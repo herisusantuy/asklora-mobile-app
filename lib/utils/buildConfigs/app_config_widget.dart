@@ -15,9 +15,8 @@ class AppConfigWidget extends InheritedWidget {
     const String environment =
         String.fromEnvironment('ENVIRONMENT', defaultValue: 'dev');
 
-    EnvironmentType envType =
-        EnvironmentType.values.byName(environment.toLowerCase());
-    baseConfig = Environment().initConfig(envType);
+    baseConfig = Environment()
+        .initConfig(EnvironmentType.values.byName(environment.toLowerCase()));
   }
 
   static AppConfigWidget? of(BuildContext context) {

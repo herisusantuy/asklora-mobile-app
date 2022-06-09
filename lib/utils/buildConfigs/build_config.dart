@@ -11,10 +11,6 @@ class Environment {
 
   static final Environment _singleton = Environment._internal();
 
-  static const EnvironmentType dev = EnvironmentType.dev;
-  static const EnvironmentType staging = EnvironmentType.staging;
-  static const EnvironmentType production = EnvironmentType.production;
-
   late BaseConfig config;
 
   initConfig(EnvironmentType environmentType) =>
