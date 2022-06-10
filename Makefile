@@ -45,15 +45,15 @@ commit: format lint run_unit
 
 run_dev_mobile: ## Runs the mobile application in dev
 	@echo "╠ Running the app"
-	@flutter run --dart-define=ENVIRONMENT=dev
+	@flutter run --flavor dev --dart-define=ENVIRONMENT=dev
 
 run_staging_mobile: ## Runs the mobile application in staging
 	@echo "╠ Running the app"
-	@flutter run --dart-define=ENVIRONMENT=staging
+	@flutter run --flavor staging --dart-define=ENVIRONMENT=staging
 
 run_production_mobile: ## Runs the mobile application in production
 	@echo "╠ Running the app"
-	@flutter run --dart-define=ENVIRONMENT=production
+	@flutter run --flavor production --dart-define=ENVIRONMENT=production
 
 #run_dev_mobile: ## Runs the mobile application in dev
 #	@echo "╠ Running the app"

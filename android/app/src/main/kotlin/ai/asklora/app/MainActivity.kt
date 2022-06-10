@@ -1,4 +1,4 @@
-package ai.asklora.app.asklora_mobile_app
+package ai.asklora.app
 
 import io.flutter.embedding.android.FlutterActivity
 
