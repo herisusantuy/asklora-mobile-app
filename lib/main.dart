@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'utils/buildConfigs/app_config_widget.dart';
+import 'core/utils/build_configs/app_config_widget.dart';
+
+const int _durationInMillis = 700;
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   runApp(AppConfigWidget(child: const MyApp()));
+
+  Future.delayed(const Duration(milliseconds: _durationInMillis), () {
+    FlutterNativeSplash.remove();
+  });
 }
 
 class MyApp extends StatelessWidget {
