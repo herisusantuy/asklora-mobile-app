@@ -1,5 +1,5 @@
 abstract class BaseConfig {
-  String get quantApiBaseUrl;
+  String get askLoraApiBaseUrl;
 
   String get alpacaApiBaseUrl;
 

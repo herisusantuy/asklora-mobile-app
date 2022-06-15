@@ -3,7 +3,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'alpaca_api_client.g.dart';
 
-@RestApi(baseUrl: 'https://www.google.com')
+@RestApi()
 abstract class AlpacaApiClient {
   factory AlpacaApiClient(Dio dio, {String baseUrl}) = _AlpacaApiClient;
 }

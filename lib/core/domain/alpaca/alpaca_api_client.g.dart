@@ -9,9 +9,7 @@ part of 'alpaca_api_client.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 class _AlpacaApiClient implements AlpacaApiClient {
-  _AlpacaApiClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://www.google.com';
-  }
+  _AlpacaApiClient(this._dio, {this.baseUrl});
 
   final Dio _dio;
 

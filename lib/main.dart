@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            Text(config == null ? '' : config.baseConfig.quantApiBaseUrl)
+            Text(config == null ? '' : config.baseConfig.askLoraApiBaseUrl)
           ],
         ),
       ),
