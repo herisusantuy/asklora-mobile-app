@@ -1,0 +1,15 @@
+# TODO: Update the color and logo of splash-screen
+flutter_native_splash:
+  color: "#E6F1FE"
+  image: assets/images/splash_screen.png
+  #  branding: assets/branding-development.png
+  #  color_dark: "#121212"
+  #  image_dark: assets/logo-development.png
+  #branding_dark: assets/branding-development.png
+
+  android_12:
+    image: assets/images/splash_screen.png
+#    icon_background_color: "#ffffff"
+#    image_dark: assets/logo-development.png
+#    icon_background_color_dark: "#121212"
+# flutter pub run flutter_native_splash:create

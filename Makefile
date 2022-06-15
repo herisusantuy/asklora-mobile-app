@@ -1,4 +1,4 @@
-.PHONY: all run_dev_web run_dev_mobile run_unit clean upgrade lint format build_dev_mobile help
+.PHONY: all run_dev_web run_dev_mobile run_test clean upgrade lint format build_dev_mobile help
 
 all: lint format run_dev_mobile
 
@@ -38,7 +38,7 @@ upgrade: clean ## Upgrades dependencies
 	@echo "╠ Upgrading dependencies..."
 	@flutter pub upgrade
 
-commit: format lint run_unit
+commit: format lint run_test
 	@echo "╠ Committing..."
 	git add .
 	git commit
@@ -59,6 +59,6 @@ run_production_mobile: ## Runs the mobile application in production
 #	@echo "╠ Running the app"
 #	@flutter run --flavor dev
 
-build_dev_mobile: clean run_unit
+build_dev_mobile: clean run_test
 	@echo "╠  Building the app"
 	@flutter build apk --flavor dev
