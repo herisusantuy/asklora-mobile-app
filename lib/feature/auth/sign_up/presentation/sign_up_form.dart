@@ -54,7 +54,6 @@ class SignUpForm extends StatelessWidget {
             textInputType: TextInputType.emailAddress,
             labelText: 'Email',
             hintText: 'Email',
-            obscureText: false,
             errorText: state.usernameErrorText,
             onChanged: (email) =>
                 context.read<SignUpBloc>().add(SignUpUsernameChanged(email)),

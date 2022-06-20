@@ -40,8 +40,8 @@ class AlpacaApiClient {
             compact: true,
             maxWidth: 90),
       ]);
-      dio.interceptors.add(AppInterceptors(dio));
     }
+    dio.interceptors.add(AppInterceptors(dio));
     return dio;
   }
 }
