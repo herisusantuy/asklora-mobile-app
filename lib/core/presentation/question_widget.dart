@@ -36,7 +36,7 @@ class QuestionWidget extends StatelessWidget {
             children: options.map(
               (choice) {
                 bool? selectedOption = choice == selectedAnswer;
-                return buildOptions(selectedOption, choice);
+                return _buildOptions(selectedOption, choice);
               },
             ).toList(),
           ),
@@ -52,14 +52,14 @@ class QuestionWidget extends StatelessWidget {
     );
   }
 
-  Widget buildOptions(bool condition, String choice) {
+  Widget _buildOptions(bool isSelected, String choice) {
     return Container(
       margin: const EdgeInsets.only(top: 10),
       child: Material(
-        color: _backgroundColor(condition),
+        color: _backgroundColor(isSelected),
         shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: _borderColor(condition),
+              color: _borderColor(isSelected),
             ),
             borderRadius: BorderRadius.circular(5)),
         child: InkWell(
@@ -73,11 +73,11 @@ class QuestionWidget extends StatelessWidget {
                 Expanded(
                   child: CustomText(
                     choice,
-                    color: _textColor(condition),
-                    type: _textTypeStyle(condition),
+                    color: _textColor(isSelected),
+                    type: _textTypeStyle(isSelected),
                   ),
                 ),
-                _iconCheck(condition),
+                _iconCheck(isSelected),
               ],
             ),
           ),
@@ -86,28 +86,28 @@ class QuestionWidget extends StatelessWidget {
     );
   }
 
-  Color _borderColor(condition) {
-    if (condition) {
+  Color _borderColor(isSelected) {
+    if (isSelected) {
       return COLORS.primary;
     } else {
       return Colors.black38;
     }
   }
 
-  Color _backgroundColor(condition) {
-    return condition ? COLORS.primary.withAlpha(30) : Colors.transparent;
+  Color _backgroundColor(isSelected) {
+    return isSelected ? COLORS.primary.withAlpha(30) : Colors.transparent;
   }
 
-  Color _textColor(condition) {
-    return condition ? COLORS.primary : COLORS.text;
+  Color _textColor(isSelected) {
+    return isSelected ? COLORS.primary : COLORS.text;
   }
 
-  FontType _textTypeStyle(condition) {
-    return condition ? FontType.smallTextBold : FontType.smallText;
+  FontType _textTypeStyle(isSelected) {
+    return isSelected ? FontType.smallTextBold : FontType.smallText;
   }
 
-  Widget _iconCheck(condition) {
-    if (condition) {
+  Widget _iconCheck(isSelected) {
+    if (isSelected) {
       return const Icon(
         Icons.check,
         size: 20,
