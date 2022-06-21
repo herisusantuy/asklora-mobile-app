@@ -7,7 +7,8 @@ class CustomDropdown extends StatelessWidget {
   final String hintName;
   final EdgeInsets padding;
   final List<String> itemsList;
-  final void Function(String?) onSelectItem;
+  final void Function(String?) onChanged;
+  final void Function()? onTap;
   final String value;
   final String errorText;
   final FormFieldValidator<String>? validator;
@@ -19,9 +20,10 @@ class CustomDropdown extends StatelessWidget {
     this.hintName = '',
     this.padding = EdgeInsets.zero,
     required this.itemsList,
-    required this.onSelectItem,
+    required this.onChanged,
     this.errorText = '',
     this.validator,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -65,8 +67,9 @@ class CustomDropdown extends StatelessWidget {
               ),
               value: dropdownValue,
               onChanged: (String? newValue) {
-                onSelectItem(newValue);
+                onChanged(newValue);
               },
+              onTap: onTap,
               decoration: InputDecoration(
                 errorText: errorText.isEmpty ? null : errorText,
                 isDense: true,
