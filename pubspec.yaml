@@ -37,7 +37,6 @@ dependencies:
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
   logger: any
-  retrofit: ^3.0.1+1
   built_value: ^8.3.2
   json_annotation: ^4.5.0
   dio: ^4.0.6
@@ -53,7 +52,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  retrofit_generator: ^4.0.1
   build_runner: ^2.1.11
   json_serializable: ^6.2.0
   built_value_generator: ^8.3.2
