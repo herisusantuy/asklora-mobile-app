@@ -15,7 +15,6 @@ class SignUpApiClient {
   SignUpApiClient._();
 
   Future<Response> signUp(SignUpRequest request) async {
-    debugPrint('krishna client ${request.toJson()}');
     var response = await AlpacaApiClient()
         .dio
         .post('/api/v1/accounts/', data: json.encode(request.toJson()));
