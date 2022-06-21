@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../utils/build_configs/build_config.dart';
+import '../logging_interceptor.dart';
 
 class AlpacaApiClient {
   final dio = createDio();
@@ -29,17 +29,7 @@ class AlpacaApiClient {
         }));
 
     if (kDebugMode) {
-      dio.interceptors.addAll([
-        PrettyDioLogger(
-            request: true,
-            requestBody: true,
-            requestHeader: true,
-            responseBody: true,
-            responseHeader: true,
-            error: true,
-            compact: true,
-            maxWidth: 90),
-      ]);
+      dio.interceptors.add(LoggingInterceptor());
     }
     dio.interceptors.add(AppInterceptors(dio));
     return dio;
