@@ -1,17 +1,14 @@
 import 'package:asklora_mobile_app/feature/auth/sign_up/bloc/sign_up_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_response.dart';
-import 'package:asklora_mobile_app/feature/auth/sign_up/presentation/sign_up_screen.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/repository/sign_up_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 
 import 'package:mockito/mockito.dart';
 
-import '../mocks/mocks.dart';
 import 'sign_up_bloc_test.mocks.dart';
 
 class DioAdapterMock extends Mock implements HttpClientAdapter {}
@@ -219,37 +216,5 @@ void main() async {
             });
 
     tearDown(() => {signUpBloc.close()});
-
-    Future<void> _buildHomeScreen(WidgetTester tester) async {
-      final mockObserver = MockNavigatorObserver();
-      await tester.pumpWidget(MaterialApp(
-        home: const SignUpScreen(),
-        navigatorObservers: [mockObserver],
-      ));
-    }
-
-    testWidgets(
-        'Show Sign-Up screen with `Username`, `Password` input field and `Submit` button',
-        (tester) async {
-      await _buildHomeScreen(tester);
-      var emailInput = find.byKey(const Key('sing_up_email_input'));
-      expect(emailInput, findsOneWidget);
-      var passwordInput = find.byKey(const Key('sing_up_password_input'));
-      expect(passwordInput, findsOneWidget);
-      var signUpButton = find.byKey(const Key('sing_up_submit_button'));
-      expect(signUpButton, findsOneWidget);
-    });
-
-    testWidgets(
-        'Show Sign-Up screen with `Username`, `Password` input field and `Submit` button',
-        (tester) async {
-      await _buildHomeScreen(tester);
-      var emailInput = find.byKey(const Key('sing_up_email_input'));
-      expect(emailInput, findsOneWidget);
-      var passwordInput = find.byKey(const Key('sing_up_password_input'));
-      expect(passwordInput, findsOneWidget);
-      var signUpButton = find.byKey(const Key('sing_up_submit_button'));
-      expect(signUpButton, findsOneWidget);
-    });
   });
 }
