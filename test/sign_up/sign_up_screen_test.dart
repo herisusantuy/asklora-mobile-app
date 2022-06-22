@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../mocks/mocks.dart';
 
 void main() async {
-  group('Home Screen Widget Test', () {
+  group('Home Screen Widget Tests', () {
     Future<void> _buildHomeScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(

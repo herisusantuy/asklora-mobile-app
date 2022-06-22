@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'mocks/mocks.dart';
 
 void main() {
-  group('Home Screen Test', () {
+  group('Home Screen Tests', () {
     setUpAll(() {});
 
     Future<void> _buildHomeScreen(WidgetTester tester) async {

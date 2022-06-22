@@ -19,7 +19,7 @@ class MockCounterBloc extends MockBloc<SignUpEvent, SignUpState>
 @GenerateMocks([SignUpRepository])
 @GenerateMocks([SignUpApiClient])
 void main() async {
-  group('Home Screen Bloc Test', () {
+  group('Sign Up Screen Bloc Tests', () {
     late MockSignUpRepository signUpRepository;
     late SignUpBloc signUpBloc;
 
