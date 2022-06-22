@@ -50,6 +50,7 @@ class ResetPasswordForm extends StatelessWidget {
         buildWhen: ((previous, current) => previous.email != current.email),
         builder: (context, state) {
           return CustomTextInput(
+            key: const Key('reset_password_email_input'),
             textInputType: TextInputType.emailAddress,
             labelText: 'Email',
             hintText: 'Email',
@@ -65,7 +66,8 @@ class ResetPasswordForm extends StatelessWidget {
     return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
       builder: ((context, state) {
         return CustomTextButton(
-          buttonText: 'Reset Password',
+          key: const Key('reset_password_submit_button'),
+          buttonText: 'Submit',
           isLoading: state.status == ResetPasswordStatus.loading,
           disable: !state.isEmailValid,
           onClick: () => context.read<ResetPasswordBloc>().add(
