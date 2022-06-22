@@ -27,5 +27,6 @@ jobs:
       - run: make run_test
 
       - uses: romeovs/lcov-reporter-action@v0.2.16
+        if: github.event_name == 'pull_request'
         with:
           lcov-file: ./coverage/lcov.info
