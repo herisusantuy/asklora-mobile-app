@@ -30,7 +30,7 @@ class CustomText extends StatelessWidget {
   final TextAlign textAlign;
   final TextDecoration decoration;
   final EdgeInsets padding;
-  final int maxLines;
+  final int? maxLines;
 
   const CustomText(
     this.text, {
@@ -41,7 +41,7 @@ class CustomText extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.decoration = TextDecoration.none,
     this.padding = EdgeInsets.zero,
-    this.maxLines = 0,
+    this.maxLines,
   }) : super(key: key);
 
   @override
