@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
+import '../../../../core/domain/endpoints.dart';
 import 'sign_up_request.dart';
 
 import '../../../../core/domain/asklora/asklora_api_client.dart';
@@ -17,7 +17,7 @@ class SignUpApiClient {
   Future<Response> signUp(SignUpRequest request) async {
     var response = await AskloraApiClient()
         .dio
-        .post('/api/v1/accounts/', data: json.encode(request.toJson()));
+        .post(endpointSignUp, data: json.encode(request.toJson()));
     return response;
   }
 }
