@@ -19,9 +19,6 @@ class SignInForm extends StatelessWidget {
             context
                 .read<SignInBloc>()
                 .add(SignInEmailChanged(state.emailAddress));
-            context
-                .read<SignInBloc>()
-                .add(SignInPasswordChanged(state.password));
 
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
