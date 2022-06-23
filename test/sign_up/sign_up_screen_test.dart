@@ -15,27 +15,114 @@ void main() async {
     }
 
     testWidgets(
-        'Show Sign-Up screen with `Username`, `Password` input field and `Submit` button',
+        'Render Sign-Up screen with `Username`, `Password`, `Submit` button and password instructions',
         (tester) async {
       await _buildHomeScreen(tester);
-      var emailInput = find.byKey(const Key('sing_up_email_input'));
+      var emailInput = find.byKey(const Key('sign_up_email_input'));
       expect(emailInput, findsOneWidget);
-      var passwordInput = find.byKey(const Key('sing_up_password_input'));
+      var passwordInput = find.byKey(const Key('sign_up_password_input'));
       expect(passwordInput, findsOneWidget);
-      var signUpButton = find.byKey(const Key('sing_up_submit_button'));
+      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       expect(signUpButton, findsOneWidget);
+
+      expect(
+          find.text(
+              '❗ Minimum eight characters, at least one letter and one number!'),
+          findsOneWidget);
+      expect(
+          find.text(
+              '✅ Minimum eight characters, at least one letter and one number!'),
+          findsNothing);
     });
 
     testWidgets(
-        'Show Sign-Up screen with `Username`, `Password` input field and `Submit` button',
+        'Render error label on email text field when entered wrong email',
         (tester) async {
       await _buildHomeScreen(tester);
-      var emailInput = find.byKey(const Key('sing_up_email_input'));
-      expect(emailInput, findsOneWidget);
-      var passwordInput = find.byKey(const Key('sing_up_password_input'));
-      expect(passwordInput, findsOneWidget);
-      var signUpButton = find.byKey(const Key('sing_up_submit_button'));
-      expect(signUpButton, findsOneWidget);
+      await tester.enterText(
+          find.byKey(const Key('sign_up_email_input')), 'kkkkk');
+
+      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
+      await tester.pump();
+
+      expect(find.text('kkkkk'), findsOneWidget);
+      expect(find.text('Enter valid email'), findsOneWidget);
+    });
+
+    testWidgets(
+        'Error label should not visible on email text field when entered correct email',
+        (tester) async {
+      await _buildHomeScreen(tester);
+      await tester.enterText(
+          find.byKey(const Key('sign_up_email_input')), 'test@test.com');
+
+      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
+      await tester.pump();
+
+      expect(find.text('test@test.com'), findsOneWidget);
+      expect(find.text('Enter valid email'), findsNothing);
+    });
+
+    testWidgets(
+        'Password instruction should be grey when entered wrong password',
+        (tester) async {
+      await _buildHomeScreen(tester);
+      await tester.enterText(
+          find.byKey(const Key('sign_up_password_input')), 'kkkkk');
+
+      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
+
+      expect(
+          ((tester.firstWidget(find.text(
+                          '❗ Minimum eight characters, at least one letter and one number!'))
+                      as Text)
+                  .style)
+              ?.color,
+          Colors.grey);
+
+      await tester.pump();
+
+      expect(find.text('kkkkk'), findsOneWidget);
+
+      expect(
+          find.text(
+              '❗ Minimum eight characters, at least one letter and one number!'),
+          findsOneWidget);
+      expect(
+          find.text(
+              '✅ Minimum eight characters, at least one letter and one number!'),
+          findsNothing);
+    });
+
+    testWidgets(
+        'Password instruction should be blueGrey when entered correct password',
+        (tester) async {
+      await _buildHomeScreen(tester);
+      await tester.enterText(
+          find.byKey(const Key('sign_up_password_input')), 'password1');
+
+      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
+
+      await tester.pump();
+
+      expect(
+          ((tester.firstWidget(find.text(
+                          '✅ Minimum eight characters, at least one letter and one number!'))
+                      as Text)
+                  .style)
+              ?.color,
+          Colors.blueGrey);
+
+      expect(find.text('password1'), findsOneWidget);
+
+      expect(
+          find.text(
+              '❗ Minimum eight characters, at least one letter and one number!'),
+          findsNothing);
+      expect(
+          find.text(
+              '✅ Minimum eight characters, at least one letter and one number!'),
+          findsOneWidget);
     });
   });
 }
