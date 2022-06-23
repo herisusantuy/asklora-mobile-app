@@ -5,7 +5,11 @@ import '../domain/reset_password_request.dart';
 import '../domain/reset_password_response.dart';
 
 class ResetPasswordRepository {
-  final ResetPasswordApiClient _resetPasswordApiClient = ResetPasswordApiClient();
+  late ResetPasswordApiClient _resetPasswordApiClient;
+
+  ResetPasswordRepository(){
+    _resetPasswordApiClient = ResetPasswordApiClient();
+  }
 
   Future<ResetPasswordResponse> resetPassword({required String email}) async {
     var response = await _resetPasswordApiClient.resetPassword(
