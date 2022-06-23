@@ -13,7 +13,7 @@ class SignInApiClient {
   SignInApiClient._();
 
   Future<Response> signIn(SignInRequest request) async {
-    var response = await AskLoraApiClient()
+    var response = await AskloraApiClient()
         .dio
         .post('/api/v1/auth/', data: jsonEncode(request.toJson()));
     return response;

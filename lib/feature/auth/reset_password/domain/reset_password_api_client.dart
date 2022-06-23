@@ -12,7 +12,7 @@ class ResetPasswordApiClient {
   ResetPasswordApiClient._();
 
   Future<Response> resetPassword(ResetPasswordRequest request) async {
-    var response = await AskLoraApiClient().dio.post(
+    var response = await AskloraApiClient().dio.post(
           '/api/v1/accounts/reset-password/',
           data: json.encode(
             request.toJson(),

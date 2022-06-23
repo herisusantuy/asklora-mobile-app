@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 import '../../utils/build_configs/build_config.dart';
 import '../logging_interceptor.dart';
 
-class AskLoraApiClient {
+class AskloraApiClient {
   final dio = createDio();
 
-  AskLoraApiClient._internal();
+  AskloraApiClient._internal();
 
-  static final _singleton = AskLoraApiClient._internal();
+  static final _singleton = AskloraApiClient._internal();
 
-  factory AskLoraApiClient() => _singleton;
+  factory AskloraApiClient() => _singleton;
 
   static Dio createDio() {
     var dio = Dio(BaseOptions(

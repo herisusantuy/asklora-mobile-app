@@ -15,7 +15,7 @@ class SignUpApiClient {
   SignUpApiClient._();
 
   Future<Response> signUp(SignUpRequest request) async {
-    var response = await AskLoraApiClient()
+    var response = await AskloraApiClient()
         .dio
         .post('/api/v1/accounts/', data: json.encode(request.toJson()));
     return response;
