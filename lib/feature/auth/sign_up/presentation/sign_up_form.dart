@@ -51,6 +51,7 @@ class SignUpForm extends StatelessWidget {
         buildWhen: (previous, current) => previous.username != current.username,
         builder: (context, state) {
           return CustomTextInput(
+            key: const Key('sign_up_email_input'),
             textInputType: TextInputType.emailAddress,
             labelText: 'Email',
             hintText: 'Email',
@@ -68,6 +69,7 @@ class SignUpForm extends StatelessWidget {
           return Column(
             children: [
               CustomTextInput(
+                key: const Key('sign_up_password_input'),
                 textInputType: TextInputType.visiblePassword,
                 labelText: 'Password',
                 hintText: 'Password (Minimum 8 characters)',
@@ -95,6 +97,7 @@ class SignUpForm extends StatelessWidget {
   Widget _signUpButton() {
     return BlocBuilder<SignUpBloc, SignUpState>(builder: (context, state) {
       return CustomTextButton(
+        key: const Key('sign_up_submit_button'),
         buttonText: 'Submit',
         isLoading: state.status == SignUpStatus.loading,
         disable: !(state.isEmailValid && state.isPasswordValid),
