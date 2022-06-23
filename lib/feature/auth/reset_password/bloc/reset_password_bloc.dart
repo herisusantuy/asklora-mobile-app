@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/domain/alpaca/alpaca_api_client.dart';
+import '../../../../core/domain/asklora/asklora_api_client.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/reset_password_repository.dart';
 

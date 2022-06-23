@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'sign_up_request.dart';
 
-import '../../../../core/domain/alpaca/alpaca_api_client.dart';
+import '../../../../core/domain/asklora/asklora_api_client.dart';
 
 class SignUpApiClient {
   static SignUpApiClient? _instance;
@@ -15,7 +15,7 @@ class SignUpApiClient {
   SignUpApiClient._();
 
   Future<Response> signUp(SignUpRequest request) async {
-    var response = await AlpacaApiClient()
+    var response = await AskLoraApiClient()
         .dio
         .post('/api/v1/accounts/', data: json.encode(request.toJson()));
     return response;

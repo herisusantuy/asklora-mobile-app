@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import 'reset_password_request.dart';
-import '../../../../core/domain/alpaca/alpaca_api_client.dart';
+import '../../../../core/domain/asklora/asklora_api_client.dart';
 
 class ResetPasswordApiClient {
   static ResetPasswordApiClient? _instance;
@@ -12,7 +12,7 @@ class ResetPasswordApiClient {
   ResetPasswordApiClient._();
 
   Future<Response> resetPassword(ResetPasswordRequest request) async {
-    var response = await AlpacaApiClient().dio.post(
+    var response = await AskLoraApiClient().dio.post(
           '/api/v1/accounts/reset-password/',
           data: json.encode(
             request.toJson(),
