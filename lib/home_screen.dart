@@ -41,12 +41,14 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomTextButton(
+                  key: const Key('custom_button_sign_up'),
                   buttonText: 'Sign-Up',
                   onClick: () => {SignUpScreen.open(context)},
                   borderRadius: borderRadius,
                 ),
                 const Padding(padding: EdgeInsets.all(padding)),
                 CustomTextButton(
+                  key: const Key('custom_button_login'),
                   buttonText: 'Login',
                   onClick: () => {SignUpScreen.open(context)},
                   borderRadius: borderRadius,

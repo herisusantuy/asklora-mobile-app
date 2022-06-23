@@ -15,7 +15,7 @@ help: ## This help dialog.
 
 run_test: ## Runs unit tests
 	@echo "╠ Running the tests"
-	@flutter test || (echo "Error while running tests"; exit 1)
+	@flutter test --coverage || (echo "Error while running tests"; exit 1)
 
 clean: ## Cleans the environment
 	@echo "╠ Cleaning the project..."
