@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/alpaca/alpaca_api_client.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_in_repository.dart';
 
@@ -55,6 +56,13 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(
           status: SignInStatus.success,
           responseMessage: 'Authentication Success'));
+    } on UnauthorizedException {
+      emit(state.copyWith(
+          status: SignInStatus.failure, responseMessage: 'Invalid Password'));
+    } on NotFoundException {
+      emit(state.copyWith(
+          status: SignInStatus.failure,
+          responseMessage: 'User does not exist with the given email'));
     } catch (e) {
       emit(state.copyWith(
           status: SignInStatus.failure, responseMessage: e.toString()));
