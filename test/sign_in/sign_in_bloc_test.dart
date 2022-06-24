@@ -151,5 +151,6 @@ void main() {
                   passwordErrorText: '',
                   responseMessage: 'Authentication Success')
             });
+    tearDown(() => signInBloc.close());
   });
 }
