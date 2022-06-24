@@ -40,6 +40,7 @@ class SignUpState extends Equatable {
         isEmailValid: isEmailValid ?? this.isEmailValid,
         isPasswordValid: isPasswordValid ?? this.isPasswordValid,
         usernameErrorText: usernameErrorText ?? this.usernameErrorText,
+        passwordErrorText: passwordErrorText ?? this.passwordErrorText,
         responseMessage: responseMessage ?? this.responseMessage);
   }
 
@@ -51,6 +52,7 @@ class SignUpState extends Equatable {
         isEmailValid,
         isPasswordValid,
         usernameErrorText,
+        passwordErrorText,
         responseMessage,
       ];
 }
