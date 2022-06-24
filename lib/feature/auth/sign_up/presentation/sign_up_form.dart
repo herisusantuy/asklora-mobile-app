@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
+import '../../otp/presentation/otp_screen.dart';
 import '../bloc/sign_up_bloc.dart';
 import 'sign_up_success_screen.dart';
 
@@ -26,7 +27,7 @@ class SignUpForm extends StatelessWidget {
                 );
               break;
             case SignUpStatus.success:
-              SignUpSuccessScreen.open(context);
+              OtpScreen.open(context);
               break;
             default:
               break;
