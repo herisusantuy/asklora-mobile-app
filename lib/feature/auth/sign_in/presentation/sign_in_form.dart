@@ -67,6 +67,7 @@ class SignInForm extends StatelessWidget {
         return Container(
             padding: const EdgeInsets.only(top: 20),
             child: CustomTextInput(
+              key: const Key('sign_in_email_input'),
               textInputType: TextInputType.emailAddress,
               labelText: 'Email Address',
               hintText: 'Input Email Address',
@@ -88,6 +89,7 @@ class SignInForm extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(top: 20),
               child: CustomTextInput(
+                key: const Key('sign_in_password_input'),
                 obscureText: true,
                 labelText: 'Password',
                 hintText: 'Input Password',
@@ -105,6 +107,7 @@ class SignInForm extends StatelessWidget {
 
   Widget _forgotPasswordButton() {
     return TextButton(
+        key: const Key('forgot_password_button'),
         onPressed: () {},
         child: const Text(
           'Forgotten Password?',
@@ -116,6 +119,7 @@ class SignInForm extends StatelessWidget {
     return BlocBuilder<SignInBloc, SignInState>(
       builder: (context, state) {
         return CustomTextButton(
+          key: const Key('sign_in_submit_button'),
           buttonText: 'Login',
           isLoading: state.status == SignInStatus.loading,
           disable:
