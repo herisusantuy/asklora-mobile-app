@@ -24,7 +24,7 @@ enum FontType {
 
 class CustomText extends StatelessWidget {
   final String text;
-  final Color color;
+  final Color? color;
   final FontType type;
   final bool ellipsis;
   final TextAlign textAlign;
@@ -35,7 +35,7 @@ class CustomText extends StatelessWidget {
   const CustomText(
     this.text, {
     Key? key,
-    this.color = COLORS.text,
+    this.color,
     this.type = FontType.bodyText,
     this.ellipsis = false,
     this.textAlign = TextAlign.start,

@@ -4,18 +4,18 @@ import 'package:flutter/foundation.dart';
 import '../../utils/build_configs/build_config.dart';
 import '../logging_interceptor.dart';
 
-class AlpacaApiClient {
+class AskloraApiClient {
   final dio = createDio();
 
-  AlpacaApiClient._internal();
+  AskloraApiClient._internal();
 
-  static final _singleton = AlpacaApiClient._internal();
+  static final _singleton = AskloraApiClient._internal();
 
-  factory AlpacaApiClient() => _singleton;
+  factory AskloraApiClient() => _singleton;
 
   static Dio createDio() {
     var dio = Dio(BaseOptions(
-        baseUrl: Environment().config.alpacaApiBaseUrl,
+        baseUrl: Environment().config.askLoraApiBaseUrl,
         followRedirects: false,
         validateStatus: (status) {
           if (status != null && status < 300) {
