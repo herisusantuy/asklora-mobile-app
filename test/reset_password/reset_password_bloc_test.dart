@@ -118,6 +118,8 @@ void main() {
                     emailErrorText: '',
                     responseMessage: 'Succesfully sent new password!')
               });
+
+      tearDown(() => resetPasswordBloc.close());
     },
   );
 }
