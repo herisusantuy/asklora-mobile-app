@@ -56,7 +56,7 @@ void main() {
         build: () => signInBloc,
         act: (bloc) {
           bloc.add(const SignInEmailChanged('qweasdzxc'));
-          bloc.add(const SignInPasswordChanged('Test1234'));
+          bloc.add(const SignInPasswordChanged('TestQWE123'));
         },
         expect: () => {
               const SignInState(
@@ -74,19 +74,18 @@ void main() {
                   emailAddress: 'qweasdzxc',
                   isEmailValid: false,
                   emailAddressErrorText: 'Enter valid email',
-                  password: 'Test1234',
+                  password: 'TestQWE123',
                   isPasswordValid: true,
                   passwordErrorText: '')
             });
     blocTest<SignInBloc, SignInState>(
         'emits "SignInStatus.unknown" and "isEmailValid = true" when entered an valid email',
         build: () => signInBloc,
-        act: (bloc) =>
-            bloc.add(const SignInEmailChanged('wahyu@loratechai.com')),
+        act: (bloc) => bloc.add(const SignInEmailChanged('nyoba@yopmail.com')),
         expect: () => {
               const SignInState(
                 status: SignInStatus.unknown,
-                emailAddress: 'wahyu@loratechai.com',
+                emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: '',
@@ -100,7 +99,7 @@ void main() {
         'emits "SignInStatus.success" WHEN entered valid email and correct password, Then pressed "Submit" button.',
         build: () {
           when(signInRepository.signIn(
-                  email: 'wahyu@loratechai.com', password: 'Test1234'))
+                  email: 'nyoba@yopmail.com', password: 'TestQWE123'))
               .thenAnswer(
             (_) => Future.value(
               SignInResponse(access: 'token'),
@@ -109,14 +108,14 @@ void main() {
           return signInBloc;
         },
         act: (bloc) => {
-              bloc.add(const SignInEmailChanged('wahyu@loratechai.com')),
-              bloc.add(const SignInPasswordChanged('Test1234')),
+              bloc.add(const SignInEmailChanged('nyoba@yopmail.com')),
+              bloc.add(const SignInPasswordChanged('TestQWE123')),
               bloc.add(const SignInSubmitted())
             },
         expect: () => {
               const SignInState(
                   status: SignInStatus.unknown,
-                  emailAddress: 'wahyu@loratechai.com',
+                  emailAddress: 'nyoba@yopmail.com',
                   isEmailValid: true,
                   emailAddressErrorText: '',
                   password: '',
@@ -125,28 +124,28 @@ void main() {
                   responseMessage: ''),
               const SignInState(
                   status: SignInStatus.unknown,
-                  emailAddress: 'wahyu@loratechai.com',
+                  emailAddress: 'nyoba@yopmail.com',
                   isEmailValid: true,
                   emailAddressErrorText: '',
-                  password: 'Test1234',
+                  password: 'TestQWE123',
                   isPasswordValid: true,
                   passwordErrorText: '',
                   responseMessage: ''),
               const SignInState(
                   status: SignInStatus.loading,
-                  emailAddress: 'wahyu@loratechai.com',
+                  emailAddress: 'nyoba@yopmail.com',
                   isEmailValid: true,
                   emailAddressErrorText: '',
-                  password: 'Test1234',
+                  password: 'TestQWE123',
                   isPasswordValid: true,
                   passwordErrorText: '',
                   responseMessage: ''),
               const SignInState(
                   status: SignInStatus.success,
-                  emailAddress: 'wahyu@loratechai.com',
+                  emailAddress: 'nyoba@yopmail.com',
                   isEmailValid: true,
                   emailAddressErrorText: '',
-                  password: 'Test1234',
+                  password: 'TestQWE123',
                   isPasswordValid: true,
                   passwordErrorText: '',
                   responseMessage: 'Authentication Success')
