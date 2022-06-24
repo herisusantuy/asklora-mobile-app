@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../../../../core/domain/alpaca/alpaca_api_client.dart';
+import '../../../../core/domain/asklora/asklora_api_client.dart';
+import '../../../../core/domain/endpoints.dart';
 import 'sign_in_request.dart';
 
 class SignInApiClient {
@@ -13,9 +14,9 @@ class SignInApiClient {
   SignInApiClient._();
 
   Future<Response> signIn(SignInRequest request) async {
-    var response = await AlpacaApiClient()
+    var response = await AskloraApiClient()
         .dio
-        .post('/api/v1/auth/', data: jsonEncode(request.toJson()));
+        .post(endpointSignIn, data: jsonEncode(request.toJson()));
     return response;
   }
 }

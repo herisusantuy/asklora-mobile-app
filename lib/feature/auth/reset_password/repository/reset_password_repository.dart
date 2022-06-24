@@ -6,6 +6,7 @@ import '../domain/reset_password_response.dart';
 
 class ResetPasswordRepository {
   late ResetPasswordApiClient _resetPasswordApiClient;
+
   ResetPasswordRepository() {
     _resetPasswordApiClient = ResetPasswordApiClient();
   }
