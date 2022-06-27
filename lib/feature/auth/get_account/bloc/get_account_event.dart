@@ -6,3 +6,5 @@ abstract class GetAccountEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetAccountSubmitted extends GetAccountEvent {}

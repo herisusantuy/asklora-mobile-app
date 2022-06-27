@@ -5,6 +5,7 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../reset_password/presentation/reset_password_screen.dart';
 import '../bloc/sign_in_bloc.dart';
 import 'sign_in_success_screen.dart';
 
@@ -48,7 +49,7 @@ class SignInForm extends StatelessWidget {
                 children: [
                   _emailInput(),
                   _passwordInput(),
-                  _forgotPasswordButton(),
+                  _forgotPasswordButton(context),
                 ],
               ),
             ),
@@ -103,9 +104,9 @@ class SignInForm extends StatelessWidget {
     );
   }
 
-  Widget _forgotPasswordButton() {
+  Widget _forgotPasswordButton(context) {
     return TextButton(
-        onPressed: () {},
+        onPressed: () => ResetPasswordScreen.open(context),
         child: const Text(
           'Forgotten Password?',
           style: TextStyle(decoration: TextDecoration.underline),

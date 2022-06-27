@@ -1,10 +1,37 @@
 part of 'get_account_bloc.dart';
 
-abstract class GetAccountState extends Equatable {
-  const GetAccountState();
-  
-  @override
-  List<Object> get props => [];
-}
+enum GetAccountStatus { success, failure, unknown, loading }
 
-class GetAccountInitial extends GetAccountState {}
+class GetAccountState extends Equatable {
+  const GetAccountState(
+      {this.status = GetAccountStatus.unknown,
+      this.responseMessage = '',
+      this.account});
+
+  // factory GetAccountState.initial() {
+  //   return GetAccountState(
+  //     status: GetAccountStatus.unknown,
+  //     responseMessage: '',
+  //     account: GetAccountResponse.initial(),
+  //   );
+  // }
+
+  final GetAccountStatus status;
+  final String responseMessage;
+  final GetAccountResponse? account;
+
+  @override
+  List<Object?> get props => [status, responseMessage, account];
+
+  GetAccountState copyWith({
+    GetAccountStatus? status,
+    String? responseMessage,
+    GetAccountResponse? account,
+  }) {
+    return GetAccountState(
+      status: status ?? this.status,
+      responseMessage: responseMessage ?? this.responseMessage,
+      account: account ?? this.account,
+    );
+  }
+}

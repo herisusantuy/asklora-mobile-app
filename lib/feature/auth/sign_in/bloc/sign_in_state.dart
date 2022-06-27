@@ -14,10 +14,10 @@ class SignInState extends Equatable {
 
   const SignInState({
     this.status = SignInStatus.unknown,
-    this.emailAddress = '',
+    this.emailAddress = 'herisusanto.id@gmail.com',
     this.isEmailValid = false,
     this.emailAddressErrorText = '',
-    this.password = '',
+    this.password = 'YjOCdR8kbt40e3',
     this.isPasswordValid = false,
     this.passwordErrorText = '',
     this.responseMessage = '',

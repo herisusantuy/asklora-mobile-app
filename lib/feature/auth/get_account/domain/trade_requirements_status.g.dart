@@ -14,7 +14,6 @@ TradeRequirementsStatus _$TradeRequirementsStatusFromJson(
       json['disclosures'] as bool,
       json['agreement'] as bool,
       json['kyc'] as bool,
-      json['document'] as bool,
     );
 
 Map<String, dynamic> _$TradeRequirementsStatusToJson(
@@ -25,5 +24,4 @@ Map<String, dynamic> _$TradeRequirementsStatusToJson(
       'disclosures': instance.disclosures,
       'agreement': instance.agreement,
       'kyc': instance.kyc,
-      'document': instance.document,
     };
