@@ -26,7 +26,7 @@ class OtpBox extends StatelessWidget {
       (MediaQuery.of(context).size.width - spaceBetween * (length + 1) * 2) /
       length;
 
-  OtpBox(
+  const OtpBox(
       {required this.otpFieldController,
       this.onCompleted,
       this.onChanged,

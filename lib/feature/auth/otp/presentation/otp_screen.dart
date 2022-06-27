@@ -20,7 +20,7 @@ class OtpScreen extends StatelessWidget {
       ),
       body: SafeArea(
           child: BlocProvider(
-        create: (context) => OtpBloc(resetTime: 3),
+        create: (context) => OtpBloc(resetTime: 180),
         child: OtpForm(email: email),
       )),
     );
