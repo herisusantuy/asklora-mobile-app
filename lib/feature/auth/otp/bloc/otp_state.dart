@@ -1,6 +1,14 @@
 part of 'otp_bloc.dart';
 
-enum OtpStatus { success, failure, unknown, loading, request }
+enum OtpStatus {
+  submitSuccess,
+  requestSuccess,
+  failure,
+  unknown,
+  requestLoading,
+  verifyLoading,
+  request
+}
 
 class OtpState extends Equatable {
   final OtpStatus status;

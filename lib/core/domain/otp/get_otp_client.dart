@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'verify_otp_request.dart';
 import 'package:dio/dio.dart';
 
 import '../asklora/asklora_api_client.dart';
@@ -17,6 +18,12 @@ class GetOtpClient {
     var response = await AskloraApiClient()
         .dio
         .post(endpointGetOtp, data: json.encode(getOtpRequest.toJson()));
+    return response;
+  }
+
+  Future<Response> verifyOtp(VerifyOtpRequest verifyOtpRequest) async {
+    var response = await AskloraApiClient().dio.post(endpointVerifyEmail,
+        data: json.encode(verifyOtpRequest.toJson()));
     return response;
   }
 }

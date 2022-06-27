@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'core/domain/otp/get_otp_request.dart';
 import 'core/presentation/custom_text_button.dart';
+import 'feature/auth/otp/presentation/otp_screen.dart';
 import 'feature/auth/sign_in/presentation/sign_in_screen.dart';
 import 'feature/auth/sign_up/presentation/sign_up_screen.dart';
 
@@ -52,6 +54,13 @@ class HomePage extends StatelessWidget {
                   key: const Key('custom_button_login'),
                   buttonText: 'Login',
                   onClick: () => SignInScreen.open(context),
+                  borderRadius: borderRadius,
+                ),
+                const Padding(padding: EdgeInsets.all(padding)),
+                CustomTextButton(
+                  key: const Key('custom_button_otp'),
+                  buttonText: 'OTP',
+                  onClick: () => OtpScreen.open(context, GetOtpRequest('test@example.com', OtpType.register.value)),
                   borderRadius: borderRadius,
                 ),
               ],
