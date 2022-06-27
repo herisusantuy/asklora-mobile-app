@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextInput extends StatelessWidget {
   final String labelText;
   final String hintText;
   final String errorText;
+  final int? maxLength;
   final bool obscureText;
   final TextInputType textInputType;
   final Function(String) onChanged;
+  final List<TextInputFormatter>? textInputFormatterList;
 
   const CustomTextInput(
       {required this.labelText,
@@ -15,12 +18,16 @@ class CustomTextInput extends StatelessWidget {
       this.textInputType = TextInputType.text,
       this.obscureText = false,
       this.errorText = '',
+      this.maxLength,
+      this.textInputFormatterList,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      inputFormatters: textInputFormatterList,
+      maxLength: maxLength,
       obscureText: obscureText,
       decoration: InputDecoration(
           border: const OutlineInputBorder(),

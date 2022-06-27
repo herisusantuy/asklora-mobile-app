@@ -1,0 +1,30 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'get_otp_request.g.dart';
+
+enum OtpType { password, register }
+
+extension Type on OtpType {
+  String get value {
+    switch (this) {
+      case OtpType.register:
+        return 'REGISTER';
+      case OtpType.password:
+        return 'PASSWORD';
+      default:
+        return '';
+    }
+  }
+}
+
+@JsonSerializable()
+class GetOtpRequest {
+  final String email;
+
+  @JsonKey(name: 'otp_type')
+  final String otpType;
+
+  GetOtpRequest(this.email, this.otpType);
+
+  Map<String, dynamic> toJson() => _$GetOtpRequestToJson(this);
+}

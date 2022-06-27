@@ -58,8 +58,12 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) async {
     try {
       emit(state.copyWith(status: SignUpStatus.loading));
-      var response = await _signUpRepository.signUp(
+      var signUpResponse = await _signUpRepository.signUp(
           email: state.username, password: state.password);
+
+      var getOtpResponse =
+          await _signUpRepository.getOtp(email: state.username);
+
       emit(state.copyWith(
           status: SignUpStatus.success,
           responseMessage: 'Account created successfully!'));
