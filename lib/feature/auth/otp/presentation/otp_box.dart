@@ -9,7 +9,7 @@ class OtpBox extends StatelessWidget {
   final List<TextInputFormatter>? textInputFormatterList;
   final OtpFieldController otpFieldController;
 
-  double fieldWidth(BuildContext context) =>
+  double _fieldWidth(BuildContext context) =>
       (MediaQuery.of(context).size.width - spaceBetween * (length + 1) * 2) /
       length;
 
@@ -26,22 +26,18 @@ class OtpBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        OTPTextField(
-          controller: otpFieldController,
-          inputFormatter: textInputFormatterList,
-          keyboardType: textInputType,
-          length: length,
-          spaceBetween: spaceBetween,
-          width: MediaQuery.of(context).size.width,
-          fieldWidth: fieldWidth(context),
-          style: textStyle,
-          textFieldAlignment: MainAxisAlignment.spaceAround,
-          fieldStyle: FieldStyle.underline,
-          onChanged: onChanged,
-        ),
-      ],
+    return OTPTextField(
+      controller: otpFieldController,
+      inputFormatter: textInputFormatterList,
+      keyboardType: textInputType,
+      length: length,
+      spaceBetween: spaceBetween,
+      width: MediaQuery.of(context).size.width,
+      fieldWidth: _fieldWidth(context),
+      style: textStyle,
+      textFieldAlignment: MainAxisAlignment.spaceAround,
+      fieldStyle: FieldStyle.underline,
+      onChanged: onChanged,
     );
   }
 }

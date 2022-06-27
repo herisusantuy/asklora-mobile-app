@@ -22,8 +22,7 @@ class OtpScreen extends StatelessWidget {
       ),
       body: SafeArea(
           child: BlocProvider(
-        create: (context) =>
-            OtpBloc(otpRepository: OtpRepository(), resetTime: 180),
+        create: (context) => OtpBloc(otpRepository: OtpRepository()),
         child: OtpForm(
           getOtpRequest: getOtpRequest,
         ),

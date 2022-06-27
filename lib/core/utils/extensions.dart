@@ -18,8 +18,3 @@ extension EmailValidator on String {
 
   bool isValidOtp() => otpRegex.hasMatch(this);
 }
-
-extension Format on int {
-  String formatTimeMMSS() =>
-      '${(this ~/ 60).toString().padLeft(2, '0')}:${(this % 60).toString().padLeft(2, '0')}';
-}

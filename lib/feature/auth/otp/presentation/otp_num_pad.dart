@@ -2,12 +2,12 @@ part of 'otp_form.dart';
 
 class OtpNumPad extends StatelessWidget {
   final OtpFieldController otpFieldController;
-  final int textPosition;
+  final int textInputPosition;
   final int length;
 
   const OtpNumPad(
       {required this.otpFieldController,
-      required this.textPosition,
+      required this.textInputPosition,
       this.length = 6,
       Key? key})
       : super(key: key);
@@ -31,6 +31,7 @@ class OtpNumPad extends StatelessWidget {
           _numKey('8'),
           _numKey('9'),
           _emptyKey,
+          _numKey('0'),
           _deleteKey
         ],
       ),
@@ -41,9 +42,9 @@ class OtpNumPad extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: () {
-          if (textPosition != length) {
-            otpFieldController.setFocus(textPosition);
-            otpFieldController.setValue(digits, textPosition);
+          if (textInputPosition != length) {
+            otpFieldController.setFocus(textInputPosition);
+            otpFieldController.setValue(digits, textInputPosition);
           }
         },
         child: CustomText(
@@ -56,8 +57,8 @@ class OtpNumPad extends StatelessWidget {
 
   Center get _deleteKey => Center(
         child: InkWell(
-          onTap: () => (textPosition > 0
-              ? otpFieldController.setValue('', textPosition - 1)
+          onTap: () => (textInputPosition > 0
+              ? otpFieldController.setValue('', textInputPosition - 1)
               : (_) {}),
           child: const Icon(Icons.backspace),
         ),

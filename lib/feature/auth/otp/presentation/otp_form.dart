@@ -9,7 +9,6 @@ import '../../../../core/domain/otp/verify_otp_request.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/styles/color.dart';
-import '../../../../core/utils/extensions.dart';
 import '../../kyc/presentation/kyc_screen.dart';
 import '../bloc/otp_bloc.dart';
 
@@ -55,10 +54,10 @@ class OtpForm extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _padding(),
-              _information(),
+              _titleWithGuide(),
               _otpBox(),
               _padding(),
-              _numPad(),
+              _otpNumPad(),
               _padding(),
               _requestOtp(),
               _padding(),
@@ -70,7 +69,7 @@ class OtpForm extends StatelessWidget {
     );
   }
 
-  Widget _information() {
+  Widget _titleWithGuide() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -91,7 +90,7 @@ class OtpForm extends StatelessWidget {
   Widget _otpBox() {
     return BlocBuilder<OtpBloc, OtpState>(
       buildWhen: (previous, current) =>
-          previous.textPosition != current.textPosition,
+          previous.textInputPosition != current.textInputPosition,
       builder: (context, state) {
         return Container(
           padding: const EdgeInsets.only(top: 20),
@@ -105,14 +104,14 @@ class OtpForm extends StatelessWidget {
     );
   }
 
-  Widget _numPad() {
+  Widget _otpNumPad() {
     return BlocBuilder<OtpBloc, OtpState>(
         buildWhen: (previous, current) =>
-            previous.textPosition != current.textPosition,
+            previous.textInputPosition != current.textInputPosition,
         builder: (context, state) {
           return OtpNumPad(
               otpFieldController: otpFieldController,
-              textPosition: state.textPosition);
+              textInputPosition: state.textInputPosition);
         });
   }
 
@@ -140,7 +139,7 @@ class OtpForm extends StatelessWidget {
         builder: (context, state) {
           if (state.disableRequest) {
             return CustomText(
-                'Request another otp in ${state.resetTime.formatTimeMMSS()}');
+                'Request another otp in ${formatTimeMMSS(state.resetTime)}');
           } else {
             return CustomTextButton(
               isLoading: state.status == OtpStatus.requestLoading,
@@ -156,4 +155,7 @@ class OtpForm extends StatelessWidget {
   Padding _padding() => const Padding(
         padding: EdgeInsets.only(top: 18),
       );
+
+  String formatTimeMMSS(int time) =>
+      '${(time ~/ 60).toString().padLeft(2, '0')}:${(time % 60).toString().padLeft(2, '0')}';
 }

@@ -9,10 +9,10 @@ abstract class OtpEvent extends Equatable {
 
 class OtpInputChanged extends OtpEvent {
   final String otp;
-  final int textPosition;
+  final int textInputPosition;
 
   const OtpInputChanged(this.otp)
-      : textPosition = otp.length,
+      : textInputPosition = otp.length,
         super();
 
   @override

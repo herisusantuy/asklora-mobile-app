@@ -15,12 +15,11 @@ part 'otp_event.dart';
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final OtpRepository _otpRepository;
-  final int resetTime;
+  final int _resetTime = 180;
   late StreamSubscription resetTimeStreamSubscription;
 
   OtpBloc({
     required OtpRepository otpRepository,
-    required this.resetTime,
   })  : _otpRepository = otpRepository,
         super(const OtpState()) {
     on<OtpInputChanged>(_onOtpInputChanged);
@@ -35,7 +34,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       await _otpRepository.getOtp(getOtpRequest: event.getOtpRequest);
       emit(state.copyWith(
           disableRequest: true,
-          resetTime: resetTime,
+          resetTime: _resetTime,
           status: OtpStatus.unknown));
 
       resetTimeStreamSubscription = ticker().listen((_) {
@@ -63,7 +62,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         status: OtpStatus.unknown,
         otp: event.otp,
         isOtpValid: (event.otp.isValidOtp() || event.otp.isEmpty),
-        textPosition: event.textPosition,
+        textInputPosition: event.textInputPosition,
         otpErrorText: (event.otp.isValidOtp() || event.otp.isEmpty)
             ? ''
             : 'Enter valid otp (exactly 6 digits)'));
@@ -91,7 +90,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
   Stream<int> ticker() {
     return Stream<int>.periodic(
-        const Duration(seconds: 1), (x) => resetTime - x).take(resetTime);
+        const Duration(seconds: 1), (x) => _resetTime - x).take(_resetTime);
   }
 
   @override

@@ -14,7 +14,7 @@ class OtpState extends Equatable {
   final OtpStatus status;
   final String otp;
   final int resetTime;
-  final int textPosition;
+  final int textInputPosition;
   final bool isOtpValid;
   final bool disableRequest;
   final String otpErrorText;
@@ -28,7 +28,7 @@ class OtpState extends Equatable {
       this.otpErrorText = '',
       this.responseMessage = '',
       this.resetTime = 0,
-      this.textPosition = 0})
+      this.textInputPosition = 0})
       : super();
 
   @override
@@ -48,7 +48,7 @@ class OtpState extends Equatable {
     bool? isOtpValid,
     bool? disableRequest,
     int? resetTime,
-    int? textPosition,
+    int? textInputPosition,
     String? otpErrorText,
     String? responseMessage,
   }) {
@@ -58,7 +58,7 @@ class OtpState extends Equatable {
       isOtpValid: isOtpValid ?? this.isOtpValid,
       disableRequest: disableRequest ?? this.disableRequest,
       resetTime: resetTime ?? this.resetTime,
-      textPosition: textPosition ?? this.textPosition,
+      textInputPosition: textInputPosition ?? this.textInputPosition,
       otpErrorText: otpErrorText ?? this.otpErrorText,
       responseMessage: responseMessage ?? this.responseMessage,
     );
