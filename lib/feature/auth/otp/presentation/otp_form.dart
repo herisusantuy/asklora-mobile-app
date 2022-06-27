@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:otp_text_field/otp_field.dart';
 
 import '../../../../core/presentation/custom_text.dart';
-import '../../../../core/presentation/custom_text_button.dart';
-import '../../../../core/presentation/custom_text_input.dart';
-import '../../../../core/utils/extensions.dart';
 import '../../kyc/presentation/kyc_screen.dart';
 import '../bloc/otp_bloc.dart';
+import 'otp_box.dart';
 
 class OtpForm extends StatelessWidget {
-  const OtpForm({Key? key}) : super(key: key);
+  final String email;
+
+  const OtpForm({required this.email, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    context.read<OtpBloc>().add(OtpRequested(email));
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
         switch (state.status) {
@@ -40,44 +41,54 @@ class OtpForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
-          children: [_otpInput(), _padding(), _otpButton()],
+          children: [
+            _padding(),
+            _information(),
+            _otpInput(),
+            _padding(),
+          ],
         ),
       ),
     );
   }
 
-  Widget _otpInput() {
-    return BlocBuilder<OtpBloc, OtpState>(
-      buildWhen: (previous, current) => previous.otp != current.otp,
-      builder: (context, state) {
-        return Container(
-            padding: const EdgeInsets.only(top: 20),
-            child: CustomTextInput(
-              textInputFormatterList: [
-                FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-              ],
-              maxLength: 6,
-              textInputType: TextInputType.number,
-              labelText: 'OTP',
-              hintText: 'Input OTP (Exactly 6 Digits)',
-              errorText: state.otpErrorText,
-              onChanged: (otp) {
-                context.read<OtpBloc>().add(OtpInputChanged(otp));
-              },
-            ));
-      },
+  Widget _information() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const CustomText(
+          'Verification Code',
+          type: FontType.h3,
+        ),
+        _padding(),
+        const CustomText(
+          'Please enter the OTP sent on your registered Email ID.',
+          type: FontType.h5,
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 
-  Widget _otpButton() {
+  Widget _otpInput() {
+    OtpFieldController otpFieldController = OtpFieldController();
+
     return BlocBuilder<OtpBloc, OtpState>(
+      buildWhen: (previous, current) =>
+          previous.resetTime != current.resetTime ||
+          previous.textPosition != current.textPosition,
       builder: (context, state) {
-        return CustomTextButton(
-          buttonText: 'Submit',
-          isLoading: state.status == OtpStatus.loading,
-          disable: (!state.otp.isValidOtp() || state.otp.isEmpty),
-          onClick: () => context.read<OtpBloc>().add(const OtpSubmitted()),
-          borderRadius: 5,
+        return Container(
+          padding: const EdgeInsets.only(top: 20),
+          child: OtpBox(
+            otpFieldController: otpFieldController,
+            onRequest: () => context.read<OtpBloc>().add(OtpRequested(email)),
+            onChanged: (otp) =>
+                context.read<OtpBloc>().add(OtpInputChanged(otp)),
+            resetTime: state.resetTime,
+            disableRequest: state.disableRequest,
+            textPosition: state.textPosition,
+          ),
         );
       },
     );
