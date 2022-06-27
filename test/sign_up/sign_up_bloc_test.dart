@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/feature/auth/sign_up/bloc/sign_up_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart';
-import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_response.dart';
+import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/repository/sign_up_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
@@ -176,6 +176,8 @@ void main() async {
                   email: 'kk@test.com', password: 'password1'))
               .thenAnswer(
                   (_) => Future.value(SignUpResponse('Sign Up Successful')));
+          when(signUpRepository.getOtp(email: 'kk@test.com')).thenAnswer(
+              (_) => Future.value(GetOtpResponse('Get OTP Successful!')));
           return signUpBloc;
         },
         act: (bloc) => {
