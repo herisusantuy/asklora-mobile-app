@@ -37,6 +37,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       ResetPasswordSubmitted event, Emitter<ResetPasswordState> emit) async {
     try {
       emit(state.copyWith(status: ResetPasswordStatus.loading));
+      // ignore: unused_local_variable
       var response =
           await _resetPasswordRepository.resetPassword(email: state.email);
 
