@@ -121,7 +121,7 @@ class OtpForm extends StatelessWidget {
           if (state.disableRequest) {
             return CustomText(
                 key: const Key('request_otp_instruction'),
-                'Request another otp in ${formatTimeMMSS(state.resetTime)}');
+                'Request another otp in ${_formatTimeMMSS(state.resetTime)}');
           } else {
             return CustomTextButton(
               key: const Key('request_otp_button'),
@@ -140,6 +140,6 @@ class OtpForm extends StatelessWidget {
         padding: EdgeInsets.only(top: 28),
       );
 
-  String formatTimeMMSS(int time) =>
+  String _formatTimeMMSS(int time) =>
       '${(time ~/ 60).toString().padLeft(2, '0')}:${(time % 60).toString().padLeft(2, '0')}';
 }

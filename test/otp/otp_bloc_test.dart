@@ -20,7 +20,7 @@ class MockCounterBloc extends MockBloc<OtpEvent, OtpState> implements OtpBloc {}
 @GenerateMocks([OtpRepository])
 @GenerateMocks([GetOtpClient])
 void main() async {
-  group('Sign Up Screen Bloc Tests', () {
+  group('Otp Screen Bloc Tests', () {
     late MockOtpRepository otpRepository;
     late OtpBloc otpBloc;
 
@@ -99,7 +99,7 @@ void main() async {
         'emits `OtpStatus.unknown` and `resetTime` = [ticking]` WHEN '
         'Tap request otp code',
         build: () {
-          when(OtpRepository().getOtp(
+          when(otpRepository.getOtp(
                   getOtpRequest: GetOtpRequest(
                       'test123@example.com', OtpType.register.value)))
               .thenAnswer((_) =>
@@ -128,7 +128,7 @@ void main() async {
         'emits `OtpStatus.submitSuccess` and `responseMessage` = Verify OTP Success` WHEN '
         'input correct otp and then Submit Otp',
         build: () {
-          when(OtpRepository().verifyOtp(
+          when(otpRepository.verifyOtp(
                   verifyOtpRequest: VerifyOtpRequest(
                       'test123@example.com', OtpType.register.value)))
               .thenAnswer(
