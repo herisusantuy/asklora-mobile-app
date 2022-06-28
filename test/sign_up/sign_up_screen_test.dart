@@ -55,8 +55,6 @@ void main() async {
       await _buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_email_input')), 'test@test.com');
-
-      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       await tester.pump();
 
       expect(find.text('test@test.com'), findsOneWidget);
@@ -69,8 +67,6 @@ void main() async {
       await _buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_password_input')), 'kkkkk');
-
-      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
 
       expect(
           ((tester.firstWidget(find.text(
@@ -100,8 +96,6 @@ void main() async {
       await _buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_password_input')), 'password1');
-
-      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
 
       await tester.pump();
 
