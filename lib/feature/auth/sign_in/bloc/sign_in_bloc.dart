@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/asklora/asklora_api_client.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_in_repository.dart';
-import '../../../../core/utils/shared_prefs.dart';
 
 part 'sign_in_state.dart';
 
@@ -55,7 +54,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(status: SignInStatus.loading));
       var response = await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
-      sharedPrefs.saveData('token', response.access!);
       emit(state.copyWith(
           status: SignInStatus.success,
           responseMessage: 'Authentication Success'));

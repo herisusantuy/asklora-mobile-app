@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/domain/endpoints.dart';
 import '../../../../core/domain/asklora/asklora_api_client.dart';
-import '../../../../core/utils/shared_prefs.dart';
+import '../../../../core/utils/secure_storage.dart';
 
 class GetAccountApiClient {
   static GetAccountApiClient? _instance;
@@ -12,7 +12,8 @@ class GetAccountApiClient {
   GetAccountApiClient._();
 
   Future<Response> getAccount() async {
-    var token = sharedPrefs.getData('token');
+    var token = await secureStorage.readSecureData('token');
+    print('token is here:${token}');
     var options = Options(headers: {'Authorization': 'Bearer $token'});
     var response =
         await AskloraApiClient().dio.get(endpointGetAccount, options: options);
