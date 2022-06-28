@@ -41,6 +41,8 @@ void main() async {
       await _buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_email_input')), 'kkkkk');
+
+      var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       await tester.pump();
 
       expect(find.text('kkkkk'), findsOneWidget);

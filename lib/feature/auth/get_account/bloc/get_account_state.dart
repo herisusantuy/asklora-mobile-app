@@ -8,14 +8,6 @@ class GetAccountState extends Equatable {
       this.responseMessage = '',
       this.account});
 
-  // factory GetAccountState.initial() {
-  //   return GetAccountState(
-  //     status: GetAccountStatus.unknown,
-  //     responseMessage: '',
-  //     account: GetAccountResponse.initial(),
-  //   );
-  // }
-
   final GetAccountStatus status;
   final String responseMessage;
   final GetAccountResponse? account;

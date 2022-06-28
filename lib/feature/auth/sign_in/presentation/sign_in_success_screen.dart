@@ -57,7 +57,7 @@ class SignInSuccessScreen extends StatelessWidget {
       builder: (context, state) {
         return CustomTextButton(
           buttonText: 'Get Account',
-          // isLoading: state.status == GetAccountStatus.loading,
+          isLoading: state.status == GetAccountStatus.loading,
           disable: state.status == GetAccountStatus.loading,
           onClick: () =>
               context.read<GetAccountBloc>().add(GetAccountSubmitted()),

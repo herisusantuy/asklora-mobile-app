@@ -52,7 +52,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     try {
       emit(state.copyWith(status: SignInStatus.loading));
-      // ignore: unused_local_variable
       var response = await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
       emit(state.copyWith(

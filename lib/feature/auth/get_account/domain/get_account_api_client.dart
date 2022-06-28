@@ -13,7 +13,6 @@ class GetAccountApiClient {
 
   Future<Response> getAccount() async {
     var token = await secureStorage.readSecureData('token');
-    print('token is here:${token}');
     var options = Options(headers: {'Authorization': 'Bearer $token'});
     var response =
         await AskloraApiClient().dio.get(endpointGetAccount, options: options);
