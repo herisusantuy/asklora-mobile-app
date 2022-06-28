@@ -56,6 +56,8 @@ class AppInterceptors extends Interceptor {
             throw UnauthorizedException(err.requestOptions);
           case 404:
             throw NotFoundException(err.requestOptions);
+          case 406:
+            throw NotAcceptableException(err.requestOptions);
           case 409:
             throw ConflictException(err.requestOptions);
           case 500:
@@ -110,6 +112,15 @@ class UnauthorizedException extends DioError {
 
 class NotFoundException extends DioError {
   NotFoundException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'The requested information could not be found';
+  }
+}
+
+class NotAcceptableException extends DioError {
+  NotAcceptableException(RequestOptions r) : super(requestOptions: r);
 
   @override
   String toString() {

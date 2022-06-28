@@ -41,9 +41,9 @@ dependencies:
 
   shared_preferences: ^2.0.15
 
-  pretty_dio_logger:
+  flutter_onfido:
     git:
-      url: https://github.com/Milad-Akarie/pretty_dio_logger.git
+      url: https://github.com/krishna-gupta-al/flutter_onfido.git
       ref: master
 
 dev_dependencies:
@@ -52,6 +52,8 @@ dev_dependencies:
   mockito: ^5.2.0
   bloc_test: ^9.0.3
   http_mock_adapter: ^0.3.3
+  flutter_driver:
+    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -78,6 +80,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/test_data/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

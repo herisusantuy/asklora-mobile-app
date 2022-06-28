@@ -4,6 +4,8 @@
 
 import 'dart:async' as _i5;
 
+import 'package:asklora_mobile_app/core/domain/repository/auth_repository.dart'
+    as _i8;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_request.dart'
@@ -60,4 +62,30 @@ class MockSignInApiClient extends _i1.Mock implements _i6.SignInApiClient {
               returnValue: Future<_i3.Response<dynamic>>.value(
                   _FakeResponse_1<dynamic>()))
           as _i5.Future<_i3.Response<dynamic>>);
+}
+
+/// A class which mocks [AuthRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthRepository extends _i1.Mock implements _i8.AuthRepository {
+  MockAuthRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  void saveAccessToken(String? token) =>
+      super.noSuchMethod(Invocation.method(#saveAccessToken, [token]),
+          returnValueForMissingStub: null);
+  @override
+  void saveDetailToken(String? token) =>
+      super.noSuchMethod(Invocation.method(#saveDetailToken, [token]),
+          returnValueForMissingStub: null);
+  @override
+  _i5.Future<String?> getAccessToken() =>
+      (super.noSuchMethod(Invocation.method(#getAccessToken, []),
+          returnValue: Future<String?>.value()) as _i5.Future<String?>);
+  @override
+  _i5.Future<String?> getDetailToken() =>
+      (super.noSuchMethod(Invocation.method(#getDetailToken, []),
+          returnValue: Future<String?>.value()) as _i5.Future<String?>);
 }

@@ -17,6 +17,7 @@ class SignInRepository {
   }) async {
     var response =
         await _signInApiClient.signIn(SignInRequest(email, password));
+
     return SignInResponse.fromJson(response.data);
   }
 }

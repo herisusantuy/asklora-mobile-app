@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/asklora/asklora_api_client.dart';
+import '../../../../core/domain/repository/auth_repository.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_in_repository.dart';
 
@@ -54,6 +55,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(status: SignInStatus.loading));
       var response = await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
+
+      var appRepository = AuthRepository();
+      appRepository.saveAccessToken(response.access);
+      appRepository.saveDetailToken(response.refresh);
+
       emit(state.copyWith(
           status: SignInStatus.success,
           responseMessage: 'Authentication Success'));
@@ -64,6 +70,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(
           status: SignInStatus.failure,
           responseMessage: 'User does not exist with the given email'));
+    } on NotAcceptableException {
+      emit(state.copyWith(
+          status: SignInStatus.failure,
+          responseMessage: 'User email is not verified'));
     } catch (e) {
       emit(state.copyWith(
           status: SignInStatus.failure, responseMessage: e.toString()));
