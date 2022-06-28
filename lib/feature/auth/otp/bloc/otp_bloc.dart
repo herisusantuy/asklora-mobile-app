@@ -16,7 +16,7 @@ part 'otp_event.dart';
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final OtpRepository _otpRepository;
   final int _resetTime = 180;
-  late StreamSubscription resetTimeStreamSubscription;
+  StreamSubscription? resetTimeStreamSubscription;
 
   OtpBloc({
     required OtpRepository otpRepository,
@@ -73,7 +73,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     Emitter<OtpState> emit,
   ) async {
     try {
-      resetTimeStreamSubscription.cancel();
+      cancelStreamSubscription();
       emit(state.copyWith(status: OtpStatus.verifyLoading));
       await _otpRepository.verifyOtp(verifyOtpRequest: event.verifyOtpRequest);
       emit(state.copyWith(
@@ -93,9 +93,15 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         const Duration(seconds: 1), (x) => _resetTime - x).take(_resetTime);
   }
 
+  void cancelStreamSubscription() {
+    if (resetTimeStreamSubscription != null) {
+      resetTimeStreamSubscription!.cancel();
+    }
+  }
+
   @override
   Future<void> close() {
-    resetTimeStreamSubscription.cancel();
+    cancelStreamSubscription();
     return super.close();
   }
 }
