@@ -1,9 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../domain/get_account_response.dart';
 import '../repository/get_account_repository.dart';
 
 part 'get_account_event.dart';
+
 part 'get_account_state.dart';
 
 class GetAccountBloc extends Bloc<GetAccountEvent, GetAccountState> {
