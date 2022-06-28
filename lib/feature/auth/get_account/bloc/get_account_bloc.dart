@@ -1,7 +1,7 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../domain/get_account_response.dart';
-import '../domain/trade_requirements_status.dart';
 import '../repository/get_account_repository.dart';
 
 part 'get_account_event.dart';
