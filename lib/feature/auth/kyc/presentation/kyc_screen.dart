@@ -12,7 +12,7 @@ class KycScreen extends StatelessWidget {
         title: const Text('KYC'),
         elevation: 0,
       ),
-      body: const Center(child: CustomText("KYC Screen")),
+      body: const Center(child: CustomText('KYC Screen')),
     );
   }
 

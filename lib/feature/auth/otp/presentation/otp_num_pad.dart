@@ -1,6 +1,7 @@
 part of 'otp_form.dart';
 
 class OtpNumPad extends StatelessWidget {
+  final String otp;
   final OtpFieldController otpFieldController;
   final int textInputPosition;
   final int length;
@@ -8,6 +9,7 @@ class OtpNumPad extends StatelessWidget {
   const OtpNumPad(
       {required this.otpFieldController,
       required this.textInputPosition,
+      required this.otp,
       this.length = 6,
       Key? key})
       : super(key: key);
@@ -15,7 +17,7 @@ class OtpNumPad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GridView.count(
         childAspectRatio: 1.2,
         crossAxisCount: 3,
@@ -42,9 +44,13 @@ class OtpNumPad extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: () {
-          if (textInputPosition != length) {
-            otpFieldController.setFocus(textInputPosition);
+          if (textInputPosition + 1 < length) {
             otpFieldController.setValue(digits, textInputPosition);
+          } else {
+            List<String> otpValueList = [];
+            otp.split('').forEach((ch) => otpValueList.add(ch));
+            otpValueList.add(digits);
+            otpFieldController.set(otpValueList);
           }
         },
         child: CustomText(
@@ -57,9 +63,9 @@ class OtpNumPad extends StatelessWidget {
 
   Center get _deleteKey => Center(
         child: InkWell(
-          onTap: () => (textInputPosition > 0
+          onTap: () => textInputPosition > 0
               ? otpFieldController.setValue('', textInputPosition - 1)
-              : (_) {}),
+              : () {},
           child: const Icon(Icons.backspace),
         ),
       );

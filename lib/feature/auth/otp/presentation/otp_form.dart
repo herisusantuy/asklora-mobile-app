@@ -55,13 +55,11 @@ class OtpForm extends StatelessWidget {
             children: [
               _padding(),
               _titleWithGuide(),
-              _otpBox(),
-              _padding(),
-              _otpNumPad(),
+              _otpBox(context),
               _padding(),
               _requestOtp(),
               _padding(),
-              _verifyButton()
+              _otpNumPad(),
             ],
           ),
         ),
@@ -87,20 +85,16 @@ class OtpForm extends StatelessWidget {
     );
   }
 
-  Widget _otpBox() {
-    return BlocBuilder<OtpBloc, OtpState>(
-      buildWhen: (previous, current) =>
-          previous.textInputPosition != current.textInputPosition,
-      builder: (context, state) {
-        return Container(
-          padding: const EdgeInsets.only(top: 20),
-          child: OtpBox(
-            otpFieldController: otpFieldController,
-            onChanged: (otp) =>
-                context.read<OtpBloc>().add(OtpInputChanged(otp)),
-          ),
-        );
-      },
+  Widget _otpBox(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 20),
+      child: OtpBox(
+        otpFieldController: otpFieldController,
+        onChanged: (otp) => context.read<OtpBloc>().add(OtpInputChanged(otp)),
+        onCompleted: (otp) => context
+            .read<OtpBloc>()
+            .add(OtpSubmitted(VerifyOtpRequest(getOtpRequest.email, otp))),
+      ),
     );
   }
 
@@ -110,24 +104,9 @@ class OtpForm extends StatelessWidget {
             previous.textInputPosition != current.textInputPosition,
         builder: (context, state) {
           return OtpNumPad(
+              otp: state.otp,
               otpFieldController: otpFieldController,
               textInputPosition: state.textInputPosition);
-        });
-  }
-
-  Widget _verifyButton() {
-    return BlocBuilder<OtpBloc, OtpState>(
-        buildWhen: (previous, current) =>
-            previous.isOtpValid != current.isOtpValid ||
-            previous.status != current.status,
-        builder: (context, state) {
-          return CustomTextButton(
-            isLoading: state.status == OtpStatus.verifyLoading,
-            disable: !state.isOtpValid,
-            buttonText: 'Submit',
-            onClick: () => context.read<OtpBloc>().add(
-                OtpSubmitted(VerifyOtpRequest(getOtpRequest.email, state.otp))),
-          );
         });
   }
 
@@ -147,13 +126,14 @@ class OtpForm extends StatelessWidget {
               onClick: () =>
                   context.read<OtpBloc>().add(OtpRequested(getOtpRequest)),
               primaryColor: COLORS.text,
+              borderRadius: 32,
             );
           }
         });
   }
 
   Padding _padding() => const Padding(
-        padding: EdgeInsets.only(top: 18),
+        padding: EdgeInsets.only(top: 28),
       );
 
   String formatTimeMMSS(int time) =>
