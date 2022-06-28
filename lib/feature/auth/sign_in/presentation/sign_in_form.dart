@@ -108,6 +108,7 @@ class SignInForm extends StatelessWidget {
 
   Widget _forgotPasswordButton(context) {
     return TextButton(
+        key: const Key('forgot_password_button'),
         onPressed: () => ResetPasswordScreen.open(context),
         child: const Text(
           'Forgotten Password?',
