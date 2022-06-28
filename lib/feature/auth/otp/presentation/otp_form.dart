@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
-import '../../../../core/domain/otp/get_otp_request.dart';
-import '../../../../core/domain/otp/verify_otp_request.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/styles/color.dart';
@@ -17,14 +15,17 @@ part 'otp_box.dart';
 part 'otp_num_pad.dart';
 
 class OtpForm extends StatelessWidget {
-  final GetOtpRequest getOtpRequest;
-  final OtpFieldController otpFieldController = OtpFieldController();
+  final OtpFieldController _otpFieldController = OtpFieldController();
 
-  OtpForm({required this.getOtpRequest, Key? key}) : super(key: key);
+  final Function onOtpSubmit;
+
+  final Function onOtpResend;
+
+  OtpForm({required this.onOtpResend, required this.onOtpSubmit, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    context.read<OtpBloc>().add(OtpRequested(getOtpRequest));
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
         switch (state.status) {
@@ -90,11 +91,9 @@ class OtpForm extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: OtpBox(
         key: const Key('otp_box'),
-        otpFieldController: otpFieldController,
+        otpFieldController: _otpFieldController,
         onChanged: (otp) => context.read<OtpBloc>().add(OtpInputChanged(otp)),
-        onCompleted: (otp) => context
-            .read<OtpBloc>()
-            .add(OtpSubmitted(VerifyOtpRequest(getOtpRequest.email, otp))),
+        onCompleted: (otp) => onOtpSubmit(otp),
       ),
     );
   }
@@ -107,7 +106,7 @@ class OtpForm extends StatelessWidget {
           return OtpNumPad(
               key: const Key('otp_num_pad'),
               otp: state.otp,
-              otpFieldController: otpFieldController,
+              otpFieldController: _otpFieldController,
               textInputPosition: state.textInputPosition);
         });
   }
@@ -127,8 +126,7 @@ class OtpForm extends StatelessWidget {
               key: const Key('request_otp_button'),
               isLoading: state.status == OtpStatus.requestLoading,
               buttonText: 'Request OTP',
-              onClick: () =>
-                  context.read<OtpBloc>().add(OtpRequested(getOtpRequest)),
+              onClick: () => onOtpResend(),
               primaryColor: COLORS.text,
               borderRadius: 32,
             );

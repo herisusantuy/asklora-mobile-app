@@ -20,12 +20,12 @@ class OtpInputChanged extends OtpEvent {
 }
 
 class OtpRequested extends OtpEvent {
-  final GetOtpRequest getOtpRequest;
+  final String email;
 
-  const OtpRequested(this.getOtpRequest) : super();
+  const OtpRequested(this.email) : super();
 
   @override
-  List<Object> get props => [getOtpRequest];
+  List<Object> get props => [email];
 }
 
 class OtpTimeResetUpdate extends OtpEvent {

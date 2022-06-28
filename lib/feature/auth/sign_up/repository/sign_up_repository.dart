@@ -22,12 +22,4 @@ class SignUpRepository {
         await _signUpApiClient.signUp(SignUpRequest(email, password));
     return SignUpResponse.fromJson(response.data);
   }
-
-  Future<GetOtpResponse> getOtp({
-    required String email,
-  }) async {
-    var response = await _getOtpClient
-        .getOtp(GetOtpRequest(email, OtpType.register.value));
-    return GetOtpResponse.fromJson(response.data);
-  }
 }

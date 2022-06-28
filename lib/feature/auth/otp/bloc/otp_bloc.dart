@@ -30,7 +30,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   void _onOtpRequested(OtpRequested event, Emitter<OtpState> emit) async {
     try {
       emit(state.copyWith(status: OtpStatus.requestLoading));
-      await _otpRepository.getOtp(getOtpRequest: event.getOtpRequest);
+      await _otpRepository.getOtp(
+          getOtpRequest: GetOtpRequest(event.email, OtpType.register.value));
       emit(state.copyWith(
           disableRequest: true,
           resetTime: _resetTime,

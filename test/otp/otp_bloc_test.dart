@@ -106,8 +106,7 @@ void main() async {
                   Future.value(GetOtpResponse('OTP Request Successful')));
           return otpBloc;
         },
-        act: (bloc) => bloc.add(OtpRequested(
-            GetOtpRequest('test123@example.com', OtpType.register.value))),
+        act: (bloc) => bloc.add(OtpRequested('test123@example.com')),
         expect: () => {
               const OtpState(status: OtpStatus.requestLoading),
               const OtpState(
@@ -138,6 +137,7 @@ void main() async {
         act: (bloc) => bloc.add(
             OtpSubmitted(VerifyOtpRequest('test123@example.com', '112233'))),
         expect: () => {
+              const OtpState(status: OtpStatus.unknown, otp: '112233'),
               const OtpState(status: OtpStatus.verifyLoading),
               const OtpState(
                   status: OtpStatus.submitSuccess,

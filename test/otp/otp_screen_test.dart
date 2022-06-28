@@ -25,9 +25,9 @@ void main() async {
     Future<void> _buildHomeScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: OtpScreen(
-            getOtpRequest:
-                GetOtpRequest('test123@example.com', OtpType.register.value)),
+        home: const OtpScreen(
+          email: 'test123@example.com',
+        ),
         navigatorObservers: [mockObserver],
       ));
     }
