@@ -105,7 +105,7 @@ void main() async {
                   username: '',
                   usernameErrorText: '',
                   password: 'abcde',
-                  passwordErrorText: '')
+                  passwordErrorText: 'Enter valid password')
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -121,7 +121,7 @@ void main() async {
                   username: '',
                   usernameErrorText: '',
                   password: 'abcdefge',
-                  passwordErrorText: '')
+                  passwordErrorText: 'Enter valid password')
             });
 
     blocTest<SignUpBloc, SignUpState>(
@@ -138,6 +138,33 @@ void main() async {
                   usernameErrorText: '',
                   password: 'password1',
                   passwordErrorText: '')
+            });
+
+    blocTest<SignUpBloc, SignUpState>(
+        'emits `SignUpStatus.unknown` and `isPasswordValid = false` and `isEmailValid = false` WHEN '
+        'entered invalid password and invalid email',
+        build: () => signUpBloc,
+        act: (bloc) => {
+              bloc.add(const SignUpUsernameChanged('abcd')),
+              bloc.add(const SignUpPasswordChanged('pass')),
+            },
+        expect: () => {
+              const SignUpState(
+                  status: SignUpStatus.unknown,
+                  isEmailValid: false,
+                  isPasswordValid: false,
+                  username: 'abcd',
+                  usernameErrorText: 'Enter valid email',
+                  password: '',
+                  passwordErrorText: ''),
+              const SignUpState(
+                  status: SignUpStatus.unknown,
+                  isEmailValid: false,
+                  isPasswordValid: false,
+                  username: 'abcd',
+                  usernameErrorText: 'Enter valid email',
+                  password: 'pass',
+                  passwordErrorText: 'Enter valid password')
             });
 
     blocTest<SignUpBloc, SignUpState>(

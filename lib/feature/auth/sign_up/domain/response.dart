@@ -10,6 +10,7 @@ class SignUpResponse {
 
   factory SignUpResponse.fromJson(Map<String, dynamic> json) =>
       _$SignUpResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$SignUpResponseToJson(this);
 }
 
 @JsonSerializable()

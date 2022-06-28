@@ -6,6 +6,7 @@ import '../../../../core/utils/extensions.dart';
 import '../repository/sign_in_repository.dart';
 
 part 'sign_in_state.dart';
+
 part 'sign_in_event.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
@@ -42,7 +43,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         passwordErrorText:
             (event.password.isValidPassword() || event.password.isEmpty)
                 ? ''
-                : 'Enter Valid Password'));
+                : 'Enter valid password'));
   }
 
   void _onSignInSubmitted(
