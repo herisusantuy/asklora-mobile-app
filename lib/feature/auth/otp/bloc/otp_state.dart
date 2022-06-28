@@ -15,17 +15,13 @@ class OtpState extends Equatable {
   final String otp;
   final int resetTime;
   final int textInputPosition;
-  final bool isOtpValid;
   final bool disableRequest;
-  final String otpErrorText;
   final String responseMessage;
 
   const OtpState(
       {this.disableRequest = false,
       this.status = OtpStatus.unknown,
       this.otp = '',
-      this.isOtpValid = false,
-      this.otpErrorText = '',
       this.responseMessage = '',
       this.resetTime = 0,
       this.textInputPosition = 0})
@@ -36,8 +32,6 @@ class OtpState extends Equatable {
         status,
         otp,
         disableRequest,
-        isOtpValid,
-        otpErrorText,
         resetTime,
         responseMessage,
       ];
@@ -45,21 +39,17 @@ class OtpState extends Equatable {
   OtpState copyWith({
     OtpStatus? status,
     String? otp,
-    bool? isOtpValid,
     bool? disableRequest,
     int? resetTime,
     int? textInputPosition,
-    String? otpErrorText,
     String? responseMessage,
   }) {
     return OtpState(
       status: status ?? this.status,
       otp: otp ?? this.otp,
-      isOtpValid: isOtpValid ?? this.isOtpValid,
       disableRequest: disableRequest ?? this.disableRequest,
       resetTime: resetTime ?? this.resetTime,
       textInputPosition: textInputPosition ?? this.textInputPosition,
-      otpErrorText: otpErrorText ?? this.otpErrorText,
       responseMessage: responseMessage ?? this.responseMessage,
     );
   }

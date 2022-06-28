@@ -43,6 +43,7 @@ class OtpNumPad extends StatelessWidget {
   Center _numKey(String digits) {
     return Center(
       child: InkWell(
+        key: Key('otp_num_key_$digits'),
         onTap: () {
           if (textInputPosition + 1 < length) {
             otpFieldController.setValue(digits, textInputPosition);

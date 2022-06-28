@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/asklora/asklora_api_client.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../../core/domain/otp/verify_otp_request.dart';
-import '../../../../core/utils/extensions.dart';
 import '../repository/otp_repository.dart';
 
 part 'otp_state.dart';
@@ -35,7 +34,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       emit(state.copyWith(
           disableRequest: true,
           resetTime: _resetTime,
-          status: OtpStatus.unknown));
+          status: OtpStatus.requestSuccess));
 
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());
@@ -61,11 +60,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     emit(state.copyWith(
         status: OtpStatus.unknown,
         otp: event.otp,
-        isOtpValid: (event.otp.isValidOtp() || event.otp.isEmpty),
-        textInputPosition: event.textInputPosition,
-        otpErrorText: (event.otp.isValidOtp() || event.otp.isEmpty)
-            ? ''
-            : 'Enter valid otp (exactly 6 digits)'));
+        textInputPosition: event.textInputPosition));
   }
 
   void _onOtpSubmitted(

@@ -89,6 +89,7 @@ class OtpForm extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 20),
       child: OtpBox(
+        key: const Key('otp_box'),
         otpFieldController: otpFieldController,
         onChanged: (otp) => context.read<OtpBloc>().add(OtpInputChanged(otp)),
         onCompleted: (otp) => context
@@ -104,6 +105,7 @@ class OtpForm extends StatelessWidget {
             previous.textInputPosition != current.textInputPosition,
         builder: (context, state) {
           return OtpNumPad(
+              key: const Key('otp_num_pad'),
               otp: state.otp,
               otpFieldController: otpFieldController,
               textInputPosition: state.textInputPosition);
@@ -118,9 +120,11 @@ class OtpForm extends StatelessWidget {
         builder: (context, state) {
           if (state.disableRequest) {
             return CustomText(
+                key: const Key('request_otp_instruction'),
                 'Request another otp in ${formatTimeMMSS(state.resetTime)}');
           } else {
             return CustomTextButton(
+              key: const Key('request_otp_button'),
               isLoading: state.status == OtpStatus.requestLoading,
               buttonText: 'Request OTP',
               onClick: () =>
