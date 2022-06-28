@@ -2,7 +2,6 @@ import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart';
-import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_response.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -19,55 +19,59 @@ class MockGetAccountBloc extends MockBloc<GetAccountEvent, GetAccountState>
 @GenerateMocks([GetAccountRepository])
 @GenerateMocks([GetAccountApiClient])
 void main() {
-  group('Get account Bloc test', () {
-    late MockGetAccountRepository getAccountRepository;
-    late GetAccountBloc getAccountBloc;
-    final tradeRequirementStatus = TradeRequirementsStatus(
-      false,
-      false,
-      false,
-      false,
-      false,
-    );
-    final GetAccountResponse account = GetAccountResponse(
-      'asklora@loratech.ai.com',
-      tradeRequirementStatus,
-      false,
-    );
+  group(
+    'Get account Bloc test',
+    () {
+      late MockGetAccountRepository getAccountRepository;
+      late GetAccountBloc getAccountBloc;
+      final tradeRequirementStatus = TradeRequirementsStatus(
+        false,
+        false,
+        false,
+        false,
+        false,
+      );
+      final GetAccountResponse account = GetAccountResponse(
+        'asklora@loratech.ai.com',
+        tradeRequirementStatus,
+        false,
+      );
 
-    setUpAll(() async {
-      getAccountRepository = MockGetAccountRepository();
-    });
-    setUp(() async {
-      getAccountBloc =
-          GetAccountBloc(getAccountRepository: getAccountRepository);
-    });
+      setUpAll(() async {
+        getAccountRepository = MockGetAccountRepository();
+      });
+      setUp(() async {
+        getAccountBloc =
+            GetAccountBloc(getAccountRepository: getAccountRepository);
+      });
 
-    test('Get account init state is should be unknown', () {
-      expect(
-          getAccountBloc.state,
+      test('Get account init state is should be unknown', () {
+        expect(
+            getAccountBloc.state,
+            const GetAccountState(
+                status: GetAccountStatus.unknown, responseMessage: ''));
+      });
+
+      blocTest<GetAccountBloc, GetAccountState>(
+        'emit "GetAccountStatus.success" WHEN GetAccountSubmitted event triggered',
+        build: () {
+          when(getAccountRepository.getAccount())
+              .thenAnswer((_) async => account);
+          return getAccountBloc;
+        },
+        act: (bloc) => bloc.add(GetAccountSubmitted()),
+        expect: () => {
           const GetAccountState(
-              status: GetAccountStatus.unknown, responseMessage: ''));
-    });
-
-    blocTest<GetAccountBloc, GetAccountState>(
-      'emit "GetAccountStatus.success" WHEN GetAccountSubmitted event triggered',
-      build: () {
-        when(getAccountRepository.getAccount())
-            .thenAnswer((_) async => account);
-        return getAccountBloc;
-      },
-      act: (bloc) => bloc.add(GetAccountSubmitted()),
-      expect: () => {
-        const GetAccountState(
-            status: GetAccountStatus.loading,
-            responseMessage: '',
-            account: null),
-        GetAccountState(
-            status: GetAccountStatus.success,
-            responseMessage: 'Successfully get account!',
-            account: account),
-      },
-    );
-  });
+              status: GetAccountStatus.loading,
+              responseMessage: '',
+              account: null),
+          GetAccountState(
+              status: GetAccountStatus.success,
+              responseMessage: 'Successfully get account!',
+              account: account),
+        },
+      );
+      tearDown(() => getAccountBloc.close());
+    },
+  );
 }
