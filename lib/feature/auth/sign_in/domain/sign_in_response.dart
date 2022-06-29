@@ -14,4 +14,6 @@ class SignInResponse {
 
   factory SignInResponse.fromJson(Map<String, dynamic> json) =>
       _$SignInResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SignInResponseToJson(this);
 }

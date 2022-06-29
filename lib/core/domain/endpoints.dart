@@ -7,3 +7,4 @@ const String endpointResetPassword = '$v1$accounts/reset-password/';
 const String endpointGetOtp = '$v1${accounts}otp/';
 const String endpointVerifyEmail = '$v1${accounts}verify-email/';
 const String endpointUpgradeAccount = '$v1${accounts}upgrade/';
+const String endpointGetAccount = '$v1$accounts';
