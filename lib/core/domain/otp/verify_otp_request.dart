@@ -11,5 +11,8 @@ class VerifyOtpRequest {
 
   VerifyOtpRequest(this.email, this.otpCode);
 
+  factory VerifyOtpRequest.fromJson(Map<String, dynamic> json) =>
+      _$VerifyOtpRequestFromJson(json);
+
   Map<String, dynamic> toJson() => _$VerifyOtpRequestToJson(this);
 }

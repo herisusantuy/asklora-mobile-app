@@ -26,5 +26,8 @@ class GetOtpRequest {
 
   GetOtpRequest(this.email, this.otpType);
 
+  factory GetOtpRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetOtpRequestFromJson(json);
+
   Map<String, dynamic> toJson() => _$GetOtpRequestToJson(this);
 }

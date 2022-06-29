@@ -58,7 +58,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) async {
     try {
       emit(state.copyWith(status: SignUpStatus.loading));
-      var signUpResponse = await _signUpRepository.signUp(
+      await _signUpRepository.signUp(
           email: state.username, password: state.password);
       emit(state.copyWith(
           status: SignUpStatus.success,
