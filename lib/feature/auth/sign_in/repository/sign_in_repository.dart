@@ -5,11 +5,7 @@ import '../domain/sign_in_request.dart';
 import '../domain/sign_in_response.dart';
 
 class SignInRepository {
-  late SignInApiClient _signInApiClient;
-
-  SignInRepository() {
-    _signInApiClient = SignInApiClient();
-  }
+  final SignInApiClient _signInApiClient = SignInApiClient();
 
   Future<SignInResponse> signIn({
     required String email,
