@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/asklora/asklora_api_client.dart';
-import '../../../../core/domain/repository/auth_repository.dart';
+import '../../../../core/domain/repository/token_repository.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_in_repository.dart';
 
@@ -56,9 +56,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       var response = await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
 
-      var appRepository = AuthRepository();
-      appRepository.saveAccessToken(response.access);
-      appRepository.saveDetailToken(response.refresh);
+      var tokenRepository = TokenRepository();
+      tokenRepository.saveAccessToken(response.access);
+      tokenRepository.saveDetailToken(response.refresh);
 
       emit(state.copyWith(
           status: SignInStatus.success,

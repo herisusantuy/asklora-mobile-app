@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/domain/repository/auth_repository.dart';
+import '../../../../core/domain/repository/token_repository.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../get_account/bloc/get_account_bloc.dart';
@@ -84,7 +84,7 @@ class SignInSuccessScreen extends StatelessWidget {
       CustomTextButton(buttonText: 'Get SDK Token', onClick: () => {});
 
   void _getAuthToken() async {
-    var accessToken = AuthRepository();
+    var accessToken = TokenRepository();
     debugPrint('Krishna access ${await accessToken.getAccessToken()}');
     debugPrint('Krishna detail ${await accessToken.getDetailToken()}');
   }

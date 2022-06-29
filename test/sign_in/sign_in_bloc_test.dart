@@ -1,11 +1,10 @@
-import 'package:asklora_mobile_app/core/domain/repository/auth_repository.dart';
+import 'package:asklora_mobile_app/core/domain/repository/token_repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_driver/flutter_driver.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -17,15 +16,13 @@ class DioAdapterMock extends Mock implements HttpClientAdapter {}
 class MockSignInBloc extends MockBloc<SignInEvent, SignInState>
     implements SignInBloc {}
 
-//class MockStorage extends Mock implements AuthRepository {}
-
 @GenerateMocks([SignInRepository])
 @GenerateMocks([SignInApiClient])
-@GenerateMocks([AuthRepository])
+@GenerateMocks([TokenRepository])
 void main() async {
   group('Sign In Screen Bloc Test', () {
     late MockSignInRepository signInRepository;
-    late MockAuthRepository authRepository;
+    late MockTokenRepository tokenRepository;
     late SignInBloc signInBloc;
     // late FlutterDriver driver;
 
@@ -33,7 +30,7 @@ void main() async {
       () async {
         signInRepository = MockSignInRepository();
         // driver = await FlutterDriver.connect(dartVmServiceUrl: '');
-        authRepository = MockAuthRepository();
+        tokenRepository = MockTokenRepository();
       },
     );
 
@@ -114,10 +111,10 @@ void main() async {
               SignInResponse('access', 'refresh'),
             ),
           );
-          when(authRepository.saveDetailToken('token')).thenAnswer((_) async {
+          when(tokenRepository.saveDetailToken('token')).thenAnswer((_) async {
             null;
           });
-          when(authRepository.saveAccessToken('token'))
+          when(tokenRepository.saveAccessToken('token'))
               .thenAnswer((_) async => {null});
           return signInBloc;
         },

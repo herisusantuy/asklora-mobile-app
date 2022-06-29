@@ -1,18 +1,18 @@
 import '../../utils/storage/secure_storage.dart';
 
-class AuthRepository {
+class TokenRepository {
   static const String keyAuthTokenAccess = 'auth_token_key_access';
   static const String keyAuthTokenRefresh = 'auth_token_key_refresh';
 
-  static final AuthRepository _appRepository = AuthRepository._internal();
+  static final TokenRepository _appRepository = TokenRepository._internal();
 
   final _secureStorage = SecureStorage();
 
-  factory AuthRepository() {
+  factory TokenRepository() {
     return _appRepository;
   }
 
-  AuthRepository._internal();
+  TokenRepository._internal();
 
   void saveAccessToken(String token) {
     _secureStorage.writeSecureData(keyAuthTokenAccess, token);
