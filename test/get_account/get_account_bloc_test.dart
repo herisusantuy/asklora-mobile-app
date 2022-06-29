@@ -1,13 +1,13 @@
+import 'package:asklora_mobile_app/feature/user/get_account/bloc/get_account_bloc.dart';
+import 'package:asklora_mobile_app/feature/user/get_account/domain/get_account_api_client.dart';
+import 'package:asklora_mobile_app/feature/user/get_account/domain/get_account_response.dart';
+import 'package:asklora_mobile_app/feature/user/get_account/domain/trade_requirements_status.dart';
+import 'package:asklora_mobile_app/feature/user/get_account/repository/get_account_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:asklora_mobile_app/feature/auth/get_account/bloc/get_account_bloc.dart';
-import 'package:asklora_mobile_app/feature/auth/get_account/domain/get_account_api_client.dart';
-import 'package:asklora_mobile_app/feature/auth/get_account/domain/get_account_response.dart';
-import 'package:asklora_mobile_app/feature/auth/get_account/domain/trade_requirements_status.dart';
-import 'package:asklora_mobile_app/feature/auth/get_account/repository/get_account_repository.dart';
 
 import 'get_account_bloc_test.mocks.dart';
 

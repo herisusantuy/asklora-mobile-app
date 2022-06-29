@@ -4,11 +4,11 @@
 
 import 'dart:async' as _i5;
 
-import 'package:asklora_mobile_app/feature/auth/get_account/domain/get_account_api_client.dart'
+import 'package:asklora_mobile_app/feature/user/get_account/domain/get_account_api_client.dart'
     as _i6;
-import 'package:asklora_mobile_app/feature/auth/get_account/domain/get_account_response.dart'
+import 'package:asklora_mobile_app/feature/user/get_account/domain/get_account_response.dart'
     as _i2;
-import 'package:asklora_mobile_app/feature/auth/get_account/repository/get_account_repository.dart'
+import 'package:asklora_mobile_app/feature/user/get_account/repository/get_account_repository.dart'
     as _i4;
 import 'package:dio/dio.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;

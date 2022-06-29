@@ -6,7 +6,7 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/utils/extensions.dart';
-import '../../kyc/presentation/kyc_screen.dart';
+import '../../../user/kyc/presentation/kyc_screen.dart';
 import '../bloc/otp_bloc.dart';
 
 class OtpForm extends StatelessWidget {

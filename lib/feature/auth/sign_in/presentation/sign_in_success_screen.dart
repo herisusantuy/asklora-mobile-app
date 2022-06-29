@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/repository/token_repository.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
-import '../../get_account/bloc/get_account_bloc.dart';
-import '../../get_account/repository/get_account_repository.dart';
+import '../../../user/get_account/bloc/get_account_bloc.dart';
+import '../../../user/get_account/repository/get_account_repository.dart';
 
 class SignInSuccessScreen extends StatelessWidget {
   const SignInSuccessScreen({Key? key}) : super(key: key);
