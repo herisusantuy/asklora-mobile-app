@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'get_otp_request.g.dart';
@@ -18,16 +19,20 @@ extension Type on OtpType {
 }
 
 @JsonSerializable()
-class GetOtpRequest {
+class GetOtpRequest extends Equatable {
   final String email;
 
   @JsonKey(name: 'otp_type')
   final String otpType;
 
-  GetOtpRequest(this.email, this.otpType);
+  const GetOtpRequest(this.email, this.otpType);
 
   factory GetOtpRequest.fromJson(Map<String, dynamic> json) =>
       _$GetOtpRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetOtpRequestToJson(this);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [email, otpType];
 }

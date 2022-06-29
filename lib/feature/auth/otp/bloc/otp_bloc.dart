@@ -14,7 +14,7 @@ part 'otp_event.dart';
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final OtpRepository _otpRepository;
-  final int _resetTime = 5;
+  final int _resetTime = 180;
   StreamSubscription? resetTimeStreamSubscription;
 
   OtpBloc({
@@ -34,6 +34,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       emit(state.copyWith(
           status: OtpStatus.unknown,
           disableRequest: true,
+          responseMessage: 'OTP code sent to your email',
           resetTime: _resetTime));
 
       resetTimeStreamSubscription = ticker().listen((_) {

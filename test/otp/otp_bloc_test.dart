@@ -43,8 +43,27 @@ void main() async {
     });
 
     blocTest<OtpBloc, OtpState>(
-        'emits `OtpStatus.unknown` and `resetTime` = [ticking]` WHEN '
-        'Tap request otp code',
+        'emits `OtpStatus.failure` and `resetTime` = 180` WHEN '
+        'Tap request otp code using wrong email',
+        build: () {
+          when(otpRepository.getOtp(
+                  getOtpRequest: GetOtpRequest(
+                      'test321@example.com', OtpType.register.value)))
+              .thenThrow('User does not exist with the given email');
+          return otpBloc;
+        },
+        act: (bloc) => bloc.add(const OtpRequested('test321@example.com')),
+        expect: () => {
+              const OtpState(status: OtpStatus.loading),
+              const OtpState(
+                responseMessage: 'User does not exist with the given email',
+                status: OtpStatus.failure,
+              ),
+            });
+
+    blocTest<OtpBloc, OtpState>(
+        'emits `OtpStatus.unknown` and `resetTime` = 180` WHEN '
+        'Tap request otp code using correct email',
         build: () {
           when(otpRepository.getOtp(
                   getOtpRequest: GetOtpRequest(
@@ -59,24 +78,43 @@ void main() async {
               const OtpState(
                 responseMessage: 'OTP code sent to your email',
                 status: OtpStatus.unknown,
+                resetTime: 180,
+                disableRequest: true,
               ),
             });
 
     blocTest<OtpBloc, OtpState>(
-        'emits `OtpStatus.submitSuccess` and `responseMessage` = Verify OTP Success` WHEN '
-        'input correct otp and then Submit Otp',
+        'emits `OtpStatus.failure` and `responseMessage` = Invalid OTP` WHEN '
+        'Submit the wrong Otp',
         build: () {
           when(otpRepository.verifyOtp(
-                  verifyOtpRequest: VerifyOtpRequest(
-                      'test123@example.com', OtpType.register.value)))
+                  verifyOtpRequest:
+                      const VerifyOtpRequest('test123@example.com', '112233')))
+              .thenThrow('Invalid OTP');
+          return otpBloc;
+        },
+        act: (bloc) => bloc.add(const OtpSubmitted(
+            VerifyOtpRequest('test123@example.com', '112233'))),
+        expect: () => {
+              const OtpState(status: OtpStatus.loading),
+              const OtpState(
+                  status: OtpStatus.failure, responseMessage: 'Invalid OTP'),
+            });
+
+    blocTest<OtpBloc, OtpState>(
+        'emits `OtpStatus.success` and `responseMessage` = Verify OTP Success` WHEN '
+        'Submit the correct Otp',
+        build: () {
+          when(otpRepository.verifyOtp(
+                  verifyOtpRequest:
+                      const VerifyOtpRequest('test123@example.com', '112233')))
               .thenAnswer(
                   (_) => Future.value(GetOtpResponse('Verify OTP Success')));
           return otpBloc;
         },
-        act: (bloc) => bloc.add(
-            OtpSubmitted(VerifyOtpRequest('test123@example.com', '112233'))),
+        act: (bloc) => bloc.add(const OtpSubmitted(
+            VerifyOtpRequest('test123@example.com', '112233'))),
         expect: () => {
-              const OtpState(status: OtpStatus.unknown, otp: '112233'),
               const OtpState(status: OtpStatus.loading),
               const OtpState(
                   status: OtpStatus.success,
