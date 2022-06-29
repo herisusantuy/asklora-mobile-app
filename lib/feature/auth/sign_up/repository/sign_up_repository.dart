@@ -4,14 +4,7 @@ import '../domain/sign_up_request.dart';
 import '../domain/response.dart';
 
 class SignUpRepository {
-  late SignUpApiClient _signUpApiClient;
-
-  //late GetOtpClient _getOtpClient;
-
-  SignUpRepository() {
-    _signUpApiClient = SignUpApiClient();
-    //_getOtpClient = GetOtpClient();
-  }
+  final SignUpApiClient _signUpApiClient = SignUpApiClient();
 
   Future<SignUpResponse> signUp({
     required String email,

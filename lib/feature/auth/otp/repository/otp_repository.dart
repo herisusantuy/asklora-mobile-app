@@ -6,11 +6,7 @@ import '../../../../core/domain/otp/verify_otp_request.dart';
 import '../../sign_up/domain/response.dart';
 
 class OtpRepository {
-  late GetOtpClient _getOtpApiClient;
-
-  OtpRepository() {
-    _getOtpApiClient = GetOtpClient();
-  }
+  final GetOtpClient _getOtpApiClient = GetOtpClient();
 
   Future<GetOtpResponse> getOtp({
     required GetOtpRequest getOtpRequest,

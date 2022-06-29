@@ -8,12 +8,6 @@ import '../endpoints.dart';
 import 'get_otp_request.dart';
 
 class GetOtpClient {
-  static GetOtpClient? _instance;
-
-  factory GetOtpClient() => _instance ??= GetOtpClient._();
-
-  GetOtpClient._();
-
   Future<Response> getOtp(GetOtpRequest getOtpRequest) async {
     var response = await AskloraApiClient()
         .dio
