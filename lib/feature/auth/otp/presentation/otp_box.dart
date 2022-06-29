@@ -4,48 +4,47 @@ class OtpBox extends StatelessWidget {
   final void Function(String)? onChanged;
   final void Function(String)? onCompleted;
   final int length;
-  final double spaceBetween;
+  final double _spaceBetween = 8;
   final TextStyle textStyle;
   final TextInputType textInputType;
   final List<TextInputFormatter>? textInputFormatterList;
-  final OtpFieldController otpFieldController;
-  final bool disable;
+  final bool enabled;
 
   double _fieldWidth(BuildContext context) =>
-      (MediaQuery.of(context).size.width - spaceBetween * (length + 1) * 2) /
+      (MediaQuery.of(context).size.width - _spaceBetween * (length + 1) * 2) /
       length;
 
   const OtpBox(
-      {required this.otpFieldController,
-      this.onChanged,
+      {this.onChanged,
       this.onCompleted,
       this.length = 6,
-      this.spaceBetween = 8,
       this.textStyle = const TextStyle(fontSize: 16),
-      this.textInputType = TextInputType.none,
+      this.textInputType = TextInputType.number,
       this.textInputFormatterList,
-      this.disable = true,
+      this.enabled = true,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AbsorbPointer(
-      absorbing: disable,
-      child: OTPTextField(
-        controller: otpFieldController,
-        inputFormatter: textInputFormatterList,
-        keyboardType: textInputType,
-        length: length,
-        spaceBetween: spaceBetween,
-        width: MediaQuery.of(context).size.width,
-        fieldWidth: _fieldWidth(context),
-        style: textStyle,
-        textFieldAlignment: MainAxisAlignment.spaceAround,
-        fieldStyle: FieldStyle.underline,
-        onChanged: onChanged,
-        onCompleted: onCompleted,
-      ),
+    return PinCodeTextField(
+      autoFocus: true,
+      enabled: enabled,
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
+      keyboardType: textInputType,
+      appContext: context,
+      length: length,
+      animationType: AnimationType.fade,
+      beforeTextPaste: (value) => false,
+      pinTheme: PinTheme(
+          shape: PinCodeFieldShape.underline,
+          fieldWidth: _fieldWidth(context),
+          inactiveColor: COLORS.text,
+          selectedColor: COLORS.primary,
+          activeColor: COLORS.text),
+      animationDuration: const Duration(milliseconds: 200),
+      onCompleted: onCompleted,
+      onChanged: (value) => onChanged,
     );
   }
 }

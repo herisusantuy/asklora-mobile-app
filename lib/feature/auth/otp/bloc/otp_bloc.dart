@@ -14,14 +14,13 @@ part 'otp_event.dart';
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final OtpRepository _otpRepository;
-  final int _resetTime = 180;
+  final int _resetTime = 5;
   StreamSubscription? resetTimeStreamSubscription;
 
   OtpBloc({
     required OtpRepository otpRepository,
   })  : _otpRepository = otpRepository,
         super(const OtpState()) {
-    on<OtpInputChanged>(_onOtpInputChanged);
     on<OtpSubmitted>(_onOtpSubmitted);
     on<OtpRequested>(_onOtpRequested);
     on<OtpTimeResetUpdate>(_onOtpTimeResetUpdate);
@@ -29,13 +28,13 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
   void _onOtpRequested(OtpRequested event, Emitter<OtpState> emit) async {
     try {
-      emit(state.copyWith(status: OtpStatus.requestLoading));
+      emit(state.copyWith(status: OtpStatus.loading));
       await _otpRepository.getOtp(
           getOtpRequest: GetOtpRequest(event.email, OtpType.register.value));
       emit(state.copyWith(
+          status: OtpStatus.unknown,
           disableRequest: true,
-          resetTime: _resetTime,
-          status: OtpStatus.requestSuccess));
+          resetTime: _resetTime));
 
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());
@@ -57,24 +56,16 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         status: OtpStatus.unknown));
   }
 
-  void _onOtpInputChanged(OtpInputChanged event, Emitter<OtpState> emit) {
-    emit(state.copyWith(
-        status: OtpStatus.unknown,
-        otp: event.otp,
-        textInputPosition: event.textInputPosition));
-  }
-
   void _onOtpSubmitted(
     OtpSubmitted event,
     Emitter<OtpState> emit,
   ) async {
     try {
-      cancelStreamSubscription();
-      emit(state.copyWith(status: OtpStatus.verifyLoading));
+      emit(state.copyWith(status: OtpStatus.loading));
       await _otpRepository.verifyOtp(verifyOtpRequest: event.verifyOtpRequest);
+      cancelStreamSubscription();
       emit(state.copyWith(
-          status: OtpStatus.submitSuccess,
-          responseMessage: 'Verify OTP Success'));
+          status: OtpStatus.success, responseMessage: 'Verify OTP Success'));
     } on UnauthorizedException {
       emit(state.copyWith(
           status: OtpStatus.failure, responseMessage: 'Invalid OTP'));

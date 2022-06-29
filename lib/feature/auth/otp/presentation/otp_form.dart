@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
@@ -12,16 +11,13 @@ import '../bloc/otp_bloc.dart';
 
 part 'otp_box.dart';
 
-part 'otp_num_pad.dart';
-
 class OtpForm extends StatelessWidget {
-  final OtpFieldController _otpFieldController = OtpFieldController();
-
   final Function onOtpSubmit;
 
   final Function onOtpResend;
 
-  OtpForm({required this.onOtpResend, required this.onOtpSubmit, Key? key})
+  const OtpForm(
+      {required this.onOtpResend, required this.onOtpSubmit, Key? key})
       : super(key: key);
 
   @override
@@ -30,8 +26,6 @@ class OtpForm extends StatelessWidget {
       listener: (context, state) {
         switch (state.status) {
           case OtpStatus.failure:
-            context.read<OtpBloc>().add(OtpInputChanged(state.otp));
-
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(SnackBar(
@@ -40,7 +34,7 @@ class OtpForm extends StatelessWidget {
                     state.responseMessage,
                   )));
             break;
-          case OtpStatus.submitSuccess:
+          case OtpStatus.success:
             KycScreen.open(context);
             break;
           default:
@@ -59,8 +53,6 @@ class OtpForm extends StatelessWidget {
               _otpBox(context),
               _padding(),
               _requestOtp(),
-              _padding(),
-              _otpNumPad(),
             ],
           ),
         ),
@@ -70,6 +62,7 @@ class OtpForm extends StatelessWidget {
 
   Widget _titleWithGuide() {
     return Column(
+      key: const Key('title_with_guide'),
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const CustomText(
@@ -91,24 +84,9 @@ class OtpForm extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: OtpBox(
         key: const Key('otp_box'),
-        otpFieldController: _otpFieldController,
-        onChanged: (otp) => context.read<OtpBloc>().add(OtpInputChanged(otp)),
         onCompleted: (otp) => onOtpSubmit(otp),
       ),
     );
-  }
-
-  Widget _otpNumPad() {
-    return BlocBuilder<OtpBloc, OtpState>(
-        buildWhen: (previous, current) =>
-            previous.textInputPosition != current.textInputPosition,
-        builder: (context, state) {
-          return OtpNumPad(
-              key: const Key('otp_num_pad'),
-              otp: state.otp,
-              otpFieldController: _otpFieldController,
-              textInputPosition: state.textInputPosition);
-        });
   }
 
   Widget _requestOtp() {
@@ -124,7 +102,7 @@ class OtpForm extends StatelessWidget {
           } else {
             return CustomTextButton(
               key: const Key('request_otp_button'),
-              isLoading: state.status == OtpStatus.requestLoading,
+              isLoading: state.status == OtpStatus.loading,
               buttonText: 'Request OTP',
               onClick: () => onOtpResend(),
               primaryColor: COLORS.text,

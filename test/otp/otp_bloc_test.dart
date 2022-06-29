@@ -39,61 +39,8 @@ void main() async {
               status: OtpStatus.unknown,
               otp: '',
               responseMessage: '',
-              resetTime: 0,
-              textInputPosition: 0));
+              resetTime: 0));
     });
-
-    blocTest<OtpBloc, OtpState>(
-        'emits `OtpStatus.unknown` and `otp` = 123456` WHEN '
-        'Tap numkey 1 to 6',
-        build: () {
-          when(OtpRepository().getOtp(
-                  getOtpRequest: GetOtpRequest(
-                      'test123@example.com', OtpType.register.value)))
-              .thenAnswer((_) =>
-                  Future.value(GetOtpResponse('OTP Request Successful')));
-          return otpBloc;
-        },
-        act: (bloc) => {
-              bloc.add(const OtpInputChanged('1')),
-              bloc.add(const OtpInputChanged('2')),
-              bloc.add(const OtpInputChanged('3')),
-              bloc.add(const OtpInputChanged('4')),
-              bloc.add(const OtpInputChanged('5')),
-              bloc.add(const OtpInputChanged('6')),
-            },
-        expect: () => {
-              const OtpState(
-                status: OtpStatus.unknown,
-                otp: '1',
-                textInputPosition: 0,
-              ),
-              const OtpState(
-                status: OtpStatus.unknown,
-                otp: '12',
-                textInputPosition: 1,
-              ),
-              const OtpState(
-                status: OtpStatus.unknown,
-                otp: '123',
-                textInputPosition: 2,
-              ),
-              const OtpState(
-                status: OtpStatus.unknown,
-                otp: '1234',
-                textInputPosition: 3,
-              ),
-              const OtpState(
-                status: OtpStatus.unknown,
-                otp: '12345',
-                textInputPosition: 4,
-              ),
-              const OtpState(
-                status: OtpStatus.unknown,
-                otp: '123456',
-                textInputPosition: 5,
-              ),
-            });
 
     blocTest<OtpBloc, OtpState>(
         'emits `OtpStatus.unknown` and `resetTime` = [ticking]` WHEN '
@@ -103,24 +50,16 @@ void main() async {
                   getOtpRequest: GetOtpRequest(
                       'test123@example.com', OtpType.register.value)))
               .thenAnswer((_) =>
-                  Future.value(GetOtpResponse('OTP Request Successful')));
+                  Future.value(GetOtpResponse('OTP code sent to your email')));
           return otpBloc;
         },
-        act: (bloc) => bloc.add(OtpRequested('test123@example.com')),
+        act: (bloc) => bloc.add(const OtpRequested('test123@example.com')),
         expect: () => {
-              const OtpState(status: OtpStatus.requestLoading),
+              const OtpState(status: OtpStatus.loading),
               const OtpState(
-                  disableRequest: true,
-                  resetTime: 180,
-                  status: OtpStatus.requestSuccess),
-              const OtpState(
-                  disableRequest: true,
-                  resetTime: 179,
-                  status: OtpStatus.requestSuccess),
-              const OtpState(
-                  disableRequest: true,
-                  resetTime: 178,
-                  status: OtpStatus.requestSuccess)
+                responseMessage: 'OTP code sent to your email',
+                status: OtpStatus.unknown,
+              ),
             });
 
     blocTest<OtpBloc, OtpState>(
@@ -138,9 +77,9 @@ void main() async {
             OtpSubmitted(VerifyOtpRequest('test123@example.com', '112233'))),
         expect: () => {
               const OtpState(status: OtpStatus.unknown, otp: '112233'),
-              const OtpState(status: OtpStatus.verifyLoading),
+              const OtpState(status: OtpStatus.loading),
               const OtpState(
-                  status: OtpStatus.submitSuccess,
+                  status: OtpStatus.success,
                   responseMessage: 'Verify OTP Success'),
             });
 

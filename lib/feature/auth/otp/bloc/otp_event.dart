@@ -7,18 +7,6 @@ abstract class OtpEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class OtpInputChanged extends OtpEvent {
-  final String otp;
-  final int textInputPosition;
-
-  const OtpInputChanged(this.otp)
-      : textInputPosition = otp.length,
-        super();
-
-  @override
-  List<Object> get props => [otp];
-}
-
 class OtpRequested extends OtpEvent {
   final String email;
 

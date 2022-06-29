@@ -1,39 +1,29 @@
 part of 'otp_bloc.dart';
 
-enum OtpStatus {
-  submitSuccess,
-  requestSuccess,
-  failure,
-  unknown,
-  requestLoading,
-  verifyLoading,
-  request
-}
+enum OtpStatus { success, failure, unknown, loading }
 
 class OtpState extends Equatable {
   final OtpStatus status;
   final String otp;
   final int resetTime;
-  final int textInputPosition;
   final bool disableRequest;
   final String responseMessage;
 
-  const OtpState(
-      {this.disableRequest = false,
-      this.status = OtpStatus.unknown,
-      this.otp = '',
-      this.responseMessage = '',
-      this.resetTime = 0,
-      this.textInputPosition = 0})
-      : super();
+  const OtpState({
+    this.disableRequest = false,
+    this.status = OtpStatus.unknown,
+    this.otp = '',
+    this.responseMessage = '',
+    this.resetTime = 0,
+  }) : super();
 
   @override
   List<Object> get props => [
+        disableRequest,
         status,
         otp,
-        disableRequest,
-        resetTime,
         responseMessage,
+        resetTime,
       ];
 
   OtpState copyWith({
@@ -41,7 +31,6 @@ class OtpState extends Equatable {
     String? otp,
     bool? disableRequest,
     int? resetTime,
-    int? textInputPosition,
     String? responseMessage,
   }) {
     return OtpState(
@@ -49,7 +38,6 @@ class OtpState extends Equatable {
       otp: otp ?? this.otp,
       disableRequest: disableRequest ?? this.disableRequest,
       resetTime: resetTime ?? this.resetTime,
-      textInputPosition: textInputPosition ?? this.textInputPosition,
       responseMessage: responseMessage ?? this.responseMessage,
     );
   }
