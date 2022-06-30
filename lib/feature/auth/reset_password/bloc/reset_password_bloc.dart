@@ -6,6 +6,7 @@ import '../../../../core/utils/extensions.dart';
 import '../repository/reset_password_repository.dart';
 
 part 'reset_password_event.dart';
+
 part 'reset_password_state.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
@@ -37,8 +38,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       ResetPasswordSubmitted event, Emitter<ResetPasswordState> emit) async {
     try {
       emit(state.copyWith(status: ResetPasswordStatus.loading));
-      var response =
-          await _resetPasswordRepository.resetPassword(email: state.email);
+      await _resetPasswordRepository.resetPassword(email: state.email);
 
       emit(state.copyWith(
           status: ResetPasswordStatus.success,

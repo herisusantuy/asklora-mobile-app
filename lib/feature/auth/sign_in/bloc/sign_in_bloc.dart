@@ -52,7 +52,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     try {
       emit(state.copyWith(status: SignInStatus.loading));
-      var response = await _signInRepository.signIn(
+      await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
       emit(state.copyWith(
           status: SignInStatus.success,

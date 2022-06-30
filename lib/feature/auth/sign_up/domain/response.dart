@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'sign_up_response.g.dart';
+part 'response.g.dart';
 
 @JsonSerializable()
 class SignUpResponse {
@@ -10,5 +10,18 @@ class SignUpResponse {
 
   factory SignUpResponse.fromJson(Map<String, dynamic> json) =>
       _$SignUpResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$SignUpResponseToJson(this);
+}
+
+@JsonSerializable()
+class GetOtpResponse {
+  String detail;
+
+  GetOtpResponse(this.detail);
+
+  factory GetOtpResponse.fromJson(Map<String, dynamic> json) =>
+      _$GetOtpResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GetOtpResponseToJson(this);
 }

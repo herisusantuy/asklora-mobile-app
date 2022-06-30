@@ -1,14 +1,10 @@
 import 'dart:async';
 import '../domain/sign_up_api_client.dart';
 import '../domain/sign_up_request.dart';
-import '../domain/sign_up_response.dart';
+import '../domain/response.dart';
 
 class SignUpRepository {
-  late SignUpApiClient _signUpApiClient;
-
-  SignUpRepository() {
-    _signUpApiClient = SignUpApiClient();
-  }
+  final SignUpApiClient _signUpApiClient = SignUpApiClient();
 
   Future<SignUpResponse> signUp({
     required String email,
