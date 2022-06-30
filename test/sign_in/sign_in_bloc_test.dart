@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/repository/repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart';
@@ -15,21 +16,32 @@ class DioAdapterMock extends Mock implements HttpClientAdapter {}
 class MockSignInBloc extends MockBloc<SignInEvent, SignInState>
     implements SignInBloc {}
 
+class MockRepository extends Mock implements Repository {}
+
 @GenerateMocks([SignInRepository])
 @GenerateMocks([SignInApiClient])
-void main() {
+void main() async {
   group('Sign In Screen Bloc Test', () {
     late MockSignInRepository signInRepository;
     late SignInBloc signInBloc;
+    late MockRepository mockRepository;
 
     setUpAll(
       () async {
         signInRepository = MockSignInRepository();
+        mockRepository = MockRepository();
+
+        when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
+          null;
+        });
+        when(mockRepository.saveAccessToken('token'))
+            .thenAnswer((_) async => {null});
       },
     );
 
     setUp(
       () async {
+        TestWidgetsFlutterBinding.ensureInitialized();
         signInBloc = SignInBloc(signInRepository: signInRepository);
       },
     );
@@ -101,9 +113,10 @@ void main() {
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
               .thenAnswer(
             (_) => Future.value(
-              SignInResponse(access: 'token'),
+              SignInResponse('access', 'refresh'),
             ),
           );
+
           return signInBloc;
         },
         act: (bloc) => {

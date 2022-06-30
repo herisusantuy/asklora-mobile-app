@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
-import '../../get_account/bloc/get_account_bloc.dart';
-import '../../get_account/repository/get_account_repository.dart';
+import '../../../../core/utils/storage/secure_storage.dart';
+import '../../../user/account/bloc/account_bloc.dart';
+import '../../../user/account/repository/account_repository.dart';
 
 class SignInSuccessScreen extends StatelessWidget {
   const SignInSuccessScreen({Key? key}) : super(key: key);
@@ -17,9 +18,9 @@ class SignInSuccessScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) =>
-            GetAccountBloc(getAccountRepository: GetAccountRepository()),
-        child: BlocListener<GetAccountBloc, GetAccountState>(
-          listener: (context, state) {
+            AccountBloc(getAccountRepository: AccountRepository()),
+        child: BlocListener<AccountBloc, AccountState>(
+          listener: (context, state) async {
             switch (state.status) {
               case GetAccountStatus.failure:
                 ScaffoldMessenger.of(context)
@@ -40,11 +41,22 @@ class SignInSuccessScreen extends StatelessWidget {
               default:
                 break;
             }
+            if (state is OnfidoSdkToken) {
+              // TODO: Initialise Onfido SDK here.
+            }
           },
           child: Container(
             padding: const EdgeInsets.only(right: 10, left: 10),
-            child: Center(
-              child: _getAccountButton(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _getAccountButton(),
+                _padding(),
+                _upgradeUserAccount(),
+                _padding(),
+                _getOnfidoToken()
+              ],
             ),
           ),
         ),
@@ -52,20 +64,48 @@ class SignInSuccessScreen extends StatelessWidget {
     );
   }
 
-  Widget _getAccountButton() {
-    return BlocBuilder<GetAccountBloc, GetAccountState>(
-      builder: (context, state) {
-        return CustomTextButton(
-          buttonText: 'Get Account',
-          isLoading: state.status == GetAccountStatus.loading,
-          disable: state.status == GetAccountStatus.loading,
-          onClick: () =>
-              context.read<GetAccountBloc>().add(GetAccountSubmitted()),
-          borderRadius: 5,
-        );
-      },
-    );
-  }
+  Widget _getAccountButton() => BlocBuilder<AccountBloc, AccountState>(
+        builder: (context, state) {
+          return CustomTextButton(
+            buttonText: 'Get Account',
+            isLoading: state.status == GetAccountStatus.fetchingAccount,
+            disable: state.status == GetAccountStatus.fetchingAccount,
+            onClick: () => context.read<AccountBloc>().add(GetAccount()),
+            borderRadius: 5,
+          );
+        },
+      );
+
+  Widget _upgradeUserAccount() => BlocBuilder<AccountBloc, AccountState>(
+        builder: (context, state) {
+          return CustomTextButton(
+            buttonText: 'Upgrade Account',
+            isLoading: state.status == GetAccountStatus.upgradingAccount,
+            disable: state.status == GetAccountStatus.upgradingAccount,
+            onClick: () async {
+              var email = await SecureStorage().readSecureData('email');
+              context.read<AccountBloc>().add(UpgradeAccount(email ?? ''));
+            },
+            borderRadius: 5,
+          );
+        },
+      );
+
+  Widget _getOnfidoToken() => BlocBuilder<AccountBloc, AccountState>(
+        builder: (context, state) {
+          return CustomTextButton(
+            buttonText: 'Get SDK Token',
+            isLoading: state.status == GetAccountStatus.fetchingOnfidoToken,
+            disable: state.status == GetAccountStatus.fetchingOnfidoToken,
+            onClick: () => context.read<AccountBloc>().add(GetSdkToken()),
+            borderRadius: 5,
+          );
+        },
+      );
+
+  Padding _padding() => const Padding(
+        padding: EdgeInsets.only(top: 18),
+      );
 
   static void open(BuildContext context) =>
       Navigator.of(context).pushReplacement(

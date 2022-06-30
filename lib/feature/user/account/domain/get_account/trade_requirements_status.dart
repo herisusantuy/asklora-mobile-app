@@ -17,6 +17,7 @@ class TradeRequirementsStatus {
     this.agreement,
     this.kyc,
   );
+
   factory TradeRequirementsStatus.fromJson(Map<String, dynamic> json) =>
       _$TradeRequirementsStatusFromJson(json);
 

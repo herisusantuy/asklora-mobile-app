@@ -44,7 +44,6 @@ class MockOtpRepository extends _i1.Mock implements _i4.OtpRepository {
               returnValue:
                   Future<_i2.GetOtpResponse>.value(_FakeGetOtpResponse_0()))
           as _i5.Future<_i2.GetOtpResponse>);
-
   @override
   _i5.Future<_i2.GetOtpResponse> verifyOtp(
           {_i7.VerifyOtpRequest? verifyOtpRequest}) =>
@@ -70,7 +69,6 @@ class MockGetOtpClient extends _i1.Mock implements _i8.GetOtpClient {
               returnValue: Future<_i3.Response<dynamic>>.value(
                   _FakeResponse_1<dynamic>()))
           as _i5.Future<_i3.Response<dynamic>>);
-
   @override
   _i5.Future<_i3.Response<dynamic>> verifyOtp(
           _i7.VerifyOtpRequest? verifyOtpRequest) =>
