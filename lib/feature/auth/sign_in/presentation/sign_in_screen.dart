@@ -15,11 +15,13 @@ class SignInScreen extends StatelessWidget {
         title: const Text('Login'),
         elevation: 0,
       ),
-      body: SafeArea(
-          child: BlocProvider(
-        create: (context) => SignInBloc(signInRepository: SignInRepository()),
-        child: const SignInForm(),
-      )),
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: BlocProvider(
+          create: (context) => SignInBloc(signInRepository: SignInRepository()),
+          child: const SignInForm(),
+        ),
+      ),
     );
   }
 
