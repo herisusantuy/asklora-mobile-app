@@ -4,9 +4,9 @@ abstract class Repository {
 
   void saveAccessToken(String token);
 
-  void saveDetailToken(String token);
+  void saveRefreshToken(String token);
 
   Future<String?> getAccessToken();
 
-  Future<String?> getDetailToken();
+  Future<String?> getRefreshToken();
 }

@@ -18,7 +18,7 @@ class TokenRepository implements Repository {
   }
 
   @override
-  void saveDetailToken(String token) async {
+  void saveRefreshToken(String token) async {
     await _secureStorage.writeSecureData(Repository.keyAuthTokenRefresh, token);
   }
 
@@ -27,6 +27,6 @@ class TokenRepository implements Repository {
       await _secureStorage.readSecureData(Repository.keyAuthTokenAccess);
 
   @override
-  Future<String?> getDetailToken() async =>
+  Future<String?> getRefreshToken() async =>
       await _secureStorage.readSecureData(Repository.keyAuthTokenRefresh);
 }

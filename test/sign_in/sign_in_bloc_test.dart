@@ -31,7 +31,7 @@ void main() async {
         signInRepository = MockSignInRepository();
         mockRepository = MockRepository();
 
-        when(mockRepository.saveDetailToken('token')).thenAnswer((_) async {
+        when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
           null;
         });
         when(mockRepository.saveAccessToken('token'))
