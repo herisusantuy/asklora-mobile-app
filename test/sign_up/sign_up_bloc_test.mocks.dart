@@ -27,9 +27,7 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeSignUpResponse_0 extends _i1.Fake implements _i2.SignUpResponse {}
 
-class _FakeGetOtpResponse_1 extends _i1.Fake implements _i2.GetOtpResponse {}
-
-class _FakeResponse_2<T> extends _i1.Fake implements _i3.Response<T> {}
+class _FakeResponse_1<T> extends _i1.Fake implements _i3.Response<T> {}
 
 /// A class which mocks [SignUpRepository].
 ///
@@ -46,12 +44,6 @@ class MockSignUpRepository extends _i1.Mock implements _i4.SignUpRepository {
           returnValue:
               Future<_i2.SignUpResponse>.value(_FakeSignUpResponse_0())) as _i5
           .Future<_i2.SignUpResponse>);
-  @override
-  _i5.Future<_i2.GetOtpResponse> getOtp({String? email}) =>
-      (super.noSuchMethod(Invocation.method(#getOtp, [], {#email: email}),
-              returnValue:
-                  Future<_i2.GetOtpResponse>.value(_FakeGetOtpResponse_1()))
-          as _i5.Future<_i2.GetOtpResponse>);
 }
 
 /// A class which mocks [SignUpApiClient].
@@ -66,6 +58,6 @@ class MockSignUpApiClient extends _i1.Mock implements _i6.SignUpApiClient {
   _i5.Future<_i3.Response<dynamic>> signUp(_i7.SignUpRequest? request) =>
       (super.noSuchMethod(Invocation.method(#signUp, [request]),
               returnValue: Future<_i3.Response<dynamic>>.value(
-                  _FakeResponse_2<dynamic>()))
+                  _FakeResponse_1<dynamic>()))
           as _i5.Future<_i3.Response<dynamic>>);
 }

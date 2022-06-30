@@ -7,17 +7,26 @@ abstract class OtpEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class OtpInputChanged extends OtpEvent {
-  final String otp;
+class OtpRequested extends OtpEvent {
+  final String email;
 
-  const OtpInputChanged(this.otp) : super();
+  const OtpRequested(this.email) : super();
 
   @override
-  List<Object> get props => [otp];
+  List<Object> get props => [email];
+}
+
+class OtpTimeResetUpdate extends OtpEvent {
+  const OtpTimeResetUpdate() : super();
+
+  @override
+  List<Object> get props => [];
 }
 
 class OtpSubmitted extends OtpEvent {
-  const OtpSubmitted() : super();
+  final VerifyOtpRequest verifyOtpRequest;
+
+  const OtpSubmitted(this.verifyOtpRequest) : super();
 
   @override
   List<Object> get props => [];

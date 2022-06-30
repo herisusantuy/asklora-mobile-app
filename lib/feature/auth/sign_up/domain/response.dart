@@ -10,6 +10,7 @@ class SignUpResponse {
 
   factory SignUpResponse.fromJson(Map<String, dynamic> json) =>
       _$SignUpResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$SignUpResponseToJson(this);
 }
 
@@ -21,4 +22,6 @@ class GetOtpResponse {
 
   factory GetOtpResponse.fromJson(Map<String, dynamic> json) =>
       _$GetOtpResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GetOtpResponseToJson(this);
 }

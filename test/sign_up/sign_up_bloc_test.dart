@@ -203,8 +203,6 @@ void main() async {
                   email: 'kk@test.com', password: 'password1'))
               .thenAnswer(
                   (_) => Future.value(SignUpResponse('Sign Up Successful')));
-          when(signUpRepository.getOtp(email: 'kk@test.com')).thenAnswer(
-              (_) => Future.value(GetOtpResponse('Get OTP Successful!')));
           return signUpBloc;
         },
         act: (bloc) => {
