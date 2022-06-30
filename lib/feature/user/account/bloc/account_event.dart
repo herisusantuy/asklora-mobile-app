@@ -10,7 +10,6 @@ abstract class AccountEvent extends Equatable {
 class GetAccount extends AccountEvent {}
 
 class UpgradeAccount extends AccountEvent {
-
   final String email;
 
   const UpgradeAccount(this.email);

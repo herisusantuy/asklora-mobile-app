@@ -4,7 +4,6 @@ part 'identity.g.dart';
 
 @JsonSerializable()
 class Identity {
-
   @JsonKey(name: 'given_name')
   String? givenName;
 

@@ -5,5 +5,5 @@ abstract class Storage {
 
   Future<void> deleteSecureData(String key);
 
-  Future<void> deleteAllSecureData() ;
+  Future<void> deleteAllSecureData();
 }

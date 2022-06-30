@@ -4,7 +4,6 @@ part 'trusted_contact.g.dart';
 
 @JsonSerializable()
 class TrustedContact {
-
   @JsonKey(name: 'given_name')
   String? givenName;
 

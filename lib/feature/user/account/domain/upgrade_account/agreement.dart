@@ -4,7 +4,6 @@ part 'agreement.g.dart';
 
 @JsonSerializable()
 class Agreement {
-
   @JsonKey(name: 'agreement')
   String? agreement;
 
