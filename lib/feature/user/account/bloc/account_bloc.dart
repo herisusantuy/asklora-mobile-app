@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/get_account/get_account_response.dart';
@@ -41,7 +40,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
-    debugPrint('Krishna _onUpgradeAccount ');
     try {
       emit(state.copyWith(status: GetAccountStatus.upgradingAccount));
 
@@ -66,7 +64,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   _onGetOnfidoSdkToken(GetSdkToken event, Emitter<AccountState> emit) async {
-    debugPrint('Krishna _onUpgradeAccount ');
     try {
       emit(state.copyWith(status: GetAccountStatus.fetchOnfidoToken));
 

@@ -42,7 +42,7 @@ class SignInSuccessScreen extends StatelessWidget {
                 break;
             }
             if (state is OnfidoSdkToken) {
-              debugPrint('Krishna token ${state.token}');
+              // TODO: Initialise Onfido SDK here.
             }
           },
           child: Container(
