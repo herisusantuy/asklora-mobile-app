@@ -10,10 +10,8 @@ class TrustedContact {
   @JsonKey(name: 'family_name')
   String? familyName;
 
-  @JsonKey(name: 'email')
   String? email;
 
-  @JsonKey(name: 'phone')
   String? phone;
 
   TrustedContact({this.givenName, this.familyName, this.email, this.phone});

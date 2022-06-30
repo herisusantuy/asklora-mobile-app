@@ -10,19 +10,15 @@ part 'upgrade_account_request.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UpgradeAccountRequest {
-  @JsonKey(name: 'contact')
   Contact? contact;
 
-  @JsonKey(name: 'identity')
   Identity? identity;
 
   @JsonKey(name: 'trusted_contact')
   TrustedContact? trustedContact;
 
-  @JsonKey(name: 'disclosures')
   Disclosures? disclosures;
 
-  @JsonKey(name: 'agreements')
   List<Agreement>? agreements;
 
   UpgradeAccountRequest(

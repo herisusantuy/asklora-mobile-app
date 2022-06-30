@@ -6,11 +6,7 @@ import '../domain/get_account/get_account_response.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 
 class AccountRepository {
-  late AccountApiClient _accountApiClient;
-
-  AccountRepository() {
-    _accountApiClient = AccountApiClient();
-  }
+  final AccountApiClient _accountApiClient = AccountApiClient();
 
   Future<GetAccountResponse> getAccount() async {
     var response = await _accountApiClient.getAccount();

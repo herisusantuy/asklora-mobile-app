@@ -13,19 +13,15 @@ class Contact {
   @JsonKey(name: 'street_address')
   String? streetAddress;
 
-  @JsonKey(name: 'unit')
   String? unit;
 
-  @JsonKey(name: 'city')
   String? city;
 
-  @JsonKey(name: 'state')
   String? state;
 
   @JsonKey(name: 'postal_code')
   String? postalCode;
 
-  @JsonKey(name: 'country')
   String? country;
 
   Contact(
