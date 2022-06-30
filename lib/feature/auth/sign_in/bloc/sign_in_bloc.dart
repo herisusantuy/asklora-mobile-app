@@ -5,13 +5,13 @@ import '../../../../core/domain/asklora/asklora_api_client.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_in_repository.dart';
 
-part 'sign_in_state.dart';
 part 'sign_in_event.dart';
 
+part 'sign_in_state.dart';
+
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc({
-    required SignInRepository signInRepository,
-  })  : _signInRepository = signInRepository,
+  SignInBloc({required SignInRepository signInRepository})
+      : _signInRepository = signInRepository,
         super(const SignInState()) {
     on<SignInEmailChanged>(_onEmailChanged);
     on<SignInPasswordChanged>(_onPasswordChanged);
@@ -42,7 +42,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         passwordErrorText:
             (event.password.isValidPassword() || event.password.isEmpty)
                 ? ''
-                : 'Enter Valid Password'));
+                : 'Enter valid password'));
   }
 
   void _onSignInSubmitted(
@@ -51,8 +51,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     try {
       emit(state.copyWith(status: SignInStatus.loading));
-      var response = await _signInRepository.signIn(
+      await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
+
       emit(state.copyWith(
           status: SignInStatus.success,
           responseMessage: 'Authentication Success'));
@@ -63,6 +64,10 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(
           status: SignInStatus.failure,
           responseMessage: 'User does not exist with the given email'));
+    } on NotAcceptableException {
+      emit(state.copyWith(
+          status: SignInStatus.failure,
+          responseMessage: 'User email is not verified'));
     } catch (e) {
       emit(state.copyWith(
           status: SignInStatus.failure, responseMessage: e.toString()));

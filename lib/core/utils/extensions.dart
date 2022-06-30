@@ -8,8 +8,13 @@ final RegExp emailRegex = RegExp(emailPatternSource);
 /// Password regex (minimum 8 chars and one character and one number).
 final RegExp passwordRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
 
+/// OTP regex (exactly 6 digits)
+final RegExp otpRegex = RegExp(r'^([0-9]{6})$');
+
 extension EmailValidator on String {
   bool isValidEmail() => emailRegex.hasMatch(this);
 
   bool isValidPassword() => passwordRegex.hasMatch(this);
+
+  bool isValidOtp() => otpRegex.hasMatch(this);
 }

@@ -9,5 +9,8 @@ class SignUpRequest {
 
   SignUpRequest(this.email, this.password);
 
+  factory SignUpRequest.fromJson(Map<String, dynamic> json) =>
+      _$SignUpRequestFromJson(json);
+
   Map<String, dynamic> toJson() => _$SignUpRequestToJson(this);
 }

@@ -4,12 +4,12 @@
 
 import 'dart:async' as _i5;
 
+import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart'
+    as _i2;
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_request.dart'
     as _i7;
-import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_response.dart'
-    as _i2;
 import 'package:asklora_mobile_app/feature/auth/sign_up/repository/sign_up_repository.dart'
     as _i4;
 import 'package:dio/dio.dart' as _i3;

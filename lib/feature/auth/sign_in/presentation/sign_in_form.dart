@@ -5,15 +5,18 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/storage/secure_storage.dart';
+import '../../reset_password/presentation/reset_password_screen.dart';
 import '../bloc/sign_in_bloc.dart';
 import 'sign_in_success_screen.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<SignInBloc, SignInState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         switch (state.status) {
           case SignInStatus.failure:
             context
@@ -29,6 +32,7 @@ class SignInForm extends StatelessWidget {
                   )));
             break;
           case SignInStatus.success:
+            await SecureStorage().writeSecureData('email', state.emailAddress);
             SignInSuccessScreen.open(context);
             break;
           default:
@@ -48,7 +52,7 @@ class SignInForm extends StatelessWidget {
                 children: [
                   _emailInput(),
                   _passwordInput(),
-                  _forgotPasswordButton(),
+                  _forgotPasswordButton(context),
                 ],
               ),
             ),
@@ -67,6 +71,7 @@ class SignInForm extends StatelessWidget {
         return Container(
             padding: const EdgeInsets.only(top: 20),
             child: CustomTextInput(
+              key: const Key('sign_in_email_input'),
               textInputType: TextInputType.emailAddress,
               labelText: 'Email Address',
               hintText: 'Input Email Address',
@@ -88,6 +93,7 @@ class SignInForm extends StatelessWidget {
             Container(
               padding: const EdgeInsets.only(top: 20),
               child: CustomTextInput(
+                key: const Key('sign_in_password_input'),
                 obscureText: true,
                 labelText: 'Password',
                 hintText: 'Input Password',
@@ -103,9 +109,10 @@ class SignInForm extends StatelessWidget {
     );
   }
 
-  Widget _forgotPasswordButton() {
+  Widget _forgotPasswordButton(context) {
     return TextButton(
-        onPressed: () {},
+        key: const Key('forgot_password_button'),
+        onPressed: () => ResetPasswordScreen.open(context),
         child: const Text(
           'Forgotten Password?',
           style: TextStyle(decoration: TextDecoration.underline),
@@ -116,6 +123,7 @@ class SignInForm extends StatelessWidget {
     return BlocBuilder<SignInBloc, SignInState>(
       builder: (context, state) {
         return CustomTextButton(
+          key: const Key('sign_in_submit_button'),
           buttonText: 'Login',
           isLoading: state.status == SignInStatus.loading,
           disable:

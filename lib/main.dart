@@ -6,7 +6,7 @@ import 'home_screen.dart';
 
 const int _durationInMillis = 700;
 
-void main() {
+main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 import '../domain/sign_up_api_client.dart';
 import '../domain/sign_up_request.dart';
-import '../domain/sign_up_response.dart';
+import '../domain/response.dart';
 
 class SignUpRepository {
   final SignUpApiClient _signUpApiClient = SignUpApiClient();

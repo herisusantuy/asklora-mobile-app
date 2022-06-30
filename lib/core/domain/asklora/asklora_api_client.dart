@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 
 import '../../utils/build_configs/build_config.dart';
 import '../logging_interceptor.dart';
+import '../repository/repository.dart';
+import '../repository/token_repository.dart';
 
 class AskloraApiClient {
   final dio = createDio();
@@ -31,15 +33,25 @@ class AskloraApiClient {
     if (kDebugMode) {
       dio.interceptors.add(LoggingInterceptor());
     }
-    dio.interceptors.add(AppInterceptors(dio));
+    dio.interceptors.add(AppInterceptors(TokenRepository()));
     return dio;
   }
 }
 
 class AppInterceptors extends Interceptor {
-  final Dio dio;
+  final Repository _storage;
 
-  AppInterceptors(this.dio);
+  AppInterceptors(this._storage);
+
+  @override
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    var accessToken = await _storage.getAccessToken();
+    if (accessToken != null) {
+      options.headers['Authorization'] = 'Bearer $accessToken';
+    }
+    return handler.next(options);
+  }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
@@ -56,6 +68,8 @@ class AppInterceptors extends Interceptor {
             throw UnauthorizedException(err.requestOptions);
           case 404:
             throw NotFoundException(err.requestOptions);
+          case 406:
+            throw NotAcceptableException(err.requestOptions);
           case 409:
             throw ConflictException(err.requestOptions);
           case 500:
@@ -110,6 +124,15 @@ class UnauthorizedException extends DioError {
 
 class NotFoundException extends DioError {
   NotFoundException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'The requested information could not be found';
+  }
+}
+
+class NotAcceptableException extends DioError {
+  NotAcceptableException(RequestOptions r) : super(requestOptions: r);
 
   @override
   String toString() {
