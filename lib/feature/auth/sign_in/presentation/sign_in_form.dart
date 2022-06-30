@@ -39,23 +39,16 @@ class SignInForm extends StatelessWidget {
             break;
         }
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Align(
+        alignment: const Alignment(0, -1 / 3),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _emailInput(),
-                  _passwordInput(),
-                  _forgotPasswordButton(context),
-                ],
-              ),
-            ),
+            _emailInput(),
+            _padding(),
+            _passwordInput(),
+            _forgotPasswordButton(context),
+            _padding(),
             _loginButton()
           ],
         ),
@@ -68,18 +61,16 @@ class SignInForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.emailAddress != current.emailAddress,
       builder: (context, state) {
-        return Container(
-            padding: const EdgeInsets.only(top: 20),
-            child: CustomTextInput(
-              key: const Key('sign_in_email_input'),
-              textInputType: TextInputType.emailAddress,
-              labelText: 'Email Address',
-              hintText: 'Input Email Address',
-              errorText: state.emailAddressErrorText,
-              onChanged: (email) {
-                context.read<SignInBloc>().add(SignInEmailChanged(email));
-              },
-            ));
+        return CustomTextInput(
+          key: const Key('sign_in_email_input'),
+          textInputType: TextInputType.emailAddress,
+          labelText: 'Email Address',
+          hintText: 'Input Email Address',
+          errorText: state.emailAddressErrorText,
+          onChanged: (email) {
+            context.read<SignInBloc>().add(SignInEmailChanged(email));
+          },
+        );
       },
     );
   }
@@ -88,22 +79,14 @@ class SignInForm extends StatelessWidget {
     return BlocBuilder<SignInBloc, SignInState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
-        return Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 20),
-              child: CustomTextInput(
-                key: const Key('sign_in_password_input'),
-                obscureText: true,
-                labelText: 'Password',
-                hintText: 'Input Password',
-                onChanged: (password) => context
-                    .read<SignInBloc>()
-                    .add(SignInPasswordChanged(password)),
-                errorText: state.passwordErrorText,
-              ),
-            ),
-          ],
+        return CustomTextInput(
+          key: const Key('sign_in_password_input'),
+          obscureText: true,
+          labelText: 'Password',
+          hintText: 'Input Password',
+          onChanged: (password) =>
+              context.read<SignInBloc>().add(SignInPasswordChanged(password)),
+          errorText: state.passwordErrorText,
         );
       },
     );
@@ -135,4 +118,8 @@ class SignInForm extends StatelessWidget {
       },
     );
   }
+
+  Padding _padding() => const Padding(
+        padding: EdgeInsets.only(top: 18),
+      );
 }
