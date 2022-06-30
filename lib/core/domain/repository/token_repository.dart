@@ -1,30 +1,32 @@
 import '../../utils/storage/secure_storage.dart';
+import 'repository.dart';
 
-class TokenRepository {
-  static const String keyAuthTokenAccess = 'auth_token_key_access';
-  static const String keyAuthTokenRefresh = 'auth_token_key_refresh';
-
-  static final TokenRepository _appRepository = TokenRepository._internal();
+class TokenRepository implements Repository {
+  static final TokenRepository _tokenRepository = TokenRepository._internal();
 
   final _secureStorage = SecureStorage();
 
   factory TokenRepository() {
-    return _appRepository;
+    return _tokenRepository;
   }
 
   TokenRepository._internal();
 
-  void saveAccessToken(String token) {
-    _secureStorage.writeSecureData(keyAuthTokenAccess, token);
+  @override
+  void saveAccessToken(String token) async {
+    await _secureStorage.writeSecureData(Repository.keyAuthTokenAccess, token);
   }
 
-  void saveDetailToken(String token) {
-    _secureStorage.writeSecureData(keyAuthTokenRefresh, token);
+  @override
+  void saveRefreshToken(String token) async {
+    await _secureStorage.writeSecureData(Repository.keyAuthTokenRefresh, token);
   }
 
+  @override
   Future<String?> getAccessToken() async =>
-      await _secureStorage.readSecureData(keyAuthTokenAccess);
+      await _secureStorage.readSecureData(Repository.keyAuthTokenAccess);
 
-  Future<String?> getDetailToken() async =>
-      await _secureStorage.readSecureData(keyAuthTokenRefresh);
+  @override
+  Future<String?> getRefreshToken() async =>
+      await _secureStorage.readSecureData(Repository.keyAuthTokenRefresh);
 }

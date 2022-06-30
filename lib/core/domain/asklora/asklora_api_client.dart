@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../utils/build_configs/build_config.dart';
 import '../logging_interceptor.dart';
+import '../repository/repository.dart';
 import '../repository/token_repository.dart';
 
 class AskloraApiClient {
@@ -32,20 +33,20 @@ class AskloraApiClient {
     if (kDebugMode) {
       dio.interceptors.add(LoggingInterceptor());
     }
-    dio.interceptors.add(AppInterceptors(dio));
+    dio.interceptors.add(AppInterceptors(TokenRepository()));
     return dio;
   }
 }
 
 class AppInterceptors extends Interceptor {
-  final Dio dio;
+  final Repository _storage;
 
-  AppInterceptors(this.dio);
+  AppInterceptors(this._storage);
 
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    var accessToken = await TokenRepository().getAccessToken();
+    var accessToken = await _storage.getAccessToken();
     if (accessToken != null) {
       options.headers['Authorization'] = 'Bearer $accessToken';
     }
