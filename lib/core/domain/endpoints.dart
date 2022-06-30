@@ -8,3 +8,4 @@ const String endpointGetOtp = '$v1${accounts}otp/';
 const String endpointVerifyEmail = '$v1${accounts}verify-email/';
 const String endpointUpgradeAccount = '$v1${accounts}upgrade/';
 const String endpointGetAccount = '$v1$accounts';
+const String endpointGetOnfidoToken = '$v1${accounts}onfido/sdk/token';

@@ -1,13 +1,15 @@
 import 'dart:async';
 
+import '../../../../core/domain/repository/repository.dart';
 import '../domain/sign_in_api_client.dart';
 import '../domain/sign_in_request.dart';
 import '../domain/sign_in_response.dart';
 
 class SignInRepository {
   late SignInApiClient _signInApiClient;
+  final Repository _storage;
 
-  SignInRepository() {
+  SignInRepository(this._storage) {
     _signInApiClient = SignInApiClient();
   }
 
@@ -18,6 +20,10 @@ class SignInRepository {
     var response =
         await _signInApiClient.signIn(SignInRequest(email, password));
 
-    return SignInResponse.fromJson(response.data);
+    var signInResponse = SignInResponse.fromJson(response.data);
+    _storage.saveAccessToken(signInResponse.access);
+    _storage.saveDetailToken(signInResponse.refresh);
+
+    return signInResponse;
   }
 }

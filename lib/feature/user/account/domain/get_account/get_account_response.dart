@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'trade_requirements_status.dart';
 
 part 'get_account_response.g.dart';

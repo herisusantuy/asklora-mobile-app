@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/core/domain/repository/token_repository.dart';
+import 'package:asklora_mobile_app/core/domain/repository/repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart';
@@ -16,21 +16,26 @@ class DioAdapterMock extends Mock implements HttpClientAdapter {}
 class MockSignInBloc extends MockBloc<SignInEvent, SignInState>
     implements SignInBloc {}
 
+class MockRepository extends Mock implements Repository {}
+
 @GenerateMocks([SignInRepository])
 @GenerateMocks([SignInApiClient])
-@GenerateMocks([TokenRepository])
 void main() async {
   group('Sign In Screen Bloc Test', () {
     late MockSignInRepository signInRepository;
-    late MockTokenRepository tokenRepository;
     late SignInBloc signInBloc;
-    // late FlutterDriver driver;
+    late MockRepository mockRepository;
 
     setUpAll(
       () async {
         signInRepository = MockSignInRepository();
-        // driver = await FlutterDriver.connect(dartVmServiceUrl: '');
-        tokenRepository = MockTokenRepository();
+        mockRepository = MockRepository();
+
+        when(mockRepository.saveDetailToken('token')).thenAnswer((_) async {
+          null;
+        });
+        when(mockRepository.saveAccessToken('token'))
+            .thenAnswer((_) async => {null});
       },
     );
 
@@ -111,11 +116,7 @@ void main() async {
               SignInResponse('access', 'refresh'),
             ),
           );
-          when(tokenRepository.saveDetailToken('token')).thenAnswer((_) async {
-            null;
-          });
-          when(tokenRepository.saveAccessToken('token'))
-              .thenAnswer((_) async => {null});
+
           return signInBloc;
         },
         act: (bloc) => {

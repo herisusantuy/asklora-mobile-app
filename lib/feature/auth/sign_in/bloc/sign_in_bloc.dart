@@ -2,18 +2,16 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/asklora/asklora_api_client.dart';
-import '../../../../core/domain/repository/token_repository.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_in_repository.dart';
 
-part 'sign_in_state.dart';
-
 part 'sign_in_event.dart';
 
+part 'sign_in_state.dart';
+
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc({
-    required SignInRepository signInRepository,
-  })  : _signInRepository = signInRepository,
+  SignInBloc({required SignInRepository signInRepository})
+      : _signInRepository = signInRepository,
         super(const SignInState()) {
     on<SignInEmailChanged>(_onEmailChanged);
     on<SignInPasswordChanged>(_onPasswordChanged);
@@ -55,10 +53,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(status: SignInStatus.loading));
       var response = await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
-
-      var tokenRepository = TokenRepository();
-      tokenRepository.saveAccessToken(response.access);
-      tokenRepository.saveDetailToken(response.refresh);
 
       emit(state.copyWith(
           status: SignInStatus.success,

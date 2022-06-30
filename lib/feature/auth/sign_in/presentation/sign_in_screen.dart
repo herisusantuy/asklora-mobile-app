@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/repository/token_repository.dart';
 import '../bloc/sign_in_bloc.dart';
 import '../repository/sign_in_repository.dart';
 import 'sign_in_form.dart';
@@ -17,7 +18,9 @@ class SignInScreen extends StatelessWidget {
       ),
       body: SafeArea(
           child: BlocProvider(
-        create: (context) => SignInBloc(signInRepository: SignInRepository()),
+        create: (context) => SignInBloc(
+          signInRepository: SignInRepository(TokenRepository()),
+        ),
         child: const SignInForm(),
       )),
     );

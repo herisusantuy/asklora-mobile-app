@@ -1,9 +1,16 @@
-part of 'get_account_bloc.dart';
+part of 'account_bloc.dart';
 
-enum GetAccountStatus { success, failure, unknown, loading }
+enum GetAccountStatus {
+  success,
+  failure,
+  unknown,
+  fetchingAccount,
+  upgradingAccount,
+  fetchOnfidoToken
+}
 
-class GetAccountState extends Equatable {
-  const GetAccountState(
+class AccountState extends Equatable {
+  const AccountState(
       {this.status = GetAccountStatus.unknown,
       this.responseMessage = '',
       this.account});
@@ -15,15 +22,21 @@ class GetAccountState extends Equatable {
   @override
   List<Object?> get props => [status, responseMessage, account];
 
-  GetAccountState copyWith({
+  AccountState copyWith({
     GetAccountStatus? status,
     String? responseMessage,
     GetAccountResponse? account,
   }) {
-    return GetAccountState(
+    return AccountState(
       status: status ?? this.status,
       responseMessage: responseMessage ?? this.responseMessage,
       account: account ?? this.account,
     );
   }
+}
+
+class OnfidoSdkToken extends AccountState {
+  final String token;
+
+  const OnfidoSdkToken(this.token);
 }
