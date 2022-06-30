@@ -65,7 +65,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   _onGetOnfidoSdkToken(GetSdkToken event, Emitter<AccountState> emit) async {
     try {
-      emit(state.copyWith(status: GetAccountStatus.fetchOnfidoToken));
+      emit(state.copyWith(status: GetAccountStatus.fetchingOnfidoToken));
 
       var response = await _accountRepository.getOnfidoToken();
 

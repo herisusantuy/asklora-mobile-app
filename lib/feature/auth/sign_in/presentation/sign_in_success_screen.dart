@@ -95,8 +95,8 @@ class SignInSuccessScreen extends StatelessWidget {
         builder: (context, state) {
           return CustomTextButton(
             buttonText: 'Get SDK Token',
-            isLoading: state.status == GetAccountStatus.fetchOnfidoToken,
-            disable: state.status == GetAccountStatus.fetchOnfidoToken,
+            isLoading: state.status == GetAccountStatus.fetchingOnfidoToken,
+            disable: state.status == GetAccountStatus.fetchingOnfidoToken,
             onClick: () => context.read<AccountBloc>().add(GetSdkToken()),
             borderRadius: 5,
           );

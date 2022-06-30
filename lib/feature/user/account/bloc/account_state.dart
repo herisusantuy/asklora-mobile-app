@@ -6,7 +6,7 @@ enum GetAccountStatus {
   unknown,
   fetchingAccount,
   upgradingAccount,
-  fetchOnfidoToken
+  fetchingOnfidoToken
 }
 
 class AccountState extends Equatable {
