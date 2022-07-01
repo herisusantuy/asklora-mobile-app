@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/utils/route_generator.dart';
 
 class KycScreen extends StatelessWidget {
   const KycScreen({Key? key}) : super(key: key);
@@ -16,6 +17,13 @@ class KycScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context) => Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => const KycScreen()));
+  static void open(BuildContext context) =>
+      Navigator.of(context).pushNamed(kycRoute);
+
+  static void openReplace(BuildContext context) =>
+      Navigator.of(context).pushReplacementNamed(kycRoute);
+
+  static void openRemoveUntil(BuildContext context, String removeUntil) =>
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(kycRoute, ModalRoute.withName(removeUntil));
 }

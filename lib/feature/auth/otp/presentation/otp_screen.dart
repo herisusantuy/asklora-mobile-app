@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/otp/verify_otp_request.dart';
 import '../../../../core/styles/color.dart';
+import '../../../../core/utils/route_generator.dart';
 import '../bloc/otp_bloc.dart';
 import '../repository/otp_repository.dart';
 import 'otp_form.dart';
@@ -37,8 +38,14 @@ class OtpScreen extends StatelessWidget {
   }
 
   static void open(BuildContext context, String email) =>
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => OtpScreen(
-                email: email,
-              )));
+      Navigator.of(context).pushNamed(otpRoute, arguments: email);
+
+  static void openReplace(BuildContext context, String email) =>
+      Navigator.of(context).pushReplacementNamed(otpRoute, arguments: email);
+
+  static void openRemoveUntil(
+          BuildContext context, String removeUntil, String email) =>
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          otpRoute, ModalRoute.withName(removeUntil),
+          arguments: email);
 }

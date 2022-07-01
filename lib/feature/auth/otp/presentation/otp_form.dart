@@ -35,7 +35,7 @@ class OtpForm extends StatelessWidget {
                   )));
             break;
           case OtpStatus.success:
-            KycScreen.open(context);
+            KycScreen.openReplace(context);
             break;
           default:
             break;
