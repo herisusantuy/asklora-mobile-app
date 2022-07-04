@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/domain/asklora/asklora_api_client.dart';
 import '../../../../core/domain/endpoints.dart';
+import '../../kyc/domain/onfido_result_request.dart';
 import 'upgrade_account/upgrade_account_request.dart';
 
 class AccountApiClient {
@@ -27,4 +28,7 @@ class AccountApiClient {
 
   Future<Response> getOnfidoToken() async =>
       await AskloraApiClient().dio.get(endpointGetOnfidoToken);
+
+  Future<Response> patchOnfidoOutcome(OnfidoResultRequest request) async =>
+      await AskloraApiClient().dio.patch(endpointOnfidoOutcome, data: jsonEncode(request.toJson()));
 }

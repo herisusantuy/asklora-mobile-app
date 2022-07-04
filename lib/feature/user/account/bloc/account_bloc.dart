@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../kyc/domain/onfido_result_request.dart';
+import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
 import '../domain/upgrade_account/mock_data.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
@@ -17,6 +19,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<GetAccount>(_onGetAccount);
     on<UpgradeAccount>(_onUpgradeAccount);
     on<GetSdkToken>(_onGetOnfidoSdkToken);
+    on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
   }
 
   final AccountRepository _accountRepository;
@@ -74,6 +77,22 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       emit(state.copyWith(
           status: GetAccountStatus.failure,
           responseMessage: 'Could not fetch the token ð !'));
+    }
+  }
+
+  _onUpdateOnfidoResult(
+      UpdateOnfidoResult event, Emitter<AccountState> emit) async {
+    try {
+      emit(state.copyWith(status: GetAccountStatus.submittingOnfidoResult));
+
+      var response = await _accountRepository.patchOnfidoOutcome(
+          OnfidoResultRequest(event.token, event.reason, event.outcome));
+
+      emit(OnfidoResultUpdated(response));
+    } catch (e) {
+      emit(state.copyWith(
+          status: GetAccountStatus.failure,
+          responseMessage: 'Could not update the Onfido result!'));
     }
   }
 }
