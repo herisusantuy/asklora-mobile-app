@@ -2,9 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../domain/get_account/get_account_response.dart';
+import '../domain/upgrade_account/contact.dart';
 import '../domain/upgrade_account/mock_data.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
+import '../../../../core/utils/storage/secure_storage.dart';
 
 part 'account_event.dart';
 
@@ -17,6 +19,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<GetAccount>(_onGetAccount);
     on<UpgradeAccount>(_onUpgradeAccount);
     on<GetSdkToken>(_onGetOnfidoSdkToken);
+    // on<AccountFieldChanged>(_onAccountFieldChange);
   }
 
   final AccountRepository _accountRepository;
@@ -39,16 +42,27 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
+  // _onAccountFieldChange(
+  //     AccountFieldChanged event, Emitter<AccountState> emit) async {
+  //   // var request = UpgradeAccountRequest.fromJson(upgradeUserMockReq);
+  //   if (event.object=='contact'){
+  //     emit(state.copyWith(contact:Contact() ));
+  //   }
+  //   //  emit(state.copyWith(upgradeAccountRequest: ))
+  // }
+
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
+    var email = await SecureStorage().readSecureData('email');
     try {
       emit(state.copyWith(status: GetAccountStatus.upgradingAccount));
 
-      var request = UpgradeAccountRequest.fromJson(upgradeUserMockReq);
+      var request = state.upgradeAccountRequest;
 
       // Replace the mock email with real email in mock request
-      request.contact?.emailAddress = event.email;
-
-      var response = await _accountRepository.upgradeAccount(request);
+      request?.contact?.emailAddress =
+          event.upgradeAccountRequest?.contact?.emailAddress;
+      var response =
+          await _accountRepository.upgradeAccount(state.upgradeAccountRequest!);
 
       emit(
         state.copyWith(

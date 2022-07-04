@@ -92,7 +92,7 @@ class SignInSuccessScreen extends StatelessWidget {
             disable: state.status == GetAccountStatus.upgradingAccount,
             onClick: () async {
               var email = await SecureStorage().readSecureData('email');
-              context.read<AccountBloc>().add(UpgradeAccount(email ?? ''));
+              // context.read<AccountBloc>().add(UpgradeAccount(email ?? ''));
             },
             borderRadius: 5,
           );
