@@ -38,4 +38,26 @@ class Contact {
       _$ContactFromJson(json);
 
   Map<String, dynamic> toJson() => _$ContactToJson(this);
+
+  Contact copyWith({
+    String? emailAddress,
+    String? phoneNumber,
+    String? streetAddress,
+    String? unit,
+    String? city,
+    String? state,
+    String? postalCode,
+    String? country,
+  }) {
+    return Contact(
+      emailAddress: emailAddress ?? this.emailAddress,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      streetAddress: streetAddress ?? this.streetAddress,
+      unit: unit ?? this.unit,
+      city: city ?? this.city,
+      state: state ?? this.state,
+      postalCode: postalCode ?? this.postalCode,
+      country: country ?? this.country,
+    );
+  }
 }
