@@ -26,7 +26,7 @@ class SignUpForm extends StatelessWidget {
                 );
               break;
             case SignUpStatus.success:
-              OtpScreen.open(context, state.username);
+              OtpScreen.openReplace(context, state.username);
               break;
             default:
               break;

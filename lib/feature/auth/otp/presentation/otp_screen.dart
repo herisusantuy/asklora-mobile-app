@@ -8,6 +8,8 @@ import '../repository/otp_repository.dart';
 import 'otp_form.dart';
 
 class OtpScreen extends StatelessWidget {
+  static const String route = '/otp';
+
   final String email;
 
   const OtpScreen({required this.email, Key? key}) : super(key: key);
@@ -36,9 +38,6 @@ class OtpScreen extends StatelessWidget {
         )));
   }
 
-  static void open(BuildContext context, String email) =>
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => OtpScreen(
-                email: email,
-              )));
+  static void openReplace(BuildContext context, String email) =>
+      Navigator.of(context).pushReplacementNamed(route, arguments: email);
 }

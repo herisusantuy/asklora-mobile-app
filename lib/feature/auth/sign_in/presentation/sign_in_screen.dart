@@ -7,6 +7,8 @@ import '../repository/sign_in_repository.dart';
 import 'sign_in_form.dart';
 
 class SignInScreen extends StatelessWidget {
+  static const String route = '/sign_in';
+
   const SignInScreen({Key? key}) : super(key: key);
 
   @override
@@ -26,6 +28,6 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context) => Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => const SignInScreen()));
+  static void open(BuildContext context) =>
+      Navigator.of(context).pushNamed(route);
 }
