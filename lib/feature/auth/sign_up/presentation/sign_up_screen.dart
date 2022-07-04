@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utils/route_generator.dart';
 import '../bloc/sign_up_bloc.dart';
 import '../repository/sign_up_repository.dart';
 import 'sign_up_form.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static const String route = '/sign_up';
+
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
@@ -28,5 +29,5 @@ class SignUpScreen extends StatelessWidget {
   }
 
   static void open(BuildContext context) =>
-      Navigator.of(context).pushNamed(signUpRoute);
+      Navigator.of(context).pushNamed(route);
 }

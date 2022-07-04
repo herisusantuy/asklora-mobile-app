@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/repository/token_repository.dart';
-import '../../../../core/utils/route_generator.dart';
 import '../bloc/sign_in_bloc.dart';
 import '../repository/sign_in_repository.dart';
 import 'sign_in_form.dart';
 
 class SignInScreen extends StatelessWidget {
+  static const String route = '/sign_in';
+
   const SignInScreen({Key? key}) : super(key: key);
 
   @override
@@ -28,5 +29,5 @@ class SignInScreen extends StatelessWidget {
   }
 
   static void open(BuildContext context) =>
-      Navigator.of(context).pushNamed(signInRoute);
+      Navigator.of(context).pushNamed(route);
 }

@@ -6,6 +6,8 @@ import 'feature/auth/sign_in/presentation/sign_in_screen.dart';
 import 'feature/auth/sign_up/presentation/sign_up_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String route = '/home';
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   static void open(BuildContext context) =>
-      Navigator.of(context).pushNamed(homeRoute);
+      Navigator.of(context).pushNamed(route);
 }
 
 class HomePage extends StatelessWidget {
