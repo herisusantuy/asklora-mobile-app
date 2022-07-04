@@ -5,6 +5,7 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../user/account/bloc/account_bloc.dart';
+import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../../user/account/repository/account_repository.dart';
 
 class SignInSuccessScreen extends StatelessWidget {
@@ -55,7 +56,9 @@ class SignInSuccessScreen extends StatelessWidget {
                 _padding(),
                 _upgradeUserAccount(),
                 _padding(),
-                _getOnfidoToken()
+                _getOnfidoToken(),
+                _padding(),
+                _upgradeAccountScreen(context)
               ],
             ),
           ),
@@ -63,6 +66,11 @@ class SignInSuccessScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _upgradeAccountScreen(BuildContext context) => CustomTextButton(
+        buttonText: 'Upgrade Account Screen',
+        onClick: () => UpgradeAccountScreen.open(context),
+      );
 
   Widget _getAccountButton() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
