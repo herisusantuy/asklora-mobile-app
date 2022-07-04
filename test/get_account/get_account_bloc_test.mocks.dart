@@ -74,9 +74,9 @@ class MockAccountRepository extends _i1.Mock implements _i7.AccountRepository {
                   _FakeOnfidoTokenResponse_2()))
           as _i8.Future<_i4.OnfidoTokenResponse>);
   @override
-  _i8.Future<_i5.OnfidoResultResponse> patchOnfidoOutcome(
+  _i8.Future<_i5.OnfidoResultResponse> updateKycResult(
           _i9.OnfidoResultRequest? request) =>
-      (super.noSuchMethod(Invocation.method(#patchOnfidoOutcome, [request]),
+      (super.noSuchMethod(Invocation.method(#updateKycResult, [request]),
               returnValue: Future<_i5.OnfidoResultResponse>.value(
                   _FakeOnfidoResultResponse_3()))
           as _i8.Future<_i5.OnfidoResultResponse>);
@@ -110,9 +110,9 @@ class MockAccountApiClient extends _i1.Mock implements _i10.AccountApiClient {
               Future<_i6.Response<dynamic>>.value(_FakeResponse_4<dynamic>()))
       as _i8.Future<_i6.Response<dynamic>>);
   @override
-  _i8.Future<_i6.Response<dynamic>> patchOnfidoOutcome(
+  _i8.Future<_i6.Response<dynamic>> updateKycResult(
           _i9.OnfidoResultRequest? request) =>
-      (super.noSuchMethod(Invocation.method(#patchOnfidoOutcome, [request]),
+      (super.noSuchMethod(Invocation.method(#updateKycResult, [request]),
               returnValue: Future<_i6.Response<dynamic>>.value(
                   _FakeResponse_4<dynamic>()))
           as _i8.Future<_i6.Response<dynamic>>);

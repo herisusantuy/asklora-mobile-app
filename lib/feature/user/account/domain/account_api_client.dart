@@ -29,6 +29,6 @@ class AccountApiClient {
   Future<Response> getOnfidoToken() async =>
       await AskloraApiClient().dio.get(endpointGetOnfidoToken);
 
-  Future<Response> patchOnfidoOutcome(OnfidoResultRequest request) async =>
+  Future<Response> updateKycResult(OnfidoResultRequest request) async =>
       await AskloraApiClient().dio.patch(endpointOnfidoOutcome, data: jsonEncode(request.toJson()));
 }

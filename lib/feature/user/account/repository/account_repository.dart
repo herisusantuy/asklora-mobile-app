@@ -27,9 +27,9 @@ class AccountRepository {
     return OnfidoTokenResponse.fromJson(response.data);
   }
 
-  Future<OnfidoResultResponse> patchOnfidoOutcome(
+  Future<OnfidoResultResponse> updateKycResult(
       OnfidoResultRequest request) async {
-    var response = await _accountApiClient.patchOnfidoOutcome(request);
+    var response = await _accountApiClient.updateKycResult(request);
     return OnfidoResultResponse.fromJson(response.data);
   }
 }
