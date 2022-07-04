@@ -88,6 +88,9 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       var response = await _accountRepository.updateKycResult(
           OnfidoResultRequest(event.token, event.reason, event.outcome));
 
+      emit(state.copyWith(
+          status: GetAccountStatus.success, responseMessage: response.detail));
+
       emit(OnfidoResultUpdated(response));
     } catch (e) {
       emit(state.copyWith(
