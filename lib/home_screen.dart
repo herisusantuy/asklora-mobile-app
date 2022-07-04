@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'core/presentation/custom_text_button.dart';
 import 'feature/auth/sign_in/presentation/sign_in_screen.dart';
 import 'feature/auth/sign_up/presentation/sign_up_screen.dart';
-import 'feature/user/kyc/presentation/kyc_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -52,7 +51,7 @@ class HomePage extends StatelessWidget {
                 CustomTextButton(
                   key: const Key('custom_button_login'),
                   buttonText: 'Login',
-                  onClick: () => KycScreen.open(context),
+                  onClick: () => SignInScreen.open(context),
                   borderRadius: borderRadius,
                 ),
               ],
