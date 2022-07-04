@@ -6,7 +6,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/styles/color.dart';
-import '../../kyc/presentation/kyc_screen.dart';
+import '../../sign_up/presentation/sign_up_success_screen.dart';
 import '../bloc/otp_bloc.dart';
 
 part 'otp_box.dart';
@@ -35,7 +35,7 @@ class OtpForm extends StatelessWidget {
                   )));
             break;
           case OtpStatus.success:
-            KycScreen.open(context);
+            SignUpSuccessScreen.openReplace(context);
             break;
           default:
             break;

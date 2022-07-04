@@ -2,15 +2,19 @@
 // in asklora_mobile_app/test/get_account/get_account_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i7;
 
-import 'package:asklora_mobile_app/feature/auth/get_account/domain/get_account_api_client.dart'
-    as _i6;
-import 'package:asklora_mobile_app/feature/auth/get_account/domain/get_account_response.dart'
+import 'package:asklora_mobile_app/feature/user/account/domain/account_api_client.dart'
+    as _i8;
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/get_account_response.dart'
     as _i2;
-import 'package:asklora_mobile_app/feature/auth/get_account/repository/get_account_repository.dart'
+import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/upgrade_account_request.dart'
+    as _i3;
+import 'package:asklora_mobile_app/feature/user/account/repository/account_repository.dart'
+    as _i6;
+import 'package:asklora_mobile_app/feature/user/kyc/presentation/domain/onfido_token_response.dart'
     as _i4;
-import 'package:dio/dio.dart' as _i3;
+import 'package:dio/dio.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -26,38 +30,69 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeGetAccountResponse_0 extends _i1.Fake
     implements _i2.GetAccountResponse {}
 
-class _FakeResponse_1<T> extends _i1.Fake implements _i3.Response<T> {}
+class _FakeUpgradeAccountRequest_1 extends _i1.Fake
+    implements _i3.UpgradeAccountRequest {}
 
-/// A class which mocks [GetAccountRepository].
+class _FakeOnfidoTokenResponse_2 extends _i1.Fake
+    implements _i4.OnfidoTokenResponse {}
+
+class _FakeResponse_3<T> extends _i1.Fake implements _i5.Response<T> {}
+
+/// A class which mocks [AccountRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetAccountRepository extends _i1.Mock
-    implements _i4.GetAccountRepository {
-  MockGetAccountRepository() {
+class MockAccountRepository extends _i1.Mock implements _i6.AccountRepository {
+  MockAccountRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.GetAccountResponse> getAccount() => (super.noSuchMethod(
+  _i7.Future<_i2.GetAccountResponse> getAccount() => (super.noSuchMethod(
           Invocation.method(#getAccount, []),
           returnValue:
               Future<_i2.GetAccountResponse>.value(_FakeGetAccountResponse_0()))
-      as _i5.Future<_i2.GetAccountResponse>);
+      as _i7.Future<_i2.GetAccountResponse>);
+  @override
+  _i7.Future<_i3.UpgradeAccountRequest> upgradeAccount(
+          _i3.UpgradeAccountRequest? upgradeAccountRequest) =>
+      (super.noSuchMethod(
+              Invocation.method(#upgradeAccount, [upgradeAccountRequest]),
+              returnValue: Future<_i3.UpgradeAccountRequest>.value(
+                  _FakeUpgradeAccountRequest_1()))
+          as _i7.Future<_i3.UpgradeAccountRequest>);
+  @override
+  _i7.Future<_i4.OnfidoTokenResponse> getOnfidoToken() =>
+      (super.noSuchMethod(Invocation.method(#getOnfidoToken, []),
+              returnValue: Future<_i4.OnfidoTokenResponse>.value(
+                  _FakeOnfidoTokenResponse_2()))
+          as _i7.Future<_i4.OnfidoTokenResponse>);
 }
 
-/// A class which mocks [GetAccountApiClient].
+/// A class which mocks [AccountApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetAccountApiClient extends _i1.Mock
-    implements _i6.GetAccountApiClient {
-  MockGetAccountApiClient() {
+class MockAccountApiClient extends _i1.Mock implements _i8.AccountApiClient {
+  MockAccountApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i3.Response<dynamic>> getAccount() => (super.noSuchMethod(
+  _i7.Future<_i5.Response<dynamic>> getAccount() => (super.noSuchMethod(
           Invocation.method(#getAccount, []),
           returnValue:
-              Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>()))
-      as _i5.Future<_i3.Response<dynamic>>);
+              Future<_i5.Response<dynamic>>.value(_FakeResponse_3<dynamic>()))
+      as _i7.Future<_i5.Response<dynamic>>);
+  @override
+  _i7.Future<_i5.Response<dynamic>> upgradeAccount(
+          _i3.UpgradeAccountRequest? request) =>
+      (super.noSuchMethod(Invocation.method(#upgradeAccount, [request]),
+              returnValue: Future<_i5.Response<dynamic>>.value(
+                  _FakeResponse_3<dynamic>()))
+          as _i7.Future<_i5.Response<dynamic>>);
+  @override
+  _i7.Future<_i5.Response<dynamic>> getOnfidoToken() => (super.noSuchMethod(
+          Invocation.method(#getOnfidoToken, []),
+          returnValue:
+              Future<_i5.Response<dynamic>>.value(_FakeResponse_3<dynamic>()))
+      as _i7.Future<_i5.Response<dynamic>>);
 }
