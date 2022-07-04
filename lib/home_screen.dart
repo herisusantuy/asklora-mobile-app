@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                 CustomTextButton(
                   key: const Key('custom_button_login'),
                   buttonText: 'Login',
-                  onClick: () => KycScreen.open(context),
+                  onClick: () => SignInScreen.open(context),
                   borderRadius: borderRadius,
                 ),
               ],
