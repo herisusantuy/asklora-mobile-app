@@ -63,7 +63,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   ) async {
     try {
       emit(state.copyWith(status: OtpStatus.loading));
-      //await _otpRepository.verifyOtp(verifyOtpRequest: event.verifyOtpRequest);
+      await _otpRepository.verifyOtp(verifyOtpRequest: event.verifyOtpRequest);
       cancelStreamSubscription();
       emit(state.copyWith(
           status: OtpStatus.success, responseMessage: 'Verify OTP Success'));

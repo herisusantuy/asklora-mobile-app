@@ -38,15 +38,6 @@ class OtpScreen extends StatelessWidget {
         )));
   }
 
-  static void open(BuildContext context, String email) =>
-      Navigator.of(context).pushNamed(route, arguments: email);
-
   static void openReplace(BuildContext context, String email) =>
       Navigator.of(context).pushReplacementNamed(route, arguments: email);
-
-  static void openRemoveUntil(
-          BuildContext context, String removeUntil, String email) =>
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          route, ModalRoute.withName(removeUntil),
-          arguments: email);
 }
