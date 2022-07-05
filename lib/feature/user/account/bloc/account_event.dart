@@ -96,3 +96,67 @@ class AccountIsUnitedStateResidentChanged extends AccountEvent {
   @override
   List<Object> get props => [isUnitedStateResident];
 }
+
+class AccountUnitNumberChanged extends AccountEvent {
+  final String unitNumber;
+  const AccountUnitNumberChanged(this.unitNumber) : super();
+  @override
+  List<Object> get props => [unitNumber];
+}
+
+class AccountResidentialChanged extends AccountEvent {
+  final String residentialAddress;
+  const AccountResidentialChanged(this.residentialAddress) : super();
+  @override
+  List<Object> get props => [residentialAddress];
+}
+
+class AccountCityChanged extends AccountEvent {
+  final String city;
+  const AccountCityChanged(this.city) : super();
+  @override
+  List<Object> get props => [city];
+}
+
+class AccountCountryChanged extends AccountEvent {
+  final String country;
+  const AccountCountryChanged(this.country) : super();
+  @override
+  List<Object> get props => [country];
+}
+
+class AccountIsSameMailingAddressChanged extends AccountEvent {
+  final bool isSameMailingAddress;
+  const AccountIsSameMailingAddressChanged(this.isSameMailingAddress) : super();
+  @override
+  List<Object> get props => [isSameMailingAddress];
+}
+
+class AccountMailUnitNumberChanged extends AccountEvent {
+  final String mailUnitNumber;
+  const AccountMailUnitNumberChanged(this.mailUnitNumber) : super();
+  @override
+  List<Object> get props => [mailUnitNumber];
+}
+
+class AccountMailResidentialAddressChanged extends AccountEvent {
+  final String mailResidentialAddress;
+  const AccountMailResidentialAddressChanged(this.mailResidentialAddress)
+      : super();
+  @override
+  List<Object> get props => [mailResidentialAddress];
+}
+
+class AccountMailCityChanged extends AccountEvent {
+  final String mailCity;
+  const AccountMailCityChanged(this.mailCity) : super();
+  @override
+  List<Object> get props => [mailCity];
+}
+
+class AccountMailCountryChanged extends AccountEvent {
+  final String mailCountry;
+  const AccountMailCountryChanged(this.mailCountry) : super();
+  @override
+  List<Object> get props => [mailCountry];
+}

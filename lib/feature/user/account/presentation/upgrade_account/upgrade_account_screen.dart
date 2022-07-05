@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
 import '../../repository/account_repository.dart';
-import 'address_proof.dart';
+import 'address_proof_form.dart';
 import 'basic_information.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
@@ -16,10 +16,10 @@ class UpgradeAccountScreen extends StatelessWidget {
     int _currentPageIndex = 0;
 
     List<Widget> _pages = [
-      BasicInformationForm(
-        controller: _pageViewController,
-      ),
-      AddressProof(),
+      // BasicInformationForm(
+      //   controller: _pageViewController,
+      // ),
+      AddressProofForm(),
     ];
     return Scaffold(
       appBar: AppBar(
