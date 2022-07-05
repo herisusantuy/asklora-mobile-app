@@ -15,20 +15,6 @@ class UpgradeAccount extends AccountEvent {
   const UpgradeAccount(this.upgradeAccountRequest);
 }
 
-class AccountFieldChanged extends AccountEvent {
-  final String object;
-  final String key;
-  final String value;
-  const AccountFieldChanged({
-    required this.object,
-    required this.key,
-    required this.value,
-  }) : super();
-
-  @override
-  List<Object> get props => [object, key, value];
-}
-
 class GetSdkToken extends AccountEvent {}
 
 class AccountFirstNameChanged extends AccountEvent {
@@ -60,7 +46,7 @@ class AccountChineseNameChanged extends AccountEvent {
 }
 
 class AccountGenderChanged extends AccountEvent {
-  final Gender gender;
+  final String gender;
   const AccountGenderChanged(this.gender) : super();
   @override
   List<Object> get props => [gender];
@@ -94,11 +80,13 @@ class AccountCountryOfCitizenshipChanged extends AccountEvent {
   List<Object> get props => [countryOfCitizenship];
 }
 
-class AccountIsHongKongResidentChanged extends AccountEvent {
-  final bool isHongKongResident;
-  const AccountIsHongKongResidentChanged(this.isHongKongResident) : super();
+class AccountIsHongKongPermanentResidentChanged extends AccountEvent {
+  final bool isHongKongPermanentResident;
+  const AccountIsHongKongPermanentResidentChanged(
+      this.isHongKongPermanentResident)
+      : super();
   @override
-  List<Object> get props => [isHongKongResident];
+  List<Object> get props => [isHongKongPermanentResident];
 }
 
 class AccountIsUnitedStateResidentChanged extends AccountEvent {

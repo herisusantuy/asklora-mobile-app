@@ -1,8 +1,9 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../bloc/account_bloc.dart';
+import '../../repository/account_repository.dart';
 import 'address_proof.dart';
 import 'basic_information.dart';
 
@@ -27,25 +28,29 @@ class UpgradeAccountScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const CustomText('Upgrade Account'),
       ),
-      body: SafeArea(
-          child: Column(
-        children: [
-          _headerUpgradeAccount(),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: PageView(
-                controller: _pageViewController,
-                physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: (page) {
-                  _currentPageIndex = page;
-                },
-                children: _pages,
+      body: BlocProvider(
+        create: (context) =>
+            AccountBloc(getAccountRepository: AccountRepository()),
+        child: SafeArea(
+            child: Column(
+          children: [
+            _headerUpgradeAccount(),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: PageView(
+                  controller: _pageViewController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  onPageChanged: (page) {
+                    _currentPageIndex = page;
+                  },
+                  children: _pages,
+                ),
               ),
             ),
-          ),
-        ],
-      )),
+          ],
+        )),
+      ),
     );
   }
 

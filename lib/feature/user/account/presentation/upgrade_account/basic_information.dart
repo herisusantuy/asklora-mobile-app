@@ -10,6 +10,7 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
+import '../../bloc/account_bloc.dart';
 import 'upgrade_account_screen.dart';
 
 class BasicInformationForm extends StatelessWidget {
@@ -21,86 +22,137 @@ class BasicInformationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _firstNameInput(),
-              _middleNameInput(),
-              _lastNameInput(),
-              _chineseNameInput(),
-              _selectGender(),
-              _datePicker(context),
-              _countryCodeAndPhoneNumber(),
-              _countryInput(),
-              _optionHkResident(),
-              _usResidentCheck(),
-            ],
-          ),
-        )),
-        _nextButton()
-      ],
+    return BlocListener<AccountBloc, AccountState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      child: Column(
+        children: [
+          Expanded(
+              child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _firstNameInput(),
+                _middleNameInput(),
+                _lastNameInput(),
+                _chineseNameInput(),
+                _selectGender(),
+                _datePicker(context),
+                _countryCodeAndPhoneNumber(),
+                _countryInput(),
+                _optionHkResident(),
+                _usResidentCheck(),
+              ],
+            ),
+          )),
+          _nextButton()
+        ],
+      ),
     );
   }
 
   Widget _firstNameInput() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: CustomTextInput(
-          labelText: 'First Name',
-          onChanged: (value) => value,
-          hintText: 'Enter your first name'),
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        return Padding(
+          key: const Key('account_first_name_input'),
+          padding: const EdgeInsets.only(top: 20),
+          child: CustomTextInput(
+            labelText: 'First Name',
+            hintText: 'Enter your first name',
+            onChanged: (value) =>
+                context.read<AccountBloc>().add(AccountFirstNameChanged(value)),
+          ),
+        );
+      },
     );
   }
 
   Widget _middleNameInput() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          labelText: 'Middle Name',
-          onChanged: (value) => value,
-          hintText: 'Enter your Middle name'),
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: CustomTextInput(
+              labelText: 'Middle Name',
+              onChanged: (value) => context
+                  .read<AccountBloc>()
+                  .add(AccountMiddleNameChanged(value)),
+              hintText: 'Enter your Middle name'),
+        );
+      },
     );
   }
 
   Widget _lastNameInput() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          labelText: 'Last Name',
-          onChanged: (value) => value,
-          hintText: 'Enter your Last name'),
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: CustomTextInput(
+              labelText: 'Last Name',
+              onChanged: (value) => context
+                  .read<AccountBloc>()
+                  .add(AccountLastNameChanged(value)),
+              hintText: 'Enter your Last name'),
+        );
+      },
     );
   }
 
   Widget _chineseNameInput() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          labelText: 'Chinese Name',
-          onChanged: (value) => value,
-          hintText: 'Enter your Chinese name'),
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: CustomTextInput(
+              labelText: 'Chinese Name',
+              onChanged: (value) => context
+                  .read<AccountBloc>()
+                  .add(AccountChineseNameChanged(value)),
+              hintText: 'Enter your Chinese name'),
+        );
+      },
     );
   }
 
-  Widget _selectGender() => CustomDropdown(
-      label: 'Gender',
-      padding: const EdgeInsets.only(top: 10),
-      itemsList: const ['Male', 'Female', 'Other'],
-      onChanged: (gender) => gender);
-
-  Widget _datePicker(context) => CustomDatePicker(
-        padding: const EdgeInsets.only(top: 10),
-        label: 'Date of Birth',
-        onDateTimeChanged: (date) => date,
+  Widget _selectGender() => BlocBuilder<AccountBloc, AccountState>(
+        builder: (context, state) {
+          return CustomDropdown(
+            label: 'Gender',
+            padding: const EdgeInsets.only(top: 10),
+            itemsList: const ['Male', 'Female', 'Other'],
+            onChanged: (gender) =>
+                context.read<AccountBloc>().add(AccountGenderChanged(gender!)),
+          );
+        },
       );
 
-  Widget _countryCodeAndPhoneNumber() => CustomPhoneNumberInput(
-        onChangedCodeArea: (code) => code,
-        onChangePhoneNumber: (phoneNumber) => phoneNumber,
+  Widget _datePicker(context) => BlocBuilder<AccountBloc, AccountState>(
+        builder: (context, state) {
+          return CustomDatePicker(
+            padding: const EdgeInsets.only(top: 10),
+            label: 'Date of Birth',
+            selectedDate: DateTime.parse(state.dateOfBirth),
+            onDateTimeChanged: (date) => context.read<AccountBloc>().add(
+                  AccountDateOfBirthChanged(date.toString()),
+                ),
+          );
+        },
+      );
+
+  Widget _countryCodeAndPhoneNumber() => BlocBuilder<AccountBloc, AccountState>(
+        builder: (context, state) {
+          return CustomPhoneNumberInput(
+            onChangedCodeArea: (code) => context
+                .read<AccountBloc>()
+                .add(AccountCountryCodeChanged(code)),
+            onChangePhoneNumber: (phoneNumber) => context
+                .read<AccountBloc>()
+                .add(AccountPhoneNumberChanged(phoneNumber)),
+          );
+        },
       );
 
   Widget _countryInput() {
@@ -114,19 +166,35 @@ class BasicInformationForm extends StatelessWidget {
   }
 
   Widget _optionHkResident() {
-    return QuestionWidget(
-        padding: const EdgeInsets.only(top: 10),
-        questionText: 'Hong Kong Permanent Resident',
-        options: ['Yes', 'No'],
-        onSelected: (value) => value);
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        return QuestionWidget(
+          padding: const EdgeInsets.only(top: 10),
+          questionText: 'Hong Kong Permanent Resident',
+          options: ['Yes', 'No'],
+          selectedAnswer: state.isHongkongPermanentResident ? 'Yes' : 'No',
+          onSelected: (value) => context.read<AccountBloc>().add(
+              AccountIsHongKongPermanentResidentChanged(
+                  value == 'Yes' ? true : false)),
+        );
+      },
+    );
   }
 
   Widget _usResidentCheck() {
-    return QuestionWidget(
-        padding: const EdgeInsets.only(top: 10, bottom: 20),
-        questionText: 'US Resident Check',
-        options: ['Yes', 'No'],
-        onSelected: (value) => value);
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        return QuestionWidget(
+          padding: const EdgeInsets.only(top: 10, bottom: 20),
+          questionText: 'US Resident Check',
+          options: ['Yes', 'No'],
+          selectedAnswer: state.isUnitedStateResident ? 'Yes' : 'No',
+          onSelected: (value) => context.read<AccountBloc>().add(
+              AccountIsUnitedStateResidentChanged(
+                  value == 'Yes' ? true : false)),
+        );
+      },
+    );
   }
 
   Widget _nextButton() => Padding(

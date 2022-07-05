@@ -17,9 +17,20 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       : _accountRepository = getAccountRepository,
         super(const AccountState()) {
     on<GetAccount>(_onGetAccount);
-    on<UpgradeAccount>(_onUpgradeAccount);
     on<GetSdkToken>(_onGetOnfidoSdkToken);
-    // on<AccountFieldChanged>(_onAccountFieldChange);
+    on<UpgradeAccount>(_onUpgradeAccount);
+    on<AccountFirstNameChanged>(_onAccountFirstNameChange);
+    on<AccountLastNameChanged>(_onAccountLastNameChange);
+    on<AccountMiddleNameChanged>(_onAccountMiddleNameChange);
+    on<AccountChineseNameChanged>(_onAccountChineseNameChange);
+    on<AccountGenderChanged>(_onAccountGenderChange);
+    on<AccountDateOfBirthChanged>(_onAccountDateOfBirthChange);
+    on<AccountCountryCodeChanged>(_onAccountCountryCodeChange);
+    on<AccountPhoneNumberChanged>(_onAccountPhoneNumberChange);
+    on<AccountCountryOfCitizenshipChanged>(_onAccountCountryOfCitizenshipChage);
+    on<AccountIsHongKongPermanentResidentChanged>(
+        _onIsHongkongPermanentResidentChange);
+    on<AccountIsUnitedStateResidentChanged>(_onIsUnitedStateResidentChange);
   }
 
   final AccountRepository _accountRepository;
@@ -42,15 +53,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
-  // _onAccountFieldChange(
-  //     AccountFieldChanged event, Emitter<AccountState> emit) async {
-  //   // var request = UpgradeAccountRequest.fromJson(upgradeUserMockReq);
-  //   if (event.object=='contact'){
-  //     emit(state.copyWith(contact:Contact() ));
-  //   }
-  //   //  emit(state.copyWith(upgradeAccountRequest: ))
-  // }
-
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
     var email = await SecureStorage().readSecureData('email');
     try {
@@ -59,10 +61,18 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       var request = state.upgradeAccountRequest;
 
       // Replace the mock email with real email in mock request
-      request?.contact?.emailAddress =
-          event.upgradeAccountRequest?.contact?.emailAddress;
-      var response =
-          await _accountRepository.upgradeAccount(state.upgradeAccountRequest!);
+      // Set contact object
+      request?.contact?.emailAddress = email;
+      request?.contact?.phoneNumber = state.phoneNumber;
+
+      // Set identity object
+      request?.identity?.givenName = state.firstName;
+      request?.identity?.middleName = state.middleName;
+      request?.identity?.familyName = state.lastName;
+      request?.identity?.dateOfBirth = state.dateOfBirth;
+      request?.identity?.countryOfCitizenship = state.countryOfCitizenship;
+
+      var response = await _accountRepository.upgradeAccount(request!);
 
       emit(
         state.copyWith(
@@ -89,5 +99,62 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           status: GetAccountStatus.failure,
           responseMessage: 'Could not fetch the token ð !'));
     }
+  }
+
+  _onAccountFirstNameChange(
+      AccountFirstNameChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(firstName: event.firstName));
+  }
+
+  _onAccountLastNameChange(
+      AccountLastNameChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(lastName: event.lastName));
+  }
+
+  _onAccountMiddleNameChange(
+      AccountMiddleNameChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(middleName: event.middleName));
+  }
+
+  _onAccountChineseNameChange(
+      AccountChineseNameChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.chineseName));
+  }
+
+  _onAccountGenderChange(
+      AccountGenderChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(gender: event.gender));
+  }
+
+  _onAccountDateOfBirthChange(
+      AccountDateOfBirthChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(dateOfBirth: event.dateOfBirth));
+  }
+
+  _onAccountCountryCodeChange(
+      AccountCountryCodeChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(countryCode: event.countryCode));
+  }
+
+  _onAccountPhoneNumberChange(
+      AccountPhoneNumberChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(phoneNumber: event.phoneNumber));
+  }
+
+  _onAccountCountryOfCitizenshipChage(
+      AccountCountryOfCitizenshipChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(countryOfCitizenship: event.countryOfCitizenship));
+  }
+
+  _onIsHongkongPermanentResidentChange(
+      AccountIsHongKongPermanentResidentChanged event,
+      Emitter<AccountState> emit) {
+    emit(state.copyWith(
+        isHongkongPermanentResident: event.isHongKongPermanentResident));
+  }
+
+  _onIsUnitedStateResidentChange(
+      AccountIsUnitedStateResidentChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(isUnitedStateResident: event.isUnitedStateResident));
   }
 }
