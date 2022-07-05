@@ -61,4 +61,4 @@ run_production_mobile: ## Runs the mobile application in production
 
 build_dev_mobile: clean run_test
 	@echo "╠  Building the app"
-	@flutter build apk --flavor dev
+	@flutter build apk --flavor dev --dart-define=ENVIRONMENT=dev
