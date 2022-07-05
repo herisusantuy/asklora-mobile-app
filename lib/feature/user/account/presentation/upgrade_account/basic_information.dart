@@ -75,6 +75,7 @@ class BasicInformationForm extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextInput(
+              key: const Key('account_middle_name_input'),
               labelText: 'Middle Name',
               onChanged: (value) => context
                   .read<AccountBloc>()
@@ -91,6 +92,7 @@ class BasicInformationForm extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextInput(
+              key: const Key('account_last_name_input'),
               labelText: 'Last Name',
               onChanged: (value) => context
                   .read<AccountBloc>()
@@ -107,6 +109,7 @@ class BasicInformationForm extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextInput(
+              key: const Key('account_chinese_name_input'),
               labelText: 'Chinese Name',
               onChanged: (value) => context
                   .read<AccountBloc>()
@@ -120,6 +123,7 @@ class BasicInformationForm extends StatelessWidget {
   Widget _selectGender() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
           return CustomDropdown(
+            key: const Key('account_gender_input'),
             label: 'Gender',
             padding: const EdgeInsets.only(top: 10),
             itemsList: const ['Male', 'Female', 'Other'],
@@ -132,6 +136,7 @@ class BasicInformationForm extends StatelessWidget {
   Widget _datePicker(context) => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
           return CustomDatePicker(
+            key: const Key('account_date_of_birth_input'),
             padding: const EdgeInsets.only(top: 10),
             label: 'Date of Birth',
             selectedDate: DateTime.parse(state.dateOfBirth),
@@ -145,6 +150,7 @@ class BasicInformationForm extends StatelessWidget {
   Widget _countryCodeAndPhoneNumber() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
           return CustomPhoneNumberInput(
+            key: const Key('account_phone_number_input'),
             onChangedCodeArea: (code) => context
                 .read<AccountBloc>()
                 .add(AccountCountryCodeChanged(code)),
@@ -159,6 +165,7 @@ class BasicInformationForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
+          key: const Key('account_country_of_citizenship_input'),
           labelText: 'Country of Citizenship',
           onChanged: (value) => value,
           hintText: 'Enter your Chinese name'),
@@ -169,6 +176,7 @@ class BasicInformationForm extends StatelessWidget {
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         return QuestionWidget(
+          key: const Key('account_is_hongkong_permanent_resident_input'),
           padding: const EdgeInsets.only(top: 10),
           questionText: 'Hong Kong Permanent Resident',
           options: ['Yes', 'No'],
@@ -185,6 +193,7 @@ class BasicInformationForm extends StatelessWidget {
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         return QuestionWidget(
+          key: const Key('account_is_united_state_resident_input'),
           padding: const EdgeInsets.only(top: 10, bottom: 20),
           questionText: 'US Resident Check',
           options: ['Yes', 'No'],

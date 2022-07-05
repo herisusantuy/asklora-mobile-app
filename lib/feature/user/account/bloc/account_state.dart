@@ -17,7 +17,16 @@ enum FundingSource {
   inheritance,
   bussinessIncome,
   savings,
-  family
+  family,
+  unknown
+}
+
+enum EmploymentStatus {
+  unemployed,
+  employed,
+  student,
+  retired,
+  unknown,
 }
 
 class AccountState extends Equatable {
