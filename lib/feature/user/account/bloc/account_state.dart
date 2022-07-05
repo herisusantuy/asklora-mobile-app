@@ -100,7 +100,15 @@ class AccountState extends Equatable {
       countryOfCitizenship,
       isHongkongPermanentResident,
       isUnitedStateResident,
+      unitNumber,
+      residentialAddress,
+      city,
+      country,
       isSameMailingAddress,
+      mailUnitNumber,
+      mailResidentialAddress,
+      mailCity,
+      mailCountry,
     ];
   }
 
