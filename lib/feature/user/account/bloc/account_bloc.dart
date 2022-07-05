@@ -31,6 +31,16 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<AccountIsHongKongPermanentResidentChanged>(
         _onIsHongkongPermanentResidentChange);
     on<AccountIsUnitedStateResidentChanged>(_onIsUnitedStateResidentChange);
+    on<AccountUnitNumberChanged>(_onAccountUnitNumberChanged);
+    on<AccountResidentialChanged>(_onAccountResidentChanged);
+    on<AccountCityChanged>(_onAccountCityChanged);
+    on<AccountCountryChanged>(_onAccountCountryChanged);
+    on<AccountIsSameMailingAddressChanged>(_onIsSameMailingAddressChanged);
+    on<AccountMailUnitNumberChanged>(_onAccountMailUnitNumberChanged);
+    on<AccountMailResidentialAddressChanged>(
+        _onAccountMailResidentialAddressChanged);
+    on<AccountMailCityChanged>(_onAccountMailCityChanged);
+    on<AccountMailCountryChanged>(_onAccountMailCountryChanged);
   }
 
   final AccountRepository _accountRepository;
@@ -64,6 +74,10 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       // Set contact object
       request?.contact?.emailAddress = email;
       request?.contact?.phoneNumber = state.phoneNumber;
+      request?.contact?.unit = state.unitNumber;
+      request?.contact?.streetAddress = state.residentialAddress;
+      request?.contact?.city = state.city;
+      request?.contact?.country = state.country;
 
       // Set identity object
       request?.identity?.givenName = state.firstName;
@@ -156,5 +170,49 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   _onIsUnitedStateResidentChange(
       AccountIsUnitedStateResidentChanged event, Emitter<AccountState> emit) {
     emit(state.copyWith(isUnitedStateResident: event.isUnitedStateResident));
+  }
+
+  _onAccountUnitNumberChanged(
+      AccountUnitNumberChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.unitNumber));
+  }
+
+  _onAccountResidentChanged(
+      AccountResidentialChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.residentialAddress));
+  }
+
+  _onAccountCityChanged(AccountCityChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.city));
+  }
+
+  _onAccountCountryChanged(
+      AccountCountryChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.country));
+  }
+
+  _onIsSameMailingAddressChanged(
+      AccountIsSameMailingAddressChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(isSameMailingAddress: event.isSameMailingAddress));
+  }
+
+  _onAccountMailUnitNumberChanged(
+      AccountMailUnitNumberChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.mailUnitNumber));
+  }
+
+  _onAccountMailResidentialAddressChanged(
+      AccountMailResidentialAddressChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.mailResidentialAddress));
+  }
+
+  _onAccountMailCityChanged(
+      AccountMailCityChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.mailCity));
+  }
+
+  _onAccountMailCountryChanged(
+      AccountMailCountryChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.mailCountry));
   }
 }
