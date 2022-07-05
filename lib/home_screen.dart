@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'check_screen.dart';
 import 'core/presentation/custom_text_button.dart';
 import 'core/utils/route_generator.dart';
 import 'feature/auth/sign_in/presentation/sign_in_screen.dart';
@@ -18,12 +18,12 @@ class HomeScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const CheckScreen(),
     );
   }
 
-  static void open(BuildContext context) =>
-      Navigator.of(context).pushNamed(route);
+  static void openReplace(BuildContext context) =>
+      Navigator.of(context).pushReplacementNamed(route);
 }
 
 class HomePage extends StatelessWidget {

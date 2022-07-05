@@ -1,7 +1,14 @@
 import '../../utils/storage/secure_storage.dart';
+import '../token/token_api_client.dart';
+import '../token/token_refresh_request.dart';
+import '../token/token_refresh_response.dart';
+import '../token/token_verify_request.dart';
+import '../token/token_verify_response.dart';
 import 'repository.dart';
 
 class TokenRepository implements Repository {
+  final TokenApiClient _tokenApiClient = TokenApiClient();
+
   static final TokenRepository _tokenRepository = TokenRepository._internal();
 
   final _secureStorage = SecureStorage();
@@ -29,4 +36,20 @@ class TokenRepository implements Repository {
   @override
   Future<String?> getRefreshToken() async =>
       await _secureStorage.readSecureData(Repository.keyAuthTokenRefresh);
+
+  Future<TokenVerifyResponse> verifyToken(String accessToken) async {
+    var response =
+        await _tokenApiClient.verify(TokenVerifyRequest(accessToken));
+
+    var verifyResponse = TokenVerifyResponse.fromJson(response.data);
+    return verifyResponse;
+  }
+
+  Future<TokenRefreshResponse> refreshToken(String refreshToken) async {
+    var response =
+        await _tokenApiClient.refresh(TokenRefreshRequest(refreshToken));
+
+    var refreshResponse = TokenRefreshResponse.fromJson(response.data);
+    return refreshResponse;
+  }
 }

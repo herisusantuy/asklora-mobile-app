@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/repository/token_repository.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
+import '../../../../home_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/repository/account_repository.dart';
+import 'sign_in_screen.dart';
 
 class SignInSuccessScreen extends StatelessWidget {
+  static const route = '/sign_in_success_screen';
+
   const SignInSuccessScreen({Key? key}) : super(key: key);
 
   @override
@@ -55,7 +60,11 @@ class SignInSuccessScreen extends StatelessWidget {
                 _padding(),
                 _upgradeUserAccount(),
                 _padding(),
-                _getOnfidoToken()
+                _getOnfidoToken(),
+                _padding(),
+                _signOutButton(context),
+                _padding(),
+                _signInButton(context)
               ],
             ),
           ),
@@ -75,6 +84,28 @@ class SignInSuccessScreen extends StatelessWidget {
           );
         },
       );
+
+  Widget _signOutButton(BuildContext context) {
+    return CustomTextButton(
+      buttonText: 'Sign Out',
+      onClick: () {
+        TokenRepository().saveAccessToken('');
+        TokenRepository().saveRefreshToken('');
+        HomeScreen.openReplace(context);
+      },
+      borderRadius: 5,
+    );
+  }
+
+  Widget _signInButton(BuildContext context) {
+    return CustomTextButton(
+      buttonText: 'Sign In',
+      onClick: () {
+        SignInScreen.open(context);
+      },
+      borderRadius: 5,
+    );
+  }
 
   Widget _upgradeUserAccount() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
@@ -107,7 +138,8 @@ class SignInSuccessScreen extends StatelessWidget {
         padding: EdgeInsets.only(top: 18),
       );
 
-  static void open(BuildContext context) =>
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const SignInSuccessScreen()));
+  static void openAndRemoveAllRoute(BuildContext context) {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
+  }
 }
