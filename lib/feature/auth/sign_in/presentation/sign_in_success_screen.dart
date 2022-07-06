@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_onfido/flutter_onfido.dart';
 
 import '../../../../core/domain/repository/token_repository.dart';
 import '../../../../core/presentation/custom_text.dart';
@@ -8,6 +10,7 @@ import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../home_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/repository/account_repository.dart';
+import '../../../user/kyc/domain/onfido_result_request.dart';
 import '../../sign_out/bloc/sign_out_bloc.dart';
 import '../../sign_out/repository/sign_out_repository.dart';
 
@@ -62,7 +65,35 @@ class SignInSuccessScreen extends StatelessWidget {
                       break;
                   }
                   if (state is OnfidoSdkToken) {
-                    // TODO: Initialise Onfido SDK here.
+                    // TODO: Refactor this into Widget and Bloc
+                    try {
+                      var result = await FlutterOnfido.start(
+                        config: OnfidoConfig(
+                          sdkToken: state.token,
+                          flowSteps: OnfidoFlowSteps(
+                            welcome: false,
+                            captureDocument: OnfidoCaptureDocumentStep(
+                                countryCode: OnfidoCountryCode.HKG,
+                                docType:
+                                    OnfidoDocumentType.NATIONAL_IDENTITY_CARD),
+                            captureFace:
+                                OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO),
+                          ),
+                        ),
+                        iosAppearance: const OnfidoIOSAppearance(),
+                      );
+
+                      context.read<AccountBloc>().add(UpdateOnfidoResult(
+                          Reason.userCompleted.value,
+                          'Onfido SDK',
+                          state.token));
+                    } on PlatformException {
+                      context.read<AccountBloc>().add(UpdateOnfidoResult(
+                          Reason.userExited.value, 'Onfido SDK', state.token));
+                    } catch (e) {
+                      context.read<AccountBloc>().add(UpdateOnfidoResult(
+                          Reason.sdkError.value, 'Onfido SDK', state.token));
+                    }
                   }
                 },
                 child: Column(
@@ -80,15 +111,13 @@ class SignInSuccessScreen extends StatelessWidget {
                 listener: (context, state) async {
                   switch (state.status) {
                     case SignOutStatus.failure:
+                    case SignOutStatus.success:
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(SnackBar(
                           backgroundColor: Colors.red,
                           content: CustomText(state.responseMessage),
                         ));
-                      HomeScreen.openReplace(context);
-                      break;
-                    case SignOutStatus.success:
                       HomeScreen.openReplace(context);
                       break;
                     default:
@@ -148,7 +177,7 @@ class SignInSuccessScreen extends StatelessWidget {
   Widget _getOnfidoToken() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
           return CustomTextButton(
-            buttonText: 'Get SDK Token',
+            buttonText: 'Open Verification',
             isLoading: state.status == GetAccountStatus.fetchingOnfidoToken,
             disable: state.status == GetAccountStatus.fetchingOnfidoToken,
             onClick: () => context.read<AccountBloc>().add(GetSdkToken()),

@@ -1,6 +1,8 @@
 import 'dart:async';
 
-import '../../kyc/presentation/domain/onfido_token_response.dart';
+import '../../kyc/domain/onfido_result_request.dart';
+import '../../kyc/domain/onfido_result_response.dart';
+import '../../kyc/domain/onfido_token_response.dart';
 import '../domain/account_api_client.dart';
 import '../domain/get_account/get_account_response.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
@@ -23,5 +25,11 @@ class AccountRepository {
   Future<OnfidoTokenResponse> getOnfidoToken() async {
     var response = await _accountApiClient.getOnfidoToken();
     return OnfidoTokenResponse.fromJson(response.data);
+  }
+
+  Future<OnfidoResultResponse> updateKycResult(
+      OnfidoResultRequest request) async {
+    var response = await _accountApiClient.updateKycResult(request);
+    return OnfidoResultResponse.fromJson(response.data);
   }
 }

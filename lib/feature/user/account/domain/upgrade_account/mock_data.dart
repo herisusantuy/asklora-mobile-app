@@ -10,8 +10,8 @@ var upgradeUserMockReq = {
     'country': 'HKG'
   },
   'identity': {
-    'given_name': 'KrishnaTest',
-    'middle_name': 'Gupta',
+    'given_name': 'Jane',
+    'middle_name': 'clear',
     'family_name': 'last name',
     'date_of_birth': '1988-08-12',
     'tax_id': '666-55-4321',
