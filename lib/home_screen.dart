@@ -5,27 +5,9 @@ import 'feature/auth/sign_in/presentation/sign_in_screen.dart';
 import 'feature/auth/sign_up/presentation/sign_up_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String route = '/home';
+
   const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
-    );
-  }
-
-  static void open(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,4 +39,7 @@ class HomePage extends StatelessWidget {
               ],
             )));
   }
+
+  static void openReplace(BuildContext context) => Navigator.of(context)
+      .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
 }

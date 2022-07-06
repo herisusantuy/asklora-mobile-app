@@ -7,26 +7,28 @@ import '../repository/sign_in_repository.dart';
 import 'sign_in_form.dart';
 
 class SignInScreen extends StatelessWidget {
+  static const String route = '/sign_in';
+
   const SignInScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        elevation: 0,
-      ),
+      appBar: AppBar(title: const Text('Login'), elevation: 0),
       body: Padding(
-          padding: const EdgeInsets.all(15),
-          child: BlocProvider(
-            create: (context) => SignInBloc(
-              signInRepository: SignInRepository(TokenRepository()),
+        padding: const EdgeInsets.all(15),
+        child: BlocProvider(
+          create: (context) => SignInBloc(
+            signInRepository: SignInRepository(
+              TokenRepository(),
             ),
-            child: const SignInForm(),
-          )),
+          ),
+          child: const SignInForm(),
+        ),
+      ),
     );
   }
 
-  static void open(BuildContext context) => Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => const SignInScreen()));
+  static void open(BuildContext context) =>
+      Navigator.of(context).pushNamed(route);
 }

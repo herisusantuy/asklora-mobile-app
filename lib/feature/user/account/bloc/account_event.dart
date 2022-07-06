@@ -169,3 +169,11 @@ class AccountMailCountryChanged extends AccountEvent {
   @override
   List<Object> get props => [mailCountry];
 }
+
+class UpdateOnfidoResult extends AccountEvent {
+  final String outcome;
+  final String reason;
+  final String token;
+
+  const UpdateOnfidoResult(this.outcome, this.reason, this.token);
+}
