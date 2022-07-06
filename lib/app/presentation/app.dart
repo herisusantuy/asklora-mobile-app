@@ -13,10 +13,7 @@ class App extends StatelessWidget {
 
   const App({
     Key? key,
-    required this.tokenValidator,
   }) : super(key: key);
-
-  final TokenValidator tokenValidator;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +26,7 @@ class App extends StatelessWidget {
         initialRoute: App.route,
         home: BlocProvider(
           create: (_) => AppBloc(
-            tokenValidation: tokenValidator,
+            tokenValidator: TokenValidator(),
           )..add(AppLaunched()),
           child: BlocListener<AppBloc, AppState>(
             listenWhen: (previous, current) =>

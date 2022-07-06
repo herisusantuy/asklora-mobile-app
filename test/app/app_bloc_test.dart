@@ -5,7 +5,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-
 import 'package:mockito/mockito.dart';
 
 import 'app_bloc_test.mocks.dart';
@@ -26,7 +25,7 @@ void main() async {
     });
 
     setUp(() async {
-      appBloc = AppBloc(tokenValidation: tokenValidator);
+      appBloc = AppBloc(tokenValidator: tokenValidator);
     });
 
     test('App Bloc init state is should be `unknown`', () {
