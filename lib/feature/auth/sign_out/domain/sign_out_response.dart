@@ -6,9 +6,7 @@ part 'sign_out_response.g.dart';
 class SignOutResponse {
   String detail;
 
-  SignOutResponse(
-    this.detail
-  );
+  SignOutResponse(this.detail);
 
   factory SignOutResponse.fromJson(Map<String, dynamic> json) =>
       _$SignOutResponseFromJson(json);

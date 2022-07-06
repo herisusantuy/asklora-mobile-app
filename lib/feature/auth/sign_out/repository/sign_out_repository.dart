@@ -15,7 +15,8 @@ class SignOutRepository {
   Future<SignOutResponse> signOut() async {
     var refreshToken = await _storage.getRefreshToken();
     await _storage.deleteAll();
-    var response = await _signOutApiClient.signOut(SignOutRequest(refreshToken));
+    var response =
+        await _signOutApiClient.signOut(SignOutRequest(refreshToken));
     var signOutResponse = SignOutResponse.fromJson(response.data);
     return signOutResponse;
   }
