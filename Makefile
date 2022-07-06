@@ -55,6 +55,10 @@ run_production_mobile: ## Runs the mobile application in production
 	@echo "╠ Running the app"
 	@flutter run --flavor production --dart-define=ENVIRONMENT=production
 
+build_runner:
+	@echo "╠ Generating the code"
+	@flutter pub run build_runner build --delete-conflicting-outputs
+
 #run_dev_mobile: ## Runs the mobile application in dev
 #	@echo "╠ Running the app"
 #	@flutter run --flavor dev

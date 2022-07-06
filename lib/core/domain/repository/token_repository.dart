@@ -52,6 +52,7 @@ class TokenRepository implements Repository {
         await _tokenApiClient.refresh(TokenRefreshRequest(refreshToken));
 
     var refreshResponse = TokenRefreshResponse.fromJson(response.data);
+    saveAccessToken(refreshResponse.access!);
     return refreshResponse;
   }
 
