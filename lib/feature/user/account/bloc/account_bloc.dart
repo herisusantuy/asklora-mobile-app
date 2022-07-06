@@ -19,6 +19,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<GetAccount>(_onGetAccount);
     on<GetSdkToken>(_onGetOnfidoSdkToken);
     on<UpgradeAccount>(_onUpgradeAccount);
+    on<AccountCurrentStepChanged>(_onAccountCurrentStepIndexChange);
     on<AccountFirstNameChanged>(_onAccountFirstNameChange);
     on<AccountLastNameChanged>(_onAccountLastNameChange);
     on<AccountMiddleNameChanged>(_onAccountMiddleNameChange);
@@ -121,6 +122,28 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           status: GetAccountStatus.failure,
           responseMessage: 'Could not fetch the token ð !'));
     }
+  }
+
+  _onAccountCurrentStepIndexChange(
+      AccountCurrentStepChanged event, Emitter<AccountState> emit) {
+    int nextStepIndex = state.currentStepIndex;
+    if (event.type == 'back') {
+      if (state.currentStepIndex - 1 < 0) {
+        nextStepIndex = 0;
+      } else {
+        nextStepIndex--;
+      }
+    }
+
+    if (event.type != 'back') {
+      if (state.currentStepIndex + 1 == 2) {
+        nextStepIndex = 2;
+      } else {
+        nextStepIndex++;
+      }
+    }
+
+    emit(state.copyWith(currentStepIndex: nextStepIndex));
   }
 
   _onAccountFirstNameChange(

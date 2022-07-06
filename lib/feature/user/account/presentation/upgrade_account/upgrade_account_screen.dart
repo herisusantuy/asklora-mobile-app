@@ -14,13 +14,14 @@ class UpgradeAccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PageController _pageViewController = PageController(initialPage: 0);
-    int _currentPageIndex = 0;
 
     List<Widget> _pages = [
       BasicInformationForm(
         controller: _pageViewController,
       ),
-      AddressProofForm(),
+      AddressProofForm(
+        controller: _pageViewController,
+      ),
       FinancialProfileForm(controller: _pageViewController),
     ];
     return Scaffold(
@@ -36,16 +37,13 @@ class UpgradeAccountScreen extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            _headerUpgradeAccount(),
+            _headerUpgradeAccount(_pageViewController),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: PageView(
                   controller: _pageViewController,
                   physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged: (page) {
-                    _currentPageIndex = page;
-                  },
                   children: _pages,
                 ),
               ),
@@ -56,7 +54,7 @@ class UpgradeAccountScreen extends StatelessWidget {
     );
   }
 
-  Widget _headerUpgradeAccount() => Container(
+  Widget _headerUpgradeAccount(PageController controller) => Container(
         decoration: const BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -64,25 +62,40 @@ class UpgradeAccountScreen extends StatelessWidget {
             ),
           ),
         ),
-        child: Row(
-          children: [
-            InkWell(
-              onTap: () => '',
-              child: Container(
-                padding: const EdgeInsets.all(5),
-                child: const Icon(
-                  Icons.chevron_left_rounded,
-                  size: 35,
+        child: BlocBuilder<AccountBloc, AccountState>(
+          builder: (context, state) {
+            return Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    context
+                        .read<AccountBloc>()
+                        .add(const AccountCurrentStepChanged('back'));
+                    controller.previousPage(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.ease);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    child: const Icon(
+                      Icons.chevron_left_rounded,
+                      size: 35,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(left: 10),
-              child: CustomText(
-                'Step',
-              ),
-            )
-          ],
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: CustomText(
+                    state.currentStepIndex == 0
+                        ? 'Basic Information'
+                        : state.currentStepIndex == 1
+                            ? 'Address Proof'
+                            : '',
+                  ),
+                )
+              ],
+            );
+          },
         ),
       );
 

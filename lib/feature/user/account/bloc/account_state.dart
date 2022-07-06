@@ -35,6 +35,7 @@ class AccountState extends Equatable {
     this.responseMessage = '',
     this.account,
     this.upgradeAccountRequest,
+    this.currentStepIndex = 0,
     this.firstName = '',
     this.middleName = '',
     this.lastName = '',
@@ -68,6 +69,7 @@ class AccountState extends Equatable {
   final String responseMessage;
   final GetAccountResponse? account;
   final UpgradeAccountRequest? upgradeAccountRequest;
+  final int currentStepIndex;
   final String firstName;
   final String middleName;
   final String lastName;
@@ -103,6 +105,7 @@ class AccountState extends Equatable {
       responseMessage,
       account,
       upgradeAccountRequest,
+      currentStepIndex,
       firstName,
       middleName,
       lastName,
@@ -138,6 +141,7 @@ class AccountState extends Equatable {
     String? responseMessage,
     GetAccountResponse? account,
     UpgradeAccountRequest? upgradeAccountRequest,
+    int? currentStepIndex,
     String? firstName,
     String? middleName,
     String? lastName,
@@ -172,6 +176,7 @@ class AccountState extends Equatable {
       account: account ?? this.account,
       upgradeAccountRequest:
           upgradeAccountRequest ?? this.upgradeAccountRequest,
+      currentStepIndex: currentStepIndex ?? this.currentStepIndex,
       firstName: firstName ?? this.firstName,
       middleName: middleName ?? this.middleName,
       lastName: lastName ?? this.lastName,
