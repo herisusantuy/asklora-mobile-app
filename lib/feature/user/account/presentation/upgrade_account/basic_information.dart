@@ -164,11 +164,18 @@ class BasicInformationForm extends StatelessWidget {
   Widget _countryInput() {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          key: const Key('account_country_of_citizenship_input'),
-          labelText: 'Country of Citizenship',
-          onChanged: (value) => value,
-          hintText: 'Enter your Chinese name'),
+      child: BlocBuilder<AccountBloc, AccountState>(
+        builder: (context, state) {
+          return CustomTextInput(
+              key: const Key('account_country_of_citizenship_input'),
+              labelText: 'Country of Citizenship',
+              onChanged: (countryOfCitizenship) => context
+                  .read<AccountBloc>()
+                  .add(
+                      AccountCountryOfCitizenshipChanged(countryOfCitizenship)),
+              hintText: 'Enter your Chinese name');
+        },
+      ),
     );
   }
 
@@ -206,6 +213,21 @@ class BasicInformationForm extends StatelessWidget {
     );
   }
 
+  bool _validateBasicInformationStep(AccountState state) {
+    if (state.firstName.isEmpty ||
+        state.middleName.isEmpty ||
+        state.lastName.isEmpty ||
+        state.chineseName.isEmpty ||
+        state.gender.isEmpty ||
+        state.dateOfBirth.isEmpty ||
+        state.countryCode.isEmpty ||
+        state.phoneNumber.isEmpty ||
+        state.countryOfCitizenship.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
   Widget _nextButton() => Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: BlocBuilder<AccountBloc, AccountState>(
@@ -213,6 +235,7 @@ class BasicInformationForm extends StatelessWidget {
             return CustomTextButton(
               buttonText: 'Next',
               borderRadius: 30,
+              disable: _validateBasicInformationStep(state),
               onClick: () {
                 context
                     .read<AccountBloc>()

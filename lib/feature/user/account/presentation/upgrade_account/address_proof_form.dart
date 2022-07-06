@@ -206,9 +206,37 @@ class AddressProofForm extends StatelessWidget {
         },
       );
 
+  bool _validateAddressProofStep(AccountState state) {
+    if (state.unitNumber.isEmpty ||
+        state.residentialAddress.isEmpty ||
+        state.city.isEmpty ||
+        state.country.isEmpty ||
+        state.mailUnitNumber.isEmpty ||
+        state.mailResidentialAddress.isEmpty ||
+        state.mailCity.isEmpty ||
+        state.mailCountry.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
   Widget _nextButton() => Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: CustomTextButton(
-            buttonText: 'Next', borderRadius: 30, onClick: () => ''),
+        child: BlocBuilder<AccountBloc, AccountState>(
+          builder: (context, state) {
+            return CustomTextButton(
+                disable: _validateAddressProofStep(state),
+                buttonText: 'Next',
+                borderRadius: 30,
+                onClick: () {
+                  context
+                      .read<AccountBloc>()
+                      .add(const AccountCurrentStepChanged('next'));
+                  controller.nextPage(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.ease);
+                });
+          },
+        ),
       );
 }
