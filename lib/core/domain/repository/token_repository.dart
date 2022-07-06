@@ -37,6 +37,7 @@ class TokenRepository implements Repository {
   Future<String?> getRefreshToken() async =>
       await _secureStorage.readSecureData(Repository.keyAuthTokenRefresh);
 
+  @override
   Future<TokenVerifyResponse> verifyToken(String accessToken) async {
     var response =
         await _tokenApiClient.verify(TokenVerifyRequest(accessToken));
@@ -45,6 +46,7 @@ class TokenRepository implements Repository {
     return verifyResponse;
   }
 
+  @override
   Future<TokenRefreshResponse> refreshToken(String refreshToken) async {
     var response =
         await _tokenApiClient.refresh(TokenRefreshRequest(refreshToken));
@@ -52,4 +54,7 @@ class TokenRepository implements Repository {
     var refreshResponse = TokenRefreshResponse.fromJson(response.data);
     return refreshResponse;
   }
+
+  @override
+  Future<void> deleteAll() async => await _secureStorage.deleteAllSecureData();
 }

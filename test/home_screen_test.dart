@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/utils/route_generator.dart';
 import 'package:asklora_mobile_app/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +13,7 @@ void main() {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const HomeScreen(),
+        onGenerateRoute: RouterGenerator.generateRoute,
         navigatorObservers: [mockObserver],
       ));
     }

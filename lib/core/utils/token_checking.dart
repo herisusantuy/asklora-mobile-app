@@ -1,52 +1,45 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
-import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
-import '../../home_screen.dart';
 import '../domain/repository/repository.dart';
 import '../domain/repository/token_repository.dart';
 
 class TokenValidation {
-  BuildContext context;
+  final void Function() onSuccess;
+  final void Function() onFailed;
   final Repository _storage = TokenRepository();
 
   TokenRepository tokenRepository = TokenRepository();
 
-  TokenValidation.verify(this.context) {
+  TokenValidation({required this.onSuccess, required this.onFailed}) {
     tokenVerify();
   }
 
-  void tokenVerify() {
+  void tokenVerify() async {
     try {
-      _storage.getAccessToken().then((value) {
-        if (value != null && value.isNotEmpty) {
-          tokenRepository
-              .verifyToken(value)
-              .then((_) => SignInSuccessScreen.openAndRemoveAllRoute(context));
-        } else {
-          HomeScreen.openReplace(context);
-        }
-      });
+      var accessToken = await _storage.getAccessToken();
+      if (accessToken != null) {
+        await tokenRepository.verifyToken(accessToken);
+        onSuccess();
+      } else {
+        onFailed();
+      }
     } catch (e) {
       return _tokenRefresh();
     }
     FlutterNativeSplash.remove();
   }
 
-  void _tokenRefresh() {
+  void _tokenRefresh() async {
     try {
-      _storage.getRefreshToken().then((value) {
-        if (value != null) {
-          tokenRepository.refreshToken(value).then((value) {
-            _storage.saveAccessToken(value.access!);
-            SignInSuccessScreen.openAndRemoveAllRoute(context);
-          });
-        } else {
-          HomeScreen.openReplace(context);
-        }
-      });
+      var accessToken = await _storage.getRefreshToken();
+      if (accessToken != null) {
+        var response = await tokenRepository.refreshToken(accessToken);
+        _storage.saveAccessToken(response.access!);
+        onSuccess();
+      } else {
+        onFailed();
+      }
     } catch (e) {
-      HomeScreen.openReplace(context);
+      onFailed();
     }
   }
 }

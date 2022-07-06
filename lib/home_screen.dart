@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'check_screen.dart';
+import 'app.dart';
 import 'core/presentation/custom_text_button.dart';
 import 'core/utils/route_generator.dart';
 import 'feature/auth/sign_in/presentation/sign_in_screen.dart';
 import 'feature/auth/sign_up/presentation/sign_up_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  static const String route = '/home';
-
-  const HomeScreen({Key? key}) : super(key: key);
+class AskLora extends StatelessWidget {
+  const AskLora({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +16,15 @@ class HomeScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CheckScreen(),
+      initialRoute: App.route,
     );
   }
-
-  static void openReplace(BuildContext context) =>
-      Navigator.of(context).pushReplacementNamed(route);
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  static const String route = '/home';
+
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,4 +56,7 @@ class HomePage extends StatelessWidget {
               ],
             )));
   }
+
+  static void openReplace(BuildContext context) =>
+      Navigator.of(context).pushReplacementNamed(route);
 }

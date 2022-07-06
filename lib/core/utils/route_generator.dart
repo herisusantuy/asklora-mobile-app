@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../app.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
@@ -10,8 +11,10 @@ import '../../home_screen.dart';
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case App.route:
+        return MaterialPageRoute(builder: (_) => const App());
       case HomeScreen.route:
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       case SignInScreen.route:
         return MaterialPageRoute(builder: (_) => const SignInScreen());
       case SignInSuccessScreen.route:

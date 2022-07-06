@@ -8,5 +8,5 @@ main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  runApp(AppConfigWidget(child: const HomeScreen()));
+  runApp(AppConfigWidget(child: const AskLora()));
 }
