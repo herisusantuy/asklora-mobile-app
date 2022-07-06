@@ -6,6 +6,7 @@ import '../../bloc/account_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
 import 'basic_information.dart';
+import 'financial_profile_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
   const UpgradeAccountScreen({Key? key}) : super(key: key);
@@ -16,10 +17,11 @@ class UpgradeAccountScreen extends StatelessWidget {
     int _currentPageIndex = 0;
 
     List<Widget> _pages = [
-      // BasicInformationForm(
-      //   controller: _pageViewController,
-      // ),
+      BasicInformationForm(
+        controller: _pageViewController,
+      ),
       AddressProofForm(),
+      FinancialProfileForm(controller: _pageViewController),
     ];
     return Scaffold(
       appBar: AppBar(
