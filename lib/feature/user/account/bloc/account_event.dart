@@ -160,3 +160,53 @@ class AccountMailCountryChanged extends AccountEvent {
   @override
   List<Object> get props => [mailCountry];
 }
+
+class AccountAnnualIncomeChanged extends AccountEvent {
+  final String annualIncome;
+  const AccountAnnualIncomeChanged(this.annualIncome) : super();
+  @override
+  List<Object> get props => [annualIncome];
+}
+
+class AccountInvestibleLiquidAssetChanged extends AccountEvent {
+  final String investibleLiquidAssets;
+  const AccountInvestibleLiquidAssetChanged(this.investibleLiquidAssets)
+      : super();
+  @override
+  List<Object> get props => [investibleLiquidAssets];
+}
+
+class AccountFundingSourceChanged extends AccountEvent {
+  final String fundingSource;
+  const AccountFundingSourceChanged(this.fundingSource) : super();
+  @override
+  List<Object> get props => [fundingSource];
+}
+
+class AccountEmploymentStatusChanged extends AccountEvent {
+  final String employmentStatus;
+  const AccountEmploymentStatusChanged(this.employmentStatus) : super();
+  @override
+  List<Object> get props => [employmentStatus];
+}
+
+class AccountOccupationChanged extends AccountEvent {
+  final String occupation;
+  const AccountOccupationChanged(this.occupation) : super();
+  @override
+  List<Object> get props => [occupation];
+}
+
+class AccountEmployerChanged extends AccountEvent {
+  final String employer;
+  const AccountEmployerChanged(this.employer) : super();
+  @override
+  List<Object> get props => [employer];
+}
+
+class AccountEmployerAddressChanged extends AccountEvent {
+  final String employerAddress;
+  const AccountEmployerAddressChanged(this.employerAddress) : super();
+  @override
+  List<Object> get props => [employerAddress];
+}

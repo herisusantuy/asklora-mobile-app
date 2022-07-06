@@ -41,6 +41,14 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         _onAccountMailResidentialAddressChanged);
     on<AccountMailCityChanged>(_onAccountMailCityChanged);
     on<AccountMailCountryChanged>(_onAccountMailCountryChanged);
+    on<AccountAnnualIncomeChanged>(_onAccountAnnualIncomeChanged);
+    on<AccountInvestibleLiquidAssetChanged>(
+        _onAccountInvestibleLiquidAssetChanged);
+    on<AccountFundingSourceChanged>(_onAccountFundingSourceChanged);
+    on<AccountEmploymentStatusChanged>(_onAccountEmploymentStatusChanged);
+    on<AccountOccupationChanged>(_onAccountOccupationChanged);
+    on<AccountEmployerChanged>(_onAccountEmployerChanged);
+    on<AccountEmployerAddressChanged>(_onAccountEmployerAddressChanged);
   }
 
   final AccountRepository _accountRepository;
@@ -214,5 +222,40 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   _onAccountMailCountryChanged(
       AccountMailCountryChanged event, Emitter<AccountState> emit) {
     emit(state.copyWith(chineseName: event.mailCountry));
+  }
+
+  _onAccountAnnualIncomeChanged(
+      AccountAnnualIncomeChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.annualIncome));
+  }
+
+  _onAccountInvestibleLiquidAssetChanged(
+      AccountInvestibleLiquidAssetChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.investibleLiquidAssets));
+  }
+
+  _onAccountFundingSourceChanged(
+      AccountFundingSourceChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.fundingSource));
+  }
+
+  _onAccountEmploymentStatusChanged(
+      AccountEmploymentStatusChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.employmentStatus));
+  }
+
+  _onAccountOccupationChanged(
+      AccountOccupationChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.occupation));
+  }
+
+  _onAccountEmployerChanged(
+      AccountEmployerChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.employer));
+  }
+
+  _onAccountEmployerAddressChanged(
+      AccountEmployerAddressChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(chineseName: event.employerAddress));
   }
 }
