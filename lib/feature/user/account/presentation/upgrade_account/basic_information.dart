@@ -208,10 +208,21 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _nextButton() => Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: CustomTextButton(
-          buttonText: 'Next',
-          borderRadius: 30,
-          onClick: () => '',
+        child: BlocBuilder<AccountBloc, AccountState>(
+          builder: (context, state) {
+            return CustomTextButton(
+              buttonText: 'Next',
+              borderRadius: 30,
+              onClick: () {
+                context
+                    .read<AccountBloc>()
+                    .add(const AccountCurrentStepChanged('next'));
+                controller.nextPage(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.ease);
+              },
+            );
+          },
         ),
       );
 }

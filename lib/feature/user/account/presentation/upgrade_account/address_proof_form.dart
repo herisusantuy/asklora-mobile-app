@@ -6,11 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
-import '../../../../../question_bloc.dart';
 import '../../bloc/account_bloc.dart';
 
 class AddressProofForm extends StatelessWidget {
-  const AddressProofForm({Key? key}) : super(key: key);
+  final PageController controller;
+  const AddressProofForm({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +64,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+              key: const Key('account_residential_address_input'),
               labelText: 'Residential Address',
               hintText: 'Enter your Residential Address',
               onChanged: (residentialAddress) => context
@@ -76,6 +80,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+                key: const Key('account_city_input'),
                 labelText: 'City',
                 onChanged: (city) =>
                     context.read<AccountBloc>().add(AccountCityChanged(city)),
@@ -89,6 +94,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+              key: const Key('account_country_input'),
               labelText: 'Country',
               hintText: 'Enter your Country',
               onChanged: (country) => context
@@ -102,10 +108,10 @@ class AddressProofForm extends StatelessWidget {
   Widget _mailAddressCheck(ScrollController controller) =>
       BlocBuilder<AccountBloc, AccountState>(
         builder: (BuildContext context, state) {
-          print('state select options: ${state.isSameMailingAddress}');
           return Column(
             children: [
               QuestionWidget(
+                key: const Key('account_is_same_mailing_address_input'),
                 padding: const EdgeInsets.only(top: 10),
                 questionText:
                     'My mailing address and residential address is the same',
@@ -144,6 +150,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: CustomTextInput(
+                key: const Key('account_mail_unit_number_input'),
                 labelText: 'Unit/Apartment No.',
                 onChanged: (mailUnitNumber) => context
                     .read<AccountBloc>()
@@ -158,6 +165,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+                key: const Key('account_mail_residential_address_input'),
                 labelText: 'Residential Address',
                 onChanged: (mailResidentialAddress) => context
                     .read<AccountBloc>()
@@ -173,6 +181,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+                key: const Key('account_city_input'),
                 labelText: 'City',
                 onChanged: (mailCity) => context
                     .read<AccountBloc>()
@@ -187,6 +196,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 20),
             child: CustomTextInput(
+                key: const Key('account_country_input'),
                 labelText: 'Country',
                 onChanged: (mailCountry) => context
                     .read<AccountBloc>()
