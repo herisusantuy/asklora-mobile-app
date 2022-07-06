@@ -249,36 +249,36 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   _onAccountAnnualIncomeChanged(
       AccountAnnualIncomeChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.annualIncome));
+    emit(state.copyWith(annualHouseholdIncome: event.annualIncome));
   }
 
   _onAccountInvestibleLiquidAssetChanged(
       AccountInvestibleLiquidAssetChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.investibleLiquidAssets));
+    emit(state.copyWith(investibleLiquidAssets: event.investibleLiquidAssets));
   }
 
   _onAccountFundingSourceChanged(
       AccountFundingSourceChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.fundingSource));
+    emit(state.copyWith(fundingSource: event.fundingSource));
   }
 
   _onAccountEmploymentStatusChanged(
       AccountEmploymentStatusChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.employmentStatus));
+    emit(state.copyWith(employmentStatus: event.employmentStatus));
   }
 
   _onAccountOccupationChanged(
       AccountOccupationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.occupation));
+    emit(state.copyWith(occupation: event.occupation));
   }
 
   _onAccountEmployerChanged(
       AccountEmployerChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.employer));
+    emit(state.copyWith(employer: event.employer));
   }
 
   _onAccountEmployerAddressChanged(
       AccountEmployerAddressChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.employerAddress));
+    emit(state.copyWith(employerAddress: event.employerAddress));
   }
 }

@@ -186,14 +186,14 @@ class AccountInvestibleLiquidAssetChanged extends AccountEvent {
 }
 
 class AccountFundingSourceChanged extends AccountEvent {
-  final String fundingSource;
+  final FundingSource fundingSource;
   const AccountFundingSourceChanged(this.fundingSource) : super();
   @override
   List<Object> get props => [fundingSource];
 }
 
 class AccountEmploymentStatusChanged extends AccountEvent {
-  final String employmentStatus;
+  final EmploymentStatus employmentStatus;
   const AccountEmploymentStatusChanged(this.employmentStatus) : super();
   @override
   List<Object> get props => [employmentStatus];
