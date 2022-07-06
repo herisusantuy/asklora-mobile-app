@@ -1,4 +1,3 @@
-import 'package:built_value/built_value.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,12 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
 import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_phone_number_input.dart';
-import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../bloc/account_bloc.dart';
-import 'upgrade_account_screen.dart';
 
 class BasicInformationForm extends StatelessWidget {
   final PageController controller;
@@ -56,9 +53,9 @@ class BasicInformationForm extends StatelessWidget {
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         return Padding(
-          key: const Key('account_first_name_input'),
           padding: const EdgeInsets.only(top: 20),
           child: CustomTextInput(
+            key: const Key('account_first_name_input'),
             labelText: 'First Name',
             hintText: 'Enter your first name',
             onChanged: (value) =>
@@ -123,7 +120,7 @@ class BasicInformationForm extends StatelessWidget {
   Widget _selectGender() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
           return CustomDropdown(
-            key: const Key('account_gender_input'),
+            key: const Key('account_gender_select'),
             label: 'Gender',
             padding: const EdgeInsets.only(top: 10),
             itemsList: const ['Male', 'Female', 'Other'],
@@ -136,7 +133,7 @@ class BasicInformationForm extends StatelessWidget {
   Widget _datePicker(context) => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
           return CustomDatePicker(
-            key: const Key('account_date_of_birth_input'),
+            key: const Key('account_date_of_birth_picker'),
             padding: const EdgeInsets.only(top: 10),
             label: 'Date of Birth',
             selectedDate: DateTime.parse(state.dateOfBirth),
@@ -150,7 +147,7 @@ class BasicInformationForm extends StatelessWidget {
   Widget _countryCodeAndPhoneNumber() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
           return CustomPhoneNumberInput(
-            key: const Key('account_phone_number_input'),
+            key: const Key('account_country_code_phone_number_input'),
             onChangedCodeArea: (code) => context
                 .read<AccountBloc>()
                 .add(AccountCountryCodeChanged(code)),
@@ -183,7 +180,7 @@ class BasicInformationForm extends StatelessWidget {
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         return QuestionWidget(
-          key: const Key('account_is_hongkong_permanent_resident_input'),
+          key: const Key('account_is_hongkong_permanent_resident_question'),
           padding: const EdgeInsets.only(top: 10),
           questionText: 'Hong Kong Permanent Resident',
           options: ['Yes', 'No'],
@@ -200,7 +197,7 @@ class BasicInformationForm extends StatelessWidget {
     return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         return QuestionWidget(
-          key: const Key('account_is_united_state_resident_input'),
+          key: const Key('account_is_united_state_resident_question'),
           padding: const EdgeInsets.only(top: 10, bottom: 20),
           questionText: 'US Resident Check',
           options: ['Yes', 'No'],
@@ -233,6 +230,7 @@ class BasicInformationForm extends StatelessWidget {
         child: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
             return CustomTextButton(
+              key: const Key('account_basic_information_next_step_button'),
               buttonText: 'Next',
               borderRadius: 30,
               disable: _validateBasicInformationStep(state),

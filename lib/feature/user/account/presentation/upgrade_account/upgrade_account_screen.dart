@@ -5,20 +5,26 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
-import 'basic_information.dart';
+import 'basic_information_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
-  const UpgradeAccountScreen({Key? key}) : super(key: key);
+  const UpgradeAccountScreen({Key? key, required this.initialPage})
+      : super(key: key);
+
+  final int initialPage;
 
   @override
   Widget build(BuildContext context) {
-    final PageController _pageViewController = PageController(initialPage: 0);
+    final PageController _pageViewController =
+        PageController(initialPage: initialPage);
 
     List<Widget> _pages = [
       BasicInformationForm(
+        key: const Key('basic_information_step'),
         controller: _pageViewController,
       ),
       AddressProofForm(
+        key: const Key('address_proof_step'),
         controller: _pageViewController,
       ),
     ];
@@ -40,6 +46,7 @@ class UpgradeAccountScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: PageView(
+                  key: const Key('upgrade_account_page_view'),
                   controller: _pageViewController,
                   physics: const NeverScrollableScrollPhysics(),
                   children: _pages,
@@ -97,6 +104,9 @@ class UpgradeAccountScreen extends StatelessWidget {
         ),
       );
 
-  static void open(BuildContext context) => Navigator.of(context)
-      .push(MaterialPageRoute(builder: (_) => const UpgradeAccountScreen()));
+  static void open(BuildContext context) =>
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => const UpgradeAccountScreen(
+                initialPage: 0,
+              )));
 }
