@@ -29,7 +29,7 @@ class App extends StatelessWidget {
         initialRoute: App.route,
         home: BlocProvider(
           create: (_) => AppBloc(
-            tokenValidation: tokenValidator,
+            tokenValidator: tokenValidator,
           )..add(AppLaunched()),
           child: BlocListener<AppBloc, AppState>(
             listenWhen: (previous, current) =>
