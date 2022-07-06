@@ -10,7 +10,7 @@ class TokenValidator {
     try {
       var accessToken = await _storage.getAccessToken();
       if (accessToken != null && accessToken.isNotEmpty) {
-        var res = await _tokenRepository.verifyToken(accessToken);
+        await _tokenRepository.verifyToken(accessToken);
         return true;
       } else {
         return false;
