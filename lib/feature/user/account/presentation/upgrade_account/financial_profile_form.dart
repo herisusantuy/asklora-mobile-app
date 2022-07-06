@@ -40,7 +40,6 @@ class FinancialProfileForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.annualHouseholdIncome != current.annualHouseholdIncome,
       builder: (context, state) {
-        print('annual income : ${state.annualHouseholdIncome}');
         return CustomDropdown(
             padding: const EdgeInsets.only(top: 20),
             label: 'Annual Household Income',
@@ -65,7 +64,6 @@ class FinancialProfileForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.investibleLiquidAssets != current.investibleLiquidAssets,
       builder: (context, state) {
-        print('investible asset : ${state.investibleLiquidAssets}');
         return CustomDropdown(
             padding: const EdgeInsets.only(top: 10),
             label: 'Investible Liquid Assets',
@@ -90,7 +88,6 @@ class FinancialProfileForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.fundingSource != current.fundingSource,
       builder: (context, state) {
-        print('funding source: ${state.fundingSource}');
         return CustomDropdown(
             padding: const EdgeInsets.only(top: 10),
             label: 'Account Funding Source',
@@ -112,7 +109,6 @@ class FinancialProfileForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.employmentStatus != current.employmentStatus,
       builder: (context, state) {
-        print('employment status : ${state.employmentStatus}');
         return Column(
           children: [
             CustomDropdown(
@@ -147,7 +143,6 @@ class FinancialProfileForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.occupation != current.occupation,
       builder: (context, state) {
-        print('occupation: ${state.occupation}');
         List<String> items = [
           'Healthcare',
           'Education',
@@ -200,7 +195,6 @@ class FinancialProfileForm extends StatelessWidget {
   Widget _employerInput() => BlocBuilder<AccountBloc, AccountState>(
         buildWhen: (previous, current) => previous.employer != current.employer,
         builder: (context, state) {
-          print('employer : ${state.employer}');
           return Padding(
             padding: const EdgeInsets.only(top: 20),
             child: CustomTextInput(
@@ -216,7 +210,6 @@ class FinancialProfileForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.employerAddress != current.employerAddress,
         builder: (context, state) {
-          print("employer address : ${state.employerAddress}");
           return Padding(
             padding: const EdgeInsets.only(top: 10),
             child: CustomTextInput(
