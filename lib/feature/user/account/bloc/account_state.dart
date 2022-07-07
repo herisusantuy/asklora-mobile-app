@@ -64,6 +64,13 @@ class AccountState extends Equatable {
     this.occupation = '',
     this.employer = '',
     this.employerAddress = '',
+    this.isAffiliated,
+    this.isSeniorExecutive,
+    this.isSeniorPolitical,
+    this.isFamilyMember,
+    this.isAssociates,
+    this.isOwner,
+    this.isEmployee,
   });
 
   final GetAccountStatus status;
@@ -98,6 +105,13 @@ class AccountState extends Equatable {
   final String occupation;
   final String employer;
   final String employerAddress;
+  final bool? isAffiliated;
+  final bool? isSeniorExecutive;
+  final bool? isSeniorPolitical;
+  final bool? isFamilyMember;
+  final bool? isAssociates;
+  final bool? isOwner;
+  final bool? isEmployee;
 
   @override
   List<Object?> get props {
@@ -133,7 +147,14 @@ class AccountState extends Equatable {
       employmentStatus,
       occupation,
       employer,
-      employerAddress
+      employerAddress,
+      isAffiliated,
+      isSeniorExecutive,
+      isSeniorPolitical,
+      isFamilyMember,
+      isAssociates,
+      isOwner,
+      isEmployee,
     ];
   }
 
@@ -170,6 +191,13 @@ class AccountState extends Equatable {
     String? occupation,
     String? employer,
     String? employerAddress,
+    bool? isAffiliated,
+    bool? isSeniorExecutive,
+    bool? isSeniorPolitical,
+    bool? isFamilyMember,
+    bool? isAssociates,
+    bool? isOwner,
+    bool? isEmployee,
   }) {
     return AccountState(
       status: status ?? this.status,
@@ -210,6 +238,13 @@ class AccountState extends Equatable {
       occupation: occupation ?? this.occupation,
       employer: employer ?? this.employer,
       employerAddress: employerAddress ?? this.employerAddress,
+      isAffiliated: isAffiliated ?? this.isAffiliated,
+      isSeniorExecutive: isSeniorExecutive ?? this.isSeniorExecutive,
+      isSeniorPolitical: isSeniorPolitical ?? this.isSeniorPolitical,
+      isFamilyMember: isFamilyMember ?? this.isFamilyMember,
+      isAssociates: isAssociates ?? this.isAssociates,
+      isOwner: isOwner ?? this.isOwner,
+      isEmployee: isEmployee ?? this.isEmployee,
     );
   }
 }
