@@ -69,6 +69,8 @@ class AccountState extends Equatable {
     this.isSeniorPolitical,
     this.isFamilyMember,
     this.isAssociates,
+    this.nameOfAffiliatedPerson = '',
+    this.nameOfJointAccount = '',
     this.isOwner,
     this.isEmployee,
   });
@@ -110,7 +112,9 @@ class AccountState extends Equatable {
   final bool? isSeniorPolitical;
   final bool? isFamilyMember;
   final bool? isAssociates;
+  final String nameOfAffiliatedPerson;
   final bool? isOwner;
+  final String nameOfJointAccount;
   final bool? isEmployee;
 
   @override
@@ -153,7 +157,9 @@ class AccountState extends Equatable {
       isSeniorPolitical,
       isFamilyMember,
       isAssociates,
+      nameOfAffiliatedPerson,
       isOwner,
+      nameOfJointAccount,
       isEmployee,
     ];
   }
@@ -196,7 +202,9 @@ class AccountState extends Equatable {
     bool? isSeniorPolitical,
     bool? isFamilyMember,
     bool? isAssociates,
+    String? nameOfAffiliatedPerson,
     bool? isOwner,
+    String? nameOfJointAccount,
     bool? isEmployee,
   }) {
     return AccountState(
@@ -243,7 +251,10 @@ class AccountState extends Equatable {
       isSeniorPolitical: isSeniorPolitical ?? this.isSeniorPolitical,
       isFamilyMember: isFamilyMember ?? this.isFamilyMember,
       isAssociates: isAssociates ?? this.isAssociates,
+      nameOfAffiliatedPerson:
+          nameOfAffiliatedPerson ?? this.nameOfAffiliatedPerson,
       isOwner: isOwner ?? this.isOwner,
+      nameOfJointAccount: nameOfJointAccount ?? this.nameOfJointAccount,
       isEmployee: isEmployee ?? this.isEmployee,
     );
   }
