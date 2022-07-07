@@ -10,7 +10,7 @@ enum GetAccountStatus {
   submittingOnfidoResult,
 }
 
-enum Gender { femail, male, other, unknown }
+enum Gender { female, male, other, unknown }
 
 enum FundingSource {
   employmentIncome,
