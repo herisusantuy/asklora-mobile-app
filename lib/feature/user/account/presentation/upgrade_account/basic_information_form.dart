@@ -137,6 +137,12 @@ class BasicInformationForm extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             label: 'Date of Birth',
             selectedDate: DateTime.parse(state.dateOfBirth),
+            initialDateTime: DateTime(
+              DateTime.now().year - 18,
+              DateTime.now().month,
+              DateTime.now().day,
+            ),
+            maximumYear: DateTime.now().year - 18,
             onDateTimeChanged: (date) => context.read<AccountBloc>().add(
                   AccountDateOfBirthChanged(date.toString()),
                 ),
