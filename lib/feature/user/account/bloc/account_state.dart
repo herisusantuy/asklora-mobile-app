@@ -57,6 +57,13 @@ class AccountState extends Equatable {
     this.mailResidentialAddress = '',
     this.mailCity = '',
     this.mailCountry = '',
+    this.annualHouseholdIncome = '',
+    this.investibleLiquidAssets = '',
+    this.fundingSource = FundingSource.unknown,
+    this.employmentStatus = EmploymentStatus.unknown,
+    this.occupation = '',
+    this.employer = '',
+    this.employerAddress = '',
   });
 
   final GetAccountStatus status;
@@ -84,6 +91,13 @@ class AccountState extends Equatable {
   final String mailResidentialAddress;
   final String mailCity;
   final String mailCountry;
+  final String annualHouseholdIncome;
+  final String investibleLiquidAssets;
+  final FundingSource fundingSource;
+  final EmploymentStatus employmentStatus;
+  final String occupation;
+  final String employer;
+  final String employerAddress;
 
   @override
   List<Object?> get props {
@@ -113,6 +127,13 @@ class AccountState extends Equatable {
       mailResidentialAddress,
       mailCity,
       mailCountry,
+      annualHouseholdIncome,
+      investibleLiquidAssets,
+      fundingSource,
+      employmentStatus,
+      occupation,
+      employer,
+      employerAddress
     ];
   }
 
@@ -142,6 +163,13 @@ class AccountState extends Equatable {
     String? mailResidentialAddress,
     String? mailCity,
     String? mailCountry,
+    String? annualHouseholdIncome,
+    String? investibleLiquidAssets,
+    FundingSource? fundingSource,
+    EmploymentStatus? employmentStatus,
+    String? occupation,
+    String? employer,
+    String? employerAddress,
   }) {
     return AccountState(
       status: status ?? this.status,
@@ -173,6 +201,15 @@ class AccountState extends Equatable {
           mailResidentialAddress ?? this.mailResidentialAddress,
       mailCity: mailCity ?? this.mailCity,
       mailCountry: mailCountry ?? this.mailCountry,
+      annualHouseholdIncome:
+          annualHouseholdIncome ?? this.annualHouseholdIncome,
+      investibleLiquidAssets:
+          investibleLiquidAssets ?? this.investibleLiquidAssets,
+      fundingSource: fundingSource ?? this.fundingSource,
+      employmentStatus: employmentStatus ?? this.employmentStatus,
+      occupation: occupation ?? this.occupation,
+      employer: employer ?? this.employer,
+      employerAddress: employerAddress ?? this.employerAddress,
     );
   }
 }

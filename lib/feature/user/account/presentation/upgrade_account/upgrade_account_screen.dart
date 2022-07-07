@@ -5,6 +5,7 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
+import 'financial_profile_form.dart';
 import 'basic_information_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
@@ -27,6 +28,7 @@ class UpgradeAccountScreen extends StatelessWidget {
         key: const Key('address_proof_step'),
         controller: _pageViewController,
       ),
+      FinancialProfileForm(controller: _pageViewController),
     ];
     return Scaffold(
       appBar: AppBar(
