@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../kyc/domain/onfido_result_request.dart';
+import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
 import '../domain/upgrade_account/contact.dart';
 import '../domain/upgrade_account/mock_data.dart';
@@ -50,6 +52,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<AccountOccupationChanged>(_onAccountOccupationChanged);
     on<AccountEmployerChanged>(_onAccountEmployerChanged);
     on<AccountEmployerAddressChanged>(_onAccountEmployerAddressChanged);
+    on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
   }
 
   final AccountRepository _accountRepository;
@@ -280,5 +283,24 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   _onAccountEmployerAddressChanged(
       AccountEmployerAddressChanged event, Emitter<AccountState> emit) {
     emit(state.copyWith(employerAddress: event.employerAddress));
+  }
+
+  _onUpdateOnfidoResult(
+      UpdateOnfidoResult event, Emitter<AccountState> emit) async {
+    try {
+      emit(state.copyWith(status: GetAccountStatus.submittingOnfidoResult));
+
+      var response = await _accountRepository.updateKycResult(
+          OnfidoResultRequest(event.token, event.reason, event.outcome));
+
+      emit(state.copyWith(
+          status: GetAccountStatus.success, responseMessage: response.detail));
+
+      emit(OnfidoResultUpdated(response));
+    } catch (e) {
+      emit(state.copyWith(
+          status: GetAccountStatus.failure,
+          responseMessage: 'Could not update the Onfido result!'));
+    }
   }
 }

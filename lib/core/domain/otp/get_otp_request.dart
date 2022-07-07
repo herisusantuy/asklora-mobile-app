@@ -33,6 +33,5 @@ class GetOtpRequest extends Equatable {
   Map<String, dynamic> toJson() => _$GetOtpRequestToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [email, otpType];
 }

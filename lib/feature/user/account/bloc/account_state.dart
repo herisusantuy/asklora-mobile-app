@@ -6,7 +6,8 @@ enum GetAccountStatus {
   unknown,
   fetchingAccount,
   upgradingAccount,
-  fetchingOnfidoToken
+  fetchingOnfidoToken,
+  submittingOnfidoResult,
 }
 
 enum Gender { femail, male, other, unknown }
@@ -217,4 +218,10 @@ class OnfidoSdkToken extends AccountState {
   final String token;
 
   const OnfidoSdkToken(this.token);
+}
+
+class OnfidoResultUpdated extends AccountState {
+  final OnfidoResultResponse response;
+
+  const OnfidoResultUpdated(this.response);
 }

@@ -6,6 +6,8 @@ import '../repository/sign_up_repository.dart';
 import 'sign_up_form.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static const String route = '/sign_up';
+
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
@@ -26,6 +28,6 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context) => Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => const SignUpScreen()));
+  static void open(BuildContext context) =>
+      Navigator.of(context).pushNamed(route);
 }
