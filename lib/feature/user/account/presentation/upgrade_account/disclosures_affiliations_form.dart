@@ -62,6 +62,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         builder: (context, state) {
           print('question 1 : ${state.isAffiliated}');
           return QuestionWidget(
+            key: const Key('disclosure_affiliation_question_1'),
             questionText:
                 '1. Affiliated or work with a US registered broker-dealer or FINRA?',
             padding: const EdgeInsets.only(top: 10),
@@ -91,6 +92,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         builder: (context, state) {
           print('question 2 : ${state.isSeniorExecutive}');
           return QuestionWidget(
+              key: const Key('disclosure_affiliation_question_2'),
               questionText:
                   '2. Senior executive at or a 10% or greater shareholder of a publicly traded company?',
               padding: const EdgeInsets.only(top: 10),
@@ -109,6 +111,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         builder: (context, state) {
           print('question 3 : ${state.isSeniorPolitical}');
           return QuestionWidget(
+              key: const Key('disclosure_affiliation_question_3'),
               questionText: '3. I am a senior political figure?',
               padding: const EdgeInsets.only(top: 10),
               options: const ['Yes', 'No'],
@@ -126,6 +129,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         builder: (context, state) {
           print('question 4 : ${state.isFamilyMember}');
           return QuestionWidget(
+            key: const Key('disclosure_affiliation_question_4'),
             questionText:
                 '4. I am a family member or relative of senior political figure?',
             padding: const EdgeInsets.only(top: 10),
@@ -156,6 +160,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         builder: (context, state) {
           print('question 5 : ${state.isAssociates}');
           return QuestionWidget(
+            key: const Key('disclosure_affiliation_question_5'),
             questionText:
                 '5. I am affiliated with any director, officer, or employee of LORA Technologies Limited or its associates?',
             padding: const EdgeInsets.only(top: 10),
@@ -184,6 +189,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         builder: (context, state) {
           print('question 6 : ${state.isOwner}');
           return QuestionWidget(
+            key: const Key('disclosure_affiliation_question_6'),
             questionText: '6. I am the sole beneficial owner of the account?',
             padding: const EdgeInsets.only(top: 10),
             options: const ['Yes', 'No'],
@@ -219,6 +225,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         builder: (context, state) {
           print('question 7 : ${state.isEmployee}');
           return QuestionWidget(
+            key: const Key('disclosure_affiliation_question_7'),
             questionText:
                 '7. I am a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission?',
             padding: const EdgeInsets.only(top: 10),
