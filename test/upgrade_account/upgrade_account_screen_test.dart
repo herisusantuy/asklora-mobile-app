@@ -94,22 +94,6 @@ void main() async {
       var addressProofNextStepButton =
           find.byKey(const Key('account_address_proof_next_step_button'));
       expect(addressProofNextStepButton, findsOneWidget);
-
-      // var mailingUnitNumberInput =
-      //     find.byKey(const Key('account_mailing_unit_number_input'));
-      // expect(mailingUnitNumberInput, findsOneWidget);
-
-      // var mailingResidentialAddressInput =
-      //     find.byKey(const Key('account_mailing_residential_address_input'));
-      // expect(mailingResidentialAddressInput, findsOneWidget);
-
-      // var mailingCityInput =
-      //     find.byKey(const Key('account_mailing_city_input'));
-      // expect(mailingCityInput, findsOneWidget);
-
-      // var mailingCountryInput =
-      //     find.byKey(const Key('account_mailing_country_input'));
-      // expect(mailingCountryInput, findsOneWidget);
     });
   });
 }

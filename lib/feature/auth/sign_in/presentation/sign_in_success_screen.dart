@@ -101,7 +101,7 @@ class SignInSuccessScreen extends StatelessWidget {
                   children: [
                     _getAccountButton(),
                     _padding(),
-                    _upgradeUserAccount(),
+                    _upgradeAccountScreen(context),
                     _padding(),
                     _getOnfidoToken(),
                   ],
