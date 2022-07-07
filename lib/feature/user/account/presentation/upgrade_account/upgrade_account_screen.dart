@@ -102,7 +102,9 @@ class UpgradeAccountScreen extends StatelessWidget {
                         ? 'Basic Information'
                         : state.currentStepIndex == 1
                             ? 'Address Proof'
-                            : '',
+                            : state.currentStepIndex == 2
+                                ? 'Employment, Financial Profile'
+                                : '',
                   ),
                 )
               ],

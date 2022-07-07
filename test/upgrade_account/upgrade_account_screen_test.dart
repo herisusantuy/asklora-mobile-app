@@ -20,6 +20,14 @@ void main() async {
           navigatorObservers: [mockObserver]));
     }
 
+    Future<void> _buildEmploymentFinancialProfileForm(
+        WidgetTester tester) async {
+      final mockObserver = MockNavigatorObserver();
+      await tester.pumpWidget(MaterialApp(
+          home: const UpgradeAccountScreen(initialPage: 2),
+          navigatorObservers: [mockObserver]));
+    }
+
     testWidgets(
         'Render Upgrade Account screen with all fields "Basic Information"',
         (tester) async {
@@ -94,6 +102,24 @@ void main() async {
       var addressProofNextStepButton =
           find.byKey(const Key('account_address_proof_next_step_button'));
       expect(addressProofNextStepButton, findsOneWidget);
+    });
+
+    testWidgets(
+        'Render upgrade account screens with all fields "Employment and Financial Profil"',
+        (WidgetTester tester) async {
+      await _buildEmploymentFinancialProfileForm(tester);
+
+      var annualIncomeSelectSelect =
+          find.byKey(const Key('account_annual_income_select'));
+      expect(annualIncomeSelectSelect, findsOneWidget);
+
+      var ivestibleLiquidAssetsSelect =
+          find.byKey(const Key('account_investible_liquid_assets_select'));
+      expect(ivestibleLiquidAssetsSelect, findsOneWidget);
+
+      var fundingSourceSelect =
+          find.byKey(const Key('account_funding_source_select'));
+      expect(fundingSourceSelect, findsOneWidget);
     });
   });
 }

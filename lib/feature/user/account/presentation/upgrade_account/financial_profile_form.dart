@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_dropdown.dart';
-import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../bloc/account_bloc.dart';
@@ -41,6 +40,7 @@ class FinancialProfileForm extends StatelessWidget {
           previous.annualHouseholdIncome != current.annualHouseholdIncome,
       builder: (context, state) {
         return CustomDropdown(
+            key: const Key('account_annual_income_select'),
             padding: const EdgeInsets.only(top: 20),
             label: 'Annual Household Income',
             hintName: '-',
@@ -65,6 +65,7 @@ class FinancialProfileForm extends StatelessWidget {
           previous.investibleLiquidAssets != current.investibleLiquidAssets,
       builder: (context, state) {
         return CustomDropdown(
+            key: const Key('account_investible_liquid_assets_select'),
             padding: const EdgeInsets.only(top: 10),
             label: 'Investible Liquid Assets',
             hintName: '-',
@@ -89,6 +90,7 @@ class FinancialProfileForm extends StatelessWidget {
           previous.fundingSource != current.fundingSource,
       builder: (context, state) {
         return CustomDropdown(
+            key: const Key('account_funding_source_select'),
             padding: const EdgeInsets.only(top: 10),
             label: 'Account Funding Source',
             hintName: '-',
@@ -112,6 +114,7 @@ class FinancialProfileForm extends StatelessWidget {
         return Column(
           children: [
             CustomDropdown(
+                key: const Key('account_employment_status_select'),
                 padding: const EdgeInsets.only(top: 10),
                 label: 'Employment Status',
                 hintName: '-',
@@ -139,23 +142,24 @@ class FinancialProfileForm extends StatelessWidget {
   }
 
   Widget _occupationDropdown() {
+    List<String> items = [
+      'Healthcare',
+      'Education',
+      'Legal',
+      'Business',
+      'Finance',
+      'IT',
+      'Commercial',
+      'Other',
+    ];
     return BlocBuilder<AccountBloc, AccountState>(
       buildWhen: (previous, current) =>
           previous.occupation != current.occupation,
       builder: (context, state) {
-        List<String> items = [
-          'Healthcare',
-          'Education',
-          'Legal',
-          'Business',
-          'Finance',
-          'IT',
-          'Commercial',
-          'Other',
-        ];
         return Column(
           children: [
             CustomDropdown(
+              key: const Key('account_occupation_select'),
               padding: const EdgeInsets.only(top: 10),
               label: 'Occupation',
               hintName: '-',
@@ -175,18 +179,17 @@ class FinancialProfileForm extends StatelessWidget {
   }
 
   Widget _occupationInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) => previous != current,
+        buildWhen: (previous, current) =>
+            previous.occupation != current.occupation,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+              key: const Key('account_occupation_input'),
               labelText: '',
-              onChanged: (value) {
-                String otherOccupation = value;
-                context
-                    .read<AccountBloc>()
-                    .add(AccountOccupationChanged(otherOccupation));
-              },
+              onChanged: (value) => context
+                  .read<AccountBloc>()
+                  .add(AccountOccupationChanged(value)),
               hintText: 'Other',
             ),
           );
@@ -198,6 +201,7 @@ class FinancialProfileForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 20),
             child: CustomTextInput(
+                key: const Key('account_employer_input'),
                 labelText: 'Employer',
                 onChanged: (value) => context
                     .read<AccountBloc>()
@@ -213,6 +217,7 @@ class FinancialProfileForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10),
             child: CustomTextInput(
+              key: const Key('account_employer_address_input'),
               labelText: 'Employer Address',
               onChanged: (value) => context
                   .read<AccountBloc>()
