@@ -132,17 +132,15 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _datePicker(context) => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
+          final DateTime dateTime = DateTime.now();
           return CustomDatePicker(
             key: const Key('account_date_of_birth_picker'),
             padding: const EdgeInsets.only(top: 10),
             label: 'Date of Birth',
             selectedDate: DateTime.parse(state.dateOfBirth),
-            initialDateTime: DateTime(
-              DateTime.now().year - 18,
-              DateTime.now().month,
-              DateTime.now().day,
-            ),
-            maximumYear: DateTime.now().year - 18,
+            initialDateTime:
+                DateTime(dateTime.year - 18, dateTime.month, dateTime.day),
+            maximumYear: dateTime.year - 18,
             onDateTimeChanged: (date) => context.read<AccountBloc>().add(
                   AccountDateOfBirthChanged(date.toString()),
                 ),

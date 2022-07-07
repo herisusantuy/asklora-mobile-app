@@ -142,20 +142,20 @@ class FinancialProfileForm extends StatelessWidget {
   }
 
   Widget _occupationDropdown() {
+    List<String> items = [
+      'Healthcare',
+      'Education',
+      'Legal',
+      'Business',
+      'Finance',
+      'IT',
+      'Commercial',
+      'Other',
+    ];
     return BlocBuilder<AccountBloc, AccountState>(
       buildWhen: (previous, current) =>
           previous.occupation != current.occupation,
       builder: (context, state) {
-        List<String> items = [
-          'Healthcare',
-          'Education',
-          'Legal',
-          'Business',
-          'Finance',
-          'IT',
-          'Commercial',
-          'Other',
-        ];
         return Column(
           children: [
             CustomDropdown(
@@ -179,19 +179,17 @@ class FinancialProfileForm extends StatelessWidget {
   }
 
   Widget _occupationInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) => previous != current,
+        buildWhen: (previous, current) =>
+            previous.occupation != current.occupation,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
               key: const Key('account_occupation_input'),
               labelText: '',
-              onChanged: (value) {
-                String otherOccupation = value;
-                context
-                    .read<AccountBloc>()
-                    .add(AccountOccupationChanged(otherOccupation));
-              },
+              onChanged: (value) => context
+                  .read<AccountBloc>()
+                  .add(AccountOccupationChanged(value)),
               hintText: 'Other',
             ),
           );
