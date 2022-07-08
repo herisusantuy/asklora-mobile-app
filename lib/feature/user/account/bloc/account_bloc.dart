@@ -1,14 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
-import '../domain/upgrade_account/contact.dart';
-import '../domain/upgrade_account/mock_data.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
-import '../../../../core/utils/storage/secure_storage.dart';
 
 part 'account_event.dart';
 

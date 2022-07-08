@@ -12,6 +12,7 @@ import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
 
 class BasicInformationForm extends StatelessWidget {
   final PageController controller;
+
   const BasicInformationForm({
     Key? key,
     required this.controller,
@@ -221,7 +222,7 @@ class BasicInformationForm extends StatelessWidget {
           key: const Key('BasicInformation_is_united_state_resident_question'),
           padding: const EdgeInsets.only(top: 10, bottom: 20),
           questionText: 'US Resident Check',
-          options: ['Yes', 'No'],
+          options: const ['Yes', 'No'],
           selectedAnswer: state.isUnitedStateResident ? 'Yes' : 'No',
           onSelected: (value) => context.read<BasicInformationBloc>().add(
               BasicInformationIsUnitedStateResidentChanged(

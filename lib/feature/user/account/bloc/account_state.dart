@@ -52,7 +52,24 @@ class AccountState extends Equatable {
       currentStepIndex: currentStepIndex ?? this.currentStepIndex,
     );
   }
+
+  // bool disableNextButton() {
+  //   if (firstName.isEmpty ||
+  //       middleName.isEmpty ||
+  //       lastName.isEmpty ||
+  //       chineseName.isEmpty ||
+  //       gender.isEmpty ||
+  //       dateOfBirth.isEmpty ||
+  //       countryCode.isEmpty ||
+  //       phoneNumber.isEmpty ||
+  //       countryOfCitizenship.isEmpty) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 }
+
+class EnableBasicInformationNextButton extends AccountState {}
 
 class OnfidoSdkToken extends AccountState {
   final String token;

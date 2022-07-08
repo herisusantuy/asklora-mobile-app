@@ -8,7 +8,10 @@ import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 
 class AddressProofForm extends StatelessWidget {
   final PageController controller;
-  const AddressProofForm({
+
+  final _scrollController = ScrollController();
+
+  AddressProofForm({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -36,7 +39,7 @@ class AddressProofForm extends StatelessWidget {
               ),
             ),
           ),
-          _nextButton(),
+          // _nextButton(),
         ],
       ),
     );

@@ -19,9 +19,11 @@ class GetSdkToken extends AccountEvent {}
 
 class AccountCurrentStepChanged extends AccountEvent {
   final String type;
+
   const AccountCurrentStepChanged(
     this.type,
   ) : super();
+
   @override
   List<Object> get props => [type];
 }
