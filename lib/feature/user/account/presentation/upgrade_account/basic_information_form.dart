@@ -12,6 +12,7 @@ import '../../bloc/account_bloc.dart';
 
 class BasicInformationForm extends StatelessWidget {
   final PageController controller;
+
   const BasicInformationForm({
     Key? key,
     required this.controller,
@@ -51,6 +52,7 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _firstNameInput() {
     return BlocBuilder<AccountBloc, AccountState>(
+      buildWhen: (previous, current) => previous.firstName != current.firstName,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -68,6 +70,8 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _middleNameInput() {
     return BlocBuilder<AccountBloc, AccountState>(
+      buildWhen: (previous, current) =>
+          previous.middleName != current.middleName,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
@@ -85,6 +89,7 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _lastNameInput() {
     return BlocBuilder<AccountBloc, AccountState>(
+      buildWhen: (previous, current) => previous.lastName != current.lastName,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
@@ -102,6 +107,8 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _chineseNameInput() {
     return BlocBuilder<AccountBloc, AccountState>(
+      buildWhen: (previous, current) =>
+          previous.chineseName != current.chineseName,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
@@ -118,6 +125,7 @@ class BasicInformationForm extends StatelessWidget {
   }
 
   Widget _selectGender() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) => previous.gender != current.gender,
         builder: (context, state) {
           return CustomDropdown(
             key: const Key('account_gender_select'),
@@ -131,6 +139,8 @@ class BasicInformationForm extends StatelessWidget {
       );
 
   Widget _datePicker(context) => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) =>
+            previous.dateOfBirth != current.dateOfBirth,
         builder: (context, state) {
           final DateTime dateTime = DateTime.now();
           return CustomDatePicker(
@@ -149,6 +159,9 @@ class BasicInformationForm extends StatelessWidget {
       );
 
   Widget _countryCodeAndPhoneNumber() => BlocBuilder<AccountBloc, AccountState>(
+        // buildWhen: (previous, current) =>
+        //     (previous.countryCode != current.countryCode) ||
+        //     previous.phoneNumber != current.phoneNumber,
         builder: (context, state) {
           return CustomPhoneNumberInput(
             key: const Key('account_country_code_phone_number_input'),
@@ -166,6 +179,8 @@ class BasicInformationForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) =>
+            previous.countryOfCitizenship != current.countryOfCitizenship,
         builder: (context, state) {
           return CustomTextInput(
               key: const Key('account_country_of_citizenship_input'),
@@ -174,7 +189,7 @@ class BasicInformationForm extends StatelessWidget {
                   .read<AccountBloc>()
                   .add(
                       AccountCountryOfCitizenshipChanged(countryOfCitizenship)),
-              hintText: 'Enter your Chinese name');
+              hintText: 'Country of Citizenship');
         },
       ),
     );
@@ -182,13 +197,16 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _optionHkResident() {
     return BlocBuilder<AccountBloc, AccountState>(
+      buildWhen: (previous, current) =>
+          previous.isHongKongPermanentResident !=
+          current.isHongKongPermanentResident,
       builder: (context, state) {
         return QuestionWidget(
-          key: const Key('account_is_hongkong_permanent_resident_question'),
+          key: const Key('account_is_hong_kong_permanent_resident_question'),
           padding: const EdgeInsets.only(top: 10),
           questionText: 'Hong Kong Permanent Resident',
-          options: ['Yes', 'No'],
-          selectedAnswer: state.isHongkongPermanentResident ? 'Yes' : 'No',
+          options: const ['Yes', 'No'],
+          selectedAnswer: state.isHongKongPermanentResident ? 'Yes' : 'No',
           onSelected: (value) => context.read<AccountBloc>().add(
               AccountIsHongKongPermanentResidentChanged(
                   value == 'Yes' ? true : false)),
@@ -199,12 +217,14 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _usResidentCheck() {
     return BlocBuilder<AccountBloc, AccountState>(
+      buildWhen: (previous, current) =>
+          previous.isUnitedStateResident != current.isUnitedStateResident,
       builder: (context, state) {
         return QuestionWidget(
           key: const Key('account_is_united_state_resident_question'),
           padding: const EdgeInsets.only(top: 10, bottom: 20),
           questionText: 'US Resident Check',
-          options: ['Yes', 'No'],
+          options: const ['Yes', 'No'],
           selectedAnswer: state.isUnitedStateResident ? 'Yes' : 'No',
           onSelected: (value) => context.read<AccountBloc>().add(
               AccountIsUnitedStateResidentChanged(
@@ -212,21 +232,6 @@ class BasicInformationForm extends StatelessWidget {
         );
       },
     );
-  }
-
-  bool _validateBasicInformationStep(AccountState state) {
-    if (state.firstName.isEmpty ||
-        state.middleName.isEmpty ||
-        state.lastName.isEmpty ||
-        state.chineseName.isEmpty ||
-        state.gender.isEmpty ||
-        state.dateOfBirth.isEmpty ||
-        state.countryCode.isEmpty ||
-        state.phoneNumber.isEmpty ||
-        state.countryOfCitizenship.isEmpty) {
-      return true;
-    }
-    return false;
   }
 
   Widget _nextButton() => Padding(
@@ -237,7 +242,7 @@ class BasicInformationForm extends StatelessWidget {
               key: const Key('account_basic_information_next_step_button'),
               buttonText: 'Next',
               borderRadius: 30,
-              disable: _validateBasicInformationStep(state),
+              disable: state.disableNextButton(),
               onClick: () {
                 context
                     .read<AccountBloc>()

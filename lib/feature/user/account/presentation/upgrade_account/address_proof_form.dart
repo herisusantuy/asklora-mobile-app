@@ -8,14 +8,16 @@ import '../../bloc/account_bloc.dart';
 
 class AddressProofForm extends StatelessWidget {
   final PageController controller;
-  const AddressProofForm({
+
+  final _scrollController = ScrollController();
+
+  AddressProofForm({
     Key? key,
     required this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    ScrollController _scrollController = ScrollController();
     return BlocListener<AccountBloc, AccountState>(
       listener: (context, state) {},
       child: Column(
@@ -43,6 +45,8 @@ class AddressProofForm extends StatelessWidget {
   }
 
   Widget _unitNumberInput() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) =>
+            previous.unitNumber != current.unitNumber,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
@@ -59,6 +63,8 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _residentialAddressInput() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) =>
+            previous.residentialAddress != current.residentialAddress,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
@@ -75,6 +81,7 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _cityInput() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) => previous.city != current.city,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
@@ -89,6 +96,7 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _countryInput() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) => previous.country != current.country,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
@@ -106,6 +114,8 @@ class AddressProofForm extends StatelessWidget {
 
   Widget _mailAddressCheck(ScrollController controller) =>
       BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) =>
+            previous.isSameMailingAddress != current.isSameMailingAddress,
         builder: (BuildContext context, state) {
           return Column(
             children: [
@@ -145,6 +155,8 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _mailApartmentNumberInput() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) =>
+            previous.mailUnitNumber != current.mailUnitNumber,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
@@ -160,6 +172,8 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _mailResidentAddressInput() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) =>
+            previous.mailResidentialAddress != current.mailResidentialAddress,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
@@ -176,6 +190,7 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _mailCityInput() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) => previous.mailCity != current.mailCity,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
@@ -191,6 +206,8 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _mailCountryInput() => BlocBuilder<AccountBloc, AccountState>(
+        buildWhen: (previous, current) =>
+            previous.mailCountry != current.mailCountry,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 20),
@@ -222,6 +239,8 @@ class AddressProofForm extends StatelessWidget {
   Widget _nextButton() => Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: BlocBuilder<AccountBloc, AccountState>(
+          buildWhen: (previous, current) =>
+              previous.currentStepIndex != current.currentStepIndex,
           builder: (context, state) {
             return CustomTextButton(
                 key: const Key('account_address_proof_next_step_button'),
