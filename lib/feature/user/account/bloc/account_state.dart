@@ -10,13 +10,13 @@ enum GetAccountStatus {
   submittingOnfidoResult,
 }
 
-enum Gender { femail, male, other, unknown }
+enum Gender { female, male, other, unknown }
 
 enum FundingSource {
   employmentIncome,
   investments,
   inheritance,
-  bussinessIncome,
+  businessIncome,
   savings,
   family,
   unknown
@@ -46,7 +46,7 @@ class AccountState extends Equatable {
     this.countryCode = '',
     this.phoneNumber = '',
     this.countryOfCitizenship = '',
-    this.isHongkongPermanentResident = true,
+    this.isHongKongPermanentResident = true,
     this.isUnitedStateResident = false,
     this.unitNumber = '',
     this.residentialAddress = '',
@@ -80,7 +80,7 @@ class AccountState extends Equatable {
   final String countryCode;
   final String phoneNumber;
   final String countryOfCitizenship;
-  final bool isHongkongPermanentResident;
+  final bool isHongKongPermanentResident;
   final bool isUnitedStateResident;
   final String unitNumber;
   final String residentialAddress;
@@ -116,7 +116,7 @@ class AccountState extends Equatable {
       countryCode,
       phoneNumber,
       countryOfCitizenship,
-      isHongkongPermanentResident,
+      isHongKongPermanentResident,
       isUnitedStateResident,
       unitNumber,
       residentialAddress,
@@ -152,7 +152,7 @@ class AccountState extends Equatable {
     String? countryCode,
     String? phoneNumber,
     String? countryOfCitizenship,
-    bool? isHongkongPermanentResident,
+    bool? isHongKongPermanentResident,
     bool? isUnitedStateResident,
     String? unitNumber,
     String? residentialAddress,
@@ -187,8 +187,8 @@ class AccountState extends Equatable {
       countryCode: countryCode ?? this.countryCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       countryOfCitizenship: countryOfCitizenship ?? this.countryOfCitizenship,
-      isHongkongPermanentResident:
-          isHongkongPermanentResident ?? this.isHongkongPermanentResident,
+      isHongKongPermanentResident:
+          isHongKongPermanentResident ?? this.isHongKongPermanentResident,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
       unitNumber: unitNumber ?? this.unitNumber,
@@ -212,7 +212,24 @@ class AccountState extends Equatable {
       employerAddress: employerAddress ?? this.employerAddress,
     );
   }
+
+  bool disableNextButton() {
+    if (firstName.isEmpty ||
+        middleName.isEmpty ||
+        lastName.isEmpty ||
+        chineseName.isEmpty ||
+        gender.isEmpty ||
+        dateOfBirth.isEmpty ||
+        countryCode.isEmpty ||
+        phoneNumber.isEmpty ||
+        countryOfCitizenship.isEmpty) {
+      return true;
+    }
+    return false;
+  }
 }
+
+class EnableBasicInformationNextButton extends AccountState {}
 
 class OnfidoSdkToken extends AccountState {
   final String token;

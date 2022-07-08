@@ -1,14 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
-import '../domain/upgrade_account/contact.dart';
-import '../domain/upgrade_account/mock_data.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
-import '../../../../core/utils/storage/secure_storage.dart';
 
 part 'account_event.dart';
 
@@ -30,9 +28,10 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<AccountDateOfBirthChanged>(_onAccountDateOfBirthChange);
     on<AccountCountryCodeChanged>(_onAccountCountryCodeChange);
     on<AccountPhoneNumberChanged>(_onAccountPhoneNumberChange);
-    on<AccountCountryOfCitizenshipChanged>(_onAccountCountryOfCitizenshipChage);
+    on<AccountCountryOfCitizenshipChanged>(
+        _onAccountCountryOfCitizenshipChange);
     on<AccountIsHongKongPermanentResidentChanged>(
-        _onIsHongkongPermanentResidentChange);
+        _onIsHongKongPermanentResidentChange);
     on<AccountIsUnitedStateResidentChanged>(_onIsUnitedStateResidentChange);
     on<AccountUnitNumberChanged>(_onAccountUnitNumberChanged);
     on<AccountResidentialChanged>(_onAccountResidentChanged);
@@ -189,16 +188,16 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     emit(state.copyWith(phoneNumber: event.phoneNumber));
   }
 
-  _onAccountCountryOfCitizenshipChage(
+  _onAccountCountryOfCitizenshipChange(
       AccountCountryOfCitizenshipChanged event, Emitter<AccountState> emit) {
     emit(state.copyWith(countryOfCitizenship: event.countryOfCitizenship));
   }
 
-  _onIsHongkongPermanentResidentChange(
+  _onIsHongKongPermanentResidentChange(
       AccountIsHongKongPermanentResidentChanged event,
       Emitter<AccountState> emit) {
     emit(state.copyWith(
-        isHongkongPermanentResident: event.isHongKongPermanentResident));
+        isHongKongPermanentResident: event.isHongKongPermanentResident));
   }
 
   _onIsUnitedStateResidentChange(
@@ -243,6 +242,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   _onAccountMailCityChanged(
       AccountMailCityChanged event, Emitter<AccountState> emit) {
     emit(state.copyWith(chineseName: event.mailCity));
+    // _validateBasicInformationStep(state, emit);
   }
 
   _onAccountMailCountryChanged(
