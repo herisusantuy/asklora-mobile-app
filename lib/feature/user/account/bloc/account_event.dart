@@ -263,11 +263,26 @@ class AccountQuestion5ofAffiliationChanged extends AccountEvent {
   List<Object> get props => [isAssociates];
 }
 
+class AccountNameOfAffiliatedPersonChanged extends AccountEvent {
+  final String nameOfAffiliatedPerson;
+  const AccountNameOfAffiliatedPersonChanged(this.nameOfAffiliatedPerson)
+      : super();
+  @override
+  List<Object> get props => [nameOfAffiliatedPerson];
+}
+
 class AccountQuestion6ofAffiliationChanged extends AccountEvent {
   final bool isOwner;
   const AccountQuestion6ofAffiliationChanged(this.isOwner) : super();
   @override
   List<Object> get props => [isOwner];
+}
+
+class AccountNameOfJointAccountChanged extends AccountEvent {
+  final String nameOfJointAccount;
+  const AccountNameOfJointAccountChanged(this.nameOfJointAccount) : super();
+  @override
+  List<Object> get props => [nameOfJointAccount];
 }
 
 class AccountQuestion7ofAffiliationChanged extends AccountEvent {

@@ -63,8 +63,11 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         _onAccountQuestion4ofAffiliationChanged);
     on<AccountQuestion5ofAffiliationChanged>(
         _onAccountQuestion5ofAffiliationChanged);
+    on<AccountNameOfAffiliatedPersonChanged>(
+        _onAccountNameOfAffiliatedPersonChanged);
     on<AccountQuestion6ofAffiliationChanged>(
         _onAccountQuestion6ofAffiliationChanged);
+    on<AccountNameOfJointAccountChanged>(_onAccountNameOfJointAccountChanged);
     on<AccountQuestion7ofAffiliationChanged>(
         _onAccountQuestion7ofAffiliationChanged);
   }
@@ -343,9 +346,19 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     emit(state.copyWith(isAssociates: event.isAssociates));
   }
 
+  _onAccountNameOfAffiliatedPersonChanged(
+      AccountNameOfAffiliatedPersonChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(nameOfAffiliatedPerson: event.nameOfAffiliatedPerson));
+  }
+
   _onAccountQuestion6ofAffiliationChanged(
       AccountQuestion6ofAffiliationChanged event, Emitter<AccountState> emit) {
     emit(state.copyWith(isOwner: event.isOwner));
+  }
+
+  _onAccountNameOfJointAccountChanged(
+      AccountNameOfJointAccountChanged event, Emitter<AccountState> emit) {
+    emit(state.copyWith(nameOfJointAccount: event.nameOfJointAccount));
   }
 
   _onAccountQuestion7ofAffiliationChanged(
