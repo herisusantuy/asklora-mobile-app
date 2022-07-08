@@ -37,7 +37,6 @@ class SigningAgreementTaxForm extends StatelessWidget {
           (previous.isFormW8BenOpened != current.isFormW8BenOpened) ||
           (previous.isCheckedCertify != current.isCheckedCertify),
       builder: (context, state) {
-        print('form opened: ${state.isFormW8BenOpened}');
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextButton(
@@ -58,8 +57,6 @@ class SigningAgreementTaxForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isCheckedCertify != current.isCheckedCertify,
         builder: (context, state) {
-          print('certify: ${state.isCheckedCertify}');
-
           return CustomCheckbox(
             padding: const EdgeInsets.only(top: 10),
             text:
@@ -80,7 +77,6 @@ class SigningAgreementTaxForm extends StatelessWidget {
           previous.isFormW8BenOpened != current.isFormW8BenOpened ||
           previous.isCheckedDeclare != current.isCheckedDeclare,
       builder: (context, state) {
-        print('declare: ${state.isCheckedDeclare}');
         return CustomCheckbox(
           padding: const EdgeInsets.only(top: 10),
           text:
