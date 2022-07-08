@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
-import '../../bloc/account_bloc.dart';
+import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 
 class AddressProofForm extends StatelessWidget {
   final PageController controller;
@@ -18,7 +18,8 @@ class AddressProofForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AccountBloc, AccountState>(
+    ScrollController _scrollController = ScrollController();
+    return BlocListener<AddressProofBloc, AddressProofState>(
       listener: (context, state) {},
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,15 +39,14 @@ class AddressProofForm extends StatelessWidget {
               ),
             ),
           ),
-          _nextButton(),
+          // _nextButton(),
         ],
       ),
     );
   }
 
-  Widget _unitNumberInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) =>
-            previous.unitNumber != current.unitNumber,
+  Widget _unitNumberInput() => BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
@@ -55,80 +55,80 @@ class AddressProofForm extends StatelessWidget {
               labelText: 'Unit/Apartment No.',
               hintText: 'Enter your Unit/Apartment No.',
               onChanged: (unitNumber) => context
-                  .read<AccountBloc>()
-                  .add(AccountUnitNumberChanged(unitNumber)),
+                  .read<AddressProofBloc>()
+                  .add(AddressProofUnitNumberChanged(unitNumber)),
             ),
           );
         },
       );
 
-  Widget _residentialAddressInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) =>
-            previous.residentialAddress != current.residentialAddress,
+  Widget _residentialAddressInput() =>
+      BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-              key: const Key('account_residential_address_input'),
+              key: const Key('address_proof_residential_address_input'),
               labelText: 'Residential Address',
               hintText: 'Enter your Residential Address',
               onChanged: (residentialAddress) => context
-                  .read<AccountBloc>()
-                  .add(AccountResidentialChanged(residentialAddress)),
+                  .read<AddressProofBloc>()
+                  .add(AddressProofResidentialChanged(residentialAddress)),
             ),
           );
         },
       );
 
-  Widget _cityInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) => previous.city != current.city,
+  Widget _cityInput() => BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-                key: const Key('account_city_input'),
+                key: const Key('address_proof_city_input'),
                 labelText: 'City',
-                onChanged: (city) =>
-                    context.read<AccountBloc>().add(AccountCityChanged(city)),
+                onChanged: (city) => context
+                    .read<AddressProofBloc>()
+                    .add(AddressProofCityChanged(city)),
                 hintText: 'Enter your City'),
           );
         },
       );
 
-  Widget _countryInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) => previous.country != current.country,
+  Widget _countryInput() => BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-              key: const Key('account_country_input'),
+              key: const Key('address_proof_country_input'),
               labelText: 'Country',
               hintText: 'Enter your Country',
               onChanged: (country) => context
-                  .read<AccountBloc>()
-                  .add(AccountCountryChanged(country)),
+                  .read<AddressProofBloc>()
+                  .add(AddressProofCountryChanged(country)),
             ),
           );
         },
       );
 
   Widget _mailAddressCheck(ScrollController controller) =>
-      BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) =>
-            previous.isSameMailingAddress != current.isSameMailingAddress,
+      BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (BuildContext context, state) {
           return Column(
             children: [
               QuestionWidget(
-                key: const Key('account_is_same_mailing_address_select'),
+                key: const Key('address_proof_is_same_mailing_address_select'),
                 padding: const EdgeInsets.only(top: 10),
                 questionText:
                     'My mailing address and residential address is the same',
                 options: const ['Yes', 'No'],
                 selectedAnswer: state.isSameMailingAddress ? 'Yes' : 'No',
                 onSelected: (value) async {
-                  context.read<AccountBloc>().add(
-                        AccountIsSameMailingAddressChanged(
+                  context.read<AddressProofBloc>().add(
+                        AddressProofIsSameMailingAddressChanged(
                             value == 'Yes' ? true : false),
                       );
                   Future.delayed(
@@ -154,75 +154,76 @@ class AddressProofForm extends StatelessWidget {
         },
       );
 
-  Widget _mailApartmentNumberInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) =>
-            previous.mailUnitNumber != current.mailUnitNumber,
+  Widget _mailApartmentNumberInput() =>
+      BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: CustomTextInput(
-                key: const Key('account_mailing_unit_number_input'),
+                key: const Key('address_proof_mailing_unit_number_input'),
                 labelText: 'Unit/Apartment No.',
                 onChanged: (mailUnitNumber) => context
-                    .read<AccountBloc>()
-                    .add(AccountMailUnitNumberChanged(mailUnitNumber)),
+                    .read<AddressProofBloc>()
+                    .add(AddressProofMailUnitNumberChanged(mailUnitNumber)),
                 hintText: 'Enter your Unit/Apartment No.'),
           );
         },
       );
 
-  Widget _mailResidentAddressInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) =>
-            previous.mailResidentialAddress != current.mailResidentialAddress,
+  Widget _mailResidentAddressInput() =>
+      BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-                key: const Key('account_mailing_residential_address_input'),
+                key: const Key(
+                    'address_proof_mailing_residential_address_input'),
                 labelText: 'Residential Address',
                 onChanged: (mailResidentialAddress) => context
-                    .read<AccountBloc>()
-                    .add(AccountMailResidentialAddressChanged(
+                    .read<AddressProofBloc>()
+                    .add(AddressProofMailResidentialAddressChanged(
                         mailResidentialAddress)),
                 hintText: 'Enter your Residential Address'),
           );
         },
       );
 
-  Widget _mailCityInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) => previous.mailCity != current.mailCity,
+  Widget _mailCityInput() => BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-                key: const Key('account_mailing_city_input'),
+                key: const Key('address_proof_mailing_city_input'),
                 labelText: 'City',
                 onChanged: (mailCity) => context
-                    .read<AccountBloc>()
-                    .add(AccountMailCityChanged(mailCity)),
+                    .read<AddressProofBloc>()
+                    .add(AddressProofMailCityChanged(mailCity)),
                 hintText: 'Enter your City'),
           );
         },
       );
 
-  Widget _mailCountryInput() => BlocBuilder<AccountBloc, AccountState>(
-        buildWhen: (previous, current) =>
-            previous.mailCountry != current.mailCountry,
+  Widget _mailCountryInput() =>
+      BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) => false,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 20),
             child: CustomTextInput(
-                key: const Key('account_mailing_country_input'),
+                key: const Key('address_proof_mailing_country_input'),
                 labelText: 'Country',
                 onChanged: (mailCountry) => context
-                    .read<AccountBloc>()
-                    .add(AccountMailCountryChanged(mailCountry)),
+                    .read<AddressProofBloc>()
+                    .add(AddressProofMailCountryChanged(mailCountry)),
                 hintText: 'Enter your Country'),
           );
         },
       );
 
-  bool _validateAddressProofStep(AccountState state) {
+  bool _validateAddressProofStep(AddressProofState state) {
     if (state.unitNumber.isEmpty ||
         state.residentialAddress.isEmpty ||
         state.city.isEmpty ||
@@ -238,19 +239,18 @@ class AddressProofForm extends StatelessWidget {
 
   Widget _nextButton() => Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: BlocBuilder<AccountBloc, AccountState>(
-          buildWhen: (previous, current) =>
-              previous.currentStepIndex != current.currentStepIndex,
+        child: BlocBuilder<AddressProofBloc, AddressProofState>(
+          buildWhen: (previous, current) => false,
           builder: (context, state) {
             return CustomTextButton(
-                key: const Key('account_address_proof_next_step_button'),
-                disable: _validateAddressProofStep(state),
+                key: const Key('address_proof_next_step_button'),
+                // disable: _validateAddressProofStep(state),
                 buttonText: 'Next',
                 borderRadius: 30,
                 onClick: () {
-                  context
-                      .read<AccountBloc>()
-                      .add(const AccountCurrentStepChanged('next'));
+                  // context
+                  //     .read<AddressProofBloc>()
+                  //     .add(const AccountCurrentStepChanged('next'));
                   controller.nextPage(
                       duration: const Duration(milliseconds: 200),
                       curve: Curves.ease);

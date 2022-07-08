@@ -20,37 +20,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<GetSdkToken>(_onGetOnfidoSdkToken);
     on<UpgradeAccount>(_onUpgradeAccount);
     on<AccountCurrentStepChanged>(_onAccountCurrentStepIndexChange);
-    on<AccountFirstNameChanged>(_onAccountFirstNameChange);
-    on<AccountLastNameChanged>(_onAccountLastNameChange);
-    on<AccountMiddleNameChanged>(_onAccountMiddleNameChange);
-    on<AccountChineseNameChanged>(_onAccountChineseNameChange);
-    on<AccountGenderChanged>(_onAccountGenderChange);
-    on<AccountDateOfBirthChanged>(_onAccountDateOfBirthChange);
-    on<AccountCountryCodeChanged>(_onAccountCountryCodeChange);
-    on<AccountPhoneNumberChanged>(_onAccountPhoneNumberChange);
-    on<AccountCountryOfCitizenshipChanged>(
-        _onAccountCountryOfCitizenshipChange);
-    on<AccountIsHongKongPermanentResidentChanged>(
-        _onIsHongKongPermanentResidentChange);
-    on<AccountIsUnitedStateResidentChanged>(_onIsUnitedStateResidentChange);
-    on<AccountUnitNumberChanged>(_onAccountUnitNumberChanged);
-    on<AccountResidentialChanged>(_onAccountResidentChanged);
-    on<AccountCityChanged>(_onAccountCityChanged);
-    on<AccountCountryChanged>(_onAccountCountryChanged);
-    on<AccountIsSameMailingAddressChanged>(_onIsSameMailingAddressChanged);
-    on<AccountMailUnitNumberChanged>(_onAccountMailUnitNumberChanged);
-    on<AccountMailResidentialAddressChanged>(
-        _onAccountMailResidentialAddressChanged);
-    on<AccountMailCityChanged>(_onAccountMailCityChanged);
-    on<AccountMailCountryChanged>(_onAccountMailCountryChanged);
-    on<AccountAnnualIncomeChanged>(_onAccountAnnualIncomeChanged);
-    on<AccountInvestibleLiquidAssetChanged>(
-        _onAccountInvestibleLiquidAssetChanged);
-    on<AccountFundingSourceChanged>(_onAccountFundingSourceChanged);
-    on<AccountEmploymentStatusChanged>(_onAccountEmploymentStatusChanged);
-    on<AccountOccupationChanged>(_onAccountOccupationChanged);
-    on<AccountEmployerChanged>(_onAccountEmployerChanged);
-    on<AccountEmployerAddressChanged>(_onAccountEmployerAddressChanged);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
   }
 
@@ -84,18 +53,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       // Replace the mock email with real email in mock request
       // Set contact object
       request?.contact?.emailAddress = email;
-      request?.contact?.phoneNumber = state.phoneNumber;
-      request?.contact?.unit = state.unitNumber;
-      request?.contact?.streetAddress = state.residentialAddress;
-      request?.contact?.city = state.city;
-      request?.contact?.country = state.country;
-
-      // Set identity object
-      request?.identity?.givenName = state.firstName;
-      request?.identity?.middleName = state.middleName;
-      request?.identity?.familyName = state.lastName;
-      request?.identity?.dateOfBirth = state.dateOfBirth;
-      request?.identity?.countryOfCitizenship = state.countryOfCitizenship;
 
       var response = await _accountRepository.upgradeAccount(request!);
 
@@ -146,143 +103,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
 
     emit(state.copyWith(currentStepIndex: nextStepIndex));
-  }
-
-  _onAccountFirstNameChange(
-      AccountFirstNameChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(firstName: event.firstName));
-  }
-
-  _onAccountLastNameChange(
-      AccountLastNameChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(lastName: event.lastName));
-  }
-
-  _onAccountMiddleNameChange(
-      AccountMiddleNameChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(middleName: event.middleName));
-  }
-
-  _onAccountChineseNameChange(
-      AccountChineseNameChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.chineseName));
-  }
-
-  _onAccountGenderChange(
-      AccountGenderChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(gender: event.gender));
-  }
-
-  _onAccountDateOfBirthChange(
-      AccountDateOfBirthChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(dateOfBirth: event.dateOfBirth));
-  }
-
-  _onAccountCountryCodeChange(
-      AccountCountryCodeChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(countryCode: event.countryCode));
-  }
-
-  _onAccountPhoneNumberChange(
-      AccountPhoneNumberChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(phoneNumber: event.phoneNumber));
-  }
-
-  _onAccountCountryOfCitizenshipChange(
-      AccountCountryOfCitizenshipChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(countryOfCitizenship: event.countryOfCitizenship));
-  }
-
-  _onIsHongKongPermanentResidentChange(
-      AccountIsHongKongPermanentResidentChanged event,
-      Emitter<AccountState> emit) {
-    emit(state.copyWith(
-        isHongKongPermanentResident: event.isHongKongPermanentResident));
-  }
-
-  _onIsUnitedStateResidentChange(
-      AccountIsUnitedStateResidentChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isUnitedStateResident: event.isUnitedStateResident));
-  }
-
-  _onAccountUnitNumberChanged(
-      AccountUnitNumberChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.unitNumber));
-  }
-
-  _onAccountResidentChanged(
-      AccountResidentialChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.residentialAddress));
-  }
-
-  _onAccountCityChanged(AccountCityChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.city));
-  }
-
-  _onAccountCountryChanged(
-      AccountCountryChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.country));
-  }
-
-  _onIsSameMailingAddressChanged(
-      AccountIsSameMailingAddressChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isSameMailingAddress: event.isSameMailingAddress));
-  }
-
-  _onAccountMailUnitNumberChanged(
-      AccountMailUnitNumberChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.mailUnitNumber));
-  }
-
-  _onAccountMailResidentialAddressChanged(
-      AccountMailResidentialAddressChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.mailResidentialAddress));
-  }
-
-  _onAccountMailCityChanged(
-      AccountMailCityChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.mailCity));
-    // _validateBasicInformationStep(state, emit);
-  }
-
-  _onAccountMailCountryChanged(
-      AccountMailCountryChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(chineseName: event.mailCountry));
-  }
-
-  _onAccountAnnualIncomeChanged(
-      AccountAnnualIncomeChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(annualHouseholdIncome: event.annualIncome));
-  }
-
-  _onAccountInvestibleLiquidAssetChanged(
-      AccountInvestibleLiquidAssetChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(investibleLiquidAssets: event.investibleLiquidAssets));
-  }
-
-  _onAccountFundingSourceChanged(
-      AccountFundingSourceChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(fundingSource: event.fundingSource));
-  }
-
-  _onAccountEmploymentStatusChanged(
-      AccountEmploymentStatusChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(employmentStatus: event.employmentStatus));
-  }
-
-  _onAccountOccupationChanged(
-      AccountOccupationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(occupation: event.occupation));
-  }
-
-  _onAccountEmployerChanged(
-      AccountEmployerChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(employer: event.employer));
-  }
-
-  _onAccountEmployerAddressChanged(
-      AccountEmployerAddressChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(employerAddress: event.employerAddress));
   }
 
   _onUpdateOnfidoResult(
