@@ -238,8 +238,6 @@ class BasicInformationForm extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10.0),
         child: BlocBuilder<AccountBloc, AccountState>(
           builder: (context, state) {
-            debugPrint(
-                'Krishna state $state ${state is EnableBasicInformationNextButton}');
             return CustomTextButton(
               key: const Key('account_basic_information_next_step_button'),
               buttonText: 'Next',
