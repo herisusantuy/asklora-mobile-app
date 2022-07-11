@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:signature/signature.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
@@ -7,18 +8,19 @@ import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
+import '../../bloc/signing_broker_agremeent/bloc/signing_broker_agreement_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
 import 'financial_profile_form.dart';
 import 'basic_information_form.dart';
 import 'signin_agreement_tax_form.dart';
+import 'signing_broker_agreements_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
   const UpgradeAccountScreen({Key? key, required this.initialPage})
       : super(key: key);
 
   final int initialPage;
-
   @override
   Widget build(BuildContext context) {
     final PageController _pageViewController =
@@ -36,7 +38,11 @@ class UpgradeAccountScreen extends StatelessWidget {
       FinancialProfileForm(controller: _pageViewController),
       SigningAgreementTaxForm(
           key: const Key('signing_agreement_tax_step'),
-          controller: _pageViewController)
+          controller: _pageViewController),
+      SigningBrokerAgreementsForm(
+        key: const Key('signing_broker_agreement_step'),
+        controller: _pageViewController,
+      ),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -60,7 +66,12 @@ class UpgradeAccountScreen extends StatelessWidget {
           BlocProvider(
             create: (context) => FinancialProfileBloc(),
           ),
-          BlocProvider(create: (context) => SigningAgreementTaxBloc()),
+          BlocProvider(
+            create: (context) => SigningAgreementTaxBloc(),
+          ),
+          BlocProvider(
+            create: (context) => SigningBrokerAgreementBloc(),
+          ),
         ],
         child: SafeArea(
             child: Column(
