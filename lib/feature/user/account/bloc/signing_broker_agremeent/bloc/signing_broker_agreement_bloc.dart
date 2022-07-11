@@ -11,7 +11,7 @@ part 'signing_broker_agreement_state.dart';
 
 class SigningBrokerAgreementBloc
     extends Bloc<SigningBrokerAgreementEvent, SigningBrokerAgreementState> {
-  SigningBrokerAgreementBloc() : super(const SigningBrokerAgreementState()) {
+  SigningBrokerAgreementBloc() : super(SigningBrokerAgreementState()) {
     on<AlpacaCustomerAgreementOpened>(_onAlpacaCustomerAgreementOpened);
     on<UnderstoodAlpacaCustomAgreementChecked>(
         _onUnderstoodAlpacaCustomAgreementChecked);
@@ -53,14 +53,14 @@ class SigningBrokerAgreementBloc
       points: event.customerSignature.points,
     );
     final signature = await exportController.toPngBytes();
-    exportController.dispose();
-    emit(state.copyWith(customerSignature: signature));
+    if (signature != null) {
+      emit(state.copyWith(customerSignature: signature, isSignatureDrew: true));
+    }
   }
 
   _onCustomerSignatureReset(
       CustomerSignatureReset event, Emitter<SigningBrokerAgreementState> emit) {
-    print('reset triggered');
-    state.customerSignature!.clear();
-    emit(state.copyWith(customerSignature: null));
+    state.customerSignature = null;
+    emit(state.copyWith(customerSignature: null, isSignatureDrew: false));
   }
 }

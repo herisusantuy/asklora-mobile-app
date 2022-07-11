@@ -8,14 +8,13 @@ import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../bloc/signing_broker_agremeent/bloc/signing_broker_agreement_bloc.dart';
+import 'widgets/signature_drawer.dart';
 
 class SigningBrokerAgreementsForm extends StatelessWidget {
   final PageController controller;
-  // final SignatureController signatureController;
   SigningBrokerAgreementsForm({
     Key? key,
     required this.controller,
-    // required this.signatureController,
   }) : super(key: key);
 
   final SignatureController _signatureController = SignatureController();
@@ -49,8 +48,6 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
             previous.isAlpacaCustomerAgreementOpened !=
             current.isAlpacaCustomerAgreementOpened,
         builder: (context, state) {
-          print(
-              'alpaca customer agreement opened : ${state.isAlpacaCustomerAgreementOpened}');
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: CustomTextButton(
@@ -72,8 +69,6 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
             previous.isUnderstoodAlpacaCustomAgreementChecked !=
                 current.isUnderstoodAlpacaCustomAgreementChecked,
         builder: (context, state) {
-          print(
-              'understood : ${state.isUnderstoodAlpacaCustomAgreementChecked}');
           return CustomCheckbox(
             padding: const EdgeInsets.only(top: 10),
             text:
@@ -94,7 +89,6 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
             previous.isSigningAgreementChecked !=
                 current.isSigningAgreementChecked,
         builder: (context, state) {
-          print('understand : ${state.isSigningAgreementChecked}');
           return CustomCheckbox(
             padding: const EdgeInsets.only(top: 10),
             text:
@@ -111,60 +105,32 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
   Widget _customerSignature() =>
       BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         builder: (context, state) {
-          print('rebuild customer signature');
-          print('state signature : ${state.customerSignature}');
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const CustomText('Customer Signature: '),
-                if (state.customerSignature == null)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Signature(
-                          controller: _signatureController,
-                          height: 200,
-                          backgroundColor: Colors.grey[300]!,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: CustomTextButton(
-                                  buttonText: 'Accept',
-                                  onClick: () => context
-                                      .read<SigningBrokerAgreementBloc>()
-                                      .add(CustomerSignatureDrew(
-                                          _signatureController)))),
-                          Expanded(
-                              child: CustomTextButton(
-                                  buttonText: 'Reset',
-                                  onClick: () => _signatureController.clear())),
-                        ],
-                      )
-                    ],
-                  )
+                if (!state.isSignatureDrew)
+                  SignatureDrawer(
+                      signatureController: _signatureController,
+                      onSubmit: () => context
+                          .read<SigningBrokerAgreementBloc>()
+                          .add(CustomerSignatureDrew(_signatureController)),
+                      onReset: () => _signatureController.clear())
                 else
                   Column(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.memory(
-                          state.customerSignature!,
-                          height: 200,
-                        ),
-                      ),
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.memory(state.customerSignature!,
+                              height: 200)),
                       CustomTextButton(
                           buttonText: 'Reset Signature',
                           onClick: () {
-                            print('reset');
+                            _signatureController.clear();
                             context.read<SigningBrokerAgreementBloc>().add(
                                 CustomerSignatureReset(_signatureController));
-                            //_signatureController.clear();
                           })
                     ],
                   ),

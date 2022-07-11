@@ -4,12 +4,14 @@ class SigningBrokerAgreementState extends Equatable {
   final bool isAlpacaCustomerAgreementOpened;
   final bool isUnderstoodAlpacaCustomAgreementChecked;
   final bool isSigningAgreementChecked;
-  final Uint8List? customerSignature;
+  final bool isSignatureDrew;
+  var customerSignature;
 
-  const SigningBrokerAgreementState({
+  SigningBrokerAgreementState({
     this.isAlpacaCustomerAgreementOpened = false,
     this.isUnderstoodAlpacaCustomAgreementChecked = false,
     this.isSigningAgreementChecked = false,
+    this.isSignatureDrew = false,
     this.customerSignature,
   });
 
@@ -18,6 +20,7 @@ class SigningBrokerAgreementState extends Equatable {
         isAlpacaCustomerAgreementOpened,
         isUnderstoodAlpacaCustomAgreementChecked,
         isSigningAgreementChecked,
+        isSignatureDrew,
         customerSignature
       ];
 
@@ -25,6 +28,7 @@ class SigningBrokerAgreementState extends Equatable {
     bool? isAlpacaCustomerAgreementOpened,
     bool? isUnderstoodAlpacaCustomAgreementChecked,
     bool? isSigningAgreementChecked,
+    bool? isSignatureDrew,
     Uint8List? customerSignature,
   }) {
     return SigningBrokerAgreementState(
@@ -35,6 +39,7 @@ class SigningBrokerAgreementState extends Equatable {
               this.isUnderstoodAlpacaCustomAgreementChecked,
       isSigningAgreementChecked:
           isSigningAgreementChecked ?? this.isSigningAgreementChecked,
+      isSignatureDrew: isSignatureDrew ?? this.isSignatureDrew,
       customerSignature: customerSignature ?? this.customerSignature,
     );
   }
