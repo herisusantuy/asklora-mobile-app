@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
+import '../../bloc/account_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 
 class FinancialProfileForm extends StatelessWidget {
@@ -15,22 +16,52 @@ class FinancialProfileForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-            child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _annualIncomeDropdown(),
-              _investibleLiquidAssetsDropdown(),
-              _fundingSourceDropdown(),
-              _employmentStatusDropdown(),
-            ],
-          ),
-        )),
-        _nextButton()
-      ],
+    return BlocListener<FinancialProfileBloc, FinancialProfileState>(
+      listener: (context, state) {
+        if (state.annualHouseholdIncome.isNotEmpty &&
+            state.investibleLiquidAssets.isNotEmpty) {
+          if (state.employmentStatus == EmploymentStatus.employed) {
+            if (state.occupation != 'Other') {
+              if (state.employer.isNotEmpty &&
+                  state.employerAddress.isNotEmpty) {
+                context.read<AccountBloc>().add(const AccountEnableNextButton(
+                    currentStepIndex: 2, status: true));
+              } else {
+                context.read<AccountBloc>().add(const AccountEnableNextButton(
+                    currentStepIndex: 2, status: false));
+              }
+            } else {
+              if (state.otherOccupation.isNotEmpty) {
+                context.read<AccountBloc>().add(const AccountEnableNextButton(
+                    currentStepIndex: 2, status: true));
+              } else {
+                context.read<AccountBloc>().add(const AccountEnableNextButton(
+                    currentStepIndex: 2, status: false));
+              }
+            }
+          } else {
+            context.read<AccountBloc>().add(const AccountEnableNextButton(
+                currentStepIndex: 2, status: true));
+          }
+        }
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _annualIncomeDropdown(),
+                _investibleLiquidAssetsDropdown(),
+                _fundingSourceDropdown(),
+                _employmentStatusDropdown(),
+              ],
+            ),
+          )),
+          _nextButton()
+        ],
+      ),
     );
   }
 
@@ -131,8 +162,8 @@ class FinancialProfileForm extends StatelessWidget {
               Column(
                 children: [
                   _occupationDropdown(),
-                  _employerInput(),
-                  _employerAddressInput()
+                  _employerInput(context),
+                  _employerAddressInput(context)
                 ],
               )
           ],
@@ -169,98 +200,65 @@ class FinancialProfileForm extends StatelessWidget {
                   .read<FinancialProfileBloc>()
                   .add(FinancialProfileOccupationChanged(value!)),
             ),
-            if (state.occupation == 'Other' ||
-                !items.contains(state.occupation))
-              _occupationInput(),
+            if (state.occupation == 'Other') _otherOccupationInput(context),
           ],
         );
       },
     );
   }
 
-  Widget _occupationInput() =>
-      BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-        buildWhen: (previous, current) =>
-            previous.occupation != current.occupation,
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: CustomTextInput(
-              key: const Key('account_occupation_input'),
-              labelText: '',
-              onChanged: (value) => context
-                  .read<FinancialProfileBloc>()
-                  .add(FinancialProfileOccupationChanged(value)),
-              hintText: 'Other',
-            ),
-          );
-        },
+  Widget _otherOccupationInput(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: CustomTextInput(
+          key: const Key('account_other_occupation_input'),
+          labelText: '',
+          onChanged: (value) => context
+              .read<FinancialProfileBloc>()
+              .add(FinancialProfileOtherOccupationChanged(value)),
+          hintText: 'Other',
+        ),
       );
-  Widget _employerInput() =>
-      BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-        buildWhen: (previous, current) => previous.employer != current.employer,
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: CustomTextInput(
-                key: const Key('account_employer_input'),
-                labelText: 'Employer',
-                onChanged: (value) => context
-                    .read<FinancialProfileBloc>()
-                    .add(FinancialProfileEmployerChanged(value)),
-                hintText: 'Employer'),
-          );
-        },
+  Widget _employerInput(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: CustomTextInput(
+            key: const Key('account_employer_input'),
+            labelText: 'Employer',
+            onChanged: (value) => context
+                .read<FinancialProfileBloc>()
+                .add(FinancialProfileEmployerChanged(value)),
+            hintText: 'Employer'),
       );
-  Widget _employerAddressInput() =>
-      BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-        buildWhen: (previous, current) =>
-            previous.employerAddress != current.employerAddress,
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: CustomTextInput(
-              key: const Key('account_employer_address_input'),
-              labelText: 'Employer Address',
-              onChanged: (value) => context
-                  .read<FinancialProfileBloc>()
-                  .add(FinancialProfileEmployerAddressChanged(value)),
-              hintText: 'Employer Address',
-            ),
-          );
-        },
+  Widget _employerAddressInput(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: CustomTextInput(
+          key: const Key('account_employer_address_input'),
+          labelText: 'Employer Address',
+          onChanged: (value) => context
+              .read<FinancialProfileBloc>()
+              .add(FinancialProfileEmployerAddressChanged(value)),
+          hintText: 'Employer Address',
+        ),
       );
 
   Widget _nextButton() {
-    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
+    return BlocBuilder<AccountBloc, AccountState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextButton(
-              disable: _disabledNextButton(state),
+              disable: !state.isFinancialProfileCompleted,
               borderRadius: 30,
               buttonText: 'Next',
-              onClick: () => controller.nextPage(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.ease)),
+              onClick: () {
+                context
+                    .read<AccountBloc>()
+                    .add(const AccountCurrentStepChanged('next'));
+                controller.nextPage(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.ease);
+              }),
         );
       },
     );
-  }
-
-  bool _disabledNextButton(FinancialProfileState state) {
-    if (state.annualHouseholdIncome.isEmpty ||
-        state.investibleLiquidAssets.isEmpty ||
-        state.fundingSource == FundingSource.unknown ||
-        state.employmentStatus == EmploymentStatus.unknown ||
-        state.employmentStatus == EmploymentStatus.employed) {
-      if (state.occupation.isEmpty ||
-          state.employer.isEmpty ||
-          state.employerAddress.isEmpty ||
-          state.occupation == 'Other') {
-        return true;
-      }
-    }
-    return false;
   }
 }
