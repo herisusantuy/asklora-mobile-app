@@ -21,23 +21,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<UpgradeAccount>(_onUpgradeAccount);
     on<AccountCurrentStepChanged>(_onAccountCurrentStepIndexChange);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
-    on<AccountQuestion1ofAffiliationChanged>(
-        _onAccountQuestion1ofAffiliationChanged);
-    on<AccountQuestion2ofAffiliationChanged>(
-        _onAccountQuestion2ofAffiliationChanged);
-    on<AccountQuestion3ofAffiliationChanged>(
-        _onAccountQuestion3ofAffiliationChanged);
-    on<AccountQuestion4ofAffiliationChanged>(
-        _onAccountQuestion4ofAffiliationChanged);
-    on<AccountQuestion5ofAffiliationChanged>(
-        _onAccountQuestion5ofAffiliationChanged);
-    on<AccountNameOfAffiliatedPersonChanged>(
-        _onAccountNameOfAffiliatedPersonChanged);
-    on<AccountQuestion6ofAffiliationChanged>(
-        _onAccountQuestion6ofAffiliationChanged);
-    on<AccountNameOfJointAccountChanged>(_onAccountNameOfJointAccountChanged);
-    on<AccountQuestion7ofAffiliationChanged>(
-        _onAccountQuestion7ofAffiliationChanged);
   }
 
   final AccountRepository _accountRepository;
@@ -139,50 +122,5 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           status: GetAccountStatus.failure,
           responseMessage: 'Could not update the Onfido result!'));
     }
-  }
-
-  _onAccountQuestion1ofAffiliationChanged(
-      AccountQuestion1ofAffiliationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isAffiliated: event.isAffiliated));
-  }
-
-  _onAccountQuestion2ofAffiliationChanged(
-      AccountQuestion2ofAffiliationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isSeniorExecutive: event.isSeniorExecutive));
-  }
-
-  _onAccountQuestion3ofAffiliationChanged(
-      AccountQuestion3ofAffiliationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isSeniorPolitical: event.isSeniorPolitical));
-  }
-
-  _onAccountQuestion4ofAffiliationChanged(
-      AccountQuestion4ofAffiliationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isFamilyMember: event.isFamilyMember));
-  }
-
-  _onAccountQuestion5ofAffiliationChanged(
-      AccountQuestion5ofAffiliationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isAssociates: event.isAssociates));
-  }
-
-  _onAccountNameOfAffiliatedPersonChanged(
-      AccountNameOfAffiliatedPersonChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(nameOfAffiliatedPerson: event.nameOfAffiliatedPerson));
-  }
-
-  _onAccountQuestion6ofAffiliationChanged(
-      AccountQuestion6ofAffiliationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isOwner: event.isOwner));
-  }
-
-  _onAccountNameOfJointAccountChanged(
-      AccountNameOfJointAccountChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(nameOfJointAccount: event.nameOfJointAccount));
-  }
-
-  _onAccountQuestion7ofAffiliationChanged(
-      AccountQuestion7ofAffiliationChanged event, Emitter<AccountState> emit) {
-    emit(state.copyWith(isEmployee: event.isEmployee));
   }
 }
