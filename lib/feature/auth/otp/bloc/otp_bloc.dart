@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/domain/asklora/asklora_api_client.dart';
+import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../../core/domain/otp/verify_otp_request.dart';
 import '../repository/otp_repository.dart';
 
-part 'otp_state.dart';
-
 part 'otp_event.dart';
+
+part 'otp_state.dart';
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final OtpRepository _otpRepository;
