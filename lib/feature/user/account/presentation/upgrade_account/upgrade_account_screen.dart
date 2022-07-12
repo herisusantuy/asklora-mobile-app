@@ -108,15 +108,7 @@ class UpgradeAccountScreen extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 10),
-                  child: CustomText(
-                    state.currentStepIndex == 0
-                        ? 'Basic Information'
-                        : state.currentStepIndex == 1
-                            ? 'Address Proof'
-                            : state.currentStepIndex == 2
-                                ? 'Employment, Financial Profile'
-                                : '',
-                  ),
+                  child: CustomText(state.currentStepName),
                 )
               ],
             );
