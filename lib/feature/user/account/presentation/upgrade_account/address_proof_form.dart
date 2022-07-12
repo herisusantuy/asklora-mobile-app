@@ -39,7 +39,7 @@ class AddressProofForm extends StatelessWidget {
               ),
             ),
           ),
-          // _nextButton(),
+          _nextButton(),
         ],
       ),
     );
@@ -69,7 +69,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-              key: const Key('address_proof_residential_address_input'),
+              key: const Key('account_residential_address_input'),
               labelText: 'Residential Address',
               hintText: 'Enter your Residential Address',
               onChanged: (residentialAddress) => context
@@ -86,7 +86,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-                key: const Key('address_proof_city_input'),
+                key: const Key('account_city_input'),
                 labelText: 'City',
                 onChanged: (city) => context
                     .read<AddressProofBloc>()
@@ -102,7 +102,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-              key: const Key('address_proof_country_input'),
+              key: const Key('account_country_input'),
               labelText: 'Country',
               hintText: 'Enter your Country',
               onChanged: (country) => context
@@ -120,7 +120,7 @@ class AddressProofForm extends StatelessWidget {
           return Column(
             children: [
               QuestionWidget(
-                key: const Key('address_proof_is_same_mailing_address_select'),
+                key: const Key('account_is_same_mailing_address_select'),
                 padding: const EdgeInsets.only(top: 10),
                 questionText:
                     'My mailing address and residential address is the same',
@@ -161,7 +161,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: CustomTextInput(
-                key: const Key('address_proof_mailing_unit_number_input'),
+                key: const Key('account_mailing_unit_number_input'),
                 labelText: 'Unit/Apartment No.',
                 onChanged: (mailUnitNumber) => context
                     .read<AddressProofBloc>()
@@ -178,8 +178,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-                key: const Key(
-                    'address_proof_mailing_residential_address_input'),
+                key: const Key('account_mailing_residential_address_input'),
                 labelText: 'Residential Address',
                 onChanged: (mailResidentialAddress) => context
                     .read<AddressProofBloc>()
@@ -196,7 +195,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
-                key: const Key('address_proof_mailing_city_input'),
+                key: const Key('account_mailing_city_input'),
                 labelText: 'City',
                 onChanged: (mailCity) => context
                     .read<AddressProofBloc>()
@@ -213,7 +212,7 @@ class AddressProofForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 20),
             child: CustomTextInput(
-                key: const Key('address_proof_mailing_country_input'),
+                key: const Key('account_mailing_country_input'),
                 labelText: 'Country',
                 onChanged: (mailCountry) => context
                     .read<AddressProofBloc>()
@@ -243,7 +242,7 @@ class AddressProofForm extends StatelessWidget {
           buildWhen: (previous, current) => false,
           builder: (context, state) {
             return CustomTextButton(
-                key: const Key('address_proof_next_step_button'),
+                key: const Key('account_address_proof_next_step_button'),
                 // disable: _validateAddressProofStep(state),
                 buttonText: 'Next',
                 borderRadius: 30,
