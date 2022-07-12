@@ -167,8 +167,6 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             previous.isAssociates != current.isAssociates ||
             current.isNameOfAffiliatedPersonSubmitted == true,
         builder: (context, state) {
-          print('question 5 : ${state.isAssociates}');
-          print('name affiliated : ${state.nameOfAffiliatedPerson}');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -222,7 +220,6 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             previous.isOwner != current.isOwner ||
             previous.nameOfJointAccount != current.nameOfJointAccount,
         builder: (context, state) {
-          print('question 6 : ${state.nameOfJointAccount}');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -280,7 +277,6 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isEmployee != current.isEmployee,
         builder: (context, state) {
-          print('question 7 : ${state.isEmployee}');
           return QuestionWidget(
             key: const Key('disclosure_affiliation_question_7'),
             questionText:
