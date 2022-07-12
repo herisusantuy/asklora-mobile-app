@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/presentation/custom_text.dart';
-
 class KycScreen extends StatelessWidget {
   static const String route = '/kyc';
 
@@ -9,13 +7,7 @@ class KycScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('KYC'),
-        elevation: 0,
-      ),
-      body: const Center(child: CustomText('KYC Screen')),
-    );
+    return Container();
   }
 
   static void open(BuildContext context) =>

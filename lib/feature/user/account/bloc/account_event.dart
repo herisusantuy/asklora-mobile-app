@@ -10,12 +10,23 @@ abstract class AccountEvent extends Equatable {
 class GetAccount extends AccountEvent {}
 
 class UpgradeAccount extends AccountEvent {
-  final String email;
+  final UpgradeAccountRequest? upgradeAccountRequest;
 
-  const UpgradeAccount(this.email);
+  const UpgradeAccount(this.upgradeAccountRequest);
 }
 
 class GetSdkToken extends AccountEvent {}
+
+class AccountCurrentStepChanged extends AccountEvent {
+  final String type;
+
+  const AccountCurrentStepChanged(
+    this.type,
+  ) : super();
+
+  @override
+  List<Object> get props => [type];
+}
 
 class UpdateOnfidoResult extends AccountEvent {
   final String outcome;

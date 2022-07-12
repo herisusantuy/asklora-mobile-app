@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../../../../core/domain/asklora/asklora_api_client.dart';
+import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/endpoints.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import 'upgrade_account/upgrade_account_request.dart';
@@ -14,23 +14,19 @@ class AccountApiClient {
 
   AccountApiClient._();
 
-  Future<Response> getAccount() async {
-    var response = await AskloraApiClient().dio.get(endpointGetAccount);
-    return response;
-  }
+  Future<Response> getAccount() async =>
+      await AskloraApiClient().get(endpoint: endpointGetAccount);
 
-  Future<Response> upgradeAccount(UpgradeAccountRequest request) async {
-    var response = await AskloraApiClient()
-        .dio
-        .post(endpointUpgradeAccount, data: jsonEncode(request.toJson()));
-    return response;
-  }
+  Future<Response> upgradeAccount(UpgradeAccountRequest request) async =>
+      await AskloraApiClient().post(
+          endpoint: endpointUpgradeAccount,
+          payload: jsonEncode(request.toJson()));
 
   Future<Response> getOnfidoToken() async =>
-      await AskloraApiClient().dio.get(endpointGetOnfidoToken);
+      await AskloraApiClient().get(endpoint: endpointGetOnfidoToken);
 
   Future<Response> updateKycResult(OnfidoResultRequest request) async =>
-      await AskloraApiClient()
-          .dio
-          .patch(endpointOnfidoOutcome, data: jsonEncode(request.toJson()));
+      await AskloraApiClient().patch(
+          endpoint: endpointOnfidoOutcome,
+          payload: jsonEncode(request.toJson()));
 }

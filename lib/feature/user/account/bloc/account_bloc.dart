@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
-import '../domain/upgrade_account/mock_data.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
 
@@ -17,8 +17,9 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       : _accountRepository = getAccountRepository,
         super(const AccountState()) {
     on<GetAccount>(_onGetAccount);
-    on<UpgradeAccount>(_onUpgradeAccount);
     on<GetSdkToken>(_onGetOnfidoSdkToken);
+    on<UpgradeAccount>(_onUpgradeAccount);
+    on<AccountCurrentStepChanged>(_onAccountCurrentStepIndexChange);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
   }
 
@@ -43,15 +44,17 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
+    var email = await SecureStorage().readSecureData('email');
     try {
       emit(state.copyWith(status: GetAccountStatus.upgradingAccount));
 
-      var request = UpgradeAccountRequest.fromJson(upgradeUserMockReq);
+      var request = state.upgradeAccountRequest;
 
       // Replace the mock email with real email in mock request
-      request.contact?.emailAddress = event.email;
+      // Set contact object
+      request?.contact?.emailAddress = email;
 
-      var response = await _accountRepository.upgradeAccount(request);
+      var response = await _accountRepository.upgradeAccount(request!);
 
       emit(
         state.copyWith(
@@ -78,6 +81,28 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           status: GetAccountStatus.failure,
           responseMessage: 'Could not fetch the token ð !'));
     }
+  }
+
+  _onAccountCurrentStepIndexChange(
+      AccountCurrentStepChanged event, Emitter<AccountState> emit) {
+    int nextStepIndex = state.currentStepIndex;
+    if (event.type == 'back') {
+      if (state.currentStepIndex - 1 < 0) {
+        nextStepIndex = 0;
+      } else {
+        nextStepIndex--;
+      }
+    }
+
+    if (event.type != 'back') {
+      if (state.currentStepIndex + 1 == 2) {
+        nextStepIndex = 2;
+      } else {
+        nextStepIndex++;
+      }
+    }
+
+    emit(state.copyWith(currentStepIndex: nextStepIndex));
   }
 
   _onUpdateOnfidoResult(

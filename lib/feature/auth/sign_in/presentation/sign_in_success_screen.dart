@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
 
-import '../../../../core/domain/repository/token_repository.dart';
+import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../home_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
+import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../../user/account/repository/account_repository.dart';
 import '../../../user/kyc/domain/onfido_result_request.dart';
 import '../../sign_out/bloc/sign_out_bloc.dart';
@@ -100,7 +101,7 @@ class SignInSuccessScreen extends StatelessWidget {
                   children: [
                     _getAccountButton(),
                     _padding(),
-                    _upgradeUserAccount(),
+                    _upgradeAccountScreen(context),
                     _padding(),
                     _getOnfidoToken(),
                   ],
@@ -132,6 +133,11 @@ class SignInSuccessScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _upgradeAccountScreen(BuildContext context) => CustomTextButton(
+        buttonText: 'Upgrade Account Screen',
+        onClick: () => UpgradeAccountScreen.open(context),
+      );
 
   Widget _getAccountButton() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
@@ -166,8 +172,8 @@ class SignInSuccessScreen extends StatelessWidget {
             isLoading: state.status == GetAccountStatus.upgradingAccount,
             disable: state.status == GetAccountStatus.upgradingAccount,
             onClick: () async {
-              await SecureStorage().readSecureData('email').then((email) =>
-                  context.read<AccountBloc>().add(UpgradeAccount(email ?? '')));
+              var email = await SecureStorage().readSecureData('email');
+              // context.read<AccountBloc>().add(UpgradeAccount(email ?? ''));
             },
             borderRadius: 5,
           );
