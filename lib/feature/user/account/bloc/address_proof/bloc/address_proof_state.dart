@@ -80,4 +80,25 @@ class AddressProofState extends Equatable {
       mailCountry,
     ];
   }
+
+  bool enableNextButton() {
+    if (unitNumber.isNotEmpty &&
+        residentialAddress.isNotEmpty &&
+        city.isNotEmpty &&
+        country.isNotEmpty) {
+      if (isSameMailingAddress == true) {
+        return true;
+      } else {
+        if (mailUnitNumber.isNotEmpty &&
+            mailResidentialAddress.isNotEmpty &&
+            mailCity.isNotEmpty &&
+            mailCountry.isNotEmpty) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+    return false;
+  }
 }

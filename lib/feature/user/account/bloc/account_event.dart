@@ -17,6 +17,17 @@ class UpgradeAccount extends AccountEvent {
 
 class GetSdkToken extends AccountEvent {}
 
+class AccountEnableNextButton extends AccountEvent {
+  final int currentStepIndex;
+  final bool status;
+  const AccountEnableNextButton(
+      {required this.currentStepIndex, required this.status})
+      : super();
+
+  @override
+  List<Object> get props => [currentStepIndex];
+}
+
 class AccountCurrentStepChanged extends AccountEvent {
   final String type;
 
