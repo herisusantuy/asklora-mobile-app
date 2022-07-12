@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
+import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 
 class TrustedContactForm extends StatelessWidget {
   final PageController controller;
@@ -17,14 +18,16 @@ class TrustedContactForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _firstNameInput(),
-              _lastNameInput(),
-              _emailInput(),
-              _phoneNumberInput(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _firstNameInput(),
+                _lastNameInput(),
+                _emailInput(),
+                _phoneNumberInput(),
+              ],
+            ),
           ),
         ),
         _nextButton()
@@ -32,42 +35,101 @@ class TrustedContactForm extends StatelessWidget {
     );
   }
 
-  Widget _firstNameInput() => Padding(
-        padding: const EdgeInsets.only(top: 20.0),
-        child: CustomTextInput(
-          labelText: 'First Name',
-          onChanged: (value) => value,
-          hintText: 'Enter First Name',
-        ),
+  Widget _firstNameInput() =>
+      BlocBuilder<TrustedContactBloc, TrustedContactState>(
+        buildWhen: (previous, current) =>
+            previous.firstName != current.firstName,
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: CustomTextInput(
+              key: const Key('trusted_contact_first_name_input'),
+              labelText: 'First Name',
+              hintText: 'Enter First Name',
+              errorText: state.firstNameErrorText,
+              onChanged: (value) => context
+                  .read<TrustedContactBloc>()
+                  .add(FirstNameChanged(value)),
+            ),
+          );
+        },
       );
-  Widget _lastNameInput() => Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: CustomTextInput(
-          labelText: 'Last Name',
-          onChanged: (value) => value,
-          hintText: 'Enter Last Name',
-        ),
+  Widget _lastNameInput() =>
+      BlocBuilder<TrustedContactBloc, TrustedContactState>(
+        buildWhen: (previous, current) => previous.lastName != current.lastName,
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: CustomTextInput(
+              key: const Key('trusted_contact_last_name_input'),
+              labelText: 'Last Name',
+              errorText: state.lastNameErrorText,
+              hintText: 'Enter Last Name',
+              onChanged: (value) => context
+                  .read<TrustedContactBloc>()
+                  .add(LastNameChanged(value)),
+            ),
+          );
+        },
       );
-  Widget _emailInput() => Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: CustomTextInput(
-          labelText: 'Email Address',
-          onChanged: (value) => value,
-          hintText: 'Enter Email Address',
-        ),
+  Widget _emailInput() => BlocBuilder<TrustedContactBloc, TrustedContactState>(
+        buildWhen: (previous, current) =>
+            previous.emailAddress != current.emailAddress,
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: CustomTextInput(
+              key: const Key('trusted_contact_email_address_input'),
+              labelText: 'Email Address',
+              hintText: 'Enter Email Address',
+              errorText: state.emailErrorText,
+              textInputType: TextInputType.emailAddress,
+              onChanged: (value) => context
+                  .read<TrustedContactBloc>()
+                  .add(EmailAddressChanged(value)),
+            ),
+          );
+        },
       );
-  Widget _phoneNumberInput() => Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: CustomTextInput(
-          labelText: 'Phone Number',
-          onChanged: (value) => value,
-          hintText: 'Enter Phone Number',
-        ),
+  Widget _phoneNumberInput() =>
+      BlocBuilder<TrustedContactBloc, TrustedContactState>(
+        buildWhen: (previous, current) =>
+            previous.phoneNumber != current.phoneNumber,
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: CustomTextInput(
+              key: const Key('trusted_contact_phone_number_input'),
+              labelText: 'Phone Number',
+              hintText: 'Enter Phone Number',
+              errorText: state.phoneNumberErrorText,
+              textInputType: TextInputType.number,
+              onChanged: (value) => context
+                  .read<TrustedContactBloc>()
+                  .add(PhoneNumberChanged(value)),
+            ),
+          );
+        },
       );
 
-  Widget _nextButton() => CustomTextButton(
-        borderRadius: 30,
-        buttonText: 'Next',
-        onClick: () {},
+  Widget _nextButton() => BlocBuilder<TrustedContactBloc, TrustedContactState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+            child: CustomTextButton(
+              borderRadius: 30,
+              buttonText: 'Next',
+              disable: state.disableNextButton(),
+              onClick: () {
+                controller.nextPage(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.ease);
+                context
+                    .read<TrustedContactBloc>()
+                    .add(const TrustedContactSubmitted());
+              },
+            ),
+          );
+        },
       );
 }
