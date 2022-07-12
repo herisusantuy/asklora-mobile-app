@@ -19,7 +19,6 @@ class AddressProofForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController _scrollController = ScrollController();
     return BlocListener<AddressProofBloc, AddressProofState>(
       listener: (context, state) {
         if (state.unitNumber.isNotEmpty &&

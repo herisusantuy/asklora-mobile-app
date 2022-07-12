@@ -93,9 +93,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       } else {
         nextStepIndex--;
       }
-    }
-
-    if (event.type != 'back') {
+    } else {
       if (state.currentStepIndex + 1 == 2) {
         nextStepIndex = 2;
       } else {
@@ -105,23 +103,36 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
     emit(state.copyWith(
         currentStepIndex: nextStepIndex,
-        currentStepName: nextStepIndex == 0
-            ? 'Basic Information'
-            : nextStepIndex == 1
-                ? 'Address Proof'
-                : nextStepIndex == 2
-                    ? 'Employment, Financial Profile'
-                    : ''));
+        currentStepName: _getStepName(nextStepIndex)));
+  }
+
+  String _getStepName(int stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return 'Basic Information';
+      case 1:
+        return 'Address Proof';
+      case 2:
+        return 'Employment, Financial Profile';
+      default:
+        return '';
+    }
   }
 
   _onAccountEnableNextButton(
       AccountEnableNextButton event, Emitter<AccountState> emit) {
-    if (event.currentStepIndex == 0) {
-      emit(state.copyWith(isBasicInformationCompleted: event.status));
-    } else if (event.currentStepIndex == 1) {
-      emit(state.copyWith(isAddressProofCompleted: event.status));
-    } else if (event.currentStepIndex == 2) {
-      emit(state.copyWith(isFinancialProfileCompleted: event.status));
+    switch (event.currentStepIndex) {
+      case 0:
+        emit(state.copyWith(isBasicInformationCompleted: event.status));
+        break;
+      case 1:
+        emit(state.copyWith(isAddressProofCompleted: event.status));
+        break;
+      case 2:
+        emit(state.copyWith(isFinancialProfileCompleted: event.status));
+        break;
+      default:
+        break;
     }
   }
 
