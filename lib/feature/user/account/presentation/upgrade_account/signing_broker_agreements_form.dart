@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
@@ -148,7 +146,9 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
               borderRadius: 30,
               buttonText: 'Next',
               disable: state.disabledNextButton(),
-              onClick: () {},
+              onClick: () => controller.nextPage(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.ease),
             ),
           );
         },
