@@ -9,59 +9,38 @@ import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 
 class FinancialProfileForm extends StatelessWidget {
   final PageController controller;
+
   const FinancialProfileForm({
     Key? key,
     required this.controller,
   }) : super(key: key);
 
+  final incomeRange = const [
+    '0 to 200,000',
+    '200,001 to 400,000',
+    '400,001 to 600,000',
+    '600,000 to 800,000',
+    '800,001 to 1,000,000+',
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return BlocListener<FinancialProfileBloc, FinancialProfileState>(
-      listener: (context, state) {
-        if (state.annualHouseholdIncome.isNotEmpty &&
-            state.investibleLiquidAssets.isNotEmpty) {
-          if (state.employmentStatus == EmploymentStatus.employed) {
-            if (state.occupation != 'Other') {
-              if (state.employer.isNotEmpty &&
-                  state.employerAddress.isNotEmpty) {
-                context.read<AccountBloc>().add(const AccountEnableNextButton(
-                    currentStepIndex: 2, status: true));
-              } else {
-                context.read<AccountBloc>().add(const AccountEnableNextButton(
-                    currentStepIndex: 2, status: false));
-              }
-            } else {
-              if (state.otherOccupation.isNotEmpty) {
-                context.read<AccountBloc>().add(const AccountEnableNextButton(
-                    currentStepIndex: 2, status: true));
-              } else {
-                context.read<AccountBloc>().add(const AccountEnableNextButton(
-                    currentStepIndex: 2, status: false));
-              }
-            }
-          } else {
-            context.read<AccountBloc>().add(const AccountEnableNextButton(
-                currentStepIndex: 2, status: true));
-          }
-        }
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-              child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _annualIncomeDropdown(),
-                _investibleLiquidAssetsDropdown(),
-                _fundingSourceDropdown(),
-                _employmentStatusDropdown(),
-              ],
-            ),
-          )),
-          _nextButton()
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _annualIncomeDropdown(),
+              _investibleLiquidAssetsDropdown(),
+              _fundingSourceDropdown(),
+              _employmentStatusDropdown(),
+            ],
+          ),
+        )),
+        _nextButton()
+      ],
     );
   }
 
@@ -76,13 +55,7 @@ class FinancialProfileForm extends StatelessWidget {
             label: 'Annual Household Income',
             hintName: '-',
             value: state.annualHouseholdIncome,
-            itemsList: const [
-              '0 to 200.000',
-              '200.001 to 400.000',
-              '400.001 to 600.000',
-              '600.000 to 800.000',
-              '800.001 to 1.000.000+',
-            ],
+            itemsList: incomeRange,
             onChanged: (value) => context
                 .read<FinancialProfileBloc>()
                 .add(FinancialProfileAnnualHouseholdIncomeChanged(value!)));
@@ -101,13 +74,7 @@ class FinancialProfileForm extends StatelessWidget {
             label: 'Investible Liquid Assets',
             hintName: '-',
             value: state.investibleLiquidAssets,
-            itemsList: const [
-              '0 to 200.000',
-              '200.001 to 400.000',
-              '400.001 to 600.000',
-              '600.000 to 800.000',
-              '800.001 to 1.000.000+',
-            ],
+            itemsList: incomeRange,
             onChanged: (value) => context
                 .read<FinancialProfileBloc>()
                 .add(FinancialProfileInvestibleLiquidAssetChanged(value!)));
@@ -218,6 +185,7 @@ class FinancialProfileForm extends StatelessWidget {
           hintText: 'Other',
         ),
       );
+
   Widget _employerInput(BuildContext context) => Padding(
         padding: const EdgeInsets.only(top: 20),
         child: CustomTextInput(
@@ -228,6 +196,7 @@ class FinancialProfileForm extends StatelessWidget {
                 .add(FinancialProfileEmployerChanged(value)),
             hintText: 'Employer'),
       );
+
   Widget _employerAddressInput(BuildContext context) => Padding(
         padding: const EdgeInsets.only(top: 10),
         child: CustomTextInput(
@@ -241,12 +210,14 @@ class FinancialProfileForm extends StatelessWidget {
       );
 
   Widget _nextButton() {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
+      buildWhen: (previous, current) =>
+          previous.enableNextButton() != current.enableNextButton(),
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextButton(
-              disable: !state.isFinancialProfileCompleted,
+              disable: !state.enableNextButton(),
               borderRadius: 30,
               buttonText: 'Next',
               onClick: () {

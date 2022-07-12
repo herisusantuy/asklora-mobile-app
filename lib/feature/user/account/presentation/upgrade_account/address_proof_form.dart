@@ -19,50 +19,26 @@ class AddressProofForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddressProofBloc, AddressProofState>(
-      listener: (context, state) {
-        if (state.unitNumber.isNotEmpty &&
-            state.residentialAddress.isNotEmpty &&
-            state.city.isNotEmpty &&
-            state.country.isNotEmpty) {
-          if (state.isSameMailingAddress == true) {
-            context.read<AccountBloc>().add(const AccountEnableNextButton(
-                currentStepIndex: 1, status: true));
-          } else {
-            if (state.mailUnitNumber.isNotEmpty &&
-                state.mailResidentialAddress.isNotEmpty &&
-                state.mailCity.isNotEmpty &&
-                state.mailCountry.isNotEmpty) {
-              context.read<AccountBloc>().add(const AccountEnableNextButton(
-                  currentStepIndex: 1, status: true));
-            } else {
-              context.read<AccountBloc>().add(const AccountEnableNextButton(
-                  currentStepIndex: 1, status: false));
-            }
-          }
-        }
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _unitNumberInput(context),
-                  _residentialAddressInput(context),
-                  _cityInput(context),
-                  _countryInput(context),
-                  _mailAddressCheck(_scrollController),
-                ],
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _unitNumberInput(context),
+                _residentialAddressInput(context),
+                _cityInput(context),
+                _countryInput(context),
+                _mailAddressCheck(_scrollController),
+              ],
             ),
           ),
-          _nextButton(),
-        ],
-      ),
+        ),
+        _nextButton(),
+      ],
     );
   }
 
@@ -202,14 +178,13 @@ class AddressProofForm extends StatelessWidget {
 
   Widget _nextButton() => Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: BlocBuilder<AccountBloc, AccountState>(
+        child: BlocBuilder<AddressProofBloc, AddressProofState>(
           buildWhen: (previous, current) =>
-              previous.isAddressProofCompleted !=
-              current.isAddressProofCompleted,
+              previous.enableNextButton() != current.enableNextButton(),
           builder: (context, state) {
             return CustomTextButton(
                 key: const Key('account_address_proof_next_step_button'),
-                disable: !state.isAddressProofCompleted,
+                disable: !state.enableNextButton(),
                 buttonText: 'Next',
                 borderRadius: 30,
                 onClick: () {

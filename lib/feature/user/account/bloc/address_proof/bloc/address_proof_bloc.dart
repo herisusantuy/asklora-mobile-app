@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'address_proof_event.dart';
+
 part 'address_proof_state.dart';
 
 class AddressProofBloc extends Bloc<AddressProofEvent, AddressProofState> {

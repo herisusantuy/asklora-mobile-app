@@ -21,44 +21,28 @@ class BasicInformationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<BasicInformationBloc, BasicInformationState>(
-      listener: (context, state) {
-        if (state.firstName.isNotEmpty &&
-            state.middleName.isNotEmpty &&
-            state.lastName.isNotEmpty &&
-            state.chineseName.isNotEmpty &&
-            state.gender.isNotEmpty &&
-            state.dateOfBirth.isNotEmpty &&
-            state.countryCode.isNotEmpty &&
-            state.phoneNumber.isNotEmpty &&
-            state.countryOfCitizenship.isNotEmpty) {
-          context.read<AccountBloc>().add(
-              const AccountEnableNextButton(currentStepIndex: 0, status: true));
-        }
-      },
-      child: Column(
-        children: [
-          Expanded(
-              child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _firstNameInput(context),
-                _middleNameInput(context),
-                _lastNameInput(context),
-                _chineseNameInput(context),
-                _selectGender(context),
-                _datePicker(),
-                _countryCodeAndPhoneNumber(context),
-                _countryInput(context),
-                _optionHkResident(),
-                _usResidentCheck(),
-              ],
-            ),
-          )),
-          _nextButton()
-        ],
-      ),
+    return Column(
+      children: [
+        Expanded(
+            child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _firstNameInput(context),
+              _middleNameInput(context),
+              _lastNameInput(context),
+              _chineseNameInput(context),
+              _selectGender(context),
+              _datePicker(),
+              _countryCodeAndPhoneNumber(context),
+              _countryInput(context),
+              _optionHkResident(),
+              _usResidentCheck(),
+            ],
+          ),
+        )),
+        _nextButton()
+      ],
     );
   }
 
@@ -174,15 +158,15 @@ class BasicInformationForm extends StatelessWidget {
   Widget _optionHkResident() {
     return BlocBuilder<BasicInformationBloc, BasicInformationState>(
       buildWhen: ((previous, current) =>
-          previous.isHongkongPermanentResident !=
-          current.isHongkongPermanentResident),
+          previous.isHongKongPermanentResident !=
+          current.isHongKongPermanentResident),
       builder: (context, state) {
         return QuestionWidget(
-          key: const Key('account_is_hongkong_permanent_resident_question'),
+          key: const Key('account_is_hong_kong_permanent_resident_question'),
           padding: const EdgeInsets.only(top: 10),
           questionText: 'Hong Kong Permanent Resident',
-          options: ['Yes', 'No'],
-          selectedAnswer: state.isHongkongPermanentResident ? 'Yes' : 'No',
+          options: const ['Yes', 'No'],
+          selectedAnswer: state.isHongKongPermanentResident ? 'Yes' : 'No',
           onSelected: (value) => context.read<BasicInformationBloc>().add(
               BasicInformationIsHongKongPermanentResidentChanged(
                   value == 'Yes' ? true : false)),
@@ -212,16 +196,15 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _nextButton() => Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: BlocBuilder<AccountBloc, AccountState>(
+        child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
           buildWhen: (previous, current) =>
-              previous.isBasicInformationCompleted !=
-              current.isBasicInformationCompleted,
+              previous.enableNextButton() != current.enableNextButton(),
           builder: (context, state) {
             return CustomTextButton(
               key: const Key('account_basic_information_next_step_button'),
               buttonText: 'Next',
               borderRadius: 30,
-              disable: !state.isBasicInformationCompleted,
+              disable: !state.enableNextButton(),
               onClick: () {
                 context
                     .read<AccountBloc>()
