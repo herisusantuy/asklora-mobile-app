@@ -184,7 +184,8 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     .add(QuestionNo5Changed(value == 'Yes' ? true : false)),
               ),
               if (state.isNameOfAffiliatedPersonSubmitted &&
-                  state.isAssociates!)
+                  state.isAssociates! &&
+                  state.nameOfAffiliatedPerson.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Column(
@@ -213,12 +214,17 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 onChanged: (value) => context
                     .read<DisclosureAffiliationBloc>()
                     .add(NameOfJointAccountChanged(value)),
-                onSubmit: () => Navigator.pop(context));
+                onSubmit: () {
+                  context
+                      .read<DisclosureAffiliationBloc>()
+                      .add(const NameOfJointAccountSubmitted());
+                  Navigator.pop(context);
+                });
           }
         },
         buildWhen: (previous, current) =>
             previous.isOwner != current.isOwner ||
-            previous.nameOfJointAccount != current.nameOfJointAccount,
+            current.isNameOfJointAccountSubmitted == true,
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -236,7 +242,9 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     .read<DisclosureAffiliationBloc>()
                     .add(QuestionNo6Changed(value == 'Yes' ? true : false)),
               ),
-              if (state.nameOfJointAccount.isNotEmpty)
+              if (state.isNameOfJointAccountSubmitted &&
+                  state.nameOfJointAccount.isNotEmpty &&
+                  state.isOwner!)
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Column(

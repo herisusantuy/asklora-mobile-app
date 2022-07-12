@@ -69,6 +69,12 @@ class NameOfJointAccountChanged extends DisclosuresAffiliationEvent {
   List<Object> get props => [nameOfJointAccount];
 }
 
+class NameOfJointAccountSubmitted extends DisclosuresAffiliationEvent {
+  const NameOfJointAccountSubmitted() : super();
+  @override
+  List<Object> get props => [];
+}
+
 class QuestionNo7Changed extends DisclosuresAffiliationEvent {
   final bool isEmployee;
   const QuestionNo7Changed(this.isEmployee) : super();

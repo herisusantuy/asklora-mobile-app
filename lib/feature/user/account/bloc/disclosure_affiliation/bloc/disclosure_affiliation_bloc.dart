@@ -16,6 +16,7 @@ class DisclosureAffiliationBloc
     on<NameOfAffiliatedSubmitted>(_onNameOfAffiliatedSubmitted);
     on<QuestionNo6Changed>(_onQuestionNo6Changed);
     on<NameOfJointAccountChanged>(_onNameOfJointAccountChanged);
+    on<NameOfJointAccountSubmitted>(_onNameOfJointAccountSubmitted);
     on<QuestionNo7Changed>(_onQuestionNo7Changed);
   }
 
@@ -63,12 +64,22 @@ class DisclosureAffiliationBloc
 
   _onQuestionNo6Changed(
       QuestionNo6Changed event, Emitter<DisclosureAffiliationState> emit) {
-    emit(state.copyWith(isOwner: event.isOwner));
+    if (event.isOwner) {
+      emit(state.copyWith(isOwner: event.isOwner));
+    }
+    emit(state.copyWith(isOwner: event.isOwner, nameOfJointAccount: ''));
   }
 
   _onNameOfJointAccountChanged(NameOfJointAccountChanged event,
       Emitter<DisclosureAffiliationState> emit) {
-    emit(state.copyWith(nameOfJointAccount: event.nameOfJointAccount));
+    emit(state.copyWith(
+        nameOfJointAccount: event.nameOfJointAccount,
+        isNameOfJointAccountSubmitted: false));
+  }
+
+  _onNameOfJointAccountSubmitted(NameOfJointAccountSubmitted event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(isNameOfJointAccountSubmitted: true));
   }
 
   _onQuestionNo7Changed(
