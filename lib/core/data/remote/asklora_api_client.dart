@@ -1,21 +1,38 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../domain/token/repository/repository.dart';
+import '../../domain/token/repository/token_repository.dart';
 import '../../utils/build_configs/build_config.dart';
-import '../logging_interceptor.dart';
+import '../../utils/logging_interceptor.dart';
 
-class AlpacaApiClient {
-  final dio = createDio();
+class AskloraApiClient {
+  late Dio _dio;
 
-  AlpacaApiClient._internal();
+  AskloraApiClient._internal() {
+    _dio = _createDio();
+  }
 
-  static final _singleton = AlpacaApiClient._internal();
+  static final _singleton = AskloraApiClient._internal();
 
-  factory AlpacaApiClient() => _singleton;
+  factory AskloraApiClient() => _singleton;
 
-  static Dio createDio() {
+  Future<Response> post(
+          {required String endpoint, required String payload}) async =>
+      _singleton._dio.post(endpoint, data: payload);
+
+  Future<Response> get(
+          {required String endpoint,
+          Map<String, dynamic>? queryParameters}) async =>
+      _singleton._dio.get(endpoint, queryParameters: queryParameters);
+
+  Future<Response> patch(
+          {required String endpoint, required String payload}) async =>
+      _singleton._dio.patch(endpoint, data: payload);
+
+  Dio _createDio() {
     var dio = Dio(BaseOptions(
-        baseUrl: Environment().config.alpacaApiBaseUrl,
+        baseUrl: Environment().config.askLoraApiBaseUrl,
         followRedirects: false,
         validateStatus: (status) {
           if (status != null && status < 300) {
@@ -31,15 +48,25 @@ class AlpacaApiClient {
     if (kDebugMode) {
       dio.interceptors.add(LoggingInterceptor());
     }
-    dio.interceptors.add(AppInterceptors(dio));
+    dio.interceptors.add(AppInterceptors(TokenRepository()));
     return dio;
   }
 }
 
 class AppInterceptors extends Interceptor {
-  final Dio dio;
+  final Repository _storage;
 
-  AppInterceptors(this.dio);
+  AppInterceptors(this._storage);
+
+  @override
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    var accessToken = await _storage.getAccessToken();
+    if (accessToken != null) {
+      options.headers['Authorization'] = 'Bearer $accessToken';
+    }
+    return handler.next(options);
+  }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
