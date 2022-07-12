@@ -66,7 +66,7 @@ void main() async {
       expect(countryOfCitizenshipInput, findsOneWidget);
 
       var isHongKongPermanentResidentQuestion = find
-          .byKey(const Key('account_is_hong_kong_permanent_resident_question'));
+          .byKey(const Key('account_is_hongkong_permanent_resident_question'));
       expect(isHongKongPermanentResidentQuestion, findsOneWidget);
 
       var isUnitedStateResidentQuestion =

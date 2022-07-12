@@ -1,23 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../utils/logging_interceptor.dart';
 import '../../utils/build_configs/build_config.dart';
-import '../logging_interceptor.dart';
-import '../repository/repository.dart';
-import '../repository/token_repository.dart';
 
-class AskloraApiClient {
+class AlpacaApiClient {
   final dio = createDio();
 
-  AskloraApiClient._internal();
+  AlpacaApiClient._internal();
 
-  static final _singleton = AskloraApiClient._internal();
+  static final _singleton = AlpacaApiClient._internal();
 
-  factory AskloraApiClient() => _singleton;
+  factory AlpacaApiClient() => _singleton;
 
   static Dio createDio() {
     var dio = Dio(BaseOptions(
-        baseUrl: Environment().config.askLoraApiBaseUrl,
+        baseUrl: Environment().config.alpacaApiBaseUrl,
         followRedirects: false,
         validateStatus: (status) {
           if (status != null && status < 300) {
@@ -33,25 +31,15 @@ class AskloraApiClient {
     if (kDebugMode) {
       dio.interceptors.add(LoggingInterceptor());
     }
-    dio.interceptors.add(AppInterceptors(TokenRepository()));
+    dio.interceptors.add(AppInterceptors(dio));
     return dio;
   }
 }
 
 class AppInterceptors extends Interceptor {
-  final Repository _storage;
+  final Dio dio;
 
-  AppInterceptors(this._storage);
-
-  @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
-    var accessToken = await _storage.getAccessToken();
-    if (accessToken != null) {
-      options.headers['Authorization'] = 'Bearer $accessToken';
-    }
-    return handler.next(options);
-  }
+  AppInterceptors(this.dio);
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
