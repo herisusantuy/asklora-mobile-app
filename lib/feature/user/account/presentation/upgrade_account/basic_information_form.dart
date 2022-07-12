@@ -8,6 +8,7 @@ import '../../../../../core/presentation/custom_phone_number_input.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
+import '../../bloc/account_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
 
 class BasicInformationForm extends StatelessWidget {
@@ -22,7 +23,18 @@ class BasicInformationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<BasicInformationBloc, BasicInformationState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state.firstName.isNotEmpty &&
+            state.middleName.isNotEmpty &&
+            state.lastName.isNotEmpty &&
+            state.chineseName.isNotEmpty &&
+            state.gender.isNotEmpty &&
+            state.dateOfBirth.isNotEmpty &&
+            state.countryCode.isNotEmpty &&
+            state.phoneNumber.isNotEmpty &&
+            state.countryOfCitizenship.isNotEmpty) {
+          context.read<AccountBloc>().add(
+              const AccountEnableNextButton(currentStepIndex: 0, status: true));
+        }
       },
       child: Column(
         children: [
@@ -31,14 +43,14 @@ class BasicInformationForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _firstNameInput(),
-                _middleNameInput(),
-                _lastNameInput(),
-                _chineseNameInput(),
-                _selectGender(),
-                _datePicker(context),
-                _countryCodeAndPhoneNumber(),
-                _countryInput(),
+                _firstNameInput(context),
+                _middleNameInput(context),
+                _lastNameInput(context),
+                _chineseNameInput(context),
+                _selectGender(context),
+                _datePicker(),
+                _countryCodeAndPhoneNumber(context),
+                _countryInput(context),
                 _optionHkResident(),
                 _usResidentCheck(),
               ],
@@ -50,96 +62,70 @@ class BasicInformationForm extends StatelessWidget {
     );
   }
 
-  Widget _firstNameInput() {
-    return BlocBuilder<BasicInformationBloc, BasicInformationState>(
-      buildWhen: ((previous, current) => false),
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: CustomTextInput(
-            key: const Key('account_first_name_input'),
-            labelText: 'First Name',
-            hintText: 'Enter your first name',
-            onChanged: (value) => context
-                .read<BasicInformationBloc>()
-                .add(BasicInformationFirstNameChanged(value)),
-          ),
-        );
-      },
+  Widget _firstNameInput(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: CustomTextInput(
+        key: const Key('account_first_name_input'),
+        labelText: 'First Name',
+        hintText: 'Enter your first name',
+        onChanged: (value) => context
+            .read<BasicInformationBloc>()
+            .add(BasicInformationFirstNameChanged(value)),
+      ),
     );
   }
 
-  Widget _middleNameInput() {
-    return BlocBuilder<BasicInformationBloc, BasicInformationState>(
-      buildWhen: ((previous, current) => false),
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: CustomTextInput(
-              key: const Key('account_middle_name_input'),
-              labelText: 'Middle Name',
-              onChanged: (value) => context
-                  .read<BasicInformationBloc>()
-                  .add(BasicInformationMiddleNameChanged(value)),
-              hintText: 'Enter your Middle name'),
-        );
-      },
+  Widget _middleNameInput(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: CustomTextInput(
+          key: const Key('account_middle_name_input'),
+          labelText: 'Middle Name',
+          onChanged: (value) => context
+              .read<BasicInformationBloc>()
+              .add(BasicInformationMiddleNameChanged(value)),
+          hintText: 'Enter your Middle name'),
     );
   }
 
-  Widget _lastNameInput() {
-    return BlocBuilder<BasicInformationBloc, BasicInformationState>(
-      buildWhen: ((previous, current) => false),
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: CustomTextInput(
-              key: const Key('account_last_name_input'),
-              labelText: 'Last Name',
-              onChanged: (value) => context
-                  .read<BasicInformationBloc>()
-                  .add(BasicInformationLastNameChanged(value)),
-              hintText: 'Enter your Last name'),
-        );
-      },
+  Widget _lastNameInput(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: CustomTextInput(
+          key: const Key('account_last_name_input'),
+          labelText: 'Last Name',
+          onChanged: (value) => context
+              .read<BasicInformationBloc>()
+              .add(BasicInformationLastNameChanged(value)),
+          hintText: 'Enter your Last name'),
     );
   }
 
-  Widget _chineseNameInput() {
-    return BlocBuilder<BasicInformationBloc, BasicInformationState>(
-      buildWhen: ((previous, current) => false),
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: CustomTextInput(
-              key: const Key('account_chinese_name_input'),
-              labelText: 'Chinese Name',
-              onChanged: (value) => context
-                  .read<BasicInformationBloc>()
-                  .add(BasicInformationChineseNameChanged(value)),
-              hintText: 'Enter your Chinese name'),
-        );
-      },
+  Widget _chineseNameInput(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: CustomTextInput(
+          key: const Key('account_chinese_name_input'),
+          labelText: 'Chinese Name',
+          onChanged: (value) => context
+              .read<BasicInformationBloc>()
+              .add(BasicInformationChineseNameChanged(value)),
+          hintText: 'Enter your Chinese name'),
     );
   }
 
-  Widget _selectGender() =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
-        buildWhen: ((previous, current) => false),
-        builder: (context, state) {
-          return CustomDropdown(
-            key: const Key('account_gender_select'),
-            label: 'Gender',
-            padding: const EdgeInsets.only(top: 10),
-            itemsList: const ['Male', 'Female', 'Other'],
-            onChanged: (gender) => context
-                .read<BasicInformationBloc>()
-                .add(BasicInformationGenderChanged(gender!)),
-          );
-        },
+  Widget _selectGender(BuildContext context) => CustomDropdown(
+        key: const Key('account_gender_select'),
+        label: 'Gender',
+        padding: const EdgeInsets.only(top: 10),
+        itemsList: const ['Male', 'Female', 'Other'],
+        onChanged: (gender) => context
+            .read<BasicInformationBloc>()
+            .add(BasicInformationGenderChanged(gender!)),
       );
 
-  Widget _datePicker(context) =>
+  Widget _datePicker() =>
       BlocBuilder<BasicInformationBloc, BasicInformationState>(
         buildWhen: ((previous, current) => false),
         builder: (context, state) {
@@ -160,44 +146,36 @@ class BasicInformationForm extends StatelessWidget {
         },
       );
 
-  Widget _countryCodeAndPhoneNumber() =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
-        buildWhen: ((previous, current) => false),
-        builder: (context, state) {
-          return CustomPhoneNumberInput(
-            key: const Key('account_country_code_phone_number_input'),
-            onChangedCodeArea: (code) => context
-                .read<BasicInformationBloc>()
-                .add(BasicInformationCountryCodeChanged(code)),
-            onChangePhoneNumber: (phoneNumber) => context
-                .read<BasicInformationBloc>()
-                .add(BasicInformationPhoneNumberChanged(phoneNumber)),
-          );
-        },
+  Widget _countryCodeAndPhoneNumber(BuildContext context) =>
+      CustomPhoneNumberInput(
+        key: const Key('account_country_code_phone_number_input'),
+        onChangedCodeArea: (code) => context
+            .read<BasicInformationBloc>()
+            .add(BasicInformationCountryCodeChanged(code)),
+        onChangePhoneNumber: (phoneNumber) => context
+            .read<BasicInformationBloc>()
+            .add(BasicInformationPhoneNumberChanged(phoneNumber)),
       );
 
-  Widget _countryInput() {
+  Widget _countryInput(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
-      child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
-        buildWhen: ((previous, current) => false),
-        builder: (context, state) {
-          return CustomTextInput(
-              key: const Key('account_country_of_citizenship_input'),
-              labelText: 'Country of Citizenship',
-              onChanged: (countryOfCitizenship) => context
-                  .read<BasicInformationBloc>()
-                  .add(BasicInformationCountryOfCitizenshipChanged(
-                      countryOfCitizenship)),
-              hintText: 'Enter your Chinese name');
-        },
-      ),
+      child: CustomTextInput(
+          key: const Key('account_country_of_citizenship_input'),
+          labelText: 'Country of Citizenship',
+          onChanged: (countryOfCitizenship) => context
+              .read<BasicInformationBloc>()
+              .add(BasicInformationCountryOfCitizenshipChanged(
+                  countryOfCitizenship)),
+          hintText: 'Enter your Chinese name'),
     );
   }
 
   Widget _optionHkResident() {
     return BlocBuilder<BasicInformationBloc, BasicInformationState>(
-      buildWhen: ((previous, current) => false),
+      buildWhen: ((previous, current) =>
+          previous.isHongkongPermanentResident !=
+          current.isHongkongPermanentResident),
       builder: (context, state) {
         return QuestionWidget(
           key: const Key('account_is_hongkong_permanent_resident_question'),
@@ -215,7 +193,8 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _usResidentCheck() {
     return BlocBuilder<BasicInformationBloc, BasicInformationState>(
-      buildWhen: ((previous, current) => false),
+      buildWhen: ((previous, current) =>
+          previous.isUnitedStateResident != current.isUnitedStateResident),
       builder: (context, state) {
         return QuestionWidget(
           key: const Key('account_is_united_state_resident_question'),
@@ -231,34 +210,22 @@ class BasicInformationForm extends StatelessWidget {
     );
   }
 
-  bool _validateBasicInformationStep(BasicInformationState state) {
-    if (state.firstName.isEmpty ||
-        state.middleName.isEmpty ||
-        state.lastName.isEmpty ||
-        state.chineseName.isEmpty ||
-        state.gender.isEmpty ||
-        state.dateOfBirth.isEmpty ||
-        state.countryCode.isEmpty ||
-        state.phoneNumber.isEmpty ||
-        state.countryOfCitizenship.isEmpty) {
-      return true;
-    }
-    return false;
-  }
-
   Widget _nextButton() => Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
+        child: BlocBuilder<AccountBloc, AccountState>(
+          buildWhen: (previous, current) =>
+              previous.isBasicInformationCompleted !=
+              current.isBasicInformationCompleted,
           builder: (context, state) {
             return CustomTextButton(
               key: const Key('account_basic_information_next_step_button'),
               buttonText: 'Next',
               borderRadius: 30,
-              // disable: _validateBasicInformationStep(state),
+              disable: !state.isBasicInformationCompleted,
               onClick: () {
-                // context
-                //     .read<BasicInformationBloc>()
-                //     .add(const BasicInformationCurrentStepChanged('next'));
+                context
+                    .read<AccountBloc>()
+                    .add(const AccountCurrentStepChanged('next'));
                 controller.nextPage(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.ease);
