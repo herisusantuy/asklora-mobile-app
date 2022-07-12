@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
-import '../../bloc/account_bloc.dart';
+import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 
 class FinancialProfileForm extends StatelessWidget {
   final PageController controller;
@@ -24,7 +24,7 @@ class FinancialProfileForm extends StatelessWidget {
             children: [
               _annualIncomeDropdown(),
               _investibleLiquidAssetsDropdown(),
-              _accountFundingSourceDropdown(),
+              _fundingSourceDropdown(),
               _employmentStatusDropdown(),
             ],
           ),
@@ -35,7 +35,7 @@ class FinancialProfileForm extends StatelessWidget {
   }
 
   Widget _annualIncomeDropdown() {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.annualHouseholdIncome != current.annualHouseholdIncome,
       builder: (context, state) {
@@ -53,14 +53,14 @@ class FinancialProfileForm extends StatelessWidget {
               '800.001 to 1.000.000+',
             ],
             onChanged: (value) => context
-                .read<AccountBloc>()
-                .add(AccountAnnualIncomeChanged(value!)));
+                .read<FinancialProfileBloc>()
+                .add(FinancialProfileAnnualHouseholdIncomeChanged(value!)));
       },
     );
   }
 
   Widget _investibleLiquidAssetsDropdown() {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.investibleLiquidAssets != current.investibleLiquidAssets,
       builder: (context, state) {
@@ -78,14 +78,14 @@ class FinancialProfileForm extends StatelessWidget {
               '800.001 to 1.000.000+',
             ],
             onChanged: (value) => context
-                .read<AccountBloc>()
-                .add(AccountInvestibleLiquidAssetChanged(value!)));
+                .read<FinancialProfileBloc>()
+                .add(FinancialProfileInvestibleLiquidAssetChanged(value!)));
       },
     );
   }
 
-  Widget _accountFundingSourceDropdown() {
-    return BlocBuilder<AccountBloc, AccountState>(
+  Widget _fundingSourceDropdown() {
+    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.fundingSource != current.fundingSource,
       builder: (context, state) {
@@ -99,15 +99,15 @@ class FinancialProfileForm extends StatelessWidget {
             onChanged: (value) {
               final fundingSource = FundingSource.values.byName(value!);
               context
-                  .read<AccountBloc>()
-                  .add(AccountFundingSourceChanged(fundingSource));
+                  .read<FinancialProfileBloc>()
+                  .add(FinancialProfileFundingSourceChanged(fundingSource));
             });
       },
     );
   }
 
   Widget _employmentStatusDropdown() {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.employmentStatus != current.employmentStatus,
       builder: (context, state) {
@@ -123,9 +123,9 @@ class FinancialProfileForm extends StatelessWidget {
                 onChanged: (value) {
                   final employmentStatus =
                       EmploymentStatus.values.byName(value!);
-                  context
-                      .read<AccountBloc>()
-                      .add(AccountEmploymentStatusChanged(employmentStatus));
+                  context.read<FinancialProfileBloc>().add(
+                      FinancialProfileEmploymentStatusChanged(
+                          employmentStatus));
                 }),
             if (state.employmentStatus == EmploymentStatus.employed)
               Column(
@@ -152,7 +152,7 @@ class FinancialProfileForm extends StatelessWidget {
       'Commercial',
       'Other',
     ];
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.occupation != current.occupation,
       builder: (context, state) {
@@ -166,8 +166,8 @@ class FinancialProfileForm extends StatelessWidget {
               itemsList: items,
               value: state.occupation,
               onChanged: (value) => context
-                  .read<AccountBloc>()
-                  .add(AccountOccupationChanged(value!)),
+                  .read<FinancialProfileBloc>()
+                  .add(FinancialProfileOccupationChanged(value!)),
             ),
             if (state.occupation == 'Other' ||
                 !items.contains(state.occupation))
@@ -178,7 +178,8 @@ class FinancialProfileForm extends StatelessWidget {
     );
   }
 
-  Widget _occupationInput() => BlocBuilder<AccountBloc, AccountState>(
+  Widget _occupationInput() =>
+      BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
         buildWhen: (previous, current) =>
             previous.occupation != current.occupation,
         builder: (context, state) {
@@ -188,14 +189,15 @@ class FinancialProfileForm extends StatelessWidget {
               key: const Key('account_occupation_input'),
               labelText: '',
               onChanged: (value) => context
-                  .read<AccountBloc>()
-                  .add(AccountOccupationChanged(value)),
+                  .read<FinancialProfileBloc>()
+                  .add(FinancialProfileOccupationChanged(value)),
               hintText: 'Other',
             ),
           );
         },
       );
-  Widget _employerInput() => BlocBuilder<AccountBloc, AccountState>(
+  Widget _employerInput() =>
+      BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
         buildWhen: (previous, current) => previous.employer != current.employer,
         builder: (context, state) {
           return Padding(
@@ -204,13 +206,14 @@ class FinancialProfileForm extends StatelessWidget {
                 key: const Key('account_employer_input'),
                 labelText: 'Employer',
                 onChanged: (value) => context
-                    .read<AccountBloc>()
-                    .add(AccountEmployerChanged(value)),
+                    .read<FinancialProfileBloc>()
+                    .add(FinancialProfileEmployerChanged(value)),
                 hintText: 'Employer'),
           );
         },
       );
-  Widget _employerAddressInput() => BlocBuilder<AccountBloc, AccountState>(
+  Widget _employerAddressInput() =>
+      BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
         buildWhen: (previous, current) =>
             previous.employerAddress != current.employerAddress,
         builder: (context, state) {
@@ -220,8 +223,8 @@ class FinancialProfileForm extends StatelessWidget {
               key: const Key('account_employer_address_input'),
               labelText: 'Employer Address',
               onChanged: (value) => context
-                  .read<AccountBloc>()
-                  .add(AccountEmployerAddressChanged(value)),
+                  .read<FinancialProfileBloc>()
+                  .add(FinancialProfileEmployerAddressChanged(value)),
               hintText: 'Employer Address',
             ),
           );
@@ -229,7 +232,7 @@ class FinancialProfileForm extends StatelessWidget {
       );
 
   Widget _nextButton() {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
@@ -245,7 +248,7 @@ class FinancialProfileForm extends StatelessWidget {
     );
   }
 
-  bool _disabledNextButton(AccountState state) {
+  bool _disabledNextButton(FinancialProfileState state) {
     if (state.annualHouseholdIncome.isEmpty ||
         state.investibleLiquidAssets.isEmpty ||
         state.fundingSource == FundingSource.unknown ||
