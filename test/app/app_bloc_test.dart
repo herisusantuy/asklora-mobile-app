@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
+import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart';
 import 'package:asklora_mobile_app/core/domain/token/token_api_client.dart';
-import 'package:asklora_mobile_app/core/utils/token_validator.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,19 +13,19 @@ class DioAdapterMock extends Mock implements HttpClientAdapter {}
 
 class MockAppBloc extends MockBloc<AppEvent, AppState> implements AppBloc {}
 
-@GenerateMocks([TokenValidator])
+@GenerateMocks([TokenRepository])
 @GenerateMocks([TokenApiClient])
 void main() async {
   group('App Bloc Tests', () {
     late AppBloc appBloc;
-    late MockTokenValidator tokenValidator;
+    late MockTokenRepository tokenRepository;
 
     setUpAll(() async {
-      tokenValidator = MockTokenValidator();
+      tokenRepository = MockTokenRepository();
     });
 
     setUp(() async {
-      appBloc = AppBloc(tokenValidator: tokenValidator);
+      appBloc = AppBloc(tokenRepository: tokenRepository);
     });
 
     test('App Bloc init state is should be `unknown`', () {
@@ -36,7 +36,7 @@ void main() async {
       'emits `AppState.unauthenticated` WHEN '
       'Token is not valid or expired',
       build: () {
-        when(tokenValidator.isTokenValid())
+        when(tokenRepository.isTokenValid())
             .thenAnswer((_) => Future.value(false));
         return appBloc;
       },
@@ -48,7 +48,7 @@ void main() async {
       'emits `AppState.authenticated` WHEN '
       'Token is valid',
       build: () {
-        when(tokenValidator.isTokenValid())
+        when(tokenRepository.isTokenValid())
             .thenAnswer((_) => Future.value(true));
         return appBloc;
       },

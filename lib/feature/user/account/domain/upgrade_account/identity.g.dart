@@ -17,7 +17,7 @@ Identity _$IdentityFromJson(Map<String, dynamic> json) => Identity(
       countryOfBirth: json['country_of_birth'] as String?,
       countryOfTaxResidence: json['country_of_tax_residence'] as String?,
       fundingSource: json['funding_source'] as String?,
-    );
+    )..employmentStatus = json['employment_status'] as String?;
 
 Map<String, dynamic> _$IdentityToJson(Identity instance) => <String, dynamic>{
       'given_name': instance.givenName,
@@ -30,4 +30,5 @@ Map<String, dynamic> _$IdentityToJson(Identity instance) => <String, dynamic>{
       'country_of_birth': instance.countryOfBirth,
       'country_of_tax_residence': instance.countryOfTaxResidence,
       'funding_source': instance.fundingSource,
+      'employment_status': instance.employmentStatus,
     };

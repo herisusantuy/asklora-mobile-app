@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/utils/route_generator.dart';
-import '../../core/utils/token_validator.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../home_screen.dart';
 import '../bloc/app_bloc.dart';
@@ -22,9 +22,8 @@ class App extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: BlocProvider(
-          create: (_) => AppBloc(
-            tokenValidator: TokenValidator(),
-          )..add(AppLaunched()),
+          create: (_) =>
+              AppBloc(tokenRepository: TokenRepository())..add(AppLaunched()),
           child: BlocConsumer<AppBloc, AppState>(
             listener: (_, __) => FlutterNativeSplash.remove(),
             builder: (context, state) {
