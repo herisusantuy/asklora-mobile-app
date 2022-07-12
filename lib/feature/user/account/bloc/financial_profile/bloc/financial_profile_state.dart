@@ -24,6 +24,7 @@ class FinancialProfileState extends Equatable {
   final FundingSource fundingSource;
   final EmploymentStatus employmentStatus;
   final String occupation;
+  final String otherOccupation;
   final String employer;
   final String employerAddress;
   const FinancialProfileState({
@@ -32,6 +33,7 @@ class FinancialProfileState extends Equatable {
     this.fundingSource = FundingSource.unknown,
     this.employmentStatus = EmploymentStatus.unknown,
     this.occupation = '',
+    this.otherOccupation = '',
     this.employer = '',
     this.employerAddress = '',
   });
@@ -42,6 +44,7 @@ class FinancialProfileState extends Equatable {
     FundingSource? fundingSource,
     EmploymentStatus? employmentStatus,
     String? occupation,
+    String? otherOccupation,
     String? employer,
     String? employerAddress,
   }) {
@@ -53,6 +56,7 @@ class FinancialProfileState extends Equatable {
       fundingSource: fundingSource ?? this.fundingSource,
       employmentStatus: employmentStatus ?? this.employmentStatus,
       occupation: occupation ?? this.occupation,
+      otherOccupation: otherOccupation ?? this.otherOccupation,
       employer: employer ?? this.employer,
       employerAddress: employerAddress ?? this.employerAddress,
     );
@@ -66,6 +70,7 @@ class FinancialProfileState extends Equatable {
       fundingSource,
       employmentStatus,
       occupation,
+      otherOccupation,
       employer,
       employerAddress,
     ];
