@@ -203,7 +203,7 @@ class FinancialProfileForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 20),
             child: CustomTextInput(
-                key: const Key('FinancialProfile_employer_input'),
+                key: const Key('account_employer_input'),
                 labelText: 'Employer',
                 onChanged: (value) => context
                     .read<FinancialProfileBloc>()
@@ -220,7 +220,7 @@ class FinancialProfileForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10),
             child: CustomTextInput(
-              key: const Key('FinancialProfile_employer_address_input'),
+              key: const Key('account_employer_address_input'),
               labelText: 'Employer Address',
               onChanged: (value) => context
                   .read<FinancialProfileBloc>()
