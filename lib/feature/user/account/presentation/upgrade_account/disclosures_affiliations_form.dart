@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/question_widget.dart';
-import '../../bloc/account_bloc.dart';
+import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../widgets/modal_text_input.dart';
 import '../widgets/modal_upload_document.dart';
 
@@ -30,13 +30,13 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                   padding: EdgeInsets.only(top: 20),
                   type: FontType.bodyTextBold,
                 ),
-                _question1(),
-                _question2(),
-                _question3(),
-                _question4(),
-                _question5(),
-                _question6(),
-                _question7(),
+                _questionNo1(),
+                _questionNo2(),
+                _questionNo3(),
+                _questionNo4(),
+                _questionNo5(),
+                _questionNo6(),
+                _questionNo7(),
               ],
             ),
           ),
@@ -46,7 +46,8 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
     );
   }
 
-  Widget _question1() => BlocConsumer<AccountBloc, AccountState>(
+  Widget _questionNo1() =>
+      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         listenWhen: (previous, current) =>
             previous.isAffiliated != current.isAffiliated,
         listener: (context, state) {
@@ -60,7 +61,6 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isAffiliated != current.isAffiliated,
         builder: (context, state) {
-          print('question 1 : ${state.isAffiliated}');
           return QuestionWidget(
             key: const Key('disclosure_affiliation_question_1'),
             questionText:
@@ -70,13 +70,14 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             selectedAnswer: state.isAffiliated != null
                 ? (state.isAffiliated! ? 'Yes' : 'No')
                 : null,
-            onSelected: (value) => context.read<AccountBloc>().add(
-                AccountQuestion1ofAffiliationChanged(
-                    value == 'Yes' ? true : false)),
+            onSelected: (value) => context
+                .read<DisclosureAffiliationBloc>()
+                .add(QuestionNo1Changed(value == 'Yes' ? true : false)),
           );
         },
       );
-  Widget _question2() => BlocConsumer<AccountBloc, AccountState>(
+  Widget _questionNo2() =>
+      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         listenWhen: (previous, current) =>
             previous.isSeniorExecutive != current.isSeniorExecutive,
         listener: (context, state) {
@@ -90,7 +91,6 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isSeniorExecutive != current.isSeniorExecutive,
         builder: (context, state) {
-          print('question 2 : ${state.isSeniorExecutive}');
           return QuestionWidget(
               key: const Key('disclosure_affiliation_question_2'),
               questionText:
@@ -100,16 +100,16 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
               selectedAnswer: state.isSeniorExecutive != null
                   ? (state.isSeniorExecutive! ? 'Yes' : 'No')
                   : null,
-              onSelected: (value) => context.read<AccountBloc>().add(
-                  AccountQuestion2ofAffiliationChanged(
-                      value == 'Yes' ? true : false)));
+              onSelected: (value) => context
+                  .read<DisclosureAffiliationBloc>()
+                  .add(QuestionNo2Changed(value == 'Yes' ? true : false)));
         },
       );
-  Widget _question3() => BlocBuilder<AccountBloc, AccountState>(
+  Widget _questionNo3() =>
+      BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
             previous.isSeniorPolitical != current.isSeniorPolitical,
         builder: (context, state) {
-          print('question 3 : ${state.isSeniorPolitical}');
           return QuestionWidget(
               key: const Key('disclosure_affiliation_question_3'),
               questionText: '3. I am a senior political figure?',
@@ -118,16 +118,16 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
               selectedAnswer: state.isSeniorPolitical != null
                   ? (state.isSeniorPolitical! ? 'Yes' : 'No')
                   : null,
-              onSelected: (value) => context.read<AccountBloc>().add(
-                  AccountQuestion3ofAffiliationChanged(
-                      value == 'Yes' ? true : false)));
+              onSelected: (value) => context
+                  .read<DisclosureAffiliationBloc>()
+                  .add(QuestionNo3Changed(value == 'Yes' ? true : false)));
         },
       );
-  Widget _question4() => BlocBuilder<AccountBloc, AccountState>(
+  Widget _questionNo4() =>
+      BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
             previous.isFamilyMember != current.isFamilyMember,
         builder: (context, state) {
-          print('question 4 : ${state.isFamilyMember}');
           return QuestionWidget(
             key: const Key('disclosure_affiliation_question_4'),
             questionText:
@@ -137,13 +137,14 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             selectedAnswer: state.isFamilyMember != null
                 ? (state.isFamilyMember! ? 'Yes' : 'No')
                 : null,
-            onSelected: (value) => context.read<AccountBloc>().add(
-                AccountQuestion4ofAffiliationChanged(
-                    value == 'Yes' ? true : false)),
+            onSelected: (value) => context
+                .read<DisclosureAffiliationBloc>()
+                .add(QuestionNo4Changed(value == 'Yes' ? true : false)),
           );
         },
       );
-  Widget _question5() => BlocConsumer<AccountBloc, AccountState>(
+  Widget _questionNo5() =>
+      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         listenWhen: (previous, current) =>
             previous.isAssociates != current.isAssociates,
         listener: (context, state) {
@@ -151,57 +152,113 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             showModalTextInput(
                 labelTextInput: 'Name of Affiliated Person',
                 context: context,
-                onChanged: (value) => value,
-                onSubmit: () => Navigator.pop(context));
+                onChanged: (value) => context
+                    .read<DisclosureAffiliationBloc>()
+                    .add(NameOfAffiliatedChanged(value)),
+                onSubmit: () {
+                  context
+                      .read<DisclosureAffiliationBloc>()
+                      .add(const NameOfAffiliatedSubmitted());
+                  Navigator.pop(context);
+                });
           }
         },
         buildWhen: (previous, current) =>
-            previous.isAssociates != current.isAssociates,
+            previous.isAssociates != current.isAssociates ||
+            current.isNameOfAffiliatedPersonSubmitted == true,
         builder: (context, state) {
           print('question 5 : ${state.isAssociates}');
-          return QuestionWidget(
-            key: const Key('disclosure_affiliation_question_5'),
-            questionText:
-                '5. I am affiliated with any director, officer, or employee of LORA Technologies Limited or its associates?',
-            padding: const EdgeInsets.only(top: 10),
-            options: const ['Yes', 'No'],
-            selectedAnswer: state.isAssociates != null
-                ? (state.isAssociates! ? 'Yes' : 'No')
-                : null,
-            onSelected: (value) => context.read<AccountBloc>().add(
-                AccountQuestion5ofAffiliationChanged(
-                    value == 'Yes' ? true : false)),
+          print('name affiliated : ${state.nameOfAffiliatedPerson}');
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              QuestionWidget(
+                key: const Key('disclosure_affiliation_question_5'),
+                questionText:
+                    '5. I am affiliated with any director, officer, or employee of LORA Technologies Limited or its associates?',
+                padding: const EdgeInsets.only(top: 10),
+                options: const ['Yes', 'No'],
+                selectedAnswer: state.isAssociates != null
+                    ? (state.isAssociates! ? 'Yes' : 'No')
+                    : null,
+                onSelected: (value) => context
+                    .read<DisclosureAffiliationBloc>()
+                    .add(QuestionNo5Changed(value == 'Yes' ? true : false)),
+              ),
+              if (state.isNameOfAffiliatedPersonSubmitted &&
+                  state.isAssociates!)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomText(
+                        'Name of Joint Account :',
+                        type: FontType.formTitle,
+                      ),
+                      CustomText(state.nameOfAffiliatedPerson),
+                    ],
+                  ),
+                )
+            ],
           );
         },
       );
-  Widget _question6() => BlocConsumer<AccountBloc, AccountState>(
+  Widget _questionNo6() =>
+      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         listenWhen: (previous, current) => previous.isOwner != current.isOwner,
         listener: (context, state) {
           if (state.isOwner!) {
             showModalTextInput(
                 labelTextInput: 'Name of Joint Account',
                 context: context,
-                onChanged: (value) => value,
+                onChanged: (value) => context
+                    .read<DisclosureAffiliationBloc>()
+                    .add(NameOfJointAccountChanged(value)),
                 onSubmit: () => Navigator.pop(context));
           }
         },
-        buildWhen: (previous, current) => previous.isOwner != current.isOwner,
+        buildWhen: (previous, current) =>
+            previous.isOwner != current.isOwner ||
+            previous.nameOfJointAccount != current.nameOfJointAccount,
         builder: (context, state) {
-          print('question 6 : ${state.isOwner}');
-          return QuestionWidget(
-            key: const Key('disclosure_affiliation_question_6'),
-            questionText: '6. I am the sole beneficial owner of the account?',
-            padding: const EdgeInsets.only(top: 10),
-            options: const ['Yes', 'No'],
-            selectedAnswer:
-                state.isOwner != null ? (state.isOwner! ? 'Yes' : 'No') : null,
-            onSelected: (value) => context.read<AccountBloc>().add(
-                AccountQuestion6ofAffiliationChanged(
-                    value == 'Yes' ? true : false)),
+          print('question 6 : ${state.nameOfJointAccount}');
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              QuestionWidget(
+                key: const Key('disclosure_affiliation_question_6'),
+                questionText:
+                    '6. I am the sole beneficial owner of the account?',
+                padding: const EdgeInsets.only(top: 10),
+                options: const ['Yes', 'No'],
+                selectedAnswer: state.isOwner != null
+                    ? (state.isOwner! ? 'Yes' : 'No')
+                    : null,
+                onSelected: (value) => context
+                    .read<DisclosureAffiliationBloc>()
+                    .add(QuestionNo6Changed(value == 'Yes' ? true : false)),
+              ),
+              if (state.nameOfJointAccount.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CustomText(
+                        'Name of Joint Account :',
+                        type: FontType.formTitle,
+                      ),
+                      CustomText(state.nameOfJointAccount),
+                    ],
+                  ),
+                )
+            ],
           );
         },
       );
-  Widget _question7() => BlocConsumer<AccountBloc, AccountState>(
+  Widget _questionNo7() =>
+      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         listenWhen: (previous, current) =>
             previous.isEmployee != current.isEmployee,
         listener: (context, state) {
@@ -234,9 +291,8 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 ? (state.isEmployee! ? 'Yes' : 'No')
                 : null,
             onSelected: (value) {
-              context.read<AccountBloc>().add(
-                    AccountQuestion7ofAffiliationChanged(
-                        value == 'Yes' ? true : false),
+              context.read<DisclosureAffiliationBloc>().add(
+                    QuestionNo7Changed(value == 'Yes' ? true : false),
                   );
             },
           );
@@ -244,7 +300,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
       );
 
   Widget _nextButton() {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.only(top: 20.0),
@@ -252,11 +308,8 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
               key: const Key('disclosures_affiliations_next_step_button'),
               borderRadius: 30,
               buttonText: 'Next',
-              disable: _disabledNextButton(state),
+              disable: state.disabledNextButton(),
               onClick: () {
-                context
-                    .read<AccountBloc>()
-                    .add(const AccountCurrentStepChanged('next'));
                 controller.nextPage(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.ease);
@@ -264,18 +317,5 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         );
       },
     );
-  }
-
-  bool _disabledNextButton(AccountState state) {
-    if (state.isAffiliated != null &&
-        state.isSeniorExecutive != null &&
-        state.isSeniorPolitical != null &&
-        state.isFamilyMember != null &&
-        state.isAssociates != null &&
-        state.isOwner != null &&
-        (state.isEmployee != null && state.isEmployee != true)) {
-      return false;
-    }
-    return true;
   }
 }
