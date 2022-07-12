@@ -5,6 +5,7 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
+import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
@@ -59,6 +60,9 @@ class UpgradeAccountScreen extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => FinancialProfileBloc(),
+          ),
+          BlocProvider(
+            create: (context) => DisclosureAffiliationBloc(),
           ),
         ],
         child: SafeArea(
