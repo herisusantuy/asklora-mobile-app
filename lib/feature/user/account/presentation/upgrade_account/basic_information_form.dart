@@ -181,6 +181,11 @@ class BasicInformationForm extends StatelessWidget {
                 context.read<BasicInformationBloc>().add(
                     BasicInformationIsHongKongPermanentResidentChanged(
                         value == 'Yes' ? true : false));
+                if (value == 'No') {
+                  context
+                      .read<BasicInformationBloc>()
+                      .add(const BasicInformationIdNumberChanged(''));
+                }
                 Future.delayed(
                     const Duration(milliseconds: 200),
                     () => _scrollController.animateTo(
