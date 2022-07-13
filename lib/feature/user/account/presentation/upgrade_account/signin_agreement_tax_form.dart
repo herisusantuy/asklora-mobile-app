@@ -65,7 +65,6 @@ class SigningAgreementTaxForm extends StatelessWidget {
             onChanged: (value) => context
                 .read<SigningAgreementTaxBloc>()
                 .add(CertifyNotUsCitizenChecked(value!)),
-            // onChanged: (value) => value,
             textAlign: TextAlign.justify,
           );
         },
