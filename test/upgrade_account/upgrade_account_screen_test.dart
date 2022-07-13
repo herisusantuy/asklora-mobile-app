@@ -16,7 +16,7 @@ void main() async {
     Future<void> _buildAddressProofForm(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 1),
+          home: UpgradeAccountScreen(initialPage: 2),
           navigatorObservers: [mockObserver]));
     }
 
@@ -24,7 +24,7 @@ void main() async {
         WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 2),
+          home: UpgradeAccountScreen(initialPage: 3),
           navigatorObservers: [mockObserver]));
     }
 
