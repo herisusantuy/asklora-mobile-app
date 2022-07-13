@@ -48,6 +48,13 @@ class FinancialProfileOccupationChanged extends FinancialProfileEvent {
   List<Object> get props => [occupation];
 }
 
+class FinancialProfileOtherOccupationChanged extends FinancialProfileEvent {
+  final String otherOccupation;
+  const FinancialProfileOtherOccupationChanged(this.otherOccupation) : super();
+  @override
+  List<Object> get props => [otherOccupation];
+}
+
 class FinancialProfileEmployerChanged extends FinancialProfileEvent {
   final String employer;
   const FinancialProfileEmployerChanged(this.employer) : super();
