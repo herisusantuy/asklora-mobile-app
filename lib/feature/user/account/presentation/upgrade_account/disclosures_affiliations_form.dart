@@ -8,6 +8,7 @@ import '../../../../../core/presentation/question_widget.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../widgets/modal_text_input.dart';
 import '../widgets/modal_upload_document.dart';
+import 'affiliated_form.dart';
 
 class DisclosuresAffiliationsForm extends StatelessWidget {
   final PageController controller;
@@ -67,85 +68,11 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     .read<DisclosureAffiliationBloc>()
                     .add(QuestionNo1Changed(value == 'Yes' ? true : false)),
               ),
-              if (state.isAffiliated == true)
-                Column(
-                  children: [
-                    _affiliateCompanyName(),
-                    _affiliateCompanyAddress(),
-                    _affiliateCompanyCity(),
-                    _affiliateCompanyStreet(),
-                    _affiliateCompanyCountry(),
-                    _affiliateCompanyEmail(),
-                  ],
-                )
+              if (state.isAffiliated == true) const AffiliateForm()
             ],
           );
         },
       );
-
-  Widget _affiliateCompanyName() {
-    return BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: CustomTextInput(
-              labelText: 'Company Name',
-              onChanged: (value) => value,
-              hintText: 'Enter Company Name'),
-        );
-      },
-    );
-  }
-
-  Widget _affiliateCompanyAddress() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          labelText: 'Company Street Address',
-          onChanged: (value) => value,
-          hintText: 'Enter Company Street Address'),
-    );
-  }
-
-  Widget _affiliateCompanyCity() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          labelText: 'Company City',
-          onChanged: (value) => value,
-          hintText: 'Enter Company City'),
-    );
-  }
-
-  Widget _affiliateCompanyStreet() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          labelText: 'Company State',
-          onChanged: (value) => value,
-          hintText: 'Enter Company State'),
-    );
-  }
-
-  Widget _affiliateCompanyCountry() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          labelText: 'Company Country',
-          onChanged: (value) => value,
-          hintText: 'Enter Company Country'),
-    );
-  }
-
-  Widget _affiliateCompanyEmail() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          labelText: 'Company Compliance Email',
-          onChanged: (value) => value,
-          hintText: 'Enter Company Compliance Email'),
-    );
-  }
 
   Widget _questionNo2() =>
       BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
