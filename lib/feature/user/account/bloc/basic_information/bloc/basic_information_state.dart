@@ -13,8 +13,9 @@ class BasicInformationState extends Equatable {
     this.countryCode = '',
     this.phoneNumber = '',
     this.countryOfCitizenship = '',
-    this.isHongKongPermanentResident = true,
-    this.isUnitedStateResident = false,
+    this.isHongKongPermanentResident,
+    this.idNumber = '',
+    this.isUnitedStateResident,
   });
 
   final String firstName;
@@ -26,11 +27,12 @@ class BasicInformationState extends Equatable {
   final String countryCode;
   final String phoneNumber;
   final String countryOfCitizenship;
-  final bool isHongKongPermanentResident;
-  final bool isUnitedStateResident;
+  final bool? isHongKongPermanentResident;
+  final String idNumber;
+  final bool? isUnitedStateResident;
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       firstName,
       middleName,
@@ -42,6 +44,7 @@ class BasicInformationState extends Equatable {
       phoneNumber,
       countryOfCitizenship,
       isHongKongPermanentResident,
+      idNumber,
       isUnitedStateResident,
     ];
   }
@@ -57,6 +60,7 @@ class BasicInformationState extends Equatable {
     String? phoneNumber,
     String? countryOfCitizenship,
     bool? isHongKongPermanentResident,
+    String? idNumber,
     bool? isUnitedStateResident,
   }) {
     return BasicInformationState(
@@ -71,19 +75,33 @@ class BasicInformationState extends Equatable {
       countryOfCitizenship: countryOfCitizenship ?? this.countryOfCitizenship,
       isHongKongPermanentResident:
           isHongKongPermanentResident ?? this.isHongKongPermanentResident,
+      idNumber: idNumber ?? this.idNumber,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
     );
   }
 
-  bool enableNextButton() =>
-      firstName.isNotEmpty &&
-      middleName.isNotEmpty &&
-      lastName.isNotEmpty &&
-      chineseName.isNotEmpty &&
-      gender.isNotEmpty &&
-      dateOfBirth.isNotEmpty &&
-      countryCode.isNotEmpty &&
-      phoneNumber.isNotEmpty &&
-      countryOfCitizenship.isNotEmpty;
+  bool enableNextButton() {
+    if (firstName.isNotEmpty &&
+        middleName.isNotEmpty &&
+        lastName.isNotEmpty &&
+        chineseName.isNotEmpty &&
+        gender.isNotEmpty &&
+        dateOfBirth.isNotEmpty &&
+        countryCode.isNotEmpty &&
+        phoneNumber.isNotEmpty &&
+        countryOfCitizenship.isNotEmpty) {
+      if (isHongKongPermanentResident == true) {
+        if (idNumber.isNotEmpty) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
 }

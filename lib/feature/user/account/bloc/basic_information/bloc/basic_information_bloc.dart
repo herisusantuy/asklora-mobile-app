@@ -23,6 +23,7 @@ class BasicInformationBloc
         _onBasicInformationCountryOfCitizenshipChage);
     on<BasicInformationIsHongKongPermanentResidentChanged>(
         _onIsHongKongPermanentResidentChange);
+    on<BasicInformationIdNumberChanged>(_onIdNumberChange);
     on<BasicInformationIsUnitedStateResidentChanged>(
         _onIsUnitedStateResidentChange);
   }
@@ -78,6 +79,11 @@ class BasicInformationBloc
       Emitter<BasicInformationState> emit) {
     emit(state.copyWith(
         isHongKongPermanentResident: event.isHongKongPermanentResident));
+  }
+
+  _onIdNumberChange(BasicInformationIdNumberChanged event,
+      Emitter<BasicInformationState> emit) {
+    emit(state.copyWith(idNumber: event.idNumber));
   }
 
   _onIsUnitedStateResidentChange(
