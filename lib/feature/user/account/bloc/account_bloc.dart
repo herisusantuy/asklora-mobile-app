@@ -110,8 +110,10 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       case 0:
         return 'Basic Information';
       case 1:
-        return 'Address Proof';
+        return 'Country of Tax Residence';
       case 2:
+        return 'Address Proof';
+      case 3:
         return 'Employment, Financial Profile';
       default:
         return '';

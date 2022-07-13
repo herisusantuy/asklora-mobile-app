@@ -5,6 +5,7 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
+import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import '../../repository/account_repository.dart';
@@ -12,6 +13,7 @@ import 'address_proof_form.dart';
 import 'disclosures_affiliations_form.dart';
 import 'financial_profile_form.dart';
 import 'basic_information_form.dart';
+import 'country_of_tax_residence_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
   const UpgradeAccountScreen({Key? key, required this.initialPage})
@@ -29,6 +31,9 @@ class UpgradeAccountScreen extends StatelessWidget {
         key: const Key('basic_information_step'),
         controller: _pageViewController,
       ),
+      CountryOfTaxResidenceForm(
+          key: const Key('country_of_tax_residence_step'),
+          controller: _pageViewController),
       AddressProofForm(
         key: const Key('address_proof_step'),
         controller: _pageViewController,
@@ -37,7 +42,7 @@ class UpgradeAccountScreen extends StatelessWidget {
       DisclosuresAffiliationsForm(
         key: const Key('disclosures_affiliations_step'),
         controller: _pageViewController,
-      )
+      ),
     ];
     return Scaffold(
       appBar: AppBar(
@@ -63,6 +68,9 @@ class UpgradeAccountScreen extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => DisclosureAffiliationBloc(),
+          ),
+          BlocProvider(
+            create: (context) => CountryOfTaxResidenceBloc(),
           ),
         ],
         child: SafeArea(
