@@ -1,6 +1,9 @@
+import 'signing_broker_agreements_form.dart';
+
+import '../../bloc/signing_broker_agremeent/bloc/signing_broker_agreement_bloc.dart';
+import 'review_information_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:signature/signature.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
@@ -10,7 +13,6 @@ import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart'
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
-import '../../bloc/signing_broker_agremeent/bloc/signing_broker_agreement_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
 import 'disclosures_affiliations_form.dart';
@@ -18,43 +20,49 @@ import 'financial_profile_form.dart';
 import 'basic_information_form.dart';
 import 'risk_disclosure_form.dart';
 import 'signin_agreement_tax_form.dart';
-import 'signing_broker_agreements_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
-  const UpgradeAccountScreen({Key? key, required this.initialPage})
-      : super(key: key);
+  UpgradeAccountScreen({Key? key, required this.initialPage})
+      : _pageViewController = PageController(initialPage: initialPage),
+        super(key: key);
 
   final int initialPage;
+
+  final PageController _pageViewController;
+
+  List<Widget> get _pages => [
+        BasicInformationForm(
+          key: const Key('basic_information_step'),
+          controller: _pageViewController,
+        ),
+        AddressProofForm(
+          key: const Key('address_proof_step'),
+          controller: _pageViewController,
+        ),
+        FinancialProfileForm(
+            key: const Key('financial_profile_step'),
+            controller: _pageViewController),
+        DisclosuresAffiliationsForm(
+          key: const Key('disclosures_affiliations_step'),
+          controller: _pageViewController,
+        ),
+        SigningAgreementTaxForm(
+            key: const Key('signing_agreement_tax_step'),
+            controller: _pageViewController),
+        SigningBrokerAgreementsForm(
+          key: const Key('signing_broker_agreement_step'),
+          controller: _pageViewController,
+        ),
+        RiskDisclosureForm(
+            key: const Key('risk_disclosure_step'),
+            controller: _pageViewController),
+        ReviewInformationScreen(
+            key: const Key('review_information_step'),
+            controller: _pageViewController),
+      ];
+
   @override
   Widget build(BuildContext context) {
-    final PageController _pageViewController =
-        PageController(initialPage: initialPage);
-
-    List<Widget> _pages = [
-      BasicInformationForm(
-        key: const Key('basic_information_step'),
-        controller: _pageViewController,
-      ),
-      AddressProofForm(
-        key: const Key('address_proof_step'),
-        controller: _pageViewController,
-      ),
-      FinancialProfileForm(controller: _pageViewController),
-      DisclosuresAffiliationsForm(
-        key: const Key('disclosures_affiliations_step'),
-        controller: _pageViewController,
-      ),
-      SigningAgreementTaxForm(
-          key: const Key('signing_agreement_tax_step'),
-          controller: _pageViewController),
-      SigningBrokerAgreementsForm(
-        key: const Key('signing_broker_agreement_step'),
-        controller: _pageViewController,
-      ),
-      RiskDisclosureForm(
-          key: const Key('risk_disclosure_step'),
-          controller: _pageViewController),
-    ];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -65,11 +73,18 @@ class UpgradeAccountScreen extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) =>
-                  AccountBloc(getAccountRepository: AccountRepository())),
-          BlocProvider(create: (context) => BasicInformationBloc()),
-          BlocProvider(create: (context) => AddressProofBloc()),
-          BlocProvider(create: (context) => FinancialProfileBloc()),
+            create: (context) =>
+                AccountBloc(getAccountRepository: AccountRepository()),
+          ),
+          BlocProvider(
+            create: (context) => BasicInformationBloc(),
+          ),
+          BlocProvider(
+            create: (context) => AddressProofBloc(),
+          ),
+          BlocProvider(
+            create: (context) => FinancialProfileBloc(),
+          ),
           BlocProvider(create: (context) => DisclosureAffiliationBloc()),
           BlocProvider(create: (context) => SigningAgreementTaxBloc()),
           BlocProvider(create: (context) => SigningBrokerAgreementBloc()),
@@ -78,7 +93,7 @@ class UpgradeAccountScreen extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            _headerUpgradeAccount(_pageViewController),
+            _headerUpgradeAccount(),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -96,7 +111,7 @@ class UpgradeAccountScreen extends StatelessWidget {
     );
   }
 
-  Widget _headerUpgradeAccount(PageController controller) => Container(
+  Widget _headerUpgradeAccount() => Container(
         decoration: const BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -113,7 +128,7 @@ class UpgradeAccountScreen extends StatelessWidget {
                     context
                         .read<AccountBloc>()
                         .add(const AccountCurrentStepChanged('back'));
-                    controller.previousPage(
+                    _pageViewController.previousPage(
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.ease);
                   },
@@ -137,7 +152,7 @@ class UpgradeAccountScreen extends StatelessWidget {
 
   static void open(BuildContext context) =>
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => const UpgradeAccountScreen(
+          builder: (_) => UpgradeAccountScreen(
                 initialPage: 0,
               )));
 }

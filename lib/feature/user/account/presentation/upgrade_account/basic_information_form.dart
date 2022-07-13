@@ -111,7 +111,8 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _datePicker() =>
       BlocBuilder<BasicInformationBloc, BasicInformationState>(
-        buildWhen: ((previous, current) => false),
+        buildWhen: ((previous, current) =>
+            previous.dateOfBirth != current.dateOfBirth),
         builder: (context, state) {
           final DateTime dateTime = DateTime.now();
           return CustomDatePicker(
