@@ -9,6 +9,7 @@ import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart'
 import '../widgets/modal_text_input.dart';
 import '../widgets/modal_upload_document.dart';
 import 'affiliated_form.dart';
+import 'controlled_person_from.dart';
 
 class DisclosuresAffiliationsForm extends StatelessWidget {
   final PageController controller;
@@ -75,32 +76,29 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
       );
 
   Widget _questionNo2() =>
-      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-        listenWhen: (previous, current) =>
-            previous.isSeniorExecutive != current.isSeniorExecutive,
-        listener: (context, state) {
-          if (state.isSeniorExecutive!) {
-            modalUploadDocument(
-                title: 'Upload: "Account Approval Letter"',
-                context: context,
-                onClick: () => '');
-          }
-        },
+      BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
             previous.isSeniorExecutive != current.isSeniorExecutive,
         builder: (context, state) {
-          return QuestionWidget(
-              key: const Key('disclosure_affiliation_question_2'),
-              questionText:
-                  '2. Senior executive at or a 10% or greater shareholder of a publicly traded company?',
-              padding: const EdgeInsets.only(top: 10),
-              options: const ['Yes', 'No'],
-              selectedAnswer: state.isSeniorExecutive != null
-                  ? (state.isSeniorExecutive! ? 'Yes' : 'No')
-                  : null,
-              onSelected: (value) => context
-                  .read<DisclosureAffiliationBloc>()
-                  .add(QuestionNo2Changed(value == 'Yes' ? true : false)));
+          return Column(
+            children: [
+              QuestionWidget(
+                key: const Key('disclosure_affiliation_question_2'),
+                questionText:
+                    '2. Senior executive at or a 10% or greater shareholder of a publicly traded company?',
+                padding: const EdgeInsets.only(top: 10),
+                options: const ['Yes', 'No'],
+                selectedAnswer: state.isSeniorExecutive != null
+                    ? (state.isSeniorExecutive! ? 'Yes' : 'No')
+                    : null,
+                onSelected: (value) =>
+                    context.read<DisclosureAffiliationBloc>().add(
+                          QuestionNo2Changed(value == 'Yes' ? true : false),
+                        ),
+              ),
+              if (state.isSeniorExecutive == true) const ControlledPersonForm()
+            ],
+          );
         },
       );
   Widget _questionNo3() =>
