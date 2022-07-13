@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
+import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../widgets/modal_text_input.dart';
@@ -47,35 +48,101 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
   }
 
   Widget _questionNo1() =>
-      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-        listenWhen: (previous, current) =>
-            previous.isAffiliated != current.isAffiliated,
-        listener: (context, state) {
-          if (state.isAffiliated!) {
-            modalUploadDocument(
-                title: 'Upload: "Account Approval Letter"',
-                context: context,
-                onClick: () => '');
-          }
-        },
+      BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
             previous.isAffiliated != current.isAffiliated,
         builder: (context, state) {
-          return QuestionWidget(
-            key: const Key('disclosure_affiliation_question_1'),
-            questionText:
-                '1. Affiliated or work with a US registered broker-dealer or FINRA?',
-            padding: const EdgeInsets.only(top: 10),
-            options: const ['Yes', 'No'],
-            selectedAnswer: state.isAffiliated != null
-                ? (state.isAffiliated! ? 'Yes' : 'No')
-                : null,
-            onSelected: (value) => context
-                .read<DisclosureAffiliationBloc>()
-                .add(QuestionNo1Changed(value == 'Yes' ? true : false)),
+          return Column(
+            children: [
+              QuestionWidget(
+                key: const Key('disclosure_affiliation_question_1'),
+                questionText:
+                    '1. Affiliated or work with a US registered broker-dealer or FINRA?',
+                padding: const EdgeInsets.only(top: 10),
+                options: const ['Yes', 'No'],
+                selectedAnswer: state.isAffiliated != null
+                    ? (state.isAffiliated! ? 'Yes' : 'No')
+                    : null,
+                onSelected: (value) => context
+                    .read<DisclosureAffiliationBloc>()
+                    .add(QuestionNo1Changed(value == 'Yes' ? true : false)),
+              ),
+              if (state.isAffiliated!)
+                Column(
+                  children: [
+                    _affiliatedCompanyName(),
+                    _affiliateCompanyAddress(),
+                    _affiliateCompanyCity(),
+                    _affiliateCompanyStreet(),
+                    _affiliateCompanyCountry(),
+                    _affiliateCompanyEmail(),
+                  ],
+                )
+            ],
           );
         },
       );
+
+  Widget _affiliatedCompanyName() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: CustomTextInput(
+          labelText: 'Company Name',
+          onChanged: (value) => value,
+          hintText: 'Enter Company Name'),
+    );
+  }
+
+  Widget _affiliateCompanyAddress() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: CustomTextInput(
+          labelText: 'Company Street Address',
+          onChanged: (value) => value,
+          hintText: 'Enter Company Street Address'),
+    );
+  }
+
+  Widget _affiliateCompanyCity() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: CustomTextInput(
+          labelText: 'Company City',
+          onChanged: (value) => value,
+          hintText: 'Enter Company City'),
+    );
+  }
+
+  Widget _affiliateCompanyStreet() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: CustomTextInput(
+          labelText: 'Company State',
+          onChanged: (value) => value,
+          hintText: 'Enter Company State'),
+    );
+  }
+
+  Widget _affiliateCompanyCountry() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: CustomTextInput(
+          labelText: 'Company Country',
+          onChanged: (value) => value,
+          hintText: 'Enter Company Country'),
+    );
+  }
+
+  Widget _affiliateCompanyEmail() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: CustomTextInput(
+          labelText: 'Company Compliance Email',
+          onChanged: (value) => value,
+          hintText: 'Enter Company Compliance Email'),
+    );
+  }
+
   Widget _questionNo2() =>
       BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         listenWhen: (previous, current) =>
