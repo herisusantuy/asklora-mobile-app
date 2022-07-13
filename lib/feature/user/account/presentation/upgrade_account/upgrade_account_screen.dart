@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:signature/signature.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
@@ -9,6 +10,7 @@ import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart'
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
+import '../../bloc/signing_broker_agremeent/bloc/signing_broker_agreement_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
 import 'disclosures_affiliations_form.dart';
@@ -16,13 +18,13 @@ import 'financial_profile_form.dart';
 import 'basic_information_form.dart';
 import 'risk_disclosure_form.dart';
 import 'signin_agreement_tax_form.dart';
+import 'signing_broker_agreements_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
   const UpgradeAccountScreen({Key? key, required this.initialPage})
       : super(key: key);
 
   final int initialPage;
-
   @override
   Widget build(BuildContext context) {
     final PageController _pageViewController =
@@ -45,6 +47,10 @@ class UpgradeAccountScreen extends StatelessWidget {
       SigningAgreementTaxForm(
           key: const Key('signing_agreement_tax_step'),
           controller: _pageViewController),
+      SigningBrokerAgreementsForm(
+        key: const Key('signing_broker_agreement_step'),
+        controller: _pageViewController,
+      ),
       RiskDisclosureForm(
           key: const Key('risk_disclosure_step'),
           controller: _pageViewController),
@@ -59,20 +65,14 @@ class UpgradeAccountScreen extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                AccountBloc(getAccountRepository: AccountRepository()),
-          ),
-          BlocProvider(
-            create: (context) => BasicInformationBloc(),
-          ),
-          BlocProvider(
-            create: (context) => AddressProofBloc(),
-          ),
-          BlocProvider(
-            create: (context) => FinancialProfileBloc(),
-          ),
+              create: (context) =>
+                  AccountBloc(getAccountRepository: AccountRepository())),
+          BlocProvider(create: (context) => BasicInformationBloc()),
+          BlocProvider(create: (context) => AddressProofBloc()),
+          BlocProvider(create: (context) => FinancialProfileBloc()),
           BlocProvider(create: (context) => DisclosureAffiliationBloc()),
           BlocProvider(create: (context) => SigningAgreementTaxBloc()),
+          BlocProvider(create: (context) => SigningBrokerAgreementBloc()),
           BlocProvider(create: (context) => RiskDisclosureBloc()),
         ],
         child: SafeArea(

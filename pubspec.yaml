@@ -46,6 +46,8 @@ dependencies:
       url: https://github.com/krishna-gupta-al/flutter_onfido.git
       ref: master
   pin_code_fields: ^7.4.0
+  url_launcher: ^6.1.4
+  signature: ^5.0.1
 
 dev_dependencies:
   build_runner: ^2.1.11
