@@ -54,7 +54,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       // Set contact object
       request?.contact?.emailAddress = email;
 
-      var response = await _accountRepository.upgradeAccount(request!);
+      await _accountRepository.upgradeAccount(request!);
 
       emit(
         state.copyWith(
@@ -115,6 +115,18 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         return 'Address Proof';
       case 3:
         return 'Employment, Financial Profile';
+      case 4:
+        return 'Disclosures & Affiliations';
+      case 5:
+        return 'Signing Task Agreement';
+      case 6:
+        return 'Signing Broker Agreements';
+      case 7:
+        return 'Trusted Contract';
+      case 8:
+        return 'Risk Disclosure';
+      case 9:
+        return 'Review Information';
       default:
         return '';
     }
