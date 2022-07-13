@@ -15,6 +15,18 @@ class DisclosureAffiliationBloc
     on<AffiliateCompanyCountryChanged>(_onAffiliateCompanyCountryChanged);
     on<AffiliateCompanyEmailChanged>(_onAffiliateCompanyEmailChanged);
     on<QuestionNo2Changed>(_onQuestionNo2Changed);
+    on<ControlledPersonCompanyNameChanged>(
+        _onControlledPersonCompanyNameChanged);
+    on<ControlledPersonCompanyAddressChanged>(
+        _onControlledPersonCompanyAddressChanged);
+    on<ControlledPersonCompanyCityChanged>(
+        _onControlledPersonCompanyCityChanged);
+    on<ControlledPersonCompanyStateChanged>(
+        _onControlledPersonCompanyStateChanged);
+    on<ControlledPersonCompanyCountryChanged>(
+        _onControlledPersonCompanyCountryChanged);
+    on<ControlledPersonCompanyEmailChanged>(
+        _onControlledPersonCompanyEmailChanged);
     on<QuestionNo3Changed>(_onQuestionNo3Changed);
     on<QuestionNo4Changed>(_onQuestionNo4Changed);
     on<QuestionNo5Changed>(_onQuestionNo5Changed);
@@ -28,7 +40,18 @@ class DisclosureAffiliationBloc
 
   _onQuestionNo1Changed(
       QuestionNo1Changed event, Emitter<DisclosureAffiliationState> emit) {
-    emit(state.copyWith(isAffiliated: event.isAffiliated));
+    if (event.isAffiliated) {
+      emit(state.copyWith(isAffiliated: event.isAffiliated));
+    } else {
+      emit(state.copyWith(
+          isAffiliated: event.isAffiliated,
+          affiliateCompanyName: '',
+          affiliateCompanyAddress: '',
+          affiliateCompanyCity: '',
+          affiliateCompanyState: '',
+          affiliateCompanyCountry: '',
+          affiliateCompanyEmail: ''));
+    }
   }
 
   _onAffiliateCompanyNameChanged(AffiliateCompanyNameChanged event,
@@ -65,7 +88,61 @@ class DisclosureAffiliationBloc
 
   _onQuestionNo2Changed(
       QuestionNo2Changed event, Emitter<DisclosureAffiliationState> emit) {
-    emit(state.copyWith(isSeniorExecutive: event.isSeniorExecutive));
+    if (event.isSeniorExecutive) {
+      emit(state.copyWith(isSeniorExecutive: event.isSeniorExecutive));
+    } else {
+      emit(state.copyWith(
+        isSeniorExecutive: event.isSeniorExecutive,
+        controlledPersonCompanyName: '',
+        controlledPersonCompanyAddress: '',
+        controlledPersonCompanyCity: '',
+        controlledPersonCompanyState: '',
+        controlledPersonCompanyCountry: '',
+        controlledPersonCompanyEmail: '',
+      ));
+    }
+  }
+
+  _onControlledPersonCompanyNameChanged(
+      ControlledPersonCompanyNameChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(
+        controlledPersonCompanyName: event.controlledPersonCompanyName));
+  }
+
+  _onControlledPersonCompanyAddressChanged(
+      ControlledPersonCompanyAddressChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(
+        controlledPersonCompanyAddress: event.controlledPersonCompanyAddress));
+  }
+
+  _onControlledPersonCompanyCityChanged(
+      ControlledPersonCompanyCityChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(
+        controlledPersonCompanyCity: event.controlledPersonCompanyCity));
+  }
+
+  _onControlledPersonCompanyStateChanged(
+      ControlledPersonCompanyStateChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(
+        controlledPersonCompanyState: event.controlledPersonCompanyState));
+  }
+
+  _onControlledPersonCompanyCountryChanged(
+      ControlledPersonCompanyCountryChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(
+        controlledPersonCompanyCountry: event.controlledPersonCompanyCountry));
+  }
+
+  _onControlledPersonCompanyEmailChanged(
+      ControlledPersonCompanyEmailChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(
+        controlledPersonCompanyEmail: event.controlledPersonCompanyEmail));
   }
 
   _onQuestionNo3Changed(

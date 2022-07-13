@@ -9,6 +9,12 @@ class DisclosureAffiliationState extends Equatable {
   final String affiliateCompanyCountry;
   final String affiliateCompanyEmail;
   final bool? isSeniorExecutive;
+  final String controlledPersonCompanyName;
+  final String controlledPersonCompanyAddress;
+  final String controlledPersonCompanyCity;
+  final String controlledPersonCompanyState;
+  final String controlledPersonCompanyCountry;
+  final String controlledPersonCompanyEmail;
   final bool? isSeniorPolitical;
   final bool? isFamilyMember;
   final bool? isAssociates;
@@ -20,13 +26,19 @@ class DisclosureAffiliationState extends Equatable {
   final bool? isEmployee;
   const DisclosureAffiliationState({
     this.isAffiliated,
-    this.isSeniorExecutive,
     this.affiliateCompanyName = '',
     this.affiliateCompanyAddress = '',
     this.affiliateCompanyCity = '',
     this.affiliateCompanyState = '',
     this.affiliateCompanyCountry = '',
     this.affiliateCompanyEmail = '',
+    this.isSeniorExecutive,
+    this.controlledPersonCompanyName = '',
+    this.controlledPersonCompanyAddress = '',
+    this.controlledPersonCompanyCity = '',
+    this.controlledPersonCompanyState = '',
+    this.controlledPersonCompanyCountry = '',
+    this.controlledPersonCompanyEmail = '',
     this.isSeniorPolitical,
     this.isFamilyMember,
     this.isAssociates,
@@ -40,13 +52,19 @@ class DisclosureAffiliationState extends Equatable {
 
   DisclosureAffiliationState copyWith({
     bool? isAffiliated,
-    bool? isSeniorExecutive,
     String? affiliateCompanyName,
     String? affiliateCompanyAddress,
     String? affiliateCompanyCity,
     String? affiliateCompanyState,
     String? affiliateCompanyCountry,
     String? affiliateCompanyEmail,
+    bool? isSeniorExecutive,
+    String? controlledPersonCompanyName,
+    String? controlledPersonCompanyAddress,
+    String? controlledPersonCompanyCity,
+    String? controlledPersonCompanyState,
+    String? controlledPersonCompanyCountry,
+    String? controlledPersonCompanyEmail,
     bool? isSeniorPolitical,
     bool? isFamilyMember,
     bool? isAssociates,
@@ -59,7 +77,6 @@ class DisclosureAffiliationState extends Equatable {
   }) {
     return DisclosureAffiliationState(
       isAffiliated: isAffiliated ?? this.isAffiliated,
-      isSeniorExecutive: isSeniorExecutive ?? this.isSeniorExecutive,
       affiliateCompanyName: affiliateCompanyName ?? this.affiliateCompanyName,
       affiliateCompanyAddress:
           affiliateCompanyAddress ?? this.affiliateCompanyAddress,
@@ -70,6 +87,19 @@ class DisclosureAffiliationState extends Equatable {
           affiliateCompanyCountry ?? this.affiliateCompanyCountry,
       affiliateCompanyEmail:
           affiliateCompanyEmail ?? this.affiliateCompanyEmail,
+      isSeniorExecutive: isSeniorExecutive ?? this.isSeniorExecutive,
+      controlledPersonCompanyName:
+          controlledPersonCompanyName ?? this.controlledPersonCompanyName,
+      controlledPersonCompanyAddress:
+          controlledPersonCompanyAddress ?? this.controlledPersonCompanyAddress,
+      controlledPersonCompanyCity:
+          controlledPersonCompanyCity ?? this.controlledPersonCompanyCity,
+      controlledPersonCompanyState:
+          controlledPersonCompanyState ?? this.controlledPersonCompanyState,
+      controlledPersonCompanyCountry:
+          controlledPersonCompanyCountry ?? this.controlledPersonCompanyCountry,
+      controlledPersonCompanyEmail:
+          controlledPersonCompanyEmail ?? this.controlledPersonCompanyEmail,
       isSeniorPolitical: isSeniorPolitical ?? this.isSeniorPolitical,
       isFamilyMember: isFamilyMember ?? this.isFamilyMember,
       isAssociates: isAssociates ?? this.isAssociates,
@@ -95,6 +125,12 @@ class DisclosureAffiliationState extends Equatable {
         affiliateCompanyCountry,
         affiliateCompanyEmail,
         isSeniorExecutive,
+        controlledPersonCompanyName,
+        controlledPersonCompanyAddress,
+        controlledPersonCompanyCity,
+        controlledPersonCompanyState,
+        controlledPersonCompanyCountry,
+        controlledPersonCompanyEmail,
         isSeniorPolitical,
         isFamilyMember,
         isAssociates,
