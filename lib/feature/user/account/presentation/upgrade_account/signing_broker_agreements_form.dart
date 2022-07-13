@@ -5,7 +5,7 @@ import 'package:signature/signature.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
-import '../../bloc/signing_broker_agremeent/bloc/signing_broker_agreement_bloc.dart';
+import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
 import '../widgets/signature_drawer.dart';
 
 class SigningBrokerAgreementsForm extends StatelessWidget {
