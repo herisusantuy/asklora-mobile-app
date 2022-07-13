@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
-import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../widgets/modal_text_input.dart';
-import '../widgets/modal_upload_document.dart';
 import 'affiliated_form.dart';
 import 'controlled_person_from.dart';
+import 'family_member_form.dart';
 
 class DisclosuresAffiliationsForm extends StatelessWidget {
   final PageController controller;
@@ -124,18 +123,27 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isFamilyMember != current.isFamilyMember,
         builder: (context, state) {
-          return QuestionWidget(
-            key: const Key('disclosure_affiliation_question_4'),
-            questionText:
-                '4. I am a family member or relative of senior political figure?',
-            padding: const EdgeInsets.only(top: 10),
-            options: const ['Yes', 'No'],
-            selectedAnswer: state.isFamilyMember != null
-                ? (state.isFamilyMember! ? 'Yes' : 'No')
-                : null,
-            onSelected: (value) => context
-                .read<DisclosureAffiliationBloc>()
-                .add(QuestionNo4Changed(value == 'Yes' ? true : false)),
+          return Column(
+            children: [
+              QuestionWidget(
+                key: const Key('disclosure_affiliation_question_4'),
+                questionText:
+                    '4. I am a family member or relative of senior political figure?',
+                padding: const EdgeInsets.only(top: 10),
+                options: const ['Yes', 'No'],
+                selectedAnswer: state.isFamilyMember != null
+                    ? (state.isFamilyMember! ? 'Yes' : 'No')
+                    : null,
+                onSelected: (value) => context
+                    .read<DisclosureAffiliationBloc>()
+                    .add(QuestionNo4Changed(value == 'Yes'
+                        ? true
+                        : value == 'No'
+                            ? false
+                            : false)),
+              ),
+              if (state.isFamilyMember == true) const FamilyMemberForm()
+            ],
           );
         },
       );

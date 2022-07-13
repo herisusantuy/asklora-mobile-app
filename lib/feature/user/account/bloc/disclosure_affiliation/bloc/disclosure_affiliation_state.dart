@@ -17,6 +17,8 @@ class DisclosureAffiliationState extends Equatable {
   final String controlledPersonCompanyEmail;
   final bool? isSeniorPolitical;
   final bool? isFamilyMember;
+  final String firstNameOfFamilyMember;
+  final String lastNameOfFamilyMember;
   final bool? isAssociates;
   final String nameOfAffiliatedPerson;
   final bool isNameOfAffiliatedPersonSubmitted;
@@ -41,6 +43,8 @@ class DisclosureAffiliationState extends Equatable {
     this.controlledPersonCompanyEmail = '',
     this.isSeniorPolitical,
     this.isFamilyMember,
+    this.firstNameOfFamilyMember = '',
+    this.lastNameOfFamilyMember = '',
     this.isAssociates,
     this.nameOfAffiliatedPerson = '',
     this.isNameOfAffiliatedPersonSubmitted = false,
@@ -67,6 +71,8 @@ class DisclosureAffiliationState extends Equatable {
     String? controlledPersonCompanyEmail,
     bool? isSeniorPolitical,
     bool? isFamilyMember,
+    String? firstNameOfFamilyMember,
+    String? lastNameOfFamilyMember,
     bool? isAssociates,
     String? nameOfAffiliatedPerson,
     bool? isNameOfAffiliatedPersonSubmitted,
@@ -102,6 +108,10 @@ class DisclosureAffiliationState extends Equatable {
           controlledPersonCompanyEmail ?? this.controlledPersonCompanyEmail,
       isSeniorPolitical: isSeniorPolitical ?? this.isSeniorPolitical,
       isFamilyMember: isFamilyMember ?? this.isFamilyMember,
+      firstNameOfFamilyMember:
+          firstNameOfFamilyMember ?? this.firstNameOfFamilyMember,
+      lastNameOfFamilyMember:
+          lastNameOfFamilyMember ?? this.lastNameOfFamilyMember,
       isAssociates: isAssociates ?? this.isAssociates,
       nameOfAffiliatedPerson:
           nameOfAffiliatedPerson ?? this.nameOfAffiliatedPerson,
@@ -133,6 +143,8 @@ class DisclosureAffiliationState extends Equatable {
         controlledPersonCompanyEmail,
         isSeniorPolitical,
         isFamilyMember,
+        firstNameOfFamilyMember,
+        lastNameOfFamilyMember,
         isAssociates,
         nameOfAffiliatedPerson,
         isNameOfAffiliatedPersonSubmitted,

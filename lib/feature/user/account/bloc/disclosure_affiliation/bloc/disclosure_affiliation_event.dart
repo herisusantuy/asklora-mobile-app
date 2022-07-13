@@ -129,6 +129,20 @@ class QuestionNo4Changed extends DisclosuresAffiliationEvent {
   List<Object> get props => [isFamilyMember];
 }
 
+class FirstNameOfFamilyMemberChanged extends DisclosuresAffiliationEvent {
+  final String firstNameOfFamilyMember;
+  const FirstNameOfFamilyMemberChanged(this.firstNameOfFamilyMember) : super();
+  @override
+  List<Object> get props => [firstNameOfFamilyMember];
+}
+
+class LastNameOfFamilyMemberChanged extends DisclosuresAffiliationEvent {
+  final String lastNameOfFamilyMember;
+  const LastNameOfFamilyMemberChanged(this.lastNameOfFamilyMember) : super();
+  @override
+  List<Object> get props => [lastNameOfFamilyMember];
+}
+
 class QuestionNo5Changed extends DisclosuresAffiliationEvent {
   final bool isAssociates;
   const QuestionNo5Changed(this.isAssociates) : super();

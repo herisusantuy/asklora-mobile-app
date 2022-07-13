@@ -29,6 +29,8 @@ class DisclosureAffiliationBloc
         _onControlledPersonCompanyEmailChanged);
     on<QuestionNo3Changed>(_onQuestionNo3Changed);
     on<QuestionNo4Changed>(_onQuestionNo4Changed);
+    on<FirstNameOfFamilyMemberChanged>(_onFirstNameOfFamilyMemberChanged);
+    on<LastNameOfFamilyMemberChanged>(_onLastNameOfFamilyMemberChanged);
     on<QuestionNo5Changed>(_onQuestionNo5Changed);
     on<NameOfAffiliatedChanged>(_onNameOfAffiliatedChanged);
     on<NameOfAffiliatedSubmitted>(_onNameOfAffiliatedSubmitted);
@@ -152,7 +154,26 @@ class DisclosureAffiliationBloc
 
   _onQuestionNo4Changed(
       QuestionNo4Changed event, Emitter<DisclosureAffiliationState> emit) {
-    emit(state.copyWith(isFamilyMember: event.isFamilyMember));
+    if (event.isFamilyMember == true) {
+      emit(state.copyWith(isFamilyMember: event.isFamilyMember));
+    } else {
+      emit(state.copyWith(
+        isFamilyMember: event.isFamilyMember,
+        firstNameOfFamilyMember: '',
+        lastNameOfFamilyMember: '',
+      ));
+    }
+  }
+
+  _onFirstNameOfFamilyMemberChanged(FirstNameOfFamilyMemberChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(
+        state.copyWith(firstNameOfFamilyMember: event.firstNameOfFamilyMember));
+  }
+
+  _onLastNameOfFamilyMemberChanged(LastNameOfFamilyMemberChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(lastNameOfFamilyMember: event.lastNameOfFamilyMember));
   }
 
   _onQuestionNo5Changed(
