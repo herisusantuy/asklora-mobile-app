@@ -13,7 +13,7 @@ class BasicInformationState extends Equatable {
     this.countryCode = '',
     this.phoneNumber = '',
     this.countryOfCitizenship = '',
-    this.isHongkongPermanentResident = true,
+    this.isHongKongPermanentResident = true,
     this.isUnitedStateResident = false,
   });
 
@@ -26,7 +26,7 @@ class BasicInformationState extends Equatable {
   final String countryCode;
   final String phoneNumber;
   final String countryOfCitizenship;
-  final bool isHongkongPermanentResident;
+  final bool isHongKongPermanentResident;
   final bool isUnitedStateResident;
 
   @override
@@ -41,7 +41,7 @@ class BasicInformationState extends Equatable {
       countryCode,
       phoneNumber,
       countryOfCitizenship,
-      isHongkongPermanentResident,
+      isHongKongPermanentResident,
       isUnitedStateResident,
     ];
   }
@@ -56,7 +56,7 @@ class BasicInformationState extends Equatable {
     String? countryCode,
     String? phoneNumber,
     String? countryOfCitizenship,
-    bool? isHongkongPermanentResident,
+    bool? isHongKongPermanentResident,
     bool? isUnitedStateResident,
   }) {
     return BasicInformationState(
@@ -69,10 +69,21 @@ class BasicInformationState extends Equatable {
       countryCode: countryCode ?? this.countryCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       countryOfCitizenship: countryOfCitizenship ?? this.countryOfCitizenship,
-      isHongkongPermanentResident:
-          isHongkongPermanentResident ?? this.isHongkongPermanentResident,
+      isHongKongPermanentResident:
+          isHongKongPermanentResident ?? this.isHongKongPermanentResident,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
     );
   }
+
+  bool enableNextButton() =>
+      firstName.isNotEmpty &&
+      middleName.isNotEmpty &&
+      lastName.isNotEmpty &&
+      chineseName.isNotEmpty &&
+      gender.isNotEmpty &&
+      dateOfBirth.isNotEmpty &&
+      countryCode.isNotEmpty &&
+      phoneNumber.isNotEmpty &&
+      countryOfCitizenship.isNotEmpty;
 }

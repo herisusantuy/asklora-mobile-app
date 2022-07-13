@@ -16,6 +16,8 @@ class FinancialProfileBloc
     on<FinancialProfileEmploymentStatusChanged>(
         _onFinancialProfileEmploymentStatusChanged);
     on<FinancialProfileOccupationChanged>(_onFinancialProfileOccupationChanged);
+    on<FinancialProfileOtherOccupationChanged>(
+        _onFinancialProfileOtherOccupationChanged);
     on<FinancialProfileEmployerChanged>(_onFinancialProfileEmployerChanged);
     on<FinancialProfileEmployerAddressChanged>(
         _onFinancialProfileEmployerAddressChanged);
@@ -48,6 +50,12 @@ class FinancialProfileBloc
   _onFinancialProfileOccupationChanged(FinancialProfileOccupationChanged event,
       Emitter<FinancialProfileState> emit) {
     emit(state.copyWith(occupation: event.occupation));
+  }
+
+  _onFinancialProfileOtherOccupationChanged(
+      FinancialProfileOtherOccupationChanged event,
+      Emitter<FinancialProfileState> emit) {
+    emit(state.copyWith(otherOccupation: event.otherOccupation));
   }
 
   _onFinancialProfileEmployerChanged(FinancialProfileEmployerChanged event,

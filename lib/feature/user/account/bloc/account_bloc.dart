@@ -92,9 +92,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       } else {
         nextStepIndex--;
       }
-    }
-
-    if (event.type != 'back') {
+    } else {
       if (state.currentStepIndex + 1 == 2) {
         nextStepIndex = 2;
       } else {
@@ -102,7 +100,22 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       }
     }
 
-    emit(state.copyWith(currentStepIndex: nextStepIndex));
+    emit(state.copyWith(
+        currentStepIndex: nextStepIndex,
+        currentStepName: _getStepName(nextStepIndex)));
+  }
+
+  String _getStepName(int stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return 'Basic Information';
+      case 1:
+        return 'Address Proof';
+      case 2:
+        return 'Employment, Financial Profile';
+      default:
+        return '';
+    }
   }
 
   _onUpdateOnfidoResult(
