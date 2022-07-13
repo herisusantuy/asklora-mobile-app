@@ -36,11 +36,11 @@ class SigningAgreementChecked extends SigningBrokerAgreementEvent {
 }
 
 class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
-  final SignatureController customerSignature;
+  final Uint8List? customerSignature;
   const CustomerSignatureDrew(this.customerSignature) : super();
 
   @override
-  List<Object> get props => [customerSignature];
+  List<Object?> get props => [customerSignature];
 }
 
 class CustomerSignatureReset extends SigningBrokerAgreementEvent {

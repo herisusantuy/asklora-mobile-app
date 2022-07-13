@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
@@ -112,9 +114,11 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                 if (!state.isSignatureDrew)
                   SignatureDrawer(
                       signatureController: _signatureController,
-                      onSubmit: () => context
-                          .read<SigningBrokerAgreementBloc>()
-                          .add(CustomerSignatureDrew(_signatureController)),
+                      onSubmit: () async {
+                        context.read<SigningBrokerAgreementBloc>().add(
+                            CustomerSignatureDrew(
+                                await _getCustomerSignature()));
+                      },
                       onReset: () => _signatureController.clear())
                 else
                   Column(
@@ -153,4 +157,14 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
           );
         },
       );
+
+  Future<Uint8List?> _getCustomerSignature() async {
+    final exportController = SignatureController(
+      penStrokeWidth: 2,
+      penColor: Colors.black,
+      exportBackgroundColor: Colors.transparent,
+      points: _signatureController.points,
+    );
+    return await exportController.toPngBytes();
+  }
 }
