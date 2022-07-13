@@ -8,6 +8,12 @@ class DisclosureAffiliationBloc
     extends Bloc<DisclosuresAffiliationEvent, DisclosureAffiliationState> {
   DisclosureAffiliationBloc() : super(const DisclosureAffiliationState()) {
     on<QuestionNo1Changed>(_onQuestionNo1Changed);
+    on<AffiliateCompanyNameChanged>(_onAffiliateCompanyNameChanged);
+    on<AffiliateCompanyAddressChanged>(_onAffiliateCompanyAddressChanged);
+    on<AffiliateCompanyCityChanged>(_onAffiliateCompanyCityChanged);
+    on<AffiliateCompanyStateChanged>(_onAffiliateCompanyStateChanged);
+    on<AffiliateCompanyCountryChanged>(_onAffiliateCompanyCountryChanged);
+    on<AffiliateCompanyEmailChanged>(_onAffiliateCompanyEmailChanged);
     on<QuestionNo2Changed>(_onQuestionNo2Changed);
     on<QuestionNo3Changed>(_onQuestionNo3Changed);
     on<QuestionNo4Changed>(_onQuestionNo4Changed);
@@ -23,6 +29,38 @@ class DisclosureAffiliationBloc
   _onQuestionNo1Changed(
       QuestionNo1Changed event, Emitter<DisclosureAffiliationState> emit) {
     emit(state.copyWith(isAffiliated: event.isAffiliated));
+  }
+
+  _onAffiliateCompanyNameChanged(AffiliateCompanyNameChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(affiliateCompanyName: event.affiliateCompanyName));
+  }
+
+  _onAffiliateCompanyAddressChanged(AffiliateCompanyAddressChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(
+        state.copyWith(affiliateCompanyAddress: event.affiliateCompanyAddress));
+  }
+
+  _onAffiliateCompanyCityChanged(AffiliateCompanyCityChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(affiliateCompanyCity: event.affiliateCompanyCity));
+  }
+
+  _onAffiliateCompanyStateChanged(AffiliateCompanyStateChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(affiliateCompanyState: event.affiliateCompanyState));
+  }
+
+  _onAffiliateCompanyCountryChanged(AffiliateCompanyCountryChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(
+        state.copyWith(affiliateCompanyCountry: event.affiliateCompanyCountry));
+  }
+
+  _onAffiliateCompanyEmailChanged(AffiliateCompanyEmailChanged event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(affiliateCompanyEmail: event.affiliateCompanyEmail));
   }
 
   _onQuestionNo2Changed(

@@ -2,6 +2,12 @@ part of 'disclosure_affiliation_bloc.dart';
 
 class DisclosureAffiliationState extends Equatable {
   final bool? isAffiliated;
+  final String affiliateCompanyName;
+  final String affiliateCompanyAddress;
+  final String affiliateCompanyCity;
+  final String affiliateCompanyState;
+  final String affiliateCompanyCountry;
+  final String affiliateCompanyEmail;
   final bool? isSeniorExecutive;
   final bool? isSeniorPolitical;
   final bool? isFamilyMember;
@@ -15,6 +21,12 @@ class DisclosureAffiliationState extends Equatable {
   const DisclosureAffiliationState({
     this.isAffiliated,
     this.isSeniorExecutive,
+    this.affiliateCompanyName = '',
+    this.affiliateCompanyAddress = '',
+    this.affiliateCompanyCity = '',
+    this.affiliateCompanyState = '',
+    this.affiliateCompanyCountry = '',
+    this.affiliateCompanyEmail = '',
     this.isSeniorPolitical,
     this.isFamilyMember,
     this.isAssociates,
@@ -29,6 +41,12 @@ class DisclosureAffiliationState extends Equatable {
   DisclosureAffiliationState copyWith({
     bool? isAffiliated,
     bool? isSeniorExecutive,
+    String? affiliateCompanyName,
+    String? affiliateCompanyAddress,
+    String? affiliateCompanyCity,
+    String? affiliateCompanyState,
+    String? affiliateCompanyCountry,
+    String? affiliateCompanyEmail,
     bool? isSeniorPolitical,
     bool? isFamilyMember,
     bool? isAssociates,
@@ -42,6 +60,16 @@ class DisclosureAffiliationState extends Equatable {
     return DisclosureAffiliationState(
       isAffiliated: isAffiliated ?? this.isAffiliated,
       isSeniorExecutive: isSeniorExecutive ?? this.isSeniorExecutive,
+      affiliateCompanyName: affiliateCompanyName ?? this.affiliateCompanyName,
+      affiliateCompanyAddress:
+          affiliateCompanyAddress ?? this.affiliateCompanyAddress,
+      affiliateCompanyCity: affiliateCompanyCity ?? this.affiliateCompanyCity,
+      affiliateCompanyState:
+          affiliateCompanyState ?? this.affiliateCompanyState,
+      affiliateCompanyCountry:
+          affiliateCompanyCountry ?? this.affiliateCompanyCountry,
+      affiliateCompanyEmail:
+          affiliateCompanyEmail ?? this.affiliateCompanyEmail,
       isSeniorPolitical: isSeniorPolitical ?? this.isSeniorPolitical,
       isFamilyMember: isFamilyMember ?? this.isFamilyMember,
       isAssociates: isAssociates ?? this.isAssociates,
@@ -60,6 +88,12 @@ class DisclosureAffiliationState extends Equatable {
   @override
   List<Object?> get props => [
         isAffiliated,
+        affiliateCompanyName,
+        affiliateCompanyAddress,
+        affiliateCompanyCity,
+        affiliateCompanyState,
+        affiliateCompanyCountry,
+        affiliateCompanyEmail,
         isSeniorExecutive,
         isSeniorPolitical,
         isFamilyMember,

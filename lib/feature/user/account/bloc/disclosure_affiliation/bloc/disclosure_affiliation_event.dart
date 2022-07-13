@@ -14,6 +14,48 @@ class QuestionNo1Changed extends DisclosuresAffiliationEvent {
   List<Object> get props => [isAffiliated];
 }
 
+class AffiliateCompanyNameChanged extends DisclosuresAffiliationEvent {
+  final String affiliateCompanyName;
+  const AffiliateCompanyNameChanged(this.affiliateCompanyName) : super();
+  @override
+  List<Object> get props => [affiliateCompanyName];
+}
+
+class AffiliateCompanyAddressChanged extends DisclosuresAffiliationEvent {
+  final String affiliateCompanyAddress;
+  const AffiliateCompanyAddressChanged(this.affiliateCompanyAddress) : super();
+  @override
+  List<Object> get props => [affiliateCompanyAddress];
+}
+
+class AffiliateCompanyCityChanged extends DisclosuresAffiliationEvent {
+  final String affiliateCompanyCity;
+  const AffiliateCompanyCityChanged(this.affiliateCompanyCity) : super();
+  @override
+  List<Object> get props => [affiliateCompanyCity];
+}
+
+class AffiliateCompanyStateChanged extends DisclosuresAffiliationEvent {
+  final String affiliateCompanyState;
+  const AffiliateCompanyStateChanged(this.affiliateCompanyState) : super();
+  @override
+  List<Object> get props => [affiliateCompanyState];
+}
+
+class AffiliateCompanyCountryChanged extends DisclosuresAffiliationEvent {
+  final String affiliateCompanyCountry;
+  const AffiliateCompanyCountryChanged(this.affiliateCompanyCountry) : super();
+  @override
+  List<Object> get props => [affiliateCompanyCountry];
+}
+
+class AffiliateCompanyEmailChanged extends DisclosuresAffiliationEvent {
+  final String affiliateCompanyEmail;
+  const AffiliateCompanyEmailChanged(this.affiliateCompanyEmail) : super();
+  @override
+  List<Object> get props => [affiliateCompanyEmail];
+}
+
 class QuestionNo2Changed extends DisclosuresAffiliationEvent {
   final bool isSeniorExecutive;
   const QuestionNo2Changed(this.isSeniorExecutive) : super();
