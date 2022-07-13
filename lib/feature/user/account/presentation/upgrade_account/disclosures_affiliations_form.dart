@@ -67,10 +67,10 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     .read<DisclosureAffiliationBloc>()
                     .add(QuestionNo1Changed(value == 'Yes' ? true : false)),
               ),
-              if (state.isAffiliated!)
+              if (state.isAffiliated == true)
                 Column(
                   children: [
-                    _affiliatedCompanyName(),
+                    _affiliateCompanyName(),
                     _affiliateCompanyAddress(),
                     _affiliateCompanyCity(),
                     _affiliateCompanyStreet(),
@@ -83,13 +83,17 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         },
       );
 
-  Widget _affiliatedCompanyName() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
-      child: CustomTextInput(
-          labelText: 'Company Name',
-          onChanged: (value) => value,
-          hintText: 'Enter Company Name'),
+  Widget _affiliateCompanyName() {
+    return BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: CustomTextInput(
+              labelText: 'Company Name',
+              onChanged: (value) => value,
+              hintText: 'Enter Company Name'),
+        );
+      },
     );
   }
 
