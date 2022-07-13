@@ -102,7 +102,9 @@ class AddressProofForm extends StatelessWidget {
                 questionText:
                     'My mailing address and residential address is the same',
                 options: const ['Yes', 'No'],
-                selectedAnswer: state.isSameMailingAddress ? 'Yes' : 'No',
+                selectedAnswer: state.isSameMailingAddress != null
+                    ? (state.isSameMailingAddress! ? 'Yes' : 'No')
+                    : null,
                 onSelected: (value) async {
                   context.read<AddressProofBloc>().add(
                         AddressProofIsSameMailingAddressChanged(
@@ -117,7 +119,8 @@ class AddressProofForm extends StatelessWidget {
                           ));
                 },
               ),
-              if (!state.isSameMailingAddress)
+              if (state.isSameMailingAddress != null &&
+                  !state.isSameMailingAddress!)
                 Column(
                   children: [
                     _mailApartmentNumberInput(context),
