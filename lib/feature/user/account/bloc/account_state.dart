@@ -17,10 +17,7 @@ class AccountState extends Equatable {
       this.account,
       this.upgradeAccountRequest,
       this.currentStepIndex = 0,
-      this.currentStepName = 'Basic Information',
-      this.isBasicInformationCompleted = false,
-      this.isAddressProofCompleted = false,
-      this.isFinancialProfileCompleted = false});
+      this.currentStepName = 'Basic Information'});
 
   final GetAccountStatus status;
   final String responseMessage;
@@ -28,9 +25,6 @@ class AccountState extends Equatable {
   final UpgradeAccountRequest? upgradeAccountRequest;
   final int currentStepIndex;
   final String currentStepName;
-  final bool isBasicInformationCompleted;
-  final bool isAddressProofCompleted;
-  final bool isFinancialProfileCompleted;
 
   @override
   List<Object?> get props {
@@ -41,36 +35,26 @@ class AccountState extends Equatable {
       upgradeAccountRequest,
       currentStepIndex,
       currentStepName,
-      isBasicInformationCompleted,
-      isAddressProofCompleted,
-      isFinancialProfileCompleted
     ];
   }
 
-  AccountState copyWith(
-      {GetAccountStatus? status,
-      String? responseMessage,
-      GetAccountResponse? account,
-      UpgradeAccountRequest? upgradeAccountRequest,
-      int? currentStepIndex,
-      String? currentStepName,
-      bool? isBasicInformationCompleted,
-      bool? isAddressProofCompleted,
-      bool? isFinancialProfileCompleted}) {
+  AccountState copyWith({
+    GetAccountStatus? status,
+    String? responseMessage,
+    GetAccountResponse? account,
+    UpgradeAccountRequest? upgradeAccountRequest,
+    int? currentStepIndex,
+    String? currentStepName,
+  }) {
     return AccountState(
-        status: status ?? this.status,
-        responseMessage: responseMessage ?? this.responseMessage,
-        account: account ?? this.account,
-        upgradeAccountRequest:
-            upgradeAccountRequest ?? this.upgradeAccountRequest,
-        currentStepIndex: currentStepIndex ?? this.currentStepIndex,
-        currentStepName: currentStepName ?? this.currentStepName,
-        isBasicInformationCompleted:
-            isBasicInformationCompleted ?? this.isBasicInformationCompleted,
-        isAddressProofCompleted:
-            isAddressProofCompleted ?? this.isAddressProofCompleted,
-        isFinancialProfileCompleted:
-            isFinancialProfileCompleted ?? this.isFinancialProfileCompleted);
+      status: status ?? this.status,
+      responseMessage: responseMessage ?? this.responseMessage,
+      account: account ?? this.account,
+      upgradeAccountRequest:
+          upgradeAccountRequest ?? this.upgradeAccountRequest,
+      currentStepIndex: currentStepIndex ?? this.currentStepIndex,
+      currentStepName: currentStepName ?? this.currentStepName,
+    );
   }
 }
 

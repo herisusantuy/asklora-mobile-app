@@ -21,7 +21,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<UpgradeAccount>(_onUpgradeAccount);
     on<AccountCurrentStepChanged>(_onAccountCurrentStepIndexChange);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
-    on<AccountEnableNextButton>(_onAccountEnableNextButton);
   }
 
   final AccountRepository _accountRepository;
@@ -116,23 +115,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         return 'Employment, Financial Profile';
       default:
         return '';
-    }
-  }
-
-  _onAccountEnableNextButton(
-      AccountEnableNextButton event, Emitter<AccountState> emit) {
-    switch (event.currentStepIndex) {
-      case 0:
-        emit(state.copyWith(isBasicInformationCompleted: event.status));
-        break;
-      case 1:
-        emit(state.copyWith(isAddressProofCompleted: event.status));
-        break;
-      case 2:
-        emit(state.copyWith(isFinancialProfileCompleted: event.status));
-        break;
-      default:
-        break;
     }
   }
 
