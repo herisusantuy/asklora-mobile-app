@@ -16,16 +16,52 @@ import 'address_proof_form.dart';
 import 'basic_information_form.dart';
 import 'disclosures_affiliations_form.dart';
 import 'financial_profile_form.dart';
+import 'review_information_screen.dart';
 import 'risk_disclosure_form.dart';
 import 'signing_agreement_tax_form.dart';
 import 'signing_broker_agreements_form.dart';
 import 'trusted_contact_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
-  const UpgradeAccountScreen({Key? key, required this.initialPage})
-      : super(key: key);
+  UpgradeAccountScreen({Key? key, required this.initialPage})
+      : _pageViewController = PageController(initialPage: initialPage),
+        super(key: key);
 
   final int initialPage;
+
+  final PageController _pageViewController;
+
+  List<Widget> get _pages => [
+        BasicInformationForm(
+          key: const Key('basic_information_step'),
+          controller: _pageViewController,
+        ),
+        AddressProofForm(
+          key: const Key('address_proof_step'),
+          controller: _pageViewController,
+        ),
+        FinancialProfileForm(
+            key: const Key('financial_profile_step'),
+            controller: _pageViewController),
+        DisclosuresAffiliationsForm(
+          key: const Key('disclosures_affiliations_step'),
+          controller: _pageViewController,
+        ),
+        SigningAgreementTaxForm(
+            key: const Key('signing_agreement_tax_step'),
+            controller: _pageViewController),
+        SigningBrokerAgreementsForm(
+          key: const Key('signing_broker_agreement_step'),
+          controller: _pageViewController,
+        ),
+        RiskDisclosureForm(
+            key: const Key('risk_disclosure_step'),
+            controller: _pageViewController),
+        ReviewInformationScreen(
+            key: const Key('review_information_step'),
+            controller: _pageViewController),
+      ];
+
   @override
   Widget build(BuildContext context) {
     final PageController _pageViewController =
@@ -85,7 +121,7 @@ class UpgradeAccountScreen extends StatelessWidget {
         child: SafeArea(
             child: Column(
           children: [
-            _headerUpgradeAccount(_pageViewController),
+            _headerUpgradeAccount(),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -103,7 +139,7 @@ class UpgradeAccountScreen extends StatelessWidget {
     );
   }
 
-  Widget _headerUpgradeAccount(PageController controller) => Container(
+  Widget _headerUpgradeAccount() => Container(
         decoration: const BoxDecoration(
           border: Border(
             bottom: BorderSide(
@@ -120,7 +156,7 @@ class UpgradeAccountScreen extends StatelessWidget {
                     context
                         .read<AccountBloc>()
                         .add(const AccountCurrentStepChanged('back'));
-                    controller.previousPage(
+                    _pageViewController.previousPage(
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.ease);
                   },
@@ -144,7 +180,7 @@ class UpgradeAccountScreen extends StatelessWidget {
 
   static void open(BuildContext context) =>
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => const UpgradeAccountScreen(
+          builder: (_) => UpgradeAccountScreen(
                 initialPage: 0,
               )));
 }

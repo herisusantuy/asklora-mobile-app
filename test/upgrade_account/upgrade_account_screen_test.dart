@@ -9,14 +9,14 @@ void main() async {
     Future<void> _buildUpgradeAccountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: const UpgradeAccountScreen(initialPage: 0),
+          home: UpgradeAccountScreen(initialPage: 0),
           navigatorObservers: [mockObserver]));
     }
 
     Future<void> _buildAddressProofForm(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: const UpgradeAccountScreen(initialPage: 1),
+          home: UpgradeAccountScreen(initialPage: 1),
           navigatorObservers: [mockObserver]));
     }
 
@@ -24,7 +24,7 @@ void main() async {
         WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: const UpgradeAccountScreen(initialPage: 2),
+          home: UpgradeAccountScreen(initialPage: 2),
           navigatorObservers: [mockObserver]));
     }
 
