@@ -7,6 +7,7 @@ import 'package:signature/signature.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
+import '../../bloc/account_bloc.dart';
 import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
 import '../widgets/signature_drawer.dart';
 
@@ -150,9 +151,14 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
               borderRadius: 30,
               buttonText: 'Next',
               disable: state.disabledNextButton(),
-              onClick: () => controller.nextPage(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.ease),
+              onClick: () {
+                context
+                    .read<AccountBloc>()
+                    .add(const AccountCurrentStepChanged('next'));
+                controller.nextPage(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.ease);
+              },
             ),
           );
         },
