@@ -162,7 +162,7 @@ class BasicInformationForm extends StatelessWidget {
           current.isHongKongPermanentResident),
       builder: (context, state) {
         return QuestionWidget(
-          key: const Key('account_is_hong_kong_permanent_resident_question'),
+          key: const Key('account_is_hongkong_permanent_resident_question'),
           padding: const EdgeInsets.only(top: 10),
           questionText: 'Hong Kong Permanent Resident',
           options: const ['Yes', 'No'],
