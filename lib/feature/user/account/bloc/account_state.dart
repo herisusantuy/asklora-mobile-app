@@ -11,19 +11,20 @@ enum GetAccountStatus {
 }
 
 class AccountState extends Equatable {
-  const AccountState({
-    this.status = GetAccountStatus.unknown,
-    this.responseMessage = '',
-    this.account,
-    this.upgradeAccountRequest,
-    this.currentStepIndex = 0,
-  });
+  const AccountState(
+      {this.status = GetAccountStatus.unknown,
+      this.responseMessage = '',
+      this.account,
+      this.upgradeAccountRequest,
+      this.currentStepIndex = 0,
+      this.currentStepName = 'Basic Information'});
 
   final GetAccountStatus status;
   final String responseMessage;
   final GetAccountResponse? account;
   final UpgradeAccountRequest? upgradeAccountRequest;
   final int currentStepIndex;
+  final String currentStepName;
 
   @override
   List<Object?> get props {
@@ -33,6 +34,7 @@ class AccountState extends Equatable {
       account,
       upgradeAccountRequest,
       currentStepIndex,
+      currentStepName,
     ];
   }
 
@@ -42,6 +44,7 @@ class AccountState extends Equatable {
     GetAccountResponse? account,
     UpgradeAccountRequest? upgradeAccountRequest,
     int? currentStepIndex,
+    String? currentStepName,
   }) {
     return AccountState(
       status: status ?? this.status,
@@ -50,23 +53,9 @@ class AccountState extends Equatable {
       upgradeAccountRequest:
           upgradeAccountRequest ?? this.upgradeAccountRequest,
       currentStepIndex: currentStepIndex ?? this.currentStepIndex,
+      currentStepName: currentStepName ?? this.currentStepName,
     );
   }
-
-  // bool disableNextButton() {
-  //   if (firstName.isEmpty ||
-  //       middleName.isEmpty ||
-  //       lastName.isEmpty ||
-  //       chineseName.isEmpty ||
-  //       gender.isEmpty ||
-  //       dateOfBirth.isEmpty ||
-  //       countryCode.isEmpty ||
-  //       phoneNumber.isEmpty ||
-  //       countryOfCitizenship.isEmpty) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 }
 
 class EnableBasicInformationNextButton extends AccountState {}
