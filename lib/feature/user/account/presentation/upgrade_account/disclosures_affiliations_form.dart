@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
+import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
@@ -149,29 +150,13 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         },
       );
   Widget _questionNo5() =>
-      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-        listenWhen: (previous, current) =>
-            previous.isAssociates != current.isAssociates,
-        listener: (context, state) {
-          if (state.isAssociates!) {
-            showModalTextInput(
-                labelTextInput: 'Name of Affiliated Person',
-                context: context,
-                onChanged: (value) => context
-                    .read<DisclosureAffiliationBloc>()
-                    .add(NameOfAffiliatedChanged(value)),
-                onSubmit: () {
-                  context
-                      .read<DisclosureAffiliationBloc>()
-                      .add(const NameOfAffiliatedSubmitted());
-                  Navigator.pop(context);
-                });
-          }
-        },
+      BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
             previous.isAssociates != current.isAssociates ||
-            current.isNameOfAffiliatedPersonSubmitted == true,
+            previous.nameOfAffiliatedPerson != current.nameOfAffiliatedPerson,
         builder: (context, state) {
+          print('Q5: ${state.isAssociates}');
+          print('name: ${state.nameOfAffiliatedPerson}');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -186,23 +171,21 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     : null,
                 onSelected: (value) => context
                     .read<DisclosureAffiliationBloc>()
-                    .add(QuestionNo5Changed(value == 'Yes' ? true : false)),
+                    .add(QuestionNo5Changed(value == 'Yes'
+                        ? true
+                        : value == 'No'
+                            ? false
+                            : false)),
               ),
-              if (state.isNameOfAffiliatedPersonSubmitted &&
-                  state.isAssociates! &&
-                  state.nameOfAffiliatedPerson.isNotEmpty)
+              if (state.isAssociates == true)
                 Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CustomText(
-                        'Name of Joint Account :',
-                        type: FontType.formTitle,
-                      ),
-                      CustomText(state.nameOfAffiliatedPerson),
-                    ],
-                  ),
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                  child: CustomTextInput(
+                      labelText: 'Name of Affiliated Person',
+                      onChanged: (value) => context
+                          .read<DisclosureAffiliationBloc>()
+                          .add(NameOfAffiliatedChanged(value)),
+                      hintText: 'Enter field'),
                 )
             ],
           );
