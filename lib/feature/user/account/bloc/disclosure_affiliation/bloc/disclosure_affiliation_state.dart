@@ -23,7 +23,6 @@ class DisclosureAffiliationState extends Equatable {
   final String nameOfAffiliatedPerson;
   final bool? isOwner;
   final String nameOfJointAccount;
-  final bool isNameOfJointAccountSubmitted;
   final bool? isEmployee;
   const DisclosureAffiliationState({
     this.isAffiliated,
@@ -48,7 +47,6 @@ class DisclosureAffiliationState extends Equatable {
     this.nameOfAffiliatedPerson = '',
     this.isOwner,
     this.nameOfJointAccount = '',
-    this.isNameOfJointAccountSubmitted = false,
     this.isEmployee,
   });
 
@@ -76,7 +74,6 @@ class DisclosureAffiliationState extends Equatable {
     bool? isNameOfAffiliatedPersonSubmitted,
     bool? isOwner,
     String? nameOfJointAccount,
-    bool? isNameOfJointAccountSubmitted,
     bool? isEmployee,
   }) {
     return DisclosureAffiliationState(
@@ -115,8 +112,6 @@ class DisclosureAffiliationState extends Equatable {
           nameOfAffiliatedPerson ?? this.nameOfAffiliatedPerson,
       isOwner: isOwner ?? this.isOwner,
       nameOfJointAccount: nameOfJointAccount ?? this.nameOfJointAccount,
-      isNameOfJointAccountSubmitted:
-          isNameOfJointAccountSubmitted ?? this.isNameOfJointAccountSubmitted,
       isEmployee: isEmployee ?? this.isEmployee,
     );
   }
@@ -145,7 +140,6 @@ class DisclosureAffiliationState extends Equatable {
         nameOfAffiliatedPerson,
         isOwner,
         nameOfJointAccount,
-        isNameOfJointAccountSubmitted,
         isEmployee,
       ];
 

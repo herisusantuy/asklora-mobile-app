@@ -155,8 +155,6 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             previous.isAssociates != current.isAssociates ||
             previous.nameOfAffiliatedPerson != current.nameOfAffiliatedPerson,
         builder: (context, state) {
-          print('Q5: ${state.isAssociates}');
-          print('name: ${state.nameOfAffiliatedPerson}');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -192,28 +190,13 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         },
       );
   Widget _questionNo6() =>
-      BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-        listenWhen: (previous, current) => previous.isOwner != current.isOwner,
-        listener: (context, state) {
-          if (state.isOwner!) {
-            showModalTextInput(
-                labelTextInput: 'Name of Joint Account',
-                context: context,
-                onChanged: (value) => context
-                    .read<DisclosureAffiliationBloc>()
-                    .add(NameOfJointAccountChanged(value)),
-                onSubmit: () {
-                  context
-                      .read<DisclosureAffiliationBloc>()
-                      .add(const NameOfJointAccountSubmitted());
-                  Navigator.pop(context);
-                });
-          }
-        },
+      BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
             previous.isOwner != current.isOwner ||
-            current.isNameOfJointAccountSubmitted == true,
+            previous.nameOfJointAccount != current.nameOfJointAccount,
         builder: (context, state) {
+          print('Q6: ${state.isOwner}');
+          print('name: ${state.nameOfJointAccount}');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -228,23 +211,21 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     : null,
                 onSelected: (value) => context
                     .read<DisclosureAffiliationBloc>()
-                    .add(QuestionNo6Changed(value == 'Yes' ? true : false)),
+                    .add(QuestionNo6Changed(value == 'Yes'
+                        ? true
+                        : value == 'No'
+                            ? false
+                            : false)),
               ),
-              if (state.isNameOfJointAccountSubmitted &&
-                  state.nameOfJointAccount.isNotEmpty &&
-                  state.isOwner!)
+              if (state.isOwner == true)
                 Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CustomText(
-                        'Name of Joint Account :',
-                        type: FontType.formTitle,
-                      ),
-                      CustomText(state.nameOfJointAccount),
-                    ],
-                  ),
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+                  child: CustomTextInput(
+                      labelText: 'Name of Joint Account',
+                      onChanged: (value) => context
+                          .read<DisclosureAffiliationBloc>()
+                          .add(NameOfJointAccountChanged(value)),
+                      hintText: 'Enter field'),
                 )
             ],
           );
