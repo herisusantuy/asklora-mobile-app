@@ -67,11 +67,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     : null,
                 onSelected: (value) => context
                     .read<DisclosureAffiliationBloc>()
-                    .add(QuestionNo1Changed(value == 'Yes'
-                        ? true
-                        : value == 'No'
-                            ? false
-                            : false)),
+                    .add(QuestionNo1Changed(_isQuestionAnswered(value))),
               ),
               if (state.isAffiliated == true) const AffiliateForm()
             ],
@@ -149,11 +145,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     : null,
                 onSelected: (value) => context
                     .read<DisclosureAffiliationBloc>()
-                    .add(QuestionNo4Changed(value == 'Yes'
-                        ? true
-                        : value == 'No'
-                            ? false
-                            : false)),
+                    .add(QuestionNo4Changed(_isQuestionAnswered(value))),
               ),
               if (state.isFamilyMember == true) const FamilyMemberForm()
             ],
@@ -180,11 +172,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     : null,
                 onSelected: (value) => context
                     .read<DisclosureAffiliationBloc>()
-                    .add(QuestionNo5Changed(value == 'Yes'
-                        ? true
-                        : value == 'No'
-                            ? false
-                            : false)),
+                    .add(QuestionNo5Changed(_isQuestionAnswered(value))),
               ),
               if (state.isAssociates == true)
                 Padding(
@@ -220,11 +208,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     : null,
                 onSelected: (value) => context
                     .read<DisclosureAffiliationBloc>()
-                    .add(QuestionNo6Changed(value == 'Yes'
-                        ? true
-                        : value == 'No'
-                            ? false
-                            : false)),
+                    .add(QuestionNo6Changed(_isQuestionAnswered(value))),
               ),
               if (state.isOwner == true)
                 Padding(
@@ -274,11 +258,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 : null,
             onSelected: (value) {
               context.read<DisclosureAffiliationBloc>().add(
-                    QuestionNo7Changed(value == 'Yes'
-                        ? true
-                        : value == 'No'
-                            ? false
-                            : false),
+                    QuestionNo7Changed(_isQuestionAnswered(value)),
                   );
             },
           );
@@ -306,5 +286,14 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool _isQuestionAnswered(value) {
+    if (value == 'Yes') {
+      return true;
+    } else if (value == 'No') {
+      return false;
+    }
+    return false;
   }
 }
