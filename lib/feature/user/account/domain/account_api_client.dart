@@ -32,6 +32,6 @@ class AccountApiClient {
           payload: jsonEncode(request.toJson()));
 
   Future<Response> submitTaxInfo(TaxInfoRequest request) async =>
-      await AskloraApiClient().patch(
+      await AskloraApiClient().post(
           endpoint: endpointTaxInfo, payload: jsonEncode(request.toJson()));
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,14 +7,26 @@ import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
+import '../domain/upgrade_account/tax_info_mock_data.dart';
+import '../domain/upgrade_account/tax_info_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
+import 'address_proof/bloc/address_proof_bloc.dart';
+import 'basic_information/bloc/basic_information_bloc.dart';
+import 'country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
+import 'signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
 
 part 'account_event.dart';
 
 part 'account_state.dart';
 
 class AccountBloc extends Bloc<AccountEvent, AccountState> {
+  final BasicInformationBloc basicInformationBloc = BasicInformationBloc();
+  final AddressProofBloc addressProofBloc = AddressProofBloc();
+  final CountryOfTaxResidenceBloc countryOfTaxResidenceBloc =
+      CountryOfTaxResidenceBloc();
+  final SigningBrokerAgreementBloc signingBrokerAgreementBloc =
+      SigningBrokerAgreementBloc();
   AccountBloc({required AccountRepository getAccountRepository})
       : _accountRepository = getAccountRepository,
         super(const AccountState()) {
@@ -21,6 +35,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<UpgradeAccount>(_onUpgradeAccount);
     on<AccountCurrentStepChanged>(_onAccountCurrentStepIndexChange);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
+    on<SubmitTaxInfo>(_onSubmitTaxInfo);
   }
 
   final AccountRepository _accountRepository;
@@ -66,6 +81,42 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       emit(state.copyWith(
           status: GetAccountStatus.failure,
           responseMessage: 'Could not upgrade the account!'));
+    }
+  }
+
+  _onSubmitTaxInfo(SubmitTaxInfo event, Emitter<AccountState> emit) async {
+    try {
+      emit(state.copyWith(status: GetAccountStatus.submittingTaxInfo));
+      String formattedDateOfBirth =
+          '${DateTime.parse(basicInformationBloc.state.dateOfBirth).year}-${DateTime.parse(basicInformationBloc.state.dateOfBirth).month}-${DateTime.parse(basicInformationBloc.state.dateOfBirth).day}';
+      DateTime date = DateTime.now();
+      String formattedDate =
+          '${DateTime.parse(date.toString()).year}-${DateTime.parse(date.toString()).month}-${DateTime.parse(date.toString()).day}';
+      TaxInfoRequest taxInfoReq = TaxInfoRequest(
+          fullName:
+              '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
+          countryCitizen: basicInformationBloc.state.countryOfCitizenship,
+          permanentAddressStreet: addressProofBloc.state.residentialAddress,
+          permanentAddressCityState: addressProofBloc.state.city,
+          permanentAddressCountry: addressProofBloc.state.country,
+          mailingAddressStreet: addressProofBloc.state.mailResidentialAddress,
+          mailingAddressCityState: addressProofBloc.state.mailCity,
+          mailingAddressCountry: addressProofBloc.state.mailCountry,
+          foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
+          dateOfBirth: formattedDateOfBirth,
+          signature: signingBrokerAgreementBloc.state.customerSignature,
+          date: formattedDate,
+          signerFullName:
+              '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
+          ipAddress: '148.47.169.169');
+      await _accountRepository.submitTaxInfo(taxInfoReq);
+      emit(state.copyWith(
+          status: GetAccountStatus.success,
+          responseMessage: 'Tax info submitted successfully!.'));
+    } catch (e) {
+      emit(state.copyWith(
+          status: GetAccountStatus.failure,
+          responseMessage: 'Could not submit tax info!'));
     }
   }
 
