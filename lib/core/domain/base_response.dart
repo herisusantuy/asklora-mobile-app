@@ -3,7 +3,7 @@ enum ResponseState { success, error, unknown, loading }
 class BaseResponse<T> {
   ResponseState state;
   T? data;
-  String? exception;
+  Exception? exception;
 
   BaseResponse({this.state = ResponseState.success, this.data, this.exception});
 
@@ -19,14 +19,14 @@ class BaseResponse<T> {
     return BaseResponse(state: ResponseState.success, data: data);
   }
 
-  static BaseResponse<T> error<T>(String exception) {
+  static BaseResponse<T> error<T>(Exception exception) {
     return BaseResponse(state: ResponseState.error, exception: exception);
   }
 
   BaseResponse<T> copyWith({
     ResponseState? state,
     T? data,
-    String? exception,
+    Exception? exception,
   }) {
     return BaseResponse<T>(
       state: state ?? this.state,

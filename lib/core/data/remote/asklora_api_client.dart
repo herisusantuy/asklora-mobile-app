@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
+import '../../domain/endpoints.dart';
+import '../../domain/token/model/token_refresh_response.dart';
 import '../../domain/token/repository/repository.dart';
 import '../../domain/token/repository/token_repository.dart';
 import '../../utils/build_configs/build_config.dart';
@@ -48,15 +50,16 @@ class AskloraApiClient {
     if (kDebugMode) {
       dio.interceptors.add(LoggingInterceptor());
     }
-    dio.interceptors.add(AppInterceptors(TokenRepository()));
+    dio.interceptors.add(AppInterceptors(TokenRepository(), dio));
     return dio;
   }
 }
 
 class AppInterceptors extends Interceptor {
   final Repository _storage;
+  final Dio _dio;
 
-  AppInterceptors(this._storage);
+  AppInterceptors(this._storage, this._dio);
 
   @override
   void onRequest(
@@ -66,6 +69,40 @@ class AppInterceptors extends Interceptor {
       options.headers['Authorization'] = 'Bearer $accessToken';
     }
     return handler.next(options);
+  }
+
+  Future<void> _handleTokenExpire(
+      DioError error, ErrorInterceptorHandler handler) async {
+    if (await refreshToken()) {
+      return handler.resolve(await _retry(error.requestOptions));
+    }
+  }
+
+  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
+    final options = Options(
+      method: requestOptions.method,
+      headers: requestOptions.headers,
+    );
+    return _dio.request<dynamic>(requestOptions.path,
+        data: requestOptions.data,
+        queryParameters: requestOptions.queryParameters,
+        options: options);
+  }
+
+  Future<bool> refreshToken() async {
+    final refreshToken = await _storage.getRefreshToken();
+    final response =
+        await _dio.post(endpointTokenRefresh, data: {'refresh': refreshToken});
+
+    if (response.statusCode == 200) {
+      var refreshResponse = TokenRefreshResponse.fromJson(response.data);
+      var accessToken = refreshResponse.access!;
+      _storage.saveAccessToken(accessToken);
+      return true;
+    } else {
+      _storage.deleteAll();
+      return false;
+    }
   }
 
   @override
@@ -80,7 +117,12 @@ class AppInterceptors extends Interceptor {
           case 400:
             throw BadRequestException(err.requestOptions);
           case 401:
-            throw UnauthorizedException(err.requestOptions);
+            if (err.response?.data['message'] == 'Token invalid') {
+              _handleTokenExpire(err, handler);
+              return;
+            } else {
+              throw UnauthorizedException(err.requestOptions);
+            }
           case 404:
             throw NotFoundException(err.requestOptions);
           case 406:

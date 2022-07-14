@@ -13,7 +13,6 @@ import '../../../user/account/presentation/upgrade_account/upgrade_account_scree
 import '../../../user/account/repository/account_repository.dart';
 import '../../../user/kyc/domain/onfido_result_request.dart';
 import '../../sign_out/bloc/sign_out_bloc.dart';
-import '../../sign_out/repository/sign_out_repository.dart';
 
 class SignInSuccessScreen extends StatelessWidget {
   static const route = '/sign_in_success_screen';
@@ -33,8 +32,8 @@ class SignInSuccessScreen extends StatelessWidget {
                 AccountBloc(getAccountRepository: AccountRepository()),
           ),
           BlocProvider(
-            create: (context) => SignOutBloc(
-                signOutRepository: SignOutRepository(TokenRepository())),
+            create: (context) =>
+                SignOutBloc(tokenRepository: TokenRepository()),
           ),
         ],
         child: Padding(
@@ -112,11 +111,18 @@ class SignInSuccessScreen extends StatelessWidget {
                 listener: (context, state) async {
                   switch (state.status) {
                     case SignOutStatus.failure:
-                    case SignOutStatus.success:
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(SnackBar(
                           backgroundColor: Colors.red,
+                          content: CustomText(state.responseMessage),
+                        ));
+                      break;
+                    case SignOutStatus.success:
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(SnackBar(
+                          backgroundColor: Colors.green,
                           content: CustomText(state.responseMessage),
                         ));
                       HomeScreen.openReplace(context);

@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/domain/token/repository/token_repository.dart';
 import '../repository/sign_out_repository.dart';
 
 part 'sign_out_event.dart';
@@ -7,13 +9,14 @@ part 'sign_out_event.dart';
 part 'sign_out_state.dart';
 
 class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
-  SignOutBloc({required SignOutRepository signOutRepository})
-      : _signOutRepository = signOutRepository,
+  SignOutBloc({required TokenRepository tokenRepository})
+      : _tokenRepository = tokenRepository,
         super(const SignOutState()) {
     on<SignOutSubmitted>(_onSignOutSubmitted);
   }
 
-  final SignOutRepository _signOutRepository;
+  final TokenRepository _tokenRepository;
+  final SignOutRepository _signOutRepository = SignOutRepository();
 
   void _onSignOutSubmitted(
     SignOutSubmitted event,
@@ -21,9 +24,18 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
   ) async {
     try {
       emit(state.copyWith(status: SignOutStatus.loading));
-      await _signOutRepository.signOut();
-      emit(state.copyWith(
-          status: SignOutStatus.success, responseMessage: 'Sign Out Success'));
+      var isSignedOut = await _signOutRepository
+          .signOut(await _tokenRepository.getRefreshToken());
+      if (isSignedOut) {
+        await _tokenRepository.deleteAll();
+        emit(state.copyWith(
+            status: SignOutStatus.success,
+            responseMessage: 'Sign Out Success'));
+      } else {
+        emit(state.copyWith(
+            status: SignOutStatus.failure,
+            responseMessage: 'Not able to sign-out!'));
+      }
     } catch (e) {
       emit(state.copyWith(
           status: SignOutStatus.failure, responseMessage: e.toString()));
