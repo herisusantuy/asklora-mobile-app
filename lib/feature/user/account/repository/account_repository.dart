@@ -5,6 +5,7 @@ import '../../kyc/domain/onfido_result_response.dart';
 import '../../kyc/domain/onfido_token_response.dart';
 import '../domain/account_api_client.dart';
 import '../domain/get_account/get_account_response.dart';
+import '../domain/upgrade_account/tax_info_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 
 class AccountRepository {
@@ -31,5 +32,10 @@ class AccountRepository {
       OnfidoResultRequest request) async {
     var response = await _accountApiClient.updateKycResult(request);
     return OnfidoResultResponse.fromJson(response.data);
+  }
+
+  Future<TaxInfoRequest> submitTaxInfo(TaxInfoRequest request) async {
+    var response = await _accountApiClient.submitTaxInfo(request);
+    return TaxInfoRequest.fromJson(response.data);
   }
 }
