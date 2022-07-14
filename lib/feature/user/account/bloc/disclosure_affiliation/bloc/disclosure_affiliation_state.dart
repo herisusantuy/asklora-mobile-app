@@ -144,44 +144,32 @@ class DisclosureAffiliationState extends Equatable {
       ];
 
   bool disabledNextButton() {
-    if (isAffiliated != null &&
-            isSeniorExecutive != null &&
-            isSeniorPolitical != null &&
-            isFamilyMember != null
-        // &&
-        //     isAssociates != null &
-        // &
-        //     isOwner != null
-        // &&
-        //     isEmployee != null
-        ) {
-      if (isAffiliated == true &&
-          isSeniorExecutive == true &&
-          isFamilyMember == true) {
-        if (affiliateCompanyName.isEmpty ||
-            affiliateCompanyAddress.isEmpty ||
-            affiliateCompanyCity.isEmpty ||
-            affiliateCompanyState.isEmpty ||
-            affiliateCompanyCountry.isEmpty ||
-            affiliateCompanyEmail.isEmpty) {
-          return true;
-        } else if (controlledPersonCompanyName.isEmpty ||
-            controlledPersonCompanyAddress.isEmpty ||
-            controlledPersonCompanyCity.isEmpty ||
-            controlledPersonCompanyState.isEmpty ||
-            controlledPersonCompanyCountry.isEmpty ||
-            controlledPersonCompanyEmail.isEmpty) {
-          return true;
-        } else if (firstNameOfFamilyMember.isEmpty ||
-            lastNameOfFamilyMember.isEmpty) {
-          return true;
-        }
-        return false;
-      } else {
-        return false;
-      }
-    } else {
+    if (((isAffiliated == null || isAffiliated == true) &&
+            (affiliateCompanyName.isEmpty ||
+                affiliateCompanyAddress.isEmpty ||
+                affiliateCompanyCity.isEmpty ||
+                affiliateCompanyState.isEmpty ||
+                affiliateCompanyCity.isEmpty ||
+                affiliateCompanyCountry.isEmpty ||
+                affiliateCompanyEmail.isEmpty)) ||
+        ((isSeniorExecutive == null || isSeniorExecutive == true) &&
+            (controlledPersonCompanyName.isEmpty ||
+                controlledPersonCompanyAddress.isEmpty ||
+                controlledPersonCompanyCity.isEmpty ||
+                controlledPersonCompanyState.isEmpty ||
+                controlledPersonCompanyCountry.isEmpty ||
+                controlledPersonCompanyEmail.isEmpty)) ||
+        (isSeniorPolitical == null) ||
+        ((isFamilyMember == null || isFamilyMember == true) &&
+            (firstNameOfFamilyMember.isEmpty ||
+                lastNameOfFamilyMember.isEmpty)) ||
+        ((isAssociates == null || isAssociates == true) &&
+            (nameOfAffiliatedPerson.isEmpty)) ||
+        ((isOwner == null || isOwner == true) &&
+            (nameOfJointAccount.isEmpty)) ||
+        (isEmployee == null || isEmployee == true)) {
       return true;
     }
+    return false;
   }
 }

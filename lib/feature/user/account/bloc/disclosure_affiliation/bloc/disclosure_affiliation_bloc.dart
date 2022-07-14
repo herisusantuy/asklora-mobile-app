@@ -1,9 +1,8 @@
-import 'package:built_value/built_value.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'disclosure_affiliation_state.dart';
 part 'disclosure_affiliation_event.dart';
+part 'disclosure_affiliation_state.dart';
 
 class DisclosureAffiliationBloc
     extends Bloc<DisclosuresAffiliationEvent, DisclosureAffiliationState> {

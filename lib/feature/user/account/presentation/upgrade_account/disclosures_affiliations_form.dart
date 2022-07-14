@@ -7,7 +7,6 @@ import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
-import '../widgets/modal_text_input.dart';
 import 'affiliated_form.dart';
 import 'controlled_person_from.dart';
 import 'family_member_form.dart';
@@ -68,7 +67,11 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     : null,
                 onSelected: (value) => context
                     .read<DisclosureAffiliationBloc>()
-                    .add(QuestionNo1Changed(value == 'Yes' ? true : false)),
+                    .add(QuestionNo1Changed(value == 'Yes'
+                        ? true
+                        : value == 'No'
+                            ? false
+                            : false)),
               ),
               if (state.isAffiliated == true) const AffiliateForm()
             ],
@@ -94,7 +97,11 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     : null,
                 onSelected: (value) =>
                     context.read<DisclosureAffiliationBloc>().add(
-                          QuestionNo2Changed(value == 'Yes' ? true : false),
+                          QuestionNo2Changed(value == 'Yes'
+                              ? true
+                              : value == 'No'
+                                  ? false
+                                  : false),
                         ),
               ),
               if (state.isSeniorExecutive == true) const ControlledPersonForm()
@@ -117,7 +124,11 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                   : null,
               onSelected: (value) => context
                   .read<DisclosureAffiliationBloc>()
-                  .add(QuestionNo3Changed(value == 'Yes' ? true : false)));
+                  .add(QuestionNo3Changed(value == 'Yes'
+                      ? true
+                      : value == 'No'
+                          ? false
+                          : false)));
         },
       );
   Widget _questionNo4() =>
@@ -195,8 +206,6 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             previous.isOwner != current.isOwner ||
             previous.nameOfJointAccount != current.nameOfJointAccount,
         builder: (context, state) {
-          print('Q6: ${state.isOwner}');
-          print('name: ${state.nameOfJointAccount}');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -265,7 +274,11 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 : null,
             onSelected: (value) {
               context.read<DisclosureAffiliationBloc>().add(
-                    QuestionNo7Changed(value == 'Yes' ? true : false),
+                    QuestionNo7Changed(value == 'Yes'
+                        ? true
+                        : value == 'No'
+                            ? false
+                            : false),
                   );
             },
           );
