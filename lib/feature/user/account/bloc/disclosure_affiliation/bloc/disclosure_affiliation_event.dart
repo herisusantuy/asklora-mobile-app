@@ -157,12 +157,6 @@ class NameOfAffiliatedChanged extends DisclosuresAffiliationEvent {
   List<Object> get props => [nameOfAffiliatedPerson];
 }
 
-class NameOfAffiliatedSubmitted extends DisclosuresAffiliationEvent {
-  const NameOfAffiliatedSubmitted() : super();
-  @override
-  List<Object> get props => [];
-}
-
 class QuestionNo6Changed extends DisclosuresAffiliationEvent {
   final bool isOwner;
   const QuestionNo6Changed(this.isOwner) : super();

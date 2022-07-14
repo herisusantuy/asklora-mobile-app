@@ -1,3 +1,4 @@
+import 'package:built_value/built_value.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +34,6 @@ class DisclosureAffiliationBloc
     on<LastNameOfFamilyMemberChanged>(_onLastNameOfFamilyMemberChanged);
     on<QuestionNo5Changed>(_onQuestionNo5Changed);
     on<NameOfAffiliatedChanged>(_onNameOfAffiliatedChanged);
-    on<NameOfAffiliatedSubmitted>(_onNameOfAffiliatedSubmitted);
     on<QuestionNo6Changed>(_onQuestionNo6Changed);
     on<NameOfJointAccountChanged>(_onNameOfJointAccountChanged);
     on<NameOfJointAccountSubmitted>(_onNameOfJointAccountSubmitted);
@@ -189,13 +189,8 @@ class DisclosureAffiliationBloc
   _onNameOfAffiliatedChanged(
       NameOfAffiliatedChanged event, Emitter<DisclosureAffiliationState> emit) {
     emit(state.copyWith(
-        nameOfAffiliatedPerson: event.nameOfAffiliatedPerson,
-        isNameOfAffiliatedPersonSubmitted: false));
-  }
-
-  _onNameOfAffiliatedSubmitted(NameOfAffiliatedSubmitted event,
-      Emitter<DisclosureAffiliationState> emit) {
-    emit(state.copyWith(isNameOfAffiliatedPersonSubmitted: true));
+      nameOfAffiliatedPerson: event.nameOfAffiliatedPerson,
+    ));
   }
 
   _onQuestionNo6Changed(

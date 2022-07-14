@@ -21,7 +21,6 @@ class DisclosureAffiliationState extends Equatable {
   final String lastNameOfFamilyMember;
   final bool? isAssociates;
   final String nameOfAffiliatedPerson;
-  final bool isNameOfAffiliatedPersonSubmitted;
   final bool? isOwner;
   final String nameOfJointAccount;
   final bool isNameOfJointAccountSubmitted;
@@ -47,7 +46,6 @@ class DisclosureAffiliationState extends Equatable {
     this.lastNameOfFamilyMember = '',
     this.isAssociates,
     this.nameOfAffiliatedPerson = '',
-    this.isNameOfAffiliatedPersonSubmitted = false,
     this.isOwner,
     this.nameOfJointAccount = '',
     this.isNameOfJointAccountSubmitted = false,
@@ -115,8 +113,6 @@ class DisclosureAffiliationState extends Equatable {
       isAssociates: isAssociates ?? this.isAssociates,
       nameOfAffiliatedPerson:
           nameOfAffiliatedPerson ?? this.nameOfAffiliatedPerson,
-      isNameOfAffiliatedPersonSubmitted: isNameOfAffiliatedPersonSubmitted ??
-          this.isNameOfAffiliatedPersonSubmitted,
       isOwner: isOwner ?? this.isOwner,
       nameOfJointAccount: nameOfJointAccount ?? this.nameOfJointAccount,
       isNameOfJointAccountSubmitted:
@@ -147,7 +143,6 @@ class DisclosureAffiliationState extends Equatable {
         lastNameOfFamilyMember,
         isAssociates,
         nameOfAffiliatedPerson,
-        isNameOfAffiliatedPersonSubmitted,
         isOwner,
         nameOfJointAccount,
         isNameOfJointAccountSubmitted,
@@ -156,14 +151,43 @@ class DisclosureAffiliationState extends Equatable {
 
   bool disabledNextButton() {
     if (isAffiliated != null &&
-        isSeniorExecutive != null &&
-        isSeniorPolitical != null &&
-        isFamilyMember != null &&
-        isAssociates != null &&
-        isOwner != null &&
-        (isEmployee != null && isEmployee != true)) {
-      return false;
+            isSeniorExecutive != null &&
+            isSeniorPolitical != null &&
+            isFamilyMember != null
+        // &&
+        //     isAssociates != null &
+        // &
+        //     isOwner != null
+        // &&
+        //     isEmployee != null
+        ) {
+      if (isAffiliated == true &&
+          isSeniorExecutive == true &&
+          isFamilyMember == true) {
+        if (affiliateCompanyName.isEmpty ||
+            affiliateCompanyAddress.isEmpty ||
+            affiliateCompanyCity.isEmpty ||
+            affiliateCompanyState.isEmpty ||
+            affiliateCompanyCountry.isEmpty ||
+            affiliateCompanyEmail.isEmpty) {
+          return true;
+        } else if (controlledPersonCompanyName.isEmpty ||
+            controlledPersonCompanyAddress.isEmpty ||
+            controlledPersonCompanyCity.isEmpty ||
+            controlledPersonCompanyState.isEmpty ||
+            controlledPersonCompanyCountry.isEmpty ||
+            controlledPersonCompanyEmail.isEmpty) {
+          return true;
+        } else if (firstNameOfFamilyMember.isEmpty ||
+            lastNameOfFamilyMember.isEmpty) {
+          return true;
+        }
+        return false;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
     }
-    return true;
   }
 }
