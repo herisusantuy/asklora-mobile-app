@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/question_widget.dart';
+import '../../bloc/account_bloc.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../widgets/modal_text_input.dart';
 import 'affiliated_form.dart';
@@ -318,6 +319,9 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
               buttonText: 'Next',
               disable: state.disabledNextButton(),
               onClick: () {
+                context
+                    .read<AccountBloc>()
+                    .add(const AccountCurrentStepChanged('next'));
                 controller.nextPage(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.ease);

@@ -46,15 +46,9 @@ class SigningBrokerAgreementBloc
 
   _onCustomerSignatureDrew(CustomerSignatureDrew event,
       Emitter<SigningBrokerAgreementState> emit) async {
-    final exportController = SignatureController(
-      penStrokeWidth: 2,
-      penColor: Colors.black,
-      exportBackgroundColor: Colors.transparent,
-      points: event.customerSignature.points,
-    );
-    final signature = await exportController.toPngBytes();
-    if (signature != null) {
-      emit(state.copyWith(customerSignature: signature, isSignatureDrew: true));
+    if (event.customerSignature != null) {
+      emit(state.copyWith(
+          customerSignature: event.customerSignature, isSignatureDrew: true));
     }
   }
 
