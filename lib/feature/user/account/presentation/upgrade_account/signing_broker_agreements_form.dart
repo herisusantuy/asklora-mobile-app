@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
@@ -5,6 +7,7 @@ import 'package:signature/signature.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
+import '../../bloc/account_bloc.dart';
 import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
 import '../widgets/signature_drawer.dart';
 
@@ -112,9 +115,11 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                 if (!state.isSignatureDrew)
                   SignatureDrawer(
                       signatureController: _signatureController,
-                      onSubmit: () => context
-                          .read<SigningBrokerAgreementBloc>()
-                          .add(CustomerSignatureDrew(_signatureController)),
+                      onSubmit: () async {
+                        context.read<SigningBrokerAgreementBloc>().add(
+                            CustomerSignatureDrew(
+                                await _getCustomerSignature()));
+                      },
                       onReset: () => _signatureController.clear())
                 else
                   Column(
@@ -146,11 +151,26 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
               borderRadius: 30,
               buttonText: 'Next',
               disable: state.disabledNextButton(),
-              onClick: () => controller.nextPage(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.ease),
+              onClick: () {
+                context
+                    .read<AccountBloc>()
+                    .add(const AccountCurrentStepChanged('next'));
+                controller.nextPage(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.ease);
+              },
             ),
           );
         },
       );
+
+  Future<Uint8List?> _getCustomerSignature() async {
+    final exportController = SignatureController(
+      penStrokeWidth: 2,
+      penColor: Colors.black,
+      exportBackgroundColor: Colors.transparent,
+      points: _signatureController.points,
+    );
+    return await exportController.toPngBytes();
+  }
 }

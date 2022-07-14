@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
+import '../../bloc/account_bloc.dart';
 import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 
 class TrustedContactForm extends StatelessWidget {
@@ -121,12 +122,15 @@ class TrustedContactForm extends StatelessWidget {
               buttonText: 'Next',
               disable: state.disableNextButton(),
               onClick: () {
+                context
+                    .read<AccountBloc>()
+                    .add(const AccountCurrentStepChanged('next'));
+                context.read<TrustedContactBloc>().add(
+                      const TrustedContactSubmitted(),
+                    );
                 controller.nextPage(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.ease);
-                context
-                    .read<TrustedContactBloc>()
-                    .add(const TrustedContactSubmitted());
               },
             ),
           );
