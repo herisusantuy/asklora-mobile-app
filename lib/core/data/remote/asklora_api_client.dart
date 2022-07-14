@@ -71,9 +71,9 @@ class AppInterceptors extends Interceptor {
     return handler.next(options);
   }
 
-  Future<void> _handleTokenExpire(
+  Future<void> _handleExpiredToken(
       DioError error, ErrorInterceptorHandler handler) async {
-    if (await refreshToken()) {
+    if (await _refreshToken()) {
       return handler.resolve(await _retry(error.requestOptions));
     }
   }
@@ -89,7 +89,7 @@ class AppInterceptors extends Interceptor {
         options: options);
   }
 
-  Future<bool> refreshToken() async {
+  Future<bool> _refreshToken() async {
     final refreshToken = await _storage.getRefreshToken();
     final response =
         await _dio.post(endpointTokenRefresh, data: {'refresh': refreshToken});
@@ -118,7 +118,7 @@ class AppInterceptors extends Interceptor {
             throw BadRequestException(err.requestOptions);
           case 401:
             if (err.response?.data['message'] == 'Token invalid') {
-              _handleTokenExpire(err, handler);
+              _handleExpiredToken(err, handler);
               return;
             } else {
               throw UnauthorizedException(err.requestOptions);
