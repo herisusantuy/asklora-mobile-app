@@ -82,6 +82,13 @@ class BasicInformationIsHongKongPermanentResidentChanged
   List<Object> get props => [isHongKongPermanentResident];
 }
 
+class BasicInformationIdNumberChanged extends BasicInformationEvent {
+  final String idNumber;
+  const BasicInformationIdNumberChanged(this.idNumber);
+  @override
+  List<Object> get props => [idNumber];
+}
+
 class BasicInformationIsUnitedStateResidentChanged
     extends BasicInformationEvent {
   final bool isUnitedStateResident;

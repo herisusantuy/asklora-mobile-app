@@ -10,6 +10,7 @@ class CustomTextInput extends StatelessWidget {
   final TextInputType textInputType;
   final Function(String) onChanged;
   final List<TextInputFormatter>? textInputFormatterList;
+  final String initialValue;
 
   const CustomTextInput(
       {required this.labelText,
@@ -20,12 +21,14 @@ class CustomTextInput extends StatelessWidget {
       this.errorText = '',
       this.maxLength,
       this.textInputFormatterList,
+      this.initialValue = '',
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      initialValue: initialValue,
       inputFormatters: textInputFormatterList,
       maxLength: maxLength,
       obscureText: obscureText,

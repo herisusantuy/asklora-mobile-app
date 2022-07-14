@@ -5,6 +5,7 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
+import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
@@ -14,6 +15,7 @@ import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
 import 'basic_information_form.dart';
+import 'country_of_tax_residence_form.dart';
 import 'disclosures_affiliations_form.dart';
 import 'financial_profile_form.dart';
 import 'review_information_screen.dart';
@@ -36,6 +38,9 @@ class UpgradeAccountScreen extends StatelessWidget {
           key: const Key('basic_information_step'),
           controller: _pageViewController,
         ),
+        CountryOfTaxResidenceForm(
+            key: const Key('country_of_tax_residence_step'),
+            controller: _pageViewController),
         AddressProofForm(
           key: const Key('address_proof_step'),
           controller: _pageViewController,
@@ -67,49 +72,48 @@ class UpgradeAccountScreen extends StatelessWidget {
       ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        toolbarHeight: 0,
-        automaticallyImplyLeading: false,
-        title: const CustomText('Upgrade Account'),
-      ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) =>
-                AccountBloc(getAccountRepository: AccountRepository()),
-          ),
-          BlocProvider(create: (context) => BasicInformationBloc()),
-          BlocProvider(create: (context) => AddressProofBloc()),
-          BlocProvider(create: (context) => FinancialProfileBloc()),
-          BlocProvider(create: (context) => DisclosureAffiliationBloc()),
-          BlocProvider(create: (context) => SigningAgreementTaxBloc()),
-          BlocProvider(create: (context) => SigningBrokerAgreementBloc()),
-          BlocProvider(create: (context) => TrustedContactBloc()),
-          BlocProvider(create: (context) => RiskDisclosureBloc()),
-        ],
-        child: SafeArea(
-            child: Column(
-          children: [
-            _headerUpgradeAccount(),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: PageView(
-                  key: const Key('upgrade_account_page_view'),
-                  controller: _pageViewController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: _pages,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          toolbarHeight: 0,
+          automaticallyImplyLeading: false,
+          title: const CustomText('Upgrade Account'),
+        ),
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  AccountBloc(getAccountRepository: AccountRepository()),
+            ),
+            BlocProvider(create: (context) => BasicInformationBloc()),
+            BlocProvider(create: (context) => CountryOfTaxResidenceBloc()),
+            BlocProvider(create: (context) => AddressProofBloc()),
+            BlocProvider(create: (context) => FinancialProfileBloc()),
+            BlocProvider(create: (context) => DisclosureAffiliationBloc()),
+            BlocProvider(create: (context) => SigningAgreementTaxBloc()),
+            BlocProvider(create: (context) => SigningBrokerAgreementBloc()),
+            BlocProvider(create: (context) => TrustedContactBloc()),
+            BlocProvider(create: (context) => RiskDisclosureBloc()),
+          ],
+          child: SafeArea(
+              child: Column(
+            children: [
+              _headerUpgradeAccount(),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: PageView(
+                    key: const Key('upgrade_account_page_view'),
+                    controller: _pageViewController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: _pages,
+                  ),
                 ),
               ),
-            ),
-          ],
-        )),
-      ),
-    );
-  }
+            ],
+          )),
+        ),
+      );
 
   Widget _headerUpgradeAccount() => Container(
         decoration: const BoxDecoration(
