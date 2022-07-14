@@ -24,7 +24,7 @@ class AddressProofState extends Equatable {
     this.residentialAddress = '',
     this.city = '',
     this.country = '',
-    this.isSameMailingAddress = true,
+    this.isSameMailingAddress,
     this.mailUnitNumber = '',
     this.mailResidentialAddress = '',
     this.mailCity = '',
@@ -35,7 +35,7 @@ class AddressProofState extends Equatable {
   final String residentialAddress;
   final String city;
   final String country;
-  final bool isSameMailingAddress;
+  final bool? isSameMailingAddress;
   final String mailUnitNumber;
   final String mailResidentialAddress;
   final String mailCity;
@@ -67,7 +67,7 @@ class AddressProofState extends Equatable {
   }
 
   @override
-  List<Object> get props {
+  List<Object?> get props {
     return [
       unitNumber,
       residentialAddress,

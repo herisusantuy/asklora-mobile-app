@@ -110,20 +110,22 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       case 0:
         return 'Basic Information';
       case 1:
-        return 'Address Proof';
+        return 'Country of Tax Residence';
       case 2:
-        return 'Employment, Financial Profile';
+        return 'Address Proof';
       case 3:
-        return 'Disclosures & Affiliations';
+        return 'Employment, Financial Profile';
       case 4:
-        return 'Signing Task Agreement';
+        return 'Disclosures & Affiliations';
       case 5:
-        return 'Signing Broker Agreements';
+        return 'Signing Task Agreement';
       case 6:
-        return 'Trusted Contract';
+        return 'Signing Broker Agreements';
       case 7:
-        return 'Risk Disclosure';
+        return 'Trusted Contract';
       case 8:
+        return 'Risk Disclosure';
+      case 9:
         return 'Review Information';
       default:
         return '';

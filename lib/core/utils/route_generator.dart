@@ -5,6 +5,7 @@ import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
 import '../../feature/user/kyc/presentation/kyc_screen.dart';
 import '../../home_screen.dart';
 
@@ -26,6 +27,8 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) => OtpScreen(email: email));
       case KycScreen.route:
         return MaterialPageRoute(builder: (_) => const KycScreen());
+      case NotEligibleScreen.route:
+        return MaterialPageRoute(builder: (_) => const NotEligibleScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
