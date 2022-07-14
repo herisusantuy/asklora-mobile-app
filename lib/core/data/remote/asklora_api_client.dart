@@ -76,6 +76,7 @@ class AppInterceptors extends Interceptor {
     if (await _refreshToken()) {
       return handler.resolve(await _retry(error.requestOptions));
     }
+    handler.next(error);
   }
 
   Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
@@ -90,17 +91,21 @@ class AppInterceptors extends Interceptor {
   }
 
   Future<bool> _refreshToken() async {
-    final refreshToken = await _storage.getRefreshToken();
-    final response =
-        await _dio.post(endpointTokenRefresh, data: {'refresh': refreshToken});
+    try {
+      final refreshToken = await _storage.getRefreshToken();
+      final response = await _dio
+          .post(endpointTokenRefresh, data: {'refresh': refreshToken});
 
-    if (response.statusCode == 200) {
-      var refreshResponse = TokenRefreshResponse.fromJson(response.data);
-      var accessToken = refreshResponse.access!;
-      _storage.saveAccessToken(accessToken);
-      return true;
-    } else {
-      _storage.deleteAll();
+      if (response.statusCode == 200) {
+        var refreshResponse = TokenRefreshResponse.fromJson(response.data);
+        var accessToken = refreshResponse.access!;
+        _storage.saveAccessToken(accessToken);
+        return true;
+      } else {
+        _storage.deleteAll();
+        return false;
+      }
+    } catch (e) {
       return false;
     }
   }
