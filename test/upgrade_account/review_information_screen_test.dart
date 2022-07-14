@@ -23,7 +23,8 @@ void main() async {
         find.byKey(const Key('signing_broker_agreement'));
     final trustedContract = find.byKey(const Key('trusted_contract'));
     final riskDisclosure = find.byKey(const Key('risk_disclosure'));
-    final countryOfTaxResidence = find.byKey(const Key('country_of_tax_residence'));
+    final countryOfTaxResidence =
+        find.byKey(const Key('country_of_tax_residence'));
 
     testWidgets('Render Review Information screen', (tester) async {
       await _buildReviewInformationScreen(tester);

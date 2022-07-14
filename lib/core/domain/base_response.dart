@@ -7,7 +7,8 @@ class BaseResponse<T> extends Equatable {
   final T? data;
   final String? exception;
 
-  const BaseResponse({this.state = ResponseState.success, this.data, this.exception});
+  const BaseResponse(
+      {this.state = ResponseState.success, this.data, this.exception});
 
   static BaseResponse<T> unknown<T>() {
     return const BaseResponse(state: ResponseState.unknown);
