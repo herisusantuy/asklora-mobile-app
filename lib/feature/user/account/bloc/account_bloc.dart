@@ -79,7 +79,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     } catch (e) {
       emit(state.copyWith(
           status: GetAccountStatus.failure,
-          responseMessage: 'Could not fetch the token ð !'));
+          responseMessage: 'Could not fetch the token!'));
     }
   }
 

@@ -34,7 +34,8 @@ class SignInSuccessScreen extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => SignOutBloc(
-                signOutRepository: SignOutRepository(TokenRepository())),
+                tokenRepository: TokenRepository(),
+                signOutRepository: SignOutRepository()),
           ),
         ],
         child: Padding(
@@ -112,11 +113,18 @@ class SignInSuccessScreen extends StatelessWidget {
                 listener: (context, state) async {
                   switch (state.status) {
                     case SignOutStatus.failure:
-                    case SignOutStatus.success:
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(SnackBar(
                           backgroundColor: Colors.red,
+                          content: CustomText(state.responseMessage),
+                        ));
+                      break;
+                    case SignOutStatus.success:
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(SnackBar(
+                          backgroundColor: Colors.green,
                           content: CustomText(state.responseMessage),
                         ));
                       HomeScreen.openReplace(context);

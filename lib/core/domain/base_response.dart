@@ -5,7 +5,7 @@ enum ResponseState { success, error, unknown, loading }
 class BaseResponse<T> extends Equatable {
   final ResponseState state;
   final T? data;
-  final String? exception;
+  final Exception? exception;
 
   const BaseResponse(
       {this.state = ResponseState.success, this.data, this.exception});
@@ -22,14 +22,14 @@ class BaseResponse<T> extends Equatable {
     return BaseResponse(state: ResponseState.success, data: data);
   }
 
-  static BaseResponse<T> error<T>(String exception) {
+  static BaseResponse<T> error<T>(Exception exception) {
     return BaseResponse(state: ResponseState.error, exception: exception);
   }
 
   BaseResponse<T> copyWith({
     ResponseState? state,
     T? data,
-    String? exception,
+    Exception? exception,
   }) {
     return BaseResponse<T>(
       state: state ?? this.state,
