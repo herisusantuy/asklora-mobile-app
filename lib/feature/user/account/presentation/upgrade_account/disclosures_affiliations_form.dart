@@ -288,12 +288,5 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
     );
   }
 
-  bool _isQuestionAnswered(value) {
-    if (value == 'Yes') {
-      return true;
-    } else if (value == 'No') {
-      return false;
-    }
-    return false;
-  }
+  bool _isQuestionAnswered(value) => value == 'Yes' ? true : false;
 }
