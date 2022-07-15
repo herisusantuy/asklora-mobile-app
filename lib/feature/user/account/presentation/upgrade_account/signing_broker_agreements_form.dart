@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -125,9 +126,11 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                   Column(
                     children: [
                       ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.memory(state.customerSignature!,
-                              height: 200)),
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.memory(
+                            base64Decode(state.customerSignature),
+                            height: 200),
+                      ),
                       CustomTextButton(
                           buttonText: 'Reset Signature',
                           onClick: () {
@@ -164,13 +167,15 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
         },
       );
 
-  Future<Uint8List?> _getCustomerSignature() async {
+  Future<String?> _getCustomerSignature() async {
     final exportController = SignatureController(
       penStrokeWidth: 2,
       penColor: Colors.black,
       exportBackgroundColor: Colors.transparent,
       points: _signatureController.points,
     );
-    return await exportController.toPngBytes();
+    final bytes = await exportController.toPngBytes();
+    String base64Image = base64Encode(bytes!);
+    return base64Image;
   }
 }

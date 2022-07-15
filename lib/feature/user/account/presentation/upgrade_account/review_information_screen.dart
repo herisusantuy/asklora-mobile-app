@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:convert';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
@@ -197,7 +198,8 @@ class ReviewInformationScreen extends StatelessWidget {
                     if (state.customerSignature != null)
                       ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.memory(state.customerSignature,
+                          child: Image.memory(
+                              base64Decode(state.customerSignature),
                               height: 200)),
                   ],
                 )),
