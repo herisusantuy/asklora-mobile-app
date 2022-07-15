@@ -9,14 +9,17 @@ part 'sign_out_event.dart';
 part 'sign_out_state.dart';
 
 class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
-  SignOutBloc({required Repository tokenRepository})
+  SignOutBloc(
+      {required Repository tokenRepository,
+      required SignOutRepository signOutRepository})
       : _tokenRepository = tokenRepository,
+        _signOutRepository = signOutRepository,
         super(const SignOutState()) {
     on<SignOutSubmitted>(_onSignOutSubmitted);
   }
 
   final Repository _tokenRepository;
-  final SignOutRepository _signOutRepository = SignOutRepository();
+  final SignOutRepository _signOutRepository;
 
   void _onSignOutSubmitted(
     SignOutSubmitted event,

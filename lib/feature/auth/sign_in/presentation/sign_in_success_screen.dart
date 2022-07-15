@@ -13,6 +13,7 @@ import '../../../user/account/presentation/upgrade_account/upgrade_account_scree
 import '../../../user/account/repository/account_repository.dart';
 import '../../../user/kyc/domain/onfido_result_request.dart';
 import '../../sign_out/bloc/sign_out_bloc.dart';
+import '../../sign_out/repository/sign_out_repository.dart';
 
 class SignInSuccessScreen extends StatelessWidget {
   static const route = '/sign_in_success_screen';
@@ -32,8 +33,9 @@ class SignInSuccessScreen extends StatelessWidget {
                 AccountBloc(getAccountRepository: AccountRepository()),
           ),
           BlocProvider(
-            create: (context) =>
-                SignOutBloc(tokenRepository: TokenRepository()),
+            create: (context) => SignOutBloc(
+                tokenRepository: TokenRepository(),
+                signOutRepository: SignOutRepository()),
           ),
         ],
         child: Padding(

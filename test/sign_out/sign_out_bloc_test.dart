@@ -22,12 +22,15 @@ void main() async {
     late MockSignOutRepository signOutRepository;
 
     setUpAll(() async {
-      tokenRepository = MockRepository();
       signOutRepository = MockSignOutRepository();
-      signOutBloc = SignOutBloc(tokenRepository: tokenRepository);
+      tokenRepository = MockRepository();
     });
 
-    setUp(() async {});
+    setUp(() async {
+      signOutBloc = SignOutBloc(
+          tokenRepository: tokenRepository,
+          signOutRepository: signOutRepository);
+    });
 
     test('Sign Out Bloc init state is should be `unknown`', () {
       expect(
@@ -40,11 +43,8 @@ void main() async {
         'emits `SignOutStatus.success` and `responseMessage = Sign Out Success` WHEN '
         'press Sign Out Button',
         build: () {
-          // when(tokenRepository.getRefreshToken())
-          //     .thenAnswer((realInvocation) => Future.value('refresh_token'));
           when(tokenRepository.getRefreshToken())
               .thenAnswer((realInvocation) => Future.value('refresh_token'));
-
           when(signOutRepository.signOut('refresh_token'))
               .thenAnswer((_) => Future.value(true));
           when(tokenRepository.deleteAll())
