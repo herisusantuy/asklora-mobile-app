@@ -7,10 +7,13 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
+import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
+import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
+import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 
 class ReviewInformationScreen extends StatelessWidget {
   final PageController controller;
@@ -27,11 +30,14 @@ class ReviewInformationScreen extends StatelessWidget {
           child: Column(
             children: [
               _basicInformation(),
+              _countryOfTaxResidence(),
               _addressProof(),
               _financialProfile(),
               _disclosuresAffiliations(),
               _signingTaskAgreement(),
-              _riskDisclosure()
+              _signingBrokerAgreement(),
+              _trustedContact(),
+              _riskDisclosure(),
             ],
           ),
         )),
@@ -41,6 +47,7 @@ class ReviewInformationScreen extends StatelessWidget {
   }
 
   Widget _basicInformation() => Padding(
+        key: const Key('basic_information'),
         padding: const EdgeInsets.only(bottom: 10),
         child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
             builder: (context, state) => ExpansionTile(
@@ -65,6 +72,7 @@ class ReviewInformationScreen extends StatelessWidget {
       );
 
   Widget _addressProof() => Padding(
+        key: const Key('address_proof'),
         padding: const EdgeInsets.only(bottom: 10),
         child: BlocBuilder<AddressProofBloc, AddressProofState>(
             builder: (context, state) => ExpansionTile(
@@ -82,6 +90,7 @@ class ReviewInformationScreen extends StatelessWidget {
       );
 
   Widget _financialProfile() => Padding(
+        key: const Key('financial_profile'),
         padding: const EdgeInsets.only(bottom: 10),
         child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
             builder: (context, state) => ExpansionTile(
@@ -100,6 +109,7 @@ class ReviewInformationScreen extends StatelessWidget {
       );
 
   Widget _disclosuresAffiliations() => Padding(
+        key: const Key('disclosure_affiliations'),
         padding: const EdgeInsets.only(bottom: 10),
         child:
             BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
@@ -131,6 +141,7 @@ class ReviewInformationScreen extends StatelessWidget {
       );
 
   Widget _signingTaskAgreement() => Padding(
+        key: const Key('signing_agreement'),
         padding: const EdgeInsets.only(bottom: 10),
         child: BlocBuilder<SigningAgreementTaxBloc, SigningAgreementTaxState>(
             builder: (context, state) => ExpansionTile(
@@ -158,7 +169,57 @@ class ReviewInformationScreen extends StatelessWidget {
                 )),
       );
 
+  Widget _signingBrokerAgreement() => Padding(
+        key: const Key('signing_broker_agreement'),
+        padding: const EdgeInsets.only(bottom: 10),
+        child: BlocBuilder<SigningBrokerAgreementBloc,
+                SigningBrokerAgreementState>(
+            builder: (context, state) => ExpansionTile(
+                  title: const CustomText('Signing Broker Agreement'),
+                  children: [
+                    CustomCheckbox(
+                      padding: const EdgeInsets.only(top: 10),
+                      text:
+                          'I have read, understood, and agree to be bound by Alpaca Securities LLC and LORA Technologies, Limited account terms, and all other terms, disclosures and disclaimers applicable to me, as referenced in the Alpaca Customer Agreement. I also acknowledge that the Alpaca Customer Agreement contains a pre-dispute arbitration clause in Section 42.',
+                      disabled: true,
+                      isChecked: state.isUnderstoodAlpacaCustomAgreementChecked,
+                      onChanged: (_) {},
+                    ),
+                    _spaceHeight(),
+                    CustomCheckbox(
+                        padding: const EdgeInsets.only(top: 10),
+                        text:
+                            'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Application Agreement.',
+                        disabled: true,
+                        isChecked: state.isSigningAgreementChecked,
+                        onChanged: (_) {}),
+                    _spaceHeight(),
+                    if (state.customerSignature != null)
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.memory(state.customerSignature,
+                              height: 200)),
+                  ],
+                )),
+      );
+
+  Widget _trustedContact() => Padding(
+        key: const Key('trusted_contract'),
+        padding: const EdgeInsets.only(bottom: 10),
+        child: BlocBuilder<TrustedContactBloc, TrustedContactState>(
+            builder: (context, state) => ExpansionTile(
+                  title: const CustomText('Trusted Contact'),
+                  children: [
+                    _customCard('First Name', state.firstName),
+                    _customCard('Last Name', state.lastName),
+                    _customCard('Email Address', state.emailAddress),
+                    _customCard('Phone Number', state.phoneNumber),
+                  ],
+                )),
+      );
+
   Widget _riskDisclosure() => Padding(
+        key: const Key('risk_disclosure'),
         padding: const EdgeInsets.only(bottom: 10),
         child: BlocBuilder<RiskDisclosureBloc, BaseResponse<bool>>(
             builder: (context, state) => ExpansionTile(
@@ -175,6 +236,22 @@ class ReviewInformationScreen extends StatelessWidget {
                     ),
                   ],
                 )),
+      );
+
+  Widget _countryOfTaxResidence() => Padding(
+        key: const Key('country_of_tax_residence'),
+        padding: const EdgeInsets.only(bottom: 10),
+        child:
+            BlocBuilder<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
+                builder: (context, state) => ExpansionTile(
+                      title: const CustomText('Country of Tax Residence'),
+                      children: [
+                        _customCard('Tax Residence', state.taxResidence),
+                        _customCard('Country of Tax Residence',
+                            state.countryOfTaxResidence),
+                        _customCard('TIN Number', state.tinNumber),
+                      ],
+                    )),
       );
 
   String _stringOfYesOrNo(bool? condition) {
@@ -204,6 +281,7 @@ class ReviewInformationScreen extends StatelessWidget {
       );
 
   Widget _nextButton() => Padding(
+        key: const Key('next_button'),
         padding: const EdgeInsets.only(top: 10.0),
         child: CustomTextButton(
             borderRadius: 30,

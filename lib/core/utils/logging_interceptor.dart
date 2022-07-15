@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -8,17 +10,17 @@ class LoggingInterceptor extends Interceptor {
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     _logPrint(
-        '==================================== API Request - Start ====================================');
+        '╔==================================== ☁️ API Request - Start ☁️ =====================================╗');
 
     _printKeyValue('URI', options.uri);
     _printKeyValue('METHOD', options.method);
     _logPrint('HEADERS:');
     options.headers.forEach((key, v) => _printKeyValue(' - $key', v));
     _logPrint('BODY:');
-    _printAll(options.data ?? '');
+    _printAll(_prettifyResponse(options.data ?? ''));
 
     _logPrint(
-        '==================================== API Request - End ====================================');
+        '╚==================================== ☁️ API Request - End ☁️ =======================================╝');
 
     return handler.next(options);
   }
@@ -26,7 +28,7 @@ class LoggingInterceptor extends Interceptor {
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     _logPrint(
-        '==================================== Api Error - Start ====================================');
+        '╔==================================== ❌ Api Error - Start ❌ =======================================╗');
 
     _logPrint('URI: ${err.requestOptions.uri}');
     if (err.response != null) {
@@ -40,7 +42,7 @@ class LoggingInterceptor extends Interceptor {
     }
 
     _logPrint(
-        '==================================== Api Error - End ====================================');
+        '╚==================================== ❌ Api Error - End ❌ ==========================================╝');
     return handler.next(err);
   }
 
@@ -48,29 +50,29 @@ class LoggingInterceptor extends Interceptor {
   Future onResponse(
       Response response, ResponseInterceptorHandler handler) async {
     _logPrint(
-        '==================================== Api Response - Start ====================================');
+        '╔==================================== ✅ Api Response - Start ✅ ====================================╗');
 
     _printKeyValue('URI', response.requestOptions.uri);
     _printKeyValue('STATUS CODE', response.statusCode ?? '');
     _printKeyValue('REDIRECT', response.isRedirect ?? false);
     _logPrint('BODY:');
-    _printAll(response.data ?? '');
+    _printAll(_prettifyResponse(response.data ?? ''));
 
     _logPrint(
-        '==================================== Api Response - End ====================================');
+        '╚==================================== ✅ Api Response - End ✅ ======================================╝');
 
     return handler.next(response);
   }
 
-  void _printKeyValue(String key, Object v) {
-    _logPrint('$key: $v');
-  }
+  void _printKeyValue(String key, Object v) => _logPrint('$key: $v');
 
-  void _printAll(msg) {
-    msg.toString().split('\n').forEach(_logPrint);
-  }
+  void _printAll(msg) => msg.toString().split('\n').forEach(_logPrint);
 
-  void _logPrint(String s) {
-    debugPrint(s);
+  void _logPrint(String s) => debugPrint(s);
+
+  String _prettifyResponse(jsonObject) {
+    var spaces = ' ' * 2;
+    var encoder = JsonEncoder.withIndent(spaces);
+    return encoder.convert(jsonObject);
   }
 }
