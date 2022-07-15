@@ -36,7 +36,7 @@ class SigningAgreementChecked extends SigningBrokerAgreementEvent {
 }
 
 class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
-  final Uint8List? customerSignature;
+  final String? customerSignature;
   const CustomerSignatureDrew(this.customerSignature) : super();
 
   @override

@@ -54,7 +54,6 @@ class SigningBrokerAgreementBloc
 
   _onCustomerSignatureReset(
       CustomerSignatureReset event, Emitter<SigningBrokerAgreementState> emit) {
-    state.customerSignature = null;
-    emit(state.copyWith(customerSignature: null, isSignatureDrew: false));
+    emit(state.copyWith(customerSignature: '', isSignatureDrew: false));
   }
 }
