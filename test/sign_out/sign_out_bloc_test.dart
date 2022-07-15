@@ -1,34 +1,35 @@
+import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/bloc/sign_out_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/domain/sign_out_api_client.dart';
-import 'package:asklora_mobile_app/feature/auth/sign_out/domain/sign_out_response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/repository/sign_out_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-
 import 'package:mockito/mockito.dart';
 
 import 'sign_out_bloc_test.mocks.dart';
 
 class DioAdapterMock extends Mock implements HttpClientAdapter {}
 
-class MockCounterBloc extends MockBloc<SignOutEvent, SignOutState>
-    implements SignOutBloc {}
-
 @GenerateMocks([SignOutRepository])
 @GenerateMocks([SignOutApiClient])
+@GenerateMocks([Repository])
 void main() async {
   group('Sign Up Screen Bloc Tests', () {
-    late MockSignOutRepository signOutRepository;
+    late MockRepository tokenRepository;
     late SignOutBloc signOutBloc;
+    late MockSignOutRepository signOutRepository;
 
     setUpAll(() async {
       signOutRepository = MockSignOutRepository();
+      tokenRepository = MockRepository();
     });
 
     setUp(() async {
-      signOutBloc = SignOutBloc(signOutRepository: signOutRepository);
+      signOutBloc = SignOutBloc(
+          tokenRepository: tokenRepository,
+          signOutRepository: signOutRepository);
     });
 
     test('Sign Out Bloc init state is should be `unknown`', () {
@@ -42,8 +43,13 @@ void main() async {
         'emits `SignOutStatus.success` and `responseMessage = Sign Out Success` WHEN '
         'press Sign Out Button',
         build: () {
-          when(signOutRepository.signOut()).thenAnswer(
-              (_) => Future.value(SignOutResponse('Sign Out Successful')));
+          when(tokenRepository.getRefreshToken())
+              .thenAnswer((realInvocation) => Future.value('refresh_token'));
+          when(signOutRepository.signOut('refresh_token'))
+              .thenAnswer((_) => Future.value(true));
+          when(tokenRepository.deleteAll())
+              .thenAnswer((realInvocation) => Future.value());
+
           return signOutBloc;
         },
         act: (bloc) => bloc.add(const SignOutSubmitted()),

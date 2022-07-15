@@ -12,7 +12,7 @@ void main() async {
     });
 
     test('Risk Disclosure init state data should be `false`', () {
-      expect(riskDisclosureBloc.state, BaseResponse(data: false));
+      expect(riskDisclosureBloc.state, const BaseResponse(data: false));
     });
 
     blocTest<RiskDisclosureBloc, BaseResponse<bool>>(
@@ -23,7 +23,7 @@ void main() async {
         },
         act: (bloc) => bloc.add(const CompanyRiskDisclosureChanged(true)),
         expect: () => {
-              BaseResponse(data: true),
+              const BaseResponse(data: true),
             });
 
     blocTest<RiskDisclosureBloc, BaseResponse<bool>>(
@@ -37,8 +37,8 @@ void main() async {
           bloc.add(const CompanyRiskDisclosureChanged(false));
         },
         expect: () => {
-              BaseResponse(data: true),
-              BaseResponse(data: false),
+              const BaseResponse(data: true),
+              const BaseResponse(data: false),
             });
 
     tearDown(() => {riskDisclosureBloc.close()});
