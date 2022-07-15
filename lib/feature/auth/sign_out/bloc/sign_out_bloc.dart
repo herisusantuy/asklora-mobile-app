@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/domain/token/repository/token_repository.dart';
+import '../../../../core/domain/token/repository/repository.dart';
 import '../repository/sign_out_repository.dart';
 
 part 'sign_out_event.dart';
@@ -9,13 +9,13 @@ part 'sign_out_event.dart';
 part 'sign_out_state.dart';
 
 class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
-  SignOutBloc({required TokenRepository tokenRepository})
+  SignOutBloc({required Repository tokenRepository})
       : _tokenRepository = tokenRepository,
         super(const SignOutState()) {
     on<SignOutSubmitted>(_onSignOutSubmitted);
   }
 
-  final TokenRepository _tokenRepository;
+  final Repository _tokenRepository;
   final SignOutRepository _signOutRepository = SignOutRepository();
 
   void _onSignOutSubmitted(
