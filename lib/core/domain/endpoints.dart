@@ -13,3 +13,4 @@ const String endpointGetOnfidoToken = '$v1${accounts}onfido/sdk/token';
 const String endpointOnfidoOutcome = '$v1${accounts}onfido/sdk/outcome';
 const String endpointTokenVerify = '${v1}auth/verify/';
 const String endpointTokenRefresh = '${v1}auth/refresh/';
+const String endpointTaxInfo = '$v1${accounts}tax-info/';

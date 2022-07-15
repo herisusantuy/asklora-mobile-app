@@ -25,6 +25,8 @@ import 'signing_broker_agreements_form.dart';
 import 'trusted_contact_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
+  final AccountBloc accountBloc =
+      AccountBloc(getAccountRepository: AccountRepository());
   UpgradeAccountScreen({Key? key, required this.initialPage})
       : _pageViewController = PageController(initialPage: initialPage),
         super(key: key);
@@ -81,17 +83,16 @@ class UpgradeAccountScreen extends StatelessWidget {
         ),
         body: MultiBlocProvider(
           providers: [
+            BlocProvider(create: (context) => accountBloc),
+            BlocProvider(create: (context) => accountBloc.basicInformationBloc),
             BlocProvider(
-              create: (context) =>
-                  AccountBloc(getAccountRepository: AccountRepository()),
-            ),
-            BlocProvider(create: (context) => BasicInformationBloc()),
-            BlocProvider(create: (context) => CountryOfTaxResidenceBloc()),
-            BlocProvider(create: (context) => AddressProofBloc()),
+                create: (context) => accountBloc.countryOfTaxResidenceBloc),
+            BlocProvider(create: (context) => accountBloc.addressProofBloc),
             BlocProvider(create: (context) => FinancialProfileBloc()),
             BlocProvider(create: (context) => DisclosureAffiliationBloc()),
             BlocProvider(create: (context) => SigningAgreementTaxBloc()),
-            BlocProvider(create: (context) => SigningBrokerAgreementBloc()),
+            BlocProvider(
+                create: (context) => accountBloc.signingBrokerAgreementBloc),
             BlocProvider(create: (context) => TrustedContactBloc()),
             BlocProvider(create: (context) => RiskDisclosureBloc()),
           ],

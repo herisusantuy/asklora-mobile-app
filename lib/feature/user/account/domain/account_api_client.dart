@@ -6,6 +6,7 @@ import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/endpoints.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import 'upgrade_account/upgrade_account_request.dart';
+import 'upgrade_account/tax_info_request.dart';
 
 class AccountApiClient {
   static AccountApiClient? _instance;
@@ -29,4 +30,8 @@ class AccountApiClient {
       await AskloraApiClient().patch(
           endpoint: endpointOnfidoOutcome,
           payload: jsonEncode(request.toJson()));
+
+  Future<Response> submitTaxInfo(TaxInfoRequest request) async =>
+      await AskloraApiClient().post(
+          endpoint: endpointTaxInfo, payload: jsonEncode(request.toJson()));
 }

@@ -8,6 +8,7 @@ enum GetAccountStatus {
   upgradingAccount,
   fetchingOnfidoToken,
   submittingOnfidoResult,
+  submittingTaxInfo
 }
 
 class AccountState extends Equatable {
