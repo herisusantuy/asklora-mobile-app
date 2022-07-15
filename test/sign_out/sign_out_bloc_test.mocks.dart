@@ -4,7 +4,7 @@
 
 import 'dart:async' as _i4;
 
-import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart'
+import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart'
     as _i7;
 import 'package:asklora_mobile_app/feature/auth/sign_out/domain/sign_out_api_client.dart'
     as _i5;
@@ -57,11 +57,11 @@ class MockSignOutApiClient extends _i1.Mock implements _i5.SignOutApiClient {
           as _i4.Future<_i2.Response<dynamic>>);
 }
 
-/// A class which mocks [TokenRepository].
+/// A class which mocks [Repository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTokenRepository extends _i1.Mock implements _i7.TokenRepository {
-  MockTokenRepository() {
+class MockRepository extends _i1.Mock implements _i7.Repository {
+  MockRepository() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -82,11 +82,6 @@ class MockTokenRepository extends _i1.Mock implements _i7.TokenRepository {
       (super.noSuchMethod(Invocation.method(#getRefreshToken, []),
           returnValue: Future<String?>.value()) as _i4.Future<String?>);
   @override
-  _i4.Future<void> deleteAll() =>
-      (super.noSuchMethod(Invocation.method(#deleteAll, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
-  @override
   _i4.Future<bool> isTokenValid() =>
       (super.noSuchMethod(Invocation.method(#isTokenValid, []),
           returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
@@ -94,4 +89,9 @@ class MockTokenRepository extends _i1.Mock implements _i7.TokenRepository {
   _i4.Future<bool> refreshToken() =>
       (super.noSuchMethod(Invocation.method(#refreshToken, []),
           returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+  @override
+  _i4.Future<void> deleteAll() =>
+      (super.noSuchMethod(Invocation.method(#deleteAll, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }
