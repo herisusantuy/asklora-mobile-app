@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dart_ipify/dart_ipify.dart';
 
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
@@ -92,6 +93,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       DateTime date = DateTime.now();
       String formattedDate =
           '${DateTime.parse(date.toString()).year}-${DateTime.parse(date.toString()).month}-${DateTime.parse(date.toString()).day}';
+      final idAddress = await Ipify.ipv4();
       TaxInfoRequest taxInfoReq = TaxInfoRequest(
           fullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
@@ -104,11 +106,12 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           mailingAddressCountry: addressProofBloc.state.mailCountry,
           foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
           dateOfBirth: formattedDateOfBirth,
-          signature: signingBrokerAgreementBloc.state.customerSignature,
+          signature:
+              'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
           date: formattedDate,
           signerFullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
-          ipAddress: '148.47.169.169');
+          ipAddress: idAddress);
       await _accountRepository.submitTaxInfo(taxInfoReq);
       emit(state.copyWith(
           status: GetAccountStatus.success,
