@@ -17,41 +17,34 @@ void main() async {
           navigatorObservers: [mockObserver]));
     }
 
-    var question1 = find.byKey(const Key('disclosure_affiliation_question_1'));
-    var question1Option1 =
-        find.byKey(const Key('disclosure_affiliation_question_1 Yes'));
-    var question1Option2 =
-        find.byKey(const Key('disclosure_affiliation_question_1 No'));
-    var question2 = find.byKey(const Key('disclosure_affiliation_question_2'));
-    var question2Option1 =
-        find.byKey(const Key('disclosure_affiliation_question_2 Yes'));
-    var question2Option2 =
-        find.byKey(const Key('disclosure_affiliation_question_2 No'));
-    var question3 = find.byKey(const Key('disclosure_affiliation_question_3'));
-    var question3Option1 =
-        find.byKey(const Key('disclosure_affiliation_question_3 Yes'));
-    var question3Option2 =
-        find.byKey(const Key('disclosure_affiliation_question_3 No'));
-    var question4 = find.byKey(const Key('disclosure_affiliation_question_4'));
-    var question4Option1 =
-        find.byKey(const Key('disclosure_affiliation_question_4 Yes'));
-    var question4Option2 =
-        find.byKey(const Key('disclosure_affiliation_question_4 No'));
-    var question5 = find.byKey(const Key('disclosure_affiliation_question_5'));
-    var question5Option1 =
-        find.byKey(const Key('disclosure_affiliation_question_5 Yes'));
-    var question5Option2 =
-        find.byKey(const Key('disclosure_affiliation_question_5 No'));
-    var question6 = find.byKey(const Key('disclosure_affiliation_question_6'));
-    var question6Option1 =
-        find.byKey(const Key('disclosure_affiliation_question_6 Yes'));
-    var question6Option2 =
-        find.byKey(const Key('disclosure_affiliation_question_6 No'));
-    var question7 = find.byKey(const Key('disclosure_affiliation_question_7'));
-    var question7Option1 =
-        find.byKey(const Key('disclosure_affiliation_question_7 Yes'));
-    var question7Option2 =
-        find.byKey(const Key('disclosure_affiliation_question_7 No'));
+    var question1 = find.byKey(const Key('question_1'));
+    var question1IsYes = find.byKey(const Key('question_1 Yes'));
+    var question1IsNo = find.byKey(const Key('question_1 No'));
+
+    var question2 = find.byKey(const Key('question_2'));
+    var question2IsYes = find.byKey(const Key('question_2 Yes'));
+    var question2IsNo = find.byKey(const Key('question_2 No'));
+
+    var question3 = find.byKey(const Key('question_3'));
+    var question3IsYes = find.byKey(const Key('question_3 Yes'));
+    var question3IsNo = find.byKey(const Key('question_3 No'));
+
+    var question4 = find.byKey(const Key('question_4'));
+    var question4IsYes = find.byKey(const Key('question_4 Yes'));
+    var question4IsNo = find.byKey(const Key('question_4 No'));
+
+    var question5 = find.byKey(const Key('question_5'));
+    var question5IsYes = find.byKey(const Key('question_5 Yes'));
+    var question5IsNo = find.byKey(const Key('question_5 No'));
+
+    var question6 = find.byKey(const Key('question_6'));
+    var question6IsYes = find.byKey(const Key('question_6 Yes'));
+    var question6IsNo = find.byKey(const Key('question_6 No'));
+
+    var question7 = find.byKey(const Key('question_7'));
+    var question7IsYes = find.byKey(const Key('question_7 Yes'));
+    var question7IsNo = find.byKey(const Key('question_7 No'));
+
     var nextButton =
         find.byKey(const Key('disclosures_affiliations_next_step_button'));
 
@@ -59,12 +52,26 @@ void main() async {
         (tester) async {
       await _buildDisclosureAffiliationForm(tester);
       expect(question1, findsOneWidget);
+      expect(question1IsYes, findsOneWidget);
+      expect(question1IsNo, findsOneWidget);
       expect(question2, findsOneWidget);
+      expect(question2IsYes, findsOneWidget);
+      expect(question2IsNo, findsOneWidget);
       expect(question3, findsOneWidget);
+      expect(question3IsYes, findsOneWidget);
+      expect(question3IsNo, findsOneWidget);
       expect(question4, findsOneWidget);
+      expect(question4IsYes, findsOneWidget);
+      expect(question4IsNo, findsOneWidget);
       expect(question5, findsOneWidget);
+      expect(question5IsYes, findsOneWidget);
+      expect(question5IsNo, findsOneWidget);
       expect(question6, findsOneWidget);
+      expect(question6IsYes, findsOneWidget);
+      expect(question6IsNo, findsOneWidget);
       expect(question7, findsOneWidget);
+      expect(question7IsYes, findsOneWidget);
+      expect(question7IsNo, findsOneWidget);
       expect(nextButton, findsOneWidget);
     });
     testWidgets(
@@ -85,32 +92,28 @@ void main() async {
         'enable next button when question has answered with option "No" ',
         (tester) async {
       await _buildDisclosureAffiliationForm(tester);
-      await tester.tap(question1Option2);
+      await tester.tap(question1IsNo);
       await tester.pump();
-      await tester.tap(question2Option2);
+      await tester.tap(question2IsNo);
       await tester.pump();
-      // await tester.tap(question3Option2);
-      // await tester.pump();
-      // await tester.tap(question4Option2);
-      // await tester.pump();
-      // await tester.tap(question5Option2);
-      // await tester.pump();
-      // await tester.tap(question6Option2);
-      // await tester.pump();
-      // await tester.tap(question7Option2);
-      // await tester.pump();
+      await tester.tap(question3IsNo);
+      await tester.pump();
+      await tester.ensureVisible(question4IsNo);
+      await tester.tap(question4IsNo);
+      await tester.pump();
+      await tester.tap(question5IsNo);
+      await tester.pump();
+      await tester.tap(question6IsNo);
+      await tester.pump();
+      await tester.tap(question7IsNo);
+      await tester.pump();
       expect((tester.widget(question1) as QuestionWidget).selectedAnswer, 'No');
       expect((tester.widget(question2) as QuestionWidget).selectedAnswer, 'No');
-      // expect((tester.widget(question3) as QuestionWidget).selectedAnswer,
-      //     'No');
-      // expect((tester.widget(question4) as QuestionWidget).selectedAnswer,
-      //     'No');
-      // expect((tester.widget(question5) as QuestionWidget).selectedAnswer,
-      //     'No');
-      // expect((tester.widget(question6) as QuestionWidget).selectedAnswer,
-      //     'No');
-      // expect((tester.widget(question7) as QuestionWidget).selectedAnswer,
-      //     'No');
+      expect((tester.widget(question3) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question4) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question5) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question6) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question7) as QuestionWidget).selectedAnswer, 'No');
     });
   });
 }
