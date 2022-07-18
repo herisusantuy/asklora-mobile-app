@@ -10,6 +10,7 @@ class QuestionWidget extends StatelessWidget {
   final void Function(String) onSelected;
   final String? selectedAnswer;
   final String errorText;
+  final String keyOption;
   const QuestionWidget({
     Key? key,
     this.padding = EdgeInsets.zero,
@@ -18,6 +19,7 @@ class QuestionWidget extends StatelessWidget {
     required this.onSelected,
     this.selectedAnswer,
     this.errorText = '',
+    this.keyOption = '',
   }) : super(key: key);
 
   @override
@@ -63,6 +65,7 @@ class QuestionWidget extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(5)),
         child: InkWell(
+          key: Key('$keyOption $choice'),
           onTap: () {
             onSelected(choice);
           },
