@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/styles/color.dart';
@@ -26,13 +27,10 @@ class OtpForm extends StatelessWidget {
       listener: (context, state) {
         switch (state.status) {
           case OtpStatus.failure:
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  backgroundColor: Colors.red,
-                  content: CustomText(
-                    state.responseMessage,
-                  )));
+            CustomSnackBar(context)
+                .setMessage(state.responseMessage)
+                .setType(CustomSnackBarType.error)
+                .show();
             break;
           case OtpStatus.success:
             SignUpSuccessScreen.openReplace(context);
