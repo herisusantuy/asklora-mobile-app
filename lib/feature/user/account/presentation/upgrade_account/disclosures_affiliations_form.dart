@@ -57,6 +57,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
           return Column(
             children: [
               QuestionWidget(
+                keyOption: 'disclosure_affiliation_question_1',
                 key: const Key('disclosure_affiliation_question_1'),
                 questionText:
                     '1. Affiliated or work with a US registered broker-dealer or FINRA?',
