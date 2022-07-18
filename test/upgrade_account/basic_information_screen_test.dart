@@ -1,3 +1,6 @@
+import 'package:asklora_mobile_app/core/presentation/custom_dropdown.dart';
+import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/core/presentation/question_widget.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -5,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../mocks/mocks.dart';
 
 void main() async {
-  group('Upgrade Account screen widget test', () {
+  group('Upgrade Account screen on Basic Information Form test', () {
     Future<void> _buildUpgradeAccountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -13,54 +16,118 @@ void main() async {
           navigatorObservers: [mockObserver]));
     }
 
-    testWidgets(
-        'Render Upgrade Account screen with all fields "Basic Information"',
-        (tester) async {
+    var firstNameInput = find.byKey(const Key('account_first_name_input'));
+    var middleNameInput = find.byKey(const Key('account_middle_name_input'));
+    var lastNameInput = find.byKey(const Key('account_last_name_input'));
+    var chineseNameInput = find.byKey(const Key('account_chinese_name_input'));
+    var genderSelect = find.byKey(const Key('account_gender_select'));
+    var dateOfBirthPicker =
+        find.byKey(const Key('account_date_of_birth_picker'));
+    var countryCodeAndPhoneNumberInput =
+        find.byKey(const Key('account_country_code_phone_number_input'));
+    var countryOfCitizenshipInput =
+        find.byKey(const Key('account_country_of_citizenship_input'));
+    var isHongKongPermanentResidentQuestion = find
+        .byKey(const Key('account_is_hongkong_permanent_resident_question'));
+    var isHongKongPermanentResidentYesAnswer = find.byKey(
+        const Key('account_is_hongkong_permanent_resident_question Yes'));
+    var isHongKongPermanentResidentNoAnswer = find
+        .byKey(const Key('account_is_hongkong_permanent_resident_question No'));
+    var accountIdNumberInput = find.byKey(const Key('account_id_number_input'));
+    var isUnitedStateResidentQuestion =
+        find.byKey(const Key('account_is_united_state_resident_question'));
+    var isUnitedStateResidentYesAnswer =
+        find.byKey(const Key('account_is_united_state_resident_question Yes'));
+    var isUnitedStateResidentNoAnswer =
+        find.byKey(const Key('account_is_united_state_resident_question No'));
+    var usResidentNote = find.byKey(const Key('account_us_resident_note'));
+    var basicInformationNextStepButton =
+        find.byKey(const Key('account_basic_information_next_step_button'));
+    testWidgets('Render Basic Information Form first render.', (tester) async {
       await _buildUpgradeAccountScreen(tester);
 
-      var upgradeAccountPageView =
-          find.byKey(const Key('upgrade_account_page_view'));
-      expect(upgradeAccountPageView, findsOneWidget);
-
-      var firstNameInput = find.byKey(const Key('account_first_name_input'));
       expect(firstNameInput, findsOneWidget);
-
-      var middleNameInput = find.byKey(const Key('account_middle_name_input'));
       expect(middleNameInput, findsOneWidget);
-
-      var lastNameInput = find.byKey(const Key('account_last_name_input'));
       expect(lastNameInput, findsOneWidget);
-
-      var chineseNameInput =
-          find.byKey(const Key('account_chinese_name_input'));
       expect(chineseNameInput, findsOneWidget);
-
-      var genderSelect = find.byKey(const Key('account_gender_select'));
       expect(genderSelect, findsOneWidget);
-
-      var dateOfBirthPicker =
-          find.byKey(const Key('account_date_of_birth_picker'));
+      expect((tester.widget<CustomDropdown>(genderSelect).value), '');
       expect(dateOfBirthPicker, findsOneWidget);
-
-      var countryCodeAndPhoneNumberInput =
-          find.byKey(const Key('account_country_code_phone_number_input'));
       expect(countryCodeAndPhoneNumberInput, findsOneWidget);
-
-      var countryOfCitizenshipInput =
-          find.byKey(const Key('account_country_of_citizenship_input'));
       expect(countryOfCitizenshipInput, findsOneWidget);
-
-      var isHongKongPermanentResidentQuestion = find
-          .byKey(const Key('account_is_hong_kong_permanent_resident_question'));
       expect(isHongKongPermanentResidentQuestion, findsOneWidget);
-
-      var isUnitedStateResidentQuestion =
-          find.byKey(const Key('account_is_united_state_resident_question'));
+      expect(isHongKongPermanentResidentYesAnswer, findsOneWidget);
+      expect(isHongKongPermanentResidentNoAnswer, findsOneWidget);
+      expect(accountIdNumberInput, findsNothing);
       expect(isUnitedStateResidentQuestion, findsOneWidget);
-
-      var basicInformationNextStepButton =
-          find.byKey(const Key('account_basic_information_next_step_button'));
+      expect(isUnitedStateResidentYesAnswer, findsOneWidget);
+      expect(isUnitedStateResidentNoAnswer, findsOneWidget);
       expect(basicInformationNextStepButton, findsOneWidget);
+      expect(
+          (tester
+              .widget<QuestionWidget>(isHongKongPermanentResidentQuestion)
+              .selectedAnswer),
+          null);
+      expect(
+          (tester
+              .widget<QuestionWidget>(isUnitedStateResidentQuestion)
+              .selectedAnswer),
+          null);
+      expect(
+          tester
+              .widget<CustomTextButton>(basicInformationNextStepButton)
+              .disable,
+          true);
+    });
+
+    testWidgets(
+        'Behavior on Select Gender,HongKong Permanent and US Resident question',
+        (tester) async {
+      await _buildUpgradeAccountScreen(tester);
+      await tester.ensureVisible(isHongKongPermanentResidentYesAnswer);
+      await tester.tap(isHongKongPermanentResidentYesAnswer,
+          warnIfMissed: false);
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(
+          (tester.widget(isHongKongPermanentResidentQuestion) as QuestionWidget)
+              .selectedAnswer,
+          'Yes');
+      expect(accountIdNumberInput, findsOneWidget);
+
+      await tester.ensureVisible(isHongKongPermanentResidentNoAnswer);
+      await tester.tap(isHongKongPermanentResidentNoAnswer,
+          warnIfMissed: false);
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(
+          (tester.widget(isHongKongPermanentResidentQuestion) as QuestionWidget)
+              .selectedAnswer,
+          'No');
+
+      await tester.ensureVisible(isUnitedStateResidentYesAnswer);
+      await tester.tap(isUnitedStateResidentYesAnswer, warnIfMissed: false);
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(
+          (tester.widget(isUnitedStateResidentQuestion) as QuestionWidget)
+              .selectedAnswer,
+          'Yes');
+      expect(usResidentNote, findsOneWidget);
+
+      await tester.ensureVisible(isUnitedStateResidentNoAnswer);
+      await tester.tap(isUnitedStateResidentNoAnswer, warnIfMissed: false);
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(
+          (tester.widget(isUnitedStateResidentQuestion) as QuestionWidget)
+              .selectedAnswer,
+          'No');
+
+      await tester.tap(genderSelect, warnIfMissed: false);
+
+      expect((tester.widget(genderSelect) as CustomDropdown).itemsList,
+          const ['Male', 'Female', 'Other']);
     });
   });
 }
