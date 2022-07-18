@@ -1,11 +1,9 @@
 part of 'upgrade_account_bloc.dart';
 
-enum UpgradeAccountStatus { success, failure, unknown, loading }
-
-enum Gender { femail, male, unknown }
+enum Gender { female, male, unknown }
 
 class UpgradeAccountState extends Equatable {
-  final UpgradeAccountStatus status;
+  final ResponseState status;
   final String firstName;
   final String middleName;
   final String lastName;
@@ -19,7 +17,7 @@ class UpgradeAccountState extends Equatable {
   final bool isUnitedStateResident;
 
   const UpgradeAccountState({
-    this.status = UpgradeAccountStatus.unknown,
+    this.status = ResponseState.unknown,
     this.firstName = '',
     this.middleName = '',
     this.lastName = '',
@@ -52,7 +50,7 @@ class UpgradeAccountState extends Equatable {
   }
 
   UpgradeAccountState copyWith({
-    UpgradeAccountStatus? status,
+    ResponseState? status,
     String? firstName,
     String? middleName,
     String? lastName,

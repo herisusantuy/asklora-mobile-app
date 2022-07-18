@@ -9,6 +9,7 @@ abstract class SigningBrokerAgreementEvent extends Equatable {
 
 class AlpacaCustomerAgreementOpened extends SigningBrokerAgreementEvent {
   final bool isAlpacaCustomerAgreementOpened;
+
   const AlpacaCustomerAgreementOpened(this.isAlpacaCustomerAgreementOpened)
       : super();
 
@@ -19,6 +20,7 @@ class AlpacaCustomerAgreementOpened extends SigningBrokerAgreementEvent {
 class UnderstoodAlpacaCustomAgreementChecked
     extends SigningBrokerAgreementEvent {
   final bool isUnderstoodAlpacaCustomAgreementChecked;
+
   const UnderstoodAlpacaCustomAgreementChecked(
       this.isUnderstoodAlpacaCustomAgreementChecked)
       : super();
@@ -29,6 +31,7 @@ class UnderstoodAlpacaCustomAgreementChecked
 
 class SigningAgreementChecked extends SigningBrokerAgreementEvent {
   final bool isSigningAgreementChecked;
+
   const SigningAgreementChecked(this.isSigningAgreementChecked) : super();
 
   @override
@@ -37,6 +40,7 @@ class SigningAgreementChecked extends SigningBrokerAgreementEvent {
 
 class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
   final String? customerSignature;
+
   const CustomerSignatureDrew(this.customerSignature) : super();
 
   @override
@@ -45,6 +49,7 @@ class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
 
 class CustomerSignatureReset extends SigningBrokerAgreementEvent {
   final SignatureController resetCustomerSignature;
+
   const CustomerSignatureReset(this.resetCustomerSignature) : super();
 
   @override

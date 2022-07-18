@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/bloc/sign_out_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/domain/sign_out_api_client.dart';
@@ -36,7 +37,7 @@ void main() async {
       expect(
           signOutBloc.state,
           const SignOutState(
-              status: SignOutStatus.unknown, responseMessage: ''));
+              status: ResponseState.unknown, responseMessage: ''));
     });
 
     blocTest<SignOutBloc, SignOutState>(
@@ -55,9 +56,9 @@ void main() async {
         act: (bloc) => bloc.add(const SignOutSubmitted()),
         expect: () => {
               const SignOutState(
-                  status: SignOutStatus.loading, responseMessage: ''),
+                  status: ResponseState.loading, responseMessage: ''),
               const SignOutState(
-                  status: SignOutStatus.success,
+                  status: ResponseState.success,
                   responseMessage: 'Sign Out Success')
             });
 

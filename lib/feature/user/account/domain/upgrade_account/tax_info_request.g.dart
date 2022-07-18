@@ -15,9 +15,10 @@ TaxInfoRequest _$TaxInfoRequestFromJson(Map<String, dynamic> json) =>
           json['permanent_address_city_state'] as String? ?? '',
       permanentAddressCountry:
           json['permanent_address_country'] as String? ?? '',
-      mailingAddressStreet: json['mailing_address_street'] as String?,
-      mailingAddressCityState: json['mailing_address_city_state'] as String?,
-      mailingAddressCountry: json['mailing_address_country'] as String?,
+      mailingAddressStreet: json['mailing_address_street'] as String? ?? '',
+      mailingAddressCityState:
+          json['mailing_address_city_state'] as String? ?? '',
+      mailingAddressCountry: json['mailing_address_country'] as String? ?? '',
       foreignTaxId: json['foreign_tax_id'] as String? ?? '',
       dateOfBirth: json['date_of_birth'] as String? ?? '',
       signature: json['signature'] as String? ?? '',

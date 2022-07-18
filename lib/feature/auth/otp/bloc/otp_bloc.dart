@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../../core/domain/otp/verify_otp_request.dart';
 import '../repository/otp_repository.dart';
@@ -28,11 +29,11 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
   void _onOtpRequested(OtpRequested event, Emitter<OtpState> emit) async {
     try {
-      emit(state.copyWith(status: OtpStatus.loading));
+      emit(state.copyWith(status: ResponseState.loading));
       await _otpRepository.getOtp(
           getOtpRequest: GetOtpRequest(event.email, OtpType.register.value));
       emit(state.copyWith(
-          status: OtpStatus.unknown,
+          status: ResponseState.unknown,
           disableRequest: true,
           responseMessage: 'OTP code sent to your email',
           resetTime: _resetTime));
@@ -42,11 +43,11 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       });
     } on NotFoundException {
       emit(state.copyWith(
-          status: OtpStatus.failure,
+          status: ResponseState.error,
           responseMessage: 'User does not exist with the given email'));
     } catch (e) {
       emit(state.copyWith(
-          status: OtpStatus.failure, responseMessage: e.toString()));
+          status: ResponseState.error, responseMessage: e.toString()));
     }
   }
 
@@ -54,7 +55,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     emit(state.copyWith(
         disableRequest: state.resetTime == 1 ? false : true,
         resetTime: state.resetTime - 1,
-        status: OtpStatus.unknown));
+        status: ResponseState.unknown));
   }
 
   void _onOtpSubmitted(
@@ -62,17 +63,18 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     Emitter<OtpState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: OtpStatus.loading));
+      emit(state.copyWith(status: ResponseState.loading));
       await _otpRepository.verifyOtp(verifyOtpRequest: event.verifyOtpRequest);
       cancelStreamSubscription();
       emit(state.copyWith(
-          status: OtpStatus.success, responseMessage: 'Verify OTP Success'));
+          status: ResponseState.success,
+          responseMessage: 'Verify OTP Success'));
     } on UnauthorizedException {
       emit(state.copyWith(
-          status: OtpStatus.failure, responseMessage: 'Invalid OTP'));
+          status: ResponseState.error, responseMessage: 'Invalid OTP'));
     } catch (e) {
       emit(state.copyWith(
-          status: OtpStatus.failure, responseMessage: e.toString()));
+          status: ResponseState.error, responseMessage: e.toString()));
     }
   }
 

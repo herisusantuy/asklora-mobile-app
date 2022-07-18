@@ -1,13 +1,11 @@
 part of 'sign_out_bloc.dart';
 
-enum SignOutStatus { success, failure, unknown, loading }
-
 class SignOutState extends Equatable {
-  final SignOutStatus status;
+  final ResponseState status;
   final String responseMessage;
 
   const SignOutState({
-    this.status = SignOutStatus.unknown,
+    this.status = ResponseState.unknown,
     this.responseMessage = '',
   }) : super();
 
@@ -18,7 +16,7 @@ class SignOutState extends Equatable {
       ];
 
   SignOutState copyWith({
-    SignOutStatus? status,
+    ResponseState? status,
     String? responseMessage,
   }) {
     return SignOutState(

@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
@@ -52,7 +53,7 @@ void main() async {
         expect(
             signInBloc.state,
             const SignInState(
-                status: SignInStatus.unknown,
+                status: ResponseState.unknown,
                 emailAddress: '',
                 isEmailValid: false,
                 password: '',
@@ -71,7 +72,7 @@ void main() async {
         },
         expect: () => {
               const SignInState(
-                status: SignInStatus.unknown,
+                status: ResponseState.unknown,
                 emailAddress: 'qweasdzxc',
                 isEmailValid: false,
                 emailAddressErrorText: 'Enter valid email',
@@ -81,7 +82,7 @@ void main() async {
                 responseMessage: '',
               ),
               const SignInState(
-                  status: SignInStatus.unknown,
+                  status: ResponseState.unknown,
                   emailAddress: 'qweasdzxc',
                   isEmailValid: false,
                   emailAddressErrorText: 'Enter valid email',
@@ -95,7 +96,7 @@ void main() async {
         act: (bloc) => bloc.add(const SignInEmailChanged('nyoba@yopmail.com')),
         expect: () => {
               const SignInState(
-                status: SignInStatus.unknown,
+                status: ResponseState.unknown,
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
                 emailAddressErrorText: '',
@@ -113,7 +114,7 @@ void main() async {
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
               .thenAnswer(
             (_) => Future.value(
-              SignInResponse('access', 'refresh'),
+              BaseResponse(data: SignInResponse('access', 'refresh')),
             ),
           );
 
@@ -126,7 +127,7 @@ void main() async {
             },
         expect: () => {
               const SignInState(
-                  status: SignInStatus.unknown,
+                  status: ResponseState.unknown,
                   emailAddress: 'nyoba@yopmail.com',
                   isEmailValid: true,
                   emailAddressErrorText: '',
@@ -135,7 +136,7 @@ void main() async {
                   passwordErrorText: '',
                   responseMessage: ''),
               const SignInState(
-                  status: SignInStatus.unknown,
+                  status: ResponseState.unknown,
                   emailAddress: 'nyoba@yopmail.com',
                   isEmailValid: true,
                   emailAddressErrorText: '',
@@ -144,7 +145,7 @@ void main() async {
                   passwordErrorText: '',
                   responseMessage: ''),
               const SignInState(
-                  status: SignInStatus.loading,
+                  status: ResponseState.loading,
                   emailAddress: 'nyoba@yopmail.com',
                   isEmailValid: true,
                   emailAddressErrorText: '',
@@ -153,7 +154,7 @@ void main() async {
                   passwordErrorText: '',
                   responseMessage: ''),
               const SignInState(
-                  status: SignInStatus.success,
+                  status: ResponseState.success,
                   emailAddress: 'nyoba@yopmail.com',
                   isEmailValid: true,
                   emailAddressErrorText: '',

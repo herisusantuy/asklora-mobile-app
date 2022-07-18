@@ -1,9 +1,7 @@
 part of 'sign_in_bloc.dart';
 
-enum SignInStatus { success, failure, unknown, loading }
-
 class SignInState extends Equatable {
-  final SignInStatus status;
+  final ResponseState status;
   final String emailAddress;
   final bool isEmailValid;
   final String emailAddressErrorText;
@@ -13,7 +11,7 @@ class SignInState extends Equatable {
   final String responseMessage;
 
   const SignInState({
-    this.status = SignInStatus.unknown,
+    this.status = ResponseState.unknown,
     this.emailAddress = '',
     this.isEmailValid = false,
     this.emailAddressErrorText = '',
@@ -36,7 +34,7 @@ class SignInState extends Equatable {
       ];
 
   SignInState copyWith({
-    SignInStatus? status,
+    ResponseState? status,
     String? emailAddress,
     bool? isEmailValid,
     String? emailAddressErrorText,

@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_client.dart';
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart';
 import 'package:asklora_mobile_app/core/domain/otp/verify_otp_request.dart';
@@ -8,7 +9,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-
 import 'package:mockito/mockito.dart';
 
 import 'otp_bloc_test.mocks.dart';
@@ -36,7 +36,7 @@ void main() async {
       expect(
           otpBloc.state,
           const OtpState(
-              status: OtpStatus.unknown,
+              status: ResponseState.unknown,
               otp: '',
               responseMessage: '',
               resetTime: 0));
@@ -54,10 +54,10 @@ void main() async {
         },
         act: (bloc) => bloc.add(const OtpRequested('test321@example.com')),
         expect: () => {
-              const OtpState(status: OtpStatus.loading),
+              const OtpState(status: ResponseState.loading),
               const OtpState(
                 responseMessage: 'User does not exist with the given email',
-                status: OtpStatus.failure,
+                status: ResponseState.error,
               ),
             });
 
@@ -68,16 +68,16 @@ void main() async {
           when(otpRepository.getOtp(
                   getOtpRequest: GetOtpRequest(
                       'test123@example.com', OtpType.register.value)))
-              .thenAnswer((_) =>
-                  Future.value(GetOtpResponse('OTP code sent to your email')));
+              .thenAnswer((_) => Future.value(BaseResponse(
+                  data: GetOtpResponse('OTP code sent to your email'))));
           return otpBloc;
         },
         act: (bloc) => bloc.add(const OtpRequested('test123@example.com')),
         expect: () => {
-              const OtpState(status: OtpStatus.loading),
+              const OtpState(status: ResponseState.loading),
               const OtpState(
                 responseMessage: 'OTP code sent to your email',
-                status: OtpStatus.unknown,
+                status: ResponseState.unknown,
                 resetTime: 180,
                 disableRequest: true,
               ),
@@ -96,9 +96,9 @@ void main() async {
         act: (bloc) => bloc.add(const OtpSubmitted(
             VerifyOtpRequest('test123@example.com', '112233'))),
         expect: () => {
-              const OtpState(status: OtpStatus.loading),
+              const OtpState(status: ResponseState.loading),
               const OtpState(
-                  status: OtpStatus.failure, responseMessage: 'Invalid OTP'),
+                  status: ResponseState.error, responseMessage: 'Invalid OTP'),
             });
 
     blocTest<OtpBloc, OtpState>(
@@ -108,16 +108,16 @@ void main() async {
           when(otpRepository.verifyOtp(
                   verifyOtpRequest:
                       const VerifyOtpRequest('test123@example.com', '112233')))
-              .thenAnswer(
-                  (_) => Future.value(GetOtpResponse('Verify OTP Success')));
+              .thenAnswer((_) => Future.value(
+                  BaseResponse(data: GetOtpResponse('Verify OTP Success'))));
           return otpBloc;
         },
         act: (bloc) => bloc.add(const OtpSubmitted(
             VerifyOtpRequest('test123@example.com', '112233'))),
         expect: () => {
-              const OtpState(status: OtpStatus.loading),
+              const OtpState(status: ResponseState.loading),
               const OtpState(
-                  status: OtpStatus.success,
+                  status: ResponseState.success,
                   responseMessage: 'Verify OTP Success'),
             });
 

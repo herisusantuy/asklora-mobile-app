@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
@@ -15,14 +16,14 @@ class SignUpForm extends StatelessWidget {
     return BlocListener<SignUpBloc, SignUpState>(
         listener: (context, state) {
           switch (state.status) {
-            case SignUpStatus.failure:
+            case ResponseState.error:
               context
                   .read<SignUpBloc>()
                   .add(SignUpUsernameChanged(state.username));
 
               CustomSnackBar(context).setMessage(state.responseMessage).show();
               break;
-            case SignUpStatus.success:
+            case ResponseState.success:
               OtpScreen.openReplace(context, state.username);
               break;
             default:
@@ -96,7 +97,7 @@ class SignUpForm extends StatelessWidget {
       return CustomTextButton(
         key: const Key('sign_up_submit_button'),
         buttonText: 'Submit',
-        isLoading: state.status == SignUpStatus.loading,
+        isLoading: state.status == ResponseState.loading,
         disable: !(state.isEmailValid && state.isPasswordValid),
         onClick: () => context.read<SignUpBloc>().add(const SignUpSubmitted()),
       );

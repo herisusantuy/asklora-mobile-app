@@ -4,7 +4,7 @@ enum FundingSource {
   employmentIncome,
   investments,
   inheritance,
-  bussinessIncome,
+  businessIncome,
   savings,
   family,
   unknown

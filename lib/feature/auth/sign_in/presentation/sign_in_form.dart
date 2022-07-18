@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
@@ -18,7 +19,7 @@ class SignInForm extends StatelessWidget {
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) async {
         switch (state.status) {
-          case SignInStatus.failure:
+          case ResponseState.error:
             context
                 .read<SignInBloc>()
                 .add(SignInEmailChanged(state.emailAddress));
@@ -28,7 +29,7 @@ class SignInForm extends StatelessWidget {
                 .setType(CustomSnackBarType.error)
                 .show();
             break;
-          case SignInStatus.success:
+          case ResponseState.success:
             await SecureStorage()
                 .writeSecureData('email', state.emailAddress)
                 .then(
@@ -107,7 +108,7 @@ class SignInForm extends StatelessWidget {
         return CustomTextButton(
           key: const Key('sign_in_submit_button'),
           buttonText: 'Login',
-          isLoading: state.status == SignInStatus.loading,
+          isLoading: state.status == ResponseState.loading,
           disable:
               (!state.emailAddress.isValidEmail() || state.password.isEmpty),
           onClick: () =>

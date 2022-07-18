@@ -1,12 +1,13 @@
+import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/feature/auth/reset_password/bloc/reset_password_bloc.dart';
+import 'package:asklora_mobile_app/feature/auth/reset_password/domain/reset_password_api_client.dart';
+import 'package:asklora_mobile_app/feature/auth/reset_password/domain/reset_password_response.dart';
+import 'package:asklora_mobile_app/feature/auth/reset_password/repository/reset_password_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:asklora_mobile_app/feature/auth/reset_password/bloc/reset_password_bloc.dart';
-import 'package:asklora_mobile_app/feature/auth/reset_password/domain/reset_password_api_client.dart';
-import 'package:asklora_mobile_app/feature/auth/reset_password/domain/reset_password_response.dart';
-import 'package:asklora_mobile_app/feature/auth/reset_password/repository/reset_password_repository.dart';
 
 import 'reset_password_bloc_test.mocks.dart';
 
@@ -43,7 +44,7 @@ void main() {
           expect(
               resetPasswordBloc.state,
               const ResetPasswordState(
-                  status: ResetPasswordStatus.unknown,
+                  status: ResponseState.unknown,
                   email: '',
                   isEmailValid: false,
                   emailErrorText: '',
@@ -57,7 +58,7 @@ void main() {
         act: (bloc) => bloc.add(const ResetPasswordEmailChanged('sadfasdf')),
         expect: () => {
           const ResetPasswordState(
-              status: ResetPasswordStatus.unknown,
+              status: ResponseState.unknown,
               email: 'sadfasdf',
               isEmailValid: false,
               emailErrorText: 'Enter valid email',
@@ -73,7 +74,7 @@ void main() {
         ),
         expect: () => {
           const ResetPasswordState(
-              status: ResetPasswordStatus.unknown,
+              status: ResponseState.unknown,
               email: 'asklora@loratechai.com',
               isEmailValid: true,
               emailErrorText: '',
@@ -88,7 +89,8 @@ void main() {
                     email: 'asklora@loratechai.com'))
                 .thenAnswer(
               (_) => Future.value(
-                ResetPasswordResponse('Reset Password Successfull'),
+                BaseResponse(
+                    data: ResetPasswordResponse('Reset Password Successful')),
               ),
             );
             return resetPasswordBloc;
@@ -100,19 +102,19 @@ void main() {
               },
           expect: () => {
                 const ResetPasswordState(
-                    status: ResetPasswordStatus.unknown,
+                    status: ResponseState.unknown,
                     email: 'asklora@loratechai.com',
                     isEmailValid: true,
                     emailErrorText: '',
                     responseMessage: ''),
                 const ResetPasswordState(
-                    status: ResetPasswordStatus.loading,
+                    status: ResponseState.loading,
                     email: 'asklora@loratechai.com',
                     isEmailValid: true,
                     emailErrorText: '',
                     responseMessage: ''),
                 const ResetPasswordState(
-                    status: ResetPasswordStatus.success,
+                    status: ResponseState.success,
                     email: 'asklora@loratechai.com',
                     isEmailValid: true,
                     emailErrorText: '',

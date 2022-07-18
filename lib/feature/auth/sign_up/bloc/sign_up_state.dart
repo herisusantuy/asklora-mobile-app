@@ -1,10 +1,8 @@
 part of 'sign_up_bloc.dart';
 
-enum SignUpStatus { success, failure, unknown, loading }
-
 class SignUpState extends Equatable {
   const SignUpState(
-      {this.status = SignUpStatus.unknown,
+      {this.status = ResponseState.unknown,
       this.username = '',
       this.password = '',
       this.isEmailValid = false,
@@ -14,7 +12,7 @@ class SignUpState extends Equatable {
       this.isPasswordValid = false})
       : super();
 
-  final SignUpStatus status;
+  final ResponseState status;
   final String username;
   final String password;
   final String usernameErrorText;
@@ -24,7 +22,7 @@ class SignUpState extends Equatable {
   final String responseMessage;
 
   SignUpState copyWith({
-    SignUpStatus? status,
+    ResponseState? status,
     String? username,
     String? password,
     String? usernameErrorText,

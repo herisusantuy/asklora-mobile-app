@@ -1,9 +1,7 @@
 part of 'otp_bloc.dart';
 
-enum OtpStatus { success, failure, unknown, loading }
-
 class OtpState extends Equatable {
-  final OtpStatus status;
+  final ResponseState status;
   final String otp;
   final int resetTime;
   final bool disableRequest;
@@ -11,7 +9,7 @@ class OtpState extends Equatable {
 
   const OtpState({
     this.disableRequest = false,
-    this.status = OtpStatus.unknown,
+    this.status = ResponseState.unknown,
     this.otp = '',
     this.responseMessage = '',
     this.resetTime = 0,
@@ -27,7 +25,7 @@ class OtpState extends Equatable {
       ];
 
   OtpState copyWith({
-    OtpStatus? status,
+    ResponseState? status,
     String? otp,
     bool? disableRequest,
     int? resetTime,

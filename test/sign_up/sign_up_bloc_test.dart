@@ -1,12 +1,12 @@
+import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/bloc/sign_up_bloc.dart';
-import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart';
+import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/repository/sign_up_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-
 import 'package:mockito/mockito.dart';
 
 import 'sign_up_bloc_test.mocks.dart';
@@ -35,7 +35,7 @@ void main() async {
       expect(
           signUpBloc.state,
           const SignUpState(
-              status: SignUpStatus.unknown,
+              status: ResponseState.unknown,
               isEmailValid: false,
               isPasswordValid: false,
               username: '',
@@ -51,7 +51,7 @@ void main() async {
         act: (bloc) => bloc.add(const SignUpUsernameChanged('kkkkkk')),
         expect: () => {
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: 'kkkkkk',
@@ -67,7 +67,7 @@ void main() async {
         act: (bloc) => bloc.add(const SignUpUsernameChanged('test@test.c@')),
         expect: () => {
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: 'test@test.c@',
@@ -83,7 +83,7 @@ void main() async {
         act: (bloc) => bloc.add(const SignUpUsernameChanged('test@test.com')),
         expect: () => {
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: true,
                   isPasswordValid: false,
                   username: 'test@test.com',
@@ -99,7 +99,7 @@ void main() async {
         act: (bloc) => bloc.add(const SignUpPasswordChanged('abcde')),
         expect: () => {
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: '',
@@ -115,7 +115,7 @@ void main() async {
         act: (bloc) => bloc.add(const SignUpPasswordChanged('abcdefge')),
         expect: () => {
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: '',
@@ -131,7 +131,7 @@ void main() async {
         act: (bloc) => bloc.add(const SignUpPasswordChanged('password1')),
         expect: () => {
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: false,
                   isPasswordValid: true,
                   username: '',
@@ -150,7 +150,7 @@ void main() async {
             },
         expect: () => {
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: 'abcd',
@@ -158,7 +158,7 @@ void main() async {
                   password: '',
                   passwordErrorText: ''),
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: false,
                   isPasswordValid: false,
                   username: 'abcd',
@@ -177,7 +177,7 @@ void main() async {
             },
         expect: () => {
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: true,
                   isPasswordValid: false,
                   username: 'kk@test.com',
@@ -185,7 +185,7 @@ void main() async {
                   password: '',
                   passwordErrorText: ''),
               const SignUpState(
-                  status: SignUpStatus.unknown,
+                  status: ResponseState.unknown,
                   isEmailValid: true,
                   isPasswordValid: true,
                   username: 'kk@test.com',
@@ -201,8 +201,8 @@ void main() async {
         build: () {
           when(signUpRepository.signUp(
                   email: 'kk@test.com', password: 'password1'))
-              .thenAnswer(
-                  (_) => Future.value(SignUpResponse('Sign Up Successful')));
+              .thenAnswer((_) => Future.value(
+                  BaseResponse(data: SignUpResponse('Sign Up Successful'))));
           return signUpBloc;
         },
         act: (bloc) => {
@@ -212,19 +212,19 @@ void main() async {
             },
         expect: () => {
               const SignUpState(
-                status: SignUpStatus.unknown,
+                status: ResponseState.unknown,
                 isEmailValid: true,
                 username: 'kk@test.com',
               ),
               const SignUpState(
-                status: SignUpStatus.unknown,
+                status: ResponseState.unknown,
                 isEmailValid: true,
                 isPasswordValid: true,
                 username: 'kk@test.com',
                 password: 'password1',
               ),
               const SignUpState(
-                  status: SignUpStatus.loading,
+                  status: ResponseState.loading,
                   isEmailValid: true,
                   isPasswordValid: true,
                   username: 'kk@test.com',
@@ -232,7 +232,7 @@ void main() async {
                   password: 'password1',
                   passwordErrorText: ''),
               const SignUpState(
-                  status: SignUpStatus.success,
+                  status: ResponseState.success,
                   isEmailValid: true,
                   isPasswordValid: true,
                   username: 'kk@test.com',

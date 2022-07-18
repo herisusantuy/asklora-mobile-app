@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_up_repository.dart';
 
@@ -28,7 +28,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) {
     emit(
       state.copyWith(
-          status: SignUpStatus.unknown,
+          status: ResponseState.unknown,
           username: event.username,
           isEmailValid: event.username.isValidEmail(),
           usernameErrorText:
@@ -43,7 +43,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) {
     emit(state.copyWith(
-        status: SignUpStatus.unknown,
+        status: ResponseState.unknown,
         password: event.password,
         passwordErrorText:
             (event.password.isValidPassword() || event.password.isEmpty)
@@ -57,23 +57,23 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: SignUpStatus.loading));
+      emit(state.copyWith(status: ResponseState.loading));
       await _signUpRepository.signUp(
           email: state.username, password: state.password);
       emit(state.copyWith(
-          status: SignUpStatus.success,
+          status: ResponseState.success,
           responseMessage: 'Account created successfully!'));
     } on ConflictException {
       emit(state.copyWith(
-          status: SignUpStatus.failure,
+          status: ResponseState.error,
           responseMessage: 'Account with this email already exists'));
     } on BadRequestException {
       emit(state.copyWith(
-          status: SignUpStatus.failure,
+          status: ResponseState.error,
           responseMessage: 'This password is too common.'));
     } catch (e) {
       emit(state.copyWith(
-          status: SignUpStatus.failure, responseMessage: e.toString()));
+          status: ResponseState.error, responseMessage: e.toString()));
     }
   }
 }

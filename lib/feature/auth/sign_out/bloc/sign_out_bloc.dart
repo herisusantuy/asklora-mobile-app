@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/token/repository/repository.dart';
 import '../repository/sign_out_repository.dart';
 
@@ -26,22 +27,22 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
     Emitter<SignOutState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: SignOutStatus.loading));
+      emit(state.copyWith(status: ResponseState.loading));
       var isSignedOut = await _signOutRepository
           .signOut(await _tokenRepository.getRefreshToken());
       if (isSignedOut) {
         await _tokenRepository.deleteAll();
         emit(state.copyWith(
-            status: SignOutStatus.success,
+            status: ResponseState.success,
             responseMessage: 'Sign Out Success'));
       } else {
         emit(state.copyWith(
-            status: SignOutStatus.failure,
+            status: ResponseState.error,
             responseMessage: 'Not able to sign-out!'));
       }
     } catch (e) {
       emit(state.copyWith(
-          status: SignOutStatus.failure, responseMessage: e.toString()));
+          status: ResponseState.error, responseMessage: e.toString()));
     }
   }
 }

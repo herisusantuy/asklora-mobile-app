@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/reset_password_repository.dart';
 
@@ -25,7 +26,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ) {
     emit(
       state.copyWith(
-          status: ResetPasswordStatus.unknown,
+          status: ResponseState.unknown,
           email: event.email,
           isEmailValid: event.email.isValidEmail(),
           emailErrorText: (event.email.isValidEmail() || event.email.isEmpty)
@@ -37,21 +38,20 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   void _onResetPasswordSubmitted(
       ResetPasswordSubmitted event, Emitter<ResetPasswordState> emit) async {
     try {
-      emit(state.copyWith(status: ResetPasswordStatus.loading));
+      emit(state.copyWith(status: ResponseState.loading));
       await _resetPasswordRepository.resetPassword(email: state.email);
 
       emit(state.copyWith(
-          status: ResetPasswordStatus.success,
+          status: ResponseState.success,
           responseMessage: 'Succesfully sent new password!'));
     } on BadRequestException {
       emit(
         state.copyWith(
-            status: ResetPasswordStatus.failure,
-            responseMessage: 'Bad request.'),
+            status: ResponseState.error, responseMessage: 'Bad request.'),
       );
     } catch (e) {
       emit(state.copyWith(
-          status: ResetPasswordStatus.failure, responseMessage: e.toString()));
+          status: ResponseState.error, responseMessage: e.toString()));
     }
   }
 }

@@ -1,14 +1,11 @@
-import 'dart:async';
-
+import 'package:dart_ipify/dart_ipify.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dart_ipify/dart_ipify.dart';
 
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
-import '../domain/upgrade_account/tax_info_mock_data.dart';
 import '../domain/upgrade_account/tax_info_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
@@ -28,6 +25,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       CountryOfTaxResidenceBloc();
   final SigningBrokerAgreementBloc signingBrokerAgreementBloc =
       SigningBrokerAgreementBloc();
+
   AccountBloc({required AccountRepository getAccountRepository})
       : _accountRepository = getAccountRepository,
         super(const AccountState()) {

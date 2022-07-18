@@ -1,7 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'country_of_tax_residence_event.dart';
+
 part 'country_of_tax_residence_state.dart';
 
 class CountryOfTaxResidenceBloc
