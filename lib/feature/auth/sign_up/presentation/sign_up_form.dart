@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
 import '../../otp/presentation/otp_screen.dart';
@@ -19,11 +20,7 @@ class SignUpForm extends StatelessWidget {
                   .read<SignUpBloc>()
                   .add(SignUpUsernameChanged(state.username));
 
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(content: Text(state.responseMessage)),
-                );
+              CustomSnackBar(context).setMessage(state.responseMessage).show();
               break;
             case SignUpStatus.success:
               OtpScreen.openReplace(context, state.username);
