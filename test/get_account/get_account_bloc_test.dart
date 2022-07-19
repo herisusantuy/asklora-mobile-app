@@ -45,9 +45,9 @@ void main() {
         secureStorage = MockSecureStorage();
       });
       setUp(() async {
-
-        getAccountBloc =
-            AccountBloc(getAccountRepository: mockAccountRepository, secureStorage: secureStorage);
+        getAccountBloc = AccountBloc(
+            getAccountRepository: mockAccountRepository,
+            secureStorage: secureStorage);
       });
 
       test('Get account init state is should be unknown', () {

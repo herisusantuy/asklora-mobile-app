@@ -27,11 +27,12 @@ void main() async {
     final countryOfTaxResidence =
         find.byKey(const Key('country_of_tax_residence'));
     final reviewInformationCheckbox =
-    find.byKey(const Key('review_information_checkbox'));
-    final submitButton =
-    find.byKey(const Key('submit_button'));
+        find.byKey(const Key('review_information_checkbox'));
+    final submitButton = find.byKey(const Key('submit_button'));
 
-    testWidgets('Render Review Information screen,`check box` = not checked ,`submit button` = disabled', (tester) async {
+    testWidgets(
+        'Render Review Information screen,`check box` = not checked ,`submit button` = disabled',
+        (tester) async {
       await _buildReviewInformationScreen(tester);
       expect(basicInformation, findsOneWidget);
       expect(addressProof, findsOneWidget);
@@ -43,9 +44,7 @@ void main() async {
       expect(riskDisclosure, findsOneWidget);
       expect(countryOfTaxResidence, findsOneWidget);
       expect(reviewInformationCheckbox, findsOneWidget);
-      expect(
-          (tester.firstWidget(submitButton) as CustomTextButton)
-              .disable,
+      expect((tester.firstWidget(submitButton) as CustomTextButton).disable,
           isTrue);
       expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
           isFalse);
@@ -53,32 +52,28 @@ void main() async {
 
     testWidgets(
         'Tap once on checkbox, `check box` = checked, `submit button` = enabled',
-            (tester) async {
-          await _buildReviewInformationScreen(tester);
-          await tester.tap(reviewInformationCheckbox);
-          await tester.pump();
-          expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
-              isTrue);
-          expect(
-              (tester.firstWidget(submitButton) as CustomTextButton)
-                  .disable,
-              isFalse);
-        });
+        (tester) async {
+      await _buildReviewInformationScreen(tester);
+      await tester.tap(reviewInformationCheckbox);
+      await tester.pump();
+      expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
+          isTrue);
+      expect((tester.firstWidget(submitButton) as CustomTextButton).disable,
+          isFalse);
+    });
 
     testWidgets(
         'Tap twice on checkbox, `check box` = not checked, `next button` = disabled',
-            (tester) async {
-          await _buildReviewInformationScreen(tester);
-          await tester.tap(reviewInformationCheckbox);
-          await tester.pump();
-          await tester.tap(reviewInformationCheckbox);
-          await tester.pump();
-          expect(
-              (tester.firstWidget(submitButton) as CustomTextButton)
-                  .disable,
-              isTrue);
-          expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
-              isFalse);
-        });
+        (tester) async {
+      await _buildReviewInformationScreen(tester);
+      await tester.tap(reviewInformationCheckbox);
+      await tester.pump();
+      await tester.tap(reviewInformationCheckbox);
+      await tester.pump();
+      expect((tester.firstWidget(submitButton) as CustomTextButton).disable,
+          isTrue);
+      expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
+          isFalse);
+    });
   });
 }

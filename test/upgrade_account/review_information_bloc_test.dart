@@ -194,8 +194,7 @@ void main() async {
                   status: GetAccountStatus.submittingTaxInfo,
                   responseMessage: 'Account upgraded successfully!'),
               TaxInfoSubmitted(),
-              const AccountState(
-                  status: GetAccountStatus.fetchingOnfidoToken),
+              const AccountState(status: GetAccountStatus.fetchingOnfidoToken),
               const OnfidoSdkToken('11223344axx')
             });
 

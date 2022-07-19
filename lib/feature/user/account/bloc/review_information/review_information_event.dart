@@ -10,7 +10,8 @@ abstract class ReviewInformationEvent extends Equatable {
 class ReviewInformationAgreementChanged extends ReviewInformationEvent {
   final bool reviewInformationAgreementChecked;
 
-  const ReviewInformationAgreementChanged(this.reviewInformationAgreementChecked)
+  const ReviewInformationAgreementChanged(
+      this.reviewInformationAgreementChecked)
       : super();
 
   @override

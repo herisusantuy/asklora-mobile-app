@@ -119,7 +119,6 @@ class AppInterceptors extends Interceptor {
         throw DeadlineExceededException(err.requestOptions);
       case DioErrorType.response:
         switch (err.response?.statusCode) {
-
           case 400:
             throw BadRequestException(err.requestOptions);
           case 401:
