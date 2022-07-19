@@ -7,7 +7,7 @@ class BasicInformationState extends Equatable {
     this.lastName = '',
     this.chineseName = '',
     this.gender = '',
-    this.dateOfBirth = '',
+    this.dateOfBirth = '1990-01-01',
     this.countryCode = '',
     this.phoneNumber = '',
     this.countryOfCitizenship = '',
