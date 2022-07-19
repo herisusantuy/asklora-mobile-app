@@ -94,10 +94,12 @@ class AddressProofForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isSameMailingAddress != current.isSameMailingAddress,
         builder: (BuildContext context, state) {
+          const String key = 'account_is_same_mailing_address_select';
           return Column(
             children: [
               QuestionWidget(
-                key: const Key('account_is_same_mailing_address_select'),
+                keyOption: key,
+                key: const Key(key),
                 padding: const EdgeInsets.only(top: 10),
                 questionText:
                     'My mailing address and residential address is the same',
