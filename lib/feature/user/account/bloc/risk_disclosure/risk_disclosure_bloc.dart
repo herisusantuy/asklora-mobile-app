@@ -6,7 +6,7 @@ import '../../../../../core/domain/base_response.dart';
 part 'risk_disclosure_event.dart';
 
 class RiskDisclosureBloc extends Bloc<RiskDisclosureEvent, BaseResponse<bool>> {
-  RiskDisclosureBloc() : super(BaseResponse(data: false)) {
+  RiskDisclosureBloc() : super(const BaseResponse(data: false)) {
     on<CompanyRiskDisclosureChanged>(_onCompanyRiskDisclosureChanged);
   }
 

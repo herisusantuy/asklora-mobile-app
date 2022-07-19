@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'disclosures.g.dart';
 
 @JsonSerializable()
-class Disclosures {
+class Disclosures extends Equatable {
   @JsonKey(name: 'is_control_person')
   bool? isControlPerson;
 
@@ -30,4 +31,13 @@ class Disclosures {
       _$DisclosuresFromJson(json);
 
   Map<String, dynamic> toJson() => _$DisclosuresToJson(this);
+
+  @override
+  List<Object> get props => [
+        isControlPerson ?? false,
+        isAffiliatedExchangeOrFinra ?? false,
+        isPoliticallyExposed ?? false,
+        immediateFamilyExposed ?? false,
+        employmentStatus ?? false
+      ];
 }

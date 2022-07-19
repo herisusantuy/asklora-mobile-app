@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'agreement.g.dart';
 
 @JsonSerializable()
-class Agreement {
+class Agreement extends Equatable {
   String? agreement;
 
   @JsonKey(name: 'ip_address')
@@ -15,4 +16,7 @@ class Agreement {
       _$AgreementFromJson(json);
 
   Map<String, dynamic> toJson() => _$AgreementToJson(this);
+
+  @override
+  List<Object> get props => [agreement ?? ''];
 }

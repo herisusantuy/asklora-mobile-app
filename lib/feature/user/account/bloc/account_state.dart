@@ -13,7 +13,7 @@ enum GetAccountStatus {
 
 class AccountState extends Equatable {
   const AccountState(
-      {this.status = GetAccountStatus.unknown,
+      {this.status = GetAccountStatus.success,
       this.responseMessage = '',
       this.account,
       this.upgradeAccountRequest,
@@ -72,3 +72,5 @@ class OnfidoResultUpdated extends AccountState {
 
   const OnfidoResultUpdated(this.response);
 }
+
+class TaxInfoSubmitted extends AccountState {}

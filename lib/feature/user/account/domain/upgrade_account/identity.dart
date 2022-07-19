@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'identity.g.dart';
 
 @JsonSerializable()
-class Identity {
+class Identity extends Equatable {
   @JsonKey(name: 'given_name')
   String? givenName;
 
@@ -52,4 +53,18 @@ class Identity {
       _$IdentityFromJson(json);
 
   Map<String, dynamic> toJson() => _$IdentityToJson(this);
+
+  @override
+  List<Object> get props => [
+        givenName ?? '',
+        middleName ?? '',
+        familyName ?? '',
+        dateOfBirth ?? '',
+        taxId ?? '',
+        taxIdType ?? '',
+        countryOfCitizenship ?? '',
+        countryOfBirth ?? '',
+        countryOfTaxResidence ?? '',
+        fundingSource ?? ''
+      ];
 }

@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,8 +26,12 @@ void main() async {
     final riskDisclosure = find.byKey(const Key('risk_disclosure'));
     final countryOfTaxResidence =
         find.byKey(const Key('country_of_tax_residence'));
+    final reviewInformationCheckbox =
+    find.byKey(const Key('review_information_checkbox'));
+    final submitButton =
+    find.byKey(const Key('submit_button'));
 
-    testWidgets('Render Review Information screen', (tester) async {
+    testWidgets('Render Review Information screen,`check box` = not checked ,`submit button` = disabled', (tester) async {
       await _buildReviewInformationScreen(tester);
       expect(basicInformation, findsOneWidget);
       expect(addressProof, findsOneWidget);
@@ -37,6 +42,43 @@ void main() async {
       expect(trustedContract, findsOneWidget);
       expect(riskDisclosure, findsOneWidget);
       expect(countryOfTaxResidence, findsOneWidget);
+      expect(reviewInformationCheckbox, findsOneWidget);
+      expect(
+          (tester.firstWidget(submitButton) as CustomTextButton)
+              .disable,
+          isTrue);
+      expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
+          isFalse);
     });
+
+    testWidgets(
+        'Tap once on checkbox, `check box` = checked, `submit button` = enabled',
+            (tester) async {
+          await _buildReviewInformationScreen(tester);
+          await tester.tap(reviewInformationCheckbox);
+          await tester.pump();
+          expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
+              isTrue);
+          expect(
+              (tester.firstWidget(submitButton) as CustomTextButton)
+                  .disable,
+              isFalse);
+        });
+
+    testWidgets(
+        'Tap twice on checkbox, `check box` = not checked, `next button` = disabled',
+            (tester) async {
+          await _buildReviewInformationScreen(tester);
+          await tester.tap(reviewInformationCheckbox);
+          await tester.pump();
+          await tester.tap(reviewInformationCheckbox);
+          await tester.pump();
+          expect(
+              (tester.firstWidget(submitButton) as CustomTextButton)
+                  .disable,
+              isTrue);
+          expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
+              isFalse);
+        });
   });
 }

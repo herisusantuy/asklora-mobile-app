@@ -1,21 +1,25 @@
-import 'dart:async';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dart_ipify/dart_ipify.dart';
 
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
-import '../domain/upgrade_account/tax_info_mock_data.dart';
+import '../domain/upgrade_account/agreement.dart';
+import '../domain/upgrade_account/contact.dart';
+import '../domain/upgrade_account/disclosures.dart';
+import '../domain/upgrade_account/identity.dart';
 import '../domain/upgrade_account/tax_info_request.dart';
+import '../domain/upgrade_account/trusted_contact.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
 import 'address_proof/bloc/address_proof_bloc.dart';
 import 'basic_information/bloc/basic_information_bloc.dart';
 import 'country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
+import 'disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
+import 'financial_profile/bloc/financial_profile_bloc.dart';
 import 'signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
+import 'trusted_contact/bloc/trusted_contact_bloc.dart';
 
 part 'account_event.dart';
 
@@ -28,8 +32,18 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       CountryOfTaxResidenceBloc();
   final SigningBrokerAgreementBloc signingBrokerAgreementBloc =
       SigningBrokerAgreementBloc();
-  AccountBloc({required AccountRepository getAccountRepository})
-      : _accountRepository = getAccountRepository,
+
+  //
+  final FinancialProfileBloc financialProfileBloc = FinancialProfileBloc();
+  final TrustedContactBloc trustedContactBloc = TrustedContactBloc();
+  final DisclosureAffiliationBloc disclosureAffiliationBloc =
+      DisclosureAffiliationBloc();
+
+  AccountBloc({
+    required AccountRepository getAccountRepository,
+    required SecureStorage secureStorage,
+  })  : _accountRepository = getAccountRepository,
+        _secureStorage = secureStorage,
         super(const AccountState()) {
     on<GetAccount>(_onGetAccount);
     on<GetSdkToken>(_onGetOnfidoSdkToken);
@@ -40,6 +54,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   final AccountRepository _accountRepository;
+  final SecureStorage _secureStorage;
 
   _onGetAccount(GetAccount event, Emitter<AccountState> emit) async {
     try {
@@ -60,18 +75,53 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
-    var email = await SecureStorage().readSecureData('email');
+    var email = await _secureStorage.readSecureData('email');
     try {
       emit(state.copyWith(status: GetAccountStatus.upgradingAccount));
-
-      var request = state.upgradeAccountRequest;
-
-      // Replace the mock email with real email in mock request
-      // Set contact object
-      request?.contact?.emailAddress = email;
-
-      await _accountRepository.upgradeAccount(request!);
-
+      UpgradeAccountRequest request = UpgradeAccountRequest(
+          contact: Contact(
+              emailAddress: email,
+              phoneNumber: basicInformationBloc.state.phoneNumber,
+              streetAddress: addressProofBloc.state.residentialAddress,
+              unit: addressProofBloc.state.unitNumber,
+              city: addressProofBloc.state.city,
+              country: addressProofBloc.state.country),
+          identity: Identity(
+              givenName: basicInformationBloc.state.firstName,
+              middleName: basicInformationBloc.state.middleName,
+              familyName: basicInformationBloc.state.lastName,
+              dateOfBirth: basicInformationBloc.state.dateOfBirth,
+              taxId: countryOfTaxResidenceBloc.state.tinNumber,
+              taxIdType: 'NOT_SPECIFIED',
+              countryOfCitizenship:
+                  basicInformationBloc.state.countryOfCitizenship,
+              countryOfBirth: 'HKG',
+              //mock
+              countryOfTaxResidence:
+                  countryOfTaxResidenceBloc.state.taxResidence,
+              fundingSource:
+                  fundingSourceValue(financialProfileBloc.state.fundingSource)),
+          trustedContact: TrustedContact(
+              givenName: trustedContactBloc.state.firstName,
+              familyName: trustedContactBloc.state.lastName,
+              email: trustedContactBloc.state.emailAddress,
+              phone: trustedContactBloc.state.phoneNumber),
+          disclosures: Disclosures(
+              isControlPerson: disclosureAffiliationBloc.state.isOwner,
+              isAffiliatedExchangeOrFinra:
+                  disclosureAffiliationBloc.state.isAffiliated,
+              isPoliticallyExposed:
+                  disclosureAffiliationBloc.state.isSeniorPolitical,
+              immediateFamilyExposed:
+                  disclosureAffiliationBloc.state.isFamilyMember,
+              employmentStatus:
+                  financialProfileBloc.state.employmentStatus.name),
+          agreements: [
+            Agreement(agreement: 'MA', ipAddress: event.ipAddress),
+            Agreement(agreement: 'AA', ipAddress: event.ipAddress),
+            Agreement(agreement: 'CA', ipAddress: event.ipAddress),
+          ]);
+      await _accountRepository.upgradeAccount(request);
       emit(
         state.copyWith(
           status: GetAccountStatus.success,
@@ -93,7 +143,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       DateTime date = DateTime.now();
       String formattedDate =
           '${DateTime.parse(date.toString()).year}-${DateTime.parse(date.toString()).month}-${DateTime.parse(date.toString()).day}';
-      final idAddress = await Ipify.ipv4();
       TaxInfoRequest taxInfoReq = TaxInfoRequest(
           fullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
@@ -111,12 +160,11 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           date: formattedDate,
           signerFullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
-          ipAddress: idAddress);
+          ipAddress: event.ipAddress);
       await _accountRepository.submitTaxInfo(taxInfoReq);
-      emit(state.copyWith(
-          status: GetAccountStatus.success,
-          responseMessage: 'Tax info submitted successfully!.'));
+      emit(TaxInfoSubmitted());
     } catch (e) {
+      print("HERE $e");
       emit(state.copyWith(
           status: GetAccountStatus.failure,
           responseMessage: 'Could not submit tax info!'));
