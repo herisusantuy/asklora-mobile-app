@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/utils/extensions.dart';
@@ -23,13 +23,10 @@ class SignInForm extends StatelessWidget {
                 .read<SignInBloc>()
                 .add(SignInEmailChanged(state.emailAddress));
 
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  backgroundColor: Colors.red,
-                  content: CustomText(
-                    state.responseMessage,
-                  )));
+            CustomSnackBar(context)
+                .setMessage(state.responseMessage)
+                .setType(CustomSnackBarType.error)
+                .show();
             break;
           case SignInStatus.success:
             await SecureStorage()

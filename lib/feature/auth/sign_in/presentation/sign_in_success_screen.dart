@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
 
 import '../../../../core/domain/token/repository/token_repository.dart';
+import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
@@ -49,20 +50,15 @@ class SignInSuccessScreen extends StatelessWidget {
                 listener: (context, state) async {
                   switch (state.status) {
                     case GetAccountStatus.failure:
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(SnackBar(
-                          backgroundColor: Colors.red,
-                          content: CustomText(state.responseMessage),
-                        ));
+                      CustomSnackBar(context)
+                          .setMessage(state.responseMessage)
+                          .setType(CustomSnackBarType.error)
+                          .show();
                       break;
                     case GetAccountStatus.success:
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(SnackBar(
-                          backgroundColor: Colors.green,
-                          content: CustomText(state.responseMessage),
-                        ));
+                      CustomSnackBar(context)
+                          .setMessage(state.responseMessage)
+                          .show();
                       break;
                     default:
                       break;
@@ -114,20 +110,15 @@ class SignInSuccessScreen extends StatelessWidget {
                 listener: (context, state) async {
                   switch (state.status) {
                     case SignOutStatus.failure:
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(SnackBar(
-                          backgroundColor: Colors.red,
-                          content: CustomText(state.responseMessage),
-                        ));
+                      CustomSnackBar(context)
+                          .setMessage(state.responseMessage)
+                          .setType(CustomSnackBarType.error)
+                          .show();
                       break;
                     case SignOutStatus.success:
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(SnackBar(
-                          backgroundColor: Colors.green,
-                          content: CustomText(state.responseMessage),
-                        ));
+                      CustomSnackBar(context)
+                          .setMessage(state.responseMessage)
+                          .show();
                       HomeScreen.openReplace(context);
                       break;
                     default:
