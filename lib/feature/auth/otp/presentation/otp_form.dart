@@ -30,8 +30,7 @@ class OtpForm extends StatelessWidget {
           case ResponseState.error:
             CustomSnackBar(context)
                 .setMessage(state.responseMessage)
-                .setType(CustomSnackBarType.error)
-                .show();
+                .showError();
             break;
           case ResponseState.success:
             SignUpSuccessScreen.openReplace(context);

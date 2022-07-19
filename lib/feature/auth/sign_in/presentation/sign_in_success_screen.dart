@@ -52,8 +52,7 @@ class SignInSuccessScreen extends StatelessWidget {
                     case GetAccountStatus.failure:
                       CustomSnackBar(context)
                           .setMessage(state.responseMessage)
-                          .setType(CustomSnackBarType.error)
-                          .show();
+                          .showError();
                       break;
                     case GetAccountStatus.success:
                       CustomSnackBar(context)
@@ -112,8 +111,7 @@ class SignInSuccessScreen extends StatelessWidget {
                     case ResponseState.error:
                       CustomSnackBar(context)
                           .setMessage(state.responseMessage)
-                          .setType(CustomSnackBarType.error)
-                          .show();
+                          .showError();
                       break;
                     case ResponseState.success:
                       CustomSnackBar(context)

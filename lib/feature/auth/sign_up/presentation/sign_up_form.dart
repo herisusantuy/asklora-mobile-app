@@ -15,13 +15,14 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignUpBloc, SignUpState>(
         listener: (context, state) {
-          switch (state.status) {
+          switch (state.response.state) {
             case ResponseState.error:
               context
                   .read<SignUpBloc>()
                   .add(SignUpUsernameChanged(state.username));
-
-              CustomSnackBar(context).setMessage(state.responseMessage).show();
+              CustomSnackBar(context)
+                  .setMessage(state.response.message)
+                  .showError();
               break;
             case ResponseState.success:
               OtpScreen.openReplace(context, state.username);
@@ -97,7 +98,7 @@ class SignUpForm extends StatelessWidget {
       return CustomTextButton(
         key: const Key('sign_up_submit_button'),
         buttonText: 'Submit',
-        isLoading: state.status == ResponseState.loading,
+        isLoading: state.response.state == ResponseState.loading,
         disable: !(state.isEmailValid && state.isPasswordValid),
         onClick: () => context.read<SignUpBloc>().add(const SignUpSubmitted()),
       );

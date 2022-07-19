@@ -26,8 +26,7 @@ class SignInForm extends StatelessWidget {
 
             CustomSnackBar(context)
                 .setMessage(state.responseMessage)
-                .setType(CustomSnackBarType.error)
-                .show();
+                .showError();
             break;
           case ResponseState.success:
             await SecureStorage()

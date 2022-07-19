@@ -22,8 +22,7 @@ class ResetPasswordForm extends StatelessWidget {
                 .add(ResetPasswordEmailChanged(state.email));
             CustomSnackBar(context)
                 .setMessage(state.responseMessage)
-                .setType(CustomSnackBarType.error)
-                .show();
+                .showError();
             break;
           case ResponseState.success:
             ResetPasswordSuccesScreen.open(context);
