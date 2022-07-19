@@ -40,6 +40,7 @@ class SigningAgreementTaxForm extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 10.0),
           child: CustomTextButton(
+            key: const Key('button_open_form_w8ben'),
             disable: !state.isCheckedCertify,
             borderRadius: 30,
             buttonText: 'US TAX Form W-8BEN',
@@ -58,6 +59,7 @@ class SigningAgreementTaxForm extends StatelessWidget {
             previous.isCheckedCertify != current.isCheckedCertify,
         builder: (context, state) {
           return CustomCheckbox(
+            key: const Key('certify_not_us_citizen_checkbox'),
             padding: const EdgeInsets.only(top: 10),
             text:
                 'I certify that I am not a US citizen, US resident alien or other US person for US tax purposes, and I am submitting the applicable Form W-8 BEN with this form to certify my foreign status and, if applicable, claim tax treaty benefits.',
@@ -77,6 +79,7 @@ class SigningAgreementTaxForm extends StatelessWidget {
           previous.isCheckedDeclare != current.isCheckedDeclare,
       builder: (context, state) {
         return CustomCheckbox(
+          key: const Key('declare_correct_information_checkbox'),
           padding: const EdgeInsets.only(top: 10),
           text:
               'I declare that I have examined the information on this form and to the best of my knowledge and belief it is true, correct, and complete',
