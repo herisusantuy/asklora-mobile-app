@@ -60,7 +60,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _signUpRepository.signUp(
           email: state.username, password: state.password);
-      emit(state.copyWith(response: BaseResponse.complete(data)));
+      emit(state.copyWith(response: data));
     } on ConflictException {
       emit(state.copyWith(
           response:
@@ -73,7 +73,3 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     }
   }
 }
-
-// BaseResponse<SignUpResponse>(
-// data: SignUpResponse('Sign Up Successful'),
-// state: ResponseState.success))

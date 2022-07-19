@@ -34,8 +34,8 @@ void main() async {
     test('Sign Up Bloc init state is should be `unknown`', () {
       expect(
           signUpBloc.state,
-          SignUpState(
-              response: BaseResponse.unknown(),
+          const SignUpState(
+              response: BaseResponse(),
               isEmailValid: false,
               isPasswordValid: false,
               username: '',
@@ -201,8 +201,10 @@ void main() async {
         build: () {
           when(signUpRepository.signUp(
                   email: 'kk@test.com', password: 'password1'))
-              .thenAnswer(
-                  (_) => Future.value(SignUpResponse('Sign Up Successful')));
+              .thenAnswer((_) => Future.value(
+                  const BaseResponse<SignUpResponse>(
+                      data: SignUpResponse('Sign Up Successful'),
+                      state: ResponseState.success)));
           return signUpBloc;
         },
         act: (bloc) => {
@@ -231,9 +233,10 @@ void main() async {
                   usernameErrorText: '',
                   password: 'password1',
                   passwordErrorText: ''),
-              SignUpState(
-                  response: BaseResponse.complete(
-                      SignUpResponse('Sign Up Successful')),
+              const SignUpState(
+                  response: BaseResponse<SignUpResponse>(
+                      data: SignUpResponse('Sign Up Successful'),
+                      state: ResponseState.success),
                   isEmailValid: true,
                   isPasswordValid: true,
                   username: 'kk@test.com',
