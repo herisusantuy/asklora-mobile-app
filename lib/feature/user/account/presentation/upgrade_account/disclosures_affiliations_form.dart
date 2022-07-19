@@ -222,7 +222,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     .read<DisclosureAffiliationBloc>()
                     .add(QuestionNo6Changed(_isQuestionAnswered(value))),
               ),
-              if (state.isOwner == true)
+              if (state.isOwner == false)
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                   child: CustomTextInput(

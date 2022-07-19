@@ -194,12 +194,12 @@ class DisclosureAffiliationBloc
   _onQuestionNo6Changed(
       QuestionNo6Changed event, Emitter<DisclosureAffiliationState> emit) {
     if (event.isOwner) {
-      emit(state.copyWith(isOwner: event.isOwner));
+      emit(state.copyWith(isOwner: event.isOwner, nameOfJointAccount: ''));
+    } else {
+      emit(state.copyWith(
+        isOwner: event.isOwner,
+      ));
     }
-    emit(state.copyWith(
-      isOwner: event.isOwner,
-      nameOfJointAccount: '',
-    ));
   }
 
   _onNameOfJointAccountChanged(NameOfJointAccountChanged event,

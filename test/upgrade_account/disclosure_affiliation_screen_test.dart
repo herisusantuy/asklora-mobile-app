@@ -241,7 +241,7 @@ void main() async {
     });
 
     testWidgets(
-        'Next button disable when question no 6 is "Yes" and text input not filled , question no 1 until no 5,and no 7 has answered with option "No"',
+        'Next button disable when question no 6 is "No" and text input not filled , question no 1 until no 5,and no 7 has answered with option "No"',
         (tester) async {
       await _buildDisclosureAffiliationForm(tester);
       await tester.tap(question1IsNo);
@@ -255,7 +255,7 @@ void main() async {
       await tester.pump();
       await tester.tap(question5IsNo);
       await tester.pump();
-      await tester.tap(question6IsYes, warnIfMissed: true);
+      await tester.tap(question6IsNo, warnIfMissed: true);
       await tester.pump();
       await tester.ensureVisible(question7);
       await tester.tap(question7IsNo);
@@ -265,8 +265,7 @@ void main() async {
       expect((tester.widget(question3) as QuestionWidget).selectedAnswer, 'No');
       expect((tester.widget(question4) as QuestionWidget).selectedAnswer, 'No');
       expect((tester.widget(question5) as QuestionWidget).selectedAnswer, 'No');
-      expect(
-          (tester.widget(question6) as QuestionWidget).selectedAnswer, 'Yes');
+      expect((tester.widget(question6) as QuestionWidget).selectedAnswer, 'No');
       expect((tester.widget(question7) as QuestionWidget).selectedAnswer, 'No');
       expect((tester.widget(nextButton) as CustomTextButton).disable, true);
     });
