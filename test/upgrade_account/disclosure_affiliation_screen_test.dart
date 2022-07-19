@@ -48,8 +48,7 @@ void main() async {
     var nextButton =
         find.byKey(const Key('disclosures_affiliations_next_step_button'));
 
-    testWidgets('Render Disclosure  Affiliation Form first render',
-        (tester) async {
+    testWidgets('Disclosure Affiliation Form first render', (tester) async {
       await _buildDisclosureAffiliationForm(tester);
       expect(question1, findsOneWidget);
       expect(question1IsYes, findsOneWidget);
@@ -75,7 +74,7 @@ void main() async {
       expect(nextButton, findsOneWidget);
     });
     testWidgets(
-        'selected answer is null when first render and next button = disabled',
+        'Selected answer is null when first render and next button = disabled',
         (tester) async {
       await _buildDisclosureAffiliationForm(tester);
       expect((tester.widget<QuestionWidget>(question1).selectedAnswer), null);
@@ -89,7 +88,7 @@ void main() async {
     });
 
     testWidgets(
-        'enable next button when question has answered with option "No" ',
+        'Next button enable when all question has answered with option "No" ',
         (tester) async {
       await _buildDisclosureAffiliationForm(tester);
       await tester.tap(question1IsNo);
@@ -114,6 +113,195 @@ void main() async {
       expect((tester.widget(question5) as QuestionWidget).selectedAnswer, 'No');
       expect((tester.widget(question6) as QuestionWidget).selectedAnswer, 'No');
       expect((tester.widget(question7) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(nextButton) as CustomTextButton).disable, false);
+    });
+
+    testWidgets(
+        'Next button disable when question no 1 is "Yes" and text input not filled , question no 2 until no 7 has answered with option "No"',
+        (tester) async {
+      await _buildDisclosureAffiliationForm(tester);
+      await tester.tap(question1IsYes);
+      await tester.pump();
+      await tester.ensureVisible(question2IsNo);
+      await tester.tap(question2IsNo);
+      await tester.pump();
+      await tester.tap(question3IsNo);
+      await tester.pump();
+      await tester.tap(question4IsNo);
+      await tester.pump();
+      await tester.tap(question5IsNo);
+      await tester.pump();
+      await tester.ensureVisible(question6IsNo);
+      await tester.tap(question6IsNo);
+      await tester.pump();
+      await tester.tap(question7IsNo);
+      await tester.pump();
+      expect(
+          (tester.widget(question1) as QuestionWidget).selectedAnswer, 'Yes');
+      expect((tester.widget(question2) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question3) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question4) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question5) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question6) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question7) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(nextButton) as CustomTextButton).disable, true);
+    });
+
+    testWidgets(
+        'Next button disable when question no 2 is "Yes" and text input not filled , question no 1, no 3 until no 7 has answered with option "No"',
+        (tester) async {
+      await _buildDisclosureAffiliationForm(tester);
+      await tester.tap(question1IsNo);
+      await tester.pump();
+      await tester.tap(question2IsYes);
+      await tester.pump();
+      await tester.ensureVisible(question3IsNo);
+      await tester.tap(question3IsNo);
+      await tester.pump();
+      await tester.tap(question4IsNo);
+      await tester.pump();
+      await tester.tap(question5IsNo);
+      await tester.pump();
+      await tester.ensureVisible(question6IsNo);
+      await tester.tap(question6IsNo);
+      await tester.pump();
+      await tester.tap(question7IsNo);
+      await tester.pump();
+      expect((tester.widget(question1) as QuestionWidget).selectedAnswer, 'No');
+      expect(
+          (tester.widget(question2) as QuestionWidget).selectedAnswer, 'Yes');
+      expect((tester.widget(question3) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question4) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question5) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question6) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question7) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(nextButton) as CustomTextButton).disable, true);
+    });
+
+    testWidgets(
+        'Next button disable when question no 4 is "Yes" and text input not filled , question no 1, no 2, no 3, no 5 until no 7 has answered with option "No"',
+        (tester) async {
+      await _buildDisclosureAffiliationForm(tester);
+      await tester.tap(question1IsNo);
+      await tester.pump();
+      await tester.tap(question2IsNo);
+      await tester.pump();
+      await tester.tap(question3IsNo);
+      await tester.pump();
+      await tester.ensureVisible(question4IsYes);
+      await tester.tap(question4IsYes);
+      await tester.pump();
+      await tester.tap(question5IsNo);
+      await tester.pump();
+      await tester.ensureVisible(question6IsNo);
+      await tester.tap(question6IsNo);
+      await tester.pump();
+      await tester.tap(question7IsNo);
+      await tester.pump();
+      expect((tester.widget(question1) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question2) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question3) as QuestionWidget).selectedAnswer, 'No');
+      expect(
+          (tester.widget(question4) as QuestionWidget).selectedAnswer, 'Yes');
+      expect((tester.widget(question5) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question6) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question7) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(nextButton) as CustomTextButton).disable, true);
+    });
+
+    testWidgets(
+        'Next button disable when question no 5 is "Yes" and text input not filled , question no 1 until no 5, and question no 6 until no 7 has answered with option "No"',
+        (tester) async {
+      await _buildDisclosureAffiliationForm(tester);
+      await tester.tap(question1IsNo);
+      await tester.pump();
+      await tester.tap(question2IsNo);
+      await tester.pump();
+      await tester.tap(question3IsNo);
+      await tester.pump();
+      await tester.ensureVisible(question4);
+      await tester.tap(question4IsNo);
+      await tester.pump();
+      await tester.tap(question5IsYes);
+      await tester.pump();
+      await tester.ensureVisible(question6);
+      await tester.tap(question6IsNo);
+      await tester.pump();
+      await tester.tap(question7IsNo);
+      await tester.pump();
+      expect((tester.widget(question1) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question2) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question3) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question4) as QuestionWidget).selectedAnswer, 'No');
+      expect(
+          (tester.widget(question5) as QuestionWidget).selectedAnswer, 'Yes');
+      expect((tester.widget(question6) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question7) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(nextButton) as CustomTextButton).disable, true);
+    });
+
+    testWidgets(
+        'Next button disable when question no 6 is "Yes" and text input not filled , question no 1 until no 5,and no 7 has answered with option "No"',
+        (tester) async {
+      await _buildDisclosureAffiliationForm(tester);
+      await tester.tap(question1IsNo);
+      await tester.pump();
+      await tester.tap(question2IsNo);
+      await tester.pump();
+      await tester.tap(question3IsNo);
+      await tester.pump();
+      await tester.ensureVisible(question4);
+      await tester.tap(question4IsNo);
+      await tester.pump();
+      await tester.tap(question5IsNo);
+      await tester.pump();
+      await tester.tap(question6IsYes, warnIfMissed: true);
+      await tester.pump();
+      await tester.ensureVisible(question7);
+      await tester.tap(question7IsNo);
+      await tester.pump();
+      expect((tester.widget(question1) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question2) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question3) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question4) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question5) as QuestionWidget).selectedAnswer, 'No');
+      expect(
+          (tester.widget(question6) as QuestionWidget).selectedAnswer, 'Yes');
+      expect((tester.widget(question7) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(nextButton) as CustomTextButton).disable, true);
+    });
+    testWidgets(
+        'Next button disable when question no 7 is "Yes" and show pop up information , question no 1 until no 6 has answered with option "No"',
+        (tester) async {
+      await _buildDisclosureAffiliationForm(tester);
+      await tester.tap(question1IsNo);
+      await tester.pump();
+      await tester.tap(question2IsNo);
+      await tester.pump();
+      await tester.tap(question3IsNo);
+      await tester.pump();
+      await tester.ensureVisible(question4IsNo);
+      await tester.tap(question4IsNo);
+      await tester.pump();
+      await tester.tap(question5IsNo);
+      await tester.pump();
+      await tester.tap(question6IsNo);
+      await tester.pump();
+      await tester.tap(question7IsYes);
+      await tester.pump();
+      expect((tester.widget(question1) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question2) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question3) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question4) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question5) as QuestionWidget).selectedAnswer, 'No');
+      expect((tester.widget(question6) as QuestionWidget).selectedAnswer, 'No');
+      expect(
+          (tester.widget(question7) as QuestionWidget).selectedAnswer, 'Yes');
+      expect(
+          (find.text(
+              'Sorry, you’re not eligible for AskLORA Employee of SFC are ineligible to open brokerage accounts')),
+          findsOneWidget);
+      expect((tester.widget(nextButton) as CustomTextButton).disable, true);
     });
   });
 }
