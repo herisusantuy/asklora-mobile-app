@@ -59,6 +59,7 @@ class SigningAgreementTaxForm extends StatelessWidget {
             previous.isCheckedCertify != current.isCheckedCertify,
         builder: (context, state) {
           return CustomCheckbox(
+            checkboxKey: const Key('certify_not_us_citizen_checkbox_key_value'),
             key: const Key('certify_not_us_citizen_checkbox'),
             padding: const EdgeInsets.only(top: 10),
             text:
@@ -79,6 +80,8 @@ class SigningAgreementTaxForm extends StatelessWidget {
           previous.isCheckedDeclare != current.isCheckedDeclare,
       builder: (context, state) {
         return CustomCheckbox(
+          checkboxKey:
+              const Key('declare_correct_information_checkbox_key_value'),
           key: const Key('declare_correct_information_checkbox'),
           padding: const EdgeInsets.only(top: 10),
           text:
