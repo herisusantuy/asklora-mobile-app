@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
 import '../bloc/reset_password_bloc.dart';
@@ -18,11 +19,10 @@ class ResetPasswordForm extends StatelessWidget {
             context
                 .read<ResetPasswordBloc>()
                 .add(ResetPasswordEmailChanged(state.email));
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                content: Text(state.responseMessage),
-              ));
+            CustomSnackBar(context)
+                .setMessage(state.responseMessage)
+                .setType(CustomSnackBarType.error)
+                .show();
             break;
           case ResetPasswordStatus.success:
             ResetPasswordSuccesScreen.open(context);
