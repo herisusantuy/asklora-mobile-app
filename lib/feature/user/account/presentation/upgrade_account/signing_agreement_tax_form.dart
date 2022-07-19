@@ -98,6 +98,7 @@ class SigningAgreementTaxForm extends StatelessWidget {
     return BlocBuilder<SigningAgreementTaxBloc, SigningAgreementTaxState>(
       builder: (context, state) {
         return CustomTextButton(
+            key: const Key('signing_agreement_tax_next_step_button'),
             borderRadius: 30,
             disable: state.disabledNextButton(),
             buttonText: 'Next',
