@@ -90,13 +90,13 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
               givenName: basicInformationBloc.state.firstName,
               middleName: basicInformationBloc.state.middleName,
               familyName: basicInformationBloc.state.lastName,
-              dateOfBirth: basicInformationBloc.state.dateOfBirth,
+              dateOfBirth:
+                  parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
               taxId: countryOfTaxResidenceBloc.state.tinNumber,
               taxIdType: 'NOT_SPECIFIED',
               countryOfCitizenship:
                   basicInformationBloc.state.countryOfCitizenship,
-              countryOfBirth: 'HKG',
-              //mock
+              countryOfBirth: null,
               countryOfTaxResidence:
                   countryOfTaxResidenceBloc.state.taxResidence,
               fundingSource:
@@ -138,11 +138,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   _onSubmitTaxInfo(SubmitTaxInfo event, Emitter<AccountState> emit) async {
     try {
       emit(state.copyWith(status: GetAccountStatus.submittingTaxInfo));
-      String formattedDateOfBirth =
-          '${DateTime.parse(basicInformationBloc.state.dateOfBirth).year}-${DateTime.parse(basicInformationBloc.state.dateOfBirth).month}-${DateTime.parse(basicInformationBloc.state.dateOfBirth).day}';
-      DateTime date = DateTime.now();
-      String formattedDate =
-          '${DateTime.parse(date.toString()).year}-${DateTime.parse(date.toString()).month}-${DateTime.parse(date.toString()).day}';
       TaxInfoRequest taxInfoReq = TaxInfoRequest(
           fullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
@@ -154,17 +149,17 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           mailingAddressCityState: addressProofBloc.state.mailCity,
           mailingAddressCountry: addressProofBloc.state.mailCountry,
           foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
-          dateOfBirth: formattedDateOfBirth,
+          dateOfBirth:
+              parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
           signature:
               'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
-          date: formattedDate,
+          date: parseDateFormatYYmmdd(DateTime.now().toString()),
           signerFullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
           ipAddress: event.ipAddress);
       await _accountRepository.submitTaxInfo(taxInfoReq);
       emit(TaxInfoSubmitted());
     } catch (e) {
-      print("HERE $e");
       emit(state.copyWith(
           status: GetAccountStatus.failure,
           responseMessage: 'Could not submit tax info!'));
@@ -251,5 +246,9 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           status: GetAccountStatus.failure,
           responseMessage: 'Could not update the Onfido result!'));
     }
+  }
+
+  String parseDateFormatYYmmdd(String date) {
+    return '${DateTime.parse(date).year}-${DateTime.parse(date).month.toString().padLeft(2, '0')}-${DateTime.parse(date).day}';
   }
 }

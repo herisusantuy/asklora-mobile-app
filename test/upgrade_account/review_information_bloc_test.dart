@@ -74,12 +74,13 @@ void main() async {
               givenName: basicInformationBloc.state.firstName,
               middleName: basicInformationBloc.state.middleName,
               familyName: basicInformationBloc.state.lastName,
-              dateOfBirth: basicInformationBloc.state.dateOfBirth,
+              dateOfBirth:
+                  parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
               taxId: countryOfTaxResidenceBloc.state.tinNumber,
               taxIdType: 'NOT_SPECIFIED',
               countryOfCitizenship:
                   basicInformationBloc.state.countryOfCitizenship,
-              countryOfBirth: 'HKG',
+              countryOfBirth: null,
               //mock
               countryOfTaxResidence:
                   countryOfTaxResidenceBloc.state.countryOfTaxResidence,
@@ -105,11 +106,6 @@ void main() async {
             Agreement(agreement: 'AA', ipAddress: ipAddress),
             Agreement(agreement: 'CA', ipAddress: ipAddress),
           ]);
-      String formattedDateOfBirth =
-          '${DateTime.parse(basicInformationBloc.state.dateOfBirth).year}-${DateTime.parse(basicInformationBloc.state.dateOfBirth).month}-${DateTime.parse(basicInformationBloc.state.dateOfBirth).day}';
-      DateTime date = DateTime.now();
-      String formattedDate =
-          '${DateTime.parse(date.toString()).year}-${DateTime.parse(date.toString()).month}-${DateTime.parse(date.toString()).day}';
       taxInfoReq = TaxInfoRequest(
           fullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
@@ -121,10 +117,11 @@ void main() async {
           mailingAddressCityState: addressProofBloc.state.mailCity,
           mailingAddressCountry: addressProofBloc.state.mailCountry,
           foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
-          dateOfBirth: formattedDateOfBirth,
+          dateOfBirth:
+              parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
           signature:
               'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
-          date: formattedDate,
+          date: parseDateFormatYYmmdd(DateTime.now().toString()),
           signerFullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
           ipAddress: ipAddress);
@@ -200,4 +197,8 @@ void main() async {
 
     tearDown(() => {reviewInformationBloc.close()});
   });
+}
+
+String parseDateFormatYYmmdd(String date) {
+  return '${DateTime.parse(date).year}-${DateTime.parse(date).month.toString().padLeft(2, '0')}-${DateTime.parse(date).day}';
 }
