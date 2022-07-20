@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'context.dart';
+
 part 'disclosures.g.dart';
 
 @JsonSerializable()
@@ -20,12 +22,27 @@ class Disclosures extends Equatable {
   @JsonKey(name: 'employment_status')
   String? employmentStatus;
 
+  @JsonKey(name: 'employer_name')
+  String? employerName;
+
+  @JsonKey(name: 'employer_address')
+  String? employerAddress;
+
+  @JsonKey(name: 'employment_position')
+  String? employmentPosition;
+
+  List<Context>? context;
+
   Disclosures(
       {this.isControlPerson,
       this.isAffiliatedExchangeOrFinra,
       this.isPoliticallyExposed,
       this.immediateFamilyExposed,
-      this.employmentStatus});
+      this.employmentStatus,
+      this.employerName,
+      this.employerAddress,
+      this.employmentPosition,
+      this.context});
 
   factory Disclosures.fromJson(Map<String, dynamic> json) =>
       _$DisclosuresFromJson(json);
@@ -38,6 +55,10 @@ class Disclosures extends Equatable {
         isAffiliatedExchangeOrFinra ?? false,
         isPoliticallyExposed ?? false,
         immediateFamilyExposed ?? false,
-        employmentStatus ?? false
+        employmentStatus ?? false,
+        employerName ?? '',
+        employerAddress ?? '',
+        employmentPosition ?? '',
+        context ?? []
       ];
 }

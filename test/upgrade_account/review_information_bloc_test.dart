@@ -102,9 +102,21 @@ void main() async {
               employmentStatus:
                   financialProfileBloc.state.employmentStatus.name),
           agreements: [
-            Agreement(agreement: 'MA', ipAddress: ipAddress),
-            Agreement(agreement: 'AA', ipAddress: ipAddress),
-            Agreement(agreement: 'CA', ipAddress: ipAddress),
+            Agreement(
+                agreement: 'MA',
+                ipAddress: ipAddress,
+                signature:
+                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+            Agreement(
+                agreement: 'AA',
+                ipAddress: ipAddress,
+                signature:
+                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+            Agreement(
+                agreement: 'CA',
+                ipAddress: ipAddress,
+                signature:
+                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
           ]);
       taxInfoReq = TaxInfoRequest(
           fullName:
@@ -200,5 +212,5 @@ void main() async {
 }
 
 String parseDateFormatYYmmdd(String date) {
-  return '${DateTime.parse(date).year}-${DateTime.parse(date).month.toString().padLeft(2, '0')}-${DateTime.parse(date).day}';
+  return '${DateTime.parse(date).year}-${DateTime.parse(date).month.toString().padLeft(2, '0')}-${DateTime.parse(date).day.toString().padLeft(2, '0')}';
 }

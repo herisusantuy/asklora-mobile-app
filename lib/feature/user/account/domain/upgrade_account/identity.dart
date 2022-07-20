@@ -34,8 +34,6 @@ class Identity extends Equatable {
 
   @JsonKey(name: 'funding_source')
   String? fundingSource;
-  @JsonKey(name: 'employment_status')
-  String? employmentStatus;
 
   Identity(
       {this.givenName,
