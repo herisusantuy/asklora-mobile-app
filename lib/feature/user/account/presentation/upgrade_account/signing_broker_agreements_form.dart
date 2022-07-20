@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -135,8 +134,9 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                           buttonText: 'Reset Signature',
                           onClick: () {
                             _signatureController.clear();
-                            context.read<SigningBrokerAgreementBloc>().add(
-                                CustomerSignatureReset(_signatureController));
+                            context
+                                .read<SigningBrokerAgreementBloc>()
+                                .add(const CustomerSignatureReset());
                           })
                     ],
                   ),

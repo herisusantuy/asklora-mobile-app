@@ -16,6 +16,7 @@ import 'address_proof/bloc/address_proof_bloc.dart';
 import 'basic_information/bloc/basic_information_bloc.dart';
 import 'country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
 import 'signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
+import '../repository/signing_broker_agreement_repository.dart';
 
 part 'account_event.dart';
 
@@ -27,7 +28,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   final CountryOfTaxResidenceBloc countryOfTaxResidenceBloc =
       CountryOfTaxResidenceBloc();
   final SigningBrokerAgreementBloc signingBrokerAgreementBloc =
-      SigningBrokerAgreementBloc();
+      SigningBrokerAgreementBloc(SigningBrokerAgreementRepository());
   AccountBloc({required AccountRepository getAccountRepository})
       : _accountRepository = getAccountRepository,
         super(const AccountState()) {
