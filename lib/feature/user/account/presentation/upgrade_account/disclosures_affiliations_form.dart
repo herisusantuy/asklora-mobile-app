@@ -188,6 +188,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                   child: CustomTextInput(
+                      key: const Key('name_of_affiliated_person_input'),
                       labelText: 'Name of Affiliated Person',
                       onChanged: (value) => context
                           .read<DisclosureAffiliationBloc>()
@@ -226,6 +227,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                   child: CustomTextInput(
+                      key: const Key('name_of_joint_account_input'),
                       labelText: 'Name of Joint Account',
                       onChanged: (value) => context
                           .read<DisclosureAffiliationBloc>()
