@@ -28,11 +28,11 @@ void main() async {
     var countryOfCitizenshipInput =
         find.byKey(const Key('account_country_of_citizenship_input'));
     var isHongKongPermanentResidentQuestion = find
-        .byKey(const Key('account_is_hongkong_permanent_resident_question'));
+        .byKey(const Key('account_is_hong_kong_permanent_resident_question'));
     var isHongKongPermanentResidentYesAnswer = find.byKey(
-        const Key('account_is_hongkong_permanent_resident_question Yes'));
-    var isHongKongPermanentResidentNoAnswer = find
-        .byKey(const Key('account_is_hongkong_permanent_resident_question No'));
+        const Key('account_is_hong_kong_permanent_resident_question Yes'));
+    var isHongKongPermanentResidentNoAnswer = find.byKey(
+        const Key('account_is_hong_kong_permanent_resident_question No'));
     var accountIdNumberInput = find.byKey(const Key('account_id_number_input'));
     var isUnitedStateResidentQuestion =
         find.byKey(const Key('account_is_united_state_resident_question'));

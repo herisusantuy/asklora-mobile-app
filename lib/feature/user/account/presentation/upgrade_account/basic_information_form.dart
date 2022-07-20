@@ -167,7 +167,7 @@ class BasicInformationForm extends StatelessWidget {
           previous.isHongKongPermanentResident !=
           current.isHongKongPermanentResident),
       builder: (context, state) {
-        const String key = 'account_is_hongkong_permanent_resident_question';
+        const String key = 'account_is_hong_kong_permanent_resident_question';
         return Column(
           children: [
             QuestionWidget(
