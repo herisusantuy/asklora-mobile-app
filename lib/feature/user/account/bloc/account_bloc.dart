@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -137,59 +135,61 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
     var email = await _secureStorage.readSecureData('email');
-    emit(state.copyWith(status: GetAccountStatus.upgradingAccount));
-    UpgradeAccountRequest request = UpgradeAccountRequest(
-      contact: Contact(
-          emailAddress: email,
-          phoneNumber: basicInformationBloc.state.phoneNumber,
-          streetAddress: addressProofBloc.state.residentialAddress,
-          unit: addressProofBloc.state.unitNumber,
-          city: addressProofBloc.state.city,
-          state: '',
-          postalCode: '',
-          country: addressProofBloc.state.country),
-      identity: Identity(
-          givenName: basicInformationBloc.state.firstName,
-          middleName: basicInformationBloc.state.middleName,
-          familyName: basicInformationBloc.state.lastName,
-          dateOfBirth:
-              parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
-          taxId: countryOfTaxResidenceBloc.state.tinNumber,
-          taxIdType: 'NOT_SPECIFIED',
-          countryOfCitizenship: basicInformationBloc.state.countryOfCitizenship,
-          countryOfBirth: null,
-          countryOfTaxResidence: countryOfTaxResidenceBloc.state.taxResidence,
-          fundingSource:
-              fundingSourceValue(financialProfileBloc.state.fundingSource)),
-      trustedContact: TrustedContact(
-          givenName: trustedContactBloc.state.firstName,
-          familyName: trustedContactBloc.state.lastName,
-          email: trustedContactBloc.state.emailAddress,
-          phone: trustedContactBloc.state.phoneNumber),
-      disclosures: Disclosures(
-          isControlPerson: disclosureAffiliationBloc.state.isSeniorExecutive,
-          isAffiliatedExchangeOrFinra:
-              disclosureAffiliationBloc.state.isAffiliated,
-          isPoliticallyExposed:
-              disclosureAffiliationBloc.state.isSeniorPolitical,
-          immediateFamilyExposed:
-              disclosureAffiliationBloc.state.isFamilyMember,
-          employmentStatus: financialProfileBloc.state.employmentStatus.name,
-          employerName: financialProfileBloc.state.employer,
-          employerAddress: financialProfileBloc.state.employerAddress,
-          employmentPosition: financialProfileBloc.state.occupation,
-          context: _generateContextList()),
-      agreements: _generateAgreementList(event.ipAddress),
-    );
-    log('data: ${request.toJson()}');
-    await _accountRepository.upgradeAccount(request);
-    emit(
-      state.copyWith(
-        status: GetAccountStatus.success,
-        responseMessage: 'Account upgraded successfully!',
-      ),
-    );
-    try {} catch (e) {
+
+    try {
+      emit(state.copyWith(status: GetAccountStatus.upgradingAccount));
+      UpgradeAccountRequest request = UpgradeAccountRequest(
+        contact: Contact(
+            emailAddress: email,
+            phoneNumber: basicInformationBloc.state.phoneNumber,
+            streetAddress: addressProofBloc.state.residentialAddress,
+            unit: addressProofBloc.state.unitNumber,
+            city: addressProofBloc.state.city,
+            state: '',
+            postalCode: '',
+            country: addressProofBloc.state.country),
+        identity: Identity(
+            givenName: basicInformationBloc.state.firstName,
+            middleName: basicInformationBloc.state.middleName,
+            familyName: basicInformationBloc.state.lastName,
+            dateOfBirth:
+                parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
+            taxId: countryOfTaxResidenceBloc.state.tinNumber,
+            taxIdType: 'NOT_SPECIFIED',
+            countryOfCitizenship:
+                basicInformationBloc.state.countryOfCitizenship,
+            countryOfBirth: null,
+            countryOfTaxResidence: countryOfTaxResidenceBloc.state.taxResidence,
+            fundingSource:
+                fundingSourceValue(financialProfileBloc.state.fundingSource)),
+        trustedContact: TrustedContact(
+            givenName: trustedContactBloc.state.firstName,
+            familyName: trustedContactBloc.state.lastName,
+            email: trustedContactBloc.state.emailAddress,
+            phone: trustedContactBloc.state.phoneNumber),
+        disclosures: Disclosures(
+            isControlPerson: disclosureAffiliationBloc.state.isSeniorExecutive,
+            isAffiliatedExchangeOrFinra:
+                disclosureAffiliationBloc.state.isAffiliated,
+            isPoliticallyExposed:
+                disclosureAffiliationBloc.state.isSeniorPolitical,
+            immediateFamilyExposed:
+                disclosureAffiliationBloc.state.isFamilyMember,
+            employmentStatus: financialProfileBloc.state.employmentStatus.name,
+            employerName: financialProfileBloc.state.employer,
+            employerAddress: financialProfileBloc.state.employerAddress,
+            employmentPosition: financialProfileBloc.state.occupation,
+            context: _generateContextList()),
+        agreements: _generateAgreementList(event.ipAddress),
+      );
+      await _accountRepository.upgradeAccount(request);
+      emit(
+        state.copyWith(
+          status: GetAccountStatus.success,
+          responseMessage: 'Account upgraded successfully!',
+        ),
+      );
+    } catch (e) {
       emit(state.copyWith(
           status: GetAccountStatus.failure,
           responseMessage: 'Could not upgrade the account!'));
