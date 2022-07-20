@@ -1,7 +1,5 @@
 part of 'basic_information_bloc.dart';
 
-enum Gender { female, male, other, unknown }
-
 class BasicInformationState extends Equatable {
   const BasicInformationState({
     this.firstName = '',
