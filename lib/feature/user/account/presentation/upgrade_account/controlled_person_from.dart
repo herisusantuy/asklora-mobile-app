@@ -25,6 +25,7 @@ class ControlledPersonForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
       child: CustomTextInput(
+          key: const Key('controlled_person_company_name_input'),
           labelText: 'Company Name',
           onChanged: (value) => context
               .read<DisclosureAffiliationBloc>()
@@ -37,6 +38,7 @@ class ControlledPersonForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
+          key: const Key('controlled_person_company_address_input'),
           labelText: 'Company Street Address',
           onChanged: (value) => context
               .read<DisclosureAffiliationBloc>()
@@ -49,6 +51,7 @@ class ControlledPersonForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
+          key: const Key('controlled_person_company_city_input'),
           labelText: 'Company City',
           onChanged: (value) => context
               .read<DisclosureAffiliationBloc>()
@@ -61,6 +64,7 @@ class ControlledPersonForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
+          key: const Key('controlled_person_company_state_input'),
           labelText: 'Company State',
           onChanged: (value) => context
               .read<DisclosureAffiliationBloc>()
@@ -73,6 +77,7 @@ class ControlledPersonForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
+          key: const Key('controlled_person_company_country_input'),
           labelText: 'Company Country',
           onChanged: (value) => context
               .read<DisclosureAffiliationBloc>()
@@ -85,6 +90,7 @@ class ControlledPersonForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
+          key: const Key('controlled_person_company_email_input'),
           labelText: 'Company Compliance Email',
           onChanged: (value) => context
               .read<DisclosureAffiliationBloc>()
