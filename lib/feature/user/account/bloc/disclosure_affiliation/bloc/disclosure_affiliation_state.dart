@@ -165,7 +165,7 @@ class DisclosureAffiliationState extends Equatable {
                 lastNameOfFamilyMember.isEmpty)) ||
         ((isAssociates == null || isAssociates == true) &&
             (nameOfAffiliatedPerson.isEmpty)) ||
-        ((isOwner == null || isOwner == true) &&
+        ((isOwner == null || isOwner == false) &&
             (nameOfJointAccount.isEmpty)) ||
         (isEmployee == null || isEmployee == true)) {
       return true;
