@@ -20,5 +20,29 @@ void main() async {
         ),
       );
     });
+
+    blocTest<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
+        'Input field for Country of Tax Residence form',
+        build: () => countryOfTaxResidenceBloc,
+        act: (bloc) {
+          bloc.add(const TaxResidenceChanged('20 N San Mateo Dr'));
+          bloc.add(const CountryOfTaxResidenceChanged('HKG'));
+          bloc.add(const TinNumberChanged('123456789'));
+        },
+        expect: () => {
+              const CountryOfTaxResidenceState(
+                  taxResidence: '20 N San Mateo Dr',
+                  countryOfTaxResidence: '',
+                  tinNumber: ''),
+              const CountryOfTaxResidenceState(
+                  taxResidence: '20 N San Mateo Dr',
+                  countryOfTaxResidence: 'HKG',
+                  tinNumber: ''),
+              const CountryOfTaxResidenceState(
+                  taxResidence: '20 N San Mateo Dr',
+                  countryOfTaxResidence: 'HKG',
+                  tinNumber: '123456789')
+            });
+    tearDown(() => countryOfTaxResidenceBloc.close());
   });
 }
