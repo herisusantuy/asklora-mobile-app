@@ -935,10 +935,10 @@ void main() async {
               ),
             });
     blocTest<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-        'Question no 6 = "Yes" and filled name of joint account input text ',
+        'Question no 6 = "No" and filled name of joint account input text ',
         build: () => disclosureAffiliationBloc,
         act: (bloc) => {
-              bloc.add(const QuestionNo6Changed(true)),
+              bloc.add(const QuestionNo6Changed(false)),
               bloc.add(const NameOfJointAccountChanged('qwe')),
             },
         expect: () => {
@@ -963,7 +963,7 @@ void main() async {
                 lastNameOfFamilyMember: '',
                 isAssociates: null,
                 nameOfAffiliatedPerson: '',
-                isOwner: true,
+                isOwner: false,
                 nameOfJointAccount: '',
                 isEmployee: null,
               ),
@@ -988,7 +988,7 @@ void main() async {
                 lastNameOfFamilyMember: '',
                 isAssociates: null,
                 nameOfAffiliatedPerson: '',
-                isOwner: true,
+                isOwner: false,
                 nameOfJointAccount: 'qwe',
                 isEmployee: null,
               ),
