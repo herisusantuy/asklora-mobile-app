@@ -167,11 +167,12 @@ class BasicInformationForm extends StatelessWidget {
           previous.isHongKongPermanentResident !=
           current.isHongKongPermanentResident),
       builder: (context, state) {
+        const String key = 'account_is_hong_kong_permanent_resident_question';
         return Column(
           children: [
             QuestionWidget(
-              key:
-                  const Key('account_is_hong_kong_permanent_resident_question'),
+              keyOption: key,
+              key: const Key(key),
               padding: const EdgeInsets.only(top: 10),
               questionText: 'Hong Kong Permanent Resident',
               options: const ['Yes', 'No'],
@@ -186,14 +187,15 @@ class BasicInformationForm extends StatelessWidget {
                   context
                       .read<BasicInformationBloc>()
                       .add(const BasicInformationIdNumberChanged(''));
+                } else {
+                  Future.delayed(
+                      const Duration(milliseconds: 200),
+                      () => _scrollController.animateTo(
+                            _scrollController.position.maxScrollExtent,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.ease,
+                          ));
                 }
-                Future.delayed(
-                    const Duration(milliseconds: 200),
-                    () => _scrollController.animateTo(
-                          _scrollController.position.maxScrollExtent,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.ease,
-                        ));
               },
             ),
             if (state.isHongKongPermanentResident != null &&
@@ -231,10 +233,12 @@ class BasicInformationForm extends StatelessWidget {
       buildWhen: ((previous, current) =>
           previous.isUnitedStateResident != current.isUnitedStateResident),
       builder: (context, state) {
+        String key = 'account_is_united_state_resident_question';
         return Column(
           children: [
             QuestionWidget(
-              key: const Key('account_is_united_state_resident_question'),
+              keyOption: key,
+              key: Key(key),
               padding: const EdgeInsets.only(top: 10),
               questionText: 'US Resident Check',
               options: const ['Yes', 'No'],
@@ -256,6 +260,7 @@ class BasicInformationForm extends StatelessWidget {
 
   Widget _usResidentsNote() {
     return Container(
+      key: const Key('account_us_resident_note'),
       padding: const EdgeInsets.only(top: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
