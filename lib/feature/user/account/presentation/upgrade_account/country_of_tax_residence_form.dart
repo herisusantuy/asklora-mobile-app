@@ -42,7 +42,7 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
           onSelect: (Country country) => context
               .read<CountryOfTaxResidenceBloc>()
               .add(CountryOfTaxResidenceChanged(
-                  country.countryCode, country.name)),
+                  country.countryCodeIso3, country.name)),
         ),
       ));
 

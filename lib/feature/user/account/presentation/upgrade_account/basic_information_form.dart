@@ -164,7 +164,7 @@ class BasicInformationForm extends StatelessWidget {
           onSelect: (Country country) => context
               .read<BasicInformationBloc>()
               .add(BasicInformationCountryOfCitizenshipChanged(
-                  country.countryCode, country.name)),
+                  country.countryCodeIso3, country.name)),
         ),
       ));
 
