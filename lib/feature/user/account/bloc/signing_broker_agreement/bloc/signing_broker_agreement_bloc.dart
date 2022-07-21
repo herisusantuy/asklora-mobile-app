@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:signature/signature.dart';
 
 import '../../../repository/signing_broker_agreement_repository.dart';
 
