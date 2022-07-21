@@ -1,6 +1,6 @@
-import 'package:asklora_mobile_app/core/presentation/custom_dropdown.dart';
 import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import 'package:asklora_mobile_app/core/presentation/custom_country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -15,8 +15,6 @@ void main() async {
           navigatorObservers: [mockObserver]));
     }
 
-    var accountTaxResidenceInput =
-        find.byKey(const Key('account_tax_residence_input'));
     var accountCountryOfTaxResidence =
         find.byKey(const Key('account_country_of_tax_residence'));
     var accountTinNumberInput =
@@ -26,10 +24,11 @@ void main() async {
 
     testWidgets('Country of Tax Residence form first render.', (tester) async {
       await _buildCountryOfTaxResidencenForm(tester);
-      expect(accountTaxResidenceInput, findsOneWidget);
       expect(accountCountryOfTaxResidence, findsOneWidget);
       expect(
-          (tester.widget<CustomDropdown>(accountCountryOfTaxResidence).value),
+          (tester
+              .widget<CustomCountryPicker>(accountCountryOfTaxResidence)
+              .initialValue),
           '');
       expect(accountTinNumberInput, findsOneWidget);
       expect(accountCountryOfTaxResidenceNextStepButton, findsOneWidget);
