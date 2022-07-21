@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/utils/storage/secure_storage.dart';
 import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/account_api_client.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/get_account/get_account_response.dart';
@@ -18,12 +19,14 @@ class MockGetAccountBloc extends MockBloc<AccountEvent, AccountState>
 
 @GenerateMocks([AccountRepository])
 @GenerateMocks([AccountApiClient])
+@GenerateMocks([SecureStorage])
 void main() {
   group(
     'Get account Bloc test',
     () {
       late MockAccountRepository mockAccountRepository;
       late AccountBloc getAccountBloc;
+      late SecureStorage secureStorage;
       final tradeRequirementStatus = TradeRequirementsStatus(
         false,
         false,
@@ -39,10 +42,12 @@ void main() {
 
       setUpAll(() async {
         mockAccountRepository = MockAccountRepository();
+        secureStorage = MockSecureStorage();
       });
       setUp(() async {
-        getAccountBloc =
-            AccountBloc(getAccountRepository: mockAccountRepository);
+        getAccountBloc = AccountBloc(
+            getAccountRepository: mockAccountRepository,
+            secureStorage: secureStorage);
       });
 
       test('Get account init state is should be unknown', () {
