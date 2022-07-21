@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
@@ -310,7 +311,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
-  String parseDateFormatYYmmdd(String date) {
-    return '${DateTime.parse(date).year}-${DateTime.parse(date).month.toString().padLeft(2, '0')}-${DateTime.parse(date).day.toString().padLeft(2, '0')}';
-  }
+  String parseDateFormatYYmmdd(String date) =>
+      DateFormat('yyyy-MM-dd').format(DateTime.parse(date));
 }
