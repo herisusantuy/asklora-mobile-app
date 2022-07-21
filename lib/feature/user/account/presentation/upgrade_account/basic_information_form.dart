@@ -1,3 +1,4 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
+import '../../../../../core/presentation/custom_country_picker.dart';
 import 'not_eligible_screen.dart';
 
 class BasicInformationForm extends StatelessWidget {
@@ -40,7 +42,7 @@ class BasicInformationForm extends StatelessWidget {
               _selectGender(context),
               _datePicker(),
               _countryCodeAndPhoneNumber(context),
-              _countryInput(context),
+              _countryOfCitizenship(context),
               _optionHkResident(),
               _usResidentCheck(),
             ],
@@ -136,30 +138,35 @@ class BasicInformationForm extends StatelessWidget {
         },
       );
 
-  Widget _countryCodeAndPhoneNumber(BuildContext context) =>
-      CustomPhoneNumberInput(
-        key: const Key('account_country_code_phone_number_input'),
-        onChangedCodeArea: (code) => context
-            .read<BasicInformationBloc>()
-            .add(BasicInformationCountryCodeChanged(code)),
-        onChangePhoneNumber: (phoneNumber) => context
-            .read<BasicInformationBloc>()
-            .add(BasicInformationPhoneNumberChanged(phoneNumber)),
+  Widget _countryCodeAndPhoneNumber(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
+            builder: (context, state) => CustomPhoneNumberInput(
+                  key: const Key('account_country_code_phone_number_input'),
+                  initialValue: state.countryCode,
+                  onChangedCodeArea: (country) => context
+                      .read<BasicInformationBloc>()
+                      .add(BasicInformationCountryCodeChanged(
+                          country.phoneCode)),
+                  onChangePhoneNumber: (phoneNumber) => context
+                      .read<BasicInformationBloc>()
+                      .add(BasicInformationPhoneNumberChanged(phoneNumber)),
+                )),
       );
 
-  Widget _countryInput(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
+  Widget _countryOfCitizenship(BuildContext context) => Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
+        builder: (context, state) => CustomCountryPicker(
           key: const Key('account_country_of_citizenship_input'),
-          labelText: 'Country of Citizenship',
-          onChanged: (countryOfCitizenship) => context
+          title: 'Country of Tax Residence',
+          initialValue: state.countryNameOfCitizenship,
+          onSelect: (Country country) => context
               .read<BasicInformationBloc>()
               .add(BasicInformationCountryOfCitizenshipChanged(
-                  countryOfCitizenship)),
-          hintText: 'Enter your Chinese name'),
-    );
-  }
+                  country.countryCode, country.name)),
+        ),
+      ));
 
   Widget _optionHkResident() {
     return BlocBuilder<BasicInformationBloc, BasicInformationState>(

@@ -30,15 +30,11 @@ void main() async {
         },
         expect: () => {
               const CountryOfTaxResidenceState(
-                  countryNameOfTaxResidence: '20 N San Mateo Dr',
-                  countryOfTaxResidence: '',
-                  tinNumber: ''),
-              const CountryOfTaxResidenceState(
-                  countryNameOfTaxResidence: '20 N San Mateo Dr',
+                  countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
                   tinNumber: ''),
               const CountryOfTaxResidenceState(
-                  countryNameOfTaxResidence: '20 N San Mateo Dr',
+                  countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
                   tinNumber: '123456789')
             });

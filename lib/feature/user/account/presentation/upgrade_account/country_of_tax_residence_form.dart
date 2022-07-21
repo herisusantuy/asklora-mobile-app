@@ -6,7 +6,7 @@ import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
-import '../widgets/custom_country_picker.dart';
+import '../../../../../core/presentation/custom_country_picker.dart';
 
 class CountryOfTaxResidenceForm extends StatelessWidget {
   final PageController controller;
@@ -36,6 +36,7 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: BlocBuilder<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
         builder: (context, state) => CustomCountryPicker(
+          key: const Key('account_country_of_tax_residence'),
           title: 'Country of Tax Residence',
           initialValue: state.countryNameOfTaxResidence,
           onSelect: (Country country) => context

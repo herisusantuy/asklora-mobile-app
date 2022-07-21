@@ -11,6 +11,7 @@ class BasicInformationState extends Equatable {
     this.countryCode = '',
     this.phoneNumber = '',
     this.countryOfCitizenship = '',
+    this.countryNameOfCitizenship = '',
     this.isHongKongPermanentResident,
     this.idNumber = '',
     this.isUnitedStateResident,
@@ -25,6 +26,7 @@ class BasicInformationState extends Equatable {
   final String countryCode;
   final String phoneNumber;
   final String countryOfCitizenship;
+  final String countryNameOfCitizenship;
   final bool? isHongKongPermanentResident;
   final String idNumber;
   final bool? isUnitedStateResident;
@@ -41,6 +43,7 @@ class BasicInformationState extends Equatable {
       countryCode,
       phoneNumber,
       countryOfCitizenship,
+      countryNameOfCitizenship,
       isHongKongPermanentResident,
       idNumber,
       isUnitedStateResident,
@@ -57,6 +60,7 @@ class BasicInformationState extends Equatable {
     String? countryCode,
     String? phoneNumber,
     String? countryOfCitizenship,
+    String? countryNameOfCitizenship,
     bool? isHongKongPermanentResident,
     String? idNumber,
     bool? isUnitedStateResident,
@@ -71,6 +75,8 @@ class BasicInformationState extends Equatable {
       countryCode: countryCode ?? this.countryCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       countryOfCitizenship: countryOfCitizenship ?? this.countryOfCitizenship,
+      countryNameOfCitizenship:
+          countryNameOfCitizenship ?? this.countryNameOfCitizenship,
       isHongKongPermanentResident:
           isHongKongPermanentResident ?? this.isHongKongPermanentResident,
       idNumber: idNumber ?? this.idNumber,
