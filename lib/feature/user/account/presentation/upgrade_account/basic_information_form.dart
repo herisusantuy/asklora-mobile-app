@@ -72,11 +72,11 @@ class BasicInformationForm extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
           key: const Key('account_middle_name_input'),
-          labelText: 'Middle Name',
+          labelText: 'Middle Name (Optional)',
           onChanged: (value) => context
               .read<BasicInformationBloc>()
               .add(BasicInformationMiddleNameChanged(value)),
-          hintText: 'Enter your Middle name'),
+          hintText: 'Enter your Middle name (Optional)'),
     );
   }
 
@@ -98,11 +98,11 @@ class BasicInformationForm extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
           key: const Key('account_chinese_name_input'),
-          labelText: 'Chinese Name',
+          labelText: 'Chinese Name (Optional)',
           onChanged: (value) => context
               .read<BasicInformationBloc>()
               .add(BasicInformationChineseNameChanged(value)),
-          hintText: 'Enter your Chinese name'),
+          hintText: 'Enter your Chinese name (Optional)'),
     );
   }
 

@@ -87,14 +87,14 @@ class BasicInformationState extends Equatable {
 
   bool enableNextButton() {
     if (firstName.isNotEmpty &&
-        middleName.isNotEmpty &&
         lastName.isNotEmpty &&
-        chineseName.isNotEmpty &&
         gender.isNotEmpty &&
         dateOfBirth.isNotEmpty &&
         countryCode.isNotEmpty &&
         phoneNumber.isNotEmpty &&
-        countryOfCitizenship.isNotEmpty) {
+        countryOfCitizenship.isNotEmpty &&
+        isHongKongPermanentResident != null &&
+        isUnitedStateResident != null) {
       if (isHongKongPermanentResident == true) {
         if (idNumber.isNotEmpty) {
           return true;
