@@ -36,27 +36,27 @@ class UpgradeAccountScreen extends StatelessWidget {
   final PageController _pageViewController;
 
   List<Widget> get _pages => [
-        // BasicInformationForm(
-        //   key: const Key('basic_information_step'),
-        //   controller: _pageViewController,
-        // ),
-        // CountryOfTaxResidenceForm(
-        //     key: const Key('country_of_tax_residence_step'),
-        //     controller: _pageViewController),
-        // AddressProofForm(
-        //   key: const Key('address_proof_step'),
-        //   controller: _pageViewController,
-        // ),
-        // FinancialProfileForm(
-        //     key: const Key('financial_profile_step'),
-        //     controller: _pageViewController),
-        // DisclosuresAffiliationsForm(
-        //   key: const Key('disclosures_affiliations_step'),
-        //   controller: _pageViewController,
-        // ),
-        // SigningAgreementTaxForm(
-        //     key: const Key('signing_agreement_tax_step'),
-        //     controller: _pageViewController),
+        BasicInformationForm(
+          key: const Key('basic_information_step'),
+          controller: _pageViewController,
+        ),
+        CountryOfTaxResidenceForm(
+            key: const Key('country_of_tax_residence_step'),
+            controller: _pageViewController),
+        AddressProofForm(
+          key: const Key('address_proof_step'),
+          controller: _pageViewController,
+        ),
+        FinancialProfileForm(
+            key: const Key('financial_profile_step'),
+            controller: _pageViewController),
+        DisclosuresAffiliationsForm(
+          key: const Key('disclosures_affiliations_step'),
+          controller: _pageViewController,
+        ),
+        SigningAgreementTaxForm(
+            key: const Key('signing_agreement_tax_step'),
+            controller: _pageViewController),
         SigningBrokerAgreementsForm(
           key: const Key('signing_broker_agreement_step'),
           controller: _pageViewController,
