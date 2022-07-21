@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tax_info_request.g.dart';
 
 @JsonSerializable()
-class TaxInfoRequest {
+class TaxInfoRequest extends Equatable {
   @JsonKey(name: 'full_name')
   final String fullName;
   @JsonKey(name: 'country_citizen')
@@ -52,4 +53,22 @@ class TaxInfoRequest {
       _$TaxInfoRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$TaxInfoRequestToJson(this);
+
+  @override
+  List<Object> get props => [
+        fullName,
+        countryCitizen,
+        permanentAddressStreet,
+        permanentAddressCityState,
+        permanentAddressCountry,
+        mailingAddressStreet ?? '',
+        mailingAddressCityState ?? '',
+        mailingAddressCountry ?? '',
+        foreignTaxId,
+        dateOfBirth,
+        signature,
+        date,
+        signerFullName,
+        ipAddress
+      ];
 }

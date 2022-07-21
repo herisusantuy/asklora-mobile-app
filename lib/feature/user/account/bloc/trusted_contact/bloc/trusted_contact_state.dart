@@ -59,7 +59,9 @@ class TrustedContactState extends Equatable {
     if (firstName.isEmpty ||
         lastName.isEmpty ||
         emailAddress.isEmpty ||
-        phoneNumber.isEmpty) {
+        phoneNumber.isEmpty ||
+        phoneNumberErrorText.isNotEmpty ||
+        emailErrorText.isNotEmpty) {
       return true;
     }
     return false;

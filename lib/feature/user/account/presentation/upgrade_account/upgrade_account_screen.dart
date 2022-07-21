@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/utils/storage/secure_storage.dart';
 import '../../bloc/account_bloc.dart';
-import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
-import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
-import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
-import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
-import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
+import '../../bloc/review_information/review_information_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
-import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
-import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 import '../../repository/account_repository.dart';
 import 'address_proof_form.dart';
 import 'basic_information_form.dart';
@@ -25,11 +20,16 @@ import 'signing_broker_agreements_form.dart';
 import 'trusted_contact_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
-  final AccountBloc accountBloc =
-      AccountBloc(getAccountRepository: AccountRepository());
+  late AccountBloc accountBloc;
+
   UpgradeAccountScreen({Key? key, required this.initialPage})
       : _pageViewController = PageController(initialPage: initialPage),
-        super(key: key);
+        super(key: key) {
+    accountBloc = AccountBloc(
+      getAccountRepository: AccountRepository(),
+      secureStorage: SecureStorage(),
+    );
+  }
 
   final int initialPage;
 
@@ -88,13 +88,15 @@ class UpgradeAccountScreen extends StatelessWidget {
             BlocProvider(
                 create: (context) => accountBloc.countryOfTaxResidenceBloc),
             BlocProvider(create: (context) => accountBloc.addressProofBloc),
-            BlocProvider(create: (context) => FinancialProfileBloc()),
-            BlocProvider(create: (context) => DisclosureAffiliationBloc()),
-            BlocProvider(create: (context) => SigningAgreementTaxBloc()),
+            BlocProvider(create: (context) => accountBloc.financialProfileBloc),
+            BlocProvider(
+                create: (context) => accountBloc.disclosureAffiliationBloc),
             BlocProvider(
                 create: (context) => accountBloc.signingBrokerAgreementBloc),
-            BlocProvider(create: (context) => TrustedContactBloc()),
+            BlocProvider(create: (context) => accountBloc.trustedContactBloc),
             BlocProvider(create: (context) => RiskDisclosureBloc()),
+            BlocProvider(create: (context) => ReviewInformationBloc()),
+            BlocProvider(create: (context) => SigningAgreementTaxBloc()),
           ],
           child: SafeArea(
               child: Column(

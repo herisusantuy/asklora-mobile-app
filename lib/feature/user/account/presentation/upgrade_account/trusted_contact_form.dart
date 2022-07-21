@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text_button.dart';
@@ -8,6 +9,7 @@ import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 
 class TrustedContactForm extends StatelessWidget {
   final PageController controller;
+
   const TrustedContactForm({
     Key? key,
     required this.controller,
@@ -55,6 +57,7 @@ class TrustedContactForm extends StatelessWidget {
           );
         },
       );
+
   Widget _lastNameInput() =>
       BlocBuilder<TrustedContactBloc, TrustedContactState>(
         buildWhen: (previous, current) => previous.lastName != current.lastName,
@@ -73,6 +76,7 @@ class TrustedContactForm extends StatelessWidget {
           );
         },
       );
+
   Widget _emailInput() => BlocBuilder<TrustedContactBloc, TrustedContactState>(
         buildWhen: (previous, current) =>
             previous.emailAddress != current.emailAddress,
@@ -92,6 +96,7 @@ class TrustedContactForm extends StatelessWidget {
           );
         },
       );
+
   Widget _phoneNumberInput() =>
       BlocBuilder<TrustedContactBloc, TrustedContactState>(
         buildWhen: (previous, current) =>
@@ -100,6 +105,7 @@ class TrustedContactForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+              textInputFormatterList: [FilteringTextInputFormatter.digitsOnly],
               key: const Key('trusted_contact_phone_number_input'),
               labelText: 'Phone Number',
               hintText: 'Enter Phone Number',
@@ -118,6 +124,7 @@ class TrustedContactForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0, bottom: 10),
             child: CustomTextButton(
+              key: const Key('trusted_contact_next_button'),
               borderRadius: 30,
               buttonText: 'Next',
               disable: state.disableNextButton(),

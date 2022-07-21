@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'financial_profile_event.dart';
+
 part 'financial_profile_state.dart';
 
 class FinancialProfileBloc

@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'agreement.dart';
@@ -9,7 +10,7 @@ import 'trusted_contact.dart';
 part 'upgrade_account_request.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class UpgradeAccountRequest {
+class UpgradeAccountRequest extends Equatable {
   Contact? contact;
 
   Identity? identity;
@@ -32,4 +33,8 @@ class UpgradeAccountRequest {
       _$UpgradeAccountRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$UpgradeAccountRequestToJson(this);
+
+  @override
+  List<Object> get props =>
+      [contact!, identity!, trustedContact!, disclosures!, agreements!];
 }
