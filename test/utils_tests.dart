@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/utils/extensions.dart';
+import 'package:asklora_mobile_app/core/utils/util.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
@@ -33,6 +34,21 @@ main() {
       expect(passwordRegex.hasMatch(''), false);
       expect(passwordRegex.hasMatch('kkkkk'), false);
       expect(passwordRegex.hasMatch('passw0rd!!!'), false);
+    });
+
+    test('Hong Kong ID Card Validation', () {
+      expect(isHkIdValid('A12345'), false);
+      expect(isHkIdValid('A12345789'), false);
+      expect(isHkIdValid('A123456(7)'), false);
+      expect(isHkIdValid('A123457890'), false);
+      expect(isHkIdValid('A1234567'), false);
+
+      expect(isHkIdValid('VE5753176'), true);
+      expect(isHkIdValid('F543210A'), true);
+      expect(isHkIdValid('Q9249334'), true);
+      expect(isHkIdValid('V491175A'), true);
+      expect(isHkIdValid('E4273315'), true);
+      expect(isHkIdValid('FL1530083'), true);
     });
   });
 }
