@@ -369,6 +369,8 @@ class ReviewInformationScreen extends StatelessWidget {
                             key: const Key('submit_button'),
                             borderRadius: 30,
                             buttonText: 'Submit',
+                            isLoading: state.status ==
+                                GetAccountStatus.upgradingAccount,
                             disable: !stateReviewInformation.data!,
                             onClick: () async => context
                                 .read<AccountBloc>()
