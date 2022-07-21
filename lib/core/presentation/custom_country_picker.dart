@@ -34,7 +34,7 @@ class CustomCountryPicker extends StatelessWidget {
           onTap: () => showCountryPicker(
             context: context,
             showPhoneCode: showPhoneCode,
-            favorite: ['HK', 'US', 'GB'],
+            favorite: ['HK', 'US', 'CA', 'GB'],
             onSelect: onSelect,
           ),
           child: Container(
