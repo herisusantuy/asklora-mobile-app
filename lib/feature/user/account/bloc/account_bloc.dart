@@ -159,7 +159,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             countryOfCitizenship:
                 basicInformationBloc.state.countryOfCitizenship,
             countryOfBirth: null,
-            countryOfTaxResidence: countryOfTaxResidenceBloc.state.taxResidence,
+            countryOfTaxResidence:
+                countryOfTaxResidenceBloc.state.countryNameOfTaxResidence,
             fundingSource:
                 fundingSourceValue(financialProfileBloc.state.fundingSource)),
         trustedContact: TrustedContact(
