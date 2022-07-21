@@ -24,13 +24,6 @@ void main() {
         find.byKey(const Key('account_funding_source_select'));
     var accountEmploymentStatusSelect =
         find.byKey(const Key('account_employment_status_select'));
-    var accountOccupationSelect =
-        find.byKey(const Key('account_occupation_select'));
-    var accountOtherOccupationInput =
-        find.byKey(const Key('account_other_occupation_input'));
-    var accountEmployerInput = find.byKey(const Key('account_employer_input'));
-    var accountEmployerAddressInput =
-        find.byKey(const Key('account_employer_address_input'));
     var financialProfileNextStepButton =
         find.byKey(const Key('account_financial_profile_next_step_button'));
 
@@ -40,10 +33,6 @@ void main() {
       expect(accountInvestibleLiquidAssetsSelect, findsOneWidget);
       expect(accountFundingSourceSelect, findsOneWidget);
       expect(accountEmploymentStatusSelect, findsOneWidget);
-      // expect(accountOccupationSelect, findsOneWidget);
-      // expect(accountOtherOccupationInput, findsOneWidget);
-      // expect(accountEmployerInput, findsOneWidget);
-      // expect(accountEmployerAddressInput, findsOneWidget);
       expect(financialProfileNextStepButton, findsOneWidget);
       expect(
           tester.widget<CustomDropdown>(accountAnnualIncomeSelect).value, '');
