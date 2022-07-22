@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
-
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../home_screen.dart';
+import '../../../payment/withdrawal/withdraw_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../../user/account/repository/account_repository.dart';
@@ -102,6 +102,10 @@ class SignInSuccessScreen extends StatelessWidget {
                     _upgradeAccountScreen(context),
                     _padding(),
                     _getOnfidoToken(),
+                    _padding(),
+                    CustomTextButton(
+                        buttonText: 'Withdraw',
+                        onClick: () => WithdrawScreen.open(context))
                   ],
                 ),
               ),
