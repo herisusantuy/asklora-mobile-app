@@ -1,11 +1,12 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
+import '../../../../../core/presentation/custom_country_picker.dart';
 
 class CountryOfTaxResidenceForm extends StatelessWidget {
   final PageController controller;
@@ -21,9 +22,8 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _taxResidenceInput(context),
-              _selectCountryOfTaxResidence(context),
-              _tinNumberInput(context)
+              _countryOfTaxResidence(context),
+              _tinNumberInput(context),
             ],
           ),
         ),
@@ -32,29 +32,19 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
     );
   }
 
-  Widget _taxResidenceInput(BuildContext context) {
-    return Padding(
+  Widget _countryOfTaxResidence(BuildContext context) => Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: CustomTextInput(
-          key: const Key('account_tax_residence_input'),
-          labelText: 'Tax Residence',
-          hintText: 'Enter your tax residence',
-          onChanged: (value) => context
+      child: BlocBuilder<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
+        builder: (context, state) => CustomCountryPicker(
+          key: const Key('account_country_of_tax_residence'),
+          title: 'Country of Tax Residence',
+          initialValue: state.countryNameOfTaxResidence,
+          onSelect: (Country country) => context
               .read<CountryOfTaxResidenceBloc>()
-              .add(TaxResidenceChanged(value))),
-    );
-  }
-
-  Widget _selectCountryOfTaxResidence(BuildContext context) {
-    return CustomDropdown(
-        key: const Key('account_country_of_tax_residence'),
-        label: 'Country Of Tax Residence',
-        padding: const EdgeInsets.only(top: 20),
-        itemsList: const ['Hong Kong'],
-        onChanged: (value) => context
-            .read<CountryOfTaxResidenceBloc>()
-            .add(CountryOfTaxResidenceChanged(value!)));
-  }
+              .add(CountryOfTaxResidenceChanged(
+                  country.countryCodeIso3, country.name)),
+        ),
+      ));
 
   Widget _tinNumberInput(BuildContext context) {
     return Padding(

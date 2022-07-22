@@ -7,17 +7,12 @@ abstract class CountryOfTaxResidenceEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class TaxResidenceChanged extends CountryOfTaxResidenceEvent {
-  final String taxResidence;
-  const TaxResidenceChanged(this.taxResidence);
-
-  @override
-  List<Object> get props => [taxResidence];
-}
-
 class CountryOfTaxResidenceChanged extends CountryOfTaxResidenceEvent {
   final String countryOfTaxResidence;
-  const CountryOfTaxResidenceChanged(this.countryOfTaxResidence);
+  final String countryNameOfTaxResidence;
+
+  const CountryOfTaxResidenceChanged(
+      this.countryOfTaxResidence, this.countryNameOfTaxResidence);
 
   @override
   List<Object> get props => [countryOfTaxResidence];
@@ -25,6 +20,7 @@ class CountryOfTaxResidenceChanged extends CountryOfTaxResidenceEvent {
 
 class TinNumberChanged extends CountryOfTaxResidenceEvent {
   final String tinNumber;
+
   const TinNumberChanged(this.tinNumber);
 
   @override
