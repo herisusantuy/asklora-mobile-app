@@ -64,14 +64,13 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
             maxLength: state.countryOfTaxResidence == 'HKG' ? 9 : 15,
             errorText: state.isHkIdValid
                 ? ''
-                : _idNumberErrorText(
-                    state.isHkIdValid, state.countryOfTaxResidence),
+                : _idNumberErrorText(state.countryOfTaxResidence),
             onChanged: (value) => context
                 .read<CountryOfTaxResidenceBloc>()
                 .add(TinNumberChanged(value))),
       );
 
-  String _idNumberErrorText(bool test, String countryCode) =>
+  String _idNumberErrorText(String countryCode) =>
       (countryCode == 'HKG') ? 'Enter valid HKID number' : '';
 
   Widget _nextButton() {
