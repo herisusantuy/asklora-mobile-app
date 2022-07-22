@@ -44,9 +44,8 @@ class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
 }
 
 class CustomerSignatureReset extends SigningBrokerAgreementEvent {
-  final SignatureController resetCustomerSignature;
-  const CustomerSignatureReset(this.resetCustomerSignature) : super();
+  const CustomerSignatureReset() : super();
 
   @override
-  List<Object> get props => [resetCustomerSignature];
+  List<Object> get props => [];
 }

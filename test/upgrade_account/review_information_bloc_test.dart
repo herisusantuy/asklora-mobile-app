@@ -17,6 +17,7 @@ import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/t
 import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/trusted_contact.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/upgrade_account_request.dart';
 import 'package:asklora_mobile_app/feature/user/account/repository/account_repository.dart';
+import 'package:asklora_mobile_app/feature/user/account/repository/signing_broker_agreement_repository.dart';
 import 'package:asklora_mobile_app/feature/user/kyc/domain/onfido_token_response.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -51,7 +52,8 @@ void main() async {
       financialProfileBloc = FinancialProfileBloc();
       trustedContactBloc = TrustedContactBloc();
       disclosureAffiliationBloc = DisclosureAffiliationBloc();
-      signingBrokerAgreementBloc = SigningBrokerAgreementBloc();
+      signingBrokerAgreementBloc =
+          SigningBrokerAgreementBloc(SigningBrokerAgreementRepository());
       accountRepository = MockAccountRepository();
       secureStorage = MockSecureStorage();
     });
