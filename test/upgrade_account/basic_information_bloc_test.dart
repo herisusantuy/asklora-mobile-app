@@ -43,8 +43,8 @@ void main() {
           bloc.add(const BasicInformationDateOfBirthChanged('1990-09-10'));
           bloc.add(const BasicInformationCountryCodeChanged('+62'));
           bloc.add(const BasicInformationPhoneNumberChanged('8765432190'));
-          bloc.add(
-              const BasicInformationCountryOfCitizenshipChanged('HongKong'));
+          bloc.add(const BasicInformationCountryOfCitizenshipChanged(
+              'HKG', 'Hong Kong'));
           bloc.add(
               const BasicInformationIsHongKongPermanentResidentChanged(true));
           bloc.add(const BasicInformationIdNumberChanged('666-55-4321'));
@@ -172,7 +172,8 @@ void main() {
                 dateOfBirth: '1990-09-10',
                 countryCode: '+62',
                 phoneNumber: '8765432190',
-                countryOfCitizenship: 'HongKong',
+                countryOfCitizenship: 'HKG',
+                countryNameOfCitizenship: 'Hong Kong',
                 isHongKongPermanentResident: null,
                 idNumber: '',
                 isUnitedStateResident: null,
@@ -186,7 +187,8 @@ void main() {
                 dateOfBirth: '1990-09-10',
                 countryCode: '+62',
                 phoneNumber: '8765432190',
-                countryOfCitizenship: 'HongKong',
+                countryOfCitizenship: 'HKG',
+                countryNameOfCitizenship: 'Hong Kong',
                 isHongKongPermanentResident: true,
                 idNumber: '',
                 isUnitedStateResident: null,
@@ -200,7 +202,8 @@ void main() {
                 dateOfBirth: '1990-09-10',
                 countryCode: '+62',
                 phoneNumber: '8765432190',
-                countryOfCitizenship: 'HongKong',
+                countryOfCitizenship: 'HKG',
+                countryNameOfCitizenship: 'Hong Kong',
                 isHongKongPermanentResident: true,
                 idNumber: '666-55-4321',
                 isUnitedStateResident: null,
@@ -214,7 +217,8 @@ void main() {
                 dateOfBirth: '1990-09-10',
                 countryCode: '+62',
                 phoneNumber: '8765432190',
-                countryOfCitizenship: 'HongKong',
+                countryOfCitizenship: 'HKG',
+                countryNameOfCitizenship: 'Hong Kong',
                 isHongKongPermanentResident: true,
                 idNumber: '666-55-4321',
                 isUnitedStateResident: false,

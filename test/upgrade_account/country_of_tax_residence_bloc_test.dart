@@ -14,7 +14,7 @@ void main() async {
       expect(
         countryOfTaxResidenceBloc.state,
         const CountryOfTaxResidenceState(
-          taxResidence: '',
+          countryNameOfTaxResidence: '',
           countryOfTaxResidence: '',
           tinNumber: '',
         ),
@@ -25,21 +25,16 @@ void main() async {
         'Input field for Country of Tax Residence form',
         build: () => countryOfTaxResidenceBloc,
         act: (bloc) {
-          bloc.add(const TaxResidenceChanged('20 N San Mateo Dr'));
-          bloc.add(const CountryOfTaxResidenceChanged('HKG'));
+          bloc.add(const CountryOfTaxResidenceChanged('HKG', 'Hong Kong'));
           bloc.add(const TinNumberChanged('123456789'));
         },
         expect: () => {
               const CountryOfTaxResidenceState(
-                  taxResidence: '20 N San Mateo Dr',
-                  countryOfTaxResidence: '',
-                  tinNumber: ''),
-              const CountryOfTaxResidenceState(
-                  taxResidence: '20 N San Mateo Dr',
+                  countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
                   tinNumber: ''),
               const CountryOfTaxResidenceState(
-                  taxResidence: '20 N San Mateo Dr',
+                  countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
                   tinNumber: '123456789')
             });

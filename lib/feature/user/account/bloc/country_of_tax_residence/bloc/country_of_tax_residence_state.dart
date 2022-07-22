@@ -2,24 +2,26 @@ part of 'country_of_tax_residence_bloc.dart';
 
 class CountryOfTaxResidenceState extends Equatable {
   const CountryOfTaxResidenceState(
-      {this.taxResidence = '',
+      {this.countryNameOfTaxResidence = '',
       this.countryOfTaxResidence = '',
       this.tinNumber = ''});
 
-  final String taxResidence;
+  final String countryNameOfTaxResidence;
   final String countryOfTaxResidence;
   final String tinNumber;
 
   @override
-  List<Object> get props => [taxResidence, countryOfTaxResidence, tinNumber];
+  List<Object> get props =>
+      [countryNameOfTaxResidence, countryOfTaxResidence, tinNumber];
 
   CountryOfTaxResidenceState copyWith({
-    String? taxResidence,
+    String? countryNameOfTaxResidence,
     String? countryOfTaxResidence,
     String? tinNumber,
   }) {
     return CountryOfTaxResidenceState(
-      taxResidence: taxResidence ?? this.taxResidence,
+      countryNameOfTaxResidence:
+          countryNameOfTaxResidence ?? this.countryNameOfTaxResidence,
       countryOfTaxResidence:
           countryOfTaxResidence ?? this.countryOfTaxResidence,
       tinNumber: tinNumber ?? this.tinNumber,
@@ -27,7 +29,7 @@ class CountryOfTaxResidenceState extends Equatable {
   }
 
   bool enableNextButton() =>
-      taxResidence.isNotEmpty &&
+      countryNameOfTaxResidence.isNotEmpty &&
       countryOfTaxResidence.isNotEmpty &&
       tinNumber.isNotEmpty;
 }

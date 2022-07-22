@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'basic_information_event.dart';
+
 part 'basic_information_state.dart';
 
 class BasicInformationBloc
@@ -60,7 +61,9 @@ class BasicInformationBloc
 
   _onBasicInformationCountryCodeChange(BasicInformationCountryCodeChanged event,
       Emitter<BasicInformationState> emit) {
-    emit(state.copyWith(countryCode: event.countryCode));
+    emit(state.copyWith(
+      countryCode: event.countryCode,
+    ));
   }
 
   _onBasicInformationPhoneNumberChange(BasicInformationPhoneNumberChanged event,
@@ -71,7 +74,9 @@ class BasicInformationBloc
   _onBasicInformationCountryOfCitizenshipChage(
       BasicInformationCountryOfCitizenshipChanged event,
       Emitter<BasicInformationState> emit) {
-    emit(state.copyWith(countryOfCitizenship: event.countryOfCitizenship));
+    emit(state.copyWith(
+        countryOfCitizenship: event.countryOfCitizenship,
+        countryNameOfCitizenship: event.countryNameOfCitizenship));
   }
 
   _onIsHongKongPermanentResidentChange(

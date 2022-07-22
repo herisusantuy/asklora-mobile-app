@@ -308,7 +308,8 @@ class ReviewInformationScreen extends StatelessWidget {
                 builder: (context, state) => ExpansionTile(
                       title: const CustomText('Country of Tax Residence'),
                       children: [
-                        _customCard('Tax Residence', state.taxResidence),
+                        _customCard(
+                            'Tax Residence', state.countryNameOfTaxResidence),
                         _customCard('Country of Tax Residence',
                             state.countryOfTaxResidence),
                         _customCard('TIN Number', state.tinNumber),
@@ -368,6 +369,8 @@ class ReviewInformationScreen extends StatelessWidget {
                             key: const Key('submit_button'),
                             borderRadius: 30,
                             buttonText: 'Submit',
+                            isLoading: state.status ==
+                                GetAccountStatus.upgradingAccount,
                             disable: !stateReviewInformation.data!,
                             onClick: () async => context
                                 .read<AccountBloc>()
