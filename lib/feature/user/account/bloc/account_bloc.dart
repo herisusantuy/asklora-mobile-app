@@ -34,8 +34,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       CountryOfTaxResidenceBloc();
   final SigningBrokerAgreementBloc signingBrokerAgreementBloc =
       SigningBrokerAgreementBloc();
-
-  //
   final FinancialProfileBloc financialProfileBloc = FinancialProfileBloc();
   final TrustedContactBloc trustedContactBloc = TrustedContactBloc();
   final DisclosureAffiliationBloc disclosureAffiliationBloc =
@@ -99,15 +97,18 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     if (disclosureAffiliationBloc.state.isSeniorExecutive ?? false) {
       contextList.add(Context(
         contextType: 'CONTROLLED_FIRM',
-        companyName: disclosureAffiliationBloc.state.affiliateCompanyName,
+        companyName:
+            disclosureAffiliationBloc.state.controlledPersonCompanyName,
         companyStreetAddress:
             disclosureAffiliationBloc.state.controlledPersonCompanyAddress,
         companyCity:
             disclosureAffiliationBloc.state.controlledPersonCompanyCity,
-        companyState: disclosureAffiliationBloc.state.affiliateCompanyState,
-        companyCountry: disclosureAffiliationBloc.state.affiliateCompanyCountry,
+        companyState:
+            disclosureAffiliationBloc.state.controlledPersonCompanyState,
+        companyCountry:
+            disclosureAffiliationBloc.state.controlledPersonCompanyCountry,
         companyComplianceEmail:
-            disclosureAffiliationBloc.state.affiliateCompanyEmail,
+            disclosureAffiliationBloc.state.controlledPersonCompanyEmail,
       ));
     }
     if (disclosureAffiliationBloc.state.isAffiliated ?? false) {
@@ -115,9 +116,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         contextType: 'AFFILIATE_FIRM',
         companyName: disclosureAffiliationBloc.state.affiliateCompanyName,
         companyStreetAddress:
-            disclosureAffiliationBloc.state.controlledPersonCompanyAddress,
-        companyCity:
-            disclosureAffiliationBloc.state.controlledPersonCompanyCity,
+            disclosureAffiliationBloc.state.affiliateCompanyAddress,
+        companyCity: disclosureAffiliationBloc.state.affiliateCompanyCity,
         companyState: disclosureAffiliationBloc.state.affiliateCompanyState,
         companyCountry: disclosureAffiliationBloc.state.affiliateCompanyCountry,
         companyComplianceEmail:
@@ -178,9 +178,16 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             immediateFamilyExposed:
                 disclosureAffiliationBloc.state.isFamilyMember,
             employmentStatus: financialProfileBloc.state.employmentStatus.name,
-            employerName: financialProfileBloc.state.employer,
-            employerAddress: financialProfileBloc.state.employerAddress,
-            employmentPosition: financialProfileBloc.state.occupation,
+            employerName: financialProfileBloc.state.employer.isNotEmpty
+                ? financialProfileBloc.state.employer
+                : null,
+            employerAddress:
+                financialProfileBloc.state.employerAddress.isNotEmpty
+                    ? financialProfileBloc.state.employerAddress
+                    : null,
+            employmentPosition: financialProfileBloc.state.occupation.isNotEmpty
+                ? financialProfileBloc.state.occupation
+                : null,
             context: _generateContextList()),
         agreements: _generateAgreementList(event.ipAddress),
       );

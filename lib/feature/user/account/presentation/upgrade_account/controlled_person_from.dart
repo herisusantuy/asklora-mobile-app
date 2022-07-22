@@ -1,6 +1,8 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 
@@ -75,15 +77,19 @@ class ControlledPersonForm extends StatelessWidget {
 
   Widget _controlledPersonCompanyCountryInput(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          key: const Key('controlled_person_company_country_input'),
-          labelText: 'Company Country',
-          onChanged: (value) => context
-              .read<DisclosureAffiliationBloc>()
-              .add(ControlledPersonCompanyCountryChanged(value)),
-          hintText: 'Enter Company Country'),
-    );
+        padding: const EdgeInsets.only(top: 10.0),
+        child:
+            BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
+          builder: (context, state) => CustomCountryPicker(
+            key: const Key('controlled_person_company_country_input'),
+            title: 'Company Country',
+            initialValue: state.controlledPersonCompanyCountry,
+            onSelect: (Country country) => context
+                .read<DisclosureAffiliationBloc>()
+                .add(ControlledPersonCompanyCountryChanged(
+                    country.countryCodeIso3)),
+          ),
+        ));
   }
 
   Widget _controlledPersonCompanyEmailInput(BuildContext context) {
