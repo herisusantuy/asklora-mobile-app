@@ -1,9 +1,10 @@
+import 'dart:convert';
+
 import 'package:dart_ipify/dart_ipify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
-import 'dart:convert';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
@@ -364,7 +365,7 @@ class ReviewInformationScreen extends StatelessWidget {
               BlocBuilder<AccountBloc, AccountState>(
                   buildWhen: (prev, current) => prev.status != current.status,
                   builder: (context, state) => Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                         child: CustomTextButton(
                             key: const Key('submit_button'),
                             borderRadius: 30,

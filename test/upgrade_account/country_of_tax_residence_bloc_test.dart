@@ -22,7 +22,7 @@ void main() async {
     });
 
     blocTest<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
-        'Input field for Country of Tax Residence form',
+        'TIN Input fields for Hong Kong Residence with invalid HKID',
         build: () => countryOfTaxResidenceBloc,
         act: (bloc) {
           bloc.add(const CountryOfTaxResidenceChanged('HKG', 'Hong Kong'));
@@ -36,7 +36,46 @@ void main() async {
               const CountryOfTaxResidenceState(
                   countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
-                  tinNumber: '123456789')
+                  tinNumber: '123456789',
+                  isHkIdValid: false)
+            });
+
+    blocTest<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
+        'TIN Input fields for Hong Kong Residence with valid HKID',
+        build: () => countryOfTaxResidenceBloc,
+        act: (bloc) {
+          bloc.add(const CountryOfTaxResidenceChanged('HKG', 'Hong Kong'));
+          bloc.add(const TinNumberChanged('f1234567'));
+        },
+        expect: () => {
+              const CountryOfTaxResidenceState(
+                  countryNameOfTaxResidence: 'Hong Kong',
+                  countryOfTaxResidence: 'HKG',
+                  tinNumber: ''),
+              const CountryOfTaxResidenceState(
+                  countryNameOfTaxResidence: 'Hong Kong',
+                  countryOfTaxResidence: 'HKG',
+                  tinNumber: 'f1234567',
+                  isHkIdValid: true)
+            });
+
+    blocTest<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
+        'TIN Input fields for non Hong Kong Residence ',
+        build: () => countryOfTaxResidenceBloc,
+        act: (bloc) {
+          bloc.add(const CountryOfTaxResidenceChanged('CAD', 'Canada'));
+          bloc.add(const TinNumberChanged('123456789'));
+        },
+        expect: () => {
+              const CountryOfTaxResidenceState(
+                  countryNameOfTaxResidence: 'Canada',
+                  countryOfTaxResidence: 'CAD',
+                  tinNumber: ''),
+              const CountryOfTaxResidenceState(
+                  countryNameOfTaxResidence: 'Canada',
+                  countryOfTaxResidence: 'CAD',
+                  tinNumber: '123456789',
+                  isHkIdValid: true)
             });
     tearDown(() => countryOfTaxResidenceBloc.close());
   });

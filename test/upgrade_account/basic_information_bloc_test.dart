@@ -32,6 +32,52 @@ void main() {
     });
 
     blocTest<BasicInformationBloc, BasicInformationState>(
+        'Input invalid HKID number',
+        build: () => basicInformationBloc,
+        act: (bloc) {
+          bloc.add(const BasicInformationIdNumberChanged('666-55-4321'));
+        },
+        expect: () => {
+              const BasicInformationState(
+                firstName: '',
+                middleName: '',
+                lastName: '',
+                chineseName: '',
+                gender: '',
+                countryCode: '',
+                phoneNumber: '',
+                countryOfCitizenship: '',
+                isHongKongPermanentResident: null,
+                idNumber: '666-55-4321',
+                isUnitedStateResident: null,
+                isHkIdValid: false,
+              ),
+            });
+
+    blocTest<BasicInformationBloc, BasicInformationState>(
+        'Input valid HKID number',
+        build: () => basicInformationBloc,
+        act: (bloc) {
+          bloc.add(const BasicInformationIdNumberChanged('F1234567'));
+        },
+        expect: () => {
+              const BasicInformationState(
+                firstName: '',
+                middleName: '',
+                lastName: '',
+                chineseName: '',
+                gender: '',
+                countryCode: '',
+                phoneNumber: '',
+                countryOfCitizenship: '',
+                isHongKongPermanentResident: null,
+                idNumber: 'F1234567',
+                isUnitedStateResident: null,
+                isHkIdValid: true,
+              ),
+            });
+
+    blocTest<BasicInformationBloc, BasicInformationState>(
         'Input field for Basic Information Form.',
         build: () => basicInformationBloc,
         act: (bloc) {
@@ -222,8 +268,10 @@ void main() {
                 isHongKongPermanentResident: true,
                 idNumber: '666-55-4321',
                 isUnitedStateResident: false,
+                isHkIdValid: false,
               )
             });
+
     tearDown(() => basicInformationBloc.close());
   });
 }

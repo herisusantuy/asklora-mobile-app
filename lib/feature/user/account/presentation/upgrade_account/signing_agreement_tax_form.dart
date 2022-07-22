@@ -8,10 +8,12 @@ import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
 
 class SigningAgreementTaxForm extends StatelessWidget {
   final PageController controller;
+
   const SigningAgreementTaxForm({
     Key? key,
     required this.controller,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -100,19 +102,21 @@ class SigningAgreementTaxForm extends StatelessWidget {
   Widget _nextButton() {
     return BlocBuilder<SigningAgreementTaxBloc, SigningAgreementTaxState>(
       builder: (context, state) {
-        return CustomTextButton(
-            key: const Key('signing_agreement_tax_next_step_button'),
-            borderRadius: 30,
-            disable: state.disabledNextButton(),
-            buttonText: 'Next',
-            onClick: () {
-              context
-                  .read<AccountBloc>()
-                  .add(const AccountCurrentStepChanged('next'));
-              controller.nextPage(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.ease);
-            });
+        return Padding(
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+            child: CustomTextButton(
+                key: const Key('signing_agreement_tax_next_step_button'),
+                borderRadius: 30,
+                disable: state.disabledNextButton(),
+                buttonText: 'Next',
+                onClick: () {
+                  context
+                      .read<AccountBloc>()
+                      .add(const AccountCurrentStepChanged('next'));
+                  controller.nextPage(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.ease);
+                }));
       },
     );
   }

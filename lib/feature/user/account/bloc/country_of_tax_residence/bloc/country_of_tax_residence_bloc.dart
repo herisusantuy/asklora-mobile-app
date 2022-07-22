@@ -1,5 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../core/utils/util.dart';
 
 part 'country_of_tax_residence_event.dart';
 
@@ -21,6 +23,12 @@ class CountryOfTaxResidenceBloc
 
   _onTinNumberChange(
       TinNumberChanged event, Emitter<CountryOfTaxResidenceState> emit) {
-    emit(state.copyWith(tinNumber: event.tinNumber));
+    if (state.countryOfTaxResidence == 'HKG') {
+      emit(state.copyWith(
+          tinNumber: event.tinNumber,
+          isHkIdValid: isHkIdValid(event.tinNumber)));
+    } else {
+      emit(state.copyWith(tinNumber: event.tinNumber, isHkIdValid: true));
+    }
   }
 }
