@@ -1,16 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:convert';
+
+import 'package:dart_ipify/dart_ipify.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_onfido/flutter_onfido.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
+import '../../../../auth/sign_in/presentation/sign_in_success_screen.dart';
+import '../../../kyc/domain/onfido_result_request.dart';
+import '../../bloc/account_bloc.dart';
 import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
 import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
+import '../../bloc/review_information/review_information_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
 import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
@@ -24,26 +32,79 @@ class ReviewInformationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _basicInformation(),
-              _countryOfTaxResidence(),
-              _addressProof(),
-              _financialProfile(),
-              _disclosuresAffiliations(),
-              _signingTaskAgreement(),
-              _signingBrokerAgreement(),
-              _trustedContact(),
-              _riskDisclosure(),
-            ],
-          ),
-        )),
-        _nextButton()
-      ],
+    return BlocListener<AccountBloc, AccountState>(
+      listener: (context, state) async {
+        if (state is TaxInfoSubmitted) {
+          context.read<AccountBloc>().add(GetSdkToken());
+        } else if (state is OnfidoSdkToken) {
+          try {
+            FlutterOnfido.start(
+              config: OnfidoConfig(
+                sdkToken: state.token,
+                flowSteps: OnfidoFlowSteps(
+                  welcome: false,
+                  captureDocument: OnfidoCaptureDocumentStep(
+                      countryCode: OnfidoCountryCode.HKG,
+                      docType: OnfidoDocumentType.NATIONAL_IDENTITY_CARD),
+                  captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO),
+                ),
+              ),
+              iosAppearance: const OnfidoIOSAppearance(),
+            ).then((value) => context.read<AccountBloc>().add(
+                UpdateOnfidoResult(
+                    Reason.userCompleted.value, 'Onfido SDK', state.token)));
+          } on PlatformException {
+            context.read<AccountBloc>().add(UpdateOnfidoResult(
+                Reason.userExited.value, 'Onfido SDK', state.token));
+          } catch (e) {
+            context.read<AccountBloc>().add(UpdateOnfidoResult(
+                Reason.sdkError.value, 'Onfido SDK', state.token));
+          }
+        } else if (state is OnfidoResultUpdated) {
+          SignInSuccessScreen.openAndRemoveAllRoute(context);
+        } else {
+          switch (state.status) {
+            case GetAccountStatus.failure:
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(SnackBar(
+                    backgroundColor: Colors.red,
+                    content: CustomText(
+                      state.responseMessage,
+                    )));
+              break;
+            case GetAccountStatus.success:
+              context
+                  .read<AccountBloc>()
+                  .add(SubmitTaxInfo(await Ipify.ipv4()));
+              break;
+            default:
+              break;
+          }
+        }
+      },
+      child: Column(
+        children: [
+          Expanded(
+              child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _basicInformation(),
+                _countryOfTaxResidence(),
+                _addressProof(),
+                _financialProfile(),
+                _disclosuresAffiliations(),
+                _signingTaskAgreement(),
+                _signingBrokerAgreement(),
+                _trustedContact(),
+                _riskDisclosure(),
+              ],
+            ),
+          )),
+          _reviewInformationAgreement(),
+          _submitButton(context)
+        ],
+      ),
     );
   }
 
@@ -195,7 +256,7 @@ class ReviewInformationScreen extends StatelessWidget {
                         isChecked: state.isSigningAgreementChecked,
                         onChanged: (_) {}),
                     _spaceHeight(),
-                    if (state.customerSignature != null)
+                    if (state.customerSignature.isEmpty)
                       ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.memory(
@@ -248,7 +309,8 @@ class ReviewInformationScreen extends StatelessWidget {
                 builder: (context, state) => ExpansionTile(
                       title: const CustomText('Country of Tax Residence'),
                       children: [
-                        _customCard('Tax Residence', state.taxResidence),
+                        _customCard(
+                            'Tax Residence', state.countryNameOfTaxResidence),
                         _customCard('Country of Tax Residence',
                             state.countryOfTaxResidence),
                         _customCard('TIN Number', state.tinNumber),
@@ -282,17 +344,39 @@ class ReviewInformationScreen extends StatelessWidget {
         ),
       );
 
-  Widget _nextButton() => Padding(
-        key: const Key('next_button'),
-        padding: const EdgeInsets.only(top: 10.0),
-        child: CustomTextButton(
-            borderRadius: 30,
-            buttonText: 'Next',
-            disable: true,
-            onClick: () => controller.nextPage(
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.ease)),
+  Widget _reviewInformationAgreement() => Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: BlocBuilder<ReviewInformationBloc, BaseResponse<bool>>(
+          builder: (context, state) => CustomCheckbox(
+            checkboxKey: const Key('review_information_checkbox'),
+            onChanged: (value) => context
+                .read<ReviewInformationBloc>()
+                .add(ReviewInformationAgreementChanged(value!)),
+            isChecked: state.data!,
+            text:
+                'Given I am with all the information that I already filled in the previous page',
+          ),
+        ),
       );
+
+  Widget _submitButton(BuildContext context) =>
+      BlocBuilder<ReviewInformationBloc, BaseResponse<bool>>(
+          builder: (context, stateReviewInformation) =>
+              BlocBuilder<AccountBloc, AccountState>(
+                  buildWhen: (prev, current) => prev.status != current.status,
+                  builder: (context, state) => Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: CustomTextButton(
+                            key: const Key('submit_button'),
+                            borderRadius: 30,
+                            buttonText: 'Submit',
+                            isLoading: state.status ==
+                                GetAccountStatus.upgradingAccount,
+                            disable: !stateReviewInformation.data!,
+                            onClick: () async => context
+                                .read<AccountBloc>()
+                                .add(UpgradeAccount(await Ipify.ipv4()))),
+                      )));
 
   SizedBox _spaceHeight() => const SizedBox(
         height: 10,

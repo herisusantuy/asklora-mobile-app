@@ -1,18 +1,28 @@
-import 'package:dart_ipify/dart_ipify.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../kyc/domain/onfido_result_request.dart';
 import '../../kyc/domain/onfido_result_response.dart';
 import '../domain/get_account/get_account_response.dart';
+import '../domain/upgrade_account/agreement.dart';
+import '../domain/upgrade_account/contact.dart';
+import '../domain/upgrade_account/context.dart';
+import '../domain/upgrade_account/disclosures.dart';
+import '../domain/upgrade_account/identity.dart';
 import '../domain/upgrade_account/tax_info_request.dart';
+import '../domain/upgrade_account/trusted_contact.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
+import '../repository/signing_broker_agreement_repository.dart';
 import 'address_proof/bloc/address_proof_bloc.dart';
 import 'basic_information/bloc/basic_information_bloc.dart';
 import 'country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
+import 'disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
+import 'financial_profile/bloc/financial_profile_bloc.dart';
 import 'signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
+import 'trusted_contact/bloc/trusted_contact_bloc.dart';
 
 part 'account_event.dart';
 
@@ -24,10 +34,18 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   final CountryOfTaxResidenceBloc countryOfTaxResidenceBloc =
       CountryOfTaxResidenceBloc();
   final SigningBrokerAgreementBloc signingBrokerAgreementBloc =
-      SigningBrokerAgreementBloc();
+      SigningBrokerAgreementBloc(SigningBrokerAgreementRepository());
 
-  AccountBloc({required AccountRepository getAccountRepository})
-      : _accountRepository = getAccountRepository,
+  final FinancialProfileBloc financialProfileBloc = FinancialProfileBloc();
+  final TrustedContactBloc trustedContactBloc = TrustedContactBloc();
+  final DisclosureAffiliationBloc disclosureAffiliationBloc =
+      DisclosureAffiliationBloc();
+
+  AccountBloc({
+    required AccountRepository getAccountRepository,
+    required SecureStorage secureStorage,
+  })  : _accountRepository = getAccountRepository,
+        _secureStorage = secureStorage,
         super(const AccountState()) {
     on<GetAccount>(_onGetAccount);
     on<GetSdkToken>(_onGetOnfidoSdkToken);
@@ -38,6 +56,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   final AccountRepository _accountRepository;
+  final SecureStorage _secureStorage;
 
   _onGetAccount(GetAccount event, Emitter<AccountState> emit) async {
     try {
@@ -57,19 +76,124 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
+  List<Agreement> _generateAgreementList(String ipAddress) => [
+        Agreement(
+            agreement: 'MA',
+            ipAddress: ipAddress,
+            signature:
+                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+        Agreement(
+            agreement: 'AA',
+            ipAddress: ipAddress,
+            signature:
+                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+        Agreement(
+            agreement: 'CA',
+            ipAddress: ipAddress,
+            signature:
+                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}')
+      ];
+
+  List<Context> _generateContextList() {
+    List<Context> contextList = [];
+    if (disclosureAffiliationBloc.state.isSeniorExecutive ?? false) {
+      contextList.add(Context(
+        contextType: 'CONTROLLED_FIRM',
+        companyName:
+            disclosureAffiliationBloc.state.controlledPersonCompanyName,
+        companyStreetAddress:
+            disclosureAffiliationBloc.state.controlledPersonCompanyAddress,
+        companyCity:
+            disclosureAffiliationBloc.state.controlledPersonCompanyCity,
+        companyState:
+            disclosureAffiliationBloc.state.controlledPersonCompanyState,
+        companyCountry:
+            disclosureAffiliationBloc.state.controlledPersonCompanyCountry,
+        companyComplianceEmail:
+            disclosureAffiliationBloc.state.controlledPersonCompanyEmail,
+      ));
+    }
+    if (disclosureAffiliationBloc.state.isAffiliated ?? false) {
+      contextList.add(Context(
+        contextType: 'AFFILIATE_FIRM',
+        companyName: disclosureAffiliationBloc.state.affiliateCompanyName,
+        companyStreetAddress:
+            disclosureAffiliationBloc.state.affiliateCompanyAddress,
+        companyCity: disclosureAffiliationBloc.state.affiliateCompanyCity,
+        companyState: disclosureAffiliationBloc.state.affiliateCompanyState,
+        companyCountry: disclosureAffiliationBloc.state.affiliateCompanyCountry,
+        companyComplianceEmail:
+            disclosureAffiliationBloc.state.affiliateCompanyEmail,
+      ));
+    }
+    if (disclosureAffiliationBloc.state.isFamilyMember ?? false) {
+      contextList.add(Context(
+        contextType: 'IMMEDIATE_FAMILY_EXPOSED',
+        givenName: disclosureAffiliationBloc.state.firstNameOfFamilyMember,
+        familyName: disclosureAffiliationBloc.state.lastNameOfFamilyMember,
+      ));
+    }
+    return contextList;
+  }
+
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
-    var email = await SecureStorage().readSecureData('email');
+    var email = await _secureStorage.readSecureData('email');
+
     try {
       emit(state.copyWith(status: GetAccountStatus.upgradingAccount));
-
-      var request = state.upgradeAccountRequest;
-
-      // Replace the mock email with real email in mock request
-      // Set contact object
-      request?.contact?.emailAddress = email;
-
-      await _accountRepository.upgradeAccount(request!);
-
+      UpgradeAccountRequest request = UpgradeAccountRequest(
+        contact: Contact(
+            emailAddress: email,
+            phoneNumber: basicInformationBloc.state.phoneNumber,
+            streetAddress: addressProofBloc.state.residentialAddress,
+            unit: addressProofBloc.state.unitNumber,
+            city: addressProofBloc.state.city,
+            state: '',
+            postalCode: '',
+            country: addressProofBloc.state.country),
+        identity: Identity(
+            givenName: basicInformationBloc.state.firstName,
+            middleName: basicInformationBloc.state.middleName,
+            familyName: basicInformationBloc.state.lastName,
+            dateOfBirth:
+                parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
+            taxId: countryOfTaxResidenceBloc.state.tinNumber,
+            taxIdType: 'NOT_SPECIFIED',
+            countryOfCitizenship:
+                basicInformationBloc.state.countryOfCitizenship,
+            countryOfBirth: null,
+            countryOfTaxResidence:
+                countryOfTaxResidenceBloc.state.countryOfTaxResidence,
+            fundingSource:
+                fundingSourceValue(financialProfileBloc.state.fundingSource)),
+        trustedContact: TrustedContact(
+            givenName: trustedContactBloc.state.firstName,
+            familyName: trustedContactBloc.state.lastName,
+            email: trustedContactBloc.state.emailAddress,
+            phone: trustedContactBloc.state.phoneNumber),
+        disclosures: Disclosures(
+            isControlPerson: disclosureAffiliationBloc.state.isSeniorExecutive,
+            isAffiliatedExchangeOrFinra:
+                disclosureAffiliationBloc.state.isAffiliated,
+            isPoliticallyExposed:
+                disclosureAffiliationBloc.state.isSeniorPolitical,
+            immediateFamilyExposed:
+                disclosureAffiliationBloc.state.isFamilyMember,
+            employmentStatus: financialProfileBloc.state.employmentStatus.name,
+            employerName: financialProfileBloc.state.employer.isNotEmpty
+                ? financialProfileBloc.state.employer
+                : null,
+            employerAddress:
+                financialProfileBloc.state.employerAddress.isNotEmpty
+                    ? financialProfileBloc.state.employerAddress
+                    : null,
+            employmentPosition: financialProfileBloc.state.occupation.isNotEmpty
+                ? financialProfileBloc.state.occupation
+                : null,
+            context: _generateContextList()),
+        agreements: _generateAgreementList(event.ipAddress),
+      );
+      await _accountRepository.upgradeAccount(request);
       emit(
         state.copyWith(
           status: GetAccountStatus.success,
@@ -86,12 +210,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   _onSubmitTaxInfo(SubmitTaxInfo event, Emitter<AccountState> emit) async {
     try {
       emit(state.copyWith(status: GetAccountStatus.submittingTaxInfo));
-      String formattedDateOfBirth =
-          '${DateTime.parse(basicInformationBloc.state.dateOfBirth).year}-${DateTime.parse(basicInformationBloc.state.dateOfBirth).month}-${DateTime.parse(basicInformationBloc.state.dateOfBirth).day}';
-      DateTime date = DateTime.now();
-      String formattedDate =
-          '${DateTime.parse(date.toString()).year}-${DateTime.parse(date.toString()).month}-${DateTime.parse(date.toString()).day}';
-      final idAddress = await Ipify.ipv4();
       TaxInfoRequest taxInfoReq = TaxInfoRequest(
           fullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
@@ -103,17 +221,16 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           mailingAddressCityState: addressProofBloc.state.mailCity,
           mailingAddressCountry: addressProofBloc.state.mailCountry,
           foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
-          dateOfBirth: formattedDateOfBirth,
+          dateOfBirth:
+              parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
           signature:
               'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
-          date: formattedDate,
+          date: parseDateFormatYYmmdd(DateTime.now().toString()),
           signerFullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
-          ipAddress: idAddress);
+          ipAddress: event.ipAddress);
       await _accountRepository.submitTaxInfo(taxInfoReq);
-      emit(state.copyWith(
-          status: GetAccountStatus.success,
-          responseMessage: 'Tax info submitted successfully!.'));
+      emit(TaxInfoSubmitted());
     } catch (e) {
       emit(state.copyWith(
           status: GetAccountStatus.failure,
@@ -202,4 +319,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           responseMessage: 'Could not update the Onfido result!'));
     }
   }
+
+  String parseDateFormatYYmmdd(String date) =>
+      DateFormat('yyyy-MM-dd').format(DateTime.parse(date));
 }

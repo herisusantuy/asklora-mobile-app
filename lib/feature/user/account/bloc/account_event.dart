@@ -10,9 +10,9 @@ abstract class AccountEvent extends Equatable {
 class GetAccount extends AccountEvent {}
 
 class UpgradeAccount extends AccountEvent {
-  final UpgradeAccountRequest? upgradeAccountRequest;
+  final String ipAddress;
 
-  const UpgradeAccount(this.upgradeAccountRequest);
+  const UpgradeAccount(this.ipAddress);
 }
 
 class GetSdkToken extends AccountEvent {}
@@ -36,4 +36,8 @@ class UpdateOnfidoResult extends AccountEvent {
   const UpdateOnfidoResult(this.outcome, this.reason, this.token);
 }
 
-class SubmitTaxInfo extends AccountEvent {}
+class SubmitTaxInfo extends AccountEvent {
+  final String ipAddress;
+
+  const SubmitTaxInfo(this.ipAddress);
+}

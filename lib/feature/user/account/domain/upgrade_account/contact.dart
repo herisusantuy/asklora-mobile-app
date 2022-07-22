@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'contact.g.dart';
 
 @JsonSerializable()
-class Contact {
+class Contact extends Equatable {
   @JsonKey(name: 'email_address')
   String? emailAddress;
 
@@ -60,4 +61,16 @@ class Contact {
       country: country ?? this.country,
     );
   }
+
+  @override
+  List<Object> get props => [
+        emailAddress ?? '',
+        phoneNumber ?? '',
+        streetAddress ?? '',
+        unit ?? '',
+        city ?? '',
+        state ?? '',
+        postalCode ?? '',
+        country ?? ''
+      ];
 }

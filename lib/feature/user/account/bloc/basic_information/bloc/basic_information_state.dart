@@ -1,7 +1,5 @@
 part of 'basic_information_bloc.dart';
 
-enum Gender { female, male, other, unknown }
-
 class BasicInformationState extends Equatable {
   const BasicInformationState({
     this.firstName = '',
@@ -13,9 +11,11 @@ class BasicInformationState extends Equatable {
     this.countryCode = '',
     this.phoneNumber = '',
     this.countryOfCitizenship = '',
+    this.countryNameOfCitizenship = '',
     this.isHongKongPermanentResident,
     this.idNumber = '',
     this.isUnitedStateResident,
+    this.isHkIdValid = false,
   });
 
   final String firstName;
@@ -27,9 +27,11 @@ class BasicInformationState extends Equatable {
   final String countryCode;
   final String phoneNumber;
   final String countryOfCitizenship;
+  final String countryNameOfCitizenship;
   final bool? isHongKongPermanentResident;
   final String idNumber;
   final bool? isUnitedStateResident;
+  final bool isHkIdValid;
 
   @override
   List<Object?> get props {
@@ -43,9 +45,11 @@ class BasicInformationState extends Equatable {
       countryCode,
       phoneNumber,
       countryOfCitizenship,
+      countryNameOfCitizenship,
       isHongKongPermanentResident,
       idNumber,
       isUnitedStateResident,
+      isHkIdValid,
     ];
   }
 
@@ -59,9 +63,11 @@ class BasicInformationState extends Equatable {
     String? countryCode,
     String? phoneNumber,
     String? countryOfCitizenship,
+    String? countryNameOfCitizenship,
     bool? isHongKongPermanentResident,
     String? idNumber,
     bool? isUnitedStateResident,
+    bool? isHkIdValid,
   }) {
     return BasicInformationState(
       firstName: firstName ?? this.firstName,
@@ -73,26 +79,29 @@ class BasicInformationState extends Equatable {
       countryCode: countryCode ?? this.countryCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       countryOfCitizenship: countryOfCitizenship ?? this.countryOfCitizenship,
+      countryNameOfCitizenship:
+          countryNameOfCitizenship ?? this.countryNameOfCitizenship,
       isHongKongPermanentResident:
           isHongKongPermanentResident ?? this.isHongKongPermanentResident,
       idNumber: idNumber ?? this.idNumber,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
+      isHkIdValid: isHkIdValid ?? this.isHkIdValid,
     );
   }
 
   bool enableNextButton() {
     if (firstName.isNotEmpty &&
-        middleName.isNotEmpty &&
         lastName.isNotEmpty &&
-        chineseName.isNotEmpty &&
         gender.isNotEmpty &&
         dateOfBirth.isNotEmpty &&
         countryCode.isNotEmpty &&
         phoneNumber.isNotEmpty &&
-        countryOfCitizenship.isNotEmpty) {
+        countryOfCitizenship.isNotEmpty &&
+        isHongKongPermanentResident != null &&
+        isUnitedStateResident != null) {
       if (isHongKongPermanentResident == true) {
-        if (idNumber.isNotEmpty) {
+        if (idNumber.isNotEmpty && isHkIdValid) {
           return true;
         } else {
           return false;

@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/utils/util.dart';
+
 part 'basic_information_event.dart';
 
 part 'basic_information_state.dart';
@@ -21,7 +23,7 @@ class BasicInformationBloc
     on<BasicInformationPhoneNumberChanged>(
         _onBasicInformationPhoneNumberChange);
     on<BasicInformationCountryOfCitizenshipChanged>(
-        _onBasicInformationCountryOfCitizenshipChage);
+        _onBasicInformationCountryOfCitizenshipChange);
     on<BasicInformationIsHongKongPermanentResidentChanged>(
         _onIsHongKongPermanentResidentChange);
     on<BasicInformationIdNumberChanged>(_onIdNumberChange);
@@ -61,7 +63,9 @@ class BasicInformationBloc
 
   _onBasicInformationCountryCodeChange(BasicInformationCountryCodeChanged event,
       Emitter<BasicInformationState> emit) {
-    emit(state.copyWith(countryCode: event.countryCode));
+    emit(state.copyWith(
+      countryCode: event.countryCode,
+    ));
   }
 
   _onBasicInformationPhoneNumberChange(BasicInformationPhoneNumberChanged event,
@@ -69,10 +73,12 @@ class BasicInformationBloc
     emit(state.copyWith(phoneNumber: event.phoneNumber));
   }
 
-  _onBasicInformationCountryOfCitizenshipChage(
+  _onBasicInformationCountryOfCitizenshipChange(
       BasicInformationCountryOfCitizenshipChanged event,
       Emitter<BasicInformationState> emit) {
-    emit(state.copyWith(countryOfCitizenship: event.countryOfCitizenship));
+    emit(state.copyWith(
+        countryOfCitizenship: event.countryOfCitizenship,
+        countryNameOfCitizenship: event.countryNameOfCitizenship));
   }
 
   _onIsHongKongPermanentResidentChange(
@@ -84,7 +90,8 @@ class BasicInformationBloc
 
   _onIdNumberChange(BasicInformationIdNumberChanged event,
       Emitter<BasicInformationState> emit) {
-    emit(state.copyWith(idNumber: event.idNumber));
+    emit(state.copyWith(
+        idNumber: event.idNumber, isHkIdValid: isHkIdValid(event.idNumber)));
   }
 
   _onIsUnitedStateResidentChange(

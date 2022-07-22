@@ -4,6 +4,8 @@
 
 import 'dart:async' as _i9;
 
+import 'package:asklora_mobile_app/core/utils/storage/secure_storage.dart'
+    as _i12;
 import 'package:asklora_mobile_app/feature/user/account/domain/account_api_client.dart'
     as _i11;
 import 'package:asklora_mobile_app/feature/user/account/domain/get_account/get_account_response.dart'
@@ -133,4 +135,33 @@ class MockAccountApiClient extends _i1.Mock implements _i11.AccountApiClient {
               returnValue: Future<_i7.Response<dynamic>>.value(
                   _FakeResponse_5<dynamic>()))
           as _i9.Future<_i7.Response<dynamic>>);
+}
+
+/// A class which mocks [SecureStorage].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
+  MockSecureStorage() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i9.Future<void> writeSecureData(String? key, String? value) =>
+      (super.noSuchMethod(Invocation.method(#writeSecureData, [key, value]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i9.Future<void>);
+  @override
+  _i9.Future<String?> readSecureData(String? key) =>
+      (super.noSuchMethod(Invocation.method(#readSecureData, [key]),
+          returnValue: Future<String?>.value()) as _i9.Future<String?>);
+  @override
+  _i9.Future<void> deleteSecureData(String? key) =>
+      (super.noSuchMethod(Invocation.method(#deleteSecureData, [key]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i9.Future<void>);
+  @override
+  _i9.Future<void> deleteAllSecureData() =>
+      (super.noSuchMethod(Invocation.method(#deleteAllSecureData, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i9.Future<void>);
 }

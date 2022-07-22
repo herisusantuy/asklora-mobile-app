@@ -24,6 +24,7 @@ class AddressProofState extends Equatable {
     this.residentialAddress = '',
     this.city = '',
     this.country = '',
+    this.countryName = '',
     this.isSameMailingAddress,
     this.mailUnitNumber = '',
     this.mailResidentialAddress = '',
@@ -35,6 +36,7 @@ class AddressProofState extends Equatable {
   final String residentialAddress;
   final String city;
   final String country;
+  final String countryName;
   final bool? isSameMailingAddress;
   final String mailUnitNumber;
   final String mailResidentialAddress;
@@ -46,6 +48,7 @@ class AddressProofState extends Equatable {
     String? residentialAddress,
     String? city,
     String? country,
+    String? countryName,
     bool? isSameMailingAddress,
     String? mailUnitNumber,
     String? mailResidentialAddress,
@@ -57,6 +60,7 @@ class AddressProofState extends Equatable {
       residentialAddress: residentialAddress ?? this.residentialAddress,
       city: city ?? this.city,
       country: country ?? this.country,
+      countryName: countryName ?? this.countryName,
       isSameMailingAddress: isSameMailingAddress ?? this.isSameMailingAddress,
       mailUnitNumber: mailUnitNumber ?? this.mailUnitNumber,
       mailResidentialAddress:
@@ -73,6 +77,7 @@ class AddressProofState extends Equatable {
       residentialAddress,
       city,
       country,
+      countryName,
       isSameMailingAddress,
       mailUnitNumber,
       mailResidentialAddress,

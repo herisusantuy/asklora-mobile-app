@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:signature/signature.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+import '../../../repository/signing_broker_agreement_repository.dart';
 
 part 'signing_broker_agreement_event.dart';
 
@@ -9,7 +9,10 @@ part 'signing_broker_agreement_state.dart';
 
 class SigningBrokerAgreementBloc
     extends Bloc<SigningBrokerAgreementEvent, SigningBrokerAgreementState> {
-  SigningBrokerAgreementBloc() : super(const SigningBrokerAgreementState()) {
+  SigningBrokerAgreementBloc(
+      SigningBrokerAgreementRepository signingBrokerAgreementRepository)
+      : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
+        super(const SigningBrokerAgreementState()) {
     on<AlpacaCustomerAgreementOpened>(_onAlpacaCustomerAgreementOpened);
     on<UnderstoodAlpacaCustomAgreementChecked>(
         _onUnderstoodAlpacaCustomAgreementChecked);
@@ -18,11 +21,13 @@ class SigningBrokerAgreementBloc
     on<CustomerSignatureReset>(_onCustomerSignatureReset);
   }
 
+  final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
+
   _onAlpacaCustomerAgreementOpened(AlpacaCustomerAgreementOpened event,
       Emitter<SigningBrokerAgreementState> emit) async {
-    final Uri url = Uri.parse(
+    await _signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
         'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf');
-    if (!await launchUrl(url)) throw 'Could not launch $url';
+
     emit(state.copyWith(
         isAlpacaCustomerAgreementOpened:
             event.isAlpacaCustomerAgreementOpened));

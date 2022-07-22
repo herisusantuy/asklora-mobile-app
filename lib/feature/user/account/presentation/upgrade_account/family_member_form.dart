@@ -1,4 +1,3 @@
-import 'package:file/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -30,6 +29,7 @@ class FamilyMemberForm extends StatelessWidget {
             previous.isFamilyMember != current.isFamilyMember,
         builder: (context, state) {
           return CustomTextInput(
+            key: const Key('first_name_of_family_form_input'),
             labelText: 'First Name',
             onChanged: (value) => context
                 .read<DisclosureAffiliationBloc>()
@@ -50,6 +50,7 @@ class FamilyMemberForm extends StatelessWidget {
             previous.isFamilyMember != current.isFamilyMember,
         builder: (context, state) {
           return CustomTextInput(
+            key: const Key('last_name_of_family_form_input'),
             labelText: 'Last Name',
             onChanged: (value) => context
                 .read<DisclosureAffiliationBloc>()

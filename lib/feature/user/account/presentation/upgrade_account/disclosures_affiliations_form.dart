@@ -54,12 +54,12 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isAffiliated != current.isAffiliated,
         builder: (context, state) {
-          String key = 'question_1';
+          const String key = 'question_1';
           return Column(
             children: [
               QuestionWidget(
                 keyOption: key,
-                key: Key(key),
+                key: const Key(key),
                 questionText:
                     '1. Affiliated or work with a US registered broker-dealer or FINRA?',
                 padding: const EdgeInsets.only(top: 10),
@@ -82,12 +82,12 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isSeniorExecutive != current.isSeniorExecutive,
         builder: (context, state) {
-          String key = 'question_2';
+          const String key = 'question_2';
           return Column(
             children: [
               QuestionWidget(
                 keyOption: key,
-                key: Key(key),
+                key: const Key(key),
                 questionText:
                     '2. Senior executive at or a 10% or greater shareholder of a publicly traded company?',
                 padding: const EdgeInsets.only(top: 10),
@@ -114,10 +114,10 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isSeniorPolitical != current.isSeniorPolitical,
         builder: (context, state) {
-          String key = 'question_3';
+          const String key = 'question_3';
           return QuestionWidget(
               keyOption: key,
-              key: Key(key),
+              key: const Key(key),
               questionText: '3. I am a senior political figure?',
               padding: const EdgeInsets.only(top: 10),
               options: const ['Yes', 'No'],
@@ -138,12 +138,12 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isFamilyMember != current.isFamilyMember,
         builder: (context, state) {
-          String key = 'question_4';
+          const String key = 'question_4';
           return Column(
             children: [
               QuestionWidget(
                 keyOption: key,
-                key: Key(key),
+                key: const Key(key),
                 questionText:
                     '4. I am a family member or relative of senior political figure?',
                 padding: const EdgeInsets.only(top: 10),
@@ -166,13 +166,13 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             previous.isAssociates != current.isAssociates ||
             previous.nameOfAffiliatedPerson != current.nameOfAffiliatedPerson,
         builder: (context, state) {
-          String key = 'question_5';
+          const String key = 'question_5';
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               QuestionWidget(
                 keyOption: key,
-                key: Key(key),
+                key: const Key(key),
                 questionText:
                     '5. I am affiliated with any director, officer, or employee of LORA Technologies Limited or its associates?',
                 padding: const EdgeInsets.only(top: 10),
@@ -188,6 +188,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                   child: CustomTextInput(
+                      key: const Key('name_of_affiliated_person_input'),
                       labelText: 'Name of Affiliated Person',
                       onChanged: (value) => context
                           .read<DisclosureAffiliationBloc>()
@@ -204,13 +205,13 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
             previous.isOwner != current.isOwner ||
             previous.nameOfJointAccount != current.nameOfJointAccount,
         builder: (context, state) {
-          String key = 'question_6';
+          const String key = 'question_6';
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               QuestionWidget(
                 keyOption: key,
-                key: Key(key),
+                key: const Key(key),
                 questionText:
                     '6. I am the sole beneficial owner of the account?',
                 padding: const EdgeInsets.only(top: 10),
@@ -222,10 +223,11 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                     .read<DisclosureAffiliationBloc>()
                     .add(QuestionNo6Changed(_isQuestionAnswered(value))),
               ),
-              if (state.isOwner == true)
+              if (state.isOwner == false)
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                   child: CustomTextInput(
+                      key: const Key('name_of_joint_account_input'),
                       labelText: 'Name of Joint Account',
                       onChanged: (value) => context
                           .read<DisclosureAffiliationBloc>()
@@ -259,10 +261,10 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isEmployee != current.isEmployee,
         builder: (context, state) {
-          String key = 'question_7';
+          const String key = 'question_7';
           return QuestionWidget(
             keyOption: key,
-            key: Key(key),
+            key: const Key(key),
             questionText:
                 '7. I am a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission?',
             padding: const EdgeInsets.only(top: 10),
@@ -283,7 +285,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
     return BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.only(top: 20.0),
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: CustomTextButton(
               key: const Key('disclosures_affiliations_next_step_button'),
               borderRadius: 30,

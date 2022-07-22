@@ -31,8 +31,9 @@ class SignInSuccessScreen extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                AccountBloc(getAccountRepository: AccountRepository()),
+            create: (context) => AccountBloc(
+                getAccountRepository: AccountRepository(),
+                secureStorage: SecureStorage()),
           ),
           BlocProvider(
             create: (context) => SignOutBloc(
@@ -65,7 +66,7 @@ class SignInSuccessScreen extends StatelessWidget {
                   if (state is OnfidoSdkToken) {
                     // TODO: Refactor this into Widget and Bloc
                     try {
-                      var result = await FlutterOnfido.start(
+                      await FlutterOnfido.start(
                         config: OnfidoConfig(
                           sdkToken: state.token,
                           flowSteps: OnfidoFlowSteps(
@@ -158,21 +159,6 @@ class SignInSuccessScreen extends StatelessWidget {
             isLoading: state.status == ResponseState.loading,
             onClick: () =>
                 context.read<SignOutBloc>().add(const SignOutSubmitted()),
-            borderRadius: 5,
-          );
-        },
-      );
-
-  Widget _upgradeUserAccount() => BlocBuilder<AccountBloc, AccountState>(
-        builder: (context, state) {
-          return CustomTextButton(
-            buttonText: 'Upgrade Account',
-            isLoading: state.status == GetAccountStatus.upgradingAccount,
-            disable: state.status == GetAccountStatus.upgradingAccount,
-            onClick: () async {
-              var email = await SecureStorage().readSecureData('email');
-              // context.read<AccountBloc>().add(UpgradeAccount(email ?? ''));
-            },
             borderRadius: 5,
           );
         },

@@ -1,6 +1,8 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
@@ -78,26 +80,29 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _countryInput(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: CustomTextInput(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: BlocBuilder<AddressProofBloc, AddressProofState>(
+        builder: (context, state) => CustomCountryPicker(
           key: const Key('account_country_input'),
-          labelText: 'Country',
-          hintText: 'Enter your Country',
-          onChanged: (country) => context
-              .read<AddressProofBloc>()
-              .add(AddressProofCountryChanged(country)),
+          title: 'Country',
+          initialValue: state.countryName,
+          onSelect: (Country country) => context.read<AddressProofBloc>().add(
+              AddressProofCountryChanged(
+                  country.countryCodeIso3, country.name)),
         ),
-      );
+      ));
 
   Widget _mailAddressCheck(ScrollController controller) =>
       BlocBuilder<AddressProofBloc, AddressProofState>(
         buildWhen: (previous, current) =>
             previous.isSameMailingAddress != current.isSameMailingAddress,
         builder: (BuildContext context, state) {
+          const String key = 'account_is_same_mailing_address_select';
           return Column(
             children: [
               QuestionWidget(
-                key: const Key('account_is_same_mailing_address_select'),
+                keyOption: key,
+                key: const Key(key),
                 padding: const EdgeInsets.only(top: 10),
                 questionText:
                     'My mailing address and residential address is the same',
@@ -180,7 +185,7 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _nextButton() => Padding(
-        padding: const EdgeInsets.only(top: 10.0),
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: BlocBuilder<AddressProofBloc, AddressProofState>(
           buildWhen: (previous, current) =>
               previous.enableNextButton() != current.enableNextButton(),
