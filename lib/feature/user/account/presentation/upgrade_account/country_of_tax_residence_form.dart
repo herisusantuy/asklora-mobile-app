@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_country_picker.dart';
@@ -60,8 +61,11 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
             key: const Key('account_tin_number_input'),
             labelText: 'TIN Number',
             hintText: 'Enter your TIN number',
-            textInputFormatterList: [UpperCaseTextFormatter()],
-            maxLength: state.countryOfTaxResidence == 'HKG' ? 9 : 15,
+            textInputFormatterList: [
+              UpperCaseTextFormatter(),
+              LengthLimitingTextInputFormatter(
+                  state.countryOfTaxResidence == 'HKG' ? 9 : 15)
+            ],
             errorText: state.isHkIdValid
                 ? ''
                 : _idNumberErrorText(state.countryOfTaxResidence),

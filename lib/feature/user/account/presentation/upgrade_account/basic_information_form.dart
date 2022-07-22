@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_country_picker.dart';
@@ -224,9 +225,11 @@ class BasicInformationForm extends StatelessWidget {
           child: CustomTextInput(
               key: const Key('account_id_number_input'),
               labelText: 'ID Number *',
-              textInputFormatterList: [UpperCaseTextFormatter()],
+              textInputFormatterList: [
+                UpperCaseTextFormatter(),
+                LengthLimitingTextInputFormatter(9)
+              ],
               errorText: state.isHkIdValid ? '' : 'HKID is not valid.',
-              maxLength: 9,
               initialValue: state.idNumber,
               onChanged: (value) => context
                   .read<BasicInformationBloc>()
