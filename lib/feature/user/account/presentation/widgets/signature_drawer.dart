@@ -31,12 +31,14 @@ class SignatureDrawer extends StatelessWidget {
           children: [
             Expanded(
               child: CustomTextButton(
+                key: const Key('accept_signature_button'),
                 buttonText: 'Accept',
                 onClick: onSubmit,
               ),
             ),
             Expanded(
               child: CustomTextButton(
+                key: const Key('reset_signature_button'),
                 buttonText: 'Reset',
                 onClick: onReset,
               ),
