@@ -182,7 +182,7 @@ class AddressProofForm extends StatelessWidget {
       );
 
   Widget _nextButton() => Padding(
-        padding: const EdgeInsets.only(top: 10.0),
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: BlocBuilder<AddressProofBloc, AddressProofState>(
           buildWhen: (previous, current) =>
               previous.enableNextButton() != current.enableNextButton(),

@@ -215,7 +215,7 @@ class FinancialProfileForm extends StatelessWidget {
           previous.enableNextButton() != current.enableNextButton(),
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.only(top: 10.0),
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: CustomTextButton(
               disable: !state.enableNextButton(),
               borderRadius: 30,

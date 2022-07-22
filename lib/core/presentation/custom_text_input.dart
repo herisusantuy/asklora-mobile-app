@@ -35,6 +35,7 @@ class CustomTextInput extends StatelessWidget {
       decoration: InputDecoration(
           border: const OutlineInputBorder(),
           labelText: labelText,
+          counterText: '',
           hintText: hintText,
           errorText: errorText.isEmpty ? null : errorText),
       onChanged: (str) => onChanged(str),

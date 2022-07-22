@@ -149,7 +149,7 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
       BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.only(top: 10.0),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
             child: CustomTextButton(
               borderRadius: 30,
               buttonText: 'Next',
