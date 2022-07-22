@@ -15,6 +15,7 @@ import '../domain/upgrade_account/tax_info_request.dart';
 import '../domain/upgrade_account/trusted_contact.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
+import '../repository/signing_broker_agreement_repository.dart';
 import 'address_proof/bloc/address_proof_bloc.dart';
 import 'basic_information/bloc/basic_information_bloc.dart';
 import 'country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
@@ -33,7 +34,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   final CountryOfTaxResidenceBloc countryOfTaxResidenceBloc =
       CountryOfTaxResidenceBloc();
   final SigningBrokerAgreementBloc signingBrokerAgreementBloc =
-      SigningBrokerAgreementBloc();
+      SigningBrokerAgreementBloc(SigningBrokerAgreementRepository());
+
   final FinancialProfileBloc financialProfileBloc = FinancialProfileBloc();
   final TrustedContactBloc trustedContactBloc = TrustedContactBloc();
   final DisclosureAffiliationBloc disclosureAffiliationBloc =

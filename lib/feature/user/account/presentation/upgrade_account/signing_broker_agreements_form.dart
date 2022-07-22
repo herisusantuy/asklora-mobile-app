@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -53,6 +52,7 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: CustomTextButton(
+              key: const Key('alpaca_customer_agreement_button'),
               borderRadius: 30,
               buttonText: 'Alpaca Customer Agreement',
               onClick: () => context
@@ -72,6 +72,8 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                 current.isUnderstoodAlpacaCustomAgreementChecked,
         builder: (context, state) {
           return CustomCheckbox(
+            checkboxKey: const Key('signing_broker_agreement_checkbox_1_value'),
+            key: const Key('signing_broker_agreement_checkbox_1'),
             padding: const EdgeInsets.only(top: 10),
             text:
                 'I have read, understood, and agree to be bound by Alpaca Securities LLC and LORA Technologies, Limited account terms, and all other terms, disclosures and disclaimers applicable to me, as referenced in the Alpaca Customer Agreement. I also acknowledge that the Alpaca Customer Agreement contains a pre-dispute arbitration clause in Section 42.',
@@ -92,6 +94,8 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                 current.isSigningAgreementChecked,
         builder: (context, state) {
           return CustomCheckbox(
+            checkboxKey: const Key('signing_broker_agreement_checkbox_2_value'),
+            key: const Key('signing_broker_agreement_checkbox_2'),
             padding: const EdgeInsets.only(top: 10),
             text:
                 'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Application Agreement.',
@@ -115,6 +119,7 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                 const CustomText('Customer Signature: '),
                 if (!state.isSignatureDrew)
                   SignatureDrawer(
+                      key: const Key('customer_signature_drawer'),
                       signatureController: _signatureController,
                       onSubmit: () async {
                         context.read<SigningBrokerAgreementBloc>().add(
@@ -129,14 +134,17 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         child: Image.memory(
                             base64Decode(state.customerSignature),
+                            key: const Key('customer_signature_png'),
                             height: 200),
                       ),
                       CustomTextButton(
+                          key: const Key('clear_signature_button'),
                           buttonText: 'Reset Signature',
                           onClick: () {
                             _signatureController.clear();
-                            context.read<SigningBrokerAgreementBloc>().add(
-                                CustomerSignatureReset(_signatureController));
+                            context
+                                .read<SigningBrokerAgreementBloc>()
+                                .add(const CustomerSignatureReset());
                           })
                     ],
                   ),
@@ -151,6 +159,7 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextButton(
+              key: const Key('signing_broker_agreement_next_step_button'),
               borderRadius: 30,
               buttonText: 'Next',
               disable: state.disabledNextButton(),
