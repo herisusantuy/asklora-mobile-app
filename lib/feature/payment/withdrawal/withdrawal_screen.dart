@@ -1,38 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/withdraw_bloc.dart';
+import 'bloc/withdrawal_bloc.dart';
+import 'withdrawal_bank_detail/bloc/withdrawal_bank_detail_bloc.dart';
 import 'withdrawal_bank_detail/presentation/withdrawal_bank_detail_screen.dart';
 import 'withdrawal_welcome_screen/presentation/withdrawal_welcome_screen.dart';
 
-class WithdrawScreen extends StatelessWidget {
-  static const String route = '/withdraw_screen';
+class WithdrawalScreen extends StatelessWidget {
+  static const String route = '/withdrawal_screen';
 
-  const WithdrawScreen({Key? key}) : super(key: key);
+  const WithdrawalScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => WithdrawBloc(),
+          create: (_) => WithdrawalBloc(),
+        ),
+        BlocProvider(
+          create: (_) => WithdrawalBankDetailBloc(),
         ),
       ],
       child: Scaffold(
         backgroundColor: Colors.grey[300],
-        body: BlocBuilder<WithdrawBloc, WithdrawState>(
-          builder: (context, state) => pages(state.withdrawPages),
+        body: BlocBuilder<WithdrawalBloc, WithdrawalState>(
+          builder: (context, state) => pages(state.withdrawalPages),
         ),
       ),
     );
   }
 
-  Widget pages(WithdrawPages withdrawPages) {
+  Widget pages(WithdrawalPages withdrawPages) {
     switch (withdrawPages) {
-      case WithdrawPages.welcome:
+      case WithdrawalPages.welcome:
         return const WithdrawalWelcomeScreen();
-      case WithdrawPages.bankDetail:
+      case WithdrawalPages.bankDetail:
         return const WithdrawalBankDetailScreen();
+      default:
+        return const SizedBox.shrink();
     }
   }
 
