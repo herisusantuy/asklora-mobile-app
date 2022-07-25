@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../core/presentation/custom_text.dart';
 import '../../../core/presentation/custom_text_button.dart';
-import 'deposit_screen_1/deposit_method.dart';
+import 'deposit_method.dart';
 
-class DepositScreen extends StatelessWidget {
-  const DepositScreen({Key? key}) : super(key: key);
+class DepositWelcomeScreen extends StatelessWidget {
+  const DepositWelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,5 +76,5 @@ class DepositScreen extends StatelessWidget {
       );
 
   static void open(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (_) => const DepositScreen()));
+      context, MaterialPageRoute(builder: (_) => const DepositWelcomeScreen()));
 }

@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/deposit/presentation/deposit_screen.dart';
+import 'package:asklora_mobile_app/feature/deposit/presentation/deposit_welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,7 +9,7 @@ void main() {
     Future<void> _buildDepositWelcomeScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: const DepositScreen(),
+        home: const DepositWelcomeScreen(),
         navigatorObservers: [mockObserver],
       ));
     }
