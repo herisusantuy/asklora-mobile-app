@@ -37,6 +37,8 @@ class LoggingInterceptor extends Interceptor {
     _logPrint('$err');
     if (err.response != null) {
       _printKeyValue('REDIRECT', err.response?.realUri ?? '');
+      _logPrint('HEADERS:');
+      err.response?.headers.forEach((key, v) => _printKeyValue(' - $key', v));
       _logPrint('BODY:');
       _printAll(err.response?.data.toString());
     }
@@ -55,6 +57,8 @@ class LoggingInterceptor extends Interceptor {
     _printKeyValue('URI', response.requestOptions.uri);
     _printKeyValue('STATUS CODE', response.statusCode ?? '');
     _printKeyValue('REDIRECT', response.isRedirect ?? false);
+    _logPrint('HEADERS:');
+    response.headers.forEach((key, v) => _printKeyValue(' - $key', v));
     _logPrint('BODY:');
     _printAll(_prettifyResponse(response.data ?? ''));
 
