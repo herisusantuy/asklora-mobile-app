@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
-import '../../../custom_payment_text_input.dart';
+import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/withdrawal_bloc.dart';
-import '../../custom_withdrawal_body.dart';
+import '../../presentation/custom_withdrawal_body.dart';
 import '../bloc/withdrawal_bank_detail_bloc.dart';
 
 class WithdrawalBankDetailScreen extends StatelessWidget {
@@ -48,7 +48,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
             hintText: 'Account No.',
             onChanged: (value) => context
                 .read<WithdrawalBankDetailBloc>()
-                .add(AccountNoChanged(value))),
+                .add(AccountNumberChanged(value))),
         CustomPaymentTextInput(
             labelText: 'Bank Name',
             hintText: 'THE HONG KONG AND SHANGHAI BANKING CORPORATION LIMITED',
@@ -60,7 +60,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
             hintText: 'Bank No.',
             onChanged: (value) => context
                 .read<WithdrawalBankDetailBloc>()
-                .add(BankNoChanged(value))),
+                .add(BankNumberChanged(value))),
         CustomPaymentTextInput(
             labelText: 'Account Name',
             hintText: 'Account Name',

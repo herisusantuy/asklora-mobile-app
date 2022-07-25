@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/presentation/custom_text.dart';
-import '../../core/presentation/custom_text_input.dart';
+import '../../../core/presentation/custom_text.dart';
+import '../../../core/presentation/custom_text_input.dart';
 
 class CustomPaymentTextInput extends StatelessWidget {
   final Function(String) onChanged;

@@ -7,10 +7,10 @@ abstract class WithdrawalBankDetailEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class AccountNoChanged extends WithdrawalBankDetailEvent {
+class AccountNumberChanged extends WithdrawalBankDetailEvent {
   final String value;
 
-  const AccountNoChanged(this.value) : super();
+  const AccountNumberChanged(this.value) : super();
 
   @override
   List<Object> get props => [value];
@@ -34,10 +34,10 @@ class BankNameChanged extends WithdrawalBankDetailEvent {
   List<Object> get props => [value];
 }
 
-class BankNoChanged extends WithdrawalBankDetailEvent {
+class BankNumberChanged extends WithdrawalBankDetailEvent {
   final String value;
 
-  const BankNoChanged(this.value) : super();
+  const BankNumberChanged(this.value) : super();
 
   @override
   List<Object> get props => [value];

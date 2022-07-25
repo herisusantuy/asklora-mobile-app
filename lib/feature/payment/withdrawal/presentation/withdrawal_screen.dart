@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/withdrawal_bloc.dart';
-import 'withdrawal_bank_detail/bloc/withdrawal_bank_detail_bloc.dart';
-import 'withdrawal_bank_detail/presentation/withdrawal_bank_detail_screen.dart';
-import 'withdrawal_welcome_screen/presentation/withdrawal_welcome_screen.dart';
+import '../bloc/withdrawal_bloc.dart';
+import '../withdrawal_bank_detail/bloc/withdrawal_bank_detail_bloc.dart';
+import '../withdrawal_bank_detail/presentation/withdrawal_bank_detail_screen.dart';
+import '../withdrawal_welcome_screen/presentation/withdrawal_welcome_screen.dart';
 
 class WithdrawalScreen extends StatelessWidget {
   static const String route = '/withdrawal_screen';

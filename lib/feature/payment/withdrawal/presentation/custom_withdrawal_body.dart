@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/presentation/custom_text_button.dart';
-import 'bloc/withdrawal_bloc.dart';
+import '../../../../core/presentation/custom_text_button.dart';
+import '../bloc/withdrawal_bloc.dart';
 
 class CustomWithdrawalBody extends StatelessWidget {
   final List<Widget> children;

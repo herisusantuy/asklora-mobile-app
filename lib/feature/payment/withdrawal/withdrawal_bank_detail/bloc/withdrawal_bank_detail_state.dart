@@ -1,39 +1,42 @@
 part of 'withdrawal_bank_detail_bloc.dart';
 
 class WithdrawalBankDetailState extends Equatable {
-  final String accountNo, bankName, bankNo, accountName;
+  final String accountNumber;
+  final String bankName;
+  final String bankNumber;
+  final String accountName;
   final bool nextButtonDisable;
 
   const WithdrawalBankDetailState(
-      {this.accountNo = '',
+      {this.accountNumber = '',
       this.bankName = '',
-      this.bankNo = '',
+      this.bankNumber = '',
       this.accountName = '',
       this.nextButtonDisable = true})
       : super();
 
   @override
-  List<Object> get props => [accountNo, bankName, bankNo, accountName];
+  List<Object> get props => [accountNumber, bankName, bankNumber, accountName];
 
   WithdrawalBankDetailState copyWith(
-      {String? accountNo,
+      {String? accountNumber,
       String? bankName,
-      String? bankNo,
+      String? bankNumber,
       String? accountName,
       bool? nextButtonDisable}) {
     return WithdrawalBankDetailState(
-      accountNo: accountNo ?? this.accountNo,
+      accountNumber: accountNumber ?? this.accountNumber,
       bankName: bankName ?? this.bankName,
-      bankNo: bankNo ?? this.bankNo,
+      bankNumber: bankNumber ?? this.bankNumber,
       accountName: accountName ?? this.accountName,
       nextButtonDisable: _nextButtonDisable,
     );
   }
 
   bool get _nextButtonDisable {
-    if (accountNo.isNotEmpty &&
+    if (accountNumber.isNotEmpty &&
         accountName.isNotEmpty &&
-        bankNo.isNotEmpty &&
+        bankNumber.isNotEmpty &&
         bankName.isNotEmpty) {
       return false;
     } else {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/withdrawal_bloc.dart';
-import '../../custom_withdrawal_body.dart';
+import '../../presentation/custom_withdrawal_body.dart';
 
 class WithdrawalWelcomeScreen extends StatelessWidget {
   const WithdrawalWelcomeScreen({Key? key}) : super(key: key);
