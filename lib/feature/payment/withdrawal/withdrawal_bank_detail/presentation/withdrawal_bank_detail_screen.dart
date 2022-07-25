@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../custom_payment_text_input.dart';
-import '../../bloc/withdraw_bloc.dart';
-import '../../custom_scaffold_body.dart';
+import '../../bloc/withdrawal_bloc.dart';
+import '../../custom_withdrawal_body.dart';
+import '../bloc/withdrawal_bank_detail_bloc.dart';
 
 class WithdrawalBankDetailScreen extends StatelessWidget {
-  static const String route = '/withdraw_bank_detail';
-
   const WithdrawalBankDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffoldBody(
-      onTapBack: WithdrawPages.welcome,
+    return CustomWithdrawalBody(
+      backTo: WithdrawalPages.welcome,
+      navigationButton:
+          BlocBuilder<WithdrawalBankDetailBloc, WithdrawalBankDetailState>(
+        buildWhen: (previous, current) =>
+            previous.nextButtonDisable != current.nextButtonDisable,
+        builder: (context, state) => CustomWithdrawalBody.nextButton(
+            context: context,
+            nextTo: WithdrawalPages.amount,
+            disableButton: state.nextButtonDisable),
+      ),
       children: [
         const CustomText('Your Bank Details', type: FontType.h1),
         const SizedBox(
@@ -37,17 +46,27 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
         CustomPaymentTextInput(
             labelText: 'Account No.',
             hintText: 'Account No.',
-            onChanged: (_) {}),
+            onChanged: (value) => context
+                .read<WithdrawalBankDetailBloc>()
+                .add(AccountNoChanged(value))),
         CustomPaymentTextInput(
             labelText: 'Bank Name',
             hintText: 'THE HONG KONG AND SHANGHAI BANKING CORPORATION LIMITED',
-            onChanged: (_) {}),
+            onChanged: (value) => context
+                .read<WithdrawalBankDetailBloc>()
+                .add(BankNameChanged(value))),
         CustomPaymentTextInput(
-            labelText: 'Bank No.', hintText: 'Bank No.', onChanged: (_) {}),
+            labelText: 'Bank No.',
+            hintText: 'Bank No.',
+            onChanged: (value) => context
+                .read<WithdrawalBankDetailBloc>()
+                .add(BankNoChanged(value))),
         CustomPaymentTextInput(
             labelText: 'Account Name',
             hintText: 'Account Name',
-            onChanged: (_) {}),
+            onChanged: (value) => context
+                .read<WithdrawalBankDetailBloc>()
+                .add(AccountNameChanged(value))),
       ],
     );
   }
