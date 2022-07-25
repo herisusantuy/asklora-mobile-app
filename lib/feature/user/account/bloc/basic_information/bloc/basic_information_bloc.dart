@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../../../core/utils/util.dart';
+
 part 'basic_information_event.dart';
 
 part 'basic_information_state.dart';
@@ -21,7 +23,7 @@ class BasicInformationBloc
     on<BasicInformationPhoneNumberChanged>(
         _onBasicInformationPhoneNumberChange);
     on<BasicInformationCountryOfCitizenshipChanged>(
-        _onBasicInformationCountryOfCitizenshipChage);
+        _onBasicInformationCountryOfCitizenshipChange);
     on<BasicInformationIsHongKongPermanentResidentChanged>(
         _onIsHongKongPermanentResidentChange);
     on<BasicInformationIdNumberChanged>(_onIdNumberChange);
@@ -71,7 +73,7 @@ class BasicInformationBloc
     emit(state.copyWith(phoneNumber: event.phoneNumber));
   }
 
-  _onBasicInformationCountryOfCitizenshipChage(
+  _onBasicInformationCountryOfCitizenshipChange(
       BasicInformationCountryOfCitizenshipChanged event,
       Emitter<BasicInformationState> emit) {
     emit(state.copyWith(
@@ -88,7 +90,8 @@ class BasicInformationBloc
 
   _onIdNumberChange(BasicInformationIdNumberChanged event,
       Emitter<BasicInformationState> emit) {
-    emit(state.copyWith(idNumber: event.idNumber));
+    emit(state.copyWith(
+        idNumber: event.idNumber, isHkIdValid: isHkIdValid(event.idNumber)));
   }
 
   _onIsUnitedStateResidentChange(

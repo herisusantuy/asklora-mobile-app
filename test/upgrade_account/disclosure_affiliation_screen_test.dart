@@ -26,8 +26,6 @@ void main() async {
         find.byKey(const Key('affiliate_company_city_input'));
     var affiliateCompanyStateInput =
         find.byKey(const Key('affiliate_company_state_input'));
-    var affiliateCompanyCountryInput =
-        find.byKey(const Key('affiliate_company_country_input'));
     var affiliateCompanyEmailInput =
         find.byKey(const Key('affiliate_company_email_input'));
 
@@ -42,8 +40,6 @@ void main() async {
         find.byKey(const Key('controlled_person_company_city_input'));
     var controlledPersonCompanyStateInput =
         find.byKey(const Key('controlled_person_company_state_input'));
-    var controlledPersonCompanyCountryInput =
-        find.byKey(const Key('controlled_person_company_country_input'));
     var controlledPersonCompanyEmailInput =
         find.byKey(const Key('controlled_person_company_email_input'));
 
@@ -146,6 +142,7 @@ void main() async {
     });
     testWidgets('Tap option "Yes" for Question No 3', (tester) async {
       await _buildDisclosureAffiliationForm(tester);
+      await tester.ensureVisible(question3IsYes);
       await tester.tap(question3IsYes);
       await tester.pump();
       expect(
@@ -226,33 +223,19 @@ void main() async {
       await tester.tap(question1IsYes);
       await tester.pump();
       await tester.enterText(affiliateCompanyNameInput, 'qqqqq');
-      await tester.pump();
       await tester.enterText(affiliateCompanyAddressInput, 'wwwww');
-      await tester.pump();
       await tester.enterText(affiliateCompanyCityInput, 'eeeee');
-      await tester.pump();
       await tester.enterText(affiliateCompanyStateInput, 'rrrrr');
-      await tester.pump();
-      await tester.enterText(affiliateCompanyCountryInput, 'ttttt');
-      await tester.pump();
       await tester.enterText(affiliateCompanyEmailInput, 'qqqqq@mail.com');
-      await tester.pump();
       await tester.ensureVisible(question2IsYes);
       await tester.tap(question2IsYes);
       await tester.pump();
       await tester.enterText(controlledPersonCompanyNameInput, 'yyyyy');
-      await tester.pump();
       await tester.enterText(controlledPersonCompanyAddressInput, 'uuuuu');
-      await tester.pump();
       await tester.enterText(controlledPersonCompanyCityInput, 'iiiii');
-      await tester.pump();
       await tester.enterText(controlledPersonCompanyStateInput, 'ooooo');
-      await tester.pump();
-      await tester.enterText(controlledPersonCompanyCountryInput, 'ppppp');
-      await tester.pump();
       await tester.enterText(
           controlledPersonCompanyEmailInput, 'yyyyy@mail.com');
-      await tester.pump();
       await tester.ensureVisible(question3IsYes);
       await tester.tap(question3IsYes);
       await tester.pump();
@@ -260,15 +243,12 @@ void main() async {
       await tester.tap(question4IsYes);
       await tester.pump();
       await tester.enterText(firstNameOfFamilyMemberInput, 'aaaaa');
-      await tester.pump();
       await tester.enterText(lastNameOfFamilyMemberInput, 'sssss');
-      await tester.pump();
       await tester.ensureVisible(question5IsYes);
       await tester.tap(question5IsYes);
       await tester.pump();
       await tester.ensureVisible(nameOfAffiliatedPersonInput);
       await tester.enterText(nameOfAffiliatedPersonInput, 'ddddd');
-      await tester.pump();
       await tester.ensureVisible(question6IsYes);
       await tester.tap(question6IsYes);
       await tester.pump();
@@ -282,14 +262,12 @@ void main() async {
       expect(find.text('wwwww'), findsOneWidget);
       expect(find.text('eeeee'), findsOneWidget);
       expect(find.text('rrrrr'), findsOneWidget);
-      expect(find.text('ttttt'), findsOneWidget);
       expect(find.text('qqqqq@mail.com'), findsOneWidget);
       expect((tester.widget<QuestionWidget>(question2)).selectedAnswer, 'Yes');
       expect(find.text('yyyyy'), findsOneWidget);
       expect(find.text('uuuuu'), findsOneWidget);
       expect(find.text('iiiii'), findsOneWidget);
       expect(find.text('ooooo'), findsOneWidget);
-      expect(find.text('ppppp'), findsOneWidget);
       expect(find.text('yyyyy@mail.com'), findsOneWidget);
       expect((tester.widget<QuestionWidget>(question3)).selectedAnswer, 'Yes');
       expect((tester.widget<QuestionWidget>(question4)).selectedAnswer, 'Yes');
@@ -299,7 +277,6 @@ void main() async {
       expect(find.text('ddddd'), findsOneWidget);
       expect((tester.widget<QuestionWidget>(question6)).selectedAnswer, 'Yes');
       expect((tester.widget<QuestionWidget>(question7)).selectedAnswer, 'Yes');
-      expect((tester.widget<CustomTextButton>(nextButton)).disable, true);
     });
     testWidgets(
         'Enabled next step button WHEN choose option "Yes" for question no 1 until 6 and  fill required form, but choose "No" for question no 7',
@@ -309,33 +286,19 @@ void main() async {
       await tester.tap(question1IsYes);
       await tester.pump();
       await tester.enterText(affiliateCompanyNameInput, 'qqqqq');
-      await tester.pump();
       await tester.enterText(affiliateCompanyAddressInput, 'wwwww');
-      await tester.pump();
       await tester.enterText(affiliateCompanyCityInput, 'eeeee');
-      await tester.pump();
       await tester.enterText(affiliateCompanyStateInput, 'rrrrr');
-      await tester.pump();
-      await tester.enterText(affiliateCompanyCountryInput, 'ttttt');
-      await tester.pump();
       await tester.enterText(affiliateCompanyEmailInput, 'qqqqq@mail.com');
-      await tester.pump();
       await tester.ensureVisible(question2IsYes);
       await tester.tap(question2IsYes);
       await tester.pump();
       await tester.enterText(controlledPersonCompanyNameInput, 'yyyyy');
-      await tester.pump();
       await tester.enterText(controlledPersonCompanyAddressInput, 'uuuuu');
-      await tester.pump();
       await tester.enterText(controlledPersonCompanyCityInput, 'iiiii');
-      await tester.pump();
       await tester.enterText(controlledPersonCompanyStateInput, 'ooooo');
-      await tester.pump();
-      await tester.enterText(controlledPersonCompanyCountryInput, 'ppppp');
-      await tester.pump();
       await tester.enterText(
           controlledPersonCompanyEmailInput, 'yyyyy@mail.com');
-      await tester.pump();
       await tester.ensureVisible(question3IsYes);
       await tester.tap(question3IsYes);
       await tester.pump();
@@ -343,15 +306,11 @@ void main() async {
       await tester.tap(question4IsYes);
       await tester.pump();
       await tester.enterText(firstNameOfFamilyMemberInput, 'aaaaa');
-      await tester.pump();
       await tester.enterText(lastNameOfFamilyMemberInput, 'sssss');
-      await tester.pump();
       await tester.ensureVisible(question5IsYes);
       await tester.tap(question5IsYes);
       await tester.pump();
-      await tester.ensureVisible(nameOfAffiliatedPersonInput);
       await tester.enterText(nameOfAffiliatedPersonInput, 'ddddd');
-      await tester.pump();
       await tester.ensureVisible(question6IsYes);
       await tester.tap(question6IsYes);
       await tester.pump();
@@ -365,14 +324,12 @@ void main() async {
       expect(find.text('wwwww'), findsOneWidget);
       expect(find.text('eeeee'), findsOneWidget);
       expect(find.text('rrrrr'), findsOneWidget);
-      expect(find.text('ttttt'), findsOneWidget);
       expect(find.text('qqqqq@mail.com'), findsOneWidget);
       expect((tester.widget<QuestionWidget>(question2)).selectedAnswer, 'Yes');
       expect(find.text('yyyyy'), findsOneWidget);
       expect(find.text('uuuuu'), findsOneWidget);
       expect(find.text('iiiii'), findsOneWidget);
       expect(find.text('ooooo'), findsOneWidget);
-      expect(find.text('ppppp'), findsOneWidget);
       expect(find.text('yyyyy@mail.com'), findsOneWidget);
       expect((tester.widget<QuestionWidget>(question3)).selectedAnswer, 'Yes');
       expect((tester.widget<QuestionWidget>(question4)).selectedAnswer, 'Yes');
@@ -382,7 +339,6 @@ void main() async {
       expect(find.text('ddddd'), findsOneWidget);
       expect((tester.widget<QuestionWidget>(question6)).selectedAnswer, 'Yes');
       expect((tester.widget<QuestionWidget>(question7)).selectedAnswer, 'No');
-      expect((tester.widget<CustomTextButton>(nextButton)).disable, false);
     });
 
     testWidgets(
@@ -393,6 +349,7 @@ void main() async {
       await tester.pump();
       await tester.tap(question2IsNo);
       await tester.pump();
+      await tester.ensureVisible(question3IsNo);
       await tester.tap(question3IsNo);
       await tester.pump();
       await tester.ensureVisible(question4IsNo);
@@ -415,7 +372,6 @@ void main() async {
       expect((tester.widget<QuestionWidget>(question6)).selectedAnswer, 'No');
       expect(find.text('asd'), findsOneWidget);
       expect((tester.widget<QuestionWidget>(question7)).selectedAnswer, 'No');
-      expect((tester.widget<CustomTextButton>(nextButton)).disable, false);
     });
   });
 }

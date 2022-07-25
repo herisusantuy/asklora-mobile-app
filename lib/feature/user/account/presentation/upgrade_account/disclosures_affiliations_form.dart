@@ -285,7 +285,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
     return BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.only(top: 20.0),
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: CustomTextButton(
               key: const Key('disclosures_affiliations_next_step_button'),
               borderRadius: 30,

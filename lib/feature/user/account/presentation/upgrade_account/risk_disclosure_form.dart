@@ -50,7 +50,7 @@ class RiskDisclosureForm extends StatelessWidget {
       );
 
   Widget _nextButton() => Padding(
-        padding: const EdgeInsets.only(top: 10.0),
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: BlocBuilder<RiskDisclosureBloc, BaseResponse<bool>>(
           builder: (context, state) => CustomTextButton(
               key: const Key('risk_disclosure_next_button'),

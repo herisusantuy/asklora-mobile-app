@@ -50,6 +50,7 @@ class CustomTextInput extends StatelessWidget {
           fillColor: fillColor,
           border: inputBorder,
           labelText: labelText,
+          counterText: '',
           hintText: hintText,
           enabledBorder: enabledBorder,
           disabledBorder: disabledBorder,

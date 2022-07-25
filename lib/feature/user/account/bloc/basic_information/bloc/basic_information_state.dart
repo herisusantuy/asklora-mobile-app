@@ -15,6 +15,7 @@ class BasicInformationState extends Equatable {
     this.isHongKongPermanentResident,
     this.idNumber = '',
     this.isUnitedStateResident,
+    this.isHkIdValid = false,
   });
 
   final String firstName;
@@ -30,6 +31,7 @@ class BasicInformationState extends Equatable {
   final bool? isHongKongPermanentResident;
   final String idNumber;
   final bool? isUnitedStateResident;
+  final bool isHkIdValid;
 
   @override
   List<Object?> get props {
@@ -47,6 +49,7 @@ class BasicInformationState extends Equatable {
       isHongKongPermanentResident,
       idNumber,
       isUnitedStateResident,
+      isHkIdValid,
     ];
   }
 
@@ -64,6 +67,7 @@ class BasicInformationState extends Equatable {
     bool? isHongKongPermanentResident,
     String? idNumber,
     bool? isUnitedStateResident,
+    bool? isHkIdValid,
   }) {
     return BasicInformationState(
       firstName: firstName ?? this.firstName,
@@ -82,6 +86,7 @@ class BasicInformationState extends Equatable {
       idNumber: idNumber ?? this.idNumber,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
+      isHkIdValid: isHkIdValid ?? this.isHkIdValid,
     );
   }
 
@@ -96,7 +101,7 @@ class BasicInformationState extends Equatable {
         isHongKongPermanentResident != null &&
         isUnitedStateResident != null) {
       if (isHongKongPermanentResident == true) {
-        if (idNumber.isNotEmpty) {
+        if (idNumber.isNotEmpty && isHkIdValid) {
           return true;
         } else {
           return false;
