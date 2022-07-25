@@ -32,11 +32,9 @@ void main() async {
         find.byKey(const Key('signing_broker_agreement_checkbox_2_value'));
     var customerSignatureDrawer =
         find.byKey(const Key('customer_signature_drawer'));
-    var customerSignaturePng = find.byKey(const Key('customer_signature_png'));
     var acceptSignatureButton =
         find.byKey(const Key('accept_signature_button'));
     var resetSignatureButton = find.byKey(const Key('reset_signature_button'));
-    var clearSignatureButton = find.byKey(const Key('clear_signature_button'));
     var nextButton =
         find.byKey(const Key('signing_broker_agreement_next_step_button'));
 
