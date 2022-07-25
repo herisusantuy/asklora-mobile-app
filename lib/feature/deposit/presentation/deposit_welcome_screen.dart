@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/presentation/custom_text.dart';
 import '../../../core/presentation/custom_text_button.dart';
-import 'deposit_method.dart';
+import 'deposit_method_screen.dart';
 
 class DepositWelcomeScreen extends StatelessWidget {
   const DepositWelcomeScreen({Key? key}) : super(key: key);
