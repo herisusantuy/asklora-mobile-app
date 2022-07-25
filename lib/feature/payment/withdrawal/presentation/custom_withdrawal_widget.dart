@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/presentation/custom_text_button.dart';
 import '../bloc/withdrawal_bloc.dart';
 
-class CustomWithdrawalBody extends StatelessWidget {
+class CustomWithdrawalWidget extends StatelessWidget {
   final List<Widget> children;
   final WithdrawalPages? backTo;
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;
 
-  const CustomWithdrawalBody(
+  const CustomWithdrawalWidget(
       {required this.children,
       this.backTo,
       this.onSubmit,
@@ -62,37 +61,4 @@ class CustomWithdrawalBody extends StatelessWidget {
       ),
     );
   }
-
-  static Widget nextButton(
-          {required BuildContext context,
-          required WithdrawalPages nextTo,
-          bool disableButton = true}) =>
-      Padding(
-        padding: const EdgeInsets.all(32),
-        child: CustomTextButton(
-          height: 40,
-          disable: disableButton,
-          buttonText: 'Next',
-          onClick: () =>
-              context.read<WithdrawalBloc>().add(PageChanged(nextTo)),
-          primaryColor: Colors.black,
-          borderRadius: 6,
-        ),
-      );
-
-  static Widget submitButton(
-          {required BuildContext context,
-          required Function onSubmit,
-          bool disableButton = true}) =>
-      Padding(
-        padding: const EdgeInsets.all(32),
-        child: CustomTextButton(
-          height: 40,
-          disable: disableButton,
-          buttonText: 'Submit',
-          onClick: onSubmit,
-          primaryColor: Colors.black,
-          borderRadius: 6,
-        ),
-      );
 }

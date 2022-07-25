@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/withdrawal_bloc.dart';
-import '../../presentation/custom_withdrawal_body.dart';
+import '../../presentation/custom_withdrawal_widget.dart';
+import '../../presentation/withdrawal_next_button.dart';
 import '../bloc/withdrawal_bank_detail_bloc.dart';
 
 class WithdrawalBankDetailScreen extends StatelessWidget {
@@ -11,16 +12,15 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomWithdrawalBody(
+    return CustomWithdrawalWidget(
       backTo: WithdrawalPages.welcome,
       navigationButton:
           BlocBuilder<WithdrawalBankDetailBloc, WithdrawalBankDetailState>(
         buildWhen: (previous, current) =>
             previous.nextButtonDisable != current.nextButtonDisable,
-        builder: (context, state) => CustomWithdrawalBody.nextButton(
-            context: context,
+        builder: (context, state) => WithdrawalNextButton(
             nextTo: WithdrawalPages.amount,
-            disableButton: state.nextButtonDisable),
+            disable: state.nextButtonDisable),
       ),
       children: [
         const CustomText('Your Bank Details', type: FontType.h1),

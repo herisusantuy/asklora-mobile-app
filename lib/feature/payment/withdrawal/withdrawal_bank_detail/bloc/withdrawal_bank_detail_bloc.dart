@@ -16,21 +16,22 @@ class WithdrawalBankDetailBloc
 
   void _onAccountNumberChanged(
       AccountNumberChanged event, Emitter<WithdrawalBankDetailState> emit) {
-    emit(state.copyWith(accountNumber: event.value));
+    emit(state.copyWith(
+        accountNumber: event.value));
   }
 
   void _onAccountNameChanged(
       AccountNameChanged event, Emitter<WithdrawalBankDetailState> emit) {
-    emit(state.copyWith(accountNumber: event.value));
+    emit(state.copyWith(accountName: event.value));
   }
 
   void _onBankNumberChanged(
       BankNumberChanged event, Emitter<WithdrawalBankDetailState> emit) {
-    emit(state.copyWith(accountNumber: event.value));
+    emit(state.copyWith(bankNumber: event.value));
   }
 
   void _onBankNameChanged(
       BankNameChanged event, Emitter<WithdrawalBankDetailState> emit) {
-    emit(state.copyWith(accountNumber: event.value));
+    emit(state.copyWith(bankName: event.value));
   }
 }

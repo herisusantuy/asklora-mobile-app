@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/withdrawal_bloc.dart';
-import '../../presentation/custom_withdrawal_body.dart';
+import '../../presentation/custom_withdrawal_widget.dart';
+import '../../presentation/withdrawal_next_button.dart';
 
 class WithdrawalWelcomeScreen extends StatelessWidget {
   const WithdrawalWelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomWithdrawalBody(
-      navigationButton: CustomWithdrawalBody.nextButton(
-          context: context,
-          nextTo: WithdrawalPages.bankDetail,
-          disableButton: false),
+    return CustomWithdrawalWidget(
+      navigationButton: const WithdrawalNextButton(
+          nextTo: WithdrawalPages.bankDetail, disable: false),
       children: [
         const CustomText('Withdrawal', type: FontType.h1),
         const SizedBox(

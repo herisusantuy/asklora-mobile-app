@@ -23,7 +23,6 @@ class WithdrawalScreen extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        backgroundColor: Colors.grey[300],
         body: BlocBuilder<WithdrawalBloc, WithdrawalState>(
           builder: (context, state) => pages(state.withdrawalPages),
         ),
