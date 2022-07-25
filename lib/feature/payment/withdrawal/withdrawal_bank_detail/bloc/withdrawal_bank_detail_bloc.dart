@@ -16,8 +16,7 @@ class WithdrawalBankDetailBloc
 
   void _onAccountNumberChanged(
       AccountNumberChanged event, Emitter<WithdrawalBankDetailState> emit) {
-    emit(state.copyWith(
-        accountNumber: event.value));
+    emit(state.copyWith(accountNumber: event.value));
   }
 
   void _onAccountNameChanged(

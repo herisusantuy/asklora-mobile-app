@@ -19,8 +19,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.nextButtonDisable != current.nextButtonDisable,
         builder: (context, state) => WithdrawalNextButton(
-            nextTo: WithdrawalPages.amount,
-            disable: state.nextButtonDisable),
+            nextTo: WithdrawalPages.amount, disable: state.nextButtonDisable),
       ),
       children: [
         const CustomText('Your Bank Details', type: FontType.h1),
