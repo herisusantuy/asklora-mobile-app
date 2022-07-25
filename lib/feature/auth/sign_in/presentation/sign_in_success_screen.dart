@@ -9,6 +9,7 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../home_screen.dart';
+import '../../../deposit/presentation/deposit_welcome_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../../user/account/repository/account_repository.dart';
@@ -101,6 +102,8 @@ class SignInSuccessScreen extends StatelessWidget {
                     _padding(),
                     _upgradeAccountScreen(context),
                     _padding(),
+                    _depositScreen(context),
+                    _padding(),
                     _getOnfidoToken(),
                   ],
                 ),
@@ -138,6 +141,9 @@ class SignInSuccessScreen extends StatelessWidget {
         buttonText: 'Upgrade Account Screen',
         onClick: () => UpgradeAccountScreen.open(context),
       );
+
+  Widget _depositScreen(BuildContext context) => CustomTextButton(
+      buttonText: 'Deposit', onClick: () => DepositWelcomeScreen.open(context));
 
   Widget _getAccountButton() => BlocBuilder<AccountBloc, AccountState>(
         builder: (context, state) {
