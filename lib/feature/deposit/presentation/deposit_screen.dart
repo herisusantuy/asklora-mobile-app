@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/presentation/custom_text.dart';
 import '../../../core/presentation/custom_text_button.dart';
-import 'deposit_screen_1/deposit_screen_1.dart';
+import 'deposit_screen_1/deposit_method.dart';
 
 class DepositScreen extends StatelessWidget {
   const DepositScreen({Key? key}) : super(key: key);
@@ -72,7 +72,7 @@ class DepositScreen extends StatelessWidget {
             key: const Key('deposit_screen_next_button'),
             borderRadius: 5,
             buttonText: 'Next',
-            onClick: () => DepositScreen1.open(context)),
+            onClick: () => DepositMethodScreen.open(context)),
       );
 
   static void open(BuildContext context) => Navigator.push(
