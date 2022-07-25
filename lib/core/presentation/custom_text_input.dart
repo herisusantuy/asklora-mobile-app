@@ -11,6 +11,12 @@ class CustomTextInput extends StatelessWidget {
   final Function(String) onChanged;
   final List<TextInputFormatter>? textInputFormatterList;
   final String initialValue;
+  final Color? fillColor;
+  final InputBorder inputBorder;
+  final InputBorder? enabledBorder;
+  final InputBorder? disabledBorder;
+  final InputBorder? focusedBorder;
+  final FloatingLabelBehavior? floatingLabelBehavior;
 
   const CustomTextInput(
       {required this.labelText,
@@ -22,6 +28,12 @@ class CustomTextInput extends StatelessWidget {
       this.maxLength,
       this.textInputFormatterList,
       this.initialValue = '',
+      this.fillColor,
+      this.inputBorder = const OutlineInputBorder(),
+      this.floatingLabelBehavior,
+      this.enabledBorder,
+      this.disabledBorder,
+      this.focusedBorder,
       Key? key})
       : super(key: key);
 
@@ -33,10 +45,16 @@ class CustomTextInput extends StatelessWidget {
       maxLength: maxLength,
       obscureText: obscureText,
       decoration: InputDecoration(
-          border: const OutlineInputBorder(),
+          floatingLabelBehavior: floatingLabelBehavior,
+          filled: fillColor != null ? true : false,
+          fillColor: fillColor,
+          border: inputBorder,
           labelText: labelText,
           counterText: '',
           hintText: hintText,
+          enabledBorder: enabledBorder,
+          disabledBorder: disabledBorder,
+          focusedBorder: focusedBorder,
           errorText: errorText.isEmpty ? null : errorText),
       onChanged: (str) => onChanged(str),
       keyboardType: textInputType,
