@@ -1,54 +1,40 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/presentation/custom_text.dart';
-import '../../../core/presentation/custom_text_button.dart';
-import 'deposit_method_screen.dart';
+import '../bloc/deposit_bloc.dart';
+import 'widget/custom_deposit_widget.dart';
+import 'widget/deposit_next_button.dart';
 
 class DepositWelcomeScreen extends StatelessWidget {
   const DepositWelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
+    return CustomDepositWidget(
+      navigationButton: const DepositNextButton(
+        key: Key('deposit_welcome_screen_next_button'),
+        nextTo: DepositPages.depositMethod,
+        disable: false,
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                  child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CustomText(
-                      'Deposit',
-                      key: Key('title_deposit_welcome_screen'),
-                      padding: EdgeInsets.only(top: 10, bottom: 50),
-                      type: FontType.h2,
-                    ),
-                    const CustomText(
-                      'LORA allows you to deposit either through wire or FPS. Here are the steps that you need to take to deposit with us:',
-                      key: Key('subtitle_deposit_welcome_screen'),
-                      padding: EdgeInsets.only(top: 10, bottom: 30),
-                      type: FontType.smallTextBold,
-                    ),
-                    _customTextRow('1', 'Tell us your bank account details'),
-                    _customTextRow('2',
-                        'Transfer to LORA’s bank account through your bank'),
-                    _customTextRow('3', 'Tell us how much you’ve deposited'),
-                    _customTextRow('4', 'Upload proof of remittance'),
-                  ],
-                ),
-              )),
-              _nextButton(context),
-            ],
-          ),
+      children: [
+        const CustomText(
+          'Deposit',
+          key: Key('title_deposit_welcome_screen'),
+          padding: EdgeInsets.only(top: 10, bottom: 50),
+          type: FontType.h2,
         ),
-      ),
+        const CustomText(
+          'LORA allows you to deposit either through wire or FPS. Here are the steps that you need to take to deposit with us:',
+          key: Key('subtitle_deposit_welcome_screen'),
+          padding: EdgeInsets.only(top: 10, bottom: 30),
+          type: FontType.smallTextBold,
+        ),
+        _customTextRow('1', 'Tell us your bank account details'),
+        _customTextRow(
+            '2', 'Transfer to LORA’s bank account through your bank'),
+        _customTextRow('3', 'Tell us how much you’ve deposited'),
+        _customTextRow('4', 'Upload proof of remittance'),
+      ],
     );
   }
 
@@ -65,16 +51,4 @@ class DepositWelcomeScreen extends StatelessWidget {
           ],
         ),
       );
-
-  Widget _nextButton(context) => Padding(
-        padding: EdgeInsets.zero,
-        child: CustomTextButton(
-            key: const Key('deposit_screen_next_button'),
-            borderRadius: 5,
-            buttonText: 'Next',
-            onClick: () => DepositMethodScreen.open(context)),
-      );
-
-  static void open(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (_) => const DepositWelcomeScreen()));
 }

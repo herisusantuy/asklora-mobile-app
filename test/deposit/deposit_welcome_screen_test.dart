@@ -1,19 +1,25 @@
-import 'package:asklora_mobile_app/feature/deposit/presentation/deposit_welcome_screen.dart';
+import 'package:asklora_mobile_app/feature/deposit/bloc/deposit_bloc.dart';
+import 'package:asklora_mobile_app/feature/deposit/presentation/deposit_screen.dart';
+import 'package:asklora_mobile_app/feature/deposit/presentation/widget/deposit_next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../mocks/mocks.dart';
 
 void main() {
-  group('Deposit Welcome Screen', () {
+  group('Deposit Welcome Screen Test', () {
     Future<void> _buildDepositWelcomeScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: const DepositWelcomeScreen(),
+        home: const DepositScreen(
+          initialDepositPages: DepositPages.welcome,
+        ),
         navigatorObservers: [mockObserver],
       ));
     }
 
+    var nextButton =
+        find.byKey(const Key('deposit_welcome_screen_next_button'));
     testWidgets('First render screen', (WidgetTester tester) async {
       await _buildDepositWelcomeScreen(tester);
       expect(find.text('Deposit'), findsOneWidget);
@@ -26,8 +32,8 @@ void main() {
           findsOneWidget);
       expect(find.text('Tell us how much you’ve deposited'), findsOneWidget);
       expect(find.text('Upload proof of remittance'), findsOneWidget);
-      expect(
-          find.byKey(const Key('deposit_screen_next_button')), findsOneWidget);
+      expect(nextButton, findsOneWidget);
+      expect((tester.widget<DepositNextButton>(nextButton)).disable, false);
     });
   });
 }
