@@ -10,16 +10,13 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomWithdrawalWidget(
+      title: 'Your Bank Details',
       backTo: WithdrawalPages.welcome,
       navigationButton: const WithdrawalNextButton(
           key: Key('withdrawal_bank_detail_screen_next_button'),
           nextTo: WithdrawalPages.amount,
           disable: false),
       children: [
-        const CustomText('Your Bank Details', type: FontType.h1),
-        const SizedBox(
-          height: 50,
-        ),
         const CustomText(
           'Please confirm your bank details. Your withdrawal will be credited to this account',
           type: FontType.smallTextBold,

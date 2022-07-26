@@ -10,15 +10,12 @@ class WithdrawalWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomWithdrawalWidget(
+      title: 'Withdrawal',
       navigationButton: const WithdrawalNextButton(
           key: Key('withdrawal_welcome_screen_next_button'),
           nextTo: WithdrawalPages.bankDetail,
           disable: false),
       children: [
-        const CustomText('Withdrawal', type: FontType.h1),
-        const SizedBox(
-          height: 50,
-        ),
         const CustomText(
           'Withdrawal will be credited to the bank account you used to deposit with. Please note that we are unable to credit to another bank account.',
           type: FontType.smallTextBold,
