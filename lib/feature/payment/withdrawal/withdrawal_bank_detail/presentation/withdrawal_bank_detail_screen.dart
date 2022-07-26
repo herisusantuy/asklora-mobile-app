@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
-import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/withdrawal_bloc.dart';
 import '../../presentation/custom_withdrawal_widget.dart';
 import '../../presentation/withdrawal_next_button.dart';
-import '../bloc/withdrawal_bank_detail_bloc.dart';
 
 class WithdrawalBankDetailScreen extends StatelessWidget {
   const WithdrawalBankDetailScreen({Key? key}) : super(key: key);
@@ -14,13 +11,10 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomWithdrawalWidget(
       backTo: WithdrawalPages.welcome,
-      navigationButton:
-          BlocBuilder<WithdrawalBankDetailBloc, WithdrawalBankDetailState>(
-        buildWhen: (previous, current) =>
-            previous.nextButtonDisable != current.nextButtonDisable,
-        builder: (context, state) => WithdrawalNextButton(
-            nextTo: WithdrawalPages.amount, disable: state.nextButtonDisable),
-      ),
+      navigationButton: const WithdrawalNextButton(
+          key: Key('withdrawal_bank_detail_screen_next_button'),
+          nextTo: WithdrawalPages.amount,
+          disable: false),
       children: [
         const CustomText('Your Bank Details', type: FontType.h1),
         const SizedBox(
@@ -42,31 +36,41 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        CustomPaymentTextInput(
-            labelText: 'Account No.',
-            hintText: 'Account No.',
-            onChanged: (value) => context
-                .read<WithdrawalBankDetailBloc>()
-                .add(AccountNumberChanged(value))),
-        CustomPaymentTextInput(
-            labelText: 'Bank Name',
-            hintText: 'THE HONG KONG AND SHANGHAI BANKING CORPORATION LIMITED',
-            onChanged: (value) => context
-                .read<WithdrawalBankDetailBloc>()
-                .add(BankNameChanged(value))),
-        CustomPaymentTextInput(
-            labelText: 'Bank No.',
-            hintText: 'Bank No.',
-            onChanged: (value) => context
-                .read<WithdrawalBankDetailBloc>()
-                .add(BankNumberChanged(value))),
-        CustomPaymentTextInput(
-            labelText: 'Account Name',
-            hintText: 'Account Name',
-            onChanged: (value) => context
-                .read<WithdrawalBankDetailBloc>()
-                .add(AccountNameChanged(value))),
+        _customContainer('Account No.', '1234567890'),
+        _customContainer('Bank Name',
+            'THE HONG KONG AND SHANGHAI BANKING CORPORATION LIMITED'),
+        _customContainer('Bank No.', '813'),
+        _customContainer('Account Name', 'LEUNG CHIU WAI')
       ],
     );
   }
+
+  Widget _customContainer(String title, String label) => Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomText(
+              title,
+              type: FontType.smallTextBold,
+            ),
+            const SizedBox(
+              height: 6,
+            ),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(4)),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
+                child: CustomText(
+                  label,
+                  type: FontType.bodyText,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
 }

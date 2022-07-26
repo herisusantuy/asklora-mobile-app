@@ -1,11 +1,11 @@
 part of 'withdrawal_bloc.dart';
 
-enum WithdrawalPages { welcome, bankDetail, amount }
+enum WithdrawalPages { welcome, bankDetail, amount, unknown }
 
 class WithdrawalState extends Equatable {
   final WithdrawalPages withdrawalPages;
 
-  const WithdrawalState({this.withdrawalPages = WithdrawalPages.welcome})
+  const WithdrawalState({this.withdrawalPages = WithdrawalPages.unknown})
       : super();
 
   @override
