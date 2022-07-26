@@ -1,7 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/domain/base_response.dart';
 
 part 'upgrade_account_event.dart';
+
 part 'upgrade_account_state.dart';
 
 class UpgradeAccountBloc

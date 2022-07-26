@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
+
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
@@ -54,8 +56,7 @@ class SignInSuccessScreen extends StatelessWidget {
                     case GetAccountStatus.failure:
                       CustomSnackBar(context)
                           .setMessage(state.responseMessage)
-                          .setType(CustomSnackBarType.error)
-                          .show();
+                          .showError();
                       break;
                     case GetAccountStatus.success:
                       CustomSnackBar(context)
@@ -110,16 +111,15 @@ class SignInSuccessScreen extends StatelessWidget {
               _padding(),
               BlocListener<SignOutBloc, SignOutState>(
                 listener: (context, state) async {
-                  switch (state.status) {
-                    case SignOutStatus.failure:
+                  switch (state.response.state) {
+                    case ResponseState.error:
                       CustomSnackBar(context)
-                          .setMessage(state.responseMessage)
-                          .setType(CustomSnackBarType.error)
-                          .show();
+                          .setMessage(state.response.message)
+                          .showError();
                       break;
-                    case SignOutStatus.success:
+                    case ResponseState.success:
                       CustomSnackBar(context)
-                          .setMessage(state.responseMessage)
+                          .setMessage(state.response.message)
                           .show();
                       HomeScreen.openReplace(context);
                       break;
@@ -164,12 +164,13 @@ class SignInSuccessScreen extends StatelessWidget {
       );
 
   Widget _signOutButton() => BlocBuilder<SignOutBloc, SignOutState>(
-        buildWhen: ((previous, current) => previous.status != current.status),
+        buildWhen: ((previous, current) =>
+            previous.response.state != current.response.state),
         builder: (context, state) {
           return CustomTextButton(
             buttonText: 'Sign Out',
-            disable: state.status == SignOutStatus.loading,
-            isLoading: state.status == SignOutStatus.loading,
+            disable: state.response.state == ResponseState.loading,
+            isLoading: state.response.state == ResponseState.loading,
             onClick: () =>
                 context.read<SignOutBloc>().add(const SignOutSubmitted()),
             borderRadius: 5,

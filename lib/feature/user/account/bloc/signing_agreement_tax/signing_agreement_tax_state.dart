@@ -4,6 +4,7 @@ class SigningAgreementTaxState extends Equatable {
   final bool isCheckedCertify;
   final bool isCheckedDeclare;
   final bool isFormW8BenOpened;
+
   const SigningAgreementTaxState({
     this.isCheckedCertify = false,
     this.isCheckedDeclare = false,

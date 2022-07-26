@@ -9,6 +9,7 @@ abstract class TrustedContactEvent extends Equatable {
 
 class FirstNameChanged extends TrustedContactEvent {
   final String firstName;
+
   const FirstNameChanged(this.firstName) : super();
 
   @override
@@ -17,6 +18,7 @@ class FirstNameChanged extends TrustedContactEvent {
 
 class LastNameChanged extends TrustedContactEvent {
   final String lastName;
+
   const LastNameChanged(this.lastName) : super();
 
   @override
@@ -25,6 +27,7 @@ class LastNameChanged extends TrustedContactEvent {
 
 class EmailAddressChanged extends TrustedContactEvent {
   final String emailAddress;
+
   const EmailAddressChanged(this.emailAddress) : super();
 
   @override
@@ -33,6 +36,7 @@ class EmailAddressChanged extends TrustedContactEvent {
 
 class PhoneNumberChanged extends TrustedContactEvent {
   final String phoneNumber;
+
   const PhoneNumberChanged(this.phoneNumber) : super();
 
   @override

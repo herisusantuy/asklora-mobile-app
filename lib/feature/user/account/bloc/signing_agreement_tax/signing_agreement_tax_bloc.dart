@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'signing_agreement_tax_state.dart';
 part 'signing_agreement_tax_event.dart';
+
+part 'signing_agreement_tax_state.dart';
 
 class SigningAgreementTaxBloc
     extends Bloc<SigningAgreementTaxEvent, SigningAgreementTaxState> {
@@ -11,6 +12,7 @@ class SigningAgreementTaxBloc
     on<DeclareCorrectInformationChecked>(_onDeclareCorrectInformationChecked);
     on<FormW8BenOpened>(_onFormW8BenOpened);
   }
+
   _onCertifyNotUsCitizenChecked(CertifyNotUsCitizenChecked event,
       Emitter<SigningAgreementTaxState> emit) {
     if (event.isCertifyChecked) {
