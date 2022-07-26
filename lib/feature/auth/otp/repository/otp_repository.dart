@@ -14,13 +14,13 @@ class OtpRepository {
   }) async {
     var response = await _getOtpApiClient.getOtp(getOtpRequest);
 
-    return BaseResponse.complete(GetOtpResponse.fromJson(response.data));
+    return BaseResponse(data: GetOtpResponse.fromJson(response.data));
   }
 
   Future<BaseResponse<GetOtpResponse>> verifyOtp({
     required VerifyOtpRequest verifyOtpRequest,
   }) async {
     var response = await _getOtpApiClient.verifyOtp(verifyOtpRequest);
-    return BaseResponse(data: GetOtpResponse.fromJson(response.data));
+    return BaseResponse.complete(GetOtpResponse.fromJson(response.data));
   }
 }
