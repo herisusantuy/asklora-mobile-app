@@ -74,17 +74,15 @@ class TokenRepository implements Repository {
       String accessToken) async {
     var response =
         await _tokenApiClient.verify(TokenVerifyRequest(accessToken));
-
-    return BaseResponse(data: TokenVerifyResponse.fromJson(response.data));
+    return BaseResponse.complete(TokenVerifyResponse.fromJson(response.data));
   }
 
   Future<BaseResponse<TokenRefreshResponse>> _refreshToken(
       String refreshToken) async {
     var response =
         await _tokenApiClient.refresh(TokenRefreshRequest(refreshToken));
-
     var refreshResponse =
-        BaseResponse(data: TokenRefreshResponse.fromJson(response.data));
+        BaseResponse.complete(TokenRefreshResponse.fromJson(response.data));
     saveAccessToken(refreshResponse.data!.access!);
     return refreshResponse;
   }

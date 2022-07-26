@@ -26,10 +26,10 @@ class OtpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
-        switch (state.status) {
+        switch (state.response.state) {
           case ResponseState.error:
             CustomSnackBar(context)
-                .setMessage(state.responseMessage)
+                .setMessage(state.response.message)
                 .showError();
             break;
           case ResponseState.success:
@@ -91,7 +91,7 @@ class OtpForm extends StatelessWidget {
     return BlocBuilder<OtpBloc, OtpState>(
         buildWhen: (previous, current) =>
             previous.resetTime != current.resetTime ||
-            previous.status != current.status,
+            previous.response.state != current.response.state,
         builder: (context, state) {
           if (state.disableRequest) {
             return CustomText(
@@ -100,7 +100,7 @@ class OtpForm extends StatelessWidget {
           } else {
             return CustomTextButton(
               key: const Key('request_otp_button'),
-              isLoading: state.status == ResponseState.loading,
+              isLoading: state.response.state == ResponseState.loading,
               buttonText: 'Request OTP',
               onClick: () => onOtpResend(),
               primaryColor: COLORS.text,

@@ -29,25 +29,22 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
   void _onOtpRequested(OtpRequested event, Emitter<OtpState> emit) async {
     try {
-      emit(state.copyWith(status: ResponseState.loading));
-      await _otpRepository.getOtp(
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data = await _otpRepository.getOtp(
           getOtpRequest: GetOtpRequest(event.email, OtpType.register.value));
+      data.copyWith(message: 'OTP code sent to your email');
       emit(state.copyWith(
-          status: ResponseState.unknown,
-          disableRequest: true,
-          responseMessage: 'OTP code sent to your email',
-          resetTime: _resetTime));
+          response: data, disableRequest: true, resetTime: _resetTime));
 
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());
       });
     } on NotFoundException {
       emit(state.copyWith(
-          status: ResponseState.error,
-          responseMessage: 'User does not exist with the given email'));
+          response:
+              BaseResponse.error('User does not exist with the given email')));
     } catch (e) {
-      emit(state.copyWith(
-          status: ResponseState.error, responseMessage: e.toString()));
+      emit(state.copyWith(response: BaseResponse.error(e.toString())));
     }
   }
 
@@ -55,7 +52,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     emit(state.copyWith(
         disableRequest: state.resetTime == 1 ? false : true,
         resetTime: state.resetTime - 1,
-        status: ResponseState.unknown));
+        response: BaseResponse.unknown()));
   }
 
   void _onOtpSubmitted(
@@ -63,18 +60,16 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     Emitter<OtpState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: ResponseState.loading));
-      await _otpRepository.verifyOtp(verifyOtpRequest: event.verifyOtpRequest);
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data = await _otpRepository.verifyOtp(
+          verifyOtpRequest: event.verifyOtpRequest);
       cancelStreamSubscription();
-      emit(state.copyWith(
-          status: ResponseState.success,
-          responseMessage: 'Verify OTP Success'));
+      data.copyWith(message: 'Verify OTP Success');
+      emit(state.copyWith(response: data));
     } on UnauthorizedException {
-      emit(state.copyWith(
-          status: ResponseState.error, responseMessage: 'Invalid OTP'));
+      emit(state.copyWith(response: BaseResponse.error('Invalid OTP')));
     } catch (e) {
-      emit(state.copyWith(
-          status: ResponseState.error, responseMessage: e.toString()));
+      emit(state.copyWith(response: BaseResponse.error(e.toString())));
     }
   }
 

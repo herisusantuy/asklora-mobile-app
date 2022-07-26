@@ -23,7 +23,6 @@ class SignInRepository {
     var signInResponse = SignInResponse.fromJson(response.data);
     _storage.saveAccessToken(signInResponse.access);
     _storage.saveRefreshToken(signInResponse.refresh);
-
-    return BaseResponse(data: signInResponse);
+    return BaseResponse.complete(signInResponse);
   }
 }

@@ -27,22 +27,19 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
     Emitter<SignOutState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: ResponseState.loading));
+      emit(state.copyWith(response: BaseResponse.loading()));
       var isSignedOut = await _signOutRepository
           .signOut(await _tokenRepository.getRefreshToken());
       if (isSignedOut) {
         await _tokenRepository.deleteAll();
         emit(state.copyWith(
-            status: ResponseState.success,
-            responseMessage: 'Sign Out Success'));
+            response: BaseResponse.complete('Sign Out Success')));
       } else {
         emit(state.copyWith(
-            status: ResponseState.error,
-            responseMessage: 'Not able to sign-out!'));
+            response: BaseResponse.error('Not able to sign-out!')));
       }
     } catch (e) {
-      emit(state.copyWith(
-          status: ResponseState.error, responseMessage: e.toString()));
+      emit(state.copyWith(response: BaseResponse.error(e.toString())));
     }
   }
 }

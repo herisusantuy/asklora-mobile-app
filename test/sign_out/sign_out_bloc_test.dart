@@ -34,10 +34,7 @@ void main() async {
     });
 
     test('Sign Out Bloc init state is should be `unknown`', () {
-      expect(
-          signOutBloc.state,
-          const SignOutState(
-              status: ResponseState.unknown, responseMessage: ''));
+      expect(signOutBloc.state, const SignOutState(response: BaseResponse()));
     });
 
     blocTest<SignOutBloc, SignOutState>(
@@ -55,11 +52,8 @@ void main() async {
         },
         act: (bloc) => bloc.add(const SignOutSubmitted()),
         expect: () => {
-              const SignOutState(
-                  status: ResponseState.loading, responseMessage: ''),
-              const SignOutState(
-                  status: ResponseState.success,
-                  responseMessage: 'Sign Out Success')
+              SignOutState(response: BaseResponse.loading()),
+              SignOutState(response: BaseResponse.complete('Sign Out Success'))
             });
 
     tearDown(() => {signOutBloc.close()});

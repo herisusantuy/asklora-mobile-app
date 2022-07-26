@@ -33,13 +33,8 @@ void main() async {
     });
 
     test('Otp Bloc init state is should be `unknown`', () {
-      expect(
-          otpBloc.state,
-          const OtpState(
-              status: ResponseState.unknown,
-              otp: '',
-              responseMessage: '',
-              resetTime: 0));
+      expect(otpBloc.state,
+          const OtpState(response: BaseResponse(), otp: '', resetTime: 0));
     });
 
     blocTest<OtpBloc, OtpState>(
@@ -54,11 +49,10 @@ void main() async {
         },
         act: (bloc) => bloc.add(const OtpRequested('test321@example.com')),
         expect: () => {
-              const OtpState(status: ResponseState.loading),
-              const OtpState(
-                responseMessage: 'User does not exist with the given email',
-                status: ResponseState.error,
-              ),
+              OtpState(response: BaseResponse.loading()),
+              OtpState(
+                  response: BaseResponse.error(
+                      'User does not exist with the given email'))
             });
 
     blocTest<OtpBloc, OtpState>(
@@ -68,16 +62,17 @@ void main() async {
           when(otpRepository.getOtp(
                   getOtpRequest: GetOtpRequest(
                       'test123@example.com', OtpType.register.value)))
-              .thenAnswer((_) => Future.value(BaseResponse(
-                  data: GetOtpResponse('OTP code sent to your email'))));
+              .thenAnswer((_) => Future.value(BaseResponse.complete(
+                  const GetOtpResponse('OTP code sent to your email'))));
           return otpBloc;
         },
         act: (bloc) => bloc.add(const OtpRequested('test123@example.com')),
         expect: () => {
-              const OtpState(status: ResponseState.loading),
+              OtpState(response: BaseResponse.loading()),
               const OtpState(
-                responseMessage: 'OTP code sent to your email',
-                status: ResponseState.unknown,
+                response: BaseResponse<GetOtpResponse>(
+                    data: GetOtpResponse('OTP code sent to your email'),
+                    state: ResponseState.success),
                 resetTime: 180,
                 disableRequest: true,
               ),
@@ -96,9 +91,8 @@ void main() async {
         act: (bloc) => bloc.add(const OtpSubmitted(
             VerifyOtpRequest('test123@example.com', '112233'))),
         expect: () => {
-              const OtpState(status: ResponseState.loading),
-              const OtpState(
-                  status: ResponseState.error, responseMessage: 'Invalid OTP'),
+              OtpState(response: BaseResponse.loading()),
+              OtpState(response: BaseResponse.error('Invalid OTP'))
             });
 
     blocTest<OtpBloc, OtpState>(
@@ -108,17 +102,18 @@ void main() async {
           when(otpRepository.verifyOtp(
                   verifyOtpRequest:
                       const VerifyOtpRequest('test123@example.com', '112233')))
-              .thenAnswer((_) => Future.value(
-                  BaseResponse(data: GetOtpResponse('Verify OTP Success'))));
+              .thenAnswer((_) => Future.value(BaseResponse.complete(
+                  const GetOtpResponse('Verify OTP Success'))));
           return otpBloc;
         },
         act: (bloc) => bloc.add(const OtpSubmitted(
             VerifyOtpRequest('test123@example.com', '112233'))),
         expect: () => {
-              const OtpState(status: ResponseState.loading),
+              OtpState(response: BaseResponse.loading()),
               const OtpState(
-                  status: ResponseState.success,
-                  responseMessage: 'Verify OTP Success'),
+                  response: BaseResponse<GetOtpResponse>(
+                      data: GetOtpResponse('Verify OTP Success'),
+                      state: ResponseState.success))
             });
 
     tearDown(() => {otpBloc.close()});

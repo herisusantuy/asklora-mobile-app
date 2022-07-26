@@ -14,6 +14,6 @@ class SignUpRepository {
   }) async {
     var response =
         await _signUpApiClient.signUp(SignUpRequest(email, password));
-    return BaseResponse(data: SignUpResponse.fromJson(response.data));
+    return BaseResponse.complete(SignUpResponse.fromJson(response.data));
   }
 }

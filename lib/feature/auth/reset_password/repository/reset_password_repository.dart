@@ -14,6 +14,6 @@ class ResetPasswordRepository {
     var response = await _resetPasswordApiClient.resetPassword(
       ResetPasswordRequest(email),
     );
-    return BaseResponse(data: ResetPasswordResponse.fromJson(response.data));
+    return BaseResponse.complete(ResetPasswordResponse.fromJson(response.data));
   }
 }

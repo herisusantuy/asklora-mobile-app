@@ -18,14 +18,14 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignInBloc, SignInState>(
       listener: (context, state) async {
-        switch (state.status) {
+        switch (state.response.state) {
           case ResponseState.error:
             context
                 .read<SignInBloc>()
                 .add(SignInEmailChanged(state.emailAddress));
 
             CustomSnackBar(context)
-                .setMessage(state.responseMessage)
+                .setMessage(state.response.message)
                 .showError();
             break;
           case ResponseState.success:
@@ -107,7 +107,7 @@ class SignInForm extends StatelessWidget {
         return CustomTextButton(
           key: const Key('sign_in_submit_button'),
           buttonText: 'Login',
-          isLoading: state.status == ResponseState.loading,
+          isLoading: state.response.state == ResponseState.loading,
           disable:
               (!state.emailAddress.isValidEmail() || state.password.isEmpty),
           onClick: () =>

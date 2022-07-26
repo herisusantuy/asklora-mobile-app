@@ -14,7 +14,7 @@ class OtpRepository {
   }) async {
     var response = await _getOtpApiClient.getOtp(getOtpRequest);
 
-    return BaseResponse(data: GetOtpResponse.fromJson(response.data));
+    return BaseResponse.complete(GetOtpResponse.fromJson(response.data));
   }
 
   Future<BaseResponse<GetOtpResponse>> verifyOtp({

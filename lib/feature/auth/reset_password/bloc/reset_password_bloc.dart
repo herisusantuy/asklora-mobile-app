@@ -26,7 +26,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ) {
     emit(
       state.copyWith(
-          status: ResponseState.unknown,
+          response: BaseResponse.unknown(),
           email: event.email,
           isEmailValid: event.email.isValidEmail(),
           emailErrorText: (event.email.isValidEmail() || event.email.isEmpty)
@@ -38,20 +38,16 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   void _onResetPasswordSubmitted(
       ResetPasswordSubmitted event, Emitter<ResetPasswordState> emit) async {
     try {
-      emit(state.copyWith(status: ResponseState.loading));
-      await _resetPasswordRepository.resetPassword(email: state.email);
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data =
+          await _resetPasswordRepository.resetPassword(email: state.email);
+      data.copyWith(message: 'Successfully sent new password!');
 
-      emit(state.copyWith(
-          status: ResponseState.success,
-          responseMessage: 'Succesfully sent new password!'));
+      emit(state.copyWith(response: data));
     } on BadRequestException {
-      emit(
-        state.copyWith(
-            status: ResponseState.error, responseMessage: 'Bad request.'),
-      );
+      emit(state.copyWith(response: BaseResponse.error('Bad request.')));
     } catch (e) {
-      emit(state.copyWith(
-          status: ResponseState.error, responseMessage: e.toString()));
+      state.copyWith(response: BaseResponse.error(e.toString()));
     }
   }
 }

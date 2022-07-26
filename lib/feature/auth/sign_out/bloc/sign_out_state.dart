@@ -1,27 +1,16 @@
 part of 'sign_out_bloc.dart';
 
 class SignOutState extends Equatable {
-  final ResponseState status;
-  final String responseMessage;
+  final BaseResponse response;
 
-  const SignOutState({
-    this.status = ResponseState.unknown,
-    this.responseMessage = '',
-  }) : super();
+  const SignOutState({this.response = const BaseResponse()}) : super();
 
   @override
-  List<Object> get props => [
-        status,
-        responseMessage,
-      ];
+  List<Object> get props => [response];
 
   SignOutState copyWith({
-    ResponseState? status,
-    String? responseMessage,
+    BaseResponse? response,
   }) {
-    return SignOutState(
-      status: status ?? this.status,
-      responseMessage: responseMessage ?? this.responseMessage,
-    );
+    return SignOutState(response: response ?? this.response);
   }
 }
