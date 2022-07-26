@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/presentation/custom_text.dart';
 import '../../../core/presentation/custom_text_button.dart';
@@ -23,14 +24,14 @@ class DepositMethodScreen extends StatelessWidget {
           padding: EdgeInsets.only(top: 10, bottom: 50),
           type: FontType.h4,
         ),
-        _wireTransferButton(),
-        _fpsButton(),
-        _whatIsFpsButton(),
+        _wireTransferButton(context),
+        _fpsButton(context),
+        _whatIsFpsButton(context),
       ],
     );
   }
 
-  Widget _wireTransferButton() {
+  Widget _wireTransferButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30.0),
       child: CustomTextButton(
@@ -41,7 +42,7 @@ class DepositMethodScreen extends StatelessWidget {
     );
   }
 
-  Widget _fpsButton() {
+  Widget _fpsButton(BuildContext context) {
     return Padding(
       padding: EdgeInsets.zero,
       child: CustomTextButton(
@@ -52,14 +53,15 @@ class DepositMethodScreen extends StatelessWidget {
     );
   }
 
-  Widget _whatIsFpsButton() {
+  Widget _whatIsFpsButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: InkWell(
-        key: const Key('what_is_fps_button'),
-        child: const CustomText('What is FPS?'),
-        onTap: () => '',
-      ),
+          key: const Key('what_is_fps_button'),
+          child: const CustomText('What is FPS?'),
+          onTap: () => context
+              .read<DepositBloc>()
+              .add(const PageChanged(DepositPages.fpsMeaning))),
     );
   }
 }
