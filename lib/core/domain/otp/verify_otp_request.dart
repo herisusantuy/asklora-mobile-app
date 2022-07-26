@@ -18,6 +18,5 @@ class VerifyOtpRequest extends Equatable {
   Map<String, dynamic> toJson() => _$VerifyOtpRequestToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [email, otpCode];
 }

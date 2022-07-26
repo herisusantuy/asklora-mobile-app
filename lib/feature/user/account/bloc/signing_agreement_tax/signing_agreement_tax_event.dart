@@ -9,6 +9,7 @@ abstract class SigningAgreementTaxEvent extends Equatable {
 
 class FormW8BenOpened extends SigningAgreementTaxEvent {
   final bool isFormW8BenOpened;
+
   const FormW8BenOpened(
     this.isFormW8BenOpened,
   ) : super();
@@ -19,6 +20,7 @@ class FormW8BenOpened extends SigningAgreementTaxEvent {
 
 class CertifyNotUsCitizenChecked extends SigningAgreementTaxEvent {
   final bool isCertifyChecked;
+
   const CertifyNotUsCitizenChecked(
     this.isCertifyChecked,
   ) : super();
@@ -29,6 +31,7 @@ class CertifyNotUsCitizenChecked extends SigningAgreementTaxEvent {
 
 class DeclareCorrectInformationChecked extends SigningAgreementTaxEvent {
   final bool isDeclareChecked;
+
   const DeclareCorrectInformationChecked(
     this.isDeclareChecked,
   ) : super();

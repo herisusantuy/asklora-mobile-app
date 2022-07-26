@@ -1,5 +1,6 @@
 import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
-import 'package:asklora_mobile_app/feature/deposit/presentation/deposit_method_screen.dart';
+import 'package:asklora_mobile_app/feature/deposit/bloc/deposit_bloc.dart';
+import 'package:asklora_mobile_app/feature/deposit/presentation/deposit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,7 +11,9 @@ void main() {
     Future<void> _buildDepositMethodScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: const DepositMethodScreen(),
+        home: const DepositScreen(
+          initialDepositPages: DepositPages.depositMethod,
+        ),
         navigatorObservers: [mockObserver],
       ));
     }
@@ -24,7 +27,10 @@ void main() {
       expect(find.text('Deposit Method'), findsOneWidget);
       expect(find.text('Please select method of deposit'), findsOneWidget);
       expect((wireTransferButton), findsOneWidget);
+      expect(
+          (tester.widget<CustomTextButton>(wireTransferButton)).disable, false);
       expect(fpsButton, findsOneWidget);
+      expect((tester.widget<CustomTextButton>(fpsButton)).disable, false);
       expect(whatIsFpsButton, findsOneWidget);
     });
   });

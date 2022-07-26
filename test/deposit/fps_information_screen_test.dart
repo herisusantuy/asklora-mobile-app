@@ -1,15 +1,18 @@
-import 'package:asklora_mobile_app/feature/deposit/presentation/what_is_fps_screen.dart';
+import 'package:asklora_mobile_app/feature/deposit/bloc/deposit_bloc.dart';
+import 'package:asklora_mobile_app/feature/deposit/presentation/deposit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../mocks/mocks.dart';
 
 void main() {
-  group('*What is FPS Screen*', () {
+  group('*FPS Information Screen Test*', () {
     Future<void> _buildWhatIsFpsScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: const WhatIsFpsScreen(),
+        home: const DepositScreen(
+          initialDepositPages: DepositPages.fpsMeaning,
+        ),
         navigatorObservers: [mockObserver],
       ));
     }

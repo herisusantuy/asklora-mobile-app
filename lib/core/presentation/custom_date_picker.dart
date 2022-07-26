@@ -11,6 +11,7 @@ class CustomDatePicker extends StatelessWidget {
   final DateTime? initialDateTime;
   final int? maximumYear;
   final void Function(DateTime) onDateTimeChanged;
+
   const CustomDatePicker(
       {Key? key,
       this.label = '',
@@ -47,7 +48,8 @@ class CustomDatePicker extends StatelessWidget {
               child: Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 20),
                     child: CustomText(selectedDate != null
                         ? '${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}'
                         : '-'),

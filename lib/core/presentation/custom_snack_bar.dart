@@ -8,26 +8,28 @@ class CustomSnackBar {
   CustomSnackBar(this.context);
 
   late String _message = '';
-  CustomSnackBarType _type = CustomSnackBarType.success;
 
   CustomSnackBar setMessage(String message) {
     _message = message;
     return this;
   }
 
-  CustomSnackBar setType(CustomSnackBarType type) {
-    _type = type;
-    return this;
-  }
-
-  void show() {
+  void _show(CustomSnackBarType type) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(
         backgroundColor:
-            _type == CustomSnackBarType.success ? Colors.green : Colors.red,
+            type == CustomSnackBarType.success ? Colors.green : Colors.red,
         content: CustomText(_message),
       ));
+  }
+
+  void showError() {
+    _show(CustomSnackBarType.error);
+  }
+
+  void show() {
+    _show(CustomSnackBarType.success);
   }
 }
 
