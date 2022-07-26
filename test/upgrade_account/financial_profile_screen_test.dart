@@ -1,6 +1,5 @@
 import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
 import 'package:asklora_mobile_app/core/presentation/custom_dropdown.dart';
-import 'package:asklora_mobile_app/feature/user/account/bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

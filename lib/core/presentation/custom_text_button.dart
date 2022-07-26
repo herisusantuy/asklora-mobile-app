@@ -7,6 +7,8 @@ class CustomTextButton extends StatelessWidget {
   final Function onClick;
   final Color primaryColor;
   final double borderRadius;
+  final double? height;
+  final double? width;
 
   const CustomTextButton(
       {required this.buttonText,
@@ -15,13 +17,17 @@ class CustomTextButton extends StatelessWidget {
       this.borderRadius = 0,
       this.isLoading = false,
       this.disable = false,
+      this.height,
+      this.width,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minHeight: 55, minWidth: 55),
+      height: height,
+      width: width,
+      constraints: const BoxConstraints(minHeight: 40, minWidth: 55),
       child: isLoading
           ? const CircularProgressIndicator()
           : ElevatedButton(
