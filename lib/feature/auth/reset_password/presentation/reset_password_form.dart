@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
@@ -14,17 +15,16 @@ class ResetPasswordForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ResetPasswordBloc, ResetPasswordState>(
       listener: (context, state) {
-        switch (state.status) {
-          case ResetPasswordStatus.failure:
+        switch (state.response.state) {
+          case ResponseState.error:
             context
                 .read<ResetPasswordBloc>()
                 .add(ResetPasswordEmailChanged(state.email));
             CustomSnackBar(context)
-                .setMessage(state.responseMessage)
-                .setType(CustomSnackBarType.error)
-                .show();
+                .setMessage(state.response.message)
+                .showError();
             break;
-          case ResetPasswordStatus.success:
+          case ResponseState.success:
             ResetPasswordSuccesScreen.open(context);
             break;
           default:
@@ -68,7 +68,7 @@ class ResetPasswordForm extends StatelessWidget {
         return CustomTextButton(
           key: const Key('reset_password_submit_button'),
           buttonText: 'Submit',
-          isLoading: state.status == ResetPasswordStatus.loading,
+          isLoading: state.response.state == ResponseState.loading,
           disable: !state.isEmailValid,
           onClick: () => context.read<ResetPasswordBloc>().add(
                 const ResetPasswordSubmitted(),

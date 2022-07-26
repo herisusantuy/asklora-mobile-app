@@ -1,46 +1,39 @@
 part of 'reset_password_bloc.dart';
 
-enum ResetPasswordStatus { success, failure, unknown, loading }
-
 class ResetPasswordState extends Equatable {
-  const ResetPasswordState(
-      {this.status = ResetPasswordStatus.unknown,
-      this.email = '',
-      this.isEmailValid = false,
-      this.emailErrorText = '',
-      this.responseMessage = ''})
-      : super();
+  const ResetPasswordState({
+    this.response = const BaseResponse(),
+    this.email = '',
+    this.isEmailValid = false,
+    this.emailErrorText = '',
+  }) : super();
 
-  final ResetPasswordStatus status;
+  final BaseResponse response;
   final String email;
   final bool isEmailValid;
   final String emailErrorText;
-  final String responseMessage;
 
   ResetPasswordState copyWith({
-    ResetPasswordStatus? status,
+    BaseResponse? response,
     String? email,
     bool? isEmailValid,
     String? emailErrorText,
-    String? responseMessage,
   }) {
     return ResetPasswordState(
-      status: status ?? this.status,
+      response: response ?? this.response,
       email: email ?? this.email,
       isEmailValid: isEmailValid ?? this.isEmailValid,
       emailErrorText: emailErrorText ?? this.emailErrorText,
-      responseMessage: responseMessage ?? this.responseMessage,
     );
   }
 
   @override
   List<Object> get props {
     return [
-      status,
+      response,
       email,
       isEmailValid,
       emailErrorText,
-      responseMessage,
     ];
   }
 }

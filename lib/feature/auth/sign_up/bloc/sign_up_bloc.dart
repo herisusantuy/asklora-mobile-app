@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_up_repository.dart';
 
@@ -28,7 +28,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) {
     emit(
       state.copyWith(
-          status: SignUpStatus.unknown,
+          response: BaseResponse.unknown(),
           username: event.username,
           isEmailValid: event.username.isValidEmail(),
           usernameErrorText:
@@ -43,7 +43,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) {
     emit(state.copyWith(
-        status: SignUpStatus.unknown,
+        response: BaseResponse.unknown(),
         password: event.password,
         passwordErrorText:
             (event.password.isValidPassword() || event.password.isEmpty)
@@ -57,23 +57,19 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: SignUpStatus.loading));
-      await _signUpRepository.signUp(
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data = await _signUpRepository.signUp(
           email: state.username, password: state.password);
-      emit(state.copyWith(
-          status: SignUpStatus.success,
-          responseMessage: 'Account created successfully!'));
+      emit(state.copyWith(response: data));
     } on ConflictException {
       emit(state.copyWith(
-          status: SignUpStatus.failure,
-          responseMessage: 'Account with this email already exists'));
+          response:
+              BaseResponse.error('Account with this email already exists')));
     } on BadRequestException {
       emit(state.copyWith(
-          status: SignUpStatus.failure,
-          responseMessage: 'This password is too common.'));
+          response: BaseResponse.error('This password is too common.')));
     } catch (e) {
-      emit(state.copyWith(
-          status: SignUpStatus.failure, responseMessage: e.toString()));
+      emit(state.copyWith(response: BaseResponse.error(e.toString())));
     }
   }
 }

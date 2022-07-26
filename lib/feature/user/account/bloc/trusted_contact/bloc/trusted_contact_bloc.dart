@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/extensions.dart';
 
-part 'trusted_contact_state.dart';
 part 'trusted_contact_event.dart';
+
+part 'trusted_contact_state.dart';
 
 class TrustedContactBloc
     extends Bloc<TrustedContactEvent, TrustedContactState> {

@@ -1,13 +1,14 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'token_verify_response.g.dart';
 
 @JsonSerializable()
-class TokenVerifyResponse {
-  String? detail;
-  String? code;
+class TokenVerifyResponse extends Equatable {
+  final String? detail;
+  final String? code;
 
-  TokenVerifyResponse(
+  const TokenVerifyResponse(
     this.detail,
     this.code,
   );
@@ -16,4 +17,7 @@ class TokenVerifyResponse {
       _$TokenVerifyResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$TokenVerifyResponseToJson(this);
+
+  @override
+  List<Object?> get props => [detail, code];
 }

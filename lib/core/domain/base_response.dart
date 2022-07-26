@@ -5,10 +5,10 @@ enum ResponseState { success, error, unknown, loading }
 class BaseResponse<T> extends Equatable {
   final ResponseState state;
   final T? data;
-  final Exception? exception;
+  final String message;
 
   const BaseResponse(
-      {this.state = ResponseState.success, this.data, this.exception});
+      {this.state = ResponseState.unknown, this.data, this.message = ''});
 
   static BaseResponse<T> unknown<T>() {
     return const BaseResponse(state: ResponseState.unknown);
@@ -18,28 +18,29 @@ class BaseResponse<T> extends Equatable {
     return const BaseResponse(state: ResponseState.loading);
   }
 
-  static BaseResponse<T> complete<T>(T data) {
-    return BaseResponse(state: ResponseState.success, data: data);
+  static BaseResponse<T> complete<T>(T data, {String message = ''}) {
+    return BaseResponse(
+        state: ResponseState.success, data: data, message: message);
   }
 
-  static BaseResponse<T> error<T>(Exception exception) {
-    return BaseResponse(state: ResponseState.error, exception: exception);
+  static BaseResponse<T> error<T>(String message) {
+    return BaseResponse(state: ResponseState.error, message: message);
   }
 
   BaseResponse<T> copyWith({
     ResponseState? state,
     T? data,
-    Exception? exception,
+    String? message,
   }) {
     return BaseResponse<T>(
       state: state ?? this.state,
       data: data ?? this.data,
-      exception: exception ?? this.exception,
+      message: message ?? this.message,
     );
   }
 
   @override
   List<Object?> get props {
-    return [state, data, exception];
+    return [state, data, message];
   }
 }

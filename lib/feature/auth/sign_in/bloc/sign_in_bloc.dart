@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_in_repository.dart';
 
@@ -22,7 +23,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   void _onEmailChanged(SignInEmailChanged event, Emitter<SignInState> emit) {
     emit(state.copyWith(
-        status: SignInStatus.unknown,
+        response: BaseResponse.unknown(),
         emailAddress: event.emailAddress,
         isEmailValid: event.emailAddress.isValidEmail(),
         emailAddressErrorText:
@@ -36,7 +37,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     Emitter<SignInState> emit,
   ) {
     emit(state.copyWith(
-        status: SignInStatus.unknown,
+        response: BaseResponse.unknown(),
         password: event.password,
         isPasswordValid: event.password.isValidPassword(),
         passwordErrorText:
@@ -50,27 +51,24 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     Emitter<SignInState> emit,
   ) async {
     try {
-      emit(state.copyWith(status: SignInStatus.loading));
-      await _signInRepository.signIn(
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data = await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
 
-      emit(state.copyWith(
-          status: SignInStatus.success,
-          responseMessage: 'Authentication Success'));
+      data.copyWith(message: 'Authentication Success');
+
+      emit(state.copyWith(response: data));
     } on UnauthorizedException {
-      emit(state.copyWith(
-          status: SignInStatus.failure, responseMessage: 'Invalid Password'));
+      emit(state.copyWith(response: BaseResponse.error('Invalid Password')));
     } on NotFoundException {
       emit(state.copyWith(
-          status: SignInStatus.failure,
-          responseMessage: 'User does not exist with the given email'));
+          response:
+              BaseResponse.error('User does not exist with the given email')));
     } on NotAcceptableException {
       emit(state.copyWith(
-          status: SignInStatus.failure,
-          responseMessage: 'User email is not verified'));
+          response: BaseResponse.error('User email is not verified')));
     } catch (e) {
-      emit(state.copyWith(
-          status: SignInStatus.failure, responseMessage: e.toString()));
+      emit(state.copyWith(response: BaseResponse.error(e.toString())));
     }
   }
 }

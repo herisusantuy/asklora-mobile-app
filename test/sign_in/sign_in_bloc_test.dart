@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
@@ -52,13 +53,13 @@ void main() async {
         expect(
             signInBloc.state,
             const SignInState(
-                status: SignInStatus.unknown,
-                emailAddress: '',
-                isEmailValid: false,
-                password: '',
-                isPasswordValid: false,
-                passwordErrorText: '',
-                responseMessage: ''));
+              response: BaseResponse(),
+              emailAddress: '',
+              isEmailValid: false,
+              password: '',
+              isPasswordValid: false,
+              passwordErrorText: '',
+            ));
       },
     );
 
@@ -70,18 +71,17 @@ void main() async {
           bloc.add(const SignInPasswordChanged('TestQWE123'));
         },
         expect: () => {
-              const SignInState(
-                status: SignInStatus.unknown,
+              SignInState(
+                response: BaseResponse.unknown(),
                 emailAddress: 'qweasdzxc',
                 isEmailValid: false,
                 emailAddressErrorText: 'Enter valid email',
                 password: '',
                 isPasswordValid: false,
                 passwordErrorText: '',
-                responseMessage: '',
               ),
-              const SignInState(
-                  status: SignInStatus.unknown,
+              SignInState(
+                  response: BaseResponse.unknown(),
                   emailAddress: 'qweasdzxc',
                   isEmailValid: false,
                   emailAddressErrorText: 'Enter valid email',
@@ -94,15 +94,14 @@ void main() async {
         build: () => signInBloc,
         act: (bloc) => bloc.add(const SignInEmailChanged('nyoba@yopmail.com')),
         expect: () => {
-              const SignInState(
-                status: SignInStatus.unknown,
+              SignInState(
+                response: BaseResponse.unknown(),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: '',
                 isPasswordValid: false,
                 passwordErrorText: '',
-                responseMessage: '',
               )
             });
 
@@ -111,11 +110,10 @@ void main() async {
         build: () {
           when(signInRepository.signIn(
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
-              .thenAnswer(
-            (_) => Future.value(
-              SignInResponse('access', 'refresh'),
-            ),
-          );
+              .thenAnswer((_) => Future.value(
+                  const BaseResponse<SignInResponse>(
+                      data: SignInResponse('access', 'refresh'),
+                      state: ResponseState.success)));
 
           return signInBloc;
         },
@@ -125,42 +123,44 @@ void main() async {
               bloc.add(const SignInSubmitted())
             },
         expect: () => {
+              SignInState(
+                response: BaseResponse.unknown(),
+                emailAddress: 'nyoba@yopmail.com',
+                isEmailValid: true,
+                emailAddressErrorText: '',
+                password: '',
+                isPasswordValid: false,
+                passwordErrorText: '',
+              ),
+              SignInState(
+                response: BaseResponse.unknown(),
+                emailAddress: 'nyoba@yopmail.com',
+                isEmailValid: true,
+                emailAddressErrorText: '',
+                password: 'TestQWE123',
+                isPasswordValid: true,
+                passwordErrorText: '',
+              ),
+              SignInState(
+                response: BaseResponse.loading(),
+                emailAddress: 'nyoba@yopmail.com',
+                isEmailValid: true,
+                emailAddressErrorText: '',
+                password: 'TestQWE123',
+                isPasswordValid: true,
+                passwordErrorText: '',
+              ),
               const SignInState(
-                  status: SignInStatus.unknown,
-                  emailAddress: 'nyoba@yopmail.com',
-                  isEmailValid: true,
-                  emailAddressErrorText: '',
-                  password: '',
-                  isPasswordValid: false,
-                  passwordErrorText: '',
-                  responseMessage: ''),
-              const SignInState(
-                  status: SignInStatus.unknown,
-                  emailAddress: 'nyoba@yopmail.com',
-                  isEmailValid: true,
-                  emailAddressErrorText: '',
-                  password: 'TestQWE123',
-                  isPasswordValid: true,
-                  passwordErrorText: '',
-                  responseMessage: ''),
-              const SignInState(
-                  status: SignInStatus.loading,
-                  emailAddress: 'nyoba@yopmail.com',
-                  isEmailValid: true,
-                  emailAddressErrorText: '',
-                  password: 'TestQWE123',
-                  isPasswordValid: true,
-                  passwordErrorText: '',
-                  responseMessage: ''),
-              const SignInState(
-                  status: SignInStatus.success,
-                  emailAddress: 'nyoba@yopmail.com',
-                  isEmailValid: true,
-                  emailAddressErrorText: '',
-                  password: 'TestQWE123',
-                  isPasswordValid: true,
-                  passwordErrorText: '',
-                  responseMessage: 'Authentication Success')
+                response: BaseResponse<SignInResponse>(
+                    data: SignInResponse('access', 'refresh'),
+                    state: ResponseState.success),
+                emailAddress: 'nyoba@yopmail.com',
+                isEmailValid: true,
+                emailAddressErrorText: '',
+                password: 'TestQWE123',
+                isPasswordValid: true,
+                passwordErrorText: '',
+              )
             });
     tearDown(() => signInBloc.close());
   });

@@ -4,7 +4,7 @@ enum FundingSource {
   employmentIncome,
   investments,
   inheritance,
-  bussinessIncome,
+  businessIncome,
   savings,
   family,
   unknown
@@ -13,19 +13,19 @@ enum FundingSource {
 String fundingSourceValue(FundingSource fundingSource) {
   switch (fundingSource) {
     case FundingSource.employmentIncome:
-      return "employment_income";
+      return 'employment_income';
     case FundingSource.investments:
-      return "investments";
+      return 'investments';
     case FundingSource.inheritance:
-      return "inheritance";
-    case FundingSource.bussinessIncome:
-      return "bussiness_income";
+      return 'inheritance';
+    case FundingSource.businessIncome:
+      return 'business_income';
     case FundingSource.savings:
-      return "savings";
+      return 'savings';
     case FundingSource.family:
-      return "family";
+      return 'family';
     default:
-      return "unknown";
+      return 'unknown';
   }
 }
 

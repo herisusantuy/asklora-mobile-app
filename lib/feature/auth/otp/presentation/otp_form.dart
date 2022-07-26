@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
@@ -25,14 +26,13 @@ class OtpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
-        switch (state.status) {
-          case OtpStatus.failure:
+        switch (state.response.state) {
+          case ResponseState.error:
             CustomSnackBar(context)
-                .setMessage(state.responseMessage)
-                .setType(CustomSnackBarType.error)
-                .show();
+                .setMessage(state.response.message)
+                .showError();
             break;
-          case OtpStatus.success:
+          case ResponseState.success:
             SignUpSuccessScreen.openReplace(context);
             break;
           default:
@@ -91,7 +91,7 @@ class OtpForm extends StatelessWidget {
     return BlocBuilder<OtpBloc, OtpState>(
         buildWhen: (previous, current) =>
             previous.resetTime != current.resetTime ||
-            previous.status != current.status,
+            previous.response.state != current.response.state,
         builder: (context, state) {
           if (state.disableRequest) {
             return CustomText(
@@ -100,7 +100,7 @@ class OtpForm extends StatelessWidget {
           } else {
             return CustomTextButton(
               key: const Key('request_otp_button'),
-              isLoading: state.status == OtpStatus.loading,
+              isLoading: state.response.state == ResponseState.loading,
               buttonText: 'Request OTP',
               onClick: () => onOtpResend(),
               primaryColor: COLORS.text,

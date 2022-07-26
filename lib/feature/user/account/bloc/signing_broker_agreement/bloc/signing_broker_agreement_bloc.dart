@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../repository/signing_broker_agreement_repository.dart';
 
 part 'signing_broker_agreement_event.dart';
+
 part 'signing_broker_agreement_state.dart';
 
 class SigningBrokerAgreementBloc
@@ -21,10 +22,12 @@ class SigningBrokerAgreementBloc
   }
 
   final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
+
   _onAlpacaCustomerAgreementOpened(AlpacaCustomerAgreementOpened event,
       Emitter<SigningBrokerAgreementState> emit) async {
     await _signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
         'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf');
+
     emit(state.copyWith(
         isAlpacaCustomerAgreementOpened:
             event.isAlpacaCustomerAgreementOpened));
