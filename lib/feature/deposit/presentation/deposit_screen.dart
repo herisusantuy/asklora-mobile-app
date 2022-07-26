@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/deposit_bloc.dart';
 import 'deposit_method_screen.dart';
 import 'deposit_welcome_screen.dart';
+import 'fps_information_screen.dart';
 
 class DepositScreen extends StatelessWidget {
   static const String route = '/deposit_screen';
@@ -40,6 +41,8 @@ class DepositScreen extends StatelessWidget {
         return const DepositWelcomeScreen();
       case DepositPages.depositMethod:
         return const DepositMethodScreen();
+      case DepositPages.fpsMeaning:
+        return const FpsInformationScreen();
       default:
         return const SizedBox.shrink();
     }
