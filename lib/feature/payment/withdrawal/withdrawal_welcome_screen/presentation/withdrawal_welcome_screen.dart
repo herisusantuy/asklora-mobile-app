@@ -11,7 +11,9 @@ class WithdrawalWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomWithdrawalWidget(
       navigationButton: const WithdrawalNextButton(
-          nextTo: WithdrawalPages.bankDetail, disable: false),
+          key: Key('withdrawal_welcome_screen_next_button'),
+          nextTo: WithdrawalPages.bankDetail,
+          disable: false),
       children: [
         const CustomText('Withdrawal', type: FontType.h1),
         const SizedBox(
