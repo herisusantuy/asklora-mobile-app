@@ -53,7 +53,9 @@ class FinancialProfileForm extends StatelessWidget {
             key: const Key('account_annual_income_select'),
             padding: const EdgeInsets.only(top: 20),
             label: 'Annual Household Income',
-            hintName: '-',
+            hintName: state.annualHouseholdIncome.isNotEmpty
+                ? state.annualHouseholdIncome
+                : '-',
             value: state.annualHouseholdIncome,
             itemsList: incomeRange,
             onChanged: (value) => context
@@ -72,7 +74,9 @@ class FinancialProfileForm extends StatelessWidget {
             key: const Key('account_investible_liquid_assets_select'),
             padding: const EdgeInsets.only(top: 10),
             label: 'Investible Liquid Assets',
-            hintName: '-',
+            hintName: state.investibleLiquidAssets.isNotEmpty
+                ? state.investibleLiquidAssets
+                : '-',
             value: state.investibleLiquidAssets,
             itemsList: incomeRange,
             onChanged: (value) => context
@@ -91,7 +95,9 @@ class FinancialProfileForm extends StatelessWidget {
             key: const Key('account_funding_source_select'),
             padding: const EdgeInsets.only(top: 10),
             label: 'Account Funding Source',
-            hintName: '-',
+            hintName: state.fundingSource != FundingSource.unknown
+                ? state.fundingSource.name
+                : '-',
             itemsList: FundingSource.values.map((item) => item.name).toList(),
             value: state.fundingSource.name,
             onChanged: (value) {
@@ -115,7 +121,9 @@ class FinancialProfileForm extends StatelessWidget {
                 key: const Key('account_employment_status_select'),
                 padding: const EdgeInsets.only(top: 10),
                 label: 'Employment Status',
-                hintName: '-',
+                hintName: state.employmentStatus != EmploymentStatus.unknown
+                    ? state.employmentStatus.name
+                    : '-',
                 itemsList: EmploymentStatus.values.map((e) => e.name).toList(),
                 value: state.employmentStatus.name,
                 onChanged: (value) {
@@ -160,9 +168,9 @@ class FinancialProfileForm extends StatelessWidget {
               key: const Key('account_occupation_select'),
               padding: const EdgeInsets.only(top: 10),
               label: 'Occupation',
-              hintName: '-',
+              hintName: state.occupation ?? '-',
               itemsList: items,
-              value: state.occupation,
+              value: state.occupation ?? '',
               onChanged: (value) => context
                   .read<FinancialProfileBloc>()
                   .add(FinancialProfileOccupationChanged(value!)),
@@ -176,30 +184,39 @@ class FinancialProfileForm extends StatelessWidget {
 
   Widget _otherOccupationInput(BuildContext context) => Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: CustomTextInput(
-          key: const Key('account_other_occupation_input'),
-          labelText: '',
-          onChanged: (value) => context
-              .read<FinancialProfileBloc>()
-              .add(FinancialProfileOtherOccupationChanged(value)),
-          hintText: 'Other',
-        ),
+        child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
+            buildWhen: (previous, current) => false,
+            builder: (context, state) => CustomTextInput(
+                  initialValue: state.otherOccupation ?? '',
+                  key: const Key('account_other_occupation_input'),
+                  labelText: 'Other Occupation',
+                  onChanged: (value) => context
+                      .read<FinancialProfileBloc>()
+                      .add(FinancialProfileOtherOccupationChanged(value)),
+                  hintText: 'Other',
+                )),
       );
 
   Widget _employerInput(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: CustomTextInput(
+      padding: const EdgeInsets.only(top: 20),
+      child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
+        buildWhen: (previous, current) => false,
+        builder: (context, state) => CustomTextInput(
+            initialValue: state.employer ?? '',
             key: const Key('account_employer_input'),
             labelText: 'Employer',
             onChanged: (value) => context
                 .read<FinancialProfileBloc>()
                 .add(FinancialProfileEmployerChanged(value)),
             hintText: 'Employer'),
-      );
+      ));
 
   Widget _employerAddressInput(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: CustomTextInput(
+      padding: const EdgeInsets.only(top: 10),
+      child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
+        buildWhen: (previous, current) => false,
+        builder: (context, state) => CustomTextInput(
+          initialValue: state.employerAddress ?? '',
           key: const Key('account_employer_address_input'),
           labelText: 'Employer Address',
           onChanged: (value) => context
@@ -207,7 +224,7 @@ class FinancialProfileForm extends StatelessWidget {
               .add(FinancialProfileEmployerAddressChanged(value)),
           hintText: 'Employer Address',
         ),
-      );
+      ));
 
   Widget _nextButton() {
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(

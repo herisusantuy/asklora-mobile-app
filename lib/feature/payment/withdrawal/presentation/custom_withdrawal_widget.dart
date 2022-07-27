@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/presentation/custom_text.dart';
 import '../bloc/withdrawal_bloc.dart';
 
 class CustomWithdrawalWidget extends StatelessWidget {
@@ -8,9 +9,11 @@ class CustomWithdrawalWidget extends StatelessWidget {
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;
+  final String title;
 
   const CustomWithdrawalWidget(
-      {required this.children,
+      {required this.title,
+      required this.children,
       this.backTo,
       this.onSubmit,
       this.disableButton = true,
@@ -31,28 +34,39 @@ class CustomWithdrawalWidget extends StatelessWidget {
       },
       child: Column(
         children: [
+          SafeArea(
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InkWell(
+                      onTap: () => _onTapBack(context),
+                      child: const Icon(
+                        Icons.chevron_left,
+                        size: 52,
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: CustomText(title, type: FontType.h2),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: SingleChildScrollView(
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InkWell(
-                        onTap: () => _onTapBack(context),
-                        child: const Icon(
-                          Icons.chevron_left,
-                          size: 52,
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: children,
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: children,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

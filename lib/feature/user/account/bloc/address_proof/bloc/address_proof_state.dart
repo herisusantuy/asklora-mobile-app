@@ -30,6 +30,7 @@ class AddressProofState extends Equatable {
     this.mailResidentialAddress = '',
     this.mailCity = '',
     this.mailCountry = '',
+    this.mailCountryName = '',
   });
 
   final String unitNumber;
@@ -42,6 +43,7 @@ class AddressProofState extends Equatable {
   final String mailResidentialAddress;
   final String mailCity;
   final String mailCountry;
+  final String mailCountryName;
 
   AddressProofState copyWith({
     String? unitNumber,
@@ -54,6 +56,7 @@ class AddressProofState extends Equatable {
     String? mailResidentialAddress,
     String? mailCity,
     String? mailCountry,
+    String? mailCountryName,
   }) {
     return AddressProofState(
       unitNumber: unitNumber ?? this.unitNumber,
@@ -67,6 +70,7 @@ class AddressProofState extends Equatable {
           mailResidentialAddress ?? this.mailResidentialAddress,
       mailCity: mailCity ?? this.mailCity,
       mailCountry: mailCountry ?? this.mailCountry,
+      mailCountryName: mailCountryName ?? this.mailCountryName,
     );
   }
 
@@ -83,6 +87,7 @@ class AddressProofState extends Equatable {
       mailResidentialAddress,
       mailCity,
       mailCountry,
+      mailCountryName
     ];
   }
 

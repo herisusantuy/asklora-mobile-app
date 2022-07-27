@@ -40,8 +40,10 @@ class SigningAgreementChecked extends SigningBrokerAgreementEvent {
 
 class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
   final String? customerSignature;
+  final String? signedTime;
 
-  const CustomerSignatureDrew(this.customerSignature) : super();
+  const CustomerSignatureDrew(this.customerSignature, this.signedTime)
+      : super();
 
   @override
   List<Object?> get props => [customerSignature];

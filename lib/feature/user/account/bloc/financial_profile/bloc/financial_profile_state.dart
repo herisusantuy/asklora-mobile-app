@@ -42,10 +42,10 @@ class FinancialProfileState extends Equatable {
   final String investibleLiquidAssets;
   final FundingSource fundingSource;
   final EmploymentStatus employmentStatus;
-  final String occupation;
-  final String otherOccupation;
-  final String employer;
-  final String employerAddress;
+  final String? occupation;
+  final String? otherOccupation;
+  final String? employer;
+  final String? employerAddress;
 
   const FinancialProfileState({
     this.annualHouseholdIncome = '',
@@ -89,10 +89,10 @@ class FinancialProfileState extends Equatable {
       investibleLiquidAssets,
       fundingSource,
       employmentStatus,
-      occupation,
-      otherOccupation,
-      employer,
-      employerAddress,
+      occupation ?? '',
+      otherOccupation ?? '',
+      employer ?? '',
+      employerAddress ?? '',
     ];
   }
 
@@ -102,13 +102,13 @@ class FinancialProfileState extends Equatable {
         return false;
       } else if (EmploymentStatus.employed == employmentStatus) {
         if (occupation != 'Other') {
-          if (employer.isNotEmpty && employerAddress.isNotEmpty) {
+          if (employer != null && employerAddress != null) {
             return true;
           } else {
             return false;
           }
         } else {
-          if (otherOccupation.isNotEmpty) {
+          if (otherOccupation != null) {
             return true;
           } else {
             return false;

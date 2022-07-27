@@ -41,7 +41,7 @@ void main() async {
               bloc.add(const AddressProofMailResidentialAddressChanged(
                   '25 N San Mateo Dr')),
               bloc.add(const AddressProofMailCityChanged('San Jose')),
-              bloc.add(const AddressProofMailCountryChanged('HKG'))
+              bloc.add(const AddressProofMailCountryChanged('HKG', 'Hong Kong'))
             },
         expect: () => {
               const AddressProofState(
@@ -54,6 +54,7 @@ void main() async {
                 mailResidentialAddress: '',
                 mailCity: '',
                 mailCountry: '',
+                mailCountryName: '',
               ),
               const AddressProofState(
                 unitNumber: 'Apt 1A',
@@ -65,6 +66,7 @@ void main() async {
                 mailResidentialAddress: '',
                 mailCity: '',
                 mailCountry: '',
+                mailCountryName: '',
               ),
               const AddressProofState(
                 unitNumber: 'Apt 1A',
@@ -76,6 +78,7 @@ void main() async {
                 mailResidentialAddress: '',
                 mailCity: '',
                 mailCountry: '',
+                mailCountryName: '',
               ),
               const AddressProofState(
                 unitNumber: 'Apt 1A',
@@ -88,6 +91,7 @@ void main() async {
                 mailResidentialAddress: '',
                 mailCity: '',
                 mailCountry: '',
+                mailCountryName: '',
               ),
               const AddressProofState(
                 unitNumber: 'Apt 1A',
@@ -100,6 +104,7 @@ void main() async {
                 mailResidentialAddress: '',
                 mailCity: '',
                 mailCountry: '',
+                mailCountryName: '',
               ),
               const AddressProofState(
                 unitNumber: 'Apt 1A',
@@ -112,6 +117,7 @@ void main() async {
                 mailResidentialAddress: '',
                 mailCity: '',
                 mailCountry: '',
+                mailCountryName: '',
               ),
               const AddressProofState(
                 unitNumber: 'Apt 1A',
@@ -124,6 +130,7 @@ void main() async {
                 mailResidentialAddress: '25 N San Mateo Dr',
                 mailCity: '',
                 mailCountry: '',
+                mailCountryName: '',
               ),
               const AddressProofState(
                 unitNumber: 'Apt 1A',
@@ -136,6 +143,7 @@ void main() async {
                 mailResidentialAddress: '25 N San Mateo Dr',
                 mailCity: 'San Jose',
                 mailCountry: '',
+                mailCountryName: '',
               ),
               const AddressProofState(
                 unitNumber: 'Apt 1A',
@@ -148,6 +156,7 @@ void main() async {
                 mailResidentialAddress: '25 N San Mateo Dr',
                 mailCity: 'San Jose',
                 mailCountry: 'HKG',
+                mailCountryName: 'Hong Kong',
               ),
             });
     tearDown(() => {addressProofBloc.close()});

@@ -25,54 +25,70 @@ class ControlledPersonForm extends StatelessWidget {
 
   Widget _controlledPersonCompanyNameInput(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20.0),
-      child: CustomTextInput(
-          key: const Key('controlled_person_company_name_input'),
-          labelText: 'Company Name',
-          onChanged: (value) => context
-              .read<DisclosureAffiliationBloc>()
-              .add(ControlledPersonCompanyNameChanged(value)),
-          hintText: 'Enter Company Name'),
-    );
+        padding: const EdgeInsets.only(top: 20.0),
+        child:
+            BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
+          buildWhen: (_, __) => false,
+          builder: (context, state) => CustomTextInput(
+              initialValue: state.controlledPersonCompanyName,
+              key: const Key('controlled_person_company_name_input'),
+              labelText: 'Company Name',
+              onChanged: (value) => context
+                  .read<DisclosureAffiliationBloc>()
+                  .add(ControlledPersonCompanyNameChanged(value)),
+              hintText: 'Enter Company Name'),
+        ));
   }
 
   Widget _controlledPersonCompanyAddressInput(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          key: const Key('controlled_person_company_address_input'),
-          labelText: 'Company Street Address',
-          onChanged: (value) => context
-              .read<DisclosureAffiliationBloc>()
-              .add(ControlledPersonCompanyAddressChanged(value)),
-          hintText: 'Enter Company Street Address'),
-    );
+        padding: const EdgeInsets.only(top: 10.0),
+        child:
+            BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
+          buildWhen: (_, __) => false,
+          builder: (context, state) => CustomTextInput(
+              initialValue: state.controlledPersonCompanyAddress,
+              key: const Key('controlled_person_company_address_input'),
+              labelText: 'Company Street Address',
+              onChanged: (value) => context
+                  .read<DisclosureAffiliationBloc>()
+                  .add(ControlledPersonCompanyAddressChanged(value)),
+              hintText: 'Enter Company Street Address'),
+        ));
   }
 
   Widget _controlledPersonCompanyCityInput(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          key: const Key('controlled_person_company_city_input'),
-          labelText: 'Company City',
-          onChanged: (value) => context
-              .read<DisclosureAffiliationBloc>()
-              .add(ControlledPersonCompanyCityChanged(value)),
-          hintText: 'Enter Company City'),
-    );
+        padding: const EdgeInsets.only(top: 10.0),
+        child:
+            BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
+          buildWhen: (_, __) => false,
+          builder: (context, state) => CustomTextInput(
+              initialValue: state.controlledPersonCompanyCity,
+              key: const Key('controlled_person_company_city_input'),
+              labelText: 'Company City',
+              onChanged: (value) => context
+                  .read<DisclosureAffiliationBloc>()
+                  .add(ControlledPersonCompanyCityChanged(value)),
+              hintText: 'Enter Company City'),
+        ));
   }
 
   Widget _controlledPersonCompanyStateInput(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          key: const Key('controlled_person_company_state_input'),
-          labelText: 'Company State',
-          onChanged: (value) => context
-              .read<DisclosureAffiliationBloc>()
-              .add(ControlledPersonCompanyStateChanged(value)),
-          hintText: 'Enter Company State'),
-    );
+        padding: const EdgeInsets.only(top: 10.0),
+        child:
+            BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
+          buildWhen: (_, __) => false,
+          builder: (context, state) => CustomTextInput(
+              initialValue: state.controlledPersonCompanyState,
+              key: const Key('controlled_person_company_state_input'),
+              labelText: 'Company State',
+              onChanged: (value) => context
+                  .read<DisclosureAffiliationBloc>()
+                  .add(ControlledPersonCompanyStateChanged(value)),
+              hintText: 'Enter Company State'),
+        ));
   }
 
   Widget _controlledPersonCompanyCountryInput(BuildContext context) {
@@ -94,14 +110,18 @@ class ControlledPersonForm extends StatelessWidget {
 
   Widget _controlledPersonCompanyEmailInput(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
-      child: CustomTextInput(
-          key: const Key('controlled_person_company_email_input'),
-          labelText: 'Company Compliance Email',
-          onChanged: (value) => context
-              .read<DisclosureAffiliationBloc>()
-              .add(ControlledPersonCompanyEmailChanged(value)),
-          hintText: 'Enter Company Compliance Email'),
-    );
+        padding: const EdgeInsets.only(top: 10.0),
+        child:
+            BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
+          buildWhen: (_, __) => false,
+          builder: (context, state) => CustomTextInput(
+              initialValue: state.controlledPersonCompanyEmail,
+              key: const Key('controlled_person_company_email_input'),
+              labelText: 'Company Compliance Email',
+              onChanged: (value) => context
+                  .read<DisclosureAffiliationBloc>()
+                  .add(ControlledPersonCompanyEmailChanged(value)),
+              hintText: 'Enter Company Compliance Email'),
+        ));
   }
 }

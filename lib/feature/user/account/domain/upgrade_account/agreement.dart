@@ -5,14 +5,21 @@ part 'agreement.g.dart';
 
 @JsonSerializable()
 class Agreement extends Equatable {
-  String? agreement;
+  final String? agreement;
 
   @JsonKey(name: 'ip_address')
-  String? ipAddress;
+  final String? ipAddress;
 
-  String? signature;
+  final String? signature;
 
-  Agreement({this.agreement, this.ipAddress, this.signature});
+  @JsonKey(name: 'signed_at')
+  final String? signedAt;
+
+  const Agreement(
+      {required this.agreement,
+      required this.signedAt,
+      required this.ipAddress,
+      required this.signature});
 
   factory Agreement.fromJson(Map<String, dynamic> json) =>
       _$AgreementFromJson(json);

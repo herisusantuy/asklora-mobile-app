@@ -79,16 +79,19 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   List<Agreement> _generateAgreementList(String ipAddress) => [
         Agreement(
             agreement: 'MA',
+            signedAt: signingBrokerAgreementBloc.state.signedTime,
             ipAddress: ipAddress,
             signature:
                 'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
         Agreement(
             agreement: 'AA',
+            signedAt: signingBrokerAgreementBloc.state.signedTime,
             ipAddress: ipAddress,
             signature:
                 'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
         Agreement(
             agreement: 'CA',
+            signedAt: signingBrokerAgreementBloc.state.signedTime,
             ipAddress: ipAddress,
             signature:
                 'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}')
@@ -148,8 +151,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             streetAddress: addressProofBloc.state.residentialAddress,
             unit: addressProofBloc.state.unitNumber,
             city: addressProofBloc.state.city,
-            state: '',
-            postalCode: '',
+            state: null,
+            postalCode: null,
             country: addressProofBloc.state.country),
         identity: Identity(
             givenName: basicInformationBloc.state.firstName,
@@ -180,16 +183,9 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             immediateFamilyExposed:
                 disclosureAffiliationBloc.state.isFamilyMember,
             employmentStatus: financialProfileBloc.state.employmentStatus.name,
-            employerName: financialProfileBloc.state.employer.isNotEmpty
-                ? financialProfileBloc.state.employer
-                : null,
-            employerAddress:
-                financialProfileBloc.state.employerAddress.isNotEmpty
-                    ? financialProfileBloc.state.employerAddress
-                    : null,
-            employmentPosition: financialProfileBloc.state.occupation.isNotEmpty
-                ? financialProfileBloc.state.occupation
-                : null,
+            employerName: financialProfileBloc.state.employer,
+            employerAddress: financialProfileBloc.state.employerAddress,
+            employmentPosition: financialProfileBloc.state.occupation,
             context: _generateContextList()),
         agreements: _generateAgreementList(event.ipAddress),
       );

@@ -58,6 +58,7 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
         buildWhen: ((previous, current) =>
             previous.tinNumber != current.tinNumber),
         builder: (context, state) => CustomTextInput(
+            initialValue: state.tinNumber,
             key: const Key('account_tin_number_input'),
             labelText: 'TIN Number',
             hintText: 'Enter your TIN number',

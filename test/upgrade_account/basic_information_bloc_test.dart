@@ -17,9 +17,9 @@ void main() {
           basicInformationBloc.state,
           const BasicInformationState(
             firstName: '',
-            middleName: '',
+            middleName: null,
             lastName: '',
-            chineseName: '',
+            chineseName: null,
             gender: '',
             dateOfBirth: '1990-01-01',
             countryCode: '',
@@ -40,9 +40,9 @@ void main() {
         expect: () => {
               const BasicInformationState(
                 firstName: '',
-                middleName: '',
+                middleName: null,
                 lastName: '',
-                chineseName: '',
+                chineseName: null,
                 gender: '',
                 countryCode: '',
                 phoneNumber: '',
@@ -63,9 +63,9 @@ void main() {
         expect: () => {
               const BasicInformationState(
                 firstName: '',
-                middleName: '',
+                middleName: null,
                 lastName: '',
-                chineseName: '',
+                chineseName: null,
                 gender: '',
                 countryCode: '',
                 phoneNumber: '',
@@ -99,9 +99,9 @@ void main() {
         expect: () => {
               const BasicInformationState(
                 firstName: 'John',
-                middleName: '',
+                middleName: null,
                 lastName: '',
-                chineseName: '',
+                chineseName: null,
                 gender: '',
                 dateOfBirth: '1990-01-01',
                 countryCode: '',
@@ -115,7 +115,7 @@ void main() {
                 firstName: 'John',
                 middleName: 'Middle',
                 lastName: '',
-                chineseName: '',
+                chineseName: null,
                 gender: '',
                 dateOfBirth: '1990-01-01',
                 countryCode: '',
@@ -129,7 +129,7 @@ void main() {
                 firstName: 'John',
                 middleName: 'Middle',
                 lastName: 'Doe',
-                chineseName: '',
+                chineseName: null,
                 gender: '',
                 dateOfBirth: '1990-01-01',
                 countryCode: '',

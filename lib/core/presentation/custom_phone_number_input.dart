@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'custom_country_picker.dart';
 import 'custom_text.dart';
@@ -8,11 +9,13 @@ import 'custom_text_input.dart';
 class CustomPhoneNumberInput extends StatelessWidget {
   final Function(Country) onChangedCodeArea;
   final Function(String) onChangePhoneNumber;
-  final String? initialValue;
+  final String? initialValueOfCodeArea;
+  final String? initialValueOfPhoneNumber;
 
   const CustomPhoneNumberInput({
     Key? key,
-    this.initialValue,
+    this.initialValueOfCodeArea,
+    this.initialValueOfPhoneNumber,
     required this.onChangedCodeArea,
     required this.onChangePhoneNumber,
   }) : super(key: key);
@@ -33,10 +36,10 @@ class CustomPhoneNumberInput extends StatelessWidget {
               Expanded(
                   flex: 1,
                   child: CustomCountryPicker(
-                      initialValue:
-                          initialValue != null && initialValue!.isNotEmpty
-                              ? '+$initialValue'
-                              : null,
+                      initialValue: initialValueOfCodeArea != null &&
+                              initialValueOfCodeArea!.isNotEmpty
+                          ? '+$initialValueOfCodeArea'
+                          : null,
                       hintText: '+852',
                       onSelect: onChangedCodeArea)),
               const SizedBox(
@@ -45,6 +48,11 @@ class CustomPhoneNumberInput extends StatelessWidget {
               Expanded(
                   flex: 2,
                   child: CustomTextInput(
+                    initialValue: initialValueOfPhoneNumber ?? '',
+                    textInputType: TextInputType.number,
+                    textInputFormatterList: [
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     hintText: 'Phone Number',
                     labelText: 'Phone Number',
                     onChanged: onChangePhoneNumber,

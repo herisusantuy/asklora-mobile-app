@@ -13,6 +13,7 @@ import 'family_member_form.dart';
 
 class DisclosuresAffiliationsForm extends StatelessWidget {
   final PageController controller;
+
   const DisclosuresAffiliationsForm({
     Key? key,
     required this.controller,
@@ -109,6 +110,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
           );
         },
       );
+
   Widget _questionNo3() =>
       BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
@@ -133,6 +135,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                           : false)));
         },
       );
+
   Widget _questionNo4() =>
       BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
@@ -160,6 +163,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
           );
         },
       );
+
   Widget _questionNo5() =>
       BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
@@ -188,6 +192,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                   child: CustomTextInput(
+                      initialValue: state.nameOfAffiliatedPerson,
                       key: const Key('name_of_affiliated_person_input'),
                       labelText: 'Name of Affiliated Person',
                       onChanged: (value) => context
@@ -199,6 +204,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
           );
         },
       );
+
   Widget _questionNo6() =>
       BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         buildWhen: (previous, current) =>
@@ -227,6 +233,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                   child: CustomTextInput(
+                      initialValue: state.nameOfJointAccount,
                       key: const Key('name_of_joint_account_input'),
                       labelText: 'Name of Joint Account',
                       onChanged: (value) => context
@@ -238,6 +245,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
           );
         },
       );
+
   Widget _questionNo7() =>
       BlocConsumer<DisclosureAffiliationBloc, DisclosureAffiliationState>(
         listenWhen: (previous, current) =>

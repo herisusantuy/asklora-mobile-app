@@ -51,12 +51,15 @@ class SigningBrokerAgreementBloc
       Emitter<SigningBrokerAgreementState> emit) async {
     if (event.customerSignature != null) {
       emit(state.copyWith(
-          customerSignature: event.customerSignature, isSignatureDrew: true));
+          customerSignature: event.customerSignature,
+          isSignatureDrew: true,
+          signedTime: event.signedTime));
     }
   }
 
   _onCustomerSignatureReset(
       CustomerSignatureReset event, Emitter<SigningBrokerAgreementState> emit) {
-    emit(state.copyWith(customerSignature: '', isSignatureDrew: false));
+    emit(state.copyWith(
+        customerSignature: '', isSignatureDrew: false, signedTime: ''));
   }
 }

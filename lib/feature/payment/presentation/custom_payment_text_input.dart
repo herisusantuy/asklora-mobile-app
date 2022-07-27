@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../core/presentation/custom_text.dart';
 import '../../../core/presentation/custom_text_input.dart';
@@ -8,12 +9,18 @@ class CustomPaymentTextInput extends StatelessWidget {
   final String labelText;
   final String hintText;
   final String initialValue;
+  final TextInputType textInputType;
+  final List<TextInputFormatter>? textInputFormatterList;
+  final double paddingBottom;
 
   const CustomPaymentTextInput(
       {required this.labelText,
       required this.hintText,
       required this.onChanged,
+      this.textInputType = TextInputType.text,
+      this.textInputFormatterList,
       this.initialValue = '',
+      this.paddingBottom = 20,
       Key? key})
       : super(key: key);
 
@@ -26,7 +33,7 @@ class CustomPaymentTextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.only(bottom: paddingBottom),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,6 +45,8 @@ class CustomPaymentTextInput extends StatelessWidget {
             height: 6,
           ),
           CustomTextInput(
+              textInputType: textInputType,
+              textInputFormatterList: textInputFormatterList,
               initialValue: initialValue,
               floatingLabelBehavior: FloatingLabelBehavior.never,
               inputBorder: customBorder,
