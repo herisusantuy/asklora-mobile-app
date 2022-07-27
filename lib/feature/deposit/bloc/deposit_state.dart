@@ -6,6 +6,9 @@ enum DepositPages {
   fpsMeaning,
   bankDetails,
   addBankAccount,
+  wireTransfer,
+  fpsTransfer,
+  uploadProof,
   unknown
 }
 
