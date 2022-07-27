@@ -8,7 +8,7 @@ import '../../mocks/mocks.dart';
 
 void main() async {
   group('Withdrawal Welcome Screen widget test', () {
-    Future<void> _buildReviewInformationScreen(WidgetTester tester) async {
+    Future<void> _buildWithdrawalWelcomeScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const WithdrawalScreen(
@@ -22,7 +22,7 @@ void main() async {
 
     testWidgets('Render Withdrawal Welcome Screen,`next button` = enabled',
         (tester) async {
-      await _buildReviewInformationScreen(tester);
+      await _buildWithdrawalWelcomeScreen(tester);
       expect(nextButton, findsOneWidget);
       expect(
           find.text(

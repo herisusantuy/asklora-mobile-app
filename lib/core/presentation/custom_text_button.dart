@@ -27,7 +27,7 @@ class CustomTextButton extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      constraints: const BoxConstraints(minHeight: 40, minWidth: 55),
+      constraints: const BoxConstraints(minHeight: 55, minWidth: 55),
       child: isLoading
           ? const CircularProgressIndicator()
           : ElevatedButton(
