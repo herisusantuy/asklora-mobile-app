@@ -11,6 +11,8 @@ class WithdrawalAmountBloc
     on<WithdrawalAmountChanged>(_onWithdrawalAmountChanged);
   }
 
+  static const double usdHkdRate = 7.8476;
+
   void _onWithdrawalAmountChanged(
       WithdrawalAmountChanged event, Emitter<WithdrawalAmountState> emit) {
     emit(state.copyWith(
@@ -29,7 +31,5 @@ class WithdrawalAmountBloc
     }
   }
 
-  _calculateUSDtoHKDConversion(double usd) {
-    return usd * 7.8476;
-  }
+  _calculateUSDtoHKDConversion(double usd) => usd * usdHkdRate;
 }
