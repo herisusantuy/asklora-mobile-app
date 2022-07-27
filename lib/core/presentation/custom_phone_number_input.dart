@@ -36,10 +36,10 @@ class CustomPhoneNumberInput extends StatelessWidget {
               Expanded(
                   flex: 1,
                   child: CustomCountryPicker(
-                      initialValue:
-                          initialValueOfCodeArea != null && initialValueOfCodeArea!.isNotEmpty
-                              ? '+$initialValueOfCodeArea'
-                              : null,
+                      initialValue: initialValueOfCodeArea != null &&
+                              initialValueOfCodeArea!.isNotEmpty
+                          ? '+$initialValueOfCodeArea'
+                          : null,
                       hintText: '+852',
                       onSelect: onChangedCodeArea)),
               const SizedBox(
@@ -48,9 +48,11 @@ class CustomPhoneNumberInput extends StatelessWidget {
               Expanded(
                   flex: 2,
                   child: CustomTextInput(
-                    initialValue: initialValueOfPhoneNumber??'',
+                    initialValue: initialValueOfPhoneNumber ?? '',
                     textInputType: TextInputType.number,
-                    textInputFormatterList: [FilteringTextInputFormatter.digitsOnly],
+                    textInputFormatterList: [
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     hintText: 'Phone Number',
                     labelText: 'Phone Number',
                     onChanged: onChangePhoneNumber,
