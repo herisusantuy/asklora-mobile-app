@@ -49,7 +49,9 @@ class DepositMethodScreen extends StatelessWidget {
           key: const Key('fps_button'),
           borderRadius: 5,
           buttonText: 'FPS',
-          onClick: () => ''),
+          onClick: () => context
+              .read<DepositBloc>()
+              .add(const PageChanged(DepositPages.fpsTransfer))),
     );
   }
 
