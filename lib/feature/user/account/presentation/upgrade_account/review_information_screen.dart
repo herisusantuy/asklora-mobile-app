@@ -116,9 +116,9 @@ class ReviewInformationScreen extends StatelessWidget {
                   title: const CustomText('Basic Information'),
                   children: [
                     _customCard('First Name', state.firstName),
-                    _customCard('Middle Name', state.middleName),
+                    _customCard('Middle Name', state.middleName ?? ''),
                     _customCard('Last Name', state.lastName),
-                    _customCard('Chinese Name', state.chineseName),
+                    _customCard('Chinese Name', state.chineseName ?? ''),
                     _customCard('Gender', state.gender),
                     _customCard('Date of Birth', state.dateOfBirth),
                     _customCard('Phone Number',

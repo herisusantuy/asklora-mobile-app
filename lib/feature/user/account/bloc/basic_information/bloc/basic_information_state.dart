@@ -3,9 +3,9 @@ part of 'basic_information_bloc.dart';
 class BasicInformationState extends Equatable {
   const BasicInformationState({
     this.firstName = '',
-    this.middleName = '',
+    this.middleName,
     this.lastName = '',
-    this.chineseName = '',
+    this.chineseName,
     this.gender = '',
     this.dateOfBirth = '1990-01-01',
     this.countryCode = '',
@@ -19,9 +19,9 @@ class BasicInformationState extends Equatable {
   });
 
   final String firstName;
-  final String middleName;
+  final String? middleName;
   final String lastName;
-  final String chineseName;
+  final String? chineseName;
   final String gender;
   final String dateOfBirth;
   final String countryCode;

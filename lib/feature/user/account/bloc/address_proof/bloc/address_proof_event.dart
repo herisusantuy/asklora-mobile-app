@@ -84,9 +84,11 @@ class AddressProofMailCityChanged extends AddressProofEvent {
 
 class AddressProofMailCountryChanged extends AddressProofEvent {
   final String mailCountry;
+  final String mailCountryName;
 
-  const AddressProofMailCountryChanged(this.mailCountry) : super();
+  const AddressProofMailCountryChanged(this.mailCountry, this.mailCountryName)
+      : super();
 
   @override
-  List<Object> get props => [mailCountry];
+  List<Object> get props => [mailCountry, mailCountryName];
 }

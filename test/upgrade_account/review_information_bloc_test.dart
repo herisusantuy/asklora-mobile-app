@@ -42,6 +42,7 @@ void main() async {
     late DisclosureAffiliationBloc disclosureAffiliationBloc;
     late SigningBrokerAgreementBloc signingBrokerAgreementBloc;
     String ipAddress = '10.11.12.13';
+    String signedAt = '2022-07-22T10:11';
     late UpgradeAccountRequest upgradeAccountRequest;
     late TaxInfoRequest taxInfoReq;
 
@@ -107,16 +108,19 @@ void main() async {
             Agreement(
                 agreement: 'MA',
                 ipAddress: ipAddress,
+                signedAt: signedAt,
                 signature:
                     'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
             Agreement(
                 agreement: 'AA',
                 ipAddress: ipAddress,
+                signedAt: signedAt,
                 signature:
                     'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
             Agreement(
                 agreement: 'CA',
                 ipAddress: ipAddress,
+                signedAt: signedAt,
                 signature:
                     'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
           ]);
@@ -185,7 +189,7 @@ void main() async {
               .thenAnswer((_) => Future.value(TaxInfoRequest()));
 
           when(accountRepository.getOnfidoToken()).thenAnswer(
-              (_) => Future.value(OnfidoTokenResponse('11223344axx')));
+              (_) => Future.value(const OnfidoTokenResponse('11223344axx')));
 
           return accountBloc;
         },

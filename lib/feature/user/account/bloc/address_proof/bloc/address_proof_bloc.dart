@@ -63,6 +63,8 @@ class AddressProofBloc extends Bloc<AddressProofEvent, AddressProofState> {
 
   _onAddressProofMailCountryChanged(
       AddressProofMailCountryChanged event, Emitter<AddressProofState> emit) {
-    emit(state.copyWith(mailCountry: event.mailCountry));
+    emit(state.copyWith(
+        mailCountry: event.mailCountry,
+        mailCountryName: event.mailCountryName));
   }
 }

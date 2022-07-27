@@ -120,7 +120,7 @@ void main() async {
           bloc.add(const AlpacaCustomerAgreementOpened(true));
           bloc.add(const UnderstoodAlpacaCustomAgreementChecked(true));
           bloc.add(const SigningAgreementChecked(true));
-          bloc.add(const CustomerSignatureDrew('aaaaa'));
+          bloc.add(const CustomerSignatureDrew('aaaaa', '2022-07-22T12:02'));
         },
         expect: () => {
               const SigningBrokerAgreementState(
@@ -146,7 +146,8 @@ void main() async {
                   isUnderstoodAlpacaCustomAgreementChecked: true,
                   isSigningAgreementChecked: true,
                   isSignatureDrew: true,
-                  customerSignature: 'aaaaa'),
+                  customerSignature: 'aaaaa',
+                  signedTime: '2022-07-22T12:02'),
             });
     blocTest<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         'Reset Customer Signature',
@@ -158,7 +159,7 @@ void main() async {
           bloc.add(const AlpacaCustomerAgreementOpened(true));
           bloc.add(const UnderstoodAlpacaCustomAgreementChecked(true));
           bloc.add(const SigningAgreementChecked(true));
-          bloc.add(const CustomerSignatureDrew('aaaaa'));
+          bloc.add(const CustomerSignatureDrew('aaaaa', '2022-07-22T12:02'));
           bloc.add(const CustomerSignatureReset());
         },
         expect: () => {
@@ -185,13 +186,15 @@ void main() async {
                   isUnderstoodAlpacaCustomAgreementChecked: true,
                   isSigningAgreementChecked: true,
                   isSignatureDrew: true,
-                  customerSignature: 'aaaaa'),
+                  customerSignature: 'aaaaa',
+                  signedTime: '2022-07-22T12:02'),
               const SigningBrokerAgreementState(
                   isAlpacaCustomerAgreementOpened: true,
                   isUnderstoodAlpacaCustomAgreementChecked: true,
                   isSigningAgreementChecked: true,
                   isSignatureDrew: false,
-                  customerSignature: ''),
+                  customerSignature: '',
+                  signedTime: ''),
             });
 
     tearDown(() => signingBrokerAgreementBloc.close());
