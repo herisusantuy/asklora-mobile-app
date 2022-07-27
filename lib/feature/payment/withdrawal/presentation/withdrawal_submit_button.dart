@@ -16,7 +16,7 @@ class WithdrawalSubmitButton extends StatelessWidget {
       child: CustomTextButton(
         height: 40,
         disable: disable,
-        buttonText: 'Next',
+        buttonText: 'Request Withdrawal',
         onClick: onSubmit,
         primaryColor: Colors.black,
         borderRadius: 6,
