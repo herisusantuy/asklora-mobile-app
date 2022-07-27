@@ -7,8 +7,13 @@ import '../../bloc/deposit_bloc.dart';
 class DepositNextButton extends StatelessWidget {
   final bool disable;
   final DepositPages nextTo;
+  final String label;
 
-  const DepositNextButton({required this.nextTo, this.disable = true, Key? key})
+  const DepositNextButton(
+      {required this.nextTo,
+      this.disable = true,
+      Key? key,
+      this.label = 'Next'})
       : super(key: key);
 
   @override
@@ -17,7 +22,7 @@ class DepositNextButton extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
       child: CustomTextButton(
         disable: disable,
-        buttonText: 'Next',
+        buttonText: label,
         onClick: () {
           context.read<DepositBloc>().add(PageChanged(nextTo));
         },
