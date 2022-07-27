@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:signature/signature.dart';
 
 import '../../../../../core/presentation/custom_checkbox.dart';
@@ -13,6 +14,7 @@ import '../widgets/signature_drawer.dart';
 
 class SigningBrokerAgreementsForm extends StatelessWidget {
   final PageController controller;
+
   SigningBrokerAgreementsForm({
     Key? key,
     required this.controller,
@@ -85,6 +87,7 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
           );
         },
       );
+
   Widget _isSigningAgreementChecked() =>
       BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         buildWhen: (previous, current) =>
@@ -124,7 +127,9 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
                       onSubmit: () async {
                         context.read<SigningBrokerAgreementBloc>().add(
                             CustomerSignatureDrew(
-                                await _getCustomerSignature()));
+                                await _getCustomerSignature(),
+                                DateFormat('yyyy-MM-ddThh:mm')
+                                    .format(DateTime.now())));
                       },
                       onReset: () => _signatureController.clear())
                 else
@@ -153,6 +158,7 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
           );
         },
       );
+
   Widget _nextButton() =>
       BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         builder: (context, state) {

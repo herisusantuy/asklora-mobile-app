@@ -46,6 +46,7 @@ class TrustedContactForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: CustomTextInput(
+              initialValue: state.firstName,
               key: const Key('trusted_contact_first_name_input'),
               labelText: 'First Name',
               hintText: 'Enter First Name',
@@ -65,6 +66,7 @@ class TrustedContactForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+              initialValue: state.lastName,
               key: const Key('trusted_contact_last_name_input'),
               labelText: 'Last Name',
               errorText: state.lastNameErrorText,
@@ -84,6 +86,7 @@ class TrustedContactForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+              initialValue: state.emailAddress,
               key: const Key('trusted_contact_email_address_input'),
               labelText: 'Email Address',
               hintText: 'Enter Email Address',
@@ -105,6 +108,7 @@ class TrustedContactForm extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
+              initialValue: state.phoneNumber,
               textInputFormatterList: [FilteringTextInputFormatter.digitsOnly],
               key: const Key('trusted_contact_phone_number_input'),
               labelText: 'Phone Number',

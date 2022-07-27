@@ -29,6 +29,7 @@ class FamilyMemberForm extends StatelessWidget {
             previous.isFamilyMember != current.isFamilyMember,
         builder: (context, state) {
           return CustomTextInput(
+            initialValue: state.firstNameOfFamilyMember,
             key: const Key('first_name_of_family_form_input'),
             labelText: 'First Name',
             onChanged: (value) => context
@@ -50,6 +51,7 @@ class FamilyMemberForm extends StatelessWidget {
             previous.isFamilyMember != current.isFamilyMember,
         builder: (context, state) {
           return CustomTextInput(
+            initialValue: state.lastNameOfFamilyMember,
             key: const Key('last_name_of_family_form_input'),
             labelText: 'Last Name',
             onChanged: (value) => context

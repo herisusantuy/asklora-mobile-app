@@ -6,6 +6,7 @@ class SigningBrokerAgreementState extends Equatable {
   final bool isSigningAgreementChecked;
   final bool isSignatureDrew;
   final String customerSignature;
+  final String? signedTime;
 
   const SigningBrokerAgreementState({
     this.isAlpacaCustomerAgreementOpened = false,
@@ -13,6 +14,7 @@ class SigningBrokerAgreementState extends Equatable {
     this.isSigningAgreementChecked = false,
     this.isSignatureDrew = false,
     this.customerSignature = '',
+    this.signedTime,
   });
 
   @override
@@ -21,7 +23,8 @@ class SigningBrokerAgreementState extends Equatable {
         isUnderstoodAlpacaCustomAgreementChecked,
         isSigningAgreementChecked,
         isSignatureDrew,
-        customerSignature
+        customerSignature,
+        signedTime ?? ''
       ];
 
   SigningBrokerAgreementState copyWith({
@@ -30,6 +33,7 @@ class SigningBrokerAgreementState extends Equatable {
     bool? isSigningAgreementChecked,
     bool? isSignatureDrew,
     String? customerSignature,
+    String? signedTime,
   }) {
     return SigningBrokerAgreementState(
       isAlpacaCustomerAgreementOpened: isAlpacaCustomerAgreementOpened ??
@@ -41,6 +45,7 @@ class SigningBrokerAgreementState extends Equatable {
           isSigningAgreementChecked ?? this.isSigningAgreementChecked,
       isSignatureDrew: isSignatureDrew ?? this.isSignatureDrew,
       customerSignature: customerSignature ?? this.customerSignature,
+      signedTime: signedTime ?? this.signedTime,
     );
   }
 
