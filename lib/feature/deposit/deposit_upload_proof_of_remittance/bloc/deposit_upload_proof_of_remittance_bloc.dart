@@ -13,13 +13,13 @@ class DepositUploadProofOfRemittanceBloc extends Bloc<
       {required FilePickerRepository filePickerRepository})
       : _filePickerRepository = filePickerRepository,
         super(const DepositUploadProofofRemittanceState()) {
-    on<PickDocumentFile>(_onPickDocumentFile);
+    on<PickFile>(_onPickFile);
   }
 
   final FilePickerRepository _filePickerRepository;
 
-  void _onPickDocumentFile(
-    PickDocumentFile event,
+  void _onPickFile(
+    PickFile event,
     Emitter<DepositUploadProofofRemittanceState> emit,
   ) async {
     emit(state.copyWith(

@@ -31,15 +31,15 @@ void main() async {
 
     blocTest<DepositUploadProofOfRemittanceBloc,
             DepositUploadProofofRemittanceState>(
-        'emits `withdrawalUSDAmount` = 1 and `withdrawalHKDAmount` = 7.8476` WHEN '
-        'input amount 1',
+        'emits `PlatformFile(name: `test_file`, size: 2000)` WHEN '
+        'picking some file',
         build: () {
           when(filePickerRepository.pickFile(fileType: FileType.image))
               .thenAnswer((_) =>
                   Future.value(PlatformFile(name: 'test_file', size: 2000)));
           return depositUploadProofOfRemittanceBloc;
         },
-        act: (bloc) => bloc.add(const PickDocumentFile()),
+        act: (bloc) => bloc.add(const PickFile()),
         expect: () => {
               DepositUploadProofofRemittanceState(
                   documentFile: PlatformFile(name: 'test_file', size: 2000)),

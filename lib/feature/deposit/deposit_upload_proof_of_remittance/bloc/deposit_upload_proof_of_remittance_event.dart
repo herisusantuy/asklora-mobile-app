@@ -7,8 +7,8 @@ abstract class DepositUploadProofofRemittanceEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class PickDocumentFile extends DepositUploadProofofRemittanceEvent {
-  const PickDocumentFile() : super();
+class PickFile extends DepositUploadProofofRemittanceEvent {
+  const PickFile() : super();
 
   @override
   List<Object> get props => [];

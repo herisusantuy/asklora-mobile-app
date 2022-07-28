@@ -76,7 +76,7 @@ class DepositUploadProofOfRemittanceScreen extends StatelessWidget {
                     InkWell(
                       onTap: () => context
                           .read<DepositUploadProofOfRemittanceBloc>()
-                          .add(const PickDocumentFile()),
+                          .add(const PickFile()),
                       child: BlocBuilder<DepositUploadProofOfRemittanceBloc,
                           DepositUploadProofofRemittanceState>(
                         builder: (context, state) {
