@@ -6,6 +6,7 @@ import 'deposit_method_screen.dart';
 import 'deposit_welcome_screen.dart';
 import 'fps_information_screen.dart';
 import 'fps_transfer_screen.dart';
+import 'wire_transfer_screen.dart';
 
 class DepositScreen extends StatelessWidget {
   static const String route = '/deposit_screen';
@@ -46,6 +47,8 @@ class DepositScreen extends StatelessWidget {
         return const FpsInformationScreen();
       case DepositPages.fpsTransfer:
         return const FpsTransferScreen();
+      case DepositPages.wireTransfer:
+        return const WireTransferScreen();
       default:
         return const SizedBox.shrink();
     }
