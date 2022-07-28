@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/withdrawal_bloc.dart';
+import '../withdrawal_acknowledgement/presentation/withdrawal_acknowledgement_screen.dart';
 import '../withdrawal_amount/bloc/withdrawal_amount_bloc.dart';
 import '../withdrawal_amount/presentation/withdrawal_amount_screen.dart';
 import '../withdrawal_bank_detail/presentation/withdrawal_bank_detail_screen.dart';
@@ -45,6 +46,8 @@ class WithdrawalScreen extends StatelessWidget {
         return const WithdrawalBankDetailScreen();
       case WithdrawalPages.amount:
         return const WithdrawalAmountScreen();
+      case WithdrawalPages.acknowledgement:
+        return const WithdrawalAcknowledgementScreen();
       default:
         return const SizedBox.shrink();
     }

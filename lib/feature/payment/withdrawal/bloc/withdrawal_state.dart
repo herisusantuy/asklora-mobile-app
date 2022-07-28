@@ -1,6 +1,6 @@
 part of 'withdrawal_bloc.dart';
 
-enum WithdrawalPages { welcome, bankDetail, amount, instruction, unknown }
+enum WithdrawalPages { welcome, bankDetail, amount, acknowledgement, unknown }
 
 class WithdrawalState extends Equatable {
   final WithdrawalPages withdrawalPages;
