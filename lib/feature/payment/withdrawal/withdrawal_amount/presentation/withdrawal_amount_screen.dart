@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/withdrawal_bloc.dart';
 import '../../presentation/custom_withdrawal_text_information_widget.dart';
 import '../../presentation/custom_withdrawal_widget.dart';
-import '../../presentation/withdrawal_submit_button.dart';
 import '../bloc/withdrawal_amount_bloc.dart';
 
 class WithdrawalAmountScreen extends StatelessWidget {
@@ -22,7 +22,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
               buildWhen: (previous, current) =>
                   current.withdrawalAmountErrorType !=
                   previous.withdrawalAmountErrorType,
-              builder: (context, state) => WithdrawalSubmitButton(
+              builder: (context, state) => CustomPaymentButton(
                     key: const Key('withdrawal_submit_button'),
                     title: 'Request Withdrawal',
                     onSubmit: () => context.read<WithdrawalBloc>().add(

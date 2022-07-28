@@ -12,6 +12,7 @@ class CustomCardCopyText extends StatelessWidget {
   final EdgeInsets contentPadding;
   final TextAlign textAlign;
   final Key? keyCopyButton;
+
   const CustomCardCopyText({
     Key? key,
     this.label = '',
