@@ -29,63 +29,50 @@ class WireTransferScreen extends StatelessWidget {
             'Please note there is a minimum deposit amount of HKD10,000 for users who are depositing with a new bank account',
             padding: EdgeInsets.only(bottom: 30),
           ),
-          _accountNumberCard(),
-          _bankNameCard(),
-          _bankNumberCard(),
-          _accountNameCard(),
+          _cardCopyText('Account No.', '1234567890', 'Account Copied',
+              key: 'deposit_account_number_card'),
+          _cardCopyText(
+              'Bank Name', 'DBS Bank (Hong Kong) Limited', 'Bank Name Copied',
+              key: 'deposit_bank_name_card'),
+          _cardCopyText('Bank No.', '016', 'Bank No. Copied',
+              key: 'deposit_bank_number_card'),
+          _cardCopyText(
+              'Account Name.', 'LORA Advisors Limited', 'Account Name Copied',
+              key: 'deposit_account_name_card'),
           _cautionText(),
-          _swiftCodeCard(),
-          _bankAddressCard(),
+          _cardCopyText('Swift Code.', 'DHBKHKHH', 'Swift Code Copied',
+              key: 'deposit_swift_code_card'),
+          _cardCopyText(
+            'Bank Address',
+            'G/F, The Center, 99 Queen`s Road Central, Central, Hong Kong',
+            'Bank Address Copied',
+            key: 'deposit_bank_address_card',
+            textAlign: TextAlign.start,
+          ),
         ]);
   }
 
-  Widget _accountNumberCard() {
-    return const CustomCardCopyText(
-      key: Key('deposit_account_number_card'),
-      label: 'Account No.',
-      text: '1234567890',
-      message: 'Account No Copied',
-      padding: EdgeInsets.only(bottom: 20),
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    );
-  }
-
-  Widget _bankNameCard() {
-    return const CustomCardCopyText(
-      key: Key('deposit_bank_name_card'),
-      label: 'Bank Name.',
-      text: 'DBS Bank (Hong Kong) Limited',
-      message: 'Bank Name Copied',
-      padding: EdgeInsets.only(bottom: 20),
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    );
-  }
-
-  Widget _bankNumberCard() {
-    return const CustomCardCopyText(
-      key: Key('deposit_bank_number_card'),
-      label: 'Bank No.',
-      text: '016',
-      message: 'Bank Number Copied',
-      padding: EdgeInsets.only(bottom: 20),
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    );
-  }
-
-  Widget _accountNameCard() {
-    return const CustomCardCopyText(
-      key: Key('deposit_account_name_card'),
-      label: 'Account Name.',
-      text: 'LORA Advisors Limited',
-      message: 'Account Name Copied',
-      padding: EdgeInsets.only(bottom: 10),
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+  Widget _cardCopyText(
+    String label,
+    String text,
+    String message, {
+    String? key,
+    TextAlign textAlign = TextAlign.center,
+  }) {
+    return CustomCardCopyText(
+      key: Key(key ?? ''),
+      label: label,
+      text: text,
+      message: message,
+      textAlign: textAlign,
+      padding: const EdgeInsets.only(bottom: 20),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     );
   }
 
   Widget _cautionText() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.only(bottom: 10.0, top: 5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
@@ -101,29 +88,6 @@ class WireTransferScreen extends StatelessWidget {
           ))
         ],
       ),
-    );
-  }
-
-  Widget _swiftCodeCard() {
-    return const CustomCardCopyText(
-      key: Key('deposit_swift_code_card'),
-      label: 'Swift Code.',
-      text: 'DHBKHKHH',
-      message: 'Swift Code Copied',
-      padding: EdgeInsets.only(bottom: 20),
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-    );
-  }
-
-  Widget _bankAddressCard() {
-    return const CustomCardCopyText(
-      key: Key('deposit_bank_address_card'),
-      label: 'Bank Address.',
-      text: 'G/F, The Center, 99 Queen`s Road Central, Central, Hong Kong',
-      message: 'Bank Address Copied',
-      textAlign: TextAlign.start,
-      padding: EdgeInsets.only(bottom: 20),
-      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     );
   }
 }
