@@ -24,9 +24,9 @@ class WithdrawalAmountScreen extends StatelessWidget {
                   previous.withdrawalAmountErrorType,
               builder: (context, state) => WithdrawalSubmitButton(
                     key: const Key('withdrawal_submit_button'),
-                    onSubmit: () => context
-                        .read<WithdrawalBloc>()
-                        .add(const PageChanged(WithdrawalPages.instruction)),
+                    title: 'Request Withdrawal',
+                    onSubmit: () => context.read<WithdrawalBloc>().add(
+                        const PageChanged(WithdrawalPages.acknowledgement)),
                     disable: state.withdrawalAmountErrorType !=
                         WithdrawalAmountErrorType.unknown,
                   )),
