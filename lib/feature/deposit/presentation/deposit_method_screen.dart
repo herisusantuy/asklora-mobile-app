@@ -38,7 +38,9 @@ class DepositMethodScreen extends StatelessWidget {
           key: const Key('wire_transfer_button'),
           borderRadius: 5,
           buttonText: 'WIRE TRANSFER',
-          onClick: () => ''),
+          onClick: () => context
+              .read<DepositBloc>()
+              .add(const PageChanged(DepositPages.wireTransfer))),
     );
   }
 

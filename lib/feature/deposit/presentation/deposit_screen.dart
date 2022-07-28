@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/feature/deposit/presentation/wire_transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,6 +56,8 @@ class DepositScreen extends StatelessWidget {
         return const FpsTransferScreen();
       case DepositPages.uploadProof:
         return const DepositUploadProofOfRemittanceScreen();
+      case DepositPages.wireTransfer:
+        return const WireTransferScreen();
       default:
         return const SizedBox.shrink();
     }
