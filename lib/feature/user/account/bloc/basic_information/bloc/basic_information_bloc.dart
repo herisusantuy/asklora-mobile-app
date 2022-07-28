@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/utils/util.dart';
+import '../../../../../../core/utils/hkid_validation.dart';
 
 part 'basic_information_event.dart';
 

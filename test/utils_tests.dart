@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/utils/extensions.dart';
-import 'package:asklora_mobile_app/core/utils/util.dart';
+import 'package:asklora_mobile_app/core/utils/hkid_validation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
