@@ -6,11 +6,14 @@ class CustomRowText extends StatelessWidget {
   final String index;
   final String text;
   final EdgeInsets padding;
+  final FontType fontType;
+
   const CustomRowText(
       {Key? key,
       this.index = '1',
       this.text = 'text',
-      this.padding = EdgeInsets.zero})
+      this.padding = EdgeInsets.zero,
+      this.fontType = FontType.bodyText})
       : super(key: key);
 
   @override
@@ -20,8 +23,13 @@ class CustomRowText extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(flex: 1, child: CustomText('$index.')),
-          Expanded(flex: 14, child: CustomText(text)),
+          Expanded(
+              flex: 1,
+              child: CustomText(
+                '$index.',
+                type: fontType,
+              )),
+          Expanded(flex: 14, child: CustomText(text, type: fontType)),
         ],
       ),
     );
