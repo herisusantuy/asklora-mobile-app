@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../auth/sign_in/presentation/sign_in_success_screen.dart';
+import '../../../presentation/custom_payment_button_button.dart';
 import '../../presentation/custom_withdrawal_widget.dart';
-import '../../presentation/withdrawal_submit_button.dart';
 
 class WithdrawalAcknowledgementScreen extends StatelessWidget {
   const WithdrawalAcknowledgementScreen({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class WithdrawalAcknowledgementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomWithdrawalWidget(
       title: '',
-      navigationButton: WithdrawalSubmitButton(
+      navigationButton: CustomPaymentButton(
           key: const Key('withdrawal_acknowledgement_submit_button'),
           title: 'Home',
           disable: false,

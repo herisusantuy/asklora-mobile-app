@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 
-class WithdrawalSubmitButton extends StatelessWidget {
+class CustomPaymentButton extends StatelessWidget {
   final String title;
   final bool disable;
   final Function onSubmit;
 
-  const WithdrawalSubmitButton(
+  const CustomPaymentButton(
       {required this.title,
       required this.onSubmit,
       this.disable = true,

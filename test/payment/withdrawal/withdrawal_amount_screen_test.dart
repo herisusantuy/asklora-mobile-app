@@ -1,6 +1,6 @@
+import 'package:asklora_mobile_app/feature/payment/presentation/custom_payment_button_button.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/bloc/withdrawal_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/withdrawal_screen.dart';
-import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/withdrawal_submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -32,8 +32,7 @@ void main() async {
       expect(amountInput, findsOneWidget);
       expect(estimatedHKDAmountText, findsOneWidget);
       expect(exceedAmountErrorText, findsNothing);
-      expect(
-          (tester.firstWidget(submitButton) as WithdrawalSubmitButton).disable,
+      expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
           isTrue);
     });
 
@@ -46,8 +45,7 @@ void main() async {
       expect(find.text('1'), findsOneWidget);
       expect(find.text('7.8476'), findsOneWidget);
       expect(exceedAmountErrorText, findsNothing);
-      expect(
-          (tester.firstWidget(submitButton) as WithdrawalSubmitButton).disable,
+      expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
           isFalse);
     });
 
@@ -60,8 +58,7 @@ void main() async {
       expect(find.text('2001'), findsOneWidget);
       expect(find.text('15703.0476'), findsOneWidget);
       expect(exceedAmountErrorText, findsOneWidget);
-      expect(
-          (tester.firstWidget(submitButton) as WithdrawalSubmitButton).disable,
+      expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
           isTrue);
     });
   });
