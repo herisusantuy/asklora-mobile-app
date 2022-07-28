@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 
 class WithdrawalSubmitButton extends StatelessWidget {
+  final String title;
   final bool disable;
   final Function onSubmit;
 
   const WithdrawalSubmitButton(
-      {required this.onSubmit, this.disable = true, Key? key})
+      {required this.title,
+      required this.onSubmit,
+      this.disable = true,
+      Key? key})
       : super(key: key);
 
   @override
@@ -16,7 +20,7 @@ class WithdrawalSubmitButton extends StatelessWidget {
       child: CustomTextButton(
         height: 40,
         disable: disable,
-        buttonText: 'Request Withdrawal',
+        buttonText: title,
         onClick: onSubmit,
         primaryColor: Colors.black,
         borderRadius: 6,
