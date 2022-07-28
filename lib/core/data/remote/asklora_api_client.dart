@@ -6,6 +6,7 @@ import '../../domain/token/model/token_refresh_response.dart';
 import '../../domain/token/repository/repository.dart';
 import '../../domain/token/repository/token_repository.dart';
 import '../../utils/build_configs/build_config.dart';
+import '../../utils/device_id.dart';
 import '../../utils/logging_interceptor.dart';
 
 class AskloraApiClient {
@@ -44,7 +45,7 @@ class AskloraApiClient {
         },
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         }));
 
     if (kDebugMode) {
@@ -58,6 +59,12 @@ class AskloraApiClient {
 class AppInterceptors extends Interceptor {
   final Repository _storage;
   final Dio _dio;
+  String? _deviceId;
+
+  Future<String?> _getDeviceId() async {
+    _deviceId = await getDeviceId();
+    return _deviceId;
+  }
 
   AppInterceptors(this._storage, this._dio);
 
@@ -68,6 +75,7 @@ class AppInterceptors extends Interceptor {
     if (accessToken != null) {
       options.headers['Authorization'] = 'Bearer $accessToken';
     }
+    options.headers['X-Device-id'] = _deviceId ?? _getDeviceId();
     return handler.next(options);
   }
 
