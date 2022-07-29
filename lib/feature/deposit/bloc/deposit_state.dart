@@ -14,8 +14,11 @@ enum DepositPages {
 
 class DepositState extends Equatable {
   final DepositPages depositPages;
+  final DepositPages? previousDepositPages;
+
   const DepositState({
     this.depositPages = DepositPages.unknown,
+    this.previousDepositPages,
   }) : super();
 
   @override
@@ -23,9 +26,11 @@ class DepositState extends Equatable {
 
   DepositState copyWith({
     DepositPages? depositPages,
+    DepositPages? previousDepositPages,
   }) {
     return DepositState(
       depositPages: depositPages ?? this.depositPages,
+      previousDepositPages: previousDepositPages ?? this.previousDepositPages,
     );
   }
 }

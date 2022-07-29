@@ -1,6 +1,6 @@
+import 'package:asklora_mobile_app/feature/payment/presentation/custom_payment_button_button.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/bloc/withdrawal_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/withdrawal_screen.dart';
-import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/withdrawal_submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -30,8 +30,7 @@ void main() async {
           find.text(
               'We`ll let you know as soon as your withdrawal has been processed'),
           findsOneWidget);
-      expect(
-          (tester.firstWidget(submitButton) as WithdrawalSubmitButton).disable,
+      expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
           isFalse);
     });
   });

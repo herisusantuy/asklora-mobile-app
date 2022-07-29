@@ -10,13 +10,16 @@ class CustomCardCopyText extends StatelessWidget {
   final String message;
   final EdgeInsets padding;
   final EdgeInsets contentPadding;
+  final TextAlign textAlign;
   final Key? keyCopyButton;
+
   const CustomCardCopyText({
     Key? key,
     this.label = '',
     this.text = '',
     this.message = '',
     this.keyCopyButton,
+    this.textAlign = TextAlign.center,
     this.padding = EdgeInsets.zero,
     this.contentPadding = EdgeInsets.zero,
   }) : super(key: key);
@@ -46,7 +49,7 @@ class CustomCardCopyText extends StatelessWidget {
                 Expanded(
                   child: CustomText(
                     text,
-                    textAlign: TextAlign.center,
+                    textAlign: textAlign,
                   ),
                 ),
                 InkWell(
