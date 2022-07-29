@@ -6,26 +6,26 @@ part 'contact.g.dart';
 @JsonSerializable()
 class Contact extends Equatable {
   @JsonKey(name: 'email_address')
-  String? emailAddress;
+  final String? emailAddress;
 
   @JsonKey(name: 'phone_number')
-  String? phoneNumber;
+  final String? phoneNumber;
 
   @JsonKey(name: 'street_address')
-  String? streetAddress;
+  final String? streetAddress;
 
-  String? unit;
+  final String? unit;
 
-  String? city;
+  final String? city;
 
-  String? state;
+  final String? state;
 
   @JsonKey(name: 'postal_code')
-  String? postalCode;
+  final String? postalCode;
 
-  String? country;
+  final String? country;
 
-  Contact(
+  const Contact(
       {this.emailAddress,
       this.phoneNumber,
       this.streetAddress,

@@ -11,18 +11,18 @@ part 'upgrade_account_request.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UpgradeAccountRequest extends Equatable {
-  Contact? contact;
+  final Contact? contact;
 
-  Identity? identity;
+  final Identity? identity;
 
   @JsonKey(name: 'trusted_contact')
-  TrustedContact? trustedContact;
+  final TrustedContact? trustedContact;
 
-  Disclosures? disclosures;
+  final Disclosures? disclosures;
 
-  List<Agreement>? agreements;
+  final List<Agreement>? agreements;
 
-  UpgradeAccountRequest(
+  const UpgradeAccountRequest(
       {this.contact,
       this.identity,
       this.trustedContact,

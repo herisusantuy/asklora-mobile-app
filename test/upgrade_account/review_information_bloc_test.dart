@@ -186,7 +186,7 @@ void main() async {
               .thenAnswer((_) => Future.value(UpgradeAccountRequest()));
 
           when(accountRepository.submitTaxInfo(taxInfoReq))
-              .thenAnswer((_) => Future.value(TaxInfoRequest()));
+              .thenAnswer((_) => Future.value(const TaxInfoRequest()));
 
           when(accountRepository.getOnfidoToken()).thenAnswer(
               (_) => Future.value(const OnfidoTokenResponse('11223344axx')));
