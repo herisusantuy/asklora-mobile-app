@@ -10,7 +10,7 @@ class FpsInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CustomDepositWidget(
-        backTo: DepositPages.depositMethod,
+        backTo: DepositPageStep.depositMethod,
         children: [
           CustomText(
             'What is FPS?',

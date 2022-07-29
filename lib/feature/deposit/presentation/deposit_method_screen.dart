@@ -12,7 +12,7 @@ class DepositMethodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPages.welcome,
+      backTo: DepositPageStep.welcome,
       children: [
         const CustomText(
           'Deposit Method',
@@ -40,7 +40,7 @@ class DepositMethodScreen extends StatelessWidget {
           buttonText: 'WIRE TRANSFER',
           onClick: () => context
               .read<DepositBloc>()
-              .add(const PageChanged(DepositPages.wireTransfer))),
+              .add(const PageChanged(DepositPageStep.wireTransfer))),
     );
   }
 
@@ -53,7 +53,7 @@ class DepositMethodScreen extends StatelessWidget {
           buttonText: 'FPS',
           onClick: () => context
               .read<DepositBloc>()
-              .add(const PageChanged(DepositPages.fpsTransfer))),
+              .add(const PageChanged(DepositPageStep.fpsTransfer))),
     );
   }
 
@@ -65,7 +65,7 @@ class DepositMethodScreen extends StatelessWidget {
           child: const CustomText('What is FPS?'),
           onTap: () => context
               .read<DepositBloc>()
-              .add(const PageChanged(DepositPages.fpsMeaning))),
+              .add(const PageChanged(DepositPageStep.fpsMeaning))),
     );
   }
 }

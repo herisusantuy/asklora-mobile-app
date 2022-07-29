@@ -4,7 +4,7 @@ import '../../bloc/deposit_bloc.dart';
 
 class CustomDepositWidget extends StatelessWidget {
   final List<Widget> children;
-  final DepositPages? backTo;
+  final DepositPageStep? backTo;
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;

@@ -12,7 +12,7 @@ void main() {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const DepositScreen(
-          initialDepositPages: DepositPages.welcome,
+          initialDepositPages: DepositPageStep.welcome,
         ),
         navigatorObservers: [mockObserver],
       ));

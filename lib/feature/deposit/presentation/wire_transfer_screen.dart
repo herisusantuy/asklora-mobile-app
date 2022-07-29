@@ -12,10 +12,11 @@ class WireTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-        backTo: DepositPages.depositMethod,
+        backTo: DepositPageStep.depositMethod,
         navigationButton: const DepositNextButton(
           key: Key('deposit_wire_transfer_next_button'),
-          nextTo: DepositPages.depositMethod,
+          label: 'Upload Proof Of Remittance',
+          nextTo: DepositPageStep.uploadProof,
           disable: false,
         ),
         children: [
@@ -39,7 +40,7 @@ class WireTransferScreen extends StatelessWidget {
           _cardCopyText(
               'Account Name.', 'LORA Advisors Limited', 'Account Name Copied',
               key: 'deposit_account_name_card'),
-          _cautionText(),
+          _infoText(),
           _cardCopyText('Swift Code.', 'DHBKHKHH', 'Swift Code Copied',
               key: 'deposit_swift_code_card'),
           _cardCopyText(
@@ -70,7 +71,7 @@ class WireTransferScreen extends StatelessWidget {
     );
   }
 
-  Widget _cautionText() {
+  Widget _infoText() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0, top: 5),
       child: Row(

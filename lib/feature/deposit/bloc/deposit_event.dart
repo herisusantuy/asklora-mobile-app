@@ -8,7 +8,7 @@ abstract class DepositEvent extends Equatable {
 }
 
 class PageChanged extends DepositEvent {
-  final DepositPages depositPages;
+  final DepositPageStep depositPages;
 
   const PageChanged(this.depositPages) : super();
 
