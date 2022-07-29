@@ -8,32 +8,32 @@ part 'disclosures.g.dart';
 @JsonSerializable()
 class Disclosures extends Equatable {
   @JsonKey(name: 'is_control_person')
-  bool? isControlPerson;
+  final bool? isControlPerson;
 
   @JsonKey(name: 'is_affiliated_exchange_or_finra')
-  bool? isAffiliatedExchangeOrFinra;
+  final bool? isAffiliatedExchangeOrFinra;
 
   @JsonKey(name: 'is_politically_exposed')
-  bool? isPoliticallyExposed;
+  final bool? isPoliticallyExposed;
 
   @JsonKey(name: 'immediate_family_exposed')
-  bool? immediateFamilyExposed;
+  final bool? immediateFamilyExposed;
 
   @JsonKey(name: 'employment_status')
-  String? employmentStatus;
+  final String? employmentStatus;
 
   @JsonKey(name: 'employer_name')
-  String? employerName;
+  final String? employerName;
 
   @JsonKey(name: 'employer_address')
-  String? employerAddress;
+  final String? employerAddress;
 
   @JsonKey(name: 'employment_position')
-  String? employmentPosition;
+  final String? employmentPosition;
 
-  List<Context>? context;
+  final List<Context>? context;
 
-  Disclosures(
+  const Disclosures(
       {this.isControlPerson,
       this.isAffiliatedExchangeOrFinra,
       this.isPoliticallyExposed,

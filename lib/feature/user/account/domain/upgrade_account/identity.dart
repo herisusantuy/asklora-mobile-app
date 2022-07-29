@@ -6,36 +6,36 @@ part 'identity.g.dart';
 @JsonSerializable()
 class Identity extends Equatable {
   @JsonKey(name: 'given_name')
-  String? givenName;
+  final String? givenName;
 
   @JsonKey(name: 'middle_name')
-  String? middleName;
+  final String? middleName;
 
   @JsonKey(name: 'family_name')
-  String? familyName;
+  final String? familyName;
 
   @JsonKey(name: 'date_of_birth')
-  String? dateOfBirth;
+  final String? dateOfBirth;
 
   @JsonKey(name: 'tax_id')
-  String? taxId;
+  final String? taxId;
 
   @JsonKey(name: 'tax_id_type')
-  String? taxIdType;
+  final String? taxIdType;
 
   @JsonKey(name: 'country_of_citizenship')
-  String? countryOfCitizenship;
+  final String? countryOfCitizenship;
 
   @JsonKey(name: 'country_of_birth')
-  String? countryOfBirth;
+  final String? countryOfBirth;
 
   @JsonKey(name: 'country_of_tax_residence')
-  String? countryOfTaxResidence;
+  final String? countryOfTaxResidence;
 
   @JsonKey(name: 'funding_source')
-  String? fundingSource;
+  final String? fundingSource;
 
-  Identity(
+  const Identity(
       {this.givenName,
       this.middleName,
       this.familyName,

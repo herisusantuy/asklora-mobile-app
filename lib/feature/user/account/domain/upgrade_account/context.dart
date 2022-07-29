@@ -6,25 +6,25 @@ part 'context.g.dart';
 @JsonSerializable()
 class Context extends Equatable {
   @JsonKey(name: 'context_type')
-  String? contextType;
+  final String? contextType;
   @JsonKey(name: 'company_name')
-  String? companyName;
+  final String? companyName;
   @JsonKey(name: 'company_street_address')
-  String? companyStreetAddress;
+  final String? companyStreetAddress;
   @JsonKey(name: 'company_city')
-  String? companyCity;
+  final String? companyCity;
   @JsonKey(name: 'company_state')
-  String? companyState;
+  final String? companyState;
   @JsonKey(name: 'company_country')
-  String? companyCountry;
+  final String? companyCountry;
   @JsonKey(name: 'company_compliance_email')
-  String? companyComplianceEmail;
+  final String? companyComplianceEmail;
   @JsonKey(name: 'given_name')
-  String? givenName;
+  final String? givenName;
   @JsonKey(name: 'family_name')
-  String? familyName;
+  final String? familyName;
 
-  Context(
+  const Context(
       {this.contextType,
       this.companyName,
       this.companyStreetAddress,

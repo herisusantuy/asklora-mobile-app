@@ -20,7 +20,7 @@ import 'signing_broker_agreements_form.dart';
 import 'trusted_contact_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
-  late AccountBloc accountBloc;
+  late final AccountBloc accountBloc;
 
   UpgradeAccountScreen({Key? key, required this.initialPage})
       : _pageViewController = PageController(initialPage: initialPage),

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/clearable_text_field.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
-import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../reset_password/presentation/reset_password_screen.dart';
@@ -40,16 +40,18 @@ class SignInForm extends StatelessWidget {
       },
       child: Align(
         alignment: const Alignment(0, -1 / 3),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _emailInput(),
-            _padding(),
-            _passwordInput(),
-            _forgotPasswordButton(context),
-            _padding(),
-            _loginButton()
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _emailInput(),
+              _padding(),
+              _passwordInput(),
+              _forgotPasswordButton(context),
+              _padding(),
+              _loginButton()
+            ],
+          ),
         ),
       ),
     );
@@ -60,7 +62,7 @@ class SignInForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.emailAddress != current.emailAddress,
       builder: (context, state) {
-        return CustomTextInput(
+        return ClearableTextFormField(
           key: const Key('sign_in_email_input'),
           textInputType: TextInputType.emailAddress,
           labelText: 'Email Address',
@@ -78,10 +80,11 @@ class SignInForm extends StatelessWidget {
     return BlocBuilder<SignInBloc, SignInState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
-        return CustomTextInput(
+        return ClearableTextFormField(
           key: const Key('sign_in_password_input'),
           obscureText: true,
           labelText: 'Password',
+          textInputType: TextInputType.visiblePassword,
           hintText: 'Input Password',
           onChanged: (password) =>
               context.read<SignInBloc>().add(SignInPasswordChanged(password)),

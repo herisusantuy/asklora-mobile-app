@@ -15,7 +15,7 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Sign-up')),
       body: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocProvider(
           create: (context) {
             return SignUpBloc(

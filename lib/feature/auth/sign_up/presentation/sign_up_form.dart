@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/clearable_text_field.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
-import '../../../../core/presentation/custom_text_input.dart';
 import '../../otp/presentation/otp_screen.dart';
 import '../bloc/sign_up_bloc.dart';
 
@@ -33,7 +33,8 @@ class SignUpForm extends StatelessWidget {
         },
         child: Align(
             alignment: const Alignment(0, -1 / 3),
-            child: Column(
+            child: SingleChildScrollView(
+                child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 _userNameInput(),
@@ -42,14 +43,14 @@ class SignUpForm extends StatelessWidget {
                 _padding(),
                 _signUpButton(),
               ],
-            )));
+            ))));
   }
 
   BlocBuilder _userNameInput() {
     return BlocBuilder<SignUpBloc, SignUpState>(
         buildWhen: (previous, current) => previous.username != current.username,
         builder: (context, state) {
-          return CustomTextInput(
+          return ClearableTextFormField(
             key: const Key('sign_up_email_input'),
             textInputType: TextInputType.emailAddress,
             labelText: 'Email',
@@ -67,7 +68,7 @@ class SignUpForm extends StatelessWidget {
         builder: (context, state) {
           return Column(
             children: [
-              CustomTextInput(
+              ClearableTextFormField(
                 key: const Key('sign_up_password_input'),
                 textInputType: TextInputType.visiblePassword,
                 labelText: 'Password',

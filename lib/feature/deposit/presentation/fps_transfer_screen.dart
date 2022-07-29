@@ -10,9 +10,10 @@ import 'widget/deposit_next_button.dart';
 class FpsTransferScreen extends StatelessWidget {
   const FpsTransferScreen({Key? key}) : super(key: key);
 
+  final String fpsId = '123456789';
+
   @override
   Widget build(BuildContext context) {
-    String _fpsId = '123456789';
     return CustomDepositWidget(
       backTo: DepositPages.depositMethod,
       navigationButton: const DepositNextButton(
@@ -33,8 +34,8 @@ class FpsTransferScreen extends StatelessWidget {
           key: const Key('fps_id_card'),
           keyCopyButton: const Key('fps_id_card_copy_button'),
           label: 'FPS ID',
-          text: _fpsId,
-          message: '$_fpsId Copied',
+          text: fpsId,
+          message: '$fpsId Copied',
           padding: const EdgeInsets.symmetric(vertical: 50),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

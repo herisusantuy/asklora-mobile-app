@@ -6,16 +6,17 @@ part 'trusted_contact.g.dart';
 @JsonSerializable()
 class TrustedContact extends Equatable {
   @JsonKey(name: 'given_name')
-  String? givenName;
+  final String? givenName;
 
   @JsonKey(name: 'family_name')
-  String? familyName;
+  final String? familyName;
 
-  String? email;
+  final String? email;
 
-  String? phone;
+  final String? phone;
 
-  TrustedContact({this.givenName, this.familyName, this.email, this.phone});
+  const TrustedContact(
+      {this.givenName, this.familyName, this.email, this.phone});
 
   factory TrustedContact.fromJson(Map<String, dynamic> json) =>
       _$TrustedContactFromJson(json);

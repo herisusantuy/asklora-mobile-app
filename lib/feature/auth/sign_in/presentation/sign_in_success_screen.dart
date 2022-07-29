@@ -82,12 +82,9 @@ class SignInSuccessScreen extends StatelessWidget {
                           ),
                         ),
                         iosAppearance: const OnfidoIOSAppearance(),
-                      );
-
-                      context.read<AccountBloc>().add(UpdateOnfidoResult(
-                          Reason.userCompleted.value,
-                          'Onfido SDK',
-                          state.token));
+                      ).then((value) => context.read<AccountBloc>().add(
+                          UpdateOnfidoResult(Reason.userCompleted.value,
+                              'Onfido SDK', state.token)));
                     } on PlatformException {
                       context.read<AccountBloc>().add(UpdateOnfidoResult(
                           Reason.userExited.value, 'Onfido SDK', state.token));

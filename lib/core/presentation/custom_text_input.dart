@@ -38,26 +38,24 @@ class CustomTextInput extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: initialValue,
-      inputFormatters: textInputFormatterList,
-      maxLength: maxLength,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-          floatingLabelBehavior: floatingLabelBehavior,
-          filled: fillColor != null ? true : false,
-          fillColor: fillColor,
-          border: inputBorder,
-          labelText: labelText,
-          counterText: '',
-          hintText: hintText,
-          enabledBorder: enabledBorder,
-          disabledBorder: disabledBorder,
-          focusedBorder: focusedBorder,
-          errorText: errorText.isEmpty ? null : errorText),
-      onChanged: (str) => onChanged(str),
-      keyboardType: textInputType,
-    );
-  }
+  Widget build(BuildContext context) => TextFormField(
+        initialValue: initialValue,
+        inputFormatters: textInputFormatterList,
+        maxLength: maxLength,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+            floatingLabelBehavior: floatingLabelBehavior,
+            filled: fillColor != null ? true : false,
+            fillColor: fillColor,
+            border: inputBorder,
+            labelText: labelText,
+            counterText: '',
+            hintText: hintText,
+            enabledBorder: enabledBorder,
+            disabledBorder: disabledBorder,
+            focusedBorder: focusedBorder,
+            errorText: errorText.isEmpty ? null : errorText),
+        onChanged: (str) => onChanged(str),
+        keyboardType: textInputType,
+      );
 }

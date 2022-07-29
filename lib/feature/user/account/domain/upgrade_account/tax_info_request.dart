@@ -32,7 +32,7 @@ class TaxInfoRequest extends Equatable {
   @JsonKey(name: 'ip_address')
   final String ipAddress;
 
-  TaxInfoRequest({
+  const TaxInfoRequest({
     this.fullName = '',
     this.countryCitizen = '',
     this.permanentAddressStreet = '',
