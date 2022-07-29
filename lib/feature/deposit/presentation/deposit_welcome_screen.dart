@@ -13,7 +13,7 @@ class DepositWelcomeScreen extends StatelessWidget {
     return CustomDepositWidget(
       navigationButton: const DepositNextButton(
         key: Key('deposit_welcome_screen_next_button'),
-        nextTo: DepositPages.depositMethod,
+        nextTo: DepositPageStep.depositMethod,
         disable: false,
       ),
       children: [

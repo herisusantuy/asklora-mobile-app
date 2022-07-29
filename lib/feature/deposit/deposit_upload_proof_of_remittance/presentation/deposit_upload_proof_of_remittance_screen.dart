@@ -1,15 +1,13 @@
 import 'dart:io';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../presentation/widget/custom_deposit_widget.dart';
-import '../../presentation/widget/custom_row_text.dart';
-
-import '../../presentation/widget/deposit_next_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../presentation/widget/custom_deposit_widget.dart';
+import '../../presentation/widget/custom_row_text.dart';
+import '../../presentation/widget/deposit_next_button.dart';
 import '../bloc/deposit_upload_proof_of_remittance_bloc.dart';
 
 class DepositUploadProofOfRemittanceScreen extends StatelessWidget {
@@ -24,54 +22,32 @@ class DepositUploadProofOfRemittanceScreen extends StatelessWidget {
               navigationButton: BlocBuilder<DepositUploadProofOfRemittanceBloc,
                   DepositUploadProofofRemittanceState>(
                 builder: (context, state) => DepositNextButton(
+                  label: 'Submit',
                   key: const Key(
                       'deposit_upload_proof_of_remittance_next_button'),
-                  nextTo: DepositPages.depositMethod,
+                  nextTo: DepositPageStep.acknowledged,
                   disable: state.documentFile != null ? false : true,
                 ),
               ),
               children: [
-                const CustomText(
+                _text(
                   'Upload Proof of Remittance',
-                  padding: EdgeInsets.only(top: 10, bottom: 50),
-                  type: FontType.h2,
+                  fontType: FontType.h2,
                 ),
-                const CustomText(
+                _text(
                   'Please upload your proof of remittance below. This helps us verify your deposit. The proof of remittance should contain :',
-                  padding: EdgeInsets.only(top: 10, bottom: 30),
-                  type: FontType.smallText,
                 ),
-                const CustomRowText(
-                  index: '1',
-                  text: 'The deposit amount',
-                  padding: EdgeInsets.only(bottom: 3),
-                  fontType: FontType.smallText,
+                _rowText('1', 'The deposit amount'),
+                _rowText('2', 'Your account name'),
+                _rowText('3', 'Your bank account no.'),
+                _rowText(
+                  '4',
+                  'A transaction reference. Please put your User ID (XXXXX) as your transaction reference',
                 ),
-                const CustomRowText(
-                  index: '2',
-                  text: 'Your account name',
-                  padding: EdgeInsets.only(bottom: 3),
-                  fontType: FontType.smallText,
-                ),
-                const CustomRowText(
-                  index: '3',
-                  text: 'Your bank account no.',
-                  padding: EdgeInsets.only(bottom: 3),
-                  fontType: FontType.smallText,
-                ),
-                const CustomRowText(
-                  index: '4',
-                  text:
-                      'A transaction reference. Please put your User ID (XXXXX) as your transaction reference',
-                  padding: EdgeInsets.only(bottom: 3),
-                  fontType: FontType.smallText,
-                ),
-                const CustomText(
+                _text(
                   'It can be a screenshot from your bank app or a receipt. Please see the sample screenshot below for an example',
-                  padding: EdgeInsets.only(top: 10, bottom: 30),
-                  type: FontType.smallText,
                 ),
-                _customContainer(
+                _uploadDocument(
                     'Upload Document',
                     InkWell(
                       onTap: () => context
@@ -80,6 +56,7 @@ class DepositUploadProofOfRemittanceScreen extends StatelessWidget {
                       child: BlocBuilder<DepositUploadProofOfRemittanceBloc,
                           DepositUploadProofofRemittanceState>(
                         builder: (context, state) {
+                          debugPrint('Krishna pick file ${state}');
                           if (state.documentFile != null) {
                             return Image.file(
                               key: const Key(
@@ -99,12 +76,28 @@ class DepositUploadProofOfRemittanceScreen extends StatelessWidget {
                         },
                       ),
                     )),
-                _customContainer('Sample Document', const CustomText('Image')),
+                _uploadDocument('Sample Document', const CustomText('Image')),
               ],
             ));
   }
 
-  Widget _customContainer(String title, Widget content) => Container(
+  Widget _text(String text, {FontType fontType = FontType.smallText}) =>
+      CustomText(
+        text,
+        padding: const EdgeInsets.only(top: 10, bottom: 50),
+        type: fontType,
+      );
+
+  Widget _rowText(String index, String text,
+          {FontType fontType = FontType.smallText}) =>
+      CustomRowText(
+        index: index,
+        text: text,
+        padding: const EdgeInsets.only(bottom: 3),
+        fontType: fontType,
+      );
+
+  Widget _uploadDocument(String title, Widget content) => Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: 1.5),
           borderRadius: const BorderRadius.all(Radius.circular(4))),

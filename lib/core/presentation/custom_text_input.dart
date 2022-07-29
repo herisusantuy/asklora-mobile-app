@@ -11,6 +11,7 @@ class CustomTextInput extends StatelessWidget {
   final Function(String) onChanged;
   final List<TextInputFormatter>? textInputFormatterList;
   final String initialValue;
+  final String prefixText;
   final Color? fillColor;
   final InputBorder inputBorder;
   final InputBorder? enabledBorder;
@@ -34,6 +35,7 @@ class CustomTextInput extends StatelessWidget {
       this.enabledBorder,
       this.disabledBorder,
       this.focusedBorder,
+      this.prefixText = '',
       Key? key})
       : super(key: key);
 
@@ -51,6 +53,7 @@ class CustomTextInput extends StatelessWidget {
             labelText: labelText,
             counterText: '',
             hintText: hintText,
+            prefixText: '$prefixText  ',
             enabledBorder: enabledBorder,
             disabledBorder: disabledBorder,
             focusedBorder: focusedBorder,

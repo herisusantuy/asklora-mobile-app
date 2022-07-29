@@ -105,30 +105,11 @@ class SignInSuccessScreen extends StatelessWidget {
                 ),
               ),
               _padding(),
-              BlocListener<SignOutBloc, SignOutState>(
-                listener: (context, state) async {
-                  switch (state.response.state) {
-                    case ResponseState.error:
-                      CustomSnackBar(context)
-                          .setMessage(state.response.message)
-                          .showError();
-                      break;
-                    case ResponseState.success:
-                      CustomSnackBar(context)
-                          .setMessage(state.response.message)
-                          .show();
-                      HomeScreen.openReplace(context);
-                      break;
-                    default:
-                      break;
-                  }
-                },
-                child: _signOutButton(),
-              ),
-              _padding(),
               _getWithdrawalButton(context),
               _padding(),
               _depositScreen(context),
+              _padding(),
+              _signOutButton(),
             ],
           ),
         ),
@@ -159,19 +140,36 @@ class SignInSuccessScreen extends StatelessWidget {
         },
       );
 
-  Widget _signOutButton() => BlocBuilder<SignOutBloc, SignOutState>(
-        buildWhen: ((previous, current) =>
-            previous.response.state != current.response.state),
-        builder: (context, state) {
-          return CustomTextButton(
-            buttonText: 'Sign Out',
-            disable: state.response.state == ResponseState.loading,
-            isLoading: state.response.state == ResponseState.loading,
-            onClick: () =>
-                context.read<SignOutBloc>().add(const SignOutSubmitted()),
-            borderRadius: 5,
-          );
+  Widget _signOutButton() => BlocListener<SignOutBloc, SignOutState>(
+        listener: (context, state) async {
+          switch (state.response.state) {
+            case ResponseState.error:
+              CustomSnackBar(context)
+                  .setMessage(state.response.message)
+                  .showError();
+              break;
+            case ResponseState.success:
+              CustomSnackBar(context).setMessage(state.response.message).show();
+              HomeScreen.openReplace(context);
+              break;
+            default:
+              break;
+          }
         },
+        child: BlocBuilder<SignOutBloc, SignOutState>(
+          buildWhen: ((previous, current) =>
+              previous.response.state != current.response.state),
+          builder: (context, state) {
+            return CustomTextButton(
+              buttonText: 'Sign Out',
+              disable: state.response.state == ResponseState.loading,
+              isLoading: state.response.state == ResponseState.loading,
+              onClick: () =>
+                  context.read<SignOutBloc>().add(const SignOutSubmitted()),
+              borderRadius: 5,
+            );
+          },
+        ),
       );
 
   Widget _getOnfidoToken() => BlocBuilder<AccountBloc, AccountState>(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_input.dart';
@@ -110,8 +111,8 @@ class WithdrawalAmountScreen extends StatelessWidget {
                 textInputFormatterList: [
                   FilteringTextInputFormatter.digitsOnly
                 ],
+                prefixText: 'USD',
                 paddingBottom: 6,
-                labelText: 'Withdrawal Amount',
                 hintText: 'Enter Amount',
                 onChanged: (value) => context.read<WithdrawalAmountBloc>().add(
                     WithdrawalAmountChanged(

@@ -6,7 +6,7 @@ import '../../bloc/deposit_bloc.dart';
 
 class DepositNextButton extends StatelessWidget {
   final bool disable;
-  final DepositPages nextTo;
+  final DepositPageStep nextTo;
   final String label;
 
   const DepositNextButton(

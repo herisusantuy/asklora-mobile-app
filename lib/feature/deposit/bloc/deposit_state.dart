@@ -1,6 +1,6 @@
 part of 'deposit_bloc.dart';
 
-enum DepositPages {
+enum DepositPageStep {
   welcome,
   depositMethod,
   fpsMeaning,
@@ -9,15 +9,16 @@ enum DepositPages {
   wireTransfer,
   fpsTransfer,
   uploadProof,
+  acknowledged,
   unknown
 }
 
 class DepositState extends Equatable {
-  final DepositPages depositPages;
-  final DepositPages? previousDepositPages;
+  final DepositPageStep depositPages;
+  final DepositPageStep? previousDepositPages;
 
   const DepositState({
-    this.depositPages = DepositPages.unknown,
+    this.depositPages = DepositPageStep.unknown,
     this.previousDepositPages,
   }) : super();
 
@@ -25,8 +26,8 @@ class DepositState extends Equatable {
   List<Object?> get props => [depositPages];
 
   DepositState copyWith({
-    DepositPages? depositPages,
-    DepositPages? previousDepositPages,
+    DepositPageStep? depositPages,
+    DepositPageStep? previousDepositPages,
   }) {
     return DepositState(
       depositPages: depositPages ?? this.depositPages,

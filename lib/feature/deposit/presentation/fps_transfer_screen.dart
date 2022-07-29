@@ -15,10 +15,10 @@ class FpsTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPages.depositMethod,
+      backTo: DepositPageStep.depositMethod,
       navigationButton: const DepositNextButton(
         label: 'Upload Proof of Remittance',
-        nextTo: DepositPages.depositMethod,
+        nextTo: DepositPageStep.depositMethod,
         disable: false,
       ),
       children: [
