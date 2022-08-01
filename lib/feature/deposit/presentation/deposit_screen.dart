@@ -46,7 +46,6 @@ class DepositScreen extends StatelessWidget {
   }
 
   Widget _pages(DepositPageStep step) {
-    debugPrint('Krishna Deposit Screen page $step');
     switch (step) {
       case DepositPageStep.welcome:
         return const DepositWelcomeScreen();

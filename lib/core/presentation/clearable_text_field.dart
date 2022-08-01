@@ -10,6 +10,7 @@ class ClearableTextFormField extends FormField<String> {
   final bool obscureText;
   final TextInputType textInputType;
   final Function(String) onChanged;
+  final Function? onClear;
   final List<TextInputFormatter>? textInputFormatterList;
   final String initialValue;
   final Color? fillColor;
@@ -28,6 +29,7 @@ class ClearableTextFormField extends FormField<String> {
       this.obscureText = false,
       this.errorText = '',
       this.maxLength,
+      this.onClear,
       this.textInputFormatterList,
       this.initialValue = '',
       this.fillColor,
@@ -37,7 +39,7 @@ class ClearableTextFormField extends FormField<String> {
       this.disabledBorder,
       this.focusedBorder,
       this.controller,
-      this.resetIcon = const Icon(Icons.cancel),
+      this.resetIcon = const Icon(Icons.cancel, size: 20),
       Key? key})
       : super(
           key: key,
@@ -76,6 +78,9 @@ class ClearableTextFormField extends FormField<String> {
                               onPressed: () {
                                 state.clear();
                                 onChanged('');
+                                if (onClear != null) {
+                                  onClear();
+                                }
                               },
                               color: Theme.of(state.context).hintColor,
                             )
