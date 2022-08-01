@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
+import '../../../../../core/utils/formatters/phone_input_formatter/phone_input_formatter.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 
@@ -109,15 +110,19 @@ class TrustedContactForm extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
               initialValue: state.phoneNumber,
-              textInputFormatterList: [FilteringTextInputFormatter.digitsOnly],
+              textInputFormatterList: [
+                FilteringTextInputFormatter.digitsOnly,
+                PhoneInputFormatter(
+                    onPhoneNumberChange: (value) => context
+                        .read<TrustedContactBloc>()
+                        .add(PhoneNumberChanged(value)))
+              ],
               key: const Key('trusted_contact_phone_number_input'),
               labelText: 'Phone Number',
-              hintText: 'Enter Phone Number',
+              hintText: '+852 1234 5678',
               errorText: state.phoneNumberErrorText,
               textInputType: TextInputType.number,
-              onChanged: (value) => context
-                  .read<TrustedContactBloc>()
-                  .add(PhoneNumberChanged(value)),
+              onChanged: (value) => {},
             ),
           );
         },

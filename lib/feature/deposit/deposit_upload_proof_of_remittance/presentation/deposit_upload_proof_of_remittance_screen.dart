@@ -56,7 +56,6 @@ class DepositUploadProofOfRemittanceScreen extends StatelessWidget {
                       child: BlocBuilder<DepositUploadProofOfRemittanceBloc,
                           DepositUploadProofofRemittanceState>(
                         builder: (context, state) {
-                          debugPrint('Krishna pick file ${state}');
                           if (state.documentFile != null) {
                             return Image.file(
                               key: const Key(

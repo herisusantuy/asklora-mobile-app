@@ -183,7 +183,7 @@ void main() async {
               .thenAnswer((_) => Future.value());
 
           when(accountRepository.upgradeAccount(upgradeAccountRequest))
-              .thenAnswer((_) => Future.value(UpgradeAccountRequest()));
+              .thenAnswer((_) => Future.value(const UpgradeAccountRequest()));
 
           when(accountRepository.submitTaxInfo(taxInfoReq))
               .thenAnswer((_) => Future.value(const TaxInfoRequest()));
