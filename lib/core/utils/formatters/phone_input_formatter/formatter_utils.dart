@@ -49,7 +49,6 @@ bool numericStringStartsWithOrphanPeriod(String string) {
 void checkMask(String mask) {
   if (_oneDashRegExp.hasMatch(mask)) {
     throw ('A mask cannot contain more than one dash (-) symbols in a row');
-    // return false;
   }
   if (!_startPlusRegExp.hasMatch(mask)) {
     throw ('A mask must start with a + sign followed by a digit of a rounded brace');
@@ -64,9 +63,6 @@ bool isUnmaskableSymbol(String? symbol) {
     return false;
   }
   return _isMaskSymbolRegExp.hasMatch(symbol);
-  // var matches = RegExp(r'^[-\+ )(]+$').allMatches(symbol);
-  // print('NUM MATCHES ${matches.toList().length} FOR $symbol');
-  // return false;
 }
 
 bool isDigit(String? character) {
