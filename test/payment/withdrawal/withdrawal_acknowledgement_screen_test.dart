@@ -1,4 +1,3 @@
-import 'package:asklora_mobile_app/feature/payment/presentation/custom_payment_button_button.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/bloc/withdrawal_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,21 +16,20 @@ void main() async {
           navigatorObservers: [mockObserver]));
     }
 
-    final submitButton =
-        find.byKey(const Key('withdrawal_acknowledgement_submit_button'));
+    final image = find.byKey(const Key('withdrawal_acknowledgement_image'));
 
     testWidgets(
         'Render Withdrawal Acknowledgement Screen,`next button` = enabled',
         (tester) async {
       await _buildWithdrawalWelcomeScreen(tester);
-      expect(submitButton, findsOneWidget);
-      expect(find.text('Instruction Received'), findsOneWidget);
+      expect(image, findsOneWidget);
+      expect(find.text('Acknowledgement'), findsOneWidget);
       expect(
           find.text(
-              'We`ll let you know as soon as your withdrawal has been processed'),
+              'We`re processing your transaction. We`ll let you know via push notification and email as we`ve sent the funds your way'),
           findsOneWidget);
-      expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
-          isFalse);
+      expect(
+          find.text('This can usually take 1-2 business days'), findsOneWidget);
     });
   });
 }

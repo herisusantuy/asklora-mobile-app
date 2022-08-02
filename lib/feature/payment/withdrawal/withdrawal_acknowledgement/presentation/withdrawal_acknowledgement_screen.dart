@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
-import '../../../../auth/sign_in/presentation/sign_in_success_screen.dart';
-import '../../../presentation/custom_payment_button_button.dart';
 import '../../presentation/custom_withdrawal_widget.dart';
 
 class WithdrawalAcknowledgementScreen extends StatelessWidget {
@@ -10,26 +8,47 @@ class WithdrawalAcknowledgementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomWithdrawalWidget(
-      title: '',
-      navigationButton: CustomPaymentButton(
-          key: const Key('withdrawal_acknowledgement_submit_button'),
-          title: 'Home',
-          disable: false,
-          onSubmit: () => SignInSuccessScreen.openAndRemoveAllRoute(context)),
-      children: const [
-        Align(
-          alignment: Alignment.center,
-          child: CustomText(
-            'Instruction Received',
-            type: FontType.h2,
-            textAlign: TextAlign.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      customHeader: Align(
+        alignment: Alignment.centerRight,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: InkWell(
+              onTap: () => Navigator.pop(context),
+              child: const CustomText(
+                'Done',
+                type: FontType.bodyTextBold,
+              )),
+        ),
+      ),
+      children: [
+        Container(
+          height: 160,
+          width: double.infinity,
+          padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.only(top: 48, bottom: 48),
+          color: Colors.grey[300],
+          child: const Center(
+            child: CustomText(
+              '-Image-',
+              key: Key('withdrawal_acknowledgement_image'),
+              type: FontType.bodyText,
+            ),
           ),
         ),
-        SizedBox(
-          height: 12,
+        const CustomText(
+          'Acknowledgement',
+          type: FontType.h5,
+          padding: EdgeInsets.only(bottom: 12),
         ),
-        CustomText(
-          'We`ll let you know as soon as your withdrawal has been processed',
+        const CustomText(
+          'We`re processing your transaction. We`ll let you know via push notification and email as we`ve sent the funds your way',
+          type: FontType.smallText,
+          textAlign: TextAlign.center,
+          padding: EdgeInsets.only(bottom: 24),
+        ),
+        const CustomText(
+          'This can usually take 1-2 business days',
           type: FontType.smallText,
           textAlign: TextAlign.center,
         ),

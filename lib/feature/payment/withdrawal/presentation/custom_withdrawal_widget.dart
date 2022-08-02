@@ -9,15 +9,21 @@ class CustomWithdrawalWidget extends StatelessWidget {
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;
-  final String title;
+  final String? title;
+  final CrossAxisAlignment crossAxisAlignment;
+  final bool backButtonVisibility;
+  final Widget? customHeader;
 
   const CustomWithdrawalWidget(
-      {required this.title,
+      {this.title,
       required this.children,
       this.backTo,
       this.onSubmit,
       this.disableButton = true,
       this.navigationButton,
+      this.backButtonVisibility = true,
+      this.crossAxisAlignment = CrossAxisAlignment.start,
+      this.customHeader,
       Key? key})
       : super(key: key);
 
@@ -37,21 +43,22 @@ class CustomWithdrawalWidget extends StatelessWidget {
           SafeArea(
             child: SizedBox(
               width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                      onTap: () => _onTapBack(context),
-                      child: const Icon(
-                        Icons.chevron_left,
-                        size: 52,
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: CustomText(title, type: FontType.h2),
+              child: customHeader ??
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                          onTap: () => _onTapBack(context),
+                          child: const Icon(
+                            Icons.chevron_left,
+                            size: 52,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: CustomText(title ?? '', type: FontType.h2),
+                      ),
+                    ],
                   ),
-                ],
-              ),
             ),
           ),
           Expanded(
@@ -62,7 +69,7 @@ class CustomWithdrawalWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: crossAxisAlignment,
                       children: children,
                     ),
                   ),
