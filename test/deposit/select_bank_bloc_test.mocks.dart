@@ -20,12 +20,12 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-/// A class which mocks [ListBankRepository].
+/// A class which mocks [BankDetailsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockListBankRepository extends _i1.Mock
-    implements _i2.ListBankRepository {
-  MockListBankRepository() {
+class MockBankDetailsRepository extends _i1.Mock
+    implements _i2.BankDetailsRepository {
+  MockBankDetailsRepository() {
     _i1.throwOnMissingStub(this);
   }
 

@@ -9,17 +9,17 @@ part 'select_bank_state.dart';
 part 'select_bank_event.dart';
 
 class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
-  final ListBankRepository _listBankRepository;
+  final BankDetailsRepository _bankDetailsRepository;
 
-  SelectBankBloc({required ListBankRepository listBankRepository})
-      : _listBankRepository = listBankRepository,
+  SelectBankBloc({required BankDetailsRepository bankDetailsRepository})
+      : _bankDetailsRepository = bankDetailsRepository,
         super(const SelectBankState()) {
     on<GetListBanks>(_getListBanks);
     on<SearchBank>(_searchListBanks);
   }
 
   void _getListBanks(GetListBanks event, Emitter<SelectBankState> emit) async {
-    emit(state.copyWith(listBanks: await _listBankRepository.getListBank()));
+    emit(state.copyWith(listBanks: await _bankDetailsRepository.getListBank()));
   }
 
   void _searchListBanks(SearchBank event, Emitter<SelectBankState> emit) {

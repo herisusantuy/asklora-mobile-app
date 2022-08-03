@@ -9,20 +9,21 @@ import 'package:mockito/mockito.dart';
 
 import 'select_bank_bloc_test.mocks.dart';
 
-@GenerateMocks([ListBankRepository])
+@GenerateMocks([BankDetailsRepository])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group('*Select Bank Bloc Test*', () {
-    late MockListBankRepository listBankRepository;
+    late MockBankDetailsRepository bankDetailsRepository;
     late SelectBankBloc selectBankBloc;
 
     setUpAll(() async {
-      listBankRepository = MockListBankRepository();
+      bankDetailsRepository = MockBankDetailsRepository();
     });
 
     setUp(() async {
-      selectBankBloc = SelectBankBloc(listBankRepository: listBankRepository);
+      selectBankBloc =
+          SelectBankBloc(bankDetailsRepository: bankDetailsRepository);
     });
 
     test('init state should be null', () async {
@@ -32,7 +33,7 @@ void main() {
 
     blocTest<SelectBankBloc, SelectBankState>('Get List of Banks',
         build: () {
-          when(listBankRepository.getListBank())
+          when(bankDetailsRepository.getListBank())
               .thenAnswer((_) => Future.value([
                     const BankDetails(1, 'BCA', 'asd', 'BBCA'),
                   ]));
@@ -48,7 +49,7 @@ void main() {
             });
     blocTest<SelectBankBloc, SelectBankState>('Search List of Banks',
         build: () {
-          when(listBankRepository.getListBank())
+          when(bankDetailsRepository.getListBank())
               .thenAnswer((_) => Future.value([
                     const BankDetails(1, 'BCA', 'asd', 'BBCA'),
                   ]));

@@ -33,7 +33,7 @@ class DepositScreen extends StatelessWidget {
                   filePickerRepository: FilePickerRepository())),
           BlocProvider(
               create: (_) =>
-                  SelectBankBloc(listBankRepository: ListBankRepository())
+                  SelectBankBloc(bankDetailsRepository: BankDetailsRepository())
                     ..add(GetListBanks())),
         ],
         child: Scaffold(
