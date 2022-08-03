@@ -1,16 +1,16 @@
 part of 'select_bank_bloc.dart';
 
 class SelectBankState extends Equatable {
-  final List<ListBanks>? listBanks;
-  final List<ListBanks>? searchListBank;
+  final List<BankDetails>? listBanks;
+  final List<BankDetails>? searchListBank;
   const SelectBankState({
     this.listBanks,
     this.searchListBank,
   });
 
   SelectBankState copyWith({
-    List<ListBanks>? listBanks,
-    List<ListBanks>? searchListBank,
+    List<BankDetails>? listBanks,
+    List<BankDetails>? searchListBank,
   }) {
     return SelectBankState(
       listBanks: listBanks ?? this.listBanks,

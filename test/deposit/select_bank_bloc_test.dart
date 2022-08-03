@@ -34,7 +34,7 @@ void main() {
         build: () {
           when(listBankRepository.getListBank())
               .thenAnswer((_) => Future.value([
-                    const ListBanks(1, 'BCA', 'asd', 'BBCA'),
+                    const BankDetails(1, 'BCA', 'asd', 'BBCA'),
                   ]));
           return selectBankBloc;
         },
@@ -43,14 +43,14 @@ void main() {
         },
         expect: () => {
               const SelectBankState(listBanks: [
-                ListBanks(1, 'BCA', 'asd', 'BBCA'),
+                BankDetails(1, 'BCA', 'asd', 'BBCA'),
               ]),
             });
     blocTest<SelectBankBloc, SelectBankState>('Search List of Banks',
         build: () {
           when(listBankRepository.getListBank())
               .thenAnswer((_) => Future.value([
-                    const ListBanks(1, 'BCA', 'asd', 'BBCA'),
+                    const BankDetails(1, 'BCA', 'asd', 'BBCA'),
                   ]));
           return selectBankBloc;
         },
@@ -60,12 +60,12 @@ void main() {
         },
         expect: () => {
               const SelectBankState(listBanks: [
-                ListBanks(1, 'BCA', 'asd', 'BBCA'),
+                BankDetails(1, 'BCA', 'asd', 'BBCA'),
               ]),
               const SelectBankState(listBanks: [
-                ListBanks(1, 'BCA', 'asd', 'BBCA'),
+                BankDetails(1, 'BCA', 'asd', 'BBCA'),
               ], searchListBank: [
-                ListBanks(1, 'BCA', 'asd', 'BBCA'),
+                BankDetails(1, 'BCA', 'asd', 'BBCA'),
               ]),
             });
     tearDown(() => selectBankBloc.close());

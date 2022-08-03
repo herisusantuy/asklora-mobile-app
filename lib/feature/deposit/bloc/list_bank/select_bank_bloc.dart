@@ -23,7 +23,7 @@ class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
   }
 
   void _searchListBanks(SearchBank event, Emitter<SelectBankState> emit) {
-    List<ListBanks> searchBankKeyword = [];
+    List<BankDetails> searchBankKeyword = [];
     searchBankKeyword.addAll(List.from(state.listBanks!.where((name) {
       return name.bankName.toLowerCase().contains(event.keyword.toLowerCase());
     })));

@@ -10,7 +10,7 @@ import '../mocks/mocks.dart';
 
 void main() async {
   // * Get list of bank from json file
-  List<ListBanks> listBanks = await ListBankRepository().getListBank();
+  List<BankDetails> listBanks = await ListBankRepository().getListBank();
 
   group('*Deposit Select Bank Screen Test*', () {
     Future<void> _buildDepositSelectBankScreen(WidgetTester tester) async {
@@ -29,7 +29,7 @@ void main() async {
       await _buildDepositSelectBankScreen(tester);
       expect(searchBankInput, findsOneWidget);
       await tester.pump();
-      for (ListBanks bank in listBanks) {
+      for (BankDetails bank in listBanks) {
         expect(find.text(bankCodeFormatter(bank.clearingCode)), findsOneWidget);
       }
     });

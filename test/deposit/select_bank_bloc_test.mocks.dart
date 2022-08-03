@@ -29,8 +29,8 @@ class MockListBankRepository extends _i1.Mock
   }
 
   @override
-  _i3.Future<List<_i4.ListBanks>> getListBank() =>
-      (super.noSuchMethod(Invocation.method(#getListBank, []),
-              returnValue: Future<List<_i4.ListBanks>>.value(<_i4.ListBanks>[]))
-          as _i3.Future<List<_i4.ListBanks>>);
+  _i3.Future<List<_i4.BankDetails>> getListBank() => (super.noSuchMethod(
+          Invocation.method(#getListBank, []),
+          returnValue: Future<List<_i4.BankDetails>>.value(<_i4.BankDetails>[]))
+      as _i3.Future<List<_i4.BankDetails>>);
 }

@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'list_bank.g.dart';
 
 @JsonSerializable()
-class ListBanks extends Equatable {
+class BankDetails extends Equatable {
   @JsonKey(name: 'clearing_code')
   final int clearingCode;
   @JsonKey(name: 'bank_name')
@@ -13,17 +13,17 @@ class ListBanks extends Equatable {
   final String chineseName;
   @JsonKey(name: 'swift_bic')
   final String? swiftBic;
-  const ListBanks(
+  const BankDetails(
     this.clearingCode,
     this.bankName,
     this.chineseName,
     this.swiftBic,
   );
 
-  factory ListBanks.fromJson(Map<String, dynamic> json) =>
-      _$ListBanksFromJson(json);
+  factory BankDetails.fromJson(Map<String, dynamic> json) =>
+      _$BankDetailsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ListBanksToJson(this);
+  Map<String, dynamic> toJson() => _$BankDetailsToJson(this);
 
   @override
   List<Object?> get props => [clearingCode, bankName, chineseName, swiftBic];
