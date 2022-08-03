@@ -1,9 +1,10 @@
-import 'package:asklora_mobile_app/feature/deposit/presentation/wire_transfer_screen.dart';
+import 'wire_transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../payment/withdrawal/withdrawal_acknowledgement/presentation/withdrawal_acknowledgement_screen.dart';
 import '../bloc/deposit_bloc.dart';
+import '../deposit_edda_new_user/presentation/deposit_edda_new_user_screen.dart';
 import '../deposit_upload_proof_of_remittance/bloc/deposit_upload_proof_of_remittance_bloc.dart';
 import '../deposit_upload_proof_of_remittance/presentation/deposit_upload_proof_of_remittance_screen.dart';
 import '../deposit_upload_proof_of_remittance/repository/FilePickerRepository.dart';
@@ -61,6 +62,8 @@ class DepositScreen extends StatelessWidget {
         return const WireTransferScreen();
       case DepositPageStep.acknowledged:
         return const WithdrawalAcknowledgementScreen();
+      case DepositPageStep.eddaNewUser:
+        return const DepositEddaNewUserScreen();
       default:
         return const SizedBox.shrink();
     }
