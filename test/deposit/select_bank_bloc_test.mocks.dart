@@ -6,7 +6,7 @@ import 'dart:async' as _i3;
 
 import 'package:asklora_mobile_app/feature/deposit/model/bank_details.dart'
     as _i4;
-import 'package:asklora_mobile_app/feature/deposit/repository/list_bank_repository.dart'
+import 'package:asklora_mobile_app/feature/deposit/repository/bank_details_repository.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 

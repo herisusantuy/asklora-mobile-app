@@ -7,7 +7,7 @@ import '../bloc/list_bank/select_bank_bloc.dart';
 import '../deposit_upload_proof_of_remittance/bloc/deposit_upload_proof_of_remittance_bloc.dart';
 import '../deposit_upload_proof_of_remittance/presentation/deposit_upload_proof_of_remittance_screen.dart';
 import '../deposit_upload_proof_of_remittance/repository/FilePickerRepository.dart';
-import '../repository/list_bank_repository.dart';
+import '../repository/bank_details_repository.dart';
 import 'deposit_method_screen.dart';
 import 'select_bank_screen.dart';
 import 'deposit_welcome_screen.dart';

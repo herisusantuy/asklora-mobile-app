@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/formatters/bank_code_formatter.dart';
 import '../../model/bank_details.dart';
-import '../../repository/list_bank_repository.dart';
+import '../../repository/bank_details_repository.dart';
 
 part 'select_bank_state.dart';
 part 'select_bank_event.dart';
