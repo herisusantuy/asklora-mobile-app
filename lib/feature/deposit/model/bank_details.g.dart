@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'list_bank.dart';
+part of 'bank_details.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

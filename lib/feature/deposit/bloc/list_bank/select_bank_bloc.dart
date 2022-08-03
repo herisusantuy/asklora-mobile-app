@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/formatters/bank_code_formatter.dart';
-import '../../model/list_bank.dart';
+import '../../model/bank_details.dart';
 import '../../repository/list_bank_repository.dart';
 
 part 'select_bank_state.dart';
