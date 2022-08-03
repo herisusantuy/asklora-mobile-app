@@ -33,7 +33,7 @@ void main() {
 
     blocTest<SelectBankBloc, SelectBankState>('Get List of Banks',
         build: () {
-          when(bankDetailsRepository.getListBank())
+          when(bankDetailsRepository.getBankDetails())
               .thenAnswer((_) => Future.value([
                     const BankDetails(1, 'BCA', 'asd', 'BBCA'),
                   ]));
@@ -49,7 +49,7 @@ void main() {
             });
     blocTest<SelectBankBloc, SelectBankState>('Search List of Banks',
         build: () {
-          when(bankDetailsRepository.getListBank())
+          when(bankDetailsRepository.getBankDetails())
               .thenAnswer((_) => Future.value([
                     const BankDetails(1, 'BCA', 'asd', 'BBCA'),
                   ]));

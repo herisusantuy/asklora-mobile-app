@@ -31,16 +31,7 @@ class SelectBankScreen extends StatelessWidget {
   Widget _listBanks() {
     return BlocBuilder<SelectBankBloc, SelectBankState>(
       builder: (context, state) {
-        if (state.searchListBank != null) {
-          return Column(
-            children: state.searchListBank!
-                .map((item) => _banksCard(
-                      item.clearingCode,
-                      item.bankName,
-                    ))
-                .toList(),
-          );
-        } else if (state.listBanks != null) {
+        if (state.listBanks != null) {
           return Column(
             children: state.listBanks!
                 .map((item) => _banksCard(

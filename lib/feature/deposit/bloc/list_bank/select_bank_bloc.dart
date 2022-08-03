@@ -10,6 +10,7 @@ part 'select_bank_event.dart';
 
 class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
   final BankDetailsRepository _bankDetailsRepository;
+  late final List<BankDetails> listBankDetails;
 
   SelectBankBloc({required BankDetailsRepository bankDetailsRepository})
       : _bankDetailsRepository = bankDetailsRepository,
@@ -19,18 +20,25 @@ class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
   }
 
   void _getListBanks(GetListBanks event, Emitter<SelectBankState> emit) async {
-    emit(state.copyWith(
-        listBanks: await _bankDetailsRepository.getBankDetails()));
+    listBankDetails = await _bankDetailsRepository.getBankDetails();
+    emit(state.copyWith(listBanks: listBankDetails));
   }
 
   void _searchListBanks(SearchBank event, Emitter<SelectBankState> emit) {
-    List<BankDetails> searchBankKeyword = [];
-    searchBankKeyword.addAll(List.from(state.listBanks!.where((name) {
-      return name.bankName.toLowerCase().contains(event.keyword.toLowerCase());
-    })));
-    searchBankKeyword.addAll(List.from(state.listBanks!.where((name) {
-      return bankCodeFormatter(name.clearingCode).contains(event.keyword);
-    })));
-    emit(state.copyWith(searchListBank: searchBankKeyword));
+    if (event.keyword.isNotEmpty) {
+      List<BankDetails> searchBankKeyword = [];
+      searchBankKeyword.addAll(List.from(state.listBanks!.where((name) {
+        return name.bankName
+            .toLowerCase()
+            .contains(event.keyword.toLowerCase());
+      })));
+      searchBankKeyword.addAll(List.from(state.listBanks!.where((name) {
+        return bankCodeFormatter(name.clearingCode).contains(event.keyword);
+      })));
+
+      emit(state.copyWith(listBanks: searchBankKeyword));
+    } else {
+      emit(state.copyWith(listBanks: listBankDetails));
+    }
   }
 }
