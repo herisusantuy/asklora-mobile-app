@@ -33,5 +33,3 @@ class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
     emit(state.copyWith(searchListBank: searchBankKeyword));
   }
 }
-
-// List.from(allNames.where((name) => name.contains(searchText)))
