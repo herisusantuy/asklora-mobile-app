@@ -34,13 +34,13 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        CustomWithdrawalTextInformationWidget(
+        CustomPaymentTextInformationWidget(
             title: 'Account No.', label: '1234567890'),
-        CustomWithdrawalTextInformationWidget(
+        CustomPaymentTextInformationWidget(
             title: 'Bank Name',
             label: 'THE HONG KONG AND SHANGHAI BANKING CORPORATION LIMITED'),
-        CustomWithdrawalTextInformationWidget(title: 'Bank No.', label: '813'),
-        CustomWithdrawalTextInformationWidget(
+        CustomPaymentTextInformationWidget(title: 'Bank No.', label: '813'),
+        CustomPaymentTextInformationWidget(
             title: 'Account Name', label: 'LEUNG CHIU WAI')
       ],
     );

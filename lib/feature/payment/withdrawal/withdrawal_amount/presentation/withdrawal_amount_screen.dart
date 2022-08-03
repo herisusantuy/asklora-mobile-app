@@ -35,6 +35,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
         const CustomText(
           'Please tell us how much you wish to withdraw',
           type: FontType.h5,
+          padding: EdgeInsets.only(bottom: 30),
         ),
         _withdrawalAmountInput(context),
         _exchangeArrowIcon(),
@@ -86,8 +87,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
             BlocBuilder<WithdrawalAmountBloc, WithdrawalAmountState>(
                 buildWhen: (previous, current) =>
                     previous.withdrawalHKDAmount != current.withdrawalHKDAmount,
-                builder: (context, state) =>
-                    CustomWithdrawalTextInformationWidget(
+                builder: (context, state) => CustomPaymentTextInformationWidget(
                       title: 'Estimated HKD Amount',
                       label: '${state.withdrawalHKDAmount}',
                       paddingBottom: 6,
@@ -107,6 +107,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
           children: [
             CustomPaymentTextInput(
                 key: const Key('withdrawal_amount_input'),
+                titleText: 'Withdrawal Amount',
                 textInputType: TextInputType.number,
                 textInputFormatterList: [
                   FilteringTextInputFormatter.digitsOnly

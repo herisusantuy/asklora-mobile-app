@@ -1,3 +1,5 @@
+import '../deposit_edda_your_bank_details/bloc/deposit_edda_your_bank_details_bloc.dart';
+import '../deposit_edda_your_bank_details/presentation/deposit_edda_your_bank_details_screen.dart';
 import 'wire_transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +31,7 @@ class DepositScreen extends StatelessWidget {
           BlocProvider(
               create: (_) => DepositUploadProofOfRemittanceBloc(
                   filePickerRepository: FilePickerRepository())),
+          BlocProvider(create: (_) => DepositEddaYourBankDetailsBloc()),
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -64,6 +67,12 @@ class DepositScreen extends StatelessWidget {
         return const WithdrawalAcknowledgementScreen();
       case DepositPageStep.eddaNewUser:
         return const DepositEddaNewUserScreen();
+      case DepositPageStep.eddaYourBankDetails:
+        return const DepositEddaYourBankDetailsScreen();
+      case DepositPageStep.eddaGetBankDetailsLoading:
+        return const DepositEddaGetBankDetailsLoadingScreen();
+      case DepositPageStep.eddaGetBankDetailsSuccess:
+        return const DepositEddaGetBankDetailsSuccessScreen();
       default:
         return const SizedBox.shrink();
     }

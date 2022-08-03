@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text.dart';
 
-class CustomWithdrawalTextInformationWidget extends StatelessWidget {
+class CustomPaymentTextInformationWidget extends StatelessWidget {
   final String title;
   final String label;
   final double paddingBottom;
 
-  const CustomWithdrawalTextInformationWidget(
+  const CustomPaymentTextInformationWidget(
       {required this.title,
       required this.label,
       this.paddingBottom = 20,

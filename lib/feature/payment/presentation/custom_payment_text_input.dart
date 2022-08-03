@@ -6,6 +6,7 @@ import '../../../core/presentation/custom_text_input.dart';
 
 class CustomPaymentTextInput extends StatelessWidget {
   final Function(String) onChanged;
+  final String titleText;
   final String labelText;
   final String hintText;
   final String initialValue;
@@ -22,6 +23,7 @@ class CustomPaymentTextInput extends StatelessWidget {
       this.prefixText = '',
       this.initialValue = '',
       this.paddingBottom = 20,
+      this.titleText = '',
       this.labelText = '',
       Key? key})
       : super(key: key);
@@ -39,13 +41,12 @@ class CustomPaymentTextInput extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(
-            labelText,
-            type: FontType.smallTextBold,
-          ),
-          const SizedBox(
-            height: 6,
-          ),
+          if (titleText.isNotEmpty)
+            CustomText(
+              titleText,
+              type: FontType.smallTextBold,
+              padding: const EdgeInsets.only(bottom: 6),
+            ),
           CustomTextInput(
               textInputType: textInputType,
               textInputFormatterList: textInputFormatterList,
