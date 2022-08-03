@@ -18,6 +18,7 @@ void main() async {
     }
 
     final submitButton = find.byKey(const Key('withdrawal_submit_button'));
+    final continueButton = find.byKey(const Key('withdrawal_continue_button'));
     final amountInput = find.byKey(const Key('withdrawal_amount_input'));
     final estimatedHKDAmountText =
         find.byKey(const Key('estimated_hkd_amount_text'));
@@ -60,6 +61,24 @@ void main() async {
       expect(exceedAmountErrorText, findsOneWidget);
       expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
           isTrue);
+    });
+
+    testWidgets(
+        'tap request withdrawal on given right amount, `submit button` = enabled, `estimated hkd amount` = 7.8476, `exceed amount error text` = not visible',
+        (tester) async {
+      await _buildWithdrawalAmountScreenScreen(tester);
+      await tester.enterText(amountInput, '1');
+      await tester.pump();
+      expect(find.text('1'), findsOneWidget);
+      expect(find.text('7.8476'), findsOneWidget);
+      expect(exceedAmountErrorText, findsNothing);
+      expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
+          isFalse);
+      expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
+          isFalse);
+      await tester.tap(submitButton);
+      await tester.pump();
+      expect(continueButton, findsOneWidget);
     });
   });
 }
