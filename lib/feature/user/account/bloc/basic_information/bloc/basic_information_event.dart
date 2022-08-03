@@ -123,3 +123,17 @@ class BasicInformationIsUnitedStateResidentChanged
   @override
   List<Object> get props => [isUnitedStateResident];
 }
+
+class BasicInformationNext extends BasicInformationEvent {
+  const BasicInformationNext() : super();
+
+  @override
+  List<Object> get props => [];
+}
+
+class BasicInformationReset extends BasicInformationEvent {
+  const BasicInformationReset() : super();
+
+  @override
+  List<Object> get props => [];
+}

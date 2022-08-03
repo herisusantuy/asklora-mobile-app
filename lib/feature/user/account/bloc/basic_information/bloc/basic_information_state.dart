@@ -1,22 +1,23 @@
 part of 'basic_information_bloc.dart';
 
 class BasicInformationState extends Equatable {
-  const BasicInformationState({
-    this.firstName = '',
-    this.middleName,
-    this.lastName = '',
-    this.chineseName,
-    this.gender = '',
-    this.dateOfBirth = '1990-01-01',
-    this.countryCode = '',
-    this.phoneNumber = '',
-    this.countryOfCitizenship = '',
-    this.countryNameOfCitizenship = '',
-    this.isHongKongPermanentResident,
-    this.idNumber = '',
-    this.isUnitedStateResident,
-    this.isHkIdValid = false,
-  });
+  const BasicInformationState(
+      {this.firstName = '',
+      this.middleName,
+      this.lastName = '',
+      this.chineseName,
+      this.gender = '',
+      this.dateOfBirth = '1990-01-01',
+      this.countryCode = '',
+      this.phoneNumber = '',
+      this.countryOfCitizenship = '',
+      this.countryNameOfCitizenship = '',
+      this.isHongKongPermanentResident,
+      this.idNumber = '',
+      this.isUnitedStateResident,
+      this.isHkIdValid = false,
+      this.message = '',
+      this.status = ResponseState.unknown});
 
   final String firstName;
   final String? middleName;
@@ -32,6 +33,8 @@ class BasicInformationState extends Equatable {
   final String idNumber;
   final bool? isUnitedStateResident;
   final bool isHkIdValid;
+  final ResponseState status;
+  final String? message;
 
   @override
   List<Object?> get props {
@@ -50,6 +53,8 @@ class BasicInformationState extends Equatable {
       idNumber,
       isUnitedStateResident,
       isHkIdValid,
+      status,
+      message,
     ];
   }
 
@@ -68,6 +73,8 @@ class BasicInformationState extends Equatable {
     String? idNumber,
     bool? isUnitedStateResident,
     bool? isHkIdValid,
+    ResponseState? status,
+    String? message,
   }) {
     return BasicInformationState(
       firstName: firstName ?? this.firstName,
@@ -87,6 +94,8 @@ class BasicInformationState extends Equatable {
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
       isHkIdValid: isHkIdValid ?? this.isHkIdValid,
+      status: status ?? this.status,
+      message: message ?? this.message,
     );
   }
 

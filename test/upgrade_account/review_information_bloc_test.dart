@@ -201,15 +201,15 @@ void main() async {
           bloc.add(GetSdkToken());
         },
         expect: () => {
-              const AccountState(status: GetAccountStatus.upgradingAccount),
+              const AccountState(status: AccountStatus.upgradingAccount),
               const AccountState(
-                  status: GetAccountStatus.success,
+                  status: AccountStatus.success,
                   responseMessage: 'Account upgraded successfully!'),
               const AccountState(
-                  status: GetAccountStatus.submittingTaxInfo,
+                  status: AccountStatus.submittingTaxInfo,
                   responseMessage: 'Account upgraded successfully!'),
               TaxInfoSubmitted(),
-              const AccountState(status: GetAccountStatus.fetchingOnfidoToken),
+              const AccountState(status: AccountStatus.fetchingOnfidoToken),
               const OnfidoSdkToken('11223344axx')
             });
 
