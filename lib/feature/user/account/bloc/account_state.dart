@@ -1,6 +1,6 @@
 part of 'account_bloc.dart';
 
-enum GetAccountStatus {
+enum AccountStatus {
   success,
   failure,
   unknown,
@@ -13,14 +13,14 @@ enum GetAccountStatus {
 
 class AccountState extends Equatable {
   const AccountState(
-      {this.status = GetAccountStatus.unknown,
+      {this.status = AccountStatus.unknown,
       this.responseMessage = '',
       this.account,
       this.upgradeAccountRequest,
       this.currentStepIndex = 0,
       this.currentStepName = 'Basic Information'});
 
-  final GetAccountStatus status;
+  final AccountStatus status;
   final String responseMessage;
   final GetAccountResponse? account;
   final UpgradeAccountRequest? upgradeAccountRequest;
@@ -40,7 +40,7 @@ class AccountState extends Equatable {
   }
 
   AccountState copyWith({
-    GetAccountStatus? status,
+    AccountStatus? status,
     String? responseMessage,
     GetAccountResponse? account,
     UpgradeAccountRequest? upgradeAccountRequest,

@@ -64,7 +64,7 @@ class ReviewInformationScreen extends StatelessWidget {
           SignInSuccessScreen.openAndRemoveAllRoute(context);
         } else {
           switch (state.status) {
-            case GetAccountStatus.failure:
+            case AccountStatus.failure:
               ScaffoldMessenger.of(context)
                 ..hideCurrentSnackBar()
                 ..showSnackBar(SnackBar(
@@ -73,7 +73,7 @@ class ReviewInformationScreen extends StatelessWidget {
                       state.responseMessage,
                     )));
               break;
-            case GetAccountStatus.success:
+            case AccountStatus.success:
               context
                   .read<AccountBloc>()
                   .add(SubmitTaxInfo(await Ipify.ipv4()));
@@ -370,8 +370,8 @@ class ReviewInformationScreen extends StatelessWidget {
                             key: const Key('submit_button'),
                             borderRadius: 30,
                             buttonText: 'Submit',
-                            isLoading: state.status ==
-                                GetAccountStatus.upgradingAccount,
+                            isLoading:
+                                state.status == AccountStatus.upgradingAccount,
                             disable: !stateReviewInformation.data!,
                             onClick: () async => context
                                 .read<AccountBloc>()
