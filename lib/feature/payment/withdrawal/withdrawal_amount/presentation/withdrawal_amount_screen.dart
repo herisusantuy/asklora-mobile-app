@@ -115,7 +115,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
                     Row(
                       children: const [
                         CustomText(
-                          'Payer`s account',
+                          'Payer\'s account',
                           padding: EdgeInsets.only(right: 12),
                           type: FontType.smallText,
                         ),
