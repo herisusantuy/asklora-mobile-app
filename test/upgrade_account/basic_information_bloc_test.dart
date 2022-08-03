@@ -11,7 +11,7 @@ void main() {
     });
 
     test(
-        'init state all field should be empty string except for unrequired field it should be null',
+        'init state all field should be empty string except for optional fields it should be null',
         () {
       expect(
           basicInformationBloc.state,
@@ -30,6 +30,92 @@ void main() {
             isUnitedStateResident: null,
           ));
     });
+
+    blocTest<BasicInformationBloc, BasicInformationState>(
+        'Expected bloc error should be error as US residence is true',
+        build: () => basicInformationBloc,
+        act: (bloc) {
+          bloc.add(const BasicInformationIsUnitedStateResidentChanged(true));
+          bloc.add(const BasicInformationNext());
+        },
+        expect: () => {
+              const BasicInformationState(
+                firstName: '',
+                middleName: null,
+                lastName: '',
+                chineseName: null,
+                gender: '',
+                countryCode: '',
+                phoneNumber: '',
+                countryOfCitizenship: '',
+                isHongKongPermanentResident: null,
+                idNumber: '',
+                isUnitedStateResident: true,
+                isHkIdValid: false,
+                status: BasicInformationStatus.unknown,
+                message: '',
+              ),
+              const BasicInformationState(
+                firstName: '',
+                middleName: null,
+                lastName: '',
+                chineseName: null,
+                gender: '',
+                countryCode: '',
+                phoneNumber: '',
+                countryOfCitizenship: '',
+                isHongKongPermanentResident: null,
+                idNumber: '',
+                isUnitedStateResident: true,
+                isHkIdValid: false,
+                status: BasicInformationStatus.error,
+                message: r'You are not eligible!',
+              ),
+            });
+
+    blocTest<BasicInformationBloc, BasicInformationState>(
+        'Expected bloc error should be error as age is below 18',
+        build: () => basicInformationBloc,
+        act: (bloc) {
+          bloc.add(const BasicInformationDateOfBirthChanged('2010-08-08'));
+          bloc.add(const BasicInformationNext());
+        },
+        expect: () => {
+              const BasicInformationState(
+                firstName: '',
+                middleName: null,
+                lastName: '',
+                chineseName: null,
+                gender: '',
+                countryCode: '',
+                phoneNumber: '',
+                dateOfBirth: '2010-08-08',
+                countryOfCitizenship: '',
+                isHongKongPermanentResident: null,
+                idNumber: '',
+                isUnitedStateResident: null,
+                isHkIdValid: false,
+                status: BasicInformationStatus.unknown,
+                message: '',
+              ),
+              const BasicInformationState(
+                firstName: '',
+                middleName: null,
+                lastName: '',
+                chineseName: null,
+                gender: '',
+                countryCode: '',
+                phoneNumber: '',
+                countryOfCitizenship: '',
+                dateOfBirth: '2010-08-08',
+                isHongKongPermanentResident: null,
+                idNumber: '',
+                isUnitedStateResident: null,
+                isHkIdValid: false,
+                status: BasicInformationStatus.error,
+                message: r'You must be over 18 to sign up for AskLORA!',
+              ),
+            });
 
     blocTest<BasicInformationBloc, BasicInformationState>(
         'Input invalid HKID number',

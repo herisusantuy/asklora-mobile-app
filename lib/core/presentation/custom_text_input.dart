@@ -22,7 +22,7 @@ class CustomTextInput extends StatelessWidget {
   const CustomTextInput(
       {required this.labelText,
       required this.onChanged,
-      required this.hintText,
+      this.hintText = '',
       this.textInputType = TextInputType.text,
       this.obscureText = false,
       this.errorText = '',

@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/utils/hkid_validation.dart';
+import '../../../../../../core/utils/storage/age_validation.dart';
 
 part 'basic_information_event.dart';
 
@@ -29,6 +30,8 @@ class BasicInformationBloc
     on<BasicInformationIdNumberChanged>(_onIdNumberChange);
     on<BasicInformationIsUnitedStateResidentChanged>(
         _onIsUnitedStateResidentChange);
+    on<BasicInformationNext>(_onBasicInformationNext);
+    on<BasicInformationReset>(_onBasicInformationReset);
   }
 
   _onBasicInformationFirstNameChange(BasicInformationFirstNameChanged event,
@@ -98,5 +101,27 @@ class BasicInformationBloc
       BasicInformationIsUnitedStateResidentChanged event,
       Emitter<BasicInformationState> emit) {
     emit(state.copyWith(isUnitedStateResident: event.isUnitedStateResident));
+  }
+
+  _onBasicInformationNext(
+      BasicInformationNext event, Emitter<BasicInformationState> emit) {
+    if (state.isHongKongPermanentResident != null &&
+            !state.isHongKongPermanentResident! ||
+        state.isUnitedStateResident != null && state.isUnitedStateResident!) {
+      emit(state.copyWith(
+          status: BasicInformationStatus.error,
+          message: r'You are not eligible!'));
+    } else if (!isAdult(state.dateOfBirth)) {
+      emit(state.copyWith(
+          status: BasicInformationStatus.error,
+          message: r'You must be over 18 to sign up for AskLORA!'));
+    } else {
+      emit(state.copyWith(status: BasicInformationStatus.success));
+    }
+  }
+
+  _onBasicInformationReset(
+      BasicInformationReset event, Emitter<BasicInformationState> emit) {
+    emit(state.copyWith(status: BasicInformationStatus.unknown));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:asklora_mobile_app/core/utils/extensions.dart';
 import 'package:asklora_mobile_app/core/utils/hkid_validation.dart';
+import 'package:asklora_mobile_app/core/utils/storage/age_validation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
@@ -49,6 +50,27 @@ main() {
       expect(isHkIdValid('V491175A'), true);
       expect(isHkIdValid('E4273315'), true);
       expect(isHkIdValid('FL1530083'), true);
+    });
+
+    test('Age Validation Test', () {
+      var now = DateTime.now();
+      var seventeenYearsAnd11Months =
+          DateTime(now.year - 17, now.month - 1, now.day);
+
+      var seventeenYearsAnd11MonthsAndDayMinusOne =
+          DateTime(now.year - 17, now.month - 1, now.day - 1);
+
+      var nineteenYears = DateTime(now.year - 19, now.month, now.day);
+      var eighteenYears = DateTime(now.year - 18, now.month, now.day);
+
+      expect(isAdult(now.toString()), false);
+      expect(isAdult(seventeenYearsAnd11Months.toString()), false);
+      expect(
+          isAdult(seventeenYearsAnd11MonthsAndDayMinusOne.toString()), false);
+
+      expect(isAdult('2004-08-02'), true);
+      expect(isAdult(nineteenYears.toString()), true);
+      expect(isAdult(eighteenYears.toString()), true);
     });
   });
 }

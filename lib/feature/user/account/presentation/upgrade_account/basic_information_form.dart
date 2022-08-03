@@ -4,18 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
 import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_phone_number_input.dart';
-import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
+import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
-import '../../bloc/account_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
-import 'not_eligible_screen.dart';
 
 class BasicInformationForm extends StatelessWidget {
   final PageController controller;
@@ -62,9 +61,10 @@ class BasicInformationForm extends StatelessWidget {
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomTextInput(
           initialValue: state.firstName,
+          textInputFormatterList: [englishNameFormatter()],
           key: const Key('account_first_name_input'),
-          labelText: 'First Name',
-          hintText: 'Enter your first name',
+          labelText: 'Legal First Name (English)',
+          textInputType: TextInputType.name,
           onChanged: (value) => context
               .read<BasicInformationBloc>()
               .add(BasicInformationFirstNameChanged(value)),
@@ -81,7 +81,9 @@ class BasicInformationForm extends StatelessWidget {
           builder: (context, state) => CustomTextInput(
               initialValue: state.middleName ?? '',
               key: const Key('account_middle_name_input'),
-              labelText: 'Middle Name (Optional)',
+              labelText: 'Legal Middle Name (English)',
+              textInputType: TextInputType.name,
+              textInputFormatterList: [englishNameFormatter()],
               onChanged: (value) => context
                   .read<BasicInformationBloc>()
                   .add(BasicInformationMiddleNameChanged(value)),
@@ -97,7 +99,9 @@ class BasicInformationForm extends StatelessWidget {
           builder: (context, state) => CustomTextInput(
               initialValue: state.lastName,
               key: const Key('account_last_name_input'),
-              labelText: 'Last Name',
+              textInputFormatterList: [englishNameFormatter()],
+              labelText: 'Legal Last Name (English)',
+              textInputType: TextInputType.name,
               onChanged: (value) => context
                   .read<BasicInformationBloc>()
                   .add(BasicInformationLastNameChanged(value)),
@@ -114,6 +118,8 @@ class BasicInformationForm extends StatelessWidget {
               initialValue: state.chineseName ?? '',
               key: const Key('account_chinese_name_input'),
               labelText: 'Chinese Name (Optional)',
+              textInputType: TextInputType.name,
+              textInputFormatterList: [chineseNameFormatter()],
               onChanged: (value) => context
                   .read<BasicInformationBloc>()
                   .add(BasicInformationChineseNameChanged(value)),
@@ -140,15 +146,14 @@ class BasicInformationForm extends StatelessWidget {
         buildWhen: ((previous, current) =>
             previous.dateOfBirth != current.dateOfBirth),
         builder: (context, state) {
-          final DateTime dateTime = DateTime.now();
+          final DateTime dateTimeNow = DateTime.now();
           return CustomDatePicker(
             key: const Key('account_date_of_birth_picker'),
             padding: const EdgeInsets.only(top: 10),
             label: 'Date of Birth',
             selectedDate: DateTime.parse(state.dateOfBirth),
-            initialDateTime:
-                DateTime(dateTime.year - 18, dateTime.month, dateTime.day),
-            maximumYear: dateTime.year - 18,
+            initialDateTime: dateTimeNow,
+            maximumDate: dateTimeNow,
             onDateTimeChanged: (date) =>
                 context.read<BasicInformationBloc>().add(
                       BasicInformationDateOfBirthChanged(date.toString()),
@@ -206,7 +211,7 @@ class BasicInformationForm extends StatelessWidget {
               keyOption: key,
               key: const Key(key),
               padding: const EdgeInsets.only(top: 10),
-              questionText: 'Hong Kong Permanent Resident',
+              questionText: 'Are You a Hong Kong Permanent Resident?',
               options: const ['Yes', 'No'],
               selectedAnswer: state.isHongKongPermanentResident != null
                   ? (state.isHongKongPermanentResident! ? 'Yes' : 'No')
@@ -249,6 +254,7 @@ class BasicInformationForm extends StatelessWidget {
               key: const Key('account_id_number_input'),
               labelText: 'ID Number *',
               textInputFormatterList: [
+                lettersAndNumberFormatter(),
                 UpperCaseTextFormatter(),
                 LengthLimitingTextInputFormatter(9)
               ],
@@ -275,7 +281,8 @@ class BasicInformationForm extends StatelessWidget {
               keyOption: key,
               key: Key(key),
               padding: const EdgeInsets.only(top: 10),
-              questionText: 'US Resident Check',
+              questionText:
+                  'Are You a US Tax Resident, Green Card Holder, or US Citizen?',
               options: const ['Yes', 'No'],
               selectedAnswer: state.isUnitedStateResident != null
                   ? (state.isUnitedStateResident! ? 'Yes' : 'No')
@@ -284,40 +291,33 @@ class BasicInformationForm extends StatelessWidget {
                   BasicInformationIsUnitedStateResidentChanged(
                       value == 'Yes' ? true : false)),
             ),
-            if (state.isUnitedStateResident != null &&
-                state.isUnitedStateResident!)
-              _usResidentsNote()
           ],
         );
       },
     );
   }
 
-  Widget _usResidentsNote() {
-    return Container(
-      key: const Key('account_us_resident_note'),
-      padding: const EdgeInsets.only(top: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          CustomText(
-            '*',
-            type: FontType.smallNote,
-          ),
-          Expanded(
-            child: CustomText(
-              'I am a US tax resident, green card holder, or US citizen',
-              type: FontType.smallNote,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _nextButton(BuildContext context) => Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
+        child: BlocConsumer<BasicInformationBloc, BasicInformationState>(
+          listenWhen: (context, state) =>
+              (state.status == BasicInformationStatus.error ||
+                  state.status == BasicInformationStatus.success),
+          listener: (context, state) => {
+            if (state.status == BasicInformationStatus.error)
+              {
+                showAlertDialog(context, state.message!, onPressedOk: () {}),
+              }
+            else if (state.status == BasicInformationStatus.success)
+              {
+                controller.nextPage(
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.ease)
+              },
+            context
+                .read<BasicInformationBloc>()
+                .add(const BasicInformationReset())
+          },
           buildWhen: (previous, current) =>
               previous.enableNextButton() != current.enableNextButton() ||
               previous.isHongKongPermanentResident !=
@@ -329,17 +329,9 @@ class BasicInformationForm extends StatelessWidget {
               borderRadius: 30,
               disable: !state.enableNextButton(),
               onClick: () {
-                if (state.isHongKongPermanentResident != null &&
-                    !state.isHongKongPermanentResident!) {
-                  NotEligibleScreen.openReplace(context);
-                } else {
-                  context
-                      .read<AccountBloc>()
-                      .add(const AccountCurrentStepChanged('next'));
-                  controller.nextPage(
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.ease);
-                }
+                context
+                    .read<BasicInformationBloc>()
+                    .add(const BasicInformationNext());
               },
             );
           },
