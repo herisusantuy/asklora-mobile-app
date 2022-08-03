@@ -12,7 +12,7 @@ void main() async {
   // * Get list of bank from json file
   List<ListBanks> listBanks = await ListBankRepository().getListBank();
 
-  group('*Select Bank Screen Test*', () {
+  group('*Deposit Select Bank Screen Test*', () {
     Future<void> _buildDepositSelectBankScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
