@@ -26,7 +26,7 @@ void main() async {
       expect(find.text('Acknowledgement'), findsOneWidget);
       expect(
           find.text(
-              'We`re processing your transaction. We`ll let you know via push notification and email as we`ve sent the funds your way'),
+              'We\'re processing your transaction. We\'ll let you know via push notification and email as we\'ve sent the funds your way'),
           findsOneWidget);
       expect(
           find.text('This can usually take 1-2 business days'), findsOneWidget);
