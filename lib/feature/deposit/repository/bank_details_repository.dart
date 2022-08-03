@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import '../model/bank_details.dart';
 
 class BankDetailsRepository {
-  Future<List<BankDetails>> getListBank() async {
+  Future<List<BankDetails>> getBankDetails() async {
     final String response =
         await rootBundle.loadString('assets/json/bank_lists.json');
 

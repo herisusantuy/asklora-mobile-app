@@ -19,7 +19,8 @@ class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
   }
 
   void _getListBanks(GetListBanks event, Emitter<SelectBankState> emit) async {
-    emit(state.copyWith(listBanks: await _bankDetailsRepository.getListBank()));
+    emit(state.copyWith(
+        listBanks: await _bankDetailsRepository.getBankDetails()));
   }
 
   void _searchListBanks(SearchBank event, Emitter<SelectBankState> emit) {
