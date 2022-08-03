@@ -1,11 +1,5 @@
 part of 'basic_information_bloc.dart';
 
-enum BasicInformationStatus {
-  error,
-  success,
-  unknown,
-}
-
 class BasicInformationState extends Equatable {
   const BasicInformationState(
       {this.firstName = '',
@@ -23,7 +17,7 @@ class BasicInformationState extends Equatable {
       this.isUnitedStateResident,
       this.isHkIdValid = false,
       this.message = '',
-      this.status = BasicInformationStatus.unknown});
+      this.status = ResponseState.unknown});
 
   final String firstName;
   final String? middleName;
@@ -39,7 +33,7 @@ class BasicInformationState extends Equatable {
   final String idNumber;
   final bool? isUnitedStateResident;
   final bool isHkIdValid;
-  final BasicInformationStatus status;
+  final ResponseState status;
   final String? message;
 
   @override
@@ -79,7 +73,7 @@ class BasicInformationState extends Equatable {
     String? idNumber,
     bool? isUnitedStateResident,
     bool? isHkIdValid,
-    BasicInformationStatus? status,
+    ResponseState? status,
     String? message,
   }) {
     return BasicInformationState(

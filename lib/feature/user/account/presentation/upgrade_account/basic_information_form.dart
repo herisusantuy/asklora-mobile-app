@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
@@ -301,14 +302,14 @@ class BasicInformationForm extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: BlocConsumer<BasicInformationBloc, BasicInformationState>(
           listenWhen: (context, state) =>
-              (state.status == BasicInformationStatus.error ||
-                  state.status == BasicInformationStatus.success),
+              (state.status == ResponseState.error ||
+                  state.status == ResponseState.success),
           listener: (context, state) => {
-            if (state.status == BasicInformationStatus.error)
+            if (state.status == ResponseState.error)
               {
                 showAlertDialog(context, state.message!, onPressedOk: () {}),
               }
-            else if (state.status == BasicInformationStatus.success)
+            else if (state.status == ResponseState.success)
               {
                 controller.nextPage(
                     duration: const Duration(milliseconds: 200),

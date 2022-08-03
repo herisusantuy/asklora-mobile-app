@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/user/account/bloc/basic_information/bloc/basic_information_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -52,7 +53,7 @@ void main() {
                 idNumber: '',
                 isUnitedStateResident: true,
                 isHkIdValid: false,
-                status: BasicInformationStatus.unknown,
+                status: ResponseState.unknown,
                 message: '',
               ),
               const BasicInformationState(
@@ -68,7 +69,7 @@ void main() {
                 idNumber: '',
                 isUnitedStateResident: true,
                 isHkIdValid: false,
-                status: BasicInformationStatus.error,
+                status: ResponseState.error,
                 message: r'You are not eligible!',
               ),
             });
@@ -95,7 +96,7 @@ void main() {
                 idNumber: '',
                 isUnitedStateResident: null,
                 isHkIdValid: false,
-                status: BasicInformationStatus.unknown,
+                status: ResponseState.unknown,
                 message: '',
               ),
               const BasicInformationState(
@@ -112,7 +113,7 @@ void main() {
                 idNumber: '',
                 isUnitedStateResident: null,
                 isHkIdValid: false,
-                status: BasicInformationStatus.error,
+                status: ResponseState.error,
                 message: r'You must be over 18 to sign up for AskLORA!',
               ),
             });
