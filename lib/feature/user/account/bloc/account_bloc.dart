@@ -60,18 +60,18 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   _onGetAccount(GetAccount event, Emitter<AccountState> emit) async {
     try {
-      emit(state.copyWith(status: GetAccountStatus.fetchingAccount));
+      emit(state.copyWith(status: AccountStatus.fetchingAccount));
       var response = await _accountRepository.getAccount();
       emit(
         state.copyWith(
-          status: GetAccountStatus.success,
+          status: AccountStatus.success,
           responseMessage: 'Successfully get account!',
           account: response,
         ),
       );
     } catch (e) {
       emit(state.copyWith(
-          status: GetAccountStatus.failure,
+          status: AccountStatus.failure,
           responseMessage: 'Get account is failed!'));
     }
   }
@@ -143,7 +143,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     var email = await _secureStorage.readSecureData('email');
 
     try {
-      emit(state.copyWith(status: GetAccountStatus.upgradingAccount));
+      emit(state.copyWith(status: AccountStatus.upgradingAccount));
       UpgradeAccountRequest request = UpgradeAccountRequest(
         contact: Contact(
             emailAddress: email,
@@ -192,20 +192,20 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       await _accountRepository.upgradeAccount(request);
       emit(
         state.copyWith(
-          status: GetAccountStatus.success,
+          status: AccountStatus.success,
           responseMessage: 'Account upgraded successfully!',
         ),
       );
     } catch (e) {
       emit(state.copyWith(
-          status: GetAccountStatus.failure,
+          status: AccountStatus.failure,
           responseMessage: 'Could not upgrade the account!'));
     }
   }
 
   _onSubmitTaxInfo(SubmitTaxInfo event, Emitter<AccountState> emit) async {
     try {
-      emit(state.copyWith(status: GetAccountStatus.submittingTaxInfo));
+      emit(state.copyWith(status: AccountStatus.submittingTaxInfo));
       TaxInfoRequest taxInfoReq = TaxInfoRequest(
           fullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
@@ -229,21 +229,21 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       emit(TaxInfoSubmitted());
     } catch (e) {
       emit(state.copyWith(
-          status: GetAccountStatus.failure,
+          status: AccountStatus.failure,
           responseMessage: 'Could not submit tax info!'));
     }
   }
 
   _onGetOnfidoSdkToken(GetSdkToken event, Emitter<AccountState> emit) async {
     try {
-      emit(state.copyWith(status: GetAccountStatus.fetchingOnfidoToken));
+      emit(state.copyWith(status: AccountStatus.fetchingOnfidoToken));
 
       var response = await _accountRepository.getOnfidoToken();
 
       emit(OnfidoSdkToken(response.token));
     } catch (e) {
       emit(state.copyWith(
-          status: GetAccountStatus.failure,
+          status: AccountStatus.failure,
           responseMessage: 'Could not fetch the token!'));
     }
   }
@@ -300,18 +300,18 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   _onUpdateOnfidoResult(
       UpdateOnfidoResult event, Emitter<AccountState> emit) async {
     try {
-      emit(state.copyWith(status: GetAccountStatus.submittingOnfidoResult));
+      emit(state.copyWith(status: AccountStatus.submittingOnfidoResult));
 
       var response = await _accountRepository.updateKycResult(
           OnfidoResultRequest(event.token, event.reason, event.outcome));
 
       emit(state.copyWith(
-          status: GetAccountStatus.success, responseMessage: response.detail));
+          status: AccountStatus.success, responseMessage: response.detail));
 
       emit(OnfidoResultUpdated(response));
     } catch (e) {
       emit(state.copyWith(
-          status: GetAccountStatus.failure,
+          status: AccountStatus.failure,
           responseMessage: 'Could not update the Onfido result!'));
     }
   }
