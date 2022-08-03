@@ -12,7 +12,7 @@ class CustomWithdrawalWidget extends StatelessWidget {
   final String? title;
   final CrossAxisAlignment crossAxisAlignment;
   final bool backButtonVisibility;
-  final Widget? customHeader;
+  final Widget? header;
 
   const CustomWithdrawalWidget(
       {this.title,
@@ -23,7 +23,7 @@ class CustomWithdrawalWidget extends StatelessWidget {
       this.navigationButton,
       this.backButtonVisibility = true,
       this.crossAxisAlignment = CrossAxisAlignment.start,
-      this.customHeader,
+      this.header,
       Key? key})
       : super(key: key);
 
@@ -43,7 +43,7 @@ class CustomWithdrawalWidget extends StatelessWidget {
           SafeArea(
             child: SizedBox(
               width: double.infinity,
-              child: customHeader ??
+              child: header ??
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

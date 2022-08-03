@@ -9,7 +9,7 @@ class WithdrawalAcknowledgementScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomWithdrawalWidget(
       crossAxisAlignment: CrossAxisAlignment.center,
-      customHeader: Align(
+      header: Align(
         alignment: Alignment.centerRight,
         child: Padding(
           padding: const EdgeInsets.only(right: 12),
@@ -42,7 +42,7 @@ class WithdrawalAcknowledgementScreen extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 12),
         ),
         const CustomText(
-          'We`re processing your transaction. We`ll let you know via push notification and email as we`ve sent the funds your way',
+          'We\'re processing your transaction. We\'ll let you know via push notification and email as we\'ve sent the funds your way',
           type: FontType.smallText,
           textAlign: TextAlign.center,
           padding: EdgeInsets.only(bottom: 24),
