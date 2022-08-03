@@ -1,4 +1,4 @@
-part of 'list_bank_bloc.dart';
+part of 'select_bank_bloc.dart';
 
 class SelectBankState extends Equatable {
   final List<ListBanks>? listBanks;

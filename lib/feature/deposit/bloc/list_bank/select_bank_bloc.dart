@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/formatters/bank_code_formatter.dart';
 import '../../model/list_bank.dart';
 import '../../repository/list_bank_repository.dart';
 
-part 'list_bank_state.dart';
-part 'list_bank_event.dart';
+part 'select_bank_state.dart';
+part 'select_bank_event.dart';
 
 class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
   final ListBankRepository _listBankRepository;
@@ -27,10 +28,7 @@ class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
       return name.bankName.toLowerCase().contains(event.keyword.toLowerCase());
     })));
     searchBankKeyword.addAll(List.from(state.listBanks!.where((name) {
-      return name.clearingCode
-          .toString()
-          .padLeft(3, '0')
-          .contains(event.keyword);
+      return bankCodeFormatter(name.clearingCode).contains(event.keyword);
     })));
     emit(state.copyWith(searchListBank: searchBankKeyword));
   }

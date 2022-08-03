@@ -1,16 +1,19 @@
-import 'package:asklora_mobile_app/feature/deposit/presentation/wire_transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../payment/withdrawal/withdrawal_acknowledgement/presentation/withdrawal_acknowledgement_screen.dart';
 import '../bloc/deposit_bloc.dart';
+import '../bloc/list_bank/select_bank_bloc.dart';
 import '../deposit_upload_proof_of_remittance/bloc/deposit_upload_proof_of_remittance_bloc.dart';
 import '../deposit_upload_proof_of_remittance/presentation/deposit_upload_proof_of_remittance_screen.dart';
 import '../deposit_upload_proof_of_remittance/repository/FilePickerRepository.dart';
+import '../repository/list_bank_repository.dart';
 import 'deposit_method_screen.dart';
+import 'select_bank_screen.dart';
 import 'deposit_welcome_screen.dart';
 import 'fps_information_screen.dart';
 import 'fps_transfer_screen.dart';
+import 'wire_transfer_screen.dart';
 
 class DepositScreen extends StatelessWidget {
   static const String route = '/deposit_screen';
@@ -28,6 +31,10 @@ class DepositScreen extends StatelessWidget {
           BlocProvider(
               create: (_) => DepositUploadProofOfRemittanceBloc(
                   filePickerRepository: FilePickerRepository())),
+          BlocProvider(
+              create: (_) =>
+                  SelectBankBloc(listBankRepository: ListBankRepository())
+                    ..add(GetListBanks())),
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -61,6 +68,8 @@ class DepositScreen extends StatelessWidget {
         return const WireTransferScreen();
       case DepositPageStep.acknowledged:
         return const WithdrawalAcknowledgementScreen();
+      case DepositPageStep.selectBank:
+        return const SelectBankScreen();
       default:
         return const SizedBox.shrink();
     }

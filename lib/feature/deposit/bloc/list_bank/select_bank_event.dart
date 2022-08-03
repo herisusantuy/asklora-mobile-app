@@ -1,4 +1,4 @@
-part of 'list_bank_bloc.dart';
+part of 'select_bank_bloc.dart';
 
 abstract class SelectBankEvent extends Equatable {
   const SelectBankEvent() : super();
