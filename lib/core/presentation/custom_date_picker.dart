@@ -9,7 +9,7 @@ class CustomDatePicker extends StatelessWidget {
   final EdgeInsets padding;
   final DateTime? selectedDate;
   final DateTime? initialDateTime;
-  final int? maximumYear;
+  final DateTime? maximumDate;
   final void Function(DateTime) onDateTimeChanged;
 
   const CustomDatePicker(
@@ -18,7 +18,7 @@ class CustomDatePicker extends StatelessWidget {
       this.padding = EdgeInsets.zero,
       this.selectedDate,
       this.initialDateTime,
-      this.maximumYear,
+      this.maximumDate,
       required this.onDateTimeChanged})
       : super(key: key);
 
@@ -71,7 +71,7 @@ class CustomDatePicker extends StatelessWidget {
                               mode: CupertinoDatePickerMode.date,
                               onDateTimeChanged: onDateTimeChanged,
                               initialDateTime: initialDateTime,
-                              maximumYear: maximumYear,
+                              maximumDate: maximumDate,
                             ),
                           ),
                           CustomTextButton(

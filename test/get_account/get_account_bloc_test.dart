@@ -54,7 +54,7 @@ void main() {
         expect(
             getAccountBloc.state,
             const AccountState(
-                status: GetAccountStatus.unknown, responseMessage: ''));
+                status: AccountStatus.unknown, responseMessage: ''));
       });
 
       blocTest<AccountBloc, AccountState>(
@@ -67,11 +67,11 @@ void main() {
         act: (bloc) => bloc.add(GetAccount()),
         expect: () => {
           const AccountState(
-              status: GetAccountStatus.fetchingAccount,
+              status: AccountStatus.fetchingAccount,
               responseMessage: '',
               account: null),
           AccountState(
-              status: GetAccountStatus.success,
+              status: AccountStatus.success,
               responseMessage: 'Successfully get account!',
               account: account),
         },

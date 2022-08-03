@@ -132,6 +132,9 @@ class UpgradeAccountScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
+                    if (_pageViewController.page == 0) {
+                      Navigator.of(context).pop(true);
+                    }
                     context
                         .read<AccountBloc>()
                         .add(const AccountCurrentStepChanged('back'));

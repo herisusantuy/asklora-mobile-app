@@ -40,7 +40,6 @@ void main() async {
         find.byKey(const Key('account_is_united_state_resident_question Yes'));
     var isUnitedStateResidentNoAnswer =
         find.byKey(const Key('account_is_united_state_resident_question No'));
-    var usResidentNote = find.byKey(const Key('account_us_resident_note'));
     var basicInformationNextStepButton =
         find.byKey(const Key('account_basic_information_next_step_button'));
     testWidgets('Render Basic Information Form first render.', (tester) async {
@@ -113,7 +112,6 @@ void main() async {
           (tester.widget(isUnitedStateResidentQuestion) as QuestionWidget)
               .selectedAnswer,
           'Yes');
-      expect(usResidentNote, findsOneWidget);
 
       await tester.ensureVisible(isUnitedStateResidentNoAnswer);
       await tester.tap(isUnitedStateResidentNoAnswer, warnIfMissed: false);
