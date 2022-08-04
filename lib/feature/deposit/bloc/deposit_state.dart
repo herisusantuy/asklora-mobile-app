@@ -11,6 +11,11 @@ enum DepositPageStep {
   uploadProof,
   acknowledged,
   selectBank,
+  eddaNewUser,
+  eddaYourBankDetails,
+  eddaGetBankDetailsLoading,
+  eddaGetBankDetailsSuccess,
+  eddaDepositAmount,
   unknown
 }
 

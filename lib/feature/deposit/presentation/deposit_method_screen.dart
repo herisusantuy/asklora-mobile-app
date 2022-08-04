@@ -27,6 +27,7 @@ class DepositMethodScreen extends StatelessWidget {
         _wireTransferButton(context),
         _fpsButton(context),
         _whatIsFpsButton(context),
+        _eddaButton(context),
       ],
     );
   }
@@ -41,6 +42,19 @@ class DepositMethodScreen extends StatelessWidget {
           onClick: () => context
               .read<DepositBloc>()
               .add(const PageChanged(DepositPageStep.selectBank))),
+    );
+  }
+
+  Widget _eddaButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30.0, top: 10),
+      child: CustomTextButton(
+          key: const Key('edda_button'),
+          borderRadius: 5,
+          buttonText: 'Electronic Direct Debit Authorization (eDDA)',
+          onClick: () => context
+              .read<DepositBloc>()
+              .add(const PageChanged(DepositPageStep.eddaNewUser))),
     );
   }
 
