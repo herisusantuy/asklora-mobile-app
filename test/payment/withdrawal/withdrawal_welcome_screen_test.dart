@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/feature/payment/withdrawal/bloc/withdrawal_bloc.dart';
-import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/withdrawal_next_button.dart';
+import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/widget/withdrawal_next_button.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,20 +1,19 @@
+import '../../withdrawal/presentation/acknowledgement_screen.dart';
+import '../bloc/upload_proof_of_remittance/upload_proof_of_remittance_bloc.dart';
+import '../edda/bloc/bank_details/bank_details_bloc.dart';
+import '../edda/presentation/bank_details_screen.dart';
+import '../edda/presentation/initiate_screen.dart';
+import '../fps/presentation/information_screen.dart';
+import '../fps/presentation/transfer_screen.dart';
+import '../repository/file_picker_repository.dart';
+import 'upload_proof_of_remittance_screen.dart';
+import '../wire/presentation/wire_transfer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../payment/deposits/edda/presentation/initiate_screen.dart';
-import '../../payment/withdrawal/presentation/acknowledgement_screen.dart';
 import '../bloc/deposit_bloc.dart';
-import '../bloc/list_bank/select_bank_bloc.dart';
-import '../deposit_upload_proof_of_remittance/bloc/deposit_upload_proof_of_remittance_bloc.dart';
-import '../deposit_upload_proof_of_remittance/presentation/deposit_upload_proof_of_remittance_screen.dart';
-import '../deposit_upload_proof_of_remittance/repository/FilePickerRepository.dart';
-import '../repository/bank_details_repository.dart';
 import 'deposit_method_screen.dart';
-import 'select_bank_screen.dart';
 import 'deposit_welcome_screen.dart';
-import 'fps_information_screen.dart';
-import 'fps_transfer_screen.dart';
-import 'wire_transfer_screen.dart';
 
 class DepositScreen extends StatelessWidget {
   static const String route = '/deposit_screen';
@@ -30,12 +29,9 @@ class DepositScreen extends StatelessWidget {
         providers: [
           BlocProvider(create: (_) => DepositBloc()),
           BlocProvider(
-              create: (_) => DepositUploadProofOfRemittanceBloc(
+              create: (_) => UploadProofOfRemittanceBloc(
                   filePickerRepository: FilePickerRepository())),
-          BlocProvider(
-              create: (_) =>
-                  SelectBankBloc(bankDetailsRepository: BankDetailsRepository())
-                    ..add(GetListBanks())),
+          BlocProvider(create: (_) => BankDetailsBloc()),
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -60,19 +56,23 @@ class DepositScreen extends StatelessWidget {
       case DepositPageStep.depositMethod:
         return const DepositMethodScreen();
       case DepositPageStep.fpsMeaning:
-        return const FpsInformationScreen();
+        return const InformationScreen();
       case DepositPageStep.fpsTransfer:
-        return const FpsTransferScreen();
+        return const TransferScreen();
       case DepositPageStep.uploadProof:
-        return const DepositUploadProofOfRemittanceScreen();
+        return const UploadProofOfRemittanceScreen();
       case DepositPageStep.wireTransfer:
         return const WireTransferScreen();
       case DepositPageStep.acknowledged:
         return const AcknowledgementScreen();
-      case DepositPageStep.selectBank:
-        return const SelectBankScreen();
-      case DepositPageStep.eddaNewUser:
+      case DepositPageStep.eddaInitiate:
         return const InitiateScreen();
+      case DepositPageStep.eDdaBankDetails:
+        return const BankDetailsScreen();
+      case DepositPageStep.eDdaBankDetailsProgress:
+        return const BankDetailsProgressScreen();
+      case DepositPageStep.eDdaBankDetailsSuccess:
+        return const BankDetailsSuccessScreen();
       default:
         return const SizedBox.shrink();
     }
