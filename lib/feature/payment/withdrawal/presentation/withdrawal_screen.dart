@@ -1,11 +1,11 @@
+import 'welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/amount/amount_bloc.dart';
 import '../bloc/withdrawal_bloc.dart';
-import '../withdrawal_acknowledgement/presentation/withdrawal_acknowledgement_screen.dart';
-import '../withdrawal_amount/bloc/withdrawal_amount_bloc.dart';
-import '../withdrawal_amount/presentation/withdrawal_amount_screen.dart';
-import '../withdrawal_bank_detail/presentation/withdrawal_bank_detail_screen.dart';
-import '../withdrawal_welcome_screen/presentation/withdrawal_welcome_screen.dart';
+import 'acknowledgement_screen.dart';
+import 'amount_screen.dart';
+import 'bank_detail_screen.dart';
 
 class WithdrawalScreen extends StatelessWidget {
   static const String route = '/withdrawal_screen';
@@ -24,7 +24,7 @@ class WithdrawalScreen extends StatelessWidget {
           create: (_) => WithdrawalBloc(),
         ),
         BlocProvider(
-          create: (_) => WithdrawalAmountBloc(),
+          create: (_) => AmountBloc(),
         ),
       ],
       child: Scaffold(
@@ -41,13 +41,13 @@ class WithdrawalScreen extends StatelessWidget {
   Widget pages(WithdrawalPages withdrawPages) {
     switch (withdrawPages) {
       case WithdrawalPages.welcome:
-        return const WithdrawalWelcomeScreen();
+        return const WelcomeScreen();
       case WithdrawalPages.bankDetail:
-        return const WithdrawalBankDetailScreen();
+        return const BankDetailScreen();
       case WithdrawalPages.amount:
-        return const WithdrawalAmountScreen();
+        return const AmountScreen();
       case WithdrawalPages.acknowledgement:
-        return const WithdrawalAcknowledgementScreen();
+        return const AcknowledgementScreen();
       default:
         return const SizedBox.shrink();
     }
