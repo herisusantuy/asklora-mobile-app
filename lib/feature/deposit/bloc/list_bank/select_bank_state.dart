@@ -9,7 +9,6 @@ class SelectBankState extends Equatable {
 
   SelectBankState copyWith({
     List<BankDetails>? listBanks,
-    // List<BankDetails>? searchListBank,
   }) {
     return SelectBankState(
       listBanks: listBanks ?? this.listBanks,
