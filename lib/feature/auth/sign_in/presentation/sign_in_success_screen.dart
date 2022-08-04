@@ -52,12 +52,12 @@ class SignInSuccessScreen extends StatelessWidget {
               BlocListener<AccountBloc, AccountState>(
                   listener: (context, state) async {
                     switch (state.status) {
-                      case GetAccountStatus.failure:
+                      case AccountStatus.failure:
                         CustomSnackBar(context)
                             .setMessage(state.responseMessage)
                             .showError();
                         break;
-                      case GetAccountStatus.success:
+                      case AccountStatus.success:
                         CustomSnackBar(context)
                             .setMessage(state.responseMessage)
                             .show();
@@ -130,8 +130,8 @@ class SignInSuccessScreen extends StatelessWidget {
         builder: (context, state) {
           return CustomTextButton(
             buttonText: 'Get Account',
-            isLoading: state.status == GetAccountStatus.fetchingAccount,
-            disable: state.status == GetAccountStatus.fetchingAccount,
+            isLoading: state.status == AccountStatus.fetchingAccount,
+            disable: state.status == AccountStatus.fetchingAccount,
             onClick: () => context.read<AccountBloc>().add(GetAccount()),
             borderRadius: 5,
           );
@@ -174,8 +174,8 @@ class SignInSuccessScreen extends StatelessWidget {
         builder: (context, state) {
           return CustomTextButton(
             buttonText: 'Open Verification',
-            isLoading: state.status == GetAccountStatus.fetchingOnfidoToken,
-            disable: state.status == GetAccountStatus.fetchingOnfidoToken,
+            isLoading: state.status == AccountStatus.fetchingOnfidoToken,
+            disable: state.status == AccountStatus.fetchingOnfidoToken,
             onClick: () => context.read<AccountBloc>().add(GetSdkToken()),
             borderRadius: 5,
           );
