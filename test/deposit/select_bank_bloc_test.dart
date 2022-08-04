@@ -27,7 +27,7 @@ void main() {
     });
 
     test('init state should be null', () async {
-      expect(selectBankBloc.state, const SelectBankState(listBanks: null));
+      expect(selectBankBloc.state, const SelectBankState(listBanks: []));
     });
 
     blocTest<SelectBankBloc, SelectBankState>('Get List of Banks',

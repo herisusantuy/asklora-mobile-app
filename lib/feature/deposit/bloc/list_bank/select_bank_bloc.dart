@@ -5,8 +5,9 @@ import '../../../../core/utils/formatters/bank_code_formatter.dart';
 import '../../model/bank_details.dart';
 import '../../repository/bank_details_repository.dart';
 
-part 'select_bank_state.dart';
 part 'select_bank_event.dart';
+
+part 'select_bank_state.dart';
 
 class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
   final BankDetailsRepository _bankDetailsRepository;
@@ -27,12 +28,12 @@ class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
   void _searchListBanks(SearchBank event, Emitter<SelectBankState> emit) {
     if (event.keyword.isNotEmpty) {
       List<BankDetails> searchBankKeyword = [];
-      searchBankKeyword.addAll(List.from(state.listBanks!.where((name) {
+      searchBankKeyword.addAll(List.from(state.listBanks.where((name) {
         return name.bankName
             .toLowerCase()
             .contains(event.keyword.toLowerCase());
       })));
-      searchBankKeyword.addAll(List.from(state.listBanks!.where((name) {
+      searchBankKeyword.addAll(List.from(state.listBanks.where((name) {
         return bankCodeFormatter(name.clearingCode).contains(event.keyword);
       })));
 

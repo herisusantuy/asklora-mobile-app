@@ -1,9 +1,10 @@
 part of 'select_bank_bloc.dart';
 
 class SelectBankState extends Equatable {
-  final List<BankDetails>? listBanks;
+  final List<BankDetails> listBanks;
+
   const SelectBankState({
-    this.listBanks,
+    this.listBanks = const [],
   });
 
   SelectBankState copyWith({
