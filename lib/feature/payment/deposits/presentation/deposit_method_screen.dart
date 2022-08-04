@@ -54,7 +54,7 @@ class DepositMethodScreen extends StatelessWidget {
           buttonText: 'Electronic Direct Debit Authorization (eDDA)',
           onClick: () => context
               .read<DepositBloc>()
-              .add(const PageChanged(DepositPageStep.selectBank))),
+              .add(const PageChanged(DepositPageStep.eddaInitiate))),
     );
   }
 
