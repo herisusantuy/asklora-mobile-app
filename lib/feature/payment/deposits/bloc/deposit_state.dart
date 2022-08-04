@@ -10,6 +10,7 @@ enum DepositPageStep {
   fpsTransfer,
   uploadProof,
   acknowledged,
+  selectBank,
   eddaInitiate,
   eDdaBankDetails,
   eDdaBankDetailsProgress,
