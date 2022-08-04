@@ -41,7 +41,7 @@ class DepositMethodScreen extends StatelessWidget {
           buttonText: 'WIRE TRANSFER',
           onClick: () => context
               .read<DepositBloc>()
-              .add(const PageChanged(DepositPageStep.wireTransfer))),
+              .add(const PageChanged(DepositPageStep.selectBank))),
     );
   }
 
