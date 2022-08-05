@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_text.dart';
 import '../../presentation/custom_payment_button_button.dart';
+import '../../presentation/custom_payment_text_information_widget.dart';
 import '../../presentation/custom_payment_text_input.dart';
+import '../../presentation/payment_confirmation_dialog.dart';
 import '../bloc/amount/amount_bloc.dart';
 import '../bloc/withdrawal_bloc.dart';
-import 'widget/custom_withdrawal_text_information_widget.dart';
 import 'widget/custom_withdrawal_widget.dart';
 
 class AmountScreen extends StatelessWidget {
@@ -78,88 +79,21 @@ class AmountScreen extends StatelessWidget {
         ],
       );
 
-  void _showConfirmationAmount(BuildContext context, String amount) =>
+  void _showConfirmationAmount(
+          BuildContext context, String amount) =>
       showModalBottomSheet(
           context: context,
-          builder: (_) => Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Stack(
-                      children: [
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: InkWell(
-                                onTap: () => Navigator.pop(context),
-                                child: const Icon(
-                                  Icons.close,
-                                  size: 32,
-                                ))),
-                        const Align(
-                          alignment: Alignment.center,
-                          child: CustomText(
-                            'Withdrawal Amount (USD)',
-                            type: FontType.smallText,
-                            padding: EdgeInsets.only(bottom: 12),
-                          ),
-                        ),
-                      ],
-                    ),
-                    CustomText(
-                      amount,
-                      type: FontType.h5,
-                      padding: const EdgeInsets.only(bottom: 16),
-                    ),
-                    Row(
-                      children: const [
-                        CustomText(
-                          'Payer\'s account',
-                          padding: EdgeInsets.only(right: 12),
-                          type: FontType.smallText,
-                        ),
-                        Expanded(
-                            child: CustomText(
-                          '004 The Hong Kong and Shanghai Banking Corporation Limited (7890)',
-                          type: FontType.smallText,
-                        )),
-                      ],
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.pink[100],
-                          borderRadius: BorderRadius.circular(6)),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 20),
-                      margin: const EdgeInsets.only(top: 24),
-                      child: Row(
-                        children: const [
-                          Icon(
-                            Icons.info_outline,
-                            size: 18,
-                          ),
-                          Expanded(
-                              child: CustomText(
-                            'Please note that we are unable to cancel your withdrawal request once you have submitted it.',
-                            type: FontType.smallText,
-                            padding: EdgeInsets.only(left: 12),
-                          ))
-                        ],
-                      ),
-                    ),
-                    CustomPaymentButton(
-                        key: const Key('withdrawal_continue_button'),
-                        title: 'Continue',
-                        onSubmit: () {
-                          Navigator.pop(context);
-                          context.read<WithdrawalBloc>().add(const PageChanged(
-                              WithdrawalPages.acknowledgement));
-                        },
-                        disable: false)
-                  ],
-                ),
-              ));
+          builder: (_) => PaymentConfirmationDialog(
+              title: 'Withdrawal Amount (USD)',
+              amount: amount,
+              bankAccountName: "Payer's",
+              bankName:
+                  '004 The Hong Kong and Shanghai Banking Corporation Limited (7890)',
+              warningText:
+                  'Please note that the deposit amount cannot exceed the account balance in your bank. Otherwise, your bank may charge you extra fees due to transaction failures',
+              onSubmit: () => context
+                  .read<WithdrawalBloc>()
+                  .add(const PageChanged(WithdrawalPages.acknowledgement))));
 
   Widget _estimatedHKDAmount() => Padding(
         key: const Key('estimated_hkd_amount_text'),

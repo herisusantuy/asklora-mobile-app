@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../presentation/custom_payment_text_information_widget.dart';
 import '../bloc/withdrawal_bloc.dart';
-import 'widget/custom_withdrawal_text_information_widget.dart';
 import 'widget/custom_withdrawal_widget.dart';
 import 'widget/withdrawal_next_button.dart';
 

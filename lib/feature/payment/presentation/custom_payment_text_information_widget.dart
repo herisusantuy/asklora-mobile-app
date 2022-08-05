@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../core/presentation/custom_text.dart';
 
 class CustomPaymentTextInformationWidget extends StatelessWidget {
   final String title;

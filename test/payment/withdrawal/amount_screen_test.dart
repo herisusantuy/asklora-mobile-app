@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../mocks/mocks.dart';
 
 void main() async {
-  group('Withdrawal Bank Detail Screen widget test', () {
+  group('Withdrawal Amount Screen widget test', () {
     Future<void> _buildAmountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -18,7 +18,8 @@ void main() async {
     }
 
     final submitButton = find.byKey(const Key('withdrawal_submit_button'));
-    final continueButton = find.byKey(const Key('withdrawal_continue_button'));
+    final continueButton =
+        find.byKey(const Key('payment_confirmation_continue_button'));
     final amountInput = find.byKey(const Key('withdrawal_amount_input'));
     final estimatedHKDAmountText =
         find.byKey(const Key('estimated_hkd_amount_text'));

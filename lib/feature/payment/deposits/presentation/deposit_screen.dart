@@ -1,6 +1,8 @@
 import '../../withdrawal/presentation/acknowledgement_screen.dart';
 import '../bloc/upload_proof_of_remittance/upload_proof_of_remittance_bloc.dart';
+import '../edda/bloc/amount/amount_bloc.dart';
 import '../edda/bloc/bank_details/bank_details_bloc.dart';
+import '../edda/presentation/amount_screen.dart';
 import '../edda/presentation/bank_details_screen.dart';
 import '../edda/presentation/initiate_screen.dart';
 import '../fps/presentation/information_screen.dart';
@@ -32,6 +34,7 @@ class DepositScreen extends StatelessWidget {
               create: (_) => UploadProofOfRemittanceBloc(
                   filePickerRepository: FilePickerRepository())),
           BlocProvider(create: (_) => BankDetailsBloc()),
+          BlocProvider(create: (_) => AmountBloc()),
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -73,6 +76,8 @@ class DepositScreen extends StatelessWidget {
         return const BankDetailsProgressScreen();
       case DepositPageStep.eDdaBankDetailsSuccess:
         return const BankDetailsSuccessScreen();
+      case DepositPageStep.eDdaDepositAmount:
+        return const AmountScreen();
       default:
         return const SizedBox.shrink();
     }
