@@ -13,6 +13,7 @@ class BankDetails extends Equatable {
   final String chineseName;
   @JsonKey(name: 'swift_bic')
   final String? swiftBic;
+
   const BankDetails(
     this.clearingCode,
     this.bankName,
@@ -27,4 +28,9 @@ class BankDetails extends Equatable {
 
   @override
   List<Object?> get props => [clearingCode, bankName, chineseName, swiftBic];
+
+  @override
+  String toString() {
+    return '$clearingCode $bankName $chineseName $swiftBic';
+  }
 }

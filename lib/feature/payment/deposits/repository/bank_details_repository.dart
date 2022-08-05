@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import '../domain/bank_details.dart';
+import '../shareable/bank_list/domain/bank_details.dart';
 
 class BankDetailsRepository {
   Future<List<BankDetails>> getBankDetails() async {

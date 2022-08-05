@@ -53,7 +53,7 @@ class CustomTextInput extends StatelessWidget {
             labelText: labelText,
             counterText: '',
             hintText: hintText,
-            prefixText: '$prefixText  ',
+            prefixText: prefixText.isEmpty ? null : '$prefixText  ',
             enabledBorder: enabledBorder,
             disabledBorder: disabledBorder,
             focusedBorder: focusedBorder,

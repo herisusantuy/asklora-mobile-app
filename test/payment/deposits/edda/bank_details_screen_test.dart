@@ -22,6 +22,8 @@ void main() async {
     final bankName = find.byKey(const Key('deposit_bank_details_bank_name'));
     final bankAccountNumberInput =
         find.byKey(const Key('deposit_bank_details_bank_account_number_input'));
+    final confirmBankAccountNumberInput =
+    find.byKey(const Key('deposit_bank_details_bank_confirm_account_number_input'));
 
     testWidgets(
         'Render Deposit Edda Bank Details Screen, `continue button` = disabled',
@@ -34,6 +36,7 @@ void main() async {
       expect(find.text('Your Bank Details'), findsOneWidget);
       expect(bankName, findsOneWidget);
       expect(bankAccountNumberInput, findsOneWidget);
+      expect(confirmBankAccountNumberInput, findsOneWidget);
       expect(continueButton, findsOneWidget);
       expect(
           tester.widget<CustomPaymentButton>(continueButton).disable, isTrue);
@@ -49,12 +52,24 @@ void main() async {
           tester.widget<CustomPaymentButton>(continueButton).disable, isTrue);
     });
 
+    testWidgets('Enter account number = `abc`, `continue button` = disable',
+            (tester) async {
+          await _buildBankDetailsScreen(tester);
+          await tester.enterText(confirmBankAccountNumberInput, 'abc');
+          await tester.pump();
+          expect(find.text('abc'), findsNothing);
+          expect(
+              tester.widget<CustomPaymentButton>(continueButton).disable, isTrue);
+        });
+
     testWidgets('Enter account number = `123`, `continue button` = enabled',
         (tester) async {
       await _buildBankDetailsScreen(tester);
       await tester.enterText(bankAccountNumberInput, '123');
+      await tester.enterText(confirmBankAccountNumberInput, '123456');
       await tester.pump();
       expect(find.text('123'), findsOneWidget);
+      expect(find.text('123456'), findsOneWidget);
       expect(
           tester.widget<CustomPaymentButton>(continueButton).disable, isFalse);
     });

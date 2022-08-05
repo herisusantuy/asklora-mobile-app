@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
 
@@ -60,22 +61,17 @@ class CustomDepositWidget extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
+              // child: SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: children,
-                      ),
-                    ),
-                  ],
+                  children: children,
                 ),
               ),
             ),
+            // ),
             navigationButton ?? const SizedBox.shrink()
           ],
         ),

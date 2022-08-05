@@ -8,12 +8,21 @@ abstract class BankDetailsEvent extends Equatable {
 }
 
 class BankAccountNumberChanged extends BankDetailsEvent {
-  final String value;
+  final String accountNumber;
 
-  const BankAccountNumberChanged(this.value) : super();
+  const BankAccountNumberChanged(this.accountNumber) : super();
 
   @override
-  List<Object> get props => [value];
+  List<Object> get props => [accountNumber];
+}
+
+class ConfirmBankAccountNumberChanged extends BankDetailsEvent {
+  final String confirmAccountNumber;
+
+  const ConfirmBankAccountNumberChanged(this.confirmAccountNumber) : super();
+
+  @override
+  List<Object> get props => [confirmAccountNumber];
 }
 
 class BankDetailsSubmitted extends BankDetailsEvent {

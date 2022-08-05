@@ -16,8 +16,10 @@ void main() async {
         () {
       expect(
           bankDetailsBloc.state,
-          BankDetailsState(
-              bankAccountNumber: '', response: BaseResponse.unknown()));
+          const BankDetailsState(
+              bankAccountNumber: '',
+              confirmBankAccountNumber: '',
+              response: BaseResponse()));
     });
 
     blocTest<BankDetailsBloc, BankDetailsState>(
