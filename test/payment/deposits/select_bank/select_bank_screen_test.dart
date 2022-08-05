@@ -1,8 +1,8 @@
 import 'package:asklora_mobile_app/core/utils/formatters/bank_code_formatter.dart';
-import 'package:asklora_mobile_app/feature/deposit/bloc/deposit_bloc.dart';
-import 'package:asklora_mobile_app/feature/deposit/model/bank_details.dart';
-import 'package:asklora_mobile_app/feature/deposit/presentation/deposit_screen.dart';
-import 'package:asklora_mobile_app/feature/deposit/repository/bank_details_repository.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/bloc/deposit_bloc.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/domain/bank_details.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/presentation/deposit_screen.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/repository/bank_details_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
