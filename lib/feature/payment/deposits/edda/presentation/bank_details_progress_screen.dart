@@ -1,4 +1,4 @@
-part of 'bank_details_screen.dart';
+part of '../../shareable/bank_details/bank_details_screen.dart';
 
 class BankDetailsProgressScreen extends StatelessWidget {
   const BankDetailsProgressScreen({Key? key}) : super(key: key);

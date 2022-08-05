@@ -9,13 +9,13 @@ import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../shareable/bank_list/domain/bank_details.dart';
-import '../../shareable/widget/custom_deposit_widget.dart';
-import '../bloc/bank_details/bank_details_bloc.dart';
+import '../bank_list/domain/bank_details.dart';
+import '../widget/custom_deposit_widget.dart';
+import 'bloc/bank_details_bloc.dart';
 
-part 'bank_details_progress_screen.dart';
+part '../../edda/presentation/bank_details_progress_screen.dart';
 
-part 'bank_details_success_screen.dart';
+part '../../edda/presentation/bank_details_success_screen.dart';
 
 class BankDetailsScreen extends StatelessWidget {
   final BankDetails? bankDetails;
