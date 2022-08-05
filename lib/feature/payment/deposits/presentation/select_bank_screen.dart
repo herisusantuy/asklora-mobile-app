@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/presentation/custom_text.dart';
-import '../../../core/presentation/custom_text_input.dart';
-import '../../../core/utils/formatters/bank_code_formatter.dart';
+import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/custom_text_input.dart';
+import '../../../../core/utils/formatters/bank_code_formatter.dart';
 import '../bloc/deposit_bloc.dart';
 import '../bloc/list_bank/select_bank_bloc.dart';
 import 'widget/custom_deposit_widget.dart';

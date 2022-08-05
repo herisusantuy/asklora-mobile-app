@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
 
 class CustomDepositWidget extends StatelessWidget {
+  final String title;
   final List<Widget> children;
   final DepositPageStep? backTo;
   final Widget? navigationButton;
@@ -15,6 +17,7 @@ class CustomDepositWidget extends StatelessWidget {
       this.onSubmit,
       this.disableButton = true,
       this.navigationButton,
+      this.title = '',
       Key? key})
       : super(key: key);
 
@@ -47,6 +50,12 @@ class CustomDepositWidget extends StatelessWidget {
                           color: Colors.white,
                         ),
                       )),
+                  if (title.isNotEmpty)
+                    CustomText(
+                      title,
+                      type: FontType.h5,
+                      color: Colors.white,
+                    )
                 ],
               ),
             ),
