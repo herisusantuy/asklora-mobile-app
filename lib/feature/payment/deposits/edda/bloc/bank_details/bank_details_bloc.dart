@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/domain/base_response.dart';
@@ -37,8 +36,6 @@ class BankDetailsBloc extends Bloc<BankDetailsEvent, BankDetailsState> {
     BankDetailsSubmitted event,
     Emitter<BankDetailsState> emit,
   ) async {
-    debugPrint(
-        'Krishna account _onBankDetailsSubmitted ${state.bankAccountNumber} ${state.confirmBankAccountNumber}');
     if (state.bankAccountNumber != state.confirmBankAccountNumber) {
       emit(state.copyWith(
           response: BaseResponse.error('Account number does not match!')));

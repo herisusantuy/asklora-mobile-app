@@ -61,7 +61,6 @@ class CustomDepositWidget extends StatelessWidget {
               ),
             ),
             Expanded(
-              // child: SingleChildScrollView(
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
@@ -71,7 +70,6 @@ class CustomDepositWidget extends StatelessWidget {
                 ),
               ),
             ),
-            // ),
             navigationButton ?? const SizedBox.shrink()
           ],
         ),
