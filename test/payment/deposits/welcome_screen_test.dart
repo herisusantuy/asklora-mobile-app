@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/feature/payment/deposits/bloc/deposit_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/presentation/deposit_screen.dart';
-import 'package:asklora_mobile_app/feature/payment/deposits/presentation/widget/deposit_next_button.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/shareable/widget/deposit_next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

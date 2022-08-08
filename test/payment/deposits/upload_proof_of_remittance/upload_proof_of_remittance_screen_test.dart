@@ -1,9 +1,11 @@
 import 'package:asklora_mobile_app/feature/payment/deposits/bloc/deposit_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/presentation/deposit_screen.dart';
-import 'package:asklora_mobile_app/feature/payment/deposits/presentation/widget/deposit_next_button.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/shareable/widget/deposit_next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../../../mocks/mocks.dart';
+import '../../../test_helpers.dart';
 
 void main() async {
   group('Upload Proof of Remittance Screen widget test', () {
@@ -26,6 +28,7 @@ void main() async {
     testWidgets(
         'Render Deposit Upload Proof of Remittance Screen,`submit button` = disabled, `exceed amount error text` = not visible',
         (tester) async {
+      FlutterError.onError = ignoreOverflowErrors;
       await _buildWithdrawalAmountScreenScreen(tester);
       expect(nextButton, findsOneWidget);
       expect(addButton, findsOneWidget);

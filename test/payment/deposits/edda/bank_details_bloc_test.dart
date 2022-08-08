@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/feature/payment/deposits/edda/bloc/bank_details/bank_details_bloc.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/bloc/bank_details_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -16,8 +16,10 @@ void main() async {
         () {
       expect(
           bankDetailsBloc.state,
-          BankDetailsState(
-              bankAccountNumber: '', response: BaseResponse.unknown()));
+          const BankDetailsState(
+              bankAccountNumber: '',
+              confirmBankAccountNumber: '',
+              response: BaseResponse()));
     });
 
     blocTest<BankDetailsBloc, BankDetailsState>(

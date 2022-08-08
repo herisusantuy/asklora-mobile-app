@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../repository/file_picker_repository.dart';
+import '../../../repository/file_picker_repository.dart';
 
 part 'upload_proof_of_remittance_event.dart';
 
