@@ -10,6 +10,8 @@ class CustomDepositWidget extends StatelessWidget {
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;
+  final CrossAxisAlignment crossAxisAlignment;
+  final Widget? header;
 
   const CustomDepositWidget(
       {required this.children,
@@ -18,6 +20,8 @@ class CustomDepositWidget extends StatelessWidget {
       this.disableButton = true,
       this.navigationButton,
       this.title = '',
+        this.crossAxisAlignment = CrossAxisAlignment.start,
+        this.header,
       Key? key})
       : super(key: key);
 
@@ -36,7 +40,7 @@ class CustomDepositWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Material(
+            header??Material(
               color: Colors.blue,
               child: Row(
                 children: [
@@ -68,7 +72,7 @@ class CustomDepositWidget extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 12),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: crossAxisAlignment,
                         children: children,
                       ),
                     ),

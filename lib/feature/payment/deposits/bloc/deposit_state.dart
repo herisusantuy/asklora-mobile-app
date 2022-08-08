@@ -16,6 +16,8 @@ enum DepositPageStep {
   eDdaBankDetailsProgress,
   eDdaBankDetailsSuccess,
   eDdaDepositAmount,
+  eDdaAcknowledged,
+  eDdaFinished,
   unknown
 }
 
