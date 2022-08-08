@@ -63,7 +63,7 @@ void main() async {
         act: (bloc) async {
           bloc.add(const AmountChanged(10001));
           bloc.add(const AmountSubmitted());
-          await Future.delayed(const Duration(seconds: 2));
+          await Future.delayed(const Duration(seconds: 3));
         },
         expect: () => {
               const AmountState(
