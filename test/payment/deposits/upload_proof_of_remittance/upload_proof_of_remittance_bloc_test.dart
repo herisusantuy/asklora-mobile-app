@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/payment/deposits/bloc/upload_proof_of_remittance/upload_proof_of_remittance_bloc.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/shareable/proof_of_remittance/bloc/upload_proof_of_remittance_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/repository/file_picker_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:file_picker/file_picker.dart';

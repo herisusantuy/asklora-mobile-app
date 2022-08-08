@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../presentation/widget/custom_card_copy_text.dart';
-import '../../presentation/widget/custom_deposit_widget.dart';
-import '../../presentation/widget/custom_row_text.dart';
-import '../../presentation/widget/deposit_next_button.dart';
+import '../../shareable/widget/custom_card_copy_text.dart';
+import '../../shareable/widget/custom_deposit_widget.dart';
+import '../../shareable/widget/custom_row_text.dart';
+import '../../shareable/widget/deposit_next_button.dart';
 
 class TransferScreen extends StatelessWidget {
   const TransferScreen({Key? key}) : super(key: key);

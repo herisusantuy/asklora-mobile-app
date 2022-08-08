@@ -20,8 +20,8 @@ class CustomDepositWidget extends StatelessWidget {
       this.disableButton = true,
       this.navigationButton,
       this.title = '',
-        this.crossAxisAlignment = CrossAxisAlignment.start,
-        this.header,
+      this.crossAxisAlignment = CrossAxisAlignment.start,
+      this.header,
       Key? key})
       : super(key: key);
 
@@ -40,43 +40,37 @@ class CustomDepositWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            header??Material(
-              color: Colors.blue,
-              child: Row(
-                children: [
-                  InkWell(
-                      onTap: () => _onTapBack(context),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Icon(
-                          Icons.chevron_left,
-                          size: 40,
+            header ??
+                Material(
+                  color: Colors.blue,
+                  child: Row(
+                    children: [
+                      InkWell(
+                          onTap: () => _onTapBack(context),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.chevron_left,
+                              size: 40,
+                              color: Colors.white,
+                            ),
+                          )),
+                      if (title.isNotEmpty)
+                        CustomText(
+                          title,
+                          type: FontType.h5,
                           color: Colors.white,
-                        ),
-                      )),
-                  if (title.isNotEmpty)
-                    CustomText(
-                      title,
-                      type: FontType.h5,
-                      color: Colors.white,
-                    )
-                ],
-              ),
-            ),
+                        )
+                    ],
+                  ),
+                ),
             Expanded(
-              child: SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 12),
-                      child: Column(
-                        crossAxisAlignment: crossAxisAlignment,
-                        children: children,
-                      ),
-                    ),
-                  ],
+                  children: children,
                 ),
               ),
             ),

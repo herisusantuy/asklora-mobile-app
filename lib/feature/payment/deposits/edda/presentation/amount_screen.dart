@@ -10,7 +10,7 @@ import '../../../presentation/custom_payment_text_input.dart';
 import '../../../presentation/payment_confirmation_dialog.dart';
 import '../../../utils/amount_error_type.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../presentation/widget/custom_deposit_widget.dart';
+import '../../shareable/widget/custom_deposit_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
 
 class AmountScreen extends StatelessWidget {

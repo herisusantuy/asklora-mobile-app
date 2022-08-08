@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/utils/formatters/bank_code_formatter.dart';
-import '../../domain/bank_details.dart';
-import '../../repository/bank_details_repository.dart';
+import '../../../../../../core/domain/base_response.dart';
+import '../../../../../../core/utils/formatters/bank_code_formatter.dart';
+import '../../../repository/bank_details_repository.dart';
+import '../domain/bank_details.dart';
 
 part 'select_bank_event.dart';
 
@@ -21,25 +22,34 @@ class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
   }
 
   void _getListBanks(GetListBanks event, Emitter<SelectBankState> emit) async {
+    emit(state);
     listBankDetails = await _bankDetailsRepository.getBankDetails();
-    emit(state.copyWith(listBanks: listBankDetails));
+    emit(state.copyWith(
+        response: BaseResponse<List<BankDetails>>(
+            state: ResponseState.success, data: listBankDetails)));
   }
 
   void _searchListBanks(SearchBank event, Emitter<SelectBankState> emit) {
     if (event.keyword.isNotEmpty) {
       List<BankDetails> searchBankKeyword = [];
-      searchBankKeyword.addAll(List.from(state.listBanks.where((name) {
+      searchBankKeyword.addAll(
+          List.from((state.response.data as List<BankDetails>).where((name) {
         return name.bankName
             .toLowerCase()
             .contains(event.keyword.toLowerCase());
       })));
-      searchBankKeyword.addAll(List.from(state.listBanks.where((name) {
+      searchBankKeyword.addAll(
+          List.from((state.response.data as List<BankDetails>).where((name) {
         return bankCodeFormatter(name.clearingCode).contains(event.keyword);
       })));
 
-      emit(state.copyWith(listBanks: searchBankKeyword));
+      emit(state.copyWith(
+          response: BaseResponse<List<BankDetails>>(
+              state: ResponseState.success, data: searchBankKeyword)));
     } else {
-      emit(state.copyWith(listBanks: listBankDetails));
+      emit(state.copyWith(
+          response: BaseResponse<List<BankDetails>>(
+              state: ResponseState.success, data: listBankDetails)));
     }
   }
 }

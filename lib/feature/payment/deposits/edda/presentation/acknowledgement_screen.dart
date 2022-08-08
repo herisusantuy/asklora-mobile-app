@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../presentation/widget/custom_deposit_widget.dart';
+import '../../shareable/widget/custom_deposit_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
 
 class EDdaAcknowledgementScreen extends StatelessWidget {

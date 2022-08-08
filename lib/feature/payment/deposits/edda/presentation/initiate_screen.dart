@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../presentation/widget/custom_deposit_widget.dart';
+import '../../shareable/widget/custom_deposit_widget.dart';
 
 class InitiateScreen extends StatelessWidget {
   const InitiateScreen({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class InitiateScreen extends StatelessWidget {
           key: const Key('deposit_add_bank_details'),
           onTap: () => context
               .read<DepositBloc>()
-              .add(const PageChanged(DepositPageStep.eDdaBankDetails)),
+              .add(const PageChanged(DepositPageStep.selectBank)),
           child: const Icon(
             Icons.add_circle_outline,
             size: 50,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../mocks/mocks.dart';
+import '../../../test_helpers.dart';
 
 void main() {
   group('*Wire Transfer Screen Test*', () {
@@ -24,7 +25,9 @@ void main() {
     var accountNameCard = find.byKey(const Key('deposit_account_name_card'));
     var swiftCodeCard = find.byKey(const Key('deposit_swift_code_card'));
     var bankAddressCard = find.byKey(const Key('deposit_bank_address_card'));
+
     testWidgets('First Screen Render', (WidgetTester tester) async {
+      FlutterError.onError = ignoreOverflowErrors;
       await _buildWireTransferScreen(tester);
       expect(find.text('Wire Transfer'), findsOneWidget);
       expect(

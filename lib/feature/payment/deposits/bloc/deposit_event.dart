@@ -15,3 +15,21 @@ class PageChanged extends DepositEvent {
   @override
   List<Object?> get props => [depositPages];
 }
+
+class DepositMethodSelected extends DepositEvent {
+  final DepositMethod depositMethod;
+
+  const DepositMethodSelected(this.depositMethod) : super();
+
+  @override
+  List<Object?> get props => [depositMethod];
+}
+
+class BankSelected extends DepositEvent {
+  final BankDetails bankDetails;
+
+  const BankSelected(this.bankDetails) : super();
+
+  @override
+  List<Object?> get props => [bankDetails];
+}
