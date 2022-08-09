@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
 
@@ -11,6 +10,8 @@ class CustomDepositWidget extends StatelessWidget {
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;
+  final CrossAxisAlignment crossAxisAlignment;
+  final Widget? header;
 
   const CustomDepositWidget(
       {required this.children,
@@ -19,6 +20,8 @@ class CustomDepositWidget extends StatelessWidget {
       this.disableButton = true,
       this.navigationButton,
       this.title = '',
+      this.crossAxisAlignment = CrossAxisAlignment.start,
+      this.header,
       Key? key})
       : super(key: key);
 
@@ -37,29 +40,30 @@ class CustomDepositWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Material(
-              color: Colors.blue,
-              child: Row(
-                children: [
-                  InkWell(
-                      onTap: () => _onTapBack(context),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Icon(
-                          Icons.chevron_left,
-                          size: 40,
+            header ??
+                Material(
+                  color: Colors.blue,
+                  child: Row(
+                    children: [
+                      InkWell(
+                          onTap: () => _onTapBack(context),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.chevron_left,
+                              size: 40,
+                              color: Colors.white,
+                            ),
+                          )),
+                      if (title.isNotEmpty)
+                        CustomText(
+                          title,
+                          type: FontType.h5,
                           color: Colors.white,
-                        ),
-                      )),
-                  if (title.isNotEmpty)
-                    CustomText(
-                      title,
-                      type: FontType.h5,
-                      color: Colors.white,
-                    )
-                ],
-              ),
-            ),
+                        )
+                    ],
+                  ),
+                ),
             Expanded(
               child: Padding(
                 padding:
