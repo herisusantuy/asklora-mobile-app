@@ -6,6 +6,7 @@ import '../bloc/deposit_bloc.dart';
 import '../edda/bloc/amount/amount_bloc.dart';
 import '../edda/presentation/edda_acknowledgement_screen.dart';
 import '../edda/presentation/amount_screen.dart';
+import '../edda/presentation/edda_information_screen.dart';
 import '../edda/presentation/finished_screen.dart';
 import '../edda/presentation/initiate_screen.dart';
 import '../fps/presentation/information_screen.dart';
@@ -77,7 +78,9 @@ class DepositScreen extends StatelessWidget {
         return const WireTransferScreen();
       case DepositPageStep.acknowledged:
         return const AcknowledgementScreen();
-      case DepositPageStep.eddaInitiate:
+      case DepositPageStep.eDdaMeaning:
+        return const EddaInformationScreen();
+      case DepositPageStep.eDdaInitiate:
         return const InitiateScreen();
       case DepositPageStep.eDdaBankDetails:
         return BankDetailsScreen(state.bankDetails);
@@ -99,7 +102,7 @@ class DepositScreen extends StatelessWidget {
   DepositPageStep _backStep(DepositMethod? depositMethod) {
     switch (depositMethod) {
       case DepositMethod.eDda:
-        return DepositPageStep.eddaInitiate;
+        return DepositPageStep.eDdaInitiate;
       case DepositMethod.fps:
       case DepositMethod.wireTransfer:
       default:
