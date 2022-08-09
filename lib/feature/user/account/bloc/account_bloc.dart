@@ -283,7 +283,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       case 4:
         return 'Disclosures & Affiliations';
       case 5:
-        return 'Signing Task Agreement';
+        return 'Signing Tax Agreement';
       case 6:
         return 'Signing Broker Agreements';
       case 7:
