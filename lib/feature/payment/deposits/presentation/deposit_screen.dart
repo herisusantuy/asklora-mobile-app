@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../withdrawal/presentation/acknowledgement_screen.dart';
 import '../bloc/deposit_bloc.dart';
 import '../edda/bloc/amount/amount_bloc.dart';
-import '../edda/presentation/acknowledgement_screen.dart';
+import '../edda/presentation/edda_acknowledgement_screen.dart';
 import '../edda/presentation/amount_screen.dart';
 import '../edda/presentation/finished_screen.dart';
 import '../edda/presentation/initiate_screen.dart';
@@ -88,7 +88,7 @@ class DepositScreen extends StatelessWidget {
       case DepositPageStep.eDdaDepositAmount:
         return const AmountScreen();
       case DepositPageStep.eDdaAcknowledged:
-        return const EDdaAcknowledgementScreen();
+        return const EddaAcknowledgementScreen();
       case DepositPageStep.eDdaFinished:
         return const FinishedScreen();
       default:

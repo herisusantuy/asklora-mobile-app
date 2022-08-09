@@ -6,8 +6,8 @@ import '../../bloc/deposit_bloc.dart';
 import '../../shareable/widget/custom_deposit_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
 
-class EDdaAcknowledgementScreen extends StatelessWidget {
-  const EDdaAcknowledgementScreen({Key? key}) : super(key: key);
+class EddaAcknowledgementScreen extends StatelessWidget {
+  const EddaAcknowledgementScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
