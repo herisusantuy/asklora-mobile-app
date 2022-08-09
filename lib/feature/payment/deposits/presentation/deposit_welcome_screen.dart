@@ -16,25 +16,27 @@ class DepositWelcomeScreen extends StatelessWidget {
         nextTo: DepositPageStep.depositMethod,
         disable: false,
       ),
-      children: [
-        const CustomText(
-          'Deposit',
-          key: Key('title_deposit_welcome_screen'),
-          padding: EdgeInsets.only(top: 10, bottom: 50),
-          type: FontType.h2,
-        ),
-        const CustomText(
-          'LORA allows you to deposit either through wire or FPS. Here are the steps that you need to take to deposit with us:',
-          key: Key('subtitle_deposit_welcome_screen'),
-          padding: EdgeInsets.only(top: 10, bottom: 30),
-          type: FontType.smallTextBold,
-        ),
-        _customTextRow('1', 'Tell us your bank account details'),
-        _customTextRow(
-            '2', 'Transfer to LORA’s bank account through your bank'),
-        _customTextRow('3', 'Tell us how much you’ve deposited'),
-        _customTextRow('4', 'Upload proof of remittance'),
-      ],
+      child: Column(
+        children: [
+          const CustomText(
+            'Deposit',
+            key: Key('title_deposit_welcome_screen'),
+            padding: EdgeInsets.only(top: 10, bottom: 50),
+            type: FontType.h2,
+          ),
+          const CustomText(
+            'LORA allows you to deposit either through wire or FPS. Here are the steps that you need to take to deposit with us:',
+            key: Key('subtitle_deposit_welcome_screen'),
+            padding: EdgeInsets.only(top: 10, bottom: 30),
+            type: FontType.smallTextBold,
+          ),
+          _customTextRow('1', 'Tell us your bank account details'),
+          _customTextRow(
+              '2', 'Transfer to LORA’s bank account through your bank'),
+          _customTextRow('3', 'Tell us how much you’ve deposited'),
+          _customTextRow('4', 'Upload proof of remittance'),
+        ],
+      ),
     );
   }
 

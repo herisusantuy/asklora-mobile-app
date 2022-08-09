@@ -10,15 +10,15 @@ import 'bloc/select_bank_bloc.dart';
 import 'domain/bank_details.dart';
 
 class SelectBankScreen extends StatelessWidget {
-  final DepositPageStep _backStep;
-
-  const SelectBankScreen(this._backStep, {Key? key}) : super(key: key);
+  const SelectBankScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-        title: 'Please Select a Bank',
-        backTo: _backStep, //DepositPageStep.eddaInitiate,
+      title: 'Please Select a Bank',
+      backTo:
+          _backStep(BlocProvider.of<DepositBloc>(context).state.depositMethod),
+      child: Column(
         children: [
           ClearableTextFormField(
             key: const Key('deposit_search_bank_input'),
@@ -31,10 +31,13 @@ class SelectBankScreen extends StatelessWidget {
               child: SingleChildScrollView(
             child: _listBanks(),
           )),
-        ]);
+        ],
+      ),
+    );
   }
 
   Widget _listBanks() {
+    //return Container(color: Colors.red, height: 550,);
     return BlocBuilder<SelectBankBloc, SelectBankState>(
       builder: (context, state) {
         return Column(
@@ -62,5 +65,16 @@ class SelectBankScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  DepositPageStep _backStep(DepositMethod? depositMethod) {
+    switch (depositMethod) {
+      case DepositMethod.eDda:
+        return DepositPageStep.eddaInitiate;
+      case DepositMethod.fps:
+      case DepositMethod.wire:
+      default:
+        return DepositPageStep.depositMethod;
+    }
   }
 }

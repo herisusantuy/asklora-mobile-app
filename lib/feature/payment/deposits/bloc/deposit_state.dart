@@ -1,12 +1,11 @@
 part of 'deposit_bloc.dart';
 
-enum DepositMethod { wireTransfer, fps, eDda }
+enum DepositMethod { wire, fps, eDda }
 
 enum DepositPageStep {
   welcome,
   depositMethod,
   fpsMeaning,
-  bankDetails,
   addBankAccount,
   wireTransfer,
   fpsTransfer,
@@ -14,6 +13,8 @@ enum DepositPageStep {
   acknowledged,
   selectBank,
   eddaInitiate,
+  wireTransferBankDetails,
+  fpsBankDetails,
   eDdaBankDetails,
   eDdaBankDetailsProgress,
   eDdaBankDetailsSuccess,

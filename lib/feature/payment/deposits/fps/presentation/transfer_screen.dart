@@ -15,33 +15,26 @@ class TransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPageStep.depositMethod,
-      navigationButton: const DepositNextButton(
-        label: 'Upload Proof of Remittance',
-        nextTo: DepositPageStep.depositMethod,
-        disable: false,
+      backTo: DepositPageStep.eDdaBankDetails,
+      // navigationButton:
+      child: ListView(
+        children: [
+          const CustomText(
+            'Please transfer to AskLORA’s bank account using your bank app',
+          ),
+          CustomCardCopyText(
+            key: const Key('fps_id_card'),
+            keyCopyButton: const Key('fps_id_card_copy_button'),
+            label: 'FPS ID',
+            text: fpsId,
+            message: '$fpsId Copied',
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          ),
+          _notesText(),
+        ],
       ),
-      children: [
-        const CustomText(
-          'FPS Transfer',
-          padding: EdgeInsets.only(bottom: 20),
-          type: FontType.h2,
-        ),
-        const CustomText(
-          'Please transfer to AskLORA’s bank account using your bank app',
-        ),
-        CustomCardCopyText(
-          key: const Key('fps_id_card'),
-          keyCopyButton: const Key('fps_id_card_copy_button'),
-          label: 'FPS ID',
-          text: fpsId,
-          message: '$fpsId Copied',
-          padding: const EdgeInsets.symmetric(vertical: 50),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        ),
-        _notesText(),
-      ],
     );
   }
 
@@ -61,10 +54,15 @@ class TransferScreen extends StatelessWidget {
             text:
                 'Please make sure your FPS number matches the phone number you used to register on AskLORA'),
         CustomRowText(
-            padding: EdgeInsets.only(bottom: 5),
+            padding: EdgeInsets.only(bottom: 20),
             index: '3',
             text:
                 'Did you know that in a year, cows kill more people than sharks?'),
+        DepositNextButton(
+          label: 'Upload Proof of Remittance',
+          nextTo: DepositPageStep.uploadProof,
+          disable: false,
+        ),
       ],
     );
   }

@@ -12,45 +12,47 @@ import '../../bloc/deposit_bloc.dart';
 import '../../shareable/widget/custom_deposit_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
 
-class AmountScreen extends StatelessWidget {
-  const AmountScreen({Key? key}) : super(key: key);
+class EddaAmountDepositScreen extends StatelessWidget {
+  const EddaAmountDepositScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPageStep.eDdaBankDetails,
-      navigationButton: BlocBuilder<AmountBloc, AmountState>(
-          builder: (context, state) => CustomPaymentButton(
-                key: const Key('deposit_bank_amount_continue_button'),
-                disable:
-                    state.depositAmountErrorType != AmountErrorType.unknown,
-                title: 'Continue',
-                onSubmit: () => _showConfirmationAmount(
-                    context, state.depositHKDAmount.toString()),
-              )),
-      children: [
-        _text('eDDA Deposit', fontType: FontType.h2),
-        _text(
-            'Please note there is a minimum deposit amount of HKD10,000 for users who are depositing with a new bank account'),
-        const CustomPaymentTextInformationWidget(
-          key: Key('deposit_amount_bank_details'),
-          title: 'Bank Details',
-          label:
-              'THE HONG KONG AND SHANGHAI BANKING CORPORATION LIMITED (004)..',
-          paddingBottom: 30,
-        ),
-        CustomPaymentTextInput(
-            key: const Key('deposit_edda_amount_input'),
-            titleText: 'Deposit Amount',
-            textInputType: TextInputType.number,
-            textInputFormatterList: [FilteringTextInputFormatter.digitsOnly],
-            prefixText: 'HKD',
-            paddingBottom: 6,
-            hintText: 'Enter Amount',
-            onChanged: (value) => context.read<AmountBloc>().add(
-                AmountChanged(value.isNotEmpty ? double.parse(value) : 0))),
-      ],
-    );
+        backTo: DepositPageStep.eDdaBankDetails,
+        title: 'eDDA Deposit',
+        navigationButton: BlocBuilder<AmountBloc, AmountState>(
+            builder: (context, state) => CustomPaymentButton(
+                  key: const Key('deposit_bank_amount_continue_button'),
+                  disable:
+                      state.depositAmountErrorType != AmountErrorType.unknown,
+                  title: 'Continue',
+                  onSubmit: () => _showConfirmationAmount(
+                      context, state.depositHKDAmount.toString()),
+                )),
+        child: ListView(
+          children: [
+            _text(
+                'Please note there is a minimum deposit amount of HKD10,000 for users who are depositing with a new bank account'),
+            const CustomPaymentTextInformationWidget(
+              key: Key('deposit_amount_bank_details'),
+              title: 'Bank Details',
+              label:
+                  'THE HONG KONG AND SHANGHAI BANKING CORPORATION LIMITED (004)..',
+              paddingBottom: 30,
+            ),
+            CustomPaymentTextInput(
+                key: const Key('deposit_edda_amount_input'),
+                titleText: 'Deposit Amount',
+                textInputType: TextInputType.number,
+                textInputFormatterList: [
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                prefixText: 'HKD',
+                hintText: 'Enter Amount',
+                onChanged: (value) => context.read<AmountBloc>().add(
+                    AmountChanged(value.isNotEmpty ? double.parse(value) : 0))),
+          ],
+        ));
   }
 
   Widget _text(String text,

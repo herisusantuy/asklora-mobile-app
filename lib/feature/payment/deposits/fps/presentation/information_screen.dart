@@ -9,9 +9,10 @@ class InformationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomDepositWidget(
-        backTo: DepositPageStep.depositMethod,
-        children: [
+    return CustomDepositWidget(
+      backTo: DepositPageStep.depositMethod,
+      child: Column(
+        children: const [
           CustomText(
             'What is FPS?',
             padding: EdgeInsets.only(bottom: 40),
@@ -26,6 +27,8 @@ class InformationScreen extends StatelessWidget {
             'Traditional fund transfers require the payee’s bank account number, but FPS supports payments made using the payee’s mobile number, email address, FPS Identifier or HKID. FPS also allows registered payees to use a QR code to receive payments (a Mobile Security Key or Security Device might be required to complete the transaction). You can also receive payments and transfers from institutions, corporates and the HKSAR government via your Hong Kong ID number.',
             type: FontType.bodyTextBold,
           ),
-        ]);
+        ],
+      ),
+    );
   }
 }

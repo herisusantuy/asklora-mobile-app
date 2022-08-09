@@ -12,16 +12,10 @@ class WireTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-        backTo: DepositPageStep.depositMethod,
-        navigationButton: const DepositNextButton(
-          key: Key('deposit_wire_transfer_next_button'),
-          label: 'Upload Proof Of Remittance',
-          nextTo: DepositPageStep.uploadProof,
-          disable: false,
-        ),
+      backTo: DepositPageStep.eDdaBankDetails,
+      title: 'Wire Transfer',
+      child: ListView(
         children: [
-          const CustomText('Wire Transfer',
-              padding: EdgeInsets.only(bottom: 30), type: FontType.h2),
           const CustomText(
             'Please transfer to AskLORA’s bank account using your bank app',
             padding: EdgeInsets.only(bottom: 10),
@@ -50,7 +44,15 @@ class WireTransferScreen extends StatelessWidget {
             key: 'deposit_bank_address_card',
             textAlign: TextAlign.start,
           ),
-        ]);
+          const DepositNextButton(
+            key: Key('deposit_wire_transfer_next_button'),
+            label: 'Upload Proof Of Remittance',
+            nextTo: DepositPageStep.uploadProof,
+            disable: false,
+          )
+        ],
+      ),
+    );
   }
 
   Widget _cardCopyText(

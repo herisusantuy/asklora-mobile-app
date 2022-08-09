@@ -13,22 +13,20 @@ class DepositMethodScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       backTo: DepositPageStep.welcome,
-      children: [
-        const CustomText(
-          'Deposit Method',
-          padding: EdgeInsets.only(top: 10, bottom: 40),
-          type: FontType.h2,
-        ),
-        const CustomText(
-          'Please select method of deposit',
-          padding: EdgeInsets.only(top: 10, bottom: 50),
-          type: FontType.h4,
-        ),
-        _wireTransferButton(context),
-        _fpsButton(context),
-        _whatIsFpsButton(context),
-        _eddaButton(context),
-      ],
+      title: 'Deposit Method',
+      child: ListView(
+        children: [
+          const CustomText(
+            'Please select method of deposit',
+            padding: EdgeInsets.only(top: 10, bottom: 50),
+            type: FontType.h4,
+          ),
+          _wireTransferButton(context),
+          _fpsButton(context),
+          _whatIsFpsButton(context),
+          _eddaButton(context),
+        ],
+      ),
     );
   }
 
@@ -42,7 +40,7 @@ class DepositMethodScreen extends StatelessWidget {
             onClick: () {
               context
                   .read<DepositBloc>()
-                  .add(const DepositMethodSelected(DepositMethod.wireTransfer));
+                  .add(const DepositMethodSelected(DepositMethod.wire));
               context
                   .read<DepositBloc>()
                   .add(const PageChanged(DepositPageStep.selectBank));

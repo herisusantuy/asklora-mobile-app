@@ -4,14 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../withdrawal/presentation/acknowledgement_screen.dart';
 import '../bloc/deposit_bloc.dart';
 import '../edda/bloc/amount/amount_bloc.dart';
-import '../edda/presentation/amount_screen.dart';
+import '../edda/presentation/edda_amount_deposit_screen.dart';
 import '../edda/presentation/initiate_screen.dart';
 import '../fps/presentation/information_screen.dart';
 import '../fps/presentation/transfer_screen.dart';
 import '../repository/bank_details_repository.dart';
 import '../repository/file_picker_repository.dart';
-import '../shareable/bank_details/bank_details_screen.dart';
+import '../shareable/bank_details/bank_account_details_screen.dart';
 import '../shareable/bank_details/bloc/bank_details_bloc.dart';
+import '../shareable/bank_details/edda_bank_account_details_screen.dart';
 import '../shareable/bank_list/bloc/select_bank_bloc.dart';
 import '../shareable/bank_list/select_bank_screen.dart';
 import '../shareable/proof_of_remittance/bloc/upload_proof_of_remittance_bloc.dart';
@@ -66,7 +67,7 @@ class DepositScreen extends StatelessWidget {
       case DepositPageStep.fpsMeaning:
         return const InformationScreen();
       case DepositPageStep.selectBank:
-        return SelectBankScreen(_backStep(state.depositMethod));
+        return const SelectBankScreen();
       case DepositPageStep.fpsTransfer:
         return const TransferScreen();
       case DepositPageStep.uploadProof:
@@ -78,26 +79,19 @@ class DepositScreen extends StatelessWidget {
       case DepositPageStep.eddaInitiate:
         return const InitiateScreen();
       case DepositPageStep.eDdaBankDetails:
-        return BankDetailsScreen(state.bankDetails);
+        if (state.depositMethod == DepositMethod.eDda) {
+          return EddaBankAccountDetailsScreen(state.bankDetails);
+        } else {
+          return BankAccountDetailsScreen(state.bankDetails);
+        }
       case DepositPageStep.eDdaBankDetailsProgress:
         return const BankDetailsProgressScreen();
       case DepositPageStep.eDdaBankDetailsSuccess:
         return const BankDetailsSuccessScreen();
       case DepositPageStep.eDdaDepositAmount:
-        return const AmountScreen();
+        return const EddaAmountDepositScreen();
       default:
         return const SizedBox.shrink();
-    }
-  }
-
-  DepositPageStep _backStep(DepositMethod? depositMethod) {
-    switch (depositMethod) {
-      case DepositMethod.eDda:
-        return DepositPageStep.eddaInitiate;
-      case DepositMethod.fps:
-      case DepositMethod.wireTransfer:
-      default:
-        return DepositPageStep.depositMethod;
     }
   }
 
