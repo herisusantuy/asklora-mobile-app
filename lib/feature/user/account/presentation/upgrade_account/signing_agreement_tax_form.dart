@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_checkbox.dart';
+import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
@@ -55,24 +56,46 @@ class SigningAgreementTaxForm extends StatelessWidget {
     );
   }
 
-  Widget _checkboxCertifyNotUsCitizen() =>
-      BlocBuilder<SigningAgreementTaxBloc, SigningAgreementTaxState>(
-        buildWhen: (previous, current) =>
-            previous.isCheckedCertify != current.isCheckedCertify,
-        builder: (context, state) {
-          return CustomCheckbox(
-            checkboxKey: const Key('certify_not_us_citizen_checkbox_key_value'),
-            key: const Key('certify_not_us_citizen_checkbox'),
-            padding: const EdgeInsets.only(top: 10),
-            text:
-                'I certify that I am not a US citizen, US resident alien or other US person for US tax purposes, and I am submitting the applicable Form W-8 BEN with this form to certify my foreign status and, if applicable, claim tax treaty benefits.',
-            isChecked: state.isCheckedCertify,
-            onChanged: (value) => context
-                .read<SigningAgreementTaxBloc>()
-                .add(CertifyNotUsCitizenChecked(value!)),
-            textAlign: TextAlign.justify,
-          );
-        },
+  Widget _checkboxCertifyNotUsCitizen() => Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Expanded(flex: 1, child: CustomText('*')),
+                Expanded(
+                  flex: 20,
+                  child: CustomText(
+                    'We are required to show you your completed W-8BEN form for regulatory purposes',
+                    type: FontType.smallTextBold,
+                    // textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          BlocBuilder<SigningAgreementTaxBloc, SigningAgreementTaxState>(
+            buildWhen: (previous, current) =>
+                previous.isCheckedCertify != current.isCheckedCertify,
+            builder: (context, state) {
+              return CustomCheckbox(
+                checkboxKey:
+                    const Key('certify_not_us_citizen_checkbox_key_value'),
+                key: const Key('certify_not_us_citizen_checkbox'),
+                padding: const EdgeInsets.only(top: 10),
+                text:
+                    'I certify that I am not a US citizen, US resident alien or other US person for US tax purposes, and I am submitting the applicable Form W-8 BEN with this form to certify my foreign status and, if applicable, claim tax treaty benefits.',
+                isChecked: state.isCheckedCertify,
+                onChanged: (value) => context
+                    .read<SigningAgreementTaxBloc>()
+                    .add(CertifyNotUsCitizenChecked(value!)),
+                textAlign: TextAlign.justify,
+              );
+            },
+          ),
+        ],
       );
 
   Widget _checkDeclareCorrectInformation() {
