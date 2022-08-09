@@ -27,7 +27,7 @@ class DepositMethodScreen extends StatelessWidget {
         _wireTransferButton(context),
         _fpsButton(context),
         _whatIsFpsButton(context),
-        _eDdaButton(context),
+        _initiateEddaButton(context),
         _whatIsEddaButton(context)
       ],
     );
@@ -50,7 +50,7 @@ class DepositMethodScreen extends StatelessWidget {
             }));
   }
 
-  Widget _eDdaButton(BuildContext context) {
+  Widget _initiateEddaButton(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(top: 10),
         child: CustomTextButton(
