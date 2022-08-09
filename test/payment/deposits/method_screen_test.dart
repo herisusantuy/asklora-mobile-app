@@ -21,6 +21,8 @@ void main() {
     var wireTransferButton = find.byKey(const Key('wire_transfer_button'));
     var fpsButton = find.byKey(const Key('fps_button'));
     var whatIsFpsButton = find.byKey(const Key('what_is_fps_button'));
+    var eDdaButton = find.byKey(const Key('edda_button'));
+    var whatIsEddaButton = find.byKey(const Key('what_is_edda_button'));
 
     testWidgets('First render screen', (tester) async {
       await _buildDepositMethodScreen(tester);
@@ -32,6 +34,8 @@ void main() {
       expect(fpsButton, findsOneWidget);
       expect((tester.widget<CustomTextButton>(fpsButton)).disable, false);
       expect(whatIsFpsButton, findsOneWidget);
+      expect(eDdaButton, findsOneWidget);
+      expect(whatIsEddaButton, findsOneWidget);
     });
   });
 }

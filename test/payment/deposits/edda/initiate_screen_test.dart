@@ -10,7 +10,7 @@ void main() async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const DepositScreen(
-            initialDepositPages: DepositPageStep.eddaInitiate,
+            initialDepositPages: DepositPageStep.eDdaInitiate,
           ),
           navigatorObservers: [mockObserver]));
     }
