@@ -16,11 +16,11 @@ class FinancialProfileForm extends StatelessWidget {
   }) : super(key: key);
 
   final incomeRange = const [
-    '0 to 200,000',
-    '200,001 to 400,000',
-    '400,001 to 600,000',
-    '600,000 to 800,000',
-    '800,001 to 1,000,000+',
+    '0 - 200,000',
+    '200,001 - 400,000',
+    '400,001 - 600,000',
+    '600,000 - 800,000',
+    '800,001 - 1,000,000+',
   ];
 
   @override
