@@ -277,7 +277,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       case 1:
         return 'Country of Tax Residence';
       case 2:
-        return 'Address Proof';
+        return 'Permanent Residential Address';
       case 3:
         return 'Employment, Financial Profile';
       case 4:
