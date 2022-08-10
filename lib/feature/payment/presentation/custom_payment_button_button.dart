@@ -11,7 +11,7 @@ class CustomPaymentButton extends StatelessWidget {
       {required this.title,
       required this.onSubmit,
       this.disable = true,
-        this.isLoading = false,
+      this.isLoading = false,
       Key? key})
       : super(key: key);
 
