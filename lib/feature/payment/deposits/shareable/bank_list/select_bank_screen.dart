@@ -15,11 +15,10 @@ class SelectBankScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      title: 'Please Select a Bank',
-      backTo:
-          _backStep(BlocProvider.of<DepositBloc>(context).state.depositMethod),
-      child: Column(
-        children: [
+        title: 'Please Select a Bank',
+        backTo: _backStep(
+            BlocProvider.of<DepositBloc>(context).state.depositMethod),
+        child: Column(children: [
           ClearableTextFormField(
             key: const Key('deposit_search_bank_input'),
             labelText: 'Search Bank',
@@ -27,23 +26,19 @@ class SelectBankScreen extends StatelessWidget {
             onChanged: (value) =>
                 context.read<SelectBankBloc>().add(SearchBank(value)),
           ),
-          Expanded(
-              child: SingleChildScrollView(
-            child: _listBanks(),
-          )),
-        ],
-      ),
-    );
+          Flexible(child: _listBanks()),
+        ]));
   }
 
   Widget _listBanks() {
-    //return Container(color: Colors.red, height: 550,);
     return BlocBuilder<SelectBankBloc, SelectBankState>(
       builder: (context, state) {
-        return Column(
-            children: (state.response.data as List<BankDetails>)
-                .map((item) => _banksCard(context, item))
-                .toList());
+        var data = state.response.data as List<BankDetails>;
+        return ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _banksCard(context, data[index]);
+            });
       },
     );
   }

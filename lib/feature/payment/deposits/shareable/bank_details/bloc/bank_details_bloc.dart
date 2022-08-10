@@ -58,8 +58,6 @@ class BankDetailsBloc extends Bloc<BankDetailsEvent, BankDetailsState> {
     BankDetailsSubmitted event,
     Emitter<BankDetailsState> emit,
   ) async {
-    debugPrint(
-        'Krishna ${state.bankAccountName} ${state.confirmBankAccountNumber} ${state.bankAccountNumber} ${event.shouldValidateName}');
     if (state.bankAccountNumber != state.confirmBankAccountNumber) {
       emit(state.copyWith(
           response: BaseResponse.error('Account number does not match!')));
