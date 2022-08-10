@@ -25,6 +25,27 @@ class ConfirmBankAccountNumberChanged extends BankDetailsEvent {
   List<Object> get props => [confirmAccountNumber];
 }
 
+class BankAccountNameChanged extends BankDetailsEvent {
+  final String accountName;
+
+  const BankAccountNameChanged(this.accountName) : super();
+
+  @override
+  List<Object> get props => [accountName];
+}
+
 class BankDetailsSubmitted extends BankDetailsEvent {
-  const BankDetailsSubmitted() : super();
+  final bool shouldValidateName;
+
+  const BankDetailsSubmitted({this.shouldValidateName = false}) : super();
+
+  @override
+  List<Object> get props => [];
+}
+
+class BankDetailsReset extends BankDetailsEvent {
+  const BankDetailsReset() : super();
+
+  @override
+  List<Object> get props => [];
 }

@@ -12,8 +12,8 @@ class InitiateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       backTo: DepositPageStep.depositMethod,
-      children: [
-        _text('eDDA Transfer', fontType: FontType.h2),
+      title: 'eDDA Transfer',
+      child: ListView(children: [
         _text(
             'eDDA allows you to make instant deposits to your brokerage accounts in just a few steps.'),
         _text('Please note that not all banks are currently supported',
@@ -31,7 +31,7 @@ class InitiateScreen extends StatelessWidget {
             size: 50,
           ),
         ))
-      ],
+      ]),
     );
   }
 
