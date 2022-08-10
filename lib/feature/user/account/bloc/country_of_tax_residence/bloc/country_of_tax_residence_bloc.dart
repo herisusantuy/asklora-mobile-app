@@ -16,9 +16,20 @@ class CountryOfTaxResidenceBloc
 
   _onCountryOfTaxResidenceChange(CountryOfTaxResidenceChanged event,
       Emitter<CountryOfTaxResidenceState> emit) {
-    emit(state.copyWith(
+    if (event.countryOfTaxResidence == 'HKG' &&
+        !isHkIdValid(state.tinNumber) &&
+        state.tinNumber.isNotEmpty) {
+      emit(state.copyWith(
+          countryOfTaxResidence: event.countryOfTaxResidence,
+          countryNameOfTaxResidence: event.countryNameOfTaxResidence,
+          isHkIdValid: false));
+    } else {
+      emit(state.copyWith(
         countryOfTaxResidence: event.countryOfTaxResidence,
-        countryNameOfTaxResidence: event.countryNameOfTaxResidence));
+        countryNameOfTaxResidence: event.countryNameOfTaxResidence,
+        isHkIdValid: true,
+      ));
+    }
   }
 
   _onTinNumberChange(

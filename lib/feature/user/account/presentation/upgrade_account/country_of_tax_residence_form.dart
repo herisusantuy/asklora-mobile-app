@@ -43,6 +43,8 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
 
   Widget _countryOfTaxResidence(BuildContext context) =>
       BlocBuilder<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
+          buildWhen: (previous, current) =>
+              previous.countryOfTaxResidence != current.countryOfTaxResidence,
           builder: (context, state) => CustomCountryPicker(
                 key: const Key('account_country_of_tax_residence'),
                 title: 'Country of Tax Residence',
@@ -56,7 +58,9 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
   Widget _tinNumberInput(BuildContext context) =>
       BlocBuilder<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
         buildWhen: ((previous, current) =>
-            previous.tinNumber != current.tinNumber),
+            previous.tinNumber != current.tinNumber ||
+            previous.countryNameOfTaxResidence !=
+                current.countryNameOfTaxResidence),
         builder: (context, state) => CustomTextInput(
             initialValue: state.tinNumber,
             key: const Key('account_tin_number_input'),
