@@ -12,6 +12,8 @@ class CustomDepositWidget extends StatelessWidget {
   final bool disableButton;
   final Function? onSubmit;
   final Function? onBackPressed;
+  final CrossAxisAlignment crossAxisAlignment;
+  final Widget? header;
 
   const CustomDepositWidget(
       {required this.child,
@@ -21,6 +23,8 @@ class CustomDepositWidget extends StatelessWidget {
       this.navigationButton,
       this.title = '',
       this.onBackPressed,
+      this.crossAxisAlignment = CrossAxisAlignment.start,
+      this.header,
       Key? key})
       : super(key: key);
 
@@ -44,29 +48,30 @@ class CustomDepositWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Material(
-              color: Colors.blue,
-              child: Row(
-                children: [
-                  InkWell(
-                      onTap: () => _onTapBack(context),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Icon(
-                          Icons.chevron_left,
-                          size: 40,
+            header ??
+                Material(
+                  color: Colors.blue,
+                  child: Row(
+                    children: [
+                      InkWell(
+                          onTap: () => _onTapBack(context),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.chevron_left,
+                              size: 40,
+                              color: Colors.white,
+                            ),
+                          )),
+                      if (title.isNotEmpty)
+                        CustomText(
+                          title,
+                          type: FontType.h5,
                           color: Colors.white,
-                        ),
-                      )),
-                  if (title.isNotEmpty)
-                    CustomText(
-                      title,
-                      type: FontType.h5,
-                      color: Colors.white,
-                    )
-                ],
-              ),
-            ),
+                        )
+                    ],
+                  ),
+                ),
             Expanded(
               child: Padding(
                 padding:

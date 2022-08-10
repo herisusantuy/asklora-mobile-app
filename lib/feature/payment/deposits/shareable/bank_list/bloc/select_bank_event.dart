@@ -11,6 +11,7 @@ class GetListBanks extends SelectBankEvent {}
 
 class SearchBank extends SelectBankEvent {
   final String keyword;
+
   const SearchBank(
     this.keyword,
   ) : super();

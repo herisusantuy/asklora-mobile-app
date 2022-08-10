@@ -15,3 +15,10 @@ class AmountChanged extends AmountEvent {
   @override
   List<Object> get props => [value];
 }
+
+class AmountSubmitted extends AmountEvent {
+  const AmountSubmitted() : super();
+
+  @override
+  List<Object> get props => [];
+}

@@ -76,7 +76,6 @@ class EddaAmountDepositScreen extends StatelessWidget {
                   '004 The Hong Kong and Shanghai Banking Corporation Limited (7890)',
               warningText:
                   'Please note that the deposit amount cannot exceed the account balance in your bank. Otherwise, your bank may charge you extra fees due to transaction failures',
-              onSubmit: () => context
-                  .read<DepositBloc>()
-                  .add(const PageChanged(DepositPageStep.acknowledged))));
+              onSubmit: () =>
+                  context.read<AmountBloc>().add(const AmountSubmitted())));
 }

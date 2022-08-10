@@ -12,7 +12,6 @@ class CustomWithdrawalWidget extends StatelessWidget {
   final Function? onSubmit;
   final String? title;
   final CrossAxisAlignment crossAxisAlignment;
-  final bool backButtonVisibility;
   final Widget? header;
 
   const CustomWithdrawalWidget(
@@ -22,7 +21,6 @@ class CustomWithdrawalWidget extends StatelessWidget {
       this.onSubmit,
       this.disableButton = true,
       this.navigationButton,
-      this.backButtonVisibility = true,
       this.crossAxisAlignment = CrossAxisAlignment.start,
       this.header,
       Key? key})

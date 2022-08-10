@@ -24,7 +24,8 @@ class DepositMethodScreen extends StatelessWidget {
           _wireTransferButton(context),
           _fpsButton(context),
           _whatIsFpsButton(context),
-          _eddaButton(context),
+          _initiateEddaButton(context),
+          _whatIsEddaButton(context)
         ],
       ),
     );
@@ -47,9 +48,9 @@ class DepositMethodScreen extends StatelessWidget {
             }));
   }
 
-  Widget _eddaButton(BuildContext context) {
+  Widget _initiateEddaButton(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(bottom: 30.0, top: 10),
+        padding: const EdgeInsets.only(top: 10),
         child: CustomTextButton(
             key: const Key('edda_button'),
             borderRadius: 5,
@@ -60,7 +61,7 @@ class DepositMethodScreen extends StatelessWidget {
                   .add(const DepositMethodSelected(DepositMethod.eDda));
               context
                   .read<DepositBloc>()
-                  .add(const PageChanged(DepositPageStep.eddaInitiate));
+                  .add(const PageChanged(DepositPageStep.eDdaInitiate));
             }));
   }
 
@@ -90,6 +91,18 @@ class DepositMethodScreen extends StatelessWidget {
           onTap: () => context
               .read<DepositBloc>()
               .add(const PageChanged(DepositPageStep.fpsMeaning))),
+    );
+  }
+
+  Widget _whatIsEddaButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: InkWell(
+          key: const Key('what_is_edda_button'),
+          child: const CustomText('What is eDDA?'),
+          onTap: () => context
+              .read<DepositBloc>()
+              .add(const PageChanged(DepositPageStep.eDdaMeaning))),
     );
   }
 }

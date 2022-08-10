@@ -12,13 +12,16 @@ enum DepositPageStep {
   uploadProof,
   acknowledged,
   selectBank,
-  eddaInitiate,
   wireTransferBankDetails,
   fpsBankDetails,
+  eDdaInitiate,
+  eDdaMeaning,
   eDdaBankDetails,
   eDdaBankDetailsProgress,
   eDdaBankDetailsSuccess,
   eDdaDepositAmount,
+  eDdaAcknowledged,
+  eDdaFinished,
   unknown
 }
 
