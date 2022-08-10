@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/custom_text.dart';
 import '../../shareable/widget/custom_deposit_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
@@ -23,28 +24,30 @@ class FinishedScreen extends StatelessWidget {
               )),
         ),
       ),
-      children: [
-        Container(
-          height: 160,
-          width: double.infinity,
-          padding: const EdgeInsets.all(12),
-          margin: const EdgeInsets.only(top: 48, bottom: 48),
-          color: Colors.grey[300],
-          child: const Center(
-            child: CustomText(
-              '-Image-',
-              key: Key('edda_deposit_finished_image'),
-              type: FontType.bodyText,
+      child: ListView(
+        children: [
+          Container(
+            height: 160,
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.only(top: 48, bottom: 48),
+            color: Colors.grey[300],
+            child: const Center(
+              child: CustomText(
+                '-Image-',
+                key: Key('edda_deposit_finished_image'),
+                type: FontType.bodyText,
+              ),
             ),
           ),
-        ),
-        _text(r'CA$H MON€Y', fontType: FontType.h5, bottomPadding: 12),
-        BlocBuilder<AmountBloc, AmountState>(
-            buildWhen: (_, __) => false,
-            builder: (context, state) =>
-                _text('HKD${state.depositHKDAmount}', bottomPadding: 32)),
-        _text('EZ MONEY. See how easy that was?', bottomPadding: 32),
-      ],
+          _text(r'CA$H MON€Y', fontType: FontType.h5, bottomPadding: 12),
+          BlocBuilder<AmountBloc, AmountState>(
+              buildWhen: (_, __) => false,
+              builder: (context, state) =>
+                  _text('HKD${state.depositHKDAmount}', bottomPadding: 32)),
+          _text('EZ MONEY. See how easy that was?', bottomPadding: 32),
+        ],
+      ),
     );
   }
 

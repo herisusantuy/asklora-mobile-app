@@ -23,8 +23,10 @@ void main() {
     var bankNameCard = find.byKey(const Key('deposit_bank_name_card'));
     var bankNumberCard = find.byKey(const Key('deposit_bank_number_card'));
     var accountNameCard = find.byKey(const Key('deposit_account_name_card'));
-    var swiftCodeCard = find.byKey(const Key('deposit_swift_code_card'));
-    var bankAddressCard = find.byKey(const Key('deposit_bank_address_card'));
+    var swiftCodeCard =
+        find.byKey(const Key('deposit_swift_code_card'), skipOffstage: false);
+    var bankAddressCard =
+        find.byKey(const Key('deposit_bank_address_card'), skipOffstage: false);
 
     testWidgets('First Screen Render', (WidgetTester tester) async {
       FlutterError.onError = ignoreOverflowErrors;

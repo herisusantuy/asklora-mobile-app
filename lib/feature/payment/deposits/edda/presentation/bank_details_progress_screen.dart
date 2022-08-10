@@ -1,4 +1,4 @@
-part of '../../shareable/bank_details/bank_details_screen.dart';
+part of '../../shareable/bank_details/edda_bank_account_details_screen.dart';
 
 class BankDetailsProgressScreen extends StatelessWidget {
   const BankDetailsProgressScreen({Key? key}) : super(key: key);
@@ -7,7 +7,7 @@ class BankDetailsProgressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<BankDetailsBloc, BankDetailsState>(
         listener: (context, state) {
-          if (state.response.data == CompleteStep.firstStep) {
+          if (state.response.data == CompleteStep.eddaFirstStep) {
             context
                 .read<DepositBloc>()
                 .add(const PageChanged(DepositPageStep.eDdaBankDetailsSuccess));
