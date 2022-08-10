@@ -133,6 +133,8 @@ class BasicInformationForm extends StatelessWidget {
       BlocBuilder<BasicInformationBloc, BasicInformationState>(
           buildWhen: (_, __) => false,
           builder: (context, state) => CustomDropdown(
+                hintName:
+                    state.gender.isNotEmpty ? state.gender : 'Select Gender',
                 value: state.gender,
                 key: const Key('account_gender_select'),
                 label: 'Gender',
