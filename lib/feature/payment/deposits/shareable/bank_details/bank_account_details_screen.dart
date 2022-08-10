@@ -13,6 +13,7 @@ import '../../bloc/deposit_bloc.dart';
 import '../bank_list/domain/bank_details.dart';
 import '../widget/custom_deposit_widget.dart';
 import 'bloc/bank_details_bloc.dart';
+import 'domain/add_bank_account_request.dart';
 
 class BankAccountDetailsScreen extends StatelessWidget {
   final BankDetails? bankDetails;
@@ -30,6 +31,7 @@ class BankAccountDetailsScreen extends StatelessWidget {
         if (state.response.state == ResponseState.success) {
           var depositMethod =
               BlocProvider.of<DepositBloc>(context).state.depositMethod;
+          print('METHOD $depositMethod');
           if (depositMethod == DepositMethod.wire) {
             context
                 .read<DepositBloc>()
@@ -110,10 +112,23 @@ class BankAccountDetailsScreen extends StatelessWidget {
               disable: state.bankAccountNumber.isEmpty ||
                   state.confirmBankAccountNumber.isEmpty ||
                   state.bankAccountName.isEmpty,
+              isLoading: state.response.state == ResponseState.loading,
               title: 'Continue',
-              onSubmit: () => context
-                  .read<BankDetailsBloc>()
-                  .add(const BankDetailsSubmitted(shouldValidateName: true)),
+              onSubmit: () => context.read<BankDetailsBloc>().add(
+                  BankDetailsSubmitted(
+                      addBankAccountRequest: AddBankAccountRequest(
+                          name: state.bankAccountName,
+                          bankCodeType: 'HKD',
+                          accountName: state.bankAccountName,
+                          accountNumber: state.bankAccountNumber,
+                          bankCode: bankDetails?.swiftBic ?? '',
+                          bankTransferType: context
+                                  .read<DepositBloc>()
+                                  .state
+                                  .depositMethod
+                                  ?.value ??
+                              ''),
+                      shouldValidateName: true)),
             )
           ]),
         ),

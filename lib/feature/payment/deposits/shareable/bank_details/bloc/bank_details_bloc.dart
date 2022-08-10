@@ -1,21 +1,26 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/domain/base_response.dart';
+import '../../../repository/bank_details_repository.dart';
+import '../domain/add_bank_account_request.dart';
 
 part 'bank_details_event.dart';
 
 part 'bank_details_state.dart';
 
 class BankDetailsBloc extends Bloc<BankDetailsEvent, BankDetailsState> {
-  BankDetailsBloc() : super(const BankDetailsState()) {
+  BankDetailsBloc({required BankDetailsRepository bankDetailsRepository})
+      : _bankDetailsRepository = bankDetailsRepository,
+        super(const BankDetailsState()) {
     on<BankAccountNumberChanged>(_onBankAccountNumberChanged);
     on<BankAccountNameChanged>(_onBankAccountNameChanged);
     on<ConfirmBankAccountNumberChanged>(_onConfirmBankAccountNumberChanged);
     on<BankDetailsReset>(_onBankDetailsReset);
     on<BankDetailsSubmitted>(_onBankDetailsSubmitted);
   }
+
+  final BankDetailsRepository _bankDetailsRepository;
 
   void _onBankAccountNumberChanged(
     BankAccountNumberChanged event,
@@ -66,18 +71,13 @@ class BankDetailsBloc extends Bloc<BankDetailsEvent, BankDetailsState> {
       emit(state.copyWith(
           response: BaseResponse.error('Account name should not be empty!')));
     } else {
-      // if shouldValidateName is true then assuming the flow is coming from fps/wire transfer method.
-      if (event.shouldValidateName) {
-        emit(state.copyWith(
-            response: BaseResponse.complete(CompleteStep.others)));
-      } else {
+      try {
         emit(state.copyWith(response: BaseResponse.loading()));
-        await Future.delayed(const Duration(seconds: 1));
-        emit(state.copyWith(
-            response: BaseResponse.complete(CompleteStep.eddaFirstStep)));
-        await Future.delayed(const Duration(seconds: 1));
-        emit(state.copyWith(
-            response: BaseResponse.complete(CompleteStep.eddaSecondStep)));
+        var data = await _bankDetailsRepository.addBankAccount(
+            addBankAccountRequest: event.addBankAccountRequest);
+        emit(state.copyWith(response: data));
+      } catch (e) {
+        emit(state.copyWith(response: BaseResponse.error(e.toString())));
       }
     }
   }

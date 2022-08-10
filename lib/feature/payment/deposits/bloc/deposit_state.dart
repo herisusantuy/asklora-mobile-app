@@ -2,6 +2,21 @@ part of 'deposit_bloc.dart';
 
 enum DepositMethod { wire, fps, eDda }
 
+extension Type on DepositMethod {
+  String get value {
+    switch (this) {
+      case DepositMethod.wire:
+        return 'WIRE';
+      case DepositMethod.fps:
+        return 'FPS';
+      case DepositMethod.eDda:
+        return 'EDDA';
+      default:
+        return '';
+    }
+  }
+}
+
 enum DepositPageStep {
   welcome,
   depositMethod,

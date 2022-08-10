@@ -5,6 +5,7 @@ class BankDetailsSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _delayedNextStep(context);
     return BlocListener<BankDetailsBloc, BankDetailsState>(
         listener: (context, state) {
           if (state.response.data == CompleteStep.eddaSecondStep) {
@@ -32,5 +33,11 @@ class BankDetailsSuccessScreen extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  void _delayedNextStep(BuildContext context) {
+    Future.delayed(const Duration(seconds: 1)).then((value) => context
+        .read<DepositBloc>()
+        .add(const PageChanged(DepositPageStep.eDdaDepositAmount)));
   }
 }

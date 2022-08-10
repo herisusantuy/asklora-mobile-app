@@ -44,7 +44,9 @@ class DepositScreen extends StatelessWidget {
         BlocProvider(
             create: (_) => UploadProofOfRemittanceBloc(
                 filePickerRepository: FilePickerRepository())),
-        BlocProvider(create: (_) => BankDetailsBloc()),
+        BlocProvider(
+            create: (_) => BankDetailsBloc(
+                bankDetailsRepository: BankDetailsRepository())),
         BlocProvider(create: (_) => AmountBloc()),
       ],
       child: Scaffold(
