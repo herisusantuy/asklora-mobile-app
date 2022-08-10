@@ -14,6 +14,7 @@ import '../widget/custom_deposit_widget.dart';
 import 'bloc/bank_details_bloc.dart';
 
 part '../../edda/presentation/bank_details_progress_screen.dart';
+
 part '../../edda/presentation/bank_details_success_screen.dart';
 
 class EddaBankAccountDetailsScreen extends StatelessWidget {
@@ -83,9 +84,11 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
                         paddingBottom: 18,
                       ),
                       _text(
+                          key: const Key('bank_details_minimum_amount_label'),
                           'Please Note that there is a minimum deposit amount of HKD10,000 when adding a new bank account',
                           fontType: FontType.smallTextBold),
                       _text(
+                          key: const Key('bank_details_continue_button_label'),
                           r"By clicking 'Continue', you indicate that you have read and agreed to the bound by the General Client Agreement and the associated terms with Electronic Direct Debit Authorization",
                           bottomPadding: 0),
                       CustomPaymentButton(
@@ -107,8 +110,10 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
 
   Widget _text(String text,
           {FontType fontType = FontType.smallText,
+          Key key = const Key(''),
           double bottomPadding = 18}) =>
       CustomText(
+        key: key,
         text,
         padding: EdgeInsets.only(top: 10, bottom: bottomPadding),
         type: fontType,

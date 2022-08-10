@@ -4,8 +4,8 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../shareable/widget/custom_deposit_widget.dart';
 
-class InformationScreen extends StatelessWidget {
-  const InformationScreen({Key? key}) : super(key: key);
+class FpsInformationScreen extends StatelessWidget {
+  const FpsInformationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

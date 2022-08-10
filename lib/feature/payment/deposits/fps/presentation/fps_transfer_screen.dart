@@ -7,8 +7,8 @@ import '../../shareable/widget/custom_deposit_widget.dart';
 import '../../shareable/widget/custom_row_text.dart';
 import '../../shareable/widget/deposit_next_button.dart';
 
-class TransferScreen extends StatelessWidget {
-  const TransferScreen({Key? key}) : super(key: key);
+class FpsTransferScreen extends StatelessWidget {
+  const FpsTransferScreen({Key? key}) : super(key: key);
 
   final String fpsId = '123456789';
 
@@ -16,19 +16,23 @@ class TransferScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       backTo: DepositPageStep.eDdaBankDetails,
-      // navigationButton:
+      title: 'FPS Transfer',
       child: ListView(
         children: [
           const CustomText(
             'Please transfer to AskLORA’s bank account using your bank app',
           ),
+          const CustomText(
+            'Please note there is a minimum deposit amount of HKD10,000 for users who are depositing with a new bank account',
+            padding: EdgeInsets.symmetric(vertical: 20),
+          ),
           CustomCardCopyText(
             key: const Key('fps_id_card'),
             keyCopyButton: const Key('fps_id_card_copy_button'),
-            label: 'FPS ID',
+            label: 'AskLORA’s FPS ID',
             text: fpsId,
             message: '$fpsId Copied',
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           ),

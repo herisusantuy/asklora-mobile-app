@@ -38,10 +38,10 @@ class WireTransferScreen extends StatelessWidget {
           _cardCopyText('Swift Code.', 'DHBKHKHH', 'Swift Code Copied',
               key: 'deposit_swift_code_card'),
           _cardCopyText(
+            key: 'deposit_bank_address_card',
             'Bank Address',
             'G/F, The Center, 99 Queen`s Road Central, Central, Hong Kong',
             'Bank Address Copied',
-            key: 'deposit_bank_address_card',
             textAlign: TextAlign.start,
           ),
           const DepositNextButton(
