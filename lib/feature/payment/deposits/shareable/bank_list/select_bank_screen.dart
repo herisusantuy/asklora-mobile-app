@@ -70,7 +70,7 @@ class SelectBankScreen extends StatelessWidget {
   DepositPageStep _backStep(DepositMethod? depositMethod) {
     switch (depositMethod) {
       case DepositMethod.eDda:
-        return DepositPageStep.eddaInitiate;
+        return DepositPageStep.eDdaInitiate;
       case DepositMethod.fps:
       case DepositMethod.wire:
       default:
