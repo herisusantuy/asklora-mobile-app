@@ -64,6 +64,7 @@ class CustomDropdown extends StatelessWidget {
               hint: CustomText(
                 hintName,
                 type: FontType.smallText,
+                color: value.isNotEmpty ? Colors.black : Colors.black26,
               ),
               value: dropdownValue,
               onChanged: (String? newValue) {

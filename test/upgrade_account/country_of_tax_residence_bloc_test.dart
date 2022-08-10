@@ -32,7 +32,8 @@ void main() async {
               const CountryOfTaxResidenceState(
                   countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
-                  tinNumber: ''),
+                  tinNumber: '',
+                  isHkIdValid: true),
               const CountryOfTaxResidenceState(
                   countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
@@ -51,7 +52,8 @@ void main() async {
               const CountryOfTaxResidenceState(
                   countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
-                  tinNumber: ''),
+                  tinNumber: '',
+                  isHkIdValid: true),
               const CountryOfTaxResidenceState(
                   countryNameOfTaxResidence: 'Hong Kong',
                   countryOfTaxResidence: 'HKG',
@@ -70,7 +72,8 @@ void main() async {
               const CountryOfTaxResidenceState(
                   countryNameOfTaxResidence: 'Canada',
                   countryOfTaxResidence: 'CAD',
-                  tinNumber: ''),
+                  tinNumber: '',
+                  isHkIdValid: true),
               const CountryOfTaxResidenceState(
                   countryNameOfTaxResidence: 'Canada',
                   countryOfTaxResidence: 'CAD',
