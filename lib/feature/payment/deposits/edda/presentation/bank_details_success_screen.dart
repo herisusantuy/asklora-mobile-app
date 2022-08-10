@@ -6,33 +6,25 @@ class BankDetailsSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _delayedNextStep(context);
-    return BlocListener<BankDetailsBloc, BankDetailsState>(
-        listener: (context, state) {
-          if (state.response.data == CompleteStep.eddaSecondStep) {
-            context
-                .read<DepositBloc>()
-                .add(const PageChanged(DepositPageStep.eDdaDepositAmount));
-          }
-        },
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CustomText(
-                'Nice',
-                type: FontType.h2,
-                padding: EdgeInsets.only(bottom: 20),
-              ),
-              CustomText(
-                'Some text about it being done',
-                padding: EdgeInsets.only(bottom: 20),
-                textAlign: TextAlign.center,
-              ),
-            ],
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          CustomText(
+            'Nice',
+            type: FontType.h2,
+            padding: EdgeInsets.only(bottom: 20),
           ),
-        ));
+          CustomText(
+            'Some text about it being done',
+            padding: EdgeInsets.only(bottom: 20),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
   }
 
   void _delayedNextStep(BuildContext context) {
