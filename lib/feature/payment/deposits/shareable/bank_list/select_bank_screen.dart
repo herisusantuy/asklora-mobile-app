@@ -16,8 +16,7 @@ class SelectBankScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
         title: 'Please Select a Bank',
-        backTo: _backStep(
-            BlocProvider.of<DepositBloc>(context).state.depositMethod),
+        backTo: _backStep(context.read<DepositBloc>().state.depositMethod),
         child: Column(children: [
           ClearableTextFormField(
             key: const Key('deposit_search_bank_input'),

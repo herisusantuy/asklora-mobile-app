@@ -24,14 +24,11 @@ class BankAccountDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<BankDetailsBloc, BankDetailsState>(
-      listenWhen: (context, state) =>
-          (state.response.state == ResponseState.success ||
-              state.response.state == ResponseState.error),
+      listenWhen: (previous, current) =>
+          previous.response.state != current.response.state,
       listener: (context, state) {
         if (state.response.state == ResponseState.success) {
-          var depositMethod =
-              BlocProvider.of<DepositBloc>(context).state.depositMethod;
-          print('METHOD $depositMethod');
+          var depositMethod = context.read<DepositBloc>().state.depositMethod;
           if (depositMethod == DepositMethod.wire) {
             context
                 .read<DepositBloc>()

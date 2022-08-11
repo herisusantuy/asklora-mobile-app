@@ -42,13 +42,11 @@ enum DepositPageStep {
 
 class DepositState extends Equatable {
   final DepositPageStep depositPages;
-  final DepositPageStep? previousDepositPages;
   final BankDetails? bankDetails;
   final DepositMethod? depositMethod;
 
   const DepositState({
     this.depositPages = DepositPageStep.unknown,
-    this.previousDepositPages,
     this.bankDetails,
     this.depositMethod,
   }) : super();
@@ -58,13 +56,11 @@ class DepositState extends Equatable {
 
   DepositState copyWith({
     DepositPageStep? depositPages,
-    DepositPageStep? previousDepositPages,
     BankDetails? bankDetails,
     DepositMethod? depositMethod,
   }) {
     return DepositState(
       depositPages: depositPages ?? this.depositPages,
-      previousDepositPages: previousDepositPages ?? this.previousDepositPages,
       bankDetails: bankDetails ?? this.bankDetails,
       depositMethod: depositMethod ?? this.depositMethod,
     );

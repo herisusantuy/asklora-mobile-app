@@ -15,9 +15,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
   }
 
   void _onPageChanged(PageChanged event, Emitter<DepositState> emit) {
-    emit(state.copyWith(
-        depositPages: event.depositPages,
-        previousDepositPages: state.depositPages));
+    emit(state.copyWith(depositPages: event.depositPages));
   }
 
   void _onDepositMethodSelected(
@@ -28,7 +26,6 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
   void _onBankSelected(BankSelected event, Emitter<DepositState> emit) {
     emit(state.copyWith(
         bankDetails: event.bankDetails,
-        depositPages: DepositPageStep.eDdaBankDetails,
-        previousDepositPages: state.depositPages));
+        depositPages: DepositPageStep.eDdaBankDetails));
   }
 }

@@ -27,9 +27,8 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<BankDetailsBloc, BankDetailsState>(
-        listenWhen: (context, state) =>
-            (state.response.state == ResponseState.loading ||
-                state.response.state == ResponseState.error),
+        listenWhen: (previous, current) =>
+            previous.response.state != current.response.state,
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
             context.read<DepositBloc>().add(

@@ -1,7 +1,5 @@
 part of 'bank_details_bloc.dart';
 
-enum CompleteStep { eddaFirstStep, eddaSecondStep, others }
-
 class BankDetailsState extends Equatable {
   final String bankAccountNumber;
   final String confirmBankAccountNumber;
