@@ -16,10 +16,12 @@ void main() async {
     }
 
     testWidgets('Render Deposit Edda Bank Details Success Screen',
-        (tester) async {
-      await _buildBankDetailsSuccessScreen(tester);
-      expect(find.text('Nice'), findsOneWidget);
-      expect(find.text('Some text about it being done'), findsOneWidget);
+        (WidgetTester tester) async {
+      await tester.runAsync(() async {
+        await _buildBankDetailsSuccessScreen(tester);
+        expect(find.text('Nice'), findsOneWidget);
+        expect(find.text('Some text about it being done'), findsOneWidget);
+      });
     });
   });
 }

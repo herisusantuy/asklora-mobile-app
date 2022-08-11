@@ -36,8 +36,11 @@ class BankAccountNameChanged extends BankDetailsEvent {
 
 class BankDetailsSubmitted extends BankDetailsEvent {
   final bool shouldValidateName;
+  final AddBankAccountRequest addBankAccountRequest;
 
-  const BankDetailsSubmitted({this.shouldValidateName = false}) : super();
+  const BankDetailsSubmitted(
+      {required this.addBankAccountRequest, this.shouldValidateName = false})
+      : super();
 
   @override
   List<Object> get props => [];

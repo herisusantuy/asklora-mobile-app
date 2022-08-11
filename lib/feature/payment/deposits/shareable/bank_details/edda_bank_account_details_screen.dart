@@ -12,6 +12,7 @@ import '../../bloc/deposit_bloc.dart';
 import '../bank_list/domain/bank_details.dart';
 import '../widget/custom_deposit_widget.dart';
 import 'bloc/bank_details_bloc.dart';
+import 'domain/add_bank_account_request.dart';
 
 part '../../edda/presentation/bank_details_progress_screen.dart';
 
@@ -26,9 +27,8 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<BankDetailsBloc, BankDetailsState>(
-        listenWhen: (context, state) =>
-            (state.response.state == ResponseState.loading ||
-                state.response.state == ResponseState.error),
+        listenWhen: (previous, current) =>
+            previous.response.state != current.response.state,
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
             context.read<DepositBloc>().add(
@@ -98,7 +98,19 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
                             state.confirmBankAccountNumber.isEmpty,
                         title: 'Continue',
                         onSubmit: () => context.read<BankDetailsBloc>().add(
-                            const BankDetailsSubmitted(
+                            BankDetailsSubmitted(
+                                addBankAccountRequest: AddBankAccountRequest(
+                                    name: state.bankAccountName,
+                                    bankCodeType: 'HKD',
+                                    accountName: state.bankAccountName,
+                                    accountNumber: state.bankAccountNumber,
+                                    bankCode: bankDetails?.swiftBic ?? '',
+                                    bankTransferType: context
+                                            .read<DepositBloc>()
+                                            .state
+                                            .depositMethod
+                                            ?.value ??
+                                        ''),
                                 shouldValidateName: false)),
                       )
                     ]))));

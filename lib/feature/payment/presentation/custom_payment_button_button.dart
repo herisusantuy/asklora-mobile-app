@@ -4,12 +4,14 @@ import '../../../../core/presentation/custom_text_button.dart';
 class CustomPaymentButton extends StatelessWidget {
   final String title;
   final bool disable;
+  final bool isLoading;
   final Function onSubmit;
 
   const CustomPaymentButton(
       {required this.title,
       required this.onSubmit,
       this.disable = true,
+      this.isLoading = false,
       Key? key})
       : super(key: key);
 
@@ -18,6 +20,7 @@ class CustomPaymentButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(32),
       child: CustomTextButton(
+        isLoading: isLoading,
         height: 40,
         disable: disable,
         buttonText: title,

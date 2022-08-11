@@ -304,9 +304,7 @@ class BasicInformationForm extends StatelessWidget {
   Widget _nextButton(BuildContext context) => Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: BlocConsumer<BasicInformationBloc, BasicInformationState>(
-          listenWhen: (context, state) =>
-              (state.status == ResponseState.error ||
-                  state.status == ResponseState.success),
+          listenWhen: (previous, current) => previous.status != current.status,
           listener: (context, state) => {
             if (state.status == ResponseState.error)
               {

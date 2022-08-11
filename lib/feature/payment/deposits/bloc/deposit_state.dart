@@ -2,6 +2,21 @@ part of 'deposit_bloc.dart';
 
 enum DepositMethod { wire, fps, eDda }
 
+extension Type on DepositMethod {
+  String get value {
+    switch (this) {
+      case DepositMethod.wire:
+        return 'WIRE';
+      case DepositMethod.fps:
+        return 'FPS';
+      case DepositMethod.eDda:
+        return 'EDDA';
+      default:
+        return '';
+    }
+  }
+}
+
 enum DepositPageStep {
   welcome,
   depositMethod,
@@ -27,13 +42,11 @@ enum DepositPageStep {
 
 class DepositState extends Equatable {
   final DepositPageStep depositPages;
-  final DepositPageStep? previousDepositPages;
   final BankDetails? bankDetails;
   final DepositMethod? depositMethod;
 
   const DepositState({
     this.depositPages = DepositPageStep.unknown,
-    this.previousDepositPages,
     this.bankDetails,
     this.depositMethod,
   }) : super();
@@ -43,13 +56,11 @@ class DepositState extends Equatable {
 
   DepositState copyWith({
     DepositPageStep? depositPages,
-    DepositPageStep? previousDepositPages,
     BankDetails? bankDetails,
     DepositMethod? depositMethod,
   }) {
     return DepositState(
       depositPages: depositPages ?? this.depositPages,
-      previousDepositPages: previousDepositPages ?? this.previousDepositPages,
       bankDetails: bankDetails ?? this.bankDetails,
       depositMethod: depositMethod ?? this.depositMethod,
     );
