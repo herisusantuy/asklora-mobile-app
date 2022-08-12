@@ -16,6 +16,14 @@ class PageChanged extends DepositEvent {
   List<Object?> get props => [depositPages];
 }
 
+class PageBack extends DepositEvent {
+
+  const PageBack() : super();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class DepositMethodSelected extends DepositEvent {
   final DepositMethod depositMethod;
 

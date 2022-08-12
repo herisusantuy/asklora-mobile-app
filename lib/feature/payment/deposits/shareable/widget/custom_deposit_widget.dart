@@ -30,7 +30,7 @@ class CustomDepositWidget extends StatelessWidget {
 
   void _onTapBack(BuildContext context) {
     backTo != null
-        ? context.read<DepositBloc>().add(PageChanged(backTo!))
+        ? context.read<DepositBloc>().add(const PageBack())
         : Navigator.pop(context);
     if (onBackPressed != null) {
       onBackPressed!();
