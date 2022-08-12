@@ -15,6 +15,19 @@ extension Type on DepositMethod {
         return '';
     }
   }
+
+  String get name {
+    switch (this) {
+      case DepositMethod.wire:
+        return 'Wire';
+      case DepositMethod.fps:
+        return 'FPS';
+      case DepositMethod.eDda:
+        return 'eDDA';
+      default:
+        return '';
+    }
+  }
 }
 
 enum DepositPageStep {
@@ -26,6 +39,7 @@ enum DepositPageStep {
   fpsTransfer,
   uploadProof,
   acknowledged,
+  returningUser,
   selectBank,
   wireTransferBankDetails,
   fpsBankDetails,
@@ -44,25 +58,31 @@ class DepositState extends Equatable {
   final DepositPageStep depositPages;
   final BankDetails? bankDetails;
   final DepositMethod? depositMethod;
+  final BaseResponse<RegisteredBankAccount>? registeredBankAccountResponse;
 
   const DepositState({
     this.depositPages = DepositPageStep.unknown,
     this.bankDetails,
     this.depositMethod,
+    this.registeredBankAccountResponse,
   }) : super();
 
   @override
-  List<Object?> get props => [depositPages, bankDetails, depositMethod];
+  List<Object?> get props =>
+      [depositPages, bankDetails, depositMethod, registeredBankAccountResponse];
 
   DepositState copyWith({
     DepositPageStep? depositPages,
     BankDetails? bankDetails,
     DepositMethod? depositMethod,
+    BaseResponse<RegisteredBankAccount>? registeredBankAccountResponse,
   }) {
     return DepositState(
       depositPages: depositPages ?? this.depositPages,
       bankDetails: bankDetails ?? this.bankDetails,
       depositMethod: depositMethod ?? this.depositMethod,
+      registeredBankAccountResponse:
+          registeredBankAccountResponse ?? this.registeredBankAccountResponse,
     );
   }
 }

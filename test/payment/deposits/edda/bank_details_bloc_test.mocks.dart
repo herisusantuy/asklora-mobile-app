@@ -9,8 +9,10 @@ import 'package:asklora_mobile_app/feature/payment/deposits/repository/bank_deta
     as _i3;
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/add_bank_account_request.dart'
     as _i5;
-import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/domain/bank_details.dart'
+import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/registered_bank_account.dart'
     as _i6;
+import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/domain/bank_details.dart'
+    as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -46,8 +48,16 @@ class MockBankDetailsRepository extends _i1.Mock
           as _i4.Future<_i2.BaseResponse<_i5.AddBankAccountRequest>>);
 
   @override
-  _i4.Future<List<_i6.BankDetails>> getBankDetails() => (super.noSuchMethod(
+  _i4.Future<_i2.BaseResponse<_i6.RegisteredBankAccount>> getBankAccount() =>
+      (super.noSuchMethod(Invocation.method(#getBankAccount, []),
+              returnValue:
+                  Future<_i2.BaseResponse<_i6.RegisteredBankAccount>>.value(
+                      _FakeBaseResponse_0<_i6.RegisteredBankAccount>()))
+          as _i4.Future<_i2.BaseResponse<_i6.RegisteredBankAccount>>);
+
+  @override
+  _i4.Future<List<_i7.BankDetails>> getBankDetails() => (super.noSuchMethod(
           Invocation.method(#getBankDetails, []),
-          returnValue: Future<List<_i6.BankDetails>>.value(<_i6.BankDetails>[]))
-      as _i4.Future<List<_i6.BankDetails>>);
+          returnValue: Future<List<_i7.BankDetails>>.value(<_i7.BankDetails>[]))
+      as _i4.Future<List<_i7.BankDetails>>);
 }

@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import '../../../../core/domain/base_response.dart';
 import '../shareable/bank_details/domain/add_bank_account_request.dart';
 import '../shareable/bank_details/domain/bank_details_api_client.dart';
+import '../shareable/bank_details/domain/get_bank_account_response.dart';
+import '../shareable/bank_details/domain/registered_bank_account.dart';
 import '../shareable/bank_list/domain/bank_details.dart';
 
 class BankDetailsRepository {
@@ -16,6 +18,12 @@ class BankDetailsRepository {
     var response =
         await _bankDetailsApiClient.addBankAccount(addBankAccountRequest);
     return BaseResponse.complete(AddBankAccountRequest.fromJson(response.data));
+  }
+
+  Future<BaseResponse<RegisteredBankAccount>> getBankAccount() async {
+    var response = await _bankDetailsApiClient.getBankAccount();
+    return BaseResponse.complete(RegisteredBankAccount(List<BankDetail>.from(
+        response.data.map((model) => BankDetail.fromJson(model)))));
   }
 
   Future<List<BankDetails>> getBankDetails() async {

@@ -10,4 +10,7 @@ class BankDetailsApiClient {
   Future<Response> addBankAccount(AddBankAccountRequest request) async =>
       await AskloraApiClient().post(
           endpoint: endpointBankAccount, payload: jsonEncode(request.toJson()));
+
+  Future<Response> getBankAccount() async =>
+      await AskloraApiClient().get(endpoint: endpointBankAccount);
 }
