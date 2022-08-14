@@ -3,11 +3,11 @@ import 'package:equatable/equatable.dart';
 import 'get_bank_account_response.dart';
 
 class RegisteredBankAccount extends Equatable {
-  late final List<BankDetail>? fpsBankAccount;
-  late final List<BankDetail>? wireBankAccount;
-  late final List<BankDetail>? eDdaBankAccount;
+  late final List<GetBankAccountResponse>? fpsBankAccount;
+  late final List<GetBankAccountResponse>? wireBankAccount;
+  late final List<GetBankAccountResponse>? eDdaBankAccount;
 
-  RegisteredBankAccount(List<BankDetail> getBankAccountResponse) {
+  RegisteredBankAccount(List<GetBankAccountResponse> getBankAccountResponse) {
     fpsBankAccount = List.from((getBankAccountResponse)
         .where((bankDetail) => bankDetail.bankTransferType!.contains('FPS')));
     wireBankAccount = List.from((getBankAccountResponse)

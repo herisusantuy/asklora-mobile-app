@@ -5,21 +5,6 @@ part 'get_bank_account_response.g.dart';
 
 @JsonSerializable()
 class GetBankAccountResponse extends Equatable {
-  final List<BankDetail>? bankDetailList;
-
-  const GetBankAccountResponse(this.bankDetailList);
-
-  factory GetBankAccountResponse.fromJson(Map<String, dynamic> json) =>
-      _$GetBankAccountResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$GetBankAccountResponseToJson(this);
-
-  @override
-  List<Object?> get props => [bankDetailList];
-}
-
-@JsonSerializable()
-class BankDetail extends Equatable {
   final String? uid;
   final String? country;
   @JsonKey(name: 'state_province')
@@ -41,7 +26,7 @@ class BankDetail extends Equatable {
   @JsonKey(name: 'account_number')
   final String? accountNumber;
 
-  const BankDetail(
+  const GetBankAccountResponse(
       this.stateProvince,
       this.bankType,
       this.uid,
@@ -55,10 +40,10 @@ class BankDetail extends Equatable {
       this.city,
       this.streetAddress);
 
-  factory BankDetail.fromJson(Map<String, dynamic> json) =>
-      _$BankDetailFromJson(json);
+  factory GetBankAccountResponse.fromJson(Map<String, dynamic> json) =>
+      _$GetBankAccountResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BankDetailToJson(this);
+  Map<String, dynamic> toJson() => _$GetBankAccountResponseToJson(this);
 
   @override
   List<Object?> get props => [

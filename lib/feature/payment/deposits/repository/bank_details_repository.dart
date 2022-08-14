@@ -22,8 +22,9 @@ class BankDetailsRepository {
 
   Future<BaseResponse<RegisteredBankAccount>> getBankAccount() async {
     var response = await _bankDetailsApiClient.getBankAccount();
-    return BaseResponse.complete(RegisteredBankAccount(List<BankDetail>.from(
-        response.data.map((model) => BankDetail.fromJson(model)))));
+    return BaseResponse.complete(RegisteredBankAccount(
+        List<GetBankAccountResponse>.from(response.data
+            .map((model) => GetBankAccountResponse.fromJson(model)))));
   }
 
   Future<List<BankDetails>> getBankDetails() async {
