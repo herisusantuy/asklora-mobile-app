@@ -47,7 +47,6 @@ class BankAccountDetailsScreen extends StatelessWidget {
       },
       child: CustomDepositWidget(
         title: 'Your Bank Details',
-        backTo: DepositPageStep.selectBank,
         onBackPressed: () =>
             context.read<BankDetailsBloc>().add(const BankDetailsReset()),
         child: BlocBuilder<BankDetailsBloc, BankDetailsState>(

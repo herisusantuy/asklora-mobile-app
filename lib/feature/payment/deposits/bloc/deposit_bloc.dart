@@ -11,78 +11,95 @@ part 'deposit_event.dart';
 part 'deposit_state.dart';
 
 class DepositBloc extends Bloc<DepositEvent, DepositState> {
-  DepositBloc({required BankDetailsRepository bankDetailsRepository})
+  DepositBloc(
+      {required BankDetailsRepository bankDetailsRepository,
+      DepositPageStep initialDepositPageStep = DepositPageStep.welcome})
       : _bankDetailsRepository = bankDetailsRepository,
-        super(const DepositState()) {
-    on<PageChanged>(_onPageNext);
+        _initialDepositPageStep = initialDepositPageStep,
+        super(DepositState(depositPages: initialDepositPageStep)) {
+    on<PageChanged>(_onPageChanged);
+    on<PageChangedReplacement>(_onPageChangedReplacement);
+    on<PageChangedRemoveUntil>(_onPageChangedRemoveUntil);
+    on<PagePop>(_onPagePop);
     on<BankSelected>(_onBankSelected);
     on<DepositMethodSelected>(_onDepositMethodSelected);
     on<RegisteredBankAccountCheck>(_onReturningUserCheck);
-    on<PageBack>(_onPageBack);
+    _depositPageStepList = [_initialDepositPageStep];
   }
 
+  final DepositPageStep _initialDepositPageStep;
   final BankDetailsRepository _bankDetailsRepository;
-  List<DepositPageStep> depositPageStepList = [DepositPageStep.welcome];
+  late List<DepositPageStep> _depositPageStepList;
 
-  void _onPageNext(PageChanged event, Emitter<DepositState> emit) {
-    print('NEXT PRESSED');
-    depositPageStepList.add(event.depositPages);
+  void _onPageChanged(PageChanged event, Emitter<DepositState> emit) {
+    _depositPageStepList.add(event.depositPages);
     emit(state.copyWith(depositPages: event.depositPages));
   }
 
-  void _onPageBack(PageBack event, Emitter<DepositState> emit){
-    print('BACK PRESSED');
-    if(depositPageStepList.length>1){
-      depositPageStepList.removeLast();
-    }
-    emit(state.copyWith(depositPages: depositPageStepList.last));
+  void _onPageChangedReplacement(
+      PageChangedReplacement event, Emitter<DepositState> emit) {
+    if (_depositPageStepList.length > 1) _depositPageStepList.removeLast();
+    _depositPageStepList.add(event.depositPages);
+    emit(state.copyWith(depositPages: event.depositPages));
   }
+
+  void _onPageChangedRemoveUntil(
+      PageChangedRemoveUntil event, Emitter<DepositState> emit) {
+    int find = _depositPageStepList.lastIndexOf(event.removeUntil);
+    if (find != -1) {
+      _depositPageStepList.removeRange(find + 1, _depositPageStepList.length);
+    } else {
+      _depositPageStepList.removeRange(1, _depositPageStepList.length);
+    }
+    _depositPageStepList.add(event.depositPages);
+    emit(state.copyWith(depositPages: event.depositPages));
+  }
+
+  void _onPagePop(PagePop event, Emitter<DepositState> emit) {
+    if (_depositPageStepList.length > 1) {
+      _depositPageStepList.removeLast();
+    }
+    emit(state.copyWith(depositPages: _depositPageStepList.last));
+  }
+
   void _onDepositMethodSelected(
       DepositMethodSelected event, Emitter<DepositState> emit) {
     var registeredBankAccount = state.registeredBankAccountResponse!.data!;
+    DepositPageStep depositPageStep;
     if (event.depositMethod == DepositMethod.fps &&
             registeredBankAccount.fpsBankAccount!.isNotEmpty ||
         event.depositMethod == DepositMethod.wire &&
             registeredBankAccount.wireBankAccount!.isNotEmpty ||
         event.depositMethod == DepositMethod.eDda &&
             registeredBankAccount.eDdaBankAccount!.isNotEmpty) {
-      depositPageStepList.add(DepositPageStep.returningUser);
-      emit(state.copyWith(
-          depositMethod: event.depositMethod,
-          depositPages: DepositPageStep.returningUser));
-
+      depositPageStep = DepositPageStep.returningUser;
     } else {
-      depositPageStepList.add(DepositPageStep.selectBank);
-      emit(state.copyWith(
-          depositMethod: event.depositMethod,
-          depositPages: DepositPageStep.selectBank));
+      depositPageStep = DepositPageStep.selectBank;
     }
+    emit(state.copyWith(
+        depositMethod: event.depositMethod, depositPages: depositPageStep));
+    add(PageChanged(depositPageStep));
   }
 
   void _onBankSelected(BankSelected event, Emitter<DepositState> emit) {
-    emit(state.copyWith(
-        bankDetails: event.bankDetails,
-        depositPages: DepositPageStep.eDdaBankDetails));
+    emit(state.copyWith(bankDetails: event.bankDetails));
+    add(const PageChangedRemoveUntil(
+        DepositPageStep.eDdaBankDetails, DepositPageStep.welcome));
   }
 
   void _onReturningUserCheck(
       RegisteredBankAccountCheck event, Emitter<DepositState> emit) async {
-    emit(state.copyWith(registeredBankAccountResponse: BaseResponse.loading()));
-
-    var response = await _bankDetailsRepository.getBankAccount();
-    depositPageStepList.add(DepositPageStep.depositMethod);
-    emit(state.copyWith(
-        registeredBankAccountResponse: response,
-        depositPages: DepositPageStep.depositMethod));
-    // try {
-    //   emit(state.copyWith(registeredBankAccountResponse: BaseResponse.loading()));
-    //
-    //   var response = await _bankDetailsRepository.getBankAccount();
-    //   print('halo');
-    //   emit(state.copyWith(registeredBankAccountResponse: response, depositPages: DepositPageStep.depositMethod));
-    // } catch (e) {
-    //   print('error $e');
-    //   emit(state.copyWith(registeredBankAccountResponse: BaseResponse.error(e.toString())));
-    // }
+    try {
+      emit(state.copyWith(
+          registeredBankAccountResponse: BaseResponse.loading()));
+      var response = await _bankDetailsRepository.getBankAccount();
+      emit(state.copyWith(
+          registeredBankAccountResponse: response,
+          depositPages: DepositPageStep.depositMethod));
+      add(const PageChanged(DepositPageStep.depositMethod));
+    } catch (e) {
+      emit(state.copyWith(
+          registeredBankAccountResponse: BaseResponse.error(e.toString())));
+    }
   }
 }

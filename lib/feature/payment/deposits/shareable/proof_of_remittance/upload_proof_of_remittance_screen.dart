@@ -18,8 +18,6 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
     return BlocBuilder<DepositBloc, DepositState>(
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomDepositWidget(
-              backTo:
-                  _backStep(context.read<DepositBloc>().state.depositMethod),
               title: 'Upload Proof of Remittance',
               navigationButton: BlocBuilder<UploadProofOfRemittanceBloc,
                   UploadProofofRemittanceState>(
@@ -116,15 +114,4 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
           content
         ],
       ));
-
-  DepositPageStep _backStep(DepositMethod? depositMethod) {
-    switch (depositMethod) {
-      case DepositMethod.fps:
-        return DepositPageStep.fpsTransfer;
-      case DepositMethod.wire:
-        return DepositPageStep.wireTransfer;
-      default:
-        return DepositPageStep.depositMethod;
-    }
-  }
 }

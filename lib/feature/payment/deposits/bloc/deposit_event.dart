@@ -16,9 +16,27 @@ class PageChanged extends DepositEvent {
   List<Object?> get props => [depositPages];
 }
 
-class PageBack extends DepositEvent {
+class PageChangedReplacement extends DepositEvent {
+  final DepositPageStep depositPages;
 
-  const PageBack() : super();
+  const PageChangedReplacement(this.depositPages) : super();
+
+  @override
+  List<Object?> get props => [depositPages];
+}
+
+class PageChangedRemoveUntil extends DepositEvent {
+  final DepositPageStep depositPages;
+  final DepositPageStep removeUntil;
+
+  const PageChangedRemoveUntil(this.depositPages, this.removeUntil) : super();
+
+  @override
+  List<Object?> get props => [depositPages, removeUntil];
+}
+
+class PagePop extends DepositEvent {
+  const PagePop() : super();
 
   @override
   List<Object?> get props => [];

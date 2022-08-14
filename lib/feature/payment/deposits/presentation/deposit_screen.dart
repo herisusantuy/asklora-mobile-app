@@ -38,8 +38,9 @@ class DepositScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (_) =>
-                DepositBloc(bankDetailsRepository: BankDetailsRepository())),
+            create: (_) => DepositBloc(
+                bankDetailsRepository: BankDetailsRepository(),
+                initialDepositPageStep: initialDepositPages)),
         BlocProvider(
             create: (_) =>
                 SelectBankBloc(bankDetailsRepository: BankDetailsRepository())

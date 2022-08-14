@@ -11,7 +11,6 @@ class InitiateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPageStep.depositMethod,
       title: 'eDDA Transfer',
       child: ListView(children: [
         _text(

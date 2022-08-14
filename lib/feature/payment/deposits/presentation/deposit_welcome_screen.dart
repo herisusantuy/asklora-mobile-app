@@ -13,9 +13,11 @@ class DepositWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
+      onBackClosedDeposit: true,
       title: 'Deposit',
       navigationButton: BlocBuilder<DepositBloc, DepositState>(
         builder: (context, state) => CustomPaymentButton(
+          key: const Key('deposit_welcome_screen_next_button'),
           title: 'Next',
           onSubmit: () => context
               .read<DepositBloc>()

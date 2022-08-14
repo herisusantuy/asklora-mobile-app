@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
-import '../../bloc/deposit_bloc.dart';
 import '../../shareable/widget/custom_deposit_widget.dart';
 
 class EddaInformationScreen extends StatelessWidget {
@@ -10,7 +9,6 @@ class EddaInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPageStep.depositMethod,
       title: 'What is eDDA?',
       child: ListView(
         children: const [

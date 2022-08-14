@@ -7,7 +7,7 @@ import '../../bloc/deposit_bloc.dart';
 class CustomDepositWidget extends StatelessWidget {
   final String title;
   final Widget child;
-  final DepositPageStep? backTo;
+  final bool onBackClosedDeposit;
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;
@@ -17,20 +17,20 @@ class CustomDepositWidget extends StatelessWidget {
 
   const CustomDepositWidget(
       {required this.child,
-      this.backTo,
       this.onSubmit,
       this.disableButton = true,
       this.navigationButton,
       this.title = '',
       this.onBackPressed,
+      this.onBackClosedDeposit = false,
       this.crossAxisAlignment = CrossAxisAlignment.start,
       this.header,
       Key? key})
       : super(key: key);
 
   void _onTapBack(BuildContext context) {
-    backTo != null
-        ? context.read<DepositBloc>().add(const PageBack())
+    !onBackClosedDeposit
+        ? context.read<DepositBloc>().add(const PagePop())
         : Navigator.pop(context);
     if (onBackPressed != null) {
       onBackPressed!();
