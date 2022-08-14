@@ -53,22 +53,16 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   void _onReturningUserCheck(
       RegisteredBankAccountCheck event, Emitter<DepositState> emit) async {
-    emit(state.copyWith(registeredBankAccountResponse: BaseResponse.loading()));
-
-    var response = await _bankDetailsRepository.getBankAccount();
-    print('halo');
-    emit(state.copyWith(
-        registeredBankAccountResponse: response,
-        depositPages: DepositPageStep.depositMethod));
-    // try {
-    //   emit(state.copyWith(registeredBankAccountResponse: BaseResponse.loading()));
-    //
-    //   var response = await _bankDetailsRepository.getBankAccount();
-    //   print('halo');
-    //   emit(state.copyWith(registeredBankAccountResponse: response, depositPages: DepositPageStep.depositMethod));
-    // } catch (e) {
-    //   print('error $e');
-    //   emit(state.copyWith(registeredBankAccountResponse: BaseResponse.error(e.toString())));
-    // }
+    try {
+      emit(state.copyWith(
+          registeredBankAccountResponse: BaseResponse.loading()));
+      var response = await _bankDetailsRepository.getBankAccount();
+      emit(state.copyWith(
+          registeredBankAccountResponse: response,
+          depositPages: DepositPageStep.depositMethod));
+    } catch (e) {
+      emit(state.copyWith(
+          registeredBankAccountResponse: BaseResponse.error(e.toString())));
+    }
   }
 }
