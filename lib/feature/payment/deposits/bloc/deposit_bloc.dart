@@ -83,8 +83,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   void _onBankSelected(BankSelected event, Emitter<DepositState> emit) {
     emit(state.copyWith(bankDetails: event.bankDetails));
-    add(const PageChangedRemoveUntil(
-        DepositPageStep.eDdaBankDetails, DepositPageStep.welcome));
+    add(const PageChanged(DepositPageStep.eDdaBankDetails));
   }
 
   void _onReturningUserCheck(

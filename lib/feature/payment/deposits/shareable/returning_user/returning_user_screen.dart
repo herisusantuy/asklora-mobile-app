@@ -12,11 +12,10 @@ class ReturningUserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       title: _getTitle(context),
-      backTo: DepositPageStep.selectBank,
       child: ListView(
         children: [
           _text('Select Bank Account'),
-          CustomPaymentTextInformationWidget(
+          const CustomPaymentTextInformationWidget(
             label: '',
             title: '',
           )
