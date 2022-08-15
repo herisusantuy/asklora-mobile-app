@@ -58,13 +58,13 @@ class DepositState extends Equatable {
   final DepositPageStep depositPages;
   final BankDetails? bankDetails;
   final DepositMethod? depositMethod;
-  final BaseResponse<RegisteredBankAccount>? registeredBankAccountResponse;
+  final BaseResponse<RegisteredBankAccount> registeredBankAccountResponse;
 
   const DepositState({
     this.depositPages = DepositPageStep.unknown,
     this.bankDetails,
     this.depositMethod,
-    this.registeredBankAccountResponse,
+    this.registeredBankAccountResponse = const BaseResponse(),
   }) : super();
 
   @override

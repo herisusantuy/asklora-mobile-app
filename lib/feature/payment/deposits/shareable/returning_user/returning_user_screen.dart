@@ -16,6 +16,7 @@ class ReturningUserScreen extends StatelessWidget {
       child: ListView(
         children: [
           _text('Select Bank Account'),
+          _text('Deposit From', bottomPadding: 6),
           Column(
             children: _registeredBankAccount(context.read<DepositBloc>().state),
           ),
@@ -39,22 +40,24 @@ class ReturningUserScreen extends StatelessWidget {
   }
 
   List<Widget> _registeredBankAccount(DepositState depositState) {
-    List<GetBankAccountResponse> bankDetailList;
-    if (depositState.depositMethod == DepositMethod.wire) {
-      bankDetailList =
-          depositState.registeredBankAccountResponse!.data!.wireBankAccount!;
-    } else if (depositState.depositMethod == DepositMethod.fps) {
-      bankDetailList =
-          depositState.registeredBankAccountResponse!.data!.fpsBankAccount!;
-    } else {
-      bankDetailList =
-          depositState.registeredBankAccountResponse!.data!.eDdaBankAccount!;
+    List<GetBankAccountResponse> bankDetailList = [];
+    if (depositState.registeredBankAccountResponse.data != null) {
+      if (depositState.depositMethod == DepositMethod.wire) {
+        bankDetailList =
+            depositState.registeredBankAccountResponse.data!.wireBankAccount!;
+      } else if (depositState.depositMethod == DepositMethod.fps) {
+        bankDetailList =
+            depositState.registeredBankAccountResponse.data!.fpsBankAccount!;
+      } else {
+        bankDetailList =
+            depositState.registeredBankAccountResponse.data!.eDdaBankAccount!;
+      }
     }
+
     return bankDetailList
         .map(
           (item) => CustomPaymentTextInformationWidget(
             label: _getBankDetails(item),
-            title: 'Deposit From',
           ),
         )
         .toList();

@@ -28,7 +28,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   void _onDepositMethodSelected(
       DepositMethodSelected event, Emitter<DepositState> emit) {
-    var registeredBankAccount = state.registeredBankAccountResponse!.data!;
+    var registeredBankAccount = state.registeredBankAccountResponse.data!;
     if (event.depositMethod == DepositMethod.fps &&
             registeredBankAccount.fpsBankAccount!.isNotEmpty ||
         event.depositMethod == DepositMethod.wire &&
