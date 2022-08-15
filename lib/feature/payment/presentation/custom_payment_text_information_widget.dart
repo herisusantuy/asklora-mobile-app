@@ -8,10 +8,7 @@ class CustomPaymentTextInformationWidget extends StatelessWidget {
   final double paddingBottom;
 
   const CustomPaymentTextInformationWidget(
-      {this.title,
-      required this.label,
-      this.paddingBottom = 20,
-      Key? key})
+      {this.title, required this.label, this.paddingBottom = 20, Key? key})
       : super(key: key);
 
   @override
