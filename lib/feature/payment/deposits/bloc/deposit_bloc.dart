@@ -17,7 +17,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     on<PageChanged>(_onPageChanged);
     on<BankSelected>(_onBankSelected);
     on<DepositMethodSelected>(_onDepositMethodSelected);
-    on<RegisteredBankAccountCheck>(_onReturningUserCheck);
+    on<RegisteredBankAccountCheck>(_onRegisteredBankAccountCheck);
   }
 
   final BankDetailsRepository _bankDetailsRepository;
@@ -51,7 +51,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
         depositPages: DepositPageStep.eDdaBankDetails));
   }
 
-  void _onReturningUserCheck(
+  void _onRegisteredBankAccountCheck(
       RegisteredBankAccountCheck event, Emitter<DepositState> emit) async {
     try {
       emit(state.copyWith(
