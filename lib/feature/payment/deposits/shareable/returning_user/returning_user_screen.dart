@@ -18,7 +18,8 @@ class ReturningUserScreen extends StatelessWidget {
           _text('Select Bank Account'),
           _text('Deposit From', bottomPadding: 6),
           Column(
-            children: _registeredBankAccount(context.read<DepositBloc>().state),
+            children: _registeredBankAccount(
+                context, context.read<DepositBloc>().state),
           ),
           Center(child: _text('Or')),
           _text('Add a New Bank Account',
@@ -39,7 +40,8 @@ class ReturningUserScreen extends StatelessWidget {
     );
   }
 
-  List<Widget> _registeredBankAccount(DepositState depositState) {
+  List<Widget> _registeredBankAccount(
+      BuildContext context, DepositState depositState) {
     List<GetBankAccountResponse> bankDetailList = [];
     if (depositState.registeredBankAccountResponse.data != null) {
       if (depositState.depositMethod == DepositMethod.wire) {
@@ -56,8 +58,23 @@ class ReturningUserScreen extends StatelessWidget {
 
     return bankDetailList
         .map(
-          (item) => CustomPaymentTextInformationWidget(
-            label: _getBankDetails(item),
+          (item) => InkWell(
+            onTap: () {
+              var depositMethod =
+                  context.read<DepositBloc>().state.depositMethod;
+              DepositPageStep depositPageStep;
+              if (depositMethod == DepositMethod.wire) {
+                depositPageStep = DepositPageStep.wireTransfer;
+              } else if (depositMethod == DepositMethod.fps) {
+                depositPageStep = DepositPageStep.fpsTransfer;
+              } else {
+                depositPageStep = DepositPageStep.eDdaDepositAmount;
+              }
+              context.read<DepositBloc>().add(PageChanged(depositPageStep));
+            },
+            child: CustomPaymentTextInformationWidget(
+              label: _getBankDetails(item),
+            ),
           ),
         )
         .toList();
