@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_text.dart';
+import '../../presentation/custom_payment_button_button.dart';
 import '../bloc/deposit_bloc.dart';
 import '../shareable/widget/custom_deposit_widget.dart';
-import '../shareable/widget/deposit_next_button.dart';
 
 class DepositWelcomeScreen extends StatelessWidget {
   const DepositWelcomeScreen({Key? key}) : super(key: key);
@@ -12,10 +14,17 @@ class DepositWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       title: 'Deposit',
-      navigationButton: const DepositNextButton(
-        key: Key('deposit_welcome_screen_next_button'),
-        nextTo: DepositPageStep.depositMethod,
-        disable: false,
+      navigationButton: BlocBuilder<DepositBloc, DepositState>(
+        builder: (context, state) => CustomPaymentButton(
+          key: const Key('deposit_welcome_screen_next_button'),
+          title: 'Next',
+          onSubmit: () => context
+              .read<DepositBloc>()
+              .add(const RegisteredBankAccountCheck()),
+          isLoading: state.registeredBankAccountResponse.state ==
+              ResponseState.loading,
+          disable: false,
+        ),
       ),
       child: ListView(
         children: [

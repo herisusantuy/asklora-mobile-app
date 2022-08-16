@@ -6,7 +6,7 @@ import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../mocks/mocks.dart';
+import '../../../../mocks/mocks.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

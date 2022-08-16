@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../core/presentation/custom_text.dart';
 
 class CustomPaymentTextInformationWidget extends StatelessWidget {
-  final String title;
+  final String? title;
   final String label;
   final double paddingBottom;
 
   const CustomPaymentTextInformationWidget(
-      {required this.title,
-      required this.label,
-      this.paddingBottom = 20,
-      Key? key})
+      {this.title, required this.label, this.paddingBottom = 20, Key? key})
       : super(key: key);
 
   @override
@@ -21,13 +18,12 @@ class CustomPaymentTextInformationWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(
-            title,
-            type: FontType.smallTextBold,
-          ),
-          const SizedBox(
-            height: 6,
-          ),
+          if (title != null)
+            CustomText(
+              title!,
+              type: FontType.smallTextBold,
+              padding: const EdgeInsets.only(bottom: 6),
+            ),
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
