@@ -38,7 +38,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   void _onPageChangedReplacement(
       PageChangedReplacement event, Emitter<DepositState> emit) {
-    if (_depositPageStepList.length > 1) _depositPageStepList.removeLast();
+    _depositPageStepList.removeLast();
     _depositPageStepList.add(event.depositPages);
     emit(state.copyWith(depositPages: event.depositPages));
   }
@@ -49,17 +49,19 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     if (find != -1) {
       _depositPageStepList.removeRange(find + 1, _depositPageStepList.length);
     } else {
-      _depositPageStepList.removeRange(1, _depositPageStepList.length);
+      _depositPageStepList.removeRange(0, _depositPageStepList.length);
     }
     _depositPageStepList.add(event.depositPages);
     emit(state.copyWith(depositPages: event.depositPages));
   }
 
   void _onPagePop(PagePop event, Emitter<DepositState> emit) {
-    if (_depositPageStepList.length > 1) {
-      _depositPageStepList.removeLast();
+    _depositPageStepList.removeLast();
+    if (_depositPageStepList.isNotEmpty) {
+      emit(state.copyWith(depositPages: _depositPageStepList.last));
+    } else {
+      emit(state.copyWith(depositPages: DepositPageStep.unknown));
     }
-    emit(state.copyWith(depositPages: _depositPageStepList.last));
   }
 
   void _onDepositMethodSelected(

@@ -13,7 +13,6 @@ class DepositWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      onBackClosedDeposit: true,
       title: 'Deposit',
       navigationButton: BlocBuilder<DepositBloc, DepositState>(
         builder: (context, state) => CustomPaymentButton(

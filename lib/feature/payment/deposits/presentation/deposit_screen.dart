@@ -59,7 +59,14 @@ class DepositScreen extends StatelessWidget {
             elevation: 0,
             automaticallyImplyLeading: false,
           ),
-          body: BlocBuilder<DepositBloc, DepositState>(
+          body: BlocConsumer<DepositBloc, DepositState>(
+            listenWhen: (_, current) =>
+                current.depositPages == DepositPageStep.unknown,
+            listener: (context, state) {
+              if (state.depositPages == DepositPageStep.unknown) {
+                Navigator.pop(context);
+              }
+            },
             builder: (context, state) => _pages(state),
           )),
     );
