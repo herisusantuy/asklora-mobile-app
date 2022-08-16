@@ -66,6 +66,9 @@ void main() async {
                   depositPages: DepositPageStep.welcome,
                   registeredBankAccountResponse: BaseResponse.loading()),
               DepositState(
+                  depositPages: DepositPageStep.welcome,
+                  registeredBankAccountResponse: registeredBankAccountResponse),
+              DepositState(
                   depositPages: DepositPageStep.depositMethod,
                   registeredBankAccountResponse: registeredBankAccountResponse),
             });
@@ -88,8 +91,16 @@ void main() async {
                   depositPages: DepositPageStep.welcome,
                   registeredBankAccountResponse: BaseResponse.loading()),
               DepositState(
+                  depositPages: DepositPageStep.welcome,
+                  registeredBankAccountResponse: registeredBankAccountResponse),
+              DepositState(
                   depositPages: DepositPageStep.depositMethod,
                   registeredBankAccountResponse: registeredBankAccountResponse),
+              DepositState(
+                depositMethod: DepositMethod.fps,
+                depositPages: DepositPageStep.depositMethod,
+                registeredBankAccountResponse: registeredBankAccountResponse,
+              ),
               DepositState(
                 depositMethod: DepositMethod.fps,
                 depositPages: DepositPageStep.returningUser,
