@@ -22,7 +22,7 @@ class DepositWelcomeScreen extends StatelessWidget {
           onSubmit: () => context
               .read<DepositBloc>()
               .add(const RegisteredBankAccountCheck()),
-          isLoading: state.registeredBankAccountResponse?.state ==
+          isLoading: state.registeredBankAccountResponse.state ==
               ResponseState.loading,
           disable: false,
         ),

@@ -99,7 +99,7 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
                         onSubmit: () => context.read<BankDetailsBloc>().add(
                             BankDetailsSubmitted(
                                 addBankAccountRequest: AddBankAccountRequest(
-                                    name: state.bankAccountName,
+                                    name: bankDetails!.bankName,
                                     bankCodeType: 'HKD',
                                     accountName: state.bankAccountName,
                                     accountNumber: state.bankAccountNumber,

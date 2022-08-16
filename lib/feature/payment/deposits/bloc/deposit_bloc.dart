@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../repository/bank_details_repository.dart';
-import '../shareable/bank_details/domain/registered_bank_account.dart';
+import '../shareable/bank_details/domain/registered_bank_accounts.dart';
 import '../shareable/bank_list/domain/bank_details.dart';
 
 part 'deposit_event.dart';
@@ -23,7 +23,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     on<PagePop>(_onPagePop);
     on<BankSelected>(_onBankSelected);
     on<DepositMethodSelected>(_onDepositMethodSelected);
-    on<RegisteredBankAccountCheck>(_onReturningUserCheck);
+    on<RegisteredBankAccountCheck>(_onRegisteredBankAccountCheck);
     _depositPageStepList = [_initialDepositPageStep];
   }
 
@@ -64,14 +64,14 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   void _onDepositMethodSelected(
       DepositMethodSelected event, Emitter<DepositState> emit) {
-    var registeredBankAccount = state.registeredBankAccountResponse!.data!;
     DepositPageStep depositPageStep;
+    var registeredBankAccount = state.registeredBankAccountResponse.data!;
     if (event.depositMethod == DepositMethod.fps &&
-            registeredBankAccount.fpsBankAccount!.isNotEmpty ||
+            registeredBankAccount.fpsBankAccounts!.isNotEmpty ||
         event.depositMethod == DepositMethod.wire &&
-            registeredBankAccount.wireBankAccount!.isNotEmpty ||
+            registeredBankAccount.wireBankAccounts!.isNotEmpty ||
         event.depositMethod == DepositMethod.eDda &&
-            registeredBankAccount.eDdaBankAccount!.isNotEmpty) {
+            registeredBankAccount.eDdaBankAccounts!.isNotEmpty) {
       depositPageStep = DepositPageStep.returningUser;
     } else {
       depositPageStep = DepositPageStep.selectBank;
@@ -86,7 +86,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     add(const PageChanged(DepositPageStep.eDdaBankDetails));
   }
 
-  void _onReturningUserCheck(
+  void _onRegisteredBankAccountCheck(
       RegisteredBankAccountCheck event, Emitter<DepositState> emit) async {
     try {
       emit(state.copyWith(

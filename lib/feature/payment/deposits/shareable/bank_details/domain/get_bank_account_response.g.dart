@@ -9,18 +9,6 @@ part of 'get_bank_account_response.dart';
 GetBankAccountResponse _$GetBankAccountResponseFromJson(
         Map<String, dynamic> json) =>
     GetBankAccountResponse(
-      (json['bankDetailList'] as List<dynamic>?)
-          ?.map((e) => BankDetail.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$GetBankAccountResponseToJson(
-        GetBankAccountResponse instance) =>
-    <String, dynamic>{
-      'bankDetailList': instance.bankDetailList,
-    };
-
-BankDetail _$BankDetailFromJson(Map<String, dynamic> json) => BankDetail(
       json['state_province'] as String?,
       json['bank_type'] as String?,
       json['uid'] as String?,
@@ -35,7 +23,8 @@ BankDetail _$BankDetailFromJson(Map<String, dynamic> json) => BankDetail(
       json['street_address'] as String?,
     );
 
-Map<String, dynamic> _$BankDetailToJson(BankDetail instance) =>
+Map<String, dynamic> _$GetBankAccountResponseToJson(
+        GetBankAccountResponse instance) =>
     <String, dynamic>{
       'uid': instance.uid,
       'country': instance.country,
