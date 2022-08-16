@@ -78,8 +78,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     } else {
       depositPageStep = DepositPageStep.selectBank;
     }
-    emit(state.copyWith(
-        depositMethod: event.depositMethod, depositPages: depositPageStep));
+    emit(state.copyWith(depositMethod: event.depositMethod));
     add(PageChanged(depositPageStep));
   }
 
@@ -94,9 +93,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
       emit(state.copyWith(
           registeredBankAccountResponse: BaseResponse.loading()));
       var response = await _bankDetailsRepository.getBankAccount();
-      emit(state.copyWith(
-          registeredBankAccountResponse: response,
-          depositPages: DepositPageStep.depositMethod));
+      emit(state.copyWith(registeredBankAccountResponse: response));
       add(const PageChanged(DepositPageStep.depositMethod));
     } catch (e) {
       emit(state.copyWith(
