@@ -1,7 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/bloc/deposit_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/get_bank_account_response.dart';
-import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/registered_bank_account.dart';
+import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/registered_bank_accounts.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/domain/bank_details.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,8 +13,8 @@ void main() async {
   group('Deposit Bloc Tests', () {
     late DepositBloc depositBloc;
     late MockBankDetailsRepository mockBankDetailsRepository;
-    final BaseResponse<RegisteredBankAccount> registeredBankAccountResponse =
-        BaseResponse.complete(RegisteredBankAccount(const [
+    final BaseResponse<RegisteredBankAccounts> registeredBankAccountResponse =
+        BaseResponse.complete(RegisteredBankAccounts(const [
       GetBankAccountResponse('', '', '', '123', 'Alex', '112233', 'FPS', '',
           'Bank Central Asia', '', '', '')
     ]));

@@ -58,7 +58,7 @@ class DepositState extends Equatable {
   final DepositPageStep depositPages;
   final BankDetails? bankDetails;
   final DepositMethod? depositMethod;
-  final BaseResponse<RegisteredBankAccount> registeredBankAccountResponse;
+  final BaseResponse<RegisteredBankAccounts> registeredBankAccountResponse;
 
   const DepositState({
     this.depositPages = DepositPageStep.unknown,
@@ -75,7 +75,7 @@ class DepositState extends Equatable {
     DepositPageStep? depositPages,
     BankDetails? bankDetails,
     DepositMethod? depositMethod,
-    BaseResponse<RegisteredBankAccount>? registeredBankAccountResponse,
+    BaseResponse<RegisteredBankAccounts>? registeredBankAccountResponse,
   }) {
     return DepositState(
       depositPages: depositPages ?? this.depositPages,

@@ -46,13 +46,13 @@ class ReturningUserScreen extends StatelessWidget {
     if (depositState.registeredBankAccountResponse.data != null) {
       if (depositState.depositMethod == DepositMethod.wire) {
         bankDetailList =
-            depositState.registeredBankAccountResponse.data!.wireBankAccount!;
+            depositState.registeredBankAccountResponse.data!.wireBankAccounts!;
       } else if (depositState.depositMethod == DepositMethod.fps) {
         bankDetailList =
-            depositState.registeredBankAccountResponse.data!.fpsBankAccount!;
+            depositState.registeredBankAccountResponse.data!.fpsBankAccounts!;
       } else {
         bankDetailList =
-            depositState.registeredBankAccountResponse.data!.eDdaBankAccount!;
+            depositState.registeredBankAccountResponse.data!.eDdaBankAccounts!;
       }
     }
 

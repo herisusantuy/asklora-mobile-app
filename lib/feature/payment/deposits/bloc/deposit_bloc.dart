@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../repository/bank_details_repository.dart';
-import '../shareable/bank_details/domain/registered_bank_account.dart';
+import '../shareable/bank_details/domain/registered_bank_accounts.dart';
 import '../shareable/bank_list/domain/bank_details.dart';
 
 part 'deposit_event.dart';
@@ -30,11 +30,11 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
       DepositMethodSelected event, Emitter<DepositState> emit) {
     var registeredBankAccount = state.registeredBankAccountResponse.data!;
     if (event.depositMethod == DepositMethod.fps &&
-            registeredBankAccount.fpsBankAccount!.isNotEmpty ||
+            registeredBankAccount.fpsBankAccounts!.isNotEmpty ||
         event.depositMethod == DepositMethod.wire &&
-            registeredBankAccount.wireBankAccount!.isNotEmpty ||
+            registeredBankAccount.wireBankAccounts!.isNotEmpty ||
         event.depositMethod == DepositMethod.eDda &&
-            registeredBankAccount.eDdaBankAccount!.isNotEmpty) {
+            registeredBankAccount.eDdaBankAccounts!.isNotEmpty) {
       emit(state.copyWith(
           depositMethod: event.depositMethod,
           depositPages: DepositPageStep.returningUser));
