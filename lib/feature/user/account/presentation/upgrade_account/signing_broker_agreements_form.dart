@@ -32,7 +32,7 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _alpacaCustomerAgreement(),
+                _agreement(),
                 _isUnderstoodAlpacaCustomAgreementChecked(),
                 _isSigningAgreementChecked(),
                 _customerSignature(),
@@ -45,7 +45,7 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
     );
   }
 
-  Widget _alpacaCustomerAgreement() =>
+  Widget _agreement() =>
       BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         buildWhen: (previous, current) =>
             previous.isAlpacaCustomerAgreementOpened !=
@@ -53,13 +53,43 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 20.0),
-            child: CustomTextButton(
-              key: const Key('alpaca_customer_agreement_button'),
-              borderRadius: 30,
-              buttonText: 'Alpaca Customer Agreement',
-              onClick: () => context
-                  .read<SigningBrokerAgreementBloc>()
-                  .add(const AlpacaCustomerAgreementOpened(true)),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextButton(
+                        key: const Key('alpaca_customer_agreement_button'),
+                        borderRadius: 30,
+                        buttonText: 'Alpaca Customer Agreement',
+                        onClick: () => context
+                            .read<SigningBrokerAgreementBloc>()
+                            .add(const AlpacaCustomerAgreementOpened(true)),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 6,
+                    ),
+                    Expanded(
+                      child: CustomTextButton(
+                        key: const Key('asklora_client_agreement_button'),
+                        borderRadius: 30,
+                        buttonText: 'Asklora Client Agreement',
+                        onClick: () => context
+                            .read<SigningBrokerAgreementBloc>()
+                            .add(const AskLoraClientAgreementOpened()),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                const CustomText(
+                  'You will not be able to check the boxes below until you have clicked the Alpaca Customer Agreement and the AskLORA Client Agreement',
+                  type: FontType.bodyTextBold,
+                )
+              ],
             ),
           );
         },
@@ -70,6 +100,8 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.isAlpacaCustomerAgreementOpened !=
                 current.isAlpacaCustomerAgreementOpened ||
+            previous.isAskLoraClientAgreementOpened !=
+                current.isAskLoraClientAgreementOpened ||
             previous.isUnderstoodAlpacaCustomAgreementChecked !=
                 current.isUnderstoodAlpacaCustomAgreementChecked,
         builder: (context, state) {
@@ -79,7 +111,8 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             text:
                 'I have read, understood, and agree to be bound by Alpaca Securities LLC and LORA Technologies, Limited account terms, and all other terms, disclosures and disclaimers applicable to me, as referenced in the Alpaca Customer Agreement. I also acknowledge that the Alpaca Customer Agreement contains a pre-dispute arbitration clause in Section 42.',
-            disabled: !state.isAlpacaCustomerAgreementOpened,
+            disabled: !state.isAlpacaCustomerAgreementOpened ||
+                !state.isAskLoraClientAgreementOpened,
             isChecked: state.isUnderstoodAlpacaCustomAgreementChecked,
             onChanged: (value) => context
                 .read<SigningBrokerAgreementBloc>()

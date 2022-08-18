@@ -17,6 +17,13 @@ class AlpacaCustomerAgreementOpened extends SigningBrokerAgreementEvent {
   List<Object> get props => [isAlpacaCustomerAgreementOpened];
 }
 
+class AskLoraClientAgreementOpened extends SigningBrokerAgreementEvent {
+  const AskLoraClientAgreementOpened() : super();
+
+  @override
+  List<Object> get props => [];
+}
+
 class UnderstoodAlpacaCustomAgreementChecked
     extends SigningBrokerAgreementEvent {
   final bool isUnderstoodAlpacaCustomAgreementChecked;
