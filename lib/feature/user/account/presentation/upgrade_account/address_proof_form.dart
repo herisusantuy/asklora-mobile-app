@@ -6,6 +6,7 @@ import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
+import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 
@@ -50,6 +51,7 @@ class AddressProofForm extends StatelessWidget {
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomTextInput(
           initialValue: state.unitNumber,
+          textInputFormatterList: [denyEmoji()],
           key: const Key('account_unit_number_input'),
           labelText: 'Unit/Apartment No.',
           hintText: 'Enter your Unit/Apartment No.',
@@ -65,6 +67,7 @@ class AddressProofForm extends StatelessWidget {
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomTextInput(
           initialValue: state.residentialAddress,
+          textInputFormatterList: [denyEmoji()],
           key: const Key('account_residential_address_input'),
           labelText: 'Residential Address',
           hintText: 'Enter your Residential Address',
@@ -80,6 +83,7 @@ class AddressProofForm extends StatelessWidget {
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomTextInput(
             initialValue: state.city,
+            textInputFormatterList: [denyEmoji()],
             key: const Key('account_city_input'),
             labelText: 'City',
             onChanged: (city) => context
@@ -154,6 +158,7 @@ class AddressProofForm extends StatelessWidget {
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomTextInput(
             initialValue: state.mailUnitNumber,
+            textInputFormatterList: [denyEmoji()],
             key: const Key('account_mailing_unit_number_input'),
             labelText: 'Unit/Apartment No.',
             onChanged: (mailUnitNumber) => context
@@ -168,6 +173,7 @@ class AddressProofForm extends StatelessWidget {
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomTextInput(
             initialValue: state.mailResidentialAddress,
+            textInputFormatterList: [denyEmoji()],
             key: const Key('account_mailing_residential_address_input'),
             labelText: 'Residential Address',
             onChanged: (mailResidentialAddress) => context
@@ -183,6 +189,7 @@ class AddressProofForm extends StatelessWidget {
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomTextInput(
             initialValue: state.mailCity,
+            textInputFormatterList: [denyEmoji()],
             key: const Key('account_mailing_city_input'),
             labelText: 'City',
             onChanged: (mailCity) => context
