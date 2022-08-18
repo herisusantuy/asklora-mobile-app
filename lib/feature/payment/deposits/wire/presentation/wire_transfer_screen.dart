@@ -12,7 +12,6 @@ class WireTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPageStep.eDdaBankDetails,
       title: 'Wire Transfer',
       child: ListView(
         children: [
