@@ -59,18 +59,16 @@ class BasicInformationForm extends StatelessWidget {
   Widget _firstNameInput(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
-        buildWhen: (_, __) => false,
-        builder: (context, state) => CustomTextInput(
-          initialValue: state.firstName,
-          textInputFormatterList: [englishNameFormatter()],
-          key: const Key('account_first_name_input'),
-          labelText: 'Legal First Name (English)',
-          textInputType: TextInputType.name,
-          onChanged: (value) => context
-              .read<BasicInformationBloc>()
-              .add(BasicInformationFirstNameChanged(value)),
-        ),
+      child: CustomTextInput(
+        textCapitalization: TextCapitalization.words,
+        initialValue: context.read<BasicInformationBloc>().state.firstName,
+        textInputFormatterList: [fullEnglishNameFormatter()],
+        key: const Key('account_first_name_input'),
+        labelText: 'Legal First Name (English)',
+        textInputType: TextInputType.text,
+        onChanged: (value) => context
+            .read<BasicInformationBloc>()
+            .add(BasicInformationFirstNameChanged(value)),
       ),
     );
   }
@@ -78,54 +76,53 @@ class BasicInformationForm extends StatelessWidget {
   Widget _middleNameInput(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
-      child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
-          buildWhen: (_, __) => false,
-          builder: (context, state) => CustomTextInput(
-              initialValue: state.middleName ?? '',
-              key: const Key('account_middle_name_input'),
-              labelText: 'Legal Middle Name (English)',
-              textInputType: TextInputType.name,
-              textInputFormatterList: [englishNameFormatter()],
-              onChanged: (value) => context
-                  .read<BasicInformationBloc>()
-                  .add(BasicInformationMiddleNameChanged(value)),
-              hintText: 'Enter your Middle name (Optional)')),
+      child: CustomTextInput(
+          textCapitalization: TextCapitalization.words,
+          initialValue:
+              context.read<BasicInformationBloc>().state.middleName ?? '',
+          key: const Key('account_middle_name_input'),
+          labelText: 'Legal Middle Name (English)',
+          textInputType: TextInputType.text,
+          textInputFormatterList: [fullEnglishNameFormatter()],
+          onChanged: (value) => context
+              .read<BasicInformationBloc>()
+              .add(BasicInformationMiddleNameChanged(value)),
+          hintText: 'Enter your Middle name (Optional)'),
     );
   }
 
   Widget _lastNameInput(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
-      child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
-          buildWhen: (_, __) => false,
-          builder: (context, state) => CustomTextInput(
-              initialValue: state.lastName,
-              key: const Key('account_last_name_input'),
-              textInputFormatterList: [englishNameFormatter()],
-              labelText: 'Legal Last Name (English)',
-              textInputType: TextInputType.name,
-              onChanged: (value) => context
-                  .read<BasicInformationBloc>()
-                  .add(BasicInformationLastNameChanged(value)),
-              hintText: 'Enter your Last name')),
+      child: CustomTextInput(
+          textCapitalization: TextCapitalization.words,
+          initialValue: context.read<BasicInformationBloc>().state.lastName,
+          key: const Key('account_last_name_input'),
+          textInputFormatterList: [fullEnglishNameFormatter()],
+          labelText: 'Legal Last Name (English)',
+          textInputType: TextInputType.text,
+          onChanged: (value) => context
+              .read<BasicInformationBloc>()
+              .add(BasicInformationLastNameChanged(value)),
+          hintText: 'Enter your Last name'),
     );
   }
 
   Widget _chineseNameInput(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
-      child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
-          buildWhen: (_, __) => false,
-          builder: (context, state) => CustomTextInput(
-              initialValue: state.chineseName ?? '',
-              key: const Key('account_chinese_name_input'),
-              labelText: 'Chinese Name (Optional)',
-              textInputType: TextInputType.name,
-              textInputFormatterList: [chineseNameFormatter()],
-              onChanged: (value) => context
-                  .read<BasicInformationBloc>()
-                  .add(BasicInformationChineseNameChanged(value)),
-              hintText: 'Enter your Chinese name (Optional)')),
+      child: CustomTextInput(
+          textCapitalization: TextCapitalization.words,
+          initialValue:
+              context.read<BasicInformationBloc>().state.chineseName ?? '',
+          key: const Key('account_chinese_name_input'),
+          labelText: 'Chinese Name (Optional)',
+          textInputType: TextInputType.text,
+          textInputFormatterList: [chineseNameFormatter()],
+          onChanged: (value) => context
+              .read<BasicInformationBloc>()
+              .add(BasicInformationChineseNameChanged(value)),
+          hintText: 'Enter your Chinese name (Optional)'),
     );
   }
 
