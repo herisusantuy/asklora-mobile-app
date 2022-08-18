@@ -113,7 +113,7 @@ class ControlledPersonForm extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10.0),
         child:
             BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-          buildWhen: (_, __) => false,
+              buildWhen: (previous, current) => previous.controlledPersonCompanyEmail!=current.controlledPersonCompanyEmail,
           builder: (context, state) => CustomTextInput(
               initialValue: state.controlledPersonCompanyEmail,
               key: const Key('controlled_person_company_email_input'),

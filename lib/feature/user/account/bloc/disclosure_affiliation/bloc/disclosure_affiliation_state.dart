@@ -8,6 +8,7 @@ class DisclosureAffiliationState extends Equatable {
   final String affiliateCompanyState;
   final String affiliateCompanyCountry;
   final String affiliateCompanyEmail;
+  final String affiliateCompanyEmailErrorText;
   final bool? isSeniorExecutive;
   final String controlledPersonCompanyName;
   final String controlledPersonCompanyAddress;
@@ -15,6 +16,7 @@ class DisclosureAffiliationState extends Equatable {
   final String controlledPersonCompanyState;
   final String controlledPersonCompanyCountry;
   final String controlledPersonCompanyEmail;
+  final String controlledPersonCompanyEmailErrorText;
   final bool? isSeniorPolitical;
   final bool? isFamilyMember;
   final String firstNameOfFamilyMember;
@@ -24,6 +26,7 @@ class DisclosureAffiliationState extends Equatable {
   final bool? isOwner;
   final String nameOfJointAccount;
   final bool? isEmployee;
+
   const DisclosureAffiliationState({
     this.isAffiliated,
     this.affiliateCompanyName = '',
@@ -32,6 +35,7 @@ class DisclosureAffiliationState extends Equatable {
     this.affiliateCompanyState = '',
     this.affiliateCompanyCountry = '',
     this.affiliateCompanyEmail = '',
+    this.affiliateCompanyEmailErrorText = '',
     this.isSeniorExecutive,
     this.controlledPersonCompanyName = '',
     this.controlledPersonCompanyAddress = '',
@@ -39,6 +43,7 @@ class DisclosureAffiliationState extends Equatable {
     this.controlledPersonCompanyState = '',
     this.controlledPersonCompanyCountry = '',
     this.controlledPersonCompanyEmail = '',
+    this.controlledPersonCompanyEmailErrorText = '',
     this.isSeniorPolitical,
     this.isFamilyMember,
     this.firstNameOfFamilyMember = '',
@@ -58,6 +63,7 @@ class DisclosureAffiliationState extends Equatable {
     String? affiliateCompanyState,
     String? affiliateCompanyCountry,
     String? affiliateCompanyEmail,
+    String? affiliateCompanyEmailErrorText,
     bool? isSeniorExecutive,
     String? controlledPersonCompanyName,
     String? controlledPersonCompanyAddress,
@@ -65,6 +71,7 @@ class DisclosureAffiliationState extends Equatable {
     String? controlledPersonCompanyState,
     String? controlledPersonCompanyCountry,
     String? controlledPersonCompanyEmail,
+    String? controlledPersonCompanyEmailErrorText,
     bool? isSeniorPolitical,
     bool? isFamilyMember,
     String? firstNameOfFamilyMember,
@@ -88,6 +95,8 @@ class DisclosureAffiliationState extends Equatable {
           affiliateCompanyCountry ?? this.affiliateCompanyCountry,
       affiliateCompanyEmail:
           affiliateCompanyEmail ?? this.affiliateCompanyEmail,
+      affiliateCompanyEmailErrorText:
+          affiliateCompanyEmailErrorText ?? this.affiliateCompanyEmailErrorText,
       isSeniorExecutive: isSeniorExecutive ?? this.isSeniorExecutive,
       controlledPersonCompanyName:
           controlledPersonCompanyName ?? this.controlledPersonCompanyName,
@@ -101,6 +110,9 @@ class DisclosureAffiliationState extends Equatable {
           controlledPersonCompanyCountry ?? this.controlledPersonCompanyCountry,
       controlledPersonCompanyEmail:
           controlledPersonCompanyEmail ?? this.controlledPersonCompanyEmail,
+      controlledPersonCompanyEmailErrorText:
+          controlledPersonCompanyEmailErrorText ??
+              this.controlledPersonCompanyEmailErrorText,
       isSeniorPolitical: isSeniorPolitical ?? this.isSeniorPolitical,
       isFamilyMember: isFamilyMember ?? this.isFamilyMember,
       firstNameOfFamilyMember:
@@ -151,14 +163,16 @@ class DisclosureAffiliationState extends Equatable {
                 affiliateCompanyState.isEmpty ||
                 affiliateCompanyCity.isEmpty ||
                 affiliateCompanyCountry.isEmpty ||
-                affiliateCompanyEmail.isEmpty)) ||
+                affiliateCompanyEmail.isEmpty ||
+                affiliateCompanyEmailErrorText.isNotEmpty)) ||
         ((isSeniorExecutive == null || isSeniorExecutive == true) &&
             (controlledPersonCompanyName.isEmpty ||
                 controlledPersonCompanyAddress.isEmpty ||
                 controlledPersonCompanyCity.isEmpty ||
                 controlledPersonCompanyState.isEmpty ||
                 controlledPersonCompanyCountry.isEmpty ||
-                controlledPersonCompanyEmail.isEmpty)) ||
+                controlledPersonCompanyEmail.isEmpty ||
+                controlledPersonCompanyEmailErrorText.isNotEmpty)) ||
         (isSeniorPolitical == null) ||
         ((isFamilyMember == null || isFamilyMember == true) &&
             (firstNameOfFamilyMember.isEmpty ||
