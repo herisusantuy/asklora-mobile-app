@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
+import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
@@ -67,6 +68,7 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
             labelText: 'TIN Number',
             hintText: 'Enter your TIN number',
             textInputFormatterList: [
+              lettersAndNumberFormatter(),
               UpperCaseTextFormatter(),
               LengthLimitingTextInputFormatter(
                   state.countryOfTaxResidence == 'HKG' ? 9 : 15)
@@ -80,7 +82,7 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
       );
 
   String _idNumberErrorText(String countryCode) =>
-      (countryCode == 'HKG') ? 'Enter valid HKID number' : '';
+      (countryCode == 'HKG') ? 'Please enter a valid TIN number' : '';
 
   Widget _nextButton() {
     return BlocBuilder<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
@@ -95,6 +97,7 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
             borderRadius: 30,
             disable: !state.enableNextButton(),
             onClick: () {
+              FocusManager.instance.primaryFocus?.unfocus();
               context
                   .read<AccountBloc>()
                   .add(const AccountCurrentStepChanged('next'));
