@@ -9,7 +9,7 @@ platform :android do
 
   private_lane :set_up_env_vars do |options|
     env = options[:env]
-    sh("cd ../.. && sh change_environment.sh " + env)
+    sh("cd ../.. && sh set_up.sh " + env)
   end
 
   private_lane :upload_to_firebase do |options|

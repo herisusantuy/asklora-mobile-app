@@ -1,50 +1,28 @@
-#!/bin/bash
+file="version.properties"
 
-# Increment a version string using Semantic Versioning terminology.
-
-# Parse command line options.
-
-while getopts ":Mmp" Option
+while IFS='=' read -r key value
 do
-  case $Option in
-    M ) major=true;;
-    m ) minor=true;;
-    p ) patch=true;;
-  esac
-done
+    key=$(echo $key | tr '.' '_')
+    eval ${key}=\${value}
+done < "$file"
 
-# If a flag is missing, show usage message.
-if [ $OPTIND -eq 1 ]; then
-  echo "No options were passed";
-  echo "usage: $(basename $0) [-Mmp] major.minor.patch"
-  exit 1
-fi
+VERSION=$(git show-ref --head --hash head --abbrev=5)
+VERSION_NAME=${major}'.'${minor}'.'${patch}'.'$VERSION
 
-shift $(($OPTIND - 1))
+VERSION_CODE=$(( $major * 10000 + $minor * 100 + $patch))
+echo $VERSION
+echo $VERSION_CODE
+echo $VERSION_NAME
 
-version=$1
+sed -i "" "/flutter.versionName=/ s/=.*/=$VERSION_NAME/" android/local.properties
+sed -i "" "/flutter.versionCode=/ s/=.*/=$VERSION_CODE/" android/local.properties
+sed -i "" "/flutter.buildMode=/ s/=.*/=release/" android/local.properties
 
-if [ -z $version ]; then
-  version="0.0.0"
-fi
+NEW_PATCH=$(( $patch + 1 ))
 
-# Build array from version string.
-a=( ${version//./ } )
+echo $NEW_PATCH
 
-# Increment version numbers as requested.
-if [ ! -z $major ]; then
-  ((a[0]++))
-  a[1]=0
-  a[2]=0
-fi
+sed -i "" "/patch=/ s/=.*/=$NEW_PATCH/" version.properties
 
-if [ ! -z $minor ]; then
-  ((a[1]++))
-  a[2]=0
-fi
-
-if [ ! -z $patch ]; then
-  ((a[2]++))
-fi
-
-echo "${a[0]}.${a[1]}.${a[2]}"
+git add version.properties
+git commit -m "increased version"

@@ -4,7 +4,7 @@ platform :ios do
 
    private_lane :set_up_env_vars do |options|
       env = options[:env]
-      sh("cd ../.. && sh change_environment.sh " + env)
+      sh("cd ../.. && sh set_up.sh " + env)
     end
 
   private_lane :cert_dev do
@@ -52,20 +52,20 @@ platform :ios do
 
   desc "Creating a dev build"
   lane :dev do
-#     set_up_env_vars(env:"dev")
-#     cert_dev()
-#     fastlane build_ios_app(
-#       workspace: "Runner.xcworkspace",
-#       scheme: "dev",
-#       export_method: "app-store",
-#     )
+        set_up_env_vars(env:"dev")
+    #     cert_dev()
+    #     fastlane build_ios_app(
+    #       workspace: "Runner.xcworkspace",
+    #       scheme: "dev",
+    #       export_method: "app-store",
+    #     )
 #     upload_to_app_center
-    upload_to_testflight(
-      username: "asklora@loratechai.com",
-      app_identifier: "ai.asklora.app.dev",
-      ipa: "Runner.ipa",
-      skip_waiting_for_build_processing: true
-    )
+#     upload_to_testflight(
+#       username: "asklora@loratechai.com",
+#       app_identifier: "ai.asklora.app.dev",
+#       ipa: "Runner.ipa",
+#       skip_waiting_for_build_processing: true
+#     )
   end
 
   desc "Uploading dev build on TestFlight..."
