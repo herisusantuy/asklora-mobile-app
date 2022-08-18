@@ -129,6 +129,7 @@ class TrustedContactForm extends StatelessWidget {
               buttonText: 'Next',
               disable: state.disableNextButton(),
               onClick: () {
+                FocusManager.instance.primaryFocus?.unfocus();
                 context
                     .read<AccountBloc>()
                     .add(const AccountCurrentStepChanged('next'));
