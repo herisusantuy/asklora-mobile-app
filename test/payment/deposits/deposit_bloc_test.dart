@@ -19,7 +19,8 @@ void main() async {
       GetBankAccountResponse('', '', '', '123', 'Alex', '112233', 'FPS', '',
           'Bank Central Asia', '', '', '')
     ]));
-    final NavigationBloc<DepositPageStep> navigationBloc = NavigationBloc(DepositPageStep.unknown);
+    final NavigationBloc<DepositPageStep> navigationBloc =
+        NavigationBloc(DepositPageStep.unknown);
 
     setUpAll(() async {
       mockBankDetailsRepository = MockBankDetailsRepository();
@@ -60,7 +61,7 @@ void main() async {
               .thenAnswer((_) => Future.value(registeredBankAccountResponse));
           return depositBloc;
         },
-        act: (bloc) => bloc.add(RegisteredBankAccountCheck(whenDone: (){})),
+        act: (bloc) => bloc.add(RegisteredBankAccountCheck(whenDone: () {})),
         expect: () => {
               DepositState(
                   registeredBankAccountResponse: BaseResponse.loading()),
@@ -79,9 +80,9 @@ void main() async {
           return depositBloc;
         },
         act: (bloc) async {
-          bloc.add(RegisteredBankAccountCheck(whenDone: (){}));
+          bloc.add(RegisteredBankAccountCheck(whenDone: () {}));
           await Future.delayed(const Duration(seconds: 1));
-          bloc.add(DepositMethodSelected(DepositMethod.fps, whenDone: (_){}));
+          bloc.add(DepositMethodSelected(DepositMethod.fps, whenDone: (_) {}));
         },
         expect: () => {
               DepositState(
@@ -106,8 +107,9 @@ void main() async {
         build: () {
           return depositBloc;
         },
-        act: (bloc) =>
-            bloc.add(BankSelected(const BankDetails(123, 'BCA', '', '112233'), whenDone: (){})),
+        act: (bloc) => bloc.add(BankSelected(
+            const BankDetails(123, 'BCA', '', '112233'),
+            whenDone: () {})),
         expect: () => {
               const DepositState(
                   bankDetails: BankDetails(123, 'BCA', '', '112233')),

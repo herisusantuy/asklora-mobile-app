@@ -25,7 +25,9 @@ class DepositNextButton extends StatelessWidget {
         disable: disable,
         buttonText: label,
         onClick: () {
-          context.read<NavigationBloc<DepositPageStep>>().add(PageChanged(nextTo));
+          context
+              .read<NavigationBloc<DepositPageStep>>()
+              .add(PageChanged(nextTo));
         },
         borderRadius: 5,
       ),
