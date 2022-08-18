@@ -7,62 +7,32 @@ abstract class DepositEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class PageChanged extends DepositEvent {
-  final DepositPageStep depositPages;
-
-  const PageChanged(this.depositPages) : super();
-
-  @override
-  List<Object?> get props => [depositPages];
-}
-
-class PageChangedReplacement extends DepositEvent {
-  final DepositPageStep depositPages;
-
-  const PageChangedReplacement(this.depositPages) : super();
-
-  @override
-  List<Object?> get props => [depositPages];
-}
-
-class PageChangedRemoveUntil extends DepositEvent {
-  final DepositPageStep depositPages;
-  final DepositPageStep removeUntil;
-
-  const PageChangedRemoveUntil(this.depositPages, this.removeUntil) : super();
-
-  @override
-  List<Object?> get props => [depositPages, removeUntil];
-}
-
-class PagePop extends DepositEvent {
-  const PagePop() : super();
-
-  @override
-  List<Object?> get props => [];
-}
-
 class DepositMethodSelected extends DepositEvent {
+  final Function(DepositPageStep) whenDone;
   final DepositMethod depositMethod;
 
-  const DepositMethodSelected(this.depositMethod) : super();
+  const DepositMethodSelected(this.depositMethod, {required this.whenDone})
+      : super();
 
   @override
-  List<Object?> get props => [depositMethod];
+  List<Object?> get props => [depositMethod, whenDone];
 }
 
 class BankSelected extends DepositEvent {
+  final Function whenDone;
   final BankDetails bankDetails;
 
-  const BankSelected(this.bankDetails) : super();
+  const BankSelected(this.bankDetails, {required this.whenDone}) : super();
 
   @override
   List<Object?> get props => [bankDetails];
 }
 
 class RegisteredBankAccountCheck extends DepositEvent {
-  const RegisteredBankAccountCheck() : super();
+  final Function whenDone;
+
+  const RegisteredBankAccountCheck({required this.whenDone}) : super();
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [whenDone];
 }

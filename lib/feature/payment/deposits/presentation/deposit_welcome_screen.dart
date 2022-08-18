@@ -5,6 +5,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../presentation/custom_payment_button_button.dart';
 import '../bloc/deposit_bloc.dart';
+import '../bloc/navigation_bloc/navigation_bloc.dart';
 import '../shareable/widget/custom_deposit_widget.dart';
 
 class DepositWelcomeScreen extends StatelessWidget {
@@ -18,9 +19,11 @@ class DepositWelcomeScreen extends StatelessWidget {
         builder: (context, state) => CustomPaymentButton(
           key: const Key('deposit_welcome_screen_next_button'),
           title: 'Next',
-          onSubmit: () => context
-              .read<DepositBloc>()
-              .add(const RegisteredBankAccountCheck()),
+          onSubmit: () => context.read<DepositBloc>().add(
+              RegisteredBankAccountCheck(
+                  whenDone: () => context
+                      .read<NavigationBloc<DepositPageStep>>()
+                      .add(const PageChanged(DepositPageStep.depositMethod)))),
           isLoading: state.registeredBankAccountResponse.state ==
               ResponseState.loading,
           disable: false,

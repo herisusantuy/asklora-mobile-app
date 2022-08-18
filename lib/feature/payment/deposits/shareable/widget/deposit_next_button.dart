@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../bloc/navigation_bloc/navigation_bloc.dart';
 
 class DepositNextButton extends StatelessWidget {
   final bool disable;
@@ -24,7 +25,7 @@ class DepositNextButton extends StatelessWidget {
         disable: disable,
         buttonText: label,
         onClick: () {
-          context.read<DepositBloc>().add(PageChanged(nextTo));
+          context.read<NavigationBloc<DepositPageStep>>().add(PageChanged(nextTo));
         },
         borderRadius: 5,
       ),

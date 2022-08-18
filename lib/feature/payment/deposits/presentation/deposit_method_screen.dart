@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../bloc/deposit_bloc.dart';
+import '../bloc/navigation_bloc/navigation_bloc.dart';
 import '../shareable/widget/custom_deposit_widget.dart';
 
 class DepositMethodScreen extends StatelessWidget {
@@ -37,9 +38,11 @@ class DepositMethodScreen extends StatelessWidget {
             key: const Key('wire_transfer_button'),
             borderRadius: 5,
             buttonText: 'WIRE TRANSFER',
-            onClick: () => context
-                .read<DepositBloc>()
-                .add(const DepositMethodSelected(DepositMethod.wire))));
+            onClick: () => context.read<DepositBloc>().add(
+                DepositMethodSelected(DepositMethod.wire,
+                    whenDone: (depositPageStep) => context
+                        .read<NavigationBloc<DepositPageStep>>()
+                        .add(PageChanged(depositPageStep))))));
   }
 
   Widget _initiateEddaButton(BuildContext context) {
@@ -49,9 +52,11 @@ class DepositMethodScreen extends StatelessWidget {
             key: const Key('edda_button'),
             borderRadius: 5,
             buttonText: 'Electronic Direct Debit Authorization (eDDA)',
-            onClick: () => context
-                .read<DepositBloc>()
-                .add(const DepositMethodSelected(DepositMethod.eDda))));
+            onClick: () => context.read<DepositBloc>().add(
+                DepositMethodSelected(DepositMethod.eDda,
+                    whenDone: (depositPageStep) => context
+                        .read<NavigationBloc<DepositPageStep>>()
+                        .add(PageChanged(depositPageStep))))));
   }
 
   Widget _fpsButton(BuildContext context) {
@@ -62,9 +67,11 @@ class DepositMethodScreen extends StatelessWidget {
               key: const Key('fps_button'),
               borderRadius: 5,
               buttonText: 'FPS',
-              onClick: () => context
-                  .read<DepositBloc>()
-                  .add(const DepositMethodSelected(DepositMethod.fps))),
+              onClick: () => context.read<DepositBloc>().add(
+                  DepositMethodSelected(DepositMethod.fps,
+                      whenDone: (depositPageStep) => context
+                          .read<NavigationBloc<DepositPageStep>>()
+                          .add(PageChanged(depositPageStep))))),
         ));
   }
 
@@ -75,7 +82,7 @@ class DepositMethodScreen extends StatelessWidget {
           key: const Key('what_is_fps_button'),
           child: const CustomText('What is FPS?'),
           onTap: () => context
-              .read<DepositBloc>()
+              .read<NavigationBloc>()
               .add(const PageChanged(DepositPageStep.fpsMeaning))),
     );
   }
@@ -87,7 +94,7 @@ class DepositMethodScreen extends StatelessWidget {
           key: const Key('what_is_edda_button'),
           child: const CustomText('What is eDDA?'),
           onTap: () => context
-              .read<DepositBloc>()
+              .read<NavigationBloc>()
               .add(const PageChanged(DepositPageStep.eDdaMeaning))),
     );
   }
