@@ -18,11 +18,16 @@ sed -i "" "/flutter.versionName=/ s/=.*/=$VERSION_NAME/" android/local.propertie
 sed -i "" "/flutter.versionCode=/ s/=.*/=$VERSION_CODE/" android/local.properties
 sed -i "" "/flutter.buildMode=/ s/=.*/=release/" android/local.properties
 
+plutil -replace CFBundleShortVersionString -string $VERSION_NAME ios/Runner/Info.plist
+plutil -replace CFBundleVersion -string $VERSION_CODE ios/Runner/Info.plist
+
 NEW_PATCH=$(( $patch + 1 ))
 
 echo $NEW_PATCH
 
 sed -i "" "/patch=/ s/=.*/=$NEW_PATCH/" version.properties
 
-git add version.properties
-git commit -m "increased version"
+#TODO: Open this in CI/CD Pipeline
+#git add version.properties
+#git commit -m "increased version"
+
