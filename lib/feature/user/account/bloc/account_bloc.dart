@@ -147,7 +147,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       UpgradeAccountRequest request = UpgradeAccountRequest(
         contact: Contact(
             emailAddress: email,
-            phoneNumber: basicInformationBloc.state.phoneNumber,
+            phoneNumber:
+                '+${basicInformationBloc.state.countryCode}${basicInformationBloc.state.phoneNumber}',
             streetAddress: addressProofBloc.state.residentialAddress,
             unit: addressProofBloc.state.unitNumber,
             city: addressProofBloc.state.city,
@@ -173,7 +174,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
             givenName: trustedContactBloc.state.firstName,
             familyName: trustedContactBloc.state.lastName,
             email: trustedContactBloc.state.emailAddress,
-            phone: trustedContactBloc.state.phoneNumber),
+            phone:
+                '+${trustedContactBloc.state.countryCode}${trustedContactBloc.state.phoneNumber}'),
         disclosures: Disclosures(
             isControlPerson: disclosureAffiliationBloc.state.isSeniorExecutive,
             isAffiliatedExchangeOrFinra:
