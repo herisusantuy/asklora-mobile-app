@@ -1,6 +1,8 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 import 'core/presentation/custom_text_button.dart';
+import 'core/utils/build_configs/build_config.dart';
 import 'feature/auth/sign_in/presentation/sign_in_screen.dart';
 import 'feature/auth/sign_up/presentation/sign_up_screen.dart';
 
@@ -36,6 +38,10 @@ class HomeScreen extends StatelessWidget {
                   onClick: () => SignInScreen.open(context),
                   borderRadius: borderRadius,
                 ),
+                Text('Test ${Environment().config.askLoraApiBaseUrl}'),
+                TextButton(
+                    onPressed: () => {throw Exception("Testing crash")},
+                    child: const Text('Crash Me!!!'))
               ],
             )));
   }

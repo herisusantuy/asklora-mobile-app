@@ -1,0 +1,62 @@
+default_platform(:android)
+
+platform :android do
+
+   before_all do
+     ENV["FIREBASE_LOGIN_CREDENTIALS"] = "fastlane/firebase_credentials_dev.json"
+     ENV["FIREBASE_APP_ID"] = "1:741527391541:android:3a15564f2525bad32c507c"
+   end
+
+  private_lane :set_up_env_vars do |options|
+    env = options[:env]
+    sh("cd ../.. && sh change_environment.sh " + env)
+  end
+
+  private_lane :upload_to_firebase do |options|
+
+    output_path = "../build/app/outputs/flutter-apk/" +options[:apk_name]
+
+    firebase_app_distribution(
+      app: ENV["FIREBASE_APP_ID"],
+      android_artifact_path: output_path,
+      android_artifact_type: "APK",
+      release_notes: "Test App",
+      firebase_cli_token: "1//0esqoYTunpewwCgYIARAAGA4SNwF-L9Ird0PV8D6GAh9P3sJEcx5lKWIalDd1l0YwTIbXvEuNzLQ_k45AIJYxNXrR6qFKc_kGG1g",
+      service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+      debug: true
+    )
+
+  end
+
+  desc "Runs all the tests"
+  lane :clean do
+#     gradle(task: "clean")
+      commit = last_git_commit()
+      short_hash = commit[:abbreviated_commit_hash]
+      print("short hash " + short_hash)
+  end
+
+  desc "Create a dev build"
+  lane :create_dev do
+    clean()
+    set_up_env_vars(env:"dev")
+    gradle(task: "assembleDevRelease")
+    upload_to_firebase(apk_name:"app-dev-release.apk")
+  end
+
+  desc "Create a staging build"
+  lane :create_staging do
+    clean()
+    set_up_env_vars(env:"staging")
+    gradle(task: "assembleStagingRelease")
+#    upload_to_play_store
+  end
+
+  desc "Create a production build"
+    lane :create_release do
+      clean()
+      set_up_env_vars(env:"production")
+      gradle(task: "assembleProductionRelease")
+#      upload_to_play_store
+    end
+end

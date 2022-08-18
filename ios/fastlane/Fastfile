@@ -1,0 +1,95 @@
+default_platform(:ios)
+
+platform :ios do
+
+   private_lane :set_up_env_vars do |options|
+      env = options[:env]
+      sh("cd ../.. && sh change_environment.sh " + env)
+    end
+
+  private_lane :cert_dev do
+  match(
+      type: "appstore",
+      generate_apple_certs: false,
+      force: false,
+      app_identifier: "ai.asklora.app.dev",
+      git_url: "https://github.com/asklora/mobile-app-keys.git",
+      team_id: "GB8GPPG7HX",
+      team_name: "LORA Technologies, Limited")
+  end
+
+  private_lane :cert_stag do
+    match(
+      type: "appstore",
+      generate_apple_certs: false,
+      force: false,
+      app_identifier: "ai.asklora.app.stag",
+      git_url: "https://github.com/asklora/mobile-app-keys.git",
+      team_id: "GB8GPPG7HX",
+      team_name: "LORA Technologies, Limited")
+  end
+
+  private_lane :cert_release do
+    match(
+      type: "appstore",
+      generate_apple_certs: false,
+      force: false,
+      app_identifier: "ai.asklora.app",
+      git_url: "https://github.com/asklora/mobile-app-keys.git",
+      team_id: "GB8GPPG7HX",
+      team_name: "LORA Technologies, Limited")
+  end
+
+  private_lane :upload_to_app_center do
+    appcenter_upload(
+        api_token: "17940e4a8c6cf3c7960c93ee7c10a66852d0e5fe",
+        owner_name: "krishna.gupta-loratechai.com",
+        owner_type: "user",
+        app_name: "AskLora-Dev",
+        file: "Runner.ipa",
+        notify_testers: true)
+  end
+
+  desc "Creating a dev build"
+  lane :dev do
+#     set_up_env_vars(env:"dev")
+#     cert_dev()
+#     fastlane build_ios_app(
+#       workspace: "Runner.xcworkspace",
+#       scheme: "dev",
+#       export_method: "app-store",
+#     )
+#     upload_to_app_center
+    upload_to_testflight(
+      username: "asklora@loratechai.com",
+      app_identifier: "ai.asklora.app.dev",
+      ipa: "Runner.ipa",
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Uploading dev build on TestFlight..."
+  lane :upload do
+       upload_to_testflight(
+         username: "asklora@loratechai.com",
+         app_identifier: "ai.asklora.app.dev",
+         ipa: "Runner.ipa",
+         skip_waiting_for_build_processing: true)
+  end
+
+  desc "Creating a staging build"
+  lane :staging do
+    set_up_env_vars(env:"staging")
+    cert_stag()
+    build_app(workspace: "Runner.xcworkspace", scheme: "staging",  export_method: "ad-hoc")
+    #upload_to_testflight
+  end
+
+  desc "Creating a production build"
+  lane :release do
+    set_up_env_vars(env:"production")
+    cert_release()
+    build_app(workspace: "Runner.xcworkspace", scheme: "production",  export_method: "app-store")
+    #upload_to_testflight
+  end
+end

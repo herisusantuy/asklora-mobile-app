@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "asklora-327307",
+  "private_key_id": "a32bb341b9eb79c898f8781e89235099e3b5bfcb",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCnLUQWJx37p/j5\nfiD0XA40dmYbYImG6Zq2k8I3bswCEf8GKyAAzeV9MOkpC0kz2bkB3fGCPMjpWsef\nVB4qTX+j6fbf/1W20stPEEgfGrjKIO3j0UrDE5Qmo4ThfNjjU7+W4bV+7atDQBn3\nJlll3m+NkOwdavnYPQCYHZ66GlZ0r5AmO92aTiZV0OrZ1uzfwQyRc4GBDPJJzxX+\nHyXr04/Im7+AkZjFticxzK6b3W/b4LqtDvOs5rJ0QHb2eQKxmNTFyhbbcMFF59aW\nJowf1HosOT0whDtTqO2/tCMwZLMw+VMUki9qu9UfXc0lDzUQDAaQY/dPZZBnLLlX\nrFk97qgjAgMBAAECggEAS7N7M97VvGm1G+EJ8i0nP4lntjjyPbXVmZxyI2DYH43f\nof7wOH0D0LtPsYbLSJ/sH1TNslBtGAJEB7lzCWvbgzGEWa1JNobginZQeklC6UCd\nCH7y8EAS46ZDG0pJ+jKnvJ6LbaUY2tSRjXF/pNnjQMMhsDaLWWhSNw+emx4nDSHg\n97mwLWr7TqN4oU1/mLm3UxhLziJDjoyh7jpZzdbCvgacVOXfalzKyqz1C5Ao7Qbu\n8nPa8dXhVpUFb65DiPI43OeLtVLWOkpDzhEXSwySNnugYm0AHJTsbjrYtSm79BCc\ny9UCKXIxuslyTI/PyxlWTOO519EXD7YuGFNxkMJUXQKBgQDeWAWQ79ykbW8Qb0T9\nrkqB36jexaQdXs+RATYT1Uj0XX4+LBls+ZVcm+8vUEVbD+ytDQKzJi/oILM7PiLP\n6iw8uFXnwaSC7D+Gl5Lpvh2pZfrU+BIr6K7EuprOdvUt00B3LwmcPuTzoWDCKBrF\nr3yY0SViOcR0c/UlWhTNjOi+twKBgQDAe3vpIk4iFc1JrThw7EtT3w/Fvz5KCQd1\n0LycMttcrS1ZRf4dNUtkKjyCpGM+spWdzpsitAnUl5FAxOCxTv1MYqlUeb+VfP23\nhVEii+pY2+W2Svi9JcskZjDD1gYcN4YniqXdoC4Q3SpyblNi+A0FSd/CbJrphakK\nzSMtVa319QKBgDka4lMXR9PzR1MxQMbmvLwedYDBwiTI9QaJCRqO7O3WFVZifSU/\n9NyUMBo2w5lfvam0bb0VUbiMrXvJuacsva/aqDWdxmLZyncG9vSRn4yiZInOLNya\nJkjgpGHiq5XZa/UwX4eBn8vy5qb3Jekf6SBWlwNjUtGV9qBhQnaIej6BAoGANHd0\nZy/6rD/VHWgiImXGgq4i1nwytmuPpQWo48rZEIIEAnmZssx8KGl65QF6K/Tx43oV\nv3fj1hcaeNUxiiNF2DRsg6JMHqtbXVLxssEAuAf4rZ/x/Vz36owQbtFACSD5aH3a\niHbJF7+xek+oWynSIsboP07rSwwr783K8OiR6qECgYB9yjKMZLwYsS/uzulvLgtY\nQMkS2aMzGCga6qwvP5PY+UYnOVBHg5w/AtOimITgFQSonDP5cG3mrJfFTtcZFLvQ\nH2ii42m1sxRyelMaP2O1rV0UM3+YtOQcrXFZbuQLFGN2NKbv7w0DI58Nt7dZbS57\nCztt/KKtmS79llM8oLuh8A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "asklora-app@asklora-327307.iam.gserviceaccount.com",
+  "client_id": "116658290523505019771",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/asklora-app%40asklora-327307.iam.gserviceaccount.com"
+}
