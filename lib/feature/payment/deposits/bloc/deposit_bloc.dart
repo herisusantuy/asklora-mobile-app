@@ -23,25 +23,12 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   void _onDepositMethodSelected(
       DepositMethodSelected event, Emitter<DepositState> emit) {
-    DepositPageStep depositPageStep;
-    var registeredBankAccount = state.registeredBankAccountResponse.data!;
-    if (event.depositMethod == DepositMethod.fps &&
-            registeredBankAccount.fpsBankAccounts!.isNotEmpty ||
-        event.depositMethod == DepositMethod.wire &&
-            registeredBankAccount.wireBankAccounts!.isNotEmpty ||
-        event.depositMethod == DepositMethod.eDda &&
-            registeredBankAccount.eDdaBankAccounts!.isNotEmpty) {
-      depositPageStep = DepositPageStep.returningUser;
-    } else {
-      depositPageStep = DepositPageStep.selectBank;
-    }
-    emit(state.copyWith(depositMethod: event.depositMethod));
-    event.whenDone(depositPageStep);
+    emit(state.copyWith(
+        depositMethod: event.depositMethod, depositEvent: event));
   }
 
   void _onBankSelected(BankSelected event, Emitter<DepositState> emit) {
-    emit(state.copyWith(bankDetails: event.bankDetails));
-    event.whenDone();
+    emit(state.copyWith(bankDetails: event.bankDetails, depositEvent: event));
   }
 
   void _onRegisteredBankAccountCheck(
@@ -50,8 +37,8 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
       emit(state.copyWith(
           registeredBankAccountResponse: BaseResponse.loading()));
       var response = await _bankDetailsRepository.getBankAccount();
-      emit(state.copyWith(registeredBankAccountResponse: response));
-      event.whenDone();
+      emit(state.copyWith(
+          registeredBankAccountResponse: response, depositEvent: event));
     } catch (e) {
       emit(state.copyWith(
           registeredBankAccountResponse: BaseResponse.error(e.toString())));

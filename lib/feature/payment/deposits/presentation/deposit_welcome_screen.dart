@@ -15,15 +15,20 @@ class DepositWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       title: 'Deposit',
-      navigationButton: BlocBuilder<DepositBloc, DepositState>(
+      navigationButton: BlocConsumer<DepositBloc, DepositState>(
+        listenWhen: (_, current) =>
+            current.depositEvent is RegisteredBankAccountCheck,
+        listener: (context, state) {
+          context
+              .read<NavigationBloc<DepositPageStep>>()
+              .add(const PageChanged(DepositPageStep.depositMethod));
+        },
         builder: (context, state) => CustomPaymentButton(
           key: const Key('deposit_welcome_screen_next_button'),
           title: 'Next',
-          onSubmit: () => context.read<DepositBloc>().add(
-              RegisteredBankAccountCheck(
-                  whenDone: () => context
-                      .read<NavigationBloc<DepositPageStep>>()
-                      .add(const PageChanged(DepositPageStep.depositMethod)))),
+          onSubmit: () => context
+              .read<DepositBloc>()
+              .add(const RegisteredBankAccountCheck()),
           isLoading: state.registeredBankAccountResponse.state ==
               ResponseState.loading,
           disable: false,

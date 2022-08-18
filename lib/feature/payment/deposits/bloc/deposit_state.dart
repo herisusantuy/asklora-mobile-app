@@ -55,11 +55,13 @@ enum DepositPageStep {
 }
 
 class DepositState extends Equatable {
+  final DepositEvent? depositEvent;
   final BankDetails? bankDetails;
   final DepositMethod? depositMethod;
   final BaseResponse<RegisteredBankAccounts> registeredBankAccountResponse;
 
   const DepositState({
+    this.depositEvent,
     this.bankDetails,
     this.depositMethod,
     this.registeredBankAccountResponse = const BaseResponse(),
@@ -67,14 +69,16 @@ class DepositState extends Equatable {
 
   @override
   List<Object?> get props =>
-      [bankDetails, depositMethod, registeredBankAccountResponse];
+      [depositEvent, bankDetails, depositMethod, registeredBankAccountResponse];
 
   DepositState copyWith({
+    DepositEvent? depositEvent,
     BankDetails? bankDetails,
     DepositMethod? depositMethod,
     BaseResponse<RegisteredBankAccounts>? registeredBankAccountResponse,
   }) {
     return DepositState(
+      depositEvent: depositEvent ?? this.depositEvent,
       bankDetails: bankDetails ?? this.bankDetails,
       depositMethod: depositMethod ?? this.depositMethod,
       registeredBankAccountResponse:

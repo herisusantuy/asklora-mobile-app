@@ -8,31 +8,26 @@ abstract class DepositEvent extends Equatable {
 }
 
 class DepositMethodSelected extends DepositEvent {
-  final Function(DepositPageStep) whenDone;
   final DepositMethod depositMethod;
 
-  const DepositMethodSelected(this.depositMethod, {required this.whenDone})
-      : super();
+  const DepositMethodSelected(this.depositMethod) : super();
 
   @override
-  List<Object?> get props => [depositMethod, whenDone];
+  List<Object?> get props => [depositMethod];
 }
 
 class BankSelected extends DepositEvent {
-  final Function whenDone;
   final BankDetails bankDetails;
 
-  const BankSelected(this.bankDetails, {required this.whenDone}) : super();
+  const BankSelected(this.bankDetails) : super();
 
   @override
   List<Object?> get props => [bankDetails];
 }
 
 class RegisteredBankAccountCheck extends DepositEvent {
-  final Function whenDone;
-
-  const RegisteredBankAccountCheck({required this.whenDone}) : super();
+  const RegisteredBankAccountCheck() : super();
 
   @override
-  List<Object?> get props => [whenDone];
+  List<Object?> get props => [];
 }

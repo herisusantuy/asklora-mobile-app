@@ -61,13 +61,15 @@ void main() async {
               .thenAnswer((_) => Future.value(registeredBankAccountResponse));
           return depositBloc;
         },
-        act: (bloc) => bloc.add(RegisteredBankAccountCheck(whenDone: () {})),
+        act: (bloc) => bloc.add(const RegisteredBankAccountCheck()),
         expect: () => {
               DepositState(
                   registeredBankAccountResponse: BaseResponse.loading()),
               DepositState(
+                  depositEvent: const RegisteredBankAccountCheck(),
                   registeredBankAccountResponse: registeredBankAccountResponse),
               DepositState(
+                  depositEvent: const RegisteredBankAccountCheck(),
                   registeredBankAccountResponse: registeredBankAccountResponse),
             });
 
@@ -80,22 +82,26 @@ void main() async {
           return depositBloc;
         },
         act: (bloc) async {
-          bloc.add(RegisteredBankAccountCheck(whenDone: () {}));
+          bloc.add(const RegisteredBankAccountCheck());
           await Future.delayed(const Duration(seconds: 1));
-          bloc.add(DepositMethodSelected(DepositMethod.fps, whenDone: (_) {}));
+          bloc.add(const DepositMethodSelected(DepositMethod.fps));
         },
         expect: () => {
               DepositState(
                   registeredBankAccountResponse: BaseResponse.loading()),
               DepositState(
+                  depositEvent: const RegisteredBankAccountCheck(),
                   registeredBankAccountResponse: registeredBankAccountResponse),
               DepositState(
+                  depositEvent: const RegisteredBankAccountCheck(),
                   registeredBankAccountResponse: registeredBankAccountResponse),
               DepositState(
+                depositEvent: const DepositMethodSelected(DepositMethod.fps),
                 depositMethod: DepositMethod.fps,
                 registeredBankAccountResponse: registeredBankAccountResponse,
               ),
               DepositState(
+                depositEvent: const DepositMethodSelected(DepositMethod.fps),
                 depositMethod: DepositMethod.fps,
                 registeredBankAccountResponse: registeredBankAccountResponse,
               ),
@@ -107,11 +113,13 @@ void main() async {
         build: () {
           return depositBloc;
         },
-        act: (bloc) => bloc.add(BankSelected(
-            const BankDetails(123, 'BCA', '', '112233'),
-            whenDone: () {})),
+        act: (bloc) => bloc.add(const BankSelected(
+              BankDetails(123, 'BCA', '', '112233'),
+            )),
         expect: () => {
               const DepositState(
+                  depositEvent:
+                      BankSelected(BankDetails(123, 'BCA', '', '112233')),
                   bankDetails: BankDetails(123, 'BCA', '', '112233')),
             });
 

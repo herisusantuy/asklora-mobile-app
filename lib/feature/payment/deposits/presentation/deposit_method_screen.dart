@@ -14,19 +14,40 @@ class DepositMethodScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       title: 'Deposit Method',
-      child: ListView(
-        children: [
-          const CustomText(
-            'Please select method of deposit',
-            padding: EdgeInsets.only(top: 10, bottom: 50),
-            type: FontType.h4,
-          ),
-          _wireTransferButton(context),
-          _fpsButton(context),
-          _whatIsFpsButton(context),
-          _initiateEddaButton(context),
-          _whatIsEddaButton(context)
-        ],
+      child: BlocListener<DepositBloc, DepositState>(
+        listenWhen: (_, current) =>
+            current.depositEvent is DepositMethodSelected,
+        listener: (context, state) {
+          DepositPageStep depositPageStep;
+          var registeredBankAccount = state.registeredBankAccountResponse.data!;
+          if (state.depositMethod == DepositMethod.fps &&
+                  registeredBankAccount.fpsBankAccounts!.isNotEmpty ||
+              state.depositMethod == DepositMethod.wire &&
+                  registeredBankAccount.wireBankAccounts!.isNotEmpty ||
+              state.depositMethod == DepositMethod.eDda &&
+                  registeredBankAccount.eDdaBankAccounts!.isNotEmpty) {
+            depositPageStep = DepositPageStep.returningUser;
+          } else {
+            depositPageStep = DepositPageStep.selectBank;
+          }
+          context
+              .read<NavigationBloc<DepositPageStep>>()
+              .add(PageChanged(depositPageStep));
+        },
+        child: ListView(
+          children: [
+            const CustomText(
+              'Please select method of deposit',
+              padding: EdgeInsets.only(top: 10, bottom: 50),
+              type: FontType.h4,
+            ),
+            _wireTransferButton(context),
+            _fpsButton(context),
+            _whatIsFpsButton(context),
+            _initiateEddaButton(context),
+            _whatIsEddaButton(context)
+          ],
+        ),
       ),
     );
   }
@@ -38,11 +59,9 @@ class DepositMethodScreen extends StatelessWidget {
             key: const Key('wire_transfer_button'),
             borderRadius: 5,
             buttonText: 'WIRE TRANSFER',
-            onClick: () => context.read<DepositBloc>().add(
-                DepositMethodSelected(DepositMethod.wire,
-                    whenDone: (depositPageStep) => context
-                        .read<NavigationBloc<DepositPageStep>>()
-                        .add(PageChanged(depositPageStep))))));
+            onClick: () => context
+                .read<DepositBloc>()
+                .add(const DepositMethodSelected(DepositMethod.wire))));
   }
 
   Widget _initiateEddaButton(BuildContext context) {
@@ -52,27 +71,21 @@ class DepositMethodScreen extends StatelessWidget {
             key: const Key('edda_button'),
             borderRadius: 5,
             buttonText: 'Electronic Direct Debit Authorization (eDDA)',
-            onClick: () => context.read<DepositBloc>().add(
-                DepositMethodSelected(DepositMethod.eDda,
-                    whenDone: (depositPageStep) => context
-                        .read<NavigationBloc<DepositPageStep>>()
-                        .add(PageChanged(depositPageStep))))));
+            onClick: () => context
+                .read<DepositBloc>()
+                .add(const DepositMethodSelected(DepositMethod.eDda))));
   }
 
   Widget _fpsButton(BuildContext context) {
     return Padding(
         padding: EdgeInsets.zero,
-        child: BlocBuilder<DepositBloc, DepositState>(
-          builder: (context, state) => CustomTextButton(
-              key: const Key('fps_button'),
-              borderRadius: 5,
-              buttonText: 'FPS',
-              onClick: () => context.read<DepositBloc>().add(
-                  DepositMethodSelected(DepositMethod.fps,
-                      whenDone: (depositPageStep) => context
-                          .read<NavigationBloc<DepositPageStep>>()
-                          .add(PageChanged(depositPageStep))))),
-        ));
+        child: CustomTextButton(
+            key: const Key('fps_button'),
+            borderRadius: 5,
+            buttonText: 'FPS',
+            onClick: () => context
+                .read<DepositBloc>()
+                .add(const DepositMethodSelected(DepositMethod.fps))));
   }
 
   Widget _whatIsFpsButton(BuildContext context) {
