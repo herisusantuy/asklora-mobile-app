@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../bloc/navigation_bloc/navigation_bloc.dart';
 import '../../shareable/widget/custom_deposit_widget.dart';
 
 class InitiateScreen extends StatelessWidget {
@@ -23,7 +24,7 @@ class InitiateScreen extends StatelessWidget {
             child: InkWell(
           key: const Key('deposit_add_bank_details'),
           onTap: () => context
-              .read<DepositBloc>()
+              .read<NavigationBloc>()
               .add(const PageChanged(DepositPageStep.selectBank)),
           child: const Icon(
             Icons.add_circle_outline,
