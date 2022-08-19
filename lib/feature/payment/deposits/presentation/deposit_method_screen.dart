@@ -95,7 +95,7 @@ class DepositMethodScreen extends StatelessWidget {
           key: const Key('what_is_fps_button'),
           child: const CustomText('What is FPS?'),
           onTap: () => context
-              .read<NavigationBloc>()
+              .read<NavigationBloc<DepositPageStep>>()
               .add(const PageChanged(DepositPageStep.fpsMeaning))),
     );
   }
@@ -107,7 +107,7 @@ class DepositMethodScreen extends StatelessWidget {
           key: const Key('what_is_edda_button'),
           child: const CustomText('What is eDDA?'),
           onTap: () => context
-              .read<NavigationBloc>()
+              .read<NavigationBloc<DepositPageStep>>()
               .add(const PageChanged(DepositPageStep.eDdaMeaning))),
     );
   }
