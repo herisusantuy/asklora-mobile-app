@@ -24,7 +24,7 @@ class InitiateScreen extends StatelessWidget {
             child: InkWell(
           key: const Key('deposit_add_bank_details'),
           onTap: () => context
-              .read<NavigationBloc>()
+              .read<NavigationBloc<DepositPageStep>>()
               .add(const PageChanged(DepositPageStep.selectBank)),
           child: const Icon(
             Icons.add_circle_outline,
