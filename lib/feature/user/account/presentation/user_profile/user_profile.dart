@@ -31,7 +31,7 @@ class UserProfileScreen extends StatelessWidget {
       builder: (context, state) {
         if (state.status == AccountStatus.unknown ||
             state.status == AccountStatus.fetchingAccount) {
-          return _loadingWidget();
+          return const Center(child: CircularProgressIndicator());
         } else {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
