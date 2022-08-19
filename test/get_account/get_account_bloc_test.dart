@@ -1,7 +1,9 @@
 import 'package:asklora_mobile_app/core/utils/storage/secure_storage.dart';
 import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/account_api_client.dart';
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/identity.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/get_account/get_account_response.dart';
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/account_contact.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/get_account/trade_requirements_status.dart';
 import 'package:asklora_mobile_app/feature/user/account/repository/account_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -34,10 +36,13 @@ void main() {
         false,
         false,
       );
+      final contact = AccountContact('asd@mail.com', '+62', '811111111',
+          'Qwerty asdfg', 'qwe', 'no 01', 'asd', '111111', 'ASD');
       final GetAccountResponse account = GetAccountResponse(
         'asklora@loratech.ai.com',
         tradeRequirementStatus,
         false,
+        contact,
       );
 
       setUpAll(() async {

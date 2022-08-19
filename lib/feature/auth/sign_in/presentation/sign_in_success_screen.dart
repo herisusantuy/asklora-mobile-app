@@ -14,6 +14,7 @@ import '../../../payment/deposits/presentation/deposit_screen.dart';
 import '../../../payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import '../../../user/account/presentation/user_profile/user_profile.dart';
 import '../../../user/account/repository/account_repository.dart';
 import '../../../user/kyc/domain/onfido_result_request.dart';
 import '../../sign_out/bloc/sign_out_bloc.dart';
@@ -26,24 +27,25 @@ class SignInSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const CustomText('Success Login'),
-      ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => AccountBloc(
-                getAccountRepository: AccountRepository(),
-                secureStorage: SecureStorage()),
-          ),
-          BlocProvider(
-            create: (context) => SignOutBloc(
-                tokenRepository: TokenRepository(),
-                signOutRepository: SignOutRepository()),
-          ),
-        ],
-        child: Padding(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AccountBloc(
+              getAccountRepository: AccountRepository(),
+              secureStorage: SecureStorage()),
+        ),
+        BlocProvider(
+          create: (context) => SignOutBloc(
+              tokenRepository: TokenRepository(),
+              signOutRepository: SignOutRepository()),
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          title: const CustomText('Success Login'),
+          actions: [_userButton(context)],
+        ),
+        body: Padding(
           padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
           child: SingleChildScrollView(
             child: Column(
@@ -100,8 +102,6 @@ class SignInSuccessScreen extends StatelessWidget {
                       }
                     },
                     child: const SizedBox()),
-                _getAccountButton(),
-                _padding(),
                 _upgradeAccountScreen(context),
                 _padding(),
                 _getOnfidoToken(),
@@ -130,17 +130,24 @@ class SignInSuccessScreen extends StatelessWidget {
   Widget _depositScreen(BuildContext context) => CustomTextButton(
       buttonText: 'Deposit', onClick: () => DepositScreen.open(context));
 
-  Widget _getAccountButton() => BlocBuilder<AccountBloc, AccountState>(
-        builder: (context, state) {
-          return CustomTextButton(
-            buttonText: 'Get Account',
-            isLoading: state.status == AccountStatus.fetchingAccount,
-            disable: state.status == AccountStatus.fetchingAccount,
-            onClick: () => context.read<AccountBloc>().add(GetAccount()),
-            borderRadius: 5,
-          );
-        },
-      );
+  Widget _userButton(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        UserProfileScreen.open(context);
+      },
+      child: const Padding(
+        padding: EdgeInsets.all(5.0),
+        child: CircleAvatar(
+          radius: 15,
+          backgroundColor: Colors.white,
+          child: Icon(
+            Icons.person,
+            color: Colors.blue,
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget _signOutButton() => BlocListener<SignOutBloc, SignOutState>(
         listener: (context, state) async {

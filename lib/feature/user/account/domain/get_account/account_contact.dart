@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'contact.g.dart';
+part 'account_contact.g.dart';
 
 @JsonSerializable()
-class Contact {
+class AccountContact {
   @JsonKey(name: 'email_address')
   final String email;
   @JsonKey(name: 'phone_number_country_code')
@@ -19,7 +19,7 @@ class Contact {
   final String postalCode;
   final String country;
 
-  Contact(
+  AccountContact(
     this.email,
     this.countryCode,
     this.phoneNumber,
@@ -31,8 +31,8 @@ class Contact {
     this.country,
   );
 
-  factory Contact.fromJson(Map<String, dynamic> json) =>
-      _$ContactFromJson(json);
+  factory AccountContact.fromJson(Map<String, dynamic> json) =>
+      _$AccountContactFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ContactToJson(this);
+  Map<String, dynamic> toJson() => _$AccountContactToJson(this);
 }

@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'contact.dart';
+part of 'account_contact.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Contact _$ContactFromJson(Map<String, dynamic> json) => Contact(
+AccountContact _$AccountContactFromJson(Map<String, dynamic> json) =>
+    AccountContact(
       json['email_address'] as String,
       json['phone_number_country_code'] as String?,
       json['phone_number'] as String,
@@ -18,7 +19,8 @@ Contact _$ContactFromJson(Map<String, dynamic> json) => Contact(
       json['country'] as String,
     );
 
-Map<String, dynamic> _$ContactToJson(Contact instance) => <String, dynamic>{
+Map<String, dynamic> _$AccountContactToJson(AccountContact instance) =>
+    <String, dynamic>{
       'email_address': instance.email,
       'phone_number_country_code': instance.countryCode,
       'phone_number': instance.phoneNumber,

@@ -12,6 +12,7 @@ GetAccountResponse _$GetAccountResponseFromJson(Map<String, dynamic> json) =>
       TradeRequirementsStatus.fromJson(
           json['trade_requirements_status'] as Map<String, dynamic>),
       json['trade_status'] as bool,
+      AccountContact.fromJson(json['contact'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetAccountResponseToJson(GetAccountResponse instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$GetAccountResponseToJson(GetAccountResponse instance) =>
       'email': instance.email,
       'trade_requirements_status': instance.tradeRequirementsStatus.toJson(),
       'trade_status': instance.tradeStatus,
+      'contact': instance.contact.toJson(),
     };
