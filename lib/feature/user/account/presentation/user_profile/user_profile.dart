@@ -32,7 +32,7 @@ class UserProfileScreen extends StatelessWidget {
         if (state.status == AccountStatus.unknown ||
             state.status == AccountStatus.fetchingAccount) {
           return const Center(child: CircularProgressIndicator());
-        } else {
+        } else if (state.status == AccountStatus.success) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -67,13 +67,11 @@ class UserProfileScreen extends StatelessWidget {
               _customRowText('Country', state.account!.contact.country),
             ],
           );
+        } else {
+          return const Center(child: CustomText('Failed to Load data'));
         }
       },
     );
-  }
-
-  Widget _loadingWidget() {
-    return const Center(child: CustomText('Loading...'));
   }
 
   Widget _customRowText(String label, String value) {
