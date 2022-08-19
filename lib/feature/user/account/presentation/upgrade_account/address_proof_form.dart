@@ -223,6 +223,7 @@ class AddressProofForm extends StatelessWidget {
                 buttonText: 'Next',
                 borderRadius: 30,
                 onClick: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   context
                       .read<AccountBloc>()
                       .add(const AccountCurrentStepChanged('next'));
