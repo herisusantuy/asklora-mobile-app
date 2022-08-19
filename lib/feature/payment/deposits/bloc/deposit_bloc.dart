@@ -14,7 +14,6 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
   DepositBloc({required BankDetailsRepository bankDetailsRepository})
       : _bankDetailsRepository = bankDetailsRepository,
         super(const DepositState()) {
-    on<PageChanged>(_onPageChanged);
     on<BankSelected>(_onBankSelected);
     on<DepositMethodSelected>(_onDepositMethodSelected);
     on<RegisteredBankAccountCheck>(_onRegisteredBankAccountCheck);
@@ -22,33 +21,14 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   final BankDetailsRepository _bankDetailsRepository;
 
-  void _onPageChanged(PageChanged event, Emitter<DepositState> emit) {
-    emit(state.copyWith(depositPages: event.depositPages));
-  }
-
   void _onDepositMethodSelected(
       DepositMethodSelected event, Emitter<DepositState> emit) {
-    var registeredBankAccount = state.registeredBankAccountResponse.data!;
-    if (event.depositMethod == DepositMethod.fps &&
-            registeredBankAccount.fpsBankAccounts!.isNotEmpty ||
-        event.depositMethod == DepositMethod.wire &&
-            registeredBankAccount.wireBankAccounts!.isNotEmpty ||
-        event.depositMethod == DepositMethod.eDda &&
-            registeredBankAccount.eDdaBankAccounts!.isNotEmpty) {
-      emit(state.copyWith(
-          depositMethod: event.depositMethod,
-          depositPages: DepositPageStep.returningUser));
-    } else {
-      emit(state.copyWith(
-          depositMethod: event.depositMethod,
-          depositPages: DepositPageStep.selectBank));
-    }
+    emit(state.copyWith(
+        depositMethod: event.depositMethod, depositEvent: event));
   }
 
   void _onBankSelected(BankSelected event, Emitter<DepositState> emit) {
-    emit(state.copyWith(
-        bankDetails: event.bankDetails,
-        depositPages: DepositPageStep.eDdaBankDetails));
+    emit(state.copyWith(bankDetails: event.bankDetails, depositEvent: event));
   }
 
   void _onRegisteredBankAccountCheck(
@@ -58,8 +38,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
           registeredBankAccountResponse: BaseResponse.loading()));
       var response = await _bankDetailsRepository.getBankAccount();
       emit(state.copyWith(
-          registeredBankAccountResponse: response,
-          depositPages: DepositPageStep.depositMethod));
+          registeredBankAccountResponse: response, depositEvent: event));
     } catch (e) {
       emit(state.copyWith(
           registeredBankAccountResponse: BaseResponse.error(e.toString())));

@@ -8,14 +8,14 @@ class BankDetailsProgressScreen extends StatelessWidget {
     return BlocListener<BankDetailsBloc, BankDetailsState>(
         listener: (context, state) {
           if (state.response.state == ResponseState.success) {
-            context
-                .read<DepositBloc>()
-                .add(const PageChanged(DepositPageStep.eDdaBankDetailsSuccess));
+            context.read<NavigationBloc<DepositPageStep>>().add(
+                const PageChangedReplacement(
+                    DepositPageStep.eDdaBankDetailsSuccess));
           } else if (state.response.state == ResponseState.error) {
             showAlertDialog(context, state.response.message,
                 onPressedOk: () => context
-                    .read<DepositBloc>()
-                    .add(const PageChanged(DepositPageStep.eDdaBankDetails)));
+                    .read<NavigationBloc<DepositPageStep>>()
+                    .add(const PagePop()));
           }
         },
         child: Container(

@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../bloc/navigation_bloc/navigation_bloc.dart';
 
 class CustomDepositWidget extends StatelessWidget {
   final String title;
   final Widget child;
-  final DepositPageStep? backTo;
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;
@@ -17,7 +17,6 @@ class CustomDepositWidget extends StatelessWidget {
 
   const CustomDepositWidget(
       {required this.child,
-      this.backTo,
       this.onSubmit,
       this.disableButton = true,
       this.navigationButton,
@@ -29,9 +28,7 @@ class CustomDepositWidget extends StatelessWidget {
       : super(key: key);
 
   void _onTapBack(BuildContext context) {
-    backTo != null
-        ? context.read<DepositBloc>().add(PageChanged(backTo!))
-        : Navigator.pop(context);
+    context.read<NavigationBloc<DepositPageStep>>().add(const PagePop());
     if (onBackPressed != null) {
       onBackPressed!();
     }

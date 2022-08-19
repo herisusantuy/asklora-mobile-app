@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../bloc/deposit_bloc.dart';
+import '../bloc/navigation_bloc/navigation_bloc.dart';
 import '../shareable/widget/custom_deposit_widget.dart';
 
 class DepositMethodScreen extends StatelessWidget {
@@ -12,21 +13,41 @@ class DepositMethodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPageStep.welcome,
       title: 'Deposit Method',
-      child: ListView(
-        children: [
-          const CustomText(
-            'Please select method of deposit',
-            padding: EdgeInsets.only(top: 10, bottom: 50),
-            type: FontType.h4,
-          ),
-          _wireTransferButton(context),
-          _fpsButton(context),
-          _whatIsFpsButton(context),
-          _initiateEddaButton(context),
-          _whatIsEddaButton(context)
-        ],
+      child: BlocListener<DepositBloc, DepositState>(
+        listenWhen: (_, current) =>
+            current.depositEvent is DepositMethodSelected,
+        listener: (context, state) {
+          DepositPageStep depositPageStep;
+          var registeredBankAccount = state.registeredBankAccountResponse.data!;
+          if (state.depositMethod == DepositMethod.fps &&
+                  registeredBankAccount.fpsBankAccounts!.isNotEmpty ||
+              state.depositMethod == DepositMethod.wire &&
+                  registeredBankAccount.wireBankAccounts!.isNotEmpty ||
+              state.depositMethod == DepositMethod.eDda &&
+                  registeredBankAccount.eDdaBankAccounts!.isNotEmpty) {
+            depositPageStep = DepositPageStep.returningUser;
+          } else {
+            depositPageStep = DepositPageStep.selectBank;
+          }
+          context
+              .read<NavigationBloc<DepositPageStep>>()
+              .add(PageChanged(depositPageStep));
+        },
+        child: ListView(
+          children: [
+            const CustomText(
+              'Please select method of deposit',
+              padding: EdgeInsets.only(top: 10, bottom: 50),
+              type: FontType.h4,
+            ),
+            _wireTransferButton(context),
+            _fpsButton(context),
+            _whatIsFpsButton(context),
+            _initiateEddaButton(context),
+            _whatIsEddaButton(context)
+          ],
+        ),
       ),
     );
   }
@@ -58,15 +79,13 @@ class DepositMethodScreen extends StatelessWidget {
   Widget _fpsButton(BuildContext context) {
     return Padding(
         padding: EdgeInsets.zero,
-        child: BlocBuilder<DepositBloc, DepositState>(
-          builder: (context, state) => CustomTextButton(
-              key: const Key('fps_button'),
-              borderRadius: 5,
-              buttonText: 'FPS',
-              onClick: () => context
-                  .read<DepositBloc>()
-                  .add(const DepositMethodSelected(DepositMethod.fps))),
-        ));
+        child: CustomTextButton(
+            key: const Key('fps_button'),
+            borderRadius: 5,
+            buttonText: 'FPS',
+            onClick: () => context
+                .read<DepositBloc>()
+                .add(const DepositMethodSelected(DepositMethod.fps))));
   }
 
   Widget _whatIsFpsButton(BuildContext context) {
@@ -76,7 +95,7 @@ class DepositMethodScreen extends StatelessWidget {
           key: const Key('what_is_fps_button'),
           child: const CustomText('What is FPS?'),
           onTap: () => context
-              .read<DepositBloc>()
+              .read<NavigationBloc>()
               .add(const PageChanged(DepositPageStep.fpsMeaning))),
     );
   }
@@ -88,7 +107,7 @@ class DepositMethodScreen extends StatelessWidget {
           key: const Key('what_is_edda_button'),
           child: const CustomText('What is eDDA?'),
           onTap: () => context
-              .read<DepositBloc>()
+              .read<NavigationBloc>()
               .add(const PageChanged(DepositPageStep.eDdaMeaning))),
     );
   }

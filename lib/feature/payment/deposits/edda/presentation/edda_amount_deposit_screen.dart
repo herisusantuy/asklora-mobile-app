@@ -9,6 +9,7 @@ import '../../../presentation/custom_payment_text_input.dart';
 import '../../../presentation/payment_confirmation_dialog.dart';
 import '../../../utils/amount_error_type.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../bloc/navigation_bloc/navigation_bloc.dart';
 import '../../shareable/widget/custom_deposit_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
 
@@ -18,7 +19,6 @@ class EddaAmountDepositScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-        backTo: DepositPageStep.eDdaBankDetails,
         title: 'eDDA Deposit',
         navigationButton: BlocBuilder<AmountBloc, AmountState>(
             builder: (context, state) => CustomPaymentButton(
@@ -77,6 +77,6 @@ class EddaAmountDepositScreen extends StatelessWidget {
               warningText:
                   'Please note that the deposit amount cannot exceed the account balance in your bank. Otherwise, your bank may charge you extra fees due to transaction failures',
               onSubmit: () => context
-                  .read<DepositBloc>()
+                  .read<NavigationBloc>()
                   .add(const PageChanged(DepositPageStep.acknowledged))));
 }

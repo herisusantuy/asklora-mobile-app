@@ -29,7 +29,7 @@ class BankDetailsSuccessScreen extends StatelessWidget {
 
   void _delayedNextStep(BuildContext context) {
     Future.delayed(const Duration(seconds: 1)).then((value) => context
-        .read<DepositBloc>()
-        .add(const PageChanged(DepositPageStep.eDdaDepositAmount)));
+        .read<NavigationBloc>()
+        .add(const PageChangedReplacement(DepositPageStep.eDdaDepositAmount)));
   }
 }

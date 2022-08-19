@@ -10,6 +10,7 @@ import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../bloc/navigation_bloc/navigation_bloc.dart';
 import '../bank_list/domain/bank_details.dart';
 import '../widget/custom_deposit_widget.dart';
 import 'bloc/bank_details_bloc.dart';
@@ -31,11 +32,11 @@ class BankAccountDetailsScreen extends StatelessWidget {
           var depositMethod = context.read<DepositBloc>().state.depositMethod;
           if (depositMethod == DepositMethod.wire) {
             context
-                .read<DepositBloc>()
+                .read<NavigationBloc>()
                 .add(const PageChanged(DepositPageStep.wireTransfer));
           } else if (depositMethod == DepositMethod.fps) {
             context
-                .read<DepositBloc>()
+                .read<NavigationBloc>()
                 .add(const PageChanged(DepositPageStep.fpsTransfer));
           }
         } else if (state.response.state == ResponseState.error) {
@@ -47,7 +48,6 @@ class BankAccountDetailsScreen extends StatelessWidget {
       },
       child: CustomDepositWidget(
         title: 'Your Bank Details',
-        backTo: DepositPageStep.selectBank,
         onBackPressed: () =>
             context.read<BankDetailsBloc>().add(const BankDetailsReset()),
         child: BlocBuilder<BankDetailsBloc, BankDetailsState>(

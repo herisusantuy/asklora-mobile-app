@@ -19,14 +19,16 @@ class CustomPaymentButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(32),
-      child: CustomTextButton(
-        isLoading: isLoading,
-        height: 40,
-        disable: disable,
-        buttonText: title,
-        onClick: onSubmit,
-        primaryColor: Colors.black,
-        borderRadius: 6,
+      child: Center(
+        child: CustomTextButton(
+          isLoading: isLoading,
+          height: 40,
+          disable: disable,
+          buttonText: title,
+          onClick: onSubmit,
+          primaryColor: Colors.black,
+          borderRadius: 6,
+        ),
       ),
     );
   }

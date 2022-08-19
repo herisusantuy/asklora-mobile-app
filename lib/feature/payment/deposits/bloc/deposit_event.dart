@@ -7,15 +7,6 @@ abstract class DepositEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class PageChanged extends DepositEvent {
-  final DepositPageStep depositPages;
-
-  const PageChanged(this.depositPages) : super();
-
-  @override
-  List<Object?> get props => [depositPages];
-}
-
 class DepositMethodSelected extends DepositEvent {
   final DepositMethod depositMethod;
 
