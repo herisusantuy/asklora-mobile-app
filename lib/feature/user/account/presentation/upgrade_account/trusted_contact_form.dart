@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/custom_phone_number_input.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
-import '../../../../../core/utils/formatters/phone_input_formatter/phone_input_formatter.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 
@@ -48,6 +47,8 @@ class TrustedContactForm extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20.0),
             child: CustomTextInput(
               initialValue: state.firstName,
+              textCapitalization: TextCapitalization.words,
+              textInputType: TextInputType.text,
               key: const Key('trusted_contact_first_name_input'),
               labelText: 'First Name',
               hintText: 'Enter First Name',
@@ -68,6 +69,8 @@ class TrustedContactForm extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
               initialValue: state.lastName,
+              textCapitalization: TextCapitalization.words,
+              textInputType: TextInputType.text,
               key: const Key('trusted_contact_last_name_input'),
               labelText: 'Last Name',
               errorText: state.lastNameErrorText,
@@ -101,31 +104,23 @@ class TrustedContactForm extends StatelessWidget {
         },
       );
 
-  Widget _phoneNumberInput() =>
-      BlocBuilder<TrustedContactBloc, TrustedContactState>(
-        buildWhen: (previous, current) =>
-            previous.phoneNumber != current.phoneNumber,
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: CustomTextInput(
-              initialValue: state.phoneNumber,
-              textInputFormatterList: [
-                FilteringTextInputFormatter.digitsOnly,
-                PhoneInputFormatter(
-                    onPhoneNumberChange: (value) => context
-                        .read<TrustedContactBloc>()
-                        .add(PhoneNumberChanged(value)))
-              ],
-              key: const Key('trusted_contact_phone_number_input'),
-              labelText: 'Phone Number',
-              hintText: '+852 1234 5678',
-              errorText: state.phoneNumberErrorText,
-              textInputType: TextInputType.number,
-              onChanged: (value) => {},
-            ),
-          );
-        },
+  Widget _phoneNumberInput() => Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: BlocBuilder<TrustedContactBloc, TrustedContactState>(
+            buildWhen: (previous, current) =>
+                previous.countryCode != current.countryCode ||
+                previous.phoneNumber != current.phoneNumber,
+            builder: (context, state) => CustomPhoneNumberInput(
+                  key: const Key('trusted_contact_phone_number_input'),
+                  initialValueOfCodeArea: state.countryCode,
+                  initialValueOfPhoneNumber: state.phoneNumber,
+                  onChangedCodeArea: (country) => context
+                      .read<TrustedContactBloc>()
+                      .add(CountryCodeChanged(country.phoneCode)),
+                  onChangePhoneNumber: (phoneNumber) => context
+                      .read<TrustedContactBloc>()
+                      .add(PhoneNumberChanged(phoneNumber)),
+                )),
       );
 
   Widget _nextButton() => BlocBuilder<TrustedContactBloc, TrustedContactState>(
@@ -138,6 +133,7 @@ class TrustedContactForm extends StatelessWidget {
               buttonText: 'Next',
               disable: state.disableNextButton(),
               onClick: () {
+                FocusManager.instance.primaryFocus?.unfocus();
                 context
                     .read<AccountBloc>()
                     .add(const AccountCurrentStepChanged('next'));

@@ -43,6 +43,15 @@ class PhoneNumberChanged extends TrustedContactEvent {
   List<Object> get props => [phoneNumber];
 }
 
+class CountryCodeChanged extends TrustedContactEvent {
+  final String countryCode;
+
+  const CountryCodeChanged(this.countryCode) : super();
+
+  @override
+  List<Object> get props => [countryCode];
+}
+
 class TrustedContactSubmitted extends TrustedContactEvent {
   const TrustedContactSubmitted();
 

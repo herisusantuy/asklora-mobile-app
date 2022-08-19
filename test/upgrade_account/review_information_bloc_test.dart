@@ -68,7 +68,8 @@ void main() async {
       upgradeAccountRequest = UpgradeAccountRequest(
           contact: Contact(
               emailAddress: '',
-              phoneNumber: basicInformationBloc.state.phoneNumber,
+              phoneNumber:
+                  '+${basicInformationBloc.state.countryCode}${basicInformationBloc.state.phoneNumber}',
               streetAddress: addressProofBloc.state.residentialAddress,
               unit: addressProofBloc.state.unitNumber,
               city: addressProofBloc.state.city,
@@ -93,7 +94,8 @@ void main() async {
               givenName: trustedContactBloc.state.firstName,
               familyName: trustedContactBloc.state.lastName,
               email: trustedContactBloc.state.emailAddress,
-              phone: trustedContactBloc.state.phoneNumber),
+              phone:
+                  '+${trustedContactBloc.state.countryCode}${trustedContactBloc.state.phoneNumber}'),
           disclosures: Disclosures(
               isControlPerson: disclosureAffiliationBloc.state.isOwner,
               isAffiliatedExchangeOrFinra:
