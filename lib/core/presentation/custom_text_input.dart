@@ -18,6 +18,7 @@ class CustomTextInput extends StatelessWidget {
   final InputBorder? disabledBorder;
   final InputBorder? focusedBorder;
   final FloatingLabelBehavior? floatingLabelBehavior;
+  final TextCapitalization textCapitalization;
 
   const CustomTextInput(
       {required this.labelText,
@@ -36,11 +37,13 @@ class CustomTextInput extends StatelessWidget {
       this.disabledBorder,
       this.focusedBorder,
       this.prefixText = '',
+      this.textCapitalization = TextCapitalization.none,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => TextFormField(
+        textCapitalization: textCapitalization,
         initialValue: initialValue,
         inputFormatters: textInputFormatterList,
         maxLength: maxLength,
