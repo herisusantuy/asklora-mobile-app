@@ -10,7 +10,7 @@ void main() {
     Future<void> _buildWhatIsFpsScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: const DepositScreen(
+        home: DepositScreen(
           initialDepositPages: DepositPageStep.fpsMeaning,
         ),
         navigatorObservers: [mockObserver],

@@ -11,7 +11,7 @@ void main() {
     Future<void> _buildWireTransferScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: const DepositScreen(
+        home: DepositScreen(
           initialDepositPages: DepositPageStep.wireTransfer,
         ),
         navigatorObservers: [mockObserver],
