@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   buttonText: 'Login',
                   onClick: () => SignInScreen.open(context),
                   borderRadius: borderRadius,
-                ),
+                )
               ],
             )));
   }
