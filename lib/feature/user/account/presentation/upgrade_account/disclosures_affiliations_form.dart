@@ -300,6 +300,7 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
               buttonText: 'Next',
               disable: state.disabledNextButton(),
               onClick: () {
+                FocusManager.instance.primaryFocus?.unfocus();
                 context
                     .read<AccountBloc>()
                     .add(const AccountCurrentStepChanged('next'));
