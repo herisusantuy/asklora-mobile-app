@@ -87,6 +87,8 @@ class FinancialProfileForm extends StatelessWidget {
   }
 
   Widget _fundingSourceDropdown() {
+    List<String> itemList = FundingSource.values.map((e) => e.name).toList();
+    itemList.remove('unknown');
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.fundingSource != current.fundingSource,
@@ -98,7 +100,7 @@ class FinancialProfileForm extends StatelessWidget {
             hintName: state.fundingSource != FundingSource.unknown
                 ? state.fundingSource.name
                 : '-',
-            itemsList: FundingSource.values.map((item) => item.name).toList(),
+            itemsList: itemList,
             value: state.fundingSource.name,
             onChanged: (value) {
               final fundingSource = FundingSource.values.byName(value!);
@@ -111,6 +113,8 @@ class FinancialProfileForm extends StatelessWidget {
   }
 
   Widget _employmentStatusDropdown() {
+    List<String> itemList = EmploymentStatus.values.map((e) => e.name).toList();
+    itemList.remove('unknown');
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.employmentStatus != current.employmentStatus,
@@ -124,7 +128,7 @@ class FinancialProfileForm extends StatelessWidget {
                 hintName: state.employmentStatus != EmploymentStatus.unknown
                     ? state.employmentStatus.name
                     : '-',
-                itemsList: EmploymentStatus.values.map((e) => e.name).toList(),
+                itemsList: itemList,
                 value: state.employmentStatus.name,
                 onChanged: (value) {
                   final employmentStatus =
