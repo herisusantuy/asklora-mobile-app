@@ -15,7 +15,6 @@ class FpsTransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPageStep.eDdaBankDetails,
       title: 'FPS Transfer',
       child: ListView(
         children: [
