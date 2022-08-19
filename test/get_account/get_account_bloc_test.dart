@@ -1,7 +1,9 @@
 import 'package:asklora_mobile_app/core/utils/storage/secure_storage.dart';
 import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/account_api_client.dart';
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/account_identity.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/get_account/get_account_response.dart';
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/account_contact.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/get_account/trade_requirements_status.dart';
 import 'package:asklora_mobile_app/feature/user/account/repository/account_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -34,10 +36,35 @@ void main() {
         false,
         false,
       );
+      final AccountContact contact = AccountContact(
+          email: 'asd@mail.com',
+          countryCode: '+62',
+          phoneNumber: '811111111',
+          streetAddress: 'Qwerty asdfg',
+          city: 'qwe',
+          unit: 'no 01',
+          state: 'asd',
+          postalCode: '111111',
+          country: 'ASD');
+      final AccountIdentity identity = AccountIdentity(
+          givenName: 'asd',
+          middleName: 'asd',
+          familyName: 'asd',
+          chineseName: 'asd',
+          dateOfBirth: 'asd',
+          taxId: '123',
+          taxIdType: 'USA_SSN',
+          countryOfResidentship: 'asd',
+          countryOfCitizenship: 'asd',
+          countryOfBirth: 'asd',
+          countryOfTaxResidence: 'asd',
+          fundingSource: 'asd');
       final GetAccountResponse account = GetAccountResponse(
         'asklora@loratech.ai.com',
         tradeRequirementStatus,
         false,
+        contact,
+        identity,
       );
 
       setUpAll(() async {
