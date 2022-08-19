@@ -21,50 +21,59 @@ class UserProfileScreen extends StatelessWidget {
             getAccountRepository: AccountRepository(),
             secureStorage: SecureStorage())
           ..add(GetAccount()),
-        child: BlocBuilder<AccountBloc, AccountState>(
-          builder: (context, state) {
-            if (state.status == AccountStatus.unknown ||
-                state.status == AccountStatus.fetchingAccount) {
-              return const Center(child: CustomText('Loading...'));
-            } else {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          const CircleAvatar(
-                            radius: 30,
-                            child: CustomText('Ava'),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          CustomText(
-                            state.account!.email,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  _customRowText('Email', state.account!.email),
-                  _customRowText('Phone Number',
-                      '${state.account!.contact.countryCode ?? ''}${state.account!.contact.phoneNumber}'),
-                  _customRowText(
-                      'Street Address', state.account!.contact.streetAddress),
-                  _customRowText('City', state.account!.contact.city),
-                  _customRowText('Unit', state.account!.contact.unit),
-                  _customRowText('State', state.account!.contact.state),
-                  _customRowText('Country', state.account!.contact.country),
-                ],
-              );
-            }
-          },
-        ),
+        child: _userProfile(),
       ),
     );
+  }
+
+  Widget _userProfile() {
+    return BlocBuilder<AccountBloc, AccountState>(
+      builder: (context, state) {
+        if (state.status == AccountStatus.unknown ||
+            state.status == AccountStatus.fetchingAccount) {
+          return _loadingWidget();
+        } else {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      const CircleAvatar(
+                        radius: 30,
+                        child: CustomText('Ava'),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      CustomText(
+                        '${state.account!.identity.givenName} ${state.account!.identity.middleName} ${state.account!.identity.familyName}',
+                      ),
+                      CustomText(state.account?.identity.chineseName ?? '')
+                    ],
+                  ),
+                ),
+              ),
+              _customRowText('Email', state.account!.email),
+              _customRowText('Phone Number',
+                  '${state.account!.contact.countryCode ?? ''}${state.account!.contact.phoneNumber}'),
+              _customRowText(
+                  'Street Address', state.account!.contact.streetAddress),
+              _customRowText('City', state.account!.contact.city),
+              _customRowText('Unit', state.account!.contact.unit),
+              _customRowText('State', state.account!.contact.state),
+              _customRowText('Country', state.account!.contact.country),
+            ],
+          );
+        }
+      },
+    );
+  }
+
+  Widget _loadingWidget() {
+    return const Center(child: CustomText('Loading...'));
   }
 
   Widget _customRowText(String label, String value) {

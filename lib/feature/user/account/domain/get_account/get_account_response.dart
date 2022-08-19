@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'account_contact.dart';
+import 'account_identity.dart';
 import 'trade_requirements_status.dart';
 
 part 'get_account_response.g.dart';
@@ -15,12 +16,15 @@ class GetAccountResponse extends Equatable {
   final bool tradeStatus;
   @JsonKey(name: 'contact')
   final AccountContact contact;
+  @JsonKey(name: 'identity')
+  final AccountIdentity identity;
 
   const GetAccountResponse(
     this.email,
     this.tradeRequirementsStatus,
     this.tradeStatus,
     this.contact,
+    this.identity,
   );
 
   factory GetAccountResponse.fromJson(Map<String, dynamic> json) =>

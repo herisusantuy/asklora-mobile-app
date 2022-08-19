@@ -1,27 +1,39 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'identity.g.dart';
+part 'account_identity.g.dart';
 
 @JsonSerializable()
-class Identity {
+class AccountIdentity {
+  @JsonKey(name: 'given_name')
   final String givenName;
+  @JsonKey(name: 'middle_name')
   final String middleName;
+  @JsonKey(name: 'family_name')
   final String familyName;
-  final String chineseNAme;
+  @JsonKey(name: 'chinese_name')
+  final String? chineseName;
+  @JsonKey(name: 'date_of_name')
   final String dateOfBirth;
+  @JsonKey(name: 'tax_id')
   final String taxId;
+  @JsonKey(name: 'tax_id_type')
   final String taxIdType;
+  @JsonKey(name: 'country_of_residentship')
   final String countryOfResidentship;
+  @JsonKey(name: 'country_of_citizenship')
   final String countryOfCitizenship;
+  @JsonKey(name: 'country_of_birth')
   final String countryOfBirth;
+  @JsonKey(name: 'country_of_tax_residence')
   final String countryOfTaxResidence;
+  @JsonKey(name: 'funding_source')
   final String fundingSource;
 
-  Identity({
+  AccountIdentity({
     this.givenName = '',
     this.middleName = '',
     this.familyName = '',
-    this.chineseNAme = '',
+    this.chineseName = '',
     this.dateOfBirth = '',
     this.taxId = '',
     this.taxIdType = '',
@@ -32,8 +44,8 @@ class Identity {
     this.fundingSource = '',
   });
 
-  factory Identity.fromJson(Map<String, dynamic> json) =>
-      _$IdentityFromJson(json);
+  factory AccountIdentity.fromJson(Map<String, dynamic> json) =>
+      _$AccountIdentityFromJson(json);
 
-  Map<String, dynamic> toJson() => _$IdentityToJson(this);
+  Map<String, dynamic> toJson() => _$AccountIdentityToJson(this);
 }
