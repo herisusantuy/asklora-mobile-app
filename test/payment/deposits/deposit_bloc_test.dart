@@ -32,7 +32,7 @@ void main() async {
       expect(
           depositBloc.state,
           const DepositState(
-            depositPages: DepositPageStep.unknown,
+            depositPages: DepositPageStep.welcome,
             registeredBankAccountResponse: BaseResponse(),
           ));
     });
@@ -63,7 +63,11 @@ void main() async {
         act: (bloc) => bloc.add(const RegisteredBankAccountCheck()),
         expect: () => {
               DepositState(
+                  depositPages: DepositPageStep.welcome,
                   registeredBankAccountResponse: BaseResponse.loading()),
+              DepositState(
+                  depositPages: DepositPageStep.welcome,
+                  registeredBankAccountResponse: registeredBankAccountResponse),
               DepositState(
                   depositPages: DepositPageStep.depositMethod,
                   registeredBankAccountResponse: registeredBankAccountResponse),
@@ -84,10 +88,19 @@ void main() async {
         },
         expect: () => {
               DepositState(
+                  depositPages: DepositPageStep.welcome,
                   registeredBankAccountResponse: BaseResponse.loading()),
+              DepositState(
+                  depositPages: DepositPageStep.welcome,
+                  registeredBankAccountResponse: registeredBankAccountResponse),
               DepositState(
                   depositPages: DepositPageStep.depositMethod,
                   registeredBankAccountResponse: registeredBankAccountResponse),
+              DepositState(
+                depositMethod: DepositMethod.fps,
+                depositPages: DepositPageStep.depositMethod,
+                registeredBankAccountResponse: registeredBankAccountResponse,
+              ),
               DepositState(
                 depositMethod: DepositMethod.fps,
                 depositPages: DepositPageStep.returningUser,
@@ -104,6 +117,9 @@ void main() async {
         act: (bloc) =>
             bloc.add(const BankSelected(BankDetails(123, 'BCA', '', '112233'))),
         expect: () => {
+              const DepositState(
+                  bankDetails: BankDetails(123, 'BCA', '', '112233'),
+                  depositPages: DepositPageStep.welcome),
               const DepositState(
                   bankDetails: BankDetails(123, 'BCA', '', '112233'),
                   depositPages: DepositPageStep.eDdaBankDetails),
