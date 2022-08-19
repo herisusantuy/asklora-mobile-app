@@ -13,6 +13,7 @@ class TrustedContactBloc
     on<FirstNameChanged>(_onFirstNameChanged);
     on<LastNameChanged>(_onLastNameChanged);
     on<EmailAddressChanged>(_onEmailAddressChanged);
+    on<CountryCodeChanged>(_onCountryCodeChanged);
     on<PhoneNumberChanged>(_onPhoneNumberChanged);
     on<TrustedContactSubmitted>(_onTrustedContactSubmitted);
   }
@@ -62,6 +63,13 @@ class TrustedContactBloc
                   ? 'Enter valid phone number'
                   : ''),
     );
+  }
+
+  void _onCountryCodeChanged(
+      CountryCodeChanged event, Emitter<TrustedContactState> emit) {
+    emit(state.copyWith(
+      countryCode: event.countryCode,
+    ));
   }
 
   void _onTrustedContactSubmitted(

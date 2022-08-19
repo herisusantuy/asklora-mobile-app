@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/utils/storage/secure_storage.dart';
 import '../../bloc/account_bloc.dart';
@@ -34,6 +35,8 @@ class UpgradeAccountScreen extends StatelessWidget {
   final int initialPage;
 
   final PageController _pageViewController;
+
+  DateTime? currentBackPressTime;
 
   List<Widget> get _pages => [
         BasicInformationForm(
@@ -74,49 +77,67 @@ class UpgradeAccountScreen extends StatelessWidget {
       ];
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          toolbarHeight: 0,
-          automaticallyImplyLeading: false,
-          title: const CustomText('Upgrade Account'),
-        ),
-        body: MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => accountBloc),
-            BlocProvider(create: (context) => accountBloc.basicInformationBloc),
-            BlocProvider(
-                create: (context) => accountBloc.countryOfTaxResidenceBloc),
-            BlocProvider(create: (context) => accountBloc.addressProofBloc),
-            BlocProvider(create: (context) => accountBloc.financialProfileBloc),
-            BlocProvider(
-                create: (context) => accountBloc.disclosureAffiliationBloc),
-            BlocProvider(
-                create: (context) => accountBloc.signingBrokerAgreementBloc),
-            BlocProvider(create: (context) => accountBloc.trustedContactBloc),
-            BlocProvider(create: (context) => RiskDisclosureBloc()),
-            BlocProvider(create: (context) => ReviewInformationBloc()),
-            BlocProvider(create: (context) => SigningAgreementTaxBloc()),
-          ],
-          child: SafeArea(
-              child: Column(
-            children: [
-              _headerUpgradeAccount(),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: PageView(
-                    key: const Key('upgrade_account_page_view'),
-                    controller: _pageViewController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: _pages,
+  Widget build(BuildContext context) => WillPopScope(
+        onWillPop: () => onWillPop(context),
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            toolbarHeight: 0,
+            automaticallyImplyLeading: false,
+            title: const CustomText('Upgrade Account'),
+          ),
+          body: MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => accountBloc),
+              BlocProvider(
+                  create: (context) => accountBloc.basicInformationBloc),
+              BlocProvider(
+                  create: (context) => accountBloc.countryOfTaxResidenceBloc),
+              BlocProvider(create: (context) => accountBloc.addressProofBloc),
+              BlocProvider(
+                  create: (context) => accountBloc.financialProfileBloc),
+              BlocProvider(
+                  create: (context) => accountBloc.disclosureAffiliationBloc),
+              BlocProvider(
+                  create: (context) => accountBloc.signingBrokerAgreementBloc),
+              BlocProvider(create: (context) => accountBloc.trustedContactBloc),
+              BlocProvider(create: (context) => RiskDisclosureBloc()),
+              BlocProvider(create: (context) => ReviewInformationBloc()),
+              BlocProvider(create: (context) => SigningAgreementTaxBloc()),
+            ],
+            child: SafeArea(
+                child: Column(
+              children: [
+                _headerUpgradeAccount(),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: PageView(
+                      key: const Key('upgrade_account_page_view'),
+                      controller: _pageViewController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: _pages,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            )),
+          ),
         ),
       );
+
+  Future<bool> onWillPop(BuildContext context) {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      CustomSnackBar(context)
+          .setMessage('Press back again to go back to the title screen')
+          .show();
+      return Future.value(false);
+    }
+    return Future.value(true);
+  }
 
   Widget _headerUpgradeAccount() => Container(
         decoration: const BoxDecoration(

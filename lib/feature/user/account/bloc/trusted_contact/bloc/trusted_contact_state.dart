@@ -9,6 +9,7 @@ class TrustedContactState extends Equatable {
   final String emailErrorText;
   final String phoneNumber;
   final String phoneNumberErrorText;
+  final String countryCode;
 
   const TrustedContactState({
     this.firstName = '',
@@ -19,6 +20,7 @@ class TrustedContactState extends Equatable {
     this.emailErrorText = '',
     this.phoneNumber = '',
     this.phoneNumberErrorText = '',
+    this.countryCode = '',
   });
 
   TrustedContactState copyWith({
@@ -30,6 +32,7 @@ class TrustedContactState extends Equatable {
     String? emailErrorText,
     String? phoneNumber,
     String? phoneNumberErrorText,
+    String? countryCode,
   }) {
     return TrustedContactState(
       firstName: firstName ?? this.firstName,
@@ -40,6 +43,7 @@ class TrustedContactState extends Equatable {
       emailErrorText: emailErrorText ?? this.emailErrorText,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       phoneNumberErrorText: phoneNumberErrorText ?? this.phoneNumberErrorText,
+      countryCode: countryCode ?? this.countryCode,
     );
   }
 
@@ -53,6 +57,7 @@ class TrustedContactState extends Equatable {
         emailErrorText,
         phoneNumber,
         phoneNumberErrorText,
+        countryCode
       ];
 
   bool disableNextButton() {
@@ -61,7 +66,8 @@ class TrustedContactState extends Equatable {
         emailAddress.isEmpty ||
         phoneNumber.isEmpty ||
         phoneNumberErrorText.isNotEmpty ||
-        emailErrorText.isNotEmpty) {
+        emailErrorText.isNotEmpty ||
+        countryCode.isEmpty) {
       return true;
     }
     return false;

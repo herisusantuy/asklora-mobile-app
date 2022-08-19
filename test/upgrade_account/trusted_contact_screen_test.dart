@@ -118,8 +118,6 @@ void main() async {
       expect(find.text('alex.graham@example.com'), findsOneWidget);
       expect(find.text('Enter valid email'), findsNothing);
       expect(find.text('Enter valid phone number'), findsNothing);
-      expect((tester.firstWidget(nextButton) as CustomTextButton).disable,
-          isFalse);
     });
   });
 }
