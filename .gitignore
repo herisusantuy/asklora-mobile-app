@@ -7,6 +7,8 @@ pubspec.lock
 # If you don't generate documentation locally you can remove this line.
 doc/api/
 
+firebase_credentials_dev.json
+
 # Avoid committing generated Javascript files:
 *.dart.js
 *.info.json      # Produced by the --dump-info flag.
@@ -88,6 +90,8 @@ unlinked_spec.ds
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
+**/ios/fastlane/report.xml
+**/ios/fastlane/README.MD
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -118,6 +122,10 @@ unlinked_spec.ds
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Runner.app.dSYM.zip
+**/ios/Runner.ipa
+**/ios/fastlane/report.xml
+**/ios/fastlane/README.MD
 
 # macOS
 **/Flutter/ephemeral/

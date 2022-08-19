@@ -30,6 +30,8 @@ class BasicInformationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BasicInformationState basicInformationState =
+        context.read<BasicInformationBloc>().state;
     return Column(
       children: [
         Expanded(
@@ -38,10 +40,10 @@ class BasicInformationForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _firstNameInput(context),
-              _middleNameInput(context),
-              _lastNameInput(context),
-              _chineseNameInput(context),
+              _firstNameInput(context, basicInformationState),
+              _middleNameInput(context, basicInformationState),
+              _lastNameInput(context, basicInformationState),
+              _chineseNameInput(context, basicInformationState),
               _selectGender(context),
               _datePicker(),
               _countryCodeAndPhoneNumber(context),
@@ -56,12 +58,13 @@ class BasicInformationForm extends StatelessWidget {
     );
   }
 
-  Widget _firstNameInput(BuildContext context) {
+  Widget _firstNameInput(
+      BuildContext context, BasicInformationState basicInformationState) {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: CustomTextInput(
         textCapitalization: TextCapitalization.words,
-        initialValue: context.read<BasicInformationBloc>().state.firstName,
+        initialValue: basicInformationState.firstName,
         textInputFormatterList: [fullEnglishNameFormatter()],
         key: const Key('account_first_name_input'),
         labelText: 'Legal First Name (English)',
@@ -73,13 +76,13 @@ class BasicInformationForm extends StatelessWidget {
     );
   }
 
-  Widget _middleNameInput(BuildContext context) {
+  Widget _middleNameInput(
+      BuildContext context, BasicInformationState basicInformationState) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
           textCapitalization: TextCapitalization.words,
-          initialValue:
-              context.read<BasicInformationBloc>().state.middleName ?? '',
+          initialValue: basicInformationState.middleName ?? '',
           key: const Key('account_middle_name_input'),
           labelText: 'Legal Middle Name (English)',
           textInputType: TextInputType.text,
@@ -91,12 +94,13 @@ class BasicInformationForm extends StatelessWidget {
     );
   }
 
-  Widget _lastNameInput(BuildContext context) {
+  Widget _lastNameInput(
+      BuildContext context, BasicInformationState basicInformationState) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
           textCapitalization: TextCapitalization.words,
-          initialValue: context.read<BasicInformationBloc>().state.lastName,
+          initialValue: basicInformationState.lastName,
           key: const Key('account_last_name_input'),
           textInputFormatterList: [fullEnglishNameFormatter()],
           labelText: 'Legal Last Name (English)',
@@ -108,13 +112,13 @@ class BasicInformationForm extends StatelessWidget {
     );
   }
 
-  Widget _chineseNameInput(BuildContext context) {
+  Widget _chineseNameInput(
+      BuildContext context, BasicInformationState basicInformationState) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: CustomTextInput(
           textCapitalization: TextCapitalization.words,
-          initialValue:
-              context.read<BasicInformationBloc>().state.chineseName ?? '',
+          initialValue: basicInformationState.chineseName ?? '',
           key: const Key('account_chinese_name_input'),
           labelText: 'Chinese Name (Optional)',
           textInputType: TextInputType.text,
