@@ -47,6 +47,8 @@ class TrustedContactForm extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20.0),
             child: CustomTextInput(
               initialValue: state.firstName,
+              textCapitalization: TextCapitalization.words,
+              textInputType: TextInputType.text,
               key: const Key('trusted_contact_first_name_input'),
               labelText: 'First Name',
               hintText: 'Enter First Name',
@@ -67,6 +69,8 @@ class TrustedContactForm extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10.0),
             child: CustomTextInput(
               initialValue: state.lastName,
+              textCapitalization: TextCapitalization.words,
+              textInputType: TextInputType.text,
               key: const Key('trusted_contact_last_name_input'),
               labelText: 'Last Name',
               errorText: state.lastNameErrorText,
