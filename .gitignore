@@ -8,6 +8,7 @@ pubspec.lock
 doc/api/
 
 .env
+firebase_credentials_dev.json
 
 # Avoid committing generated Javascript files:
 *.dart.js

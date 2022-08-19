@@ -4,7 +4,7 @@ default_platform(:android)
 platform :android do
 
    before_all do
-     ENV["FIREBASE_LOGIN_CREDENTIALS"] = "fastlane/firebase_credentials_dev.json"
+     ENV["FIREBASE_LOGIN_CREDENTIALS"] = "../firebase_credentials_dev.json"
      Dotenv.overload('../../.env')
    end
 
@@ -36,9 +36,10 @@ platform :android do
 
   desc "Create a dev build"
   lane :create_dev do
-    clean()
-    set_up_env_vars(env:"dev")
-    gradle(task: "assembleDevRelease")
+
+#     clean()
+#     set_up_env_vars(env:"dev")
+#     gradle(task: "assembleDevRelease")
     upload_to_firebase(apk_name:"app-dev-release.apk")
   end
 
