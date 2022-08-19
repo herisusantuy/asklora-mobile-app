@@ -32,5 +32,8 @@ linter:
     - camel_case_extensions
     - prefer_const_constructors
 
+  analyzer:
+    exclude:
+      - .env
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
