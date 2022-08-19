@@ -19,17 +19,17 @@ class AccountContact {
   final String postalCode;
   final String country;
 
-  AccountContact(
-    this.email,
-    this.countryCode,
-    this.phoneNumber,
-    this.streetAddress,
-    this.city,
-    this.unit,
-    this.state,
-    this.postalCode,
-    this.country,
-  );
+  AccountContact({
+    this.email = '',
+    this.countryCode = '',
+    this.phoneNumber = '',
+    this.streetAddress = '',
+    this.city = '',
+    this.unit = '',
+    this.state = '',
+    this.postalCode = '',
+    this.country = '',
+  });
 
   factory AccountContact.fromJson(Map<String, dynamic> json) =>
       _$AccountContactFromJson(json);

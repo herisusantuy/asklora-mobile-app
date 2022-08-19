@@ -8,15 +8,15 @@ part of 'account_contact.dart';
 
 AccountContact _$AccountContactFromJson(Map<String, dynamic> json) =>
     AccountContact(
-      json['email_address'] as String,
-      json['phone_number_country_code'] as String?,
-      json['phone_number'] as String,
-      json['street_address'] as String,
-      json['city'] as String,
-      json['unit'] as String,
-      json['state'] as String,
-      json['postal_code'] as String,
-      json['country'] as String,
+      email: json['email_address'] as String? ?? '',
+      countryCode: json['phone_number_country_code'] as String? ?? '',
+      phoneNumber: json['phone_number'] as String? ?? '',
+      streetAddress: json['street_address'] as String? ?? '',
+      city: json['city'] as String? ?? '',
+      unit: json['unit'] as String? ?? '',
+      state: json['state'] as String? ?? '',
+      postalCode: json['postal_code'] as String? ?? '',
+      country: json['country'] as String? ?? '',
     );
 
 Map<String, dynamic> _$AccountContactToJson(AccountContact instance) =>

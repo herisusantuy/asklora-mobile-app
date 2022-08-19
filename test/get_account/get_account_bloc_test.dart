@@ -36,8 +36,16 @@ void main() {
         false,
         false,
       );
-      final contact = AccountContact('asd@mail.com', '+62', '811111111',
-          'Qwerty asdfg', 'qwe', 'no 01', 'asd', '111111', 'ASD');
+      final contact = AccountContact(
+          email: 'asd@mail.com',
+          countryCode: '+62',
+          phoneNumber: '811111111',
+          streetAddress: 'Qwerty asdfg',
+          city: 'qwe',
+          unit: 'no 01',
+          state: 'asd',
+          postalCode: '111111',
+          country: 'ASD');
       final identity = AccountIdentity(
           givenName: 'asd',
           middleName: 'asd',
