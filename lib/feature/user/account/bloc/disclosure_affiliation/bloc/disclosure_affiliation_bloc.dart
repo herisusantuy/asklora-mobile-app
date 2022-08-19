@@ -1,7 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/utils/extensions.dart';
+
 part 'disclosure_affiliation_event.dart';
+
 part 'disclosure_affiliation_state.dart';
 
 class DisclosureAffiliationBloc
@@ -83,7 +86,13 @@ class DisclosureAffiliationBloc
 
   _onAffiliateCompanyEmailChanged(AffiliateCompanyEmailChanged event,
       Emitter<DisclosureAffiliationState> emit) {
-    emit(state.copyWith(affiliateCompanyEmail: event.affiliateCompanyEmail));
+    emit(state.copyWith(
+        affiliateCompanyEmail: event.affiliateCompanyEmail,
+        affiliateCompanyEmailErrorText:
+            (event.affiliateCompanyEmail.isValidEmail() ||
+                    event.affiliateCompanyEmail.isEmpty)
+                ? ''
+                : 'Enter valid email'));
   }
 
   _onQuestionNo2Changed(
@@ -142,7 +151,12 @@ class DisclosureAffiliationBloc
       ControlledPersonCompanyEmailChanged event,
       Emitter<DisclosureAffiliationState> emit) {
     emit(state.copyWith(
-        controlledPersonCompanyEmail: event.controlledPersonCompanyEmail));
+        controlledPersonCompanyEmail: event.controlledPersonCompanyEmail,
+        controlledPersonCompanyEmailErrorText:
+            (event.controlledPersonCompanyEmail.isValidEmail() ||
+                    event.controlledPersonCompanyEmail.isEmpty)
+                ? ''
+                : 'Enter valid email'));
   }
 
   _onQuestionNo3Changed(

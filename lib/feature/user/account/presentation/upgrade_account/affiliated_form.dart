@@ -111,11 +111,14 @@ class AffiliateForm extends StatelessWidget {
         padding: const EdgeInsets.only(top: 10.0),
         child:
             BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-          buildWhen: (_, __) => false,
+          buildWhen: (previous, current) =>
+              previous.affiliateCompanyEmail != current.affiliateCompanyEmail,
           builder: (context, state) => CustomTextInput(
               initialValue: state.affiliateCompanyEmail,
               key: const Key('affiliate_company_email_input'),
               labelText: 'Company Compliance Email',
+              textInputType: TextInputType.emailAddress,
+              errorText: state.affiliateCompanyEmailErrorText,
               onChanged: (value) => context
                   .read<DisclosureAffiliationBloc>()
                   .add(AffiliateCompanyEmailChanged(value)),
