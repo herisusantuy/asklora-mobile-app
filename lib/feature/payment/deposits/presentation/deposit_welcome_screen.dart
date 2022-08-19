@@ -5,6 +5,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../presentation/custom_payment_button_button.dart';
 import '../bloc/deposit_bloc.dart';
+import '../bloc/navigation_bloc/navigation_bloc.dart';
 import '../shareable/widget/custom_deposit_widget.dart';
 
 class DepositWelcomeScreen extends StatelessWidget {
@@ -14,7 +15,14 @@ class DepositWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       title: 'Deposit',
-      navigationButton: BlocBuilder<DepositBloc, DepositState>(
+      navigationButton: BlocConsumer<DepositBloc, DepositState>(
+        listenWhen: (_, current) =>
+            current.depositEvent is RegisteredBankAccountCheck,
+        listener: (context, state) {
+          context
+              .read<NavigationBloc<DepositPageStep>>()
+              .add(const PageChanged(DepositPageStep.depositMethod));
+        },
         builder: (context, state) => CustomPaymentButton(
           key: const Key('deposit_welcome_screen_next_button'),
           title: 'Next',

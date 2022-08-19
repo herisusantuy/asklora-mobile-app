@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../bloc/navigation_bloc/navigation_bloc.dart';
 import '../../shareable/widget/custom_deposit_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
 
@@ -16,7 +17,7 @@ class EddaAcknowledgementScreen extends StatelessWidget {
         listener: (context, state) {
           if (state.response == ResponseState.success) {
             context
-                .read<DepositBloc>()
+                .read<NavigationBloc>()
                 .add(const PageChanged(DepositPageStep.eDdaFinished));
           }
         },

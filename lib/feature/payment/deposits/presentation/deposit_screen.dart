@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../withdrawal/presentation/acknowledgement_screen.dart';
 import '../bloc/deposit_bloc.dart';
+import '../bloc/navigation_bloc/navigation_bloc.dart';
 import '../edda/bloc/amount/amount_bloc.dart';
 import '../edda/presentation/edda_acknowledgement_screen.dart';
 import '../edda/presentation/edda_amount_deposit_screen.dart';
@@ -37,10 +38,10 @@ class DepositScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (_) => NavigationBloc(initialDepositPages)),
         BlocProvider(
-            create: (_) => DepositBloc(
-                bankDetailsRepository: BankDetailsRepository(),
-                initialDepositPageStep: initialDepositPages)),
+            create: (_) =>
+                DepositBloc(bankDetailsRepository: BankDetailsRepository())),
         BlocProvider(
             create: (_) =>
                 SelectBankBloc(bankDetailsRepository: BankDetailsRepository())
@@ -59,23 +60,22 @@ class DepositScreen extends StatelessWidget {
             elevation: 0,
             automaticallyImplyLeading: false,
           ),
-          body: BlocConsumer<DepositBloc, DepositState>(
-            listenWhen: (_, current) =>
-                current.depositPages == DepositPageStep.unknown,
+          body: BlocConsumer<NavigationBloc<DepositPageStep>,
+              NavigationState<DepositPageStep>>(
+            listenWhen: (_, current) => current.lastPage == true,
             listener: (context, state) {
-              if (state.depositPages == DepositPageStep.unknown) {
-                Navigator.pop(context);
-              }
+              Navigator.pop(context);
             },
-            builder: (context, state) => _pages(state),
+            builder: (context, state) =>
+                _pages(state, context.read<DepositBloc>().state),
           )),
     );
   }
 
-  Widget _pages(DepositState state) {
-    switch (state.depositPages == DepositPageStep.unknown
+  Widget _pages(NavigationState navigationState, DepositState depositState) {
+    switch (navigationState.page == DepositPageStep.unknown
         ? initialDepositPages
-        : state.depositPages) {
+        : navigationState.page) {
       case DepositPageStep.welcome:
         return const DepositWelcomeScreen();
       case DepositPageStep.depositMethod:
@@ -97,10 +97,10 @@ class DepositScreen extends StatelessWidget {
       case DepositPageStep.eDdaInitiate:
         return const InitiateScreen();
       case DepositPageStep.eDdaBankDetails:
-        if (state.depositMethod == DepositMethod.eDda) {
-          return EddaBankAccountDetailsScreen(state.bankDetails);
+        if (depositState.depositMethod == DepositMethod.eDda) {
+          return EddaBankAccountDetailsScreen(depositState.bankDetails);
         } else {
-          return BankAccountDetailsScreen(state.bankDetails);
+          return BankAccountDetailsScreen(depositState.bankDetails);
         }
       case DepositPageStep.eDdaBankDetailsProgress:
         return const BankDetailsProgressScreen();

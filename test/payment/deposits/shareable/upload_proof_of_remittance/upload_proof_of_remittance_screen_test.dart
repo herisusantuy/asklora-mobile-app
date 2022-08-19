@@ -12,7 +12,7 @@ void main() async {
     Future<void> _buildWithdrawalAmountScreenScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: const DepositScreen(
+          home: DepositScreen(
             initialDepositPages: DepositPageStep.uploadProof,
           ),
           navigatorObservers: [mockObserver]));
