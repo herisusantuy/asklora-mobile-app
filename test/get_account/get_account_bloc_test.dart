@@ -36,7 +36,7 @@ void main() {
         false,
         false,
       );
-      final contact = AccountContact(
+      final AccountContact contact = AccountContact(
           email: 'asd@mail.com',
           countryCode: '+62',
           phoneNumber: '811111111',
@@ -46,7 +46,7 @@ void main() {
           state: 'asd',
           postalCode: '111111',
           country: 'ASD');
-      final identity = AccountIdentity(
+      final AccountIdentity identity = AccountIdentity(
           givenName: 'asd',
           middleName: 'asd',
           familyName: 'asd',
