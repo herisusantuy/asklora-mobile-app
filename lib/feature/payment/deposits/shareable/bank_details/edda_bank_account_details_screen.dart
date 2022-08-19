@@ -9,6 +9,7 @@ import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../bloc/navigation_bloc/navigation_bloc.dart';
 import '../bank_list/domain/bank_details.dart';
 import '../widget/custom_deposit_widget.dart';
 import 'bloc/bank_details_bloc.dart';
@@ -31,7 +32,7 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
             previous.response.state != current.response.state,
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
-            context.read<DepositBloc>().add(
+            context.read<NavigationBloc<DepositPageStep>>().add(
                 const PageChanged(DepositPageStep.eDdaBankDetailsProgress));
           } else if (state.response.state == ResponseState.error) {
             showAlertDialog(context, state.response.message,
