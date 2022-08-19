@@ -51,14 +51,14 @@ class UserProfileScreen extends StatelessWidget {
                       CustomText(
                         '${state.account!.identity.givenName} ${state.account!.identity.middleName} ${state.account!.identity.familyName}',
                       ),
-                      CustomText(state.account?.identity.chineseName ?? '')
+                      CustomText(state.account!.identity.chineseName)
                     ],
                   ),
                 ),
               ),
               _customRowText('Email', state.account!.email),
               _customRowText('Phone Number',
-                  '${state.account!.contact.countryCode ?? ''}${state.account!.contact.phoneNumber}'),
+                  '${state.account!.contact.countryCode}${state.account!.contact.phoneNumber}'),
               _customRowText(
                   'Street Address', state.account!.contact.streetAddress),
               _customRowText('City', state.account!.contact.city),

@@ -7,7 +7,7 @@ class AccountContact {
   @JsonKey(name: 'email_address')
   final String email;
   @JsonKey(name: 'phone_number_country_code')
-  final String? countryCode;
+  final String countryCode;
   @JsonKey(name: 'phone_number')
   final String phoneNumber;
   @JsonKey(name: 'street_address')

@@ -11,7 +11,7 @@ class AccountIdentity {
   @JsonKey(name: 'family_name')
   final String familyName;
   @JsonKey(name: 'chinese_name')
-  final String? chineseName;
+  final String chineseName;
   @JsonKey(name: 'date_of_name')
   final String dateOfBirth;
   @JsonKey(name: 'tax_id')
