@@ -2,6 +2,7 @@ part of 'signing_broker_agreement_bloc.dart';
 
 class SigningBrokerAgreementState extends Equatable {
   final bool isAlpacaCustomerAgreementOpened;
+  final bool isAskLoraClientAgreementOpened;
   final bool isUnderstoodAlpacaCustomAgreementChecked;
   final bool isSigningAgreementChecked;
   final bool isSignatureDrew;
@@ -10,6 +11,7 @@ class SigningBrokerAgreementState extends Equatable {
 
   const SigningBrokerAgreementState({
     this.isAlpacaCustomerAgreementOpened = false,
+    this.isAskLoraClientAgreementOpened = false,
     this.isUnderstoodAlpacaCustomAgreementChecked = false,
     this.isSigningAgreementChecked = false,
     this.isSignatureDrew = false,
@@ -20,6 +22,7 @@ class SigningBrokerAgreementState extends Equatable {
   @override
   List<Object?> get props => [
         isAlpacaCustomerAgreementOpened,
+        isAskLoraClientAgreementOpened,
         isUnderstoodAlpacaCustomAgreementChecked,
         isSigningAgreementChecked,
         isSignatureDrew,
@@ -29,6 +32,7 @@ class SigningBrokerAgreementState extends Equatable {
 
   SigningBrokerAgreementState copyWith({
     bool? isAlpacaCustomerAgreementOpened,
+    bool? isAskLoraClientAgreementOpened,
     bool? isUnderstoodAlpacaCustomAgreementChecked,
     bool? isSigningAgreementChecked,
     bool? isSignatureDrew,
@@ -38,6 +42,8 @@ class SigningBrokerAgreementState extends Equatable {
     return SigningBrokerAgreementState(
       isAlpacaCustomerAgreementOpened: isAlpacaCustomerAgreementOpened ??
           this.isAlpacaCustomerAgreementOpened,
+      isAskLoraClientAgreementOpened:
+          isAskLoraClientAgreementOpened ?? this.isAskLoraClientAgreementOpened,
       isUnderstoodAlpacaCustomAgreementChecked:
           isUnderstoodAlpacaCustomAgreementChecked ??
               this.isUnderstoodAlpacaCustomAgreementChecked,

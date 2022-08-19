@@ -14,6 +14,7 @@ class SigningBrokerAgreementBloc
       : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
         super(const SigningBrokerAgreementState()) {
     on<AlpacaCustomerAgreementOpened>(_onAlpacaCustomerAgreementOpened);
+    on<AskLoraClientAgreementOpened>(_onAskLoraClientAgreementOpened);
     on<UnderstoodAlpacaCustomAgreementChecked>(
         _onUnderstoodAlpacaCustomAgreementChecked);
     on<SigningAgreementChecked>(_onSigningAgreementChecked);
@@ -31,6 +32,11 @@ class SigningBrokerAgreementBloc
     emit(state.copyWith(
         isAlpacaCustomerAgreementOpened:
             event.isAlpacaCustomerAgreementOpened));
+  }
+
+  _onAskLoraClientAgreementOpened(AskLoraClientAgreementOpened event,
+      Emitter<SigningBrokerAgreementState> emit) async {
+    emit(state.copyWith(isAskLoraClientAgreementOpened: true));
   }
 
   _onUnderstoodAlpacaCustomAgreementChecked(
