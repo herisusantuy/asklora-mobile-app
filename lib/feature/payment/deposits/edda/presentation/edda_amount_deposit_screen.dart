@@ -77,6 +77,6 @@ class EddaAmountDepositScreen extends StatelessWidget {
               warningText:
                   'Please note that the deposit amount cannot exceed the account balance in your bank. Otherwise, your bank may charge you extra fees due to transaction failures',
               onSubmit: () => context
-                  .read<NavigationBloc>()
+                  .read<NavigationBloc<DepositPageStep>>()
                   .add(const PageChanged(DepositPageStep.acknowledged))));
 }

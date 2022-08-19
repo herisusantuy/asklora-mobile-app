@@ -17,7 +17,7 @@ class EddaAcknowledgementScreen extends StatelessWidget {
         listener: (context, state) {
           if (state.response == ResponseState.success) {
             context
-                .read<NavigationBloc>()
+                .read<NavigationBloc<DepositPageStep>>()
                 .add(const PageChanged(DepositPageStep.eDdaFinished));
           }
         },

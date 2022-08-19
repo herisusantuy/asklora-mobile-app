@@ -32,11 +32,11 @@ class BankAccountDetailsScreen extends StatelessWidget {
           var depositMethod = context.read<DepositBloc>().state.depositMethod;
           if (depositMethod == DepositMethod.wire) {
             context
-                .read<NavigationBloc>()
+                .read<NavigationBloc<DepositPageStep>>()
                 .add(const PageChanged(DepositPageStep.wireTransfer));
           } else if (depositMethod == DepositMethod.fps) {
             context
-                .read<NavigationBloc>()
+                .read<NavigationBloc<DepositPageStep>>()
                 .add(const PageChanged(DepositPageStep.fpsTransfer));
           }
         } else if (state.response.state == ResponseState.error) {
