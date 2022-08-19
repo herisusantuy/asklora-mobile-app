@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../bloc/deposit_bloc.dart';
+import '../../bloc/navigation_bloc/navigation_bloc.dart';
 import '../bank_details/domain/get_bank_account_response.dart';
 import '../widget/custom_deposit_widget.dart';
 
@@ -28,7 +29,7 @@ class ReturningUserScreen extends StatelessWidget {
               child: InkWell(
             key: const Key('deposit_add_bank_account'),
             onTap: () => context
-                .read<DepositBloc>()
+                .read<NavigationBloc>()
                 .add(const PageChanged(DepositPageStep.selectBank)),
             child: const Icon(
               Icons.add_circle_outline,
@@ -70,7 +71,9 @@ class ReturningUserScreen extends StatelessWidget {
               } else {
                 depositPageStep = DepositPageStep.eDdaDepositAmount;
               }
-              context.read<DepositBloc>().add(PageChanged(depositPageStep));
+              context
+                  .read<NavigationBloc<DepositPageStep>>()
+                  .add(PageChanged(depositPageStep));
             },
             child: CustomPaymentTextInformationWidget(
               label: _getBankDetails(item),
