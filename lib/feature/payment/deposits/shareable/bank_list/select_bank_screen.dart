@@ -16,7 +16,6 @@ class SelectBankScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
         title: 'Please Select a Bank',
-        backTo: _backStep(context.read<DepositBloc>().state.depositMethod),
         child: Column(children: [
           ClearableTextFormField(
             key: const Key('deposit_search_bank_input'),
@@ -59,16 +58,5 @@ class SelectBankScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  DepositPageStep _backStep(DepositMethod? depositMethod) {
-    switch (depositMethod) {
-      case DepositMethod.eDda:
-        return DepositPageStep.eDdaInitiate;
-      case DepositMethod.fps:
-      case DepositMethod.wire:
-      default:
-        return DepositPageStep.depositMethod;
-    }
   }
 }

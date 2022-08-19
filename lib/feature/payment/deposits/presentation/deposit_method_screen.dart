@@ -12,7 +12,6 @@ class DepositMethodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-      backTo: DepositPageStep.welcome,
       title: 'Deposit Method',
       child: ListView(
         children: [
