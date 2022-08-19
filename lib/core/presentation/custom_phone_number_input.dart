@@ -43,7 +43,7 @@ class CustomPhoneNumberInput extends StatelessWidget {
                               initialValueOfCodeArea!.isNotEmpty
                           ? '+$initialValueOfCodeArea'
                           : null,
-                      hintText: '+852',
+                      hintText: '',
                       showPhoneCode: true,
                       onSelect: onChangedCodeArea)),
               const SizedBox(
