@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'base_config.dart';
 import 'build_config.dart';
+import 'environment.dart';
 
 class AppConfigWidget extends InheritedWidget {
   late final BaseConfig baseConfig;
@@ -13,7 +14,7 @@ class AppConfigWidget extends InheritedWidget {
 
   void _initConfig() {
     const String environment =
-        String.fromEnvironment('ENVIRONMENT', defaultValue: 'dev');
+        String.fromEnvironment('ENVIRONMENT', defaultValue: defaultEnvironment);
 
     baseConfig = Environment()
         .initConfig(EnvironmentType.values.byName(environment.toLowerCase()));
