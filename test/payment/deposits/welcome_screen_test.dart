@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/feature/payment/deposits/bloc/deposit_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/presentation/deposit_screen.dart';
-import 'package:asklora_mobile_app/feature/payment/deposits/shareable/widget/deposit_next_button.dart';
+import 'package:asklora_mobile_app/feature/payment/presentation/custom_payment_button_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -33,7 +33,7 @@ void main() {
       expect(find.text('Tell us how much you’ve deposited'), findsOneWidget);
       expect(find.text('Upload proof of remittance'), findsOneWidget);
       expect(nextButton, findsOneWidget);
-      expect((tester.widget<DepositNextButton>(nextButton)).disable, false);
+      expect((tester.widget<CustomPaymentButton>(nextButton)).disable, false);
     });
   });
 }

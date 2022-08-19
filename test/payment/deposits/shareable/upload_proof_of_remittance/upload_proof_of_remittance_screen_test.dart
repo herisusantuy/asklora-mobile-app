@@ -4,8 +4,8 @@ import 'package:asklora_mobile_app/feature/payment/deposits/shareable/widget/dep
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../mocks/mocks.dart';
-import '../../../test_helpers.dart';
+import '../../../../mocks/mocks.dart';
+import '../../../../test_helpers.dart';
 
 void main() async {
   group('Upload Proof of Remittance Screen widget test', () {

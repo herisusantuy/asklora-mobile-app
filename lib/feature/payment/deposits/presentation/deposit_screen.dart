@@ -20,6 +20,7 @@ import '../shareable/bank_list/bloc/select_bank_bloc.dart';
 import '../shareable/bank_list/select_bank_screen.dart';
 import '../shareable/proof_of_remittance/bloc/upload_proof_of_remittance_bloc.dart';
 import '../shareable/proof_of_remittance/upload_proof_of_remittance_screen.dart';
+import '../shareable/returning_user/returning_user_screen.dart';
 import '../wire/presentation/wire_transfer_screen.dart';
 import 'deposit_method_screen.dart';
 import 'deposit_welcome_screen.dart';
@@ -36,7 +37,10 @@ class DepositScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => DepositBloc()),
+        BlocProvider(
+            create: (_) => DepositBloc(
+                bankDetailsRepository: BankDetailsRepository(),
+                initialDepositPageStep: initialDepositPages)),
         BlocProvider(
             create: (_) =>
                 SelectBankBloc(bankDetailsRepository: BankDetailsRepository())
@@ -55,7 +59,14 @@ class DepositScreen extends StatelessWidget {
             elevation: 0,
             automaticallyImplyLeading: false,
           ),
-          body: BlocBuilder<DepositBloc, DepositState>(
+          body: BlocConsumer<DepositBloc, DepositState>(
+            listenWhen: (_, current) =>
+                current.depositPages == DepositPageStep.unknown,
+            listener: (context, state) {
+              if (state.depositPages == DepositPageStep.unknown) {
+                Navigator.pop(context);
+              }
+            },
             builder: (context, state) => _pages(state),
           )),
     );
@@ -101,6 +112,8 @@ class DepositScreen extends StatelessWidget {
         return const EddaAcknowledgementScreen();
       case DepositPageStep.eDdaFinished:
         return const FinishedScreen();
+      case DepositPageStep.returningUser:
+        return const ReturningUserScreen();
       default:
         return const SizedBox.shrink();
     }

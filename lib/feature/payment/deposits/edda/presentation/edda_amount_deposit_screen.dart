@@ -18,7 +18,6 @@ class EddaAmountDepositScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomDepositWidget(
-        backTo: DepositPageStep.eDdaBankDetails,
         title: 'eDDA Deposit',
         navigationButton: BlocBuilder<AmountBloc, AmountState>(
             builder: (context, state) => CustomPaymentButton(
