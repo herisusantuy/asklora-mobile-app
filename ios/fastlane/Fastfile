@@ -1,4 +1,10 @@
+fastlane_require 'dotenv'
+
 default_platform(:ios)
+
+before_all do
+    Dotenv.overload('../../.env')
+end
 
 platform :ios do
 
@@ -42,7 +48,7 @@ platform :ios do
 
   private_lane :upload_to_app_center do
     appcenter_upload(
-        api_token: "17940e4a8c6cf3c7960c93ee7c10a66852d0e5fe",
+        api_token: ENV["APP_CENTER_DEV_API_TOKEN"],
         owner_name: "krishna.gupta-loratechai.com",
         owner_type: "user",
         app_name: "AskLora-Dev",
@@ -50,31 +56,19 @@ platform :ios do
         notify_testers: true)
   end
 
-  desc "Creating a dev build"
+  desc "Create a dev build"
   lane :dev do
-        set_up_env_vars(env:"dev")
-    #     cert_dev()
-    #     fastlane build_ios_app(
-    #       workspace: "Runner.xcworkspace",
-    #       scheme: "dev",
-    #       export_method: "app-store",
-    #     )
-#     upload_to_app_center
-#     upload_to_testflight(
-#       username: "asklora@loratechai.com",
-#       app_identifier: "ai.asklora.app.dev",
-#       ipa: "Runner.ipa",
-#       skip_waiting_for_build_processing: true
-#     )
+    clean_build_artifacts()
+    set_up_env_vars(env:"dev")
+    cert_dev()
+    build_ios_app(workspace: "Runner.xcworkspace", scheme: "dev", export_method: "app-store")
+    upload_to_testflight(username: "asklora@loratechai.com", app_identifier: "ai.asklora.app.dev", ipa: "Runner.ipa", skip_waiting_for_build_processing: true)
+    upload_symbols()
   end
 
-  desc "Uploading dev build on TestFlight..."
-  lane :upload do
-       upload_to_testflight(
-         username: "asklora@loratechai.com",
-         app_identifier: "ai.asklora.app.dev",
-         ipa: "Runner.ipa",
-         skip_waiting_for_build_processing: true)
+  desc "Upload DSYM symbols file on Crashlytics"
+  lane :upload_symbols do
+       upload_symbols_to_crashlytics(dsym_path: "Runner.app.dSYM.zip", app_id: ENV["FIREBASE_IOS_DEV_APP_ID"], gsp_path: "Runner/GoogleService-Info.plist")
   end
 
   desc "Creating a staging build"

@@ -1,10 +1,11 @@
+fastlane_require 'dotenv'
 default_platform(:android)
 
 platform :android do
 
    before_all do
      ENV["FIREBASE_LOGIN_CREDENTIALS"] = "fastlane/firebase_credentials_dev.json"
-     ENV["FIREBASE_APP_ID"] = "1:741527391541:android:3a15564f2525bad32c507c"
+     Dotenv.overload('../../.env')
    end
 
   private_lane :set_up_env_vars do |options|
@@ -17,11 +18,11 @@ platform :android do
     output_path = "../build/app/outputs/flutter-apk/" +options[:apk_name]
 
     firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
+      app: ENV["FIREBASE_ANDROID_DEV_APP_ID"],
       android_artifact_path: output_path,
       android_artifact_type: "APK",
       release_notes: "Test App",
-      firebase_cli_token: "1//0esqoYTunpewwCgYIARAAGA4SNwF-L9Ird0PV8D6GAh9P3sJEcx5lKWIalDd1l0YwTIbXvEuNzLQ_k45AIJYxNXrR6qFKc_kGG1g",
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
       service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
       debug: true
     )
@@ -30,10 +31,7 @@ platform :android do
 
   desc "Runs all the tests"
   lane :clean do
-#     gradle(task: "clean")
-      commit = last_git_commit()
-      short_hash = commit[:abbreviated_commit_hash]
-      print("short hash " + short_hash)
+    gradle(task: "clean")
   end
 
   desc "Create a dev build"
