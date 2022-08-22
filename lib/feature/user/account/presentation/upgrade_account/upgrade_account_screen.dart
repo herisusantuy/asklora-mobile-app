@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/utils/storage/secure_storage.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/review_information/review_information_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
@@ -22,107 +23,131 @@ import 'trusted_contact_form.dart';
 
 class UpgradeAccountScreen extends StatelessWidget {
   late final AccountBloc accountBloc;
+  DateTime? currentBackPressTime;
 
-  UpgradeAccountScreen({Key? key, required this.initialPage})
-      : _pageViewController = PageController(initialPage: initialPage),
-        super(key: key) {
+  static const String route = '/upgrade_account_screen';
+  final UpgradeAccountPageStep initialUpgradeAccountPages;
+
+  UpgradeAccountScreen(
+      {Key? key,
+      this.initialUpgradeAccountPages =
+          UpgradeAccountPageStep.basicInformation})
+      : super(key: key) {
     accountBloc = AccountBloc(
       getAccountRepository: AccountRepository(),
       secureStorage: SecureStorage(),
     );
   }
 
-  final int initialPage;
-
-  final PageController _pageViewController;
-
-  DateTime? currentBackPressTime;
-
-  List<Widget> get _pages => [
-        BasicInformationForm(
-          key: const Key('basic_information_step'),
-          controller: _pageViewController,
-        ),
-        CountryOfTaxResidenceForm(
-            key: const Key('country_of_tax_residence_step'),
-            controller: _pageViewController),
-        AddressProofForm(
-          key: const Key('address_proof_step'),
-          controller: _pageViewController,
-        ),
-        FinancialProfileForm(
-            key: const Key('financial_profile_step'),
-            controller: _pageViewController),
-        DisclosuresAffiliationsForm(
-          key: const Key('disclosures_affiliations_step'),
-          controller: _pageViewController,
-        ),
-        SigningAgreementTaxForm(
-            key: const Key('signing_agreement_tax_step'),
-            controller: _pageViewController),
-        SigningBrokerAgreementsForm(
-          key: const Key('signing_broker_agreement_step'),
-          controller: _pageViewController,
-        ),
-        TrustedContactForm(
-          key: const Key('trusted_contact_step'),
-          controller: _pageViewController,
-        ),
-        RiskDisclosureForm(
-            key: const Key('risk_disclosure_step'),
-            controller: _pageViewController),
-        ReviewInformationScreen(
-            key: const Key('review_information_step'),
-            controller: _pageViewController),
-      ];
-
   @override
-  Widget build(BuildContext context) => WillPopScope(
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => NavigationBloc(initialUpgradeAccountPages)),
+        BlocProvider(create: (context) => accountBloc),
+        BlocProvider(create: (context) => accountBloc.basicInformationBloc),
+        BlocProvider(
+            create: (context) => accountBloc.countryOfTaxResidenceBloc),
+        BlocProvider(create: (context) => accountBloc.addressProofBloc),
+        BlocProvider(create: (context) => accountBloc.financialProfileBloc),
+        BlocProvider(
+            create: (context) => accountBloc.disclosureAffiliationBloc),
+        BlocProvider(
+            create: (context) => accountBloc.signingBrokerAgreementBloc),
+        BlocProvider(create: (context) => accountBloc.trustedContactBloc),
+        BlocProvider(create: (context) => RiskDisclosureBloc()),
+        BlocProvider(create: (context) => ReviewInformationBloc()),
+        BlocProvider(create: (context) => SigningAgreementTaxBloc()),
+      ],
+      child: WillPopScope(
         onWillPop: () => onWillPop(context),
         child: Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            toolbarHeight: 0,
-            automaticallyImplyLeading: false,
-            title: const CustomText('Upgrade Account'),
-          ),
-          body: MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (context) => accountBloc),
-              BlocProvider(
-                  create: (context) => accountBloc.basicInformationBloc),
-              BlocProvider(
-                  create: (context) => accountBloc.countryOfTaxResidenceBloc),
-              BlocProvider(create: (context) => accountBloc.addressProofBloc),
-              BlocProvider(
-                  create: (context) => accountBloc.financialProfileBloc),
-              BlocProvider(
-                  create: (context) => accountBloc.disclosureAffiliationBloc),
-              BlocProvider(
-                  create: (context) => accountBloc.signingBrokerAgreementBloc),
-              BlocProvider(create: (context) => accountBloc.trustedContactBloc),
-              BlocProvider(create: (context) => RiskDisclosureBloc()),
-              BlocProvider(create: (context) => ReviewInformationBloc()),
-              BlocProvider(create: (context) => SigningAgreementTaxBloc()),
-            ],
-            child: SafeArea(
+            appBar: AppBar(
+              toolbarHeight: 0,
+              elevation: 0,
+              automaticallyImplyLeading: false,
+            ),
+            body: BlocConsumer<NavigationBloc<UpgradeAccountPageStep>,
+                NavigationState<UpgradeAccountPageStep>>(
+              listenWhen: (_, current) => current.lastPage == true,
+              listener: (context, state) => Navigator.pop(context),
+              builder: (context, state) => SafeArea(
                 child: Column(
+                  key: const Key('upgrade_account_page'),
+                  children: [
+                    _headerUpgradeAccount,
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: _pages(state),
+                    )),
+                  ],
+                ),
+              ),
+            )),
+      ),
+    );
+  }
+
+  Widget _pages(NavigationState navigationState) {
+    switch (navigationState.page) {
+      case UpgradeAccountPageStep.basicInformation:
+        return BasicInformationForm();
+      case UpgradeAccountPageStep.countryOfTaxResidence:
+        return const CountryOfTaxResidenceForm();
+      case UpgradeAccountPageStep.addressProof:
+        return AddressProofForm();
+      case UpgradeAccountPageStep.employmentFinancialProfile:
+        return const FinancialProfileForm();
+      case UpgradeAccountPageStep.disclosureAffiliation:
+        return const DisclosuresAffiliationsForm();
+      case UpgradeAccountPageStep.signingTaxAgreement:
+        return const SigningAgreementTaxForm();
+      case UpgradeAccountPageStep.signingBrokerAgreement:
+        return SigningBrokerAgreementsForm();
+      case UpgradeAccountPageStep.trustedContact:
+        return const TrustedContactForm();
+      case UpgradeAccountPageStep.riskDisclosure:
+        return const RiskDisclosureForm();
+      case UpgradeAccountPageStep.reviewInformation:
+        return const ReviewInformationScreen();
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
+  Widget get _headerUpgradeAccount => Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.black12,
+            ),
+          ),
+        ),
+        child: BlocBuilder<NavigationBloc<UpgradeAccountPageStep>,
+            NavigationState<UpgradeAccountPageStep>>(
+          builder: (context, state) {
+            return Row(
               children: [
-                _headerUpgradeAccount(),
-                Expanded(
+                InkWell(
+                  onTap: () => context
+                      .read<NavigationBloc<UpgradeAccountPageStep>>()
+                      .add(const PagePop()),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: PageView(
-                      key: const Key('upgrade_account_page_view'),
-                      controller: _pageViewController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: _pages,
+                    padding: const EdgeInsets.all(5),
+                    child: const Icon(
+                      Icons.chevron_left_rounded,
+                      size: 35,
                     ),
                   ),
                 ),
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: CustomText(state.page.name),
+                )
               ],
-            )),
-          ),
+            );
+          },
         ),
       );
 
@@ -139,51 +164,5 @@ class UpgradeAccountScreen extends StatelessWidget {
     return Future.value(true);
   }
 
-  Widget _headerUpgradeAccount() => Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: Colors.black12,
-            ),
-          ),
-        ),
-        child: BlocBuilder<AccountBloc, AccountState>(
-          builder: (context, state) {
-            return Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    if (_pageViewController.page == 0) {
-                      Navigator.of(context).pop(true);
-                    }
-                    context
-                        .read<AccountBloc>()
-                        .add(const AccountCurrentStepChanged('back'));
-                    _pageViewController.previousPage(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.ease);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(5),
-                    child: const Icon(
-                      Icons.chevron_left_rounded,
-                      size: 35,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: CustomText(state.currentStepName),
-                )
-              ],
-            );
-          },
-        ),
-      );
-
-  static void open(BuildContext context) =>
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => UpgradeAccountScreen(
-                initialPage: 0,
-              )));
+  static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

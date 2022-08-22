@@ -1,7 +1,9 @@
 import 'package:asklora_mobile_app/core/presentation/custom_checkbox.dart';
 import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
 import 'package:asklora_mobile_app/feature/user/account/repository/signing_broker_agreement_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +17,10 @@ void main() async {
     Future<void> _buildSigningBrokerAgreement(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 6),
+          home: UpgradeAccountScreen(
+            initialUpgradeAccountPages:
+                UpgradeAccountPageStep.signingBrokerAgreement,
+          ),
           navigatorObservers: [mockObserver]));
     }
 
@@ -69,7 +74,7 @@ void main() async {
       expect((tester.widget<CustomCheckbox>(checkbox1)).isChecked, false);
       expect((tester.widget<CustomCheckbox>(checkbox2)).disabled, true);
       expect((tester.widget<CustomCheckbox>(checkbox2)).isChecked, false);
-      expect((tester.widget<CustomTextButton>(nextButton)).disable, true);
+      expect((tester.widget<UpgradeAccountButton>(nextButton)).disable, true);
     });
 
     testWidgets('Tapped "Alpaca Customer Agreement" button',
@@ -89,11 +94,13 @@ void main() async {
     });
     testWidgets('Tapped accept Signature ', (WidgetTester tester) async {
       await _buildSigningBrokerAgreement(tester);
+      await tester.ensureVisible(acceptSignatureButton);
       await tester.tap(acceptSignatureButton);
       await tester.pump();
     });
     testWidgets('Tapped reset Signature ', (WidgetTester tester) async {
       await _buildSigningBrokerAgreement(tester);
+      await tester.ensureVisible(resetSignatureButton);
       await tester.tap(resetSignatureButton);
       await tester.pump();
     });

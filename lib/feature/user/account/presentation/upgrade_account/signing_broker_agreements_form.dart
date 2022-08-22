@@ -8,17 +8,14 @@ import 'package:signature/signature.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
 import '../widgets/signature_drawer.dart';
+import 'widgets/upgrade_account_button.dart';
 
 class SigningBrokerAgreementsForm extends StatelessWidget {
-  final PageController controller;
-
-  SigningBrokerAgreementsForm({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  SigningBrokerAgreementsForm({Key? key}) : super(key: key);
 
   final SignatureController _signatureController = SignatureController();
 
@@ -195,22 +192,12 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
   Widget _nextButton() =>
       BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-            child: CustomTextButton(
-              key: const Key('signing_broker_agreement_next_step_button'),
-              borderRadius: 30,
-              buttonText: 'Next',
-              disable: state.disabledNextButton(),
-              onClick: () {
-                context
-                    .read<AccountBloc>()
-                    .add(const AccountCurrentStepChanged('next'));
-                controller.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.ease);
-              },
-            ),
+          return UpgradeAccountButton(
+            key: const Key('signing_broker_agreement_next_step_button'),
+            disable: state.disabledNextButton(),
+            onClick: () => context
+                .read<NavigationBloc<UpgradeAccountPageStep>>()
+                .add(const PageChanged(UpgradeAccountPageStep.trustedContact)),
           );
         },
       );
@@ -223,7 +210,10 @@ class SigningBrokerAgreementsForm extends StatelessWidget {
       points: _signatureController.points,
     );
     final bytes = await exportController.toPngBytes();
-    String base64Image = base64Encode(bytes!);
+    String? base64Image;
+    if (bytes != null) {
+      base64Image = base64Encode(bytes);
+    }
     return base64Image;
   }
 }

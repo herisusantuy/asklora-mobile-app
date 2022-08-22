@@ -51,10 +51,3 @@ class CountryCodeChanged extends TrustedContactEvent {
   @override
   List<Object> get props => [countryCode];
 }
-
-class TrustedContactSubmitted extends TrustedContactEvent {
-  const TrustedContactSubmitted();
-
-  @override
-  List<Object> get props => [];
-}

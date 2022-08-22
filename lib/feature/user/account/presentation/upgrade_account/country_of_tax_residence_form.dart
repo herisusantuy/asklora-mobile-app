@@ -1,21 +1,19 @@
+import 'widgets/upgrade_account_button.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_country_picker.dart';
-import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
 
 class CountryOfTaxResidenceForm extends StatelessWidget {
-  final PageController controller;
-
-  const CountryOfTaxResidenceForm({Key? key, required this.controller})
-      : super(key: key);
+  const CountryOfTaxResidenceForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,23 +87,14 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.enableNextButton() != current.enableNextButton(),
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-          child: CustomTextButton(
-            key: const Key('account_country_of_tax_residence_next_step_button'),
-            buttonText: 'Next',
-            borderRadius: 30,
-            disable: !state.enableNextButton(),
-            onClick: () {
-              FocusManager.instance.primaryFocus?.unfocus();
-              context
-                  .read<AccountBloc>()
-                  .add(const AccountCurrentStepChanged('next'));
-              controller.nextPage(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.ease);
-            },
-          ),
+        return UpgradeAccountButton(
+          key: const Key('account_country_of_tax_residence_next_step_button'),
+          disable: !state.enableNextButton(),
+          onClick: () {
+            context
+                .read<NavigationBloc<UpgradeAccountPageStep>>()
+                .add(const PageChanged(UpgradeAccountPageStep.addressProof));
+          },
         );
       },
     );

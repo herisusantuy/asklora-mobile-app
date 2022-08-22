@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_country_picker.dart';
-import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
+import 'widgets/upgrade_account_button.dart';
 
 class AddressProofForm extends StatelessWidget {
-  final PageController controller;
-
   final _scrollController = ScrollController();
 
   AddressProofForm({
     Key? key,
-    required this.controller,
   }) : super(key: key);
 
   @override
@@ -211,27 +209,17 @@ class AddressProofForm extends StatelessWidget {
         ),
       ));
 
-  Widget _nextButton() => Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: BlocBuilder<AddressProofBloc, AddressProofState>(
-          buildWhen: (previous, current) =>
-              previous.enableNextButton() != current.enableNextButton(),
-          builder: (context, state) {
-            return CustomTextButton(
-                key: const Key('account_address_proof_next_step_button'),
-                disable: !state.enableNextButton(),
-                buttonText: 'Next',
-                borderRadius: 30,
-                onClick: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  context
-                      .read<AccountBloc>()
-                      .add(const AccountCurrentStepChanged('next'));
-                  controller.nextPage(
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.ease);
-                });
-          },
-        ),
+  Widget _nextButton() => BlocBuilder<AddressProofBloc, AddressProofState>(
+        buildWhen: (previous, current) =>
+            previous.enableNextButton() != current.enableNextButton(),
+        builder: (context, state) {
+          return UpgradeAccountButton(
+              key: const Key('account_address_proof_next_step_button'),
+              disable: !state.enableNextButton(),
+              onClick: () => context
+                  .read<NavigationBloc<UpgradeAccountPageStep>>()
+                  .add(const PageChanged(
+                      UpgradeAccountPageStep.employmentFinancialProfile)));
+        },
       );
 }

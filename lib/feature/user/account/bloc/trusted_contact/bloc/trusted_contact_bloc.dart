@@ -15,7 +15,6 @@ class TrustedContactBloc
     on<EmailAddressChanged>(_onEmailAddressChanged);
     on<CountryCodeChanged>(_onCountryCodeChanged);
     on<PhoneNumberChanged>(_onPhoneNumberChanged);
-    on<TrustedContactSubmitted>(_onTrustedContactSubmitted);
   }
 
   void _onFirstNameChanged(
@@ -71,7 +70,4 @@ class TrustedContactBloc
       countryCode: event.countryCode,
     ));
   }
-
-  void _onTrustedContactSubmitted(
-      TrustedContactSubmitted event, Emitter<TrustedContactState> emit) {}
 }
