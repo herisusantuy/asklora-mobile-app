@@ -15,9 +15,9 @@ class GetAccountResponse extends Equatable {
   @JsonKey(name: 'trade_status')
   final bool tradeStatus;
   @JsonKey(name: 'contact')
-  final AccountContact contact;
+  final AccountContact? contact;
   @JsonKey(name: 'identity')
-  final AccountIdentity identity;
+  final AccountIdentity? identity;
 
   const GetAccountResponse(
     this.email,
