@@ -72,5 +72,3 @@ class OnfidoResultUpdated extends AccountState {
 
   const OnfidoResultUpdated(this.response);
 }
-
-class TaxInfoSubmitted extends AccountState {}

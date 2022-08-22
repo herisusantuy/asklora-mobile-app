@@ -34,9 +34,7 @@ class ReviewInformationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AccountBloc, AccountState>(
       listener: (context, state) async {
-        if (state is TaxInfoSubmitted) {
-          context.read<AccountBloc>().add(GetSdkToken());
-        } else if (state is OnfidoSdkToken) {
+        if (state is OnfidoSdkToken) {
           try {
             FlutterOnfido.start(
               config: OnfidoConfig(
@@ -74,9 +72,7 @@ class ReviewInformationScreen extends StatelessWidget {
                     )));
               break;
             case AccountStatus.success:
-              context
-                  .read<AccountBloc>()
-                  .add(SubmitTaxInfo(await Ipify.ipv4()));
+              context.read<AccountBloc>().add(GetSdkToken());
               break;
             default:
               break;
