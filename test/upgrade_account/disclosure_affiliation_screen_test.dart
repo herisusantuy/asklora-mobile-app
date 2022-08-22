@@ -1,6 +1,7 @@
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
 import 'package:asklora_mobile_app/core/presentation/question_widget.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,7 +12,9 @@ void main() async {
     Future<void> _buildDisclosureAffiliationForm(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 4),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.disclosureAffiliation),
           navigatorObservers: [mockObserver]));
     }
 
@@ -110,7 +113,7 @@ void main() async {
       expect((tester.widget<QuestionWidget>(question5).selectedAnswer), null);
       expect((tester.widget<QuestionWidget>(question6).selectedAnswer), null);
       expect((tester.widget<QuestionWidget>(question7).selectedAnswer), null);
-      expect((tester.widget<CustomTextButton>(nextButton).disable), true);
+      expect((tester.widget<UpgradeAccountButton>(nextButton).disable), true);
     });
 
     testWidgets('Tap option "Yes" for Question No 1', (tester) async {

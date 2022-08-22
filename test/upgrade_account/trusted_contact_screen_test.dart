@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,7 +11,9 @@ void main() async {
     Future<void> _buildRiskDisclosureForm(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 7),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.trustedContact),
           navigatorObservers: [mockObserver]));
     }
 

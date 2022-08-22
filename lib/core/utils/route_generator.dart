@@ -7,6 +7,7 @@ import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
 import '../../feature/payment/deposits/presentation/deposit_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
+import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../feature/user/kyc/presentation/kyc_screen.dart';
 import '../../home_screen.dart';
 
@@ -23,6 +24,8 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case SignUpSuccessScreen.route:
         return MaterialPageRoute(builder: (_) => const SignUpSuccessScreen());
+      case UpgradeAccountScreen.route:
+        return MaterialPageRoute(builder: (_) => UpgradeAccountScreen());
       case OtpScreen.route:
         String email = settings.arguments as String;
         return MaterialPageRoute(builder: (_) => OtpScreen(email: email));

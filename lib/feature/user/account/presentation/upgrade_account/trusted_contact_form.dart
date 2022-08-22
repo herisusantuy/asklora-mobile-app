@@ -4,16 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_phone_number_input.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
 
 class TrustedContactForm extends StatelessWidget {
-  final PageController controller;
-
-  const TrustedContactForm({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const TrustedContactForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -125,26 +121,14 @@ class TrustedContactForm extends StatelessWidget {
 
   Widget _nextButton() => BlocBuilder<TrustedContactBloc, TrustedContactState>(
         builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-            child: CustomTextButton(
-              key: const Key('trusted_contact_next_button'),
-              borderRadius: 30,
-              buttonText: 'Next',
-              disable: state.disableNextButton(),
-              onClick: () {
-                FocusManager.instance.primaryFocus?.unfocus();
-                context
-                    .read<AccountBloc>()
-                    .add(const AccountCurrentStepChanged('next'));
-                context.read<TrustedContactBloc>().add(
-                      const TrustedContactSubmitted(),
-                    );
-                controller.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.ease);
-              },
-            ),
+          return CustomTextButton(
+            key: const Key('trusted_contact_next_button'),
+            borderRadius: 30,
+            buttonText: 'Next',
+            disable: state.disableNextButton(),
+            onClick: () => context
+                .read<NavigationBloc<UpgradeAccountPageStep>>()
+                .add(const PageChanged(UpgradeAccountPageStep.riskDisclosure)),
           );
         },
       );

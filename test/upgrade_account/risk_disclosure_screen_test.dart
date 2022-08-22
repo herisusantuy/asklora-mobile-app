@@ -1,5 +1,6 @@
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,7 +11,9 @@ void main() async {
     Future<void> _buildRiskDisclosureForm(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 8),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.riskDisclosure),
           navigatorObservers: [mockObserver]));
     }
 
@@ -29,7 +32,7 @@ void main() async {
       expect(riskDisclosureCheckBox, findsOneWidget);
       expect(riskDisclosureNextButton, findsOneWidget);
       expect(
-          (tester.firstWidget(riskDisclosureNextButton) as CustomTextButton)
+          (tester.firstWidget(riskDisclosureNextButton) as UpgradeAccountButton)
               .disable,
           isTrue);
       expect((tester.firstWidget(riskDisclosureCheckBox) as Checkbox).value,
@@ -45,7 +48,7 @@ void main() async {
       expect((tester.firstWidget(riskDisclosureCheckBox) as Checkbox).value,
           isTrue);
       expect(
-          (tester.firstWidget(riskDisclosureNextButton) as CustomTextButton)
+          (tester.firstWidget(riskDisclosureNextButton) as UpgradeAccountButton)
               .disable,
           isFalse);
     });
@@ -59,7 +62,7 @@ void main() async {
       await tester.tap(riskDisclosureCheckBox);
       await tester.pump();
       expect(
-          (tester.firstWidget(riskDisclosureNextButton) as CustomTextButton)
+          (tester.firstWidget(riskDisclosureNextButton) as UpgradeAccountButton)
               .disable,
           isTrue);
       expect((tester.firstWidget(riskDisclosureCheckBox) as Checkbox).value,

@@ -1,6 +1,7 @@
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import 'package:asklora_mobile_app/core/presentation/custom_country_picker.dart';
+import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,7 +12,9 @@ void main() async {
     Future<void> _buildCountryOfTaxResidencenForm(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 1),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.countryOfTaxResidence),
           navigatorObservers: [mockObserver]));
     }
 
@@ -34,7 +37,7 @@ void main() async {
       expect(accountCountryOfTaxResidenceNextStepButton, findsOneWidget);
       expect(
           (tester
-              .widget<CustomTextButton>(
+              .widget<UpgradeAccountButton>(
                   accountCountryOfTaxResidenceNextStepButton)
               .disable),
           true);

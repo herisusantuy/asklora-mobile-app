@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
-import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/disclosure_affiliation/bloc/disclosure_affiliation_bloc.dart';
 import 'affiliated_form.dart';
 import 'controlled_person_from.dart';
 import 'family_member_form.dart';
+import 'widgets/upgrade_account_button.dart';
 
 class DisclosuresAffiliationsForm extends StatelessWidget {
-  final PageController controller;
-
   const DisclosuresAffiliationsForm({
     Key? key,
-    required this.controller,
   }) : super(key: key);
 
   @override
@@ -292,23 +290,13 @@ class DisclosuresAffiliationsForm extends StatelessWidget {
   Widget _nextButton() {
     return BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-          child: CustomTextButton(
-              key: const Key('disclosures_affiliations_next_step_button'),
-              borderRadius: 30,
-              buttonText: 'Next',
-              disable: state.disabledNextButton(),
-              onClick: () {
-                FocusManager.instance.primaryFocus?.unfocus();
-                context
-                    .read<AccountBloc>()
-                    .add(const AccountCurrentStepChanged('next'));
-                controller.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.ease);
-              }),
-        );
+        return UpgradeAccountButton(
+            key: const Key('disclosures_affiliations_next_step_button'),
+            disable: state.disabledNextButton(),
+            onClick: () => context
+                .read<NavigationBloc<UpgradeAccountPageStep>>()
+                .add(const PageChanged(
+                    UpgradeAccountPageStep.signingTaxAgreement)));
       },
     );
   }

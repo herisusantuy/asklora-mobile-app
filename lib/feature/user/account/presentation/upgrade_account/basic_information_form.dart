@@ -10,23 +10,19 @@ import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
 import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_phone_number_input.dart';
-import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
+import 'widgets/upgrade_account_button.dart';
 
 class BasicInformationForm extends StatelessWidget {
-  final PageController controller;
-
   final _scrollController = ScrollController();
 
-  BasicInformationForm({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  BasicInformationForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -302,45 +298,35 @@ class BasicInformationForm extends StatelessWidget {
     );
   }
 
-  Widget _nextButton(BuildContext context) => Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: BlocConsumer<BasicInformationBloc, BasicInformationState>(
-          listenWhen: (previous, current) => previous.status != current.status,
-          listener: (context, state) => {
-            if (state.status == ResponseState.error)
-              {
-                showAlertDialog(context, state.message!, onPressedOk: () {}),
-              }
-            else if (state.status == ResponseState.success)
-              {
-                controller.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.ease)
-              },
-            context
-                .read<BasicInformationBloc>()
-                .add(const BasicInformationReset())
-          },
-          buildWhen: (previous, current) =>
-              previous.enableNextButton() != current.enableNextButton() ||
-              previous.isHongKongPermanentResident !=
-                  current.isHongKongPermanentResident,
-          builder: (context, state) {
-            return CustomTextButton(
+  Widget _nextButton(BuildContext context) =>
+      BlocConsumer<BasicInformationBloc, BasicInformationState>(
+        listenWhen: (previous, current) => previous.status != current.status,
+        listener: (context, state) => {
+          if (state.status == ResponseState.error)
+            {
+              showAlertDialog(context, state.message!, onPressedOk: () {}),
+            }
+          else if (state.status == ResponseState.success)
+            {
+              context.read<NavigationBloc<UpgradeAccountPageStep>>().add(
+                  const PageChanged(
+                      UpgradeAccountPageStep.countryOfTaxResidence))
+            },
+          context
+              .read<BasicInformationBloc>()
+              .add(const BasicInformationReset())
+        },
+        buildWhen: (previous, current) =>
+            previous.enableNextButton() != current.enableNextButton() ||
+            previous.isHongKongPermanentResident !=
+                current.isHongKongPermanentResident,
+        builder: (context, state) {
+          return UpgradeAccountButton(
               key: const Key('account_basic_information_next_step_button'),
-              buttonText: 'Next',
-              borderRadius: 30,
               disable: !state.enableNextButton(),
-              onClick: () {
-                context
-                    .read<AccountBloc>()
-                    .add(const AccountCurrentStepChanged('next'));
-                context
-                    .read<BasicInformationBloc>()
-                    .add(const BasicInformationNext());
-              },
-            );
-          },
-        ),
+              onClick: () => context
+                  .read<BasicInformationBloc>()
+                  .add(const BasicInformationNext()));
+        },
       );
 }
