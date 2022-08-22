@@ -1,7 +1,8 @@
 import 'package:asklora_mobile_app/core/presentation/custom_dropdown.dart';
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
 import 'package:asklora_mobile_app/core/presentation/question_widget.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,7 +13,9 @@ void main() async {
     Future<void> _buildUpgradeAccountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 0),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.basicInformation),
           navigatorObservers: [mockObserver]));
     }
 
@@ -74,7 +77,7 @@ void main() async {
           null);
       expect(
           tester
-              .widget<CustomTextButton>(basicInformationNextStepButton)
+              .widget<UpgradeAccountButton>(basicInformationNextStepButton)
               .disable,
           true);
     });

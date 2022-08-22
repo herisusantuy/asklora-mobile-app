@@ -1,6 +1,8 @@
 import 'package:asklora_mobile_app/core/presentation/custom_checkbox.dart';
 import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,7 +13,9 @@ void main() async {
     Future<void> _buildSigningAgreementTaxForm(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: UpgradeAccountScreen(initialPage: 5),
+        home: UpgradeAccountScreen(
+            initialUpgradeAccountPages:
+                UpgradeAccountPageStep.signingTaxAgreement),
         navigatorObservers: [mockObserver],
       ));
     }
@@ -58,7 +62,7 @@ void main() async {
           (tester.widget<CustomCheckbox>(declareCorrectInformationCheckbox))
               .disabled,
           true);
-      expect((tester.widget(nextButton) as CustomTextButton).disable, true);
+      expect((tester.widget(nextButton) as UpgradeAccountButton).disable, true);
     });
 
     testWidgets(
@@ -123,8 +127,8 @@ void main() async {
               await tester.pump(),
               await tester.tap(declareCorrectInformationChecked),
               await tester.pump(),
-              expect(
-                  (tester.widget<CustomTextButton>(nextButton)).disable, false),
+              expect((tester.widget<UpgradeAccountButton>(nextButton)).disable,
+                  false),
             });
   });
 }

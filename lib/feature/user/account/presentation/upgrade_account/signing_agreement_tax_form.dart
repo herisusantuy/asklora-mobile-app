@@ -4,16 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
+import 'widgets/upgrade_account_button.dart';
 
 class SigningAgreementTaxForm extends StatelessWidget {
-  final PageController controller;
-
-  const SigningAgreementTaxForm({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const SigningAgreementTaxForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -125,21 +122,13 @@ class SigningAgreementTaxForm extends StatelessWidget {
   Widget _nextButton() {
     return BlocBuilder<SigningAgreementTaxBloc, SigningAgreementTaxState>(
       builder: (context, state) {
-        return Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-            child: CustomTextButton(
-                key: const Key('signing_agreement_tax_next_step_button'),
-                borderRadius: 30,
-                disable: state.disabledNextButton(),
-                buttonText: 'Next',
-                onClick: () {
-                  context
-                      .read<AccountBloc>()
-                      .add(const AccountCurrentStepChanged('next'));
-                  controller.nextPage(
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.ease);
-                }));
+        return UpgradeAccountButton(
+            key: const Key('signing_agreement_tax_next_step_button'),
+            disable: state.disabledNextButton(),
+            onClick: () => context
+                .read<NavigationBloc<UpgradeAccountPageStep>>()
+                .add(const PageChanged(
+                    UpgradeAccountPageStep.signingBrokerAgreement)));
       },
     );
   }

@@ -9,7 +9,6 @@ import 'package:flutter_onfido/flutter_onfido.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
-import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../../kyc/domain/onfido_result_request.dart';
 import '../../bloc/account_bloc.dart';
@@ -23,12 +22,10 @@ import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
 import '../../bloc/signing_agreement_tax/signing_agreement_tax_bloc.dart';
 import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
 import '../../bloc/trusted_contact/bloc/trusted_contact_bloc.dart';
+import 'widgets/upgrade_account_button.dart';
 
 class ReviewInformationScreen extends StatelessWidget {
-  final PageController controller;
-
-  const ReviewInformationScreen({required this.controller, Key? key})
-      : super(key: key);
+  const ReviewInformationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -362,10 +359,8 @@ class ReviewInformationScreen extends StatelessWidget {
                   buildWhen: (prev, current) => prev.status != current.status,
                   builder: (context, state) => Padding(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                        child: CustomTextButton(
+                        child: UpgradeAccountButton(
                             key: const Key('submit_button'),
-                            borderRadius: 30,
-                            buttonText: 'Submit',
                             isLoading:
                                 state.status == AccountStatus.upgradingAccount,
                             disable: !stateReviewInformation.data!,

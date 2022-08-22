@@ -1,6 +1,7 @@
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
 import 'package:asklora_mobile_app/core/presentation/custom_dropdown.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,7 +12,9 @@ void main() {
     Future<void> _buildFinancialProfileScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 3),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.employmentFinancialProfile),
           navigatorObservers: [mockObserver]));
     }
 
@@ -46,7 +49,7 @@ void main() {
           'unknown');
       expect(
           tester
-              .widget<CustomTextButton>(financialProfileNextStepButton)
+              .widget<UpgradeAccountButton>(financialProfileNextStepButton)
               .disable,
           true);
     });

@@ -1,5 +1,6 @@
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
+import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,7 +11,9 @@ void main() async {
     Future<void> _buildReviewInformationScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 9),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.reviewInformation),
           navigatorObservers: [mockObserver]));
     }
 
@@ -44,7 +47,7 @@ void main() async {
       expect(riskDisclosure, findsOneWidget);
       expect(countryOfTaxResidence, findsOneWidget);
       expect(reviewInformationCheckbox, findsOneWidget);
-      expect((tester.firstWidget(submitButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(submitButton) as UpgradeAccountButton).disable,
           isTrue);
       expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
           isFalse);
@@ -58,7 +61,7 @@ void main() async {
       await tester.pump();
       expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
           isTrue);
-      expect((tester.firstWidget(submitButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(submitButton) as UpgradeAccountButton).disable,
           isFalse);
     });
 
@@ -70,7 +73,7 @@ void main() async {
       await tester.pump();
       await tester.tap(reviewInformationCheckbox);
       await tester.pump();
-      expect((tester.firstWidget(submitButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(submitButton) as UpgradeAccountButton).disable,
           isTrue);
       expect((tester.firstWidget(reviewInformationCheckbox) as Checkbox).value,
           isFalse);

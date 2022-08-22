@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,14 +10,17 @@ void main() async {
     Future<void> _buildUpgradeAccountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 0),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.basicInformation),
           navigatorObservers: [mockObserver]));
     }
 
     Future<void> _buildAddressProofForm(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 2),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages: UpgradeAccountPageStep.addressProof),
           navigatorObservers: [mockObserver]));
     }
 
@@ -24,7 +28,9 @@ void main() async {
         WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: UpgradeAccountScreen(initialPage: 3),
+          home: UpgradeAccountScreen(
+              initialUpgradeAccountPages:
+                  UpgradeAccountPageStep.employmentFinancialProfile),
           navigatorObservers: [mockObserver]));
     }
 
@@ -34,7 +40,7 @@ void main() async {
       await _buildUpgradeAccountScreen(tester);
 
       var upgradeAccountPageView =
-          find.byKey(const Key('upgrade_account_page_view'));
+          find.byKey(const Key('upgrade_account_page'));
       expect(upgradeAccountPageView, findsOneWidget);
 
       var firstNameInput = find.byKey(const Key('account_first_name_input'));

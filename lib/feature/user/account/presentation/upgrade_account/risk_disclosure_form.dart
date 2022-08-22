@@ -4,15 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
-import '../../../../../core/presentation/custom_text_button.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';
+import 'widgets/upgrade_account_button.dart';
 
 class RiskDisclosureForm extends StatelessWidget {
-  final PageController controller;
-
-  const RiskDisclosureForm({required this.controller, Key? key})
-      : super(key: key);
+  const RiskDisclosureForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,23 +47,14 @@ class RiskDisclosureForm extends StatelessWidget {
         ),
       );
 
-  Widget _nextButton() => Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: BlocBuilder<RiskDisclosureBloc, BaseResponse<bool>>(
-          builder: (context, state) => CustomTextButton(
-              key: const Key('risk_disclosure_next_button'),
-              borderRadius: 30,
-              buttonText: 'Next',
-              disable: !state.data!,
-              onClick: () {
-                context
-                    .read<AccountBloc>()
-                    .add(const AccountCurrentStepChanged('next'));
-                controller.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.ease);
-              }),
-        ),
+  Widget _nextButton() => BlocBuilder<RiskDisclosureBloc, BaseResponse<bool>>(
+        builder: (context, state) => UpgradeAccountButton(
+            key: const Key('risk_disclosure_next_button'),
+            disable: !state.data!,
+            onClick: () => context
+                .read<NavigationBloc<UpgradeAccountPageStep>>()
+                .add(const PageChanged(
+                    UpgradeAccountPageStep.reviewInformation))),
       );
 
   SizedBox _spaceHeight() => const SizedBox(

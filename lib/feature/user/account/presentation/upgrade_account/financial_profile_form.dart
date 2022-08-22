@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_dropdown.dart';
-import '../../../../../core/presentation/custom_text_button.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
+import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
+import 'widgets/upgrade_account_button.dart';
 
 class FinancialProfileForm extends StatelessWidget {
-  final PageController controller;
-
-  const FinancialProfileForm({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const FinancialProfileForm({Key? key}) : super(key: key);
 
   final incomeRange = const [
     '0 - 200,000',
@@ -235,22 +231,13 @@ class FinancialProfileForm extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.enableNextButton() != current.enableNextButton(),
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-          child: CustomTextButton(
-              key: const Key('account_financial_profile_next_step_button'),
-              disable: !state.enableNextButton(),
-              borderRadius: 30,
-              buttonText: 'Next',
-              onClick: () {
-                context
-                    .read<AccountBloc>()
-                    .add(const AccountCurrentStepChanged('next'));
-                controller.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.ease);
-              }),
-        );
+        return UpgradeAccountButton(
+            key: const Key('account_financial_profile_next_step_button'),
+            disable: !state.enableNextButton(),
+            onClick: () => context
+                .read<NavigationBloc<UpgradeAccountPageStep>>()
+                .add(const PageChanged(
+                    UpgradeAccountPageStep.disclosureAffiliation)));
       },
     );
   }

@@ -50,7 +50,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<GetAccount>(_onGetAccount);
     on<GetSdkToken>(_onGetOnfidoSdkToken);
     on<UpgradeAccount>(_onUpgradeAccount);
-    on<AccountCurrentStepChanged>(_onAccountCurrentStepIndexChange);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
   }
 
@@ -247,55 +246,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       emit(state.copyWith(
           status: AccountStatus.failure,
           responseMessage: 'Could not fetch the token!'));
-    }
-  }
-
-  _onAccountCurrentStepIndexChange(
-      AccountCurrentStepChanged event, Emitter<AccountState> emit) {
-    int nextStepIndex = state.currentStepIndex;
-    if (event.type == 'back') {
-      if (state.currentStepIndex - 1 < 0) {
-        nextStepIndex = 0;
-      } else {
-        nextStepIndex--;
-      }
-    } else {
-      if (state.currentStepIndex + 1 == 2) {
-        nextStepIndex = 2;
-      } else {
-        nextStepIndex++;
-      }
-    }
-
-    emit(state.copyWith(
-        currentStepIndex: nextStepIndex,
-        currentStepName: _getStepName(nextStepIndex)));
-  }
-
-  String _getStepName(int stepIndex) {
-    switch (stepIndex) {
-      case 0:
-        return 'Basic Information';
-      case 1:
-        return 'Country of Tax Residence';
-      case 2:
-        return 'Permanent Residential Address';
-      case 3:
-        return 'Employment, Financial Profile';
-      case 4:
-        return 'Disclosures & Affiliations';
-      case 5:
-        return 'Signing Tax Agreement';
-      case 6:
-        return 'Signing Broker Agreements';
-      case 7:
-        return 'Trusted Contract';
-      case 8:
-        return 'Risk Disclosure';
-      case 9:
-        return 'Review Information';
-      default:
-        return '';
     }
   }
 
