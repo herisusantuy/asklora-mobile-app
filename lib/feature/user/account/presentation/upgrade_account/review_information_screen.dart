@@ -165,7 +165,7 @@ class ReviewInformationScreen extends StatelessWidget {
                     _customCard(
                         'Account Funding Source', state.fundingSource.name),
                     _customCard(
-                        'Employmen Status', state.employmentStatus.name),
+                        'Employment Status', state.employmentStatus.name),
                   ],
                 )),
       );
