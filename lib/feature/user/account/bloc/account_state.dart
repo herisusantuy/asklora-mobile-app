@@ -55,50 +55,34 @@ extension Type on UpgradeAccountPageStep {
 }
 
 class AccountState extends Equatable {
-  const AccountState(
-      {this.status = AccountStatus.unknown,
-      this.responseMessage = '',
-      this.account,
-      this.upgradeAccountRequest,
-      this.currentStepIndex = 0,
-      this.currentStepName = 'Basic Information'});
+  const AccountState({
+    this.status = AccountStatus.unknown,
+    this.responseMessage = '',
+    this.account,
+    this.upgradeAccountRequest,
+  });
 
   final AccountStatus status;
   final String responseMessage;
   final GetAccountResponse? account;
   final UpgradeAccountRequest? upgradeAccountRequest;
-  final int currentStepIndex;
-  final String currentStepName;
 
   @override
   List<Object?> get props {
-    return [
-      status,
-      responseMessage,
-      account,
-      upgradeAccountRequest,
-      currentStepIndex,
-      currentStepName,
-    ];
+    return [status, responseMessage, account, upgradeAccountRequest];
   }
 
-  AccountState copyWith({
-    AccountStatus? status,
-    String? responseMessage,
-    GetAccountResponse? account,
-    UpgradeAccountRequest? upgradeAccountRequest,
-    int? currentStepIndex,
-    String? currentStepName,
-  }) {
+  AccountState copyWith(
+      {AccountStatus? status,
+      String? responseMessage,
+      GetAccountResponse? account,
+      UpgradeAccountRequest? upgradeAccountRequest}) {
     return AccountState(
-      status: status ?? this.status,
-      responseMessage: responseMessage ?? this.responseMessage,
-      account: account ?? this.account,
-      upgradeAccountRequest:
-          upgradeAccountRequest ?? this.upgradeAccountRequest,
-      currentStepIndex: currentStepIndex ?? this.currentStepIndex,
-      currentStepName: currentStepName ?? this.currentStepName,
-    );
+        status: status ?? this.status,
+        responseMessage: responseMessage ?? this.responseMessage,
+        account: account ?? this.account,
+        upgradeAccountRequest:
+            upgradeAccountRequest ?? this.upgradeAccountRequest);
   }
 }
 
