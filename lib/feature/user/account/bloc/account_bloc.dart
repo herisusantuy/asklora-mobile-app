@@ -51,7 +51,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<GetSdkToken>(_onGetOnfidoSdkToken);
     on<UpgradeAccount>(_onUpgradeAccount);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
-    on<SubmitTaxInfo>(_onSubmitTaxInfo);
   }
 
   final AccountRepository _accountRepository;
@@ -143,54 +142,12 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
     try {
       emit(state.copyWith(status: AccountStatus.upgradingAccount));
-      UpgradeAccountRequest request = UpgradeAccountRequest(
-        contact: Contact(
-            emailAddress: email,
-            phoneNumber:
-                '+${basicInformationBloc.state.countryCode}${basicInformationBloc.state.phoneNumber}',
-            streetAddress: addressProofBloc.state.residentialAddress,
-            unit: addressProofBloc.state.unitNumber,
-            city: addressProofBloc.state.city,
-            state: null,
-            postalCode: null,
-            country: addressProofBloc.state.country),
-        identity: Identity(
-            givenName: basicInformationBloc.state.firstName,
-            middleName: basicInformationBloc.state.middleName,
-            familyName: basicInformationBloc.state.lastName,
-            dateOfBirth:
-                parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
-            taxId: countryOfTaxResidenceBloc.state.tinNumber,
-            taxIdType: 'NOT_SPECIFIED',
-            countryOfCitizenship:
-                basicInformationBloc.state.countryOfCitizenship,
-            countryOfBirth: null,
-            countryOfTaxResidence:
-                countryOfTaxResidenceBloc.state.countryOfTaxResidence,
-            fundingSource:
-                fundingSourceValue(financialProfileBloc.state.fundingSource)),
-        trustedContact: TrustedContact(
-            givenName: trustedContactBloc.state.firstName,
-            familyName: trustedContactBloc.state.lastName,
-            email: trustedContactBloc.state.emailAddress,
-            phone:
-                '+${trustedContactBloc.state.countryCode}${trustedContactBloc.state.phoneNumber}'),
-        disclosures: Disclosures(
-            isControlPerson: disclosureAffiliationBloc.state.isSeniorExecutive,
-            isAffiliatedExchangeOrFinra:
-                disclosureAffiliationBloc.state.isAffiliated,
-            isPoliticallyExposed:
-                disclosureAffiliationBloc.state.isSeniorPolitical,
-            immediateFamilyExposed:
-                disclosureAffiliationBloc.state.isFamilyMember,
-            employmentStatus: financialProfileBloc.state.employmentStatus.name,
-            employerName: financialProfileBloc.state.employer,
-            employerAddress: financialProfileBloc.state.employerAddress,
-            employmentPosition: financialProfileBloc.state.occupation,
-            context: _generateContextList()),
-        agreements: _generateAgreementList(event.ipAddress),
-      );
-      await _accountRepository.upgradeAccount(request);
+
+      await _accountRepository
+          .upgradeAccount(_upgradeAccountRequest(email!, event.ipAddress));
+
+      await _accountRepository
+          .submitTaxInfo(_submitTaxInfoRequest(event.ipAddress));
       emit(
         state.copyWith(
           status: AccountStatus.success,
@@ -204,40 +161,83 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
-  _onSubmitTaxInfo(SubmitTaxInfo event, Emitter<AccountState> emit) async {
-    try {
-      emit(state.copyWith(status: AccountStatus.submittingTaxInfo));
-      TaxInfoRequest taxInfoReq = TaxInfoRequest(
-          fullName:
-              '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
-          countryCitizen: basicInformationBloc.state.countryOfCitizenship,
-          permanentAddressStreet: addressProofBloc.state.residentialAddress,
-          permanentAddressCityState: addressProofBloc.state.city,
-          permanentAddressCountry: addressProofBloc.state.country,
-          mailingAddressStreet: addressProofBloc.state.mailResidentialAddress,
-          mailingAddressCityState: addressProofBloc.state.mailCity,
-          mailingAddressCountry: addressProofBloc.state.mailCountry,
-          foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
+  UpgradeAccountRequest _upgradeAccountRequest(String email, String ipAddress) {
+    UpgradeAccountRequest request = UpgradeAccountRequest(
+      contact: Contact(
+          emailAddress: email,
+          phoneNumber:
+              '+${basicInformationBloc.state.countryCode}${basicInformationBloc.state.phoneNumber}',
+          streetAddress: addressProofBloc.state.residentialAddress,
+          unit: addressProofBloc.state.unitNumber,
+          city: addressProofBloc.state.city,
+          state: null,
+          postalCode: null,
+          country: addressProofBloc.state.country),
+      identity: Identity(
+          givenName: basicInformationBloc.state.firstName,
+          middleName: basicInformationBloc.state.middleName,
+          familyName: basicInformationBloc.state.lastName,
           dateOfBirth:
               parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
-          signature:
-              'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
-          date: parseDateFormatYYmmdd(DateTime.now().toString()),
-          signerFullName:
-              '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
-          ipAddress: event.ipAddress);
-      await _accountRepository.submitTaxInfo(taxInfoReq);
-      emit(TaxInfoSubmitted());
-    } catch (e) {
-      emit(state.copyWith(
-          status: AccountStatus.failure,
-          responseMessage: 'Could not submit tax info!'));
-    }
+          taxId: countryOfTaxResidenceBloc.state.tinNumber,
+          taxIdType: 'NOT_SPECIFIED',
+          countryOfCitizenship: basicInformationBloc.state.countryOfCitizenship,
+          countryOfBirth: null,
+          countryOfTaxResidence:
+              countryOfTaxResidenceBloc.state.countryOfTaxResidence,
+          fundingSource:
+              fundingSourceValue(financialProfileBloc.state.fundingSource)),
+      trustedContact: TrustedContact(
+          givenName: trustedContactBloc.state.firstName,
+          familyName: trustedContactBloc.state.lastName,
+          email: trustedContactBloc.state.emailAddress,
+          phone:
+              '+${trustedContactBloc.state.countryCode}${trustedContactBloc.state.phoneNumber}'),
+      disclosures: Disclosures(
+          isControlPerson: disclosureAffiliationBloc.state.isSeniorExecutive,
+          isAffiliatedExchangeOrFinra:
+              disclosureAffiliationBloc.state.isAffiliated,
+          isPoliticallyExposed:
+              disclosureAffiliationBloc.state.isSeniorPolitical,
+          immediateFamilyExposed:
+              disclosureAffiliationBloc.state.isFamilyMember,
+          employmentStatus: financialProfileBloc.state.employmentStatus.name,
+          employerName: financialProfileBloc.state.employer,
+          employerAddress: financialProfileBloc.state.employerAddress,
+          employmentPosition: financialProfileBloc.state.occupation,
+          context: _generateContextList()),
+      agreements: _generateAgreementList(ipAddress),
+    );
+    return request;
+  }
+
+  TaxInfoRequest _submitTaxInfoRequest(String ipAddress) {
+    TaxInfoRequest taxInfoReq = TaxInfoRequest(
+        fullName:
+            '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
+        countryCitizen: basicInformationBloc.state.countryOfCitizenship,
+        permanentAddressStreet: addressProofBloc.state.residentialAddress,
+        permanentAddressCityState: addressProofBloc.state.city,
+        permanentAddressCountry: addressProofBloc.state.country,
+        mailingAddressStreet: addressProofBloc.state.mailResidentialAddress,
+        mailingAddressCityState: addressProofBloc.state.mailCity,
+        mailingAddressCountry: addressProofBloc.state.mailCountry,
+        foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
+        dateOfBirth:
+            parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
+        signature:
+            'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
+        date: parseDateFormatYYmmdd(DateTime.now().toString()),
+        signerFullName:
+            '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
+        ipAddress: ipAddress);
+    return taxInfoReq;
   }
 
   _onGetOnfidoSdkToken(GetSdkToken event, Emitter<AccountState> emit) async {
     try {
-      emit(state.copyWith(status: AccountStatus.fetchingOnfidoToken));
+      emit(state.copyWith(
+          status: AccountStatus.fetchingOnfidoToken, responseMessage: ''));
 
       var response = await _accountRepository.getOnfidoToken();
 

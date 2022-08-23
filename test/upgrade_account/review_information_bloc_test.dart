@@ -182,7 +182,7 @@ void main() async {
         'Tap submit button',
         build: () {
           when(secureStorage.readSecureData('email'))
-              .thenAnswer((_) => Future.value());
+              .thenAnswer((_) => Future.value(''));
 
           when(accountRepository.upgradeAccount(upgradeAccountRequest))
               .thenAnswer((_) => Future.value(const UpgradeAccountRequest()));
@@ -198,8 +198,6 @@ void main() async {
         act: (bloc) async {
           bloc.add(UpgradeAccount(ipAddress));
           await Future.delayed(const Duration(seconds: 1));
-          bloc.add(SubmitTaxInfo(ipAddress));
-          await Future.delayed(const Duration(seconds: 1));
           bloc.add(GetSdkToken());
         },
         expect: () => {
@@ -207,10 +205,6 @@ void main() async {
               const AccountState(
                   status: AccountStatus.success,
                   responseMessage: 'Account upgraded successfully!'),
-              const AccountState(
-                  status: AccountStatus.submittingTaxInfo,
-                  responseMessage: 'Account upgraded successfully!'),
-              TaxInfoSubmitted(),
               const AccountState(status: AccountStatus.fetchingOnfidoToken),
               const OnfidoSdkToken('11223344axx')
             });

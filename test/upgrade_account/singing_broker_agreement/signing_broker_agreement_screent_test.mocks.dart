@@ -28,10 +28,7 @@ class MockSigningBrokerAgreementRepository extends _i1.Mock
   }
 
   @override
-  _i3.Future<bool> openAlpacaCustomerAgreement(
-          dynamic signingBrokerAgreementRepository) =>
-      (super.noSuchMethod(
-          Invocation.method(
-              #openAlpacaCustomerAgreement, [signingBrokerAgreementRepository]),
+  _i3.Future<bool> openAlpacaCustomerAgreement(String? filePath) => (super
+      .noSuchMethod(Invocation.method(#openAlpacaCustomerAgreement, [filePath]),
           returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
 }
