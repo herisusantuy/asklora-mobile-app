@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/utils/storage/secure_storage.dart';
-import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/review_information/review_information_bloc.dart';
 import '../../bloc/risk_disclosure/risk_disclosure_bloc.dart';

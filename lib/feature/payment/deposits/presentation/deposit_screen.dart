@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../withdrawal/presentation/acknowledgement_screen.dart';
 import '../bloc/deposit_bloc.dart';
-import '../bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../edda/bloc/amount/amount_bloc.dart';
 import '../edda/presentation/edda_acknowledgement_screen.dart';
 import '../edda/presentation/edda_amount_deposit_screen.dart';

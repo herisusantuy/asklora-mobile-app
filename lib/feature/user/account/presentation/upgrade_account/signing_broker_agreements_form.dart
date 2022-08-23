@@ -8,7 +8,7 @@ import 'package:signature/signature.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_button.dart';
-import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/signing_broker_agreement/bloc/signing_broker_agreement_bloc.dart';
 import '../widgets/signature_drawer.dart';

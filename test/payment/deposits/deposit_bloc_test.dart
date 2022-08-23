@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/presentation/navigation/bloc/navigation_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/bloc/deposit_bloc.dart';
-import 'package:asklora_mobile_app/feature/payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/get_bank_account_response.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/registered_bank_accounts.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/domain/bank_details.dart';
@@ -113,15 +113,14 @@ void main() async {
         build: () {
           return depositBloc;
         },
-        act: (bloc) => bloc.add(const BankSelected(
-              BankDetails(123, 'BCA', '', '112233'),
-            )),
-        expect: () => {
-              const DepositState(
-                  depositEvent:
-                      BankSelected(BankDetails(123, 'BCA', '', '112233')),
-                  bankDetails: BankDetails(123, 'BCA', '', '112233')),
-            });
+        act: (bloc) => bloc.add(
+            const BankSelected(BankDetails(123, 'BCA', '', '112233'), 111)),
+        expect: () {
+          const DepositState(
+              depositEvent:
+                  BankSelected(BankDetails(123, 'BCA', '', '112233'), 111),
+              bankDetails: BankDetails(123, 'BCA', '', '112233'));
+        });
 
     tearDown(() => {depositBloc.close()});
   });

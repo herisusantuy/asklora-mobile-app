@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../shareable/widget/custom_card_copy_text.dart';
-import '../../shareable/widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../shareable/widget/deposit_next_button.dart';
 
 class WireTransferScreen extends StatelessWidget {
@@ -11,7 +11,7 @@ class WireTransferScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDepositWidget(
+    return CustomNavigationWidget<DepositPageStep>(
       title: 'Wire Transfer',
       child: ListView(
         children: [

@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bank_details/domain/get_bank_account_response.dart';
-import '../widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 
 class ReturningUserScreen extends StatelessWidget {
   const ReturningUserScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomDepositWidget(
+    return CustomNavigationWidget<DepositPageStep>(
       title: _getTitle(context),
       child: ListView(
         children: [

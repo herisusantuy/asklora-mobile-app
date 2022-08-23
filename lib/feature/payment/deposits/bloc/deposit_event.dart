@@ -18,11 +18,12 @@ class DepositMethodSelected extends DepositEvent {
 
 class BankSelected extends DepositEvent {
   final BankDetails bankDetails;
+  final int? timeStamp;
 
-  const BankSelected(this.bankDetails) : super();
+  const BankSelected(this.bankDetails, this.timeStamp) : super();
 
   @override
-  List<Object?> get props => [bankDetails];
+  List<Object?> get props => [bankDetails, timeStamp];
 }
 
 class RegisteredBankAccountCheck extends DepositEvent {

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
-import '../../shareable/widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../bloc/deposit_bloc.dart';
 import '../bloc/amount/amount_bloc.dart';
 
 class FinishedScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class FinishedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDepositWidget(
+    return CustomNavigationWidget<DepositPageStep>(
       crossAxisAlignment: CrossAxisAlignment.center,
       header: Align(
         alignment: Alignment.centerRight,
