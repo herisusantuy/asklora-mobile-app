@@ -63,6 +63,10 @@ build_runner:
 #	@echo "╠ Running the app"
 #	@flutter run --flavor dev
 
-build_dev_mobile: clean run_test
+build_dev: clean run_test
 	@echo "╠  Building the app"
 	@flutter build apk --flavor dev --dart-define=ENVIRONMENT=dev
+
+build_and_upload_dev: clean ## Create and upload the android build on firebase
+	@echo "╠  Building the app"
+	cd android && fastlane android create_dev

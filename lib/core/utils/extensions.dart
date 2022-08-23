@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// General Email Regex (RFC 5322 Official Standard)
 /// https://www.emailregex.com/
 const emailPatternSource =
@@ -18,3 +20,5 @@ extension EmailValidator on String {
 
   bool isValidOtp() => otpRegex.hasMatch(this);
 }
+
+MaterialColor randomColor() => ([...Colors.primaries]..shuffle()).first;
