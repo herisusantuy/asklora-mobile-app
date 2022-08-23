@@ -10,11 +10,12 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../home_screen.dart';
+import '../../../orders/regular/regular_order_home_screen.dart';
 import '../../../payment/deposits/presentation/deposit_screen.dart';
 import '../../../payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
-import '../../../user/account/presentation/user_profile/user_profile.dart';
+import '../../../user/account/presentation/user_profile/user_profile_screen.dart';
 import '../../../user/account/repository/account_repository.dart';
 import '../../../user/kyc/domain/onfido_result_request.dart';
 import '../../sign_out/bloc/sign_out_bloc.dart';
@@ -42,7 +43,10 @@ class SignInSuccessScreen extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const CustomText('Success Login'),
+          title: const CustomText(
+            'Welcome!',
+            type: FontType.h4SemiBold,
+          ),
           actions: [_userButton(context)],
         ),
         body: Padding(
@@ -110,6 +114,8 @@ class SignInSuccessScreen extends StatelessWidget {
                 _padding(),
                 _depositScreen(context),
                 _padding(),
+                _regularOrder(context),
+                _padding(),
                 _signOutButton(),
               ],
             ),
@@ -129,6 +135,10 @@ class SignInSuccessScreen extends StatelessWidget {
 
   Widget _depositScreen(BuildContext context) => CustomTextButton(
       buttonText: 'Deposit', onClick: () => DepositScreen.open(context));
+
+  Widget _regularOrder(BuildContext context) => CustomTextButton(
+      buttonText: 'Order (Regular)',
+      onClick: () => RegularOrderHomeScreen.open(context));
 
   Widget _userButton(BuildContext context) {
     return InkWell(

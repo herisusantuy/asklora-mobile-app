@@ -6,6 +6,7 @@ enum FontType {
   h2,
   h3,
   h4,
+  h4SemiBold,
   h5,
   bodyText,
   bodyTextBold,
@@ -59,6 +60,7 @@ class CustomText extends StatelessWidget {
       case FontType.h3:
         fontType = 22;
         break;
+      case FontType.h4SemiBold:
       case FontType.h4:
         fontType = 20;
         break;
@@ -66,18 +68,14 @@ class CustomText extends StatelessWidget {
         fontType = 18;
         break;
       case FontType.bodyText:
-        fontType = 16;
-        break;
       case FontType.bodyTextBold:
+      case FontType.formInfield:
         fontType = 16;
-        break;
-      case FontType.smallText:
-        fontType = 14;
         break;
       case FontType.smallTextBold:
-        fontType = 14;
-        break;
+      case FontType.smallText:
       case FontType.button:
+      case FontType.formTitle:
         fontType = 14;
         break;
       case FontType.note:
@@ -86,15 +84,7 @@ class CustomText extends StatelessWidget {
       case FontType.smallNote:
         fontType = 12;
         break;
-      case FontType.formTitle:
-        fontType = 14;
-        break;
-      case FontType.formInfield:
-        fontType = 16;
-        break;
       case FontType.mobileMenu:
-        fontType = 11;
-        break;
       case FontType.delay:
         fontType = 11;
         break;
@@ -108,25 +98,16 @@ class CustomText extends StatelessWidget {
         boldText = FontWeight.w300;
         break;
       case FontType.h1:
-        boldText = FontWeight.bold;
-        break;
       case FontType.h2:
-        boldText = FontWeight.bold;
-        break;
       case FontType.h3:
-        boldText = FontWeight.bold;
-        break;
       case FontType.h4:
-        boldText = FontWeight.bold;
-        break;
       case FontType.h5:
-        boldText = FontWeight.bold;
-        break;
       case FontType.bodyTextBold:
-        boldText = FontWeight.bold;
-        break;
       case FontType.smallTextBold:
         boldText = FontWeight.bold;
+        break;
+      case FontType.h4SemiBold:
+        boldText = FontWeight.w500;
         break;
       default:
         boldText = FontWeight.normal;
