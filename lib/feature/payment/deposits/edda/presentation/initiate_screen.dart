@@ -11,7 +11,7 @@ class InitiateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget(
+    return CustomNavigationWidget<DepositPageStep>(
       title: 'eDDA Transfer',
       child: ListView(children: [
         _text(
