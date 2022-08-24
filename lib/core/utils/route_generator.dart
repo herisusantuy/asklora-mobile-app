@@ -5,7 +5,7 @@ import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
-import '../../feature/orders/regular/regular_order_home_screen.dart';
+import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/deposits/presentation/deposit_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
