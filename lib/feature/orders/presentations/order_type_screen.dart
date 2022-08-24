@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/presentation/custom_text.dart';
 import '../../../core/utils/app_icons.dart';
 
-enum OrderType { buy, sell, unknown }
+enum OrderType { buy, sell }
 
 class OrderTypeScreen extends StatelessWidget {
   final OrderType orderType;
@@ -25,7 +25,7 @@ class OrderTypeScreen extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 20),
             ),
             const CustomText(
-              'AskLORa supports the\nfollowing order type :',
+              'AskLORA supports the following order type :',
               padding: EdgeInsets.only(bottom: 20),
             ),
             _listMenus(),
@@ -86,38 +86,34 @@ class OrderTypeScreen extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
-      child: Row(
-        children: [
-          Expanded(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    title,
-                    type: FontType.h5,
-                    padding: const EdgeInsets.only(bottom: 5),
-                  ),
-                  CustomText(text),
-                ],
-              )),
-          Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: onPress,
-                    child: Image.asset(
-                      icon,
-                      height: 50,
-                      width: 50,
-                      fit: BoxFit.contain,
+      child: InkWell(
+        onTap: onPress,
+        child: Row(
+          children: [
+            Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      title,
+                      type: FontType.h5,
+                      padding: const EdgeInsets.only(bottom: 5),
                     ),
-                  ),
-                ],
-              ))
-        ],
+                    CustomText(text),
+                  ],
+                )),
+            Expanded(
+                flex: 1,
+                child: Image.asset(
+                  icon,
+                  height: 50,
+                  width: 50,
+                  alignment: Alignment.centerRight,
+                  // fit: BoxFit.contain,
+                ))
+          ],
+        ),
       ),
     );
   }
