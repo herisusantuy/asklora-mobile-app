@@ -156,7 +156,7 @@ class DisclosureAffiliationBloc
             (event.controlledPersonCompanyEmail.isValidEmail() ||
                     event.controlledPersonCompanyEmail.isEmpty)
                 ? ''
-                : 'Enter valid email'));
+                : 'Please enter valid email'));
   }
 
   _onQuestionNo3Changed(

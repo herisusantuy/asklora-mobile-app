@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/utils/storage/secure_storage.dart';
 import '../../bloc/account_bloc.dart';
 import '../../repository/account_repository.dart';
@@ -13,9 +14,7 @@ class UserProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        title: const CustomText('User Profile'),
-      ),
+          title: const CustomText('User Profile', type: FontType.h4SemiBold)),
       body: BlocProvider(
         create: (context) => AccountBloc(
             getAccountRepository: AccountRepository(),
@@ -33,6 +32,9 @@ class UserProfileScreen extends StatelessWidget {
             state.status == AccountStatus.fetchingAccount) {
           return const Center(child: CircularProgressIndicator());
         } else if (state.status == AccountStatus.success) {
+          String firstName = state.account!.identity!.givenName;
+          String middleName = state.account!.identity!.middleName;
+          String familyName = state.account!.identity!.familyName;
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,30 +43,39 @@ class UserProfileScreen extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      const CircleAvatar(
-                        radius: 30,
-                        child: CustomText('Ava'),
-                      ),
+                      CircleAvatar(
+                          radius: 32,
+                          backgroundColor: randomColor(),
+                          child: CustomText(
+                            '${familyName[0].toUpperCase()} ${familyName[0].toUpperCase()}',
+                            type: FontType.h4SemiBold,
+                            color: Colors.white,
+                          )),
                       const SizedBox(
                         height: 15,
                       ),
-                      CustomText(
-                        '${state.account!.identity.givenName} ${state.account!.identity.middleName} ${state.account!.identity.familyName}',
-                      ),
-                      CustomText(state.account!.identity.chineseName)
+                      if (state.account!.identity != null)
+                        Column(
+                          children: [
+                            CustomText('$firstName $middleName $familyName'),
+                            CustomText(state.account!.identity!.chineseName),
+                          ],
+                        )
+                      else
+                        const SizedBox()
                     ],
                   ),
                 ),
               ),
               _customRowText('Email', state.account!.email),
               _customRowText('Phone Number',
-                  '${state.account!.contact.countryCode}${state.account!.contact.phoneNumber}'),
-              _customRowText(
-                  'Street Address', state.account!.contact.streetAddress),
-              _customRowText('City', state.account!.contact.city),
-              _customRowText('Unit', state.account!.contact.unit),
-              _customRowText('State', state.account!.contact.state),
-              _customRowText('Country', state.account!.contact.country),
+                  '${state.account!.contact?.countryCode ?? ''}${state.account!.contact?.phoneNumber ?? ''}'),
+              _customRowText('Street Address',
+                  state.account!.contact?.streetAddress ?? ''),
+              _customRowText('City', state.account!.contact?.city ?? ''),
+              _customRowText('Unit', state.account!.contact?.unit ?? ''),
+              _customRowText('State', state.account!.contact?.state ?? ''),
+              _customRowText('Country', state.account!.contact?.country ?? ''),
             ],
           );
         } else {

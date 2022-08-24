@@ -25,7 +25,7 @@ class ResetPasswordForm extends StatelessWidget {
                 .showError();
             break;
           case ResponseState.success:
-            ResetPasswordSuccesScreen.open(context);
+            ResetPasswordSuccessScreen.open(context);
             break;
           default:
             break;

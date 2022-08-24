@@ -24,9 +24,3 @@ class UpdateOnfidoResult extends AccountEvent {
 
   const UpdateOnfidoResult(this.outcome, this.reason, this.token);
 }
-
-class SubmitTaxInfo extends AccountEvent {
-  final String ipAddress;
-
-  const SubmitTaxInfo(this.ipAddress);
-}

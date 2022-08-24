@@ -119,7 +119,7 @@ class ControlledPersonForm extends StatelessWidget {
           builder: (context, state) => CustomTextInput(
               initialValue: state.controlledPersonCompanyEmail,
               textInputType: TextInputType.emailAddress,
-              errorText: state.affiliateCompanyEmailErrorText,
+              errorText: state.controlledPersonCompanyEmailErrorText,
               key: const Key('controlled_person_company_email_input'),
               labelText: 'Company Compliance Email',
               onChanged: (value) => context
