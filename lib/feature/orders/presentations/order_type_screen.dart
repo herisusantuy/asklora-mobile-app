@@ -28,37 +28,51 @@ class OrderTypeScreen extends StatelessWidget {
               'AskLORA supports the following order type :',
               padding: EdgeInsets.only(bottom: 20),
             ),
-            _listMenus(),
+            Column(
+              children: _listMenus(),
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget _listMenus() {
-    return Column(children: [
-      if (orderType == OrderType.buy) ...[
+  List<Widget> _listMenus() {
+    if (orderType == OrderType.buy) {
+      return [
         _customListMenu(
             'Market Order', 'Buy the stock at the current market price',
-            icon: AppIcons.saveMoney, onPress: () {}),
+            key: const Key('market_order_buy_button'),
+            icon: AppIcons.saveMoney,
+            onPress: () {}),
         _customListMenu(
             'Limit Order', 'Buy the stock at a specified limit price or lower',
-            icon: AppIcons.barChart, onPress: () {}),
-        _customListMenu('Stop Limit Order',
-            'Buy the stock if it rises to a specified stop price',
-            icon: AppIcons.stop, onPress: () {}),
+            key: const Key('limit_order_buy_button'),
+            icon: AppIcons.barChart,
+            onPress: () {}),
+        _customListMenu(
+            'Stop Order', 'Buy the stock if it rises to a specified stop price',
+            key: const Key('stop_order_buy_button'),
+            icon: AppIcons.stop,
+            onPress: () {}),
         _customListMenu('Stop Limit Order',
             'Buy a limit order if the stock rises to a specified stop price',
-            icon: AppIcons.financial, onPress: () {}),
+            key: const Key('stop_limit_order_buy_button'),
+            icon: AppIcons.financial,
+            onPress: () {}),
         _customListMenu('Trailing Stop Order',
             "Trail the stock's price and buy if it goes above the trail limit you've set",
-            icon: AppIcons.route, onPress: () {}),
+            key: const Key('trailing_stop_order_buy_button'),
+            icon: AppIcons.route,
+            onPress: () {}),
         const CustomText(
-          'Still unsure about the different order types? Learn more here',
+          'Still unsure about the different order types? Learn more here!',
           textAlign: TextAlign.center,
           padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
-        ),
-      ] else ...[
+        )
+      ];
+    } else {
+      return [
         _customListMenu(
             'Market Order', 'Sell the stock at the current market price',
             icon: AppIcons.saveMoney, onPress: () {}),
@@ -73,9 +87,9 @@ class OrderTypeScreen extends StatelessWidget {
             icon: AppIcons.financial, onPress: () {}),
         _customListMenu('Trailing Stop Order',
             'Trail the stock’s price and sell if it goes below the trail limit you’ve set',
-            icon: AppIcons.route, onPress: () {}),
-      ]
-    ]);
+            icon: AppIcons.route, onPress: () {})
+      ];
+    }
   }
 
   Widget _customListMenu(
@@ -83,10 +97,12 @@ class OrderTypeScreen extends StatelessWidget {
     String text, {
     String icon = '',
     Function()? onPress,
+    Key? key,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: InkWell(
+        key: key,
         onTap: onPress,
         child: Row(
           children: [
