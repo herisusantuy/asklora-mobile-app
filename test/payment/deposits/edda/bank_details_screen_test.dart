@@ -11,7 +11,7 @@ void main() async {
     Future<void> _buildBankDetailsScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: DepositScreen(
+          home: const DepositScreen(
             initialDepositPages: DepositPageStep.eDdaBankDetails,
           ),
           navigatorObservers: [mockObserver]));
@@ -68,11 +68,10 @@ void main() async {
         (tester) async {
       await _buildBankDetailsScreen(tester);
       await tester.enterText(bankAccountNumberInput, '123');
-      await tester.enterText(confirmBankAccountNumberInput, '123456');
+      await tester.enterText(confirmBankAccountNumberInput, '123');
       await tester.enterText(bankAccountName, 'kkkkkk');
       await tester.pump();
-      expect(find.text('123'), findsOneWidget);
-      expect(find.text('123'), findsOneWidget);
+      expect(find.text('123'), findsNWidgets(2));
       expect(
           tester.widget<CustomPaymentButton>(continueButton).disable, isFalse);
     });

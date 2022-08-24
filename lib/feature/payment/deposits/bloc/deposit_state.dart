@@ -58,31 +58,22 @@ class DepositState extends Equatable {
   final DepositEvent? depositEvent;
   final BankDetails? bankDetails;
   final DepositMethod? depositMethod;
-  final BaseResponse<RegisteredBankAccounts> registeredBankAccountResponse;
 
-  const DepositState({
-    this.depositEvent,
-    this.bankDetails,
-    this.depositMethod,
-    this.registeredBankAccountResponse = const BaseResponse(),
-  }) : super();
+  const DepositState({this.depositEvent, this.bankDetails, this.depositMethod})
+      : super();
 
   @override
-  List<Object?> get props =>
-      [depositEvent, bankDetails, depositMethod, registeredBankAccountResponse];
+  List<Object?> get props => [depositEvent, bankDetails, depositMethod];
 
   DepositState copyWith({
     DepositEvent? depositEvent,
     BankDetails? bankDetails,
     DepositMethod? depositMethod,
-    BaseResponse<RegisteredBankAccounts>? registeredBankAccountResponse,
   }) {
     return DepositState(
       depositEvent: depositEvent ?? this.depositEvent,
       bankDetails: bankDetails ?? this.bankDetails,
       depositMethod: depositMethod ?? this.depositMethod,
-      registeredBankAccountResponse:
-          registeredBankAccountResponse ?? this.registeredBankAccountResponse,
     );
   }
 }

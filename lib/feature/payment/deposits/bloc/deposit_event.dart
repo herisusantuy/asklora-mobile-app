@@ -25,10 +25,3 @@ class BankSelected extends DepositEvent {
   @override
   List<Object?> get props => [bankDetails, timeStamp];
 }
-
-class RegisteredBankAccountCheck extends DepositEvent {
-  const RegisteredBankAccountCheck() : super();
-
-  @override
-  List<Object?> get props => [];
-}

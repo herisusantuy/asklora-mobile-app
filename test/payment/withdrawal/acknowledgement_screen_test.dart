@@ -11,7 +11,7 @@ void main() async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const WithdrawalScreen(
-            initialWithdrawalPages: WithdrawalPages.acknowledgement,
+            initialWithdrawalPages: WithdrawalPagesStep.acknowledgement,
           ),
           navigatorObservers: [mockObserver]));
     }

@@ -1,7 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/feature/payment/deposits/repository/bank_details_repository.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/bloc/select_bank_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/domain/bank_details.dart';
+import 'package:asklora_mobile_app/feature/payment/repository/bank_account_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,23 +10,23 @@ import 'package:mockito/mockito.dart';
 
 import 'select_bank_bloc_test.mocks.dart';
 
-@GenerateMocks([BankDetailsRepository])
+@GenerateMocks([BankAccountRepository])
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   List<BankDetails> bankDetails = [const BankDetails(1, 'BCA', 'asd', 'BBCA')];
 
   group('*Select Bank Bloc Test*', () {
-    late MockBankDetailsRepository bankDetailsRepository;
+    late MockBankAccountRepository bankAccountRepository;
     late SelectBankBloc selectBankBloc;
 
     setUpAll(() async {
-      bankDetailsRepository = MockBankDetailsRepository();
+      bankAccountRepository = MockBankAccountRepository();
     });
 
     setUp(() async {
       selectBankBloc =
-          SelectBankBloc(bankDetailsRepository: bankDetailsRepository);
+          SelectBankBloc(bankDetailsRepository: bankAccountRepository);
     });
 
     test('init state should be null', () async {
@@ -35,7 +35,7 @@ void main() {
 
     blocTest<SelectBankBloc, SelectBankState>('Get List of Banks',
         build: () {
-          when(bankDetailsRepository.getBankDetails())
+          when(bankAccountRepository.getBankDetails())
               .thenAnswer((_) => Future.value([
                     const BankDetails(1, 'BCA', 'asd', 'BBCA'),
                   ]));
@@ -56,7 +56,7 @@ void main() {
             });
     blocTest<SelectBankBloc, SelectBankState>('Search List of Banks',
         build: () {
-          when(bankDetailsRepository.getBankDetails())
+          when(bankAccountRepository.getBankDetails())
               .thenAnswer((_) => Future.value([
                     const BankDetails(1, 'BCA', 'asd', 'BBCA'),
                   ]));

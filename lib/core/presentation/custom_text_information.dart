@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/presentation/custom_text.dart';
+import 'custom_text.dart';
 
-class CustomPaymentTextInformationWidget extends StatelessWidget {
+class CustomTextInformation extends StatelessWidget {
   final String? title;
   final String label;
   final double paddingBottom;
 
-  const CustomPaymentTextInformationWidget(
+  const CustomTextInformation(
       {this.title, required this.label, this.paddingBottom = 20, Key? key})
       : super(key: key);
 

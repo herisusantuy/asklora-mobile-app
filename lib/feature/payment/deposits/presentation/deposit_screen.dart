@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/bank_account_bloc.dart';
+import '../../repository/bank_account_repository.dart';
 import '../../withdrawal/presentation/acknowledgement_screen.dart';
 import '../bloc/deposit_bloc.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -12,7 +14,6 @@ import '../edda/presentation/finished_screen.dart';
 import '../edda/presentation/initiate_screen.dart';
 import '../fps/presentation/fps_information_screen.dart';
 import '../fps/presentation/fps_transfer_screen.dart';
-import '../repository/bank_details_repository.dart';
 import '../repository/file_picker_repository.dart';
 import '../shareable/bank_details/bank_account_details_screen.dart';
 import '../shareable/bank_details/bloc/bank_details_bloc.dart';
@@ -39,20 +40,19 @@ class DepositScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => NavigationBloc(initialDepositPages)),
+        BlocProvider(create: (_) => DepositBloc()),
         BlocProvider(
             create: (_) =>
-                DepositBloc(bankDetailsRepository: BankDetailsRepository())),
-        BlocProvider(
-            create: (_) =>
-                SelectBankBloc(bankDetailsRepository: BankDetailsRepository())
+                SelectBankBloc(bankDetailsRepository: BankAccountRepository())
                   ..add(GetListBanks())),
         BlocProvider(
             create: (_) => UploadProofOfRemittanceBloc(
                 filePickerRepository: FilePickerRepository())),
-        BlocProvider(
-            create: (_) => BankDetailsBloc(
-                bankDetailsRepository: BankDetailsRepository())),
+        BlocProvider(create: (_) => BankDetailsBloc()),
         BlocProvider(create: (_) => AmountBloc()),
+        BlocProvider(
+            create: (_) => BankAccountBloc(
+                bankAccountRepository: BankAccountRepository())),
       ],
       child: Scaffold(
           appBar: AppBar(
