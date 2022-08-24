@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../presentations/order_type_screen.dart';
+
 class RegularOrderHomeScreen extends StatelessWidget {
   static const String route = '/order_regular';
 
@@ -9,9 +11,7 @@ class RegularOrderHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('')),
-      body: const Center(
-        child: Text('Reset password sent successfully.'),
-      ),
+      body: const OrderTypeScreen(orderType: OrderType.buy),
     );
   }
 
