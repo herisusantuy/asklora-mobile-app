@@ -115,12 +115,12 @@ void main() async {
         },
         act: (bloc) => bloc.add(
             const BankSelected(BankDetails(123, 'BCA', '', '112233'), 111)),
-        expect: () {
-          const DepositState(
-              depositEvent:
-                  BankSelected(BankDetails(123, 'BCA', '', '112233'), 111),
-              bankDetails: BankDetails(123, 'BCA', '', '112233'));
-        });
+        expect: () => {
+              const DepositState(
+                  depositEvent:
+                      BankSelected(BankDetails(123, 'BCA', '', '112233'), 111),
+                  bankDetails: BankDetails(123, 'BCA', '', '112233'))
+            });
 
     tearDown(() => {depositBloc.close()});
   });
