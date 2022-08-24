@@ -11,7 +11,7 @@ void main() async {
     Future<void> _buildAmountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: DepositScreen(
+          home: const DepositScreen(
             initialDepositPages: DepositPageStep.eDdaDepositAmount,
           ),
           navigatorObservers: [mockObserver]));

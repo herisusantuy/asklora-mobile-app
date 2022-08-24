@@ -7,11 +7,11 @@ abstract class WithdrawalEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class PageChanged extends WithdrawalEvent {
-  final WithdrawalPages withdrawPages;
+class WithdrawalSubmitted extends WithdrawalEvent {
+  final String amount;
 
-  const PageChanged(this.withdrawPages) : super();
+  const WithdrawalSubmitted(this.amount) : super();
 
   @override
-  List<Object> get props => [withdrawPages];
+  List<Object?> get props => [];
 }

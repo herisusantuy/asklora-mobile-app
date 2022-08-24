@@ -1,23 +1,28 @@
 part of 'withdrawal_bloc.dart';
 
-enum WithdrawalPages { welcome, bankDetail, amount, acknowledgement, unknown }
+enum WithdrawalPagesStep {
+  welcome,
+  bankDetail,
+  amount,
+  acknowledgement,
+  unknown
+}
 
 class WithdrawalState extends Equatable {
-  final WithdrawalPages withdrawalPages;
+  final BaseResponse<WithdrawalResponse> response;
 
-  const WithdrawalState({this.withdrawalPages = WithdrawalPages.unknown})
-      : super();
+  const WithdrawalState({this.response = const BaseResponse()}) : super();
 
   @override
   List<Object> get props => [
-        withdrawalPages,
+        response,
       ];
 
   WithdrawalState copyWith({
-    WithdrawalPages? withdrawalPages,
+    BaseResponse<WithdrawalResponse>? response,
   }) {
     return WithdrawalState(
-      withdrawalPages: withdrawalPages ?? this.withdrawalPages,
+      response: response ?? this.response,
     );
   }
 }

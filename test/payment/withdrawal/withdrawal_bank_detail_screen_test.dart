@@ -12,7 +12,7 @@ void main() async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const WithdrawalScreen(
-            initialWithdrawalPages: WithdrawalPages.bankDetail,
+            initialWithdrawalPages: WithdrawalPagesStep.bankDetail,
           ),
           navigatorObservers: [mockObserver]));
     }
@@ -31,6 +31,7 @@ void main() async {
     testWidgets('Render Withdrawal Bank Detail Screen,`next button` = enabled',
         (tester) async {
       await _buildWithdrawalBankDetailScreen(tester);
+      await tester.ensureVisible(confirmationText);
       expect(confirmationText, findsOneWidget);
       expect(assistanceText, findsOneWidget);
       expect(accountText, findsOneWidget);

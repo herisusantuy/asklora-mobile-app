@@ -9,7 +9,7 @@ void main() async {
     Future<void> _buildBankDetailsProgressScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-          home: DepositScreen(
+          home: const DepositScreen(
             initialDepositPages: DepositPageStep.eDdaBankDetailsProgress,
           ),
           navigatorObservers: [mockObserver]));

@@ -1,5 +1,5 @@
+import 'package:asklora_mobile_app/feature/payment/presentation/custom_payment_button_button.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/bloc/withdrawal_bloc.dart';
-import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/widget/withdrawal_next_button.dart';
 import 'package:asklora_mobile_app/feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +12,7 @@ void main() async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const WithdrawalScreen(
-            initialWithdrawalPages: WithdrawalPages.welcome,
+            initialWithdrawalPages: WithdrawalPagesStep.welcome,
           ),
           navigatorObservers: [mockObserver]));
     }
@@ -32,7 +32,7 @@ void main() async {
           find.text('Tell us how much you want to withdraw'), findsOneWidget);
       expect(find.text('Confirm your bank account details'), findsOneWidget);
       expect(find.text('Sit back and relax'), findsOneWidget);
-      expect((tester.firstWidget(nextButton) as WithdrawalNextButton).disable,
+      expect((tester.firstWidget(nextButton) as CustomPaymentButton).disable,
           isFalse);
     });
   });

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/alert_dialog.dart';
 import '../../../../core/presentation/custom_text.dart';
+import '../../bloc/bank_account_bloc.dart';
 import '../../presentation/custom_payment_button_button.dart';
 import '../bloc/deposit_bloc.dart';
 import '../bloc/navigation_bloc/navigation_bloc.dart';
@@ -15,22 +17,24 @@ class DepositWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDepositWidget(
       title: 'Deposit',
-      navigationButton: BlocConsumer<DepositBloc, DepositState>(
-        listenWhen: (_, current) =>
-            current.depositEvent is RegisteredBankAccountCheck,
+      navigationButton: BlocConsumer<BankAccountBloc, BankAccountState>(
         listener: (context, state) {
-          context
-              .read<NavigationBloc<DepositPageStep>>()
-              .add(const PageChanged(DepositPageStep.depositMethod));
+          if (state.response.state == ResponseState.success) {
+            context
+                .read<NavigationBloc<DepositPageStep>>()
+                .add(const PageChanged(DepositPageStep.depositMethod));
+          } else if (state.response.state == ResponseState.success) {
+            showAlertDialog(context, state.response.message,
+                onPressedOk: () {});
+          }
         },
         builder: (context, state) => CustomPaymentButton(
           key: const Key('deposit_welcome_screen_next_button'),
           title: 'Next',
           onSubmit: () => context
-              .read<DepositBloc>()
+              .read<BankAccountBloc>()
               .add(const RegisteredBankAccountCheck()),
-          isLoading: state.registeredBankAccountResponse.state ==
-              ResponseState.loading,
+          isLoading: state.response.state == ResponseState.loading,
           disable: false,
         ),
       ),

@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import '../../../../core/domain/base_response.dart';
-import '../shareable/bank_details/domain/add_bank_account_request.dart';
-import '../shareable/bank_details/domain/bank_details_api_client.dart';
-import '../shareable/bank_details/domain/get_bank_account_response.dart';
-import '../shareable/bank_details/domain/registered_bank_accounts.dart';
-import '../shareable/bank_list/domain/bank_details.dart';
+import '../../../core/domain/base_response.dart';
+import '../domain/add_bank_account_request.dart';
+import '../domain/bank_account_api_client.dart';
+import '../domain/get_bank_account_response.dart';
+import '../domain/registered_bank_accounts.dart';
+import '../deposits/shareable/bank_list/domain/bank_details.dart';
 
-class BankDetailsRepository {
-  final BankDetailsApiClient _bankDetailsApiClient = BankDetailsApiClient();
+class BankAccountRepository {
+  final BankAccountApiClient _bankDetailsApiClient = BankAccountApiClient();
 
   Future<BaseResponse<AddBankAccountRequest>> addBankAccount({
     required AddBankAccountRequest addBankAccountRequest,

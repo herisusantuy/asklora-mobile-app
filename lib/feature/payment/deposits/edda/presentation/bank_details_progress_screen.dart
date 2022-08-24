@@ -5,7 +5,7 @@ class BankDetailsProgressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<BankDetailsBloc, BankDetailsState>(
+    return BlocListener<BankAccountBloc, BankAccountState>(
         listener: (context, state) {
           if (state.response.state == ResponseState.success) {
             context.read<NavigationBloc<DepositPageStep>>().add(

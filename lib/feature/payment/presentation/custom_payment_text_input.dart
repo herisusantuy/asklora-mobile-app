@@ -8,6 +8,7 @@ class CustomPaymentTextInput extends StatelessWidget {
   final Function(String) onChanged;
   final String titleText;
   final String labelText;
+  final String errorText;
   final String hintText;
   final String initialValue;
   final TextInputType textInputType;
@@ -25,6 +26,7 @@ class CustomPaymentTextInput extends StatelessWidget {
       this.paddingBottom = 20,
       this.titleText = '',
       this.labelText = '',
+      this.errorText = '',
       Key? key})
       : super(key: key);
 
@@ -59,6 +61,7 @@ class CustomPaymentTextInput extends StatelessWidget {
               prefixText: prefixText,
               labelText: labelText,
               onChanged: onChanged,
+              errorText: errorText,
               hintText: hintText),
         ],
       ),

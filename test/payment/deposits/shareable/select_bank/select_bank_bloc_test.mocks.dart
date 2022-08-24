@@ -5,14 +5,14 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/feature/payment/deposits/repository/bank_details_repository.dart'
-    as _i3;
-import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/add_bank_account_request.dart'
-    as _i5;
-import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_details/domain/registered_bank_accounts.dart'
-    as _i6;
 import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/domain/bank_details.dart'
     as _i7;
+import 'package:asklora_mobile_app/feature/payment/domain/add_bank_account_request.dart'
+    as _i5;
+import 'package:asklora_mobile_app/feature/payment/domain/registered_bank_accounts.dart'
+    as _i6;
+import 'package:asklora_mobile_app/feature/payment/repository/bank_account_repository.dart'
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -27,12 +27,12 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeBaseResponse_0<T> extends _i1.Fake implements _i2.BaseResponse<T> {}
 
-/// A class which mocks [BankDetailsRepository].
+/// A class which mocks [BankAccountRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBankDetailsRepository extends _i1.Mock
-    implements _i3.BankDetailsRepository {
-  MockBankDetailsRepository() {
+class MockBankAccountRepository extends _i1.Mock
+    implements _i3.BankAccountRepository {
+  MockBankAccountRepository() {
     _i1.throwOnMissingStub(this);
   }
 

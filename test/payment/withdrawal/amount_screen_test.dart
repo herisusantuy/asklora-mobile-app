@@ -12,7 +12,7 @@ void main() async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const WithdrawalScreen(
-            initialWithdrawalPages: WithdrawalPages.amount,
+            initialWithdrawalPages: WithdrawalPagesStep.amount,
           ),
           navigatorObservers: [mockObserver]));
     }
@@ -79,6 +79,7 @@ void main() async {
           isFalse);
       await tester.tap(submitButton);
       await tester.pump();
+      await tester.ensureVisible(continueButton);
       expect(continueButton, findsOneWidget);
     });
   });

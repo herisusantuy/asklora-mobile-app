@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../bloc/withdrawal_bloc.dart';
 
 class CustomWithdrawalWidget extends StatelessWidget {
-  final List<Widget> children;
-  final WithdrawalPages? backTo;
+  final Widget child;
   final Widget? navigationButton;
   final bool disableButton;
   final Function? onSubmit;
@@ -16,8 +16,7 @@ class CustomWithdrawalWidget extends StatelessWidget {
 
   const CustomWithdrawalWidget(
       {this.title,
-      required this.children,
-      this.backTo,
+      required this.child,
       this.onSubmit,
       this.disableButton = true,
       this.navigationButton,
@@ -26,9 +25,8 @@ class CustomWithdrawalWidget extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  void _onTapBack(BuildContext context) => backTo != null
-      ? context.read<WithdrawalBloc>().add(PageChanged(backTo!))
-      : Navigator.pop(context);
+  void _onTapBack(BuildContext context) =>
+      context.read<NavigationBloc<WithdrawalPagesStep>>().add(const PagePop());
 
   @override
   Widget build(BuildContext context) {
@@ -37,47 +35,31 @@ class CustomWithdrawalWidget extends StatelessWidget {
         _onTapBack(context);
         return false;
       },
-      child: Column(
-        children: [
-          SafeArea(
-            child: SizedBox(
-              width: double.infinity,
-              child: header ??
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                          onTap: () => _onTapBack(context),
-                          child: const Icon(
-                            Icons.chevron_left,
-                            size: 52,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: CustomText(title ?? '', type: FontType.h2),
-                      ),
-                    ],
-                  ),
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      crossAxisAlignment: crossAxisAlignment,
-                      children: children,
-                    ),
-                  ),
-                ],
+      child: SafeArea(
+        child: Column(
+          children: [
+            header ??
+                Row(
+                  children: [
+                    InkWell(
+                        onTap: () => _onTapBack(context),
+                        child: const Icon(
+                          Icons.chevron_left,
+                          size: 52,
+                        )),
+                    Expanded(child: CustomText(title ?? '', type: FontType.h3)),
+                  ],
+                ),
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                child: child,
               ),
             ),
-          ),
-          navigationButton ?? const SizedBox.shrink()
-        ],
+            navigationButton ?? const SizedBox.shrink()
+          ],
+        ),
       ),
     );
   }

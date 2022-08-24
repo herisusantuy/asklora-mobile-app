@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
+import '../../bloc/bank_account_bloc.dart';
 import '../bloc/deposit_bloc.dart';
 import '../bloc/navigation_bloc/navigation_bloc.dart';
 import '../shareable/widget/custom_deposit_widget.dart';
@@ -19,7 +20,8 @@ class DepositMethodScreen extends StatelessWidget {
             current.depositEvent is DepositMethodSelected,
         listener: (context, state) {
           DepositPageStep depositPageStep;
-          var registeredBankAccount = state.registeredBankAccountResponse.data!;
+          var registeredBankAccount =
+              context.read<BankAccountBloc>().state.response.data!;
           if (state.depositMethod == DepositMethod.fps &&
                   registeredBankAccount.fpsBankAccounts!.isNotEmpty ||
               state.depositMethod == DepositMethod.wire &&
