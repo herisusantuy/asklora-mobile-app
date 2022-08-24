@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
-import '../../bloc/bank_account_bloc.dart';
+import '../../../../core/presentation/custom_text_information.dart';
 import '../../domain/get_bank_account_response.dart';
-import '../../presentation/custom_payment_text_information_widget.dart';
 import '../bloc/withdrawal_bloc.dart';
 import 'widget/custom_withdrawal_widget.dart';
 import 'widget/withdrawal_next_button.dart';
 
 class BankDetailScreen extends StatelessWidget {
-  const BankDetailScreen({Key? key}) : super(key: key);
+  final GetBankAccountResponse? fpsAccount;
+
+  const BankDetailScreen({required this.fpsAccount, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    GetBankAccountResponse? fps = context
-        .read<BankAccountBloc>()
-        .state
-        .response
-        .data
-        ?.fpsBankAccounts?[0];
     return CustomWithdrawalWidget(
       title: 'Your Bank Details',
       navigationButton: const WithdrawalNextButton(
@@ -43,14 +38,14 @@ class BankDetailScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          CustomPaymentTextInformationWidget(
-              title: 'Account No.', label: fps?.accountNumber ?? ''),
-          CustomPaymentTextInformationWidget(
-              title: 'Bank Name', label: fps?.name ?? ''),
-          CustomPaymentTextInformationWidget(
-              title: 'Bank No.', label: fps?.bankCode ?? ''),
-          CustomPaymentTextInformationWidget(
-              title: 'Account Name', label: fps?.accountName ?? '')
+          CustomTextInformation(
+              title: 'Account No.', label: fpsAccount?.accountNumber ?? ''),
+          CustomTextInformation(
+              title: 'Bank Name', label: fpsAccount?.name ?? ''),
+          CustomTextInformation(
+              title: 'Bank No.', label: fpsAccount?.bankCode ?? ''),
+          CustomTextInformation(
+              title: 'Account Name', label: fpsAccount?.accountName ?? '')
         ],
       ),
     );

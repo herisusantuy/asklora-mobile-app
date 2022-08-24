@@ -5,11 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/alert_dialog.dart';
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/custom_text_information.dart';
 import '../../bloc/bank_account_bloc.dart';
 import '../../deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../domain/get_bank_account_response.dart';
 import '../../presentation/custom_payment_button_button.dart';
-import '../../presentation/custom_payment_text_information_widget.dart';
 import '../../presentation/custom_payment_text_input.dart';
 import '../../presentation/payment_confirmation_dialog.dart';
 import '../bloc/amount/amount_bloc.dart';
@@ -133,7 +133,7 @@ class AmountScreen extends StatelessWidget {
             BlocBuilder<AmountBloc, AmountState>(
                 buildWhen: (previous, current) =>
                     previous.withdrawalHKDAmount != current.withdrawalHKDAmount,
-                builder: (context, state) => CustomPaymentTextInformationWidget(
+                builder: (context, state) => CustomTextInformation(
                       title: 'Estimated HKD Amount',
                       label: '${state.withdrawalHKDAmount}',
                       paddingBottom: 6,

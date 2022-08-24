@@ -46,17 +46,23 @@ class WithdrawalScreen extends StatelessWidget {
             listener: (context, state) {
               Navigator.pop(context);
             },
-            builder: (context, state) => _pages(state),
+            builder: (context, state) => _pages(context, state),
           ),
         ));
   }
 
-  Widget _pages(NavigationState navigationState) {
+  Widget _pages(BuildContext context, NavigationState navigationState) {
     switch (navigationState.page) {
       case WithdrawalPagesStep.welcome:
         return const WelcomeScreen();
       case WithdrawalPagesStep.bankDetail:
-        return const BankDetailScreen();
+        return BankDetailScreen(
+            fpsAccount: context
+                .read<BankAccountBloc>()
+                .state
+                .response
+                .data
+                ?.fpsBankAccounts?[0]);
       case WithdrawalPagesStep.amount:
         return const AmountScreen();
       case WithdrawalPagesStep.acknowledgement:

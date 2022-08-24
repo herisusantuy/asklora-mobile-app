@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_information.dart';
 import '../../../bloc/bank_account_bloc.dart';
 import '../../../domain/add_bank_account_request.dart';
 import '../../../presentation/custom_payment_button_button.dart';
-import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../bloc/navigation_bloc/navigation_bloc.dart';
@@ -50,7 +50,7 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
                 context.read<BankDetailsBloc>().add(const BankDetailsReset()),
             child: BlocBuilder<BankDetailsBloc, BankDetailsState>(
                 builder: (context, state) => ListView(children: [
-                      CustomPaymentTextInformationWidget(
+                      CustomTextInformation(
                         key: const Key('edda_deposit_bank_details_bank_name'),
                         title: 'Bank Name',
                         label: _getBankDetails(),

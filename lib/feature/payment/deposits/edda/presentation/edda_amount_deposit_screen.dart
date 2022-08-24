@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_information.dart';
 import '../../../presentation/custom_payment_button_button.dart';
-import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../../presentation/payment_confirmation_dialog.dart';
 import '../../../utils/amount_error_type.dart';
@@ -33,7 +33,7 @@ class EddaAmountDepositScreen extends StatelessWidget {
           children: [
             _text(
                 'Please note there is a minimum deposit amount of HKD10,000 for users who are depositing with a new bank account'),
-            const CustomPaymentTextInformationWidget(
+            const CustomTextInformation(
               key: Key('deposit_amount_bank_details'),
               title: 'Bank Details',
               label:
