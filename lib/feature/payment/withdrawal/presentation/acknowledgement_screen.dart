@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text.dart';
-import 'widget/custom_withdrawal_widget.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../bloc/withdrawal_bloc.dart';
 
 class AcknowledgementScreen extends StatelessWidget {
   const AcknowledgementScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomWithdrawalWidget(
+    return CustomNavigationWidget<WithdrawalPagesStep>(
       crossAxisAlignment: CrossAxisAlignment.center,
       header: Align(
         alignment: Alignment.centerRight,

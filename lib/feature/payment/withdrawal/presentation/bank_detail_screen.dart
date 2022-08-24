@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_information.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../domain/get_bank_account_response.dart';
 import '../bloc/withdrawal_bloc.dart';
-import 'widget/custom_withdrawal_widget.dart';
 import 'widget/withdrawal_next_button.dart';
 
 class BankDetailScreen extends StatelessWidget {
@@ -14,7 +14,7 @@ class BankDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomWithdrawalWidget(
+    return CustomNavigationWidget<WithdrawalPagesStep>(
       title: 'Your Bank Details',
       navigationButton: const WithdrawalNextButton(
           key: Key('withdrawal_bank_detail_screen_next_button'),
