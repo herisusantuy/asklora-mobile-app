@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/utils/formatters/bank_code_formatter.dart';
-import '../../../repository/bank_details_repository.dart';
+import '../../../../repository/bank_account_repository.dart';
 import '../domain/bank_details.dart';
 
 part 'select_bank_event.dart';
@@ -11,11 +11,11 @@ part 'select_bank_event.dart';
 part 'select_bank_state.dart';
 
 class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
-  final BankDetailsRepository _bankDetailsRepository;
+  final BankAccountRepository _bankAccountRepository;
   late final List<BankDetails> listBankDetails;
 
-  SelectBankBloc({required BankDetailsRepository bankDetailsRepository})
-      : _bankDetailsRepository = bankDetailsRepository,
+  SelectBankBloc({required BankAccountRepository bankDetailsRepository})
+      : _bankAccountRepository = bankDetailsRepository,
         super(const SelectBankState()) {
     on<GetListBanks>(_getListBanks);
     on<SearchBank>(_searchListBanks);
@@ -23,7 +23,7 @@ class SelectBankBloc extends Bloc<SelectBankEvent, SelectBankState> {
 
   void _getListBanks(GetListBanks event, Emitter<SelectBankState> emit) async {
     emit(state);
-    listBankDetails = await _bankDetailsRepository.getBankDetails();
+    listBankDetails = await _bankAccountRepository.getBankDetails();
     emit(state.copyWith(
         response: BaseResponse<List<BankDetails>>(
             state: ResponseState.success, data: listBankDetails)));

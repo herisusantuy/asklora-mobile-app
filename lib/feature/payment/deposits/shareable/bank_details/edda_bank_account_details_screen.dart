@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../bloc/bank_account_bloc.dart';
+import '../../../domain/add_bank_account_request.dart';
 import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../../presentation/custom_payment_text_input.dart';
@@ -13,7 +15,6 @@ import '../../bloc/navigation_bloc/navigation_bloc.dart';
 import '../bank_list/domain/bank_details.dart';
 import '../widget/custom_deposit_widget.dart';
 import 'bloc/bank_details_bloc.dart';
-import 'domain/add_bank_account_request.dart';
 
 part '../../edda/presentation/bank_details_progress_screen.dart';
 
@@ -27,18 +28,20 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<BankDetailsBloc, BankDetailsState>(
+    return BlocListener<BankAccountBloc, BankAccountState>(
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
             context.read<NavigationBloc<DepositPageStep>>().add(
-                const PageChanged(DepositPageStep.eDdaBankDetailsProgress));
+                const PageChangedRemoveUntil(
+                    DepositPageStep.eDdaBankDetailsProgress,
+                    DepositPageStep.welcome));
           } else if (state.response.state == ResponseState.error) {
             showAlertDialog(context, state.response.message,
                 onPressedOk: () => context
-                    .read<BankDetailsBloc>()
-                    .add(BankAccountNumberChanged(state.bankAccountNumber)));
+                    .read<NavigationBloc<DepositPageStep>>()
+                    .add(const PagePop()));
           }
         },
         child: CustomDepositWidget(
@@ -95,10 +98,11 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
                         key: const Key(
                             'edda_deposit_bank_details_continue_button'),
                         disable: state.bankAccountNumber.isEmpty ||
-                            state.confirmBankAccountNumber.isEmpty,
+                            state.confirmBankAccountNumber.isEmpty ||
+                            state.confirmBankAccountNumberErrorText.isNotEmpty,
                         title: 'Continue',
-                        onSubmit: () => context.read<BankDetailsBloc>().add(
-                            BankDetailsSubmitted(
+                        onSubmit: () => context.read<BankAccountBloc>().add(
+                            BankAccountSubmitted(
                                 addBankAccountRequest: AddBankAccountRequest(
                                     name: bankDetails!.bankName,
                                     bankCodeType: 'HKD',

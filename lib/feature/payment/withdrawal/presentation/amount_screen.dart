@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/alert_dialog.dart';
 import '../../../../core/presentation/custom_text.dart';
+import '../../bloc/bank_account_bloc.dart';
+import '../../deposits/bloc/navigation_bloc/navigation_bloc.dart';
+import '../../domain/get_bank_account_response.dart';
 import '../../presentation/custom_payment_button_button.dart';
 import '../../presentation/custom_payment_text_information_widget.dart';
 import '../../presentation/custom_payment_text_input.dart';
@@ -18,7 +23,6 @@ class AmountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomWithdrawalWidget(
       title: 'Input Withdrawal Amount',
-      backTo: WithdrawalPages.bankDetail,
       navigationButton: BlocBuilder<AmountBloc, AmountState>(
           buildWhen: (previous, current) =>
               current.withdrawalAmountErrorType !=
@@ -32,17 +36,19 @@ class AmountScreen extends StatelessWidget {
                 disable:
                     state.withdrawalAmountErrorType != AmountErrorType.unknown,
               )),
-      children: [
-        const CustomText(
-          'Please tell us how much you wish to withdraw',
-          type: FontType.h5,
-          padding: EdgeInsets.only(bottom: 30),
-        ),
-        _withdrawalAmountInput(context),
-        _exchangeArrowIcon(),
-        _estimatedHKDAmount(),
-        _noteOfExchangeRate(),
-      ],
+      child: ListView(
+        children: [
+          const CustomText(
+            'Please tell us how much you wish to withdraw',
+            type: FontType.h5,
+            padding: EdgeInsets.only(bottom: 30),
+          ),
+          _withdrawalAmountInput(context),
+          _exchangeArrowIcon(),
+          _estimatedHKDAmount(),
+          _noteOfExchangeRate(),
+        ],
+      ),
     );
   }
 
@@ -79,21 +85,44 @@ class AmountScreen extends StatelessWidget {
         ],
       );
 
-  void _showConfirmationAmount(
-          BuildContext context, String amount) =>
-      showModalBottomSheet(
-          context: context,
-          builder: (_) => PaymentConfirmationDialog(
-              title: 'Withdrawal Amount (USD)',
-              amount: amount,
-              bankAccountName: "Payer's",
-              bankName:
-                  '004 The Hong Kong and Shanghai Banking Corporation Limited (7890)',
-              warningText:
-                  'Please note that the deposit amount cannot exceed the account balance in your bank. Otherwise, your bank may charge you extra fees due to transaction failures',
-              onSubmit: () => context
-                  .read<WithdrawalBloc>()
-                  .add(const PageChanged(WithdrawalPages.acknowledgement))));
+  void _showConfirmationAmount(BuildContext context, String amount) {
+    GetBankAccountResponse? fps = context
+        .read<BankAccountBloc>()
+        .state
+        .response
+        .data
+        ?.fpsBankAccounts?[0];
+    showModalBottomSheet(
+        context: context,
+        builder: (_) => BlocProvider.value(
+              value: BlocProvider.of<WithdrawalBloc>(context),
+              child: BlocConsumer<WithdrawalBloc, WithdrawalState>(
+                listener: (context, state) {
+                  if (state.response.state == ResponseState.success) {
+                    Navigator.pop(context);
+                    context.read<NavigationBloc<WithdrawalPagesStep>>().add(
+                        const PageChanged(WithdrawalPagesStep.acknowledgement));
+                  } else if (state.response.state == ResponseState.error) {
+                    Navigator.pop(context);
+                    showAlertDialog(context, state.response.message,
+                        onPressedOk: () {});
+                  }
+                },
+                builder: (context, state) => PaymentConfirmationDialog(
+                    title: 'Withdrawal Amount (USD)',
+                    amount: amount,
+                    closeOnSubmit: false,
+                    bankAccountName: fps?.accountName ?? '',
+                    bankName: '${fps?.name ?? ''} (${fps?.bankCode ?? ''})',
+                    isLoading: state.response.state == ResponseState.loading,
+                    warningText:
+                        'Please note that the deposit amount cannot exceed the account balance in your bank. Otherwise, your bank may charge you extra fees due to transaction failures',
+                    onSubmit: () => context
+                        .read<WithdrawalBloc>()
+                        .add(WithdrawalSubmitted(amount))),
+              ),
+            ));
+  }
 
   Widget _estimatedHKDAmount() => Padding(
         key: const Key('estimated_hkd_amount_text'),

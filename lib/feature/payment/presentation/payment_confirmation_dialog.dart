@@ -10,6 +10,8 @@ class PaymentConfirmationDialog extends StatelessWidget {
   final String bankName;
   final String warningText;
   final Function onSubmit;
+  final bool isLoading;
+  final bool closeOnSubmit;
 
   const PaymentConfirmationDialog(
       {required this.title,
@@ -18,6 +20,8 @@ class PaymentConfirmationDialog extends StatelessWidget {
       required this.bankName,
       required this.bankAccountName,
       required this.warningText,
+      this.isLoading = false,
+      this.closeOnSubmit = true,
       Key? key})
       : super(key: key);
 
@@ -92,8 +96,11 @@ class PaymentConfirmationDialog extends StatelessWidget {
             CustomPaymentButton(
                 key: const Key('payment_confirmation_continue_button'),
                 title: 'Continue',
+                isLoading: isLoading,
                 onSubmit: () {
-                  Navigator.pop(context);
+                  if (closeOnSubmit) {
+                    Navigator.pop(context);
+                  }
                   onSubmit();
                 },
                 disable: false)

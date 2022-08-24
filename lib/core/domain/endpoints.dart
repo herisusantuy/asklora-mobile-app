@@ -1,5 +1,6 @@
 const v1 = '/api/v1/';
 const accounts = 'accounts/';
+const transactions = 'transactions/';
 
 const String endpointSignIn = '${v1}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
@@ -15,3 +16,4 @@ const String endpointTokenVerify = '${v1}auth/verify/';
 const String endpointTokenRefresh = '${v1}auth/refresh/';
 const String endpointTaxInfo = '$v1${accounts}tax-info/';
 const String endpointBankAccount = '$v1${accounts}bank-account-related/';
+const String endpointWithdrawal = '$v1${transactions}withdraw/';

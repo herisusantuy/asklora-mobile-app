@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
+import '../../../bloc/bank_account_bloc.dart';
+import '../../../domain/add_bank_account_request.dart';
 import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../../presentation/custom_payment_text_input.dart';
@@ -14,7 +15,6 @@ import '../../bloc/navigation_bloc/navigation_bloc.dart';
 import '../bank_list/domain/bank_details.dart';
 import '../widget/custom_deposit_widget.dart';
 import 'bloc/bank_details_bloc.dart';
-import 'domain/add_bank_account_request.dart';
 
 class BankAccountDetailsScreen extends StatelessWidget {
   final BankDetails? bankDetails;
@@ -24,26 +24,21 @@ class BankAccountDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<BankDetailsBloc, BankDetailsState>(
+    return BlocListener<BankAccountBloc, BankAccountState>(
       listenWhen: (previous, current) =>
           previous.response.state != current.response.state,
       listener: (context, state) {
         if (state.response.state == ResponseState.success) {
           var depositMethod = context.read<DepositBloc>().state.depositMethod;
           if (depositMethod == DepositMethod.wire) {
-            context
-                .read<NavigationBloc<DepositPageStep>>()
-                .add(const PageChanged(DepositPageStep.wireTransfer));
+            context.read<NavigationBloc<DepositPageStep>>().add(
+                const PageChangedRemoveUntil(
+                    DepositPageStep.wireTransfer, DepositPageStep.welcome));
           } else if (depositMethod == DepositMethod.fps) {
-            context
-                .read<NavigationBloc<DepositPageStep>>()
-                .add(const PageChanged(DepositPageStep.fpsTransfer));
+            context.read<NavigationBloc<DepositPageStep>>().add(
+                const PageChangedRemoveUntil(
+                    DepositPageStep.fpsTransfer, DepositPageStep.welcome));
           }
-        } else if (state.response.state == ResponseState.error) {
-          showAlertDialog(context, state.response.message,
-              onPressedOk: () => context
-                  .read<BankDetailsBloc>()
-                  .add(BankAccountNumberChanged(state.bankAccountNumber)));
         }
       },
       child: CustomDepositWidget(
@@ -70,19 +65,26 @@ class BankAccountDetailsScreen extends StatelessWidget {
                   .add(BankAccountNumberChanged(value)),
               paddingBottom: 18,
             ),
-            CustomPaymentTextInput(
-              key: const Key(
-                  'deposit_bank_details_bank_confirm_account_number_input'),
-              hintText: 'Confirm Your Bank Account Number Again',
-              titleText: 'Confirm Bank Account Number',
-              textInputType: TextInputType.number,
-              textInputFormatterList: [FilteringTextInputFormatter.digitsOnly],
-              initialValue: state.confirmBankAccountNumber,
-              onChanged: (value) => context
-                  .read<BankDetailsBloc>()
-                  .add(ConfirmBankAccountNumberChanged(value)),
-              paddingBottom: 18,
-            ),
+            BlocBuilder<BankDetailsBloc, BankDetailsState>(
+                buildWhen: (previous, current) =>
+                    previous.confirmBankAccountNumberErrorText !=
+                    current.confirmBankAccountNumberErrorText,
+                builder: (context, state) => CustomPaymentTextInput(
+                      key: const Key(
+                          'deposit_bank_details_bank_confirm_account_number_input'),
+                      hintText: 'Confirm Your Bank Account Number Again',
+                      titleText: 'Confirm Bank Account Number',
+                      textInputType: TextInputType.number,
+                      textInputFormatterList: [
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      initialValue: state.confirmBankAccountNumber,
+                      errorText: state.confirmBankAccountNumberErrorText,
+                      onChanged: (value) => context
+                          .read<BankDetailsBloc>()
+                          .add(ConfirmBankAccountNumberChanged(value)),
+                      paddingBottom: 18,
+                    )),
             CustomPaymentTextInput(
               key: const Key(
                   'deposit_bank_details_bank_name_on_bank_account_input'),
@@ -104,29 +106,32 @@ class BankAccountDetailsScreen extends StatelessWidget {
                 key: const Key('bank_details_continue_button_label'),
                 r"By clicking 'Continue', you indicate that you have read and agreed to the bound by the General Client Agreement",
                 bottomPadding: 0),
-            CustomPaymentButton(
-              key: const Key('deposit_bank_details_continue_button'),
-              disable: state.bankAccountNumber.isEmpty ||
-                  state.confirmBankAccountNumber.isEmpty ||
-                  state.bankAccountName.isEmpty,
-              isLoading: state.response.state == ResponseState.loading,
-              title: 'Continue',
-              onSubmit: () => context.read<BankDetailsBloc>().add(
-                  BankDetailsSubmitted(
-                      addBankAccountRequest: AddBankAccountRequest(
-                          name: bankDetails!.bankName,
-                          bankCodeType: 'HKD',
-                          accountName: state.bankAccountName,
-                          accountNumber: state.bankAccountNumber,
-                          bankCode: bankDetails?.swiftBic ?? '',
-                          bankTransferType: context
-                                  .read<DepositBloc>()
-                                  .state
-                                  .depositMethod
-                                  ?.value ??
-                              ''),
-                      shouldValidateName: true)),
-            )
+            BlocBuilder<BankAccountBloc, BankAccountState>(
+                builder: (context, bankAccountState) => CustomPaymentButton(
+                      key: const Key('deposit_bank_details_continue_button'),
+                      disable: state.bankAccountNumber.isEmpty ||
+                          state.confirmBankAccountNumber.isEmpty ||
+                          state.bankAccountName.isEmpty ||
+                          state.confirmBankAccountNumberErrorText.isNotEmpty,
+                      isLoading: bankAccountState.response.state ==
+                          ResponseState.loading,
+                      title: 'Continue',
+                      onSubmit: () => context.read<BankAccountBloc>().add(
+                          BankAccountSubmitted(
+                              addBankAccountRequest: AddBankAccountRequest(
+                                  name: bankDetails!.bankName,
+                                  bankCodeType: 'HKD',
+                                  accountName: state.bankAccountName,
+                                  accountNumber: state.bankAccountNumber,
+                                  bankCode: bankDetails?.swiftBic ?? '',
+                                  bankTransferType: context
+                                          .read<DepositBloc>()
+                                          .state
+                                          .depositMethod
+                                          ?.value ??
+                                      ''),
+                              shouldValidateName: true)),
+                    ))
           ]),
         ),
       ),

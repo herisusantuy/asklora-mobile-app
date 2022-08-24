@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../bloc/bank_account_bloc.dart';
 import '../../../presentation/custom_payment_text_information_widget.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../bloc/navigation_bloc/navigation_bloc.dart';
-import '../bank_details/domain/get_bank_account_response.dart';
+import '../../../domain/get_bank_account_response.dart';
 import '../widget/custom_deposit_widget.dart';
 
 class ReturningUserScreen extends StatelessWidget {
@@ -19,8 +20,7 @@ class ReturningUserScreen extends StatelessWidget {
           _text('Select Bank Account'),
           _text('Deposit From', bottomPadding: 6),
           Column(
-            children: _registeredBankAccount(
-                context, context.read<DepositBloc>().state),
+            children: _registeredBankAccount(context),
           ),
           Center(child: _text('Or')),
           _text('Add a New Bank Account',
@@ -41,19 +41,17 @@ class ReturningUserScreen extends StatelessWidget {
     );
   }
 
-  List<Widget> _registeredBankAccount(
-      BuildContext context, DepositState depositState) {
+  List<Widget> _registeredBankAccount(BuildContext context) {
+    BankAccountState bankAccountState = context.read<BankAccountBloc>().state;
+    DepositState depositState = context.read<DepositBloc>().state;
     List<GetBankAccountResponse> bankDetailList = [];
-    if (depositState.registeredBankAccountResponse.data != null) {
+    if (bankAccountState.response.data != null) {
       if (depositState.depositMethod == DepositMethod.wire) {
-        bankDetailList =
-            depositState.registeredBankAccountResponse.data!.wireBankAccounts!;
+        bankDetailList = bankAccountState.response.data!.wireBankAccounts!;
       } else if (depositState.depositMethod == DepositMethod.fps) {
-        bankDetailList =
-            depositState.registeredBankAccountResponse.data!.fpsBankAccounts!;
+        bankDetailList = bankAccountState.response.data!.fpsBankAccounts!;
       } else {
-        bankDetailList =
-            depositState.registeredBankAccountResponse.data!.eDdaBankAccounts!;
+        bankDetailList = bankAccountState.response.data!.eDdaBankAccounts!;
       }
     }
 

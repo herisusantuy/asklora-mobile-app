@@ -61,10 +61,12 @@ class CustomDepositWidget extends StatelessWidget {
                             ),
                           )),
                       if (title.isNotEmpty)
-                        CustomText(
-                          title,
-                          type: FontType.h5,
-                          color: Colors.white,
+                        Expanded(
+                          child: CustomText(
+                            title,
+                            type: FontType.h3,
+                            color: Colors.white,
+                          ),
                         )
                     ],
                   ),
