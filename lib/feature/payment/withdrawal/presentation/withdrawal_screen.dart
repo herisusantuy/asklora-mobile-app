@@ -26,7 +26,8 @@ class WithdrawalScreen extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => NavigationBloc(initialWithdrawalPages),
+            create: (_) =>
+                NavigationBloc<WithdrawalPagesStep>(initialWithdrawalPages),
           ),
           BlocProvider(
             create: (_) =>
@@ -41,6 +42,11 @@ class WithdrawalScreen extends StatelessWidget {
           ),
         ],
         child: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 0,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+          ),
           body: BlocConsumer<NavigationBloc<WithdrawalPagesStep>,
               NavigationState<WithdrawalPagesStep>>(
             listenWhen: (_, current) => current.lastPage == true,
