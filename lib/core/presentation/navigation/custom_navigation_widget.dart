@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/presentation/custom_text.dart';
-import '../../bloc/deposit_bloc.dart';
-import '../../bloc/navigation_bloc/navigation_bloc.dart';
+import '../custom_text.dart';
+import 'bloc/navigation_bloc.dart';
 
-class CustomDepositWidget extends StatelessWidget {
+class CustomNavigationWidget<T> extends StatelessWidget {
   final String title;
   final Widget child;
   final Widget? navigationButton;
@@ -15,7 +14,7 @@ class CustomDepositWidget extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
   final Widget? header;
 
-  const CustomDepositWidget(
+  const CustomNavigationWidget(
       {required this.child,
       this.onSubmit,
       this.disableButton = true,
@@ -28,7 +27,7 @@ class CustomDepositWidget extends StatelessWidget {
       : super(key: key);
 
   void _onTapBack(BuildContext context) {
-    context.read<NavigationBloc<DepositPageStep>>().add(const PagePop());
+    context.read<NavigationBloc<T>>().add(const PagePop());
     if (onBackPressed != null) {
       onBackPressed!();
     }

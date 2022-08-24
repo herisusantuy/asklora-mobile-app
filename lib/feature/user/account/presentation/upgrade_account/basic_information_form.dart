@@ -14,7 +14,7 @@ import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
-import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/basic_information/bloc/basic_information_bloc.dart';
 import 'widgets/upgrade_account_button.dart';

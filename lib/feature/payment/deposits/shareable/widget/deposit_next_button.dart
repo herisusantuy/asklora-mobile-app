@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text_button.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 
 class DepositNextButton extends StatelessWidget {
   final bool disable;

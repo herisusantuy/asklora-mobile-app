@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../bloc/navigation_bloc/navigation_bloc.dart';
-import '../../shareable/widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
 
 class EddaAcknowledgementScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class EddaAcknowledgementScreen extends StatelessWidget {
                 .add(const PageChanged(DepositPageStep.eDdaFinished));
           }
         },
-        child: CustomDepositWidget(
+        child: CustomNavigationWidget<DepositPageStep>(
           crossAxisAlignment: CrossAxisAlignment.center,
           header: Align(
             alignment: Alignment.centerRight,

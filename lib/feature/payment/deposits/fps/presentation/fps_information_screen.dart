@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
-import '../../shareable/widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../bloc/deposit_bloc.dart';
 
 class FpsInformationScreen extends StatelessWidget {
   const FpsInformationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomDepositWidget(
+    return CustomNavigationWidget<DepositPageStep>(
       child: Column(
         children: const [
           CustomText(

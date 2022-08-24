@@ -9,8 +9,8 @@ import '../../../presentation/custom_payment_text_input.dart';
 import '../../../presentation/payment_confirmation_dialog.dart';
 import '../../../utils/amount_error_type.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../bloc/navigation_bloc/navigation_bloc.dart';
-import '../../shareable/widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../bloc/amount/amount_bloc.dart';
 
 class EddaAmountDepositScreen extends StatelessWidget {
@@ -18,7 +18,7 @@ class EddaAmountDepositScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDepositWidget(
+    return CustomNavigationWidget<DepositPageStep>(
         title: 'eDDA Deposit',
         navigationButton: BlocBuilder<AmountBloc, AmountState>(
             builder: (context, state) => CustomPaymentButton(

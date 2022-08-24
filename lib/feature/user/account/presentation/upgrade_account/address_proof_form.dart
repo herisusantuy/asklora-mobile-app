@@ -6,7 +6,7 @@ import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
-import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/address_proof/bloc/address_proof_bloc.dart';
 import 'widgets/upgrade_account_button.dart';

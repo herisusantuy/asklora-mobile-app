@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../widget/custom_row_text.dart';
 import '../widget/deposit_next_button.dart';
 import 'bloc/upload_proof_of_remittance_bloc.dart';
@@ -17,7 +17,7 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DepositBloc, DepositState>(
         buildWhen: (_, __) => false,
-        builder: (context, state) => CustomDepositWidget(
+        builder: (context, state) => CustomNavigationWidget<DepositPageStep>(
               title: 'Upload Proof of Remittance',
               navigationButton: BlocBuilder<UploadProofOfRemittanceBloc,
                   UploadProofofRemittanceState>(
