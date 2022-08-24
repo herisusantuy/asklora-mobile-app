@@ -112,7 +112,6 @@ class OrderTypeScreen extends StatelessWidget {
                   height: 50,
                   width: 50,
                   alignment: Alignment.centerRight,
-                  // fit: BoxFit.contain,
                 ))
           ],
         ),
