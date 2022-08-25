@@ -37,7 +37,7 @@ class SymbolDetail {
 
 enum TransactionType { buy, sell, unknown }
 
-enum OrderPageStep { initial, orderType, limit }
+enum OrderPageStep { symbolDetails, orderType, order }
 
 class OrderState extends Equatable {
   final TransactionType transactionType;
