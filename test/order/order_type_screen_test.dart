@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/orders/presentations/order_type_screen.dart';
+import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_type_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
