@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/presentation/custom_text.dart';
-import '../../../core/utils/app_icons.dart';
+import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/utils/app_icons.dart';
 
 enum OrderType { buy, sell }
 
 class OrderTypeScreen extends StatelessWidget {
   final OrderType orderType;
+
   const OrderTypeScreen({
     Key? key,
     required this.orderType,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -126,7 +128,6 @@ class OrderTypeScreen extends StatelessWidget {
                   height: 50,
                   width: 50,
                   alignment: Alignment.centerRight,
-                  // fit: BoxFit.contain,
                 ))
           ],
         ),
