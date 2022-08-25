@@ -2,63 +2,66 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../auth/sign_in/presentation/sign_in_success_screen.dart';
-
-enum OrderType { buy, sell }
+import '../../bloc/order_bloc.dart';
 
 class OrderSubmittedScreen extends StatelessWidget {
-  final OrderType orderType;
+  final TransactionType transactionType;
   const OrderSubmittedScreen({
     Key? key,
-    required this.orderType,
+    required this.transactionType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-        ),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: ListView(
-                physics: const ScrollPhysics(),
-                children: [
-                  const CustomText(
-                    'Order Success!',
-                    type: FontType.h2,
-                    textAlign: TextAlign.center,
-                    padding: EdgeInsets.only(top: 10),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20.0),
-                    child: Icon(
-                      Icons.check_circle,
-                      size: 100,
-                      color: Colors.green,
+    return CustomNavigationWidget<OrderPageStep>(
+      header: const SizedBox(),
+      child: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: ListView(
+                  physics: const ScrollPhysics(),
+                  children: [
+                    const CustomText(
+                      'Order Success!',
+                      type: FontType.h2,
+                      textAlign: TextAlign.center,
+                      padding: EdgeInsets.only(top: 10),
                     ),
-                  ),
-                  const CustomText(
-                    'Your order of AAPL.O\nbeen processed',
-                    textAlign: TextAlign.center,
-                    padding: EdgeInsets.only(bottom: 20),
-                  ),
-                  _orderDetailCard(OrderType.sell),
-                ],
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.0),
+                      child: Icon(
+                        Icons.check_circle,
+                        size: 100,
+                        color: Colors.green,
+                      ),
+                    ),
+                    const CustomText(
+                      'Your order of AAPL.O\nbeen processed',
+                      textAlign: TextAlign.center,
+                      padding: EdgeInsets.only(bottom: 20),
+                    ),
+                    _orderDetailCard,
+                  ],
+                ),
               ),
-            ),
-            _backToDashboardButton(context),
-            _viewOrderDetailButton(),
-          ],
+              _backToDashboardButton(context),
+              _viewOrderDetailButton(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _orderDetailCard(OrderType orderType) {
+  Widget get _orderDetailCard {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
@@ -67,8 +70,8 @@ class OrderSubmittedScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _customRowText(
-              'Direction', orderType == OrderType.buy ? 'BUY' : 'SELL'),
+          _customRowText('Direction',
+              transactionType == TransactionType.buy ? 'BUY' : 'SELL'),
           _customRowText('Order Type', 'Market'),
           _customRowText('Quantity', '0.80'),
           _customRowText('Amount', '\$80.00'),
