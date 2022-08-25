@@ -33,8 +33,6 @@ class LimitOrderWidget extends StatelessWidget {
             textValue: symbolDetail.marketPrice, fontType: FontType.smallText),
         const CustomExpandedRow('Estimated Total',
             textValue: r'$320', fontType: FontType.smallText),
-        const CustomExpandedRow('Available buying power',
-            textValue: r'$10,000', fontType: FontType.smallText),
         if (transactionType == TransactionType.buy) ...[
           const CustomExpandedRow('Available buying power',
               textValue: r'$10,000', fontType: FontType.smallText),
