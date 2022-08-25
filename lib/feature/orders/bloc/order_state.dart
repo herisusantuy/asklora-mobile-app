@@ -6,6 +6,7 @@ enum OrderType {
   stop,
   stopLimit,
   trailingStop,
+  submitted,
 }
 
 extension Type on OrderType {
@@ -21,6 +22,8 @@ extension Type on OrderType {
         return 'Stop Limit';
       case OrderType.trailingStop:
         return 'Trailing Stop';
+      case OrderType.submitted:
+        return 'Order Submitted';
       default:
         return '';
     }
