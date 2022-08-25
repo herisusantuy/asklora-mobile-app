@@ -29,7 +29,12 @@ extension Type on OrderType {
 
 enum TransactionType { buy, sell, unknown }
 
-enum OrderPageStep { symbolDetails, orderType, order }
+enum OrderPageStep {
+  symbolDetails,
+  orderType,
+  order,
+  orderSubmitted,
+}
 
 class OrderState extends Equatable {
   final TransactionType transactionType;
