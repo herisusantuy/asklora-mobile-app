@@ -27,14 +27,6 @@ extension Type on OrderType {
   }
 }
 
-class SymbolDetail {
-  final String name;
-  final String assetImage;
-  final String marketPrice;
-
-  SymbolDetail(this.name, this.marketPrice, this.assetImage);
-}
-
 enum TransactionType { buy, sell, unknown }
 
 enum OrderPageStep { symbolDetails, orderType, order }

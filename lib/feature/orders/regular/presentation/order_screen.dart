@@ -6,7 +6,8 @@ import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 
 import '../../bloc/order_bloc.dart';
-import 'limit_order_content.dart';
+import '../../domain/symbol_detail.dart';
+import 'limit_order_widget.dart';
 
 class OrderScreen extends StatelessWidget {
   final SymbolDetail symbolDetail;
@@ -32,7 +33,7 @@ class OrderScreen extends StatelessWidget {
     return BlocBuilder<OrderBloc, OrderState>(
       builder: (context, state) {
         if (state.orderType == OrderType.limit) {
-          return LimitOrderContent(state.transactionType, symbolDetail);
+          return LimitOrderWidget(state.transactionType, symbolDetail);
         }
         return const SizedBox.shrink();
       },

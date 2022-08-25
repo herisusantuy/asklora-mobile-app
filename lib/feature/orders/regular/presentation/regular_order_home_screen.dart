@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../core/utils/app_icons.dart';
 import '../../bloc/order_bloc.dart';
+import '../../domain/symbol_detail.dart';
 import 'order_screen.dart';
 import 'order_type_screen.dart';
 import 'regular_order_symbol_details_screen.dart';
 
 class RegularOrderHomeScreen extends StatelessWidget {
+  final SymbolDetail symbolDetail;
   final OrderPageStep initialOrderPageStep;
   static const String route = '/order_regular';
 
   const RegularOrderHomeScreen(
-      {this.initialOrderPageStep = OrderPageStep.symbolDetails, Key? key})
+      {required this.symbolDetail,
+      this.initialOrderPageStep = OrderPageStep.symbolDetails,
+      Key? key})
       : super(key: key);
 
   @override
@@ -47,8 +50,7 @@ class RegularOrderHomeScreen extends StatelessWidget {
       case OrderPageStep.symbolDetails:
         return const RegularOrderSymbolDetailsScreen();
       case OrderPageStep.order:
-        return OrderScreen(
-            symbolDetail: SymbolDetail('AAPL.O', '100', AppIcons.appleLogo));
+        return OrderScreen(symbolDetail: symbolDetail);
       case OrderPageStep.orderType:
         return OrderTypeScreen(
           transactionType: orderState.transactionType,

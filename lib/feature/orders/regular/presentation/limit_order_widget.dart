@@ -3,12 +3,13 @@ import '../../../../core/presentation/custom_dropdown.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../bloc/order_bloc.dart';
+import '../../domain/symbol_detail.dart';
 
-class LimitOrderContent extends StatelessWidget {
+class LimitOrderWidget extends StatelessWidget {
   final SymbolDetail symbolDetail;
   final TransactionType transactionType;
 
-  const LimitOrderContent(this.transactionType, this.symbolDetail, {Key? key})
+  const LimitOrderWidget(this.transactionType, this.symbolDetail, {Key? key})
       : super(key: key);
 
   @override
