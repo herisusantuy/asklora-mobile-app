@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../presentations/order_type_screen.dart';
+import 'regular_order_symbol_details_screen.dart';
 
 class RegularOrderHomeScreen extends StatelessWidget {
   static const String route = '/order_regular';
@@ -10,9 +10,8 @@ class RegularOrderHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('')),
-      body: const OrderTypeScreen(orderType: OrderType.buy),
-    );
+        appBar: AppBar(title: const Text('')),
+        body: const RegularOrderSymbolDetailsScreen());
   }
 
   static void open(BuildContext context) =>

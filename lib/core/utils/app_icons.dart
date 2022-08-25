@@ -4,4 +4,5 @@ class AppIcons {
   static String saveMoney = 'assets/icons/save_money.png';
   static String route = 'assets/icons/route.png';
   static String financial = 'assets/icons/financial.png';
+  static String appleLogo = 'assets/icons/apple_logo.png';
 }
