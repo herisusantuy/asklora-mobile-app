@@ -74,19 +74,29 @@ class OrderTypeScreen extends StatelessWidget {
       return [
         _customListMenu(
             'Market Order', 'Sell the stock at the current market price',
-            icon: AppIcons.saveMoney, onPress: () {}),
+            key: const Key('market_order_sell_button'),
+            icon: AppIcons.saveMoney,
+            onPress: () {}),
         _customListMenu('Limit Order',
             'Sell the stock at a specified limit price or higher',
-            icon: AppIcons.barChart, onPress: () {}),
+            key: const Key('limit_order_sell_button'),
+            icon: AppIcons.barChart,
+            onPress: () {}),
         _customListMenu('Stop Limit Order',
             'Sell the stock if it falls to a specified stop price',
-            icon: AppIcons.stop, onPress: () {}),
+            key: const Key('stop_order_sell_button'),
+            icon: AppIcons.stop,
+            onPress: () {}),
         _customListMenu('Stop Limit Order',
             'Sell a limit order if the stock falls to a specified stop price',
-            icon: AppIcons.financial, onPress: () {}),
+            key: const Key('stop_limit_order_sell_button'),
+            icon: AppIcons.financial,
+            onPress: () {}),
         _customListMenu('Trailing Stop Order',
             'Trail the stock’s price and sell if it goes below the trail limit you’ve set',
-            icon: AppIcons.route, onPress: () {})
+            key: const Key('trailing_stop_order_sell_button'),
+            icon: AppIcons.route,
+            onPress: () {})
       ];
     }
   }
