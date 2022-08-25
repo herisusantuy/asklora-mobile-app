@@ -1,83 +1,104 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../core/utils/app_icons.dart';
-
-enum OrderType { buy, sell }
+import '../../bloc/order_bloc.dart';
 
 class OrderTypeScreen extends StatelessWidget {
-  final OrderType orderType;
+  final TransactionType transactionType;
 
   const OrderTypeScreen({
     Key? key,
-    required this.orderType,
+    required this.transactionType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-        child: ListView(
-          physics: const ScrollPhysics(),
-          children: [
-            const CustomText(
-              'Select Order type',
-              type: FontType.h2,
-              padding: EdgeInsets.only(bottom: 20),
-            ),
-            const CustomText(
-              'AskLORA supports the following order type :',
-              padding: EdgeInsets.only(bottom: 20),
-            ),
-            _listMenus(),
-          ],
-        ),
+    return CustomNavigationWidget<OrderPageStep>(
+      child: ListView(
+        physics: const ScrollPhysics(),
+        children: [
+          const CustomText(
+            'Select Order type',
+            type: FontType.h2,
+            padding: EdgeInsets.only(bottom: 20),
+          ),
+          const CustomText(
+            'AskLORA supports the following order type :',
+            padding: EdgeInsets.only(bottom: 20),
+          ),
+          Column(
+            children: _listMenus(),
+          )
+        ],
       ),
     );
   }
 
-  Widget _listMenus() {
-    return Column(children: [
-      if (orderType == OrderType.buy) ...[
+  List<Widget> _listMenus() {
+    if (transactionType == TransactionType.buy) {
+      return [
         _customListMenu(
             'Market Order', 'Buy the stock at the current market price',
-            icon: AppIcons.saveMoney, onPress: () {}),
+            key: const Key('market_order_buy_button'),
+            icon: AppIcons.saveMoney,
+            onPress: () {}),
         _customListMenu(
             'Limit Order', 'Buy the stock at a specified limit price or lower',
-            icon: AppIcons.barChart, onPress: () {}),
-        _customListMenu('Stop Limit Order',
-            'Buy the stock if it rises to a specified stop price',
-            icon: AppIcons.stop, onPress: () {}),
+            key: const Key('limit_order_buy_button'),
+            icon: AppIcons.barChart,
+            onPress: () {}),
+        _customListMenu(
+            'Stop Order', 'Buy the stock if it rises to a specified stop price',
+            key: const Key('stop_order_buy_button'),
+            icon: AppIcons.stop,
+            onPress: () {}),
         _customListMenu('Stop Limit Order',
             'Buy a limit order if the stock rises to a specified stop price',
-            icon: AppIcons.financial, onPress: () {}),
+            key: const Key('stop_limit_order_buy_button'),
+            icon: AppIcons.financial,
+            onPress: () {}),
         _customListMenu('Trailing Stop Order',
             "Trail the stock's price and buy if it goes above the trail limit you've set",
-            icon: AppIcons.route, onPress: () {}),
+            key: const Key('trailing_stop_order_buy_button'),
+            icon: AppIcons.route,
+            onPress: () {}),
         const CustomText(
-          'Still unsure about the different order types? Learn more here',
+          'Still unsure about the different order types? Learn more here!',
           textAlign: TextAlign.center,
           padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
-        ),
-      ] else ...[
+        )
+      ];
+    } else {
+      return [
         _customListMenu(
             'Market Order', 'Sell the stock at the current market price',
-            icon: AppIcons.saveMoney, onPress: () {}),
+            key: const Key('market_order_sell_button'),
+            icon: AppIcons.saveMoney,
+            onPress: () {}),
         _customListMenu('Limit Order',
             'Sell the stock at a specified limit price or higher',
-            icon: AppIcons.barChart, onPress: () {}),
+            key: const Key('limit_order_sell_button'),
+            icon: AppIcons.barChart,
+            onPress: () {}),
         _customListMenu('Stop Limit Order',
             'Sell the stock if it falls to a specified stop price',
-            icon: AppIcons.stop, onPress: () {}),
+            key: const Key('stop_order_sell_button'),
+            icon: AppIcons.stop,
+            onPress: () {}),
         _customListMenu('Stop Limit Order',
             'Sell a limit order if the stock falls to a specified stop price',
-            icon: AppIcons.financial, onPress: () {}),
+            key: const Key('stop_limit_order_sell_button'),
+            icon: AppIcons.financial,
+            onPress: () {}),
         _customListMenu('Trailing Stop Order',
             'Trail the stock’s price and sell if it goes below the trail limit you’ve set',
-            icon: AppIcons.route, onPress: () {}),
-      ]
-    ]);
+            key: const Key('trailing_stop_order_sell_button'),
+            icon: AppIcons.route,
+            onPress: () {})
+      ];
+    }
   }
 
   Widget _customListMenu(
@@ -85,10 +106,12 @@ class OrderTypeScreen extends StatelessWidget {
     String text, {
     String icon = '',
     Function()? onPress,
+    Key? key,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: InkWell(
+        key: key,
         onTap: onPress,
         child: Row(
           children: [
