@@ -58,7 +58,6 @@ class CustomDropdown extends StatelessWidget {
           ButtonTheme(
             alignedDropdown: true,
             child: DropdownButtonFormField<String>(
-              isExpanded: true,
               elevation: 2,
               validator: validator,
               menuMaxHeight: 200,

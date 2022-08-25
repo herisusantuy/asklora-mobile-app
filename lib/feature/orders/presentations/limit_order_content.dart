@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../core/presentation/custom_dropdown.dart';
 import '../../../core/presentation/custom_expanded_row.dart';
 import '../../../core/presentation/custom_text.dart';
-import '../utils/type.dart';
-import 'shareable_order_screen.dart';
+import '../bloc/order_bloc.dart';
 
 class LimitOrderContent extends StatelessWidget {
-  final StockModel stockModel;
+  final SymbolDetail symbolDetail;
   final TransactionType transactionType;
 
-  const LimitOrderContent(this.transactionType, this.stockModel, {Key? key})
+  const LimitOrderContent(this.transactionType, this.symbolDetail, {Key? key})
       : super(key: key);
 
   @override
@@ -30,19 +29,18 @@ class LimitOrderContent extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        CustomExpandedRow('Market price of ${stockModel.name}',
-            textValue: '\$${stockModel.marketPrice}',
-            fontType: FontType.smallText),
+        CustomExpandedRow('Market price of ${symbolDetail.name}',
+            textValue: symbolDetail.marketPrice, fontType: FontType.smallText),
         const CustomExpandedRow('Estimated Total',
-            textValue: '\$320', fontType: FontType.smallText),
+            textValue: r'$320', fontType: FontType.smallText),
         const CustomExpandedRow('Available buying power',
-            textValue: '\$10,000', fontType: FontType.smallText),
+            textValue: r'$10,000', fontType: FontType.smallText),
         if (transactionType == TransactionType.buy) ...[
           const CustomExpandedRow('Available buying power',
-              textValue: '\$10,000', fontType: FontType.smallText),
+              textValue: r'$10,000', fontType: FontType.smallText),
         ] else if (transactionType == TransactionType.sell) ...[
           const CustomExpandedRow('Available amount to sell',
-              textValue: '\$10,000', fontType: FontType.smallText),
+              textValue: r'$10,000', fontType: FontType.smallText),
           const CustomExpandedRow('Number of shares you can sell',
               textValue: '10', fontType: FontType.smallText),
         ],
