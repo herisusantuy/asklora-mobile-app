@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_text_button.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../bloc/order_bloc.dart';
 import '../../widgets/symbol_details_widget.dart';
 
 class RegularOrderSymbolDetailsScreen extends StatelessWidget {
@@ -8,45 +12,59 @@ class RegularOrderSymbolDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          child: Column(
+    return CustomNavigationWidget<OrderPageStep>(
+      child: Column(
+        children: [
+          const SymbolDetailsWidget(),
+          Expanded(
+            //TODO: Add others widgets like graph and financials here.
+            child: Container(),
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SymbolDetailsWidget(),
               Expanded(
-                //TODO: Add others widgets like graph and financials here.
-                child: Container(),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomTextButton(
-                              buttonText: 'BUY', onClick: () => {}),
-                        ],
-                      )),
-                  const SizedBox(width: 10),
-                  Expanded(
-                      flex: 1,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          CustomTextButton(
-                              buttonText: 'SELL', onClick: () => {}),
-                        ],
-                      ))
-                ],
-              )
+                  flex: 1,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomTextButton(
+                          buttonText: 'BUY',
+                          onClick: () {
+                            context.read<OrderBloc>().add(
+                                const TransactionTypeChanged(
+                                    TransactionType.buy));
+                            context
+                                .read<NavigationBloc<OrderPageStep>>()
+                                .add(const PageChanged(OrderPageStep.order));
+                          }),
+                    ],
+                  )),
+              const SizedBox(width: 10),
+              Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      CustomTextButton(
+                          buttonText: 'SELL',
+                          onClick: () {
+                            context.read<OrderBloc>().add(
+                                const TransactionTypeChanged(
+                                    TransactionType.sell));
+                            context
+                                .read<NavigationBloc<OrderPageStep>>()
+                                .add(const PageChanged(OrderPageStep.order));
+                          }),
+                    ],
+                  ))
             ],
-          )),
+          )
+        ],
+      ),
     );
   }
 }
