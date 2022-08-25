@@ -32,8 +32,7 @@ class SymbolDetail {
   final String assetImage;
   final String marketPrice;
 
-  SymbolDetail(this.name, this.marketPrice,
-      {this.assetImage = 'assets/icons/save-money.png'});
+  SymbolDetail(this.name, this.marketPrice, this.assetImage);
 }
 
 enum TransactionType { buy, sell, unknown }

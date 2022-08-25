@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/presentation/custom_text.dart';
-import '../../../core/utils/app_icons.dart';
-import '../bloc/order_bloc.dart';
+import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/utils/app_icons.dart';
+import '../../bloc/order_bloc.dart';
 
 class OrderTypeScreen extends StatelessWidget {
   final TransactionType orderType;

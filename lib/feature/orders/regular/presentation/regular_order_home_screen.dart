@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/order_bloc.dart';
-import '../presentations/order_screen.dart';
+
+import '../../../../core/utils/app_icons.dart';
+import '../../bloc/order_bloc.dart';
+import 'order_screen.dart';
 
 class RegularOrderHomeScreen extends StatelessWidget {
   static const String route = '/order_regular';
@@ -13,7 +15,8 @@ class RegularOrderHomeScreen extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (_) => OrderBloc(),
-        child: OrderScreen(symbolDetail: SymbolDetail('AAPL.O', '100')),
+        child: OrderScreen(
+            symbolDetail: SymbolDetail('AAPL.O', '100', AppIcons.appleLogo)),
       ),
     );
   }

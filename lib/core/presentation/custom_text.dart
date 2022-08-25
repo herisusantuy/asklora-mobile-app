@@ -6,6 +6,7 @@ enum FontType {
   h2,
   h3,
   h4,
+  h4Normal,
   h4SemiBold,
   h5,
   bodyText,
@@ -60,6 +61,7 @@ class CustomText extends StatelessWidget {
       case FontType.h3:
         fontType = 22;
         break;
+      case FontType.h4Normal:
       case FontType.h4SemiBold:
       case FontType.h4:
         fontType = 20;
