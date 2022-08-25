@@ -1,46 +1,43 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../core/utils/app_icons.dart';
-
-enum OrderType { buy, sell }
+import '../../bloc/order_bloc.dart';
 
 class OrderTypeScreen extends StatelessWidget {
-  final OrderType orderType;
+  final TransactionType transactionType;
 
   const OrderTypeScreen({
     Key? key,
-    required this.orderType,
+    required this.transactionType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-        child: ListView(
-          physics: const ScrollPhysics(),
-          children: [
-            const CustomText(
-              'Select Order type',
-              type: FontType.h2,
-              padding: EdgeInsets.only(bottom: 20),
-            ),
-            const CustomText(
-              'AskLORA supports the following order type :',
-              padding: EdgeInsets.only(bottom: 20),
-            ),
-            Column(
-              children: _listMenus(),
-            )
-          ],
-        ),
+    return CustomNavigationWidget<OrderPageStep>(
+      child: ListView(
+        physics: const ScrollPhysics(),
+        children: [
+          const CustomText(
+            'Select Order type',
+            type: FontType.h2,
+            padding: EdgeInsets.only(bottom: 20),
+          ),
+          const CustomText(
+            'AskLORA supports the following order type :',
+            padding: EdgeInsets.only(bottom: 20),
+          ),
+          Column(
+            children: _listMenus(),
+          )
+        ],
       ),
     );
   }
 
   List<Widget> _listMenus() {
-    if (orderType == OrderType.buy) {
+    if (transactionType == TransactionType.buy) {
       return [
         _customListMenu(
             'Market Order', 'Buy the stock at the current market price',
