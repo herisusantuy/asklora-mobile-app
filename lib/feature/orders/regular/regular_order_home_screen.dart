@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../presentations/order_type_screen.dart';
+import '../presentations/shareable_order_screen.dart';
+import '../utils/type.dart';
 
 class RegularOrderHomeScreen extends StatelessWidget {
   static const String route = '/order_regular';
@@ -10,8 +10,10 @@ class RegularOrderHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('')),
-      body: const OrderTypeScreen(orderType: OrderType.buy),
+      body: ShareableOrderScreen(
+          transactionType: TransactionType.buy,
+          initialOrderType: OrderType.limit,
+          stockModel: StockModel('AAPL.O', '100')),
     );
   }
 

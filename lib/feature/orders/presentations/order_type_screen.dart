@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../../core/presentation/custom_text.dart';
 import '../../../core/utils/app_icons.dart';
-
-enum OrderType { buy, sell }
+import '../utils/type.dart';
 
 class OrderTypeScreen extends StatelessWidget {
-  final OrderType orderType;
+  final TransactionType orderType;
+
   const OrderTypeScreen({
     Key? key,
     required this.orderType,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,7 +38,7 @@ class OrderTypeScreen extends StatelessWidget {
 
   Widget _listMenus() {
     return Column(children: [
-      if (orderType == OrderType.buy) ...[
+      if (orderType == TransactionType.buy) ...[
         _customListMenu(
             'Market Order', 'Buy the stock at the current market price',
             icon: AppIcons.saveMoney, onPress: () {}),
