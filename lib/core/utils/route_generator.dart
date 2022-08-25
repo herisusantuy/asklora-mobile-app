@@ -5,6 +5,7 @@ import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/deposits/presentation/deposit_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
@@ -12,6 +13,7 @@ import '../../feature/user/account/presentation/upgrade_account/not_eligible_scr
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../feature/user/kyc/presentation/kyc_screen.dart';
 import '../../home_screen.dart';
+import 'app_icons.dart';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -41,7 +43,9 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) => const DepositScreen());
       case RegularOrderHomeScreen.route:
         return MaterialPageRoute(
-            builder: (_) => const RegularOrderHomeScreen());
+            builder: (_) => RegularOrderHomeScreen(
+                symbolDetail:
+                    SymbolDetail('AAPL.O', '100', AppIcons.appleLogo)));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
