@@ -34,14 +34,13 @@ void main() async {
         build: () {
           return depositBloc;
         },
-        act: (bloc) => bloc.add(const BankSelected(
-              BankDetails(123, 'BCA', '', '112233'),
-            )),
+        act: (bloc) => bloc.add(
+            const BankSelected(BankDetails(123, 'BCA', '', '112233'), 111)),
         expect: () => {
               const DepositState(
                   depositEvent:
-                      BankSelected(BankDetails(123, 'BCA', '', '112233')),
-                  bankDetails: BankDetails(123, 'BCA', '', '112233')),
+                      BankSelected(BankDetails(123, 'BCA', '', '112233'), 111),
+                  bankDetails: BankDetails(123, 'BCA', '', '112233'))
             });
 
     tearDown(() => {depositBloc.close()});

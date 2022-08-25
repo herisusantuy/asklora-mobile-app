@@ -7,15 +7,15 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../bloc/bank_account_bloc.dart';
 import '../../presentation/custom_payment_button_button.dart';
 import '../bloc/deposit_bloc.dart';
-import '../bloc/navigation_bloc/navigation_bloc.dart';
-import '../shareable/widget/custom_deposit_widget.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 
 class DepositWelcomeScreen extends StatelessWidget {
   const DepositWelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomDepositWidget(
+    return CustomNavigationWidget<DepositPageStep>(
       title: 'Deposit',
       navigationButton: BlocConsumer<BankAccountBloc, BankAccountState>(
         listener: (context, state) {

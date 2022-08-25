@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/alert_dialog.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/bank_account_bloc.dart';
-import '../../deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../presentation/custom_payment_button_button.dart';
 import '../bloc/withdrawal_bloc.dart';
-import 'widget/custom_withdrawal_widget.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomWithdrawalWidget(
+    return CustomNavigationWidget<WithdrawalPagesStep>(
       title: 'Withdrawal',
       navigationButton: BlocConsumer<BankAccountBloc, BankAccountState>(
         listener: (context, state) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/presentation/custom_text.dart';
-import '../../../core/presentation/custom_text_button.dart';
-import '../../auth/sign_in/presentation/sign_in_success_screen.dart';
+import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/custom_text_button.dart';
+import '../../../auth/sign_in/presentation/sign_in_success_screen.dart';
 
 enum OrderType { buy, sell }
 

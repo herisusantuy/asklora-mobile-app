@@ -10,7 +10,7 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../home_screen.dart';
-import '../../../orders/regular/regular_order_home_screen.dart';
+import '../../../orders/regular/presentation/regular_order_home_screen.dart';
 import '../../../payment/deposits/presentation/deposit_screen.dart';
 import '../../../payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';

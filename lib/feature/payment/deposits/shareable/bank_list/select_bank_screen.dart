@@ -5,8 +5,8 @@ import '../../../../../core/presentation/clearable_text_field.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/utils/formatters/bank_code_formatter.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../bloc/navigation_bloc/navigation_bloc.dart';
-import '../widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import 'bloc/select_bank_bloc.dart';
 import 'domain/bank_details.dart';
 
@@ -22,7 +22,7 @@ class SelectBankScreen extends StatelessWidget {
             .read<NavigationBloc<DepositPageStep>>()
             .add(const PageChanged(DepositPageStep.eDdaBankDetails));
       },
-      child: CustomDepositWidget(
+      child: CustomNavigationWidget<DepositPageStep>(
           title: 'Please Select a Bank',
           child: Column(children: [
             ClearableTextFormField(
@@ -53,7 +53,8 @@ class SelectBankScreen extends StatelessWidget {
   Widget _banksCard(BuildContext context, BankDetails bankDetails) {
     return InkWell(
       borderRadius: BorderRadius.circular(5),
-      onTap: () => context.read<DepositBloc>().add(BankSelected(bankDetails)),
+      onTap: () => context.read<DepositBloc>().add(
+          BankSelected(bankDetails, DateTime.now().millisecondsSinceEpoch)),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5),
         child: Row(

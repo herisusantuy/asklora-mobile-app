@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
-import '../../../../payment/deposits/bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import 'widgets/upgrade_account_button.dart';

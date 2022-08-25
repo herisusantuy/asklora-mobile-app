@@ -11,9 +11,9 @@ import '../../../domain/add_bank_account_request.dart';
 import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/deposit_bloc.dart';
-import '../../bloc/navigation_bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bank_list/domain/bank_details.dart';
-import '../widget/custom_deposit_widget.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import 'bloc/bank_details_bloc.dart';
 
 part '../../edda/presentation/bank_details_progress_screen.dart';
@@ -44,7 +44,7 @@ class EddaBankAccountDetailsScreen extends StatelessWidget {
                     .add(const PagePop()));
           }
         },
-        child: CustomDepositWidget(
+        child: CustomNavigationWidget<DepositPageStep>(
             title: 'Your Bank Details',
             onBackPressed: () =>
                 context.read<BankDetailsBloc>().add(const BankDetailsReset()),

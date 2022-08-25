@@ -6,22 +6,22 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/alert_dialog.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_information.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/bank_account_bloc.dart';
-import '../../deposits/bloc/navigation_bloc/navigation_bloc.dart';
 import '../../domain/get_bank_account_response.dart';
 import '../../presentation/custom_payment_button_button.dart';
 import '../../presentation/custom_payment_text_input.dart';
 import '../../presentation/payment_confirmation_dialog.dart';
 import '../bloc/amount/amount_bloc.dart';
 import '../bloc/withdrawal_bloc.dart';
-import 'widget/custom_withdrawal_widget.dart';
 
 class AmountScreen extends StatelessWidget {
   const AmountScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomWithdrawalWidget(
+    return CustomNavigationWidget<WithdrawalPagesStep>(
       title: 'Input Withdrawal Amount',
       navigationButton: BlocBuilder<AmountBloc, AmountState>(
           buildWhen: (previous, current) =>

@@ -1,15 +1,16 @@
-import '../../bloc/bank_account_bloc.dart';
-import '../../deposits/bloc/navigation_bloc/navigation_bloc.dart';
-import '../../repository/bank_account_repository.dart';
-import '../repository/withdrawal_repository.dart';
-import 'welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../bloc/bank_account_bloc.dart';
+import '../../repository/bank_account_repository.dart';
 import '../bloc/amount/amount_bloc.dart';
 import '../bloc/withdrawal_bloc.dart';
+import '../repository/withdrawal_repository.dart';
 import 'acknowledgement_screen.dart';
 import 'amount_screen.dart';
 import 'bank_detail_screen.dart';
+import 'welcome_screen.dart';
 
 class WithdrawalScreen extends StatelessWidget {
   static const String route = '/withdrawal_screen';
@@ -25,7 +26,8 @@ class WithdrawalScreen extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => NavigationBloc(initialWithdrawalPages),
+            create: (_) =>
+                NavigationBloc<WithdrawalPagesStep>(initialWithdrawalPages),
           ),
           BlocProvider(
             create: (_) =>
@@ -40,6 +42,11 @@ class WithdrawalScreen extends StatelessWidget {
           ),
         ],
         child: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 0,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+          ),
           body: BlocConsumer<NavigationBloc<WithdrawalPagesStep>,
               NavigationState<WithdrawalPagesStep>>(
             listenWhen: (_, current) => current.lastPage == true,
