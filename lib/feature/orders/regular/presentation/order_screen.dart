@@ -31,6 +31,7 @@ class OrderScreen extends StatelessWidget {
 
   Widget get contents {
     return BlocBuilder<OrderBloc, OrderState>(
+      key: const Key('order_contents'),
       builder: (context, state) {
         if (state.orderType == OrderType.limit) {
           return LimitOrderWidget(state.transactionType, symbolDetail);
@@ -41,6 +42,7 @@ class OrderScreen extends StatelessWidget {
   }
 
   Widget get _title => Row(
+        key: const Key('order_title'),
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomText(
@@ -63,6 +65,7 @@ class OrderScreen extends StatelessWidget {
 
   Widget get _dropdownOrderType {
     return BlocBuilder<OrderBloc, OrderState>(
+        key: const Key('dropdown_order_type'),
         buildWhen: (previous, current) =>
             previous.orderType != current.orderType,
         builder: (context, state) => InkWell(
