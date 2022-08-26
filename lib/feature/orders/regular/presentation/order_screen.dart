@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/presentation/custom_dropdown.dart';
+import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
-import 'limit_order_widget.dart';
+
+part 'limit_order_widget.dart';
+
+part 'stop_order_widget.dart';
+
+part 'widgets/available_amount_to_sell_widget.dart';
+
+part 'widgets/available_buying_power_widget.dart';
+
+part 'widgets/estimated_total_widget.dart';
+
+part 'widgets/market_price_widget.dart';
+
+part 'widgets/number_of_sellable_shares_widget.dart';
+
+part 'widgets/quantity_widget.dart';
+
+part 'widgets/time_in_force_widget.dart';
+
+part 'widgets/trading_hours_widget.dart';
+
+part 'widgets/type_of_order_price.dart';
 
 class OrderScreen extends StatelessWidget {
   final SymbolDetail symbolDetail;
@@ -34,7 +57,15 @@ class OrderScreen extends StatelessWidget {
       key: const Key('order_contents'),
       builder: (context, state) {
         if (state.orderType == OrderType.limit) {
-          return LimitOrderWidget(state.transactionType, symbolDetail);
+          return LimitOrderWidget(
+              orderType: state.orderType,
+              transactionType: state.transactionType,
+              symbolDetail: symbolDetail);
+        } else if (state.orderType == OrderType.stop) {
+          return StopOrderWidget(
+              orderType: state.orderType,
+              transactionType: state.transactionType,
+              symbolDetail: symbolDetail);
         }
         return const SizedBox.shrink();
       },
