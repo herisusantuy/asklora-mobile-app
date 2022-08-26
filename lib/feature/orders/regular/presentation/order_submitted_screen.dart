@@ -8,15 +8,18 @@ import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../bloc/order_bloc.dart';
+import '../../domain/symbol_detail.dart';
 
 class OrderSubmittedScreen extends StatelessWidget {
   final TransactionType transactionType;
   final OrderType orderType;
+  final SymbolDetail symbolDetail;
 
   const OrderSubmittedScreen({
     Key? key,
     required this.transactionType,
     required this.orderType,
+    required this.symbolDetail,
   }) : super(key: key);
 
   @override
@@ -48,10 +51,10 @@ class OrderSubmittedScreen extends StatelessWidget {
                       color: Colors.green,
                     ),
                   ),
-                  const CustomText(
-                    'Your order of AAPL.O\nbeen processed',
+                  CustomText(
+                    'Your order of ${symbolDetail.name}\nbeen processed',
                     textAlign: TextAlign.center,
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
                   ),
                   _orderDetailCard,
                 ],
