@@ -10,6 +10,7 @@ class CustomExpandedRow extends StatelessWidget {
   final EdgeInsets padding;
   final int flex1;
   final int flex2;
+  final TextAlign textValueAlign;
 
   const CustomExpandedRow(this.label,
       {this.textValue = '',
@@ -18,6 +19,7 @@ class CustomExpandedRow extends StatelessWidget {
       this.flex1 = 2,
       this.flex2 = 1,
       this.padding = const EdgeInsets.only(bottom: 8),
+      this.textValueAlign = TextAlign.right,
       Key? key})
       : super(key: key);
 
@@ -40,6 +42,7 @@ class CustomExpandedRow extends StatelessWidget {
                   CustomText(
                     textValue,
                     type: fontType,
+                    textAlign: textValueAlign,
                   ))
         ],
       ),
