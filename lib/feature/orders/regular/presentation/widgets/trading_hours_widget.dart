@@ -8,7 +8,7 @@ class TradingHoursWidget extends StatelessWidget {
     String? tradingHoursValue = 'Extended';
     return CustomExpandedRow(
       'Trading Hours',
-      widgetValue: CustomDropdown(
+      child: CustomDropdown(
           key: const Key('time_in_force_dropdown'),
           hintName: tradingHoursValue,
           value: tradingHoursValue,

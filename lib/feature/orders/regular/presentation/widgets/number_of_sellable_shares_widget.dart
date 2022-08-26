@@ -8,6 +8,6 @@ class NumberOfSellableSharesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomExpandedRow('Number of shares you can sell',
-        textValue: value, fontType: FontType.smallText);
+        text: value, fontType: FontType.smallText);
   }
 }

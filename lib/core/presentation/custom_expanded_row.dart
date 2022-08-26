@@ -4,18 +4,18 @@ import 'custom_text.dart';
 
 class CustomExpandedRow extends StatelessWidget {
   final String label;
-  final String textValue;
+  final String text;
   final FontType fontType;
-  final Widget? widgetValue;
+  final Widget? child;
   final EdgeInsets padding;
   final int flex1;
   final int flex2;
   final TextAlign textValueAlign;
 
   const CustomExpandedRow(this.label,
-      {this.textValue = '',
+      {this.text = '',
       this.fontType = FontType.bodyText,
-      this.widgetValue,
+      this.child,
       this.flex1 = 2,
       this.flex2 = 1,
       this.padding = const EdgeInsets.only(bottom: 8),
@@ -28,7 +28,8 @@ class CustomExpandedRow extends StatelessWidget {
     return Padding(
       padding: padding,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
               flex: flex1,
@@ -38,9 +39,9 @@ class CustomExpandedRow extends StatelessWidget {
               )),
           Expanded(
               flex: flex2,
-              child: widgetValue ??
+              child: child ??
                   CustomText(
-                    textValue,
+                    text,
                     type: fontType,
                     textAlign: textValueAlign,
                   ))

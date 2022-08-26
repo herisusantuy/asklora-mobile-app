@@ -8,6 +8,6 @@ class AvailableBuyingPowerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomExpandedRow('Available buying power',
-        textValue: value, fontType: FontType.smallText);
+        text: value, fontType: FontType.smallText);
   }
 }
