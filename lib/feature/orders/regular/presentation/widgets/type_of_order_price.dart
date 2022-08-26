@@ -11,7 +11,7 @@ class OrderTypePriceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomExpandedRow(
       '${orderType.name} Price',
-      textValue: value,
+      text: value,
     );
   }
 }

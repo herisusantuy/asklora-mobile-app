@@ -8,7 +8,7 @@ class TimeInForceWidget extends StatelessWidget {
     String? timeInForceValue = 'Day';
     return CustomExpandedRow(
       'Time in Force',
-      widgetValue: CustomDropdown(
+      child: CustomDropdown(
           key: const Key('time_in_force_dropdown'),
           hintName: timeInForceValue,
           value: timeInForceValue,

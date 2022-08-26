@@ -8,6 +8,6 @@ class AvailableAmountToSellWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomExpandedRow('Available amount to sell',
-        textValue: value, fontType: FontType.smallText);
+        text: value, fontType: FontType.smallText);
   }
 }

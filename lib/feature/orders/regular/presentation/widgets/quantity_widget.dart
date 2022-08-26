@@ -7,6 +7,6 @@ class SharesQuantityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomExpandedRow('Quantity', textValue: value);
+    return CustomExpandedRow('Quantity', text: value);
   }
 }

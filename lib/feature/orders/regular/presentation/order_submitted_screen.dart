@@ -9,6 +9,7 @@ import '../../bloc/order_bloc.dart';
 
 class OrderSubmittedScreen extends StatelessWidget {
   final TransactionType transactionType;
+
   const OrderSubmittedScreen({
     Key? key,
     required this.transactionType,
@@ -72,23 +73,23 @@ class OrderSubmittedScreen extends StatelessWidget {
           CustomExpandedRow(
             'Direction',
             key: const Key('direction_value_expanded_row'),
-            textValue: transactionType.name,
+            text: transactionType.name,
             padding: const EdgeInsets.only(bottom: 15),
           ),
           const CustomExpandedRow(
             'Order Type',
             key: Key('order_type_value_expanded_row'),
-            textValue: 'Market',
+            text: 'Market',
             padding: EdgeInsets.only(bottom: 15),
           ),
           const CustomExpandedRow(
             'Quantity',
             key: Key('quantity_value_expanded_row'),
-            textValue: '0.80',
+            text: '0.80',
             padding: EdgeInsets.only(bottom: 15),
           ),
           const CustomExpandedRow('Amount',
-              key: Key('amount_value_expanded_row'), textValue: r'$80.00'),
+              key: Key('amount_value_expanded_row'), text: r'$80.00'),
         ],
       ),
     );
