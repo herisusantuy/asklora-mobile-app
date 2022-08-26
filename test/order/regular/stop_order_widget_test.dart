@@ -16,7 +16,7 @@ void main() {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: LimitOrderWidget(
+          body: StopOrderWidget(
               orderType: orderType,
               transactionType: transactionType,
               symbolDetail: symbolDetail),
