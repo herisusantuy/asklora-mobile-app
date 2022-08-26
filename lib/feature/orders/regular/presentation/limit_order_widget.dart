@@ -18,29 +18,29 @@ class LimitOrderWidget extends StatelessWidget {
       children: [
         const CustomExpandedRow(
           'Limit Price',
-          textValue: '110',
+          text: '110',
         ),
-        const CustomExpandedRow('Quantity', textValue: '4'),
-        CustomExpandedRow('Time in Force', widgetValue: _dropdownTimeInForce),
+        const CustomExpandedRow('Quantity', text: '4'),
+        CustomExpandedRow('Time in Force', child: _dropdownTimeInForce),
         CustomExpandedRow(
           'Trading Hours',
-          widgetValue: _dropdownTradingHours,
+          child: _dropdownTradingHours,
         ),
         const SizedBox(
           height: 40,
         ),
         CustomExpandedRow('Market price of ${symbolDetail.name}',
-            textValue: symbolDetail.marketPrice, fontType: FontType.smallText),
+            text: symbolDetail.marketPrice, fontType: FontType.smallText),
         const CustomExpandedRow('Estimated Total',
-            textValue: r'$320', fontType: FontType.smallText),
+            text: r'$320', fontType: FontType.smallText),
         if (transactionType == TransactionType.buy) ...[
           const CustomExpandedRow('Available buying power',
-              textValue: r'$10,000', fontType: FontType.smallText),
+              text: r'$10,000', fontType: FontType.smallText),
         ] else if (transactionType == TransactionType.sell) ...[
           const CustomExpandedRow('Available amount to sell',
-              textValue: r'$10,000', fontType: FontType.smallText),
+              text: r'$10,000', fontType: FontType.smallText),
           const CustomExpandedRow('Number of shares you can sell',
-              textValue: '10', fontType: FontType.smallText),
+              text: '10', fontType: FontType.smallText),
         ],
       ],
     );

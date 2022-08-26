@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
-
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
 import 'limit_order_widget.dart';
+import 'market_order_widget.dart';
 
 class OrderScreen extends StatelessWidget {
   final SymbolDetail symbolDetail;
@@ -19,7 +19,7 @@ class OrderScreen extends StatelessWidget {
     return CustomNavigationWidget<OrderPageStep>(
       child: Column(
         children: [
-          _dropdownOrderType,
+          _dropDownOrderType,
           _spaceHeight,
           _title,
           _spaceHeight,
@@ -33,10 +33,14 @@ class OrderScreen extends StatelessWidget {
     return BlocBuilder<OrderBloc, OrderState>(
       key: const Key('order_contents'),
       builder: (context, state) {
-        if (state.orderType == OrderType.limit) {
-          return LimitOrderWidget(state.transactionType, symbolDetail);
+        switch (state.orderType) {
+          case OrderType.limit:
+            return LimitOrderWidget(state.transactionType, symbolDetail);
+          case OrderType.market:
+            return MarketOrderWidget(state.transactionType, symbolDetail);
+          default:
+            return const SizedBox.shrink();
         }
-        return const SizedBox.shrink();
       },
     );
   }
@@ -59,26 +63,19 @@ class OrderScreen extends StatelessWidget {
         ],
       );
 
-  Widget get _spaceHeight => const SizedBox(
-        height: 40,
-      );
+  Widget get _spaceHeight => const SizedBox(height: 15);
 
-  Widget get _dropdownOrderType {
-    return BlocBuilder<OrderBloc, OrderState>(
-        key: const Key('dropdown_order_type'),
-        buildWhen: (previous, current) =>
-            previous.orderType != current.orderType,
-        builder: (context, state) => InkWell(
-              onTap: () => context
-                  .read<NavigationBloc<OrderPageStep>>()
-                  .add(const PageChanged(OrderPageStep.orderType)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomText(state.orderType.name),
-                  const Icon(Icons.arrow_drop_down)
-                ],
-              ),
-            ));
-  }
+  Widget get _dropDownOrderType => BlocBuilder<OrderBloc, OrderState>(
+      key: const Key('dropdown_order_type'),
+      buildWhen: (previous, current) => previous.orderType != current.orderType,
+      builder: (context, state) => Align(
+          alignment: Alignment.centerRight,
+          child: TextButton.icon(
+              label: Text(state.orderType.string),
+              icon: const Icon(Icons.arrow_drop_down),
+              onPressed: () {
+                context
+                    .read<NavigationBloc<OrderPageStep>>()
+                    .add(const PageChanged(OrderPageStep.orderType));
+              })));
 }

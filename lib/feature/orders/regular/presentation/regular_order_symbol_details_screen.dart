@@ -13,58 +13,40 @@ class RegularOrderSymbolDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget<OrderPageStep>(
-      child: Column(
-        children: [
-          const SymbolDetailsWidget(),
-          Expanded(
-            //TODO: Add others widgets like graph and financials here.
-            child: Container(),
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                  flex: 1,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextButton(
-                          buttonText: 'BUY',
-                          onClick: () {
-                            context.read<OrderBloc>().add(
-                                const TransactionTypeChanged(
-                                    TransactionType.buy));
-                            context
-                                .read<NavigationBloc<OrderPageStep>>()
-                                .add(const PageChanged(OrderPageStep.order));
-                          }),
-                    ],
-                  )),
-              const SizedBox(width: 10),
-              Expanded(
-                  flex: 1,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      CustomTextButton(
-                          buttonText: 'SELL',
-                          onClick: () {
-                            context.read<OrderBloc>().add(
-                                const TransactionTypeChanged(
-                                    TransactionType.sell));
-                            context
-                                .read<NavigationBloc<OrderPageStep>>()
-                                .add(const PageChanged(OrderPageStep.order));
-                          }),
-                    ],
-                  ))
-            ],
-          )
-        ],
+        child: Column(children: [
+      const SymbolDetailsWidget(),
+      Expanded(
+        //TODO: Add others widgets like graph and financials here.
+        child: Container(),
       ),
-    );
+      Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+                flex: 1,
+                child: CustomTextButton(
+                    buttonText: 'BUY',
+                    onClick: () {
+                      context.read<OrderBloc>().add(
+                          const TransactionTypeChanged(TransactionType.buy));
+                      context
+                          .read<NavigationBloc<OrderPageStep>>()
+                          .add(const PageChanged(OrderPageStep.order));
+                    })),
+            const SizedBox(width: 10),
+            Expanded(
+                flex: 1,
+                child: CustomTextButton(
+                    buttonText: 'SELL',
+                    onClick: () {
+                      context.read<OrderBloc>().add(
+                          const TransactionTypeChanged(TransactionType.sell));
+                      context
+                          .read<NavigationBloc<OrderPageStep>>()
+                          .add(const PageChanged(OrderPageStep.order));
+                    }))
+          ]),
+    ]));
   }
 }
