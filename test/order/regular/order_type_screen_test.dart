@@ -3,7 +3,7 @@ import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_typ
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../mocks/mocks.dart';
+import '../../mocks/mocks.dart';
 
 void main() {
   group('*Order Type Screen Test*', () {
