@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
@@ -17,45 +18,43 @@ class OrderSubmittedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomNavigationWidget<OrderPageStep>(
       header: const SizedBox(),
-      child: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: ListView(
-                  physics: const ScrollPhysics(),
-                  children: [
-                    const CustomText(
-                      'Order Success!',
-                      type: FontType.h2,
-                      textAlign: TextAlign.center,
-                      padding: EdgeInsets.only(top: 10),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: ListView(
+                physics: const ScrollPhysics(),
+                children: [
+                  const CustomText(
+                    'Order Success!',
+                    type: FontType.h2,
+                    textAlign: TextAlign.center,
+                    padding: EdgeInsets.only(top: 10),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20.0),
+                    child: Icon(
+                      Icons.check_circle,
+                      size: 100,
+                      color: Colors.green,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.0),
-                      child: Icon(
-                        Icons.check_circle,
-                        size: 100,
-                        color: Colors.green,
-                      ),
-                    ),
-                    const CustomText(
-                      'Your order of AAPL.O\nbeen processed',
-                      textAlign: TextAlign.center,
-                      padding: EdgeInsets.only(bottom: 20),
-                    ),
-                    _orderDetailCard,
-                  ],
-                ),
+                  ),
+                  const CustomText(
+                    'Your order of AAPL.O\nbeen processed',
+                    textAlign: TextAlign.center,
+                    padding: EdgeInsets.only(bottom: 20),
+                  ),
+                  _orderDetailCard,
+                ],
               ),
-              _backToDashboardButton(context),
-              _viewOrderDetailButton(),
-            ],
-          ),
+            ),
+            _backToDashboardButton(context),
+            _viewOrderDetailButton(),
+          ],
         ),
       ),
     );
@@ -70,28 +69,22 @@ class OrderSubmittedScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _customRowText('Direction',
-              transactionType == TransactionType.buy ? 'BUY' : 'SELL'),
-          _customRowText('Order Type', 'Market'),
-          _customRowText('Quantity', '0.80'),
-          _customRowText('Amount', '\$80.00'),
-        ],
-      ),
-    );
-  }
-
-  Widget _customRowText(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
-      child: Row(
-        children: [
-          Expanded(flex: 2, child: CustomText(title)),
-          Expanded(
-              flex: 1,
-              child: CustomText(
-                value,
-                textAlign: TextAlign.end,
-              )),
+          CustomExpandedRow(
+            'Direction',
+            textValue: transactionType.name,
+            padding: const EdgeInsets.only(bottom: 15),
+          ),
+          const CustomExpandedRow(
+            'Order Type',
+            textValue: 'Market',
+            padding: EdgeInsets.only(bottom: 15),
+          ),
+          const CustomExpandedRow(
+            'Quantity',
+            textValue: '0.80',
+            padding: EdgeInsets.only(bottom: 15),
+          ),
+          const CustomExpandedRow('Amount', textValue: r'$80.00'),
         ],
       ),
     );
