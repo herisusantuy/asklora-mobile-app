@@ -1,7 +1,7 @@
 import 'package:asklora_mobile_app/core/utils/app_icons.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
-import 'package:asklora_mobile_app/feature/orders/regular/presentation/limit_order_widget.dart';
+import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,12 +11,15 @@ void main() {
   group('Limit Order Widget Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
-    Future<void> _buildDepositWelcomeScreen(
-        WidgetTester tester, TransactionType transactionType) async {
+    Future<void> _buildLimitOrderWidget(WidgetTester tester,
+        OrderType orderType, TransactionType transactionType) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: LimitOrderWidget(transactionType, symbolDetail),
+          body: LimitOrderWidget(
+              orderType: orderType,
+              transactionType: transactionType,
+              symbolDetail: symbolDetail),
         ),
         navigatorObservers: [mockObserver],
       ));
@@ -24,7 +27,8 @@ void main() {
 
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
-      await _buildDepositWelcomeScreen(tester, TransactionType.buy);
+      await _buildLimitOrderWidget(
+          tester, OrderType.limit, TransactionType.buy);
       expect(find.text('Limit Price'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
       expect(find.text('Time in Force'), findsOneWidget);
@@ -38,7 +42,8 @@ void main() {
 
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
-      await _buildDepositWelcomeScreen(tester, TransactionType.sell);
+      await _buildLimitOrderWidget(
+          tester, OrderType.limit, TransactionType.sell);
       expect(find.text('Limit Price'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
       expect(find.text('Time in Force'), findsOneWidget);

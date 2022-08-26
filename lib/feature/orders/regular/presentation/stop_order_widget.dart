@@ -1,11 +1,11 @@
 part of 'order_screen.dart';
 
-class LimitOrderWidget extends StatelessWidget {
+class StopOrderWidget extends StatelessWidget {
   final OrderType orderType;
   final SymbolDetail symbolDetail;
   final TransactionType transactionType;
 
-  const LimitOrderWidget(
+  const StopOrderWidget(
       {required this.orderType,
       required this.transactionType,
       required this.symbolDetail,
