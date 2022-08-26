@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
+import 'order_details_screen.dart';
 import 'order_screen.dart';
 import 'order_submitted_screen.dart';
 import 'order_type_screen.dart';
@@ -55,10 +56,16 @@ class RegularOrderHomeScreen extends StatelessWidget {
       case OrderPageStep.orderSubmitted:
         return OrderSubmittedScreen(
           transactionType: orderState.transactionType,
+          orderType: orderState.orderType,
         );
       case OrderPageStep.orderType:
         return OrderTypeScreen(
           transactionType: orderState.transactionType,
+        );
+      case OrderPageStep.orderDetails:
+        return OrderDetailsScreen(
+          transactionType: orderState.transactionType,
+          orderType: orderState.orderType,
         );
       default:
         return const SizedBox.shrink();
