@@ -4,6 +4,7 @@ import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
+import 'order_screen.dart';
 
 class MarketOrderWidget extends StatelessWidget {
   final SymbolDetail symbolDetail;
@@ -50,8 +51,7 @@ class MarketOrderWidget extends StatelessWidget {
         _spaceHeight,
         const CustomText(r'$80.00', type: FontType.h3),
         _spaceHeight,
-        CustomExpandedRow('Market price of ${symbolDetail.name}',
-            text: symbolDetail.marketPrice, fontType: FontType.smallText),
+        MarketPriceWidget(symbolDetail),
         const CustomExpandedRow('Number of shares',
             text: r'0.8', fontType: FontType.smallText),
         const CustomExpandedRow('Estimate Total',
@@ -59,15 +59,11 @@ class MarketOrderWidget extends StatelessWidget {
         _spaceHeight,
         _spaceHeight,
         if (transactionType == TransactionType.buy) ...[
-          const CustomExpandedRow('Available buying power',
-              text: r'$1000.00', fontType: FontType.smallText),
-          const CustomExpandedRow('Number of shares you can buy',
-              text: '10.00', fontType: FontType.smallText),
+          const AvailableBuyingPowerWidget(r'$1000.00'),
+          const NumberOfBuyableSharesWidget('10'),
         ] else if (transactionType == TransactionType.sell) ...[
-          const CustomExpandedRow('Available amount to sell',
-              text: r'$1000.00', fontType: FontType.smallText),
-          const CustomExpandedRow('Number of shares you can sell',
-              text: '10.00', fontType: FontType.smallText),
+          const AvailableAmountToSellWidget(r'$1000.00'),
+          const NumberOfSellableSharesWidget('10')
         ],
       ],
     );

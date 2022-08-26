@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../bloc/order_bloc.dart';
@@ -29,41 +31,48 @@ class OrderTypeScreen extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 20),
           ),
           Column(
-            children: _listMenus(),
+            children: _listMenus(context),
           )
         ],
       ),
     );
   }
 
-  List<Widget> _listMenus() {
+  void onPress(BuildContext context, OrderType orderType) {
+    context.read<OrderBloc>().add(OrderTypeChanged(orderType));
+    context.read<NavigationBloc<OrderPageStep>>().add(
+        const PageChangedRemoveUntil(
+            OrderPageStep.order, OrderPageStep.symbolDetails));
+  }
+
+  List<Widget> _listMenus(BuildContext context) {
     if (transactionType == TransactionType.buy) {
       return [
         _customListMenu(
             'Market Order', 'Buy the stock at the current market price',
             key: const Key('market_order_buy_button'),
             icon: AppIcons.saveMoney,
-            onPress: () {}),
+            onPress: () => onPress(context, OrderType.market)),
         _customListMenu(
             'Limit Order', 'Buy the stock at a specified limit price or lower',
             key: const Key('limit_order_buy_button'),
             icon: AppIcons.barChart,
-            onPress: () {}),
+            onPress: () => onPress(context, OrderType.limit)),
         _customListMenu(
             'Stop Order', 'Buy the stock if it rises to a specified stop price',
             key: const Key('stop_order_buy_button'),
             icon: AppIcons.stop,
-            onPress: () {}),
+            onPress: () => onPress(context, OrderType.stop)),
         _customListMenu('Stop Limit Order',
             'Buy a limit order if the stock rises to a specified stop price',
             key: const Key('stop_limit_order_buy_button'),
             icon: AppIcons.financial,
-            onPress: () {}),
+            onPress: () => onPress(context, OrderType.stopLimit)),
         _customListMenu('Trailing Stop Order',
             "Trail the stock's price and buy if it goes above the trail limit you've set",
             key: const Key('trailing_stop_order_buy_button'),
             icon: AppIcons.route,
-            onPress: () {}),
+            onPress: () => onPress(context, OrderType.trailingStop)),
         const CustomText(
           'Still unsure about the different order types? Learn more here!',
           textAlign: TextAlign.center,
