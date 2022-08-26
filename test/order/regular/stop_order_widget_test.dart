@@ -8,15 +8,15 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../mocks/mocks.dart';
 
 void main() {
-  group('Limit Order Widget Test', () {
+  group('Stop Order Widget Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
-    Future<void> _buildLimitOrderWidget(WidgetTester tester,
-        OrderType orderType, TransactionType transactionType) async {
+    Future<void> _buildStopOrderWidget(WidgetTester tester, OrderType orderType,
+        TransactionType transactionType) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: StopOrderWidget(
+          body: LimitOrderWidget(
               orderType: orderType,
               transactionType: transactionType,
               symbolDetail: symbolDetail),
@@ -27,9 +27,8 @@ void main() {
 
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
-      await _buildLimitOrderWidget(
-          tester, OrderType.limit, TransactionType.buy);
-      expect(find.text('Limit Price'), findsOneWidget);
+      await _buildStopOrderWidget(tester, OrderType.stop, TransactionType.buy);
+      expect(find.text('Stop Price'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
       expect(find.text('Time in Force'), findsOneWidget);
       expect(find.text('Trading Hours'), findsOneWidget);
@@ -42,9 +41,8 @@ void main() {
 
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
-      await _buildLimitOrderWidget(
-          tester, OrderType.limit, TransactionType.sell);
-      expect(find.text('Limit Price'), findsOneWidget);
+      await _buildStopOrderWidget(tester, OrderType.stop, TransactionType.sell);
+      expect(find.text('Stop Price'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
       expect(find.text('Time in Force'), findsOneWidget);
       expect(find.text('Trading Hours'), findsOneWidget);
