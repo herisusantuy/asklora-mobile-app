@@ -47,6 +47,7 @@ enum OrderPageStep {
   orderType,
   order,
   orderSubmitted,
+  orderDetails,
 }
 
 class OrderState extends Equatable {
