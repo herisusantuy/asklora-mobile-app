@@ -1,4 +1,3 @@
-import 'package:asklora_mobile_app/core/domain/endpoints.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_submitted_screen.dart';
 import 'package:flutter/material.dart';
