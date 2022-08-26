@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/order_bloc.dart';
@@ -17,6 +18,14 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget<OrderPageStep>(
+      navigationButton: CustomTextButton(
+        borderRadius: 5,
+        padding: const EdgeInsets.all(10),
+        buttonText: 'Confirm',
+        onClick: () => context
+            .read<NavigationBloc<OrderPageStep>>()
+            .add(const PageChanged(OrderPageStep.orderSubmitted)),
+      ),
       child: Column(
         children: [
           _dropDownOrderType,
@@ -71,7 +80,7 @@ class OrderScreen extends StatelessWidget {
       builder: (context, state) => Align(
           alignment: Alignment.centerRight,
           child: TextButton.icon(
-              label: Text(state.orderType.string),
+              label: Text(state.orderType.name),
               icon: const Icon(Icons.arrow_drop_down),
               onPressed: () {
                 context

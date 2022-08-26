@@ -9,7 +9,7 @@ enum OrderType {
 }
 
 extension Type on OrderType {
-  String get string {
+  String get name {
     switch (this) {
       case OrderType.market:
         return 'Market';
@@ -29,7 +29,25 @@ extension Type on OrderType {
 
 enum TransactionType { buy, sell, unknown }
 
-enum OrderPageStep { symbolDetails, orderType, order }
+extension TypeOfTransaction on TransactionType {
+  String get name {
+    switch (this) {
+      case TransactionType.buy:
+        return 'BUY';
+      case TransactionType.sell:
+        return 'SELL';
+      default:
+        return '';
+    }
+  }
+}
+
+enum OrderPageStep {
+  symbolDetails,
+  orderType,
+  order,
+  orderSubmitted,
+}
 
 class OrderState extends Equatable {
   final TransactionType transactionType;
