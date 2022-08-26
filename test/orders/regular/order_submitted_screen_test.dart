@@ -1,4 +1,6 @@
+import 'package:asklora_mobile_app/core/utils/app_icons.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
+import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_submitted_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,15 +9,19 @@ import '../../mocks/mocks.dart';
 
 void main() {
   group('*Order Submitted Screen Test*', () {
-    Future<void> _buildORderSubmittedScreen(WidgetTester tester,
+    final SymbolDetail symbolDetail =
+        SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
+    Future<void> _buildOrderSubmittedScreen(WidgetTester tester,
         {required TransactionType transactionType,
-        required OrderType orderType}) async {
+        required OrderType orderType,
+        required SymbolDetail symbolDetail}) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
           body: OrderSubmittedScreen(
             transactionType: transactionType,
             orderType: orderType,
+            symbolDetail: symbolDetail,
           ),
         ),
         navigatorObservers: [mockObserver],
@@ -33,8 +39,10 @@ void main() {
 
     testWidgets('When user on "BUY Market Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
-          transactionType: TransactionType.buy, orderType: OrderType.market);
+      await _buildOrderSubmittedScreen(tester,
+          transactionType: TransactionType.buy,
+          orderType: OrderType.market,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
       expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
@@ -47,11 +55,14 @@ void main() {
     });
     testWidgets('When user on "BUY Limit Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
-          transactionType: TransactionType.buy, orderType: OrderType.limit);
+      await _buildOrderSubmittedScreen(tester,
+          transactionType: TransactionType.buy,
+          orderType: OrderType.limit,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(directionValue, findsOneWidget);
       expect(orderTypeValue, findsOneWidget);
       expect(quantityValue, findsOneWidget);
@@ -61,11 +72,14 @@ void main() {
     });
     testWidgets('When user on "BUY Stop Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
-          transactionType: TransactionType.buy, orderType: OrderType.stop);
+      await _buildOrderSubmittedScreen(tester,
+          transactionType: TransactionType.buy,
+          orderType: OrderType.stop,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(directionValue, findsOneWidget);
       expect(orderTypeValue, findsOneWidget);
       expect(quantityValue, findsOneWidget);
@@ -75,11 +89,14 @@ void main() {
     });
     testWidgets('When user on "BUY Stop Limit Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
-          transactionType: TransactionType.buy, orderType: OrderType.stopLimit);
+      await _buildOrderSubmittedScreen(tester,
+          transactionType: TransactionType.buy,
+          orderType: OrderType.stopLimit,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(directionValue, findsOneWidget);
       expect(orderTypeValue, findsOneWidget);
       expect(quantityValue, findsOneWidget);
@@ -89,12 +106,14 @@ void main() {
     });
     testWidgets('When user on "BUY Trailing Stop Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
+      await _buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.buy,
-          orderType: OrderType.trailingStop);
+          orderType: OrderType.trailingStop,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(directionValue, findsOneWidget);
       expect(orderTypeValue, findsOneWidget);
       expect(quantityValue, findsOneWidget);
@@ -105,11 +124,14 @@ void main() {
 
     testWidgets('When user on "SELL Market Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
-          transactionType: TransactionType.sell, orderType: OrderType.market);
+      await _buildOrderSubmittedScreen(tester,
+          transactionType: TransactionType.sell,
+          orderType: OrderType.market,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(find.text('Order Type'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
@@ -119,11 +141,14 @@ void main() {
     });
     testWidgets('When user on "SELL Limit Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
-          transactionType: TransactionType.sell, orderType: OrderType.limit);
+      await _buildOrderSubmittedScreen(tester,
+          transactionType: TransactionType.sell,
+          orderType: OrderType.limit,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(find.text('Order Type'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
@@ -133,11 +158,14 @@ void main() {
     });
     testWidgets('When user on "SELL Stop Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
-          transactionType: TransactionType.sell, orderType: OrderType.stop);
+      await _buildOrderSubmittedScreen(tester,
+          transactionType: TransactionType.sell,
+          orderType: OrderType.stop,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(find.text('Order Type'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
@@ -147,12 +175,14 @@ void main() {
     });
     testWidgets('When user on "SELL Stop Limit Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
+      await _buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.sell,
-          orderType: OrderType.stopLimit);
+          orderType: OrderType.stopLimit,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(find.text('Order Type'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
@@ -163,12 +193,14 @@ void main() {
     testWidgets(
         'When user on "SELL Trailing Stop Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildORderSubmittedScreen(tester,
+      await _buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.sell,
-          orderType: OrderType.trailingStop);
+          orderType: OrderType.trailingStop,
+          symbolDetail: symbolDetail);
       expect(find.text('Order Success!'), findsOneWidget);
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
-      expect(find.text('Your order of AAPL.O\nbeen processed'), findsOneWidget);
+      expect(find.text('Your order of ${symbolDetail.name}\nbeen processed'),
+          findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(find.text('Order Type'), findsOneWidget);
       expect(find.text('Quantity'), findsOneWidget);
