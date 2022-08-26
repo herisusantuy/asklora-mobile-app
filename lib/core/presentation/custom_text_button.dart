@@ -9,6 +9,7 @@ class CustomTextButton extends StatelessWidget {
   final double borderRadius;
   final double? height;
   final double? width;
+  final EdgeInsets? padding;
 
   const CustomTextButton(
       {required this.buttonText,
@@ -19,12 +20,14 @@ class CustomTextButton extends StatelessWidget {
       this.disable = false,
       this.height,
       this.width,
+      this.padding,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: padding,
       height: height,
       width: width,
       constraints: const BoxConstraints(minHeight: 55, minWidth: 55),
