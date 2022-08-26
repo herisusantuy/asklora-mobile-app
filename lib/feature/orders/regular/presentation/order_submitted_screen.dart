@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../bloc/order_bloc.dart';
 
 class OrderSubmittedScreen extends StatelessWidget {
   final TransactionType transactionType;
+  final OrderType orderType;
 
   const OrderSubmittedScreen({
     Key? key,
     required this.transactionType,
+    required this.orderType,
   }) : super(key: key);
 
   @override
@@ -54,7 +58,7 @@ class OrderSubmittedScreen extends StatelessWidget {
               ),
             ),
             _backToDashboardButton(context),
-            _viewOrderDetailButton(),
+            _viewOrderDetailButton(context),
           ],
         ),
       ),
@@ -76,11 +80,11 @@ class OrderSubmittedScreen extends StatelessWidget {
             text: transactionType.name,
             padding: const EdgeInsets.only(bottom: 15),
           ),
-          const CustomExpandedRow(
+          CustomExpandedRow(
             'Order Type',
-            key: Key('order_type_value_expanded_row'),
-            text: 'Market',
-            padding: EdgeInsets.only(bottom: 15),
+            key: const Key('order_type_value_expanded_row'),
+            text: orderType.name,
+            padding: const EdgeInsets.only(bottom: 15),
           ),
           const CustomExpandedRow(
             'Quantity',
@@ -95,12 +99,14 @@ class OrderSubmittedScreen extends StatelessWidget {
     );
   }
 
-  Widget _viewOrderDetailButton() {
+  Widget _viewOrderDetailButton(BuildContext context) {
     return CustomTextButton(
         key: const Key('view_order_detail_submitted_button'),
         borderRadius: 5,
         buttonText: 'View my order',
-        onClick: () {});
+        onClick: () => context
+            .read<NavigationBloc<OrderPageStep>>()
+            .add(const PageChanged(OrderPageStep.orderDetails)));
   }
 
   Widget _backToDashboardButton(BuildContext context) {
