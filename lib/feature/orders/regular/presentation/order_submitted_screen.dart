@@ -71,20 +71,24 @@ class OrderSubmittedScreen extends StatelessWidget {
         children: [
           CustomExpandedRow(
             'Direction',
+            key: const Key('direction_value_expanded_row'),
             textValue: transactionType.name,
             padding: const EdgeInsets.only(bottom: 15),
           ),
           const CustomExpandedRow(
             'Order Type',
+            key: Key('order_type_value_expanded_row'),
             textValue: 'Market',
             padding: EdgeInsets.only(bottom: 15),
           ),
           const CustomExpandedRow(
             'Quantity',
+            key: Key('quantity_value_expanded_row'),
             textValue: '0.80',
             padding: EdgeInsets.only(bottom: 15),
           ),
-          const CustomExpandedRow('Amount', textValue: r'$80.00'),
+          const CustomExpandedRow('Amount',
+              key: Key('amount_value_expanded_row'), textValue: r'$80.00'),
         ],
       ),
     );
@@ -92,11 +96,15 @@ class OrderSubmittedScreen extends StatelessWidget {
 
   Widget _viewOrderDetailButton() {
     return CustomTextButton(
-        borderRadius: 5, buttonText: 'View my order', onClick: () {});
+        key: const Key('view_order_detail_submitted_button'),
+        borderRadius: 5,
+        buttonText: 'View my order',
+        onClick: () {});
   }
 
   Widget _backToDashboardButton(BuildContext context) {
     return CustomTextButton(
+        key: const Key('back_to_dashboard_button'),
         padding: const EdgeInsets.only(bottom: 15),
         borderRadius: 5,
         buttonText: 'Back to Dashboard',
