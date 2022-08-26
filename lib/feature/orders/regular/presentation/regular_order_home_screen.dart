@@ -5,6 +5,7 @@ import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
 import 'order_screen.dart';
+import 'order_submitted_screen.dart';
 import 'order_type_screen.dart';
 import 'regular_order_symbol_details_screen.dart';
 
@@ -51,6 +52,10 @@ class RegularOrderHomeScreen extends StatelessWidget {
         return const RegularOrderSymbolDetailsScreen();
       case OrderPageStep.order:
         return OrderScreen(symbolDetail: symbolDetail);
+      case OrderPageStep.orderSubmitted:
+        return OrderSubmittedScreen(
+          transactionType: orderState.transactionType,
+        );
       case OrderPageStep.orderType:
         return OrderTypeScreen(
           transactionType: orderState.transactionType,
