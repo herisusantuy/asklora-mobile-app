@@ -14,6 +14,7 @@ class TimeInForceWidget extends StatelessWidget {
           builder: (context, state) => Align(
               alignment: Alignment.centerRight,
               child: TextButton.icon(
+                  key: const Key('time_in_force_button'),
                   label: Text(state.timeInForce.name),
                   icon: const Icon(Icons.arrow_drop_down),
                   onPressed: () => showModalBottomSheet(
@@ -23,9 +24,15 @@ class TimeInForceWidget extends StatelessWidget {
                             child: BlocBuilder<OrderBloc, OrderState>(
                               builder: (context, state) =>
                                   OrderBottomSheetWidget(
+                                      key: const Key(
+                                          'time_in_force_bottom_sheet'),
                                       title: 'Select Time in Force',
                                       children: [
                                     CustomBottomSheetCardWidget(
+                                        key: const Key(
+                                            'time_in_force_day_choice'),
+                                        keyButton: const Key(
+                                            'time_in_force_day_choice_button'),
                                         onTap: () => context
                                             .read<OrderBloc>()
                                             .add(const TimeInForceChanged(
@@ -39,6 +46,10 @@ class TimeInForceWidget extends StatelessWidget {
                                       height: 16,
                                     ),
                                     CustomBottomSheetCardWidget(
+                                        key: const Key(
+                                            'time_in_force_good_till_cancelled_choice'),
+                                        keyButton: const Key(
+                                            'time_in_force_good_till_cancelled_choice_button'),
                                         onTap: () => context
                                             .read<OrderBloc>()
                                             .add(const TimeInForceChanged(

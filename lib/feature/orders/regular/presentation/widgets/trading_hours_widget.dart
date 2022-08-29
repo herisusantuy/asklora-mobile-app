@@ -14,6 +14,7 @@ class TradingHoursWidget extends StatelessWidget {
           builder: (context, state) => Align(
               alignment: Alignment.centerRight,
               child: TextButton.icon(
+                  key: const Key('trading_hours_button'),
                   label: Text(state.tradingHours.name),
                   icon: const Icon(Icons.arrow_drop_down),
                   onPressed: () => showModalBottomSheet(
@@ -23,9 +24,15 @@ class TradingHoursWidget extends StatelessWidget {
                             child: BlocBuilder<OrderBloc, OrderState>(
                               builder: (context, state) =>
                                   OrderBottomSheetWidget(
+                                      key: const Key(
+                                          'trading_hours_bottom_sheet'),
                                       title: 'Select Trading Hours',
                                       children: [
                                     CustomBottomSheetCardWidget(
+                                        key: const Key(
+                                            'trading_hours_regular_choice'),
+                                        keyButton: const Key(
+                                            'trading_hours_regular_choice_button'),
                                         onTap: () => context
                                             .read<OrderBloc>()
                                             .add(const TradingHoursChanged(
@@ -37,6 +44,10 @@ class TradingHoursWidget extends StatelessWidget {
                                             TradingHours.regular),
                                     _spaceHeight,
                                     CustomBottomSheetCardWidget(
+                                        key: const Key(
+                                            'trading_hours_extended_choice'),
+                                        keyButton: const Key(
+                                            'trading_hours_extended_choice_button'),
                                         onTap: () => context
                                             .read<OrderBloc>()
                                             .add(const TradingHoursChanged(

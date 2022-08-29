@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
 
 class CustomBottomSheetCardWidget extends StatelessWidget {
+  final Key? keyButton;
   final String label;
   final String text;
   final bool active;
@@ -13,12 +14,14 @@ class CustomBottomSheetCardWidget extends StatelessWidget {
       required this.text,
       required this.onTap,
       this.active = false,
+      this.keyButton,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      key: keyButton,
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(12),

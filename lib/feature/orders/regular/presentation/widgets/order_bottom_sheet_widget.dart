@@ -43,7 +43,7 @@ class OrderBottomSheetWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               ...children

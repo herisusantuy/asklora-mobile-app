@@ -16,6 +16,7 @@ class TrailTypeWidget extends StatelessWidget {
                   child: Align(
                       alignment: Alignment.centerRight,
                       child: TextButton.icon(
+                          key: const Key('trail_type_button'),
                           label: Text(state.trailType.name),
                           icon: const Icon(Icons.arrow_drop_down),
                           onPressed: () => showModalBottomSheet(
@@ -25,9 +26,15 @@ class TrailTypeWidget extends StatelessWidget {
                                     child: BlocBuilder<OrderBloc, OrderState>(
                                       builder: (context, state) =>
                                           OrderBottomSheetWidget(
+                                              key: const Key(
+                                                  'trail_type_bottom_sheet'),
                                               title: 'Select Trail Type',
                                               children: [
                                             CustomBottomSheetCardWidget(
+                                                key: const Key(
+                                                    'trail_type_amount_choice'),
+                                                keyButton: const Key(
+                                                    'trail_type_amount_choice_button'),
                                                 onTap: () => context
                                                     .read<OrderBloc>()
                                                     .add(const TrailTypeChanged(
@@ -41,6 +48,10 @@ class TrailTypeWidget extends StatelessWidget {
                                               height: 16,
                                             ),
                                             CustomBottomSheetCardWidget(
+                                                key: const Key(
+                                                    'trail_type_percentage_choice'),
+                                                keyButton: const Key(
+                                                    'trail_type_percentage_choice_button'),
                                                 onTap: () => context
                                                     .read<OrderBloc>()
                                                     .add(const TrailTypeChanged(

@@ -16,8 +16,8 @@ class StopLimitOrderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const OrderTypePriceWidget('Stop Price', '110'),
-        const OrderTypePriceWidget('Limit Price', '110'),
+        const OrderTypePriceWidget('Stop', '110'),
+        const OrderTypePriceWidget('Limit', '110'),
         const SharesQuantityWidget('4'),
         const TimeInForceWidget(),
         const SizedBox(
