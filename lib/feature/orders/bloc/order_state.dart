@@ -42,6 +42,21 @@ extension TypeOfTransaction on TransactionType {
   }
 }
 
+enum MarketType { amount, shares }
+
+extension TypeOfMarket on MarketType {
+  String get name {
+    switch (this) {
+      case MarketType.amount:
+        return 'Amount';
+      case MarketType.shares:
+        return 'Shares';
+      default:
+        return '';
+    }
+  }
+}
+
 enum OrderPageStep {
   symbolDetails,
   orderType,
@@ -53,22 +68,26 @@ enum OrderPageStep {
 class OrderState extends Equatable {
   final TransactionType transactionType;
   final OrderType orderType;
+  final MarketType marketType;
 
-  const OrderState(
-      {this.transactionType = TransactionType.unknown,
-      this.orderType = OrderType.limit})
-      : super();
+  const OrderState({
+    this.transactionType = TransactionType.unknown,
+    this.orderType = OrderType.limit,
+    this.marketType = MarketType.amount,
+  }) : super();
 
   @override
-  List<Object?> get props => [transactionType, orderType];
+  List<Object?> get props => [transactionType, orderType, marketType];
 
   OrderState copyWith({
     TransactionType? transactionType,
     OrderType? orderType,
+    MarketType? marketType,
   }) {
     return OrderState(
       transactionType: transactionType ?? this.transactionType,
       orderType: orderType ?? this.orderType,
+      marketType: marketType ?? this.marketType,
     );
   }
 }

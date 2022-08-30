@@ -9,6 +9,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc() : super(const OrderState()) {
     on<TransactionTypeChanged>(_onTransactionTypeChanged);
     on<OrderTypeChanged>(_onOrderTypeChanged);
+    on<MarketTypeChanged>(_onMarketTypeChanged);
   }
 
   void _onTransactionTypeChanged(
@@ -18,5 +19,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
   void _onOrderTypeChanged(OrderTypeChanged event, Emitter<OrderState> emit) {
     emit(state.copyWith(orderType: event.orderType));
+  }
+
+  void _onMarketTypeChanged(MarketTypeChanged event, Emitter<OrderState> emit) {
+    emit(state.copyWith(marketType: event.marketType));
   }
 }

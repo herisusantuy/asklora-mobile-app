@@ -24,3 +24,12 @@ class OrderTypeChanged extends OrderEvent {
   @override
   List<Object?> get props => [orderType];
 }
+
+class MarketTypeChanged extends OrderEvent {
+  final MarketType marketType;
+
+  const MarketTypeChanged(this.marketType) : super();
+
+  @override
+  List<Object?> get props => [marketType];
+}
