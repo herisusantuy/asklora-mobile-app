@@ -19,6 +19,8 @@ part 'stop_order_widget.dart';
 
 part 'stop_limit_order_widget.dart';
 
+part 'order_confirmation_widget.dart';
+
 part 'widgets/available_amount_to_sell_widget.dart';
 
 part 'widgets/available_buying_power_widget.dart';
@@ -41,10 +43,15 @@ part 'widgets/order_type_price_widget.dart';
 
 part 'widgets/trail_type_widget.dart';
 
+part 'widgets/symbol_title_widget.dart';
+
 class OrderScreen extends StatelessWidget {
+  final OrderState orderState;
   final SymbolDetail symbolDetail;
 
-  const OrderScreen({required this.symbolDetail, Key? key}) : super(key: key);
+  const OrderScreen(
+      {required this.orderState, required this.symbolDetail, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +59,19 @@ class OrderScreen extends StatelessWidget {
       navigationButton: CustomTextButton(
         borderRadius: 5,
         padding: const EdgeInsets.all(10),
-        buttonText: 'Confirm',
-        onClick: () => context
-            .read<NavigationBloc<OrderPageStep>>()
-            .add(const PageChanged(OrderPageStep.orderSubmitted)),
+        buttonText: orderState.transactionType.name,
+        onClick: () => showModalBottomSheet(
+            context: context,
+            builder: (_) => BlocProvider.value(
+                value: BlocProvider.of<OrderBloc>(context),
+                child: OrderConfirmationWidget(
+                    orderState: orderState, symbolDetail: symbolDetail))),
       ),
       child: Column(
         children: [
           _dropDownOrderType,
           _spaceHeight,
-          _title,
+          SymbolTitleWidget(symbolDetail),
           _spaceHeight,
           contents,
         ],
@@ -72,6 +82,8 @@ class OrderScreen extends StatelessWidget {
   Widget get contents {
     return Expanded(
       child: BlocBuilder<OrderBloc, OrderState>(
+        buildWhen: (previous, current) =>
+            previous.orderType != current.orderType,
         key: const Key('order_contents'),
         builder: (context, state) {
           switch (state.orderType) {
@@ -104,24 +116,6 @@ class OrderScreen extends StatelessWidget {
       ),
     );
   }
-
-  Widget get _title => Row(
-        key: const Key('order_title'),
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomText(
-            symbolDetail.name,
-            type: FontType.h3,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Image.asset(
-            symbolDetail.assetImage,
-            height: 60,
-          )
-        ],
-      );
 
   Widget get _spaceHeight => const SizedBox(height: 15);
 

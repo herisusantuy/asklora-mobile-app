@@ -6,10 +6,12 @@ class OrderBottomSheetWidget extends StatelessWidget {
   final String title;
   final List<Widget> children;
   final EdgeInsets padding;
+  final FontType titleFontType;
 
   const OrderBottomSheetWidget(
       {required this.title,
       required this.children,
+      this.titleFontType = FontType.h5,
       this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       Key key = const Key('order_bottom_sheet_widget')})
       : super(key: key);
@@ -37,7 +39,7 @@ class OrderBottomSheetWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     child: CustomText(
                       title,
-                      type: FontType.h5,
+                      type: titleFontType,
                       padding: const EdgeInsets.only(bottom: 12, top: 4),
                     ),
                   ),
