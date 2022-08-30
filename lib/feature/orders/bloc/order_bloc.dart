@@ -12,6 +12,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<TrailTypeChanged>(_onTrailTypeChanged);
     on<TimeInForceChanged>(_onTimeInForceChanged);
     on<TradingHoursChanged>(_onTradingHoursChanged);
+    on<MarketTypeChanged>(_onMarketTypeChanged);
   }
 
   void _onTransactionTypeChanged(
@@ -35,5 +36,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   void _onTradingHoursChanged(
       TradingHoursChanged event, Emitter<OrderState> emit) {
     emit(state.copyWith(tradingHours: event.tradingHours));
+  }
+
+  void _onMarketTypeChanged(MarketTypeChanged event, Emitter<OrderState> emit) {
+    emit(state.copyWith(marketType: event.marketType));
   }
 }
