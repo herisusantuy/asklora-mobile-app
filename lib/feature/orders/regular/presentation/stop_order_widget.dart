@@ -14,9 +14,9 @@ class StopOrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
-        OrderTypePriceWidget(orderType, '110'),
+        OrderTypePriceWidget(orderType.name, '110'),
         const SharesQuantityWidget('4'),
         const TimeInForceWidget(),
         const TradingHoursWidget(),

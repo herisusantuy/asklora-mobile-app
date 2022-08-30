@@ -1,11 +1,11 @@
 part of 'order_screen.dart';
 
-class LimitOrderWidget extends StatelessWidget {
+class StopLimitOrderWidget extends StatelessWidget {
   final OrderType orderType;
   final SymbolDetail symbolDetail;
   final TransactionType transactionType;
 
-  const LimitOrderWidget(
+  const StopLimitOrderWidget(
       {required this.orderType,
       required this.transactionType,
       required this.symbolDetail,
@@ -16,10 +16,10 @@ class LimitOrderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        OrderTypePriceWidget(orderType.name, '110'),
+        const OrderTypePriceWidget('Stop', '110'),
+        const OrderTypePriceWidget('Limit', '110'),
         const SharesQuantityWidget('4'),
         const TimeInForceWidget(),
-        const TradingHoursWidget(),
         const SizedBox(
           height: 40,
         ),

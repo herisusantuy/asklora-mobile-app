@@ -1,6 +1,4 @@
-import 'package:asklora_mobile_app/core/utils/app_icons.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
-import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,8 +7,6 @@ import '../../mocks/mocks.dart';
 
 void main() {
   group('Order Details Screen Test', () {
-    final SymbolDetail symbolDetail =
-        SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
     Future<void> _buildOrderDetailsScreen(WidgetTester tester,
         {required TransactionType transactionType,
         required OrderType orderType}) async {

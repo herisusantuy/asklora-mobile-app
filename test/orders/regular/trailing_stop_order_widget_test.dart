@@ -9,17 +9,17 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../mocks/mocks.dart';
 
 void main() {
-  group('Limit Order Widget Test', () {
+  group('Trailing Stop Order Widget Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
-    Future<void> _buildLimitOrderWidget(WidgetTester tester,
+    Future<void> _buildTrailingStopOrderWidget(WidgetTester tester,
         OrderType orderType, TransactionType transactionType) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
           body: BlocProvider(
             create: (_) => OrderBloc(),
-            child: LimitOrderWidget(
+            child: TrailingStopOrderWidget(
                 orderType: orderType,
                 transactionType: transactionType,
                 symbolDetail: symbolDetail),
@@ -29,6 +29,7 @@ void main() {
       ));
     }
 
+    final trailType = find.byKey(const Key('trail_type_widget'));
     final timeInForce = find.byKey(const Key('time_in_force_widget'));
     final marketPrice = find.byKey(const Key('market_price_widget'));
     final estimatedTotal = find.byKey(const Key('estimated_total_widget'));
@@ -36,19 +37,17 @@ void main() {
         find.byKey(const Key('available_buying_power_widget'));
     final availableAmountToSell =
         find.byKey(const Key('available_amount_to_sell_widget'));
-    final tradingHours = find.byKey(const Key('trading_hours_widget'));
     final sharesQuantity = find.byKey(const Key('shares_quantity_widget'));
     final numberOfSellableShares =
         find.byKey(const Key('number_of_sellable_shares_widget'));
 
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
-      await _buildLimitOrderWidget(
+      await _buildTrailingStopOrderWidget(
           tester, OrderType.limit, TransactionType.buy);
-      expect(find.text('Limit Price'), findsOneWidget);
+      expect(trailType, findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
-      expect(tradingHours, findsOneWidget);
       expect(marketPrice, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(availableBuyingPower, findsOneWidget);
@@ -58,12 +57,11 @@ void main() {
 
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
-      await _buildLimitOrderWidget(
+      await _buildTrailingStopOrderWidget(
           tester, OrderType.limit, TransactionType.sell);
-      expect(find.text('Limit Price'), findsOneWidget);
+      expect(trailType, findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
-      expect(tradingHours, findsOneWidget);
       expect(marketPrice, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(availableBuyingPower, findsNothing);
