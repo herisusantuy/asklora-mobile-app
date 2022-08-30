@@ -21,17 +21,7 @@ class MarketOrderWidget extends StatelessWidget {
       children: [
         _amountAndSharesStockButton,
         _spaceHeight,
-        BlocBuilder<OrderBloc, OrderState>(
-          buildWhen: (previous, current) =>
-              previous.marketType != current.marketType,
-          builder: (context, state) {
-            if (state.marketType == MarketType.amount) {
-              return const CustomText(r'$80.00', type: FontType.h3);
-            } else {
-              return const SharesStockWidget();
-            }
-          },
-        ),
+        _inputMarket,
         _spaceHeight,
         MarketPriceWidget(symbolDetail),
         const CustomExpandedRow('Number of shares',
@@ -108,6 +98,19 @@ class MarketOrderWidget extends StatelessWidget {
               },
             ))
       ],
+    );
+  }
+
+  Widget get _inputMarket {
+    return BlocBuilder<OrderBloc, OrderState>(
+      key: const Key('input_market'),
+      buildWhen: (previous, current) =>
+          previous.marketType != current.marketType,
+      builder: (context, state) {
+        return state.marketType == MarketType.amount
+            ? const CustomText(r'$80.00', type: FontType.h3)
+            : const SharesStockWidget();
+      },
     );
   }
 
