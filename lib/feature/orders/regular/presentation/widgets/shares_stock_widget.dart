@@ -19,17 +19,11 @@ class SharesStockWidget extends StatelessWidget {
         ),
         Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: InkWell(
-                  onTap: () => {}, child: Icon(Icons.add_circle_outline)),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: InkWell(
-                  onTap: () => {},
-                  child: Icon(Icons.remove_circle_outline_outlined)),
-            ),
+            InkWell(onTap: () => {}, child: Icon(Icons.add_circle_outline)),
+            const SizedBox(height: 10),
+            InkWell(
+                onTap: () => {},
+                child: Icon(Icons.remove_circle_outline_outlined)),
           ],
         )
       ],
