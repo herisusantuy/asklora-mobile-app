@@ -43,6 +43,35 @@ void main() async {
               const OrderState(orderType: OrderType.limit),
             });
 
+    blocTest<OrderBloc, OrderState>(
+        'emits `trailType` = TrailType.amount WHEN '
+        'select trail type amount',
+        build: () => orderBloc,
+        act: (bloc) async => bloc.add(const TrailTypeChanged(TrailType.amount)),
+        expect: () => {
+              const OrderState(trailType: TrailType.amount),
+            });
+
+    blocTest<OrderBloc, OrderState>(
+        'emits `timeInForce` = TimeInForce.goodTillCanceled WHEN '
+        'select time in force goodTillCanceled',
+        build: () => orderBloc,
+        act: (bloc) async =>
+            bloc.add(const TimeInForceChanged(TimeInForce.goodTillCanceled)),
+        expect: () => {
+              const OrderState(timeInForce: TimeInForce.goodTillCanceled),
+            });
+
+    blocTest<OrderBloc, OrderState>(
+        'emits `tradingHours` = TradingHours.regular WHEN '
+        'select trading hours regular',
+        build: () => orderBloc,
+        act: (bloc) async =>
+            bloc.add(const TradingHoursChanged(TradingHours.regular)),
+        expect: () => {
+              const OrderState(tradingHours: TradingHours.regular),
+            });
+
     tearDown(() => {orderBloc.close()});
   });
 }

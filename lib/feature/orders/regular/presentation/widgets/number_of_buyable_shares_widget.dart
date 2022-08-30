@@ -3,7 +3,9 @@ part of '../order_screen.dart';
 class NumberOfBuyableSharesWidget extends StatelessWidget {
   final String value;
 
-  const NumberOfBuyableSharesWidget(this.value, {Key? key}) : super(key: key);
+  const NumberOfBuyableSharesWidget(this.value,
+      {Key key = const Key('number_of_buyable_shares_widget')})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

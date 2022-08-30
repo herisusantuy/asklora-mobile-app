@@ -9,17 +9,17 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../mocks/mocks.dart';
 
 void main() {
-  group('Limit Order Widget Test', () {
+  group('Stop Limit Order Widget Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
-    Future<void> _buildLimitOrderWidget(WidgetTester tester,
+    Future<void> _buildStopLimitOrderWidget(WidgetTester tester,
         OrderType orderType, TransactionType transactionType) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
           body: BlocProvider(
             create: (_) => OrderBloc(),
-            child: LimitOrderWidget(
+            child: StopLimitOrderWidget(
                 orderType: orderType,
                 transactionType: transactionType,
                 symbolDetail: symbolDetail),
@@ -36,19 +36,18 @@ void main() {
         find.byKey(const Key('available_buying_power_widget'));
     final availableAmountToSell =
         find.byKey(const Key('available_amount_to_sell_widget'));
-    final tradingHours = find.byKey(const Key('trading_hours_widget'));
     final sharesQuantity = find.byKey(const Key('shares_quantity_widget'));
     final numberOfSellableShares =
         find.byKey(const Key('number_of_sellable_shares_widget'));
 
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
-      await _buildLimitOrderWidget(
+      await _buildStopLimitOrderWidget(
           tester, OrderType.limit, TransactionType.buy);
+      expect(find.text('Stop Price'), findsOneWidget);
       expect(find.text('Limit Price'), findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
-      expect(tradingHours, findsOneWidget);
       expect(marketPrice, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(availableBuyingPower, findsOneWidget);
@@ -58,12 +57,12 @@ void main() {
 
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
-      await _buildLimitOrderWidget(
+      await _buildStopLimitOrderWidget(
           tester, OrderType.limit, TransactionType.sell);
+      expect(find.text('Stop Price'), findsOneWidget);
       expect(find.text('Limit Price'), findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
-      expect(tradingHours, findsOneWidget);
       expect(marketPrice, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(availableBuyingPower, findsNothing);
