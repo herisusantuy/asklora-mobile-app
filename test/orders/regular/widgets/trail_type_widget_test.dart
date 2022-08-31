@@ -15,7 +15,7 @@ void main() {
         home: Scaffold(
           body: BlocProvider(
             create: (_) => OrderBloc(),
-            child: const TrailTypeWidget(),
+            child: const TrailWidget(),
           ),
         ),
         navigatorObservers: [mockObserver],

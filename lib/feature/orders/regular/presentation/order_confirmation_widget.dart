@@ -22,10 +22,7 @@ class OrderConfirmationWidget extends StatelessWidget {
             'Direction',
             text: orderState.transactionType.name,
           ),
-          CustomExpandedRow(
-            'Order Type',
-            text: orderState.orderType.name,
-          ),
+          OrderTypeWidget(orderState),
           ..._additionalWidget,
           _spaceHeight,
           CustomTextButton(
@@ -53,7 +50,11 @@ class OrderConfirmationWidget extends StatelessWidget {
         return [
           OrderTypePriceWidget(orderState.orderType.name, '110'),
           const SharesQuantityWidget('4'),
-          const EstimatedTotalWidget('440'),
+          const OrderFeesWidget('1'),
+          const EstimatedTotalWidget(
+            '440',
+            fontType: FontType.bodyText,
+          ),
           const TimeInForceWidget(
             showOnlyInformation: true,
           ),
@@ -65,7 +66,38 @@ class OrderConfirmationWidget extends StatelessWidget {
         return [
           OrderTypePriceWidget(orderState.orderType.name, '110'),
           const SharesQuantityWidget('4'),
-          const EstimatedTotalWidget('440'),
+          const OrderFeesWidget('1'),
+          const EstimatedTotalWidget(
+            '440',
+            fontType: FontType.bodyText,
+          ),
+          const TimeInForceWidget(
+            showOnlyInformation: true,
+          ),
+        ];
+      case OrderType.stopLimit:
+        return [
+          const OrderTypePriceWidget('Stop', '110'),
+          const OrderTypePriceWidget('Limit', '110'),
+          const SharesQuantityWidget('4'),
+          const OrderFeesWidget('1'),
+          const EstimatedTotalWidget(
+            '440',
+            fontType: FontType.bodyText,
+          ),
+          const TimeInForceWidget(
+            showOnlyInformation: true,
+          ),
+        ];
+      case OrderType.trailingStop:
+        return [
+          const TrailWidget(showOnlyInformation: true),
+          const SharesQuantityWidget('4'),
+          const OrderFeesWidget('1'),
+          const EstimatedTotalWidget(
+            '440',
+            fontType: FontType.bodyText,
+          ),
           const TimeInForceWidget(
             showOnlyInformation: true,
           ),

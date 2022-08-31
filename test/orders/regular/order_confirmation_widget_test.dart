@@ -28,6 +28,9 @@ void main() {
     }
 
     final timeInForce = find.byKey(const Key('time_in_force_widget'));
+    final trail = find.byKey(const Key('trail_widget'));
+    final orderType = find.byKey(const Key('order_type_widget'));
+    final fees = find.byKey(const Key('order_fees_widget'));
     final estimatedTotal = find.byKey(const Key('estimated_total_widget'));
     final tradingHours = find.byKey(const Key('trading_hours_widget'));
     final sharesQuantity = find.byKey(const Key('shares_quantity_widget'));
@@ -42,9 +45,10 @@ void main() {
               orderType: OrderType.limit,
               transactionType: TransactionType.buy));
       expect(find.text('Direction'), findsOneWidget);
-      expect(find.text('Order Type'), findsOneWidget);
+      expect(orderType, findsOneWidget);
       expect(find.text('Limit Price'), findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
+      expect(fees, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(timeInForce, findsOneWidget);
       expect(tradingHours, findsOneWidget);
@@ -58,9 +62,45 @@ void main() {
           const OrderState(
               orderType: OrderType.stop, transactionType: TransactionType.buy));
       expect(find.text('Direction'), findsOneWidget);
-      expect(find.text('Order Type'), findsOneWidget);
+      expect(orderType, findsOneWidget);
       expect(find.text('Stop Price'), findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
+      expect(fees, findsOneWidget);
+      expect(estimatedTotal, findsOneWidget);
+      expect(timeInForce, findsOneWidget);
+      expect(orderConfirmationButton, findsOneWidget);
+    });
+
+    testWidgets('First render stop limit order confirmation widget',
+        (WidgetTester tester) async {
+      await _buildOrderConfirmationWidget(
+          tester,
+          const OrderState(
+              orderType: OrderType.stopLimit,
+              transactionType: TransactionType.buy));
+      expect(find.text('Direction'), findsOneWidget);
+      expect(orderType, findsOneWidget);
+      expect(find.text('Stop Price'), findsOneWidget);
+      expect(find.text('Limit Price'), findsOneWidget);
+      expect(sharesQuantity, findsOneWidget);
+      expect(fees, findsOneWidget);
+      expect(estimatedTotal, findsOneWidget);
+      expect(timeInForce, findsOneWidget);
+      expect(orderConfirmationButton, findsOneWidget);
+    });
+
+    testWidgets('First render trailing stop order confirmation widget',
+        (WidgetTester tester) async {
+      await _buildOrderConfirmationWidget(
+          tester,
+          const OrderState(
+              orderType: OrderType.trailingStop,
+              transactionType: TransactionType.buy));
+      expect(find.text('Direction'), findsOneWidget);
+      expect(orderType, findsOneWidget);
+      expect(trail, findsOneWidget);
+      expect(sharesQuantity, findsOneWidget);
+      expect(fees, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(timeInForce, findsOneWidget);
       expect(orderConfirmationButton, findsOneWidget);

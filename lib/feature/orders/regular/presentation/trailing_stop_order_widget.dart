@@ -16,7 +16,7 @@ class TrailingStopOrderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const TrailTypeWidget(),
+        const TrailWidget(),
         const SharesQuantityWidget('4'),
         const TimeInForceWidget(),
         const SizedBox(

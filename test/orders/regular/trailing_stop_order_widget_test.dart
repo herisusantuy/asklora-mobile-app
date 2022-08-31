@@ -29,7 +29,7 @@ void main() {
       ));
     }
 
-    final trailType = find.byKey(const Key('trail_type_widget'));
+    final trail = find.byKey(const Key('trail_widget'));
     final timeInForce = find.byKey(const Key('time_in_force_widget'));
     final marketPrice = find.byKey(const Key('market_price_widget'));
     final estimatedTotal = find.byKey(const Key('estimated_total_widget'));
@@ -45,7 +45,7 @@ void main() {
         (WidgetTester tester) async {
       await _buildTrailingStopOrderWidget(
           tester, OrderType.limit, TransactionType.buy);
-      expect(trailType, findsOneWidget);
+      expect(trail, findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
       expect(marketPrice, findsOneWidget);
@@ -59,7 +59,7 @@ void main() {
         (WidgetTester tester) async {
       await _buildTrailingStopOrderWidget(
           tester, OrderType.limit, TransactionType.sell);
-      expect(trailType, findsOneWidget);
+      expect(trail, findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
       expect(marketPrice, findsOneWidget);
