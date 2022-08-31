@@ -3,6 +3,7 @@ import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/market_order_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../mocks/mocks.dart';
@@ -15,15 +16,22 @@ void main() {
         OrderType orderType, TransactionType transactionType) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: MarketOrderWidget(transactionType, symbolDetail)),
+        home: Scaffold(
+          body: BlocProvider(
+            create: (context) => OrderBloc(),
+            child: MarketOrderWidget(transactionType, symbolDetail),
+          ),
+        ),
         navigatorObservers: [mockObserver],
       ));
     }
 
+    var inputMarket = find.byKey(const Key('input_market'));
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
       await _buildMarketOrderWidget(
           tester, OrderType.market, TransactionType.buy);
+      expect(inputMarket, findsOneWidget);
       expect(find.text('Market price of ${symbolDetail.name}'), findsOneWidget);
       expect(find.text('Number of shares'), findsOneWidget);
       expect(find.text('Estimate Total'), findsOneWidget);
@@ -35,6 +43,7 @@ void main() {
         (WidgetTester tester) async {
       await _buildMarketOrderWidget(
           tester, OrderType.market, TransactionType.sell);
+      expect(inputMarket, findsOneWidget);
       expect(find.text('Market price of ${symbolDetail.name}'), findsOneWidget);
       expect(find.text('Number of shares'), findsOneWidget);
       expect(find.text('Estimate Total'), findsOneWidget);

@@ -81,6 +81,21 @@ extension TypeOfTransaction on TransactionType {
   }
 }
 
+enum MarketType { amount, shares }
+
+extension TypeOfMarket on MarketType {
+  String get name {
+    switch (this) {
+      case MarketType.amount:
+        return 'Amount';
+      case MarketType.shares:
+        return 'Shares';
+      default:
+        return '';
+    }
+  }
+}
+
 enum OrderPageStep {
   symbolDetails,
   orderType,
@@ -95,18 +110,26 @@ class OrderState extends Equatable {
   final TrailType trailType;
   final TimeInForce timeInForce;
   final TradingHours tradingHours;
+  final MarketType marketType;
 
-  const OrderState(
-      {this.transactionType = TransactionType.unknown,
-      this.orderType = OrderType.limit,
-      this.trailType = TrailType.percentage,
-      this.timeInForce = TimeInForce.day,
-      this.tradingHours = TradingHours.extended})
-      : super();
+  const OrderState({
+    this.transactionType = TransactionType.unknown,
+    this.orderType = OrderType.limit,
+    this.trailType = TrailType.percentage,
+    this.timeInForce = TimeInForce.day,
+    this.tradingHours = TradingHours.extended,
+    this.marketType = MarketType.amount,
+  }) : super();
 
   @override
-  List<Object?> get props =>
-      [transactionType, orderType, trailType, timeInForce, tradingHours];
+  List<Object?> get props => [
+        transactionType,
+        orderType,
+        trailType,
+        timeInForce,
+        tradingHours,
+        marketType
+      ];
 
   OrderState copyWith({
     TransactionType? transactionType,
@@ -114,6 +137,7 @@ class OrderState extends Equatable {
     TrailType? trailType,
     TimeInForce? timeInForce,
     TradingHours? tradingHours,
+    MarketType? marketType,
   }) {
     return OrderState(
       transactionType: transactionType ?? this.transactionType,
@@ -121,6 +145,7 @@ class OrderState extends Equatable {
       trailType: trailType ?? this.trailType,
       timeInForce: timeInForce ?? this.timeInForce,
       tradingHours: tradingHours ?? this.tradingHours,
+      marketType: marketType ?? this.marketType,
     );
   }
 }

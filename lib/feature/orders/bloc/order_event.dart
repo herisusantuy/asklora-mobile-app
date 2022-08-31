@@ -51,3 +51,12 @@ class TradingHoursChanged extends OrderEvent {
   @override
   List<Object?> get props => [tradingHours];
 }
+
+class MarketTypeChanged extends OrderEvent {
+  final MarketType marketType;
+
+  const MarketTypeChanged(this.marketType) : super();
+
+  @override
+  List<Object?> get props => [marketType];
+}
