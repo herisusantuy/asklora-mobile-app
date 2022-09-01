@@ -20,8 +20,9 @@ void main() {
           body: BlocProvider(
             create: (_) => OrderBloc(),
             child: OrderConfirmationWidget(
-              onConfirmedTap: (){},
-                orderState: orderState, symbolDetail: symbolDetail),
+                onConfirmedTap: () {},
+                orderState: orderState,
+                symbolDetail: symbolDetail),
           ),
         ),
         navigatorObservers: [mockObserver],
