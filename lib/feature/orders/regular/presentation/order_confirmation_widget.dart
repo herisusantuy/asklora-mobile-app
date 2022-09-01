@@ -53,7 +53,8 @@ class OrderConfirmationWidget extends StatelessWidget {
           OrderTypePriceWidget(
               prefixTitle: orderState.orderType.name, value: '110'),
           const SharesQuantityWidget(value: '4'),
-          const OrderFeesWidget(value: '1'),
+          if (orderState.transactionType == TransactionType.buy)
+            const OrderFeesWidget(value: '1'),
           const EstimatedTotalWidget(
             value: '440',
             fontType: FontType.bodyText,
@@ -70,7 +71,8 @@ class OrderConfirmationWidget extends StatelessWidget {
           OrderTypePriceWidget(
               prefixTitle: orderState.orderType.name, value: '110'),
           const SharesQuantityWidget(value: '4'),
-          const OrderFeesWidget(value: '1'),
+          if (orderState.transactionType == TransactionType.buy)
+            const OrderFeesWidget(value: '1'),
           const EstimatedTotalWidget(
             value: '440',
             fontType: FontType.bodyText,
@@ -84,7 +86,8 @@ class OrderConfirmationWidget extends StatelessWidget {
           const OrderTypePriceWidget(prefixTitle: 'Stop', value: '110'),
           const OrderTypePriceWidget(prefixTitle: 'Limit', value: '110'),
           const SharesQuantityWidget(value: '4'),
-          const OrderFeesWidget(value: '1'),
+          if (orderState.transactionType == TransactionType.buy)
+            const OrderFeesWidget(value: '1'),
           const EstimatedTotalWidget(
             value: '440',
             fontType: FontType.bodyText,
@@ -97,7 +100,8 @@ class OrderConfirmationWidget extends StatelessWidget {
         return [
           const TrailWidget(showOnlyInformation: true),
           const SharesQuantityWidget(value: '4'),
-          const OrderFeesWidget(value: '1'),
+          if (orderState.transactionType == TransactionType.buy)
+            const OrderFeesWidget(value: '1'),
           const EstimatedTotalWidget(
             value: '440',
             fontType: FontType.bodyText,
@@ -116,13 +120,11 @@ class OrderConfirmationWidget extends StatelessWidget {
             'Equivalent Quantity',
             text: '0.8',
           ),
-          const OrderFeesWidget(value: '1'),
+          if (orderState.transactionType == TransactionType.buy)
+            const OrderFeesWidget(value: '1'),
           const EstimatedTotalWidget(
             value: '440',
             fontType: FontType.bodyText,
-          ),
-          const TimeInForceWidget(
-            showOnlyInformation: true,
           ),
         ];
       default:

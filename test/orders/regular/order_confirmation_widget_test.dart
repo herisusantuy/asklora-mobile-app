@@ -29,6 +29,7 @@ void main() {
       ));
     }
 
+    final symbolTitle = find.byKey(const Key('symbol_title_widget'));
     final timeInForce = find.byKey(const Key('time_in_force_widget'));
     final trail = find.byKey(const Key('trail_widget'));
     final orderType = find.byKey(const Key('order_type_widget'));
@@ -46,6 +47,7 @@ void main() {
           const OrderState(
               orderType: OrderType.limit,
               transactionType: TransactionType.buy));
+      expect(symbolTitle, findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(orderType, findsOneWidget);
       expect(find.text('Limit Price'), findsOneWidget);
@@ -63,6 +65,7 @@ void main() {
           tester,
           const OrderState(
               orderType: OrderType.stop, transactionType: TransactionType.buy));
+      expect(symbolTitle, findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(orderType, findsOneWidget);
       expect(find.text('Stop Price'), findsOneWidget);
@@ -80,6 +83,7 @@ void main() {
           const OrderState(
               orderType: OrderType.stopLimit,
               transactionType: TransactionType.buy));
+      expect(symbolTitle, findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(orderType, findsOneWidget);
       expect(find.text('Stop Price'), findsOneWidget);
@@ -98,10 +102,29 @@ void main() {
           const OrderState(
               orderType: OrderType.trailingStop,
               transactionType: TransactionType.buy));
+      expect(symbolTitle, findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(orderType, findsOneWidget);
       expect(trail, findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
+      expect(fees, findsOneWidget);
+      expect(estimatedTotal, findsOneWidget);
+      expect(timeInForce, findsOneWidget);
+      expect(orderConfirmationButton, findsOneWidget);
+    });
+
+    testWidgets('First market order confirmation widget',
+        (WidgetTester tester) async {
+      await _buildOrderConfirmationWidget(
+          tester,
+          const OrderState(
+              orderType: OrderType.market,
+              transactionType: TransactionType.buy));
+      expect(symbolTitle, findsOneWidget);
+      expect(find.text('Direction'), findsOneWidget);
+      expect(orderType, findsOneWidget);
+      expect(find.text('Amount'), findsOneWidget);
+      expect(find.text('Equivalent Quantity'), findsOneWidget);
       expect(fees, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(timeInForce, findsOneWidget);

@@ -3,7 +3,8 @@ part of '../order_screen.dart';
 class SymbolTitleWidget extends StatelessWidget {
   final SymbolDetail symbolDetail;
 
-  const SymbolTitleWidget({required this.symbolDetail, Key? key})
+  const SymbolTitleWidget(
+      {required this.symbolDetail, Key? key = const Key('symbol_title_widget')})
       : super(key: key);
 
   @override
