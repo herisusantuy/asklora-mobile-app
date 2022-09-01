@@ -9,13 +9,16 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('Trail Type Widget Test', () {
-    Future<void> _buildTrailTypeWidget(WidgetTester tester) async {
+    Future<void> _buildTrailTypeWidget(WidgetTester tester,
+        {bool showOnlyInformation = false}) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
           body: BlocProvider(
             create: (_) => OrderBloc(),
-            child: const TrailWidget(),
+            child: TrailWidget(
+              showOnlyInformation: showOnlyInformation,
+            ),
           ),
         ),
         navigatorObservers: [mockObserver],
@@ -85,6 +88,14 @@ void main() {
           (tester.widget(trailTypeAmountChoice) as CustomBottomSheetCardWidget)
               .active,
           isFalse);
+    });
+
+    testWidgets(
+        'render only the information with default state trailType=percentage',
+        (WidgetTester tester) async {
+      await _buildTrailTypeWidget(tester, showOnlyInformation: true);
+      expect(trailTypeButton, findsNothing);
+      expect(find.text('Trail Percentage'), findsOneWidget);
     });
   });
 }

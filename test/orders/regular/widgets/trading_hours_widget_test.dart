@@ -9,13 +9,16 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('Trading Hours Widget Test', () {
-    Future<void> _buildTradingHoursWidget(WidgetTester tester) async {
+    Future<void> _buildTradingHoursWidget(WidgetTester tester,
+        {bool showOnlyInformation = false}) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
           body: BlocProvider(
             create: (_) => OrderBloc(),
-            child: const TradingHoursWidget(),
+            child: TradingHoursWidget(
+              showOnlyInformation: showOnlyInformation,
+            ),
           ),
         ),
         navigatorObservers: [mockObserver],
@@ -87,6 +90,14 @@ void main() {
                   as CustomBottomSheetCardWidget)
               .active,
           isFalse);
+    });
+
+    testWidgets(
+        'render only the information with default state tradingHours=extended',
+        (WidgetTester tester) async {
+      await _buildTradingHoursWidget(tester, showOnlyInformation: true);
+      expect(tradingHoursButton, findsNothing);
+      expect(find.text('Extended'), findsOneWidget);
     });
   });
 }

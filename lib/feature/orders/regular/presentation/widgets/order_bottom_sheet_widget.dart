@@ -30,12 +30,14 @@ class OrderBottomSheetWidget extends StatelessWidget {
                   Align(
                       alignment: Alignment.centerLeft,
                       child: InkWell(
+                          key: const Key('order_bottom_sheet_close_button'),
                           onTap: () => Navigator.pop(context),
                           child: const Icon(
                             Icons.close,
                             size: 32,
                           ))),
                   Align(
+                    key: const Key('order_bottom_sheet_title'),
                     alignment: Alignment.center,
                     child: CustomText(
                       title,
