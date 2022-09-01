@@ -21,7 +21,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   }
 
   void _onOrderTypeChanged(OrderTypeChanged event, Emitter<OrderState> emit) {
-    emit(state.copyWith(orderType: event.orderType));
+    OrderState initialOrderState = const OrderState();
+    emit(state.copyWith(
+        orderType: event.orderType,
+        trailType: initialOrderState.trailType,
+        timeInForce: initialOrderState.timeInForce,
+        tradingHours: initialOrderState.tradingHours));
   }
 
   void _onTrailTypeChanged(TrailTypeChanged event, Emitter<OrderState> emit) {

@@ -1,16 +1,16 @@
 part of '../order_screen.dart';
 
-class OrderTypePriceWidget extends StatelessWidget {
-  final String prefixTitle;
+class OrderFeesWidget extends StatelessWidget {
   final String value;
 
-  const OrderTypePriceWidget({this.prefixTitle = '', this.value = '', Key? key})
+  const OrderFeesWidget(
+      {this.value = '', Key key = const Key('order_fees_widget')})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomExpandedRow(
-      '$prefixTitle Price',
+      'Fees',
       text: '\$$value',
     );
   }

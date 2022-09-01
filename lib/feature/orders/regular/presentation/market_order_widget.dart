@@ -23,7 +23,7 @@ class MarketOrderWidget extends StatelessWidget {
         _spaceHeight,
         _inputMarket,
         _spaceHeight,
-        MarketPriceWidget(symbolDetail),
+        MarketPriceWidget(symbolDetail: symbolDetail),
         const CustomExpandedRow('Number of shares',
             text: r'0.8', fontType: FontType.smallText),
         const CustomExpandedRow('Estimate Total',
@@ -31,11 +31,11 @@ class MarketOrderWidget extends StatelessWidget {
         _spaceHeight,
         _spaceHeight,
         if (transactionType == TransactionType.buy) ...[
-          const AvailableBuyingPowerWidget(r'$1000.00'),
-          const NumberOfBuyableSharesWidget('10'),
+          const AvailableBuyingPowerWidget(value: r'$1000.00'),
+          const NumberOfBuyableSharesWidget(value: '10'),
         ] else if (transactionType == TransactionType.sell) ...[
-          const AvailableAmountToSellWidget(r'$1000.00'),
-          const NumberOfSellableSharesWidget('10')
+          const AvailableAmountToSellWidget(value: r'$1000.00'),
+          const NumberOfSellableSharesWidget(value: '10')
         ],
       ],
     );
