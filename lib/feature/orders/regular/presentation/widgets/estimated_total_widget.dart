@@ -4,8 +4,9 @@ class EstimatedTotalWidget extends StatelessWidget {
   final FontType fontType;
   final String value;
 
-  const EstimatedTotalWidget(this.value,
-      {this.fontType = FontType.smallText,
+  const EstimatedTotalWidget(
+      {this.value = '',
+      this.fontType = FontType.smallText,
       Key key = const Key('estimated_total_widget')})
       : super(key: key);
 

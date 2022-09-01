@@ -20,6 +20,7 @@ void main() {
           body: BlocProvider(
             create: (_) => OrderBloc(),
             child: OrderConfirmationWidget(
+              onConfirmedTap: (){},
                 orderState: orderState, symbolDetail: symbolDetail),
           ),
         ),

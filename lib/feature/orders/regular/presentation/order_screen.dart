@@ -69,13 +69,17 @@ class OrderScreen extends StatelessWidget {
             builder: (_) => BlocProvider.value(
                 value: BlocProvider.of<OrderBloc>(context),
                 child: OrderConfirmationWidget(
-                    orderState: orderState, symbolDetail: symbolDetail))),
+                    onConfirmedTap: () => context
+                        .read<NavigationBloc<OrderPageStep>>()
+                        .add(const PageChanged(OrderPageStep.orderSubmitted)),
+                    orderState: orderState,
+                    symbolDetail: symbolDetail))),
       ),
       child: Column(
         children: [
           _dropDownOrderType,
           _spaceHeight,
-          SymbolTitleWidget(symbolDetail),
+          SymbolTitleWidget(symbolDetail: symbolDetail),
           _spaceHeight,
           contents,
         ],

@@ -4,7 +4,7 @@ class OrderTypePriceWidget extends StatelessWidget {
   final String prefixTitle;
   final String value;
 
-  const OrderTypePriceWidget(this.prefixTitle, this.value, {Key? key})
+  const OrderTypePriceWidget({this.prefixTitle = '', this.value = '', Key? key})
       : super(key: key);
 
   @override

@@ -16,20 +16,20 @@ class StopLimitOrderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const OrderTypePriceWidget('Stop', '110'),
-        const OrderTypePriceWidget('Limit', '110'),
-        const SharesQuantityWidget('4'),
+        const OrderTypePriceWidget(prefixTitle: 'Stop', value: '110'),
+        const OrderTypePriceWidget(prefixTitle: 'Limit', value: '110'),
+        const SharesQuantityWidget(value: '4'),
         const TimeInForceWidget(),
         const SizedBox(
           height: 40,
         ),
-        MarketPriceWidget(symbolDetail),
-        const EstimatedTotalWidget(r'$320'),
+        MarketPriceWidget(symbolDetail: symbolDetail),
+        const EstimatedTotalWidget(value: r'$320'),
         if (transactionType == TransactionType.buy) ...[
-          const AvailableBuyingPowerWidget(r'$10,000'),
+          const AvailableBuyingPowerWidget(value: r'$10,000'),
         ] else if (transactionType == TransactionType.sell) ...[
-          const AvailableAmountToSellWidget(r'$10,000'),
-          const NumberOfSellableSharesWidget('10'),
+          const AvailableAmountToSellWidget(value: r'$10,000'),
+          const NumberOfSellableSharesWidget(value: '10'),
         ],
       ],
     );

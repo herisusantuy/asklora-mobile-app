@@ -3,8 +3,8 @@ part of '../order_screen.dart';
 class OrderTypeWidget extends StatelessWidget {
   final OrderState orderState;
 
-  const OrderTypeWidget(this.orderState,
-      {Key key = const Key('order_type_widget')})
+  const OrderTypeWidget(
+      {required this.orderState, Key key = const Key('order_type_widget')})
       : super(key: key);
 
   @override

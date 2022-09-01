@@ -3,8 +3,8 @@ part of '../order_screen.dart';
 class SharesQuantityWidget extends StatelessWidget {
   final String value;
 
-  const SharesQuantityWidget(this.value,
-      {Key key = const Key('shares_quantity_widget')})
+  const SharesQuantityWidget(
+      {this.value = '', Key key = const Key('shares_quantity_widget')})
       : super(key: key);
 
   @override
