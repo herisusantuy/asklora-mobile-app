@@ -127,7 +127,6 @@ void main() {
       expect(find.text('Equivalent Quantity'), findsOneWidget);
       expect(fees, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
-      expect(timeInForce, findsOneWidget);
       expect(orderConfirmationButton, findsOneWidget);
     });
   });
