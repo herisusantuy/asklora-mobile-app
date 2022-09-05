@@ -9,13 +9,16 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('Time in Force Widget Test', () {
-    Future<void> _buildTimeInForceWidget(WidgetTester tester) async {
+    Future<void> _buildTimeInForceWidget(WidgetTester tester,
+        {bool showOnlyInformation = false}) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
           body: BlocProvider(
             create: (_) => OrderBloc(),
-            child: const TimeInForceWidget(),
+            child: TimeInForceWidget(
+              showOnlyInformation: showOnlyInformation,
+            ),
           ),
         ),
         navigatorObservers: [mockObserver],
@@ -86,6 +89,14 @@ void main() {
           (tester.widget(timeInForceDayChoice) as CustomBottomSheetCardWidget)
               .active,
           isFalse);
+    });
+
+    testWidgets(
+        'render only the information with default state timeInForce=Day',
+        (WidgetTester tester) async {
+      await _buildTimeInForceWidget(tester, showOnlyInformation: true);
+      expect(timeInForceButton, findsNothing);
+      expect(find.text('Day'), findsOneWidget);
     });
   });
 }

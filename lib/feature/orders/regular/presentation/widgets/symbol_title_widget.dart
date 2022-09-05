@@ -10,7 +10,6 @@ class SymbolTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      key: const Key('order_title'),
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomText(

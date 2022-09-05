@@ -114,7 +114,7 @@ class OrderState extends Equatable {
 
   const OrderState({
     this.transactionType = TransactionType.unknown,
-    this.orderType = OrderType.limit,
+    this.orderType = OrderType.market,
     this.trailType = TrailType.percentage,
     this.timeInForce = TimeInForce.day,
     this.tradingHours = TradingHours.extended,

@@ -61,6 +61,7 @@ class OrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomNavigationWidget<OrderPageStep>(
       navigationButton: CustomTextButton(
+        key: const Key('order_confirmation_button'),
         borderRadius: 5,
         padding: const EdgeInsets.all(10),
         buttonText: orderState.transactionType.name,

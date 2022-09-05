@@ -25,8 +25,11 @@ void main() {
     testWidgets('First render order screen', (WidgetTester tester) async {
       await _buildDepositWelcomeScreen(tester);
       expect(find.byKey(const Key('dropdown_order_type')), findsOneWidget);
-      expect(find.byKey(const Key('order_title')), findsOneWidget);
       expect(find.byKey(const Key('order_contents')), findsOneWidget);
+      expect(find.byKey(const Key('symbol_title_widget')), findsOneWidget);
+      expect(find.byKey(const Key('symbol_title_widget')), findsOneWidget);
+      expect(
+          find.byKey(const Key('order_confirmation_button')), findsOneWidget);
     });
   });
 }
