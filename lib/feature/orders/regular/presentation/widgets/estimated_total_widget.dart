@@ -14,7 +14,7 @@ class EstimatedTotalWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomExpandedRow(
       'Estimated Total',
-      text: value,
+      text: '\$$value',
       fontType: fontType,
     );
   }

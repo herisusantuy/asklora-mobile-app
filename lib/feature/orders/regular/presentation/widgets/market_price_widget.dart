@@ -10,6 +10,7 @@ class MarketPriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomExpandedRow('Market price of ${symbolDetail.name}',
-        text: symbolDetail.marketPrice, fontType: FontType.smallText);
+        text: symbolDetail.marketPrice.toString(),
+        fontType: FontType.smallText);
   }
 }

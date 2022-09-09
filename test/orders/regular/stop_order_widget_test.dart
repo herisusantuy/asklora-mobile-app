@@ -11,7 +11,7 @@ import '../../mocks/mocks.dart';
 void main() {
   group('Stop Order Widget Test', () {
     final SymbolDetail symbolDetail =
-        SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
+        SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
     Future<void> _buildStopOrderWidget(WidgetTester tester, OrderType orderType,
         TransactionType transactionType) async {
       final mockObserver = MockNavigatorObserver();

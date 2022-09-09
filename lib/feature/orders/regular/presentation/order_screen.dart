@@ -49,6 +49,8 @@ part 'widgets/order_fees_widget.dart';
 
 part 'widgets/order_type_widget.dart';
 
+part 'widgets/order_confirmation_button.dart';
+
 class OrderScreen extends StatelessWidget {
   final OrderState orderState;
   final SymbolDetail symbolDetail;
@@ -60,35 +62,19 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget<OrderPageStep>(
-      navigationButton: CustomTextButton(
-        key: const Key('order_confirmation_button'),
-        borderRadius: 5,
-        padding: const EdgeInsets.all(10),
-        buttonText: orderState.transactionType.name,
-        onClick: () => showModalBottomSheet(
-            context: context,
-            builder: (_) => BlocProvider.value(
-                value: BlocProvider.of<OrderBloc>(context),
-                child: OrderConfirmationWidget(
-                    onConfirmedTap: () => context
-                        .read<NavigationBloc<OrderPageStep>>()
-                        .add(const PageChanged(OrderPageStep.orderSubmitted)),
-                    orderState: orderState,
-                    symbolDetail: symbolDetail))),
-      ),
       child: Column(
         children: [
           _dropDownOrderType,
           _spaceHeight,
           SymbolTitleWidget(symbolDetail: symbolDetail),
           _spaceHeight,
-          contents,
+          _contents,
         ],
       ),
     );
   }
 
-  Widget get contents {
+  Widget get _contents {
     return Expanded(
       child: BlocBuilder<OrderBloc, OrderState>(
         buildWhen: (previous, current) =>
@@ -102,7 +88,8 @@ class OrderScreen extends StatelessWidget {
                   transactionType: state.transactionType,
                   symbolDetail: symbolDetail);
             case OrderType.market:
-              return MarketOrderWidget(state.transactionType, symbolDetail);
+              return MarketOrderWidget(
+                  orderState: orderState, symbolDetail: symbolDetail);
             case OrderType.stop:
               return StopOrderWidget(
                   orderType: state.orderType,

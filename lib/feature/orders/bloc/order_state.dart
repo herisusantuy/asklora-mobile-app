@@ -104,6 +104,10 @@ enum OrderPageStep {
   orderDetails,
 }
 
+enum SymbolType { ric, symbol }
+
+enum OrderClass { bracket, simple, oco, oto }
+
 class OrderState extends Equatable {
   final TransactionType transactionType;
   final OrderType orderType;

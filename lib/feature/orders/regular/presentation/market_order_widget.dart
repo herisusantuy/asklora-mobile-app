@@ -1,44 +1,109 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
+import '../../bloc/market/market_bloc.dart';
 import '../../bloc/order_bloc.dart';
+import '../../domain/order_request.dart';
 import '../../domain/symbol_detail.dart';
 import 'order_screen.dart';
 import 'widgets/shares_stock_widget.dart';
 
 class MarketOrderWidget extends StatelessWidget {
   final SymbolDetail symbolDetail;
-  final TransactionType transactionType;
+  final OrderState orderState;
 
-  const MarketOrderWidget(this.transactionType, this.symbolDetail, {Key? key})
+  const MarketOrderWidget(
+      {required this.orderState, required this.symbolDetail, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _amountAndSharesStockButton,
-        _spaceHeight,
-        _inputMarket,
-        _spaceHeight,
-        MarketPriceWidget(symbolDetail: symbolDetail),
-        const CustomExpandedRow('Number of shares',
-            text: r'0.8', fontType: FontType.smallText),
-        const CustomExpandedRow('Estimate Total',
-            text: r'$80', fontType: FontType.smallText),
-        _spaceHeight,
-        _spaceHeight,
-        if (transactionType == TransactionType.buy) ...[
-          const AvailableBuyingPowerWidget(value: r'$1000.00'),
-          const NumberOfBuyableSharesWidget(value: '10'),
-        ] else if (transactionType == TransactionType.sell) ...[
-          const AvailableAmountToSellWidget(value: r'$1000.00'),
-          const NumberOfSellableSharesWidget(value: '10')
-        ],
+        Expanded(
+          child: Column(
+            children: [
+              _amountAndSharesStockButton,
+              _spaceHeight,
+              _inputMarket,
+              _spaceHeight,
+              MarketPriceWidget(symbolDetail: symbolDetail),
+              BlocBuilder<MarketBloc, MarketState>(
+                  buildWhen: (previous, current) =>
+                      previous.sharesAmount != current.sharesAmount,
+                  builder: (context, state) => CustomExpandedRow(
+                      'Number of shares',
+                      text: state.sharesAmount.toString(),
+                      fontType: FontType.smallText)),
+              BlocBuilder<MarketBloc, MarketState>(
+                  buildWhen: (previous, current) =>
+                      previous.estimateTotal != current.estimateTotal,
+                  builder: (context, state) => EstimatedTotalWidget(
+                      value: state.estimateTotal.toString(),
+                      fontType: FontType.smallText)),
+              _spaceHeight,
+              _spaceHeight,
+              if (orderState.transactionType == TransactionType.buy) ...[
+                BlocBuilder<MarketBloc, MarketState>(
+                    buildWhen: (previous, current) =>
+                        previous.availableBuyingPower !=
+                        current.availableBuyingPower,
+                    builder: (context, state) => AvailableBuyingPowerWidget(
+                        value: state.availableBuyingPower.toString())),
+                BlocBuilder<MarketBloc, MarketState>(
+                    buildWhen: (previous, current) =>
+                        previous.numberOfBuyableShares !=
+                        current.numberOfBuyableShares,
+                    builder: (context, state) => NumberOfBuyableSharesWidget(
+                        value: state.numberOfBuyableShares.toString())),
+              ] else if (orderState.transactionType ==
+                  TransactionType.sell) ...[
+                const AvailableAmountToSellWidget(value: r'$1000.00'),
+                const NumberOfSellableSharesWidget(value: '10')
+              ],
+            ],
+          ),
+        ),
+        BlocBuilder<MarketBloc, MarketState>(
+            buildWhen: (previous, current) =>
+                previous.errorText != current.errorText ||
+                previous.response.state != current.response.state,
+            builder: (context, state) => OrderConfirmationButton<MarketBloc>(
+                errorText: state.errorText,
+                isLoading: state.response.state == ResponseState.loading,
+                disable: state.errorText.isNotEmpty ? true : false,
+                orderState: orderState,
+                symbolDetail: symbolDetail,
+                onConfirmedTap: () => context.read<MarketBloc>().add(
+                      OrderSubmitted(_orderRequest(context)),
+                    )))
       ],
     );
+  }
+
+  OrderRequest _orderRequest(BuildContext context) {
+    switch (orderState.orderType) {
+      case OrderType.market:
+        MarketState marketState = context.read<MarketBloc>().state;
+        if (orderState.marketType == MarketType.amount) {
+          return OrderRequest.marketAmount(
+              symbolType: symbolDetail.symbolType.name,
+              symbol: symbolDetail.name,
+              side: orderState.transactionType.name,
+              amount: marketState.amount.toString());
+        } else {
+          return OrderRequest.marketShares(
+              symbolType: symbolDetail.symbolType.name,
+              symbol: symbolDetail.name,
+              side: orderState.transactionType.name,
+              qty: marketState.sharesAmount.toString());
+        }
+      default:
+        return OrderRequest();
+    }
   }
 
   Widget get _amountAndSharesStockButton {
@@ -58,11 +123,11 @@ class MarketOrderWidget extends StatelessWidget {
                       .add(const MarketTypeChanged(MarketType.amount)),
                   style: ElevatedButton.styleFrom(
                       primary: state.marketType == MarketType.amount
-                          ? Colors.white
-                          : Colors.blue,
-                      onPrimary: state.marketType == MarketType.amount
                           ? Colors.blue
                           : Colors.white,
+                      onPrimary: state.marketType == MarketType.amount
+                          ? Colors.white
+                          : Colors.blue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
@@ -84,11 +149,11 @@ class MarketOrderWidget extends StatelessWidget {
                       .add(const MarketTypeChanged(MarketType.shares)),
                   style: ElevatedButton.styleFrom(
                       primary: state.marketType == MarketType.shares
-                          ? Colors.white
-                          : Colors.blue,
-                      onPrimary: state.marketType == MarketType.shares
                           ? Colors.blue
                           : Colors.white,
+                      onPrimary: state.marketType == MarketType.shares
+                          ? Colors.white
+                          : Colors.blue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),

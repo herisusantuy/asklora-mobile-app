@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../bloc/market/market_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
+import '../../repository/orders_repository.dart';
 import 'order_details_screen.dart';
 import 'order_screen.dart';
 import 'order_submitted_screen.dart';
@@ -13,10 +15,12 @@ import 'regular_order_symbol_details_screen.dart';
 class RegularOrderHomeScreen extends StatelessWidget {
   final SymbolDetail symbolDetail;
   final OrderPageStep initialOrderPageStep;
+  final double availableBuyingPower;
   static const String route = '/order_regular';
 
   const RegularOrderHomeScreen(
       {required this.symbolDetail,
+      required this.availableBuyingPower,
       this.initialOrderPageStep = OrderPageStep.symbolDetails,
       Key? key})
       : super(key: key);
@@ -28,6 +32,11 @@ class RegularOrderHomeScreen extends StatelessWidget {
         BlocProvider(
             create: (_) => NavigationBloc<OrderPageStep>(initialOrderPageStep)),
         BlocProvider(create: (_) => OrderBloc()),
+        BlocProvider(
+            create: (_) => MarketBloc(
+                marketPrice: symbolDetail.marketPrice,
+                availableBuyingPower: availableBuyingPower,
+                ordersRepository: OrdersRepository())),
       ],
       child: Scaffold(
           appBar: AppBar(

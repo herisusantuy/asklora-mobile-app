@@ -10,7 +10,7 @@ import '../../mocks/mocks.dart';
 void main() {
   group('*Order Submitted Screen Test*', () {
     final SymbolDetail symbolDetail =
-        SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
+        SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
     Future<void> _buildOrderSubmittedScreen(WidgetTester tester,
         {required TransactionType transactionType,
         required OrderType orderType,

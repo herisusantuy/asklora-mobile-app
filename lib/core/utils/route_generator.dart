@@ -5,6 +5,7 @@ import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/deposits/presentation/deposit_screen.dart';
@@ -44,8 +45,9 @@ class RouterGenerator {
       case RegularOrderHomeScreen.route:
         return MaterialPageRoute(
             builder: (_) => RegularOrderHomeScreen(
-                symbolDetail:
-                    SymbolDetail('AAPL.O', '100', AppIcons.appleLogo)));
+                availableBuyingPower: 1000,
+                symbolDetail: SymbolDetail(
+                    'AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol)));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
