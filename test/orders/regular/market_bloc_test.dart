@@ -47,6 +47,7 @@ void main() async {
         act: (bloc) async => bloc.add(const AmountChanged(1000)),
         expect: () => {
               MarketState(
+                  amount: 1000,
                   estimateTotal: 1000,
                   sharesAmount: calculateAmount(marketPrice, 1000),
                   availableBuyingPower: 1000,
@@ -62,6 +63,7 @@ void main() async {
         act: (bloc) async => bloc.add(const SharesAmountIncremented()),
         expect: () => {
               MarketState(
+                  amount: 10,
                   estimateTotal: calculateEstimateTotal(marketPrice, 0.1),
                   sharesAmount: 0.1,
                   availableBuyingPower: 1000,
@@ -80,6 +82,7 @@ void main() async {
         },
         expect: () => {
               MarketState(
+                  amount: 10,
                   estimateTotal: calculateEstimateTotal(marketPrice, 0.1),
                   sharesAmount: 0.1,
                   availableBuyingPower: 1000,
@@ -87,6 +90,7 @@ void main() async {
                   availableAmountToSell: 2000,
                   numberOfSellableShares: 20),
               const MarketState(
+                  amount: 0,
                   estimateTotal: 0,
                   sharesAmount: 0,
                   availableBuyingPower: 1000,
