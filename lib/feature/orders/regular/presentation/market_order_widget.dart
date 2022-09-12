@@ -95,31 +95,26 @@ class MarketOrderWidget extends StatelessWidget {
                 orderState: orderState,
                 symbolDetail: symbolDetail,
                 onConfirmedTap: () => context.read<MarketBloc>().add(
-                      OrderSubmitted(_orderRequest(context)),
+                      OrderSubmitted(_orderRequest(state)),
                     )))
       ],
     );
   }
 
-  OrderRequest _orderRequest(BuildContext context) {
-    switch (orderState.orderType) {
-      case OrderType.market:
-        MarketState marketState = context.read<MarketBloc>().state;
-        if (orderState.marketType == MarketType.amount) {
-          return OrderRequest.marketAmount(
-              symbolType: symbolDetail.symbolType.name,
-              symbol: symbolDetail.name,
-              side: orderState.transactionType.name,
-              amount: marketState.amount.toString());
-        } else {
-          return OrderRequest.marketShares(
-              symbolType: symbolDetail.symbolType.name,
-              symbol: symbolDetail.name,
-              side: orderState.transactionType.name,
-              qty: marketState.sharesAmount.toString());
-        }
-      default:
-        return OrderRequest();
+  OrderRequest _orderRequest(MarketState marketState) {
+    switch (orderState.marketType) {
+      case MarketType.amount:
+        return OrderRequest.marketAmount(
+            symbolType: symbolDetail.symbolType.name,
+            symbol: symbolDetail.name,
+            side: orderState.transactionType.name,
+            amount: marketState.amount.toString());
+      case MarketType.shares:
+        return OrderRequest.marketShares(
+            symbolType: symbolDetail.symbolType.name,
+            symbol: symbolDetail.name,
+            side: orderState.transactionType.name,
+            qty: marketState.sharesAmount.toString());
     }
   }
 
