@@ -28,7 +28,8 @@ void main() {
                 create: (context) => MarketBloc(
                     marketPrice: 100,
                     availableBuyingPower: 1000,
-                    ordersRepository: OrdersRepository()),
+                    ordersRepository: OrdersRepository(),
+                    numberOfSellableShares: 20),
               ),
             ],
             child: MarketOrderWidget(

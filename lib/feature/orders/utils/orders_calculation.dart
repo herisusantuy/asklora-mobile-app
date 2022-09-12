@@ -5,12 +5,17 @@ double calculateEstimateTotal(double marketPrice, double sharesAmount) {
 }
 
 double calculateAmount(double marketPrice, double amount) {
-  return (marketPrice / amount).toPrecision(1);
+  return (amount / marketPrice).toPrecision(1);
 }
 
 double calculateNumberOfBuyableShares(
     double marketPrice, double availableBuyingPower) {
   return (availableBuyingPower / marketPrice).toPrecision(1);
+}
+
+double calculateAvailableAmountToSell(
+    double marketPrice, double numberOfSellableShares) {
+  return (numberOfSellableShares * marketPrice).toPrecision(1);
 }
 
 double incrementSharesAmount(double sharesAmount) {

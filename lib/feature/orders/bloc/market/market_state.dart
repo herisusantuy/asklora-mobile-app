@@ -6,17 +6,23 @@ class MarketState extends Equatable {
   final double sharesAmount;
   final double estimateTotal;
   final double availableBuyingPower;
+  final double availableAmountToSell;
   final double numberOfBuyableShares;
-  final String errorText;
+  final double numberOfSellableShares;
+  final String buyErrorText;
+  final String sellErrorText;
 
   const MarketState(
       {this.response = const BaseResponse(),
       this.amount = 0,
       this.sharesAmount = 0,
       this.estimateTotal = 0,
-      this.availableBuyingPower = 0,
-      this.numberOfBuyableShares = 0,
-      this.errorText = ''})
+      required this.availableBuyingPower,
+      required this.availableAmountToSell,
+      required this.numberOfBuyableShares,
+      required this.numberOfSellableShares,
+      this.buyErrorText = '',
+      this.sellErrorText = ''})
       : super();
 
   @override
@@ -26,7 +32,9 @@ class MarketState extends Equatable {
         sharesAmount,
         estimateTotal,
         availableBuyingPower,
-        numberOfBuyableShares
+        numberOfBuyableShares,
+        buyErrorText,
+        sellErrorText
       ];
 
   MarketState copyWith(
@@ -36,16 +44,30 @@ class MarketState extends Equatable {
       double? estimateTotal,
       double? availableBuyingPower,
       double? numberOfBuyableShares,
-      String? errorText}) {
+      double? availableAmountToSell,
+      double? numberOfSellableShares,
+      String? buyErrorText,
+      String? sellErrorText}) {
     return MarketState(
       response: response ?? this.response,
       amount: amount ?? this.amount,
       sharesAmount: sharesAmount ?? this.sharesAmount,
       estimateTotal: estimateTotal ?? this.estimateTotal,
+      availableAmountToSell:
+          availableAmountToSell ?? this.availableAmountToSell,
+      numberOfSellableShares:
+          numberOfSellableShares ?? this.numberOfSellableShares,
       availableBuyingPower: availableBuyingPower ?? this.availableBuyingPower,
       numberOfBuyableShares:
           numberOfBuyableShares ?? this.numberOfBuyableShares,
-      errorText: errorText ?? this.errorText,
+      buyErrorText:
+          (estimateTotal ?? this.estimateTotal) > this.availableBuyingPower
+              ? 'Amount exceed the amount of available buying power'
+              : '',
+      sellErrorText:
+          (estimateTotal ?? this.estimateTotal) > this.availableAmountToSell
+              ? 'Amount exceed the available amount to sell'
+              : '',
     );
   }
 }

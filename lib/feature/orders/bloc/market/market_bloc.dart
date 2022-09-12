@@ -14,30 +14,47 @@ class MarketBloc extends Bloc<MarketEvent, MarketState> {
   MarketBloc(
       {required double marketPrice,
       required double availableBuyingPower,
+      required double numberOfSellableShares,
       required OrdersRepository ordersRepository})
       : _marketPrice = marketPrice,
+        _availableBuyingPower = availableBuyingPower,
+        _numberOfSellableShares = numberOfSellableShares,
         _ordersRepository = ordersRepository,
         super(MarketState(
             availableBuyingPower: availableBuyingPower,
             numberOfBuyableShares: calculateNumberOfBuyableShares(
-                marketPrice, availableBuyingPower))) {
+                marketPrice, availableBuyingPower),
+            numberOfSellableShares: numberOfSellableShares,
+            availableAmountToSell: calculateAvailableAmountToSell(
+                marketPrice, numberOfSellableShares))) {
     on<AmountChanged>(_onAmountChanged);
     on<SharesAmountChanged>(_onSharesAmountChanged);
     on<SharesAmountIncremented>(_onSharesAmountIncremented);
     on<SharesAmountDecremented>(_onSharesAmountDecremented);
     on<OrderSubmitted>(_onOrderSubmitted);
+    on<ResetMarketValue>(_onResetMarketValue);
   }
 
   final OrdersRepository _ordersRepository;
 
   final double _marketPrice;
+  final double _availableBuyingPower;
+  final double _numberOfSellableShares;
 
   void _onAmountChanged(AmountChanged event, Emitter<MarketState> emit) {
-    if (!event.amount.isNegative) {
-      emit(state.copyWith(
-          estimateTotal: event.amount,
-          sharesAmount: calculateAmount(_marketPrice, event.amount)));
-    }
+    double sharesAmount = calculateAmount(_marketPrice, event.amount);
+    emit(state.copyWith(
+        estimateTotal: event.amount, sharesAmount: sharesAmount));
+  }
+
+  void _onResetMarketValue(ResetMarketValue event, Emitter<MarketState> emit) {
+    emit(MarketState(
+        availableBuyingPower: _availableBuyingPower,
+        numberOfBuyableShares:
+            calculateNumberOfBuyableShares(_marketPrice, _availableBuyingPower),
+        numberOfSellableShares: _numberOfSellableShares,
+        availableAmountToSell: calculateAvailableAmountToSell(
+            _marketPrice, _numberOfSellableShares)));
   }
 
   void _onSharesAmountChanged(
@@ -55,10 +72,7 @@ class MarketBloc extends Bloc<MarketEvent, MarketState> {
     double sharesAmount = incrementSharesAmount(state.sharesAmount);
     emit(state.copyWith(
         estimateTotal: calculateEstimateTotal(_marketPrice, sharesAmount),
-        sharesAmount: sharesAmount,
-        errorText: sharesAmount > state.numberOfBuyableShares
-            ? 'Number of shares exceed the number of shares you can buy'
-            : ''));
+        sharesAmount: sharesAmount));
   }
 
   void _onSharesAmountDecremented(
@@ -67,10 +81,7 @@ class MarketBloc extends Bloc<MarketEvent, MarketState> {
       double sharesAmount = decrementSharesAmount(state.sharesAmount);
       emit(state.copyWith(
           estimateTotal: calculateEstimateTotal(_marketPrice, sharesAmount),
-          sharesAmount: sharesAmount,
-          errorText: sharesAmount > state.numberOfBuyableShares
-              ? 'Number of shares exceed the number of shares you can buy'
-              : ''));
+          sharesAmount: sharesAmount));
     }
   }
 

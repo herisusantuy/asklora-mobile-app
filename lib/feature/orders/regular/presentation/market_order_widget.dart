@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/custom_text_input.dart';
 import '../../bloc/market/market_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../domain/order_request.dart';
@@ -61,20 +63,35 @@ class MarketOrderWidget extends StatelessWidget {
                         value: state.numberOfBuyableShares.toString())),
               ] else if (orderState.transactionType ==
                   TransactionType.sell) ...[
-                const AvailableAmountToSellWidget(value: r'$1000.00'),
-                const NumberOfSellableSharesWidget(value: '10')
+                BlocBuilder<MarketBloc, MarketState>(
+                    buildWhen: (previous, current) =>
+                        previous.availableAmountToSell !=
+                        current.availableAmountToSell,
+                    builder: (context, state) => AvailableAmountToSellWidget(
+                        value: state.availableAmountToSell.toString())),
+                BlocBuilder<MarketBloc, MarketState>(
+                    buildWhen: (previous, current) =>
+                        previous.numberOfSellableShares !=
+                        current.numberOfSellableShares,
+                    builder: (context, state) => NumberOfSellableSharesWidget(
+                        value: state.numberOfSellableShares.toString()))
               ],
             ],
           ),
         ),
         BlocBuilder<MarketBloc, MarketState>(
             buildWhen: (previous, current) =>
-                previous.errorText != current.errorText ||
+                orderState.transactionType == TransactionType.buy &&
+                    previous.buyErrorText != current.buyErrorText ||
+                orderState.transactionType == TransactionType.sell &&
+                    previous.sellErrorText != current.sellErrorText ||
                 previous.response.state != current.response.state,
             builder: (context, state) => OrderConfirmationButton<MarketBloc>(
-                errorText: state.errorText,
+                errorText: orderState.transactionType == TransactionType.buy
+                    ? state.buyErrorText
+                    : state.sellErrorText,
                 isLoading: state.response.state == ResponseState.loading,
-                disable: state.errorText.isNotEmpty ? true : false,
+                disable: state.buyErrorText.isNotEmpty ? true : false,
                 orderState: orderState,
                 symbolDetail: symbolDetail,
                 onConfirmedTap: () => context.read<MarketBloc>().add(
@@ -118,9 +135,12 @@ class MarketOrderWidget extends StatelessWidget {
                   previous.marketType != current.marketType,
               builder: (context, state) {
                 return ElevatedButton(
-                  onPressed: () => context
-                      .read<OrderBloc>()
-                      .add(const MarketTypeChanged(MarketType.amount)),
+                  onPressed: () {
+                    context
+                        .read<OrderBloc>()
+                        .add(const MarketTypeChanged(MarketType.amount));
+                    context.read<MarketBloc>().add(const ResetMarketValue());
+                  },
                   style: ElevatedButton.styleFrom(
                       primary: state.marketType == MarketType.amount
                           ? Colors.blue
@@ -144,9 +164,12 @@ class MarketOrderWidget extends StatelessWidget {
                   previous.marketType != current.marketType,
               builder: (context, state) {
                 return ElevatedButton(
-                  onPressed: () => context
-                      .read<OrderBloc>()
-                      .add(const MarketTypeChanged(MarketType.shares)),
+                  onPressed: () {
+                    context
+                        .read<OrderBloc>()
+                        .add(const MarketTypeChanged(MarketType.shares));
+                    context.read<MarketBloc>().add(const ResetMarketValue());
+                  },
                   style: ElevatedButton.styleFrom(
                       primary: state.marketType == MarketType.shares
                           ? Colors.blue
@@ -173,11 +196,21 @@ class MarketOrderWidget extends StatelessWidget {
           previous.marketType != current.marketType,
       builder: (context, state) {
         return state.marketType == MarketType.amount
-            ? const CustomText(r'$80.00', type: FontType.h3)
+            ? _amountForm(context)
             : const SharesStockWidget();
       },
     );
   }
+
+  Widget _amountForm(BuildContext context) => CustomTextInput(
+      textInputType: TextInputType.number,
+      textInputFormatterList: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
+      labelText: 'Amount',
+      onChanged: (value) => context
+          .read<MarketBloc>()
+          .add(AmountChanged(value.isNotEmpty ? double.parse(value) : 0)));
 
   Widget get _spaceHeight => const SizedBox(height: 15);
 }

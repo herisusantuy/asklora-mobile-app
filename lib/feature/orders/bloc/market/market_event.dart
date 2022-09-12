@@ -47,3 +47,10 @@ class OrderSubmitted extends MarketEvent {
   @override
   List<Object?> get props => [orderRequest];
 }
+
+class ResetMarketValue extends MarketEvent {
+  const ResetMarketValue() : super();
+
+  @override
+  List<Object?> get props => [];
+}
