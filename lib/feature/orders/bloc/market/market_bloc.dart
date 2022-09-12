@@ -44,7 +44,9 @@ class MarketBloc extends Bloc<MarketEvent, MarketState> {
   void _onAmountChanged(AmountChanged event, Emitter<MarketState> emit) {
     double sharesAmount = calculateAmount(_marketPrice, event.amount);
     emit(state.copyWith(
-        estimateTotal: event.amount, sharesAmount: sharesAmount));
+        amount: event.amount,
+        estimateTotal: event.amount,
+        sharesAmount: sharesAmount));
   }
 
   void _onResetMarketValue(ResetMarketValue event, Emitter<MarketState> emit) {
@@ -60,9 +62,11 @@ class MarketBloc extends Bloc<MarketEvent, MarketState> {
   void _onSharesAmountChanged(
       SharesAmountChanged event, Emitter<MarketState> emit) {
     if (!event.sharesAmount.isNegative) {
+      double estimateTotal =
+          calculateEstimateTotal(_marketPrice, event.sharesAmount);
       emit(state.copyWith(
-          estimateTotal:
-              calculateEstimateTotal(_marketPrice, event.sharesAmount),
+          amount: estimateTotal,
+          estimateTotal: estimateTotal,
           sharesAmount: event.sharesAmount));
     }
   }
@@ -70,8 +74,10 @@ class MarketBloc extends Bloc<MarketEvent, MarketState> {
   void _onSharesAmountIncremented(
       SharesAmountIncremented event, Emitter<MarketState> emit) {
     double sharesAmount = incrementSharesAmount(state.sharesAmount);
+    double estimateTotal = calculateEstimateTotal(_marketPrice, sharesAmount);
     emit(state.copyWith(
-        estimateTotal: calculateEstimateTotal(_marketPrice, sharesAmount),
+        amount: estimateTotal,
+        estimateTotal: estimateTotal,
         sharesAmount: sharesAmount));
   }
 
@@ -79,8 +85,10 @@ class MarketBloc extends Bloc<MarketEvent, MarketState> {
       SharesAmountDecremented event, Emitter<MarketState> emit) {
     if (state.sharesAmount != 0) {
       double sharesAmount = decrementSharesAmount(state.sharesAmount);
+      double estimateTotal = calculateEstimateTotal(_marketPrice, sharesAmount);
       emit(state.copyWith(
-          estimateTotal: calculateEstimateTotal(_marketPrice, sharesAmount),
+          amount: estimateTotal,
+          estimateTotal: estimateTotal,
           sharesAmount: sharesAmount));
     }
   }
