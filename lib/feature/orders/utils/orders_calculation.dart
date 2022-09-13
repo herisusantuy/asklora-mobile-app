@@ -1,7 +1,7 @@
 import '../../../core/utils/extensions.dart';
 
-double calculateEstimateTotal(double marketPrice, double sharesAmount) {
-  return (marketPrice * sharesAmount).toPrecision(1);
+double calculateEstimateTotal(double price, double sharesAmount) {
+  return (price * sharesAmount).toPrecision(1);
 }
 
 double calculateAmount(double marketPrice, double amount) {

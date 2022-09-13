@@ -87,7 +87,8 @@ class MarketOrderWidget extends StatelessWidget {
                     previous.sellErrorText != current.sellErrorText ||
                 previous.response.state != current.response.state ||
                 previous.amount != current.amount,
-            builder: (context, state) => OrderConfirmationButton<MarketBloc>(
+            builder: (context, state) => OrderConfirmationButton<MarketState>(
+                dynamicState: state,
                 errorText: orderState.transactionType == TransactionType.buy
                     ? state.buyErrorText
                     : state.sellErrorText,

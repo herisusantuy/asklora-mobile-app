@@ -1,12 +1,14 @@
 part of 'order_screen.dart';
 
-class OrderConfirmationWidget extends StatelessWidget {
+class OrderConfirmationWidget<T> extends StatelessWidget {
   final SymbolDetail symbolDetail;
   final OrderState orderState;
   final Function onConfirmedTap;
+  final T? dynamicState;
 
   const OrderConfirmationWidget(
-      {required this.onConfirmedTap,
+      {this.dynamicState,
+      required this.onConfirmedTap,
       required this.orderState,
       required this.symbolDetail,
       Key? key})
@@ -49,66 +51,58 @@ class OrderConfirmationWidget extends StatelessWidget {
   List<Widget> get _additionalWidget {
     switch (orderState.orderType) {
       case OrderType.limit:
+        LimitState limitState = dynamicState as LimitState;
         return [
-          OrderTypePriceWidget(
-              prefixTitle: orderState.orderType.name, value: '110'),
-          const SharesQuantityWidget(value: '4'),
+          OrderTypePriceWidget.info(
+              prefixTitle: orderState.orderType.name,
+              value: limitState.limit.toString()),
+          SharesQuantityWidget.info(value: limitState.quantity.toString()),
           if (orderState.transactionType == TransactionType.buy)
             const OrderFeesWidget(value: '1'),
-          const EstimatedTotalWidget(
-            value: '440',
+          EstimatedTotalWidget(
+            value: limitState.estimateTotal.toString(),
             fontType: FontType.bodyText,
           ),
-          const TimeInForceWidget(
-            showOnlyInformation: true,
-          ),
-          const TradingHoursWidget(
-            showOnlyInformation: true,
-          ),
+          _timeInForce,
+          _tradingHours,
         ];
       case OrderType.stop:
         return [
-          OrderTypePriceWidget(
+          OrderTypePriceWidget.info(
               prefixTitle: orderState.orderType.name, value: '110'),
-          const SharesQuantityWidget(value: '4'),
+          SharesQuantityWidget.info(value: '4'),
           if (orderState.transactionType == TransactionType.buy)
             const OrderFeesWidget(value: '1'),
           const EstimatedTotalWidget(
             value: '440',
             fontType: FontType.bodyText,
           ),
-          const TimeInForceWidget(
-            showOnlyInformation: true,
-          ),
+          _timeInForce,
         ];
       case OrderType.stopLimit:
         return [
-          const OrderTypePriceWidget(prefixTitle: 'Stop', value: '110'),
-          const OrderTypePriceWidget(prefixTitle: 'Limit', value: '110'),
-          const SharesQuantityWidget(value: '4'),
+          OrderTypePriceWidget.info(prefixTitle: 'Stop', value: '20'),
+          OrderTypePriceWidget.info(prefixTitle: 'Limit', value: '20'),
+          SharesQuantityWidget.info(value: '10'),
           if (orderState.transactionType == TransactionType.buy)
             const OrderFeesWidget(value: '1'),
           const EstimatedTotalWidget(
             value: '440',
             fontType: FontType.bodyText,
           ),
-          const TimeInForceWidget(
-            showOnlyInformation: true,
-          ),
+          _timeInForce,
         ];
       case OrderType.trailingStop:
         return [
           const TrailWidget(showOnlyInformation: true),
-          const SharesQuantityWidget(value: '4'),
+          SharesQuantityWidget.info(value: '4'),
           if (orderState.transactionType == TransactionType.buy)
             const OrderFeesWidget(value: '1'),
           const EstimatedTotalWidget(
             value: '440',
             fontType: FontType.bodyText,
           ),
-          const TimeInForceWidget(
-            showOnlyInformation: true,
-          ),
+          _timeInForce,
         ];
       case OrderType.market:
         return [
@@ -131,4 +125,16 @@ class OrderConfirmationWidget extends StatelessWidget {
         return [];
     }
   }
+
+  Widget get _timeInForce => CustomExpandedRow(
+        'Time in Force',
+        key: const Key('time_in_force_widget'),
+        text: orderState.timeInForce.name,
+      );
+
+  Widget get _tradingHours => CustomExpandedRow(
+        'Trading Hours',
+        key: const Key('trading_hours_widget'),
+        text: orderState.tradingHours.name,
+      );
 }

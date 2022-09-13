@@ -64,8 +64,10 @@ class OrderRequest {
       {required String symbolType,
       required String symbol,
       required String side,
+      required String quantity,
       required String limitPrice}) {
     return OrderRequest(
+        qty: quantity,
         symbol: symbol,
         side: side,
         type: OrderType.limit.name,

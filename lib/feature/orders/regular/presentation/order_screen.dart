@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
+import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../bloc/limit/limit_bloc.dart';
 import '../../bloc/order_bloc.dart';
+import '../../domain/order_request.dart';
 import '../../domain/symbol_detail.dart';
 import 'market_order_widget.dart';
 import 'widgets/custom_bottom_sheet_card_widget.dart';
@@ -84,9 +89,7 @@ class OrderScreen extends StatelessWidget {
           switch (state.orderType) {
             case OrderType.limit:
               return LimitOrderWidget(
-                  orderType: state.orderType,
-                  transactionType: state.transactionType,
-                  symbolDetail: symbolDetail);
+                  orderState: state, symbolDetail: symbolDetail);
             case OrderType.market:
               return MarketOrderWidget(
                   orderState: orderState, symbolDetail: symbolDetail);

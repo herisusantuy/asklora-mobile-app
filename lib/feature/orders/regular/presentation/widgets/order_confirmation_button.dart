@@ -1,13 +1,13 @@
 part of '../order_screen.dart';
 
-class OrderConfirmationButton<T extends StateStreamableSource<Object?>>
-    extends StatelessWidget {
+class OrderConfirmationButton<T> extends StatelessWidget {
   final OrderState orderState;
   final Function onConfirmedTap;
   final SymbolDetail symbolDetail;
   final bool isLoading;
   final String errorText;
   final bool disable;
+  final T? dynamicState;
 
   const OrderConfirmationButton(
       {required this.orderState,
@@ -16,6 +16,7 @@ class OrderConfirmationButton<T extends StateStreamableSource<Object?>>
       this.errorText = '',
       this.disable = false,
       this.isLoading = false,
+      this.dynamicState,
       Key? key})
       : super(key: key);
 
@@ -37,13 +38,11 @@ class OrderConfirmationButton<T extends StateStreamableSource<Object?>>
           buttonText: orderState.transactionType.name,
           onClick: () => showModalBottomSheet(
               context: context,
-              builder: (_) => BlocProvider.value(
-                    value: BlocProvider.of<T>(context),
-                    child: OrderConfirmationWidget(
-                      onConfirmedTap: onConfirmedTap,
-                      orderState: orderState,
-                      symbolDetail: symbolDetail,
-                    ),
+              builder: (_) => OrderConfirmationWidget<T>(
+                    dynamicState: dynamicState,
+                    onConfirmedTap: onConfirmedTap,
+                    orderState: orderState,
+                    symbolDetail: symbolDetail,
                   )),
         ),
       ],
