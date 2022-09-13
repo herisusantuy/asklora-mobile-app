@@ -1,7 +1,9 @@
 import 'package:asklora_mobile_app/core/utils/app_icons.dart';
+import 'package:asklora_mobile_app/feature/orders/bloc/limit/limit_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_screen.dart';
+import 'package:asklora_mobile_app/feature/orders/repository/orders_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,18 +13,27 @@ import '../../mocks/mocks.dart';
 void main() {
   group('Limit Order Widget Test', () {
     final SymbolDetail symbolDetail =
-        SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
-    Future<void> _buildLimitOrderWidget(WidgetTester tester,
-        OrderType orderType, TransactionType transactionType) async {
+        SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
+    Future<void> _buildLimitOrderWidget(
+        WidgetTester tester, OrderState orderState) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: BlocProvider(
-            create: (_) => OrderBloc(),
+          body: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => OrderBloc(),
+              ),
+              BlocProvider(
+                create: (_) => LimitBloc(
+                    marketPrice: 100,
+                    availableBuyingPower: 1000,
+                    ordersRepository: OrdersRepository(),
+                    numberOfSellableShares: 20),
+              ),
+            ],
             child: LimitOrderWidget(
-                orderType: orderType,
-                transactionType: transactionType,
-                symbolDetail: symbolDetail),
+                orderState: orderState, symbolDetail: symbolDetail),
           ),
         ),
         navigatorObservers: [mockObserver],
@@ -44,7 +55,10 @@ void main() {
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
       await _buildLimitOrderWidget(
-          tester, OrderType.limit, TransactionType.buy);
+          tester,
+          const OrderState(
+              orderType: OrderType.limit,
+              transactionType: TransactionType.buy));
       expect(find.text('Limit Price'), findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
@@ -59,7 +73,10 @@ void main() {
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
       await _buildLimitOrderWidget(
-          tester, OrderType.limit, TransactionType.sell);
+          tester,
+          const OrderState(
+              orderType: OrderType.limit,
+              transactionType: TransactionType.sell));
       expect(find.text('Limit Price'), findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);

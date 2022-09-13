@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
+import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../bloc/limit/limit_bloc.dart';
 import '../../bloc/order_bloc.dart';
+import '../../domain/order_request.dart';
 import '../../domain/symbol_detail.dart';
 import 'market_order_widget.dart';
 import 'widgets/custom_bottom_sheet_card_widget.dart';
@@ -49,6 +54,8 @@ part 'widgets/order_fees_widget.dart';
 
 part 'widgets/order_type_widget.dart';
 
+part 'widgets/order_confirmation_button.dart';
+
 class OrderScreen extends StatelessWidget {
   final OrderState orderState;
   final SymbolDetail symbolDetail;
@@ -60,35 +67,19 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget<OrderPageStep>(
-      navigationButton: CustomTextButton(
-        key: const Key('order_confirmation_button'),
-        borderRadius: 5,
-        padding: const EdgeInsets.all(10),
-        buttonText: orderState.transactionType.name,
-        onClick: () => showModalBottomSheet(
-            context: context,
-            builder: (_) => BlocProvider.value(
-                value: BlocProvider.of<OrderBloc>(context),
-                child: OrderConfirmationWidget(
-                    onConfirmedTap: () => context
-                        .read<NavigationBloc<OrderPageStep>>()
-                        .add(const PageChanged(OrderPageStep.orderSubmitted)),
-                    orderState: orderState,
-                    symbolDetail: symbolDetail))),
-      ),
       child: Column(
         children: [
           _dropDownOrderType,
           _spaceHeight,
           SymbolTitleWidget(symbolDetail: symbolDetail),
           _spaceHeight,
-          contents,
+          _contents,
         ],
       ),
     );
   }
 
-  Widget get contents {
+  Widget get _contents {
     return Expanded(
       child: BlocBuilder<OrderBloc, OrderState>(
         buildWhen: (previous, current) =>
@@ -98,11 +89,10 @@ class OrderScreen extends StatelessWidget {
           switch (state.orderType) {
             case OrderType.limit:
               return LimitOrderWidget(
-                  orderType: state.orderType,
-                  transactionType: state.transactionType,
-                  symbolDetail: symbolDetail);
+                  orderState: state, symbolDetail: symbolDetail);
             case OrderType.market:
-              return MarketOrderWidget(state.transactionType, symbolDetail);
+              return MarketOrderWidget(
+                  orderState: orderState, symbolDetail: symbolDetail);
             case OrderType.stop:
               return StopOrderWidget(
                   orderType: state.orderType,

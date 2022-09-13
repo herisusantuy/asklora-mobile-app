@@ -22,3 +22,7 @@ extension EmailValidator on String {
 }
 
 MaterialColor randomColor() => ([...Colors.primaries]..shuffle()).first;
+
+extension DoublePrecision on double {
+  double toPrecision(int n) => double.parse(toStringAsFixed(n));
+}

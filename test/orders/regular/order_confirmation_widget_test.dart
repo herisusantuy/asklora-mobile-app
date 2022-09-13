@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/utils/app_icons.dart';
+import 'package:asklora_mobile_app/feature/orders/bloc/limit/limit_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_screen.dart';
@@ -10,15 +11,17 @@ import '../../mocks/mocks.dart';
 
 void main() {
   final SymbolDetail symbolDetail =
-      SymbolDetail('AAPL.O', '100', AppIcons.appleLogo);
-  Future<void> _buildOrderConfirmationWidget(
-      WidgetTester tester, OrderState orderState) async {
+      SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
+  Future<void> _buildOrderConfirmationWidget<T>(
+      WidgetTester tester, OrderState orderState,
+      {T? dynamicState}) async {
     final mockObserver = MockNavigatorObserver();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: BlocProvider(
           create: (_) => OrderBloc(),
-          child: OrderConfirmationWidget(
+          child: OrderConfirmationWidget<T>(
+              dynamicState: dynamicState,
               onConfirmedTap: () {},
               orderState: orderState,
               symbolDetail: symbolDetail),
@@ -41,11 +44,14 @@ void main() {
 
   group('Order Buy Confirmation Widget Test', () {
     testWidgets('Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await _buildOrderConfirmationWidget<LimitState>(
           tester,
           const OrderState(
-              orderType: OrderType.limit,
-              transactionType: TransactionType.buy));
+              orderType: OrderType.limit, transactionType: TransactionType.buy),
+          dynamicState: const LimitState(
+              availableBuyingPower: 1000,
+              availableAmountToSell: 10,
+              numberOfSellableShares: 10));
       expect(symbolTitle, findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(orderType, findsOneWidget);
@@ -128,11 +134,15 @@ void main() {
 
   group('Order Sell Confirmation Widget Test', () {
     testWidgets('Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await _buildOrderConfirmationWidget<LimitState>(
           tester,
           const OrderState(
               orderType: OrderType.limit,
-              transactionType: TransactionType.sell));
+              transactionType: TransactionType.sell),
+          dynamicState: const LimitState(
+              availableBuyingPower: 1000,
+              availableAmountToSell: 100,
+              numberOfSellableShares: 10));
       expect(symbolTitle, findsOneWidget);
       expect(find.text('Direction'), findsOneWidget);
       expect(orderType, findsOneWidget);
