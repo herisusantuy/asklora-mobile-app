@@ -10,8 +10,10 @@ import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/limit/limit_bloc.dart';
 import '../../bloc/order_bloc.dart';
+import '../../bloc/stop/stop_bloc.dart';
 import '../../domain/order_request.dart';
 import '../../domain/symbol_detail.dart';
+import '../../repository/orders_repository.dart';
 import 'market_order_widget.dart';
 import 'widgets/custom_bottom_sheet_card_widget.dart';
 import 'widgets/order_bottom_sheet_widget.dart';
@@ -59,10 +61,14 @@ part 'widgets/order_confirmation_button.dart';
 class OrderScreen extends StatelessWidget {
   final OrderState orderState;
   final SymbolDetail symbolDetail;
+  final double availableBuyingPower;
 
-  const OrderScreen(
-      {required this.orderState, required this.symbolDetail, Key? key})
-      : super(key: key);
+  const OrderScreen({
+    required this.orderState,
+    required this.symbolDetail,
+    Key? key,
+    required this.availableBuyingPower,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +100,15 @@ class OrderScreen extends StatelessWidget {
               return MarketOrderWidget(
                   orderState: orderState, symbolDetail: symbolDetail);
             case OrderType.stop:
-              return StopOrderWidget(
-                  orderType: state.orderType,
-                  transactionType: state.transactionType,
-                  symbolDetail: symbolDetail);
+              return BlocProvider(
+                create: (context) => StopBloc(
+                    marketPrice: symbolDetail.marketPrice,
+                    availableBuyingPower: availableBuyingPower,
+                    ordersRepository: OrdersRepository(),
+                    numberOfSellableShares: 20),
+                child: StopOrderWidget(
+                    orderState: orderState, symbolDetail: symbolDetail),
+              );
             case OrderType.stopLimit:
               return StopLimitOrderWidget(
                   orderType: state.orderType,
