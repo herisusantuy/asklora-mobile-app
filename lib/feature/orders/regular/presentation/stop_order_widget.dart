@@ -89,12 +89,12 @@ class StopOrderWidget extends StatelessWidget {
             orderState: context.read<OrderBloc>().state,
             symbolDetail: symbolDetail,
             onConfirmedTap: () => context.read<StopBloc>().add(
-                StopOrderSubmitted(OrderRequest.limit(
+                StopOrderSubmitted(OrderRequest.stop(
                     symbolType: symbolDetail.symbolType.name,
                     symbol: symbolDetail.name,
                     side: orderState.transactionType.name,
                     quantity: state.quantity.toString(),
-                    limitPrice: state.stopPrice.toString()))),
+                    stopPrice: state.stopPrice.toString()))),
           ),
         )
       ],
