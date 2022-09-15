@@ -108,12 +108,7 @@ class StopLimitOrderWidget extends StatelessWidget {
             ? state.buyErrorText
             : state.sellErrorText,
         isLoading: state.response.state == ResponseState.loading,
-        disable: state.buyErrorText.isNotEmpty ||
-                state.stopPrice == 0 ||
-                state.limitPrice == 0 ||
-                state.quantity == 0
-            ? true
-            : false,
+        disable: state.disabledConfirmButton(orderState.transactionType),
         orderState: context.read<OrderBloc>().state,
         symbolDetail: symbolDetail,
         onConfirmedTap: () => context.read<StopLimitOrderBloc>().add(
