@@ -91,19 +91,23 @@ class OrderRequest {
     );
   }
 
-  static OrderRequest stopLimit(
-      {required String symbolType,
-      required String symbol,
-      required String side,
-      required String stopPrice,
-      required String limitPrice}) {
+  static OrderRequest stopLimit({
+    required String symbolType,
+    required String symbol,
+    required String side,
+    required String stopPrice,
+    required String limitPrice,
+    required String quantity,
+  }) {
     return OrderRequest(
-        symbol: symbol,
-        side: side,
-        type: OrderType.stopLimit.name,
-        orderClass: OrderClass.simple.name,
-        limitPrice: limitPrice,
-        stopPrice: stopPrice);
+      symbol: symbol,
+      side: side,
+      type: OrderType.stopLimit.name,
+      orderClass: OrderClass.simple.name,
+      limitPrice: limitPrice,
+      stopPrice: stopPrice,
+      qty: quantity,
+    );
   }
 
   static OrderRequest trailingStopAmount(
