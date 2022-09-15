@@ -1,4 +1,4 @@
-part of 'limit_bloc.dart';
+part of 'limit_order_bloc.dart';
 
 class LimitOrderState extends Equatable {
   final BaseResponse response;

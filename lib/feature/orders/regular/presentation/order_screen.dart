@@ -9,7 +9,7 @@ import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../user/account/domain/upgrade_account/context.dart';
-import '../../bloc/limit/limit_bloc.dart';
+import '../../bloc/limit/limit_order_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../bloc/stop/stop_order_bloc.dart';
 import '../../bloc/stop_limit/stop_limit_order_bloc.dart';
