@@ -39,12 +39,6 @@ class RegularOrderHomeScreen extends StatelessWidget {
                 availableBuyingPower: availableBuyingPower,
                 ordersRepository: OrdersRepository(),
                 numberOfSellableShares: 20)),
-        BlocProvider(
-            create: (_) => LimitBloc(
-                marketPrice: symbolDetail.marketPrice,
-                availableBuyingPower: availableBuyingPower,
-                ordersRepository: OrdersRepository(),
-                numberOfSellableShares: 20)),
       ],
       child: Scaffold(
           appBar: AppBar(

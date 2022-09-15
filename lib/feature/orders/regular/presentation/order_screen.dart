@@ -96,8 +96,14 @@ class OrderScreen extends StatelessWidget {
         builder: (context, state) {
           switch (state.orderType) {
             case OrderType.limit:
-              return LimitOrderWidget(
-                  orderState: state, symbolDetail: symbolDetail);
+              return BlocProvider(
+                  create: (_) => LimitOrderBloc(
+                      marketPrice: symbolDetail.marketPrice,
+                      availableBuyingPower: availableBuyingPower,
+                      ordersRepository: OrdersRepository(),
+                      numberOfSellableShares: 20),
+                  child: LimitOrderWidget(
+                      orderState: state, symbolDetail: symbolDetail));
             case OrderType.market:
               return MarketOrderWidget(
                   orderState: orderState, symbolDetail: symbolDetail);

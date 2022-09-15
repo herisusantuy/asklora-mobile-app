@@ -1,6 +1,6 @@
 part of 'limit_bloc.dart';
 
-class LimitState extends Equatable {
+class LimitOrderState extends Equatable {
   final BaseResponse response;
   final double limit;
   final double quantity;
@@ -11,7 +11,7 @@ class LimitState extends Equatable {
   final String buyErrorText;
   final String sellErrorText;
 
-  const LimitState(
+  const LimitOrderState(
       {this.response = const BaseResponse(),
       this.limit = 0,
       this.quantity = 0,
@@ -34,7 +34,7 @@ class LimitState extends Equatable {
         sellErrorText
       ];
 
-  LimitState copyWith(
+  LimitOrderState copyWith(
       {BaseResponse? response,
       double? limit,
       double? quantity,
@@ -44,7 +44,7 @@ class LimitState extends Equatable {
       double? numberOfSellableShares,
       String? buyErrorText,
       String? sellErrorText}) {
-    return LimitState(
+    return LimitOrderState(
       response: response ?? this.response,
       limit: limit ?? this.limit,
       quantity: quantity ?? this.quantity,
@@ -63,5 +63,23 @@ class LimitState extends Equatable {
               ? 'Amount exceed the available amount to sell'
               : '',
     );
+  }
+
+  bool disabledConfirmButton(TransactionType transactionType) {
+    if (transactionType == TransactionType.buy) {
+      if (limit != 0 && quantity != 0 && buyErrorText.isEmpty) {
+        return false;
+      } else {
+        return true;
+      }
+    } else if (transactionType == TransactionType.sell) {
+      if (limit != 0 && quantity != 0 && sellErrorText.isEmpty) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
   }
 }

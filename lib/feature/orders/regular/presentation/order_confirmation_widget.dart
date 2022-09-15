@@ -51,7 +51,7 @@ class OrderConfirmationWidget<T> extends StatelessWidget {
   List<Widget> get _additionalWidget {
     switch (orderState.orderType) {
       case OrderType.limit:
-        LimitState limitState = dynamicState as LimitState;
+        LimitOrderState limitState = dynamicState as LimitOrderState;
         return [
           OrderTypePriceWidget.info(
               prefixTitle: orderState.orderType.name,

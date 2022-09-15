@@ -25,7 +25,7 @@ void main() {
                 create: (_) => OrderBloc(),
               ),
               BlocProvider(
-                create: (_) => LimitBloc(
+                create: (_) => LimitOrderBloc(
                     marketPrice: 100,
                     availableBuyingPower: 1000,
                     ordersRepository: OrdersRepository(),

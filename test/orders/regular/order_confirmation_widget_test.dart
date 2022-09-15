@@ -44,11 +44,11 @@ void main() {
 
   group('Order Buy Confirmation Widget Test', () {
     testWidgets('Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget<LimitState>(
+      await _buildOrderConfirmationWidget<LimitOrderState>(
           tester,
           const OrderState(
               orderType: OrderType.limit, transactionType: TransactionType.buy),
-          dynamicState: const LimitState(
+          dynamicState: const LimitOrderState(
               availableBuyingPower: 1000,
               availableAmountToSell: 10,
               numberOfSellableShares: 10));
@@ -134,12 +134,12 @@ void main() {
 
   group('Order Sell Confirmation Widget Test', () {
     testWidgets('Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget<LimitState>(
+      await _buildOrderConfirmationWidget<LimitOrderState>(
           tester,
           const OrderState(
               orderType: OrderType.limit,
               transactionType: TransactionType.sell),
-          dynamicState: const LimitState(
+          dynamicState: const LimitOrderState(
               availableBuyingPower: 1000,
               availableAmountToSell: 100,
               numberOfSellableShares: 10));
