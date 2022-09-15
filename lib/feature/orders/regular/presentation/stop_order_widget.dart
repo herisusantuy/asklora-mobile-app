@@ -18,12 +18,12 @@ class StopOrderWidget extends StatelessWidget {
             children: [
               OrderTypePriceWidget.input(
                 prefixTitle: orderState.orderType.name,
-                onChanged: (value) => context.read<StopBloc>().add(
+                onChanged: (value) => context.read<StopOrderBloc>().add(
                     StopPriceChanged(
                         value.isNotEmpty ? double.parse(value) : 0)),
               ),
               SharesQuantityWidget.input(
-                onChanged: (value) => context.read<StopBloc>().add(
+                onChanged: (value) => context.read<StopOrderBloc>().add(
                     StopQuantityChanged(
                         value.isNotEmpty ? double.parse(value) : 0)),
               ),
@@ -33,13 +33,13 @@ class StopOrderWidget extends StatelessWidget {
                 height: 40,
               ),
               MarketPriceWidget(symbolDetail: symbolDetail),
-              BlocBuilder<StopBloc, StopState>(
+              BlocBuilder<StopOrderBloc, StopOrderState>(
                   buildWhen: (previous, current) =>
                       previous.estimateTotal != current.estimateTotal,
                   builder: (context, state) => EstimatedTotalWidget(
                       value: state.estimateTotal.toString())),
               if (orderState.transactionType == TransactionType.buy) ...[
-                BlocBuilder<StopBloc, StopState>(
+                BlocBuilder<StopOrderBloc, StopOrderState>(
                   buildWhen: (previous, current) =>
                       previous.availableBuyingPower !=
                       current.availableBuyingPower,
@@ -48,14 +48,14 @@ class StopOrderWidget extends StatelessWidget {
                 ),
               ] else if (orderState.transactionType ==
                   TransactionType.sell) ...[
-                BlocBuilder<StopBloc, StopState>(
+                BlocBuilder<StopOrderBloc, StopOrderState>(
                   buildWhen: (previous, current) =>
                       previous.availableAmountToSell !=
                       current.availableAmountToSell,
                   builder: (context, state) => AvailableAmountToSellWidget(
                       value: state.availableAmountToSell.toString()),
                 ),
-                BlocBuilder<StopBloc, StopState>(
+                BlocBuilder<StopOrderBloc, StopOrderState>(
                   buildWhen: (previous, current) =>
                       previous.numberOfSellableShares !=
                       current.numberOfSellableShares,
@@ -66,7 +66,7 @@ class StopOrderWidget extends StatelessWidget {
             ],
           ),
         ),
-        BlocBuilder<StopBloc, StopState>(
+        BlocBuilder<StopOrderBloc, StopOrderState>(
           buildWhen: (previous, current) =>
               orderState.transactionType == TransactionType.buy &&
                   previous.buyErrorText != current.buyErrorText ||
@@ -75,7 +75,7 @@ class StopOrderWidget extends StatelessWidget {
               previous.response.state != current.response.state ||
               previous.stopPrice != current.stopPrice ||
               previous.quantity != current.quantity,
-          builder: (context, state) => OrderConfirmationButton<StopState>(
+          builder: (context, state) => OrderConfirmationButton<StopOrderState>(
             dynamicState: state,
             errorText: orderState.transactionType == TransactionType.buy
                 ? state.buyErrorText
@@ -88,7 +88,7 @@ class StopOrderWidget extends StatelessWidget {
                 : false,
             orderState: context.read<OrderBloc>().state,
             symbolDetail: symbolDetail,
-            onConfirmedTap: () => context.read<StopBloc>().add(
+            onConfirmedTap: () => context.read<StopOrderBloc>().add(
                 StopOrderSubmitted(OrderRequest.stop(
                     symbolType: symbolDetail.symbolType.name,
                     symbol: symbolDetail.name,
