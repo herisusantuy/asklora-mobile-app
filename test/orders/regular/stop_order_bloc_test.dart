@@ -65,7 +65,7 @@ void main() async {
     );
 
     blocTest<StopOrderBloc, StopOrderState>(
-      'emits `estimateTotal = 1000` and `stop price = 100` `quantity = 10` WHEN input stop price 100 and quantity 100',
+      'emits `estimateTotal = 1000` and `stop price = 100` `quantity = 10` WHEN input stop price 100 and quantity 10',
       build: () => stopBloc,
       act: (bloc) async {
         bloc.add(const StopPriceChanged(100));
