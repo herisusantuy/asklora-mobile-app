@@ -6,7 +6,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../market_bloc_test.mocks.dart';
+import 'market_bloc_test.mocks.dart';
 
 void main() async {
   group('*Stop Order Bloc Test*', () {
