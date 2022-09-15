@@ -6,7 +6,7 @@ import '../../domain/order_request.dart';
 import '../../repository/orders_repository.dart';
 import '../../utils/orders_calculation.dart';
 
-part 'stop_bloc_state.dart';
+part 'stop_order_state.dart';
 part 'stop_order_event.dart';
 
 class StopOrderBloc extends Bloc<StopOrderEvent, StopOrderState> {
