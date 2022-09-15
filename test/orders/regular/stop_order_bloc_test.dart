@@ -2,12 +2,15 @@ import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/stop/stop_order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/order_request.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/order_response.dart';
+import 'package:asklora_mobile_app/feature/orders/repository/orders_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'market_bloc_test.mocks.dart';
 
+@GenerateMocks([OrdersRepository])
 void main() async {
   group('*Stop Order Bloc Test*', () {
     late StopOrderBloc stopBloc;
