@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_text.dart';
@@ -8,7 +9,6 @@ import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
-import '../../../user/account/domain/upgrade_account/context.dart';
 import '../../bloc/limit/limit_order_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../bloc/stop/stop_order_bloc.dart';
@@ -21,44 +21,25 @@ import 'widgets/custom_bottom_sheet_card_widget.dart';
 import 'widgets/order_bottom_sheet_widget.dart';
 
 part 'limit_order_widget.dart';
-
-part 'trailing_stop_order_widget.dart';
-
-part 'stop_order_widget.dart';
-
-part 'stop_limit_order_widget.dart';
-
 part 'order_confirmation_widget.dart';
-
+part 'stop_limit_order_widget.dart';
+part 'stop_order_widget.dart';
+part 'trailing_stop_order_widget.dart';
 part 'widgets/available_amount_to_sell_widget.dart';
-
 part 'widgets/available_buying_power_widget.dart';
-
 part 'widgets/estimated_total_widget.dart';
-
 part 'widgets/market_price_widget.dart';
-
 part 'widgets/number_of_buyable_shares_widget.dart';
-
 part 'widgets/number_of_sellable_shares_widget.dart';
-
-part 'widgets/shares_quantity_widget.dart';
-
-part 'widgets/time_in_force_widget.dart';
-
-part 'widgets/trading_hours_widget.dart';
-
-part 'widgets/order_type_price_widget.dart';
-
-part 'widgets/trail_widget.dart';
-
-part 'widgets/symbol_title_widget.dart';
-
-part 'widgets/order_fees_widget.dart';
-
-part 'widgets/order_type_widget.dart';
-
 part 'widgets/order_confirmation_button.dart';
+part 'widgets/order_fees_widget.dart';
+part 'widgets/order_type_price_widget.dart';
+part 'widgets/order_type_widget.dart';
+part 'widgets/shares_quantity_widget.dart';
+part 'widgets/symbol_title_widget.dart';
+part 'widgets/time_in_force_widget.dart';
+part 'widgets/trading_hours_widget.dart';
+part 'widgets/trail_widget.dart';
 
 class OrderScreen extends StatelessWidget {
   final OrderState orderState;

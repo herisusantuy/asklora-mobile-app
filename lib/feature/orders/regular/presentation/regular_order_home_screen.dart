@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../bloc/limit/limit_order_bloc.dart';
 import '../../bloc/market/market_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
