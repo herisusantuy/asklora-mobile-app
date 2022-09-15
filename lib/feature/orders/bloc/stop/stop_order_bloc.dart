@@ -6,19 +6,19 @@ import '../../domain/order_request.dart';
 import '../../repository/orders_repository.dart';
 import '../../utils/orders_calculation.dart';
 
-part 'stop_state.dart';
-part 'stop_event.dart';
+part 'stop_bloc_state.dart';
+part 'stop_order_event.dart';
 
-class StopBloc extends Bloc<StopEvent, StopState> {
+class StopOrderBloc extends Bloc<StopOrderEvent, StopOrderState> {
   final OrdersRepository _ordersRepository;
 
-  StopBloc({
+  StopOrderBloc({
     required double marketPrice,
     required double availableBuyingPower,
     required double numberOfSellableShares,
     required OrdersRepository ordersRepository,
   })  : _ordersRepository = ordersRepository,
-        super(StopState(
+        super(StopOrderState(
           availableBuyingPower: availableBuyingPower,
           numberOfSellableShares: numberOfSellableShares,
           availableAmountToSell: calculateAvailableAmountToSell(
@@ -29,21 +29,23 @@ class StopBloc extends Bloc<StopEvent, StopState> {
     on<StopOrderSubmitted>(_onOrderSubmitted);
   }
 
-  void _onStopPriceChanged(StopPriceChanged event, Emitter<StopState> emit) {
+  void _onStopPriceChanged(
+      StopPriceChanged event, Emitter<StopOrderState> emit) {
     emit(state.copyWith(
         stopPrice: event.stopPrice,
         estimateTotal:
             calculateEstimateTotal(event.stopPrice, state.quantity)));
   }
 
-  void _onQuantityChanged(StopQuantityChanged event, Emitter<StopState> emit) {
+  void _onQuantityChanged(
+      StopQuantityChanged event, Emitter<StopOrderState> emit) {
     emit(state.copyWith(
         estimateTotal: calculateEstimateTotal(state.stopPrice, event.quantity),
         quantity: event.quantity));
   }
 
   void _onOrderSubmitted(
-      StopOrderSubmitted event, Emitter<StopState> emit) async {
+      StopOrderSubmitted event, Emitter<StopOrderState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     try {
       var data =

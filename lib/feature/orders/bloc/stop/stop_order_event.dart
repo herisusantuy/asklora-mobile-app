@@ -1,13 +1,13 @@
-part of 'stop_bloc.dart';
+part of 'stop_order_bloc.dart';
 
-abstract class StopEvent extends Equatable {
-  const StopEvent() : super();
+abstract class StopOrderEvent extends Equatable {
+  const StopOrderEvent() : super();
 
   @override
   List<Object?> get props => [];
 }
 
-class StopPriceChanged extends StopEvent {
+class StopPriceChanged extends StopOrderEvent {
   final double stopPrice;
 
   const StopPriceChanged(this.stopPrice) : super();
@@ -16,7 +16,7 @@ class StopPriceChanged extends StopEvent {
   List<Object?> get props => [stopPrice];
 }
 
-class StopQuantityChanged extends StopEvent {
+class StopQuantityChanged extends StopOrderEvent {
   final double quantity;
 
   const StopQuantityChanged(this.quantity) : super();
@@ -25,7 +25,7 @@ class StopQuantityChanged extends StopEvent {
   List<Object?> get props => [quantity];
 }
 
-class StopOrderSubmitted extends StopEvent {
+class StopOrderSubmitted extends StopOrderEvent {
   final OrderRequest orderRequest;
 
   const StopOrderSubmitted(this.orderRequest) : super();

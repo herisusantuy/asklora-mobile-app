@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/feature/orders/bloc/stop/stop_bloc.dart';
+import 'package:asklora_mobile_app/feature/orders/bloc/stop/stop_order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/order_request.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/order_response.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -10,7 +10,7 @@ import '../market_bloc_test.mocks.dart';
 
 void main() async {
   group('*Stop Order Bloc Test*', () {
-    late StopBloc stopBloc;
+    late StopOrderBloc stopBloc;
     late MockOrdersRepository mockOrdersRepository;
     double marketPrice = 100;
 
@@ -19,7 +19,7 @@ void main() async {
     });
 
     setUp(() async {
-      stopBloc = StopBloc(
+      stopBloc = StopOrderBloc(
           marketPrice: marketPrice,
           availableBuyingPower: 1000,
           numberOfSellableShares: 20,
@@ -29,19 +29,19 @@ void main() async {
     test('Stop Order init state', () {
       expect(
           stopBloc.state,
-          const StopState(
+          const StopOrderState(
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20,
           ));
     });
 
-    blocTest<StopBloc, StopState>(
+    blocTest<StopOrderBloc, StopOrderState>(
       'emits `estimateTotal = 0` and `stopPrice = 100` WHEN input stop price 100',
       build: () => stopBloc,
       act: (bloc) async => bloc.add(const StopPriceChanged(100)),
       expect: () => {
-        const StopState(
+        const StopOrderState(
             stopPrice: 100,
             estimateTotal: 0,
             availableBuyingPower: 1000,
@@ -50,12 +50,12 @@ void main() async {
       },
     );
 
-    blocTest<StopBloc, StopState>(
+    blocTest<StopOrderBloc, StopOrderState>(
       'emits `estimateTotal = 0` and `quantity = 10` WHEN input quantity 100',
       build: () => stopBloc,
       act: (bloc) => bloc.add(const StopQuantityChanged(10)),
       expect: () => {
-        const StopState(
+        const StopOrderState(
             quantity: 10,
             estimateTotal: 0,
             availableBuyingPower: 1000,
@@ -64,7 +64,7 @@ void main() async {
       },
     );
 
-    blocTest<StopBloc, StopState>(
+    blocTest<StopOrderBloc, StopOrderState>(
       'emits `estimateTotal = 1000` and `stop price = 100` `quantity = 10` WHEN input stop price 100 and quantity 100',
       build: () => stopBloc,
       act: (bloc) async {
@@ -72,13 +72,13 @@ void main() async {
         bloc.add(const StopQuantityChanged(10));
       },
       expect: () => {
-        const StopState(
+        const StopOrderState(
             stopPrice: 100,
             estimateTotal: 0,
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20),
-        const StopState(
+        const StopOrderState(
             stopPrice: 100,
             quantity: 10,
             estimateTotal: 1000,
@@ -105,7 +105,7 @@ void main() async {
     BaseResponse errorResponse =
         BaseResponse.error('Something went wrong, please try again later');
 
-    blocTest<StopBloc, StopState>(
+    blocTest<StopOrderBloc, StopOrderState>(
       'emits `response = BaseResponse.complete` WHEN `failed submit buy stop order`',
       build: () {
         when(mockOrdersRepository.submitOrder(
@@ -117,19 +117,19 @@ void main() async {
         bloc.add(StopOrderSubmitted(buyStopOrderRequest));
       },
       expect: () => {
-        StopState(
+        StopOrderState(
             response: BaseResponse.loading(),
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20),
-        StopState(
+        StopOrderState(
             response: errorResponse,
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20),
       },
     );
-    blocTest<StopBloc, StopState>(
+    blocTest<StopOrderBloc, StopOrderState>(
       'emits `response = BaseResponse.complete` WHEN `failed submit sell stop order`',
       build: () {
         when(mockOrdersRepository.submitOrder(
@@ -141,19 +141,19 @@ void main() async {
         bloc.add(StopOrderSubmitted(sellStopOrderRequest));
       },
       expect: () => {
-        StopState(
+        StopOrderState(
             response: BaseResponse.loading(),
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20),
-        StopState(
+        StopOrderState(
             response: errorResponse,
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20),
       },
     );
-    blocTest<StopBloc, StopState>(
+    blocTest<StopOrderBloc, StopOrderState>(
       'emits `response = BaseResponse.complete` WHEN `successfully submit buy stop order`',
       build: () {
         when(mockOrdersRepository.submitOrder(
@@ -165,19 +165,19 @@ void main() async {
         bloc.add(StopOrderSubmitted(buyStopOrderRequest));
       },
       expect: () => {
-        StopState(
+        StopOrderState(
             response: BaseResponse.loading(),
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20),
-        StopState(
+        StopOrderState(
             response: successResponse,
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20),
       },
     );
-    blocTest<StopBloc, StopState>(
+    blocTest<StopOrderBloc, StopOrderState>(
       'emits `response = BaseResponse.complete` WHEN `successfully submit sell stop order`',
       build: () {
         when(mockOrdersRepository.submitOrder(
@@ -189,12 +189,12 @@ void main() async {
         bloc.add(StopOrderSubmitted(sellStopOrderRequest));
       },
       expect: () => {
-        StopState(
+        StopOrderState(
             response: BaseResponse.loading(),
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,
             numberOfSellableShares: 20),
-        StopState(
+        StopOrderState(
             response: successResponse,
             availableBuyingPower: 1000,
             availableAmountToSell: 2000,

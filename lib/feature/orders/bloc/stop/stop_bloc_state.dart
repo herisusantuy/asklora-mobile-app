@@ -1,6 +1,6 @@
-part of 'stop_bloc.dart';
+part of 'stop_order_bloc.dart';
 
-class StopState extends Equatable {
+class StopOrderState extends Equatable {
   final BaseResponse response;
   final double stopPrice;
   final double quantity;
@@ -11,7 +11,7 @@ class StopState extends Equatable {
   final String buyErrorText;
   final String sellErrorText;
 
-  const StopState({
+  const StopOrderState({
     this.response = const BaseResponse(),
     this.stopPrice = 0,
     this.quantity = 0,
@@ -36,7 +36,7 @@ class StopState extends Equatable {
         sellErrorText
       ];
 
-  StopState copyWith({
+  StopOrderState copyWith({
     BaseResponse? response,
     double? stopPrice,
     double? quantity,
@@ -47,7 +47,7 @@ class StopState extends Equatable {
     String? buyErrorText,
     String? sellErrorText,
   }) {
-    return StopState(
+    return StopOrderState(
       response: response ?? this.response,
       stopPrice: stopPrice ?? this.stopPrice,
       quantity: quantity ?? this.quantity,
