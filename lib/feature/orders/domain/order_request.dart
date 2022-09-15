@@ -79,13 +79,16 @@ class OrderRequest {
       {required String symbolType,
       required String symbol,
       required String side,
-      required String stopPrice}) {
+      required String stopPrice,
+      required String quantity}) {
     return OrderRequest(
-        symbol: symbol,
-        side: side,
-        type: OrderType.stop.name,
-        orderClass: OrderClass.simple.name,
-        stopPrice: stopPrice);
+      symbol: symbol,
+      side: side,
+      type: OrderType.stop.name,
+      orderClass: OrderClass.simple.name,
+      stopPrice: stopPrice,
+      qty: quantity,
+    );
   }
 
   static OrderRequest stopLimit(

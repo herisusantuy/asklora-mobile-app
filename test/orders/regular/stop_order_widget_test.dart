@@ -1,7 +1,9 @@
 import 'package:asklora_mobile_app/core/utils/app_icons.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
+import 'package:asklora_mobile_app/feature/orders/bloc/stop/stop_order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_screen.dart';
+import 'package:asklora_mobile_app/feature/orders/repository/orders_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,17 +14,23 @@ void main() {
   group('Stop Order Widget Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
-    Future<void> _buildStopOrderWidget(WidgetTester tester, OrderType orderType,
-        TransactionType transactionType) async {
+    Future<void> _buildStopOrderWidget(
+        WidgetTester tester, OrderState orderState) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
           body: BlocProvider(
             create: (_) => OrderBloc(),
-            child: StopOrderWidget(
-                orderType: orderType,
-                transactionType: transactionType,
-                symbolDetail: symbolDetail),
+            child: BlocProvider(
+              create: (_) => StopOrderBloc(
+                marketPrice: 100,
+                availableBuyingPower: 1000,
+                numberOfSellableShares: 20,
+                ordersRepository: OrdersRepository(),
+              ),
+              child: StopOrderWidget(
+                  orderState: orderState, symbolDetail: symbolDetail),
+            ),
           ),
         ),
         navigatorObservers: [mockObserver],
@@ -43,7 +51,10 @@ void main() {
 
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
-      await _buildStopOrderWidget(tester, OrderType.stop, TransactionType.buy);
+      await _buildStopOrderWidget(
+          tester,
+          const OrderState(
+              orderType: OrderType.stop, transactionType: TransactionType.buy));
       expect(find.text('Stop Price'), findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
@@ -57,7 +68,11 @@ void main() {
 
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
-      await _buildStopOrderWidget(tester, OrderType.stop, TransactionType.sell);
+      await _buildStopOrderWidget(
+          tester,
+          const OrderState(
+              orderType: OrderType.stop,
+              transactionType: TransactionType.sell));
       expect(find.text('Stop Price'), findsOneWidget);
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);

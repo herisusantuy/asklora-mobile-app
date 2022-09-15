@@ -72,6 +72,7 @@ class RegularOrderHomeScreen extends StatelessWidget {
         return OrderScreen(
           symbolDetail: symbolDetail,
           orderState: orderState,
+          availableBuyingPower: availableBuyingPower,
         );
       case OrderPageStep.orderSubmitted:
         return OrderSubmittedScreen(
