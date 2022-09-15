@@ -1,4 +1,4 @@
-part of 'limit_bloc.dart';
+part of 'limit_order_bloc.dart';
 
 abstract class LimitOrderEvent extends Equatable {
   const LimitOrderEvent() : super();

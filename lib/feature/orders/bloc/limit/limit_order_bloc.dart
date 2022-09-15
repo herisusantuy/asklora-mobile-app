@@ -7,8 +7,8 @@ import '../../repository/orders_repository.dart';
 import '../../utils/orders_calculation.dart';
 import '../order_bloc.dart';
 
-part 'limit_event.dart';
-part 'limit_state.dart';
+part 'limit_order_event.dart';
+part 'limit_order_state.dart';
 
 class LimitOrderBloc extends Bloc<LimitOrderEvent, LimitOrderState> {
   LimitOrderBloc(
