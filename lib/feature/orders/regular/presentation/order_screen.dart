@@ -8,9 +8,11 @@ import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../../user/account/domain/upgrade_account/context.dart';
 import '../../bloc/limit/limit_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../bloc/stop/stop_order_bloc.dart';
+import '../../bloc/stop_limit/stop_limit_order_bloc.dart';
 import '../../domain/order_request.dart';
 import '../../domain/symbol_detail.dart';
 import '../../repository/orders_repository.dart';
@@ -110,10 +112,16 @@ class OrderScreen extends StatelessWidget {
                     orderState: orderState, symbolDetail: symbolDetail),
               );
             case OrderType.stopLimit:
-              return StopLimitOrderWidget(
-                  orderType: state.orderType,
-                  transactionType: state.transactionType,
-                  symbolDetail: symbolDetail);
+              return BlocProvider(
+                create: (context) => StopLimitOrderBloc(
+                  marketPrice: symbolDetail.marketPrice,
+                  availableBuyingPower: availableBuyingPower,
+                  ordersRepository: OrdersRepository(),
+                  numberOfSellableShares: 20,
+                ),
+                child: StopLimitOrderWidget(
+                    orderState: orderState, symbolDetail: symbolDetail),
+              );
             case OrderType.trailingStop:
               return TrailingStopOrderWidget(
                   orderType: state.orderType,
