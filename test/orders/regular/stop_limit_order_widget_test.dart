@@ -19,18 +19,19 @@ void main() {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: BlocProvider(
-            create: (_) => OrderBloc(),
-            child: BlocProvider(
-              create: (context) => StopLimitOrderBloc(
-                  marketPrice: 100,
-                  availableBuyingPower: 1000,
-                  numberOfSellableShares: 20,
-                  ordersRepository: OrdersRepository()),
+          body: MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => OrderBloc()),
+                BlocProvider(
+                  create: (context) => StopLimitOrderBloc(
+                      marketPrice: 100,
+                      availableBuyingPower: 1000,
+                      numberOfSellableShares: 20,
+                      ordersRepository: OrdersRepository()),
+                ),
+              ],
               child: StopLimitOrderWidget(
-                  orderState: orderState, symbolDetail: symbolDetail),
-            ),
-          ),
+                  orderState: orderState, symbolDetail: symbolDetail)),
         ),
         navigatorObservers: [mockObserver],
       ));
