@@ -1,36 +1,134 @@
 part of 'order_screen.dart';
 
 class TrailingStopOrderWidget extends StatelessWidget {
-  final OrderType orderType;
+  final OrderState orderState;
   final SymbolDetail symbolDetail;
-  final TransactionType transactionType;
 
   const TrailingStopOrderWidget(
-      {required this.orderType,
-      required this.transactionType,
-      required this.symbolDetail,
-      Key? key})
+      {required this.orderState, required this.symbolDetail, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
-        const TrailWidget(),
-        const SharesQuantityWidget(value: '4'),
-        const TimeInForceWidget(),
-        const SizedBox(
-          height: 40,
+        Expanded(
+          child: ListView(
+            physics: const ScrollPhysics(),
+            children: [
+              _trailInput(context, trailType: orderState.trailType),
+              _quantityInput(context),
+              const TimeInForceWidget(),
+              const SizedBox(
+                height: 40,
+              ),
+              MarketPriceWidget(symbolDetail: symbolDetail),
+              _initialTrailingPrice,
+              _availablePower,
+            ],
+          ),
         ),
-        MarketPriceWidget(symbolDetail: symbolDetail),
-        const EstimatedTotalWidget(value: r'$320'),
-        if (transactionType == TransactionType.buy) ...[
-          const AvailableBuyingPowerWidget(value: r'$10,000'),
-        ] else if (transactionType == TransactionType.sell) ...[
-          const AvailableAmountToSellWidget(value: r'$10,000'),
-          const NumberOfSellableSharesWidget(value: '10'),
-        ],
+        _submitButton
       ],
     );
+  }
+
+  Widget _trailInput(BuildContext context, {required TrailType trailType}) {
+    if (trailType == TrailType.amount) {
+      return TrailWidget.input(
+          onChanged: (value) => context.read<TrailingOrderBloc>().add(
+              TrailingAmountChanged(
+                  value.isNotEmpty ? double.parse(value) : 0)));
+    } else {
+      return TrailWidget.input(
+          onChanged: (value) => context.read<TrailingOrderBloc>().add(
+              TrailingPercentageChanged(
+                  value.isNotEmpty ? double.parse(value) : 0)));
+    }
+  }
+
+  Widget _quantityInput(BuildContext context) => SharesQuantityWidget.input(
+        onChanged: (value) => context.read<TrailingOrderBloc>().add(
+            QuantityOfTrailingOrderChanged(
+                value.isNotEmpty ? double.parse(value) : 0)),
+      );
+
+  Widget get _initialTrailingPrice =>
+      BlocBuilder<TrailingOrderBloc, TrailingOrderState>(
+        buildWhen: (previous, current) =>
+            previous.initialTrailingPrice != current.initialTrailingPrice,
+        builder: (context, state) {
+          return InitialTrailingPrice(
+              value: state.initialTrailingPrice.toString());
+        },
+      );
+
+  Widget get _availablePower => Column(
+        children: [
+          if (orderState.transactionType == TransactionType.buy)
+            BlocBuilder<TrailingOrderBloc, TrailingOrderState>(
+              builder: (context, state) {
+                return AvailableBuyingPowerWidget(
+                    value: state.availableBuyingPower.toString());
+              },
+            )
+          else if (orderState.transactionType == TransactionType.sell) ...[
+            BlocBuilder<TrailingOrderBloc, TrailingOrderState>(
+              builder: (context, state) {
+                return AvailableAmountToSellWidget(
+                    value: state.availableAmountToSell.toString());
+              },
+            ),
+            BlocBuilder<TrailingOrderBloc, TrailingOrderState>(
+              builder: (context, state) {
+                return NumberOfSellableSharesWidget(
+                    value: state.numberOfSellableShares.toString());
+              },
+            )
+          ],
+        ],
+      );
+
+  Widget get _submitButton {
+    return BlocBuilder<TrailingOrderBloc, TrailingOrderState>(
+      buildWhen: (previous, current) =>
+          orderState.transactionType == TransactionType.buy &&
+              previous.buyErrorText != current.buyErrorText ||
+          orderState.transactionType == TransactionType.sell &&
+              previous.sellErrorText != current.sellErrorText ||
+          previous.response.state != current.response.state ||
+          previous.amount != current.amount ||
+          previous.percentage != current.percentage ||
+          previous.quantity != current.quantity,
+      builder: (context, state) => OrderConfirmationButton<TrailingOrderState>(
+        dynamicState: state,
+        errorText: orderState.transactionType == TransactionType.buy
+            ? state.buyErrorText
+            : state.sellErrorText,
+        isLoading: state.response.state == ResponseState.loading,
+        disable: false,
+        orderState: context.read<OrderBloc>().state,
+        symbolDetail: symbolDetail,
+        onConfirmedTap: () => context.read<TrailingOrderBloc>().add(
+              TrailingOrderSubmitted(_orderRequest(state)),
+            ),
+      ),
+    );
+  }
+
+  OrderRequest _orderRequest(TrailingOrderState state) {
+    if (orderState.trailType == TrailType.amount) {
+      return OrderRequest.trailingStopAmount(
+          symbolType: symbolDetail.symbolType.name,
+          symbol: symbolDetail.name,
+          side: orderState.transactionType.name,
+          trailPrice: state.amount.toString());
+    } else {
+      return OrderRequest.trailingStopPercentage(
+          symbolType: symbolDetail.symbolType.name,
+          symbol: symbolDetail.name,
+          side: orderState.transactionType.name,
+          trailPercentage: state.percentage.toString());
+    }
   }
 }

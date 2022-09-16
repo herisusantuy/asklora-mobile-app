@@ -2,10 +2,29 @@ part of '../order_screen.dart';
 
 class TrailWidget extends StatelessWidget {
   final bool showOnlyInformation;
+  final String? value;
+  final Function(String)? onChanged;
 
-  const TrailWidget(
-      {this.showOnlyInformation = false, Key key = const Key('trail_widget')})
-      : super(key: key);
+  const TrailWidget({
+    Key key = const Key('trail_widget'),
+    this.showOnlyInformation = false,
+    this.value = '',
+    this.onChanged,
+  }) : super(key: key);
+
+  static TrailWidget input({required Function(String) onChanged}) {
+    return TrailWidget(
+      onChanged: onChanged,
+      showOnlyInformation: false,
+    );
+  }
+
+  static TrailWidget info({required String value}) {
+    return TrailWidget(
+      value: value,
+      showOnlyInformation: true,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +95,24 @@ class TrailWidget extends StatelessWidget {
                                     )))),
                   ),
                 state.trailType == TrailType.percentage
-                    ? const CustomExpandedRow(
+                    ? CustomExpandedRow(
                         'Trail Percentage',
-                        text: '15%',
+                        text: '$value',
+                        child: showOnlyInformation
+                            ? null
+                            : CustomTextInput(
+                                textInputType: TextInputType.number,
+                                labelText: '',
+                                onChanged: onChanged ?? (_) {}),
                       )
-                    : const CustomExpandedRow(
-                        'Trail Amount',
+                    : CustomExpandedRow('Trail Amount',
                         text: r'$10',
-                      ),
+                        child: showOnlyInformation
+                            ? null
+                            : CustomTextInput(
+                                textInputType: TextInputType.number,
+                                labelText: '',
+                                onChanged: onChanged ?? (_) {})),
               ],
             ));
   }
