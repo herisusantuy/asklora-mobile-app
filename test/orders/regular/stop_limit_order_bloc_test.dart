@@ -119,7 +119,7 @@ void main() {
     OrderRequest requestSellStopLimitOrder = OrderRequest.stopLimit(
         symbolType: 'symbol',
         symbol: 'abc',
-        side: 'buy',
+        side: 'sell',
         stopPrice: '99',
         limitPrice: '100',
         quantity: '10');
