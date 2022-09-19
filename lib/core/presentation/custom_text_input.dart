@@ -12,6 +12,7 @@ class CustomTextInput extends StatelessWidget {
   final List<TextInputFormatter>? textInputFormatterList;
   final String initialValue;
   final String prefixText;
+  final String suffixText;
   final Color? fillColor;
   final InputBorder inputBorder;
   final InputBorder? enabledBorder;
@@ -19,6 +20,7 @@ class CustomTextInput extends StatelessWidget {
   final InputBorder? focusedBorder;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final TextCapitalization textCapitalization;
+  final TextAlign textAlign;
 
   const CustomTextInput(
       {required this.labelText,
@@ -37,7 +39,9 @@ class CustomTextInput extends StatelessWidget {
       this.disabledBorder,
       this.focusedBorder,
       this.prefixText = '',
+      this.suffixText = '',
       this.textCapitalization = TextCapitalization.none,
+      this.textAlign = TextAlign.start,
       Key? key})
       : super(key: key);
 
@@ -48,6 +52,7 @@ class CustomTextInput extends StatelessWidget {
         inputFormatters: textInputFormatterList,
         maxLength: maxLength,
         obscureText: obscureText,
+        textAlign: textAlign,
         decoration: InputDecoration(
             floatingLabelBehavior: floatingLabelBehavior,
             filled: fillColor != null ? true : false,
@@ -57,6 +62,7 @@ class CustomTextInput extends StatelessWidget {
             counterText: '',
             hintText: hintText,
             prefixText: prefixText.isEmpty ? null : '$prefixText  ',
+            suffixText: suffixText.isEmpty ? null : '$suffixText  ',
             enabledBorder: enabledBorder,
             disabledBorder: disabledBorder,
             focusedBorder: focusedBorder,
