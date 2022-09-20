@@ -26,11 +26,12 @@ double decrementSharesAmount(double sharesAmount) {
   return (sharesAmount - 0.1).toPrecision(1);
 }
 
-double initialTrailingAmountPrice(double trailingAmount, double marketPrice) {
+double calculateTrailingAmount(double trailingAmount, double marketPrice) {
   return (trailingAmount + marketPrice).toPrecision(1);
 }
 
-double initialTrailingPercentagePrice(
+double calculateTrailingPercentage(
     double trailingPercentage, double marketPrice) {
-  return (trailingPercentage * marketPrice / 100).toPrecision(1);
+  return ((trailingPercentage * marketPrice / 100) + marketPrice)
+      .toPrecision(1);
 }
