@@ -4,9 +4,16 @@ class TrailingStopOrderWidget extends StatelessWidget {
   final OrderState orderState;
   final SymbolDetail symbolDetail;
 
-  const TrailingStopOrderWidget(
+  TrailingStopOrderWidget(
       {required this.orderState, required this.symbolDetail, Key? key})
       : super(key: key);
+
+  final trailInput = TextEditingController();
+  final quantityInput = TextEditingController();
+  void clearValue() {
+    trailInput.clear();
+    quantityInput.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,10 @@ class TrailingStopOrderWidget extends StatelessWidget {
           child: ListView(
             physics: const ScrollPhysics(),
             children: [
-              _trailInput(context, trailType: orderState.trailType),
+              TrailWidget(
+                clearValue: clearValue,
+              ),
+              _trialOrderInput,
               _quantityInput(context),
               const TimeInForceWidget(),
               const SizedBox(
@@ -24,6 +34,7 @@ class TrailingStopOrderWidget extends StatelessWidget {
               ),
               MarketPriceWidget(symbolDetail: symbolDetail),
               _initialTrailingPrice,
+              _estimatedTotal,
               _availablePower,
             ],
           ),
@@ -33,21 +44,57 @@ class TrailingStopOrderWidget extends StatelessWidget {
     );
   }
 
-  Widget _trailInput(BuildContext context, {required TrailType trailType}) {
-    if (trailType == TrailType.amount) {
-      return TrailWidget.input(
-          onChanged: (value) => context.read<TrailingOrderBloc>().add(
-              TrailingAmountChanged(
-                  value.isNotEmpty ? double.parse(value) : 0)));
-    } else {
-      return TrailWidget.input(
-          onChanged: (value) => context.read<TrailingOrderBloc>().add(
-              TrailingPercentageChanged(
-                  value.isNotEmpty ? double.parse(value) : 0)));
-    }
+  Widget get _trialOrderInput {
+    return BlocBuilder<OrderBloc, OrderState>(
+      buildWhen: (previous, current) => previous.trailType != current.trailType,
+      builder: (context, state) {
+        return state.trailType == TrailType.amount
+            ? CustomExpandedRow(
+                'Trail Amount',
+                child: CustomTextInput(
+                  controller: trailInput,
+                  prefixText: r'$',
+                  hintText: '0',
+                  textInputFormatterList: [
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  textInputType: TextInputType.number,
+                  labelText: 'Amount',
+                  onChanged: (value) {
+                    context.read<TrailingOrderBloc>().add(
+                          TrailingAmountChanged(
+                            value.isNotEmpty ? double.parse(value) : 0,
+                          ),
+                        );
+                  },
+                ),
+              )
+            : CustomExpandedRow(
+                'Trail Percentage',
+                child: CustomTextInput(
+                    controller: trailInput,
+                    suffixText: '%',
+                    hintText: '0',
+                    textAlign: TextAlign.end,
+                    textInputFormatterList: [
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                    textInputType: TextInputType.number,
+                    labelText: 'Percentage',
+                    onChanged: (value) {
+                      context.read<TrailingOrderBloc>().add(
+                            TrailingPercentageChanged(
+                              value.isNotEmpty ? double.parse(value) : 0,
+                            ),
+                          );
+                    }),
+              );
+      },
+    );
   }
 
   Widget _quantityInput(BuildContext context) => SharesQuantityWidget.input(
+        controller: quantityInput,
         onChanged: (value) => context.read<TrailingOrderBloc>().add(
             QuantityOfTrailingOrderChanged(
                 value.isNotEmpty ? double.parse(value) : 0)),
@@ -60,6 +107,15 @@ class TrailingStopOrderWidget extends StatelessWidget {
         builder: (context, state) {
           return InitialTrailingPrice(
               value: state.initialTrailingPrice.toString());
+        },
+      );
+
+  Widget get _estimatedTotal =>
+      BlocBuilder<TrailingOrderBloc, TrailingOrderState>(
+        buildWhen: (previous, current) =>
+            previous.estimateTotal != current.estimateTotal,
+        builder: (context, state) {
+          return EstimatedTotalWidget(value: state.estimateTotal.toString());
         },
       );
 
@@ -106,7 +162,9 @@ class TrailingStopOrderWidget extends StatelessWidget {
             ? state.buyErrorText
             : state.sellErrorText,
         isLoading: state.response.state == ResponseState.loading,
-        disable: false,
+        // disable: state.disableConfirmButton(
+        //     orderState.transactionType, state.trailType),
+        disable: state.disableConfirmButton(orderState.transactionType),
         orderState: context.read<OrderBloc>().state,
         symbolDetail: symbolDetail,
         onConfirmedTap: () => context.read<TrailingOrderBloc>().add(
@@ -116,19 +174,19 @@ class TrailingStopOrderWidget extends StatelessWidget {
     );
   }
 
-  OrderRequest _orderRequest(TrailingOrderState state) {
+  OrderRequest _orderRequest(TrailingOrderState trailingOrderState) {
     if (orderState.trailType == TrailType.amount) {
       return OrderRequest.trailingStopAmount(
           symbolType: symbolDetail.symbolType.name,
           symbol: symbolDetail.name,
           side: orderState.transactionType.name,
-          trailPrice: state.amount.toString());
+          trailPrice: trailingOrderState.initialTrailingPrice.toString());
     } else {
       return OrderRequest.trailingStopPercentage(
           symbolType: symbolDetail.symbolType.name,
           symbol: symbolDetail.name,
           side: orderState.transactionType.name,
-          trailPercentage: state.percentage.toString());
+          trailPercentage: trailingOrderState.initialTrailingPrice.toString());
     }
   }
 }

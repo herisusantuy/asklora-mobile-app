@@ -5,13 +5,18 @@ import '../../../../core/domain/base_response.dart';
 import '../../domain/order_request.dart';
 import '../../repository/orders_repository.dart';
 import '../../utils/orders_calculation.dart';
+import '../order_bloc.dart';
 
 part 'trailing_order_event.dart';
 part 'trailing_order_state.dart';
 
 class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
   final OrdersRepository _ordersRepository;
+
   final double _marketPrice;
+  final double _availableBuyingPower;
+  final double _numberOfSellableShares;
+
   TrailingOrderBloc({
     required double marketPrice,
     required double availableBuyingPower,
@@ -19,6 +24,8 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
     required OrdersRepository ordersRepository,
   })  : _ordersRepository = ordersRepository,
         _marketPrice = marketPrice,
+        _availableBuyingPower = availableBuyingPower,
+        _numberOfSellableShares = numberOfSellableShares,
         super(TrailingOrderState(
             availableBuyingPower: availableBuyingPower,
             availableAmountToSell: calculateAvailableAmountToSell(
@@ -27,28 +34,50 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
     on<TrailingAmountChanged>(_onAmountChanged);
     on<TrailingPercentageChanged>(_onPercentageChanged);
     on<QuantityOfTrailingOrderChanged>(_onQuantityChanged);
+    on<TrailingOrderSubmitted>(_onOrderSubmitted);
+    on<ResetTrailingOrderValue>(_onResetTrailingOrderValue);
   }
 
   void _onAmountChanged(
       TrailingAmountChanged event, Emitter<TrailingOrderState> emit) {
+    print(
+        'on amount changed ${calculateTrailingAmount(event.amount, _marketPrice)}');
     emit(state.copyWith(
-        amount: event.amount,
-        initialTrailingPrice:
-            initialTrailingAmountPrice(event.amount, _marketPrice)));
+      amount: event.amount,
+      initialTrailingPrice: calculateTrailingAmount(event.amount, _marketPrice),
+    ));
   }
 
   void _onPercentageChanged(
       TrailingPercentageChanged event, Emitter<TrailingOrderState> emit) {
+    print(
+        'on percentage changed ${calculateTrailingPercentage(event.percentage, _marketPrice)}');
     emit(state.copyWith(
         percentage: event.percentage,
         initialTrailingPrice:
-            initialTrailingPercentagePrice(event.percentage, _marketPrice)));
+            calculateTrailingPercentage(event.percentage, _marketPrice)));
   }
 
   void _onQuantityChanged(
       QuantityOfTrailingOrderChanged event, Emitter<TrailingOrderState> emit) {
+    print(
+        'on quantity changed ${calculateEstimateTotal(state.initialTrailingPrice, event.quantity)}');
     emit(state.copyWith(
-      quantity: event.quantity,
+        quantity: event.quantity,
+        estimateTotal: calculateEstimateTotal(
+            state.initialTrailingPrice, event.quantity)));
+  }
+
+  void _onResetTrailingOrderValue(
+      ResetTrailingOrderValue event, Emitter<TrailingOrderState> emit) {
+    print('on reset trail');
+    emit(state.copyWith(
+      amount: 0,
+      percentage: 0,
+      estimateTotal: 0,
+      availableBuyingPower: _availableBuyingPower,
+      initialTrailingPrice: _marketPrice,
+      numberOfSellableShares: _numberOfSellableShares,
     ));
   }
 

@@ -23,6 +23,13 @@ class TrailingPercentageChanged extends TrailingOrderEvent {
   List<Object?> get props => [percentage];
 }
 
+class ResetTrailingOrderValue extends TrailingOrderEvent {
+  const ResetTrailingOrderValue() : super();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class QuantityOfTrailingOrderChanged extends TrailingOrderEvent {
   final double quantity;
   const QuantityOfTrailingOrderChanged(this.quantity) : super();
