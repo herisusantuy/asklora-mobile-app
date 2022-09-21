@@ -43,6 +43,8 @@ void main() {
     final timeInForce = find.byKey(const Key('time_in_force_widget'));
     final marketPrice = find.byKey(const Key('market_price_widget'));
     final estimatedTotal = find.byKey(const Key('estimated_total_widget'));
+    final initialTrailingPrice =
+        find.byKey(const Key('initial_trailing_price_widget'));
     final availableBuyingPower =
         find.byKey(const Key('available_buying_power_widget'));
     final availableAmountToSell =
@@ -62,6 +64,7 @@ void main() {
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
       expect(marketPrice, findsOneWidget);
+      expect(initialTrailingPrice, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(availableBuyingPower, findsOneWidget);
       expect(availableAmountToSell, findsNothing);
@@ -79,6 +82,7 @@ void main() {
       expect(sharesQuantity, findsOneWidget);
       expect(timeInForce, findsOneWidget);
       expect(marketPrice, findsOneWidget);
+      expect(initialTrailingPrice, findsOneWidget);
       expect(estimatedTotal, findsOneWidget);
       expect(availableBuyingPower, findsNothing);
       expect(availableAmountToSell, findsOneWidget);

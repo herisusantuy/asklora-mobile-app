@@ -10,7 +10,7 @@ class InitialTrailingPrice extends StatelessWidget {
   const InitialTrailingPrice(
       {this.value = '',
       this.fontType = FontType.smallText,
-      Key key = const Key('estimated_total_widget')})
+      Key key = const Key('initial_trailing_price_widget')})
       : super(key: key);
 
   @override
