@@ -4,16 +4,9 @@ class TrailingStopOrderWidget extends StatelessWidget {
   final OrderState orderState;
   final SymbolDetail symbolDetail;
 
-  TrailingStopOrderWidget(
+  const TrailingStopOrderWidget(
       {required this.orderState, required this.symbolDetail, Key? key})
       : super(key: key);
-
-  final trailInput = TextEditingController();
-  final quantityInput = TextEditingController();
-  void clearValue() {
-    trailInput.clear();
-    quantityInput.clear();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +16,7 @@ class TrailingStopOrderWidget extends StatelessWidget {
           child: ListView(
             physics: const ScrollPhysics(),
             children: [
-              TrailWidget(
-                clearValue: clearValue,
-              ),
+              const TrailTypeWidget(),
               _trialOrderInput,
               _quantityInput(context),
               const TimeInForceWidget(),
@@ -52,7 +43,7 @@ class TrailingStopOrderWidget extends StatelessWidget {
             ? CustomExpandedRow(
                 'Trail Amount',
                 child: CustomTextInput(
-                  controller: trailInput,
+                  key: const Key('trail_amount_input'),
                   prefixText: r'$',
                   hintText: '0',
                   textInputFormatterList: [
@@ -72,7 +63,7 @@ class TrailingStopOrderWidget extends StatelessWidget {
             : CustomExpandedRow(
                 'Trail Percentage',
                 child: CustomTextInput(
-                    controller: trailInput,
+                    key: const Key('trail_percentage_input'),
                     suffixText: '%',
                     hintText: '0',
                     textAlign: TextAlign.end,
@@ -93,11 +84,17 @@ class TrailingStopOrderWidget extends StatelessWidget {
     );
   }
 
-  Widget _quantityInput(BuildContext context) => SharesQuantityWidget.input(
-        controller: quantityInput,
-        onChanged: (value) => context.read<TrailingOrderBloc>().add(
-            QuantityOfTrailingOrderChanged(
-                value.isNotEmpty ? double.parse(value) : 0)),
+  Widget _quantityInput(BuildContext context) =>
+      BlocBuilder<OrderBloc, OrderState>(
+        buildWhen: (previous, current) =>
+            previous.trailType != current.trailType,
+        builder: (context, state) {
+          return SharesQuantityWidget.input(
+            onChanged: (value) => context.read<TrailingOrderBloc>().add(
+                QuantityOfTrailingOrderChanged(
+                    value.isNotEmpty ? double.parse(value) : 0)),
+          );
+        },
       );
 
   Widget get _initialTrailingPrice =>

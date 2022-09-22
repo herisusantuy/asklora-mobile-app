@@ -84,19 +84,15 @@ class TrailingOrderState extends Equatable {
   bool disableConfirmButton(TransactionType transactionType) {
     switch (transactionType) {
       case TransactionType.buy:
-        return (amount != 0 || percentage != 0) &&
-                quantity != 0 &&
-                estimateTotal != 0 &&
-                buyErrorText.isEmpty
-            ? false
-            : true;
+        return !((amount != 0 || percentage != 0) &&
+            quantity != 0 &&
+            estimateTotal != 0 &&
+            buyErrorText.isEmpty);
       case TransactionType.sell:
-        return (amount != 0 || percentage != 0) &&
-                quantity != 0 &&
-                estimateTotal != 0 &&
-                buyErrorText.isEmpty
-            ? false
-            : true;
+        return !((amount != 0 || percentage != 0) &&
+            quantity != 0 &&
+            estimateTotal != 0 &&
+            buyErrorText.isEmpty);
       default:
         return true;
     }
