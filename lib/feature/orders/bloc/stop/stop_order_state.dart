@@ -69,20 +69,21 @@ class StopOrderState extends Equatable {
   }
 
   bool disabledConfirmButton(TransactionType transactionType) {
-    if (transactionType == TransactionType.buy) {
-      if (stopPrice != 0 && quantity != 0 && buyErrorText.isEmpty) {
-        return false;
-      } else {
+    switch (transactionType) {
+      case TransactionType.buy:
+        if (stopPrice != 0 && quantity != 0 && buyErrorText.isEmpty) {
+          return false;
+        } else {
+          return true;
+        }
+      case TransactionType.sell:
+        if (stopPrice != 0 && quantity != 0 && sellErrorText.isEmpty) {
+          return false;
+        } else {
+          return true;
+        }
+      default:
         return true;
-      }
-    } else if (transactionType == TransactionType.sell) {
-      if (stopPrice != 0 && quantity != 0 && sellErrorText.isEmpty) {
-        return false;
-      } else {
-        return true;
-      }
-    } else {
-      return true;
     }
   }
 }
