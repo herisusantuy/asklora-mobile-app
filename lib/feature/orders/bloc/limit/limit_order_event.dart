@@ -1,13 +1,13 @@
-part of 'limit_bloc.dart';
+part of 'limit_order_bloc.dart';
 
-abstract class LimitEvent extends Equatable {
-  const LimitEvent() : super();
+abstract class LimitOrderEvent extends Equatable {
+  const LimitOrderEvent() : super();
 
   @override
   List<Object?> get props => [];
 }
 
-class LimitChanged extends LimitEvent {
+class LimitChanged extends LimitOrderEvent {
   final double limit;
 
   const LimitChanged(this.limit) : super();
@@ -16,7 +16,7 @@ class LimitChanged extends LimitEvent {
   List<Object?> get props => [limit];
 }
 
-class QuantityChanged extends LimitEvent {
+class QuantityChanged extends LimitOrderEvent {
   final double quantity;
 
   const QuantityChanged(this.quantity) : super();
@@ -25,7 +25,7 @@ class QuantityChanged extends LimitEvent {
   List<Object?> get props => [quantity];
 }
 
-class OrderSubmitted extends LimitEvent {
+class OrderSubmitted extends LimitOrderEvent {
   final OrderRequest orderRequest;
 
   const OrderSubmitted(this.orderRequest) : super();

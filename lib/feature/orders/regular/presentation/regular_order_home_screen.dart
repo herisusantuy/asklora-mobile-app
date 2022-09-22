@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../bloc/limit/limit_bloc.dart';
 import '../../bloc/market/market_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
@@ -35,12 +34,6 @@ class RegularOrderHomeScreen extends StatelessWidget {
         BlocProvider(create: (_) => OrderBloc()),
         BlocProvider(
             create: (_) => MarketBloc(
-                marketPrice: symbolDetail.marketPrice,
-                availableBuyingPower: availableBuyingPower,
-                ordersRepository: OrdersRepository(),
-                numberOfSellableShares: 20)),
-        BlocProvider(
-            create: (_) => LimitBloc(
                 marketPrice: symbolDetail.marketPrice,
                 availableBuyingPower: availableBuyingPower,
                 ordersRepository: OrdersRepository(),
