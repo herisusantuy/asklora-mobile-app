@@ -17,7 +17,6 @@ class TrailingStopOrderWidget extends StatelessWidget {
             physics: const ScrollPhysics(),
             children: [
               const TrailTypeWidget(),
-              _trialOrderInput,
               _quantityInput(context),
               const TimeInForceWidget(),
               const SizedBox(
@@ -32,55 +31,6 @@ class TrailingStopOrderWidget extends StatelessWidget {
         ),
         _submitButton
       ],
-    );
-  }
-
-  Widget get _trialOrderInput {
-    return BlocBuilder<OrderBloc, OrderState>(
-      buildWhen: (previous, current) => previous.trailType != current.trailType,
-      builder: (context, state) {
-        return state.trailType == TrailType.amount
-            ? CustomExpandedRow(
-                'Trail Amount',
-                child: CustomTextInput(
-                  key: const Key('trail_amount_input'),
-                  prefixText: r'$',
-                  hintText: '0',
-                  textInputFormatterList: [
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  textInputType: TextInputType.number,
-                  labelText: 'Amount',
-                  onChanged: (value) {
-                    context.read<TrailingOrderBloc>().add(
-                          TrailingAmountChanged(
-                            value.isNotEmpty ? double.parse(value) : 0,
-                          ),
-                        );
-                  },
-                ),
-              )
-            : CustomExpandedRow(
-                'Trail Percentage',
-                child: CustomTextInput(
-                    key: const Key('trail_percentage_input'),
-                    suffixText: '%',
-                    hintText: '0',
-                    textAlign: TextAlign.end,
-                    textInputFormatterList: [
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    textInputType: TextInputType.number,
-                    labelText: 'Percentage',
-                    onChanged: (value) {
-                      context.read<TrailingOrderBloc>().add(
-                            TrailingPercentageChanged(
-                              value.isNotEmpty ? double.parse(value) : 0,
-                            ),
-                          );
-                    }),
-              );
-      },
     );
   }
 
