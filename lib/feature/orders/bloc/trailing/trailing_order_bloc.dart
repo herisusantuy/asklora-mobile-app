@@ -40,8 +40,6 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
 
   void _onAmountChanged(
       TrailingAmountChanged event, Emitter<TrailingOrderState> emit) {
-    print(
-        'on amount changed ${calculateTrailingAmount(event.amount, _marketPrice)}');
     emit(state.copyWith(
       amount: event.amount,
       initialTrailingPrice: calculateTrailingAmount(event.amount, _marketPrice),
@@ -50,8 +48,6 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
 
   void _onPercentageChanged(
       TrailingPercentageChanged event, Emitter<TrailingOrderState> emit) {
-    print(
-        'on percentage changed ${calculateTrailingPercentage(event.percentage, _marketPrice)}');
     emit(state.copyWith(
         percentage: event.percentage,
         initialTrailingPrice:
@@ -60,8 +56,6 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
 
   void _onQuantityChanged(
       QuantityOfTrailingOrderChanged event, Emitter<TrailingOrderState> emit) {
-    print(
-        'on quantity changed ${calculateEstimateTotal(state.initialTrailingPrice, event.quantity)}');
     emit(state.copyWith(
         quantity: event.quantity,
         estimateTotal: calculateEstimateTotal(
@@ -70,7 +64,6 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
 
   void _onResetTrailingOrderValue(
       ResetTrailingOrderValue event, Emitter<TrailingOrderState> emit) {
-    print('on reset trail');
     emit(state.copyWith(
       amount: 0,
       percentage: 0,
