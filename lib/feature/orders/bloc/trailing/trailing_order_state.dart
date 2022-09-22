@@ -81,66 +81,24 @@ class TrailingOrderState extends Equatable {
     );
   }
 
-  // bool disableConfirmButton(
-  //     TransactionType transactionType, TrailType trailType) {
-  //   if (transactionType == TransactionType.buy) {
-  //     if (trailType == TrailType.amount) {
-  //       if (amount != 0 &&
-  //           quantity != 0 &&
-  //           estimateTotal != 0 &&
-  //           buyErrorText.isEmpty) {
-  //         return false;
-  //       }
-  //     } else if (trailType == TrailType.percentage) {
-  //       if (percentage != 0 &&
-  //           quantity != 0 &&
-  //           estimateTotal != 0 &&
-  //           buyErrorText.isEmpty) {
-  //         return false;
-  //       }
-  //     }
-  //     return true;
-  //   } else if (transactionType == TransactionType.sell) {
-  //     if (trailType == TrailType.amount) {
-  //       if (amount != 0 &&
-  //           quantity != 0 &&
-  //           estimateTotal != 0 &&
-  //           sellErrorText.isEmpty) {
-  //         return false;
-  //       }
-  //     } else if (trailType == TrailType.percentage) {
-  //       if (percentage != 0 &&
-  //           quantity != 0 &&
-  //           estimateTotal != 0 &&
-  //           sellErrorText.isEmpty) {
-  //         return false;
-  //       }
-  //     }
-  //     return true;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
   bool disableConfirmButton(TransactionType transactionType) {
-    if (transactionType == TransactionType.buy) {
-      if ((amount != 0 || percentage != 0) &&
-          quantity != 0 &&
-          estimateTotal != 0 &&
-          buyErrorText.isEmpty) {
-        return false;
-      }
-      return true;
-    } else if (transactionType == TransactionType.sell) {
-      if ((amount != 0 || percentage != 0) &&
-          quantity != 0 &&
-          estimateTotal != 0 &&
-          sellErrorText.isEmpty) {
-        return false;
-      }
-      return true;
-    } else {
-      return true;
+    switch (transactionType) {
+      case TransactionType.buy:
+        return (amount != 0 || percentage != 0) &&
+                quantity != 0 &&
+                estimateTotal != 0 &&
+                buyErrorText.isEmpty
+            ? false
+            : true;
+      case TransactionType.sell:
+        return (amount != 0 || percentage != 0) &&
+                quantity != 0 &&
+                estimateTotal != 0 &&
+                buyErrorText.isEmpty
+            ? false
+            : true;
+      default:
+        return true;
     }
   }
 }

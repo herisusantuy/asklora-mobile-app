@@ -162,8 +162,6 @@ class TrailingStopOrderWidget extends StatelessWidget {
             ? state.buyErrorText
             : state.sellErrorText,
         isLoading: state.response.state == ResponseState.loading,
-        // disable: state.disableConfirmButton(
-        //     orderState.transactionType, state.trailType),
         disable: state.disableConfirmButton(orderState.transactionType),
         orderState: context.read<OrderBloc>().state,
         symbolDetail: symbolDetail,
