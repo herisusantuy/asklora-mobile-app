@@ -68,17 +68,13 @@ class LimitOrderState extends Equatable {
   bool disabledConfirmButton(TransactionType transactionType) {
     switch (transactionType) {
       case TransactionType.buy:
-        if (limit != 0 && quantity != 0 && buyErrorText.isEmpty) {
-          return false;
-        } else {
-          return true;
-        }
+        return limit != 0 && quantity != 0 && buyErrorText.isEmpty
+            ? false
+            : true;
       case TransactionType.sell:
-        if (limit != 0 && quantity != 0 && sellErrorText.isEmpty) {
-          return false;
-        } else {
-          return true;
-        }
+        return limit != 0 && quantity != 0 && sellErrorText.isEmpty
+            ? false
+            : true;
       default:
         return true;
     }
