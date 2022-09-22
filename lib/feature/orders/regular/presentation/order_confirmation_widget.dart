@@ -94,7 +94,7 @@ class OrderConfirmationWidget<T> extends StatelessWidget {
         ];
       case OrderType.trailingStop:
         return [
-          const TrailWidget(showOnlyInformation: true),
+          const TrailTypeWidget(showOnlyInformation: true),
           SharesQuantityWidget.info(value: '4'),
           if (orderState.transactionType == TransactionType.buy)
             const OrderFeesWidget(value: '1'),

@@ -16,7 +16,7 @@ void main() {
         home: Scaffold(
           body: BlocProvider(
             create: (_) => OrderBloc(),
-            child: TrailWidget(
+            child: TrailTypeWidget(
               showOnlyInformation: showOnlyInformation,
             ),
           ),

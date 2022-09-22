@@ -41,7 +41,7 @@ part 'widgets/shares_quantity_widget.dart';
 part 'widgets/symbol_title_widget.dart';
 part 'widgets/time_in_force_widget.dart';
 part 'widgets/trading_hours_widget.dart';
-part 'widgets/trail_widget.dart';
+part 'widgets/trail_type_widget.dart';
 
 class OrderScreen extends StatelessWidget {
   final OrderState orderState;

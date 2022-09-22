@@ -1,17 +1,15 @@
 part of '../order_screen.dart';
 
-class TrailWidget extends StatelessWidget {
+class TrailTypeWidget extends StatelessWidget {
   final bool showOnlyInformation;
   final String? value;
   final Function(String)? onChanged;
-  final Function()? clearValue;
 
-  const TrailWidget({
+  const TrailTypeWidget({
     Key key = const Key('trail_widget'),
     this.showOnlyInformation = false,
     this.value = '',
     this.onChanged,
-    this.clearValue,
   }) : super(key: key);
 
   @override
@@ -59,7 +57,6 @@ class TrailWidget extends StatelessWidget {
                                   context.read<TrailingOrderBloc>().add(
                                         const ResetTrailingOrderValue(),
                                       );
-                                  clearValue!();
                                 },
                                 label: TrailType.amount.name,
                                 text:
@@ -80,7 +77,6 @@ class TrailWidget extends StatelessWidget {
                                   context.read<TrailingOrderBloc>().add(
                                         const ResetTrailingOrderValue(),
                                       );
-                                  clearValue!();
                                 },
                                 label: TrailType.percentage.name,
                                 text:
