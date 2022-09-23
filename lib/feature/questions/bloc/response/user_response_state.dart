@@ -4,15 +4,17 @@ class UserResponseState extends Equatable {
   final ResponseState responseState;
   final EndpointResponse endpointResponse;
 
-  const UserResponseState(
-      {this.responseState = ResponseState.unknown, this.endpointResponse = const EndpointResponse(),});
+  const UserResponseState({
+    this.responseState = ResponseState.unknown,
+    this.endpointResponse = const EndpointResponse(),
+  });
 
   UserResponseState copyWith({
     ResponseState? responseState,
     EndpointResponse? endpointResponse,
   }) {
     return UserResponseState(
-        responseState: responseState ?? this.responseState,
+      responseState: responseState ?? this.responseState,
       endpointResponse: endpointResponse ?? this.endpointResponse,
     );
   }

@@ -30,20 +30,17 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   }
 
   void _onInvestmentStyleQuestionIndexChanged(
-      InvestmentStyleQuestionIndexChanged event,
-      Emitter<QuestionState> emit) {
+      InvestmentStyleQuestionIndexChanged event, Emitter<QuestionState> emit) {
     emit(state.copyWith(
         investmentStyleQuestionIndex: event.investmentStyleQuestionIndex));
   }
 
   void _onLoadQuestions(
       LoadQuestions event, Emitter<QuestionState> emit) async {
-    print('on load question bloc');
     emit(state.copyWith(response: BaseResponse.loading()));
     QuestionCollectionRepository repository = QuestionCollectionRepository();
 
     var data = await repository.fetchQuestions();
     emit(state.copyWith(response: BaseResponse.complete(data)));
-
   }
 }

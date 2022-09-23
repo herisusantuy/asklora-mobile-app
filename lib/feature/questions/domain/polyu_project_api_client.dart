@@ -9,7 +9,6 @@ import 'bot_submission_request.dart';
 import 'user_response_request.dart';
 
 class QuestionApiClient {
-
   Future<Response> getQuestions() async =>
       await AskloraApiClient().get(endpoint: question);
 
@@ -18,10 +17,12 @@ class QuestionApiClient {
           .post(endpoint: addAnswer, payload: json.encode(request.toJson()));
 
   Future<Response> postBulkAnswer(List<UserResponseRequest> request) async =>
-      await AskloraApiClient().post(endpoint: addAnswer, payload: jsonEncode(request));
+      await AskloraApiClient()
+          .post(endpoint: addAnswer, payload: jsonEncode(request));
 
-  Future<Response> postUser(AddUserRequest request) async => await AskloraApiClient()
-      .post(endpoint: addUser, payload: json.encode(request.toJson()));
+  Future<Response> postUser(AddUserRequest request) async =>
+      await AskloraApiClient()
+          .post(endpoint: addUser, payload: json.encode(request.toJson()));
 
   Future<Response> postBotChoice(BotSubmissionRequest request) async =>
       await AskloraApiClient()

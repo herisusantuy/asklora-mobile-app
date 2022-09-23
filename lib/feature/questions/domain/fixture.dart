@@ -1,5 +1,3 @@
-
-
 import 'question.dart';
 
 enum QuestionSection {
@@ -9,7 +7,6 @@ enum QuestionSection {
   neuroticism('neuroticism'),
   investmentStyle('investment_style'),
   feedBack('feedback');
-
 
   final String value;
 
@@ -85,7 +82,7 @@ class Fixture {
       if (element.questions!.section == QuestionSection.investmentStyle.value) {
         setInvestmentStyleQuestion = element;
       }
-      if(element.questions!.section == QuestionSection.feedBack.value){
+      if (element.questions!.section == QuestionSection.feedBack.value) {
         setFeedBackQuestions = element;
       }
     }

@@ -17,8 +17,8 @@ class UserResponseRequest {
 
   UserResponseRequest(
       {required this.email,
-        required this.questionId,
-        required this.section,
-        required this.types,
-        required this.points});
+      required this.questionId,
+      required this.section,
+      required this.types,
+      required this.points});
 }

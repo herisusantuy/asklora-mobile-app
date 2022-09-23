@@ -23,7 +23,6 @@ class SendBulkResponse extends UserResponseEvent {
 }
 
 class SkipResponse extends UserResponseEvent {
-
   @override
   List<Object?> get props => [];
 
@@ -38,4 +37,3 @@ class UpdateEndpointResponse extends UserResponseEvent {
 
   const UpdateEndpointResponse(this.endpointResponse);
 }
-
