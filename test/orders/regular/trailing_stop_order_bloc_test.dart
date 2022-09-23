@@ -124,6 +124,7 @@ void main() async {
       symbol: 'abc',
       side: 'buy',
       trailPrice: '10',
+      quantity: '10',
     );
     OrderRequest requestBuyTrailStopOrderByPercentage =
         OrderRequest.trailingStopAmount(
@@ -131,6 +132,7 @@ void main() async {
       symbol: 'abc',
       side: 'buy',
       trailPrice: '10',
+      quantity: '10',
     );
     OrderRequest requestSellTrailStopOrderByAmount =
         OrderRequest.trailingStopAmount(
@@ -138,6 +140,7 @@ void main() async {
       symbol: 'abc',
       side: 'sell',
       trailPrice: '10',
+      quantity: '10',
     );
     OrderRequest requestSellTrailStopOrderByPercentage =
         OrderRequest.trailingStopAmount(
@@ -145,6 +148,7 @@ void main() async {
       symbol: 'abc',
       side: 'sell',
       trailPrice: '10',
+      quantity: '10',
     );
     BaseResponse<OrderResponse> successResponse =
         BaseResponse.complete(OrderResponse());
