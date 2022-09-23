@@ -95,19 +95,10 @@ class TrailingStopOrderWidget extends StatelessWidget {
   Widget get _submitButton {
     return BlocBuilder<TrailingOrderBloc, TrailingOrderState>(
       buildWhen: (previous, current) =>
-          orderState.transactionType == TransactionType.buy &&
-              previous.buyErrorText != current.buyErrorText ||
-          orderState.transactionType == TransactionType.sell &&
-              previous.sellErrorText != current.sellErrorText ||
-          previous.response.state != current.response.state ||
-          previous.amount != current.amount ||
-          previous.percentage != current.percentage ||
-          previous.quantity != current.quantity,
+          buildSubmitButton(previous, current, orderState.transactionType),
       builder: (context, state) => OrderConfirmationButton<TrailingOrderState>(
         dynamicState: state,
-        errorText: orderState.transactionType == TransactionType.buy
-            ? state.buyErrorText
-            : state.sellErrorText,
+        errorText: state.errorText(orderState.transactionType),
         isLoading: state.response.state == ResponseState.loading,
         disable: state.disableConfirmButton(orderState.transactionType),
         orderState: context.read<OrderBloc>().state,

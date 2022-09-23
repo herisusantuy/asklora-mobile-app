@@ -14,8 +14,6 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
   final OrdersRepository _ordersRepository;
 
   final double _marketPrice;
-  final double _availableBuyingPower;
-  final double _numberOfSellableShares;
 
   TrailingOrderBloc({
     required double marketPrice,
@@ -24,8 +22,6 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
     required OrdersRepository ordersRepository,
   })  : _ordersRepository = ordersRepository,
         _marketPrice = marketPrice,
-        _availableBuyingPower = availableBuyingPower,
-        _numberOfSellableShares = numberOfSellableShares,
         super(TrailingOrderState(
             availableBuyingPower: availableBuyingPower,
             availableAmountToSell: calculateAvailableAmountToSell(
@@ -68,9 +64,7 @@ class TrailingOrderBloc extends Bloc<TrailingOrderEvent, TrailingOrderState> {
       amount: 0,
       percentage: 0,
       estimateTotal: 0,
-      availableBuyingPower: _availableBuyingPower,
       initialTrailingPrice: _marketPrice,
-      numberOfSellableShares: _numberOfSellableShares,
     ));
   }
 

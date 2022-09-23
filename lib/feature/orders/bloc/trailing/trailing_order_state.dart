@@ -92,9 +92,34 @@ class TrailingOrderState extends Equatable {
         return !((amount != 0 || percentage != 0) &&
             quantity != 0 &&
             estimateTotal != 0 &&
-            buyErrorText.isEmpty);
+            sellErrorText.isEmpty);
       default:
         return true;
     }
+  }
+
+  String errorText(TransactionType transactionType) {
+    switch (transactionType) {
+      case TransactionType.buy:
+        return buyErrorText;
+      default:
+        return sellErrorText;
+    }
+  }
+}
+
+bool buildSubmitButton(TrailingOrderState previous, TrailingOrderState current,
+    TransactionType transactionType) {
+  switch (transactionType) {
+    case TransactionType.buy:
+      return previous.buyErrorText != current.buyErrorText;
+    case TransactionType.sell:
+      return previous.sellErrorText != current.sellErrorText ||
+          previous.response.state != current.response.state ||
+          previous.amount != current.amount ||
+          previous.percentage != current.percentage ||
+          previous.quantity != current.quantity;
+    default:
+      return false;
   }
 }
