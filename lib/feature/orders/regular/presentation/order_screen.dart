@@ -13,11 +13,13 @@ import '../../bloc/limit/limit_order_bloc.dart';
 import '../../bloc/order_bloc.dart';
 import '../../bloc/stop/stop_order_bloc.dart';
 import '../../bloc/stop_limit/stop_limit_order_bloc.dart';
+import '../../bloc/trailing/trailing_order_bloc.dart';
 import '../../domain/order_request.dart';
 import '../../domain/symbol_detail.dart';
 import '../../repository/orders_repository.dart';
 import 'market_order_widget.dart';
 import 'widgets/custom_bottom_sheet_card_widget.dart';
+import 'widgets/initialTrailingPrice.dart';
 import 'widgets/order_bottom_sheet_widget.dart';
 
 part 'limit_order_widget.dart';
@@ -39,7 +41,7 @@ part 'widgets/shares_quantity_widget.dart';
 part 'widgets/symbol_title_widget.dart';
 part 'widgets/time_in_force_widget.dart';
 part 'widgets/trading_hours_widget.dart';
-part 'widgets/trail_widget.dart';
+part 'widgets/trail_type_widget.dart';
 
 class OrderScreen extends StatelessWidget {
   final OrderState orderState;
@@ -110,10 +112,16 @@ class OrderScreen extends StatelessWidget {
                     orderState: orderState, symbolDetail: symbolDetail),
               );
             case OrderType.trailingStop:
-              return TrailingStopOrderWidget(
-                  orderType: state.orderType,
-                  transactionType: state.transactionType,
-                  symbolDetail: symbolDetail);
+              return BlocProvider(
+                create: (context) => TrailingOrderBloc(
+                  marketPrice: symbolDetail.marketPrice,
+                  availableBuyingPower: availableBuyingPower,
+                  ordersRepository: OrdersRepository(),
+                  numberOfSellableShares: 20,
+                ),
+                child: TrailingStopOrderWidget(
+                    orderState: orderState, symbolDetail: symbolDetail),
+              );
             default:
               return const SizedBox.shrink();
           }

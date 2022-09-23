@@ -11,6 +11,7 @@ class CustomExpandedRow extends StatelessWidget {
   final int flex1;
   final int flex2;
   final TextAlign textValueAlign;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const CustomExpandedRow(this.label,
       {this.text = '',
@@ -20,6 +21,7 @@ class CustomExpandedRow extends StatelessWidget {
       this.flex2 = 1,
       this.padding = const EdgeInsets.only(bottom: 8),
       this.textValueAlign = TextAlign.right,
+      this.crossAxisAlignment = CrossAxisAlignment.start,
       Key? key})
       : super(key: key);
 
@@ -29,7 +31,7 @@ class CustomExpandedRow extends StatelessWidget {
       padding: padding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: crossAxisAlignment,
         children: [
           Expanded(
               flex: flex1,

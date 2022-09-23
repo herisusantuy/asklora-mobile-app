@@ -94,7 +94,7 @@ class OrderConfirmationWidget<T> extends StatelessWidget {
         ];
       case OrderType.trailingStop:
         return [
-          const TrailWidget(showOnlyInformation: true),
+          _trailType,
           SharesQuantityWidget.info(value: '4'),
           if (orderState.transactionType == TransactionType.buy)
             const OrderFeesWidget(value: '1'),
@@ -136,5 +136,10 @@ class OrderConfirmationWidget<T> extends StatelessWidget {
         'Trading Hours',
         key: const Key('trading_hours_widget'),
         text: orderState.tradingHours.name,
+      );
+  Widget get _trailType => CustomExpandedRow(
+        'Trail Type',
+        key: const Key('trail_type_widget'),
+        text: orderState.trailType.name,
       );
 }

@@ -1,6 +1,8 @@
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
+import 'package:asklora_mobile_app/feature/orders/bloc/trailing/trailing_order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_screen.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/widgets/custom_bottom_sheet_card_widget.dart';
+import 'package:asklora_mobile_app/feature/orders/repository/orders_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,9 +16,20 @@ void main() {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: BlocProvider(
-            create: (_) => OrderBloc(),
-            child: TrailWidget(
+          body: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => OrderBloc(),
+              ),
+              BlocProvider(
+                create: (_) => TrailingOrderBloc(
+                    marketPrice: 100,
+                    availableBuyingPower: 1000,
+                    numberOfSellableShares: 20,
+                    ordersRepository: OrdersRepository()),
+              ),
+            ],
+            child: TrailTypeWidget(
               showOnlyInformation: showOnlyInformation,
             ),
           ),

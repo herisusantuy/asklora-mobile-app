@@ -34,11 +34,13 @@ class SharesQuantityWidget extends StatelessWidget {
       child: showOnlyInformation
           ? null
           : CustomTextInput(
+              key: UniqueKey(),
               textInputType: TextInputType.number,
               textInputFormatterList: [
                 FilteringTextInputFormatter.digitsOnly,
               ],
               labelText: 'Quantity',
+              hintText: '0',
               onChanged: onChanged ?? (_) {},
             ),
     );
