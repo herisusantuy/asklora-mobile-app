@@ -76,19 +76,15 @@ class StopLimitOrderState extends Equatable {
   bool disabledConfirmButton(TransactionType transactionType) {
     switch (transactionType) {
       case TransactionType.buy:
-        return stopPrice != 0 &&
-                limitPrice != 0 &&
-                quantity != 0 &&
-                buyErrorText.isEmpty
-            ? false
-            : true;
+        return !(stopPrice != 0 &&
+            limitPrice != 0 &&
+            quantity != 0 &&
+            buyErrorText.isEmpty);
       case TransactionType.sell:
-        return stopPrice != 0 &&
-                limitPrice != 0 &&
-                quantity != 0 &&
-                sellErrorText.isEmpty
-            ? false
-            : true;
+        return !(stopPrice != 0 &&
+            limitPrice != 0 &&
+            quantity != 0 &&
+            sellErrorText.isEmpty);
       default:
         return true;
     }

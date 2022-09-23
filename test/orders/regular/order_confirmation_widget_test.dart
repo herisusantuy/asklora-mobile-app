@@ -33,7 +33,7 @@ void main() {
 
   final symbolTitle = find.byKey(const Key('symbol_title_widget'));
   final timeInForce = find.byKey(const Key('time_in_force_widget'));
-  final trail = find.byKey(const Key('trail_widget'));
+  final trail = find.byKey(const Key('trail_type_widget'));
   final orderType = find.byKey(const Key('order_type_widget'));
   final fees = find.byKey(const Key('order_fees_widget'));
   final estimatedTotal = find.byKey(const Key('estimated_total_widget'));
