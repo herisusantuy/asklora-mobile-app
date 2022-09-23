@@ -34,6 +34,7 @@ class SharesQuantityWidget extends StatelessWidget {
       child: showOnlyInformation
           ? null
           : CustomTextInput(
+              key: UniqueKey(),
               textInputType: TextInputType.number,
               textInputFormatterList: [
                 FilteringTextInputFormatter.digitsOnly,
