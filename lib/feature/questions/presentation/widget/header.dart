@@ -16,18 +16,19 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Expanded(
                 child: CustomText(
               header,
-              type: FontType.h5,
+              type: FontType.h3,
             )),
             if (questionNumber.isNotEmpty)
               CustomText(
                 questionNumber,
-                type: FontType.bodyTextBold,
+                type: FontType.h4,
               ),
           ],
         ),

@@ -32,8 +32,8 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
               questionNumber: questionCollection.questions!.questionIndex!,
               subHeader: questionCollection.questions!.question!,
             ),
-            SizedBox(
-              height: 12,
+            const SizedBox(
+              height: 16,
             ),
             Expanded(
               child: BlocBuilder<MultipleQuestionWidgetBloc,
