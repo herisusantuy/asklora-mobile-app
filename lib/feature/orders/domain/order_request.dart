@@ -110,31 +110,37 @@ class OrderRequest {
     );
   }
 
-  static OrderRequest trailingStopAmount(
-      {required String symbolType,
-      required String symbol,
-      required String side,
-      required String trailPrice}) {
+  static OrderRequest trailingStopAmount({
+    required String symbolType,
+    required String symbol,
+    required String side,
+    required String trailPrice,
+    required String quantity,
+  }) {
     return OrderRequest(
       symbol: symbol,
       side: side,
       type: OrderType.trailingStop.name,
       orderClass: OrderClass.simple.name,
       trailPrice: trailPrice,
+      qty: quantity,
     );
   }
 
-  static OrderRequest trailingStopPercentage(
-      {required String symbolType,
-      required String symbol,
-      required String side,
-      required String trailPercentage}) {
+  static OrderRequest trailingStopPercentage({
+    required String symbolType,
+    required String symbol,
+    required String side,
+    required String trailPercentage,
+    required String quantity,
+  }) {
     return OrderRequest(
       symbol: symbol,
       side: side,
       type: OrderType.trailingStop.name,
       orderClass: OrderClass.simple.name,
       trailPercent: trailPercentage,
+      qty: quantity,
     );
   }
 

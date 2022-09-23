@@ -111,18 +111,23 @@ class TrailingStopOrderWidget extends StatelessWidget {
   }
 
   OrderRequest _orderRequest(TrailingOrderState trailingOrderState) {
-    if (orderState.trailType == TrailType.amount) {
-      return OrderRequest.trailingStopAmount(
+    switch (orderState.trailType) {
+      case TrailType.amount:
+        return OrderRequest.trailingStopAmount(
           symbolType: symbolDetail.symbolType.name,
           symbol: symbolDetail.name,
           side: orderState.transactionType.name,
-          trailPrice: trailingOrderState.initialTrailingPrice.toString());
-    } else {
-      return OrderRequest.trailingStopPercentage(
+          trailPrice: trailingOrderState.initialTrailingPrice.toString(),
+          quantity: trailingOrderState.quantity.toString(),
+        );
+      case TrailType.percentage:
+        return OrderRequest.trailingStopPercentage(
           symbolType: symbolDetail.symbolType.name,
           symbol: symbolDetail.name,
           side: orderState.transactionType.name,
-          trailPercentage: trailingOrderState.initialTrailingPrice.toString());
+          trailPercentage: trailingOrderState.initialTrailingPrice.toString(),
+          quantity: trailingOrderState.quantity.toString(),
+        );
     }
   }
 }

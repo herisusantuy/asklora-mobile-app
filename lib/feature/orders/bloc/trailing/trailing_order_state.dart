@@ -112,7 +112,10 @@ bool buildSubmitButton(TrailingOrderState previous, TrailingOrderState current,
     TransactionType transactionType) {
   switch (transactionType) {
     case TransactionType.buy:
-      return previous.buyErrorText != current.buyErrorText;
+      return previous.buyErrorText != current.buyErrorText ||
+          previous.amount != current.amount ||
+          previous.percentage != current.percentage ||
+          previous.quantity != current.quantity;
     case TransactionType.sell:
       return previous.sellErrorText != current.sellErrorText ||
           previous.response.state != current.response.state ||
