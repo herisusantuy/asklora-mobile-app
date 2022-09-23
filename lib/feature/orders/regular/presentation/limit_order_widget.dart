@@ -17,11 +17,11 @@ class LimitOrderWidget extends StatelessWidget {
             children: [
               OrderTypePriceWidget.input(
                 prefixTitle: orderState.orderType.name,
-                onChanged: (value) => context.read<LimitBloc>().add(
+                onChanged: (value) => context.read<LimitOrderBloc>().add(
                     LimitChanged(value.isNotEmpty ? double.parse(value) : 0)),
               ),
               SharesQuantityWidget.input(
-                  onChanged: (value) => context.read<LimitBloc>().add(
+                  onChanged: (value) => context.read<LimitOrderBloc>().add(
                       QuantityChanged(
                           value.isNotEmpty ? double.parse(value) : 0))),
               const TimeInForceWidget(),
@@ -30,13 +30,13 @@ class LimitOrderWidget extends StatelessWidget {
                 height: 40,
               ),
               MarketPriceWidget(symbolDetail: symbolDetail),
-              BlocBuilder<LimitBloc, LimitState>(
+              BlocBuilder<LimitOrderBloc, LimitOrderState>(
                   buildWhen: (previous, current) =>
                       previous.estimateTotal != current.estimateTotal,
                   builder: (context, state) => EstimatedTotalWidget(
                       value: state.estimateTotal.toString())),
               if (orderState.transactionType == TransactionType.buy) ...[
-                BlocBuilder<LimitBloc, LimitState>(
+                BlocBuilder<LimitOrderBloc, LimitOrderState>(
                   buildWhen: (previous, current) =>
                       previous.availableBuyingPower !=
                       current.availableBuyingPower,
@@ -45,14 +45,14 @@ class LimitOrderWidget extends StatelessWidget {
                 )
               ] else if (orderState.transactionType ==
                   TransactionType.sell) ...[
-                BlocBuilder<LimitBloc, LimitState>(
+                BlocBuilder<LimitOrderBloc, LimitOrderState>(
                   buildWhen: (previous, current) =>
                       previous.availableAmountToSell !=
                       current.availableAmountToSell,
                   builder: (context, state) => AvailableAmountToSellWidget(
                       value: state.availableAmountToSell.toString()),
                 ),
-                BlocBuilder<LimitBloc, LimitState>(
+                BlocBuilder<LimitOrderBloc, LimitOrderState>(
                   buildWhen: (previous, current) =>
                       previous.numberOfSellableShares !=
                       current.numberOfSellableShares,
@@ -63,7 +63,7 @@ class LimitOrderWidget extends StatelessWidget {
             ],
           ),
         ),
-        BlocBuilder<LimitBloc, LimitState>(
+        BlocBuilder<LimitOrderBloc, LimitOrderState>(
             buildWhen: (previous, current) =>
                 orderState.transactionType == TransactionType.buy &&
                     previous.buyErrorText != current.buyErrorText ||
@@ -72,27 +72,25 @@ class LimitOrderWidget extends StatelessWidget {
                 previous.response.state != current.response.state ||
                 previous.limit != current.limit ||
                 previous.quantity != current.quantity,
-            builder: (context, state) => OrderConfirmationButton<LimitState>(
-                dynamicState: state,
-                errorText: orderState.transactionType == TransactionType.buy
-                    ? state.buyErrorText
-                    : state.sellErrorText,
-                isLoading: state.response.state == ResponseState.loading,
-                disable: state.buyErrorText.isNotEmpty ||
-                        state.limit == 0 ||
-                        state.quantity == 0
-                    ? true
-                    : false,
-                orderState: context.read<OrderBloc>().state,
-                symbolDetail: symbolDetail,
-                onConfirmedTap: () => context.read<LimitBloc>().add(
-                      OrderSubmitted(OrderRequest.limit(
-                          symbolType: symbolDetail.symbolType.name,
-                          symbol: symbolDetail.name,
-                          side: orderState.transactionType.name,
-                          quantity: state.quantity.toString(),
-                          limitPrice: state.limit.toString())),
-                    )))
+            builder: (context, state) =>
+                OrderConfirmationButton<LimitOrderState>(
+                    dynamicState: state,
+                    errorText: orderState.transactionType == TransactionType.buy
+                        ? state.buyErrorText
+                        : state.sellErrorText,
+                    isLoading: state.response.state == ResponseState.loading,
+                    disable:
+                        state.disabledConfirmButton(orderState.transactionType),
+                    orderState: context.read<OrderBloc>().state,
+                    symbolDetail: symbolDetail,
+                    onConfirmedTap: () => context.read<LimitOrderBloc>().add(
+                          OrderSubmitted(OrderRequest.limit(
+                              symbolType: symbolDetail.symbolType.name,
+                              symbol: symbolDetail.name,
+                              side: orderState.transactionType.name,
+                              quantity: state.quantity.toString(),
+                              limitPrice: state.limit.toString())),
+                        )))
       ],
     );
   }

@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/utils/app_icons.dart';
-import 'package:asklora_mobile_app/feature/orders/bloc/limit/limit_bloc.dart';
+import 'package:asklora_mobile_app/feature/orders/bloc/limit/limit_order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_screen.dart';
@@ -25,7 +25,7 @@ void main() {
                 create: (_) => OrderBloc(),
               ),
               BlocProvider(
-                create: (_) => LimitBloc(
+                create: (_) => LimitOrderBloc(
                     marketPrice: 100,
                     availableBuyingPower: 1000,
                     ordersRepository: OrdersRepository(),

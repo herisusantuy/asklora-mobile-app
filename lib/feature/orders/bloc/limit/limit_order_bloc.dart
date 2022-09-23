@@ -5,19 +5,19 @@ import '../../../../../core/domain/base_response.dart';
 import '../../domain/order_request.dart';
 import '../../repository/orders_repository.dart';
 import '../../utils/orders_calculation.dart';
+import '../order_bloc.dart';
 
-part 'limit_event.dart';
+part 'limit_order_event.dart';
+part 'limit_order_state.dart';
 
-part 'limit_state.dart';
-
-class LimitBloc extends Bloc<LimitEvent, LimitState> {
-  LimitBloc(
+class LimitOrderBloc extends Bloc<LimitOrderEvent, LimitOrderState> {
+  LimitOrderBloc(
       {required double marketPrice,
       required double availableBuyingPower,
       required double numberOfSellableShares,
       required OrdersRepository ordersRepository})
       : _ordersRepository = ordersRepository,
-        super(LimitState(
+        super(LimitOrderState(
             availableBuyingPower: availableBuyingPower,
             numberOfSellableShares: numberOfSellableShares,
             availableAmountToSell: calculateAvailableAmountToSell(
@@ -29,19 +29,21 @@ class LimitBloc extends Bloc<LimitEvent, LimitState> {
 
   final OrdersRepository _ordersRepository;
 
-  void _onLimitChanged(LimitChanged event, Emitter<LimitState> emit) {
+  void _onLimitChanged(LimitChanged event, Emitter<LimitOrderState> emit) {
     emit(state.copyWith(
         limit: event.limit,
         estimateTotal: calculateEstimateTotal(event.limit, state.quantity)));
   }
 
-  void _onQuantityChanged(QuantityChanged event, Emitter<LimitState> emit) {
+  void _onQuantityChanged(
+      QuantityChanged event, Emitter<LimitOrderState> emit) {
     emit(state.copyWith(
         estimateTotal: calculateEstimateTotal(state.limit, event.quantity),
         quantity: event.quantity));
   }
 
-  void _onOrderSubmitted(OrderSubmitted event, Emitter<LimitState> emit) async {
+  void _onOrderSubmitted(
+      OrderSubmitted event, Emitter<LimitOrderState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     try {
       var data =

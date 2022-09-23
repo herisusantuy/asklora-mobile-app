@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/utils/app_icons.dart';
-import 'package:asklora_mobile_app/feature/orders/bloc/limit/limit_bloc.dart';
+import 'package:asklora_mobile_app/feature/orders/bloc/limit/limit_order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/bloc/order_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/symbol_detail.dart';
 import 'package:asklora_mobile_app/feature/orders/regular/presentation/order_screen.dart';
@@ -44,11 +44,11 @@ void main() {
 
   group('Order Buy Confirmation Widget Test', () {
     testWidgets('Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget<LimitState>(
+      await _buildOrderConfirmationWidget<LimitOrderState>(
           tester,
           const OrderState(
               orderType: OrderType.limit, transactionType: TransactionType.buy),
-          dynamicState: const LimitState(
+          dynamicState: const LimitOrderState(
               availableBuyingPower: 1000,
               availableAmountToSell: 10,
               numberOfSellableShares: 10));
@@ -134,12 +134,12 @@ void main() {
 
   group('Order Sell Confirmation Widget Test', () {
     testWidgets('Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget<LimitState>(
+      await _buildOrderConfirmationWidget<LimitOrderState>(
           tester,
           const OrderState(
               orderType: OrderType.limit,
               transactionType: TransactionType.sell),
-          dynamicState: const LimitState(
+          dynamicState: const LimitOrderState(
               availableBuyingPower: 1000,
               availableAmountToSell: 100,
               numberOfSellableShares: 10));
