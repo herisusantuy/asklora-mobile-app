@@ -25,9 +25,17 @@ class TrailTypeWidget extends StatelessWidget {
                             icon: const Icon(Icons.arrow_drop_down),
                             onPressed: () => showModalBottomSheet(
                                 context: context,
-                                builder: (_) => BlocProvider.value(
-                                      value:
-                                          BlocProvider.of<OrderBloc>(context),
+                                builder: (_) => MultiBlocProvider(
+                                      providers: [
+                                        BlocProvider.value(
+                                          value: BlocProvider.of<OrderBloc>(
+                                              context),
+                                        ),
+                                        BlocProvider.value(
+                                          value: BlocProvider.of<
+                                              TrailingOrderBloc>(context),
+                                        ),
+                                      ],
                                       child: BlocBuilder<OrderBloc, OrderState>(
                                         builder: (context, state) =>
                                             OrderBottomSheetWidget(
@@ -40,12 +48,16 @@ class TrailTypeWidget extends StatelessWidget {
                                                       'trail_type_amount_choice'),
                                                   keyButton: const Key(
                                                       'trail_type_amount_choice_button'),
-                                                  onTap: () => context
-                                                      .read<OrderBloc>()
-                                                      .add(
-                                                          const TrailTypeChanged(
-                                                              TrailType
-                                                                  .amount)),
+                                                  onTap: () {
+                                                    context.read<OrderBloc>().add(
+                                                        const TrailTypeChanged(
+                                                            TrailType.amount));
+                                                    context
+                                                        .read<
+                                                            TrailingOrderBloc>()
+                                                        .add(
+                                                            const ResetTrailingOrderValue());
+                                                  },
                                                   label: TrailType.amount.name,
                                                   text:
                                                       'Trail an amount that is below the current price of the stock',
@@ -59,12 +71,17 @@ class TrailTypeWidget extends StatelessWidget {
                                                       'trail_type_percentage_choice'),
                                                   keyButton: const Key(
                                                       'trail_type_percentage_choice_button'),
-                                                  onTap: () => context
-                                                      .read<OrderBloc>()
-                                                      .add(
-                                                          const TrailTypeChanged(
-                                                              TrailType
-                                                                  .percentage)),
+                                                  onTap: () {
+                                                    context.read<OrderBloc>().add(
+                                                        const TrailTypeChanged(
+                                                            TrailType
+                                                                .percentage));
+                                                    context
+                                                        .read<
+                                                            TrailingOrderBloc>()
+                                                        .add(
+                                                            const ResetTrailingOrderValue());
+                                                  },
                                                   label:
                                                       TrailType.percentage.name,
                                                   text:
@@ -75,19 +92,20 @@ class TrailTypeWidget extends StatelessWidget {
                                       ),
                                     )))),
                   ),
-                state.trailType == TrailType.percentage
+                state.trailType == TrailType.amount
                     ? CustomExpandedRow(
-                        'Trail Percentage',
-                        text: '15%',
+                        'Trail Amount',
+                        text: r'$15',
                         child: showOnlyInformation
                             ? null
                             : CustomTextInput(
                                 key: const Key('trail_amount_input'),
+                                prefixText: r'$',
                                 textInputType: TextInputType.number,
                                 textInputFormatterList: [
                                   FilteringTextInputFormatter.digitsOnly,
                                 ],
-                                labelText: 'Percentage',
+                                labelText: 'Amount',
                                 hintText: '0',
                                 onChanged: (value) {
                                   context.read<TrailingOrderBloc>().add(
@@ -101,12 +119,13 @@ class TrailTypeWidget extends StatelessWidget {
                               ),
                       )
                     : CustomExpandedRow(
-                        'Trail Amount',
-                        text: r'$10',
+                        'Trail Percentage',
+                        text: '10%',
                         child: showOnlyInformation
                             ? null
                             : CustomTextInput(
                                 key: const Key('trail_percentage_input'),
+                                suffixText: '%',
                                 textInputType: TextInputType.number,
                                 textInputFormatterList: [
                                   FilteringTextInputFormatter.digitsOnly,
