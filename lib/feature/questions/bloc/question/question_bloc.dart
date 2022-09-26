@@ -20,6 +20,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   QuestionBloc() : super(const QuestionState()) {
     on<LoadQuestions>(_onLoadQuestions);
     on<PrivacyQuestionIndexChanged>(_onPrivacyQuestionIndexChanged);
+    on<PersonalisationQuestionIndexChanged>(_onPersonalisationIndexChanged);
     on<InvestmentStyleQuestionIndexChanged>(
         _onInvestmentStyleQuestionIndexChanged);
   }
@@ -27,6 +28,12 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   void _onPrivacyQuestionIndexChanged(
       PrivacyQuestionIndexChanged event, Emitter<QuestionState> emit) {
     emit(state.copyWith(privacyQuestionIndex: event.privacyQuestionIndex));
+  }
+
+  void _onPersonalisationIndexChanged(
+      PersonalisationQuestionIndexChanged event, Emitter<QuestionState> emit) {
+    emit(state.copyWith(
+        personalisationQuestionIndex: event.personalisationQuestion));
   }
 
   void _onInvestmentStyleQuestionIndexChanged(
