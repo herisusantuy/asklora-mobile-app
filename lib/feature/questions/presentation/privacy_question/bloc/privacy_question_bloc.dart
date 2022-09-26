@@ -23,10 +23,8 @@ class PrivacyQuestionBloc
 
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<PrivacyQuestionState> emit) {
-    debugPrint('navigation step changed privacy');
     ++_privacyQuestionIndex;
     if (_privacyQuestionIndex < privacyQuestions.length) {
-      debugPrint('there is some data');
       QuestionCollection question = privacyQuestions[_privacyQuestionIndex];
       if (question.questions!.types == QuestionType.choices.value) {
         emit(OnNextQuestion<QuestionCollection>(QuestionType.choices, question,
@@ -52,7 +50,6 @@ class PrivacyQuestionBloc
 
   void _onNavigationPop(
       PreviousQuestion event, Emitter<PrivacyQuestionState> emit) {
-    debugPrint('navigation pop');
     --_privacyQuestionIndex;
     if (_privacyQuestionIndex >= 0) {
       QuestionCollection question = privacyQuestions[_privacyQuestionIndex];
@@ -64,7 +61,6 @@ class PrivacyQuestionBloc
             QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       } else {
-        debugPrint('on pop bloc question type slider');
         emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       }

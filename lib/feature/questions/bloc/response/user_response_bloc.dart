@@ -48,7 +48,6 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
   void _onUpdateEndpointResponse(
       UpdateEndpointResponse event, Emitter<UserResponseState> emit) async {
     emit(state.copyWith(endpointResponse: event.endpointResponse));
-    debugPrint('update endpoint response ${event.endpointResponse.email}');
   }
 
   void _onSendBulkResponse(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
@@ -48,7 +49,6 @@ class PrivacyQuestionScreen extends StatelessWidget {
                       questionCollection: questionCollection,
                       defaultChoiceIndex: -1,
                     );
-                  //
                   case (QuestionType.descriptive):
                     return DescriptiveQuestionWidget(
                         questionCollection: questionCollection);

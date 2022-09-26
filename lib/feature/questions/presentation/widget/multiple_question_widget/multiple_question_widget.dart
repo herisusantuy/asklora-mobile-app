@@ -89,7 +89,6 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                           context
                               .read<PrivacyQuestionBloc>()
                               .add(NextQuestion());
-                          //
                         }
                       },
                       child: QuestionNavigationButtonWidget(
