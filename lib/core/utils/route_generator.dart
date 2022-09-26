@@ -10,6 +10,7 @@ import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/deposits/presentation/deposit_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
+import '../../feature/questions/presentation/question_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../feature/user/kyc/presentation/kyc_screen.dart';
@@ -48,6 +49,8 @@ class RouterGenerator {
                 availableBuyingPower: 1000,
                 symbolDetail: SymbolDetail(
                     'AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol)));
+      case QuestionScreen.route:
+        return MaterialPageRoute(builder: (_) => const QuestionScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

@@ -3,6 +3,13 @@ const accounts = 'accounts/';
 const transactions = 'transactions/';
 const orders = 'orders/';
 
+//TODO later it will be changed
+const question = 'question/';
+const String addUser = 'user/add';
+const String addAnswer = 'user/add-answer';
+const String addBotChoice = 'user/add-choices';
+//
+
 const String endpointSignIn = '${v1}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';
