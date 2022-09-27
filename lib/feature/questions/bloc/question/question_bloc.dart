@@ -33,7 +33,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   void _onPersonalisationIndexChanged(
       PersonalisationQuestionIndexChanged event, Emitter<QuestionState> emit) {
     emit(state.copyWith(
-        personalisationQuestionIndex: event.personalisationQuestion));
+        personalisationQuestionIndex: event.personalisationQuestionIndex));
   }
 
   void _onInvestmentStyleQuestionIndexChanged(

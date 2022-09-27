@@ -24,12 +24,12 @@ class PrivacyQuestionIndexChanged extends QuestionEvent {
 }
 
 class PersonalisationQuestionIndexChanged extends QuestionEvent {
-  final int personalisationQuestion;
-  const PersonalisationQuestionIndexChanged(this.personalisationQuestion)
+  final int personalisationQuestionIndex;
+  const PersonalisationQuestionIndexChanged(this.personalisationQuestionIndex)
       : super();
 
   @override
-  List<Object> get props => [personalisationQuestion];
+  List<Object> get props => [personalisationQuestionIndex];
 }
 
 class InvestmentStyleQuestionIndexChanged extends QuestionEvent {
