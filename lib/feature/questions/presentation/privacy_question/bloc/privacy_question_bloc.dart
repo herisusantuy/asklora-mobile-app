@@ -40,10 +40,9 @@ class PrivacyQuestionBloc
       } else if (question.questions!.types == QuestionType.slider.value) {
         emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (_privacyQuestionIndex == privacyQuestions.length) {
-        emit(OnNextPersonalisationQuestionScreen());
       }
     } else {
+      emit(OnNextPersonalisationQuestionScreen());
       debugPrint('there is no data');
     }
   }

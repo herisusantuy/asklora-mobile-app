@@ -8,7 +8,7 @@ import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
-import '../widget/slider_question_widget.dart';
+import '../widget/slider_question_widget/slider_question_widget.dart';
 import 'bloc/privacy_question_bloc.dart';
 
 class PrivacyQuestionScreen extends StatelessWidget {
