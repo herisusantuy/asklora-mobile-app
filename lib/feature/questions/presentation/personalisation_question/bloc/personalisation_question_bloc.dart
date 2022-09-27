@@ -8,9 +8,9 @@ import '../../../domain/question.dart';
 part 'personalisation_question_state.dart';
 part 'personalisation_question_event.dart';
 
-class PersonalizationQuestionBloc
+class PersonalisationQuestionBloc
     extends Bloc<PersonalisationQuestionEvent, PersonalisationQuestionState> {
-  PersonalizationQuestionBloc({int initialIndex = 0})
+  PersonalisationQuestionBloc({int initialIndex = 0})
       : _personalizationIndex = initialIndex - 1,
         super(const PersonalisationQuestionState()) {
     on<NextPersonalisationQuestion>(_onNavigationStepChanged);
@@ -42,10 +42,9 @@ class PersonalizationQuestionBloc
         emit(OnNextPersonalizationQuestion<QuestionCollection>(
             QuestionType.slider, question,
             personalizationQuestionIndex: _personalizationIndex));
-      } else if (_personalizationIndex == personalizationQuestions.length) {
-        emit(OnNextToInvestmentStyleQuestionScreen());
       }
     } else {
+      emit(OnNextToInvestmentStyleQuestionScreen());
       debugPrint('there is no data');
     }
   }
