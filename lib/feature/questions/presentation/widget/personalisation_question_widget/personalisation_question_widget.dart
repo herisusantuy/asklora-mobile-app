@@ -8,13 +8,13 @@ import '../../../domain/question.dart';
 import '../../../domain/user_response_request.dart';
 import '../../personalisation_question/bloc/personalisation_question_bloc.dart';
 import '../question_navigation_button_widget.dart';
-import 'bloc/slider_question_widget_bloc.dart';
+import 'bloc/personalisation_question_widget_bloc.dart';
 
-class SliderQuestionWidget extends StatelessWidget {
+class PersonalisationQuestionWidget extends StatelessWidget {
   final QuestionCollection questionCollection;
   final int defaultChoiceIndex;
 
-  const SliderQuestionWidget({
+  const PersonalisationQuestionWidget({
     required this.questionCollection,
     this.defaultChoiceIndex = 0,
     Key? key,
@@ -23,9 +23,10 @@ class SliderQuestionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          SliderQuestionWidgetBloc(defaultChoiceIndex: defaultChoiceIndex),
-      child: BlocBuilder<SliderQuestionWidgetBloc, SliderQuestionWidgetState>(
+      create: (_) => PersonalisationQuestionWidgetBloc(
+          defaultChoiceIndex: defaultChoiceIndex),
+      child: BlocBuilder<PersonalisationQuestionWidgetBloc,
+          PersonalisationQuestionWidgetState>(
         builder: (context, state) {
           return Column(
             children: [
@@ -73,8 +74,9 @@ class SliderQuestionWidget extends StatelessWidget {
                                 selectedColor: Colors.black,
                                 pressElevation: 0,
                                 onSelected: (value) => context
-                                    .read<SliderQuestionWidgetBloc>()
-                                    .add(AnswerSliderQuestionChanged(index)),
+                                    .read<PersonalisationQuestionWidgetBloc>()
+                                    .add(AnswerOfPersonalisationQuestionChanged(
+                                        index)),
                               ),
                             );
                           },

@@ -6,7 +6,7 @@ import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
-import '../widget/slider_question_widget/slider_question_widget.dart';
+import '../widget/personalisation_question_widget/personalisation_question_widget.dart';
 import 'bloc/personalisation_question_bloc.dart';
 
 class PersonalisationQuestionScreen extends StatelessWidget {
@@ -45,7 +45,7 @@ class PersonalisationQuestionScreen extends StatelessWidget {
               QuestionCollection questionCollection = state.question;
               switch (state.questionType) {
                 case QuestionType.choices:
-                  return SliderQuestionWidget(
+                  return PersonalisationQuestionWidget(
                     key: Key(questionCollection.uid!),
                     questionCollection: questionCollection,
                     defaultChoiceIndex: -1,
