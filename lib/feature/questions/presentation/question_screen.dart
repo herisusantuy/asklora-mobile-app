@@ -7,6 +7,7 @@ import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/question_answer_repository.dart';
+import 'investment_style_question/investment_style_question_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
 
 class QuestionScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class QuestionScreen extends StatelessWidget {
   final QuestionPageStep initialQuestionPage;
 
   const QuestionScreen(
-      {Key? key, this.initialQuestionPage = QuestionPageStep.privacy})
+      {Key? key, this.initialQuestionPage = QuestionPageStep.investmentStyle})
       : super(key: key);
 
   @override
@@ -54,6 +55,8 @@ class QuestionScreen extends StatelessWidget {
             switch (navigationState.page) {
               case QuestionPageStep.privacy:
                 return const PrivacyQuestionScreen();
+              case QuestionPageStep.investmentStyle:
+                return const InvestmentStyleQuestionScreen();
               default:
                 return const SizedBox.shrink();
             }

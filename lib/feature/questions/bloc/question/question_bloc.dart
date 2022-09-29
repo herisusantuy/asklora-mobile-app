@@ -11,7 +11,7 @@ part 'question_state.dart';
 enum QuestionPageStep {
   privacy,
   personalisation,
-  investmentSty,
+  investmentStyle,
   botRecommendation,
   unknown
 }

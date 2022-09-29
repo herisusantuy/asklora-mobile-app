@@ -305,16 +305,64 @@
     "collection": "question",
     "questions": {
       "choices": [{
+        "name": "Very inaccurate",
+        "point": "1"
+      },
+        {
+          "name": "Somewhat inaccurate",
+          "point": "2"
+        },
+        {
+          "name": "Neutral",
+          "point": "3"
+        },
+        {
+          "name": "Somewhat accurate",
+          "point": "4"
+        },
+        {
+          "name": "Very accurate",
+          "point": "5"
+        }
+      ],
+      "hints": null,
+      "question": "I consider HKD30,000 to be a very large investment.",
+      "question_index": 1,
+      "section": "investment_style",
+      "types": "choices"
+    },
+    "uid": "quid10"
+  },
+  {
+    "collection": "question",
+    "questions": {
+      "choices": [{
         "name": "words",
         "point": "TBD"
       }],
       "hints": "For example, Burgers, Brad Pitt, Louis Vuitton, Perfume, TSLA, Technology etc. You can type in more than one word, but please separate them by commas (e.g. Spaghetti, Amazon, Airplanes)",
       "question": "Type any stocks or any industries you like.",
-      "question_index": 1,
+      "question_index": 2,
       "section": "investment_style",
       "types": "descriptive"
     },
-    "uid": "quid10"
+    "uid": "quid11"
+  },
+
+  {
+    "collection": "question",
+    "questions": {
+      "choices": [{
+        "name": "words",
+        "point": "TBD"
+      }],
+      "hints": "For example, Burgers, Brad Pitt, Louis Vuitton, Perfume, TSLA, Technology etc. You can type in more than one word, but please separate them by commas (e.g. Spaghetti, Amazon, Airplanes)",
+      "question": "Type any stocks or any industries you like.",
+      "question_index": 3,
+      "section": "investment_style",
+      "types": "descriptive"
+    },
+    "uid": "quid12"
   },
   {
     "collection": "question",
@@ -342,36 +390,45 @@
       ],
       "hints": null,
       "question": "I consider HKD30,000 to be a very large investment.",
-      "question_index": 2,
-      "section": "investment_style",
-      "types": "slider"
-    },
-    "uid": "quid11"
-  },
-  {
-    "collection": "question",
-    "questions": {
-      "choices": [{
-        "name": "75% chance of having +2.5% gain; \n 25% chance of having -7.5% loss",
-        "point": "1"
-      },
-        {
-          "name": "25% chance of having +7.5% gain; \n 75% chance of having -2.5% loss",
-          "point": "2"
-        },
-        {
-          "name": "equal 50% chance of either \n gaining or losing 3.25%",
-          "point": "3"
-        }
-      ],
-      "hints": null,
-      "question": "Which of these investment outcomes is more appealing to you?",
-      "question_index": 3,
+      "question_index": 4,
       "section": "investment_style",
       "types": "choices"
     },
     "uid": "quid13"
   },
+  {
+    "collection": "question",
+    "questions": {
+      "choices": [{
+        "name": "Very inaccurate",
+        "point": "1"
+      },
+        {
+          "name": "Somewhat inaccurate",
+          "point": "2"
+        },
+        {
+          "name": "Neutral",
+          "point": "3"
+        },
+        {
+          "name": "Somewhat accurate",
+          "point": "4"
+        },
+        {
+          "name": "Very accurate",
+          "point": "5"
+        }
+      ],
+      "hints": null,
+      "question": "I consider HKD30,000 to be a very large investment.",
+      "question_index": 5,
+      "section": "investment_style",
+      "types": "choices"
+    },
+    "uid": "quid14"
+  },
+
   {
     "collection": "question",
     "questions": {
@@ -385,6 +442,6 @@
       "section": "feedback",
       "types": "descriptive"
     },
-    "uid": "quid14"
+    "uid": "quid15"
   }
 ]

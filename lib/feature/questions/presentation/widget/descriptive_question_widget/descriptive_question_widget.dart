@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
@@ -43,6 +44,14 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
+                  if (questionCollection.questions!.hints != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: CustomText(
+                        questionCollection.questions!.hints!,
+                        type: FontType.bodyTextBold,
+                      ),
+                    ),
                   Expanded(
                     child: CustomTextInput(
                       key: const Key('descriptive_question_input'),
