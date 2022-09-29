@@ -5,7 +5,6 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
 import '../../../domain/user_response_request.dart';
-import '../../privacy_question/bloc/privacy_question_bloc.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
 import 'bloc/multiple_question_widget_bloc.dart';
@@ -15,12 +14,14 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
   final int defaultChoiceIndex;
   final String headerTitle;
   final Function onSubmitSuccess;
+  final Function() onCancel;
 
   const MultipleChoiceQuestionWidget(
       {required this.headerTitle,
       required this.questionCollection,
       this.defaultChoiceIndex = 0,
       required this.onSubmitSuccess,
+      required this.onCancel,
       Key? key})
       : super(key: key);
 
@@ -32,6 +33,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
         child: Column(
           children: [
             Header(
+              key: const Key('question_header'),
               header: '$headerTitle Questions',
               questionNumber: questionCollection.questions!.questionIndex!,
               subHeader: questionCollection.questions!.question!,
@@ -42,7 +44,10 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
             Expanded(
               child: BlocBuilder<MultipleQuestionWidgetBloc,
                   MultipleQuestionWidgetState>(
+                buildWhen: (previous, current) =>
+                    previous.defaultChoiceIndex != current.defaultChoiceIndex,
                 builder: (context, state) => ListView.builder(
+                    key: const Key('multiple_choice_question_builder'),
                     itemCount: questionCollection.questions!.choices!.length,
                     itemBuilder: (BuildContext context, int index) => Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -78,6 +83,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
             ),
             Builder(
                 builder: (context) => QuestionNavigationButtonWidget(
+                      key: const Key('question_navigation_button_widget'),
                       onSubmitSuccess: onSubmitSuccess,
                       onNext: () => context
                           .read<UserResponseBloc>()
@@ -93,9 +99,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                     1)
                                 .toString(),
                           ))),
-                      onCancel: () => context
-                          .read<PrivacyQuestionBloc>()
-                          .add(PreviousQuestion()),
+                      onCancel: onCancel,
                     )),
           ],
         ));

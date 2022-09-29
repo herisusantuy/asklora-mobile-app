@@ -7,7 +7,7 @@ import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../personalisation_question/bloc/personalisation_question_bloc.dart';
-import '../widget/descriptive_question_widget.dart';
+import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
 import '../widget/personalisation_question_widget/personalisation_question_widget.dart';
 import 'bloc/privacy_question_bloc.dart';
@@ -54,6 +54,9 @@ class PrivacyQuestionScreen extends StatelessWidget {
                       onSubmitSuccess: () => context
                           .read<PrivacyQuestionBloc>()
                           .add(NextQuestion()),
+                      onCancel: () => context
+                          .read<PrivacyQuestionBloc>()
+                          .add(PreviousQuestion()),
                     );
                   case (QuestionType.descriptive):
                     //TODO defaultAnswer should be from answered question when endpoint is ready
@@ -61,6 +64,9 @@ class PrivacyQuestionScreen extends StatelessWidget {
                         defaultAnswer: '',
                         headerTitle: headerTitle,
                         questionCollection: questionCollection,
+                        onCancel: () => context
+                            .read<PrivacyQuestionBloc>()
+                            .add(PreviousQuestion()),
                         onSubmitSuccess: () => context
                             .read<PrivacyQuestionBloc>()
                             .add(NextQuestion()));
