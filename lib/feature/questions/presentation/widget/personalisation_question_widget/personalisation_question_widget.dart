@@ -14,10 +14,12 @@ class PersonalisationQuestionWidget extends StatelessWidget {
   final QuestionCollection questionCollection;
   final int defaultChoiceIndex;
   final Function onSubmitSuccess;
+  final Function() onCancel;
 
   const PersonalisationQuestionWidget({
     required this.questionCollection,
     required this.onSubmitSuccess,
+    required this.onCancel,
     this.defaultChoiceIndex = 0,
     Key? key,
   }) : super(key: key);
@@ -116,9 +118,7 @@ class PersonalisationQuestionWidget extends StatelessWidget {
                             types: questionCollection.questions!.types!,
                             points: (state.defaultChoiceIndex + 1).toString())),
                       ),
-                  onCancel: () => context
-                      .read<PersonalisationQuestionBloc>()
-                      .add(PreviousPersonalisationQuestion()),
+                  onCancel: onCancel,
                 ),
               )
             ],
