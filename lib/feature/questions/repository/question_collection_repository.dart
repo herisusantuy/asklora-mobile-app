@@ -15,8 +15,6 @@ class QuestionCollectionRepository {
 
   final Fixture fixture = Fixture();
 
-  String jsonQuestion = 'a';
-
   Future<Fixture> fetchQuestions() async {
     final String response =
         await rootBundle.loadString('assets/json/question_list.json');

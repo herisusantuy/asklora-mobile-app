@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/fixture.dart';
@@ -44,7 +43,6 @@ class PrivacyQuestionBloc
       }
     } else {
       emit(OnNextPersonalisationQuestionScreen());
-      debugPrint('there is no data');
     }
   }
 
