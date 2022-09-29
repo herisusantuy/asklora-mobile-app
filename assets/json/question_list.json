@@ -98,31 +98,14 @@
     "collection": "question",
     "questions": {
       "choices": [{
-        "name": "Under 30",
-        "point": "5"
-      },
-        {
-          "name": "30 - 39",
-          "point": "4"
-        },
-        {
-          "name": "40 - 49",
-          "point": "3"
-        },
-        {
-          "name": "50 - 59",
-          "point": "2"
-        },
-        {
-          "name": "Over 60",
-          "point": "1"
-        }
-      ],
-      "hints": "Age",
-      "question": "Not to be rude but, how old are you?",
+        "name": "words",
+        "point": "TBD"
+      }],
+      "hints": "For example, Burgers, Brad Pitt, Louis Vuitton, Perfume, TSLA, Technology etc. You can type in more than one word, but please separate them by commas (e.g. Spaghetti, Amazon, Airplanes)",
+      "question": "Type any stocks or any industries you like.",
       "question_index": 4,
       "section": "privacy",
-      "types": "choices"
+      "types": "descriptive"
     },
     "uid": "quid3"
   },

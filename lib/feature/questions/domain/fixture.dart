@@ -68,7 +68,15 @@ class Fixture {
     investmentStyleQuestion.add(questionCollection);
   }
 
+  void clearQuestion() {
+    investmentStyleQuestion.clear();
+    personalisedQuestion.clear();
+    privacyQuestions.clear();
+    feedBackQuestion.clear();
+  }
+
   Fixture fixture(List<QuestionCollection> questionCollection) {
+    clearQuestion();
     for (var element in questionCollection) {
       if (element.questions!.section == QuestionSection.privacy.value) {
         setPrivacyQuestions = element;

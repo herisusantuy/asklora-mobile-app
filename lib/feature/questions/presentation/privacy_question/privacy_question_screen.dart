@@ -13,6 +13,7 @@ import 'bloc/privacy_question_bloc.dart';
 
 class PrivacyQuestionScreen extends StatelessWidget {
   final int initialIndex;
+  final String headerTitle = 'Privacy';
 
   const PrivacyQuestionScreen({this.initialIndex = 0, Key? key})
       : super(key: key);
@@ -45,13 +46,23 @@ class PrivacyQuestionScreen extends StatelessWidget {
                   case (QuestionType.choices):
                     //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                     return MultipleChoiceQuestionWidget(
+                      headerTitle: headerTitle,
                       key: Key(questionCollection.uid!),
                       questionCollection: questionCollection,
                       defaultChoiceIndex: -1,
+                      onSubmitSuccess: () => context
+                          .read<PrivacyQuestionBloc>()
+                          .add(NextQuestion()),
                     );
                   case (QuestionType.descriptive):
+                    //TODO defaultAnswer should be from answered question when endpoint is ready
                     return DescriptiveQuestionWidget(
-                        questionCollection: questionCollection);
+                        defaultAnswer: '',
+                        headerTitle: headerTitle,
+                        questionCollection: questionCollection,
+                        onSubmitSuccess: () => context
+                            .read<PrivacyQuestionBloc>()
+                            .add(NextQuestion()));
                   case (QuestionType.slider):
                     return SliderQuestionWidget(
                         questionCollection: questionCollection);
