@@ -39,6 +39,7 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
             child: Column(
               children: [
                 CustomTextButton(
+                  key: const Key('question_next_button'),
                   isLoading: state.responseState == ResponseState.loading,
                   buttonText: 'Next',
                   onClick: onNext,
@@ -49,6 +50,7 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
                   height: 16,
                 ),
                 GestureDetector(
+                    key: const Key('question_cancel_button'),
                     onTap: onCancel,
                     child: const CustomText(
                       'Cancel',
