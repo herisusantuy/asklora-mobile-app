@@ -13,9 +13,11 @@ import 'bloc/personalisation_question_widget_bloc.dart';
 class PersonalisationQuestionWidget extends StatelessWidget {
   final QuestionCollection questionCollection;
   final int defaultChoiceIndex;
+  final Function onSubmitSuccess;
 
   const PersonalisationQuestionWidget({
     required this.questionCollection,
+    required this.onSubmitSuccess,
     this.defaultChoiceIndex = 0,
     Key? key,
   }) : super(key: key);
@@ -105,6 +107,7 @@ class PersonalisationQuestionWidget extends StatelessWidget {
                   }
                 },
                 child: QuestionNavigationButtonWidget(
+                  onSubmitSuccess: onSubmitSuccess,
                   onNext: () => context.read<UserResponseBloc>().add(
                         SendResponse(UserResponseRequest(
                             email: 'xx@gmail.com',

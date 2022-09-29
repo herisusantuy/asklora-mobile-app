@@ -46,6 +46,9 @@ class PersonalisationQuestionScreen extends StatelessWidget {
               switch (state.questionType) {
                 case QuestionType.choices:
                   return PersonalisationQuestionWidget(
+                    onSubmitSuccess: () => context
+                        .read<PersonalisationQuestionBloc>()
+                        .add(NextPersonalisationQuestion()),
                     key: Key(questionCollection.uid!),
                     questionCollection: questionCollection,
                     defaultChoiceIndex: -1,

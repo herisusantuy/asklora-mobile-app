@@ -6,6 +6,7 @@ import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
+import '../personalisation_question/bloc/personalisation_question_bloc.dart';
 import '../widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
 import '../widget/personalisation_question_widget/personalisation_question_widget.dart';
@@ -65,6 +66,9 @@ class PrivacyQuestionScreen extends StatelessWidget {
                             .add(NextQuestion()));
                   case (QuestionType.slider):
                     return PersonalisationQuestionWidget(
+                        onSubmitSuccess: () => context
+                            .read<PersonalisationQuestionBloc>()
+                            .add(NextPersonalisationQuestion()),
                         questionCollection: questionCollection);
                   default:
                     return const SizedBox.shrink();
