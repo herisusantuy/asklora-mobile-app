@@ -7,6 +7,7 @@ import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/question_answer_repository.dart';
+import '../repository/question_collection_repository.dart';
 import 'investment_style_question/investment_style_question_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
 
@@ -15,7 +16,7 @@ class QuestionScreen extends StatelessWidget {
   final QuestionPageStep initialQuestionPage;
 
   const QuestionScreen(
-      {Key? key, this.initialQuestionPage = QuestionPageStep.investmentStyle})
+      {Key? key, this.initialQuestionPage = QuestionPageStep.privacy})
       : super(key: key);
 
   @override
@@ -25,7 +26,10 @@ class QuestionScreen extends StatelessWidget {
         BlocProvider(
             create: (_) => UserResponseBloc(
                 userResponseRepository: UserResponseRepository())),
-        BlocProvider(create: (_) => QuestionBloc()..add(const LoadQuestions())),
+        BlocProvider(
+            create: (_) => QuestionBloc(
+                questionCollectionRepository: QuestionCollectionRepository())
+              ..add(const LoadQuestions())),
         BlocProvider(
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
