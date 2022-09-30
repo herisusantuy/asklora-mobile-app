@@ -70,15 +70,15 @@ class PrivacyQuestionScreen extends StatelessWidget {
                         onSubmitSuccess: () => context
                             .read<PrivacyQuestionBloc>()
                             .add(NextQuestion()));
-                  case (QuestionType.slider):
-                    return PersonalisationQuestionWidget(
-                        onSubmitSuccess: () => context
-                            .read<PersonalisationQuestionBloc>()
-                            .add(NextPersonalisationQuestion()),
-                        onCancel: () => context
-                            .read<PersonalisationQuestionBloc>()
-                            .add(PreviousPersonalisationQuestion()),
-                        questionCollection: questionCollection);
+                  // case (QuestionType.slider):
+                  //   return PersonalisationQuestionWidget(
+                  //       onSubmitSuccess: () => context
+                  //           .read<PersonalisationQuestionBloc>()
+                  //           .add(NextPersonalisationQuestion()),
+                  //       onCancel: () => context
+                  //           .read<PersonalisationQuestionBloc>()
+                  //           .add(PreviousPersonalisationQuestion()),
+                  //       questionCollection: questionCollection);
                   default:
                     return const SizedBox.shrink();
                 }

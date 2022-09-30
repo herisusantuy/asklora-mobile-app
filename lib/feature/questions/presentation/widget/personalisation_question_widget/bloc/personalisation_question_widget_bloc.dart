@@ -6,7 +6,8 @@ part 'personalisation_question_widget_event.dart';
 
 class PersonalisationQuestionWidgetBloc extends Bloc<
     PersonalisationQuestionWidgetEvent, PersonalisationQuestionWidgetState> {
-  PersonalisationQuestionWidgetBloc({int defaultChoiceIndex = -1})
+  PersonalisationQuestionWidgetBloc(
+      {List<int> defaultChoiceIndex = const [-1, -1]})
       : super(PersonalisationQuestionWidgetState(
             defaultChoiceIndex: defaultChoiceIndex)) {
     on<AnswerOfPersonalisationQuestionChanged>(_onAnswerSliderQuestionChanged);

@@ -26,23 +26,22 @@ class PersonalisationQuestionBloc
     if (_personalizationIndex < personalizationQuestions.length) {
       QuestionCollection question =
           personalizationQuestions[_personalizationIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
-            QuestionType.choices, question,
-            personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
-            personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
-            personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
-            QuestionType.slider, question,
-            personalizationQuestionIndex: _personalizationIndex));
+      if (question.questions!.types == QuestionType.slider.value) {
+        int personalisationQuestionLastIndex = _personalizationIndex;
+        List<QuestionCollection> questionCollection = [question];
+        QuestionCollection questionTwo =
+            personalizationQuestions[_personalizationIndex + 1];
+        if (questionTwo.questions!.types == QuestionType.slider.value) {
+          ++_personalizationIndex;
+          questionCollection.add(questionTwo);
+          ++personalisationQuestionLastIndex;
+          emit(OnNextPersonalisationGetTwoQuestion<QuestionCollection>(
+              QuestionType.slider, questionCollection,
+              personalisationQuestionLastIndex:
+                  personalisationQuestionLastIndex));
+        }
       }
+      print('_personalizationIndex next: $_personalizationIndex');
     } else {
       emit(OnNextToInvestmentStyleQuestionScreen());
       debugPrint('there is no data');
@@ -52,22 +51,26 @@ class PersonalisationQuestionBloc
   void _onNavigationPop(PreviousPersonalisationQuestion event,
       Emitter<PersonalisationQuestionState> emit) {
     --_personalizationIndex;
+
     if (_personalizationIndex >= 0) {
       QuestionCollection question =
-          personalizationQuestions[_personalizationIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
-            QuestionType.choices, question,
-            personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
-            personalizationQuestionIndex: _personalizationIndex));
-      } else {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
-            QuestionType.slider, question,
-            personalizationQuestionIndex: _personalizationIndex));
+          personalizationQuestions[--_personalizationIndex];
+      if (question.questions!.types == QuestionType.slider.value) {
+        int personalisationQuestionLastIndex = _personalizationIndex;
+        List<QuestionCollection> questionCollection = [question];
+        QuestionCollection questionTwo =
+            personalizationQuestions[_personalizationIndex + 1];
+        if (questionTwo.questions!.types == QuestionType.slider.value) {
+          --_personalizationIndex;
+          questionCollection.add(questionTwo);
+          --personalisationQuestionLastIndex;
+          emit(OnNextPersonalisationGetTwoQuestion<QuestionCollection>(
+              QuestionType.slider, questionCollection,
+              personalisationQuestionLastIndex:
+                  personalisationQuestionLastIndex));
+        }
       }
+      print('_personalizationIndex back: $_personalizationIndex');
     } else if (_personalizationIndex < 0) {
       emit(OnPerviousToPrivacyQuestionScreen());
     }

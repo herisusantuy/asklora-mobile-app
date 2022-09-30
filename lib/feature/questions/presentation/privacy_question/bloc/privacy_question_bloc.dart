@@ -23,7 +23,6 @@ class PrivacyQuestionBloc
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<PrivacyQuestionState> emit) {
     ++_privacyQuestionIndex;
-    print('privacy length: ${privacyQuestions.length}');
     if (_privacyQuestionIndex < privacyQuestions.length) {
       QuestionCollection question = privacyQuestions[_privacyQuestionIndex];
       if (question.questions!.types == QuestionType.choices.value) {

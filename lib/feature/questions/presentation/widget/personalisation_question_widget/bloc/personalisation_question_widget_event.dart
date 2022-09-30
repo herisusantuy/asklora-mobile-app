@@ -11,7 +11,7 @@ abstract class PersonalisationQuestionWidgetEvent extends Equatable {
 
 class AnswerOfPersonalisationQuestionChanged
     extends PersonalisationQuestionWidgetEvent {
-  final int defaultChoiceIndex;
+  final List<int> defaultChoiceIndex;
 
   AnswerOfPersonalisationQuestionChanged(this.defaultChoiceIndex);
 }

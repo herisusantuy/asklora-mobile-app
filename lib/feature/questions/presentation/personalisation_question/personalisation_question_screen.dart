@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
@@ -19,7 +20,11 @@ class PersonalisationQuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget(
-      header: const SizedBox(),
+      header: const CustomText(
+        'Personalisation Question',
+        type: FontType.h3,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      ),
       child: BlocProvider(
         create: (_) => PersonalisationQuestionBloc(initialIndex: initialIndex)
           ..add(NextPersonalisationQuestion()),
@@ -41,24 +46,19 @@ class PersonalisationQuestionScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            if (state is OnNextPersonalizationQuestion) {
-              QuestionCollection questionCollection = state.question;
-              switch (state.questionType) {
-                case QuestionType.choices:
-                  return PersonalisationQuestionWidget(
-                    key: Key(questionCollection.uid!),
-                    questionCollection: questionCollection,
-                    defaultChoiceIndex: -1,
-                    onSubmitSuccess: () => context
-                        .read<PersonalisationQuestionBloc>()
-                        .add(NextPersonalisationQuestion()),
-                    onCancel: () => context
-                        .read<PersonalisationQuestionBloc>()
-                        .add(PreviousPersonalisationQuestion()),
-                  );
-                default:
-                  return const SizedBox();
-              }
+            if (state is OnNextPersonalisationGetTwoQuestion) {
+              List questionCollection = state.questions;
+              return PersonalisationQuestionWidget(
+                key: UniqueKey(),
+                questionCollection:
+                    questionCollection as List<QuestionCollection>,
+                onSubmitSuccess: () => context
+                    .read<PersonalisationQuestionBloc>()
+                    .add(NextPersonalisationQuestion()),
+                onCancel: () => context
+                    .read<PersonalisationQuestionBloc>()
+                    .add(PreviousPersonalisationQuestion()),
+              );
             } else {
               return const SizedBox();
             }

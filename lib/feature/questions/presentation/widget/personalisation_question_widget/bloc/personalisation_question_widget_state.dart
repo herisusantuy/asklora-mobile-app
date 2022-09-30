@@ -1,12 +1,12 @@
 part of 'personalisation_question_widget_bloc.dart';
 
 class PersonalisationQuestionWidgetState extends Equatable {
-  final int defaultChoiceIndex;
+  final List<int> defaultChoiceIndex;
 
   const PersonalisationQuestionWidgetState({required this.defaultChoiceIndex})
       : super();
 
-  PersonalisationQuestionWidgetState copyWith({int? defaultChoiceIndex}) {
+  PersonalisationQuestionWidgetState copyWith({List<int>? defaultChoiceIndex}) {
     return PersonalisationQuestionWidgetState(
         defaultChoiceIndex: defaultChoiceIndex ?? this.defaultChoiceIndex);
   }
