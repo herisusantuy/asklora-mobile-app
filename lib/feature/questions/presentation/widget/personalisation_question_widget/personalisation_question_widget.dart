@@ -5,7 +5,6 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
-import '../../../domain/user_response_request.dart';
 import '../../personalisation_question/bloc/personalisation_question_bloc.dart';
 import '../question_navigation_button_widget.dart';
 import 'bloc/personalisation_question_widget_bloc.dart';
@@ -33,9 +32,16 @@ class PersonalisationQuestionWidget extends StatelessWidget {
           PersonalisationQuestionWidgetState>(
         builder: (context, state) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const CustomText(
+                'Personalisation Question',
+                type: FontType.h3,
+                padding: EdgeInsets.only(bottom: 16),
+              ),
               Expanded(
                 child: ListView.builder(
+                    key: const Key('personalisation_question_widget'),
                     physics: const ScrollPhysics(),
                     itemCount: questionCollection.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -130,6 +136,8 @@ class PersonalisationQuestionWidget extends StatelessWidget {
                   }
                 },
                 child: QuestionNavigationButtonWidget(
+                  key: const Key(
+                      'personalisation_question_navigation_button_widget'),
                   onSubmitSuccess: onSubmitSuccess,
                   onNext: () => context
                       .read<PersonalisationQuestionBloc>()

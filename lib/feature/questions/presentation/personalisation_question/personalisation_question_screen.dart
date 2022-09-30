@@ -20,11 +20,7 @@ class PersonalisationQuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget(
-      header: const CustomText(
-        'Personalisation Question',
-        type: FontType.h3,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-      ),
+      header: const SizedBox(),
       child: BlocProvider(
         create: (_) => PersonalisationQuestionBloc(initialIndex: initialIndex)
           ..add(NextPersonalisationQuestion()),
