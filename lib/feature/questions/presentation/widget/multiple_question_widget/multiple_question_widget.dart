@@ -52,6 +52,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ChoiceChip(
+                            key: Key(index.toString()),
                             labelPadding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 25.0),
                             label: SizedBox(

@@ -41,6 +41,8 @@ void main() async {
       expect(questionNavigationButtonWidget, findsOneWidget);
       expect(questionNextButton, findsOneWidget);
       expect(questionCancelButton, findsOneWidget);
+      await tester.tap(find.byKey(const Key('0')));
+      await tester.pump();
 
       ///question 2 - descriptive type
       await tester.tap(questionNextButton);
@@ -52,6 +54,8 @@ void main() async {
       expect(questionNavigationButtonWidget, findsOneWidget);
       expect(questionNextButton, findsOneWidget);
       expect(questionCancelButton, findsOneWidget);
+      await tester.enterText(descriptiveQuestionInput, 'abc');
+      await tester.pump();
 
       ///question 3 - descriptive type
       await tester.tap(questionNextButton);
@@ -63,6 +67,8 @@ void main() async {
       expect(questionNavigationButtonWidget, findsOneWidget);
       expect(questionNextButton, findsOneWidget);
       expect(questionCancelButton, findsOneWidget);
+      await tester.enterText(descriptiveQuestionInput, 'abc');
+      await tester.pump();
 
       ///question 4 - choice type
       await tester.tap(questionNextButton);
@@ -74,6 +80,8 @@ void main() async {
       expect(questionNavigationButtonWidget, findsOneWidget);
       expect(questionNextButton, findsOneWidget);
       expect(questionCancelButton, findsOneWidget);
+      await tester.tap(find.byKey(const Key('1')));
+      await tester.pump();
 
       ///question 5 - choice type
       await tester.tap(questionNextButton);
@@ -85,6 +93,8 @@ void main() async {
       expect(questionNavigationButtonWidget, findsOneWidget);
       expect(questionNextButton, findsOneWidget);
       expect(questionCancelButton, findsOneWidget);
+      await tester.tap(find.byKey(const Key('0')));
+      await tester.pump();
     });
   });
 }
