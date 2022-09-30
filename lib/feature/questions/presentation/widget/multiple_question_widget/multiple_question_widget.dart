@@ -81,8 +81,12 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                         )),
               ),
             ),
-            Builder(
-                builder: (context) => QuestionNavigationButtonWidget(
+            BlocBuilder<MultipleQuestionWidgetBloc,
+                    MultipleQuestionWidgetState>(
+                buildWhen: (previous, current) =>
+                    previous.defaultChoiceIndex != current.defaultChoiceIndex,
+                builder: (context, state) => QuestionNavigationButtonWidget(
+                      disable: state.defaultChoiceIndex.isNegative,
                       key: const Key('question_navigation_button_widget'),
                       onSubmitSuccess: onSubmitSuccess,
                       onNext: () => context
