@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/fixture.dart';
@@ -40,11 +39,9 @@ class PrivacyQuestionBloc
       } else if (question.questions!.types == QuestionType.slider.value) {
         emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (_privacyQuestionIndex == privacyQuestions.length) {
-        emit(OnNextPersonalisationQuestionScreen());
       }
     } else {
-      debugPrint('there is no data');
+      emit(OnNextPersonalisationQuestionScreen());
     }
   }
 

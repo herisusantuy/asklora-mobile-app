@@ -7,6 +7,7 @@ import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/question_answer_repository.dart';
+import 'personalisation_question/personalisation_question_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
 
 class QuestionScreen extends StatelessWidget {
@@ -54,6 +55,8 @@ class QuestionScreen extends StatelessWidget {
             switch (navigationState.page) {
               case QuestionPageStep.privacy:
                 return const PrivacyQuestionScreen();
+              case QuestionPageStep.personalisation:
+                return const PersonalisationQuestionScreen();
               default:
                 return const SizedBox.shrink();
             }

@@ -1,42 +1,45 @@
-[{
-  "collection": "question",
-  "questions": {
-    "choices": [{
-      "name": "Never",
-      "point": "1"
-    },
-      {
-        "name": "Less than 1 year",
-        "point": "2"
-      },
-      {
-        "name": "1 to 2 years",
-        "point": "3"
-      },
-      {
-        "name": "3 to 4 years",
-        "point": "4"
-      },
-      {
-        "name": "5 years or above",
-        "point": "5"
-      }
-    ],
-    "hints": null,
-    "question": "How long have you been investing in stocks until now, aside from MPF's?",
-    "question_index": 1,
-    "section": "privacy",
-    "types": "choices"
-  },
-  "uid": "quid0"
-},
+[
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "<HK$ 12,999",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Never",
+          "point": "1"
+        },
+        {
+          "name": "Less than 1 year",
+          "point": "2"
+        },
+        {
+          "name": "1 to 2 years",
+          "point": "3"
+        },
+        {
+          "name": "3 to 4 years",
+          "point": "4"
+        },
+        {
+          "name": "5 years or above",
+          "point": "5"
+        }
+      ],
+      "hints": null,
+      "question": "How long have you been investing in stocks until now, aside from MPF's?",
+      "question_index": 1,
+      "section": "privacy",
+      "types": "choices"
+    },
+    "uid": "quid0"
+  },
+  {
+    "collection": "question",
+    "questions": {
+      "choices": [
+        {
+          "name": "<HK$ 12,999",
+          "point": "1"
+        },
         {
           "name": "HK$13,000-HK$19,999",
           "point": "2"
@@ -65,10 +68,11 @@
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Very inaccurate",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Very inaccurate",
+          "point": "1"
+        },
         {
           "name": "Somewhat inaccurate",
           "point": "2"
@@ -97,42 +101,28 @@
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Under 30",
-        "point": "5"
-      },
+      "choices": [
         {
-          "name": "30 - 39",
-          "point": "4"
-        },
-        {
-          "name": "40 - 49",
-          "point": "3"
-        },
-        {
-          "name": "50 - 59",
-          "point": "2"
-        },
-        {
-          "name": "Over 60",
-          "point": "1"
+          "name": "words",
+          "point": "TBD"
         }
       ],
-      "hints": "Age",
-      "question": "Not to be rude but, how old are you?",
+      "hints": "For example, Burgers, Brad Pitt, Louis Vuitton, Perfume, TSLA, Technology etc. You can type in more than one word, but please separate them by commas (e.g. Spaghetti, Amazon, Airplanes)",
+      "question": "Type any stocks or any industries you like.",
       "question_index": 4,
       "section": "privacy",
-      "types": "choices"
+      "types": "descriptive"
     },
     "uid": "quid3"
   },
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Never",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Never",
+          "point": "1"
+        },
         {
           "name": "Rarely",
           "point": "2"
@@ -154,17 +144,18 @@
       "question": "Do you talk to strangers at parties?",
       "question_index": 1,
       "section": "openness",
-      "types": "choices"
+      "types": "slider"
     },
     "uid": "quid4"
   },
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Never",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Never",
+          "point": "1"
+        },
         {
           "name": "Rarely",
           "point": "2"
@@ -186,17 +177,18 @@
       "question": "Do you enjoy learning new things?",
       "question_index": 2,
       "section": "openness",
-      "types": "choices"
+      "types": "slider"
     },
     "uid": "quid5"
   },
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Never",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Never",
+          "point": "1"
+        },
         {
           "name": "Rarely",
           "point": "2"
@@ -218,17 +210,18 @@
       "question": "Do you keep notes handy to write down ideas or reminders, and follow them?",
       "question_index": 1,
       "section": "conscientiousness",
-      "types": "choices"
+      "types": "slider"
     },
     "uid": "quid6"
   },
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Never",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Never",
+          "point": "1"
+        },
         {
           "name": "Rarely",
           "point": "2"
@@ -250,17 +243,18 @@
       "question": "Do you pay attention to detail?",
       "question_index": 2,
       "section": "conscientiousness",
-      "types": "choices"
+      "types": "slider"
     },
     "uid": "quid7"
   },
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Never",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Never",
+          "point": "1"
+        },
         {
           "name": "Rarely",
           "point": "2"
@@ -282,17 +276,18 @@
       "question": "Do you stay calm under pressure?",
       "question_index": 1,
       "section": "neuroticism",
-      "types": "choices"
+      "types": "slider"
     },
     "uid": "quid8"
   },
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Never",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Never",
+          "point": "1"
+        },
         {
           "name": "Rarely",
           "point": "2"
@@ -314,17 +309,19 @@
       "question": "Do you always feel excited or eager ?",
       "question_index": 2,
       "section": "neuroticism",
-      "types": "choices"
+      "types": "slider"
     },
     "uid": "quid9"
   },
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "words",
-        "point": "TBD"
-      }],
+      "choices": [
+        {
+          "name": "words",
+          "point": "TBD"
+        }
+      ],
       "hints": "For example, Burgers, Brad Pitt, Louis Vuitton, Perfume, TSLA, Technology etc. You can type in more than one word, but please separate them by commas (e.g. Spaghetti, Amazon, Airplanes)",
       "question": "Type any stocks or any industries you like.",
       "question_index": 1,
@@ -336,10 +333,11 @@
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "Very inaccurate",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "Very inaccurate",
+          "point": "1"
+        },
         {
           "name": "Somewhat inaccurate",
           "point": "2"
@@ -368,10 +366,11 @@
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "75% chance of having +2.5% gain; \n 25% chance of having -7.5% loss",
-        "point": "1"
-      },
+      "choices": [
+        {
+          "name": "75% chance of having +2.5% gain; \n 25% chance of having -7.5% loss",
+          "point": "1"
+        },
         {
           "name": "25% chance of having +7.5% gain; \n 75% chance of having -2.5% loss",
           "point": "2"
@@ -392,10 +391,12 @@
   {
     "collection": "question",
     "questions": {
-      "choices": [{
-        "name": "words",
-        "point": "TBD"
-      }],
+      "choices": [
+        {
+          "name": "words",
+          "point": "TBD"
+        }
+      ],
       "hints": "Type your response here",
       "question": "Please give your feedback on the questions and bot stock recommendations.",
       "question_index": 1,

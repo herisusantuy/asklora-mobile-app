@@ -23,6 +23,15 @@ class PrivacyQuestionIndexChanged extends QuestionEvent {
   List<Object> get props => [privacyQuestionIndex];
 }
 
+class PersonalisationQuestionIndexChanged extends QuestionEvent {
+  final int personalisationQuestionIndex;
+  const PersonalisationQuestionIndexChanged(this.personalisationQuestionIndex)
+      : super();
+
+  @override
+  List<Object> get props => [personalisationQuestionIndex];
+}
+
 class InvestmentStyleQuestionIndexChanged extends QuestionEvent {
   const InvestmentStyleQuestionIndexChanged(this.investmentStyleQuestionIndex)
       : super();
