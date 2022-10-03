@@ -8,7 +8,6 @@ import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
-import '../widget/slider_question_widget.dart';
 import 'bloc/investment_style_question_bloc.dart';
 
 class InvestmentStyleQuestionScreen extends StatelessWidget {
@@ -71,9 +70,6 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                         onSubmitSuccess: () => context
                             .read<InvestmentStyleQuestionBloc>()
                             .add(NextQuestion()));
-                  case (QuestionType.slider):
-                    return SliderQuestionWidget(
-                        questionCollection: questionCollection);
                   default:
                     return const SizedBox.shrink();
                 }

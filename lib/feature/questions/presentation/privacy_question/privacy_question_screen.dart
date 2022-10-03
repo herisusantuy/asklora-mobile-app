@@ -8,7 +8,6 @@ import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
-import '../widget/slider_question_widget.dart';
 import 'bloc/privacy_question_bloc.dart';
 
 class PrivacyQuestionScreen extends StatelessWidget {
@@ -69,9 +68,6 @@ class PrivacyQuestionScreen extends StatelessWidget {
                         onSubmitSuccess: () => context
                             .read<PrivacyQuestionBloc>()
                             .add(NextQuestion()));
-                  case (QuestionType.slider):
-                    return SliderQuestionWidget(
-                        questionCollection: questionCollection);
                   default:
                     return const SizedBox.shrink();
                 }
