@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
+
+import '../../../core/domain/base_response.dart';
 import '../domain/endpoint_response.dart';
 
 class BotRecommendationRepository {
@@ -16,5 +21,16 @@ class BotRecommendationRepository {
 
   List<RecommendedBot> get getRecommendedBots {
     return recommendedBots;
+  }
+
+  Future<BaseResponse<List<RecommendedBot>>> fetchBots() async {
+    final String response =
+        await rootBundle.loadString('assets/json/bot_recommended_list.json');
+
+    Iterable iterable = json.decode(response);
+    var data = List<RecommendedBot>.from(
+        iterable.map((model) => RecommendedBot.fromJson(model)));
+
+    return BaseResponse.complete(data);
   }
 }

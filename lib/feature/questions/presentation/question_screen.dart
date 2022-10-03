@@ -8,6 +8,7 @@ import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/question_answer_repository.dart';
 import '../repository/question_collection_repository.dart';
+import 'bot_recommendation/bot_recommendation_screen.dart';
 import 'investment_style_question/investment_style_question_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
 
@@ -61,6 +62,8 @@ class QuestionScreen extends StatelessWidget {
                 return const PrivacyQuestionScreen();
               case QuestionPageStep.investmentStyle:
                 return const InvestmentStyleQuestionScreen();
+              case QuestionPageStep.botRecommendation:
+                return const BotRecommendationScreen();
               default:
                 return const SizedBox.shrink();
             }
