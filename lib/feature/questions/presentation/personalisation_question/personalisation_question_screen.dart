@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
-import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../widget/personalisation_question_widget/personalisation_question_widget.dart';
 import 'bloc/personalisation_question_bloc.dart';

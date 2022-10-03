@@ -1,12 +1,11 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/fixture.dart';
 import '../../../domain/question.dart';
 
-part 'personalisation_question_state.dart';
 part 'personalisation_question_event.dart';
+part 'personalisation_question_state.dart';
 
 class PersonalisationQuestionBloc
     extends Bloc<PersonalisationQuestionEvent, PersonalisationQuestionState> {
@@ -41,10 +40,8 @@ class PersonalisationQuestionBloc
                   personalisationQuestionLastIndex));
         }
       }
-      print('_personalizationIndex next: $_personalizationIndex');
     } else {
       emit(OnNextToInvestmentStyleQuestionScreen());
-      debugPrint('there is no data');
     }
   }
 
@@ -70,7 +67,6 @@ class PersonalisationQuestionBloc
                   personalisationQuestionLastIndex));
         }
       }
-      print('_personalizationIndex back: $_personalizationIndex');
     } else if (_personalizationIndex < 0) {
       emit(OnPerviousToPrivacyQuestionScreen());
     }
