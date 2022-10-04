@@ -18,7 +18,7 @@ class QuestionScreen extends StatelessWidget {
   final QuestionPageStep initialQuestionPage;
 
   const QuestionScreen(
-      {Key? key, this.initialQuestionPage = QuestionPageStep.investmentStyle})
+      {Key? key, this.initialQuestionPage = QuestionPageStep.privacy})
       : super(key: key);
 
   @override
