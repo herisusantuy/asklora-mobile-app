@@ -49,7 +49,7 @@ class PersonalisationQuestionBloc
       Emitter<PersonalisationQuestionState> emit) {
     --_personalizationIndex;
 
-    if (_personalizationIndex >= 0) {
+    if (_personalizationIndex > 0) {
       QuestionCollection question =
           personalizationQuestions[--_personalizationIndex];
       if (question.questions!.types == QuestionType.slider.value) {
@@ -67,7 +67,7 @@ class PersonalisationQuestionBloc
                   personalisationQuestionLastIndex));
         }
       }
-    } else if (_personalizationIndex < 0) {
+    } else if (_personalizationIndex <= 0) {
       emit(OnPerviousToPrivacyQuestionScreen());
     }
   }

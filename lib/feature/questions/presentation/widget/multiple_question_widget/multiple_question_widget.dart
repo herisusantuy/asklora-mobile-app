@@ -52,6 +52,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) => Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ChoiceChip(
+                            key: Key(index.toString()),
                             labelPadding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 25.0),
                             label: SizedBox(
@@ -81,8 +82,12 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                         )),
               ),
             ),
-            Builder(
-                builder: (context) => QuestionNavigationButtonWidget(
+            BlocBuilder<MultipleQuestionWidgetBloc,
+                    MultipleQuestionWidgetState>(
+                buildWhen: (previous, current) =>
+                    previous.defaultChoiceIndex != current.defaultChoiceIndex,
+                builder: (context, state) => QuestionNavigationButtonWidget(
+                      disable: state.defaultChoiceIndex.isNegative,
                       key: const Key('question_navigation_button_widget'),
                       onSubmitSuccess: onSubmitSuccess,
                       onNext: () => context

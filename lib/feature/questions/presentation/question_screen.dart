@@ -7,6 +7,9 @@ import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/question_answer_repository.dart';
+import '../repository/question_collection_repository.dart';
+import 'bot_recommendation/bot_recommendation_screen.dart';
+import 'investment_style_question/investment_style_question_screen.dart';
 import 'personalisation_question/personalisation_question_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
 
@@ -25,7 +28,10 @@ class QuestionScreen extends StatelessWidget {
         BlocProvider(
             create: (_) => UserResponseBloc(
                 userResponseRepository: UserResponseRepository())),
-        BlocProvider(create: (_) => QuestionBloc()..add(const LoadQuestions())),
+        BlocProvider(
+            create: (_) => QuestionBloc(
+                questionCollectionRepository: QuestionCollectionRepository())
+              ..add(const LoadQuestions())),
         BlocProvider(
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
@@ -48,24 +54,30 @@ class QuestionScreen extends StatelessWidget {
   }
 
   Widget _pages(NavigationState navigationState) {
-    return BlocBuilder<QuestionBloc, QuestionState>(
-        buildWhen: (previous, current) => previous.response != current.response,
-        builder: (context, state) {
-          if (state.response.state == ResponseState.success) {
-            switch (navigationState.page) {
-              case QuestionPageStep.privacy:
-                return const PrivacyQuestionScreen();
-              case QuestionPageStep.personalisation:
-                return const PersonalisationQuestionScreen();
-              default:
-                return const SizedBox.shrink();
-            }
-          } else if (state.response.state == ResponseState.loading) {
-            return const CustomLoadingWidget();
-          } else {
+    return BlocBuilder<QuestionBloc, QuestionState>(builder: (context, state) {
+      if (state.response.state == ResponseState.success) {
+        switch (navigationState.page) {
+          case QuestionPageStep.privacy:
+            return PrivacyQuestionScreen(
+              initialIndex: state.privacyQuestionIndex,
+            );
+          case QuestionPageStep.personalisation:
+            return const PersonalisationQuestionScreen();
+          case QuestionPageStep.investmentStyle:
+            return InvestmentStyleQuestionScreen(
+              initialIndex: state.investmentStyleQuestionIndex,
+            );
+          case QuestionPageStep.botRecommendation:
+            return const BotRecommendationScreen();
+          default:
             return const SizedBox.shrink();
-          }
-        });
+        }
+      } else if (state.response.state == ResponseState.loading) {
+        return const CustomLoadingWidget();
+      } else {
+        return const SizedBox.shrink();
+      }
+    });
   }
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);

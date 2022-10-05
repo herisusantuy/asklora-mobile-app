@@ -10,11 +10,13 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
   final Function() onNext;
   final Function() onCancel;
   final Function onSubmitSuccess;
+  final bool disable;
 
   const QuestionNavigationButtonWidget(
       {required this.onSubmitSuccess,
       required this.onNext,
       required this.onCancel,
+      this.disable = true,
       Key? key})
       : super(key: key);
 
@@ -40,6 +42,7 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
               children: [
                 CustomTextButton(
                   key: const Key('question_next_button'),
+                  disable: disable,
                   isLoading: state.responseState == ResponseState.loading,
                   buttonText: 'Next',
                   onClick: onNext,

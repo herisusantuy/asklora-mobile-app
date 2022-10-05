@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
@@ -30,21 +31,28 @@ class DescriptiveQuestionWidget extends StatelessWidget {
     return BlocProvider(
       create: (_) =>
           DescriptiveQuestionWidgetBloc(defaultAnswer: defaultAnswer),
-      child: Builder(
-          builder: (context) => Column(
-                children: [
-                  Header(
-                    key: const Key('question_header'),
-                    header: '$headerTitle Questions',
-                    questionNumber:
-                        questionCollection.questions!.questionIndex!,
-                    subHeader: questionCollection.questions!.question!,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Expanded(
-                    child: CustomTextInput(
+      child: Column(
+        children: [
+          Header(
+            key: const Key('question_header'),
+            header: '$headerTitle Questions',
+            questionNumber: questionCollection.questions!.questionIndex!,
+            subHeader: questionCollection.questions!.question!,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          if (questionCollection.questions!.hints != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: CustomText(
+                questionCollection.questions!.hints!,
+                type: FontType.bodyTextBold,
+              ),
+            ),
+          Expanded(
+            child: Builder(
+                builder: (context) => CustomTextInput(
                       key: const Key('descriptive_question_input'),
                       initialValue: defaultAnswer,
                       labelText: '',
@@ -52,9 +60,12 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                       onChanged: (value) => context
                           .read<DescriptiveQuestionWidgetBloc>()
                           .add(AnswerChanged(value)),
-                    ),
-                  ),
-                  QuestionNavigationButtonWidget(
+                    )),
+          ),
+          BlocBuilder<DescriptiveQuestionWidgetBloc,
+                  DescriptiveQuestionWidgetState>(
+              builder: (context, state) => QuestionNavigationButtonWidget(
+                    disable: state.answer.isEmpty,
                     key: const Key('question_navigation_button_widget'),
                     onSubmitSuccess: onSubmitSuccess,
                     onNext: () => context
@@ -70,9 +81,9 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                               .answer,
                         ))),
                     onCancel: onCancel,
-                  )
-                ],
-              )),
+                  ))
+        ],
+      ),
     );
   }
 }

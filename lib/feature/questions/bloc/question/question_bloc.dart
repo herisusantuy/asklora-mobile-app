@@ -11,19 +11,24 @@ part 'question_state.dart';
 enum QuestionPageStep {
   privacy,
   personalisation,
-  investmentSty,
+  investmentStyle,
   botRecommendation,
   unknown
 }
 
 class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
-  QuestionBloc() : super(const QuestionState()) {
+  QuestionBloc(
+      {required QuestionCollectionRepository questionCollectionRepository})
+      : _questionCollectionRepository = questionCollectionRepository,
+        super(const QuestionState()) {
     on<LoadQuestions>(_onLoadQuestions);
     on<PrivacyQuestionIndexChanged>(_onPrivacyQuestionIndexChanged);
     on<PersonalisationQuestionIndexChanged>(_onPersonalisationIndexChanged);
     on<InvestmentStyleQuestionIndexChanged>(
         _onInvestmentStyleQuestionIndexChanged);
   }
+
+  final QuestionCollectionRepository _questionCollectionRepository;
 
   void _onPrivacyQuestionIndexChanged(
       PrivacyQuestionIndexChanged event, Emitter<QuestionState> emit) {
@@ -45,9 +50,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   void _onLoadQuestions(
       LoadQuestions event, Emitter<QuestionState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
-    QuestionCollectionRepository repository = QuestionCollectionRepository();
-
-    var data = await repository.fetchQuestions();
+    var data = await _questionCollectionRepository.fetchQuestions();
     emit(state.copyWith(response: BaseResponse.complete(data)));
   }
 }

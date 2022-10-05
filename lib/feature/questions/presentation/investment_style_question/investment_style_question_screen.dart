@@ -8,13 +8,13 @@ import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
-import 'bloc/privacy_question_bloc.dart';
+import 'bloc/investment_style_question_bloc.dart';
 
-class PrivacyQuestionScreen extends StatelessWidget {
+class InvestmentStyleQuestionScreen extends StatelessWidget {
   final int initialIndex;
-  final String headerTitle = 'Privacy';
+  final String headerTitle = 'Investment Style';
 
-  const PrivacyQuestionScreen({this.initialIndex = 0, Key? key})
+  const InvestmentStyleQuestionScreen({this.initialIndex = 0, Key? key})
       : super(key: key);
 
   @override
@@ -22,18 +22,20 @@ class PrivacyQuestionScreen extends StatelessWidget {
     return CustomNavigationWidget(
         header: const SizedBox.shrink(),
         child: BlocProvider(
-            create: (_) => PrivacyQuestionBloc(initialIndex: initialIndex)
-              ..add(NextQuestion()),
-            child: BlocConsumer<PrivacyQuestionBloc, PrivacyQuestionState>(
-                listener: (context, state) {
+            create: (_) =>
+                InvestmentStyleQuestionBloc(initialIndex: initialIndex)
+                  ..add(NextQuestion()),
+            child: BlocConsumer<InvestmentStyleQuestionBloc,
+                InvestmentStyleQuestionState>(listener: (context, state) {
               if (state is OnNextQuestion) {
                 context.read<QuestionBloc>().add(
-                    PrivacyQuestionIndexChanged(state.privacyQuestionIndex));
-              } else if (state is OnNextPersonalisationQuestionScreen) {
+                    InvestmentStyleQuestionIndexChanged(
+                        state.investmentStyleQuestionIndex));
+              } else if (state is OnNextBotRecommendationScreen) {
                 context
                     .read<NavigationBloc<QuestionPageStep>>()
-                    .add(const PageChanged(QuestionPageStep.personalisation));
-              } else if (state is OnPreviousSignInSuccessScreen) {
+                    .add(const PageChanged(QuestionPageStep.botRecommendation));
+              } else if (state is OnPreviousPersonalisationScreen) {
                 context
                     .read<NavigationBloc<QuestionPageStep>>()
                     .add(const PagePop());
@@ -50,10 +52,10 @@ class PrivacyQuestionScreen extends StatelessWidget {
                       questionCollection: questionCollection,
                       defaultChoiceIndex: -1,
                       onSubmitSuccess: () => context
-                          .read<PrivacyQuestionBloc>()
+                          .read<InvestmentStyleQuestionBloc>()
                           .add(NextQuestion()),
                       onCancel: () => context
-                          .read<PrivacyQuestionBloc>()
+                          .read<InvestmentStyleQuestionBloc>()
                           .add(PreviousQuestion()),
                     );
                   case (QuestionType.descriptive):
@@ -63,10 +65,10 @@ class PrivacyQuestionScreen extends StatelessWidget {
                         headerTitle: headerTitle,
                         questionCollection: questionCollection,
                         onCancel: () => context
-                            .read<PrivacyQuestionBloc>()
+                            .read<InvestmentStyleQuestionBloc>()
                             .add(PreviousQuestion()),
                         onSubmitSuccess: () => context
-                            .read<PrivacyQuestionBloc>()
+                            .read<InvestmentStyleQuestionBloc>()
                             .add(NextQuestion()));
                   default:
                     return const SizedBox.shrink();

@@ -10,6 +10,7 @@ import 'bloc/personalisation_question_bloc.dart';
 
 class PersonalisationQuestionScreen extends StatelessWidget {
   final int initialIndex;
+
   const PersonalisationQuestionScreen({
     this.initialIndex = 0,
     Key? key,
@@ -32,7 +33,7 @@ class PersonalisationQuestionScreen extends StatelessWidget {
             } else if (state is OnNextToInvestmentStyleQuestionScreen) {
               context
                   .read<NavigationBloc<QuestionPageStep>>()
-                  .add(const PageChanged(QuestionPageStep.investmentSty));
+                  .add(const PageChanged(QuestionPageStep.investmentStyle));
             } else if (state is OnPerviousToPrivacyQuestionScreen) {
               context
                   .read<NavigationBloc<QuestionPageStep>>()
