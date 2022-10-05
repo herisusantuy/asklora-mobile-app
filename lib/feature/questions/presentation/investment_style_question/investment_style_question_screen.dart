@@ -61,6 +61,7 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                   case (QuestionType.descriptive):
                     //TODO defaultAnswer should be from answered question when endpoint is ready
                     return DescriptiveQuestionWidget(
+                        key: Key(questionCollection.uid!),
                         defaultAnswer: '',
                         headerTitle: headerTitle,
                         questionCollection: questionCollection,

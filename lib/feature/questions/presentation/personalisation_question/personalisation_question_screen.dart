@@ -19,7 +19,7 @@ class PersonalisationQuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget(
-      header: const SizedBox(),
+      header: const SizedBox.shrink(),
       child: BlocProvider(
         create: (_) => PersonalisationQuestionBloc(initialIndex: initialIndex)
           ..add(NextPersonalisationQuestion()),
@@ -30,6 +30,10 @@ class PersonalisationQuestionScreen extends StatelessWidget {
               context.read<QuestionBloc>().add(
                   PersonalisationQuestionIndexChanged(
                       state.personalizationQuestionIndex));
+            } else if (state is OnNextPersonalisationGetTwoQuestion) {
+              context.read<QuestionBloc>().add(
+                  PersonalisationQuestionIndexChanged(
+                      state.personalisationQuestionLastIndex));
             } else if (state is OnNextToInvestmentStyleQuestionScreen) {
               context
                   .read<NavigationBloc<QuestionPageStep>>()
@@ -42,11 +46,9 @@ class PersonalisationQuestionScreen extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is OnNextPersonalisationGetTwoQuestion) {
-              List questionCollection = state.questions;
               return PersonalisationQuestionWidget(
                 key: UniqueKey(),
-                questionCollection:
-                    questionCollection as List<QuestionCollection>,
+                questionCollection: state.questions as List<QuestionCollection>,
                 onSubmitSuccess: () => context
                     .read<PersonalisationQuestionBloc>()
                     .add(NextPersonalisationQuestion()),

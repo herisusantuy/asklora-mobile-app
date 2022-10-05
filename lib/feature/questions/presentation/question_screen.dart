@@ -62,7 +62,9 @@ class QuestionScreen extends StatelessWidget {
               initialIndex: state.privacyQuestionIndex,
             );
           case QuestionPageStep.personalisation:
-            return const PersonalisationQuestionScreen();
+            return PersonalisationQuestionScreen(
+              initialIndex: state.personalisationQuestionIndex,
+            );
           case QuestionPageStep.investmentStyle:
             return InvestmentStyleQuestionScreen(
               initialIndex: state.investmentStyleQuestionIndex,

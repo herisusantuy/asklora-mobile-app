@@ -71,7 +71,6 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                     onNext: () => context
                         .read<UserResponseBloc>()
                         .add(SendResponse(UserResponseRequest(
-                          email: 'xx@gmail.com',
                           questionId: questionCollection.uid!,
                           section: questionCollection.questions!.section!,
                           types: questionCollection.questions!.types!,

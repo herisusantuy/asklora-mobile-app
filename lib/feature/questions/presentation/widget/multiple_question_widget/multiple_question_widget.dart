@@ -42,45 +42,45 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
               height: 16,
             ),
             Expanded(
-              child: BlocBuilder<MultipleQuestionWidgetBloc,
-                  MultipleQuestionWidgetState>(
-                buildWhen: (previous, current) =>
-                    previous.defaultChoiceIndex != current.defaultChoiceIndex,
-                builder: (context, state) => ListView.builder(
-                    key: const Key('multiple_choice_question_builder'),
-                    itemCount: questionCollection.questions!.choices!.length,
-                    itemBuilder: (BuildContext context, int index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ChoiceChip(
-                            key: Key(index.toString()),
-                            labelPadding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 25.0),
-                            label: SizedBox(
-                              width: double.infinity,
-                              child: CustomText(
-                                '${questionCollection.questions!.choices![index].point!}. ${questionCollection.questions!.choices![index].name!}',
-                                color: index == state.defaultChoiceIndex
-                                    ? Colors.white
-                                    : Colors.black,
-                                type: index == state.defaultChoiceIndex
-                                    ? FontType.bodyTextBold
-                                    : FontType.bodyText,
-                              ),
-                            ),
-                            selected: index == state.defaultChoiceIndex,
-                            selectedColor: Colors.black,
-                            shadowColor: Colors.transparent,
-                            backgroundColor: Colors.grey[200],
-                            onSelected: (value) => context
-                                .read<MultipleQuestionWidgetBloc>()
-                                .add(AnswerChanged(index)),
-                            // backgroundColor: color,
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 8),
-                          ),
-                        )),
-              ),
+              child: ListView.builder(
+                  key: const Key('multiple_choice_question_builder'),
+                  itemCount: questionCollection.questions!.choices!.length,
+                  itemBuilder: (BuildContext context, int index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: BlocBuilder<MultipleQuestionWidgetBloc,
+                                MultipleQuestionWidgetState>(
+                            buildWhen: (previous, current) =>
+                                previous.defaultChoiceIndex !=
+                                current.defaultChoiceIndex,
+                            builder: (context, state) => ChoiceChip(
+                                  key: Key(index.toString()),
+                                  labelPadding: const EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 25.0),
+                                  label: SizedBox(
+                                    width: double.infinity,
+                                    child: CustomText(
+                                      '${questionCollection.questions!.choices![index].point!}. ${questionCollection.questions!.choices![index].name!}',
+                                      color: index == state.defaultChoiceIndex
+                                          ? Colors.white
+                                          : Colors.black,
+                                      type: index == state.defaultChoiceIndex
+                                          ? FontType.bodyTextBold
+                                          : FontType.bodyText,
+                                    ),
+                                  ),
+                                  selected: index == state.defaultChoiceIndex,
+                                  selectedColor: Colors.black,
+                                  shadowColor: Colors.transparent,
+                                  backgroundColor: Colors.grey[200],
+                                  onSelected: (value) => context
+                                      .read<MultipleQuestionWidgetBloc>()
+                                      .add(AnswerChanged(index)),
+                                  // backgroundColor: color,
+                                  elevation: 0,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 8),
+                                )),
+                      )),
             ),
             BlocBuilder<MultipleQuestionWidgetBloc,
                     MultipleQuestionWidgetState>(
@@ -93,7 +93,6 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                       onNext: () => context
                           .read<UserResponseBloc>()
                           .add(SendResponse(UserResponseRequest(
-                            email: 'xx@gmail.com',
                             questionId: questionCollection.uid!,
                             section: questionCollection.questions!.section!,
                             types: questionCollection.questions!.types!,
