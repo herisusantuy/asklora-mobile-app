@@ -13,7 +13,7 @@ import '../../../../home_screen.dart';
 import '../../../orders/regular/presentation/regular_order_home_screen.dart';
 import '../../../payment/deposits/presentation/deposit_screen.dart';
 import '../../../payment/withdrawal/presentation/withdrawal_screen.dart';
-import '../../../questions/presentation/question_screen.dart';
+import '../../../ppi/presentation/question_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../../user/account/presentation/user_profile/user_profile_screen.dart';
