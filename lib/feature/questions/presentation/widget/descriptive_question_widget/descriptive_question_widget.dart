@@ -32,6 +32,7 @@ class DescriptiveQuestionWidget extends StatelessWidget {
       create: (_) =>
           DescriptiveQuestionWidgetBloc(defaultAnswer: defaultAnswer),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Header(
             key: const Key('question_header'),

@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:asklora_mobile_app/feature/questions/bloc/question/question_bloc.dart';
+import 'package:asklora_mobile_app/feature/questions/domain/fixture.dart';
+import 'package:asklora_mobile_app/feature/questions/domain/question.dart';
 import 'package:asklora_mobile_app/feature/questions/presentation/question_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,6 +21,7 @@ void main() async {
 
     var questionNextButton = find.byKey(const Key('question_next_button'));
     var questionCancelButton = find.byKey(const Key('question_cancel_button'));
+    List<QuestionCollection> privacyQuestions = Fixture().privacyQuestions;
 
     Future<void> buildPrivacyQuestionScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
@@ -34,52 +39,37 @@ void main() async {
       await buildPrivacyQuestionScreen(tester);
       await tester.pumpAndSettle();
 
-      ///question 1 - choice type
-      expect(multipleChoiceQuestionBuilder, findsOneWidget);
-      expect(descriptiveQuestionInput, findsNothing);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
-      await tester.tap(find.byKey(const Key('0')));
-      await tester.pump();
-
-      ///question 2 - choice type
-      await tester.tap(questionNextButton);
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 1));
-      expect(multipleChoiceQuestionBuilder, findsOneWidget);
-      expect(descriptiveQuestionInput, findsNothing);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
-      await tester.tap(find.byKey(const Key('1')));
-      await tester.pump();
-
-      ///question 3 - choice type
-      await tester.tap(questionNextButton);
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 1));
-      expect(multipleChoiceQuestionBuilder, findsOneWidget);
-      expect(descriptiveQuestionInput, findsNothing);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
-      await tester.tap(find.byKey(const Key('2')));
-      await tester.pump();
-
-      ///question 4 - descriptive type
-      await tester.tap(questionNextButton);
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 1));
-      expect(multipleChoiceQuestionBuilder, findsNothing);
-      expect(descriptiveQuestionInput, findsOneWidget);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
+      for (int index = 0; index < privacyQuestions.length; index++) {
+        if (privacyQuestions[index].questions!.types ==
+            QuestionType.choices.value) {
+          expect(multipleChoiceQuestionBuilder, findsOneWidget);
+          expect(descriptiveQuestionInput, findsNothing);
+          expect(questionHeader, findsOneWidget);
+          expect(questionNavigationButtonWidget, findsOneWidget);
+          expect(questionNextButton, findsOneWidget);
+          expect(questionCancelButton, findsOneWidget);
+          await tester.pumpAndSettle();
+          await tester.tap(find.byKey(Key(
+              '${privacyQuestions[index].uid}-${_randomSelectedIndex(privacyQuestions[index].questions!.choices!.length)}')));
+          await tester.pumpAndSettle();
+          await tester.tap(questionNextButton);
+          await tester.pump();
+        } else if (privacyQuestions[index].questions!.types ==
+            QuestionType.descriptive.value) {
+          expect(multipleChoiceQuestionBuilder, findsNothing);
+          expect(descriptiveQuestionInput, findsOneWidget);
+          expect(questionHeader, findsOneWidget);
+          expect(questionNavigationButtonWidget, findsOneWidget);
+          expect(questionNextButton, findsOneWidget);
+          expect(questionCancelButton, findsOneWidget);
+          await tester.enterText(descriptiveQuestionInput, 'abc');
+          await tester.pump();
+          await tester.tap(questionNextButton);
+          await tester.pump();
+        }
+      }
     });
   });
 }
+
+int _randomSelectedIndex(int max) => Random().nextInt(max);

@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:asklora_mobile_app/feature/questions/bloc/question/question_bloc.dart';
+import 'package:asklora_mobile_app/feature/questions/domain/fixture.dart';
+import 'package:asklora_mobile_app/feature/questions/domain/question.dart';
 import 'package:asklora_mobile_app/feature/questions/presentation/question_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,6 +22,9 @@ void main() async {
     var questionNextButton = find.byKey(const Key('question_next_button'));
     var questionCancelButton = find.byKey(const Key('question_cancel_button'));
 
+    List<QuestionCollection> investmentStyle =
+        Fixture().investmentStyleQuestion;
+
     Future<void> buildPrivacyQuestionScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -34,67 +41,37 @@ void main() async {
       await buildPrivacyQuestionScreen(tester);
       await tester.pumpAndSettle();
 
-      ///question 1 - choice type
-      expect(multipleChoiceQuestionBuilder, findsOneWidget);
-      expect(descriptiveQuestionInput, findsNothing);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
-      await tester.tap(find.byKey(const Key('0')));
-      await tester.pump();
-
-      ///question 2 - descriptive type
-      await tester.tap(questionNextButton);
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 1));
-      expect(multipleChoiceQuestionBuilder, findsNothing);
-      expect(descriptiveQuestionInput, findsOneWidget);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
-      await tester.enterText(descriptiveQuestionInput, 'abc');
-      await tester.pump();
-
-      ///question 3 - descriptive type
-      await tester.tap(questionNextButton);
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 1));
-      expect(multipleChoiceQuestionBuilder, findsNothing);
-      expect(descriptiveQuestionInput, findsOneWidget);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
-      await tester.enterText(descriptiveQuestionInput, 'abc');
-      await tester.pump();
-
-      ///question 4 - choice type
-      await tester.tap(questionNextButton);
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 1));
-      expect(multipleChoiceQuestionBuilder, findsOneWidget);
-      expect(descriptiveQuestionInput, findsNothing);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
-      await tester.tap(find.byKey(const Key('1')));
-      await tester.pump();
-
-      ///question 5 - choice type
-      await tester.tap(questionNextButton);
-      await tester.pump();
-      await tester.pump(const Duration(seconds: 1));
-      expect(multipleChoiceQuestionBuilder, findsOneWidget);
-      expect(descriptiveQuestionInput, findsNothing);
-      expect(questionHeader, findsOneWidget);
-      expect(questionNavigationButtonWidget, findsOneWidget);
-      expect(questionNextButton, findsOneWidget);
-      expect(questionCancelButton, findsOneWidget);
-      await tester.tap(find.byKey(const Key('0')));
-      await tester.pump();
+      for (int index = 0; index < investmentStyle.length; index++) {
+        if (investmentStyle[index].questions!.types ==
+            QuestionType.choices.value) {
+          expect(multipleChoiceQuestionBuilder, findsOneWidget);
+          expect(descriptiveQuestionInput, findsNothing);
+          expect(questionHeader, findsOneWidget);
+          expect(questionNavigationButtonWidget, findsOneWidget);
+          expect(questionNextButton, findsOneWidget);
+          expect(questionCancelButton, findsOneWidget);
+          await tester.pumpAndSettle();
+          await tester.tap(find.byKey(Key(
+              '${investmentStyle[index].uid}-${_randomSelectedIndex(investmentStyle[index].questions!.choices!.length)}')));
+          await tester.pumpAndSettle();
+          await tester.tap(questionNextButton);
+          await tester.pump();
+        } else if (investmentStyle[index].questions!.types ==
+            QuestionType.descriptive.value) {
+          expect(multipleChoiceQuestionBuilder, findsNothing);
+          expect(descriptiveQuestionInput, findsOneWidget);
+          expect(questionHeader, findsOneWidget);
+          expect(questionNavigationButtonWidget, findsOneWidget);
+          expect(questionNextButton, findsOneWidget);
+          expect(questionCancelButton, findsOneWidget);
+          await tester.enterText(descriptiveQuestionInput, 'abc');
+          await tester.pump();
+          await tester.tap(questionNextButton);
+          await tester.pump();
+        }
+      }
     });
   });
 }
+
+int _randomSelectedIndex(int max) => Random().nextInt(max);

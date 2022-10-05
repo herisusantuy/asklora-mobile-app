@@ -75,7 +75,8 @@ class PersonalisationQuestionWidget extends StatelessWidget {
                                                 current.defaultChoiceIndex,
                                             builder: (context, state) =>
                                                 ChoiceChip(
-                                                  key: Key(choice.point!),
+                                                  key: Key(
+                                                      '${questionCollection[index].uid}-$indexOptions'),
                                                   labelPadding: const EdgeInsets
                                                           .symmetric(
                                                       vertical: 5,

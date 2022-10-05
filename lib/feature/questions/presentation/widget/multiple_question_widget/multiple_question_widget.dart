@@ -5,6 +5,7 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
 import '../../../domain/user_response_request.dart';
+import '../../../utils/conversion.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
 import 'bloc/multiple_question_widget_bloc.dart';
@@ -53,19 +54,44 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                 previous.defaultChoiceIndex !=
                                 current.defaultChoiceIndex,
                             builder: (context, state) => ChoiceChip(
-                                  key: Key(index.toString()),
+                                  key: Key('${questionCollection.uid}-$index'),
                                   labelPadding: const EdgeInsets.symmetric(
                                       vertical: 5, horizontal: 25.0),
                                   label: SizedBox(
                                     width: double.infinity,
-                                    child: CustomText(
-                                      '${questionCollection.questions!.choices![index].point!}. ${questionCollection.questions!.choices![index].name!}',
-                                      color: index == state.defaultChoiceIndex
-                                          ? Colors.white
-                                          : Colors.black,
-                                      type: index == state.defaultChoiceIndex
-                                          ? FontType.bodyTextBold
-                                          : FontType.bodyText,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          '${indexToStringAlphabet(index)}.',
+                                          color:
+                                              index == state.defaultChoiceIndex
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                          type:
+                                              index == state.defaultChoiceIndex
+                                                  ? FontType.bodyTextBold
+                                                  : FontType.bodyText,
+                                          padding:
+                                              const EdgeInsets.only(right: 12),
+                                        ),
+                                        Expanded(
+                                          child: CustomText(
+                                            questionCollection.questions!
+                                                .choices![index].name!,
+                                            color: index ==
+                                                    state.defaultChoiceIndex
+                                                ? Colors.white
+                                                : Colors.black,
+                                            type: index ==
+                                                    state.defaultChoiceIndex
+                                                ? FontType.bodyTextBold
+                                                : FontType.bodyText,
+                                            maxLines: 2,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   selected: index == state.defaultChoiceIndex,
