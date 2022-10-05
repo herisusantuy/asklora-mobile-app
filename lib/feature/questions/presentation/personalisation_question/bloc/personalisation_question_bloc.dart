@@ -5,6 +5,7 @@ import '../../../domain/fixture.dart';
 import '../../../domain/question.dart';
 
 part 'personalisation_question_event.dart';
+
 part 'personalisation_question_state.dart';
 
 class PersonalisationQuestionBloc
@@ -15,6 +16,7 @@ class PersonalisationQuestionBloc
     on<NextPersonalisationQuestion>(_onNavigationStepChanged);
     on<PreviousPersonalisationQuestion>(_onNavigationPop);
   }
+
   int _personalizationIndex;
   List<QuestionCollection> personalizationQuestions =
       Fixture().personalisedQuestion;
@@ -26,18 +28,15 @@ class PersonalisationQuestionBloc
       QuestionCollection question =
           personalizationQuestions[_personalizationIndex];
       if (question.questions!.types == QuestionType.slider.value) {
-        int personalisationQuestionLastIndex = _personalizationIndex;
         List<QuestionCollection> questionCollection = [question];
         QuestionCollection questionTwo =
             personalizationQuestions[_personalizationIndex + 1];
         if (questionTwo.questions!.types == QuestionType.slider.value) {
           ++_personalizationIndex;
           questionCollection.add(questionTwo);
-          ++personalisationQuestionLastIndex;
           emit(OnNextPersonalisationGetTwoQuestion<QuestionCollection>(
               QuestionType.slider, questionCollection,
-              personalisationQuestionLastIndex:
-                  personalisationQuestionLastIndex));
+              personalisationQuestionLastIndex: _personalizationIndex - 1));
         }
       }
     } else {
@@ -48,19 +47,17 @@ class PersonalisationQuestionBloc
   void _onNavigationPop(PreviousPersonalisationQuestion event,
       Emitter<PersonalisationQuestionState> emit) {
     --_personalizationIndex;
-
     if (_personalizationIndex > 0) {
+      --_personalizationIndex;
       QuestionCollection question =
           personalizationQuestions[--_personalizationIndex];
       if (question.questions!.types == QuestionType.slider.value) {
         int personalisationQuestionLastIndex = _personalizationIndex;
         List<QuestionCollection> questionCollection = [question];
         QuestionCollection questionTwo =
-            personalizationQuestions[_personalizationIndex + 1];
+            personalizationQuestions[++_personalizationIndex];
         if (questionTwo.questions!.types == QuestionType.slider.value) {
-          --_personalizationIndex;
           questionCollection.add(questionTwo);
-          --personalisationQuestionLastIndex;
           emit(OnNextPersonalisationGetTwoQuestion<QuestionCollection>(
               QuestionType.slider, questionCollection,
               personalisationQuestionLastIndex:

@@ -17,7 +17,6 @@ void main() async {
     late UserResponseBloc userResponseBloc;
 
     UserResponseRequest userResponseRequest = UserResponseRequest(
-        email: 'xx@gmail.com',
         questionId: 'quid0',
         section: 'investment_style',
         types: 'choices',

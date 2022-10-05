@@ -45,7 +45,7 @@ class BotCard extends StatelessWidget {
                 ),
                 child: Center(
                   child: CustomText(
-                    index.toString(),
+                    (index + 1).toString(),
                     color: Colors.white,
                   ),
                 )),
