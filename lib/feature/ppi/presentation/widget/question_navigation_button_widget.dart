@@ -36,7 +36,8 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.responseState != current.responseState,
         builder: (context, state) {
-          return Padding(
+          return Container(
+            width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [

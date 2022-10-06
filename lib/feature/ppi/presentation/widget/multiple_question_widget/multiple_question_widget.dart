@@ -122,12 +122,8 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                             questionId: questionCollection.uid!,
                             section: questionCollection.questions!.section!,
                             types: questionCollection.questions!.types!,
-                            points: (context
-                                        .read<MultipleQuestionWidgetBloc>()
-                                        .state
-                                        .defaultChoiceIndex +
-                                    1)
-                                .toString(),
+                            points: questionCollection.questions!
+                                .choices![state.defaultChoiceIndex].point!,
                           ))),
                       onCancel: onCancel,
                     )),

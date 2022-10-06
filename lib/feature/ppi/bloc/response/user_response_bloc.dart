@@ -51,6 +51,14 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   void _onSendBulkResponse(
       SendBulkResponse event, Emitter<UserResponseState> emit) async {
-    _userResponseRepository.addBulkAnswer(event.userResponseRequest);
+    try {
+      emit(state.copyWith(responseState: ResponseState.loading));
+      var data = await _userResponseRepository
+          .addBulkAnswer(event.userResponseRequest);
+      emit(state.copyWith(
+          responseState: ResponseState.success, endpointResponse: data));
+    } catch (e) {
+      emit(state.copyWith(responseState: ResponseState.error));
+    }
   }
 }
