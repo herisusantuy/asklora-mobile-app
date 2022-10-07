@@ -3,19 +3,19 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'question.dart';
 
-part 'endpoint_response.g.dart';
+part 'ppi_user_response.g.dart';
 
 @JsonSerializable()
-class EndpointResponse {
+class PpiUserResponse {
   final String? email;
   final SnapShot? snapshot;
 
-  factory EndpointResponse.fromJson(Map<String, dynamic> json) =>
-      _$EndpointResponseFromJson(json);
+  factory PpiUserResponse.fromJson(Map<String, dynamic> json) =>
+      _$PpiUserResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$EndpointResponseToJson(this);
+  Map<String, dynamic> toJson() => _$PpiUserResponseToJson(this);
 
-  const EndpointResponse({this.email, this.snapshot});
+  const PpiUserResponse({this.email, this.snapshot});
 }
 
 @JsonSerializable()

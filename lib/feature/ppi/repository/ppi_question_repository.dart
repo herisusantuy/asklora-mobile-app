@@ -5,13 +5,12 @@ import 'package:flutter/services.dart';
 import '../domain/fixture.dart';
 import '../domain/question.dart';
 
-class QuestionCollectionRepository {
-  static QuestionCollectionRepository? _instance;
+class PpiQuestionRepository {
+  static PpiQuestionRepository? _instance;
 
-  factory QuestionCollectionRepository() =>
-      _instance ??= QuestionCollectionRepository._();
+  factory PpiQuestionRepository() => _instance ??= PpiQuestionRepository._();
 
-  QuestionCollectionRepository._();
+  PpiQuestionRepository._();
 
   final Fixture fixture = Fixture();
 

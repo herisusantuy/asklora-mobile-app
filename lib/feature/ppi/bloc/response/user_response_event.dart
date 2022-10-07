@@ -5,21 +5,21 @@ abstract class UserResponseEvent extends Equatable {
 }
 
 class SendResponse extends UserResponseEvent {
-  final UserResponseRequest userResponseRequest;
+  final PpiUserResponseRequest ppiUserResponseRequest;
 
   @override
-  List<Object?> get props => [userResponseRequest];
+  List<Object?> get props => [ppiUserResponseRequest];
 
-  const SendResponse(this.userResponseRequest);
+  const SendResponse(this.ppiUserResponseRequest);
 }
 
 class SendBulkResponse extends UserResponseEvent {
-  final List<UserResponseRequest> userResponseRequest;
+  final List<PpiUserResponseRequest> ppiUserResponseRequest;
 
   @override
-  List<Object?> get props => [userResponseRequest];
+  List<Object?> get props => [ppiUserResponseRequest];
 
-  const SendBulkResponse(this.userResponseRequest);
+  const SendBulkResponse(this.ppiUserResponseRequest);
 }
 
 class SkipResponse extends UserResponseEvent {
@@ -29,11 +29,11 @@ class SkipResponse extends UserResponseEvent {
   const SkipResponse();
 }
 
-class UpdateEndpointResponse extends UserResponseEvent {
-  final EndpointResponse endpointResponse;
+class UpdateppiUserResponse extends UserResponseEvent {
+  final PpiUserResponse ppiUserResponse;
 
   @override
-  List<Object?> get props => [endpointResponse];
+  List<Object?> get props => [ppiUserResponse];
 
-  const UpdateEndpointResponse(this.endpointResponse);
+  const UpdateppiUserResponse(this.ppiUserResponse);
 }

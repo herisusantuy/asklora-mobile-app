@@ -6,8 +6,8 @@ import '../../../core/presentation/custom_loading_widget.dart';
 import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
-import '../repository/question_answer_repository.dart';
-import '../repository/question_collection_repository.dart';
+import '../repository/ppi_question_repository.dart';
+import '../repository/ppi_response_repository.dart';
 import 'bot_recommendation/bot_recommendation_screen.dart';
 import 'investment_style_question/investment_style_question_screen.dart';
 import 'personalisation_question/personalisation_question_screen.dart';
@@ -27,11 +27,11 @@ class QuestionScreen extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (_) => UserResponseBloc(
-                userResponseRepository: UserResponseRepository())),
+                ppiResponseRepository: PpiResponseRepository())),
         BlocProvider(
-            create: (_) => QuestionBloc(
-                questionCollectionRepository: QuestionCollectionRepository())
-              ..add(const LoadQuestions())),
+            create: (_) =>
+                QuestionBloc(ppiQuestionRepository: PpiQuestionRepository())
+                  ..add(const LoadQuestions())),
         BlocProvider(
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
