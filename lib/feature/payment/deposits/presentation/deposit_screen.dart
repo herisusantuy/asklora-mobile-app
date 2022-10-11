@@ -66,30 +66,31 @@ class DepositScreen extends StatelessWidget {
             listener: (context, state) {
               Navigator.pop(context);
             },
-            builder: (context, state) =>
-                _pages(state, context.read<DepositBloc>().state),
+            builder: (context, state) => _pages(state, context),
           )),
     );
   }
 
-  Widget _pages(NavigationState navigationState, DepositState depositState) {
+  Widget _pages(NavigationState navigationState, BuildContext context) {
+    DepositState depositState = context.read<DepositBloc>().state;
+    BankAccountState bankAccountState = context.read<BankAccountBloc>().state;
     switch (navigationState.page == DepositPageStep.unknown
         ? initialDepositPages
         : navigationState.page) {
       case DepositPageStep.welcome:
         return const DepositWelcomeScreen();
       case DepositPageStep.depositMethod:
-        return const DepositMethodScreen();
+        return DepositMethodScreen(bankAccountState);
       case DepositPageStep.fpsMeaning:
         return const FpsInformationScreen();
       case DepositPageStep.selectBank:
         return const SelectBankScreen();
       case DepositPageStep.fpsTransfer:
-        return const FpsTransferScreen();
+        return FpsTransferScreen(bankAccountState);
       case DepositPageStep.uploadProof:
         return const UploadProofOfRemittanceScreen();
       case DepositPageStep.wireTransfer:
-        return const WireTransferScreen();
+        return WireTransferScreen(bankAccountState);
       case DepositPageStep.acknowledged:
         return const AcknowledgementScreen();
       case DepositPageStep.eDdaMeaning:
@@ -113,7 +114,10 @@ class DepositScreen extends StatelessWidget {
       case DepositPageStep.eDdaFinished:
         return const FinishedScreen();
       case DepositPageStep.returningUser:
-        return const ReturningUserScreen();
+        return ReturningUserScreen(
+          depositState: depositState,
+          bankAccountState: bankAccountState,
+        );
       default:
         return const SizedBox.shrink();
     }
