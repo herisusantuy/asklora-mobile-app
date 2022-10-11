@@ -46,7 +46,8 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) => const DepositScreen());
       case PhotoViewScreen.route:
         ImageProvider imageProvider = settings.arguments as ImageProvider;
-        return MaterialPageRoute(builder: (_) => PhotoViewScreen(imageProvider));
+        return MaterialPageRoute(
+            builder: (_) => PhotoViewScreen(imageProvider));
       case RegularOrderHomeScreen.route:
         return MaterialPageRoute(
             builder: (_) => RegularOrderHomeScreen(

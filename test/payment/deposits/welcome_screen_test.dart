@@ -25,8 +25,10 @@ void main() {
       expect(find.text('Deposit'), findsOneWidget);
       expect(find.byKey(const Key('subtitle_deposit_welcome_screen')),
           findsOneWidget);
-      expect(find.byKey(const Key('fps_method_subtitle_guide')), findsOneWidget);
-      expect(find.byKey(const Key('edda_method_subtitle_guide')), findsOneWidget);
+      expect(
+          find.byKey(const Key('fps_method_subtitle_guide')), findsOneWidget);
+      expect(
+          find.byKey(const Key('edda_method_subtitle_guide')), findsOneWidget);
       expect(find.byKey(const Key('deposit_notes')), findsOneWidget);
       expect(nextButton, findsOneWidget);
       expect((tester.widget<CustomPaymentButton>(nextButton)).disable, false);
