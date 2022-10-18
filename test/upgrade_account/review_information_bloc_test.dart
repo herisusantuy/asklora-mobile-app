@@ -184,11 +184,17 @@ void main() async {
           when(secureStorage.readSecureData('email'))
               .thenAnswer((_) => Future.value(''));
 
+          /* when(accountRepository.upgradeAccount(upgradeAccountRequest))
+              .thenAnswer((_) => Future.value(const UpgradeAccountRequest()));*/
+
           when(accountRepository.upgradeAccount(upgradeAccountRequest))
-              .thenAnswer((_) => Future.value(const UpgradeAccountRequest()));
+              .thenAnswer((_) => Future.value(true));
+
+          /*when(accountRepository.submitTaxInfo(taxInfoReq))
+              .thenAnswer((_) => Future.value( TaxInfoRequest()));*/
 
           when(accountRepository.submitTaxInfo(taxInfoReq))
-              .thenAnswer((_) => Future.value(const TaxInfoRequest()));
+              .thenAnswer((_) => Future.value(true));
 
           when(accountRepository.getOnfidoToken()).thenAnswer(
               (_) => Future.value(const OnfidoTokenResponse('11223344axx')));
