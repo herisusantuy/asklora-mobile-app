@@ -148,12 +148,10 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
       await _accountRepository
           .submitTaxInfo(_submitTaxInfoRequest(event.ipAddress));
-      emit(
-        state.copyWith(
+
+      emit(state.copyWith(
           status: AccountStatus.success,
-          responseMessage: 'Account upgraded successfully!',
-        ),
-      );
+          responseMessage: 'Account upgraded successfully!'));
     } catch (e) {
       emit(state.copyWith(
           status: AccountStatus.failure,
