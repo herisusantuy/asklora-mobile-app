@@ -16,11 +16,17 @@ class AccountRepository {
     return GetAccountResponse.fromJson(response.data);
   }
 
-  Future<UpgradeAccountRequest> upgradeAccount(
+  Future<bool> upgradeAccount(
       UpgradeAccountRequest upgradeAccountRequest) async {
-    var response =
-        await _accountApiClient.upgradeAccount(upgradeAccountRequest);
-    return UpgradeAccountRequest.fromJson(response.data);
+    // TODO: Change this API flow according to the new flow.
+    try {
+      var response =
+          await _accountApiClient.upgradeAccount(upgradeAccountRequest);
+      //return UpgradeAccountRequest.fromJson(response.data);
+      return true;
+    } catch (e) {
+      return (e.toString() == 'Invalid request');
+    }
   }
 
   Future<OnfidoTokenResponse> getOnfidoToken() async {
@@ -34,8 +40,14 @@ class AccountRepository {
     return OnfidoResultResponse.fromJson(response.data);
   }
 
-  Future<TaxInfoRequest> submitTaxInfo(TaxInfoRequest request) async {
-    var response = await _accountApiClient.submitTaxInfo(request);
-    return TaxInfoRequest.fromJson(response.data);
+  Future<bool> submitTaxInfo(TaxInfoRequest request) async {
+    // TODO: Change this API flow according to the new flow.
+    try {
+      var response = await _accountApiClient.submitTaxInfo(request);
+      //TaxInfoRequest.fromJson(response.data);
+      return true;
+    } catch (e) {
+      return (e.toString() == 'Invalid request');
+    }
   }
 }
