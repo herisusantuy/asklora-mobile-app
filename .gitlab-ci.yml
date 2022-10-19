@@ -7,8 +7,8 @@ stages:
   - test
 
 before_script:
-  - flutter pub get
   - flutter clean
+  - flutter pub get
 
 #build:
 #  stage: build
