@@ -35,33 +35,57 @@ class WelcomeScreen extends StatelessWidget {
         builder: (context, state) => CustomPaymentButton(
           key: const Key('withdrawal_welcome_screen_next_button'),
           title: 'Next',
-          onSubmit: () => context
-              .read<BankAccountBloc>()
-              .add(const RegisteredBankAccountCheck()),
+          onSubmit: () => showAlertDialog(context,
+              'Please note that for withdrawals, there is a cutoff time of 17:00HKT. If you withdraw after this time, your request will be processed in the next business day',
+              title: '',
+              onPressedOk: () => context
+                  .read<BankAccountBloc>()
+                  .add(const RegisteredBankAccountCheck())),
           isLoading: state.response.state == ResponseState.loading,
           disable: false,
         ),
       ),
-      child: Column(
+      child: ListView(
         children: [
           const CustomText(
-            'Withdrawal will be credited to the bank account you used to deposit with. Please note that we are unable to credit to another bank account.',
-            type: FontType.smallTextBold,
+            'Withdrawals will be credited to the bank account you used to deposit with. Please note that you are unable to withdraw funds to another bank account for regulatory purposes',
+            key: Key('subtitle_withdrawal_welcome_screen'),
+            type: FontType.smallText,
             textAlign: TextAlign.justify,
           ),
           const SizedBox(
             height: 20,
           ),
-          _customRow('1', 'Tell us how much you want to withdraw'),
-          _customRow('2', 'Confirm your bank account details'),
-          _customRow('3', 'Sit back and relax'),
+          _customTextRow('1', 'Confirm your bank account details'),
+          _customTextRow('2', 'Tell us how much you want to withdraw'),
+          const SizedBox(
+            height: 32,
+          ),
+          ..._withdrawalNotes
         ],
       ),
     );
   }
 
-  Widget _customRow(String index, String text) => Padding(
-        padding: const EdgeInsets.only(top: 8),
+  List<Widget> get _withdrawalNotes => [
+        const CustomText(
+          'Notes:',
+          key: Key('withdrawal_notes'),
+          padding: EdgeInsets.only(bottom: 6),
+          type: FontType.smallText,
+        ),
+        _customTextRow('1',
+            'We work with Alpaca Securities LLC (“Alpaca”) in the US to handle your funds. Your withdrawal request will be sent to Alpaca every business day and we will send the funds to your bank account as soon as it arrives in HK. As such, please note that by law, we do not hold your funds in HK for more than 24 hours',
+            fontType: FontType.smallText),
+        _customTextRow('2',
+            'Funds will be credited back to your bank account on a best effort basis as soon as we request and receive your funds from Alpaca, but there is no guarantee that your withdrawal request will be fulfilled within the estimated time period. Normally, withdrawals take between 2 - 4 business days.',
+            fontType: FontType.smallText),
+      ];
+
+  Widget _customTextRow(String index, String text,
+          {FontType fontType = FontType.bodyTextBold}) =>
+      Padding(
+        padding: const EdgeInsets.only(top: 3),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,13 +93,13 @@ class WelcomeScreen extends StatelessWidget {
                 flex: 1,
                 child: CustomText(
                   '$index.',
-                  type: FontType.bodyTextBold,
+                  type: fontType,
                 )),
             Expanded(
                 flex: 14,
                 child: CustomText(
                   text,
-                  type: FontType.bodyTextBold,
+                  type: fontType,
                 )),
           ],
         ),

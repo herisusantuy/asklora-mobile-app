@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/photo_view_screen.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../widget/custom_row_text.dart';
@@ -50,29 +51,34 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
                         onTap: () => context
                             .read<UploadProofOfRemittanceBloc>()
                             .add(const PickFile()),
-                        child: BlocBuilder<UploadProofOfRemittanceBloc,
-                            UploadProofofRemittanceState>(
-                          builder: (context, state) {
-                            if (state.documentFile != null) {
-                              return Image.file(
-                                key: const Key(
-                                    'deposit_upload_proof_of_remittance_image'),
-                                File(state.documentFile!.path!),
-                                height: 150,
-                              );
-                            } else {
-                              return const Icon(
-                                Icons.add_circle_outline,
-                                key: Key(
-                                    'deposit_upload_proof_of_remittance_add_button'),
-                                color: Colors.grey,
-                                size: 42,
-                              );
-                            }
-                          },
+                        child: const Icon(
+                          Icons.add_circle_outline,
+                          key: Key(
+                              'deposit_upload_proof_of_remittance_add_button'),
+                          color: Colors.grey,
+                          size: 42,
                         ),
                       )),
-                  _uploadDocument('Sample Document', const CustomText('Image')),
+                  _uploadDocument('Sample Document', BlocBuilder<
+                      UploadProofOfRemittanceBloc,
+                      UploadProofofRemittanceState>(
+                    builder: (context, state) {
+                      if (state.documentFile != null) {
+                        return GestureDetector(
+                          onTap: () => PhotoViewScreen.open(context,
+                              FileImage(File(state.documentFile!.path!))),
+                          child: Image.file(
+                            key: const Key(
+                                'deposit_upload_proof_of_remittance_image'),
+                            File(state.documentFile!.path!),
+                            height: 150,
+                          ),
+                        );
+                      } else {
+                        return const CustomText('Image');
+                      }
+                    },
+                  )),
                 ],
               ),
             ));

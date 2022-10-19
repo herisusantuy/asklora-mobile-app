@@ -24,14 +24,12 @@ void main() async {
         (tester) async {
       await _buildWithdrawalWelcomeScreen(tester);
       expect(nextButton, findsOneWidget);
-      expect(
-          find.text(
-              'Withdrawal will be credited to the bank account you used to deposit with. Please note that we are unable to credit to another bank account.'),
+      expect(find.byKey(const Key('subtitle_withdrawal_welcome_screen')),
           findsOneWidget);
+      expect(find.text('Confirm your bank account details'), findsOneWidget);
       expect(
           find.text('Tell us how much you want to withdraw'), findsOneWidget);
-      expect(find.text('Confirm your bank account details'), findsOneWidget);
-      expect(find.text('Sit back and relax'), findsOneWidget);
+      expect(find.byKey(const Key('withdrawal_notes')), findsOneWidget);
       expect((tester.firstWidget(nextButton) as CustomPaymentButton).disable,
           isFalse);
     });

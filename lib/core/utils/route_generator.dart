@@ -15,6 +15,7 @@ import '../../feature/user/account/presentation/upgrade_account/not_eligible_scr
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../feature/user/kyc/presentation/kyc_screen.dart';
 import '../../home_screen.dart';
+import '../presentation/photo_view_screen.dart';
 import 'app_icons.dart';
 
 class RouterGenerator {
@@ -43,6 +44,10 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) => const WithdrawalScreen());
       case DepositScreen.route:
         return MaterialPageRoute(builder: (_) => const DepositScreen());
+      case PhotoViewScreen.route:
+        ImageProvider imageProvider = settings.arguments as ImageProvider;
+        return MaterialPageRoute(
+            builder: (_) => PhotoViewScreen(imageProvider));
       case RegularOrderHomeScreen.route:
         return MaterialPageRoute(
             builder: (_) => RegularOrderHomeScreen(

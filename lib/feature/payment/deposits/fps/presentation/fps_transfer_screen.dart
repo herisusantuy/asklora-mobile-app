@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../bloc/bank_account_bloc.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../shareable/widget/custom_card_copy_text.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
@@ -8,7 +9,9 @@ import '../../shareable/widget/custom_row_text.dart';
 import '../../shareable/widget/deposit_next_button.dart';
 
 class FpsTransferScreen extends StatelessWidget {
-  const FpsTransferScreen({Key? key}) : super(key: key);
+  final BankAccountState bankAccountState;
+
+  const FpsTransferScreen(this.bankAccountState, {Key? key}) : super(key: key);
 
   final String fpsId = '123456789';
 
@@ -36,6 +39,11 @@ class FpsTransferScreen extends StatelessWidget {
                 const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           ),
           _notesText(),
+          DepositNextButton(
+            label: 'Continue',
+            nextTo: _nextTo(context),
+            disable: false,
+          ),
         ],
       ),
     );
@@ -61,12 +69,16 @@ class FpsTransferScreen extends StatelessWidget {
             index: '3',
             text:
                 'Did you know that in a year, cows kill more people than sharks?'),
-        DepositNextButton(
-          label: 'Upload Proof of Remittance',
-          nextTo: DepositPageStep.uploadProof,
-          disable: false,
-        ),
       ],
     );
+  }
+
+  DepositPageStep _nextTo(BuildContext context) {
+    if (bankAccountState.response.data != null &&
+        bankAccountState.response.data!.wireBankAccounts.isNotEmpty) {
+      return DepositPageStep.acknowledged;
+    } else {
+      return DepositPageStep.uploadProof;
+    }
   }
 }
