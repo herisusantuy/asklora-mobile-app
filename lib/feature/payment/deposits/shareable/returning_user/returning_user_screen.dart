@@ -10,7 +10,12 @@ import '../../../domain/get_bank_account_response.dart';
 import '../../bloc/deposit_bloc.dart';
 
 class ReturningUserScreen extends StatelessWidget {
-  const ReturningUserScreen({Key? key}) : super(key: key);
+  final DepositState depositState;
+  final BankAccountState bankAccountState;
+
+  const ReturningUserScreen(
+      {required this.depositState, required this.bankAccountState, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +34,23 @@ class ReturningUserScreen extends StatelessWidget {
           Center(
               child: InkWell(
             key: const Key('deposit_add_bank_account'),
-            onTap: () => context
-                .read<NavigationBloc<DepositPageStep>>()
-                .add(const PageChanged(DepositPageStep.selectBank)),
+            onTap: () {
+              late DepositPageStep depositPageStep;
+              switch (depositState.depositMethod) {
+                case DepositMethod.wire:
+                  depositPageStep = DepositPageStep.wireTransfer;
+                  break;
+                case DepositMethod.fps:
+                  depositPageStep = DepositPageStep.fpsTransfer;
+                  break;
+                default:
+                  depositPageStep = DepositPageStep.unknown;
+                  break;
+              }
+              context
+                  .read<NavigationBloc<DepositPageStep>>()
+                  .add(PageChanged(depositPageStep));
+            },
             child: const Icon(
               Icons.add_circle_outline,
               size: 50,
@@ -43,8 +62,6 @@ class ReturningUserScreen extends StatelessWidget {
   }
 
   List<Widget> _registeredBankAccount(BuildContext context) {
-    BankAccountState bankAccountState = context.read<BankAccountBloc>().state;
-    DepositState depositState = context.read<DepositBloc>().state;
     List<GetBankAccountResponse> bankDetailList = [];
     if (bankAccountState.response.data != null) {
       if (depositState.depositMethod == DepositMethod.wire) {

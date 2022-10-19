@@ -31,9 +31,12 @@ class DepositWelcomeScreen extends StatelessWidget {
         builder: (context, state) => CustomPaymentButton(
           key: const Key('deposit_welcome_screen_next_button'),
           title: 'Next',
-          onSubmit: () => context
-              .read<BankAccountBloc>()
-              .add(const RegisteredBankAccountCheck()),
+          onSubmit: () => showAlertDialog(context,
+              'Please note that for same day deposits, there is a deposit cutoff time of 15:00HKT. If you deposit after this time, your request will be processed in the next business day',
+              title: '',
+              onPressedOk: () => context
+                  .read<BankAccountBloc>()
+                  .add(const RegisteredBankAccountCheck())),
           isLoading: state.response.state == ResponseState.loading,
           disable: false,
         ),
@@ -41,31 +44,76 @@ class DepositWelcomeScreen extends StatelessWidget {
       child: ListView(
         children: [
           const CustomText(
-            'LORA allows you to deposit either through wire or FPS. Here are the steps that you need to take to deposit with us:',
+            'AskLORA allows you to deposit either through wire, FPS, or set up an eDDA. Here are the steps that you need to take to deposit with us:',
             key: Key('subtitle_deposit_welcome_screen'),
             padding: EdgeInsets.only(top: 10, bottom: 30),
             type: FontType.smallTextBold,
           ),
-          _customTextRow('1', 'Tell us your bank account details'),
-          _customTextRow(
-              '2', 'Transfer to LORA’s bank account through your bank'),
-          _customTextRow('3', 'Tell us how much you’ve deposited'),
-          _customTextRow('4', 'Upload proof of remittance'),
+          ..._fpsMethodGuide,
+          const SizedBox(
+            height: 32,
+          ),
+          ..._eDdaMethodGuide,
+          const SizedBox(
+            height: 32,
+          ),
+          ..._depositNotes
         ],
       ),
     );
   }
 
-  Widget _customTextRow(String index, String text) => Padding(
+  List<Widget> get _depositNotes => [
+        const CustomText(
+          'Notes:',
+          key: Key('deposit_notes'),
+          padding: EdgeInsets.only(bottom: 6),
+          type: FontType.smallText,
+        ),
+        _customTextRow('1',
+            'We work with Alpaca Securities LLC (“Alpaca”) in the US to handle your funds. Your deposit will be sent to Alpaca every business day and your account will be credited as soon as the money arrives in Alpaca’s bank account. As such, please note that by law, we do not hold your funds in HK for more than 24 hours.',
+            fontType: FontType.smallText),
+        _customTextRow('2',
+            'There is a cutoff time by which your deposits will actually be credited to your account. Please click here to learn more about cutoff times.',
+            fontType: FontType.smallText),
+        _customTextRow('3',
+            'By depositing with AskLORA, you indicate that you have read and agreed to be bound by the terms set out in the Alpaca Customer Agreement and LORA Technologies Client Agreement',
+            fontType: FontType.smallText),
+      ];
+
+  List<Widget> get _fpsMethodGuide => [
+        const CustomText(
+          'If you’re wire transferring or transferring using FPS',
+          key: Key('fps_method_subtitle_guide'),
+          padding: EdgeInsets.only(bottom: 6),
+          type: FontType.smallText,
+        ),
+        _customTextRow('1', 'Choose your deposit method'),
+        _customTextRow('2',
+            "Transfer the funds to LORA's bank account through your bank app"),
+        _customTextRow('3', 'Upload proof of remittance'),
+      ];
+
+  List<Widget> get _eDdaMethodGuide => [
+        const CustomText(
+          'If you’re transferring using eDDA',
+          key: Key('edda_method_subtitle_guide'),
+          padding: EdgeInsets.only(bottom: 6),
+          type: FontType.smallText,
+        ),
+        _customTextRow('1', 'Connect your bank account with us'),
+        _customTextRow('2', 'Input your desired deposit amount'),
+      ];
+
+  Widget _customTextRow(String index, String text,
+          {FontType fontType = FontType.bodyText}) =>
+      Padding(
         padding: const EdgeInsets.only(top: 3.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-                flex: 1,
-                child: CustomText('$index.', type: FontType.bodyTextBold)),
-            Expanded(
-                flex: 14, child: CustomText(text, type: FontType.bodyTextBold))
+            Expanded(flex: 1, child: CustomText('$index.', type: fontType)),
+            Expanded(flex: 14, child: CustomText(text, type: fontType))
           ],
         ),
       );

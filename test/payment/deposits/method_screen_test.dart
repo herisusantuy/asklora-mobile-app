@@ -8,7 +8,7 @@ import '../../mocks/mocks.dart';
 
 void main() {
   group('Deposit Method Screen', () {
-    Future<void> _buildDepositMethodScreen(WidgetTester tester) async {
+    Future<void> buildDepositMethodScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const DepositScreen(
@@ -21,11 +21,9 @@ void main() {
     var wireTransferButton = find.byKey(const Key('wire_transfer_button'));
     var fpsButton = find.byKey(const Key('fps_button'));
     var whatIsFpsButton = find.byKey(const Key('what_is_fps_button'));
-    var eDdaButton = find.byKey(const Key('edda_button'));
-    var whatIsEddaButton = find.byKey(const Key('what_is_edda_button'));
 
     testWidgets('First render screen', (tester) async {
-      await _buildDepositMethodScreen(tester);
+      await buildDepositMethodScreen(tester);
       expect(find.text('Deposit Method'), findsOneWidget);
       expect(find.text('Please select method of deposit'), findsOneWidget);
       expect((wireTransferButton), findsOneWidget);
@@ -34,8 +32,6 @@ void main() {
       expect(fpsButton, findsOneWidget);
       expect((tester.widget<CustomTextButton>(fpsButton)).disable, false);
       expect(whatIsFpsButton, findsOneWidget);
-      expect(eDdaButton, findsOneWidget);
-      expect(whatIsEddaButton, findsOneWidget);
     });
   });
 }
