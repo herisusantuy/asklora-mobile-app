@@ -4,12 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../bloc/bank_account_bloc.dart';
+import '../../domain/registered_bank_accounts.dart';
 import '../bloc/deposit_bloc.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 
 class DepositMethodScreen extends StatelessWidget {
-  const DepositMethodScreen({Key? key}) : super(key: key);
+  final BankAccountState bankAccountState;
+
+  const DepositMethodScreen(this.bankAccountState, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +24,16 @@ class DepositMethodScreen extends StatelessWidget {
             current.depositEvent is DepositMethodSelected,
         listener: (context, state) {
           DepositPageStep depositPageStep;
-          var registeredBankAccount =
-              context.read<BankAccountBloc>().state.response.data!;
+          RegisteredBankAccounts registeredBankAccounts =
+              bankAccountState.response.data!;
           if (state.depositMethod == DepositMethod.fps &&
-                  registeredBankAccount.fpsBankAccounts!.isNotEmpty ||
-              state.depositMethod == DepositMethod.wire &&
-                  registeredBankAccount.wireBankAccounts!.isNotEmpty ||
-              state.depositMethod == DepositMethod.eDda &&
-                  registeredBankAccount.eDdaBankAccounts!.isNotEmpty) {
-            depositPageStep = DepositPageStep.returningUser;
+              registeredBankAccounts.fpsBankAccounts!.isEmpty) {
+            depositPageStep = DepositPageStep.fpsTransfer;
+          } else if (state.depositMethod == DepositMethod.wire &&
+              registeredBankAccounts.wireBankAccounts!.isEmpty) {
+            depositPageStep = DepositPageStep.wireTransfer;
           } else {
-            depositPageStep = DepositPageStep.selectBank;
+            depositPageStep = DepositPageStep.returningUser;
           }
           context
               .read<NavigationBloc<DepositPageStep>>()
@@ -46,8 +49,10 @@ class DepositMethodScreen extends StatelessWidget {
             _wireTransferButton(context),
             _fpsButton(context),
             _whatIsFpsButton(context),
-            _initiateEddaButton(context),
-            _whatIsEddaButton(context)
+
+            ///TODO hide edda method for now according to new payment flow
+            // _initiateEddaButton(context),
+            // _whatIsEddaButton(context)
           ],
         ),
       ),

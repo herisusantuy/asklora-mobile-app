@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_information.dart';
+import '../../../bloc/bank_account_bloc.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../shareable/widget/custom_card_copy_text.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../shareable/widget/deposit_next_button.dart';
 
 class WireTransferScreen extends StatelessWidget {
-  const WireTransferScreen({Key? key}) : super(key: key);
+  final BankAccountState bankAccountState;
+
+  const WireTransferScreen(this.bankAccountState, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,8 @@ class WireTransferScreen extends StatelessWidget {
           _cardCopyText(
               'Account Name.', 'LORA Advisors Limited', 'Account Name Copied',
               key: 'deposit_account_name_card'),
-          _infoText(),
+          _infoText(
+              'Please make sure that you input the name as shown exactly above. Failure to do so may result in your transfer being returned by your bank.'),
           _cardCopyText('Swift Code.', 'DHBKHKHH', 'Swift Code Copied',
               key: 'deposit_swift_code_card'),
           _cardCopyText(
@@ -43,15 +48,28 @@ class WireTransferScreen extends StatelessWidget {
             'Bank Address Copied',
             textAlign: TextAlign.start,
           ),
-          const DepositNextButton(
-            key: Key('deposit_wire_transfer_next_button'),
-            label: 'Upload Proof Of Remittance',
-            nextTo: DepositPageStep.uploadProof,
+          const CustomTextInformation(
+              title: 'Current Exchange Rate', label: 'HKD 1 = USD 0.137'),
+          _infoText(
+              'Please note that this is an estimated quote based on the Reuters FX rate. The final amount may differ slightly based on exchange rates at the time of conversion'),
+          DepositNextButton(
+            key: const Key('deposit_wire_transfer_next_button'),
+            label: 'Continue',
+            nextTo: _nextTo(context),
             disable: false,
           )
         ],
       ),
     );
+  }
+
+  DepositPageStep _nextTo(BuildContext context) {
+    if (bankAccountState.response.data != null &&
+        bankAccountState.response.data.wireBankAccounts.isNotEmpty) {
+      return DepositPageStep.acknowledged;
+    } else {
+      return DepositPageStep.uploadProof;
+    }
   }
 
   Widget _cardCopyText(
@@ -72,20 +90,20 @@ class WireTransferScreen extends StatelessWidget {
     );
   }
 
-  Widget _infoText() {
+  Widget _infoText(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0, top: 5),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Icon(
+        children: [
+          const Icon(
             Icons.info_outline_rounded,
             size: 20,
           ),
           Expanded(
               child: CustomText(
-            'Please make sure that you input the name as shown exactly above. Failure to do so may result in your transfer being returned by your bank.',
-            padding: EdgeInsets.only(left: 5),
+            text,
+            padding: const EdgeInsets.only(left: 5),
             type: FontType.smallNote,
           ))
         ],
