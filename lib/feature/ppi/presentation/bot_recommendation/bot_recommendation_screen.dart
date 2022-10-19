@@ -7,7 +7,7 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
-import '../../domain/endpoint_response.dart';
+import '../../domain/ppi_user_response.dart';
 import '../../repository/bot_recommendation_repository.dart';
 import '../widget/header.dart';
 import '../widget/question_navigation_button_widget.dart';

@@ -5,7 +5,7 @@ import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
-import '../../../domain/user_response_request.dart';
+import '../../../domain/ppi_user_response_request.dart';
 import 'bloc/descriptive_question_widget_bloc.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
@@ -71,7 +71,7 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                     onSubmitSuccess: onSubmitSuccess,
                     onNext: () => context
                         .read<UserResponseBloc>()
-                        .add(SendResponse(UserResponseRequest(
+                        .add(SendResponse(PpiUserResponseRequest(
                           questionId: questionCollection.uid!,
                           section: questionCollection.questions!.section!,
                           types: questionCollection.questions!.types!,

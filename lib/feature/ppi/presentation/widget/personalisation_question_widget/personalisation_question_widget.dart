@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
-import '../../../domain/user_response_request.dart';
+import '../../../domain/ppi_user_response_request.dart';
 import '../question_navigation_button_widget.dart';
 import 'bloc/personalisation_question_widget_bloc.dart';
 
@@ -124,7 +124,7 @@ class PersonalisationQuestionWidget extends StatelessWidget {
                       onSubmitSuccess: onSubmitSuccess,
                       disable: state.defaultChoiceIndex.contains(-1),
                       onNext: () => context.read<UserResponseBloc>().add(
-                          SendBulkResponse(_getUserResponseRequest(
+                          SendBulkResponse(_getppiUserResponseRequest(
                               state.defaultChoiceIndex))),
                       onCancel: onCancel,
                     ))
@@ -135,18 +135,18 @@ class PersonalisationQuestionWidget extends StatelessWidget {
   List<int> _setDefaultIndex(List<int> lists, int answer, int index) =>
       List.from(lists)..[index] = answer;
 
-  List<UserResponseRequest> _getUserResponseRequest(
+  List<PpiUserResponseRequest> _getppiUserResponseRequest(
       List<int> defaultChoiceIndex) {
-    List<UserResponseRequest> userResponseRequests = [];
+    List<PpiUserResponseRequest> ppiUserResponseRequests = [];
     int index = 0;
     for (var element in questionCollection) {
-      userResponseRequests.add(UserResponseRequest(
+      ppiUserResponseRequests.add(PpiUserResponseRequest(
         questionId: element.uid!,
         section: element.questions!.section!,
         types: element.questions!.types!,
         points: element.questions!.choices![defaultChoiceIndex[index++]].point!,
       ));
     }
-    return userResponseRequests;
+    return ppiUserResponseRequests;
   }
 }

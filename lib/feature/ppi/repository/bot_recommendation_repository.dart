@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
-import '../domain/endpoint_response.dart';
+import '../domain/ppi_user_response.dart';
 
 class BotRecommendationRepository {
   static BotRecommendationRepository? _instance;

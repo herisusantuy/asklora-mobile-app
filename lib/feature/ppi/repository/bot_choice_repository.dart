@@ -1,6 +1,6 @@
 import '../domain/bot_submission_request.dart';
-import '../domain/endpoint_response.dart';
-import '../domain/polyu_project_api_client.dart';
+import '../domain/ppi_api_client.dart';
+import '../domain/ppi_user_response.dart';
 
 class BotChoiceRepository {
   static BotChoiceRepository? _instance;
@@ -9,12 +9,12 @@ class BotChoiceRepository {
 
   BotChoiceRepository._();
 
-  final QuestionApiClient _polyUApiClient = QuestionApiClient();
+  final PpiApiClient _ppiApiClient = PpiApiClient();
 
-  Future<EndpointResponse> addAnswer(
+  Future<PpiUserResponse> addAnswer(
       BotSubmissionRequest botSubmissionRequest) async {
-    var response = await _polyUApiClient.postBotChoice(botSubmissionRequest);
+    var response = await _ppiApiClient.postBotChoice(botSubmissionRequest);
 
-    return EndpointResponse.fromJson(response.data);
+    return PpiUserResponse.fromJson(response.data);
   }
 }

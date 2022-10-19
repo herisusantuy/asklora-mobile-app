@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/feature/ppi/domain/endpoint_response.dart';
+import 'package:asklora_mobile_app/feature/ppi/domain/ppi_user_response.dart';
 import 'package:asklora_mobile_app/feature/ppi/presentation/bot_recommendation/bloc/bot_recommendation_bloc.dart';
 import 'package:asklora_mobile_app/feature/ppi/repository/bot_recommendation_repository.dart';
 import 'package:bloc_test/bloc_test.dart';

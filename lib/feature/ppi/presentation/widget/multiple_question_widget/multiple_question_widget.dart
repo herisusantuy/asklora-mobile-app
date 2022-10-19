@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
-import '../../../domain/user_response_request.dart';
-import '../../../utils/conversion.dart';
+import '../../../domain/ppi_user_response_request.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
 import 'bloc/multiple_question_widget_bloc.dart';
@@ -64,7 +63,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomText(
-                                          '${indexToStringAlphabet(index)}.',
+                                          '${String.fromCharCode(index + 65)}.',
                                           color:
                                               index == state.defaultChoiceIndex
                                                   ? Colors.white
@@ -118,7 +117,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                       onSubmitSuccess: onSubmitSuccess,
                       onNext: () => context
                           .read<UserResponseBloc>()
-                          .add(SendResponse(UserResponseRequest(
+                          .add(SendResponse(PpiUserResponseRequest(
                             questionId: questionCollection.uid!,
                             section: questionCollection.questions!.section!,
                             types: questionCollection.questions!.types!,

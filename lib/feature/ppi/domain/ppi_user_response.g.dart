@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'endpoint_response.dart';
+part of 'ppi_user_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-EndpointResponse _$EndpointResponseFromJson(Map<String, dynamic> json) =>
-    EndpointResponse(
+PpiUserResponse _$PpiUserResponseFromJson(Map<String, dynamic> json) =>
+    PpiUserResponse(
       email: json['email'] as String?,
       snapshot: json['snapshot'] == null
           ? null
           : SnapShot.fromJson(json['snapshot'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$EndpointResponseToJson(EndpointResponse instance) =>
+Map<String, dynamic> _$PpiUserResponseToJson(PpiUserResponse instance) =>
     <String, dynamic>{
       'email': instance.email,
       'snapshot': instance.snapshot,
