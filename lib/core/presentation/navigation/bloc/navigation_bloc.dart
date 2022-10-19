@@ -44,9 +44,7 @@ class NavigationBloc<T> extends Bloc<NavigationEvent<T>, NavigationState<T>> {
   }
 
   void _onPagePop(PagePop event, Emitter<NavigationState> emit) {
-    if (_savedPages.isNotEmpty) {
-      _savedPages.removeLast();
-    }
+    _savedPages.removeLast();
     if (_savedPages.isNotEmpty) {
       emit(state.copyWith(page: _savedPages.last, lastPage: false));
     } else {

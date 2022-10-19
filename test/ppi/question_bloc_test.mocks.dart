@@ -5,7 +5,7 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/feature/ppi/domain/fixture.dart' as _i2;
-import 'package:asklora_mobile_app/feature/ppi/repository/question_collection_repository.dart'
+import 'package:asklora_mobile_app/feature/ppi/repository/ppi_question_repository.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -21,12 +21,12 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeFixture_0 extends _i1.Fake implements _i2.Fixture {}
 
-/// A class which mocks [QuestionCollectionRepository].
+/// A class which mocks [PpiQuestionRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockQuestionCollectionRepository extends _i1.Mock
-    implements _i3.QuestionCollectionRepository {
-  MockQuestionCollectionRepository() {
+class MockPpiQuestionRepository extends _i1.Mock
+    implements _i3.PpiQuestionRepository {
+  MockPpiQuestionRepository() {
     _i1.throwOnMissingStub(this);
   }
 

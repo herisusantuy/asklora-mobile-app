@@ -1,8 +1,8 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/ppi/bloc/response/user_response_bloc.dart';
-import 'package:asklora_mobile_app/feature/ppi/domain/endpoint_response.dart';
-import 'package:asklora_mobile_app/feature/ppi/domain/user_response_request.dart';
-import 'package:asklora_mobile_app/feature/ppi/repository/question_answer_repository.dart';
+import 'package:asklora_mobile_app/feature/ppi/domain/ppi_user_response.dart';
+import 'package:asklora_mobile_app/feature/ppi/domain/ppi_user_response_request.dart';
+import 'package:asklora_mobile_app/feature/ppi/repository/ppi_response_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,27 +10,27 @@ import 'package:mockito/mockito.dart';
 
 import 'user_response_bloc_test.mocks.dart';
 
-@GenerateMocks([UserResponseRepository])
+@GenerateMocks([PpiResponseRepository])
 void main() async {
   group('User Response Bloc Tests', () {
-    late UserResponseRepository userResponseRepository;
+    late PpiResponseRepository ppiResponseRepository;
     late UserResponseBloc userResponseBloc;
 
-    UserResponseRequest userResponseRequest = UserResponseRequest(
+    PpiUserResponseRequest ppiUserResponseRequest = PpiUserResponseRequest(
         questionId: 'quid0',
         section: 'investment_style',
         types: 'choices',
         points: '1');
-    EndpointResponse endpointResponse =
-        const EndpointResponse(email: 'xx@gmail.com');
+    PpiUserResponse ppiUserResponse =
+        const PpiUserResponse(email: 'xx@gmail.com');
 
     setUpAll(() async {
-      userResponseRepository = MockUserResponseRepository();
+      ppiResponseRepository = MockPpiResponseRepository();
     });
 
     setUp(() async {
       userResponseBloc =
-          UserResponseBloc(userResponseRepository: userResponseRepository);
+          UserResponseBloc(ppiResponseRepository: ppiResponseRepository);
     });
 
     test('User Response Bloc init state is should be unknown', () {
@@ -39,21 +39,21 @@ void main() async {
     });
 
     blocTest<UserResponseBloc, UserResponseState>(
-        'emits ResponseState success and EndpointResponse(email:xx@gmail.com) WHEN '
+        'emits ResponseState success and ppiUserResponse(email:xx@gmail.com) WHEN '
         'send answer',
         build: () {
-          when(userResponseRepository.addAnswer(userResponseRequest))
-              .thenAnswer((_) => Future.value(endpointResponse));
+          when(ppiResponseRepository.addAnswer(ppiUserResponseRequest))
+              .thenAnswer((_) => Future.value(ppiUserResponse));
           return userResponseBloc;
         },
-        act: (bloc) => bloc.add(SendResponse(userResponseRequest)),
+        act: (bloc) => bloc.add(SendResponse(ppiUserResponseRequest)),
         expect: () => {
               const UserResponseState(
                   responseState: ResponseState.loading,
-                  endpointResponse: EndpointResponse()),
+                  ppiUserResponse: PpiUserResponse()),
               UserResponseState(
                   responseState: ResponseState.success,
-                  endpointResponse: endpointResponse)
+                  ppiUserResponse: ppiUserResponse)
             });
 
     tearDown(() => {userResponseBloc.close()});

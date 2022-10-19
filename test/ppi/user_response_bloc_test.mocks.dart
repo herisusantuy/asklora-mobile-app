@@ -4,13 +4,13 @@
 
 import 'dart:async' as _i5;
 
-import 'package:asklora_mobile_app/feature/ppi/domain/endpoint_response.dart'
+import 'package:asklora_mobile_app/feature/ppi/domain/ppi_user_response.dart'
     as _i3;
-import 'package:asklora_mobile_app/feature/ppi/domain/user_response_request.dart'
+import 'package:asklora_mobile_app/feature/ppi/domain/ppi_user_response_request.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/ppi/repository/bot_recommendation_repository.dart'
     as _i2;
-import 'package:asklora_mobile_app/feature/ppi/repository/question_answer_repository.dart'
+import 'package:asklora_mobile_app/feature/ppi/repository/ppi_response_repository.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -27,15 +27,14 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeBotRecommendationRepository_0 extends _i1.Fake
     implements _i2.BotRecommendationRepository {}
 
-class _FakeEndpointResponse_1 extends _i1.Fake implements _i3.EndpointResponse {
-}
+class _FakePpiUserResponse_1 extends _i1.Fake implements _i3.PpiUserResponse {}
 
-/// A class which mocks [UserResponseRepository].
+/// A class which mocks [PpiResponseRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserResponseRepository extends _i1.Mock
-    implements _i4.UserResponseRepository {
-  MockUserResponseRepository() {
+class MockPpiResponseRepository extends _i1.Mock
+    implements _i4.PpiResponseRepository {
+  MockPpiResponseRepository() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -46,20 +45,20 @@ class MockUserResponseRepository extends _i1.Mock
           as _i2.BotRecommendationRepository);
 
   @override
-  _i5.Future<_i3.EndpointResponse> addAnswer(
-          _i6.UserResponseRequest? answerQuestionRequest) =>
+  _i5.Future<_i3.PpiUserResponse> addAnswer(
+          _i6.PpiUserResponseRequest? ppiUserResponseRequest) =>
       (super.noSuchMethod(
-              Invocation.method(#addAnswer, [answerQuestionRequest]),
+              Invocation.method(#addAnswer, [ppiUserResponseRequest]),
               returnValue:
-                  Future<_i3.EndpointResponse>.value(_FakeEndpointResponse_1()))
-          as _i5.Future<_i3.EndpointResponse>);
+                  Future<_i3.PpiUserResponse>.value(_FakePpiUserResponse_1()))
+          as _i5.Future<_i3.PpiUserResponse>);
 
   @override
-  _i5.Future<_i3.EndpointResponse> addBulkAnswer(
-          List<_i6.UserResponseRequest>? answerQuestionRequest) =>
+  _i5.Future<_i3.PpiUserResponse> addBulkAnswer(
+          List<_i6.PpiUserResponseRequest>? ppiUserResponseRequest) =>
       (super.noSuchMethod(
-              Invocation.method(#addBulkAnswer, [answerQuestionRequest]),
+              Invocation.method(#addBulkAnswer, [ppiUserResponseRequest]),
               returnValue:
-                  Future<_i3.EndpointResponse>.value(_FakeEndpointResponse_1()))
-          as _i5.Future<_i3.EndpointResponse>);
+                  Future<_i3.PpiUserResponse>.value(_FakePpiUserResponse_1()))
+          as _i5.Future<_i3.PpiUserResponse>);
 }

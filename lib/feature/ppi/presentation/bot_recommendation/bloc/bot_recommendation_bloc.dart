@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../../domain/endpoint_response.dart';
+import '../../../domain/ppi_user_response.dart';
 import '../../../repository/bot_recommendation_repository.dart';
 
 part 'bot_recommendation_event.dart';

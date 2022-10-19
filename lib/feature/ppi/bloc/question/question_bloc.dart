@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
-import '../../repository/question_collection_repository.dart';
+import '../../repository/ppi_question_repository.dart';
 
 part 'question_event.dart';
 
@@ -17,9 +17,8 @@ enum QuestionPageStep {
 }
 
 class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
-  QuestionBloc(
-      {required QuestionCollectionRepository questionCollectionRepository})
-      : _questionCollectionRepository = questionCollectionRepository,
+  QuestionBloc({required PpiQuestionRepository ppiQuestionRepository})
+      : _questionCollectionRepository = ppiQuestionRepository,
         super(const QuestionState()) {
     on<LoadQuestions>(_onLoadQuestions);
     on<PrivacyQuestionIndexChanged>(_onPrivacyQuestionIndexChanged);
@@ -28,7 +27,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
         _onInvestmentStyleQuestionIndexChanged);
   }
 
-  final QuestionCollectionRepository _questionCollectionRepository;
+  final PpiQuestionRepository _questionCollectionRepository;
 
   void _onPrivacyQuestionIndexChanged(
       PrivacyQuestionIndexChanged event, Emitter<QuestionState> emit) {

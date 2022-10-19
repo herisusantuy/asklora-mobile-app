@@ -5,7 +5,7 @@
 import 'dart:async' as _i5;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/feature/ppi/domain/endpoint_response.dart'
+import 'package:asklora_mobile_app/feature/ppi/domain/ppi_user_response.dart'
     as _i4;
 import 'package:asklora_mobile_app/feature/ppi/repository/bot_recommendation_repository.dart'
     as _i3;

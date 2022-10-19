@@ -1,4 +1,4 @@
-class UserResponseRequest {
+class PpiUserResponseRequest {
   final String questionId;
   final String section;
   final String types;
@@ -13,7 +13,7 @@ class UserResponseRequest {
     return data;
   }
 
-  UserResponseRequest(
+  PpiUserResponseRequest(
       {required this.questionId,
       required this.section,
       required this.types,
