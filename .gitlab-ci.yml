@@ -23,6 +23,10 @@ before_script:
 #    - merge_requests
 
 format:
+
+  tags:
+    - dev
+
   stage: format
 
   script:
@@ -32,6 +36,10 @@ format:
     - pushes
 
 analyze:
+
+  tags:
+    - dev
+
   stage: analyze
 
   script:
@@ -41,6 +49,10 @@ analyze:
     - pushes
 
 unit_test:
+
+  tags:
+    - dev
+    
   stage: test
 
   script:
