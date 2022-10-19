@@ -18,7 +18,7 @@ class AccountRepository {
 
   Future<bool> upgradeAccount(
       UpgradeAccountRequest upgradeAccountRequest) async {
-    // Hack: Let the user go to Onfido KYC even if he tried to upgrade the account again.
+    // TODO: Change this API flow according to the new flow.
     try {
       var response =
           await _accountApiClient.upgradeAccount(upgradeAccountRequest);
@@ -41,7 +41,7 @@ class AccountRepository {
   }
 
   Future<bool> submitTaxInfo(TaxInfoRequest request) async {
-    // Hack: Let the user go to Onfido KYC even if he tried to upgrade the account again.
+    // TODO: Change this API flow according to the new flow.
     try {
       var response = await _accountApiClient.submitTaxInfo(request);
       //TaxInfoRequest.fromJson(response.data);
