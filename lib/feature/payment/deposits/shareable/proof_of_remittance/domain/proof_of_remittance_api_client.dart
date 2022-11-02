@@ -7,9 +7,9 @@ import '../../../../../../core/domain/endpoints.dart';
 import 'proof_of_remittance_request.dart';
 
 class ProofOfRemittanceApiClient {
-  Future<Response> submitProofOfRemittance(ProofOfRemittanceRequest request) async =>
+  Future<Response> submitProofOfRemittance(
+          ProofOfRemittanceRequest request) async =>
       await AskloraApiClient().post(
-          endpoint: endpointProofOfRemittance, payload: jsonEncode(request.toJson()));
-
-
+          endpoint: endpointProofOfRemittance,
+          payload: jsonEncode(request.toJson()));
 }
