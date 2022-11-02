@@ -10,8 +10,11 @@ import '../../shareable/widget/deposit_next_button.dart';
 
 class FpsTransferScreen extends StatelessWidget {
   final BankAccountState bankAccountState;
+  final DepositState depositState;
 
-  const FpsTransferScreen(this.bankAccountState, {Key? key}) : super(key: key);
+  const FpsTransferScreen(
+      {required this.bankAccountState, required this.depositState, Key? key})
+      : super(key: key);
 
   final String fpsId = '123456789';
 
@@ -75,7 +78,8 @@ class FpsTransferScreen extends StatelessWidget {
 
   DepositPageStep _nextTo(BuildContext context) {
     if (bankAccountState.response.data != null &&
-        bankAccountState.response.data!.wireBankAccounts.isNotEmpty) {
+        bankAccountState.response.data!.wireBankAccounts.isNotEmpty &&
+        depositState.useExistingBankAccount) {
       return DepositPageStep.acknowledged;
     } else {
       return DepositPageStep.uploadProof;

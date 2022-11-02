@@ -88,7 +88,10 @@ class DepositScreen extends StatelessWidget {
       case DepositPageStep.selectBank:
         return const SelectBankScreen();
       case DepositPageStep.fpsTransfer:
-        return FpsTransferScreen(bankAccountState);
+        return FpsTransferScreen(
+          bankAccountState: bankAccountState,
+          depositState: depositState,
+        );
       case DepositPageStep.uploadProof:
         return const UploadProofOfRemittanceScreen();
       case DepositPageStep.wireTransfer:
