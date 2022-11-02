@@ -21,6 +21,7 @@ import '../shareable/bank_details/edda_bank_account_details_screen.dart';
 import '../shareable/bank_list/bloc/select_bank_bloc.dart';
 import '../shareable/bank_list/select_bank_screen.dart';
 import '../shareable/proof_of_remittance/bloc/upload_proof_of_remittance_bloc.dart';
+import '../shareable/proof_of_remittance/repository/proof_of_remittance_repository.dart';
 import '../shareable/proof_of_remittance/upload_proof_of_remittance_screen.dart';
 import '../shareable/returning_user/returning_user_screen.dart';
 import '../wire/presentation/wire_transfer_screen.dart';
@@ -47,6 +48,7 @@ class DepositScreen extends StatelessWidget {
                   ..add(GetListBanks())),
         BlocProvider(
             create: (_) => UploadProofOfRemittanceBloc(
+                proofOfRemittanceRepository: ProofOfRemittanceRepository(),
                 filePickerRepository: FilePickerRepository())),
         BlocProvider(create: (_) => BankDetailsBloc()),
         BlocProvider(create: (_) => AmountBloc()),
@@ -90,7 +92,10 @@ class DepositScreen extends StatelessWidget {
       case DepositPageStep.uploadProof:
         return const UploadProofOfRemittanceScreen();
       case DepositPageStep.wireTransfer:
-        return WireTransferScreen(bankAccountState);
+        return WireTransferScreen(
+          bankAccountState: bankAccountState,
+          depositState: depositState,
+        );
       case DepositPageStep.acknowledged:
         return const AcknowledgementScreen();
       case DepositPageStep.eDdaMeaning:

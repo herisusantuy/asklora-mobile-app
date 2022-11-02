@@ -58,22 +58,30 @@ class DepositState extends Equatable {
   final DepositEvent? depositEvent;
   final BankDetails? bankDetails;
   final DepositMethod? depositMethod;
+  final bool useExistingBankAccount;
 
-  const DepositState({this.depositEvent, this.bankDetails, this.depositMethod})
+  const DepositState(
+      {this.depositEvent,
+      this.bankDetails,
+      this.depositMethod,
+      this.useExistingBankAccount = false})
       : super();
 
   @override
-  List<Object?> get props => [depositEvent, bankDetails, depositMethod];
+  List<Object?> get props =>
+      [depositEvent, bankDetails, depositMethod, useExistingBankAccount];
 
-  DepositState copyWith({
-    DepositEvent? depositEvent,
-    BankDetails? bankDetails,
-    DepositMethod? depositMethod,
-  }) {
+  DepositState copyWith(
+      {DepositEvent? depositEvent,
+      BankDetails? bankDetails,
+      DepositMethod? depositMethod,
+      bool? useExistingBankAccount}) {
     return DepositState(
       depositEvent: depositEvent ?? this.depositEvent,
       bankDetails: bankDetails ?? this.bankDetails,
       depositMethod: depositMethod ?? this.depositMethod,
+      useExistingBankAccount:
+          useExistingBankAccount ?? this.useExistingBankAccount,
     );
   }
 }

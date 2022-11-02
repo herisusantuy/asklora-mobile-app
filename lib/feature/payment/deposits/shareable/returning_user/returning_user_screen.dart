@@ -48,6 +48,9 @@ class ReturningUserScreen extends StatelessWidget {
                   break;
               }
               context
+                  .read<DepositBloc>()
+                  .add(const UseExistingBankAccountChanged(false));
+              context
                   .read<NavigationBloc<DepositPageStep>>()
                   .add(PageChanged(depositPageStep));
             },
@@ -87,6 +90,9 @@ class ReturningUserScreen extends StatelessWidget {
               } else {
                 depositPageStep = DepositPageStep.eDdaDepositAmount;
               }
+              context
+                  .read<DepositBloc>()
+                  .add(const UseExistingBankAccountChanged(true));
               context
                   .read<NavigationBloc<DepositPageStep>>()
                   .add(PageChanged(depositPageStep));

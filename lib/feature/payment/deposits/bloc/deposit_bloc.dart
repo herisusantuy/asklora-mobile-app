@@ -10,12 +10,18 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
   DepositBloc() : super(const DepositState()) {
     on<BankSelected>(_onBankSelected);
     on<DepositMethodSelected>(_onDepositMethodSelected);
+    on<UseExistingBankAccountChanged>(_onUseExistingBankAccountChanged);
   }
 
   void _onDepositMethodSelected(
       DepositMethodSelected event, Emitter<DepositState> emit) {
     emit(state.copyWith(
         depositMethod: event.depositMethod, depositEvent: event));
+  }
+
+  void _onUseExistingBankAccountChanged(
+      UseExistingBankAccountChanged event, Emitter<DepositState> emit) {
+    emit(state.copyWith(useExistingBankAccount: event.useExistingBankAccount));
   }
 
   void _onBankSelected(BankSelected event, Emitter<DepositState> emit) {
