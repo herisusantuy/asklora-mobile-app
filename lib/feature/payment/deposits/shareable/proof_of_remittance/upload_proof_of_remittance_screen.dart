@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/photo_view_screen.dart';
 import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_input.dart';
@@ -29,6 +30,11 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
                 listener: (context, state) {
                   if (state.response.state == ResponseState.error) {
                     showAlertDialog(context, state.response.message);
+                  } else if (state.response.state == ResponseState.success) {
+                    context.read<NavigationBloc<DepositPageStep>>().add(
+                        const PageChangedRemoveUntil(
+                            DepositPageStep.eDdaAcknowledged,
+                            DepositPageStep.welcome));
                   }
                 },
                 builder: (context, state) => CustomPaymentButton(
