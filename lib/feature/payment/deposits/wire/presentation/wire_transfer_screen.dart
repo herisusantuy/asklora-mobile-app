@@ -10,8 +10,11 @@ import '../../shareable/widget/deposit_next_button.dart';
 
 class WireTransferScreen extends StatelessWidget {
   final BankAccountState bankAccountState;
+  final DepositState depositState;
 
-  const WireTransferScreen(this.bankAccountState, {Key? key}) : super(key: key);
+  const WireTransferScreen(
+      {required this.bankAccountState, required this.depositState, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +68,8 @@ class WireTransferScreen extends StatelessWidget {
 
   DepositPageStep _nextTo(BuildContext context) {
     if (bankAccountState.response.data != null &&
-        bankAccountState.response.data.wireBankAccounts.isNotEmpty) {
+        bankAccountState.response.data.wireBankAccounts.isNotEmpty &&
+        depositState.useExistingBankAccount) {
       return DepositPageStep.acknowledged;
     } else {
       return DepositPageStep.uploadProof;

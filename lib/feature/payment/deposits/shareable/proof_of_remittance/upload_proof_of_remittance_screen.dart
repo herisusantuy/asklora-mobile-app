@@ -1,14 +1,19 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/photo_view_screen.dart';
+import '../../../presentation/custom_payment_button_button.dart';
+import '../../../presentation/custom_payment_text_input.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../widget/custom_row_text.dart';
-import '../widget/deposit_next_button.dart';
 import 'bloc/upload_proof_of_remittance_bloc.dart';
 
 class UploadProofOfRemittanceScreen extends StatelessWidget {
@@ -20,14 +25,30 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
         buildWhen: (_, __) => false,
         builder: (context, state) => CustomNavigationWidget<DepositPageStep>(
               title: 'Upload Proof of Remittance',
-              navigationButton: BlocBuilder<UploadProofOfRemittanceBloc,
+              navigationButton: BlocConsumer<UploadProofOfRemittanceBloc,
                   UploadProofofRemittanceState>(
-                builder: (context, state) => DepositNextButton(
-                  label: 'Submit',
+                listener: (context, state) {
+                  if (state.response.state == ResponseState.error) {
+                    showAlertDialog(context, state.response.message);
+                  } else if (state.response.state == ResponseState.success) {
+                    context.read<NavigationBloc<DepositPageStep>>().add(
+                        const PageChangedRemoveUntil(
+                            DepositPageStep.eDdaAcknowledged,
+                            DepositPageStep.welcome));
+                  }
+                },
+                builder: (context, state) => CustomPaymentButton(
+                  isLoading: state.response.state == ResponseState.loading,
                   key: const Key(
-                      'deposit_upload_proof_of_remittance_next_button'),
-                  nextTo: DepositPageStep.acknowledged,
-                  disable: state.documentFile != null ? false : true,
+                      'deposit_upload_proof_of_remittance_submit_button'),
+                  disable:
+                      state.documentFiles.isNotEmpty && state.depositAmount > 0
+                          ? false
+                          : true,
+                  title: 'Submit',
+                  onSubmit: () => context
+                      .read<UploadProofOfRemittanceBloc>()
+                      .add(const SubmitProofofRemittance()),
                 ),
               ),
               child: ListView(
@@ -45,6 +66,7 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
                   _text(
                     'It can be a screenshot from your bank app or a receipt. Please see the sample screenshot below for an example',
                   ),
+                  _depositAmountInput(context),
                   _uploadDocument(
                       'Upload Document',
                       InkWell(
@@ -63,16 +85,20 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
                       UploadProofOfRemittanceBloc,
                       UploadProofofRemittanceState>(
                     builder: (context, state) {
-                      if (state.documentFile != null) {
-                        return GestureDetector(
-                          onTap: () => PhotoViewScreen.open(context,
-                              FileImage(File(state.documentFile!.path!))),
-                          child: Image.file(
-                            key: const Key(
-                                'deposit_upload_proof_of_remittance_image'),
-                            File(state.documentFile!.path!),
-                            height: 150,
-                          ),
+                      if (state.documentFiles.isNotEmpty) {
+                        return Column(
+                          children: state.documentFiles
+                              .map((element) => GestureDetector(
+                                    onTap: () => PhotoViewScreen.open(context,
+                                        FileImage(File(element.path!))),
+                                    child: Image.file(
+                                      key: const Key(
+                                          'deposit_upload_proof_of_remittance_image'),
+                                      File(element.path!),
+                                      height: 150,
+                                    ),
+                                  ))
+                              .toList(),
                         );
                       } else {
                         return const CustomText('Image');
@@ -98,6 +124,22 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
         text: text,
         padding: const EdgeInsets.only(bottom: 3),
         fontType: fontType,
+      );
+
+  Widget _depositAmountInput(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(bottom: 36),
+        child: CustomPaymentTextInput(
+            key: const Key('deposit_amount_input'),
+            titleText: 'Deposit Amount',
+            textInputType: TextInputType.number,
+            textInputFormatterList: [FilteringTextInputFormatter.digitsOnly],
+            prefixText: 'HKD',
+            paddingBottom: 6,
+            hintText: 'Enter Amount',
+            onChanged: (value) => context
+                .read<UploadProofOfRemittanceBloc>()
+                .add(DepositAmountChanged(
+                    value.isNotEmpty ? double.parse(value) : 0))),
       );
 
   Widget _uploadDocument(String title, Widget content) => Container(

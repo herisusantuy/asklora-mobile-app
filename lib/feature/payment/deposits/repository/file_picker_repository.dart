@@ -11,4 +11,17 @@ class FilePickerRepository {
       return null;
     }
   }
+
+  Future<List<PlatformFile>> pickFiles(
+      {FileType fileType = FileType.any}) async {
+    FilePickerResult? filePickerResult = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      type: fileType,
+    );
+    if (filePickerResult != null) {
+      return filePickerResult.files;
+    } else {
+      return [];
+    }
+  }
 }

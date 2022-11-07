@@ -13,3 +13,19 @@ class PickFile extends UploadProofofRemittanceEvent {
   @override
   List<Object> get props => [];
 }
+
+class DepositAmountChanged extends UploadProofofRemittanceEvent {
+  final double value;
+
+  const DepositAmountChanged(this.value) : super();
+
+  @override
+  List<Object> get props => [value];
+}
+
+class SubmitProofofRemittance extends UploadProofofRemittanceEvent {
+  const SubmitProofofRemittance() : super();
+
+  @override
+  List<Object> get props => [];
+}

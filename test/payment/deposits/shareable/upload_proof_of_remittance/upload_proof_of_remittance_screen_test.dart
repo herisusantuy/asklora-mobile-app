@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/feature/payment/deposits/bloc/deposit_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/presentation/deposit_screen.dart';
-import 'package:asklora_mobile_app/feature/payment/deposits/shareable/widget/deposit_next_button.dart';
+import 'package:asklora_mobile_app/feature/payment/presentation/custom_payment_button_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,7 +9,7 @@ import '../../../../test_helpers.dart';
 
 void main() async {
   group('Upload Proof of Remittance Screen widget test', () {
-    Future<void> _buildWithdrawalAmountScreenScreen(WidgetTester tester) async {
+    Future<void> buildWithdrawalAmountScreenScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const DepositScreen(
@@ -18,10 +18,8 @@ void main() async {
           navigatorObservers: [mockObserver]));
     }
 
-    final nextButton =
-        find.byKey(const Key('deposit_upload_proof_of_remittance_next_button'));
-    final addButton =
-        find.byKey(const Key('deposit_upload_proof_of_remittance_add_button'));
+    final submitButton = find
+        .byKey(const Key('deposit_upload_proof_of_remittance_submit_button'));
     final imageFile =
         find.byKey(const Key('deposit_upload_proof_of_remittance_image'));
 
@@ -29,11 +27,10 @@ void main() async {
         'Render Deposit Upload Proof of Remittance Screen,`submit button` = disabled, `exceed amount error text` = not visible',
         (tester) async {
       FlutterError.onError = ignoreOverflowErrors;
-      await _buildWithdrawalAmountScreenScreen(tester);
-      expect(nextButton, findsOneWidget);
-      expect(addButton, findsOneWidget);
+      await buildWithdrawalAmountScreenScreen(tester);
+      expect(submitButton, findsOneWidget);
       expect(imageFile, findsNothing);
-      expect((tester.firstWidget(nextButton) as DepositNextButton).disable,
+      expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
           isTrue);
     });
   });
