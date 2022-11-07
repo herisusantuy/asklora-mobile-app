@@ -17,7 +17,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_native_splash: ^2.2.3+1
-  flutter_secure_storage: ^5.0.2
+  flutter_secure_storage: ^6.0.0
   json_annotation: ^4.5.0
   logger: any
   shared_preferences: ^2.0.15
@@ -36,12 +36,12 @@ dependencies:
       url: https://github.com/asklora/flutter_country_picker.git
       ref: master
   intl: ^0.17.0
-  device_info_plus: ^4.0.1
+  device_info_plus: ^8.0.0
   file_picker: ^5.0.0
   collection: ^1.16.0
-  package_info_plus: ^1.4.3
-  firebase_core: ^1.20.1
-  firebase_crashlytics: ^2.8.7
+  package_info_plus: ^3.0.1
+  firebase_core: ^2.1.1
+  firebase_crashlytics: ^3.0.3
   flutter_dotenv: ^5.0.2
   flutter_svg: ^1.1.4
   photo_view: ^0.14.0
