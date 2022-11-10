@@ -20,7 +20,7 @@ class ProofOfRemittanceRepository {
     List<ProofFile> proofFiles = [];
     for (var element in platformFiles) {
       final bytes = File(element.path!).readAsBytesSync();
-      proofFiles.add(ProofFile(base64Encode(bytes)));
+      proofFiles.add(ProofFile('data:image/png;base64,${base64Encode(bytes)}'));
     }
     var response = await _proofOfRemittanceApiClient.submitProofOfRemittance(
         ProofOfRemittanceRequest(depositAmount, proofFiles));
