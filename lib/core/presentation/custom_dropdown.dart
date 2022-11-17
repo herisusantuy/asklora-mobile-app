@@ -12,6 +12,8 @@ class CustomDropdown extends StatelessWidget {
   final String value;
   final String errorText;
   final FormFieldValidator<String>? validator;
+  final InputBorder? border;
+  final InputBorder? focusedBorder;
 
   const CustomDropdown({
     Key? key,
@@ -21,6 +23,8 @@ class CustomDropdown extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     required this.itemsList,
     required this.onChanged,
+    this.border,
+    this.focusedBorder,
     this.errorText = '',
     this.validator,
     this.onTap,
@@ -72,6 +76,8 @@ class CustomDropdown extends StatelessWidget {
               },
               onTap: onTap,
               decoration: InputDecoration(
+                border: border,
+                focusedBorder:focusedBorder,
                 errorText: errorText.isEmpty ? null : errorText,
                 isDense: true,
                 contentPadding: const EdgeInsets.symmetric(

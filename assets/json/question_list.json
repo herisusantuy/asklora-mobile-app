@@ -103,17 +103,61 @@
     "questions": {
       "choices": [
         {
+          "name": "I cannot accept any risk of capital loss. ",
+          "point": "1"
+        },
+        {
+          "name": "Fixed returns similar to interest rates, I can tolerate low risk of capital loss.",
+          "point": "2"
+        },
+        {
+          "name": "To achieve some capital growth and returns above interest rates, I can tolerate moderate risk of capital loss ",
+          "point": "3"
+        },
+        {
+          "name": "To achieve substantial returns above interest rates, I can tolerate higher risk of capital loss.",
+          "point": "4"
+        },
+        {
+          "name": "To achieve very high and substantial returns, I can tolerate very high risk of capital loss which can exceed initial invested value.",
+          "point": "5"
+        }
+      ],
+      "hints": null,
+      "question": "Can I ask about your investment objectives?",
+      "question_index": 4,
+      "section": "privacy",
+      "types": "choices"
+    },
+    "uid": "quid3"
+  },
+  {
+    "collection": "question",
+    "questions": {
+      "hints": "",
+      "question": "Can I ask about your financial situation?",
+      "question_index": 5,
+      "section": "privacy",
+      "types": "unique"
+    },
+    "uid": "quid4"
+  },
+  {
+    "collection": "question",
+    "questions": {
+      "choices": [
+        {
           "name": "words",
           "point": "TBD"
         }
       ],
       "hints": "Age",
-      "question": "Not to be rude.\nbut, how old are you?",
-      "question_index": 4,
+      "question": "Not to be rude. but, how old are you?",
+      "question_index": 6,
       "section": "privacy",
       "types": "descriptive"
     },
-    "uid": "quid3"
+    "uid": "quid5"
   },
   {
     "collection": "question",

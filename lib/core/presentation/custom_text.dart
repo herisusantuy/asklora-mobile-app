@@ -5,6 +5,7 @@ enum FontType {
   h1,
   h2,
   h3,
+  h3W800,
   h4,
   h4Normal,
   h4SemiBold,
@@ -31,6 +32,7 @@ class CustomText extends StatelessWidget {
   final TextDecoration decoration;
   final EdgeInsets padding;
   final int? maxLines;
+  final FontStyle? fontStyle;
 
   const CustomText(
     this.text, {
@@ -42,11 +44,13 @@ class CustomText extends StatelessWidget {
     this.decoration = TextDecoration.none,
     this.padding = EdgeInsets.zero,
     this.maxLines,
+        this.fontStyle
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double? fontType;
+
 
     switch (type) {
       case FontType.h1:
@@ -59,6 +63,9 @@ class CustomText extends StatelessWidget {
         fontType = 30;
         break;
       case FontType.h3:
+        fontType = 22;
+        break;
+      case FontType.h3W800:
         fontType = 22;
         break;
       case FontType.h4Normal:
@@ -99,6 +106,9 @@ class CustomText extends StatelessWidget {
       case FontType.highlight:
         boldText = FontWeight.w300;
         break;
+      case FontType.h3W800:
+        boldText = FontWeight.w800;
+        break;
       case FontType.h1:
       case FontType.h2:
       case FontType.h3:
@@ -123,6 +133,7 @@ class CustomText extends StatelessWidget {
           fontSize: fontType,
           fontWeight: boldText,
           decoration: decoration,
+            fontStyle:fontStyle
         ),
         overflow: ellipsis ? TextOverflow.ellipsis : null,
         textAlign: textAlign,

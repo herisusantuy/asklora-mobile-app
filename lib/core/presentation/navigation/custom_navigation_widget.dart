@@ -46,17 +46,17 @@ class CustomNavigationWidget<T> extends StatelessWidget {
           children: [
             header ??
                 Material(
-                  color: Colors.blue,
+                  color: Colors.transparent,
                   child: Row(
                     children: [
                       InkWell(
                           onTap: () => _onTapBack(context),
                           child: const Padding(
-                            padding: EdgeInsets.all(8),
+                            padding: EdgeInsets.all(12),
                             child: Icon(
-                              Icons.chevron_left,
-                              size: 40,
-                              color: Colors.white,
+                              Icons.arrow_back_rounded,
+                              size: 26,
+                              color: Colors.black,
                             ),
                           )),
                       if (title.isNotEmpty)
@@ -64,7 +64,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
                           child: CustomText(
                             title,
                             type: FontType.h3,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         )
                     ],
@@ -73,7 +73,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Container(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   child: child,

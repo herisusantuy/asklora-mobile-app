@@ -5,6 +5,10 @@ import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../feature/onboarding/ppi/presentation/ppi_screen.dart';
+import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../feature/onboarding/welcome/greeting/greeting_screen.dart';
+import '../../feature/onboarding/welcome/lora_ask_name/presentation/lora_ask_name_screen.dart';
 import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
@@ -56,6 +60,15 @@ class RouterGenerator {
                     'AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol)));
       case QuestionScreen.route:
         return MaterialPageRoute(builder: (_) => const QuestionScreen());
+      case CarouselScreen.route:
+        return MaterialPageRoute(builder: (_) => const CarouselScreen());
+      case LoraAskNameScreen.route:
+        return MaterialPageRoute(builder: (_) => const LoraAskNameScreen());
+      case GreetingScreen.route:
+        return MaterialPageRoute(
+            builder: (_) => GreetingScreen(name: settings.arguments as String));
+      case PpiScreen.route:
+        return MaterialPageRoute(builder: (_) => const PpiScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
