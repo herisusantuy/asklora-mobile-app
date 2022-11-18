@@ -1,13 +1,13 @@
 import 'dart:math';
 
-import 'package:asklora_mobile_app/feature/ppi/bloc/question/question_bloc.dart';
-import 'package:asklora_mobile_app/feature/ppi/domain/fixture.dart';
-import 'package:asklora_mobile_app/feature/ppi/domain/question.dart';
-import 'package:asklora_mobile_app/feature/ppi/presentation/question_screen.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/bloc/question/question_bloc.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/fixture.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/question.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/ppi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../mocks/mocks.dart';
+import '../../mocks/mocks.dart';
 
 void main() async {
   group('Questions Screen Tests', () {
@@ -20,13 +20,12 @@ void main() async {
         find.byKey(const Key('question_navigation_button_widget'));
 
     var questionNextButton = find.byKey(const Key('question_next_button'));
-    var questionCancelButton = find.byKey(const Key('question_cancel_button'));
     List<QuestionCollection> privacyQuestions = Fixture().privacyQuestions;
 
     Future<void> buildPrivacyQuestionScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: const QuestionScreen(
+        home: const PpiScreen(
           initialQuestionPage: QuestionPageStep.privacy,
         ),
         navigatorObservers: [mockObserver],
@@ -47,7 +46,6 @@ void main() async {
           expect(questionHeader, findsOneWidget);
           expect(questionNavigationButtonWidget, findsOneWidget);
           expect(questionNextButton, findsOneWidget);
-          expect(questionCancelButton, findsOneWidget);
           await tester.pumpAndSettle();
           await tester.tap(find.byKey(Key(
               '${privacyQuestions[index].uid}-${_randomSelectedIndex(privacyQuestions[index].questions!.choices!.length)}')));
@@ -61,8 +59,34 @@ void main() async {
           expect(questionHeader, findsOneWidget);
           expect(questionNavigationButtonWidget, findsOneWidget);
           expect(questionNextButton, findsOneWidget);
-          expect(questionCancelButton, findsOneWidget);
           await tester.enterText(descriptiveQuestionInput, 'abc');
+          await tester.pump();
+          await tester.tap(questionNextButton);
+          await tester.pump();
+        }
+        else if(privacyQuestions[index].questions!.types ==
+            QuestionType.unique.value){
+          var accountInvestibleLiquidAssetsSelect =
+          find.byKey(const Key('account_investible_liquid_assets_select'));
+          var accountFundingSourceSelect =
+          find.byKey(const Key('account_funding_source_select'));
+          var accountEmploymentStatusSelect =
+          find.byKey(const Key('account_employment_status_select'));
+          expect(accountInvestibleLiquidAssetsSelect, findsOneWidget);
+          expect(accountFundingSourceSelect, findsOneWidget);
+          expect(accountEmploymentStatusSelect, findsOneWidget);
+          expect(questionNextButton, findsOneWidget);
+          await tester.tap(accountInvestibleLiquidAssetsSelect);
+          await tester.pump();
+          await tester.tap(find.text('0 - 200,000').last);
+          await tester.pump();
+          await tester.tap(accountFundingSourceSelect);
+          await tester.pump();
+          await tester.tap(find.text('investments').last);
+          await tester.pump();
+          await tester.tap(accountEmploymentStatusSelect);
+          await tester.pump();
+          await tester.tap(find.text('unemployed').last);
           await tester.pump();
           await tester.tap(questionNextButton);
           await tester.pump();

@@ -246,6 +246,7 @@ class FinancialSituationQuestion extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.enableNextButton() != current.enableNextButton(),
         builder: (context, state) => CustomButton(
+          key: const Key('question_next_button'),
               disable: !state.enableNextButton(),
               label: 'Next',
               onClick: onTapNext,

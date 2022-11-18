@@ -7,11 +7,12 @@ import '../mocks/mocks.dart';
 void main() async {
   group('OTP Screen Widget Tests', () {
     var requestOtpButton = find.byKey(const Key('request_otp_button'));
+    var signUpAgainButton = find.byKey(const Key('sign_up_again_button'));
 
     var otpBox = find.byKey(const Key('otp_box'));
-    var titleWithGuide = find.byKey(const Key('title_with_guide'));
+    var mEmojiWidget = find.byKey(const Key('memoji_widget'));
 
-    Future<void> _buildHomeScreen(WidgetTester tester) async {
+    Future<void> buildHomeScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const OtpScreen(
@@ -24,17 +25,18 @@ void main() async {
     testWidgets(
         'Render OTP screen with `Guide` text, `OtpBox` field, `Instruction` text',
         (tester) async {
-      await _buildHomeScreen(tester);
+      await buildHomeScreen(tester);
       await tester.pump();
       expect(otpBox, findsOneWidget);
-      expect(titleWithGuide, findsOneWidget);
+      expect(mEmojiWidget, findsOneWidget);
       expect(requestOtpButton, findsOneWidget);
+      expect(signUpAgainButton, findsOneWidget);
     });
 
     testWidgets('Entering OTP < 6 digits not number',
         (WidgetTester tester) async {
       await tester.runAsync(() async {
-        await _buildHomeScreen(tester);
+        await buildHomeScreen(tester);
         await tester.pump();
         await tester.enterText(otpBox, 'abc');
         await tester.pump();
@@ -46,7 +48,7 @@ void main() async {
 
     testWidgets('Entering OTP < 6 digits number', (WidgetTester tester) async {
       await tester.runAsync(() async {
-        await _buildHomeScreen(tester);
+        await buildHomeScreen(tester);
         await tester.pump();
         await tester.enterText(otpBox, '123');
         await tester.pump();
@@ -58,7 +60,7 @@ void main() async {
 
     testWidgets('Entering OTP 6 digits number', (WidgetTester tester) async {
       await tester.runAsync(() async {
-        await _buildHomeScreen(tester);
+        await buildHomeScreen(tester);
         await tester.pump();
         await tester.enterText(otpBox, '123456');
         await tester.pump();

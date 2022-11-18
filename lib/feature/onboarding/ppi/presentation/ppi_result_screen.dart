@@ -46,6 +46,7 @@ class PpiResultScreen extends StatelessWidget {
   Widget get _button {
     if (ppiResultType == PpiResultType.success) {
       return CustomButton(
+        key: const Key('next_button'),
         label: 'SURE!',
         onClick: onPrimaryButtonTap ?? () {},
         margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
@@ -57,11 +58,13 @@ class PpiResultScreen extends StatelessWidget {
         child: Column(
           children: [
             CustomButton(
+              key: const Key('try_again_button'),
               label: 'TRY AGAIN',
               onClick: onPrimaryButtonTap ?? () {},
               margin: const EdgeInsets.only(bottom: 32),
             ),
             CustomTextButton(
+              key: const Key('need_help_button'),
               fontType: FontType.smallTextBold,
               margin: const EdgeInsets.only(bottom: 16),
               onTap: () {},

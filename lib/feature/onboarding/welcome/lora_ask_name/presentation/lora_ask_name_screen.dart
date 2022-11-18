@@ -30,6 +30,7 @@ class LoraAskNameScreen extends StatelessWidget {
                 ),
                 Builder(
                     builder: (context) => CustomCenteredTextInput(
+                      key: const Key('name_input'),
                           onChanged: (value) => context
                               .read<LoraAskNameBloc>()
                               .add(NameChanged(value)),
@@ -48,6 +49,7 @@ class LoraAskNameScreen extends StatelessWidget {
 
   Widget get _nextButton => BlocBuilder<LoraAskNameBloc, LoraAskNameState>(
       builder: (context, state) => CustomButton(
+        key: const Key('next_button'),
             label: 'Next',
             disable: state.name.isEmpty,
             onClick: () => GreetingScreen.open(context, state.name),

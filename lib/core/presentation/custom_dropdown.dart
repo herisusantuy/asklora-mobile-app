@@ -33,21 +33,6 @@ class CustomDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? dropdownValue;
-    List<DropdownMenuItem<String>> buildDropdownMenuItems(List list) {
-      List<DropdownMenuItem<String>> dropDownItems = [];
-      for (var value in list) {
-        dropDownItems.add(
-          DropdownMenuItem<String>(
-            value: value,
-            child: CustomText(
-              value,
-              type: FontType.smallText,
-            ),
-          ),
-        );
-      }
-      return dropDownItems;
-    }
 
     return Container(
       padding: padding,
@@ -77,7 +62,7 @@ class CustomDropdown extends StatelessWidget {
               onTap: onTap,
               decoration: InputDecoration(
                 border: border,
-                focusedBorder:focusedBorder,
+                focusedBorder: focusedBorder,
                 errorText: errorText.isEmpty ? null : errorText,
                 isDense: true,
                 contentPadding: const EdgeInsets.symmetric(
@@ -85,12 +70,40 @@ class CustomDropdown extends StatelessWidget {
                 ),
               ),
               borderRadius: BorderRadius.circular(5),
-              items: buildDropdownMenuItems(itemsList),
+              items: itemsList
+                  .map(
+                    (element) => DropdownMenuItem<String>(
+                      value: element,
+                      child: CustomText(
+                        element,
+                        type: FontType.smallText,
+                      ),
+                    ),
+                  )
+                  .toList(),
               isDense: true,
             ),
           ),
         ],
       ),
     );
+  }
+
+  List<DropdownMenuItem<String>> buildDropdownMenuItems(List list) {
+    List<DropdownMenuItem<String>> dropDownItems = [];
+    for (var value in list) {
+      dropDownItems.add(
+        DropdownMenuItem<String>(
+          key: Key(value),
+          value: value,
+          child: CustomText(
+            value,
+            type: FontType.smallText,
+          ),
+        ),
+      );
+    }
+    print('the length ${dropDownItems.length}');
+    return dropDownItems;
   }
 }

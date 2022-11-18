@@ -92,7 +92,7 @@ class OtpForm extends StatelessWidget {
             borderSide: state.disableRequest
                 ? BorderSide.none
                 : const BorderSide(width: 2, color: Color(0xff232323)),
-            key: const Key('sign_in_submit_button'),
+            key: const Key('request_otp_button'),
             fontStyle: FontStyle.normal,
             disable: state.disableRequest,
             label: state.disableRequest
@@ -105,6 +105,7 @@ class OtpForm extends StatelessWidget {
 
   Widget _signUpAgainButton(BuildContext context) {
     return CustomTextButton(
+      key: const Key('sign_up_again_button'),
       margin: const EdgeInsets.only(top: 28, bottom: 28),
       label: 'SIGN UP AGAIN',
       onTap: () => Navigator.pop(context),

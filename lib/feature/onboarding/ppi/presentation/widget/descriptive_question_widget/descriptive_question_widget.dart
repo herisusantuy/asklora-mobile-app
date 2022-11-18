@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/we_create/custom_centered_text_input.dart';
@@ -15,6 +16,8 @@ class DescriptiveQuestionWidget extends StatelessWidget {
   final QuestionCollection questionCollection;
   final Function onSubmitSuccess;
   final Function() onCancel;
+  final TextInputType textInputType;
+  final List<TextInputFormatter>? textInputFormatterList;
 
   const DescriptiveQuestionWidget(
       {required this.headerTitle,
@@ -22,11 +25,14 @@ class DescriptiveQuestionWidget extends StatelessWidget {
       required this.questionCollection,
       required this.onSubmitSuccess,
       required this.onCancel,
+        this.textInputType = TextInputType.text,
+        this.textInputFormatterList,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
       create: (_) =>
           DescriptiveQuestionWidgetBloc(defaultAnswer: defaultAnswer),
@@ -44,6 +50,8 @@ class DescriptiveQuestionWidget extends StatelessWidget {
           Expanded(
             child: Builder(
                 builder: (context) => CustomCenteredTextInput(
+                  textInputType: textInputType,
+                  textInputFormatterList:textInputFormatterList,
                       initialValue: defaultAnswer,
                       hintText: questionCollection.questions?.hints ?? '',
                       key: const Key('descriptive_question_input'),

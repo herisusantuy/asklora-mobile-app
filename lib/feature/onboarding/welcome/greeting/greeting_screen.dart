@@ -23,6 +23,7 @@ class GreetingScreen extends StatelessWidget {
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta, xxx $name.',
               imageAsset: '/'),
           CustomButton(
+            key: const Key('next_button'),
             label: 'Next',
             onClick: () => PpiScreen.open(context),
             margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),

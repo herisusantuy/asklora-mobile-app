@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/core/presentation/we_create/custom_button.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/presentation/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -58,7 +58,7 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
           isTrue);
     });
 
@@ -73,7 +73,7 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
           isTrue);
     });
 
@@ -104,7 +104,7 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
           isTrue);
     });
 
@@ -140,7 +140,7 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
           isTrue);
     });
 
@@ -176,7 +176,7 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
           isTrue);
     });
 
@@ -212,7 +212,7 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomTextButton).disable,
+      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
           isFalse);
     });
   });

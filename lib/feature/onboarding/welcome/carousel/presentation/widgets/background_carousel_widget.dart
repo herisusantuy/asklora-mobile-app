@@ -13,6 +13,7 @@ class BackgroundCarouselWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
+      key: const Key('background_carousel_slider'),
       options: CarouselOptions(
         viewportFraction: 1,
         height: MediaQuery.of(context).size.height,

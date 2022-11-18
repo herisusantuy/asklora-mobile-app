@@ -5,7 +5,7 @@ import 'package:asklora_mobile_app/feature/ppi/presentation/widget/question_navi
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../mocks/mocks.dart';
+import '../../mocks/mocks.dart';
 
 void main() async {
   group('Investment Style Questions Screen Tests', () {
