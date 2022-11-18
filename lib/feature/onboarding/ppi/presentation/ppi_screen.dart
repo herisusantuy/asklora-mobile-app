@@ -37,15 +37,37 @@ class PpiScreen extends StatelessWidget {
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
       ],
       child: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 0,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+          ),
           body: BlocConsumer<NavigationBloc<QuestionPageStep>,
               NavigationState<QuestionPageStep>>(
-        listenWhen: (_, current) => current.lastPage == true,
-        listener: (context, state) {
-          Navigator.pop(context);
-        },
-        builder: (context, state) => _pages(state),
-      )),
+            listenWhen: (_, current) => current.lastPage == true,
+            listener: (context, state) {
+              Navigator.pop(context);
+            },
+            builder: (context, state) => Column(
+              children: [
+                _progressIndicator(),
+                Expanded(child: _pages(state)),
+              ],
+            ),
+          )),
     );
+  }
+
+  Widget _progressIndicator() {
+    return BlocBuilder<QuestionBloc, QuestionState>(
+        buildWhen: (previous, current) =>
+            previous.currentPages != current.currentPages,
+        builder: (context, state) => LinearProgressIndicator(
+              backgroundColor: Colors.grey[350],
+              value: state.currentPages / state.totalPages,
+              color: Colors.grey[700],
+            ));
   }
 
   Widget _pages(NavigationState navigationState) {
@@ -62,9 +84,14 @@ class PpiScreen extends StatelessWidget {
                   'Thank you for your trust. Unfortunately my age is a secret...',
               ppiResultType: PpiResultType.success,
               additionalMessage: 'Let’s talk about your personality.',
-              onPrimaryButtonTap: () => context
-                  .read<NavigationBloc<QuestionPageStep>>()
-                  .add(const PageChanged(QuestionPageStep.personalisation)),
+              onPrimaryButtonTap: () {
+                context
+                    .read<QuestionBloc>()
+                    .add(const CurrentPageIncremented());
+                context
+                    .read<NavigationBloc<QuestionPageStep>>()
+                    .add(const PageChanged(QuestionPageStep.personalisation));
+              },
             );
           case QuestionPageStep.privacyResultFailed:
             return PpiResultScreen(

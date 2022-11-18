@@ -1,7 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/feature/ppi/bloc/question/question_bloc.dart';
-import 'package:asklora_mobile_app/feature/ppi/domain/fixture.dart';
-import 'package:asklora_mobile_app/feature/ppi/repository/ppi_question_repository.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/bloc/question/question_bloc.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/fixture.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_question_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

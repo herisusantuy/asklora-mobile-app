@@ -188,7 +188,7 @@
       "question": "Do you talk to strangers at parties?",
       "question_index": 1,
       "section": "openness",
-      "types": "slider"
+      "types": "choices"
     },
     "uid": "quid4"
   },
@@ -221,7 +221,7 @@
       "question": "Do you enjoy learning new things?",
       "question_index": 2,
       "section": "openness",
-      "types": "slider"
+      "types": "choices"
     },
     "uid": "quid5"
   },

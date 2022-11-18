@@ -42,3 +42,17 @@ class InvestmentStyleQuestionIndexChanged extends QuestionEvent {
   @override
   List<Object> get props => [investmentStyleQuestionIndex];
 }
+
+class CurrentPageIncremented extends QuestionEvent {
+  const CurrentPageIncremented() : super();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CurrentPageDecremented extends QuestionEvent {
+  const CurrentPageDecremented() : super();
+
+  @override
+  List<Object> get props => [];
+}

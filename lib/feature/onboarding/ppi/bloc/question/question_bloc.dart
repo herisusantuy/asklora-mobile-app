@@ -25,6 +25,8 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
     on<PersonalisationQuestionIndexChanged>(_onPersonalisationIndexChanged);
     on<InvestmentStyleQuestionIndexChanged>(
         _onInvestmentStyleQuestionIndexChanged);
+    on<CurrentPageIncremented>(_onCurrentPageIncremented);
+    on<CurrentPageDecremented>(_onCurrentPageDecremented);
   }
 
   final PpiQuestionRepository _questionCollectionRepository;
@@ -51,5 +53,15 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
     emit(state.copyWith(response: BaseResponse.loading()));
     var data = await _questionCollectionRepository.fetchQuestions();
     emit(state.copyWith(response: BaseResponse.complete(data)));
+  }
+
+  void _onCurrentPageIncremented(
+      CurrentPageIncremented event, Emitter<QuestionState> emit) async {
+    emit(state.copyWith(currentPages: state.currentPages + 1));
+  }
+
+  void _onCurrentPageDecremented(
+      CurrentPageDecremented event, Emitter<QuestionState> emit) async {
+    emit(state.copyWith(currentPages: state.currentPages - 1));
   }
 }

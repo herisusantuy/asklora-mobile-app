@@ -57,7 +57,6 @@ class MockFilePickerRepository extends _i1.Mock
         ),
         returnValue: _i4.Future<_i5.PlatformFile?>.value(),
       ) as _i4.Future<_i5.PlatformFile?>);
-
   @override
   _i4.Future<List<_i5.PlatformFile>> pickFiles(
           {_i5.FileType? fileType = _i5.FileType.any}) =>

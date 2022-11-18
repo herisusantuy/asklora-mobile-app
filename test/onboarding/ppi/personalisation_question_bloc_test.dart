@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/ppi/presentation/personalisation_question/bloc/personalisation_question_bloc.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/personalisation_question/bloc/personalisation_question_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -21,13 +21,13 @@ void main() {
       'emits onNextInvestmentStyleQuestionScreen WHEN tap next button',
       build: () => personalisationQuestionBloc,
       act: (bloc) => bloc.add(NextPersonalisationQuestion()),
-      expect: () => {OnNextToInvestmentStyleQuestionScreen()},
+      expect: () => {OnNextResultEndScreen()},
     );
     blocTest<PersonalisationQuestionBloc, PersonalisationQuestionState>(
       'emits onPreviousPrivacyQuestionScreen WHEN tap cancel button',
       build: () => personalisationQuestionBloc,
       act: (bloc) => bloc.add(PreviousPersonalisationQuestion()),
-      expect: () => {OnPerviousToPrivacyQuestionScreen()},
+      expect: () => {OnPreviousToPrivacyQuestionScreen()},
     );
     tearDown(() => {personalisationQuestionBloc.close()});
   });

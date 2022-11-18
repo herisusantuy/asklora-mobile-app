@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/ppi/presentation/privacy_question/bloc/privacy_question_bloc.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/privacy_question/bloc/privacy_question_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -20,7 +20,7 @@ void main() async {
         'Tap next button',
         build: () => privacyQuestionBloc,
         act: (bloc) => bloc.add(NextQuestion()),
-        expect: () => {OnNextPersonalisationQuestionScreen()});
+        expect: () => {OnNextResultSuccessScreen()});
 
     blocTest<PrivacyQuestionBloc, PrivacyQuestionState>(
         'emits OnPreviousSignInSuccessScreen WHEN '

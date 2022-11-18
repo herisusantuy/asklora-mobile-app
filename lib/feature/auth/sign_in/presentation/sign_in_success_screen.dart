@@ -10,10 +10,10 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../home_screen.dart';
+import '../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../orders/regular/presentation/regular_order_home_screen.dart';
 import '../../../payment/deposits/presentation/deposit_screen.dart';
 import '../../../payment/withdrawal/presentation/withdrawal_screen.dart';
-import '../../../ppi/presentation/question_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../../user/account/presentation/user_profile/user_profile_screen.dart';
@@ -144,7 +144,7 @@ class SignInSuccessScreen extends StatelessWidget {
       onClick: () => RegularOrderHomeScreen.open(context));
 
   Widget _questionScreen(BuildContext context) => CustomTextButton(
-      buttonText: 'Question PPI', onClick: () => QuestionScreen.open(context));
+      buttonText: 'Question PPI', onClick: () => PpiScreen.open(context));
 
   Widget _userButton(BuildContext context) {
     return InkWell(

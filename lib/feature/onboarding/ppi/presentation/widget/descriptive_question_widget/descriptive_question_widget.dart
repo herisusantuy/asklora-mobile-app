@@ -11,7 +11,6 @@ import '../header.dart';
 import '../question_navigation_button_widget.dart';
 
 class DescriptiveQuestionWidget extends StatelessWidget {
-  final String headerTitle;
   final String defaultAnswer;
   final QuestionCollection questionCollection;
   final Function onSubmitSuccess;
@@ -20,8 +19,7 @@ class DescriptiveQuestionWidget extends StatelessWidget {
   final List<TextInputFormatter>? textInputFormatterList;
 
   const DescriptiveQuestionWidget(
-      {required this.headerTitle,
-      this.defaultAnswer = '',
+      {this.defaultAnswer = '',
       required this.questionCollection,
       required this.onSubmitSuccess,
       required this.onCancel,

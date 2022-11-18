@@ -27,20 +27,6 @@ class OnNextPersonalizationQuestion<T> extends PersonalisationQuestionState {
   List<Object> get props => [questionType, timeStamp];
 }
 
-class OnNextPersonalisationGetTwoQuestion<T>
-    extends PersonalisationQuestionState {
-  final QuestionType questionType;
-  final int personalisationQuestionLastIndex;
-  final List<T> questions;
-  final int timeStamp = DateTime.now().millisecondsSinceEpoch;
-
-  OnNextPersonalisationGetTwoQuestion(this.questionType, this.questions,
-      {required this.personalisationQuestionLastIndex});
-
-  @override
-  List<Object> get props => [questionType, timeStamp, questions];
-}
-
 class OnNextToInvestmentStyleQuestionScreen
     extends PersonalisationQuestionState {}
 

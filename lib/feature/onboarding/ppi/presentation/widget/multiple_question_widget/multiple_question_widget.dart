@@ -12,13 +12,11 @@ import 'bloc/multiple_question_widget_bloc.dart';
 class MultipleChoiceQuestionWidget extends StatelessWidget {
   final QuestionCollection questionCollection;
   final int defaultChoiceIndex;
-  final String headerTitle;
   final Function onSubmitSuccess;
   final Function() onCancel;
 
   const MultipleChoiceQuestionWidget(
-      {required this.headerTitle,
-      required this.questionCollection,
+      {required this.questionCollection,
       this.defaultChoiceIndex = 0,
       required this.onSubmitSuccess,
       required this.onCancel,

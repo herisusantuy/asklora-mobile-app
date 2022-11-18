@@ -1,10 +1,9 @@
 import 'dart:math';
 
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
-import 'package:asklora_mobile_app/feature/ppi/bloc/question/question_bloc.dart';
-import 'package:asklora_mobile_app/feature/ppi/domain/fixture.dart';
-import 'package:asklora_mobile_app/feature/ppi/domain/question.dart';
-import 'package:asklora_mobile_app/feature/ppi/presentation/question_screen.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/bloc/question/question_bloc.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/fixture.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/question.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/ppi_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,20 +11,22 @@ import '../../mocks/mocks.dart';
 
 void main() {
   group('Personalisation Question Screen Test', () {
-    var titleQuestionScreen = find.text('Personalisation Question');
-    var personalisationQuestionWidget =
-        find.byKey(const Key('personalisation_question_widget'));
-    var questionNavigationButtonWidget = find
-        .byKey(const Key('personalisation_question_navigation_button_widget'));
+    var multipleChoiceQuestionBuilder =
+        find.byKey(const Key('multiple_choice_question_builder'));
+    var descriptiveQuestionInput =
+        find.byKey(const Key('descriptive_question_input'));
+    var questionHeader = find.byKey(const Key('question_header'));
+    var questionNavigationButtonWidget =
+        find.byKey(const Key('question_navigation_button_widget'));
     var questionNextButton = find.byKey(const Key('question_next_button'));
-    var questionCancelButton = find.byKey(const Key('question_cancel_button'));
+
     List<QuestionCollection> personalisedQuestions =
         Fixture().personalisedQuestion;
     Future<void> builderPersonalisationQuestionScreen(
         WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
-        home: const QuestionScreen(
+        home: const PpiScreen(
           initialQuestionPage: QuestionPageStep.personalisation,
         ),
         navigatorObservers: [mockObserver],
@@ -38,30 +39,32 @@ void main() {
       await builderPersonalisationQuestionScreen(tester);
       await tester.pumpAndSettle();
 
-      for (int index = 0;
-          index < personalisedQuestions.length;
-          index = index + 2) {
-        expect(titleQuestionScreen, findsOneWidget);
-        expect(personalisationQuestionWidget, findsOneWidget);
-        expect(questionNavigationButtonWidget, findsOneWidget);
-        expect(questionNextButton, findsOneWidget);
-        expect(questionCancelButton, findsOneWidget);
-        await tester.tap(find.byKey(Key(
-            '${personalisedQuestions[index].uid}-${_randomSelectedIndex(personalisedQuestions[index].questions!.choices!.length)}')));
-        await tester.pumpAndSettle();
-        expect(
-            (tester.firstWidget(questionNextButton) as CustomTextButton)
-                .disable,
-            isTrue);
-        await tester.tap(find.byKey(Key(
-            '${personalisedQuestions[index + 1].uid}-${_randomSelectedIndex(personalisedQuestions[index + 1].questions!.choices!.length)}')));
-        await tester.pumpAndSettle();
-        expect(
-            (tester.firstWidget(questionNextButton) as CustomTextButton)
-                .disable,
-            isFalse);
-        await tester.tap(questionNextButton);
-        await tester.pump();
+      for (int index = 0; index < personalisedQuestions.length; index++) {
+        if (personalisedQuestions[index].questions!.types ==
+            QuestionType.choices.value) {
+          expect(multipleChoiceQuestionBuilder, findsOneWidget);
+          expect(descriptiveQuestionInput, findsNothing);
+          expect(questionHeader, findsOneWidget);
+          expect(questionNavigationButtonWidget, findsOneWidget);
+          expect(questionNextButton, findsOneWidget);
+          await tester.pumpAndSettle();
+          await tester.tap(find.byKey(Key(
+              '${personalisedQuestions[index].uid}-${_randomSelectedIndex(personalisedQuestions[index].questions!.choices!.length)}')));
+          await tester.pumpAndSettle();
+          await tester.tap(questionNextButton);
+          await tester.pump();
+        } else if (personalisedQuestions[index].questions!.types ==
+            QuestionType.descriptive.value) {
+          expect(multipleChoiceQuestionBuilder, findsNothing);
+          expect(descriptiveQuestionInput, findsOneWidget);
+          expect(questionHeader, findsOneWidget);
+          expect(questionNavigationButtonWidget, findsOneWidget);
+          expect(questionNextButton, findsOneWidget);
+          await tester.enterText(descriptiveQuestionInput, 'abc');
+          await tester.pump();
+          await tester.tap(questionNextButton);
+          await tester.pump();
+        }
       }
     });
   });

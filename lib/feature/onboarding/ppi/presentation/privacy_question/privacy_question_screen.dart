@@ -14,7 +14,6 @@ import 'bloc/privacy_question_bloc.dart';
 
 class PrivacyQuestionScreen extends StatelessWidget {
   final int initialIndex;
-  final String headerTitle = 'Privacy';
 
   const PrivacyQuestionScreen({this.initialIndex = 0, Key? key})
       : super(key: key);
@@ -46,40 +45,26 @@ class PrivacyQuestionScreen extends StatelessWidget {
                   case (QuestionType.choices):
                     //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                     return MultipleChoiceQuestionWidget(
-                      headerTitle: headerTitle,
-                      key: Key(questionCollection.uid!),
-                      questionCollection: questionCollection,
-                      defaultChoiceIndex: -1,
-                      onSubmitSuccess: () => context
-                          .read<PrivacyQuestionBloc>()
-                          .add(NextQuestion()),
-                      onCancel: () => context
-                          .read<PrivacyQuestionBloc>()
-                          .add(PreviousQuestion()),
-                    );
+                        key: Key(questionCollection.uid!),
+                        questionCollection: questionCollection,
+                        defaultChoiceIndex: -1,
+                        onCancel: () => onCancel(context),
+                        onSubmitSuccess: () => onSubmitSuccess(context));
                   case (QuestionType.descriptive):
                     //TODO defaultAnswer should be from answered question when endpoint is ready
                     return DescriptiveQuestionWidget(
-                        defaultAnswer: '',
-                        headerTitle: headerTitle,
-                        questionCollection: questionCollection,
-                        onCancel: () => context
-                            .read<PrivacyQuestionBloc>()
-                            .add(PreviousQuestion()),
-                        onSubmitSuccess: () => context
-                            .read<PrivacyQuestionBloc>()
-                            .add(NextQuestion()));
+                      defaultAnswer: '',
+                      questionCollection: questionCollection,
+                      onCancel: () => onCancel(context),
+                      onSubmitSuccess: () => onSubmitSuccess(context),
+                    );
                   case (QuestionType.unique):
                     return BlocProvider(
                         create: (_) => FinancialProfileBloc(),
                         child: FinancialSituationQuestion(
                           questionCollection: questionCollection,
-                          onTapNext: () => context
-                              .read<PrivacyQuestionBloc>()
-                              .add(NextQuestion()),
-                          onCancel: () => context
-                              .read<PrivacyQuestionBloc>()
-                              .add(PreviousQuestion()),
+                          onTapNext: () => onSubmitSuccess(context),
+                          onCancel: () => onCancel(context),
                         ));
                   default:
                     return const SizedBox.shrink();
@@ -88,5 +73,15 @@ class PrivacyQuestionScreen extends StatelessWidget {
                 return const SizedBox.shrink();
               }
             })));
+  }
+
+  void onSubmitSuccess(BuildContext context) {
+    context.read<QuestionBloc>().add(const CurrentPageIncremented());
+    context.read<PrivacyQuestionBloc>().add(NextQuestion());
+  }
+
+  void onCancel(BuildContext context) {
+    context.read<QuestionBloc>().add(const CurrentPageDecremented());
+    context.read<PrivacyQuestionBloc>().add(PreviousQuestion());
   }
 }

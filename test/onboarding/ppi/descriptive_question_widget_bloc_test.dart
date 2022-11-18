@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/ppi/presentation/widget/descriptive_question_widget/bloc/descriptive_question_widget_bloc.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/widget/descriptive_question_widget/bloc/descriptive_question_widget_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
