@@ -38,7 +38,9 @@ class LocalizationToggleButton extends StatelessWidget {
                               : null,
                           child: CustomText(
                             localizationType.name.toUpperCase(),
-                            type: active?FontType.smallTextBold:FontType.smallText,
+                            type: active
+                                ? FontType.smallTextBold
+                                : FontType.smallText,
                             color: active ? Colors.white : Colors.grey,
                           ),
                         ),

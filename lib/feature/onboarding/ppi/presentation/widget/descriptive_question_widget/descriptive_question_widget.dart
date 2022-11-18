@@ -25,14 +25,13 @@ class DescriptiveQuestionWidget extends StatelessWidget {
       required this.questionCollection,
       required this.onSubmitSuccess,
       required this.onCancel,
-        this.textInputType = TextInputType.text,
-        this.textInputFormatterList,
+      this.textInputType = TextInputType.text,
+      this.textInputFormatterList,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (_) =>
           DescriptiveQuestionWidgetBloc(defaultAnswer: defaultAnswer),
@@ -50,8 +49,8 @@ class DescriptiveQuestionWidget extends StatelessWidget {
           Expanded(
             child: Builder(
                 builder: (context) => CustomCenteredTextInput(
-                  textInputType: textInputType,
-                  textInputFormatterList:textInputFormatterList,
+                      textInputType: textInputType,
+                      textInputFormatterList: textInputFormatterList,
                       initialValue: defaultAnswer,
                       hintText: questionCollection.questions?.hints ?? '',
                       key: const Key('descriptive_question_input'),

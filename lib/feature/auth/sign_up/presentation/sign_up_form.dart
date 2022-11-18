@@ -41,7 +41,10 @@ class SignUpForm extends StatelessWidget {
               child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const MEmojiWidget(text: 'To craft a better investment experience for you. Please join us to continue.', imageAsset: '/'),
+              const MEmojiWidget(
+                  text:
+                      'To craft a better investment experience for you. Please join us to continue.',
+                  imageAsset: '/'),
               _userNameInput(),
               _padding(),
               _passwordInput(),
@@ -58,7 +61,8 @@ class SignUpForm extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 32.0),
       child: BlocBuilder<SignUpBloc, SignUpState>(
-          buildWhen: (previous, current) => previous.username != current.username,
+          buildWhen: (previous, current) =>
+              previous.username != current.username,
           builder: (context, state) {
             return ClearableTextFormField(
               key: const Key('sign_up_email_input'),
@@ -118,7 +122,6 @@ class SignUpForm extends StatelessWidget {
     });
   }
 
-
   Widget _signInButton(BuildContext context) {
     return CustomButton(
       margin: const EdgeInsets.only(top: 20),
@@ -135,7 +138,10 @@ class SignUpForm extends StatelessWidget {
   Widget _maybeLaterButton(BuildContext context) {
     return CustomTextButton(
       margin: const EdgeInsets.only(top: 28),
-      label: 'MAYBE LATER', onTap: ()=>CarouselScreen.open(context), fontType: FontType.smallTextBold,);
+      label: 'MAYBE LATER',
+      onTap: () => CarouselScreen.open(context),
+      fontType: FontType.smallTextBold,
+    );
   }
 
   Padding _padding() => const Padding(

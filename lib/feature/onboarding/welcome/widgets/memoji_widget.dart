@@ -6,7 +6,10 @@ class MEmojiWidget extends StatelessWidget {
   final String text;
   final String imageAsset;
 
-  const MEmojiWidget({required this.text, required this.imageAsset, Key? key = const Key('memoji_widget')})
+  const MEmojiWidget(
+      {required this.text,
+      required this.imageAsset,
+      Key? key = const Key('memoji_widget')})
       : super(key: key);
 
   @override

@@ -6,7 +6,7 @@ import '../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../welcome/widgets/memoji_widget.dart';
 
-enum PpiResultType { success, failed, end}
+enum PpiResultType { success, failed, end }
 
 class PpiResultScreen extends StatelessWidget {
   final String mEmojiText;
@@ -51,8 +51,7 @@ class PpiResultScreen extends StatelessWidget {
         onClick: onPrimaryButtonTap ?? () {},
         margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
       );
-    }
-    else if(ppiResultType == PpiResultType.failed){
+    } else if (ppiResultType == PpiResultType.failed) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
         child: Column(
@@ -73,8 +72,7 @@ class PpiResultScreen extends StatelessWidget {
           ],
         ),
       );
-    }
-    else {
+    } else {
       return CustomButton(
         label: 'GOT IT',
         onClick: onPrimaryButtonTap ?? () {},

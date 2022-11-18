@@ -28,8 +28,9 @@ class CustomTextInput extends StatelessWidget {
   final int? maxLine;
 
   const CustomTextInput(
-      {required this.labelText, this.onChanged,
-        this.onFieldSubmitted,
+      {required this.labelText,
+      this.onChanged,
+      this.onFieldSubmitted,
       this.hintText = '',
       this.textInputType = TextInputType.text,
       this.obscureText = false,
@@ -50,7 +51,7 @@ class CustomTextInput extends StatelessWidget {
       this.controller,
       this.textStyle,
       this.hintTextStyle,
-        this.maxLine,
+      this.maxLine,
       Key? key})
       : super(key: key);
 

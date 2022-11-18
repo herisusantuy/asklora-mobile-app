@@ -46,13 +46,13 @@ void main() {
       });
 
       testWidgets('Show Ppi Result screen with failed type',
-              (WidgetTester tester) async {
-            await buildPpiResultScreen(tester, PpiResultType.failed);
-            expect(mEmojiWidget, findsOneWidget);
-            expect(nextButton, findsNothing);
-            expect(tryAgainButton, findsOneWidget);
-            expect(needHelpButton, findsOneWidget);
-          });
+          (WidgetTester tester) async {
+        await buildPpiResultScreen(tester, PpiResultType.failed);
+        expect(mEmojiWidget, findsOneWidget);
+        expect(nextButton, findsNothing);
+        expect(tryAgainButton, findsOneWidget);
+        expect(needHelpButton, findsOneWidget);
+      });
     },
   );
 }

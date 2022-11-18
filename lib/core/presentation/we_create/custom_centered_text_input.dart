@@ -19,7 +19,7 @@ class CustomCenteredTextInput extends StatelessWidget {
       this.initialValue,
       this.padding = EdgeInsets.zero,
       this.textInputType = TextInputType.text,
-        this.textInputFormatterList,
+      this.textInputFormatterList,
       Key? key})
       : super(key: key);
 

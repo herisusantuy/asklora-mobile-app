@@ -5,8 +5,7 @@ import '../../../../../core/presentation/custom_text.dart';
 class QuestionHeader extends StatelessWidget {
   final Function() onTapBack;
   const QuestionHeader(
-      {Key? key,
-      required this.questionText, required this.onTapBack})
+      {Key? key, required this.questionText, required this.onTapBack})
       : super(key: key);
 
   final String questionText;

@@ -30,11 +30,11 @@ class CustomButton extends StatelessWidget {
       this.height,
       this.width,
       this.padding,
-        this.borderSide=BorderSide.none,
+      this.borderSide = BorderSide.none,
       this.margin,
       this.fontStyle = FontStyle.italic,
-      this.fontWeight=FontWeight.w700,
-        this.fontType = FontType.smallTextBold,
+      this.fontWeight = FontWeight.w700,
+      this.fontType = FontType.smallTextBold,
       Key? key})
       : super(key: key);
 
@@ -51,15 +51,19 @@ class CustomButton extends StatelessWidget {
           : ElevatedButton(
               onPressed: () => disable ? null : onClick(),
               style: ElevatedButton.styleFrom(
-                elevation: 0,
-                  foregroundColor: disable?Colors.white70:foregroundColor,
+                  elevation: 0,
+                  foregroundColor: disable ? Colors.white70 : foregroundColor,
                   backgroundColor: disable ? Colors.black12 : backgroundColor,
                   shape: RoundedRectangleBorder(
                     side: borderSide,
                     borderRadius: BorderRadius.circular(borderRadius),
                   ),
                   minimumSize: const Size.fromHeight(50)),
-              child: CustomText(label, type: fontType, fontStyle: fontStyle,),
+              child: CustomText(
+                label,
+                type: fontType,
+                fontStyle: fontStyle,
+              ),
             ),
     );
   }

@@ -34,23 +34,21 @@ class CustomText extends StatelessWidget {
   final int? maxLines;
   final FontStyle? fontStyle;
 
-  const CustomText(
-    this.text, {
-    Key? key,
-    this.color,
-    this.type = FontType.bodyText,
-    this.ellipsis = false,
-    this.textAlign = TextAlign.start,
-    this.decoration = TextDecoration.none,
-    this.padding = EdgeInsets.zero,
-    this.maxLines,
-        this.fontStyle
-  }) : super(key: key);
+  const CustomText(this.text,
+      {Key? key,
+      this.color,
+      this.type = FontType.bodyText,
+      this.ellipsis = false,
+      this.textAlign = TextAlign.start,
+      this.decoration = TextDecoration.none,
+      this.padding = EdgeInsets.zero,
+      this.maxLines,
+      this.fontStyle})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double? fontType;
-
 
     switch (type) {
       case FontType.h1:
@@ -129,12 +127,11 @@ class CustomText extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: color,
-          fontSize: fontType,
-          fontWeight: boldText,
-          decoration: decoration,
-            fontStyle:fontStyle
-        ),
+            color: color,
+            fontSize: fontType,
+            fontWeight: boldText,
+            decoration: decoration,
+            fontStyle: fontStyle),
         overflow: ellipsis ? TextOverflow.ellipsis : null,
         textAlign: textAlign,
         maxLines: maxLines,

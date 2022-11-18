@@ -71,7 +71,8 @@ class FinancialProfileEmployerAddressChanged extends FinancialProfileEvent {
 
 class FinancialProfileEmployerAddressTwoChanged extends FinancialProfileEvent {
   final String employerAddressTwo;
-  const FinancialProfileEmployerAddressTwoChanged(this.employerAddressTwo) : super();
+  const FinancialProfileEmployerAddressTwoChanged(this.employerAddressTwo)
+      : super();
   @override
   List<Object> get props => [employerAddressTwo];
 }

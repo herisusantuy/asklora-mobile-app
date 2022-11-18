@@ -23,8 +23,7 @@ class BackgroundCarouselWidget extends StatelessWidget {
       ),
       items: _carouselItems
           .map((carouselModel) => CarouselItem(
-          title: carouselModel.title,
-          imageAsset: carouselModel.imageAsset))
+              title: carouselModel.title, imageAsset: carouselModel.imageAsset))
           .toList(),
     );
   }

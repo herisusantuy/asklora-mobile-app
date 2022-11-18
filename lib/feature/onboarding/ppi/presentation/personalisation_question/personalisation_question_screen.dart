@@ -34,8 +34,7 @@ class PersonalisationQuestionScreen extends StatelessWidget {
               context
                   .read<NavigationBloc<QuestionPageStep>>()
                   .add(const PagePop());
-            }
-            else if (state is OnNextResultEndScreen) {
+            } else if (state is OnNextResultEndScreen) {
               context.read<NavigationBloc<QuestionPageStep>>().add(
                   const PageChanged(QuestionPageStep.personalisationResultEnd));
             }

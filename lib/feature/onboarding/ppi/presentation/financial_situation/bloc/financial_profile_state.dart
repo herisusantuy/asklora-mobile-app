@@ -111,7 +111,9 @@ class FinancialProfileState extends Equatable {
         occupation != 'Other' &&
         occupation!.isNotEmpty) {
       return true;
-    } else if (occupation == 'Other' && otherOccupation!=null && otherOccupation!.isNotEmpty) {
+    } else if (occupation == 'Other' &&
+        otherOccupation != null &&
+        otherOccupation!.isNotEmpty) {
       return true;
     } else {
       return false;

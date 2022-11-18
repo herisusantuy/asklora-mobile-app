@@ -76,9 +76,10 @@ class PrivacyQuestionScreen extends StatelessWidget {
                           questionCollection: questionCollection,
                           onTapNext: () => context
                               .read<PrivacyQuestionBloc>()
-                              .add(NextQuestion()), onCancel: () =>context
-                            .read<PrivacyQuestionBloc>()
-                            .add(PreviousQuestion()),
+                              .add(NextQuestion()),
+                          onCancel: () => context
+                              .read<PrivacyQuestionBloc>()
+                              .add(PreviousQuestion()),
                         ));
                   default:
                     return const SizedBox.shrink();

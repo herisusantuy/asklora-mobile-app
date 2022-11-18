@@ -9,7 +9,6 @@ import 'package:mockito/mockito.dart';
 
 import 'bot_recommendation_bloc_test.mocks.dart';
 
-
 @GenerateMocks([BotRecommendationRepository])
 void main() async {
   group('User Response Bloc Tests', () {

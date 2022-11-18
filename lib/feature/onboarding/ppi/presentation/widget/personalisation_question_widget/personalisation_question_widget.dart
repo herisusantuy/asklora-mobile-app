@@ -45,7 +45,8 @@ class PersonalisationQuestionWidget extends StatelessWidget {
                           QuestionHeader(
                             key: const Key('question_header'),
                             onTapBack: onCancel,
-                            questionText: questionCollection[index].questions!.question!,
+                            questionText:
+                                questionCollection[index].questions!.question!,
                           ),
                           const CustomText(
                             'Please rate from 1 - 5 for each statement below:',

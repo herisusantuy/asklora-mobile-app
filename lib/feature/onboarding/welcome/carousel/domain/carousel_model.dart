@@ -1,4 +1,4 @@
-class CarouselModel{
+class CarouselModel {
   final String title;
   final String imageAsset;
 

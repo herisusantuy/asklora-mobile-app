@@ -69,10 +69,10 @@ class PpiScreen extends StatelessWidget {
           case QuestionPageStep.privacyResultFailed:
             return PpiResultScreen(
               mEmojiText:
-              'I’m sorry, but….(explain the reason why they failed. e.g. too young)',
+                  'I’m sorry, but….(explain the reason why they failed. e.g. too young)',
               ppiResultType: PpiResultType.failed,
               additionalMessage: '-Reason-',
-              onPrimaryButtonTap: ()=>Navigator.pop(context),
+              onPrimaryButtonTap: () => Navigator.pop(context),
             );
           case QuestionPageStep.personalisation:
             return PersonalisationQuestionScreen(
@@ -81,10 +81,11 @@ class PpiScreen extends StatelessWidget {
           case QuestionPageStep.personalisationResultEnd:
             return PpiResultScreen(
               mEmojiText:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta.',
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta.',
               ppiResultType: PpiResultType.end,
-              additionalMessage: '(Screen that show some kind of a result to moviate user / user feel like they get a reward after answering the ques)',
-              onPrimaryButtonTap: ()=>SignUpScreen.open(context),
+              additionalMessage:
+                  '(Screen that show some kind of a result to moviate user / user feel like they get a reward after answering the ques)',
+              onPrimaryButtonTap: () => SignUpScreen.open(context),
             );
           default:
             return const SizedBox.shrink();

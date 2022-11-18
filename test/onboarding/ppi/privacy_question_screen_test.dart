@@ -63,15 +63,14 @@ void main() async {
           await tester.pump();
           await tester.tap(questionNextButton);
           await tester.pump();
-        }
-        else if(privacyQuestions[index].questions!.types ==
-            QuestionType.unique.value){
+        } else if (privacyQuestions[index].questions!.types ==
+            QuestionType.unique.value) {
           var accountInvestibleLiquidAssetsSelect =
-          find.byKey(const Key('account_investible_liquid_assets_select'));
+              find.byKey(const Key('account_investible_liquid_assets_select'));
           var accountFundingSourceSelect =
-          find.byKey(const Key('account_funding_source_select'));
+              find.byKey(const Key('account_funding_source_select'));
           var accountEmploymentStatusSelect =
-          find.byKey(const Key('account_employment_status_select'));
+              find.byKey(const Key('account_employment_status_select'));
           expect(accountInvestibleLiquidAssetsSelect, findsOneWidget);
           expect(accountFundingSourceSelect, findsOneWidget);
           expect(accountEmploymentStatusSelect, findsOneWidget);

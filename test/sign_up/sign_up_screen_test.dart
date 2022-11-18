@@ -58,8 +58,8 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
-          isTrue);
+      expect(
+          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
     });
 
     testWidgets('Entering wrong email format', (tester) async {
@@ -73,8 +73,8 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
-          isTrue);
+      expect(
+          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
     });
 
     testWidgets('Entering wrong password format', (tester) async {
@@ -104,8 +104,8 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
-          isTrue);
+      expect(
+          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
     });
 
     testWidgets('Entering correct email but wrong password format',
@@ -140,8 +140,8 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
-          isTrue);
+      expect(
+          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
     });
 
     testWidgets('Entering wrong email but correct password format',
@@ -176,8 +176,8 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
-          isTrue);
+      expect(
+          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
     });
 
     testWidgets('Entering correct email and correct password format',
@@ -212,8 +212,8 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect((tester.firstWidget(signUpButton) as CustomButton).disable,
-          isFalse);
+      expect(
+          (tester.firstWidget(signUpButton) as CustomButton).disable, isFalse);
     });
   });
 }

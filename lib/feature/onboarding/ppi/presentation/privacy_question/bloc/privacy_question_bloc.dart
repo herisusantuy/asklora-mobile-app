@@ -39,11 +39,10 @@ class PrivacyQuestionBloc
       } else if (question.questions!.types == QuestionType.slider.value) {
         emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      }else if (question.questions!.types == QuestionType.unique.value) {
+      } else if (question.questions!.types == QuestionType.unique.value) {
         emit(OnNextQuestion<QuestionCollection>(QuestionType.unique, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       }
-
     } else {
       emit(OnNextResultSuccessScreen());
     }
@@ -61,11 +60,10 @@ class PrivacyQuestionBloc
         emit(OnNextQuestion<QuestionCollection>(
             QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if(question.questions!.types == QuestionType.slider.value){
+      } else if (question.questions!.types == QuestionType.slider.value) {
         emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      }
-      else if(question.questions!.types == QuestionType.unique.value){
+      } else if (question.questions!.types == QuestionType.unique.value) {
         emit(OnNextQuestion<QuestionCollection>(QuestionType.unique, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       }
