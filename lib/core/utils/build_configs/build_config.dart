@@ -33,7 +33,7 @@ class DevConfig implements BaseConfig {
   String get alpacaApiBaseUrl => 'https://8.210.201.22:8000/';
 
   @override
-  String get askLoraApiBaseUrl => 'https://dev-apca.api.asklora.ai/';
+  String get askLoraApiBaseUrl => 'https://apca.api.asklora.ai/';
 
   @override
   String get streamServiceBaseUrl => 'wss://apca.services.asklora.ai/';
@@ -57,7 +57,7 @@ class ProdConfig implements BaseConfig {
   String get alpacaApiBaseUrl => 'https://8.210.201.22:8000/prodConfig';
 
   @override
-  String get askLoraApiBaseUrl => 'https://apca.services.asklora.ai/prodConfig';
+  String get askLoraApiBaseUrl => 'https://apca.api.asklora.ai/';
 
   @override
   String get streamServiceBaseUrl =>
