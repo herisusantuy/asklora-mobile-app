@@ -8,8 +8,7 @@ part 'omni_search_question_widget_state.dart';
 class OmniSearchQuestionWidgetBloc
     extends Bloc<OmniSearchQuestionWidgetEvent, OmniSearchQuestionWidgetState> {
   OmniSearchQuestionWidgetBloc({List<String> defaultAnswer = const []})
-      : super(OmniSearchQuestionWidgetState(
-            keywordAnswers: defaultAnswer)) {
+      : super(OmniSearchQuestionWidgetState(keywordAnswers: defaultAnswer)) {
     on<KeywordAdded>(_onKeywordAdded);
     on<KeywordRemoved>(_onKeywordRemoved);
     on<KeywordSelected>(_onKeywordSelected);
@@ -22,8 +21,7 @@ class OmniSearchQuestionWidgetBloc
     if (!keywords.contains(event.keywordInput)) {
       keywords.add(event.keywordInput);
       emit(state.copyWith(keywords: keywords));
-    }
-    else{
+    } else {
       emit(state.copyWith(addKeywordError: true));
     }
   }

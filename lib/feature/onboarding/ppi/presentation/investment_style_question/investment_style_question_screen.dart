@@ -50,8 +50,8 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                       key: Key(questionCollection.uid!),
                       questionCollection: questionCollection,
                       defaultChoiceIndex: -1,
-                      onSubmitSuccess: ()=>onSubmitSuccess(context),
-                      onCancel: ()=>onCancel(context),
+                      onSubmitSuccess: () => onSubmitSuccess(context),
+                      onCancel: () => onCancel(context),
                     );
                   case (QuestionType.descriptive):
                     //TODO defaultAnswer should be from answered question when endpoint is ready
@@ -59,14 +59,14 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                         key: Key(questionCollection.uid!),
                         defaultAnswer: '',
                         questionCollection: questionCollection,
-                        onCancel: ()=>onCancel(context),
-                        onSubmitSuccess: ()=>onSubmitSuccess(context));
+                        onCancel: () => onCancel(context),
+                        onSubmitSuccess: () => onSubmitSuccess(context));
                   case (QuestionType.omniSearch):
                     return OmniSearchQuestionWidget(
                       key: Key(questionCollection.uid!),
                       questionCollection: questionCollection,
-                      onSubmitSuccess: ()=>onSubmitSuccess(context),
-                      onCancel: ()=>onCancel(context),
+                      onSubmitSuccess: () => onSubmitSuccess(context),
+                      onCancel: () => onCancel(context),
                     );
 
                   default:

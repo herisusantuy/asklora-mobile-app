@@ -146,7 +146,10 @@ class SignInSuccessScreen extends StatelessWidget {
       onClick: () => RegularOrderHomeScreen.open(context));
 
   Widget _questionScreen(BuildContext context) => CustomTextButton(
-      buttonText: 'Question PPI', onClick: () => PpiScreen.open(context, arguments: Pair(QuestionPageType.privacyAndPersonalisation, QuestionPageStep.privacy)));
+      buttonText: 'Question PPI',
+      onClick: () => PpiScreen.open(context,
+          arguments: Pair(QuestionPageType.privacyAndPersonalisation,
+              QuestionPageStep.privacy)));
 
   Widget _userButton(BuildContext context) {
     return InkWell(

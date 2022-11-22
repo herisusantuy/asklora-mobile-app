@@ -26,7 +26,8 @@ void main() async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const PpiScreen(
-          questionPageType: QuestionPageType.privacyAndPersonalisation, initialQuestionPage: QuestionPageStep.privacy,
+          questionPageType: QuestionPageType.privacyAndPersonalisation,
+          initialQuestionPage: QuestionPageStep.privacy,
         ),
         navigatorObservers: [mockObserver],
       ));

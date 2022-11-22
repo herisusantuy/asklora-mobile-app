@@ -23,7 +23,11 @@ class PpiScreen extends StatelessWidget {
   final QuestionPageStep initialQuestionPage;
   final QuestionPageType questionPageType;
 
-  const PpiScreen({Key? key, required this.questionPageType,required this.initialQuestionPage}):super(key: key);
+  const PpiScreen(
+      {Key? key,
+      required this.questionPageType,
+      required this.initialQuestionPage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +72,8 @@ class PpiScreen extends StatelessWidget {
   Widget _progressIndicator() {
     return BlocBuilder<QuestionBloc, QuestionState>(
         buildWhen: (previous, current) =>
-            previous.currentPages != current.currentPages||previous.totalPages!=current.totalPages,
+            previous.currentPages != current.currentPages ||
+            previous.totalPages != current.totalPages,
         builder: (context, state) => LinearProgressIndicator(
               backgroundColor: Colors.grey[350],
               value: state.currentPages / state.totalPages,

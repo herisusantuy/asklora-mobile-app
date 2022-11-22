@@ -61,10 +61,12 @@ class RouterGenerator {
                 symbolDetail: SymbolDetail(
                     'AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol)));
       case PpiScreen.route:
-        var args = settings.arguments as Pair<QuestionPageType, QuestionPageStep>;
+        var args =
+            settings.arguments as Pair<QuestionPageType, QuestionPageStep>;
         return MaterialPageRoute(
             builder: (_) => PpiScreen(
-                  questionPageType: args.left, initialQuestionPage: args.right,
+                  questionPageType: args.left,
+                  initialQuestionPage: args.right,
                 ));
       case CarouselScreen.route:
         return MaterialPageRoute(builder: (_) => const CarouselScreen());

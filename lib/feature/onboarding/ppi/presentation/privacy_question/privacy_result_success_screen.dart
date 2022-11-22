@@ -13,15 +13,15 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PpiResultScreen(
       mEmojiText:
-      'Thank you for your trust. Unfortunately my age is a secret...',
+          'Thank you for your trust. Unfortunately my age is a secret...',
       additionalMessage: 'Let’s talk about your personality.',
       bottomButton: CustomButton(
         key: const Key('next_button'),
         label: 'SURE!',
-        onClick: (){
-          context.read<QuestionBloc>()
-              .add(const CurrentPageIncremented());
-          context.read<NavigationBloc<QuestionPageStep>>()
+        onClick: () {
+          context.read<QuestionBloc>().add(const CurrentPageIncremented());
+          context
+              .read<NavigationBloc<QuestionPageStep>>()
               .add(const PageChanged(QuestionPageStep.personalisation));
         },
         margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),

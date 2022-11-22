@@ -11,7 +11,7 @@ class PrivacyResultFailedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PpiResultScreen(
       mEmojiText:
-      'I’m sorry, but….(explain the reason why they failed. e.g. too young)',
+          'I’m sorry, but….(explain the reason why they failed. e.g. too young)',
       additionalMessage: '-Reason-',
       bottomButton: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
@@ -20,7 +20,7 @@ class PrivacyResultFailedScreen extends StatelessWidget {
             CustomButton(
               key: const Key('try_again_button'),
               label: 'TRY AGAIN',
-              onClick: ()=>Navigator.pop(context),
+              onClick: () => Navigator.pop(context),
               margin: const EdgeInsets.only(bottom: 32),
             ),
             CustomTextButton(

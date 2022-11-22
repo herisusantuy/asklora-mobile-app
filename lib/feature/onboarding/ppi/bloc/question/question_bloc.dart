@@ -82,10 +82,11 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       case QuestionPageType.privacyAndPersonalisation:
         //+2 for privacy and personalisation result screen
         return fixture.privacyQuestions.length +
-            fixture.personalisedQuestion.length +2;
+            fixture.personalisedQuestion.length +
+            2;
       case QuestionPageType.investmentStyle:
         //+2 for investment style welcome and result screen
-        return fixture.investmentStyleQuestion.length+2;
+        return fixture.investmentStyleQuestion.length + 2;
     }
   }
 }

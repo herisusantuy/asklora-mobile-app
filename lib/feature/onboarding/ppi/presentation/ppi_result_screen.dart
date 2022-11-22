@@ -12,7 +12,7 @@ class PpiResultScreen extends StatelessWidget {
   const PpiResultScreen(
       {required this.mEmojiText,
       this.additionalMessage = '',
-        required this.bottomButton,
+      required this.bottomButton,
       Key? key})
       : super(key: key);
 

@@ -10,12 +10,13 @@ class PersonalisationResultEndScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PpiResultScreen(
       mEmojiText:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta.',
-      additionalMessage: '(Screen that show some kind of a result to moviate user / user feel like they get a reward after answering the ques)',
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta.',
+      additionalMessage:
+          '(Screen that show some kind of a result to moviate user / user feel like they get a reward after answering the ques)',
       bottomButton: CustomButton(
         key: const Key('next_button'),
         label: 'GOT IT',
-        onClick: ()=>SignUpScreen.open(context),
+        onClick: () => SignUpScreen.open(context),
         margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
       ),
     );

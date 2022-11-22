@@ -39,10 +39,8 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
         key: const Key('define_investment_style_button'),
         fontStyle: FontStyle.normal,
         label: 'DEFINE INVESTMENT STYLE',
-        onClick: (){
-          context
-              .read<QuestionBloc>()
-              .add(const CurrentPageIncremented());
+        onClick: () {
+          context.read<QuestionBloc>().add(const CurrentPageIncremented());
           context
               .read<NavigationBloc<QuestionPageStep>>()
               .add(const PageChanged(QuestionPageStep.investmentStyle));

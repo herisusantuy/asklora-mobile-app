@@ -44,7 +44,8 @@ class EmailActivationScreen extends StatelessWidget {
         fontStyle: FontStyle.normal,
         label: 'RESEND ACTIVATION LINK',
         onClick: () => PpiScreen.open(context,
-            arguments: Pair(QuestionPageType.investmentStyle, QuestionPageStep.investmentStyleWelcome)),
+            arguments: Pair(QuestionPageType.investmentStyle,
+                QuestionPageStep.investmentStyleWelcome)),
       );
 
   Widget _singUpAgainButton(BuildContext context) => CustomTextButton(

@@ -14,7 +14,7 @@ void main() async {
     var multipleChoiceQuestionBuilder =
         find.byKey(const Key('multiple_choice_question_builder'));
     var omniSearchQuestionBuilder =
-    find.byKey(const Key('omni_search_question_builder'));
+        find.byKey(const Key('omni_search_question_builder'));
     var descriptiveQuestionInput =
         find.byKey(const Key('descriptive_question_input'));
     var questionHeader = find.byKey(const Key('question_header'));

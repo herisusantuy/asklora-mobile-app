@@ -27,7 +27,9 @@ class GreetingScreen extends StatelessWidget {
           CustomButton(
             key: const Key('next_button'),
             label: 'Next',
-            onClick: () => PpiScreen.open(context, arguments: Pair(QuestionPageType.privacyAndPersonalisation, QuestionPageStep.privacy)),
+            onClick: () => PpiScreen.open(context,
+                arguments: Pair(QuestionPageType.privacyAndPersonalisation,
+                    QuestionPageStep.privacy)),
             margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
           )
         ],
