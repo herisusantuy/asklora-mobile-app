@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../feature/onboarding/ppi/presentation/ppi_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../feature/onboarding/welcome/greeting/greeting_screen.dart';
@@ -18,6 +20,7 @@ import '../../feature/user/account/presentation/upgrade_account/not_eligible_scr
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../feature/user/kyc/presentation/kyc_screen.dart';
 import '../../home_screen.dart';
+import '../domain/pair.dart';
 import '../presentation/photo_view_screen.dart';
 import 'app_icons.dart';
 
@@ -58,7 +61,11 @@ class RouterGenerator {
                 symbolDetail: SymbolDetail(
                     'AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol)));
       case PpiScreen.route:
-        return MaterialPageRoute(builder: (_) => const PpiScreen());
+        var args = settings.arguments as Pair<QuestionPageType, QuestionPageStep>;
+        return MaterialPageRoute(
+            builder: (_) => PpiScreen(
+                  questionPageType: args.left, initialQuestionPage: args.right,
+                ));
       case CarouselScreen.route:
         return MaterialPageRoute(builder: (_) => const CarouselScreen());
       case LoraAskNameScreen.route:
@@ -66,8 +73,8 @@ class RouterGenerator {
       case GreetingScreen.route:
         return MaterialPageRoute(
             builder: (_) => GreetingScreen(name: settings.arguments as String));
-      case PpiScreen.route:
-        return MaterialPageRoute(builder: (_) => const PpiScreen());
+      case EmailActivationScreen.route:
+        return MaterialPageRoute(builder: (_) => const EmailActivationScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

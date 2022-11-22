@@ -14,6 +14,7 @@ class CustomTextInput extends StatelessWidget {
   final String? initialValue;
   final String prefixText;
   final String suffixText;
+  final Widget? suffixIcon;
   final Color? fillColor;
   final InputBorder inputBorder;
   final InputBorder? enabledBorder;
@@ -25,6 +26,7 @@ class CustomTextInput extends StatelessWidget {
   final TextEditingController? controller;
   final TextStyle? textStyle;
   final TextStyle? hintTextStyle;
+  final EdgeInsets contentPadding;
   final int? maxLine;
 
   const CustomTextInput(
@@ -44,8 +46,10 @@ class CustomTextInput extends StatelessWidget {
       this.enabledBorder,
       this.disabledBorder,
       this.focusedBorder,
+        this.contentPadding = const EdgeInsets.fromLTRB(17, 15, 17, 15),
       this.prefixText = '',
       this.suffixText = '',
+        this.suffixIcon,
       this.textCapitalization = TextCapitalization.none,
       this.textAlign = TextAlign.start,
       this.controller,
@@ -74,10 +78,12 @@ class CustomTextInput extends StatelessWidget {
             border: inputBorder,
             labelText: labelText,
             hintStyle: hintTextStyle,
+            contentPadding: contentPadding,
             counterText: '',
             hintText: hintText,
             prefixText: prefixText.isEmpty ? null : '$prefixText  ',
             suffixText: suffixText.isEmpty ? null : '$suffixText  ',
+            suffixIcon: suffixIcon,
             enabledBorder: enabledBorder,
             disabledBorder: disabledBorder,
             focusedBorder: focusedBorder,

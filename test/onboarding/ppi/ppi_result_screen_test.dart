@@ -10,13 +10,14 @@ void main() {
     'PPI Result Screen Widget Test',
     () {
       Future<void> buildPpiResultScreen(
-          WidgetTester tester, PpiResultType ppiResultType) async {
+          WidgetTester tester, Widget bottomButton) async {
         final mockObserver = MockNavigatorObserver();
         await tester.pumpWidget(MaterialApp(
           home: PpiResultScreen(
-              mEmojiText: 'congratulations',
-              additionalMessage: 'additional message',
-              ppiResultType: ppiResultType),
+            mEmojiText: 'congratulations',
+            additionalMessage: 'additional message',
+            bottomButton: bottomButton,
+          ),
           navigatorObservers: [mockObserver],
         ));
       }
@@ -24,34 +25,22 @@ void main() {
       var mEmojiWidget = find.byKey(
         const Key('memoji_widget'),
       );
-      var nextButton = find.byKey(
-        const Key('next_button'),
-      );
-      var tryAgainButton = find.byKey(
-        const Key('try_again_button'),
-      );
-      var needHelpButton = find.byKey(
-        const Key('need_help_button'),
-      );
 
-      testWidgets('Show Ppi Result screen with success type',
+      testWidgets('Show Ppi Result screen with only memoji widget',
           (WidgetTester tester) async {
-        await buildPpiResultScreen(tester, PpiResultType.success);
+        await buildPpiResultScreen(tester, const SizedBox.shrink());
         expect(mEmojiWidget, findsOneWidget);
-        expect(nextButton, findsOneWidget);
-        expect(tryAgainButton, findsNothing);
-        expect(needHelpButton, findsNothing);
-        expect(
-            (tester.firstWidget(nextButton) as CustomButton).disable, isFalse);
       });
 
-      testWidgets('Show Ppi Result screen with failed type',
+      testWidgets('Show Ppi Result screen with memoji widget and bottomButton',
           (WidgetTester tester) async {
-        await buildPpiResultScreen(tester, PpiResultType.failed);
+        Key bottomButtonKey = const Key('bottom_button');
+        await buildPpiResultScreen(
+            tester,
+            CustomButton(
+                key: bottomButtonKey, label: 'button', onClick: () {}));
         expect(mEmojiWidget, findsOneWidget);
-        expect(nextButton, findsNothing);
-        expect(tryAgainButton, findsOneWidget);
-        expect(needHelpButton, findsOneWidget);
+        expect(find.byKey(bottomButtonKey), findsOneWidget);
       });
     },
   );

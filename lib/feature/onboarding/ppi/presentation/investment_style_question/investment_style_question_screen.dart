@@ -6,34 +6,36 @@ import '../../../../../core/presentation/navigation/custom_navigation_widget.dar
 import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
-import '../financial_situation/bloc/financial_profile_bloc.dart';
-import '../financial_situation/presentation/financial_situation_question.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
-import 'bloc/privacy_question_bloc.dart';
+import '../widget/omni_search_question_widget/omni_search_question_widget.dart';
+import 'bloc/investment_style_question_bloc.dart';
 
-class PrivacyQuestionScreen extends StatelessWidget {
+class InvestmentStyleQuestionScreen extends StatelessWidget {
   final int initialIndex;
 
-  const PrivacyQuestionScreen({this.initialIndex = 0, Key? key})
+  const InvestmentStyleQuestionScreen({this.initialIndex = 0, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget<QuestionPageStep>(
+    return CustomNavigationWidget(
         header: const SizedBox.shrink(),
         child: BlocProvider(
-            create: (_) => PrivacyQuestionBloc(initialIndex: initialIndex)
-              ..add(NextQuestion()),
-            child: BlocConsumer<PrivacyQuestionBloc, PrivacyQuestionState>(
-                listener: (context, state) {
+            create: (_) =>
+                InvestmentStyleQuestionBloc(initialIndex: initialIndex)
+                  ..add(NextQuestion()),
+            child: BlocConsumer<InvestmentStyleQuestionBloc,
+                InvestmentStyleQuestionState>(listener: (context, state) {
               if (state is OnNextQuestion) {
                 context.read<QuestionBloc>().add(
-                    PrivacyQuestionIndexChanged(state.privacyQuestionIndex));
-              } else if (state is OnNextResultSuccessScreen) {
+                    InvestmentStyleQuestionIndexChanged(
+                        state.investmentStyleQuestionIndex));
+              } else if (state is OnNextResultScreen) {
                 context.read<NavigationBloc<QuestionPageStep>>().add(
-                    const PageChanged(QuestionPageStep.privacyResultSuccess));
-              } else if (state is OnPreviousSignInSuccessScreen) {
+                    const PageChanged(
+                        QuestionPageStep.investmentStyleResultEnd));
+              } else if (state is OnPreviousPage) {
                 context
                     .read<NavigationBloc<QuestionPageStep>>()
                     .add(const PagePop());
@@ -45,27 +47,28 @@ class PrivacyQuestionScreen extends StatelessWidget {
                   case (QuestionType.choices):
                     //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                     return MultipleChoiceQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        questionCollection: questionCollection,
-                        defaultChoiceIndex: -1,
-                        onCancel: () => onCancel(context),
-                        onSubmitSuccess: () => onSubmitSuccess(context));
+                      key: Key(questionCollection.uid!),
+                      questionCollection: questionCollection,
+                      defaultChoiceIndex: -1,
+                      onSubmitSuccess: ()=>onSubmitSuccess(context),
+                      onCancel: ()=>onCancel(context),
+                    );
                   case (QuestionType.descriptive):
                     //TODO defaultAnswer should be from answered question when endpoint is ready
                     return DescriptiveQuestionWidget(
-                      defaultAnswer: '',
+                        key: Key(questionCollection.uid!),
+                        defaultAnswer: '',
+                        questionCollection: questionCollection,
+                        onCancel: ()=>onCancel(context),
+                        onSubmitSuccess: ()=>onSubmitSuccess(context));
+                  case (QuestionType.omniSearch):
+                    return OmniSearchQuestionWidget(
+                      key: Key(questionCollection.uid!),
                       questionCollection: questionCollection,
-                      onCancel: () => onCancel(context),
-                      onSubmitSuccess: () => onSubmitSuccess(context),
+                      onSubmitSuccess: ()=>onSubmitSuccess(context),
+                      onCancel: ()=>onCancel(context),
                     );
-                  case (QuestionType.unique):
-                    return BlocProvider(
-                        create: (_) => FinancialProfileBloc(),
-                        child: FinancialSituationQuestion(
-                          questionCollection: questionCollection,
-                          onTapNext: () => onSubmitSuccess(context),
-                          onCancel: () => onCancel(context),
-                        ));
+
                   default:
                     return const SizedBox.shrink();
                 }
@@ -77,11 +80,11 @@ class PrivacyQuestionScreen extends StatelessWidget {
 
   void onSubmitSuccess(BuildContext context) {
     context.read<QuestionBloc>().add(const CurrentPageIncremented());
-    context.read<PrivacyQuestionBloc>().add(NextQuestion());
+    context.read<InvestmentStyleQuestionBloc>().add(NextQuestion());
   }
 
   void onCancel(BuildContext context) {
     context.read<QuestionBloc>().add(const CurrentPageDecremented());
-    context.read<PrivacyQuestionBloc>().add(PreviousQuestion());
+    context.read<InvestmentStyleQuestionBloc>().add(PreviousQuestion());
   }
 }

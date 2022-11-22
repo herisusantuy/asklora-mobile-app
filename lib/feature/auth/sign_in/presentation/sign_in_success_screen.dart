@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/pair.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../home_screen.dart';
+import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../orders/regular/presentation/regular_order_home_screen.dart';
 import '../../../payment/deposits/presentation/deposit_screen.dart';
@@ -144,7 +146,7 @@ class SignInSuccessScreen extends StatelessWidget {
       onClick: () => RegularOrderHomeScreen.open(context));
 
   Widget _questionScreen(BuildContext context) => CustomTextButton(
-      buttonText: 'Question PPI', onClick: () => PpiScreen.open(context));
+      buttonText: 'Question PPI', onClick: () => PpiScreen.open(context, arguments: Pair(QuestionPageType.privacyAndPersonalisation, QuestionPageStep.privacy)));
 
   Widget _userButton(BuildContext context) {
     return InkWell(

@@ -6,7 +6,7 @@ class QuestionState extends Equatable {
     this.privacyQuestionIndex = 0,
     this.personalisationQuestionIndex = 0,
     this.investmentStyleQuestionIndex = 0,
-    this.totalPages = 14,
+    this.totalPages = 1,
     this.currentPages = 1,
   }) : super();
 

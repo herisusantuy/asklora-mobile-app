@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_loading_widget.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/ppi_question_repository.dart';
 import '../repository/ppi_response_repository.dart';
+import 'investment_style_question/investment_style_question_screen.dart';
+import 'investment_style_question/investment_style_result_end_screen.dart';
+import 'investment_style_question/investment_style_welcome_screen.dart';
 import 'personalisation_question/personalisation_question_screen.dart';
-import 'ppi_result_screen.dart';
+import 'personalisation_question/personalisation_result_end_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
+import 'privacy_question/privacy_result_failed_screen.dart';
+import 'privacy_question/privacy_result_success_screen.dart';
 
 class PpiScreen extends StatelessWidget {
   static const String route = '/ppi_screen';
   final QuestionPageStep initialQuestionPage;
+  final QuestionPageType questionPageType;
 
-  const PpiScreen(
-      {Key? key, this.initialQuestionPage = QuestionPageStep.privacy})
-      : super(key: key);
+  const PpiScreen({Key? key, required this.questionPageType,required this.initialQuestionPage}):super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +33,16 @@ class PpiScreen extends StatelessWidget {
             create: (_) => UserResponseBloc(
                 ppiResponseRepository: PpiResponseRepository())),
         BlocProvider(
-            create: (_) =>
-                QuestionBloc(ppiQuestionRepository: PpiQuestionRepository())
-                  ..add(const LoadQuestions())),
+            create: (_) => QuestionBloc(
+                ppiQuestionRepository: PpiQuestionRepository(),
+                questionPageType: questionPageType)
+              ..add(const LoadQuestions())),
         BlocProvider(
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
       ],
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             toolbarHeight: 0,
             elevation: 0,
@@ -62,7 +68,7 @@ class PpiScreen extends StatelessWidget {
   Widget _progressIndicator() {
     return BlocBuilder<QuestionBloc, QuestionState>(
         buildWhen: (previous, current) =>
-            previous.currentPages != current.currentPages,
+            previous.currentPages != current.currentPages||previous.totalPages!=current.totalPages,
         builder: (context, state) => LinearProgressIndicator(
               backgroundColor: Colors.grey[350],
               value: state.currentPages / state.totalPages,
@@ -79,41 +85,21 @@ class PpiScreen extends StatelessWidget {
               initialIndex: state.privacyQuestionIndex,
             );
           case QuestionPageStep.privacyResultSuccess:
-            return PpiResultScreen(
-              mEmojiText:
-                  'Thank you for your trust. Unfortunately my age is a secret...',
-              ppiResultType: PpiResultType.success,
-              additionalMessage: 'Let’s talk about your personality.',
-              onPrimaryButtonTap: () {
-                context
-                    .read<QuestionBloc>()
-                    .add(const CurrentPageIncremented());
-                context
-                    .read<NavigationBloc<QuestionPageStep>>()
-                    .add(const PageChanged(QuestionPageStep.personalisation));
-              },
-            );
+            return const PrivacyResultSuccessScreen();
           case QuestionPageStep.privacyResultFailed:
-            return PpiResultScreen(
-              mEmojiText:
-                  'I’m sorry, but….(explain the reason why they failed. e.g. too young)',
-              ppiResultType: PpiResultType.failed,
-              additionalMessage: '-Reason-',
-              onPrimaryButtonTap: () => Navigator.pop(context),
-            );
+            return const PrivacyResultFailedScreen();
           case QuestionPageStep.personalisation:
             return PersonalisationQuestionScreen(
               initialIndex: state.personalisationQuestionIndex,
             );
           case QuestionPageStep.personalisationResultEnd:
-            return PpiResultScreen(
-              mEmojiText:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta.',
-              ppiResultType: PpiResultType.end,
-              additionalMessage:
-                  '(Screen that show some kind of a result to moviate user / user feel like they get a reward after answering the ques)',
-              onPrimaryButtonTap: () => SignUpScreen.open(context),
-            );
+            return const PersonalisationResultEndScreen();
+          case QuestionPageStep.investmentStyleWelcome:
+            return const InvestmentStyleWelcomeScreen();
+          case QuestionPageStep.investmentStyle:
+            return const InvestmentStyleQuestionScreen();
+          case QuestionPageStep.investmentStyleResultEnd:
+            return const InvestmentStyleResultEndScreen();
           default:
             return const SizedBox.shrink();
         }
@@ -125,5 +111,7 @@ class PpiScreen extends StatelessWidget {
     });
   }
 
-  static void open(BuildContext context) => Navigator.pushNamed(context, route);
+  static void open(BuildContext context,
+          {required Pair<QuestionPageType, QuestionPageStep> arguments}) =>
+      Navigator.pushNamed(context, route, arguments: arguments);
 }

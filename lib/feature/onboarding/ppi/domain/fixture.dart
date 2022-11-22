@@ -17,6 +17,7 @@ enum QuestionType {
   choices('choices'),
   slider('slider'),
   descriptive('descriptive'),
+  omniSearch('omnisearch'),
   unique('unique'),
   feedBack('feedback');
 

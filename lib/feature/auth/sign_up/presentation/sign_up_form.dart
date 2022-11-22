@@ -7,10 +7,10 @@ import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/presentation/we_create/custom_button.dart';
-import '../../../auth/otp/presentation/otp_screen.dart';
 import '../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../../onboarding/welcome/widgets/memoji_widget.dart';
+import '../../email_activation/presentation/email_activation_screen.dart';
 import '../bloc/sign_up_bloc.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -30,7 +30,7 @@ class SignUpForm extends StatelessWidget {
                   .showError();
               break;
             case ResponseState.success:
-              OtpScreen.openReplace(context, state.username);
+              EmailActivationScreen.open(context);
               break;
             default:
               break;

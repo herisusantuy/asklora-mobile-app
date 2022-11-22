@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
 import '../../../../core/presentation/we_create/custom_button.dart';
+import '../../ppi/bloc/question/question_bloc.dart';
 import '../../ppi/presentation/ppi_screen.dart';
 import '../widgets/memoji_widget.dart';
 
@@ -25,7 +27,7 @@ class GreetingScreen extends StatelessWidget {
           CustomButton(
             key: const Key('next_button'),
             label: 'Next',
-            onClick: () => PpiScreen.open(context),
+            onClick: () => PpiScreen.open(context, arguments: Pair(QuestionPageType.privacyAndPersonalisation, QuestionPageStep.privacy)),
             margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
           )
         ],

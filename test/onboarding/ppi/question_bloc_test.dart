@@ -20,7 +20,9 @@ void main() async {
     });
 
     setUp(() async {
-      questionBloc = QuestionBloc(ppiQuestionRepository: ppiQuestionRepository);
+      questionBloc = QuestionBloc(
+          ppiQuestionRepository: ppiQuestionRepository,
+          questionPageType: QuestionPageType.privacyAndPersonalisation);
     });
 
     test('Question Bloc init response should be BaseResponse', () {
