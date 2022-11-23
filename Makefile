@@ -74,3 +74,7 @@ build_and_upload_dev: clean get ## Create and upload the android build on fireba
 build_prod: clean run_test
 	@echo "╠  Building the production apk"
 	@flutter build apk --flavor dev --dart-define=ENVIRONMENT=production
+
+build_stag: clean run_test
+	@echo "╠  Building the staging apk"
+	@flutter build apk --flavor dev --dart-define=ENVIRONMENT=staging
