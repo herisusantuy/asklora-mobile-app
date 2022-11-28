@@ -14,12 +14,14 @@ class CustomDropdown extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final InputBorder? border;
   final InputBorder? focusedBorder;
+  final bool isDense;
 
   const CustomDropdown({
     Key? key,
     this.value = '',
     this.label = '',
     this.hintName = '',
+    this.isDense=true,
     this.padding = EdgeInsets.zero,
     required this.itemsList,
     required this.onChanged,
@@ -64,7 +66,7 @@ class CustomDropdown extends StatelessWidget {
                 border: border,
                 focusedBorder: focusedBorder,
                 errorText: errorText.isEmpty ? null : errorText,
-                isDense: true,
+                isDense: false,
                 contentPadding: const EdgeInsets.symmetric(
                   vertical: 6,
                 ),

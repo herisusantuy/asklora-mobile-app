@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:asklora_mobile_app/feature/user/account/repository/signing_broker_agreement_repository.dart'
+import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/signing_broker_agreement_repository.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 

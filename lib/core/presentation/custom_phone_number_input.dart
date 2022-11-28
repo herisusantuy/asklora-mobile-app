@@ -45,13 +45,16 @@ class CustomPhoneNumberInput extends StatelessWidget {
                           : null,
                       hintText: '',
                       showPhoneCode: true,
-                      onSelect: onChangedCodeArea)),
+                      onSelect: onChangedCodeArea,
+                  height: 48,
+                  )),
               const SizedBox(
                 width: 8,
               ),
               Expanded(
                   flex: 2,
                   child: ClearableTextFormField(
+
                     initialValue: initialValueOfPhoneNumber ?? '',
                     textInputType: TextInputType.number,
                     textInputFormatterList: [

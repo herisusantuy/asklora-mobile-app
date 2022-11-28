@@ -39,23 +39,18 @@ class CustomDatePicker extends StatelessWidget {
             ),
           InkWell(
             child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 14, vertical: 14),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black38,
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 20),
-                    child: CustomText(selectedDate != null
-                        ? '${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}'
-                        : '-'),
-                  )
-                ],
-              ),
+              child: CustomText(selectedDate != null
+                  ? '${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}'
+                  : '-'),
             ),
             onTap: () => showModalBottomSheet(
                 context: (context),

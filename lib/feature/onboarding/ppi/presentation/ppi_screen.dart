@@ -5,6 +5,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_loading_widget.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/ppi_question_repository.dart';
@@ -74,10 +75,8 @@ class PpiScreen extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.currentPages != current.currentPages ||
             previous.totalPages != current.totalPages,
-        builder: (context, state) => LinearProgressIndicator(
-              backgroundColor: Colors.grey[350],
-              value: state.currentPages / state.totalPages,
-              color: Colors.grey[700],
+        builder: (context, state) => CustomLinearProgressIndicator(
+              progress: state.currentPages / state.totalPages,
             ));
   }
 

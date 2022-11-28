@@ -46,7 +46,7 @@ class CustomTextInput extends StatelessWidget {
       this.enabledBorder,
       this.disabledBorder,
       this.focusedBorder,
-      this.contentPadding = const EdgeInsets.fromLTRB(17, 15, 17, 15),
+      this.contentPadding = const EdgeInsets.fromLTRB(17, 14, 17, 14),
       this.prefixText = '',
       this.suffixText = '',
       this.suffixIcon,

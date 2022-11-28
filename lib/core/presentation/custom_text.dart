@@ -31,8 +31,10 @@ class CustomText extends StatelessWidget {
   final TextAlign textAlign;
   final TextDecoration decoration;
   final EdgeInsets padding;
+  final EdgeInsets margin;
   final int? maxLines;
   final FontStyle? fontStyle;
+  final double? height;
 
   const CustomText(this.text,
       {Key? key,
@@ -42,7 +44,9 @@ class CustomText extends StatelessWidget {
       this.textAlign = TextAlign.start,
       this.decoration = TextDecoration.none,
       this.padding = EdgeInsets.zero,
+        this.margin = EdgeInsets.zero,
       this.maxLines,
+        this.height,
       this.fontStyle})
       : super(key: key);
 
@@ -124,6 +128,7 @@ class CustomText extends StatelessWidget {
     }
     return Container(
       padding: padding,
+      margin:margin,
       child: Text(
         text,
         style: TextStyle(
@@ -131,6 +136,7 @@ class CustomText extends StatelessWidget {
             fontSize: fontType,
             fontWeight: boldText,
             decoration: decoration,
+            height: height,
             fontStyle: fontStyle),
         overflow: ellipsis ? TextOverflow.ellipsis : null,
         textAlign: textAlign,

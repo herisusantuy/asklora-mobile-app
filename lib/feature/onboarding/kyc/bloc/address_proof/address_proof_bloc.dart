@@ -1,0 +1,48 @@
+import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+part 'address_proof_event.dart';
+
+part 'address_proof_state.dart';
+
+class AddressProofBloc extends Bloc<AddressProofEvent, AddressProofState> {
+  AddressProofBloc() : super(const AddressProofState()) {
+    on<AddressLine1Changed>(_onAddressLine1Changed);
+    on<AddressLine2Changed>(_onAddressLine2Changed);
+    on<DistrictChanged>(_onDistrictChanged);
+    on<RegionChanged>(_onRegionChanged);
+    on<ImagesChanged>(_onImagesChanged);
+    on<ImageDeleted>(_onImageDeleted);
+  }
+
+  _onAddressLine1Changed(
+      AddressLine1Changed event, Emitter<AddressProofState> emit) {
+    emit(state.copyWith(addressLine1: event.unitNumber));
+  }
+
+  _onAddressLine2Changed(
+      AddressLine2Changed event, Emitter<AddressProofState> emit) {
+    emit(state.copyWith(addressLine2: event.residentialAddress));
+  }
+
+  _onDistrictChanged(DistrictChanged event, Emitter<AddressProofState> emit) {
+    emit(state.copyWith(district: event.district));
+  }
+
+  _onRegionChanged(RegionChanged event, Emitter<AddressProofState> emit) {
+    emit(state.copyWith(region: event.region));
+  }
+
+  _onImagesChanged(ImagesChanged event, Emitter<AddressProofState> emit) {
+    List<PlatformFile> images = List.from(state.addressProofImages);
+    images.addAll(event.images);
+    emit(state.copyWith(addressProofImages: images));
+  }
+
+  _onImageDeleted(ImageDeleted event, Emitter<AddressProofState> emit) {
+    List<PlatformFile> images = List.from(state.addressProofImages);
+    images.remove(event.image);
+    emit(state.copyWith(addressProofImages: images));
+  }
+}

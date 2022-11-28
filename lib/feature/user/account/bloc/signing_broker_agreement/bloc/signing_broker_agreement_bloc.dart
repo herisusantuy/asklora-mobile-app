@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../repository/signing_broker_agreement_repository.dart';
+import '../../../../../onboarding/kyc/repository/signing_broker_agreement_repository.dart';
 
 part 'signing_broker_agreement_event.dart';
 

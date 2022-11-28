@@ -9,6 +9,7 @@ class CustomCountryPicker extends StatelessWidget {
   final String hintText;
   final Function(Country) onSelect;
   final bool showPhoneCode;
+  final double height;
 
   const CustomCountryPicker(
       {required this.onSelect,
@@ -16,6 +17,7 @@ class CustomCountryPicker extends StatelessWidget {
       this.title,
       this.hintText = 'Select Country',
       this.showPhoneCode = false,
+        this.height = 60,
       Key? key})
       : super(key: key);
 
@@ -38,7 +40,7 @@ class CustomCountryPicker extends StatelessWidget {
             onSelect: onSelect,
           ),
           child: Container(
-            height: 60,
+            height: height,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             width: double.infinity,
             decoration: BoxDecoration(
@@ -60,7 +62,7 @@ class CustomCountryPicker extends StatelessWidget {
                 ),
                 const Icon(
                   Icons.arrow_drop_down_circle,
-                  color: Colors.lightBlueAccent,
+                  color: Color(0xff424b5a),
                   size: 22,
                 ),
               ],
