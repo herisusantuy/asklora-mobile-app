@@ -40,8 +40,7 @@ class CustomDatePicker extends StatelessWidget {
           InkWell(
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 14, vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black38,

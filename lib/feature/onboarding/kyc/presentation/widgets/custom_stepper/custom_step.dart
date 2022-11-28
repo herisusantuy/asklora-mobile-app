@@ -7,9 +7,9 @@ class CustomStep extends StatelessWidget {
 
   const CustomStep(
       {this.svgAsset = 'inactive_step_icon.svg',
-        this.drawLine = false,
-        required this.label,
-        Key? key})
+      this.drawLine = false,
+      required this.label,
+      Key? key})
       : super(key: key);
 
   @override
@@ -26,7 +26,11 @@ class CustomStep extends StatelessWidget {
             SvgPicture.asset('assets/icons/kyc/$svgAsset'),
           ],
         ),
-        CustomText(label, type: FontType.smallText, padding: const EdgeInsets.only(left: 12, bottom: 2),)
+        CustomText(
+          label,
+          type: FontType.smallText,
+          padding: const EdgeInsets.only(left: 12, bottom: 2),
+        )
       ],
     );
   }

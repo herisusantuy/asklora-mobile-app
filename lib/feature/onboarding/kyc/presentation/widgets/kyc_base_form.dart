@@ -12,7 +12,7 @@ class KycBaseForm extends StatelessWidget {
   const KycBaseForm(
       {required this.title,
       required this.content,
-        required this.progress,
+      required this.progress,
       this.onTapBack,
       this.bottomButton,
       Key? key})
@@ -29,7 +29,7 @@ class KycBaseForm extends StatelessWidget {
     );
   }
 
-  Widget get _header=> Column(
+  Widget get _header => Column(
         children: [
           CustomLinearProgressIndicator(progress: progress),
           Container(

@@ -35,7 +35,6 @@ class CountryOfTaxResidenceBloc
   _onTinNumberChange(
       TinNumberChanged event, Emitter<CountryOfTaxResidenceState> emit) {
     emit(state.copyWith(
-        tinNumber: event.tinNumber,
-        isHkIdValid: isHkIdValid(event.tinNumber)));
+        tinNumber: event.tinNumber, isHkIdValid: isHkIdValid(event.tinNumber)));
   }
 }

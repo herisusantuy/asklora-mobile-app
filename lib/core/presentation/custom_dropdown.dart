@@ -21,7 +21,7 @@ class CustomDropdown extends StatelessWidget {
     this.value = '',
     this.label = '',
     this.hintName = '',
-    this.isDense=true,
+    this.isDense = true,
     this.padding = EdgeInsets.zero,
     required this.itemsList,
     required this.onChanged,

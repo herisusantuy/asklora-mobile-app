@@ -14,7 +14,12 @@ class DisclosureAffiliationBaseInputScreen extends StatelessWidget {
   final Function(String) onLastNameChanged;
   final Widget bottomButton;
 
-  const DisclosureAffiliationBaseInputScreen({required this.progress, Key? key, required this.onFirstNameChanged, required this.onLastNameChanged, required this.bottomButton})
+  const DisclosureAffiliationBaseInputScreen(
+      {required this.progress,
+      Key? key,
+      required this.onFirstNameChanged,
+      required this.onLastNameChanged,
+      required this.bottomButton})
       : super(key: key);
 
   @override
@@ -65,8 +70,7 @@ class DisclosureAffiliationBaseInputScreen extends StatelessWidget {
           onChanged: onChanged,
           labelText: label,
           hintText: hintText,
-          textInputFormatterList: [
-            fullEnglishNameFormatter()],
+          textInputFormatterList: [fullEnglishNameFormatter()],
           textInputType: TextInputType.text,
           floatingLabelBehavior: FloatingLabelBehavior.always,
         ),

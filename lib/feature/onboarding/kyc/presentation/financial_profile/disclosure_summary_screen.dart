@@ -56,11 +56,12 @@ class DisclosureSummaryScreen extends StatelessWidget {
                           ? 'Yes'
                           : 'No'
                       : 'Unknown'),
-          if (disclosureAffiliationState.affiliatedAssociatesFirstName.isNotEmpty)
+          if (disclosureAffiliationState
+              .affiliatedAssociatesFirstName.isNotEmpty)
             SummaryTextInfo(
                 title: 'Name of Affiliated Person',
                 subTitle:
-                '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
+                    '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
           SummaryTextInfo(
               title:
                   'Are your immediate family or/and you a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.',

@@ -27,11 +27,12 @@ class CustomToggleButton extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if(title!=null)CustomText(
-              title!,
-              padding: const EdgeInsets.only(bottom: 14),
-              type: FontType.bodyTextBold,
-            ),
+            if (title != null)
+              CustomText(
+                title!,
+                padding: const EdgeInsets.only(bottom: 14),
+                type: FontType.bodyTextBold,
+              ),
             Row(
               children: [
                 _choicesWidget(
@@ -68,7 +69,11 @@ class CustomToggleButton extends StatelessWidget {
             color: selected ? const Color(0xff424b5a) : Colors.white,
           ),
           constraints: const BoxConstraints(minHeight: 44),
-          child: Center(child: CustomText(choice, color: selected?Colors.white:Colors.black,)),
+          child: Center(
+              child: CustomText(
+            choice,
+            color: selected ? Colors.white : Colors.black,
+          )),
         ),
       ),
     );

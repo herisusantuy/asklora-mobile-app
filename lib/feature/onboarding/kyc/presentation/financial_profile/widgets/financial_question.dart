@@ -9,6 +9,8 @@ class FinancialQuestion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomText(question, type: FontType.h5, padding: AppValues.screenHorizontalPadding.copyWith(bottom: 14));
+    return CustomText(question,
+        type: FontType.h5,
+        padding: AppValues.screenHorizontalPadding.copyWith(bottom: 14));
   }
 }

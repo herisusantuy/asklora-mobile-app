@@ -36,7 +36,7 @@ class ClearableTextFormField extends FormField<String> {
       this.fillColor,
       this.inputBorder = const OutlineInputBorder(),
       this.floatingLabelBehavior,
-        this.contentPadding = const EdgeInsets.fromLTRB(17, 14, 17, 14),
+      this.contentPadding = const EdgeInsets.fromLTRB(17, 14, 17, 14),
       this.enabledBorder,
       this.disabledBorder,
       this.focusedBorder,

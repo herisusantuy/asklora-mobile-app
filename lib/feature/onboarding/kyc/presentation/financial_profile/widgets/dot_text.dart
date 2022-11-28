@@ -7,7 +7,7 @@ class DotText extends StatelessWidget {
   final String text;
   final Color color;
 
-  const DotText(this.text,{this.color=Colors.black,Key? key})
+  const DotText(this.text, {this.color = Colors.black, Key? key})
       : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class DotText extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Padding(
+            Padding(
               padding: const EdgeInsets.only(top: 6.0),
               child: Icon(
                 Icons.circle,

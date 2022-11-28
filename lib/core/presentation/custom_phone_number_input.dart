@@ -39,14 +39,14 @@ class CustomPhoneNumberInput extends StatelessWidget {
               Expanded(
                   flex: 1,
                   child: CustomCountryPicker(
-                      initialValue: initialValueOfCodeArea != null &&
-                              initialValueOfCodeArea!.isNotEmpty
-                          ? '+$initialValueOfCodeArea'
-                          : null,
-                      hintText: '',
-                      showPhoneCode: true,
-                      onSelect: onChangedCodeArea,
-                  height: 48,
+                    initialValue: initialValueOfCodeArea != null &&
+                            initialValueOfCodeArea!.isNotEmpty
+                        ? '+$initialValueOfCodeArea'
+                        : null,
+                    hintText: '',
+                    showPhoneCode: true,
+                    onSelect: onChangedCodeArea,
+                    height: 48,
                   )),
               const SizedBox(
                 width: 8,
@@ -54,7 +54,6 @@ class CustomPhoneNumberInput extends StatelessWidget {
               Expanded(
                   flex: 2,
                   child: ClearableTextFormField(
-
                     initialValue: initialValueOfPhoneNumber ?? '',
                     textInputType: TextInputType.number,
                     textInputFormatterList: [

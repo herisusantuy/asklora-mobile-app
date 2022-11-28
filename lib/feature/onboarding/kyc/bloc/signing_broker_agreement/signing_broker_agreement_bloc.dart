@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../repository/signing_broker_agreement_repository.dart';
 
-
 part 'signing_broker_agreement_event.dart';
 
 part 'signing_broker_agreement_state.dart';

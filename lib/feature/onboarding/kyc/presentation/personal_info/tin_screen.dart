@@ -61,7 +61,8 @@ class TinScreen extends StatelessWidget {
                           state.countryOfTaxResidence == 'HKG' ? 9 : 15)
                     ],
                     errorText: state.isHkIdValid
-                        ? '':'Please enter a valid TIN number',
+                        ? ''
+                        : 'Please enter a valid TIN number',
                     onChanged: (value) => context
                         .read<CountryOfTaxResidenceBloc>()
                         .add(TinNumberChanged(value)))),

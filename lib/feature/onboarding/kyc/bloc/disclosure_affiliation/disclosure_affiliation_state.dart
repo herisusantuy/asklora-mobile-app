@@ -52,7 +52,7 @@ class DisclosureAffiliationState extends Equatable {
         isAffiliatedCommission,
         affiliatedPersonFirstName,
         affiliatedPersonLastName,
-    affiliatedAssociatesFirstName,
-    affiliatedAssociatesLastName
+        affiliatedAssociatesFirstName,
+        affiliatedAssociatesLastName
       ];
 }

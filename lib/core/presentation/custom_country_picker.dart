@@ -17,7 +17,7 @@ class CustomCountryPicker extends StatelessWidget {
       this.title,
       this.hintText = 'Select Country',
       this.showPhoneCode = false,
-        this.height = 60,
+      this.height = 60,
       Key? key})
       : super(key: key);
 

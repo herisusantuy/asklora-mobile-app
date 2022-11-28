@@ -20,7 +20,8 @@ import '../widgets/kyc_button_pair.dart';
 class BasicInformationScreen extends StatelessWidget {
   final double progress;
 
-  const BasicInformationScreen({required this.progress, Key? key}) : super(key: key);
+  const BasicInformationScreen({required this.progress, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

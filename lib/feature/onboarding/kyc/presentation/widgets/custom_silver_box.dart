@@ -6,7 +6,12 @@ class CustomSilverBox extends StatelessWidget {
   final String title;
   final Widget content;
   final EdgeInsets margin;
-  const CustomSilverBox({required this.title, required this.content, this.margin=EdgeInsets.zero, Key? key}) : super(key: key);
+  const CustomSilverBox(
+      {required this.title,
+      required this.content,
+      this.margin = EdgeInsets.zero,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

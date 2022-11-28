@@ -90,7 +90,8 @@ class CustomImagePicker extends StatelessWidget {
                                 )),
                       ))
                   .toList(),
-              if(!disabled)_emptyImage(withHintText: false, width: size, height: size)
+              if (!disabled)
+                _emptyImage(withHintText: false, width: size, height: size)
             ],
           ),
         );

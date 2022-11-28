@@ -35,7 +35,6 @@ class AffiliateAssociatesChanged extends DisclosuresAffiliationEvent {
 }
 
 class AffiliatePersonFirstNameChanged extends DisclosuresAffiliationEvent {
-
   final String firstName;
 
   const AffiliatePersonFirstNameChanged(this.firstName) : super();
@@ -54,7 +53,6 @@ class AffiliatePersonLastNameChanged extends DisclosuresAffiliationEvent {
 }
 
 class AffiliateAssociatesFirstNameChanged extends DisclosuresAffiliationEvent {
-
   final String firstName;
 
   const AffiliateAssociatesFirstNameChanged(this.firstName) : super();

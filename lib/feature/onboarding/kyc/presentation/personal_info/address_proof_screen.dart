@@ -71,7 +71,8 @@ class AddressProofScreen extends StatelessWidget {
                 initialValue: state.addressProofImages,
                 additionalText:
                     'Address Proof can be lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                onImageDeleted: (image)=>context.read<AddressProofBloc>().add(ImageDeleted(image)),
+                onImageDeleted: (image) =>
+                    context.read<AddressProofBloc>().add(ImageDeleted(image)),
                 onImagePicked: (images) =>
                     context.read<AddressProofBloc>().add(ImagesChanged(images)),
               ));

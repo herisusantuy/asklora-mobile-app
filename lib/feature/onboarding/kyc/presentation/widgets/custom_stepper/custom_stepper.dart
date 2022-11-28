@@ -14,25 +14,23 @@ class CustomStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-    children: steps
-        .asMap()
-        .entries
-        .map((element) => CustomStep(
-      svgAsset: _getSvgAsset(element.key, currentStep),
-      label: element.value,
-      drawLine: element.key!=0,
-    ))
-        .toList(),
-  );
+        children: steps
+            .asMap()
+            .entries
+            .map((element) => CustomStep(
+                  svgAsset: _getSvgAsset(element.key, currentStep),
+                  label: element.value,
+                  drawLine: element.key != 0,
+                ))
+            .toList(),
+      );
 
-  String _getSvgAsset(int index, int currentStep){
-    if(index+1 < currentStep){
+  String _getSvgAsset(int index, int currentStep) {
+    if (index + 1 < currentStep) {
       return 'passed_step_icon.svg';
-    }
-    else if(index+1==currentStep){
+    } else if (index + 1 == currentStep) {
       return 'active_step_icon.svg';
-    }
-    else{
+    } else {
       return 'inactive_step_icon.svg';
     }
   }

@@ -44,9 +44,9 @@ class CustomText extends StatelessWidget {
       this.textAlign = TextAlign.start,
       this.decoration = TextDecoration.none,
       this.padding = EdgeInsets.zero,
-        this.margin = EdgeInsets.zero,
+      this.margin = EdgeInsets.zero,
       this.maxLines,
-        this.height,
+      this.height,
       this.fontStyle})
       : super(key: key);
 
@@ -128,7 +128,7 @@ class CustomText extends StatelessWidget {
     }
     return Container(
       padding: padding,
-      margin:margin,
+      margin: margin,
       child: Text(
         text,
         style: TextStyle(

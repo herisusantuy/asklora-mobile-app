@@ -12,12 +12,12 @@ class CustomAppBar extends AppBar {
 
   CustomAppBar.transparentMinimal({super.key})
       : super(
-    iconTheme: const IconThemeData(
-      color: Colors.black, //change your color here
-    ),
-    toolbarHeight: 0,
-    elevation: 0,
-    backgroundColor: Colors.transparent,
-    automaticallyImplyLeading: false,
-  );
+          iconTheme: const IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          toolbarHeight: 0,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+        );
 }

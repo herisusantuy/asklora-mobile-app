@@ -12,7 +12,8 @@ import '../widgets/kyc_button_pair.dart';
 
 class ResidentCheckScreen extends StatelessWidget {
   final double progress;
-  const ResidentCheckScreen({required this.progress, Key? key}) : super(key: key);
+  const ResidentCheckScreen({required this.progress, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,8 @@ class ResidentCheckScreen extends StatelessWidget {
         content: ListView(
           children: [_isUnitedStatesResident, _isHongKongResident],
         ),
-        bottomButton: _bottomButton, progress: progress,
+        bottomButton: _bottomButton,
+        progress: progress,
       ),
     );
   }

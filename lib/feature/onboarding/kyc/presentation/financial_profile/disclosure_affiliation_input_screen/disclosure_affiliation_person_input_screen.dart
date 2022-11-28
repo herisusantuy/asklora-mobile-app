@@ -15,33 +15,29 @@ class DisclosureAffiliationPersonInputScreen extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context)=>DisclosureAffiliationBaseInputScreen(progress: progress,
-        onFirstNameChanged: (value) =>
-            context
-                .read<DisclosureAffiliationBloc>()
-                .add(AffiliatePersonFirstNameChanged(value)),
-        onLastNameChanged: (value) =>
-            context
-                .read<DisclosureAffiliationBloc>()
-                .add(AffiliatePersonLastNameChanged(value)),
-        bottomButton: _bottomButton);
-
+  Widget build(BuildContext context) => DisclosureAffiliationBaseInputScreen(
+      progress: progress,
+      onFirstNameChanged: (value) => context
+          .read<DisclosureAffiliationBloc>()
+          .add(AffiliatePersonFirstNameChanged(value)),
+      onLastNameChanged: (value) => context
+          .read<DisclosureAffiliationBloc>()
+          .add(AffiliatePersonLastNameChanged(value)),
+      bottomButton: _bottomButton);
 
   Widget get _bottomButton =>
       BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
           buildWhen: (previous, current) =>
-          previous.affiliatedPersonFirstName !=
-              current.affiliatedPersonFirstName ||
+              previous.affiliatedPersonFirstName !=
+                  current.affiliatedPersonFirstName ||
               previous.affiliatedPersonLastName !=
                   current.affiliatedPersonLastName,
-          builder: (context, state) =>
-              KycButtonPair(
+          builder: (context, state) => KycButtonPair(
                 disablePrimaryButton: state.affiliatedPersonFirstName.isEmpty ||
                     state.affiliatedPersonLastName.isEmpty,
-                primaryButtonOnClick: () =>
-                    context
-                        .read<NavigationBloc<KycPageStep>>()
-                        .add(const PageChanged(
+                primaryButtonOnClick: () => context
+                    .read<NavigationBloc<KycPageStep>>()
+                    .add(const PageChanged(
                         KycPageStep.disclosureAffiliationAssociates)),
                 secondaryButtonOnClick: () => CarouselScreen.open(context),
                 primaryButtonLabel: 'NEXT',

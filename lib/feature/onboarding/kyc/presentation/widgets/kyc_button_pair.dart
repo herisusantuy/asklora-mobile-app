@@ -17,7 +17,7 @@ class KycButtonPair extends StatelessWidget {
       required this.secondaryButtonOnClick,
       required this.primaryButtonLabel,
       required this.secondaryButtonLabel,
-        this.disablePrimaryButton = false,
+      this.disablePrimaryButton = false,
       this.padding = const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10),
       Key? key})
       : super(key: key);

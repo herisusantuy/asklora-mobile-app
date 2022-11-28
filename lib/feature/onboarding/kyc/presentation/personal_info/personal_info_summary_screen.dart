@@ -23,7 +23,7 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
       {required this.basicInformationState,
       required this.progress,
       required this.addressProofState,
-        required this.countryOfTaxResidenceState,
+      required this.countryOfTaxResidenceState,
       Key? key})
       : super(key: key);
 
@@ -70,11 +70,14 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
           SummaryTextInfo(
               title: 'Phone', subTitle: basicInformationState.phoneNumber),
           SummaryTextInfo(
-              title: 'TIN Number', subTitle: countryOfTaxResidenceState.tinNumber),
-          SummaryTextInfo(title: 'Address', subTitle: addressProofState.addressLine1),
+              title: 'TIN Number',
+              subTitle: countryOfTaxResidenceState.tinNumber),
+          SummaryTextInfo(
+              title: 'Address', subTitle: addressProofState.addressLine1),
           SummaryTextInfo(
               title: 'Address 2', subTitle: addressProofState.addressLine2),
-          CustomImagePicker(padding: AppValues.screenHorizontalPadding,
+          CustomImagePicker(
+            padding: AppValues.screenHorizontalPadding,
             initialValue: addressProofState.addressProofImages,
             title: '',
             disabled: true,
