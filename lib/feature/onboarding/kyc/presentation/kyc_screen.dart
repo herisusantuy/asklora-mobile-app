@@ -7,6 +7,7 @@ import '../bloc/basic_information/basic_information_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/kyc_bloc.dart';
+import '../repository/account_repository.dart';
 import 'financial_profile/disclosure_affiliation_associates_screen.dart';
 import 'financial_profile/disclosure_affiliation_commission_screen.dart';
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_associates_input_screen.dart';
@@ -23,6 +24,7 @@ import 'personal_info/otp/repository/otp_repository.dart';
 import 'personal_info/personal_info_summary_screen.dart';
 import 'personal_info/resident_check_screen.dart';
 import 'personal_info/tin_screen.dart';
+import 'sign_agreements/sign_agreements_screen.dart';
 import 'verify_identity/verify_identity_screen.dart';
 
 class KycScreen extends StatelessWidget {
@@ -52,6 +54,10 @@ class KycScreen extends StatelessWidget {
               ),
               BlocProvider(
                 create: (context) => DisclosureAffiliationBloc(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    KycBloc(getAccountRepository: AccountRepository()),
               ),
             ],
             child: BlocListener<NavigationBloc<KycPageStep>, NavigationState>(
@@ -135,6 +141,10 @@ class KycScreen extends StatelessWidget {
               );
             case KycPageStep.verifyIdentity:
               return const VerifyIdentityScreen(
+                progress: 0.8,
+              );
+            case KycPageStep.signAgreements:
+              return const SignAgreementsScreen(
                 progress: 0.8,
               );
             default:

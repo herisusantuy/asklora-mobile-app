@@ -8,8 +8,8 @@ part 'kyc_event.dart';
 
 part 'kyc_state.dart';
 
-class AccountBloc extends Bloc<AccountEvent, KycState> {
-  AccountBloc({required AccountRepository getAccountRepository})
+class KycBloc extends Bloc<KycEvent, KycState> {
+  KycBloc({required AccountRepository getAccountRepository})
       : _accountRepository = getAccountRepository,
         super(const KycState()) {
     on<GetSdkToken>(_onGetOnfidoSdkToken);
