@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/presentation/custom_text.dart';
+import 'custom_text.dart';
 
-class MEmojiWidget extends StatelessWidget {
+class LoraMemojiWidget extends StatelessWidget {
   final String text;
   final String imageAsset;
 
-  const MEmojiWidget(
+  const LoraMemojiWidget(
       {required this.text,
       required this.imageAsset,
       Key? key = const Key('memoji_widget')})

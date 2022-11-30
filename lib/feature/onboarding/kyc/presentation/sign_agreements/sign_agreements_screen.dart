@@ -20,8 +20,7 @@ class SignAgreementsScreen extends StatelessWidget {
   final double progress;
   final SignatureController _signatureController = SignatureController();
 
-  SignAgreementsScreen({required this.progress, Key? key})
-      : super(key: key);
+  SignAgreementsScreen({required this.progress, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -187,13 +186,15 @@ class SignAgreementsScreen extends StatelessWidget {
                             height: 200),
                       ),
                       CustomTextButton(
-                          key: const Key('clear_signature_button'),
-                          onTap: () {
-                            _signatureController.clear();
-                            context
-                                .read<SigningBrokerAgreementBloc>()
-                                .add(const CustomerSignatureReset());
-                          }, label:  'Reset Signature',)
+                        key: const Key('clear_signature_button'),
+                        onTap: () {
+                          _signatureController.clear();
+                          context
+                              .read<SigningBrokerAgreementBloc>()
+                              .add(const CustomerSignatureReset());
+                        },
+                        label: 'Reset Signature',
+                      )
                     ],
                   ),
               ],
@@ -215,6 +216,4 @@ class SignAgreementsScreen extends StatelessWidget {
                 primaryButtonLabel: 'AGREE',
                 secondaryButtonLabel: 'CONTINUE LATER',
               ));
-
-
 }

@@ -7,7 +7,6 @@ import '../../../../../../core/presentation/custom_text.dart';
 import '../../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../../core/values/app_values.dart';
 
-
 class SignatureDrawer extends StatelessWidget {
   final SignatureController _signatureController = SignatureController();
   final VoidCallback onSubmit;
@@ -27,57 +26,62 @@ class SignatureDrawer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomText('Sign here:', padding: EdgeInsets.only(bottom: 12),),
-          initialValue!=null?Column(
-            children: [
-              Signature(
-                controller: _signatureController,
-                height: 200,
-                backgroundColor: Colors.grey[300]!,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: CustomTextButton(
-                        key: const Key('accept_signature_button'),
-                        label: 'Accept',
-                        onTap: (){
-                          onSubmit();
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: CustomTextButton(
-                        key: const Key('reset_signature_button'),
-                        label: 'Reset',
-                        onTap: onReset,
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ):Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.memory(
-                    base64Decode(initialValue!),
-                    key: const Key('customer_signature_png'),
-                    height: 200),
-              ),
-              CustomTextButton(
-                key: const Key('clear_signature_button'),
-                onTap: () {
-                  _signatureController.clear();
-                  onReset();
-                }, label:  'Reset Signature',)
-            ],
+          const CustomText(
+            'Sign here:',
+            padding: EdgeInsets.only(bottom: 12),
           ),
-
+          initialValue != null
+              ? Column(
+                  children: [
+                    Signature(
+                      controller: _signatureController,
+                      height: 200,
+                      backgroundColor: Colors.grey[300]!,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: CustomTextButton(
+                              key: const Key('accept_signature_button'),
+                              label: 'Accept',
+                              onTap: () {
+                                onSubmit();
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: CustomTextButton(
+                              key: const Key('reset_signature_button'),
+                              label: 'Reset',
+                              onTap: onReset,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                )
+              : Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.memory(base64Decode(initialValue!),
+                          key: const Key('customer_signature_png'),
+                          height: 200),
+                    ),
+                    CustomTextButton(
+                      key: const Key('clear_signature_button'),
+                      onTap: () {
+                        _signatureController.clear();
+                        onReset();
+                      },
+                      label: 'Reset Signature',
+                    )
+                  ],
+                ),
         ],
       ),
     );

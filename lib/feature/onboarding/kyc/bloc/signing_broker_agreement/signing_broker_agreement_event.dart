@@ -24,13 +24,10 @@ class AskLoraClientAgreementOpened extends SigningBrokerAgreementEvent {
   List<Object> get props => [];
 }
 
-class BoundByAlpacaAndLoraAgreementChecked
-    extends SigningBrokerAgreementEvent {
+class BoundByAlpacaAndLoraAgreementChecked extends SigningBrokerAgreementEvent {
   final bool isChecked;
 
-  const BoundByAlpacaAndLoraAgreementChecked(
-      this.isChecked)
-      : super();
+  const BoundByAlpacaAndLoraAgreementChecked(this.isChecked) : super();
 
   @override
   List<Object> get props => [isChecked];

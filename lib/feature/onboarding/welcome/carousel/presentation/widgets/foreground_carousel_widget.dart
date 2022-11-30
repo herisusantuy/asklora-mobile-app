@@ -19,7 +19,7 @@ class ForegroundCarouselWidget extends StatelessWidget {
               key: const Key('begin_on_boarding_button'),
               margin: const EdgeInsets.only(bottom: 32),
               label: "LET'S BEGIN",
-              onClick: () => LoraAskNameScreen.open(context),
+              onClick: () => AskNameScreen.open(context),
             ),
             Center(
                 child: CustomTextButton(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
 import '../../../../core/presentation/we_create/custom_button.dart';
 import '../../ppi/bloc/question/question_bloc.dart';
 import '../../ppi/presentation/ppi_screen.dart';
-import '../widgets/memoji_widget.dart';
 
 class GreetingScreen extends StatelessWidget {
   static const route = '/greeting_screen';
@@ -20,7 +20,7 @@ class GreetingScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MEmojiWidget(
+          LoraMemojiWidget(
               text:
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta, xxx $name.',
               imageAsset: '/'),
