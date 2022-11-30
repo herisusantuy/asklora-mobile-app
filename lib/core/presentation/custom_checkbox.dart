@@ -9,15 +9,19 @@ class CustomCheckbox extends StatelessWidget {
   final TextAlign textAlign;
   final bool isChecked;
   final bool disabled;
+  final FontType fontType;
+  final double? fontHeight;
   final void Function(bool?) onChanged;
 
   const CustomCheckbox({
     Key? key,
     this.checkboxKey,
+    this.fontType = FontType.bodyText,
     required this.text,
     this.padding = EdgeInsets.zero,
     required this.isChecked,
     required this.onChanged,
+    this.fontHeight,
     this.textAlign = TextAlign.start,
     this.disabled = false,
   }) : super(key: key);
@@ -39,6 +43,8 @@ class CustomCheckbox extends StatelessWidget {
           Expanded(
             child: CustomText(
               text,
+              type: fontType,
+              height: fontHeight,
               padding: const EdgeInsets.only(top: 5, left: 5),
               textAlign: textAlign,
             ),

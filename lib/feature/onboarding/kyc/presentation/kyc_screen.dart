@@ -7,7 +7,9 @@ import '../bloc/basic_information/basic_information_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/kyc_bloc.dart';
+import '../bloc/signing_broker_agreement/signing_broker_agreement_bloc.dart';
 import '../repository/account_repository.dart';
+import '../repository/signing_broker_agreement_repository.dart';
 import 'financial_profile/disclosure_affiliation_associates_screen.dart';
 import 'financial_profile/disclosure_affiliation_commission_screen.dart';
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_associates_input_screen.dart';
@@ -58,6 +60,11 @@ class KycScreen extends StatelessWidget {
               BlocProvider(
                 create: (context) =>
                     KycBloc(getAccountRepository: AccountRepository()),
+              ),
+              BlocProvider(
+                create: (context) => SigningBrokerAgreementBloc(
+                    signingBrokerAgreementRepository:
+                        SigningBrokerAgreementRepository()),
               ),
             ],
             child: BlocListener<NavigationBloc<KycPageStep>, NavigationState>(
@@ -144,7 +151,7 @@ class KycScreen extends StatelessWidget {
                 progress: 0.8,
               );
             case KycPageStep.signAgreements:
-              return const SignAgreementsScreen(
+              return SignAgreementsScreen(
                 progress: 0.8,
               );
             default:

@@ -24,25 +24,34 @@ class AskLoraClientAgreementOpened extends SigningBrokerAgreementEvent {
   List<Object> get props => [];
 }
 
-class UnderstoodAlpacaCustomAgreementChecked
+class BoundByAlpacaAndLoraAgreementChecked
     extends SigningBrokerAgreementEvent {
-  final bool isUnderstoodAlpacaCustomAgreementChecked;
+  final bool isChecked;
 
-  const UnderstoodAlpacaCustomAgreementChecked(
-      this.isUnderstoodAlpacaCustomAgreementChecked)
+  const BoundByAlpacaAndLoraAgreementChecked(
+      this.isChecked)
       : super();
 
   @override
-  List<Object> get props => [isUnderstoodAlpacaCustomAgreementChecked];
+  List<Object> get props => [isChecked];
 }
 
-class SigningAgreementChecked extends SigningBrokerAgreementEvent {
-  final bool isSigningAgreementChecked;
+class UnderstandOnTheAgreementChecked extends SigningBrokerAgreementEvent {
+  final bool isChecked;
 
-  const SigningAgreementChecked(this.isSigningAgreementChecked) : super();
+  const UnderstandOnTheAgreementChecked(this.isChecked) : super();
 
   @override
-  List<Object> get props => [isSigningAgreementChecked];
+  List<Object> get props => [isChecked];
+}
+
+class CertifyNotUSCitizenAgreementChecked extends SigningBrokerAgreementEvent {
+  final bool isChecked;
+
+  const CertifyNotUSCitizenAgreementChecked(this.isChecked) : super();
+
+  @override
+  List<Object> get props => [isChecked];
 }
 
 class CustomerSignatureDrew extends SigningBrokerAgreementEvent {

@@ -3,8 +3,9 @@ part of 'signing_broker_agreement_bloc.dart';
 class SigningBrokerAgreementState extends Equatable {
   final bool isAlpacaCustomerAgreementOpened;
   final bool isAskLoraClientAgreementOpened;
-  final bool isUnderstoodAlpacaCustomAgreementChecked;
-  final bool isSigningAgreementChecked;
+  final bool isBoundByAlpacaAndLoraAgreementChecked;
+  final bool isUnderstandOnTheAgreementChecked;
+  final bool isCertifyNotUSCitizenAgreementChecked;
   final bool isSignatureDrew;
   final String customerSignature;
   final String? signedTime;
@@ -12,8 +13,9 @@ class SigningBrokerAgreementState extends Equatable {
   const SigningBrokerAgreementState({
     this.isAlpacaCustomerAgreementOpened = false,
     this.isAskLoraClientAgreementOpened = false,
-    this.isUnderstoodAlpacaCustomAgreementChecked = false,
-    this.isSigningAgreementChecked = false,
+    this.isCertifyNotUSCitizenAgreementChecked = false,
+    this.isBoundByAlpacaAndLoraAgreementChecked = false,
+    this.isUnderstandOnTheAgreementChecked = false,
     this.isSignatureDrew = false,
     this.customerSignature = '',
     this.signedTime,
@@ -23,8 +25,9 @@ class SigningBrokerAgreementState extends Equatable {
   List<Object?> get props => [
         isAlpacaCustomerAgreementOpened,
         isAskLoraClientAgreementOpened,
-        isUnderstoodAlpacaCustomAgreementChecked,
-        isSigningAgreementChecked,
+        isCertifyNotUSCitizenAgreementChecked,
+        isBoundByAlpacaAndLoraAgreementChecked,
+        isUnderstandOnTheAgreementChecked,
         isSignatureDrew,
         customerSignature,
         signedTime ?? ''
@@ -33,8 +36,9 @@ class SigningBrokerAgreementState extends Equatable {
   SigningBrokerAgreementState copyWith({
     bool? isAlpacaCustomerAgreementOpened,
     bool? isAskLoraClientAgreementOpened,
-    bool? isUnderstoodAlpacaCustomAgreementChecked,
-    bool? isSigningAgreementChecked,
+    bool? isBoundByAlpacaAndLoraAgreementChecked,
+    bool? isUnderstandOnTheAgreementChecked,
+    bool? isCertifyNotUSCitizenAgreementChecked,
     bool? isSignatureDrew,
     String? customerSignature,
     String? signedTime,
@@ -44,11 +48,14 @@ class SigningBrokerAgreementState extends Equatable {
           this.isAlpacaCustomerAgreementOpened,
       isAskLoraClientAgreementOpened:
           isAskLoraClientAgreementOpened ?? this.isAskLoraClientAgreementOpened,
-      isUnderstoodAlpacaCustomAgreementChecked:
-          isUnderstoodAlpacaCustomAgreementChecked ??
-              this.isUnderstoodAlpacaCustomAgreementChecked,
-      isSigningAgreementChecked:
-          isSigningAgreementChecked ?? this.isSigningAgreementChecked,
+      isCertifyNotUSCitizenAgreementChecked:
+          isCertifyNotUSCitizenAgreementChecked ??
+              this.isCertifyNotUSCitizenAgreementChecked,
+      isBoundByAlpacaAndLoraAgreementChecked:
+          isBoundByAlpacaAndLoraAgreementChecked ??
+              this.isBoundByAlpacaAndLoraAgreementChecked,
+      isUnderstandOnTheAgreementChecked: isUnderstandOnTheAgreementChecked ??
+          this.isUnderstandOnTheAgreementChecked,
       isSignatureDrew: isSignatureDrew ?? this.isSignatureDrew,
       customerSignature: customerSignature ?? this.customerSignature,
       signedTime: signedTime ?? this.signedTime,
@@ -57,8 +64,9 @@ class SigningBrokerAgreementState extends Equatable {
 
   bool disabledNextButton() {
     if (isAlpacaCustomerAgreementOpened &&
-        isUnderstoodAlpacaCustomAgreementChecked &&
-        isSigningAgreementChecked &&
+        isBoundByAlpacaAndLoraAgreementChecked &&
+        isUnderstandOnTheAgreementChecked &&
+        isCertifyNotUSCitizenAgreementChecked &&
         customerSignature.isNotEmpty) {
       return false;
     }

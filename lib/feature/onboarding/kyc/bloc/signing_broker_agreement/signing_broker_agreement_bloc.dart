@@ -10,14 +10,17 @@ part 'signing_broker_agreement_state.dart';
 class SigningBrokerAgreementBloc
     extends Bloc<SigningBrokerAgreementEvent, SigningBrokerAgreementState> {
   SigningBrokerAgreementBloc(
-      SigningBrokerAgreementRepository signingBrokerAgreementRepository)
+      {required SigningBrokerAgreementRepository
+          signingBrokerAgreementRepository})
       : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
         super(const SigningBrokerAgreementState()) {
     on<AlpacaCustomerAgreementOpened>(_onAlpacaCustomerAgreementOpened);
     on<AskLoraClientAgreementOpened>(_onAskLoraClientAgreementOpened);
-    on<UnderstoodAlpacaCustomAgreementChecked>(
-        _onUnderstoodAlpacaCustomAgreementChecked);
-    on<SigningAgreementChecked>(_onSigningAgreementChecked);
+    on<BoundByAlpacaAndLoraAgreementChecked>(
+        _onBoundByAlpacaAndLoraAgreementChecked);
+    on<UnderstandOnTheAgreementChecked>(_onUnderstandOnTheAgreementChecked);
+    on<CertifyNotUSCitizenAgreementChecked>(
+        _onCertifyNotUSCitizenAgreementChecked);
     on<CustomerSignatureDrew>(_onCustomerSignatureDrew);
     on<CustomerSignatureReset>(_onCustomerSignatureReset);
   }
@@ -39,18 +42,23 @@ class SigningBrokerAgreementBloc
     emit(state.copyWith(isAskLoraClientAgreementOpened: true));
   }
 
-  _onUnderstoodAlpacaCustomAgreementChecked(
-      UnderstoodAlpacaCustomAgreementChecked event,
+  _onBoundByAlpacaAndLoraAgreementChecked(
+      BoundByAlpacaAndLoraAgreementChecked event,
       Emitter<SigningBrokerAgreementState> emit) {
     emit(state.copyWith(
-        isUnderstoodAlpacaCustomAgreementChecked:
-            event.isUnderstoodAlpacaCustomAgreementChecked));
+        isBoundByAlpacaAndLoraAgreementChecked: event.isChecked));
   }
 
-  _onSigningAgreementChecked(SigningAgreementChecked event,
+  _onUnderstandOnTheAgreementChecked(UnderstandOnTheAgreementChecked event,
       Emitter<SigningBrokerAgreementState> emit) {
-    emit(state.copyWith(
-        isSigningAgreementChecked: event.isSigningAgreementChecked));
+    emit(state.copyWith(isUnderstandOnTheAgreementChecked: event.isChecked));
+  }
+
+  _onCertifyNotUSCitizenAgreementChecked(
+      CertifyNotUSCitizenAgreementChecked event,
+      Emitter<SigningBrokerAgreementState> emit) {
+    emit(
+        state.copyWith(isCertifyNotUSCitizenAgreementChecked: event.isChecked));
   }
 
   _onCustomerSignatureDrew(CustomerSignatureDrew event,
