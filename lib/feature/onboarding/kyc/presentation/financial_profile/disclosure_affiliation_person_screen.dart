@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -32,19 +33,19 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
                 : KycPageStep.disclosureAffiliationAssociates)),
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 24),
-          children: const [
-            FinancialQuestion(
+          children: [
+            const FinancialQuestion(
               'Do any of the following apply to you or a member of your immediate family ?',
             ),
-            DotText(
+            _dotText(
               'I am affiliated or work with US registered broker-dealer or FINRA.',
             ),
-            DotText(
+            _dotText(
                 'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.'),
-            DotText('I am a senior political figure.'),
-            DotText(
+            _dotText('I am a senior political figure.'),
+            _dotText(
                 'I am a family member or relative of a senior political figure.'),
-            DotText(
+            _dotText(
                 'I am a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.'),
           ],
         ),
@@ -61,4 +62,7 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
       progress: progress,
     );
   }
+
+  Widget _dotText(String text) => DotText(text,
+      padding: AppValues.screenHorizontalPadding.copyWith(top: 24));
 }

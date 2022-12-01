@@ -33,7 +33,7 @@ class VerifyIdentityScreen extends StatelessWidget {
             ///CHANGE THIS TO HANDLE ERROR LATER
             context
                 .read<NavigationBloc<KycPageStep>>()
-                .add(const PageChanged(KycPageStep.signAgreements));
+                .add(const PageChanged(KycPageStep.signBrokerAgreements));
           }
         },
         child: ListView(

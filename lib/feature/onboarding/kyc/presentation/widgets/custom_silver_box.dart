@@ -6,8 +6,9 @@ class CustomSilverBox extends StatelessWidget {
   final String title;
   final Widget content;
   final EdgeInsets margin;
+
   const CustomSilverBox(
-      {required this.title,
+      {this.title = '',
       required this.content,
       this.margin = EdgeInsets.zero,
       Key? key})
@@ -24,11 +25,12 @@ class CustomSilverBox extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(
-            title,
-            type: FontType.bodyTextBold,
-            padding: const EdgeInsets.only(bottom: 24),
-          ),
+          if (title.isNotEmpty)
+            CustomText(
+              title,
+              type: FontType.bodyTextBold,
+              padding: const EdgeInsets.only(bottom: 24),
+            ),
           content
         ],
       ),

@@ -1,33 +1,27 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:signature/signature.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
-import '../../bloc/signing_broker_agreement/signing_broker_agreement_bloc.dart';
+import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../widgets/kyc_base_form.dart';
 import '../widgets/kyc_button_pair.dart';
 import 'widgets/signature_drawer.dart';
 
-class SignAgreementsScreen extends StatelessWidget {
+class BrokerAgreementScreen extends StatelessWidget {
   final double progress;
-  final SignatureController _signatureController = SignatureController();
 
-  SignAgreementsScreen({required this.progress, Key? key}) : super(key: key);
+  const BrokerAgreementScreen({required this.progress, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Set Up Financial Profile',
+      title: 'Sign Agreements',
       content: ListView(
         padding: const EdgeInsets.symmetric(vertical: 24),
         children: [
@@ -40,12 +34,12 @@ class SignAgreementsScreen extends StatelessWidget {
           _agreementCard(
               title: 'Alpaca Customer Agreement.pdf',
               onTap: () => context
-                  .read<SigningBrokerAgreementBloc>()
+                  .read<SigningAgreementBloc>()
                   .add(const AlpacaCustomerAgreementOpened(true))),
           _agreementCard(
               title: 'Asklora Client Agreement.pdf',
               onTap: () => context
-                  .read<SigningBrokerAgreementBloc>()
+                  .read<SigningAgreementBloc>()
                   .add(const AskLoraClientAgreementOpened())),
           _boundByAlpacaAndLoraAgreement,
           _understandOnTheAgreement,
@@ -85,7 +79,7 @@ class SignAgreementsScreen extends StatelessWidget {
       );
 
   Widget get _boundByAlpacaAndLoraAgreement =>
-      BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
               previous.isAlpacaCustomerAgreementOpened !=
                   current.isAlpacaCustomerAgreementOpened ||
@@ -106,12 +100,12 @@ class SignAgreementsScreen extends StatelessWidget {
                 fontType: FontType.smallText,
                 fontHeight: 1.4,
                 onChanged: (value) => context
-                    .read<SigningBrokerAgreementBloc>()
+                    .read<SigningAgreementBloc>()
                     .add(BoundByAlpacaAndLoraAgreementChecked(value!)),
               ));
 
   Widget get _understandOnTheAgreement =>
-      BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
               previous.isBoundByAlpacaAndLoraAgreementChecked !=
                   current.isBoundByAlpacaAndLoraAgreementChecked ||
@@ -129,12 +123,12 @@ class SignAgreementsScreen extends StatelessWidget {
                 isChecked: state.isUnderstandOnTheAgreementChecked,
                 fontType: FontType.smallText,
                 onChanged: (value) => context
-                    .read<SigningBrokerAgreementBloc>()
+                    .read<SigningAgreementBloc>()
                     .add(UnderstandOnTheAgreementChecked(value!)),
               ));
 
   Widget get _certifyNotUSCitizenAgreement =>
-      BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
               previous.isUnderstandOnTheAgreementChecked !=
                   current.isUnderstandOnTheAgreementChecked ||
@@ -152,67 +146,34 @@ class SignAgreementsScreen extends StatelessWidget {
                 isChecked: state.isCertifyNotUSCitizenAgreementChecked,
                 fontType: FontType.smallText,
                 onChanged: (value) => context
-                    .read<SigningBrokerAgreementBloc>()
+                    .read<SigningAgreementBloc>()
                     .add(CertifyNotUSCitizenAgreementChecked(value!)),
               ));
 
   Widget get _customerSignature =>
-      BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (!state.isSignatureDrew)
-                  SignatureDrawer(
-                      key: const Key('customer_signature_drawer'),
-                      onSubmit: () async {
-                        context.read<SigningBrokerAgreementBloc>().add(
-                            CustomerSignatureDrew(
-                                '',
-                                DateFormat('yyyy-MM-ddThh:mm')
-                                    .format(DateTime.now())));
-                      },
-                      onReset: () => _signatureController.clear())
-                else
-                  Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.memory(
-                            base64Decode(state.customerSignature),
-                            key: const Key('customer_signature_png'),
-                            height: 200),
-                      ),
-                      CustomTextButton(
-                        key: const Key('clear_signature_button'),
-                        onTap: () {
-                          _signatureController.clear();
-                          context
-                              .read<SigningBrokerAgreementBloc>()
-                              .add(const CustomerSignatureReset());
-                        },
-                        label: 'Reset Signature',
-                      )
-                    ],
-                  ),
-              ],
-            ),
-          );
-        },
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
+        buildWhen: (previous,current)=>previous.customerSignature!=current.customerSignature,
+        builder: (context, state) => SignatureDrawer(
+            key: const Key('customer_signature_drawer'),
+            initialValue: state.customerSignature,
+            onSubmit: () => context
+                .read<SigningAgreementBloc>()
+                .add(const CustomerSignatureDrew()),
+            onReset: () => context
+                .read<SigningAgreementBloc>()
+                .add(const CustomerSignatureReset()), signatureController: state.signatureController,),
       );
 
   Widget _bottomButton(BuildContext context) =>
-      BlocBuilder<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
-              previous.disabledNextButton() != current.disabledNextButton(),
+              previous.disabledBrokerButton() != current.disabledBrokerButton(),
           builder: (context, state) => KycButtonPair(
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()
-                    .add(const PageChanged(KycPageStep.verifyIdentity)),
+                    .add(const PageChanged(KycPageStep.signRiskDisclosureAgreements)),
                 secondaryButtonOnClick: () => CarouselScreen.open(context),
-                disablePrimaryButton: state.disabledNextButton(),
+                disablePrimaryButton: state.disabledBrokerButton(),
                 primaryButtonLabel: 'AGREE',
                 secondaryButtonLabel: 'CONTINUE LATER',
               ));

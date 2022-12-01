@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:signature/signature.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
@@ -7,7 +8,7 @@ import '../bloc/basic_information/basic_information_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/kyc_bloc.dart';
-import '../bloc/signing_broker_agreement/signing_broker_agreement_bloc.dart';
+import '../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../repository/account_repository.dart';
 import '../repository/signing_broker_agreement_repository.dart';
 import 'financial_profile/disclosure_affiliation_associates_screen.dart';
@@ -18,6 +19,7 @@ import 'financial_profile/disclosure_affiliation_person_screen.dart';
 import 'financial_profile/disclosure_summary_screen.dart';
 import 'kyc_progress/kyc_progress_screen.dart';
 import 'kyc_rejected_screen.dart';
+import 'kyc_summary_screen.dart';
 import 'personal_info/address_proof_screen.dart';
 import 'personal_info/basic_information_screen.dart';
 import 'personal_info/otp/bloc/otp_bloc.dart';
@@ -26,7 +28,9 @@ import 'personal_info/otp/repository/otp_repository.dart';
 import 'personal_info/personal_info_summary_screen.dart';
 import 'personal_info/resident_check_screen.dart';
 import 'personal_info/tin_screen.dart';
-import 'sign_agreements/sign_agreements_screen.dart';
+import 'sign_agreements/broker_agreement_screen.dart';
+import 'sign_agreements/risk_disclosure_agreement_screen.dart';
+import 'sign_agreements/tax_agreement_screen.dart';
 import 'verify_identity/verify_identity_screen.dart';
 
 class KycScreen extends StatelessWidget {
@@ -62,9 +66,10 @@ class KycScreen extends StatelessWidget {
                     KycBloc(getAccountRepository: AccountRepository()),
               ),
               BlocProvider(
-                create: (context) => SigningBrokerAgreementBloc(
+                create: (context) => SigningAgreementBloc(
                     signingBrokerAgreementRepository:
-                        SigningBrokerAgreementRepository()),
+                        SigningBrokerAgreementRepository(),
+                    signatureController: SignatureController()),
               ),
             ],
             child: BlocListener<NavigationBloc<KycPageStep>, NavigationState>(
@@ -82,7 +87,7 @@ class KycScreen extends StatelessWidget {
               return const KycProgressScreen();
             case KycPageStep.residentCheck:
               return const ResidentCheckScreen(
-                progress: 0.1,
+                progress: 0.05,
               );
             case KycPageStep.personalInfoRejected:
               return const KycRejectedScreen(
@@ -91,53 +96,53 @@ class KycScreen extends StatelessWidget {
               );
             case KycPageStep.basicInformation:
               return const BasicInformationScreen(
-                progress: 0.2,
+                progress: 0.1,
               );
             case KycPageStep.otp:
               return const OtpScreen(
                 email: 'raviranjan@asifboot.com',
-                progress: 0.3,
+                progress: 0.15,
               );
             case KycPageStep.tin:
               return const TinScreen(
-                progress: 0.4,
+                progress: 0.2,
               );
             case KycPageStep.addressProof:
               return const AddressProofScreen(
-                progress: 0.5,
+                progress: 0.25,
               );
             case KycPageStep.personalInfoSummary:
               return PersonalInfoSummaryScreen(
                 basicInformationState:
                     context.read<BasicInformationBloc>().state,
-                progress: 0.6,
+                progress: 0.3,
                 addressProofState: context.read<AddressProofBloc>().state,
                 countryOfTaxResidenceState:
                     context.read<CountryOfTaxResidenceBloc>().state,
               );
             case KycPageStep.disclosureAffiliationPerson:
               return const DisclosureAffiliationPersonScreen(
-                progress: 0.7,
+                progress: 0.35,
               );
             case KycPageStep.disclosureAffiliationPersonInput:
               return const DisclosureAffiliationPersonInputScreen(
-                progress: 0.75,
+                progress: 0.4,
               );
             case KycPageStep.disclosureAffiliationAssociates:
               return const DisclosureAffiliationAssociatesScreen(
-                progress: 0.75,
+                progress: 0.45,
               );
             case KycPageStep.disclosureAffiliationAssociatesInput:
               return const DisclosureAffiliationAssociatesInputScreen(
-                progress: 0.75,
+                progress: 0.5,
               );
             case KycPageStep.disclosureAffiliationCommissions:
               return const DisclosureAffiliationCommissionScreen(
-                progress: 0.8,
+                progress: 0.6,
               );
             case KycPageStep.disclosureSummary:
               return DisclosureSummaryScreen(
-                progress: 0.8,
+                progress: 0.65,
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,
               );
@@ -148,11 +153,30 @@ class KycScreen extends StatelessWidget {
               );
             case KycPageStep.verifyIdentity:
               return const VerifyIdentityScreen(
+                progress: 0.7,
+              );
+            case KycPageStep.signBrokerAgreements:
+              return const BrokerAgreementScreen(
+                progress: 0.75,
+              );
+            case KycPageStep.signRiskDisclosureAgreements:
+              return const RiskDisclosureAgreementScreen(
                 progress: 0.8,
               );
-            case KycPageStep.signAgreements:
-              return SignAgreementsScreen(
-                progress: 0.8,
+            case KycPageStep.signTaxAgreements:
+              return const TaxAgreementScreen(
+                progress: 0.85,
+              );
+            case KycPageStep.kycSummary:
+              return KycSummaryScreen(
+                basicInformationState:
+                    context.read<BasicInformationBloc>().state,
+                progress: 0.9,
+                addressProofState: context.read<AddressProofBloc>().state,
+                countryOfTaxResidenceState:
+                    context.read<CountryOfTaxResidenceBloc>().state,
+                disclosureAffiliationState:
+                    context.read<DisclosureAffiliationBloc>().state,
               );
             default:
               return const SizedBox.shrink();
