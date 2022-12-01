@@ -23,7 +23,7 @@ class DepositWelcomeScreen extends StatelessWidget {
             context
                 .read<NavigationBloc<DepositPageStep>>()
                 .add(const PageChanged(DepositPageStep.depositMethod));
-          } else if (state.response.state == ResponseState.success) {
+          } else if (state.response.state == ResponseState.error) {
             showAlertDialog(context, state.response.message,
                 onPressedOk: () {});
           }
