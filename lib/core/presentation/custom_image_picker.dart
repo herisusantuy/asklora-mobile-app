@@ -10,6 +10,7 @@ import 'custom_text.dart';
 class CustomImagePicker extends StatelessWidget {
   final bool disabled;
   final String title;
+  final String hintText;
   final EdgeInsets padding;
   final List<PlatformFile> initialValue;
   final String? additionalText;
@@ -19,6 +20,7 @@ class CustomImagePicker extends StatelessWidget {
 
   CustomImagePicker(
       {required this.title,
+      this.hintText = '',
       this.initialValue = const [],
       this.padding = EdgeInsets.zero,
       this.additionalText,
@@ -40,9 +42,7 @@ class CustomImagePicker extends StatelessWidget {
             type: FontType.note,
             padding: const EdgeInsets.only(bottom: 6),
           ),
-          initialValue.isEmpty
-              ? _emptyImage(withHintText: true)
-              : _haveImages(context),
+          initialValue.isEmpty ? _emptyImage() : _haveImages(context),
           if (additionalText != null)
             CustomText(
               additionalText!,
@@ -90,8 +90,7 @@ class CustomImagePicker extends StatelessWidget {
                                 )),
                       ))
                   .toList(),
-              if (!disabled)
-                _emptyImage(withHintText: false, width: size, height: size)
+              if (!disabled) _emptyImage(width: size, height: size)
             ],
           ),
         );
@@ -99,10 +98,7 @@ class CustomImagePicker extends StatelessWidget {
     );
   }
 
-  Widget _emptyImage(
-          {bool withHintText = true,
-          double width = double.infinity,
-          double? height}) =>
+  Widget _emptyImage({double width = double.infinity, double? height}) =>
       DottedBorder(
           color: Colors.grey,
           dashPattern: const [4, 4],
@@ -127,9 +123,9 @@ class CustomImagePicker extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                if (withHintText)
+                if (hintText.isNotEmpty)
                   CustomText(
-                    title,
+                    hintText,
                     color: Colors.grey,
                     padding: const EdgeInsets.only(top: 20),
                   ),

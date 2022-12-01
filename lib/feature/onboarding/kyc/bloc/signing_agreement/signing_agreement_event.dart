@@ -1,4 +1,4 @@
-part of 'signing_broker_agreement_bloc.dart';
+part of 'signing_agreement_bloc.dart';
 
 abstract class SigningBrokerAgreementEvent extends Equatable {
   const SigningBrokerAgreementEvent();
@@ -24,13 +24,10 @@ class AskLoraClientAgreementOpened extends SigningBrokerAgreementEvent {
   List<Object> get props => [];
 }
 
-class BoundByAlpacaAndLoraAgreementChecked
-    extends SigningBrokerAgreementEvent {
+class BoundByAlpacaAndLoraAgreementChecked extends SigningBrokerAgreementEvent {
   final bool isChecked;
 
-  const BoundByAlpacaAndLoraAgreementChecked(
-      this.isChecked)
-      : super();
+  const BoundByAlpacaAndLoraAgreementChecked(this.isChecked) : super();
 
   @override
   List<Object> get props => [isChecked];
@@ -54,15 +51,20 @@ class CertifyNotUSCitizenAgreementChecked extends SigningBrokerAgreementEvent {
   List<Object> get props => [isChecked];
 }
 
-class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
-  final String? customerSignature;
-  final String? signedTime;
+class RiskDisclosureAgreementChecked extends SigningBrokerAgreementEvent {
+  final bool isChecked;
 
-  const CustomerSignatureDrew(this.customerSignature, this.signedTime)
-      : super();
+  const RiskDisclosureAgreementChecked(this.isChecked) : super();
 
   @override
-  List<Object?> get props => [customerSignature];
+  List<Object> get props => [isChecked];
+}
+
+class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
+  const CustomerSignatureDrew() : super();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class CustomerSignatureReset extends SigningBrokerAgreementEvent {

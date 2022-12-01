@@ -28,7 +28,11 @@ enum KycPageStep {
   disclosureRejected,
   disclosureSummary,
   verifyIdentity,
-  signAgreements,
+  signBrokerAgreements,
+  signRiskDisclosureAgreements,
+  signTaxAgreements,
+  kycSummary,
+  giftBotStock
   // countryOfTaxResidence,
   // addressProof,
   // employmentFinancialProfile,

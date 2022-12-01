@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../welcome/carousel/presentation/carousel_screen.dart';
+import '../bloc/address_proof/address_proof_bloc.dart';
+import '../bloc/basic_information/basic_information_bloc.dart';
+import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
+import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
+import '../bloc/kyc_bloc.dart';
+import 'financial_profile/widgets/disclosure_summary_content.dart';
+import 'personal_info/widgets/personal_info_summary_content.dart';
+import 'widgets/kyc_base_form.dart';
+import 'widgets/kyc_button_pair.dart';
+
+class KycSummaryScreen extends StatelessWidget {
+  final BasicInformationState basicInformationState;
+  final AddressProofState addressProofState;
+  final CountryOfTaxResidenceState countryOfTaxResidenceState;
+  final DisclosureAffiliationState disclosureAffiliationState;
+  final double progress;
+
+  const KycSummaryScreen(
+      {required this.basicInformationState,
+      required this.progress,
+      required this.addressProofState,
+      required this.countryOfTaxResidenceState,
+      required this.disclosureAffiliationState,
+      Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return KycBaseForm(
+      onTapBack: () =>
+          context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
+      title: 'Summary',
+      content: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        children: [
+          PersonalInfoSummaryContent(
+              basicInformationState: basicInformationState,
+              addressProofState: addressProofState,
+              countryOfTaxResidenceState: countryOfTaxResidenceState, title: 'Personal Info',),
+          const SizedBox(height: 56,),
+          DisclosureSummaryContent(
+              disclosureAffiliationState: disclosureAffiliationState, title: 'Financial Profile',)
+        ],
+      ),
+      bottomButton: _bottomButton(context),
+      progress: progress,
+    );
+  }
+
+  Widget _bottomButton(BuildContext context) => KycButtonPair(
+        primaryButtonOnClick: () => context
+            .read<NavigationBloc<KycPageStep>>()
+            .add(const PageChanged(KycPageStep.giftBotStock)),
+        secondaryButtonOnClick: () => CarouselScreen.open(context),
+        primaryButtonLabel: 'COMPLETE',
+        secondaryButtonLabel: 'SAVE FOR LATER',
+      );
+}

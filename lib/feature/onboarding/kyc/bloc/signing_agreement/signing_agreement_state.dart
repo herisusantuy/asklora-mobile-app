@@ -1,49 +1,55 @@
-part of 'signing_broker_agreement_bloc.dart';
+part of 'signing_agreement_bloc.dart';
 
-class SigningBrokerAgreementState extends Equatable {
+class SigningAgreementState extends Equatable {
   final bool isAlpacaCustomerAgreementOpened;
   final bool isAskLoraClientAgreementOpened;
   final bool isBoundByAlpacaAndLoraAgreementChecked;
   final bool isUnderstandOnTheAgreementChecked;
   final bool isCertifyNotUSCitizenAgreementChecked;
-  final bool isSignatureDrew;
+  final bool isRiskDisclosureAgreementChecked;
   final String customerSignature;
   final String? signedTime;
+  final SignatureController signatureController;
 
-  const SigningBrokerAgreementState({
+  const SigningAgreementState({
+    required this.signatureController,
     this.isAlpacaCustomerAgreementOpened = false,
     this.isAskLoraClientAgreementOpened = false,
     this.isCertifyNotUSCitizenAgreementChecked = false,
     this.isBoundByAlpacaAndLoraAgreementChecked = false,
     this.isUnderstandOnTheAgreementChecked = false,
-    this.isSignatureDrew = false,
+    this.isRiskDisclosureAgreementChecked = false,
     this.customerSignature = '',
     this.signedTime,
   });
 
   @override
   List<Object?> get props => [
+        signatureController,
         isAlpacaCustomerAgreementOpened,
         isAskLoraClientAgreementOpened,
         isCertifyNotUSCitizenAgreementChecked,
+        isRiskDisclosureAgreementChecked,
         isBoundByAlpacaAndLoraAgreementChecked,
         isUnderstandOnTheAgreementChecked,
-        isSignatureDrew,
         customerSignature,
         signedTime ?? ''
       ];
 
-  SigningBrokerAgreementState copyWith({
+  SigningAgreementState copyWith({
     bool? isAlpacaCustomerAgreementOpened,
     bool? isAskLoraClientAgreementOpened,
     bool? isBoundByAlpacaAndLoraAgreementChecked,
     bool? isUnderstandOnTheAgreementChecked,
+    bool? isTaxAgreementChecked,
+    bool? isRiskDisclosureAgreementChecked,
     bool? isCertifyNotUSCitizenAgreementChecked,
     bool? isSignatureDrew,
     String? customerSignature,
     String? signedTime,
   }) {
-    return SigningBrokerAgreementState(
+    return SigningAgreementState(
+      signatureController: signatureController,
       isAlpacaCustomerAgreementOpened: isAlpacaCustomerAgreementOpened ??
           this.isAlpacaCustomerAgreementOpened,
       isAskLoraClientAgreementOpened:
@@ -51,18 +57,19 @@ class SigningBrokerAgreementState extends Equatable {
       isCertifyNotUSCitizenAgreementChecked:
           isCertifyNotUSCitizenAgreementChecked ??
               this.isCertifyNotUSCitizenAgreementChecked,
+      isRiskDisclosureAgreementChecked: isRiskDisclosureAgreementChecked ??
+          this.isRiskDisclosureAgreementChecked,
       isBoundByAlpacaAndLoraAgreementChecked:
           isBoundByAlpacaAndLoraAgreementChecked ??
               this.isBoundByAlpacaAndLoraAgreementChecked,
       isUnderstandOnTheAgreementChecked: isUnderstandOnTheAgreementChecked ??
           this.isUnderstandOnTheAgreementChecked,
-      isSignatureDrew: isSignatureDrew ?? this.isSignatureDrew,
       customerSignature: customerSignature ?? this.customerSignature,
       signedTime: signedTime ?? this.signedTime,
     );
   }
 
-  bool disabledNextButton() {
+  bool disabledBrokerButton() {
     if (isAlpacaCustomerAgreementOpened &&
         isBoundByAlpacaAndLoraAgreementChecked &&
         isUnderstandOnTheAgreementChecked &&
