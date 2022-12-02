@@ -47,6 +47,7 @@ dependencies:
   photo_view: ^0.14.0
   carousel_slider: ^4.1.1
   dotted_border: ^2.0.0+3
+  google_fonts: ^3.0.1
 
 #dependency_overrides:
 #  firebase_core_platform_interface: 4.5.1
@@ -71,6 +72,7 @@ flutter:
     - assets/icons/
     - assets/json/
     - .env
+    - google_fonts/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

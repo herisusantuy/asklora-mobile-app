@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 enum FontType {
   highlight,
@@ -17,6 +18,7 @@ enum FontType {
   button,
   note,
   smallNote,
+  smallNoteBold,
   formTitle,
   formInfield,
   mobileMenu,
@@ -93,6 +95,7 @@ class CustomText extends StatelessWidget {
         fontType = 13;
         break;
       case FontType.smallNote:
+      case FontType.smallNoteBold:
         fontType = 12;
         break;
       case FontType.mobileMenu:
@@ -118,6 +121,7 @@ class CustomText extends StatelessWidget {
       case FontType.h5:
       case FontType.bodyTextBold:
       case FontType.smallTextBold:
+      case FontType.smallNoteBold:
         boldText = FontWeight.bold;
         break;
       case FontType.h4SemiBold:
@@ -131,13 +135,14 @@ class CustomText extends StatelessWidget {
       margin: margin,
       child: Text(
         text,
-        style: TextStyle(
-            color: color,
-            fontSize: fontType,
-            fontWeight: boldText,
-            decoration: decoration,
-            height: height,
-            fontStyle: fontStyle),
+        style: GoogleFonts.mulish(
+            textStyle: TextStyle(
+                color: color,
+                fontSize: fontType,
+                fontWeight: boldText,
+                decoration: decoration,
+                height: height,
+                fontStyle: fontStyle)),
         overflow: ellipsis ? TextOverflow.ellipsis : null,
         textAlign: textAlign,
         maxLines: maxLines,

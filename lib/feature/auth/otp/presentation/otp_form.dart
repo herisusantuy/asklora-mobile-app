@@ -9,7 +9,7 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
-import '../../../../core/styles/color.dart';
+import '../../../../core/styles/asklora_colors.dart';
 import '../../sign_up/presentation/sign_up_success_screen.dart';
 import '../bloc/otp_bloc.dart';
 
