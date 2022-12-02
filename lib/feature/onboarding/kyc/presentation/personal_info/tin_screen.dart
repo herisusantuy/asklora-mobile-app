@@ -29,6 +29,7 @@ class TinScreen extends StatelessWidget {
         children: [
           const CustomText(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit OTP is sent to your SMS.',
+            key: Key('sub_title'),
             type: FontType.smallText,
             padding: AppValues.screenHorizontalPadding,
           ),
@@ -49,6 +50,7 @@ class TinScreen extends StatelessWidget {
                     previous.countryNameOfTaxResidence !=
                         current.countryNameOfTaxResidence,
                 builder: (context, state) => CustomTextInput(
+                    key: const Key('tin_input'),
                     labelText: 'TIN Number',
                     textInputType: TextInputType.number,
                     hintText:

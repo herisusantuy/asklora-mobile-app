@@ -49,6 +49,7 @@ class OtpScreen extends StatelessWidget {
           children: [
             const CustomText(
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit OTP is sent to your SMS.',
+              key: Key('sub_title'),
               type: FontType.smallText,
               padding: AppValues.screenHorizontalPadding,
             ),
@@ -102,6 +103,7 @@ class OtpScreen extends StatelessWidget {
       padding: AppValues.screenHorizontalPadding.copyWith(top: 32),
       child: BlocBuilder<OtpBloc, OtpState>(builder: (context, state) {
         return CustomTextInput(
+          key: const Key('otp_input'),
           labelText: 'OTP',
           textInputType: TextInputType.number,
           hintText: '0000 (4 digit)',

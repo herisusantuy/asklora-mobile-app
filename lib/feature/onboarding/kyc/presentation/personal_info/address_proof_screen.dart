@@ -29,32 +29,37 @@ class AddressProofScreen extends StatelessWidget {
         onPointerDown: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        child: ListView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 24),
-          children: [
-            const CustomText(
-              'Please provide your permanent residential address.',
-              type: FontType.smallText,
-              padding: AppValues.screenHorizontalPadding,
-            ),
-            _textInput(
-                label: 'Address Line 1',
-                onChanged: (value) => context
-                    .read<AddressProofBloc>()
-                    .add(AddressLine1Changed(value)),
-                hintText: 'Address Line 1',
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 38)),
-            _textInput(
-                label: 'Address Line 2',
-                onChanged: (value) => context
-                    .read<AddressProofBloc>()
-                    .add(AddressLine2Changed(value)),
-                hintText: 'Address Line 2',
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 28)),
-            _district,
-            _region,
-            _addressImageProof
-          ],
+          child: Column(
+            children: [
+              const CustomText(
+                'Please provide your permanent residential address.',
+                key: Key('sub_title'),
+                type: FontType.smallText,
+                padding: AppValues.screenHorizontalPadding,
+              ),
+              _textInput(
+                  key: const Key('address_line_1'),
+                  label: 'Address Line 1',
+                  onChanged: (value) => context
+                      .read<AddressProofBloc>()
+                      .add(AddressLine1Changed(value)),
+                  hintText: 'Address Line 1',
+                  padding: AppValues.screenHorizontalPadding.copyWith(top: 38)),
+              _textInput(
+                  key: const Key('address_line_2'),
+                  label: 'Address Line 2',
+                  onChanged: (value) => context
+                      .read<AddressProofBloc>()
+                      .add(AddressLine2Changed(value)),
+                  hintText: 'Address Line 2',
+                  padding: AppValues.screenHorizontalPadding.copyWith(top: 28)),
+              _district,
+              _region,
+              _addressImageProof
+            ],
+          ),
         ),
       ),
       bottomButton: _bottomButton,
@@ -66,6 +71,7 @@ class AddressProofScreen extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.addressProofImages != current.addressProofImages,
           builder: (context, state) => CustomImagePicker(
+                key: const Key('address_proof_image_picker'),
                 padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 title: 'Upload Address Proof',
                 initialValue: state.addressProofImages,
@@ -100,7 +106,7 @@ class AddressProofScreen extends StatelessWidget {
       builder: (context, state) => Padding(
             padding: AppValues.screenHorizontalPadding.copyWith(top: 12),
             child: CustomDropdown(
-                key: const Key('district_picker'),
+                key: const Key('region_picker'),
                 padding: const EdgeInsets.only(top: 10),
                 isDense: false,
                 label: 'Region',
@@ -117,10 +123,12 @@ class AddressProofScreen extends StatelessWidget {
           {required String label,
           EdgeInsets padding = EdgeInsets.zero,
           required Function(String) onChanged,
-          String hintText = ''}) =>
+          String hintText = '',
+          required Key key}) =>
       Padding(
         padding: padding,
         child: CustomTextInput(
+          key: key,
           onChanged: onChanged,
           labelText: label,
           hintText: hintText,
