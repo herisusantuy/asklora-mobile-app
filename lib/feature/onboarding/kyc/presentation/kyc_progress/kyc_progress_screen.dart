@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
-import '../../../welcome/widgets/memoji_widget.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/custom_silver_box.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
@@ -21,7 +21,7 @@ class KycProgressScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const MEmojiWidget(
+          const LoraMemojiWidget(
               text:
                   'Here is the last step before unlocking the painless invesment experience.',
               imageAsset: '/'),
