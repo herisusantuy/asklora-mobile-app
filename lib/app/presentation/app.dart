@@ -5,7 +5,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/utils/route_generator.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
-import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
+import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../home_screen.dart';
 import '../bloc/app_bloc.dart';
 
 class App extends StatelessWidget {
@@ -31,7 +32,7 @@ class App extends StatelessWidget {
                 case AppStatus.authenticated:
                   return const SignInSuccessScreen();
                 case AppStatus.unauthenticated:
-                  return const KycScreen();
+                  return const CarouselScreen();
                 case AppStatus.unknown:
                   return const SizedBox();
               }

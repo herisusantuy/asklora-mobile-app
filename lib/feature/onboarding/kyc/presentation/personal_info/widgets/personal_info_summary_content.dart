@@ -13,58 +13,63 @@ class PersonalInfoSummaryContent extends StatelessWidget {
   final BasicInformationState basicInformationState;
   final AddressProofState addressProofState;
   final CountryOfTaxResidenceState countryOfTaxResidenceState;
-  const PersonalInfoSummaryContent({Key? key, required this.basicInformationState, required this.addressProofState, required this.countryOfTaxResidenceState, required this.title}) : super(key: key);
+  const PersonalInfoSummaryContent(
+      {Key? key,
+      required this.basicInformationState,
+      required this.addressProofState,
+      required this.countryOfTaxResidenceState,
+      required this.title})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context)=>Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        KycSubTitle(
-          subTitle: title,
-          padding: AppValues.screenHorizontalPadding.copyWith(bottom: 6),
-        ),
-        SummaryTextInfo(
-            title:
-            'Are you a United States tax resident, green card holder or citizens ?',
-            subTitle: basicInformationState.isUnitedStateResident != null
-                ? basicInformationState.isUnitedStateResident!
-                ? 'Yes'
-                : 'No'
-                : 'Unknown'),
-        SummaryTextInfo(
-            title: 'Are you a Hong Kong citizen or resident ?',
-            subTitle:
-            basicInformationState.isHongKongPermanentResident != null
-                ? basicInformationState.isHongKongPermanentResident!
-                ? 'Yes'
-                : 'No'
-                : 'Unknown'),
-        SummaryTextInfo(
-            title: 'English First Name',
-            subTitle: basicInformationState.firstName),
-        SummaryTextInfo(
-            title: 'English Last Name',
-            subTitle: basicInformationState.lastName),
-        SummaryTextInfo(title: 'Sex', subTitle: basicInformationState.gender),
-        SummaryTextInfo(
-            title: 'Day of Birth',
-            subTitle: basicInformationState.dateOfBirth),
-        SummaryTextInfo(
-            title: 'Phone', subTitle: basicInformationState.phoneNumber),
-        SummaryTextInfo(
-            title: 'TIN Number',
-            subTitle: countryOfTaxResidenceState.tinNumber),
-        SummaryTextInfo(
-            title: 'Address', subTitle: addressProofState.addressLine1),
-        SummaryTextInfo(
-            title: 'Address 2', subTitle: addressProofState.addressLine2),
-        CustomImagePicker(
-          padding: AppValues.screenHorizontalPadding,
-          initialValue: addressProofState.addressProofImages,
-          title: '',
-          disabled: true,
-        )
-      ],
-    );
-
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          KycSubTitle(
+            subTitle: title,
+            padding: AppValues.screenHorizontalPadding.copyWith(bottom: 6),
+          ),
+          SummaryTextInfo(
+              title:
+                  'Are you a United States tax resident, green card holder or citizens ?',
+              subTitle: basicInformationState.isUnitedStateResident != null
+                  ? basicInformationState.isUnitedStateResident!
+                      ? 'Yes'
+                      : 'No'
+                  : 'Unknown'),
+          SummaryTextInfo(
+              title: 'Are you a Hong Kong citizen or resident ?',
+              subTitle:
+                  basicInformationState.isHongKongPermanentResident != null
+                      ? basicInformationState.isHongKongPermanentResident!
+                          ? 'Yes'
+                          : 'No'
+                      : 'Unknown'),
+          SummaryTextInfo(
+              title: 'English First Name',
+              subTitle: basicInformationState.firstName),
+          SummaryTextInfo(
+              title: 'English Last Name',
+              subTitle: basicInformationState.lastName),
+          SummaryTextInfo(title: 'Sex', subTitle: basicInformationState.gender),
+          SummaryTextInfo(
+              title: 'Day of Birth',
+              subTitle: basicInformationState.dateOfBirth),
+          SummaryTextInfo(
+              title: 'Phone', subTitle: basicInformationState.phoneNumber),
+          SummaryTextInfo(
+              title: 'TIN Number',
+              subTitle: countryOfTaxResidenceState.tinNumber),
+          SummaryTextInfo(
+              title: 'Address', subTitle: addressProofState.addressLine1),
+          SummaryTextInfo(
+              title: 'Address 2', subTitle: addressProofState.addressLine2),
+          CustomImagePicker(
+            padding: AppValues.screenHorizontalPadding,
+            initialValue: addressProofState.addressProofImages,
+            title: '',
+            disabled: true,
+          )
+        ],
+      );
 }

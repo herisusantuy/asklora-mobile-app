@@ -39,9 +39,9 @@ class OtpBox extends StatelessWidget {
       pinTheme: PinTheme(
           shape: PinCodeFieldShape.underline,
           fieldWidth: _fieldWidth(context),
-          inactiveColor: COLORS.text,
-          selectedColor: COLORS.primary,
-          activeColor: COLORS.text),
+          inactiveColor: AskLoraColors.text,
+          selectedColor: AskLoraColors.primary,
+          activeColor: AskLoraColors.text),
       animationDuration: const Duration(milliseconds: 200),
       onCompleted: onCompleted,
       onChanged: (value) => onChanged,

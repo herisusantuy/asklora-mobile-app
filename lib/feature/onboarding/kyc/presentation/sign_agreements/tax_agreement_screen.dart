@@ -79,12 +79,12 @@ class TaxAgreementScreen extends StatelessWidget {
         padding: AppValues.screenHorizontalPadding.copyWith(top: 6, left: 38),
       );
 
-  Widget _bottomButton(BuildContext context) =>KycButtonPair(
-    primaryButtonOnClick: () => context
-        .read<NavigationBloc<KycPageStep>>()
-        .add(const PageChanged(KycPageStep.kycSummary)),
-    secondaryButtonOnClick: () => CarouselScreen.open(context),
-    primaryButtonLabel: 'AGREE',
-    secondaryButtonLabel: 'CONTINUE LATER',
-  );
+  Widget _bottomButton(BuildContext context) => KycButtonPair(
+        primaryButtonOnClick: () => context
+            .read<NavigationBloc<KycPageStep>>()
+            .add(const PageChanged(KycPageStep.kycSummary)),
+        secondaryButtonOnClick: () => CarouselScreen.open(context),
+        primaryButtonLabel: 'AGREE',
+        secondaryButtonLabel: 'CONTINUE LATER',
+      );
 }

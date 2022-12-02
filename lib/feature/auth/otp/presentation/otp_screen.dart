@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/otp/verify_otp_request.dart';
-import '../../../../core/styles/color.dart';
+import '../../../../core/styles/asklora_colors.dart';
 import '../bloc/otp_bloc.dart';
 import '../repository/otp_repository.dart';
 import 'otp_form.dart';
@@ -19,7 +19,7 @@ class OtpScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          foregroundColor: COLORS.text,
+          foregroundColor: AskLoraColors.text,
           elevation: 0,
         ),
         body: SafeArea(
