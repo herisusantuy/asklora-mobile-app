@@ -8,17 +8,21 @@ class DotText extends StatelessWidget {
   final EdgeInsets padding;
   final double fontHeight;
 
-  const DotText(this.text, {this.color = Colors.black, this.padding = EdgeInsets.zero, this.fontHeight=1,Key? key})
+  const DotText(this.text,
+      {this.color = Colors.black,
+      this.padding = EdgeInsets.zero,
+      this.fontHeight = 1,
+      Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding:padding,
+        padding: padding,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding:  EdgeInsets.only(top: 6.0+fontHeight*2),
+              padding: EdgeInsets.only(top: 6.0 + fontHeight * 2),
               child: Icon(
                 Icons.circle,
                 size: 6,

@@ -35,7 +35,8 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
         child: PersonalInfoSummaryContent(
           basicInformationState: basicInformationState,
           addressProofState: addressProofState,
-          countryOfTaxResidenceState: countryOfTaxResidenceState, title: 'Summary',
+          countryOfTaxResidenceState: countryOfTaxResidenceState,
+          title: 'Summary',
         ),
       ),
       bottomButton: _bottomButton(context),

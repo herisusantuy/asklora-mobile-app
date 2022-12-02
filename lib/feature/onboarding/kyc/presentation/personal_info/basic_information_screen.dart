@@ -44,7 +44,7 @@ class BasicInformationScreen extends StatelessWidget {
                 padding: AppValues.screenHorizontalPadding,
               ),
               _textInput(
-                key: const Key('first_name'),
+                  key: const Key('first_name'),
                   label: 'English First Name',
                   onChanged: (value) => context
                       .read<BasicInformationBloc>()
@@ -144,7 +144,8 @@ class BasicInformationScreen extends StatelessWidget {
   Widget _textInput(
           {required String label,
           EdgeInsets padding = EdgeInsets.zero,
-          required Function(String) onChanged, required Key key}) =>
+          required Function(String) onChanged,
+          required Key key}) =>
       Padding(
         padding: padding,
         child: CustomTextInput(

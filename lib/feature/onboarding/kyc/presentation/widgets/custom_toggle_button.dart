@@ -61,7 +61,7 @@ class CustomToggleButton extends StatelessWidget {
       required BorderRadius borderRadius}) {
     return Expanded(
       child: GestureDetector(
-        key:Key('$title-$choice'),
+        key: Key('$title-$choice'),
         onTap: () => onSelected(choice),
         child: Container(
           decoration: BoxDecoration(

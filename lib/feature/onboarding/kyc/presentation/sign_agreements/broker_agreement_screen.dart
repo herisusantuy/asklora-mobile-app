@@ -14,7 +14,8 @@ import 'widgets/signature_drawer.dart';
 class BrokerAgreementScreen extends StatelessWidget {
   final double progress;
 
-  const BrokerAgreementScreen({required this.progress, Key? key}) : super(key: key);
+  const BrokerAgreementScreen({required this.progress, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -152,16 +153,19 @@ class BrokerAgreementScreen extends StatelessWidget {
 
   Widget get _customerSignature =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
-        buildWhen: (previous,current)=>previous.customerSignature!=current.customerSignature,
+        buildWhen: (previous, current) =>
+            previous.customerSignature != current.customerSignature,
         builder: (context, state) => SignatureDrawer(
-            key: const Key('customer_signature_drawer'),
-            initialValue: state.customerSignature,
-            onSubmit: () => context
-                .read<SigningAgreementBloc>()
-                .add(const CustomerSignatureDrew()),
-            onReset: () => context
-                .read<SigningAgreementBloc>()
-                .add(const CustomerSignatureReset()), signatureController: state.signatureController,),
+          key: const Key('customer_signature_drawer'),
+          initialValue: state.customerSignature,
+          onSubmit: () => context
+              .read<SigningAgreementBloc>()
+              .add(const CustomerSignatureDrew()),
+          onReset: () => context
+              .read<SigningAgreementBloc>()
+              .add(const CustomerSignatureReset()),
+          signatureController: state.signatureController,
+        ),
       );
 
   Widget _bottomButton(BuildContext context) =>
@@ -171,7 +175,8 @@ class BrokerAgreementScreen extends StatelessWidget {
           builder: (context, state) => KycButtonPair(
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()
-                    .add(const PageChanged(KycPageStep.signRiskDisclosureAgreements)),
+                    .add(const PageChanged(
+                        KycPageStep.signRiskDisclosureAgreements)),
                 secondaryButtonOnClick: () => CarouselScreen.open(context),
                 disablePrimaryButton: state.disabledBrokerButton(),
                 primaryButtonLabel: 'AGREE',

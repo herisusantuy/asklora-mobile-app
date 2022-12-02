@@ -48,7 +48,7 @@ class ResidentCheckScreen extends StatelessWidget {
 
   Widget get _isUnitedStatesResident => BlocBuilder<BasicInformationBloc,
           BasicInformationState>(
-    key: const Key('is_united_states_resident'),
+      key: const Key('is_united_states_resident'),
       buildWhen: (previous, current) =>
           previous.isUnitedStateResident != current.isUnitedStateResident,
       builder: (context, state) => CustomToggleButton(

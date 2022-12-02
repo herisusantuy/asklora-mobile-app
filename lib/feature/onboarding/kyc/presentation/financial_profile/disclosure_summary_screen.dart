@@ -27,7 +27,8 @@ class DisclosureSummaryScreen extends StatelessWidget {
       content: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 24),
         child: DisclosureSummaryContent(
-          disclosureAffiliationState: disclosureAffiliationState, title: 'Summary',
+          disclosureAffiliationState: disclosureAffiliationState,
+          title: 'Summary',
         ),
       ),
       bottomButton: _bottomButton(context),
