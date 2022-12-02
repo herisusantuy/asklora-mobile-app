@@ -50,7 +50,7 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
   }
 
   Widget get _licenseeProfile => CustomSilverBox(
-    key: const Key('licensee_profile'),
+        key: const Key('licensee_profile'),
         title: '',
         content: Row(
           children: [
