@@ -51,7 +51,7 @@ void main() {
           await tester.pumpAndSettle();
           await tester.tap(find.byKey(Key(
               '${personalisedQuestions[index].uid}-${_randomSelectedIndex(personalisedQuestions[index].questions!.choices!.length)}')));
-          await tester.pumpAndSettle();
+          await tester.pump();
           await tester.tap(questionNextButton);
           await tester.pump();
         } else if (personalisedQuestions[index].questions!.types ==

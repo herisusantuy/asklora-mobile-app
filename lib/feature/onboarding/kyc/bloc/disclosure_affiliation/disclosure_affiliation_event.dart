@@ -25,10 +25,10 @@ class AffiliatedCommissionChanged extends DisclosuresAffiliationEvent {
   List<Object> get props => [isAffiliatedCommission];
 }
 
-class AffiliateAssociatesChanged extends DisclosuresAffiliationEvent {
+class AffiliatedAssociatesChanged extends DisclosuresAffiliationEvent {
   final bool isAffiliatedAssociates;
 
-  const AffiliateAssociatesChanged(this.isAffiliatedAssociates) : super();
+  const AffiliatedAssociatesChanged(this.isAffiliatedAssociates) : super();
 
   @override
   List<Object> get props => [isAffiliatedAssociates];

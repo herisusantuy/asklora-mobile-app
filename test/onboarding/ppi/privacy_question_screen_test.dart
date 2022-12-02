@@ -50,7 +50,7 @@ void main() async {
           await tester.pumpAndSettle();
           await tester.tap(find.byKey(Key(
               '${privacyQuestions[index].uid}-${_randomSelectedIndex(privacyQuestions[index].questions!.choices!.length)}')));
-          await tester.pumpAndSettle();
+          await tester.pump();
           await tester.tap(questionNextButton);
           await tester.pump();
         } else if (privacyQuestions[index].questions!.types ==
