@@ -55,7 +55,7 @@ void main() async {
           await tester.pumpAndSettle();
           await tester.tap(find.byKey(Key(
               '${investmentStyle[index].uid}-${_randomSelectedIndex(investmentStyle[index].questions!.choices!.length)}')));
-          await tester.pumpAndSettle();
+          await tester.pump();
           await tester.tap(questionNextButton);
           await tester.pump();
         } else if (investmentStyle[index].questions!.types ==

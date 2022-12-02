@@ -84,6 +84,7 @@ class AddressProofScreen extends StatelessWidget {
               ));
 
   final districts = const ['Southern', 'Western', 'Eastern', 'Northern'];
+  final region = const ['Hong Kong Island'];
 
   Widget get _district => BlocBuilder<AddressProofBloc, AddressProofState>(
       builder: (context, state) => Padding(
@@ -112,7 +113,7 @@ class AddressProofScreen extends StatelessWidget {
                 label: 'Region',
                 hintName: 'Region',
                 value: state.region,
-                itemsList: districts,
+                itemsList: region,
                 border: const OutlineInputBorder(),
                 onChanged: (value) => context
                     .read<AddressProofBloc>()

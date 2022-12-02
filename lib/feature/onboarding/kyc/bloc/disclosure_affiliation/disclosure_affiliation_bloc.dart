@@ -9,7 +9,7 @@ class DisclosureAffiliationBloc
     extends Bloc<DisclosuresAffiliationEvent, DisclosureAffiliationState> {
   DisclosureAffiliationBloc() : super(const DisclosureAffiliationState()) {
     on<AffiliatedPersonChanged>(_onAffiliatedPersonChanged);
-    on<AffiliateAssociatesChanged>(_onAffiliateAssociatesChanged);
+    on<AffiliatedAssociatesChanged>(_onAffiliateAssociatesChanged);
     on<AffiliatedCommissionChanged>(_onAffiliateCommissionChanged);
     on<AffiliatePersonFirstNameChanged>(_onAffiliatePersonFirstNameChanged);
     on<AffiliatePersonLastNameChanged>(_onAffiliatePersonLastNameChanged);
@@ -28,7 +28,7 @@ class DisclosureAffiliationBloc
     }
   }
 
-  _onAffiliateAssociatesChanged(AffiliateAssociatesChanged event,
+  _onAffiliateAssociatesChanged(AffiliatedAssociatesChanged event,
       Emitter<DisclosureAffiliationState> emit) {
     emit(state.copyWith(isAffiliatedAssociates: event.isAffiliatedAssociates));
   }

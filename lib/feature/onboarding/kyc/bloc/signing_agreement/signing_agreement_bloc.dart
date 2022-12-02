@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:signature/signature.dart';
@@ -78,7 +75,8 @@ class SigningAgreementBloc
   _onCustomerSignatureDrew(
       CustomerSignatureDrew event, Emitter<SigningAgreementState> emit) async {
     emit(state.copyWith(
-        customerSignature: await _getCustomerSignature(),
+        customerSignature: await _signingBrokerAgreementRepository
+            .getCustomerSignature(state.signatureController.points),
         isSignatureDrew: true,
         signedTime: DateFormat('yyyy-MM-ddThh:mm').format(DateTime.now())));
   }
@@ -88,16 +86,5 @@ class SigningAgreementBloc
     _signatureController.clear();
     emit(state.copyWith(
         customerSignature: '', isSignatureDrew: false, signedTime: ''));
-  }
-
-  Future<String> _getCustomerSignature() async {
-    final exportController = SignatureController(
-      penStrokeWidth: 2,
-      penColor: Colors.black,
-      exportBackgroundColor: Colors.transparent,
-      points: _signatureController.points,
-    );
-    final bytes = await exportController.toPngBytes();
-    return bytes != null ? base64Encode(bytes) : '';
   }
 }

@@ -136,15 +136,124 @@ void main() {
         expect(find.text('hong kong'), findsOneWidget);
         expect(find.text('indonesia'), findsOneWidget);
         await tester.pump();
+      });
 
-        await tester.tap(regionPicker);
-        await tester.pump();
-        await tester.tap(find.text('Western').last);
-        await tester.pump();
-        await tester.tap(districtPicker);
-        await tester.pump();
-        await tester.tap(find.text('Western').last);
-        await tester.pump();
+      testWidgets('Show personal info summary', (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.personalInfoSummary);
+        expect(find.byKey(const Key('personal_info_summary_content')),
+            findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Show personal info summary', (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.personalInfoSummary);
+        expect(find.byKey(const Key('personal_info_summary_content')),
+            findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Show disclosure affiliation person',
+          (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.disclosureAffiliationPerson);
+        expect(find.byKey(const Key('financial_question')), findsOneWidget);
+        expect(find.byKey(const Key('choices_button')), findsOneWidget);
+      });
+
+      testWidgets('Show disclosure affiliation person input',
+          (WidgetTester tester) async {
+        await buildKycScreen(
+            tester, KycPageStep.disclosureAffiliationPersonInput);
+        expect(find.byKey(const Key('disclosure_affiliation_input')),
+            findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Show disclosure affiliation associates',
+          (WidgetTester tester) async {
+        await buildKycScreen(
+            tester, KycPageStep.disclosureAffiliationAssociates);
+        expect(find.byKey(const Key('financial_question')), findsOneWidget);
+        expect(find.byKey(const Key('choices_button')), findsOneWidget);
+      });
+
+      testWidgets('Show disclosure affiliation commissions',
+          (WidgetTester tester) async {
+        await buildKycScreen(
+            tester, KycPageStep.disclosureAffiliationCommissions);
+        expect(find.byKey(const Key('financial_question')), findsOneWidget);
+        expect(find.byKey(const Key('choices_button')), findsOneWidget);
+      });
+
+      testWidgets('Show disclosure affiliation rejected screen',
+          (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.disclosureRejected);
+        expect(find.byKey(const Key('rejected_title')), findsOneWidget);
+        expect(find.byKey(const Key('rejected_sign')), findsOneWidget);
+        expect(find.byKey(const Key('rejected_reason')), findsOneWidget);
+      });
+
+      testWidgets('Show disclosure summary', (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.disclosureSummary);
+        expect(find.byKey(const Key('disclosure_summary_content')),
+            findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Show verify identity screen', (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.verifyIdentity);
+        expect(find.byKey(const Key('sub_title')), findsOneWidget);
+        expect(find.byKey(const Key('verification_steps')), findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Show broker agreement customer screen',
+          (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.signBrokerAgreements);
+        expect(find.byKey(const Key('alpaca_agreement')), findsOneWidget);
+        expect(find.byKey(const Key('asklora_agreement')), findsOneWidget);
+        expect(find.byKey(const Key('bound_alpaca_lora_agreement_checkbox')),
+            findsOneWidget);
+        expect(find.byKey(const Key('understand_agreement_checkbox')),
+            findsOneWidget);
+        expect(find.byKey(const Key('certify_not_us_citizen_checkbox')),
+            findsOneWidget);
+        expect(
+            find.byKey(const Key('customer_signature_drawer')), findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Show risk disclosure agreement screen',
+          (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.signRiskDisclosureAgreements);
+        expect(find.byKey(const Key('sub_title')), findsOneWidget);
+        expect(find.byKey(const Key('statements')), findsOneWidget);
+        expect(find.byKey(const Key('licensee_profile')), findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Show Tax agreement screen', (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.signTaxAgreements);
+        expect(find.byKey(const Key('sub_title')), findsOneWidget);
+        expect(find.byKey(const Key('statements')), findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Kyc Summary screen', (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.kycSummary);
+        expect(find.byKey(const Key('personal_info_summary_content')),
+            findsOneWidget);
+        expect(find.byKey(const Key('financial_profile_summary_content')),
+            findsOneWidget);
+        expect(find.byKey(const Key('sign_agreement_summary_content')),
+            findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
+      });
+
+      testWidgets('Gift Bot Stock screen', (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.giftBotStock);
+        expect(find.byKey(const Key('sub_title')), findsOneWidget);
+        expect(find.byKey(const Key('success_sign')), findsOneWidget);
+        expect(kycButtonPair, findsOneWidget);
       });
     },
   );

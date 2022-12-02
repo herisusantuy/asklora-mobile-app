@@ -29,12 +29,14 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
         children: [
           _licenseeProfile,
           KycSubTitle(
+            key: const Key('sub_title'),
             subTitle: 'Risk Disclosure Statement',
             padding:
                 AppValues.screenHorizontalPadding.copyWith(bottom: 20, top: 32),
           ),
           const CustomText(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a, elementum enim a elit at sit bibendum vestibulum. Lorem pellentesque diam in neque. Nam nibh et ornare odio scelerisque. In id morbi integer orci. Donec condimentum tortor scelerisque diam. Facilisi sollicitudin elit velit, hendrerit enim. Eleifend in pharetra vel blandit pharetra vulputate odio vitae, mattis. Aliquam luctus dui convallis eget dolor sem urna enim. Odio viverra fermentum pellentesque blandit sollicitudin integer facilisis et velit. Pulvinar consectetur massa libero cras euismod. Viverra urna proin nibh nulla nibh a eu facilisis. Adipiscing nec nam tempus lacus et turpis nunc. Ornare sed risus vivamus arcu morbi diam. Eget maecenas felis ornare tincidunt urna diam purus sed. Posuere sit amet id hendrerit a. Egestas ut vitae arcu nibh est tortor sit. Ullamcorper tempus, nam habitasse pharetra. Eleifend euismod urna, sed pretium dignissim in vel faucibus bibendum. Ullamcorper non mollis ac scelerisque pharetra cras.',
+            key: Key('statements'),
             type: FontType.smallText,
             padding: AppValues.screenHorizontalPadding,
             height: 1.6,
@@ -48,6 +50,7 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
   }
 
   Widget get _licenseeProfile => CustomSilverBox(
+        key: const Key('licensee_profile'),
         title: '',
         content: Row(
           children: [

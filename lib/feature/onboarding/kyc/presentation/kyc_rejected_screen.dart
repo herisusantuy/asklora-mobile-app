@@ -25,17 +25,20 @@ class KycRejectedScreen extends StatelessWidget {
             children: [
               const CustomText(
                 'Sorry ! you’re not eligible for Asklora',
+                key: Key('rejected_title'),
                 type: FontType.h3W800,
                 textAlign: TextAlign.center,
                 padding: EdgeInsets.only(top: 64, left: 28, right: 28),
               ),
               const CustomText(
                 '-Image-',
+                key: Key('rejected_sign'),
                 padding: EdgeInsets.only(top: 56),
                 textAlign: TextAlign.center,
               ),
               CustomText(
                 rejectedReason,
+                key: const Key('rejected_reason'),
                 type: FontType.smallText,
                 padding: const EdgeInsets.only(top: 32, left: 28, right: 28),
                 textAlign: TextAlign.center,

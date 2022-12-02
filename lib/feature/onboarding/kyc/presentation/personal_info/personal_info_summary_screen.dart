@@ -33,6 +33,7 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
       content: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 24),
         child: PersonalInfoSummaryContent(
+          key: const Key('personal_info_summary_content'),
           basicInformationState: basicInformationState,
           addressProofState: addressProofState,
           countryOfTaxResidenceState: countryOfTaxResidenceState,

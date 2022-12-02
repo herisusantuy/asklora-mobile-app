@@ -38,6 +38,7 @@ class DisclosureAffiliationCommissionScreen extends StatelessWidget {
         ),
       ),
       bottomButton: ChoicesButton(
+        key: const Key('choices_button'),
         onAnswerYes: () => context
             .read<DisclosureAffiliationBloc>()
             .add(const AffiliatedCommissionChanged(true)),

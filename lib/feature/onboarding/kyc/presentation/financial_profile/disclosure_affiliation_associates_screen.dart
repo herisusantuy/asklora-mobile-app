@@ -38,12 +38,13 @@ class DisclosureAffiliationAssociatesScreen extends StatelessWidget {
         ),
       ),
       bottomButton: ChoicesButton(
+        key: const Key('choices_button'),
         onAnswerYes: () => context
             .read<DisclosureAffiliationBloc>()
-            .add(const AffiliateAssociatesChanged(true)),
+            .add(const AffiliatedAssociatesChanged(true)),
         onAnswerNo: () => context
             .read<DisclosureAffiliationBloc>()
-            .add(const AffiliateAssociatesChanged(false)),
+            .add(const AffiliatedAssociatesChanged(false)),
         onSaveForLater: () => CarouselScreen.open(context),
       ),
       progress: progress,
