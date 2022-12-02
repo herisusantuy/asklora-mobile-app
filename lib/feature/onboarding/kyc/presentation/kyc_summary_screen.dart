@@ -9,6 +9,7 @@ import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/kyc_bloc.dart';
 import 'financial_profile/widgets/disclosure_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
+import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
 import 'widgets/kyc_base_form.dart';
 import 'widgets/kyc_button_pair.dart';
 
@@ -38,12 +39,22 @@ class KycSummaryScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 24),
         children: [
           PersonalInfoSummaryContent(
-              basicInformationState: basicInformationState,
-              addressProofState: addressProofState,
-              countryOfTaxResidenceState: countryOfTaxResidenceState, title: 'Personal Info',),
-          const SizedBox(height: 56,),
+            basicInformationState: basicInformationState,
+            addressProofState: addressProofState,
+            countryOfTaxResidenceState: countryOfTaxResidenceState,
+            title: 'Personal Info',
+          ),
+          const SizedBox(
+            height: 56,
+          ),
           DisclosureSummaryContent(
-              disclosureAffiliationState: disclosureAffiliationState, title: 'Financial Profile',)
+            disclosureAffiliationState: disclosureAffiliationState,
+            title: 'Financial Profile',
+          ),
+          const SizedBox(
+            height: 56,
+          ),
+          const SignAgreementSummaryContent(title: 'Agreements')
         ],
       ),
       bottomButton: _bottomButton(context),

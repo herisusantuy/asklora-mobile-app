@@ -12,6 +12,7 @@ import '../widgets/kyc_button_pair.dart';
 
 class ResidentCheckScreen extends StatelessWidget {
   final double progress;
+
   const ResidentCheckScreen({required this.progress, Key? key})
       : super(key: key);
 
@@ -34,8 +35,10 @@ class ResidentCheckScreen extends StatelessWidget {
         onTapBack: () =>
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
         title: 'Set Up Personal Info',
-        content: ListView(
-          children: [_isUnitedStatesResident, _isHongKongResident],
+        content: SingleChildScrollView(
+          child: Column(
+            children: [_isUnitedStatesResident, _isHongKongResident],
+          ),
         ),
         bottomButton: _bottomButton,
         progress: progress,
@@ -45,6 +48,7 @@ class ResidentCheckScreen extends StatelessWidget {
 
   Widget get _isUnitedStatesResident => BlocBuilder<BasicInformationBloc,
           BasicInformationState>(
+    key: const Key('is_united_states_resident'),
       buildWhen: (previous, current) =>
           previous.isUnitedStateResident != current.isUnitedStateResident,
       builder: (context, state) => CustomToggleButton(
@@ -63,6 +67,7 @@ class ResidentCheckScreen extends StatelessWidget {
 
   Widget get _isHongKongResident =>
       BlocBuilder<BasicInformationBloc, BasicInformationState>(
+          key: const Key('is_hong_kong_resident'),
           buildWhen: (previous, current) =>
               previous.isHongKongPermanentResident !=
               current.isHongKongPermanentResident,

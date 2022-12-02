@@ -75,6 +75,7 @@ class CustomDropdown extends StatelessWidget {
               items: itemsList
                   .map(
                     (element) => DropdownMenuItem<String>(
+                      key: Key(element),
                       value: element,
                       child: CustomText(
                         element,
@@ -89,23 +90,5 @@ class CustomDropdown extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  List<DropdownMenuItem<String>> buildDropdownMenuItems(List list) {
-    List<DropdownMenuItem<String>> dropDownItems = [];
-    for (var value in list) {
-      dropDownItems.add(
-        DropdownMenuItem<String>(
-          key: Key(value),
-          value: value,
-          child: CustomText(
-            value,
-            type: FontType.smallText,
-          ),
-        ),
-      );
-    }
-    print('the length ${dropDownItems.length}');
-    return dropDownItems;
   }
 }

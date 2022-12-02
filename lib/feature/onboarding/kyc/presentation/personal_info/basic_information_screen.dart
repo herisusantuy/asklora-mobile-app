@@ -34,31 +34,35 @@ class BasicInformationScreen extends StatelessWidget {
         onPointerDown: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        child: ListView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 24),
-          children: [
-            const CustomText(
-              'Please make sure your name is exactly the same as the information on identification document.',
-              type: FontType.smallText,
-              padding: AppValues.screenHorizontalPadding,
-            ),
-            _textInput(
-                label: 'English First Name',
-                onChanged: (value) => context
-                    .read<BasicInformationBloc>()
-                    .add(BasicInformationFirstNameChanged(value)),
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 38)),
-            _textInput(
-                label: 'English Last Name',
-                onChanged: (value) => context
-                    .read<BasicInformationBloc>()
-                    .add(BasicInformationLastNameChanged(value)),
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 28)),
-            _selectGender,
-            _nationality,
-            _dateOfBirth,
-            _countryCodeAndPhoneNumber
-          ],
+          child: Column(
+            children: [
+              const CustomText(
+                'Please make sure your name is exactly the same as the information on identification document.',
+                type: FontType.smallText,
+                padding: AppValues.screenHorizontalPadding,
+              ),
+              _textInput(
+                key: const Key('first_name'),
+                  label: 'English First Name',
+                  onChanged: (value) => context
+                      .read<BasicInformationBloc>()
+                      .add(BasicInformationFirstNameChanged(value)),
+                  padding: AppValues.screenHorizontalPadding.copyWith(top: 38)),
+              _textInput(
+                  key: const Key('last_name'),
+                  label: 'English First Name',
+                  onChanged: (value) => context
+                      .read<BasicInformationBloc>()
+                      .add(BasicInformationLastNameChanged(value)),
+                  padding: AppValues.screenHorizontalPadding.copyWith(top: 28)),
+              _selectGender,
+              _nationality,
+              _dateOfBirth,
+              _countryCodeAndPhoneNumber
+            ],
+          ),
         ),
       ),
       bottomButton: _bottomButton,
@@ -73,7 +77,7 @@ class BasicInformationScreen extends StatelessWidget {
           builder: (context, state) {
             final DateTime dateTimeNow = DateTime.now();
             return CustomDatePicker(
-              key: const Key('account_date_of_birth_picker'),
+              key: const Key('date_of_birth'),
               padding: const EdgeInsets.only(top: 10),
               label: 'Date of Birth',
               selectedDate: DateTime.parse(state.dateOfBirth),
@@ -95,7 +99,7 @@ class BasicInformationScreen extends StatelessWidget {
             previous.countryOfCitizenship != current.countryOfCitizenship,
         builder: (context, state) => CustomCountryPicker(
           height: 46,
-          key: const Key('account_country_of_citizenship_input'),
+          key: const Key('nationality'),
           title: 'Nationality',
           initialValue: state.countryNameOfCitizenship,
           onSelect: (Country country) => context
@@ -112,7 +116,7 @@ class BasicInformationScreen extends StatelessWidget {
                 previous.countryCode != current.countryCode ||
                 previous.phoneNumber != current.phoneNumber,
             builder: (context, state) => CustomPhoneNumberInput(
-                  key: const Key('account_country_code_phone_number_input'),
+                  key: const Key('phone_number'),
                   initialValueOfCodeArea: state.countryCode,
                   initialValueOfPhoneNumber: state.phoneNumber,
                   onChangedCodeArea: (country) => context
@@ -140,10 +144,11 @@ class BasicInformationScreen extends StatelessWidget {
   Widget _textInput(
           {required String label,
           EdgeInsets padding = EdgeInsets.zero,
-          required Function(String) onChanged}) =>
+          required Function(String) onChanged, required Key key}) =>
       Padding(
         padding: padding,
         child: CustomTextInput(
+          key: key,
           textCapitalization: TextCapitalization.words,
           onChanged: onChanged,
           labelText: label,

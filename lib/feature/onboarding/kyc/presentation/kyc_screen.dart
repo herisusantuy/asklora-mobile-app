@@ -17,6 +17,7 @@ import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affilia
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_person_input_screen.dart';
 import 'financial_profile/disclosure_affiliation_person_screen.dart';
 import 'financial_profile/disclosure_summary_screen.dart';
+import 'gift_bot_stock_screen.dart';
 import 'kyc_progress/kyc_progress_screen.dart';
 import 'kyc_rejected_screen.dart';
 import 'kyc_summary_screen.dart';
@@ -84,7 +85,9 @@ class KycScreen extends StatelessWidget {
         builder: (context, state) {
           switch (state.page) {
             case KycPageStep.progress:
-              return const KycProgressScreen();
+              return const KycProgressScreen(
+                currentStep: 1,
+              );
             case KycPageStep.residentCheck:
               return const ResidentCheckScreen(
                 progress: 0.05,
@@ -178,6 +181,8 @@ class KycScreen extends StatelessWidget {
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,
               );
+            case KycPageStep.giftBotStock:
+              return const GiftBotStockScreen();
             default:
               return const SizedBox.shrink();
           }

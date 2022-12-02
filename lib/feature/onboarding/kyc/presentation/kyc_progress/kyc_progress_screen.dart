@@ -12,25 +12,29 @@ import '../widgets/custom_stepper/custom_stepper.dart';
 import '../widgets/kyc_button_pair.dart';
 
 class KycProgressScreen extends StatelessWidget {
-  const KycProgressScreen({Key? key}) : super(key: key);
+  final int currentStep;
+
+  const KycProgressScreen({this.currentStep = 0, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        const MEmojiWidget(
-            text:
-                'Here is the last step before unlocking the painless invesment experience.',
-            imageAsset: '/'),
-        _kycSteps,
-        _neededItems,
-        const CustomText(
-          'Once you started, you can always take a break and resume to the process whenever you want.',
-          type: FontType.smallText,
-          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-        ),
-        _bottomButton(context)
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const MEmojiWidget(
+              text:
+                  'Here is the last step before unlocking the painless invesment experience.',
+              imageAsset: '/'),
+          _kycSteps,
+          _neededItems,
+          const CustomText(
+            'Once you started, you can always take a break and resume to the process whenever you want.',
+            type: FontType.smallText,
+            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+          ),
+          _bottomButton(context),
+        ],
+      ),
     );
   }
 
@@ -44,11 +48,12 @@ class KycProgressScreen extends StatelessWidget {
       );
 
   Widget get _kycSteps => CustomSilverBox(
+      key: const Key('kyc_steps'),
       margin: AppValues.screenHorizontalPadding.copyWith(top: 18),
       title: 'Get ready for AI trading.',
-      content: const CustomStepper(
-        currentStep: 2,
-        steps: [
+      content: CustomStepper(
+        currentStep: currentStep,
+        steps: const [
           'Set up Personal Info',
           'Set up Financial Profile',
           'Verify Identity',
@@ -57,6 +62,7 @@ class KycProgressScreen extends StatelessWidget {
       ));
 
   Widget get _neededItems => CustomSilverBox(
+      key: const Key('kyc_items_needed'),
       margin: const EdgeInsets.only(left: 14, top: 14, right: 14, bottom: 32),
       title: 'The items you will needs..',
       content: Column(
