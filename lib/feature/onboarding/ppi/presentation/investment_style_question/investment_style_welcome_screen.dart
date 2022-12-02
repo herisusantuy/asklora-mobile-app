@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/we_create/custom_app_bar.dart';
 import '../../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
-import '../../../welcome/widgets/memoji_widget.dart';
 
 class InvestmentStyleWelcomeScreen extends StatelessWidget {
   const InvestmentStyleWelcomeScreen({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
         child: Column(
           children: [
             const Expanded(
-              child: MEmojiWidget(
+              child: LoraMemojiWidget(
                 text:
                     'Let’s dive into the core of the personalisation experience, defining your investment style.',
                 imageAsset: '/',

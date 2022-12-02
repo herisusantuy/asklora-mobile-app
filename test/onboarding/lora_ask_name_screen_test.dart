@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/presentation/we_create/custom_button.dart';
-import 'package:asklora_mobile_app/feature/onboarding/welcome/lora_ask_name/presentation/lora_ask_name_screen.dart';
+import 'package:asklora_mobile_app/feature/onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,7 +12,7 @@ void main() {
       Future<void> buildCarouselScreen(WidgetTester tester) async {
         final mockObserver = MockNavigatorObserver();
         await tester.pumpWidget(MaterialApp(
-          home: const LoraAskNameScreen(),
+          home: const AskNameScreen(),
           navigatorObservers: [mockObserver],
         ));
       }

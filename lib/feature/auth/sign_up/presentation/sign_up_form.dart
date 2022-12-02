@@ -5,11 +5,11 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/clearable_text_field.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/presentation/we_create/custom_button.dart';
 import '../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
-import '../../../onboarding/welcome/widgets/memoji_widget.dart';
 import '../../email_activation/presentation/email_activation_screen.dart';
 import '../bloc/sign_up_bloc.dart';
 
@@ -41,7 +41,7 @@ class SignUpForm extends StatelessWidget {
               child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const MEmojiWidget(
+              const LoraMemojiWidget(
                   text:
                       'To craft a better investment experience for you. Please join us to continue.',
                   imageAsset: '/'),

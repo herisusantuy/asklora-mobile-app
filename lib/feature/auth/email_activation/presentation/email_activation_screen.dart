@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
 import '../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
-import '../../../onboarding/welcome/widgets/memoji_widget.dart';
 
 class EmailActivationScreen extends StatelessWidget {
   static const route = '/email_activation_screen';
@@ -23,7 +23,7 @@ class EmailActivationScreen extends StatelessWidget {
         child: Column(
           children: [
             const Expanded(
-              child: MEmojiWidget(
+              child: LoraMemojiWidget(
                   text:
                       'Let get started by activate the account by your provided email. ',
                   imageAsset: '/'),

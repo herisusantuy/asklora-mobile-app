@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
-import '../../welcome/widgets/memoji_widget.dart';
 
 class PpiResultScreen extends StatelessWidget {
   final String mEmojiText;
@@ -22,7 +22,7 @@ class PpiResultScreen extends StatelessWidget {
       appBar: CustomAppBar.transparent(),
       body: Column(
         children: [
-          MEmojiWidget(text: mEmojiText, imageAsset: '/'),
+          LoraMemojiWidget(text: mEmojiText, imageAsset: '/'),
           if (additionalMessage.isNotEmpty)
             CustomText(
               additionalMessage,
