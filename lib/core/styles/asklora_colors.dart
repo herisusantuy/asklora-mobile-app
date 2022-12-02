@@ -12,4 +12,5 @@ class AskLoraColors {
   static const darkGray = Color(0XFF878787);
   static const white = Color(0XFFFFFFFF);
   static const black = Color(0XFF000000);
+  static const charcoal = Color(0XFF232323);
 }

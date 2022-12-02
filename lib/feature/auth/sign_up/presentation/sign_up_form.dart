@@ -140,7 +140,6 @@ class SignUpForm extends StatelessWidget {
       margin: const EdgeInsets.only(top: 28),
       label: 'MAYBE LATER',
       onTap: () => CarouselScreen.open(context),
-      fontType: FontType.smallTextBold,
     );
   }
 

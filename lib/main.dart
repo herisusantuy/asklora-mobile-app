@@ -24,8 +24,8 @@ main() async {
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   runApp(AppConfigWidget(child: const App()));
 }

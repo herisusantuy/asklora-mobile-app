@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/presentation/custom_text.dart';
 import '../../../styles/asklora_colors.dart';
+import '../../custom_text_new.dart';
 import 'bloc/localization_bloc.dart';
 
 class LocalizationToggleButton extends StatelessWidget {
@@ -38,8 +38,8 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 100,
-        height: 38,
+        width: 110,
+        height: 36,
         child: Stack(children: <Widget>[
           GestureDetector(
               onTap: () {
@@ -50,8 +50,8 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                 setState(() {});
               },
               child: Container(
-                  width: 100,
-                  height: 38,
+                  width: 110,
+                  height: 36,
                   decoration: ShapeDecoration(
                     color: AskLoraColors.lightGray,
                     shape: RoundedRectangleBorder(
@@ -64,10 +64,11 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                         LocalizationType.values.length,
                         (index) => Padding(
                             padding: const EdgeInsets.only(right: 8),
-                            child: CustomText(
+                            child: CustomTextNew(
                               LocalizationType.values.elementAt(index).value,
                               textAlign: TextAlign.center,
-                              type: FontType.smallNote,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
                               color: AskLoraColors.darkGray,
                             ))),
                   ))),
@@ -79,20 +80,21 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                   : Alignment.centerRight,
               child: Container(
                   margin: const EdgeInsets.all(4),
-                  width: 50,
+                  width: 52,
                   height: 30,
                   decoration: ShapeDecoration(
-                    color: AskLoraColors.black,
+                    color: AskLoraColors.charcoal,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                   alignment: Alignment.center,
-                  child: CustomText(
+                  child: CustomTextNew(
                     initialPosition
                         ? LocalizationType.english.value
                         : LocalizationType.chinese.value,
-                    type: FontType.smallNoteBold,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12,
                     color: Colors.white,
                   )))
         ]));

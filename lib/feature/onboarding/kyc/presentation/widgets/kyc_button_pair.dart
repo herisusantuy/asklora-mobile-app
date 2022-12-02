@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
 
@@ -41,7 +40,6 @@ class KycButtonPair extends StatelessWidget {
             margin: const EdgeInsets.only(top: 24, bottom: 12),
             label: secondaryButtonLabel,
             onTap: secondaryButtonOnClick,
-            fontType: FontType.smallTextBold,
           )
         ],
       ),

@@ -24,7 +24,6 @@ class ForegroundCarouselWidget extends StatelessWidget {
               key: const Key('sign_in_button'),
               padding: const EdgeInsets.all(16),
               fontStyle: FontStyle.italic,
-              fontType: FontType.smallTextBold,
               onTap: () => SignInScreen.open(context),
               label: 'HAVE AN ACCOUNT?',
             )),

@@ -53,7 +53,6 @@ class EmailActivationScreen extends StatelessWidget {
         margin: const EdgeInsets.only(top: 28, bottom: 28),
         label: 'SIGN UP AGAIN',
         onTap: () => Navigator.pop(context),
-        fontType: FontType.smallTextBold,
       );
 
   static void open(BuildContext context) =>

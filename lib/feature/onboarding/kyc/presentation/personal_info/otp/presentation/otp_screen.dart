@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../../../core/domain/base_response.dart';
 import '../../../../../../../core/domain/otp/verify_otp_request.dart';
 import '../../../../../../../core/presentation/custom_text.dart';
@@ -92,7 +93,6 @@ class OtpScreen extends StatelessWidget {
               margin: const EdgeInsets.only(top: 28, bottom: 28),
               label: 'SIGN UP AGAIN',
               onTap: () => Navigator.pop(context),
-              fontType: FontType.smallTextBold,
             )
           ],
         ),

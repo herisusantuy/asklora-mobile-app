@@ -52,7 +52,6 @@ class ChoicesButton extends StatelessWidget {
             margin: const EdgeInsets.only(top: 24),
             label: 'SAVE FOR LATER',
             onTap: onSaveForLater,
-            fontType: FontType.smallTextBold,
           )
         ],
       ),

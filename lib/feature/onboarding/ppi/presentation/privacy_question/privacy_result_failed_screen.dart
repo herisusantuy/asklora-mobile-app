@@ -25,7 +25,6 @@ class PrivacyResultFailedScreen extends StatelessWidget {
             ),
             CustomTextButton(
               key: const Key('need_help_button'),
-              fontType: FontType.smallTextBold,
               margin: const EdgeInsets.only(bottom: 16),
               onTap: () {},
               label: 'NEED HELP?',

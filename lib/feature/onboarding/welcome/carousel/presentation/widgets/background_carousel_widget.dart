@@ -1,3 +1,4 @@
+/*
 part of '../carousel_screen.dart';
 
 class BackgroundCarouselWidget extends StatelessWidget {
@@ -28,3 +29,4 @@ class BackgroundCarouselWidget extends StatelessWidget {
     );
   }
 }
+*/

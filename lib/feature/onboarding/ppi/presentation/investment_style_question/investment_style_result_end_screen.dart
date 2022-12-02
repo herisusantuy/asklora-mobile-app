@@ -40,6 +40,5 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
         margin: const EdgeInsets.only(top: 28, bottom: 28),
         label: 'MAYBE LATER',
         onTap: () => CarouselScreen.open(context),
-        fontType: FontType.smallTextBold,
       );
 }
