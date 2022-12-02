@@ -41,6 +41,7 @@ class VerifyIdentityScreen extends StatelessWidget {
           children: [
             const CustomText(
               'We need to make sure lorem ipsum dolor sit amet, consectetur adipscing elit. Ornare velit ipsum risus at feugiat adipiscing erat mauris velit. Morbi non morbi eu tincidunt. Laoreet elit.',
+              key: Key('sub_title'),
               type: FontType.smallText,
               padding: AppValues.screenHorizontalPadding,
               height: 2,
@@ -84,6 +85,7 @@ class VerifyIdentityScreen extends StatelessWidget {
   }
 
   Widget get _verificationSteps => const CustomSilverBox(
+      key: Key('verification_steps'),
       margin: EdgeInsets.only(left: 14, top: 32, right: 14),
       title: 'Get ready for the verification process. You will..',
       content: CustomStepper(

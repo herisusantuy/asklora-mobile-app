@@ -26,11 +26,13 @@ class TaxAgreementScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 32),
         children: [
           KycSubTitle(
+            key: const Key('sub_title'),
             subTitle: 'US Tax Form',
             padding: AppValues.screenHorizontalPadding.copyWith(bottom: 20),
           ),
           const CustomText(
             'Under penalties of perjury, I declare that I have examined the information on this form and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:',
+            key: Key('statements'),
             type: FontType.smallText,
             padding: AppValues.screenHorizontalPadding,
             height: 1.6,

@@ -16,6 +16,7 @@ class DisclosureAffiliationPersonInputScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DisclosureAffiliationBaseInputScreen(
+    key: const Key('disclosure_affiliation_input'),
       progress: progress,
       onFirstNameChanged: (value) => context
           .read<DisclosureAffiliationBloc>()

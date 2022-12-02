@@ -14,7 +14,8 @@ import 'widgets/signature_drawer.dart';
 class BrokerAgreementScreen extends StatelessWidget {
   final double progress;
 
-  const BrokerAgreementScreen({required this.progress, Key? key}) : super(key: key);
+  const BrokerAgreementScreen({required this.progress, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,38 +23,46 @@ class BrokerAgreementScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Sign Agreements',
-      content: ListView(
+      content: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 24),
-        children: [
-          const CustomText(
-            'Please read the 2 agreements pdf files.',
-            type: FontType.smallText,
-            padding: AppValues.screenHorizontalPadding,
-            height: 2,
-          ),
-          _agreementCard(
-              title: 'Alpaca Customer Agreement.pdf',
-              onTap: () => context
-                  .read<SigningAgreementBloc>()
-                  .add(const AlpacaCustomerAgreementOpened(true))),
-          _agreementCard(
-              title: 'Asklora Client Agreement.pdf',
-              onTap: () => context
-                  .read<SigningAgreementBloc>()
-                  .add(const AskLoraClientAgreementOpened())),
-          _boundByAlpacaAndLoraAgreement,
-          _understandOnTheAgreement,
-          _certifyNotUSCitizenAgreement,
-          _customerSignature
-        ],
+        child: Column(
+          children: [
+            const CustomText(
+              'Please read the 2 agreements pdf files.',
+              type: FontType.smallText,
+              padding: AppValues.screenHorizontalPadding,
+              height: 2,
+            ),
+            _agreementCard(
+                key: const Key('alpaca_agreement'),
+                title: 'Alpaca Customer Agreement.pdf',
+                onTap: () => context
+                    .read<SigningAgreementBloc>()
+                    .add(const AlpacaCustomerAgreementOpened(true))),
+            _agreementCard(
+                key: const Key('asklora_agreement'),
+                title: 'Asklora Client Agreement.pdf',
+                onTap: () => context
+                    .read<SigningAgreementBloc>()
+                    .add(const AskLoraClientAgreementOpened())),
+            _boundByAlpacaAndLoraAgreement,
+            _understandOnTheAgreement,
+            _certifyNotUSCitizenAgreement,
+            _customerSignature
+          ],
+        ),
       ),
       bottomButton: _bottomButton(context),
       progress: progress,
     );
   }
 
-  Widget _agreementCard({required String title, required VoidCallback onTap}) =>
+  Widget _agreementCard(
+          {required String title,
+          required VoidCallback onTap,
+          required Key key}) =>
       GestureDetector(
+        key: key,
         onTap: onTap,
         child: Container(
           margin: AppValues.screenHorizontalPadding.copyWith(top: 18),
@@ -89,8 +98,8 @@ class BrokerAgreementScreen extends StatelessWidget {
                   current.isBoundByAlpacaAndLoraAgreementChecked,
           builder: (context, state) => CustomCheckbox(
                 checkboxKey:
-                    const Key('signing_broker_agreement_checkbox_1_value'),
-                key: const Key('signing_broker_agreement_checkbox_1'),
+                    const Key('bound_alpaca_lora_agreement_checkbox_value'),
+                key: const Key('bound_alpaca_lora_agreement_checkbox'),
                 padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 text:
                     'I have read, understood, and agree to be bound by Alpaca Securities LLC and LORA Technologies, Limited account terms, and all other terms, disclosures and disclaimers applicable to me, as referenced in the Alpaca Customer Agreement. I also acknowledge that the Alpaca Customer Agreement contains a pre-dispute arbitration clause in Section 42.',
@@ -112,9 +121,8 @@ class BrokerAgreementScreen extends StatelessWidget {
               previous.isUnderstandOnTheAgreementChecked !=
                   current.isUnderstandOnTheAgreementChecked,
           builder: (context, state) => CustomCheckbox(
-                checkboxKey:
-                    const Key('signing_broker_agreement_checkbox_2_value'),
-                key: const Key('signing_broker_agreement_checkbox_2'),
+                checkboxKey: const Key('understand_agreement_checkbox_value'),
+                key: const Key('understand_agreement_checkbox'),
                 padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 text:
                     'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Application Agreement.',
@@ -135,9 +143,8 @@ class BrokerAgreementScreen extends StatelessWidget {
               previous.isCertifyNotUSCitizenAgreementChecked !=
                   current.isCertifyNotUSCitizenAgreementChecked,
           builder: (context, state) => CustomCheckbox(
-                checkboxKey:
-                    const Key('signing_broker_agreement_checkbox_3_value'),
-                key: const Key('signing_broker_agreement_checkbox_3'),
+                checkboxKey: const Key('certify_not_us_citizen_checkbox_value'),
+                key: const Key('certify_not_us_citizen_checkbox'),
                 padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 text:
                     'I certify that I am not a US citizen, US resident alien or other US person for US tax purposes, and I am submitting the applicable Form W-8 BEN with this form to certify my foreign status and, if applicable, claim tax treaty benefits.',
@@ -152,16 +159,19 @@ class BrokerAgreementScreen extends StatelessWidget {
 
   Widget get _customerSignature =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
-        buildWhen: (previous,current)=>previous.customerSignature!=current.customerSignature,
+        buildWhen: (previous, current) =>
+            previous.customerSignature != current.customerSignature,
         builder: (context, state) => SignatureDrawer(
-            key: const Key('customer_signature_drawer'),
-            initialValue: state.customerSignature,
-            onSubmit: () => context
-                .read<SigningAgreementBloc>()
-                .add(const CustomerSignatureDrew()),
-            onReset: () => context
-                .read<SigningAgreementBloc>()
-                .add(const CustomerSignatureReset()), signatureController: state.signatureController,),
+          key: const Key('customer_signature_drawer'),
+          initialValue: state.customerSignature,
+          onSubmit: () => context
+              .read<SigningAgreementBloc>()
+              .add(const CustomerSignatureDrew()),
+          onReset: () => context
+              .read<SigningAgreementBloc>()
+              .add(const CustomerSignatureReset()),
+          signatureController: state.signatureController,
+        ),
       );
 
   Widget _bottomButton(BuildContext context) =>
@@ -171,7 +181,8 @@ class BrokerAgreementScreen extends StatelessWidget {
           builder: (context, state) => KycButtonPair(
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()
-                    .add(const PageChanged(KycPageStep.signRiskDisclosureAgreements)),
+                    .add(const PageChanged(
+                        KycPageStep.signRiskDisclosureAgreements)),
                 secondaryButtonOnClick: () => CarouselScreen.open(context),
                 disablePrimaryButton: state.disabledBrokerButton(),
                 primaryButtonLabel: 'AGREE',
