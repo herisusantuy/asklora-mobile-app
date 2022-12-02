@@ -21,7 +21,7 @@ class CarouselItem extends StatelessWidget {
             title,
             fontWeight: FontWeight.w900,
             fontSize: 48,
-            color: AskLoraColors.charcoal ,
+            color: AskLoraColors.charcoal,
           ),
         )),
       ],
