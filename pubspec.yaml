@@ -69,6 +69,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/kyc/
     - assets/json/
     - .env
     - google_fonts/
