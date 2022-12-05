@@ -21,6 +21,12 @@ extension EmailValidator on String {
   bool isValidOtp() => otpRegex.hasMatch(this);
 }
 
+extension PasswordValidators on String {
+  bool get containsUppercase => contains(RegExp(r'[A-Z]'));
+  bool get containsLowercase => contains(RegExp(r'[a-z]'));
+  bool get containsNumber => contains(RegExp(r'[0-9]'));
+}
+
 MaterialColor randomColor() => ([...Colors.primaries]..shuffle()).first;
 
 extension DoublePrecision on double {

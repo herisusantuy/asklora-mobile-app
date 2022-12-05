@@ -30,23 +30,31 @@ class _MasterTextFieldState extends State<MasterTextField> {
   final OutlineInputBorder nonFocusedBorder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)));
 
-  final OutlineInputBorder defaultBorder = const OutlineInputBorder(
+  final OutlineInputBorder focusedBorder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       borderSide: BorderSide(color: AskLoraColors.green, width: 2));
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
+  Widget? label;
 
   @override
   void initState() {
     super.initState();
     controller.addListener(() {
-      setState(() {
-        if (controller.text.isEmpty) {
-          floatingLabelBehavior = FloatingLabelBehavior.never;
-        } else {
-          floatingLabelBehavior = FloatingLabelBehavior.always;
-        }
-      });
+      _setFloatingLabelBehavior();
+    });
+  }
+
+  void _setFloatingLabelBehavior() {
+    setState(() {
+      if (controller.text.isEmpty) {
+        label = null;
+        floatingLabelBehavior = FloatingLabelBehavior.never;
+
+      } else {
+        label = Text(widget.label);
+        floatingLabelBehavior = FloatingLabelBehavior.always;
+      }
     });
   }
 
@@ -58,15 +66,16 @@ class _MasterTextFieldState extends State<MasterTextField> {
         inputFormatters: widget.textInputFormatterList,
         maxLines: widget.maxLine,
         decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 17, vertical: 14),
           floatingLabelBehavior: floatingLabelBehavior,
-          label: Text(widget.label),
+          label: label,
           hintStyle: const TextStyle(color: AskLoraColors.darkGray),
           hintText: widget.label,
           border: nonFocusedBorder,
           errorText: widget.errorText.isEmpty ? null : widget.errorText,
-          focusedBorder: defaultBorder,
-          errorBorder: defaultBorder,
-          focusedErrorBorder: defaultBorder,
+          focusedBorder: focusedBorder,
+          errorBorder: nonFocusedBorder,
+          focusedErrorBorder: focusedBorder,
           errorStyle: const TextStyle(color: AskLoraColors.magenta),
           labelStyle: const TextStyle(color: Colors.black),
           filled: false,
