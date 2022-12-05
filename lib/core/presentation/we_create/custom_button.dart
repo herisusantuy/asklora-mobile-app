@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../styles/asklora_colors.dart';
-import '../custom_text_new.dart';
+import '../custom_text.dart';
 
 class CustomButton extends StatelessWidget {
   final bool isLoading;
@@ -59,9 +59,9 @@ class CustomButton extends StatelessWidget {
                     borderRadius: BorderRadius.circular(borderRadius),
                   ),
                   minimumSize: const Size.fromHeight(50)),
-              child: CustomTextNew(
+              child: CustomText(
                 label,
-                fontSize: 15,
+                type: FontType.button,
                 fontStyle: fontStyle,
                 fontWeight: fontWeight,
                 color: disable

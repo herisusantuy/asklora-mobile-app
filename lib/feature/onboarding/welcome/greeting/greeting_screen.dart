@@ -22,7 +22,7 @@ class GreetingScreen extends StatelessWidget {
         children: [
           LoraMemojiWidget(
               text:
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta, xxx $name.',
+                  'You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy $name.',
               imageAsset: '/'),
           CustomButton(
             key: const Key('next_button'),
@@ -30,7 +30,7 @@ class GreetingScreen extends StatelessWidget {
             onClick: () => PpiScreen.open(context,
                 arguments: Pair(QuestionPageType.privacyAndPersonalisation,
                     QuestionPageStep.privacy)),
-            margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
+            margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
           )
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../styles/asklora_colors.dart';
-import '../custom_text_new.dart';
+import '../custom_text.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String label;
@@ -28,9 +28,9 @@ class CustomTextButton extends StatelessWidget {
       margin: margin,
       child: GestureDetector(
         onTap: onTap,
-        child: CustomTextNew(
+        child: CustomText(
           label,
-          fontSize: 15,
+          type: FontType.button,
           fontStyle: fontStyle,
           color: AskLoraColors.charcoal,
           fontWeight: FontWeight.w900,

@@ -17,10 +17,10 @@ class CarouselItem extends StatelessWidget {
         SafeArea(
             child: Padding(
           padding: const EdgeInsets.only(top: 88, left: 16, right: 16),
-          child: CustomTextNew(
+          child: CustomText(
             title,
             fontWeight: FontWeight.w900,
-            fontSize: 48,
+            type: FontType.h1,
             color: AskLoraColors.charcoal,
           ),
         )),

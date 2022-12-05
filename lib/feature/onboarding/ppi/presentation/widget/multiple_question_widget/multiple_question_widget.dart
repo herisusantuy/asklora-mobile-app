@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/custom_text.dart';
+import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../bloc/response/user_response_bloc.dart';
-import '../../../domain/question.dart';
 import '../../../domain/ppi_user_response_request.dart';
+import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
 import 'bloc/multiple_question_widget_bloc.dart';
@@ -37,74 +38,58 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
               questionText: questionCollection.questions!.question!,
             ),
             const SizedBox(
-              height: 16,
+              height: 45,
             ),
             Expanded(
-              child: ListView.builder(
-                  key: const Key('multiple_choice_question_builder'),
-                  itemCount: questionCollection.questions!.choices!.length,
-                  itemBuilder: (BuildContext context, int index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: BlocBuilder<MultipleQuestionWidgetBloc,
-                                MultipleQuestionWidgetState>(
-                            buildWhen: (previous, current) =>
-                                previous.defaultChoiceIndex !=
-                                current.defaultChoiceIndex,
-                            builder: (context, state) => ChoiceChip(
-                                  key: Key('${questionCollection.uid}-$index'),
-                                  labelPadding: const EdgeInsets.symmetric(
-                                      vertical: 5, horizontal: 25.0),
-                                  label: SizedBox(
-                                    width: double.infinity,
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        CustomText(
-                                          '${String.fromCharCode(index + 65)}.',
-                                          color:
-                                              index == state.defaultChoiceIndex
-                                                  ? Colors.white
-                                                  : Colors.black,
-                                          type:
-                                              index == state.defaultChoiceIndex
-                                                  ? FontType.bodyTextBold
-                                                  : FontType.bodyText,
-                                          padding:
-                                              const EdgeInsets.only(right: 12),
-                                        ),
-                                        Expanded(
-                                          child: CustomText(
-                                            questionCollection.questions!
-                                                .choices![index].name!,
-                                            color: index ==
-                                                    state.defaultChoiceIndex
-                                                ? Colors.white
-                                                : Colors.black,
-                                            type: index ==
-                                                    state.defaultChoiceIndex
-                                                ? FontType.bodyTextBold
-                                                : FontType.bodyText,
-                                            maxLines: 2,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  selected: index == state.defaultChoiceIndex,
-                                  selectedColor: Colors.black,
-                                  shadowColor: Colors.transparent,
-                                  backgroundColor: Colors.grey[200],
-                                  onSelected: (value) => context
-                                      .read<MultipleQuestionWidgetBloc>()
-                                      .add(AnswerChanged(index)),
-                                  // backgroundColor: color,
-                                  elevation: 0,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 8),
+                child: ListView.builder(
+              key: const Key('multiple_choice_question_builder'),
+              itemCount: questionCollection.questions!.choices!.length,
+              itemBuilder: (BuildContext context, int index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: BlocBuilder<MultipleQuestionWidgetBloc,
+                          MultipleQuestionWidgetState>(
+                      buildWhen: (previous, current) =>
+                          previous.defaultChoiceIndex !=
+                          current.defaultChoiceIndex,
+                      builder: (context, state) => ChoiceChip(
+                            key: Key('${questionCollection.uid}-$index'),
+                            materialTapTargetSize: MaterialTapTargetSize.padded,
+                            labelPadding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 20.0),
+                            shape: index == state.defaultChoiceIndex
+                                ? const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    side: BorderSide(
+                                        color: AskLoraColors.primaryGreen,
+                                        width: 3))
+                                : const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    side:
+                                        BorderSide(color: AskLoraColors.gray)),
+                            label: SizedBox(
+                                width: double.infinity,
+                                child: CustomText(
+                                  questionCollection
+                                      .questions!.choices![index].name!,
+                                  color: AskLoraColors.charcoal,
+                                  maxLines: 3,
+                                  type: FontType.smallText,
+                                  fontWeight: FontWeight.w700,
                                 )),
-                      )),
-            ),
+                            selected: index == state.defaultChoiceIndex,
+                            selectedColor: AskLoraColors.lightGreen,
+                            shadowColor: Colors.transparent,
+                            backgroundColor: AskLoraColors.white,
+                            onSelected: (value) => context
+                                .read<MultipleQuestionWidgetBloc>()
+                                .add(AnswerChanged(index)),
+                            elevation: 0,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 7),
+                          ))),
+            )),
             BlocBuilder<MultipleQuestionWidgetBloc,
                     MultipleQuestionWidgetState>(
                 buildWhen: (previous, current) =>

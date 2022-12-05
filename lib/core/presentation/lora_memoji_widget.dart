@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'custom_text.dart';
-import 'custom_text_new.dart';
 
 class LoraMemojiWidget extends StatelessWidget {
   final String text;
@@ -25,9 +24,9 @@ class LoraMemojiWidget extends StatelessWidget {
         ),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: CustomTextNew(
+            child: CustomText(
               text,
-              fontSize: 20,
+              type: FontType.h4,
               textAlign: TextAlign.center,
               fontWeight: FontWeight.w900,
             )),

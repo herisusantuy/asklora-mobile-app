@@ -76,6 +76,7 @@ class PpiScreen extends StatelessWidget {
             previous.currentPages != current.currentPages ||
             previous.totalPages != current.totalPages,
         builder: (context, state) => CustomLinearProgressIndicator(
+          padding: const EdgeInsets.all(10),
               progress: state.currentPages / state.totalPages,
             ));
   }

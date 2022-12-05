@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/asklora_colors.dart';
+
 class CustomLinearProgressIndicator extends StatelessWidget {
   final double progress;
   final EdgeInsets padding;
@@ -13,9 +15,10 @@ class CustomLinearProgressIndicator extends StatelessWidget {
     return Padding(
       padding: padding,
       child: LinearProgressIndicator(
-        backgroundColor: Colors.grey[350],
+        backgroundColor: AskLoraColors.magentaOpacity50Percent,
         value: progress,
-        color: Colors.grey[700],
+        minHeight: 2,
+        color: AskLoraColors.primaryMagenta,
       ),
     );
   }
