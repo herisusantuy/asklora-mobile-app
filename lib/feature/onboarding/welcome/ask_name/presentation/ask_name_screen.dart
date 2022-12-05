@@ -30,18 +30,21 @@ class AskNameScreen extends StatelessWidget {
                   imageAsset: '/',
                 ),
                 Builder(
-                    builder: (context) => CustomCenteredTextInput(
-                          key: const Key('name_input'),
-                          onChanged: (value) => context
-                              .read<LoraAskNameBloc>()
-                              .add(NameChanged(value)),
-                          hintText: 'Your Name',
-                          padding: const EdgeInsets.only(
-                              top: 18, left: 32, right: 32),
-                        )),
+                    builder: (context) => Center(
+                        child: IntrinsicWidth(
+                            child: CustomCenteredTextInput(
+                                key: const Key('name_input'),
+                                onChanged: (value) => context
+                                    .read<LoraAskNameBloc>()
+                                    .add(NameChanged(value)),
+                                hintText: 'Your Name',
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                textInputType: TextInputType.name)))),
               ],
             )),
-            _nextButton
+            _nextButton,
+            const SizedBox(height: 5)
           ],
         ),
       ),
@@ -51,7 +54,7 @@ class AskNameScreen extends StatelessWidget {
   Widget get _nextButton => BlocBuilder<LoraAskNameBloc, LoraAskNameState>(
       builder: (context, state) => CustomButton(
             key: const Key('next_button'),
-            label: 'Next',
+            label: 'NEXT',
             disable: state.name.isEmpty,
             onClick: () => GreetingScreen.open(context, state.name),
             margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),

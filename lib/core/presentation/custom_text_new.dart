@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../styles/asklora_colors.dart';
+
 class CustomTextNew extends StatelessWidget {
   final String text;
   final Color color;
@@ -12,7 +14,7 @@ class CustomTextNew extends StatelessWidget {
   final int? maxLines;
 
   const CustomTextNew(this.text,
-      {this.color = Colors.white,
+      {this.color = AskLoraColors.charcoal,
       this.fontSize = 38,
       this.textAlign = TextAlign.start,
       this.fontWeight = FontWeight.w300,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../custom_text.dart';
+import '../../styles/asklora_colors.dart';
+import '../custom_text_new.dart';
 
 class CustomButton extends StatelessWidget {
   final bool isLoading;
@@ -15,15 +16,14 @@ class CustomButton extends StatelessWidget {
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   final FontStyle fontStyle;
-  final FontType fontType;
   final FontWeight fontWeight;
   final BorderSide borderSide;
 
   const CustomButton(
       {required this.label,
       required this.onClick,
-      this.backgroundColor = const Color(0xff232323),
-      this.foregroundColor = const Color(0xff00e2a1),
+      this.backgroundColor = AskLoraColors.charcoal,
+      this.foregroundColor = AskLoraColors.primaryGreen,
       this.borderRadius = 16,
       this.isLoading = false,
       this.disable = false,
@@ -33,8 +33,7 @@ class CustomButton extends StatelessWidget {
       this.borderSide = BorderSide.none,
       this.margin,
       this.fontStyle = FontStyle.italic,
-      this.fontWeight = FontWeight.w700,
-      this.fontType = FontType.smallTextBold,
+      this.fontWeight = FontWeight.w900,
       Key? key})
       : super(key: key);
 
@@ -54,16 +53,20 @@ class CustomButton extends StatelessWidget {
                   elevation: 0,
                   foregroundColor: disable ? Colors.white : foregroundColor,
                   backgroundColor:
-                      disable ? const Color(0xffc2d1d9) : backgroundColor,
+                      disable ? AskLoraColors.gray : backgroundColor,
                   shape: RoundedRectangleBorder(
                     side: borderSide,
                     borderRadius: BorderRadius.circular(borderRadius),
                   ),
                   minimumSize: const Size.fromHeight(50)),
-              child: CustomText(
+              child: CustomTextNew(
                 label,
-                type: fontType,
+                fontSize: 15,
                 fontStyle: fontStyle,
+                fontWeight: fontWeight,
+                color: disable
+                    ? AskLoraColors.darkGray
+                    : AskLoraColors.primaryGreen,
               ),
             ),
     );
