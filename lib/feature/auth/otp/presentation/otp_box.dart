@@ -40,7 +40,7 @@ class OtpBox extends StatelessWidget {
           shape: PinCodeFieldShape.underline,
           fieldWidth: _fieldWidth(context),
           inactiveColor: AskLoraColors.text,
-          selectedColor: AskLoraColors.primary,
+          selectedColor: AskLoraColors.primaryGreen,
           activeColor: AskLoraColors.text),
       animationDuration: const Duration(milliseconds: 200),
       onCompleted: onCompleted,

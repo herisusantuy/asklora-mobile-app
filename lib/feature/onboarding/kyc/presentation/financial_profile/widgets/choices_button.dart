@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/presentation/custom_text.dart';
 import '../../../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../../core/values/app_values.dart';
@@ -30,7 +29,6 @@ class ChoicesButton extends StatelessWidget {
             label: 'Yes',
             onClick: onAnswerYes,
             borderRadius: 6,
-            fontType: FontType.bodyText,
             foregroundColor: Colors.black,
             backgroundColor: Colors.white,
             borderSide: const BorderSide(color: Colors.grey),
@@ -42,7 +40,6 @@ class ChoicesButton extends StatelessWidget {
             label: 'No',
             onClick: onAnswerNo,
             borderRadius: 6,
-            fontType: FontType.bodyText,
             foregroundColor: Colors.black,
             backgroundColor: Colors.white,
             borderSide: const BorderSide(color: Colors.grey),

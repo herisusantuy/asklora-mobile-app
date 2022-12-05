@@ -92,7 +92,7 @@ class QuestionWidget extends StatelessWidget {
 
   Color _borderColor(isSelected) {
     if (isSelected) {
-      return AskLoraColors.primary;
+      return AskLoraColors.primaryGreen;
     } else {
       return Colors.black38;
     }
@@ -100,12 +100,12 @@ class QuestionWidget extends StatelessWidget {
 
   Color _backgroundColor(isSelected) {
     return isSelected
-        ? AskLoraColors.primary.withAlpha(30)
+        ? AskLoraColors.primaryGreen.withAlpha(30)
         : Colors.transparent;
   }
 
   Color _textColor(isSelected) {
-    return isSelected ? AskLoraColors.primary : AskLoraColors.text;
+    return isSelected ? AskLoraColors.primaryGreen : AskLoraColors.text;
   }
 
   FontType _textTypeStyle(isSelected) {
@@ -117,7 +117,7 @@ class QuestionWidget extends StatelessWidget {
       return const Icon(
         Icons.check,
         size: 20,
-        color: AskLoraColors.primary,
+        color: AskLoraColors.primaryGreen,
       );
     } else {
       return const SizedBox(

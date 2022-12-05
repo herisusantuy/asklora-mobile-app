@@ -34,10 +34,11 @@ class CarouselScreen extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 15),
                       const LocalizationToggleButton(),
-                      const SizedBox(height: 20),
-                      Container(height: 250, child: _test()),
-                      Expanded(child: SizedBox()),
+                      const SizedBox(height: 10),
+                      SizedBox(height: 250, child: _test()),
+                      const Expanded(child: SizedBox()),
                       CustomButton(
                         key: const Key('begin_on_boarding_button'),
                         label: "LET'S BEGIN",
@@ -55,34 +56,18 @@ class CarouselScreen extends StatelessWidget {
   }
 
   Widget _test() {
-    return /*Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[*/
-        // const SizedBox(width: 20.0, height: 100.0),
-        // const Text(
-        //   'Be',
-        //   style: TextStyle(fontSize: 43.0),
-        // ),
-        // const SizedBox(width: 20.0, height: 100.0),
-        DefaultTextStyle(
-            style: GoogleFonts.mulish(
-                textStyle: const TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 48,
-                    color: AskLoraColors.charcoal)),
-            child: AnimatedTextKit(
-              animatedTexts: [
-                RotateAnimatedText('Get Your Investment In Shape'),
-                RotateAnimatedText('Guide by AI Coach, Lora '),
-                RotateAnimatedText('Personalized Experience'),
-              ],
-              onTap: () {
-                print("Tap Event");
-              },
-            ));
-    /*    ),
-      ],
-    );*/
+    return DefaultTextStyle(
+        style: GoogleFonts.mulish(
+            textStyle: const TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 48,
+                height: 1.1,
+                color: AskLoraColors.charcoal)),
+        child: AnimatedTextKit(animatedTexts: [
+          RotateAnimatedText('Get Your Investment In Shape'),
+          RotateAnimatedText('Guide by AI Coach, Lora '),
+          RotateAnimatedText('Personalized Experience'),
+        ]));
   }
 
   static void open(BuildContext context) =>

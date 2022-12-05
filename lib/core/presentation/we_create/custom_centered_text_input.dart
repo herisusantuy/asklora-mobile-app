@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../styles/asklora_colors.dart';
 import '../custom_text_input.dart';
 
 class CustomCenteredTextInput extends StatelessWidget {
@@ -11,6 +13,7 @@ class CustomCenteredTextInput extends StatelessWidget {
   final String hintText;
   final String? initialValue;
   final EdgeInsets padding;
+  final FontWeight fontWeight;
 
   const CustomCenteredTextInput(
       {required this.onChanged,
@@ -20,11 +23,9 @@ class CustomCenteredTextInput extends StatelessWidget {
       this.padding = EdgeInsets.zero,
       this.textInputType = TextInputType.text,
       this.textInputFormatterList,
+      this.fontWeight = FontWeight.w900,
       Key? key})
       : super(key: key);
-
-  final TextStyle textStyle =
-      const TextStyle(fontSize: 26, fontWeight: FontWeight.w700);
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +39,15 @@ class CustomCenteredTextInput extends StatelessWidget {
         inputBorder: InputBorder.none,
         textInputFormatterList: textInputFormatterList,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintTextStyle: textStyle.copyWith(color: Colors.grey[300]),
-        textStyle: textStyle.copyWith(color: Colors.black),
-        textAlign: TextAlign.center,
+        hintTextStyle: GoogleFonts.mulish(
+            fontSize: 30,
+            fontWeight: fontWeight,
+            color: AskLoraColors.lightGray),
+        textStyle: GoogleFonts.mulish(
+            fontSize: 33,
+            fontWeight: fontWeight,
+            color: AskLoraColors.charcoal),
+        textAlign: TextAlign.left,
         onChanged: onChanged,
       ),
     );

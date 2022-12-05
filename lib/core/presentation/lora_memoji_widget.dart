@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'custom_text.dart';
+import 'custom_text_new.dart';
 
 class LoraMemojiWidget extends StatelessWidget {
   final String text;
@@ -22,12 +23,14 @@ class LoraMemojiWidget extends StatelessWidget {
           textAlign: TextAlign.center,
           padding: EdgeInsets.only(bottom: 32, top: 24),
         ),
-        CustomText(
-          text,
-          type: FontType.h3W800,
-          textAlign: TextAlign.center,
-          padding: const EdgeInsets.symmetric(horizontal: 42),
-        ),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: CustomTextNew(
+              text,
+              fontSize: 20,
+              textAlign: TextAlign.center,
+              fontWeight: FontWeight.w900,
+            )),
       ],
     );
   }
