@@ -34,7 +34,10 @@ class SecondaryButton extends StatelessWidget {
       child: ElevatedButton(
           style: _defaultButtonStyle.copyWith(
               minimumSize: _getButtonMinimumSize,
-              backgroundColor: _getColor(Colors.transparent,
+              backgroundColor: _getColor(
+                  active
+                      ? AskLoraColors.primaryGreen.withOpacity(0.1)
+                      : Colors.transparent,
                   AskLoraColors.primaryGreen.withOpacity(0.2)),
               foregroundColor: _getColor(AskLoraColors.charcoal,
                   AskLoraColors.charcoal.withOpacity(0.9)),
@@ -72,7 +75,7 @@ class SecondaryButton extends StatelessWidget {
       return RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
           side: BorderSide(
-              width: 1.4,
+              width: states.contains(MaterialState.pressed) ? 3 : 1.4,
               color: states.contains(MaterialState.pressed)
                   ? colorPressed
                   : color));

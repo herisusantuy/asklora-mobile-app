@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../domain/pair.dart';
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
-import '../custom_text.dart';
 import '../custom_text_new.dart';
 
 enum ButtonPrimaryType { solidCharcoal, solidGreen, ghostCharcoal, ghostGreen }
@@ -43,13 +42,7 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
           style: _getDefaultButtonStyle,
           onPressed: disabled ? null : onTap,
-          child: /*CustomText(
-            label,
-            fontStyle: fontStyle,
-            fontWeight: FontWeight.w900,
-            type: _getFontType,
-          )*/
-              CustomTextNew(
+          child: CustomTextNew(
             label,
             style: AskLoraTextStyles.button1,
           )),
@@ -144,17 +137,6 @@ class PrimaryButton extends StatelessWidget {
         return Pair(200, 40);
       case ButtonPrimarySize.big:
         return Pair(double.infinity, 55);
-    }
-  }
-
-  FontType get _getFontType {
-    switch (buttonPrimarySize) {
-      case ButtonPrimarySize.small:
-        return FontType.mobileMenu;
-      case ButtonPrimarySize.mid:
-        return FontType.smallNote;
-      case ButtonPrimarySize.big:
-        return FontType.button;
     }
   }
 }

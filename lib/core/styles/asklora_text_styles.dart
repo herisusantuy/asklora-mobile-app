@@ -124,7 +124,7 @@ class AskLoraTextStyles {
     fontWeight: AskLoraFontWeight.regular.value,
   );
 
-  static TextStyle? button1 = TextStyle(
+  static TextStyle button1 = TextStyle(
     fontSize: 15,
     height: 1.5,
     fontWeight: AskLoraFontWeight.black.value,
