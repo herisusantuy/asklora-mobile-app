@@ -51,12 +51,14 @@ class AskNameScreen extends StatelessWidget {
   }
 
   Widget get _nextButton => BlocBuilder<LoraAskNameBloc, LoraAskNameState>(
-      builder: (context, state) => PrimaryButton(
+      builder: (context, state) => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 14),
+          child: PrimaryButton(
             key: const Key('next_button'),
             label: 'NEXT',
             disabled: state.name.isEmpty,
             onTap: () => GreetingScreen.open(context, state.name),
-          ));
+          )));
 
   static void open(BuildContext context) =>
       Navigator.of(context).pushNamed(route);

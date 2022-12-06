@@ -29,7 +29,7 @@ class CarouselScreen extends StatelessWidget {
         body: SafeArea(
             child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0),
+                    const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
