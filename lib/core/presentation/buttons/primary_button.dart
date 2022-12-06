@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../domain/pair.dart';
 import '../../styles/asklora_colors.dart';
+import '../custom_text.dart';
 
 enum ButtonPrimaryType { solidCharcoal, solidGreen, ghostCharcoal, ghostGreen }
 
@@ -16,7 +18,7 @@ class PrimaryButton extends StatelessWidget {
 
   PrimaryButton(
       {this.label = '',
-      required this.buttonPrimaryType,
+      this.buttonPrimaryType = ButtonPrimaryType.solidCharcoal,
       this.disabled = false,
       required this.onTap,
       this.fontStyle = FontStyle.italic,
@@ -26,10 +28,10 @@ class PrimaryButton extends StatelessWidget {
 
   final ButtonStyle _defaultButtonStyle = ElevatedButton.styleFrom(
       elevation: 0,
-      minimumSize: const Size(50, 100),
+      minimumSize: const Size(55, 100),
       shadowColor: Colors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
       ));
 
   @override
@@ -39,12 +41,11 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
           style: _getDefaultButtonStyle,
           onPressed: disabled ? null : onTap,
-          child: Text(
+          child: CustomText(
             label,
-            style: TextStyle(
-                fontSize: _getFontSize,
-                fontStyle: fontStyle,
-                fontWeight: FontWeight.w700),
+            fontStyle: fontStyle,
+            fontWeight: FontWeight.w900,
+            type: _getFontType,
           )),
     );
   }
@@ -108,7 +109,7 @@ class PrimaryButton extends StatelessWidget {
       Color color, Color colorPressed) {
     return MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       return RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(12),
           side: BorderSide(
               color: states.contains(MaterialState.pressed)
                   ? colorPressed
@@ -136,18 +137,18 @@ class PrimaryButton extends StatelessWidget {
       case ButtonPrimarySize.mid:
         return Pair(200, 40);
       case ButtonPrimarySize.big:
-        return Pair(double.infinity, 50);
+        return Pair(double.infinity, 55);
     }
   }
 
-  double get _getFontSize {
+  FontType get _getFontType {
     switch (buttonPrimarySize) {
       case ButtonPrimarySize.small:
-        return 10;
+        return FontType.mobileMenu;
       case ButtonPrimarySize.mid:
-        return 14;
+        return FontType.smallNote;
       case ButtonPrimarySize.big:
-        return 18;
+        return FontType.button;
     }
   }
 }
