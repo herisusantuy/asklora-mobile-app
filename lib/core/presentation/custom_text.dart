@@ -37,6 +37,7 @@ class CustomText extends StatelessWidget {
   final int? maxLines;
   final FontStyle? fontStyle;
   final double? height;
+  final FontWeight fontWeight;
 
   const CustomText(this.text,
       {Key? key,
@@ -47,6 +48,7 @@ class CustomText extends StatelessWidget {
       this.decoration = TextDecoration.none,
       this.padding = EdgeInsets.zero,
       this.margin = EdgeInsets.zero,
+      this.fontWeight = FontWeight.normal,
       this.maxLines,
       this.height,
       this.fontStyle})
@@ -55,6 +57,7 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double? fontType;
+    FontWeight fontWeight = this.fontWeight;
 
     switch (type) {
       case FontType.h1:
@@ -106,29 +109,30 @@ class CustomText extends StatelessWidget {
         fontType = 16;
     }
 
-    FontWeight? boldText;
     switch (type) {
       case FontType.highlight:
-        boldText = FontWeight.w300;
+        fontWeight = FontWeight.w300;
         break;
       case FontType.h3W800:
-        boldText = FontWeight.w800;
+        fontWeight = FontWeight.w800;
         break;
       case FontType.h1:
       case FontType.h2:
       case FontType.h3:
       case FontType.h4:
       case FontType.h5:
+        fontWeight = FontWeight.w900;
+        break;
       case FontType.bodyTextBold:
       case FontType.smallTextBold:
       case FontType.smallNoteBold:
-        boldText = FontWeight.bold;
+        fontWeight = FontWeight.bold;
         break;
       case FontType.h4SemiBold:
-        boldText = FontWeight.w500;
+        fontWeight = FontWeight.w500;
         break;
       default:
-        boldText = FontWeight.normal;
+        fontWeight = this.fontWeight;
     }
     return Container(
       padding: padding,
@@ -139,7 +143,7 @@ class CustomText extends StatelessWidget {
             textStyle: TextStyle(
                 color: color,
                 fontSize: fontType,
-                fontWeight: boldText,
+                fontWeight: fontWeight,
                 decoration: decoration,
                 height: height,
                 fontStyle: fontStyle)),

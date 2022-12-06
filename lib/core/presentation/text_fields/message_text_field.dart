@@ -34,7 +34,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
 
   final OutlineInputBorder focusedBorder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
-      borderSide: BorderSide(color: AskLoraColors.green, width: 2));
+      borderSide: BorderSide(color: AskLoraColors.primaryGreen, width: 2));
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
   Widget? label;

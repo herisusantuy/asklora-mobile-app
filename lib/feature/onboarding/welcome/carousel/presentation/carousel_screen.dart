@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../core/presentation/animated_text.dart';
 import '../../../../../core/presentation/custom_text.dart';
-import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/rotate_animated_text.dart';
 import '../../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
@@ -60,7 +59,7 @@ class CarouselScreen extends StatelessWidget {
         style: GoogleFonts.mulish(
             textStyle: const TextStyle(
                 fontWeight: FontWeight.w900,
-                fontSize: 48,
+                fontSize: 42,
                 height: 1.1,
                 color: AskLoraColors.charcoal)),
         child: AnimatedTextKit(animatedTexts: [

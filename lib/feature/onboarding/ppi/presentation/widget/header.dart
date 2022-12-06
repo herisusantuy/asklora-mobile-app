@@ -18,7 +18,7 @@ class QuestionHeader extends StatelessWidget {
         InkWell(
             onTap: onTapBack,
             child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 14),
+              padding: EdgeInsets.symmetric(vertical: 20),
               child: Icon(
                 Icons.arrow_back_rounded,
                 size: 24,
@@ -28,7 +28,8 @@ class QuestionHeader extends StatelessWidget {
         if (questionText.isNotEmpty)
           CustomText(
             questionText,
-            type: FontType.h5,
+            type: FontType.h3,
+            fontWeight: FontWeight.w900,
             padding: const EdgeInsets.only(top: 8),
           ),
       ],

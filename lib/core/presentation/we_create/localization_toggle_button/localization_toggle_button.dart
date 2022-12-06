@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../styles/asklora_colors.dart';
-import '../../custom_text_new.dart';
+import '../../custom_text.dart';
 import 'bloc/localization_bloc.dart';
 
 class LocalizationToggleButton extends StatelessWidget {
@@ -64,11 +64,11 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                         LocalizationType.values.length,
                         (index) => Padding(
                             padding: const EdgeInsets.only(right: 8),
-                            child: CustomTextNew(
+                            child: CustomText(
                               LocalizationType.values.elementAt(index).value,
                               textAlign: TextAlign.center,
                               fontWeight: FontWeight.w700,
-                              fontSize: 12,
+                              type: FontType.smallNote,
                               color: AskLoraColors.darkGray,
                             ))),
                   ))),
@@ -89,12 +89,12 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                     ),
                   ),
                   alignment: Alignment.center,
-                  child: CustomTextNew(
+                  child: CustomText(
                     initialPosition
                         ? LocalizationType.english.value
                         : LocalizationType.chinese.value,
                     fontWeight: FontWeight.w700,
-                    fontSize: 12,
+                    type: FontType.smallNote,
                     color: Colors.white,
                   )))
         ]));

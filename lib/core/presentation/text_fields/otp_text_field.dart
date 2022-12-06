@@ -31,7 +31,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
 
   final OutlineInputBorder focusedBorder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
-      borderSide: BorderSide(color: AskLoraColors.green, width: 2));
+      borderSide: BorderSide(color: AskLoraColors.primaryGreen, width: 2));
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
   Widget? label;
@@ -60,7 +60,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
   Widget build(BuildContext context) => Theme(
         data: ThemeData(
           colorScheme: ThemeData().colorScheme.copyWith(
-                primary: AskLoraColors.green,
+                primary: AskLoraColors.primaryGreen,
               ),
         ),
         child: TextFormField(

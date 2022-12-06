@@ -58,22 +58,22 @@ class PrimaryButton extends StatelessWidget {
                 disabled ? AskLoraColors.gray : AskLoraColors.charcoal,
                 AskLoraColors.charcoal.withOpacity(0.9)),
             foregroundColor: _getColor(
-                disabled ? AskLoraColors.darkGray : AskLoraColors.green,
-                AskLoraColors.green.withOpacity(0.9)));
+                disabled ? AskLoraColors.darkGray : AskLoraColors.primaryGreen,
+                AskLoraColors.primaryGreen.withOpacity(0.9)));
       case ButtonPrimaryType.solidGreen:
         return _defaultButtonStyle.copyWith(
             minimumSize: _getButtonMinimumSize,
             backgroundColor: _getColor(
-                disabled ? AskLoraColors.lightGray : AskLoraColors.green,
-                AskLoraColors.green.withOpacity(0.9)),
+                disabled ? AskLoraColors.lightGray : AskLoraColors.primaryGreen,
+                AskLoraColors.primaryGreen.withOpacity(0.9)),
             foregroundColor: _getColor(
                 disabled ? AskLoraColors.darkGray : AskLoraColors.charcoal,
                 AskLoraColors.charcoal.withOpacity(0.9)));
       case ButtonPrimaryType.ghostCharcoal:
         return _defaultButtonStyle.copyWith(
             minimumSize: _getButtonMinimumSize,
-            backgroundColor:
-                _getColor(Colors.white, AskLoraColors.green.withOpacity(0.2)),
+            backgroundColor: _getColor(
+                Colors.white, AskLoraColors.primaryGreen.withOpacity(0.2)),
             foregroundColor: _getColor(
                 disabled ? AskLoraColors.gray : AskLoraColors.charcoal,
                 AskLoraColors.charcoal.withOpacity(0.9)),
@@ -83,14 +83,14 @@ class PrimaryButton extends StatelessWidget {
       case ButtonPrimaryType.ghostGreen:
         return _defaultButtonStyle.copyWith(
             minimumSize: _getButtonMinimumSize,
-            backgroundColor: _getColor(
-                Colors.transparent, AskLoraColors.green.withOpacity(0.2)),
+            backgroundColor: _getColor(Colors.transparent,
+                AskLoraColors.primaryGreen.withOpacity(0.2)),
             foregroundColor: _getColor(
-                disabled ? AskLoraColors.gray : AskLoraColors.green,
-                AskLoraColors.green.withOpacity(0.9)),
+                disabled ? AskLoraColors.gray : AskLoraColors.primaryGreen,
+                AskLoraColors.primaryGreen.withOpacity(0.9)),
             shape: _getBorder(
-                disabled ? AskLoraColors.gray : AskLoraColors.green,
-                AskLoraColors.green.withOpacity(0.9)));
+                disabled ? AskLoraColors.gray : AskLoraColors.primaryGreen,
+                AskLoraColors.primaryGreen.withOpacity(0.9)));
     }
   }
 

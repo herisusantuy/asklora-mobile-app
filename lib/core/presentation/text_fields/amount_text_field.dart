@@ -62,7 +62,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
   Widget build(BuildContext context) => Theme(
         data: ThemeData(
           colorScheme: ThemeData().colorScheme.copyWith(
-                primary: AskLoraColors.green,
+                primary: AskLoraColors.primaryGreen,
               ),
         ),
         child: TextFormField(

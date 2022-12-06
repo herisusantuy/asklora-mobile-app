@@ -8,10 +8,10 @@ class TextFieldStyle {
 
   static OutlineInputBorder focusedBorder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(8)),
-      borderSide: BorderSide(color: AskLoraColors.green, width: 2));
+      borderSide: BorderSide(color: AskLoraColors.primaryGreen, width: 2));
 
   static TextStyle errorTextStyle =
-      const TextStyle(color: AskLoraColors.magenta);
+      const TextStyle(color: AskLoraColors.primaryMagenta);
 
   static TextStyle labelTextStyle = const TextStyle(color: Colors.black);
 

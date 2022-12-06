@@ -43,8 +43,7 @@ class AskNameScreen extends StatelessWidget {
                                 textInputType: TextInputType.name)))),
               ],
             )),
-            _nextButton,
-            const SizedBox(height: 5)
+            _nextButton
           ],
         ),
       ),
@@ -57,7 +56,7 @@ class AskNameScreen extends StatelessWidget {
             label: 'NEXT',
             disable: state.name.isEmpty,
             onClick: () => GreetingScreen.open(context, state.name),
-            margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
+            margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
           ));
 
   static void open(BuildContext context) =>

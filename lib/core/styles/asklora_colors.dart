@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AskLoraColors {
   static const primaryGreen = Color(0xFF36EAB6);
   static const primaryMagenta = Color(0xFFEA1DD6);
+  static const magentaOpacity50Percent = Color(0xFF80EA1DD6);
   static const up = Color(0xFF008753);
   static const down = Color(0xFFC33335);
   static const text = Color(0xFF222E41);
@@ -15,6 +16,6 @@ class AskLoraColors {
   static const white = Color(0XFFFFFFFF);
   static const black = Color(0XFF000000);
   static const charcoal = Color(0XFF232323);
-  static const green = Color(0XFF36eab6);
-  static const magenta = Color(0XFFea1dd6);
+  static const lightGreen = Color(0XFFF0FAF9);
+  static const lightMagenta = Color(0XFFFDF4FB);
 }

@@ -82,7 +82,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   Widget build(BuildContext context) => Theme(
         data: ThemeData(
           colorScheme: ThemeData().colorScheme.copyWith(
-                primary: AskLoraColors.green,
+                primary: AskLoraColors.primaryGreen,
               ),
         ),
         child: Column(
@@ -139,7 +139,9 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           children: [
             Icon(
               checkPassed ? Icons.check : Icons.close,
-              color: checkPassed ? AskLoraColors.green : AskLoraColors.magenta,
+              color: checkPassed
+                  ? AskLoraColors.primaryGreen
+                  : AskLoraColors.primaryMagenta,
               size: 10,
             ),
             const SizedBox(
