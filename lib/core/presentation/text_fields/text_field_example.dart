@@ -14,9 +14,16 @@ class TextFieldExample extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(color: Colors.black,),
-        const CustomText('BUTTONS EXAMPLE', type: FontType.h5,),
-        const Divider(color: Colors.black,),
+        const Divider(
+          color: Colors.black,
+        ),
+        const CustomText(
+          'TEXT FIELDS EXAMPLE',
+          type: FontType.h5,
+        ),
+        const Divider(
+          color: Colors.black,
+        ),
         _textField(
             'Master',
             const MasterTextField(
@@ -45,7 +52,9 @@ class TextFieldExample extends StatelessWidget {
         _textField(
             'Dropdown',
             CustomDropdown(
-              hintText: 'HKD 10000', itemsList: const ['This', 'That'], onChanged: (_) {  },
+              hintText: 'HKD 10000',
+              itemsList: const ['This', 'That'],
+              onChanged: (_) {},
             )),
       ],
     );
