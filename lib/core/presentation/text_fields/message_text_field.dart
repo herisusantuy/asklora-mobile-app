@@ -20,7 +20,7 @@ class MessageTextField extends StatefulWidget {
       this.textInputFormatterList,
       this.label = '',
       this.errorText = '',
-        this.onChanged,
+      this.onChanged,
       this.maxLine = 5})
       : super(key: key);
 

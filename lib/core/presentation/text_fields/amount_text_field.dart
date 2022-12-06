@@ -14,7 +14,7 @@ class AmountTextField extends StatefulWidget {
 
   const AmountTextField(
       {Key? key,
-        this.onChanged,
+      this.onChanged,
       this.initialValue,
       this.hintText = '',
       this.label = '',
