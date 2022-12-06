@@ -19,7 +19,7 @@ class AmountTextField extends StatefulWidget {
       this.hintText = '',
       this.label = '',
       this.errorText = '',
-      this.prefixText = ''})
+      this.prefixText = 'HKD '})
       : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
   Widget? label;
-  Widget? prefixWidget;
+  String? prefixText;
 
   @override
   void initState() {
@@ -45,14 +45,14 @@ class _AmountTextFieldState extends State<AmountTextField> {
     setState(() {
       if (controller.text.isEmpty) {
         label = null;
-        prefixWidget = null;
+        prefixText = null;
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
         label = Text(widget.label);
-        prefixWidget = Padding(
-          padding: const EdgeInsets.only(right: 6.0),
-          child: Text(widget.prefixText),
-        );
+        setState(() {
+          prefixText = widget.prefixText;
+        });
+
         floatingLabelBehavior = FloatingLabelBehavior.always;
       }
     });
@@ -78,6 +78,6 @@ class _AmountTextFieldState extends State<AmountTextField> {
                 label: label,
                 hintText: widget.hintText,
                 errorText: widget.errorText.isEmpty ? null : widget.errorText,
-                prefix: prefixWidget)),
+                prefixText: prefixText)),
       );
 }

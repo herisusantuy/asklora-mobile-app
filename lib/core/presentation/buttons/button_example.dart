@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../styles/asklora_colors.dart';
-import '../custom_text.dart';
+import '../../styles/asklora_text_styles.dart';
+import '../custom_text_new.dart';
 import 'primary_button.dart';
 import 'secondary_button.dart';
 
@@ -13,9 +14,9 @@ class ButtonExample extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomText(
-          'BUTTONS EXAMPLE',
-          type: FontType.h5,
+         CustomTextNew(
+          'Get Your Investment In Shape',
+          style: AskLoraTextStyles.h1,
         ),
         const Divider(
           color: Colors.black,
@@ -91,7 +92,7 @@ class ButtonExample extends StatelessWidget {
               buttonSecondarySize: ButtonSecondarySize.big,
               active: true,
               onTap: () {}),
-        )
+        ),
       ],
     );
   }
