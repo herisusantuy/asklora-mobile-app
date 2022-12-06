@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../styles/asklora_colors.dart';
+import 'style/text_field_style.dart';
 
 class MasterTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
@@ -9,14 +8,18 @@ class MasterTextField extends StatefulWidget {
   final List<TextInputFormatter>? textInputFormatterList;
   final int? maxLine;
   final String label;
+  final String hintText;
   final String errorText;
+  final Function(String)? onChanged;
 
   const MasterTextField(
       {Key? key,
+        this.onChanged,
       this.textCapitalization = TextCapitalization.none,
       this.initialValue,
       this.textInputFormatterList,
       this.label = '',
+      this.hintText = '',
       this.errorText = '',
       this.maxLine})
       : super(key: key);
@@ -27,13 +30,6 @@ class MasterTextField extends StatefulWidget {
 
 class _MasterTextFieldState extends State<MasterTextField> {
   final TextEditingController controller = TextEditingController();
-  final OutlineInputBorder nonFocusedBorder = const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)));
-
-  final OutlineInputBorder focusedBorder = const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-      borderSide: BorderSide(color: AskLoraColors.green, width: 2));
-
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
   Widget? label;
 
@@ -50,7 +46,6 @@ class _MasterTextFieldState extends State<MasterTextField> {
       if (controller.text.isEmpty) {
         label = null;
         floatingLabelBehavior = FloatingLabelBehavior.never;
-
       } else {
         label = Text(widget.label);
         floatingLabelBehavior = FloatingLabelBehavior.always;
@@ -60,25 +55,16 @@ class _MasterTextFieldState extends State<MasterTextField> {
 
   @override
   Widget build(BuildContext context) => TextFormField(
-        controller: controller,
-        textCapitalization: widget.textCapitalization,
-        initialValue: widget.initialValue,
-        inputFormatters: widget.textInputFormatterList,
-        maxLines: widget.maxLine,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 17, vertical: 14),
-          floatingLabelBehavior: floatingLabelBehavior,
-          label: label,
-          hintStyle: const TextStyle(color: AskLoraColors.darkGray),
-          hintText: widget.label,
-          border: nonFocusedBorder,
-          errorText: widget.errorText.isEmpty ? null : widget.errorText,
-          focusedBorder: focusedBorder,
-          errorBorder: nonFocusedBorder,
-          focusedErrorBorder: focusedBorder,
-          errorStyle: const TextStyle(color: AskLoraColors.magenta),
-          labelStyle: const TextStyle(color: Colors.black),
-          filled: false,
-        ),
-      );
+      controller: controller,
+      onChanged: widget.onChanged,
+      textCapitalization: widget.textCapitalization,
+      initialValue: widget.initialValue,
+      inputFormatters: widget.textInputFormatterList,
+      maxLines: widget.maxLine,
+      decoration: TextFieldStyle.inputDecoration.copyWith(
+        floatingLabelBehavior: floatingLabelBehavior,
+        label: label,
+        hintText: widget.hintText,
+        errorText: widget.errorText.isEmpty ? null : widget.errorText,
+      ));
 }

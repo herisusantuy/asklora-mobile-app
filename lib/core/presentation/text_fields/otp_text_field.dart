@@ -4,18 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../styles/asklora_colors.dart';
+import 'style/text_field_style.dart';
 
 class OtpTextField extends StatefulWidget {
-  final TextCapitalization textCapitalization;
   final String? initialValue;
-  final String label;
   final String errorText;
+  final VoidCallback onSendOtpTap;
+  final Function(String)? onChanged;
 
   const OtpTextField({
     Key? key,
-    this.textCapitalization = TextCapitalization.none,
+    this.onChanged,
     this.initialValue,
-    this.label = '',
+    required this.onSendOtpTap,
     this.errorText = '',
   }) : super(key: key);
 
@@ -49,7 +50,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
         label = null;
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
-        label = Text(widget.label);
+        label = const Text('One-time-password');
         floatingLabelBehavior = FloatingLabelBehavior.always;
       }
     });
@@ -64,35 +65,28 @@ class _OtpTextFieldState extends State<OtpTextField> {
         ),
         child: TextFormField(
           controller: controller,
-          textCapitalization: widget.textCapitalization,
+          onChanged: widget.onChanged,
           initialValue: widget.initialValue,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(4),
           ],
           keyboardType: TextInputType.number,
-          decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 17, vertical: 14),
-            suffixIcon: const ResendOtpButton(),
-            floatingLabelBehavior: floatingLabelBehavior,
-            label: label,
-            hintStyle: const TextStyle(color: AskLoraColors.darkGray),
-            hintText: 'One-time-password (4 digit)',
-            border: nonFocusedBorder,
-            focusedBorder: focusedBorder,
-            errorBorder: nonFocusedBorder,
-            focusedErrorBorder: focusedBorder,
-            errorStyle: const TextStyle(color: AskLoraColors.magenta),
-            labelStyle: const TextStyle(color: Colors.black),
-            filled: false,
-          ),
+          decoration: TextFieldStyle.inputDecoration.copyWith(
+              floatingLabelBehavior: floatingLabelBehavior,
+              label: label,
+              hintText: 'One-time-password (4 digit)',
+              errorText: widget.errorText.isEmpty ? null : widget.errorText,
+              suffixIcon: ResendOtpButton(onSendOtpTap: widget.onSendOtpTap)),
         ),
       );
 }
 
 class ResendOtpButton extends StatefulWidget {
-  const ResendOtpButton({Key? key}) : super(key: key);
+  final VoidCallback onSendOtpTap;
+
+  const ResendOtpButton({required this.onSendOtpTap, Key? key})
+      : super(key: key);
 
   @override
   State<ResendOtpButton> createState() => _ResendOtpButtonState();
@@ -119,6 +113,7 @@ class _ResendOtpButtonState extends State<ResendOtpButton> {
           GestureDetector(
             onTap: () {
               if (!disable) {
+                widget.onSendOtpTap();
                 setState(() {
                   disable = true;
                 });

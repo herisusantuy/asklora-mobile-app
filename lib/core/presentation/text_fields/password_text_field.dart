@@ -3,21 +3,26 @@ import 'package:flutter/services.dart';
 
 import '../../styles/asklora_colors.dart';
 import '../../utils/extensions.dart';
+import 'style/text_field_style.dart';
 
 class PasswordTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final String? initialValue;
   final List<TextInputFormatter>? textInputFormatterList;
   final String label;
+  final String hintText;
   final String errorText;
   final Function(bool) validPassword;
+  final Function(String)? onChanged;
 
   const PasswordTextField({
     Key? key,
+    this.onChanged,
     this.textCapitalization = TextCapitalization.none,
     this.initialValue,
     this.textInputFormatterList,
     this.label = '',
+    this.hintText = '',
     this.errorText = '',
     required this.validPassword,
   }) : super(key: key);
@@ -28,12 +33,6 @@ class PasswordTextField extends StatefulWidget {
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
   final TextEditingController controller = TextEditingController();
-  final OutlineInputBorder nonFocusedBorder = const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)));
-
-  final OutlineInputBorder focusedBorder = const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-      borderSide: BorderSide(color: AskLoraColors.green, width: 2));
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
   bool obscureText = true;
@@ -57,7 +56,6 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       if (controller.text.isEmpty) {
         label = null;
         floatingLabelBehavior = FloatingLabelBehavior.never;
-
       } else {
         label = Text(widget.label);
         floatingLabelBehavior = FloatingLabelBehavior.always;
@@ -91,36 +89,28 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           children: [
             TextFormField(
               controller: controller,
+              onChanged: widget.onChanged,
               textCapitalization: widget.textCapitalization,
               initialValue: widget.initialValue,
               inputFormatters: widget.textInputFormatterList,
               obscureText: obscureText,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 17, vertical: 14),
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      obscureText = !obscureText;
-                    });
-                  },
-                  child: Icon(
-                    obscureText
-                        ? Icons.remove_red_eye_outlined
-                        : Icons.remove_red_eye,
-                  ),
-                ),
-                floatingLabelBehavior: floatingLabelBehavior,
-                label: label,
-                hintStyle: const TextStyle(color: AskLoraColors.darkGray),
-                hintText: widget.label,
-                border: nonFocusedBorder,
-                focusedBorder: focusedBorder,
-                errorBorder: nonFocusedBorder,
-                focusedErrorBorder: focusedBorder,
-                errorStyle: const TextStyle(color: AskLoraColors.magenta),
-                labelStyle: const TextStyle(color: Colors.black),
-                filled: false,
-              ),
+              decoration: TextFieldStyle.inputDecoration.copyWith(
+                  floatingLabelBehavior: floatingLabelBehavior,
+                  label: label,
+                  hintText: widget.hintText,
+                  errorText: widget.errorText.isEmpty ? null : widget.errorText,
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                    child: Icon(
+                      obscureText
+                          ? Icons.remove_red_eye_outlined
+                          : Icons.remove_red_eye,
+                    ),
+                  )),
             ),
             const SizedBox(
               height: 6,
