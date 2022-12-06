@@ -24,7 +24,7 @@ class CustomButton extends StatelessWidget {
       required this.onClick,
       this.backgroundColor = AskLoraColors.charcoal,
       this.foregroundColor = AskLoraColors.primaryGreen,
-      this.borderRadius = 16,
+      this.borderRadius = 14,
       this.isLoading = false,
       this.disable = false,
       this.height,
