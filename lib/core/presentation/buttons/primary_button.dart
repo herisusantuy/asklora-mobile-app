@@ -29,7 +29,7 @@ class PrimaryButton extends StatelessWidget {
       minimumSize: const Size(50, 100),
       shadowColor: Colors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(12),
       ));
 
   @override
@@ -108,7 +108,7 @@ class PrimaryButton extends StatelessWidget {
       Color color, Color colorPressed) {
     return MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       return RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(12),
           side: BorderSide(
               color: states.contains(MaterialState.pressed)
                   ? colorPressed
