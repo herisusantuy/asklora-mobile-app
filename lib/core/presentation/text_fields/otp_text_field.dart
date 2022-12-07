@@ -91,13 +91,13 @@ class ResendOtpButton extends StatefulWidget {
 class _ResendOtpButtonState extends State<ResendOtpButton> {
   bool firstTime = true;
   bool disable = false;
-  int time = 3;
-  late Timer timer;
+  int time = 60;
+  Timer? timer;
 
   @override
   void dispose() {
     super.dispose();
-    timer.cancel();
+    timer?.cancel();
   }
 
   @override
