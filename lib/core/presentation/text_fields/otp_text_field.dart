@@ -16,7 +16,7 @@ class OtpTextField extends StatefulWidget {
   const OtpTextField({
     Key? key,
     this.onChanged,
-    this.initialValue='',
+    this.initialValue = '',
     required this.onSendOtpTap,
     this.errorText = '',
   }) : super(key: key);

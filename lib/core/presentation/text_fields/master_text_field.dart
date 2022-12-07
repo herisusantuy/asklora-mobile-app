@@ -16,7 +16,7 @@ class MasterTextField extends StatefulWidget {
       {Key? key,
       this.onChanged,
       this.textCapitalization = TextCapitalization.none,
-      this.initialValue='',
+      this.initialValue = '',
       this.textInputFormatterList,
       this.labelText = '',
       this.hintText = '',

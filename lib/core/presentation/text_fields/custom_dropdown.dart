@@ -17,7 +17,7 @@ class CustomDropdown extends StatelessWidget {
     Key? key,
     this.value = '',
     this.hintText = '',
-    this.label='',
+    this.label = '',
     required this.itemsList,
     required this.onChanged,
     this.onTap,
@@ -25,7 +25,6 @@ class CustomDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,7 +33,9 @@ class CustomDropdown extends StatelessWidget {
             label,
             style: TextFieldStyle.labelTextStyle,
           ),
-        const SizedBox(height: 6,),
+        const SizedBox(
+          height: 6,
+        ),
         ButtonTheme(
           alignedDropdown: true,
           child: DropdownButtonFormField<String>(
@@ -42,8 +43,8 @@ class CustomDropdown extends StatelessWidget {
             menuMaxHeight: 200,
             hint: CustomTextNew(
               hintText,
-              style: AskLoraTextStyles.body1
-                  .copyWith(color: TextFieldStyle.hintTextStyle.color, height: 1),
+              style: AskLoraTextStyles.body1.copyWith(
+                  color: TextFieldStyle.hintTextStyle.color, height: 1),
             ),
             onChanged: (String? newValue) {
               onChanged(newValue);
