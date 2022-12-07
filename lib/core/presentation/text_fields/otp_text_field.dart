@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../styles/asklora_colors.dart';
+import '../../styles/asklora_text_styles.dart';
 import 'style/text_field_style.dart';
 
 class OtpTextField extends StatefulWidget {
@@ -26,12 +27,6 @@ class OtpTextField extends StatefulWidget {
 
 class _OtpTextFieldState extends State<OtpTextField> {
   final TextEditingController controller = TextEditingController();
-  final OutlineInputBorder nonFocusedBorder = const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)));
-
-  final OutlineInputBorder focusedBorder = const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-      borderSide: BorderSide(color: AskLoraColors.primaryGreen, width: 2));
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
   Widget? label;
@@ -67,6 +62,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
           controller: controller,
           onChanged: widget.onChanged,
           initialValue: widget.initialValue,
+          style: TextFieldStyle.valueTextStyle,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(4),
@@ -93,8 +89,9 @@ class ResendOtpButton extends StatefulWidget {
 }
 
 class _ResendOtpButtonState extends State<ResendOtpButton> {
+  bool firstTime = true;
   bool disable = false;
-  int time = 60;
+  int time = 3;
   late Timer timer;
 
   @override
@@ -112,6 +109,7 @@ class _ResendOtpButtonState extends State<ResendOtpButton> {
         children: [
           GestureDetector(
             onTap: () {
+              firstTime = false;
               if (!disable) {
                 widget.onSendOtpTap();
                 setState(() {
@@ -137,12 +135,15 @@ class _ResendOtpButtonState extends State<ResendOtpButton> {
             },
             child: Center(
               child: Text(
-                disable ? 'RE-SEND IN $time' : 'SEND OTP',
-                style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                    color: disable ? Colors.grey[400] : Colors.black),
-              ),
+                  disable
+                      ? 'RE-SEND IN $time'
+                      : firstTime
+                          ? 'SEND OTP'
+                          : 'RE-SEND OTP',
+                  style: AskLoraTextStyles.subtitleAllCap1.copyWith(
+                      color: disable
+                          ? AskLoraColors.gray
+                          : AskLoraColors.charcoal)),
             ),
           )
         ],

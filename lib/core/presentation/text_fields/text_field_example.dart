@@ -3,6 +3,7 @@ import '../custom_text.dart';
 import 'amount_text_field.dart';
 import 'custom_dropdown.dart';
 import 'master_text_field.dart';
+import 'message_text_field.dart';
 import 'otp_text_field.dart';
 import 'password_text_field.dart';
 
@@ -26,35 +27,52 @@ class TextFieldExample extends StatelessWidget {
         ),
         _textField(
             'Master',
-            const MasterTextField(
+            MasterTextField(
+              label: 'Label',
+              hintText: 'Hint Text',
+              onChanged: (value) => debugPrint('value $value'),
+            )),
+        _textField(
+            'Master Error',
+            MasterTextField(
               label: 'Label',
               errorText: 'Please fill the label',
-              hintText: 'hint text',
+              hintText: 'Hint Text',
+              onChanged: (value) => debugPrint('value $value'),
             )),
         _textField(
             'Password',
             PasswordTextField(
               label: 'Label',
-              hintText: 'hint text',
-              validPassword: (value) => print('valid $value'),
+              hintText: 'Hint Text',
+              validPassword: (value) => debugPrint('valid $value'),
+              onChanged: (value) => debugPrint('value $value'),
             )),
         _textField(
             'One Time Password',
             OtpTextField(
               onSendOtpTap: () {},
+              onChanged: (value) => debugPrint('value $value'),
             )),
         _textField(
             'Amount',
-            const AmountTextField(
+            AmountTextField(
               label: 'Label',
               hintText: 'HKD 10000',
+              onChanged: (value) => debugPrint('value $value'),
             )),
         _textField(
             'Dropdown',
             CustomDropdown(
-              hintText: 'HKD 10000',
+              hintText: 'Select Dropdown',
               itemsList: const ['This', 'That'],
-              onChanged: (_) {},
+              onChanged: (value) => debugPrint('value $value'),
+            )),
+        _textField(
+            'Dropdown',
+            MessageTextField(
+              hintText: 'Hint Text',
+              onChanged: (value) => debugPrint('value $value'),
             )),
       ],
     );

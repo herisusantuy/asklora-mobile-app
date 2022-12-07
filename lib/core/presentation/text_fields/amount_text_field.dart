@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../styles/asklora_colors.dart';
+import '../../utils/extensions.dart';
+import '../../utils/formatters/currency_formatter.dart';
 import 'style/text_field_style.dart';
 
 class AmountTextField extends StatefulWidget {
@@ -32,10 +34,13 @@ class _AmountTextFieldState extends State<AmountTextField> {
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
   Widget? label;
   String? prefixText;
+  Widget? prefixWidget;
+  String? hintText;
 
   @override
   void initState() {
     super.initState();
+    hintText = widget.hintText;
     controller.addListener(() {
       _setFloatingLabelBehavior();
     });
@@ -44,15 +49,14 @@ class _AmountTextFieldState extends State<AmountTextField> {
   void _setFloatingLabelBehavior() {
     setState(() {
       if (controller.text.isEmpty) {
+        hintText = widget.hintText;
         label = null;
         prefixText = null;
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
+        hintText = null;
         label = Text(widget.label);
-        setState(() {
-          prefixText = widget.prefixText;
-        });
-
+        prefixText = widget.prefixText;
         floatingLabelBehavior = FloatingLabelBehavior.always;
       }
     });
@@ -67,16 +71,22 @@ class _AmountTextFieldState extends State<AmountTextField> {
         ),
         child: TextFormField(
             controller: controller,
-            onChanged: widget.onChanged,
+            onChanged: (value) {
+              if (widget.onChanged != null) {
+                widget.onChanged!(value.replaceAll(amountRegex, ''));
+              }
+            },
             initialValue: widget.initialValue,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
+              CurrencyTextInputFormatter(symbol: '', decimalDigits: 0)
             ],
             keyboardType: TextInputType.number,
+            style: TextFieldStyle.valueTextStyle,
             decoration: TextFieldStyle.inputDecoration.copyWith(
                 floatingLabelBehavior: floatingLabelBehavior,
                 label: label,
-                hintText: widget.hintText,
+                hintText: hintText,
                 errorText: widget.errorText.isEmpty ? null : widget.errorText,
                 prefixText: prefixText)),
       );
