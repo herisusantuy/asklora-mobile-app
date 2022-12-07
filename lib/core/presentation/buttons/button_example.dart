@@ -4,7 +4,8 @@ import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../custom_text_new.dart';
 import 'primary_button.dart';
-import 'secondary_button.dart';
+import 'secondary/secondary_multiple_choice_button.dart';
+import 'utils/button_utils.dart';
 
 class ButtonExample extends StatelessWidget {
   const ButtonExample({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class ButtonExample extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         CustomTextNew(
+        CustomTextNew(
           'Get Your Investment In Shape',
           style: AskLoraTextStyles.h1,
         ),
@@ -72,22 +73,23 @@ class ButtonExample extends StatelessWidget {
             )),
         _button(
           'Secondary default',
-          SecondaryButton(
+          SecondaryMultipleChoiceButton(
               label: 'Multiple choice big safsaff asfasf asfsafas',
               buttonSecondarySize: ButtonSecondarySize.small,
               onTap: () {}),
         ),
         _button(
           'Secondary active',
-          SecondaryButton(
-              label: 'Multiple choice big safsaff asfasf asfsafas',
+          SecondaryMultipleChoiceButton(
+              label:
+                  'Multiple choice big safsaff asfasf asfsafas asfasf asfasf asfsaf asfsafas fasf',
               buttonSecondarySize: ButtonSecondarySize.small,
               active: true,
               onTap: () {}),
         ),
         _button(
           'Secondary active big',
-          SecondaryButton(
+          SecondaryMultipleChoiceButton(
               label: 'Multiple choice big safsaff asfasf asfsafas',
               buttonSecondarySize: ButtonSecondarySize.big,
               active: true,

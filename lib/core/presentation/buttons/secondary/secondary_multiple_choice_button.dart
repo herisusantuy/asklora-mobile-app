@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import '../../domain/pair.dart';
-import '../../styles/asklora_colors.dart';
+import '../../../domain/pair.dart';
+import '../../../styles/asklora_colors.dart';
+import '../../../styles/asklora_text_styles.dart';
+import '../../custom_text_new.dart';
+import '../utils/button_utils.dart';
 
-enum ButtonSecondarySize { small, big }
-
-class SecondaryButton extends StatelessWidget {
+class SecondaryMultipleChoiceButton extends StatelessWidget {
   final String label;
   final ButtonSecondarySize buttonSecondarySize;
   final FontStyle fontStyle;
   final VoidCallback onTap;
   final bool active;
 
-  SecondaryButton(
+  SecondaryMultipleChoiceButton(
       {this.label = '',
       required this.onTap,
       this.fontStyle = FontStyle.normal,
@@ -42,18 +43,16 @@ class SecondaryButton extends StatelessWidget {
               foregroundColor: _getColor(AskLoraColors.charcoal,
                   AskLoraColors.charcoal.withOpacity(0.9)),
               shape: _getBorder(
-                  active ? AskLoraColors.primaryGreen : AskLoraColors.gray,
-                  AskLoraColors.gray.withOpacity(0.9))),
+                  color:
+                      active ? AskLoraColors.primaryGreen : AskLoraColors.gray,
+                  colorPressed: AskLoraColors.gray.withOpacity(0.9),
+                  borderWidth: active ? 3 : 1.4)),
           onPressed: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: Text(label,
-                  style: TextStyle(
-                      fontSize: _getFontSize,
-                      fontStyle: fontStyle,
-                      fontWeight: FontWeight.w700)),
+              child: CustomTextNew(label, style: AskLoraTextStyles.subtitle2),
             ),
           )),
     );
@@ -70,12 +69,14 @@ class SecondaryButton extends StatelessWidget {
   }
 
   MaterialStateProperty<OutlinedBorder> _getBorder(
-      Color color, Color colorPressed) {
+      {required Color color,
+      required Color colorPressed,
+      required double borderWidth}) {
     return MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       return RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
           side: BorderSide(
-              width: states.contains(MaterialState.pressed) ? 3 : 1.4,
+              width: borderWidth,
               color: states.contains(MaterialState.pressed)
                   ? colorPressed
                   : color));
@@ -99,15 +100,6 @@ class SecondaryButton extends StatelessWidget {
         return Pair(200, 40);
       case ButtonSecondarySize.big:
         return Pair(double.infinity, 50);
-    }
-  }
-
-  double get _getFontSize {
-    switch (buttonSecondarySize) {
-      case ButtonSecondarySize.small:
-        return 10;
-      case ButtonSecondarySize.big:
-        return 14;
     }
   }
 }
