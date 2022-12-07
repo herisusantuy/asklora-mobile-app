@@ -61,6 +61,7 @@ class _MasterTextFieldState extends State<MasterTextField> {
       initialValue: widget.initialValue,
       inputFormatters: widget.textInputFormatterList,
       maxLines: widget.maxLine,
+      style: TextFieldStyle.valueTextStyle,
       decoration: TextFieldStyle.inputDecoration.copyWith(
         floatingLabelBehavior: floatingLabelBehavior,
         label: label,

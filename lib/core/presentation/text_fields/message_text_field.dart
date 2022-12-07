@@ -9,7 +9,7 @@ class MessageTextField extends StatefulWidget {
   final String? initialValue;
   final List<TextInputFormatter>? textInputFormatterList;
   final int? maxLine;
-  final String label;
+  final String hintText;
   final String errorText;
   final Function(String)? onChanged;
 
@@ -18,7 +18,7 @@ class MessageTextField extends StatefulWidget {
       this.textCapitalization = TextCapitalization.none,
       this.initialValue,
       this.textInputFormatterList,
-      this.label = '',
+      this.hintText = '',
       this.errorText = '',
       this.onChanged,
       this.maxLine = 5})
@@ -46,24 +46,15 @@ class _MessageTextFieldState extends State<MessageTextField> {
 
   @override
   Widget build(BuildContext context) => TextFormField(
-        textCapitalization: widget.textCapitalization,
-        initialValue: widget.initialValue,
-        inputFormatters: widget.textInputFormatterList,
-        maxLines: widget.maxLine,
-        onChanged: widget.onChanged,
-        decoration: InputDecoration(
-          floatingLabelBehavior: floatingLabelBehavior,
-          label: label,
-          hintStyle: const TextStyle(color: AskLoraColors.darkGray),
-          hintText: widget.label,
-          errorText: widget.errorText.isEmpty ? null : widget.errorText,
-          contentPadding: TextFieldStyle.contentPadding,
-          border: TextFieldStyle.nonFocusedBorder,
-          focusedBorder: TextFieldStyle.focusedBorder,
-          errorBorder: TextFieldStyle.nonFocusedBorder,
-          focusedErrorBorder: TextFieldStyle.focusedBorder,
-          errorStyle: TextFieldStyle.errorTextStyle,
-          labelStyle: TextFieldStyle.labelTextStyle,
-        ),
-      );
+      textCapitalization: widget.textCapitalization,
+      initialValue: widget.initialValue,
+      inputFormatters: widget.textInputFormatterList,
+      maxLines: widget.maxLine,
+      onChanged: widget.onChanged,
+      style: TextFieldStyle.valueTextStyle,
+      decoration: TextFieldStyle.inputDecoration.copyWith(
+        floatingLabelBehavior: floatingLabelBehavior,
+        hintText: widget.hintText,
+        errorText: widget.errorText.isEmpty ? null : widget.errorText,
+      ));
 }

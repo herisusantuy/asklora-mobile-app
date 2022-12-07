@@ -13,6 +13,9 @@ final RegExp passwordRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
 /// OTP regex (exactly 6 digits)
 final RegExp otpRegex = RegExp(r'^([0-9]{6})$');
 
+/// extract amount regex
+final RegExp amountRegex = RegExp('[^0-9]');
+
 extension EmailValidator on String {
   bool isValidEmail() => emailRegex.hasMatch(this);
 

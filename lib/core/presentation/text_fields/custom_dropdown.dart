@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/asklora_text_styles.dart';
 import '../custom_text.dart';
+import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 
 class CustomDropdown extends StatelessWidget {
@@ -28,10 +30,10 @@ class CustomDropdown extends StatelessWidget {
       child: DropdownButtonFormField<String>(
         elevation: 2,
         menuMaxHeight: 200,
-        hint: CustomText(
+        hint: CustomTextNew(
           hintText,
-          type: FontType.smallText,
-          color: value.isNotEmpty ? Colors.black : Colors.black26,
+          style: AskLoraTextStyles.body1
+              .copyWith(color: TextFieldStyle.hintTextStyle.color, height: 1),
         ),
         value: dropdownValue,
         onChanged: (String? newValue) {

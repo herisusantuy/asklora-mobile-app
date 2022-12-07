@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../styles/asklora_colors.dart';
+import '../../styles/asklora_text_styles.dart';
 import '../../utils/extensions.dart';
+import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 
 class PasswordTextField extends StatefulWidget {
@@ -94,6 +96,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               initialValue: widget.initialValue,
               inputFormatters: widget.textInputFormatterList,
               obscureText: obscureText,
+              obscuringCharacter: '●',
+              style: TextFieldStyle.valueTextStyle,
               decoration: TextFieldStyle.inputDecoration.copyWith(
                   floatingLabelBehavior: floatingLabelBehavior,
                   label: label,
@@ -142,14 +146,15 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               color: checkPassed
                   ? AskLoraColors.primaryGreen
                   : AskLoraColors.primaryMagenta,
-              size: 10,
+              size: 12,
             ),
             const SizedBox(
               width: 4,
             ),
-            Text(
+            CustomTextNew(
               label,
-              style: TextStyle(fontSize: 9, color: Colors.grey[600]),
+              style: AskLoraTextStyles.body3
+                  .copyWith(color: AskLoraColors.darkGray),
             )
           ],
         ),
