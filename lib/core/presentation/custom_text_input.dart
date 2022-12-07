@@ -28,6 +28,7 @@ class CustomTextInput extends StatelessWidget {
   final TextStyle? hintTextStyle;
   final EdgeInsets contentPadding;
   final int? maxLine;
+  final bool autoFocus;
 
   const CustomTextInput(
       {required this.labelText,
@@ -56,6 +57,7 @@ class CustomTextInput extends StatelessWidget {
       this.textStyle,
       this.hintTextStyle,
       this.maxLine,
+      this.autoFocus = false,
       Key? key})
       : super(key: key);
 
@@ -71,6 +73,7 @@ class CustomTextInput extends StatelessWidget {
         style: textStyle,
         maxLines: maxLine,
         minLines: 1,
+        autofocus: autoFocus,
         decoration: InputDecoration(
             floatingLabelBehavior: floatingLabelBehavior,
             filled: fillColor != null ? true : false,

@@ -15,7 +15,6 @@ enum QuestionSection {
 
 enum QuestionType {
   choices('choices'),
-  slider('slider'),
   descriptive('descriptive'),
   feedBack('feedback');
 

@@ -36,9 +36,6 @@ class PrivacyQuestionBloc
         emit(OnNextQuestion<QuestionCollection>(
             QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
-            privacyQuestionIndex: _privacyQuestionIndex));
       }
     } else {
       emit(OnNextPersonalisationQuestionScreen());
@@ -56,9 +53,6 @@ class PrivacyQuestionBloc
       } else if (question.questions!.types == QuestionType.descriptive.value) {
         emit(OnNextQuestion<QuestionCollection>(
             QuestionType.descriptive, question,
-            privacyQuestionIndex: _privacyQuestionIndex));
-      } else {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       }
     } else if (_privacyQuestionIndex < 0) {

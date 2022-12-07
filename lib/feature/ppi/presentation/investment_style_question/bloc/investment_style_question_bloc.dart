@@ -38,9 +38,6 @@ class InvestmentStyleQuestionBloc
         emit(OnNextQuestion<QuestionCollection>(
             QuestionType.descriptive, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
-            investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       }
     } else {
       emit(OnNextBotRecommendationScreen());
@@ -59,9 +56,6 @@ class InvestmentStyleQuestionBloc
       } else if (question.questions!.types == QuestionType.descriptive.value) {
         emit(OnNextQuestion<QuestionCollection>(
             QuestionType.descriptive, question,
-            investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
-      } else {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       }
     } else if (_investmentStyleQuestionIndex < 0) {
