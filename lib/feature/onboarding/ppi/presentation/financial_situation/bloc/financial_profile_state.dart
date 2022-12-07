@@ -1,40 +1,51 @@
 part of 'financial_profile_bloc.dart';
 
-enum FundingSource {
-  employmentIncome,
-  investments,
-  inheritance,
-  businessIncome,
-  savings,
-  family,
-  unknown
+const incomeRangeItems = [
+  '0 - 200,000',
+  '200,001 - 400,000',
+  '400,001 - 600,000',
+  '600,000 - 800,000',
+  '800,001 - 1,000,000+',
+];
+
+enum Occupations {
+  healthCare('Healthcare'),
+  education('Education'),
+  legal('Legal'),
+  business('Business'),
+  finance('Finance'),
+  it('IT'),
+  other('Other');
+
+  final String value;
+
+  const Occupations(this.value);
 }
 
-String fundingSourceValue(FundingSource fundingSource) {
-  switch (fundingSource) {
-    case FundingSource.employmentIncome:
-      return 'employment_income';
-    case FundingSource.investments:
-      return 'investments';
-    case FundingSource.inheritance:
-      return 'inheritance';
-    case FundingSource.businessIncome:
-      return 'business_income';
-    case FundingSource.savings:
-      return 'savings';
-    case FundingSource.family:
-      return 'family';
-    default:
-      return 'unknown';
-  }
+enum FundingSource {
+  employmentIncome('Employment Income'),
+  investments('Investments'),
+  inheritance('Inheritance'),
+  businessIncome('Business Income'),
+  savings('Savings'),
+  family('Family'),
+  unknown('Unknown');
+
+  final String value;
+
+  const FundingSource(this.value);
 }
 
 enum EmploymentStatus {
-  unemployed,
-  employed,
-  student,
-  retired,
-  unknown,
+  unemployed('Unemployed'),
+  employed('Employed'),
+  student('Student'),
+  retired('Retired'),
+  unknown('Unknown');
+
+  final String value;
+
+  const EmploymentStatus(this.value);
 }
 
 class FinancialProfileState extends Equatable {
@@ -42,7 +53,7 @@ class FinancialProfileState extends Equatable {
   final String investibleLiquidAssets;
   final FundingSource fundingSource;
   final EmploymentStatus employmentStatus;
-  final String? occupation;
+  final Occupations? occupation;
   final String? otherOccupation;
   final String? employer;
   final String? employerAddress;
@@ -53,7 +64,7 @@ class FinancialProfileState extends Equatable {
     this.investibleLiquidAssets = '',
     this.fundingSource = FundingSource.unknown,
     this.employmentStatus = EmploymentStatus.unknown,
-    this.occupation = '',
+    this.occupation,
     this.otherOccupation = '',
     this.employer = '',
     this.employerAddress = '',
@@ -65,7 +76,7 @@ class FinancialProfileState extends Equatable {
     String? investibleLiquidAssets,
     FundingSource? fundingSource,
     EmploymentStatus? employmentStatus,
-    String? occupation,
+    Occupations? occupation,
     String? otherOccupation,
     String? employer,
     String? employerAddress,
@@ -108,39 +119,15 @@ class FinancialProfileState extends Equatable {
         employmentStatus != EmploymentStatus.employed) {
       return true;
     } else if (employmentStatus == EmploymentStatus.employed &&
-        occupation != 'Other' &&
-        occupation!.isNotEmpty) {
+        occupation != null &&
+        occupation != Occupations.other) {
       return true;
-    } else if (occupation == 'Other' &&
+    } else if (occupation == Occupations.other &&
         otherOccupation != null &&
         otherOccupation!.isNotEmpty) {
       return true;
     } else {
       return false;
     }
-    //
-    //   if (investibleLiquidAssets.isNotEmpty) {
-    //     if (EmploymentStatus.unknown == employmentStatus) {
-    //       return false;
-    //     } else if (EmploymentStatus.employed == employmentStatus) {
-    //       if (occupation != 'Other') {
-    //         if (employer != null && employerAddress != null) {
-    //           return true;
-    //         } else {
-    //           return false;
-    //         }
-    //       } else {
-    //         print('here');
-    //         if (otherOccupation!.isNotEmpty) {
-    //           return true;
-    //         } else {
-    //           return false;
-    //         }
-    //       }
-    //     } else {
-    //       return true;
-    //     }
-    //   }
-    //   return false;
   }
 }

@@ -4,10 +4,10 @@ import 'style/text_field_style.dart';
 
 class MasterTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
-  final String? initialValue;
+  final String initialValue;
   final List<TextInputFormatter>? textInputFormatterList;
   final int? maxLine;
-  final String label;
+  final String labelText;
   final String hintText;
   final String errorText;
   final Function(String)? onChanged;
@@ -16,9 +16,9 @@ class MasterTextField extends StatefulWidget {
       {Key? key,
       this.onChanged,
       this.textCapitalization = TextCapitalization.none,
-      this.initialValue,
+      this.initialValue='',
       this.textInputFormatterList,
-      this.label = '',
+      this.labelText = '',
       this.hintText = '',
       this.errorText = '',
       this.maxLine})
@@ -31,11 +31,17 @@ class MasterTextField extends StatefulWidget {
 class _MasterTextFieldState extends State<MasterTextField> {
   final TextEditingController controller = TextEditingController();
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
-  Widget? label;
+  String? label;
 
   @override
   void initState() {
     super.initState();
+
+    if (widget.initialValue.isNotEmpty) {
+      label = widget.labelText;
+      floatingLabelBehavior = FloatingLabelBehavior.always;
+      controller.text = widget.initialValue;
+    }
     controller.addListener(() {
       _setFloatingLabelBehavior();
     });
@@ -47,7 +53,7 @@ class _MasterTextFieldState extends State<MasterTextField> {
         label = null;
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
-        label = Text(widget.label);
+        label = widget.labelText;
         floatingLabelBehavior = FloatingLabelBehavior.always;
       }
     });
@@ -58,13 +64,12 @@ class _MasterTextFieldState extends State<MasterTextField> {
       controller: controller,
       onChanged: widget.onChanged,
       textCapitalization: widget.textCapitalization,
-      initialValue: widget.initialValue,
       inputFormatters: widget.textInputFormatterList,
       maxLines: widget.maxLine,
       style: TextFieldStyle.valueTextStyle,
       decoration: TextFieldStyle.inputDecoration.copyWith(
         floatingLabelBehavior: floatingLabelBehavior,
-        label: label,
+        labelText: label,
         hintText: widget.hintText,
         errorText: widget.errorText.isEmpty ? null : widget.errorText,
       ));

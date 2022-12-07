@@ -28,14 +28,14 @@ class TextFieldExample extends StatelessWidget {
         _textField(
             'Master',
             MasterTextField(
-              label: 'Label',
+              labelText: 'Label',
               hintText: 'Hint Text',
               onChanged: (value) => debugPrint('value $value'),
             )),
         _textField(
             'Master Error',
             MasterTextField(
-              label: 'Label',
+              labelText: 'Label',
               errorText: 'Please fill the label',
               hintText: 'Hint Text',
               onChanged: (value) => debugPrint('value $value'),
@@ -57,6 +57,7 @@ class TextFieldExample extends StatelessWidget {
         _textField(
             'Amount',
             AmountTextField(
+              initialValue: '20000',
               label: 'Label',
               hintText: 'HKD 10000',
               onChanged: (value) => debugPrint('value $value'),

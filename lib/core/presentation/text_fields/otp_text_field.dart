@@ -8,7 +8,7 @@ import '../../styles/asklora_text_styles.dart';
 import 'style/text_field_style.dart';
 
 class OtpTextField extends StatefulWidget {
-  final String? initialValue;
+  final String initialValue;
   final String errorText;
   final VoidCallback onSendOtpTap;
   final Function(String)? onChanged;
@@ -16,7 +16,7 @@ class OtpTextField extends StatefulWidget {
   const OtpTextField({
     Key? key,
     this.onChanged,
-    this.initialValue,
+    this.initialValue='',
     required this.onSendOtpTap,
     this.errorText = '',
   }) : super(key: key);
@@ -29,11 +29,16 @@ class _OtpTextFieldState extends State<OtpTextField> {
   final TextEditingController controller = TextEditingController();
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
-  Widget? label;
+  String? label;
 
   @override
   void initState() {
     super.initState();
+    if (widget.initialValue.isNotEmpty) {
+      label = 'One-time-password';
+      floatingLabelBehavior = FloatingLabelBehavior.always;
+      controller.text = widget.initialValue;
+    }
     controller.addListener(() {
       _setFloatingLabelBehavior();
     });
@@ -45,7 +50,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
         label = null;
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
-        label = const Text('One-time-password');
+        label = 'One-time-password';
         floatingLabelBehavior = FloatingLabelBehavior.always;
       }
     });
@@ -61,7 +66,6 @@ class _OtpTextFieldState extends State<OtpTextField> {
         child: TextFormField(
           controller: controller,
           onChanged: widget.onChanged,
-          initialValue: widget.initialValue,
           style: TextFieldStyle.valueTextStyle,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
@@ -70,7 +74,7 @@ class _OtpTextFieldState extends State<OtpTextField> {
           keyboardType: TextInputType.number,
           decoration: TextFieldStyle.inputDecoration.copyWith(
               floatingLabelBehavior: floatingLabelBehavior,
-              label: label,
+              labelText: label,
               hintText: 'One-time-password (4 digit)',
               errorText: widget.errorText.isEmpty ? null : widget.errorText,
               suffixIcon: ResendOtpButton(onSendOtpTap: widget.onSendOtpTap)),

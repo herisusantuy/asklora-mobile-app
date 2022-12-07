@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../../core/presentation/custom_dropdown.dart';
-import '../../../../../../core/presentation/custom_text_input.dart';
-import '../../../../../../core/presentation/we_create/custom_button.dart';
+import '../../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../../core/presentation/text_fields/custom_dropdown.dart';
+import '../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../domain/question.dart';
 import '../../widget/header.dart';
 import '../bloc/financial_profile_bloc.dart';
@@ -19,14 +18,8 @@ class FinancialSituationQuestion extends StatelessWidget {
       required this.questionCollection,
       Key? key})
       : super(key: key);
-
-  final incomeRange = const [
-    '0 - 200,000',
-    '200,001 - 400,000',
-    '400,001 - 600,000',
-    '600,000 - 800,000',
-    '800,001 - 1,000,000+',
-  ];
+  static const double _spaceHeightDouble = 14;
+  final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
 
   @override
   Widget build(BuildContext context) {
@@ -43,34 +36,39 @@ class FinancialSituationQuestion extends StatelessWidget {
         ),
         Expanded(
             child: SingleChildScrollView(
+          padding: const EdgeInsets.only(bottom: _spaceHeightDouble),
           child: Column(
             children: [
-              _investibleLiquidAssetsDropdown(),
-              _fundingSourceDropdown(),
-              _employmentStatusDropdown(),
+              _investibleLiquidAssetsDropdown,
+              _spaceHeight,
+              _fundingSourceDropdown,
+              _spaceHeight,
+              _employmentStatusDropdown,
+              _spaceHeight,
+              _occupationDropdown,
+              _otherOccupationInput,
+              _spaceHeight,
+              _employerInput,
             ],
           ),
         )),
-        _nextButton()
+        _nextButton(),
+        _spaceHeight,
       ],
     );
   }
 
-  Widget _investibleLiquidAssetsDropdown() {
+  Widget get _investibleLiquidAssetsDropdown {
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.investibleLiquidAssets != current.investibleLiquidAssets,
       builder: (context, state) {
         return CustomDropdown(
             key: const Key('account_investible_liquid_assets_select'),
-            padding: const EdgeInsets.only(top: 10),
             label: 'Investible Liquid Assets*',
-            hintName: state.investibleLiquidAssets.isNotEmpty
-                ? state.investibleLiquidAssets
-                : '-',
+            hintText: 'Please select',
             value: state.investibleLiquidAssets,
-            itemsList: incomeRange,
-            border: const OutlineInputBorder(),
+            itemsList: incomeRangeItems,
             onChanged: (value) => context
                 .read<FinancialProfileBloc>()
                 .add(FinancialProfileInvestibleLiquidAssetChanged(value!)));
@@ -78,179 +76,147 @@ class FinancialSituationQuestion extends StatelessWidget {
     );
   }
 
-  Widget _fundingSourceDropdown() {
-    List<String> itemList = FundingSource.values.map((e) => e.name).toList();
-    itemList.remove('unknown');
+  Widget get _fundingSourceDropdown {
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
           previous.fundingSource != current.fundingSource,
       builder: (context, state) {
         return CustomDropdown(
             key: const Key('account_funding_source_select'),
-            padding: const EdgeInsets.only(top: 10),
             label: 'Account Funding Source*',
-            hintName: state.fundingSource != FundingSource.unknown
-                ? state.fundingSource.name
-                : '-',
-            itemsList: itemList,
+            hintText: 'Please select',
+            itemsList: FundingSource.values.map((e) => e.value).toList()
+              ..remove(FundingSource.unknown.value),
             value: state.fundingSource.name,
-            border: const OutlineInputBorder(),
-            onChanged: (value) {
-              final fundingSource = FundingSource.values.byName(value!);
-              context
-                  .read<FinancialProfileBloc>()
-                  .add(FinancialProfileFundingSourceChanged(fundingSource));
-            });
+            onChanged: (value) => context.read<FinancialProfileBloc>().add(
+                FinancialProfileFundingSourceChanged(FundingSource.values
+                    .firstWhere((element) => element.value == value))));
       },
     );
   }
 
-  Widget _employmentStatusDropdown() {
-    List<String> itemList = EmploymentStatus.values.map((e) => e.name).toList();
-    itemList.remove('unknown');
+  Widget get _employmentStatusDropdown {
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-      buildWhen: (previous, current) =>
-          previous.employmentStatus != current.employmentStatus,
-      builder: (context, state) {
-        return Column(
-          children: [
-            CustomDropdown(
-                key: const Key('account_employment_status_select'),
-                padding: const EdgeInsets.only(top: 10),
-                label: 'Employment Status*',
-                hintName: state.employmentStatus != EmploymentStatus.unknown
-                    ? state.employmentStatus.name
-                    : '-',
-                itemsList: itemList,
-                value: state.employmentStatus.name,
-                border: const OutlineInputBorder(),
-                onChanged: (value) {
-                  final employmentStatus =
-                      EmploymentStatus.values.byName(value!);
-                  context.read<FinancialProfileBloc>().add(
-                      FinancialProfileEmploymentStatusChanged(
-                          employmentStatus));
-                }),
-            if (state.employmentStatus == EmploymentStatus.employed)
-              Column(
-                children: [
-                  _occupationDropdown(),
-                  _employerInput(context),
-                  _employerAddressInput(context),
-                  _employerAddressTwoInput(context)
-                ],
-              )
-          ],
-        );
-      },
-    );
+        buildWhen: (previous, current) =>
+            previous.employmentStatus != current.employmentStatus,
+        builder: (context, state) => CustomDropdown(
+            key: const Key('account_employment_status_select'),
+            label: 'Employment Status*',
+            hintText: 'Please select',
+            itemsList: EmploymentStatus.values.map((e) => e.value).toList()
+              ..remove(EmploymentStatus.unknown.value),
+            value: state.employmentStatus.value,
+            onChanged: (value) => context.read<FinancialProfileBloc>().add(
+                FinancialProfileEmploymentStatusChanged(EmploymentStatus.values
+                    .firstWhere((element) => element.value == value)))));
   }
 
-  Widget _occupationDropdown() {
-    List<String> items = [
-      'Healthcare',
-      'Education',
-      'Legal',
-      'Business',
-      'Finance',
-      'IT',
-      'Commercial',
-      'Other',
-    ];
+  Widget get _occupationDropdown {
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
       buildWhen: (previous, current) =>
+          previous.employmentStatus != current.employmentStatus ||
           previous.occupation != current.occupation,
       builder: (context, state) {
-        return Column(
-          children: [
-            CustomDropdown(
-              key: const Key('account_occupation_select'),
-              padding: const EdgeInsets.only(top: 10),
-              label: 'Occupation*',
-              hintName: '-',
-              itemsList: items,
-              value: state.occupation ?? '',
-              border: const OutlineInputBorder(),
-              onChanged: (value) => context
-                  .read<FinancialProfileBloc>()
-                  .add(FinancialProfileOccupationChanged(value!)),
-            ),
-            if (state.occupation == 'Other') _otherOccupationInput(context),
-          ],
-        );
+        if (state.employmentStatus == EmploymentStatus.employed) {
+          return CustomDropdown(
+            key: const Key('account_occupation_select'),
+            label: 'Occupation*',
+            itemsList: Occupations.values.map((e) => e.value).toList(),
+            value: state.occupation?.value ?? '',
+            hintText: 'Please select',
+            onChanged: (value) => context.read<FinancialProfileBloc>().add(
+                FinancialProfileOccupationChanged(Occupations.values
+                    .firstWhere((element) => element.value == value))),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }
 
-  Widget _otherOccupationInput(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-            buildWhen: (previous, current) => false,
-            builder: (context, state) => CustomTextInput(
+  Widget get _otherOccupationInput =>
+      BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
+          buildWhen: (previous, current) =>
+              previous.employmentStatus != current.employmentStatus ||
+              previous.occupation != current.occupation,
+          builder: (context, state) {
+            if (state.employmentStatus == EmploymentStatus.employed &&
+                state.occupation == Occupations.other) {
+              return Padding(
+                padding: const EdgeInsets.only(top: _spaceHeightDouble),
+                child: MasterTextField(
                   initialValue: state.otherOccupation ?? '',
                   key: const Key('account_other_occupation_input'),
                   labelText: 'Other Occupation*',
                   onChanged: (value) => context
                       .read<FinancialProfileBloc>()
                       .add(FinancialProfileOtherOccupationChanged(value)),
-                  hintText: 'Other',
-                )),
+                  hintText: 'Other Occupation*',
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          });
+
+  Widget get _employerInput =>
+      BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
+        buildWhen: (previous, current) =>
+            previous.employmentStatus != current.employmentStatus,
+        builder: (context, state) {
+          if (state.employmentStatus == EmploymentStatus.employed) {
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: _spaceHeightDouble),
+                  child: MasterTextField(
+                      initialValue: state.employer ?? '',
+                      key: const Key('account_employer_input'),
+                      labelText: 'Employer',
+                      onChanged: (value) => context
+                          .read<FinancialProfileBloc>()
+                          .add(FinancialProfileEmployerChanged(value)),
+                      hintText: 'Employer e.g. Lawyer'),
+                ),
+                _spaceHeight,
+                MasterTextField(
+                  initialValue: state.employerAddress ?? '',
+                  key: const Key('account_employer_address_two_input'),
+                  labelText: 'Employer Address 2',
+                  onChanged: (value) => context
+                      .read<FinancialProfileBloc>()
+                      .add(FinancialProfileEmployerAddressTwoChanged(value)),
+                  hintText: 'Employer Address 2',
+                ),
+                _spaceHeight,
+                MasterTextField(
+                  initialValue: state.employerAddress ?? '',
+                  key: const Key('account_employer_address_input'),
+                  labelText: 'Employer Address 1',
+                  onChanged: (value) => context
+                      .read<FinancialProfileBloc>()
+                      .add(FinancialProfileEmployerAddressChanged(value)),
+                  hintText: 'Employer Address 1',
+                ),
+              ],
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
       );
-
-  Widget _employerInput(BuildContext context) => Padding(
-      padding: const EdgeInsets.only(top: 20),
-      child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-        buildWhen: (previous, current) => false,
-        builder: (context, state) => CustomTextInput(
-            initialValue: state.employer ?? '',
-            key: const Key('account_employer_input'),
-            labelText: 'Employer',
-            onChanged: (value) => context
-                .read<FinancialProfileBloc>()
-                .add(FinancialProfileEmployerChanged(value)),
-            hintText: 'Employer'),
-      ));
-
-  Widget _employerAddressInput(BuildContext context) => Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-        buildWhen: (previous, current) => false,
-        builder: (context, state) => CustomTextInput(
-          initialValue: state.employerAddress ?? '',
-          key: const Key('account_employer_address_input'),
-          labelText: 'Employer Address 1',
-          onChanged: (value) => context
-              .read<FinancialProfileBloc>()
-              .add(FinancialProfileEmployerAddressChanged(value)),
-          hintText: 'Employer Address 1',
-        ),
-      ));
-
-  Widget _employerAddressTwoInput(BuildContext context) => Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-        buildWhen: (previous, current) => false,
-        builder: (context, state) => CustomTextInput(
-          initialValue: state.employerAddress ?? '',
-          key: const Key('account_employer_address_two_input'),
-          labelText: 'Employer Address 2',
-          onChanged: (value) => context
-              .read<FinancialProfileBloc>()
-              .add(FinancialProfileEmployerAddressTwoChanged(value)),
-          hintText: 'Employer Address 2',
-        ),
-      ));
 
   Widget _nextButton() {
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
         buildWhen: (previous, current) =>
             previous.enableNextButton() != current.enableNextButton(),
-        builder: (context, state) => CustomButton(
+        builder: (context, state) => PrimaryButton(
+              label: 'NEXT',
+              buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
               key: const Key('question_next_button'),
-              disable: !state.enableNextButton(),
-              label: 'Next',
-              onClick: onTapNext,
-              margin: const EdgeInsets.only(bottom: 24),
+              disabled: !state.enableNextButton(),
+              onTap: onTapNext,
             ));
   }
 }

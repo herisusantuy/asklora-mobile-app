@@ -9,7 +9,7 @@ import 'style/text_field_style.dart';
 
 class PasswordTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
-  final String? initialValue;
+  final String initialValue;
   final List<TextInputFormatter>? textInputFormatterList;
   final String label;
   final String hintText;
@@ -21,7 +21,7 @@ class PasswordTextField extends StatefulWidget {
     Key? key,
     this.onChanged,
     this.textCapitalization = TextCapitalization.none,
-    this.initialValue,
+    this.initialValue='',
     this.textInputFormatterList,
     this.label = '',
     this.hintText = '',
@@ -42,11 +42,16 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   bool containsLowerCase = false;
   bool containsUpperCase = false;
   bool containsNumber = false;
-  Widget? label;
+  String? label;
 
   @override
   void initState() {
     super.initState();
+    if (widget.initialValue.isNotEmpty) {
+      label = widget.label;
+      floatingLabelBehavior = FloatingLabelBehavior.always;
+      controller.text = widget.initialValue;
+    }
     controller.addListener(() {
       _setFloatingLabelBehavior();
       _textValidation();
@@ -59,7 +64,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         label = null;
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
-        label = Text(widget.label);
+        label = widget.label;
         floatingLabelBehavior = FloatingLabelBehavior.always;
       }
     });
@@ -93,14 +98,13 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               controller: controller,
               onChanged: widget.onChanged,
               textCapitalization: widget.textCapitalization,
-              initialValue: widget.initialValue,
               inputFormatters: widget.textInputFormatterList,
               obscureText: obscureText,
               obscuringCharacter: '●',
               style: TextFieldStyle.valueTextStyle,
               decoration: TextFieldStyle.inputDecoration.copyWith(
                   floatingLabelBehavior: floatingLabelBehavior,
-                  label: label,
+                  labelText: label,
                   hintText: widget.hintText,
                   errorText: widget.errorText.isEmpty ? null : widget.errorText,
                   suffixIcon: GestureDetector(

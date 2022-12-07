@@ -18,7 +18,7 @@ class PrimaryButton extends StatelessWidget {
   final VoidCallback onTap;
 
   PrimaryButton(
-      {this.label = '',
+      {required this.label,
       this.buttonPrimaryType = ButtonPrimaryType.solidCharcoal,
       this.disabled = false,
       required this.onTap,

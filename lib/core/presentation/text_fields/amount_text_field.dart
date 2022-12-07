@@ -7,7 +7,7 @@ import '../../utils/formatters/currency_formatter.dart';
 import 'style/text_field_style.dart';
 
 class AmountTextField extends StatefulWidget {
-  final String? initialValue;
+  final String initialValue;
   final String label;
   final String hintText;
   final String prefixText;
@@ -17,7 +17,7 @@ class AmountTextField extends StatefulWidget {
   const AmountTextField(
       {Key? key,
       this.onChanged,
-      this.initialValue,
+      this.initialValue='',
       this.hintText = '',
       this.label = '',
       this.errorText = '',
@@ -32,7 +32,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
   final TextEditingController controller = TextEditingController();
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
-  Widget? label;
+  String? label;
   String? prefixText;
   Widget? prefixWidget;
   String? hintText;
@@ -40,6 +40,11 @@ class _AmountTextFieldState extends State<AmountTextField> {
   @override
   void initState() {
     super.initState();
+    if (widget.initialValue.isNotEmpty) {
+      label = widget.label;
+      floatingLabelBehavior = FloatingLabelBehavior.always;
+      controller.text = widget.initialValue;
+    }
     hintText = widget.hintText;
     controller.addListener(() {
       _setFloatingLabelBehavior();
@@ -55,7 +60,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
         hintText = null;
-        label = Text(widget.label);
+        label = widget.label;
         prefixText = widget.prefixText;
         floatingLabelBehavior = FloatingLabelBehavior.always;
       }
@@ -76,7 +81,6 @@ class _AmountTextFieldState extends State<AmountTextField> {
                 widget.onChanged!(value.replaceAll(amountRegex, ''));
               }
             },
-            initialValue: widget.initialValue,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               CurrencyTextInputFormatter(symbol: '', decimalDigits: 0)
@@ -85,7 +89,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
             style: TextFieldStyle.valueTextStyle,
             decoration: TextFieldStyle.inputDecoration.copyWith(
                 floatingLabelBehavior: floatingLabelBehavior,
-                label: label,
+                labelText: label,
                 hintText: hintText,
                 errorText: widget.errorText.isEmpty ? null : widget.errorText,
                 prefixText: prefixText)),
