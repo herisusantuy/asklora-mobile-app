@@ -37,23 +37,23 @@
     "questions": {
       "choices": [
         {
-          "name": "<HK$ 12,999",
+          "name": "less than HK$ 20K",
           "point": "1"
         },
         {
-          "name": "HK$13,000-HK$19,999",
+          "name": "HK$ 20K to 49K",
           "point": "2"
         },
         {
-          "name": "HK$20,000-HK$29,999",
+          "name": "HK$ 50K to 99K",
           "point": "3"
         },
         {
-          "name": "HK$30,000-HK$44,999",
+          "name": "HK$ 100K to 149K",
           "point": "4"
         },
         {
-          "name": ">HK$45,000",
+          "name": "more than HK$ 150K",
           "point": "5"
         }
       ],
@@ -107,24 +107,24 @@
           "point": "1"
         },
         {
-          "name": "Fixed returns similar to interest rates, I can tolerate low risk of capital loss.",
+          "name": "I can tolerate low risk of capital loss, such as fixed returns similar to interest rates",
           "point": "2"
         },
         {
-          "name": "To achieve some capital growth and returns above interest rates, I can tolerate moderate risk of capital loss ",
+          "name": "I can tolerate moderate risk of capital loss to achieve some capital growth and returns above interest rates",
           "point": "3"
         },
         {
-          "name": "To achieve substantial returns above interest rates, I can tolerate higher risk of capital loss.",
+          "name": "I can tolerate higher risk of capital loss to achieve substantial returns above interest rates",
           "point": "4"
         },
         {
-          "name": "To achieve very high and substantial returns, I can tolerate very high risk of capital loss which can exceed initial invested value.",
+          "name": "I can tolerate very high risk of capital loss which can exceed initial invested value to achieve very high and substantial returns ",
           "point": "5"
         }
       ],
       "hints": null,
-      "question": "Can I ask about your investment objectives?",
+      "question": "What are your investment objectives?",
       "question_index": 4,
       "section": "privacy",
       "types": "choices"
@@ -135,7 +135,7 @@
     "collection": "question",
     "questions": {
       "hints": "",
-      "question": "Can I ask about your financial situation?",
+      "question": "What is your financial situation?",
       "question_index": 5,
       "section": "privacy",
       "types": "unique"
@@ -152,7 +152,7 @@
         }
       ],
       "hints": "Age",
-      "question": "Not to be rude. but, how old are you?",
+      "question": "Nothing to be embarrassed about but, how old are you?",
       "question_index": 6,
       "section": "privacy",
       "types": "descriptive"
@@ -164,24 +164,24 @@
     "questions": {
       "choices": [
         {
-          "name": "Never",
-          "point": "1"
+          "name": "Of course!",
+          "point": "5"
         },
         {
-          "name": "Rarely",
-          "point": "2"
+          "name": "Quite often",
+          "point": "4"
         },
         {
           "name": "Sometimes",
           "point": "3"
         },
         {
-          "name": "Often",
-          "point": "4"
+          "name": "Not really...",
+          "point": "2"
         },
         {
-          "name": "Always",
-          "point": "5"
+          "name": "Never",
+          "point": "1"
         }
       ],
       "hints": null,
@@ -197,24 +197,24 @@
     "questions": {
       "choices": [
         {
-          "name": "Never",
-          "point": "1"
+          "name": "All the time.",
+          "point": "5"
         },
         {
-          "name": "Rarely",
-          "point": "2"
-        },
-        {
-          "name": "Sometimes",
-          "point": "3"
-        },
-        {
-          "name": "Often",
+          "name": "Usually.",
           "point": "4"
         },
         {
-          "name": "Always",
-          "point": "5"
+          "name": "Sometimes.",
+          "point": "3"
+        },
+        {
+          "name": "Not really...",
+          "point": "2"
+        },
+        {
+          "name": "That’s not me.",
+          "point": "1"
         }
       ],
       "hints": null,
@@ -230,31 +230,31 @@
     "questions": {
       "choices": [
         {
-          "name": "Never",
-          "point": "1"
+          "name": "Of course!",
+          "point": "5"
         },
         {
-          "name": "Rarely",
-          "point": "2"
-        },
-        {
-          "name": "Sometimes",
-          "point": "3"
-        },
-        {
-          "name": "Often",
+          "name": "Accurate.",
           "point": "4"
         },
         {
-          "name": "Always",
-          "point": "5"
+          "name": "Sort of.",
+          "point": "3"
+        },
+        {
+          "name": "Not really...",
+          "point": "2"
+        },
+        {
+          "name": "No.",
+          "point": "1"
         }
       ],
       "hints": null,
-      "question": "Do you keep notes handy to write down ideas or reminders, and follow them?",
+      "question": "Do you have a vivid imagination?",
       "question_index": 1,
       "section": "conscientiousness",
-      "types": "slider"
+      "types": "choices"
     },
     "uid": "quid6"
   },
@@ -263,31 +263,31 @@
     "questions": {
       "choices": [
         {
-          "name": "Never",
-          "point": "1"
+          "name": "Of course!",
+          "point": "5"
         },
         {
-          "name": "Rarely",
-          "point": "2"
-        },
-        {
-          "name": "Sometimes",
-          "point": "3"
-        },
-        {
-          "name": "Often",
+          "name": "Accurate.",
           "point": "4"
         },
         {
-          "name": "Always",
-          "point": "5"
+          "name": "Sort of.",
+          "point": "3"
+        },
+        {
+          "name": "Not really...",
+          "point": "2"
+        },
+        {
+          "name": "Completely inaccurate.",
+          "point": "1"
         }
       ],
       "hints": null,
-      "question": "Do you pay attention to detail?",
+      "question": "Do you find it difficult to sit still without fidgeting?",
       "question_index": 2,
       "section": "conscientiousness",
-      "types": "slider"
+      "types": "choices"
     },
     "uid": "quid7"
   },
@@ -296,31 +296,31 @@
     "questions": {
       "choices": [
         {
-          "name": "Never",
-          "point": "1"
+          "name": "All the time.",
+          "point": "5"
         },
         {
-          "name": "Rarely",
-          "point": "2"
-        },
-        {
-          "name": "Sometimes",
-          "point": "3"
-        },
-        {
-          "name": "Often",
+          "name": "Usually.",
           "point": "4"
         },
         {
-          "name": "Always",
-          "point": "5"
+          "name": "Sometimes.",
+          "point": "3"
+        },
+        {
+          "name": "Not really...",
+          "point": "2"
+        },
+        {
+          "name": "Never.",
+          "point": "1"
         }
       ],
       "hints": null,
-      "question": "Do you stay calm under pressure?",
+      "question": "Do you have trouble sleeping or wake up sweating after a bad dream?",
       "question_index": 1,
       "section": "neuroticism",
-      "types": "slider"
+      "types": "choices"
     },
     "uid": "quid8"
   },
@@ -329,31 +329,31 @@
     "questions": {
       "choices": [
         {
-          "name": "Never",
-          "point": "1"
+          "name": "Of course!",
+          "point": "5"
         },
         {
-          "name": "Rarely",
-          "point": "2"
-        },
-        {
-          "name": "Sometimes",
-          "point": "3"
-        },
-        {
-          "name": "Often",
+          "name": "Quite often.",
           "point": "4"
         },
         {
-          "name": "Always",
-          "point": "5"
+          "name": "Sometimes.",
+          "point": "3"
+        },
+        {
+          "name": "Not really...",
+          "point": "2"
+        },
+        {
+          "name": "That’s not me.",
+          "point": "1"
         }
       ],
       "hints": null,
-      "question": "Do you always feel excited or eager ?",
+      "question": "Are you easily annoyed if things don’t go according to plan?",
       "question_index": 2,
       "section": "neuroticism",
-      "types": "slider"
+      "types": "choices"
     },
     "uid": "quid9"
   },

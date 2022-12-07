@@ -14,6 +14,7 @@ class CustomCenteredTextInput extends StatelessWidget {
   final String? initialValue;
   final EdgeInsets padding;
   final FontWeight fontWeight;
+  final int? maxLength;
 
   const CustomCenteredTextInput(
       {required this.onChanged,
@@ -24,6 +25,7 @@ class CustomCenteredTextInput extends StatelessWidget {
       this.textInputType = TextInputType.text,
       this.textInputFormatterList,
       this.fontWeight = FontWeight.w900,
+      this.maxLength,
       Key? key})
       : super(key: key);
 
@@ -36,9 +38,11 @@ class CustomCenteredTextInput extends StatelessWidget {
         initialValue: initialValue,
         labelText: labelText,
         hintText: hintText,
+        maxLength: maxLength,
         inputBorder: InputBorder.none,
         textInputFormatterList: textInputFormatterList,
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        autoFocus: true,
         hintTextStyle: GoogleFonts.mulish(
             fontSize: 30,
             fontWeight: fontWeight,
@@ -47,7 +51,7 @@ class CustomCenteredTextInput extends StatelessWidget {
             fontSize: 33,
             fontWeight: fontWeight,
             color: AskLoraColors.charcoal),
-        textAlign: TextAlign.left,
+        textAlign: TextAlign.center,
         onChanged: onChanged,
       ),
     );

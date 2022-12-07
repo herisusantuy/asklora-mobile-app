@@ -41,55 +41,50 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
               height: 45,
             ),
             Expanded(
-                child: ListView.builder(
-              key: const Key('multiple_choice_question_builder'),
-              itemCount: questionCollection.questions!.choices!.length,
-              itemBuilder: (BuildContext context, int index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: BlocBuilder<MultipleQuestionWidgetBloc,
-                          MultipleQuestionWidgetState>(
-                      buildWhen: (previous, current) =>
-                          previous.defaultChoiceIndex !=
-                          current.defaultChoiceIndex,
-                      builder: (context, state) => ChoiceChip(
-                            key: Key('${questionCollection.uid}-$index'),
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
-                            labelPadding: const EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 20.0),
-                            shape: index == state.defaultChoiceIndex
-                                ? const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    side: BorderSide(
-                                        color: AskLoraColors.primaryGreen,
-                                        width: 3))
-                                : const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    side:
-                                        BorderSide(color: AskLoraColors.gray)),
-                            label: SizedBox(
-                                width: double.infinity,
-                                child: CustomText(
-                                  questionCollection
-                                      .questions!.choices![index].name!,
-                                  color: AskLoraColors.charcoal,
-                                  maxLines: 3,
-                                  type: FontType.smallText,
-                                  fontWeight: FontWeight.w700,
-                                )),
-                            selected: index == state.defaultChoiceIndex,
-                            selectedColor: AskLoraColors.lightGreen,
-                            shadowColor: Colors.transparent,
-                            backgroundColor: AskLoraColors.white,
-                            onSelected: (value) => context
-                                .read<MultipleQuestionWidgetBloc>()
-                                .add(AnswerChanged(index)),
-                            elevation: 0,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 7),
-                          ))),
-            )),
+                child: BlocBuilder<MultipleQuestionWidgetBloc,
+                        MultipleQuestionWidgetState>(
+                    buildWhen: (previous, current) =>
+                        previous.defaultChoiceIndex !=
+                        current.defaultChoiceIndex,
+                    builder: (context, state) {
+                      return ListView.separated(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          separatorBuilder: (BuildContext context, i) =>
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                              ),
+                          itemCount:
+                              questionCollection.questions!.choices!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                                decoration: (index == state.defaultChoiceIndex)
+                                    ? _greenBorder()
+                                    : _grayBorder(),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                      alignment: Alignment.centerLeft,
+                                      foregroundColor:
+                                          AskLoraColors.primaryGreen,
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16, horizontal: 16)),
+                                  child: CustomText(
+                                    questionCollection
+                                        .questions!.choices![index].name!,
+                                    color: AskLoraColors.charcoal,
+                                    maxLines: 3,
+                                    textAlign: TextAlign.left,
+                                    type: FontType.smallText,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  onPressed: () {
+                                    context
+                                        .read<MultipleQuestionWidgetBloc>()
+                                        .add(AnswerChanged(index));
+                                    debugPrint('Krishna index ${index}');
+                                  },
+                                ));
+                          });
+                    })),
             BlocBuilder<MultipleQuestionWidgetBloc,
                     MultipleQuestionWidgetState>(
                 buildWhen: (previous, current) =>
@@ -111,5 +106,18 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                     )),
           ],
         ));
+  }
+
+  BoxDecoration _greenBorder() {
+    return BoxDecoration(
+        color: AskLoraColors.lightGreen,
+        border: Border.all(width: 3.0, color: AskLoraColors.primaryGreen),
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)));
+  }
+
+  BoxDecoration _grayBorder() {
+    return BoxDecoration(
+        border: Border.all(width: 1.0, color: AskLoraColors.gray),
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)));
   }
 }

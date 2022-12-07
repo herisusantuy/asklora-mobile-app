@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/we_create/custom_centered_text_input.dart';
 import '../../../bloc/response/user_response_bloc.dart';
-import '../../../domain/question.dart';
 import '../../../domain/ppi_user_response_request.dart';
-import 'bloc/descriptive_question_widget_bloc.dart';
+import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
+import 'bloc/descriptive_question_widget_bloc.dart';
 
 class DescriptiveQuestionWidget extends StatelessWidget {
   final String defaultAnswer;
@@ -34,7 +34,9 @@ class DescriptiveQuestionWidget extends StatelessWidget {
       create: (_) =>
           DescriptiveQuestionWidgetBloc(defaultAnswer: defaultAnswer),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
           QuestionHeader(
             key: const Key('question_header'),
@@ -44,19 +46,16 @@ class DescriptiveQuestionWidget extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          Expanded(
-            child: Builder(
-                builder: (context) => CustomCenteredTextInput(
-                      textInputType: textInputType,
-                      textInputFormatterList: textInputFormatterList,
-                      initialValue: defaultAnswer,
-                      hintText: questionCollection.questions?.hints ?? '',
-                      key: const Key('descriptive_question_input'),
-                      onChanged: (value) => context
-                          .read<DescriptiveQuestionWidgetBloc>()
-                          .add(AnswerChanged(value)),
-                    )),
-          ),
+          Builder(
+              builder: (context) => CustomCenteredTextInput(
+                  key: const Key('name_input'),
+                  maxLength: 2,
+                  onChanged: (value) => context
+                      .read<DescriptiveQuestionWidgetBloc>()
+                      .add(AnswerChanged(value)),
+                  hintText: '',
+                  textInputType: TextInputType.number)),
+          const Expanded(child: SizedBox()),
           BlocBuilder<DescriptiveQuestionWidgetBloc,
                   DescriptiveQuestionWidgetState>(
               builder: (context, state) => QuestionNavigationButtonWidget(
