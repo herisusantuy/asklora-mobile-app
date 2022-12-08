@@ -5,6 +5,7 @@ import '../../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../domain/question.dart';
 import '../../widget/header.dart';
+import '../../widget/question_title.dart';
 import '../bloc/financial_profile_bloc.dart';
 
 class FinancialSituationQuestion extends StatelessWidget {
@@ -18,7 +19,7 @@ class FinancialSituationQuestion extends StatelessWidget {
       required this.questionCollection,
       Key? key})
       : super(key: key);
-  static const double _spaceHeightDouble = 14;
+  static const double _spaceHeightDouble = 20;
   final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
 
   @override
@@ -29,16 +30,16 @@ class FinancialSituationQuestion extends StatelessWidget {
         QuestionHeader(
           key: const Key('question_header'),
           onTapBack: onCancel,
-          questionText: questionCollection.questions!.question!,
-        ),
-        const SizedBox(
-          height: 16,
+          // questionText: questionCollection.questions!.question!,
         ),
         Expanded(
             child: SingleChildScrollView(
           padding: const EdgeInsets.only(bottom: _spaceHeightDouble),
           child: Column(
             children: [
+              QuestionTitle(
+                question: questionCollection.questions!.question!,
+              ),
               _investibleLiquidAssetsDropdown,
               _spaceHeight,
               _fundingSourceDropdown,
@@ -65,9 +66,9 @@ class FinancialSituationQuestion extends StatelessWidget {
       builder: (context, state) {
         return CustomDropdown(
             key: const Key('account_investible_liquid_assets_select'),
-            label: 'Investible Liquid Assets*',
+            labelText: 'Investible Liquid Assets*',
             hintText: 'Please select',
-            value: state.investibleLiquidAssets,
+            initialValue: state.investibleLiquidAssets,
             itemsList: incomeRangeItems,
             onChanged: (value) => context
                 .read<FinancialProfileBloc>()
@@ -83,11 +84,13 @@ class FinancialSituationQuestion extends StatelessWidget {
       builder: (context, state) {
         return CustomDropdown(
             key: const Key('account_funding_source_select'),
-            label: 'Account Funding Source*',
+            labelText: 'Account Funding Source*',
             hintText: 'Please select',
             itemsList: FundingSource.values.map((e) => e.value).toList()
               ..remove(FundingSource.unknown.value),
-            value: state.fundingSource.name,
+            initialValue: state.fundingSource != FundingSource.unknown
+                ? state.fundingSource.value
+                : '',
             onChanged: (value) => context.read<FinancialProfileBloc>().add(
                 FinancialProfileFundingSourceChanged(FundingSource.values
                     .firstWhere((element) => element.value == value))));
@@ -101,11 +104,13 @@ class FinancialSituationQuestion extends StatelessWidget {
             previous.employmentStatus != current.employmentStatus,
         builder: (context, state) => CustomDropdown(
             key: const Key('account_employment_status_select'),
-            label: 'Employment Status*',
+            labelText: 'Employment Status*',
             hintText: 'Please select',
             itemsList: EmploymentStatus.values.map((e) => e.value).toList()
               ..remove(EmploymentStatus.unknown.value),
-            value: state.employmentStatus.value,
+            initialValue: state.employmentStatus != EmploymentStatus.unknown
+                ? state.employmentStatus.value
+                : '',
             onChanged: (value) => context.read<FinancialProfileBloc>().add(
                 FinancialProfileEmploymentStatusChanged(EmploymentStatus.values
                     .firstWhere((element) => element.value == value)))));
@@ -120,9 +125,9 @@ class FinancialSituationQuestion extends StatelessWidget {
         if (state.employmentStatus == EmploymentStatus.employed) {
           return CustomDropdown(
             key: const Key('account_occupation_select'),
-            label: 'Occupation*',
+            labelText: 'Occupation*',
             itemsList: Occupations.values.map((e) => e.value).toList(),
-            value: state.occupation?.value ?? '',
+            initialValue: state.occupation?.value ?? '',
             hintText: 'Please select',
             onChanged: (value) => context.read<FinancialProfileBloc>().add(
                 FinancialProfileOccupationChanged(Occupations.values
@@ -168,16 +173,23 @@ class FinancialSituationQuestion extends StatelessWidget {
           if (state.employmentStatus == EmploymentStatus.employed) {
             return Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: _spaceHeightDouble),
-                  child: MasterTextField(
-                      initialValue: state.employer ?? '',
-                      key: const Key('account_employer_input'),
-                      labelText: 'Employer',
-                      onChanged: (value) => context
-                          .read<FinancialProfileBloc>()
-                          .add(FinancialProfileEmployerChanged(value)),
-                      hintText: 'Employer e.g. Lawyer'),
+                MasterTextField(
+                    initialValue: state.employer ?? '',
+                    key: const Key('account_employer_input'),
+                    labelText: 'Employer',
+                    onChanged: (value) => context
+                        .read<FinancialProfileBloc>()
+                        .add(FinancialProfileEmployerChanged(value)),
+                    hintText: 'Employer e.g. Lawyer'),
+                _spaceHeight,
+                MasterTextField(
+                  initialValue: state.employerAddress ?? '',
+                  key: const Key('account_employer_address_input'),
+                  labelText: 'Employer Address 1',
+                  onChanged: (value) => context
+                      .read<FinancialProfileBloc>()
+                      .add(FinancialProfileEmployerAddressChanged(value)),
+                  hintText: 'Employer Address 1',
                 ),
                 _spaceHeight,
                 MasterTextField(
@@ -188,16 +200,6 @@ class FinancialSituationQuestion extends StatelessWidget {
                       .read<FinancialProfileBloc>()
                       .add(FinancialProfileEmployerAddressTwoChanged(value)),
                   hintText: 'Employer Address 2',
-                ),
-                _spaceHeight,
-                MasterTextField(
-                  initialValue: state.employerAddress ?? '',
-                  key: const Key('account_employer_address_input'),
-                  labelText: 'Employer Address 1',
-                  onChanged: (value) => context
-                      .read<FinancialProfileBloc>()
-                      .add(FinancialProfileEmployerAddressChanged(value)),
-                  hintText: 'Employer Address 1',
                 ),
               ],
             );
