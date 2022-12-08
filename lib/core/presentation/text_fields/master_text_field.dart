@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'style/text_field_style.dart';
 
 class MasterTextField extends StatefulWidget {
@@ -11,6 +12,8 @@ class MasterTextField extends StatefulWidget {
   final String hintText;
   final String errorText;
   final Function(String)? onChanged;
+  final TextInputAction? textInputAction;
+  final TextInputType? textInputType;
 
   const MasterTextField(
       {Key? key,
@@ -21,6 +24,8 @@ class MasterTextField extends StatefulWidget {
       this.labelText = '',
       this.hintText = '',
       this.errorText = '',
+      this.textInputAction,
+      this.textInputType,
       this.maxLine})
       : super(key: key);
 
@@ -63,9 +68,11 @@ class _MasterTextFieldState extends State<MasterTextField> {
   Widget build(BuildContext context) => TextFormField(
       controller: controller,
       onChanged: widget.onChanged,
+      keyboardType: widget.textInputType,
       textCapitalization: widget.textCapitalization,
       inputFormatters: widget.textInputFormatterList,
       maxLines: widget.maxLine,
+      textInputAction: widget.textInputAction,
       style: TextFieldStyle.valueTextStyle,
       decoration: TextFieldStyle.inputDecoration.copyWith(
         floatingLabelBehavior: floatingLabelBehavior,
