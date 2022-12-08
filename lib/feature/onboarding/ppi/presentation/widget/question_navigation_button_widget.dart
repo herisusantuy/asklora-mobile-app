@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/presentation/we_create/custom_button.dart';
+import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../bloc/response/user_response_bloc.dart';
 
 class QuestionNavigationButtonWidget extends StatelessWidget {
@@ -35,13 +35,14 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.responseState != current.responseState,
         builder: (context, state) {
-          return CustomButton(
-            margin: const EdgeInsets.only(bottom: 24),
-            key: const Key('question_next_button'),
-            disable: disable,
-            isLoading: state.responseState == ResponseState.loading,
-            onClick: onNext,
-            label: 'Next',
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 24.0),
+            child: PrimaryButton(
+              key: const Key('question_next_button'),
+              disabled: disable,
+              label: 'NEXT',
+              onTap: onNext,
+            ),
           );
         });
   }

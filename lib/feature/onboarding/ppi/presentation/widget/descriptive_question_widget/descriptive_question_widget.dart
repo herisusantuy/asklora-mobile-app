@@ -35,7 +35,7 @@ class DescriptiveQuestionWidget extends StatelessWidget {
       create: (_) =>
           DescriptiveQuestionWidgetBloc(defaultAnswer: defaultAnswer),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -43,7 +43,9 @@ class DescriptiveQuestionWidget extends StatelessWidget {
             key: const Key('question_header'),
             onTapBack: onCancel,
           ),
-          QuestionTitle(question: questionCollection.questions!.question!,),
+          QuestionTitle(
+            question: questionCollection.questions!.question!,
+          ),
           const SizedBox(
             height: 16,
           ),

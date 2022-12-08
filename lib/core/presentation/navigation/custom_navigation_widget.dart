@@ -27,9 +27,10 @@ class CustomNavigationWidget<T> extends StatelessWidget {
       : super(key: key);
 
   void _onTapBack(BuildContext context) {
-    context.read<NavigationBloc<T>>().add(const PagePop());
     if (onBackPressed != null) {
       onBackPressed!();
+    } else {
+      context.read<NavigationBloc<T>>().add(const PagePop());
     }
   }
 

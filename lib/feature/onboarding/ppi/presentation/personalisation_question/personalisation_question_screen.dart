@@ -21,7 +21,8 @@ class PersonalisationQuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget(
+    return CustomNavigationWidget<QuestionPageStep>(
+      onBackPressed: onCancel,
       header: const SizedBox.shrink(),
       child: BlocProvider(
         create: (_) => PersonalisationQuestionBloc(initialIndex: initialIndex)
@@ -36,7 +37,7 @@ class PersonalisationQuestionScreen extends StatelessWidget {
             } else if (state is OnPreviousToPrivacyQuestionScreen) {
               context
                   .read<NavigationBloc<QuestionPageStep>>()
-                  .add(const PagePop());
+                  .add(const PageChanged(QuestionPageStep.privacy));
             } else if (state is OnNextResultEndScreen) {
               context.read<NavigationBloc<QuestionPageStep>>().add(
                   const PageChanged(QuestionPageStep.personalisationResultEnd));
@@ -47,7 +48,6 @@ class PersonalisationQuestionScreen extends StatelessWidget {
               QuestionCollection questionCollection = state.question;
               switch (state.questionType) {
                 case (QuestionType.choices):
-
                   //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                   return MultipleChoiceQuestionWidget(
                     key: Key(questionCollection.uid!),
