@@ -12,8 +12,6 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../ask_name/presentation/ask_name_screen.dart';
 
-// part 'widgets/background_carousel_widget.dart';
-
 part 'widgets/carousel_item.dart';
 
 part 'widgets/foreground_carousel_widget.dart';
@@ -25,33 +23,28 @@ class CarouselScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-            child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 15),
-                      const LocalizationToggleButton(),
-                      const SizedBox(height: 10),
-                      SizedBox(height: 250, child: _test()),
-                      const Expanded(child: SizedBox()),
-                      PrimaryButton(
-                        key: const Key('begin_on_boarding_button_'),
-                        label: "LET'S BEGIN",
-                        onTap: () => AskNameScreen.open(context),
-                      ),
-                      Center(
-                          child: CustomTextButton(
-                        key: const Key('sign_in_button'),
-                        padding: const EdgeInsets.all(16),
-                        onTap: () => SignInScreen.open(context),
-                        label: 'HAVE AN ACCOUNT?',
-                      )),
-                      const SizedBox(height: 5)
-                    ]))));
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const SizedBox(height: 15),
+          const LocalizationToggleButton(),
+          const SizedBox(height: 10),
+          SizedBox(height: 250, child: _test()),
+          const Expanded(child: SizedBox()),
+          PrimaryButton(
+            key: const Key('begin_on_boarding_button_'),
+            label: "LET'S BEGIN",
+            onTap: () => AskNameScreen.open(context),
+          ),
+          Center(
+              child: CustomTextButton(
+            key: const Key('sign_in_button'),
+            padding: const EdgeInsets.all(16),
+            onTap: () => SignInScreen.open(context),
+            label: 'HAVE AN ACCOUNT?',
+          )),
+          const SizedBox(height: 5)
+        ]));
   }
 
   Widget _test() {

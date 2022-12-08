@@ -103,6 +103,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               obscuringCharacter: '●',
               style: TextFieldStyle.valueTextStyle,
               decoration: TextFieldStyle.inputDecoration.copyWith(
+                  // errorStyle: TextStyle(),
                   floatingLabelBehavior: floatingLabelBehavior,
                   labelText: label,
                   hintText: widget.hintText,
@@ -113,10 +114,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                         obscureText = !obscureText;
                       });
                     },
-                    child: Icon(
+                    child: Image.asset(
                       obscureText
-                          ? Icons.remove_red_eye_outlined
-                          : Icons.remove_red_eye,
+                          ? 'assets/icons/icon_obscure_text_disable.png'
+                          : 'assets/icons/icon_obscure_text_enable.png',
                     ),
                   )),
             ),

@@ -26,6 +26,7 @@ class CustomTextButton extends StatelessWidget {
     return Container(
       padding: padding,
       margin: margin,
+      alignment: Alignment.center,
       child: GestureDetector(
         onTap: onTap,
         child: CustomText(

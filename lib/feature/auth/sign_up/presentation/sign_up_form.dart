@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/presentation/clearable_text_field.dart';
+import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
-import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
-import '../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../core/presentation/text_fields/master_text_field.dart';
+import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_button.dart';
+import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../email_activation/presentation/email_activation_screen.dart';
@@ -36,25 +37,24 @@ class SignUpForm extends StatelessWidget {
               break;
           }
         },
-        child: Center(
-          child: SingleChildScrollView(
-              child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const LoraMemojiWidget(
-                  text:
-                      'To craft a better investment experience for you. Please join us to continue.',
-                  imageAsset: '/'),
-              _userNameInput(),
-              _padding(),
-              _passwordInput(),
-              _padding(),
-              _signUpButton(),
-              _signInButton(context),
-              _maybeLaterButton(context)
-            ],
-          )),
-        ));
+        child: SingleChildScrollView(
+            child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const LoraMemojiWidget(
+                text:
+                    'Start your new investing journey\nwith Lora - your\nAI Investment Coach',
+                imageAsset: '/'),
+            _userNameInput(),
+            _padding(),
+            _passwordInput(),
+            _padding(),
+            _signUpButton(),
+            _signInButton(context),
+            _maybeLaterButton(context)
+          ],
+        )));
   }
 
   Widget _userNameInput() {
@@ -64,15 +64,17 @@ class SignUpForm extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.username != current.username,
           builder: (context, state) {
-            return ClearableTextFormField(
-              key: const Key('sign_up_email_input'),
-              textInputType: TextInputType.emailAddress,
-              labelText: 'Email',
-              hintText: 'Email',
-              errorText: state.usernameErrorText,
-              onChanged: (email) =>
-                  context.read<SignUpBloc>().add(SignUpUsernameChanged(email)),
-            );
+            return MasterTextField(
+                key: const Key('sign_up_email_input'),
+                textInputAction: TextInputAction.next,
+                textInputType: TextInputType.emailAddress,
+                maxLine: 1,
+                labelText: 'Email Address',
+                hintText: 'Email Address',
+                errorText: state.usernameErrorText,
+                onChanged: (email) => context
+                    .read<SignUpBloc>()
+                    .add(SignUpUsernameChanged(email)));
           }),
     );
   }
@@ -81,31 +83,14 @@ class SignUpForm extends StatelessWidget {
     return BlocBuilder<SignUpBloc, SignUpState>(
         buildWhen: (previous, current) => previous.password != current.password,
         builder: (context, state) {
-          return Column(
-            children: [
-              ClearableTextFormField(
-                key: const Key('sign_up_password_input'),
-                textInputType: TextInputType.visiblePassword,
-                labelText: 'Password',
-                hintText: 'Password (Minimum 8 characters)',
-                obscureText: true,
-                errorText: state.passwordErrorText,
-                onChanged: (password) => context
-                    .read<SignUpBloc>()
-                    .add(SignUpPasswordChanged(password)),
-              ),
-              _padding(),
-              state.isPasswordValid
-                  ? const Text(
-                      '✅ Minimum eight characters, at least one letter and one number!',
-                      style: TextStyle(color: Colors.blueGrey),
-                    )
-                  : const Text(
-                      '❗ Minimum eight characters, at least one letter and one number!',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-            ],
-          );
+          return PasswordTextField(
+              validPassword: (isValidPassword) => {},
+              hintText: 'Password',
+              label: 'Password',
+              errorText: state.passwordErrorText,
+              onChanged: (password) => context
+                  .read<SignUpBloc>()
+                  .add(SignUpPasswordChanged(password)));
         });
   }
 
@@ -123,15 +108,12 @@ class SignUpForm extends StatelessWidget {
   }
 
   Widget _signInButton(BuildContext context) {
-    return CustomButton(
-      margin: const EdgeInsets.only(top: 20),
-      backgroundColor: Colors.white,
-      foregroundColor: const Color(0xff232323),
-      borderSide: const BorderSide(width: 2, color: Color(0xff232323)),
+    return PrimaryButton(
+      buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
       key: const Key('sign_in_submit_button'),
       fontStyle: FontStyle.normal,
       label: 'ALREADY HAVE AN ACCOUNT?',
-      onClick: () => SignInScreen.open(context),
+      onTap: () => SignInScreen.open(context),
     );
   }
 
@@ -144,6 +126,6 @@ class SignUpForm extends StatelessWidget {
   }
 
   Padding _padding() => const Padding(
-        padding: EdgeInsets.only(top: 18),
+        padding: EdgeInsets.only(top: 20),
       );
 }
