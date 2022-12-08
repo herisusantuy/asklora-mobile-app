@@ -19,7 +19,7 @@ class FinancialSituationQuestion extends StatelessWidget {
       required this.questionCollection,
       Key? key})
       : super(key: key);
-  static const double _spaceHeightDouble = 20;
+  static const double _spaceHeightDouble = 36;
   final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
 
   @override
@@ -174,6 +174,7 @@ class FinancialSituationQuestion extends StatelessWidget {
             return Column(
               children: [
                 MasterTextField(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
                     initialValue: state.employer ?? '',
                     key: const Key('account_employer_input'),
                     labelText: 'Employer',
@@ -183,15 +184,16 @@ class FinancialSituationQuestion extends StatelessWidget {
                     hintText: 'Employer e.g. Lawyer'),
                 _spaceHeight,
                 MasterTextField(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
                   initialValue: state.employerAddress ?? '',
                   key: const Key('account_employer_address_input'),
-                  labelText: 'Employer Address 1',
+                  labelText: 'Employer/Company Address',
                   onChanged: (value) => context
                       .read<FinancialProfileBloc>()
                       .add(FinancialProfileEmployerAddressChanged(value)),
                   hintText: 'Employer Address 1',
                 ),
-                _spaceHeight,
+                SizedBox(height: 8,),
                 MasterTextField(
                   initialValue: state.employerAddress ?? '',
                   key: const Key('account_employer_address_two_input'),

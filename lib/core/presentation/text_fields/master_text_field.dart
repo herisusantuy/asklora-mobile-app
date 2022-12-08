@@ -14,11 +14,13 @@ class MasterTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
+  final FloatingLabelBehavior floatingLabelBehavior;
 
   const MasterTextField(
       {Key? key,
       this.onChanged,
       this.textCapitalization = TextCapitalization.none,
+      this.floatingLabelBehavior = FloatingLabelBehavior.never,
       this.initialValue = '',
       this.textInputFormatterList,
       this.labelText = '',
@@ -35,21 +37,26 @@ class MasterTextField extends StatefulWidget {
 
 class _MasterTextFieldState extends State<MasterTextField> {
   final TextEditingController controller = TextEditingController();
-  FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
+  late FloatingLabelBehavior floatingLabelBehavior;
   String? label;
 
   @override
   void initState() {
     super.initState();
-
-    if (widget.initialValue.isNotEmpty) {
+    if (widget.floatingLabelBehavior == FloatingLabelBehavior.always) {
       label = widget.labelText;
-      floatingLabelBehavior = FloatingLabelBehavior.always;
-      controller.text = widget.initialValue;
+      floatingLabelBehavior = widget.floatingLabelBehavior;
+    } else {
+      floatingLabelBehavior = FloatingLabelBehavior.never;
+      if (widget.initialValue.isNotEmpty) {
+        label = widget.labelText;
+        floatingLabelBehavior = FloatingLabelBehavior.always;
+        controller.text = widget.initialValue;
+      }
+      controller.addListener(() {
+        _setFloatingLabelBehavior();
+      });
     }
-    controller.addListener(() {
-      _setFloatingLabelBehavior();
-    });
   }
 
   void _setFloatingLabelBehavior() {
