@@ -36,14 +36,13 @@ class CarouselScreen extends StatelessWidget {
             label: "LET'S BEGIN",
             onTap: () => AskNameScreen.open(context),
           ),
-          Center(
-              child: CustomTextButton(
+          CustomTextButton(
             key: const Key('sign_in_button'),
             padding: const EdgeInsets.all(16),
             onTap: () => SignInScreen.open(context),
             label: 'HAVE AN ACCOUNT?',
-          )),
-          const SizedBox(height: 5)
+          ),
+          const SizedBox(height: 10)
         ]));
   }
 
