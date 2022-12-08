@@ -48,10 +48,12 @@ class SliderQuestionWidget extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         child: ListView.builder(
                             key: const Key('multiple_choice_question_builder'),
-                            itemCount: questionCollection.questions!.choices!.length,
+                            itemCount:
+                                questionCollection.questions!.choices!.length,
                             reverse: true,
                             shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index) => Padding(
+                            itemBuilder: (BuildContext context, int index) =>
+                                Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: BlocBuilder<SliderQuestionWidgetBloc,
                                           SliderQuestionWidgetState>(
@@ -59,30 +61,36 @@ class SliderQuestionWidget extends StatelessWidget {
                                           previous.defaultChoiceIndex !=
                                           current.defaultChoiceIndex,
                                       builder: (context, state) => ChoiceChip(
-                                            key:
-                                                Key('${questionCollection.uid}-$index'),
-                                            labelPadding: const EdgeInsets.symmetric(
-                                                vertical: 5, horizontal: 25.0),
+                                            key: Key(
+                                                '${questionCollection.uid}-$index'),
+                                            labelPadding:
+                                                const EdgeInsets.symmetric(
+                                                    vertical: 5,
+                                                    horizontal: 25.0),
                                             label: SizedBox(
                                               width: double.infinity,
                                               child: CustomText(
-                                                questionCollection
-                                                    .questions!.choices![index].point!,
-                                                color: index == state.defaultChoiceIndex
+                                                questionCollection.questions!
+                                                    .choices![index].point!,
+                                                color: index ==
+                                                        state.defaultChoiceIndex
                                                     ? Colors.white
                                                     : Colors.black,
-                                                type: index == state.defaultChoiceIndex
+                                                type: index ==
+                                                        state.defaultChoiceIndex
                                                     ? FontType.bodyTextBold
                                                     : FontType.bodyText,
                                                 maxLines: 2,
                                               ),
                                             ),
-                                            selected: index == state.defaultChoiceIndex,
+                                            selected: index ==
+                                                state.defaultChoiceIndex,
                                             selectedColor: Colors.black,
                                             shadowColor: Colors.transparent,
                                             backgroundColor: Colors.grey[200],
                                             onSelected: (value) => context
-                                                .read<SliderQuestionWidgetBloc>()
+                                                .read<
+                                                    SliderQuestionWidgetBloc>()
                                                 .add(AnswerChanged(index)),
                                             // backgroundColor: color,
                                             elevation: 0,
@@ -92,21 +100,28 @@ class SliderQuestionWidget extends StatelessWidget {
                                 )),
                       ),
                     ),
-                    BlocBuilder<SliderQuestionWidgetBloc, SliderQuestionWidgetState>(
+                    BlocBuilder<SliderQuestionWidgetBloc,
+                            SliderQuestionWidgetState>(
                         buildWhen: (previous, current) =>
-                            previous.defaultChoiceIndex != current.defaultChoiceIndex,
-                        builder: (context, state) => QuestionNavigationButtonWidget(
+                            previous.defaultChoiceIndex !=
+                            current.defaultChoiceIndex,
+                        builder: (context, state) =>
+                            QuestionNavigationButtonWidget(
                               disable: state.defaultChoiceIndex.isNegative,
-                              key: const Key('question_navigation_button_widget'),
+                              key: const Key(
+                                  'question_navigation_button_widget'),
                               onSubmitSuccess: onSubmitSuccess,
                               onNext: () => context
                                   .read<UserResponseBloc>()
                                   .add(SendResponse(PpiUserResponseRequest(
                                     questionId: questionCollection.uid!,
-                                    section: questionCollection.questions!.section!,
+                                    section:
+                                        questionCollection.questions!.section!,
                                     types: questionCollection.questions!.types!,
-                                    points: questionCollection.questions!
-                                        .choices![state.defaultChoiceIndex].point!,
+                                    points: questionCollection
+                                        .questions!
+                                        .choices![state.defaultChoiceIndex]
+                                        .point!,
                                   ))),
                               onCancel: onCancel,
                             )),

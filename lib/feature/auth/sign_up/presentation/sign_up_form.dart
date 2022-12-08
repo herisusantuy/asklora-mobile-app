@@ -7,7 +7,6 @@ import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
-import '../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
@@ -37,10 +36,7 @@ class SignUpForm extends StatelessWidget {
               break;
           }
         },
-        child: SingleChildScrollView(
-            child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
           children: [
             const LoraMemojiWidget(
                 text:
@@ -50,11 +46,16 @@ class SignUpForm extends StatelessWidget {
             _padding(),
             _passwordInput(),
             _padding(),
+            ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 50),
+                child: const Expanded(child: SizedBox())),
             _signUpButton(),
+            _padding(),
             _signInButton(context),
-            _maybeLaterButton(context)
+            _maybeLaterButton(context),
+            _padding(),
           ],
-        )));
+        ));
   }
 
   Widget _userNameInput() {
@@ -96,13 +97,12 @@ class SignUpForm extends StatelessWidget {
 
   Widget _signUpButton() {
     return BlocBuilder<SignUpBloc, SignUpState>(builder: (context, state) {
-      return CustomButton(
+      return PrimaryButton(
         key: const Key('sign_up_submit_button'),
         fontStyle: FontStyle.normal,
         label: 'SIGN UP',
-        isLoading: state.response.state == ResponseState.loading,
-        disable: !(state.isEmailValid && state.isPasswordValid),
-        onClick: () => context.read<SignUpBloc>().add(const SignUpSubmitted()),
+        disabled: !(state.isEmailValid && state.isPasswordValid),
+        onTap: () => context.read<SignUpBloc>().add(const SignUpSubmitted()),
       );
     });
   }
