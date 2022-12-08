@@ -43,7 +43,9 @@ class DescriptiveQuestionWidget extends StatelessWidget {
             key: const Key('question_header'),
             onTapBack: onCancel,
           ),
-          QuestionTitle(question: questionCollection.questions!.question!,),
+          QuestionTitle(
+            question: questionCollection.questions!.question!,
+          ),
           const SizedBox(
             height: 16,
           ),
