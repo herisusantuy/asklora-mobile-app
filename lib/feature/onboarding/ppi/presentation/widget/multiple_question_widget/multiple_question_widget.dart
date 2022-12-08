@@ -62,74 +62,9 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                 },
                               ),
                             );
-                            // return Container(
-                            //     margin:
-                            //         const EdgeInsets.symmetric(vertical: 10),
-                            //     decoration: (index == state.defaultChoiceIndex)
-                            //         ? _greenBorder()
-                            //         : _grayBorder(),
-                            //     child: TextButton(
-                            //       style: TextButton.styleFrom(
-                            //           alignment: Alignment.centerLeft,
-                            //           foregroundColor:
-                            //               AskLoraColors.primaryGreen,
-                            //           padding: const EdgeInsets.symmetric(
-                            //               vertical: 16, horizontal: 16)),
-                            //       child: CustomText(
-                            //         e.name!,
-                            //         color: AskLoraColors.charcoal,
-                            //         maxLines: 3,
-                            //         textAlign: TextAlign.left,
-                            //         type: FontType.smallText,
-                            //         fontWeight: FontWeight.w700,
-                            //       ),
-                            //       onPressed: () {
-                            //         context
-                            //             .read<MultipleQuestionWidgetBloc>()
-                            //             .add(AnswerChanged(index));
-                            //         debugPrint('Krishna index ${index}');
-                            //       },
-                            //     ));
                           })
                         ],
                       );
-                      // return ListView.separated(
-                      //     padding: const EdgeInsets.only(bottom: 20),
-                      //     separatorBuilder: (BuildContext context, i) =>
-                      //         const Padding(
-                      //           padding: EdgeInsets.symmetric(vertical: 10),
-                      //         ),
-                      //     itemCount:
-                      //         questionCollection.questions!.choices!.length,
-                      //     itemBuilder: (BuildContext context, int index) {
-                      //       return Container(
-                      //           decoration: (index == state.defaultChoiceIndex)
-                      //               ? _greenBorder()
-                      //               : _grayBorder(),
-                      //           child: TextButton(
-                      //             style: TextButton.styleFrom(
-                      //                 alignment: Alignment.centerLeft,
-                      //                 foregroundColor:
-                      //                     AskLoraColors.primaryGreen,
-                      //                 padding: const EdgeInsets.symmetric(
-                      //                     vertical: 16, horizontal: 16)),
-                      //             child: CustomText(
-                      //               questionCollection
-                      //                   .questions!.choices![index].name!,
-                      //               color: AskLoraColors.charcoal,
-                      //               maxLines: 3,
-                      //               textAlign: TextAlign.left,
-                      //               type: FontType.smallText,
-                      //               fontWeight: FontWeight.w700,
-                      //             ),
-                      //             onPressed: () {
-                      //               context
-                      //                   .read<MultipleQuestionWidgetBloc>()
-                      //                   .add(AnswerChanged(index));
-                      //               debugPrint('Krishna index ${index}');
-                      //             },
-                      //           ));
-                      //     });
                     })),
             BlocBuilder<MultipleQuestionWidgetBloc,
                     MultipleQuestionWidgetState>(
@@ -153,17 +88,4 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
           ],
         ));
   }
-
-// BoxDecoration _greenBorder() {
-//   return BoxDecoration(
-//       color: AskLoraColors.lightGreen,
-//       border: Border.all(width: 3.0, color: AskLoraColors.primaryGreen),
-//       borderRadius: const BorderRadius.all(Radius.circular(10.0)));
-// }
-//
-// BoxDecoration _grayBorder() {
-//   return BoxDecoration(
-//       border: Border.all(width: 1.0, color: AskLoraColors.gray),
-//       borderRadius: const BorderRadius.all(Radius.circular(10.0)));
-// }
 }

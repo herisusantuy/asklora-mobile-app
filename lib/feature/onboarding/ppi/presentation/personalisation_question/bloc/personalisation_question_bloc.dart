@@ -73,6 +73,7 @@ class PersonalisationQuestionBloc
             personalizationQuestionIndex: _personalizationIndex));
       }
     } else if (_personalizationIndex < 0) {
+      print('here man');
       emit(OnPreviousToPrivacyQuestionScreen());
     }
   }

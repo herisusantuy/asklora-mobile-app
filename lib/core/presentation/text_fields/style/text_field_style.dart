@@ -15,7 +15,7 @@ class TextFieldStyle {
   static TextStyle errorTextStyle = AskLoraTextStyles.body3
       .copyWith(color: AskLoraColors.primaryMagenta, height: 1);
 
-  static TextStyle labelTextStyle = AskLoraTextStyles.body3
+  static TextStyle labelTextStyle = AskLoraTextStyles.body2
       .copyWith(color: AskLoraColors.charcoal, height: 1.2);
 
   static TextStyle hintTextStyle =

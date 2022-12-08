@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/styles/asklora_colors.dart';
+
 class QuestionHeader extends StatelessWidget {
   final Function() onTapBack;
 
@@ -11,9 +13,9 @@ class QuestionHeader extends StatelessWidget {
         child: InkWell(
             onTap: onTapBack,
             child: const Icon(
-              Icons.arrow_back_rounded,
-              size: 24,
-              color: Colors.black,
+              Icons.arrow_back_ios_new_rounded,
+              size: 20,
+              color: AskLoraColors.charcoal,
             )),
       );
 }

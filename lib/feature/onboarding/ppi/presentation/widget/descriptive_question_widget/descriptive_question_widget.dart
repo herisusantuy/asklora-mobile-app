@@ -35,7 +35,7 @@ class DescriptiveQuestionWidget extends StatelessWidget {
       create: (_) =>
           DescriptiveQuestionWidgetBloc(defaultAnswer: defaultAnswer),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [

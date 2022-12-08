@@ -89,7 +89,7 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
         case ButtonSecondarySize.small:
           return const Size(200, 40);
         case ButtonSecondarySize.big:
-          return const Size(double.infinity, 50);
+          return const Size(double.infinity, 56);
       }
     });
   }
