@@ -8,6 +8,7 @@ import '../../../../../../core/presentation/custom_text_input.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
 import '../../../domain/ppi_user_response_request.dart';
+import '../question_title.dart';
 import 'bloc/omni_search_question_widget_bloc.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
@@ -46,90 +47,103 @@ class OmniSearchQuestionWidget extends StatelessWidget {
           }
         },
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             QuestionHeader(
               key: const Key('question_header'),
               onTapBack: onCancel,
-              questionText: questionCollection.questions!.question!,
-            ),
-            const SizedBox(
-              height: 48,
-            ),
-            _addKeywordInput(),
-            const SizedBox(
-              height: 32,
             ),
             Expanded(
-              child: BlocBuilder<OmniSearchQuestionWidgetBloc,
-                      OmniSearchQuestionWidgetState>(
-                  buildWhen: (previous, current) =>
-                      previous.keywords != current.keywords ||
-                      previous.keywordAnswers != current.keywordAnswers,
-                  builder: (context, state) => Wrap(
-                        key: const Key('omni_search_question_builder'),
-                        spacing: 12,
-                        children: state.keywords
-                            .asMap()
-                            .map((index, element) {
-                              bool selected = state.keywordAnswers
-                                  .contains(state.keywords[index]);
-                              return MapEntry(
-                                  index,
-                                  ChoiceChip(
-                                    key:
-                                        Key('${questionCollection.uid}-$index'),
-                                    labelPadding: const EdgeInsets.symmetric(
-                                        vertical: 2, horizontal: 12.0),
-                                    label: CustomText(
-                                      state.keywords[index],
-                                      color: selected
-                                          ? Colors.white
-                                          : Colors.black,
-                                      type: selected
-                                          ? FontType.bodyTextBold
-                                          : FontType.bodyText,
-                                    ),
-                                    selected: selected,
-                                    selectedColor: Colors.black,
-                                    shadowColor: Colors.transparent,
-                                    backgroundColor: Colors.grey[200],
-                                    onSelected: (value) => context
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    QuestionTitle(
+                      question: questionCollection.questions!.question!,
+                    ),
+                    _addKeywordInput(),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Expanded(
+                      child: BlocBuilder<OmniSearchQuestionWidgetBloc,
+                              OmniSearchQuestionWidgetState>(
+                          buildWhen: (previous, current) =>
+                              previous.keywords != current.keywords ||
+                              previous.keywordAnswers != current.keywordAnswers,
+                          builder: (context, state) => Wrap(
+                                key: const Key('omni_search_question_builder'),
+                                spacing: 12,
+                                children: state.keywords
+                                    .asMap()
+                                    .map((index, element) {
+                                      bool selected = state.keywordAnswers
+                                          .contains(state.keywords[index]);
+                                      return MapEntry(
+                                          index,
+                                          ChoiceChip(
+                                            key: Key(
+                                                '${questionCollection.uid}-$index'),
+                                            labelPadding:
+                                                const EdgeInsets.symmetric(
+                                                    vertical: 2,
+                                                    horizontal: 12.0),
+                                            label: CustomText(
+                                              state.keywords[index],
+                                              color: selected
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              type: selected
+                                                  ? FontType.bodyTextBold
+                                                  : FontType.bodyText,
+                                            ),
+                                            selected: selected,
+                                            selectedColor: Colors.black,
+                                            shadowColor: Colors.transparent,
+                                            backgroundColor: Colors.grey[200],
+                                            onSelected: (value) => context
+                                                .read<
+                                                    OmniSearchQuestionWidgetBloc>()
+                                                .add(KeywordSelected(
+                                                    state.keywords[index])),
+                                            // backgroundColor: color,
+                                            elevation: 0,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 0),
+                                          ));
+                                    })
+                                    .values
+                                    .toList(),
+                              )),
+                    ),
+                    BlocBuilder<OmniSearchQuestionWidgetBloc,
+                            OmniSearchQuestionWidgetState>(
+                        buildWhen: (previous, current) =>
+                            previous.keywordAnswers != current.keywordAnswers,
+                        builder: (context, state) =>
+                            QuestionNavigationButtonWidget(
+                              disable: state.keywordAnswers.isEmpty,
+                              key: const Key(
+                                  'question_navigation_button_widget'),
+                              onSubmitSuccess: onSubmitSuccess,
+                              onNext: () => context
+                                  .read<UserResponseBloc>()
+                                  .add(SendResponse(PpiUserResponseRequest(
+                                    questionId: questionCollection.uid!,
+                                    section:
+                                        questionCollection.questions!.section!,
+                                    types: questionCollection.questions!.types!,
+                                    points: context
                                         .read<OmniSearchQuestionWidgetBloc>()
-                                        .add(KeywordSelected(
-                                            state.keywords[index])),
-                                    // backgroundColor: color,
-                                    elevation: 0,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 0),
-                                  ));
-                            })
-                            .values
-                            .toList(),
-                      )),
+                                        .state
+                                        .keywordAnswers
+                                        .toString(),
+                                  ))),
+                              onCancel: onCancel,
+                            ))
+                  ],
+                ),
+              ),
             ),
-            BlocBuilder<OmniSearchQuestionWidgetBloc,
-                    OmniSearchQuestionWidgetState>(
-                buildWhen: (previous, current) =>
-                    previous.keywordAnswers != current.keywordAnswers,
-                builder: (context, state) => QuestionNavigationButtonWidget(
-                      disable: state.keywordAnswers.isEmpty,
-                      key: const Key('question_navigation_button_widget'),
-                      onSubmitSuccess: onSubmitSuccess,
-                      onNext: () => context
-                          .read<UserResponseBloc>()
-                          .add(SendResponse(PpiUserResponseRequest(
-                            questionId: questionCollection.uid!,
-                            section: questionCollection.questions!.section!,
-                            types: questionCollection.questions!.types!,
-                            points: context
-                                .read<OmniSearchQuestionWidgetBloc>()
-                                .state
-                                .keywordAnswers
-                                .toString(),
-                          ))),
-                      onCancel: onCancel,
-                    ))
           ],
         ),
       ),

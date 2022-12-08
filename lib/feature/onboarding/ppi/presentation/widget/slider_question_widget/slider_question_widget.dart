@@ -7,6 +7,7 @@ import '../../../domain/question.dart';
 import '../../../domain/ppi_user_response_request.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
+import '../question_title.dart';
 import 'bloc/slider_question_widget_bloc.dart';
 
 class SliderQuestionWidget extends StatelessWidget {
@@ -29,83 +30,90 @@ class SliderQuestionWidget extends StatelessWidget {
         create: (_) =>
             SliderQuestionWidgetBloc(defaultChoiceIndex: defaultChoiceIndex),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             QuestionHeader(
               key: const Key('question_header'),
               onTapBack: onCancel,
-              questionText: questionCollection.questions!.question!,
-            ),
-            const SizedBox(
-              height: 16,
             ),
             Expanded(
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: ListView.builder(
-                    key: const Key('multiple_choice_question_builder'),
-                    itemCount: questionCollection.questions!.choices!.length,
-                    reverse: true,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: BlocBuilder<SliderQuestionWidgetBloc,
-                                  SliderQuestionWidgetState>(
-                              buildWhen: (previous, current) =>
-                                  previous.defaultChoiceIndex !=
-                                  current.defaultChoiceIndex,
-                              builder: (context, state) => ChoiceChip(
-                                    key:
-                                        Key('${questionCollection.uid}-$index'),
-                                    labelPadding: const EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 25.0),
-                                    label: SizedBox(
-                                      width: double.infinity,
-                                      child: CustomText(
-                                        questionCollection
-                                            .questions!.choices![index].point!,
-                                        color: index == state.defaultChoiceIndex
-                                            ? Colors.white
-                                            : Colors.black,
-                                        type: index == state.defaultChoiceIndex
-                                            ? FontType.bodyTextBold
-                                            : FontType.bodyText,
-                                        maxLines: 2,
-                                      ),
-                                    ),
-                                    selected: index == state.defaultChoiceIndex,
-                                    selectedColor: Colors.black,
-                                    shadowColor: Colors.transparent,
-                                    backgroundColor: Colors.grey[200],
-                                    onSelected: (value) => context
-                                        .read<SliderQuestionWidgetBloc>()
-                                        .add(AnswerChanged(index)),
-                                    // backgroundColor: color,
-                                    elevation: 0,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 8),
-                                  )),
-                        )),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    QuestionTitle(
+                      question: questionCollection.questions!.question!,
+                    ),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: ListView.builder(
+                            key: const Key('multiple_choice_question_builder'),
+                            itemCount: questionCollection.questions!.choices!.length,
+                            reverse: true,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) => Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: BlocBuilder<SliderQuestionWidgetBloc,
+                                          SliderQuestionWidgetState>(
+                                      buildWhen: (previous, current) =>
+                                          previous.defaultChoiceIndex !=
+                                          current.defaultChoiceIndex,
+                                      builder: (context, state) => ChoiceChip(
+                                            key:
+                                                Key('${questionCollection.uid}-$index'),
+                                            labelPadding: const EdgeInsets.symmetric(
+                                                vertical: 5, horizontal: 25.0),
+                                            label: SizedBox(
+                                              width: double.infinity,
+                                              child: CustomText(
+                                                questionCollection
+                                                    .questions!.choices![index].point!,
+                                                color: index == state.defaultChoiceIndex
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                type: index == state.defaultChoiceIndex
+                                                    ? FontType.bodyTextBold
+                                                    : FontType.bodyText,
+                                                maxLines: 2,
+                                              ),
+                                            ),
+                                            selected: index == state.defaultChoiceIndex,
+                                            selectedColor: Colors.black,
+                                            shadowColor: Colors.transparent,
+                                            backgroundColor: Colors.grey[200],
+                                            onSelected: (value) => context
+                                                .read<SliderQuestionWidgetBloc>()
+                                                .add(AnswerChanged(index)),
+                                            // backgroundColor: color,
+                                            elevation: 0,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 8),
+                                          )),
+                                )),
+                      ),
+                    ),
+                    BlocBuilder<SliderQuestionWidgetBloc, SliderQuestionWidgetState>(
+                        buildWhen: (previous, current) =>
+                            previous.defaultChoiceIndex != current.defaultChoiceIndex,
+                        builder: (context, state) => QuestionNavigationButtonWidget(
+                              disable: state.defaultChoiceIndex.isNegative,
+                              key: const Key('question_navigation_button_widget'),
+                              onSubmitSuccess: onSubmitSuccess,
+                              onNext: () => context
+                                  .read<UserResponseBloc>()
+                                  .add(SendResponse(PpiUserResponseRequest(
+                                    questionId: questionCollection.uid!,
+                                    section: questionCollection.questions!.section!,
+                                    types: questionCollection.questions!.types!,
+                                    points: questionCollection.questions!
+                                        .choices![state.defaultChoiceIndex].point!,
+                                  ))),
+                              onCancel: onCancel,
+                            )),
+                  ],
+                ),
               ),
             ),
-            BlocBuilder<SliderQuestionWidgetBloc, SliderQuestionWidgetState>(
-                buildWhen: (previous, current) =>
-                    previous.defaultChoiceIndex != current.defaultChoiceIndex,
-                builder: (context, state) => QuestionNavigationButtonWidget(
-                      disable: state.defaultChoiceIndex.isNegative,
-                      key: const Key('question_navigation_button_widget'),
-                      onSubmitSuccess: onSubmitSuccess,
-                      onNext: () => context
-                          .read<UserResponseBloc>()
-                          .add(SendResponse(PpiUserResponseRequest(
-                            questionId: questionCollection.uid!,
-                            section: questionCollection.questions!.section!,
-                            types: questionCollection.questions!.types!,
-                            points: questionCollection.questions!
-                                .choices![state.defaultChoiceIndex].point!,
-                          ))),
-                      onCancel: onCancel,
-                    )),
           ],
         ));
   }

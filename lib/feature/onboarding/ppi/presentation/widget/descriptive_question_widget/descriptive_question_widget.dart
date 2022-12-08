@@ -8,6 +8,7 @@ import '../../../domain/ppi_user_response_request.dart';
 import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
+import '../question_title.dart';
 import 'bloc/descriptive_question_widget_bloc.dart';
 
 class DescriptiveQuestionWidget extends StatelessWidget {
@@ -41,8 +42,8 @@ class DescriptiveQuestionWidget extends StatelessWidget {
           QuestionHeader(
             key: const Key('question_header'),
             onTapBack: onCancel,
-            questionText: questionCollection.questions!.question!,
           ),
+          QuestionTitle(question: questionCollection.questions!.question!,),
           const SizedBox(
             height: 16,
           ),

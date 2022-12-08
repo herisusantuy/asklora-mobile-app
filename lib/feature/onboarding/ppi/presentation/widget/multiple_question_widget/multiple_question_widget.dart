@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/presentation/custom_text.dart';
-import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../core/presentation/buttons/secondary/secondary_multiple_choice_button.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/ppi_user_response_request.dart';
 import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
+import '../question_title.dart';
 import 'bloc/multiple_question_widget_bloc.dart';
 
 class MultipleChoiceQuestionWidget extends StatelessWidget {
@@ -33,13 +33,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             QuestionHeader(
-              key: const Key('question_header'),
-              onTapBack: onCancel,
-              questionText: questionCollection.questions!.question!,
-            ),
-            const SizedBox(
-              height: 45,
-            ),
+                key: const Key('question_header'), onTapBack: onCancel),
             Expanded(
                 child: BlocBuilder<MultipleQuestionWidgetBloc,
                         MultipleQuestionWidgetState>(
@@ -47,43 +41,95 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                         previous.defaultChoiceIndex !=
                         current.defaultChoiceIndex,
                     builder: (context, state) {
-                      return ListView.separated(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          separatorBuilder: (BuildContext context, i) =>
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                              ),
-                          itemCount:
-                              questionCollection.questions!.choices!.length,
-                          itemBuilder: (BuildContext context, int index) {
+                      return ListView(
+                        children: [
+                          QuestionTitle(
+                            question: questionCollection.questions!.question!,
+                          ),
+                          ...questionCollection.questions!.choices!.map((e) {
+                            int index = questionCollection.questions!.choices!
+                                .indexOf(e);
                             return Container(
-                                decoration: (index == state.defaultChoiceIndex)
-                                    ? _greenBorder()
-                                    : _grayBorder(),
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      alignment: Alignment.centerLeft,
-                                      foregroundColor:
-                                          AskLoraColors.primaryGreen,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 16, horizontal: 16)),
-                                  child: CustomText(
-                                    questionCollection
-                                        .questions!.choices![index].name!,
-                                    color: AskLoraColors.charcoal,
-                                    maxLines: 3,
-                                    textAlign: TextAlign.left,
-                                    type: FontType.smallText,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  onPressed: () {
-                                    context
-                                        .read<MultipleQuestionWidgetBloc>()
-                                        .add(AnswerChanged(index));
-                                    debugPrint('Krishna index ${index}');
-                                  },
-                                ));
-                          });
+                              margin: const EdgeInsets.symmetric(vertical: 10),
+                              child: SecondaryMultipleChoiceButton(
+                                active: index == state.defaultChoiceIndex,
+                                label: e.name!,
+                                onTap: () {
+                                  context
+                                      .read<MultipleQuestionWidgetBloc>()
+                                      .add(AnswerChanged(index));
+                                  debugPrint('Krishna index ${index}');
+                                },
+                              ),
+                            );
+                            // return Container(
+                            //     margin:
+                            //         const EdgeInsets.symmetric(vertical: 10),
+                            //     decoration: (index == state.defaultChoiceIndex)
+                            //         ? _greenBorder()
+                            //         : _grayBorder(),
+                            //     child: TextButton(
+                            //       style: TextButton.styleFrom(
+                            //           alignment: Alignment.centerLeft,
+                            //           foregroundColor:
+                            //               AskLoraColors.primaryGreen,
+                            //           padding: const EdgeInsets.symmetric(
+                            //               vertical: 16, horizontal: 16)),
+                            //       child: CustomText(
+                            //         e.name!,
+                            //         color: AskLoraColors.charcoal,
+                            //         maxLines: 3,
+                            //         textAlign: TextAlign.left,
+                            //         type: FontType.smallText,
+                            //         fontWeight: FontWeight.w700,
+                            //       ),
+                            //       onPressed: () {
+                            //         context
+                            //             .read<MultipleQuestionWidgetBloc>()
+                            //             .add(AnswerChanged(index));
+                            //         debugPrint('Krishna index ${index}');
+                            //       },
+                            //     ));
+                          })
+                        ],
+                      );
+                      // return ListView.separated(
+                      //     padding: const EdgeInsets.only(bottom: 20),
+                      //     separatorBuilder: (BuildContext context, i) =>
+                      //         const Padding(
+                      //           padding: EdgeInsets.symmetric(vertical: 10),
+                      //         ),
+                      //     itemCount:
+                      //         questionCollection.questions!.choices!.length,
+                      //     itemBuilder: (BuildContext context, int index) {
+                      //       return Container(
+                      //           decoration: (index == state.defaultChoiceIndex)
+                      //               ? _greenBorder()
+                      //               : _grayBorder(),
+                      //           child: TextButton(
+                      //             style: TextButton.styleFrom(
+                      //                 alignment: Alignment.centerLeft,
+                      //                 foregroundColor:
+                      //                     AskLoraColors.primaryGreen,
+                      //                 padding: const EdgeInsets.symmetric(
+                      //                     vertical: 16, horizontal: 16)),
+                      //             child: CustomText(
+                      //               questionCollection
+                      //                   .questions!.choices![index].name!,
+                      //               color: AskLoraColors.charcoal,
+                      //               maxLines: 3,
+                      //               textAlign: TextAlign.left,
+                      //               type: FontType.smallText,
+                      //               fontWeight: FontWeight.w700,
+                      //             ),
+                      //             onPressed: () {
+                      //               context
+                      //                   .read<MultipleQuestionWidgetBloc>()
+                      //                   .add(AnswerChanged(index));
+                      //               debugPrint('Krishna index ${index}');
+                      //             },
+                      //           ));
+                      //     });
                     })),
             BlocBuilder<MultipleQuestionWidgetBloc,
                     MultipleQuestionWidgetState>(
@@ -108,16 +154,16 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
         ));
   }
 
-  BoxDecoration _greenBorder() {
-    return BoxDecoration(
-        color: AskLoraColors.lightGreen,
-        border: Border.all(width: 3.0, color: AskLoraColors.primaryGreen),
-        borderRadius: const BorderRadius.all(Radius.circular(10.0)));
-  }
-
-  BoxDecoration _grayBorder() {
-    return BoxDecoration(
-        border: Border.all(width: 1.0, color: AskLoraColors.gray),
-        borderRadius: const BorderRadius.all(Radius.circular(10.0)));
-  }
+// BoxDecoration _greenBorder() {
+//   return BoxDecoration(
+//       color: AskLoraColors.lightGreen,
+//       border: Border.all(width: 3.0, color: AskLoraColors.primaryGreen),
+//       borderRadius: const BorderRadius.all(Radius.circular(10.0)));
+// }
+//
+// BoxDecoration _grayBorder() {
+//   return BoxDecoration(
+//       border: Border.all(width: 1.0, color: AskLoraColors.gray),
+//       borderRadius: const BorderRadius.all(Radius.circular(10.0)));
+// }
 }
