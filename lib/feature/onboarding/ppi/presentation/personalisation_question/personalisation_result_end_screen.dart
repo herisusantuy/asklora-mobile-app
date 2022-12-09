@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
@@ -11,6 +13,10 @@ class PersonalisationResultEndScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget<QuestionPageStep>(
+      onBackPressed: () {
+        context.read<QuestionBloc>().add(const CurrentPersonalisationPageDecremented());
+        context.read<NavigationBloc<QuestionPageStep>>().add(const PagePop());
+      },
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
         mEmojiText:

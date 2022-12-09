@@ -20,59 +20,66 @@ class PrivacyQuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget<QuestionPageStep>(
-        header: const SizedBox.shrink(),
-        child: BlocProvider(
-            create: (_) => PrivacyQuestionBloc(initialIndex: initialIndex)
-              ..add(NextQuestion()),
-            child: BlocConsumer<PrivacyQuestionBloc, PrivacyQuestionState>(
-                listener: (context, state) {
-              if (state is OnNextQuestion) {
-                context.read<QuestionBloc>().add(
-                    PrivacyQuestionIndexChanged(state.privacyQuestionIndex));
-              } else if (state is OnNextResultSuccessScreen) {
-                context.read<NavigationBloc<QuestionPageStep>>().add(
-                    const PageChanged(QuestionPageStep.privacyResultSuccess));
-              } else if (state is OnPreviousSignInSuccessScreen) {
-                context
-                    .read<NavigationBloc<QuestionPageStep>>()
-                    .add(const PagePop());
-              }
-            }, builder: (context, state) {
-              if (state is OnNextQuestion) {
-                QuestionCollection questionCollection = state.question;
-                switch (state.questionType) {
-                  case (QuestionType.choices):
-                    //TODO defaultChoiceIndex should be from answered question when endpoint is ready
-                    return MultipleChoiceQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        questionCollection: questionCollection,
-                        defaultChoiceIndex: -1,
-                        onCancel: () => onCancel(context),
-                        onSubmitSuccess: () => onSubmitSuccess(context));
-                  case (QuestionType.descriptive):
-                    //TODO defaultAnswer should be from answered question when endpoint is ready
-                    return DescriptiveQuestionWidget(
-                      defaultAnswer: '',
-                      questionCollection: questionCollection,
-                      onCancel: () => onCancel(context),
-                      onSubmitSuccess: () => onSubmitSuccess(context),
-                    );
-                  case (QuestionType.unique):
-                    return BlocProvider(
-                        create: (_) => FinancialProfileBloc(),
-                        child: FinancialSituationQuestion(
-                          questionCollection: questionCollection,
-                          onTapNext: () => onSubmitSuccess(context),
-                          onCancel: () => onCancel(context),
-                        ));
-                  default:
-                    return const SizedBox.shrink();
-                }
-              } else {
-                return const SizedBox.shrink();
-              }
-            })));
+    return BlocProvider(
+        create: (_) => PrivacyQuestionBloc(initialIndex: initialIndex)
+          ..add(NextQuestion()),
+        child: Builder(
+            builder: (context) => CustomNavigationWidget<QuestionPageStep>(
+                  onBackPressed: () => onCancel(context),
+                  header: const SizedBox.shrink(),
+                  child: BlocConsumer<PrivacyQuestionBloc,
+                      PrivacyQuestionState>(listener: (context, state) {
+                    if (state is OnNextQuestion) {
+                      context.read<QuestionBloc>().add(
+                          PrivacyQuestionIndexChanged(
+                              state.privacyQuestionIndex));
+                    } else if (state is OnNextResultSuccessScreen) {
+                      context.read<NavigationBloc<QuestionPageStep>>().add(
+                          const PageChanged(
+                              QuestionPageStep.privacyResultSuccess));
+                    } else if (state is OnPreviousSignInSuccessScreen) {
+                      context
+                          .read<NavigationBloc<QuestionPageStep>>()
+                          .add(const PagePop());
+                    }
+                  }, builder: (context, state) {
+                    if (state is OnNextQuestion) {
+                      QuestionCollection questionCollection =
+                          state.question;
+                      switch (state.questionType) {
+                        case (QuestionType.choices):
+                          //TODO defaultChoiceIndex should be from answered question when endpoint is ready
+                          return MultipleChoiceQuestionWidget(
+                              key: Key(questionCollection.uid!),
+                              questionCollection: questionCollection,
+                              defaultChoiceIndex: -1,
+                              onCancel: () => onCancel(context),
+                              onSubmitSuccess: () =>
+                                  onSubmitSuccess(context));
+                        case (QuestionType.descriptive):
+                          //TODO defaultAnswer should be from answered question when endpoint is ready
+                          return DescriptiveQuestionWidget(
+                            defaultAnswer: '',
+                            questionCollection: questionCollection,
+                            onCancel: () => onCancel(context),
+                            onSubmitSuccess: () => onSubmitSuccess(context),
+                          );
+                        case (QuestionType.unique):
+                          return BlocProvider(
+                              create: (_) => FinancialProfileBloc(),
+                              child: FinancialSituationQuestion(
+                                questionCollection: questionCollection,
+                                onTapNext: () => onSubmitSuccess(context),
+                                onCancel: () => onCancel(context),
+                              ));
+                        default:
+                          return const SizedBox.shrink();
+                      }
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  }),
+                )));
   }
 
   void onSubmitSuccess(BuildContext context) {

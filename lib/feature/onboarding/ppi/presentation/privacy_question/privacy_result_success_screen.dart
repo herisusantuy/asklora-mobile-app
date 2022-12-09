@@ -13,6 +13,10 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomNavigationWidget<QuestionPageStep>(
+      onBackPressed: () {
+        context.read<QuestionBloc>().add(const CurrentPrivacyPageDecremented());
+        context.read<NavigationBloc<QuestionPageStep>>().add(const PagePop());
+      },
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
         mEmojiText:

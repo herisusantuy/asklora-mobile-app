@@ -21,65 +21,67 @@ class PersonalisationQuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget<QuestionPageStep>(
-      onBackPressed: onCancel,
-      header: const SizedBox.shrink(),
-      child: BlocProvider(
-        create: (_) => PersonalisationQuestionBloc(initialIndex: initialIndex)
-          ..add(NextPersonalisationQuestion()),
-        child: BlocConsumer<PersonalisationQuestionBloc,
-            PersonalisationQuestionState>(
-          listener: (context, state) {
-            if (state is OnNextPersonalizationQuestion) {
-              context.read<QuestionBloc>().add(
-                  PersonalisationQuestionIndexChanged(
-                      state.personalizationQuestionIndex));
-            } else if (state is OnPreviousToPrivacyQuestionScreen) {
-              context
-                  .read<NavigationBloc<QuestionPageStep>>()
-                  .add(const PageChanged(QuestionPageStep.privacy));
-            } else if (state is OnNextResultEndScreen) {
-              context.read<NavigationBloc<QuestionPageStep>>().add(
-                  const PageChanged(QuestionPageStep.personalisationResultEnd));
-            }
-          },
-          builder: (context, state) {
-            if (state is OnNextPersonalizationQuestion) {
-              QuestionCollection questionCollection = state.question;
-              switch (state.questionType) {
-                case (QuestionType.choices):
-                  //TODO defaultChoiceIndex should be from answered question when endpoint is ready
-                  return MultipleChoiceQuestionWidget(
-                    key: Key(questionCollection.uid!),
-                    questionCollection: questionCollection,
-                    defaultChoiceIndex: -1,
-                    onSubmitSuccess: () => onSubmitSuccess(context),
-                    onCancel: () => onCancel(context),
-                  );
-                case (QuestionType.descriptive):
-                  //TODO defaultAnswer should be from answered question when endpoint is ready
-                  return DescriptiveQuestionWidget(
-                      defaultAnswer: '',
-                      questionCollection: questionCollection,
-                      onSubmitSuccess: () => onSubmitSuccess(context),
-                      onCancel: () => onCancel(context));
-                case (QuestionType.slider):
-                  return SliderQuestionWidget(
-                    key: Key(questionCollection.uid!),
-                    questionCollection: questionCollection,
-                    defaultChoiceIndex: -1,
-                    onSubmitSuccess: () => onSubmitSuccess(context),
-                    onCancel: () => onCancel(context),
-                  );
-                default:
-                  return const SizedBox.shrink();
-              }
-            } else {
-              return const SizedBox();
-            }
-          },
-        ),
-      ),
+    return BlocProvider(
+      create: (_) => PersonalisationQuestionBloc(initialIndex: initialIndex)
+        ..add(NextPersonalisationQuestion()),
+      child: Builder(
+          builder: (context) => CustomNavigationWidget<QuestionPageStep>(
+                onBackPressed: () => onCancel(context),
+                header: const SizedBox.shrink(),
+                child: BlocConsumer<PersonalisationQuestionBloc,
+                    PersonalisationQuestionState>(
+                  listener: (context, state) {
+                    if (state is OnNextPersonalizationQuestion) {
+                      context.read<QuestionBloc>().add(
+                          PersonalisationQuestionIndexChanged(
+                              state.personalizationQuestionIndex));
+                    } else if (state is OnPreviousToPrivacyQuestionScreen) {
+                      context
+                          .read<NavigationBloc<QuestionPageStep>>()
+                          .add(const PagePop());
+                    } else if (state is OnNextResultEndScreen) {
+                      context.read<NavigationBloc<QuestionPageStep>>().add(
+                          const PageChanged(
+                              QuestionPageStep.personalisationResultEnd));
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is OnNextPersonalizationQuestion) {
+                      QuestionCollection questionCollection = state.question;
+                      switch (state.questionType) {
+                        case (QuestionType.choices):
+                          //TODO defaultChoiceIndex should be from answered question when endpoint is ready
+                          return MultipleChoiceQuestionWidget(
+                            key: Key(questionCollection.uid!),
+                            questionCollection: questionCollection,
+                            defaultChoiceIndex: -1,
+                            onSubmitSuccess: () => onSubmitSuccess(context),
+                            onCancel: () => onCancel(context),
+                          );
+                        case (QuestionType.descriptive):
+                          //TODO defaultAnswer should be from answered question when endpoint is ready
+                          return DescriptiveQuestionWidget(
+                              defaultAnswer: '',
+                              questionCollection: questionCollection,
+                              onSubmitSuccess: () => onSubmitSuccess(context),
+                              onCancel: () => onCancel(context));
+                        case (QuestionType.slider):
+                          return SliderQuestionWidget(
+                            key: Key(questionCollection.uid!),
+                            questionCollection: questionCollection,
+                            defaultChoiceIndex: -1,
+                            onSubmitSuccess: () => onSubmitSuccess(context),
+                            onCancel: () => onCancel(context),
+                          );
+                        default:
+                          return const SizedBox.shrink();
+                      }
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
+                ),
+              )),
     );
   }
 
