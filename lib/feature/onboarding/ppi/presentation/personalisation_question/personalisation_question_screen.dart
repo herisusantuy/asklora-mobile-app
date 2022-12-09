@@ -84,14 +84,14 @@ class PersonalisationQuestionScreen extends StatelessWidget {
   }
 
   void onSubmitSuccess(BuildContext context) {
-    context.read<QuestionBloc>().add(const CurrentPageIncremented());
+    context.read<QuestionBloc>().add(const CurrentPersonalisationPageIncremented());
     context
         .read<PersonalisationQuestionBloc>()
         .add(NextPersonalisationQuestion());
   }
 
   void onCancel(BuildContext context) {
-    context.read<QuestionBloc>().add(const CurrentPageDecremented());
+    context.read<QuestionBloc>().add(const CurrentPersonalisationPageDecremented());
     context
         .read<PersonalisationQuestionBloc>()
         .add(PreviousPersonalisationQuestion());

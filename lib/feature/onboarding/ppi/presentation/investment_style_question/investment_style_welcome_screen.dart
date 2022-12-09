@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/we_create/custom_app_bar.dart';
@@ -40,7 +38,9 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
         fontStyle: FontStyle.normal,
         label: 'DEFINE INVESTMENT STYLE',
         onClick: () {
-          context.read<QuestionBloc>().add(const CurrentPageIncremented());
+          context
+              .read<QuestionBloc>()
+              .add(const CurrentInvestmentStylePageIncremented());
           context
               .read<NavigationBloc<QuestionPageStep>>()
               .add(const PageChanged(QuestionPageStep.investmentStyle));

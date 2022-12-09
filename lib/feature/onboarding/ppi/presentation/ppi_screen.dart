@@ -71,14 +71,53 @@ class PpiScreen extends StatelessWidget {
   }
 
   Widget _progressIndicator() {
-    return BlocBuilder<QuestionBloc, QuestionState>(
-        buildWhen: (previous, current) =>
-            previous.currentPages != current.currentPages ||
-            previous.totalPages != current.totalPages,
-        builder: (context, state) => CustomLinearProgressIndicator(
-              padding: const EdgeInsets.all(10),
-              progress: state.currentPages / state.totalPages,
-            ));
+    switch (questionPageType) {
+      case QuestionPageType.privacyAndPersonalisation:
+        return BlocBuilder<QuestionBloc, QuestionState>(
+            buildWhen: (previous, current) =>
+                previous.currentPrivacyPages != current.currentPrivacyPages ||
+                previous.totalPrivacyPages != current.totalPrivacyPages ||
+                previous.currentPersonalisationPages !=
+                    current.currentPersonalisationPages ||
+                previous.totalPersonalisationPages !=
+                    current.totalPersonalisationPages,
+            builder: (context, state) => Row(
+                  children: [
+                    Expanded(
+                      child: CustomLinearProgressIndicator(
+                        padding: const EdgeInsets.only(
+                            left: 10, top: 10, bottom: 10, right: 2),
+                        progress: state.currentPrivacyPages > 0
+                            ? state.currentPrivacyPages /
+                                state.totalPrivacyPages
+                            : 0,
+                      ),
+                    ),
+                    Expanded(
+                      child: CustomLinearProgressIndicator(
+                        padding: const EdgeInsets.only(
+                            right: 10, top: 10, bottom: 10, left: 2),
+                        progress: state.currentPersonalisationPages > 0
+                            ? state.currentPersonalisationPages /
+                                state.totalPersonalisationPages
+                            : 0,
+                      ),
+                    ),
+                  ],
+                ));
+      case QuestionPageType.investmentStyle:
+        return BlocBuilder<QuestionBloc, QuestionState>(
+            buildWhen: (previous, current) =>
+                previous.currentInvestmentStylePages !=
+                    current.currentInvestmentStylePages ||
+                previous.totalInvestmentStylePages !=
+                    current.totalInvestmentStylePages,
+            builder: (context, state) => CustomLinearProgressIndicator(
+                  padding: const EdgeInsets.all(10),
+                  progress: state.currentInvestmentStylePages>0?state.currentInvestmentStylePages /
+                      state.totalInvestmentStylePages:0,
+                ));
+    }
   }
 
   Widget _pages(NavigationState navigationState) {

@@ -6,24 +6,36 @@ class QuestionState extends Equatable {
     this.privacyQuestionIndex = 0,
     this.personalisationQuestionIndex = 0,
     this.investmentStyleQuestionIndex = 0,
-    this.totalPages = 1,
-    this.currentPages = 1,
+    this.totalPrivacyPages = 0,
+    this.totalPersonalisationPages = 0,
+    this.totalInvestmentStylePages = 0,
+    this.currentPrivacyPages = 0,
+    this.currentPersonalisationPages = 0,
+    this.currentInvestmentStylePages = 0,
   }) : super();
 
   final BaseResponse response;
   final int privacyQuestionIndex;
   final int personalisationQuestionIndex;
   final int investmentStyleQuestionIndex;
-  final int totalPages;
-  final int currentPages;
+  final int totalPrivacyPages;
+  final int totalPersonalisationPages;
+  final int totalInvestmentStylePages;
+  final int currentPrivacyPages;
+  final int currentPersonalisationPages;
+  final int currentInvestmentStylePages;
 
   QuestionState copyWith({
     BaseResponse? response,
     int? privacyQuestionIndex,
     int? personalisationQuestionIndex,
     int? investmentStyleQuestionIndex,
-    int? totalPages,
-    int? currentPages,
+    int? totalPrivacyPages,
+    int? totalPersonalisationPages,
+    int? totalInvestmentStylePages,
+    int? currentPrivacyPages,
+    int? currentPersonalisationPages,
+    int? currentInvestmentStylePages,
   }) {
     return QuestionState(
       response: response ?? this.response,
@@ -32,8 +44,16 @@ class QuestionState extends Equatable {
           personalisationQuestionIndex ?? this.personalisationQuestionIndex,
       investmentStyleQuestionIndex:
           investmentStyleQuestionIndex ?? this.investmentStyleQuestionIndex,
-      totalPages: totalPages ?? this.totalPages,
-      currentPages: currentPages ?? this.currentPages,
+      totalPrivacyPages: totalPrivacyPages ?? this.totalPrivacyPages,
+      totalPersonalisationPages:
+          totalPersonalisationPages ?? this.totalPersonalisationPages,
+      totalInvestmentStylePages:
+          totalInvestmentStylePages ?? this.totalInvestmentStylePages,
+      currentPrivacyPages: currentPrivacyPages ?? this.currentPrivacyPages,
+      currentPersonalisationPages:
+          currentPersonalisationPages ?? this.currentPersonalisationPages,
+      currentInvestmentStylePages:
+          currentInvestmentStylePages ?? this.currentInvestmentStylePages,
     );
   }
 
@@ -43,6 +63,11 @@ class QuestionState extends Equatable {
         personalisationQuestionIndex,
         investmentStyleQuestionIndex,
         response,
-        currentPages
+        currentPrivacyPages,
+        currentPersonalisationPages,
+        currentInvestmentStylePages,
+        totalPrivacyPages,
+        totalPersonalisationPages,
+        totalInvestmentStylePages,
       ];
 }

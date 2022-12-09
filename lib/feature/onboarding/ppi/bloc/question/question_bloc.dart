@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
-import '../../domain/fixture.dart';
 import '../../repository/ppi_question_repository.dart';
 
 part 'question_event.dart';
@@ -34,8 +33,16 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
     on<PersonalisationQuestionIndexChanged>(_onPersonalisationIndexChanged);
     on<InvestmentStyleQuestionIndexChanged>(
         _onInvestmentStyleQuestionIndexChanged);
-    on<CurrentPageIncremented>(_onCurrentPageIncremented);
-    on<CurrentPageDecremented>(_onCurrentPageDecremented);
+    on<CurrentPrivacyPageIncremented>(_onCurrentPrivacyPageIncremented);
+    on<CurrentPersonalisationPageIncremented>(
+        _onCurrentPersonalisationPageIncremented);
+    on<CurrentInvestmentStylePageIncremented>(
+        _onCurrentInvestmentStylePageIncremented);
+    on<CurrentPrivacyPageDecremented>(_onCurrentPrivacyPageDecremented);
+    on<CurrentPersonalisationPageDecremented>(
+        _onCurrentPersonalisationPageDecremented);
+    on<CurrentInvestmentStylePageDecremented>(
+        _onCurrentInvestmentStylePageDecremented);
   }
 
   final PpiQuestionRepository _questionCollectionRepository;
@@ -64,29 +71,55 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
     var data = await _questionCollectionRepository.fetchQuestions();
     emit(state.copyWith(
         response: BaseResponse.complete(data),
-        totalPages: _getTotalPages(data)));
+        currentPrivacyPages:
+            _questionPageType == QuestionPageType.privacyAndPersonalisation
+                ? 1
+                : 0,
+        currentInvestmentStylePages:
+            _questionPageType == QuestionPageType.investmentStyle ? 1 : 0,
+        //+1 for privacy result
+        totalPrivacyPages: data.privacyQuestions.length + 1,
+        //+1 for personalisation result
+        totalPersonalisationPages: data.personalisedQuestion.length + 1,
+        //+1 for investmentStyle result
+        totalInvestmentStylePages: data.investmentStyleQuestion.length + 1));
   }
 
-  void _onCurrentPageIncremented(
-      CurrentPageIncremented event, Emitter<QuestionState> emit) async {
-    emit(state.copyWith(currentPages: state.currentPages + 1));
+  void _onCurrentPrivacyPageIncremented(
+      CurrentPrivacyPageIncremented event, Emitter<QuestionState> emit) async {
+    emit(state.copyWith(currentPrivacyPages: state.currentPrivacyPages + 1));
   }
 
-  void _onCurrentPageDecremented(
-      CurrentPageDecremented event, Emitter<QuestionState> emit) async {
-    emit(state.copyWith(currentPages: state.currentPages - 1));
+  void _onCurrentPersonalisationPageIncremented(
+      CurrentPersonalisationPageIncremented event,
+      Emitter<QuestionState> emit) async {
+    emit(state.copyWith(
+        currentPersonalisationPages: state.currentPersonalisationPages + 1));
   }
 
-  int _getTotalPages(Fixture fixture) {
-    switch (_questionPageType) {
-      case QuestionPageType.privacyAndPersonalisation:
-        //+2 for privacy and personalisation result screen
-        return fixture.privacyQuestions.length +
-            fixture.personalisedQuestion.length +
-            2;
-      case QuestionPageType.investmentStyle:
-        //+2 for investment style welcome and result screen
-        return fixture.investmentStyleQuestion.length + 2;
-    }
+  void _onCurrentInvestmentStylePageIncremented(
+      CurrentInvestmentStylePageIncremented event,
+      Emitter<QuestionState> emit) async {
+    emit(state.copyWith(
+        currentInvestmentStylePages: state.currentInvestmentStylePages + 1));
+  }
+
+  void _onCurrentPrivacyPageDecremented(
+      CurrentPrivacyPageDecremented event, Emitter<QuestionState> emit) async {
+    emit(state.copyWith(currentPrivacyPages: state.currentPrivacyPages - 1));
+  }
+
+  void _onCurrentPersonalisationPageDecremented(
+      CurrentPersonalisationPageDecremented event,
+      Emitter<QuestionState> emit) async {
+    emit(state.copyWith(
+        currentPersonalisationPages: state.currentPersonalisationPages - 1));
+  }
+
+  void _onCurrentInvestmentStylePageDecremented(
+      CurrentInvestmentStylePageDecremented event,
+      Emitter<QuestionState> emit) async {
+    emit(state.copyWith(
+        currentInvestmentStylePages: state.currentInvestmentStylePages - 1));
   }
 }

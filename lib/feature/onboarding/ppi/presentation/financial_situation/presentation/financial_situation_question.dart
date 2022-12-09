@@ -151,6 +151,7 @@ class FinancialSituationQuestion extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(top: _spaceHeightDouble),
                 child: MasterTextField(
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
                   initialValue: state.otherOccupation ?? '',
                   key: const Key('account_other_occupation_input'),
                   labelText: 'Other Occupation*',

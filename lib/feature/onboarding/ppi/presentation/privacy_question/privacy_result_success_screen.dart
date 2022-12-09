@@ -22,7 +22,7 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
           key: const Key('next_button'),
           label: 'SURE!',
           onClick: () {
-            context.read<QuestionBloc>().add(const CurrentPageIncremented());
+            context.read<QuestionBloc>().add(const CurrentPersonalisationPageIncremented());
             context
                 .read<NavigationBloc<QuestionPageStep>>()
                 .add(const PageChanged(QuestionPageStep.personalisation));

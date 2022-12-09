@@ -76,12 +76,12 @@ class PrivacyQuestionScreen extends StatelessWidget {
   }
 
   void onSubmitSuccess(BuildContext context) {
-    context.read<QuestionBloc>().add(const CurrentPageIncremented());
+    context.read<QuestionBloc>().add(const CurrentPrivacyPageIncremented());
     context.read<PrivacyQuestionBloc>().add(NextQuestion());
   }
 
   void onCancel(BuildContext context) {
-    context.read<QuestionBloc>().add(const CurrentPageDecremented());
+    context.read<QuestionBloc>().add(const CurrentPrivacyPageDecremented());
     context.read<PrivacyQuestionBloc>().add(PreviousQuestion());
   }
 }
