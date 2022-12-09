@@ -115,10 +115,13 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                     });
                   },
                   child: UnconstrainedBox(
-                    child: SvgPicture.asset(
-                      obscureText
-                          ? 'assets/icons/icon_obscure_text_disable.svg'
-                          : 'assets/icons/icon_obscure_text_enable.svg',
+                    child: Padding(
+                      padding: EdgeInsets.only(top: obscureText ? 2 : 0),
+                      child: SvgPicture.asset(
+                        obscureText
+                            ? 'assets/icons/icon_obscure_text_disable.svg'
+                            : 'assets/icons/icon_obscure_text_enable.svg',
+                      ),
                     ),
                   ),
                 ),
