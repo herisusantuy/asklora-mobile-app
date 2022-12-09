@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
 
 class PpiResultScreen extends StatelessWidget {
   final String mEmojiText;
@@ -24,14 +24,19 @@ class PpiResultScreen extends StatelessWidget {
         children: [
           LoraMemojiWidget(text: mEmojiText, imageAsset: '/'),
           if (additionalMessage.isNotEmpty)
-            CustomText(
-              additionalMessage,
-              type: FontType.h3W800,
-              textAlign: TextAlign.center,
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 24),
+              child: CustomTextNew(
+                additionalMessage,
+                style: AskLoraTextStyles.body1,
+                textAlign: TextAlign.center,
+              ),
             ),
           const Expanded(child: SizedBox()),
-          bottomButton
+          Padding(
+            padding: const EdgeInsets.only(bottom: 24.0),
+            child: bottomButton,
+          )
         ],
       ),
     );

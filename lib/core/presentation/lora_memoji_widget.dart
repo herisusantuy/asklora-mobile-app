@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../styles/asklora_colors.dart';
+import '../styles/asklora_text_styles.dart';
 import 'custom_text.dart';
+import 'custom_text_new.dart';
 
 class LoraMemojiWidget extends StatelessWidget {
   final String text;
@@ -26,11 +28,10 @@ class LoraMemojiWidget extends StatelessWidget {
         ),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: CustomText(
+            child: CustomTextNew(
               text,
-              type: FontType.h4,
+              style: AskLoraTextStyles.h4,
               textAlign: TextAlign.center,
-              fontWeight: FontWeight.w900,
             )),
       ],
     );

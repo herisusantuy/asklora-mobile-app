@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/presentation/custom_text.dart';
-import '../../../../../core/presentation/we_create/custom_button.dart';
+import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../ppi_result_screen.dart';
 
@@ -17,15 +16,14 @@ class PrivacyResultFailedScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
         child: Column(
           children: [
-            CustomButton(
+            PrimaryButton(
               key: const Key('try_again_button'),
               label: 'TRY AGAIN',
-              onClick: () => Navigator.pop(context),
-              margin: const EdgeInsets.only(bottom: 32),
+              onTap: () => Navigator.pop(context),
             ),
             CustomTextButton(
               key: const Key('need_help_button'),
-              margin: const EdgeInsets.only(bottom: 16),
+              margin: const EdgeInsets.only(top: 24),
               onTap: () {},
               label: 'NEED HELP?',
             )
