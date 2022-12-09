@@ -18,44 +18,42 @@ class SignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SignUpBloc, SignUpState>(
-        listener: (context, state) {
-          switch (state.response.state) {
-            case ResponseState.error:
-              context
-                  .read<SignUpBloc>()
-                  .add(SignUpUsernameChanged(state.username));
-              CustomSnackBar(context)
-                  .setMessage(state.response.message)
-                  .showError();
-              break;
-            case ResponseState.success:
-              EmailActivationScreen.open(context);
-              break;
-            default:
-              break;
-          }
-        },
-        child: ListView(
-          children: [
-            const LoraMemojiWidget(
-                text:
-                    'Start your new investing journey\nwith Lora - your\nAI Investment Coach',
-                imageAsset: '/'),
-            _userNameInput(),
-            _padding(),
-            _passwordInput(),
-            _padding(),
-            ConstrainedBox(
-                constraints: const BoxConstraints(minHeight: 50),
-                child: const Expanded(child: SizedBox())),
-            _signUpButton(),
-            _padding(),
-            _signInButton(context),
-            _maybeLaterButton(context),
-            _padding(),
-          ],
-        ));
+    return BlocListener<SignUpBloc, SignUpState>(listener: (context, state) {
+      switch (state.response.state) {
+        case ResponseState.error:
+          context.read<SignUpBloc>().add(SignUpUsernameChanged(state.username));
+          CustomSnackBar(context)
+              .setMessage(state.response.message)
+              .showError();
+          break;
+        case ResponseState.success:
+          EmailActivationScreen.open(context);
+          break;
+        default:
+          break;
+      }
+    }, child: LayoutBuilder(builder: (context, constraint) {
+      return SingleChildScrollView(
+          child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: IntrinsicHeight(
+                  child: Column(children: <Widget>[
+                const LoraMemojiWidget(
+                    text:
+                        'Start your new investing journey\nwith Lora - your\nAI Investment Coach',
+                    imageAsset: '/'),
+                _userNameInput(),
+                _padding(),
+                _passwordInput(),
+                _padding(),
+                const Expanded(child: SizedBox(height: 50)),
+                _signUpButton(),
+                _padding(),
+                _signInButton(context),
+                _maybeLaterButton(context),
+                _padding(padding: 28),
+              ]))));
+    }));
   }
 
   Widget _userNameInput() {
@@ -119,13 +117,13 @@ class SignUpForm extends StatelessWidget {
 
   Widget _maybeLaterButton(BuildContext context) {
     return CustomTextButton(
-      margin: const EdgeInsets.only(top: 28),
+      margin: const EdgeInsets.only(top: 20),
       label: 'MAYBE LATER',
       onTap: () => CarouselScreen.open(context),
     );
   }
 
-  Padding _padding() => const Padding(
-        padding: EdgeInsets.only(top: 20),
+  Padding _padding({double padding = 20}) => Padding(
+        padding: EdgeInsets.only(top: padding),
       );
 }
