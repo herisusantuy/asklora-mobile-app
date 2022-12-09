@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
@@ -103,23 +104,25 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               obscuringCharacter: '●',
               style: TextFieldStyle.valueTextStyle,
               decoration: TextFieldStyle.inputDecoration.copyWith(
-                  // errorStyle: TextStyle(),
-                  floatingLabelBehavior: floatingLabelBehavior,
-                  labelText: label,
-                  hintText: widget.hintText,
-                  errorText: widget.errorText.isEmpty ? null : widget.errorText,
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
-                    child: Image.asset(
+                floatingLabelBehavior: floatingLabelBehavior,
+                labelText: label,
+                hintText: widget.hintText,
+                errorText: widget.errorText.isEmpty ? null : widget.errorText,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  },
+                  child: UnconstrainedBox(
+                    child: SvgPicture.asset(
                       obscureText
-                          ? 'assets/icons/icon_obscure_text_disable.png'
-                          : 'assets/icons/icon_obscure_text_enable.png',
+                          ? 'assets/icons/icon_obscure_text_disable.svg'
+                          : 'assets/icons/icon_obscure_text_enable.svg',
                     ),
-                  )),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 6,
