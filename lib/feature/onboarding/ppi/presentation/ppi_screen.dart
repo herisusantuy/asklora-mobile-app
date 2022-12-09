@@ -114,8 +114,10 @@ class PpiScreen extends StatelessWidget {
                     current.totalInvestmentStylePages,
             builder: (context, state) => CustomLinearProgressIndicator(
                   padding: const EdgeInsets.all(10),
-                  progress: state.currentInvestmentStylePages>0?state.currentInvestmentStylePages /
-                      state.totalInvestmentStylePages:0,
+                  progress: state.currentInvestmentStylePages > 0
+                      ? state.currentInvestmentStylePages /
+                          state.totalInvestmentStylePages
+                      : 0,
                 ));
     }
   }

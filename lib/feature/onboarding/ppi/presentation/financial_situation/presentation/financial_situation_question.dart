@@ -175,7 +175,7 @@ class FinancialSituationQuestion extends StatelessWidget {
             return Column(
               children: [
                 MasterTextField(
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
                     initialValue: state.employer ?? '',
                     key: const Key('account_employer_input'),
                     labelText: 'Employer',
@@ -194,7 +194,9 @@ class FinancialSituationQuestion extends StatelessWidget {
                       .add(FinancialProfileEmployerAddressChanged(value)),
                   hintText: 'Employer Address 1',
                 ),
-                SizedBox(height: 8,),
+                SizedBox(
+                  height: 8,
+                ),
                 MasterTextField(
                   initialValue: state.employerAddress ?? '',
                   key: const Key('account_employer_address_two_input'),
