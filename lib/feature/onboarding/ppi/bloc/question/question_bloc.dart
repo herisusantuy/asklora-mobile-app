@@ -13,7 +13,6 @@ enum QuestionPageStep {
   privacyResultFailed,
   personalisation,
   personalisationResultEnd,
-  investmentStyleWelcome,
   investmentStyle,
   investmentStyleResultEnd,
   unknown

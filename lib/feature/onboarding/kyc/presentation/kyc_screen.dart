@@ -35,6 +35,7 @@ import 'sign_agreements/tax_agreement_screen.dart';
 import 'verify_identity/verify_identity_screen.dart';
 
 class KycScreen extends StatelessWidget {
+  static const String route = '/kyc_screen';
   final KycPageStep initialKycPageStep;
 
   const KycScreen({this.initialKycPageStep = KycPageStep.progress, Key? key})
@@ -188,4 +189,9 @@ class KycScreen extends StatelessWidget {
           }
         });
   }
+
+  static void open(BuildContext context) => Navigator.pushNamed(
+        context,
+        route,
+      );
 }

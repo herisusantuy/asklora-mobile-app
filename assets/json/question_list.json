@@ -366,8 +366,8 @@
           "point": "TBD"
         }
       ],
-      "hints": "Type in any industries or companies that you might be interested in!",
-      "question": "Give me some words and I’ll find investments no one tells you are relevant!",
+      "hints": "Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!",
+      "question": "What gets your investing mojo on?",
       "question_index": 1,
       "section": "investment_style",
       "types": "omnisearch"

@@ -10,12 +10,14 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
   final Function() onCancel;
   final Function onSubmitSuccess;
   final bool disable;
+  final EdgeInsets padding;
 
   const QuestionNavigationButtonWidget(
       {required this.onSubmitSuccess,
       required this.onNext,
       required this.onCancel,
       this.disable = true,
+      this.padding = const EdgeInsets.only(bottom: 24.0),
       Key? key})
       : super(key: key);
 
@@ -36,7 +38,7 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
             previous.responseState != current.responseState,
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 24.0),
+            padding: padding,
             child: PrimaryButton(
               key: const Key('question_next_button'),
               disabled: disable,

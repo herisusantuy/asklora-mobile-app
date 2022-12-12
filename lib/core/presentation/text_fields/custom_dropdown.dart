@@ -35,7 +35,10 @@ class _CustomDropdownState extends State<CustomDropdown> {
       onChanged: (String? newValue) {
         widget.onChanged(newValue);
       },
-      icon: const Icon(Icons.keyboard_arrow_down, color: AskLoraColors.charcoal,),
+      icon: const Icon(
+        Icons.keyboard_arrow_down,
+        color: AskLoraColors.charcoal,
+      ),
       onTap: widget.onTap,
       style: TextFieldStyle.valueTextStyle,
       decoration: TextFieldStyle.inputDecoration.copyWith(
