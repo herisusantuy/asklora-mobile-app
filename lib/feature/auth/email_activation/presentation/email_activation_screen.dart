@@ -15,7 +15,7 @@ class EmailActivationScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar.transparent(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
             const Expanded(

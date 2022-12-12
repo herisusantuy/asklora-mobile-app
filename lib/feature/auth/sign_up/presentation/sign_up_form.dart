@@ -86,7 +86,6 @@ class SignUpForm extends StatelessWidget {
               validPassword: (isValidPassword) => {},
               hintText: 'Password',
               label: 'Password',
-              errorText: state.passwordErrorText,
               onChanged: (password) => context
                   .read<SignUpBloc>()
                   .add(SignUpPasswordChanged(password)));

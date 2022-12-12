@@ -23,7 +23,7 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
             const Expanded(
               child: LoraMemojiWidget(
                 text:
-                    'Let’s dive into the core of the personalisation experience, defining your investment style.',
+                    'Let’s dive into the core of the personalisation experience - defining your investment style.',
                 imageAsset: '/',
               ),
             ),
