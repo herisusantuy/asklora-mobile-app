@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 
 class CustomSilverBox extends StatelessWidget {
   final String title;
@@ -17,8 +17,7 @@ class CustomSilverBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 28),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       decoration: BoxDecoration(
           color: const Color(0xfff2f5f7),
           borderRadius: BorderRadius.circular(12)),
@@ -26,10 +25,12 @@ class CustomSilverBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title.isNotEmpty)
-            CustomText(
-              title,
-              type: FontType.bodyTextBold,
-              padding: const EdgeInsets.only(bottom: 24),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: CustomTextNew(
+                title,
+                style: AskLoraTextStyles.h5,
+              ),
             ),
           content
         ],

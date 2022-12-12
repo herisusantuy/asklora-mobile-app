@@ -22,15 +22,18 @@ class CustomStep extends StatelessWidget {
             if (drawLine)
               CustomPaint(
                   painter: DashedLineVerticalPainter(),
-                  size: const Size(1, 30)),
+                  size: const Size(1, 34)),
             SvgPicture.asset('assets/icons/kyc/$svgAsset'),
           ],
         ),
-        CustomText(
+        const SizedBox(
+          width: 14,
+        ),
+        CustomTextNew(
           label,
-          type: FontType.smallText,
-          padding: const EdgeInsets.only(left: 12, bottom: 2),
-        )
+          style:
+              AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
+        ),
       ],
     );
   }

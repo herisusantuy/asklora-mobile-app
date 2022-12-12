@@ -6,7 +6,9 @@ import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../feature/onboarding/ppi/presentation/ppi_screen.dart';
 import '../../feature/onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
@@ -18,7 +20,7 @@ import '../../feature/payment/deposits/presentation/deposit_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
-import '../../feature/user/kyc/presentation/kyc_screen.dart';
+
 import '../../home_screen.dart';
 import '../domain/pair.dart';
 import '../presentation/photo_view_screen.dart';
@@ -77,6 +79,9 @@ class RouterGenerator {
             builder: (_) => GreetingScreen(name: settings.arguments as String));
       case EmailActivationScreen.route:
         return MaterialPageRoute(builder: (_) => const EmailActivationScreen());
+      case InvestmentStyleWelcomeScreen.route:
+        return MaterialPageRoute(
+            builder: (_) => const InvestmentStyleWelcomeScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

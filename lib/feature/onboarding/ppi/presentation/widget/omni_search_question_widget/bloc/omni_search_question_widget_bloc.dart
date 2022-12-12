@@ -12,6 +12,8 @@ class OmniSearchQuestionWidgetBloc
     on<KeywordAdded>(_onKeywordAdded);
     on<KeywordRemoved>(_onKeywordRemoved);
     on<KeywordSelected>(_onKeywordSelected);
+    on<KeywordChanged>(_onKeywordChanged);
+    on<KeywordReset>(_onKeywordReset);
   }
 
   void _onKeywordAdded(
@@ -20,7 +22,7 @@ class OmniSearchQuestionWidgetBloc
     emit(state.copyWith(addKeywordError: false));
     if (!keywords.contains(event.keywordInput)) {
       keywords.add(event.keywordInput);
-      emit(state.copyWith(keywords: keywords));
+      emit(state.copyWith(keywords: keywords, keyword: ''));
     } else {
       emit(state.copyWith(addKeywordError: true));
     }
@@ -28,9 +30,16 @@ class OmniSearchQuestionWidgetBloc
 
   void _onKeywordRemoved(
       KeywordRemoved event, Emitter<OmniSearchQuestionWidgetState> emit) {
-    List<String> keywords = state.keywords;
+    List<String> keywordAnswers = List.from(state.keywordAnswers);
+    keywordAnswers.remove(event.keyword);
+    List<String> keywords = List.from(state.keywords);
     keywords.remove(event.keyword);
-    emit(state.copyWith(keywords: keywords));
+    emit(state.copyWith(keywords: keywords, keywordAnswers: keywordAnswers));
+  }
+
+  void _onKeywordReset(
+      KeywordReset event, Emitter<OmniSearchQuestionWidgetState> emit) {
+    emit(state.copyWith(keywords: defaultKeywords, keywordAnswers: []));
   }
 
   void _onKeywordSelected(
@@ -43,5 +52,10 @@ class OmniSearchQuestionWidgetBloc
     }
 
     emit(state.copyWith(keywordAnswers: keywordAnswers));
+  }
+
+  void _onKeywordChanged(
+      KeywordChanged event, Emitter<OmniSearchQuestionWidgetState> emit) {
+    emit(state.copyWith(keyword: event.keyword));
   }
 }

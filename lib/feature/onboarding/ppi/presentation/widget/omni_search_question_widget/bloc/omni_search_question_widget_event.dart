@@ -9,8 +9,15 @@ abstract class OmniSearchQuestionWidgetEvent extends Equatable {
   List<Object> get props => [timeStamp];
 }
 
+class KeywordChanged extends OmniSearchQuestionWidgetEvent {
+  final String keyword;
+
+  KeywordChanged(this.keyword);
+}
+
 class KeywordAdded extends OmniSearchQuestionWidgetEvent {
   final String keywordInput;
+
   KeywordAdded(this.keywordInput);
 }
 
@@ -24,4 +31,8 @@ class KeywordSelected extends OmniSearchQuestionWidgetEvent {
   final String keyword;
 
   KeywordSelected(this.keyword);
+}
+
+class KeywordReset extends OmniSearchQuestionWidgetEvent {
+  KeywordReset();
 }

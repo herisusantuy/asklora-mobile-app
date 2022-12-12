@@ -73,7 +73,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
                 ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Container(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   child: child,

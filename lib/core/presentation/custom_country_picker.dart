@@ -1,7 +1,10 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
+import '../styles/asklora_colors.dart';
 import 'custom_text.dart';
+import 'custom_text_new.dart';
+import 'text_fields/style/text_field_style.dart';
 
 class CustomCountryPicker extends StatelessWidget {
   final String? title;
@@ -44,26 +47,27 @@ class CustomCountryPicker extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             width: double.infinity,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(5),
                 border: Border.all(width: 1, color: Colors.grey)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: CustomText(
+                  child: CustomTextNew(
                     ellipsis: true,
                     initialValue != null && initialValue!.isNotEmpty
                         ? initialValue!
                         : hintText,
-                    color: initialValue != null && initialValue!.isNotEmpty
-                        ? Colors.black
-                        : Colors.grey,
+                    style: TextFieldStyle.valueTextStyle.copyWith(
+                        height: 1,
+                        color: initialValue != null && initialValue!.isNotEmpty
+                            ? AskLoraColors.charcoal
+                            : AskLoraColors.gray),
                   ),
                 ),
                 const Icon(
-                  Icons.arrow_drop_down_circle,
-                  color: Color(0xff424b5a),
-                  size: 22,
+                  Icons.keyboard_arrow_down,
+                  color: AskLoraColors.charcoal,
                 ),
               ],
             ),

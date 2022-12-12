@@ -5,11 +5,12 @@ import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
 import '../../../../../core/presentation/custom_phone_number_input.dart';
-import '../../../../../core/presentation/custom_text.dart';
-import '../../../../../core/presentation/custom_text_input.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/text_fields/master_text_field.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
-import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -23,6 +24,9 @@ class BasicInformationScreen extends StatelessWidget {
   const BasicInformationScreen({required this.progress, Key? key})
       : super(key: key);
 
+  static const double _spaceHeightDouble = 36;
+  final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
+
   @override
   Widget build(BuildContext context) {
     return KycBaseForm(
@@ -34,67 +38,65 @@ class BasicInformationScreen extends StatelessWidget {
         onPointerDown: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        child: SingleChildScrollView(
+        child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 24),
-          child: Column(
-            children: [
-              const CustomText(
-                'Please make sure your name is exactly the same as the information on identification document.',
-                type: FontType.smallText,
-                padding: AppValues.screenHorizontalPadding,
-              ),
-              _textInput(
-                  key: const Key('first_name'),
-                  label: 'English First Name',
-                  onChanged: (value) => context
-                      .read<BasicInformationBloc>()
-                      .add(BasicInformationFirstNameChanged(value)),
-                  padding: AppValues.screenHorizontalPadding.copyWith(top: 38)),
-              _textInput(
-                  key: const Key('last_name'),
-                  label: 'English First Name',
-                  onChanged: (value) => context
-                      .read<BasicInformationBloc>()
-                      .add(BasicInformationLastNameChanged(value)),
-                  padding: AppValues.screenHorizontalPadding.copyWith(top: 28)),
-              _selectGender,
-              _nationality,
-              _dateOfBirth,
-              _countryCodeAndPhoneNumber
-            ],
-          ),
+          children: [
+            CustomTextNew(
+              'Please make sure your name is exactly the same as the information on identification document.',
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            _spaceHeight,
+            _textInput(
+                key: const Key('first_name'),
+                label: 'English First Name',
+                onChanged: (value) => context
+                    .read<BasicInformationBloc>()
+                    .add(BasicInformationFirstNameChanged(value))),
+            _spaceHeight,
+            _textInput(
+                key: const Key('last_name'),
+                label: 'English First Name',
+                onChanged: (value) => context
+                    .read<BasicInformationBloc>()
+                    .add(BasicInformationLastNameChanged(value))),
+            _spaceHeight,
+            _selectGender,
+            _spaceHeight,
+            _nationality,
+            _spaceHeight,
+            _dateOfBirth,
+            _spaceHeight,
+            _countryCodeAndPhoneNumber
+          ],
         ),
       ),
       bottomButton: _bottomButton,
     );
   }
 
-  Widget get _dateOfBirth => Padding(
-        padding: AppValues.screenHorizontalPadding.copyWith(top: 12),
-        child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
-          buildWhen: ((previous, current) =>
-              previous.dateOfBirth != current.dateOfBirth),
-          builder: (context, state) {
-            final DateTime dateTimeNow = DateTime.now();
-            return CustomDatePicker(
-              key: const Key('date_of_birth'),
-              padding: const EdgeInsets.only(top: 10),
-              label: 'Date of Birth',
-              selectedDate: DateTime.parse(state.dateOfBirth),
-              initialDateTime: dateTimeNow,
-              maximumDate: dateTimeNow,
-              onDateTimeChanged: (date) =>
-                  context.read<BasicInformationBloc>().add(
-                        BasicInformationDateOfBirthChanged(date.toString()),
-                      ),
-            );
-          },
-        ),
+  Widget get _dateOfBirth =>
+      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+        buildWhen: ((previous, current) =>
+            previous.dateOfBirth != current.dateOfBirth),
+        builder: (context, state) {
+          final DateTime dateTimeNow = DateTime.now();
+          return CustomDatePicker(
+            key: const Key('date_of_birth'),
+            label: 'Date of Birth',
+            selectedDate: DateTime.parse(state.dateOfBirth),
+            initialDateTime: dateTimeNow,
+            maximumDate: dateTimeNow,
+            onDateTimeChanged: (date) =>
+                context.read<BasicInformationBloc>().add(
+                      BasicInformationDateOfBirthChanged(date.toString()),
+                    ),
+          );
+        },
       );
 
-  Widget get _nationality => Padding(
-      padding: AppValues.screenHorizontalPadding.copyWith(top: 28),
-      child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
+  Widget get _nationality =>
+      BlocBuilder<BasicInformationBloc, BasicInformationState>(
         buildWhen: (previous, current) =>
             previous.countryOfCitizenship != current.countryOfCitizenship,
         builder: (context, state) => CustomCountryPicker(
@@ -107,27 +109,24 @@ class BasicInformationScreen extends StatelessWidget {
               .add(BasicInformationCountryOfCitizenshipChanged(
                   country.countryCodeIso3, country.name)),
         ),
-      ));
-
-  Widget get _countryCodeAndPhoneNumber => Padding(
-        padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
-        child: BlocBuilder<BasicInformationBloc, BasicInformationState>(
-            buildWhen: (previous, current) =>
-                previous.countryCode != current.countryCode ||
-                previous.phoneNumber != current.phoneNumber,
-            builder: (context, state) => CustomPhoneNumberInput(
-                  key: const Key('phone_number'),
-                  initialValueOfCodeArea: state.countryCode,
-                  initialValueOfPhoneNumber: state.phoneNumber,
-                  onChangedCodeArea: (country) => context
-                      .read<BasicInformationBloc>()
-                      .add(BasicInformationCountryCodeChanged(
-                          country.phoneCode)),
-                  onChangePhoneNumber: (phoneNumber) => context
-                      .read<BasicInformationBloc>()
-                      .add(BasicInformationPhoneNumberChanged(phoneNumber)),
-                )),
       );
+
+  Widget get _countryCodeAndPhoneNumber =>
+      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+          buildWhen: (previous, current) =>
+              previous.countryCode != current.countryCode ||
+              previous.phoneNumber != current.phoneNumber,
+          builder: (context, state) => CustomPhoneNumberInput(
+                key: const Key('phone_number'),
+                initialValueOfCodeArea: state.countryCode,
+                initialValueOfPhoneNumber: state.phoneNumber,
+                onChangedCodeArea: (country) => context
+                    .read<BasicInformationBloc>()
+                    .add(BasicInformationCountryCodeChanged(country.phoneCode)),
+                onChangePhoneNumber: (phoneNumber) => context
+                    .read<BasicInformationBloc>()
+                    .add(BasicInformationPhoneNumberChanged(phoneNumber)),
+              ));
 
   Widget get _selectGender =>
       BlocBuilder<BasicInformationBloc, BasicInformationState>(
@@ -137,26 +136,21 @@ class BasicInformationScreen extends StatelessWidget {
                     .read<BasicInformationBloc>()
                     .add(BasicInformationGenderChanged(value)),
                 initialValue: state.gender,
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 28),
                 choices: Pair('Male', 'Female'),
               ));
 
   Widget _textInput(
           {required String label,
-          EdgeInsets padding = EdgeInsets.zero,
           required Function(String) onChanged,
           required Key key}) =>
-      Padding(
-        padding: padding,
-        child: CustomTextInput(
-          key: key,
-          textCapitalization: TextCapitalization.words,
-          onChanged: onChanged,
-          labelText: label,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          textInputFormatterList: [fullEnglishNameFormatter()],
-          textInputType: TextInputType.text,
-        ),
+      MasterTextField(
+        key: key,
+        textCapitalization: TextCapitalization.words,
+        onChanged: onChanged,
+        labelText: label,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        textInputFormatterList: [fullEnglishNameFormatter()],
+        textInputType: TextInputType.text,
       );
 
   Widget get _bottomButton =>

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
-import 'custom_text.dart';
 import 'custom_text_new.dart';
 
 class LoraMemojiWidget extends StatelessWidget {
@@ -20,11 +19,14 @@ class LoraMemojiWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const CustomText(
-          '-MEmoji Image-',
-          textAlign: TextAlign.center,
-          color: AskLoraColors.charcoal,
-          padding: EdgeInsets.only(bottom: 32, top: 24),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 32, top: 24),
+          child: CustomTextNew(
+            '-MEmoji Image-',
+            textAlign: TextAlign.center,
+            style:
+                AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
+          ),
         ),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../values/app_values.dart';
+import 'buttons/primary_button.dart';
 import 'custom_text.dart';
-import 'custom_text_button.dart';
 
 class CustomDatePicker extends StatelessWidget {
   final String label;
@@ -54,25 +55,28 @@ class CustomDatePicker extends StatelessWidget {
             onTap: () => showModalBottomSheet(
                 context: (context),
                 builder: (_) => SafeArea(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            height: 200,
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: CupertinoDatePicker(
-                              mode: CupertinoDatePickerMode.date,
-                              onDateTimeChanged: onDateTimeChanged,
-                              initialDateTime: initialDateTime,
-                              maximumDate: maximumDate,
+                      child: Padding(
+                        padding: AppValues.screenHorizontalPadding
+                            .copyWith(bottom: 24),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              height: 200,
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: CupertinoDatePicker(
+                                mode: CupertinoDatePickerMode.date,
+                                onDateTimeChanged: onDateTimeChanged,
+                                initialDateTime: initialDateTime,
+                                maximumDate: maximumDate,
+                              ),
                             ),
-                          ),
-                          CustomTextButton(
-                              buttonText: 'Select',
-                              borderRadius: 30,
-                              onClick: () => Navigator.pop(context))
-                        ],
+                            PrimaryButton(
+                                label: 'Select',
+                                onTap: () => Navigator.pop(context))
+                          ],
+                        ),
                       ),
                     )),
           ),

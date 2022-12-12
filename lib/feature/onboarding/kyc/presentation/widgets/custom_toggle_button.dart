@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/domain/pair.dart';
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 
 class CustomToggleButton extends StatelessWidget {
   final String? title;
@@ -21,38 +23,37 @@ class CustomToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: padding,
-      child: LayoutBuilder(builder: (context, constraint) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (title != null)
-              CustomText(
+    return LayoutBuilder(builder: (context, constraint) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (title != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: CustomTextNew(
                 title!,
-                padding: const EdgeInsets.only(bottom: 14),
-                type: FontType.bodyTextBold,
+                style: AskLoraTextStyles.subtitle1,
               ),
-            Row(
-              children: [
-                _choicesWidget(
-                    choice: choices.left,
-                    selected: initialValue == choices.left,
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        bottomLeft: Radius.circular(8))),
-                _choicesWidget(
-                    choice: choices.right,
-                    selected: initialValue == choices.right,
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(8),
-                        bottomRight: Radius.circular(8)))
-              ],
-            )
-          ],
-        );
-      }),
-    );
+            ),
+          Row(
+            children: [
+              _choicesWidget(
+                  choice: choices.left,
+                  selected: initialValue == choices.left,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      bottomLeft: Radius.circular(8))),
+              _choicesWidget(
+                  choice: choices.right,
+                  selected: initialValue == choices.right,
+                  borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(8),
+                      bottomRight: Radius.circular(8)))
+            ],
+          )
+        ],
+      );
+    });
   }
 
   Widget _choicesWidget(
@@ -65,15 +66,19 @@ class CustomToggleButton extends StatelessWidget {
         onTap: () => onSelected(choice),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xff424b5a), width: 0.8),
+            border: Border.all(color: AskLoraColors.darkGray, width: 1),
             borderRadius: borderRadius,
-            color: selected ? const Color(0xff424b5a) : Colors.white,
+            color: selected ? AskLoraColors.charcoal : Colors.white,
           ),
           constraints: const BoxConstraints(minHeight: 44),
           child: Center(
-              child: CustomText(
+              child: CustomTextNew(
             choice,
-            color: selected ? Colors.white : Colors.black,
+            style: AskLoraTextStyles.subtitle2.copyWith(
+              color: selected
+                  ? AskLoraColors.primaryGreen
+                  : AskLoraColors.darkGray,
+            ),
           )),
         ),
       ),

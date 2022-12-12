@@ -35,10 +35,15 @@ class ResidentCheckScreen extends StatelessWidget {
         onTapBack: () =>
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
         title: 'Set Up Personal Info',
-        content: SingleChildScrollView(
-          child: Column(
-            children: [_isUnitedStatesResident, _isHongKongResident],
-          ),
+        content: ListView(
+          padding: EdgeInsets.symmetric(vertical: 38),
+          children: [
+            _isUnitedStatesResident,
+            SizedBox(
+              height: 38,
+            ),
+            _isHongKongResident
+          ],
         ),
         bottomButton: _bottomButton,
         progress: progress,
@@ -62,7 +67,6 @@ class ResidentCheckScreen extends StatelessWidget {
                     : 'No'
                 : null,
             choices: Pair('Yes', 'No'),
-            padding: const EdgeInsets.only(top: 38, left: 14, right: 14),
           ));
 
   Widget get _isHongKongResident =>
@@ -81,7 +85,6 @@ class ResidentCheckScreen extends StatelessWidget {
                         ? 'Yes'
                         : 'No'
                     : null,
-                padding: const EdgeInsets.only(top: 38, left: 14, right: 14),
                 choices: Pair('Yes', 'No'),
               ));
 

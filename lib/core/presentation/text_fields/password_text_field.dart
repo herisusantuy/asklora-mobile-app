@@ -97,43 +97,45 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         child: Column(
           children: [
             Focus(
-              child: TextFormField(
-                controller: controller,
-                onChanged: widget.onChanged,
-                textCapitalization: widget.textCapitalization,
-                inputFormatters: widget.textInputFormatterList,
-                obscureText: obscureText,
-                obscuringCharacter: '●',
-                style: TextFieldStyle.valueTextStyle,
-                decoration: TextFieldStyle.inputDecoration.copyWith(
-                  floatingLabelBehavior: floatingLabelBehavior,
-                  labelText: label,
-                  hintText: widget.hintText,
-                  errorText: widget.errorText.isEmpty ? null : widget.errorText,
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
-                    child: UnconstrainedBox(
-                      child: SvgPicture.asset(
-                        obscureText
-                            ? 'assets/icons/icon_obscure_text_disable.svg'
-                            : 'assets/icons/icon_obscure_text_enable.svg',
+                child: TextFormField(
+                    controller: controller,
+                    onChanged: widget.onChanged,
+                    textCapitalization: widget.textCapitalization,
+                    inputFormatters: widget.textInputFormatterList,
+                    obscureText: obscureText,
+                    obscuringCharacter: '●',
+                    style: TextFieldStyle.valueTextStyle,
+                    decoration: TextFieldStyle.inputDecoration.copyWith(
+                      floatingLabelBehavior: floatingLabelBehavior,
+                      labelText: label,
+                      hintText: widget.hintText,
+                      errorText:
+                          widget.errorText.isEmpty ? null : widget.errorText,
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                        child: UnconstrainedBox(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: obscureText ? 2 : 0),
+                            child: SvgPicture.asset(
+                              obscureText
+                                  ? 'assets/icons/icon_obscure_text_disable.svg'
+                                  : 'assets/icons/icon_obscure_text_enable.svg',
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              onFocusChange: (hasFocus) {
-                shouldShowErrorsTexts =
-                    hasFocus /*(hasFocus || controller.text.length > 0)*/;
-                debugPrint('Krishna has focus ${(hasFocus)}');
-              },
-            ),
+                    )),
+                onFocusChange: (hasFocus) {
+                  shouldShowErrorsTexts =
+                      hasFocus /*(hasFocus || controller.text.length > 0)*/;
+                  debugPrint('Krishna has focus ${(hasFocus)}');
+                }),
             if (shouldShowErrorsTexts || controller.text.isNotEmpty)
-              ..._errorCheckWidgets
+              ..._errorCheckWidgets,
           ],
         ),
       );

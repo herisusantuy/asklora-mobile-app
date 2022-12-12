@@ -27,8 +27,9 @@ class PrivacyQuestionScreen extends StatelessWidget {
             builder: (context) => CustomNavigationWidget<QuestionPageStep>(
                   onBackPressed: () => onCancel(context),
                   header: const SizedBox.shrink(),
-                  child: BlocConsumer<PrivacyQuestionBloc,
-                      PrivacyQuestionState>(listener: (context, state) {
+                  child:
+                      BlocConsumer<PrivacyQuestionBloc, PrivacyQuestionState>(
+                          listener: (context, state) {
                     if (state is OnNextQuestion) {
                       context.read<QuestionBloc>().add(
                           PrivacyQuestionIndexChanged(
@@ -44,8 +45,7 @@ class PrivacyQuestionScreen extends StatelessWidget {
                     }
                   }, builder: (context, state) {
                     if (state is OnNextQuestion) {
-                      QuestionCollection questionCollection =
-                          state.question;
+                      QuestionCollection questionCollection = state.question;
                       switch (state.questionType) {
                         case (QuestionType.choices):
                           //TODO defaultChoiceIndex should be from answered question when endpoint is ready
@@ -54,8 +54,7 @@ class PrivacyQuestionScreen extends StatelessWidget {
                               questionCollection: questionCollection,
                               defaultChoiceIndex: -1,
                               onCancel: () => onCancel(context),
-                              onSubmitSuccess: () =>
-                                  onSubmitSuccess(context));
+                              onSubmitSuccess: () => onSubmitSuccess(context));
                         case (QuestionType.descriptive):
                           //TODO defaultAnswer should be from answered question when endpoint is ready
                           return DescriptiveQuestionWidget(

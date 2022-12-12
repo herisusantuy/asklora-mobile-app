@@ -12,7 +12,6 @@ import '../repository/ppi_question_repository.dart';
 import '../repository/ppi_response_repository.dart';
 import 'investment_style_question/investment_style_question_screen.dart';
 import 'investment_style_question/investment_style_result_end_screen.dart';
-import 'investment_style_question/investment_style_welcome_screen.dart';
 import 'personalisation_question/personalisation_question_screen.dart';
 import 'personalisation_question/personalisation_result_end_screen.dart';
 import 'privacy_question/privacy_question_screen.dart';
@@ -140,8 +139,6 @@ class PpiScreen extends StatelessWidget {
             );
           case QuestionPageStep.personalisationResultEnd:
             return const PersonalisationResultEndScreen();
-          case QuestionPageStep.investmentStyleWelcome:
-            return const InvestmentStyleWelcomeScreen();
           case QuestionPageStep.investmentStyle:
             return const InvestmentStyleQuestionScreen();
           case QuestionPageStep.investmentStyleResultEnd:
