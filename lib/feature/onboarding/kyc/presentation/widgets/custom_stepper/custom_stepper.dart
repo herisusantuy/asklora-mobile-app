@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../../../../core/presentation/custom_text.dart';
+import '../../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../core/styles/asklora_text_styles.dart';
 
 part 'custom_step.dart';
 

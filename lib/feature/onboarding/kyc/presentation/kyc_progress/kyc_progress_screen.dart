@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -18,19 +19,33 @@ class KycProgressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
+    return Padding(
+      padding: AppValues.screenHorizontalPadding,
+      child: ListView(
         children: [
           const LoraMemojiWidget(
               text:
-                  'Here is the last step before unlocking the painless invesment experience.',
+                  'Open investment account and deposit are the last step before investing. ',
               imageAsset: '/'),
+          const SizedBox(
+            height: 63,
+          ),
           _kycSteps,
+          const SizedBox(
+            height: 20,
+          ),
           _neededItems,
-          const CustomText(
+          const SizedBox(
+            height: 57,
+          ),
+          CustomTextNew(
             'Once you started, you can always take a break and resume to the process whenever you want.',
-            type: FontType.smallText,
-            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+            style: AskLoraTextStyles.subtitle3
+                .copyWith(color: AskLoraColors.charcoal),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 30,
           ),
           _bottomButton(context),
         ],
@@ -63,22 +78,25 @@ class KycProgressScreen extends StatelessWidget {
 
   Widget get _neededItems => CustomSilverBox(
       key: const Key('kyc_items_needed'),
-      margin: const EdgeInsets.only(left: 14, top: 14, right: 14, bottom: 32),
       title: 'The items you will needs..',
       content: Column(
         children: ['HKID', 'Proof of residential address']
             .map((element) => Padding(
-                  padding: const EdgeInsets.only(bottom: 24.0),
+                  padding: const EdgeInsets.only(bottom: 10.0),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.add_a_photo,
-                        color: Colors.grey[400]!,
+                      CustomTextNew(
+                        '●',
+                        style: AskLoraTextStyles.body1
+                            .copyWith(color: AskLoraColors.charcoal, height: 2),
                       ),
-                      CustomText(
+                      const SizedBox(
+                        width: 14,
+                      ),
+                      CustomTextNew(
                         element,
-                        padding: const EdgeInsets.only(left: 14),
-                        type: FontType.smallText,
+                        style: AskLoraTextStyles.body1
+                            .copyWith(color: AskLoraColors.charcoal),
                       )
                     ],
                   ),

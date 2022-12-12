@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../core/presentation/custom_text.dart';
+import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
+import '../../../../core/styles/asklora_colors.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/values/app_values.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/kyc_bloc.dart';
 import 'widgets/kyc_button_pair.dart';
@@ -18,35 +21,32 @@ class KycRejectedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar.transparentMinimal(),
-      body: Column(
-        children: [
-          Expanded(
-              child: ListView(
-            children: [
-              const CustomText(
-                'Sorry ! you’re not eligible for Asklora',
-                key: Key('rejected_title'),
-                type: FontType.h3W800,
-                textAlign: TextAlign.center,
-                padding: EdgeInsets.only(top: 64, left: 28, right: 28),
-              ),
-              const CustomText(
-                '-Image-',
-                key: Key('rejected_sign'),
-                padding: EdgeInsets.only(top: 56),
-                textAlign: TextAlign.center,
-              ),
-              CustomText(
-                rejectedReason,
-                key: const Key('rejected_reason'),
-                type: FontType.smallText,
-                padding: const EdgeInsets.only(top: 32, left: 28, right: 28),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          )),
-          _bottomButton(context)
-        ],
+      body: Padding(
+        padding: AppValues.screenHorizontalPadding,
+        child: Column(
+          children: [
+            Expanded(
+                child: ListView(
+              padding: const EdgeInsets.only(top: 64),
+              children: [
+                const LoraMemojiWidget(
+                    text: 'Sorry ! you’re not eligible for Asklora',
+                    imageAsset: '/'),
+                const SizedBox(
+                  height: 20,
+                ),
+                CustomTextNew(
+                  rejectedReason,
+                  key: const Key('rejected_reason'),
+                  style: AskLoraTextStyles.body1
+                      .copyWith(color: AskLoraColors.charcoal),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            )),
+            _bottomButton(context)
+          ],
+        ),
       ),
     );
   }

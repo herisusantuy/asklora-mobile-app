@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
+import '../../../../../core/values/app_values.dart';
 
 class KycBaseForm extends StatelessWidget {
   final String title;
@@ -23,8 +24,16 @@ class KycBaseForm extends StatelessWidget {
     return Column(
       children: [
         _header,
-        Expanded(child: content),
-        if (bottomButton != null) bottomButton!
+        Expanded(
+            child: Padding(
+          padding: AppValues.screenHorizontalPadding,
+          child: content,
+        )),
+        if (bottomButton != null)
+          Padding(
+            padding: AppValues.screenHorizontalPadding,
+            child: bottomButton!,
+          )
       ],
     );
   }
@@ -33,10 +42,7 @@ class KycBaseForm extends StatelessWidget {
         children: [
           CustomLinearProgressIndicator(progress: progress),
           Container(
-            decoration: const BoxDecoration(
-                border:
-                    Border(bottom: BorderSide(width: 0.8, color: Colors.grey))),
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Stack(
               children: [
                 if (onTapBack != null)
