@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'overlay_controller_widget.dart';
 
 extension OverlayControllerWidgetExtension on BuildContext {
-
   _OverlayExtensionHelper get loaderOverlay =>
       _OverlayExtensionHelper(OverlayControllerWidget.of(this));
 }
