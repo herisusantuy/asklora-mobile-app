@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/loading/overlay_controller_widget_extension.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
@@ -25,8 +24,6 @@ class SignInForm extends StatelessWidget {
         listener: (context, state) async {
       if (state.response.state == ResponseState.loading) {
         context.loaderOverlay.show();
-      } else {
-        context.loaderOverlay.hide();
       }
       switch (state.response.state) {
         case ResponseState.error:
@@ -34,14 +31,14 @@ class SignInForm extends StatelessWidget {
               .read<SignInBloc>()
               .add(SignInEmailChanged(state.emailAddress));
 
-          CustomSnackBar(context)
-              .setMessage(state.response.message)
-              .showError();
+          context.loaderOverlay.visibleInAppNotification(
+              inAppNotification: true, message: state.response.message);
           break;
         case ResponseState.success:
           await SecureStorage()
               .writeSecureData('email', state.emailAddress)
               .then((_) => SignInSuccessScreen.openAndRemoveAllRoute(context));
+          context.loaderOverlay.hide();
           break;
         default:
           break;

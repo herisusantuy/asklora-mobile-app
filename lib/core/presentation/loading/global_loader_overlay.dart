@@ -8,7 +8,6 @@ class GlobalLoaderOverlay extends StatefulWidget {
     this.textDirection = TextDirection.ltr,
     this.overlayWidget,
     this.overlayOpacity,
-    // this.overlayColor,
     this.disableBackButton = true,
     this.overlayWholeScreen = true,
     this.overlayHeight,
@@ -29,9 +28,6 @@ class GlobalLoaderOverlay extends StatefulWidget {
 
   /// The opacity of the overlay
   final double? overlayOpacity;
-
-  /// The color of the overlay
-  // final Color? overlayColor;
 
   /// Whether or not to disable the back button while loading.
   final bool disableBackButton;
@@ -71,7 +67,7 @@ class GlobalLoaderOverlay extends StatefulWidget {
   /// The layout builder for the overlay
   final Widget Function(Widget?, List<Widget>) layoutBuilder;
 
-  /// TextDirection of the app. This is generaly used when putting [LoaderOverlay] above MaterialApp.
+  /// TextDirection of the app. This is generally used when putting [LoaderOverlay] above MaterialApp.
   final TextDirection textDirection;
 
   @override
@@ -86,7 +82,6 @@ class _GlobalLoaderOverlayState extends State<GlobalLoaderOverlay> {
       child: LoaderOverlay(
         overlayWidget: widget.overlayWidget,
         overlayOpacity: widget.overlayOpacity,
-        // overlayColor: widget.overlayColor,
         disableBackButton: widget.disableBackButton,
         overlayWholeScreen: widget.overlayWholeScreen,
         overlayHeight: widget.overlayHeight,

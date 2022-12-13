@@ -24,6 +24,19 @@ class OverlayControllerWidget extends InheritedWidget {
       visibilityController.add(<String, dynamic>{
         'loading': loading,
         'widget': widget,
+        'message': '',
+        'inAppNotification': false
+      });
+
+  void setInAppNotificationVisible({
+    bool inAppNotification = false,
+    String message = '',
+  }) =>
+      visibilityController.add(<String, dynamic>{
+        'loading': false,
+        'widget': null,
+        'message': message,
+        'inAppNotification': inAppNotification
       });
 
   void dispose() => visibilityController.close();

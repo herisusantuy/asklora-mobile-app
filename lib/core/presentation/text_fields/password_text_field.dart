@@ -130,9 +130,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                       ),
                     )),
                 onFocusChange: (hasFocus) {
-                  shouldShowErrorsTexts =
-                      hasFocus /*(hasFocus || controller.text.length > 0)*/;
-                  debugPrint('Krishna has focus ${(hasFocus)}');
+                  shouldShowErrorsTexts = hasFocus;
                 }),
             if (shouldShowErrorsTexts || controller.text.isNotEmpty)
               ..._errorCheckWidgets,

@@ -58,7 +58,6 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                   context
                                       .read<MultipleQuestionWidgetBloc>()
                                       .add(AnswerChanged(index));
-                                  debugPrint('Krishna index ${index}');
                                 },
                               ),
                             );

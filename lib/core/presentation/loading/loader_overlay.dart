@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../styles/asklora_colors.dart';
+import '../custom_in_app_notification.dart';
 import 'overlay_controller_widget.dart';
 import 'overlay_controller_widget_extension.dart';
 
@@ -122,12 +123,18 @@ class _LoaderOverlayState extends State<LoaderOverlay> {
           stream: innerContext.loaderOverlay.overlayController.visibilityStream,
           initialData: const <String, dynamic>{
             'loading': false,
+            'inAppNotification': false,
             'widget': null,
+            'message': ''
           },
           builder: (_, snapshot) {
             final visibilityStream =
                 innerContext.loaderOverlay.overlayController.visibilityStream;
+
             final isLoading = snapshot.data!['loading'] as bool;
+            final inAppNotification =
+                snapshot.data!['inAppNotification'] as bool;
+            final message = snapshot.data!['message'] as String;
             final widgetOverlay = snapshot.data!['widget'] as Widget?;
 
             if (isLoading) {
@@ -146,12 +153,19 @@ class _LoaderOverlayState extends State<LoaderOverlay> {
                   switchOutCurve: widget.switchOutCurve,
                   transitionBuilder: widget.transitionBuilder,
                   layoutBuilder: widget.layoutBuilder,
-                  child: isLoading
-                      ? Stack(
-                          children: _getLoadingWidget(
-                          isLoading,
-                        ))
-                      : const SizedBox.shrink(),
+                  child: Stack(
+                    children: [
+                      inAppNotification
+                          ? CustomInAppNotification(message: message)
+                          : const SizedBox.shrink(),
+                      isLoading
+                          ? Stack(
+                              children: _getLoadingWidget(
+                              isLoading,
+                            ))
+                          : const SizedBox.shrink()
+                    ],
+                  ),
                 ),
               ],
             );
@@ -207,16 +221,6 @@ class _DotWidgetState extends State<DotWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      duration: const Duration(seconds: 10),
-      vsync: this,
-    )..repeat();
-  }
-
   Animatable<Color?> background = TweenSequence<Color?>([
     TweenSequenceItem(
         weight: 0.1,
@@ -233,17 +237,30 @@ class _DotWidgetState extends State<DotWidget>
   ]);
 
   @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {
-          // debugPrint('Krishna test ${_controller.value}');
           return SizedBox(
-              child: SvgPicture.asset(
-            'assets/icons/asklora_dot_green.svg',
-            color: //background.transform(_controller.value)
-                background.evaluate(AlwaysStoppedAnimation(_controller.value)),
-          ));
+              child: SvgPicture.asset('assets/icons/asklora_dot_green.svg',
+                  color: background
+                      .evaluate(AlwaysStoppedAnimation(_controller.value))));
         });
   }
 }

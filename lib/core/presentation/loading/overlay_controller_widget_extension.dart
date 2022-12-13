@@ -37,4 +37,10 @@ class _OverlayExtensionHelper {
     _visible = false;
     _overlayController.setOverlayVisible(_visible!);
   }
+
+  void visibleInAppNotification(
+      {bool inAppNotification = true, String message = ''}) {
+    _overlayController.setInAppNotificationVisible(
+        inAppNotification: inAppNotification, message: message);
+  }
 }
