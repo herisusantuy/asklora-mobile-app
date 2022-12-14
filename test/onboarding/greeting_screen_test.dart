@@ -30,8 +30,8 @@ void main() {
         await buildCarouselScreen(tester);
         expect(mEmojiWidget, findsOneWidget);
         expect(nextButton, findsOneWidget);
-        expect(
-            (tester.firstWidget(nextButton) as PrimaryButton).disabled, isFalse);
+        expect((tester.firstWidget(nextButton) as PrimaryButton).disabled,
+            isFalse);
       });
     },
   );
