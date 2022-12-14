@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/we_create/custom_app_bar.dart';
@@ -22,10 +23,8 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
           children: [
             const Expanded(
               child: LoraMemojiWidget(
-                text:
-                    'Let’s dive into the core of the personalisation experience - defining your investment style.',
-                imageAsset: '/',
-              ),
+                  text:
+                      'Let’s dive into the core of the personalisation experience - defining your investment style.'),
             ),
             _defineInvestmentStyleButton(context),
             _signUpAgainButton(context)

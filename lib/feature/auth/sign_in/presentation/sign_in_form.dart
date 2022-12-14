@@ -49,15 +49,14 @@ class SignInForm extends StatelessWidget {
               constraints: BoxConstraints(minHeight: constraint.maxHeight),
               child: IntrinsicHeight(
                   child: Column(children: <Widget>[
-                const LoraMemojiWidget(
-                    text: 'Welcome back!\nReady to go?', imageAsset: '/'),
+                const LoraMemojiWidget(text: 'Welcome back!\nReady to go?'),
                 context.padding(),
                 _emailInput(),
                 context.padding(topPadding: 10),
                 _passwordInput(),
                 context.padding(topPadding: 10),
                 _forgotPasswordButton(context),
-                const Expanded(child: SizedBox(height: 50)),
+                Flexible(child: Container()),
                 _loginButton(),
                 _createAnAccountButton(context),
                 context.padding(topPadding: 20),

@@ -5,7 +5,6 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
-import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
@@ -52,10 +51,8 @@ class OtpForm extends StatelessWidget {
                   children: [
                     _padding(),
                     const LoraMemojiWidget(
-                      text:
-                          'Please enter the OTP sent on your registered Email ID.',
-                      imageAsset: '/',
-                    ),
+                        text:
+                            'Please enter the OTP sent on your registered Email ID.'),
                     _otpBox(context),
                   ],
                 ),

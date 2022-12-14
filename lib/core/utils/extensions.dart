@@ -17,6 +17,9 @@ final RegExp otpRegex = RegExp(r'^([0-9]{6})$');
 /// extract amount regex
 final RegExp amountRegex = RegExp('[^0-9]');
 
+bool deviceHasNotch(BuildContext context) =>
+    (MediaQuery.of(context).viewPadding.top > 0);
+
 extension EmailValidator on String {
   bool isValidEmail() => emailRegex.hasMatch(this);
 

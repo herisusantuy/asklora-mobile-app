@@ -40,8 +40,7 @@ class SignUpForm extends StatelessWidget {
                   child: Column(children: <Widget>[
                 const LoraMemojiWidget(
                     text:
-                        'Start your new investing journey\nwith Lora - your\nAI Investment Coach',
-                    imageAsset: '/'),
+                        'Start your new investing journey\nwith Lora - your\nAI Investment Coach'),
                 _userNameInput(),
                 _padding(),
                 _passwordInput(),

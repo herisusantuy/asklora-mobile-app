@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
@@ -22,7 +23,7 @@ class PpiResultScreen extends StatelessWidget {
       appBar: CustomAppBar.transparent(),
       body: Column(
         children: [
-          LoraMemojiWidget(text: mEmojiText, imageAsset: '/'),
+          LoraMemojiWidget(text: mEmojiText),
           if (additionalMessage.isNotEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 24),
