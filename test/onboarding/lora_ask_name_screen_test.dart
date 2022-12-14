@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/core/presentation/we_create/custom_button.dart';
+import 'package:asklora_mobile_app/core/presentation/buttons/primary_button.dart';
 import 'package:asklora_mobile_app/feature/onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -36,7 +36,7 @@ void main() {
         expect(nameInput, findsOneWidget);
         expect(nextButton, findsOneWidget);
         expect(
-            (tester.firstWidget(nextButton) as CustomButton).disable, isTrue);
+            (tester.firstWidget(nextButton) as PrimaryButton).disabled, isTrue);
         expect(mEmojiWidget, findsOneWidget);
         expect(nameInput, findsOneWidget);
       });
@@ -52,7 +52,7 @@ void main() {
         await tester.pump();
         expect(find.text('Anton'), findsOneWidget);
         expect(
-            (tester.firstWidget(nextButton) as CustomButton).disable, isFalse);
+            (tester.firstWidget(nextButton) as PrimaryButton).disabled, isFalse);
       });
     },
   );
