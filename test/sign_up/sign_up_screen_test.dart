@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/core/presentation/we_create/custom_button.dart';
+import 'package:asklora_mobile_app/core/presentation/buttons/primary_button.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/presentation/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,41 +25,21 @@ void main() async {
       expect(passwordInput, findsOneWidget);
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       expect(signUpButton, findsOneWidget);
-
-      expect(
-          find.text(
-              '❗ Minimum eight characters, at least one letter and one number!'),
-          findsOneWidget);
-      expect(
-          find.text(
-              '✅ Minimum eight characters, at least one letter and one number!'),
-          findsNothing);
     });
 
     testWidgets('Not entering anything', (tester) async {
       await _buildHomeScreen(tester);
 
       //password instruction should be greyed and icon should be ❗
-      expect(
-          ((tester.firstWidget(find.text(
-                          '❗ Minimum eight characters, at least one letter and one number!'))
-                      as Text)
-                  .style)
-              ?.color,
-          Colors.grey);
-      expect(
-          find.text(
-              '❗ Minimum eight characters, at least one letter and one number!'),
-          findsOneWidget);
-      expect(
-          find.text(
-              '✅ Minimum eight characters, at least one letter and one number!'),
-          findsNothing);
+      expect(find.text('min. 8 characters'), findsNothing);
+      expect(find.text('at least 1 lowercase letter'), findsNothing);
+      expect(find.text('at least 1 uppercase letter'), findsNothing);
+      expect(find.text('at least 1 number'), findsNothing);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       expect(
-          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
+          (tester.firstWidget(signUpButton) as PrimaryButton).disabled, isTrue);
     });
 
     testWidgets('Entering wrong email format', (tester) async {
@@ -74,7 +54,7 @@ void main() async {
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       expect(
-          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
+          (tester.firstWidget(signUpButton) as PrimaryButton).disabled, isTrue);
     });
 
     testWidgets('Entering wrong password format', (tester) async {
@@ -85,27 +65,15 @@ void main() async {
 
       expect(find.text('kkkkk'), findsOneWidget);
 
-      //password instruction should be greyed and icon should be ❗
-      expect(
-          ((tester.firstWidget(find.text(
-                          '❗ Minimum eight characters, at least one letter and one number!'))
-                      as Text)
-                  .style)
-              ?.color,
-          Colors.grey);
-      expect(
-          find.text(
-              '❗ Minimum eight characters, at least one letter and one number!'),
-          findsOneWidget);
-      expect(
-          find.text(
-              '✅ Minimum eight characters, at least one letter and one number!'),
-          findsNothing);
+      expect(find.text('min. 8 characters'), findsOneWidget);
+      expect(find.text('at least 1 lowercase letter'), findsOneWidget);
+      expect(find.text('at least 1 uppercase letter'), findsOneWidget);
+      expect(find.text('at least 1 number'), findsOneWidget);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       expect(
-          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
+          (tester.firstWidget(signUpButton) as PrimaryButton).disabled, isTrue);
     });
 
     testWidgets('Entering correct email but wrong password format',
@@ -122,26 +90,15 @@ void main() async {
       expect(find.text('Enter valid email'), findsNothing);
 
       //password instruction should be greyed and icon should be ❗
-      expect(
-          ((tester.firstWidget(find.text(
-                          '❗ Minimum eight characters, at least one letter and one number!'))
-                      as Text)
-                  .style)
-              ?.color,
-          Colors.grey);
-      expect(
-          find.text(
-              '❗ Minimum eight characters, at least one letter and one number!'),
-          findsOneWidget);
-      expect(
-          find.text(
-              '✅ Minimum eight characters, at least one letter and one number!'),
-          findsNothing);
+      expect(find.text('min. 8 characters'), findsOneWidget);
+      expect(find.text('at least 1 lowercase letter'), findsOneWidget);
+      expect(find.text('at least 1 uppercase letter'), findsOneWidget);
+      expect(find.text('at least 1 number'), findsOneWidget);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       expect(
-          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
+          (tester.firstWidget(signUpButton) as PrimaryButton).disabled, isTrue);
     });
 
     testWidgets('Entering wrong email but correct password format',
@@ -150,34 +107,23 @@ void main() async {
       await tester.enterText(
           find.byKey(const Key('sign_up_email_input')), 'kkkkk');
       await tester.enterText(
-          find.byKey(const Key('sign_up_password_input')), 'testing123');
+          find.byKey(const Key('sign_up_password_input')), 'Testing123');
       await tester.pump();
 
-      expect(find.text('testing123'), findsOneWidget);
+      expect(find.text('Testing123'), findsOneWidget);
       expect(find.text('kkkkk'), findsOneWidget);
       expect(find.text('Enter valid email'), findsOneWidget);
 
       //password instruction should be bluegrey and icon should be ✅
-      expect(
-          find.text(
-              '✅ Minimum eight characters, at least one letter and one number!'),
-          findsOneWidget);
-      expect(
-          find.text(
-              '❗ Minimum eight characters, at least one letter and one number!'),
-          findsNothing);
-      expect(
-          ((tester.firstWidget(find.text(
-                          '✅ Minimum eight characters, at least one letter and one number!'))
-                      as Text)
-                  .style)
-              ?.color,
-          Colors.blueGrey);
+      expect(find.text('min. 8 characters'), findsOneWidget);
+      expect(find.text('at least 1 lowercase letter'), findsOneWidget);
+      expect(find.text('at least 1 uppercase letter'), findsOneWidget);
+      expect(find.text('at least 1 number'), findsOneWidget);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
       expect(
-          (tester.firstWidget(signUpButton) as CustomButton).disable, isTrue);
+          (tester.firstWidget(signUpButton) as PrimaryButton).disabled, isTrue);
     });
 
     testWidgets('Entering correct email and correct password format',
@@ -186,34 +132,23 @@ void main() async {
       await tester.enterText(
           find.byKey(const Key('sign_up_email_input')), 'testing@xyz.com');
       await tester.enterText(
-          find.byKey(const Key('sign_up_password_input')), 'testing123');
+          find.byKey(const Key('sign_up_password_input')), 'Testing123');
       await tester.pump();
 
       expect(find.text('testing@xyz.com'), findsOneWidget);
-      expect(find.text('testing123'), findsOneWidget);
+      expect(find.text('Testing123'), findsOneWidget);
       expect(find.text('Enter valid email'), findsNothing);
 
       //password instruction should be bluegrey and icon should be ✅
-      expect(
-          find.text(
-              '✅ Minimum eight characters, at least one letter and one number!'),
-          findsOneWidget);
-      expect(
-          find.text(
-              '❗ Minimum eight characters, at least one letter and one number!'),
-          findsNothing);
-      expect(
-          ((tester.firstWidget(find.text(
-                          '✅ Minimum eight characters, at least one letter and one number!'))
-                      as Text)
-                  .style)
-              ?.color,
-          Colors.blueGrey);
+      expect(find.text('min. 8 characters'), findsOneWidget);
+      expect(find.text('at least 1 lowercase letter'), findsOneWidget);
+      expect(find.text('at least 1 uppercase letter'), findsOneWidget);
+      expect(find.text('at least 1 number'), findsOneWidget);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
-      expect(
-          (tester.firstWidget(signUpButton) as CustomButton).disable, isFalse);
+      expect((tester.firstWidget(signUpButton) as PrimaryButton).disabled,
+          isFalse);
     });
   });
 }

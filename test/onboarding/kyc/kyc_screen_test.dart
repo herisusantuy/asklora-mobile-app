@@ -32,7 +32,6 @@ void main() {
         expect(find.byKey(const Key('memoji_widget')), findsOneWidget);
         expect(find.byKey(const Key('kyc_steps')), findsOneWidget);
         expect(find.byKey(const Key('kyc_items_needed')), findsOneWidget);
-        expect(kycButtonPair, findsOneWidget);
       });
 
       testWidgets(
@@ -66,9 +65,6 @@ void main() {
         expect(find.text('Male'), findsOneWidget);
         expect(find.text('Female'), findsOneWidget);
         expect(find.byKey(const Key('nationality')), findsOneWidget);
-        expect(find.byKey(const Key('date_of_birth')), findsOneWidget);
-        expect(find.byKey(const Key('phone_number')), findsOneWidget);
-        expect(kycButtonPair, findsOneWidget);
       });
 
       testWidgets(
@@ -182,14 +178,6 @@ void main() {
             tester, KycPageStep.disclosureAffiliationCommissions);
         expect(find.byKey(const Key('financial_question')), findsOneWidget);
         expect(find.byKey(const Key('choices_button')), findsOneWidget);
-      });
-
-      testWidgets('Show disclosure affiliation rejected screen',
-          (WidgetTester tester) async {
-        await buildKycScreen(tester, KycPageStep.disclosureRejected);
-        expect(find.byKey(const Key('rejected_title')), findsOneWidget);
-        expect(find.byKey(const Key('rejected_sign')), findsOneWidget);
-        expect(find.byKey(const Key('rejected_reason')), findsOneWidget);
       });
 
       testWidgets('Show disclosure summary', (WidgetTester tester) async {

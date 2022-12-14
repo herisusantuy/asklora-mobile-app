@@ -82,6 +82,7 @@ class SignUpForm extends StatelessWidget {
         buildWhen: (previous, current) => previous.password != current.password,
         builder: (context, state) {
           return PasswordTextField(
+              key: const Key('sign_up_password_input'),
               validPassword: (isValidPassword) => {},
               hintText: 'Password',
               label: 'Password',
@@ -106,7 +107,7 @@ class SignUpForm extends StatelessWidget {
   Widget _signInButton(BuildContext context) {
     return PrimaryButton(
       buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-      key: const Key('sign_in_submit_button'),
+      key: const Key('sign_up_have_an_account_button'),
       fontStyle: FontStyle.normal,
       label: 'ALREADY HAVE AN ACCOUNT?',
       onTap: () => SignInScreen.open(context),
@@ -115,6 +116,7 @@ class SignUpForm extends StatelessWidget {
 
   Widget _maybeLaterButton(BuildContext context) {
     return CustomTextButton(
+      key: const Key('sign_up_may_be_later_button'),
       margin: const EdgeInsets.only(top: 20),
       label: 'MAYBE LATER',
       onTap: () => CarouselScreen.open(context),

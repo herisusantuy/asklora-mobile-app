@@ -128,7 +128,7 @@ void main() async {
         'emits `SignUpStatus.unknown` and `isPasswordValid = true` WHEN '
         'entered correct password',
         build: () => signUpBloc,
-        act: (bloc) => bloc.add(const SignUpPasswordChanged('password1')),
+        act: (bloc) => bloc.add(const SignUpPasswordChanged('Password1')),
         expect: () => {
               SignUpState(
                   response: BaseResponse.unknown(),
@@ -136,7 +136,7 @@ void main() async {
                   isPasswordValid: true,
                   username: '',
                   usernameErrorText: '',
-                  password: 'password1',
+                  password: 'Password1',
                   passwordErrorText: '')
             });
 
@@ -173,7 +173,7 @@ void main() async {
         build: () => signUpBloc,
         act: (bloc) => {
               bloc.add(const SignUpUsernameChanged('kk@test.com')),
-              bloc.add(const SignUpPasswordChanged('password1')),
+              bloc.add(const SignUpPasswordChanged('Password1')),
             },
         expect: () => {
               SignUpState(
@@ -190,7 +190,7 @@ void main() async {
                   isPasswordValid: true,
                   username: 'kk@test.com',
                   usernameErrorText: '',
-                  password: 'password1',
+                  password: 'Password1',
                   passwordErrorText: '')
             });
 
@@ -200,7 +200,7 @@ void main() async {
         'pressed `Submit` button',
         build: () {
           when(signUpRepository.signUp(
-                  email: 'kk@test.com', password: 'password1'))
+                  email: 'kk@test.com', password: 'Password1'))
               .thenAnswer((_) => Future.value(
                   const BaseResponse<SignUpResponse>(
                       data: SignUpResponse('Sign Up Successful'),
@@ -209,7 +209,7 @@ void main() async {
         },
         act: (bloc) => {
               bloc.add(const SignUpUsernameChanged('kk@test.com')),
-              bloc.add(const SignUpPasswordChanged('password1')),
+              bloc.add(const SignUpPasswordChanged('Password1')),
               bloc.add(const SignUpSubmitted()),
             },
         expect: () => {
@@ -223,7 +223,7 @@ void main() async {
                 isEmailValid: true,
                 isPasswordValid: true,
                 username: 'kk@test.com',
-                password: 'password1',
+                password: 'Password1',
               ),
               SignUpState(
                   response: BaseResponse.loading(),
@@ -231,7 +231,7 @@ void main() async {
                   isPasswordValid: true,
                   username: 'kk@test.com',
                   usernameErrorText: '',
-                  password: 'password1',
+                  password: 'Password1',
                   passwordErrorText: ''),
               const SignUpState(
                   response: BaseResponse<SignUpResponse>(
@@ -241,7 +241,7 @@ void main() async {
                   isPasswordValid: true,
                   username: 'kk@test.com',
                   usernameErrorText: '',
-                  password: 'password1',
+                  password: 'Password1',
                   passwordErrorText: '')
             });
 

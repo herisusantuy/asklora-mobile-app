@@ -27,20 +27,10 @@ void main() {
           const Key('sign_in_button'),
         );
 
-        // var backgroundCarouselSlider = find.byKey(
-        //   const Key('background_carousel_slider'),
-        // );
         var localizationToggleButton = find.byKey(
           const Key('localization_toggle_button'),
         );
 
-        // expect(backgroundCarouselSlider, findsOneWidget);
-        // expect(
-        //     (tester.firstWidget(backgroundCarouselSlider) as CarouselSlider)
-        //             .items!
-        //             .length ==
-        //         4,
-        //     isTrue);
         expect(localizationToggleButton, findsOneWidget);
         expect(onBoardingButton, findsOneWidget);
         expect(signInButton, findsOneWidget);

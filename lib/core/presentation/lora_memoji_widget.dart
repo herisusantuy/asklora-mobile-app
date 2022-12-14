@@ -13,8 +13,6 @@ class LoraMemojiWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        'Krishna does it have bothc ${MediaQuery.of(context).viewPadding.top}');
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
