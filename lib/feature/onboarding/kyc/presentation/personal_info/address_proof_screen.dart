@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_image_picker.dart';
-import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
@@ -18,6 +20,9 @@ class AddressProofScreen extends StatelessWidget {
   const AddressProofScreen({required this.progress, Key? key})
       : super(key: key);
 
+  static const double _spaceHeightDouble = 36;
+  final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
+
   @override
   Widget build(BuildContext context) {
     return KycBaseForm(
@@ -29,37 +34,39 @@ class AddressProofScreen extends StatelessWidget {
         onPointerDown: (event) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        child: SingleChildScrollView(
+        child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 24),
-          child: Column(
-            children: [
-              const CustomText(
-                'Please provide your permanent residential address.',
-                key: Key('sub_title'),
-                type: FontType.smallText,
-                padding: AppValues.screenHorizontalPadding,
-              ),
-              _textInput(
-                  key: const Key('address_line_1'),
-                  label: 'Address Line 1',
-                  onChanged: (value) => context
-                      .read<AddressProofBloc>()
-                      .add(AddressLine1Changed(value)),
-                  hintText: 'Address Line 1',
-                  padding: AppValues.screenHorizontalPadding.copyWith(top: 38)),
-              _textInput(
-                  key: const Key('address_line_2'),
-                  label: 'Address Line 2',
-                  onChanged: (value) => context
-                      .read<AddressProofBloc>()
-                      .add(AddressLine2Changed(value)),
-                  hintText: 'Address Line 2',
-                  padding: AppValues.screenHorizontalPadding.copyWith(top: 28)),
-              _district,
-              _region,
-              _addressImageProof
-            ],
-          ),
+          children: [
+            CustomTextNew(
+              'Please provide your permanent residential address.',
+              key: const Key('sub_title'),
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            _textInput(
+              key: const Key('address_line_1'),
+              label: 'Address Line 1',
+              onChanged: (value) => context
+                  .read<AddressProofBloc>()
+                  .add(AddressLine1Changed(value)),
+              hintText: 'Address Line 1',
+            ),
+            _spaceHeight,
+            _textInput(
+              key: const Key('address_line_2'),
+              label: 'Address Line 2',
+              onChanged: (value) => context
+                  .read<AddressProofBloc>()
+                  .add(AddressLine2Changed(value)),
+              hintText: 'Address Line 2',
+            ),
+            _spaceHeight,
+            _district,
+            _spaceHeight,
+            _region,
+            _spaceHeight,
+            _addressImageProof
+          ],
         ),
       ),
       bottomButton: _bottomButton,
@@ -87,54 +94,44 @@ class AddressProofScreen extends StatelessWidget {
   final region = const ['Hong Kong Island'];
 
   Widget get _district => BlocBuilder<AddressProofBloc, AddressProofState>(
-      builder: (context, state) => Padding(
-            padding: AppValues.screenHorizontalPadding.copyWith(top: 12),
-            child: CustomDropdown(
-                key: const Key('district_picker'),
-                padding: const EdgeInsets.only(top: 10),
-                isDense: false,
-                label: 'District',
-                hintName: 'District',
-                value: state.district,
-                itemsList: districts,
-                border: const OutlineInputBorder(),
-                onChanged: (value) => context
-                    .read<AddressProofBloc>()
-                    .add(DistrictChanged(value ?? ''))),
-          ));
+      builder: (context, state) => CustomDropdown(
+          key: const Key('district_picker'),
+          padding: const EdgeInsets.only(top: 10),
+          isDense: false,
+          label: 'District',
+          hintName: 'District',
+          value: state.district,
+          itemsList: districts,
+          border: const OutlineInputBorder(),
+          onChanged: (value) => context
+              .read<AddressProofBloc>()
+              .add(DistrictChanged(value ?? ''))));
 
   Widget get _region => BlocBuilder<AddressProofBloc, AddressProofState>(
-      builder: (context, state) => Padding(
-            padding: AppValues.screenHorizontalPadding.copyWith(top: 12),
-            child: CustomDropdown(
-                key: const Key('region_picker'),
-                padding: const EdgeInsets.only(top: 10),
-                isDense: false,
-                label: 'Region',
-                hintName: 'Region',
-                value: state.region,
-                itemsList: region,
-                border: const OutlineInputBorder(),
-                onChanged: (value) => context
-                    .read<AddressProofBloc>()
-                    .add(RegionChanged(value ?? ''))),
-          ));
+      builder: (context, state) => CustomDropdown(
+          key: const Key('region_picker'),
+          padding: const EdgeInsets.only(top: 10),
+          isDense: false,
+          label: 'Region',
+          hintName: 'Region',
+          value: state.region,
+          itemsList: region,
+          border: const OutlineInputBorder(),
+          onChanged: (value) => context
+              .read<AddressProofBloc>()
+              .add(RegionChanged(value ?? ''))));
 
   Widget _textInput(
           {required String label,
-          EdgeInsets padding = EdgeInsets.zero,
           required Function(String) onChanged,
           String hintText = '',
           required Key key}) =>
-      Padding(
-        padding: padding,
-        child: CustomTextInput(
-          key: key,
-          onChanged: onChanged,
-          labelText: label,
-          hintText: hintText,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-        ),
+      CustomTextInput(
+        key: key,
+        onChanged: onChanged,
+        labelText: label,
+        hintText: hintText,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       );
 
   Widget get _bottomButton => BlocBuilder<AddressProofBloc, AddressProofState>(

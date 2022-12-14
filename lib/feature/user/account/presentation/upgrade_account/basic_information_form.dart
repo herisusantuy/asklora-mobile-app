@@ -190,7 +190,7 @@ class BasicInformationForm extends StatelessWidget {
             previous.countryOfCitizenship != current.countryOfCitizenship,
         builder: (context, state) => CustomCountryPicker(
           key: const Key('account_country_of_citizenship_input'),
-          title: 'Country of Tax Residence',
+          label: 'Country of Tax Residence',
           initialValue: state.countryNameOfCitizenship,
           onSelect: (Country country) => context
               .read<BasicInformationBloc>()

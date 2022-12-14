@@ -95,7 +95,7 @@ class AddressProofForm extends StatelessWidget {
       child: BlocBuilder<AddressProofBloc, AddressProofState>(
         builder: (context, state) => CustomCountryPicker(
           key: const Key('account_country_input'),
-          title: 'Country',
+          label: 'Country',
           initialValue: state.countryName,
           onSelect: (Country country) => context.read<AddressProofBloc>().add(
               AddressProofCountryChanged(
@@ -201,7 +201,7 @@ class AddressProofForm extends StatelessWidget {
       child: BlocBuilder<AddressProofBloc, AddressProofState>(
         builder: (context, state) => CustomCountryPicker(
           key: const Key('account_mailing_country_input'),
-          title: 'Country',
+          label: 'Country',
           initialValue: state.mailCountryName,
           onSelect: (Country country) => context.read<AddressProofBloc>().add(
               AddressProofMailCountryChanged(

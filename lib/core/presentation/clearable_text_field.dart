@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'text_fields/style/text_field_style.dart';
+
 class ClearableTextFormField extends FormField<String> {
   final TextEditingController? controller;
   final String labelText;
@@ -19,7 +21,6 @@ class ClearableTextFormField extends FormField<String> {
   final InputBorder? disabledBorder;
   final InputBorder? focusedBorder;
   final FloatingLabelBehavior? floatingLabelBehavior;
-  final EdgeInsets contentPadding;
   final Icon resetIcon;
 
   ClearableTextFormField(
@@ -36,7 +37,6 @@ class ClearableTextFormField extends FormField<String> {
       this.fillColor,
       this.inputBorder = const OutlineInputBorder(),
       this.floatingLabelBehavior,
-      this.contentPadding = const EdgeInsets.fromLTRB(17, 14, 17, 14),
       this.enabledBorder,
       this.disabledBorder,
       this.focusedBorder,
@@ -61,18 +61,11 @@ class ClearableTextFormField extends FormField<String> {
                 obscureText: obscureText,
                 inputFormatters: textInputFormatterList,
                 maxLength: maxLength,
-                decoration: InputDecoration(
+                decoration: TextFieldStyle.inputDecoration.copyWith(
                   floatingLabelBehavior: floatingLabelBehavior,
-                  filled: fillColor != null ? true : false,
-                  fillColor: fillColor,
-                  border: inputBorder,
                   labelText: labelText,
-                  contentPadding: contentPadding,
                   counterText: '',
                   hintText: hintText,
-                  enabledBorder: enabledBorder,
-                  disabledBorder: disabledBorder,
-                  focusedBorder: focusedBorder,
                   errorText: errorText.isEmpty ? null : errorText,
                   suffixIcon:
                       ((field.value?.length ?? -1) > 0 && state.hasFocus)

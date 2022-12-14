@@ -12,6 +12,7 @@ class MasterTextField extends StatefulWidget {
   final String hintText;
   final String errorText;
   final Function(String)? onChanged;
+  final Function(String)? onFieldSubmitted;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
   final FloatingLabelBehavior floatingLabelBehavior;
@@ -19,6 +20,7 @@ class MasterTextField extends StatefulWidget {
   const MasterTextField(
       {Key? key,
       this.onChanged,
+      this.onFieldSubmitted,
       this.textCapitalization = TextCapitalization.none,
       this.floatingLabelBehavior = FloatingLabelBehavior.never,
       this.initialValue = '',
@@ -43,6 +45,7 @@ class _MasterTextFieldState extends State<MasterTextField> {
   @override
   void initState() {
     super.initState();
+    controller.text = widget.initialValue;
     if (widget.floatingLabelBehavior == FloatingLabelBehavior.always) {
       label = widget.labelText;
       floatingLabelBehavior = widget.floatingLabelBehavior;
@@ -51,7 +54,6 @@ class _MasterTextFieldState extends State<MasterTextField> {
       if (widget.initialValue.isNotEmpty) {
         label = widget.labelText;
         floatingLabelBehavior = FloatingLabelBehavior.always;
-        controller.text = widget.initialValue;
       }
       controller.addListener(() {
         _setFloatingLabelBehavior();
@@ -73,6 +75,7 @@ class _MasterTextFieldState extends State<MasterTextField> {
 
   @override
   Widget build(BuildContext context) => TextFormField(
+      onFieldSubmitted: widget.onFieldSubmitted,
       controller: controller,
       onChanged: widget.onChanged,
       keyboardType: widget.textInputType,

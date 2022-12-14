@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/domain/base_response.dart';
 import '../../../../../../../core/domain/otp/verify_otp_request.dart';
-import '../../../../../../../core/presentation/custom_text.dart';
-import '../../../../../../../core/presentation/custom_text_input.dart';
+import '../../../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../../../core/presentation/we_create/custom_button.dart';
+import '../../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../../../core/presentation/we_create/custom_text_button.dart';
-import '../../../../../../../core/values/app_values.dart';
+import '../../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../auth/sign_up/presentation/sign_up_success_screen.dart';
 import '../../../../bloc/kyc_bloc.dart';
 import '../../../widgets/kyc_base_form.dart';
@@ -48,79 +49,75 @@ class OtpScreen extends StatelessWidget {
         content: ListView(
           padding: const EdgeInsets.only(top: 28),
           children: [
-            const CustomText(
+            CustomTextNew(
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit OTP is sent to your SMS.',
-              key: Key('sub_title'),
-              type: FontType.smallText,
-              padding: AppValues.screenHorizontalPadding,
+              key: const Key('sub_title'),
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 36,
             ),
             _otpInput(context),
           ],
         ),
-        progress: 0.3,
+        progress: progress,
         bottomButton: _bottomButton(context),
       ),
     );
   }
 
-  Widget _bottomButton(BuildContext context) => Padding(
-        padding: AppValues.screenHorizontalPadding,
-        child: Column(
-          children: [
-            BlocBuilder<OtpBloc, OtpState>(
-                buildWhen: (previous, current) =>
-                    previous.resetTime != current.resetTime ||
-                    previous.response.state != current.response.state,
-                builder: (context, state) {
-                  return CustomButton(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color(0xff232323),
-                    borderSide: state.disableRequest
-                        ? BorderSide.none
-                        : const BorderSide(width: 2, color: Color(0xff232323)),
-                    key: const Key('request_otp_button'),
-                    fontStyle: FontStyle.normal,
-                    disable: state.disableRequest,
-                    label: state.disableRequest
-                        ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
-                        : 'RESEND OTP CODE',
-                    onClick: () =>
-                        context.read<OtpBloc>().add(OtpRequested(email)),
-                  );
-                }),
-            CustomTextButton(
-              key: const Key('sign_up_again_button'),
-              margin: const EdgeInsets.only(top: 28, bottom: 28),
-              label: 'SIGN UP AGAIN',
-              onTap: () => Navigator.pop(context),
-            )
-          ],
-        ),
+  Widget _bottomButton(BuildContext context) => Column(
+        children: [
+          BlocBuilder<OtpBloc, OtpState>(
+              buildWhen: (previous, current) =>
+                  previous.resetTime != current.resetTime ||
+                  previous.response.state != current.response.state,
+              builder: (context, state) {
+                return PrimaryButton(
+                  buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+                  key: const Key('request_otp_button'),
+                  fontStyle: FontStyle.normal,
+                  disabled: state.disableRequest,
+                  label: state.disableRequest
+                      ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
+                      : 'RESEND OTP CODE',
+                  onTap: () => context.read<OtpBloc>().add(OtpRequested(email)),
+                );
+              }),
+          CustomTextButton(
+            key: const Key('sign_up_again_button'),
+            margin: const EdgeInsets.only(top: 27, bottom: 35),
+            label: 'SIGN UP AGAIN',
+            onTap: () => Navigator.pop(context),
+          )
+        ],
       );
 
   Widget _otpInput(BuildContext context) {
-    return Padding(
-      padding: AppValues.screenHorizontalPadding.copyWith(top: 32),
-      child: BlocBuilder<OtpBloc, OtpState>(builder: (context, state) {
-        return CustomTextInput(
-          key: const Key('otp_input'),
-          labelText: 'OTP',
-          textInputType: TextInputType.number,
-          hintText: '0000 (4 digit)',
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          errorText: state.response.state == ResponseState.error
-              ? 'The OTP is incorrect'
-              : '',
-          maxLength: 4,
-          textInputFormatterList: [
-            FilteringTextInputFormatter.digitsOnly,
-          ],
-          onFieldSubmitted: (otp) => context.read<OtpBloc>().add(
-                OtpSubmitted(VerifyOtpRequest(email, otp)),
-              ),
-        );
-      }),
-    );
+    return BlocBuilder<OtpBloc, OtpState>(
+        buildWhen: (previous, current) =>
+            previous.response.state != current.response.state,
+        builder: (context, state) {
+          return MasterTextField(
+            key: const Key('otp_input'),
+            initialValue: state.otp,
+            labelText: 'OTP',
+            textInputType: TextInputType.number,
+            hintText: '0000 (4 digit)',
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            errorText: state.response.state == ResponseState.error
+                ? 'The OTP is incorrect'
+                : '',
+            textInputFormatterList: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(4)
+            ],
+            onFieldSubmitted: (otp) => context.read<OtpBloc>().add(
+                  OtpSubmitted(VerifyOtpRequest(email, otp)),
+                ),
+          );
+        });
   }
 
   String _formatTimeMMSS(int time) =>

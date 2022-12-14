@@ -19,13 +19,13 @@ class TextFieldStyle {
       .copyWith(color: AskLoraColors.charcoal, height: 1.2);
 
   static TextStyle hintTextStyle =
-      AskLoraTextStyles.body1.copyWith(color: AskLoraColors.gray, height: 1.2);
+      AskLoraTextStyles.body1.copyWith(color: AskLoraColors.gray, height: 1.3);
 
   static TextStyle valueTextStyle = AskLoraTextStyles.body1
-      .copyWith(color: AskLoraColors.charcoal, height: 1.2);
+      .copyWith(color: AskLoraColors.charcoal, height: 1.3);
 
   static EdgeInsets contentPadding =
-      const EdgeInsets.symmetric(horizontal: 17, vertical: 12);
+      const EdgeInsets.symmetric(horizontal: 17, vertical: 18);
 
   static InputDecoration inputDecoration = InputDecoration(
       contentPadding: contentPadding,

@@ -34,9 +34,12 @@ class BasicInformationScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Personal Info',
-      content: Listener(
-        onPointerDown: (event) {
-          FocusManager.instance.primaryFocus?.unfocus();
+      content: GestureDetector(
+        onTap: () {
+          FocusScopeNode focus = FocusScope.of(context);
+          if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
+            focus.focusedChild?.unfocus();
+          }
         },
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 24),
@@ -48,6 +51,8 @@ class BasicInformationScreen extends StatelessWidget {
             ),
             _spaceHeight,
             _textInput(
+                initialValue:
+                    context.read<BasicInformationBloc>().state.firstName,
                 key: const Key('first_name'),
                 label: 'English First Name',
                 onChanged: (value) => context
@@ -55,8 +60,10 @@ class BasicInformationScreen extends StatelessWidget {
                     .add(BasicInformationFirstNameChanged(value))),
             _spaceHeight,
             _textInput(
+                initialValue:
+                    context.read<BasicInformationBloc>().state.lastName,
                 key: const Key('last_name'),
-                label: 'English First Name',
+                label: 'English Last Name',
                 onChanged: (value) => context
                     .read<BasicInformationBloc>()
                     .add(BasicInformationLastNameChanged(value))),
@@ -100,9 +107,8 @@ class BasicInformationScreen extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.countryOfCitizenship != current.countryOfCitizenship,
         builder: (context, state) => CustomCountryPicker(
-          height: 46,
           key: const Key('nationality'),
-          title: 'Nationality',
+          label: 'Nationality',
           initialValue: state.countryNameOfCitizenship,
           onSelect: (Country country) => context
               .read<BasicInformationBloc>()
@@ -140,11 +146,13 @@ class BasicInformationScreen extends StatelessWidget {
               ));
 
   Widget _textInput(
-          {required String label,
+          {required String initialValue,
+          required String label,
           required Function(String) onChanged,
           required Key key}) =>
       MasterTextField(
         key: key,
+        initialValue: initialValue,
         textCapitalization: TextCapitalization.words,
         onChanged: onChanged,
         labelText: label,
