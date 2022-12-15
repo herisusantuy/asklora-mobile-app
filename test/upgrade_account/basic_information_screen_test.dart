@@ -1,5 +1,6 @@
-import 'package:asklora_mobile_app/core/presentation/custom_dropdown.dart';
+
 import 'package:asklora_mobile_app/core/presentation/question_widget.dart';
+import 'package:asklora_mobile_app/core/presentation/text_fields/custom_dropdown.dart';
 import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
@@ -53,7 +54,7 @@ void main() async {
       expect(lastNameInput, findsOneWidget);
       expect(chineseNameInput, findsOneWidget);
       expect(genderSelect, findsOneWidget);
-      expect((tester.widget<CustomDropdown>(genderSelect).value), '');
+      expect((tester.widget<CustomDropdown>(genderSelect).initialValue), '');
       expect(dateOfBirthPicker, findsOneWidget);
       expect(countryCodeAndPhoneNumberInput, findsOneWidget);
       expect(countryOfCitizenshipInput, findsOneWidget);

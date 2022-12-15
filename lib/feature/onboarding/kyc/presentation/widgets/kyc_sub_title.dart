@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 
 class KycSubTitle extends StatelessWidget {
-  final EdgeInsets padding;
   final String subTitle;
 
-  const KycSubTitle(
-      {required this.subTitle, this.padding = EdgeInsets.zero, Key? key})
-      : super(key: key);
+  const KycSubTitle({required this.subTitle, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CustomText(
+    return CustomTextNew(
       subTitle,
-      type: FontType.h4,
-      padding: padding,
+      style: AskLoraTextStyles.h4.copyWith(color: AskLoraColors.charcoal),
     );
   }
 }

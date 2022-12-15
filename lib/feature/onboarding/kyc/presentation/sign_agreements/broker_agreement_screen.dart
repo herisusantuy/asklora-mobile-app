@@ -8,7 +8,7 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import 'widgets/signature_drawer.dart';
 
 class BrokerAgreementScreen extends StatelessWidget {
@@ -178,7 +178,7 @@ class BrokerAgreementScreen extends StatelessWidget {
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
               previous.disabledBrokerButton() != current.disabledBrokerButton(),
-          builder: (context, state) => KycButtonPair(
+          builder: (context, state) => ButtonPair(
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()
                     .add(const PageChanged(

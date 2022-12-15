@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/core/presentation/we_create/custom_button.dart';
+import 'package:asklora_mobile_app/core/presentation/buttons/primary_button.dart';
 import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/ppi_result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -35,10 +35,8 @@ void main() {
       testWidgets('Show Ppi Result screen with memoji widget and bottomButton',
           (WidgetTester tester) async {
         Key bottomButtonKey = const Key('bottom_button');
-        await buildPpiResultScreen(
-            tester,
-            CustomButton(
-                key: bottomButtonKey, label: 'button', onClick: () {}));
+        await buildPpiResultScreen(tester,
+            PrimaryButton(key: bottomButtonKey, label: 'button', onTap: () {}));
         expect(mEmojiWidget, findsOneWidget);
         expect(find.byKey(bottomButtonKey), findsOneWidget);
       });

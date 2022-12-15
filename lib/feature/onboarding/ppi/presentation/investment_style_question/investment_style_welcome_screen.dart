@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/domain/pair.dart';
+import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/we_create/custom_app_bar.dart';
-import '../../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../ppi_screen.dart';
@@ -34,11 +34,11 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _defineInvestmentStyleButton(BuildContext context) => CustomButton(
+  Widget _defineInvestmentStyleButton(BuildContext context) => PrimaryButton(
         key: const Key('define_investment_style_button'),
         fontStyle: FontStyle.normal,
         label: 'DEFINE INVESTMENT STYLE',
-        onClick: () => PpiScreen.open(context,
+        onTap: () => PpiScreen.open(context,
             arguments: Pair(QuestionPageType.investmentStyle,
                 QuestionPageStep.investmentStyle)),
       );

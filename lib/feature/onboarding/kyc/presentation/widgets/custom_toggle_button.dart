@@ -63,14 +63,17 @@ class CustomToggleButton extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         key: Key('$title-$choice'),
-        onTap: () => onSelected(choice),
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+          onSelected(choice);
+        },
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: AskLoraColors.darkGray, width: 1),
             borderRadius: borderRadius,
             color: selected ? AskLoraColors.charcoal : Colors.white,
           ),
-          constraints: const BoxConstraints(minHeight: 44),
+          constraints: const BoxConstraints(minHeight: 55),
           child: Center(
               child: CustomTextNew(
             choice,

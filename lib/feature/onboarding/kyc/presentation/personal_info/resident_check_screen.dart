@@ -8,7 +8,7 @@ import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 
 class ResidentCheckScreen extends StatelessWidget {
   final double progress;
@@ -94,7 +94,7 @@ class ResidentCheckScreen extends StatelessWidget {
               previous.isHongKongPermanentResident !=
                   current.isHongKongPermanentResident ||
               previous.isUnitedStateResident != current.isUnitedStateResident,
-          builder: (context, state) => KycButtonPair(
+          builder: (context, state) => ButtonPair(
                 disablePrimaryButton: state.isUnitedStateResident == null ||
                     state.isHongKongPermanentResident == null,
                 primaryButtonOnClick: () => context

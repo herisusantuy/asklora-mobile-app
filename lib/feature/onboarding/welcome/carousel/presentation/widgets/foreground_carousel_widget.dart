@@ -14,10 +14,10 @@ class ForegroundCarouselWidget extends StatelessWidget {
             const SizedBox(height: 10),
             const LocalizationToggleButton(),
             const Expanded(child: SizedBox()),
-            CustomButton(
+            PrimaryButton(
               key: const Key('begin_on_boarding_button'),
               label: "LET'S BEGIN",
-              onClick: () => AskNameScreen.open(context),
+              onTap: () => AskNameScreen.open(context),
             ),
             Center(
                 child: CustomTextButton(

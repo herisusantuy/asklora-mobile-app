@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../../../core/values/app_values.dart';
 import '../../widgets/kyc_sub_title.dart';
 import '../../widgets/summary_text_info.dart';
 
@@ -15,7 +14,6 @@ class SignAgreementSummaryContent extends StatelessWidget {
         children: [
           KycSubTitle(
             subTitle: title,
-            padding: AppValues.screenHorizontalPadding.copyWith(bottom: 6),
           ),
           const SummaryTextInfo(
               title: 'Alpaca Customer Agreement',
