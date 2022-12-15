@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/onfido/start_onfido.dart';
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/values/app_values.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/onfido/onfido_result_request.dart';
@@ -38,15 +39,17 @@ class VerifyIdentityScreen extends StatelessWidget {
                 .add(const PageChanged(KycPageStep.signBrokerAgreements));
           }
         },
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomText(
+            CustomTextNew(
               'We need to make sure lorem ipsum dolor sit amet, consectetur adipscing elit. Ornare velit ipsum risus at feugiat adipiscing erat mauris velit. Morbi non morbi eu tincidunt. Laoreet elit.',
-              key: Key('sub_title'),
-              type: FontType.smallText,
-              padding: AppValues.screenHorizontalPadding,
-              height: 2,
+              key: const Key('sub_title'),
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 51,
             ),
             _verificationSteps
           ],
@@ -76,7 +79,6 @@ class VerifyIdentityScreen extends StatelessWidget {
 
   Widget get _verificationSteps => const CustomSilverBox(
       key: Key('verification_steps'),
-      margin: EdgeInsets.only(left: 14, top: 32, right: 14),
       title: 'Get ready for the verification process. You will..',
       content: CustomStepper(
         currentStep: 0,
