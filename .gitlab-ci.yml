@@ -48,15 +48,15 @@ analyze:
   only:
     - pushes
 
-unit_test:
+# unit_test:
 
-  tags:
-    - dev
+#   tags:
+#     - dev
     
-  stage: test
+#   stage: test
 
-  script:
-    - make run_test
+#   script:
+#     - make run_test
 
-  only:
-    - pushes
+#   only:
+#     - pushes
