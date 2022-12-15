@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
+import '../../../../core/presentation/loading/overlay_controller_widget_extension.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
@@ -19,15 +20,19 @@ class SignUpForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SignUpBloc, SignUpState>(listener: (context, state) {
+      if (state.response.state == ResponseState.loading) {
+        context.loaderOverlay.show();
+      }
       switch (state.response.state) {
         case ResponseState.error:
           context.read<SignUpBloc>().add(SignUpUsernameChanged(state.username));
-          CustomSnackBar(context)
-              .setMessage(state.response.message)
-              .showError();
+
+          context.loaderOverlay.visibleInAppNotification(
+              inAppNotification: true, message: state.response.message);
           break;
         case ResponseState.success:
           EmailActivationScreen.open(context);
+          context.loaderOverlay.hide();
           break;
         default:
           break;

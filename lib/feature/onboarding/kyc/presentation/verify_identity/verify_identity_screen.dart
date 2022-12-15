@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_onfido/flutter_onfido.dart';
+
+import '../../../../../core/onfido/start_onfido.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/values/app_values.dart';
@@ -26,9 +27,10 @@ class VerifyIdentityScreen extends StatelessWidget {
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Verify Identity',
       content: BlocListener<KycBloc, KycState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is OnfidoSdkToken) {
-            _doVerificationOnfido(context: context, onFidoSdkTokenState: state);
+            await _doVerificationOnfido(
+                context: context, onFidoSdkTokenState: state);
           } else if (state.status == KycStatus.failure) {
             ///CHANGE THIS TO HANDLE ERROR LATER
             context
@@ -55,26 +57,14 @@ class VerifyIdentityScreen extends StatelessWidget {
     );
   }
 
-  void _doVerificationOnfido(
+  Future<void> _doVerificationOnfido(
       {required BuildContext context,
-      required OnfidoSdkToken onFidoSdkTokenState}) {
+      required OnfidoSdkToken onFidoSdkTokenState}) async {
     try {
-      FlutterOnfido.start(
-        config: OnfidoConfig(
-          sdkToken: onFidoSdkTokenState.token,
-          flowSteps: OnfidoFlowSteps(
-            welcome: false,
-            captureDocument: OnfidoCaptureDocumentStep(
-                countryCode: OnfidoCountryCode.HKG,
-                docType: OnfidoDocumentType.NATIONAL_IDENTITY_CARD),
-            captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO),
-          ),
-        ),
-        iosAppearance: const OnfidoIOSAppearance(),
-      ).then((value) => context.read<KycBloc>().add(UpdateOnfidoResult(
-          Reason.userCompleted.value,
-          'Onfido SDK',
-          onFidoSdkTokenState.token)));
+      await startOnfido(onFidoSdkTokenState.token).then((value) => context
+          .read<KycBloc>()
+          .add(UpdateOnfidoResult(Reason.userCompleted.value, 'Onfido SDK',
+              onFidoSdkTokenState.token)));
     } on PlatformException {
       context.read<KycBloc>().add(UpdateOnfidoResult(
           Reason.userExited.value, 'Onfido SDK', onFidoSdkTokenState.token));
