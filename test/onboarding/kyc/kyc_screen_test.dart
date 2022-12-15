@@ -43,8 +43,7 @@ void main() {
             find.byKey(const Key('is_united_states_resident')), findsOneWidget);
         expect(kycButtonPair, findsOneWidget);
         expect(
-            (tester.widget(kycButtonPair) as ButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             true);
         await tester.tap(find.byKey(const Key(
             'Are you a United States tax resident, green card holder or citizens ?-No')));
@@ -52,8 +51,7 @@ void main() {
             .byKey(const Key('Are you a Hong Kong citizen or resident ?-Yes')));
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as ButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             false);
       });
 
@@ -98,14 +96,12 @@ void main() {
         expect(find.text('ABCDEFG'), findsOneWidget);
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as ButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             true);
         await tester.enterText(tinInput, 'O8586854');
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as ButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             false);
       });
 
