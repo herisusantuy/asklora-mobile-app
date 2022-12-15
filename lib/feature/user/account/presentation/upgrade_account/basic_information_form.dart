@@ -8,10 +8,10 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
-import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_phone_number_input.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/question_widget.dart';
+import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -130,12 +130,11 @@ class BasicInformationForm extends StatelessWidget {
       BlocBuilder<BasicInformationBloc, BasicInformationState>(
           buildWhen: (_, __) => false,
           builder: (context, state) => CustomDropdown(
-                hintName:
+                hintText:
                     state.gender.isNotEmpty ? state.gender : 'Select Gender',
-                value: state.gender,
+                initialValue: state.gender,
                 key: const Key('account_gender_select'),
-                label: 'Gender',
-                padding: const EdgeInsets.only(top: 10),
+                labelText: 'Gender',
                 itemsList: const ['Male', 'Female', 'Other'],
                 onChanged: (gender) => context
                     .read<BasicInformationBloc>()
