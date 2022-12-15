@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/core/presentation/custom_dropdown.dart';
+import 'package:asklora_mobile_app/core/presentation/text_fields/custom_dropdown.dart';
 import 'package:asklora_mobile_app/feature/user/account/bloc/account_bloc.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import 'package:asklora_mobile_app/feature/user/account/presentation/upgrade_account/widgets/upgrade_account_button.dart';
@@ -37,15 +37,22 @@ void main() {
       expect(accountEmploymentStatusSelect, findsOneWidget);
       expect(financialProfileNextStepButton, findsOneWidget);
       expect(
-          tester.widget<CustomDropdown>(accountAnnualIncomeSelect).value, '');
+          tester.widget<CustomDropdown>(accountAnnualIncomeSelect).initialValue,
+          '');
       expect(
           tester
               .widget<CustomDropdown>(accountInvestibleLiquidAssetsSelect)
-              .value,
+              .initialValue,
           '');
-      expect(tester.widget<CustomDropdown>(accountFundingSourceSelect).value,
+      expect(
+          tester
+              .widget<CustomDropdown>(accountFundingSourceSelect)
+              .initialValue,
           'unknown');
-      expect(tester.widget<CustomDropdown>(accountEmploymentStatusSelect).value,
+      expect(
+          tester
+              .widget<CustomDropdown>(accountEmploymentStatusSelect)
+              .initialValue,
           'unknown');
       expect(
           tester

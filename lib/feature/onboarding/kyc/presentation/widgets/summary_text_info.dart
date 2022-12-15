@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/presentation/custom_text.dart';
-import '../../../../../core/values/app_values.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 
 class SummaryTextInfo extends StatelessWidget {
   final Widget? titleWidget;
@@ -14,25 +14,24 @@ class SummaryTextInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (titleWidget != null) titleWidget!,
-          if (title != null)
-            CustomText(
-              title!,
-              type: FontType.smallText,
-              color: Colors.grey,
-            ),
-          CustomText(
-            subTitle,
-            type: FontType.smallTextBold,
-            padding: const EdgeInsets.only(top: 6),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (titleWidget != null) titleWidget!,
+        if (title != null)
+          CustomTextNew(
+            title!,
+            style: AskLoraTextStyles.body2.copyWith(color: AskLoraColors.gray),
           ),
-        ],
-      ),
+        const SizedBox(
+          height: 10,
+        ),
+        CustomTextNew(
+          subTitle,
+          style: AskLoraTextStyles.subtitle2
+              .copyWith(color: AskLoraColors.charcoal),
+        ),
+      ],
     );
   }
 }

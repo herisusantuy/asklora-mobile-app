@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/feature/onboarding/kyc/bloc/kyc_bloc.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/presentation/kyc_screen.dart';
-import 'package:asklora_mobile_app/feature/onboarding/kyc/presentation/widgets/kyc_button_pair.dart';
+import 'package:asklora_mobile_app/core/presentation/buttons/button_pair.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -43,8 +43,7 @@ void main() {
             find.byKey(const Key('is_united_states_resident')), findsOneWidget);
         expect(kycButtonPair, findsOneWidget);
         expect(
-            (tester.widget(kycButtonPair) as KycButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             true);
         await tester.tap(find.byKey(const Key(
             'Are you a United States tax resident, green card holder or citizens ?-No')));
@@ -52,8 +51,7 @@ void main() {
             .byKey(const Key('Are you a Hong Kong citizen or resident ?-Yes')));
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as KycButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             false);
       });
 
@@ -98,14 +96,12 @@ void main() {
         expect(find.text('ABCDEFG'), findsOneWidget);
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as KycButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             true);
         await tester.enterText(tinInput, 'O8586854');
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as KycButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             false);
       });
 

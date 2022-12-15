@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/presentation/custom_text.dart';
-import '../../../../../../core/values/app_values.dart';
+import '../../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../widgets/kyc_sub_title.dart';
 import '../../widgets/summary_text_info.dart';
@@ -15,14 +15,17 @@ class DisclosureSummaryContent extends StatelessWidget {
       {Key? key, required this.disclosureAffiliationState, required this.title})
       : super(key: key);
 
+  static const double _spaceHeightDouble = 20;
+  final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
+
   @override
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           KycSubTitle(
             subTitle: title,
-            padding: AppValues.screenHorizontalPadding.copyWith(bottom: 6),
           ),
+          _spaceHeight,
           SummaryTextInfo(
               titleWidget: _affiliatedQuestionWidget,
               subTitle: disclosureAffiliationState.isAffiliatedPerson != null
@@ -31,10 +34,14 @@ class DisclosureSummaryContent extends StatelessWidget {
                       : 'No'
                   : 'Unknown'),
           if (disclosureAffiliationState.affiliatedPersonFirstName.isNotEmpty)
-            SummaryTextInfo(
-                title: 'Name of Affiliated Person',
-                subTitle:
-                    '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
+            Padding(
+              padding: const EdgeInsets.only(top: _spaceHeightDouble),
+              child: SummaryTextInfo(
+                  title: 'Name of Affiliated Person',
+                  subTitle:
+                      '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
+            ),
+          _spaceHeight,
           SummaryTextInfo(
               title:
                   'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
@@ -46,10 +53,14 @@ class DisclosureSummaryContent extends StatelessWidget {
                       : 'Unknown'),
           if (disclosureAffiliationState
               .affiliatedAssociatesFirstName.isNotEmpty)
-            SummaryTextInfo(
-                title: 'Name of Affiliated Person',
-                subTitle:
-                    '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
+            Padding(
+              padding: const EdgeInsets.only(top: _spaceHeightDouble),
+              child: SummaryTextInfo(
+                  title: 'Name of Affiliated Person',
+                  subTitle:
+                      '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
+            ),
+          _spaceHeight,
           SummaryTextInfo(
               title:
                   'Are your immediate family or/and you a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.',
@@ -64,27 +75,25 @@ class DisclosureSummaryContent extends StatelessWidget {
 
   Widget get _affiliatedQuestionWidget => Column(
         children: [
-          const CustomText(
+          CustomTextNew(
             'Do any of the following apply to you or a member of your immediate family ?',
-            type: FontType.smallText,
-            color: Colors.grey,
+            style: AskLoraTextStyles.body2.copyWith(color: AskLoraColors.gray),
           ),
-          _dotText(
+          _spaceHeight,
+          const DotText(
             'I am affiliated or work with US registered broker-dealer or FINRA.',
           ),
-          _dotText(
+          _spaceHeight,
+          const DotText(
               'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.'),
-          _dotText('I am a senior political figure.'),
-          _dotText(
+          _spaceHeight,
+          const DotText('I am a senior political figure.'),
+          _spaceHeight,
+          const DotText(
               'I am a family member or relative of a senior political figure.'),
-          _dotText(
+          _spaceHeight,
+          const DotText(
               'I am a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.'),
         ],
-      );
-
-  Widget _dotText(String text) => DotText(
-        text,
-        color: Colors.grey,
-        padding: AppValues.screenHorizontalPadding.copyWith(top: 24),
       );
 }

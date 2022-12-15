@@ -46,7 +46,7 @@ class CountryOfTaxResidenceForm extends StatelessWidget {
               previous.countryOfTaxResidence != current.countryOfTaxResidence,
           builder: (context, state) => CustomCountryPicker(
                 key: const Key('account_country_of_tax_residence'),
-                title: 'Country of Tax Residence',
+                label: 'Country of Tax Residence',
                 initialValue: state.countryNameOfTaxResidence,
                 onSelect: (Country country) => context
                     .read<CountryOfTaxResidenceBloc>()

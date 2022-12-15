@@ -7,7 +7,7 @@ import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import 'widgets/personal_info_summary_content.dart';
 
 class PersonalInfoSummaryScreen extends StatelessWidget {
@@ -45,7 +45,7 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => KycButtonPair(
+  Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.disclosureAffiliationPerson)),

@@ -6,7 +6,7 @@ import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/kyc_bloc.dart';
-import 'widgets/kyc_button_pair.dart';
+import '../../../../core/presentation/buttons/button_pair.dart';
 
 class GiftBotStockScreen extends StatelessWidget {
   const GiftBotStockScreen({Key? key}) : super(key: key);
@@ -41,7 +41,7 @@ class GiftBotStockScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => KycButtonPair(
+  Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => CarouselScreen.open(context),
         secondaryButtonOnClick: () =>
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),

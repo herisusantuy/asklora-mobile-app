@@ -147,6 +147,7 @@ void main() async {
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
+
       expect((tester.firstWidget(signUpButton) as PrimaryButton).disabled,
           isFalse);
     });

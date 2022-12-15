@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/presentation/we_create/custom_button.dart';
+import '../../../../../../core/presentation/buttons/secondary/secondary_multiple_choice_button.dart';
 import '../../../../../../core/presentation/we_create/custom_text_button.dart';
-import '../../../../../../core/values/app_values.dart';
 
 class ChoicesButton extends StatelessWidget {
+  final String initialValue;
   final Function() onAnswerYes;
   final Function() onAnswerNo;
   final Function() onSaveForLater;
 
   const ChoicesButton(
-      {required this.onAnswerYes,
+      {this.initialValue = '',
+      required this.onAnswerYes,
       required this.onAnswerNo,
       required this.onSaveForLater,
       Key? key})
@@ -20,29 +21,27 @@ class ChoicesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: AppValues.screenHorizontalPadding.copyWith(bottom: 22),
+      padding: const EdgeInsets.only(bottom: 35),
       child: Column(
         children: [
-          CustomButton(
+          SecondaryMultipleChoiceButton(
+            active: initialValue == 'yes',
             key: const Key('yes_button'),
             fontStyle: FontStyle.normal,
             label: 'Yes',
-            onClick: onAnswerYes,
-            borderRadius: 6,
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.white,
-            borderSide: const BorderSide(color: Colors.grey),
+            onTap: onAnswerYes,
+            labelAlignment: Alignment.center,
           ),
-          CustomButton(
+          const SizedBox(
+            height: 20,
+          ),
+          SecondaryMultipleChoiceButton(
+            active: initialValue == 'no',
             key: const Key('no_button'),
-            margin: const EdgeInsets.only(top: 14),
             fontStyle: FontStyle.normal,
             label: 'No',
-            onClick: onAnswerNo,
-            borderRadius: 6,
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.white,
-            borderSide: const BorderSide(color: Colors.grey),
+            onTap: onAnswerNo,
+            labelAlignment: Alignment.center,
           ),
           CustomTextButton(
             key: const Key('save_for_later_button'),

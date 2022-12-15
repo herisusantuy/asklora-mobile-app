@@ -4,7 +4,7 @@ class AskLoraColors {
   static const primaryGreen = Color(0xFF36EAB6);
   static const primaryMagenta = Color(0xFFEA1DD6);
   static const primaryBlue = Color(0xFF66E3FF);
-  static const magentaOpacity50Percent = Color(0xFF80EA1DD6);
+  static const magentaOpacity50Percent = Color(0x80EA1DD6);
   static const up = Color(0xFF008753);
   static const down = Color(0xFFC33335);
   static const text = Color(0xFF222E41);
@@ -15,6 +15,7 @@ class AskLoraColors {
   static const gray = Color(0XFFD2D2D2);
   static const darkGray = Color(0XFF878787);
   static const white = Color(0XFFFFFFFF);
+  static const whiteSmoke = Color(0XFFF5F5F5);
   static const black = Color(0XFF000000);
   static const charcoal = Color(0XFF232323);
   static const lightGreen = Color(0XFFF0FAF9);

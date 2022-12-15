@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../../core/presentation/we_create/custom_text_button.dart';
+import 'primary_button.dart';
+import '../we_create/custom_text_button.dart';
 
-class KycButtonPair extends StatelessWidget {
+class ButtonPair extends StatelessWidget {
   final String primaryButtonLabel;
   final String secondaryButtonLabel;
   final bool disablePrimaryButton;
@@ -11,7 +11,7 @@ class KycButtonPair extends StatelessWidget {
   final Function() secondaryButtonOnClick;
   final EdgeInsets padding;
 
-  const KycButtonPair(
+  const ButtonPair(
       {required this.primaryButtonOnClick,
       required this.secondaryButtonOnClick,
       required this.primaryButtonLabel,

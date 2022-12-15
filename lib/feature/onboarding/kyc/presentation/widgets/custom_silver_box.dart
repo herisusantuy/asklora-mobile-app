@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 
 class CustomSilverBox extends StatelessWidget {
@@ -19,8 +20,8 @@ class CustomSilverBox extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       decoration: BoxDecoration(
-          color: const Color(0xfff2f5f7),
-          borderRadius: BorderRadius.circular(12)),
+          color: AskLoraColors.whiteSmoke,
+          borderRadius: BorderRadius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

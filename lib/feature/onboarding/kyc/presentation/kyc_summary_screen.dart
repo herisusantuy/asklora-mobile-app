@@ -11,7 +11,7 @@ import 'financial_profile/widgets/disclosure_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
 import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
 import 'widgets/kyc_base_form.dart';
-import 'widgets/kyc_button_pair.dart';
+import '../../../../core/presentation/buttons/button_pair.dart';
 
 class KycSummaryScreen extends StatelessWidget {
   final BasicInformationState basicInformationState;
@@ -67,7 +67,7 @@ class KycSummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => KycButtonPair(
+  Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.giftBotStock)),
