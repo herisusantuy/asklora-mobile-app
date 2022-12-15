@@ -21,32 +21,43 @@ class DisclosureAffiliationAssociatesScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Financial Profile',
-      content:
-          BlocListener<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-        listener: (BuildContext context, state) => context
-            .read<NavigationBloc<KycPageStep>>()
-            .add(PageChanged(state.isAffiliatedAssociates!
-                ? KycPageStep.disclosureAffiliationAssociatesInput
-                : KycPageStep.disclosureAffiliationCommissions)),
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 24),
-          children: const [
-            FinancialQuestion(
-              'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
-            ),
-          ],
-        ),
+      content: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        children: const [
+          FinancialQuestion(
+            'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
+          ),
+        ],
       ),
-      bottomButton: ChoicesButton(
-        key: const Key('choices_button'),
-        onAnswerYes: () => context
-            .read<DisclosureAffiliationBloc>()
-            .add(const AffiliatedAssociatesChanged(true)),
-        onAnswerNo: () => context
-            .read<DisclosureAffiliationBloc>()
-            .add(const AffiliatedAssociatesChanged(false)),
-        onSaveForLater: () => CarouselScreen.open(context),
-      ),
+      bottomButton: BlocBuilder<DisclosureAffiliationBloc,
+              DisclosureAffiliationState>(
+          buildWhen: (previous, current) =>
+              previous.isAffiliatedAssociates != current.isAffiliatedAssociates,
+          builder: (context, state) => ChoicesButton(
+                initialValue: state.isAffiliatedAssociates != null
+                    ? state.isAffiliatedAssociates!
+                        ? 'yes'
+                        : 'no'
+                    : 'unknown',
+                key: const Key('choices_button'),
+                onAnswerYes: () {
+                  context
+                      .read<DisclosureAffiliationBloc>()
+                      .add(const AffiliatedAssociatesChanged(true));
+                  context.read<NavigationBloc<KycPageStep>>().add(
+                      const PageChanged(
+                          KycPageStep.disclosureAffiliationAssociatesInput));
+                },
+                onAnswerNo: () {
+                  context
+                      .read<DisclosureAffiliationBloc>()
+                      .add(const AffiliatedAssociatesChanged(false));
+                  context.read<NavigationBloc<KycPageStep>>().add(
+                      const PageChanged(
+                          KycPageStep.disclosureAffiliationCommissions));
+                },
+                onSaveForLater: () => CarouselScreen.open(context),
+              )),
       progress: progress,
     );
   }

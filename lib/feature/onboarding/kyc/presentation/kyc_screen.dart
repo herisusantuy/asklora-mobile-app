@@ -129,16 +129,20 @@ class KycScreen extends StatelessWidget {
                 progress: 0.35,
               );
             case KycPageStep.disclosureAffiliationPersonInput:
-              return const DisclosureAffiliationPersonInputScreen(
+              return DisclosureAffiliationPersonInputScreen(
                 progress: 0.4,
+                disclosureAffiliationState:
+                    context.read<DisclosureAffiliationBloc>().state,
               );
             case KycPageStep.disclosureAffiliationAssociates:
               return const DisclosureAffiliationAssociatesScreen(
                 progress: 0.45,
               );
             case KycPageStep.disclosureAffiliationAssociatesInput:
-              return const DisclosureAffiliationAssociatesInputScreen(
+              return DisclosureAffiliationAssociatesInputScreen(
                 progress: 0.5,
+                disclosureAffiliationState:
+                    context.read<DisclosureAffiliationBloc>().state,
               );
             case KycPageStep.disclosureAffiliationCommissions:
               return const DisclosureAffiliationCommissionScreen(

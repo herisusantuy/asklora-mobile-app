@@ -5,13 +5,15 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../feature/payment/deposits/repository/file_picker_repository.dart';
-import 'custom_text.dart';
+import '../styles/asklora_colors.dart';
+import '../styles/asklora_text_styles.dart';
+import 'custom_text_new.dart';
 
 class CustomImagePicker extends StatelessWidget {
   final bool disabled;
   final String title;
+  final Color titleColor;
   final String hintText;
-  final EdgeInsets padding;
   final List<PlatformFile> initialValue;
   final String? additionalText;
   final Function(List<PlatformFile>)? onImagePicked;
@@ -22,7 +24,7 @@ class CustomImagePicker extends StatelessWidget {
       {required this.title,
       this.hintText = '',
       this.initialValue = const [],
-      this.padding = EdgeInsets.zero,
+      this.titleColor = AskLoraColors.charcoal,
       this.additionalText,
       this.onImagePicked,
       this.onImageDeleted,
@@ -32,25 +34,27 @@ class CustomImagePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: padding,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomText(
-            title,
-            type: FontType.note,
-            padding: const EdgeInsets.only(bottom: 6),
-          ),
-          initialValue.isEmpty ? _emptyImage() : _haveImages(context),
-          if (additionalText != null)
-            CustomText(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomTextNew(
+          title,
+          style: AskLoraTextStyles.body2.copyWith(color: titleColor),
+        ),
+        const SizedBox(
+          height: 6,
+        ),
+        initialValue.isEmpty ? _emptyImage() : _haveImages(context),
+        if (additionalText != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 13),
+            child: CustomTextNew(
               additionalText!,
-              type: FontType.note,
-              padding: const EdgeInsets.only(top: 20),
-            )
-        ],
-      ),
+              style: AskLoraTextStyles.body3
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+          )
+      ],
     );
   }
 
@@ -59,7 +63,8 @@ class CustomImagePicker extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         double size = constraints.maxWidth / 2 - spacing / 2;
-        return Center(
+        return Align(
+          alignment: disabled ? Alignment.centerLeft : Alignment.center,
           child: Wrap(
             spacing: spacing,
             runSpacing: spacing,
@@ -123,11 +128,14 @@ class CustomImagePicker extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-                if (hintText.isNotEmpty)
-                  CustomText(
-                    hintText,
-                    color: Colors.grey,
+                if (hintText.isNotEmpty && initialValue.isEmpty)
+                  Padding(
                     padding: const EdgeInsets.only(top: 20),
+                    child: CustomTextNew(
+                      hintText,
+                      style: AskLoraTextStyles.body1
+                          .copyWith(color: AskLoraColors.gray),
+                    ),
                   ),
               ],
             ),

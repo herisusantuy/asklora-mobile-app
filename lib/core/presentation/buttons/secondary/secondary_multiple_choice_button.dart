@@ -11,6 +11,7 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
   final FontStyle fontStyle;
   final VoidCallback onTap;
   final bool active;
+  final Alignment labelAlignment;
 
   SecondaryMultipleChoiceButton(
       {this.label = '',
@@ -18,6 +19,7 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
       this.fontStyle = FontStyle.normal,
       this.buttonSecondarySize = ButtonSecondarySize.big,
       this.active = false,
+      this.labelAlignment = Alignment.centerLeft,
       Key? key})
       : super(key: key);
 
@@ -51,7 +53,7 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Align(
-              alignment: Alignment.centerLeft,
+              alignment: labelAlignment,
               child: CustomTextNew(label, style: AskLoraTextStyles.subtitle2),
             ),
           )),

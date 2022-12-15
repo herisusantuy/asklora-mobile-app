@@ -8,16 +8,22 @@ import '../../widgets/kyc_button_pair.dart';
 import 'disclosure_affiliation_base_input_screen.dart';
 
 class DisclosureAffiliationPersonInputScreen extends StatelessWidget {
+  final DisclosureAffiliationState disclosureAffiliationState;
   final double progress;
 
   const DisclosureAffiliationPersonInputScreen(
-      {required this.progress, Key? key})
+      {required this.disclosureAffiliationState,
+      required this.progress,
+      Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => DisclosureAffiliationBaseInputScreen(
       key: const Key('disclosure_affiliation_input'),
       progress: progress,
+      initialFirstNameValue:
+          disclosureAffiliationState.affiliatedPersonFirstName,
+      initialLastNameValue: disclosureAffiliationState.affiliatedPersonLastName,
       onFirstNameChanged: (value) => context
           .read<DisclosureAffiliationBloc>()
           .add(AffiliatePersonFirstNameChanged(value)),

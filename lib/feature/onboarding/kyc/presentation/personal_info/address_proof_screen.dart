@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_image_picker.dart';
-import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
+import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -30,9 +29,12 @@ class AddressProofScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Personal Info',
-      content: Listener(
-        onPointerDown: (event) {
-          FocusManager.instance.primaryFocus?.unfocus();
+      content: GestureDetector(
+        onTap: () {
+          FocusScopeNode focus = FocusScope.of(context);
+          if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
+            focus.focusedChild?.unfocus();
+          }
         },
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 24),
@@ -43,7 +45,9 @@ class AddressProofScreen extends StatelessWidget {
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
+            _spaceHeight,
             _textInput(
+              initialValue: context.read<AddressProofBloc>().state.addressLine1,
               key: const Key('address_line_1'),
               label: 'Address Line 1',
               onChanged: (value) => context
@@ -53,6 +57,7 @@ class AddressProofScreen extends StatelessWidget {
             ),
             _spaceHeight,
             _textInput(
+              initialValue: context.read<AddressProofBloc>().state.addressLine2,
               key: const Key('address_line_2'),
               label: 'Address Line 2',
               onChanged: (value) => context
@@ -78,12 +83,12 @@ class AddressProofScreen extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.addressProofImages != current.addressProofImages,
           builder: (context, state) => CustomImagePicker(
+                hintText: 'Upload Address Proof',
                 key: const Key('address_proof_image_picker'),
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 title: 'Upload Address Proof',
                 initialValue: state.addressProofImages,
                 additionalText:
-                    'Address Proof can be lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                    'Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept utility bill, bank statement, or government correspondence within the last 3 months.',
                 onImageDeleted: (image) =>
                     context.read<AddressProofBloc>().add(ImageDeleted(image)),
                 onImagePicked: (images) =>
@@ -96,13 +101,10 @@ class AddressProofScreen extends StatelessWidget {
   Widget get _district => BlocBuilder<AddressProofBloc, AddressProofState>(
       builder: (context, state) => CustomDropdown(
           key: const Key('district_picker'),
-          padding: const EdgeInsets.only(top: 10),
-          isDense: false,
-          label: 'District',
-          hintName: 'District',
-          value: state.district,
+          labelText: 'District',
+          hintText: 'District',
+          initialValue: state.district,
           itemsList: districts,
-          border: const OutlineInputBorder(),
           onChanged: (value) => context
               .read<AddressProofBloc>()
               .add(DistrictChanged(value ?? ''))));
@@ -110,24 +112,23 @@ class AddressProofScreen extends StatelessWidget {
   Widget get _region => BlocBuilder<AddressProofBloc, AddressProofState>(
       builder: (context, state) => CustomDropdown(
           key: const Key('region_picker'),
-          padding: const EdgeInsets.only(top: 10),
-          isDense: false,
-          label: 'Region',
-          hintName: 'Region',
-          value: state.region,
+          labelText: 'Region',
+          hintText: 'Region',
+          initialValue: state.region,
           itemsList: region,
-          border: const OutlineInputBorder(),
           onChanged: (value) => context
               .read<AddressProofBloc>()
               .add(RegionChanged(value ?? ''))));
 
   Widget _textInput(
-          {required String label,
+          {required String initialValue,
+          required String label,
           required Function(String) onChanged,
           String hintText = '',
           required Key key}) =>
-      CustomTextInput(
+      MasterTextField(
         key: key,
+        initialValue: initialValue,
         onChanged: onChanged,
         labelText: label,
         hintText: hintText,
