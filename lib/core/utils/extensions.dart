@@ -17,6 +17,9 @@ final RegExp otpRegex = RegExp(r'^([0-9]{6})$');
 /// extract amount regex
 final RegExp amountRegex = RegExp('[^0-9]');
 
+bool deviceHasNotch(BuildContext context) =>
+    (MediaQuery.of(context).viewPadding.top > 0);
+
 extension EmailValidator on String {
   bool isValidEmail() => emailRegex.hasMatch(this);
 
@@ -37,4 +40,19 @@ MaterialColor randomColor() => ([...Colors.primaries]..shuffle()).first;
 
 extension DoublePrecision on double {
   double toPrecision(int n) => double.parse(toStringAsFixed(n));
+}
+
+extension ExtraPadding on BuildContext {
+  Padding padding(
+          {double topPadding = 20,
+          double rightPadding = 20,
+          double bottomPadding = 20,
+          double leftPadding = 20}) =>
+      Padding(
+          padding: EdgeInsets.only(
+        top: topPadding,
+        left: leftPadding,
+        right: rightPadding,
+        bottom: bottomPadding,
+      ));
 }

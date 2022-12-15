@@ -32,7 +32,6 @@ void main() {
         expect(find.byKey(const Key('memoji_widget')), findsOneWidget);
         expect(find.byKey(const Key('kyc_steps')), findsOneWidget);
         expect(find.byKey(const Key('kyc_items_needed')), findsOneWidget);
-        expect(kycButtonPair, findsOneWidget);
       });
 
       testWidgets(
@@ -44,8 +43,7 @@ void main() {
             find.byKey(const Key('is_united_states_resident')), findsOneWidget);
         expect(kycButtonPair, findsOneWidget);
         expect(
-            (tester.widget(kycButtonPair) as ButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             true);
         await tester.tap(find.byKey(const Key(
             'Are you a United States tax resident, green card holder or citizens ?-No')));
@@ -53,8 +51,7 @@ void main() {
             .byKey(const Key('Are you a Hong Kong citizen or resident ?-Yes')));
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as ButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             false);
       });
 
@@ -66,9 +63,6 @@ void main() {
         expect(find.text('Male'), findsOneWidget);
         expect(find.text('Female'), findsOneWidget);
         expect(find.byKey(const Key('nationality')), findsOneWidget);
-        expect(find.byKey(const Key('date_of_birth')), findsOneWidget);
-        expect(find.byKey(const Key('phone_number')), findsOneWidget);
-        expect(kycButtonPair, findsOneWidget);
       });
 
       testWidgets(
@@ -102,14 +96,12 @@ void main() {
         expect(find.text('ABCDEFG'), findsOneWidget);
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as ButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             true);
         await tester.enterText(tinInput, 'O8586854');
         await tester.pump();
         expect(
-            (tester.widget(kycButtonPair) as ButtonPair)
-                .disablePrimaryButton,
+            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             false);
       });
 
@@ -182,14 +174,6 @@ void main() {
             tester, KycPageStep.disclosureAffiliationCommissions);
         expect(find.byKey(const Key('financial_question')), findsOneWidget);
         expect(find.byKey(const Key('choices_button')), findsOneWidget);
-      });
-
-      testWidgets('Show disclosure affiliation rejected screen',
-          (WidgetTester tester) async {
-        await buildKycScreen(tester, KycPageStep.disclosureRejected);
-        expect(find.byKey(const Key('rejected_title')), findsOneWidget);
-        expect(find.byKey(const Key('rejected_sign')), findsOneWidget);
-        expect(find.byKey(const Key('rejected_reason')), findsOneWidget);
       });
 
       testWidgets('Show disclosure summary', (WidgetTester tester) async {

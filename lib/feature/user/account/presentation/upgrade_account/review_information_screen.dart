@@ -4,9 +4,9 @@ import 'package:dart_ipify/dart_ipify.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_onfido/flutter_onfido.dart';
 
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/onfido/start_onfido.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../auth/sign_in/presentation/sign_in_success_screen.dart';
@@ -33,20 +33,9 @@ class ReviewInformationScreen extends StatelessWidget {
       listener: (context, state) async {
         if (state is OnfidoSdkToken) {
           try {
-            FlutterOnfido.start(
-              config: OnfidoConfig(
-                sdkToken: state.token,
-                flowSteps: OnfidoFlowSteps(
-                  welcome: false,
-                  captureDocument: OnfidoCaptureDocumentStep(
-                      countryCode: OnfidoCountryCode.HKG,
-                      docType: OnfidoDocumentType.NATIONAL_IDENTITY_CARD),
-                  captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO),
-                ),
-              ),
-              iosAppearance: const OnfidoIOSAppearance(),
-            ).then((value) => context.read<AccountBloc>().add(
-                UpdateOnfidoResult(
+            await startOnfido(state.token).then((value) => context
+                .read<AccountBloc>()
+                .add(UpdateOnfidoResult(
                     Reason.userCompleted.value, 'Onfido SDK', state.token)));
           } on PlatformException {
             context.read<AccountBloc>().add(UpdateOnfidoResult(

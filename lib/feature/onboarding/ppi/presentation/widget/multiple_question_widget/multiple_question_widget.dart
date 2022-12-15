@@ -42,6 +42,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                         current.defaultChoiceIndex,
                     builder: (context, state) {
                       return ListView(
+                        key: const Key('multiple_choice_question_builder'),
                         children: [
                           QuestionTitle(
                             question: questionCollection.questions!.question!,
@@ -52,13 +53,13 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                             return Container(
                               margin: const EdgeInsets.symmetric(vertical: 10),
                               child: SecondaryMultipleChoiceButton(
+                                key: Key('${questionCollection.uid}-$index}'),
                                 active: index == state.defaultChoiceIndex,
                                 label: e.name!,
                                 onTap: () {
                                   context
                                       .read<MultipleQuestionWidgetBloc>()
                                       .add(AnswerChanged(index));
-                                  debugPrint('Krishna index ${index}');
                                 },
                               ),
                             );

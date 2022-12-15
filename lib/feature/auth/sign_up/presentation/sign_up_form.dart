@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
+import '../../../../core/presentation/loading/overlay_controller_widget_extension.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
@@ -19,41 +20,60 @@ class SignUpForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SignUpBloc, SignUpState>(listener: (context, state) {
+      if (state.response.state == ResponseState.loading) {
+        context.loaderOverlay.show();
+      }
       switch (state.response.state) {
         case ResponseState.error:
           context.read<SignUpBloc>().add(SignUpUsernameChanged(state.username));
-          CustomSnackBar(context)
-              .setMessage(state.response.message)
-              .showError();
+
+          context.loaderOverlay.visibleInAppNotification(
+              inAppNotification: true, message: state.response.message);
           break;
         case ResponseState.success:
           EmailActivationScreen.open(context);
+          context.loaderOverlay.hide();
           break;
         default:
           break;
       }
-    }, child: LayoutBuilder(builder: (context, constraint) {
-      return SingleChildScrollView(
+    }, child: LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return SingleChildScrollView(
           child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraint.maxHeight),
-              child: IntrinsicHeight(
-                  child: Column(children: <Widget>[
-                const LoraMemojiWidget(
-                    text:
-                        'Start your new investing journey\nwith Lora - your\nAI Investment Coach',
-                    imageAsset: '/'),
-                _userNameInput(),
-                _padding(),
-                _passwordInput(),
-                _padding(),
-                const Expanded(child: SizedBox(height: 50)),
-                _signUpButton(),
-                _padding(),
-                _signInButton(context),
-                _maybeLaterButton(context),
-                _padding(padding: 28),
-              ]))));
-    }));
+            constraints: BoxConstraints(
+              minHeight: constraints.maxHeight,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  children: [
+                    const LoraMemojiWidget(
+                        text:
+                            'Start your new investing journey\nwith Lora - your\nAI Investment Coach'),
+                    _userNameInput(),
+                    _padding(),
+                    _passwordInput(),
+                    _padding(),
+                  ],
+                ),
+                Column(
+                  children: [
+                    _signUpButton(),
+                    _padding(),
+                    _signInButton(context),
+                    _maybeLaterButton(context),
+                    _padding(padding: 28)
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    ));
   }
 
   Widget _userNameInput() {
@@ -83,6 +103,7 @@ class SignUpForm extends StatelessWidget {
         buildWhen: (previous, current) => previous.password != current.password,
         builder: (context, state) {
           return PasswordTextField(
+              key: const Key('sign_up_password_input'),
               validPassword: (isValidPassword) => {},
               hintText: 'Password',
               label: 'Password',
@@ -107,7 +128,7 @@ class SignUpForm extends StatelessWidget {
   Widget _signInButton(BuildContext context) {
     return PrimaryButton(
       buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-      key: const Key('sign_in_submit_button'),
+      key: const Key('sign_up_have_an_account_button'),
       fontStyle: FontStyle.normal,
       label: 'ALREADY HAVE AN ACCOUNT?',
       onTap: () => SignInScreen.open(context),
@@ -116,6 +137,7 @@ class SignUpForm extends StatelessWidget {
 
   Widget _maybeLaterButton(BuildContext context) {
     return CustomTextButton(
+      key: const Key('sign_up_may_be_later_button'),
       margin: const EdgeInsets.only(top: 20),
       label: 'MAYBE LATER',
       onTap: () => CarouselScreen.open(context),

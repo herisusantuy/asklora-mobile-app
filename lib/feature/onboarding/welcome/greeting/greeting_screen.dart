@@ -22,8 +22,7 @@ class GreetingScreen extends StatelessWidget {
         children: [
           LoraMemojiWidget(
               text:
-                  'You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy $name.',
-              imageAsset: '/'),
+                  'You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy $name.'),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 14),
               child: PrimaryButton(

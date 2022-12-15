@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/we_create/custom_app_bar.dart';
@@ -20,8 +21,7 @@ class EmailActivationScreen extends StatelessWidget {
           children: [
             const Expanded(
               child: LoraMemojiWidget(
-                  text: 'Check your email and activate your account.',
-                  imageAsset: '/'),
+                  text: 'Check your email and activate your account.'),
             ),
             _resendActivationLinkButton(context),
             _singUpAgainButton(context)

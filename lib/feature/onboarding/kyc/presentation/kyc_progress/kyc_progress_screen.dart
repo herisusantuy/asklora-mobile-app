@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -25,8 +26,7 @@ class KycProgressScreen extends StatelessWidget {
         children: [
           const LoraMemojiWidget(
               text:
-                  'Open investment account and deposit are the last step before investing. ',
-              imageAsset: '/'),
+                  'Open investment account and deposit are the last step before investing. '),
           const SizedBox(
             height: 63,
           ),
