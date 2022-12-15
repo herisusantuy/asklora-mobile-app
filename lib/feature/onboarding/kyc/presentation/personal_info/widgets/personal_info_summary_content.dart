@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/presentation/custom_image_picker.dart';
-import '../../../../../../core/values/app_values.dart';
+import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../bloc/address_proof/address_proof_bloc.dart';
 import '../../../bloc/basic_information/basic_information_bloc.dart';
 import '../../../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
@@ -13,6 +13,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
   final BasicInformationState basicInformationState;
   final AddressProofState addressProofState;
   final CountryOfTaxResidenceState countryOfTaxResidenceState;
+
   const PersonalInfoSummaryContent(
       {Key? key,
       required this.basicInformationState,
@@ -21,14 +22,17 @@ class PersonalInfoSummaryContent extends StatelessWidget {
       required this.title})
       : super(key: key);
 
+  static const double _spaceHeightDouble = 20;
+  final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
+
   @override
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           KycSubTitle(
             subTitle: title,
-            padding: AppValues.screenHorizontalPadding.copyWith(bottom: 6),
           ),
+          _spaceHeight,
           SummaryTextInfo(
               title:
                   'Are you a United States tax resident, green card holder or citizens ?',
@@ -37,6 +41,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
                       ? 'Yes'
                       : 'No'
                   : 'Unknown'),
+          _spaceHeight,
           SummaryTextInfo(
               title: 'Are you a Hong Kong citizen or resident ?',
               subTitle:
@@ -45,29 +50,37 @@ class PersonalInfoSummaryContent extends StatelessWidget {
                           ? 'Yes'
                           : 'No'
                       : 'Unknown'),
+          _spaceHeight,
           SummaryTextInfo(
               title: 'English First Name',
               subTitle: basicInformationState.firstName),
+          _spaceHeight,
           SummaryTextInfo(
               title: 'English Last Name',
               subTitle: basicInformationState.lastName),
           SummaryTextInfo(title: 'Sex', subTitle: basicInformationState.gender),
+          _spaceHeight,
           SummaryTextInfo(
               title: 'Day of Birth',
               subTitle: basicInformationState.dateOfBirth),
+          _spaceHeight,
           SummaryTextInfo(
               title: 'Phone', subTitle: basicInformationState.phoneNumber),
+          _spaceHeight,
           SummaryTextInfo(
               title: 'TIN Number',
               subTitle: countryOfTaxResidenceState.tinNumber),
+          _spaceHeight,
           SummaryTextInfo(
               title: 'Address', subTitle: addressProofState.addressLine1),
+          _spaceHeight,
           SummaryTextInfo(
               title: 'Address 2', subTitle: addressProofState.addressLine2),
+          _spaceHeight,
           CustomImagePicker(
-            padding: AppValues.screenHorizontalPadding,
             initialValue: addressProofState.addressProofImages,
-            title: '',
+            title: 'Address Proof',
+            titleColor: AskLoraColors.gray,
             disabled: true,
           )
         ],
