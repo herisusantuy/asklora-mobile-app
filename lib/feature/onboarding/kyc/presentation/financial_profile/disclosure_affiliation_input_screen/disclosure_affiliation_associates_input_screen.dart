@@ -4,7 +4,7 @@ import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart
 import '../../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/kyc_bloc.dart';
-import '../../widgets/kyc_button_pair.dart';
+import '../../../../../../core/presentation/buttons/button_pair.dart';
 import 'disclosure_affiliation_base_input_screen.dart';
 
 class DisclosureAffiliationAssociatesInputScreen extends StatelessWidget {
@@ -39,7 +39,7 @@ class DisclosureAffiliationAssociatesInputScreen extends StatelessWidget {
                   current.affiliatedAssociatesFirstName ||
               previous.affiliatedAssociatesLastName !=
                   current.affiliatedAssociatesLastName,
-          builder: (context, state) => KycButtonPair(
+          builder: (context, state) => ButtonPair(
                 disablePrimaryButton:
                     state.affiliatedAssociatesFirstName.isEmpty ||
                         state.affiliatedAssociatesLastName.isEmpty,

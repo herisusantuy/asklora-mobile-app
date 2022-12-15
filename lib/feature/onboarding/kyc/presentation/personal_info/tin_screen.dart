@@ -12,7 +12,7 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 
 class TinScreen extends StatelessWidget {
   final double progress;
@@ -74,7 +74,7 @@ class TinScreen extends StatelessWidget {
       BlocBuilder<CountryOfTaxResidenceBloc, CountryOfTaxResidenceState>(
           buildWhen: (previous, current) =>
               previous.isHkIdValid != current.isHkIdValid,
-          builder: (context, state) => KycButtonPair(
+          builder: (context, state) => ButtonPair(
                 disablePrimaryButton: !state.isHkIdValid,
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()

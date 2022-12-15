@@ -11,7 +11,7 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 
 class AddressProofScreen extends StatelessWidget {
   final double progress;
@@ -138,7 +138,7 @@ class AddressProofScreen extends StatelessWidget {
   Widget get _bottomButton => BlocBuilder<AddressProofBloc, AddressProofState>(
       buildWhen: (previous, current) =>
           previous.enableNextButton() != current.enableNextButton(),
-      builder: (context, state) => KycButtonPair(
+      builder: (context, state) => ButtonPair(
             disablePrimaryButton: !state.enableNextButton(),
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()

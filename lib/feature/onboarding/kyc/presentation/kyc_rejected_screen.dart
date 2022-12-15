@@ -9,7 +9,7 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/values/app_values.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/kyc_bloc.dart';
-import 'widgets/kyc_button_pair.dart';
+import '../../../../core/presentation/buttons/button_pair.dart';
 
 class KycRejectedScreen extends StatelessWidget {
   final String rejectedReason;
@@ -51,7 +51,7 @@ class KycRejectedScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => KycButtonPair(
+  Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => CarouselScreen.open(context),
         secondaryButtonOnClick: () =>
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),

@@ -16,7 +16,7 @@ import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 
 class BasicInformationScreen extends StatelessWidget {
   final double progress;
@@ -165,7 +165,7 @@ class BasicInformationScreen extends StatelessWidget {
       BlocBuilder<BasicInformationBloc, BasicInformationState>(
           buildWhen: (previous, current) =>
               _disablePrimaryButton(previous) != _disablePrimaryButton(current),
-          builder: (context, state) => KycButtonPair(
+          builder: (context, state) => ButtonPair(
                 disablePrimaryButton: _disablePrimaryButton(state),
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()

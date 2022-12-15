@@ -5,7 +5,7 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import 'widgets/disclosure_summary_content.dart';
 
 class DisclosureSummaryScreen extends StatelessWidget {
@@ -37,7 +37,7 @@ class DisclosureSummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => KycButtonPair(
+  Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.verifyIdentity)),

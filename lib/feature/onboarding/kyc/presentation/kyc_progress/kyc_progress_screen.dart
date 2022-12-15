@@ -10,7 +10,7 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/custom_silver_box.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 
 class KycProgressScreen extends StatelessWidget {
   final int currentStep;
@@ -53,7 +53,7 @@ class KycProgressScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => KycButtonPair(
+  Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.residentCheck)),

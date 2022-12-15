@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
-import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
-import '../../../../core/presentation/we_create/custom_button.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../sign_up/presentation/sign_up_success_screen.dart';
@@ -18,7 +17,7 @@ part 'otp_box.dart';
 class OtpForm extends StatelessWidget {
   final Function onOtpSubmit;
 
-  final Function onOtpResend;
+  final Function() onOtpResend;
 
   const OtpForm(
       {required this.onOtpResend, required this.onOtpSubmit, Key? key})
@@ -86,19 +85,15 @@ class OtpForm extends StatelessWidget {
             previous.resetTime != current.resetTime ||
             previous.response.state != current.response.state,
         builder: (context, state) {
-          return CustomButton(
-            backgroundColor: Colors.white,
-            foregroundColor: const Color(0xff232323),
-            borderSide: state.disableRequest
-                ? BorderSide.none
-                : const BorderSide(width: 2, color: Color(0xff232323)),
+          return PrimaryButton(
+            buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
             key: const Key('request_otp_button'),
             fontStyle: FontStyle.normal,
-            disable: state.disableRequest,
+            disabled: state.disableRequest,
             label: state.disableRequest
                 ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
                 : 'RESEND OTP CODE',
-            onClick: onOtpResend,
+            onTap: onOtpResend,
           );
         });
   }

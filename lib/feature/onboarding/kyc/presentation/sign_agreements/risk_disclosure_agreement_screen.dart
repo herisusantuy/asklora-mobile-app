@@ -9,7 +9,7 @@ import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../widgets/custom_silver_box.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../widgets/kyc_sub_title.dart';
 
 class RiskDisclosureAgreementScreen extends StatelessWidget {
@@ -102,7 +102,7 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.isRiskDisclosureAgreementChecked !=
               current.isRiskDisclosureAgreementChecked,
-          builder: (context, state) => KycButtonPair(
+          builder: (context, state) => ButtonPair(
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()
                     .add(const PageChanged(KycPageStep.signTaxAgreements)),

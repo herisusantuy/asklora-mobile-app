@@ -11,7 +11,7 @@ import '../../domain/onfido/onfido_result_request.dart';
 import '../widgets/custom_silver_box.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 
 class VerifyIdentityScreen extends StatelessWidget {
   final double progress;
@@ -97,7 +97,7 @@ class VerifyIdentityScreen extends StatelessWidget {
         ],
       ));
 
-  Widget _bottomButton(BuildContext context) => KycButtonPair(
+  Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () {
           ///TODO OPEN ONFIDO SCREEN LATER
           context.read<KycBloc>().add(GetSdkToken());

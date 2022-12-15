@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/core/presentation/we_create/custom_button.dart';
+import 'package:asklora_mobile_app/core/presentation/buttons/primary_button.dart';
 import 'package:asklora_mobile_app/feature/onboarding/welcome/greeting/greeting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -31,7 +31,7 @@ void main() {
         expect(mEmojiWidget, findsOneWidget);
         expect(nextButton, findsOneWidget);
         expect(
-            (tester.firstWidget(nextButton) as CustomButton).disable, isFalse);
+            (tester.firstWidget(nextButton) as PrimaryButton).disabled, isFalse);
       });
     },
   );

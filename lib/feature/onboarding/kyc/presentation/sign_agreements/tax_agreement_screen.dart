@@ -7,7 +7,7 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../financial_profile/widgets/dot_text.dart';
 import '../widgets/kyc_base_form.dart';
-import '../widgets/kyc_button_pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../widgets/kyc_sub_title.dart';
 
 class TaxAgreementScreen extends StatelessWidget {
@@ -76,7 +76,7 @@ class TaxAgreementScreen extends StatelessWidget {
         fontHeight: 1.6,
       );
 
-  Widget _bottomButton(BuildContext context) => KycButtonPair(
+  Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.kycSummary)),
