@@ -28,10 +28,10 @@ class CarouselScreen extends StatelessWidget {
           const SizedBox(height: 15),
           const LocalizationToggleButton(),
           const SizedBox(height: 10),
-          SizedBox(height: 250, child: _test()),
+          SizedBox(height: 250, child: _animatedTexts()),
           const Expanded(child: SizedBox()),
           PrimaryButton(
-            key: const Key('begin_on_boarding_button_'),
+            key: const Key('begin_on_boarding_button'),
             label: "LET'S BEGIN",
             onTap: () => AskNameScreen.open(context),
           ),
@@ -45,7 +45,7 @@ class CarouselScreen extends StatelessWidget {
         ]));
   }
 
-  Widget _test() {
+  Widget _animatedTexts() {
     return DefaultTextStyle(
         style: GoogleFonts.mulish(
             textStyle: const TextStyle(

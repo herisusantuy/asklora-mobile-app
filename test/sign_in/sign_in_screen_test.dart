@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/core/presentation/custom_text_button.dart';
+import 'package:asklora_mobile_app/core/presentation/buttons/primary_button.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/presentation/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -50,7 +50,7 @@ void main() {
 
         expect(find.text('qweasdzxc'), findsOneWidget);
         expect(find.text('Enter valid email'), findsOneWidget);
-        expect(tester.widget<CustomTextButton>(loginButton).disable, isTrue);
+        expect(tester.widget<PrimaryButton>(loginButton).disabled, isTrue);
       });
 
       testWidgets('Enable button when entered valid email.', (tester) async {
@@ -71,7 +71,7 @@ void main() {
         expect(find.text('wahyu@loratechai.com'), findsOneWidget);
         expect(find.text('Test123!'), findsOneWidget);
         expect(find.text('Enter valid email'), findsNothing);
-        expect(tester.widget<CustomTextButton>(submitButton).disable, isFalse);
+        expect(tester.widget<PrimaryButton>(submitButton).disabled, isFalse);
       });
     },
   );

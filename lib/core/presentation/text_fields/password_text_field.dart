@@ -43,6 +43,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   bool containsLowerCase = false;
   bool containsUpperCase = false;
   bool containsNumber = false;
+  bool shouldShowErrorsTexts = false;
   String? label;
 
   @override
@@ -95,47 +96,52 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         ),
         child: Column(
           children: [
-            TextFormField(
-              controller: controller,
-              onChanged: widget.onChanged,
-              textCapitalization: widget.textCapitalization,
-              inputFormatters: widget.textInputFormatterList,
-              obscureText: obscureText,
-              obscuringCharacter: '●',
-              style: TextFieldStyle.valueTextStyle,
-              decoration: TextFieldStyle.inputDecoration.copyWith(
-                floatingLabelBehavior: floatingLabelBehavior,
-                labelText: label,
-                hintText: widget.hintText,
-                errorText: widget.errorText.isEmpty ? null : widget.errorText,
-                suffixIcon: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      obscureText = !obscureText;
-                    });
-                  },
-                  child: UnconstrainedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: obscureText ? 2 : 0),
-                      child: SvgPicture.asset(
-                        obscureText
-                            ? 'assets/icons/icon_obscure_text_disable.svg'
-                            : 'assets/icons/icon_obscure_text_enable.svg',
+            Focus(
+                child: TextFormField(
+                    controller: controller,
+                    onChanged: widget.onChanged,
+                    textCapitalization: widget.textCapitalization,
+                    inputFormatters: widget.textInputFormatterList,
+                    obscureText: obscureText,
+                    obscuringCharacter: '●',
+                    style: TextFieldStyle.valueTextStyle,
+                    decoration: TextFieldStyle.inputDecoration.copyWith(
+                      floatingLabelBehavior: floatingLabelBehavior,
+                      labelText: label,
+                      hintText: widget.hintText,
+                      errorText:
+                          widget.errorText.isEmpty ? null : widget.errorText,
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                        child: UnconstrainedBox(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: obscureText ? 2 : 0),
+                            child: SvgPicture.asset(
+                              obscureText
+                                  ? 'assets/icons/icon_obscure_text_disable.svg'
+                                  : 'assets/icons/icon_obscure_text_enable.svg',
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 6,
-            ),
-            ..._errorCheckWidgets
+                    )),
+                onFocusChange: (hasFocus) {
+                  shouldShowErrorsTexts = hasFocus;
+                }),
+            if (shouldShowErrorsTexts || controller.text.isNotEmpty)
+              ..._errorCheckWidgets,
           ],
         ),
       );
 
   List<Widget> get _errorCheckWidgets => [
+        const SizedBox(
+          height: 5,
+        ),
         _errorWidget(
             label: 'min. 8 characters', checkPassed: minEightCharacters),
         _errorWidget(

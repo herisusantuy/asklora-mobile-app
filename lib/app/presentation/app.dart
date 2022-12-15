@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
+import '../../core/presentation/loading/global_loader_overlay.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
-import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/app_bloc.dart';
 
@@ -30,31 +30,39 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        onGenerateRoute: RouterGenerator.generateRoute,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-            primarySwatch:
-                MaterialColor(AskLoraColors.charcoal.value, _colorCodes)),
-        home: BlocProvider(
-            create: (_) =>
-                AppBloc(tokenRepository: TokenRepository())..add(AppLaunched()),
-            child: Scaffold(
-                backgroundColor: AskLoraColors.white,
-                body: SafeArea(
-                  child: BlocConsumer<AppBloc, AppState>(
-                    listener: (_, __) => FlutterNativeSplash.remove(),
-                    builder: (context, state) {
-                      switch (state.status) {
-                        case AppStatus.authenticated:
-                          return const SignInSuccessScreen();
-                        case AppStatus.unauthenticated:
-                          return const CarouselScreen();
-                        case AppStatus.unknown:
-                          return const SizedBox();
-                      }
-                    },
-                  ),
-                ))));
+    return GestureDetector(
+        onTap: () {
+          FocusScopeNode focus = FocusScope.of(context);
+          if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
+            focus.focusedChild?.unfocus();
+          }
+        },
+        child: GlobalLoaderOverlay(
+            child: MaterialApp(
+                onGenerateRoute: RouterGenerator.generateRoute,
+                title: 'Flutter Demo',
+                theme: ThemeData(
+                    primarySwatch: MaterialColor(
+                        AskLoraColors.charcoal.value, _colorCodes)),
+                home: BlocProvider(
+                    create: (_) => AppBloc(tokenRepository: TokenRepository())
+                      ..add(AppLaunched()),
+                    child: Scaffold(
+                        backgroundColor: AskLoraColors.white,
+                        body: SafeArea(
+                          child: BlocConsumer<AppBloc, AppState>(
+                            listener: (_, __) => FlutterNativeSplash.remove(),
+                            builder: (context, state) {
+                              switch (state.status) {
+                                case AppStatus.authenticated:
+                                  return const SignInSuccessScreen();
+                                case AppStatus.unauthenticated:
+                                  return const CarouselScreen();
+                                case AppStatus.unknown:
+                                  return const SizedBox();
+                              }
+                            },
+                          ),
+                        ))))));
   }
 }

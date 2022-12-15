@@ -27,7 +27,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         emailAddress: event.emailAddress,
         isEmailValid: event.emailAddress.isValidEmail(),
         emailAddressErrorText:
-            (event.emailAddress.isValidEmail() || event.emailAddress.isEmpty)
+            (event.emailAddress.toLowerCase().isValidEmail() ||
+                    event.emailAddress.isEmpty)
                 ? ''
                 : 'Enter valid email'));
   }

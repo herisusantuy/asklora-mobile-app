@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -30,8 +31,7 @@ class KycRejectedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 64),
               children: [
                 const LoraMemojiWidget(
-                    text: 'Sorry ! you’re not eligible for Asklora',
-                    imageAsset: '/'),
+                    text: 'Sorry ! you’re not eligible for Asklora'),
                 const SizedBox(
                   height: 20,
                 ),

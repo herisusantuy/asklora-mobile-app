@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AskLoraColors {
   static const primaryGreen = Color(0xFF36EAB6);
   static const primaryMagenta = Color(0xFFEA1DD6);
+  static const primaryBlue = Color(0xFF66E3FF);
   static const magentaOpacity50Percent = Color(0x80EA1DD6);
   static const up = Color(0xFF008753);
   static const down = Color(0xFFC33335);

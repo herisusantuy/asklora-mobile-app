@@ -51,10 +51,8 @@ class OtpForm extends StatelessWidget {
                   children: [
                     _padding(),
                     const LoraMemojiWidget(
-                      text:
-                          'Please enter the OTP sent on your registered Email ID.',
-                      imageAsset: '/',
-                    ),
+                        text:
+                            'Please enter the OTP sent on your registered Email ID.'),
                     _otpBox(context),
                   ],
                 ),

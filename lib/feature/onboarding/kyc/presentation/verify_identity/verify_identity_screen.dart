@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_onfido/flutter_onfido.dart';
-import '../../../../../core/presentation/custom_text_new.dart';
+
+import '../../../../../core/onfido/start_onfido.dart';
+import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/styles/asklora_colors.dart';
-import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/onfido/onfido_result_request.dart';
@@ -20,9 +20,6 @@ class VerifyIdentityScreen extends StatelessWidget {
   const VerifyIdentityScreen({required this.progress, Key? key})
       : super(key: key);
 
-  static const double _spaceHeightDouble = 36;
-  final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
-
   @override
   Widget build(BuildContext context) {
     return KycBaseForm(
@@ -30,9 +27,10 @@ class VerifyIdentityScreen extends StatelessWidget {
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Verify Identity',
       content: BlocListener<KycBloc, KycState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is OnfidoSdkToken) {
-            _doVerificationOnfido(context: context, onFidoSdkTokenState: state);
+            await _doVerificationOnfido(
+                context: context, onFidoSdkTokenState: state);
           } else if (state.status == KycStatus.failure) {
             ///CHANGE THIS TO HANDLE ERROR LATER
             context
@@ -40,16 +38,16 @@ class VerifyIdentityScreen extends StatelessWidget {
                 .add(const PageChanged(KycPageStep.signBrokerAgreements));
           }
         },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 24),
           children: [
-            CustomTextNew(
-              'We need to verify your identity via your HKID. You’ll be redirected to our KYC partner Onfido.',
-              key: const Key('sub_title'),
-              style: AskLoraTextStyles.body1
-                  .copyWith(color: AskLoraColors.charcoal),
+            const CustomText(
+              'We need to make sure lorem ipsum dolor sit amet, consectetur adipscing elit. Ornare velit ipsum risus at feugiat adipiscing erat mauris velit. Morbi non morbi eu tincidunt. Laoreet elit.',
+              key: Key('sub_title'),
+              type: FontType.smallText,
+              padding: AppValues.screenHorizontalPadding,
+              height: 2,
             ),
-            _spaceHeight,
             _verificationSteps
           ],
         ),
@@ -59,26 +57,14 @@ class VerifyIdentityScreen extends StatelessWidget {
     );
   }
 
-  void _doVerificationOnfido(
+  Future<void> _doVerificationOnfido(
       {required BuildContext context,
-      required OnfidoSdkToken onFidoSdkTokenState}) {
+      required OnfidoSdkToken onFidoSdkTokenState}) async {
     try {
-      FlutterOnfido.start(
-        config: OnfidoConfig(
-          sdkToken: onFidoSdkTokenState.token,
-          flowSteps: OnfidoFlowSteps(
-            welcome: false,
-            captureDocument: OnfidoCaptureDocumentStep(
-                countryCode: OnfidoCountryCode.HKG,
-                docType: OnfidoDocumentType.NATIONAL_IDENTITY_CARD),
-            captureFace: OnfidoCaptureFaceStep(OnfidoCaptureType.PHOTO),
-          ),
-        ),
-        iosAppearance: const OnfidoIOSAppearance(),
-      ).then((value) => context.read<KycBloc>().add(UpdateOnfidoResult(
-          Reason.userCompleted.value,
-          'Onfido SDK',
-          onFidoSdkTokenState.token)));
+      await startOnfido(onFidoSdkTokenState.token).then((value) => context
+          .read<KycBloc>()
+          .add(UpdateOnfidoResult(Reason.userCompleted.value, 'Onfido SDK',
+              onFidoSdkTokenState.token)));
     } on PlatformException {
       context.read<KycBloc>().add(UpdateOnfidoResult(
           Reason.userExited.value, 'Onfido SDK', onFidoSdkTokenState.token));
@@ -90,6 +76,7 @@ class VerifyIdentityScreen extends StatelessWidget {
 
   Widget get _verificationSteps => const CustomSilverBox(
       key: Key('verification_steps'),
+      margin: EdgeInsets.only(left: 14, top: 32, right: 14),
       title: 'Get ready for the verification process. You will..',
       content: CustomStepper(
         currentStep: 0,
