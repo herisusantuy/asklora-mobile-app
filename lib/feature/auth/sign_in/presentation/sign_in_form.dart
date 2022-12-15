@@ -47,20 +47,31 @@ class SignInForm extends StatelessWidget {
       return SingleChildScrollView(
           child: ConstrainedBox(
               constraints: BoxConstraints(minHeight: constraint.maxHeight),
-              child: IntrinsicHeight(
-                  child: Column(children: <Widget>[
-                const LoraMemojiWidget(text: 'Welcome back!\nReady to go?'),
-                context.padding(),
-                _emailInput(),
-                context.padding(topPadding: 10),
-                _passwordInput(),
-                context.padding(topPadding: 10),
-                _forgotPasswordButton(context),
-                Flexible(child: Container()),
-                _loginButton(),
-                _createAnAccountButton(context),
-                context.padding(topPadding: 20),
-              ]))));
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        const LoraMemojiWidget(
+                            text: 'Welcome back!\nReady to go?'),
+                        context.padding(),
+                        _emailInput(),
+                        context.padding(topPadding: 10),
+                        _passwordInput(),
+                        context.padding(topPadding: 10),
+                        _forgotPasswordButton(context),
+                        context.padding(topPadding: 10),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        _loginButton(),
+                        _createAnAccountButton(context),
+                        context.padding(topPadding: 20),
+                      ],
+                    ),
+                  ])));
     }));
   }
 

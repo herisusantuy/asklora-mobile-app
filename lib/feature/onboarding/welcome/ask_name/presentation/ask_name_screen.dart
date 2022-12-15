@@ -18,27 +18,35 @@ class AskNameScreen extends StatelessWidget {
     return CustomScaffold(
       body: BlocProvider(
         create: (_) => LoraAskNameBloc(),
-        child: Expanded(
-            child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const LoraMemojiWidget(
-                text:
-                    "Hi! I'm Lora, your AI investment coach. What should I call you?"),
-            Builder(
-                builder: (context) => Center(
-                    child: IntrinsicWidth(
-                        child: CustomCenteredTextInput(
-                            key: const Key('name_input'),
-                            onChanged: (value) => context
-                                .read<LoraAskNameBloc>()
-                                .add(NameChanged(value)),
-                            hintText: 'Your Name',
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            textInputType: TextInputType.name)))),
-            _nextButton,
-          ],
-        )),
+        child: LayoutBuilder(
+          builder: (context, constraint) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      const LoraMemojiWidget(
+                          text:
+                              "Hi! I'm Lora, your AI investment coach. What should I call you?"),
+                      CustomCenteredTextInput(
+                          key: const Key('name_input'),
+                          onChanged: (value) => context
+                              .read<LoraAskNameBloc>()
+                              .add(NameChanged(value)),
+                          hintText: 'Your Name',
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          textInputType: TextInputType.name),
+                    ],
+                  ),
+                  _nextButton,
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

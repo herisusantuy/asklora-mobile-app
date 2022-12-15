@@ -37,27 +37,43 @@ class SignUpForm extends StatelessWidget {
         default:
           break;
       }
-    }, child: LayoutBuilder(builder: (context, constraint) {
-      return SingleChildScrollView(
+    }, child: LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return SingleChildScrollView(
           child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraint.maxHeight),
-              child: IntrinsicHeight(
-                  child: Column(children: <Widget>[
-                const LoraMemojiWidget(
-                    text:
-                        'Start your new investing journey\nwith Lora - your\nAI Investment Coach'),
-                _userNameInput(),
-                _padding(),
-                _passwordInput(),
-                _padding(),
-                const Expanded(child: SizedBox(height: 50)),
-                _signUpButton(),
-                _padding(),
-                _signInButton(context),
-                _maybeLaterButton(context),
-                _padding(padding: 28),
-              ]))));
-    }));
+            constraints: BoxConstraints(
+              minHeight: constraints.maxHeight,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  children: [
+                    const LoraMemojiWidget(
+                        text:
+                            'Start your new investing journey\nwith Lora - your\nAI Investment Coach'),
+                    _userNameInput(),
+                    _padding(),
+                    _passwordInput(),
+                    _padding(),
+                  ],
+                ),
+                Column(
+                  children: [
+                    _signUpButton(),
+                    _padding(),
+                    _signInButton(context),
+                    _maybeLaterButton(context),
+                    _padding(padding: 28)
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    ));
   }
 
   Widget _userNameInput() {
