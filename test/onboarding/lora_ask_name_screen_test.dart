@@ -51,8 +51,8 @@ void main() {
         );
         await tester.pump();
         expect(find.text('Anton'), findsOneWidget);
-        expect(
-            (tester.firstWidget(nextButton) as PrimaryButton).disabled, isFalse);
+        expect((tester.firstWidget(nextButton) as PrimaryButton).disabled,
+            isFalse);
       });
     },
   );

@@ -41,8 +41,7 @@ class BasicInformationScreen extends StatelessWidget {
             focus.focusedChild?.unfocus();
           }
         },
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 24),
+        child: Column(
           children: [
             CustomTextNew(
               'Please make sure your name is exactly the same as the information on identification document.',

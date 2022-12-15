@@ -30,15 +30,12 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Personal Info',
-      content: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        child: PersonalInfoSummaryContent(
-          key: const Key('personal_info_summary_content'),
-          basicInformationState: basicInformationState,
-          addressProofState: addressProofState,
-          countryOfTaxResidenceState: countryOfTaxResidenceState,
-          title: 'Summary',
-        ),
+      content: PersonalInfoSummaryContent(
+        key: const Key('personal_info_summary_content'),
+        basicInformationState: basicInformationState,
+        addressProofState: addressProofState,
+        countryOfTaxResidenceState: countryOfTaxResidenceState,
+        title: 'Summary',
       ),
       bottomButton: _bottomButton(context),
       progress: progress,

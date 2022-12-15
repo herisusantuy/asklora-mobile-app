@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_onfido/flutter_onfido.dart';
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/values/app_values.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/onfido/onfido_result_request.dart';
@@ -18,6 +19,9 @@ class VerifyIdentityScreen extends StatelessWidget {
 
   const VerifyIdentityScreen({required this.progress, Key? key})
       : super(key: key);
+
+  static const double _spaceHeightDouble = 36;
+  final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +40,16 @@ class VerifyIdentityScreen extends StatelessWidget {
                 .add(const PageChanged(KycPageStep.signBrokerAgreements));
           }
         },
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomText(
-              'We need to make sure lorem ipsum dolor sit amet, consectetur adipscing elit. Ornare velit ipsum risus at feugiat adipiscing erat mauris velit. Morbi non morbi eu tincidunt. Laoreet elit.',
-              key: Key('sub_title'),
-              type: FontType.smallText,
-              padding: AppValues.screenHorizontalPadding,
-              height: 2,
+            CustomTextNew(
+              'We need to verify your identity via your HKID. You’ll be redirected to our KYC partner Onfido.',
+              key: const Key('sub_title'),
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
             ),
+            _spaceHeight,
             _verificationSteps
           ],
         ),
@@ -86,7 +90,6 @@ class VerifyIdentityScreen extends StatelessWidget {
 
   Widget get _verificationSteps => const CustomSilverBox(
       key: Key('verification_steps'),
-      margin: EdgeInsets.only(left: 14, top: 32, right: 14),
       title: 'Get ready for the verification process. You will..',
       content: CustomStepper(
         currentStep: 0,

@@ -21,8 +21,7 @@ class DisclosureAffiliationCommissionScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Financial Profile',
-      content: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 24),
+      content: Column(
         children: const [
           FinancialQuestion(
             'Are your immediate family or/and you a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.',

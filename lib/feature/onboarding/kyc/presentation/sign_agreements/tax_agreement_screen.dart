@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/values/app_values.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../financial_profile/widgets/dot_text.dart';
@@ -16,48 +17,63 @@ class TaxAgreementScreen extends StatelessWidget {
   const TaxAgreementScreen({required this.progress, Key? key})
       : super(key: key);
 
+  final Widget _spaceHeight = const SizedBox(
+    height: 8,
+  );
+
   @override
   Widget build(BuildContext context) {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Sign Agreements',
-      content: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 32),
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          KycSubTitle(
-            key: const Key('sub_title'),
-            subTitle: 'US Tax Form',
+          const KycSubTitle(
+            key: Key('sub_title'),
+            subTitle: 'W-8BEN Form',
           ),
-          const CustomText(
+          const SizedBox(
+            height: 24,
+          ),
+          CustomTextNew(
             'Under penalties of perjury, I declare that I have examined the information on this form and to the best of my knowledge and belief it is true, correct, and complete. I further certify under penalties of perjury that:',
-            key: Key('statements'),
-            type: FontType.smallText,
-            padding: AppValues.screenHorizontalPadding,
-            height: 1.6,
+            key: const Key('statements'),
+            style:
+                AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
-          _dotText(
+          _spaceHeight,
+          const DotText(
               'I am the individual that is the beneficial owner (or am authorized to sign for the individual that is the beneficial owner) of all the income or proceeds to which this form relates or am using this form to document myself for chapter 4 purposes;'),
-          _dotText(
+          _spaceHeight,
+          const DotText(
               'The person named on line 1 of this form is not a U.S. person;'),
-          _dotText('This form relates to:'),
+          _spaceHeight,
+          const DotText('This form relates to:'),
+          _spaceHeight,
           _dotTextSlightRight(
               '(a) income not effectively connected with the conduct of a trade or business in the United States;'),
+          _spaceHeight,
           _dotTextSlightRight(
               '(b) income effectively connected with the conduct of a trade or business in the United States but is not subject to tax under an applicable income tax treaty;'),
+          _spaceHeight,
           _dotTextSlightRight(
               '(c) the partner’s share of a partnership’s effectively connected taxable income; or'),
+          _spaceHeight,
           _dotTextSlightRight(
               '(d) the partner’s amount realized from the transfer of a partnership interest subject to withholding under section 1446(f);'),
-          _dotText(
+          _spaceHeight,
+          const DotText(
               'The person named on line 1 of this form is a resident of the treaty country listed on line 9 of the form (if any) within the meaning of the income tax treaty between the United States and that country; and'),
-          _dotText(
+          _spaceHeight,
+          const DotText(
               'For broker transactions or barter exchanges, the beneficial owner is an exempt foreign person as defined in the instructions.'),
-          CustomText(
+          _spaceHeight,
+          CustomTextNew(
             'Furthermore, I authorize this form to be provided to any withholding agent that has control, receipt, or custody of the income of which I am the beneficial owner or any withholding agent that can disburse or make payments of the income of which I am the beneficial owner. I agree that I will submit a new form within 30 days if any certification made on this form becomes incorrect.',
-            type: FontType.smallText,
-            padding: AppValues.screenHorizontalPadding.copyWith(top: 6),
-            height: 1.6,
+            style:
+                AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
         ],
       ),
@@ -66,14 +82,11 @@ class TaxAgreementScreen extends StatelessWidget {
     );
   }
 
-  Widget _dotText(String text) => DotText(
-        text,
-        fontHeight: 1.6,
-      );
-
-  Widget _dotTextSlightRight(String text) => DotText(
-        text,
-        fontHeight: 1.6,
+  Widget _dotTextSlightRight(String text) => Padding(
+        padding: const EdgeInsets.only(left: 28.0),
+        child: DotText(
+          text,
+        ),
       );
 
   Widget _bottomButton(BuildContext context) => ButtonPair(

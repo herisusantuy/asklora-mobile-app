@@ -44,8 +44,8 @@ class DisclosureAffiliationBaseInputScreen extends StatelessWidget {
             focus.focusedChild?.unfocus();
           }
         },
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextNew(
               'Please provide the name of affiliated person.',

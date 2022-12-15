@@ -6,6 +6,7 @@ class CustomTextNew extends StatelessWidget {
   final bool ellipsis;
   final TextAlign textAlign;
   final int? maxLines;
+  final bool applyHeightToFirstAscent;
 
   const CustomTextNew(
     this.text, {
@@ -14,6 +15,7 @@ class CustomTextNew extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.maxLines,
     this.style,
+    this.applyHeightToFirstAscent = false,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class CustomTextNew extends StatelessWidget {
         textAlign: textAlign,
         overflow: ellipsis ? TextOverflow.ellipsis : null,
         maxLines: maxLines,
-        textHeightBehavior:
-            const TextHeightBehavior(applyHeightToFirstAscent: false));
+        textHeightBehavior: TextHeightBehavior(
+            applyHeightToFirstAscent: applyHeightToFirstAscent));
   }
 }

@@ -36,8 +36,7 @@ class AddressProofScreen extends StatelessWidget {
             focus.focusedChild?.unfocus();
           }
         },
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 24),
+        child: Column(
           children: [
             CustomTextNew(
               'Please provide your permanent residential address.',

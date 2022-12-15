@@ -35,11 +35,14 @@ class ResidentCheckScreen extends StatelessWidget {
         onTapBack: () =>
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
         title: 'Set Up Personal Info',
-        content: ListView(
-          padding: EdgeInsets.symmetric(vertical: 38),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 38,
+            ),
             _isUnitedStatesResident,
-            SizedBox(
+            const SizedBox(
               height: 38,
             ),
             _isHongKongResident
