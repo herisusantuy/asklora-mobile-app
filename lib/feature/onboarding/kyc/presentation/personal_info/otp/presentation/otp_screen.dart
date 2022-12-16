@@ -46,8 +46,7 @@ class OtpScreen extends StatelessWidget {
         title: 'Set Up Personal Info',
         onTapBack: () =>
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-        content: ListView(
-          padding: const EdgeInsets.only(top: 28),
+        content: Column(
           children: [
             CustomTextNew(
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit OTP is sent to your SMS.',

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/presentation/buttons/secondary/view_file_button.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/values/app_values.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
@@ -17,75 +20,57 @@ class BrokerAgreementScreen extends StatelessWidget {
   const BrokerAgreementScreen({required this.progress, Key? key})
       : super(key: key);
 
+  static const double _spaceHeightDouble = 20;
+  final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
+
   @override
   Widget build(BuildContext context) {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Sign Agreements',
-      content: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        child: Column(
-          children: [
-            const CustomText(
-              'Please read the 2 agreements pdf files.',
-              type: FontType.smallText,
-              padding: AppValues.screenHorizontalPadding,
-              height: 2,
-            ),
-            _agreementCard(
-                key: const Key('alpaca_agreement'),
-                title: 'Alpaca Customer Agreement.pdf',
-                onTap: () => context
-                    .read<SigningAgreementBloc>()
-                    .add(const AlpacaCustomerAgreementOpened(true))),
-            _agreementCard(
-                key: const Key('asklora_agreement'),
-                title: 'Asklora Client Agreement.pdf',
-                onTap: () => context
-                    .read<SigningAgreementBloc>()
-                    .add(const AskLoraClientAgreementOpened())),
-            _boundByAlpacaAndLoraAgreement,
-            _understandOnTheAgreement,
-            _certifyNotUSCitizenAgreement,
-            _customerSignature
-          ],
-        ),
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomTextNew(
+            'Please read the 2 agreements pdf files.',
+            style:
+                AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          ViewFileButton(
+              key: const Key('alpaca_agreement'),
+              label: 'Alpaca Customer Agreement.pdf',
+              onTap: () => context
+                  .read<SigningAgreementBloc>()
+                  .add(const AlpacaCustomerAgreementOpened(true))),
+          _spaceHeight,
+          ViewFileButton(
+              key: const Key('asklora_agreement'),
+              label: 'Asklora Client Agreement.pdf',
+              onTap: () => context
+                  .read<SigningAgreementBloc>()
+                  .add(const AskLoraClientAgreementOpened())),
+          const SizedBox(
+            height: 36,
+          ),
+          _boundByAlpacaAndLoraAgreement,
+          _spaceHeight,
+          _understandOnTheAgreement,
+          _spaceHeight,
+          _certifyNotUSCitizenAgreement,
+          const SizedBox(
+            height: 45,
+          ),
+          _customerSignature
+        ],
       ),
       bottomButton: _bottomButton(context),
       progress: progress,
     );
   }
-
-  Widget _agreementCard(
-          {required String title,
-          required VoidCallback onTap,
-          required Key key}) =>
-      GestureDetector(
-        key: key,
-        onTap: onTap,
-        child: Container(
-          margin: AppValues.screenHorizontalPadding.copyWith(top: 18),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: Colors.grey)),
-          child: Row(
-            children: [
-              Icon(
-                Icons.picture_as_pdf_outlined,
-                color: Colors.grey[400]!,
-              ),
-              Expanded(
-                  child: CustomText(
-                title,
-                type: FontType.smallTextBold,
-                padding: const EdgeInsets.only(left: 14),
-              ))
-            ],
-          ),
-        ),
-      );
 
   Widget get _boundByAlpacaAndLoraAgreement =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
@@ -100,7 +85,6 @@ class BrokerAgreementScreen extends StatelessWidget {
                 checkboxKey:
                     const Key('bound_alpaca_lora_agreement_checkbox_value'),
                 key: const Key('bound_alpaca_lora_agreement_checkbox'),
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 text:
                     'I have read, understood, and agree to be bound by Alpaca Securities LLC and LORA Technologies, Limited account terms, and all other terms, disclosures and disclaimers applicable to me, as referenced in the Alpaca Customer Agreement. I also acknowledge that the Alpaca Customer Agreement contains a pre-dispute arbitration clause in Section 42.',
                 disabled: !state.isAlpacaCustomerAgreementOpened ||
@@ -123,7 +107,6 @@ class BrokerAgreementScreen extends StatelessWidget {
           builder: (context, state) => CustomCheckbox(
                 checkboxKey: const Key('understand_agreement_checkbox_value'),
                 key: const Key('understand_agreement_checkbox'),
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 text:
                     'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Application Agreement.',
                 fontHeight: 1.4,
@@ -145,7 +128,6 @@ class BrokerAgreementScreen extends StatelessWidget {
           builder: (context, state) => CustomCheckbox(
                 checkboxKey: const Key('certify_not_us_citizen_checkbox_value'),
                 key: const Key('certify_not_us_citizen_checkbox'),
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 text:
                     'I certify that I am not a US citizen, US resident alien or other US person for US tax purposes, and I am submitting the applicable Form W-8 BEN with this form to certify my foreign status and, if applicable, claim tax treaty benefits.',
                 fontHeight: 1.4,

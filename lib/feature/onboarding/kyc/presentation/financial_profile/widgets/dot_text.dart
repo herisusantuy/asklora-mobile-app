@@ -7,9 +7,13 @@ class DotText extends StatelessWidget {
   final String text;
   final Color color;
   final double fontHeight;
+  final TextStyle? style;
 
   const DotText(this.text,
-      {this.color = Colors.black, this.fontHeight = 1, Key? key})
+      {this.color = AskLoraColors.charcoal,
+      this.fontHeight = 1,
+      this.style,
+      Key? key})
       : super(key: key);
 
   @override
@@ -17,7 +21,7 @@ class DotText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 6.0 + fontHeight * 2, right: 14),
+            padding: const EdgeInsets.only(top: 8, right: 14),
             child: Icon(
               Icons.circle,
               size: 6,
@@ -27,8 +31,7 @@ class DotText extends StatelessWidget {
           Expanded(
             child: CustomTextNew(
               text,
-              style: AskLoraTextStyles.body2
-                  .copyWith(color: AskLoraColors.charcoal),
+              style: style ?? AskLoraTextStyles.body1.copyWith(color: color),
             ),
           ),
         ],

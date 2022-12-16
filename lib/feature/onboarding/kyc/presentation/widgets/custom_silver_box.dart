@@ -6,13 +6,8 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 class CustomSilverBox extends StatelessWidget {
   final String title;
   final Widget content;
-  final EdgeInsets margin;
 
-  const CustomSilverBox(
-      {this.title = '',
-      required this.content,
-      this.margin = EdgeInsets.zero,
-      Key? key})
+  const CustomSilverBox({this.title = '', required this.content, Key? key})
       : super(key: key);
 
   @override

@@ -25,15 +25,49 @@ class KycBaseForm extends StatelessWidget {
       children: [
         _header,
         Expanded(
-            child: Padding(
-          padding: AppValues.screenHorizontalPadding,
-          child: content,
-        )),
-        if (bottomButton != null)
-          Padding(
-            padding: AppValues.screenHorizontalPadding,
-            child: bottomButton!,
-          )
+          child: LayoutBuilder(
+            builder:
+                (BuildContext context, BoxConstraints viewportConstraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: viewportConstraints.maxHeight,
+                  ),
+                  child: Padding(
+                    padding: AppValues.screenHorizontalPadding,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 24.0, bottom: 43),
+                          child: content,
+                        ),
+                        if (bottomButton != null) bottomButton!
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        // SingleChildScrollView(
+        //   child: Column(
+        //     children: [
+        //       Expanded(
+        //           child: Padding(
+        //         padding: AppValues.screenHorizontalPadding,
+        //         child: content,
+        //       )),
+        //       if (bottomButton != null)
+        //         Padding(
+        //           padding: AppValues.screenHorizontalPadding,
+        //           child: bottomButton!,
+        //         )
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

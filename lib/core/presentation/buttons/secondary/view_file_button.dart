@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../../domain/pair.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../styles/asklora_colors.dart';
 import '../../../styles/asklora_text_styles.dart';
 import '../../custom_text_new.dart';
-import '../utils/button_utils.dart';
 
-class SecondaryMultipleChoiceButton extends StatelessWidget {
+class ViewFileButton extends StatelessWidget {
   final String label;
-  final ButtonSecondarySize buttonSecondarySize;
   final FontStyle fontStyle;
   final VoidCallback onTap;
-  final bool active;
   final Alignment labelAlignment;
 
-  SecondaryMultipleChoiceButton(
+  ViewFileButton(
       {this.label = '',
       required this.onTap,
       this.fontStyle = FontStyle.normal,
-      this.buttonSecondarySize = ButtonSecondarySize.big,
-      this.active = false,
       this.labelAlignment = Alignment.centerLeft,
       Key? key})
       : super(key: key);
@@ -26,35 +21,36 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
   final ButtonStyle _defaultButtonStyle = ElevatedButton.styleFrom(
       elevation: 0,
       shadowColor: Colors.transparent,
+      minimumSize: const Size(double.infinity, 55),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
       ));
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: _getSizedBoxSize.left,
+      width: double.infinity,
       child: ElevatedButton(
           style: _defaultButtonStyle.copyWith(
-              minimumSize: _getButtonMinimumSize,
-              backgroundColor: _getColor(
-                  active
-                      ? AskLoraColors.primaryGreen.withOpacity(0.1)
-                      : Colors.transparent,
+              backgroundColor: _getColor(Colors.transparent,
                   AskLoraColors.primaryGreen.withOpacity(0.2)),
               foregroundColor: _getColor(AskLoraColors.charcoal,
                   AskLoraColors.charcoal.withOpacity(0.9)),
               shape: _getBorder(
-                  color:
-                      active ? AskLoraColors.primaryGreen : AskLoraColors.gray,
+                  color: AskLoraColors.gray,
                   colorPressed: AskLoraColors.gray.withOpacity(0.9),
-                  borderWidth: active ? 3 : 1.4)),
+                  borderWidth: 1.4)),
           onPressed: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Align(
-              alignment: labelAlignment,
-              child: CustomTextNew(label, style: AskLoraTextStyles.subtitle2),
+            child: Row(
+              children: [
+                SvgPicture.asset('assets/icons/kyc/pdf.svg'),
+                const SizedBox(
+                  width: 18,
+                ),
+                CustomTextNew(label, style: AskLoraTextStyles.subtitle2),
+              ],
             ),
           )),
     );
@@ -83,25 +79,5 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
                   ? colorPressed
                   : color));
     });
-  }
-
-  MaterialStateProperty<Size?> get _getButtonMinimumSize {
-    return MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-      switch (buttonSecondarySize) {
-        case ButtonSecondarySize.small:
-          return const Size(200, 40);
-        case ButtonSecondarySize.big:
-          return const Size(double.infinity, 55);
-      }
-    });
-  }
-
-  Pair<double, double> get _getSizedBoxSize {
-    switch (buttonSecondarySize) {
-      case ButtonSecondarySize.small:
-        return Pair(200, 40);
-      case ButtonSecondarySize.big:
-        return Pair(double.infinity, 50);
-    }
   }
 }

@@ -24,13 +24,10 @@ class DisclosureSummaryScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Financial Profile',
-      content: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        child: DisclosureSummaryContent(
-          key: const Key('disclosure_summary_content'),
-          disclosureAffiliationState: disclosureAffiliationState,
-          title: 'Summary',
-        ),
+      content: DisclosureSummaryContent(
+        key: const Key('disclosure_summary_content'),
+        disclosureAffiliationState: disclosureAffiliationState,
+        title: 'Summary',
       ),
       bottomButton: _bottomButton(context),
       progress: progress,

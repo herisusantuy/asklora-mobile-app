@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:signature/signature.dart';
-
-import '../../../../../../core/presentation/custom_text.dart';
+import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/presentation/we_create/custom_text_button.dart';
-import '../../../../../../core/values/app_values.dart';
+import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../core/styles/asklora_text_styles.dart';
 
 class SignatureDrawer extends StatelessWidget {
   final SignatureController signatureController;
@@ -23,16 +24,23 @@ class SignatureDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return DottedBorder(
+      padding: EdgeInsets.zero,
+      radius: const Radius.circular(20),
+      borderType: BorderType.RRect,
+      color: AskLoraColors.gray,
+      dashPattern: const [4, 4],
+      child: Stack(
         children: [
-          const CustomText(
-            'Sign here:',
-            padding: EdgeInsets.only(bottom: 12),
-          ),
           ...initialValue.isEmpty ? _signatureDrawer : _signatureImage,
+          Positioned(
+            left: 19,
+            top: 20,
+            child: CustomTextNew(
+              'SIGN HERE',
+              style: AskLoraTextStyles.subtitleAllCap1,
+            ),
+          ),
         ],
       ),
     );
@@ -41,9 +49,12 @@ class SignatureDrawer extends StatelessWidget {
   List<Widget> get _signatureImage => [
         Center(
           child: Image.memory(base64Decode(initialValue),
-              key: const Key('customer_signature_png'), height: 200),
+              key: const Key('customer_signature_png'), height: 300),
         ),
-        Center(
+        Positioned(
+          bottom: 8,
+          left: 0,
+          right: 0,
           child: CustomTextButton(
             key: const Key('clear_signature_button'),
             onTap: onReset,
@@ -55,29 +66,34 @@ class SignatureDrawer extends StatelessWidget {
   List<Widget> get _signatureDrawer => [
         Signature(
           controller: signatureController,
-          height: 200,
-          backgroundColor: Colors.grey[300]!,
+          height: 300,
+          backgroundColor: Colors.transparent,
         ),
-        Row(
-          children: [
-            Expanded(
-              child: Center(
-                child: CustomTextButton(
-                    key: const Key('accept_signature_button'),
-                    label: 'Accept',
-                    onTap: onSubmit),
-              ),
-            ),
-            Expanded(
-              child: Center(
-                child: CustomTextButton(
-                  key: const Key('reset_signature_button'),
-                  label: 'Reset',
-                  onTap: onReset,
+        Positioned(
+          bottom: 8,
+          left: 0,
+          right: 0,
+          child: Row(
+            children: [
+              Expanded(
+                child: Center(
+                  child: CustomTextButton(
+                      key: const Key('accept_signature_button'),
+                      label: 'Accept',
+                      onTap: onSubmit),
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Center(
+                  child: CustomTextButton(
+                    key: const Key('reset_signature_button'),
+                    label: 'Reset',
+                    onTap: onReset,
+                  ),
+                ),
+              ),
+            ],
+          ),
         )
       ];
 }

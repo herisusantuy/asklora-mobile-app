@@ -73,27 +73,37 @@ class DisclosureSummaryContent extends StatelessWidget {
         ],
       );
 
+  Widget get _spaceHeightAffiliated => const SizedBox(
+        height: 10,
+      );
+
   Widget get _affiliatedQuestionWidget => Column(
         children: [
           CustomTextNew(
             'Do any of the following apply to you or a member of your immediate family ?',
             style: AskLoraTextStyles.body2.copyWith(color: AskLoraColors.gray),
           ),
-          _spaceHeight,
-          const DotText(
+          _spaceHeightAffiliated,
+          _dotText(
             'I am affiliated or work with US registered broker-dealer or FINRA.',
           ),
-          _spaceHeight,
-          const DotText(
+          _spaceHeightAffiliated,
+          _dotText(
               'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.'),
-          _spaceHeight,
-          const DotText('I am a senior political figure.'),
-          _spaceHeight,
-          const DotText(
+          _spaceHeightAffiliated,
+          _dotText('I am a senior political figure.'),
+          _spaceHeightAffiliated,
+          _dotText(
               'I am a family member or relative of a senior political figure.'),
-          _spaceHeight,
-          const DotText(
+          _spaceHeightAffiliated,
+          _dotText(
               'I am a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.'),
         ],
+      );
+
+  Widget _dotText(String text) => DotText(
+        text,
+        style: AskLoraTextStyles.body2.copyWith(color: AskLoraColors.gray),
+        color: AskLoraColors.gray,
       );
 }

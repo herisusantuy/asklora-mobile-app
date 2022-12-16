@@ -25,8 +25,7 @@ class TinScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Personal Info',
-      content: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 24),
+      content: Column(
         children: [
           CustomTextNew(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit OTP is sent to your SMS.',

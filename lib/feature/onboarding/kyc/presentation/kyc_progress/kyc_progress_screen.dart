@@ -64,7 +64,6 @@ class KycProgressScreen extends StatelessWidget {
 
   Widget get _kycSteps => CustomSilverBox(
       key: const Key('kyc_steps'),
-      margin: AppValues.screenHorizontalPadding.copyWith(top: 18),
       title: 'Get ready for AI trading.',
       content: CustomStepper(
         currentStep: currentStep,

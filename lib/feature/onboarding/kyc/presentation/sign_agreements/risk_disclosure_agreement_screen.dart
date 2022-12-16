@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/values/app_values.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
@@ -24,22 +26,33 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Sign Agreements',
-      content: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 24),
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _licenseeProfile,
-          KycSubTitle(
-            key: const Key('sub_title'),
+          const SizedBox(
+            height: 42,
+          ),
+          const KycSubTitle(
+            key: Key('sub_title'),
             subTitle: 'Risk Disclosure Statement',
           ),
-          const CustomText(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a, elementum enim a elit at sit bibendum vestibulum. Lorem pellentesque diam in neque. Nam nibh et ornare odio scelerisque. In id morbi integer orci. Donec condimentum tortor scelerisque diam. Facilisi sollicitudin elit velit, hendrerit enim. Eleifend in pharetra vel blandit pharetra vulputate odio vitae, mattis. Aliquam luctus dui convallis eget dolor sem urna enim. Odio viverra fermentum pellentesque blandit sollicitudin integer facilisis et velit. Pulvinar consectetur massa libero cras euismod. Viverra urna proin nibh nulla nibh a eu facilisis. Adipiscing nec nam tempus lacus et turpis nunc. Ornare sed risus vivamus arcu morbi diam. Eget maecenas felis ornare tincidunt urna diam purus sed. Posuere sit amet id hendrerit a. Egestas ut vitae arcu nibh est tortor sit. Ullamcorper tempus, nam habitasse pharetra. Eleifend euismod urna, sed pretium dignissim in vel faucibus bibendum. Ullamcorper non mollis ac scelerisque pharetra cras.',
-            key: Key('statements'),
-            type: FontType.smallText,
-            padding: AppValues.screenHorizontalPadding,
-            height: 1.6,
+          const SizedBox(
+            height: 24,
           ),
-          _riskDisclosureAgreement
+          CustomTextNew(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a, elementum enim a elit at sit bibendum vestibulum. Lorem pellentesque diam in neque. Nam nibh et ornare odio scelerisque. In id morbi integer orci. Donec condimentum tortor scelerisque diam. Facilisi sollicitudin elit velit, hendrerit enim. Eleifend in pharetra vel blandit pharetra vulputate odio vitae, mattis. Aliquam luctus dui convallis eget dolor sem urna enim. Odio viverra fermentum pellentesque blandit sollicitudin integer facilisis et velit. Pulvinar consectetur massa libero cras euismod. Viverra urna proin nibh nulla nibh a eu facilisis. Adipiscing nec nam tempus lacus et turpis nunc. Ornare sed risus vivamus arcu morbi diam. Eget maecenas felis ornare tincidunt urna diam purus sed. Posuere sit amet id hendrerit a. Egestas ut vitae arcu nibh est tortor sit. Ullamcorper tempus, nam habitasse pharetra. Eleifend euismod urna, sed pretium dignissim in vel faucibus bibendum. Ullamcorper non mollis ac scelerisque pharetra cras.',
+            key: const Key('statements'),
+            style:
+                AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
+          ),
+          const SizedBox(
+            height: 46,
+          ),
+          _riskDisclosureAgreement,
+          const SizedBox(
+            height: 14,
+          ),
         ],
       ),
       bottomButton: _bottomButton(context),
@@ -74,7 +87,6 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
             )
           ],
         ),
-        margin: AppValues.screenHorizontalPadding,
       );
 
   Widget get _riskDisclosureAgreement =>
@@ -86,7 +98,6 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
                 checkboxKey:
                     const Key('signing_risk_disclosure_agreement_value'),
                 key: const Key('signing_risk_disclosure_agreement'),
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
                 text:
                     'I have read, understood, and agree with the Risk Disclosure Statement',
                 fontHeight: 1.4,
