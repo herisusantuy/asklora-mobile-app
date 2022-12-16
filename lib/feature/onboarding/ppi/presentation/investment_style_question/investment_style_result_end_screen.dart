@@ -11,7 +11,7 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PpiResultScreen(
-      mEmojiText: 'Your investment style is all set!',
+      memojiText: 'Your investment style is all set!',
       additionalMessage:
           'Let’s check your personalised recommendations. You are eligible for a FREE AI trade (US\$68.00). But first, you need to create an investment account.',
       bottomButton: Padding(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
@@ -21,10 +22,9 @@ class PersonalisationResultEndScreen extends StatelessWidget {
       },
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
-        mEmojiText:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta.',
+        memojiText: 'Do you know?',
         additionalMessage:
-            '(Screen that show some kind of a result to moviate user / user feel like they get a reward after answering the ques)',
+            '(Screen that show some kind of a result to movitiate user / user feel like they get a reward after answering the ques)',
         bottomButton: PrimaryButton(
           key: const Key('next_button'),
           label: 'GOT IT',

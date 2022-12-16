@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'primary_button.dart';
 import '../we_create/custom_text_button.dart';
+import 'primary_button.dart';
 
 class ButtonPair extends StatelessWidget {
   final String primaryButtonLabel;
@@ -33,7 +33,7 @@ class ButtonPair extends StatelessWidget {
         ),
         CustomTextButton(
           key: const Key('kyc_secondary_button'),
-          margin: const EdgeInsets.only(top: 27, bottom: 35),
+          margin: const EdgeInsets.only(top: 24, bottom: 30),
           label: secondaryButtonLabel,
           onTap: secondaryButtonOnClick,
         )

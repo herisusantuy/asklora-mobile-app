@@ -14,7 +14,7 @@ void main() {
         final mockObserver = MockNavigatorObserver();
         await tester.pumpWidget(MaterialApp(
           home: PpiResultScreen(
-            mEmojiText: 'congratulations',
+            memojiText: 'congratulations',
             additionalMessage: 'additional message',
             bottomButton: bottomButton,
           ),

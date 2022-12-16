@@ -17,7 +17,7 @@ class LoraMemojiWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: [
         const Padding(
-          padding: EdgeInsets.only(top: 20, left: 0, right: 0),
+          padding: EdgeInsets.only(top: 40, left: 0, right: 0),
         ),
         Stack(
           alignment: Alignment.center,
@@ -29,6 +29,7 @@ class LoraMemojiWidget extends StatelessWidget {
         ),
         Container(
             transform: Matrix4.translationValues(0.0, -35.0, 0.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: CustomTextNew(
               text,
               style: AskLoraTextStyles.h4,

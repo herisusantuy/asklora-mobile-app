@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
-import '../../../../core/presentation/we_create/custom_app_bar.dart';
 import '../../ppi/bloc/question/question_bloc.dart';
 import '../../ppi/presentation/ppi_screen.dart';
 
@@ -15,8 +15,7 @@ class GreetingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.transparent(),
+    return CustomScaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
