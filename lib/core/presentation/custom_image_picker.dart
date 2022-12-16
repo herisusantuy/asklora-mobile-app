@@ -77,6 +77,7 @@ class CustomImagePicker extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: const Color(0xffc2d1d9),
                             image: DecorationImage(
+                                fit: BoxFit.fitWidth,
                                 image: FileImage(File(e.path ?? '/')))),
                         child: disabled
                             ? const SizedBox.shrink()
@@ -88,9 +89,17 @@ class CustomImagePicker extends StatelessWidget {
                                       onImageDeleted!(e);
                                     }
                                   },
-                                  child: const Icon(
-                                    Icons.close,
-                                    color: Colors.white,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(2.0),
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AskLoraColors.darkGray,
+                                    ),
+                                    child: const Icon(
+                                      Icons.close,
+                                      color: Colors.white,
+                                      size: 14,
+                                    ),
                                   ),
                                 )),
                       ))
@@ -105,6 +114,8 @@ class CustomImagePicker extends StatelessWidget {
 
   Widget _emptyImage({double width = double.infinity, double? height}) =>
       DottedBorder(
+          radius: const Radius.circular(4),
+          borderType: BorderType.RRect,
           color: Colors.grey,
           dashPattern: const [4, 4],
           child: Container(
@@ -124,8 +135,8 @@ class CustomImagePicker extends StatelessWidget {
                   },
                   child: const Icon(
                     Icons.add_circle_outline,
-                    size: 56,
-                    color: Colors.grey,
+                    size: 48,
+                    color: AskLoraColors.primaryGreen,
                   ),
                 ),
                 if (hintText.isNotEmpty && initialValue.isEmpty)

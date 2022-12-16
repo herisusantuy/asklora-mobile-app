@@ -38,31 +38,28 @@ class App extends StatelessWidget {
           }
         },
         child: GlobalLoaderOverlay(
-            child: MaterialApp(
-                onGenerateRoute: RouterGenerator.generateRoute,
-                title: 'Flutter Demo',
-                theme: ThemeData(
-                    primarySwatch: MaterialColor(
-                        AskLoraColors.charcoal.value, _colorCodes)),
-                home: BlocProvider(
-                    create: (_) => AppBloc(tokenRepository: TokenRepository())
-                      ..add(AppLaunched()),
-                    child: Scaffold(
-                        backgroundColor: AskLoraColors.white,
-                        body: SafeArea(
-                          child: BlocConsumer<AppBloc, AppState>(
-                            listener: (_, __) => FlutterNativeSplash.remove(),
-                            builder: (context, state) {
-                              switch (state.status) {
-                                case AppStatus.authenticated:
-                                  return const SignInSuccessScreen();
-                                case AppStatus.unauthenticated:
-                                  return const CarouselScreen();
-                                case AppStatus.unknown:
-                                  return const SizedBox();
-                              }
-                            },
-                          ),
-                        ))))));
+            child: BlocProvider(
+          create: (_) =>
+              AppBloc(tokenRepository: TokenRepository())..add(AppLaunched()),
+          child: MaterialApp(
+              onGenerateRoute: RouterGenerator.generateRoute,
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                  primarySwatch:
+                      MaterialColor(AskLoraColors.charcoal.value, _colorCodes)),
+              home: BlocConsumer<AppBloc, AppState>(
+                listener: (_, __) => FlutterNativeSplash.remove(),
+                builder: (context, state) {
+                  switch (state.status) {
+                    case AppStatus.authenticated:
+                      return const SignInSuccessScreen();
+                    case AppStatus.unauthenticated:
+                      return const CarouselScreen();
+                    case AppStatus.unknown:
+                      return const SizedBox();
+                  }
+                },
+              )),
+        )));
   }
 }

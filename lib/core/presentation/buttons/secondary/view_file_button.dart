@@ -42,7 +42,7 @@ class ViewFileButton extends StatelessWidget {
                   borderWidth: 1.4)),
           onPressed: onTap,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             child: Row(
               children: [
                 SvgPicture.asset('assets/icons/kyc/pdf.svg'),
