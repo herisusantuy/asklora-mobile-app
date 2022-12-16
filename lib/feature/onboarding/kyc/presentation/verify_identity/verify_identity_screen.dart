@@ -49,7 +49,7 @@ class VerifyIdentityScreen extends StatelessWidget {
                   .copyWith(color: AskLoraColors.charcoal),
             ),
             const SizedBox(
-              height: 51,
+              height: 42,
             ),
             _verificationSteps
           ],

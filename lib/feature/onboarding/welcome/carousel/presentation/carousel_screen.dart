@@ -8,6 +8,7 @@ import '../../../../../core/presentation/rotate_animated_text.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/values/app_values.dart';
 import '../../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../ask_name/presentation/ask_name_screen.dart';
 
@@ -22,27 +23,32 @@ class CarouselScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const SizedBox(height: 15),
-          const LocalizationToggleButton(),
-          const SizedBox(height: 10),
-          SizedBox(height: 250, child: _animatedTexts()),
-          const Expanded(child: SizedBox()),
-          PrimaryButton(
-            key: const Key('begin_on_boarding_button'),
-            label: "LET'S BEGIN",
-            onTap: () => AskNameScreen.open(context),
-          ),
-          CustomTextButton(
-            key: const Key('sign_in_button'),
-            padding: const EdgeInsets.all(16),
-            onTap: () => SignInScreen.open(context),
-            label: 'HAVE AN ACCOUNT?',
-          ),
-          const SizedBox(height: 10)
-        ]));
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+            padding: AppValues.screenHorizontalPadding,
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const SizedBox(height: 15),
+              const LocalizationToggleButton(),
+              const SizedBox(height: 10),
+              SizedBox(height: 250, child: _animatedTexts()),
+              const Expanded(child: SizedBox()),
+              PrimaryButton(
+                key: const Key('begin_on_boarding_button'),
+                label: "LET'S BEGIN",
+                onTap: () => AskNameScreen.open(context),
+              ),
+              CustomTextButton(
+                key: const Key('sign_in_button'),
+                padding: const EdgeInsets.all(16),
+                onTap: () => SignInScreen.open(context),
+                label: 'HAVE AN ACCOUNT?',
+              ),
+              const SizedBox(height: 10)
+            ])),
+      ),
+    );
   }
 
   Widget _animatedTexts() {

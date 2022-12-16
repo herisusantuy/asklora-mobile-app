@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -20,35 +19,50 @@ class KycProgressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: AppValues.screenHorizontalPadding,
-      child: ListView(
-        children: [
-          const LoraMemojiWidget(
-              text:
-                  'Open investment account and deposit are the last step before investing. '),
-          const SizedBox(
-            height: 63,
+    return Scaffold(
+      body: Padding(
+        padding: AppValues.screenHorizontalPadding,
+        child: LayoutBuilder(
+          builder: (context, constraint) => SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      const LoraMemojiWidget(
+                          text:
+                              'Open investment account and deposit are the last step before investing. '),
+                      const SizedBox(
+                        height: 63,
+                      ),
+                      _kycSteps,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _neededItems,
+                      const SizedBox(
+                        height: 57,
+                      ),
+                      CustomTextNew(
+                        'Once you started, you can always take a break and resume to the process whenever you want.',
+                        style: AskLoraTextStyles.subtitle3
+                            .copyWith(color: AskLoraColors.charcoal),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  ),
+                  _bottomButton(context),
+                ],
+              ),
+            ),
           ),
-          _kycSteps,
-          const SizedBox(
-            height: 20,
-          ),
-          _neededItems,
-          const SizedBox(
-            height: 57,
-          ),
-          CustomTextNew(
-            'Once you started, you can always take a break and resume to the process whenever you want.',
-            style: AskLoraTextStyles.subtitle3
-                .copyWith(color: AskLoraColors.charcoal),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          _bottomButton(context),
-        ],
+        ),
       ),
     );
   }
