@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../core/presentation/animated_text.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/rotate_animated_text.dart';
@@ -30,18 +31,11 @@ class CarouselScreen extends StatelessWidget {
           const SizedBox(height: 10),
           SizedBox(height: 250, child: _animatedTexts()),
           const Expanded(child: SizedBox()),
-          PrimaryButton(
-            key: const Key('begin_on_boarding_button'),
-            label: "LET'S BEGIN",
-            onTap: () => AskNameScreen.open(context),
-          ),
-          CustomTextButton(
-            key: const Key('sign_in_button'),
-            padding: const EdgeInsets.all(16),
-            onTap: () => SignInScreen.open(context),
-            label: 'HAVE AN ACCOUNT?',
-          ),
-          const SizedBox(height: 10)
+          ButtonPair(
+              primaryButtonOnClick: () => AskNameScreen.open(context),
+              secondaryButtonOnClick: () => SignInScreen.open(context),
+              primaryButtonLabel: "LET'S BEGIN",
+              secondaryButtonLabel: 'HAVE AN ACCOUNT?')
         ]));
   }
 
