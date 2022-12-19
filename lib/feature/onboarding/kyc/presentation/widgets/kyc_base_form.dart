@@ -76,8 +76,7 @@ class KycBaseForm extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 2),
                     child: CustomTextNew(
                       title,
-                     style: AskLoraTextStyles.h5,
-
+                      style: AskLoraTextStyles.h5,
                     ),
                   ),
                 )
