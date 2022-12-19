@@ -32,7 +32,7 @@ class PpiResultScreen extends StatelessWidget {
                   if (additionalMessage.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 36, vertical: 24),
+                          horizontal: 36, vertical: 0),
                       child: CustomTextNew(
                         additionalMessage,
                         style: AskLoraTextStyles.body1,

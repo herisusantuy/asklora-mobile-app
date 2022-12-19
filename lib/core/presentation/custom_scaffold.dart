@@ -1,8 +1,34 @@
 import 'package:flutter/material.dart';
 
-import 'custom_app_bar.dart';
+import '../styles/asklora_colors.dart';
 
 class CustomScaffold extends Scaffold {
-  CustomScaffold({super.key, super.body})
-      : super(extendBodyBehindAppBar: true, appBar: CustomAppBar());
+  CustomScaffold(
+      {super.key, required Widget body, bool enableBackNavigation = true})
+      : super(
+            extendBodyBehindAppBar: true,
+            body: Stack(
+              children: [
+                SafeArea(child: body),
+                SafeArea(
+                    child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0, top: 10),
+                  child: enableBackNavigation
+                      ? Builder(
+                          builder: (BuildContext context) {
+                            return IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back_ios_new_outlined,
+                                color: AskLoraColors.charcoal,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            );
+                          },
+                        )
+                      : null,
+                )),
+              ],
+            ));
 }

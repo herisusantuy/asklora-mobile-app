@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -11,7 +12,6 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/custom_silver_box.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
-import '../../../../../core/presentation/buttons/button_pair.dart';
 
 class KycProgressScreen extends StatelessWidget {
   final int currentStep;
@@ -27,9 +27,6 @@ class KycProgressScreen extends StatelessWidget {
           const LoraMemojiWidget(
               text:
                   'Open investment account and deposit are the last step before investing. '),
-          const SizedBox(
-            height: 63,
-          ),
           _kycSteps,
           const SizedBox(
             height: 20,
