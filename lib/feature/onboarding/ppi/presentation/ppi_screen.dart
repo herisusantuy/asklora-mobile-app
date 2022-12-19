@@ -140,7 +140,9 @@ class PpiScreen extends StatelessWidget {
           case QuestionPageStep.personalisationResultEnd:
             return const PersonalisationResultEndScreen();
           case QuestionPageStep.investmentStyle:
-            return const InvestmentStyleQuestionScreen();
+            return InvestmentStyleQuestionScreen(
+              initialIndex: state.investmentStyleQuestionIndex,
+            );
           case QuestionPageStep.investmentStyleResultEnd:
             return const InvestmentStyleResultEndScreen();
           default:

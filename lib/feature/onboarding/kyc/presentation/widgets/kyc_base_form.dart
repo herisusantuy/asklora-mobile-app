@@ -69,15 +69,15 @@ class KycBaseForm extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: GestureDetector(
                           onTap: onTapBack,
-                          child: const Icon(Icons.arrow_back_ios_new_rounded))),
+                          child: const Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            size: 24,
+                          ))),
                 Align(
                   alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: CustomTextNew(
-                      title,
-                      style: AskLoraTextStyles.h5,
-                    ),
+                  child: CustomTextNew(
+                    title,
+                    style: AskLoraTextStyles.h5,
                   ),
                 )
               ],

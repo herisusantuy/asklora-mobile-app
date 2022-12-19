@@ -13,6 +13,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
   final Function? onSubmit;
   final Function? onBackPressed;
   final CrossAxisAlignment crossAxisAlignment;
+  final EdgeInsets padding;
   final Widget? header;
 
   const CustomNavigationWidget(
@@ -24,6 +25,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
       this.onBackPressed,
       this.crossAxisAlignment = CrossAxisAlignment.start,
       this.header,
+      this.padding = AppValues.screenHorizontalPadding,
       Key? key})
       : super(key: key);
 
@@ -74,7 +76,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
                 ),
             Expanded(
               child: Padding(
-                padding: AppValues.screenHorizontalPadding,
+                padding: padding,
                 child: Container(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   child: child,

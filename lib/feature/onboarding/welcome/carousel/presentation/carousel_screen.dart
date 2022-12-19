@@ -23,21 +23,26 @@ class CarouselScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const SizedBox(height: 15),
-          const LocalizationToggleButton(),
-          const SizedBox(height: 10),
-          SizedBox(height: 250, child: _animatedTexts()),
-          const Expanded(child: SizedBox()),
-          ButtonPair(
-              key: const Key('carousel_button_pair'),
-              primaryButtonOnClick: () => AskNameScreen.open(context),
-              secondaryButtonOnClick: () => SignInScreen.open(context),
-              primaryButtonLabel: "LET'S BEGIN",
-              secondaryButtonLabel: 'HAVE AN ACCOUNT?')
-        ]));
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const SizedBox(height: 15),
+              const LocalizationToggleButton(),
+              const SizedBox(height: 10),
+              SizedBox(height: 250, child: _animatedTexts()),
+              const Expanded(child: SizedBox()),
+              ButtonPair(
+                  key: const Key('carousel_button_pair'),
+                  primaryButtonOnClick: () => AskNameScreen.open(context),
+                  secondaryButtonOnClick: () => SignInScreen.open(context),
+                  primaryButtonLabel: "LET'S BEGIN",
+                  secondaryButtonLabel: 'HAVE AN ACCOUNT?')
+            ])),
+      ),
+    );
   }
 
   Widget _animatedTexts() {
