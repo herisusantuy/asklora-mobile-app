@@ -69,7 +69,7 @@ class KycBaseForm extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: GestureDetector(
                           onTap: onTapBack,
-                          child: const Icon(Icons.arrow_back_rounded))),
+                          child: const Icon(Icons.arrow_back_ios_new_rounded))),
                 Align(
                   alignment: Alignment.center,
                   child: Padding(
