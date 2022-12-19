@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 
 class KycBaseForm extends StatelessWidget {
@@ -71,10 +72,13 @@ class KycBaseForm extends StatelessWidget {
                           child: const Icon(Icons.arrow_back_rounded))),
                 Align(
                   alignment: Alignment.center,
-                  child: CustomText(
-                    title,
-                    type: FontType.h5,
+                  child: Padding(
                     padding: const EdgeInsets.only(top: 2),
+                    child: CustomTextNew(
+                      title,
+                     style: AskLoraTextStyles.h5,
+
+                    ),
                   ),
                 )
               ],

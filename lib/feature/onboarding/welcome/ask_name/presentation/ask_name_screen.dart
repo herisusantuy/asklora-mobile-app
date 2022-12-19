@@ -5,6 +5,7 @@ import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/we_create/custom_centered_text_input.dart';
+import '../../../../../core/values/app_values.dart';
 import '../../greeting/greeting_screen.dart';
 import '../bloc/lora_ask_name_bloc.dart';
 
@@ -18,31 +19,33 @@ class AskNameScreen extends StatelessWidget {
     return CustomScaffold(
       body: BlocProvider(
         create: (_) => LoraAskNameBloc(),
-        child: LayoutBuilder(
-          builder: (context, constraint) => SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraint.maxHeight),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      const LoraMemojiWidget(
-                          text:
-                              "Hi! I'm Lora, your AI investment coach. What should I call you?"),
-                      CustomCenteredTextInput(
-                          key: const Key('name_input'),
-                          onChanged: (value) => context
-                              .read<LoraAskNameBloc>()
-                              .add(NameChanged(value)),
-                          hintText: 'Your Name',
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          textInputType: TextInputType.name),
-                    ],
-                  ),
-                  _nextButton,
-                ],
+        child: Padding(
+          padding: AppValues.screenHorizontalPadding,
+          child: LayoutBuilder(
+            builder: (context, constraint) => SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        const LoraMemojiWidget(
+                            text:
+                                "Hi! I'm Lora, your AI investment coach. What should I call you?"),
+                        CustomCenteredTextInput(
+                            key: const Key('name_input'),
+                            onChanged: (value) => context
+                                .read<LoraAskNameBloc>()
+                                .add(NameChanged(value)),
+                            hintText: 'Your Name',
+                            textInputType: TextInputType.name),
+                      ],
+                    ),
+                    _nextButton,
+                  ],
+                ),
               ),
             ),
           ),
@@ -53,7 +56,7 @@ class AskNameScreen extends StatelessWidget {
 
   Widget get _nextButton => BlocBuilder<LoraAskNameBloc, LoraAskNameState>(
       builder: (context, state) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 14),
+          padding: const EdgeInsets.only(top: 24, bottom: 35),
           child: PrimaryButton(
             key: const Key('next_button'),
             label: 'NEXT',
