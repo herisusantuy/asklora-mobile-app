@@ -32,6 +32,7 @@ class CarouselScreen extends StatelessWidget {
           SizedBox(height: 250, child: _animatedTexts()),
           const Expanded(child: SizedBox()),
           ButtonPair(
+              key: const Key('carousel_button_pair'),
               primaryButtonOnClick: () => AskNameScreen.open(context),
               secondaryButtonOnClick: () => SignInScreen.open(context),
               primaryButtonLabel: "LET'S BEGIN",
