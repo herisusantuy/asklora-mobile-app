@@ -41,16 +41,16 @@ class DescriptiveQuestionWidget extends StatelessWidget {
             key: const Key('question_header'),
             onTapBack: onCancel,
           ),
-          Expanded(child: LayoutBuilder(
-            builder: (context, viewportConstraints) {
-              return SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                      minHeight: viewportConstraints.maxHeight),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+          Expanded(
+              child: LayoutBuilder(builder: (context, viewportConstraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                     Column(
                       children: [
                         QuestionTitle(
@@ -69,32 +69,33 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                             textInputType: TextInputType.number),
                       ],
                     ),
-                      BlocBuilder<DescriptiveQuestionWidgetBloc,
-                          DescriptiveQuestionWidgetState>(
-                          builder: (context, state) => QuestionNavigationButtonWidget(
-                            disable: state.answer.isEmpty,
-                            key: const Key('question_navigation_button_widget'),
-                            onSubmitSuccess: onSubmitSuccess,
-                            onNext: () => context
-                                .read<UserResponseBloc>()
-                                .add(SendResponse(PpiUserResponseRequest(
-                              questionId: questionCollection.uid!,
-                              section: questionCollection.questions!.section!,
-                              types: questionCollection.questions!.types!,
-                              points: context
-                                  .read<DescriptiveQuestionWidgetBloc>()
-                                  .state
-                                  .answer,
-                            ))),
-                            onCancel: onCancel,
-                          ))
-                  ],),
+                    BlocBuilder<DescriptiveQuestionWidgetBloc,
+                            DescriptiveQuestionWidgetState>(
+                        builder: (context, state) =>
+                            QuestionNavigationButtonWidget(
+                              disable: state.answer.isEmpty,
+                              key: const Key(
+                                  'question_navigation_button_widget'),
+                              onSubmitSuccess: onSubmitSuccess,
+                              onNext: () => context
+                                  .read<UserResponseBloc>()
+                                  .add(SendResponse(PpiUserResponseRequest(
+                                    questionId: questionCollection.uid!,
+                                    section:
+                                        questionCollection.questions!.section!,
+                                    types: questionCollection.questions!.types!,
+                                    points: context
+                                        .read<DescriptiveQuestionWidgetBloc>()
+                                        .state
+                                        .answer,
+                                  ))),
+                              onCancel: onCancel,
+                            ))
+                  ],
                 ),
-              );
-            }
-          )),
-
-
+              ),
+            );
+          })),
         ],
       ),
     );

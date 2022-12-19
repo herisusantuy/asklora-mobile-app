@@ -32,42 +32,39 @@ class FinancialSituationQuestion extends StatelessWidget {
           onTapBack: onCancel,
           // questionText: questionCollection.questions!.question!,
         ),
-        Expanded(
-            child: LayoutBuilder(
-              builder: (context, viewportConstraints) {
-                return SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: viewportConstraints.maxHeight,
+        Expanded(child: LayoutBuilder(builder: (context, viewportConstraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: viewportConstraints.maxHeight,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      QuestionTitle(
+                        question: questionCollection.questions!.question!,
+                      ),
+                      _investibleLiquidAssetsDropdown,
+                      _spaceHeight,
+                      _fundingSourceDropdown,
+                      _spaceHeight,
+                      _employmentStatusDropdown,
+                      _spaceHeight,
+                      _occupationDropdown,
+                      _otherOccupationInput,
+                      _spaceHeight,
+                      _employerInput,
+                    ],
+                  ),
+                  _nextButton(),
+                ],
+              ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                   Column(
-                     children: [
-                       QuestionTitle(
-                         question: questionCollection.questions!.question!,
-                       ),
-                       _investibleLiquidAssetsDropdown,
-                       _spaceHeight,
-                       _fundingSourceDropdown,
-                       _spaceHeight,
-                       _employmentStatusDropdown,
-                       _spaceHeight,
-                       _occupationDropdown,
-                       _otherOccupationInput,
-                       _spaceHeight,
-                       _employerInput,
-                     ],
-                   ),
-                    _nextButton(),
-                  ],
-            ),
-          ),
-        );
-              }
-            )),
+          );
+        })),
       ],
     );
   }
@@ -232,14 +229,14 @@ class FinancialSituationQuestion extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.enableNextButton() != current.enableNextButton(),
         builder: (context, state) => Padding(
-          padding: const EdgeInsets.only(bottom: 24.0, top: 52),
-          child: PrimaryButton(
+              padding: const EdgeInsets.only(bottom: 24.0, top: 52),
+              child: PrimaryButton(
                 label: 'NEXT',
                 buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
                 key: const Key('question_next_button'),
                 disabled: !state.enableNextButton(),
                 onTap: onTapNext,
               ),
-        ));
+            ));
   }
 }
