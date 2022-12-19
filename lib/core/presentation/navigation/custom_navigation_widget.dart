@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../values/app_values.dart';
 import '../custom_text.dart';
 import 'bloc/navigation_bloc.dart';
 
@@ -73,7 +74,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
                 ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                padding: AppValues.screenHorizontalPadding,
                 child: Container(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   child: child,

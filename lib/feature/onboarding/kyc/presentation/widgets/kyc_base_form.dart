@@ -52,22 +52,6 @@ class KycBaseForm extends StatelessWidget {
             },
           ),
         ),
-        // SingleChildScrollView(
-        //   child: Column(
-        //     children: [
-        //       Expanded(
-        //           child: Padding(
-        //         padding: AppValues.screenHorizontalPadding,
-        //         child: content,
-        //       )),
-        //       if (bottomButton != null)
-        //         Padding(
-        //           padding: AppValues.screenHorizontalPadding,
-        //           child: bottomButton!,
-        //         )
-        //     ],
-        //   ),
-        // ),
       ],
     );
   }

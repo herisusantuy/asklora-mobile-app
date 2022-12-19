@@ -36,48 +36,65 @@ class DescriptiveQuestionWidget extends StatelessWidget {
           DescriptiveQuestionWidgetBloc(defaultAnswer: defaultAnswer),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
         children: [
           QuestionHeader(
             key: const Key('question_header'),
             onTapBack: onCancel,
           ),
-          QuestionTitle(
-            question: questionCollection.questions!.question!,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Builder(
-              builder: (context) => CustomCenteredTextInput(
-                  key: const Key('name_input'),
-                  maxLength: 2,
-                  onChanged: (value) => context
-                      .read<DescriptiveQuestionWidgetBloc>()
-                      .add(AnswerChanged(value)),
-                  hintText: '',
-                  textInputType: TextInputType.number)),
-          const Expanded(child: SizedBox()),
-          BlocBuilder<DescriptiveQuestionWidgetBloc,
-                  DescriptiveQuestionWidgetState>(
-              builder: (context, state) => QuestionNavigationButtonWidget(
-                    disable: state.answer.isEmpty,
-                    key: const Key('question_navigation_button_widget'),
-                    onSubmitSuccess: onSubmitSuccess,
-                    onNext: () => context
-                        .read<UserResponseBloc>()
-                        .add(SendResponse(PpiUserResponseRequest(
-                          questionId: questionCollection.uid!,
-                          section: questionCollection.questions!.section!,
-                          types: questionCollection.questions!.types!,
-                          points: context
-                              .read<DescriptiveQuestionWidgetBloc>()
-                              .state
-                              .answer,
-                        ))),
-                    onCancel: onCancel,
-                  ))
+          Expanded(child: LayoutBuilder(
+            builder: (context, viewportConstraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                      minHeight: viewportConstraints.maxHeight),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    Column(
+                      children: [
+                        QuestionTitle(
+                          question: questionCollection.questions!.question!,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        CustomCenteredTextInput(
+                            key: const Key('name_input'),
+                            maxLength: 2,
+                            onChanged: (value) => context
+                                .read<DescriptiveQuestionWidgetBloc>()
+                                .add(AnswerChanged(value)),
+                            hintText: 'Age',
+                            textInputType: TextInputType.number),
+                      ],
+                    ),
+                      BlocBuilder<DescriptiveQuestionWidgetBloc,
+                          DescriptiveQuestionWidgetState>(
+                          builder: (context, state) => QuestionNavigationButtonWidget(
+                            disable: state.answer.isEmpty,
+                            key: const Key('question_navigation_button_widget'),
+                            onSubmitSuccess: onSubmitSuccess,
+                            onNext: () => context
+                                .read<UserResponseBloc>()
+                                .add(SendResponse(PpiUserResponseRequest(
+                              questionId: questionCollection.uid!,
+                              section: questionCollection.questions!.section!,
+                              types: questionCollection.questions!.types!,
+                              points: context
+                                  .read<DescriptiveQuestionWidgetBloc>()
+                                  .state
+                                  .answer,
+                            ))),
+                            onCancel: onCancel,
+                          ))
+                  ],),
+                ),
+              );
+            }
+          )),
+
+
         ],
       ),
     );

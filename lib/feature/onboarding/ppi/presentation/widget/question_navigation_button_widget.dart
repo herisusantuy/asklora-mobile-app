@@ -17,7 +17,7 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
       required this.onNext,
       required this.onCancel,
       this.disable = true,
-      this.padding = const EdgeInsets.only(bottom: 24.0),
+      this.padding = const EdgeInsets.only(bottom: 35.0, top: 24),
       Key? key})
       : super(key: key);
 

@@ -15,31 +15,31 @@ class LoraMemojiWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 20.0),
-      child: Column(
+      child: Stack(
         children: [
-          Stack(
-            children: [
-              Center(
-                  child: SvgPicture.asset(
-                      'assets/images/memoji_background_green.svg')),
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.asset('assets/images/memoji.png'),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    CustomTextNew(
-                      text,
-                      style: AskLoraTextStyles.h4,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
+          Center(
+              child: SvgPicture.asset(
+                  'assets/images/memoji_background_green.svg')),
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset('assets/images/memoji.png'),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  CustomTextNew(
+                    text,
+                    style: AskLoraTextStyles.h4,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),
