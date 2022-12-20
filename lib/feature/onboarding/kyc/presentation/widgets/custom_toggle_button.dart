@@ -73,7 +73,7 @@ class CustomToggleButton extends StatelessWidget {
             borderRadius: borderRadius,
             color: selected ? AskLoraColors.charcoal : Colors.white,
           ),
-          constraints: const BoxConstraints(minHeight: 55),
+          constraints: const BoxConstraints(minHeight: 50),
           child: Center(
               child: CustomTextNew(
             choice,

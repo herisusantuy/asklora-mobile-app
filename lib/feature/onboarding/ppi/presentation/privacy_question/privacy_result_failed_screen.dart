@@ -9,7 +9,7 @@ class PrivacyResultFailedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PpiResultScreen(
-      mEmojiText:
+      memojiText:
           'I’m sorry, but….(explain the reason why they failed. e.g. too young)',
       additionalMessage: '-Reason-',
       bottomButton: Padding(

@@ -41,7 +41,12 @@ class PrimaryButton extends StatelessWidget {
       height: _getSizedBoxSize.right,
       child: ElevatedButton(
           style: _getDefaultButtonStyle,
-          onPressed: disabled ? null : onTap,
+          onPressed: () {
+            if (!disabled) {
+              FocusManager.instance.primaryFocus?.unfocus();
+              onTap();
+            }
+          },
           child: CustomTextNew(
             label,
             style: AskLoraTextStyles.button1,

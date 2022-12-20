@@ -19,7 +19,7 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
       },
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
-        mEmojiText:
+        memojiText:
             "One year older, one year wiser, you know. \n \n Ok! Let's get to know more about you!",
         bottomButton: PrimaryButton(
           key: const Key('next_button'),

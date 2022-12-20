@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
@@ -23,7 +24,7 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
       },
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
-        mEmojiText: 'Your investment style is all set!',
+        memojiText: 'Your investment style is all set!',
         additionalMessage:
             'Let’s check your personalised recommendations. You are eligible for a FREE AI trade (US\$68.00). But first, you need to create an investment account.',
         bottomButton: Padding(

@@ -5,12 +5,12 @@ import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 
 class PpiResultScreen extends StatelessWidget {
-  final String mEmojiText;
+  final String memojiText;
   final String additionalMessage;
   final Widget bottomButton;
 
   const PpiResultScreen(
-      {required this.mEmojiText,
+      {required this.memojiText,
       this.additionalMessage = '',
       required this.bottomButton,
       Key? key})
@@ -28,7 +28,7 @@ class PpiResultScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  LoraMemojiWidget(text: mEmojiText),
+                  LoraMemojiWidget(text: memojiText),
                   if (additionalMessage.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.symmetric(
