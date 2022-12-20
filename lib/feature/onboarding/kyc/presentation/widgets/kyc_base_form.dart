@@ -59,7 +59,11 @@ class KycBaseForm extends StatelessWidget {
 
   Widget get _header => Column(
         children: [
-          CustomLinearProgressIndicator(progress: progress),
+          CustomLinearProgressIndicator(
+            progress: progress,
+            padding:
+                const EdgeInsets.only(left: 10, top: 10, bottom: 5, right: 2),
+          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Stack(

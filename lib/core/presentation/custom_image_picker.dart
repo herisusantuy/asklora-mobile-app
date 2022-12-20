@@ -75,8 +75,10 @@ class CustomImagePicker extends StatelessWidget {
                         width: size,
                         height: size,
                         decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
                             color: const Color(0xffc2d1d9),
                             image: DecorationImage(
+                                fit: BoxFit.cover,
                                 image: FileImage(File(e.path ?? '/')))),
                         child: disabled
                             ? const SizedBox.shrink()
@@ -105,6 +107,8 @@ class CustomImagePicker extends StatelessWidget {
 
   Widget _emptyImage({double width = double.infinity, double? height}) =>
       DottedBorder(
+          borderType: BorderType.RRect,
+          radius: const Radius.circular(5),
           color: Colors.grey,
           dashPattern: const [4, 4],
           child: Container(

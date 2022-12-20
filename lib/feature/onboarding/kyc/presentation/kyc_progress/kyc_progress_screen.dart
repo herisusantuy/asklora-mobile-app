@@ -75,28 +75,48 @@ class KycProgressScreen extends StatelessWidget {
   Widget get _neededItems => CustomSilverBox(
       key: const Key('kyc_items_needed'),
       title: 'The items you will needs..',
-      content: Column(
-        children: ['HKID', 'Proof of residential address']
-            .map((element) => Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Row(
-                    children: [
-                      CustomTextNew(
-                        '●',
-                        style: AskLoraTextStyles.body1
-                            .copyWith(color: AskLoraColors.charcoal, height: 2),
-                      ),
-                      const SizedBox(
-                        width: 14,
-                      ),
-                      CustomTextNew(
-                        element,
-                        style: AskLoraTextStyles.body1
-                            .copyWith(color: AskLoraColors.charcoal),
-                      )
-                    ],
+      content: Column(children: [
+        _neededItem('HKID'),
+        const SizedBox(
+          height: 10,
+        ),
+        _neededItem('Proof of residential address',
+            additionalText:
+                '(We accept utility bill, bank statement, or government correspondence within the last 3 months)')
+      ]));
+
+  Widget _neededItem(String text, {String additionalText = ''}) => Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomTextNew(
+            '●',
+            style: AskLoraTextStyles.body1
+                .copyWith(color: AskLoraColors.charcoal, height: 2),
+          ),
+          const SizedBox(
+            width: 14,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomTextNew(
+                  text,
+                  style: AskLoraTextStyles.body1
+                      .copyWith(color: AskLoraColors.charcoal),
+                ),
+                if (additionalText.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2.0),
+                    child: CustomTextNew(
+                      additionalText,
+                      style: AskLoraTextStyles.body3
+                          .copyWith(color: AskLoraColors.charcoal),
+                    ),
                   ),
-                ))
-            .toList(),
-      ));
+              ],
+            ),
+          )
+        ],
+      );
 }

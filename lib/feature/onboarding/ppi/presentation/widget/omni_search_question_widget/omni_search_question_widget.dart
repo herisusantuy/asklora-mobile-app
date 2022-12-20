@@ -39,6 +39,8 @@ class OmniSearchQuestionWidget extends StatelessWidget {
       create: (_) => OmniSearchQuestionWidgetBloc(defaultAnswer: const []),
       child: BlocListener<OmniSearchQuestionWidgetBloc,
           OmniSearchQuestionWidgetState>(
+        listenWhen: (previous, current) =>
+            previous.addKeywordError != current.addKeywordError,
         listener: (context, state) {
           if (state.addKeywordError) {
             CustomSnackBar(context)
