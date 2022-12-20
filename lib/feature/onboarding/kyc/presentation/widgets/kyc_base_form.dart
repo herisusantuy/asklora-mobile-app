@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/presentation/custom_text.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 
 class KycBaseForm extends StatelessWidget {
@@ -52,29 +53,17 @@ class KycBaseForm extends StatelessWidget {
             },
           ),
         ),
-        // SingleChildScrollView(
-        //   child: Column(
-        //     children: [
-        //       Expanded(
-        //           child: Padding(
-        //         padding: AppValues.screenHorizontalPadding,
-        //         child: content,
-        //       )),
-        //       if (bottomButton != null)
-        //         Padding(
-        //           padding: AppValues.screenHorizontalPadding,
-        //           child: bottomButton!,
-        //         )
-        //     ],
-        //   ),
-        // ),
       ],
     );
   }
 
   Widget get _header => Column(
         children: [
-          CustomLinearProgressIndicator(progress: progress),
+          CustomLinearProgressIndicator(
+            progress: progress,
+            padding:
+                const EdgeInsets.only(left: 10, top: 10, bottom: 5, right: 2),
+          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Stack(
@@ -84,13 +73,15 @@ class KycBaseForm extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: GestureDetector(
                           onTap: onTapBack,
-                          child: const Icon(Icons.arrow_back_rounded))),
+                          child: const Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            size: 24,
+                          ))),
                 Align(
                   alignment: Alignment.center,
-                  child: CustomText(
+                  child: CustomTextNew(
                     title,
-                    type: FontType.h5,
-                    padding: const EdgeInsets.only(top: 2),
+                    style: AskLoraTextStyles.h5,
                   ),
                 )
               ],

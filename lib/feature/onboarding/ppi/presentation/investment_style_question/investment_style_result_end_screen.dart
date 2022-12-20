@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../kyc/presentation/kyc_screen.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
+import '../../bloc/question/question_bloc.dart';
 import '../ppi_result_screen.dart';
 
 class InvestmentStyleResultEndScreen extends StatelessWidget {
@@ -10,17 +14,26 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PpiResultScreen(
-      mEmojiText: 'Your investment style is all set!',
-      additionalMessage:
-          'Let’s check your personalised recommendations. You are eligible for a FREE AI trade (US\$68.00). But first, you need to create an investment account.',
-      bottomButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          children: [
-            _openInvestmentAccountButton(context),
-            _maybeLaterButton(context)
-          ],
+    return CustomNavigationWidget<QuestionPageStep>(
+      onBackPressed: () {
+        context
+            .read<QuestionBloc>()
+            .add(const CurrentInvestmentStylePageDecremented());
+        context.read<NavigationBloc<QuestionPageStep>>().add(const PagePop());
+      },
+      header: const SizedBox.shrink(),
+      child: PpiResultScreen(
+        mEmojiText: 'Your investment style is all set!',
+        additionalMessage:
+            'Let’s check your personalised recommendations. You are eligible for a FREE AI trade (US\$68.00). But first, you need to create an investment account.',
+        bottomButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(
+            children: [
+              _openInvestmentAccountButton(context),
+              _maybeLaterButton(context)
+            ],
+          ),
         ),
       ),
     );

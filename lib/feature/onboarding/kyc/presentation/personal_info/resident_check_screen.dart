@@ -39,7 +39,7 @@ class ResidentCheckScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 38,
+              height: 24,
             ),
             _isUnitedStatesResident,
             const SizedBox(

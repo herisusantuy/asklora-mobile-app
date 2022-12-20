@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
-import '../../../../core/presentation/we_create/custom_app_bar.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 
 class PpiResultScreen extends StatelessWidget {
@@ -19,27 +18,37 @@ class PpiResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.transparent(),
-      body: Column(
-        children: [
-          LoraMemojiWidget(text: mEmojiText),
-          if (additionalMessage.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 24),
-              child: CustomTextNew(
-                additionalMessage,
-                style: AskLoraTextStyles.body1,
-                textAlign: TextAlign.center,
+    return LayoutBuilder(builder: (context, viewportConstraints) {
+      return SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  LoraMemojiWidget(text: mEmojiText),
+                  if (additionalMessage.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 36, vertical: 0),
+                      child: CustomTextNew(
+                        additionalMessage,
+                        style: AskLoraTextStyles.body1,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                ],
               ),
-            ),
-          const Expanded(child: SizedBox()),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24.0),
-            child: bottomButton,
-          )
-        ],
-      ),
-    );
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: bottomButton,
+              )
+            ],
+          ),
+        ),
+      );
+    });
   }
 }

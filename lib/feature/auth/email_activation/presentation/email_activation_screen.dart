@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
-import '../../../../core/presentation/we_create/custom_app_bar.dart';
-import '../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../core/values/app_values.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 
 class EmailActivationScreen extends StatelessWidget {
@@ -13,37 +13,33 @@ class EmailActivationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.transparent(),
+    return CustomScaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            const Expanded(
-              child: LoraMemojiWidget(
-                  text: 'Check your email and activate your account.'),
+        padding: AppValues.screenHorizontalPadding,
+        child: LayoutBuilder(builder: (context, constraint) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const LoraMemojiWidget(
+                      text: 'Check your email and activate your account.'),
+                  ButtonPair(
+                      primaryButtonOnClick: () =>
+                          InvestmentStyleWelcomeScreen.open(context),
+                      secondaryButtonOnClick: () => Navigator.pop(context),
+                      primaryButtonLabel: 'RESEND ACTIVATION LINK',
+                      secondaryButtonLabel: 'SIGN UP AGAIN')
+                ],
+              ),
             ),
-            _resendActivationLinkButton(context),
-            _singUpAgainButton(context)
-          ],
-        ),
+          );
+        }),
       ),
     );
   }
-
-  Widget _resendActivationLinkButton(BuildContext context) => PrimaryButton(
-        key: const Key('request_otp_button'),
-        fontStyle: FontStyle.normal,
-        label: 'RESEND ACTIVATION LINK',
-        onTap: () => InvestmentStyleWelcomeScreen.open(context),
-      );
-
-  Widget _singUpAgainButton(BuildContext context) => CustomTextButton(
-        key: const Key('sign_up_again_button'),
-        margin: const EdgeInsets.only(top: 24, bottom: 24),
-        label: 'SIGN UP AGAIN',
-        onTap: () => Navigator.pop(context),
-      );
 
   static void open(BuildContext context) =>
       Navigator.of(context).pushNamed(route);

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../core/presentation/animated_text.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/rotate_animated_text.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
@@ -22,27 +24,24 @@ class CarouselScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const SizedBox(height: 15),
-          const LocalizationToggleButton(),
-          const SizedBox(height: 10),
-          SizedBox(height: 250, child: _animatedTexts()),
-          const Expanded(child: SizedBox()),
-          PrimaryButton(
-            key: const Key('begin_on_boarding_button'),
-            label: "LET'S BEGIN",
-            onTap: () => AskNameScreen.open(context),
-          ),
-          CustomTextButton(
-            key: const Key('sign_in_button'),
-            padding: const EdgeInsets.all(16),
-            onTap: () => SignInScreen.open(context),
-            label: 'HAVE AN ACCOUNT?',
-          ),
-          const SizedBox(height: 10)
-        ]));
+    return CustomScaffold(
+        enableBackNavigation: false,
+        body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const SizedBox(height: 15),
+              const LocalizationToggleButton(),
+              const SizedBox(height: 10),
+              SizedBox(height: 250, child: _animatedTexts()),
+              const Expanded(child: SizedBox()),
+              ButtonPair(
+                  key: const Key('carousel_button_pair'),
+                  primaryButtonOnClick: () => AskNameScreen.open(context),
+                  secondaryButtonOnClick: () => SignInScreen.open(context),
+                  primaryButtonLabel: "LET'S BEGIN",
+                  secondaryButtonLabel: 'HAVE AN ACCOUNT?')
+            ])));
   }
 
   Widget _animatedTexts() {
