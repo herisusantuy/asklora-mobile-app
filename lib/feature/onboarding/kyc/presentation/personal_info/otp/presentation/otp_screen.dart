@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../../../core/domain/base_response.dart';
+import '../../../../../../../core/domain/otp/verify_otp_request.dart';
 import '../../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../../../core/presentation/text_fields/otp_text_field.dart';
+import '../../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
@@ -75,7 +78,9 @@ class OtpScreen extends StatelessWidget {
                   key: const Key('request_otp_button'),
                   fontStyle: FontStyle.normal,
                   disabled: state.disableRequest,
-                  label: 'RESEND OTP CODE',
+                  label: state.disableRequest
+                      ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
+                      : 'RESEND OTP CODE',
                   onTap: () => context.read<OtpBloc>().add(OtpRequested(email)),
                 );
               }),
@@ -93,15 +98,27 @@ class OtpScreen extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.response.state != current.response.state,
         builder: (context, state) {
-          return OtpTextField(
+          return MasterTextField(
             key: const Key('otp_input'),
             initialValue: state.otp,
+            labelText: 'OTP',
+            textInputType: TextInputType.number,
+            hintText: '0000 (4 digit)',
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             errorText: state.response.state == ResponseState.error
                 ? 'The OTP is incorrect'
                 : '',
-            onSendOtpTap: () =>
-                context.read<OtpBloc>().add(OtpRequested(email)),
+            textInputFormatterList: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(4)
+            ],
+            onFieldSubmitted: (otp) => context.read<OtpBloc>().add(
+                  OtpSubmitted(VerifyOtpRequest(email, otp)),
+                ),
           );
         });
   }
+
+  String _formatTimeMMSS(int time) =>
+      '${(time ~/ 60).toString().padLeft(2, '0')}:${(time % 60).toString().padLeft(2, '0')}';
 }
