@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
+import '../../core/presentation/custom_scaffold.dart';
 import '../../core/presentation/loading/global_loader_overlay.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
@@ -38,28 +39,30 @@ class App extends StatelessWidget {
           }
         },
         child: GlobalLoaderOverlay(
-            child: BlocProvider(
-          create: (_) =>
-              AppBloc(tokenRepository: TokenRepository())..add(AppLaunched()),
-          child: MaterialApp(
-              onGenerateRoute: RouterGenerator.generateRoute,
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                  primarySwatch:
-                      MaterialColor(AskLoraColors.charcoal.value, _colorCodes)),
-              home: BlocConsumer<AppBloc, AppState>(
-                listener: (_, __) => FlutterNativeSplash.remove(),
-                builder: (context, state) {
-                  switch (state.status) {
-                    case AppStatus.authenticated:
-                      return const SignInSuccessScreen();
-                    case AppStatus.unauthenticated:
-                      return const CarouselScreen();
-                    case AppStatus.unknown:
-                      return const SizedBox();
-                  }
-                },
-              )),
-        )));
+            child: MaterialApp(
+                onGenerateRoute: RouterGenerator.generateRoute,
+                title: 'Flutter Demo',
+                theme: ThemeData(
+                    primarySwatch: MaterialColor(
+                        AskLoraColors.charcoal.value, _colorCodes)),
+                home: BlocProvider(
+                    create: (_) => AppBloc(tokenRepository: TokenRepository())
+                      ..add(AppLaunched()),
+                    child: CustomScaffold(
+                      enableBackNavigation: false,
+                      body: BlocConsumer<AppBloc, AppState>(
+                        listener: (_, __) => FlutterNativeSplash.remove(),
+                        builder: (context, state) {
+                          switch (state.status) {
+                            case AppStatus.authenticated:
+                              return const SignInSuccessScreen();
+                            case AppStatus.unauthenticated:
+                              return const CarouselScreen();
+                            case AppStatus.unknown:
+                              return const SizedBox();
+                          }
+                        },
+                      ),
+                    )))));
   }
 }

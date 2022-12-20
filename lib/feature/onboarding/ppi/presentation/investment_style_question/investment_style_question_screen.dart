@@ -19,63 +19,65 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget(
-        header: const SizedBox.shrink(),
-        child: BlocProvider(
-            create: (_) =>
-                InvestmentStyleQuestionBloc(initialIndex: initialIndex)
-                  ..add(NextQuestion()),
-            child: BlocConsumer<InvestmentStyleQuestionBloc,
-                InvestmentStyleQuestionState>(listener: (context, state) {
-              if (state is OnNextQuestion) {
-                context.read<QuestionBloc>().add(
-                    InvestmentStyleQuestionIndexChanged(
-                        state.investmentStyleQuestionIndex));
-              } else if (state is OnNextResultScreen) {
-                context.read<NavigationBloc<QuestionPageStep>>().add(
-                    const PageChanged(
-                        QuestionPageStep.investmentStyleResultEnd));
-              } else if (state is OnPreviousPage) {
-                context
-                    .read<NavigationBloc<QuestionPageStep>>()
-                    .add(const PagePop());
-              }
-            }, builder: (context, state) {
-              if (state is OnNextQuestion) {
-                QuestionCollection questionCollection = state.question;
-                switch (state.questionType) {
-                  case (QuestionType.choices):
-                    //TODO defaultChoiceIndex should be from answered question when endpoint is ready
-                    return MultipleChoiceQuestionWidget(
-                      key: Key(questionCollection.uid!),
-                      questionCollection: questionCollection,
-                      defaultChoiceIndex: -1,
-                      onSubmitSuccess: () => onSubmitSuccess(context),
-                      onCancel: () => onCancel(context),
-                    );
-                  case (QuestionType.descriptive):
-                    //TODO defaultAnswer should be from answered question when endpoint is ready
-                    return DescriptiveQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        defaultAnswer: '',
-                        questionCollection: questionCollection,
-                        onCancel: () => onCancel(context),
-                        onSubmitSuccess: () => onSubmitSuccess(context));
-                  case (QuestionType.omniSearch):
-                    return OmniSearchQuestionWidget(
-                      key: Key(questionCollection.uid!),
-                      questionCollection: questionCollection,
-                      onSubmitSuccess: () => onSubmitSuccess(context),
-                      onCancel: () => onCancel(context),
-                    );
-
-                  default:
-                    return const SizedBox.shrink();
+    return BlocProvider(
+      create: (_) => InvestmentStyleQuestionBloc(initialIndex: initialIndex)
+        ..add(NextQuestion()),
+      child: Builder(
+          builder: (context) => CustomNavigationWidget<QuestionPageStep>(
+              onBackPressed: () => onCancel(context),
+              header: const SizedBox.shrink(),
+              child: BlocConsumer<InvestmentStyleQuestionBloc,
+                  InvestmentStyleQuestionState>(listener: (context, state) {
+                if (state is OnNextQuestion) {
+                  context.read<QuestionBloc>().add(
+                      InvestmentStyleQuestionIndexChanged(
+                          state.investmentStyleQuestionIndex));
+                } else if (state is OnNextResultScreen) {
+                  context.read<NavigationBloc<QuestionPageStep>>().add(
+                      const PageChanged(
+                          QuestionPageStep.investmentStyleResultEnd));
+                } else if (state is OnPreviousPage) {
+                  context
+                      .read<NavigationBloc<QuestionPageStep>>()
+                      .add(const PagePop());
                 }
-              } else {
-                return const SizedBox.shrink();
-              }
-            })));
+              }, builder: (context, state) {
+                if (state is OnNextQuestion) {
+                  QuestionCollection questionCollection = state.question;
+                  switch (state.questionType) {
+                    case (QuestionType.choices):
+                      //TODO defaultChoiceIndex should be from answered question when endpoint is ready
+                      return MultipleChoiceQuestionWidget(
+                        key: Key(questionCollection.uid!),
+                        questionCollection: questionCollection,
+                        defaultChoiceIndex: -1,
+                        onSubmitSuccess: () => onSubmitSuccess(context),
+                        onCancel: () => onCancel(context),
+                      );
+                    case (QuestionType.descriptive):
+                      //TODO defaultAnswer should be from answered question when endpoint is ready
+                      return DescriptiveQuestionWidget(
+                          key: Key(questionCollection.uid!),
+                          defaultAnswer: '',
+                          questionCollection: questionCollection,
+                          onCancel: () => onCancel(context),
+                          onSubmitSuccess: () => onSubmitSuccess(context));
+                    case (QuestionType.omniSearch):
+                      return OmniSearchQuestionWidget(
+                        key: Key(questionCollection.uid!),
+                        questionCollection: questionCollection,
+                        onSubmitSuccess: () => onSubmitSuccess(context),
+                        onCancel: () => onCancel(context),
+                      );
+
+                    default:
+                      return const SizedBox.shrink();
+                  }
+                } else {
+                  return const SizedBox.shrink();
+                }
+              }))),
+    );
   }
 
   void onSubmitSuccess(BuildContext context) {

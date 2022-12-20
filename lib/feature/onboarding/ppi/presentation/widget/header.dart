@@ -14,7 +14,7 @@ class QuestionHeader extends StatelessWidget {
             onTap: onTapBack,
             child: const Icon(
               Icons.arrow_back_ios_new_rounded,
-              size: 20,
+              size: 24,
               color: AskLoraColors.charcoal,
             )),
       );

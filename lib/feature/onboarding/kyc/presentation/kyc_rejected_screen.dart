@@ -20,45 +20,39 @@ class KycRejectedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
+      body: Padding(
+        padding: AppValues.screenHorizontalPadding,
+        child: LayoutBuilder(builder: (context, viewportConstraints) {
           return SingleChildScrollView(
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: viewportConstraints.maxHeight,
-              ),
-              child: Padding(
-                padding: AppValues.screenHorizontalPadding,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      children: [
-                        const SizedBox(
-                          height: 69,
-                        ),
-                        const LoraMemojiWidget(
-                            text: 'Sorry ! you’re not eligible for Asklora'),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        CustomTextNew(
-                          rejectedReason,
-                          key: const Key('rejected_reason'),
-                          style: AskLoraTextStyles.body1
-                              .copyWith(color: AskLoraColors.charcoal),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                    _bottomButton(context)
-                  ],
-                ),
+              constraints:
+                  BoxConstraints(minHeight: viewportConstraints.maxHeight),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      const LoraMemojiWidget(
+                          text: 'Sorry ! you’re not eligible for Asklora'),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomTextNew(
+                        rejectedReason,
+                        key: const Key('rejected_reason'),
+                        style: AskLoraTextStyles.body1
+                            .copyWith(color: AskLoraColors.charcoal),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  _bottomButton(context)
+                ],
               ),
             ),
           );
-        },
+        }),
       ),
     );
   }

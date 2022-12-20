@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_loading_widget.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../bloc/question/question_bloc.dart';
@@ -45,14 +46,8 @@ class PpiScreen extends StatelessWidget {
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
       ],
-      child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            toolbarHeight: 0,
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-          ),
+      child: CustomScaffold(
+          enableBackNavigation: false,
           body: BlocConsumer<NavigationBloc<QuestionPageStep>,
               NavigationState<QuestionPageStep>>(
             listenWhen: (_, current) => current.lastPage == true,
@@ -140,7 +135,9 @@ class PpiScreen extends StatelessWidget {
           case QuestionPageStep.personalisationResultEnd:
             return const PersonalisationResultEndScreen();
           case QuestionPageStep.investmentStyle:
-            return const InvestmentStyleQuestionScreen();
+            return InvestmentStyleQuestionScreen(
+              initialIndex: state.investmentStyleQuestionIndex,
+            );
           case QuestionPageStep.investmentStyleResultEnd:
             return const InvestmentStyleResultEndScreen();
           default:

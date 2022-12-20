@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/values/app_values.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 
 class EmailActivationScreen extends StatelessWidget {
@@ -13,22 +14,29 @@ class EmailActivationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const LoraMemojiWidget(
-              text: 'Check your email and activate your account.'),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ButtonPair(
-                primaryButtonLabel: 'RESEND ACTIVATION LINK',
-                primaryButtonOnClick: () =>
-                    InvestmentStyleWelcomeScreen.open(context),
-                secondaryButtonOnClick: () => Navigator.pop(context),
-                secondaryButtonLabel: 'SIGN UP AGAIN',
-              )),
-          // _test(context)
-        ],
+      body: Padding(
+        padding: AppValues.screenHorizontalPadding,
+        child: LayoutBuilder(builder: (context, constraint) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const LoraMemojiWidget(
+                      text: 'Check your email and activate your account.'),
+                  ButtonPair(
+                      primaryButtonOnClick: () =>
+                          InvestmentStyleWelcomeScreen.open(context),
+                      secondaryButtonOnClick: () => Navigator.pop(context),
+                      primaryButtonLabel: 'RESEND ACTIVATION LINK',
+                      secondaryButtonLabel: 'SIGN UP AGAIN')
+                ],
+              ),
+            ),
+          );
+        }),
       ),
     );
   }

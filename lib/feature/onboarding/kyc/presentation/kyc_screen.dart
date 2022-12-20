@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/basic_information/basic_information_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
@@ -71,10 +72,22 @@ class KycScreen extends StatelessWidget {
                 signatureController: SignatureController()),
           ),
         ],
-            child: BlocListener<NavigationBloc<KycPageStep>, NavigationState>(
-                listenWhen: (_, current) => current.lastPage == true,
-                listener: (context, state) => Navigator.pop(context),
-                child: _getPages)));
+            child: Builder(builder: (context) {
+              return CustomNavigationWidget<KycPageStep>(
+                padding: EdgeInsets.zero,
+                header: const SizedBox.shrink(),
+                onBackPressed: () {
+                  context
+                      .read<NavigationBloc<KycPageStep>>()
+                      .add(const PagePop());
+                },
+                child:
+                    BlocListener<NavigationBloc<KycPageStep>, NavigationState>(
+                        listenWhen: (_, current) => current.lastPage == true,
+                        listener: (context, state) => Navigator.pop(context),
+                        child: _getPages),
+              );
+            })));
   }
 
   Widget get _getPages {

@@ -19,25 +19,31 @@ class GreetingScreen extends StatelessWidget {
     return CustomScaffold(
       body: Padding(
         padding: AppValues.screenHorizontalPadding,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            LoraMemojiWidget(
-                text:
-                    'You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy $name.'),
-            Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 40, horizontal: 14),
-                child: PrimaryButton(
-                  key: const Key('next_button'),
-                  label: 'NEXT',
-                  onTap: () => PpiScreen.open(context,
-                      arguments: Pair(
-                          QuestionPageType.privacyAndPersonalisation,
-                          QuestionPageStep.privacy)),
-                )),
-          ],
-        ),
+        child: LayoutBuilder(builder: (context, constraint) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraint.maxHeight),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  LoraMemojiWidget(
+                      text:
+                          'You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy $name.'),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 35, top: 24),
+                      child: PrimaryButton(
+                        key: const Key('next_button'),
+                        label: 'NEXT',
+                        onTap: () => PpiScreen.open(context,
+                            arguments: Pair(
+                                QuestionPageType.privacyAndPersonalisation,
+                                QuestionPageStep.privacy)),
+                      )),
+                ],
+              ),
+            ),
+          );
+        }),
       ),
     );
   }

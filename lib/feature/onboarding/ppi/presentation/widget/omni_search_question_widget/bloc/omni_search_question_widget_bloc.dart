@@ -24,7 +24,7 @@ class OmniSearchQuestionWidgetBloc
       keywords.add(event.keywordInput);
       emit(state.copyWith(keywords: keywords, keyword: ''));
     } else {
-      emit(state.copyWith(addKeywordError: true));
+      emit(state.copyWith(addKeywordError: true, keyword: ''));
     }
   }
 

@@ -20,11 +20,8 @@ void main() {
           'Show Carousel screen with localization toggle button, carousel background, onboarding button and login button',
           (WidgetTester tester) async {
         await buildCarouselScreen(tester);
-        var onBoardingButton = find.byKey(
-          const Key('begin_on_boarding_button'),
-        );
-        var signInButton = find.byKey(
-          const Key('sign_in_button'),
+        var onBoardingButtonPair = find.byKey(
+          const Key('carousel_button_pair'),
         );
 
         var localizationToggleButton = find.byKey(
@@ -32,8 +29,7 @@ void main() {
         );
 
         expect(localizationToggleButton, findsOneWidget);
-        expect(onBoardingButton, findsOneWidget);
-        expect(signInButton, findsOneWidget);
+        expect(onBoardingButtonPair, findsOneWidget);
       });
     },
   );

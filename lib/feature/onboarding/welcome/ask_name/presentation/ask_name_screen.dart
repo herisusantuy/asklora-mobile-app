@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
@@ -16,10 +17,11 @@ class AskNameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: Padding(
-        padding: AppValues.screenHorizontalPadding,
-        child: BlocProvider(
-          create: (_) => LoraAskNameBloc(),
+      enableBackNavigation: true,
+      body: BlocProvider(
+        create: (_) => LoraAskNameBloc(),
+        child: Padding(
+          padding: AppValues.screenHorizontalPadding,
           child: LayoutBuilder(
             builder: (context, constraint) => SingleChildScrollView(
               child: ConstrainedBox(
@@ -39,7 +41,6 @@ class AskNameScreen extends StatelessWidget {
                                 .read<LoraAskNameBloc>()
                                 .add(NameChanged(value)),
                             hintText: 'Your Name',
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             textInputType: TextInputType.name),
                       ],
                     ),
@@ -56,7 +57,7 @@ class AskNameScreen extends StatelessWidget {
 
   Widget get _nextButton => BlocBuilder<LoraAskNameBloc, LoraAskNameState>(
       builder: (context, state) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 14),
+          padding: const EdgeInsets.only(top: 24, bottom: 35),
           child: PrimaryButton(
             key: const Key('next_button'),
             label: 'NEXT',
