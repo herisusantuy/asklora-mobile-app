@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
-import '../../core/presentation/we_create/localization_toggle_button/bloc/localization_bloc.dart';
+import '../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 
 part 'app_event.dart';
 

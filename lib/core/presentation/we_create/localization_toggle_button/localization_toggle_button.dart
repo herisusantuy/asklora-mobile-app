@@ -4,41 +4,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../styles/asklora_colors.dart';
 import '../../custom_text.dart';
-import 'bloc/localization_bloc.dart';
 
 class LocalizationToggleButton extends StatelessWidget {
   const LocalizationToggleButton()
       : super(key: const Key('localization_toggle_button'));
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => LocalizationBloc(),
-        child: BlocProvider.value(
-            value: BlocProvider.of<AppBloc>(context),
-            child: BlocBuilder<LocalizationBloc, LocalizationState>(
-                builder: (context, state) {
-              return AnimatedToggle(
-                  localeType: state.localeType,
-                  onLanguageChange: (val) {
-                    context
-                        .read<LocalizationBloc>()
-                        .add((LocalizationChanged(localeType: val)));
-                    context.read<AppBloc>().add(AppLanguageChangeEvent(val));
-                  });
-            })));
-  }
+  Widget build(BuildContext context) => BlocProvider.value(
+      value: BlocProvider.of<AppBloc>(context),
+      child: AnimatedToggle(onLanguageChange: (val) {
+        context.read<AppBloc>().add(AppLanguageChangeEvent(val));
+      }));
 }
 
 class AnimatedToggle extends StatefulWidget {
-  const AnimatedToggle({
-    super.key,
-    required this.onLanguageChange,
-    required this.localeType,
-  });
+  const AnimatedToggle({super.key, required this.onLanguageChange});
 
   final Function(LocaleType) onLanguageChange;
-  final LocaleType localeType;
 
   @override
   State<AnimatedToggle> createState() => _AnimatedToggleState();
@@ -60,6 +42,7 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                     ? LocaleType.supportedLocales()[0]
                     : LocaleType.supportedLocales()[1];
                 widget.onLanguageChange(localeType);
+                setState(() {});
               },
               child: Container(
                   width: 110,
@@ -111,4 +94,15 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                   )))
         ]));
   }
+}
+
+class LocaleType {
+  final String languageCode;
+  final String countryCode;
+  final String label;
+
+  const LocaleType(this.languageCode, this.countryCode, this.label);
+
+  static List<LocaleType> supportedLocales() =>
+      [const LocaleType('en', 'US', 'ENG'), const LocaleType('zh', 'HK', '中')];
 }
