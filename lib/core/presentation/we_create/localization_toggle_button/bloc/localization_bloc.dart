@@ -12,6 +12,6 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
 
   void _onLocalizationChanged(
       LocalizationChanged event, Emitter<LocalizationState> emit) async {
-    emit(state.copyWith(localizationType: event.localizationType));
+    emit(state.copyWith(localeType: event.localeType));
   }
 }

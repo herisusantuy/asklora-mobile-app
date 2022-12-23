@@ -6,6 +6,7 @@ import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/we_create/custom_centered_text_input.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../../generated/l10n.dart';
 import '../../greeting/greeting_screen.dart';
 import '../bloc/lora_ask_name_bloc.dart';
 
@@ -32,15 +33,14 @@ class AskNameScreen extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        const LoraMemojiWidget(
-                            text:
-                                "Hi! I'm Lora, your AI investment coach. What should I call you?"),
+                        LoraMemojiWidget(
+                            text: S.of(context).askNameScreenPlaceholder),
                         CustomCenteredTextInput(
                             key: const Key('name_input'),
                             onChanged: (value) => context
                                 .read<LoraAskNameBloc>()
                                 .add(NameChanged(value)),
-                            hintText: 'Your Name',
+                            hintText: S.of(context).askNameScreenTextFieldHint,
                             textInputType: TextInputType.name),
                       ],
                     ),
@@ -60,7 +60,7 @@ class AskNameScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 24, bottom: 35),
           child: PrimaryButton(
             key: const Key('next_button'),
-            label: 'NEXT',
+            label: S.of(context).buttonNext,
             disabled: state.name.isEmpty,
             onTap: () => GreetingScreen.open(context, state.name),
           )));

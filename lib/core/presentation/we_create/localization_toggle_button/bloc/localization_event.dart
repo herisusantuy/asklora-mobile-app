@@ -8,6 +8,10 @@ abstract class LocalizationEvent extends Equatable {
 }
 
 class LocalizationChanged extends LocalizationEvent {
-  final LocalizationType localizationType;
-  const LocalizationChanged({required this.localizationType});
+  final LocaleType localeType;
+
+  const LocalizationChanged({required this.localeType});
+
+  @override
+  List<Object?> get props => [localeType];
 }

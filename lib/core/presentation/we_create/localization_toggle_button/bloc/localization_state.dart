@@ -1,27 +1,30 @@
 part of 'localization_bloc.dart';
 
-enum LocalizationType {
-  english('ENG'),
-  chinese('中');
+class LocaleType {
+  final String languageCode;
+  final String countryCode;
+  final String label;
 
-  final String value;
+  const LocaleType(this.languageCode, this.countryCode, this.label);
 
-  const LocalizationType(this.value);
+  static List<LocaleType> supportedLocales() =>
+      [const LocaleType('en', 'US', 'ENG'), const LocaleType('zh', 'HK', '中')];
 }
 
 class LocalizationState extends Equatable {
-  final LocalizationType localizationType;
+  final LocaleType localeType;
 
-  const LocalizationState({this.localizationType = LocalizationType.english});
+  const LocalizationState(
+      {this.localeType = const LocaleType('en', 'US', 'ENG')});
 
   @override
-  List<Object> get props => [localizationType];
+  List<Object> get props => [localeType];
 
   LocalizationState copyWith({
-    LocalizationType? localizationType,
+    LocaleType? localeType,
   }) {
     return LocalizationState(
-      localizationType: localizationType ?? this.localizationType,
+      localeType: localeType ?? this.localeType,
     );
   }
 }

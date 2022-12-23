@@ -3,9 +3,11 @@ part of 'app_bloc.dart';
 enum AppStatus { unknown, authenticated, unauthenticated }
 
 class AppState extends Equatable {
-  const AppState._({
-    this.status = AppStatus.unknown,
-  });
+  final LocaleType locale;
+
+  const AppState._(
+      {this.status = AppStatus.unknown,
+      this.locale = const LocaleType('en', 'US', 'ENG')});
 
   const AppState.unknown() : this._();
 
@@ -14,10 +16,12 @@ class AppState extends Equatable {
           status: AppStatus.authenticated,
         );
 
-  const AppState.unauthenticated() : this._(status: AppStatus.unauthenticated);
+  const AppState.unauthenticated(
+      {localeType = const LocaleType('en', 'US', 'ENG')})
+      : this._(status: AppStatus.unauthenticated, locale: localeType);
 
   final AppStatus status;
 
   @override
-  List<Object> get props => [status];
+  List<Object> get props => [status, locale];
 }

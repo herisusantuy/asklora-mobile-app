@@ -1,0 +1,29 @@
+{
+  "@@locale": "zh",
+      "buttonNext": "下一步",
+      "buttonCreateAnAccount": "建立帳戶",
+      "buttonLetsBegin": "立即開始",
+      "buttonHaveAnAccount": "已有賬戶？",
+      "carouselIntro1": "投資，一樣要 Fit！",
+      "carouselIntro2": "AI 教練指導",
+      "carouselIntro3": "個人化體驗",
+      "carouselIntro4": "AI 全自動交易",
+      "askNameScreenPlaceholder": "Hi! 我係Lora，你嘅AI投資教練， 我可以點稱呼你？",
+      "askNameScreenTextFieldHint": "你的名字",
+      "greetingScreenPlaceholder": "全新嘅投資旅程即將展開，等Asklora送你一個與別不同嘅稱號 — Sassy {name}！",
+      "@greetingScreenPlaceholder": {
+            "placeholders": {
+                    "name": {
+                        "type": "String"
+                    }
+            }
+      },
+      "ppiQuestion1": "Hi {name}! 撇除 MPFs，你有幾耐投資經驗 ？",
+      "@ppiQuestion1": {
+            "placeholders": {
+                "firstName": {
+                          "type": "String"
+                }
+            }
+      }
+}

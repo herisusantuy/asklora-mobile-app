@@ -10,6 +10,7 @@ import '../../../../../core/presentation/rotate_animated_text.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../ask_name/presentation/ask_name_screen.dart';
 
@@ -33,18 +34,18 @@ class CarouselScreen extends StatelessWidget {
               const SizedBox(height: 15),
               const LocalizationToggleButton(),
               const SizedBox(height: 10),
-              SizedBox(height: 250, child: _animatedTexts()),
+              SizedBox(height: 250, child: _animatedTexts(context)),
               const Expanded(child: SizedBox()),
               ButtonPair(
                   key: const Key('carousel_button_pair'),
                   primaryButtonOnClick: () => AskNameScreen.open(context),
                   secondaryButtonOnClick: () => SignInScreen.open(context),
-                  primaryButtonLabel: "LET'S BEGIN",
-                  secondaryButtonLabel: 'HAVE AN ACCOUNT?')
+                  primaryButtonLabel: S.of(context).buttonLetsBegin,
+                  secondaryButtonLabel: S.of(context).buttonHaveAnAccount)
             ])));
   }
 
-  Widget _animatedTexts() {
+  Widget _animatedTexts(BuildContext context) {
     return DefaultTextStyle(
         style: GoogleFonts.mulish(
             textStyle: const TextStyle(
@@ -53,9 +54,10 @@ class CarouselScreen extends StatelessWidget {
                 height: 1.1,
                 color: AskLoraColors.charcoal)),
         child: AnimatedTextKit(animatedTexts: [
-          RotateAnimatedText('Get Your Investment In Shape'),
-          RotateAnimatedText('Guide by AI Coach, Lora '),
-          RotateAnimatedText('Personalized Experience'),
+          RotateAnimatedText(S.of(context).carouselIntro1),
+          RotateAnimatedText(S.of(context).carouselIntro2),
+          RotateAnimatedText(S.of(context).carouselIntro3),
+          RotateAnimatedText(S.of(context).carouselIntro4),
         ]));
   }
 

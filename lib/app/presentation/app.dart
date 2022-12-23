@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
@@ -9,6 +10,7 @@ import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../generated/l10n.dart';
 import '../bloc/app_bloc.dart';
 
 class App extends StatelessWidget {
@@ -31,38 +33,56 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          FocusScopeNode focus = FocusScope.of(context);
-          if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
-            focus.focusedChild?.unfocus();
-          }
-        },
-        child: GlobalLoaderOverlay(
-            child: MaterialApp(
+    return GlobalLoaderOverlay(
+        child: BlocProvider(
+      create: (_) =>
+          AppBloc(tokenRepository: TokenRepository())..add(AppLaunched()),
+      child: BlocConsumer<AppBloc, AppState>(
+          listener: (_, __) => FlutterNativeSplash.remove(),
+          builder: (context, state) => GestureDetector(
+              onTap: () {
+                FocusScopeNode focus = FocusScope.of(context);
+                if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
+                  focus.focusedChild?.unfocus();
+                }
+              },
+              child: GlobalLoaderOverlay(
+                  child: MaterialApp(
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: const [
+                  Locale('en', ''),
+                  Locale.fromSubtags(
+                      languageCode: 'zh',
+                      scriptCode: 'Hant',
+                      countryCode: 'HK'),
+                ],
+                locale: Locale(state.locale.languageCode, ''),
                 onGenerateRoute: RouterGenerator.generateRoute,
                 title: 'Flutter Demo',
                 theme: ThemeData(
                     primarySwatch: MaterialColor(
                         AskLoraColors.charcoal.value, _colorCodes)),
-                home: BlocProvider(
-                    create: (_) => AppBloc(tokenRepository: TokenRepository())
-                      ..add(AppLaunched()),
-                    child: CustomScaffold(
-                      enableBackNavigation: false,
-                      body: BlocConsumer<AppBloc, AppState>(
-                        listener: (_, __) => FlutterNativeSplash.remove(),
-                        builder: (context, state) {
-                          switch (state.status) {
-                            case AppStatus.authenticated:
-                              return const SignInSuccessScreen();
-                            case AppStatus.unauthenticated:
-                              return const CarouselScreen();
-                            case AppStatus.unknown:
-                              return const SizedBox();
-                          }
-                        },
-                      ),
-                    )))));
+                home: CustomScaffold(
+                  enableBackNavigation: false,
+                  body: _getBody(state.status),
+                ),
+              )))),
+    ));
+  }
+
+  Widget _getBody(AppStatus status) {
+    switch (status) {
+      case AppStatus.authenticated:
+        return const SignInSuccessScreen();
+      case AppStatus.unauthenticated:
+        return const CarouselScreen();
+      case AppStatus.unknown:
+        return const SizedBox();
+    }
   }
 }
