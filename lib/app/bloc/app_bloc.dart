@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
+import '../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 
 part 'app_event.dart';
 
@@ -15,6 +16,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   })  : _tokenRepository = tokenRepository,
         super(const AppState.unknown()) {
     on<AppLaunched>(_onAppLaunched);
+    on<AppLanguageChangeEvent>(_onAppLanguageChangeEvent);
   }
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
@@ -23,7 +25,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     if (isTokenValid) {
       emit(const AppState.authenticated());
     } else {
-      emit(const AppState.unauthenticated());
+      emit(const AppState.unauthenticated(
+          localeType: LocaleType('en', 'US', 'ENG')));
     }
+  }
+
+  void _onAppLanguageChangeEvent(
+      AppLanguageChangeEvent event, Emitter<AppState> emit) {
+    emit(AppState.unauthenticated(localeType: event.language));
   }
 }

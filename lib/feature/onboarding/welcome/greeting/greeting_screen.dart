@@ -5,6 +5,7 @@ import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/values/app_values.dart';
+import '../../../../generated/l10n.dart';
 import '../../ppi/bloc/question/question_bloc.dart';
 import '../../ppi/presentation/ppi_screen.dart';
 
@@ -27,13 +28,12 @@ class GreetingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   LoraMemojiWidget(
-                      text:
-                          'You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy $name.'),
+                      text: S.of(context).greetingScreenPlaceholder(name)),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 35, top: 24),
                       child: PrimaryButton(
                         key: const Key('next_button'),
-                        label: 'NEXT',
+                        label: S.of(context).buttonNext,
                         onTap: () => PpiScreen.open(context,
                             arguments: Pair(
                                 QuestionPageType.privacyAndPersonalisation,

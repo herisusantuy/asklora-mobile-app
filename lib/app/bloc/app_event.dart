@@ -8,3 +8,9 @@ abstract class AppEvent extends Equatable {
 }
 
 class AppLaunched extends AppEvent {}
+
+class AppLanguageChangeEvent extends AppEvent {
+  final LocaleType language;
+
+  const AppLanguageChangeEvent(this.language);
+}
