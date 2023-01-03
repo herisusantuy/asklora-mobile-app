@@ -44,7 +44,7 @@ dependencies:
 
   country_picker:
     git:
-      url: https://github.com/asklora/flutter_country_picker.git
+      url: https://gitlab.intra.asklora.store/frontend/flutter_country_picker
       ref: master
 
 dev_dependencies:

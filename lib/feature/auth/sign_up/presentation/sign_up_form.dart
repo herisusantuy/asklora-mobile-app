@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/loading/overlay_controller_widget_extension.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';

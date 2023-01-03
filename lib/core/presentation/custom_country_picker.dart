@@ -54,6 +54,7 @@ class _CustomCountryPickerState extends State<CustomCountryPicker> {
       onTap: () {
         _focusNode.requestFocus();
         showCountryPicker(
+          searchAutofocus: true,
           context: context,
           showPhoneCode: widget.showPhoneCode,
           favorite: ['HK', 'US', 'CA', 'GB'],
