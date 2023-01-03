@@ -10,11 +10,9 @@ class LocalizationToggleButton extends StatelessWidget {
       : super(key: const Key('localization_toggle_button'));
 
   @override
-  Widget build(BuildContext context) => BlocProvider.value(
-      value: BlocProvider.of<AppBloc>(context),
-      child: AnimatedToggle(onLanguageChange: (val) {
+  Widget build(BuildContext context) => AnimatedToggle(onLanguageChange: (val) {
         context.read<AppBloc>().add(AppLanguageChangeEvent(val));
-      }));
+      });
 }
 
 class AnimatedToggle extends StatefulWidget {
