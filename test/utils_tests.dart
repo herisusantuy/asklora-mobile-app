@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/core/utils/extensions.dart';
 import 'package:asklora_mobile_app/core/utils/hkid_validation.dart';
-import 'package:asklora_mobile_app/core/utils/storage/age_validation.dart';
+import 'package:asklora_mobile_app/core/utils/age_validation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
