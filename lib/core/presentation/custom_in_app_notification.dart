@@ -38,7 +38,6 @@ class CustomInAppNotification {
   }
 
   static dismiss() async {
-    debugPrint('Krishna dismiss from custom overlay widget');
     if (!_isVisible) {
       return;
     }
