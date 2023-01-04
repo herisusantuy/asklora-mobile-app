@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
-import '../../../../core/presentation/custom_loading_widget.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
+import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../bloc/question/question_bloc.dart';
@@ -118,35 +118,39 @@ class PpiScreen extends StatelessWidget {
 
   Widget _pages(NavigationState navigationState) {
     return BlocBuilder<QuestionBloc, QuestionState>(builder: (context, state) {
-      if (state.response.state == ResponseState.success) {
-        switch (navigationState.page) {
-          case QuestionPageStep.privacy:
-            return PrivacyQuestionScreen(
-              initialIndex: state.privacyQuestionIndex,
-            );
-          case QuestionPageStep.privacyResultSuccess:
-            return const PrivacyResultSuccessScreen();
-          case QuestionPageStep.privacyResultFailed:
-            return const PrivacyResultFailedScreen();
-          case QuestionPageStep.personalisation:
-            return PersonalisationQuestionScreen(
-              initialIndex: state.personalisationQuestionIndex,
-            );
-          case QuestionPageStep.personalisationResultEnd:
-            return const PersonalisationResultEndScreen();
-          case QuestionPageStep.investmentStyle:
-            return InvestmentStyleQuestionScreen(
-              initialIndex: state.investmentStyleQuestionIndex,
-            );
-          case QuestionPageStep.investmentStyleResultEnd:
-            return const InvestmentStyleResultEndScreen();
-          default:
-            return const SizedBox.shrink();
-        }
-      } else if (state.response.state == ResponseState.loading) {
-        return const CustomLoadingWidget();
-      } else {
-        return const SizedBox.shrink();
+      switch (state.response.state) {
+        case ResponseState.loading:
+          CustomLoadingOverlay.show(context);
+          return const SizedBox.shrink();
+        case ResponseState.success:
+          CustomLoadingOverlay.dismiss();
+          switch (navigationState.page) {
+            case QuestionPageStep.privacy:
+              return PrivacyQuestionScreen(
+                initialIndex: state.privacyQuestionIndex,
+              );
+            case QuestionPageStep.privacyResultSuccess:
+              return const PrivacyResultSuccessScreen();
+            case QuestionPageStep.privacyResultFailed:
+              return const PrivacyResultFailedScreen();
+            case QuestionPageStep.personalisation:
+              return PersonalisationQuestionScreen(
+                initialIndex: state.personalisationQuestionIndex,
+              );
+            case QuestionPageStep.personalisationResultEnd:
+              return const PersonalisationResultEndScreen();
+            case QuestionPageStep.investmentStyle:
+              return InvestmentStyleQuestionScreen(
+                initialIndex: state.investmentStyleQuestionIndex,
+              );
+            case QuestionPageStep.investmentStyleResultEnd:
+              return const InvestmentStyleResultEndScreen();
+            default:
+              return const SizedBox.shrink();
+          }
+        default:
+          CustomLoadingOverlay.dismiss();
+          return const SizedBox.shrink();
       }
     });
   }

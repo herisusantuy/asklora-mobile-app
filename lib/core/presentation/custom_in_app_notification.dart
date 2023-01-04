@@ -6,18 +6,60 @@ import 'package:flutter_svg/svg.dart';
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 import 'custom_text_new.dart';
-import 'loading/overlay_controller_widget_extension.dart';
 
-class CustomInAppNotification extends StatefulWidget {
-  const CustomInAppNotification({super.key, this.message = ''});
+class CustomInAppNotification {
+  static final CustomInAppNotification _singleton =
+      CustomInAppNotification._internal();
 
-  final String message;
+  factory CustomInAppNotification() {
+    return _singleton;
+  }
 
-  @override
-  State<StatefulWidget> createState() => _CustomInAppNotificationState();
+  CustomInAppNotification._internal();
+
+  static OverlayState? overlayState;
+  static OverlayEntry? _overlayEntry;
+  static bool _isVisible = false;
+
+  static void show(BuildContext context, String message) {
+    dismiss();
+    overlayState = Overlay.of(context)!;
+
+    _overlayEntry = OverlayEntry(
+        builder: (BuildContext context) => Positioned(
+            child: DefaultTextStyle(
+                style: const TextStyle(decoration: TextDecoration.none),
+                child: CustomInAppNotificationWidget(
+                  message: message,
+                  onDismiss: () => dismiss(),
+                ))));
+    _isVisible = true;
+    overlayState?.insert(_overlayEntry!);
+  }
+
+  static dismiss() async {
+    debugPrint('Krishna dismiss from custom overlay widget');
+    if (!_isVisible) {
+      return;
+    }
+    _isVisible = false;
+    _overlayEntry?.remove();
+  }
 }
 
-class _CustomInAppNotificationState extends State<CustomInAppNotification>
+class CustomInAppNotificationWidget extends StatefulWidget {
+  const CustomInAppNotificationWidget(
+      {super.key, required this.message, this.onDismiss});
+
+  final String message;
+  final VoidCallback? onDismiss;
+
+  @override
+  State<StatefulWidget> createState() => _CustomInAppNotificationWidgetState();
+}
+
+class _CustomInAppNotificationWidgetState
+    extends State<CustomInAppNotificationWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<Offset> position;
@@ -40,9 +82,8 @@ class _CustomInAppNotificationState extends State<CustomInAppNotification>
     });
 
     controller.addStatusListener((status) {
-      if (status == AnimationStatus.dismissed) {
-        context.loaderOverlay
-            .visibleInAppNotification(inAppNotification: false);
+      if (status == AnimationStatus.dismissed && widget.onDismiss != null) {
+        widget.onDismiss!();
       }
     });
   }
