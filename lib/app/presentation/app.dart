@@ -5,7 +5,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/presentation/custom_scaffold.dart';
-import '../../core/presentation/loading/global_loader_overlay.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
@@ -33,46 +32,41 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GlobalLoaderOverlay(
-        child: BlocProvider(
-      create: (_) =>
-          AppBloc(tokenRepository: TokenRepository())..add(AppLaunched()),
-      child: BlocConsumer<AppBloc, AppState>(
-          listener: (_, __) => FlutterNativeSplash.remove(),
-          builder: (context, state) => GestureDetector(
-              onTap: () {
-                FocusScopeNode focus = FocusScope.of(context);
-                if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
-                  focus.focusedChild?.unfocus();
-                }
-              },
-              child: GlobalLoaderOverlay(
-                  child: MaterialApp(
-                localizationsDelegates: const [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: const [
-                  Locale('en', ''),
-                  Locale.fromSubtags(
-                      languageCode: 'zh',
-                      scriptCode: 'Hant',
-                      countryCode: 'HK'),
-                ],
-                locale: Locale(state.locale.languageCode, ''),
-                onGenerateRoute: RouterGenerator.generateRoute,
-                title: 'Flutter Demo',
-                theme: ThemeData(
-                    primarySwatch: MaterialColor(
-                        AskLoraColors.charcoal.value, _colorCodes)),
-                home: CustomScaffold(
-                  enableBackNavigation: false,
-                  body: _getBody(state.status),
-                ),
-              )))),
-    ));
+    return BlocProvider(
+        create: (_) =>
+            AppBloc(tokenRepository: TokenRepository())..add(AppLaunched()),
+        child: BlocConsumer<AppBloc, AppState>(
+            listener: (_, __) => FlutterNativeSplash.remove(),
+            builder: (context, state) => GestureDetector(
+                onTap: () {
+                  FocusScopeNode focus = FocusScope.of(context);
+                  if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
+                    focus.focusedChild?.unfocus();
+                  }
+                },
+                child: MaterialApp(
+                    localizationsDelegates: const [
+                      S.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: const [
+                      Locale('en', ''),
+                      Locale.fromSubtags(
+                          languageCode: 'zh',
+                          scriptCode: 'Hant',
+                          countryCode: 'HK'),
+                    ],
+                    locale: Locale(state.locale.languageCode, ''),
+                    onGenerateRoute: RouterGenerator.generateRoute,
+                    title: 'Flutter Demo',
+                    theme: ThemeData(
+                        primarySwatch: MaterialColor(
+                            AskLoraColors.charcoal.value, _colorCodes)),
+                    home: CustomScaffold(
+                        enableBackNavigation: false,
+                        body: _getBody(state.status))))));
   }
 
   Widget _getBody(AppStatus status) {
