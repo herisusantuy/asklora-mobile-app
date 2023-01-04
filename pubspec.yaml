@@ -18,7 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  flutter_native_splash: ^2.2.3+1
+  flutter_native_splash: ^2.2.16
   flutter_secure_storage: ^6.0.0
   json_annotation: ^4.5.0
   logger: any
