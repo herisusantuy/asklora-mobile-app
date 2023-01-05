@@ -10,6 +10,7 @@ class CustomDropdown extends StatefulWidget {
   final void Function()? onTap;
   final String initialValue;
   final String labelText;
+  final EdgeInsets? contentPadding;
 
   const CustomDropdown({
     Key? key,
@@ -18,6 +19,7 @@ class CustomDropdown extends StatefulWidget {
     this.labelText = '',
     required this.itemsList,
     required this.onChanged,
+    this.contentPadding,
     this.onTap,
   }) : super(key: key);
 
@@ -42,10 +44,10 @@ class _CustomDropdownState extends State<CustomDropdown> {
       onTap: widget.onTap,
       style: TextFieldStyle.valueTextStyle,
       decoration: TextFieldStyle.inputDecoration.copyWith(
-        hintText: widget.hintText,
-        labelText: widget.labelText,
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-      ),
+          hintText: widget.hintText,
+          labelText: widget.labelText,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          contentPadding: widget.contentPadding),
       borderRadius: BorderRadius.circular(5),
       items: widget.itemsList
           .map(

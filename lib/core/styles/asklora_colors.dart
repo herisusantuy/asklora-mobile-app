@@ -20,4 +20,10 @@ class AskLoraColors {
   static const charcoal = Color(0XFF232323);
   static const lightGreen = Color(0XFFF0FAF9);
   static const lightMagenta = Color(0XFFFDF4FB);
+  static const lime = Color(0XFFF5F872);
+  static const purple = Color(0XFFC29CFF);
+  static const blue = Color(0XFF7ECBDC);
+  static const darkerLime = Color(0XFFE0E32B);
+  static const darkerGreen = Color(0XFF27D7A4);
+  static const darkerPurple = Color(0XFFA479E9);
 }

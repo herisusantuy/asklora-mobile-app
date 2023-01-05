@@ -106,6 +106,10 @@ class RecommendedBot {
   @JsonKey(name: 'company_description')
   final String companyDescription;
 
+  final DateTime expiredDate;
+
+  final bool freeBot;
+
   RecommendedBot(
       this.botId,
       this.ticker,
@@ -116,7 +120,9 @@ class RecommendedBot {
       this.description,
       this.benefit,
       this.suitability,
-      this.companyDescription);
+      this.companyDescription,
+      this.expiredDate,
+      {this.freeBot = false});
 
   factory RecommendedBot.fromJson(Map<String, dynamic> json) =>
       _$RecommendedBotFromJson(json);
