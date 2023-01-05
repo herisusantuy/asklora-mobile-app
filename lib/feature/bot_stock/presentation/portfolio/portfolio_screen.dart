@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/domain/pair.dart';
@@ -14,6 +13,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../core/presentation/shimmer.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../bloc/bot_stock_bloc.dart';
 
