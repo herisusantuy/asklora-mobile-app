@@ -41,15 +41,14 @@ dependencies:
   back_button_interceptor: ^6.0.2
   onfido_sdk: ^2.0.0
 
-
   country_picker:
     git:
-      url: https://gitlab.intra.asklora.store/frontend/flutter_country_picker
+      url: git@gitlab.intra.asklora.store:frontend/flutter_country_picker.git
       ref: master
 
   asklora_mobile_chart:
     git:
-      url: https://gitlab.intra.asklora.store/frontend/asklora-mobile-charts
+      url: git@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
       ref: production
 
 dev_dependencies:
