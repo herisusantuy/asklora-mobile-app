@@ -28,7 +28,7 @@ class BotRecommendationCard extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(14, 20, 14, 11),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: botType.primaryColor),
+            color: botType.primaryBgColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

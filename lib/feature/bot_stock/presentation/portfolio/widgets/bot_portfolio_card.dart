@@ -33,7 +33,7 @@ class BotPortfolioCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(14, 20, 14, 11),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: botType.primaryColor),
+                color: botType.primaryBgColor),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,7 +72,7 @@ class BotPortfolioCard extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                   decoration: BoxDecoration(
-                      color: botType.secondaryColor,
+                      color: botType.secondaryBgColor,
                       borderRadius: BorderRadius.circular(4)),
                   child: Row(
                     children: [
@@ -88,7 +88,8 @@ class BotPortfolioCard extends StatelessWidget {
                       Expanded(
                         child: CustomTextNew(
                           expiredDayLeft.right,
-                          style: AskLoraTextStyles.subtitle4,
+                          style: AskLoraTextStyles.subtitle4
+                              .copyWith(color: botType.expiredTextColor),
                           maxLines: 2,
                           ellipsis: true,
                         ),
