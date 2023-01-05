@@ -4,9 +4,13 @@ import '../styles/asklora_colors.dart';
 
 class CustomScaffold extends Scaffold {
   CustomScaffold(
-      {super.key, required Widget body, bool enableBackNavigation = true})
+      {super.key,
+      required Widget body,
+      bool enableBackNavigation = true,
+      super.bottomNavigationBar})
       : super(
             extendBodyBehindAppBar: true,
+            extendBody: true,
             body: Stack(
               children: [
                 SafeArea(child: body),

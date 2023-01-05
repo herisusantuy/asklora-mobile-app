@@ -56,3 +56,11 @@ extension ExtraPadding on BuildContext {
         bottom: bottomPadding,
       ));
 }
+
+extension StringExtensions on String {
+  String get imagePath => 'assets/images/$this';
+
+  String get iconPath => 'assets/icons/$this';
+
+  String get svgIconPath => 'assets/icons/$this.svg';
+}
