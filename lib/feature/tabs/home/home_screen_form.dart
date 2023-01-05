@@ -54,7 +54,8 @@ class HomeScreenForm extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: 300, width: 300,
+                  height: 300,
+                  width: 300,
                   child:
                       RadarChart(ticks: ticks, features: features, data: data),
                 ),
