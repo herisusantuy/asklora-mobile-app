@@ -13,7 +13,37 @@ class BotPortfolioList extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.botPortfolioResponse.state !=
               current.botPortfolioResponse.state,
-          builder: (context, state) => Wrap(
+          builder: (context, state) {
+            if (state.botPortfolioResponse.state == ResponseState.error) {
+              return LoraPopUpMessage(
+                backgroundColor: AskLoraColors.charcoal,
+                children: [
+                  CustomTextNew(
+                    'No traded Botstocks.',
+                    style: AskLoraTextStyles.h4
+                        .copyWith(color: AskLoraColors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  CustomTextNew(
+                    'You can manage all your investments here after you start trading. Create an account and start trading.',
+                    style: AskLoraTextStyles.body2
+                        .copyWith(color: AskLoraColors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  PrimaryButton(
+                      buttonPrimaryType: ButtonPrimaryType.solidGreen,
+                      label: 'CREATE AN ACCOUNT',
+                      onTap: () {})
+                ],
+              );
+            } else {
+              return Wrap(
                 spacing: _spacing,
                 runSpacing: _runSpacing,
                 children: defaultRecommendedBots
@@ -29,5 +59,7 @@ class BotPortfolioList extends StatelessWidget {
                             recommendedBot: e,
                           ))
                     .toList(),
-              ));
+              );
+            }
+          });
 }

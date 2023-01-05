@@ -13,12 +13,14 @@ import '../../../../../../core/presentation/text_fields/style/text_field_style.d
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
+import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../bloc/bot_stock_bloc.dart';
 
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/custom_base_silver_box.dart';
+import '../widgets/lora_popup_message.dart';
 import '../widgets/pair_column_text.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
 
@@ -27,6 +29,8 @@ part 'widgets/bot_portfolio_card.dart';
 part 'widgets/bot_portfolio_card_shimmer.dart';
 
 part 'widgets/bot_portfolio_list.dart';
+
+part 'widgets/bot_portfolio_filter.dart';
 
 class PortfolioScreen extends StatelessWidget {
   static const String route = '/portfolio_screen';
@@ -50,35 +54,20 @@ class PortfolioScreen extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              ..._botFilter,
-              const SizedBox(
-                height: 30,
+              CustomTextNew(
+                'Your Botstocks',
+                style: AskLoraTextStyles.h2
+                    .copyWith(color: AskLoraColors.charcoal),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              const BotPortfolioFilter(),
               const BotPortfolioList(),
             ],
           )),
     );
   }
-
-  List<Widget> get _botFilter => [
-        CustomTextNew(
-          'Your Botstocks',
-          style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Builder(
-            builder: (context) => CustomDropdown(
-                contentPadding:
-                    TextFieldStyle.contentPadding.copyWith(top: 12, bottom: 12),
-                hintText: 'All Botstocks',
-                itemsList: BotStockFilter.values.map((e) => e.name).toList(),
-                onChanged: (value) => context.read<BotStockBloc>().add(
-                    FetchBotPortfolio(
-                        botStockFilter: BotStockFilter.values
-                            .firstWhere((element) => element.name == value))))),
-      ];
 
   List<Widget> get _botStockDetail => [
         SafeArea(
