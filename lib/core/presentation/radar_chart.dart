@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-import 'dart:math' show pi, cos, sin;
+import 'dart:math' show cos, pi, pow, sin, sqrt;
 
 import 'package:flutter/material.dart';
 
@@ -18,6 +18,7 @@ class RadarChart extends StatefulWidget {
   final TextStyle ticksTextStyle;
   final TextStyle featuresTextStyle;
   final Color outlineColor;
+  final Color backgroundColor;
   final Color axisColor;
   final List<Color> graphColors;
   final int sides;
@@ -31,6 +32,7 @@ class RadarChart extends StatefulWidget {
     this.ticksTextStyle = const TextStyle(color: Colors.grey, fontSize: 12),
     this.featuresTextStyle = const TextStyle(color: Colors.black, fontSize: 16),
     this.outlineColor = Colors.black,
+    this.backgroundColor = Colors.white,
     this.axisColor = Colors.grey,
     this.graphColors = defaultGraphColors,
     this.sides = 0,
@@ -118,10 +120,11 @@ class _RadarChartState extends State<RadarChart>
           widget.ticksTextStyle,
           widget.featuresTextStyle,
           widget.outlineColor,
+          widget.backgroundColor,
           widget.axisColor,
           widget.graphColors,
           widget.sides,
-          this.fraction),
+          fraction),
     );
   }
 
@@ -140,6 +143,7 @@ class RadarChartPainter extends CustomPainter {
   final TextStyle ticksTextStyle;
   final TextStyle featuresTextStyle;
   final Color outlineColor;
+  final Color backgroundColor;
   final Color axisColor;
   final List<Color> graphColors;
   final int sides;
@@ -153,6 +157,7 @@ class RadarChartPainter extends CustomPainter {
     this.ticksTextStyle,
     this.featuresTextStyle,
     this.outlineColor,
+    this.backgroundColor,
     this.axisColor,
     this.graphColors,
     this.sides,
@@ -187,6 +192,59 @@ class RadarChartPainter extends CustomPainter {
     return path;
   }
 
+  void _drawDashedLine(double dashLength, double dashSpace, Offset firstOffset,
+      Offset secondOffset, Canvas canvas, Size size, Paint paint) {
+    var startOffset = firstOffset;
+
+    var intervals = (_getDirectionVector(firstOffset, secondOffset).length /
+            (dashLength + dashSpace))
+        .round();
+
+    for (var i = 0; i < intervals; i++) {
+      var endOffset = _getNextOffset(startOffset, secondOffset, dashLength);
+
+      /// Draw a small line.
+      canvas.drawLine(startOffset, endOffset, paint);
+
+      /// Update the starting offset.
+      startOffset = _getNextOffset(endOffset, secondOffset, dashSpace);
+    }
+  }
+
+  Offset _getNextOffset(
+    Offset firstOffset,
+    Offset secondOffset,
+    double smallVectorLength,
+  ) {
+    var directionVector = _getDirectionVector(firstOffset, secondOffset);
+
+    var rescaleFactor = smallVectorLength / directionVector.length;
+    if (rescaleFactor.isNaN || rescaleFactor.isInfinite) {
+      rescaleFactor = 1;
+    }
+
+    var rescaledVector = Offset(directionVector.vector.dx * rescaleFactor,
+        directionVector.vector.dy * rescaleFactor);
+
+    var newOffset = Offset(
+        firstOffset.dx + rescaledVector.dx, firstOffset.dy + rescaledVector.dy);
+
+    return newOffset;
+  }
+
+  DirectionVector _getDirectionVector(Offset firstVector, Offset secondVector) {
+    var directionVector = Offset(
+        secondVector.dx - firstVector.dx, secondVector.dy - firstVector.dy);
+
+    var directionVectorLength =
+        sqrt(pow(directionVector.dx, 2) + pow(directionVector.dy, 2));
+
+    return DirectionVector(
+      vector: directionVector,
+      length: directionVectorLength,
+    );
+  }
+
   @override
   void paint(Canvas canvas, Size size) {
     final centerX = size.width / 2.0;
@@ -199,7 +257,12 @@ class RadarChartPainter extends CustomPainter {
     var outlinePaint = Paint()
       ..color = outlineColor
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0
+      ..strokeWidth = 4.0
+      ..isAntiAlias = true;
+
+    var backgroundPaint = Paint()
+      ..color = backgroundColor
+      ..style = PaintingStyle.fill
       ..isAntiAlias = true;
 
     var ticksPaint = Paint()
@@ -208,10 +271,12 @@ class RadarChartPainter extends CustomPainter {
       ..strokeWidth = 1.0
       ..isAntiAlias = true;
 
-    canvas.drawPath(variablePath(size, radius, this.sides), outlinePaint);
+    canvas.drawPath(variablePath(size, radius, sides), outlinePaint);
+
+    canvas.drawPath(variablePath(size, radius, sides), backgroundPaint);
     // Painting the circles and labels for the given ticks (could be auto-generated)
     // The last tick is ignored, since it overlaps with the feature label
-    var tickDistance = radius / (ticks.length);
+    //var tickDistance = radius / (ticks.length);
     var tickLabels = reverseAxis ? ticks.reversed.toList() : ticks;
 
     if (reverseAxis) {
@@ -228,17 +293,17 @@ class RadarChartPainter extends CustomPainter {
             reverseAxis ? 1 : 0, reverseAxis ? ticks.length : ticks.length - 1)
         .asMap()
         .forEach((index, tick) {
-      var tickRadius = tickDistance * (index + 1);
+      //var tickRadius = tickDistance * (index + 1);
 
-      canvas.drawPath(variablePath(size, tickRadius, this.sides), ticksPaint);
+      //canvas.drawPath(variablePath(size, tickRadius, this.sides), ticksPaint);
 
-      TextPainter(
-        text: TextSpan(text: tick.toString(), style: ticksTextStyle),
-        textDirection: TextDirection.ltr,
-      )
-        ..layout(minWidth: 0, maxWidth: size.width)
-        ..paint(canvas,
-            Offset(centerX, centerY - tickRadius - ticksTextStyle.fontSize!));
+      // TextPainter(
+      //   text: TextSpan(text: tick.toString(), style: ticksTextStyle),
+      //   textDirection: TextDirection.ltr,
+      // )
+      //   ..layout(minWidth: 0, maxWidth: size.width)
+      //   ..paint(canvas,
+      //       Offset(centerX, centerY - tickRadius - ticksTextStyle.fontSize!));
     });
 
     // Painting the axis for each given feature
@@ -251,7 +316,10 @@ class RadarChartPainter extends CustomPainter {
       var featureOffset =
           Offset(centerX + radius * xAngle, centerY + radius * yAngle);
 
-      canvas.drawLine(centerOffset, featureOffset, ticksPaint);
+      //canvas.drawLine(centerOffset, featureOffset, ticksPaint);
+      //paint dashed line ticks
+      _drawDashedLine(
+          3, 3, centerOffset, featureOffset, canvas, size, ticksPaint);
 
       var featureLabelFontHeight = featuresTextStyle.fontSize;
       var labelYOffset = yAngle < 0 ? -featureLabelFontHeight! : 0;
@@ -270,7 +338,7 @@ class RadarChartPainter extends CustomPainter {
     data.asMap().forEach((index, graph) {
       var graphPaint = Paint()
         ..color = graphColors[index % graphColors.length].withOpacity(0.3)
-        ..style = PaintingStyle.fill;
+        ..style = PaintingStyle.stroke;
 
       var graphOutlinePaint = Paint()
         ..color = graphColors[index % graphColors.length]
@@ -288,8 +356,14 @@ class RadarChartPainter extends CustomPainter {
         path.moveTo(centerX, centerY - scaledPoint);
       }
 
+      var pointerPaint = Paint()
+        ..color = Colors.black
+        ..style = PaintingStyle.fill
+        ..isAntiAlias = true;
+
+      List<Offset> circleOffset = [];
       graph.asMap().forEach((index, point) {
-        if (index == 0) return;
+        //if (index == 0) return;
 
         var xAngle = cos(angle * index - pi / 2);
         var yAngle = sin(angle * index - pi / 2);
@@ -302,11 +376,16 @@ class RadarChartPainter extends CustomPainter {
           path.lineTo(
               centerX + scaledPoint * xAngle, centerY + scaledPoint * yAngle);
         }
+        circleOffset.add(Offset(
+            centerX + scaledPoint * xAngle, centerY + scaledPoint * yAngle));
       });
 
       path.close();
       canvas.drawPath(path, graphPaint);
       canvas.drawPath(path, graphOutlinePaint);
+      for (var element in circleOffset) {
+        canvas.drawCircle(element, 6, pointerPaint);
+      }
     });
   }
 
@@ -314,4 +393,14 @@ class RadarChartPainter extends CustomPainter {
   bool shouldRepaint(RadarChartPainter oldDelegate) {
     return oldDelegate.fraction != fraction;
   }
+}
+
+class DirectionVector {
+  final Offset vector;
+  final double length;
+
+  const DirectionVector({
+    required this.vector,
+    required this.length,
+  });
 }

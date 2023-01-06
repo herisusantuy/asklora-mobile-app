@@ -63,7 +63,7 @@ class OnboardingStatus extends StatelessWidget {
             ),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: getIntersectContainer)
+                children: getIntersectContainer),
           ],
         ),
         const SizedBox(
@@ -74,7 +74,7 @@ class OnboardingStatus extends StatelessWidget {
           onTap: onTap,
           intersectCount: intersectCount,
           subTitle: subTitle,
-        )
+        ),
       ],
     );
   }
