@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/radar_chart.dart';
+import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
+import 'widgets/onboarding_status.dart';
 
 class HomeScreenForm extends StatelessWidget {
   const HomeScreenForm({super.key});
@@ -11,10 +12,9 @@ class HomeScreenForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var ticks = [7, 14, 21, 28, 35];
-    var features = ["AA", "BB", "CC", "DD", "EE", "FF", "GG", "HH"];
+    var features = ['Risk Tolerance', 'Patient', 'Detailed'];
     var data = [
-      [10.0, 20, 28, 5, 16, 15, 17, 6],
-      [14.5, 1, 4, 14, 23, 10, 6, 19]
+      [10.0, 20, 28]
     ];
     double numberOfFeatures = 3;
 
@@ -35,28 +35,25 @@ class HomeScreenForm extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 const SizedBox(height: 100),
-                CustomTextNew(
-                  'START INVESTING',
-                  style: AskLoraTextStyles.h4Italic,
-                ),
+                OnboardingStatus(
+                    title: 'START INVESTING',
+                    subTitle: 'Create an account',
+                    onTap: () {},
+                    progress: 0.2),
                 Container(
-                  margin: const EdgeInsets.symmetric(vertical: 20),
-                  width: double.infinity,
-                  height: 10,
-                  child: const ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    child: LinearProgressIndicator(
-                      value: 0.7,
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(Color(0xff00ff00)),
-                      backgroundColor: Color(0xffD6D6D6),
-                    ),
+                  height: 300,
+                  width: 300,
+                  child: RadarChart(
+                    backgroundColor: AskLoraColors.whiteSmoke,
+                    ticks: ticks,
+                    features: features,
+                    data: data,
+                    featuresTextStyle: AskLoraTextStyles.subtitle2
+                        .copyWith(color: AskLoraColors.charcoal),
+                    axisColor: AskLoraColors.gray,
+                    outlineColor: AskLoraColors.primaryGreen,
+                    graphColors: [AskLoraColors.primaryGreen],
                   ),
-                ),
-                Container(
-                  height: 300, width: 300,
-                  child:
-                      RadarChart(ticks: ticks, features: features, data: data),
                 ),
                 /*Row(
                   mainAxisSize: MainAxisSize.max,
