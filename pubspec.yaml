@@ -46,10 +46,10 @@ dependencies:
       url: git@gitlab.intra.asklora.store:frontend/flutter_country_picker.git
       ref: master
 
-#  asklora_mobile_chart:
-#    git:
-#      url: git@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
-#      ref: production
+  asklora_mobile_chart:
+    git:
+      url: git@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
+      ref: production
 
 dev_dependencies:
   build_runner: ^2.1.11
