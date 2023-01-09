@@ -21,9 +21,9 @@ test_echo:
     - pushes
 
 before_script:
- - mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
- - ssh-keyscan -H gitlab.intra.asklora.store >> ~/.ssh/known_hosts
- - chmod 644 ~/.ssh/known_hosts
+ - git config --global url."https://ACvUMgb_D_yHAHjMUDtQ:${CI_JOB_TOKEN}@gitlab.intra.asklora.store/"
+#  - mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
+#  - ssh-keyscan -H gitlab.intra.asklora.store >> ~/.ssh/known_hosts
  - flutter clean
  - flutter pub get
 
