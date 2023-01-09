@@ -28,17 +28,12 @@ before_script:
  - eval $(ssh-agent -s)
   # add ssh key stored in SSH_PRIVATE_KEY variable to the agent store
  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+ - ssh-add <(echo "$SSH_PRIVATE_KEY2")
   # disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks)
   # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
  - mkdir -p ~/.ssh
  - chmod 700 ~/.ssh
  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-  # try to connect to GitLab.com
- - ssh git@gitlab.intra.asklora.store
-
-  # try to clone yourself. A *PUBLIC* key paired to the SSH_PRIVATE_KEY was added as deploy key to this repository
- - git clone git@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
-
 
  - flutter clean
  - flutter pub get
