@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 enum FontType {
   highlight,
@@ -139,14 +138,13 @@ class CustomText extends StatelessWidget {
       margin: margin,
       child: Text(
         text,
-        style: GoogleFonts.mulish(
-            textStyle: TextStyle(
-                color: color,
-                fontSize: fontType,
-                fontWeight: fontWeight,
-                decoration: decoration,
-                height: height,
-                fontStyle: fontStyle)),
+        style: TextStyle(
+            color: color,
+            fontSize: fontType,
+            fontWeight: fontWeight,
+            decoration: decoration,
+            height: height,
+            fontStyle: fontStyle),
         overflow: ellipsis ? TextOverflow.ellipsis : null,
         textAlign: textAlign,
         maxLines: maxLines,

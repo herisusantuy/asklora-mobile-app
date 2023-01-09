@@ -98,9 +98,16 @@ class LocaleType {
   final String languageCode;
   final String countryCode;
   final String label;
+  final String fontType;
 
-  const LocaleType(this.languageCode, this.countryCode, this.label);
+  const LocaleType(
+      this.languageCode, this.countryCode, this.label, this.fontType);
 
-  static List<LocaleType> supportedLocales() =>
-      [const LocaleType('en', 'US', 'ENG'), const LocaleType('zh', 'HK', '中')];
+  static List<LocaleType> supportedLocales() => [
+        const LocaleType('en', 'US', 'ENG', 'Mulish'),
+        const LocaleType('zh', 'HK', '中', 'NotoSansTC')
+      ];
+
+  static LocaleType defaultFont() =>
+      const LocaleType('en', 'US', 'ENG', 'Mulish');
 }

@@ -25,8 +25,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     if (isTokenValid) {
       emit(const AppState.authenticated());
     } else {
-      emit(const AppState.unauthenticated(
-          localeType: LocaleType('en', 'US', 'ENG')));
+      emit(AppState.unauthenticated(localeType: LocaleType.defaultFont()));
     }
   }
 

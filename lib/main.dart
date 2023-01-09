@@ -22,7 +22,11 @@ main() async {
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('google_fonts/OFL.txt');
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+
+    final chineseFontLicense = await rootBundle.loadString('google_fonts/OFL-NotoSansTC.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], chineseFontLicense);
   });
+
 
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

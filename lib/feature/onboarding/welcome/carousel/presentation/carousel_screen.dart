@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../core/presentation/animated_text.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -10,6 +9,7 @@ import '../../../../../core/presentation/rotate_animated_text.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../ask_name/presentation/ask_name_screen.dart';
@@ -47,12 +47,7 @@ class CarouselScreen extends StatelessWidget {
 
   Widget _animatedTexts(BuildContext context) {
     return DefaultTextStyle(
-        style: GoogleFonts.mulish(
-            textStyle: const TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 42,
-                height: 1.1,
-                color: AskLoraColors.charcoal)),
+        style: AskLoraTextStyles.h1.copyWith(color: AskLoraColors.charcoal),
         child: AnimatedTextKit(animatedTexts: [
           RotateAnimatedText(S.of(context).carouselIntro1),
           RotateAnimatedText(S.of(context).carouselIntro2),
