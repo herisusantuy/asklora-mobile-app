@@ -3,28 +3,34 @@ import 'custom_text_new.dart';
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 
-class CustomSilverBox extends StatelessWidget {
-  final String title;
+class RoundColoredBox extends StatelessWidget {
+  final String? title;
   final Widget content;
+  final EdgeInsets padding;
+  final Color backgroundColor;
 
-  const CustomSilverBox({this.title = '', required this.content, Key? key})
+  const RoundColoredBox(
+      {this.backgroundColor = AskLoraColors.whiteSmoke,
+      this.title,
+      required this.content,
+      this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      padding: padding,
       decoration: BoxDecoration(
-          color: AskLoraColors.whiteSmoke,
-          borderRadius: BorderRadius.circular(20)),
+          color: backgroundColor, borderRadius: BorderRadius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (title.isNotEmpty)
+          if (title != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: CustomTextNew(
-                title,
+                title!,
                 style: AskLoraTextStyles.h5,
               ),
             ),

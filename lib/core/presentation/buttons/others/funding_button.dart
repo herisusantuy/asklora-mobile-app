@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../../styles/asklora_colors.dart';
 
-enum ButtonOthersType { fund, withdraw }
+enum FundingType { fund, withdraw }
 
-class OthersButton extends StatelessWidget {
-  final ButtonOthersType buttonOthersType;
+class FundingButton extends StatelessWidget {
+  final FundingType fundingType;
   final VoidCallback onTap;
   final bool disabled;
 
-  OthersButton(
-      {required this.buttonOthersType,
+  FundingButton(
+      {required this.fundingType,
       required this.onTap,
       this.disabled = false,
       Key? key})
@@ -28,7 +28,7 @@ class OthersButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final foregroundColor = disabled
         ? AskLoraColors.darkGray
-        : buttonOthersType == ButtonOthersType.fund
+        : fundingType == FundingType.fund
             ? AskLoraColors.primaryGreen
             : AskLoraColors.primaryMagenta;
 
@@ -53,7 +53,7 @@ class OthersButton extends StatelessWidget {
                 width: 3,
               ),
               Icon(
-                buttonOthersType == ButtonOthersType.fund
+                fundingType == FundingType.fund
                     ? Icons.arrow_downward_rounded
                     : Icons.arrow_upward_rounded,
                 color: foregroundColor,
@@ -65,14 +65,14 @@ class OthersButton extends StatelessWidget {
   }
 
   ButtonStyle get _getDefaultButtonStyle {
-    switch (buttonOthersType) {
-      case ButtonOthersType.fund:
+    switch (fundingType) {
+      case FundingType.fund:
         return _defaultButtonStyle.copyWith(
           backgroundColor: _getColor(
               disabled ? AskLoraColors.gray : AskLoraColors.charcoal,
               AskLoraColors.charcoal.withOpacity(0.9)),
         );
-      case ButtonOthersType.withdraw:
+      case FundingType.withdraw:
         return _defaultButtonStyle.copyWith(
           backgroundColor: _getColor(
               disabled ? AskLoraColors.gray : AskLoraColors.charcoal,

@@ -6,7 +6,7 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
-import '../../../../core/presentation/custom_silver_box.dart';
+import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../bloc/bot_stock_bloc.dart';
@@ -68,7 +68,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
               child: GiftBotStockBaseWidget(
                   content: Column(
                     children: [
-                      CustomSilverBox(
+                      RoundColoredBox(
                         content: Column(
                           children: [
                             const PairColumnText(

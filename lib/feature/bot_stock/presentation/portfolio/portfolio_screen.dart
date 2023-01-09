@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/domain/pair.dart';
-import '../../../../../../core/presentation/buttons/others/others_button.dart';
+import '../../../../../../core/presentation/buttons/others/funding_button.dart';
 import '../../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/presentation/text_fields/custom_dropdown.dart';
@@ -135,15 +135,15 @@ class PortfolioScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                OthersButton(
-                  buttonOthersType: ButtonOthersType.fund,
+                FundingButton(
+                  fundingType: FundingType.fund,
                   onTap: () {},
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                OthersButton(
-                  buttonOthersType: ButtonOthersType.withdraw,
+                FundingButton(
+                  fundingType: FundingType.withdraw,
                   onTap: () {},
                 ),
               ],
