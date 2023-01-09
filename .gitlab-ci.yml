@@ -46,6 +46,8 @@ before_script:
   ##
  - mkdir -p ~/.ssh
  - chmod 700 ~/.ssh
+ - git config --global user.email "darth@empire.com"
+ - git config --global user.name "Darth Vader"
 
   # try to connect to GitLab.com
  - ssh git@gitlab.intra.asklora.store
