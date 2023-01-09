@@ -37,7 +37,6 @@ before_script:
  - ssh git@gitlab.intra.asklora.store
 
   # try to clone yourself. A *PUBLIC* key paired to the SSH_PRIVATE_KEY was added as deploy key to this repository
- - git clone git@gitlab.intra.asklora.store:frontend/asklora-mobile-app.git
  - git clone git@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
 
 
