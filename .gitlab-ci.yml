@@ -15,7 +15,7 @@ test_echo:
   stage: test_echo
 
   script:
-    - make help
+    - echo "Ci/CD has been disabled for while"
 
   only:
     - pushes
