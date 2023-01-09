@@ -1,9 +1,9 @@
 image: cirrusci/flutter:stable
 
-stages:
+#stages:
 #  - build
-  - format
-  - analyze
+#  - format
+#  - analyze
 #  - test
 
 before_script:
