@@ -1,11 +1,11 @@
 image: cirrusci/flutter:stable
 
 stages:
-#  - build
-#  - format
-#  - analyze
-#  - test
-  - test_echo
+ - build
+ - format
+ - analyze
+ - test
+ - test_echo
 
 test_echo:
 
@@ -20,57 +20,58 @@ test_echo:
   only:
     - pushes
 
-#before_script:
-#  - flutter clean
-#  - flutter pub get
+before_script:
+ - ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+ - flutter clean
+ - flutter pub get
 
-#build:
-#  stage: build
-#
-#  script:
-#    - flutter build aot
-#
-#  tags:
-#    - shared
-#
-#  only:
-#    - merge_requests
+build:
+ stage: build
 
-#format:
-#
-#  tags:
-#    - dev
-#
-#  stage: format
-#
-#  script:
-#    - make format
-#
-#  only:
-#    - pushes
+ script:
+   - flutter build aot
 
-#analyze:
-#
-#  tags:
-#    - dev
-#
-#  stage: analyze
-#
-#  script:
-#    - make lint
-#
-#  only:
-#    - pushes
-#
-#unit_test:
-#
-#  tags:
-#    - dev
-#
-#  stage: test
-#
-#  script:
-#    - make run_test
-#
-#  only:
-#    - pushes
+ tags:
+   - shared
+
+ only:
+   - merge_requests
+
+format:
+
+ tags:
+   - dev
+
+ stage: format
+
+ script:
+   - make format
+
+ only:
+   - pushes
+
+analyze:
+
+ tags:
+   - dev
+
+ stage: analyze
+
+ script:
+   - make lint
+
+ only:
+   - pushes
+
+unit_test:
+
+ tags:
+   - dev
+
+ stage: test
+
+ script:
+   - make run_test
+
+ only:
+   - pushes
