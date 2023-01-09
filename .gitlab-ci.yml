@@ -5,14 +5,14 @@ stages:
 #  - format
 #  - analyze
 #  - test
-  - test
+  - test_echo
 
 test_echo:
 
   tags:
     - dev
 
-  stage: format
+  stage: test_echo
 
   script:
     - make help
