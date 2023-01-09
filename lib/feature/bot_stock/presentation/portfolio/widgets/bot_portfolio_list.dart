@@ -15,32 +15,15 @@ class BotPortfolioList extends StatelessWidget {
               current.botPortfolioResponse.state,
           builder: (context, state) {
             if (state.botPortfolioResponse.state == ResponseState.error) {
-              return LoraPopUpMessage(
+              return const LoraPopUpMessage(
                 backgroundColor: AskLoraColors.charcoal,
-                children: [
-                  CustomTextNew(
-                    'No traded Botstocks.',
-                    style: AskLoraTextStyles.h4
-                        .copyWith(color: AskLoraColors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  CustomTextNew(
+                title: 'No traded Botstocks.',
+                titleColor: AskLoraColors.white,
+                subTitle:
                     'You can manage all your investments here after you start trading. Create an account and start trading.',
-                    style: AskLoraTextStyles.body2
-                        .copyWith(color: AskLoraColors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  PrimaryButton(
-                      buttonPrimaryType: ButtonPrimaryType.solidGreen,
-                      label: 'CREATE AN ACCOUNT',
-                      onTap: () {})
-                ],
+                subTitleColor: AskLoraColors.white,
+                buttonLabel: 'CREATE AN ACCOUNT',
+                buttonPrimaryType: ButtonPrimaryType.solidGreen,
               );
             } else {
               return Wrap(

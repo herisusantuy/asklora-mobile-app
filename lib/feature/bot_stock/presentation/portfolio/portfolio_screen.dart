@@ -20,7 +20,7 @@ import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/custom_base_silver_box.dart';
-import '../widgets/lora_popup_message.dart';
+import '../../../../core/presentation/lora_popup_message.dart';
 import '../widgets/pair_column_text.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
 

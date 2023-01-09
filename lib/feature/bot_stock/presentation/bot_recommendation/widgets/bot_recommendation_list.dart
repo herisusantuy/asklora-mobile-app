@@ -51,9 +51,7 @@ class BotRecommendationList extends StatelessWidget {
             );
           } else {
             return SizedBox(
-              height: botCardHeight * defaultRecommendedBots.length / 2 +
-                  _spacing * ((defaultRecommendedBots.length / 2).ceil() - 1) +
-                  2 * blurPadding,
+              height: _getListHeight,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -81,35 +79,18 @@ class BotRecommendationList extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Center(
+                  const Center(
                     child: Padding(
                       padding: AppValues.screenHorizontalPadding,
                       child: LoraPopUpMessage(
                         backgroundColor: AskLoraColors.charcoal,
-                        children: [
-                          CustomTextNew(
-                            'No Botstock recommendation.',
-                            style: AskLoraTextStyles.h4
-                                .copyWith(color: AskLoraColors.white),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          CustomTextNew(
+                        title: 'No Botstock recommendation.',
+                        titleColor: AskLoraColors.white,
+                        subTitle:
                             'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-                            style: AskLoraTextStyles.body2
-                                .copyWith(color: AskLoraColors.white),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          PrimaryButton(
-                              buttonPrimaryType: ButtonPrimaryType.solidGreen,
-                              label: 'CREATE AN ACCOUNT',
-                              onTap: () {})
-                        ],
+                        subTitleColor: AskLoraColors.white,
+                        buttonLabel: 'CREATE AN ACCOUNT',
+                        buttonPrimaryType: ButtonPrimaryType.solidGreen,
                       ),
                     ),
                   )
@@ -119,4 +100,9 @@ class BotRecommendationList extends StatelessWidget {
           }
         });
   }
+
+  double get _getListHeight =>
+      botCardHeight * defaultRecommendedBots.length / 2 +
+      _spacing * ((defaultRecommendedBots.length / 2).ceil() - 1) +
+      2 * blurPadding;
 }
