@@ -4,12 +4,12 @@ import '../../../../../core/presentation/custom_checkbox.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
-import '../widgets/custom_silver_box.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../widgets/kyc_sub_title.dart';
@@ -60,7 +60,7 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
     );
   }
 
-  Widget get _licenseeProfile => CustomSilverBox(
+  Widget get _licenseeProfile => RoundColoredBox(
         key: const Key('licensee_profile'),
         title: '',
         content: Row(

@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
-import '../../core/presentation/custom_scaffold.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
@@ -64,9 +63,7 @@ class App extends StatelessWidget {
                     theme: ThemeData(
                         primarySwatch: MaterialColor(
                             AskLoraColors.charcoal.value, _colorCodes)),
-                    home: CustomScaffold(
-                        enableBackNavigation: false,
-                        body: _getBody(state.status))))));
+                    home: _getBody(state.status)))));
   }
 
   Widget _getBody(AppStatus status) {
