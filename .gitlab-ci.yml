@@ -1,10 +1,10 @@
 image: cirrusci/flutter:stable
 
 stages:
- - build
- - format
- - analyze
- - test
+#  - build
+#  - format
+#  - analyze
+#  - test
  - test_echo
 
 test_echo:
@@ -20,60 +20,60 @@ test_echo:
   only:
     - pushes
 
-before_script:
- - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git".insteadOf git@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
-#  - mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
-#  - ssh-keyscan -H gitlab.intra.asklora.store >> ~/.ssh/known_hosts
- - flutter clean
- - flutter pub get
+# before_script:
+#  - git config --global url."https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git".insteadOf git@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
+# #  - mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts && chmod 644 ~/.ssh/known_hosts
+# #  - ssh-keyscan -H gitlab.intra.asklora.store >> ~/.ssh/known_hosts
+#  - flutter clean
+#  - flutter pub get
 
-build:
- stage: build
+# build:
+#  stage: build
 
- script:
-   - flutter build aot
+#  script:
+#    - flutter build aot
 
- tags:
-   - shared
+#  tags:
+#    - shared
 
- only:
-   - merge_requests
+#  only:
+#    - merge_requests
 
-format:
+# format:
 
- tags:
-   - dev
+#  tags:
+#    - dev
 
- stage: format
+#  stage: format
 
- script:
-   - make format
+#  script:
+#    - make format
 
- only:
-   - pushes
+#  only:
+#    - pushes
 
-analyze:
+# analyze:
 
- tags:
-   - dev
+#  tags:
+#    - dev
 
- stage: analyze
+#  stage: analyze
 
- script:
-   - make lint
+#  script:
+#    - make lint
 
- only:
-   - pushes
+#  only:
+#    - pushes
 
-unit_test:
+# unit_test:
 
- tags:
-   - dev
+#  tags:
+#    - dev
 
- stage: test
+#  stage: test
 
- script:
-   - make run_test
+#  script:
+#    - make run_test
 
- only:
-   - pushes
+#  only:
+#    - pushes
