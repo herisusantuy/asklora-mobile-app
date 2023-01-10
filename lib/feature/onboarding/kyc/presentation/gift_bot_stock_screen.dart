@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/values/app_values.dart';
-import '../../welcome/carousel/presentation/carousel_screen.dart';
+import '../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../bloc/kyc_bloc.dart';
-import '../../../../core/presentation/buttons/button_pair.dart';
 
 class GiftBotStockScreen extends StatelessWidget {
   const GiftBotStockScreen({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class GiftBotStockScreen extends StatelessWidget {
   }
 
   Widget _bottomButton(BuildContext context) => ButtonPair(
-        primaryButtonOnClick: () => CarouselScreen.open(context),
+        primaryButtonOnClick: () => GiftBotStockWelcomeScreen.open(context),
         secondaryButtonOnClick: () =>
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
         primaryButtonLabel: 'GET FREE AI TRADE',

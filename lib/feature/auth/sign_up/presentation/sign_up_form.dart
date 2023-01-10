@@ -20,20 +20,20 @@ class SignUpForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SignUpBloc, SignUpState>(listener: (context, state) {
+      if (state.response.state == ResponseState.loading) {
+        CustomLoadingOverlay.show(context);
+      } else {
+        CustomLoadingOverlay.dismiss();
+      }
       switch (state.response.state) {
-        case ResponseState.loading:
-          CustomLoadingOverlay.show(context);
-          break;
         case ResponseState.error:
           context.read<SignUpBloc>().add(SignUpUsernameChanged(state.username));
-
           CustomInAppNotification.show(context, state.response.message);
           break;
         case ResponseState.success:
           EmailActivationScreen.open(context);
           break;
         default:
-          CustomLoadingOverlay.dismiss();
           break;
       }
     }, child: LayoutBuilder(
