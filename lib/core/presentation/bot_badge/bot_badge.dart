@@ -7,8 +7,10 @@ import '../custom_text_new.dart';
 
 class BotBadge extends StatefulWidget {
   final BotType botType;
+  final Color? backgroundColor;
 
-  const BotBadge({required this.botType, Key? key}) : super(key: key);
+  const BotBadge({required this.botType, this.backgroundColor, Key? key})
+      : super(key: key);
 
   @override
   State<BotBadge> createState() => _BotBadgeState();
@@ -54,7 +56,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
       width: double.infinity,
       padding: const EdgeInsets.only(top: 2),
       height: 50,
-      color: widget.botType.primaryBgColor,
+      color: widget.backgroundColor ?? widget.botType.primaryBgColor,
       child: ListView.builder(
         reverse: true,
         controller: scrollController,
