@@ -4,7 +4,7 @@ import '../../../core/presentation/radar_chart.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
-import 'widgets/onboarding_status.dart';
+import 'widgets/on_boarding_status.dart';
 
 class HomeScreenForm extends StatelessWidget {
   const HomeScreenForm({super.key});
@@ -35,12 +35,12 @@ class HomeScreenForm extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 const SizedBox(height: 100),
-                OnboardingStatus(
+                OnBoardingStatus(
                     title: 'START INVESTING',
                     subTitle: 'Create an account',
                     onTap: () {},
-                    progress: 0.2),
-                Container(
+                    progress: 0.3),
+                SizedBox(
                   height: 300,
                   width: 300,
                   child: RadarChart(
@@ -50,11 +50,12 @@ class HomeScreenForm extends StatelessWidget {
                     data: data,
                     featuresTextStyle: AskLoraTextStyles.subtitle2
                         .copyWith(color: AskLoraColors.charcoal),
-                    axisColor: AskLoraColors.gray,
+                    axisColor: AskLoraColors.charcoal.withOpacity(.4),
                     outlineColor: AskLoraColors.primaryGreen,
-                    graphColors: [AskLoraColors.primaryGreen],
+                    graphColors: const [AskLoraColors.primaryGreen],
                   ),
                 ),
+
                 /*Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [

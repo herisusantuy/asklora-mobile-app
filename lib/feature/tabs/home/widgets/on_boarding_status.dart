@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/presentation/custom_text_new.dart';
 
-class OnboardingStatus extends StatelessWidget {
+class OnBoardingStatus extends StatelessWidget {
   final String title;
   final String subTitle;
   final Color valueColor;
@@ -15,7 +15,7 @@ class OnboardingStatus extends StatelessWidget {
   final int arrowPointingOnSection;
   final VoidCallback onTap;
 
-  const OnboardingStatus(
+  const OnBoardingStatus(
       {required this.title,
       required this.subTitle,
       required this.onTap,
@@ -69,7 +69,7 @@ class OnboardingStatus extends StatelessWidget {
         const SizedBox(
           height: 14,
         ),
-        OnboardingStatusButton(
+        OnBoardingStatusButton(
           arrowPointingOnSection: arrowPointingOnSection,
           onTap: onTap,
           intersectCount: intersectCount,
@@ -94,13 +94,13 @@ class OnboardingStatus extends StatelessWidget {
   }
 }
 
-class OnboardingStatusButton extends StatefulWidget {
+class OnBoardingStatusButton extends StatefulWidget {
   final VoidCallback onTap;
   final int arrowPointingOnSection;
   final int intersectCount;
   final String subTitle;
 
-  const OnboardingStatusButton(
+  const OnBoardingStatusButton(
       {required this.arrowPointingOnSection,
       required this.onTap,
       required this.intersectCount,
@@ -109,10 +109,10 @@ class OnboardingStatusButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<OnboardingStatusButton> createState() => _OnboardingStatusButtonState();
+  State<OnBoardingStatusButton> createState() => _OnBoardingStatusButtonState();
 }
 
-class _OnboardingStatusButtonState extends State<OnboardingStatusButton> {
+class _OnBoardingStatusButtonState extends State<OnBoardingStatusButton> {
   bool _isPressed = false;
 
   @override
@@ -163,11 +163,12 @@ class _OnboardingStatusButtonState extends State<OnboardingStatusButton> {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomTextNew(
                           'NEXT STEP',
-                          style: AskLoraTextStyles.subtitleAllCap1
-                              .copyWith(color: AskLoraColors.white),
+                          style: AskLoraTextStyles.subtitleAllCap1.copyWith(
+                              color: AskLoraColors.white, letterSpacing: 1),
                         ),
                         const SizedBox(
                           height: 5,
