@@ -4,10 +4,11 @@ enum AppStatus { unknown, authenticated, unauthenticated }
 
 class AppState extends Equatable {
   final LocaleType locale;
+  final AppStatus status;
 
   const AppState._(
       {this.status = AppStatus.unknown,
-      this.locale = const LocaleType('en', 'US', 'ENG')});
+      this.locale = const LocaleType('en', 'US', 'ENG', 'Mulish')});
 
   const AppState.unknown() : this._();
 
@@ -16,11 +17,8 @@ class AppState extends Equatable {
           status: AppStatus.authenticated,
         );
 
-  const AppState.unauthenticated(
-      {localeType = const LocaleType('en', 'US', 'ENG')})
+  const AppState.unauthenticated({localeType = LocaleType.defaultFont})
       : this._(status: AppStatus.unauthenticated, locale: localeType);
-
-  final AppStatus status;
 
   @override
   List<Object> get props => [status, locale];

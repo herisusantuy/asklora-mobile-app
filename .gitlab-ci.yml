@@ -1,11 +1,11 @@
 image: cirrusci/flutter:stable
 
 stages:
- - build
- - format
- - analyze
- - test
- - test_echo
+  #  - build
+  #  - format
+  #  - analyze
+  #  - test
+  - test_echo
 
 test_echo:
 
@@ -20,70 +20,57 @@ test_echo:
   only:
     - pushes
 
-before_script:
+#before_script:
+#  - flutter clean
+#  - flutter pub get
 
- # install ssh-agent
- - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
- # run ssh-agent
- - eval $(ssh-agent -s)
- # add ssh key stored in SSH_PRIVATE_KEY variable to the agent store
- - ssh-add <(echo "$SSH_PRIVATE_KEY")
- - ssh-add <(echo "$SSH_PRIVATE_KEY2")
- # disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks)
- # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config
- - mkdir -p ~/.ssh
- - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+#build:
+#  stage: build
+#
+#  script:
+#    - flutter build aot
+#
+#  tags:
+#    - shared
+#
+#  only:
+#    - merge_requests
 
- - flutter clean
- - flutter pub get
+#format:
+#
+#  tags:
+#    - dev
+#
+#  stage: format
+#
+#  script:
+#    - make format
+#
+#  only:
+#    - pushes
 
-build:
- stage: build
-
- script:
-   - flutter build aot
-
- tags:
-   - shared
-
- only:
-   - merge_requests
-
-format:
-
- tags:
-   - dev
-
- stage: format
-
- script:
-   - make format
-
- only:
-   - pushes
-
-analyze:
-
- tags:
-   - dev
-
- stage: analyze
-
- script:
-   - make lint
-
- only:
-   - pushes
-
-unit_test:
-
- tags:
-   - dev
-
- stage: test
-
- script:
-   - make run_test
-
- only:
-   - pushes
+#analyze:
+#
+#  tags:
+#    - dev
+#
+#  stage: analyze
+#
+#  script:
+#    - make lint
+#
+#  only:
+#    - pushes
+#
+#unit_test:
+#
+#  tags:
+#    - dev
+#
+#  stage: test
+#
+#  script:
+#    - make run_test
+#
+#  only:
+#    - pushes

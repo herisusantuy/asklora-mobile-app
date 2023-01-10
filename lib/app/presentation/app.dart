@@ -61,6 +61,7 @@ class App extends StatelessWidget {
                     onGenerateRoute: RouterGenerator.generateRoute,
                     title: 'Flutter Demo',
                     theme: ThemeData(
+                        fontFamily: state.locale.fontType,
                         primarySwatch: MaterialColor(
                             AskLoraColors.charcoal.value, _colorCodes)),
                     home: _getBody(state.status)))));

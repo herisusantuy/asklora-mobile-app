@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../styles/asklora_colors.dart';
 import '../custom_text_input.dart';
@@ -43,11 +42,11 @@ class CustomCenteredTextInput extends StatelessWidget {
         textInputFormatterList: textInputFormatterList,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         autoFocus: true,
-        hintTextStyle: GoogleFonts.mulish(
+        hintTextStyle: TextStyle(
             fontSize: 30,
             fontWeight: fontWeight,
             color: AskLoraColors.lightGray),
-        textStyle: GoogleFonts.mulish(
+        textStyle: TextStyle(
             fontSize: 33,
             fontWeight: fontWeight,
             color: AskLoraColors.charcoal),
