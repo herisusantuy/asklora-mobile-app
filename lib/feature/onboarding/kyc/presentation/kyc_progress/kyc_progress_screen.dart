@@ -5,12 +5,12 @@ import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
-import '../widgets/custom_silver_box.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
 
 class KycProgressScreen extends StatelessWidget {
@@ -59,7 +59,7 @@ class KycProgressScreen extends StatelessWidget {
         secondaryButtonLabel: 'MAYBE LATER',
       );
 
-  Widget get _kycSteps => CustomSilverBox(
+  Widget get _kycSteps => RoundColoredBox(
       key: const Key('kyc_steps'),
       title: 'Get ready for AI trading.',
       content: CustomStepper(
@@ -72,7 +72,7 @@ class KycProgressScreen extends StatelessWidget {
         ],
       ));
 
-  Widget get _neededItems => CustomSilverBox(
+  Widget get _neededItems => RoundColoredBox(
       key: const Key('kyc_items_needed'),
       title: 'The items you will needs..',
       content: Column(children: [

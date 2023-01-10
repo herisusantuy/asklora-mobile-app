@@ -49,7 +49,9 @@ class PrimaryButton extends StatelessWidget {
           },
           child: CustomTextNew(
             label,
-            style: AskLoraTextStyles.button1,
+            style: buttonPrimarySize == ButtonPrimarySize.small
+                ? AskLoraTextStyles.button2
+                : AskLoraTextStyles.button1,
           )),
     );
   }
@@ -64,7 +66,11 @@ class PrimaryButton extends StatelessWidget {
                 AskLoraColors.charcoal.withOpacity(0.9)),
             foregroundColor: _getColor(
                 disabled ? AskLoraColors.darkGray : AskLoraColors.primaryGreen,
-                AskLoraColors.primaryGreen.withOpacity(0.9)));
+                AskLoraColors.primaryGreen.withOpacity(0.9)),
+            shape: _getBorder(
+              Colors.transparent,
+              Colors.transparent,
+            ));
       case ButtonPrimaryType.solidGreen:
         return _defaultButtonStyle.copyWith(
             minimumSize: _getButtonMinimumSize,
@@ -73,7 +79,11 @@ class PrimaryButton extends StatelessWidget {
                 AskLoraColors.primaryGreen.withOpacity(0.9)),
             foregroundColor: _getColor(
                 disabled ? AskLoraColors.darkGray : AskLoraColors.charcoal,
-                AskLoraColors.charcoal.withOpacity(0.9)));
+                AskLoraColors.charcoal.withOpacity(0.9)),
+            shape: _getBorder(
+              Colors.transparent,
+              Colors.transparent,
+            ));
       case ButtonPrimaryType.ghostCharcoal:
         return _defaultButtonStyle.copyWith(
             minimumSize: _getButtonMinimumSize,
@@ -111,9 +121,21 @@ class PrimaryButton extends StatelessWidget {
 
   MaterialStateProperty<OutlinedBorder> _getBorder(
       Color color, Color colorPressed) {
+    double radius = 12;
     return MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+      switch (buttonPrimarySize) {
+        case ButtonPrimarySize.small:
+          radius = 7;
+          break;
+        case ButtonPrimarySize.mid:
+          radius = 11;
+          break;
+        case ButtonPrimarySize.big:
+          radius = 14;
+          break;
+      }
       return RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(radius),
           side: BorderSide(
               color: states.contains(MaterialState.pressed)
                   ? colorPressed
@@ -137,7 +159,7 @@ class PrimaryButton extends StatelessWidget {
   Pair<double, double> get _getSizedBoxSize {
     switch (buttonPrimarySize) {
       case ButtonPrimarySize.small:
-        return Pair(60, 20);
+        return Pair(60, 25);
       case ButtonPrimarySize.mid:
         return Pair(200, 40);
       case ButtonPrimarySize.big:

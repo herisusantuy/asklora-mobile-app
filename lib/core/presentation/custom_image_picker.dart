@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +7,7 @@ import '../../feature/payment/deposits/repository/file_picker_repository.dart';
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 import 'custom_text_new.dart';
+import 'dotted_border/dotted_border.dart';
 
 class CustomImagePicker extends StatelessWidget {
   final bool disabled;

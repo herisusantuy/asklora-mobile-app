@@ -84,6 +84,8 @@ RecommendedBot _$RecommendedBotFromJson(Map<String, dynamic> json) =>
       json['benefit'] as String,
       json['suitability'] as String,
       json['company_description'] as String,
+      DateTime.parse(json['expiredDate'] as String),
+      freeBot: json['freeBot'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$RecommendedBotToJson(RecommendedBot instance) =>
@@ -98,4 +100,6 @@ Map<String, dynamic> _$RecommendedBotToJson(RecommendedBot instance) =>
       'benefit': instance.benefit,
       'suitability': instance.suitability,
       'company_description': instance.companyDescription,
+      'expiredDate': instance.expiredDate.toIso8601String(),
+      'freeBot': instance.freeBot,
     };

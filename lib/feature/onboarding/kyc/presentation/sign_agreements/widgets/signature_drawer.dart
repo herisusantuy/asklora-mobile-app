@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:signature/signature.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../../core/presentation/dotted_border/dotted_border.dart';
 import '../../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
