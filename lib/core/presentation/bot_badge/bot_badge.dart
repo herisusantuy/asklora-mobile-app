@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
 import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../custom_text_new.dart';
@@ -59,33 +61,50 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(right: 12),
+            padding: const EdgeInsets.only(right: 8),
             child: Row(
               children: [
-                Icon(
-                  Icons.emoji_people,
-                  size: iconSize,
-                ),
-                SizedBox(
-                  width: 10,
+                _getBotTypeIcon(),
+                const SizedBox(
+                  width: 5,
                 ),
                 CustomTextNew(
                   '${widget.botType.name} BOTS',
                   style: AskLoraTextStyles.h3Italic
                       .copyWith(color: widget.botType.expiredTextColor),
                 ),
-                SizedBox(
-                  width: 8,
+                const SizedBox(
+                  width: 5,
                 ),
-                Icon(
-                  Icons.arrow_forward,
-                  size: iconSize,
-                ),
+                SvgPicture.asset(
+                    'assets/icons/icon_bot_badge_pop_up_message_arrow.svg',
+                    color: widget.botType.expiredTextColor),
               ],
             ),
           );
         },
       ),
     );
+  }
+
+  Widget _getBotTypeIcon() {
+    switch (widget.botType) {
+      case BotType.plank:
+        return SvgPicture.asset(
+            'assets/icons/icon_bot_badge_pop_up_message_plank.svg',
+            color: widget.botType.expiredTextColor);
+      case BotType.squat:
+        return SvgPicture.asset(
+            'assets/icons/icon_bot_badge_pop_up_message_squat.svg',
+            color: widget.botType.expiredTextColor);
+      case BotType.pullUp:
+        return SvgPicture.asset(
+            'assets/icons/icon_bot_badge_pop_up_message_pull_up.svg',
+            color: widget.botType.expiredTextColor);
+      default:
+        return SvgPicture.asset(
+            'assets/icons/icon_bot_badge_pop_up_message_plank.svg',
+            color: widget.botType.expiredTextColor);
+    }
   }
 }
