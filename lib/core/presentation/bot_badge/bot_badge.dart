@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../custom_text_new.dart';
@@ -15,50 +14,33 @@ class BotBadge extends StatefulWidget {
 
 class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
   final ScrollController scrollController = ScrollController();
-
-  late Animation<double> animation;
-  final double paddingBetweenInfiniteBadge = 12;
-  final double paddingBetweenIcon1AndText = 10;
-  final double paddingBetweenTextAndIcon2 = 8;
   final double iconSize = 30;
+
   double currentPositionScroll = 0;
-  AnimationController? animationController;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _infiniteScroll();
+      startAnimation();
     });
   }
 
-  void _infiniteScroll() {
-    animationController =
-        AnimationController(duration: const Duration(seconds: 10), vsync: this);
-    animation = Tween<double>(
-            begin: currentPositionScroll, end: currentPositionScroll + 1000)
-        .animate(animationController!)
-      ..addListener(() {
-        currentPositionScroll = animation.value;
-        if (scrollController.hasClients) {
-          scrollController.jumpTo(animation.value);
-        }
-      })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          animationController!.dispose();
-          _infiniteScroll();
-        } else if (status == AnimationStatus.dismissed) {
-          animationController!.dispose();
-        }
-      });
-
-    animationController!.forward();
+  void startAnimation() async {
+    if (mounted) {
+      currentPositionScroll += 50;
+      scrollController
+          .animateTo(
+            currentPositionScroll,
+            duration: const Duration(seconds: 1),
+            curve: Curves.linear,
+          )
+          .then((value) => startAnimation());
+    }
   }
 
   @override
   void dispose() {
-    animationController?.dispose();
     scrollController.dispose();
     super.dispose();
   }
@@ -77,7 +59,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.only(right: paddingBetweenInfiniteBadge),
+            padding: EdgeInsets.only(right: 12),
             child: Row(
               children: [
                 Icon(
@@ -85,7 +67,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
                   size: iconSize,
                 ),
                 SizedBox(
-                  width: paddingBetweenIcon1AndText,
+                  width: 10,
                 ),
                 CustomTextNew(
                   '${widget.botType.name} BOTS',
@@ -93,7 +75,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
                       .copyWith(color: widget.botType.expiredTextColor),
                 ),
                 SizedBox(
-                  width: paddingBetweenTextAndIcon2,
+                  width: 8,
                 ),
                 Icon(
                   Icons.arrow_forward,
