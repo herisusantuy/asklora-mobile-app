@@ -9,6 +9,7 @@ stages:
 before_script:
  - flutter clean
  - flutter pub get
+ - git clone gitlab+deploy-token-3:wJWfuXtwNQgwsh7m_Sfd@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
 
 build:
  stage: build
