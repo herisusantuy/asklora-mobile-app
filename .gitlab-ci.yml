@@ -1,76 +1,62 @@
 image: cirrusci/flutter:stable
 
 stages:
-  #  - build
-  #  - format
-  #  - analyze
-  #  - test
-  - test_echo
+   - build
+   - format
+   - analyze
+   - test
 
-test_echo:
+before_script:
+ - flutter clean
+ - flutter pub get
 
-  tags:
-    - dev
+build:
+ stage: build
 
-  stage: test_echo
+ script:
+   - flutter build aot
 
-  script:
-    - echo "Ci/CD has been disabled for while"
+ tags:
+   - shared
 
-  only:
-    - pushes
+ only:
+   - merge_requests
 
-#before_script:
-#  - flutter clean
-#  - flutter pub get
+format:
 
-#build:
-#  stage: build
-#
-#  script:
-#    - flutter build aot
-#
-#  tags:
-#    - shared
-#
-#  only:
-#    - merge_requests
+ tags:
+   - dev
 
-#format:
-#
-#  tags:
-#    - dev
-#
-#  stage: format
-#
-#  script:
-#    - make format
-#
-#  only:
-#    - pushes
+ stage: format
 
-#analyze:
-#
-#  tags:
-#    - dev
-#
-#  stage: analyze
-#
-#  script:
-#    - make lint
-#
-#  only:
-#    - pushes
-#
-#unit_test:
-#
-#  tags:
-#    - dev
-#
-#  stage: test
-#
-#  script:
-#    - make run_test
-#
-#  only:
-#    - pushes
+ script:
+   - make format
+
+ only:
+   - pushes
+
+analyze:
+
+ tags:
+   - dev
+
+ stage: analyze
+
+ script:
+   - make lint
+
+ only:
+   - pushes
+
+unit_test:
+
+ tags:
+   - dev
+
+ stage: test
+
+ script:
+   - make run_test
+
+ only:
+   - pushes
