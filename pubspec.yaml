@@ -43,12 +43,12 @@ dependencies:
 
   country_picker:
     git:
-      url: git@gitlab.intra.asklora.store:frontend/flutter_country_picker.git
+      url: gitlab+deploy-token-2:DxNTG31fod_ZwJYNBsqT@gitlab.intra.asklora.store:frontend/flutter_country_picker.git
       ref: master
 
   asklora_mobile_chart:
     git:
-      url: git@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
+      url: gitlab+deploy-token-3:wJWfuXtwNQgwsh7m_Sfd@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
       ref: production
 
 dev_dependencies:
