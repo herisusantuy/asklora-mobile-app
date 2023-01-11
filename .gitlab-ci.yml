@@ -7,8 +7,9 @@ stages:
    - test
 
 before_script:
+ - git clone https://gitlab+deploy-token-2:DxNTG31fod_ZwJYNBsqT@gitlab.intra.asklora.store/frontend/flutter_country_picker.git
  - git clone https://gitlab+deploy-token-3:wJWfuXtwNQgwsh7m_Sfd@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
- - git clone https://gitlab+deploy-token-2:DxNTG31fod_ZwJYNBsqT@gitlab.intra.asklora.store:frontend/flutter_country_picker.git
+
  - flutter clean
  - flutter pub get
 
