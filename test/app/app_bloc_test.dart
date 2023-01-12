@@ -41,7 +41,7 @@ void main() async {
         return appBloc;
       },
       act: (bloc) => bloc.add(AppLaunched()),
-      expect: () => {const AppState.unauthenticated()},
+      expect: () => {AppState.unauthenticated()},
     );
 
     blocTest<AppBloc, AppState>(

@@ -17,7 +17,8 @@ class AppState extends Equatable {
           status: AppStatus.authenticated,
         );
 
-  const AppState.unauthenticated({localeType = LocaleType.defaultFont})
+  const AppState.unauthenticated(
+      {localeType = const LocaleType('en', 'US', 'ENG', 'Mulish')})
       : this._(status: AppStatus.unauthenticated, locale: localeType);
 
   @override
