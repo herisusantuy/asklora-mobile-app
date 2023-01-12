@@ -23,7 +23,6 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignInBloc, SignInState>(
         listener: (context, state) async {
-      debugPrint('Krishna state ${state.response.state}');
       if (state.response.state == ResponseState.loading) {
         CustomLoadingOverlay.show(context);
       } else {
