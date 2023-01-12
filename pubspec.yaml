@@ -42,14 +42,10 @@ dependencies:
   onfido_sdk: ^2.0.0
 
   country_picker:
-    git:
-      url: gitlab+deploy-token-2:DxNTG31fod_ZwJYNBsqT@gitlab.intra.asklora.store:frontend/flutter_country_picker.git
-      ref: master
+    path: ../flutter_country_picker/
 
   asklora_mobile_chart:
-    git:
-      url: gitlab+deploy-token-3:wJWfuXtwNQgwsh7m_Sfd@gitlab.intra.asklora.store:frontend/asklora-flutter-chart.git
-      ref: production
+    path: ../asklora-flutter-chart
 
 dev_dependencies:
   build_runner: ^2.1.11

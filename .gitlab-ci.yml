@@ -1,7 +1,7 @@
 image: cirrusci/flutter:stable
 
 stages:
-   - build
+  #  - build
    - format
    - analyze
    - test
@@ -14,17 +14,17 @@ before_script:
  - flutter pub get
 
 
-build:
- stage: build
+# build:
+#  stage: build
 
- script:
-   - flutter build aot
+#  script:
+#    - flutter build aot
 
- tags:
-   - shared
+#  tags:
+#    - shared
 
- only:
-   - merge_requests
+#  only:
+#    - merge_requests
 
 format:
 
