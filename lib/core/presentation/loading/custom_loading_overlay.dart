@@ -7,7 +7,6 @@ import 'jumping_dots_widget.dart';
 
 class CustomLoadingOverlay {
   static void show(BuildContext context) {
-    CustomOverlayWidget.dismiss();
     CustomOverlayWidget.show(
       context,
       Material(

@@ -23,10 +23,13 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignInBloc, SignInState>(
         listener: (context, state) async {
+      debugPrint('Krishna state ${state.response.state}');
+      if (state.response.state == ResponseState.loading) {
+        CustomLoadingOverlay.show(context);
+      } else {
+        CustomLoadingOverlay.dismiss();
+      }
       switch (state.response.state) {
-        case ResponseState.loading:
-          CustomLoadingOverlay.show(context);
-          break;
         case ResponseState.error:
           context
               .read<SignInBloc>()
@@ -40,7 +43,6 @@ class SignInForm extends StatelessWidget {
               .then((_) => SignInSuccessScreen.openAndRemoveAllRoute(context));
           break;
         default:
-          CustomLoadingOverlay.dismiss();
           break;
       }
     }, child: LayoutBuilder(builder: (context, constraint) {
