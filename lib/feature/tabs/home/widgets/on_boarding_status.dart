@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
@@ -41,10 +42,15 @@ class OnBoardingStatus extends StatelessWidget {
                 style: AskLoraTextStyles.h4Italic,
               ),
             ),
-            CustomTextNew(
-              'The Button',
-              style: AskLoraTextStyles.body1,
-            ),
+            ExtraInfoButton(
+                label: 'Milestone 1 / 3',
+                suffixIcon: const Icon(
+                  Icons.arrow_forward_ios_sharp,
+                  color: AskLoraColors.primaryMagenta,
+                  size: 15,
+                ),
+                onTap: () {},
+                buttonExtraInfoSize: ButtonExtraInfoSize.small)
           ],
         ),
         const SizedBox(

@@ -2,31 +2,32 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../core/presentation/lora_memoji_header.dart';
+import '../../../../core/presentation/lora_popup_message.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/custom_expansion_panel.dart';
-import '../../../../core/presentation/lora_popup_message.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
-part 'widgets/bot_recommendation_card_shimmer.dart';
+part 'widgets/bot_learn_more_bottom_sheet.dart';
 
 part 'widgets/bot_recommendation_card.dart';
 
-part 'widgets/bot_recommendation_faq.dart';
+part 'widgets/bot_recommendation_card_shimmer.dart';
 
-part 'widgets/bot_learn_more_bottom_sheet.dart';
+part 'widgets/bot_recommendation_faq.dart';
 
 part 'widgets/bot_recommendation_list.dart';
 
@@ -131,7 +132,7 @@ class BotRecommendationScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           children: [
-            const LoraMemojiWidget(
+            const LoraMemojiHeader(
                 text: 'Not feeling it? Try something different.'),
             PrimaryButton(label: 'CHANGE INVESTMENT STYLE', onTap: () {}),
           ],

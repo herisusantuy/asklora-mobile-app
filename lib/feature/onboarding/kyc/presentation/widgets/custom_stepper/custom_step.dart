@@ -1,12 +1,12 @@
 part of 'custom_stepper.dart';
 
 class CustomStep extends StatelessWidget {
-  final String svgAsset;
+  final String svgAssetName;
   final bool drawLine;
   final String label;
 
   const CustomStep(
-      {this.svgAsset = 'inactive_step_icon.svg',
+      {this.svgAssetName = 'inactive_step_icon.svg',
       this.drawLine = false,
       required this.label,
       Key? key})
@@ -24,7 +24,7 @@ class CustomStep extends StatelessWidget {
                   painter: DashedLineVerticalPainter(),
                   size: const Size(1, 34)),
             SvgPicture.asset(
-              'assets/icons/kyc/$svgAsset',
+              'assets/icons/kyc/$svgAssetName',
               height: 16,
             ),
           ],

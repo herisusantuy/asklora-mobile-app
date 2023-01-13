@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
+import '../utils/app_icons.dart';
 import 'custom_text_new.dart';
 
 class CustomInAppNotification {
@@ -126,8 +126,8 @@ class _CustomInAppNotificationWidgetState
                               controller.reverse();
                               timer.cancel();
                             },
-                            child: SvgPicture.asset(
-                                'assets/icons/icon_in_app_notification_close.svg')),
+                            child:
+                                getSvgIcon('icon_in_app_notification_close')),
                       ])),
             ),
           ),

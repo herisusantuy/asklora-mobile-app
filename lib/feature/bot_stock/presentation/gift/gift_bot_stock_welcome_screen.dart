@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../widgets/gift_bot_stock_base_widget.dart';
@@ -23,7 +24,7 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
           content: Column(
             children: [
               const SafeArea(
-                child: LoraMemojiWidget(
+                child: LoraMemojiHeader(
                     textColor: AskLoraColors.white,
                     text: 'Select a FREE AIs trade now!'),
               ),

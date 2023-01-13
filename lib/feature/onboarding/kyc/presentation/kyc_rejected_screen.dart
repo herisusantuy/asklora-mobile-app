@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/values/app_values.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/kyc_bloc.dart';
-import '../../../../core/presentation/buttons/button_pair.dart';
 
 class KycRejectedScreen extends StatelessWidget {
   final String rejectedReason;
@@ -33,7 +33,7 @@ class KycRejectedScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      const LoraMemojiWidget(
+                      const LoraMemojiHeader(
                           text: 'Sorry ! you’re not eligible for Asklora'),
                       const SizedBox(
                         height: 20,

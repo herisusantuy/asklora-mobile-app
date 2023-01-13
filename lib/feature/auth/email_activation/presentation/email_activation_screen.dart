@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 
@@ -24,7 +24,7 @@ class EmailActivationScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const LoraMemojiWidget(
+                  const LoraMemojiHeader(
                       text: 'Check your email and activate your account.'),
                   ButtonPair(
                       primaryButtonOnClick: () =>

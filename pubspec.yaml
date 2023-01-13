@@ -47,6 +47,9 @@ dependencies:
   asklora_mobile_chart:
     path: ../asklora-flutter-chart
 
+  fl_chart:
+    path: ../asklora-flutter-chart/fl_chart
+
 dev_dependencies:
   build_runner: ^2.1.11
   built_value_generator: ^8.3.2

@@ -1,34 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-import '../styles/asklora_colors.dart';
-import '../styles/asklora_text_styles.dart';
-import 'custom_text_new.dart';
+import '../utils/app_icons.dart';
+
+enum LoraMemojiType {
+  lora1('lora_memoji_1'),
+  lora2('lora_memoji_2'),
+  lora3('lora_memoji_3'),
+  lora4('lora_memoji_4'),
+  lora5('lora_memoji_5'),
+  lora6('lora_memoji_6'),
+  lora7('lora_memoji_7'),
+  lora8('lora_memoji_8'),
+  lora9('lora_memoji_9'),
+  lora10('lora_memoji_10');
+
+  final String value;
+
+  const LoraMemojiType(this.value);
+}
 
 class LoraMemojiWidget extends StatelessWidget {
-  final String text;
-  final Color textColor;
+  final LoraMemojiType loraMemojiType;
+  final double? height;
+  final double? width;
+  final Color? color;
 
   const LoraMemojiWidget(
-      {required this.text,
-      Key? key = const Key('memoji_widget'),
-      this.textColor = AskLoraColors.charcoal})
-      : super(key: key);
+      {super.key = const Key('lora_memoji_widget'),
+      required this.loraMemojiType,
+      this.height,
+      this.width,
+      this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      Stack(alignment: Alignment.center, children: [
-        SvgPicture.asset('assets/images/memoji_background_green.svg'),
-        Image.asset('assets/images/memoji.png'),
-      ]),
-      Container(
-          transform: Matrix4.translationValues(0, -35, 0),
-          child: CustomTextNew(
-            text,
-            style: AskLoraTextStyles.h4.copyWith(color: textColor),
-            textAlign: TextAlign.center,
-          )),
-    ]);
+    return getPngImage(loraMemojiType.value,
+        height: height, width: width, color: color);
   }
 }

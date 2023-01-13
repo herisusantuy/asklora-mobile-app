@@ -19,14 +19,14 @@ class CustomStepper extends StatelessWidget {
             .asMap()
             .entries
             .map((element) => CustomStep(
-                  svgAsset: _getSvgAsset(element.key, currentStep),
+                  svgAssetName: _getSvgAssetName(element.key, currentStep),
                   label: element.value,
                   drawLine: element.key != 0,
                 ))
             .toList(),
       );
 
-  String _getSvgAsset(int index, int currentStep) {
+  String _getSvgAssetName(int index, int currentStep) {
     if (index + 1 < currentStep) {
       return 'passed_step_icon.svg';
     } else if (index + 1 == currentStep) {

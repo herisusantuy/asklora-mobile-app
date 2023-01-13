@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'buttons/primary_button.dart';
-import 'custom_text_new.dart';
+
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
+import '../utils/app_icons.dart';
+import 'buttons/primary_button.dart';
+import 'custom_text_new.dart';
 
 class LoraPopUpMessage extends StatelessWidget {
   final Color backgroundColor;
@@ -12,6 +14,7 @@ class LoraPopUpMessage extends StatelessWidget {
   final Color titleColor;
   final Color subTitleColor;
   final ButtonPrimaryType buttonPrimaryType;
+  final VoidCallback? onPrimaryButtonTap;
 
   const LoraPopUpMessage(
       {required this.title,
@@ -21,6 +24,7 @@ class LoraPopUpMessage extends StatelessWidget {
       this.buttonPrimaryType = ButtonPrimaryType.solidCharcoal,
       required this.buttonLabel,
       this.backgroundColor = AskLoraColors.white,
+      this.onPrimaryButtonTap,
       Key? key})
       : super(key: key);
 
@@ -66,14 +70,16 @@ class LoraPopUpMessage extends StatelessWidget {
                     PrimaryButton(
                         buttonPrimaryType: buttonPrimaryType,
                         label: buttonLabel,
-                        onTap: () {})
+                        onTap: () {
+                          if (onPrimaryButtonTap != null) onPrimaryButtonTap!();
+                        })
                   ],
                 ),
               ),
             ),
             Align(
                 alignment: Alignment.topCenter,
-                child: Image.asset('assets/images/memoji.png')),
+                child: getPngImage('lora_memoji_1')),
           ],
         ),
       ),

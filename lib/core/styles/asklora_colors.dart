@@ -26,4 +26,5 @@ class AskLoraColors {
   static const darkerLime = Color(0XFFE0E32B);
   static const darkerGreen = Color(0XFF27D7A4);
   static const darkerPurple = Color(0XFFA479E9);
+  static const extraLightGray = Color(0XFFF8F8F8);
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
+import '../../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../../../core/presentation/custom_text_new.dart';
 
 enum ButtonExtraInfoSize { small, big }
 
@@ -45,7 +46,7 @@ class _ExtraInfoButtonState extends State<ExtraInfoButton> {
             minHeight: widget.buttonExtraInfoSize == ButtonExtraInfoSize.big
                 ? 43
                 : 27),
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(width: 1.4, color: AskLoraColors.primaryMagenta),
@@ -54,6 +55,7 @@ class _ExtraInfoButtonState extends State<ExtraInfoButton> {
                 : Colors.transparent),
         child: Row(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomTextNew(widget.label,
                 style: widget.buttonExtraInfoSize == ButtonExtraInfoSize.big
@@ -61,7 +63,10 @@ class _ExtraInfoButtonState extends State<ExtraInfoButton> {
                         .copyWith(color: AskLoraColors.primaryMagenta)
                     : AskLoraTextStyles.subtitle3
                         .copyWith(color: AskLoraColors.primaryMagenta)),
-            widget.suffixIcon ?? const SizedBox.shrink()
+            if (widget.suffixIcon != null) ...[
+              const SizedBox(width: 5),
+              widget.suffixIcon!
+            ]
           ],
         ),
       ),

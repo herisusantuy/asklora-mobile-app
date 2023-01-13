@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../ppi_screen.dart';
@@ -26,7 +26,7 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const LoraMemojiWidget(
+                  const LoraMemojiHeader(
                       text:
                           'Let’s dive into the core of the personalisation experience - defining your investment style.'),
                   ButtonPair(

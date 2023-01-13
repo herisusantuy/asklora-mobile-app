@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../../generated/l10n.dart';
 import '../../ppi/bloc/question/question_bloc.dart';
@@ -27,7 +27,7 @@ class GreetingScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  LoraMemojiWidget(
+                  LoraMemojiHeader(
                       text: S.of(context).greetingScreenPlaceholder(name)),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 35, top: 24),

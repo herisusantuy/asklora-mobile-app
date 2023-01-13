@@ -57,10 +57,14 @@ extension ExtraPadding on BuildContext {
       ));
 }
 
-extension StringExtensions on String {
-  String get imagePath => 'assets/images/$this';
-
-  String get iconPath => 'assets/icons/$this';
-
-  String get svgIconPath => 'assets/icons/$this.svg';
-}
+// extension StringExtensions on String {
+//   String get imagePath => 'assets/images/$this';
+//
+//   String get iconPath => 'assets/icons/$this';
+//
+//   String get svgIconPath => 'assets/icons/$this.svg';
+//
+//   String get pngIconPath => 'assets/icons/$this.png';
+//
+//   String get pngImagePath => 'assets/images/$this.png';
+// }

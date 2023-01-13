@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
+import '../../utils/app_icons.dart';
 import '../../utils/extensions.dart';
 import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
@@ -98,37 +98,36 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           children: [
             Focus(
                 child: TextFormField(
-                    controller: controller,
-                    onChanged: widget.onChanged,
-                    textCapitalization: widget.textCapitalization,
-                    inputFormatters: widget.textInputFormatterList,
-                    obscureText: obscureText,
-                    obscuringCharacter: '●',
-                    style: TextFieldStyle.valueTextStyle,
-                    decoration: TextFieldStyle.inputDecoration.copyWith(
-                      floatingLabelBehavior: floatingLabelBehavior,
-                      labelText: label,
-                      hintText: widget.hintText,
-                      errorText:
-                          widget.errorText.isEmpty ? null : widget.errorText,
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            obscureText = !obscureText;
-                          });
-                        },
-                        child: UnconstrainedBox(
-                          child: Padding(
-                            padding: EdgeInsets.only(top: obscureText ? 2 : 0),
-                            child: SvgPicture.asset(
-                              obscureText
-                                  ? 'assets/icons/icon_obscure_text_disable.svg'
-                                  : 'assets/icons/icon_obscure_text_enable.svg',
-                            ),
-                          ),
+                  controller: controller,
+                  onChanged: widget.onChanged,
+                  textCapitalization: widget.textCapitalization,
+                  inputFormatters: widget.textInputFormatterList,
+                  obscureText: obscureText,
+                  obscuringCharacter: '●',
+                  style: TextFieldStyle.valueTextStyle,
+                  decoration: TextFieldStyle.inputDecoration.copyWith(
+                    floatingLabelBehavior: floatingLabelBehavior,
+                    labelText: label,
+                    hintText: widget.hintText,
+                    errorText:
+                        widget.errorText.isEmpty ? null : widget.errorText,
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
+                      child: UnconstrainedBox(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: obscureText ? 2 : 0),
+                          child: getSvgIcon(obscureText
+                              ? 'icon_obscure_text_disable'
+                              : 'icon_obscure_text_enable'),
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
                 onFocusChange: (hasFocus) {
                   shouldShowErrorsTexts = hasFocus;
                 }),

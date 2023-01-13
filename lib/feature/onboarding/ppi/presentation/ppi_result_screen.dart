@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 
 class PpiResultScreen extends StatelessWidget {
@@ -28,7 +28,7 @@ class PpiResultScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  LoraMemojiWidget(text: memojiText),
+                  LoraMemojiHeader(text: memojiText),
                   if (additionalMessage.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.symmetric(
