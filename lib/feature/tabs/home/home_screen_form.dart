@@ -37,9 +37,9 @@ class HomeScreenForm extends StatelessWidget {
                       progress: 0.11),
                 ),
                 const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: const LoraRoundedCornerBanner(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: LoraRoundedCornerBanner(),
                 ),
                 const SizedBox(height: 100),
                 SizedBox(

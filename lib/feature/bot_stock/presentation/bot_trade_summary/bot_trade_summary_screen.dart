@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
-import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/presentation/round_colored_box.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
@@ -109,8 +111,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                             vertical: 12, horizontal: 13),
                         child: Row(
                           children: [
-                            Image.asset(
-                              'assets/images/memoji.png',
+                            const LoraMemojiWidget(
+                              loraMemojiType: LoraMemojiType.lora1,
                               height: 70,
                               width: 70,
                             ),
