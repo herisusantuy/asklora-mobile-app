@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../styles/asklora_colors.dart';
 import '../../../styles/asklora_text_styles.dart';
+import '../../../utils/app_icons.dart';
 import '../../custom_text_new.dart';
 
 class ViewFileButton extends StatelessWidget {
@@ -45,7 +46,7 @@ class ViewFileButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             child: Row(
               children: [
-                SvgPicture.asset('assets/icons/kyc/pdf.svg'),
+                getSvgIcon('pdf'),
                 const SizedBox(
                   width: 18,
                 ),

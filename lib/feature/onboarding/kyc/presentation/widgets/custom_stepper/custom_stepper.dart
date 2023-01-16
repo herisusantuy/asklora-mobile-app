@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -29,11 +29,11 @@ class CustomStepper extends StatelessWidget {
 
   String _getSvgAssetName(int index, int currentStep) {
     if (index + 1 < currentStep) {
-      return 'passed_step_icon.svg';
+      return 'passed_step_icon';
     } else if (index + 1 == currentStep) {
-      return 'active_step_icon.svg';
+      return 'active_step_icon';
     } else {
-      return 'inactive_step_icon.svg';
+      return 'inactive_step_icon';
     }
   }
 }

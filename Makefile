@@ -2,6 +2,8 @@
 
 all: lint format run_dev_mobile
 
+pr: format lint run_test
+
 help: ## This help dialog.
 	@IFS=$$'\n' ; \
 	help_lines=(`fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//'`); \

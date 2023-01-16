@@ -6,7 +6,7 @@ class CustomStep extends StatelessWidget {
   final String label;
 
   const CustomStep(
-      {this.svgAssetName = 'inactive_step_icon.svg',
+      {this.svgAssetName = 'inactive_step_icon',
       this.drawLine = false,
       required this.label,
       Key? key})
