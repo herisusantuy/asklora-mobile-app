@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.dart';
-import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/lora_popup_message.dart';
 import '../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../core/styles/asklora_colors.dart';
@@ -39,7 +38,10 @@ class HomeScreenForm extends StatelessWidget {
                 const SizedBox(height: 20),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: LoraRoundedCornerBanner(),
+                  child: LoraRoundedCornerBanner(
+                    text:
+                        'Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!',
+                  ),
                 ),
                 const SizedBox(height: 100),
                 SizedBox(
@@ -95,14 +97,16 @@ class HomeScreenForm extends StatelessWidget {
                       buttonLabel: 'SIGN UP'),
                 ),
                 const SizedBox(height: 20),
-                const LoraPopUpMessageWithBotBadge(
+                LoraPopUpMessageWithBotBadge(
                   backgroundColor: AskLoraColors.whiteSmoke,
                   withLoraImage: true,
                   badgePosition: BadgePosition.belowSubtitle,
                   title: 'No traded BotStocks.',
                   subTitle:
                       'You can manage all your investments here after you start trading. Create an account and start trading.',
-                  botTypes: [BotType.pullUp, BotType.squat],
+                  botTypes: const [BotType.pullUp, BotType.squat],
+                  buttonLabel: 'OPEN INVESTMENT ACCOUNT',
+                  onButtonTap: () {},
                 ),
                 const SizedBox(height: 20),
               ],

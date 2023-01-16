@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^3.0.1
   back_button_interceptor: ^6.0.2
   onfido_sdk: ^2.0.0
+  just_the_tooltip: ^0.0.12
 
   country_picker:
     path: ../flutter_country_picker/

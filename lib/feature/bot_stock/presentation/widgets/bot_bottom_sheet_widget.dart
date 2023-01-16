@@ -7,7 +7,22 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 
 class BotBottomSheetWidget extends StatelessWidget {
-  const BotBottomSheetWidget({Key? key}) : super(key: key);
+  final String title;
+  final String? subTitle;
+  final String primaryButtonLabel;
+  final String secondaryButtonLabel;
+  final VoidCallback onPrimaryButtonTap;
+  final VoidCallback onSecondaryButtonTap;
+
+  const BotBottomSheetWidget(
+      {required this.title,
+      this.subTitle,
+      required this.primaryButtonLabel,
+      required this.secondaryButtonLabel,
+      required this.onPrimaryButtonTap,
+      required this.onSecondaryButtonTap,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +49,27 @@ class BotBottomSheetWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       CustomTextNew(
-                        'Your free Botstock has been added to your portfolio successfully!',
+                        title,
                         style: AskLoraTextStyles.h4,
                         textAlign: TextAlign.center,
                       ),
+                      if (subTitle != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 14),
+                          child: CustomTextNew(
+                            subTitle!,
+                            style: AskLoraTextStyles.body1,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       const SizedBox(
                         height: 32,
                       ),
                       ButtonPair(
-                          primaryButtonOnClick: () {},
-                          secondaryButtonOnClick: () => Navigator.pop(context),
-                          primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',
-                          secondaryButtonLabel: 'NOT NOW')
+                          primaryButtonOnClick: onPrimaryButtonTap,
+                          secondaryButtonOnClick: onSecondaryButtonTap,
+                          primaryButtonLabel: primaryButtonLabel,
+                          secondaryButtonLabel: secondaryButtonLabel)
                     ],
                   ),
                 ),

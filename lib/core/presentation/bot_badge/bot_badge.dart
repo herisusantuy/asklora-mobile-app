@@ -8,8 +8,10 @@ import '../custom_text_new.dart';
 class BotBadge extends StatefulWidget {
   final BotType botType;
   final Color? backgroundColor;
+  final Color? textColor;
 
-  const BotBadge({required this.botType, this.backgroundColor, Key? key})
+  const BotBadge(
+      {required this.botType, this.backgroundColor, this.textColor, Key? key})
       : super(key: key);
 
   @override
@@ -71,9 +73,10 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
                   width: 5,
                 ),
                 CustomTextNew(
-                  '${widget.botType.name} BOTS',
-                  style: AskLoraTextStyles.h3Italic
-                      .copyWith(color: widget.botType.expiredTextColor),
+                  '${widget.botType.uppercaseName} BOTS',
+                  style: AskLoraTextStyles.h3Italic.copyWith(
+                      color:
+                          widget.textColor ?? widget.botType.expiredTextColor),
                 ),
                 const SizedBox(
                   width: 5,

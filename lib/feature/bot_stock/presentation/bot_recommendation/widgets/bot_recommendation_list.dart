@@ -26,6 +26,8 @@ class BotRecommendationList extends StatelessWidget {
                 runSpacing: _spacing,
                 children: state.botRecommendationResponse.data!
                     .map((e) => BotRecommendationCard(
+                          onTap: () => BotRecommendationDetailScreen.open(
+                              context: context, recommendedBot: e),
                           height: botCardHeight,
                           spacing: _spacing,
                           recommendedBot: e,
@@ -64,6 +66,7 @@ class BotRecommendationList extends StatelessWidget {
                       runSpacing: _spacing,
                       children: defaultRecommendedBots
                           .map((e) => BotRecommendationCard(
+                                onTap: () {},
                                 height: botCardHeight,
                                 recommendedBot: e,
                                 spacing: _spacing,

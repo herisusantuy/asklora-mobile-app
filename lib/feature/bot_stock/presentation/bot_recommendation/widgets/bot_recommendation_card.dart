@@ -4,11 +4,15 @@ class BotRecommendationCard extends StatelessWidget {
   final double height;
   final RecommendedBot recommendedBot;
   final double spacing;
+  final VoidCallback onTap;
+  final bool isDisabled;
 
   const BotRecommendationCard(
-      {required this.height,
+      {required this.onTap,
+      required this.height,
       required this.spacing,
       required this.recommendedBot,
+      this.isDisabled = false,
       Key? key})
       : super(key: key);
 
@@ -16,8 +20,7 @@ class BotRecommendationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final BotType botType = BotType.findByString(recommendedBot.botType);
     return GestureDetector(
-      onTap: () => BotRecommendationDetailScreen.open(
-          context: context, recommendedBot: recommendedBot),
+      onTap: () => isDisabled ? () {} : onTap(),
       child: Container(
         height: height,
         width: (MediaQuery.of(context).size.width -
@@ -71,9 +74,10 @@ class BotRecommendationCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: PrimaryButton(
+                  disabled: isDisabled,
                   buttonPrimarySize: ButtonPrimarySize.small,
                   label: 'FREE TRADE',
-                  onTap: () {}),
+                  onTap: onTap),
             )
           ],
         ),

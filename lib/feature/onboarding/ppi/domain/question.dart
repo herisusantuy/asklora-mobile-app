@@ -70,18 +70,21 @@ class Question {
 class Choices {
   String? name;
   String? point;
+  bool? selectable;
 
-  Choices({this.name, this.point});
+  Choices({this.name, this.point, this.selectable});
 
   Choices.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     point = json['point'];
+    selectable = json['selectable'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['point'] = point;
+    data['selectable'] = selectable;
     return data;
   }
 

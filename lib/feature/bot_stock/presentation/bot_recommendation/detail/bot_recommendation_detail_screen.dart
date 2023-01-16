@@ -19,6 +19,8 @@ import '../../widgets/gift_bot_stock_base_widget.dart';
 import '../../widgets/pair_column_text.dart';
 import 'widgets/bot_price_line_bar.dart';
 
+part 'widgets/bot_recommendation_chart.dart';
+
 class BotRecommendationDetailScreen extends StatelessWidget {
   static const String route = '/bot_recommendation_detail_screen';
   final RecommendedBot recommendedBot;

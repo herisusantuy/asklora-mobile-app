@@ -6,6 +6,7 @@ class CustomScaffold extends Scaffold {
   CustomScaffold(
       {super.key,
       required Widget body,
+      VoidCallback? onTapBack,
       bool enableBackNavigation = true,
       bool useSafeArea = true,
       super.backgroundColor,
@@ -27,7 +28,11 @@ class CustomScaffold extends Scaffold {
                                 color: AskLoraColors.charcoal,
                               ),
                               onPressed: () {
-                                Navigator.pop(context);
+                                if (onTapBack != null) {
+                                  onTapBack();
+                                } else {
+                                  Navigator.pop(context);
+                                }
                               },
                             );
                           },

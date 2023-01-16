@@ -110,19 +110,23 @@ class RecommendedBot {
 
   final bool freeBot;
 
+  final bool selectable;
+
   RecommendedBot(
-      this.botId,
-      this.ticker,
-      this.tickerName,
-      this.tickerSymbol,
-      this.botType,
-      this.botWord,
-      this.description,
-      this.benefit,
-      this.suitability,
-      this.companyDescription,
-      this.expiredDate,
-      {this.freeBot = false});
+    this.botId,
+    this.ticker,
+    this.tickerName,
+    this.tickerSymbol,
+    this.botType,
+    this.botWord,
+    this.description,
+    this.benefit,
+    this.suitability,
+    this.companyDescription,
+    this.expiredDate, {
+    this.freeBot = false,
+    this.selectable = false,
+  });
 
   factory RecommendedBot.fromJson(Map<String, dynamic> json) =>
       _$RecommendedBotFromJson(json);
@@ -148,6 +152,5 @@ String? getPointOfAnswer(String uid, List<Answer>? answers) {
     answer = answers.firstWhereOrNull((element) => element.questionId == uid);
     return answer?.points;
   }
-  print('getPointofAnswer uid : $uid ${answer?.points}');
   return '3';
 }
