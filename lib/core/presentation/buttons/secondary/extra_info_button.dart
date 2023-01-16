@@ -63,10 +63,10 @@ class _ExtraInfoButtonState extends State<ExtraInfoButton> {
                         .copyWith(color: AskLoraColors.primaryMagenta)
                     : AskLoraTextStyles.subtitle3
                         .copyWith(color: AskLoraColors.primaryMagenta)),
-            if (widget.suffixIcon != null) ...[
-              const SizedBox(width: 5),
-              widget.suffixIcon!
-            ]
+            if (widget.suffixIcon != null)
+              Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: widget.suffixIcon)
           ],
         ),
       ),
