@@ -10,10 +10,6 @@ class AppIcons {
   static String appleLogo = 'assets/icons/apple_logo.png';
 }
 
-// String get imagePath => 'assets/images/$this';
-
-// String get iconPath => 'assets/icons/$this';
-
 Widget getSvgIcon(String iconName,
         {Color? color, double? height, double? width}) =>
     SvgPicture.asset('assets/icons/$iconName.svg',
@@ -30,5 +26,3 @@ Widget getSvgImage(String assetName,
         {Color? color, double? height, double? width}) =>
     SvgPicture.asset('assets/images/$assetName.svg',
         color: color, height: height, width: width);
-
-// SvgPicture.asset('assets/images/memoji_background_green.svg'),
