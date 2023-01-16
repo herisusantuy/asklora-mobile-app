@@ -60,5 +60,11 @@
 			<string>en</string>
 			<string>zh</string>
 		</array>
+        <key>CFBundleURLName</key>
+            <string>flutterbooksample.com</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+            <string>customscheme</string>
+            </array>
 	</dict>
 </plist>
