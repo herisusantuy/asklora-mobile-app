@@ -27,18 +27,18 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
 
   const LoraPopUpMessageWithBotBadge(
       {required this.title,
-        required this.subTitle,
-        required this.botTypes,
-        this.withLoraImage = true,
-        this.badgePosition = BadgePosition.belowSubtitle,
-        this.backgroundColor = AskLoraColors.whiteSmoke,
-        this.titleColor = AskLoraColors.charcoal,
-        this.subTitleColor = AskLoraColors.charcoal,
-        this.badgeBackgroundColors = const [],
-        this.badgeTextColors = const [],
-        required this.buttonLabel,
-        required this.onButtonTap,
-        Key? key})
+      required this.subTitle,
+      required this.botTypes,
+      this.withLoraImage = true,
+      this.badgePosition = BadgePosition.belowSubtitle,
+      this.backgroundColor = AskLoraColors.whiteSmoke,
+      this.titleColor = AskLoraColors.charcoal,
+      this.subTitleColor = AskLoraColors.charcoal,
+      this.badgeBackgroundColors = const [],
+      this.badgeTextColors = const [],
+      required this.buttonLabel,
+      required this.onButtonTap,
+      Key? key})
       : super(key: key);
 
   @override
@@ -60,25 +60,25 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                 ),
                 Container(
                   padding:
-                  EdgeInsets.only(top: withLoraImage ? 64 : 32, bottom: 32),
+                      EdgeInsets.only(top: withLoraImage ? 64 : 32, bottom: 32),
                   width: double.infinity,
                   child: Column(
                     children: [
                       if (badgePosition == BadgePosition.top)
                         ...botTypes
                             .map((e) => BotBadge(
-                          botType: e,
-                          backgroundColor: _getBadgeBackgroundColor(
-                              botTypes.indexOf(e)),
-                          textColor:
-                          _getBadgeTextColor(botTypes.indexOf(e)),
-                        ))
+                                  botType: e,
+                                  backgroundColor: _getBadgeBackgroundColor(
+                                      botTypes.indexOf(e)),
+                                  textColor:
+                                      _getBadgeTextColor(botTypes.indexOf(e)),
+                                ))
                             .toList(),
                       Padding(
                         padding: EdgeInsets.only(
                             left: AppValues.screenHorizontalPadding.left + 23,
                             right:
-                            AppValues.screenHorizontalPadding.right + 23),
+                                AppValues.screenHorizontalPadding.right + 23),
                         child: Column(
                           children: [
                             CustomTextNew(
@@ -107,12 +107,12 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                       if (badgePosition == BadgePosition.belowSubtitle)
                         ...botTypes
                             .map((e) => BotBadge(
-                          backgroundColor: _getBadgeBackgroundColor(
-                              botTypes.indexOf(e)),
-                          textColor:
-                          _getBadgeTextColor(botTypes.indexOf(e)),
-                          botType: e,
-                        ))
+                                  backgroundColor: _getBadgeBackgroundColor(
+                                      botTypes.indexOf(e)),
+                                  textColor:
+                                      _getBadgeTextColor(botTypes.indexOf(e)),
+                                  botType: e,
+                                ))
                             .toList(),
                       const SizedBox(
                         height: 8,
@@ -121,7 +121,7 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                         padding: EdgeInsets.only(
                             left: AppValues.screenHorizontalPadding.left + 23,
                             right:
-                            AppValues.screenHorizontalPadding.right + 23),
+                                AppValues.screenHorizontalPadding.right + 23),
                         child: PrimaryButton(
                             buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
                             label: buttonLabel,
@@ -159,4 +159,3 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
     }
   }
 }
-

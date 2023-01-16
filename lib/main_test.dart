@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
               badgePosition: BadgePosition.belowSubtitle,
               title: 'No traded BotStocks.',
               subTitle:
-              'You can manage all your investments here after you start trading. Create an account and start trading.',
+                  'You can manage all your investments here after you start trading. Create an account and start trading.',
               botTypes: const [BotType.pullUp, BotType.squat],
               buttonLabel: 'NEXT',
               onButtonTap: () {},

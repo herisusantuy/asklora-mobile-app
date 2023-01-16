@@ -20,8 +20,12 @@ class BotRecommendationDetailContent extends StatelessWidget {
   final String _tempTooltipText =
       'Lorem ipsum dolor sit amet consectetur. Integer neque ultrices amet fermentum condimentum consequat. ';
 
-
-  const BotRecommendationDetailContent({required this.recommendedBot, required this.botType, required this.chart, Key? key}) : super(key: key);
+  const BotRecommendationDetailContent(
+      {required this.recommendedBot,
+      required this.botType,
+      required this.chart,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -139,8 +143,8 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ),
             CustomTextNew(
               'About Tesla',
-              style: AskLoraTextStyles.h6
-                  .copyWith(color: AskLoraColors.charcoal),
+              style:
+                  AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
             ),
             const SizedBox(
               height: 21,
@@ -210,23 +214,23 @@ class BotRecommendationDetailContent extends StatelessWidget {
   }
 
   Widget get _detailedInformation => Column(
-    children: [
-      const BotPriceLineBar(
-        minPrice: 210,
-        maxPrice: 240,
-        currentPrice: 220,
-      ),
-      const SizedBox(
-        height: 24,
-      ),
-      PairColumnText(
-          title1: 'Stop Loss Level (USD)',
-          subTitle1: '210.00',
-          title2: 'Take Profit Level (USD)',
-          subTitle2: '210.00',
-          tooltipText1: _tempTooltipText,
-          tooltipText2: _tempTooltipText),
-      _spaceBetweenInfo,
-    ],
-  );
+        children: [
+          const BotPriceLineBar(
+            minPrice: 210,
+            maxPrice: 240,
+            currentPrice: 220,
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          PairColumnText(
+              title1: 'Stop Loss Level (USD)',
+              subTitle1: '210.00',
+              title2: 'Take Profit Level (USD)',
+              subTitle2: '210.00',
+              tooltipText1: _tempTooltipText,
+              tooltipText2: _tempTooltipText),
+          _spaceBetweenInfo,
+        ],
+      );
 }

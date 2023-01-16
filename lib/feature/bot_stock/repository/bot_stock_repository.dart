@@ -14,7 +14,7 @@ class BotStockRepository {
   Future<BaseResponse<List<ChartDataSet>>> fetchChartDataJson() async {
     try {
       final String response =
-      await rootBundle.loadString('assets/json/aapl_with_index.json');
+          await rootBundle.loadString('assets/json/aapl_with_index.json');
 
       Iterable iterable = json.decode(response);
 
@@ -31,7 +31,7 @@ class BotStockRepository {
               List<UiData>>>> fetchTradeChartDataJson() async {
     try {
       final String response =
-      await rootBundle.loadString('assets/json/tesla_3_month_uno.json');
+          await rootBundle.loadString('assets/json/tesla_3_month_uno.json');
       var decodedJson = json.decode(response);
       return BaseResponse.complete(Triplet(
           _addIndexChartData(List<ChartDataStudioSet>.from(

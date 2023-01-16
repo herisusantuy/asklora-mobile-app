@@ -7,7 +7,8 @@ class DemonstrationBottomSheet {
       {VoidCallback? onTapBack,
       required VoidCallback onPrimaryButtonTap,
       required VoidCallback onSecondaryButtonTap,
-      required String title, String? subTitle,
+      required String title,
+      String? subTitle,
       required String primaryButtonLabel,
       required String secondaryButtonLabel,
       bool isDismissible = true}) {

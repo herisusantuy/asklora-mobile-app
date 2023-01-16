@@ -1,7 +1,6 @@
 part of '../multiple_choice_question_widget.dart';
 
 class MultipleChoiceButton extends StatelessWidget {
-
   final int index;
   final String label;
   final bool selectable;
@@ -9,9 +8,8 @@ class MultipleChoiceButton extends StatelessWidget {
   final bool active;
 
   const MultipleChoiceButton(
-      {
-        required this.index,
-        required this.label,
+      {required this.index,
+      required this.label,
       this.selectable = false,
       required this.onTap,
       this.active = false,
@@ -26,8 +24,7 @@ class MultipleChoiceButton extends StatelessWidget {
         builder: (context, state) => Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
               child: SecondaryMultipleChoiceButton(
-                  active: index == state.defaultChoiceIndex ||
-                      active,
+                  active: index == state.defaultChoiceIndex || active,
                   label: label,
                   onTap: selectable ? () => onTap() : () {}),
             ));

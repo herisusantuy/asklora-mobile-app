@@ -7,16 +7,13 @@ class BotRecommendationChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BotStockBloc, BotStockState>(
         buildWhen: (previous, current) =>
-        previous.chartDataResponse !=
-            current.chartDataResponse,
+            previous.chartDataResponse != current.chartDataResponse,
         builder: (context, state) {
-          if (state.chartDataResponse.state !=
-              ResponseState.success) {
+          if (state.chartDataResponse.state != ResponseState.success) {
             return const SizedBox.shrink();
           } else {
             return LineChartSample(
-                chartDataSets:
-                state.chartDataResponse.data!);
+                chartDataSets: state.chartDataResponse.data!);
           }
         });
   }

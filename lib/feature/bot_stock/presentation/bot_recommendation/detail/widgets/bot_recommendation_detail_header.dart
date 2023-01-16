@@ -9,7 +9,9 @@ import '../../../../utils/bot_stock_utils.dart';
 class BotRecommendationDetailHeader extends StatelessWidget {
   final RecommendedBot recommendedBot;
   final BotType botType;
-  const BotRecommendationDetailHeader({required this.botType, required this.recommendedBot, Key? key}) : super(key: key);
+  const BotRecommendationDetailHeader(
+      {required this.botType, required this.recommendedBot, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +20,7 @@ class BotRecommendationDetailHeader extends StatelessWidget {
         padding: const EdgeInsets.only(top: 22.0),
         child: CustomTextNew(
           '${botType.uppercaseName} ${recommendedBot.ticker}',
-          style: AskLoraTextStyles.h5
-              .copyWith(color: AskLoraColors.charcoal),
+          style: AskLoraTextStyles.h5.copyWith(color: AskLoraColors.charcoal),
         ),
       ),
     );
