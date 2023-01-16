@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../styles/asklora_colors.dart';
+import '../../utils/app_icons.dart';
 
 class DotWidget extends StatefulWidget {
   const DotWidget() : super(key: const Key('ad'));
@@ -51,7 +51,7 @@ class _DotWidgetState extends State<DotWidget>
         animation: _controller,
         builder: (context, child) {
           return SizedBox(
-              child: SvgPicture.asset('assets/icons/asklora_dot_green.svg',
+              child: getSvgIcon('asklora_dot_green',
                   color: background
                       .evaluate(AlwaysStoppedAnimation(_controller.value))));
         });

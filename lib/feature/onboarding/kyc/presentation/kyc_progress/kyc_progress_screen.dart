@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
@@ -24,7 +24,7 @@ class KycProgressScreen extends StatelessWidget {
       padding: AppValues.screenHorizontalPadding,
       child: ListView(
         children: [
-          const LoraMemojiWidget(
+          const LoraMemojiHeader(
               text:
                   'Open investment account and deposit are the last step before investing. '),
           _kycSteps,

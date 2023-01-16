@@ -3,16 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/buttons/button_pair.dart';
-import 'widgets/custom_choice_chips.dart';
 import '../../../../../../core/presentation/custom_snack_bar.dart';
-import '../../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
-import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../domain/question.dart';
+import '../header.dart';
 import '../question_title.dart';
 import 'bloc/omni_search_question_widget_bloc.dart';
-import '../header.dart';
+import 'widgets/custom_choice_chips.dart';
 
 class OmniSearchQuestionWidget extends StatelessWidget {
   final String defaultAnswer;
@@ -72,7 +71,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                               question: questionCollection.questions!.question!,
                               paddingBottom: 24,
                             ),
-                            _emojiWidget,
+                            const LoraRoundedCornerBanner(),
                             const SizedBox(
                               height: 52,
                             ),
@@ -146,69 +145,44 @@ class OmniSearchQuestionWidget extends StatelessWidget {
 
   Widget get _addKeywordInput =>
       BlocBuilder<OmniSearchQuestionWidgetBloc, OmniSearchQuestionWidgetState>(
-          buildWhen: (previous, current) =>
-              previous.keywords != current.keywords,
-          builder: (context, state) {
-            keywordController.text = '';
-            return AutoResizedTextField(
-              key: const Key('name_input'),
-              controller: keywordController,
-              hintText: 'ENTER KEYWORDS',
-              textInputType: TextInputType.text,
-              onChanged: (value) => context
-                  .read<OmniSearchQuestionWidgetBloc>()
-                  .add(KeywordChanged(value)),
-              suffixIcon: BlocBuilder<OmniSearchQuestionWidgetBloc,
-                      OmniSearchQuestionWidgetState>(
-                  buildWhen: (previous, current) =>
-                      previous.keyword != current.keyword,
-                  builder: (context, state) => ElevatedButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        if (state.keyword.isNotEmpty) {
-                          context
-                              .read<OmniSearchQuestionWidgetBloc>()
-                              .add(KeywordAdded(keywordController.text));
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: state.keyword.isEmpty
-                            ? AskLoraColors.gray
-                            : AskLoraColors.charcoal,
-                        foregroundColor: state.keyword.isEmpty
-                            ? AskLoraColors.darkGray
-                            : AskLoraColors.primaryGreen,
-                        shape: const CircleBorder(),
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        size: 32,
-                      ))),
-            );
-          });
-
-  Widget get _emojiWidget => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 12),
-        decoration: BoxDecoration(
-            color: AskLoraColors.lightGreen,
-            borderRadius: BorderRadius.circular(18)),
-        child: Row(
-          children: [
-            CustomTextNew(
-              '-MEmoji Image-',
-              style: AskLoraTextStyles.body4,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              width: 12,
-            ),
-            Expanded(
-              child: CustomTextNew(
-                'Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!',
-                style: AskLoraTextStyles.body1,
-              ),
-            )
-          ],
-        ),
+        buildWhen: (previous, current) => previous.keywords != current.keywords,
+        builder: (context, state) {
+          keywordController.text = '';
+          return AutoResizedTextField(
+            key: const Key('name_input'),
+            controller: keywordController,
+            hintText: 'ENTER KEYWORDS',
+            textInputType: TextInputType.text,
+            onChanged: (value) => context
+                .read<OmniSearchQuestionWidgetBloc>()
+                .add(KeywordChanged(value)),
+            suffixIcon: BlocBuilder<OmniSearchQuestionWidgetBloc,
+                    OmniSearchQuestionWidgetState>(
+                buildWhen: (previous, current) =>
+                    previous.keyword != current.keyword,
+                builder: (context, state) => ElevatedButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      if (state.keyword.isNotEmpty) {
+                        context
+                            .read<OmniSearchQuestionWidgetBloc>()
+                            .add(KeywordAdded(keywordController.text));
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: state.keyword.isEmpty
+                          ? AskLoraColors.gray
+                          : AskLoraColors.charcoal,
+                      foregroundColor: state.keyword.isEmpty
+                          ? AskLoraColors.darkGray
+                          : AskLoraColors.primaryGreen,
+                      shape: const CircleBorder(),
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      size: 32,
+                    ))),
+          );
+        },
       );
 }

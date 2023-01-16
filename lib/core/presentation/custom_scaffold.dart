@@ -8,10 +8,10 @@ class CustomScaffold extends Scaffold {
       required Widget body,
       bool enableBackNavigation = true,
       bool useSafeArea = true,
-      Color? backgroundColor})
+      super.backgroundColor,
+      super.bottomNavigationBar})
       : super(
             extendBodyBehindAppBar: true,
-            backgroundColor: backgroundColor,
             body: Stack(
               children: [
                 useSafeArea ? SafeArea(child: body) : body,

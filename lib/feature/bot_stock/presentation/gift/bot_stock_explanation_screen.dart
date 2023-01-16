@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/presentation/lora_memoji_header.dart';
 import '../widgets/circular_bot_card.dart';
 import '../widgets/gift_bot_stock_base_widget.dart';
 import 'bot_stock_do_screen.dart';
@@ -21,7 +21,7 @@ class BotStockExplanationScreen extends StatelessWidget {
         body: GiftBotStockBaseWidget(
       content: Column(
         children: [
-          const LoraMemojiWidget(
+          const LoraMemojiHeader(
               text:
                   'A Botstock is a combination of a stock and a Bot. A Bot is where Lora  manages your stock position.'),
           const SizedBox(

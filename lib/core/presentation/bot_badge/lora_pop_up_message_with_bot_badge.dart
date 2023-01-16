@@ -6,6 +6,7 @@ import '../../styles/asklora_text_styles.dart';
 import '../../values/app_values.dart';
 import '../buttons/primary_button.dart';
 import '../custom_text_new.dart';
+import '../lora_memoji_widget.dart';
 import 'bot_badge.dart';
 
 enum BadgePosition { top, belowSubtitle }
@@ -116,9 +117,9 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
           ),
         ),
         if (withLoraImage)
-          Align(
+          const Align(
               alignment: Alignment.topCenter,
-              child: Image.asset('assets/images/memoji.png')),
+              child: LoraMemojiWidget(loraMemojiType: LoraMemojiType.lora1)),
       ],
     );
   }

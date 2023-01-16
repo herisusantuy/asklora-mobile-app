@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../../core/utils/app_icons.dart';
 
 part 'custom_step.dart';
 
@@ -19,20 +20,20 @@ class CustomStepper extends StatelessWidget {
             .asMap()
             .entries
             .map((element) => CustomStep(
-                  svgAsset: _getSvgAsset(element.key, currentStep),
+                  svgAssetName: _getSvgAssetName(element.key, currentStep),
                   label: element.value,
                   drawLine: element.key != 0,
                 ))
             .toList(),
       );
 
-  String _getSvgAsset(int index, int currentStep) {
+  String _getSvgAssetName(int index, int currentStep) {
     if (index + 1 < currentStep) {
-      return 'passed_step_icon.svg';
+      return 'passed_step_icon';
     } else if (index + 1 == currentStep) {
-      return 'active_step_icon.svg';
+      return 'active_step_icon';
     } else {
-      return 'inactive_step_icon.svg';
+      return 'inactive_step_icon';
     }
   }
 }

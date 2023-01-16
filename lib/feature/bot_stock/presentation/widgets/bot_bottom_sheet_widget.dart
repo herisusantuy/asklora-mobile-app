@@ -4,6 +4,7 @@ import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../core/presentation/lora_memoji_widget.dart';
 
 class BotBottomSheetWidget extends StatelessWidget {
   const BotBottomSheetWidget({Key? key}) : super(key: key);
@@ -49,9 +50,10 @@ class BotBottomSheetWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
-                  alignment: Alignment.topCenter,
-                  child: Image.asset('assets/images/memoji.png')),
+              const Align(
+                alignment: Alignment.topCenter,
+                child: LoraMemojiWidget(loraMemojiType: LoraMemojiType.lora1),
+              ),
             ],
           ),
         ],

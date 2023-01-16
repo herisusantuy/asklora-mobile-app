@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../styles/asklora_text_styles.dart';
+import '../../utils/app_icons.dart';
 import '../custom_text_new.dart';
 
 class BotBadge extends StatefulWidget {
@@ -78,9 +78,8 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
                 const SizedBox(
                   width: 5,
                 ),
-                SvgPicture.asset(
-                    'assets/icons/icon_bot_badge_pop_up_message_arrow.svg',
-                    color: widget.botType.expiredTextColor),
+                getSvgIcon('icon_bot_badge_pop_up_message_arrow',
+                    color: widget.botType.expiredTextColor)
               ],
             ),
           );
@@ -92,20 +91,16 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
   Widget _getBotTypeIcon() {
     switch (widget.botType) {
       case BotType.plank:
-        return SvgPicture.asset(
-            'assets/icons/icon_bot_badge_pop_up_message_plank.svg',
+        return getSvgIcon('icon_bot_badge_pop_up_message_plank',
             color: widget.botType.expiredTextColor);
       case BotType.squat:
-        return SvgPicture.asset(
-            'assets/icons/icon_bot_badge_pop_up_message_squat.svg',
+        return getSvgIcon('icon_bot_badge_pop_up_message_squat',
             color: widget.botType.expiredTextColor);
       case BotType.pullUp:
-        return SvgPicture.asset(
-            'assets/icons/icon_bot_badge_pop_up_message_pull_up.svg',
+        return getSvgIcon('icon_bot_badge_pop_up_message_pull_up',
             color: widget.botType.expiredTextColor);
       default:
-        return SvgPicture.asset(
-            'assets/icons/icon_bot_badge_pop_up_message_plank.svg',
+        return getSvgIcon('icon_bot_badge_pop_up_message_plank',
             color: widget.botType.expiredTextColor);
     }
   }

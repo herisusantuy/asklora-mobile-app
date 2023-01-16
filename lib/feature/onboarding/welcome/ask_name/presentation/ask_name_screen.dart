@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
-import '../../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/presentation/we_create/custom_centered_text_input.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
@@ -33,7 +33,7 @@ class AskNameScreen extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        LoraMemojiWidget(
+                        LoraMemojiHeader(
                             text: S.of(context).askNameScreenPlaceholder),
                         CustomCenteredTextInput(
                             key: const Key('name_input'),
