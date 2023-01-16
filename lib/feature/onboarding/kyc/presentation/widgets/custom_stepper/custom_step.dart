@@ -23,10 +23,7 @@ class CustomStep extends StatelessWidget {
               CustomPaint(
                   painter: DashedLineVerticalPainter(),
                   size: const Size(1, 34)),
-            SvgPicture.asset(
-              'assets/icons/kyc/$svgAssetName',
-              height: 16,
-            ),
+            getSvgIcon('kyc/$svgAssetName')
           ],
         ),
         const SizedBox(
