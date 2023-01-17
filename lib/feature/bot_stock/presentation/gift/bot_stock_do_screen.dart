@@ -55,7 +55,7 @@ class BotStockDoScreen extends StatelessWidget {
             CircularContainer(
                 backgroundColor: botType.primaryBgColor,
                 child: getSvgIcon(botType.botAssetName,
-                    color: AskLoraColors.black  )),
+                    color: AskLoraColors.black)),
             const SizedBox(
               width: 15,
             ),

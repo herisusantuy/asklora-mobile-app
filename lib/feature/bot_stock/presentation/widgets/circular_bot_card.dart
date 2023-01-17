@@ -34,7 +34,7 @@ class CircularBotCard extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(11)),
                 color: subTitleBackgroundColor),
             child: CustomTextNew(
-              subTitle!,
+              subTitle,
               style: AskLoraTextStyles.subtitle2
                   .copyWith(color: AskLoraColors.white),
             ),
