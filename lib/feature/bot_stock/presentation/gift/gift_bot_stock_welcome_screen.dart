@@ -17,7 +17,6 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        useSafeArea: false,
         enableBackNavigation: false,
         backgroundColor: AskLoraColors.charcoal,
         body: GiftBotStockBaseWidget(
@@ -26,7 +25,7 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
               const SafeArea(
                 child: LoraMemojiHeader(
                     textColor: AskLoraColors.white,
-                    text: 'Select a FREE AIs trade now!'),
+                    text: 'Select a FREE AI trade now!'),
               ),
               CustomTextNew(
                 'Select a FREE Botstock worths USD\$68 based on your investment style that you set before.',
