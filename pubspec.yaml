@@ -45,9 +45,6 @@ dependencies:
   country_picker:
     path: ../flutter_country_picker/
 
-  asklora_mobile_chart:
-    path: ../asklora-flutter-chart
-
   fl_chart:
     path: ../asklora-flutter-chart/fl_chart
 

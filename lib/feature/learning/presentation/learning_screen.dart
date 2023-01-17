@@ -33,7 +33,7 @@ class LearningScreen extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (_) =>
-                NavigationBloc<LearningPageStep>(LearningPageStep.welcome)),
+                NavigationBloc<LearningPageStep>(initialLearningPageStep)),
         BlocProvider(
             create: (_) => DemonstrationQuestionBloc(
                   demonstrationQuestionRepository:

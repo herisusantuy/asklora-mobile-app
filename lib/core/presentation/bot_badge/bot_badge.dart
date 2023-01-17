@@ -82,7 +82,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
                   width: 5,
                 ),
                 getSvgIcon('icon_bot_badge_pop_up_message_arrow',
-                    color: widget.botType.expiredTextColor)
+                    color: widget.textColor ?? widget.botType.expiredTextColor)
               ],
             ),
           );
@@ -95,16 +95,16 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
     switch (widget.botType) {
       case BotType.plank:
         return getSvgIcon('icon_bot_badge_pop_up_message_plank',
-            color: widget.botType.expiredTextColor);
+            color: widget.textColor ?? widget.botType.expiredTextColor);
       case BotType.squat:
         return getSvgIcon('icon_bot_badge_pop_up_message_squat',
-            color: widget.botType.expiredTextColor);
+            color: widget.textColor ?? widget.botType.expiredTextColor);
       case BotType.pullUp:
         return getSvgIcon('icon_bot_badge_pop_up_message_pull_up',
-            color: widget.botType.expiredTextColor);
+            color: widget.textColor ?? widget.botType.expiredTextColor);
       default:
         return getSvgIcon('icon_bot_badge_pop_up_message_plank',
-            color: widget.botType.expiredTextColor);
+            color: widget.textColor ?? widget.botType.expiredTextColor);
     }
   }
 }

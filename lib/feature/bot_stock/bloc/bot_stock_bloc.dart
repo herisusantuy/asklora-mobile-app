@@ -1,7 +1,7 @@
-import 'package:asklora_mobile_chart/main.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../chart/domain/chart_models.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../repository/bot_stock_repository.dart';
 import '../utils/bot_stock_utils.dart';

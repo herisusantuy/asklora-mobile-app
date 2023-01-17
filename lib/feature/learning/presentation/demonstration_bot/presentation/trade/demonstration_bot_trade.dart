@@ -1,4 +1,3 @@
-import 'package:asklora_mobile_chart/samples/line_chart_studio_sample.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,6 +6,7 @@ import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../bot_stock/repository/bot_stock_repository.dart';
+import '../../../../../chart/presentation/chart_studio_animation.dart';
 import '../../../learning_screen.dart';
 import '../../bloc/demonstration_bot_bloc.dart';
 

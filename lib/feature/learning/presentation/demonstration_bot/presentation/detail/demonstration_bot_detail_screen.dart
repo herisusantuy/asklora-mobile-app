@@ -1,4 +1,3 @@
-import 'package:asklora_mobile_chart/samples/line_chart_sample.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +11,7 @@ import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/
 import '../../../../../bot_stock/presentation/widgets/gift_bot_stock_base_widget.dart';
 import '../../../../../bot_stock/repository/bot_stock_repository.dart';
 import '../../../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../../../chart/presentation/chart_animation.dart';
 import '../../../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../learning_screen.dart';
 import '../../bloc/demonstration_bot_bloc.dart';

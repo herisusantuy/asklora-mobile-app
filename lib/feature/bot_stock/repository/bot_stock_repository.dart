@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:asklora_mobile_chart/main.dart';
-import 'package:asklora_mobile_chart/model/triplet.dart';
-import 'package:asklora_mobile_chart/model/ui_data.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
+import '../../../core/domain/triplet.dart';
+import '../../chart/domain/chart_models.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../utils/bot_stock_utils.dart';
 
