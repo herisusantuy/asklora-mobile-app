@@ -26,7 +26,8 @@ class DemonstrationBotScreen extends StatelessWidget {
   final BotType botType;
   final JustTheController tooltipController;
 
-  const DemonstrationBotScreen({required this.tooltipController, required this.botType, Key? key})
+  const DemonstrationBotScreen(
+      {required this.tooltipController, required this.botType, Key? key})
       : super(key: key);
 
   @override
