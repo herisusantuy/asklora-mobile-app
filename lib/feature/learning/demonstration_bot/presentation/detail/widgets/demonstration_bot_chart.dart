@@ -12,7 +12,7 @@ class DemonstrationBotChart extends StatelessWidget {
           if (state.chartDataResponse.state != ResponseState.success) {
             return const SizedBox.shrink();
           } else {
-            return LineChartSample(
+            return ChartAnimation(
                 chartDataSets: state.chartDataResponse.data!);
           }
         });

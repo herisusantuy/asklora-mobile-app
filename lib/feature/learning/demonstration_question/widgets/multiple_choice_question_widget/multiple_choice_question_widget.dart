@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 import '../../../../../../../core/presentation/buttons/secondary/secondary_multiple_choice_button.dart';
-import '../../../../../onboarding/ppi/domain/question.dart';
-import '../../../../../onboarding/ppi/presentation/widget/multiple_question_widget/bloc/multiple_question_widget_bloc.dart';
-import '../../../../../onboarding/ppi/presentation/widget/question_title.dart';
+import '../../../../onboarding/ppi/domain/question.dart';
+import '../../../../onboarding/ppi/presentation/widget/multiple_question_widget/bloc/multiple_question_widget_bloc.dart';
+import '../../../../onboarding/ppi/presentation/widget/question_title.dart';
 import '../demonstration_tooltip_guide.dart';
 
 part 'widgets/multiple_choice_button.dart';

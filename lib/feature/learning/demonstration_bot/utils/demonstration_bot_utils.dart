@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../bot_stock/presentation/widgets/bot_bottom_sheet_widget.dart';
+import '../../../bot_stock/presentation/widgets/bot_bottom_sheet_widget.dart';
 
 class DemonstrationBottomSheet {
   static show(BuildContext context,

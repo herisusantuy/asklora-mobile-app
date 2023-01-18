@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../onboarding/ppi/domain/fixture.dart';
-import '../../../../onboarding/ppi/domain/question.dart';
+import '../../../onboarding/ppi/domain/fixture.dart';
+import '../../../onboarding/ppi/domain/question.dart';
 import '../../learning_screen.dart';
 import '../repository/demonstration_question_repository.dart';
 

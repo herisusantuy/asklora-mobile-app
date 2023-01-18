@@ -4,7 +4,7 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.dart';
 import '../../../core/presentation/lora_memoji_header.dart';
 import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../bot_stock/utils/bot_stock_utils.dart';
+import '../bot_stock/utils/bot_stock_utils.dart';
 import 'learning_screen.dart';
 
 class LearningWelcomeScreen extends StatelessWidget {

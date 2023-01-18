@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import '../../../../onboarding/ppi/domain/question.dart';
+import '../../../onboarding/ppi/domain/question.dart';
 
 class DemonstrationQuestionRepository {
   Future<List<QuestionCollection>> fetchQuestions() async {

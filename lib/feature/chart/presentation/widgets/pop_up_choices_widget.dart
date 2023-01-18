@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../domain/chart_models.dart';
 
-class UiOptionWidget extends StatefulWidget {
-  final OptionModel optionModel;
+class PopUpChoicesWidget extends StatefulWidget {
+  final UiData uiData;
   final Function() onClick;
+  final Function(OptionModel) onOptionClick;
   final Duration animationDuration;
   final Duration delayDuration;
 
-  const UiOptionWidget({
-    required this.onClick,
-    Key? key,
-    required this.optionModel,
-    this.animationDuration = const Duration(milliseconds: 500),
-    this.delayDuration = const Duration(milliseconds: 100),
-  }) : super(key: key);
+  const PopUpChoicesWidget(
+      {required this.uiData,
+      required this.onClick,
+      required this.onOptionClick,
+      this.animationDuration = const Duration(milliseconds: 500),
+      this.delayDuration = const Duration(milliseconds: 100),
+      Key? key})
+      : super(key: key);
 
   @override
-  State<UiOptionWidget> createState() => _UiOptionWidgetState();
+  State<PopUpChoicesWidget> createState() => _PopUpChoicesWidgetState();
 }
 
-class _UiOptionWidgetState extends State<UiOptionWidget> {
+class _PopUpChoicesWidgetState extends State<PopUpChoicesWidget> {
   bool show = false;
 
   @override
@@ -76,24 +79,14 @@ class _UiOptionWidgetState extends State<UiOptionWidget> {
                   child: Column(
                     children: [
                       CustomTextNew(
-                        widget.optionModel.infoText ?? '-',
+                        widget.uiData.text ?? '-',
                         style: AskLoraTextStyles.h6,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
                         height: 25,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12.0),
-                        child: PrimaryButton(
-                          label: 'See Performance',
-                          onTap: () async {
-                            animateFadeOut();
-                            await Future.delayed(widget.animationDuration);
-                            widget.onClick();
-                          },
-                        ),
-                      )
+                      ..._buttons
                     ],
                   ),
                 ),
@@ -101,14 +94,46 @@ class _UiOptionWidgetState extends State<UiOptionWidget> {
               const Align(
                   alignment: Alignment.topCenter,
                   child: LoraMemojiWidget(
-                    loraMemojiType: LoraMemojiType.lora1,
-                    width: 100,
                     height: 100,
+                    width: 100,
+                    loraMemojiType: LoraMemojiType.lora1,
                   )),
             ],
           ),
         ),
       ),
     );
+  }
+
+  List<Widget> get _buttons {
+    if (widget.uiData.options != null && widget.uiData.options!.isNotEmpty) {
+      return widget.uiData.options!
+          .map(
+            (e) => Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: PrimaryButton(
+                buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+                label: e.text ?? '-',
+                onTap: () async {
+                  animateFadeOut();
+                  await Future.delayed(widget.animationDuration);
+                  widget.onOptionClick(e);
+                },
+              ),
+            ),
+          )
+          .toList();
+    } else {
+      return [
+        PrimaryButton(
+          label: widget.uiData.buttonLabel ?? '-',
+          onTap: () async {
+            animateFadeOut();
+            await Future.delayed(widget.animationDuration);
+            widget.onClick();
+          },
+        )
+      ];
+    }
   }
 }

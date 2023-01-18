@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 
-import '../../../core/presentation/custom_scaffold.dart';
-import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../bot_stock/utils/bot_stock_utils.dart';
-import '../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../core/presentation/custom_scaffold.dart';
+import '../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../bot_stock/utils/bot_stock_utils.dart';
+import '../onboarding/ppi/domain/ppi_user_response.dart';
 import 'demonstration_bot/presentation/detail/demonstration_bot_detail_screen.dart';
 import 'demonstration_bot/presentation/demonstration_bot_screen.dart';
 import 'demonstration_bot/presentation/trade/demonstration_bot_trade.dart';

@@ -9,44 +9,42 @@ import 'dart:math' as math;
 import '../../../core/domain/triplet.dart';
 import '../../../core/presentation/dashed_line_horizontal_painter.dart';
 import '../../../core/styles/asklora_colors.dart';
+import '../../../core/styles/asklora_text_styles.dart';
 import '../domain/chart_models.dart';
 import '../utils/chart_util.dart';
 import 'widgets/animated_icon_label.dart';
 import 'widgets/animated_line_pointer.dart';
 import 'widgets/animated_line_target.dart';
-import 'widgets/ui_option_widget.dart';
-import 'widgets/ui_widget.dart';
+import 'widgets/pop_up_choices_widget.dart';
+import 'widgets/pop_up_value_widget.dart';
 
-class LineChartStudioSample extends StatefulWidget {
+class ChartStudioAnimation extends StatefulWidget {
   final Triplet<List<ChartDataStudioSet>, List<ChartDataStudioSet>,
       List<UiData>> triplet;
 
-  const LineChartStudioSample({required this.triplet, super.key});
+  const ChartStudioAnimation({required this.triplet, super.key});
 
   @override
-  State<LineChartStudioSample> createState() => _LineChartStudioSampleState();
+  State<ChartStudioAnimation> createState() => _ChartStudioAnimationState();
 }
 
-class _LineChartStudioSampleState extends State<LineChartStudioSample> {
-  final TextStyle axisStyle = TextStyle(
-    color: Colors.grey[700]!,
-    fontWeight: FontWeight.bold,
-    fontSize: 11,
-  );
-  final double targetTextHeight = 10;
+class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
+  final TextStyle axisStyle =
+      AskLoraTextStyles.body3.copyWith(color: AskLoraColors.darkGray);
+  final double targetTextHeight = 14;
 
   final double chartHeight = 250;
   final int lineAnimationDuration = 600;
   final int pauseOnHedgeFoundDuration = 1000;
-  final double reservedLeftTitle = 36;
+  final double reservedLeftTitle = 30;
 
   final double _topChartPadding = 18;
   final double _bottomChartPadding = 18;
   final double _leftChartPadding = 0;
-  final double _rightChartPadding = 0;
+  final double _rightChartPadding = 8;
 
   final List<CoordinatesModel> flSpotsCoordinate = [];
-  final List<FlSpot> flSpots = [];
+  late List<FlSpot> flSpots = [];
   final List<int> showIndexes = [];
   final List<Widget> showCenterValue = [];
 
@@ -139,11 +137,12 @@ class _LineChartStudioSampleState extends State<LineChartStudioSample> {
               flSpotsCoordinate[animateIndex].offset.dx <
                   (MediaQuery.of(context).size.width - 25))
             Positioned(
-              top: flSpotsCoordinate[animateIndex].offset.dy + 14,
-              left: flSpotsCoordinate[animateIndex].offset.dx + 6,
+              key: UniqueKey(),
+              top: flSpotsCoordinate[animateIndex].offset.dy + 13,
+              left: flSpotsCoordinate[animateIndex].offset.dx - 4,
               child: AnimatedLinePointer(
                 height: (chartHeight +
-                    28 -
+                    40 -
                     flSpotsCoordinate[animateIndex].offset.dy),
                 color: AskLoraColors.primaryMagenta,
               ),
@@ -154,7 +153,7 @@ class _LineChartStudioSampleState extends State<LineChartStudioSample> {
             child: Column(
               children: [
                 if (showUiWidget)
-                  UiWidget(
+                  PopUpChoicesWidget(
                       uiData: uiData!,
                       onClick: () {
                         setState(() {
@@ -174,7 +173,7 @@ class _LineChartStudioSampleState extends State<LineChartStudioSample> {
                         });
                       }),
                 if (showUiOptionWidget)
-                  UiOptionWidget(
+                  PopUpValueWidget(
                       onClick: () {
                         showUiOptionWidget = false;
                         uiData = null;
@@ -194,13 +193,14 @@ class _LineChartStudioSampleState extends State<LineChartStudioSample> {
                     _bottomChartPadding -
                     (botData.targetProfitLevel! * chartHeightFactor) -
                     targetTextHeight -
-                    6,
+                    4,
                 child: AnimatedLineTarget(
                   text: 'Target Profit Level',
                   width: actualChartWidth,
                   color: AskLoraColors.primaryGreen,
                   dashedType: DashedType.shortDash,
                   targetTextPosition: TargetTextPosition.top,
+                  targetTextHeight: targetTextHeight,
                 )),
             Positioned(
                 left: _leftChartPadding + reservedLeftTitle,
@@ -213,6 +213,7 @@ class _LineChartStudioSampleState extends State<LineChartStudioSample> {
                   color: AskLoraColors.primaryMagenta,
                   dashedType: DashedType.shortDash,
                   targetTextPosition: TargetTextPosition.bottom,
+                  targetTextHeight: targetTextHeight,
                 )),
           ]
         ],
@@ -318,7 +319,7 @@ class _LineChartStudioSampleState extends State<LineChartStudioSample> {
             setState(() {
               labels.add(AnimatedIconLabel(
                   key: UniqueKey(),
-                  left: flSpotsCoordinate[animateIndex].offset.dx - 21,
+                  left: flSpotsCoordinate[animateIndex].offset.dx - 25,
                   top: flSpotsCoordinate[animateIndex].offset.dy + 10,
                   hedgeType: HedgeType.buy));
             });
@@ -326,7 +327,7 @@ class _LineChartStudioSampleState extends State<LineChartStudioSample> {
             setState(() {
               labels.add(AnimatedIconLabel(
                   key: UniqueKey(),
-                  left: flSpotsCoordinate[animateIndex].offset.dx - 21,
+                  left: flSpotsCoordinate[animateIndex].offset.dx - 25,
                   top: flSpotsCoordinate[animateIndex].offset.dy - 58,
                   hedgeType: HedgeType.sell));
             });
@@ -357,10 +358,9 @@ class _LineChartStudioSampleState extends State<LineChartStudioSample> {
   }
 
   void drawLineChart() {
-    for (var data in widget.triplet.left) {
-      flSpots.add(FlSpot(data.index!.toDouble(), data.price!));
-      showIndexes.add(data.index!);
-    }
+    flSpots = widget.triplet.left
+        .map((e) => FlSpot(e.index!.toDouble(), e.price!))
+        .toList();
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {

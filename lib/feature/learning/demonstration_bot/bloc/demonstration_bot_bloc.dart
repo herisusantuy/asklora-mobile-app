@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/triplet.dart';
-import '../../../../bot_stock/repository/bot_stock_repository.dart';
-import '../../../../chart/domain/chart_models.dart';
-import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../../bot_stock/repository/bot_stock_repository.dart';
+import '../../../chart/domain/chart_models.dart';
+import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 
 part 'demonstration_bot_event.dart';
 

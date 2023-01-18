@@ -11,16 +11,16 @@ import '../utils/chart_util.dart';
 import 'widgets/animated_icon_label.dart';
 import 'widgets/animated_profit_label.dart';
 
-class LineChartSample extends StatefulWidget {
+class ChartAnimation extends StatefulWidget {
   final List<ChartDataSet> chartDataSets;
 
-  const LineChartSample({required this.chartDataSets, super.key});
+  const ChartAnimation({required this.chartDataSets, super.key});
 
   @override
-  State<LineChartSample> createState() => _LineChartSampleState();
+  State<ChartAnimation> createState() => _ChartAnimationState();
 }
 
-class _LineChartSampleState extends State<LineChartSample> {
+class _ChartAnimationState extends State<ChartAnimation> {
   final TextStyle axisStyle = TextStyle(
     color: Colors.grey[700]!,
     fontWeight: FontWeight.bold,

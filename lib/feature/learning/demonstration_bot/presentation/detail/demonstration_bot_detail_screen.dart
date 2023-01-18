@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../../core/values/app_values.dart';
-import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_recommendation_detail_content.dart';
-import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_recommendation_detail_header.dart';
-import '../../../../../bot_stock/presentation/widgets/gift_bot_stock_base_widget.dart';
-import '../../../../../bot_stock/repository/bot_stock_repository.dart';
-import '../../../../../bot_stock/utils/bot_stock_utils.dart';
-import '../../../../../chart/presentation/chart_animation.dart';
-import '../../../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../../../../core/domain/base_response.dart';
+import '../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_recommendation_detail_content.dart';
+import '../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_recommendation_detail_header.dart';
+import '../../../../bot_stock/presentation/widgets/gift_bot_stock_base_widget.dart';
+import '../../../../bot_stock/repository/bot_stock_repository.dart';
+import '../../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../../chart/presentation/chart_animation.dart';
+import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../learning_screen.dart';
 import '../../bloc/demonstration_bot_bloc.dart';
 import '../../utils/demonstration_bot_utils.dart';

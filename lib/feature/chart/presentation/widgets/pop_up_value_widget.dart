@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../domain/chart_models.dart';
 
-class UiWidget extends StatefulWidget {
-  final UiData uiData;
+class PopUpValueWidget extends StatefulWidget {
+  final OptionModel optionModel;
   final Function() onClick;
-  final Function(OptionModel) onOptionClick;
   final Duration animationDuration;
   final Duration delayDuration;
 
-  const UiWidget(
-      {required this.uiData,
-      required this.onClick,
-      required this.onOptionClick,
-      this.animationDuration = const Duration(milliseconds: 500),
-      this.delayDuration = const Duration(milliseconds: 100),
-      Key? key})
-      : super(key: key);
+  const PopUpValueWidget({
+    required this.onClick,
+    Key? key,
+    required this.optionModel,
+    this.animationDuration = const Duration(milliseconds: 500),
+    this.delayDuration = const Duration(milliseconds: 100),
+  }) : super(key: key);
 
   @override
-  State<UiWidget> createState() => _UiWidgetState();
+  State<PopUpValueWidget> createState() => _PopUpValueWidgetState();
 }
 
-class _UiWidgetState extends State<UiWidget> {
+class _PopUpValueWidgetState extends State<PopUpValueWidget> {
   bool show = false;
 
   @override
@@ -79,41 +76,24 @@ class _UiWidgetState extends State<UiWidget> {
                   child: Column(
                     children: [
                       CustomTextNew(
-                        widget.uiData.text ?? '-',
+                        widget.optionModel.infoText ?? '-',
                         style: AskLoraTextStyles.h6,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
                         height: 25,
                       ),
-                      if (widget.uiData.options != null)
-                        ...widget.uiData.options!.map(
-                          (e) => Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: PrimaryButton(
-                              buttonPrimaryType:
-                                  ButtonPrimaryType.ghostCharcoal,
-                              label: e.text ?? '-',
-                              onTap: () async {
-                                animateFadeOut();
-                                await Future.delayed(widget.animationDuration);
-                                widget.onOptionClick(e);
-                              },
-                            ),
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12.0),
+                        child: PrimaryButton(
+                          label: 'See Performance',
+                          onTap: () async {
+                            animateFadeOut();
+                            await Future.delayed(widget.animationDuration);
+                            widget.onClick();
+                          },
                         ),
-                      if (widget.uiData.options!.isEmpty)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12.0),
-                          child: PrimaryButton(
-                            label: widget.uiData.buttonLabel ?? '-',
-                            onTap: () async {
-                              animateFadeOut();
-                              await Future.delayed(widget.animationDuration);
-                              widget.onClick();
-                            },
-                          ),
-                        )
+                      )
                     ],
                   ),
                 ),
@@ -121,9 +101,9 @@ class _UiWidgetState extends State<UiWidget> {
               const Align(
                   alignment: Alignment.topCenter,
                   child: LoraMemojiWidget(
-                    height: 100,
-                    width: 100,
                     loraMemojiType: LoraMemojiType.lora1,
+                    width: 100,
+                    height: 100,
                   )),
             ],
           ),

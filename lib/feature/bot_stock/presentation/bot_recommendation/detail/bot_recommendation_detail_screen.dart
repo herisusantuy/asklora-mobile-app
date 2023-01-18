@@ -245,7 +245,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                                     ResponseState.success) {
                                   return const SizedBox.shrink();
                                 } else {
-                                  return LineChartSample(
+                                  return ChartAnimation(
                                       chartDataSets:
                                           state.chartDataResponse.data!);
                                 }

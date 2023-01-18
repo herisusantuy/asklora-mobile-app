@@ -12,7 +12,7 @@ class AnimatedLineTarget extends StatelessWidget {
   final DashedType dashedType;
   final TargetTextPosition targetTextPosition;
   final String text;
-  final double targetTextHeight = 10;
+  final double targetTextHeight;
 
   const AnimatedLineTarget(
       {required this.text,
@@ -20,6 +20,7 @@ class AnimatedLineTarget extends StatelessWidget {
       required this.color,
       required this.dashedType,
       required this.targetTextPosition,
+        required this.targetTextHeight,
       Key? key})
       : super(key: key);
 
@@ -31,7 +32,7 @@ class AnimatedLineTarget extends StatelessWidget {
       children: [
         if (targetTextPosition == TargetTextPosition.top)
           Padding(
-            padding: const EdgeInsets.only(bottom: 6.0),
+            padding: const EdgeInsets.only(bottom: 4.0),
             child: SizedBox(
               height: targetTextHeight,
               child: CustomTextNew(
