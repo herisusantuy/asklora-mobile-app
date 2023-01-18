@@ -13,7 +13,7 @@ class AnimatedLinePointer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomAnimatedOpacity(
-      animationDuration: const Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         delayDuration: const Duration(milliseconds: 500),
         child: Column(
           children: [

@@ -20,7 +20,7 @@ class AnimatedLineTarget extends StatelessWidget {
       required this.color,
       required this.dashedType,
       required this.targetTextPosition,
-        required this.targetTextHeight,
+      required this.targetTextHeight,
       Key? key})
       : super(key: key);
 
