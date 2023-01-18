@@ -115,7 +115,7 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                                 ))
                             .toList(),
                       const SizedBox(
-                        height: 8,
+                        height: 14,
                       ),
                       Padding(
                         padding: EdgeInsets.only(

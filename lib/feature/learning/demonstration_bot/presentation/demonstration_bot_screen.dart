@@ -23,9 +23,10 @@ part 'widgets/demonstration_bot_list.dart';
 class DemonstrationBotScreen extends StatelessWidget {
   static const String route = '/demonstration_bot_screen';
 
+  final BotType botType;
   final JustTheController tooltipController;
 
-  const DemonstrationBotScreen({required this.tooltipController, Key? key})
+  const DemonstrationBotScreen({required this.tooltipController, required this.botType, Key? key})
       : super(key: key);
 
   @override
@@ -96,6 +97,7 @@ class DemonstrationBotScreen extends StatelessWidget {
                     children: [
                       _header(context),
                       DemonstrationBotList(
+                        botType: botType,
                         verticalMargin: 14,
                         tooltipController: tooltipController,
                       ),

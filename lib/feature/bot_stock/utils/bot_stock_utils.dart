@@ -151,7 +151,7 @@ List<RecommendedBot> demonstrationBots = [
       '9',
       '10',
       DateTime.now().add(const Duration(days: 10)),
-      freeBot: true),
+      freeBot: true, selectable: true),
   RecommendedBot(
       '1',
       'TSLA',
@@ -163,7 +163,7 @@ List<RecommendedBot> demonstrationBots = [
       '303.75',
       '9',
       '10',
-      DateTime.now().add(const Duration(days: 30))),
+      DateTime.now().add(const Duration(days: 30)), selectable: true),
   RecommendedBot(
       '1',
       'TSLA',

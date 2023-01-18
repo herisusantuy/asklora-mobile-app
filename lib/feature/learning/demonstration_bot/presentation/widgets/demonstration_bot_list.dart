@@ -1,6 +1,7 @@
 part of '../demonstration_bot_screen.dart';
 
 class DemonstrationBotList extends StatelessWidget {
+  final BotType botType;
   final double _spacing = 16;
   final double botCardHeight = 165;
   final double blurPadding;
@@ -8,7 +9,10 @@ class DemonstrationBotList extends StatelessWidget {
   final JustTheController tooltipController;
 
   const DemonstrationBotList(
-      {required this.verticalMargin, required this.tooltipController, Key? key})
+      {required this.verticalMargin,
+      required this.tooltipController,
+      required this.botType,
+      Key? key})
       : blurPadding = verticalMargin - 8,
         super(key: key);
 
@@ -26,7 +30,7 @@ class DemonstrationBotList extends StatelessWidget {
                 spacing: _spacing,
                 runSpacing: _spacing,
                 children: state.botDemonstrationResponse.data!
-                    .map((e) => e.selectable
+                    .map((e) => e.selectable && e.botType == botType.value
                         ? DemonstrationTooltipGuide(
                             verticalOffset: 10,
                             horizontalOffset: 110,

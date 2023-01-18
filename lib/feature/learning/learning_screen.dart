@@ -17,13 +17,13 @@ import 'learning_welcome_screen.dart';
 enum LearningPageStep { welcome, question, botList, botDetail, trade }
 
 class LearningScreen extends StatelessWidget {
-  final RecommendedBot recommendedBot;
+  final BotType botType;
   final JustTheController tooltipController = JustTheController();
   final LearningPageStep initialLearningPageStep;
 
   LearningScreen(
       {this.initialLearningPageStep = LearningPageStep.welcome,
-      required this.recommendedBot,
+      required this.botType,
       Key? key})
       : super(key: key);
 
@@ -54,7 +54,9 @@ class LearningScreen extends StatelessWidget {
   }
 
   Widget get _getPages {
-    final BotType botType = BotType.findByString(recommendedBot.botType);
+    final RecommendedBot recommendedBot = demonstrationBots.firstWhere(
+        (element) =>
+            element.selectable == true && element.botType == botType.value);
     return BlocBuilder<NavigationBloc<LearningPageStep>,
             NavigationState<LearningPageStep>>(
         buildWhen: (previous, current) => previous.page != current.page,
@@ -70,6 +72,7 @@ class LearningScreen extends StatelessWidget {
               );
             case LearningPageStep.botList:
               return DemonstrationBotScreen(
+                botType: botType,
                 tooltipController: tooltipController,
               );
             case LearningPageStep.botDetail:
