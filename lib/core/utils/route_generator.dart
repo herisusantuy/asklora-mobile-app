@@ -87,7 +87,9 @@ class RouterGenerator {
         return MaterialPageRoute(
             builder: (_) => GreetingScreen(name: settings.arguments as String));
       case EmailActivationScreen.route:
-        return MaterialPageRoute(builder: (_) => const EmailActivationScreen());
+        return MaterialPageRoute(
+            builder: (_) =>
+                EmailActivationScreen(userName: settings.arguments as String));
       case InvestmentStyleWelcomeScreen.route:
         return MaterialPageRoute(
             builder: (_) => const InvestmentStyleWelcomeScreen());

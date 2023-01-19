@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/bloc/sign_up_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart';
@@ -205,6 +206,12 @@ void main() async {
                   const BaseResponse<SignUpResponse>(
                       data: SignUpResponse('Sign Up Successful'),
                       state: ResponseState.success)));
+
+          when(signUpRepository.getVerificationEmail(
+                  getVerificationEmailRequest:
+                      GetOtpRequest('kk@test.com', OtpType.register.value)))
+              .thenAnswer((_) =>
+                  Future.value(BaseResponse.complete(const GetOtpResponse(''))));
           return signUpBloc;
         },
         act: (bloc) => {
