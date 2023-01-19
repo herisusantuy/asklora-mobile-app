@@ -26,6 +26,7 @@ class MultipleChoiceButton extends StatelessWidget {
               child: SecondaryMultipleChoiceButton(
                   active: index == state.defaultChoiceIndex || active,
                   label: label,
+                  disabled: !selectable,
                   onTap: selectable ? () => onTap() : () {}),
             ));
   }
