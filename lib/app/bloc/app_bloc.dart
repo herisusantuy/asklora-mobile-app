@@ -25,13 +25,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
-    //await _userJourneyRepository.saveUserJourney(UserJourney.privacyPersonalisation);
     bool isTokenValid = await _tokenRepository.isTokenValid();
     UserJourney userJourney = await _userJourneyRepository.getUserJourney();
     if (isTokenValid) {
       emit(AppState.authenticated(userJourney: userJourney));
     } else {
-      print('current journey is $userJourney');
       emit(AppState.unauthenticated(
           localeType: LocaleType.defaultFont(), userJourney: userJourney));
     }

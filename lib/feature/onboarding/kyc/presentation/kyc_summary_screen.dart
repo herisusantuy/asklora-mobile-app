@@ -72,7 +72,7 @@ class KycSummaryScreen extends StatelessWidget {
           context
               .read<NavigationBloc<KycPageStep>>()
               .add(const PageChanged(KycPageStep.giftBotStock));
-        } ,
+        },
         secondaryButtonOnClick: () => CarouselScreen.open(context),
         primaryButtonLabel: 'COMPLETE',
         secondaryButtonLabel: 'SAVE FOR LATER',

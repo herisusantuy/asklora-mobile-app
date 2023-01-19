@@ -5,14 +5,17 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
+import 'package:asklora_mobile_app/app/bloc/app_bloc.dart' as _i6;
+import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart'
+    as _i5;
 import 'package:asklora_mobile_app/core/domain/token/model/token_refresh_request.dart'
-    as _i7;
+    as _i9;
 import 'package:asklora_mobile_app/core/domain/token/model/token_verify_request.dart'
-    as _i6;
+    as _i8;
 import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart'
     as _i3;
 import 'package:asklora_mobile_app/core/domain/token/token_api_client.dart'
-    as _i5;
+    as _i7;
 import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -104,16 +107,45 @@ class MockTokenRepository extends _i1.Mock implements _i3.TokenRepository {
       ) as _i4.Future<bool>);
 }
 
+/// A class which mocks [UserJourneyRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserJourneyRepository extends _i1.Mock
+    implements _i5.UserJourneyRepository {
+  MockUserJourneyRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<bool?> saveUserJourney(_i6.UserJourney? userJourney) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveUserJourney,
+          [userJourney],
+        ),
+        returnValue: _i4.Future<bool?>.value(),
+      ) as _i4.Future<bool?>);
+  @override
+  _i4.Future<_i6.UserJourney> getUserJourney() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserJourney,
+          [],
+        ),
+        returnValue: _i4.Future<_i6.UserJourney>.value(
+            _i6.UserJourney.privacyPersonalisation),
+      ) as _i4.Future<_i6.UserJourney>);
+}
+
 /// A class which mocks [TokenApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTokenApiClient extends _i1.Mock implements _i5.TokenApiClient {
+class MockTokenApiClient extends _i1.Mock implements _i7.TokenApiClient {
   MockTokenApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Response<dynamic>> verify(_i6.TokenVerifyRequest? request) =>
+  _i4.Future<_i2.Response<dynamic>> verify(_i8.TokenVerifyRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #verify,
@@ -129,7 +161,7 @@ class MockTokenApiClient extends _i1.Mock implements _i5.TokenApiClient {
         )),
       ) as _i4.Future<_i2.Response<dynamic>>);
   @override
-  _i4.Future<_i2.Response<dynamic>> refresh(_i7.TokenRefreshRequest? request) =>
+  _i4.Future<_i2.Response<dynamic>> refresh(_i9.TokenRefreshRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #refresh,

@@ -28,8 +28,8 @@ class UserJourneyRepository {
     } catch (e) {
       print('catch save');
       String? userJourney = await _secureStorage.readSecureData('user_journey');
-      print('get user journey catch ${UserJourney.values
-          .firstWhereOrNull((element) => element.name == userJourney)}');
+      print(
+          'get user journey catch ${UserJourney.values.firstWhereOrNull((element) => element.name == userJourney)}');
       return UserJourney.values
               .firstWhereOrNull((element) => element.name == userJourney) ??
           UserJourney.privacyPersonalisation;

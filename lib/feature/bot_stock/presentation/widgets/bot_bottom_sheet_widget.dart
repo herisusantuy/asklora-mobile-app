@@ -44,7 +44,8 @@ class BotBottomSheetWidget extends StatelessWidget {
                       ),
                       ButtonPair(
                           primaryButtonOnClick: () {},
-                          secondaryButtonOnClick: () => TabsScreen.open(context),
+                          secondaryButtonOnClick: () =>
+                              TabsScreen.open(context),
                           primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',
                           secondaryButtonLabel: 'NOT NOW')
                     ],
