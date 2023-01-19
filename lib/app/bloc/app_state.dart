@@ -1,6 +1,6 @@
 part of 'app_bloc.dart';
 
-enum UserJourney { privacyPersonalisation, createAccount, investmentStyle, kyc, freeBotStock, deposit, learning}
+enum UserJourney { privacyPersonalisation, createAccount, investmentStyle, kyc, freeBotStock, deposit, learnBotPlank}
 
 enum AppStatus { unknown, authenticated, unauthenticated }
 

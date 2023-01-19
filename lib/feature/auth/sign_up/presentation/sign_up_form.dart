@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
@@ -31,6 +32,7 @@ class SignUpForm extends StatelessWidget {
           CustomInAppNotification.show(context, state.response.message);
           break;
         case ResponseState.success:
+          context.read<AppBloc>().add(const SaveUserJourney(UserJourney.kyc));
           EmailActivationScreen.open(context);
           break;
         default:

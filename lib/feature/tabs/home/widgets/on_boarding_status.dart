@@ -4,28 +4,24 @@ import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../home_screen_form.dart';
 
 class OnBoardingStatus extends StatelessWidget {
-  final String title;
-  final String subTitle;
+  final OnBoardingStatusModel onBoardingStatusModel;
+
   final Color valueColor;
   final Color backgroundColor;
   final double edgeRadius;
   final int intersectCount;
-  final double progress;
   final int arrowPointingOnSection;
-  final VoidCallback onTap;
 
   const OnBoardingStatus(
-      {required this.title,
-      required this.subTitle,
-      required this.onTap,
+      {required this.onBoardingStatusModel,
       this.valueColor = AskLoraColors.primaryMagenta,
       this.backgroundColor = AskLoraColors.charcoal,
       this.arrowPointingOnSection = 1,
       this.edgeRadius = 10,
       this.intersectCount = 2,
-      required this.progress,
       Key? key})
       : super(key: key);
 
@@ -38,7 +34,7 @@ class OnBoardingStatus extends StatelessWidget {
           children: [
             Expanded(
               child: CustomTextNew(
-                title,
+                onBoardingStatusModel.title,
                 style: AskLoraTextStyles.h4Italic,
               ),
             ),
@@ -62,7 +58,7 @@ class OnBoardingStatus extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(edgeRadius)),
               child: LinearProgressIndicator(
                 minHeight: 10,
-                value: progress,
+                value: onBoardingStatusModel.progress,
                 valueColor: AlwaysStoppedAnimation<Color>(valueColor),
                 backgroundColor: backgroundColor,
               ),
@@ -77,9 +73,9 @@ class OnBoardingStatus extends StatelessWidget {
         ),
         OnBoardingStatusButton(
           arrowPointingOnSection: arrowPointingOnSection,
-          onTap: onTap,
+          onTap: onBoardingStatusModel.onTap,
           intersectCount: intersectCount,
-          subTitle: subTitle,
+          subTitle: onBoardingStatusModel.subTitle,
         ),
       ],
     );

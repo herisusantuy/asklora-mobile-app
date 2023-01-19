@@ -36,7 +36,7 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                 } else if (state is OnNextResultScreen) {
                   context
                       .read<AppBloc>()
-                      .add(const SaveUserJourney(UserJourney.investmentStyle));
+                      .add(const SaveUserJourney(UserJourney.createAccount));
                   context.read<NavigationBloc<QuestionPageStep>>().add(
                       const PageChanged(
                           QuestionPageStep.investmentStyleResultEnd));
