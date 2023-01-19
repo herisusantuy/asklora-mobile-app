@@ -27,3 +27,5 @@ const String endpointBankAccount = '$v1${accounts}bank-account-related/';
 const String endpointWithdrawal = '$v1${transactions}withdraw/';
 const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointOrders = '$v1$orders';
+const String endpointGetUserJourney = 'get-user-journey';
+const String endpointSaveUserJourney = 'save-user-journey';

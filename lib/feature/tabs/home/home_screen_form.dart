@@ -1,8 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.dart';
-import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/lora_popup_message.dart';
 import '../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../core/styles/asklora_colors.dart';
@@ -51,7 +49,7 @@ class HomeScreenForm extends StatelessWidget {
                       titleTextStyle: AskLoraTextStyles.subtitle2,
                       extendedBorderStyle: ExtendedBorderStyle.dash,
                       tickBorderData:
-                          const BorderSide(color: Colors.blue, width: 2),
+                      const BorderSide(color: Colors.blue, width: 2),
                       radarBorderData: const BorderSide(
                           color: AskLoraColors.primaryGreen, width: 3),
                       gridBorderData: const BorderSide(
@@ -91,7 +89,7 @@ class HomeScreenForm extends StatelessWidget {
                       backgroundColor: AskLoraColors.primaryGreen,
                       title: 'Your first Botstock is on me!',
                       subTitle:
-                          'Unlock your painless investing journey and receive a free gift Botstock.',
+                      'Unlock your painless investing journey and receive a free gift Botstock.',
                       buttonLabel: 'SIGN UP'),
                 ),
                 const SizedBox(height: 20),
@@ -101,7 +99,7 @@ class HomeScreenForm extends StatelessWidget {
                   badgePosition: BadgePosition.belowSubtitle,
                   title: 'No traded BotStocks.',
                   subTitle:
-                      'You can manage all your investments here after you start trading. Create an account and start trading.',
+                  'You can manage all your investments here after you start trading. Create an account and start trading.',
                   botTypes: [BotType.pullUp, BotType.squat],
                 ),
                 const SizedBox(height: 20),
@@ -112,4 +110,55 @@ class HomeScreenForm extends StatelessWidget {
       ),
     );
   }
+
+  // OnBoardingStatusModel? _onboardingStatusModel(BuildContext context,
+  //     UserJourney userJourney) {
+  //   switch (userJourney) {
+  //     case UserJourney.createAccount:
+  //       return OnBoardingStatusModel(
+  //         title: 'START INVESTING',
+  //         subTitle: 'Create an Account',
+  //         onTap: () => SignUpScreen.open(context),
+  //         progress: 0.1,);
+  //     case UserJourney.investmentStyle:
+  //       return OnBoardingStatusModel(
+  //         title: 'START INVESTING',
+  //         subTitle: 'Define Investment Style',
+  //         onTap: () => SignUpScreen.open(context),
+  //         progress: 0.2,);
+  //     case UserJourney.kyc:
+  //       return OnBoardingStatusModel(
+  //         title: 'START INVESTING',
+  //         subTitle: 'Define Investment Style',
+  //         onTap: () => SignUpScreen.open(context),
+  //         progress: 0.2,);
+  //     case UserJourney.freeBotStock:
+  //     // TODO: Handle this case.
+  //       break;
+  //     case UserJourney.deposit:
+  //     // TODO: Handle this case.
+  //       break;
+  //     case UserJourney.learning:
+  //     // TODO: Handle this case.
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
+
+}
+
+class OnBoardingStatusModel {
+  final String title;
+  final String subTitle;
+  final VoidCallback onTap;
+  final double progress;
+
+  OnBoardingStatusModel({
+    required this.title,
+    required this.subTitle,
+    required this.onTap,
+    required this.progress
+  });
+
 }

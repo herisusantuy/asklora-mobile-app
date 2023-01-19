@@ -5,6 +5,7 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../tabs/tabs_screen.dart';
 
 class BotBottomSheetWidget extends StatelessWidget {
   const BotBottomSheetWidget({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class BotBottomSheetWidget extends StatelessWidget {
                       ),
                       ButtonPair(
                           primaryButtonOnClick: () {},
-                          secondaryButtonOnClick: () => Navigator.pop(context),
+                          secondaryButtonOnClick: () => TabsScreen.open(context),
                           primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',
                           secondaryButtonLabel: 'NOT NOW')
                     ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../app/bloc/app_bloc.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/basic_information/basic_information_bloc.dart';
@@ -66,9 +67,12 @@ class KycSummaryScreen extends StatelessWidget {
   }
 
   Widget _bottomButton(BuildContext context) => ButtonPair(
-        primaryButtonOnClick: () => context
-            .read<NavigationBloc<KycPageStep>>()
-            .add(const PageChanged(KycPageStep.giftBotStock)),
+        primaryButtonOnClick: () {
+          context.read<AppBloc>().add(const SaveUserJourney(UserJourney.kyc));
+          context
+              .read<NavigationBloc<KycPageStep>>()
+              .add(const PageChanged(KycPageStep.giftBotStock));
+        } ,
         secondaryButtonOnClick: () => CarouselScreen.open(context),
         primaryButtonLabel: 'COMPLETE',
         secondaryButtonLabel: 'SAVE FOR LATER',
