@@ -6,7 +6,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
+import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
+import '../../feature/auth/sign_up/presentation/sign_up_form.dart';
+import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';
@@ -74,7 +77,6 @@ class App extends StatelessWidget {
       case AppStatus.authenticated:
         return const SignInSuccessScreen();
       case AppStatus.unauthenticated:
-        return TabsScreen();
         return const CarouselScreen();
       case AppStatus.unknown:
         return const SizedBox();
