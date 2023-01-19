@@ -17,7 +17,7 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
   SecondaryMultipleChoiceButton(
       {this.label = '',
       required this.onTap,
-        this.disabled = false,
+      this.disabled = false,
       this.fontStyle = FontStyle.normal,
       this.buttonSecondarySize = ButtonSecondarySize.big,
       this.active = false,
@@ -42,15 +42,18 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
             style: _defaultButtonStyle.copyWith(
                 minimumSize: _getButtonMinimumSize,
                 backgroundColor: _getColor(
-                    disabled ? AskLoraColors.gray: active
-                        ? AskLoraColors.primaryGreen.withOpacity(0.1)
-                        : Colors.transparent,
+                    disabled
+                        ? AskLoraColors.gray
+                        : active
+                            ? AskLoraColors.primaryGreen.withOpacity(0.1)
+                            : Colors.transparent,
                     AskLoraColors.primaryGreen.withOpacity(0.2)),
                 foregroundColor: _getColor(AskLoraColors.charcoal,
                     AskLoraColors.charcoal.withOpacity(0.9)),
                 shape: _getBorder(
-                    color:
-                        active ? AskLoraColors.primaryGreen : AskLoraColors.gray,
+                    color: active
+                        ? AskLoraColors.primaryGreen
+                        : AskLoraColors.gray,
                     colorPressed: AskLoraColors.gray.withOpacity(0.9),
                     borderWidth: active ? 3 : 1.4)),
             onPressed: onTap,
