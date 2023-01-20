@@ -8,7 +8,6 @@ import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
-import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';
 import '../bloc/app_bloc.dart';
 
@@ -61,7 +60,7 @@ class App extends StatelessWidget {
                     ],
                     locale: Locale(state.locale.languageCode, ''),
                     onGenerateRoute: RouterGenerator.generateRoute,
-                    title: 'Flutter Demo',
+                    title: 'Asklora',
                     theme: ThemeData(
                         fontFamily: state.locale.fontType,
                         primarySwatch: MaterialColor(
@@ -74,7 +73,6 @@ class App extends StatelessWidget {
       case AppStatus.authenticated:
         return const SignInSuccessScreen();
       case AppStatus.unauthenticated:
-        return TabsScreen();
         return const CarouselScreen();
       case AppStatus.unknown:
         return const SizedBox();

@@ -23,8 +23,15 @@ class DepositAmountChanged extends UploadProofofRemittanceEvent {
   List<Object> get props => [value];
 }
 
-class SubmitProofofRemittance extends UploadProofofRemittanceEvent {
-  const SubmitProofofRemittance() : super();
+class SubmitProofOfRemittance extends UploadProofofRemittanceEvent {
+  const SubmitProofOfRemittance() : super();
+
+  @override
+  List<Object> get props => [];
+}
+
+class SubmitWithOutProofOfRemittance extends UploadProofofRemittanceEvent {
+  const SubmitWithOutProofOfRemittance() : super();
 
   @override
   List<Object> get props => [];

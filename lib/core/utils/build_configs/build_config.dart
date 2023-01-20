@@ -44,12 +44,10 @@ class StagingConfig implements BaseConfig {
   String get alpacaApiBaseUrl => 'http://8.210.201.22:8000/stagingConfig';
 
   @override
-  String get askLoraApiBaseUrl =>
-      'http://apca.services.asklora.ai/stagingConfig';
+  String get askLoraApiBaseUrl => 'https://stag-apca.api.asklora.ai/';
 
   @override
-  String get streamServiceBaseUrl =>
-      'wss://apca.services.asklora.ai/stagingConfig';
+  String get streamServiceBaseUrl => 'wss://stag-apca.api.asklora.ai/';
 }
 
 class ProdConfig implements BaseConfig {

@@ -18,59 +18,109 @@ class BotStockExplanationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+        backgroundColor: AskLoraColors.white,
         body: GiftBotStockBaseWidget(
-      content: Column(
-        children: [
-          const LoraMemojiHeader(
-              text:
-                  'A Botstock is a combination of a stock and a Bot. A Bot is where Lora  manages your stock position.'),
-          const SizedBox(
-            height: 32,
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: _botCard(
-                      botName: 'Pull Up', description: 'Bot (AI investor)')),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 24),
-                child: Icon(
-                  Icons.add,
-                  color: AskLoraColors.gray,
-                  size: 32,
-                ),
+          content: Column(
+            children: const [
+              LoraMemojiHeader(
+                  text:
+                      'A Botstock is a combination of a stock and a Bot. A Bot is where Lora manages your stock position.'),
+              SizedBox(
+                height: 32,
               ),
-              Expanded(child: _botCard(botName: 'TSLA', description: 'Stock')),
+              WhatIsBotTutorial(),
+              SizedBox(
+                height: 50,
+              ),
             ],
-          )
-        ],
-      ),
-      bottomButton: Padding(
-        padding: const EdgeInsets.only(bottom: 30.0),
-        child: PrimaryButton(
-          label: 'SURE! WHAT DOES BOT DO?',
-          onTap: () => BotStockDoScreen.open(context),
-        ),
-      ),
-    ));
+          ),
+          bottomButton: Padding(
+            padding: const EdgeInsets.only(bottom: 30.0),
+            child: PrimaryButton(
+              label: 'SURE! WHAT DOES BOT DO?',
+              onTap: () => BotStockDoScreen.open(context),
+            ),
+          ),
+        ));
   }
-
-  Widget _botCard({required String botName, required String description}) =>
-      Column(
-        children: [
-          CircularBotCard(botName),
-          const SizedBox(
-            height: 10,
-          ),
-          CustomTextNew(
-            description,
-            style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
-          ),
-        ],
-      );
 
   static void open(BuildContext context) => Navigator.pushNamed(
         context,
         route,
       );
+}
+
+class WhatIsBotTutorial extends StatefulWidget {
+  const WhatIsBotTutorial({super.key});
+
+  @override
+  State<WhatIsBotTutorial> createState() => _WhatIsBotTutorialState();
+}
+
+class _WhatIsBotTutorialState extends State<WhatIsBotTutorial>
+    with SingleTickerProviderStateMixin {
+  bool move = false;
+  bool show = false;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 500))
+        .then((value) => setState(() {
+              move = true;
+            }));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        AnimatedOpacity(
+          opacity: move ? 0.3 : 1.0,
+          duration: const Duration(milliseconds: 1500),
+          child: Stack(
+            children: [
+              AnimatedAlign(
+                alignment: move ? Alignment.center : Alignment.centerLeft,
+                duration: const Duration(milliseconds: 1500),
+                curve: Curves.fastOutSlowIn,
+                child: const CircularBotCard(
+                    title: 'SQUAT',
+                    backgroundColor: AskLoraColors.purple,
+                    subTitleBackgroundColor: AskLoraColors.darkerPurple,
+                    subTitle: 'AI BOT'),
+              ),
+              AnimatedAlign(
+                alignment: move ? Alignment.center : Alignment.centerRight,
+                duration: const Duration(milliseconds: 1500),
+                curve: Curves.fastOutSlowIn,
+                child: const CircularBotCard(
+                    title: 'TSLA',
+                    backgroundColor: AskLoraColors.lightGray50Alpha,
+                    subTitleBackgroundColor: AskLoraColors.darkGray,
+                    subTitle: 'STOCK'),
+                onEnd: () {
+                  setState(() {
+                    show = true;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+        AnimatedOpacity(
+          opacity: show ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 500),
+          child: const Align(
+            alignment: Alignment.center,
+            child: CircularBotCard(
+                title: 'SQUAT TSLA',
+                backgroundColor: AskLoraColors.purple,
+                subTitleBackgroundColor: AskLoraColors.darkerPurple50Alpha,
+                subTitle: 'BOTSTOCK'),
+          ),
+        ),
+      ],
+    );
+  }
 }
