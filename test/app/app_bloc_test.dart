@@ -67,6 +67,29 @@ void main() async {
       expect: () => {const AppState.authenticated()},
     );
 
+    blocTest<AppBloc, AppState>(
+      'emits `userJourney=kyc` WHEN '
+      'save user journey kyc after initialize the bloc',
+      build: () {
+        when(tokenRepository.isTokenValid())
+            .thenAnswer((_) => Future.value(false));
+        when(userJourneyRepository.getUserJourney()).thenAnswer(
+            (_) => Future.value(UserJourney.privacyPersonalisation));
+        when(userJourneyRepository.saveUserJourney(UserJourney.kyc))
+            .thenAnswer((_) => Future.value(true));
+        return appBloc;
+      },
+      act: (bloc) {
+        bloc.add(AppLaunched());
+        bloc.add(const SaveUserJourney(UserJourney.kyc));
+      },
+      expect: () => {
+        const AppState.unauthenticated(
+            userJourney: UserJourney.privacyPersonalisation),
+        const AppState.unauthenticated(userJourney: UserJourney.kyc),
+      },
+    );
+
     tearDown(() => {appBloc.close()});
   });
 }
