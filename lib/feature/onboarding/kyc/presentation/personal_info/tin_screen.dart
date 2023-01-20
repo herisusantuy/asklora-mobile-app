@@ -28,7 +28,7 @@ class TinScreen extends StatelessWidget {
       content: Column(
         children: [
           CustomTextNew(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit OTP is sent to your SMS.',
+            'Please specify your country of tax residence and your corresponding Tax Identification number (TIN). For Hong Kong residents, your TIN is your HKID number',
             key: const Key('sub_title'),
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
@@ -54,7 +54,6 @@ class TinScreen extends StatelessWidget {
               key: const Key('tin_input'),
               initialValue: state.tinNumber,
               labelText: 'TIN Number',
-              textInputType: TextInputType.number,
               hintText: 'If your HKID is P123456(7), your TIN is P1234567.',
               floatingLabelBehavior: FloatingLabelBehavior.always,
               textInputFormatterList: [

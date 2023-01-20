@@ -6,12 +6,13 @@
 import 'dart:async' as _i5;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
+import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart' as _i7;
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart'
-    as _i7;
-import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_request.dart'
     as _i8;
+import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_request.dart'
+    as _i9;
 import 'package:asklora_mobile_app/feature/auth/sign_up/repository/sign_up_repository.dart'
     as _i4;
 import 'package:dio/dio.dart' as _i3;
@@ -84,18 +85,38 @@ class MockSignUpRepository extends _i1.Mock implements _i4.SignUpRepository {
           ),
         )),
       ) as _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>>);
+
+  @override
+  _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> getVerificationEmail(
+          {required _i7.GetOtpRequest? getVerificationEmailRequest}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getVerificationEmail,
+          [],
+          {#getVerificationEmailRequest: getVerificationEmailRequest},
+        ),
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>.value(
+            _FakeBaseResponse_0<_i6.GetOtpResponse>(
+          this,
+          Invocation.method(
+            #getVerificationEmail,
+            [],
+            {#getVerificationEmailRequest: getVerificationEmailRequest},
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
 }
 
 /// A class which mocks [SignUpApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignUpApiClient extends _i1.Mock implements _i7.SignUpApiClient {
+class MockSignUpApiClient extends _i1.Mock implements _i8.SignUpApiClient {
   MockSignUpApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i3.Response<dynamic>> signUp(_i8.SignUpRequest? request) =>
+  _i5.Future<_i3.Response<dynamic>> signUp(_i9.SignUpRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #signUp,
@@ -107,6 +128,24 @@ class MockSignUpApiClient extends _i1.Mock implements _i7.SignUpApiClient {
           Invocation.method(
             #signUp,
             [request],
+          ),
+        )),
+      ) as _i5.Future<_i3.Response<dynamic>>);
+
+  @override
+  _i5.Future<_i3.Response<dynamic>> getActivationEmail(
+          _i7.GetOtpRequest? getOtpRequest) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getActivationEmail,
+          [getOtpRequest],
+        ),
+        returnValue:
+            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
+          this,
+          Invocation.method(
+            #getActivationEmail,
+            [getOtpRequest],
           ),
         )),
       ) as _i5.Future<_i3.Response<dynamic>>);

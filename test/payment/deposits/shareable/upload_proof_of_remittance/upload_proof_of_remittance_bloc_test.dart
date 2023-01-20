@@ -78,7 +78,7 @@ void main() async {
         act: (bloc) => {
               bloc.add(const DepositAmountChanged(200)),
               bloc.add(const PickFile()),
-              bloc.add(const SubmitProofofRemittance())
+              bloc.add(const SubmitProofOfRemittance())
             },
         expect: () => {
               const UploadProofofRemittanceState(depositAmount: 200),

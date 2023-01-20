@@ -64,7 +64,7 @@ class App extends StatelessWidget {
                     ],
                     locale: Locale(state.locale.languageCode, ''),
                     onGenerateRoute: RouterGenerator.generateRoute,
-                    title: 'Flutter Demo',
+                    title: 'Asklora',
                     theme: ThemeData(
                         fontFamily: state.locale.fontType,
                         primarySwatch: MaterialColor(

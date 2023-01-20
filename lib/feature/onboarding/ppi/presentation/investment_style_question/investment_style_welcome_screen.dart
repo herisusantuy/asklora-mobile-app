@@ -17,6 +17,7 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
+      enableBackNavigation: false,
       body: Padding(
         padding: AppValues.screenHorizontalPadding,
         child: LayoutBuilder(builder: (context, constraint) {

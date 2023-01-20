@@ -12,6 +12,7 @@ class AskLoraColors {
   static const background = Color(0xFFF4F4F4);
   static const background2 = [Color(0xFF006EF2), Color(0xFF004396)];
   static const lightGray = Color(0XFFEDEDED);
+  static const lightGray50Alpha = Color(0X80EDEDED);
   static const gray = Color(0XFFD2D2D2);
   static const darkGray = Color(0XFF878787);
   static const white = Color(0XFFFFFFFF);
@@ -26,5 +27,6 @@ class AskLoraColors {
   static const darkerLime = Color(0XFFE0E32B);
   static const darkerGreen = Color(0XFF27D7A4);
   static const darkerPurple = Color(0XFFA479E9);
+  static const darkerPurple50Alpha = Color(0X80A479E9);
   static const extraLightGray = Color(0XFFF8F8F8);
 }

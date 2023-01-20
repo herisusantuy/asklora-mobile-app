@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../domain/pair.dart';
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 import '../utils/app_icons.dart';
@@ -9,9 +10,11 @@ import 'lora_memoji_widget.dart';
 class LoraMemojiHeader extends StatelessWidget {
   final String text;
   final Color textColor;
+  final LoraMemojiType loraMemojiType;
 
   const LoraMemojiHeader(
       {required this.text,
+      this.loraMemojiType = LoraMemojiType.lora1,
       Key? key = const Key('memoji_widget'),
       this.textColor = AskLoraColors.charcoal})
       : super(key: key);
@@ -20,8 +23,8 @@ class LoraMemojiHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
       Stack(alignment: Alignment.center, children: [
-        getSvgImage('memoji_background_green'),
-        const LoraMemojiWidget(loraMemojiType: LoraMemojiType.lora1),
+        getSvgImage(_getMemojiProps().left),
+        LoraMemojiWidget(loraMemojiType: _getMemojiProps().right),
       ]),
       Container(
           transform: Matrix4.translationValues(0, -35, 0),
@@ -31,5 +34,17 @@ class LoraMemojiHeader extends StatelessWidget {
             textAlign: TextAlign.center,
           )),
     ]);
+  }
+
+  Pair<String, LoraMemojiType> _getMemojiProps() {
+    switch (loraMemojiType) {
+      case LoraMemojiType.lora6:
+      case LoraMemojiType.lora7:
+      case LoraMemojiType.lora8:
+      case LoraMemojiType.lora9:
+        return Pair('memoji_background_magenta', loraMemojiType);
+      default:
+        return Pair('memoji_background_green', loraMemojiType);
+    }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
@@ -20,7 +19,9 @@ class SignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SignUpBloc, SignUpState>(listener: (context, state) {
+    return BlocListener<SignUpBloc, SignUpState>(listenWhen: (old, current) {
+      return old.response.state != current.response.state;
+    }, listener: (context, state) {
       if (state.response.state == ResponseState.loading) {
         CustomLoadingOverlay.show(context);
       } else {
@@ -32,10 +33,7 @@ class SignUpForm extends StatelessWidget {
           CustomInAppNotification.show(context, state.response.message);
           break;
         case ResponseState.success:
-          context
-              .read<AppBloc>()
-              .add(const SaveUserJourney(UserJourney.investmentStyle));
-          EmailActivationScreen.open(context);
+          EmailActivationScreen.open(context, state.username);
           break;
         default:
           break;
