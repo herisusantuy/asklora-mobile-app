@@ -68,7 +68,9 @@ class KycSummaryScreen extends StatelessWidget {
 
   Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () {
-          context.read<AppBloc>().add(const SaveUserJourney(UserJourney.freeBotStock));
+          context
+              .read<AppBloc>()
+              .add(const SaveUserJourney(UserJourney.freeBotStock));
           context
               .read<NavigationBloc<KycPageStep>>()
               .add(const PageChanged(KycPageStep.giftBotStock));

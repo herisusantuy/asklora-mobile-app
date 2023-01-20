@@ -66,7 +66,9 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                                 .read<DescriptiveQuestionWidgetBloc>()
                                 .add(AnswerChanged(value)),
                             hintText: 'Age',
-                            textInputFormatterList: [FilteringTextInputFormatter.digitsOnly],
+                            textInputFormatterList: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                             textInputType: TextInputType.number),
                       ],
                     ),

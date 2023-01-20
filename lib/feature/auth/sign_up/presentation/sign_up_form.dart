@@ -32,7 +32,9 @@ class SignUpForm extends StatelessWidget {
           CustomInAppNotification.show(context, state.response.message);
           break;
         case ResponseState.success:
-          context.read<AppBloc>().add(const SaveUserJourney(UserJourney.investmentStyle));
+          context
+              .read<AppBloc>()
+              .add(const SaveUserJourney(UserJourney.investmentStyle));
           EmailActivationScreen.open(context);
           break;
         default:
