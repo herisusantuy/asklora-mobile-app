@@ -210,8 +210,8 @@ void main() async {
           when(signUpRepository.getVerificationEmail(
                   getVerificationEmailRequest:
                       GetOtpRequest('kk@test.com', OtpType.register.value)))
-              .thenAnswer((_) =>
-                  Future.value(BaseResponse.complete(const GetOtpResponse(''))));
+              .thenAnswer((_) => Future.value(
+                  BaseResponse.complete(const GetOtpResponse(''))));
           return signUpBloc;
         },
         act: (bloc) => {

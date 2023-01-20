@@ -37,19 +37,34 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
                             DepositPageStep.welcome));
                   }
                 },
-                builder: (context, state) => CustomPaymentButton(
-                  isLoading: state.response.state == ResponseState.loading,
-                  key: const Key(
-                      'deposit_upload_proof_of_remittance_submit_button'),
-                  disable:
-                      state.documentFiles.isNotEmpty && state.depositAmount > 0
-                          ? false
-                          : true,
-                  title: 'Submit',
-                  onSubmit: () => context
-                      .read<UploadProofOfRemittanceBloc>()
-                      .add(const SubmitProofofRemittance()),
-                ),
+                builder: (context, state) => Column(children: [
+                  CustomPaymentButton(
+                    isLoading: state.response.state == ResponseState.loading,
+                    key: const Key(
+                        'deposit_upload_proof_of_remittance_submit_button'),
+                    disable: state.documentFiles.isNotEmpty &&
+                            state.depositAmount > 0
+                        ? false
+                        : true,
+                    title: 'Submit',
+                    onSubmit: () => context
+                        .read<UploadProofOfRemittanceBloc>()
+                        .add(const SubmitProofOfRemittance()),
+                  ),
+                  CustomPaymentButton(
+                    isLoading: state.response.state == ResponseState.loading,
+                    key: const Key(
+                        'deposit_upload_proof_of_remittance_submit_button_new'),
+                    disable: state.documentFiles.isNotEmpty &&
+                            state.depositAmount > 0
+                        ? false
+                        : true,
+                    title: 'Submit Without POR',
+                    onSubmit: () => context
+                        .read<UploadProofOfRemittanceBloc>()
+                        .add(const SubmitWithOutProofOfRemittance()),
+                  )
+                ]),
               ),
               child: ListView(
                 children: [
@@ -81,30 +96,32 @@ class UploadProofOfRemittanceScreen extends StatelessWidget {
                           size: 42,
                         ),
                       )),
-                  _uploadDocument('Sample Document', BlocBuilder<
-                      UploadProofOfRemittanceBloc,
-                      UploadProofofRemittanceState>(
-                    builder: (context, state) {
-                      if (state.documentFiles.isNotEmpty) {
-                        return Column(
-                          children: state.documentFiles
-                              .map((element) => GestureDetector(
-                                    onTap: () => PhotoViewScreen.open(context,
-                                        FileImage(File(element.path!))),
-                                    child: Image.file(
-                                      key: const Key(
-                                          'deposit_upload_proof_of_remittance_image'),
-                                      File(element.path!),
-                                      height: 150,
-                                    ),
-                                  ))
-                              .toList(),
-                        );
-                      } else {
-                        return const CustomText('Image');
-                      }
-                    },
-                  )),
+                  _uploadDocument(
+                    'Sample Document',
+                    BlocBuilder<UploadProofOfRemittanceBloc,
+                        UploadProofofRemittanceState>(
+                      builder: (context, state) {
+                        if (state.documentFiles.isNotEmpty) {
+                          return Column(
+                            children: state.documentFiles
+                                .map((element) => GestureDetector(
+                                      onTap: () => PhotoViewScreen.open(context,
+                                          FileImage(File(element.path!))),
+                                      child: Image.file(
+                                        key: const Key(
+                                            'deposit_upload_proof_of_remittance_image'),
+                                        File(element.path!),
+                                        height: 150,
+                                      ),
+                                    ))
+                                .toList(),
+                          );
+                        } else {
+                          return const CustomText('Image');
+                        }
+                      },
+                    ),
+                  ),
                 ],
               ),
             ));
