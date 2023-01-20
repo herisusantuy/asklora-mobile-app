@@ -42,7 +42,7 @@ class PersonalisationQuestionScreen extends StatelessWidget {
                           .add(const PagePop());
                     } else if (state is OnNextResultEndScreen) {
                       context.read<AppBloc>().add(
-                          const SaveUserJourney(UserJourney.investmentStyle));
+                          const SaveUserJourney(UserJourney.createAccount));
                       context.read<NavigationBloc<QuestionPageStep>>().add(
                           const PageChanged(
                               QuestionPageStep.personalisationResultEnd));

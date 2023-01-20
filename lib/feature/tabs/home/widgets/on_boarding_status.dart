@@ -153,7 +153,6 @@ class _OnBoardingStatusButtonState extends State<OnBoardingStatusButton> {
             Container(
               margin: const EdgeInsets.only(top: 9),
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 18),
-              height: 80,
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(43),
