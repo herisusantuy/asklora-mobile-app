@@ -206,12 +206,13 @@ void main() async {
                   const BaseResponse<SignUpResponse>(
                       data: SignUpResponse('Sign Up Successful'),
                       state: ResponseState.success)));
-
           when(signUpRepository.getVerificationEmail(
                   getVerificationEmailRequest:
                       GetOtpRequest('kk@test.com', OtpType.register.value)))
               .thenAnswer((_) => Future.value(
-                  BaseResponse.complete(const GetOtpResponse(''))));
+                  const BaseResponse<GetOtpResponse>(
+                      data: GetOtpResponse('Success'),
+                      state: ResponseState.success)));
           return signUpBloc;
         },
         act: (bloc) => {
