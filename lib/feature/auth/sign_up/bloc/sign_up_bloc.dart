@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../../core/utils/extensions.dart';
 import '../repository/sign_up_repository.dart';
 
@@ -11,9 +12,8 @@ part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  SignUpBloc({
-    required SignUpRepository signUpRepository,
-  })  : _signUpRepository = signUpRepository,
+  SignUpBloc({required SignUpRepository signUpRepository})
+      : _signUpRepository = signUpRepository,
         super(const SignUpState()) {
     on<SignUpUsernameChanged>(_onUsernameChanged);
     on<SignUpPasswordChanged>(_onPasswordChanged);
@@ -60,6 +60,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _signUpRepository.signUp(
           email: state.username, password: state.password);
+      await _signUpRepository.getVerificationEmail(
+          getVerificationEmailRequest:
+              GetOtpRequest(state.username, OtpType.register.value));
       emit(state.copyWith(response: data));
     } on ConflictException {
       emit(state.copyWith(
