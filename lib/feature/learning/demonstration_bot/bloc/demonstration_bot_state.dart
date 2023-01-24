@@ -9,9 +9,7 @@ class DemonstrationBotState extends Equatable {
 
   final BaseResponse<List<RecommendedBot>> botDemonstrationResponse;
   final BaseResponse<List<ChartDataSet>> chartDataResponse;
-  final BaseResponse<
-      Triplet<List<ChartDataStudioSet>, List<ChartDataStudioSet>,
-          List<UiData>>> tradeChartDataResponse;
+  final BaseResponse<ChartStudioAnimationModel> tradeChartDataResponse;
 
   @override
   List<Object?> get props {
@@ -21,10 +19,7 @@ class DemonstrationBotState extends Equatable {
   DemonstrationBotState copyWith({
     BaseResponse<List<RecommendedBot>>? botDemonstrationResponse,
     BaseResponse<List<ChartDataSet>>? chartDataResponse,
-    BaseResponse<
-            Triplet<List<ChartDataStudioSet>, List<ChartDataStudioSet>,
-                List<UiData>>>?
-        tradeChartDataResponse,
+    BaseResponse<ChartStudioAnimationModel>? tradeChartDataResponse,
   }) {
     return DemonstrationBotState(
       botDemonstrationResponse:

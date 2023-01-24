@@ -1,8 +1,8 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/core/domain/triplet.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart';
+import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart';
 import 'package:asklora_mobile_app/feature/learning/demonstration_bot/bloc/demonstration_bot_bloc.dart';
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -24,10 +24,9 @@ void main() async {
     final BaseResponse<List<ChartDataSet>> chartResponse =
         BaseResponse.complete([]);
 
-    final BaseResponse<
-            Triplet<List<ChartDataStudioSet>, List<ChartDataStudioSet>,
-                List<UiData>>> tradeChartResponse =
-        BaseResponse.complete(Triplet([], [], []));
+    final BaseResponse<ChartStudioAnimationModel> tradeChartResponse =
+        BaseResponse.complete(
+            ChartStudioAnimationModel(chartData: [], botData: [], uiData: []));
 
     final BaseResponse<List<RecommendedBot>> errorResponse =
         BaseResponse.error('Something went wrong');
@@ -35,9 +34,7 @@ void main() async {
     final BaseResponse<List<ChartDataSet>> chartErrorResponse =
         BaseResponse.error('Something went wrong');
 
-    final BaseResponse<
-            Triplet<List<ChartDataStudioSet>, List<ChartDataStudioSet>,
-                List<UiData>>> tradeChartErrorResponse =
+    final BaseResponse<ChartStudioAnimationModel> tradeChartErrorResponse =
         BaseResponse.error('Something went wrong');
 
     setUpAll(() async {

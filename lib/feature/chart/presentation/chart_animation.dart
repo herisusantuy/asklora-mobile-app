@@ -84,54 +84,16 @@ class _ChartAnimationState extends State<ChartAnimation> {
             decoration: const BoxDecoration(
               color: Colors.transparent,
             ),
-            child: Padding(
-              // padding: EdgeInsets.only(
-              //   right: _rightChartPadding,
-              //   left: _leftChartPadding,
-              //   top: _topChartPadding,
-              //   bottom: _bottomChartPadding,
-              // ),
-              padding: EdgeInsets.zero,
-              child: Stack(
-                children: [
-                  LineChart(
-                    mainData(),
-                  ),
-                  ...labels
-                ],
-              ),
+            child: Stack(
+              children: [
+                LineChart(
+                  mainData(),
+                ),
+                ...labels
+              ],
             ),
           ),
         ),
-        // const SizedBox(
-        //   height: 12,
-        // ),
-        // Center(
-        //   child: GestureDetector(
-        //     onTap: () {
-        //       if (animationComplete) {
-        //         restartAnimation();
-        //       }
-        //     },
-        //     child: Icon(
-        //       Icons.restart_alt_rounded,
-        //       color: animationComplete ? Colors.grey[700] : Colors.grey[300],
-        //       size: 34,
-        //     ),
-        //   ),
-        // ),
-        // Center(
-        //   child: Text('dash $dash'),
-        // ),
-        // Center(
-        //   child: Text('space $space'),
-        // ),
-        // Center(
-        //   child: Text('length line $linePathLength'),
-        // ),
-        // Center(
-        //   child: Text('screen size ${MediaQuery.of(context).size.width}'),
-        // ),
       ],
     );
   }
@@ -202,10 +164,6 @@ class _ChartAnimationState extends State<ChartAnimation> {
       if (mounted) {
         int? hedgeShare = widget.chartDataSets[animateIndex].hedgeShare;
         if (hedgeShare != null && hedgeShare != 0) {
-          // labels.add(Positioned(
-          //     left: flSpotsCoordinate[animateIndex].offset.dx,
-          //     top: flSpotsCoordinate[animateIndex].offset.dy,
-          //     child: Container(height: 2, width: 2, color: Colors.redAccent,)));
           if (hedgeShare > 0) {
             setState(() {
               labels.add(AnimatedIconLabel(
@@ -223,11 +181,6 @@ class _ChartAnimationState extends State<ChartAnimation> {
                   hedgeType: HedgeType.sell));
             });
           }
-          // labels.add(Positioned(
-          //   left: flSpotsCoordinate[animateIndex].offset.dx,
-          //   top: flSpotsCoordinate[animateIndex].offset.dy,
-          //   child: Container(height: 5, width: 5, color: Colors.redAccent,),));
-
           labels.add(AnimatedProfitLabel(
             key: UniqueKey(),
             delayDuration: Duration.zero,
@@ -309,10 +262,8 @@ class _ChartAnimationState extends State<ChartAnimation> {
         maxValue = element.price!;
       }
     }
-    //add multiply factor of 1.1 to add some space on top of y axis
     maxValue *= 1.1;
     maxValue = maxValue.round().toDouble();
-    //check if maxValue is not rounded by 10 then add the rest using mod
     if (maxValue % 10 != 0) {
       maxValue += (10 - maxValue % 10);
     }
@@ -390,7 +341,6 @@ class _ChartAnimationState extends State<ChartAnimation> {
       lineBarsData: [
         LineChartBarData(
           lineLengthCallback: (value) async {
-            //add dummy delay to make sure the widget is built before trigger animation()
             await Future.delayed(Duration.zero);
             if (!isLineAnimatedOnce) {
               linePathLength = value.round() + (isCurved ? 40 : 10);
@@ -406,7 +356,6 @@ class _ChartAnimationState extends State<ChartAnimation> {
             await Future.delayed(Duration.zero);
             if (!isLabelAnimatedOnce) {
               isLabelAnimatedOnce = true;
-              // animateLabel();
             }
           },
           dashArray: dashArray,

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
-import '../../../core/domain/triplet.dart';
 import '../../chart/domain/chart_models.dart';
+import '../../chart/domain/chart_studio_animation_model.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../utils/bot_stock_utils.dart';
 
@@ -23,21 +23,19 @@ class BotStockRepository {
     }
   }
 
-  Future<
-      BaseResponse<
-          Triplet<List<ChartDataStudioSet>, List<ChartDataStudioSet>,
-              List<UiData>>>> fetchTradeChartDataJson() async {
+  Future<BaseResponse<ChartStudioAnimationModel>>
+      fetchTradeChartDataJson() async {
     try {
       final String response =
           await rootBundle.loadString('assets/json/tesla_3_month_uno.json');
       var decodedJson = json.decode(response);
-      return BaseResponse.complete(Triplet(
-          _addIndexChartData(List<ChartDataStudioSet>.from(
+      return BaseResponse.complete(ChartStudioAnimationModel(
+          chartData: _addIndexChartData(List<ChartDataStudioSet>.from(
               decodedJson['chart_data']
                   .map((model) => ChartDataStudioSet.fromJson(model)))),
-          List<ChartDataStudioSet>.from(decodedJson['bot_data']
+          botData: List<ChartDataStudioSet>.from(decodedJson['bot_data']
               .map((model) => ChartDataStudioSet.fromJson(model))),
-          List<UiData>.from(
+          uiData: List<UiData>.from(
               decodedJson['ui_data'].map((model) => UiData.fromJson(model)))));
     } catch (e) {
       return BaseResponse.error(e.toString());

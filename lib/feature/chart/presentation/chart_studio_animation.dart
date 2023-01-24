@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
 
-import '../../../core/domain/triplet.dart';
 import '../../../core/presentation/dashed_line_horizontal_painter.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../domain/chart_models.dart';
+import '../domain/chart_studio_animation_model.dart';
 import '../utils/chart_util.dart';
 import 'widgets/animated_icon_label.dart';
 import 'widgets/animated_line_pointer.dart';
@@ -19,10 +19,10 @@ import 'widgets/pop_up_choices_widget.dart';
 import 'widgets/pop_up_value_widget.dart';
 
 class ChartStudioAnimation extends StatefulWidget {
-  final Triplet<List<ChartDataStudioSet>, List<ChartDataStudioSet>,
-      List<UiData>> triplet;
+  final ChartStudioAnimationModel chartStudioAnimationModel;
 
-  const ChartStudioAnimation({required this.triplet, super.key});
+  const ChartStudioAnimation(
+      {required this.chartStudioAnimationModel, super.key});
 
   @override
   State<ChartStudioAnimation> createState() => _ChartStudioAnimationState();
@@ -96,8 +96,8 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
           _rightChartPadding -
           _leftChartPadding -
           reservedLeftTitle;
-      ChartDataStudioSet? botData =
-          _searchForBotFromDate(widget.triplet.left[animateIndex].date!);
+      ChartDataStudioSet? botData = _searchForBotFromDate(
+          widget.chartStudioAnimationModel.chartData[animateIndex].date!);
       final double chartHeightFactor =
           (chartHeight - _topChartPadding - _bottomChartPadding) / getMaxYValue;
       return Stack(
@@ -282,7 +282,9 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
     setState(() {
       animationStarted = true;
     });
-    factor = (lineAnimationDuration / widget.triplet.left.length).round();
+    factor = (lineAnimationDuration /
+            widget.chartStudioAnimationModel.chartData.length)
+        .round();
     currentDistance = 0;
     if (animateIndex < flSpotsCoordinate.length) {
       currentDistance = flSpotsCoordinate[animateIndex].distance;
@@ -298,8 +300,8 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
     drawLineTimer = Timer.periodic(
         Duration(milliseconds: ((factor / currentDistance)).round()), (timer) {
       if (mounted) {
-        uiData =
-            _searchForUiDataFromDate(widget.triplet.left[animateIndex].date!);
+        uiData = _searchForUiDataFromDate(
+            widget.chartStudioAnimationModel.chartData[animateIndex].date!);
 
         if (uiData != null) {
           drawLineTimer!.cancel();
@@ -309,8 +311,8 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
           });
         }
 
-        ChartDataStudioSet? botData =
-            _searchForBotFromDate(widget.triplet.left[animateIndex].date!);
+        ChartDataStudioSet? botData = _searchForBotFromDate(
+            widget.chartStudioAnimationModel.chartData[animateIndex].date!);
         if (botData != null &&
             botData.hedgeStatus != 'Hold' &&
             animateIndex > lastIndexShown + 5) {
@@ -358,13 +360,14 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
   }
 
   void drawLineChart() {
-    flSpots = widget.triplet.left
+    flSpots = widget.chartStudioAnimationModel.chartData
         .map((e) => FlSpot(e.index!.toDouble(), e.price!))
         .toList();
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    ChartDataStudioSet? chartDataStudioSet = widget.triplet.left
+    ChartDataStudioSet? chartDataStudioSet = widget
+        .chartStudioAnimationModel.chartData
         .firstWhereOrNull((element) => element.index == value.round());
     if (chartDataStudioSet != null) {
       return Transform.rotate(
@@ -385,7 +388,7 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
 
   double get getMaxYValue {
     double maxValue = 0;
-    for (var element in widget.triplet.left) {
+    for (var element in widget.chartStudioAnimationModel.chartData) {
       if (element.price! > maxValue) {
         maxValue = element.price!;
       }
@@ -402,7 +405,7 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
 
   double get getMinYValue {
     double minValue = double.infinity;
-    for (var element in widget.triplet.left) {
+    for (var element in widget.chartStudioAnimationModel.chartData) {
       if (element.price! < minValue) {
         minValue = element.price!;
       }
@@ -487,7 +490,7 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
               left: BorderSide(width: 1, color: Color(0XFFD2D2D2)),
               bottom: BorderSide(width: 1, color: Color(0XFFD2D2D2)))),
       minX: flSpots.first.x,
-      maxX: widget.triplet.left.length - 1,
+      maxX: widget.chartStudioAnimationModel.chartData.length - 1,
       minY: 0,
       maxY: getMaxYValue,
       lineBarsData: [
@@ -529,13 +532,14 @@ class _ChartStudioAnimationState extends State<ChartStudioAnimation> {
   }
 
   ChartDataStudioSet? _searchForBotFromDate(DateTime date) {
-    List<ChartDataStudioSet> chartDataStudioSets = widget.triplet.middle;
+    List<ChartDataStudioSet> chartDataStudioSets =
+        widget.chartStudioAnimationModel.botData;
     return chartDataStudioSets
         .firstWhereOrNull((element) => element.date == date);
   }
 
   UiData? _searchForUiDataFromDate(DateTime date) {
-    List<UiData> uiDatas = widget.triplet.right;
+    List<UiData> uiDatas = widget.chartStudioAnimationModel.uiData;
     return uiDatas.firstWhereOrNull((element) => element.date == date);
   }
 }

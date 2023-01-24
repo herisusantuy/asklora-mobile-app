@@ -47,7 +47,8 @@ class DemonstrationBotTrade extends StatelessWidget {
                   if (state.tradeChartDataResponse.state ==
                       ResponseState.success) {
                     return ChartStudioAnimation(
-                      triplet: state.tradeChartDataResponse.data!,
+                      chartStudioAnimationModel:
+                          state.tradeChartDataResponse.data!,
                     );
                   } else {
                     return const SizedBox.shrink();
