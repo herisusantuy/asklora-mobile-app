@@ -1,6 +1,6 @@
-import 'package:asklora_mobile_chart/samples/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
