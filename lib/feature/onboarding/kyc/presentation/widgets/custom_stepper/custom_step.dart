@@ -3,36 +3,46 @@ part of 'custom_stepper.dart';
 class CustomStep extends StatelessWidget {
   final String svgAssetName;
   final bool drawLine;
-  final String label;
+  final String? label;
+  final double height;
+  final Widget? widgetStep;
 
   const CustomStep(
       {this.svgAssetName = 'inactive_step_icon',
       this.drawLine = false,
-      required this.label,
+      this.label,
+      this.height = 54,
+      this.widgetStep,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           children: [
+            getSvgIcon(svgAssetName, height: 18, width: 18),
             if (drawLine)
               CustomPaint(
                   painter: DashedLineVerticalPainter(),
-                  size: const Size(1, 34)),
-            getSvgIcon(svgAssetName)
+                  size: Size(1, height - 20)),
           ],
         ),
         const SizedBox(
           width: 14,
         ),
-        CustomTextNew(
-          label,
-          style:
-              AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
+        Expanded(
+          child: SizedBox(
+            height: height,
+            child: widgetStep ??
+                CustomTextNew(
+                  label ?? '',
+                  style: AskLoraTextStyles.body1
+                      .copyWith(color: AskLoraColors.charcoal),
+                ),
+          ),
         ),
       ],
     );
