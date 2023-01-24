@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../core/presentation/circular_container.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/utils/app_icons.dart';
+import '../../utils/bot_stock_utils.dart';
 import '../bot_recommendation/bot_recommendation_screen.dart';
 import '../widgets/circular_bot_card.dart';
 import '../widgets/gift_bot_stock_base_widget.dart';
@@ -25,11 +28,13 @@ class BotStockDoScreen extends StatelessWidget {
               text:
                   'Bot does the work of buying and selling to execute your personalized strategy.'),
           _botCard(
-              botName: 'PULLUP', description: 'Try your luck for a bigger win'),
+              botType: BotType.pullUp,
+              description: 'Try your luck for a bigger win'),
           _botCard(
-              botName: 'PLANK',
+              botType: BotType.plank,
               description: 'Stop loss and target gain automatically'),
-          _botCard(botName: 'SQUAT', description: 'Keen for passive income '),
+          _botCard(
+              botType: BotType.squat, description: 'Keen for passive income '),
         ],
       ),
       bottomButton: Padding(
@@ -42,26 +47,29 @@ class BotStockDoScreen extends StatelessWidget {
     ));
   }
 
-  Widget _botCard({required String botName, required String description}) =>
+  Widget _botCard({required BotType botType, required String description}) =>
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0),
         child: Row(
           children: [
-            CircularBotCard(botName),
+            CircularContainer(
+                backgroundColor: botType.primaryBgColor,
+                child: getSvgIcon(botType.botAssetName,
+                    color: AskLoraColors.black)),
             const SizedBox(
-              width: 4,
+              width: 15,
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextNew(
-                    '$botName BOT',
-                    style: AskLoraTextStyles.h5
+                    '${botType.uppercaseName} BOT',
+                    style: AskLoraTextStyles.h5Italic
                         .copyWith(color: AskLoraColors.charcoal),
                   ),
                   const SizedBox(
-                    height: 2,
+                    height: 5,
                   ),
                   CustomTextNew(
                     description,

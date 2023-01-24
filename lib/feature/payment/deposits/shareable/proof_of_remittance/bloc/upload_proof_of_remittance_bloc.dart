@@ -20,7 +20,8 @@ class UploadProofOfRemittanceBloc
         super(const UploadProofofRemittanceState()) {
     on<PickFile>(_onPickFile);
     on<DepositAmountChanged>(_onDepositAmountChanged);
-    on<SubmitProofofRemittance>(_onSubmitProofOfRemittance);
+    on<SubmitProofOfRemittance>(_onSubmitProofOfRemittance);
+    on<SubmitWithOutProofOfRemittance>(_onSubmitWithOutProofOfRemittance);
   }
 
   final FilePickerRepository _filePickerRepository;
@@ -31,13 +32,25 @@ class UploadProofOfRemittanceBloc
     emit(state.copyWith(depositAmount: event.value));
   }
 
-  void _onSubmitProofOfRemittance(SubmitProofofRemittance event,
+  void _onSubmitProofOfRemittance(SubmitProofOfRemittance event,
       Emitter<UploadProofofRemittanceState> emit) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _proofOfRemittanceRepository.submitProofOfRemittance(
           depositAmount: state.depositAmount,
           platformFiles: state.documentFiles);
+      emit(state.copyWith(response: data));
+    } catch (e) {
+      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+    }
+  }
+
+  void _onSubmitWithOutProofOfRemittance(SubmitWithOutProofOfRemittance event,
+      Emitter<UploadProofofRemittanceState> emit) async {
+    try {
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data = await _proofOfRemittanceRepository.submitProofOfRemittance(
+          depositAmount: state.depositAmount, platformFiles: []);
       emit(state.copyWith(response: data));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(e.toString())));

@@ -1,4 +1,5 @@
 const v1 = '/api/v1/';
+const v2 = '/api/v2/';
 const accounts = 'accounts/';
 const transactions = 'transactions/';
 const orders = 'orders/';
@@ -15,6 +16,7 @@ const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';
 const String endpointResetPassword = '$v1$accounts/reset-password/';
 const String endpointGetOtp = '$v1${accounts}otp/';
+const String endpointGetActivationEmailLink = '$v2${accounts}otp/';
 const String endpointVerifyEmail = '$v1${accounts}verify-email/';
 const String endpointUpgradeAccount = '$v1${accounts}upgrade/';
 const String endpointGetAccount = '$v1$accounts';

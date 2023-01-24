@@ -42,7 +42,7 @@ class BotPortfolioCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botType.name} ${recommendedBot.ticker}',
+                      '${botType.uppercaseName} ${recommendedBot.ticker}',
                       style: AskLoraTextStyles.h5Italic,
                       maxLines: 1,
                       ellipsis: true,

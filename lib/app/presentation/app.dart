@@ -61,7 +61,7 @@ class App extends StatelessWidget {
                     ],
                     locale: Locale(state.locale.languageCode, ''),
                     onGenerateRoute: RouterGenerator.generateRoute,
-                    title: 'Flutter Demo',
+                    title: 'Asklora',
                     theme: ThemeData(
                         fontFamily: state.locale.fontType,
                         primarySwatch: MaterialColor(
@@ -74,8 +74,7 @@ class App extends StatelessWidget {
       case AppStatus.authenticated:
         return const SignInSuccessScreen();
       case AppStatus.unauthenticated:
-        return TabsScreen();
-        return const CarouselScreen();
+        return const TabsScreen();
       case AppStatus.unknown:
         return const SizedBox();
     }

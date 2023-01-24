@@ -61,7 +61,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                     width: 12,
                   ),
                   CustomTextNew(
-                    '${botType.name} ${recommendedBot.ticker}',
+                    '${botType.uppercaseName} ${recommendedBot.ticker}',
                     style: AskLoraTextStyles.h5
                         .copyWith(color: AskLoraColors.charcoal),
                   ),
@@ -96,7 +96,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CustomTextNew(
-                                  '${botType.name} Bots',
+                                  '${botType.uppercaseName} Bots',
                                   style: AskLoraTextStyles.h5
                                       .copyWith(color: AskLoraColors.charcoal),
                                 ),
