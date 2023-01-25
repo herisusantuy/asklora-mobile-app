@@ -4,49 +4,59 @@ class CustomStep extends StatelessWidget {
   final String svgAssetName;
   final bool drawLine;
   final String? label;
-  final double height;
   final Widget? widgetStep;
+  final Widget? widgetIcon;
+  final double spaceHorizontal;
+  final double spaceVertical;
 
   const CustomStep(
       {this.svgAssetName = 'inactive_step_icon',
       this.drawLine = false,
       this.label,
-      this.height = 54,
       this.widgetStep,
+      this.widgetIcon,
+      this.spaceHorizontal = 20,
+      this.spaceVertical = 20,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
       children: [
-        Column(
-          children: [
-            getSvgIcon(svgAssetName, height: 18, width: 18),
-            if (drawLine)
-              CustomPaint(
-                  painter: DashedLineVerticalPainter(),
-                  size: Size(1, height - 20)),
-          ],
-        ),
-        const SizedBox(
-          width: 14,
-        ),
-        Expanded(
-          child: SizedBox(
-            height: height,
-            child: widgetStep ??
-                CustomTextNew(
-                  label ?? '',
-                  style: AskLoraTextStyles.body1
-                      .copyWith(color: AskLoraColors.charcoal),
-                ),
-          ),
-        ),
+        LayoutBuilder(builder: (context, constraints) {
+          return Container(
+            margin: const EdgeInsets.only(left: 9),
+            width: constraints.maxWidth,
+            child: UnconstrainedBox(
+              constrainedAxis: Axis.horizontal,
+              child: drawLine
+                  ? CustomPaint(
+                      painter: DashedLineVerticalPainter(),
+                      child: _drawContent,
+                    )
+                  : _drawContent,
+            ),
+          );
+        }),
+        Container(
+            transform: Matrix4.translationValues(0, -2, 0),
+            child:
+                widgetIcon ?? getSvgIcon(svgAssetName, height: 18, width: 18)),
       ],
     );
   }
+
+  Widget get _drawContent => Container(
+        transform: Matrix4.translationValues(0, -4, 0),
+        margin: EdgeInsets.only(left: spaceHorizontal, bottom: spaceVertical),
+        child: widgetStep ??
+            CustomTextNew(
+              label ?? '',
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+      );
 }
 
 class DashedLineVerticalPainter extends CustomPainter {

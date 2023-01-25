@@ -85,7 +85,6 @@ class MockSignUpRepository extends _i1.Mock implements _i4.SignUpRepository {
           ),
         )),
       ) as _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>>);
-
   @override
   _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> getVerificationEmail(
           {required _i7.GetOtpRequest? getVerificationEmailRequest}) =>
@@ -131,7 +130,6 @@ class MockSignUpApiClient extends _i1.Mock implements _i8.SignUpApiClient {
           ),
         )),
       ) as _i5.Future<_i3.Response<dynamic>>);
-
   @override
   _i5.Future<_i3.Response<dynamic>> getActivationEmail(
           _i7.GetOtpRequest? getOtpRequest) =>

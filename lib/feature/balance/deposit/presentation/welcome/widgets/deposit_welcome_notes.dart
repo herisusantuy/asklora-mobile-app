@@ -1,9 +1,10 @@
-part of '../deposit_screen.dart';
+part of '../deposit_welcome_screen.dart';
 
-class DepositNotes extends StatelessWidget {
+class DepositWelcomeNotes extends StatelessWidget {
   final DepositType depositType;
 
-  const DepositNotes({this.depositType = DepositType.firstTime, Key? key})
+  const DepositWelcomeNotes(
+      {this.depositType = DepositType.firstTime, Key? key})
       : super(key: key);
 
   @override
@@ -12,9 +13,9 @@ class DepositNotes extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomTextNew(
-          'NOTES :',
-          style: AskLoraTextStyles.subtitleAllCap2
-              .copyWith(color: AskLoraColors.darkGray),
+          'Notes :',
+          style:
+              AskLoraTextStyles.body3.copyWith(color: AskLoraColors.charcoal),
         ),
         const SizedBox(
           height: 4,
@@ -83,8 +84,7 @@ class DepositNotes extends StatelessWidget {
         child: CustomExpandedRow(
           label,
           text: text,
-          textStyle: AskLoraTextStyles.subtitleAllCap2
-              .copyWith(color: AskLoraColors.darkGray),
+          textStyle: AskLoraTextStyles.body3,
           flex1: 1,
           flex2: 20,
           textValueAlign: TextAlign.start,
