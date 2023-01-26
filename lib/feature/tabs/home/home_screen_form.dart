@@ -1,15 +1,13 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
 import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.dart';
-import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/lora_popup_message.dart';
 import '../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../bot_stock/utils/bot_stock_utils.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
-import 'widgets/on_boarding_status.dart';
+import 'widgets/on_boarding_status/on_boarding_status.dart';
 
 class HomeScreenForm extends StatelessWidget {
   const HomeScreenForm({super.key});
@@ -28,13 +26,9 @@ class HomeScreenForm extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 const SizedBox(height: 100),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: OnBoardingStatus(
-                      title: 'START INVESTING',
-                      subTitle: 'Create an account',
-                      onTap: () {},
-                      progress: 0.11),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: OnBoardingStatus(),
                 ),
                 const SizedBox(height: 20),
                 const Padding(

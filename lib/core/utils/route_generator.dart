@@ -27,6 +27,7 @@ import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/deposits/presentation/deposit_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
+import '../../feature/tabs/tabs_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 
@@ -121,6 +122,8 @@ class RouterGenerator {
                 ));
       case PortfolioScreen.route:
         return MaterialPageRoute(builder: (_) => const PortfolioScreen());
+      case TabsScreen.route:
+        return MaterialPageRoute(builder: (_) => const TabsScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

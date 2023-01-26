@@ -5,6 +5,7 @@ import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../ppi_screen.dart';
 
@@ -34,7 +35,7 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
                       primaryButtonOnClick: () => PpiScreen.open(context,
                           arguments: Pair(QuestionPageType.investmentStyle,
                               QuestionPageStep.investmentStyle)),
-                      secondaryButtonOnClick: () => Navigator.pop(context),
+                      secondaryButtonOnClick: () => SignUpScreen.open(context),
                       primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
                       secondaryButtonLabel: 'SIGN UP AGAIN')
                 ],

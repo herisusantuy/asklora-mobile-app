@@ -10,7 +10,7 @@ import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../auth/sign_in/presentation/sign_in_screen.dart';
-import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../../email_activation/presentation/email_activation_screen.dart';
 import '../bloc/sign_up_bloc.dart';
 
@@ -141,7 +141,7 @@ class SignUpForm extends StatelessWidget {
       key: const Key('sign_up_may_be_later_button'),
       margin: const EdgeInsets.only(top: 20),
       label: 'MAYBE LATER',
-      onTap: () => CarouselScreen.open(context),
+      onTap: () => TabsScreen.open(context),
     );
   }
 
