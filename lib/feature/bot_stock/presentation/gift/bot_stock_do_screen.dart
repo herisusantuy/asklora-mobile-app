@@ -64,7 +64,7 @@ class BotStockDoScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextNew(
-                    '${botType.uppercaseName} BOT',
+                    '${botType.upperCaseName} BOT',
                     style: AskLoraTextStyles.h5Italic
                         .copyWith(color: AskLoraColors.charcoal),
                   ),

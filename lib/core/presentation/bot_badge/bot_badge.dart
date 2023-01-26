@@ -73,7 +73,7 @@ class _BotBadgeState extends State<BotBadge> with TickerProviderStateMixin {
                   width: 5,
                 ),
                 CustomTextNew(
-                  '${widget.botType.uppercaseName} BOTS',
+                  '${widget.botType.upperCaseName} BOTS',
                   style: AskLoraTextStyles.h3Italic.copyWith(
                       color:
                           widget.textColor ?? widget.botType.expiredTextColor),

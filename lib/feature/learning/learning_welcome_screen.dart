@@ -22,7 +22,7 @@ class LearningWelcomeScreen extends StatelessWidget {
           children: [
             LoraMemojiHeader(
                 text:
-                    'Let’s go through a few reps, and see if ${botType.uppercaseName} bot fits your investment style.'),
+                    'Let’s go through a few reps, and see if ${botType.upperCaseName} bot fits your investment style.'),
             LoraPopUpMessageWithBotBadge(
               buttonLabel: "LET'S PRACTICE",
               withLoraImage: false,

@@ -226,14 +226,14 @@ enum BotType {
       AskLoraColors.primaryGreen, AskLoraColors.darkerGreen);
 
   final String value;
-  final String uppercaseName;
+  final String upperCaseName;
   final String name;
   final String botAssetName;
   final Color primaryBgColor;
   final Color secondaryBgColor;
   final Color expiredTextColor;
 
-  const BotType(this.value, this.uppercaseName, this.name, this.botAssetName,
+  const BotType(this.value, this.upperCaseName, this.name, this.botAssetName,
       this.primaryBgColor, this.secondaryBgColor,
       {this.expiredTextColor = AskLoraColors.charcoal});
 

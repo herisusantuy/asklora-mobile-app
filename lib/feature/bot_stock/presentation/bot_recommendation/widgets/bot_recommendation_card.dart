@@ -40,7 +40,7 @@ class BotRecommendationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextNew(
-                  '${botType.uppercaseName} ${recommendedBot.ticker}',
+                  '${botType.upperCaseName} ${recommendedBot.ticker}',
                   style: AskLoraTextStyles.h5Italic,
                   maxLines: 1,
                   ellipsis: true,

@@ -48,7 +48,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 22.0),
               child: CustomTextNew(
-                '${botType.uppercaseName} ${recommendedBot.ticker}',
+                '${botType.upperCaseName} ${recommendedBot.ticker}',
                 style: AskLoraTextStyles.h5
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -67,7 +67,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextNew(
-                            '${botType.uppercaseName} Bots',
+                            '${botType.upperCaseName} Bots',
                             style: AskLoraTextStyles.h5
                                 .copyWith(color: AskLoraColors.charcoal),
                           ),

@@ -36,7 +36,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextNew(
-                '${botType.uppercaseName} Bots',
+                '${botType.upperCaseName} Bots',
                 style: AskLoraTextStyles.h5
                     .copyWith(color: AskLoraColors.charcoal),
               ),
