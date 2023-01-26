@@ -6,6 +6,7 @@ import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../feature/balance/deposit/presentation/deposit_result_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_screen.dart';
 import '../../feature/balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../feature/balance/deposit/utils/deposit_utils.dart';
@@ -34,6 +35,7 @@ import '../../feature/user/account/presentation/upgrade_account/upgrade_account_
 
 import '../../home_screen.dart';
 import '../domain/pair.dart';
+import '../presentation/custom_status_widget.dart';
 import '../presentation/photo_view_screen.dart';
 import 'app_icons.dart';
 
@@ -127,10 +129,15 @@ class RouterGenerator {
       case PortfolioScreen.route:
         return MaterialPageRoute(builder: (_) => const PortfolioScreen());
       case DepositWelcomeScreen.route:
-        return MaterialPageRoute(
-            builder: (_) => DepositWelcomeScreen(
-                  depositType: settings.arguments as DepositType,
-                ));
+        return MaterialPageRoute(builder: (_) => const DepositWelcomeScreen());
+      case DepositResultScreen.route:
+        return MaterialPageRoute(builder: (_) {
+          var arguments = settings.arguments as Pair<DepositType, StatusType>;
+          return DepositResultScreen(
+            statusType: arguments.right,
+            depositType: arguments.left,
+          );
+        });
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

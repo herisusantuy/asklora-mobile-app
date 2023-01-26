@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_image_picker.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
+import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/round_colored_box.dart';
@@ -17,6 +19,7 @@ import '../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepp
 import '../bloc/deposit_bloc.dart';
 import '../repository/deposit_repository.dart';
 import '../utils/deposit_utils.dart';
+import 'deposit_result_screen.dart';
 import 'widgets/deposit_base_widget.dart';
 
 part 'widgets/deposit_notes.dart';
@@ -45,8 +48,18 @@ class DepositScreen extends StatelessWidget {
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
             CustomLoadingOverlay.show(context);
-          } else {
+          } else if (state.response.state == ResponseState.error) {
+            ///LETS ASSUME ERROR AS SUCCEED FOR NOW TO SHOW THE RESULT SCREEN
             CustomLoadingOverlay.dismiss();
+            // CustomInAppNotification.show(context, state.response.message);
+            DepositResultScreen.open(
+                context: context,
+                arguments: Pair(depositType, StatusType.success));
+          } else if (state.response.state == ResponseState.success) {
+            CustomLoadingOverlay.dismiss();
+            DepositResultScreen.open(
+                context: context,
+                arguments: Pair(depositType, StatusType.success));
           }
         },
         child: DepositBaseWidget(

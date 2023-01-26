@@ -19,16 +19,19 @@ class DepositStep extends StatelessWidget {
       case DepositType.firstTime:
         return RoundColoredBox(
           title: 'Deposit funds to complete your investment account opening',
-          content: Column(
-              children: _firstTimeStep.map((e) {
-            final int index = _firstTimeStep.indexOf(e);
-            return _step(
-                drawLine: index != _firstTimeStep.length - 1,
-                index: index,
-                subTitleColor: e.subTitleColor,
-                title: e.title,
-                subTitle: e.subTitle);
-          }).toList()),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Column(
+                children: _firstTimeStep.map((e) {
+              final int index = _firstTimeStep.indexOf(e);
+              return _step(
+                  drawLine: index != _firstTimeStep.length - 1,
+                  index: index,
+                  subTitleColor: e.subTitleColor,
+                  title: e.title,
+                  subTitle: e.subTitle);
+            }).toList()),
+          ),
           padding: padding,
         );
       case DepositType.type1:
@@ -70,6 +73,7 @@ class DepositStep extends StatelessWidget {
     Color subTitleColor = AskLoraColors.darkGray,
   }) =>
       CustomStep(
+        spaceVertical: 24,
         drawLine: drawLine,
         svgAssetName: _getSvgAssetName(index, currentStep),
         widgetStep: Column(
