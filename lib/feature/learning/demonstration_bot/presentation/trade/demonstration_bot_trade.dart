@@ -7,7 +7,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../bot_stock/repository/bot_stock_repository.dart';
 import '../../../../chart/presentation/chart_studio_animation.dart';
-import '../../../learning_screen.dart';
+import '../../../learning_bot_stock_screen.dart';
 import '../../bloc/demonstration_bot_bloc.dart';
 
 class DemonstrationBotTrade extends StatelessWidget {
@@ -17,7 +17,9 @@ class DemonstrationBotTrade extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.read<NavigationBloc<LearningPageStep>>().add(const PagePop());
+        context
+            .read<NavigationBloc<LearningBotStockPageStep>>()
+            .add(const PagePop());
         return false;
       },
       child: BlocProvider(
@@ -33,7 +35,7 @@ class DemonstrationBotTrade extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: InkWell(
                     onTap: () => context
-                        .read<NavigationBloc<LearningPageStep>>()
+                        .read<NavigationBloc<LearningBotStockPageStep>>()
                         .add(const PagePop()),
                     child: const Icon(
                       Icons.arrow_back_ios_new_rounded,

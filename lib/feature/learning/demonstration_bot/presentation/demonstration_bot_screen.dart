@@ -16,7 +16,7 @@ import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../demonstration_question/widgets/demonstration_tooltip_guide.dart';
-import '../../learning_screen.dart';
+import '../../learning_bot_stock_screen.dart';
 import '../bloc/demonstration_bot_bloc.dart';
 
 part 'widgets/demonstration_bot_list.dart';
@@ -35,7 +35,9 @@ class DemonstrationBotScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.read<NavigationBloc<LearningPageStep>>().add(const PagePop());
+        context
+            .read<NavigationBloc<LearningBotStockPageStep>>()
+            .add(const PagePop());
         return false;
       },
       child: BlocProvider(
@@ -88,7 +90,7 @@ class DemonstrationBotScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: InkWell(
             onTap: () => context
-                .read<NavigationBloc<LearningPageStep>>()
+                .read<NavigationBloc<LearningBotStockPageStep>>()
                 .add(const PagePop()),
             child: const Icon(
               Icons.arrow_back_ios_new_rounded,
@@ -136,7 +138,7 @@ class DemonstrationBotScreen extends StatelessWidget {
               onWillPop: () async {
                 Navigator.pop(context);
                 context
-                    .read<NavigationBloc<LearningPageStep>>()
+                    .read<NavigationBloc<LearningBotStockPageStep>>()
                     .add(const PagePop());
                 return false;
               },

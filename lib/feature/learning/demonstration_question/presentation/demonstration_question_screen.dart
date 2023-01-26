@@ -6,7 +6,7 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../onboarding/ppi/domain/fixture.dart';
 import '../../../onboarding/ppi/presentation/widget/header.dart';
-import '../../learning_screen.dart';
+import '../../learning_bot_stock_screen.dart';
 import '../bloc/demonstration_question_bloc.dart';
 import '../widgets/multiple_choice_question_widget/multiple_choice_question_widget.dart';
 import '../widgets/omni_search_question_widget.dart';
@@ -68,9 +68,10 @@ class DemonstrationQuestionScreen extends StatelessWidget {
                                         context
                                             .read<
                                                 NavigationBloc<
-                                                    LearningPageStep>>()
+                                                    LearningBotStockPageStep>>()
                                             .add(const PageChanged(
-                                                LearningPageStep.botList));
+                                                LearningBotStockPageStep
+                                                    .botList));
                                       } else {
                                         context
                                             .read<DemonstrationQuestionBloc>()
@@ -130,7 +131,9 @@ class DemonstrationQuestionScreen extends StatelessWidget {
 
   void _onTapBack(BuildContext context) {
     if (context.read<DemonstrationQuestionBloc>().state.questionIndex - 1 < 0) {
-      context.read<NavigationBloc<LearningPageStep>>().add(const PagePop());
+      context
+          .read<NavigationBloc<LearningBotStockPageStep>>()
+          .add(const PagePop());
     } else {
       context.read<DemonstrationQuestionBloc>().add(PreviousQuestion());
     }

@@ -12,17 +12,17 @@ import 'demonstration_bot/presentation/trade/demonstration_bot_trade.dart';
 import 'demonstration_question/bloc/demonstration_question_bloc.dart';
 import 'demonstration_question/presentation/demonstration_question_screen.dart';
 import 'demonstration_question/repository/demonstration_question_repository.dart';
-import 'learning_welcome_screen.dart';
+import 'learning_bot_stock_welcome_screen.dart';
 
-enum LearningPageStep { welcome, question, botList, botDetail, trade }
+enum LearningBotStockPageStep { welcome, question, botList, botDetail, trade }
 
-class LearningScreen extends StatelessWidget {
+class LearningBotStockScreen extends StatelessWidget {
   final BotType botType;
   final JustTheController tooltipController = JustTheController();
-  final LearningPageStep initialLearningPageStep;
+  final LearningBotStockPageStep initialLearningBotStockPageStep;
 
-  LearningScreen(
-      {this.initialLearningPageStep = LearningPageStep.welcome,
+  LearningBotStockScreen(
+      {this.initialLearningBotStockPageStep = LearningBotStockPageStep.welcome,
       required this.botType,
       Key? key})
       : super(key: key);
@@ -32,8 +32,8 @@ class LearningScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (_) =>
-                NavigationBloc<LearningPageStep>(initialLearningPageStep)),
+            create: (_) => NavigationBloc<LearningBotStockPageStep>(
+                initialLearningBotStockPageStep)),
         BlocProvider(
             create: (_) => DemonstrationQuestionBloc(
                   demonstrationQuestionRepository:
@@ -43,8 +43,8 @@ class LearningScreen extends StatelessWidget {
       child: CustomScaffold(
         enableBackNavigation: false,
         body: Builder(builder: (context) {
-          return BlocListener<NavigationBloc<LearningPageStep>,
-                  NavigationState<LearningPageStep>>(
+          return BlocListener<NavigationBloc<LearningBotStockPageStep>,
+                  NavigationState<LearningBotStockPageStep>>(
               listenWhen: (_, current) => current.lastPage == true,
               listener: (context, state) => Navigator.pop(context),
               child: _getPages);
@@ -57,30 +57,30 @@ class LearningScreen extends StatelessWidget {
     final RecommendedBot recommendedBot = demonstrationBots.firstWhere(
         (element) =>
             element.selectable == true && element.botType == botType.value);
-    return BlocBuilder<NavigationBloc<LearningPageStep>,
-            NavigationState<LearningPageStep>>(
+    return BlocBuilder<NavigationBloc<LearningBotStockPageStep>,
+            NavigationState<LearningBotStockPageStep>>(
         buildWhen: (previous, current) => previous.page != current.page,
         builder: (context, state) {
           switch (state.page) {
-            case LearningPageStep.welcome:
-              return LearningWelcomeScreen(
+            case LearningBotStockPageStep.welcome:
+              return LearningBotStockWelcomeScreen(
                 botType: botType,
               );
-            case LearningPageStep.question:
+            case LearningBotStockPageStep.question:
               return DemonstrationQuestionScreen(
                 tooltipController: tooltipController,
               );
-            case LearningPageStep.botList:
+            case LearningBotStockPageStep.botList:
               return DemonstrationBotScreen(
                 botType: botType,
                 tooltipController: tooltipController,
               );
-            case LearningPageStep.botDetail:
+            case LearningBotStockPageStep.botDetail:
               return DemonstrationBotDetailScreen(
                 recommendedBot: recommendedBot,
                 botType: botType,
               );
-            case LearningPageStep.trade:
+            case LearningBotStockPageStep.trade:
               return const DemonstrationBotTrade();
             default:
               return const SizedBox.shrink();

@@ -12,7 +12,7 @@ import '../../../../bot_stock/repository/bot_stock_repository.dart';
 import '../../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
-import '../../../learning_screen.dart';
+import '../../../learning_bot_stock_screen.dart';
 import '../../bloc/demonstration_bot_bloc.dart';
 import '../../utils/demonstration_bot_utils.dart';
 
@@ -30,7 +30,9 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.read<NavigationBloc<LearningPageStep>>().add(const PagePop());
+        context
+            .read<NavigationBloc<LearningBotStockPageStep>>()
+            .add(const PagePop());
         return false;
       },
       child: BlocProvider(
@@ -39,7 +41,7 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
               ..add(FetchChartData()),
         child: CustomScaffold(
             onTapBack: () => context
-                .read<NavigationBloc<LearningPageStep>>()
+                .read<NavigationBloc<LearningBotStockPageStep>>()
                 .add(const PagePop()),
             body: Column(
               children: [
@@ -68,9 +70,11 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
                             onPrimaryButtonTap: () {
                               Navigator.pop(context);
                               context
-                                  .read<NavigationBloc<LearningPageStep>>()
+                                  .read<
+                                      NavigationBloc<
+                                          LearningBotStockPageStep>>()
                                   .add(const PageChanged(
-                                      LearningPageStep.trade));
+                                      LearningBotStockPageStep.trade));
                             },
                             onSecondaryButtonTap: () => Navigator.pop(context),
                             title: 'Trade any amount above USD 200',

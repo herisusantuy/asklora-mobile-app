@@ -63,8 +63,9 @@ class DemonstrationBotList extends StatelessWidget {
                     showImmediately: false,
                     child: BotRecommendationCard(
                       onTap: () => context
-                          .read<NavigationBloc<LearningPageStep>>()
-                          .add(const PageChanged(LearningPageStep.botDetail)),
+                          .read<NavigationBloc<LearningBotStockPageStep>>()
+                          .add(const PageChanged(
+                              LearningBotStockPageStep.botDetail)),
                       height: botCardHeight,
                       spacing: _spacing,
                       recommendedBot: e,

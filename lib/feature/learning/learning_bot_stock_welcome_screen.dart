@@ -5,13 +5,13 @@ import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.
 import '../../../core/presentation/lora_memoji_header.dart';
 import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bot_stock/utils/bot_stock_utils.dart';
-import 'learning_screen.dart';
+import 'learning_bot_stock_screen.dart';
 
-class LearningWelcomeScreen extends StatelessWidget {
+class LearningBotStockWelcomeScreen extends StatelessWidget {
   final BotType botType;
-  static const String route = '/learning_welcome_screen';
+  static const String route = '/learning_bot_stock_welcome_screen';
 
-  const LearningWelcomeScreen({required this.botType, Key? key})
+  const LearningBotStockWelcomeScreen({required this.botType, Key? key})
       : super(key: key);
 
   @override
@@ -34,8 +34,8 @@ class LearningWelcomeScreen extends StatelessWidget {
               badgeTextColors: const [Colors.white],
               badgePosition: BadgePosition.top,
               onButtonTap: () => context
-                  .read<NavigationBloc<LearningPageStep>>()
-                  .add(const PageChanged(LearningPageStep.question)),
+                  .read<NavigationBloc<LearningBotStockPageStep>>()
+                  .add(const PageChanged(LearningBotStockPageStep.question)),
             )
           ],
         ));
