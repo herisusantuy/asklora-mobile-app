@@ -13,6 +13,7 @@ import '../../../bot_stock/presentation/bot_recommendation/bot_recommendation_sc
 import '../../../bot_stock/presentation/widgets/bot_bottom_sheet_widget.dart';
 import '../../../bot_stock/repository/bot_stock_repository.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../demonstration_question/widgets/demonstration_tooltip_guide.dart';
 import '../../learning_screen.dart';
@@ -47,32 +48,7 @@ class DemonstrationBotScreen extends StatelessWidget {
               current.botDemonstrationResponse.state,
           listener: (context, state) {
             if (state.botDemonstrationResponse.state == ResponseState.success) {
-              showModalBottomSheet(
-                  isDismissible: false,
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  context: (context),
-                  builder: (_) => WillPopScope(
-                        onWillPop: () async {
-                          Navigator.pop(context);
-                          context
-                              .read<NavigationBloc<LearningPageStep>>()
-                              .add(const PagePop());
-                          return false;
-                        },
-                        child: BotBottomSheetWidget(
-                          title:
-                              "Let's see the recommendations based on your Investment style.",
-                          primaryButtonLabel: 'VIEW RECOMMENDATIONS',
-                          secondaryButtonLabel: 'CONTINUE LATER',
-                          onPrimaryButtonTap: () {
-                            tooltipController.showTooltip();
-                            Navigator.pop(context);
-                          },
-                          onSecondaryButtonTap: () =>
-                              CarouselScreen.open(context),
-                        ),
-                      ));
+              _showBottomSheet(context);
             }
           },
           child: Padding(
@@ -80,35 +56,8 @@ class DemonstrationBotScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: InkWell(
-                      onTap: () => context
-                          .read<NavigationBloc<LearningPageStep>>()
-                          .add(const PagePop()),
-                      child: const Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        size: 24,
-                        color: AskLoraColors.charcoal,
-                      )),
-                ),
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.only(bottom: 35),
-                    children: [
-                      _header(context),
-                      DemonstrationBotList(
-                        botType: botType,
-                        verticalMargin: 14,
-                        tooltipController: tooltipController,
-                      ),
-                      _loraMemojiWidget,
-                      const SizedBox(
-                        height: 50,
-                      ),
-                    ],
-                  ),
-                ),
+                _backButton(context),
+                _contents(context),
               ],
             ),
           ),
@@ -116,6 +65,37 @@ class DemonstrationBotScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _contents(BuildContext context) => Expanded(
+        child: ListView(
+          padding: const EdgeInsets.only(bottom: 35),
+          children: [
+            _header(context),
+            DemonstrationBotList(
+              botType: botType,
+              verticalMargin: 14,
+              tooltipController: tooltipController,
+            ),
+            _loraMemojiWidget,
+            const SizedBox(
+              height: 50,
+            ),
+          ],
+        ),
+      );
+
+  Widget _backButton(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: InkWell(
+            onTap: () => context
+                .read<NavigationBloc<LearningPageStep>>()
+                .add(const PagePop()),
+            child: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              size: 24,
+              color: AskLoraColors.charcoal,
+            )),
+      );
 
   Widget _header(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,6 +125,34 @@ class DemonstrationBotScreen extends StatelessWidget {
           ],
         ),
       );
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        isDismissible: false,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: (context),
+        builder: (_) => WillPopScope(
+              onWillPop: () async {
+                Navigator.pop(context);
+                context
+                    .read<NavigationBloc<LearningPageStep>>()
+                    .add(const PagePop());
+                return false;
+              },
+              child: BotBottomSheetWidget(
+                title:
+                    "Let's see the recommendations based on your Investment style.",
+                primaryButtonLabel: 'VIEW RECOMMENDATIONS',
+                secondaryButtonLabel: 'CONTINUE LATER',
+                onPrimaryButtonTap: () {
+                  tooltipController.showTooltip();
+                  Navigator.pop(context);
+                },
+                onSecondaryButtonTap: () => CarouselScreen.open(context),
+              ),
+            ));
+  }
 
   static void open(BuildContext context) => Navigator.pushNamed(
         context,

@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../onboarding/ppi/domain/fixture.dart';
 import '../../../onboarding/ppi/presentation/widget/header.dart';
+import '../../learning_screen.dart';
 import '../bloc/demonstration_question_bloc.dart';
 import '../widgets/multiple_choice_question_widget/multiple_choice_question_widget.dart';
 import '../widgets/omni_search_question_widget.dart';
@@ -20,7 +22,8 @@ class DemonstrationQuestionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.read<DemonstrationQuestionBloc>().state.onTapBack(context);
+        _onTapBack(context);
+
         return false;
       },
       child: Padding(
@@ -30,10 +33,7 @@ class DemonstrationQuestionScreen extends StatelessWidget {
           children: [
             QuestionHeader(
               key: const Key('question_header'),
-              onTapBack: () => context
-                  .read<DemonstrationQuestionBloc>()
-                  .state
-                  .onTapBack(context),
+              onTapBack: () => _onTapBack(context),
             ),
             Expanded(
               child: LayoutBuilder(builder: (context, viewportConstraints) {
@@ -62,7 +62,21 @@ class DemonstrationQuestionScreen extends StatelessWidget {
                                     disabled: !state.questionAnsweredList[
                                         state.questionIndex],
                                     label: 'NEXT',
-                                    onTap: () => state.onTapNext(context),
+                                    onTap: () {
+                                      if (state.questionIndex + 1 >=
+                                          state.questionCollection.length) {
+                                        context
+                                            .read<
+                                                NavigationBloc<
+                                                    LearningPageStep>>()
+                                            .add(const PageChanged(
+                                                LearningPageStep.botList));
+                                      } else {
+                                        context
+                                            .read<DemonstrationQuestionBloc>()
+                                            .add(NextQuestion());
+                                      }
+                                    },
                                   );
                                 } else {
                                   return const SizedBox();
@@ -113,6 +127,14 @@ class DemonstrationQuestionScreen extends StatelessWidget {
           return const SizedBox.shrink();
         }
       });
+
+  void _onTapBack(BuildContext context) {
+    if (context.read<DemonstrationQuestionBloc>().state.questionIndex - 1 < 0) {
+      context.read<NavigationBloc<LearningPageStep>>().add(const PagePop());
+    } else {
+      context.read<DemonstrationQuestionBloc>().add(PreviousQuestion());
+    }
+  }
 
   static void open(BuildContext context) => Navigator.pushNamed(
         context,

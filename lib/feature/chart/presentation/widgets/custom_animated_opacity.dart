@@ -34,15 +34,6 @@ class _CustomAnimatedOpacityState extends State<CustomAnimatedOpacity> {
     }
   }
 
-  void animateFadeOut() async {
-    await Future.delayed(widget.delayDuration);
-    if (mounted) {
-      setState(() {
-        show = false;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(

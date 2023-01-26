@@ -26,22 +26,4 @@ class DemonstrationQuestionState extends Equatable {
   @override
   List<Object> get props =>
       [questionIndex, questionAnsweredList, questionCollection];
-
-  void onTapNext(BuildContext context) {
-    if (questionIndex + 1 >= questionCollection.length) {
-      context
-          .read<NavigationBloc<LearningPageStep>>()
-          .add(const PageChanged(LearningPageStep.botList));
-    } else {
-      context.read<DemonstrationQuestionBloc>().add(NextQuestion());
-    }
-  }
-
-  void onTapBack(BuildContext context) {
-    if (questionIndex - 1 < 0) {
-      context.read<NavigationBloc<LearningPageStep>>().add(const PagePop());
-    } else {
-      context.read<DemonstrationQuestionBloc>().add(PreviousQuestion());
-    }
-  }
 }
