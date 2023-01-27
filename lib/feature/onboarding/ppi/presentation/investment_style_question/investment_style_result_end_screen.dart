@@ -5,8 +5,8 @@ import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../tabs/tabs_screen.dart';
 import '../../../kyc/presentation/kyc_screen.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../ppi_result_screen.dart';
 
@@ -51,6 +51,6 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
         key: const Key('maybe_later_button'),
         margin: const EdgeInsets.only(top: 24),
         label: 'MAYBE LATER',
-        onTap: () => CarouselScreen.open(context),
+        onTap: () => TabsScreen.open(context),
       );
 }

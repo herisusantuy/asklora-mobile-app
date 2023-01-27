@@ -13,16 +13,20 @@ class AmountTextField extends StatefulWidget {
   final String prefixText;
   final String errorText;
   final Function(String)? onChanged;
+  final EdgeInsets? contentPadding;
+  final Color? backgroundColor;
 
-  const AmountTextField(
-      {Key? key,
-      this.onChanged,
-      this.initialValue = '',
-      this.hintText = '',
-      this.label = '',
-      this.errorText = '',
-      this.prefixText = 'HKD '})
-      : super(key: key);
+  const AmountTextField({
+    Key? key,
+    this.onChanged,
+    this.initialValue = '',
+    this.hintText = '',
+    this.label = '',
+    this.errorText = '',
+    this.prefixText = 'HKD ',
+    this.backgroundColor,
+    this.contentPadding,
+  }) : super(key: key);
 
   @override
   State<AmountTextField> createState() => _AmountTextFieldState();
@@ -88,10 +92,13 @@ class _AmountTextFieldState extends State<AmountTextField> {
             keyboardType: TextInputType.number,
             style: TextFieldStyle.valueTextStyle,
             decoration: TextFieldStyle.inputDecoration.copyWith(
+                filled: true,
+                fillColor: widget.backgroundColor,
                 floatingLabelBehavior: floatingLabelBehavior,
                 labelText: label,
                 hintText: hintText,
                 errorText: widget.errorText.isEmpty ? null : widget.errorText,
-                prefixText: prefixText)),
+                prefixText: prefixText,
+                contentPadding: widget.contentPadding)),
       );
 }

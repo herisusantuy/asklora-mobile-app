@@ -1,104 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../../../../core/presentation/buttons/secondary/extra_info_button.dart';
-import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/styles/asklora_colors.dart';
-import '../../../../core/styles/asklora_text_styles.dart';
-
-class OnBoardingStatus extends StatelessWidget {
-  final String title;
-  final String subTitle;
-  final Color valueColor;
-  final Color backgroundColor;
-  final double edgeRadius;
-  final int intersectCount;
-  final double progress;
-  final int arrowPointingOnSection;
-  final VoidCallback onTap;
-
-  const OnBoardingStatus(
-      {required this.title,
-      required this.subTitle,
-      required this.onTap,
-      this.valueColor = AskLoraColors.primaryMagenta,
-      this.backgroundColor = AskLoraColors.charcoal,
-      this.arrowPointingOnSection = 1,
-      this.edgeRadius = 10,
-      this.intersectCount = 2,
-      required this.progress,
-      Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: CustomTextNew(
-                title,
-                style: AskLoraTextStyles.h4Italic,
-              ),
-            ),
-            ExtraInfoButton(
-                label: 'Milestone 1 / 3',
-                suffixIcon: const Icon(
-                  Icons.arrow_forward_ios_sharp,
-                  color: AskLoraColors.primaryMagenta,
-                  size: 15,
-                ),
-                onTap: () {},
-                buttonExtraInfoSize: ButtonExtraInfoSize.small)
-          ],
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(edgeRadius)),
-              child: LinearProgressIndicator(
-                minHeight: 10,
-                value: progress,
-                valueColor: AlwaysStoppedAnimation<Color>(valueColor),
-                backgroundColor: backgroundColor,
-              ),
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: getIntersectContainer),
-          ],
-        ),
-        const SizedBox(
-          height: 14,
-        ),
-        OnBoardingStatusButton(
-          arrowPointingOnSection: arrowPointingOnSection,
-          onTap: onTap,
-          intersectCount: intersectCount,
-          subTitle: subTitle,
-        ),
-      ],
-    );
-  }
-
-  List<Widget> get getIntersectContainer {
-    List<Widget> children = [];
-    for (int i = 0; i < intersectCount; i++) {
-      children.add(
-        Container(
-          height: 10,
-          width: 4,
-          color: Colors.white,
-        ),
-      );
-    }
-    return children;
-  }
-}
+part of '../on_boarding_status.dart';
 
 class OnBoardingStatusButton extends StatefulWidget {
   final VoidCallback onTap;
@@ -157,7 +57,6 @@ class _OnBoardingStatusButtonState extends State<OnBoardingStatusButton> {
             Container(
               margin: const EdgeInsets.only(top: 9),
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 18),
-              height: 80,
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(43),

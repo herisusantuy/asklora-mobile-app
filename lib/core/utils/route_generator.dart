@@ -6,6 +6,10 @@ import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../feature/balance/deposit/presentation/deposit_result_screen.dart';
+import '../../feature/balance/deposit/presentation/deposit_screen.dart';
+import '../../feature/balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../feature/balance/deposit/utils/deposit_utils.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
 import '../../feature/bot_stock/presentation/bot_trade_summary/bot_trade_summary_screen.dart';
@@ -25,13 +29,13 @@ import '../../feature/onboarding/welcome/greeting/greeting_screen.dart';
 import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
-import '../../feature/payment/deposits/presentation/deposit_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 
 import '../../home_screen.dart';
 import '../domain/pair.dart';
+import '../presentation/custom_status_widget.dart';
 import '../presentation/photo_view_screen.dart';
 import 'app_icons.dart';
 
@@ -60,7 +64,10 @@ class RouterGenerator {
       case WithdrawalScreen.route:
         return MaterialPageRoute(builder: (_) => const WithdrawalScreen());
       case DepositScreen.route:
-        return MaterialPageRoute(builder: (_) => const DepositScreen());
+        return MaterialPageRoute(
+            builder: (_) => DepositScreen(
+                  depositType: settings.arguments as DepositType,
+                ));
       case PhotoViewScreen.route:
         ImageProvider imageProvider = settings.arguments as ImageProvider;
         return MaterialPageRoute(
@@ -121,6 +128,16 @@ class RouterGenerator {
                 ));
       case PortfolioScreen.route:
         return MaterialPageRoute(builder: (_) => const PortfolioScreen());
+      case DepositWelcomeScreen.route:
+        return MaterialPageRoute(builder: (_) => const DepositWelcomeScreen());
+      case DepositResultScreen.route:
+        return MaterialPageRoute(builder: (_) {
+          var arguments = settings.arguments as Pair<DepositType, StatusType>;
+          return DepositResultScreen(
+            statusType: arguments.right,
+            depositType: arguments.left,
+          );
+        });
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
