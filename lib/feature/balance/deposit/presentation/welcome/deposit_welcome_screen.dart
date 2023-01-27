@@ -26,6 +26,7 @@ part 'widgets/deposit_welcome_notes.dart';
 part 'widgets/deposit_bank_account.dart';
 
 class DepositWelcomeScreen extends StatelessWidget {
+  final DepositType? initialDepositType;
   static const String route = '/deposit_welcome_screen';
 
   final _spaceHeight = const SizedBox(
@@ -35,14 +36,22 @@ class DepositWelcomeScreen extends StatelessWidget {
     height: 21,
   );
 
-  const DepositWelcomeScreen({Key? key}) : super(key: key);
+  const DepositWelcomeScreen({
+    this.initialDepositType,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          BankAccountBloc(bankAccountRepository: BankAccountRepository())
-            ..add(const RegisteredBankAccountCheck()),
+      create: (_) {
+        BankAccountBloc bankAccountBloc =
+            BankAccountBloc(bankAccountRepository: BankAccountRepository());
+        if (initialDepositType == null) {
+          bankAccountBloc.add(const RegisteredBankAccountCheck());
+        }
+        return bankAccountBloc;
+      },
       child: BlocConsumer<BankAccountBloc, BankAccountState>(
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
@@ -56,7 +65,7 @@ class DepositWelcomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DepositStep(
-                  depositType: state.depositType,
+                  depositType: initialDepositType ?? state.depositType,
                 ),
                 _spaceHeightSmall,
                 CustomTextNew(
@@ -112,7 +121,6 @@ class DepositWelcomeScreen extends StatelessWidget {
     }
   }
 
-  static void open(
-          {required BuildContext context, required DepositType depositType}) =>
+  static void open({required BuildContext context, DepositType? depositType}) =>
       Navigator.pushNamed(context, route, arguments: depositType);
 }

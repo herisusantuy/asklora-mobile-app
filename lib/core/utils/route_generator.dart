@@ -130,7 +130,10 @@ class RouterGenerator {
       case PortfolioScreen.route:
         return MaterialPageRoute(builder: (_) => const PortfolioScreen());
       case DepositWelcomeScreen.route:
-        return MaterialPageRoute(builder: (_) => const DepositWelcomeScreen());
+        return MaterialPageRoute(
+            builder: (_) => DepositWelcomeScreen(
+                  initialDepositType: settings.arguments as DepositType?,
+                ));
       case DepositResultScreen.route:
         return MaterialPageRoute(builder: (_) {
           var arguments = settings.arguments as Pair<DepositType, StatusType>;
