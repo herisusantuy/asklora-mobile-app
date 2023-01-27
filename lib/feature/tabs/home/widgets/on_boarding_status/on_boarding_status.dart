@@ -8,6 +8,8 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
+import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
@@ -146,7 +148,8 @@ class OnBoardingStatus extends StatelessWidget {
         return OnBoardingStatusModel(
           title: 'START INVESTING',
           subTitle: 'Deposit funds and start investing',
-          onTap: () {},
+          onTap: () => DepositWelcomeScreen.open(
+              context: context, depositType: DepositType.firstTime),
           progress: 0.25,
         );
       case UserJourney.learnBotPlank:
