@@ -7,6 +7,7 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
@@ -42,6 +43,9 @@ class BotTradeSummaryScreen extends StatelessWidget {
           } else if (state.getFreeBotStockResponse.state ==
               ResponseState.success) {
             CustomLoadingOverlay.dismiss();
+            context
+                .read<AppBloc>()
+                .add(const SaveUserJourney(UserJourney.deposit));
             PortfolioScreen.open(context);
             showModalBottomSheet(
                 isScrollControlled: true,

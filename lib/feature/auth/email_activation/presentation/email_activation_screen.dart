@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
@@ -35,6 +36,9 @@ class EmailActivationScreen extends StatelessWidget {
             CustomLoadingOverlay.dismiss();
           }
           if (state.deeplinkStatus == DeeplinkStatus.success) {
+            context
+                .read<AppBloc>()
+                .add(const SaveUserJourney(UserJourney.investmentStyle));
             InvestmentStyleWelcomeScreen.open(context);
           }
           switch (state.response.state) {

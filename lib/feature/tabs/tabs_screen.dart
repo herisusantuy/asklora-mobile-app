@@ -5,10 +5,14 @@ import '../../core/utils/app_icons.dart';
 import 'home/home_screen_form.dart';
 
 class TabsScreen extends StatelessWidget {
+  static const String route = '/tab_screen';
+
   const TabsScreen({super.key});
 
   @override
   Widget build(BuildContext context) => const BottomTabBarWidget();
+
+  static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }
 
 class BottomTabBarWidget extends StatefulWidget {

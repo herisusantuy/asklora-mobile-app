@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
@@ -33,6 +34,9 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                       InvestmentStyleQuestionIndexChanged(
                           state.investmentStyleQuestionIndex));
                 } else if (state is OnNextResultScreen) {
+                  context
+                      .read<AppBloc>()
+                      .add(const SaveUserJourney(UserJourney.kyc));
                   context.read<NavigationBloc<QuestionPageStep>>().add(
                       const PageChanged(
                           QuestionPageStep.investmentStyleResultEnd));
