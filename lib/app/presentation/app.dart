@@ -8,8 +8,10 @@ import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';
 import '../bloc/app_bloc.dart';
+import '../repository/user_journey_repository.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -32,8 +34,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) =>
-            AppBloc(tokenRepository: TokenRepository())..add(AppLaunched()),
+        create: (_) => AppBloc(
+            tokenRepository: TokenRepository(),
+            userJourneyRepository: UserJourneyRepository())
+          ..add(AppLaunched()),
         child: BlocConsumer<AppBloc, AppState>(
             listener: (_, __) => FlutterNativeSplash.remove(),
             builder: (context, state) => GestureDetector(
@@ -65,15 +69,19 @@ class App extends StatelessWidget {
                         fontFamily: state.locale.fontType,
                         primarySwatch: MaterialColor(
                             AskLoraColors.charcoal.value, _colorCodes)),
-                    home: _getBody(state.status)))));
+                    home: _getBody(state)))));
   }
 
-  Widget _getBody(AppStatus status) {
-    switch (status) {
+  Widget _getBody(AppState state) {
+    switch (state.status) {
       case AppStatus.authenticated:
         return const SignInSuccessScreen();
       case AppStatus.unauthenticated:
-        return const CarouselScreen();
+        if (state.userJourney == UserJourney.privacyPersonalisation) {
+          return const CarouselScreen();
+        } else {
+          return const TabsScreen();
+        }
       case AppStatus.unknown:
         return const SizedBox();
     }
