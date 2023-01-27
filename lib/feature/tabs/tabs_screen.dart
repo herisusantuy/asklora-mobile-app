@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/presentation/custom_scaffold.dart';
 import '../../core/utils/app_icons.dart';
+import 'for_you/for_you_screen_form.dart';
 import 'home/home_screen_form.dart';
 
 class TabsScreen extends StatelessWidget {
@@ -24,10 +25,7 @@ class _BottomTabsWidgetState extends State<BottomTabBarWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreenForm(),
-    Text(
-      'Index 1: For you Screen',
-      style: optionStyle,
-    ),
+    ForYouScreenForm(),
     Text(
       'Index 2: Portfolio Screen',
       style: optionStyle,
