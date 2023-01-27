@@ -35,7 +35,7 @@ class DepositWelcomeNotes extends StatelessWidget {
       case DepositType.firstTime:
         return _firstTimeNotes;
       default:
-        return _type1And2Notes;
+        return _returningUserNotes;
     }
   }
 
@@ -66,7 +66,7 @@ class DepositWelcomeNotes extends StatelessWidget {
         ),
       ];
 
-  List<Widget> get _type1And2Notes => [
+  List<Widget> get _returningUserNotes => [
         _depositNote(
           label: '1.',
           text:

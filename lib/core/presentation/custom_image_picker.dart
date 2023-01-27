@@ -128,7 +128,7 @@ class CustomImagePicker extends StatelessWidget {
                           fileType: FileType.image));
                     }
                   },
-                  child: getSvgIcon('icon_add'),
+                  child: getSvgIcon('icon_add_files'),
                 ),
                 if (hintText.isNotEmpty && initialValue.isEmpty)
                   Padding(
