@@ -25,10 +25,10 @@ class UploadProofOfRemittanceStep extends StatelessWidget {
         ),
         BlocBuilder<DepositBloc, DepositState>(
           buildWhen: (previous, current) =>
-              previous.uploadProofOfRemittanceImages !=
-              current.uploadProofOfRemittanceImages,
+              previous.proofOfRemittanceImages !=
+              current.proofOfRemittanceImages,
           builder: (context, state) => CustomImagePicker(
-            initialValue: state.uploadProofOfRemittanceImages,
+            initialValue: state.proofOfRemittanceImages,
             key: const Key('upload_proof_of_remittance'),
             onImageDeleted: (image) => context
                 .read<DepositBloc>()

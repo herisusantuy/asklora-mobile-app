@@ -31,16 +31,16 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   _onProofOfRemittanceImagesChanged(
       ProofOfRemittanceImagesChanged event, Emitter<DepositState> emit) {
-    List<PlatformFile> images = List.from(state.uploadProofOfRemittanceImages);
+    List<PlatformFile> images = List.from(state.proofOfRemittanceImages);
     images.addAll(event.images);
-    emit(state.copyWith(uploadProofOfRemittanceImages: images));
+    emit(state.copyWith(proofOfRemittanceImages: images));
   }
 
   _onProofOfRemittanceImageDeleted(
       ProofOfRemittanceImageDeleted event, Emitter<DepositState> emit) {
-    List<PlatformFile> images = List.from(state.uploadProofOfRemittanceImages);
+    List<PlatformFile> images = List.from(state.proofOfRemittanceImages);
     images.remove(event.image);
-    emit(state.copyWith(uploadProofOfRemittanceImages: images));
+    emit(state.copyWith(proofOfRemittanceImages: images));
   }
 
   void _onSubmitDeposit(SubmitDeposit event, Emitter<DepositState> emit) async {
@@ -48,7 +48,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _depositRepository.submitDeposit(
           depositAmount: state.depositAmount,
-          platformFiles: state.uploadProofOfRemittanceImages);
+          platformFiles: state.proofOfRemittanceImages);
       emit(state.copyWith(response: data));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(e.toString())));

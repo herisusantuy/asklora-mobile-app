@@ -3,28 +3,27 @@ part of 'deposit_bloc.dart';
 class DepositState extends Equatable {
   final BaseResponse response;
   final double depositAmount;
-  final List<PlatformFile> uploadProofOfRemittanceImages;
+  final List<PlatformFile> proofOfRemittanceImages;
 
   const DepositState({
     this.response = const BaseResponse(),
     this.depositAmount = 0,
-    this.uploadProofOfRemittanceImages = const [],
+    this.proofOfRemittanceImages = const [],
   }) : super();
 
   @override
-  List<Object?> get props =>
-      [depositAmount, uploadProofOfRemittanceImages, response];
+  List<Object?> get props => [depositAmount, proofOfRemittanceImages, response];
 
   DepositState copyWith({
     double? depositAmount,
-    List<PlatformFile>? uploadProofOfRemittanceImages,
+    List<PlatformFile>? proofOfRemittanceImages,
     BaseResponse? response,
   }) {
     return DepositState(
       response: response ?? this.response,
       depositAmount: depositAmount ?? this.depositAmount,
-      uploadProofOfRemittanceImages:
-          uploadProofOfRemittanceImages ?? this.uploadProofOfRemittanceImages,
+      proofOfRemittanceImages:
+          proofOfRemittanceImages ?? this.proofOfRemittanceImages,
     );
   }
 
@@ -36,7 +35,7 @@ class DepositState extends Equatable {
         return false;
       }
     } else {
-      if (depositAmount == 0 || uploadProofOfRemittanceImages.isEmpty) {
+      if (depositAmount == 0 || proofOfRemittanceImages.isEmpty) {
         return true;
       } else {
         return false;
