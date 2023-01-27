@@ -6,7 +6,8 @@ import 'custom_text_new.dart';
 import 'lora_memoji_widget.dart';
 
 class LoraRoundedCornerBanner extends StatelessWidget {
-  const LoraRoundedCornerBanner({super.key});
+  final String text;
+  const LoraRoundedCornerBanner({required this.text, super.key});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -28,7 +29,7 @@ class LoraRoundedCornerBanner extends StatelessWidget {
             ),
             Expanded(
               child: CustomTextNew(
-                'Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!',
+                text,
                 style: AskLoraTextStyles.body1,
               ),
             )

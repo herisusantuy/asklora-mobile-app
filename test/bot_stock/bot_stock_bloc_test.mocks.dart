@@ -8,9 +8,12 @@ import 'dart:async' as _i4;
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart'
     as _i3;
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
+import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
+    as _i5;
+import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart'
     as _i6;
-import 'package:asklora_mobile_chart/main.dart' as _i5;
+import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
+    as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -61,39 +64,73 @@ class MockBotStockRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.BaseResponse<List<_i5.ChartDataSet>>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>
+  _i4.Future<_i2.BaseResponse<_i6.ChartStudioAnimationModel>>
+      fetchTradeChartDataJson() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchTradeChartDataJson,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<_i6.ChartStudioAnimationModel>>.value(
+                _FakeBaseResponse_0<_i6.ChartStudioAnimationModel>(
+              this,
+              Invocation.method(
+                #fetchTradeChartDataJson,
+                [],
+              ),
+            )),
+          ) as _i4.Future<_i2.BaseResponse<_i6.ChartStudioAnimationModel>>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>
       fetchBotRecommendation() => (super.noSuchMethod(
             Invocation.method(
               #fetchBotRecommendation,
               [],
             ),
             returnValue:
-                _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>.value(
-                    _FakeBaseResponse_0<List<_i6.RecommendedBot>>(
+                _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>.value(
+                    _FakeBaseResponse_0<List<_i7.RecommendedBot>>(
               this,
               Invocation.method(
                 #fetchBotRecommendation,
                 [],
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>);
+          ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>> fetchBotPortfolio() =>
+  _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>
+      fetchBotDemonstration() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchBotDemonstration,
+              [],
+            ),
+            returnValue:
+                _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>.value(
+                    _FakeBaseResponse_0<List<_i7.RecommendedBot>>(
+              this,
+              Invocation.method(
+                #fetchBotDemonstration,
+                [],
+              ),
+            )),
+          ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>> fetchBotPortfolio() =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchBotPortfolio,
           [],
         ),
         returnValue:
-            _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>.value(
-                _FakeBaseResponse_0<List<_i6.RecommendedBot>>(
+            _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>.value(
+                _FakeBaseResponse_0<List<_i7.RecommendedBot>>(
           this,
           Invocation.method(
             #fetchBotPortfolio,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>);
+      ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
   @override
   _i4.Future<_i2.BaseResponse<bool>> getFreeBotStock() => (super.noSuchMethod(
         Invocation.method(

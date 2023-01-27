@@ -23,7 +23,7 @@ class CustomInAppNotification {
 
   static void show(BuildContext context, String message) {
     dismiss();
-    overlayState = Overlay.of(context)!;
+    overlayState = Overlay.of(context);
 
     _overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Positioned(

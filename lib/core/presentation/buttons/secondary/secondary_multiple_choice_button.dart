@@ -11,11 +11,13 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
   final FontStyle fontStyle;
   final VoidCallback onTap;
   final bool active;
+  final bool disabled;
   final Alignment labelAlignment;
 
   SecondaryMultipleChoiceButton(
       {this.label = '',
       required this.onTap,
+      this.disabled = false,
       this.fontStyle = FontStyle.normal,
       this.buttonSecondarySize = ButtonSecondarySize.big,
       this.active = false,
@@ -34,29 +36,35 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: _getSizedBoxSize.left,
-      child: ElevatedButton(
-          style: _defaultButtonStyle.copyWith(
-              minimumSize: _getButtonMinimumSize,
-              backgroundColor: _getColor(
-                  active
-                      ? AskLoraColors.primaryGreen.withOpacity(0.1)
-                      : Colors.transparent,
-                  AskLoraColors.primaryGreen.withOpacity(0.2)),
-              foregroundColor: _getColor(AskLoraColors.charcoal,
-                  AskLoraColors.charcoal.withOpacity(0.9)),
-              shape: _getBorder(
-                  color:
-                      active ? AskLoraColors.primaryGreen : AskLoraColors.gray,
-                  colorPressed: AskLoraColors.gray.withOpacity(0.9),
-                  borderWidth: active ? 3 : 1.4)),
-          onPressed: onTap,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Align(
-              alignment: labelAlignment,
-              child: CustomTextNew(label, style: AskLoraTextStyles.subtitle2),
-            ),
-          )),
+      child: IgnorePointer(
+        ignoring: disabled,
+        child: ElevatedButton(
+            style: _defaultButtonStyle.copyWith(
+                minimumSize: _getButtonMinimumSize,
+                backgroundColor: _getColor(
+                    disabled
+                        ? AskLoraColors.gray
+                        : active
+                            ? AskLoraColors.primaryGreen.withOpacity(0.1)
+                            : Colors.transparent,
+                    AskLoraColors.primaryGreen.withOpacity(0.2)),
+                foregroundColor: _getColor(AskLoraColors.charcoal,
+                    AskLoraColors.charcoal.withOpacity(0.9)),
+                shape: _getBorder(
+                    color: active
+                        ? AskLoraColors.primaryGreen
+                        : AskLoraColors.gray,
+                    colorPressed: AskLoraColors.gray.withOpacity(0.9),
+                    borderWidth: active ? 3 : 1.4)),
+            onPressed: onTap,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Align(
+                alignment: labelAlignment,
+                child: CustomTextNew(label, style: AskLoraTextStyles.subtitle2),
+              ),
+            )),
+      ),
     );
   }
 

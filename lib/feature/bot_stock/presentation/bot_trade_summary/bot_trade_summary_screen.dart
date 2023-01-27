@@ -51,7 +51,14 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
                 context: (context),
-                builder: (_) => const BotBottomSheetWidget());
+                builder: (_) => BotBottomSheetWidget(
+                      title:
+                          'Your free Botstock has been added to your portfolio successfully!',
+                      primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',
+                      secondaryButtonLabel: 'NOT NOW',
+                      onPrimaryButtonTap: () {},
+                      onSecondaryButtonTap: () => Navigator.pop(context),
+                    ));
           }
         },
         child: CustomScaffold(

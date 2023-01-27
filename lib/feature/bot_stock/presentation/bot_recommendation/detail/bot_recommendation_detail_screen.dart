@@ -1,4 +1,3 @@
-import 'package:asklora_mobile_chart/samples/line_chart_sample.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +8,7 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -18,6 +18,8 @@ import '../../widgets/custom_detail_expansion_tile.dart';
 import '../../widgets/gift_bot_stock_base_widget.dart';
 import '../../widgets/pair_column_text.dart';
 import 'widgets/bot_price_line_bar.dart';
+
+part 'widgets/bot_recommendation_chart.dart';
 
 class BotRecommendationDetailScreen extends StatelessWidget {
   static const String route = '/bot_recommendation_detail_screen';
@@ -46,7 +48,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 22.0),
               child: CustomTextNew(
-                '${botType.name} ${recommendedBot.ticker}',
+                '${botType.upperCaseName} ${recommendedBot.ticker}',
                 style: AskLoraTextStyles.h5
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -65,7 +67,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextNew(
-                            '${botType.name} Bots',
+                            '${botType.upperCaseName} Bots',
                             style: AskLoraTextStyles.h5
                                 .copyWith(color: AskLoraColors.charcoal),
                           ),
@@ -243,7 +245,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                                     ResponseState.success) {
                                   return const SizedBox.shrink();
                                 } else {
-                                  return LineChartSample(
+                                  return ChartAnimation(
                                       chartDataSets:
                                           state.chartDataResponse.data!);
                                 }

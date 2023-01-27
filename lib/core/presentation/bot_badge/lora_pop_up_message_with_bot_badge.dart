@@ -18,8 +18,12 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
   final BadgePosition badgePosition;
   final bool withLoraImage;
   final Color backgroundColor;
+  final List<Color> badgeBackgroundColors;
+  final List<Color> badgeTextColors;
   final Color titleColor;
   final Color subTitleColor;
+  final String buttonLabel;
+  final VoidCallback onButtonTap;
 
   const LoraPopUpMessageWithBotBadge(
       {required this.title,
@@ -30,6 +34,10 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
       this.backgroundColor = AskLoraColors.whiteSmoke,
       this.titleColor = AskLoraColors.charcoal,
       this.subTitleColor = AskLoraColors.charcoal,
+      this.badgeBackgroundColors = const [],
+      this.badgeTextColors = const [],
+      required this.buttonLabel,
+      required this.onButtonTap,
       Key? key})
       : super(key: key);
 
@@ -60,6 +68,10 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                         ...botTypes
                             .map((e) => BotBadge(
                                   botType: e,
+                                  backgroundColor: _getBadgeBackgroundColor(
+                                      botTypes.indexOf(e)),
+                                  textColor:
+                                      _getBadgeTextColor(botTypes.indexOf(e)),
                                 ))
                             .toList(),
                       Padding(
@@ -87,17 +99,23 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 25,
+                      SizedBox(
+                        height: badgePosition == BadgePosition.belowSubtitle
+                            ? 25
+                            : 0,
                       ),
                       if (badgePosition == BadgePosition.belowSubtitle)
                         ...botTypes
                             .map((e) => BotBadge(
+                                  backgroundColor: _getBadgeBackgroundColor(
+                                      botTypes.indexOf(e)),
+                                  textColor:
+                                      _getBadgeTextColor(botTypes.indexOf(e)),
                                   botType: e,
                                 ))
                             .toList(),
                       const SizedBox(
-                        height: 8,
+                        height: 14,
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -106,8 +124,8 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
                                 AppValues.screenHorizontalPadding.right + 23),
                         child: PrimaryButton(
                             buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
-                            label: 'CREATE AN ACCOUNT',
-                            onTap: () {}),
+                            label: buttonLabel,
+                            onTap: onButtonTap),
                       )
                     ],
                   ),
@@ -122,5 +140,22 @@ class LoraPopUpMessageWithBotBadge extends StatelessWidget {
               child: LoraMemojiWidget(loraMemojiType: LoraMemojiType.lora1)),
       ],
     );
+  }
+
+  Color? _getBadgeBackgroundColor(int index) {
+    if (badgeBackgroundColors.isNotEmpty &&
+        index < badgeBackgroundColors.length) {
+      return badgeBackgroundColors[index];
+    } else {
+      return null;
+    }
+  }
+
+  Color? _getBadgeTextColor(int index) {
+    if (badgeTextColors.isNotEmpty && index < badgeTextColors.length) {
+      return badgeTextColors[index];
+    } else {
+      return null;
+    }
   }
 }

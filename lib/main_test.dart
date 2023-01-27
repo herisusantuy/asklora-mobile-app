@@ -10,7 +10,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         body: ListView(
           padding: const EdgeInsets.symmetric(vertical: 30),
-          children: const [
+          children: [
             LoraPopUpMessageWithBotBadge(
               backgroundColor: AskLoraColors.primaryGreen,
               withLoraImage: true,
@@ -32,13 +32,15 @@ class _MyAppState extends State<MyApp> {
               title: 'No traded BotStocks.',
               subTitle:
                   'You can manage all your investments here after you start trading. Create an account and start trading.',
-              botTypes: [BotType.pullUp, BotType.squat],
+              botTypes: const [BotType.pullUp, BotType.squat],
+              buttonLabel: 'NEXT',
+              onButtonTap: () {},
             ),
-            ButtonExample(),
-            SizedBox(
+            const ButtonExample(),
+            const SizedBox(
               height: 24,
             ),
-            TextFieldExample()
+            const TextFieldExample()
           ],
         ),
       ));

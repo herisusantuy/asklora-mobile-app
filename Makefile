@@ -30,7 +30,7 @@ get: ## Get all dependencies
 
 format: ## Formats the code
 	@echo "╠ Formatting the code"
-	@flutter format --set-exit-if-changed .
+	@dart format --set-exit-if-changed .
 
 lint: ## Lints the code
 	@echo "╠ Verifying code..."

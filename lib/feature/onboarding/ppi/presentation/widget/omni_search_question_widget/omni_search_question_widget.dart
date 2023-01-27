@@ -71,7 +71,10 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                               question: questionCollection.questions!.question!,
                               paddingBottom: 24,
                             ),
-                            const LoraRoundedCornerBanner(),
+                            const LoraRoundedCornerBanner(
+                              text:
+                                  'Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!',
+                            ),
                             const SizedBox(
                               height: 52,
                             ),

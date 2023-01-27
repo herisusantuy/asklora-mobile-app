@@ -15,7 +15,7 @@ class CustomOverlayWidget {
 
   static void show(BuildContext context, Widget widget) async {
     dismiss();
-    overlayState = Overlay.of(context)!;
+    overlayState = Overlay.of(context);
 
     _overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Positioned(child: widget));

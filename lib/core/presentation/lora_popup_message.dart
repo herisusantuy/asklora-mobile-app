@@ -9,7 +9,7 @@ import 'custom_text_new.dart';
 class LoraPopUpMessage extends StatelessWidget {
   final Color backgroundColor;
   final String title;
-  final String subTitle;
+  final String? subTitle;
   final String buttonLabel;
   final Color titleColor;
   final Color subTitleColor;
@@ -18,7 +18,7 @@ class LoraPopUpMessage extends StatelessWidget {
 
   const LoraPopUpMessage(
       {required this.title,
-      required this.subTitle,
+      this.subTitle,
       this.titleColor = AskLoraColors.charcoal,
       this.subTitleColor = AskLoraColors.charcoal,
       this.buttonPrimaryType = ButtonPrimaryType.solidCharcoal,
@@ -58,15 +58,16 @@ class LoraPopUpMessage extends StatelessWidget {
                     const SizedBox(
                       height: 25,
                     ),
-                    CustomTextNew(
-                      subTitle,
-                      style: AskLoraTextStyles.body2
-                          .copyWith(color: subTitleColor),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
+                    if (subTitle != null)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 25.0),
+                        child: CustomTextNew(
+                          subTitle!,
+                          style: AskLoraTextStyles.body2
+                              .copyWith(color: subTitleColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     PrimaryButton(
                         buttonPrimaryType: buttonPrimaryType,
                         label: buttonLabel,
