@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../core/presentation/lora_popup_message.dart';
 import '../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../../bot_stock/presentation/widgets/bot_bottom_sheet_widget.dart';
 import '../../../bot_stock/repository/bot_stock_repository.dart';
@@ -78,6 +77,9 @@ class DemonstrationBotScreen extends StatelessWidget {
               verticalMargin: 14,
               tooltipController: tooltipController,
             ),
+            const SizedBox(
+              height: 40,
+            ),
             _loraMemojiWidget,
             const SizedBox(
               height: 50,
@@ -117,16 +119,27 @@ class DemonstrationBotScreen extends StatelessWidget {
         ],
       );
 
-  Widget get _loraMemojiWidget => Padding(
+  Widget get _loraMemojiWidget => const LoraPopUpMessage(
+        titleColor: AskLoraColors.white,
+        subTitleColor: AskLoraColors.white,
+        backgroundColor: AskLoraColors.charcoal,
+        title: 'The recommendation is based on your investment preference.',
+        buttonLabel: '',
+        subTitle:
+            'Investment preference included Investment Style, Privacy Questions and Personalisation Questions.',
+      );
+
+  /*Padding(
         padding: const EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           children: [
             const LoraMemojiHeader(
-                text: 'Not feeling it? Try something different.'),
-            PrimaryButton(label: 'CHANGE INVESTMENT STYLE', onTap: () {}),
+                text: 'The recommendation is based on your investment preference.'),
+            SizedBox(height: 25,),
+            CustomTextNew('Investment preference included Investment Style, Privacy Questions and Personalisation Questions.', style: AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),)
           ],
         ),
-      );
+      );*/
 
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
