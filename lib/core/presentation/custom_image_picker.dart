@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import '../../feature/payment/deposits/repository/file_picker_repository.dart';
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
+import '../utils/app_icons.dart';
 import 'custom_text_new.dart';
 import 'dotted_border/dotted_border.dart';
 
 class CustomImagePicker extends StatelessWidget {
   final bool disabled;
-  final String title;
+  final String? title;
   final Color titleColor;
   final String hintText;
   final List<PlatformFile> initialValue;
@@ -21,7 +22,7 @@ class CustomImagePicker extends StatelessWidget {
   final FilePickerRepository filePickerRepository = FilePickerRepository();
 
   CustomImagePicker(
-      {required this.title,
+      {this.title,
       this.hintText = '',
       this.initialValue = const [],
       this.titleColor = AskLoraColors.charcoal,
@@ -37,10 +38,11 @@ class CustomImagePicker extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextNew(
-          title,
-          style: AskLoraTextStyles.body2.copyWith(color: titleColor),
-        ),
+        if (title != null)
+          CustomTextNew(
+            title!,
+            style: AskLoraTextStyles.body2.copyWith(color: titleColor),
+          ),
         const SizedBox(
           height: 6,
         ),
@@ -126,11 +128,7 @@ class CustomImagePicker extends StatelessWidget {
                           fileType: FileType.image));
                     }
                   },
-                  child: const Icon(
-                    Icons.add_circle_outline,
-                    size: 56,
-                    color: Colors.grey,
-                  ),
+                  child: getSvgIcon('icon_add_files'),
                 ),
                 if (hintText.isNotEmpty && initialValue.isEmpty)
                   Padding(

@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/feature/balance/deposit/utils/deposit_utils.dart';
 import 'package:asklora_mobile_app/feature/payment/bloc/bank_account_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/domain/add_bank_account_request.dart';
 import 'package:asklora_mobile_app/feature/payment/domain/get_bank_account_response.dart';
@@ -59,8 +60,9 @@ void main() async {
         act: (bloc) => bloc.add(const RegisteredBankAccountCheck()),
         expect: () => {
               BankAccountState(response: BaseResponse.loading()),
-              BankAccountState(response: registeredBankAccountResponse),
-              BankAccountState(response: registeredBankAccountResponse),
+              BankAccountState(
+                  response: registeredBankAccountResponse,
+                  depositType: DepositType.type2),
             });
 
     blocTest<BankAccountBloc, BankAccountState>(
@@ -86,7 +88,8 @@ void main() async {
                 bankTransferType: 'WIRE'))),
         expect: () => {
               BankAccountState(response: BaseResponse.loading()),
-              BankAccountState(response: response)
+              BankAccountState(
+                  response: response, depositType: DepositType.firstTime)
             });
 
     tearDown(() => {bankAccountBloc.close()});

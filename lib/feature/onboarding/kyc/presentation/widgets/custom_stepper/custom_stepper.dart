@@ -22,7 +22,7 @@ class CustomStepper extends StatelessWidget {
             .map((element) => CustomStep(
                   svgAssetName: _getSvgAssetName(element.key, currentStep),
                   label: element.value,
-                  drawLine: element.key != 0,
+                  drawLine: element.key != steps.length - 1,
                 ))
             .toList(),
       );
