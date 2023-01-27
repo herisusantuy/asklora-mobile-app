@@ -29,17 +29,9 @@ class DepositState extends Equatable {
 
   bool disableDeposit(DepositType depositType) {
     if (depositType == DepositType.type2) {
-      if (depositAmount == 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return depositAmount == 0;
     } else {
-      if (depositAmount == 0 || proofOfRemittanceImages.isEmpty) {
-        return true;
-      } else {
-        return false;
-      }
+      return (depositAmount == 0 || proofOfRemittanceImages.isEmpty);
     }
   }
 }
