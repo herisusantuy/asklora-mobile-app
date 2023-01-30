@@ -31,3 +31,5 @@ const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointOrders = '$v1$orders';
 const String endpointGetUserJourney = 'get-user-journey';
 const String endpointSaveUserJourney = 'save-user-journey';
+
+const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';

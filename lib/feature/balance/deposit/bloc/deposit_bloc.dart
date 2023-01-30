@@ -56,14 +56,14 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
 
   void _onSubmitDeposit(SubmitDeposit event, Emitter<DepositState> emit) async {
     try {
-      if (!_isBelowMinAmount) {
+      if (_isBelowMinAmount) {
+        emit(state.copyWith(depositAmountErrorText: _getAmountErrorText));
+      } else {
         emit(state.copyWith(response: BaseResponse.loading()));
         var data = await _depositRepository.submitDeposit(
             depositAmount: state.depositAmount,
             platformFiles: state.proofOfRemittanceImages);
         emit(state.copyWith(response: data));
-      } else {
-        emit(state.copyWith(depositAmountErrorText: _getAmountErrorText));
       }
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(e.toString())));

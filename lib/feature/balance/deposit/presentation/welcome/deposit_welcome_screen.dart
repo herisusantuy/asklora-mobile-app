@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/domain/endpoints.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_expanded_row.dart';
@@ -30,7 +31,7 @@ part 'widgets/deposit_bank_account.dart';
 class DepositWelcomeScreen extends StatelessWidget {
   final DepositType? initialDepositType;
   static const String route = '/deposit_welcome_screen';
-  static const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
+
 
   final _spaceHeight = const SizedBox(
     height: 54,
