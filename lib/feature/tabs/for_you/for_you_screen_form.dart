@@ -15,6 +15,7 @@ class ForYouScreenForm extends StatelessWidget {
       enableBackNavigation: false,
       backgroundColor: AskLoraColors.white,
       body: BotStockBackgroundWithPopUp(
+          shouldScrollable: false,
           header: CustomTextNew(
             'Investments for you, by you',
             style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
