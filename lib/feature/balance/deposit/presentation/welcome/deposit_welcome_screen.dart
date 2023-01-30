@@ -32,7 +32,6 @@ class DepositWelcomeScreen extends StatelessWidget {
   final DepositType? initialDepositType;
   static const String route = '/deposit_welcome_screen';
 
-
   final _spaceHeight = const SizedBox(
     height: 54,
   );
