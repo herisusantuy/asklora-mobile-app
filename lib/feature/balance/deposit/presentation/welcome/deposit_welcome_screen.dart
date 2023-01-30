@@ -63,39 +63,42 @@ class DepositWelcomeScreen extends StatelessWidget {
             CustomLoadingOverlay.dismiss();
           }
         },
-        builder: (context, state) => DepositBaseWidget(
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DepositStep(
-                  depositType: initialDepositType ?? state.depositType,
-                ),
-                _spaceHeightSmall,
-                GestureDetector(
-                  onTap: () async =>
-                      await launchUrl(Uri.parse(depositGuideUrl)),
-                  child: CustomTextNew(
-                    'VIEW DEPOSIT GUIDE',
-                    style: AskLoraTextStyles.subtitle2.copyWith(
-                      decoration: TextDecoration.underline,
+        builder: (context, state) {
+          DepositType depositType = initialDepositType ?? state.depositType;
+          return DepositBaseWidget(
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DepositStep(
+                    depositType: depositType,
+                  ),
+                  _spaceHeightSmall,
+                  GestureDetector(
+                    onTap: () async =>
+                        await launchUrl(Uri.parse(depositGuideUrl)),
+                    child: CustomTextNew(
+                      'VIEW DEPOSIT GUIDE',
+                      style: AskLoraTextStyles.subtitle2.copyWith(
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
-                ),
-                _spaceHeight,
-                DepositBankAccount(
-                  depositType: state.depositType,
-                  spaceHeightSmall: _spaceHeightSmall,
-                  spaceHeight: _spaceHeight,
-                ),
-                DepositWelcomeNotes(
-                  depositType: initialDepositType ?? state.depositType,
-                ),
-              ],
-            ),
-            bottomButton: _bottomButton(
-              context,
-              initialDepositType ?? state.depositType,
-            )),
+                  _spaceHeight,
+                  DepositBankAccount(
+                    depositType: depositType,
+                    spaceHeightSmall: _spaceHeightSmall,
+                    spaceHeight: _spaceHeight,
+                  ),
+                  DepositWelcomeNotes(
+                    depositType: depositType,
+                  ),
+                ],
+              ),
+              bottomButton: _bottomButton(
+                context,
+                depositType,
+              ));
+        },
       ),
     );
   }
