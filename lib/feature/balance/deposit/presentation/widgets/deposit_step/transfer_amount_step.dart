@@ -1,9 +1,12 @@
 part of '../../deposit_screen.dart';
 
 class TransferAmountStep extends StatelessWidget {
+  final DepositType depositType;
   final bool drawLine;
 
-  const TransferAmountStep({this.drawLine = true, Key? key}) : super(key: key);
+  const TransferAmountStep(
+      {this.drawLine = true, required this.depositType, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,7 @@ class TransferAmountStep extends StatelessWidget {
       drawLine: drawLine,
       contents: [
         CustomTextNew(
-          'Transfer HK\$10,000 to LORA',
+          'Transfer HK\$${depositType.minDeposit.convertToCurrencyDecimal()} to LORA',
           style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
         ),
         const SizedBox(
@@ -25,12 +28,24 @@ class TransferAmountStep extends StatelessWidget {
         const SizedBox(
           height: 18,
         ),
-        AmountTextField(
-          onChanged: (value) => context.read<DepositBloc>().add(
-              DepositAmountChanged(value.isNotEmpty ? double.parse(value) : 0)),
-          backgroundColor: AskLoraColors.white,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 17, vertical: 14),
+        BlocConsumer<DepositBloc, DepositState>(
+          listenWhen: (previous, current) =>
+              previous.depositAmountErrorText !=
+                  current.depositAmountErrorText &&
+              current.depositAmountErrorText.isNotEmpty,
+          listener: (context, state) => CustomInAppNotification.show(
+              context, state.depositAmountErrorText),
+          buildWhen: (previous, current) =>
+              previous.depositAmountErrorText != current.depositAmountErrorText,
+          builder: (context, state) => AmountTextField(
+            onChanged: (value) => context.read<DepositBloc>().add(
+                DepositAmountChanged(
+                    value.isNotEmpty ? double.parse(value) : 0)),
+            backgroundColor: AskLoraColors.white,
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 17, vertical: 14),
+            errorText: state.depositAmountErrorText,
+          ),
         ),
         const SizedBox(
           height: 10,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../styles/asklora_colors.dart';
 import '../../utils/extensions.dart';
@@ -86,8 +85,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
               }
             },
             inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              CurrencyTextInputFormatter(symbol: '', decimalDigits: 0)
+              CurrencyTextInputFormatter(symbol: '', decimalDigits: 1)
             ],
             keyboardType: TextInputType.number,
             style: TextFieldStyle.valueTextStyle,

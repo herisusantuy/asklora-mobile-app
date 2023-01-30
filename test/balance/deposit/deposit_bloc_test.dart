@@ -2,6 +2,7 @@ import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/balance/deposit/bloc/deposit_bloc.dart';
 import 'package:asklora_mobile_app/feature/balance/deposit/domain/deposit_response.dart';
 import 'package:asklora_mobile_app/feature/balance/deposit/repository/deposit_repository.dart';
+import 'package:asklora_mobile_app/feature/balance/deposit/utils/deposit_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,7 +23,9 @@ void main() async {
       depositRepository = MockDepositRepository();
     });
     setUp(() async {
-      depositBloc = DepositBloc(depositRepository: depositRepository);
+      depositBloc = DepositBloc(
+          depositRepository: depositRepository,
+          depositType: DepositType.firstTime);
     });
 
     test('Deposit Bloc init state should be default one', () {
@@ -50,6 +53,7 @@ void main() async {
               ),
             ),
         expect: () => {
+              const DepositState(proofOfRemittanceImages: []),
               DepositState(proofOfRemittanceImages: [
                 PlatformFile(name: 'test_file', size: 2000)
               ]),
@@ -71,6 +75,9 @@ void main() async {
                   PlatformFile(name: 'test_file', size: 2000))),
             },
         expect: () => {
+              const DepositState(
+                proofOfRemittanceImages: [],
+              ),
               DepositState(
                 proofOfRemittanceImages: [
                   PlatformFile(name: 'test_file', size: 2000),
@@ -86,13 +93,13 @@ void main() async {
         'submit deposit',
         build: () {
           when(depositRepository.submitDeposit(
-                  depositAmount: 200,
+                  depositAmount: 20000,
                   platformFiles: [PlatformFile(name: 'test_file', size: 2000)]))
               .thenAnswer((_) => Future.value(submitResponse));
           return depositBloc;
         },
         act: (bloc) => {
-              bloc.add(const DepositAmountChanged(200)),
+              bloc.add(const DepositAmountChanged(20000)),
               bloc.add(ProofOfRemittanceImagesChanged(
                 [
                   PlatformFile(name: 'test_file', size: 2000),
@@ -101,19 +108,19 @@ void main() async {
               bloc.add(SubmitDeposit())
             },
         expect: () => {
-              const DepositState(depositAmount: 200),
-              DepositState(depositAmount: 200, proofOfRemittanceImages: [
+              const DepositState(depositAmount: 20000),
+              DepositState(depositAmount: 20000, proofOfRemittanceImages: [
                 PlatformFile(name: 'test_file', size: 2000)
               ]),
               DepositState(
                   response: BaseResponse.loading(),
-                  depositAmount: 200,
+                  depositAmount: 20000,
                   proofOfRemittanceImages: [
                     PlatformFile(name: 'test_file', size: 2000)
                   ]),
               DepositState(
                   response: submitResponse,
-                  depositAmount: 200,
+                  depositAmount: 20000,
                   proofOfRemittanceImages: [
                     PlatformFile(name: 'test_file', size: 2000)
                   ]),

@@ -1,16 +1,18 @@
 part of '../../deposit_screen.dart';
 
 class TransferDetailStep extends StatelessWidget {
+  final DepositType depositType;
   final String loraFPSId = '123455679';
 
-  const TransferDetailStep({Key? key}) : super(key: key);
+  const TransferDetailStep({required this.depositType, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DepositBaseStep(
       contents: [
         CustomTextNew(
-          'Transfer HK\$10,000 to LORA',
+          'Transfer HK\$${depositType.minDeposit.convertToCurrencyDecimal()} to LORA',
           style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
         ),
         const SizedBox(

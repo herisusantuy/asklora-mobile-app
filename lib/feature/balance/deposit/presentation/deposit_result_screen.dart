@@ -4,6 +4,7 @@ import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../utils/deposit_utils.dart';
 import 'widgets/deposit_base_widget.dart';
 
@@ -23,12 +24,12 @@ class DepositResultScreen extends StatelessWidget {
         content: CustomStatusWidget(
           title: 'Deposit Request Submitted',
           statusType: statusType,
-          subTitle: _getResultProps.left,
+          subTitle: _getResultProps(context).left,
         ),
-        bottomButton: _getResultProps.right);
+        bottomButton: _getResultProps(context).right);
   }
 
-  Pair<String, Widget> get _getResultProps {
+  Pair<String, Widget> _getResultProps(BuildContext context) {
     switch (depositType) {
       case DepositType.firstTime:
         return Pair(
@@ -37,7 +38,7 @@ class DepositResultScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: PrimaryButton(
                 label: 'DONE',
-                onTap: () {},
+                onTap: () => TabsScreen.open(context),
               ),
             ));
       default:
@@ -47,7 +48,7 @@ class DepositResultScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30),
               child: ButtonPair(
                 primaryButtonLabel: 'DONE',
-                primaryButtonOnClick: () {},
+                primaryButtonOnClick: () => TabsScreen.open(context),
                 secondaryButtonLabel: 'VIEW TRANSACTION HISTORY',
                 secondaryButtonOnClick: () {},
               ),

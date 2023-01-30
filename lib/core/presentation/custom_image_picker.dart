@@ -12,6 +12,7 @@ import 'dotted_border/dotted_border.dart';
 
 class CustomImagePicker extends StatelessWidget {
   final bool disabled;
+  final bool disabledPick;
   final String? title;
   final Color titleColor;
   final String hintText;
@@ -30,6 +31,7 @@ class CustomImagePicker extends StatelessWidget {
       this.onImagePicked,
       this.onImageDeleted,
       this.disabled = false,
+      this.disabledPick = false,
       Key? key})
       : super(key: key);
 
@@ -123,12 +125,13 @@ class CustomImagePicker extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    if (onImagePicked != null && !disabled) {
+                    if (onImagePicked != null && !disabled && !disabledPick) {
                       onImagePicked!(await filePickerRepository.pickFiles(
                           fileType: FileType.image));
                     }
                   },
-                  child: getSvgIcon('icon_add_files'),
+                  child: getSvgIcon('icon_add_files',
+                      color: disabledPick ? AskLoraColors.gray : null),
                 ),
                 if (hintText.isNotEmpty && initialValue.isEmpty)
                   Padding(
