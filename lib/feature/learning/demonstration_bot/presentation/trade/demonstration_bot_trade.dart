@@ -44,18 +44,22 @@ class DemonstrationBotTrade extends StatelessWidget {
                     )),
               ),
               Expanded(
-                child: BlocBuilder<DemonstrationBotBloc, DemonstrationBotState>(
-                    builder: (context, state) {
-                  if (state.tradeChartDataResponse.state ==
-                      ResponseState.success) {
-                    return ChartStudioAnimation(
-                      chartStudioAnimationModel:
-                          state.tradeChartDataResponse.data!,
-                    );
-                  } else {
-                    return const SizedBox.shrink();
-                  }
-                }),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child:
+                      BlocBuilder<DemonstrationBotBloc, DemonstrationBotState>(
+                          builder: (context, state) {
+                    if (state.tradeChartDataResponse.state ==
+                        ResponseState.success) {
+                      return ChartStudioAnimation(
+                        chartStudioAnimationModel:
+                            state.tradeChartDataResponse.data!,
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  }),
+                ),
               ),
             ],
           ),

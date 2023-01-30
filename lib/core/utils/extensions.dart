@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 /// General Email Regex (RFC 5322 Official Standard)
 /// https://www.emailregex.com/
@@ -15,7 +16,7 @@ final RegExp passwordRegex =
 final RegExp otpRegex = RegExp(r'^([0-9]{6})$');
 
 /// extract amount regex
-final RegExp amountRegex = RegExp('[^0-9]');
+final RegExp amountRegex = RegExp('[^.0-9]');
 
 bool deviceHasNotch(BuildContext context) =>
     (MediaQuery.of(context).viewPadding.top > 0);
@@ -40,6 +41,18 @@ MaterialColor randomColor() => ([...Colors.primaries]..shuffle()).first;
 
 extension DoublePrecision on double {
   double toPrecision(int n) => double.parse(toStringAsFixed(n));
+}
+
+extension CurrencyFormat on double {
+  String convertToCurrencyDecimal(
+      {String symbol = '', String? locale, int decimalDigits = 1}) {
+    NumberFormat currencyFormatter = NumberFormat.currency(
+      symbol: symbol,
+      locale: locale,
+      decimalDigits: decimalDigits,
+    );
+    return currencyFormatter.format(this);
+  }
 }
 
 extension ExtraPadding on BuildContext {

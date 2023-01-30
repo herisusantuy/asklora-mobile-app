@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
@@ -22,6 +23,7 @@ import '../repository/deposit_repository.dart';
 import '../utils/deposit_utils.dart';
 import 'deposit_result_screen.dart';
 import 'widgets/deposit_base_widget.dart';
+import '../../../../core/utils/extensions.dart';
 
 part 'widgets/deposit_notes.dart';
 
@@ -42,7 +44,8 @@ class DepositScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => DepositBloc(depositRepository: DepositRepository()),
+      create: (_) => DepositBloc(
+          depositRepository: DepositRepository(), depositType: depositType),
       child: BlocListener<DepositBloc, DepositState>(
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
@@ -58,6 +61,9 @@ class DepositScreen extends StatelessWidget {
                 arguments: Pair(depositType, StatusType.success));
           } else if (state.response.state == ResponseState.success) {
             CustomLoadingOverlay.dismiss();
+            context
+                .read<AppBloc>()
+                .add(const SaveUserJourney(UserJourney.deposit));
             DepositResultScreen.open(
                 context: context,
                 arguments: Pair(depositType, StatusType.success));
@@ -82,20 +88,31 @@ class DepositScreen extends StatelessWidget {
     switch (depositType) {
       case DepositType.firstTime:
         return [
-          const TransferDetailStep(),
-          const TransferAmountStep(),
+          TransferDetailStep(
+            depositType: depositType,
+          ),
+          TransferAmountStep(
+            depositType: depositType,
+          ),
           const UploadProofOfRemittanceStep(),
         ];
       case DepositType.type1:
         return [
-          const TransferDetailStep(),
-          const TransferAmountStep(),
+          TransferDetailStep(
+            depositType: depositType,
+          ),
+          TransferAmountStep(
+            depositType: depositType,
+          ),
           const UploadProofOfRemittanceStep(),
         ];
       case DepositType.type2:
         return [
-          const TransferDetailStep(),
-          const TransferAmountStep(
+          TransferDetailStep(
+            depositType: depositType,
+          ),
+          TransferAmountStep(
+            depositType: depositType,
             drawLine: false,
           ),
         ];

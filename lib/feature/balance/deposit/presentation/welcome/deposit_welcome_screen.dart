@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/domain/endpoints.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_expanded_row.dart';
@@ -10,6 +12,7 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
+import '../../../../tabs/tabs_screen.dart';
 import '../../../bloc/bank_account_bloc.dart';
 import '../../../repository/bank_account_repository.dart';
 import '../../utils/deposit_utils.dart';
@@ -60,35 +63,42 @@ class DepositWelcomeScreen extends StatelessWidget {
             CustomLoadingOverlay.dismiss();
           }
         },
-        builder: (context, state) => DepositBaseWidget(
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DepositStep(
-                  depositType: initialDepositType ?? state.depositType,
-                ),
-                _spaceHeightSmall,
-                CustomTextNew(
-                  'VIEW DEPOSIT GUIDE',
-                  style: AskLoraTextStyles.subtitle2.copyWith(
-                    decoration: TextDecoration.underline,
+        builder: (context, state) {
+          DepositType depositType = initialDepositType ?? state.depositType;
+          return DepositBaseWidget(
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DepositStep(
+                    depositType: depositType,
                   ),
-                ),
-                _spaceHeight,
-                DepositBankAccount(
-                  depositType: state.depositType,
-                  spaceHeightSmall: _spaceHeightSmall,
-                  spaceHeight: _spaceHeight,
-                ),
-                DepositWelcomeNotes(
-                  depositType: state.depositType,
-                ),
-              ],
-            ),
-            bottomButton: _bottomButton(
-              context,
-              state.depositType,
-            )),
+                  _spaceHeightSmall,
+                  GestureDetector(
+                    onTap: () async =>
+                        await launchUrl(Uri.parse(depositGuideUrl)),
+                    child: CustomTextNew(
+                      'VIEW DEPOSIT GUIDE',
+                      style: AskLoraTextStyles.subtitle2.copyWith(
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                  _spaceHeight,
+                  DepositBankAccount(
+                    depositType: depositType,
+                    spaceHeightSmall: _spaceHeightSmall,
+                    spaceHeight: _spaceHeight,
+                  ),
+                  DepositWelcomeNotes(
+                    depositType: depositType,
+                  ),
+                ],
+              ),
+              bottomButton: _bottomButton(
+                context,
+                depositType,
+              ));
+        },
       ),
     );
   }
@@ -103,7 +113,7 @@ class DepositWelcomeScreen extends StatelessWidget {
                     context: context,
                     depositType: depositType,
                   ),
-              secondaryButtonOnClick: () {},
+              secondaryButtonOnClick: () => TabsScreen.open(context),
               primaryButtonLabel: 'CONTINUE',
               secondaryButtonLabel: 'MAYBE LATER'),
         );

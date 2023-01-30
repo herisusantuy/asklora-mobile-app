@@ -47,7 +47,7 @@ class DemonstrationQuestionScreen extends StatelessWidget {
                       children: [
                         _getQuestionContent,
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 30),
+                          padding: const EdgeInsets.only(bottom: 30, top: 24),
                           child: BlocBuilder<DemonstrationQuestionBloc,
                                   DemonstrationQuestionState>(
                               buildWhen: (previous, current) =>
