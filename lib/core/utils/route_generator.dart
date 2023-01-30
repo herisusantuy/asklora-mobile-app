@@ -143,9 +143,7 @@ class RouterGenerator {
           );
         });
       case TabsScreen.route:
-        return MaterialPageRoute(
-          builder: (_) => const TabsScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const TabsScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

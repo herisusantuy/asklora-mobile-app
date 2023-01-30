@@ -38,7 +38,7 @@ class SignInForm extends StatelessWidget {
           break;
         case ResponseState.success:
           await SecureStorage()
-              .writeSecureData('email', state.emailAddress)
+              .writeData('email', state.emailAddress)
               .then((_) => SignInSuccessScreen.openAndRemoveAllRoute(context));
           break;
         default:
