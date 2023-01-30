@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
@@ -10,6 +11,7 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
+import '../../../../tabs/tabs_screen.dart';
 import '../../../bloc/bank_account_bloc.dart';
 import '../../../repository/bank_account_repository.dart';
 import '../../utils/deposit_utils.dart';
@@ -28,6 +30,7 @@ part 'widgets/deposit_bank_account.dart';
 class DepositWelcomeScreen extends StatelessWidget {
   final DepositType? initialDepositType;
   static const String route = '/deposit_welcome_screen';
+  static const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
 
   final _spaceHeight = const SizedBox(
     height: 54,
@@ -68,10 +71,14 @@ class DepositWelcomeScreen extends StatelessWidget {
                   depositType: initialDepositType ?? state.depositType,
                 ),
                 _spaceHeightSmall,
-                CustomTextNew(
-                  'VIEW DEPOSIT GUIDE',
-                  style: AskLoraTextStyles.subtitle2.copyWith(
-                    decoration: TextDecoration.underline,
+                GestureDetector(
+                  onTap: () async =>
+                      await launchUrl(Uri.parse(depositGuideUrl)),
+                  child: CustomTextNew(
+                    'VIEW DEPOSIT GUIDE',
+                    style: AskLoraTextStyles.subtitle2.copyWith(
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
                 _spaceHeight,
@@ -81,13 +88,13 @@ class DepositWelcomeScreen extends StatelessWidget {
                   spaceHeight: _spaceHeight,
                 ),
                 DepositWelcomeNotes(
-                  depositType: state.depositType,
+                  depositType: initialDepositType ?? state.depositType,
                 ),
               ],
             ),
             bottomButton: _bottomButton(
               context,
-              state.depositType,
+              initialDepositType ?? state.depositType,
             )),
       ),
     );
@@ -103,7 +110,7 @@ class DepositWelcomeScreen extends StatelessWidget {
                     context: context,
                     depositType: depositType,
                   ),
-              secondaryButtonOnClick: () {},
+              secondaryButtonOnClick: () => TabsScreen.open(context),
               primaryButtonLabel: 'CONTINUE',
               secondaryButtonLabel: 'MAYBE LATER'),
         );
