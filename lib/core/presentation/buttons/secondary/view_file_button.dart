@@ -50,7 +50,9 @@ class ViewFileButton extends StatelessWidget {
                 const SizedBox(
                   width: 18,
                 ),
-                CustomTextNew(label, style: AskLoraTextStyles.subtitle2),
+                Expanded(
+                    child: CustomTextNew(label,
+                        style: AskLoraTextStyles.subtitle2)),
               ],
             ),
           )),
