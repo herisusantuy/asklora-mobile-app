@@ -129,18 +129,6 @@ class DemonstrationBotScreen extends StatelessWidget {
             'Investment preference included Investment Style, Privacy Questions and Personalisation Questions.',
       );
 
-  /*Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 48),
-        child: Column(
-          children: [
-            const LoraMemojiHeader(
-                text: 'The recommendation is based on your investment preference.'),
-            SizedBox(height: 25,),
-            CustomTextNew('Investment preference included Investment Style, Privacy Questions and Personalisation Questions.', style: AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),)
-          ],
-        ),
-      );*/
-
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
         isDismissible: false,
