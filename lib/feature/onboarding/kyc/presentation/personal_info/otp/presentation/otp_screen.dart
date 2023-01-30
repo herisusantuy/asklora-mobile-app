@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/domain/base_response.dart';
 import '../../../../../../../core/domain/otp/verify_otp_request.dart';
+import '../../../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -12,6 +13,7 @@ import '../../../../../../../core/presentation/we_create/custom_text_button.dart
 import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../auth/sign_up/presentation/sign_up_success_screen.dart';
+import '../../../../../../tabs/tabs_screen.dart';
 import '../../../../bloc/kyc_bloc.dart';
 import '../../../widgets/kyc_base_form.dart';
 import '../bloc/otp_bloc.dart';
@@ -33,7 +35,7 @@ class OtpScreen extends StatelessWidget {
             ///TODO should only show error later
             context
                 .read<NavigationBloc<KycPageStep>>()
-                .add(const PageChanged(KycPageStep.tin));
+                .add(const PageChanged(KycPageStep.addressProof));
             break;
           case ResponseState.success:
             SignUpSuccessScreen.openReplace(context);
@@ -66,31 +68,22 @@ class OtpScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => Column(
-        children: [
-          BlocBuilder<OtpBloc, OtpState>(
-              buildWhen: (previous, current) =>
-                  previous.resetTime != current.resetTime ||
-                  previous.response.state != current.response.state,
-              builder: (context, state) {
-                return PrimaryButton(
-                  buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-                  key: const Key('request_otp_button'),
-                  fontStyle: FontStyle.normal,
-                  disabled: state.disableRequest,
-                  label: state.disableRequest
-                      ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
-                      : 'RESEND OTP CODE',
-                  onTap: () => context.read<OtpBloc>().add(OtpRequested(email)),
-                );
-              }),
-          CustomTextButton(
-            key: const Key('sign_up_again_button'),
-            margin: const EdgeInsets.only(top: 27, bottom: 35),
-            label: 'SIGN UP AGAIN',
-            onTap: () => Navigator.pop(context),
-          )
-        ],
+  Widget _bottomButton(BuildContext context) => BlocBuilder<OtpBloc, OtpState>(
+        buildWhen: (previous, current) =>
+            previous.resetTime != current.resetTime ||
+            previous.response.state != current.response.state,
+        builder: (context, state) {
+          return ButtonPair(
+            disablePrimaryButton: state.disableRequest,
+            primaryButtonOnClick: () =>
+                context.read<OtpBloc>().add(OtpRequested(email)),
+            secondaryButtonOnClick: () => TabsScreen.open(context),
+            primaryButtonLabel: state.disableRequest
+                ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
+                : 'RESEND OTP CODE',
+            secondaryButtonLabel: 'SAVE FOR LATER',
+          );
+        },
       );
 
   Widget _otpInput(BuildContext context) {
