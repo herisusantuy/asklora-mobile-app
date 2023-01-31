@@ -10,6 +10,9 @@ import '../../feature/balance/deposit/presentation/deposit_result_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_screen.dart';
 import '../../feature/balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../feature/balance/deposit/utils/deposit_utils.dart';
+import '../../feature/balance/withdrawal/presentation/withdrawal_amount/withdrawal_amount_screen.dart';
+import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.dart';
+import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
 import '../../feature/bot_stock/presentation/bot_trade_summary/bot_trade_summary_screen.dart';
@@ -18,6 +21,8 @@ import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.d
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
+import '../../feature/bot_stock/utils/bot_stock_utils.dart';
+import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../feature/onboarding/ppi/domain/ppi_user_response.dart';
@@ -145,6 +150,26 @@ class RouterGenerator {
       case TabsScreen.route:
         return MaterialPageRoute(
           builder: (_) => const TabsScreen(),
+        );
+      case WithdrawalAmountScreen.route:
+        return MaterialPageRoute(
+          builder: (_) => const WithdrawalAmountScreen(),
+        );
+      case WithdrawalSummaryScreen.route:
+        return MaterialPageRoute(
+          builder: (_) => WithdrawalSummaryScreen(
+            withdrawalAmount: settings.arguments as double,
+          ),
+        );
+      case WithdrawalResultScreen.route:
+        return MaterialPageRoute(
+          builder: (_) => const WithdrawalResultScreen(),
+        );
+      case LearningBotStockScreen.route:
+        return MaterialPageRoute(
+          builder: (_) => LearningBotStockScreen(
+            botType: settings.arguments as BotType,
+          ),
         );
       default:
         return MaterialPageRoute(

@@ -15,6 +15,7 @@ import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_st
 import '../../../../tabs/tabs_screen.dart';
 import '../../../bloc/bank_account_bloc.dart';
 import '../../../repository/bank_account_repository.dart';
+import '../../../widgets/bank_account_card.dart';
 import '../../utils/deposit_utils.dart';
 import '../deposit_screen.dart';
 import '../widgets/deposit_base_widget.dart';
