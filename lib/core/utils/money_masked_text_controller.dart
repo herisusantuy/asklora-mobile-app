@@ -148,7 +148,7 @@ class MoneyMaskedTextController extends TextEditingController {
         // Then we get the substring containing the characters to be skipped so
         // that we can position the cursor properly
         final skippedString =
-        text.substring(numberOfLeadingZeros, selection.baseOffset);
+            text.substring(numberOfLeadingZeros, selection.baseOffset);
 
         // Positions the cursor right after going through all the characters
         // that are in the skippedString

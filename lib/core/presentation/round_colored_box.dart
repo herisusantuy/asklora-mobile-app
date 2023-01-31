@@ -15,7 +15,7 @@ class RoundColoredBox extends StatelessWidget {
       this.title,
       required this.content,
       this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        this.radius = 20,
+      this.radius = 20,
       Key? key})
       : super(key: key);
 

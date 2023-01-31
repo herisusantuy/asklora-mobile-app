@@ -12,24 +12,19 @@ class WithdrawalState extends Equatable {
   }) : super();
 
   @override
-  List<Object?> get props => [
-        withdrawalAmount,
-        withdrawalAmountErrorText,
-        response
-      ];
+  List<Object?> get props =>
+      [withdrawalAmount, withdrawalAmountErrorText, response];
 
   WithdrawalState copyWith({
     double? withdrawalAmount,
     String? withdrawalAmountErrorText,
     BaseResponse? response,
-
   }) {
     return WithdrawalState(
       response: response ?? this.response,
       withdrawalAmount: withdrawalAmount ?? this.withdrawalAmount,
       withdrawalAmountErrorText:
           withdrawalAmountErrorText ?? this.withdrawalAmountErrorText,
-
     );
   }
 }

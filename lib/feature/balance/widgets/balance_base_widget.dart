@@ -16,7 +16,7 @@ class BalanceBaseWidget extends StatelessWidget {
       {required this.content,
       this.useHeader = true,
       required this.bottomButton,
-         this.title='',
+      this.title = '',
       Key? key})
       : super(key: key);
 
