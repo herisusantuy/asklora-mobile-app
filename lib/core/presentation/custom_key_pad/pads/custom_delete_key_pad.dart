@@ -4,6 +4,7 @@ class CustomDeleteKeyPad extends StatelessWidget {
   final MoneyMaskedTextController controller;
   final double width;
   final double height;
+
   const CustomDeleteKeyPad(
       {required this.controller,
       required this.width,
@@ -24,7 +25,8 @@ class CustomDeleteKeyPad extends StatelessWidget {
         }
         controller.text = value;
       },
-      child: SizedBox(
+      child: Container(
+        constraints: const BoxConstraints(maxHeight: 50, minHeight: 30),
         height: height,
         width: width,
         child: const Center(

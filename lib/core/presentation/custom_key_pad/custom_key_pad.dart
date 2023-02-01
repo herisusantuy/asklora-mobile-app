@@ -43,7 +43,7 @@ class _CustomKeyPadState extends State<CustomKeyPad> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      final double padWidth = constraints.maxWidth / 3 - _spacing * 2;
+      final double padWidth = (constraints.maxWidth - _spacing * 2) / 3;
       final double padHeight = (constraints.maxHeight - _runSpacing * 3) / 4;
       return Wrap(
         spacing: _spacing,

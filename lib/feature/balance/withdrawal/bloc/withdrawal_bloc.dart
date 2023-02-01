@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../domain/withdrawal_request.dart';
+import '../domain/withdrawal_response.dart';
 import '../repository/withdrawal_repository.dart';
 
 part 'withdrawal_event.dart';
@@ -34,7 +35,7 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
       var data = await _withdrawalRepository.submitWithdrawal(
           withdrawalRequest:
               WithdrawalRequest(amount: state.withdrawalAmount.toString()));
-      emit(state.copyWith(response: BaseResponse.complete(data)));
+      emit(state.copyWith(response: data));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error(e.toString())));
     }

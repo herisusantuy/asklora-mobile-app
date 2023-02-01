@@ -56,6 +56,9 @@ class DepositScreen extends StatelessWidget {
             ///LETS ASSUME ERROR AS SUCCEED FOR NOW TO SHOW THE RESULT SCREEN
             CustomLoadingOverlay.dismiss();
             // CustomInAppNotification.show(context, state.response.message);
+            context
+                .read<AppBloc>()
+                .add(const SaveUserJourney(UserJourney.learnBotPlank));
             DepositResultScreen.open(
                 context: context,
                 arguments: Pair(depositType, StatusType.success));
@@ -63,7 +66,7 @@ class DepositScreen extends StatelessWidget {
             CustomLoadingOverlay.dismiss();
             context
                 .read<AppBloc>()
-                .add(const SaveUserJourney(UserJourney.deposit));
+                .add(const SaveUserJourney(UserJourney.learnBotPlank));
             DepositResultScreen.open(
                 context: context,
                 arguments: Pair(depositType, StatusType.success));

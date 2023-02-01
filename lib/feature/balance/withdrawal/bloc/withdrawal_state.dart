@@ -1,7 +1,7 @@
 part of 'withdrawal_bloc.dart';
 
 class WithdrawalState extends Equatable {
-  final BaseResponse response;
+  final BaseResponse<WithdrawalResponse> response;
   final double withdrawalAmount;
   final String withdrawalAmountErrorText;
 
@@ -18,7 +18,7 @@ class WithdrawalState extends Equatable {
   WithdrawalState copyWith({
     double? withdrawalAmount,
     String? withdrawalAmountErrorText,
-    BaseResponse? response,
+    BaseResponse<WithdrawalResponse>? response,
   }) {
     return WithdrawalState(
       response: response ?? this.response,
