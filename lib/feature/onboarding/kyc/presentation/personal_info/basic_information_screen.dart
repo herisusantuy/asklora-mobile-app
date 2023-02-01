@@ -163,23 +163,23 @@ class BasicInformationScreen extends StatelessWidget {
                     .add(BasicInformationPhoneNumberChanged(phoneNumber)),
               ));
 
-  Widget get _selectGender =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
-          buildWhen: (previous, current) => previous.gender != current.gender,
-          builder: (context, state) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CustomTextNew('Gender'),
-                  const SizedBox(height: 5),
-                  CustomToggleButton(
+  Widget get _selectGender => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomTextNew('Gender'),
+          const SizedBox(height: 5),
+          BlocBuilder<BasicInformationBloc, BasicInformationState>(
+              buildWhen: (previous, current) =>
+                  previous.gender != current.gender,
+              builder: (context, state) => CustomToggleButton(
                     onSelected: (value) => context
                         .read<BasicInformationBloc>()
                         .add(BasicInformationGenderChanged(value)),
                     initialValue: state.gender,
                     choices: Pair('Male', 'Female'),
-                  ),
-                ],
-              ));
+                  ))
+        ],
+      );
 
   Widget _textInput({
     required String initialValue,
