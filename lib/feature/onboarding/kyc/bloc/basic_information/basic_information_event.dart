@@ -92,6 +92,18 @@ class BasicInformationCountryOfCitizenshipChanged
   List<Object> get props => [countryOfCitizenship];
 }
 
+class BasicInformationCountryOfBirthChanged extends BasicInformationEvent {
+  final String countryCodeOfBirth;
+  final String countryNameOfBirth;
+
+  const BasicInformationCountryOfBirthChanged(
+      this.countryCodeOfBirth, this.countryNameOfBirth)
+      : super();
+
+  @override
+  List<Object> get props => [countryCodeOfBirth];
+}
+
 class BasicInformationIsHongKongPermanentResidentChanged
     extends BasicInformationEvent {
   final bool isHongKongPermanentResident;

@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
@@ -53,7 +54,7 @@ class BasicInformationScreen extends StatelessWidget {
                 initialValue:
                     context.read<BasicInformationBloc>().state.firstName,
                 key: const Key('first_name'),
-                label: 'English First Name',
+                label: 'Legal English First Name',
                 onChanged: (value) => context
                     .read<BasicInformationBloc>()
                     .add(BasicInformationFirstNameChanged(value))),
@@ -62,16 +63,29 @@ class BasicInformationScreen extends StatelessWidget {
                 initialValue:
                     context.read<BasicInformationBloc>().state.lastName,
                 key: const Key('last_name'),
-                label: 'English Last Name',
+                label: 'Legal English Last Name',
                 onChanged: (value) => context
                     .read<BasicInformationBloc>()
                     .add(BasicInformationLastNameChanged(value))),
             _spaceHeight,
             _selectGender,
             _spaceHeight,
+            _textInput(
+                initialValue:
+                    context.read<BasicInformationBloc>().state.idNumber,
+                key: const Key('hk_id_number'),
+                label: 'HKID Number',
+                hintText: 'A1234567',
+                textInputFormatterList: [lettersAndNumberFormatter()],
+                onChanged: (value) => context
+                    .read<BasicInformationBloc>()
+                    .add(BasicInformationLastNameChanged(value))),
+            _spaceHeight,
             _nationality,
             _spaceHeight,
             _dateOfBirth,
+            _spaceHeight,
+            _countryOfBirth,
             _spaceHeight,
             _countryCodeAndPhoneNumber
           ],
@@ -108,10 +122,26 @@ class BasicInformationScreen extends StatelessWidget {
         builder: (context, state) => CustomCountryPicker(
           key: const Key('nationality'),
           label: 'Nationality',
+          hintText: 'Select Nationality',
           initialValue: state.countryNameOfCitizenship,
           onSelect: (Country country) => context
               .read<BasicInformationBloc>()
               .add(BasicInformationCountryOfCitizenshipChanged(
+                  country.countryCodeIso3, country.name)),
+        ),
+      );
+
+  Widget get _countryOfBirth =>
+      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+        buildWhen: (previous, current) =>
+            previous.countryCodeOfBirth != current.countryCodeOfBirth,
+        builder: (context, state) => CustomCountryPicker(
+          key: const Key('country_of_birth'),
+          label: 'Country Of Birth',
+          initialValue: state.countryNameOfBirth,
+          onSelect: (Country country) => context
+              .read<BasicInformationBloc>()
+              .add(BasicInformationCountryOfBirthChanged(
                   country.countryCodeIso3, country.name)),
         ),
       );
@@ -136,19 +166,29 @@ class BasicInformationScreen extends StatelessWidget {
   Widget get _selectGender =>
       BlocBuilder<BasicInformationBloc, BasicInformationState>(
           buildWhen: (previous, current) => previous.gender != current.gender,
-          builder: (context, state) => CustomToggleButton(
-                onSelected: (value) => context
-                    .read<BasicInformationBloc>()
-                    .add(BasicInformationGenderChanged(value)),
-                initialValue: state.gender,
-                choices: Pair('Male', 'Female'),
+          builder: (context, state) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomTextNew('Gender'),
+                  const SizedBox(height: 5),
+                  CustomToggleButton(
+                    onSelected: (value) => context
+                        .read<BasicInformationBloc>()
+                        .add(BasicInformationGenderChanged(value)),
+                    initialValue: state.gender,
+                    choices: Pair('Male', 'Female'),
+                  ),
+                ],
               ));
 
-  Widget _textInput(
-          {required String initialValue,
-          required String label,
-          required Function(String) onChanged,
-          required Key key}) =>
+  Widget _textInput({
+    required String initialValue,
+    required String label,
+    required Function(String) onChanged,
+    required Key key,
+    List<TextInputFormatter>? textInputFormatterList,
+    String? hintText,
+  }) =>
       MasterTextField(
         key: key,
         initialValue: initialValue,
@@ -156,8 +196,10 @@ class BasicInformationScreen extends StatelessWidget {
         onChanged: onChanged,
         labelText: label,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        textInputFormatterList: [fullEnglishNameFormatter()],
+        textInputFormatterList:
+            textInputFormatterList ?? [fullEnglishNameFormatter()],
         textInputType: TextInputType.text,
+        hintText: hintText ?? '',
       );
 
   Widget get _bottomButton =>
@@ -181,7 +223,8 @@ class BasicInformationScreen extends StatelessWidget {
         state.countryNameOfCitizenship.isEmpty ||
         state.dateOfBirth.isEmpty ||
         state.countryCode.isEmpty ||
-        state.phoneNumber.isEmpty) {
+        state.phoneNumber.isEmpty ||
+        state.countryNameOfBirth.isEmpty) {
       return true;
     } else {
       return false;
