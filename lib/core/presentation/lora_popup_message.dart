@@ -68,12 +68,15 @@ class LoraPopUpMessage extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                    PrimaryButton(
-                        buttonPrimaryType: buttonPrimaryType,
-                        label: buttonLabel,
-                        onTap: () {
-                          if (onPrimaryButtonTap != null) onPrimaryButtonTap!();
-                        })
+                    if (buttonLabel.isNotEmpty)
+                      PrimaryButton(
+                          buttonPrimaryType: buttonPrimaryType,
+                          label: buttonLabel,
+                          onTap: () {
+                            if (onPrimaryButtonTap != null) {
+                              onPrimaryButtonTap!();
+                            }
+                          })
                   ],
                 ),
               ),

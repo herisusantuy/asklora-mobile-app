@@ -256,7 +256,7 @@ class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
   }
 
   @override
-  _i7.Future<void> writeSecureData(
+  _i7.Future<void> writeData(
     String? key,
     String? value,
   ) =>
@@ -272,7 +272,7 @@ class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
   @override
-  _i7.Future<String?> readSecureData(String? key) => (super.noSuchMethod(
+  _i7.Future<String?> readData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readSecureData,
           [key],
@@ -280,7 +280,7 @@ class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
         returnValue: _i7.Future<String?>.value(),
       ) as _i7.Future<String?>);
   @override
-  _i7.Future<void> deleteSecureData(String? key) => (super.noSuchMethod(
+  _i7.Future<void> deleteData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #deleteSecureData,
           [key],
@@ -289,7 +289,7 @@ class MockSecureStorage extends _i1.Mock implements _i12.SecureStorage {
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
   @override
-  _i7.Future<void> deleteAllSecureData() => (super.noSuchMethod(
+  _i7.Future<void> deleteAllData() => (super.noSuchMethod(
         Invocation.method(
           #deleteAllSecureData,
           [],

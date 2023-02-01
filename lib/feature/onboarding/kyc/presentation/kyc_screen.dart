@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
@@ -43,35 +44,37 @@ class KycScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
+        enableBackNavigation: false,
         body: MultiBlocProvider(
             providers: [
-          BlocProvider(
-              create: (_) => NavigationBloc<KycPageStep>(initialKycPageStep)),
-          BlocProvider(create: (_) => BasicInformationBloc()),
-          BlocProvider(
-            create: (context) => OtpBloc(otpRepository: OtpRepository()),
-          ),
-          BlocProvider(
-            create: (context) => CountryOfTaxResidenceBloc(),
-          ),
-          BlocProvider(
-            create: (context) => AddressProofBloc(),
-          ),
-          BlocProvider(
-            create: (context) => DisclosureAffiliationBloc(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                KycBloc(getAccountRepository: AccountRepository()),
-          ),
-          BlocProvider(
-            create: (context) => SigningAgreementBloc(
-                signingBrokerAgreementRepository:
-                    SigningBrokerAgreementRepository(),
-                signatureController: SignatureController()),
-          ),
-        ],
+              BlocProvider(
+                  create: (_) =>
+                      NavigationBloc<KycPageStep>(initialKycPageStep)),
+              BlocProvider(create: (_) => BasicInformationBloc()),
+              BlocProvider(
+                create: (context) => OtpBloc(otpRepository: OtpRepository()),
+              ),
+              BlocProvider(
+                create: (context) => CountryOfTaxResidenceBloc(),
+              ),
+              BlocProvider(
+                create: (context) => AddressProofBloc(),
+              ),
+              BlocProvider(
+                create: (context) => DisclosureAffiliationBloc(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    KycBloc(getAccountRepository: AccountRepository()),
+              ),
+              BlocProvider(
+                create: (context) => SigningAgreementBloc(
+                    signingBrokerAgreementRepository:
+                        SigningBrokerAgreementRepository(),
+                    signatureController: SignatureController()),
+              ),
+            ],
             child: Builder(builder: (context) {
               return CustomNavigationWidget<KycPageStep>(
                 padding: EdgeInsets.zero,

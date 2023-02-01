@@ -9,10 +9,15 @@ class CustomScaffold extends Scaffold {
       VoidCallback? onTapBack,
       bool enableBackNavigation = true,
       bool useSafeArea = true,
-      super.backgroundColor,
+      super.backgroundColor = Colors.white,
       super.bottomNavigationBar})
       : super(
             extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0.0,
+              toolbarHeight: 0.0, // Hide the AppBar
+            ),
             body: Stack(
               children: [
                 useSafeArea ? SafeArea(child: body) : body,

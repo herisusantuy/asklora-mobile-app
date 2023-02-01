@@ -26,10 +26,13 @@ class PersonalisationResultEndScreen extends StatelessWidget {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta.',
         additionalMessage:
             '(Screen that show some kind of a result to motivate user / user feel like they get a reward after answering the ques)',
-        bottomButton: PrimaryButton(
-          key: const Key('next_button'),
-          label: 'GOT IT',
-          onTap: () => SignUpScreen.open(context),
+        bottomButton: Padding(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: PrimaryButton(
+            key: const Key('next_button'),
+            label: 'GOT IT',
+            onTap: () => SignUpScreen.open(context),
+          ),
         ),
       ),
     );
