@@ -9,8 +9,11 @@ abstract class PortfolioEvent extends Equatable {
 
 class BotStockFilterChanged extends PortfolioEvent {
   final BotStockFilter botStockFilter;
+
   const BotStockFilterChanged(this.botStockFilter);
 }
+
+class FetchPortfolioDetail extends PortfolioEvent {}
 
 class FetchBotPortfolio extends PortfolioEvent {
   final BotStockFilter botStockFilter;

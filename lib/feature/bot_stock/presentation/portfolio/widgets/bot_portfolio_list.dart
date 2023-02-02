@@ -27,7 +27,7 @@ class BotPortfolioList extends StatelessWidget {
       return BlocBuilder<PortfolioBloc, PortfolioState>(
           buildWhen: (previous, current) =>
               previous.botPortfolioResponse.state !=
-                  current.botPortfolioResponse.state,
+              current.botPortfolioResponse.state,
           builder: (context, state) {
             if (state.botPortfolioResponse.state == ResponseState.success) {
               if (state.botPortfolioResponse.data!.isNotEmpty) {
@@ -61,7 +61,10 @@ class BotPortfolioList extends StatelessWidget {
                             top:
                                 (MediaQuery.of(context).size.height - 600) / 2),
                         child: CustomTextNew(
-                            'No ${state.botStockFilter.name} Botstocks', style: AskLoraTextStyles.body1.copyWith(color: AskLoraColors.darkGray),),
+                          'No ${state.botStockFilter.name} Botstocks',
+                          style: AskLoraTextStyles.body1
+                              .copyWith(color: AskLoraColors.darkGray),
+                        ),
                       ),
                     ],
                   );

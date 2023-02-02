@@ -14,14 +14,16 @@ import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 
-import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/custom_base_silver_box.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
+import 'domain/portfolio_detail_response.dart';
+import 'repository/portfolio_repository.dart';
 import 'widgets/bot_portfolio_pop_up.dart';
 
 part 'widgets/bot_portfolio_card.dart';
@@ -40,8 +42,9 @@ class PortfolioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PortfolioBloc(botStockRepository: BotStockRepository())
-        ..add(const FetchBotPortfolio()),
+      create: (_) => PortfolioBloc(portfolioRepository: PortfolioRepository())
+        ..add(const FetchBotPortfolio())
+        ..add(FetchPortfolioDetail()),
       child: CustomScaffold(
           useSafeArea: false,
           backgroundColor: AskLoraColors.white,
@@ -50,7 +53,7 @@ class PortfolioScreen extends StatelessWidget {
             padding:
                 AppValues.screenHorizontalPadding.copyWith(top: 15, bottom: 15),
             children: [
-              ..._botStockDetail,
+              _botStockDetail,
               const SizedBox(
                 height: 40,
               ),
@@ -70,88 +73,108 @@ class PortfolioScreen extends StatelessWidget {
     );
   }
 
-  List<Widget> get _botStockDetail => [
-        SafeArea(
-          child: CustomBaseSilverBox(
-              child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+  Widget get _botStockDetail => BlocBuilder<PortfolioBloc, PortfolioState>(
+      buildWhen: (previous, current) =>
+          previous.portfolioDetailResponse != current.portfolioDetailResponse,
+      builder: (context, state) {
+        final PortfolioDetailResponse? data =
+            state.portfolioDetailResponse.data;
+        return Column(
+          children: [
+            SafeArea(
+              child: CustomBaseSilverBox(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextNew(
+                          'Total Portfolio Value (USD)',
+                          style: AskLoraTextStyles.body4,
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        CustomTextNew(
+                          (data?.totalPortfolio ?? 0)
+                              .convertToCurrencyDecimal(),
+                          style: AskLoraTextStyles.h2,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                        color: AskLoraColors.charcoal, shape: BoxShape.circle),
+                    padding: const EdgeInsets.all(4),
+                    child: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AskLoraColors.primaryGreen,
+                      size: 22,
+                    ),
+                  )
+                ],
+              )),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: CustomBaseSilverBox(
+                        child: Column(
                   children: [
-                    CustomTextNew(
-                      'Botstock Values (USD)',
-                      style: AskLoraTextStyles.body4,
-                    ),
+                    PairColumnText(
+                        title1: 'Withdrawable Amount (USD)',
+                        title2: 'Buying Power (USD)',
+                        subTitle1: data?.withdrawableAmount != null
+                            ? data!.withdrawableAmount
+                                .convertToCurrencyDecimal()
+                            : '/',
+                        subTitle2: (data?.buyingPower ?? 0)
+                            .convertToCurrencyDecimal()),
                     const SizedBox(
-                      height: 2,
+                      height: 14,
                     ),
-                    CustomTextNew(
-                      '1322.05',
-                      style: AskLoraTextStyles.h2,
+                    PairColumnText(
+                      title1: 'Total Values',
+                      title2: 'Total P/L',
+                      subTitle1: (data?.totalBotStockValues ?? 0)
+                          .convertToCurrencyDecimal(),
+                      subTitle2: data?.withdrawableAmount != null
+                          ? '${data!.withdrawableAmount.convertToCurrencyDecimal()}%'
+                          : '/',
                     ),
                   ],
-                ),
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                    color: AskLoraColors.charcoal, shape: BoxShape.circle),
-                padding: const EdgeInsets.all(4),
-                child: const Icon(
-                  Icons.keyboard_arrow_down,
-                  color: AskLoraColors.primaryGreen,
-                  size: 22,
-                ),
-              )
-            ],
-          )),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Row(
-          children: [
-            Expanded(
-                child: CustomBaseSilverBox(
-                    child: Column(
-              children: const [
-                PairColumnText(
-                    title1: 'Withdrawable Amount (USD)',
-                    title2: 'Buying Power (USD)',
-                    subTitle1: '1,200.00',
-                    subTitle2: '250.00'),
-                SizedBox(
-                  height: 14,
-                ),
-                PairColumnText(
-                    title1: 'Total Values',
-                    title2: 'Total P/L',
-                    subTitle1: '1,100.00',
-                    subTitle2: '10.02%'),
-              ],
-            ))),
-            const SizedBox(
-              width: 10,
-            ),
-            Column(
-              children: [
-                FundingButton(
-                  fundingType: FundingType.fund,
-                  onTap: () {},
-                ),
+                ))),
                 const SizedBox(
-                  height: 10,
+                  width: 10,
                 ),
-                FundingButton(
-                  fundingType: FundingType.withdraw,
-                  onTap: () {},
-                ),
+                Column(
+                  children: [
+                    FundingButton(
+                      disabled: data == null,
+                      fundingType: FundingType.fund,
+                      onTap: () {},
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    FundingButton(
+                      disabled: data == null,
+                      fundingType: FundingType.withdraw,
+                      onTap: () {},
+                    ),
+                  ],
+                )
               ],
-            )
+            ),
           ],
-        ),
-      ];
+        );
+      });
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }
