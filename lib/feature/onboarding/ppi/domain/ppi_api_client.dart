@@ -9,17 +9,17 @@ import 'ppi_user_response_request.dart';
 
 class PpiApiClient {
   Future<Response> getQuestions() async =>
-      await AskloraApiClient().get(endpoint: question);
+      await AskloraApiClient().get(endpoint: endpointQuestion);
 
   Future<Response> postQuestionAnswer(PpiUserResponseRequest request) async =>
       await AskloraApiClient()
-          .post(endpoint: addAnswer, payload: json.encode(request.toJson()));
+          .post(endpoint: endpointAddAnswer, payload: json.encode(request.toJson()));
 
   Future<Response> postBulkAnswer(List<PpiUserResponseRequest> request) async =>
       await AskloraApiClient()
-          .post(endpoint: addAnswer, payload: jsonEncode(request));
+          .post(endpoint: endpointAddAnswer, payload: jsonEncode(request));
 
   Future<Response> postBotChoice(BotSubmissionRequest request) async =>
       await AskloraApiClient()
-          .post(endpoint: addBotChoice, payload: json.encode(request.toJson()));
+          .post(endpoint: endpointAddBotChoice, payload: json.encode(request.toJson()));
 }

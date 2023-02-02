@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 
 import '../../core/utils/storage/shared_preference.dart';
+import '../../core/utils/storage/storage_keys.dart';
 import '../bloc/app_bloc.dart';
 import '../domain/user_journey_api_client.dart';
 
@@ -14,7 +15,7 @@ class UserJourneyRepository {
       ///TODO POST RESPONSE TO API
       await _userJourneyApiClient.save();
     } catch (e) {
-      await _sharedPreference.writeData('user_journey', userJourney.name);
+      await _sharedPreference.writeData(sfKeyUserJourney, userJourney.name);
     }
     return true;
   }
@@ -25,7 +26,7 @@ class UserJourneyRepository {
       await _userJourneyApiClient.get();
       return UserJourney.privacyPersonalisation;
     } catch (e) {
-      String? userJourney = await _sharedPreference.readData('user_journey');
+      String? userJourney = await _sharedPreference.readData(sfKeyUserJourney);
       return UserJourney.values
               .firstWhereOrNull((element) => element.name == userJourney) ??
           UserJourney.privacyPersonalisation;

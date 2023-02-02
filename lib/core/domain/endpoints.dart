@@ -4,13 +4,6 @@ const accounts = 'accounts/';
 const transactions = 'transactions/';
 const orders = 'orders/';
 
-//TODO later it will be changed
-const question = 'question/';
-const String addUser = 'user/add';
-const String addAnswer = 'user/add-answer';
-const String addBotChoice = 'user/add-choices';
-//
-
 const String endpointSignIn = '${v1}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';
@@ -32,4 +25,14 @@ const String endpointOrders = '$v1$orders';
 const String endpointGetUserJourney = 'get-user-journey';
 const String endpointSaveUserJourney = 'save-user-journey';
 
+/// PPI related
+
+const endpointQuestion = 'question/';
+const String endpointAddUser = 'user';
+const String endpointAddAnswer = 'user/add-answer';
+const String endpointAddBotChoice = 'user/add-choices';
+
+///
+/// URLS
+///
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';

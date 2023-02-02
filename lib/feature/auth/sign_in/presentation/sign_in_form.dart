@@ -11,6 +11,7 @@ import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../../reset_password/presentation/reset_password_screen.dart';
 import '../../sign_up/presentation/sign_up_screen.dart';
 import '../bloc/sign_in_bloc.dart';
@@ -38,7 +39,7 @@ class SignInForm extends StatelessWidget {
           break;
         case ResponseState.success:
           await SecureStorage()
-              .writeData('email', state.emailAddress)
+              .writeData(sfKeyEmail, state.emailAddress)
               .then((_) => SignInSuccessScreen.openAndRemoveAllRoute(context));
           break;
         default:
