@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 /// A [TextEditingController] extended to apply masks to currency values
-class MoneyMaskedTextController extends TextEditingController {
-  MoneyMaskedTextController({
+class CurrencyMaskedTextController extends TextEditingController {
+  CurrencyMaskedTextController({
     double? initialValue,
     this.decimalSeparator = ',',
     this.thousandSeparator = '.',

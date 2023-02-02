@@ -1,16 +1,16 @@
 part of '../custom_key_pad.dart';
 
 class CustomKeyPadButton extends StatefulWidget {
-  final MoneyMaskedTextController controller;
   final double width;
   final double height;
   final String value;
+  final Function(String) onTap;
 
   const CustomKeyPadButton(
       {required this.width,
       required this.value,
-      required this.controller,
       required this.height,
+      required this.onTap,
       Key? key})
       : super(key: key);
 
@@ -24,8 +24,7 @@ class _CustomKeyPadButtonState extends State<CustomKeyPadButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          widget.controller.text = '${widget.controller.text}${widget.value}',
+      onTap: () => widget.onTap(widget.value),
       onTapDown: (_) {
         setState(() {
           _isPressed = true;

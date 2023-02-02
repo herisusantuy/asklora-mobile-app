@@ -9,7 +9,7 @@ class WithdrawalKeyPad extends StatelessWidget {
         child: Align(
       alignment: Alignment.bottomCenter,
       child: CustomKeyPad(
-        onChanged: (value) =>
+        onChange: (value) =>
             context.read<WithdrawalBloc>().add(WithdrawalAmountChanged(value)),
       ),
     ));
