@@ -1,0 +1,102 @@
+import 'package:flutter/material.dart';
+
+import '../../../../../core/domain/pair.dart';
+import '../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../core/presentation/lora_popup_message.dart';
+import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
+import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
+import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
+import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
+import '../../gift/gift_bot_stock_welcome_screen.dart';
+
+class BotPortfolioPopUp extends StatelessWidget {
+  final BotPortfolioPopUpType botPortfolioPopUpType;
+
+  const BotPortfolioPopUp({required this.botPortfolioPopUpType, Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final BotPortfolioPopUpModel botPortfolioPopUpModel =
+        _getPopUpProps(context, botPortfolioPopUpType);
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0),
+      child: LoraPopUpMessage(
+        backgroundColor: AskLoraColors.charcoal,
+        title: botPortfolioPopUpModel.title,
+        titleColor: AskLoraColors.white,
+        subTitle: botPortfolioPopUpModel.subTitle,
+        subTitleColor: AskLoraColors.white,
+        buttonLabel: botPortfolioPopUpModel.buttonLabel,
+        onPrimaryButtonTap: botPortfolioPopUpModel.onTap,
+        buttonPrimaryType: ButtonPrimaryType.solidGreen,
+      ),
+    );
+  }
+
+  BotPortfolioPopUpModel _getPopUpProps(
+      BuildContext context, BotPortfolioPopUpType botPortfolioPopUpType) {
+    switch (botPortfolioPopUpType) {
+      case BotPortfolioPopUpType.createAccount:
+        return BotPortfolioPopUpModel(
+            title: 'No traded Botstocks',
+            subTitle:
+                'You can manage all your investments here after you start trading. Create an account and start trading.',
+            buttonLabel: 'CREATE AN ACCOUNT',
+            onTap: () => SignUpScreen.open(context));
+      case BotPortfolioPopUpType.investmentStyle:
+        return BotPortfolioPopUpModel(
+            title: 'No traded Botstocks',
+            subTitle:
+                'You can manage all your investments here after you start trading. Create an account and start trading.',
+            buttonLabel: 'DO INVESTMENT STYLE',
+            onTap: () => PpiScreen.open(context,
+                arguments: Pair(QuestionPageType.investmentStyle,
+                    QuestionPageStep.investmentStyle)));
+      case BotPortfolioPopUpType.kyc:
+        return BotPortfolioPopUpModel(
+            title: 'No traded Botstocks',
+            subTitle:
+                'You can manage all your investments here after you start trading. Create an account and start trading.',
+            buttonLabel: 'DO KYC',
+            onTap: () => KycScreen.open(context));
+      case BotPortfolioPopUpType.redeemBotStock:
+        return BotPortfolioPopUpModel(
+            title: 'Redeem Your Free Botstock',
+            subTitle:
+                'Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!',
+            buttonLabel: 'REDEEM YOUR BOTSTOCK NOW',
+            onTap: () => GiftBotStockWelcomeScreen.open(context));
+      case BotPortfolioPopUpType.startBotStock:
+        return BotPortfolioPopUpModel(
+            title: 'No trading has started!',
+            subTitle:
+                'You can manage all your investments here after you start trading. ',
+            buttonLabel: 'START A BOTSTOCK',
+            onTap: () => SignUpScreen.open(context));
+    }
+  }
+}
+
+class BotPortfolioPopUpModel {
+  final String title;
+  final String subTitle;
+  final String buttonLabel;
+  final VoidCallback onTap;
+
+  BotPortfolioPopUpModel(
+      {required this.title,
+      required this.subTitle,
+      required this.buttonLabel,
+      required this.onTap});
+}
+
+enum BotPortfolioPopUpType {
+  createAccount,
+  investmentStyle,
+  kyc,
+  redeemBotStock,
+  startBotStock
+}

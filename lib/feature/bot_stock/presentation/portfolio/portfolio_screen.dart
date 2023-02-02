@@ -12,17 +12,17 @@ import '../../../../../../core/presentation/text_fields/style/text_field_style.d
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
-import '../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
-import '../../bloc/bot_stock_bloc.dart';
 
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/custom_base_silver_box.dart';
-import '../../../../core/presentation/lora_popup_message.dart';
 import '../widgets/pair_column_text.dart';
+import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
+import 'widgets/bot_portfolio_pop_up.dart';
 
 part 'widgets/bot_portfolio_card.dart';
 
@@ -40,7 +40,7 @@ class PortfolioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => BotStockBloc(botStockRepository: BotStockRepository())
+      create: (_) => PortfolioBloc(botStockRepository: BotStockRepository())
         ..add(const FetchBotPortfolio()),
       child: CustomScaffold(
           useSafeArea: false,
@@ -62,8 +62,9 @@ class PortfolioScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const BotPortfolioFilter(),
-              const BotPortfolioList(),
+              BotPortfolioList(
+                userJourney: context.read<AppBloc>().state.userJourney,
+              ),
             ],
           )),
     );
