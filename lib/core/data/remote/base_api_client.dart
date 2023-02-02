@@ -10,28 +10,28 @@ import '../../utils/header_util.dart';
 import '../../utils/logging_interceptor.dart';
 
 class BaseApiClient {
-  late Dio dio;
+  late Dio _dio;
 
   BaseApiClient() {
-    dio = createDio();
+    _dio = _createDio();
   }
 
   Future<Response> post(
           {required String endpoint, required String payload}) async =>
-      dio.post(endpoint, data: payload);
+      _dio.post(endpoint, data: payload);
 
   Future<Response> get(
           {required String endpoint,
           Map<String, dynamic>? queryParameters}) async =>
-      dio.get(endpoint, queryParameters: queryParameters);
+      _dio.get(endpoint, queryParameters: queryParameters);
 
   Future<Response> patch(
           {required String endpoint, required String payload}) async =>
-      dio.patch(endpoint, data: payload);
+      _dio.patch(endpoint, data: payload);
 
   String getBaseUrl() => Environment().config.askLoraApiBaseUrl;
 
-  Dio createDio() {
+  Dio _createDio() {
     var dio = Dio(BaseOptions(
         baseUrl: getBaseUrl(),
         followRedirects: false,
