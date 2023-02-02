@@ -190,8 +190,7 @@ class BasicInformationScreen extends StatelessWidget {
             textInputFormatterList: [
               lettersAndNumberFormatter(),
               UpperCaseTextFormatter(),
-              LengthLimitingTextInputFormatter(
-                  state.countryNameOfCitizenship == 'HKG' ? 9 : 15)
+              LengthLimitingTextInputFormatter(9)
             ],
             errorText: state.isHkIdValid || state.idNumber.isEmpty
                 ? ''
