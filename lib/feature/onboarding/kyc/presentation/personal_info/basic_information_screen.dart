@@ -12,6 +12,7 @@ import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
+import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -70,16 +71,7 @@ class BasicInformationScreen extends StatelessWidget {
             _spaceHeight,
             _selectGender,
             _spaceHeight,
-            _textInput(
-                initialValue:
-                    context.read<BasicInformationBloc>().state.idNumber,
-                key: const Key('hk_id_number'),
-                label: 'HKID Number',
-                hintText: 'A1234567',
-                textInputFormatterList: [lettersAndNumberFormatter()],
-                onChanged: (value) => context
-                    .read<BasicInformationBloc>()
-                    .add(BasicInformationLastNameChanged(value))),
+            _hkIdNumberInput,
             _spaceHeight,
             _nationality,
             _spaceHeight,
@@ -179,6 +171,37 @@ class BasicInformationScreen extends StatelessWidget {
                     choices: Pair('Male', 'Female'),
                   ))
         ],
+      );
+
+  Widget get _hkIdNumberInput =>
+      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+        buildWhen: (previous, current) =>
+            previous.idNumber != current.idNumber ||
+            previous.countryNameOfCitizenship !=
+                current.countryNameOfCitizenship,
+        builder: (context, state) {
+          return MasterTextField(
+            key: const Key('hk_id_number'),
+            labelText: 'HKID NUmber',
+            hintText: 'A1234567',
+            initialValue: state.idNumber,
+            textCapitalization: TextCapitalization.words,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            textInputFormatterList: [
+              lettersAndNumberFormatter(),
+              UpperCaseTextFormatter(),
+              LengthLimitingTextInputFormatter(
+                  state.countryNameOfCitizenship == 'HKG' ? 9 : 15)
+            ],
+            errorText: state.isHkIdValid || state.idNumber.isEmpty
+                ? ''
+                : 'Please enter a valid HKID Number',
+            textInputType: TextInputType.text,
+            onChanged: (value) => context
+                .read<BasicInformationBloc>()
+                .add(BasicInformationIdNumberChanged(value)),
+          );
+        },
       );
 
   Widget _textInput({
