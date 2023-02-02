@@ -41,26 +41,26 @@ class BotPortfolioPopUp extends StatelessWidget {
     switch (botPortfolioPopUpType) {
       case BotPortfolioPopUpType.createAccount:
         return BotPortfolioPopUpModel(
-            title: 'No traded Botstocks',
+            title: 'Create an Account and Start Trading!',
             subTitle:
                 'You can manage all your investments here after you start trading. Create an account and start trading.',
             buttonLabel: 'CREATE AN ACCOUNT',
             onTap: () => SignUpScreen.open(context));
       case BotPortfolioPopUpType.investmentStyle:
         return BotPortfolioPopUpModel(
-            title: 'No traded Botstocks',
+            title: 'Define Your Investment Style',
             subTitle:
-                'You can manage all your investments here after you start trading. Create an account and start trading.',
-            buttonLabel: 'DO INVESTMENT STYLE',
+                'Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!',
+            buttonLabel: 'DEFINE INVESTMENT STYLE',
             onTap: () => PpiScreen.open(context,
                 arguments: Pair(QuestionPageType.investmentStyle,
                     QuestionPageStep.investmentStyle)));
       case BotPortfolioPopUpType.kyc:
         return BotPortfolioPopUpModel(
-            title: 'No traded Botstocks',
+            title: 'Continue Account Opening',
             subTitle:
-                'You can manage all your investments here after you start trading. Create an account and start trading.',
-            buttonLabel: 'DO KYC',
+                'You still need to complete your account opening until you can start trading.',
+            buttonLabel: 'CONTINUE ACCOUNT OPENING',
             onTap: () => KycScreen.open(context));
       case BotPortfolioPopUpType.redeemBotStock:
         return BotPortfolioPopUpModel(
