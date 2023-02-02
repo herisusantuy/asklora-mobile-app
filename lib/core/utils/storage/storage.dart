@@ -1,9 +1,9 @@
 abstract class Storage {
-  Future<void> writeSecureData(String key, String value);
+  Future<void> writeData(String key, String value);
 
-  Future<String?> readSecureData(String key);
+  Future<String?> readData(String key);
 
-  Future<void> deleteSecureData(String key);
+  Future<void> deleteData(String key);
 
-  Future<void> deleteAllSecureData();
+  Future<void> deleteAllData();
 }

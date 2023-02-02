@@ -181,7 +181,7 @@ void main() async {
         'emits `status success` WHEN '
         'Tap submit button',
         build: () {
-          when(secureStorage.readSecureData('email'))
+          when(secureStorage.readData('email'))
               .thenAnswer((_) => Future.value(''));
 
           /* when(accountRepository.upgradeAccount(upgradeAccountRequest))
