@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,9 +43,9 @@ class SignInForm extends StatelessWidget {
           CustomInAppNotification.show(context, state.response.message);
           break;
         case ResponseState.success:
-          UserJourney userJourney = UserJourney.values.firstWhere(
+          UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
               (section) => section.name == state.response.data.userJourney);
-          context.read<AppBloc>().add(SaveUserJourney(userJourney));
+          context.read<AppBloc>().add(SaveUserJourney(userJourney!));
           await SecureStorage()
               .writeData('email', state.emailAddress)
               .then((_) {
