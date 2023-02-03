@@ -42,11 +42,12 @@ class SignInForm extends StatelessWidget {
           CustomInAppNotification.show(context, state.response.message);
           break;
         case ResponseState.success:
+          UserJourney userJourney = UserJourney.values.firstWhere(
+              (section) => section.name == state.response.data.userJourney);
+          context.read<AppBloc>().add(SaveUserJourney(userJourney));
           await SecureStorage()
               .writeData('email', state.emailAddress)
               .then((_) {
-            UserJourney userJourney = UserJourney.values.firstWhere(
-                (section) => section.name == state.response.data.userJourney);
             switch (userJourney) {
               case UserJourney.kyc:
                 KycScreen.open(context);
@@ -58,7 +59,6 @@ class SignInForm extends StatelessWidget {
                 OtpScreen.openReplace(context, state.emailAddress);
                 break;
             }
-            context.read<AppBloc>().add(SaveUserJourney(userJourney));
           });
 
           break;
