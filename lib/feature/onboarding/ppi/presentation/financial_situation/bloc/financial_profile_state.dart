@@ -143,9 +143,6 @@ enum District {
 }
 
 class FinancialProfileState extends Equatable {
-  final String annualHouseholdIncome;
-  final String investibleLiquidAssets;
-  final FundingSource fundingSource;
   final EmploymentStatus employmentStatus;
   final NatureOfBusiness? natureOfBusiness;
   final String? natureOfBusinessDescription;
@@ -161,10 +158,7 @@ class FinancialProfileState extends Equatable {
   final String? detailInformationOfCountry;
 
   const FinancialProfileState(
-      {this.annualHouseholdIncome = '',
-      this.investibleLiquidAssets = '',
-      this.fundingSource = FundingSource.unknown,
-      this.employmentStatus = EmploymentStatus.unknown,
+      {this.employmentStatus = EmploymentStatus.unknown,
       this.natureOfBusiness,
       this.natureOfBusinessDescription = '',
       this.occupation,
@@ -197,11 +191,6 @@ class FinancialProfileState extends Equatable {
     String? detailInformationOfCountry,
   }) {
     return FinancialProfileState(
-        annualHouseholdIncome:
-            annualHouseholdIncome ?? this.annualHouseholdIncome,
-        investibleLiquidAssets:
-            investibleLiquidAssets ?? this.investibleLiquidAssets,
-        fundingSource: fundingSource ?? this.fundingSource,
         employmentStatus: employmentStatus ?? this.employmentStatus,
         natureOfBusiness: natureOfBusiness ?? this.natureOfBusiness,
         natureOfBusinessDescription:
@@ -222,9 +211,6 @@ class FinancialProfileState extends Equatable {
   @override
   List<Object> get props {
     return [
-      annualHouseholdIncome,
-      investibleLiquidAssets,
-      fundingSource,
       employmentStatus,
       natureOfBusiness ?? '',
       natureOfBusinessDescription ?? '',

@@ -89,45 +89,6 @@ class FinancialSituationQuestion extends StatelessWidget {
     );
   }
 
-  Widget get _investibleLiquidAssetsDropdown {
-    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-      buildWhen: (previous, current) =>
-          previous.investibleLiquidAssets != current.investibleLiquidAssets,
-      builder: (context, state) {
-        return CustomDropdown(
-            key: const Key('account_investible_liquid_assets_select'),
-            labelText: 'Investible Liquid Assets*',
-            hintText: 'Please select',
-            initialValue: state.investibleLiquidAssets,
-            itemsList: incomeRangeItems,
-            onChanged: (value) => context
-                .read<FinancialProfileBloc>()
-                .add(FinancialProfileInvestibleLiquidAssetChanged(value!)));
-      },
-    );
-  }
-
-  Widget get _fundingSourceDropdown {
-    return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
-      buildWhen: (previous, current) =>
-          previous.fundingSource != current.fundingSource,
-      builder: (context, state) {
-        return CustomDropdown(
-            key: const Key('account_funding_source_select'),
-            labelText: 'Account Funding Source*',
-            hintText: 'Please select',
-            itemsList: FundingSource.values.map((e) => e.value).toList()
-              ..remove(FundingSource.unknown.value),
-            initialValue: state.fundingSource != FundingSource.unknown
-                ? state.fundingSource.value
-                : '',
-            onChanged: (value) => context.read<FinancialProfileBloc>().add(
-                FinancialProfileFundingSourceChanged(FundingSource.values
-                    .firstWhere((element) => element.value == value))));
-      },
-    );
-  }
-
   Widget get _employmentStatusDropdown {
     return BlocBuilder<FinancialProfileBloc, FinancialProfileState>(
         buildWhen: (previous, current) =>

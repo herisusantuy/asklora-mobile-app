@@ -18,27 +18,6 @@ class FinancialProfileAnnualHouseholdIncomeChanged
   List<Object> get props => [annualHouseholdIncome];
 }
 
-class FinancialProfileInvestibleLiquidAssetChanged
-    extends FinancialProfileEvent {
-  final String investibleLiquidAssets;
-
-  const FinancialProfileInvestibleLiquidAssetChanged(
-      this.investibleLiquidAssets)
-      : super();
-
-  @override
-  List<Object> get props => [investibleLiquidAssets];
-}
-
-class FinancialProfileFundingSourceChanged extends FinancialProfileEvent {
-  final FundingSource fundingSource;
-
-  const FinancialProfileFundingSourceChanged(this.fundingSource) : super();
-
-  @override
-  List<Object> get props => [fundingSource];
-}
-
 class FinancialProfileEmploymentStatusChanged extends FinancialProfileEvent {
   final EmploymentStatus employmentStatus;
 
