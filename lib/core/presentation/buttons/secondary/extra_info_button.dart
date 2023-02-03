@@ -46,7 +46,7 @@ class _ExtraInfoButtonState extends State<ExtraInfoButton> {
             minHeight: widget.buttonExtraInfoSize == ButtonExtraInfoSize.big
                 ? 43
                 : 27),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(width: 1.4, color: AskLoraColors.primaryMagenta),
