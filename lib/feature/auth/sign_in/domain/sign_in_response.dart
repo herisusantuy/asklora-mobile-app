@@ -11,7 +11,7 @@ class SignInResponse extends Equatable {
   final String refresh;
   final String userJourney;
 
-  const SignInResponse(this.access, this.refresh, {this.userJourney = 'kyc'});
+  const SignInResponse(this.access, this.refresh, {required this.userJourney});
 
   factory SignInResponse.fromJson(Map<String, dynamic> json) =>
       _$SignInResponseFromJson(json);
