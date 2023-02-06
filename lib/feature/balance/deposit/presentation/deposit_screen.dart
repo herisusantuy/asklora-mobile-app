@@ -18,11 +18,11 @@ import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
+import '../../widgets/balance_base_widget.dart';
 import '../bloc/deposit_bloc.dart';
 import '../repository/deposit_repository.dart';
 import '../utils/deposit_utils.dart';
 import 'deposit_result_screen.dart';
-import 'widgets/deposit_base_widget.dart';
 import '../../../../core/utils/extensions.dart';
 
 part 'widgets/deposit_notes.dart';
@@ -56,6 +56,9 @@ class DepositScreen extends StatelessWidget {
             ///LETS ASSUME ERROR AS SUCCEED FOR NOW TO SHOW THE RESULT SCREEN
             CustomLoadingOverlay.dismiss();
             // CustomInAppNotification.show(context, state.response.message);
+            context
+                .read<AppBloc>()
+                .add(const SaveUserJourney(UserJourney.learnBotPlank));
             DepositResultScreen.open(
                 context: context,
                 arguments: Pair(depositType, StatusType.success));
@@ -63,13 +66,14 @@ class DepositScreen extends StatelessWidget {
             CustomLoadingOverlay.dismiss();
             context
                 .read<AppBloc>()
-                .add(const SaveUserJourney(UserJourney.deposit));
+                .add(const SaveUserJourney(UserJourney.learnBotPlank));
             DepositResultScreen.open(
                 context: context,
                 arguments: Pair(depositType, StatusType.success));
           }
         },
-        child: DepositBaseWidget(
+        child: BalanceBaseWidget(
+            title: 'Deposit',
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

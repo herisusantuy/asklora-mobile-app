@@ -4,7 +4,6 @@ import 'package:signature/signature.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
-import '../../../../core/styles/asklora_colors.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/basic_information/basic_information_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
