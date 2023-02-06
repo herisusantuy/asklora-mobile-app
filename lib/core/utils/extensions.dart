@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dart:ui' as ui;
 
 /// General Email Regex (RFC 5322 Official Standard)
 /// https://www.emailregex.com/
@@ -27,6 +28,20 @@ extension EmailValidator on String {
   bool isValidPassword() => passwordRegex.hasMatch(this);
 
   bool isValidOtp() => otpRegex.hasMatch(this);
+}
+
+extension StringExtension on String {
+  double textHeight(TextStyle style, double textWidth) {
+    final TextPainter textPainter = TextPainter(
+      text: TextSpan(text: this, style: style),
+      textDirection: ui.TextDirection.ltr,
+      maxLines: 1,
+    )..layout(minWidth: 0, maxWidth: double.infinity);
+
+    final countLines = (textPainter.size.width / textWidth).ceil();
+    final height = countLines * textPainter.size.height;
+    return height;
+  }
 }
 
 extension PasswordValidators on String {
