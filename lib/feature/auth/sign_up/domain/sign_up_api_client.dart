@@ -14,7 +14,7 @@ class SignUpApiClient {
 
   Future<Response> getActivationEmail(GetOtpRequest getOtpRequest) async {
     var response = await AskloraApiClient().post(
-        endpoint: endpointGetActivationEmailLink,
+        endpoint: endpointValidateEmail,
         payload: json.encode(getOtpRequest.toJson()));
     return response;
   }

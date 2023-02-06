@@ -9,6 +9,7 @@ import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../gift/gift_bot_stock_welcome_screen.dart';
+import '../domain/bot_portfolio_pop_up_model.dart';
 
 class BotPortfolioPopUp extends StatelessWidget {
   final BotPortfolioPopUpType botPortfolioPopUpType;
@@ -19,7 +20,7 @@ class BotPortfolioPopUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BotPortfolioPopUpModel botPortfolioPopUpModel =
-        _getPopUpProps(context, botPortfolioPopUpType);
+        _getBotPortfolioPopUpModel(context, botPortfolioPopUpType);
 
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
@@ -36,7 +37,7 @@ class BotPortfolioPopUp extends StatelessWidget {
     );
   }
 
-  BotPortfolioPopUpModel _getPopUpProps(
+  BotPortfolioPopUpModel _getBotPortfolioPopUpModel(
       BuildContext context, BotPortfolioPopUpType botPortfolioPopUpType) {
     switch (botPortfolioPopUpType) {
       case BotPortfolioPopUpType.createAccount:
@@ -78,25 +79,4 @@ class BotPortfolioPopUp extends StatelessWidget {
             onTap: () => SignUpScreen.open(context));
     }
   }
-}
-
-class BotPortfolioPopUpModel {
-  final String title;
-  final String subTitle;
-  final String buttonLabel;
-  final VoidCallback onTap;
-
-  BotPortfolioPopUpModel(
-      {required this.title,
-      required this.subTitle,
-      required this.buttonLabel,
-      required this.onTap});
-}
-
-enum BotPortfolioPopUpType {
-  createAccount,
-  investmentStyle,
-  kyc,
-  redeemBotStock,
-  noBotStock
 }
