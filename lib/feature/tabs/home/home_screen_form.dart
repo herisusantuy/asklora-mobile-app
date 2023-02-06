@@ -18,19 +18,19 @@ import '../../onboarding/ppi/presentation/ppi_screen.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
 import 'widgets/on_boarding_status/on_boarding_status.dart';
 
-part 'widgets/home_screen_content.dart';
+part 'widgets/home_screen_content_widget.dart';
 
-part 'widgets/home_investment_style.dart';
+part 'widgets/home_screen_investment_style_widget.dart';
 
-part 'widgets/home_pop_up_message.dart';
+part 'widgets/home_screen_pop_up_message_widget.dart';
 
-part 'widgets/home_pop_up_message_with_bot_badge.dart';
+part 'widgets/home_screen_pop_up_message_with_bot_badge_widget.dart';
 
-part 'widgets/home_horizontal_padding.dart';
+part 'widgets/home_screen_horizontal_padding_widget.dart';
 
-part 'widgets/home_milestone_completion_reminder.dart';
+part 'widgets/home_screen_milestone_completion_reminder_widget.dart';
 
-part 'widgets/home_need_help_button.dart';
+part 'widgets/home_screen_need_help_button_widget.dart';
 
 class HomeScreenForm extends StatelessWidget {
   const HomeScreenForm({super.key});
@@ -50,13 +50,13 @@ class HomeScreenForm extends StatelessWidget {
               const SizedBox(
                 height: 100,
               ),
-              const HomeHorizontalPadding(
+              const HomeScreenHorizontalPaddingWidget(
                 child: OnBoardingStatus(),
               ),
               const SizedBox(
                 height: 50,
               ),
-              const HomeScreenContent(),
+              const HomeScreenContentWidget(),
             ]),
           ),
         ],

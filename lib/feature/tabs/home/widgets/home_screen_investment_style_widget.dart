@@ -1,10 +1,10 @@
 part of '../home_screen_form.dart';
 
-class HomeInvestmentStyle extends StatelessWidget {
+class HomeScreenInvestmentStyleWidget extends StatelessWidget {
   final bool showPrimaryButton;
   final bool showAdditionalInfo;
 
-  const HomeInvestmentStyle(
+  const HomeScreenInvestmentStyleWidget(
       {this.showPrimaryButton = false,
       this.showAdditionalInfo = false,
       Key? key})
@@ -12,7 +12,7 @@ class HomeInvestmentStyle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeHorizontalPadding(
+    return HomeScreenHorizontalPaddingWidget(
       child: Column(
         children: [
           Align(

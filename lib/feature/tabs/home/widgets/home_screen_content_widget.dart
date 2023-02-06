@@ -1,6 +1,6 @@
 part of '../home_screen_form.dart';
 
-class HomeScreenContent extends StatelessWidget {
+class HomeScreenContentWidget extends StatelessWidget {
   final Widget _spaceHeightSmall = const SizedBox(
     height: 20,
   );
@@ -9,7 +9,7 @@ class HomeScreenContent extends StatelessWidget {
     height: 50,
   );
 
-  const HomeScreenContent({Key? key}) : super(key: key);
+  const HomeScreenContentWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +29,11 @@ class HomeScreenContent extends StatelessWidget {
     switch (userJourney) {
       case UserJourney.personalisation:
         return [
-          const HomeInvestmentStyle(
+          const HomeScreenInvestmentStyleWidget(
             showAdditionalInfo: true,
           ),
           _spaceHeightBig,
-          HomePopUpMessage(
+          HomeScreenPopUpMessageWidget(
             title: 'Your first Botstock is on me!',
             subTitle:
                 'Open your account to receive a free gift bot stock. Trade it without risk and experience how it helps you save time and effort. Redeem it for real after 3 months.',
@@ -42,15 +42,15 @@ class HomeScreenContent extends StatelessWidget {
             backgroundColor: AskLoraColors.primaryGreen,
           ),
           _spaceHeightSmall,
-          const HomeNeedHelpButton(),
+          const HomeScreenNeedHelpButtonWidget(),
         ];
       case UserJourney.createAccount:
         return [
-          const HomeInvestmentStyle(
+          const HomeScreenInvestmentStyleWidget(
             showAdditionalInfo: true,
           ),
           _spaceHeightBig,
-          HomePopUpMessage(
+          HomeScreenPopUpMessageWidget(
             title: 'Your first Botstock is on me!',
             subTitle:
                 'Open your account to receive a free gift bot stock. Trade it without risk and experience how it helps you save time and effort. Redeem it for real after 3 months.',
@@ -59,15 +59,15 @@ class HomeScreenContent extends StatelessWidget {
             backgroundColor: AskLoraColors.primaryGreen,
           ),
           _spaceHeightSmall,
-          const HomeNeedHelpButton(),
+          const HomeScreenNeedHelpButtonWidget(),
         ];
       case UserJourney.investmentStyle:
         return [
-          const HomeInvestmentStyle(
+          const HomeScreenInvestmentStyleWidget(
             showPrimaryButton: true,
           ),
           _spaceHeightSmall,
-          HomePopUpMessage(
+          HomeScreenPopUpMessageWidget(
             title: 'Let me Invest in you.',
             subTitle:
                 'What strategy and stocks fit you? Fill in the Investment style questions and I will figure it out right away! The more I know about you, the better recommendations I can offer!',
@@ -78,11 +78,11 @@ class HomeScreenContent extends StatelessWidget {
             backgroundColor: AskLoraColors.primaryGreen,
           ),
           _spaceHeightSmall,
-          const HomeNeedHelpButton(),
+          const HomeScreenNeedHelpButtonWidget(),
         ];
       case UserJourney.kyc:
         return [
-          HomePopUpMessage(
+          HomeScreenPopUpMessageWidget(
             title: 'Get a FREE Botstock (US\$68)!',
             subTitle:
                 'Experience automated and personalised stock trading. Receive free bot stock and redeem it after completing the required milestones.',
@@ -93,9 +93,9 @@ class HomeScreenContent extends StatelessWidget {
             backgroundColor: AskLoraColors.whiteSmoke,
           ),
           _spaceHeightBig,
-          const HomeInvestmentStyle(),
+          const HomeScreenInvestmentStyleWidget(),
           _spaceHeightSmall,
-          HomePopUpMessage(
+          HomeScreenPopUpMessageWidget(
             title: 'Start with your first milestone!',
             subTitle:
                 'Complete your account opening and experience your first trade with an AI strategy.  ',
@@ -106,11 +106,11 @@ class HomeScreenContent extends StatelessWidget {
             boxTopMargin: 105,
           ),
           _spaceHeightSmall,
-          const HomeNeedHelpButton(),
+          const HomeScreenNeedHelpButtonWidget(),
         ];
       case UserJourney.freeBotStock:
         return [
-          HomePopUpMessage(
+          HomeScreenPopUpMessageWidget(
             title: 'Get the FREE Botstock (US\$68)!',
             subTitle:
                 'Experience automated and personalised stock trading. Receive free bot stock and redeem it after completing the required milestones.',
@@ -121,33 +121,33 @@ class HomeScreenContent extends StatelessWidget {
             backgroundColor: AskLoraColors.whiteSmoke,
           ),
           _spaceHeightBig,
-          const HomeInvestmentStyle(),
+          const HomeScreenInvestmentStyleWidget(),
           _spaceHeightSmall,
-          const HomeNeedHelpButton(),
+          const HomeScreenNeedHelpButtonWidget(),
         ];
       case UserJourney.deposit:
         return [
-          const HomeMilestoneCompletionReminder(),
+          const HomeScreenMilestoneCompletionReminderWidget(),
           _spaceHeightBig,
-          const HomeInvestmentStyle(),
+          const HomeScreenInvestmentStyleWidget(),
           _spaceHeightSmall,
-          const HomeNeedHelpButton(),
+          const HomeScreenNeedHelpButtonWidget(),
         ];
       case UserJourney.learnBotPlank:
         return [
-          const HomeMilestoneCompletionReminder(),
+          const HomeScreenMilestoneCompletionReminderWidget(),
           _spaceHeightBig,
-          const HomeInvestmentStyle(),
+          const HomeScreenInvestmentStyleWidget(),
           _spaceHeightSmall,
-          const HomeNeedHelpButton(),
+          const HomeScreenNeedHelpButtonWidget(),
         ];
       default:
         return [
-          const HomeInvestmentStyle(),
+          const HomeScreenInvestmentStyleWidget(),
           _spaceHeightSmall,
-          const HomePopUpWidgetWithBotBadge(),
+          const HomeScreenPopUpWidgetWithBotBadgeWidget(),
           _spaceHeightSmall,
-          const HomeNeedHelpButton(),
+          const HomeScreenNeedHelpButtonWidget(),
         ];
     }
   }

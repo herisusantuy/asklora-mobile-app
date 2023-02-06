@@ -1,6 +1,6 @@
 part of '../home_screen_form.dart';
 
-class HomePopUpMessage extends StatelessWidget {
+class HomeScreenPopUpMessageWidget extends StatelessWidget {
   final Color backgroundColor;
   final String title;
   final String subTitle;
@@ -11,7 +11,7 @@ class HomePopUpMessage extends StatelessWidget {
   final String pngImage;
   final double boxTopMargin;
 
-  const HomePopUpMessage(
+  const HomeScreenPopUpMessageWidget(
       {required this.title,
       required this.subTitle,
       required this.backgroundColor,
@@ -26,7 +26,7 @@ class HomePopUpMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeHorizontalPadding(
+    return HomeScreenHorizontalPaddingWidget(
       child: LoraPopUpMessage(
         backgroundColor: backgroundColor,
         title: title,

@@ -1,7 +1,7 @@
 part of '../home_screen_form.dart';
 
-class HomePopUpWidgetWithBotBadge extends StatelessWidget {
-  const HomePopUpWidgetWithBotBadge({Key? key}) : super(key: key);
+class HomeScreenPopUpWidgetWithBotBadgeWidget extends StatelessWidget {
+  const HomeScreenPopUpWidgetWithBotBadgeWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

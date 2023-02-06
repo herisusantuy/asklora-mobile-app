@@ -1,9 +1,9 @@
 part of '../home_screen_form.dart';
 
-class HomeHorizontalPadding extends StatelessWidget {
+class HomeScreenHorizontalPaddingWidget extends StatelessWidget {
   final Widget child;
 
-  const HomeHorizontalPadding({required this.child, Key? key})
+  const HomeScreenHorizontalPaddingWidget({required this.child, Key? key})
       : super(key: key);
 
   @override

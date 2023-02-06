@@ -1,7 +1,7 @@
 part of '../home_screen_form.dart';
 
-class HomeNeedHelpButton extends StatelessWidget {
-  const HomeNeedHelpButton({Key? key}) : super(key: key);
+class HomeScreenNeedHelpButtonWidget extends StatelessWidget {
+  const HomeScreenNeedHelpButtonWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
