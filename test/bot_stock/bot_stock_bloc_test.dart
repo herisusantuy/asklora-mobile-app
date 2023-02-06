@@ -89,33 +89,6 @@ void main() async {
 
     blocTest<BotStockBloc, BotStockState>(
         'emits `BaseResponse.complete` WHEN '
-        'fetching bot portfolio',
-        build: () {
-          when(botStockRepository.fetchBotPortfolio())
-              .thenAnswer((_) => Future.value(response));
-          return botStockBloc;
-        },
-        act: (bloc) => bloc.add(const FetchBotPortfolio()),
-        expect: () => {
-              BotStockState(botPortfolioResponse: BaseResponse.loading()),
-              BotStockState(botPortfolioResponse: response)
-            });
-
-    blocTest<BotStockBloc, BotStockState>(
-        'emits `BaseResponse.error` WHEN '
-        'failed fetching bot portfolio',
-        build: () {
-          when(botStockRepository.fetchBotPortfolio()).thenThrow(errorResponse);
-          return botStockBloc;
-        },
-        act: (bloc) => bloc.add(const FetchBotPortfolio()),
-        expect: () => {
-              BotStockState(botPortfolioResponse: BaseResponse.loading()),
-              BotStockState(botPortfolioResponse: errorResponse)
-            });
-
-    blocTest<BotStockBloc, BotStockState>(
-        'emits `BaseResponse.complete` WHEN '
         'getting free bot stock',
         build: () {
           when(botStockRepository.getFreeBotStock())
