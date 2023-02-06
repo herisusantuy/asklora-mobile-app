@@ -1,6 +1,7 @@
-import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/financial_situation/bloc/financial_profile_bloc.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/bloc/financial_profile/financial_profile_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/utils/financial_profile_enum.dart';
 
 void main() async {
   group('Financial Profile Bloc Tests.', () {

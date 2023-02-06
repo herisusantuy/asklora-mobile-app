@@ -18,6 +18,27 @@ class FinancialProfileAnnualHouseholdIncomeChanged
   List<Object> get props => [annualHouseholdIncome];
 }
 
+class FinancialProfileInvestibleLiquidAssetChanged
+    extends FinancialProfileEvent {
+  final String investibleLiquidAssets;
+
+  const FinancialProfileInvestibleLiquidAssetChanged(
+      this.investibleLiquidAssets)
+      : super();
+
+  @override
+  List<Object> get props => [investibleLiquidAssets];
+}
+
+class FinancialProfileFundingSourceChanged extends FinancialProfileEvent {
+  final FundingSource fundingSource;
+
+  const FinancialProfileFundingSourceChanged(this.fundingSource) : super();
+
+  @override
+  List<Object> get props => [fundingSource];
+}
+
 class FinancialProfileEmploymentStatusChanged extends FinancialProfileEvent {
   final EmploymentStatus employmentStatus;
 
@@ -72,67 +93,4 @@ class FinancialProfileEmployerAddressTwoChanged extends FinancialProfileEvent {
 
   @override
   List<Object> get props => [employerAddressTwo];
-}
-
-class FinancialProfileNatureOfBusinessChanged extends FinancialProfileEvent {
-  final NatureOfBusiness natureOfBusiness;
-
-  const FinancialProfileNatureOfBusinessChanged(this.natureOfBusiness)
-      : super();
-
-  @override
-  List<Object> get props => [natureOfBusiness];
-}
-
-class FinancialProfileNatureOfBusinessDescriptionChanged
-    extends FinancialProfileEvent {
-  final String natureOfBusinessDescription;
-
-  const FinancialProfileNatureOfBusinessDescriptionChanged(
-      this.natureOfBusinessDescription)
-      : super();
-
-  @override
-  List<Object> get props => [natureOfBusinessDescription];
-}
-
-class FinancialProfileDistrictChanged extends FinancialProfileEvent {
-  final District district;
-
-  const FinancialProfileDistrictChanged(this.district) : super();
-
-  @override
-  List<Object> get props => [district];
-}
-
-class FinancialProfileRegionChanged extends FinancialProfileEvent {
-  final Region region;
-
-  const FinancialProfileRegionChanged(this.region) : super();
-
-  @override
-  List<Object> get props => [Region];
-}
-
-class FinancialProfileCountryChanged extends FinancialProfileEvent {
-  final String country;
-  final String countryName;
-
-  const FinancialProfileCountryChanged(this.country, this.countryName)
-      : super();
-
-  @override
-  List<Object> get props => [country, countryName];
-}
-
-class FinancialProfileDetailInformationOfCountryChanged
-    extends FinancialProfileEvent {
-  final String detailInformationOfCountry;
-
-  const FinancialProfileDetailInformationOfCountryChanged(
-      this.detailInformationOfCountry)
-      : super();
-
-  @override
-  List<Object> get props => [detailInformationOfCountry];
 }

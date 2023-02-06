@@ -8,6 +8,12 @@ part 'financial_profile_state.dart';
 class FinancialProfileBloc
     extends Bloc<FinancialProfileEvent, FinancialProfileState> {
   FinancialProfileBloc() : super(const FinancialProfileState()) {
+    on<FinancialProfileAnnualHouseholdIncomeChanged>(
+        _onFinancialProfileAnnualHouseholdIncomeChanged);
+    on<FinancialProfileInvestibleLiquidAssetChanged>(
+        _onFinancialProfileInvestibleLiquidAssetChanged);
+    on<FinancialProfileFundingSourceChanged>(
+        _onFinancialProfileFundingSourceChanged);
     on<FinancialProfileEmploymentStatusChanged>(
         _onFinancialProfileEmploymentStatusChanged);
     on<FinancialProfileOccupationChanged>(_onFinancialProfileOccupationChanged);
@@ -18,15 +24,24 @@ class FinancialProfileBloc
         _onFinancialProfileEmployerAddressChanged);
     on<FinancialProfileEmployerAddressTwoChanged>(
         _onFinancialProfileEmployerAddressTwoChanged);
-    on<FinancialProfileNatureOfBusinessChanged>(
-        _onFinancialProfileNatureOfBusinessChanged);
-    on<FinancialProfileNatureOfBusinessDescriptionChanged>(
-        _onFinancialProfileNatureOfBusinessDescriptionChanged);
-    on<FinancialProfileDistrictChanged>(_onFinancialProfileDistrictChanged);
-    on<FinancialProfileRegionChanged>(_onFinancialProfileRegionChanged);
-    on<FinancialProfileCountryChanged>(_onFinancialProfileCountryChanged);
-    on<FinancialProfileDetailInformationOfCountryChanged>(
-        _onFinancialProfileDetailInformationOfCountryChanged);
+  }
+
+  _onFinancialProfileAnnualHouseholdIncomeChanged(
+      FinancialProfileAnnualHouseholdIncomeChanged event,
+      Emitter<FinancialProfileState> emit) {
+    emit(state.copyWith(annualHouseholdIncome: event.annualHouseholdIncome));
+  }
+
+  _onFinancialProfileInvestibleLiquidAssetChanged(
+      FinancialProfileInvestibleLiquidAssetChanged event,
+      Emitter<FinancialProfileState> emit) {
+    emit(state.copyWith(investibleLiquidAssets: event.investibleLiquidAssets));
+  }
+
+  _onFinancialProfileFundingSourceChanged(
+      FinancialProfileFundingSourceChanged event,
+      Emitter<FinancialProfileState> emit) {
+    emit(state.copyWith(fundingSource: event.fundingSource));
   }
 
   _onFinancialProfileEmploymentStatusChanged(
@@ -61,42 +76,5 @@ class FinancialProfileBloc
       FinancialProfileEmployerAddressTwoChanged event,
       Emitter<FinancialProfileState> emit) {
     emit(state.copyWith(employerAddressTwo: event.employerAddressTwo));
-  }
-
-  _onFinancialProfileNatureOfBusinessChanged(
-      FinancialProfileNatureOfBusinessChanged event,
-      Emitter<FinancialProfileState> emit) {
-    emit(state.copyWith(natureOfBusiness: event.natureOfBusiness));
-  }
-
-  _onFinancialProfileNatureOfBusinessDescriptionChanged(
-      FinancialProfileNatureOfBusinessDescriptionChanged event,
-      Emitter<FinancialProfileState> emit) {
-    emit(state.copyWith(
-        natureOfBusinessDescription: event.natureOfBusinessDescription));
-  }
-
-  _onFinancialProfileDistrictChanged(FinancialProfileDistrictChanged event,
-      Emitter<FinancialProfileState> emit) {
-    emit(state.copyWith(district: event.district));
-  }
-
-  _onFinancialProfileRegionChanged(FinancialProfileRegionChanged event,
-      Emitter<FinancialProfileState> emit) {
-    emit(state.copyWith(region: event.region));
-  }
-
-  _onFinancialProfileCountryChanged(FinancialProfileCountryChanged event,
-      Emitter<FinancialProfileState> emit) {
-    print(event);
-    emit(
-        state.copyWith(country: event.country, countryName: event.countryName));
-  }
-
-  _onFinancialProfileDetailInformationOfCountryChanged(
-      FinancialProfileDetailInformationOfCountryChanged event,
-      Emitter<FinancialProfileState> emit) {
-    emit(state.copyWith(
-        detailInformationOfCountry: event.detailInformationOfCountry));
   }
 }
