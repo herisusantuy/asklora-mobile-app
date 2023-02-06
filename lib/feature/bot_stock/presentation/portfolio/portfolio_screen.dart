@@ -13,13 +13,13 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../bloc/bot_stock_bloc.dart';
 
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
-import '../widgets/custom_base_silver_box.dart';
 import '../../../../core/presentation/lora_popup_message.dart';
 import '../widgets/pair_column_text.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
@@ -71,40 +71,42 @@ class PortfolioScreen extends StatelessWidget {
 
   List<Widget> get _botStockDetail => [
         SafeArea(
-          child: CustomBaseSilverBox(
-              child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextNew(
-                      'Botstock Values (USD)',
-                      style: AskLoraTextStyles.body4,
+          bottom: false,
+          child: RoundColoredBox(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              content: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomTextNew(
+                          'Botstock Values (USD)',
+                          style: AskLoraTextStyles.body4,
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        CustomTextNew(
+                          '1322.05',
+                          style: AskLoraTextStyles.h2,
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: 2,
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                        color: AskLoraColors.charcoal, shape: BoxShape.circle),
+                    padding: const EdgeInsets.all(4),
+                    child: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AskLoraColors.primaryGreen,
+                      size: 22,
                     ),
-                    CustomTextNew(
-                      '1322.05',
-                      style: AskLoraTextStyles.h2,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                    color: AskLoraColors.charcoal, shape: BoxShape.circle),
-                padding: const EdgeInsets.all(4),
-                child: const Icon(
-                  Icons.keyboard_arrow_down,
-                  color: AskLoraColors.primaryGreen,
-                  size: 22,
-                ),
-              )
-            ],
-          )),
+                  )
+                ],
+              )),
         ),
         const SizedBox(
           height: 10,
@@ -112,24 +114,26 @@ class PortfolioScreen extends StatelessWidget {
         Row(
           children: [
             Expanded(
-                child: CustomBaseSilverBox(
-                    child: Column(
-              children: const [
-                PairColumnText(
-                    title1: 'Withdrawable Amount (USD)',
-                    title2: 'Buying Power (USD)',
-                    subTitle1: '1,200.00',
-                    subTitle2: '250.00'),
-                SizedBox(
-                  height: 14,
-                ),
-                PairColumnText(
-                    title1: 'Total Values',
-                    title2: 'Total P/L',
-                    subTitle1: '1,100.00',
-                    subTitle2: '10.02%'),
-              ],
-            ))),
+                child: RoundColoredBox(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
+                    content: Column(
+                      children: const [
+                        PairColumnText(
+                            title1: 'Withdrawable Amount (USD)',
+                            title2: 'Buying Power (USD)',
+                            subTitle1: '1,200.00',
+                            subTitle2: '250.00'),
+                        SizedBox(
+                          height: 14,
+                        ),
+                        PairColumnText(
+                            title1: 'Total Values',
+                            title2: 'Total P/L',
+                            subTitle1: '1,100.00',
+                            subTitle2: '10.02%'),
+                      ],
+                    ))),
             const SizedBox(
               width: 10,
             ),

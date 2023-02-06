@@ -75,12 +75,22 @@ class TransferDetailStep extends StatelessWidget {
               ),
             ),
             Flexible(
-                child: PrimaryButton(
-              label: 'VIEW DETAILS',
-              onTap: () => _showWireDetails(context),
-              buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-              buttonPrimarySize: ButtonPrimarySize.small,
-            ))
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  const String label = 'VIEW DETAILS';
+                  return SizedBox(
+                    height: label.textHeight(AskLoraTextStyles.button2, 60),
+                    child: PrimaryButton(
+                      expandableHeight: true,
+                      label: label,
+                      onTap: () => _showWireDetails(context),
+                      buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+                      buttonPrimarySize: ButtonPrimarySize.small,
+                    ),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ],

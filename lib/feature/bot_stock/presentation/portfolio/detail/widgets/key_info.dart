@@ -40,8 +40,9 @@ class KeyInfo extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          CustomBaseSilverBox(
-            child: Row(
+          RoundColoredBox(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            content: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _columnTextBigTitle(title: '+15%', subTitle: 'Avg. Return'),

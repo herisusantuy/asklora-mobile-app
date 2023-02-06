@@ -16,6 +16,7 @@ class PrimaryButton extends StatelessWidget {
   final ButtonPrimarySize buttonPrimarySize;
   final FontStyle fontStyle;
   final VoidCallback onTap;
+  final bool expandableHeight;
 
   PrimaryButton(
       {required this.label,
@@ -24,6 +25,7 @@ class PrimaryButton extends StatelessWidget {
       required this.onTap,
       this.fontStyle = FontStyle.italic,
       this.buttonPrimarySize = ButtonPrimarySize.big,
+      this.expandableHeight = false,
       Key? key})
       : super(key: key);
 
@@ -38,7 +40,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: _getSizedBoxSize.right,
+      height: expandableHeight ? null : _getSizedBoxSize.right,
       child: ElevatedButton(
           style: _getDefaultButtonStyle,
           onPressed: () {
@@ -159,11 +161,30 @@ class PrimaryButton extends StatelessWidget {
   Pair<double, double> get _getSizedBoxSize {
     switch (buttonPrimarySize) {
       case ButtonPrimarySize.small:
-        return Pair(60, 25);
+        return Pair(
+            60,
+            textHeight(
+                label,
+                buttonPrimarySize == ButtonPrimarySize.small
+                    ? AskLoraTextStyles.button2
+                    : AskLoraTextStyles.button1,
+                60));
       case ButtonPrimarySize.mid:
         return Pair(200, 40);
       case ButtonPrimarySize.big:
         return Pair(double.infinity, 55);
     }
+  }
+
+  double textHeight(String text, TextStyle style, double textWidth) {
+    final TextPainter textPainter = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: TextDirection.ltr,
+      maxLines: 1,
+    )..layout(minWidth: 0, maxWidth: double.infinity);
+
+    final countLines = (textPainter.size.width / textWidth).ceil();
+    final height = countLines * textPainter.size.height;
+    return height;
   }
 }
