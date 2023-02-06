@@ -20,8 +20,9 @@ class Performance extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        CustomBaseSilverBox(
-          child: Row(
+        RoundColoredBox(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               ColumnText(title: 'Botstock Values (USD)', subTitle: '1,322.05'),

@@ -13,12 +13,12 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 
 import '../../utils/bot_stock_utils.dart';
-import '../widgets/custom_base_silver_box.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
@@ -82,41 +82,45 @@ class PortfolioScreen extends StatelessWidget {
         return Column(
           children: [
             SafeArea(
-              child: CustomBaseSilverBox(
-                  child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomTextNew(
-                          'Total Portfolio Value (USD)',
-                          style: AskLoraTextStyles.body4,
+              bottom: false,
+              child: RoundColoredBox(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                  content: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomTextNew(
+                              'Total Portfolio Value (USD)',
+                              style: AskLoraTextStyles.body4,
+                            ),
+                            const SizedBox(
+                              height: 2,
+                            ),
+                            CustomTextNew(
+                              (data?.totalPortfolio ?? 0)
+                                  .convertToCurrencyDecimal(),
+                              style: AskLoraTextStyles.h2,
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          height: 2,
+                      ),
+                      Container(
+                        decoration: const BoxDecoration(
+                            color: AskLoraColors.charcoal,
+                            shape: BoxShape.circle),
+                        padding: const EdgeInsets.all(4),
+                        child: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: AskLoraColors.primaryGreen,
+                          size: 22,
                         ),
-                        CustomTextNew(
-                          (data?.totalPortfolio ?? 0)
-                              .convertToCurrencyDecimal(),
-                          style: AskLoraTextStyles.h2,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: AskLoraColors.charcoal, shape: BoxShape.circle),
-                    padding: const EdgeInsets.all(4),
-                    child: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: AskLoraColors.primaryGreen,
-                      size: 22,
-                    ),
-                  )
-                ],
-              )),
+                      )
+                    ],
+                  )),
             ),
             const SizedBox(
               height: 10,
@@ -124,32 +128,34 @@ class PortfolioScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                    child: CustomBaseSilverBox(
-                        child: Column(
-                  children: [
-                    PairColumnText(
-                        title1: 'Withdrawable Amount (USD)',
-                        title2: 'Buying Power (USD)',
-                        subTitle1: data?.withdrawableAmount != null
-                            ? data!.withdrawableAmount
-                                .convertToCurrencyDecimal()
-                            : '/',
-                        subTitle2: (data?.buyingPower ?? 0)
-                            .convertToCurrencyDecimal()),
-                    const SizedBox(
-                      height: 14,
-                    ),
-                    PairColumnText(
-                      title1: 'Total Values',
-                      title2: 'Total P/L',
-                      subTitle1: (data?.totalBotStockValues ?? 0)
-                          .convertToCurrencyDecimal(),
-                      subTitle2: data?.withdrawableAmount != null
-                          ? '${data!.withdrawableAmount.convertToCurrencyDecimal()}%'
-                          : '/',
-                    ),
-                  ],
-                ))),
+                    child: RoundColoredBox(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        content: Column(
+                          children: [
+                            PairColumnText(
+                                title1: 'Withdrawable Amount (USD)',
+                                title2: 'Buying Power (USD)',
+                                subTitle1: data?.withdrawableAmount != null
+                                    ? data!.withdrawableAmount
+                                        .convertToCurrencyDecimal()
+                                    : '/',
+                                subTitle2: (data?.buyingPower ?? 0)
+                                    .convertToCurrencyDecimal()),
+                            const SizedBox(
+                              height: 14,
+                            ),
+                            PairColumnText(
+                              title1: 'Total Values',
+                              title2: 'Total P/L',
+                              subTitle1: (data?.totalBotStockValues ?? 0)
+                                  .convertToCurrencyDecimal(),
+                              subTitle2: data?.withdrawableAmount != null
+                                  ? '${data!.withdrawableAmount.convertToCurrencyDecimal()}%'
+                                  : '/',
+                            ),
+                          ],
+                        ))),
                 const SizedBox(
                   width: 10,
                 ),

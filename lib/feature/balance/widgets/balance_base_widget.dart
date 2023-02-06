@@ -6,15 +6,17 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 
-class DepositBaseWidget extends StatelessWidget {
+class BalanceBaseWidget extends StatelessWidget {
   final Widget content;
   final Widget bottomButton;
   final bool useHeader;
+  final String title;
 
-  const DepositBaseWidget(
+  const BalanceBaseWidget(
       {required this.content,
       this.useHeader = true,
       required this.bottomButton,
+      this.title = '',
       Key? key})
       : super(key: key);
 
@@ -29,7 +31,7 @@ class DepositBaseWidget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 22.0),
                   child: CustomTextNew(
-                    'Deposit',
+                    title,
                     style: AskLoraTextStyles.h5
                         .copyWith(color: AskLoraColors.charcoal),
                   ),
