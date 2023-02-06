@@ -337,8 +337,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                 disablePrimaryButton: !state.enableNextButton(),
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()
-                    .add(const PageChanged(
-                        KycPageStep.financialProfileSourceOfWealth)),
+                    .add(const PageChanged(KycPageStep.disclosureSummary)),
                 secondaryButtonOnClick: () => {},
                 primaryButtonLabel: 'NEXT',
                 secondaryButtonLabel: 'SAVE FOR LATER',
