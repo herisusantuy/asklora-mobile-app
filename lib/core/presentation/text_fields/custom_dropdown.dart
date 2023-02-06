@@ -33,15 +33,14 @@ class _CustomDropdownState extends State<CustomDropdown> {
     return DropdownButtonFormField<String>(
       value: widget.initialValue.isNotEmpty ? widget.initialValue : null,
       elevation: 2,
+      isExpanded: true,
       menuMaxHeight: 200,
       onChanged: (String? newValue) {
         widget.onChanged(newValue);
       },
-      icon: const Flexible(
-        child: Icon(
-          Icons.keyboard_arrow_down,
-          color: AskLoraColors.charcoal,
-        ),
+      icon: const Icon(
+        Icons.keyboard_arrow_down,
+        color: AskLoraColors.charcoal,
       ),
       onTap: widget.onTap,
       style: TextFieldStyle.valueTextStyle,
