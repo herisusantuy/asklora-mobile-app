@@ -1,5 +1,3 @@
-// part of 'financial_profile_bloc.dart';
-
 enum Occupations {
   accountant('Accountant'),
   analyst('Analyst'),
