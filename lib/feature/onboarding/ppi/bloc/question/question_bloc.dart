@@ -18,7 +18,7 @@ enum QuestionPageStep {
   unknown
 }
 
-enum QuestionPageType { privacyAndPersonalisation, investmentStyle }
+enum QuestionPageType { privacy, personalisation, investmentStyle }
 
 class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   QuestionBloc(
@@ -68,16 +68,16 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       LoadQuestions event, Emitter<QuestionState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     var data = await _questionCollectionRepository.fetchQuestions();
+    //+1 for privacy result
+    int totalPrivacyPages = data.privacyQuestions.length + 1;
     emit(state.copyWith(
         response: BaseResponse.complete(data),
-        currentPrivacyPages:
-            _questionPageType == QuestionPageType.privacyAndPersonalisation
-                ? 1
-                : 0,
+        currentPrivacyPages: _questionPageType == QuestionPageType.privacy
+            ? 1
+            : totalPrivacyPages,
         currentInvestmentStylePages:
             _questionPageType == QuestionPageType.investmentStyle ? 1 : 0,
-        //+1 for privacy result
-        totalPrivacyPages: data.privacyQuestions.length + 1,
+        totalPrivacyPages: totalPrivacyPages,
         //+1 for personalisation result
         totalPersonalisationPages: data.personalisedQuestion.length + 1,
         //+1 for investmentStyle result

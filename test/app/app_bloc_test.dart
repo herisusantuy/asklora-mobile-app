@@ -44,15 +44,13 @@ void main() async {
       build: () {
         when(tokenRepository.isTokenValid())
             .thenAnswer((_) => Future.value(false));
-        when(userJourneyRepository.getUserJourney()).thenAnswer(
-            (_) => Future.value(UserJourney.privacyPersonalisation));
+        when(userJourneyRepository.getUserJourney())
+            .thenAnswer((_) => Future.value(UserJourney.privacy));
         return appBloc;
       },
       act: (bloc) => bloc.add(AppLaunched()),
-      expect: () => {
-        const AppState.unauthenticated(
-            userJourney: UserJourney.privacyPersonalisation)
-      },
+      expect: () =>
+          {const AppState.unauthenticated(userJourney: UserJourney.privacy)},
     );
 
     blocTest<AppBloc, AppState>(
@@ -73,8 +71,8 @@ void main() async {
       build: () {
         when(tokenRepository.isTokenValid())
             .thenAnswer((_) => Future.value(false));
-        when(userJourneyRepository.getUserJourney()).thenAnswer(
-            (_) => Future.value(UserJourney.privacyPersonalisation));
+        when(userJourneyRepository.getUserJourney())
+            .thenAnswer((_) => Future.value(UserJourney.privacy));
         when(userJourneyRepository.saveUserJourney(UserJourney.kyc))
             .thenAnswer((_) => Future.value(true));
         return appBloc;
@@ -84,8 +82,7 @@ void main() async {
         bloc.add(const SaveUserJourney(UserJourney.kyc));
       },
       expect: () => {
-        const AppState.unauthenticated(
-            userJourney: UserJourney.privacyPersonalisation),
+        const AppState.unauthenticated(userJourney: UserJourney.privacy),
         const AppState.unauthenticated(userJourney: UserJourney.kyc),
       },
     );
