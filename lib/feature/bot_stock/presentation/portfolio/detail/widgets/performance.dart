@@ -53,7 +53,7 @@ class Performance extends StatelessWidget {
         const SizedBox(
           height: 32,
         ),
-        BlocBuilder<BotStockBloc, BotStockState>(
+        BlocBuilder<PortfolioBloc, PortfolioState>(
             buildWhen: (previous, current) =>
                 previous.chartDataResponse != current.chartDataResponse,
             builder: (context, state) {

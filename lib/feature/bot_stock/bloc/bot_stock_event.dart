@@ -9,12 +9,6 @@ abstract class BotStockEvent extends Equatable {
 
 class FetchBotRecommendation extends BotStockEvent {}
 
-class FetchBotPortfolio extends BotStockEvent {
-  final BotStockFilter botStockFilter;
-
-  const FetchBotPortfolio({this.botStockFilter = BotStockFilter.all});
-}
-
 class FaqActiveIndexChanged extends BotStockEvent {
   final int faqActiveIndex;
 

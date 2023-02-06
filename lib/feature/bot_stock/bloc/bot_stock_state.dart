@@ -3,13 +3,11 @@ part of 'bot_stock_bloc.dart';
 class BotStockState extends Equatable {
   const BotStockState(
       {this.botRecommendationResponse = const BaseResponse(),
-      this.botPortfolioResponse = const BaseResponse(),
       this.getFreeBotStockResponse = const BaseResponse(),
       this.chartDataResponse = const BaseResponse(),
       this.faqActiveIndex});
 
   final BaseResponse<List<RecommendedBot>> botRecommendationResponse;
-  final BaseResponse<List<RecommendedBot>> botPortfolioResponse;
   final BaseResponse<bool> getFreeBotStockResponse;
   final BaseResponse<List<ChartDataSet>> chartDataResponse;
   final int? faqActiveIndex;
@@ -18,7 +16,6 @@ class BotStockState extends Equatable {
   List<Object?> get props {
     return [
       botRecommendationResponse,
-      botPortfolioResponse,
       faqActiveIndex,
       getFreeBotStockResponse,
       chartDataResponse
@@ -35,7 +32,6 @@ class BotStockState extends Equatable {
     return BotStockState(
         botRecommendationResponse:
             botRecommendationResponse ?? this.botRecommendationResponse,
-        botPortfolioResponse: botPortfolioResponse ?? this.botPortfolioResponse,
         getFreeBotStockResponse:
             getFreeBotStockResponse ?? this.getFreeBotStockResponse,
         chartDataResponse: chartDataResponse ?? this.chartDataResponse,
