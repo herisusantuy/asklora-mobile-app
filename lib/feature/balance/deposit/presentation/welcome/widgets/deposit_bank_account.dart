@@ -21,32 +21,7 @@ class DepositBankAccount extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: double.infinity,
-              child: RoundColoredBox(
-                title: 'Hang Seng Bank Limited',
-                content: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Column(children: [
-                    CustomTextNew(
-                      '123 - 1256789 - 07',
-                      style: AskLoraTextStyles.body2
-                          .copyWith(color: AskLoraColors.charcoal),
-                      maxLines: 2,
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    CustomTextNew(
-                      'Lillian Lambert',
-                      style: AskLoraTextStyles.body2
-                          .copyWith(color: AskLoraColors.charcoal),
-                      maxLines: 2,
-                    ),
-                  ]),
-                ),
-              ),
-            ),
+            const BankAccountCard(),
             spaceHeightSmall,
             GestureDetector(
               onTap: () => DepositWelcomeScreen.open(

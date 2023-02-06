@@ -17,6 +17,7 @@ import 'learning_bot_stock_welcome_screen.dart';
 enum LearningBotStockPageStep { welcome, question, botList, botDetail, trade }
 
 class LearningBotStockScreen extends StatelessWidget {
+  static const String route = '/learning_bot_stock_screen';
   final BotType botType;
   final JustTheController tooltipController = JustTheController();
   final LearningBotStockPageStep initialLearningBotStockPageStep;
@@ -87,4 +88,7 @@ class LearningBotStockScreen extends StatelessWidget {
           }
         });
   }
+
+  static void open({required BuildContext context, required BotType botType}) =>
+      Navigator.pushNamed(context, route, arguments: botType);
 }
