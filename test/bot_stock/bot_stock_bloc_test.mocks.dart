@@ -115,23 +115,6 @@ class MockBotStockRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>> fetchBotPortfolio() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchBotPortfolio,
-          [],
-        ),
-        returnValue:
-            _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>.value(
-                _FakeBaseResponse_0<List<_i7.RecommendedBot>>(
-          this,
-          Invocation.method(
-            #fetchBotPortfolio,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
-  @override
   _i4.Future<_i2.BaseResponse<bool>> getFreeBotStock() => (super.noSuchMethod(
         Invocation.method(
           #getFreeBotStock,
