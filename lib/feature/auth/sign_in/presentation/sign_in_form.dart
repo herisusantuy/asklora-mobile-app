@@ -45,7 +45,8 @@ class SignInForm extends StatelessWidget {
         case ResponseState.success:
           UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
               (section) => section.name == state.response.data.userJourney);
-          context.read<AppBloc>().add(SaveUserJourney(userJourney!));
+          context.read<AppBloc>().add(SaveUserJourney(
+              userJourney ?? UserJourney.privacyPersonalisation));
           await SecureStorage()
               .writeData('email', state.emailAddress)
               .then((_) {
