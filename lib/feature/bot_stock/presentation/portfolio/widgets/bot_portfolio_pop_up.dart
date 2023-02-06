@@ -69,7 +69,7 @@ class BotPortfolioPopUp extends StatelessWidget {
                 'Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!',
             buttonLabel: 'REDEEM YOUR BOTSTOCK NOW',
             onTap: () => GiftBotStockWelcomeScreen.open(context));
-      case BotPortfolioPopUpType.startBotStock:
+      case BotPortfolioPopUpType.noBotStock:
         return BotPortfolioPopUpModel(
             title: 'No trading has started!',
             subTitle:
@@ -98,5 +98,5 @@ enum BotPortfolioPopUpType {
   investmentStyle,
   kyc,
   redeemBotStock,
-  startBotStock
+  noBotStock
 }

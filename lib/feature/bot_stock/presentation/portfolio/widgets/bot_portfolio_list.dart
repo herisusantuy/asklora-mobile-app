@@ -50,8 +50,7 @@ class BotPortfolioList extends StatelessWidget {
               } else {
                 if (state.botStockFilter == BotStockFilter.all) {
                   return const BotPortfolioPopUp(
-                      botPortfolioPopUpType:
-                          BotPortfolioPopUpType.startBotStock);
+                      botPortfolioPopUpType: BotPortfolioPopUpType.noBotStock);
                 } else {
                   return Column(
                     children: [
