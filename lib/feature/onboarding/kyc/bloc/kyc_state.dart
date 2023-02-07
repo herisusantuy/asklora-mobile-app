@@ -27,6 +27,8 @@ enum KycPageStep {
   disclosureAffiliationCommissions,
   disclosureRejected,
   disclosureSummary,
+  financialProfileEmployment,
+  financialProfileSourceOfWealth,
   verifyIdentity,
   signBrokerAgreements,
   signRiskDisclosureAgreements,

@@ -11,6 +11,8 @@ import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
+import '../../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../../learning/learning_bot_stock_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
@@ -114,6 +116,13 @@ class OnBoardingStatus extends StatelessWidget {
   OnBoardingStatusModel _onBoardingStatusModel(
       BuildContext context, UserJourney userJourney) {
     switch (userJourney) {
+      case UserJourney.personalisation:
+        return OnBoardingStatusModel(
+          title: 'START INVESTING',
+          subTitle: 'Answer Personalisation Questions',
+          onTap: () => SignUpScreen.open(context),
+          progress: 0.05,
+        );
       case UserJourney.createAccount:
         return OnBoardingStatusModel(
           title: 'START INVESTING',
@@ -156,7 +165,10 @@ class OnBoardingStatus extends StatelessWidget {
         return OnBoardingStatusModel(
           title: 'START INVESTING',
           subTitle: 'Learn to Invest with Bot - Plank',
-          onTap: () {},
+          onTap: () => LearningBotStockScreen.open(
+            context: context,
+            botType: BotType.plank,
+          ),
           progress: 0.3,
         );
       default:

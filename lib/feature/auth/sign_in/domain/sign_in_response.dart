@@ -7,11 +7,9 @@ part 'sign_in_response.g.dart';
 class SignInResponse extends Equatable {
   final String access;
   final String refresh;
+  final String userJourney;
 
-  const SignInResponse(
-    this.access,
-    this.refresh,
-  );
+  const SignInResponse(this.access, this.refresh, this.userJourney);
 
   factory SignInResponse.fromJson(Map<String, dynamic> json) =>
       _$SignInResponseFromJson(json);
@@ -19,5 +17,5 @@ class SignInResponse extends Equatable {
   Map<String, dynamic> toJson() => _$SignInResponseToJson(this);
 
   @override
-  List<Object?> get props => [access, refresh];
+  List<Object?> get props => [access, refresh, userJourney];
 }
