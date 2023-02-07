@@ -51,9 +51,9 @@ class DisclosureAffiliationCommissionScreen extends StatelessWidget {
                   context
                       .read<DisclosureAffiliationBloc>()
                       .add(const AffiliatedCommissionChanged(false));
-                  context
-                      .read<NavigationBloc<KycPageStep>>()
-                      .add(const PageChanged(KycPageStep.disclosureSummary));
+                  context.read<NavigationBloc<KycPageStep>>().add(
+                      const PageChanged(
+                          KycPageStep.financialProfileEmployment));
                 },
                 onSaveForLater: () => CarouselScreen.open(context),
               )),
