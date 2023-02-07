@@ -246,7 +246,8 @@ class BasicInformationScreen extends StatelessWidget {
         state.dateOfBirth.isEmpty ||
         state.countryCode.isEmpty ||
         state.phoneNumber.isEmpty ||
-        state.countryNameOfBirth.isEmpty) {
+        state.countryNameOfBirth.isEmpty ||
+        !state.isHkIdValid) {
       return true;
     } else {
       return false;

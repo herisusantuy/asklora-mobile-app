@@ -20,7 +20,7 @@ import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affilia
 import 'financial_profile/disclosure_affiliation_person_screen.dart';
 import 'financial_profile/disclosure_summary_screen.dart';
 import 'financial_profile/financial_profile_employment_question.dart';
-import 'gift_bot_stock_screen.dart';
+import 'kyc_result_screen.dart';
 import 'kyc_progress/kyc_progress_screen.dart';
 import 'kyc_rejected_screen.dart';
 import 'kyc_summary_screen.dart';
@@ -209,7 +209,7 @@ class KycScreen extends StatelessWidget {
                     context.read<DisclosureAffiliationBloc>().state,
               );
             case KycPageStep.giftBotStock:
-              return const GiftBotStockScreen();
+              return const KycResultScreen();
             default:
               return const SizedBox.shrink();
           }
