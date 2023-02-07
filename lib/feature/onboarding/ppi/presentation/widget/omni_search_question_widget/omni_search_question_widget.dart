@@ -15,7 +15,7 @@ import 'widgets/custom_choice_chips.dart';
 
 class OmniSearchQuestionWidget extends StatelessWidget {
   final String defaultAnswer;
-  final QuestionCollection questionCollection;
+  final Question question;
   final Function() onSubmitSuccess;
   final Function() onCancel;
   final TextInputType textInputType;
@@ -24,7 +24,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
 
   OmniSearchQuestionWidget(
       {this.defaultAnswer = '',
-      required this.questionCollection,
+      required this.question,
       required this.onSubmitSuccess,
       required this.onCancel,
       this.textInputType = TextInputType.text,
@@ -68,7 +68,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                         Column(
                           children: [
                             QuestionTitle(
-                              question: questionCollection.questions!.question!,
+                              question: question.question!,
                               paddingBottom: 24,
                             ),
                             const LoraRoundedCornerBanner(

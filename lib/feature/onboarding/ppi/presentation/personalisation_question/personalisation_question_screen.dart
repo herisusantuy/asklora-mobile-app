@@ -9,7 +9,6 @@ import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
-import '../widget/slider_question_widget/slider_question_widget.dart';
 import 'bloc/personalisation_question_bloc.dart';
 
 class PersonalisationQuestionScreen extends StatelessWidget {
@@ -50,13 +49,13 @@ class PersonalisationQuestionScreen extends StatelessWidget {
                   },
                   builder: (context, state) {
                     if (state is OnNextPersonalizationQuestion) {
-                      QuestionCollection questionCollection = state.question;
+                      Question question = state.question;
                       switch (state.questionType) {
                         case (QuestionType.choices):
                           //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                           return MultipleChoiceQuestionWidget(
-                            key: Key(questionCollection.uid!),
-                            questionCollection: questionCollection,
+                            key: Key(question.questionId!),
+                            question: question,
                             defaultChoiceIndex: -1,
                             onSubmitSuccess: () => onSubmitSuccess(context),
                             onCancel: () => onCancel(context),
@@ -65,17 +64,17 @@ class PersonalisationQuestionScreen extends StatelessWidget {
                           //TODO defaultAnswer should be from answered question when endpoint is ready
                           return DescriptiveQuestionWidget(
                               defaultAnswer: '',
-                              questionCollection: questionCollection,
+                              question: question,
                               onSubmitSuccess: () => onSubmitSuccess(context),
                               onCancel: () => onCancel(context));
                         case (QuestionType.slider):
-                          return SliderQuestionWidget(
-                            key: Key(questionCollection.uid!),
-                            questionCollection: questionCollection,
-                            defaultChoiceIndex: -1,
-                            onSubmitSuccess: () => onSubmitSuccess(context),
-                            onCancel: () => onCancel(context),
-                          );
+                        // return SliderQuestionWidget(
+                        //   key: Key(question.questionId!),
+                        //   question: question,
+                        //   defaultChoiceIndex: -1,
+                        //   onSubmitSuccess: () => onSubmitSuccess(context),
+                        //   onCancel: () => onCancel(context),
+                        // );
                         default:
                           return const SizedBox.shrink();
                       }

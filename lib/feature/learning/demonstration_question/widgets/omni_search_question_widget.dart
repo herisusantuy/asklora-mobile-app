@@ -12,7 +12,7 @@ import '../../../../../core/presentation/custom_snack_bar.dart';
 
 class OmniSearchQuestionWidget extends StatelessWidget {
   final String defaultAnswer;
-  final QuestionCollection questionCollection;
+  final Question question;
   final TextInputType textInputType;
   final List<TextInputFormatter>? textInputFormatterList;
   final TextEditingController keywordController = TextEditingController();
@@ -21,7 +21,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
   OmniSearchQuestionWidget(
       {required this.tooltipController,
       this.defaultAnswer = '',
-      required this.questionCollection,
+      required this.question,
       this.textInputType = TextInputType.text,
       this.textInputFormatterList,
       Key? key})
@@ -46,7 +46,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
         child: Column(
           children: [
             QuestionTitle(
-              question: questionCollection.questions!.question!,
+              question: question.question!,
               paddingBottom: 24,
             ),
             const LoraRoundedCornerBanner(

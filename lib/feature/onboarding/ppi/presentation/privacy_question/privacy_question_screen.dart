@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
+import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../financial_situation/bloc/financial_profile_bloc.dart';
@@ -45,13 +46,14 @@ class PrivacyQuestionScreen extends StatelessWidget {
                     }
                   }, builder: (context, state) {
                     if (state is OnNextQuestion) {
-                      QuestionCollection questionCollection = state.question;
+                      Question question = state.question;
+                      debugPrint('Krishna Privacy Question Screen UserResponseBloc ${context.read<UserResponseBloc>().state.test?.length}');
                       switch (state.questionType) {
                         case (QuestionType.choices):
                           //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                           return MultipleChoiceQuestionWidget(
-                              key: Key(questionCollection.uid!),
-                              questionCollection: questionCollection,
+                              key: Key(question.questionId!),
+                              question: question,
                               defaultChoiceIndex: -1,
                               onCancel: () => onCancel(context),
                               onSubmitSuccess: () => onSubmitSuccess(context));
@@ -59,7 +61,7 @@ class PrivacyQuestionScreen extends StatelessWidget {
                           //TODO defaultAnswer should be from answered question when endpoint is ready
                           return DescriptiveQuestionWidget(
                             defaultAnswer: '',
-                            questionCollection: questionCollection,
+                            question: question,
                             onCancel: () => onCancel(context),
                             onSubmitSuccess: () => onSubmitSuccess(context),
                           );
@@ -67,7 +69,7 @@ class PrivacyQuestionScreen extends StatelessWidget {
                           return BlocProvider(
                               create: (_) => FinancialProfileBloc(),
                               child: FinancialSituationQuestion(
-                                questionCollection: questionCollection,
+                                question: question,
                                 onTapNext: () => onSubmitSuccess(context),
                                 onCancel: () => onCancel(context),
                               ));

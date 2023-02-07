@@ -5,8 +5,8 @@ enum QuestionSection {
   openness('openness'),
   conscientiousness('conscientiousness'),
   neuroticism('neuroticism'),
-  investmentStyle('investment_style'),
-  feedBack('feedback');
+  investmentStyle('investment_style');
+  // feedBack('feedback');
 
   final String value;
 
@@ -18,8 +18,8 @@ enum QuestionType {
   slider('slider'),
   descriptive('descriptive'),
   omniSearch('omnisearch'),
-  unique('unique'),
-  feedBack('feedback');
+  unique('unique');
+  // feedBack('feedback');
 
   final String value;
 
@@ -33,78 +33,78 @@ class Fixture {
 
   Fixture._();
 
-  List<QuestionCollection> privacyQuestions = [];
-  List<QuestionCollection> personalisedQuestion = [];
-  List<QuestionCollection> investmentStyleQuestion = [];
-  List<QuestionCollection> feedBackQuestion = [];
+  List<Question> privacyQuestions = [];
+  List<Question> personalisedQuestion = [];
+  List<Question> investmentStyleQuestion = [];
 
-  List<QuestionCollection> get getFeedBackQuestions {
-    return feedBackQuestion;
-  }
+  // List<QuestionCollection> feedBackQuestion = [];
 
-  set setFeedBackQuestions(QuestionCollection questionCollection) {
-    feedBackQuestion.add(questionCollection);
-  }
+  // List<QuestionCollection> get getFeedBackQuestions {
+  //   return feedBackQuestion;
+  // }
+  //
+  // set setFeedBackQuestions(QuestionCollection questionCollection) {
+  //   feedBackQuestion.add(questionCollection);
+  // }
 
-  List<QuestionCollection> get getPrivacyQuestions {
+  List<Question> get getPrivacyQuestions {
     return privacyQuestions;
   }
 
-  set setPrivacyQuestions(QuestionCollection questionCollection) {
-    privacyQuestions.add(questionCollection);
+  set setPrivacyQuestions(Question question) {
+    privacyQuestions.add(question);
   }
 
-  List<QuestionCollection> get getPersonalisedQuestion {
+  List<Question> get getPersonalisedQuestion {
     return personalisedQuestion;
   }
 
-  set setPersonalisedQuestion(QuestionCollection questionCollection) {
-    personalisedQuestion.add(questionCollection);
+  set setPersonalisedQuestion(Question question) {
+    personalisedQuestion.add(question);
   }
 
-  List<QuestionCollection> get getInvestmentStyleQuestion {
+  List<Question> get getInvestmentStyleQuestion {
     return investmentStyleQuestion;
   }
 
-  set setInvestmentStyleQuestion(QuestionCollection questionCollection) {
-    investmentStyleQuestion.add(questionCollection);
+  set setInvestmentStyleQuestion(Question question) {
+    investmentStyleQuestion.add(question);
   }
 
   void clearQuestion() {
     investmentStyleQuestion.clear();
     personalisedQuestion.clear();
     privacyQuestions.clear();
-    feedBackQuestion.clear();
+    // feedBackQuestion.clear();
   }
 
-  Fixture fixture(List<QuestionCollection> questionCollection) {
+  Fixture fix(List<Question> questionCollection) {
     clearQuestion();
     for (var element in questionCollection) {
-      if (element.questions!.section == QuestionSection.privacy.value) {
+      if (element.section == QuestionSection.privacy.value) {
         setPrivacyQuestions = element;
       }
-      if (element.questions!.section == QuestionSection.openness.value ||
-          element.questions!.section ==
-              QuestionSection.conscientiousness.value ||
-          element.questions!.section == QuestionSection.neuroticism.value) {
+      if (element.section == QuestionSection.openness.value ||
+          element.section == QuestionSection.conscientiousness.value ||
+          element.section == QuestionSection.neuroticism.value) {
         setPersonalisedQuestion = element;
       }
-      if (element.questions!.section == QuestionSection.investmentStyle.value) {
+      if (element.section == QuestionSection.investmentStyle.value) {
         setInvestmentStyleQuestion = element;
       }
-      if (element.questions!.section == QuestionSection.feedBack.value) {
-        setFeedBackQuestions = element;
-      }
+      // if (element.section == QuestionSection.feedBack.value) {
+      //   setFeedBackQuestions = element;
+      // }
     }
     return this;
   }
 
   int indexOfPrivacyQuestionsByUid(String uid) =>
-      privacyQuestions.indexWhere((question) => question.uid == uid);
+      privacyQuestions.indexWhere((question) => question.questionId == uid);
 
   int indexOfPersonalisedQuestionsByUid(String uid) =>
-      personalisedQuestion.indexWhere((question) => question.uid == uid);
+      personalisedQuestion.indexWhere((question) => question.questionId == uid);
 
-  int indexOfInvestmentStyleQuestionByUid(String uid) =>
-      investmentStyleQuestion.indexWhere((question) => question.uid == uid);
+  int indexOfInvestmentStyleQuestionByUid(String uid) => investmentStyleQuestion
+      .indexWhere((question) => question.questionId == uid);
 }

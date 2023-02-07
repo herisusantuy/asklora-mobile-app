@@ -1,95 +1,122 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+import '../../../../core/utils/storage/shared_preference.dart';
+
+part 'question.g.dart';
+
+@JsonSerializable()
 class QuestionCollection {
-  String? collection;
-  Question? questions;
-  String? uid;
+  @JsonKey(name: 'data')
+  List<Question> questions;
 
-  QuestionCollection({this.collection, this.questions, this.uid});
+  QuestionCollection(this.questions);
 
-  QuestionCollection.fromJson(Map<String, dynamic> json) {
-    collection = json['collection'];
-    questions =
-        json['questions'] != null ? Question.fromJson(json['questions']) : null;
-    uid = json['uid'];
-  }
+  factory QuestionCollection.fromJson(Map<String, dynamic> json) =>
+      _$QuestionCollectionFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['collection'] = collection;
-    if (questions != null) {
-      data['questions'] = questions!.toJson();
-    }
-    data['uid'] = uid;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$QuestionCollectionToJson(this);
 }
 
+@JsonSerializable()
 class Question {
+  @JsonKey(name: 'answers')
   List<Choices>? choices;
   String? hints;
   String? question;
   String? section;
-  String? types;
+  @JsonKey(name: 'question_type')
+  String? questionType;
   String? questionIndex;
+  @JsonKey(name: 'question_id')
+  String? questionId;
+  int selectedOption;
 
-  Question(
-      {this.choices,
-      this.hints,
-      this.question,
-      this.section,
-      this.types,
-      this.questionIndex});
+  Question({
+    this.choices,
+    this.hints,
+    this.question,
+    this.section,
+    this.questionType,
+    this.questionIndex,
+    this.questionId,
+    this.selectedOption = -1,
+  });
 
-  Question.fromJson(Map<String, dynamic> json) {
-    if (json['choices'] != null) {
-      choices = <Choices>[];
-      json['choices'].forEach((v) {
-        choices!.add(Choices.fromJson(v));
-      });
-    }
-    hints = json['hints'];
-    question = json['question'];
-    section = json['section'];
-    types = json['types'];
-    questionIndex = json['question_index'].toString();
+  factory Question.fromJson(Map<String, dynamic> json) =>
+      _$QuestionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QuestionToJson(this);
+
+  Future<bool> save() async {
+    debugPrint('Krishna save question ${jsonEncode(toJson())}');
+    return await SharedPreference()
+        .writeData(questionId!, jsonEncode(toJson()));
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (choices != null) {
-      data['choices'] = choices!.map((v) => v.toJson()).toList();
+  Future<Question?> getCachedQuestion() async {
+    var data = await SharedPreference().readData(questionId!);
+    if (data == null) {
+      return null;
     }
-    data['hints'] = hints;
-    data['question'] = question;
-    data['section'] = section;
-    data['types'] = types;
-    data['question_index'] = questionIndex;
-    return data;
+    debugPrint('Krishna getCachedQuestion ${jsonDecode(jsonEncode(data))}');
+    return Future.value(Question.fromJson(jsonDecode(data)));
+  }
+
+  Question copyWith({
+    List<Choices>? choices,
+    String? hints,
+    String? question,
+    String? section,
+    String? questionType,
+    String? questionIndex,
+    String? questionId,
+    int? selectedOption,
+  }) {
+    return Question(
+      choices: choices ?? this.choices,
+      hints: hints ?? this.hints,
+      question: question ?? this.question,
+      section: section ?? this.section,
+      questionType: questionType ?? this.questionType,
+      questionIndex: questionIndex ?? this.questionIndex,
+      questionId: questionId ?? this.questionId,
+      selectedOption: selectedOption ?? this.selectedOption,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'Choices { hints: $hints, question: $question, section: $section, questionType: $questionType, selectedOption: $selectedOption }';
   }
 }
 
 class Choices {
   String? name;
-  String? point;
+  String? score;
   bool? selectable;
 
-  Choices({this.name, this.point, this.selectable});
+  Choices({this.name, this.score, this.selectable});
 
   Choices.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    point = json['point'];
+    score = json['score'].toString();
     selectable = json['selectable'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
-    data['point'] = point;
+    data['score'] = score;
     data['selectable'] = selectable;
     return data;
   }
 
   @override
   String toString() {
-    return 'Choices{name: $name, point: $point}';
+    return 'Choices { name: $name, score: $score }';
   }
 }

@@ -47,13 +47,13 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                 }
               }, builder: (context, state) {
                 if (state is OnNextQuestion) {
-                  QuestionCollection questionCollection = state.question;
+                  Question question = state.question;
                   switch (state.questionType) {
                     case (QuestionType.choices):
                       //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                       return MultipleChoiceQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        questionCollection: questionCollection,
+                        key: Key(question.questionId!),
+                        question: question,
                         defaultChoiceIndex: -1,
                         onSubmitSuccess: () => onSubmitSuccess(context),
                         onCancel: () => onCancel(context),
@@ -61,15 +61,15 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                     case (QuestionType.descriptive):
                       //TODO defaultAnswer should be from answered question when endpoint is ready
                       return DescriptiveQuestionWidget(
-                          key: Key(questionCollection.uid!),
+                          key: Key(question.question!),
                           defaultAnswer: '',
-                          questionCollection: questionCollection,
+                          question: question,
                           onCancel: () => onCancel(context),
                           onSubmitSuccess: () => onSubmitSuccess(context));
                     case (QuestionType.omniSearch):
                       return OmniSearchQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        questionCollection: questionCollection,
+                        key: Key(question.questionId!),
+                        question: question,
                         onSubmitSuccess: () => onSubmitSuccess(context),
                         onCancel: () => onCancel(context),
                       );

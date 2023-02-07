@@ -11,13 +11,13 @@ import '../question_title.dart';
 import 'bloc/slider_question_widget_bloc.dart';
 
 class SliderQuestionWidget extends StatelessWidget {
-  final QuestionCollection questionCollection;
+  final Question question;
   final int defaultChoiceIndex;
   final Function onSubmitSuccess;
   final Function() onCancel;
 
   const SliderQuestionWidget(
-      {required this.questionCollection,
+      {required this.question,
       this.defaultChoiceIndex = 0,
       required this.onSubmitSuccess,
       required this.onCancel,
@@ -41,15 +41,14 @@ class SliderQuestionWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     QuestionTitle(
-                      question: questionCollection.questions!.question!,
+                      question: question.question!,
                     ),
                     Expanded(
                       child: Align(
                         alignment: Alignment.topCenter,
                         child: ListView.builder(
                             key: const Key('multiple_choice_question_builder'),
-                            itemCount:
-                                questionCollection.questions!.choices!.length,
+                            itemCount: question.choices!.length,
                             reverse: true,
                             shrinkWrap: true,
                             itemBuilder: (BuildContext context, int index) =>
@@ -62,7 +61,7 @@ class SliderQuestionWidget extends StatelessWidget {
                                           current.defaultChoiceIndex,
                                       builder: (context, state) => ChoiceChip(
                                             key: Key(
-                                                '${questionCollection.uid}-$index'),
+                                                '${question.questionId}-$index'),
                                             labelPadding:
                                                 const EdgeInsets.symmetric(
                                                     vertical: 5,
@@ -70,8 +69,7 @@ class SliderQuestionWidget extends StatelessWidget {
                                             label: SizedBox(
                                               width: double.infinity,
                                               child: CustomText(
-                                                questionCollection.questions!
-                                                    .choices![index].point!,
+                                                question.choices![index].score!,
                                                 color: index ==
                                                         state.defaultChoiceIndex
                                                     ? Colors.white
@@ -114,15 +112,14 @@ class SliderQuestionWidget extends StatelessWidget {
                               onNext: () => context
                                   .read<UserResponseBloc>()
                                   .add(SendResponse(PpiUserResponseRequest(
-                                    questionId: questionCollection.uid!,
-                                    section:
-                                        questionCollection.questions!.section!,
-                                    types: questionCollection.questions!.types!,
-                                    points: questionCollection
-                                        .questions!
-                                        .choices![state.defaultChoiceIndex]
-                                        .point!,
-                                  ))),
+                                      questionId: question.questionId!,
+                                      section: question.section!,
+                                      types: question.questionType!,
+                                      points: ''
+                                      // points: question
+                                      //     .choices![state.defaultChoiceIndex]
+                                      //     .score!,
+                                      ))),
                               onCancel: onCancel,
                             )),
                   ],

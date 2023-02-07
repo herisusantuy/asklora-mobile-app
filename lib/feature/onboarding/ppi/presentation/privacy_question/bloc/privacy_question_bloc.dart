@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/fixture.dart';
@@ -18,29 +19,41 @@ class PrivacyQuestionBloc
   }
 
   int _privacyQuestionIndex;
-  List<QuestionCollection> privacyQuestions = Fixture().privacyQuestions;
+  List<Question> privacyQuestions = Fixture().privacyQuestions;
 
   void _onNavigationStepChanged(
-      NextQuestion event, Emitter<PrivacyQuestionState> emit) {
+      NextQuestion event, Emitter<PrivacyQuestionState> emit) async {
+    debugPrint(
+        'Krishna _onNavigationStepChanged before ${_privacyQuestionIndex}');
     ++_privacyQuestionIndex;
+    debugPrint(
+        'Krishna _onNavigationStepChanged after ${_privacyQuestionIndex}');
+
+    debugPrint(
+        'Krishna _onNavigationStepChanged after length ${privacyQuestions.length}');
     if (_privacyQuestionIndex < privacyQuestions.length) {
-      QuestionCollection question = privacyQuestions[_privacyQuestionIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.choices, question,
+      Question question = privacyQuestions[_privacyQuestionIndex];
+      debugPrint('Krishna _onNavigationStepChanged');
+      // var i = await question.getCachedQuestion();
+
+      // debugPrint('Krishna _onNavigationStepChanged default selected option ${i?.selectedOption}');
+      if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(
+          QuestionType.choices,
+          question,
+          privacyQuestionIndex: _privacyQuestionIndex,
+        ));
+      } else if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
+      } else if (question.questionType == QuestionType.descriptive.value) {
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
+      } else if (question.questionType == QuestionType.slider.value) {
+        emit(OnNextQuestion<Question>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
-            privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.unique.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.unique, question,
+      } else if (question.questionType == QuestionType.unique.value) {
+        emit(OnNextQuestion<Question>(QuestionType.unique, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       }
     } else {
@@ -49,22 +62,23 @@ class PrivacyQuestionBloc
   }
 
   void _onNavigationPop(
-      PreviousQuestion event, Emitter<PrivacyQuestionState> emit) {
+      PreviousQuestion event, Emitter<PrivacyQuestionState> emit) async {
     --_privacyQuestionIndex;
     if (_privacyQuestionIndex >= 0) {
-      QuestionCollection question = privacyQuestions[_privacyQuestionIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.choices, question,
+      Question question = privacyQuestions[_privacyQuestionIndex];
+      // var i = await question.getCachedQuestion();
+      debugPrint('Krishna _onNavigationPop');
+      if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(QuestionType.choices, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
+      } else if (question.questionType == QuestionType.descriptive.value) {
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
+      } else if (question.questionType == QuestionType.slider.value) {
+        emit(OnNextQuestion<Question>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.unique.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.unique, question,
+      } else if (question.questionType == QuestionType.unique.value) {
+        emit(OnNextQuestion<Question>(QuestionType.unique, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       }
     } else if (_privacyQuestionIndex < 0) {

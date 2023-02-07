@@ -11,13 +11,13 @@ import '../question_title.dart';
 import 'bloc/multiple_question_widget_bloc.dart';
 
 class MultipleChoiceQuestionWidget extends StatelessWidget {
-  final QuestionCollection questionCollection;
+  final Question question;
   final int defaultChoiceIndex;
   final Function onSubmitSuccess;
   final Function() onCancel;
 
   const MultipleChoiceQuestionWidget(
-      {required this.questionCollection,
+      {required this.question,
       this.defaultChoiceIndex = 0,
       required this.onSubmitSuccess,
       required this.onCancel,
@@ -53,26 +53,23 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                             Column(
                               children: [
                                 QuestionTitle(
-                                  question:
-                                      questionCollection.questions!.question!,
+                                  question: question.question!,
                                 ),
-                                ...questionCollection.questions!.choices!
-                                    .map((e) {
-                                  int index = questionCollection
-                                      .questions!.choices!
-                                      .indexOf(e);
+                                ...question.choices!.map((e) {
+                                  int index = question.choices!.indexOf(e);
                                   return Container(
                                     margin: const EdgeInsets.symmetric(
                                         vertical: 10),
                                     child: SecondaryMultipleChoiceButton(
-                                      key: Key(
-                                          '${questionCollection.uid}-$index}'),
-                                      active: index == state.defaultChoiceIndex,
+                                      key: Key('${question.question}-$index}'),
+                                      active: int.parse(e.score!) ==
+                                          state.defaultChoiceIndex,
                                       label: e.name!,
                                       onTap: () {
                                         context
                                             .read<MultipleQuestionWidgetBloc>()
-                                            .add(AnswerChanged(index));
+                                            .add(AnswerChanged(
+                                                int.parse(e.score!)));
                                       },
                                     ),
                                   );
@@ -91,21 +88,25 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                       key: const Key(
                                           'question_navigation_button_widget'),
                                       onSubmitSuccess: onSubmitSuccess,
-                                      onNext: () => context
-                                          .read<UserResponseBloc>()
-                                          .add(SendResponse(
-                                              PpiUserResponseRequest(
-                                            questionId: questionCollection.uid!,
-                                            section: questionCollection
-                                                .questions!.section!,
-                                            types: questionCollection
-                                                .questions!.types!,
-                                            points: questionCollection
-                                                .questions!
-                                                .choices![
-                                                    state.defaultChoiceIndex]
-                                                .point!,
-                                          ))),
+                                      onNext: () {
+                                        debugPrint(
+                                            'Krishna testing multiple_question_widget ${state.defaultChoiceIndex}');
+                                        context.read<UserResponseBloc>().add(
+                                            SaveUserResponse(question,
+                                                state.defaultChoiceIndex));
+
+                                        // context.read<UserResponseBloc>().add(
+                                        //         SendResponse(
+                                        //             PpiUserResponseRequest(
+                                        //       questionId: question.questionId!,
+                                        //       section: question.section!,
+                                        //       types: question.questionType!,
+                                        //       points: question
+                                        //           .choices![
+                                        //               0]
+                                        //           .score!,
+                                        //     )));
+                                      },
                                       onCancel: onCancel,
                                     )),
                           ],

@@ -13,7 +13,7 @@ import 'bloc/descriptive_question_widget_bloc.dart';
 
 class DescriptiveQuestionWidget extends StatelessWidget {
   final String defaultAnswer;
-  final QuestionCollection questionCollection;
+  final Question question;
   final Function onSubmitSuccess;
   final Function() onCancel;
   final TextInputType textInputType;
@@ -21,7 +21,7 @@ class DescriptiveQuestionWidget extends StatelessWidget {
 
   const DescriptiveQuestionWidget(
       {this.defaultAnswer = '',
-      required this.questionCollection,
+      required this.question,
       required this.onSubmitSuccess,
       required this.onCancel,
       this.textInputType = TextInputType.text,
@@ -54,7 +54,7 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                     Column(
                       children: [
                         QuestionTitle(
-                          question: questionCollection.questions!.question!,
+                          question: question.question!,
                         ),
                         const SizedBox(
                           height: 16,
@@ -83,10 +83,9 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                               onNext: () => context
                                   .read<UserResponseBloc>()
                                   .add(SendResponse(PpiUserResponseRequest(
-                                    questionId: questionCollection.uid!,
-                                    section:
-                                        questionCollection.questions!.section!,
-                                    types: questionCollection.questions!.types!,
+                                    questionId: question.questionId!,
+                                    section: question.section!,
+                                    types: question.questionType!,
                                     points: context
                                         .read<DescriptiveQuestionWidgetBloc>()
                                         .state

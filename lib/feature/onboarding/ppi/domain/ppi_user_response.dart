@@ -137,11 +137,11 @@ class RecommendedBot {
 int getAnswerPoint(String uid, List<Answer>? answers, List<Choices>? choices) {
   int res = -1;
   if (choices != null && answers != null) {
-    var point = answers
+    var score = answers
             .firstWhereOrNull((element) => element.questionId == uid)
             ?.points ??
         '';
-    res = choices.indexWhere((element) => element.point == point);
+    res = choices.indexWhere((element) => element.score == score);
   }
   return res;
 }

@@ -28,6 +28,6 @@ class SharedPreference implements Storage {
       await _getPreference().then((v) => v.getString(key));
 
   @override
-  Future<void> writeData(String key, String value) async =>
+  Future<bool> writeData(String key, String value) async =>
       await _getPreference().then((v) => v.setString(key, value));
 }

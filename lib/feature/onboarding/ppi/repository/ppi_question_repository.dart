@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import '../domain/fixture.dart';
@@ -18,11 +19,9 @@ class PpiQuestionRepository {
     final String response =
         await rootBundle.loadString('assets/json/question_list.json');
 
-    Iterable iterable = json.decode(response);
-    var data = List<QuestionCollection>.from(
-        iterable.map((model) => QuestionCollection.fromJson(model)));
+    var a = QuestionCollection.fromJson(jsonDecode(response));
 
-    return fixture.fixture(data);
+    return fixture.fix(a.questions);
   }
 
   Future<Fixture> getQuestions() async {
