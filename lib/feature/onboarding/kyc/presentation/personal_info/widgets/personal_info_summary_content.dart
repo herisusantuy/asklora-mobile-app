@@ -67,7 +67,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           _spaceHeight,
           SummaryTextInfo(
               title: 'Country of Birth',
-              subTitle: basicInformationState.countryOfBirth),
+              subTitle: basicInformationState.countryNameOfBirth),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Phone', subTitle: basicInformationState.phoneNumber),

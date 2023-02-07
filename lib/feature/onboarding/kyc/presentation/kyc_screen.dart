@@ -175,6 +175,8 @@ class KycScreen extends StatelessWidget {
                 progress: 0.65,
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,
+                financialProfileState:
+                    context.read<FinancialProfileBloc>().state,
               );
             case KycPageStep.disclosureRejected:
               return const KycRejectedScreen(
@@ -207,6 +209,8 @@ class KycScreen extends StatelessWidget {
                     context.read<CountryOfTaxResidenceBloc>().state,
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,
+                financialProfileState:
+                    context.read<FinancialProfileBloc>().state,
               );
             case KycPageStep.giftBotStock:
               return const GiftBotStockScreen();
