@@ -35,16 +35,6 @@ enum KycPageStep {
   signTaxAgreements,
   kycSummary,
   kycResultScreen
-  // countryOfTaxResidence,
-  // addressProof,
-  // employmentFinancialProfile,
-  // disclosureAffiliation,
-  // signingTaxAgreement,
-  // signingBrokerAgreement,
-  // trustedContact,
-  // riskDisclosure,
-  // reviewInformation,
-  // unknown
 }
 
 class KycState extends Equatable {
