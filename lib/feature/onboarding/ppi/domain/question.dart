@@ -1,10 +1,4 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import '../../../../core/utils/storage/shared_preference.dart';
 
 part 'question.g.dart';
 
@@ -50,21 +44,6 @@ class Question {
       _$QuestionFromJson(json);
 
   Map<String, dynamic> toJson() => _$QuestionToJson(this);
-
-  Future<bool> save() async {
-    debugPrint('Krishna save question ${jsonEncode(toJson())}');
-    return await SharedPreference()
-        .writeData(questionId!, jsonEncode(toJson()));
-  }
-
-  Future<Question?> getCachedQuestion() async {
-    var data = await SharedPreference().readData(questionId!);
-    if (data == null) {
-      return null;
-    }
-    debugPrint('Krishna getCachedQuestion ${jsonDecode(jsonEncode(data))}');
-    return Future.value(Question.fromJson(jsonDecode(data)));
-  }
 
   Question copyWith({
     List<Choices>? choices,

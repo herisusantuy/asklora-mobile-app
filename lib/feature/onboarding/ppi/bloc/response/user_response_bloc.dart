@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
@@ -16,11 +15,11 @@ part 'user_response_state.dart';
 class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
   UserResponseBloc({required PpiResponseRepository ppiResponseRepository})
       : _ppiResponseRepository = ppiResponseRepository,
-        super(UserResponseState(test: List.empty(growable: true))) {
+        super(UserResponseState(userResponse: List.empty(growable: true))) {
     on<UserResponseEvent>((event, emit) {});
     on<SendResponse>(_onSendAnswer);
     on<SkipResponse>(_onSkipResponse);
-    on<UpdateppiUserResponse>(_onUpdatePpiUserResponse);
+    on<UpdatePpiUserResponse>(_onUpdatePpiUserResponse);
     on<SendBulkResponse>(_onSendBulkResponse);
     on<SaveUserResponse>(_onUserResponseSave);
   }
@@ -34,7 +33,8 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       var data =
           await _ppiResponseRepository.addAnswer(event.ppiUserResponseRequest);
       emit(state.copyWith(
-          responseState: ResponseState.success, ppiUserResponse: data));
+        responseState: ResponseState.success,
+      ));
     } catch (e) {
       emit(state.copyWith(responseState: ResponseState.error));
     }
@@ -42,29 +42,24 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   void _onUserResponseSave(
       SaveUserResponse event, Emitter<UserResponseState> emit) async {
-    debugPrint('Krishna _onUserResponseSave before ${event.selectedAnswer} ');
+    state.userResponse
+        ?.removeWhere((element) => element.left == event.question.questionId);
+    state.userResponse?.add(Triplet(
+        event.question.questionId!, event.question, event.selectedAnswer));
 
-    // state.test?.add(Triplet(
-    //     event.question.questionId!, event.question, event.selectedAnswer));
-    // event.question.copyWith(selectedOption: event.selectedAnswer);
-
-    // debugPrint('Krishna _onUserResponseSave after ${event.question.selectedOption} ');
-    // var isSaved = await event.question.save();
-    emit(state.copyWith(
-        responseState: true ? ResponseState.success : ResponseState.error));
+    emit(state.copyWith(responseState: ResponseState.loading));
+    emit(state.copyWith(responseState: ResponseState.success));
   }
 
   void _onSkipResponse(
       SkipResponse event, Emitter<UserResponseState> emit) async {
     emit(state.copyWith(responseState: ResponseState.loading));
-    emit(state.copyWith(
-        responseState: ResponseState.success,
-        ppiUserResponse: state.ppiUserResponse));
+    emit(state.copyWith(responseState: ResponseState.success));
   }
 
   void _onUpdatePpiUserResponse(
-      UpdateppiUserResponse event, Emitter<UserResponseState> emit) async {
-    emit(state.copyWith(ppiUserResponse: event.ppiUserResponse));
+      UpdatePpiUserResponse event, Emitter<UserResponseState> emit) async {
+    emit(state);
   }
 
   void _onSendBulkResponse(
@@ -73,8 +68,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       emit(state.copyWith(responseState: ResponseState.loading));
       var data = await _ppiResponseRepository
           .addBulkAnswer(event.ppiUserResponseRequest);
-      emit(state.copyWith(
-          responseState: ResponseState.success, ppiUserResponse: data));
+      emit(state.copyWith(responseState: ResponseState.success));
     } catch (e) {
       emit(state.copyWith(responseState: ResponseState.error));
     }

@@ -39,11 +39,11 @@ class SkipResponse extends UserResponseEvent {
   const SkipResponse();
 }
 
-class UpdateppiUserResponse extends UserResponseEvent {
+class UpdatePpiUserResponse extends UserResponseEvent {
   final PpiUserResponse ppiUserResponse;
 
   @override
   List<Object?> get props => [ppiUserResponse];
 
-  const UpdateppiUserResponse(this.ppiUserResponse);
+  const UpdatePpiUserResponse(this.ppiUserResponse);
 }

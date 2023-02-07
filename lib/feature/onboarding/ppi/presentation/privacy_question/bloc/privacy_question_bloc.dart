@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/fixture.dart';
@@ -23,20 +22,11 @@ class PrivacyQuestionBloc
 
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<PrivacyQuestionState> emit) async {
-    debugPrint(
-        'Krishna _onNavigationStepChanged before ${_privacyQuestionIndex}');
     ++_privacyQuestionIndex;
-    debugPrint(
-        'Krishna _onNavigationStepChanged after ${_privacyQuestionIndex}');
 
-    debugPrint(
-        'Krishna _onNavigationStepChanged after length ${privacyQuestions.length}');
     if (_privacyQuestionIndex < privacyQuestions.length) {
       Question question = privacyQuestions[_privacyQuestionIndex];
-      debugPrint('Krishna _onNavigationStepChanged');
-      // var i = await question.getCachedQuestion();
 
-      // debugPrint('Krishna _onNavigationStepChanged default selected option ${i?.selectedOption}');
       if (question.questionType == QuestionType.choices.value) {
         emit(OnNextQuestion<Question>(
           QuestionType.choices,
@@ -66,8 +56,6 @@ class PrivacyQuestionBloc
     --_privacyQuestionIndex;
     if (_privacyQuestionIndex >= 0) {
       Question question = privacyQuestions[_privacyQuestionIndex];
-      // var i = await question.getCachedQuestion();
-      debugPrint('Krishna _onNavigationPop');
       if (question.questionType == QuestionType.choices.value) {
         emit(OnNextQuestion<Question>(QuestionType.choices, question,
             privacyQuestionIndex: _privacyQuestionIndex));

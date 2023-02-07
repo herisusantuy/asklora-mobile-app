@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/buttons/secondary/secondary_multiple_choice_button.dart';
 import '../../../bloc/response/user_response_bloc.dart';
-import '../../../domain/ppi_user_response_request.dart';
 import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
@@ -62,8 +61,8 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                         vertical: 10),
                                     child: SecondaryMultipleChoiceButton(
                                       key: Key('${question.question}-$index}'),
-                                      active: int.parse(e.score!) ==
-                                          state.defaultChoiceIndex,
+                                      active: state.defaultChoiceIndex ==
+                                          int.parse(e.score!),
                                       label: e.name!,
                                       onTap: () {
                                         context
@@ -88,25 +87,10 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                       key: const Key(
                                           'question_navigation_button_widget'),
                                       onSubmitSuccess: onSubmitSuccess,
-                                      onNext: () {
-                                        debugPrint(
-                                            'Krishna testing multiple_question_widget ${state.defaultChoiceIndex}');
-                                        context.read<UserResponseBloc>().add(
-                                            SaveUserResponse(question,
-                                                state.defaultChoiceIndex));
-
-                                        // context.read<UserResponseBloc>().add(
-                                        //         SendResponse(
-                                        //             PpiUserResponseRequest(
-                                        //       questionId: question.questionId!,
-                                        //       section: question.section!,
-                                        //       types: question.questionType!,
-                                        //       points: question
-                                        //           .choices![
-                                        //               0]
-                                        //           .score!,
-                                        //     )));
-                                      },
+                                      onNext: () => context
+                                          .read<UserResponseBloc>()
+                                          .add(SaveUserResponse(question,
+                                              state.defaultChoiceIndex)),
                                       onCancel: onCancel,
                                     )),
                           ],

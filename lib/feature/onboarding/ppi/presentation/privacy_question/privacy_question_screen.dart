@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:collection/collection.dart';
 
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
@@ -47,14 +48,13 @@ class PrivacyQuestionScreen extends StatelessWidget {
                   }, builder: (context, state) {
                     if (state is OnNextQuestion) {
                       Question question = state.question;
-                      debugPrint('Krishna Privacy Question Screen UserResponseBloc ${context.read<UserResponseBloc>().state.test?.length}');
                       switch (state.questionType) {
                         case (QuestionType.choices):
-                          //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                           return MultipleChoiceQuestionWidget(
                               key: Key(question.questionId!),
                               question: question,
-                              defaultChoiceIndex: -1,
+                              defaultChoiceIndex:
+                                  defaultIndex(context, question.questionId!),
                               onCancel: () => onCancel(context),
                               onSubmitSuccess: () => onSubmitSuccess(context));
                         case (QuestionType.descriptive):
@@ -91,5 +91,15 @@ class PrivacyQuestionScreen extends StatelessWidget {
   void onCancel(BuildContext context) {
     context.read<QuestionBloc>().add(const CurrentPrivacyPageDecremented());
     context.read<PrivacyQuestionBloc>().add(PreviousQuestion());
+  }
+
+  int defaultIndex(BuildContext context, String questionId) {
+    var data = context
+        .read<UserResponseBloc>()
+        .state
+        .userResponse
+        ?.firstWhereOrNull((element) => element.left == questionId);
+
+    return data == null ? -1 : data.right;
   }
 }
