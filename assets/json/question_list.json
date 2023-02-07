@@ -117,6 +117,19 @@
       ]
     },
     {
+      "question_id": "quid5",
+      "question_type": "descriptive",
+      "question": "Pssst...! I won't tell anyone, how old are you?",
+      "section": "privacy",
+      "hints": "Your age",
+      "answers": [
+        {
+          "name": "age",
+          "score": "1"
+        }
+      ]
+    },
+    {
       "question_id": "quid6",
       "question_type": "choices",
       "question": "Do you talk to strangers at parties?",
@@ -292,14 +305,14 @@
     },
     {
       "question_id": "quid12",
-      "question_type": "choices",
+      "question_type": "omnisearch",
       "question": "What gets your investing mojo on?",
       "section": "investment_style",
-      "hints": null,
+      "hints": "Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!",
       "answers": [
         {
           "name": "words",
-          "score": "0"
+          "score": ""
         }
       ]
     },

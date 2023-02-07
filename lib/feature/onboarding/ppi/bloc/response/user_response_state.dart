@@ -3,7 +3,12 @@ part of 'user_response_bloc.dart';
 class UserResponseState extends Equatable {
   final ResponseState responseState;
 
-  final List<Triplet<String, Question, int>>? userResponse;
+  /// Left => question id
+  /// middle => Whole question object
+  /// right => answer or score chosen by user
+  /// for example (multiple choice) "quid03, {}, 3"
+  /// for example (desciptive) "quid03, {}, my name"
+  final List<Triplet<String, Question, String>>? userResponse;
 
   const UserResponseState({
     this.responseState = ResponseState.unknown,
@@ -12,7 +17,7 @@ class UserResponseState extends Equatable {
 
   UserResponseState copyWith({
     ResponseState? responseState,
-    List<Triplet<String, Question, int>>? userResponse,
+    List<Triplet<String, Question, String>>? userResponse,
   }) {
     return UserResponseState(
       responseState: responseState ?? this.responseState,

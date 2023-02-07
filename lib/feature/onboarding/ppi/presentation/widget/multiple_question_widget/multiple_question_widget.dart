@@ -89,8 +89,10 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                       onSubmitSuccess: onSubmitSuccess,
                                       onNext: () => context
                                           .read<UserResponseBloc>()
-                                          .add(SaveUserResponse(question,
-                                              state.defaultChoiceIndex)),
+                                          .add(SaveUserResponse(
+                                              question,
+                                              state.defaultChoiceIndex
+                                                  .toString())),
                                       onCancel: onCancel,
                                     )),
                           ],

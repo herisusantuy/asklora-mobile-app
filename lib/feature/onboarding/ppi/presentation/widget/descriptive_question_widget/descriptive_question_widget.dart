@@ -59,17 +59,21 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                         const SizedBox(
                           height: 16,
                         ),
-                        CustomCenteredTextInput(
-                            key: const Key('name_input'),
-                            maxLength: 2,
-                            onChanged: (value) => context
-                                .read<DescriptiveQuestionWidgetBloc>()
-                                .add(AnswerChanged(value)),
-                            hintText: 'Age',
-                            textInputFormatterList: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            textInputType: TextInputType.number),
+                        BlocBuilder<DescriptiveQuestionWidgetBloc,
+                            DescriptiveQuestionWidgetState>(
+                          builder: (context, state) => CustomCenteredTextInput(
+                              key: const Key('name_input'),
+                              maxLength: 2,
+                              onChanged: (value) => context
+                                  .read<DescriptiveQuestionWidgetBloc>()
+                                  .add(AnswerChanged(value)),
+                              hintText: 'Age',
+                              initialValue: state.answer,
+                              textInputFormatterList: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              textInputType: TextInputType.number),
+                        ),
                       ],
                     ),
                     BlocBuilder<DescriptiveQuestionWidgetBloc,
@@ -82,15 +86,12 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                               onSubmitSuccess: onSubmitSuccess,
                               onNext: () => context
                                   .read<UserResponseBloc>()
-                                  .add(SendResponse(PpiUserResponseRequest(
-                                    questionId: question.questionId!,
-                                    section: question.section!,
-                                    types: question.questionType!,
-                                    points: context
-                                        .read<DescriptiveQuestionWidgetBloc>()
-                                        .state
-                                        .answer,
-                                  ))),
+                                  .add(SaveUserResponse(
+                                      question,
+                                      context
+                                          .read<DescriptiveQuestionWidgetBloc>()
+                                          .state
+                                          .answer)),
                               onCancel: onCancel,
                             ))
                   ],

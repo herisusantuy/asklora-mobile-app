@@ -6,7 +6,6 @@ enum QuestionSection {
   conscientiousness('conscientiousness'),
   neuroticism('neuroticism'),
   investmentStyle('investment_style');
-  // feedBack('feedback');
 
   final String value;
 
@@ -19,7 +18,6 @@ enum QuestionType {
   descriptive('descriptive'),
   omniSearch('omnisearch'),
   unique('unique');
-  // feedBack('feedback');
 
   final String value;
 
@@ -36,16 +34,6 @@ class Fixture {
   List<Question> privacyQuestions = [];
   List<Question> personalisedQuestion = [];
   List<Question> investmentStyleQuestion = [];
-
-  // List<QuestionCollection> feedBackQuestion = [];
-
-  // List<QuestionCollection> get getFeedBackQuestions {
-  //   return feedBackQuestion;
-  // }
-  //
-  // set setFeedBackQuestions(QuestionCollection questionCollection) {
-  //   feedBackQuestion.add(questionCollection);
-  // }
 
   List<Question> get getPrivacyQuestions {
     return privacyQuestions;
@@ -75,7 +63,6 @@ class Fixture {
     investmentStyleQuestion.clear();
     personalisedQuestion.clear();
     privacyQuestions.clear();
-    // feedBackQuestion.clear();
   }
 
   Fixture fix(List<Question> questionCollection) {
@@ -92,9 +79,6 @@ class Fixture {
       if (element.section == QuestionSection.investmentStyle.value) {
         setInvestmentStyleQuestion = element;
       }
-      // if (element.section == QuestionSection.feedBack.value) {
-      //   setFeedBackQuestions = element;
-      // }
     }
     return this;
   }

@@ -58,9 +58,9 @@ class PrivacyQuestionScreen extends StatelessWidget {
                               onCancel: () => onCancel(context),
                               onSubmitSuccess: () => onSubmitSuccess(context));
                         case (QuestionType.descriptive):
-                          //TODO defaultAnswer should be from answered question when endpoint is ready
                           return DescriptiveQuestionWidget(
-                            defaultAnswer: '',
+                            defaultAnswer:
+                                defaultString(context, question.questionId!),
                             question: question,
                             onCancel: () => onCancel(context),
                             onSubmitSuccess: () => onSubmitSuccess(context),
@@ -100,6 +100,16 @@ class PrivacyQuestionScreen extends StatelessWidget {
         .userResponse
         ?.firstWhereOrNull((element) => element.left == questionId);
 
-    return data == null ? -1 : data.right;
+    return data == null ? -1 : int.parse(data.right);
+  }
+
+  String defaultString(BuildContext context, String questionId) {
+    var data = context
+        .read<UserResponseBloc>()
+        .state
+        .userResponse
+        ?.firstWhereOrNull((element) => element.left == questionId);
+
+    return data == null ? '' : data.right;
   }
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:collection/collection.dart';
 
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
+import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
@@ -52,11 +54,11 @@ class PersonalisationQuestionScreen extends StatelessWidget {
                       Question question = state.question;
                       switch (state.questionType) {
                         case (QuestionType.choices):
-                          //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                           return MultipleChoiceQuestionWidget(
                             key: Key(question.questionId!),
                             question: question,
-                            defaultChoiceIndex: -1,
+                            defaultChoiceIndex:
+                                defaultIndex(context, question.questionId!),
                             onSubmitSuccess: () => onSubmitSuccess(context),
                             onCancel: () => onCancel(context),
                           );
@@ -67,14 +69,6 @@ class PersonalisationQuestionScreen extends StatelessWidget {
                               question: question,
                               onSubmitSuccess: () => onSubmitSuccess(context),
                               onCancel: () => onCancel(context));
-                        case (QuestionType.slider):
-                        // return SliderQuestionWidget(
-                        //   key: Key(question.questionId!),
-                        //   question: question,
-                        //   defaultChoiceIndex: -1,
-                        //   onSubmitSuccess: () => onSubmitSuccess(context),
-                        //   onCancel: () => onCancel(context),
-                        // );
                         default:
                           return const SizedBox.shrink();
                       }
@@ -103,5 +97,15 @@ class PersonalisationQuestionScreen extends StatelessWidget {
     context
         .read<PersonalisationQuestionBloc>()
         .add(PreviousPersonalisationQuestion());
+  }
+
+  int defaultIndex(BuildContext context, String questionId) {
+    var data = context
+        .read<UserResponseBloc>()
+        .state
+        .userResponse
+        ?.firstWhereOrNull((element) => element.left == questionId);
+
+    return data == null ? -1 : int.parse(data.right);
   }
 }
