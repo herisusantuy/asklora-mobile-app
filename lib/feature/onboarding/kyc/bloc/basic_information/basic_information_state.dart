@@ -8,6 +8,7 @@ class BasicInformationState extends Equatable {
       this.chineseName,
       this.gender = '',
       this.dateOfBirth = '1990-01-01',
+      this.countryOfBirth = '',
       this.countryCode = '',
       this.phoneNumber = '',
       this.countryOfCitizenship = '',
@@ -25,6 +26,7 @@ class BasicInformationState extends Equatable {
   final String? chineseName;
   final String gender;
   final String dateOfBirth;
+  final String countryOfBirth;
   final String countryCode;
   final String phoneNumber;
   final String countryOfCitizenship;
@@ -45,6 +47,7 @@ class BasicInformationState extends Equatable {
       chineseName,
       gender,
       dateOfBirth,
+      countryOfBirth,
       countryCode,
       phoneNumber,
       countryOfCitizenship,
@@ -65,6 +68,7 @@ class BasicInformationState extends Equatable {
     String? chineseName,
     String? gender,
     String? dateOfBirth,
+    String? countryOfBirth,
     String? countryCode,
     String? phoneNumber,
     String? countryOfCitizenship,
@@ -83,6 +87,7 @@ class BasicInformationState extends Equatable {
       chineseName: chineseName ?? this.chineseName,
       gender: gender ?? this.gender,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      countryOfBirth: countryOfBirth ?? this.countryOfBirth,
       countryCode: countryCode ?? this.countryCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       countryOfCitizenship: countryOfCitizenship ?? this.countryOfCitizenship,
@@ -105,6 +110,7 @@ class BasicInformationState extends Equatable {
         gender.isNotEmpty &&
         dateOfBirth.isNotEmpty &&
         countryCode.isNotEmpty &&
+        countryOfBirth.isNotEmpty &&
         phoneNumber.isNotEmpty &&
         countryOfCitizenship.isNotEmpty &&
         isHongKongPermanentResident != null &&
