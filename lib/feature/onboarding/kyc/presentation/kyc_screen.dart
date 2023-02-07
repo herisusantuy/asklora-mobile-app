@@ -10,6 +10,7 @@ import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/kyc_bloc.dart';
 import '../bloc/signing_agreement/signing_agreement_bloc.dart';
+import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../repository/account_repository.dart';
 import '../repository/signing_broker_agreement_repository.dart';
 import 'financial_profile/disclosure_affiliation_associates_screen.dart';
@@ -18,6 +19,7 @@ import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affilia
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_person_input_screen.dart';
 import 'financial_profile/disclosure_affiliation_person_screen.dart';
 import 'financial_profile/disclosure_summary_screen.dart';
+import 'financial_profile/financial_profile_employment_question.dart';
 import 'gift_bot_stock_screen.dart';
 import 'kyc_progress/kyc_progress_screen.dart';
 import 'kyc_rejected_screen.dart';
@@ -63,6 +65,9 @@ class KycScreen extends StatelessWidget {
               ),
               BlocProvider(
                 create: (context) => DisclosureAffiliationBloc(),
+              ),
+              BlocProvider(
+                create: (context) => FinancialProfileBloc(),
               ),
               BlocProvider(
                 create: (context) =>
@@ -160,6 +165,10 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.disclosureAffiliationCommissions:
               return const DisclosureAffiliationCommissionScreen(
                 progress: 0.6,
+              );
+            case KycPageStep.financialProfileEmployment:
+              return const FinancialProfileEmploymentQuestion(
+                progress: 0.62,
               );
             case KycPageStep.disclosureSummary:
               return DisclosureSummaryScreen(

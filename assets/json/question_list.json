@@ -135,7 +135,7 @@
     "collection": "question",
     "questions": {
       "hints": "",
-      "question": "What is your financial situation?",
+      "question": "Set up Financial Profile",
       "question_index": 5,
       "section": "privacy",
       "types": "unique"
