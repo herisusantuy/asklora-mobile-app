@@ -147,8 +147,7 @@ class MockUserJourneyRepository extends _i1.Mock
           #getUserJourney,
           [],
         ),
-        returnValue: _i4.Future<_i6.UserJourney>.value(
-            _i6.UserJourney.privacyPersonalisation),
+        returnValue: _i4.Future<_i6.UserJourney>.value(_i6.UserJourney.privacy),
       ) as _i4.Future<_i6.UserJourney>);
 }
 

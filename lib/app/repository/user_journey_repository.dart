@@ -23,12 +23,12 @@ class UserJourneyRepository {
     try {
       ///TODO GET RESPONSE FROM API
       await _userJourneyApiClient.get();
-      return UserJourney.privacyPersonalisation;
+      return UserJourney.privacy;
     } catch (e) {
       String? userJourney = await _sharedPreference.readData('user_journey');
       return UserJourney.values
               .firstWhereOrNull((element) => element.name == userJourney) ??
-          UserJourney.privacyPersonalisation;
+          UserJourney.privacy;
     }
   }
 }

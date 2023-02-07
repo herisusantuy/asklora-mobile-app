@@ -75,7 +75,7 @@ class BotRecommendationScreen extends StatelessWidget {
             child: Icon(
               Icons.arrow_forward_rounded,
               color: AskLoraColors.primaryMagenta,
-              size: 16,
+              size: 18,
             ),
           ),
           onTap: () {}));
