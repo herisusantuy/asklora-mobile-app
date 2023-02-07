@@ -120,7 +120,9 @@ class OnBoardingStatus extends StatelessWidget {
         return OnBoardingStatusModel(
           title: 'START INVESTING',
           subTitle: 'Answer Personalisation Questions',
-          onTap: () => SignUpScreen.open(context),
+          onTap: () => PpiScreen.open(context,
+              arguments: Pair(QuestionPageType.personalisation,
+                  QuestionPageStep.personalisation)),
           progress: 0.05,
         );
       case UserJourney.createAccount:
