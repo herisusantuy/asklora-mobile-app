@@ -34,7 +34,7 @@ enum KycPageStep {
   signRiskDisclosureAgreements,
   signTaxAgreements,
   kycSummary,
-  giftBotStock
+  kycResultScreen
   // countryOfTaxResidence,
   // addressProof,
   // employmentFinancialProfile,

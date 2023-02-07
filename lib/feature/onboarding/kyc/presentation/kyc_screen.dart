@@ -208,7 +208,7 @@ class KycScreen extends StatelessWidget {
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,
               );
-            case KycPageStep.giftBotStock:
+            case KycPageStep.kycResultScreen:
               return const KycResultScreen();
             default:
               return const SizedBox.shrink();
