@@ -5,19 +5,19 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
-import '../../../bloc/bot_stock_bloc.dart';
-import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_utils.dart';
 import '../../widgets/column_text.dart';
-import '../../widgets/custom_base_silver_box.dart';
 import '../../widgets/gift_bot_stock_base_widget.dart';
 import '../../widgets/pair_column_text.dart';
 import '../../widgets/custom_detail_expansion_tile.dart';
+import '../bloc/portfolio_bloc.dart';
+import '../repository/portfolio_repository.dart';
 
 part 'widgets/key_info.dart';
 
@@ -38,7 +38,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final BotType botType = BotType.findByString(recommendedBot.botType);
     return BlocProvider(
-      create: (_) => BotStockBloc(botStockRepository: BotStockRepository())
+      create: (_) => PortfolioBloc(portfolioRepository: PortfolioRepository())
         ..add(FetchChartData()),
       child: CustomScaffold(
           body: Column(

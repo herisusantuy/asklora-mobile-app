@@ -1,20 +1,20 @@
 import 'package:collection/collection.dart';
 
-import '../../core/utils/storage/secure_storage.dart';
+import '../../core/utils/storage/shared_preference.dart';
 import '../bloc/app_bloc.dart';
 import '../domain/user_journey_api_client.dart';
 
 class UserJourneyRepository {
   final UserJourneyApiClient _userJourneyApiClient = UserJourneyApiClient();
 
-  final _secureStorage = SecureStorage();
+  final _sharedPreference = SharedPreference();
 
   Future<bool?> saveUserJourney(UserJourney userJourney) async {
     try {
       ///TODO POST RESPONSE TO API
       await _userJourneyApiClient.save();
     } catch (e) {
-      await _secureStorage.writeSecureData('user_journey', userJourney.name);
+      await _sharedPreference.writeData('user_journey', userJourney.name);
     }
     return true;
   }
@@ -23,12 +23,12 @@ class UserJourneyRepository {
     try {
       ///TODO GET RESPONSE FROM API
       await _userJourneyApiClient.get();
-      return UserJourney.privacyPersonalisation;
+      return UserJourney.privacy;
     } catch (e) {
-      String? userJourney = await _secureStorage.readSecureData('user_journey');
+      String? userJourney = await _sharedPreference.readData('user_journey');
       return UserJourney.values
               .firstWhereOrNull((element) => element.name == userJourney) ??
-          UserJourney.privacyPersonalisation;
+          UserJourney.privacy;
     }
   }
 }

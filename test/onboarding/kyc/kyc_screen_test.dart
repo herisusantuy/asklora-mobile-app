@@ -72,8 +72,8 @@ void main() {
         await buildKycScreen(tester, KycPageStep.otp);
         expect(find.byKey(const Key('sub_title')), findsOneWidget);
         expect(otpInput, findsOneWidget);
-        expect(find.byKey(const Key('request_otp_button')), findsOneWidget);
-        expect(find.byKey(const Key('sign_up_again_button')), findsOneWidget);
+        expect(find.byKey(const Key('kyc_primary_button')), findsOneWidget);
+        expect(find.byKey(const Key('kyc_secondary_button')), findsOneWidget);
         await tester.enterText(otpInput, 'abc');
         expect(find.text('abc'), findsNothing);
         await tester.enterText(otpInput, '12345');

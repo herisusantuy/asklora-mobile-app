@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
@@ -9,6 +10,7 @@ import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/kyc_bloc.dart';
 import '../bloc/signing_agreement/signing_agreement_bloc.dart';
+import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../repository/account_repository.dart';
 import '../repository/signing_broker_agreement_repository.dart';
 import 'financial_profile/disclosure_affiliation_associates_screen.dart';
@@ -17,6 +19,7 @@ import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affilia
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_person_input_screen.dart';
 import 'financial_profile/disclosure_affiliation_person_screen.dart';
 import 'financial_profile/disclosure_summary_screen.dart';
+import 'financial_profile/financial_profile_employment_question.dart';
 import 'gift_bot_stock_screen.dart';
 import 'kyc_progress/kyc_progress_screen.dart';
 import 'kyc_rejected_screen.dart';
@@ -43,35 +46,40 @@ class KycScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
+        enableBackNavigation: false,
         body: MultiBlocProvider(
             providers: [
-          BlocProvider(
-              create: (_) => NavigationBloc<KycPageStep>(initialKycPageStep)),
-          BlocProvider(create: (_) => BasicInformationBloc()),
-          BlocProvider(
-            create: (context) => OtpBloc(otpRepository: OtpRepository()),
-          ),
-          BlocProvider(
-            create: (context) => CountryOfTaxResidenceBloc(),
-          ),
-          BlocProvider(
-            create: (context) => AddressProofBloc(),
-          ),
-          BlocProvider(
-            create: (context) => DisclosureAffiliationBloc(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                KycBloc(getAccountRepository: AccountRepository()),
-          ),
-          BlocProvider(
-            create: (context) => SigningAgreementBloc(
-                signingBrokerAgreementRepository:
-                    SigningBrokerAgreementRepository(),
-                signatureController: SignatureController()),
-          ),
-        ],
+              BlocProvider(
+                  create: (_) =>
+                      NavigationBloc<KycPageStep>(initialKycPageStep)),
+              BlocProvider(create: (_) => BasicInformationBloc()),
+              BlocProvider(
+                create: (context) => OtpBloc(otpRepository: OtpRepository()),
+              ),
+              BlocProvider(
+                create: (context) => CountryOfTaxResidenceBloc(),
+              ),
+              BlocProvider(
+                create: (context) => AddressProofBloc(),
+              ),
+              BlocProvider(
+                create: (context) => DisclosureAffiliationBloc(),
+              ),
+              BlocProvider(
+                create: (context) => FinancialProfileBloc(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    KycBloc(getAccountRepository: AccountRepository()),
+              ),
+              BlocProvider(
+                create: (context) => SigningAgreementBloc(
+                    signingBrokerAgreementRepository:
+                        SigningBrokerAgreementRepository(),
+                    signatureController: SignatureController()),
+              ),
+            ],
             child: Builder(builder: (context) {
               return CustomNavigationWidget<KycPageStep>(
                 padding: EdgeInsets.zero,
@@ -157,6 +165,10 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.disclosureAffiliationCommissions:
               return const DisclosureAffiliationCommissionScreen(
                 progress: 0.6,
+              );
+            case KycPageStep.financialProfileEmployment:
+              return const FinancialProfileEmploymentQuestion(
+                progress: 0.62,
               );
             case KycPageStep.disclosureSummary:
               return DisclosureSummaryScreen(

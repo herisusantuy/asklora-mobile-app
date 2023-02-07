@@ -8,7 +8,8 @@ class BasicInformationState extends Equatable {
       this.chineseName,
       this.gender = '',
       this.dateOfBirth = '1990-01-01',
-      this.countryOfBirth = '',
+      this.countryCodeOfBirth = '',
+      this.countryNameOfBirth = '',
       this.countryCode = '',
       this.phoneNumber = '',
       this.countryOfCitizenship = '',
@@ -26,7 +27,8 @@ class BasicInformationState extends Equatable {
   final String? chineseName;
   final String gender;
   final String dateOfBirth;
-  final String countryOfBirth;
+  final String countryCodeOfBirth;
+  final String countryNameOfBirth;
   final String countryCode;
   final String phoneNumber;
   final String countryOfCitizenship;
@@ -47,7 +49,8 @@ class BasicInformationState extends Equatable {
       chineseName,
       gender,
       dateOfBirth,
-      countryOfBirth,
+      countryCodeOfBirth,
+      countryNameOfBirth,
       countryCode,
       phoneNumber,
       countryOfCitizenship,
@@ -68,7 +71,8 @@ class BasicInformationState extends Equatable {
     String? chineseName,
     String? gender,
     String? dateOfBirth,
-    String? countryOfBirth,
+    String? countryCodeOfBirth,
+    String? countryNameOfBirth,
     String? countryCode,
     String? phoneNumber,
     String? countryOfCitizenship,
@@ -87,7 +91,8 @@ class BasicInformationState extends Equatable {
       chineseName: chineseName ?? this.chineseName,
       gender: gender ?? this.gender,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
-      countryOfBirth: countryOfBirth ?? this.countryOfBirth,
+      countryCodeOfBirth: countryCodeOfBirth ?? this.countryCodeOfBirth,
+      countryNameOfBirth: countryNameOfBirth ?? this.countryNameOfBirth,
       countryCode: countryCode ?? this.countryCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       countryOfCitizenship: countryOfCitizenship ?? this.countryOfCitizenship,
@@ -109,8 +114,8 @@ class BasicInformationState extends Equatable {
         lastName.isNotEmpty &&
         gender.isNotEmpty &&
         dateOfBirth.isNotEmpty &&
+        countryCodeOfBirth.isNotEmpty &&
         countryCode.isNotEmpty &&
-        countryOfBirth.isNotEmpty &&
         phoneNumber.isNotEmpty &&
         countryOfCitizenship.isNotEmpty &&
         isHongKongPermanentResident != null &&

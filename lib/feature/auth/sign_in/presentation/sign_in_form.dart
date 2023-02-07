@@ -1,6 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
@@ -11,6 +13,10 @@ import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
+import '../../../onboarding/kyc/presentation/kyc_screen.dart';
+import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
+import '../../../tabs/tabs_screen.dart';
+import '../../otp/presentation/otp_screen.dart';
 import '../../reset_password/presentation/reset_password_screen.dart';
 import '../../sign_up/presentation/sign_up_screen.dart';
 import '../bloc/sign_in_bloc.dart';
@@ -37,9 +43,27 @@ class SignInForm extends StatelessWidget {
           CustomInAppNotification.show(context, state.response.message);
           break;
         case ResponseState.success:
+          UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
+              (section) => section.name == state.response.data.userJourney);
+          context
+              .read<AppBloc>()
+              .add(SaveUserJourney(userJourney ?? UserJourney.createAccount));
           await SecureStorage()
-              .writeSecureData('email', state.emailAddress)
-              .then((_) => SignInSuccessScreen.openAndRemoveAllRoute(context));
+              .writeData('email', state.emailAddress)
+              .then((_) {
+            switch (userJourney) {
+              case UserJourney.kyc:
+                KycScreen.open(context);
+                break;
+              case UserJourney.investmentStyle:
+                InvestmentStyleWelcomeScreen.open(context);
+                break;
+              default:
+                OtpScreen.openReplace(context, state.emailAddress);
+                break;
+            }
+          });
+
           break;
         default:
           break;

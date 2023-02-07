@@ -14,21 +14,20 @@ class SecureStorage implements Storage {
   final _flutterSecureStorage = const FlutterSecureStorage();
 
   @override
-  Future<void> writeSecureData(String key, String value) async =>
+  Future<void> writeData(String key, String value) async =>
       await _flutterSecureStorage.write(
           key: key, value: value, aOptions: _getAndroidOptions());
 
   @override
-  Future<String?> readSecureData(String key) async =>
-      await _flutterSecureStorage.read(
-          key: key, aOptions: _getAndroidOptions());
+  Future<String?> readData(String key) async => await _flutterSecureStorage
+      .read(key: key, aOptions: _getAndroidOptions());
 
   @override
-  Future<void> deleteSecureData(String key) async =>
+  Future<void> deleteData(String key) async =>
       _flutterSecureStorage.delete(key: key, aOptions: _getAndroidOptions());
 
   @override
-  Future<void> deleteAllSecureData() async =>
+  Future<void> deleteAllData() async =>
       await _flutterSecureStorage.deleteAll(aOptions: _getAndroidOptions());
 
   AndroidOptions _getAndroidOptions() => const AndroidOptions(

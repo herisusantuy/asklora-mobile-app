@@ -138,7 +138,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
-    var email = await _secureStorage.readSecureData('email');
+    var email = await _secureStorage.readData('email');
 
     try {
       emit(state.copyWith(status: AccountStatus.upgradingAccount));

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -19,7 +20,8 @@ class KycRejectedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
+      enableBackNavigation: false,
       body: Padding(
         padding: AppValues.screenHorizontalPadding,
         child: LayoutBuilder(builder: (context, viewportConstraints) {

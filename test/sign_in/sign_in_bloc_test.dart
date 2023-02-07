@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
@@ -110,10 +111,10 @@ void main() async {
         build: () {
           when(signInRepository.signIn(
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
-              .thenAnswer((_) => Future.value(
-                  const BaseResponse<SignInResponse>(
-                      data: SignInResponse('access', 'refresh'),
-                      state: ResponseState.success)));
+              .thenAnswer((_) => Future.value(BaseResponse<SignInResponse>(
+                  data:
+                      SignInResponse('access', 'refresh', UserJourney.kyc.name),
+                  state: ResponseState.success)));
 
           return signInBloc;
         },
@@ -150,9 +151,10 @@ void main() async {
                 isPasswordValid: true,
                 passwordErrorText: '',
               ),
-              const SignInState(
+              SignInState(
                 response: BaseResponse<SignInResponse>(
-                    data: SignInResponse('access', 'refresh'),
+                    data: SignInResponse(
+                        'access', 'refresh', UserJourney.kyc.name),
                     state: ResponseState.success),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,
