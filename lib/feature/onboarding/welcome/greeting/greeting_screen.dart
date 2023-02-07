@@ -35,8 +35,7 @@ class GreetingScreen extends StatelessWidget {
                         key: const Key('next_button'),
                         label: S.of(context).buttonNext,
                         onTap: () => PpiScreen.open(context,
-                            arguments: Pair(
-                                QuestionPageType.privacyAndPersonalisation,
+                            arguments: Pair(QuestionPageType.privacy,
                                 QuestionPageStep.privacy)),
                       )),
                 ],

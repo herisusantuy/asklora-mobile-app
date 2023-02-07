@@ -14,14 +14,16 @@ class HomeScreenContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
-        buildWhen: (previous, current) =>
-            previous.userJourney != current.userJourney,
-        builder: (context, state) => Padding(
-              padding: const EdgeInsets.only(bottom: 30.0),
-              child: Column(
-                  children: _getContents(
-                      context: context, userJourney: state.userJourney)),
-            ));
+      buildWhen: (previous, current) =>
+          previous.userJourney != current.userJourney,
+      builder: (context, state) => Padding(
+        padding: const EdgeInsets.only(bottom: 30.0),
+        child: Column(
+          children:
+              _getContents(context: context, userJourney: state.userJourney),
+        ),
+      ),
+    );
   }
 
   List<Widget> _getContents(
@@ -34,12 +36,17 @@ class HomeScreenContentWidget extends StatelessWidget {
           ),
           _spaceHeightBig,
           HomeScreenPopUpMessageWidget(
-            title: 'Your first Botstock is on me!',
+            title:
+                'Let’s answer your personalisation questions so we can start giving you your Botstock recommendations!',
             subTitle:
-                'Open your account to receive a free gift bot stock. Trade it without risk and experience how it helps you save time and effort. Redeem it for real after 3 months.',
+                'Afterwards, open your account to receive a free gift Botstock',
             buttonLabel: 'Answer Personalisation Questions',
-            onPrimaryButtonTap: () => SignUpScreen.open(context),
-            backgroundColor: AskLoraColors.primaryGreen,
+            onPrimaryButtonTap: () => PpiScreen.open(
+              context,
+              arguments: Pair(QuestionPageType.personalisation,
+                  QuestionPageStep.personalisation),
+            ),
+            backgroundColor: AskLoraColors.lime,
           ),
           _spaceHeightSmall,
           const HomeScreenNeedHelpButtonWidget(),
