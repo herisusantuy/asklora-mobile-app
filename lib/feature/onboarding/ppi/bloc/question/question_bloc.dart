@@ -77,6 +77,8 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
             : totalPrivacyPages,
         currentInvestmentStylePages:
             _questionPageType == QuestionPageType.investmentStyle ? 1 : 0,
+        currentPersonalisationPages:
+            _questionPageType == QuestionPageType.personalisation ? 1 : 0,
         totalPrivacyPages: totalPrivacyPages,
         //+1 for personalisation result
         totalPersonalisationPages: data.personalisedQuestion.length + 1,

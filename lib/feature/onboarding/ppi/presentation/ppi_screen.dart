@@ -19,6 +19,8 @@ import 'privacy_question/privacy_question_screen.dart';
 import 'privacy_question/privacy_result_failed_screen.dart';
 import 'privacy_question/privacy_result_success_screen.dart';
 
+part 'widget/ppi_progress_indicator_widget.dart';
+
 class PpiScreen extends StatelessWidget {
   static const String route = '/ppi_screen';
   final QuestionPageStep initialQuestionPage;
@@ -56,62 +58,14 @@ class PpiScreen extends StatelessWidget {
             },
             builder: (context, state) => Column(
               children: [
-                _progressIndicator(),
+                PpiProgressIndicatorWidget(
+                  questionPageType: questionPageType,
+                ),
                 Expanded(child: _pages(state)),
               ],
             ),
           )),
     );
-  }
-
-  Widget _progressIndicator() {
-    if (questionPageType == QuestionPageType.investmentStyle) {
-      return BlocBuilder<QuestionBloc, QuestionState>(
-          buildWhen: (previous, current) =>
-              previous.currentInvestmentStylePages !=
-                  current.currentInvestmentStylePages ||
-              previous.totalInvestmentStylePages !=
-                  current.totalInvestmentStylePages,
-          builder: (context, state) => CustomLinearProgressIndicator(
-                padding: const EdgeInsets.all(10),
-                progress: state.currentInvestmentStylePages > 0
-                    ? state.currentInvestmentStylePages /
-                        state.totalInvestmentStylePages
-                    : 0,
-              ));
-    } else {
-      return BlocBuilder<QuestionBloc, QuestionState>(
-          buildWhen: (previous, current) =>
-              previous.currentPrivacyPages != current.currentPrivacyPages ||
-              previous.totalPrivacyPages != current.totalPrivacyPages ||
-              previous.currentPersonalisationPages !=
-                  current.currentPersonalisationPages ||
-              previous.totalPersonalisationPages !=
-                  current.totalPersonalisationPages,
-          builder: (context, state) => Row(
-                children: [
-                  Expanded(
-                    child: CustomLinearProgressIndicator(
-                      padding: const EdgeInsets.only(
-                          left: 10, top: 10, bottom: 10, right: 2),
-                      progress: state.currentPrivacyPages > 0
-                          ? state.currentPrivacyPages / state.totalPrivacyPages
-                          : 0,
-                    ),
-                  ),
-                  Expanded(
-                    child: CustomLinearProgressIndicator(
-                      padding: const EdgeInsets.only(
-                          right: 10, top: 10, bottom: 10, left: 2),
-                      progress: state.currentPersonalisationPages > 0
-                          ? state.currentPersonalisationPages /
-                              state.totalPersonalisationPages
-                          : 0,
-                    ),
-                  ),
-                ],
-              ));
-    }
   }
 
   Widget _pages(NavigationState navigationState) {
