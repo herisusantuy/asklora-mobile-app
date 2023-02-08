@@ -233,10 +233,9 @@ void main() {
         expect(kycButtonPair, findsOneWidget);
       });
 
-      testWidgets('Gift Bot Stock screen', (WidgetTester tester) async {
-        await buildKycScreen(tester, KycPageStep.giftBotStock);
-        expect(find.byKey(const Key('sub_title')), findsOneWidget);
-        expect(find.byKey(const Key('success_sign')), findsOneWidget);
+      testWidgets('Kyc result screen', (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.kycResultScreen);
+        expect(find.byKey(const Key('custom_status_widget')), findsOneWidget);
         expect(kycButtonPair, findsOneWidget);
       });
     },
