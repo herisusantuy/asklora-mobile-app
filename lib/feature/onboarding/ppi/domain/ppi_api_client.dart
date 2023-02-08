@@ -11,11 +11,11 @@ class PpiApiClient {
   Future<Response> getQuestions() async =>
       await AskloraApiClient().get(endpoint: endpointQuestion);
 
-  Future<Response> postQuestionAnswer(PpiUserResponseRequest request) async =>
+  Future<Response> postQuestionAnswer(PpiSelectionRequest request) async =>
       await AskloraApiClient().post(
           endpoint: endpointAddAnswer, payload: json.encode(request.toJson()));
 
-  Future<Response> postBulkAnswer(List<PpiUserResponseRequest> request) async =>
+  Future<Response> postBulkAnswer(List<PpiSelectionRequest> request) async =>
       await AskloraApiClient()
           .post(endpoint: endpointAddAnswer, payload: jsonEncode(request));
 

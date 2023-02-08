@@ -68,7 +68,7 @@ class MockPpiResponseRepository extends _i1.Mock
       ) as _i2.BotRecommendationRepository);
   @override
   _i5.Future<_i3.PpiUserResponse> addAnswer(
-          _i6.PpiUserResponseRequest? ppiUserResponseRequest) =>
+          _i6.PpiSelectionRequest? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAnswer,
@@ -85,7 +85,7 @@ class MockPpiResponseRepository extends _i1.Mock
       ) as _i5.Future<_i3.PpiUserResponse>);
   @override
   _i5.Future<_i3.PpiUserResponse> addBulkAnswer(
-          List<_i6.PpiUserResponseRequest>? ppiUserResponseRequest) =>
+          List<_i6.PpiSelectionRequest>? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addBulkAnswer,

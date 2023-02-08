@@ -111,11 +111,12 @@ class SliderQuestionWidget extends StatelessWidget {
                               onSubmitSuccess: onSubmitSuccess,
                               onNext: () => context
                                   .read<UserResponseBloc>()
-                                  .add(SendResponse(PpiUserResponseRequest(
+                                  .add(SendResponse(PpiSelectionRequest(
                                       questionId: question.questionId!,
                                       section: question.section!,
                                       types: question.questionType!,
-                                      points: ''
+                                      points: '',
+                                      name: ''
                                       // points: question
                                       //     .choices![state.defaultChoiceIndex]
                                       //     .score!,

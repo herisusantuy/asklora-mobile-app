@@ -42,7 +42,7 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
               QuestionTitle(
                 question: question.question!,
               ),
-              ...question!.choices!.map((e) {
+              ...question.choices!.map((e) {
                 int index = question.choices!.indexOf(e);
                 if (e.selectable != null && e.selectable!) {
                   return DemonstrationTooltipGuide(

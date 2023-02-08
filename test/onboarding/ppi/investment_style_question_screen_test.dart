@@ -23,8 +23,7 @@ void main() async {
 
     var questionNextButton = find.byKey(const Key('question_next_button'));
 
-    List<QuestionCollection> investmentStyle =
-        Fixture().investmentStyleQuestion;
+    List<Question> investmentStyle = Fixture().investmentStyleQuestion;
 
     Future<void> buildPrivacyQuestionScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();

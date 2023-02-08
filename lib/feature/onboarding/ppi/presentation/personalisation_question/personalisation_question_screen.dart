@@ -62,9 +62,9 @@ class PersonalisationQuestionScreen extends StatelessWidget {
                             onCancel: () => onCancel(context),
                           );
                         case (QuestionType.descriptive):
-                          //TODO defaultAnswer should be from answered question when endpoint is ready
                           return DescriptiveQuestionWidget(
-                              defaultAnswer: '',
+                              defaultAnswer: PpiDefaultAnswer.getString(
+                                  context, question.questionId!),
                               question: question,
                               onSubmitSuccess: () => onSubmitSuccess(context),
                               onCancel: () => onCancel(context));

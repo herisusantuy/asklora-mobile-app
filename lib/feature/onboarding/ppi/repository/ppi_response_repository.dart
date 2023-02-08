@@ -16,7 +16,7 @@ class PpiResponseRepository {
   final PpiApiClient _ppiApiClient = PpiApiClient();
 
   Future<PpiUserResponse> addAnswer(
-      PpiUserResponseRequest ppiUserResponseRequest) async {
+      PpiSelectionRequest ppiUserResponseRequest) async {
     var response =
         await _ppiApiClient.postQuestionAnswer(ppiUserResponseRequest);
 
@@ -29,7 +29,7 @@ class PpiResponseRepository {
   }
 
   Future<PpiUserResponse> addBulkAnswer(
-      List<PpiUserResponseRequest> ppiUserResponseRequest) async {
+      List<PpiSelectionRequest> ppiUserResponseRequest) async {
     var response = await _ppiApiClient.postBulkAnswer(ppiUserResponseRequest);
 
     var ppiUserResponse = PpiUserResponse.fromJson(response.data);

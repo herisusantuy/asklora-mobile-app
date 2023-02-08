@@ -1,4 +1,5 @@
-class PpiUserResponseRequest {
+class PpiSelectionRequest {
+  final String name;
   final String questionId;
   final String section;
   final String types;
@@ -8,13 +9,14 @@ class PpiUserResponseRequest {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['question_id'] = questionId;
     data['section'] = section;
-    data['types'] = types;
-    data['points'] = points;
+    data['question_type'] = types;
+    data['score'] = points;
     return data;
   }
 
-  PpiUserResponseRequest(
-      {required this.questionId,
+  PpiSelectionRequest(
+      {required this.name,
+      required this.questionId,
       required this.section,
       required this.types,
       required this.points});

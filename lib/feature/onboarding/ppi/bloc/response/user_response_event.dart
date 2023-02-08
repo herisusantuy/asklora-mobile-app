@@ -5,7 +5,7 @@ abstract class UserResponseEvent extends Equatable {
 }
 
 class SendResponse extends UserResponseEvent {
-  final PpiUserResponseRequest ppiUserResponseRequest;
+  final PpiSelectionRequest ppiUserResponseRequest;
 
   @override
   List<Object?> get props => [ppiUserResponseRequest];
@@ -24,7 +24,7 @@ class SaveUserResponse extends UserResponseEvent {
 }
 
 class SendBulkResponse extends UserResponseEvent {
-  final List<PpiUserResponseRequest> ppiUserResponseRequest;
+  final List<PpiSelectionRequest> ppiUserResponseRequest;
 
   @override
   List<Object?> get props => [ppiUserResponseRequest];

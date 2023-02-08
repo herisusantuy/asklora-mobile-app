@@ -13,10 +13,7 @@ void main() async {
     late MockDemonstrationQuestionRepository demonstrationQuestionRepository;
     late DemonstrationQuestionBloc demonstrationQuestionBloc;
 
-    final List<QuestionCollection> questionCollection = [
-      QuestionCollection(),
-      QuestionCollection()
-    ];
+    final List<Question> questionCollection = [Question(), Question()];
 
     final List<bool> questionAnsweredList = [false, false];
 
