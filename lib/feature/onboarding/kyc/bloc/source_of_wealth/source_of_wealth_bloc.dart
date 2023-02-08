@@ -110,10 +110,11 @@ class SourceOfWealthBloc
       Emitter<SourceOfWealthState> emit) {
     List<SourceOfWealthModel> sourceOfWealthAnswers =
         List.from(state.sourceOfWealthAnswers);
-    int index = sourceOfWealthAnswers.indexWhere(
-        (element) => element.sourceOfWealthType == event.sourceOfWealthType);
-    sourceOfWealthAnswers[index] = sourceOfWealthAnswers[index]
-        .copyWith(additionalSourceOfWealth: event.otherIncome);
+    int indexOfOtherIncome = sourceOfWealthAnswers.indexWhere(
+        (element) => element.sourceOfWealthType == SourceOfWealthType.other);
+    sourceOfWealthAnswers[indexOfOtherIncome] =
+        sourceOfWealthAnswers[indexOfOtherIncome]
+            .copyWith(additionalSourceOfWealth: event.otherIncome);
     emit(state.copyWith(
       sourceOfWealthAnswers: sourceOfWealthAnswers,
     ));
