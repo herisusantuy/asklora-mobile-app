@@ -5,7 +5,7 @@ enum KycStatus {
   failure,
   unknown,
   fetchingAccount,
-  upgradingAccount,
+  submittingKyc,
   fetchingOnfidoToken,
   submittingOnfidoResult,
   submittingTaxInfo
@@ -72,3 +72,5 @@ class OnfidoResultUpdated extends KycState {
 
   const OnfidoResultUpdated(this.response);
 }
+
+class KycSubmitSuccess extends KycState {}

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/basic_information/basic_information_bloc.dart';
@@ -32,37 +34,53 @@ class KycSummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return KycBaseForm(
-      onTapBack: () =>
-          context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Summary',
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PersonalInfoSummaryContent(
-            key: const Key('personal_info_summary_content'),
-            basicInformationState: basicInformationState,
-            addressProofState: addressProofState,
-            countryOfTaxResidenceState: countryOfTaxResidenceState,
-            title: 'Personal Info',
-          ),
-          const SizedBox(
-            height: 56,
-          ),
-          DisclosureSummaryContent(
-            key: const Key('financial_profile_summary_content'),
-            disclosureAffiliationState: disclosureAffiliationState,
-            title: 'Financial Profile',
-          ),
-          const SizedBox(
-            height: 56,
-          ),
-          const SignAgreementSummaryContent(
-              key: Key('sign_agreement_summary_content'), title: 'Agreements')
-        ],
+    return BlocListener<KycBloc, KycState>(
+      listener: (context, state) {
+        if (state.status == KycStatus.submittingKyc) {
+          CustomLoadingOverlay.show(context);
+        } else {
+          CustomLoadingOverlay.dismiss();
+          if (state.status == KycStatus.success) {
+            context
+                .read<NavigationBloc<KycPageStep>>()
+                .add(const PageChanged(KycPageStep.kycResultScreen));
+          } else if (state.status == KycStatus.failure) {
+            CustomInAppNotification.show(context, state.responseMessage);
+          }
+        }
+      },
+      child: KycBaseForm(
+        onTapBack: () =>
+            context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
+        title: 'Summary',
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            PersonalInfoSummaryContent(
+              key: const Key('personal_info_summary_content'),
+              basicInformationState: basicInformationState,
+              addressProofState: addressProofState,
+              countryOfTaxResidenceState: countryOfTaxResidenceState,
+              title: 'Personal Info',
+            ),
+            const SizedBox(
+              height: 56,
+            ),
+            DisclosureSummaryContent(
+              key: const Key('financial_profile_summary_content'),
+              disclosureAffiliationState: disclosureAffiliationState,
+              title: 'Financial Profile',
+            ),
+            const SizedBox(
+              height: 56,
+            ),
+            const SignAgreementSummaryContent(
+                key: Key('sign_agreement_summary_content'), title: 'Agreements')
+          ],
+        ),
+        bottomButton: _bottomButton(context),
+        progress: progress,
       ),
-      bottomButton: _bottomButton(context),
-      progress: progress,
     );
   }
 
@@ -71,9 +89,7 @@ class KycSummaryScreen extends StatelessWidget {
           context
               .read<AppBloc>()
               .add(const SaveUserJourney(UserJourney.freeBotStock));
-          context
-              .read<NavigationBloc<KycPageStep>>()
-              .add(const PageChanged(KycPageStep.kycResultScreen));
+          context.read<KycBloc>().add(SubmitKyc());
         },
         secondaryButtonOnClick: () => CarouselScreen.open(context),
         primaryButtonLabel: 'COMPLETE',

@@ -11,6 +11,7 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
+import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
@@ -56,7 +57,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                           'Your free Botstock has been added to your portfolio successfully!',
                       primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',
                       secondaryButtonLabel: 'NOT NOW',
-                      onPrimaryButtonTap: () {},
+                      onPrimaryButtonTap: () =>
+                          DepositWelcomeScreen.open(context: context),
                       onSecondaryButtonTap: () => Navigator.pop(context),
                     ));
           }

@@ -81,7 +81,11 @@ class HomeScreenContentWidget extends StatelessWidget {
             buttonLabel: 'DEFINE INVESTMENT STYLE',
             secondaryButtonLabel: 'HOW IT WORKS',
             onSecondaryButtonTap: () {},
-            onPrimaryButtonTap: () => SignUpScreen.open(context),
+            onPrimaryButtonTap: () => PpiScreen.open(
+              context,
+              arguments: Pair(QuestionPageType.investmentStyle,
+                  QuestionPageStep.investmentStyle),
+            ),
             backgroundColor: AskLoraColors.primaryGreen,
           ),
           _spaceHeightSmall,
