@@ -176,9 +176,10 @@ void main() {
         expect(find.byKey(const Key('choices_button')), findsOneWidget);
       });
 
-      testWidgets('Show disclosure summary', (WidgetTester tester) async {
-        await buildKycScreen(tester, KycPageStep.disclosureSummary);
-        expect(find.byKey(const Key('disclosure_summary_content')),
+      testWidgets('Show financial profile summary',
+          (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.financialProfileSummary);
+        expect(find.byKey(const Key('financial_profile_summary_content')),
             findsOneWidget);
         expect(kycButtonPair, findsOneWidget);
       });
