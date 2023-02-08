@@ -15,7 +15,7 @@ class SendResponse extends UserResponseEvent {
 
 class SaveUserResponse extends UserResponseEvent {
   final Question question;
-  final int selectedAnswer;
+  final String selectedAnswer;
 
   const SaveUserResponse(this.question, this.selectedAnswer);
 
