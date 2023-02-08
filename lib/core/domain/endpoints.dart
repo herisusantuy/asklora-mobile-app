@@ -3,6 +3,7 @@ const v2 = '/api/v2/';
 const accounts = 'accounts/';
 const transactions = 'transactions/';
 const orders = 'orders/';
+const activities = 'activities/';
 
 //TODO later it will be changed
 const question = 'question/';
@@ -29,7 +30,7 @@ const String endpointBankAccount = '$v1${accounts}bank-account-related/';
 const String endpointWithdrawal = '$v1${transactions}withdraw/';
 const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointOrders = '$v1$orders';
-const String endpointGetUserJourney = 'get-user-journey';
-const String endpointSaveUserJourney = 'save-user-journey';
+const String endpointGetUserJourney = '$v2${activities}user-journey/';
+const String endpointSaveUserJourney = '$v2${activities}user-journey/';
 
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
