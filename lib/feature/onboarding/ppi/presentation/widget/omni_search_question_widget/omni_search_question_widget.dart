@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,14 +9,16 @@ import '../../../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_title.dart';
 import 'bloc/omni_search_question_widget_bloc.dart';
+import 'domain/omni_search_model.dart';
 import 'widgets/custom_choice_chips.dart';
 
 class OmniSearchQuestionWidget extends StatelessWidget {
-  final String defaultAnswer;
+  final OmniSearchModel defaultOmniSearch;
   final Question question;
   final Function() onSubmitSuccess;
   final Function() onCancel;
@@ -23,7 +27,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
   final TextEditingController keywordController = TextEditingController();
 
   OmniSearchQuestionWidget(
-      {this.defaultAnswer = '',
+      {required this.defaultOmniSearch,
       required this.question,
       required this.onSubmitSuccess,
       required this.onCancel,
@@ -35,7 +39,9 @@ class OmniSearchQuestionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => OmniSearchQuestionWidgetBloc(defaultAnswer: const []),
+      create: (_) => OmniSearchQuestionWidgetBloc(
+          initialKeywordAnswers: defaultOmniSearch.keywordAnswers,
+          initialKeywords: defaultOmniSearch.keywords),
       child: BlocListener<OmniSearchQuestionWidgetBloc,
           OmniSearchQuestionWidgetState>(
         listenWhen: (previous, current) =>
@@ -125,7 +131,24 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                             builder: (context, state) => Padding(
                                   padding: const EdgeInsets.only(top: 24.0),
                                   child: ButtonPair(
-                                      primaryButtonOnClick: onSubmitSuccess,
+                                      primaryButtonOnClick: () {
+                                        onSubmitSuccess();
+                                        context.read<UserResponseBloc>().add(
+                                            SaveUserResponse(
+                                                question,
+                                                jsonEncode(OmniSearchModel(
+                                                        keywords: context
+                                                            .read<
+                                                                OmniSearchQuestionWidgetBloc>()
+                                                            .state
+                                                            .keywords,
+                                                        keywordAnswers: context
+                                                            .read<
+                                                                OmniSearchQuestionWidgetBloc>()
+                                                            .state
+                                                            .keywordAnswers)
+                                                    .toJson())));
+                                      },
                                       secondaryButtonOnClick: () => context
                                           .read<OmniSearchQuestionWidgetBloc>()
                                           .add(KeywordReset()),

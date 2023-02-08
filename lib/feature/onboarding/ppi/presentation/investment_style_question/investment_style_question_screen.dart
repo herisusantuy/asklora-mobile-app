@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:collection/collection.dart';
 
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
-import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
+import '../../utils/ppi_utils.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
 import '../widget/omni_search_question_widget/omni_search_question_widget.dart';
@@ -55,22 +54,24 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                       return MultipleChoiceQuestionWidget(
                         key: Key(question.questionId!),
                         question: question,
-                        defaultChoiceIndex:
-                            defaultIndex(context, question.questionId!),
+                        defaultChoiceIndex: PpiDefaultAnswer.getIndex(
+                            context, question.questionId!),
                         onSubmitSuccess: () => onSubmitSuccess(context),
                         onCancel: () => onCancel(context),
                       );
                     case (QuestionType.descriptive):
                       return DescriptiveQuestionWidget(
                           key: Key(question.question!),
-                          defaultAnswer:
-                              defaultString(context, question.questionId!),
+                          defaultAnswer: PpiDefaultAnswer.getString(
+                              context, question.questionId!),
                           question: question,
                           onCancel: () => onCancel(context),
                           onSubmitSuccess: () => onSubmitSuccess(context));
                     case (QuestionType.omniSearch):
                       return OmniSearchQuestionWidget(
                         key: Key(question.questionId!),
+                        defaultOmniSearch: PpiDefaultAnswer.getOmniSearch(
+                            context, question.questionId!),
                         question: question,
                         onSubmitSuccess: () => onSubmitSuccess(context),
                         onCancel: () => onCancel(context),
@@ -97,25 +98,5 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
         .read<QuestionBloc>()
         .add(const CurrentInvestmentStylePageDecremented());
     context.read<InvestmentStyleQuestionBloc>().add(PreviousQuestion());
-  }
-
-  int defaultIndex(BuildContext context, String questionId) {
-    var data = context
-        .read<UserResponseBloc>()
-        .state
-        .userResponse
-        ?.firstWhereOrNull((element) => element.left == questionId);
-
-    return data == null ? -1 : int.parse(data.right);
-  }
-
-  String defaultString(BuildContext context, String questionId) {
-    var data = context
-        .read<UserResponseBloc>()
-        .state
-        .userResponse
-        ?.firstWhereOrNull((element) => element.left == questionId);
-
-    return data == null ? '' : data.right;
   }
 }

@@ -19,7 +19,7 @@ class OmniSearchQuestionWidgetState extends Equatable {
   const OmniSearchQuestionWidgetState(
       {this.keyword = '',
       this.keywordAnswers = const [],
-      this.keywords = defaultKeywords,
+      this.keywords = const [],
       this.addKeywordError = false})
       : super();
 

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:collection/collection.dart';
 
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
-import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
+import '../../utils/ppi_utils.dart';
 import '../financial_situation/bloc/financial_profile_bloc.dart';
 import '../financial_situation/presentation/financial_situation_question.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
@@ -53,14 +52,14 @@ class PrivacyQuestionScreen extends StatelessWidget {
                           return MultipleChoiceQuestionWidget(
                               key: Key(question.questionId!),
                               question: question,
-                              defaultChoiceIndex:
-                                  defaultIndex(context, question.questionId!),
+                              defaultChoiceIndex: PpiDefaultAnswer.getIndex(
+                                  context, question.questionId!),
                               onCancel: () => onCancel(context),
                               onSubmitSuccess: () => onSubmitSuccess(context));
                         case (QuestionType.descriptive):
                           return DescriptiveQuestionWidget(
-                            defaultAnswer:
-                                defaultString(context, question.questionId!),
+                            defaultAnswer: PpiDefaultAnswer.getString(
+                                context, question.questionId!),
                             question: question,
                             onCancel: () => onCancel(context),
                             onSubmitSuccess: () => onSubmitSuccess(context),
@@ -91,25 +90,5 @@ class PrivacyQuestionScreen extends StatelessWidget {
   void onCancel(BuildContext context) {
     context.read<QuestionBloc>().add(const CurrentPrivacyPageDecremented());
     context.read<PrivacyQuestionBloc>().add(PreviousQuestion());
-  }
-
-  int defaultIndex(BuildContext context, String questionId) {
-    var data = context
-        .read<UserResponseBloc>()
-        .state
-        .userResponse
-        ?.firstWhereOrNull((element) => element.left == questionId);
-
-    return data == null ? -1 : int.parse(data.right);
-  }
-
-  String defaultString(BuildContext context, String questionId) {
-    var data = context
-        .read<UserResponseBloc>()
-        .state
-        .userResponse
-        ?.firstWhereOrNull((element) => element.left == questionId);
-
-    return data == null ? '' : data.right;
   }
 }
