@@ -37,6 +37,7 @@ class AddressProofScreen extends StatelessWidget {
           }
         },
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextNew(
               'Please provide your permanent residential address.',
