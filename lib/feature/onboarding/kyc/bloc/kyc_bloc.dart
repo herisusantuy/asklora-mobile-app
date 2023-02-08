@@ -32,7 +32,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     } catch (e) {
       emit(state.copyWith(
           status: KycStatus.failure,
-          responseMessage: 'Could not fetch the token!'));
+          responseMessage: 'Could not submit the account!'));
     }
   }
 
