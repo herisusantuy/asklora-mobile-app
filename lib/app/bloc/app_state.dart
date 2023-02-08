@@ -1,14 +1,18 @@
 part of 'app_bloc.dart';
 
 enum UserJourney {
-  privacy,
-  personalisation,
-  createAccount,
-  investmentStyle,
-  kyc,
-  freeBotStock,
-  deposit,
-  learnBotPlank
+  privacy('privacy'),
+  personalisation('personalisation'),
+  createAccount('create_account'),
+  investmentStyle('investment_style'),
+  kyc('kyc'),
+  freeBotStock('free_bot_stock'),
+  deposit('deposit'),
+  learnBotPlank('learn_bot_plank');
+
+  final String value;
+
+  const UserJourney(this.value);
 }
 
 enum AppStatus { unknown, authenticated, unauthenticated }
