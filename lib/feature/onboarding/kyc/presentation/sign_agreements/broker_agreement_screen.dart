@@ -49,7 +49,7 @@ class BrokerAgreementScreen extends StatelessWidget {
           const SizedBox(
             height: 36,
           ),
-          _boundByAlpacaAndLoraAgreement,
+          _boundByAskloraLoraAgreement,
           _spaceHeight,
           _understandOnTheAgreement,
           const SizedBox(
@@ -63,36 +63,33 @@ class BrokerAgreementScreen extends StatelessWidget {
     );
   }
 
-  Widget get _boundByAlpacaAndLoraAgreement =>
+  Widget get _boundByAskloraLoraAgreement =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
-              previous.isAlpacaCustomerAgreementOpened !=
-                  current.isAlpacaCustomerAgreementOpened ||
               previous.isAskLoraClientAgreementOpened !=
                   current.isAskLoraClientAgreementOpened ||
-              previous.isBoundByAlpacaAndLoraAgreementChecked !=
-                  current.isBoundByAlpacaAndLoraAgreementChecked,
+              previous.isBoundByAskloraAgreementChecked !=
+                  current.isBoundByAskloraAgreementChecked,
           builder: (context, state) => CustomCheckbox(
                 checkboxKey:
                     const Key('bound_alpaca_lora_agreement_checkbox_value'),
                 key: const Key('bound_alpaca_lora_agreement_checkbox'),
                 text:
                     'I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me.',
-                disabled: !state.isAlpacaCustomerAgreementOpened ||
-                    !state.isAskLoraClientAgreementOpened,
-                isChecked: state.isBoundByAlpacaAndLoraAgreementChecked,
+                disabled: !state.isAskLoraClientAgreementOpened,
+                isChecked: state.isBoundByAskloraAgreementChecked,
                 fontType: FontType.smallText,
                 fontHeight: 1.4,
                 onChanged: (value) => context
                     .read<SigningAgreementBloc>()
-                    .add(BoundByAlpacaAndLoraAgreementChecked(value!)),
+                    .add(BoundByAskloraAgreementChecked(value!)),
               ));
 
   Widget get _understandOnTheAgreement =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
-              previous.isBoundByAlpacaAndLoraAgreementChecked !=
-                  current.isBoundByAlpacaAndLoraAgreementChecked ||
+              previous.isBoundByAskloraAgreementChecked !=
+                  current.isBoundByAskloraAgreementChecked ||
               previous.isUnderstandOnTheAgreementChecked !=
                   current.isUnderstandOnTheAgreementChecked,
           builder: (context, state) => CustomCheckbox(
@@ -101,7 +98,7 @@ class BrokerAgreementScreen extends StatelessWidget {
                 text:
                     'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Application Agreement.',
                 fontHeight: 1.4,
-                disabled: !state.isBoundByAlpacaAndLoraAgreementChecked,
+                disabled: !state.isBoundByAskloraAgreementChecked,
                 isChecked: state.isUnderstandOnTheAgreementChecked,
                 fontType: FontType.smallText,
                 onChanged: (value) => context
