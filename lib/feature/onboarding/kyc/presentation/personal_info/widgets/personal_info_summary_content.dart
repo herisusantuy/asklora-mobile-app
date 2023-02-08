@@ -43,7 +43,8 @@ class PersonalInfoSummaryContent extends StatelessWidget {
                   : 'Unknown'),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Are you a Hong Kong citizen or resident ?',
+              title:
+                  'Are you a Hong Kong citizen or resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident',
               subTitle:
                   basicInformationState.isHongKongPermanentResident != null
                       ? basicInformationState.isHongKongPermanentResident!
@@ -65,10 +66,14 @@ class PersonalInfoSummaryContent extends StatelessWidget {
               subTitle: basicInformationState.dateOfBirth),
           _spaceHeight,
           SummaryTextInfo(
+              title: 'Country of Birth',
+              subTitle: basicInformationState.countryNameOfBirth),
+          _spaceHeight,
+          SummaryTextInfo(
               title: 'Phone', subTitle: basicInformationState.phoneNumber),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'TIN Number',
+              title: 'HKID Number',
               subTitle: countryOfTaxResidenceState.tinNumber),
           _spaceHeight,
           SummaryTextInfo(

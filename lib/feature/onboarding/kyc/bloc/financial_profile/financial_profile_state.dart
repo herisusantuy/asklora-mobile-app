@@ -90,30 +90,31 @@ class FinancialProfileState extends Equatable {
         employmentStatus != EmploymentStatus.employed &&
         employmentStatus != EmploymentStatus.selfEmployed) {
       return true;
-    } else if ((employmentStatus == EmploymentStatus.employed ||
-            employmentStatus == EmploymentStatus.selfEmployed) &&
-        natureOfBusiness != null &&
-        natureOfBusiness != NatureOfBusiness.other &&
-        occupation != null &&
-        occupation != Occupations.other &&
-        employer!.isNotEmpty &&
-        employerAddress!.isNotEmpty &&
-        district != null &&
-        region != null &&
-        country!.isNotEmpty &&
-        country == 'HKG') {
-      return true;
-    } else if (natureOfBusiness == NatureOfBusiness.other &&
-        natureOfBusinessDescription != null &&
-        natureOfBusinessDescription!.isNotEmpty &&
-        occupation == Occupations.other &&
-        otherOccupation != null &&
-        otherOccupation!.isNotEmpty &&
-        country != 'HKG' &&
-        detailInformationOfCountry!.isNotEmpty) {
-      return true;
     } else {
-      return false;
+      if (natureOfBusiness != null &&
+          natureOfBusiness != NatureOfBusiness.other &&
+          occupation != null &&
+          occupation != Occupations.other &&
+          employer!.isNotEmpty &&
+          employerAddress!.isNotEmpty &&
+          district != null &&
+          region != null &&
+          country!.isNotEmpty &&
+          country == 'HKG') {
+        return true;
+      } else {
+        if ((natureOfBusiness == NatureOfBusiness.other &&
+                natureOfBusinessDescription!.isEmpty) ||
+            (occupation == Occupations.other && otherOccupation!.isEmpty) ||
+            (country != 'HKG' && detailInformationOfCountry!.isEmpty)) {
+          return false;
+        } else {
+          if (employer!.isEmpty || employerAddress!.isEmpty) {
+            return false;
+          }
+          return true;
+        }
+      }
     }
   }
 }
