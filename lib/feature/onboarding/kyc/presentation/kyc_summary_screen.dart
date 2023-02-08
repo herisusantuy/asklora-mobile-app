@@ -9,7 +9,7 @@ import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/kyc_bloc.dart';
-import 'financial_profile/widgets/disclosure_summary_content.dart';
+import 'financial_profile/widgets/financial_profile_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
 import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
 import 'widgets/kyc_base_form.dart';
@@ -52,7 +52,7 @@ class KycSummaryScreen extends StatelessWidget {
           const SizedBox(
             height: 56,
           ),
-          DisclosureSummaryContent(
+          FinancialProfileSummaryContent(
             key: const Key('financial_profile_summary_content'),
             disclosureAffiliationState: disclosureAffiliationState,
             financialProfileState: financialProfileState,

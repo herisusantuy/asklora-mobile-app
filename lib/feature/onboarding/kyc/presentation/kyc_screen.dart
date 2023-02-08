@@ -18,7 +18,7 @@ import 'financial_profile/disclosure_affiliation_commission_screen.dart';
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_associates_input_screen.dart';
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_person_input_screen.dart';
 import 'financial_profile/disclosure_affiliation_person_screen.dart';
-import 'financial_profile/disclosure_summary_screen.dart';
+import 'financial_profile/financial_profile_summary_screen.dart';
 import 'financial_profile/financial_profile_employment_question.dart';
 import 'kyc_result_screen.dart';
 import 'kyc_progress/kyc_progress_screen.dart';
@@ -170,8 +170,8 @@ class KycScreen extends StatelessWidget {
               return const FinancialProfileEmploymentQuestion(
                 progress: 0.62,
               );
-            case KycPageStep.disclosureSummary:
-              return DisclosureSummaryScreen(
+            case KycPageStep.financialProfileSummary:
+              return FinancialProfileSummaryScreen(
                 progress: 0.65,
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,

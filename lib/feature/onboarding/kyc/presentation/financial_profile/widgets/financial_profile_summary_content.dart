@@ -9,12 +9,12 @@ import '../../widgets/kyc_sub_title.dart';
 import '../../widgets/summary_text_info.dart';
 import 'dot_text.dart';
 
-class DisclosureSummaryContent extends StatelessWidget {
+class FinancialProfileSummaryContent extends StatelessWidget {
   final String title;
   final DisclosureAffiliationState disclosureAffiliationState;
   final FinancialProfileState financialProfileState;
 
-  const DisclosureSummaryContent(
+  const FinancialProfileSummaryContent(
       {Key? key,
       required this.disclosureAffiliationState,
       required this.financialProfileState,
