@@ -33,6 +33,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
     return DropdownButtonFormField<String>(
       value: widget.initialValue.isNotEmpty ? widget.initialValue : null,
       elevation: 2,
+      isExpanded: true,
       menuMaxHeight: 200,
       onChanged: (String? newValue) {
         widget.onChanged(newValue);
@@ -57,6 +58,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
               child: CustomTextNew(
                 element,
                 style: TextFieldStyle.valueTextStyle.copyWith(height: 1),
+                ellipsis: true,
               ),
             ),
           )

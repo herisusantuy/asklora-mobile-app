@@ -4,7 +4,6 @@ import '../../../../../core/domain/base_response.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../repository/bot_stock_repository.dart';
-import '../utils/bot_stock_utils.dart';
 
 part 'bot_stock_event.dart';
 
@@ -15,7 +14,6 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       : _botStockRepository = botStockRepository,
         super(const BotStockState()) {
     on<FetchBotRecommendation>(_onFetchBotRecommendation);
-    on<FetchBotPortfolio>(_onFetchBotPortfolio);
     on<FaqActiveIndexChanged>(_onFaqActiveIndexChanged);
     on<GetFreeBotStock>(_onGetFreeBotStock);
     on<FetchChartData>(_onFetchChartData);
@@ -34,18 +32,6 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       emit(state.copyWith(
           botRecommendationResponse:
               BaseResponse.error('Something went wrong')));
-    }
-  }
-
-  _onFetchBotPortfolio(
-      FetchBotPortfolio event, Emitter<BotStockState> emit) async {
-    try {
-      emit(state.copyWith(botPortfolioResponse: BaseResponse.loading()));
-      emit(state.copyWith(
-          botPortfolioResponse: await _botStockRepository.fetchBotPortfolio()));
-    } catch (e) {
-      emit(state.copyWith(
-          botPortfolioResponse: BaseResponse.error('Something went wrong')));
     }
   }
 

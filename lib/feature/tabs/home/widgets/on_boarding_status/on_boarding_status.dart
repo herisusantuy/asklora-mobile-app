@@ -116,6 +116,15 @@ class OnBoardingStatus extends StatelessWidget {
   OnBoardingStatusModel _onBoardingStatusModel(
       BuildContext context, UserJourney userJourney) {
     switch (userJourney) {
+      case UserJourney.personalisation:
+        return OnBoardingStatusModel(
+          title: 'START INVESTING',
+          subTitle: 'Answer Personalisation Questions',
+          onTap: () => PpiScreen.open(context,
+              arguments: Pair(QuestionPageType.personalisation,
+                  QuestionPageStep.personalisation)),
+          progress: 0.05,
+        );
       case UserJourney.createAccount:
         return OnBoardingStatusModel(
           title: 'START INVESTING',

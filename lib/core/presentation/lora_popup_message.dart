@@ -5,16 +5,21 @@ import '../styles/asklora_text_styles.dart';
 import '../utils/app_icons.dart';
 import 'buttons/primary_button.dart';
 import 'custom_text_new.dart';
+import 'we_create/custom_text_button.dart';
 
 class LoraPopUpMessage extends StatelessWidget {
   final Color backgroundColor;
   final String title;
   final String? subTitle;
   final String buttonLabel;
+  final String? secondaryButtonLabel;
   final Color titleColor;
   final Color subTitleColor;
   final ButtonPrimaryType buttonPrimaryType;
   final VoidCallback? onPrimaryButtonTap;
+  final VoidCallback? onSecondaryButtonTap;
+  final String pngImage;
+  final double boxTopMargin;
 
   const LoraPopUpMessage(
       {required this.title,
@@ -23,8 +28,12 @@ class LoraPopUpMessage extends StatelessWidget {
       this.subTitleColor = AskLoraColors.charcoal,
       this.buttonPrimaryType = ButtonPrimaryType.solidCharcoal,
       required this.buttonLabel,
+      this.secondaryButtonLabel,
       this.backgroundColor = AskLoraColors.white,
       this.onPrimaryButtonTap,
+      this.onSecondaryButtonTap,
+      this.boxTopMargin = 70,
+      this.pngImage = 'lora_memoji_1',
       Key? key})
       : super(key: key);
 
@@ -42,7 +51,7 @@ class LoraPopUpMessage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.only(
                     left: 24, right: 24, top: 64, bottom: 32),
-                margin: const EdgeInsets.only(top: 70),
+                margin: EdgeInsets.only(top: boxTopMargin),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: backgroundColor,
@@ -76,14 +85,19 @@ class LoraPopUpMessage extends StatelessWidget {
                             if (onPrimaryButtonTap != null) {
                               onPrimaryButtonTap!();
                             }
-                          })
+                          }),
+                    if (secondaryButtonLabel != null)
+                      CustomTextButton(
+                        key: const Key('kyc_secondary_button'),
+                        margin: const EdgeInsets.only(top: 24),
+                        label: secondaryButtonLabel!,
+                        onTap: onSecondaryButtonTap ?? () {},
+                      )
                   ],
                 ),
               ),
             ),
-            Align(
-                alignment: Alignment.topCenter,
-                child: getPngImage('lora_memoji_1')),
+            Align(alignment: Alignment.topCenter, child: getPngImage(pngImage)),
           ],
         ),
       ),

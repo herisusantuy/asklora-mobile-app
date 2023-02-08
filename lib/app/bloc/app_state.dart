@@ -1,13 +1,18 @@
 part of 'app_bloc.dart';
 
 enum UserJourney {
-  privacyPersonalisation,
-  createAccount,
-  investmentStyle,
-  kyc,
-  freeBotStock,
-  deposit,
-  learnBotPlank
+  privacy('privacy'),
+  personalisation('personalisation'),
+  createAccount('create_account'),
+  investmentStyle('investment_style'),
+  kyc('kyc'),
+  freeBotStock('free_bot_stock'),
+  deposit('deposit'),
+  learnBotPlank('learn_bot_plank');
+
+  final String value;
+
+  const UserJourney(this.value);
 }
 
 enum AppStatus { unknown, authenticated, unauthenticated }
@@ -20,17 +25,16 @@ class AppState extends Equatable {
   const AppState._(
       {this.status = AppStatus.unknown,
       this.locale = const LocaleType('en', 'US', 'ENG', 'Mulish'),
-      this.userJourney = UserJourney.privacyPersonalisation});
+      this.userJourney = UserJourney.privacy});
 
   const AppState.unknown() : this._();
 
-  const AppState.authenticated(
-      {UserJourney userJourney = UserJourney.privacyPersonalisation})
+  const AppState.authenticated({UserJourney userJourney = UserJourney.privacy})
       : this._(status: AppStatus.authenticated, userJourney: userJourney);
 
   const AppState.unauthenticated(
       {localeType = const LocaleType('en', 'US', 'ENG', 'Mulish'),
-      UserJourney userJourney = UserJourney.privacyPersonalisation})
+      UserJourney userJourney = UserJourney.privacy})
       : this._(
             status: AppStatus.unauthenticated,
             locale: localeType,

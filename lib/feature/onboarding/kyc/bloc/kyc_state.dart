@@ -26,23 +26,15 @@ enum KycPageStep {
   disclosureAffiliationAssociatesInput,
   disclosureAffiliationCommissions,
   disclosureRejected,
-  disclosureSummary,
+  financialProfileSummary,
+  financialProfileEmployment,
+  financialProfileSourceOfWealth,
   verifyIdentity,
   signBrokerAgreements,
   signRiskDisclosureAgreements,
   signTaxAgreements,
   kycSummary,
-  giftBotStock
-  // countryOfTaxResidence,
-  // addressProof,
-  // employmentFinancialProfile,
-  // disclosureAffiliation,
-  // signingTaxAgreement,
-  // signingBrokerAgreement,
-  // trustedContact,
-  // riskDisclosure,
-  // reviewInformation,
-  // unknown
+  kycResultScreen
 }
 
 class KycState extends Equatable {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
@@ -36,6 +37,8 @@ class PrivacyQuestionScreen extends StatelessWidget {
                           PrivacyQuestionIndexChanged(
                               state.privacyQuestionIndex));
                     } else if (state is OnNextResultSuccessScreen) {
+                      context.read<AppBloc>().add(
+                          const SaveUserJourney(UserJourney.personalisation));
                       context.read<NavigationBloc<QuestionPageStep>>().add(
                           const PageChanged(
                               QuestionPageStep.privacyResultSuccess));

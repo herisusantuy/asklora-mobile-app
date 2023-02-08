@@ -16,12 +16,10 @@ import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
-import '../../../tabs/tabs_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
 import '../../reset_password/presentation/reset_password_screen.dart';
 import '../../sign_up/presentation/sign_up_screen.dart';
 import '../bloc/sign_in_bloc.dart';
-import 'sign_in_success_screen.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({Key? key}) : super(key: key);
@@ -45,10 +43,10 @@ class SignInForm extends StatelessWidget {
           break;
         case ResponseState.success:
           UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
-              (section) => section.name == state.response.data.userJourney);
+              (section) => section.value == state.response.data.userJourney);
           context
               .read<AppBloc>()
-              .add(SaveUserJourney(userJourney ?? UserJourney.createAccount));
+              .add(SaveUserJourney(userJourney ?? UserJourney.investmentStyle));
           await SecureStorage()
               .writeData(sfKeyEmail, state.emailAddress)
               .then((_) {
