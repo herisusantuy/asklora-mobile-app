@@ -7,9 +7,10 @@ part 'sign_in_response.g.dart';
 class SignInResponse extends Equatable {
   final String access;
   final String refresh;
-  final String userJourney;
+  final String? userJourney;
 
-  const SignInResponse(this.access, this.refresh, this.userJourney);
+  const SignInResponse(this.access, this.refresh,
+      {this.userJourney = 'investment_style'});
 
   factory SignInResponse.fromJson(Map<String, dynamic> json) =>
       _$SignInResponseFromJson(json);
