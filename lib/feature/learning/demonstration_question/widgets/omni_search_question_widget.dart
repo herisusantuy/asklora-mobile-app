@@ -30,7 +30,8 @@ class OmniSearchQuestionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => OmniSearchQuestionWidgetBloc(initialKeywordAnswers: const []),
+      create: (_) =>
+          OmniSearchQuestionWidgetBloc(initialKeywordAnswers: const []),
       child: BlocListener<OmniSearchQuestionWidgetBloc,
           OmniSearchQuestionWidgetState>(
         listenWhen: (previous, current) =>

@@ -158,5 +158,4 @@ class PpiScreen extends StatelessWidget {
   static void open(BuildContext context,
           {required Pair<QuestionPageType, QuestionPageStep> arguments}) =>
       Navigator.pushNamed(context, route, arguments: arguments);
-
 }

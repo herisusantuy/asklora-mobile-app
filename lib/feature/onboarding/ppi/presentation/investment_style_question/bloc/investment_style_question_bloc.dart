@@ -18,8 +18,7 @@ class InvestmentStyleQuestionBloc
   }
 
   int _investmentStyleQuestionIndex;
-  List<Question> investmentStyleQuestions =
-      Fixture().investmentStyleQuestion;
+  List<Question> investmentStyleQuestions = Fixture().investmentStyleQuestion;
 
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<InvestmentStyleQuestionState> emit) {
@@ -31,12 +30,10 @@ class InvestmentStyleQuestionBloc
         emit(OnNextQuestion<Question>(QuestionType.choices, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       } else if (question.questionType == QuestionType.choices.value) {
-        emit(OnNextQuestion<Question>(
-            QuestionType.descriptive, question,
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       } else if (question.questionType == QuestionType.omniSearch.value) {
-        emit(OnNextQuestion<Question>(
-            QuestionType.omniSearch, question,
+        emit(OnNextQuestion<Question>(QuestionType.omniSearch, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       } else if (question.questionType == QuestionType.slider.value) {
         emit(OnNextQuestion<Question>(QuestionType.slider, question,
@@ -57,12 +54,10 @@ class InvestmentStyleQuestionBloc
         emit(OnNextQuestion<Question>(QuestionType.choices, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       } else if (question.questionType == QuestionType.descriptive.value) {
-        emit(OnNextQuestion<Question>(
-            QuestionType.descriptive, question,
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       } else if (question.questionType == QuestionType.omniSearch.value) {
-        emit(OnNextQuestion<Question>(
-            QuestionType.omniSearch, question,
+        emit(OnNextQuestion<Question>(QuestionType.omniSearch, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       } else {
         emit(OnNextQuestion<Question>(QuestionType.slider, question,

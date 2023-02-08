@@ -28,7 +28,8 @@ class PpiDefaultAnswer {
     return data == null ? '' : data.right;
   }
 
-  static OmniSearchModel getOmniSearch(BuildContext context, String questionId) {
+  static OmniSearchModel getOmniSearch(
+      BuildContext context, String questionId) {
     var data = context
         .read<UserResponseBloc>()
         .state
