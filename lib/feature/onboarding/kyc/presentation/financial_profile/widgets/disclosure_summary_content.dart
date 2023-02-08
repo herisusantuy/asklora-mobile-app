@@ -38,9 +38,7 @@ class DisclosureSummaryContent extends StatelessWidget {
           _spaceHeight,
           SummaryTextInfo(
               title: 'Nature of Business',
-              subTitle: financialProfileState.natureOfBusiness != null
-                  ? financialProfileState.natureOfBusiness!.value
-                  : ''),
+              subTitle: financialProfileState.natureOfBusiness?.value ?? ''),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Occupation',
