@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../utils/kyc_dropdown_enum.dart';
 
 part 'address_proof_event.dart';
 

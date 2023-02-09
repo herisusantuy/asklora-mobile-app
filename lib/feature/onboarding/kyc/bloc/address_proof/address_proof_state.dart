@@ -2,21 +2,21 @@ part of 'address_proof_bloc.dart';
 
 class AddressProofState extends Equatable {
   const AddressProofState(
-      {this.district = '',
-      this.region = '',
+      {this.district,
+      this.region,
       this.addressLine1 = '',
       this.addressLine2 = '',
       this.addressProofImages = const []});
 
-  final String district;
-  final String region;
+  final District? district;
+  final Region? region;
   final String addressLine1;
   final String addressLine2;
   final List<PlatformFile> addressProofImages;
 
   AddressProofState copyWith({
-    String? district,
-    String? region,
+    District? district,
+    Region? region,
     String? addressLine1,
     String? addressLine2,
     List<PlatformFile>? addressProofImages,
@@ -36,8 +36,8 @@ class AddressProofState extends Equatable {
   }
 
   bool enableNextButton() {
-    if (district.isNotEmpty &&
-        region.isNotEmpty &&
+    if (district != null &&
+        region != null &&
         addressLine1.isNotEmpty &&
         addressProofImages.isNotEmpty) {
       return true;

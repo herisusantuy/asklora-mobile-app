@@ -15,7 +15,7 @@ import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_st
 import '../../../../tabs/tabs_screen.dart';
 import '../../../bloc/bank_account_bloc.dart';
 import '../../../repository/bank_account_repository.dart';
-import '../../../widgets/balance_base_widget.dart';
+import '../../../widgets/balance_base_form.dart';
 import '../../../widgets/bank_account_card.dart';
 import '../../utils/deposit_utils.dart';
 import '../deposit_screen.dart';
@@ -66,7 +66,7 @@ class DepositWelcomeScreen extends StatelessWidget {
         },
         builder: (context, state) {
           DepositType depositType = initialDepositType ?? state.depositType;
-          return BalanceBaseWidget(
+          return BalanceBaseForm(
               title: 'Deposit',
               content: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

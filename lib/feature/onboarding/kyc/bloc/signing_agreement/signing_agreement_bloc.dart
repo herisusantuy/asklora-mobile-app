@@ -18,13 +18,9 @@ class SigningAgreementBloc
       : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
         _signatureController = signatureController,
         super(SigningAgreementState(signatureController: signatureController)) {
-    on<AlpacaCustomerAgreementOpened>(_onAlpacaCustomerAgreementOpened);
     on<AskLoraClientAgreementOpened>(_onAskLoraClientAgreementOpened);
-    on<BoundByAlpacaAndLoraAgreementChecked>(
-        _onBoundByAlpacaAndLoraAgreementChecked);
+    on<BoundByAskloraAgreementChecked>(_onBoundByAskloraAgreementChecked);
     on<UnderstandOnTheAgreementChecked>(_onUnderstandOnTheAgreementChecked);
-    on<CertifyNotUSCitizenAgreementChecked>(
-        _onCertifyNotUSCitizenAgreementChecked);
     on<RiskDisclosureAgreementChecked>(_onRiskDisclosureAgreementChecked);
     on<CustomerSignatureDrew>(_onCustomerSignatureDrew);
     on<CustomerSignatureReset>(_onCustomerSignatureReset);
@@ -33,38 +29,19 @@ class SigningAgreementBloc
   final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
   final SignatureController _signatureController;
 
-  _onAlpacaCustomerAgreementOpened(AlpacaCustomerAgreementOpened event,
-      Emitter<SigningAgreementState> emit) async {
-    await _signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
-        'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf');
-
-    emit(state.copyWith(
-        isAlpacaCustomerAgreementOpened:
-            event.isAlpacaCustomerAgreementOpened));
-  }
-
   _onAskLoraClientAgreementOpened(AskLoraClientAgreementOpened event,
       Emitter<SigningAgreementState> emit) async {
     emit(state.copyWith(isAskLoraClientAgreementOpened: true));
   }
 
-  _onBoundByAlpacaAndLoraAgreementChecked(
-      BoundByAlpacaAndLoraAgreementChecked event,
+  _onBoundByAskloraAgreementChecked(BoundByAskloraAgreementChecked event,
       Emitter<SigningAgreementState> emit) {
-    emit(state.copyWith(
-        isBoundByAlpacaAndLoraAgreementChecked: event.isChecked));
+    emit(state.copyWith(isBoundByAskloraAgreementChecked: event.isChecked));
   }
 
   _onUnderstandOnTheAgreementChecked(UnderstandOnTheAgreementChecked event,
       Emitter<SigningAgreementState> emit) {
     emit(state.copyWith(isUnderstandOnTheAgreementChecked: event.isChecked));
-  }
-
-  _onCertifyNotUSCitizenAgreementChecked(
-      CertifyNotUSCitizenAgreementChecked event,
-      Emitter<SigningAgreementState> emit) {
-    emit(
-        state.copyWith(isCertifyNotUSCitizenAgreementChecked: event.isChecked));
   }
 
   _onRiskDisclosureAgreementChecked(RiskDisclosureAgreementChecked event,

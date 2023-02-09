@@ -3,17 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
+import '../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
-import 'widgets/disclosure_summary_content.dart';
+import 'widgets/financial_profile_summary_content.dart';
 
-class DisclosureSummaryScreen extends StatelessWidget {
+class FinancialProfileSummaryScreen extends StatelessWidget {
   final DisclosureAffiliationState disclosureAffiliationState;
+  final FinancialProfileState financialProfileState;
   final double progress;
 
-  const DisclosureSummaryScreen(
+  const FinancialProfileSummaryScreen(
       {required this.disclosureAffiliationState,
+      required this.financialProfileState,
       required this.progress,
       Key? key})
       : super(key: key);
@@ -24,9 +27,10 @@ class DisclosureSummaryScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Financial Profile',
-      content: DisclosureSummaryContent(
-        key: const Key('disclosure_summary_content'),
+      content: FinancialProfileSummaryContent(
+        key: const Key('financial_profile_summary_content'),
         disclosureAffiliationState: disclosureAffiliationState,
+        financialProfileState: financialProfileState,
         title: 'Summary',
       ),
       bottomButton: _bottomButton(context),

@@ -176,9 +176,10 @@ void main() {
         expect(find.byKey(const Key('choices_button')), findsOneWidget);
       });
 
-      testWidgets('Show disclosure summary', (WidgetTester tester) async {
-        await buildKycScreen(tester, KycPageStep.disclosureSummary);
-        expect(find.byKey(const Key('disclosure_summary_content')),
+      testWidgets('Show financial profile summary',
+          (WidgetTester tester) async {
+        await buildKycScreen(tester, KycPageStep.financialProfileSummary);
+        expect(find.byKey(const Key('financial_profile_summary_content')),
             findsOneWidget);
         expect(kycButtonPair, findsOneWidget);
       });
@@ -193,13 +194,10 @@ void main() {
       testWidgets('Show broker agreement customer screen',
           (WidgetTester tester) async {
         await buildKycScreen(tester, KycPageStep.signBrokerAgreements);
-        expect(find.byKey(const Key('alpaca_agreement')), findsOneWidget);
         expect(find.byKey(const Key('asklora_agreement')), findsOneWidget);
         expect(find.byKey(const Key('bound_alpaca_lora_agreement_checkbox')),
             findsOneWidget);
         expect(find.byKey(const Key('understand_agreement_checkbox')),
-            findsOneWidget);
-        expect(find.byKey(const Key('certify_not_us_citizen_checkbox')),
             findsOneWidget);
         expect(
             find.byKey(const Key('customer_signature_drawer')), findsOneWidget);

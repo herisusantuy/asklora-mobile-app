@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/presentation/custom_scaffold.dart';
 import '../../core/utils/app_icons.dart';
+import '../bot_stock/presentation/portfolio/portfolio_screen.dart';
 import 'for_you/for_you_screen_form.dart';
 import 'home/home_screen_form.dart';
 
@@ -25,15 +26,10 @@ class BottomTabBarWidget extends StatefulWidget {
 
 class _BottomTabsWidgetState extends State<BottomTabBarWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreenForm(),
     ForYouScreenForm(),
-    Text(
-      'Index 2: Portfolio Screen',
-      style: optionStyle,
-    ),
+    PortfolioScreen(),
   ];
 
   void _onItemTapped(int index) {

@@ -9,7 +9,7 @@ import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
-import '../../utils/financial_profile_enum.dart';
+import '../../utils/kyc_dropdown_enum.dart';
 import '../widgets/kyc_base_form.dart';
 
 class FinancialProfileEmploymentQuestion extends StatelessWidget {
@@ -337,7 +337,8 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                 disablePrimaryButton: !state.enableNextButton(),
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()
-                    .add(const PageChanged(KycPageStep.disclosureSummary)),
+                    .add(
+                        const PageChanged(KycPageStep.financialProfileSummary)),
                 secondaryButtonOnClick: () => {},
                 primaryButtonLabel: 'NEXT',
                 secondaryButtonLabel: 'SAVE FOR LATER',
