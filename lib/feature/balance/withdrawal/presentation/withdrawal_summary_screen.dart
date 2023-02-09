@@ -10,7 +10,7 @@ import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/extensions.dart';
-import '../../widgets/balance_base_widget.dart';
+import '../../widgets/balance_base_form.dart';
 import '../bloc/withdrawal_bloc.dart';
 import '../repository/withdrawal_repository.dart';
 import 'withdrawal_result_screen.dart';
@@ -42,7 +42,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
             WithdrawalResultScreen.open(context);
           }
         },
-        child: BalanceBaseWidget(
+        child: BalanceBaseForm(
           title: 'Withdrawal',
           content: Column(
             children: [

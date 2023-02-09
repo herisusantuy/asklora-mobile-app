@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/circular_container.dart';
-import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/styles/asklora_colors.dart';
@@ -10,8 +9,7 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_recommendation/bot_recommendation_screen.dart';
-import '../widgets/circular_bot_card.dart';
-import '../widgets/gift_bot_stock_base_widget.dart';
+import '../widgets/bot_stock_form.dart';
 
 class BotStockDoScreen extends StatelessWidget {
   static const String route = '/gift_bot_stock_do_screen';
@@ -20,8 +18,7 @@ class BotStockDoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-        body: GiftBotStockBaseWidget(
+    return BotStockForm(
       content: Column(
         children: [
           const LoraMemojiHeader(
@@ -44,7 +41,7 @@ class BotStockDoScreen extends StatelessWidget {
           onTap: () => BotRecommendationScreen.open(context),
         ),
       ),
-    ));
+    );
   }
 
   Widget _botCard({required BotType botType, required String description}) =>

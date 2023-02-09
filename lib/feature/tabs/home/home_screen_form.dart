@@ -13,6 +13,7 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../bot_stock/utils/bot_stock_utils.dart';
+import '../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';

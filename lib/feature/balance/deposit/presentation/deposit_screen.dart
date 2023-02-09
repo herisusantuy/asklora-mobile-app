@@ -18,7 +18,7 @@ import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
-import '../../widgets/balance_base_widget.dart';
+import '../../widgets/balance_base_form.dart';
 import '../bloc/deposit_bloc.dart';
 import '../repository/deposit_repository.dart';
 import '../utils/deposit_utils.dart';
@@ -72,7 +72,7 @@ class DepositScreen extends StatelessWidget {
                 arguments: Pair(depositType, StatusType.success));
           }
         },
-        child: BalanceBaseWidget(
+        child: BalanceBaseForm(
             title: 'Deposit',
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

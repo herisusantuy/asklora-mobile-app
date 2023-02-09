@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/onfido/start_onfido.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -32,7 +33,7 @@ class VerifyIdentityScreen extends StatelessWidget {
           if (state is OnfidoSdkToken) {
             await _doVerificationOnfido(
                 context: context, onFidoSdkTokenState: state);
-          } else if (state.status == KycStatus.failure) {
+          } else if (state.response.state == ResponseState.error) {
             ///CHANGE THIS TO HANDLE ERROR LATER
             context
                 .read<NavigationBloc<KycPageStep>>()
