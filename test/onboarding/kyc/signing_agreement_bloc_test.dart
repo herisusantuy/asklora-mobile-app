@@ -34,20 +34,6 @@ void main() async {
     });
 
     blocTest<SigningAgreementBloc, SigningAgreementState>(
-        'emits "isAlpacaCustomerAgreementOpened = true" WHEN open alpaca customer agreement',
-        build: () => signingAgreementBloc,
-        act: (bloc) {
-          when(signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
-                  'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf'))
-              .thenAnswer((_) => Future.value(true));
-          bloc.add(const AlpacaCustomerAgreementOpened(true));
-        },
-        expect: () => {
-              signingAgreementState.copyWith(
-                  isAlpacaCustomerAgreementOpened: true)
-            });
-
-    blocTest<SigningAgreementBloc, SigningAgreementState>(
         'emits "isAskloraClientAgreementOpened = true" WHEN open asklora client agreement',
         build: () => signingAgreementBloc,
         act: (bloc) {
@@ -59,14 +45,14 @@ void main() async {
             });
 
     blocTest<SigningAgreementBloc, SigningAgreementState>(
-        'emits "isBoundByAlpacaAndLoraAgreementChecked = true" WHEN open check on the agreement',
+        'emits "isBoundByAskloraAgreementChecked = true" WHEN open check on the agreement',
         build: () => signingAgreementBloc,
         act: (bloc) {
-          bloc.add(const BoundByAlpacaAndLoraAgreementChecked(true));
+          bloc.add(const BoundByAskloraAgreementChecked(true));
         },
         expect: () => {
               signingAgreementState.copyWith(
-                  isBoundByAlpacaAndLoraAgreementChecked: true)
+                  isBoundByAskloraAgreementChecked: true)
             });
 
     blocTest<SigningAgreementBloc, SigningAgreementState>(
@@ -78,17 +64,6 @@ void main() async {
         expect: () => {
               signingAgreementState.copyWith(
                   isUnderstandOnTheAgreementChecked: true)
-            });
-
-    blocTest<SigningAgreementBloc, SigningAgreementState>(
-        'emits "isCertifyNotUSCitizenAgreementChecked = true" WHEN open check on the agreement',
-        build: () => signingAgreementBloc,
-        act: (bloc) {
-          bloc.add(const CertifyNotUSCitizenAgreementChecked(true));
-        },
-        expect: () => {
-              signingAgreementState.copyWith(
-                  isCertifyNotUSCitizenAgreementChecked: true)
             });
 
     blocTest<SigningAgreementBloc, SigningAgreementState>(
