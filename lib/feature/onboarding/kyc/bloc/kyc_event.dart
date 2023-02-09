@@ -7,6 +7,8 @@ abstract class KycEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class SubmitKyc extends KycEvent {}
+
 class GetSdkToken extends KycEvent {}
 
 class UpdateOnfidoResult extends KycEvent {

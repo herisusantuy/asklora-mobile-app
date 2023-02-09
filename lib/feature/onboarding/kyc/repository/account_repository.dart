@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import '../../../../core/domain/base_response.dart';
 import '../domain/account_api_client.dart';
 import '../domain/get_account/get_account_response.dart';
 import '../domain/onfido/onfido_result_request.dart';
@@ -16,26 +17,35 @@ class AccountRepository {
     return GetAccountResponse.fromJson(response.data);
   }
 
-  Future<bool> upgradeAccount(
+  Future<BaseResponse<bool>> upgradeAccount(
       UpgradeAccountRequest upgradeAccountRequest) async {
     // TODO: Change this API flow according to the new flow.
     try {
       _accountApiClient.upgradeAccount(upgradeAccountRequest);
-      return true;
+      return BaseResponse.complete(true);
     } catch (e) {
-      return (e.toString() == 'Invalid request');
+      return BaseResponse.error('Invalid Request');
     }
   }
 
-  Future<OnfidoTokenResponse> getOnfidoToken() async {
-    var response = await _accountApiClient.getOnfidoToken();
-    return OnfidoTokenResponse.fromJson(response.data);
+  Future<BaseResponse<OnfidoTokenResponse>> getOnfidoToken() async {
+    try {
+      var response = await _accountApiClient.getOnfidoToken();
+      return BaseResponse.complete(OnfidoTokenResponse.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error('Could not fetch the token!');
+    }
   }
 
-  Future<OnfidoResultResponse> updateKycResult(
+  Future<BaseResponse<OnfidoResultResponse>> updateKycResult(
       OnfidoResultRequest request) async {
-    var response = await _accountApiClient.updateKycResult(request);
-    return OnfidoResultResponse.fromJson(response.data);
+    try {
+      var response = await _accountApiClient.updateKycResult(request);
+      return BaseResponse.complete(
+          OnfidoResultResponse.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error('Could not update the Onfido result!');
+    }
   }
 
   Future<bool> submitTaxInfo(TaxInfoRequest request) async {
