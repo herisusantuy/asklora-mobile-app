@@ -10,6 +10,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../utils/kyc_dropdown_enum.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 
@@ -95,30 +96,27 @@ class AddressProofScreen extends StatelessWidget {
                     context.read<AddressProofBloc>().add(ImagesChanged(images)),
               ));
 
-  final districts = const ['Southern', 'Western', 'Eastern', 'Northern'];
-  final region = const ['Hong Kong Island'];
-
   Widget get _district => BlocBuilder<AddressProofBloc, AddressProofState>(
       builder: (context, state) => CustomDropdown(
           key: const Key('district_picker'),
           labelText: 'District',
           hintText: 'District',
-          initialValue: state.district,
-          itemsList: districts,
-          onChanged: (value) => context
-              .read<AddressProofBloc>()
-              .add(DistrictChanged(value ?? ''))));
+          initialValue: state.district?.value ?? '',
+          itemsList: District.values.map((e) => e.value).toList(),
+          onChanged: (value) => context.read<AddressProofBloc>().add(
+              DistrictChanged(District.values
+                  .firstWhere((element) => element.value == value)))));
 
   Widget get _region => BlocBuilder<AddressProofBloc, AddressProofState>(
       builder: (context, state) => CustomDropdown(
           key: const Key('region_picker'),
           labelText: 'Region',
           hintText: 'Region',
-          initialValue: state.region,
-          itemsList: region,
-          onChanged: (value) => context
-              .read<AddressProofBloc>()
-              .add(RegionChanged(value ?? ''))));
+          initialValue: state.region?.value ?? '',
+          itemsList: Region.values.map((e) => e.value).toList(),
+          onChanged: (value) => context.read<AddressProofBloc>().add(
+              RegionChanged(Region.values
+                  .firstWhere((element) => element.value == value)))));
 
   Widget _textInput(
           {required String initialValue,

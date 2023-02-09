@@ -11,6 +11,7 @@ import '../../feature/balance/deposit/presentation/deposit_screen.dart';
 import '../../feature/balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../feature/balance/deposit/utils/deposit_utils.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_amount/withdrawal_amount_screen.dart';
+import '../../feature/balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
@@ -150,6 +151,10 @@ class RouterGenerator {
       case TabsScreen.route:
         return MaterialPageRoute(
           builder: (_) => const TabsScreen(),
+        );
+      case WithdrawalBankDetailScreen.route:
+        return MaterialPageRoute(
+          builder: (_) => const WithdrawalBankDetailScreen(),
         );
       case WithdrawalAmountScreen.route:
         return MaterialPageRoute(

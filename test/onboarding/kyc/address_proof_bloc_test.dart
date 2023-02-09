@@ -2,6 +2,7 @@ import 'package:asklora_mobile_app/feature/onboarding/kyc/bloc/address_proof/add
 import 'package:bloc_test/bloc_test.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/utils/kyc_dropdown_enum.dart';
 
 void main() async {
   group('Address Proof Bloc Test', () {
@@ -22,8 +23,8 @@ void main() async {
         act: (bloc) => {
               bloc.add(const AddressLine1Changed('San Mateo')),
               bloc.add(const AddressLine2Changed('San Georgia')),
-              bloc.add(const DistrictChanged('Western')),
-              bloc.add(const RegionChanged('China Main Island')),
+              bloc.add(const DistrictChanged(District.eastern)),
+              bloc.add(const RegionChanged(Region.hongKongIsland)),
               bloc.add(
                   ImagesChanged([PlatformFile(name: 'some_file', size: 100)]))
             },
@@ -31,36 +32,36 @@ void main() async {
               const AddressProofState(
                 addressLine1: 'San Mateo',
                 addressLine2: '',
-                district: '',
-                region: '',
+                district: null,
+                region: null,
                 addressProofImages: [],
               ),
               const AddressProofState(
                 addressLine1: 'San Mateo',
                 addressLine2: 'San Georgia',
-                district: '',
-                region: '',
+                district: null,
+                region: null,
                 addressProofImages: [],
               ),
               const AddressProofState(
                 addressLine1: 'San Mateo',
                 addressLine2: 'San Georgia',
-                district: 'Western',
-                region: '',
+                district: District.eastern,
+                region: null,
                 addressProofImages: [],
               ),
               const AddressProofState(
                 addressLine1: 'San Mateo',
                 addressLine2: 'San Georgia',
-                district: 'Western',
-                region: 'China Main Island',
+                district: District.eastern,
+                region: Region.hongKongIsland,
                 addressProofImages: [],
               ),
               AddressProofState(
                 addressLine1: 'San Mateo',
                 addressLine2: 'San Georgia',
-                district: 'Western',
-                region: 'China Main Island',
+                district: District.eastern,
+                region: Region.hongKongIsland,
                 addressProofImages: [
                   PlatformFile(name: 'some_file', size: 100)
                 ],
