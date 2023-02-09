@@ -16,8 +16,10 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../balance/deposit/presentation/deposit_screen.dart';
+import '../../../balance/deposit/utils/deposit_utils.dart';
+import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
-
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
@@ -157,7 +159,7 @@ class PortfolioScreen extends StatelessWidget {
                               subTitle1: (data?.totalBotStockValues ?? 0)
                                   .convertToCurrencyDecimal(),
                               subTitle2: data?.withdrawableAmount != null
-                                  ? '${data!.withdrawableAmount.convertToCurrencyDecimal()}%'
+                                  ? '${data!.profit.convertToCurrencyDecimal()}%'
                                   : '/',
                             ),
                           ],
@@ -170,7 +172,8 @@ class PortfolioScreen extends StatelessWidget {
                     FundingButton(
                       disabled: data == null,
                       fundingType: FundingType.fund,
-                      onTap: () {},
+                      onTap: () => DepositScreen.open(
+                          context: context, depositType: DepositType.type1),
                     ),
                     const SizedBox(
                       height: 10,
@@ -178,7 +181,7 @@ class PortfolioScreen extends StatelessWidget {
                     FundingButton(
                       disabled: data == null,
                       fundingType: FundingType.withdraw,
-                      onTap: () {},
+                      onTap: () => WithdrawalBankDetailScreen.open(context),
                     ),
                   ],
                 )
