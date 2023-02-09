@@ -16,4 +16,8 @@ class WithdrawalAmountChanged extends WithdrawalEvent {
   List<Object?> get props => [withdrawalAmount];
 }
 
-class SubmitWithdrawal extends WithdrawalEvent {}
+class SubmitWithdrawal extends WithdrawalEvent {
+  final double withdrawalAmount;
+
+  const SubmitWithdrawal(this.withdrawalAmount);
+}
