@@ -63,8 +63,9 @@ class BotStockRepository {
     return BaseResponse.complete(demonstrationBots);
   }
 
-  Future<BaseResponse<bool>> getFreeBotStock() async {
-    await Future.delayed(const Duration(seconds: 2));
+  Future<BaseResponse<bool>> getFreeBotStock(
+      RecommendedBot recommendedBot) async {
+    await Future.delayed(const Duration(seconds: 1));
     return BaseResponse.complete(true);
   }
 }

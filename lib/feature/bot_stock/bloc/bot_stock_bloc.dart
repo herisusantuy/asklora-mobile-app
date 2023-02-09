@@ -40,7 +40,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       emit(state.copyWith(getFreeBotStockResponse: BaseResponse.loading()));
       emit(state.copyWith(
           getFreeBotStockResponse:
-              await _botStockRepository.getFreeBotStock()));
+              await _botStockRepository.getFreeBotStock(event.recommendedBot)));
     } catch (e) {
       emit(state.copyWith(
           getFreeBotStockResponse: BaseResponse.error('Something went wrong')));

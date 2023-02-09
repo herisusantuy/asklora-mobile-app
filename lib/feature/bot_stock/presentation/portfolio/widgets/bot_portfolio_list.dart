@@ -34,16 +34,19 @@ class BotPortfolioList extends StatelessWidget {
                 return Column(
                   children: [
                     const BotPortfolioFilter(),
-                    Wrap(
-                      spacing: _spacing,
-                      runSpacing: _runSpacing,
-                      children: defaultRecommendedBots
-                          .map((e) => BotPortfolioCard(
-                                height: botCardHeight,
-                                spacing: _spacing,
-                                recommendedBot: e,
-                              ))
-                          .toList(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Wrap(
+                        spacing: _spacing,
+                        runSpacing: _runSpacing,
+                        children: state.botPortfolioResponse.data!
+                            .map((e) => BotPortfolioCard(
+                                  height: botCardHeight,
+                                  spacing: _spacing,
+                                  recommendedBot: e,
+                                ))
+                            .toList(),
+                      ),
                     ),
                   ],
                 );

@@ -147,7 +147,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                 disabled: state.response.state == ResponseState.loading,
                 label: 'CONFIRM',
                 onTap: () => context.read<WithdrawalBloc>().add(
-                      SubmitWithdrawal(),
+                      SubmitWithdrawal(withdrawalAmount),
                     ),
               );
             })
