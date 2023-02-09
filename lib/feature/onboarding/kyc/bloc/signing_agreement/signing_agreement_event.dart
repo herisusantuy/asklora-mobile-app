@@ -7,16 +7,6 @@ abstract class SigningBrokerAgreementEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class AlpacaCustomerAgreementOpened extends SigningBrokerAgreementEvent {
-  final bool isAlpacaCustomerAgreementOpened;
-
-  const AlpacaCustomerAgreementOpened(this.isAlpacaCustomerAgreementOpened)
-      : super();
-
-  @override
-  List<Object> get props => [isAlpacaCustomerAgreementOpened];
-}
-
 class AskLoraClientAgreementOpened extends SigningBrokerAgreementEvent {
   const AskLoraClientAgreementOpened() : super();
 
@@ -24,10 +14,10 @@ class AskLoraClientAgreementOpened extends SigningBrokerAgreementEvent {
   List<Object> get props => [];
 }
 
-class BoundByAlpacaAndLoraAgreementChecked extends SigningBrokerAgreementEvent {
+class BoundByAskloraAgreementChecked extends SigningBrokerAgreementEvent {
   final bool isChecked;
 
-  const BoundByAlpacaAndLoraAgreementChecked(this.isChecked) : super();
+  const BoundByAskloraAgreementChecked(this.isChecked) : super();
 
   @override
   List<Object> get props => [isChecked];
@@ -37,15 +27,6 @@ class UnderstandOnTheAgreementChecked extends SigningBrokerAgreementEvent {
   final bool isChecked;
 
   const UnderstandOnTheAgreementChecked(this.isChecked) : super();
-
-  @override
-  List<Object> get props => [isChecked];
-}
-
-class CertifyNotUSCitizenAgreementChecked extends SigningBrokerAgreementEvent {
-  final bool isChecked;
-
-  const CertifyNotUSCitizenAgreementChecked(this.isChecked) : super();
 
   @override
   List<Object> get props => [isChecked];
