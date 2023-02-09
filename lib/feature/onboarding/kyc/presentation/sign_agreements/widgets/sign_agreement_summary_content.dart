@@ -20,10 +20,6 @@ class SignAgreementSummaryContent extends StatelessWidget {
           ),
           _spaceHeight,
           const SummaryTextInfo(
-              title: 'Alpaca Customer Agreement',
-              subTitle: '(Agreed & Signed)'),
-          _spaceHeight,
-          const SummaryTextInfo(
               title: 'Asklora Customer Agreement',
               subTitle: '(Agreed & Signed)'),
           _spaceHeight,

@@ -3,16 +3,22 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
+import '../../../bloc/financial_profile/financial_profile_bloc.dart';
+import '../../../utils/financial_profile_enum.dart';
 import '../../widgets/kyc_sub_title.dart';
 import '../../widgets/summary_text_info.dart';
 import 'dot_text.dart';
 
-class DisclosureSummaryContent extends StatelessWidget {
+class FinancialProfileSummaryContent extends StatelessWidget {
   final String title;
   final DisclosureAffiliationState disclosureAffiliationState;
+  final FinancialProfileState financialProfileState;
 
-  const DisclosureSummaryContent(
-      {Key? key, required this.disclosureAffiliationState, required this.title})
+  const FinancialProfileSummaryContent(
+      {Key? key,
+      required this.disclosureAffiliationState,
+      required this.financialProfileState,
+      required this.title})
       : super(key: key);
 
   static const double _spaceHeightDouble = 20;
@@ -26,6 +32,53 @@ class DisclosureSummaryContent extends StatelessWidget {
             subTitle: title,
           ),
           _spaceHeight,
+          SummaryTextInfo(
+              title: 'Employment Status',
+              subTitle: financialProfileState.employmentStatus.value),
+          _spaceHeight,
+          SummaryTextInfo(
+              title: 'Nature of Business',
+              subTitle: financialProfileState.natureOfBusiness?.value ?? ''),
+          _spaceHeight,
+          SummaryTextInfo(
+              title: 'Occupation',
+              subTitle: financialProfileState.occupation != null &&
+                      financialProfileState.occupation != Occupations.other
+                  ? financialProfileState.occupation!.value
+                  : financialProfileState.occupation != null &&
+                          financialProfileState.occupation == Occupations.other
+                      ? financialProfileState.otherOccupation!
+                      : ''),
+          _spaceHeight,
+          SummaryTextInfo(
+              title: 'Employer',
+              subTitle: financialProfileState.employer != ''
+                  ? financialProfileState.employer!
+                  : ''),
+          _spaceHeight,
+          SummaryTextInfo(
+              title: 'Employer/ Company Address',
+              subTitle: financialProfileState.employerAddress != ''
+                  ? financialProfileState.employerAddress!
+                  : ''),
+          _spaceHeight,
+          SummaryTextInfo(
+              title: 'Country of Employment',
+              subTitle: financialProfileState.countryName != ''
+                  ? financialProfileState.countryName!
+                  : ''),
+          if (financialProfileState.country != 'HKG')
+            Padding(
+              padding: const EdgeInsets.only(top: _spaceHeightDouble),
+              child: SummaryTextInfo(
+                  title:
+                      'Why is your country of employment different from your country of residence?',
+                  subTitle:
+                      financialProfileState.detailInformationOfCountry != ''
+                          ? financialProfileState.detailInformationOfCountry!
+                          : ''),
+            ),
+          _spaceHeightFinancialProfile,
           SummaryTextInfo(
               titleWidget: _affiliatedQuestionWidget,
               subTitle: disclosureAffiliationState.isAffiliatedPerson != null
@@ -75,6 +128,10 @@ class DisclosureSummaryContent extends StatelessWidget {
 
   Widget get _spaceHeightAffiliated => const SizedBox(
         height: 10,
+      );
+
+  Widget get _spaceHeightFinancialProfile => const SizedBox(
+        height: 80,
       );
 
   Widget get _affiliatedQuestionWidget => Column(
