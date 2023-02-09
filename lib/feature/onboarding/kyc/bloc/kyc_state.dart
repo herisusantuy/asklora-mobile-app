@@ -69,5 +69,3 @@ class OnfidoResultUpdated extends KycState {
 
   const OnfidoResultUpdated(this.onfidoResponse);
 }
-
-class KycSubmitSuccess extends KycState {}
