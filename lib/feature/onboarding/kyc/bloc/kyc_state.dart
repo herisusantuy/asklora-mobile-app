@@ -39,25 +39,22 @@ enum KycPageStep {
 
 class KycState extends Equatable {
   const KycState({
-    this.status = KycStatus.unknown,
-    this.responseMessage = '',
+    this.response = const BaseResponse(),
   });
 
-  final KycStatus status;
-  final String responseMessage;
+  final BaseResponse response;
 
   @override
   List<Object?> get props {
-    return [status, responseMessage];
+    return [response];
   }
 
   KycState copyWith({
-    KycStatus? status,
-    String? responseMessage,
+    BaseResponse? response,
   }) {
     return KycState(
-        status: status ?? this.status,
-        responseMessage: responseMessage ?? this.responseMessage);
+      response: response ?? this.response,
+    );
   }
 }
 
@@ -68,9 +65,9 @@ class OnfidoSdkToken extends KycState {
 }
 
 class OnfidoResultUpdated extends KycState {
-  final OnfidoResultResponse response;
+  final OnfidoResultResponse onfidoResponse;
 
-  const OnfidoResultUpdated(this.response);
+  const OnfidoResultUpdated(this.onfidoResponse);
 }
 
 class KycSubmitSuccess extends KycState {}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
@@ -36,16 +37,16 @@ class KycSummaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<KycBloc, KycState>(
       listener: (context, state) {
-        if (state.status == KycStatus.submittingKyc) {
+        if (state.response.state == ResponseState.loading) {
           CustomLoadingOverlay.show(context);
         } else {
           CustomLoadingOverlay.dismiss();
-          if (state.status == KycStatus.success) {
+          if (state.response.state == ResponseState.success) {
             context
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.kycResultScreen));
-          } else if (state.status == KycStatus.failure) {
-            CustomInAppNotification.show(context, state.responseMessage);
+          } else if (state.response.state == ResponseState.error) {
+            CustomInAppNotification.show(context, state.response.message);
           }
         }
       },

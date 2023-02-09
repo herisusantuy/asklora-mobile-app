@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -17,7 +16,7 @@ import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../portfolio/portfolio_screen.dart';
 import '../widgets/bot_bottom_sheet_widget.dart';
-import '../widgets/gift_bot_stock_base_widget.dart';
+import '../widgets/bot_stock_form.dart';
 import '../widgets/pair_column_text.dart';
 
 class BotTradeSummaryScreen extends StatelessWidget {
@@ -63,100 +62,82 @@ class BotTradeSummaryScreen extends StatelessWidget {
                     ));
           }
         },
-        child: CustomScaffold(
-            body: Column(
-          children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 22.0),
-                child: CustomTextNew(
-                  recommendedBot.tickerName,
-                  style: AskLoraTextStyles.h5
-                      .copyWith(color: AskLoraColors.charcoal),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: GiftBotStockBaseWidget(
+        child: BotStockForm(
+            useHeader: true,
+            title: recommendedBot.tickerName,
+            content: Column(
+              children: [
+                RoundColoredBox(
                   content: Column(
                     children: [
-                      RoundColoredBox(
-                        content: Column(
-                          children: [
-                            const PairColumnText(
-                                title1: 'Investment Amount (USD)',
-                                title2: 'Trading Fee (USD)',
-                                subTitle1: '68.00',
-                                subTitle2: 'Free'),
-                            _spaceBetweenInfo,
-                            const PairColumnText(
-                                title1: 'Stop Loss Level',
-                                title2: 'Take Profit Level',
-                                subTitle1: 'N/A',
-                                subTitle2: '240.00'),
-                            _spaceBetweenInfo,
-                            const PairColumnText(
-                                title1: 'Market Price',
-                                title2: 'Investment Period',
-                                subTitle1: '223.07',
-                                subTitle2: '3 months'),
-                            _spaceBetweenInfo,
-                            const PairColumnText(
-                                title1: 'Start Time',
-                                title2: 'End Time',
-                                subTitle1: '03/12 15:30 ET',
-                                subTitle2: '03/26 15:30 ET'),
-                          ],
-                        ),
-                        title: 'Free Botstock Trade Summary',
+                      const PairColumnText(
+                          title1: 'Investment Amount (USD)',
+                          title2: 'Trading Fee (USD)',
+                          subTitle1: '68.00',
+                          subTitle2: 'Free'),
+                      _spaceBetweenInfo,
+                      const PairColumnText(
+                          title1: 'Stop Loss Level',
+                          title2: 'Take Profit Level',
+                          subTitle1: 'N/A',
+                          subTitle2: '240.00'),
+                      _spaceBetweenInfo,
+                      const PairColumnText(
+                          title1: 'Market Price',
+                          title2: 'Investment Period',
+                          subTitle1: '223.07',
+                          subTitle2: '3 months'),
+                      _spaceBetweenInfo,
+                      const PairColumnText(
+                          title1: 'Start Time',
+                          title2: 'End Time',
+                          subTitle1: '03/12 15:30 ET',
+                          subTitle2: '03/26 15:30 ET'),
+                    ],
+                  ),
+                  title: 'Free Botstock Trade Summary',
+                ),
+                const SizedBox(
+                  height: 19,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: AskLoraColors.lightGreen),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 13),
+                  child: Row(
+                    children: [
+                      const LoraMemojiWidget(
+                        loraMemojiType: LoraMemojiType.lora1,
+                        height: 70,
+                        width: 70,
                       ),
                       const SizedBox(
-                        height: 19,
+                        width: 12,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: AskLoraColors.lightGreen),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 13),
-                        child: Row(
-                          children: [
-                            const LoraMemojiWidget(
-                              loraMemojiType: LoraMemojiType.lora1,
-                              height: 70,
-                              width: 70,
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              child: CustomTextNew(
-                                'You will have more flexbility in the next real trade. Come on, this is FREE!',
-                                style: AskLoraTextStyles.body1
-                                    .copyWith(color: AskLoraColors.charcoal),
-                              ),
-                            )
-                          ],
+                      Expanded(
+                        child: CustomTextNew(
+                          'You will have more flexbility in the next real trade. Come on, this is FREE!',
+                          style: AskLoraTextStyles.body1
+                              .copyWith(color: AskLoraColors.charcoal),
                         ),
                       )
                     ],
                   ),
-                  bottomButton: Builder(
-                      builder: (context) => Padding(
-                            padding: const EdgeInsets.only(top: 24, bottom: 30),
-                            child: PrimaryButton(
-                              label: 'CONFIRM',
-                              onTap: () => context
-                                  .read<BotStockBloc>()
-                                  .add(GetFreeBotStock(recommendedBot)),
-                            ),
-                          ))),
-            )
-          ],
-        )),
+                )
+              ],
+            ),
+            bottomButton: Builder(
+                builder: (context) => Padding(
+                      padding: const EdgeInsets.only(top: 24, bottom: 30),
+                      child: PrimaryButton(
+                        label: 'CONFIRM',
+                        onTap: () => context
+                            .read<BotStockBloc>()
+                            .add(GetFreeBotStock(recommendedBot)),
+                      ),
+                    ))),
       ),
     );
   }
