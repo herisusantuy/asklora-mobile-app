@@ -4,7 +4,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/financial_profile/financial_profile_bloc.dart';
-import '../../../utils/financial_profile_enum.dart';
+import '../../../utils/kyc_dropdown_enum.dart';
 import '../../widgets/kyc_sub_title.dart';
 import '../../widgets/summary_text_info.dart';
 import 'dot_text.dart';
