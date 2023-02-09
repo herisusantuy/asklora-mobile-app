@@ -100,7 +100,7 @@ class HomeScreenContentWidget extends StatelessWidget {
             buttonLabel: 'OPEN INVESTMENT ACCOUNT',
             secondaryButtonLabel: 'LEARN MORE',
             onSecondaryButtonTap: () {},
-            onPrimaryButtonTap: () => SignUpScreen.open(context),
+            onPrimaryButtonTap: () => KycScreen.open(context),
             backgroundColor: AskLoraColors.whiteSmoke,
           ),
           _spaceHeightBig,
@@ -111,7 +111,7 @@ class HomeScreenContentWidget extends StatelessWidget {
             subTitle:
                 'Complete your account opening and experience your first trade with an AI strategy.  ',
             buttonLabel: 'OPEN INVESTMENT ACCOUNT',
-            onPrimaryButtonTap: () => SignUpScreen.open(context),
+            onPrimaryButtonTap: () => KycScreen.open(context),
             backgroundColor: AskLoraColors.lime,
             pngImage: 'home_dumbell',
             boxTopMargin: 105,
