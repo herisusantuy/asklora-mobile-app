@@ -54,6 +54,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
   double dash = 0;
   int linePathLength = 0;
   double addition = 0.08;
+  double lastProfit = 0;
 
   @override
   void initState() {
@@ -150,7 +151,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
           delayDuration: Duration.zero,
           left: MediaQuery.of(context).size.width - 176,
           top: 0,
-          profit: 0.9,
+          profit: lastProfit,
           hedgeType: HedgeType.sell,
         ));
       });
@@ -163,6 +164,11 @@ class _ChartAnimationState extends State<ChartAnimation> {
         Duration(milliseconds: ((factor / currentDistance)).round()), (timer) {
       if (mounted) {
         int? hedgeShare = widget.chartDataSets[animateIndex].hedgeShare;
+        double? profit = widget.chartDataSets[animateIndex].currentPnlRet;
+        if (profit != null) {
+          lastProfit = widget.chartDataSets[animateIndex].currentPnlRet!;
+        }
+
         if (hedgeShare != null && hedgeShare != 0) {
           if (hedgeShare > 0) {
             setState(() {
@@ -194,7 +200,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
                     50 * (chartHeight - 24) / 100
                 ? 10
                 : (chartHeight - 120),
-            profit: widget.chartDataSets[animateIndex].currentPnlRet!,
+            profit: profit!,
             hedgeType: hedgeShare > 0 ? HedgeType.buy : HedgeType.sell,
           ));
 
