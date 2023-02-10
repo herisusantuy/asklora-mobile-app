@@ -27,8 +27,13 @@ class SourceOfWealthBloc
     SourceOfWealthModel? answer = sourceOfWealthAnswers.firstWhereOrNull(
         (element) => element.sourceOfWealthType == event.sourceOfWealthType);
     if (answer == null) {
+      int amount =
+          event.sourceOfWealthType == SourceOfWealthType.incomeFromEmployment
+              ? 100
+              : 0;
       sourceOfWealthAnswers.add(SourceOfWealthModel(
         sourceOfWealthType: event.sourceOfWealthType,
+        amount: amount,
       ));
     } else {
       sourceOfWealthAnswers.remove(answer);
@@ -39,7 +44,6 @@ class SourceOfWealthBloc
         totalAmount = 0;
       }
     }
-
     emit(
       state.copyWith(
         sourceOfWealthAnswers: sourceOfWealthAnswers,

@@ -44,6 +44,9 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.active) {
+      _controller.text = widget.initialValue;
+    }
     if (!widget.active) {
       _controller.text = '';
     }

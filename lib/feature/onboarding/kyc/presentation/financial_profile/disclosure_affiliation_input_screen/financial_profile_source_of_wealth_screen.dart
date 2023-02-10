@@ -9,7 +9,6 @@ import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart
 import '../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../welcome/carousel/presentation/carousel_screen.dart';
-import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/kyc_bloc.dart';
 import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../../utils/source_of_wealth_enum.dart';
@@ -45,6 +44,19 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
+          Center(
+            child: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
+              buildWhen: (previous, current) =>
+                  previous.totalOfSourceOFWealthAmount !=
+                  current.totalOfSourceOFWealthAmount,
+              builder: (context, state) {
+                return CustomTextNew(
+                  '${state.totalOfSourceOFWealthAmount}%',
+                  style: AskLoraTextStyles.h1,
+                );
+              },
+            ),
+          ),
           ...SourceOfWealthType.values
               .map(
                 (wealthType) =>
@@ -56,6 +68,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                     SourceOfWealthModel? sourceOfWealthModel =
                         state.sourceOfWealthAnswers.firstWhereOrNull(
                             (type) => type.sourceOfWealthType == wealthType);
+
                     return Column(
                       children: [
                         NumberCounterInput(
@@ -63,7 +76,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                           label: wealthType.value,
                           initialValue: sourceOfWealthModel != null
                               ? sourceOfWealthModel.amount.toString()
-                              : '',
+                              : '0',
                           active: sourceOfWealthModel != null,
                           onTap: () => context
                               .read<SourceOfWealthBloc>()
@@ -71,21 +84,16 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                           onAmountChanged: (value) => context
                               .read<SourceOfWealthBloc>()
                               .add(SourceOfWealthAmountChanged(
-                                  value!.isNotEmpty
-                                      ? value
-                                      : wealthType ==
-                                              SourceOfWealthType
-                                                  .incomeFromEmployment
-                                          ? value = '100'
-                                          : '0',
-                                  wealthType)),
+                                  value!.isNotEmpty ? value : '0', wealthType)),
                         ),
                         if (sourceOfWealthModel != null &&
                             (wealthType == SourceOfWealthType.other))
                           Padding(
                             padding: const EdgeInsets.only(bottom: 20),
                             child: MasterTextField(
-                              hintText: 'Put the details',
+                              maxLine: 2,
+                              hintText:
+                                  'Use this space to provide more detailed information',
                               onChanged: (value) {
                                 context.read<SourceOfWealthBloc>().add(
                                     SourceOfWealthOtherIncomeChanged(
@@ -103,15 +111,17 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
       ),
       bottomButton: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
         buildWhen: (previous, current) =>
-            previous.enableNextButton() != current.enableNextButton(),
+            previous.enableNextButton() != current.enableNextButton() ||
+            previous.totalOfSourceOFWealthAmount !=
+                current.totalOfSourceOFWealthAmount,
         builder: (context, state) {
           return ButtonPair(
               disablePrimaryButton: state.enableNextButton(),
               primaryButtonOnClick: () {
+                print('total>> ${state.totalOfSourceOFWealthAmount}');
                 if (state.totalOfSourceOFWealthAmount == 100) {
                   context.read<NavigationBloc<KycPageStep>>().add(
-                      const PageChanged(
-                          KycPageStep.disclosureAffiliationAssociates));
+                      const PageChanged(KycPageStep.financialProfileSummary));
                 } else {
                   CustomInAppNotification.show(
                       context, 'Your sources of wealth must add up to 100%');
