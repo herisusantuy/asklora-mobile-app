@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../styles/asklora_colors.dart';
-import '../styles/asklora_text_styles.dart';
-import '../utils/app_icons.dart';
-import 'buttons/primary_button.dart';
-import 'custom_text_new.dart';
-import 'we_create/custom_text_button.dart';
+import '../../styles/asklora_colors.dart';
+import '../../styles/asklora_text_styles.dart';
+import '../../utils/app_icons.dart';
+import '../buttons/primary_button.dart';
+import '../custom_text_new.dart';
+import '../we_create/custom_text_button.dart';
 
 class LoraPopUpMessage extends StatelessWidget {
   final Color backgroundColor;

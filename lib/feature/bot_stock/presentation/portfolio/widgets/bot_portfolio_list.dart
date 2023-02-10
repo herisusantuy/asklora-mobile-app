@@ -11,7 +11,10 @@ class BotPortfolioList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (userJourney == UserJourney.createAccount) {
+    if (userJourney == UserJourney.personalisation) {
+      return const BotPortfolioPopUp(
+          botPortfolioPopUpType: BotPortfolioPopUpType.personalisation);
+    } else if (userJourney == UserJourney.createAccount) {
       return const BotPortfolioPopUp(
           botPortfolioPopUpType: BotPortfolioPopUpType.createAccount);
     } else if (userJourney == UserJourney.investmentStyle) {
