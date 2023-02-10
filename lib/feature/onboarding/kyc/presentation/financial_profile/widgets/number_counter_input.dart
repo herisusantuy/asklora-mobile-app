@@ -12,6 +12,7 @@ class NumberCounterInput extends StatefulWidget {
   final bool active;
   final VoidCallback onTap;
   final Function(String?) onAmountChanged;
+
   const NumberCounterInput({
     required this.label,
     this.active = false,
@@ -27,10 +28,18 @@ class NumberCounterInput extends StatefulWidget {
 
 class _NumberCounterInputState extends State<NumberCounterInput> {
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  void didUpdateWidget(covariant NumberCounterInput oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialValue != widget.initialValue) {
+      _controller.text = widget.initialValue;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _controller.text = widget.initialValue;
     _controller.addListener(() {
       widget.onAmountChanged(_controller.text);
     });
@@ -44,12 +53,9 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.active) {
-      _controller.text = widget.initialValue;
-    }
-    if (!widget.active) {
-      _controller.text = '';
-    }
+    _controller.selection =
+        TextSelection.collapsed(offset: _controller.text.length);
+
     return _cardButton(children: [
       _counterButton(
           label: '-',
@@ -57,9 +63,12 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
             int incrementAmount = int.parse(
                     _controller.text.isNotEmpty ? _controller.text : '0') -
                 10;
-            if (incrementAmount >= 0) {
-              _controller.text = incrementAmount.toString();
+
+            if (incrementAmount < 0) {
+              incrementAmount = 0;
             }
+
+            _controller.text = incrementAmount.toString();
           }),
       _numberInput(),
       _counterButton(
@@ -68,9 +77,11 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
             int decrementAmount = int.parse(
                     _controller.text.isNotEmpty ? _controller.text : '0') +
                 10;
-            if (decrementAmount <= 100) {
-              _controller.text = decrementAmount.toString();
+
+            if (decrementAmount > 100) {
+              decrementAmount = 100;
             }
+            _controller.text = decrementAmount.toString();
           }),
     ]);
   }
@@ -147,7 +158,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
       child: SizedBox(
         width: 82,
         height: 40,
-        child: TextFormField(
+        child: TextField(
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             NumericalRangeFormatter(min: 0, max: 100)
@@ -160,6 +171,9 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
           ),
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,
+          onChanged: (str) {
+            _controller.text = str;
+          },
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: '0',

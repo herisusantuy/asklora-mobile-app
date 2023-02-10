@@ -59,7 +59,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
           ),
           ...SourceOfWealthType.values
               .map(
-                (wealthType) =>
+                (source) =>
                     BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
                   buildWhen: (previous, current) =>
                       previous.sourceOfWealthAnswers !=
@@ -67,27 +67,27 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                   builder: (context, state) {
                     SourceOfWealthModel? sourceOfWealthModel =
                         state.sourceOfWealthAnswers.firstWhereOrNull(
-                            (type) => type.sourceOfWealthType == wealthType);
+                            (type) => type.sourceOfWealthType == source);
 
                     return Column(
                       children: [
                         NumberCounterInput(
-                          key: Key(wealthType.name),
-                          label: wealthType.value,
+                          key: Key(source.name),
+                          label: source.value,
                           initialValue: sourceOfWealthModel != null
                               ? sourceOfWealthModel.amount.toString()
                               : '0',
                           active: sourceOfWealthModel != null,
                           onTap: () => context
                               .read<SourceOfWealthBloc>()
-                              .add(SourceOfWealthSelected(wealthType)),
+                              .add(SourceOfWealthSelected(source)),
                           onAmountChanged: (value) => context
                               .read<SourceOfWealthBloc>()
                               .add(SourceOfWealthAmountChanged(
-                                  value!.isNotEmpty ? value : '0', wealthType)),
+                                  value!.isNotEmpty ? value : '0', source)),
                         ),
                         if (sourceOfWealthModel != null &&
-                            (wealthType == SourceOfWealthType.other))
+                            (source == SourceOfWealthType.other))
                           Padding(
                             padding: const EdgeInsets.only(bottom: 20),
                             child: MasterTextField(
@@ -97,7 +97,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                               onChanged: (value) {
                                 context.read<SourceOfWealthBloc>().add(
                                     SourceOfWealthOtherIncomeChanged(
-                                        wealthType, value));
+                                        source, value));
                               },
                             ),
                           ),
