@@ -2,18 +2,18 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/presentation/buttons/button_pair.dart';
-import '../../../../../../core/presentation/custom_in_app_notification.dart';
-import '../../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../../core/presentation/text_fields/master_text_field.dart';
-import '../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../welcome/carousel/presentation/carousel_screen.dart';
-import '../../../bloc/kyc_bloc.dart';
-import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
-import '../../../utils/source_of_wealth_enum.dart';
-import '../../widgets/kyc_base_form.dart';
-import '../widgets/number_counter_input.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/text_fields/master_text_field.dart';
+import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../welcome/carousel/presentation/carousel_screen.dart';
+import '../../bloc/kyc_bloc.dart';
+import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
+import '../../utils/source_of_wealth_enum.dart';
+import '../widgets/kyc_base_form.dart';
+import 'widgets/number_counter_input.dart';
 
 class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
   final double progress;
