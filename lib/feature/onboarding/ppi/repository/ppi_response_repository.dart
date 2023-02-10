@@ -1,4 +1,4 @@
-import '../domain/ppi_api_client.dart';
+import '../domain/ppi_api_repository.dart';
 import '../domain/ppi_user_response.dart';
 import '../domain/ppi_user_response_request.dart';
 import 'bot_recommendation_repository.dart';
@@ -13,12 +13,12 @@ class PpiResponseRepository {
   final BotRecommendationRepository botRecommendationRepository =
       BotRecommendationRepository();
 
-  final PpiApiClient _ppiApiClient = PpiApiClient();
+  final PpiApiRepository _ppiApiRepository = PpiApiRepository();
 
   Future<PpiUserResponse> addAnswer(
       PpiSelectionRequest ppiUserResponseRequest) async {
     var response =
-        await _ppiApiClient.postQuestionAnswer(ppiUserResponseRequest);
+        await _ppiApiRepository.postQuestionAnswer(ppiUserResponseRequest);
 
     var ppiUserResponse = PpiUserResponse.fromJson(response.data);
 
@@ -30,7 +30,8 @@ class PpiResponseRepository {
 
   Future<PpiUserResponse> addBulkAnswer(
       List<PpiSelectionRequest> ppiUserResponseRequest) async {
-    var response = await _ppiApiClient.postBulkAnswer(ppiUserResponseRequest);
+    var response =
+        await _ppiApiRepository.postBulkAnswer(ppiUserResponseRequest);
 
     var ppiUserResponse = PpiUserResponse.fromJson(response.data);
 

@@ -24,12 +24,8 @@ class SaveUserResponse extends UserResponseEvent {
 }
 
 class SendBulkResponse extends UserResponseEvent {
-  final List<PpiSelectionRequest> ppiUserResponseRequest;
-
   @override
-  List<Object?> get props => [ppiUserResponseRequest];
-
-  const SendBulkResponse(this.ppiUserResponseRequest);
+  List<Object?> get props => [DateTime.now().millisecondsSinceEpoch];
 }
 
 class SkipResponse extends UserResponseEvent {
