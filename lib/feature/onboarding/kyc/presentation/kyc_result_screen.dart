@@ -47,7 +47,7 @@ class KycResultScreen extends StatelessWidget {
 
   Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => GiftBotStockWelcomeScreen.open(context),
-        secondaryButtonOnClick: () => TabsScreen.open(context),
+        secondaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(context),
         primaryButtonLabel: 'GET FREE AI TRADE',
         secondaryButtonLabel: 'MAYBE LATER',
       );
