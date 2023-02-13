@@ -20,9 +20,15 @@ class UserJourneyRepository {
     return BaseResponse.complete(userJourneyResponse);
   }
 
-  Future<BaseResponse<UserJourneyResponse>> getUserJourney() async {
-    var response = await _userJourneyApiClient.get();
-    var userJourneyResponse = UserJourneyResponse.fromJson(response.data);
-    return BaseResponse.complete(userJourneyResponse);
+  Future<UserJourney> getUserJourney() async {
+    try {
+      var response = await _userJourneyApiClient.get();
+      var userJourneyResponse = UserJourneyResponse.fromJson(response.data);
+      return UserJourney.values.firstWhereOrNull(
+              (element) => element.value == userJourneyResponse.userJourney) ??
+          UserJourney.privacy;
+    } catch (e) {
+      return UserJourney.privacy;
+    }
   }
 }

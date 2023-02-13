@@ -175,22 +175,13 @@ class MockUserJourneyRepository extends _i1.Mock
         )),
       ) as _i5.Future<_i2.BaseResponse<_i7.UserJourneyResponse>>);
   @override
-  _i5.Future<_i2.BaseResponse<_i7.UserJourneyResponse>> getUserJourney() =>
-      (super.noSuchMethod(
+  _i5.Future<_i8.UserJourney> getUserJourney() => (super.noSuchMethod(
         Invocation.method(
           #getUserJourney,
           [],
         ),
-        returnValue:
-            _i5.Future<_i2.BaseResponse<_i7.UserJourneyResponse>>.value(
-                _FakeBaseResponse_0<_i7.UserJourneyResponse>(
-          this,
-          Invocation.method(
-            #getUserJourney,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i2.BaseResponse<_i7.UserJourneyResponse>>);
+        returnValue: _i5.Future<_i8.UserJourney>.value(_i8.UserJourney.privacy),
+      ) as _i5.Future<_i8.UserJourney>);
 }
 
 /// A class which mocks [TokenApiClient].

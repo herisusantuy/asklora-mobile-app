@@ -50,7 +50,7 @@ void main() async {
         when(tokenRepository.isTokenValid())
             .thenAnswer((_) => Future.value(true));
         when(userJourneyRepository.getUserJourney())
-            .thenAnswer((_) => Future.value(userJourneyResponse));
+            .thenAnswer((_) => Future.value(UserJourney.kyc));
         return appBloc;
       },
       act: (bloc) => bloc.add(AppLaunched()),
@@ -65,7 +65,7 @@ void main() async {
         when(tokenRepository.isTokenValid())
             .thenAnswer((_) => Future.value(false));
         when(userJourneyRepository.getUserJourney())
-            .thenAnswer((_) => Future.value(userJourneyResponse));
+            .thenAnswer((_) => Future.value(UserJourney.privacy));
         return appBloc;
       },
       act: (bloc) => bloc.add(AppLaunched()),
