@@ -96,37 +96,38 @@ class BotTradeSummaryScreen extends StatelessWidget {
                           subTitle2: '03/26 15:30 ET'),
                     ],
                   ),
-                  title: 'Free Botstock Trade Summary',
+                  title: recommendedBot.freeBot
+                      ? 'Free Botstock Trade Summary'
+                      : 'Trade Summary',
                 ),
                 const SizedBox(
                   height: 19,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: AskLoraColors.lightGreen),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 13),
-                  child: Row(
-                    children: [
-                      const LoraMemojiWidget(
-                        loraMemojiType: LoraMemojiType.lora1,
-                        height: 70,
-                        width: 70,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Expanded(
-                        child: CustomTextNew(
-                          'You will have more flexbility in the next real trade. Come on, this is FREE!',
-                          style: AskLoraTextStyles.body1
-                              .copyWith(color: AskLoraColors.charcoal),
+                if (recommendedBot.freeBot)
+                  RoundColoredBox(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 13),
+                    backgroundColor: AskLoraColors.lightGreen,
+                    content: Row(
+                      children: [
+                        const LoraMemojiWidget(
+                          loraMemojiType: LoraMemojiType.lora1,
+                          height: 70,
+                          width: 70,
                         ),
-                      )
-                    ],
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Expanded(
+                          child: CustomTextNew(
+                            'You will have more flexbility in the next real trade. Come on, this is FREE!',
+                            style: AskLoraTextStyles.body1
+                                .copyWith(color: AskLoraColors.charcoal),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                )
               ],
             ),
             bottomButton: Builder(
