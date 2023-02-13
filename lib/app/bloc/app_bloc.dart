@@ -30,12 +30,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     if (isTokenValid) {
       emit(AppState.authenticated(
           userJourney: UserJourney.values.firstWhere(
-              (element) => element.value == userJourney.data?.userJourney)));
+              (element) => element.value == userJourney.data!.userJourney)));
     } else {
       emit(AppState.unauthenticated(
           localeType: LocaleType.defaultFont(),
-          userJourney: UserJourney.values.firstWhere(
-              (element) => element.value == userJourney.data?.userJourney)));
+          userJourney: UserJourney.privacy));
     }
   }
 

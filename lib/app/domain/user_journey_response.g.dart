@@ -11,7 +11,7 @@ UserJourneyResponse _$UserJourneyResponseFromJson(Map<String, dynamic> json) =>
       json['uid'] as String,
       json['updated'] as String,
       json['user_journey'] as String,
-      json['data'] as String,
+      json['data'] as String?,
       json['user'] as int,
       json['detail'] as String?,
     );

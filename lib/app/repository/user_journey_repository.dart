@@ -15,8 +15,8 @@ class UserJourneyRepository {
   Future<BaseResponse<UserJourneyResponse>> saveUserJourney(
       {required UserJourney userJourney, String? data}) async {
     var response = await _userJourneyApiClient
-        .save(UserJourneyRequest(userJourney: userJourney.name, data: data));
-    var userJourneyResponse = UserJourneyResponse.fromJson(response.data);
+        .save(UserJourneyRequest(userJourney: userJourney.value, data: data));
+    var userJourneyResponse = UserJourneyResponse.fromJson(response.data!);
     return BaseResponse.complete(userJourneyResponse);
   }
 

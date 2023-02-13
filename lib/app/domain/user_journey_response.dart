@@ -9,7 +9,7 @@ class UserJourneyResponse extends Equatable {
   final String updated;
   @JsonKey(name: 'user_journey')
   final String userJourney;
-  final String data;
+  final String? data;
   final int user;
   final String? detail;
 
