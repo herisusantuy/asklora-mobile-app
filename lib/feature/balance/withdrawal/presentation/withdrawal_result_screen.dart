@@ -23,7 +23,8 @@ class WithdrawalResultScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 30),
           child: ButtonPair(
             primaryButtonLabel: 'DONE',
-            primaryButtonOnClick: () => TabsScreen.open(context),
+            primaryButtonOnClick: () =>
+                TabsScreen.openAndRemoveAllRoute(context),
             secondaryButtonLabel: 'VIEW TRANSACTION HISTORY',
             secondaryButtonOnClick: () {},
           ),

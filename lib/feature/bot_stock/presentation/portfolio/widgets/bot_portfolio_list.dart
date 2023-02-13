@@ -11,10 +11,7 @@ class BotPortfolioList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (userJourney == UserJourney.createAccount) {
-      return const BotPortfolioPopUp(
-          botPortfolioPopUpType: BotPortfolioPopUpType.createAccount);
-    } else if (userJourney == UserJourney.investmentStyle) {
+    if (userJourney == UserJourney.investmentStyle) {
       return const BotPortfolioPopUp(
           botPortfolioPopUpType: BotPortfolioPopUpType.investmentStyle);
     } else if (userJourney == UserJourney.kyc) {
@@ -34,16 +31,19 @@ class BotPortfolioList extends StatelessWidget {
                 return Column(
                   children: [
                     const BotPortfolioFilter(),
-                    Wrap(
-                      spacing: _spacing,
-                      runSpacing: _runSpacing,
-                      children: defaultRecommendedBots
-                          .map((e) => BotPortfolioCard(
-                                height: botCardHeight,
-                                spacing: _spacing,
-                                recommendedBot: e,
-                              ))
-                          .toList(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Wrap(
+                        spacing: _spacing,
+                        runSpacing: _runSpacing,
+                        children: state.botPortfolioResponse.data!
+                            .map((e) => BotPortfolioCard(
+                                  height: botCardHeight,
+                                  spacing: _spacing,
+                                  recommendedBot: e,
+                                ))
+                            .toList(),
+                      ),
                     ),
                   ],
                 );

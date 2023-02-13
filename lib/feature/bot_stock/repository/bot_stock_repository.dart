@@ -58,13 +58,20 @@ class BotStockRepository {
     return BaseResponse.complete(defaultRecommendedBots);
   }
 
+  Future<BaseResponse<List<RecommendedBot>>> fetchFreeBotRecommendation(
+      {bool isFreeBot = false}) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return BaseResponse.complete(defaultFreeRecommendedBots);
+  }
+
   Future<BaseResponse<List<RecommendedBot>>> fetchBotDemonstration() async {
     await Future.delayed(const Duration(seconds: 1));
     return BaseResponse.complete(demonstrationBots);
   }
 
-  Future<BaseResponse<bool>> getFreeBotStock() async {
-    await Future.delayed(const Duration(seconds: 2));
+  Future<BaseResponse<bool>> getFreeBotStock(
+      RecommendedBot recommendedBot) async {
+    await Future.delayed(const Duration(seconds: 1));
     return BaseResponse.complete(true);
   }
 }

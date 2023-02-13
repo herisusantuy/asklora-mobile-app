@@ -7,7 +7,7 @@ import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../core/presentation/custom_text_new.dart';
-import '../../../core/presentation/lora_popup_message.dart';
+import '../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../auth/sign_up/presentation/sign_up_screen.dart';

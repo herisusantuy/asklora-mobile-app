@@ -99,6 +99,26 @@ class MockBotStockRepository extends _i1.Mock
           ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
   @override
   _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>
+      fetchFreeBotRecommendation({bool? isFreeBot = false}) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #fetchFreeBotRecommendation,
+              [],
+              {#isFreeBot: isFreeBot},
+            ),
+            returnValue:
+                _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>.value(
+                    _FakeBaseResponse_0<List<_i7.RecommendedBot>>(
+              this,
+              Invocation.method(
+                #fetchFreeBotRecommendation,
+                [],
+                {#isFreeBot: isFreeBot},
+              ),
+            )),
+          ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>
       fetchBotDemonstration() => (super.noSuchMethod(
             Invocation.method(
               #fetchBotDemonstration,
@@ -115,17 +135,19 @@ class MockBotStockRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
   @override
-  _i4.Future<_i2.BaseResponse<bool>> getFreeBotStock() => (super.noSuchMethod(
+  _i4.Future<_i2.BaseResponse<bool>> getFreeBotStock(
+          _i7.RecommendedBot? recommendedBot) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getFreeBotStock,
-          [],
+          [recommendedBot],
         ),
         returnValue:
             _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
           this,
           Invocation.method(
             #getFreeBotStock,
-            [],
+            [recommendedBot],
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<bool>>);

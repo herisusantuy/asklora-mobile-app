@@ -115,7 +115,8 @@ class DepositWelcomeScreen extends StatelessWidget {
                     context: context,
                     depositType: depositType,
                   ),
-              secondaryButtonOnClick: () => TabsScreen.open(context),
+              secondaryButtonOnClick: () =>
+                  TabsScreen.openAndRemoveAllRoute(context),
               primaryButtonLabel: 'CONTINUE',
               secondaryButtonLabel: 'MAYBE LATER'),
         );

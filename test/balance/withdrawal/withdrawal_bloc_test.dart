@@ -51,7 +51,7 @@ void main() async {
         },
         act: (bloc) => {
               bloc.add(const WithdrawalAmountChanged(2000.0)),
-              bloc.add(SubmitWithdrawal())
+              bloc.add(const SubmitWithdrawal(2000.0))
             },
         expect: () => {
               const WithdrawalState(withdrawalAmount: 2000.0),

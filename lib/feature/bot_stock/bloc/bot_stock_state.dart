@@ -2,7 +2,8 @@ part of 'bot_stock_bloc.dart';
 
 class BotStockState extends Equatable {
   const BotStockState(
-      {this.botRecommendationResponse = const BaseResponse(),
+      {this.botRecommendationResponse =
+          const BaseResponse(state: ResponseState.loading),
       this.getFreeBotStockResponse = const BaseResponse(),
       this.chartDataResponse = const BaseResponse(),
       this.faqActiveIndex});
