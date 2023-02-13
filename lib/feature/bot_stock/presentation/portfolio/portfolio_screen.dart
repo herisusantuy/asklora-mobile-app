@@ -24,9 +24,9 @@ import '../../utils/bot_stock_utils.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
-import 'domain/bot_portfolio_pop_up_model.dart';
 import 'domain/portfolio_detail_response.dart';
 import 'repository/portfolio_repository.dart';
+import 'utils/portfolio_enum.dart';
 import 'widgets/bot_portfolio_pop_up.dart';
 
 part 'widgets/bot_portfolio_card.dart';

@@ -9,6 +9,8 @@ abstract class BotStockEvent extends Equatable {
 
 class FetchBotRecommendation extends BotStockEvent {}
 
+class FetchFreeBotRecommendation extends BotStockEvent {}
+
 class FaqActiveIndexChanged extends BotStockEvent {
   final int faqActiveIndex;
 

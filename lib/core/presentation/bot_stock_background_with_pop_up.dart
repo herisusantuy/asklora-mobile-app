@@ -7,7 +7,7 @@ import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../styles/asklora_colors.dart';
 import '../values/app_values.dart';
 import 'buttons/primary_button.dart';
-import 'lora_popup_message.dart';
+import 'lora_popup_message/lora_popup_message.dart';
 
 class BotStockBackgroundWithPopUp extends StatelessWidget {
   const BotStockBackgroundWithPopUp({
@@ -34,57 +34,67 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      padding: const EdgeInsets.only(top: 20),
       physics: shouldScrollable ? null : const NeverScrollableScrollPhysics(),
       child: Column(
         children: [
           Padding(padding: AppValues.screenHorizontalPadding, child: header),
-          Stack(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: blurPadding),
-                padding: AppValues.screenHorizontalPadding
-                    .copyWith(top: blurPadding, bottom: blurPadding),
-                child: Wrap(
-                  spacing: _spacing,
-                  runSpacing: _spacing,
-                  children: defaultRecommendedBots
-                      .map((e) => BotRecommendationCard(
-                            onTap: () {},
-                            height: botCardHeight,
-                            recommendedBot: e,
-                            spacing: _spacing,
-                          ))
-                      .toList(),
-                ),
-              ),
-              ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    color: Colors.white.withOpacity(0.6),
+          SizedBox(
+            height: _getListHeight,
+            width: double.infinity,
+            child: Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: blurPadding),
+                  padding: AppValues.screenHorizontalPadding
+                      .copyWith(top: blurPadding, bottom: blurPadding),
+                  child: Wrap(
+                    spacing: _spacing,
+                    runSpacing: _spacing,
+                    children: defaultRecommendedBots
+                        .map((e) => BotRecommendationCard(
+                              onTap: () {},
+                              height: botCardHeight,
+                              recommendedBot: e,
+                              spacing: _spacing,
+                            ))
+                        .toList(),
                   ),
                 ),
-              ),
-              Center(
-                child: Padding(
-                  padding: AppValues.screenHorizontalPadding,
-                  child: LoraPopUpMessage(
-                    backgroundColor: AskLoraColors.charcoal,
-                    title: popUpTitle,
-                    titleColor: AskLoraColors.white,
-                    subTitle: popUpSubTitle,
-                    subTitleColor: AskLoraColors.white,
-                    buttonLabel: popUpButtonLabel,
-                    buttonPrimaryType: ButtonPrimaryType.solidGreen,
-                    onPrimaryButtonTap: onPopUpButtonTap,
+                ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      color: Colors.white.withOpacity(0.6),
+                    ),
                   ),
                 ),
-              ),
-            ],
+                Center(
+                  child: Padding(
+                    padding: AppValues.screenHorizontalPadding,
+                    child: LoraPopUpMessage(
+                      backgroundColor: AskLoraColors.charcoal,
+                      title: popUpTitle,
+                      titleColor: AskLoraColors.white,
+                      subTitle: popUpSubTitle,
+                      subTitleColor: AskLoraColors.white,
+                      buttonLabel: popUpButtonLabel,
+                      buttonPrimaryType: ButtonPrimaryType.solidGreen,
+                      onPrimaryButtonTap: onPopUpButtonTap,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),
     );
   }
+
+  double get _getListHeight =>
+      botCardHeight * defaultRecommendedBots.length / 2 +
+      _spacing * ((defaultRecommendedBots.length / 2).ceil() - 1) +
+      2 * blurPadding;
 }

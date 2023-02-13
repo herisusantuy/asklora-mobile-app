@@ -150,7 +150,9 @@ class RouterGenerator {
         });
       case TabsScreen.route:
         return MaterialPageRoute(
-          builder: (_) => const TabsScreen(),
+          builder: (_) => TabsScreen(
+            initialTabScreenPage: settings.arguments as TabScreenPage?,
+          ),
         );
       case WithdrawalBankDetailScreen.route:
         return MaterialPageRoute(

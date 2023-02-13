@@ -75,7 +75,8 @@ class OtpScreen extends StatelessWidget {
             disablePrimaryButton: state.disableRequest,
             primaryButtonOnClick: () =>
                 context.read<OtpBloc>().add(OtpRequested(email)),
-            secondaryButtonOnClick: () => TabsScreen.open(context),
+            secondaryButtonOnClick: () =>
+                TabsScreen.openAndRemoveAllRoute(context),
             primaryButtonLabel: state.disableRequest
                 ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
                 : 'RESEND OTP CODE',

@@ -14,6 +14,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       : _botStockRepository = botStockRepository,
         super(const BotStockState()) {
     on<FetchBotRecommendation>(_onFetchBotRecommendation);
+    on<FetchFreeBotRecommendation>(_onFetchFreeBotRecommendation);
     on<FaqActiveIndexChanged>(_onFaqActiveIndexChanged);
     on<GetFreeBotStock>(_onGetFreeBotStock);
     on<FetchChartData>(_onFetchChartData);
@@ -28,6 +29,20 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       emit(state.copyWith(
           botRecommendationResponse:
               await _botStockRepository.fetchBotRecommendation()));
+    } catch (e) {
+      emit(state.copyWith(
+          botRecommendationResponse:
+              BaseResponse.error('Something went wrong')));
+    }
+  }
+
+  _onFetchFreeBotRecommendation(
+      FetchFreeBotRecommendation event, Emitter<BotStockState> emit) async {
+    try {
+      emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
+      emit(state.copyWith(
+          botRecommendationResponse:
+              await _botStockRepository.fetchFreeBotRecommendation()));
     } catch (e) {
       emit(state.copyWith(
           botRecommendationResponse:

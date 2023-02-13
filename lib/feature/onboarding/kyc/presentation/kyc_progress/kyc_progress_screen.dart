@@ -54,7 +54,7 @@ class KycProgressScreen extends StatelessWidget {
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.residentCheck)),
-        secondaryButtonOnClick: () => TabsScreen.open(context),
+        secondaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(context),
         primaryButtonLabel: 'OPEN ACCOUNT NOW',
         secondaryButtonLabel: 'MAYBE LATER',
       );

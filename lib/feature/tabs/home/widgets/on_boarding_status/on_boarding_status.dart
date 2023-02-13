@@ -7,7 +7,6 @@ import '../../../../../core/presentation/buttons/secondary/extra_info_button.dar
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
@@ -116,22 +115,6 @@ class OnBoardingStatus extends StatelessWidget {
   OnBoardingStatusModel _onBoardingStatusModel(
       BuildContext context, UserJourney userJourney) {
     switch (userJourney) {
-      case UserJourney.personalisation:
-        return OnBoardingStatusModel(
-          title: 'START INVESTING',
-          subTitle: 'Answer Personalisation Questions',
-          onTap: () => PpiScreen.open(context,
-              arguments: Pair(QuestionPageType.personalisation,
-                  QuestionPageStep.personalisation)),
-          progress: 0.05,
-        );
-      case UserJourney.createAccount:
-        return OnBoardingStatusModel(
-          title: 'START INVESTING',
-          subTitle: 'Create an Account',
-          onTap: () => SignUpScreen.open(context),
-          progress: 0.05,
-        );
       case UserJourney.investmentStyle:
         return OnBoardingStatusModel(
           title: 'START INVESTING',

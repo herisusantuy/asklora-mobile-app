@@ -12,9 +12,9 @@ import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
-import '../portfolio/portfolio_screen.dart';
 import '../widgets/bot_bottom_sheet_widget.dart';
 import '../widgets/bot_stock_form.dart';
 import '../widgets/pair_column_text.dart';
@@ -43,15 +43,16 @@ class BotTradeSummaryScreen extends StatelessWidget {
           } else if (state.getFreeBotStockResponse.state ==
               ResponseState.success) {
             CustomLoadingOverlay.dismiss();
-            context
-                .read<AppBloc>()
-                .add(const SaveUserJourney(UserJourney.deposit));
-            PortfolioScreen.open(context);
+            context.read<AppBloc>().add(
+                  const SaveUserJourney(UserJourney.deposit),
+                );
+            TabsScreen.openAndRemoveAllRoute(context,
+                initialTabScreenPage: TabScreenPage.portfolio);
             showModalBottomSheet(
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
                 context: (context),
-                builder: (_) => BotBottomSheetWidget(
+                builder: (context) => BotBottomSheetWidget(
                       title:
                           'Your free Botstock has been added to your portfolio successfully!',
                       primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',
@@ -95,37 +96,38 @@ class BotTradeSummaryScreen extends StatelessWidget {
                           subTitle2: '03/26 15:30 ET'),
                     ],
                   ),
-                  title: 'Free Botstock Trade Summary',
+                  title: recommendedBot.freeBot
+                      ? 'Free Botstock Trade Summary'
+                      : 'Trade Summary',
                 ),
                 const SizedBox(
                   height: 19,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: AskLoraColors.lightGreen),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 13),
-                  child: Row(
-                    children: [
-                      const LoraMemojiWidget(
-                        loraMemojiType: LoraMemojiType.lora1,
-                        height: 70,
-                        width: 70,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Expanded(
-                        child: CustomTextNew(
-                          'You will have more flexbility in the next real trade. Come on, this is FREE!',
-                          style: AskLoraTextStyles.body1
-                              .copyWith(color: AskLoraColors.charcoal),
+                if (recommendedBot.freeBot)
+                  RoundColoredBox(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 13),
+                    backgroundColor: AskLoraColors.lightGreen,
+                    content: Row(
+                      children: [
+                        const LoraMemojiWidget(
+                          loraMemojiType: LoraMemojiType.lora1,
+                          height: 70,
+                          width: 70,
                         ),
-                      )
-                    ],
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Expanded(
+                          child: CustomTextNew(
+                            'You will have more flexbility in the next real trade. Come on, this is FREE!',
+                            style: AskLoraTextStyles.body1
+                                .copyWith(color: AskLoraColors.charcoal),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                )
               ],
             ),
             bottomButton: Builder(
