@@ -51,6 +51,6 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
         key: const Key('maybe_later_button'),
         margin: const EdgeInsets.only(top: 24),
         label: 'MAYBE LATER',
-        onTap: () => TabsScreen.open(context),
+        onTap: () => TabsScreen.openAndRemoveAllRoute(context),
       );
 }

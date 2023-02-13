@@ -17,7 +17,10 @@ void main() async {
     late MockBotStockRepository botStockRepository;
     late BotStockBloc botStockBloc;
 
-    final BaseResponse<List<RecommendedBot>> response =
+    final BaseResponse<List<RecommendedBot>> botStockResponse =
+        BaseResponse.complete(defaultRecommendedBots);
+
+    final BaseResponse<List<RecommendedBot>> freeBotStockResponse =
         BaseResponse.complete(defaultRecommendedBots);
 
     final BaseResponse<List<ChartDataSet>> chartResponse =
@@ -64,13 +67,13 @@ void main() async {
         'fetching bot recommendation',
         build: () {
           when(botStockRepository.fetchBotRecommendation())
-              .thenAnswer((_) => Future.value(response));
+              .thenAnswer((_) => Future.value(botStockResponse));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchBotRecommendation()),
         expect: () => {
               BotStockState(botRecommendationResponse: BaseResponse.loading()),
-              BotStockState(botRecommendationResponse: response)
+              BotStockState(botRecommendationResponse: botStockResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -78,6 +81,34 @@ void main() async {
         'failed fetching bot recommendation',
         build: () {
           when(botStockRepository.fetchBotRecommendation())
+              .thenThrow(errorResponse);
+          return botStockBloc;
+        },
+        act: (bloc) => bloc.add(FetchBotRecommendation()),
+        expect: () => {
+              BotStockState(botRecommendationResponse: BaseResponse.loading()),
+              BotStockState(botRecommendationResponse: errorResponse)
+            });
+
+    blocTest<BotStockBloc, BotStockState>(
+        'emits `BaseResponse.complete` WHEN '
+        'fetching free bot recommendation',
+        build: () {
+          when(botStockRepository.fetchFreeBotRecommendation())
+              .thenAnswer((_) => Future.value(freeBotStockResponse));
+          return botStockBloc;
+        },
+        act: (bloc) => bloc.add(FetchFreeBotRecommendation()),
+        expect: () => {
+              BotStockState(botRecommendationResponse: BaseResponse.loading()),
+              BotStockState(botRecommendationResponse: freeBotStockResponse)
+            });
+
+    blocTest<BotStockBloc, BotStockState>(
+        'emits `BaseResponse.error` WHEN '
+        'failed fetching free bot recommendation',
+        build: () {
+          when(botStockRepository.fetchFreeBotRecommendation())
               .thenThrow(errorResponse);
           return botStockBloc;
         },

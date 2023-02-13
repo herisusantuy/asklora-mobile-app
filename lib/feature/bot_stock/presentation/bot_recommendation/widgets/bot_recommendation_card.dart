@@ -73,11 +73,14 @@ class BotRecommendationCard extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: PrimaryButton(
-                  disabled: isDisabled,
-                  buttonPrimarySize: ButtonPrimarySize.small,
-                  label: 'FREE TRADE',
-                  onTap: onTap),
+              child: SizedBox(
+                height: 32,
+                child: PrimaryButton(
+                    disabled: isDisabled,
+                    buttonPrimarySize: ButtonPrimarySize.small,
+                    label: recommendedBot.freeBot ? 'FREE TRADE' : 'TRADE',
+                    onTap: onTap),
+              ),
             )
           ],
         ),
