@@ -41,15 +41,6 @@ class BotPortfolioPopUp extends StatelessWidget {
   LoraPopUpMessageModel _getBotPortfolioPopUpModel(
       BuildContext context, BotPortfolioPopUpType botPortfolioPopUpType) {
     switch (botPortfolioPopUpType) {
-      case BotPortfolioPopUpType.personalisation:
-        return LoraPopUpMessageModel(
-            title: 'Create an Account and Start Trading!',
-            subTitle:
-                'You can manage all your investments here after you start trading. Create an account and start trading.',
-            buttonLabel: 'ANSWER PERSONALISATION QUESTIONS',
-            onTap: () => PpiScreen.open(context,
-                arguments: Pair(QuestionPageType.personalisation,
-                    QuestionPageStep.personalisation)));
       case BotPortfolioPopUpType.createAccount:
         return LoraPopUpMessageModel(
             title: 'Create an Account and Start Trading!',

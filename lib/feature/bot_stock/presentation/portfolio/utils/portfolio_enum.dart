@@ -1,5 +1,4 @@
 enum BotPortfolioPopUpType {
-  personalisation,
   createAccount,
   investmentStyle,
   kyc,
