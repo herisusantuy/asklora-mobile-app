@@ -25,7 +25,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
-    await _userJourneyRepository.saveUserJourney(UserJourney.freeBotStock);
     bool isTokenValid = await _tokenRepository.isTokenValid();
     UserJourney userJourney = await _userJourneyRepository.getUserJourney();
     if (isTokenValid) {
