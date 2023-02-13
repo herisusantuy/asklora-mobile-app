@@ -62,7 +62,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             } else {
               CustomLoadingOverlay.dismiss();
               if (state.endBotStockResponse.state == ResponseState.success) {
-                TabsScreen.openAndRemoveAllRoute(context);
+                TabsScreen.openAndRemoveAllRoute(context,
+                    initialTabScreenPage: TabScreenPage.portfolio);
               } else if (state.endBotStockResponse.state ==
                   ResponseState.error) {
                 CustomInAppNotification.show(
