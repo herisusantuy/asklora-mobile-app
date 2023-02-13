@@ -103,11 +103,11 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 const SizedBox(
                   height: 19,
                 ),
-                  RoundColoredBox(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 13),
-                    backgroundColor: AskLoraColors.lightGreen,
-                    content: Row(
+                RoundColoredBox(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 13),
+                  backgroundColor: AskLoraColors.lightGreen,
+                  content: Row(
                     children: [
                       const LoraMemojiWidget(
                         loraMemojiType: LoraMemojiType.lora1,
@@ -125,7 +125,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         ),
                       )
                     ],
-                  ),),
+                  ),
+                ),
               ],
             ),
             bottomButton: Builder(
