@@ -49,56 +49,54 @@ class KycScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
         enableBackNavigation: false,
-        body: BlocBuilder<AppBloc, AppState>(builder: (context, state) {
-          return MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                    create: (_) =>
-                        NavigationBloc<KycPageStep>(initialKycPageStep)),
-                BlocProvider(create: (_) => BasicInformationBloc()),
-                BlocProvider(
-                  create: (context) => OtpBloc(otpRepository: OtpRepository()),
-                ),
-                BlocProvider(
-                  create: (context) => CountryOfTaxResidenceBloc(),
-                ),
-                BlocProvider(
-                  create: (context) => AddressProofBloc(),
-                ),
-                BlocProvider(
-                  create: (context) => DisclosureAffiliationBloc(),
-                ),
-                BlocProvider(
-                  create: (context) => FinancialProfileBloc(),
-                ),
-                BlocProvider(
-                  create: (context) =>
-                      KycBloc(getAccountRepository: AccountRepository()),
-                ),
-                BlocProvider(
-                  create: (context) => SigningAgreementBloc(
-                      signingBrokerAgreementRepository:
-                          SigningBrokerAgreementRepository(),
-                      signatureController: SignatureController()),
-                ),
-              ],
-              child: Builder(builder: (context) {
-                return CustomNavigationWidget<KycPageStep>(
-                  padding: EdgeInsets.zero,
-                  header: const SizedBox.shrink(),
-                  onBackPressed: () {
-                    context
-                        .read<NavigationBloc<KycPageStep>>()
-                        .add(const PagePop());
-                  },
-                  child: BlocListener<NavigationBloc<KycPageStep>,
-                          NavigationState>(
-                      listenWhen: (_, current) => current.lastPage == true,
-                      listener: (context, state) => Navigator.pop(context),
-                      child: _getPages),
-                );
-              }));
-        }));
+        body: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                  create: (_) =>
+                      NavigationBloc<KycPageStep>(initialKycPageStep)),
+              BlocProvider(create: (_) => BasicInformationBloc()),
+              BlocProvider(
+                create: (context) => OtpBloc(otpRepository: OtpRepository()),
+              ),
+              BlocProvider(
+                create: (context) => CountryOfTaxResidenceBloc(),
+              ),
+              BlocProvider(
+                create: (context) => AddressProofBloc(),
+              ),
+              BlocProvider(
+                create: (context) => DisclosureAffiliationBloc(),
+              ),
+              BlocProvider(
+                create: (context) => FinancialProfileBloc(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    KycBloc(getAccountRepository: AccountRepository()),
+              ),
+              BlocProvider(
+                create: (context) => SigningAgreementBloc(
+                    signingBrokerAgreementRepository:
+                        SigningBrokerAgreementRepository(),
+                    signatureController: SignatureController()),
+              ),
+            ],
+            child: Builder(builder: (context) {
+              return CustomNavigationWidget<KycPageStep>(
+                padding: EdgeInsets.zero,
+                header: const SizedBox.shrink(),
+                onBackPressed: () {
+                  context
+                      .read<NavigationBloc<KycPageStep>>()
+                      .add(const PagePop());
+                },
+                child:
+                    BlocListener<NavigationBloc<KycPageStep>, NavigationState>(
+                        listenWhen: (_, current) => current.lastPage == true,
+                        listener: (context, state) => Navigator.pop(context),
+                        child: _getPages),
+              );
+            })));
   }
 
   Widget get _getPages {
