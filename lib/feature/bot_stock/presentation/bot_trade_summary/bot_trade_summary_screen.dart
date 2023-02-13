@@ -10,12 +10,11 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
-import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
-import '../widgets/bot_bottom_sheet_widget.dart';
+import '../../utils/bot_stock_bottom_sheet.dart';
 import '../widgets/bot_stock_form.dart';
 import '../widgets/pair_column_text.dart';
 
@@ -48,19 +47,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 );
             TabsScreen.openAndRemoveAllRoute(context,
                 initialTabScreenPage: TabScreenPage.portfolio);
-            showModalBottomSheet(
-                isScrollControlled: true,
-                backgroundColor: Colors.transparent,
-                context: (context),
-                builder: (context) => BotBottomSheetWidget(
-                      title:
-                          'Your free Botstock has been added to your portfolio successfully!',
-                      primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',
-                      secondaryButtonLabel: 'NOT NOW',
-                      onPrimaryButtonTap: () =>
-                          DepositWelcomeScreen.open(context: context),
-                      onSecondaryButtonTap: () => Navigator.pop(context),
-                    ));
+            BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
           }
         },
         child: BotStockForm(

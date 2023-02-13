@@ -21,4 +21,4 @@ class FetchBotPortfolio extends PortfolioEvent {
   const FetchBotPortfolio({this.botStockFilter = BotStockFilter.all});
 }
 
-class FetchChartData extends PortfolioEvent {}
+class FetchBotPortfolioChartData extends PortfolioEvent {}
