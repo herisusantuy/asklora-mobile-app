@@ -103,30 +103,31 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 const SizedBox(
                   height: 19,
                 ),
-                RoundColoredBox(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 13),
-                  backgroundColor: AskLoraColors.lightGreen,
-                  content: Row(
-                    children: [
-                      const LoraMemojiWidget(
-                        loraMemojiType: LoraMemojiType.lora1,
-                        height: 70,
-                        width: 70,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      Expanded(
-                        child: CustomTextNew(
-                          'You will have more flexbility in the next real trade. Come on, this is FREE!',
-                          style: AskLoraTextStyles.body1
-                              .copyWith(color: AskLoraColors.charcoal),
+                if (recommendedBot.freeBot)
+                  RoundColoredBox(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 13),
+                    backgroundColor: AskLoraColors.lightGreen,
+                    content: Row(
+                      children: [
+                        const LoraMemojiWidget(
+                          loraMemojiType: LoraMemojiType.lora1,
+                          height: 70,
+                          width: 70,
                         ),
-                      )
-                    ],
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        Expanded(
+                          child: CustomTextNew(
+                            'You will have more flexbility in the next real trade. Come on, this is FREE!',
+                            style: AskLoraTextStyles.body1
+                                .copyWith(color: AskLoraColors.charcoal),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
               ],
             ),
             bottomButton: Builder(
