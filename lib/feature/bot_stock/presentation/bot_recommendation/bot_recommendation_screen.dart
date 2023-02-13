@@ -43,8 +43,16 @@ class BotRecommendationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => BotStockBloc(botStockRepository: BotStockRepository())
-        ..add(FetchBotRecommendation()),
+      create: (_) {
+        if (context.read<AppBloc>().state.userJourney ==
+            UserJourney.freeBotStock) {
+          return BotStockBloc(botStockRepository: BotStockRepository())
+            ..add(FetchFreeBotRecommendation());
+        } else {
+          return BotStockBloc(botStockRepository: BotStockRepository())
+            ..add(FetchBotRecommendation());
+        }
+      },
       child: CustomScaffold(
           backgroundColor: AskLoraColors.white,
           body: Padding(

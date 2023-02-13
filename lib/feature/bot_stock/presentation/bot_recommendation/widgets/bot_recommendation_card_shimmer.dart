@@ -42,11 +42,14 @@ class BotRecommendationCardShimmer extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: PrimaryButton(
-                  disabled: true,
-                  buttonPrimarySize: ButtonPrimarySize.small,
-                  label: 'FREE TRADE',
-                  onTap: () {}),
+              child: SizedBox(
+                height: 32,
+                child: PrimaryButton(
+                    disabled: true,
+                    buttonPrimarySize: ButtonPrimarySize.small,
+                    label: 'TRADE',
+                    onTap: () {}),
+              ),
             )
           ],
         );
