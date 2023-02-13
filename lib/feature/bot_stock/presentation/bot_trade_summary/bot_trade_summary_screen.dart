@@ -12,9 +12,9 @@ import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
-import '../portfolio/portfolio_screen.dart';
 import '../widgets/bot_bottom_sheet_widget.dart';
 import '../widgets/bot_stock_form.dart';
 import '../widgets/pair_column_text.dart';
@@ -43,15 +43,16 @@ class BotTradeSummaryScreen extends StatelessWidget {
           } else if (state.getFreeBotStockResponse.state ==
               ResponseState.success) {
             CustomLoadingOverlay.dismiss();
-            context
-                .read<AppBloc>()
-                .add(const SaveUserJourney(UserJourney.deposit));
-            PortfolioScreen.open(context);
+            context.read<AppBloc>().add(
+                  const SaveUserJourney(UserJourney.deposit),
+                );
+            TabsScreen.openAndRemoveAllRoute(context,
+                initialTabScreenPage: TabScreenPage.portfolio);
             showModalBottomSheet(
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
                 context: (context),
-                builder: (_) => BotBottomSheetWidget(
+                builder: (context) => BotBottomSheetWidget(
                       title:
                           'Your free Botstock has been added to your portfolio successfully!',
                       primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',

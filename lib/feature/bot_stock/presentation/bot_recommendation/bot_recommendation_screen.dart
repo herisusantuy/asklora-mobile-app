@@ -11,10 +11,14 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
-import '../../../../core/presentation/lora_popup_message.dart';
+import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/shimmer.dart';
+import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -45,24 +49,29 @@ class BotRecommendationScreen extends StatelessWidget {
           backgroundColor: AskLoraColors.white,
           body: Padding(
             padding: const EdgeInsets.only(top: 70),
-            child: ListView(
-              padding: const EdgeInsets.only(bottom: 35),
-              children: [
-                _header(context),
-                const BotRecommendationList(
-                  verticalMargin: 14,
-                ),
-                _loraMemojiWidget,
-                const SizedBox(
-                  height: 50,
-                ),
-                const BotRecommendationFaq(),
-                const SizedBox(
-                  height: 28,
-                ),
-                _needHelpButton
-              ],
-            ),
+            child: BlocBuilder<AppBloc, AppState>(
+                buildWhen: (previous, current) =>
+                    previous.userJourney != current.userJourney,
+                builder: (context, state) {
+                  return ListView(
+                    padding: const EdgeInsets.only(bottom: 35),
+                    children: [
+                      _header(context: context, userJourney: state.userJourney),
+                      const BotRecommendationList(
+                        verticalMargin: 14,
+                      ),
+                      _loraMemojiWidget(context),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      const BotRecommendationFaq(),
+                      const SizedBox(
+                        height: 28,
+                      ),
+                      _needHelpButton
+                    ],
+                  );
+                }),
           )),
     );
   }
@@ -80,7 +89,9 @@ class BotRecommendationScreen extends StatelessWidget {
           ),
           onTap: () {}));
 
-  Widget _header(BuildContext context) => Padding(
+  Widget _header(
+          {required BuildContext context, required UserJourney userJourney}) =>
+      Padding(
         padding: AppValues.screenHorizontalPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,48 +104,61 @@ class BotRecommendationScreen extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            CustomTextNew(
-              'Hi Sassy Chris! Check out my 20 recommended Botstocks just for you.',
-              style: AskLoraTextStyles.body1
-                  .copyWith(color: AskLoraColors.charcoal),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            CustomTextNew(
-              'Select a Botstock to trade it for FREE!',
-              style: AskLoraTextStyles.subtitle2
-                  .copyWith(color: AskLoraColors.charcoal),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            GestureDetector(
-              onTap: () => showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                backgroundColor: Colors.transparent,
-                builder: (context) => const BotLearnMoreBottomSheet(),
+            if (userJourney == UserJourney.freeBotStock)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomTextNew(
+                    'Hi Sassy Chris! Check out my 20 recommended Botstocks just for you.',
+                    style: AskLoraTextStyles.body1
+                        .copyWith(color: AskLoraColors.charcoal),
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  CustomTextNew(
+                    'Select a Botstock to trade it for FREE!',
+                    style: AskLoraTextStyles.subtitle2
+                        .copyWith(color: AskLoraColors.charcoal),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  GestureDetector(
+                    onTap: () => showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => const BotLearnMoreBottomSheet(),
+                    ),
+                    child: CustomTextNew(
+                      'LEARN MORE!',
+                      style: AskLoraTextStyles.subtitle1.copyWith(
+                        color: AskLoraColors.charcoal,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: CustomTextNew(
-                'LEARN MORE!',
-                style: AskLoraTextStyles.subtitle1.copyWith(
-                  color: AskLoraColors.charcoal,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
           ],
         ),
       );
 
-  Widget get _loraMemojiWidget => Padding(
+  Widget _loraMemojiWidget(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           children: [
             const LoraMemojiHeader(
                 text: 'Not feeling it? Try something different.'),
-            PrimaryButton(label: 'CHANGE INVESTMENT STYLE', onTap: () {}),
+            PrimaryButton(
+              label: 'CHANGE INVESTMENT STYLE',
+              onTap: () => PpiScreen.open(
+                context,
+                arguments: Pair(QuestionPageType.investmentStyle,
+                    QuestionPageStep.investmentStyle),
+              ),
+            ),
           ],
         ),
       );

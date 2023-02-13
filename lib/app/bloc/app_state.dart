@@ -2,8 +2,6 @@ part of 'app_bloc.dart';
 
 enum UserJourney {
   privacy('privacy'),
-  personalisation('personalisation'),
-  createAccount('create_account'),
   investmentStyle('investment_style'),
   kyc('kyc'),
   freeBotStock('free_bot_stock'),
