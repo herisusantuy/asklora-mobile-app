@@ -96,18 +96,18 @@ class BotTradeSummaryScreen extends StatelessWidget {
                           subTitle2: '03/26 15:30 ET'),
                     ],
                   ),
-                  title: 'Free Botstock Trade Summary',
+                  title: recommendedBot.freeBot
+                      ? 'Free Botstock Trade Summary'
+                      : 'Trade Summary',
                 ),
                 const SizedBox(
                   height: 19,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: AskLoraColors.lightGreen),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 13),
-                  child: Row(
+                  RoundColoredBox(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 13),
+                    backgroundColor: AskLoraColors.lightGreen,
+                    content: Row(
                     children: [
                       const LoraMemojiWidget(
                         loraMemojiType: LoraMemojiType.lora1,
@@ -125,8 +125,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         ),
                       )
                     ],
-                  ),
-                )
+                  ),),
               ],
             ),
             bottomButton: Builder(
