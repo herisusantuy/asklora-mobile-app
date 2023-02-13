@@ -9,6 +9,7 @@ import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
+import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
@@ -63,6 +64,13 @@ class ForYouScreenForm extends StatelessWidget {
                 'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
             buttonLabel: 'OPEN INVESTMENT ACCOUNT',
             onTap: () => KycScreen.open(context));
+      case UserJourney.freeBotStock:
+        return LoraPopUpMessageModel(
+            title: 'No Botstock recommendation.',
+            subTitle:
+                'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
+            buttonLabel: 'REDEEM YOUR BOTSTOCK NOW',
+            onTap: () => GiftBotStockWelcomeScreen.open(context));
       default:
         return LoraPopUpMessageModel(
             title: '', subTitle: '', buttonLabel: '', onTap: () {});
