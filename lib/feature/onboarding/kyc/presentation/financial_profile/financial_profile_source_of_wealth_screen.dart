@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,11 +8,13 @@ import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
+import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../utils/source_of_wealth_enum.dart';
+import '../widgets/custom_donut_chart/custom_donut_chart.dart';
 import '../widgets/kyc_base_form.dart';
 import 'widgets/number_counter_input.dart';
 
@@ -44,18 +47,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Center(
-            child: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
-              buildWhen: (previous, current) =>
-                  previous.totalAmount != current.totalAmount,
-              builder: (context, state) {
-                return CustomTextNew(
-                  '${state.totalAmount}%',
-                  style: AskLoraTextStyles.h1,
-                );
-              },
-            ),
-          ),
+          _donutChart,
           ...SourceOfWealthType.values
               .map(
                 (source) =>
@@ -129,5 +121,65 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget get _donutChart {
+    return BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
+      buildWhen: (previous, current) =>
+          previous.totalAmount != current.totalAmount,
+      builder: (context, state) {
+        List<PieChartSectionData> data = state.sourceOfWealthAnswers
+            .asMap()
+            .map<int, PieChartSectionData>((index, data) {
+              final value = PieChartSectionData(
+                  value: data.amount.toDouble(),
+                  color: _colorOfChartValue(index),
+                  gradient: const LinearGradient(
+                    colors: [Colors.blue, Colors.green],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  radius: 25,
+                  showTitle: false,
+                  borderSide: const BorderSide(
+                    width: 1,
+                    color: Colors.black26,
+                  ),
+                  borderRadius: BorderRadius.circular(10));
+              return MapEntry(index, value);
+            })
+            .values
+            .toList();
+        return CustomDonutChart(
+          total: state.totalAmount,
+          sections: data,
+        );
+      },
+    );
+  }
+
+  Color _colorOfChartValue(int index) {
+    switch (index) {
+      case 0:
+        return AskLoraColors.primaryGreen;
+      case 1:
+        return AskLoraColors.primaryMagenta;
+      case 2:
+        return AskLoraColors.gray;
+      case 3:
+        return AskLoraColors.lime;
+      case 4:
+        return AskLoraColors.purple;
+      case 5:
+        return AskLoraColors.primaryBlue;
+      case 6:
+        return AskLoraColors.down;
+      case 7:
+        return AskLoraColors.up;
+      case 8:
+        return AskLoraColors.charcoal;
+      default:
+        return AskLoraColors.white;
+    }
   }
 }
