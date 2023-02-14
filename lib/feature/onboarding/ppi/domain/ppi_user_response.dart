@@ -114,21 +114,52 @@ class RecommendedBot {
 
   final double value;
 
+  ///adding variables to accomodate detail bot stock
+  final double stopLossLevel;
+  final double takeProfitLevel;
+  final String earliestStartTime;
+  final String optimizedStartTime;
+  final String investmentPeriod;
+  final String estimatedEndDate;
+  final String prevClose;
+  final String marketCap;
+  final double amount;
+  final double profit;
+  final double profitPercent;
+  final double minPrice;
+  final double maxPrice;
+  final double currentPrice;
+
   RecommendedBot(
-      this.botId,
-      this.ticker,
-      this.tickerName,
-      this.tickerSymbol,
-      this.botType,
-      this.botWord,
-      this.description,
-      this.benefit,
-      this.suitability,
-      this.companyDescription,
-      this.expiredDate,
-      {this.freeBot = false,
-      this.selectable = false,
-      this.value = 200});
+    this.botId,
+    this.ticker,
+    this.tickerName,
+    this.tickerSymbol,
+    this.botType,
+    this.botWord,
+    this.description,
+    this.benefit,
+    this.suitability,
+    this.companyDescription,
+    this.expiredDate, {
+    this.freeBot = false,
+    this.selectable = false,
+    this.value = 200,
+    this.stopLossLevel = 210,
+    this.takeProfitLevel = 210,
+    this.earliestStartTime = '03/12 15:30 ET',
+    this.optimizedStartTime = '03/12 15:30 ET',
+    this.investmentPeriod = '2 weeks',
+    this.estimatedEndDate = '03/26',
+    this.prevClose = '10/07 16:00:04 ET',
+    this.marketCap = '698.98B',
+    this.amount = 223.07,
+    this.profit = -15.060,
+    this.profitPercent = -6.32,
+    this.minPrice = 210,
+    this.maxPrice = 240,
+    this.currentPrice = 220,
+  });
 
   factory RecommendedBot.fromJson(Map<String, dynamic> json) =>
       _$RecommendedBotFromJson(json);

@@ -7,26 +7,29 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
+import '../bot_stock_result_screen.dart';
 import '../widgets/bot_stock_form.dart';
 import '../widgets/pair_column_text.dart';
 
 class BotTradeSummaryScreen extends StatelessWidget {
   static const String route = '/bot_trade_summary_screen';
-  final RecommendedBot recommendedBot;
+  final Pair<RecommendedBot, double> arguments;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
-  const BotTradeSummaryScreen({required this.recommendedBot, Key? key})
+  const BotTradeSummaryScreen({required this.arguments, Key? key})
       : super(key: key);
 
   @override
@@ -35,33 +38,45 @@ class BotTradeSummaryScreen extends StatelessWidget {
       create: (_) => BotStockBloc(botStockRepository: BotStockRepository()),
       child: BlocListener<BotStockBloc, BotStockState>(
         listenWhen: (previous, current) =>
-            previous.getFreeBotStockResponse != current.getFreeBotStockResponse,
+            previous.tradeBotStockResponse != current.tradeBotStockResponse,
         listener: (context, state) {
-          if (state.getFreeBotStockResponse.state == ResponseState.loading) {
+          if (state.tradeBotStockResponse.state == ResponseState.loading) {
             CustomLoadingOverlay.show(context);
-          } else if (state.getFreeBotStockResponse.state ==
-              ResponseState.success) {
+          } else {
             CustomLoadingOverlay.dismiss();
-            context.read<AppBloc>().add(
-                  const SaveUserJourney(UserJourney.deposit),
-                );
-            TabsScreen.openAndRemoveAllRoute(context,
-                initialTabScreenPage: TabScreenPage.portfolio);
-            BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
+            if (state.tradeBotStockResponse.state == ResponseState.success) {
+              CustomLoadingOverlay.dismiss();
+              context.read<AppBloc>().add(
+                    const SaveUserJourney(UserJourney.deposit),
+                  );
+              if (arguments.left.freeBot) {
+                TabsScreen.openAndRemoveAllRoute(context,
+                    initialTabScreenPage: TabScreenPage.portfolio);
+                BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
+              } else {
+                BotStockResultScreen.open(
+                    context: context,
+                    arguments: Pair('Trade Request Received',
+                        'Pull-up TSLA will be started at 14:00, 2022/03/12.'));
+              }
+            } else if (state.tradeBotStockResponse.state ==
+                ResponseState.error) {
+              BotStockBottomSheet.insufficientBalance(context);
+            }
           }
         },
         child: BotStockForm(
             useHeader: true,
-            title: recommendedBot.tickerName,
+            title: arguments.left.tickerName,
             content: Column(
               children: [
                 RoundColoredBox(
                   content: Column(
                     children: [
-                      const PairColumnText(
+                      PairColumnText(
                           title1: 'Investment Amount (USD)',
                           title2: 'Trading Fee (USD)',
-                          subTitle1: '68.00',
+                          subTitle1: arguments.right.convertToCurrencyDecimal(),
                           subTitle2: 'Free'),
                       _spaceBetweenInfo,
                       const PairColumnText(
@@ -83,14 +98,14 @@ class BotTradeSummaryScreen extends StatelessWidget {
                           subTitle2: '03/26 15:30 ET'),
                     ],
                   ),
-                  title: recommendedBot.freeBot
+                  title: arguments.left.freeBot
                       ? 'Free Botstock Trade Summary'
                       : 'Trade Summary',
                 ),
                 const SizedBox(
                   height: 19,
                 ),
-                if (recommendedBot.freeBot)
+                if (arguments.left.freeBot)
                   RoundColoredBox(
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 13),
@@ -122,9 +137,10 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 24, bottom: 30),
                       child: PrimaryButton(
                         label: 'CONFIRM',
-                        onTap: () => context
-                            .read<BotStockBloc>()
-                            .add(GetFreeBotStock(recommendedBot)),
+                        onTap: () => context.read<BotStockBloc>().add(
+                            TradeBotStock(
+                                recommendedBot: arguments.left,
+                                amount: arguments.right)),
                       ),
                     ))),
       ),
@@ -133,6 +149,6 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
   static void open(
           {required BuildContext context,
-          required RecommendedBot recommendedBot}) =>
-      Navigator.pushNamed(context, route, arguments: recommendedBot);
+          required Pair<RecommendedBot, double> arguments}) =>
+      Navigator.pushNamed(context, route, arguments: arguments);
 }

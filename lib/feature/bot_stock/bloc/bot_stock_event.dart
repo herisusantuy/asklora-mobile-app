@@ -17,13 +17,23 @@ class FaqActiveIndexChanged extends BotStockEvent {
   const FaqActiveIndexChanged(this.faqActiveIndex);
 }
 
-class GetFreeBotStock extends BotStockEvent {
+class TradeBotStock extends BotStockEvent {
   final RecommendedBot recommendedBot;
+  final double amount;
 
-  const GetFreeBotStock(this.recommendedBot);
+  const TradeBotStock({required this.recommendedBot, required this.amount});
 
   @override
   List<Object> get props => [recommendedBot];
+}
+
+class TradeBotStockAmountChanged extends BotStockEvent {
+  final double amount;
+
+  const TradeBotStockAmountChanged(this.amount);
+
+  @override
+  List<Object> get props => [amount];
 }
 
 class EndBotStock extends BotStockEvent {
