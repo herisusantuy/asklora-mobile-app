@@ -34,7 +34,6 @@ class CustomDonutChart extends StatelessWidget {
                 ),
               ),
             ),
-            // swapAnimationCurve: Curves.easeInQuad,
           ),
           Align(
               alignment: Alignment.center,
