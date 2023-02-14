@@ -2,25 +2,24 @@ part of 'source_of_wealth_bloc.dart';
 
 class SourceOfWealthState extends Equatable {
   final List<SourceOfWealthModel> sourceOfWealthAnswers;
-  final int totalOfSourceOFWealthAmount;
+  final int totalAmount;
   final String errorMessage;
 
   const SourceOfWealthState({
     this.sourceOfWealthAnswers = const [],
-    this.totalOfSourceOFWealthAmount = 0,
+    this.totalAmount = 0,
     this.errorMessage = '',
   });
 
   SourceOfWealthState copyWith({
     List<SourceOfWealthModel>? sourceOfWealthAnswers,
-    int? totalOfSourceOFWealthAmount,
+    int? totalAmount,
     String? errorMessage,
   }) {
     return SourceOfWealthState(
       sourceOfWealthAnswers:
           sourceOfWealthAnswers ?? this.sourceOfWealthAnswers,
-      totalOfSourceOFWealthAmount:
-          totalOfSourceOFWealthAmount ?? this.totalOfSourceOFWealthAmount,
+      totalAmount: totalAmount ?? this.totalAmount,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
@@ -29,13 +28,14 @@ class SourceOfWealthState extends Equatable {
   List<Object?> get props {
     return [
       sourceOfWealthAnswers,
-      totalOfSourceOFWealthAmount,
+      totalAmount,
       errorMessage,
+      DateTime.now().millisecondsSinceEpoch
     ];
   }
 
   bool enableNextButton() {
-    if (totalOfSourceOFWealthAmount > 0) {
+    if (totalAmount > 0) {
       return false;
     } else {
       return true;

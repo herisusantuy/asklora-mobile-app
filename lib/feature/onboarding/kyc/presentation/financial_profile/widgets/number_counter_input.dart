@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../../utils/numerical_range_formatter.dart';
+import '../../../utils/source_of_wealth_enum.dart';
 
 class NumberCounterInput extends StatefulWidget {
-  final String label;
+  final SourceOfWealthType sourceOfWealthType;
   final String initialValue;
   final bool active;
   final VoidCallback onTap;
   final Function(String?) onAmountChanged;
 
   const NumberCounterInput({
-    required this.label,
+    required this.sourceOfWealthType,
     this.active = false,
     this.initialValue = '',
     required this.onAmountChanged,
@@ -34,6 +37,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.initialValue != widget.initialValue) {
       _controller.text = widget.initialValue;
+      widget.onAmountChanged(_controller.text);
     }
   }
 
@@ -41,7 +45,9 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
   void initState() {
     super.initState();
     _controller.addListener(() {
-      widget.onAmountChanged(_controller.text);
+      widget.onAmountChanged(_controller.text.isEmpty ? '0' : _controller.text);
+      _controller.selection =
+          TextSelection.collapsed(offset: _controller.text.length);
     });
   }
 
@@ -59,30 +65,13 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
     return _cardButton(children: [
       _counterButton(
           label: '-',
-          onTap: () {
-            int incrementAmount = int.parse(
-                    _controller.text.isNotEmpty ? _controller.text : '0') -
-                10;
-
-            if (incrementAmount < 0) {
-              incrementAmount = 0;
-            }
-
-            _controller.text = incrementAmount.toString();
-          }),
+          onTap: () => context.read<SourceOfWealthBloc>().add(
+              SourceOfWealthDecrementAmountChanged(widget.sourceOfWealthType))),
       _numberInput(),
       _counterButton(
           label: '+',
-          onTap: () {
-            int decrementAmount = int.parse(
-                    _controller.text.isNotEmpty ? _controller.text : '0') +
-                10;
-
-            if (decrementAmount > 100) {
-              decrementAmount = 100;
-            }
-            _controller.text = decrementAmount.toString();
-          }),
+          onTap: () => context.read<SourceOfWealthBloc>().add(
+              SourceOfWealthIncrementAmountChanged(widget.sourceOfWealthType))),
     ]);
   }
 
@@ -113,7 +102,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextNew(
-                  widget.label,
+                  widget.sourceOfWealthType.value,
                   style: AskLoraTextStyles.subtitle2,
                 ),
                 widget.active

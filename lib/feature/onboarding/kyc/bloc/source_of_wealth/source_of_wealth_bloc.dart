@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../utils/source_of_wealth_enum.dart';
 
 part 'source_of_wealth_event.dart';
+
 part 'source_of_wealth_state.dart';
 
 class SourceOfWealthBloc
@@ -21,22 +25,22 @@ class SourceOfWealthBloc
 
   _onSourceOfWealthSelected(
       SourceOfWealthSelected event, Emitter<SourceOfWealthState> emit) {
-    int totalAmount = state.totalOfSourceOFWealthAmount;
+    int totalAmount = state.totalAmount;
     List<SourceOfWealthModel> sourceOfWealthAnswers =
         List.from(state.sourceOfWealthAnswers);
     SourceOfWealthModel? answer = sourceOfWealthAnswers.firstWhereOrNull(
         (element) => element.sourceOfWealthType == event.sourceOfWealthType);
+
     if (answer == null) {
-      int amount =
-          event.sourceOfWealthType == SourceOfWealthType.incomeFromEmployment
-              ? 100
-              : 0;
       sourceOfWealthAnswers.add(SourceOfWealthModel(
         sourceOfWealthType: event.sourceOfWealthType,
-        amount: amount,
+        amount: state.totalAmount == 0 ? 100 : 0,
+        isActive: true,
       ));
     } else {
       sourceOfWealthAnswers.remove(answer);
+      answer = answer.copyWith(isActive: !answer.isActive);
+      sourceOfWealthAnswers.add(answer);
       if (sourceOfWealthAnswers.isNotEmpty) {
         totalAmount =
             sourceOfWealthAnswers.map((e) => e.amount).reduce((a, b) => a + b);
@@ -47,7 +51,7 @@ class SourceOfWealthBloc
     emit(
       state.copyWith(
         sourceOfWealthAnswers: sourceOfWealthAnswers,
-        totalOfSourceOFWealthAmount: totalAmount,
+        totalAmount: totalAmount,
       ),
     );
   }
@@ -63,10 +67,11 @@ class SourceOfWealthBloc
           .copyWith(amount: int.parse(event.wealthAmount));
       int totalAmount =
           sourceOfWealthAnswers.map((e) => e.amount).reduce((a, b) => a + b);
+
       emit(
         state.copyWith(
           sourceOfWealthAnswers: sourceOfWealthAnswers,
-          totalOfSourceOFWealthAmount: totalAmount,
+          totalAmount: totalAmount,
         ),
       );
     }
@@ -77,16 +82,24 @@ class SourceOfWealthBloc
       Emitter<SourceOfWealthState> emit) {
     List<SourceOfWealthModel> sourceOfWealthAnswers =
         List.from(state.sourceOfWealthAnswers);
+
+    var answer = sourceOfWealthAnswers.firstWhere(
+        (element) => element.sourceOfWealthType == event.sourceOfWealthType);
+
+    if (answer.amount < 0) {
+      answer = answer.copyWith(amount: 10);
+    }
+
     int index = sourceOfWealthAnswers.indexWhere(
         (element) => element.sourceOfWealthType == event.sourceOfWealthType);
-    sourceOfWealthAnswers[index] = sourceOfWealthAnswers[index]
-        .copyWith(amount: sourceOfWealthAnswers[index].amount + 10);
+
+    sourceOfWealthAnswers[index] = answer.copyWith(amount: answer.amount + 10);
     int totalAmount =
         sourceOfWealthAnswers.map((e) => e.amount).reduce((a, b) => a + b);
     emit(
       state.copyWith(
         sourceOfWealthAnswers: sourceOfWealthAnswers,
-        totalOfSourceOFWealthAmount: totalAmount,
+        totalAmount: totalAmount,
       ),
     );
   }
@@ -96,16 +109,21 @@ class SourceOfWealthBloc
       Emitter<SourceOfWealthState> emit) {
     List<SourceOfWealthModel> sourceOfWealthAnswers =
         List.from(state.sourceOfWealthAnswers);
+    var answer = sourceOfWealthAnswers.firstWhere(
+        (element) => element.sourceOfWealthType == event.sourceOfWealthType);
+
     int index = sourceOfWealthAnswers.indexWhere(
         (element) => element.sourceOfWealthType == event.sourceOfWealthType);
-    sourceOfWealthAnswers[index] = sourceOfWealthAnswers[index]
-        .copyWith(amount: sourceOfWealthAnswers[index].amount - 10);
+
+    sourceOfWealthAnswers[index] =
+        answer.copyWith(amount: answer.amount < 10 ? 0 : answer.amount - 10);
     int totalAmount =
         sourceOfWealthAnswers.map((e) => e.amount).reduce((a, b) => a + b);
+
     emit(
       state.copyWith(
         sourceOfWealthAnswers: sourceOfWealthAnswers,
-        totalOfSourceOFWealthAmount: totalAmount,
+        totalAmount: totalAmount,
       ),
     );
   }
