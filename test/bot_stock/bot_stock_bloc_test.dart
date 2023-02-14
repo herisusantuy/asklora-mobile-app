@@ -122,7 +122,8 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'getting free bot stock',
         build: () {
-          when(botStockRepository.getFreeBotStock(recommendedBot))
+          when(botStockRepository.getFreeBotStock(
+                  recommendedBot: recommendedBot, tradeBotStockAmount: 0))
               .thenAnswer((_) => Future.value(boolResponse));
           return botStockBloc;
         },
@@ -137,7 +138,8 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed getting free bot stock',
         build: () {
-          when(botStockRepository.getFreeBotStock(recommendedBot))
+          when(botStockRepository.getFreeBotStock(
+                  recommendedBot: recommendedBot, tradeBotStockAmount: 0))
               .thenThrow(boolErrorResponse);
           return botStockBloc;
         },
