@@ -84,7 +84,7 @@ void main() async {
               .thenAnswer((_) => Future.value(chartResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(FetchChartData()),
+        act: (bloc) => bloc.add(FetchBotPortfolioChartData()),
         expect: () => {PortfolioState(chartDataResponse: chartResponse)});
 
     blocTest<PortfolioBloc, PortfolioState>(
@@ -95,7 +95,7 @@ void main() async {
               .thenThrow(chartErrorResponse);
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(FetchChartData()),
+        act: (bloc) => bloc.add(FetchBotPortfolioChartData()),
         expect: () => {PortfolioState(chartDataResponse: chartErrorResponse)});
 
     blocTest<PortfolioBloc, PortfolioState>(

@@ -147,6 +147,34 @@ void main() async {
             });
 
     blocTest<BotStockBloc, BotStockState>(
+        'emits `BaseResponse.complete` WHEN '
+        'ending bot stock',
+        build: () {
+          when(botStockRepository.endBotStock(recommendedBot))
+              .thenAnswer((_) => Future.value(boolResponse));
+          return botStockBloc;
+        },
+        act: (bloc) => bloc.add(EndBotStock(recommendedBot)),
+        expect: () => {
+              BotStockState(endBotStockResponse: BaseResponse.loading()),
+              BotStockState(endBotStockResponse: boolResponse)
+            });
+
+    blocTest<BotStockBloc, BotStockState>(
+        'emits `BaseResponse.error` WHEN '
+        'failed ending bot stock',
+        build: () {
+          when(botStockRepository.endBotStock(recommendedBot))
+              .thenThrow(boolErrorResponse);
+          return botStockBloc;
+        },
+        act: (bloc) => bloc.add(EndBotStock(recommendedBot)),
+        expect: () => {
+              BotStockState(endBotStockResponse: BaseResponse.loading()),
+              BotStockState(endBotStockResponse: boolErrorResponse)
+            });
+
+    blocTest<BotStockBloc, BotStockState>(
         'emits `faq active index = 1` WHEN '
         'tap faq on index 1',
         build: () => botStockBloc,
