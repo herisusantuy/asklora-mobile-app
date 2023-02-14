@@ -36,7 +36,8 @@ class BotBottomSheetWidget extends StatelessWidget {
             Align(
               alignment: Alignment.topCenter,
               child: Container(
-                padding: AppValues.screenHorizontalPadding.copyWith(top: 64),
+                padding: AppValues.screenHorizontalPadding
+                    .copyWith(top: 64, bottom: 20),
                 margin: const EdgeInsets.only(top: 70),
                 width: double.infinity,
                 decoration: const BoxDecoration(

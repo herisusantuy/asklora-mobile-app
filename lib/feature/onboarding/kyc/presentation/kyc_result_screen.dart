@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
@@ -11,7 +12,8 @@ class KycResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
+      enableBackNavigation: false,
       body: Padding(
         padding: AppValues.screenHorizontalPadding,
         child: LayoutBuilder(builder: (context, viewportConstraints) {

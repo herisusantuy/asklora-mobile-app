@@ -17,7 +17,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
         super(const PortfolioState()) {
     on<FetchPortfolioDetail>(_onFetchPortfolioDetail);
     on<FetchBotPortfolio>(_onFetchBotPortfolio);
-    on<FetchChartData>(_onFetchChartData);
+    on<FetchBotPortfolioChartData>(_onFetchChartData);
     on<BotStockFilterChanged>(_onBotStockFilterChanged);
   }
 
@@ -48,7 +48,8 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     }
   }
 
-  _onFetchChartData(FetchChartData event, Emitter<PortfolioState> emit) async {
+  _onFetchChartData(
+      FetchBotPortfolioChartData event, Emitter<PortfolioState> emit) async {
     try {
       emit(state.copyWith(
           chartDataResponse: await _portfolioRepository.fetchChartDataJson()));
