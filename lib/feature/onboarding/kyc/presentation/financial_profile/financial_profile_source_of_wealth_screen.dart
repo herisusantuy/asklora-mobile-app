@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +23,12 @@ import 'widgets/number_counter_input.dart';
 class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
   final double progress;
 
-  const FinancialProfileSourceOfWealthScreen({required this.progress, Key? key})
-      : super(key: key);
+  FinancialProfileSourceOfWealthScreen({required this.progress, Key? key})
+      : super(key: key) {
+    _generateGradients();
+  }
+
+  final List<SweepGradient> _gradients = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +51,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
             style: AskLoraTextStyles.body1,
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
           _donutChart,
           ...SourceOfWealthType.values
@@ -131,14 +137,13 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
         List<PieChartSectionData> data = state.sourceOfWealthAnswers
             .asMap()
             .map<int, PieChartSectionData>((index, data) {
+              debugPrint('krishna ${index} ${_gradients.length}');
               final value = PieChartSectionData(
                   value: data.amount.toDouble(),
-                  color: _colorOfChartValue(index),
-                  gradient: const LinearGradient(
-                    colors: [Colors.blue, Colors.green],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  color: AskLoraColors.primaryGreen,
+                  gradient: _gradients[index >= _gradients.length
+                      ? index - _gradients.length
+                      : index],
                   radius: 25,
                   showTitle: false,
                   borderSide: const BorderSide(
@@ -158,28 +163,26 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
     );
   }
 
-  Color _colorOfChartValue(int index) {
-    switch (index) {
-      case 0:
-        return AskLoraColors.primaryGreen;
-      case 1:
-        return AskLoraColors.primaryMagenta;
-      case 2:
-        return AskLoraColors.gray;
-      case 3:
-        return AskLoraColors.lime;
-      case 4:
-        return AskLoraColors.purple;
-      case 5:
-        return AskLoraColors.primaryBlue;
-      case 6:
-        return AskLoraColors.down;
-      case 7:
-        return AskLoraColors.up;
-      case 8:
-        return AskLoraColors.charcoal;
-      default:
-        return AskLoraColors.white;
+  final _colorList = [
+    AskLoraColors.primaryGreen,
+    AskLoraColors.primaryMagenta,
+    AskLoraColors.gray,
+    AskLoraColors.lime,
+    AskLoraColors.purple,
+    AskLoraColors.primaryBlue,
+  ];
+
+  void _generateGradients() {
+    int index = 0;
+    while (index < _colorList.length) {
+      final color = _colorList[index];
+      _gradients.add(SweepGradient(
+        startAngle: 0,
+        endAngle: pi / 4,
+        tileMode: TileMode.mirror,
+        colors: [color, color.withAlpha(30)],
+      ));
+      ++index;
     }
   }
 }

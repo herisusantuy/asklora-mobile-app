@@ -176,7 +176,7 @@ class KycScreen extends StatelessWidget {
                 progress: 0.62,
               );
             case KycPageStep.financialProfileSourceOfWealth:
-              return const FinancialProfileSourceOfWealthScreen(
+              return FinancialProfileSourceOfWealthScreen(
                 progress: 0.65,
               );
             case KycPageStep.financialProfileSummary:
