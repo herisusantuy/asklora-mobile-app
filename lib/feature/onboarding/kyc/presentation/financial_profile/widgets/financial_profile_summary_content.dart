@@ -25,10 +25,9 @@ class FinancialProfileSummaryContent extends StatelessWidget {
       : super(key: key);
   static const double _spaceHeightDouble = 20;
   final SizedBox _spaceHeight = const SizedBox(height: _spaceHeightDouble);
+
   @override
   Widget build(BuildContext context) {
-    // print(
-    // 'sourceOfWealthState>> ${sourceOfWealthState.sourceOfWealthAnswers.map((e) => e).m}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

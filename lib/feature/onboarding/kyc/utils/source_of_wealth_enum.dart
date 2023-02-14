@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 enum SourceOfWealthType {
   incomeFromEmployment('Income from Employment'),
   inheritance('Inheritance/Gift'),
@@ -18,23 +20,38 @@ class SourceOfWealthModel {
   final SourceOfWealthType sourceOfWealthType;
   final int amount;
   final String? additionalSourceOfWealth;
+  final bool isActive;
 
-  SourceOfWealthModel({
+  const SourceOfWealthModel({
     required this.sourceOfWealthType,
     this.amount = 0,
     this.additionalSourceOfWealth,
+    this.isActive = false,
   });
 
   SourceOfWealthModel copyWith({
     SourceOfWealthType? sourceOfWealthType,
     int? amount,
     String? additionalSourceOfWealth,
+    bool? isActive,
   }) {
     return SourceOfWealthModel(
       sourceOfWealthType: sourceOfWealthType ?? this.sourceOfWealthType,
       amount: amount ?? this.amount,
       additionalSourceOfWealth:
           additionalSourceOfWealth ?? this.additionalSourceOfWealth,
+      isActive: isActive ?? this.isActive,
     );
+  }
+
+  @override
+  String toString() {
+    return [
+      sourceOfWealthType.name,
+      amount,
+      additionalSourceOfWealth,
+      isActive,
+      DateTime.now().millisecondsSinceEpoch
+    ].toString();
   }
 }

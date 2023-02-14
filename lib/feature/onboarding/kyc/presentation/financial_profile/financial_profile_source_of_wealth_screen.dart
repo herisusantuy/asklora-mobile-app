@@ -47,11 +47,10 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
           Center(
             child: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
               buildWhen: (previous, current) =>
-                  previous.totalOfSourceOFWealthAmount !=
-                  current.totalOfSourceOFWealthAmount,
+                  previous.totalAmount != current.totalAmount,
               builder: (context, state) {
                 return CustomTextNew(
-                  '${state.totalOfSourceOFWealthAmount}%',
+                  '${state.totalAmount}%',
                   style: AskLoraTextStyles.h1,
                 );
               },
@@ -61,26 +60,25 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
               .map(
                 (source) =>
                     BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
-                  buildWhen: (previous, current) =>
-                      previous.sourceOfWealthAnswers !=
-                      current.sourceOfWealthAnswers,
+                  buildWhen: (previous, current) => true,
                   builder: (context, state) {
                     SourceOfWealthModel? sourceOfWealthModel =
                         state.sourceOfWealthAnswers.firstWhereOrNull(
                             (type) => type.sourceOfWealthType == source);
-
                     return Column(
                       children: [
                         NumberCounterInput(
                           key: Key(source.name),
-                          label: source.value,
+                          sourceOfWealthType: source,
                           initialValue: sourceOfWealthModel != null
                               ? sourceOfWealthModel.amount.toString()
                               : '0',
-                          active: sourceOfWealthModel != null,
-                          onTap: () => context
-                              .read<SourceOfWealthBloc>()
-                              .add(SourceOfWealthSelected(source)),
+                          active: sourceOfWealthModel?.isActive ?? false,
+                          onTap: () {
+                            context
+                                .read<SourceOfWealthBloc>()
+                                .add(SourceOfWealthSelected(source));
+                          },
                           onAmountChanged: (value) => context
                               .read<SourceOfWealthBloc>()
                               .add(SourceOfWealthAmountChanged(
@@ -112,14 +110,12 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
       bottomButton: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
         buildWhen: (previous, current) =>
             previous.enableNextButton() != current.enableNextButton() ||
-            previous.totalOfSourceOFWealthAmount !=
-                current.totalOfSourceOFWealthAmount,
+            previous.totalAmount != current.totalAmount,
         builder: (context, state) {
           return ButtonPair(
               disablePrimaryButton: state.enableNextButton(),
               primaryButtonOnClick: () {
-                print('total>> ${state.totalOfSourceOFWealthAmount}');
-                if (state.totalOfSourceOFWealthAmount == 100) {
+                if (state.totalAmount == 100) {
                   context.read<NavigationBloc<KycPageStep>>().add(
                       const PageChanged(KycPageStep.financialProfileSummary));
                 } else {
