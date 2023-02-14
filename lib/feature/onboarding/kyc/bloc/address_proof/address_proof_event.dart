@@ -26,7 +26,7 @@ class AddressLine2Changed extends AddressProofEvent {
 }
 
 class DistrictChanged extends AddressProofEvent {
-  final String district;
+  final District district;
 
   const DistrictChanged(this.district) : super();
 
@@ -35,7 +35,7 @@ class DistrictChanged extends AddressProofEvent {
 }
 
 class RegionChanged extends AddressProofEvent {
-  final String region;
+  final Region region;
 
   const RegionChanged(this.region) : super();
 

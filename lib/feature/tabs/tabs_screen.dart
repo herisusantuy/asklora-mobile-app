@@ -2,44 +2,60 @@ import 'package:flutter/material.dart';
 
 import '../../core/presentation/custom_scaffold.dart';
 import '../../core/utils/app_icons.dart';
+import '../bot_stock/presentation/portfolio/portfolio_screen.dart';
 import 'for_you/for_you_screen_form.dart';
 import 'home/home_screen_form.dart';
 
-class TabsScreen extends StatelessWidget {
+enum TabScreenPage { home, forYou, portfolio }
+
+class TabsScreen extends StatefulWidget {
   static const String route = '/tab_screen';
+  final TabScreenPage? initialTabScreenPage;
 
-  const TabsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) => const BottomTabBarWidget();
-
-  static void open(BuildContext context) => Navigator.pushNamed(context, route);
-}
-
-class BottomTabBarWidget extends StatefulWidget {
-  const BottomTabBarWidget({super.key});
+  const TabsScreen({this.initialTabScreenPage, super.key});
 
   @override
-  State<BottomTabBarWidget> createState() => _BottomTabsWidgetState();
+  State<TabsScreen> createState() => _TabsScreenState();
+
+  static void openAndRemoveAllRoute(BuildContext context,
+          {TabScreenPage? initialTabScreenPage}) =>
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          route, (Route<dynamic> route) => false,
+          arguments: initialTabScreenPage);
 }
 
-class _BottomTabsWidgetState extends State<BottomTabBarWidget> {
+class _TabsScreenState extends State<TabsScreen> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreenForm(),
     ForYouScreenForm(),
-    Text(
-      'Index 2: Portfolio Screen',
-      style: optionStyle,
-    ),
+    PortfolioScreen(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void _setInitialIndex() {
+    switch (widget.initialTabScreenPage) {
+      case TabScreenPage.forYou:
+        _onItemTapped(1);
+        break;
+      case TabScreenPage.portfolio:
+        _onItemTapped(2);
+        break;
+      default:
+        _onItemTapped(0);
+    }
+  }
+
+  @override
+  void initState() {
+    _setInitialIndex();
+    super.initState();
   }
 
   @override

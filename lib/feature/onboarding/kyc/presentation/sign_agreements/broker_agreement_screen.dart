@@ -33,20 +33,13 @@ class BrokerAgreementScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
-            'Please read the 2 agreements pdf files.',
+            'Please read the the Asklora Customer Agreement. You must check all the boxes and provide your signature in order to proceed.',
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
           const SizedBox(
             height: 24,
           ),
-          ViewFileButton(
-              key: const Key('alpaca_agreement'),
-              label: 'Alpaca Customer Agreement.pdf',
-              onTap: () => context
-                  .read<SigningAgreementBloc>()
-                  .add(const AlpacaCustomerAgreementOpened(true))),
-          _spaceHeight,
           ViewFileButton(
               key: const Key('asklora_agreement'),
               label: 'Asklora Client Agreement.pdf',
@@ -56,11 +49,9 @@ class BrokerAgreementScreen extends StatelessWidget {
           const SizedBox(
             height: 36,
           ),
-          _boundByAlpacaAndLoraAgreement,
+          _boundByAskloraLoraAgreement,
           _spaceHeight,
           _understandOnTheAgreement,
-          _spaceHeight,
-          _certifyNotUSCitizenAgreement,
           const SizedBox(
             height: 45,
           ),
@@ -72,36 +63,33 @@ class BrokerAgreementScreen extends StatelessWidget {
     );
   }
 
-  Widget get _boundByAlpacaAndLoraAgreement =>
+  Widget get _boundByAskloraLoraAgreement =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
-              previous.isAlpacaCustomerAgreementOpened !=
-                  current.isAlpacaCustomerAgreementOpened ||
               previous.isAskLoraClientAgreementOpened !=
                   current.isAskLoraClientAgreementOpened ||
-              previous.isBoundByAlpacaAndLoraAgreementChecked !=
-                  current.isBoundByAlpacaAndLoraAgreementChecked,
+              previous.isBoundByAskloraAgreementChecked !=
+                  current.isBoundByAskloraAgreementChecked,
           builder: (context, state) => CustomCheckbox(
                 checkboxKey:
                     const Key('bound_alpaca_lora_agreement_checkbox_value'),
                 key: const Key('bound_alpaca_lora_agreement_checkbox'),
                 text:
-                    'I have read, understood, and agree to be bound by Alpaca Securities LLC and LORA Technologies, Limited account terms, and all other terms, disclosures and disclaimers applicable to me, as referenced in the Alpaca Customer Agreement. I also acknowledge that the Alpaca Customer Agreement contains a pre-dispute arbitration clause in Section 42.',
-                disabled: !state.isAlpacaCustomerAgreementOpened ||
-                    !state.isAskLoraClientAgreementOpened,
-                isChecked: state.isBoundByAlpacaAndLoraAgreementChecked,
+                    'I have read, understood, and agree to be bound by LORA Advisors Limited’s account terms, and all other terms, disclosures and disclaimers applicable to me.',
+                disabled: !state.isAskLoraClientAgreementOpened,
+                isChecked: state.isBoundByAskloraAgreementChecked,
                 fontType: FontType.smallText,
                 fontHeight: 1.4,
                 onChanged: (value) => context
                     .read<SigningAgreementBloc>()
-                    .add(BoundByAlpacaAndLoraAgreementChecked(value!)),
+                    .add(BoundByAskloraAgreementChecked(value!)),
               ));
 
   Widget get _understandOnTheAgreement =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
-              previous.isBoundByAlpacaAndLoraAgreementChecked !=
-                  current.isBoundByAlpacaAndLoraAgreementChecked ||
+              previous.isBoundByAskloraAgreementChecked !=
+                  current.isBoundByAskloraAgreementChecked ||
               previous.isUnderstandOnTheAgreementChecked !=
                   current.isUnderstandOnTheAgreementChecked,
           builder: (context, state) => CustomCheckbox(
@@ -110,33 +98,12 @@ class BrokerAgreementScreen extends StatelessWidget {
                 text:
                     'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Application Agreement.',
                 fontHeight: 1.4,
-                disabled: !state.isBoundByAlpacaAndLoraAgreementChecked,
+                disabled: !state.isBoundByAskloraAgreementChecked,
                 isChecked: state.isUnderstandOnTheAgreementChecked,
                 fontType: FontType.smallText,
                 onChanged: (value) => context
                     .read<SigningAgreementBloc>()
                     .add(UnderstandOnTheAgreementChecked(value!)),
-              ));
-
-  Widget get _certifyNotUSCitizenAgreement =>
-      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
-          buildWhen: (previous, current) =>
-              previous.isUnderstandOnTheAgreementChecked !=
-                  current.isUnderstandOnTheAgreementChecked ||
-              previous.isCertifyNotUSCitizenAgreementChecked !=
-                  current.isCertifyNotUSCitizenAgreementChecked,
-          builder: (context, state) => CustomCheckbox(
-                checkboxKey: const Key('certify_not_us_citizen_checkbox_value'),
-                key: const Key('certify_not_us_citizen_checkbox'),
-                text:
-                    'I certify that I am not a US citizen, US resident alien or other US person for US tax purposes, and I am submitting the applicable Form W-8 BEN with this form to certify my foreign status and, if applicable, claim tax treaty benefits.',
-                fontHeight: 1.4,
-                disabled: !state.isUnderstandOnTheAgreementChecked,
-                isChecked: state.isCertifyNotUSCitizenAgreementChecked,
-                fontType: FontType.smallText,
-                onChanged: (value) => context
-                    .read<SigningAgreementBloc>()
-                    .add(CertifyNotUSCitizenAgreementChecked(value!)),
               ));
 
   Widget get _customerSignature =>

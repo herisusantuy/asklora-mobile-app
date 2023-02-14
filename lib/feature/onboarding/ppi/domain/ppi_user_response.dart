@@ -112,21 +112,23 @@ class RecommendedBot {
 
   final bool selectable;
 
+  final double value;
+
   RecommendedBot(
-    this.botId,
-    this.ticker,
-    this.tickerName,
-    this.tickerSymbol,
-    this.botType,
-    this.botWord,
-    this.description,
-    this.benefit,
-    this.suitability,
-    this.companyDescription,
-    this.expiredDate, {
-    this.freeBot = false,
-    this.selectable = false,
-  });
+      this.botId,
+      this.ticker,
+      this.tickerName,
+      this.tickerSymbol,
+      this.botType,
+      this.botWord,
+      this.description,
+      this.benefit,
+      this.suitability,
+      this.companyDescription,
+      this.expiredDate,
+      {this.freeBot = false,
+      this.selectable = false,
+      this.value = 200});
 
   factory RecommendedBot.fromJson(Map<String, dynamic> json) =>
       _$RecommendedBotFromJson(json);

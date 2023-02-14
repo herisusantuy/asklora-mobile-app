@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../../core/presentation/custom_scaffold.dart';
-import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
-import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../widgets/circular_bot_card.dart';
-import '../widgets/gift_bot_stock_base_widget.dart';
+import '../widgets/bot_stock_form.dart';
 import 'bot_stock_do_screen.dart';
 
 class BotStockExplanationScreen extends StatelessWidget {
@@ -17,31 +14,29 @@ class BotStockExplanationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-        backgroundColor: AskLoraColors.white,
-        body: GiftBotStockBaseWidget(
-          content: Column(
-            children: const [
-              LoraMemojiHeader(
-                  text:
-                      'A Botstock is a combination of a stock and a Bot. A Bot is where Lora manages your stock position.'),
-              SizedBox(
-                height: 32,
-              ),
-              WhatIsBotTutorial(),
-              SizedBox(
-                height: 50,
-              ),
-            ],
+    return BotStockForm(
+      content: Column(
+        children: const [
+          LoraMemojiHeader(
+              text:
+                  'A Botstock is a combination of a stock and a Bot. A Bot is where Lora manages your stock position.'),
+          SizedBox(
+            height: 32,
           ),
-          bottomButton: Padding(
-            padding: const EdgeInsets.only(bottom: 30.0),
-            child: PrimaryButton(
-              label: 'SURE! WHAT DOES BOT DO?',
-              onTap: () => BotStockDoScreen.open(context),
-            ),
+          WhatIsBotTutorial(),
+          SizedBox(
+            height: 50,
           ),
-        ));
+        ],
+      ),
+      bottomButton: Padding(
+        padding: const EdgeInsets.only(bottom: 30.0),
+        child: PrimaryButton(
+          label: 'SURE! WHAT DOES BOT DO?',
+          onTap: () => BotStockDoScreen.open(context),
+        ),
+      ),
+    );
   }
 
   static void open(BuildContext context) => Navigator.pushNamed(

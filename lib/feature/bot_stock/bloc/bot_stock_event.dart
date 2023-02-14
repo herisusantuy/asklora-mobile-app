@@ -9,6 +9,8 @@ abstract class BotStockEvent extends Equatable {
 
 class FetchBotRecommendation extends BotStockEvent {}
 
+class FetchFreeBotRecommendation extends BotStockEvent {}
+
 class FaqActiveIndexChanged extends BotStockEvent {
   final int faqActiveIndex;
 
@@ -19,6 +21,15 @@ class GetFreeBotStock extends BotStockEvent {
   final RecommendedBot recommendedBot;
 
   const GetFreeBotStock(this.recommendedBot);
+
+  @override
+  List<Object> get props => [recommendedBot];
+}
+
+class EndBotStock extends BotStockEvent {
+  final RecommendedBot recommendedBot;
+
+  const EndBotStock(this.recommendedBot);
 
   @override
   List<Object> get props => [recommendedBot];

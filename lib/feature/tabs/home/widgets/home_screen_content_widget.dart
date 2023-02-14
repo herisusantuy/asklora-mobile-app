@@ -29,45 +29,6 @@ class HomeScreenContentWidget extends StatelessWidget {
   List<Widget> _getContents(
       {required BuildContext context, required UserJourney userJourney}) {
     switch (userJourney) {
-      case UserJourney.personalisation:
-        return [
-          const HomeScreenInvestmentStyleWidget(
-            showAdditionalInfo: true,
-          ),
-          _spaceHeightBig,
-          HomeScreenPopUpMessageWidget(
-            title:
-                'Let’s answer your personalisation questions so we can start giving you your Botstock recommendations!',
-            subTitle:
-                'Afterwards, open your account to receive a free gift Botstock',
-            buttonLabel: 'Answer Personalisation Questions',
-            onPrimaryButtonTap: () => PpiScreen.open(
-              context,
-              arguments: Pair(QuestionPageType.personalisation,
-                  QuestionPageStep.personalisation),
-            ),
-            backgroundColor: AskLoraColors.lime,
-          ),
-          _spaceHeightSmall,
-          const HomeScreenNeedHelpButtonWidget(),
-        ];
-      case UserJourney.createAccount:
-        return [
-          const HomeScreenInvestmentStyleWidget(
-            showAdditionalInfo: true,
-          ),
-          _spaceHeightBig,
-          HomeScreenPopUpMessageWidget(
-            title: 'Your first Botstock is on me!',
-            subTitle:
-                'Open your account to receive a free gift bot stock. Trade it without risk and experience how it helps you save time and effort. Redeem it for real after 3 months.',
-            buttonLabel: 'SIGN UP',
-            onPrimaryButtonTap: () => SignUpScreen.open(context),
-            backgroundColor: AskLoraColors.primaryGreen,
-          ),
-          _spaceHeightSmall,
-          const HomeScreenNeedHelpButtonWidget(),
-        ];
       case UserJourney.investmentStyle:
         return [
           const HomeScreenInvestmentStyleWidget(
@@ -81,7 +42,11 @@ class HomeScreenContentWidget extends StatelessWidget {
             buttonLabel: 'DEFINE INVESTMENT STYLE',
             secondaryButtonLabel: 'HOW IT WORKS',
             onSecondaryButtonTap: () {},
-            onPrimaryButtonTap: () => SignUpScreen.open(context),
+            onPrimaryButtonTap: () => PpiScreen.open(
+              context,
+              arguments: Pair(QuestionPageType.investmentStyle,
+                  QuestionPageStep.investmentStyle),
+            ),
             backgroundColor: AskLoraColors.primaryGreen,
           ),
           _spaceHeightSmall,
@@ -96,7 +61,7 @@ class HomeScreenContentWidget extends StatelessWidget {
             buttonLabel: 'OPEN INVESTMENT ACCOUNT',
             secondaryButtonLabel: 'LEARN MORE',
             onSecondaryButtonTap: () {},
-            onPrimaryButtonTap: () => SignUpScreen.open(context),
+            onPrimaryButtonTap: () => KycScreen.open(context),
             backgroundColor: AskLoraColors.whiteSmoke,
           ),
           _spaceHeightBig,
@@ -107,7 +72,7 @@ class HomeScreenContentWidget extends StatelessWidget {
             subTitle:
                 'Complete your account opening and experience your first trade with an AI strategy.  ',
             buttonLabel: 'OPEN INVESTMENT ACCOUNT',
-            onPrimaryButtonTap: () => SignUpScreen.open(context),
+            onPrimaryButtonTap: () => KycScreen.open(context),
             backgroundColor: AskLoraColors.lime,
             pngImage: 'home_dumbell',
             boxTopMargin: 105,

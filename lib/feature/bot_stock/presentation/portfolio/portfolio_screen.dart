@@ -16,15 +16,17 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../balance/deposit/presentation/deposit_screen.dart';
+import '../../../balance/deposit/utils/deposit_utils.dart';
+import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
-
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
-import 'domain/bot_portfolio_pop_up_model.dart';
 import 'domain/portfolio_detail_response.dart';
 import 'repository/portfolio_repository.dart';
+import 'utils/portfolio_enum.dart';
 import 'widgets/bot_portfolio_pop_up.dart';
 
 part 'widgets/bot_portfolio_card.dart';
@@ -47,30 +49,35 @@ class PortfolioScreen extends StatelessWidget {
         ..add(const FetchBotPortfolio())
         ..add(FetchPortfolioDetail()),
       child: CustomScaffold(
-          useSafeArea: false,
-          backgroundColor: AskLoraColors.white,
-          enableBackNavigation: false,
-          body: ListView(
-            padding:
-                AppValues.screenHorizontalPadding.copyWith(top: 15, bottom: 15),
-            children: [
-              _botStockDetail,
-              const SizedBox(
-                height: 40,
+        useSafeArea: false,
+        backgroundColor: AskLoraColors.white,
+        enableBackNavigation: false,
+        body: ListView(
+          padding:
+              AppValues.screenHorizontalPadding.copyWith(top: 15, bottom: 15),
+          children: [
+            _botStockDetail,
+            const SizedBox(
+              height: 40,
+            ),
+            CustomTextNew(
+              'Your Botstocks',
+              style:
+                  AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            BlocBuilder<AppBloc, AppState>(
+              buildWhen: (previous, current) =>
+                  previous.userJourney != current.userJourney,
+              builder: (context, state) => BotPortfolioList(
+                userJourney: state.userJourney,
               ),
-              CustomTextNew(
-                'Your Botstocks',
-                style: AskLoraTextStyles.h2
-                    .copyWith(color: AskLoraColors.charcoal),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              BotPortfolioList(
-                userJourney: context.read<AppBloc>().state.userJourney,
-              ),
-            ],
-          )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -152,7 +159,7 @@ class PortfolioScreen extends StatelessWidget {
                               subTitle1: (data?.totalBotStockValues ?? 0)
                                   .convertToCurrencyDecimal(),
                               subTitle2: data?.withdrawableAmount != null
-                                  ? '${data!.withdrawableAmount.convertToCurrencyDecimal()}%'
+                                  ? '${data!.profit.convertToCurrencyDecimal()}%'
                                   : '/',
                             ),
                           ],
@@ -165,7 +172,8 @@ class PortfolioScreen extends StatelessWidget {
                     FundingButton(
                       disabled: data == null,
                       fundingType: FundingType.fund,
-                      onTap: () {},
+                      onTap: () => DepositScreen.open(
+                          context: context, depositType: DepositType.type1),
                     ),
                     const SizedBox(
                       height: 10,
@@ -173,7 +181,7 @@ class PortfolioScreen extends StatelessWidget {
                     FundingButton(
                       disabled: data == null,
                       fundingType: FundingType.withdraw,
-                      onTap: () {},
+                      onTap: () => WithdrawalBankDetailScreen.open(context),
                     ),
                   ],
                 )

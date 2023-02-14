@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../tabs/tabs_screen.dart';
-import '../../widgets/balance_base_widget.dart';
+import '../../widgets/balance_base_form.dart';
 
 class WithdrawalResultScreen extends StatelessWidget {
   static const String route = '/withdrawal_result_screen';
@@ -11,7 +11,7 @@ class WithdrawalResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BalanceBaseWidget(
+    return BalanceBaseForm(
         useHeader: false,
         content: const CustomStatusWidget(
           title: 'Your withdrawal request is submitted.',
@@ -23,7 +23,8 @@ class WithdrawalResultScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 30),
           child: ButtonPair(
             primaryButtonLabel: 'DONE',
-            primaryButtonOnClick: () => TabsScreen.open(context),
+            primaryButtonOnClick: () =>
+                TabsScreen.openAndRemoveAllRoute(context),
             secondaryButtonLabel: 'VIEW TRANSACTION HISTORY',
             secondaryButtonOnClick: () {},
           ),

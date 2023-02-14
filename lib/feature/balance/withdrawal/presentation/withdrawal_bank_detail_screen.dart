@@ -8,7 +8,7 @@ import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../bloc/bank_account_bloc.dart';
 import '../../repository/bank_account_repository.dart';
-import '../../widgets/balance_base_widget.dart';
+import '../../widgets/balance_base_form.dart';
 import '../../widgets/bank_account_card.dart';
 import 'withdrawal_amount/withdrawal_amount_screen.dart';
 
@@ -32,7 +32,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return BalanceBaseWidget(
+          return BalanceBaseForm(
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [BankAccountCard()],

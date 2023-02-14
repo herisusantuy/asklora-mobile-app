@@ -5,7 +5,7 @@ import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../tabs/tabs_screen.dart';
-import '../../widgets/balance_base_widget.dart';
+import '../../widgets/balance_base_form.dart';
 import '../utils/deposit_utils.dart';
 
 class DepositResultScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class DepositResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BalanceBaseWidget(
+    return BalanceBaseForm(
         title: 'Deposit',
         useHeader: false,
         content: CustomStatusWidget(
@@ -39,7 +39,7 @@ class DepositResultScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: PrimaryButton(
                 label: 'DONE',
-                onTap: () => TabsScreen.open(context),
+                onTap: () => TabsScreen.openAndRemoveAllRoute(context),
               ),
             ));
       default:
@@ -49,7 +49,8 @@ class DepositResultScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30),
               child: ButtonPair(
                 primaryButtonLabel: 'DONE',
-                primaryButtonOnClick: () => TabsScreen.open(context),
+                primaryButtonOnClick: () =>
+                    TabsScreen.openAndRemoveAllRoute(context),
                 secondaryButtonLabel: 'VIEW TRANSACTION HISTORY',
                 secondaryButtonOnClick: () {},
               ),

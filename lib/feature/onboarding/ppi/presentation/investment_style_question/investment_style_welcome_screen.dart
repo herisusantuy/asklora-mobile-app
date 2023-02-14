@@ -35,7 +35,8 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
                       primaryButtonOnClick: () => PpiScreen.open(context,
                           arguments: Pair(QuestionPageType.investmentStyle,
                               QuestionPageStep.investmentStyle)),
-                      secondaryButtonOnClick: () => TabsScreen.open(context),
+                      secondaryButtonOnClick: () =>
+                          TabsScreen.openAndRemoveAllRoute(context),
                       primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
                       secondaryButtonLabel: 'MAYBE LATER')
                 ],
