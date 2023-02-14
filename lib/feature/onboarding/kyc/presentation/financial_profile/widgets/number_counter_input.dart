@@ -155,10 +155,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
           ],
           maxLengthEnforcement: MaxLengthEnforcement.none,
           controller: _controller,
-          style: const TextStyle(
-            fontSize: 15,
-            fontFamilyFallback: ['Mulish'],
-          ),
+          style: AskLoraTextStyles.body1,
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,
           onChanged: (str) {
