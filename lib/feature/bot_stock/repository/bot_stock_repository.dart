@@ -70,7 +70,8 @@ class BotStockRepository {
   }
 
   Future<BaseResponse<bool>> getFreeBotStock(
-      RecommendedBot recommendedBot) async {
+      {required RecommendedBot recommendedBot,
+      required double tradeBotStockAmount}) async {
     await Future.delayed(const Duration(seconds: 1));
     return BaseResponse.complete(true);
   }

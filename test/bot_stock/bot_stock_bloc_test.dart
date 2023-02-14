@@ -126,8 +126,8 @@ void main() async {
               .thenAnswer((_) => Future.value(boolResponse));
           return botStockBloc;
         },
-        act: (bloc) =>
-            bloc.add(TradeBotStock(recommendedBot: recommendedBot, amount: 0)),
+        act: (bloc) => bloc.add(TradeBotStock(
+            recommendedBot: recommendedBot, tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(tradeBotStockResponse: BaseResponse.loading()),
               BotStockState(tradeBotStockResponse: boolResponse)
@@ -141,8 +141,8 @@ void main() async {
               .thenThrow(boolErrorResponse);
           return botStockBloc;
         },
-        act: (bloc) =>
-            bloc.add(TradeBotStock(recommendedBot: recommendedBot, amount: 0)),
+        act: (bloc) => bloc.add(TradeBotStock(
+            recommendedBot: recommendedBot, tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(tradeBotStockResponse: BaseResponse.loading()),
               BotStockState(tradeBotStockResponse: boolErrorResponse)

@@ -140,7 +140,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         onTap: () => context.read<BotStockBloc>().add(
                             TradeBotStock(
                                 recommendedBot: arguments.left,
-                                amount: arguments.right)),
+                                tradeBotStockAmount: arguments.right)),
                       ),
                     ))),
       ),
