@@ -40,6 +40,7 @@ class SourceOfWealthBloc
     } else {
       sourceOfWealthAnswers.remove(answer);
       answer = answer.copyWith(isActive: !answer.isActive);
+      sourceOfWealthAnswers.add(answer);
       if (sourceOfWealthAnswers.isNotEmpty) {
         totalAmount =
             sourceOfWealthAnswers.map((e) => e.amount).reduce((a, b) => a + b);
