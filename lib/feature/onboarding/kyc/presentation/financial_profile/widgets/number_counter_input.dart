@@ -44,6 +44,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
   @override
   void initState() {
     super.initState();
+    _controller.text = widget.initialValue;
     _controller.addListener(() {
       widget.onAmountChanged(_controller.text.isEmpty ? '0' : _controller.text);
       _controller.selection =
