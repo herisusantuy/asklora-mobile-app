@@ -34,11 +34,5 @@ class SourceOfWealthState extends Equatable {
     ];
   }
 
-  bool disabledNextButton() {
-    if (totalAmount > 0) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  bool disabledNextButton() => totalAmount < 0;
 }
