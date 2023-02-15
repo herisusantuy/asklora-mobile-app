@@ -107,11 +107,11 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
       ),
       bottomButton: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
         buildWhen: (previous, current) =>
-            previous.disabledNextButton() != current.disabledNextButton() ||
+            previous.enableNextButton() != current.enableNextButton() ||
             previous.totalAmount != current.totalAmount,
         builder: (context, state) {
           return ButtonPair(
-              disablePrimaryButton: state.disabledNextButton(),
+              disablePrimaryButton: !state.enableNextButton(),
               primaryButtonOnClick: () {
                 if (state.totalAmount == 100) {
                   context.read<NavigationBloc<KycPageStep>>().add(
