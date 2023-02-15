@@ -9,6 +9,7 @@ import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/kyc_bloc.dart';
+import '../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import 'financial_profile/widgets/financial_profile_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
 import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
@@ -21,6 +22,7 @@ class KycSummaryScreen extends StatelessWidget {
   final CountryOfTaxResidenceState countryOfTaxResidenceState;
   final DisclosureAffiliationState disclosureAffiliationState;
   final FinancialProfileState financialProfileState;
+  final SourceOfWealthState sourceOfWealthState;
   final double progress;
 
   const KycSummaryScreen(
@@ -30,6 +32,7 @@ class KycSummaryScreen extends StatelessWidget {
       required this.countryOfTaxResidenceState,
       required this.disclosureAffiliationState,
       required this.financialProfileState,
+      required this.sourceOfWealthState,
       Key? key})
       : super(key: key);
 
@@ -56,6 +59,7 @@ class KycSummaryScreen extends StatelessWidget {
             key: const Key('financial_profile_summary_content'),
             disclosureAffiliationState: disclosureAffiliationState,
             financialProfileState: financialProfileState,
+            sourceOfWealthState: sourceOfWealthState,
             title: 'Financial Profile',
           ),
           const SizedBox(
