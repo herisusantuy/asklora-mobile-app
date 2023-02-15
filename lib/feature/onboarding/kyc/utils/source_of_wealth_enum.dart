@@ -51,7 +51,6 @@ class SourceOfWealthModel {
       amount,
       additionalSourceOfWealth,
       isActive,
-      DateTime.now().millisecondsSinceEpoch
     ].toString();
   }
 }

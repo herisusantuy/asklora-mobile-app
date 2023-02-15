@@ -30,7 +30,6 @@ class SourceOfWealthState extends Equatable {
       sourceOfWealthAnswers,
       totalAmount,
       errorMessage,
-      DateTime.now().millisecondsSinceEpoch
     ];
   }
 
