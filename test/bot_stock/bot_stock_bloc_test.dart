@@ -122,28 +122,32 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'getting free bot stock',
         build: () {
-          when(botStockRepository.getFreeBotStock(recommendedBot))
+          when(botStockRepository.getFreeBotStock(
+                  recommendedBot: recommendedBot, tradeBotStockAmount: 0))
               .thenAnswer((_) => Future.value(boolResponse));
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(GetFreeBotStock(recommendedBot)),
+        act: (bloc) => bloc.add(TradeBotStock(
+            recommendedBot: recommendedBot, tradeBotStockAmount: 0)),
         expect: () => {
-              BotStockState(getFreeBotStockResponse: BaseResponse.loading()),
-              BotStockState(getFreeBotStockResponse: boolResponse)
+              BotStockState(tradeBotStockResponse: BaseResponse.loading()),
+              BotStockState(tradeBotStockResponse: boolResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
         'emits `BaseResponse.error` WHEN '
         'failed getting free bot stock',
         build: () {
-          when(botStockRepository.getFreeBotStock(recommendedBot))
+          when(botStockRepository.getFreeBotStock(
+                  recommendedBot: recommendedBot, tradeBotStockAmount: 0))
               .thenThrow(boolErrorResponse);
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(GetFreeBotStock(recommendedBot)),
+        act: (bloc) => bloc.add(TradeBotStock(
+            recommendedBot: recommendedBot, tradeBotStockAmount: 0)),
         expect: () => {
-              BotStockState(getFreeBotStockResponse: BaseResponse.loading()),
-              BotStockState(getFreeBotStockResponse: boolErrorResponse)
+              BotStockState(tradeBotStockResponse: BaseResponse.loading()),
+              BotStockState(tradeBotStockResponse: boolErrorResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -204,6 +208,15 @@ void main() async {
         },
         act: (bloc) => bloc.add(FetchChartData()),
         expect: () => {BotStockState(chartDataResponse: chartErrorResponse)});
+
+    blocTest<BotStockBloc, BotStockState>(
+        'emits `BaseResponse.complete` WHEN '
+        'fetching bot recommendation',
+        build: () => botStockBloc,
+        act: (bloc) => bloc.add(const TradeBotStockAmountChanged(200)),
+        expect: () => {
+              const BotStockState(botStockTradeAmount: 200),
+            });
 
     tearDown(() => {botStockBloc.close()});
   });
