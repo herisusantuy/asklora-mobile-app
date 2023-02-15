@@ -13,6 +13,9 @@ class AutoResizedTextField extends StatelessWidget {
   final String? initialValue;
   final TextEditingController? controller;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final TextStyle? textStyle;
+  final TextStyle? hintTextStyle;
 
   const AutoResizedTextField(
       {this.onChanged,
@@ -23,6 +26,9 @@ class AutoResizedTextField extends StatelessWidget {
       this.textInputType = TextInputType.text,
       this.textInputFormatterList,
       this.suffixIcon,
+      this.prefixIcon,
+      this.textStyle,
+      this.hintTextStyle,
       Key? key})
       : super(key: key);
 
@@ -31,14 +37,18 @@ class AutoResizedTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
+      keyboardType: textInputType,
+      inputFormatters: textInputFormatterList,
       decoration: InputDecoration(
+          prefixIcon: prefixIcon,
           contentPadding: EdgeInsets.zero,
           border: InputBorder.none,
-          hintStyle: AskLoraTextStyles.h3Italic
-              .copyWith(color: AskLoraColors.lightGray),
+          hintStyle: hintTextStyle ??
+              AskLoraTextStyles.h3Italic
+                  .copyWith(color: AskLoraColors.lightGray),
           suffixIcon: suffixIcon,
           hintText: hintText),
-      style: AskLoraTextStyles.h3,
+      style: textStyle ?? AskLoraTextStyles.h3,
     );
   }
 }

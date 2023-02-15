@@ -17,6 +17,7 @@ class AppLanguageChangeEvent extends AppEvent {
 
 class SaveUserJourney extends AppEvent {
   final UserJourney userJourney;
+  final String? data;
 
-  const SaveUserJourney(this.userJourney);
+  const SaveUserJourney(this.userJourney, {this.data});
 }

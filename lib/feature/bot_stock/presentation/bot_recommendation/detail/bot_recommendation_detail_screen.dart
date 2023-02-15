@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../repository/bot_stock_repository.dart';
+import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
 import '../../bot_trade_summary/bot_trade_summary_screen.dart';
 import '../../widgets/custom_detail_expansion_tile.dart';
@@ -126,7 +129,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           CustomTextNew(
-                            '223.07',
+                            recommendedBot.amount.convertToCurrencyDecimal(),
                             style: AskLoraTextStyles.h5
                                 .copyWith(color: AskLoraColors.charcoal),
                           ),
@@ -134,7 +137,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                             height: 5,
                           ),
                           CustomTextNew(
-                            '-15.060 -6.32%',
+                            '${recommendedBot.profit} ${recommendedBot.profitPercent}%',
                             style: AskLoraTextStyles.body2
                                 .copyWith(color: AskLoraColors.charcoal),
                           )
@@ -144,11 +147,11 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                   ],
                 ),
                 children: [
-                  const PairColumnText(
+                  PairColumnText(
                     title1: 'Prev Close',
-                    subTitle1: '238.13',
+                    subTitle1: recommendedBot.prevClose,
                     title2: 'Market Cap',
-                    subTitle2: '698.98B',
+                    subTitle2: recommendedBot.marketCap,
                   ),
                   const SizedBox(
                     height: 2,
@@ -204,17 +207,17 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                     if (botType != BotType.squat) _detailedInformation,
                     PairColumnText(
                         title1: 'Earliest Start Time',
-                        subTitle1: '03/12 15:30 ET',
+                        subTitle1: recommendedBot.earliestStartTime,
                         title2: 'Optimized Start Time',
-                        subTitle2: '03/12 15:30 ET',
+                        subTitle2: recommendedBot.optimizedStartTime,
                         tooltipText1: _tempTooltipText,
                         tooltipText2: _tempTooltipText),
                     _spaceBetweenInfo,
                     PairColumnText(
                         title1: 'Investment Period',
-                        subTitle1: '2 weeks',
+                        subTitle1: recommendedBot.investmentPeriod,
                         title2: 'Estimated End Date',
-                        subTitle2: '03/26',
+                        subTitle2: recommendedBot.estimatedEndDate,
                         tooltipText1: _tempTooltipText,
                         tooltipText2: _tempTooltipText),
                     const SizedBox(
@@ -242,29 +245,37 @@ class BotRecommendationDetailScreen extends StatelessWidget {
             padding:
                 AppValues.screenHorizontalPadding.copyWith(top: 24, bottom: 30),
             child: PrimaryButton(
-              label: 'TRADE',
-              onTap: () => BotTradeSummaryScreen.open(
-                  context: context, recommendedBot: recommendedBot),
-            ),
+                label: 'TRADE',
+                onTap: () {
+                  if (recommendedBot.freeBot) {
+                    BotTradeSummaryScreen.open(
+                        context: context, arguments: Pair(recommendedBot, 0));
+                  } else {
+                    BotStockBottomSheet.amountBotStockForm(
+                        context, recommendedBot);
+                  }
+                }),
           )),
     );
   }
 
   Widget get _detailedInformation => Column(
         children: [
-          const BotPriceLineBar(
-            minPrice: 210,
-            maxPrice: 240,
-            currentPrice: 220,
+          BotPriceLineBar(
+            minPrice: recommendedBot.minPrice,
+            maxPrice: recommendedBot.maxPrice,
+            currentPrice: recommendedBot.currentPrice,
           ),
           const SizedBox(
             height: 24,
           ),
           PairColumnText(
               title1: 'Stop Loss Level (USD)',
-              subTitle1: '210.00',
+              subTitle1:
+                  recommendedBot.stopLossLevel.convertToCurrencyDecimal(),
               title2: 'Take Profit Level (USD)',
-              subTitle2: '210.00',
+              subTitle2:
+                  recommendedBot.takeProfitLevel.convertToCurrencyDecimal(),
               tooltipText1: _tempTooltipText,
               tooltipText2: _tempTooltipText),
           _spaceBetweenInfo,

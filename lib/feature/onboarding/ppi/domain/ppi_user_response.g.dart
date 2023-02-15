@@ -88,6 +88,22 @@ RecommendedBot _$RecommendedBotFromJson(Map<String, dynamic> json) =>
       freeBot: json['freeBot'] as bool? ?? false,
       selectable: json['selectable'] as bool? ?? false,
       value: (json['value'] as num?)?.toDouble() ?? 200,
+      stopLossLevel: (json['stopLossLevel'] as num?)?.toDouble() ?? 210,
+      takeProfitLevel: (json['takeProfitLevel'] as num?)?.toDouble() ?? 210,
+      earliestStartTime:
+          json['earliestStartTime'] as String? ?? '03/12 15:30 ET',
+      optimizedStartTime:
+          json['optimizedStartTime'] as String? ?? '03/12 15:30 ET',
+      investmentPeriod: json['investmentPeriod'] as String? ?? '2 weeks',
+      estimatedEndDate: json['estimatedEndDate'] as String? ?? '03/26',
+      prevClose: json['prevClose'] as String? ?? '10/07 16:00:04 ET',
+      marketCap: json['marketCap'] as String? ?? '698.98B',
+      amount: (json['amount'] as num?)?.toDouble() ?? 223.07,
+      profit: (json['profit'] as num?)?.toDouble() ?? -15.060,
+      profitPercent: (json['profitPercent'] as num?)?.toDouble() ?? -6.32,
+      minPrice: (json['minPrice'] as num?)?.toDouble() ?? 210,
+      maxPrice: (json['maxPrice'] as num?)?.toDouble() ?? 240,
+      currentPrice: (json['currentPrice'] as num?)?.toDouble() ?? 220,
     );
 
 Map<String, dynamic> _$RecommendedBotToJson(RecommendedBot instance) =>
@@ -106,4 +122,18 @@ Map<String, dynamic> _$RecommendedBotToJson(RecommendedBot instance) =>
       'freeBot': instance.freeBot,
       'selectable': instance.selectable,
       'value': instance.value,
+      'stopLossLevel': instance.stopLossLevel,
+      'takeProfitLevel': instance.takeProfitLevel,
+      'earliestStartTime': instance.earliestStartTime,
+      'optimizedStartTime': instance.optimizedStartTime,
+      'investmentPeriod': instance.investmentPeriod,
+      'estimatedEndDate': instance.estimatedEndDate,
+      'prevClose': instance.prevClose,
+      'marketCap': instance.marketCap,
+      'amount': instance.amount,
+      'profit': instance.profit,
+      'profitPercent': instance.profitPercent,
+      'minPrice': instance.minPrice,
+      'maxPrice': instance.maxPrice,
+      'currentPrice': instance.currentPrice,
     };

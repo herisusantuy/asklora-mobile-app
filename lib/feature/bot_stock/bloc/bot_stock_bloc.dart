@@ -16,9 +16,10 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     on<FetchBotRecommendation>(_onFetchBotRecommendation);
     on<FetchFreeBotRecommendation>(_onFetchFreeBotRecommendation);
     on<FaqActiveIndexChanged>(_onFaqActiveIndexChanged);
-    on<GetFreeBotStock>(_onGetFreeBotStock);
+    on<TradeBotStock>(_onTradeBotStock);
     on<EndBotStock>(_onEndBotStock);
     on<FetchChartData>(_onFetchChartData);
+    on<TradeBotStockAmountChanged>(_onTradeBotStockAmountChanged);
   }
 
   final BotStockRepository _botStockRepository;
@@ -51,12 +52,13 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     }
   }
 
-  _onGetFreeBotStock(GetFreeBotStock event, Emitter<BotStockState> emit) async {
+  _onTradeBotStock(TradeBotStock event, Emitter<BotStockState> emit) async {
     try {
       emit(state.copyWith(getFreeBotStockResponse: BaseResponse.loading()));
       emit(state.copyWith(
-          getFreeBotStockResponse:
-              await _botStockRepository.getFreeBotStock(event.recommendedBot)));
+          getFreeBotStockResponse: await _botStockRepository.getFreeBotStock(
+              recommendedBot: event.recommendedBot,
+              tradeBotStockAmount: event.tradeBotStockAmount)));
     } catch (e) {
       emit(state.copyWith(
           getFreeBotStockResponse: BaseResponse.error('Something went wrong')));
@@ -91,5 +93,10 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       emit(state.copyWith(
           chartDataResponse: BaseResponse.error('Something went wrong')));
     }
+  }
+
+  _onTradeBotStockAmountChanged(
+      TradeBotStockAmountChanged event, Emitter<BotStockState> emit) async {
+    emit(state.copyWith(botStockTradeAmount: event.amount));
   }
 }
