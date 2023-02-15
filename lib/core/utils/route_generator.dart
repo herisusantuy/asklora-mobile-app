@@ -16,6 +16,7 @@ import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.d
 import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
+import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
 import '../../feature/bot_stock/presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
@@ -131,7 +132,7 @@ class RouterGenerator {
       case BotTradeSummaryScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotTradeSummaryScreen(
-                  recommendedBot: settings.arguments as RecommendedBot,
+                  arguments: settings.arguments as Pair<RecommendedBot, double>,
                 ));
       case PortfolioScreen.route:
         return MaterialPageRoute(builder: (_) => const PortfolioScreen());
@@ -176,6 +177,12 @@ class RouterGenerator {
         return MaterialPageRoute(
           builder: (_) => LearningBotStockScreen(
             botType: settings.arguments as BotType,
+          ),
+        );
+      case BotStockResultScreen.route:
+        return MaterialPageRoute(
+          builder: (_) => BotStockResultScreen(
+            arguments: settings.arguments as Pair<String, String>,
           ),
         );
       default:

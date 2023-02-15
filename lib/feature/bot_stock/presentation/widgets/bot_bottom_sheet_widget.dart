@@ -7,8 +7,10 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 
 class BotBottomSheetWidget extends StatelessWidget {
+  final bool disablePrimaryButton;
   final String title;
   final String? subTitle;
+  final Widget? child;
   final String primaryButtonLabel;
   final String secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
@@ -16,7 +18,9 @@ class BotBottomSheetWidget extends StatelessWidget {
 
   const BotBottomSheetWidget(
       {required this.title,
+      this.disablePrimaryButton = false,
       this.subTitle,
+      this.child,
       required this.primaryButtonLabel,
       required this.secondaryButtonLabel,
       required this.onPrimaryButtonTap,
@@ -62,10 +66,16 @@ class BotBottomSheetWidget extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
+                    if (child != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: child!,
+                      ),
                     const SizedBox(
                       height: 32,
                     ),
                     ButtonPair(
+                        disablePrimaryButton: disablePrimaryButton,
                         primaryButtonOnClick: onPrimaryButtonTap,
                         secondaryButtonOnClick: onSecondaryButtonTap,
                         primaryButtonLabel: primaryButtonLabel,

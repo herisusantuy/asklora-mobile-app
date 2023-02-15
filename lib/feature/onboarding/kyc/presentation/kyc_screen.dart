@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:signature/signature.dart';
+import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
@@ -11,12 +12,14 @@ import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/kyc_bloc.dart';
 import '../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
+import '../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../repository/account_repository.dart';
 import '../repository/signing_broker_agreement_repository.dart';
 import 'financial_profile/disclosure_affiliation_associates_screen.dart';
 import 'financial_profile/disclosure_affiliation_commission_screen.dart';
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_associates_input_screen.dart';
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_person_input_screen.dart';
+import 'financial_profile/financial_profile_source_of_wealth_screen.dart';
 import 'financial_profile/disclosure_affiliation_person_screen.dart';
 import 'financial_profile/financial_profile_summary_screen.dart';
 import 'financial_profile/financial_profile_employment_question.dart';
@@ -68,6 +71,9 @@ class KycScreen extends StatelessWidget {
               ),
               BlocProvider(
                 create: (context) => FinancialProfileBloc(),
+              ),
+              BlocProvider(
+                create: (context) => SourceOfWealthBloc(),
               ),
               BlocProvider(
                 create: (context) =>
@@ -170,13 +176,18 @@ class KycScreen extends StatelessWidget {
               return const FinancialProfileEmploymentQuestion(
                 progress: 0.62,
               );
+            case KycPageStep.financialProfileSourceOfWealth:
+              return const FinancialProfileSourceOfWealthScreen(
+                progress: 0.65,
+              );
             case KycPageStep.financialProfileSummary:
               return FinancialProfileSummaryScreen(
-                progress: 0.65,
+                progress: 0.68,
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,
                 financialProfileState:
                     context.read<FinancialProfileBloc>().state,
+                sourceOfWealthState: context.read<SourceOfWealthBloc>().state,
               );
             case KycPageStep.disclosureRejected:
               return const KycRejectedScreen(
@@ -211,6 +222,7 @@ class KycScreen extends StatelessWidget {
                     context.read<DisclosureAffiliationBloc>().state,
                 financialProfileState:
                     context.read<FinancialProfileBloc>().state,
+                sourceOfWealthState: context.read<SourceOfWealthBloc>().state,
               );
             case KycPageStep.kycResultScreen:
               return const KycResultScreen();

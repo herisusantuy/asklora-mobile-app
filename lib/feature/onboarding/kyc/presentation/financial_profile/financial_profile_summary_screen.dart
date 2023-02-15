@@ -5,6 +5,7 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import 'widgets/financial_profile_summary_content.dart';
@@ -12,11 +13,13 @@ import 'widgets/financial_profile_summary_content.dart';
 class FinancialProfileSummaryScreen extends StatelessWidget {
   final DisclosureAffiliationState disclosureAffiliationState;
   final FinancialProfileState financialProfileState;
+  final SourceOfWealthState sourceOfWealthState;
   final double progress;
 
   const FinancialProfileSummaryScreen(
       {required this.disclosureAffiliationState,
       required this.financialProfileState,
+      required this.sourceOfWealthState,
       required this.progress,
       Key? key})
       : super(key: key);
@@ -31,6 +34,7 @@ class FinancialProfileSummaryScreen extends StatelessWidget {
         key: const Key('financial_profile_summary_content'),
         disclosureAffiliationState: disclosureAffiliationState,
         financialProfileState: financialProfileState,
+        sourceOfWealthState: sourceOfWealthState,
         title: 'Summary',
       ),
       bottomButton: _bottomButton(context),

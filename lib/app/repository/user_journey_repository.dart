@@ -1,35 +1,57 @@
 import 'package:collection/collection.dart';
 
+import '../../core/domain/base_response.dart';
 import '../../core/utils/storage/shared_preference.dart';
 import '../../core/utils/storage/storage_keys.dart';
 import '../bloc/app_bloc.dart';
 import '../domain/user_journey_api_client.dart';
+import '../domain/user_journey_request.dart';
+import '../domain/user_journey_response.dart';
 
 class UserJourneyRepository {
   final UserJourneyApiClient _userJourneyApiClient = UserJourneyApiClient();
 
   final _sharedPreference = SharedPreference();
 
-  Future<bool?> saveUserJourney(UserJourney userJourney) async {
+  Future<BaseResponse<UserJourneyResponse>> saveUserJourney(
+      {required UserJourney userJourney, String? data}) async {
+    await _sharedPreference.writeData(sfKeyUserJourney, userJourney.value);
     try {
-      ///TODO POST RESPONSE TO API
-      await _userJourneyApiClient.save();
+      var response = await _userJourneyApiClient
+          .save(UserJourneyRequest(userJourney: userJourney.value, data: data));
+      var userJourneyResponse = UserJourneyResponse.fromJson(response.data!);
+      return BaseResponse.complete(userJourneyResponse);
     } catch (e) {
-      await _sharedPreference.writeData(sfKeyUserJourney, userJourney.name);
+      ///TODO POST TO FIREBASE
+      return BaseResponse.error('Failed save user journey!');
     }
-    return true;
   }
 
   Future<UserJourney> getUserJourney() async {
     try {
-      ///TODO GET RESPONSE FROM API
-      await _userJourneyApiClient.get();
-      return UserJourney.privacy;
+      String? localUserJourneyString =
+          await _sharedPreference.readData(sfKeyUserJourney);
+      UserJourney localUserJourney = UserJourney.values
+          .firstWhere((element) => element.value == localUserJourneyString);
+
+      var response = await _userJourneyApiClient.get();
+      var userJourneyResponse = UserJourneyResponse.fromJson(response.data);
+
+      var indexUserJourneyResponse = UserJourney.values.indexWhere(
+          (element) => element.value == userJourneyResponse.userJourney);
+      var indexUserJourneyLocal = UserJourney.values
+          .indexWhere((element) => element.value == localUserJourney.value);
+
+      if (indexUserJourneyResponse < indexUserJourneyLocal) {
+        saveUserJourney(userJourney: localUserJourney);
+        return localUserJourney;
+      } else {
+        return UserJourney.values.firstWhereOrNull((element) =>
+                element.value == userJourneyResponse.userJourney) ??
+            UserJourney.privacy;
+      }
     } catch (e) {
-      String? userJourney = await _sharedPreference.readData(sfKeyUserJourney);
-      return UserJourney.values
-              .firstWhereOrNull((element) => element.name == userJourney) ??
-          UserJourney.privacy;
+      return UserJourney.privacy;
     }
   }
 }

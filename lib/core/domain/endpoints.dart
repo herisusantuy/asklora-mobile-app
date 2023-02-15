@@ -3,8 +3,9 @@ const v2 = '/api/v2/';
 const accounts = 'accounts/';
 const transactions = 'transactions/';
 const orders = 'orders/';
+const activities = 'activities/';
 
-const String endpointSignIn = '${v1}auth/';
+const String endpointSignIn = '${v2}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';
 const String endpointResetPassword = '$v1$accounts/reset-password/';
@@ -22,8 +23,7 @@ const String endpointBankAccount = '$v1${accounts}bank-account-related/';
 const String endpointWithdrawal = '$v1${transactions}withdraw/';
 const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointOrders = '$v1$orders';
-const String endpointGetUserJourney = 'get-user-journey';
-const String endpointSaveUserJourney = 'save-user-journey';
+const String endpointUserJourney = '$v2${activities}user-journey/';
 
 /// PPI related
 
