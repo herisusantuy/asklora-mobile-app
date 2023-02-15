@@ -123,7 +123,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
               },
               secondaryButtonOnClick: () => CarouselScreen.open(context),
               primaryButtonLabel: 'NEXT',
-              secondaryButtonLabel: 'SAFE FOR LATER');
+              secondaryButtonLabel: 'SAVE FOR LATER');
         },
       ),
     );
