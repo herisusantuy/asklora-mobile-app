@@ -148,8 +148,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                   borderSide: const BorderSide(
                     width: 1,
                     color: Colors.black26,
-                  ),
-                  borderRadius: BorderRadius.circular(10));
+                  ));
               return MapEntry(index, value);
             })
             .values
