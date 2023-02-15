@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../core/styles/asklora_text_styles.dart';
 
 class CustomDonutChart extends StatelessWidget {
   final int total;
@@ -34,16 +35,12 @@ class CustomDonutChart extends StatelessWidget {
                 ),
               ),
             ),
-            // swapAnimationCurve: Curves.easeInQuad,
           ),
           Align(
               alignment: Alignment.center,
               child: CustomTextNew(
                 '$total %',
-                style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    fontFamilyFallback: ['Mulish']),
+                style: AskLoraTextStyles.subtitle2,
               )),
         ],
       ),

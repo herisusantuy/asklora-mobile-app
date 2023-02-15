@@ -180,7 +180,9 @@ class FinancialProfileSummaryContent extends StatelessWidget {
           return const SizedBox();
         } else {
           return CustomTextNew(
-            e.sourceOfWealthType.value,
+            e.sourceOfWealthType.value == 'Other'
+                ? '${e.sourceOfWealthType.value} : ${e.additionalSourceOfWealth!}'
+                : e.sourceOfWealthType.value,
             style: AskLoraTextStyles.subtitle2
                 .copyWith(color: AskLoraColors.charcoal),
           );

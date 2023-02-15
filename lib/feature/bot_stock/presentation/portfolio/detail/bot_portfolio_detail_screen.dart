@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
@@ -12,11 +13,11 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
-import '../../../../tabs/tabs_screen.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
+import '../../bot_stock_result_screen.dart';
 import '../../widgets/column_text.dart';
 import '../../widgets/bot_stock_form.dart';
 import '../../widgets/pair_column_text.dart';
@@ -62,8 +63,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             } else {
               CustomLoadingOverlay.dismiss();
               if (state.endBotStockResponse.state == ResponseState.success) {
-                TabsScreen.openAndRemoveAllRoute(context,
-                    initialTabScreenPage: TabScreenPage.portfolio);
+                BotStockResultScreen.open(
+                    context: context,
+                    arguments: Pair('Trade Request Received',
+                        '${botType.name} ${recommendedBot.ticker} will end at 17/3/2023 10.22}'));
               } else if (state.endBotStockResponse.state ==
                   ResponseState.error) {
                 CustomInAppNotification.show(

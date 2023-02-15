@@ -26,12 +26,13 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
     bool isTokenValid = await _tokenRepository.isTokenValid();
-    UserJourney userJourney = await _userJourneyRepository.getUserJourney();
     if (isTokenValid) {
+      var userJourney = await _userJourneyRepository.getUserJourney();
       emit(AppState.authenticated(userJourney: userJourney));
     } else {
       emit(AppState.unauthenticated(
-          localeType: LocaleType.defaultFont(), userJourney: userJourney));
+          localeType: LocaleType.defaultFont(),
+          userJourney: UserJourney.privacy));
     }
   }
 
@@ -42,7 +43,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void _onSaveUserJourney(SaveUserJourney event, Emitter<AppState> emit) async {
-    await _userJourneyRepository.saveUserJourney(event.userJourney);
+    await _userJourneyRepository.saveUserJourney(
+        userJourney: event.userJourney, data: event.data);
     emit(state.copyWith(userJourney: event.userJourney));
   }
 }

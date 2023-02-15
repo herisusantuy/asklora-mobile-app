@@ -44,6 +44,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
   @override
   void initState() {
     super.initState();
+    _controller.text = widget.initialValue;
     _controller.addListener(() {
       widget.onAmountChanged(_controller.text.isEmpty ? '0' : _controller.text);
       _controller.selection =
@@ -154,10 +155,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
           ],
           maxLengthEnforcement: MaxLengthEnforcement.none,
           controller: _controller,
-          style: const TextStyle(
-            fontSize: 15,
-            fontFamilyFallback: ['Mulish'],
-          ),
+          style: AskLoraTextStyles.body1,
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,
           onChanged: (str) {
