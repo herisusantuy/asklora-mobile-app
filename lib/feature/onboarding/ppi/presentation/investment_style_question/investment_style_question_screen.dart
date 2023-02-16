@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../../../tabs/for_you/bloc/for_you_bloc.dart';
 import '../../../../tabs/for_you/for_you_screen_form.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
@@ -38,10 +39,13 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                   if (!UserJourney.compareUserJourney(
                       source: context.read<AppBloc>().state.userJourney,
                       target: UserJourney.investmentStyle)) {
-                    ///save UserJourney only if current UserJourney < kyc
+                    ///save UserJourney and answer only if current UserJourney < kyc
                     context
                         .read<AppBloc>()
                         .add(const SaveUserJourney(UserJourney.kyc));
+                  } else {
+                    ///TODO will save bulk answer later
+                    context.read<ForYouBloc>().add(SaveInvestmentStyleAnswer());
                   }
 
                   context.read<NavigationBloc<QuestionPageStep>>().add(

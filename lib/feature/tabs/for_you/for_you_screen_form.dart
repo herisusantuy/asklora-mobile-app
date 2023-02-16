@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/bloc/app_bloc.dart';
+import '../../../core/domain/base_response.dart';
 import '../../../core/domain/pair.dart';
 import '../../../core/presentation/bot_stock_background_with_pop_up.dart';
 import '../../../core/presentation/custom_text_new.dart';
+import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../core/styles/asklora_colors.dart';
@@ -14,6 +16,8 @@ import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
+import 'bloc/for_you_bloc.dart';
+import 'repository/for_you_repository.dart';
 
 enum ForYouPage { investmentStyle, botRecommendation }
 
@@ -48,23 +52,51 @@ class ForYouScreenForm extends StatelessWidget {
         });
   }
 
-  Widget get _getForYouPage => BlocProvider(
-      create: (_) => NavigationBloc<ForYouPage>(ForYouPage.investmentStyle),
-      child:
-          BlocBuilder<NavigationBloc<ForYouPage>, NavigationState<ForYouPage>>(
-              buildWhen: (previous, current) => previous.page != current.page,
-              builder: (context, state) {
-                switch (state.page) {
-                  case ForYouPage.investmentStyle:
-                    return const PpiScreen(
-                        questionPageType: QuestionPageType.investmentStyle,
-                        initialQuestionPage: QuestionPageStep.investmentStyle);
-                  case ForYouPage.botRecommendation:
-                    return const BotRecommendationScreen(
-                      enableBackNavigation: false,
-                    );
-                }
-              }));
+  Widget get _getForYouPage => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) =>
+                NavigationBloc<ForYouPage>(ForYouPage.investmentStyle),
+          ),
+          BlocProvider(
+            create: (_) => ForYouBloc(forYouRepository: ForYouRepository())..add(GetInvestmentStyleAnswer()),
+          ),
+        ],
+        child: BlocConsumer<ForYouBloc, ForYouState>(
+          builder: (BuildContext context, state) {
+            if (state.response.state == ResponseState.success) {
+              return const BotRecommendationScreen(
+                enableBackNavigation: false,
+              );
+            } else {
+              return BlocBuilder<NavigationBloc<ForYouPage>,
+                      NavigationState<ForYouPage>>(
+                  buildWhen: (previous, current) =>
+                      previous.page != current.page,
+                  builder: (context, state) {
+                    switch (state.page) {
+                      case ForYouPage.investmentStyle:
+                        return const PpiScreen(
+                            questionPageType: QuestionPageType.investmentStyle,
+                            initialQuestionPage:
+                                QuestionPageStep.investmentStyle);
+                      case ForYouPage.botRecommendation:
+                        return const BotRecommendationScreen(
+                          enableBackNavigation: false,
+                        );
+                    }
+                  });
+            }
+          },
+          listener: (context, state) {
+            if (state.response.state == ResponseState.loading) {
+              CustomLoadingOverlay.show(context);
+            } else {
+              CustomLoadingOverlay.dismiss();
+            }
+          },
+        ),
+      );
 
   LoraPopUpMessageModel _getLoraPopUpMessageModel(
       BuildContext context, UserJourney userJourney) {

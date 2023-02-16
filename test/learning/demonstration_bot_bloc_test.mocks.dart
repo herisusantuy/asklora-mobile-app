@@ -135,7 +135,7 @@ class MockBotStockRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.BaseResponse<List<_i7.RecommendedBot>>>);
   @override
-  _i4.Future<_i2.BaseResponse<bool>> getFreeBotStock({
+  _i4.Future<_i2.BaseResponse<bool>> tradeBotStock({
     required _i7.RecommendedBot? recommendedBot,
     required double? tradeBotStockAmount,
   }) =>

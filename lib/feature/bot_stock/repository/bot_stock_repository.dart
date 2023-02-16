@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
+import '../../../core/utils/storage/shared_preference.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../utils/bot_stock_utils.dart';
 
 class BotStockRepository {
+  final _sharedPreference = SharedPreference();
+
   Future<BaseResponse<List<ChartDataSet>>> fetchChartDataJson() async {
     try {
       final String response =
@@ -69,11 +72,18 @@ class BotStockRepository {
     return BaseResponse.complete(demonstrationBots);
   }
 
-  Future<BaseResponse<bool>> getFreeBotStock(
+  Future<BaseResponse<bool>> tradeBotStock(
       {required RecommendedBot recommendedBot,
       required double tradeBotStockAmount}) async {
     await Future.delayed(const Duration(seconds: 1));
+    await removeInvestmentStyleAnswer();
     return BaseResponse.complete(true);
+  }
+
+  ///TODO save object type answer later
+  Future<bool> removeInvestmentStyleAnswer() async {
+    _sharedPreference.deleteData('investment_style_answer');
+    return true;
   }
 
   Future<BaseResponse<bool>> endBotStock(RecommendedBot recommendedBot) async {
