@@ -32,6 +32,7 @@ class SignInForm extends StatelessWidget {
       } else {
         CustomLoadingOverlay.dismiss();
       }
+
       switch (state.response.state) {
         case ResponseState.error:
           context
@@ -42,23 +43,29 @@ class SignInForm extends StatelessWidget {
           break;
         case ResponseState.success:
           UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
-              (section) => section.value == state.response.data.userJourney);
+              (section) => section.value == state.response.data!.userJourney);
           await SecureStorage()
               .writeData('email', state.emailAddress)
               .then((_) {
-            switch (userJourney) {
-              case UserJourney.kyc:
-                KycScreen.open(context);
-                break;
-              case UserJourney.investmentStyle:
-                InvestmentStyleWelcomeScreen.open(context);
-                break;
-              default:
-                OtpScreen.openReplace(context, state.emailAddress);
-                break;
+            if (state.response.data!.statusCode == 202) {
+              OtpScreen.openReplace(context, state.emailAddress);
+            } else {
+              switch (userJourney) {
+                case UserJourney.kyc:
+                  KycScreen.open(context);
+                  break;
+                case UserJourney.investmentStyle:
+                  InvestmentStyleWelcomeScreen.open(context);
+                  break;
+                default:
+                  OtpScreen.openReplace(context, state.emailAddress);
+                  break;
+              }
             }
           });
 
+          break;
+        case ResponseState.unknown:
           break;
         default:
           break;

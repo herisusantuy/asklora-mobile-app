@@ -19,10 +19,12 @@ class SignInRepository {
   }) async {
     var response =
         await _signInApiClient.signIn(SignInRequest(email, password));
-
     var signInResponse = SignInResponse.fromJson(response.data);
-    _storage.saveAccessToken(signInResponse.access);
-    _storage.saveRefreshToken(signInResponse.refresh);
-    return BaseResponse.complete(signInResponse);
+    if (response.statusCode == 200) {
+      _storage.saveAccessToken(signInResponse.access!);
+      _storage.saveRefreshToken(signInResponse.refresh!);
+    }
+    return BaseResponse.complete(
+        signInResponse.copyWith(statusCode: response.statusCode));
   }
 }
