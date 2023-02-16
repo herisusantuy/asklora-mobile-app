@@ -43,51 +43,56 @@ class PortfolioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        PortfolioBloc portfolioBloc =
-            PortfolioBloc(portfolioRepository: PortfolioRepository());
+    return BlocBuilder<AppBloc, AppState>(
+        buildWhen: (previous, current) =>
+            previous.userJourney != current.userJourney,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (_) {
+              PortfolioBloc portfolioBloc =
+                  PortfolioBloc(portfolioRepository: PortfolioRepository());
 
-        ///fetch portfolio when current UserJourney already passed freeBotStock
-        if (UserJourney.compareUserJourney(
-            source: context.read<AppBloc>().state.userJourney,
-            target: UserJourney.freeBotStock)) {
-          portfolioBloc.add(const FetchBotPortfolio());
-          portfolioBloc.add(FetchPortfolioDetail());
-        }
-        return portfolioBloc;
-      },
-      child: CustomScaffold(
-        useSafeArea: false,
-        backgroundColor: AskLoraColors.white,
-        enableBackNavigation: false,
-        body: ListView(
-          padding:
-              AppValues.screenHorizontalPadding.copyWith(top: 15, bottom: 15),
-          children: [
-            _botStockDetail,
-            const SizedBox(
-              height: 40,
-            ),
-            CustomTextNew(
-              'Your Botstocks',
-              style:
-                  AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            BlocBuilder<AppBloc, AppState>(
-              buildWhen: (previous, current) =>
-                  previous.userJourney != current.userJourney,
-              builder: (context, state) => BotPortfolioList(
-                userJourney: state.userJourney,
+              ///fetch portfolio when current UserJourney already passed freeBotStock
+              if (UserJourney.compareUserJourney(
+                  source: context.read<AppBloc>().state.userJourney,
+                  target: UserJourney.freeBotStock)) {
+                portfolioBloc.add(const FetchBotPortfolio());
+                portfolioBloc.add(FetchPortfolioDetail());
+              }
+              return portfolioBloc;
+            },
+            child: CustomScaffold(
+              useSafeArea: false,
+              backgroundColor: AskLoraColors.white,
+              enableBackNavigation: false,
+              body: ListView(
+                padding: AppValues.screenHorizontalPadding
+                    .copyWith(top: 15, bottom: 15),
+                children: [
+                  _botStockDetail,
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  CustomTextNew(
+                    'Your Botstocks',
+                    style: AskLoraTextStyles.h2
+                        .copyWith(color: AskLoraColors.charcoal),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  BlocBuilder<AppBloc, AppState>(
+                    buildWhen: (previous, current) =>
+                        previous.userJourney != current.userJourney,
+                    builder: (context, state) => BotPortfolioList(
+                      userJourney: state.userJourney,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 
   Widget get _botStockDetail => BlocBuilder<PortfolioBloc, PortfolioState>(

@@ -15,10 +15,12 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
+import '../../../tabs/for_you/for_you_screen_form.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -36,9 +38,11 @@ part 'widgets/bot_recommendation_faq.dart';
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
+  final bool enableBackNavigation;
   static const String route = '/gift_bot_stock_recommendation_screen';
 
-  const BotRecommendationScreen({Key? key}) : super(key: key);
+  const BotRecommendationScreen({this.enableBackNavigation = true, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +58,12 @@ class BotRecommendationScreen extends StatelessWidget {
         }
       },
       child: CustomScaffold(
+          enableBackNavigation: enableBackNavigation,
           backgroundColor: AskLoraColors.white,
           body: Padding(
-            padding: const EdgeInsets.only(top: 70),
+            padding: EdgeInsets.only(
+              top: enableBackNavigation ? 70 : 20,
+            ),
             child: BlocBuilder<AppBloc, AppState>(
                 buildWhen: (previous, current) =>
                     previous.userJourney != current.userJourney,
@@ -68,7 +75,10 @@ class BotRecommendationScreen extends StatelessWidget {
                       const BotRecommendationList(
                         verticalMargin: 14,
                       ),
-                      _loraMemojiWidget(context),
+                      if (UserJourney.compareUserJourney(
+                          source: state.userJourney,
+                          target: UserJourney.freeBotStock))
+                        _loraMemojiWidget(context),
                       const SizedBox(
                         height: 50,
                       ),
@@ -161,11 +171,21 @@ class BotRecommendationScreen extends StatelessWidget {
                 text: 'Not feeling it? Try something different.'),
             PrimaryButton(
               label: 'CHANGE INVESTMENT STYLE',
-              onTap: () => PpiScreen.open(
-                context,
-                arguments: Pair(QuestionPageType.investmentStyle,
-                    QuestionPageStep.investmentStyle),
-              ),
+              onTap: () {
+                if (UserJourney.compareUserJourney(
+                    source: context.read<AppBloc>().state.userJourney,
+                    target: UserJourney.freeBotStock)) {
+                  context
+                      .read<NavigationBloc<ForYouPage>>()
+                      .add(const PageChanged(ForYouPage.investmentStyle));
+                } else {
+                  PpiScreen.open(
+                    context,
+                    arguments: Pair(QuestionPageType.investmentStyle,
+                        QuestionPageStep.investmentStyle),
+                  );
+                }
+              },
             ),
           ],
         ),

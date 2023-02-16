@@ -27,7 +27,7 @@ class PersonalisationResultEndScreen extends StatelessWidget {
         additionalMessage:
             '(Screen that show some kind of a result to motivate user / user feel like they get a reward after answering the ques)',
         bottomButton: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
+          padding: const EdgeInsets.only(top: 20.0, bottom: 35),
           child: PrimaryButton(
             key: const Key('next_button'),
             label: 'GOT IT',

@@ -41,10 +41,7 @@ class PpiResultScreen extends StatelessWidget {
                     ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 35.0),
-                child: bottomButton,
-              )
+              bottomButton
             ],
           ),
         ),

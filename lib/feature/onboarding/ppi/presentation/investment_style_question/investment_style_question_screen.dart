@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../../../tabs/for_you/for_you_screen_form.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
@@ -34,16 +35,31 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                       InvestmentStyleQuestionIndexChanged(
                           state.investmentStyleQuestionIndex));
                 } else if (state is OnNextResultScreen) {
-                  context
-                      .read<AppBloc>()
-                      .add(const SaveUserJourney(UserJourney.kyc));
+                  if (!UserJourney.compareUserJourney(
+                      source: context.read<AppBloc>().state.userJourney,
+                      target: UserJourney.investmentStyle)) {
+                    ///save UserJourney only if current UserJourney < kyc
+                    context
+                        .read<AppBloc>()
+                        .add(const SaveUserJourney(UserJourney.kyc));
+                  }
+
                   context.read<NavigationBloc<QuestionPageStep>>().add(
                       const PageChanged(
                           QuestionPageStep.investmentStyleResultEnd));
                 } else if (state is OnPreviousPage) {
-                  context
-                      .read<NavigationBloc<QuestionPageStep>>()
-                      .add(const PagePop());
+                  if (UserJourney.compareUserJourney(
+                      source: context.read<AppBloc>().state.userJourney,
+                      target: UserJourney.freeBotStock)) {
+                    ///back to previous for you page when current User Journey > freeBotStock
+                    context
+                        .read<NavigationBloc<ForYouPage>>()
+                        .add(const PagePop());
+                  } else {
+                    context
+                        .read<NavigationBloc<QuestionPageStep>>()
+                        .add(const PagePop());
+                  }
                 }
               }, builder: (context, state) {
                 if (state is OnNextQuestion) {
@@ -69,6 +85,9 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                     case (QuestionType.omniSearch):
                       return OmniSearchQuestionWidget(
                         key: Key(questionCollection.uid!),
+                        enableBackNavigation: !UserJourney.compareUserJourney(
+                            source: context.read<AppBloc>().state.userJourney,
+                            target: UserJourney.freeBotStock),
                         questionCollection: questionCollection,
                         onSubmitSuccess: () => onSubmitSuccess(context),
                         onCancel: () => onCancel(context),

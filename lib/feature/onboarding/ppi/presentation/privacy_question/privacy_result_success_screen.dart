@@ -21,17 +21,20 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
       child: PpiResultScreen(
         memojiText:
             "One year older, one year wiser, you know. \n \n Ok! Let's get to know more about you!",
-        bottomButton: PrimaryButton(
-          key: const Key('next_button'),
-          label: 'SURE!',
-          onTap: () {
-            context
-                .read<QuestionBloc>()
-                .add(const CurrentPersonalisationPageIncremented());
-            context
-                .read<NavigationBloc<QuestionPageStep>>()
-                .add(const PageChanged(QuestionPageStep.personalisation));
-          },
+        bottomButton: Padding(
+          padding: const EdgeInsets.only(top: 20.0, bottom: 35),
+          child: PrimaryButton(
+            key: const Key('next_button'),
+            label: 'SURE!',
+            onTap: () {
+              context
+                  .read<QuestionBloc>()
+                  .add(const CurrentPersonalisationPageIncremented());
+              context
+                  .read<NavigationBloc<QuestionPageStep>>()
+                  .add(const PageChanged(QuestionPageStep.personalisation));
+            },
+          ),
         ),
       ),
     );

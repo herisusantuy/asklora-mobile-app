@@ -43,8 +43,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void _onSaveUserJourney(SaveUserJourney event, Emitter<AppState> emit) async {
-    await _userJourneyRepository.saveUserJourney(
-        userJourney: event.userJourney, data: event.data);
     emit(state.copyWith(userJourney: event.userJourney));
+    _userJourneyRepository.saveUserJourney(
+        userJourney: event.userJourney, data: event.data);
   }
 }
