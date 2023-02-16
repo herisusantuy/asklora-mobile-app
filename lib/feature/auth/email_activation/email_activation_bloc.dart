@@ -54,11 +54,12 @@ class EmailActivationBloc
   void _incomingLinkHandler() async {
     try {
       _streamSubscription = uriLinkStream.listen((Uri? uri) {
-        if (uri != null && uri.queryParameters['state'] == 'success') {
+        if (uri != null && uri.queryParameters['state'] == 'ok') {
           if (uri.queryParameters['token'] != null) {
             _tokenRepository.saveSignUpToken(uri.queryParameters['token']!);
             emit(state.copyWith(deeplinkStatus: DeeplinkStatus.success));
           }
+          return;
         }
         emit(state.copyWith(deeplinkStatus: DeeplinkStatus.failed));
       }, onError: (Object err) {
@@ -66,7 +67,7 @@ class EmailActivationBloc
       });
     } on PlatformException {
       emit(state.copyWith(deeplinkStatus: DeeplinkStatus.failed));
-    } on FormatException catch (err) {
+    } on FormatException catch (_) {
       emit(state.copyWith(deeplinkStatus: DeeplinkStatus.failed));
     }
   }
