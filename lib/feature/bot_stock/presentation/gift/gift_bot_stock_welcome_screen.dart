@@ -25,7 +25,7 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
                 text: 'Select a FREE AI trade now!'),
           ),
           CustomTextNew(
-            'Select a FREE Botstock worths USD\$68 based on your investment style that you set before.',
+            'Ready? Select a FREE Botstock\nworths HKD500 based on your\n investment style that you set\n before.\n\nGo! Move Your A%\$',
             style: AskLoraTextStyles.body1.copyWith(color: AskLoraColors.white),
             textAlign: TextAlign.center,
           )
