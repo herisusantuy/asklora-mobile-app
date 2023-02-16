@@ -20,29 +20,24 @@ class CustomDonutChart extends StatelessWidget {
       width: double.infinity,
       height: 150,
       child: Stack(
+        alignment: Alignment.center,
         children: [
           if (total == 0)
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: 130,
-                height: 130,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black54),
-                  borderRadius: BorderRadius.circular(65),
-                ),
+            Container(
+              width: 130,
+              height: 130,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black54),
+                borderRadius: BorderRadius.circular(65),
               ),
             ),
           if (total == 0)
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: 82,
-                height: 82,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black54),
-                  borderRadius: BorderRadius.circular(50),
-                ),
+            Container(
+              width: 82,
+              height: 82,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black54),
+                borderRadius: BorderRadius.circular(50),
               ),
             ),
           PieChart(
@@ -61,12 +56,10 @@ class CustomDonutChart extends StatelessWidget {
               ),
             ),
           ),
-          Align(
-              alignment: Alignment.center,
-              child: CustomTextNew(
-                '$total %',
-                style: AskLoraTextStyles.subtitle2,
-              )),
+          CustomTextNew(
+            '$total %',
+            style: AskLoraTextStyles.subtitle2,
+          ),
         ],
       ),
     );
