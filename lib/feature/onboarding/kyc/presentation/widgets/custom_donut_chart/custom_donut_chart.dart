@@ -38,14 +38,6 @@ class CustomDonutChart extends StatelessWidget {
                         ),
                       )
                     ],
-              borderData: FlBorderData(
-                show: true,
-                border: Border.all(
-                  color: AskLoraColors.black,
-                  strokeAlign: 20,
-                  width: 2,
-                ),
-              ),
             ),
           ),
           CustomTextNew(
