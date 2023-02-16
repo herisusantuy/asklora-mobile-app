@@ -22,30 +22,22 @@ class CustomDonutChart extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          if (total == 0)
-            Container(
-              width: 130,
-              height: 130,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black54),
-                borderRadius: BorderRadius.circular(65),
-              ),
-            ),
-          if (total == 0)
-            Container(
-              width: 82,
-              height: 82,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black54),
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
           PieChart(
             PieChartData(
               sectionsSpace: 0,
               centerSpaceRadius: 40,
               startDegreeOffset: -90,
-              sections: sections,
+              sections: sections!.isNotEmpty && total != 0
+                  ? sections
+                  : [
+                      PieChartSectionData(
+                        color: Colors.white,
+                        radius: 25,
+                        borderSide: const BorderSide(
+                          color: Colors.black54,
+                        ),
+                      )
+                    ],
               borderData: FlBorderData(
                 show: true,
                 border: Border.all(
