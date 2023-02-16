@@ -55,7 +55,7 @@ class HomeScreenContentWidget extends StatelessWidget {
       case UserJourney.kyc:
         return [
           HomeScreenPopUpMessageWidget(
-            title: 'Get a FREE Botstock (US\$68)!',
+            title: 'Get a FREE Botstock (HKD500)!',
             subTitle:
                 'Experience automated and personalised stock trading. Receive free bot stock and redeem it after completing the required milestones.',
             buttonLabel: 'OPEN INVESTMENT ACCOUNT',

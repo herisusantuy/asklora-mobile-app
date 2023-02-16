@@ -24,8 +24,9 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
       },
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
-        memojiText:
-            'Your investment style is all set!\n\nTime to reveal your personalised recommendations. The best part?  You’re eligible for a FREE AI trade (HKD500).\n\nBut first things first, let’s get that investment account set up!',
+        memojiText: 'Your investment style is all set!',
+        additionalMessage:
+            'Time to reveal your personalised recommendations. The best part?  You’re eligible for a FREE AI trade (HKD500).\n\nBut first things first, let’s get that investment account set up!',
         bottomButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
