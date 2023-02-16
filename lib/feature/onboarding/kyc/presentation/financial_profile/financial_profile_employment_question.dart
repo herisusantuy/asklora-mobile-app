@@ -116,7 +116,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
               padding: const EdgeInsets.only(top: _spaceHeightDouble),
               child: MasterTextField(
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                initialValue: state.natureOfBusinessDescription ?? '',
+                initialValue: state.natureOfBusinessDescription,
                 key: const Key('account_other_nature_of_business_desc_input'),
                 onChanged: (value) => context.read<FinancialProfileBloc>().add(
                     FinancialProfileNatureOfBusinessDescriptionChanged(value)),
@@ -167,7 +167,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                 padding: const EdgeInsets.only(top: _spaceHeightDouble),
                 child: MasterTextField(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
-                  initialValue: state.otherOccupation ?? '',
+                  initialValue: state.otherOccupation,
                   key: const Key('account_other_occupation_input'),
                   labelText: 'Other Occupation*',
                   onChanged: (value) => context
@@ -192,7 +192,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
               children: [
                 MasterTextField(
                     floatingLabelBehavior: FloatingLabelBehavior.always,
-                    initialValue: state.employer ?? '',
+                    initialValue: state.employer,
                     key: const Key('account_employer_input'),
                     labelText: 'Employer*',
                     onChanged: (value) => context
@@ -202,7 +202,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                 _spaceHeight,
                 MasterTextField(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
-                  initialValue: state.employerAddress ?? '',
+                  initialValue: state.employerAddress,
                   key: const Key('account_employer_address_input'),
                   labelText: 'Employer/ Company Address*',
                   onChanged: (value) => context
@@ -214,7 +214,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                   height: _spaceHeightDouble,
                 ),
                 MasterTextField(
-                  initialValue: state.employerAddress ?? '',
+                  initialValue: state.employerAddress,
                   key: const Key('account_employer_address_two_input'),
                   onChanged: (value) => context
                       .read<FinancialProfileBloc>()
@@ -287,7 +287,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                 return CustomCountryPicker(
                     key: const Key('account_country_select'),
                     label: 'Country*',
-                    initialValue: state.countryName ?? '',
+                    initialValue: state.countryName,
                     onSelect: (Country country) => context
                         .read<FinancialProfileBloc>()
                         .add(FinancialProfileCountryChanged(
@@ -314,7 +314,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
               padding: const EdgeInsets.only(top: 0),
               child: MasterTextField(
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                initialValue: state.detailInformationOfCountry ?? '',
+                initialValue: state.detailInformationOfCountry,
                 key: const Key('account_detail_information_of_country_input'),
                 labelText:
                     'Why is your country of employment different from your country of residence?*',
