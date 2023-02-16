@@ -8,4 +8,5 @@ abstract class ForYouEvent extends Equatable {
 }
 
 class GetInvestmentStyleAnswer extends ForYouEvent {}
+
 class SaveInvestmentStyleAnswer extends ForYouEvent {}

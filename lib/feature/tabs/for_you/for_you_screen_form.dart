@@ -59,7 +59,8 @@ class ForYouScreenForm extends StatelessWidget {
                 NavigationBloc<ForYouPage>(ForYouPage.investmentStyle),
           ),
           BlocProvider(
-            create: (_) => ForYouBloc(forYouRepository: ForYouRepository())..add(GetInvestmentStyleAnswer()),
+            create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
+              ..add(GetInvestmentStyleAnswer()),
           ),
         ],
         child: BlocConsumer<ForYouBloc, ForYouState>(

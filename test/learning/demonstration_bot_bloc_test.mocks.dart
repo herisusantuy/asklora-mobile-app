@@ -141,7 +141,7 @@ class MockBotStockRepository extends _i1.Mock
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getFreeBotStock,
+          #tradeBotStock,
           [],
           {
             #recommendedBot: recommendedBot,
@@ -152,7 +152,7 @@ class MockBotStockRepository extends _i1.Mock
             _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
           this,
           Invocation.method(
-            #getFreeBotStock,
+            #tradeBotStock,
             [],
             {
               #recommendedBot: recommendedBot,
@@ -161,6 +161,14 @@ class MockBotStockRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<bool>>);
+  @override
+  _i4.Future<bool> removeInvestmentStyleAnswer() => (super.noSuchMethod(
+        Invocation.method(
+          #removeInvestmentStyleAnswer,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
   @override
   _i4.Future<_i2.BaseResponse<bool>> endBotStock(
           _i7.RecommendedBot? recommendedBot) =>

@@ -18,8 +18,7 @@ class ForYouState extends Equatable {
     BaseResponse<String>? response,
   }) {
     return ForYouState(
-      response:
-          response ?? this.response,
+      response: response ?? this.response,
     );
   }
 }
