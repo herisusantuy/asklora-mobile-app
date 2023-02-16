@@ -16,10 +16,35 @@ class CustomDonutChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 16 / 8,
+    return SizedBox(
+      width: double.infinity,
+      height: 150,
       child: Stack(
         children: [
+          if (total == 0)
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: 130,
+                height: 130,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black54),
+                  borderRadius: BorderRadius.circular(65),
+                ),
+              ),
+            ),
+          if (total == 0)
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: 82,
+                height: 82,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black54),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+            ),
           PieChart(
             PieChartData(
               sectionsSpace: 0,
