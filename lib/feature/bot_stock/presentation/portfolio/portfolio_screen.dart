@@ -111,7 +111,7 @@ class PortfolioScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomTextNew(
-                              'Total Portfolio Value (USD)',
+                              'Total Portfolio Value - HKD',
                               style: AskLoraTextStyles.body4,
                             ),
                             const SizedBox(
@@ -151,8 +151,8 @@ class PortfolioScreen extends StatelessWidget {
                         content: Column(
                           children: [
                             PairColumnText(
-                                title1: 'Withdrawable Amount (USD)',
-                                title2: 'Buying Power (USD)',
+                                title1: 'Withdrawable\nAmount (HKD)',
+                                title2: 'Buying Power\n(USD)',
                                 subTitle1: data?.withdrawableAmount != null
                                     ? data!.withdrawableAmount
                                         .convertToCurrencyDecimal()
@@ -163,8 +163,8 @@ class PortfolioScreen extends StatelessWidget {
                               height: 14,
                             ),
                             PairColumnText(
-                              title1: 'Total Values',
-                              title2: 'Total P/L',
+                              title1: 'Total Botstock\nValues (HKD)',
+                              title2: 'Total P/L\n',
                               subTitle1: (data?.totalBotStockValues ?? 0)
                                   .convertToCurrencyDecimal(),
                               subTitle2: data?.withdrawableAmount != null
