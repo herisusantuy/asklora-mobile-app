@@ -40,4 +40,12 @@ class PpiResponseRepository {
 
     return ppiUserResponse;
   }
+
+  Future<String> getUserSnapShot(int userId) async {
+    var response = await _ppiApiRepository.getUserSnapshot(userId);
+
+    //var ppiUserResponse = PpiUserResponse.fromJson(response.data);
+
+    return response.toString();
+  }
 }

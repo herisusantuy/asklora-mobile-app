@@ -109,7 +109,8 @@ class SliderQuestionWidget extends StatelessWidget {
                               key: const Key(
                                   'question_navigation_button_widget'),
                               onSubmitSuccess: onSubmitSuccess,
-                              onNext: () => context
+                              onNext: () =>
+                                  {} /*context
                                   .read<UserResponseBloc>()
                                   .add(SendResponse(PpiSelectionRequest(
                                       questionId: question.questionId!,
@@ -120,7 +121,8 @@ class SliderQuestionWidget extends StatelessWidget {
                                       // points: question
                                       //     .choices![state.defaultChoiceIndex]
                                       //     .score!,
-                                      ))),
+                                      )))*/
+                              ,
                               onCancel: onCancel,
                             )),
                   ],

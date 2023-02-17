@@ -5,6 +5,7 @@ import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
+import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../../utils/ppi_utils.dart';
@@ -35,12 +36,15 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                       InvestmentStyleQuestionIndexChanged(
                           state.investmentStyleQuestionIndex));
                 } else if (state is OnNextResultScreen) {
-                  context
-                      .read<AppBloc>()
-                      .add(const SaveUserJourney(UserJourney.kyc));
-                  context.read<NavigationBloc<QuestionPageStep>>().add(
-                      const PageChanged(
-                          QuestionPageStep.investmentStyleResultEnd));
+                  // context
+                  //     .read<AppBloc>()
+                  //     .add(const SaveUserJourney(UserJourney.kyc));
+                  // context.read<NavigationBloc<QuestionPageStep>>().add(
+                  //     const PageChanged(
+                  //         QuestionPageStep.investmentStyleResultEnd));
+
+                  debugPrint('Krishna investment_question_screen OnNextResultEndScreen');
+                  context.read<UserResponseBloc>().add(SendBulkResponse());
                 } else if (state is OnPreviousPage) {
                   context
                       .read<NavigationBloc<QuestionPageStep>>()

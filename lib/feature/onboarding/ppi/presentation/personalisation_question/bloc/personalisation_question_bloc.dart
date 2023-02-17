@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/fixture.dart';
 import '../../../domain/question.dart';
 
@@ -10,15 +12,22 @@ part 'personalisation_question_state.dart';
 
 class PersonalisationQuestionBloc
     extends Bloc<PersonalisationQuestionEvent, PersonalisationQuestionState> {
-  PersonalisationQuestionBloc({int initialIndex = 0})
+  PersonalisationQuestionBloc(
+      {int initialIndex = 0, required this.userResponseBloc})
       : _personalizationIndex = initialIndex - 1,
         super(const PersonalisationQuestionState()) {
     on<NextPersonalisationQuestion>(_onNavigationStepChanged);
     on<PreviousPersonalisationQuestion>(_onNavigationPop);
+
+    // userResponseBloc.stream.listen((event) {
+    //   debugPrint('Krishna from personalisation bloc ppiResponseState ${event.ppiResponseState} responseState ${event.responseState}');
+    //
+    // });
   }
 
   int _personalizationIndex;
   List<Question> personalizationQuestions = Fixture().personalisedQuestion;
+  UserResponseBloc userResponseBloc;
 
   void _onNavigationStepChanged(NextPersonalisationQuestion event,
       Emitter<PersonalisationQuestionState> emit) {

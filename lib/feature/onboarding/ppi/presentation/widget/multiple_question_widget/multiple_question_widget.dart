@@ -61,14 +61,12 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
                                         vertical: 10),
                                     child: SecondaryMultipleChoiceButton(
                                       key: Key('${question.question}-$index}'),
-                                      active: state.defaultChoiceIndex ==
-                                          int.parse(e.score!),
+                                      active: state.defaultChoiceIndex == e.id!,
                                       label: e.name!,
                                       onTap: () {
                                         context
                                             .read<MultipleQuestionWidgetBloc>()
-                                            .add(AnswerChanged(
-                                                int.parse(e.score!)));
+                                            .add(AnswerChanged(e.id!));
                                       },
                                     ),
                                   );

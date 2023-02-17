@@ -6,18 +6,6 @@ part of 'question.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-QuestionCollection _$QuestionCollectionFromJson(Map<String, dynamic> json) =>
-    QuestionCollection(
-      (json['data'] as List<dynamic>)
-          .map((e) => Question.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$QuestionCollectionToJson(QuestionCollection instance) =>
-    <String, dynamic>{
-      'data': instance.questions,
-    };
-
 Question _$QuestionFromJson(Map<String, dynamic> json) => Question(
       choices: (json['answers'] as List<dynamic>?)
           ?.map((e) => Choices.fromJson(e as Map<String, dynamic>))
@@ -28,7 +16,6 @@ Question _$QuestionFromJson(Map<String, dynamic> json) => Question(
       questionType: json['question_type'] as String?,
       questionIndex: json['questionIndex'] as String?,
       questionId: json['question_id'] as String?,
-      selectedOption: json['selectedOption'] as int? ?? -1,
     );
 
 Map<String, dynamic> _$QuestionToJson(Question instance) => <String, dynamic>{
@@ -39,5 +26,4 @@ Map<String, dynamic> _$QuestionToJson(Question instance) => <String, dynamic>{
       'question_type': instance.questionType,
       'questionIndex': instance.questionIndex,
       'question_id': instance.questionId,
-      'selectedOption': instance.selectedOption,
     };

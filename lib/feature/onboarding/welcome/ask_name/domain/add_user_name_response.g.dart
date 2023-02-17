@@ -12,6 +12,7 @@ AddUserNameResponse _$AddUserNameResponseFromJson(Map<String, dynamic> json) =>
       json['updated'] as String,
       json['name'] as String,
       json['account_id'] as String,
+      json['id'] as int,
     );
 
 Map<String, dynamic> _$AddUserNameResponseToJson(
@@ -20,5 +21,6 @@ Map<String, dynamic> _$AddUserNameResponseToJson(
       'created': instance.created,
       'updated': instance.updated,
       'name': instance.name,
+      'id': instance.id,
       'account_id': instance.accountId,
     };

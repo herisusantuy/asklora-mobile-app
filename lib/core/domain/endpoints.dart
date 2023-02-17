@@ -28,7 +28,7 @@ const String endpointUserJourney = '$v2${activities}user-journey/';
 /// PPI related
 
 const endpointQuestion = 'question/';
-const String endpointAddUser = 'user';
+const String endpointUser = 'user';
 const String endpointAddAnswer = 'user/add-answer';
 const String endpointAddBotChoice = 'user/add-choices';
 

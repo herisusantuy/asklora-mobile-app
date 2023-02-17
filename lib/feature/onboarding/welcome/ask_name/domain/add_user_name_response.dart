@@ -8,12 +8,13 @@ class AddUserNameResponse extends Equatable {
   final String created;
   final String updated;
   final String name;
+  final int id;
 
   @JsonKey(name: 'account_id')
   final String accountId;
 
   const AddUserNameResponse(
-      this.created, this.updated, this.name, this.accountId);
+      this.created, this.updated, this.name, this.accountId, this.id);
 
   @override
   List<Object?> get props => [created, updated, name, accountId];

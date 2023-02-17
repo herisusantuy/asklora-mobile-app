@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'question.dart';
 
 enum QuestionSection {
@@ -5,7 +7,8 @@ enum QuestionSection {
   openness('openness'),
   conscientiousness('conscientiousness'),
   neuroticism('neuroticism'),
-  investmentStyle('investment_style');
+  investmentStyle('investment_style'),
+  omniSearch('omnisearch');
 
   final String value;
 
@@ -77,6 +80,12 @@ class Fixture {
         setPersonalisedQuestion = element;
       }
       if (element.section == QuestionSection.investmentStyle.value) {
+        setInvestmentStyleQuestion = element;
+      }
+      if (element.section == QuestionSection.omniSearch.value) {
+        element
+          ..questionType = QuestionType.omniSearch.value
+          ..section = QuestionSection.investmentStyle.value;
         setInvestmentStyleQuestion = element;
       }
     }

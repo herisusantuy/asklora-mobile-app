@@ -1,399 +1,513 @@
-{
-  "data": [
-    {
-      "question_id": "quid0",
-      "question_type": "choices",
-      "question": "How long have you been investing in stocks until now, aside from MPF's?",
-      "section": "privacy",
-      "hints": null,
-      "answers": [
-        {
-          "name": "5 years or above",
-          "score": "5"
-        },
-        {
-          "name": "3 to 4 years",
-          "score": "4"
-        },
-        {
-          "name": "1 to 2 years",
-          "score": "3"
-        },
-        {
-          "name": "Less than 1 year",
-          "score": "2"
-        },
-        {
-          "name": "Never",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid1",
-      "question_type": "choices",
-      "question": "How much do you make in a month? I won't tell anyone.",
-      "section": "privacy",
-      "hints": null,
-      "answers": [
-        {
-          "name": "more than HK$150,000",
-          "score": "5"
-        },
-        {
-          "name": "HK$100,000-HK$149,999",
-          "score": "4"
-        },
-        {
-          "name": "HK$50,000-HK$99,999",
-          "score": "3"
-        },
-        {
-          "name": "HK$20,000-HK$49,999",
-          "score": "2"
-        },
-        {
-          "name": "less than HK$ 12,999",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid2",
-      "question_type": "choices",
-      "question": "Alright! Do you think you are financially stable?",
-      "section": "privacy",
-      "hints": null,
-      "answers": [
-        {
-          "name": "Very accurate",
-          "score": "5"
-        },
-        {
-          "name": "Somewhat accurate",
-          "score": "4"
-        },
-        {
-          "name": "Neutral",
-          "score": "3"
-        },
-        {
-          "name": "Somewhat inaccurate",
-          "score": "2"
-        },
-        {
-          "name": "Very inaccurate",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid3",
-      "question_type": "choices",
-      "question": "What are your investment objectives?",
-      "section": "privacy",
-      "hints": "pick one",
-      "answers": [
-        {
-          "name": "I can tolerate very high risk of capital loss which can exceed initial invested value to achieve very high and substantial returns",
-          "score": "5"
-        },
-        {
-          "name": "I can tolerate higher risk of capital loss to achieve substantial returns above interest rates",
-          "score": "4"
-        },
-        {
-          "name": "I can tolerate moderate risk of capital loss to achieve some capital growth and returns above interest rates",
-          "score": "3"
-        },
-        {
-          "name": "I can tolerate low risk of capital loss, such as fixed returns similar to interest rates",
-          "score": "2"
-        },
-        {
-          "name": "I cannot accept any risk of capital loss",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid5",
-      "question_type": "descriptive",
-      "question": "Pssst...! I won't tell anyone, how old are you?",
-      "section": "privacy",
-      "hints": "Your age",
-      "answers": [
-        {
-          "name": "age",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid6",
-      "question_type": "choices",
-      "question": "Do you talk to strangers at parties?",
-      "section": "openness",
-      "hints": null,
-      "answers": [
-        {
-          "name": "Never",
-          "score": "5"
-        },
-        {
-          "name": "Not really...",
-          "score": "4"
-        },
-        {
-          "name": "Sometimes",
-          "score": "3"
-        },
-        {
-          "name": "Quite often",
-          "score": "2"
-        },
-        {
-          "name": "Of Course",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid7",
-      "question_type": "choices",
-      "question": "Do you enjoy learning new things?",
-      "section": "openness",
-      "hints": null,
-      "answers": [
-        {
-          "name": "All the time",
-          "score": "1"
-        },
-        {
-          "name": "That's not me",
-          "score": "5"
-        },
-        {
-          "name": "Not really...",
-          "score": "4"
-        },
-        {
-          "name": "Sometimes",
-          "score": "3"
-        },
-        {
-          "name": "Usually",
-          "score": "2"
-        }
-      ]
-    },
-    {
-      "question_id": "quid8",
-      "question_type": "choices",
-      "question": "Do you have a vivid imagination?",
-      "section": "openness",
-      "hints": null,
-      "answers": [
-        {
-          "name": "No",
-          "score": "5"
-        },
-        {
-          "name": "Not really...",
-          "score": "4"
-        },
-        {
-          "name": "Sort of",
-          "score": "3"
-        },
-        {
-          "name": "Accurate",
-          "score": "2"
-        },
-        {
-          "name": "Of course",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid9",
-      "question_type": "choices",
-      "question": "Do you find it difficult to sit still without fidgeting?",
-      "section": "neuroticism",
-      "hints": null,
-      "answers": [
-        {
-          "name": "All the time",
-          "score": "5"
-        },
-        {
-          "name": "Quite often",
-          "score": "4"
-        },
-        {
-          "name": "Sometimes",
-          "score": "3"
-        },
-        {
-          "name": "Not really...",
-          "score": "2"
-        },
-        {
-          "name": "Never",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid10",
-      "question_type": "choices",
-      "question": "Do you have trouble sleeping or wake up sweating after a bad dream?",
-      "section": "neuroticism",
-      "hints": null,
-      "answers": [
-        {
-          "name": "All the time",
-          "score": "5"
-        },
-        {
-          "name": "Quite often",
-          "score": "4"
-        },
-        {
-          "name": "Sometimes",
-          "score": "3"
-        },
-        {
-          "name": "Not really...",
-          "score": "2"
-        },
-        {
-          "name": "Never",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid11",
-      "question_type": "choices",
-      "question": "Are you easily annoyed if things don't go according to plan?",
-      "section": "neuroticism",
-      "hints": null,
-      "answers": [
-        {
-          "name": "All the time",
-          "score": "5"
-        },
-        {
-          "name": "Quite often",
-          "score": "4"
-        },
-        {
-          "name": "Sometimes",
-          "score": "3"
-        },
-        {
-          "name": "Not really...",
-          "score": "2"
-        },
-        {
-          "name": "That's not me",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid12",
-      "question_type": "omnisearch",
-      "question": "What gets your investing mojo on?",
-      "section": "investment_style",
-      "hints": "Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!",
-      "answers": [
-        {
-          "name": "words",
-          "score": ""
-        }
-      ]
-    },
-    {
-      "question_id": "quid13",
-      "question_type": "choices",
-      "question": "How long do you consider to hold this investment?",
-      "section": "investment_style",
-      "hints": null,
-      "answers": [
-        {
-          "name": "1 year",
-          "score": "5"
-        },
-        {
-          "name": "6 months",
-          "score": "4"
-        },
-        {
-          "name": "3 months",
-          "score": "3"
-        },
-        {
-          "name": "1 month",
-          "score": "2"
-        },
-        {
-          "name": "2 weeks",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid14",
-      "question_type": "choices",
-      "question": "Do you think this next investment is a large amount?",
-      "section": "investment_style",
-      "hints": null,
-      "answers": [
-        {
-          "name": "Nope",
-          "score": "5"
-        },
-        {
-          "name": "Not really",
-          "score": "4"
-        },
-        {
-          "name": "Depends",
-          "score": "3"
-        },
-        {
-          "name": "Quite so",
-          "score": "2"
-        },
-        {
-          "name": "Definitely",
-          "score": "1"
-        }
-      ]
-    },
-    {
-      "question_id": "quid15",
-      "question_type": "choices",
-      "question": "Which investment scenario do you prefer?",
-      "section": "investment_style",
-      "hints": null,
-      "answers": [
-        {
-          "name": "Don’t care just buy my stock!",
-          "score": "3"
-        },
-        {
-          "name": "Limited loss but slight probability of substantial gain.",
-          "score": "2"
-        },
-        {
-          "name": "Passive income with a slight probability of substantial loss",
-          "score": "1"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "question_id": "quid0",
+    "question_type": "choices",
+    "question": "How long have you been investing in stocks until now, aside from MPF's?",
+    "section": "privacy",
+    "hints": null,
+    "answers": [
+      {
+        "id": 1,
+        "name": "5 years or above",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 2,
+        "name": "3 to 4 years",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 3,
+        "name": "1 to 2 years",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 4,
+        "name": "Less than 1 year",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 5,
+        "name": "Never",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid1",
+    "question_type": "choices",
+    "question": "How much do you make in a month? I won't tell anyone.",
+    "section": "privacy",
+    "hints": null,
+    "answers": [
+      {
+        "id": 6,
+        "name": "more than HK$150,000",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 7,
+        "name": "HK$100,000-HK$149,999",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 8,
+        "name": "HK$50,000-HK$99,999",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 9,
+        "name": "HK$20,000-HK$49,999",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 10,
+        "name": "less than HK$ 12,999",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid2",
+    "question_type": "choices",
+    "question": "Alright! Do you think you are financially stable?",
+    "section": "privacy",
+    "hints": null,
+    "answers": [
+      {
+        "id": 11,
+        "name": "Very accurate",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 12,
+        "name": "Somewhat accurate",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 13,
+        "name": "Neutral",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 14,
+        "name": "Somewhat inaccurate",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 15,
+        "name": "Very inaccurate",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid3",
+    "question_type": "choices",
+    "question": "What are your investment objectives?",
+    "section": "privacy",
+    "hints": "pick one",
+    "answers": [
+      {
+        "id": 16,
+        "name": "I can toleratre very high risk of capital loss which can exceed initial invested value to achieve very high and substantial returns",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 17,
+        "name": "I can toleratre higher risk of capital loss to achieve substantial returns above interest rates",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 18,
+        "name": "I can toleratre moderate risk of capital loss to achieve some capital growth and returns above interest rates",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 19,
+        "name": "I can toleratre low risk of capital loss, such as fixed returns similar to interest rates",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 20,
+        "name": "I cannot accept any risk of capital loss",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid5",
+    "question_type": "descriptive",
+    "question": "Pssst...! I won't tell anyone, how old are you?",
+    "section": "privacy",
+    "hints": "Your age",
+    "answers": []
+  },
+  {
+    "question_id": "quid6",
+    "question_type": "choices",
+    "question": "Do you talk to strangers at parties?",
+    "section": "openness",
+    "hints": null,
+    "answers": [
+      {
+        "id": 23,
+        "name": "Never",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 24,
+        "name": "Not really...",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 25,
+        "name": "Sometimes",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 26,
+        "name": "Quite often",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 27,
+        "name": "Of Course",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid7",
+    "question_type": "choices",
+    "question": "Do you enjoy learning new things?",
+    "section": "openness",
+    "hints": null,
+    "answers": [
+      {
+        "id": 32,
+        "name": "All the time",
+        "score": "1",
+        "answer_type": "choices"
+      },
+      {
+        "id": 28,
+        "name": "That's not me",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 29,
+        "name": "Not really...",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 30,
+        "name": "Sometimes",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 31,
+        "name": "Usually",
+        "score": "2",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid8",
+    "question_type": "choices",
+    "question": "Do you have a vivid imagination?",
+    "section": "openness",
+    "hints": null,
+    "answers": [
+      {
+        "id": 33,
+        "name": "No",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 34,
+        "name": "Not really...",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 35,
+        "name": "Sort of",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 36,
+        "name": "Accurate",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 37,
+        "name": "Of course",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid9",
+    "question_type": "choices",
+    "question": "Do you find it difficult to sit still without fidgeting?",
+    "section": "neuroticism",
+    "hints": null,
+    "answers": [
+      {
+        "id": 38,
+        "name": "All the time",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 39,
+        "name": "Quite often",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 40,
+        "name": "Sometimes",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 41,
+        "name": "Not really...",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 42,
+        "name": "Never",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid10",
+    "question_type": "choices",
+    "question": "Do you have trouble sleeping or wake up sweating after a bad dream?",
+    "section": "neuroticism",
+    "hints": null,
+    "answers": [
+      {
+        "id": 43,
+        "name": "All the time",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 44,
+        "name": "Quite often",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 45,
+        "name": "Sometimes",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 46,
+        "name": "Not really...",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 47,
+        "name": "Never",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid11",
+    "question_type": "choices",
+    "question": "Are you easily annoyed if things don't go according to plan?",
+    "section": "neuroticism",
+    "hints": null,
+    "answers": [
+      {
+        "id": 48,
+        "name": "All the time",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 49,
+        "name": "Quite often",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 50,
+        "name": "Sometimes",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 51,
+        "name": "Not really...",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 52,
+        "name": "That's not me",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid12",
+    "question_type": "descriptive",
+    "question": "What gets your investing mojo on?",
+    "section": "omnisearch",
+    "hints": "rch for stocks with keywords or phrases, Lora will get you the relevant stocks!Go sea",
+    "answers": []
+  },
+  {
+    "question_id": "quid13",
+    "question_type": "choices",
+    "question": "How long do you consider to hold this investment?",
+    "section": "investment_style",
+    "hints": null,
+    "answers": [
+      {
+        "id": 54,
+        "name": "1 year",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 55,
+        "name": "6 months",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 56,
+        "name": "3 months",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 57,
+        "name": "1 month",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 58,
+        "name": "2 weeks",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid14",
+    "question_type": "choices",
+    "question": "Do you think this next investment is a large amount?",
+    "section": "investment_style",
+    "hints": null,
+    "answers": [
+      {
+        "id": 59,
+        "name": "Nope",
+        "score": "5",
+        "answer_type": "choices"
+      },
+      {
+        "id": 60,
+        "name": "Not really",
+        "score": "4",
+        "answer_type": "choices"
+      },
+      {
+        "id": 61,
+        "name": "Depends",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 62,
+        "name": "Quite so",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 63,
+        "name": "Definitely",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  },
+  {
+    "question_id": "quid15",
+    "question_type": "choices",
+    "question": "Which investment scenario do you prefer?",
+    "section": "investment_style",
+    "hints": null,
+    "answers": [
+      {
+        "id": 64,
+        "name": "You’re not sure which -  Sometimes you earn , sometimes you lose.",
+        "score": "3",
+        "answer_type": "choices"
+      },
+      {
+        "id": 65,
+        "name": "Take a chance for the home run, but you won’t  make it every time.",
+        "score": "2",
+        "answer_type": "choices"
+      },
+      {
+        "id": 66,
+        "name": "Take it steady, earn small but frequently. Occasional losses are limited.",
+        "score": "1",
+        "answer_type": "choices"
+      }
+    ]
+  }
+]

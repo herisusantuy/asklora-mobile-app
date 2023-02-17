@@ -23,6 +23,17 @@ class SaveUserResponse extends UserResponseEvent {
   List<Object?> get props => [question.toString()];
 }
 
+class SaveOmniSearchResponse extends UserResponseEvent {
+  final List<String> cachedSelectedChoices;
+  final List<String> cachedDefaultChoices;
+
+  const SaveOmniSearchResponse(
+      this.cachedSelectedChoices, this.cachedDefaultChoices);
+
+  @override
+  List<Object?> get props => [cachedSelectedChoices, cachedDefaultChoices];
+}
+
 class SendBulkResponse extends UserResponseEvent {
   @override
   List<Object?> get props => [DateTime.now().millisecondsSinceEpoch];

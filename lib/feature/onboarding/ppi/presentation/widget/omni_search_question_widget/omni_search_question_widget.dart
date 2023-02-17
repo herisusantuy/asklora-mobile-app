@@ -133,21 +133,22 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                                   child: ButtonPair(
                                       primaryButtonOnClick: () {
                                         onSubmitSuccess();
+
+                                        /// Here would be the changes.
+                                        final omniSearchState = context
+                                            .read<
+                                                OmniSearchQuestionWidgetBloc>()
+                                            .state;
+                                        context.read<UserResponseBloc>().add(
+                                            SaveOmniSearchResponse(
+                                                omniSearchState.keywordAnswers,
+                                                omniSearchState.keywords));
+
                                         context.read<UserResponseBloc>().add(
                                             SaveUserResponse(
                                                 question,
-                                                jsonEncode(OmniSearchModel(
-                                                        keywords: context
-                                                            .read<
-                                                                OmniSearchQuestionWidgetBloc>()
-                                                            .state
-                                                            .keywords,
-                                                        keywordAnswers: context
-                                                            .read<
-                                                                OmniSearchQuestionWidgetBloc>()
-                                                            .state
-                                                            .keywordAnswers)
-                                                    .toJson())));
+                                                omniSearchState.keywordAnswers
+                                                    .join(',')));
                                       },
                                       secondaryButtonOnClick: () => context
                                           .read<OmniSearchQuestionWidgetBloc>()
