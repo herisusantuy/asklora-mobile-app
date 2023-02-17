@@ -25,85 +25,14 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => InvestmentStyleQuestionBloc(initialIndex: initialIndex)
         ..add(NextQuestion()),
-      child: Builder(
-          builder: (context) => CustomNavigationWidget<QuestionPageStep>(
-              onBackPressed: () => onCancel(context),
-              header: const SizedBox.shrink(),
-              child: BlocConsumer<InvestmentStyleQuestionBloc,
-                  InvestmentStyleQuestionState>(listener: (context, state) {
-                if (state is OnNextQuestion) {
-                  context.read<QuestionBloc>().add(
-                      InvestmentStyleQuestionIndexChanged(
-                          state.investmentStyleQuestionIndex));
-                } else if (state is OnNextResultScreen) {
-                  if (!UserJourney.compareUserJourney(
-                      source: context.read<AppBloc>().state.userJourney,
-                      target: UserJourney.investmentStyle)) {
-                    ///save UserJourney and answer only if current UserJourney < kyc
-                    context
-                        .read<AppBloc>()
-                        .add(const SaveUserJourney(UserJourney.kyc));
-                  } else {
-                    ///TODO will save bulk answer later
-                    context.read<ForYouBloc>().add(SaveInvestmentStyleAnswer());
-                  }
-
-                  context.read<NavigationBloc<QuestionPageStep>>().add(
-                      const PageChanged(
-                          QuestionPageStep.investmentStyleResultEnd));
-                } else if (state is OnPreviousPage) {
-                  if (UserJourney.compareUserJourney(
-                      source: context.read<AppBloc>().state.userJourney,
-                      target: UserJourney.freeBotStock)) {
-                    ///back to previous for you page when current User Journey > freeBotStock
-                    context
-                        .read<NavigationBloc<ForYouPage>>()
-                        .add(const PagePop());
-                  } else {
-                    context
-                        .read<NavigationBloc<QuestionPageStep>>()
-                        .add(const PagePop());
-                  }
-                }
-              }, builder: (context, state) {
-                if (state is OnNextQuestion) {
-                  QuestionCollection questionCollection = state.question;
-                  switch (state.questionType) {
-                    case (QuestionType.choices):
-                      //TODO defaultChoiceIndex should be from answered question when endpoint is ready
-                      return MultipleChoiceQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        questionCollection: questionCollection,
-                        defaultChoiceIndex: -1,
-                        onSubmitSuccess: () => onSubmitSuccess(context),
-                        onCancel: () => onCancel(context),
-                      );
-                    case (QuestionType.descriptive):
-                      //TODO defaultAnswer should be from answered question when endpoint is ready
-                      return DescriptiveQuestionWidget(
-                          key: Key(questionCollection.uid!),
-                          defaultAnswer: '',
-                          questionCollection: questionCollection,
-                          onCancel: () => onCancel(context),
-                          onSubmitSuccess: () => onSubmitSuccess(context));
-                    case (QuestionType.omniSearch):
-                      return OmniSearchQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        enableBackNavigation: !UserJourney.compareUserJourney(
-                            source: context.read<AppBloc>().state.userJourney,
-                            target: UserJourney.freeBotStock),
-                        questionCollection: questionCollection,
-                        onSubmitSuccess: () => onSubmitSuccess(context),
-                        onCancel: () => onCancel(context),
-                      );
-
-                    default:
-                      return const SizedBox.shrink();
-                  }
-                } else {
-                  return const SizedBox.shrink();
-                }
-              }))),
+      child: CustomNavigationWidget<QuestionPageStep>(
+          onBackPressed: () => onCancel(context),
+          header: const SizedBox.shrink(),
+          child: BlocConsumer<InvestmentStyleQuestionBloc,
+              InvestmentStyleQuestionState>(
+            listener: _investmentStyleQuestionListener,
+            builder: _investmentStyleQuestionBuilder,
+          )),
     );
   }
 
@@ -120,4 +49,86 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
         .add(const CurrentInvestmentStylePageDecremented());
     context.read<InvestmentStyleQuestionBloc>().add(PreviousQuestion());
   }
+
+  void _investmentStyleQuestionListener(
+      BuildContext context, InvestmentStyleQuestionState state) {
+    if (state is OnNextQuestion) {
+      _onNextQuestionCallback(context, state.investmentStyleQuestionIndex);
+    } else if (state is OnNextResultScreen) {
+      _onNextResultScreenCallback(context);
+    } else if (state is OnPreviousPage) {
+      _onOnPreviousPageCallback(context);
+    }
+  }
+
+  Widget _investmentStyleQuestionBuilder(
+      BuildContext context, InvestmentStyleQuestionState state) {
+    if (state is OnNextQuestion) {
+      QuestionCollection questionCollection = state.question;
+      switch (state.questionType) {
+        case (QuestionType.choices):
+          //TODO defaultChoiceIndex should be from answered question when endpoint is ready
+          return MultipleChoiceQuestionWidget(
+            key: Key(questionCollection.uid!),
+            questionCollection: questionCollection,
+            defaultChoiceIndex: -1,
+            onSubmitSuccess: () => onSubmitSuccess(context),
+            onCancel: () => onCancel(context),
+          );
+        case (QuestionType.descriptive):
+          //TODO defaultAnswer should be from answered question when endpoint is ready
+          return DescriptiveQuestionWidget(
+              key: Key(questionCollection.uid!),
+              defaultAnswer: '',
+              questionCollection: questionCollection,
+              onCancel: () => onCancel(context),
+              onSubmitSuccess: () => onSubmitSuccess(context));
+        case (QuestionType.omniSearch):
+          return OmniSearchQuestionWidget(
+            key: Key(questionCollection.uid!),
+            enableBackNavigation: !UserJourney.compareUserJourney(
+                source: context.read<AppBloc>().state.userJourney,
+                target: UserJourney.freeBotStock),
+            questionCollection: questionCollection,
+            onSubmitSuccess: () => onSubmitSuccess(context),
+            onCancel: () => onCancel(context),
+          );
+
+        default:
+          return const SizedBox.shrink();
+      }
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
+  void _onNextResultScreenCallback(BuildContext context) {
+    UserJourney.onAlreadyPassed(
+        context: context,
+        target: UserJourney.investmentStyle,
+        onTrueCallback: () =>
+            context.read<ForYouBloc>().add(SaveInvestmentStyleAnswer()),
+        onFalseCallback: () => context
+            .read<AppBloc>()
+            .add(const SaveUserJourney(UserJourney.kyc)));
+    context
+        .read<NavigationBloc<QuestionPageStep>>()
+        .add(const PageChanged(QuestionPageStep.investmentStyleResultEnd));
+  }
+
+  void _onOnPreviousPageCallback(BuildContext context) {
+    UserJourney.onAlreadyPassed(
+        context: context,
+        target: UserJourney.freeBotStock,
+        onTrueCallback: () =>
+            context.read<NavigationBloc<ForYouPage>>().add(const PagePop()),
+        onFalseCallback: () => context
+            .read<NavigationBloc<QuestionPageStep>>()
+            .add(const PagePop()));
+  }
+
+  void _onNextQuestionCallback(
+          BuildContext context, int investmentStyleQuestionIndex) =>
+      context.read<QuestionBloc>().add(
+          InvestmentStyleQuestionIndexChanged(investmentStyleQuestionIndex));
 }
