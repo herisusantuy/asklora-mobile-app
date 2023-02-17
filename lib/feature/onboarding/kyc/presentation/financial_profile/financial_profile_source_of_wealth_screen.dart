@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,19 +10,25 @@ import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
+import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../utils/source_of_wealth_enum.dart';
+import '../widgets/custom_donut_chart/custom_donut_chart.dart';
 import '../widgets/kyc_base_form.dart';
 import 'widgets/number_counter_input.dart';
 
 class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
   final double progress;
 
-  const FinancialProfileSourceOfWealthScreen({required this.progress, Key? key})
-      : super(key: key);
+  FinancialProfileSourceOfWealthScreen({required this.progress, Key? key})
+      : super(key: key) {
+    _generateGradients();
+  }
+
+  final List<SweepGradient> _gradients = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -42,20 +51,9 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
             style: AskLoraTextStyles.body1,
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
-          Center(
-            child: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
-              buildWhen: (previous, current) =>
-                  previous.totalAmount != current.totalAmount,
-              builder: (context, state) {
-                return CustomTextNew(
-                  '${state.totalAmount}%',
-                  style: AskLoraTextStyles.h1,
-                );
-              },
-            ),
-          ),
+          _donutChart,
           ...SourceOfWealthType.values
               .map(
                 (source) =>
@@ -125,9 +123,64 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
               },
               secondaryButtonOnClick: () => CarouselScreen.open(context),
               primaryButtonLabel: 'NEXT',
-              secondaryButtonLabel: 'SAFE FOR LATER');
+              secondaryButtonLabel: 'SAVE FOR LATER');
         },
       ),
     );
+  }
+
+  Widget get _donutChart {
+    return BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
+      buildWhen: (previous, current) =>
+          previous.totalAmount != current.totalAmount,
+      builder: (context, state) {
+        List<PieChartSectionData> data = state.sourceOfWealthAnswers
+            .asMap()
+            .map<int, PieChartSectionData>((index, data) {
+              final value = PieChartSectionData(
+                  value: data.amount.toDouble(),
+                  color: AskLoraColors.primaryGreen,
+                  gradient: _gradients[index >= _gradients.length
+                      ? index - _gradients.length
+                      : index],
+                  radius: 25,
+                  showTitle: false,
+                  borderSide: const BorderSide(
+                    width: 1,
+                    color: Colors.black26,
+                  ));
+              return MapEntry(index, value);
+            })
+            .values
+            .toList();
+        return CustomDonutChart(
+          total: state.totalAmount,
+          sections: data,
+        );
+      },
+    );
+  }
+
+  final _colorList = [
+    AskLoraColors.primaryGreen,
+    AskLoraColors.primaryMagenta,
+    AskLoraColors.gray,
+    AskLoraColors.lime,
+    AskLoraColors.purple,
+    AskLoraColors.primaryBlue,
+  ];
+
+  void _generateGradients() {
+    int index = 0;
+    while (index < _colorList.length) {
+      final color = _colorList[index];
+      _gradients.add(SweepGradient(
+        startAngle: 0,
+        endAngle: pi / 4,
+        tileMode: TileMode.mirror,
+        colors: [color, color.withAlpha(30)],
+      ));
+      ++index;
+    }
   }
 }

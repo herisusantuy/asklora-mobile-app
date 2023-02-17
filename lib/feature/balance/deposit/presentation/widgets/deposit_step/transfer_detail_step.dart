@@ -19,7 +19,7 @@ class TransferDetailStep extends StatelessWidget {
           height: 10,
         ),
         CustomTextNew(
-          "Copy LORA's bank details and transfer at less HK\$10,000 from your bank account via FPS or Wire transfer.",
+          "Copy LORA's bank details and transfer at less HK\$${depositType.minDeposit.convertToCurrencyDecimal()} from your bank account via FPS or Wire transfer.",
           style:
               AskLoraTextStyles.body2.copyWith(color: AskLoraColors.charcoal),
         ),

@@ -11,6 +11,13 @@ enum UserJourney {
   final String value;
 
   const UserJourney(this.value);
+
+  static bool compareUserJourney(
+      {required UserJourney source, required UserJourney target}) {
+    ///This function is used to check whether the source is already passed the target of UserJourney
+    return UserJourney.values.indexWhere((element) => element == source) >
+        UserJourney.values.indexWhere((element) => element == target);
+  }
 }
 
 enum AppStatus { unknown, authenticated, unauthenticated }

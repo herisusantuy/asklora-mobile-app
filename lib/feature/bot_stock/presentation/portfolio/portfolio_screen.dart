@@ -16,8 +16,7 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/extensions.dart';
-import '../../../balance/deposit/presentation/deposit_screen.dart';
-import '../../../balance/deposit/utils/deposit_utils.dart';
+import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -45,9 +44,19 @@ class PortfolioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PortfolioBloc(portfolioRepository: PortfolioRepository())
-        ..add(const FetchBotPortfolio())
-        ..add(FetchPortfolioDetail()),
+      create: (_) {
+        PortfolioBloc portfolioBloc =
+            PortfolioBloc(portfolioRepository: PortfolioRepository());
+
+        ///fetch portfolio when current UserJourney already passed freeBotStock
+        if (UserJourney.compareUserJourney(
+            source: context.read<AppBloc>().state.userJourney,
+            target: UserJourney.freeBotStock)) {
+          portfolioBloc.add(const FetchBotPortfolio());
+          portfolioBloc.add(FetchPortfolioDetail());
+        }
+        return portfolioBloc;
+      },
       child: CustomScaffold(
         useSafeArea: false,
         backgroundColor: AskLoraColors.white,
@@ -172,8 +181,7 @@ class PortfolioScreen extends StatelessWidget {
                     FundingButton(
                       disabled: data == null,
                       fundingType: FundingType.fund,
-                      onTap: () => DepositScreen.open(
-                          context: context, depositType: DepositType.type1),
+                      onTap: () => DepositWelcomeScreen.open(context: context),
                     ),
                     const SizedBox(
                       height: 10,
