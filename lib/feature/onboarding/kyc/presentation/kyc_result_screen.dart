@@ -34,7 +34,7 @@ class KycResultScreen extends StatelessWidget {
                           'Your investment account application is under review!',
                       statusType: StatusType.success,
                       subTitle:
-                          'You will be informed when your application is approved. Please remember to collect your gift.\n\nPlease remember to collect your gift.',
+                          'You will be informed when your application is approved.\n\nPlease remember to collect your gift.',
                     ),
                   ),
                   _bottomButton(context)
