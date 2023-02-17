@@ -75,7 +75,7 @@ class App extends StatelessWidget {
   Widget _getBody(AppState state) {
     switch (state.status) {
       case AppStatus.authenticated:
-        return const SignInSuccessScreen();
+        return const TabsScreen();
       case AppStatus.unauthenticated:
         if (state.userJourney == UserJourney.privacy) {
           return const CarouselScreen();
