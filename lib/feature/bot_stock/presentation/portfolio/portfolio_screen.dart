@@ -123,10 +123,6 @@ class PortfolioScreen extends StatelessWidget {
                                     style: AskLoraTextStyles.body4,
                                   ),
                                   CurrencyButton(
-                                    initialValue: CurrencyType.hkd.value,
-                                    items: CurrencyType.values
-                                        .map((e) => e.value)
-                                        .toList(),
                                     onChanged: (newValue) {
                                       context.read<PortfolioBloc>().add(
                                           CurrencyChanged(CurrencyType.values
