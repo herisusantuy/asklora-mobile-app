@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
 
 class CurrencyButton extends StatelessWidget {
   final List<String> items;
@@ -31,8 +32,7 @@ class CurrencyButton extends StatelessWidget {
                     value: item,
                     child: CustomTextNew(
                       item,
-                      style: const TextStyle(
-                          fontSize: 9, fontWeight: FontWeight.w700),
+                      style: AskLoraTextStyles.body4,
                     ),
                   ))
               .toList(),
