@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/token/repository/repository.dart';
 import '../domain/sign_in_api_client.dart';
 import '../domain/sign_in_request.dart';
@@ -13,7 +12,7 @@ class SignInRepository {
 
   SignInRepository(this._storage);
 
-  Future<BaseResponse<SignInResponse>> signIn({
+  Future<SignInResponse> signIn({
     required String email,
     required String password,
   }) async {
@@ -23,6 +22,6 @@ class SignInRepository {
     var signInResponse = SignInResponse.fromJson(response.data);
     _storage.saveAccessToken(signInResponse.access);
     _storage.saveRefreshToken(signInResponse.refresh);
-    return BaseResponse.complete(signInResponse);
+    return signInResponse;
   }
 }
