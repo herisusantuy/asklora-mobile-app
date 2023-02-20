@@ -74,8 +74,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   content: Column(
                     children: [
                       PairColumnText(
-                          title1: 'Investment Amount (USD)',
-                          title2: 'Trading Fee (USD)',
+                          title1: 'Investment Amount (HKD)',
+                          title2: 'Bot Management Fee (HKD)',
                           subTitle1: arguments.right.convertToCurrencyDecimal(),
                           subTitle2: 'Free'),
                       _spaceBetweenInfo,

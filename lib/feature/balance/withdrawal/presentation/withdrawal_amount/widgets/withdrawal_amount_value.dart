@@ -20,7 +20,7 @@ class WithdrawalAmountValue extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 22.0),
                       child: CustomTextNew(
-                        'USD',
+                        'HKD',
                         style: AskLoraTextStyles.h5
                             .copyWith(color: AskLoraColors.charcoal),
                       ),
@@ -42,7 +42,7 @@ class WithdrawalAmountValue extends StatelessWidget {
           height: 12,
         ),
         CustomTextNew(
-          'Withdrawable Amount USD4,990.00',
+          'Withdrawable Amount HKD4,990.00',
           style:
               AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
         )
