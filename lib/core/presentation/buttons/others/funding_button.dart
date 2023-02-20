@@ -33,7 +33,7 @@ class FundingButton extends StatelessWidget {
             : AskLoraColors.primaryMagenta;
 
     return SizedBox(
-      height: 67,
+      height: 55,
       child: ElevatedButton(
           style: _getDefaultButtonStyle,
           onPressed: () {
