@@ -102,14 +102,6 @@ class PortfolioScreen extends StatelessWidget {
           final PortfolioDetailResponse? data =
               state.portfolioDetailResponse.data;
 
-          double amount(double number) {
-            if (state.currency == CurrencyType.usd) {
-              return number * 0.13;
-            } else {
-              return number;
-            }
-          }
-
           return Column(
             children: [
               SafeArea(
@@ -150,7 +142,7 @@ class PortfolioScreen extends StatelessWidget {
                               CustomTextNew(
                                 // (data?.totalPortfolio ?? 0)
                                 //     .convertToCurrencyDecimal(),
-                                amount(10000).convertToCurrencyDecimal(),
+                                1000.0.toHkd(),
                                 style: AskLoraTextStyles.h2,
                               ),
                               if (state.currency == CurrencyType.usd)
@@ -181,10 +173,10 @@ class PortfolioScreen extends StatelessWidget {
                                   title2:
                                       'Buying Power\n(${state.currency.value})',
                                   subTitle1: data?.withdrawableAmount != null
-                                      ? amount(data!.withdrawableAmount)
+                                      ? (data!.withdrawableAmount)
                                           .convertToCurrencyDecimal()
                                       : '/',
-                                  subTitle2: amount(data?.buyingPower ?? 0)
+                                  subTitle2: (data?.buyingPower ?? 0)
                                       .convertToCurrencyDecimal()),
                               const SizedBox(
                                 height: 14,
@@ -193,11 +185,10 @@ class PortfolioScreen extends StatelessWidget {
                                 title1:
                                     'Total Botstock\nValues (${state.currency.value})',
                                 title2: 'Total P/L\n',
-                                subTitle1:
-                                    amount((data?.totalBotStockValues) ?? 0)
-                                        .convertToCurrencyDecimal(),
+                                subTitle1: (data?.totalBotStockValues ?? 0)
+                                    .convertToCurrencyDecimal(),
                                 subTitle2: data?.withdrawableAmount != null
-                                    ? '${amount(data!.profit).convertToCurrencyDecimal()}%'
+                                    ? '${(data!.profit).convertToCurrencyDecimal()}%'
                                     : '/',
                               ),
                             ],
