@@ -40,49 +40,40 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         SummaryTextInfo(
             title: 'Employment Status',
             subTitle: financialProfileState.employmentStatus.value),
+        if (financialProfileState.natureOfBusiness != null)
+          _summaryTextInfoWithPadding(
+              title: 'Nature of Business',
+              subTitle: financialProfileState.natureOfBusiness?.value ?? ''),
+        if (financialProfileState.occupation != null ||
+            financialProfileState.otherOccupation.isNotEmpty &&
+                financialProfileState.otherOccupation.isNotEmpty)
+          _summaryTextInfoWithPadding(
+              title: 'Occupation',
+              subTitle: financialProfileState.occupation != null &&
+                      financialProfileState.occupation != Occupations.other
+                  ? financialProfileState.occupation!.value
+                  : financialProfileState.occupation != null &&
+                          financialProfileState.occupation == Occupations.other
+                      ? financialProfileState.otherOccupation
+                      : ''),
+        if (financialProfileState.employer.isNotEmpty)
+          _summaryTextInfoWithPadding(
+              title: 'Employer', subTitle: financialProfileState.employer),
+        if (financialProfileState.employerAddress.isNotEmpty)
+          _summaryTextInfoWithPadding(
+              title: 'Employer/ Company Address',
+              subTitle: financialProfileState.employerAddress),
+        if (financialProfileState.countryName.isNotEmpty)
+          _summaryTextInfoWithPadding(
+              title: 'Country of Employment',
+              subTitle: financialProfileState.countryName),
+        if (financialProfileState.country != 'HKG' &&
+            financialProfileState.detailInformationOfCountry.isNotEmpty)
+          _summaryTextInfoWithPadding(
+              title:
+                  'Why is your country of employment different from your country of residence?',
+              subTitle: financialProfileState.detailInformationOfCountry),
         _spaceHeight,
-        SummaryTextInfo(
-            title: 'Nature of Business',
-            subTitle: financialProfileState.natureOfBusiness?.value ?? ''),
-        _spaceHeight,
-        SummaryTextInfo(
-            title: 'Occupation',
-            subTitle: financialProfileState.occupation != null &&
-                    financialProfileState.occupation != Occupations.other
-                ? financialProfileState.occupation!.value
-                : financialProfileState.occupation != null &&
-                        financialProfileState.occupation == Occupations.other
-                    ? financialProfileState.otherOccupation!
-                    : ''),
-        _spaceHeight,
-        SummaryTextInfo(
-            title: 'Employer',
-            subTitle: financialProfileState.employer != ''
-                ? financialProfileState.employer!
-                : ''),
-        _spaceHeight,
-        SummaryTextInfo(
-            title: 'Employer/ Company Address',
-            subTitle: financialProfileState.employerAddress != ''
-                ? financialProfileState.employerAddress!
-                : ''),
-        _spaceHeight,
-        SummaryTextInfo(
-            title: 'Country of Employment',
-            subTitle: financialProfileState.countryName != ''
-                ? financialProfileState.countryName!
-                : ''),
-        if (financialProfileState.country != 'HKG')
-          Padding(
-            padding: const EdgeInsets.only(top: _spaceHeightDouble),
-            child: SummaryTextInfo(
-                title:
-                    'Why is your country of employment different from your country of residence?',
-                subTitle: financialProfileState.detailInformationOfCountry != ''
-                    ? financialProfileState.detailInformationOfCountry!
-                    : ''),
-          ),
-        _spaceHeightFinancialProfile,
         SummaryTextInfo(
             titleWidget: _affiliatedQuestionWidget,
             subTitle: disclosureAffiliationState.isAffiliatedPerson != null
@@ -130,10 +121,6 @@ class FinancialProfileSummaryContent extends StatelessWidget {
 
   Widget get _spaceHeightAffiliated => const SizedBox(
         height: 10,
-      );
-
-  Widget get _spaceHeightFinancialProfile => const SizedBox(
-        height: 80,
       );
 
   Widget get _affiliatedQuestionWidget => Column(
@@ -190,4 +177,11 @@ class FinancialProfileSummaryContent extends StatelessWidget {
       }).toList()
     ];
   }
+
+  Widget _summaryTextInfoWithPadding(
+          {required String title, required String subTitle}) =>
+      Padding(
+        padding: const EdgeInsets.only(top: _spaceHeightDouble),
+        child: SummaryTextInfo(title: title, subTitle: subTitle),
+      );
 }
