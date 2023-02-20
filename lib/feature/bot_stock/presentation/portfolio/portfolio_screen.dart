@@ -181,10 +181,10 @@ class PortfolioScreen extends StatelessWidget {
                                   title2:
                                       'Buying Power\n(${state.currency.value})',
                                   subTitle1: data?.withdrawableAmount != null
-                                      ? data!.withdrawableAmount
+                                      ? amount(data!.withdrawableAmount)
                                           .convertToCurrencyDecimal()
                                       : '/',
-                                  subTitle2: (data?.buyingPower ?? 0)
+                                  subTitle2: amount(data?.buyingPower ?? 0)
                                       .convertToCurrencyDecimal()),
                               const SizedBox(
                                 height: 14,
@@ -193,10 +193,11 @@ class PortfolioScreen extends StatelessWidget {
                                 title1:
                                     'Total Botstock\nValues (${state.currency.value})',
                                 title2: 'Total P/L\n',
-                                subTitle1: (data?.totalBotStockValues ?? 0)
-                                    .convertToCurrencyDecimal(),
+                                subTitle1:
+                                    amount((data?.totalBotStockValues) ?? 0)
+                                        .convertToCurrencyDecimal(),
                                 subTitle2: data?.withdrawableAmount != null
-                                    ? '${data!.profit.convertToCurrencyDecimal()}%'
+                                    ? '${amount(data!.profit).convertToCurrencyDecimal()}%'
                                     : '/',
                               ),
                             ],
