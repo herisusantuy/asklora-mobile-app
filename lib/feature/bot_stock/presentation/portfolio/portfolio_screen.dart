@@ -140,9 +140,8 @@ class PortfolioScreen extends StatelessWidget {
                                 height: 2,
                               ),
                               CustomTextNew(
-                                // (data?.totalPortfolio ?? 0)
-                                //     .convertToCurrencyDecimal(),
-                                1000.0.toHkd(),
+                                (data?.totalPortfolio ?? 0)
+                                    .convertToCurrencyDecimal(),
                                 style: AskLoraTextStyles.h2,
                               ),
                               if (state.currency == CurrencyType.usd)
