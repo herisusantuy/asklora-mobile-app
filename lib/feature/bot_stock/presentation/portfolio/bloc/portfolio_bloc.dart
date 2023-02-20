@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/utils/currency_enum.dart';
 import '../../../../chart/domain/chart_models.dart';
 import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../utils/bot_stock_utils.dart';
@@ -19,6 +20,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     on<FetchBotPortfolio>(_onFetchBotPortfolio);
     on<FetchBotPortfolioChartData>(_onFetchChartData);
     on<BotStockFilterChanged>(_onBotStockFilterChanged);
+    on<CurrencyChanged>(_onCurrencyChanged);
   }
 
   final PortfolioRepository _portfolioRepository;
@@ -63,5 +65,9 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       BotStockFilterChanged event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(botStockFilter: event.botStockFilter));
     add(FetchBotPortfolio(botStockFilter: event.botStockFilter));
+  }
+
+  _onCurrencyChanged(CurrencyChanged event, Emitter<PortfolioState> emit) {
+    emit(state.copyWith(currency: event.currency));
   }
 }
