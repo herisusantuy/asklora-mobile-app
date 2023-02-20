@@ -68,6 +68,6 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   }
 
   _onCurrencyChanged(CurrencyChanged event, Emitter<PortfolioState> emit) {
-    emit(state.copyWith(currency: event.currency));
+    emit(state.copyWith(currency: event.currencyType));
   }
 }

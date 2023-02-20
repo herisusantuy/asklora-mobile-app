@@ -24,9 +24,9 @@ class FetchBotPortfolio extends PortfolioEvent {
 class FetchBotPortfolioChartData extends PortfolioEvent {}
 
 class CurrencyChanged extends PortfolioEvent {
-  final CurrencyType currency;
-  const CurrencyChanged(this.currency) : super();
+  final CurrencyType currencyType;
+  const CurrencyChanged(this.currencyType) : super();
 
   @override
-  List<Object> get props => [currency];
+  List<Object> get props => [currencyType];
 }
