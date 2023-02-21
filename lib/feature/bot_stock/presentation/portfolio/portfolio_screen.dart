@@ -125,10 +125,9 @@ class PortfolioScreen extends StatelessWidget {
                                   CurrencyDropdown(
                                     initialValue: CurrencyType.hkd,
                                     onChanged: (newValue) {
-                                      context.read<PortfolioBloc>().add(
-                                          CurrencyChanged(CurrencyType.values
-                                              .firstWhere((element) =>
-                                                  element == newValue)));
+                                      context
+                                          .read<PortfolioBloc>()
+                                          .add(CurrencyChanged(newValue!));
                                     },
                                   )
                                 ],
