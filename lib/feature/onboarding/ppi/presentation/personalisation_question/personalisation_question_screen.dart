@@ -39,7 +39,6 @@ class PersonalisationQuestionScreen extends StatelessWidget {
           buildWhen: (previous, current) =>
               current is OnNextPersonalizationQuestion,
           listener: (context, state) async {
-            // debugPrint('Krishna personalisation_question_screen ${state}');
             if (state is OnNextPersonalizationQuestion) {
               context.read<QuestionBloc>().add(
                   PersonalisationQuestionIndexChanged(
@@ -49,30 +48,8 @@ class PersonalisationQuestionScreen extends StatelessWidget {
                   .read<NavigationBloc<QuestionPageStep>>()
                   .add(const PagePop());
             } else if (state is OnNextResultEndScreen) {
-              // debugPrint(
-              //     'Krishna personalisation_question_screen OnNextResultEndScreen');
-              // CustomLoadingOverlay.show(context);
-              // context.read<UserResponseBloc>().add(SendBulkResponse());
               context.read<NavigationBloc<QuestionPageStep>>().add(
                   const PageChanged(QuestionPageStep.personalisationResultEnd));
-
-              /* context.read<UserResponseBloc>().stream.listen((event) {
-                debugPrint(
-                    'Krishna from personalisation_question_screen ppiResponseState ${event.ppiResponseState} responseState ${event.responseState}');
-                if (event.ppiResponseState ==
-                    PpiResponseState.dispatchResponse) {
-                  if (event.responseState == ResponseState.loading) {
-                    CustomLoadingOverlay.show(context);
-                  } else {
-                    // context
-                    //     .read<NavigationBloc<QuestionPageStep>>()
-                    //     .add(const PageChanged(
-                    //         QuestionPageStep.personalisationResultEnd));
-                  }
-                }
-              });
-*/
-              // CustomLoadingOverlay.show(_context);
             }
           },
           builder: (context, state) {

@@ -19,17 +19,11 @@ class PpiQuestionRepository {
     final String response =
         await rootBundle.loadString('assets/json/question_list.json');
 
-    // debugPrint('Krishna response ${response}');
-
     List<Question> questions = List.empty(growable: true);
 
     questions = (jsonDecode(response) as List)
         .map((i) => Question.fromJson(i))
         .toList();
-
-    // var a = QuestionCollection.fromJson(jsonDecode(response));
-
-    // return fixture.fix(a.questions);
     return fixture.fix(questions);
   }
 

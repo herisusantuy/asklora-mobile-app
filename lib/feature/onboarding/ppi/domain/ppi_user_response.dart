@@ -202,24 +202,3 @@ class RecommendedBot {
 
   Map<String, dynamic> toJson() => _$RecommendedBotToJson(this);
 }
-
-// int getAnswerPoint(String uid, List<Answer>? answers, List<Choices>? choices) {
-//   int res = -1;
-//   if (choices != null && answers != null) {
-//     var score = answers
-//             .firstWhereOrNull((element) => element.questionId == uid)
-//             ?.points ??
-//         '';
-//     res = choices.indexWhere((element) => element.score == score);
-//   }
-//   return res;
-// }
-//
-// String? getPointOfAnswer(String uid, List<Answer>? answers) {
-//   Answer? answer;
-//   if (answers != null) {
-//     answer = answers.firstWhereOrNull((element) => element.questionId == uid);
-//     return answer?.points;
-//   }
-//   return '3';
-// }

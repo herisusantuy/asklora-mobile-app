@@ -38,8 +38,8 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       SendResponse event, Emitter<UserResponseState> emit) async {
     try {
       emit(state.copyWith(responseState: ResponseState.loading));
-      var data =
-          await _ppiResponseRepository.addAnswer(event.ppiUserResponseRequest);
+
+      await _ppiResponseRepository.addAnswer(event.ppiUserResponseRequest);
       emit(state.copyWith(
         responseState: ResponseState.success,
       ));
@@ -50,10 +50,6 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   void _onUserResponseSave(
       SaveUserResponse event, Emitter<UserResponseState> emit) async {
-    // emit(state.copyWith(
-    //     ppiResponseState: PpiResponseState.initAddResponse,
-    //     responseState: ResponseState.loading));
-
     emit(state.copyWith(
         ppiResponseState: PpiResponseState.initAddResponse,
         responseState: ResponseState.loading));
@@ -76,9 +72,6 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
     state.cachedDefaultChoices = List.from(event.cachedDefaultChoices);
     state.cachedSelectedChoices = List.from(event.cachedSelectedChoices);
-
-    debugPrint(
-        'Krishna user_response_bloc ${event.cachedDefaultChoices} ${event.cachedSelectedChoices}');
     emit(state.copyWith(
         ppiResponseState: PpiResponseState.finishAddResponse,
         responseState: ResponseState.success));
@@ -114,8 +107,6 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       debugPrint(
           'Krishna user_response_bloc sending data${userSnapShot.toString()}');
-
-      // await Future.delayed(const Duration(milliseconds: 2000));
 
       debugPrint('Krishna user_response_bloc done');
       emit(state.copyWith(

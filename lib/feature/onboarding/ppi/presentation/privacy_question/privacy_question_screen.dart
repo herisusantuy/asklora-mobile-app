@@ -36,14 +36,10 @@ class PrivacyQuestionScreen extends StatelessWidget {
                           PrivacyQuestionIndexChanged(
                               state.privacyQuestionIndex));
                     } else if (state is OnNextResultSuccessScreen) {
-                      debugPrint(
-                          'Krishna privacy_question_screen OnNextResultSuccessScreen');
                       context.read<NavigationBloc<QuestionPageStep>>().add(
                           const PageChanged(
                               QuestionPageStep.privacyResultSuccess));
                     } else if (state is OnPreviousSignInSuccessScreen) {
-                      debugPrint(
-                          'Krishna privacy_question_screen OnPreviousSignInSuccessScreen');
                       context
                           .read<NavigationBloc<QuestionPageStep>>()
                           .add(const PagePop());

@@ -2,20 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'question.g.dart';
 
-// @JsonSerializable()
-// class QuestionCollection {
-//   List<Question> questions;
-//
-//   QuestionCollection(this.questions);
-//
-//
-//
-//   factory QuestionCollection.fromJson(List<dynamic> json) =>
-//       _$QuestionCollectionFromJson(json);
-//
-//   Map<String, dynamic> toJson() => _$QuestionCollectionToJson(this);
-// }
-
 @JsonSerializable()
 class Question {
   @JsonKey(name: 'answers')
@@ -29,8 +15,6 @@ class Question {
   @JsonKey(name: 'question_id')
   String? questionId;
 
-  // int selectedOption;
-
   Question({
     this.choices,
     this.hints,
@@ -39,7 +23,6 @@ class Question {
     this.questionType,
     this.questionIndex,
     this.questionId,
-    // this.selectedOption = -1,
   });
 
   factory Question.fromJson(Map<String, dynamic> json) =>
@@ -55,7 +38,6 @@ class Question {
     String? questionType,
     String? questionIndex,
     String? questionId,
-    // int? selectedOption,
   }) {
     return Question(
       choices: choices ?? this.choices,
@@ -65,7 +47,6 @@ class Question {
       questionType: questionType ?? this.questionType,
       questionIndex: questionIndex ?? this.questionIndex,
       questionId: questionId ?? this.questionId,
-      // selectedOption: selectedOption ?? this.selectedOption,
     );
   }
 

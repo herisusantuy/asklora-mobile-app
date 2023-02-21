@@ -18,11 +18,6 @@ class PersonalisationQuestionBloc
         super(const PersonalisationQuestionState()) {
     on<NextPersonalisationQuestion>(_onNavigationStepChanged);
     on<PreviousPersonalisationQuestion>(_onNavigationPop);
-
-    // userResponseBloc.stream.listen((event) {
-    //   debugPrint('Krishna from personalisation bloc ppiResponseState ${event.ppiResponseState} responseState ${event.responseState}');
-    //
-    // });
   }
 
   int _personalizationIndex;
