@@ -100,6 +100,8 @@ class HomeScreenContentWidget extends StatelessWidget {
       case UserJourney.deposit:
         return [
           const HomeScreenMilestoneCompletionReminderWidget(),
+          _spaceHeightSmall,
+          const HomeScreenFreeBotStockTimerWidget(),
           _spaceHeightBig,
           const HomeScreenInvestmentStyleWidget(),
           _spaceHeightSmall,
@@ -108,6 +110,8 @@ class HomeScreenContentWidget extends StatelessWidget {
       case UserJourney.learnBotPlank:
         return [
           const HomeScreenMilestoneCompletionReminderWidget(),
+          _spaceHeightSmall,
+          const HomeScreenFreeBotStockTimerWidget(),
           _spaceHeightBig,
           const HomeScreenInvestmentStyleWidget(),
           _spaceHeightSmall,
@@ -116,6 +120,8 @@ class HomeScreenContentWidget extends StatelessWidget {
       default:
         return [
           const HomeScreenInvestmentStyleWidget(),
+          _spaceHeightSmall,
+          const HomeScreenFreeBotStockTimerWidget(),
           _spaceHeightSmall,
           const HomeScreenPopUpWidgetWithBotBadgeWidget(),
           _spaceHeightSmall,
