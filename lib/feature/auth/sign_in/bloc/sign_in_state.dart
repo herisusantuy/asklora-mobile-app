@@ -1,7 +1,7 @@
 part of 'sign_in_bloc.dart';
 
 class SignInState extends Equatable {
-  final BaseResponse response;
+  final BaseResponse<SignInResponse> response;
   final String emailAddress;
   final bool isEmailValid;
   final String emailAddressErrorText;
@@ -31,7 +31,7 @@ class SignInState extends Equatable {
       ];
 
   SignInState copyWith({
-    BaseResponse? response,
+    BaseResponse<SignInResponse>? response,
     String? emailAddress,
     bool? isEmailValid,
     String? emailAddressErrorText,

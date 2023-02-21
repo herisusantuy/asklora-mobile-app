@@ -20,6 +20,7 @@ class LoraPopUpMessage extends StatelessWidget {
   final VoidCallback? onSecondaryButtonTap;
   final String pngImage;
   final double boxTopMargin;
+  final String? bottomText;
 
   const LoraPopUpMessage(
       {required this.title,
@@ -34,6 +35,7 @@ class LoraPopUpMessage extends StatelessWidget {
       this.onSecondaryButtonTap,
       this.boxTopMargin = 70,
       this.pngImage = 'lora_memoji_1',
+      this.bottomText,
       Key? key})
       : super(key: key);
 
@@ -92,7 +94,17 @@ class LoraPopUpMessage extends StatelessWidget {
                         margin: const EdgeInsets.only(top: 24),
                         label: secondaryButtonLabel!,
                         onTap: onSecondaryButtonTap ?? () {},
-                      )
+                      ),
+                    if (bottomText != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24.0),
+                        child: CustomTextNew(
+                          bottomText!,
+                          style: AskLoraTextStyles.body3
+                              .copyWith(color: subTitleColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                   ],
                 ),
               ),

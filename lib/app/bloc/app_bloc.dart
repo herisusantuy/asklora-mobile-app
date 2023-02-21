@@ -31,8 +31,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       emit(AppState.authenticated(userJourney: userJourney));
     } else {
       emit(AppState.unauthenticated(
-          localeType: LocaleType.defaultFont(),
-          userJourney: UserJourney.privacy));
+        localeType: LocaleType.defaultFont(),
+      ));
     }
   }
 
@@ -43,8 +43,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   void _onSaveUserJourney(SaveUserJourney event, Emitter<AppState> emit) async {
-    await _userJourneyRepository.saveUserJourney(
-        userJourney: event.userJourney, data: event.data);
     emit(state.copyWith(userJourney: event.userJourney));
+    _userJourneyRepository.saveUserJourney(
+        userJourney: event.userJourney, data: event.data);
   }
 }

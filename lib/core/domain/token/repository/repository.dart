@@ -1,7 +1,7 @@
 abstract class Repository {
   static const String keyAuthTokenAccess = 'auth_token_key_access';
   static const String keyAuthTokenRefresh = 'auth_token_key_refresh';
-  static const String keyAuthTokenSignUp = 'auth_token_key_sign_up';
+  static const String keyAuthTokenSignUp = 'auth_token_key_access';
 
   void saveAccessToken(String token);
 
