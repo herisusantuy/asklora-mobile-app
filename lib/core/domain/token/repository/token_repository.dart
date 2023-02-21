@@ -86,12 +86,4 @@ class TokenRepository implements Repository {
     saveAccessToken(refreshResponse.data!.access!);
     return refreshResponse;
   }
-
-  @override
-  Future<String?> getSignUpToken() async =>
-      await _secureStorage.readData(Repository.keyAuthTokenSignUp);
-
-  @override
-  void saveSignUpToken(String token) async =>
-      await _secureStorage.writeData(Repository.keyAuthTokenSignUp, token);
 }
