@@ -12,6 +12,8 @@ import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_request.d
     as _i8;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart'
     as _i6;
+import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_with_otp_request.dart'
+    as _i9;
 import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart'
     as _i4;
 import 'package:dio/dio.dart' as _i3;
@@ -84,6 +86,36 @@ class MockSignInRepository extends _i1.Mock implements _i4.SignInRepository {
           ),
         )),
       ) as _i5.Future<_i2.BaseResponse<_i6.SignInResponse>>);
+  @override
+  _i5.Future<_i2.BaseResponse<_i6.SignInResponse>> signInWithOtp({
+    required String? otp,
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signInWithOtp,
+          [],
+          {
+            #otp: otp,
+            #email: email,
+            #password: password,
+          },
+        ),
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.SignInResponse>>.value(
+            _FakeBaseResponse_0<_i6.SignInResponse>(
+          this,
+          Invocation.method(
+            #signInWithOtp,
+            [],
+            {
+              #otp: otp,
+              #email: email,
+              #password: password,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i6.SignInResponse>>);
 }
 
 /// A class which mocks [SignInApiClient].
@@ -106,6 +138,23 @@ class MockSignInApiClient extends _i1.Mock implements _i7.SignInApiClient {
           this,
           Invocation.method(
             #signIn,
+            [request],
+          ),
+        )),
+      ) as _i5.Future<_i3.Response<dynamic>>);
+  @override
+  _i5.Future<_i3.Response<dynamic>> signInWithOtp(
+          _i9.SignInWithOtpRequest? request) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signInWithOtp,
+          [request],
+        ),
+        returnValue:
+            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
+          this,
+          Invocation.method(
+            #signInWithOtp,
             [request],
           ),
         )),

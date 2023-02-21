@@ -5,6 +5,7 @@ import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../domain/sign_in_response.dart';
+import '../domain/sign_in_with_otp_request.dart';
 import '../repository/sign_in_repository.dart';
 
 part 'sign_in_event.dart';
@@ -18,6 +19,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInEmailChanged>(_onEmailChanged);
     on<SignInPasswordChanged>(_onPasswordChanged);
     on<SignInSubmitted>(_onSignInSubmitted);
+    on<SignInWithOtpSubmitted>(_onSignInWithOtpSubmitted);
   }
 
   final SignInRepository _signInRepository;
@@ -56,6 +58,31 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
+      data.copyWith(message: 'Authentication Success');
+
+      emit(state.copyWith(response: data));
+    } on UnauthorizedException {
+      emit(state.copyWith(response: BaseResponse.error('Invalid Password')));
+    } on NotFoundException {
+      emit(state.copyWith(
+          response:
+              BaseResponse.error('User does not exist with the given email')));
+    } on NotAcceptableException {
+      emit(state.copyWith(
+          response: BaseResponse.error('User email is not verified')));
+    } catch (e) {
+      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+    }
+  }
+
+  void _onSignInWithOtpSubmitted(
+    SignInWithOtpSubmitted event,
+    Emitter<SignInState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data = await _signInRepository.signInWithOtp(
+          otp: event.otp, email: event.email, password: event.password);
       data.copyWith(message: 'Authentication Success');
 
       emit(state.copyWith(response: data));

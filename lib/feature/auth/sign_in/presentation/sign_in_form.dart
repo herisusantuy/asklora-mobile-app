@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -44,11 +45,12 @@ class SignInForm extends StatelessWidget {
         case ResponseState.success:
           UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
               (section) => section.value == state.response.data!.userJourney);
+          var arguments = Pair(state.emailAddress, state.password);
           await SecureStorage()
               .writeData('email', state.emailAddress)
               .then((_) {
             if (state.response.data!.statusCode == 202) {
-              OtpScreen.openReplace(context, state.emailAddress);
+              OtpScreen.openReplace(context, arguments);
             } else {
               switch (userJourney) {
                 case UserJourney.kyc:
@@ -58,7 +60,7 @@ class SignInForm extends StatelessWidget {
                   InvestmentStyleWelcomeScreen.open(context);
                   break;
                 default:
-                  OtpScreen.openReplace(context, state.emailAddress);
+                  OtpScreen.openReplace(context, arguments);
                   break;
               }
             }
