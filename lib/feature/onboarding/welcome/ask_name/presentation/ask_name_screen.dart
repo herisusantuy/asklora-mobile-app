@@ -61,7 +61,7 @@ class AskNameScreen extends StatelessWidget {
           child: PrimaryButton(
             key: const Key('next_button'),
             label: S.of(context).buttonNext,
-            disabled: state.name.isEmpty,
+            disabled: state.name.isEmpty || state.name.length < 3,
             onTap: () => GreetingScreen.open(context, state.name),
           )));
 
