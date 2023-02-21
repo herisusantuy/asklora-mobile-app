@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
@@ -38,7 +39,8 @@ class OtpScreen extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => SignInBloc(
-                  signInRepository: SignInRepository(TokenRepository())),
+                  signInRepository: SignInRepository(TokenRepository()),
+                  userJourneyRepository: UserJourneyRepository()),
             ),
           ],
           child:

@@ -6,10 +6,10 @@
 import 'dart:async' as _i5;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/core/domain/otp/get_otp_client.dart' as _i9;
+import 'package:asklora_mobile_app/core/domain/otp/get_otp_client.dart' as _i10;
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart' as _i7;
 import 'package:asklora_mobile_app/core/domain/otp/get_sms_otp_request.dart'
-    as _i10;
+    as _i9;
 import 'package:asklora_mobile_app/core/domain/otp/verify_otp_request.dart'
     as _i8;
 import 'package:asklora_mobile_app/feature/auth/otp/repository/otp_repository.dart'
@@ -97,12 +97,31 @@ class MockOtpRepository extends _i1.Mock implements _i4.OtpRepository {
           ),
         )),
       ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
+  @override
+  _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> getSmsOtp(
+          {required _i9.GetSmsOtpRequest? getSmsOtpRequest}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getSmsOtp,
+          [],
+          {#getSmsOtpRequest: getSmsOtpRequest},
+        ),
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>.value(
+            _FakeBaseResponse_0<_i6.GetOtpResponse>(
+          this,
+          Invocation.method(
+            #getSmsOtp,
+            [],
+            {#getSmsOtpRequest: getSmsOtpRequest},
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
 }
 
 /// A class which mocks [GetOtpClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetOtpClient extends _i1.Mock implements _i9.GetOtpClient {
+class MockGetOtpClient extends _i1.Mock implements _i10.GetOtpClient {
   MockGetOtpClient() {
     _i1.throwOnMissingStub(this);
   }
@@ -142,7 +161,7 @@ class MockGetOtpClient extends _i1.Mock implements _i9.GetOtpClient {
       ) as _i5.Future<_i3.Response<dynamic>>);
   @override
   _i5.Future<_i3.Response<dynamic>> getSmsOtp(
-          _i10.GetSmsOtpRequest? getSmsOtpRequest) =>
+          _i9.GetSmsOtpRequest? getSmsOtpRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSmsOtp,
