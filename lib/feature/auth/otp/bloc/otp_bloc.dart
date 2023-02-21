@@ -59,7 +59,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
       data.copyWith(message: 'Otp SMS is sent to your phone');
       emit(state.copyWith(
-          response: data, disableRequest: true, resetTime: _resetTime));
+        response: data,
+        disableRequest: true,
+        resetTime: _resetTime,
+      ));
 
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());

@@ -6,6 +6,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/styles/asklora_colors.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../../sign_in/bloc/sign_in_bloc.dart';
 import '../../sign_in/repository/sign_in_repository.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
@@ -49,20 +50,39 @@ class OtpScreen extends StatelessWidget {
               listeners: [
                 BlocListener<OtpBloc, OtpState>(
                     listenWhen: (previous, current) =>
-                        previous.response != current.response,
+                        previous.response.state != current.response.state,
                     listener: ((context, state) {
-                      if (state.response.state == ResponseState.success) {
-                        CustomInAppNotification.show(
-                            context, state.response.data);
+                      switch (state.response.state) {
+                        case ResponseState.error:
+                          CustomInAppNotification.show(
+                              context, state.response.message);
+                          break;
+                        case ResponseState.success:
+                          CustomInAppNotification.show(
+                              context, state.response.message);
+                          break;
+                        case ResponseState.unknown:
+                          CustomInAppNotification.show(
+                              context, state.response.message);
+                          break;
+                        default:
+                          break;
                       }
                     })),
                 BlocListener<SignInBloc, SignInState>(
                     listenWhen: (previous, current) =>
-                        previous.response != current.response,
+                        previous.response.state != current.response.state,
                     listener: ((context, state) {
-                      if (state.response.state == ResponseState.error) {
-                        CustomInAppNotification.show(
-                            context, state.response.message);
+                      switch (state.response.state) {
+                        case ResponseState.error:
+                          CustomInAppNotification.show(
+                              context, state.response.message);
+                          break;
+                        case ResponseState.success:
+                          TabsScreen.openAndRemoveAllRoute(context);
+                          break;
+                        default:
+                          break;
                       }
                     }))
               ],

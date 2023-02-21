@@ -92,9 +92,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           otp: event.otp, email: event.email, password: event.password);
       UserJourney userJourney = await _userJourneyRepository.getUserJourney();
 
-      // emit(state.copyWith(
-      //     response: BaseResponse.complete(
-      //         data.copyWith(userJourney: userJourney.value))));
+      emit(state.copyWith(
+          response: BaseResponse.complete(
+              data.copyWith(userJourney: userJourney.value))));
     } on UnauthorizedException {
       emit(state.copyWith(response: BaseResponse.error('Invalid Password')));
     } on NotFoundException {
@@ -105,7 +105,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(
           response: BaseResponse.error('User email is not verified')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error('Invalid OTP')));
     }
   }
 }

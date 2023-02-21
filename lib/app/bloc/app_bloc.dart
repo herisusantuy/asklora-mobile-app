@@ -26,6 +26,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
     bool isTokenValid = await _tokenRepository.isTokenValid();
+
     if (isTokenValid) {
       var userJourney = await _userJourneyRepository.getUserJourney();
       emit(AppState.authenticated(userJourney: userJourney));

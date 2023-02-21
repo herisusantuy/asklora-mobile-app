@@ -28,6 +28,8 @@ class OtpRepository {
     required GetSmsOtpRequest getSmsOtpRequest,
   }) async {
     var response = await _getOtpApiClient.getSmsOtp(getSmsOtpRequest);
-    return BaseResponse(data: GetOtpResponse.fromJson(response.data));
+    return BaseResponse(
+        data: GetOtpResponse.fromJson(response.data),
+        message: 'Otp SMS is sent to your phone');
   }
 }
