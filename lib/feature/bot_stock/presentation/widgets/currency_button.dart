@@ -4,10 +4,10 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/currency_enum.dart';
 
-class CurrencyButton extends StatelessWidget {
+class CurrencyDropDown extends StatelessWidget {
   final void Function(CurrencyType?) onChanged;
   final CurrencyType? initialValue;
-  const CurrencyButton({
+  const CurrencyDropDown({
     Key? key,
     required this.onChanged,
     this.initialValue,

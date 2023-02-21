@@ -122,7 +122,7 @@ class PortfolioScreen extends StatelessWidget {
                                     'Total Portfolio Value   -   ',
                                     style: AskLoraTextStyles.body4,
                                   ),
-                                  CurrencyButton(
+                                  CurrencyDropDown(
                                     initialValue: CurrencyType.hkd,
                                     onChanged: (newValue) {
                                       context.read<PortfolioBloc>().add(
