@@ -31,6 +31,7 @@ const endpointQuestion = 'question/';
 const String endpointUser = 'user';
 const String endpointAddAnswer = 'user/add-answer';
 const String endpointAddBotChoice = 'user/add-choices';
+const String endpointLinkedUser = '/linked';
 
 ///
 /// URLS

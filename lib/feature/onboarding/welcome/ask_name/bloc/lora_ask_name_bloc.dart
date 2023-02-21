@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
@@ -45,8 +46,10 @@ class LoraAskNameBloc extends Bloc<LoraAskNameEvent, LoraAskNameState> {
     try {
       var response = await _addUserNameRepository.addUserName(
           name: state.name, deviceId: deviceId!);
-      await _sharedPreference.writeData(sfKeyTempName, response.data!.name);
-      emit(state.copyWith(response: BaseResponse.complete(null)));
+      await _sharedPreference.writeData(
+          sfKeyTempName, response.data!.accountId);
+      await _sharedPreference.writeIntData(sfKeyTempId, response.data!.id);
+      emit(state.copyWith(response: BaseResponse.complete(response.data)));
     } catch (e) {
       emit(state.copyWith(
           response: BaseResponse.error('Something went wrong!')));

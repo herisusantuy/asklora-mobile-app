@@ -26,4 +26,8 @@ class PpiApiRepository {
       await PpiApiClient().post(
           endpoint: endpointAddBotChoice,
           payload: json.encode(request.toJson()));
+
+  Future<Response> linkUserId(int userId) async => await PpiApiClient().post(
+      endpoint: '$endpointUser/$userId/$endpointLinkedUser',
+      payload: json.encode(''));
 }

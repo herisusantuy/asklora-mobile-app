@@ -7,6 +7,7 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/ppi_question_repository.dart';
@@ -38,6 +39,7 @@ class PpiScreen extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (_) => UserResponseBloc(
+                sharedPreference: SharedPreference(),
                 ppiResponseRepository: PpiResponseRepository())),
         BlocProvider(
             create: (_) => QuestionBloc(

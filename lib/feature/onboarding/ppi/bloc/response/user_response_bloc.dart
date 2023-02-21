@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/triplet.dart';
+import '../../../../../core/utils/storage/shared_preference.dart';
+import '../../../../../core/utils/storage/storage_keys.dart';
 import '../../domain/ppi_user_response.dart';
 import '../../domain/ppi_user_response_request.dart';
 import '../../domain/question.dart';
@@ -14,8 +16,11 @@ part 'user_response_event.dart';
 part 'user_response_state.dart';
 
 class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
-  UserResponseBloc({required PpiResponseRepository ppiResponseRepository})
+  UserResponseBloc(
+      {required PpiResponseRepository ppiResponseRepository,
+      required SharedPreference sharedPreference})
       : _ppiResponseRepository = ppiResponseRepository,
+        _sharedPreference = sharedPreference,
         super(UserResponseState(userResponse: List.empty(growable: true))) {
     on<UserResponseEvent>((event, emit) {});
     on<SendResponse>(_onSendAnswer);
@@ -27,6 +32,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
   }
 
   final PpiResponseRepository _ppiResponseRepository;
+  final SharedPreference _sharedPreference;
 
   void _onSendAnswer(
       SendResponse event, Emitter<UserResponseState> emit) async {
@@ -96,24 +102,29 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
         responseState: ResponseState.loading,
         ppiResponseState: PpiResponseState.dispatchResponse,
       ));
-      var requests = state.getAllSelectionsInRequest();
+
+      final tempId = await _sharedPreference.readIntData(sfKeyTempId) ?? 0;
+
+      var requests = state.getAllSelectionsInRequest(tempId);
 
       debugPrint('Krishna user_response_bloc ${requests}');
 
-      var data = await _ppiResponseRepository.addBulkAnswer(requests);
-      var userSnapShot = await _ppiResponseRepository.getUserSnapShot(1);
+      await _ppiResponseRepository.addBulkAnswer(requests);
+      var userSnapShot = await _ppiResponseRepository.getUserSnapShot(tempId);
 
       debugPrint(
           'Krishna user_response_bloc sending data${userSnapShot.toString()}');
 
-      // await Future.delayed(const Duration(milliseconds: 500));
+      // await Future.delayed(const Duration(milliseconds: 2000));
 
       debugPrint('Krishna user_response_bloc done');
       emit(state.copyWith(
         responseState: ResponseState.success,
         ppiResponseState: PpiResponseState.dispatchResponse,
+        snapShot: userSnapShot,
       ));
     } catch (e) {
+      debugPrint('Krishna user_response_bloc catch ${e}');
       emit(state.copyWith(
         responseState: ResponseState.error,
         ppiResponseState: PpiResponseState.dispatchResponse,

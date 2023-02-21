@@ -5,6 +5,7 @@ enum PpiResponseState { initAddResponse, finishAddResponse, dispatchResponse }
 class UserResponseState extends Equatable {
   final ResponseState responseState;
   final PpiResponseState ppiResponseState;
+  final SnapShot? snapShot;
 
   /// Left => question id
   /// middle => Whole question object
@@ -22,6 +23,7 @@ class UserResponseState extends Equatable {
     this.userResponse,
     this.cachedSelectedChoices = const [],
     this.cachedDefaultChoices = const [],
+    this.snapShot,
   });
 
   UserResponseState copyWith({
@@ -30,6 +32,7 @@ class UserResponseState extends Equatable {
     List<Triplet<String, Question, String>>? userResponse,
     List<String>? cachedSelectedChoices,
     List<String>? cachedDefaultChoices,
+    SnapShot? snapShot,
   }) {
     return UserResponseState(
       responseState: responseState ?? this.responseState,
@@ -38,14 +41,14 @@ class UserResponseState extends Equatable {
       cachedSelectedChoices:
           cachedSelectedChoices ?? this.cachedSelectedChoices,
       cachedDefaultChoices: cachedDefaultChoices ?? this.cachedDefaultChoices,
+      snapShot: snapShot ?? this.snapShot,
     );
   }
 
-  List<PpiSelectionRequest> getAllSelectionsInRequest() =>
+  List<PpiSelectionRequest> getAllSelectionsInRequest(int id) =>
       userResponse
           ?.map((e) => PpiSelectionRequest(
-              questionId: e.left, userId: 2, answer:
-      e.right))
+              questionId: e.left, userId: id, answer: e.right))
           .toList() ??
       [];
 
@@ -53,8 +56,8 @@ class UserResponseState extends Equatable {
   List<Object> get props => [
         responseState,
         DateTime.now().millisecondsSinceEpoch,
-        cachedSelectedChoices ?? [],
-        cachedDefaultChoices ?? [],
+        cachedSelectedChoices,
+        cachedDefaultChoices,
         ppiResponseState
       ];
 }

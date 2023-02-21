@@ -8,7 +8,8 @@ enum QuestionSection {
   conscientiousness('conscientiousness'),
   neuroticism('neuroticism'),
   investmentStyle('investment_style'),
-  omniSearch('omnisearch');
+  omniSearch('omnisearch'),
+  extrovert('extrovert');
 
   final String value;
 
@@ -76,7 +77,8 @@ class Fixture {
       }
       if (element.section == QuestionSection.openness.value ||
           element.section == QuestionSection.conscientiousness.value ||
-          element.section == QuestionSection.neuroticism.value) {
+          element.section == QuestionSection.neuroticism.value ||
+          element.section == QuestionSection.extrovert.value) {
         setPersonalisedQuestion = element;
       }
       if (element.section == QuestionSection.investmentStyle.value) {

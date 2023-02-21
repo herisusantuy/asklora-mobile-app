@@ -10,6 +10,7 @@ import '../../../../../core/presentation/navigation/custom_navigation_widget.dar
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../bloc/response/user_response_bloc.dart';
+import '../../domain/ppi_user_response.dart';
 import '../investment_style_question/investment_style_welcome_screen.dart';
 import '../ppi_result_screen.dart';
 
@@ -53,27 +54,44 @@ class PersonalisationResultEndScreen extends StatelessWidget {
         if (state.ppiResponseState == PpiResponseState.finishAddResponse) {
           context.read<UserResponseBloc>().add(SendBulkResponse());
         }
-        debugPrint(
-            'Krishna personalisation ${state.responseState} ${state.ppiResponseState}');
-        if (state.responseState == ResponseState.loading) {
-          return const SizedBox.shrink();
-        } else {
+
+        if (state.responseState == ResponseState.success &&
+            state.ppiResponseState == PpiResponseState.dispatchResponse) {
+          final scores = state.snapShot?.scores;
+
+          debugPrint('Krishna personalisation ${scores.toString()}');
           return PpiResultScreen(
-            memojiText:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel nunc, egestas pulvinar sed ac semper porta.',
-            additionalMessage:
-                '(Screen that show some kind of a result to motivate user / user feel like they get a reward after answering the ques)',
+            memojiText: 'Do you know?',
+            additionalMessage: _getMessage(scores),
             bottomButton: Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: PrimaryButton(
                 key: const Key('next_button'),
                 label: 'GOT IT',
-                onTap: () => InvestmentStyleWelcomeScreen.open(context),
+                onTap: () => SignUpScreen.open(context), /*InvestmentStyleWelcomeScreen.open(context),*/
               ),
             ),
           );
         }
+        return const SizedBox.shrink();
       }),
     );
+  }
+
+  String _getMessage(Scores? scores) {
+    const high = 9;
+    if (scores == null) {
+      return '';
+    }
+    if (scores.openness >= high && scores.neuroticism >= high) {
+      return 'You are pretty open-minded to new things!\n\nLet’s be a little bit aggressive!';
+    } else if (scores.openness >= high && scores.neuroticism < high) {
+      return 'You are one of those people who’s down for trying anything new!\n\nLet’s be more aggressive!';
+    } else if (scores.openness < high && scores.neuroticism >= high) {
+      return 'You prefer a stable and safe journey!\n\nLet’s aim to make small wins in a steady manner!';
+    } else if (scores.openness < high && scores.neuroticism < high) {
+      return 'You prefer a stable and safe journey!\n\nLet’s try a more balanced strategy!';
+    }
+    return '';
   }
 }

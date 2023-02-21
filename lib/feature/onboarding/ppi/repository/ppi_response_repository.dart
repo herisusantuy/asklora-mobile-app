@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+
 import '../domain/ppi_api_repository.dart';
 import '../domain/ppi_user_response.dart';
 import '../domain/ppi_user_response_request.dart';
@@ -22,9 +25,6 @@ class PpiResponseRepository {
 
     var ppiUserResponse = PpiUserResponse.fromJson(response.data);
 
-    botRecommendationRepository.recommendedBots =
-        ppiUserResponse.snapshot?.botRecommended ?? [];
-
     return ppiUserResponse;
   }
 
@@ -33,19 +33,16 @@ class PpiResponseRepository {
     var response =
         await _ppiApiRepository.postBulkAnswer(ppiUserResponseRequest);
 
-    var ppiUserResponse = PpiUserResponse.fromJson(response.data);
-
-    botRecommendationRepository.recommendedBots =
-        ppiUserResponse.snapshot?.botRecommended ?? [];
-
-    return ppiUserResponse;
+    return PpiUserResponse.fromJson(response.data);
   }
 
-  Future<String> getUserSnapShot(int userId) async {
+  Future<SnapShot> getUserSnapShot(int userId) async {
     var response = await _ppiApiRepository.getUserSnapshot(userId);
+    return SnapShot.fromJson(response.data);
+  }
 
-    //var ppiUserResponse = PpiUserResponse.fromJson(response.data);
-
-    return response.toString();
+  Future<Response> linkUserId(int userId) async {
+    var response = await _ppiApiRepository.linkUserId(userId);
+    return response;
   }
 }

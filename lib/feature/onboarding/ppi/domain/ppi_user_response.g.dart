@@ -21,55 +21,69 @@ Map<String, dynamic> _$PpiUserResponseToJson(PpiUserResponse instance) =>
     };
 
 SnapShot _$SnapShotFromJson(Map<String, dynamic> json) => SnapShot(
-      (json['answers'] as List<dynamic>?)
-          ?.map((e) => Answer.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['bot_recommended'] as List<dynamic>?)
-          ?.map((e) => RecommendedBot.fromJson(e as Map<String, dynamic>))
+      json['id'] as int,
+      json['name'] as String,
+      json['account_id'] as String,
+      json['device_id'] as String,
+      json['created'] as String,
+      json['updated'] as String,
+      Scores.fromJson(json['scores'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SnapShotToJson(SnapShot instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'account_id': instance.accountId,
+      'device_id': instance.deviceId,
+      'created': instance.created,
+      'updated': instance.updated,
+      'scores': instance.scores,
+    };
+
+Answer _$AnswerFromJson(Map<String, dynamic> json) => Answer(
+      id: json['id'] as int,
+      name: json['name'] as String?,
+      score: json['score'] as String?,
+      answerType: json['answer_type'] as String?,
+      answer: json['answer'] as String?,
+    );
+
+Map<String, dynamic> _$AnswerToJson(Answer instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'score': instance.score,
+      'answer_type': instance.answerType,
+      'answer': instance.answer,
+    };
+
+Scores _$ScoresFromJson(Map<String, dynamic> json) => Scores(
+      (json['answers'] as List<dynamic>)
+          .map((e) => Answer.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['conscientiousness'] as int,
-      json['email'] as String,
+      (json['extrovert'] as num).toDouble(),
+      (json['objective'] as num).toDouble(),
       json['investment_style'] as int,
       (json['max_risk_score'] as num).toDouble(),
-      json['name'] as String,
       json['neuroticism'] as int,
       json['openness'] as int,
       json['privacy'] as int,
-      json['stocks'] as List<dynamic>?,
       (json['suitability'] as num).toDouble(),
       json['current_question_id'] as String,
     );
 
-Map<String, dynamic> _$SnapShotToJson(SnapShot instance) => <String, dynamic>{
+Map<String, dynamic> _$ScoresToJson(Scores instance) => <String, dynamic>{
       'answers': instance.answers,
-      'bot_recommended': instance.botRecommended,
       'conscientiousness': instance.conscientiousness,
-      'email': instance.email,
+      'extrovert': instance.extrovert,
+      'objective': instance.objective,
       'investment_style': instance.investmentStyle,
       'max_risk_score': instance.maxRiskScore,
-      'name': instance.name,
       'neuroticism': instance.neuroticism,
       'openness': instance.openness,
       'privacy': instance.privacy,
-      'stocks': instance.stocks,
       'suitability': instance.suitability,
       'current_question_id': instance.currentQuestionId,
-    };
-
-Answer _$AnswerFromJson(Map<String, dynamic> json) => Answer(
-      json['created'] as String,
-      json['points'] as String,
-      json['question_id'] as String,
-      json['section'] as String,
-      json['types'] as String,
-    );
-
-Map<String, dynamic> _$AnswerToJson(Answer instance) => <String, dynamic>{
-      'created': instance.created,
-      'points': instance.points,
-      'question_id': instance.questionId,
-      'section': instance.section,
-      'types': instance.types,
     };
 
 RecommendedBot _$RecommendedBotFromJson(Map<String, dynamic> json) =>

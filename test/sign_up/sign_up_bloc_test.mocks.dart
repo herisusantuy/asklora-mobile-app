@@ -62,6 +62,7 @@ class MockSignUpRepository extends _i1.Mock implements _i4.SignUpRepository {
   _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>> signUp({
     required String? email,
     required String? password,
+    required String? username,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -70,6 +71,7 @@ class MockSignUpRepository extends _i1.Mock implements _i4.SignUpRepository {
           {
             #email: email,
             #password: password,
+            #username: username,
           },
         ),
         returnValue: _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>>.value(
@@ -81,6 +83,7 @@ class MockSignUpRepository extends _i1.Mock implements _i4.SignUpRepository {
             {
               #email: email,
               #password: password,
+              #username: username,
             },
           ),
         )),
