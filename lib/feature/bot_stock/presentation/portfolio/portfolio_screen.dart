@@ -21,7 +21,7 @@ import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dar
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../utils/bot_stock_utils.dart';
-import '../widgets/currency_button.dart';
+import '../widgets/currency_dropdown.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
@@ -122,7 +122,7 @@ class PortfolioScreen extends StatelessWidget {
                                     'Total Portfolio Value   -   ',
                                     style: AskLoraTextStyles.body4,
                                   ),
-                                  CurrencyDropDown(
+                                  CurrencyDropdown(
                                     initialValue: CurrencyType.hkd,
                                     onChanged: (newValue) {
                                       context.read<PortfolioBloc>().add(
