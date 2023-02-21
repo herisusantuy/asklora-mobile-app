@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../bloc/bot_stock_bloc.dart';
@@ -43,6 +47,9 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BotType botType = BotType.findByString(recommendedBot.botType);
+    final Pair<Widget, Widget> portfolioDetailProps =
+        _getPortfolioDetailProps(context);
+
     return MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -262,27 +269,56 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                               'Tesla, Inc. designs, develops, manufactures, leases, and sells electric vehicles, and energy generation and storage systems in the United States, China, and internationally. The company operates in two segments, Automotive, and Energy Generation and Storage. ',
                               style: AskLoraTextStyles.body1
                                   .copyWith(color: AskLoraColors.charcoal),
-                            )
+                            ),
                           ],
                         ),
+                        portfolioDetailProps.left,
                       ],
                     ),
                   ),
                 ],
               ),
-              bottomButton: Padding(
-                padding: AppValues.screenHorizontalPadding
-                    .copyWith(top: 36, bottom: 30),
-                child: Builder(
-                  builder: (context) => PrimaryButton(
-                    buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-                    label: 'END BOTSTOCK',
-                    onTap: () => BotStockBottomSheet.endBotStockConfirmation(
-                        context, recommendedBot),
-                  ),
-                ),
-              )),
+              bottomButton: portfolioDetailProps.right),
         ));
+  }
+
+  Pair<Widget, Widget> _getPortfolioDetailProps(BuildContext context) {
+    if (UserJourney.compareUserJourney(
+        source: context.read<AppBloc>().state.userJourney,
+        target: UserJourney.deposit)) {
+      return Pair(
+          const SizedBox.shrink(),
+          Padding(
+            padding:
+                AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
+            child: Builder(
+              builder: (context) => PrimaryButton(
+                buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+                label: 'END BOTSTOCK',
+                onTap: () => BotStockBottomSheet.endBotStockConfirmation(
+                    context, recommendedBot),
+              ),
+            ),
+          ));
+    } else {
+      return Pair(
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: LoraPopUpMessage(
+              backgroundColor: AskLoraColors.charcoal,
+              title: 'Take the next step towards gift redemption!',
+              titleColor: AskLoraColors.white,
+              subTitle: 'The secret of getting ahead is getting started.',
+              subTitleColor: AskLoraColors.white,
+              buttonLabel: 'COMPLETE MILESTONE',
+              onPrimaryButtonTap: () => DepositWelcomeScreen.open(
+                  context: context, depositType: DepositType.firstTime),
+              buttonPrimaryType: ButtonPrimaryType.solidGreen,
+              bottomText: 'Next Step: Pay deposit',
+            ),
+          ),
+          const SizedBox.shrink());
+    }
   }
 
   static void open(

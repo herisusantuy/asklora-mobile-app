@@ -34,7 +34,7 @@ class KycResultScreen extends StatelessWidget {
                           'Your investment account application is under review!',
                       statusType: StatusType.success,
                       subTitle:
-                          'You will be informed when your application is approved. Please remember to collect your gift.',
+                          'You will be informed when your application is approved.\n\nPlease remember to collect your gift.',
                     ),
                   ),
                   _bottomButton(context)
@@ -50,7 +50,7 @@ class KycResultScreen extends StatelessWidget {
   Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => GiftBotStockWelcomeScreen.open(context),
         secondaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(context),
-        primaryButtonLabel: 'GET FREE AI TRADE',
+        primaryButtonLabel: 'GET FREE HKD500 GIFT BOTSTOCK',
         secondaryButtonLabel: 'MAYBE LATER',
       );
 }

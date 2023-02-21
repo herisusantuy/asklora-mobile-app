@@ -43,7 +43,8 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                       const PageChanged(
                           QuestionPageStep.investmentStyleResultEnd));
 
-                  debugPrint('Krishna investment_question_screen OnNextResultEndScreen');
+                  debugPrint(
+                      'Krishna investment_question_screen OnNextResultEndScreen');
                   // context.read<UserResponseBloc>().add(SendBulkResponse());
                 } else if (state is OnPreviousPage) {
                   context

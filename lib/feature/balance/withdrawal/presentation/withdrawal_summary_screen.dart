@@ -72,51 +72,20 @@ class WithdrawalSummaryScreen extends StatelessWidget {
               ),
               _textInfo(
                   title: 'WITHDRAWAL AMOUNT',
-                  subTitle: 'USD $_withdrawalAmount'),
+                  subTitle: 'HKD $_withdrawalAmount'),
               const SizedBox(
                 height: 24,
               ),
-              _textInfo(title: 'TRANSACTION FEE', subTitle: 'USD -10'),
+              _textInfo(title: 'TRANSACTION FEE', subTitle: 'HKD -80'),
               const Divider(
                 thickness: 2,
                 color: AskLoraColors.charcoal,
                 height: 38,
               ),
-              _textInfo(title: 'TOTAL AMOUNT', subTitle: 'USD $_totalAmount'),
+              _textInfo(title: 'TOTAL AMOUNT', subTitle: 'HKD $_totalAmount'),
               const SizedBox(
                 height: 24,
               ),
-              RoundColoredBox(
-                  radius: 8,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
-                  content: Row(
-                    children: [
-                      getSvgIcon('icon_exchange_rate'),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomTextNew(
-                            'Exchange Rate USD to HKD : 7.85',
-                            style: AskLoraTextStyles.body3
-                                .copyWith(color: AskLoraColors.darkGray),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          CustomTextNew(
-                            'Estimated HKD : 3100',
-                            style: AskLoraTextStyles.body3
-                                .copyWith(color: AskLoraColors.darkGray),
-                          )
-                        ],
-                      ))
-                    ],
-                  ))
             ],
           ),
           bottomButton: _bottomButton(context),
@@ -125,7 +94,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
     );
   }
 
-  String get _totalAmount => (withdrawalAmount - 10).convertToCurrencyDecimal();
+  String get _totalAmount => (withdrawalAmount - 80).convertToCurrencyDecimal();
 
   String get _withdrawalAmount => withdrawalAmount.convertToCurrencyDecimal();
 

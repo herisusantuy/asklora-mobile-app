@@ -6,7 +6,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
-import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';
@@ -78,11 +77,7 @@ class App extends StatelessWidget {
       case AppStatus.authenticated:
         return const TabsScreen();
       case AppStatus.unauthenticated:
-        if (state.userJourney == UserJourney.privacy) {
-          return const CarouselScreen();
-        } else {
-          return const TabsScreen();
-        }
+        return const CarouselScreen();
       case AppStatus.unknown:
         return const SizedBox();
     }

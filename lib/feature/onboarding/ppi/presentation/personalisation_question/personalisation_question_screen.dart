@@ -53,12 +53,10 @@ class PersonalisationQuestionScreen extends StatelessWidget {
               //     'Krishna personalisation_question_screen OnNextResultEndScreen');
               // CustomLoadingOverlay.show(context);
               // context.read<UserResponseBloc>().add(SendBulkResponse());
-              context
-                  .read<NavigationBloc<QuestionPageStep>>()
-                  .add(const PageChanged(
-                      QuestionPageStep.personalisationResultEnd));
+              context.read<NavigationBloc<QuestionPageStep>>().add(
+                  const PageChanged(QuestionPageStep.personalisationResultEnd));
 
-             /* context.read<UserResponseBloc>().stream.listen((event) {
+              /* context.read<UserResponseBloc>().stream.listen((event) {
                 debugPrint(
                     'Krishna from personalisation_question_screen ppiResponseState ${event.ppiResponseState} responseState ${event.responseState}');
                 if (event.ppiResponseState ==
