@@ -6,7 +6,7 @@ class BotStockState extends Equatable {
           const BaseResponse(state: ResponseState.loading),
       this.tradeBotStockResponse = const BaseResponse(),
       this.endBotStockResponse = const BaseResponse(),
-        this.rolloverBotStockResponse = const BaseResponse(),
+      this.rolloverBotStockResponse = const BaseResponse(),
       this.chartDataResponse = const BaseResponse(),
       this.faqActiveIndex,
       this.botStockTradeAmount = 0});
@@ -46,9 +46,10 @@ class BotStockState extends Equatable {
       botRecommendationResponse:
           botRecommendationResponse ?? this.botRecommendationResponse,
       tradeBotStockResponse:
-      tradeBotStockResponse ?? this.tradeBotStockResponse,
+          tradeBotStockResponse ?? this.tradeBotStockResponse,
       endBotStockResponse: endBotStockResponse ?? this.endBotStockResponse,
-      rolloverBotStockResponse: rolloverBotStockResponse ?? this.rolloverBotStockResponse,
+      rolloverBotStockResponse:
+          rolloverBotStockResponse ?? this.rolloverBotStockResponse,
       chartDataResponse: chartDataResponse ?? this.chartDataResponse,
       faqActiveIndex: faqActiveIndex,
       botStockTradeAmount: botStockTradeAmount ?? this.botStockTradeAmount,

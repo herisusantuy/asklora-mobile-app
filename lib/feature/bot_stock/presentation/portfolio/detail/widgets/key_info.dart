@@ -40,7 +40,8 @@ class KeyInfo extends StatelessWidget {
           ColumnText(
               title: 'Botstock Status',
               subTitle:
-                  BotPortfolioStatus.findByString(recommendedBot.status??'').name),
+                  BotPortfolioStatus.findByString(recommendedBot.status ?? '')
+                      .name),
           const SizedBox(
             height: 40,
           ),

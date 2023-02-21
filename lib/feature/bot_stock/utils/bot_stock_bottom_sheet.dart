@@ -61,18 +61,18 @@ class BotStockBottomSheet {
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (_) => BotBottomSheetWidget(
-          title:
-          'Do you want to continue the Botstock and extend the investment period?\n\n 2 Weeks\n',
-          subTitle:
-          'The new expiry date is 15:30, 2023/04/12',
-          primaryButtonLabel: 'EXTEND',
-          secondaryButtonLabel: 'CANCEL',
-          onPrimaryButtonTap: () {
-            Navigator.pop(context);
-            BotStockBottomSheet.rolloverBotStockDisclosure(context, recommendedBot);
-          },
-          onSecondaryButtonTap: () => Navigator.pop(context),
-        ));
+              title:
+                  'Do you want to continue the Botstock and extend the investment period?\n\n 2 Weeks\n',
+              subTitle: 'The new expiry date is 15:30, 2023/04/12',
+              primaryButtonLabel: 'EXTEND',
+              secondaryButtonLabel: 'CANCEL',
+              onPrimaryButtonTap: () {
+                Navigator.pop(context);
+                BotStockBottomSheet.rolloverBotStockDisclosure(
+                    context, recommendedBot);
+              },
+              onSecondaryButtonTap: () => Navigator.pop(context),
+            ));
   }
 
   static rolloverBotStockDisclosure(
@@ -82,18 +82,20 @@ class BotStockBottomSheet {
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (_) => BotBottomSheetWidget(
-          title:
-          'If you extend the Botstock period, you will incur additional fees ',
-          subTitle:
-          'You will be charged HKD40 if you want to extend this Botstock. If you do not have enough funds, then your fees will be deducted when you have sufficient buying power',
-          primaryButtonLabel: 'CONFIRM',
-          secondaryButtonLabel: 'BACK',
-          onPrimaryButtonTap: () {
-            Navigator.pop(context);
-            context.read<BotStockBloc>().add(RolloverBotStock(recommendedBot));
-          },
-          onSecondaryButtonTap: () => Navigator.pop(context),
-        ));
+              title:
+                  'If you extend the Botstock period, you will incur additional fees ',
+              subTitle:
+                  'You will be charged HKD40 if you want to extend this Botstock. If you do not have enough funds, then your fees will be deducted when you have sufficient buying power',
+              primaryButtonLabel: 'CONFIRM',
+              secondaryButtonLabel: 'BACK',
+              onPrimaryButtonTap: () {
+                Navigator.pop(context);
+                context
+                    .read<BotStockBloc>()
+                    .add(RolloverBotStock(recommendedBot));
+              },
+              onSecondaryButtonTap: () => Navigator.pop(context),
+            ));
   }
 
   static amountBotStockForm(
