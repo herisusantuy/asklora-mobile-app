@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uni_links/uni_links.dart';
 
@@ -19,7 +18,8 @@ class EmailActivationBloc
   EmailActivationBloc(this._signUpRepository, this._tokenRepository)
       : super(const EmailActivationState()) {
     on<ResendEmailActivationLink>(_onResendEmailActivationLink);
-    _incomingLinkHandler();
+    on<StartListenOnDeeplink>(_onStartListenOnDeeplink);
+    on<DeepLinkValidateSuccess>(_onDeepLinkValidateSuccess);
   }
 
   final SignUpRepository _signUpRepository;
@@ -51,23 +51,38 @@ class EmailActivationBloc
     return super.close();
   }
 
-  void _incomingLinkHandler() async {
+  void _onStartListenOnDeeplink(
+    StartListenOnDeeplink event,
+    Emitter<EmailActivationState> emit,
+  ) async {
     try {
       _streamSubscription = uriLinkStream.listen((Uri? uri) {
-        if (uri != null && uri.queryParameters['state'] == 'success') {
-          if (uri.queryParameters['token'] != null) {
-            _tokenRepository.saveSignUpToken(uri.queryParameters['token']!);
-            emit(state.copyWith(deeplinkStatus: DeeplinkStatus.success));
-          }
+        if (uri != null &&
+            uri.queryParameters['state'] == 'ok' &&
+            uri.queryParameters['access'] != null &&
+            uri.queryParameters['refresh'] != null) {
+          add(DeepLinkValidateSuccess(uri));
+        } else {
+          add(const DeepLinkValidateFailed());
         }
-        emit(state.copyWith(deeplinkStatus: DeeplinkStatus.failed));
       }, onError: (Object err) {
-        emit(state.copyWith(deeplinkStatus: DeeplinkStatus.failed));
+        add(const DeepLinkValidateFailed());
       });
-    } on PlatformException {
-      emit(state.copyWith(deeplinkStatus: DeeplinkStatus.failed));
-    } on FormatException catch (err) {
-      emit(state.copyWith(deeplinkStatus: DeeplinkStatus.failed));
+    } catch (e) {
+      add(const DeepLinkValidateFailed());
     }
+  }
+
+  void _onDeepLinkValidateSuccess(
+    DeepLinkValidateSuccess event,
+    Emitter<EmailActivationState> emit,
+  ) async {
+    emit(state.copyWith(response: BaseResponse.loading()));
+    await Future.delayed(const Duration(milliseconds: 1500));
+    _tokenRepository.saveAccessToken(event.uri.queryParameters['access']!);
+    _tokenRepository.saveRefreshToken(event.uri.queryParameters['refresh']!);
+    emit(state.copyWith(
+        response: const BaseResponse(),
+        deeplinkStatus: DeeplinkStatus.success));
   }
 }

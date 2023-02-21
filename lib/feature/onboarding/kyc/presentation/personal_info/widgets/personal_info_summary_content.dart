@@ -73,8 +73,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
               title: 'Phone', subTitle: basicInformationState.phoneNumber),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'HKID Number',
-              subTitle: countryOfTaxResidenceState.tinNumber),
+              title: 'HKID Number', subTitle: basicInformationState.idNumber),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Address', subTitle: addressProofState.addressLine1),

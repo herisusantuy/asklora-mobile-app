@@ -12,3 +12,26 @@ class ResendEmailActivationLink extends EmailActivationEvent {
   @override
   List<Object> get props => [email];
 }
+
+class StartListenOnDeeplink extends EmailActivationEvent {
+  const StartListenOnDeeplink();
+
+  @override
+  List<Object> get props => [];
+}
+
+class DeepLinkValidateSuccess extends EmailActivationEvent {
+  final Uri uri;
+
+  const DeepLinkValidateSuccess(this.uri);
+
+  @override
+  List<Object> get props => [uri];
+}
+
+class DeepLinkValidateFailed extends EmailActivationEvent {
+  const DeepLinkValidateFailed();
+
+  @override
+  List<Object> get props => [];
+}

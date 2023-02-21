@@ -8,11 +8,11 @@ part of 'user_journey_response.dart';
 
 UserJourneyResponse _$UserJourneyResponseFromJson(Map<String, dynamic> json) =>
     UserJourneyResponse(
-      json['uid'] as String,
-      json['updated'] as String,
-      json['user_journey'] as String,
+      json['uid'] as String?,
+      json['updated'] as String?,
+      json['user_journey'] as String?,
       json['data'] as String?,
-      json['user'] as int,
+      json['user'] as int?,
       json['detail'] as String?,
     );
 

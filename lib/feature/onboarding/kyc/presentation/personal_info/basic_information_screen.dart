@@ -92,13 +92,13 @@ class BasicInformationScreen extends StatelessWidget {
         buildWhen: ((previous, current) =>
             previous.dateOfBirth != current.dateOfBirth),
         builder: (context, state) {
-          final DateTime dateTimeNow = DateTime.now();
+          DateTime dateOfBirth = DateTime.parse(state.dateOfBirth);
           return CustomDatePicker(
             key: const Key('date_of_birth'),
             label: 'Date of Birth',
-            selectedDate: DateTime.parse(state.dateOfBirth),
-            initialDateTime: dateTimeNow,
-            maximumDate: dateTimeNow,
+            selectedDate: dateOfBirth,
+            initialDateTime: dateOfBirth,
+            maximumDate: DateTime.now(),
             onDateTimeChanged: (date) =>
                 context.read<BasicInformationBloc>().add(
                       BasicInformationDateOfBirthChanged(date.toString()),

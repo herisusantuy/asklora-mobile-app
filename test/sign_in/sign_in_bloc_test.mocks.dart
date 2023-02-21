@@ -3,20 +3,25 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
-import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart'
-    as _i7;
-import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_request.dart'
+import 'package:asklora_mobile_app/app/bloc/app_bloc.dart' as _i9;
+import 'package:asklora_mobile_app/app/domain/user_journey_response.dart'
     as _i8;
+import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart'
+    as _i7;
+import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i3;
+import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart'
+    as _i10;
+import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_request.dart'
+    as _i11;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart'
-    as _i6;
+    as _i2;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_with_otp_request.dart'
-    as _i9;
+    as _i12;
 import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart'
-    as _i4;
-import 'package:dio/dio.dart' as _i3;
+    as _i5;
+import 'package:dio/dio.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -30,9 +35,9 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeBaseResponse_0<T> extends _i1.SmartFake
-    implements _i2.BaseResponse<T> {
-  _FakeBaseResponse_0(
+class _FakeSignInResponse_0 extends _i1.SmartFake
+    implements _i2.SignInResponse {
+  _FakeSignInResponse_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -41,8 +46,19 @@ class _FakeBaseResponse_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeResponse_1<T> extends _i1.SmartFake implements _i3.Response<T> {
-  _FakeResponse_1(
+class _FakeBaseResponse_1<T> extends _i1.SmartFake
+    implements _i3.BaseResponse<T> {
+  _FakeBaseResponse_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeResponse_2<T> extends _i1.SmartFake implements _i4.Response<T> {
+  _FakeResponse_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -54,13 +70,13 @@ class _FakeResponse_1<T> extends _i1.SmartFake implements _i3.Response<T> {
 /// A class which mocks [SignInRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInRepository extends _i1.Mock implements _i4.SignInRepository {
+class MockSignInRepository extends _i1.Mock implements _i5.SignInRepository {
   MockSignInRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.BaseResponse<_i6.SignInResponse>> signIn({
+  _i6.Future<_i2.SignInResponse> signIn({
     required String? email,
     required String? password,
   }) =>
@@ -73,8 +89,7 @@ class MockSignInRepository extends _i1.Mock implements _i4.SignInRepository {
             #password: password,
           },
         ),
-        returnValue: _i5.Future<_i2.BaseResponse<_i6.SignInResponse>>.value(
-            _FakeBaseResponse_0<_i6.SignInResponse>(
+        returnValue: _i6.Future<_i2.SignInResponse>.value(_FakeSignInResponse_0(
           this,
           Invocation.method(
             #signIn,
@@ -85,9 +100,9 @@ class MockSignInRepository extends _i1.Mock implements _i4.SignInRepository {
             },
           ),
         )),
-      ) as _i5.Future<_i2.BaseResponse<_i6.SignInResponse>>);
+      ) as _i6.Future<_i2.SignInResponse>);
   @override
-  _i5.Future<_i2.BaseResponse<_i6.SignInResponse>> signInWithOtp({
+  _i6.Future<_i2.SignInResponse> signInWithOtp({
     required String? otp,
     required String? email,
     required String? password,
@@ -102,8 +117,7 @@ class MockSignInRepository extends _i1.Mock implements _i4.SignInRepository {
             #password: password,
           },
         ),
-        returnValue: _i5.Future<_i2.BaseResponse<_i6.SignInResponse>>.value(
-            _FakeBaseResponse_0<_i6.SignInResponse>(
+        returnValue: _i6.Future<_i2.SignInResponse>.value(_FakeSignInResponse_0(
           this,
           Invocation.method(
             #signInWithOtp,
@@ -115,48 +129,95 @@ class MockSignInRepository extends _i1.Mock implements _i4.SignInRepository {
             },
           ),
         )),
-      ) as _i5.Future<_i2.BaseResponse<_i6.SignInResponse>>);
+      ) as _i6.Future<_i2.SignInResponse>);
+}
+
+/// A class which mocks [UserJourneyRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserJourneyRepository extends _i1.Mock
+    implements _i7.UserJourneyRepository {
+  MockUserJourneyRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<_i3.BaseResponse<_i8.UserJourneyResponse>> saveUserJourney({
+    required _i9.UserJourney? userJourney,
+    String? data,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveUserJourney,
+          [],
+          {
+            #userJourney: userJourney,
+            #data: data,
+          },
+        ),
+        returnValue:
+            _i6.Future<_i3.BaseResponse<_i8.UserJourneyResponse>>.value(
+                _FakeBaseResponse_1<_i8.UserJourneyResponse>(
+          this,
+          Invocation.method(
+            #saveUserJourney,
+            [],
+            {
+              #userJourney: userJourney,
+              #data: data,
+            },
+          ),
+        )),
+      ) as _i6.Future<_i3.BaseResponse<_i8.UserJourneyResponse>>);
+  @override
+  _i6.Future<_i9.UserJourney> getUserJourney() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserJourney,
+          [],
+        ),
+        returnValue: _i6.Future<_i9.UserJourney>.value(_i9.UserJourney.privacy),
+      ) as _i6.Future<_i9.UserJourney>);
 }
 
 /// A class which mocks [SignInApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInApiClient extends _i1.Mock implements _i7.SignInApiClient {
+class MockSignInApiClient extends _i1.Mock implements _i10.SignInApiClient {
   MockSignInApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i3.Response<dynamic>> signIn(_i8.SignInRequest? request) =>
+  _i6.Future<_i4.Response<dynamic>> signIn(_i11.SignInRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #signIn,
           [request],
         ),
         returnValue:
-            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
             #signIn,
             [request],
           ),
         )),
-      ) as _i5.Future<_i3.Response<dynamic>>);
+      ) as _i6.Future<_i4.Response<dynamic>>);
   @override
-  _i5.Future<_i3.Response<dynamic>> signInWithOtp(
-          _i9.SignInWithOtpRequest? request) =>
+  _i6.Future<_i4.Response<dynamic>> signInWithOtp(
+          _i12.SignInWithOtpRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #signInWithOtp,
           [request],
         ),
         returnValue:
-            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
             #signInWithOtp,
             [request],
           ),
         )),
-      ) as _i5.Future<_i3.Response<dynamic>>);
+      ) as _i6.Future<_i4.Response<dynamic>>);
 }

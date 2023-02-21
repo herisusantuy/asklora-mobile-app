@@ -115,6 +115,12 @@ class RecommendedBot {
   final double value;
 
   ///adding variables to accomodate detail bot stock
+  final String sector;
+  final String ceo;
+  final String employees;
+  final String headquarters;
+  final String funded;
+
   final double stopLossLevel;
   final double takeProfitLevel;
   final String earliestStartTime;
@@ -129,6 +135,7 @@ class RecommendedBot {
   final double minPrice;
   final double maxPrice;
   final double currentPrice;
+  final String? chartData;
 
   RecommendedBot(
     this.botId,
@@ -142,6 +149,12 @@ class RecommendedBot {
     this.suitability,
     this.companyDescription,
     this.expiredDate, {
+    this.sector = 'Consumer Cyclical',
+    this.ceo = 'Mr. Elon R. Musk',
+    this.employees = '99,290',
+    this.headquarters = 'Austin, TX',
+    this.funded = '2003',
+    this.chartData,
     this.freeBot = false,
     this.selectable = false,
     this.value = 200,

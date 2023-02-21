@@ -23,6 +23,9 @@ class SignInResponse extends Equatable {
 
   Map<String, dynamic> toJson() => _$SignInResponseToJson(this);
 
+  SignInResponse copyWith({String? userJourney}) =>
+      SignInResponse(access, refresh, userJourney: userJourney);
+
   @override
   List<Object?> get props => [access, refresh, userJourney, detail, statusCode];
 

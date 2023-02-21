@@ -14,7 +14,7 @@ class SignInRepository {
 
   SignInRepository(this._storage);
 
-  Future<BaseResponse<SignInResponse>> signIn({
+  Future<SignInResponse> signIn({
     required String email,
     required String password,
   }) async {
@@ -25,11 +25,10 @@ class SignInRepository {
       _storage.saveAccessToken(signInResponse.access!);
       _storage.saveRefreshToken(signInResponse.refresh!);
     }
-    return BaseResponse.complete(
-        signInResponse.copyWith(statusCode: response.statusCode));
+    return signInResponse.copyWith(statusCode: response.statusCode);
   }
 
-  Future<BaseResponse<SignInResponse>> signInWithOtp({
+  Future<SignInResponse> signInWithOtp({
     required String otp,
     required String email,
     required String password,
@@ -42,7 +41,6 @@ class SignInRepository {
       _storage.saveAccessToken(signInResponse.access!);
       _storage.saveRefreshToken(signInResponse.refresh!);
     }
-    return BaseResponse.complete(
-        signInResponse.copyWith(statusCode: response.statusCode));
+    return signInResponse.copyWith(statusCode: response.statusCode);
   }
 }

@@ -6,12 +6,14 @@ class PortfolioState extends Equatable {
     this.botPortfolioResponse = const BaseResponse(),
     this.chartDataResponse = const BaseResponse(),
     this.botStockFilter = BotStockFilter.all,
+    this.currency = CurrencyType.hkd,
   });
 
   final BaseResponse<PortfolioDetailResponse> portfolioDetailResponse;
   final BaseResponse<List<RecommendedBot>> botPortfolioResponse;
   final BaseResponse<List<ChartDataSet>> chartDataResponse;
   final BotStockFilter botStockFilter;
+  final CurrencyType currency;
 
   @override
   List<Object?> get props {
@@ -19,7 +21,8 @@ class PortfolioState extends Equatable {
       portfolioDetailResponse,
       botPortfolioResponse,
       chartDataResponse,
-      botStockFilter
+      botStockFilter,
+      currency,
     ];
   }
 
@@ -28,6 +31,7 @@ class PortfolioState extends Equatable {
     BaseResponse<List<RecommendedBot>>? botPortfolioResponse,
     BaseResponse<List<ChartDataSet>>? chartDataResponse,
     BotStockFilter? botStockFilter,
+    CurrencyType? currency,
   }) {
     return PortfolioState(
       portfolioDetailResponse:
@@ -35,6 +39,7 @@ class PortfolioState extends Equatable {
       botPortfolioResponse: botPortfolioResponse ?? this.botPortfolioResponse,
       chartDataResponse: chartDataResponse ?? this.chartDataResponse,
       botStockFilter: botStockFilter ?? this.botStockFilter,
+      currency: currency ?? this.currency,
     );
   }
 }
