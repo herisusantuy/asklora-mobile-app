@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
+import 'currency_enum.dart';
+
 /// General Email Regex (RFC 5322 Official Standard)
 /// https://www.emailregex.com/
 const emailPatternSource =
@@ -67,6 +69,14 @@ extension CurrencyFormat on double {
       decimalDigits: decimalDigits,
     );
     return currencyFormatter.format(this);
+  }
+
+  String toUsd() {
+    return '${CurrencyType.usd.value} ${(this * 0.13).convertToCurrencyDecimal()}';
+  }
+
+  String toHkd() {
+    return '${CurrencyType.hkd.value} ${(this * 7.85).convertToCurrencyDecimal()}';
   }
 }
 

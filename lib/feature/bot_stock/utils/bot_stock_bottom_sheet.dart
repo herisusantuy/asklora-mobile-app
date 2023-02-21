@@ -146,7 +146,7 @@ class BotStockBottomSheet {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: CustomTextNew(
-                              'USD',
+                              'HKD',
                               style: AskLoraTextStyles.h5
                                   .copyWith(color: AskLoraColors.charcoal),
                             ),
@@ -164,8 +164,8 @@ class BotStockBottomSheet {
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (context) => BotBottomSheetWidget(
-              title: 'You are running out of money! Fund your accout now.',
-              subTitle: 'The minimum investment amount is USD200 per trade.',
+              title: 'You are running out of money! Fund your account now.',
+              subTitle: 'The minimum investment amount is HKD1,500 per trade.',
               primaryButtonLabel: 'DEPOSIT',
               secondaryButtonLabel: 'NOT NOW',
               onPrimaryButtonTap: () =>

@@ -63,7 +63,7 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
                         .add(const PageChanged(LearningBotStockPageStep.trade));
                   },
                   onSecondaryButtonTap: () => Navigator.pop(context),
-                  title: 'Trade any amount above USD 200',
+                  title: 'Trade any amount above HKD1,500',
                   subTitle: 'Bot will buy fractions of a share for you',
                   primaryButtonLabel: 'SEE TRADE DEMONSTRATION',
                   secondaryButtonLabel: 'CANCEL',
