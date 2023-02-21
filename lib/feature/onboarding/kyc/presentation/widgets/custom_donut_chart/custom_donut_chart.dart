@@ -16,32 +16,34 @@ class CustomDonutChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 16 / 8,
+    return SizedBox(
+      width: double.infinity,
+      height: 150,
       child: Stack(
+        alignment: Alignment.center,
         children: [
           PieChart(
             PieChartData(
               sectionsSpace: 0,
               centerSpaceRadius: 40,
               startDegreeOffset: -90,
-              sections: sections,
-              borderData: FlBorderData(
-                show: true,
-                border: Border.all(
-                  color: AskLoraColors.black,
-                  strokeAlign: 20,
-                  width: 2,
-                ),
-              ),
+              sections: sections!.isNotEmpty && total != 0
+                  ? sections
+                  : [
+                      PieChartSectionData(
+                        color: Colors.white,
+                        radius: 25,
+                        borderSide: const BorderSide(
+                          color: Colors.black54,
+                        ),
+                      )
+                    ],
             ),
           ),
-          Align(
-              alignment: Alignment.center,
-              child: CustomTextNew(
-                '$total %',
-                style: AskLoraTextStyles.subtitle2,
-              )),
+          CustomTextNew(
+            '$total %',
+            style: AskLoraTextStyles.subtitle2,
+          ),
         ],
       ),
     );
