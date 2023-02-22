@@ -66,6 +66,17 @@ void main() async {
               const PortfolioState(currency: CurrencyType.usd),
             });
 
+    blocTest<PortfolioBloc, PortfolioState>('change currency from USD to HKD',
+        build: () => portfolioBloc,
+        act: (bloc) => {
+              bloc.add(const CurrencyChanged(CurrencyType.usd)),
+              bloc.add(const CurrencyChanged(CurrencyType.hkd)),
+            },
+        expect: () => {
+              const PortfolioState(currency: CurrencyType.usd),
+              const PortfolioState(currency: CurrencyType.hkd),
+            });
+
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.complete` WHEN '
         'fetching bot portfolio',
