@@ -4,12 +4,12 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/endpoints.dart';
-import 'reset_password_request.dart';
+import 'forgot_password_request.dart';
 
-class ResetPasswordApiClient {
-  Future<Response> resetPassword(ResetPasswordRequest request) async {
+class ForgotPasswordApiClient {
+  Future<Response> forgotPassword(ForgotPasswordRequest request) async {
     var response = await AskloraApiClient().post(
-      endpoint: endpointResetPassword,
+      endpoint: endpointForgotPassword,
       payload: json.encode(
         request.toJson(),
       ),

@@ -1,7 +1,7 @@
-part of 'reset_password_bloc.dart';
+part of 'forgot_password_bloc.dart';
 
-class ResetPasswordState extends Equatable {
-  const ResetPasswordState({
+class ForgotPasswordState extends Equatable {
+  const ForgotPasswordState({
     this.response = const BaseResponse(),
     this.email = '',
     this.isEmailValid = false,
@@ -13,13 +13,13 @@ class ResetPasswordState extends Equatable {
   final bool isEmailValid;
   final String emailErrorText;
 
-  ResetPasswordState copyWith({
+  ForgotPasswordState copyWith({
     BaseResponse? response,
     String? email,
     bool? isEmailValid,
     String? emailErrorText,
   }) {
-    return ResetPasswordState(
+    return ForgotPasswordState(
       response: response ?? this.response,
       email: email ?? this.email,
       isEmailValid: isEmailValid ?? this.isEmailValid,

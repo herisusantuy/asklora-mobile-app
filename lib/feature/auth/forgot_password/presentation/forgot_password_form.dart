@@ -5,27 +5,27 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/custom_text_input.dart';
-import '../bloc/reset_password_bloc.dart';
-import 'reset_password_success_screen.dart';
+import '../bloc/forgot_password_bloc.dart';
+import 'forgot_password_success_screen.dart';
 
-class ResetPasswordForm extends StatelessWidget {
-  const ResetPasswordForm({Key? key}) : super(key: key);
+class ForgotPasswordForm extends StatelessWidget {
+  const ForgotPasswordForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ResetPasswordBloc, ResetPasswordState>(
+    return BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
       listener: (context, state) {
         switch (state.response.state) {
           case ResponseState.error:
             context
-                .read<ResetPasswordBloc>()
-                .add(ResetPasswordEmailChanged(state.email));
+                .read<ForgotPasswordBloc>()
+                .add(ForgotPasswordEmailChanged(state.email));
             CustomSnackBar(context)
                 .setMessage(state.response.message)
                 .showError();
             break;
           case ResponseState.success:
-            ResetPasswordSuccessScreen.open(context);
+            ForgotPasswordSuccessScreen.open(context);
             break;
           default:
             break;
@@ -38,7 +38,7 @@ class ResetPasswordForm extends StatelessWidget {
           children: [
             _emailInput(),
             _padding(),
-            _resetPasswordButton(),
+            _forgotPasswordButton(),
           ],
         ),
       ),
@@ -46,32 +46,32 @@ class ResetPasswordForm extends StatelessWidget {
   }
 
   BlocBuilder _emailInput() {
-    return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
         buildWhen: ((previous, current) => previous.email != current.email),
         builder: (context, state) {
           return CustomTextInput(
-            key: const Key('reset_password_email_input'),
+            key: const Key('forgot_password_email_input'),
             textInputType: TextInputType.emailAddress,
             labelText: 'Email',
             hintText: 'Email',
             errorText: state.emailErrorText,
             onChanged: (email) => context
-                .read<ResetPasswordBloc>()
-                .add(ResetPasswordEmailChanged(email)),
+                .read<ForgotPasswordBloc>()
+                .add(ForgotPasswordEmailChanged(email)),
           );
         });
   }
 
-  Widget _resetPasswordButton() {
-    return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+  Widget _forgotPasswordButton() {
+    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
       builder: ((context, state) {
         return CustomTextButton(
-          key: const Key('reset_password_submit_button'),
+          key: const Key('forgot_password_submit_button'),
           buttonText: 'Submit',
           isLoading: state.response.state == ResponseState.loading,
           disable: !state.isEmailValid,
-          onClick: () => context.read<ResetPasswordBloc>().add(
-                const ResetPasswordSubmitted(),
+          onClick: () => context.read<ForgotPasswordBloc>().add(
+                const ForgotPasswordSubmitted(),
               ),
         );
       }),

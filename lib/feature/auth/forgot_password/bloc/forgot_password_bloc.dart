@@ -4,25 +4,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
-import '../repository/reset_password_repository.dart';
+import '../repository/forgot_password_repository.dart';
 
-part 'reset_password_event.dart';
+part 'forgot_password_event.dart';
 
-part 'reset_password_state.dart';
+part 'forgot_password_state.dart';
 
-class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
-  ResetPasswordBloc({required ResetPasswordRepository resetPasswordRepository})
-      : _resetPasswordRepository = resetPasswordRepository,
-        super(const ResetPasswordState()) {
-    on<ResetPasswordEmailChanged>(_onEmailChanged);
-    on<ResetPasswordSubmitted>(_onResetPasswordSubmitted);
+class ForgotPasswordBloc
+    extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
+  ForgotPasswordBloc(
+      {required ForgotPasswordRepository forgotPasswordRepository})
+      : _forgotPasswordRepository = forgotPasswordRepository,
+        super(const ForgotPasswordState()) {
+    on<ForgotPasswordEmailChanged>(_onEmailChanged);
+    on<ForgotPasswordSubmitted>(_onForgotPasswordSubmitted);
   }
 
-  final ResetPasswordRepository _resetPasswordRepository;
+  final ForgotPasswordRepository _forgotPasswordRepository;
 
   void _onEmailChanged(
-    ResetPasswordEmailChanged event,
-    Emitter<ResetPasswordState> emit,
+    ForgotPasswordEmailChanged event,
+    Emitter<ForgotPasswordState> emit,
   ) {
     emit(
       state.copyWith(
@@ -35,12 +37,12 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     );
   }
 
-  void _onResetPasswordSubmitted(
-      ResetPasswordSubmitted event, Emitter<ResetPasswordState> emit) async {
+  void _onForgotPasswordSubmitted(
+      ForgotPasswordSubmitted event, Emitter<ForgotPasswordState> emit) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data =
-          await _resetPasswordRepository.resetPassword(email: state.email);
+          await _forgotPasswordRepository.forgotPassword(email: state.email);
       data.copyWith(message: 'Successfully sent new password!');
 
       emit(state.copyWith(response: data));
