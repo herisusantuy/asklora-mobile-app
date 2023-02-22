@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
-import '../../../../core/presentation/custom_text_button.dart';
-import '../../../../core/presentation/custom_text_input.dart';
+import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../bloc/forgot_password_bloc.dart';
 import 'forgot_password_success_screen.dart';
 
@@ -14,71 +17,109 @@ class ForgotPasswordForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
+      listenWhen: (previous, current) =>
+          previous.response.state != current.response.state,
       listener: (context, state) {
         switch (state.response.state) {
+          case ResponseState.loading:
+            CustomLoadingOverlay.show(context);
+            break;
+          case ResponseState.success:
+            CustomLoadingOverlay.dismiss();
+            CustomInAppNotification.show(context, state.response.data.detail);
+            ForgotPasswordSuccessScreen.open(context);
+            break;
           case ResponseState.error:
             context
                 .read<ForgotPasswordBloc>()
                 .add(ForgotPasswordEmailChanged(state.email));
+            CustomLoadingOverlay.dismiss();
             CustomSnackBar(context)
                 .setMessage(state.response.message)
                 .showError();
-            break;
-          case ResponseState.success:
-            ForgotPasswordSuccessScreen.open(context);
             break;
           default:
             break;
         }
       },
-      child: Align(
-        alignment: const Alignment(0, -1 / 3),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _emailInput(),
-            _padding(),
-            _forgotPasswordButton(),
-          ],
-        ),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    children: [
+                      _padding(),
+                      _padding(),
+                      const CustomTextNew(
+                        'Please enter your email. Instructions will be sent to reset your password.',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      _emailInput(),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const CustomTextNew(
+                        'Can’t remember your email address?\nEmail us at cs@asklora.ai',
+                        textAlign: TextAlign.center,
+                      ),
+                      _padding(),
+                      _forgotPasswordButton(),
+                      _padding(),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  BlocBuilder _emailInput() {
-    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-        buildWhen: ((previous, current) => previous.email != current.email),
-        builder: (context, state) {
-          return CustomTextInput(
-            key: const Key('forgot_password_email_input'),
-            textInputType: TextInputType.emailAddress,
-            labelText: 'Email',
-            hintText: 'Email',
-            errorText: state.emailErrorText,
-            onChanged: (email) => context
-                .read<ForgotPasswordBloc>()
-                .add(ForgotPasswordEmailChanged(email)),
-          );
-        });
-  }
-
-  Widget _forgotPasswordButton() {
-    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-      builder: ((context, state) {
-        return CustomTextButton(
-          key: const Key('forgot_password_submit_button'),
-          buttonText: 'Submit',
-          isLoading: state.response.state == ResponseState.loading,
-          disable: !state.isEmailValid,
-          onClick: () => context.read<ForgotPasswordBloc>().add(
-                const ForgotPasswordSubmitted(),
-              ),
-        );
-      }),
+  Widget _emailInput() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 32.0),
+      child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+          buildWhen: ((previous, current) => previous.email != current.email),
+          builder: (context, state) {
+            return MasterTextField(
+                key: const Key('forgot_password_email_input'),
+                textInputAction: TextInputAction.next,
+                textInputType: TextInputType.emailAddress,
+                maxLine: 1,
+                labelText: 'Email',
+                hintText: 'Email',
+                errorText: state.emailErrorText,
+                onChanged: (email) => context
+                    .read<ForgotPasswordBloc>()
+                    .add(ForgotPasswordEmailChanged(email)));
+          }),
     );
   }
 
+  Widget _forgotPasswordButton() =>
+      BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+        builder: (context, state) {
+          return PrimaryButton(
+              key: const Key('forgot_password_submit_button'),
+              label: 'SUBMIT',
+              disabled: !state.isEmailValid,
+              onTap: () => context
+                  .read<ForgotPasswordBloc>()
+                  .add(const ForgotPasswordSubmitted()));
+        },
+      );
+
   Padding _padding() => const Padding(
-        padding: EdgeInsets.only(top: 18),
+        padding: EdgeInsets.symmetric(vertical: 15),
       );
 }

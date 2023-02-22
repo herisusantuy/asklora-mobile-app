@@ -43,11 +43,16 @@ class ForgotPasswordBloc
       emit(state.copyWith(response: BaseResponse.loading()));
       var data =
           await _forgotPasswordRepository.forgotPassword(email: state.email);
-      data.copyWith(message: 'Successfully sent new password!');
+      data.copyWith(message: 'Link for Password reset is sent to email.');
 
       emit(state.copyWith(response: data));
     } on BadRequestException {
-      emit(state.copyWith(response: BaseResponse.error('Bad request.')));
+      emit(state.copyWith(
+          response: BaseResponse.error('Your account is not active yet.')));
+    } on NotFoundException {
+      emit(state.copyWith(
+          response:
+              BaseResponse.error('User does not exist with the given email.')));
     } catch (e) {
       state.copyWith(response: BaseResponse.error(e.toString()));
     }
