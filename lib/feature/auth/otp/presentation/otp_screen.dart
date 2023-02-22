@@ -52,21 +52,9 @@ class OtpScreen extends StatelessWidget {
                     listenWhen: (previous, current) =>
                         previous.response.state != current.response.state,
                     listener: ((context, state) {
-                      switch (state.response.state) {
-                        case ResponseState.error:
-                          CustomInAppNotification.show(
-                              context, state.response.message);
-                          break;
-                        case ResponseState.success:
-                          CustomInAppNotification.show(
-                              context, state.response.message);
-                          break;
-                        case ResponseState.unknown:
-                          CustomInAppNotification.show(
-                              context, state.response.message);
-                          break;
-                        default:
-                          break;
+                      if (state.response.state != ResponseState.loading) {
+                        CustomInAppNotification.show(
+                            context, state.response.message);
                       }
                     })),
                 BlocListener<SignInBloc, SignInState>(
