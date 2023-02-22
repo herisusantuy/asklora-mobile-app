@@ -76,6 +76,12 @@ class BotStockRepository {
     return BaseResponse.complete(true);
   }
 
+  Future<BaseResponse<bool>> rolloverBotStock(
+      RecommendedBot recommendedBot) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return BaseResponse.complete(true);
+  }
+
   Future<BaseResponse<bool>> endBotStock(RecommendedBot recommendedBot) async {
     await Future.delayed(const Duration(seconds: 1));
     return BaseResponse.complete(true);

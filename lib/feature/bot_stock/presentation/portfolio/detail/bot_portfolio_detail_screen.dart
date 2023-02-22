@@ -28,6 +28,7 @@ import '../../widgets/pair_column_text.dart';
 import '../../widgets/custom_detail_expansion_tile.dart';
 import '../bloc/portfolio_bloc.dart';
 import '../repository/portfolio_repository.dart';
+import '../utils/portfolio_enum.dart';
 
 part 'widgets/key_info.dart';
 
@@ -41,12 +42,15 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     height: 16,
   );
 
-  const BotPortfolioDetailScreen({required this.recommendedBot, Key? key})
-      : super(key: key);
+  late final BotType botType;
+
+  BotPortfolioDetailScreen({required this.recommendedBot, Key? key})
+      : super(key: key) {
+    botType = BotType.findByString(recommendedBot.botType);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final BotType botType = BotType.findByString(recommendedBot.botType);
     final Pair<Widget, Widget> portfolioDetailProps =
         _getPortfolioDetailProps(context);
 
@@ -63,24 +67,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         child: BlocListener<BotStockBloc, BotStockState>(
           listenWhen: (previous, current) =>
               previous.endBotStockResponse.state !=
-              current.endBotStockResponse.state,
-          listener: (context, state) {
-            if (state.endBotStockResponse.state == ResponseState.loading) {
-              CustomLoadingOverlay.show(context);
-            } else {
-              CustomLoadingOverlay.dismiss();
-              if (state.endBotStockResponse.state == ResponseState.success) {
-                BotStockResultScreen.open(
-                    context: context,
-                    arguments: Pair('Trade Request Received',
-                        '${botType.name} ${recommendedBot.ticker} will end at 17/3/2023 10.22}'));
-              } else if (state.endBotStockResponse.state ==
-                  ResponseState.error) {
-                CustomInAppNotification.show(
-                    context, state.endBotStockResponse.message);
-              }
-            }
-          },
+                  current.endBotStockResponse.state ||
+              previous.rolloverBotStockResponse.state !=
+                  current.rolloverBotStockResponse.state,
+          listener: _botStockListener,
           child: BotStockForm(
               useHeader: true,
               customHeader: Padding(
@@ -120,7 +110,9 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                         const SizedBox(
                           height: 33,
                         ),
-                        const KeyInfo(),
+                        KeyInfo(
+                          recommendedBot: recommendedBot,
+                        ),
                         const SizedBox(
                           height: 35,
                         ),
@@ -292,12 +284,33 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             padding:
                 AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
             child: Builder(
-              builder: (context) => PrimaryButton(
-                buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-                label: 'END BOTSTOCK',
-                onTap: () => BotStockBottomSheet.endBotStockConfirmation(
-                    context, recommendedBot),
-              ),
+              builder: (context) {
+                BotPortfolioStatus botPortfolioStatus =
+                    BotPortfolioStatus.findByString(
+                        recommendedBot.status ?? '');
+                return Column(
+                  children: [
+                    if (botPortfolioStatus != BotPortfolioStatus.pending)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: PrimaryButton(
+                          label: 'ROLLOVER BOTSTOCK',
+                          onTap: () =>
+                              BotStockBottomSheet.rolloverBotStockConfirmation(
+                                  context, recommendedBot),
+                        ),
+                      ),
+                    PrimaryButton(
+                      buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+                      label: botPortfolioStatus == BotPortfolioStatus.active
+                          ? 'END BOTSTOCK'
+                          : 'CANCEL BOTSTOCK',
+                      onTap: () => BotStockBottomSheet.endBotStockConfirmation(
+                          context, recommendedBot),
+                    ),
+                  ],
+                );
+              },
             ),
           ));
     } else {
@@ -318,6 +331,33 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             ),
           ),
           const SizedBox.shrink());
+    }
+  }
+
+  void _botStockListener(BuildContext context, BotStockState state) {
+    if (state.endBotStockResponse.state == ResponseState.loading ||
+        state.rolloverBotStockResponse.state == ResponseState.loading) {
+      CustomLoadingOverlay.show(context);
+    } else {
+      CustomLoadingOverlay.dismiss();
+      if (state.endBotStockResponse.state == ResponseState.success) {
+        BotStockResultScreen.open(
+            context: context,
+            arguments: Pair('Trade Request Received',
+                '${botType.name} ${recommendedBot.ticker} will end at 17/3/2023 10.22}'));
+      } else if (state.endBotStockResponse.state == ResponseState.error) {
+        CustomInAppNotification.show(
+            context, state.endBotStockResponse.message);
+      }
+      if (state.rolloverBotStockResponse.state == ResponseState.success) {
+        BotStockResultScreen.open(
+            context: context,
+            arguments: Pair('Trade Request Received',
+                '${botType.name} ${recommendedBot.ticker} will rollover at 17/3/2023 10.22}'));
+      } else if (state.rolloverBotStockResponse.state == ResponseState.error) {
+        CustomInAppNotification.show(
+            context, state.endBotStockResponse.message);
+      }
     }
   }
 
