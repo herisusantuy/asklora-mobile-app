@@ -139,7 +139,9 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
             .map<int, PieChartSectionData>((index, data) {
               final value = PieChartSectionData(
                   value: data.amount.toDouble(),
-                  color: AskLoraColors.primaryGreen,
+                  color: state.sourceOfWealthAnswers.length == 1
+                      ? AskLoraColors.primaryGreen
+                      : _colorList[index],
                   gradient: _gradients[index >= _gradients.length
                       ? index - _gradients.length
                       : index],
