@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/utils/currency_enum.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_detail_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/repository/portfolio_repository.dart';
@@ -47,6 +48,23 @@ void main() async {
     test('Portfolio Bloc init state response should be default one', () {
       expect(portfolioBloc.state, const PortfolioState());
     });
+
+    blocTest<PortfolioBloc, PortfolioState>(
+        'init HKD to default of the  currency',
+        build: () => portfolioBloc,
+        act: (bloc) => {bloc.add(const CurrencyChanged(CurrencyType.hkd))},
+        expect: () => {const PortfolioState(currency: CurrencyType.hkd)});
+
+    blocTest<PortfolioBloc, PortfolioState>('change currency from HKD to USD',
+        build: () => portfolioBloc,
+        act: (bloc) => {
+              bloc.add(const CurrencyChanged(CurrencyType.hkd)),
+              bloc.add(const CurrencyChanged(CurrencyType.usd)),
+            },
+        expect: () => {
+              const PortfolioState(currency: CurrencyType.hkd),
+              const PortfolioState(currency: CurrencyType.usd),
+            });
 
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.complete` WHEN '
