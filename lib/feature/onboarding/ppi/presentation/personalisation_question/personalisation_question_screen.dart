@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
-import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../../utils/ppi_utils.dart';
@@ -23,16 +20,12 @@ class PersonalisationQuestionScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext _context) {
+  Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PersonalisationQuestionBloc(
-          initialIndex: initialIndex,
-          userResponseBloc: _context.read<UserResponseBloc>())
+      create: (_) => PersonalisationQuestionBloc(initialIndex: initialIndex)
         ..add(NextPersonalisationQuestion()),
-      child: /*Builder(
-          builder: (context) =>*/
-          CustomNavigationWidget<QuestionPageStep>(
-        onBackPressed: () => onCancel(_context),
+      child: CustomNavigationWidget<QuestionPageStep>(
+        onBackPressed: () => onCancel(context),
         header: const SizedBox.shrink(),
         child: BlocConsumer<PersonalisationQuestionBloc,
             PersonalisationQuestionState>(

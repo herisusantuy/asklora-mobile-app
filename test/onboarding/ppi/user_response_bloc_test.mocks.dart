@@ -5,6 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i6;
 
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
+    as _i8;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
     as _i3;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response_request.dart'
@@ -151,4 +153,78 @@ class MockPpiResponseRepository extends _i1.Mock
           ),
         )),
       ) as _i6.Future<_i4.Response<dynamic>>);
+}
+
+/// A class which mocks [SharedPreference].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPreference extends _i1.Mock implements _i8.SharedPreference {
+  MockSharedPreference() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<void> deleteAllData() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAllData,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> deleteData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteData,
+          [key],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<String?> readData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readData,
+          [key],
+        ),
+        returnValue: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
+  @override
+  _i6.Future<bool> writeData(
+    String? key,
+    String? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> writeIntData(
+    String? key,
+    int? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeIntData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+  @override
+  _i6.Future<int?> readIntData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readIntData,
+          [key],
+        ),
+        returnValue: _i6.Future<int?>.value(),
+      ) as _i6.Future<int?>);
 }

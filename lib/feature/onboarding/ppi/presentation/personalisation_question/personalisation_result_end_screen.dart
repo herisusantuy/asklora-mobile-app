@@ -68,7 +68,7 @@ class PersonalisationResultEndScreen extends StatelessWidget {
               child: PrimaryButton(
                 key: const Key('next_button'),
                 label: 'GOT IT',
-                onTap: () => SignUpScreen.open(context), /*InvestmentStyleWelcomeScreen.open(context),*/
+                onTap: () => SignUpScreen.open(context),
               ),
             ),
           );
