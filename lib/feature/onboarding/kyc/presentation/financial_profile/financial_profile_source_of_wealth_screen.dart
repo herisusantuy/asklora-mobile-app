@@ -38,7 +38,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Financial Profile',
-      content: Column(
+      headerContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
@@ -54,6 +54,11 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
             height: 10,
           ),
           _donutChart,
+        ],
+      ),
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           ...SourceOfWealthType.values
               .map(
                 (source) =>
