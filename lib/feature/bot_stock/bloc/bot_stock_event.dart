@@ -46,4 +46,13 @@ class EndBotStock extends BotStockEvent {
   List<Object> get props => [recommendedBot];
 }
 
+class RolloverBotStock extends BotStockEvent {
+  final RecommendedBot recommendedBot;
+
+  const RolloverBotStock(this.recommendedBot);
+
+  @override
+  List<Object> get props => [recommendedBot];
+}
+
 class FetchChartData extends BotStockEvent {}
