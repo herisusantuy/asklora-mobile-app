@@ -13,10 +13,10 @@ import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/utils/extensions.dart';
-import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
 import '../../reset_password/presentation/reset_password_screen.dart';
 import '../bloc/sign_in_bloc.dart';
@@ -34,43 +34,29 @@ class SignInForm extends StatelessWidget {
         CustomLoadingOverlay.dismiss();
       }
 
-      switch (state.response.state) {
-        case ResponseState.error:
-          context
-              .read<SignInBloc>()
-              .add(SignInEmailChanged(state.emailAddress));
-
-          CustomInAppNotification.show(context, state.response.message);
-          break;
-        case ResponseState.success:
+      var responseState = state.response.state;
+      if (responseState == ResponseState.error) {
+        context.read<SignInBloc>().add(SignInEmailChanged(state.emailAddress));
+        CustomInAppNotification.show(context, state.response.message);
+      } else if (responseState == ResponseState.success) {
+        var arguments = Pair(state.emailAddress, state.password);
+        if (state.isOtpRequired) {
+          OtpScreen.openReplace(context, arguments);
+        } else {
           UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
               (section) => section.value == state.response.data?.userJourney);
-          var arguments = Pair(state.emailAddress, state.password);
-          await SecureStorage()
-              .writeData('email', state.emailAddress)
-              .then((_) {
-            if (state.response.data!.statusCode == 202) {
-              OtpScreen.openReplace(context, arguments);
-            } else {
-              switch (userJourney) {
-                case UserJourney.kyc:
-                  KycScreen.open(context);
-                  break;
-                case UserJourney.investmentStyle:
-                  InvestmentStyleWelcomeScreen.open(context);
-                  break;
-                default:
-                  OtpScreen.openReplace(context, arguments);
-                  break;
-              }
-            }
-          });
-
-          break;
-        case ResponseState.unknown:
-          break;
-        default:
-          break;
+          switch (userJourney) {
+            case UserJourney.kyc:
+              KycScreen.open(context);
+              break;
+            case UserJourney.investmentStyle:
+              InvestmentStyleWelcomeScreen.open(context);
+              break;
+            default:
+              TabsScreen.openAndRemoveAllRoute(context);
+              break;
+          }
+        }
       }
     }, child: LayoutBuilder(builder: (context, constraint) {
       return SingleChildScrollView(

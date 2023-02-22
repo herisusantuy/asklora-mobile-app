@@ -65,9 +65,16 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           email: state.emailAddress, password: state.password);
       UserJourney userJourney = await _userJourneyRepository.getUserJourney();
 
-      emit(state.copyWith(
-          response: BaseResponse.complete(
-              data.copyWith(userJourney: userJourney.value))));
+      if (data.statusCode == 202) {
+        emit(state.copyWith(
+            isOtpRequired: true,
+            response: BaseResponse.complete(
+                data.copyWith(userJourney: userJourney.value))));
+      } else {
+        emit(state.copyWith(
+            response: BaseResponse.complete(
+                data.copyWith(userJourney: userJourney.value))));
+      }
     } on UnauthorizedException {
       emit(state.copyWith(response: BaseResponse.error('Invalid Password')));
     } on NotFoundException {
