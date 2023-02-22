@@ -17,6 +17,7 @@ const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';
 const String endpointResetPassword = '$v1$accounts/reset-password/';
 const String endpointGetOtp = '$v1${accounts}otp/';
+const String endpointGetSmsOtp = '$v2${accounts}request-sms-otp/';
 const String endpointValidateEmail = '$v2${accounts}validate-email/';
 const String endpointVerifyEmail = '$v1${accounts}verify-email/';
 const String endpointUpgradeAccount = '$v1${accounts}upgrade/';

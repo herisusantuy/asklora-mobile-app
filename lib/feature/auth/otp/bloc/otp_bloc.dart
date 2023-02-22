@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
+import '../../../../core/domain/otp/get_sms_otp_request.dart';
 import '../../../../core/domain/otp/verify_otp_request.dart';
 import '../repository/otp_repository.dart';
 
@@ -25,6 +26,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     on<OtpSubmitted>(_onOtpSubmitted);
     on<OtpRequested>(_onOtpRequested);
     on<OtpTimeResetUpdate>(_onOtpTimeResetUpdate);
+    on<SmsOtpRequested>(_onSmsOtpRequested);
   }
 
   void _onOtpRequested(OtpRequested event, Emitter<OtpState> emit) async {
@@ -32,9 +34,35 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _otpRepository.getOtp(
           getOtpRequest: GetOtpRequest(event.email, OtpType.register.value));
+
       data.copyWith(message: 'OTP code sent to your email');
       emit(state.copyWith(
           response: data, disableRequest: true, resetTime: _resetTime));
+
+      resetTimeStreamSubscription = ticker().listen((_) {
+        add(const OtpTimeResetUpdate());
+      });
+    } on NotFoundException {
+      emit(state.copyWith(
+          response:
+              BaseResponse.error('User does not exist with the given email')));
+    } catch (e) {
+      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+    }
+  }
+
+  void _onSmsOtpRequested(SmsOtpRequested event, Emitter<OtpState> emit) async {
+    try {
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data = await _otpRepository.getSmsOtp(
+          getSmsOtpRequest: GetSmsOtpRequest(event.email));
+
+      data.copyWith(message: 'Otp SMS is sent to your phone');
+      emit(state.copyWith(
+        response: data,
+        disableRequest: true,
+        resetTime: _resetTime,
+      ));
 
       resetTimeStreamSubscription = ticker().listen((_) {
         add(const OtpTimeResetUpdate());

@@ -63,8 +63,10 @@ class RouterGenerator {
       case UpgradeAccountScreen.route:
         return MaterialPageRoute(builder: (_) => UpgradeAccountScreen());
       case OtpScreen.route:
-        String email = settings.arguments as String;
-        return MaterialPageRoute(builder: (_) => OtpScreen(email: email));
+        var arguments = settings.arguments as Pair<String, String>;
+        return MaterialPageRoute(
+            builder: (_) =>
+                OtpScreen(email: arguments.left, password: arguments.right));
       case KycScreen.route:
         return MaterialPageRoute(builder: (_) => const KycScreen());
       case NotEligibleScreen.route:
