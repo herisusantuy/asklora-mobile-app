@@ -92,7 +92,7 @@ class OtpScreen extends StatelessWidget {
                 onOtpSubmit: (otp) => {
                   context
                       .read<SignInBloc>()
-                      .add(SignInWithOtpSubmitted(otp, email, password))
+                      .add(SignInWithOtp(otp, email, password))
                 },
               ),
             );

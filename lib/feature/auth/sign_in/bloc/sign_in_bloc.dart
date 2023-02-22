@@ -23,7 +23,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInEmailChanged>(_onEmailChanged);
     on<SignInPasswordChanged>(_onPasswordChanged);
     on<SignInSubmitted>(_onSignInSubmitted);
-    on<SignInWithOtpSubmitted>(_onSignInWithOtpSubmitted);
+    on<SignInWithOtp>(_onSignInWithOtp);
   }
 
   final SignInRepository _signInRepository;
@@ -82,8 +82,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     }
   }
 
-  void _onSignInWithOtpSubmitted(
-    SignInWithOtpSubmitted event,
+  void _onSignInWithOtp(
+    SignInWithOtp event,
     Emitter<SignInState> emit,
   ) async {
     try {
