@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_response.dart';
@@ -35,7 +36,8 @@ void main() {
       setUp(
         () async {
           forgotPasswordBloc = ForgotPasswordBloc(
-              forgotPasswordRepository: forgotPasswordRepository);
+              forgotPasswordRepository: forgotPasswordRepository,
+              tokenRepository: TokenRepository());
         },
       );
       test(
