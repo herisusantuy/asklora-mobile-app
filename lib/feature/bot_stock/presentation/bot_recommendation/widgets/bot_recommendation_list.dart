@@ -25,7 +25,6 @@ class BotRecommendationList extends StatelessWidget {
                 spacing: _spacing,
                 runSpacing: _spacing,
                 children: state.botRecommendationResponse.data!.map((e) {
-                  print('free ${e.freeBot}');
                   return BotRecommendationCard(
                     onTap: () => BotRecommendationDetailScreen.open(
                         context: context, botRecommendationModel: e),

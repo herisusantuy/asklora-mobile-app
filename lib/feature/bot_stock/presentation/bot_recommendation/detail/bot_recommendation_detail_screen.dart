@@ -247,7 +247,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                                 title1: 'Investment Period',
                                 subTitle1: botDetailModel.bot.duration,
                                 title2: 'Estimated End Date',
-                                subTitle2: 'Not available yet',
+                                subTitle2: botDetailModel.estimatedExpiredDate,
                                 tooltipText1: _tempTooltipText,
                                 tooltipText2: _tempTooltipText),
                             const SizedBox(
