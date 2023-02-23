@@ -78,8 +78,8 @@ class BotStockRepository {
       fetchBotRecommendation() async {
     try {
       await Future.delayed(const Duration(seconds: 1));
-      final String response = await rootBundle
-          .loadString('assets/json/bot_recommended_list_new.json');
+      final String response =
+          await rootBundle.loadString('assets/json/bot_recommendation.json');
       Iterable iterable = json.decode(response);
 
       return BaseResponse.complete(List<BotRecommendationModel>.from(
@@ -93,8 +93,8 @@ class BotStockRepository {
       {bool isFreeBot = false}) async {
     try {
       await Future.delayed(const Duration(seconds: 1));
-      final String response = await rootBundle
-          .loadString('assets/json/bot_recommended_list_new.json');
+      final String response =
+          await rootBundle.loadString('assets/json/bot_recommendation.json');
 
       Iterable iterable = json.decode(response);
 
