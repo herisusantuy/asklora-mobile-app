@@ -39,7 +39,7 @@ class DemonstrationBotList extends StatelessWidget {
   Widget _listShimmer() => Wrap(
         spacing: _spacing,
         runSpacing: _spacing,
-        children: defaultRecommendedBots
+        children: defaultBotRecommendation
             .map((e) => BotRecommendationCardShimmer(
                   height: botCardHeight,
                   spacing: _spacing,

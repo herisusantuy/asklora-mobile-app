@@ -112,7 +112,8 @@ class MockData {
           botRecommendationModel.tickerName,
           botRecommendationModel.tickerSymbol,
           botRecommendationModel.latestPrice,
-          tradeBotStockAmount));
+          tradeBotStockAmount,
+          freeBot: botRecommendationModel.freeBot));
 
       await _savePortfolioBotResponse(
           PortfolioBotResponse(portfolioBots: portfolioBots));

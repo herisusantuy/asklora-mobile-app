@@ -95,11 +95,11 @@ class BotStockRepository {
       await Future.delayed(const Duration(seconds: 1));
       final String response =
           await rootBundle.loadString('assets/json/bot_recommendation.json');
-
       Iterable iterable = json.decode(response);
-
-      return BaseResponse.complete(List<BotRecommendationModel>.from(
-          iterable.map((model) => BotRecommendationModel.fromJson(model))));
+      List<BotRecommendationModel> data = List<BotRecommendationModel>.from(
+          iterable.map((model) =>
+              BotRecommendationModel.fromJson(model).copyWith(freeBot: true)));
+      return BaseResponse.complete(data);
     } catch (e) {
       return BaseResponse.error('Something went wrong');
     }

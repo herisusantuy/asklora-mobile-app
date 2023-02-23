@@ -94,7 +94,7 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
   }
 
   double get _getListHeight =>
-      botCardHeight * defaultRecommendedBots.length / 2 +
-      _spacing * ((defaultRecommendedBots.length / 2).ceil() - 1) +
+      botCardHeight * defaultBotRecommendation.length / 2 +
+      _spacing * ((defaultBotRecommendation.length / 2).ceil() - 1) +
       2 * blurPadding;
 }

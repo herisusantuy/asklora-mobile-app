@@ -74,7 +74,7 @@ class BotPortfolioList extends StatelessWidget {
               return Wrap(
                 spacing: _spacing,
                 runSpacing: _runSpacing,
-                children: defaultRecommendedBots
+                children: defaultBotRecommendation
                     .map(
                       (e) => BotPortfolioCardShimmer(
                         height: botCardHeight,

@@ -41,6 +41,20 @@ class BotRecommendationModel extends Equatable {
       {this.freeBot = false,
       this.selectable = false});
 
+  BotRecommendationModel copyWith({bool? freeBot}) => BotRecommendationModel(
+      id,
+      suitability,
+      benefit,
+      botId,
+      botWord,
+      botType,
+      botAppType,
+      ticker,
+      tickerName,
+      tickerSymbol,
+      latestPrice,
+      freeBot: freeBot ?? this.freeBot);
+
   factory BotRecommendationModel.fromJson(Map<String, dynamic> json) =>
       _$BotRecommendationModelFromJson(json);
 

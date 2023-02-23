@@ -24,15 +24,16 @@ class BotRecommendationList extends StatelessWidget {
               child: Wrap(
                 spacing: _spacing,
                 runSpacing: _spacing,
-                children: state.botRecommendationResponse.data!
-                    .map((e) => BotRecommendationCard(
-                          onTap: () => BotRecommendationDetailScreen.open(
-                              context: context, botRecommendationModel: e),
-                          height: botCardHeight,
-                          spacing: _spacing,
-                          botRecommendationModel: e,
-                        ))
-                    .toList(),
+                children: state.botRecommendationResponse.data!.map((e) {
+                  print('free ${e.freeBot}');
+                  return BotRecommendationCard(
+                    onTap: () => BotRecommendationDetailScreen.open(
+                        context: context, botRecommendationModel: e),
+                    height: botCardHeight,
+                    spacing: _spacing,
+                    botRecommendationModel: e,
+                  );
+                }).toList(),
               ),
             );
           } else if (state.botRecommendationResponse.state ==
@@ -43,7 +44,7 @@ class BotRecommendationList extends StatelessWidget {
               child: Wrap(
                 spacing: _spacing,
                 runSpacing: _spacing,
-                children: defaultRecommendedBots
+                children: defaultBotRecommendation
                     .map((e) => BotRecommendationCardShimmer(
                           height: botCardHeight,
                           spacing: _spacing,
@@ -105,7 +106,7 @@ class BotRecommendationList extends StatelessWidget {
   }
 
   double get _getListHeight =>
-      botCardHeight * defaultRecommendedBots.length / 2 +
-      _spacing * ((defaultRecommendedBots.length / 2).ceil() - 1) +
+      botCardHeight * defaultBotRecommendation.length / 2 +
+      _spacing * ((defaultBotRecommendation.length / 2).ceil() - 1) +
       2 * blurPadding;
 }
