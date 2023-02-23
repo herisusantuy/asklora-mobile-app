@@ -8,6 +8,8 @@ import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
+import '../../forgot_password/presentation/forgot_password_screen.dart';
+import '../../sign_in/presentation/sign_in_screen.dart';
 import '../bloc/reset_password_bloc.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
@@ -26,6 +28,7 @@ class ForgotPasswordForm extends StatelessWidget {
           case ResponseState.success:
             CustomLoadingOverlay.dismiss();
             CustomInAppNotification.show(context, state.response.data.detail);
+            SignInScreen.open(context);
             break;
           case ResponseState.error:
             context
@@ -37,6 +40,7 @@ class ForgotPasswordForm extends StatelessWidget {
             CustomSnackBar(context)
                 .setMessage(state.response.message)
                 .showError();
+            ForgotPasswordScreen.open(context);
             break;
           default:
             break;
@@ -85,7 +89,9 @@ class ForgotPasswordForm extends StatelessWidget {
   }
 
   Widget _passwordInput() => BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-      buildWhen: (previous, current) => previous.password != current.password,
+      buildWhen: (previous, current) =>
+          previous.password != current.password ||
+          previous.confirmPassword != current.confirmPassword,
       builder: (context, state) => PasswordTextField(
           key: const Key('reset_password_password_input'),
           validPassword: (isValidPassword) => {},
@@ -99,6 +105,7 @@ class ForgotPasswordForm extends StatelessWidget {
   Widget _confirmPasswordInput() =>
       BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
           buildWhen: (previous, current) =>
+              previous.password != current.password ||
               previous.confirmPassword != current.confirmPassword,
           builder: (context, state) => PasswordTextField(
               key: const Key('reset_password_confirm_password_input'),
@@ -112,11 +119,14 @@ class ForgotPasswordForm extends StatelessWidget {
 
   Widget _resetPasswordButton() =>
       BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+        buildWhen: (previous, current) =>
+            previous.isPasswordValid != current.isPasswordValid ||
+            previous.isConfirmPasswordValid != current.isConfirmPasswordValid,
         builder: (context, state) {
           return PrimaryButton(
               key: const Key('reset_password_submit_button'),
               label: 'SUBMIT',
-              disabled: !state.isPasswordValid && !state.isConfirmPasswordValid,
+              disabled: state.enableSubmitButton(),
               onTap: () => context
                   .read<ResetPasswordBloc>()
                   .add(const ResetPasswordSubmitted()));

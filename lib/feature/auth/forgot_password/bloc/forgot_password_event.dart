@@ -22,3 +22,26 @@ class ForgotPasswordSubmitted extends ForgotPasswordEvent {
   @override
   List<Object> get props => [];
 }
+
+class StartListenOnDeeplink extends ForgotPasswordEvent {
+  const StartListenOnDeeplink();
+
+  @override
+  List<Object> get props => [];
+}
+
+class DeepLinkValidateSuccess extends ForgotPasswordEvent {
+  final Uri uri;
+
+  const DeepLinkValidateSuccess(this.uri);
+
+  @override
+  List<Object> get props => [uri];
+}
+
+class DeepLinkValidateFailed extends ForgotPasswordEvent {
+  const DeepLinkValidateFailed();
+
+  @override
+  List<Object> get props => [];
+}

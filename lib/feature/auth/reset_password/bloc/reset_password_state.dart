@@ -21,6 +21,7 @@ class ResetPasswordState extends Equatable {
 
   ResetPasswordState copyWith({
     BaseResponse? response,
+    String? token,
     String? password,
     String? confirmPassword,
     bool? isPasswordValid,
@@ -52,5 +53,13 @@ class ResetPasswordState extends Equatable {
       passwordErrorText,
       confirmPasswordErrorText,
     ];
+  }
+
+  bool enableSubmitButton() {
+    if (isPasswordValid && isConfirmPasswordValid) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
