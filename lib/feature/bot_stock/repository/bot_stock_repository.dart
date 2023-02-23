@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
+import '../../../main.dart';
+import '../../../mock/mock_data.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
-import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_detail_request.dart';
 import '../domain/bot_recommendation_model.dart';
@@ -20,14 +21,11 @@ class BotStockRepository {
     try {
       var response = await _botStockApiClient.fetchBotDetail(BotDetailRequest(
           botRecommendationModel.ticker, botRecommendationModel.botId));
-      // await Future.delayed(const Duration(seconds: 1));
-      // final String response =
-      //     await rootBundle.loadString('assets/json/bot_detail.json');
-      //
-      // var data = json.decode(response);
 
-      return BaseResponse.complete(BotDetailModel.fromJson(response.data));
+      return BaseResponse.complete(
+          BotDetailModel.fromJson(response.data /*data*/));
     } catch (e) {
+      print('error $e');
       return BaseResponse.error('Something went wrong');
     }
   }
@@ -107,27 +105,26 @@ class BotStockRepository {
     }
   }
 
-  Future<BaseResponse<List<RecommendedBot>>> fetchBotDemonstration() async {
+  Future<BaseResponse<List<BotRecommendationModel>>>
+      fetchBotDemonstration() async {
     await Future.delayed(const Duration(seconds: 1));
     return BaseResponse.complete(demonstrationBots);
   }
 
-  Future<BaseResponse<bool>> getFreeBotStock(
+  Future<BaseResponse<bool>> tradeBotStock(
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount}) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(true);
-  }
-
-  Future<BaseResponse<bool>> rolloverBotStock(
-      BotRecommendationModel botRecommendationModel) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(true);
-  }
-
-  Future<BaseResponse<bool>> endBotStock(
-      BotRecommendationModel botRecommendationModel) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(true);
+    if (isDemoEnable) {
+      ///MOCK
+      await Future.delayed(const Duration(milliseconds: 500));
+      var data = await MockData().saveBotStock(
+          botRecommendationModel: botRecommendationModel,
+          tradeBotStockAmount: tradeBotStockAmount);
+      return data;
+    } else {
+      ///REAL
+      await Future.delayed(const Duration(milliseconds: 500));
+      return BaseResponse.complete(true);
+    }
   }
 }

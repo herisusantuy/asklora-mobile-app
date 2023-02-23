@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/currency_enum.dart';
-import '../../../../chart/domain/chart_models.dart';
-import '../../../domain/bot_recommendation_model.dart';
 import '../../../utils/bot_stock_utils.dart';
-import '../domain/portfolio_detail_response.dart';
+import '../domain/portfolio_bot_detail_model.dart';
+import '../domain/portfolio_bot_model.dart';
+import '../domain/portfolio_response.dart';
 import '../repository/portfolio_repository.dart';
 
 part 'portfolio_event.dart';
@@ -16,11 +16,13 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   PortfolioBloc({required PortfolioRepository portfolioRepository})
       : _portfolioRepository = portfolioRepository,
         super(const PortfolioState()) {
-    on<FetchPortfolioDetail>(_onFetchPortfolioDetail);
+    on<FetchBotPortfolioDetail>(_onFetchBotPortfolioDetail);
+    on<FetchPortfolio>(_onFetchPortfolio);
     on<FetchBotPortfolio>(_onFetchBotPortfolio);
-    on<FetchBotPortfolioChartData>(_onFetchChartData);
     on<BotStockFilterChanged>(_onBotStockFilterChanged);
     on<CurrencyChanged>(_onCurrencyChanged);
+    on<RolloverBotStock>(_onRolloverBotStock);
+    on<EndBotStock>(_onEndBotStock);
   }
 
   final PortfolioRepository _portfolioRepository;
@@ -38,26 +40,28 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     }
   }
 
-  _onFetchPortfolioDetail(
-      FetchPortfolioDetail event, Emitter<PortfolioState> emit) async {
+  _onFetchPortfolio(FetchPortfolio event, Emitter<PortfolioState> emit) async {
     try {
-      emit(state.copyWith(portfolioDetailResponse: BaseResponse.loading()));
-      var data = await _portfolioRepository.fetchPortfolioDetail();
-      emit(state.copyWith(portfolioDetailResponse: data));
+      emit(state.copyWith(portfolioResponse: BaseResponse.loading()));
+      var data = await _portfolioRepository.fetchPortfolio();
+      emit(state.copyWith(portfolioResponse: data));
     } catch (e) {
       emit(state.copyWith(
-          portfolioDetailResponse: BaseResponse.error('Something went wrong')));
+          portfolioResponse: BaseResponse.error('Something went wrong')));
     }
   }
 
-  _onFetchChartData(
-      FetchBotPortfolioChartData event, Emitter<PortfolioState> emit) async {
+  _onFetchBotPortfolioDetail(
+      FetchBotPortfolioDetail event, Emitter<PortfolioState> emit) async {
     try {
+      emit(state.copyWith(botPortfolioDetailResponse: BaseResponse.loading()));
       emit(state.copyWith(
-          chartDataResponse: await _portfolioRepository.fetchChartDataJson()));
+          botPortfolioDetailResponse: await _portfolioRepository
+              .fetchBotPortfolioDetail(event.portfolioBotModel)));
     } catch (e) {
       emit(state.copyWith(
-          chartDataResponse: BaseResponse.error('Something went wrong')));
+          botPortfolioDetailResponse:
+              BaseResponse.error('Something went wrong')));
     }
   }
 
@@ -69,5 +73,31 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
   _onCurrencyChanged(CurrencyChanged event, Emitter<PortfolioState> emit) {
     emit(state.copyWith(currency: event.currencyType));
+  }
+
+  _onEndBotStock(EndBotStock event, Emitter<PortfolioState> emit) async {
+    try {
+      emit(state.copyWith(endBotStockResponse: BaseResponse.loading()));
+      emit(state.copyWith(
+          endBotStockResponse:
+              await _portfolioRepository.endBotStock(event.portfolioBotModel)));
+    } catch (e) {
+      emit(state.copyWith(
+          endBotStockResponse: BaseResponse.error('Something went wrong')));
+    }
+  }
+
+  _onRolloverBotStock(
+      RolloverBotStock event, Emitter<PortfolioState> emit) async {
+    try {
+      emit(state.copyWith(rolloverBotStockResponse: BaseResponse.loading()));
+      emit(state.copyWith(
+          rolloverBotStockResponse: await _portfolioRepository
+              .rolloverBotStock(event.portfolioBotModel)));
+    } catch (e) {
+      emit(state.copyWith(
+          rolloverBotStockResponse:
+              BaseResponse.error('Something went wrong')));
+    }
   }
 }

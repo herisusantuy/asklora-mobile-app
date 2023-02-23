@@ -18,8 +18,6 @@ import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.
 import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../bloc/bot_stock_bloc.dart';
-import '../../../domain/bot_detail_model.dart';
-import '../../../domain/bot_recommendation_model.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
@@ -29,6 +27,8 @@ import '../../widgets/bot_stock_form.dart';
 import '../../widgets/pair_column_text.dart';
 import '../../widgets/custom_detail_expansion_tile.dart';
 import '../bloc/portfolio_bloc.dart';
+import '../domain/portfolio_bot_detail_model.dart';
+import '../domain/portfolio_bot_model.dart';
 import '../repository/portfolio_repository.dart';
 import '../utils/portfolio_enum.dart';
 
@@ -38,7 +38,7 @@ part 'widgets/performance.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
   static const String route = '/bot_portfolio_detail_screen';
-  final BotRecommendationModel botRecommendationModel;
+  final PortfolioBotModel portfolioBotModel;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
@@ -46,33 +46,33 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   late final BotType botType;
 
-  BotPortfolioDetailScreen({required this.botRecommendationModel, Key? key})
+  BotPortfolioDetailScreen({required this.portfolioBotModel, Key? key})
       : super(key: key) {
-    botType = BotType.findByString(botRecommendationModel.botAppType);
+    botType = BotType.findByString(portfolioBotModel.botAppType);
   }
 
   @override
   Widget build(BuildContext context) {
     final Pair<Widget, Widget> portfolioDetailProps =
         _getPortfolioDetailProps(context);
-
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) =>
-                  PortfolioBloc(portfolioRepository: PortfolioRepository())
-                    ..add(FetchBotPortfolioChartData())),
+            create: (_) =>
+                PortfolioBloc(portfolioRepository: PortfolioRepository())
+                  ..add(FetchBotPortfolioDetail(portfolioBotModel)),
+          ),
           BlocProvider(
               create: (_) =>
-                  BotStockBloc(botStockRepository: BotStockRepository())..add(FetchBotDetail(botRecommendationModel))),
+                  BotStockBloc(botStockRepository: BotStockRepository())),
         ],
-        child: BlocListener<BotStockBloc, BotStockState>(
+        child: BlocListener<PortfolioBloc, PortfolioState>(
           listenWhen: (previous, current) =>
               previous.endBotStockResponse.state !=
                   current.endBotStockResponse.state ||
               previous.rolloverBotStockResponse.state !=
                   current.rolloverBotStockResponse.state,
-          listener: _botStockListener,
+          listener: _portfolioListener,
           child: BotStockForm(
               useHeader: true,
               customHeader: Padding(
@@ -93,7 +93,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                       width: 12,
                     ),
                     CustomTextNew(
-                      '${botType.upperCaseName} ${botRecommendationModel.ticker}',
+                      '${botType.upperCaseName} ${portfolioBotModel.ticker}',
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
@@ -101,43 +101,46 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                 ),
               ),
               contentPadding: EdgeInsets.zero,
-              content: BlocConsumer<BotStockBloc, BotStockState>(
+              content: BlocConsumer<PortfolioBloc, PortfolioState>(
                   listenWhen: (previous, current) =>
-                      previous.botDetailResponse.state !=
-                      current.botDetailResponse.state,
+                      previous.botPortfolioDetailResponse.state !=
+                      current.botPortfolioDetailResponse.state,
                   listener: (context, state) {
-                    if (state.botDetailResponse.state ==
+                    if (state.botPortfolioDetailResponse.state ==
                         ResponseState.loading) {
                       CustomLoadingOverlay.show(context);
                     } else {
                       CustomLoadingOverlay.dismiss();
-                      if (state.botDetailResponse.state ==
+                      if (state.botPortfolioDetailResponse.state ==
                           ResponseState.error) {
                         CustomInAppNotification.show(
-                            context, state.botDetailResponse.message);
+                            context, state.botPortfolioDetailResponse.message);
                       }
                     }
                   },
                   buildWhen: (previous, current) =>
-                      previous.botDetailResponse.state !=
-                      current.botDetailResponse.state,
+                      previous.botPortfolioDetailResponse.state !=
+                      current.botPortfolioDetailResponse.state,
                   builder: (context, state) {
-                    if (state.botDetailResponse.state ==
+                    if (state.botPortfolioDetailResponse.state ==
                         ResponseState.success) {
-                      BotDetailModel botDetailModel =
-                          state.botDetailResponse.data!;
+                      PortfolioBotDetailModel portfolioBotDetailModel =
+                          state.botPortfolioDetailResponse.data!;
                       return Padding(
                         padding: AppValues.screenHorizontalPadding,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //const Performance(),
+                            Performance(
+                              portfolioBotDetailModel: portfolioBotDetailModel,
+                              portfolioBotModel: portfolioBotModel,
+                            ),
                             const SizedBox(
                               height: 33,
                             ),
-                            // KeyInfo(
-                            //   botRecommendationModel: botRecommendationModel,
-                            // ),
+                            KeyInfo(
+                              portfolioBotModel: portfolioBotModel,
+                            ),
                             const SizedBox(
                               height: 35,
                             ),
@@ -151,7 +154,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                         color: AskLoraColors.charcoal),
                                   ),
                                   CustomTextNew(
-                                    botDetailModel.bot.botDescription.detail,
+                                    portfolioBotDetailModel
+                                        .bot.botDescription.detail,
                                     style: AskLoraTextStyles.body3.copyWith(
                                         color: AskLoraColors.charcoal),
                                   )
@@ -167,7 +171,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                   height: 6,
                                 ),
                                 CustomTextNew(
-                                  botDetailModel.bot.botDescription.suited,
+                                  portfolioBotDetailModel
+                                      .bot.botDescription.suited,
                                   style: AskLoraTextStyles.body1
                                       .copyWith(color: AskLoraColors.charcoal),
                                 ),
@@ -183,7 +188,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                   height: 6,
                                 ),
                                 CustomTextNew(
-                                  botDetailModel.bot.botDescription.works,
+                                  portfolioBotDetailModel
+                                      .bot.botDescription.works,
                                   style: AskLoraTextStyles.body1
                                       .copyWith(color: AskLoraColors.charcoal),
                                 ),
@@ -202,7 +208,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomTextNew(
-                                          '${botDetailModel.tickerName} ${botDetailModel.ticker}',
+                                          '${portfolioBotDetailModel.tickerName} ${portfolioBotDetailModel.ticker}',
                                           style: AskLoraTextStyles.h5.copyWith(
                                               color: AskLoraColors.charcoal),
                                           maxLines: 2,
@@ -226,7 +232,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                           CrossAxisAlignment.end,
                                       children: [
                                         CustomTextNew(
-                                          botDetailModel.price
+                                          portfolioBotDetailModel.price
                                               .convertToCurrencyDecimal(),
                                           style: AskLoraTextStyles.h5.copyWith(
                                               color: AskLoraColors.charcoal),
@@ -235,7 +241,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                           height: 5,
                                         ),
                                         CustomTextNew(
-                                          '${botDetailModel.estimatedStopLossPrice.convertToCurrencyDecimal()} ${botDetailModel.estimatedTakeProfitPct.toStringAsFixed(4)}%',
+                                          '${portfolioBotDetailModel.estimatedStopLossPrice.convertToCurrencyDecimal()} ${portfolioBotDetailModel.estimatedTakeProfitPct.toStringAsFixed(4)}%',
                                           style: AskLoraTextStyles.body2
                                               .copyWith(
                                                   color:
@@ -251,7 +257,11 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                   title1: 'Prev Close',
                                   subTitle1: 'Not available yet',
                                   title2: 'Market Cap',
-                                  subTitle2: botDetailModel.marketCap ?? '-',
+                                  subTitle2:
+                                      portfolioBotDetailModel.marketCap != null
+                                          ? portfolioBotDetailModel.marketCap!
+                                              .toStringAsFixed(1)
+                                          : '-',
                                 ),
                                 const SizedBox(
                                   height: 2,
@@ -260,7 +270,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                   color: AskLoraColors.gray,
                                 ),
                                 CustomTextNew(
-                                  'About ${botDetailModel.tickerName}',
+                                  'About ${portfolioBotDetailModel.tickerName}',
                                   style: AskLoraTextStyles.h6
                                       .copyWith(color: AskLoraColors.charcoal),
                                 ),
@@ -269,30 +279,31 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                                 ),
                                 PairColumnText(
                                   title1: 'Sector(s)',
-                                  subTitle1: botDetailModel.sector,
+                                  subTitle1: portfolioBotDetailModel.sector,
                                   title2: 'Industry',
-                                  subTitle2: botDetailModel.industry,
+                                  subTitle2: portfolioBotDetailModel.industry,
                                 ),
                                 _spaceBetweenInfo,
                                 PairColumnText(
                                   title1: 'CEO',
-                                  subTitle1: botDetailModel.ceo,
+                                  subTitle1: portfolioBotDetailModel.ceo,
                                   title2: 'Employees',
-                                  subTitle2:
-                                      botDetailModel.employees.toString(),
+                                  subTitle2: portfolioBotDetailModel.employees
+                                      .toString(),
                                 ),
                                 _spaceBetweenInfo,
                                 PairColumnText(
                                   title1: 'Headquarters',
-                                  subTitle1: botDetailModel.headquarters,
+                                  subTitle1:
+                                      portfolioBotDetailModel.headquarters,
                                   title2: 'Founded',
-                                  subTitle2: botDetailModel.founded.toString(),
+                                  subTitle2: portfolioBotDetailModel.founded,
                                 ),
                                 const SizedBox(
                                   height: 23,
                                 ),
                                 CustomTextNew(
-                                  botDetailModel.description,
+                                  portfolioBotDetailModel.description,
                                   style: AskLoraTextStyles.body1
                                       .copyWith(color: AskLoraColors.charcoal),
                                 )
@@ -332,7 +343,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                           label: 'ROLLOVER BOTSTOCK',
                           onTap: () =>
                               BotStockBottomSheet.rolloverBotStockConfirmation(
-                                  context, botRecommendationModel),
+                                  context, portfolioBotModel),
                         ),
                       ),
                     PrimaryButton(
@@ -341,7 +352,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                           ? 'END BOTSTOCK'
                           : 'CANCEL BOTSTOCK',
                       onTap: () => BotStockBottomSheet.endBotStockConfirmation(
-                          context, botRecommendationModel),
+                          context, portfolioBotModel),
                     ),
                   ],
                 );
@@ -369,7 +380,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     }
   }
 
-  void _botStockListener(BuildContext context, BotStockState state) {
+  void _portfolioListener(BuildContext context, PortfolioState state) {
     if (state.endBotStockResponse.state == ResponseState.loading ||
         state.rolloverBotStockResponse.state == ResponseState.loading) {
       CustomLoadingOverlay.show(context);
@@ -379,7 +390,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         BotStockResultScreen.open(
             context: context,
             arguments: Pair('Trade Request Received',
-                '${botType.name} ${botRecommendationModel.ticker} will end at 17/3/2023 10.22}'));
+                '${botType.name} ${portfolioBotModel.ticker} will end at 17/3/2023 10.22}'));
       } else if (state.endBotStockResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.endBotStockResponse.message);
@@ -388,7 +399,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         BotStockResultScreen.open(
             context: context,
             arguments: Pair('Trade Request Received',
-                '${botType.name} ${botRecommendationModel.ticker} will rollover at 17/3/2023 10.22}'));
+                '${botType.name} ${portfolioBotModel.ticker} will rollover at 17/3/2023 10.22}'));
       } else if (state.rolloverBotStockResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.endBotStockResponse.message);
@@ -398,6 +409,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   static void open(
           {required BuildContext context,
-          required BotRecommendationModel botRecommendationModel}) =>
-      Navigator.pushNamed(context, route, arguments: botRecommendationModel);
+          required PortfolioBotModel portfolioBotModel}) =>
+      Navigator.pushNamed(context, route, arguments: portfolioBotModel);
 }

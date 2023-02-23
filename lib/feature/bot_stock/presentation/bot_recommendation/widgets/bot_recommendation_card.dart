@@ -18,7 +18,8 @@ class BotRecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BotType botType = BotType.findByString(botRecommendationModel.botAppType);
+    final BotType botType =
+        BotType.findByString(botRecommendationModel.botAppType);
     return GestureDetector(
       onTap: () => isDisabled ? () {} : onTap(),
       child: Container(
@@ -79,7 +80,8 @@ class BotRecommendationCard extends StatelessWidget {
                 child: PrimaryButton(
                     disabled: isDisabled,
                     buttonPrimarySize: ButtonPrimarySize.small,
-                    label: botRecommendationModel.freeBot ? 'FREE TRADE' : 'TRADE',
+                    label:
+                        botRecommendationModel.freeBot ? 'FREE TRADE' : 'TRADE',
                     onTap: onTap),
               ),
             )

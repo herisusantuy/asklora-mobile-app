@@ -23,6 +23,7 @@ import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
+import '../../feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
@@ -122,17 +123,19 @@ class RouterGenerator {
       case BotRecommendationDetailScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotRecommendationDetailScreen(
-                  botRecommendation: settings.arguments as BotRecommendationModel,
+                  botRecommendation:
+                      settings.arguments as BotRecommendationModel,
                 ));
       case BotPortfolioDetailScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotPortfolioDetailScreen(
-                  botRecommendationModel: settings.arguments as BotRecommendationModel,
+                  portfolioBotModel: settings.arguments as PortfolioBotModel,
                 ));
       case BotTradeSummaryScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotTradeSummaryScreen(
-                  arguments: settings.arguments as Pair<BotRecommendationModel, double>,
+                  arguments: settings.arguments
+                      as Pair<BotRecommendationModel, double>,
                 ));
       case PortfolioScreen.route:
         return MaterialPageRoute(builder: (_) => const PortfolioScreen());

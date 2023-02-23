@@ -16,8 +16,6 @@ import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
     as _i7;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart'
     as _i8;
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
-    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -139,30 +137,30 @@ class MockBotStockRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i9.RecommendedBot>>>
+  _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>
       fetchBotDemonstration() => (super.noSuchMethod(
             Invocation.method(
               #fetchBotDemonstration,
               [],
             ),
-            returnValue:
-                _i4.Future<_i2.BaseResponse<List<_i9.RecommendedBot>>>.value(
-                    _FakeBaseResponse_0<List<_i9.RecommendedBot>>(
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i6.BotRecommendationModel>>>.value(
+                _FakeBaseResponse_0<List<_i6.BotRecommendationModel>>(
               this,
               Invocation.method(
                 #fetchBotDemonstration,
                 [],
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<List<_i9.RecommendedBot>>>);
+          ) as _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<bool>> getFreeBotStock({
+  _i4.Future<_i2.BaseResponse<bool>> tradeBotStock({
     required _i6.BotRecommendationModel? botRecommendationModel,
     required double? tradeBotStockAmount,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getFreeBotStock,
+          #tradeBotStock,
           [],
           {
             #botRecommendationModel: botRecommendationModel,
@@ -173,7 +171,7 @@ class MockBotStockRepository extends _i1.Mock
             _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
           this,
           Invocation.method(
-            #getFreeBotStock,
+            #tradeBotStock,
             [],
             {
               #botRecommendationModel: botRecommendationModel,
@@ -183,37 +181,11 @@ class MockBotStockRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.BaseResponse<bool>>);
   @override
-  _i4.Future<_i2.BaseResponse<bool>> rolloverBotStock(
-          _i6.BotRecommendationModel? botRecommendationModel) =>
-      (super.noSuchMethod(
+  _i4.Future<bool> removeInvestmentStyleAnswer() => (super.noSuchMethod(
         Invocation.method(
-          #rolloverBotStock,
-          [botRecommendationModel],
+          #removeInvestmentStyleAnswer,
+          [],
         ),
-        returnValue:
-            _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
-          this,
-          Invocation.method(
-            #rolloverBotStock,
-            [botRecommendationModel],
-          ),
-        )),
-      ) as _i4.Future<_i2.BaseResponse<bool>>);
-  @override
-  _i4.Future<_i2.BaseResponse<bool>> endBotStock(
-          _i6.BotRecommendationModel? botRecommendationModel) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #endBotStock,
-          [botRecommendationModel],
-        ),
-        returnValue:
-            _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
-          this,
-          Invocation.method(
-            #endBotStock,
-            [botRecommendationModel],
-          ),
-        )),
-      ) as _i4.Future<_i2.BaseResponse<bool>>);
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

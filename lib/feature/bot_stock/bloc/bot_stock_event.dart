@@ -22,7 +22,8 @@ class TradeBotStock extends BotStockEvent {
   final double tradeBotStockAmount;
 
   const TradeBotStock(
-      {required this.botRecommendationModel, required this.tradeBotStockAmount});
+      {required this.botRecommendationModel,
+      required this.tradeBotStockAmount});
 
   @override
   List<Object> get props => [botRecommendationModel];
@@ -35,24 +36,6 @@ class TradeBotStockAmountChanged extends BotStockEvent {
 
   @override
   List<Object> get props => [amount];
-}
-
-class EndBotStock extends BotStockEvent {
-  final BotRecommendationModel botRecommendationModel;
-
-  const EndBotStock(this.botRecommendationModel);
-
-  @override
-  List<Object> get props => [botRecommendationModel];
-}
-
-class RolloverBotStock extends BotStockEvent {
-  final BotRecommendationModel botRecommendationModel;
-
-  const RolloverBotStock(this.botRecommendationModel);
-
-  @override
-  List<Object> get props => [botRecommendationModel];
 }
 
 class FetchBotDetail extends BotStockEvent {

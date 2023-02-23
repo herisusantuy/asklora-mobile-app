@@ -1,10 +1,9 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_detail_response.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/repository/portfolio_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
-import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart';
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -18,23 +17,36 @@ void main() async {
     late MockPortfolioRepository portfolioRepository;
     late PortfolioBloc portfolioBloc;
 
-    final BaseResponse<List<RecommendedBot>> response =
-        BaseResponse.complete(defaultRecommendedBots);
+    final BaseResponse<List<PortfolioBotModel>> response =
+        BaseResponse.complete(defaultPortfolioBot);
 
-    final BaseResponse<PortfolioDetailResponse> detailResponse =
-        BaseResponse.complete(PortfolioDetailResponse());
+    final BaseResponse<PortfolioResponse> portfolioResponse =
+        BaseResponse.complete(PortfolioResponse());
 
-    final BaseResponse<PortfolioDetailResponse> detailErrorResponse =
+    final BaseResponse<PortfolioResponse> portfolioErrorResponse =
         BaseResponse.error('Something went wrong');
 
-    final BaseResponse<List<ChartDataSet>> chartResponse =
-        BaseResponse.complete([]);
-
-    final BaseResponse<List<RecommendedBot>> errorResponse =
+    final BaseResponse<List<PortfolioBotModel>> errorResponse =
         BaseResponse.error('Something went wrong');
 
-    final BaseResponse<List<ChartDataSet>> chartErrorResponse =
+    final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
+
+    final BaseResponse<bool> boolErrorResponse =
         BaseResponse.error('Something went wrong');
+
+    const PortfolioBotModel portfolioBotModel = PortfolioBotModel(
+        1,
+        '',
+        '',
+        'CLASSIC_classic_003846',
+        '',
+        '',
+        'Pullup',
+        'MSFT.O',
+        'TESLA',
+        '',
+        '440',
+        2000);
 
     setUpAll(() async {
       portfolioRepository = MockPortfolioRepository();
@@ -78,52 +90,86 @@ void main() async {
 
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.complete` WHEN '
-        'fetching chart data',
-        build: () {
-          when(portfolioRepository.fetchChartDataJson())
-              .thenAnswer((_) => Future.value(chartResponse));
-          return portfolioBloc;
-        },
-        act: (bloc) => bloc.add(FetchBotPortfolioChartData()),
-        expect: () => {PortfolioState(chartDataResponse: chartResponse)});
-
-    blocTest<PortfolioBloc, PortfolioState>(
-        'emits `BaseResponse.error` WHEN '
-        'failed fetching chart data',
-        build: () {
-          when(portfolioRepository.fetchChartDataJson())
-              .thenThrow(chartErrorResponse);
-          return portfolioBloc;
-        },
-        act: (bloc) => bloc.add(FetchBotPortfolioChartData()),
-        expect: () => {PortfolioState(chartDataResponse: chartErrorResponse)});
-
-    blocTest<PortfolioBloc, PortfolioState>(
-        'emits `BaseResponse.complete` WHEN '
         'fetching portfolio detail',
         build: () {
-          when(portfolioRepository.fetchPortfolioDetail())
-              .thenAnswer((_) => Future.value(detailResponse));
+          when(portfolioRepository.fetchPortfolio())
+              .thenAnswer((_) => Future.value(portfolioResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(FetchPortfolioDetail()),
+        act: (bloc) => bloc.add(FetchPortfolio()),
         expect: () => {
-              PortfolioState(portfolioDetailResponse: BaseResponse.loading()),
-              PortfolioState(portfolioDetailResponse: detailResponse)
+              PortfolioState(portfolioResponse: BaseResponse.loading()),
+              PortfolioState(portfolioResponse: portfolioResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.error` WHEN '
         'failed portfolio detail',
         build: () {
-          when(portfolioRepository.fetchPortfolioDetail())
-              .thenThrow(detailErrorResponse);
+          when(portfolioRepository.fetchPortfolio())
+              .thenThrow(portfolioErrorResponse);
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(FetchPortfolioDetail()),
+        act: (bloc) => bloc.add(FetchPortfolio()),
         expect: () => {
-              PortfolioState(portfolioDetailResponse: BaseResponse.loading()),
-              PortfolioState(portfolioDetailResponse: detailErrorResponse)
+              PortfolioState(portfolioResponse: BaseResponse.loading()),
+              PortfolioState(portfolioResponse: portfolioErrorResponse)
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>(
+        'emits `BaseResponse.complete` WHEN '
+        'ending bot stock',
+        build: () {
+          when(portfolioRepository.endBotStock(portfolioBotModel))
+              .thenAnswer((_) => Future.value(boolResponse));
+          return portfolioBloc;
+        },
+        act: (bloc) => bloc.add(const EndBotStock(portfolioBotModel)),
+        expect: () => {
+              PortfolioState(endBotStockResponse: BaseResponse.loading()),
+              PortfolioState(endBotStockResponse: boolResponse)
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>(
+        'emits `BaseResponse.error` WHEN '
+        'failed ending bot stock',
+        build: () {
+          when(portfolioRepository.endBotStock(portfolioBotModel))
+              .thenThrow(boolErrorResponse);
+          return portfolioBloc;
+        },
+        act: (bloc) => bloc.add(const EndBotStock(portfolioBotModel)),
+        expect: () => {
+              PortfolioState(endBotStockResponse: BaseResponse.loading()),
+              PortfolioState(endBotStockResponse: boolErrorResponse)
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>(
+        'emits `BaseResponse.complete` WHEN '
+        'rollover bot stock',
+        build: () {
+          when(portfolioRepository.rolloverBotStock(portfolioBotModel))
+              .thenAnswer((_) => Future.value(boolResponse));
+          return portfolioBloc;
+        },
+        act: (bloc) => bloc.add(const RolloverBotStock(portfolioBotModel)),
+        expect: () => {
+              PortfolioState(rolloverBotStockResponse: BaseResponse.loading()),
+              PortfolioState(rolloverBotStockResponse: boolResponse)
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>(
+        'emits `BaseResponse.error` WHEN '
+        'failed rollover bot stock',
+        build: () {
+          when(portfolioRepository.rolloverBotStock(portfolioBotModel))
+              .thenThrow(boolErrorResponse);
+          return portfolioBloc;
+        },
+        act: (bloc) => bloc.add(const RolloverBotStock(portfolioBotModel)),
+        expect: () => {
+              PortfolioState(rolloverBotStockResponse: BaseResponse.loading()),
+              PortfolioState(rolloverBotStockResponse: boolErrorResponse)
             });
 
     tearDown(() => {portfolioBloc.close()});

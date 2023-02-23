@@ -1,10 +1,10 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart';
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart';
 import 'package:asklora_mobile_app/feature/learning/demonstration_bot/bloc/demonstration_bot_bloc.dart';
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -18,8 +18,8 @@ void main() async {
     late MockBotStockRepository botStockRepository;
     late DemonstrationBotBloc demonstrationBotBloc;
 
-    final BaseResponse<List<RecommendedBot>> response =
-        BaseResponse.complete(defaultRecommendedBots);
+    final BaseResponse<List<BotRecommendationModel>> response =
+        BaseResponse.complete(defaultBotRecommendation);
 
     final BaseResponse<List<ChartDataSet>> chartResponse =
         BaseResponse.complete([]);
@@ -28,7 +28,7 @@ void main() async {
         BaseResponse.complete(
             ChartStudioAnimationModel(chartData: [], botData: [], uiData: []));
 
-    final BaseResponse<List<RecommendedBot>> errorResponse =
+    final BaseResponse<List<BotRecommendationModel>> errorResponse =
         BaseResponse.error('Something went wrong');
 
     final BaseResponse<List<ChartDataSet>> chartErrorResponse =
@@ -87,7 +87,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'fetching chart data',
         build: () {
-          when(botStockRepository.fetchBotDetail())
+          when(botStockRepository.fetchChartDataJson())
               .thenAnswer((_) => Future.value(chartResponse));
           return demonstrationBotBloc;
         },
@@ -101,7 +101,7 @@ void main() async {
         'failed fetching chart data',
         build: () {
           when(
-            botStockRepository.fetchBotDetail(),
+            botStockRepository.fetchChartDataJson(),
           ).thenThrow(chartErrorResponse);
           return demonstrationBotBloc;
         },

@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
-
 part 'portfolio_response.g.dart';
 
 @JsonSerializable()
@@ -11,10 +9,8 @@ class PortfolioResponse {
   final double buyingPower;
   final double totalBotStockValues;
   final double profit;
-  final List<RecommendedBot> portfolioBots;
 
   PortfolioResponse({
-    this.portfolioBots = const [],
     this.totalPortfolio = 100000,
     this.withdrawableAmount = 5000,
     this.buyingPower = 3000,
@@ -26,4 +22,19 @@ class PortfolioResponse {
       _$PortfolioResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$PortfolioResponseToJson(this);
+
+  PortfolioResponse copyWith({
+    double? totalPortfolio,
+    double? withdrawableAmount,
+    double? buyingPower,
+    double? totalBotStockValues,
+    double? profit,
+  }) =>
+      PortfolioResponse(
+        totalPortfolio: totalPortfolio ?? this.totalPortfolio,
+        withdrawableAmount: withdrawableAmount ?? this.withdrawableAmount,
+        buyingPower: buyingPower ?? this.buyingPower,
+        totalBotStockValues: totalBotStockValues ?? this.totalBotStockValues,
+        profit: profit ?? this.profit,
+      );
 }

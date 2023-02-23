@@ -4,12 +4,12 @@ import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_recommendation_detail_content.dart';
 import '../../../../bot_stock/presentation/widgets/bot_stock_form.dart';
 import '../../../../bot_stock/repository/bot_stock_repository.dart';
 import '../../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../../chart/presentation/chart_animation.dart';
-import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../learning_bot_stock_screen.dart';
 import '../../bloc/demonstration_bot_bloc.dart';
 import '../../utils/demonstration_bot_utils.dart';
@@ -17,11 +17,11 @@ import '../../utils/demonstration_bot_utils.dart';
 part 'widgets/demonstration_bot_chart.dart';
 
 class DemonstrationBotDetailScreen extends StatelessWidget {
-  final RecommendedBot recommendedBot;
+  final BotRecommendationModel botRecommendationModel;
   final BotType botType;
 
   const DemonstrationBotDetailScreen(
-      {required this.recommendedBot, required this.botType, Key? key})
+      {required this.botRecommendationModel, required this.botType, Key? key})
       : super(key: key);
 
   @override
@@ -42,10 +42,10 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
                 .read<NavigationBloc<LearningBotStockPageStep>>()
                 .add(const PagePop()),
             useHeader: true,
-            title: '${botType.upperCaseName} ${recommendedBot.ticker}',
+            title: '${botType.upperCaseName} ${botRecommendationModel.ticker}',
             contentPadding: EdgeInsets.zero,
             content: BotRecommendationDetailContent(
-              recommendedBot: recommendedBot,
+              botRecommendationModel: botRecommendationModel,
               botType: botType,
               chart: const DemonstrationBotChart(),
             ),

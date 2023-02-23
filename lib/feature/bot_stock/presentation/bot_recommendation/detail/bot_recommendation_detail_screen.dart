@@ -178,7 +178,9 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                             title1: 'Prev Close',
                             subTitle1: 'Not available yet',
                             title2: 'Market Cap',
-                            subTitle2: botDetailModel.marketCap ?? '-',
+                            subTitle2: botDetailModel.marketCap != null
+                                ? botDetailModel.marketCap!.toStringAsFixed(1)
+                                : '-',
                           ),
                           const SizedBox(
                             height: 2,
@@ -212,7 +214,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                             title1: 'Headquarters',
                             subTitle1: botDetailModel.headquarters,
                             title2: 'Founded',
-                            subTitle2: botDetailModel.founded.toString(),
+                            subTitle2: botDetailModel.founded,
                           ),
                           const SizedBox(
                             height: 23,

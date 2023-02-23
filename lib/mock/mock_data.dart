@@ -4,9 +4,10 @@ import '../core/domain/base_response.dart';
 import '../core/utils/storage/shared_preference.dart';
 import '../feature/balance/deposit/utils/deposit_utils.dart';
 import '../feature/balance/withdrawal/domain/withdrawal_response.dart';
-import '../feature/bot_stock/presentation/portfolio/domain/portfolio_detail_response.dart';
+import '../feature/bot_stock/domain/bot_recommendation_model.dart';
+import '../feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart';
+import '../feature/bot_stock/presentation/portfolio/domain/portfolio_bot_response.dart';
 import '../feature/bot_stock/presentation/portfolio/domain/portfolio_response.dart';
-import '../feature/onboarding/ppi/domain/ppi_user_response.dart';
 
 class MockData {
   final _sharedPreference = SharedPreference();
@@ -17,46 +18,26 @@ class MockData {
 
   MockData._();
 
-  DepositType depositType = DepositType.firstTime;
+  Future<void> _saveDepositType(DepositType depositType) async {
+    _sharedPreference.writeData('deposit_type', depositType.name);
+  }
 
-  ///CURRENT PORTFOLIO INC. TOTAL PORTFOLIO, WITHRAWABLE, ETC
-  // PortfolioDetailResponse portfolioDetailResponse = PortfolioDetailResponse(
-  //     totalPortfolio: 0,
-  //     withdrawableAmount: 0,
-  //     buyingPower: 0,
-  //     totalBotStockValues: 0,
-  //     profit: 0);
+  Future<DepositType> getDepositType() async {
+    String? data = await _sharedPreference.readData('deposit_type');
+    return DepositType.values.firstWhere((element) => element.name == data);
+  }
 
-  ///CURRENT PORTFOLIO BOT OWNED BY USER
-  // List<RecommendedBot> portfolioBots = [];
-
-  Future<PortfolioDetailResponse> fetchPortfolioDetailResponse() async {
-    String? response =
-        await _sharedPreference.readData('portfolio_detail_response');
+  Future<PortfolioResponse> fetchPortfolioDetailResponse() async {
+    String? response = await _sharedPreference.readData('portfolio_response');
     if (response != null) {
-      return PortfolioDetailResponse.fromJson(jsonDecode(response));
+      return PortfolioResponse.fromJson(jsonDecode(response));
     } else {
-      return PortfolioDetailResponse(
+      return PortfolioResponse(
           totalPortfolio: 0,
           withdrawableAmount: 0,
           buyingPower: 0,
           totalBotStockValues: 0,
           profit: 0);
-    }
-  }
-
-  Future<void> _savePortfolioDetailResponse(
-      PortfolioDetailResponse portfolioDetailResponse) async {
-    _sharedPreference.writeData('portfolio_detail_response',
-        jsonEncode(portfolioDetailResponse.toJson()));
-  }
-
-  Future<PortfolioResponse> fetchPortfolioResponse() async {
-    String? response = await _sharedPreference.readData('portfolio_response');
-    if (response != null) {
-      return PortfolioResponse.fromJson(jsonDecode(response));
-    } else {
-      return PortfolioResponse();
     }
   }
 
@@ -66,25 +47,38 @@ class MockData {
         'portfolio_response', jsonEncode(portfolioResponse.toJson()));
   }
 
-  void saveDeposit(double depositAmount) async {
-    PortfolioDetailResponse portfolioDetailResponse =
-        await fetchPortfolioDetailResponse();
+  Future<PortfolioBotResponse> fetchBotPortfolioResponse() async {
+    String? response =
+        await _sharedPreference.readData('portfolio_bot_response');
+    if (response != null) {
+      return PortfolioBotResponse.fromJson(jsonDecode(response));
+    } else {
+      return PortfolioBotResponse();
+    }
+  }
 
-    _sharedPreference.writeData('deposit_type', DepositType.type1.name);
-    await _savePortfolioDetailResponse(portfolioDetailResponse.copyWith(
-      totalPortfolio: portfolioDetailResponse.totalPortfolio + depositAmount,
-      withdrawableAmount:
-          portfolioDetailResponse.withdrawableAmount + depositAmount,
-      buyingPower: portfolioDetailResponse.buyingPower + depositAmount,
+  Future<void> _savePortfolioBotResponse(
+      PortfolioBotResponse portfolioBotResponse) async {
+    _sharedPreference.writeData(
+        'portfolio_bot_response', jsonEncode(portfolioBotResponse.toJson()));
+  }
+
+  void saveDeposit(double depositAmount) async {
+    PortfolioResponse portfolioResponse = await fetchPortfolioDetailResponse();
+    _saveDepositType(DepositType.type1);
+    await _savePortfolioResponse(portfolioResponse.copyWith(
+      totalPortfolio: portfolioResponse.totalPortfolio + depositAmount,
+      withdrawableAmount: portfolioResponse.withdrawableAmount + depositAmount,
+      buyingPower: portfolioResponse.buyingPower + depositAmount,
     ));
   }
 
   Future<BaseResponse<WithdrawalResponse>> saveWithdrawal(
       double withdrawalAmount) async {
-    PortfolioDetailResponse portfolioDetailResponse =
+    PortfolioResponse portfolioDetailResponse =
         await fetchPortfolioDetailResponse();
     if (withdrawalAmount <= portfolioDetailResponse.withdrawableAmount) {
-      await _savePortfolioDetailResponse(portfolioDetailResponse.copyWith(
+      await _savePortfolioResponse(portfolioDetailResponse.copyWith(
         totalPortfolio:
             portfolioDetailResponse.totalPortfolio - withdrawalAmount,
         withdrawableAmount:
@@ -98,49 +92,59 @@ class MockData {
   }
 
   Future<BaseResponse<bool>> saveBotStock(
-      {required RecommendedBot recommendedBot,
+      {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount}) async {
-    PortfolioDetailResponse portfolioDetailResponse =
+    PortfolioResponse portfolioDetailResponse =
         await fetchPortfolioDetailResponse();
-    if (recommendedBot.freeBot ||
+    if (botRecommendationModel.freeBot ||
         portfolioDetailResponse.buyingPower >= tradeBotStockAmount) {
-      PortfolioResponse data = await fetchPortfolioResponse();
-      List<RecommendedBot> portfolioBots = List.from(data.portfolioBots);
-      //portfolioBots.add(recommendedBot.copyWith(amount: tradeBotStockAmount));
+      PortfolioBotResponse data = await fetchBotPortfolioResponse();
+      List<PortfolioBotModel> portfolioBots = List.from(data.portfolioBots);
+      portfolioBots.add(PortfolioBotModel(
+          botRecommendationModel.id,
+          botRecommendationModel.suitability,
+          botRecommendationModel.benefit,
+          botRecommendationModel.botId,
+          botRecommendationModel.botWord,
+          botRecommendationModel.botType,
+          botRecommendationModel.botAppType,
+          botRecommendationModel.ticker,
+          botRecommendationModel.tickerName,
+          botRecommendationModel.tickerSymbol,
+          botRecommendationModel.latestPrice,
+          tradeBotStockAmount));
 
-      await _savePortfolioResponse(
-          PortfolioResponse(portfolioBots: portfolioBots));
-      await _savePortfolioDetailResponse(portfolioDetailResponse.copyWith(
+      await _savePortfolioBotResponse(
+          PortfolioBotResponse(portfolioBots: portfolioBots));
+      await _savePortfolioResponse(portfolioDetailResponse.copyWith(
           withdrawableAmount: portfolioDetailResponse.withdrawableAmount -
-              (recommendedBot.freeBot ? 0 : tradeBotStockAmount),
+              (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
           buyingPower: portfolioDetailResponse.buyingPower -
-              (recommendedBot.freeBot ? 0 : tradeBotStockAmount),
+              (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
           totalBotStockValues:
               portfolioDetailResponse.totalBotStockValues + tradeBotStockAmount,
           totalPortfolio: portfolioDetailResponse.totalPortfolio +
-              (recommendedBot.freeBot ? tradeBotStockAmount : 0)));
+              (botRecommendationModel.freeBot ? tradeBotStockAmount : 0)));
       return BaseResponse.complete(true);
     } else {
       return BaseResponse.error('Insufficient balance');
     }
   }
 
-  void endBotStock(RecommendedBot recommendedBot) async {
-    PortfolioResponse data = await fetchPortfolioResponse();
-    List<RecommendedBot> portfolioBots = List.from(data.portfolioBots);
-    print('portfolio bots ${portfolioBots}');
-    portfolioBots.remove(recommendedBot);
-    await _savePortfolioResponse(
-        PortfolioResponse(portfolioBots: portfolioBots));
+  void endBotStock(PortfolioBotModel portfolioBotModel) async {
+    PortfolioBotResponse data = await fetchBotPortfolioResponse();
+    List<PortfolioBotModel> portfolioBots = List.from(data.portfolioBots);
+    portfolioBots.remove(portfolioBotModel);
+    await _savePortfolioBotResponse(
+        PortfolioBotResponse(portfolioBots: portfolioBots));
 
-    PortfolioDetailResponse portfolioDetailResponse =
-        await fetchPortfolioDetailResponse();
-    await _savePortfolioDetailResponse(portfolioDetailResponse.copyWith(
-      buyingPower: portfolioDetailResponse.buyingPower + recommendedBot.amount,
+    PortfolioResponse portfolioResponse = await fetchPortfolioDetailResponse();
+    await _savePortfolioResponse(portfolioResponse.copyWith(
+      buyingPower: portfolioResponse.buyingPower + portfolioBotModel.amount,
       withdrawableAmount:
-          portfolioDetailResponse.withdrawableAmount + recommendedBot.amount,
+          portfolioResponse.withdrawableAmount + portfolioBotModel.amount,
       totalBotStockValues:
-          portfolioDetailResponse.totalBotStockValues - recommendedBot.amount,
+          portfolioResponse.totalBotStockValues - portfolioBotModel.amount,
     ));
   }
 }

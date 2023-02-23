@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
 
-part 'bot_recommendation_model.g.dart';
+part 'portfolio_bot_model.g.dart';
 
 @JsonSerializable()
-class BotRecommendationModel extends Equatable {
+class PortfolioBotModel extends Equatable {
   final int id;
   final String suitability;
   final String benefit;
@@ -25,26 +25,29 @@ class BotRecommendationModel extends Equatable {
   final String latestPrice;
   final bool freeBot;
   final bool selectable;
+  final double amount;
 
-  const BotRecommendationModel(
-      this.id,
-      this.suitability,
-      this.benefit,
-      this.botId,
-      this.botWord,
-      this.botType,
-      this.botAppType,
-      this.ticker,
-      this.tickerName,
-      this.tickerSymbol,
-      this.latestPrice,
-      {this.freeBot = false,
-      this.selectable = false});
+  const PortfolioBotModel(
+    this.id,
+    this.suitability,
+    this.benefit,
+    this.botId,
+    this.botWord,
+    this.botType,
+    this.botAppType,
+    this.ticker,
+    this.tickerName,
+    this.tickerSymbol,
+    this.latestPrice,
+    this.amount, {
+    this.freeBot = false,
+    this.selectable = false,
+  });
 
-  factory BotRecommendationModel.fromJson(Map<String, dynamic> json) =>
-      _$BotRecommendationModelFromJson(json);
+  factory PortfolioBotModel.fromJson(Map<String, dynamic> json) =>
+      _$PortfolioBotModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BotRecommendationModelToJson(this);
+  Map<String, dynamic> toJson() => _$PortfolioBotModelToJson(this);
 
   @override
   List<Object?> get props => [

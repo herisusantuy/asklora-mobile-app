@@ -1,37 +1,76 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/services.dart';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../../../chart/domain/chart_models.dart';
-import '../../../domain/bot_recommendation_model.dart';
+import '../../../../../main.dart';
+import '../../../../../mock/mock_data.dart';
+import '../../../domain/bot_detail_request.dart';
 import '../../../utils/bot_stock_utils.dart';
-import '../domain/portfolio_detail_response.dart';
+import '../domain/portfolio_api_client.dart';
+import '../domain/portfolio_bot_detail_model.dart';
+import '../domain/portfolio_bot_model.dart';
+import '../domain/portfolio_response.dart';
 
 class PortfolioRepository {
-  Future<BaseResponse<List<ChartDataSet>>> fetchChartDataJson() async {
+  final PortfolioApiClient _portfolioApiClient = PortfolioApiClient();
+
+  Future<BaseResponse<List<PortfolioBotModel>>> fetchBotPortfolio(
+      BotStockFilter botStockFilter) async {
+    if (isDemoEnable) {
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      ///MOCK
+      var data = await MockData().fetchBotPortfolioResponse();
+      return BaseResponse.complete(data.portfolioBots);
+    } else {
+      ///REAL
+      await Future.delayed(const Duration(seconds: 1));
+      return BaseResponse.complete(
+          botStockFilter == BotStockFilter.all ? defaultPortfolioBot : []);
+    }
+  }
+
+  Future<BaseResponse<PortfolioResponse>> fetchPortfolio() async {
+    if (isDemoEnable) {
+      ///MOCK
+      await Future.delayed(const Duration(milliseconds: 500));
+      return BaseResponse.complete(
+          await MockData().fetchPortfolioDetailResponse());
+    } else {
+      ///REAL
+      await Future.delayed(const Duration(seconds: 1));
+      return BaseResponse.complete(PortfolioResponse());
+    }
+  }
+
+  Future<BaseResponse<PortfolioBotDetailModel>> fetchBotPortfolioDetail(
+      PortfolioBotModel portfolioBotModel) async {
     try {
-      final String response =
-          await rootBundle.loadString('assets/json/aapl_with_index.json');
+      var response = await _portfolioApiClient.fetchPortfolioBotDetail(
+          BotDetailRequest(portfolioBotModel.ticker, portfolioBotModel.botId));
 
-      Iterable iterable = json.decode(response);
-
-      return BaseResponse.complete(List<ChartDataSet>.from(
-          iterable.map((model) => ChartDataSet.fromJson(model))));
+      return BaseResponse.complete(
+          PortfolioBotDetailModel.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error('Something went wrong');
     }
   }
 
-  Future<BaseResponse<List<BotRecommendationModel>>> fetchBotPortfolio(
-      BotStockFilter botStockFilter) async {
+  Future<BaseResponse<bool>> rolloverBotStock(
+      PortfolioBotModel portfolioBotModel) async {
     await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(
-        botStockFilter == BotStockFilter.all ? defaultBotRecommendation : []);
+    return BaseResponse.complete(true);
   }
 
-  Future<BaseResponse<PortfolioDetailResponse>> fetchPortfolioDetail() async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(PortfolioDetailResponse());
+  Future<BaseResponse<bool>> endBotStock(
+      PortfolioBotModel portfolioBotModel) async {
+    if (isDemoEnable) {
+      ///Remove bot to mock data
+      await Future.delayed(const Duration(milliseconds: 500));
+      MockData().endBotStock(portfolioBotModel);
+      return BaseResponse.complete(true);
+    } else {
+      await Future.delayed(const Duration(seconds: 1));
+      return BaseResponse.complete(true);
+    }
   }
 }

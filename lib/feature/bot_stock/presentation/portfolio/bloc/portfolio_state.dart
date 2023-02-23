@@ -2,42 +2,51 @@ part of 'portfolio_bloc.dart';
 
 class PortfolioState extends Equatable {
   const PortfolioState({
-    this.portfolioDetailResponse = const BaseResponse(),
+    this.portfolioResponse = const BaseResponse(),
     this.botPortfolioResponse = const BaseResponse(),
-    this.chartDataResponse = const BaseResponse(),
+    this.botPortfolioDetailResponse = const BaseResponse(),
+    this.rolloverBotStockResponse = const BaseResponse(),
+    this.endBotStockResponse = const BaseResponse(),
     this.botStockFilter = BotStockFilter.all,
     this.currency = CurrencyType.hkd,
   });
 
-  final BaseResponse<PortfolioDetailResponse> portfolioDetailResponse;
-  final BaseResponse<List<BotRecommendationModel>> botPortfolioResponse;
-  final BaseResponse<List<ChartDataSet>> chartDataResponse;
+  final BaseResponse<PortfolioResponse> portfolioResponse;
+  final BaseResponse<List<PortfolioBotModel>> botPortfolioResponse;
+  final BaseResponse<PortfolioBotDetailModel> botPortfolioDetailResponse;
+  final BaseResponse<bool> rolloverBotStockResponse;
+  final BaseResponse<bool> endBotStockResponse;
   final BotStockFilter botStockFilter;
   final CurrencyType currency;
 
   @override
   List<Object?> get props {
     return [
-      portfolioDetailResponse,
+      portfolioResponse,
       botPortfolioResponse,
-      chartDataResponse,
+      botPortfolioDetailResponse,
       botStockFilter,
       currency,
     ];
   }
 
   PortfolioState copyWith({
-    BaseResponse<PortfolioDetailResponse>? portfolioDetailResponse,
-    BaseResponse<List<BotRecommendationModel>>? botPortfolioResponse,
-    BaseResponse<List<ChartDataSet>>? chartDataResponse,
+    BaseResponse<PortfolioResponse>? portfolioResponse,
+    BaseResponse<List<PortfolioBotModel>>? botPortfolioResponse,
+    BaseResponse<PortfolioBotDetailModel>? botPortfolioDetailResponse,
+    BaseResponse<bool>? rolloverBotStockResponse,
+    BaseResponse<bool>? endBotStockResponse,
     BotStockFilter? botStockFilter,
     CurrencyType? currency,
   }) {
     return PortfolioState(
-      portfolioDetailResponse:
-          portfolioDetailResponse ?? this.portfolioDetailResponse,
+      portfolioResponse: portfolioResponse ?? this.portfolioResponse,
       botPortfolioResponse: botPortfolioResponse ?? this.botPortfolioResponse,
-      chartDataResponse: chartDataResponse ?? this.chartDataResponse,
+      botPortfolioDetailResponse:
+          botPortfolioDetailResponse ?? this.botPortfolioDetailResponse,
+      rolloverBotStockResponse:
+          rolloverBotStockResponse ?? this.rolloverBotStockResponse,
+      endBotStockResponse: endBotStockResponse ?? this.endBotStockResponse,
       botStockFilter: botStockFilter ?? this.botStockFilter,
       currency: currency ?? this.currency,
     );

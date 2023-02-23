@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../chart/domain/chart_models.dart';
+import '../../../../chart/domain/chart_models.dart';
 
-part 'bot_detail_model.g.dart';
+part 'portfolio_bot_detail_model.g.dart';
 
 @JsonSerializable()
-class BotDetailModel extends Equatable {
+class PortfolioBotDetailModel extends Equatable {
   final BotModel bot;
   final String symbol;
   final String ticker;
@@ -44,7 +44,7 @@ class BotDetailModel extends Equatable {
   final String founded;
   final String headquarters;
 
-  const BotDetailModel(
+  const PortfolioBotDetailModel(
       this.bot,
       this.symbol,
       this.ticker,
@@ -70,10 +70,10 @@ class BotDetailModel extends Equatable {
       this.founded,
       this.headquarters);
 
-  factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
-      _$BotDetailModelFromJson(json);
+  factory PortfolioBotDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$PortfolioBotDetailModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BotDetailModelToJson(this);
+  Map<String, dynamic> toJson() => _$PortfolioBotDetailModelToJson(this);
 
   @override
   List<Object?> get props => [
