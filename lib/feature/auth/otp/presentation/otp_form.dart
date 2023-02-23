@@ -52,7 +52,7 @@ class OtpForm extends StatelessWidget {
                     _padding(),
                     const LoraMemojiHeader(
                         text:
-                            'Please enter the OTP sent on your registered Email ID.'),
+                            'Please enter the OTP sent on your registered Phone Number.'),
                     _otpBox(context),
                   ],
                 ),

@@ -29,3 +29,13 @@ class SignInSubmitted extends SignInEvent {
   @override
   List<Object> get props => [];
 }
+
+class SignInWithOtp extends SignInEvent {
+  final String otp;
+  final String email;
+  final String password;
+  const SignInWithOtp(this.otp, this.email, this.password) : super();
+
+  @override
+  List<Object> get props => [otp, email, password];
+}

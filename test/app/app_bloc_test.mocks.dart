@@ -119,22 +119,6 @@ class MockTokenRepository extends _i1.Mock implements _i4.TokenRepository {
         ),
         returnValue: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
-  @override
-  _i5.Future<String?> getSignUpToken() => (super.noSuchMethod(
-        Invocation.method(
-          #getSignUpToken,
-          [],
-        ),
-        returnValue: _i5.Future<String?>.value(),
-      ) as _i5.Future<String?>);
-  @override
-  void saveSignUpToken(String? token) => super.noSuchMethod(
-        Invocation.method(
-          #saveSignUpToken,
-          [token],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
 
 /// A class which mocks [UserJourneyRepository].

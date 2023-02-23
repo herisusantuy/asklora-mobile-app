@@ -118,7 +118,6 @@ void main() async {
           when(signInRepository.signIn(
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
               .thenAnswer((_) => Future.value(SignInResponse(
-                  'access', 'refresh',
                   userJourney: UserJourney.investmentStyle.value)));
           when(userJourneyRepository.getUserJourney())
               .thenAnswer((_) => Future.value(UserJourney.investmentStyle));
@@ -160,7 +159,7 @@ void main() async {
               ),
               SignInState(
                 response: BaseResponse<SignInResponse>(
-                    data: SignInResponse('access', 'refresh',
+                    data: SignInResponse(
                         userJourney: UserJourney.investmentStyle.value),
                     state: ResponseState.success),
                 emailAddress: 'nyoba@yopmail.com',
