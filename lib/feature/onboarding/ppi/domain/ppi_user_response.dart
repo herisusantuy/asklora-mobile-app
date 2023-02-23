@@ -159,6 +159,7 @@ class RecommendedBot {
   final double maxPrice;
   final double currentPrice;
   final String? chartData;
+  final String? status;
 
   RecommendedBot(
     this.botId,
@@ -195,6 +196,7 @@ class RecommendedBot {
     this.minPrice = 210,
     this.maxPrice = 240,
     this.currentPrice = 220,
+    this.status = 'active',
   });
 
   factory RecommendedBot.fromJson(Map<String, dynamic> json) =>

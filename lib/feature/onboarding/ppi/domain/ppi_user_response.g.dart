@@ -124,6 +124,7 @@ RecommendedBot _$RecommendedBotFromJson(Map<String, dynamic> json) =>
       minPrice: (json['minPrice'] as num?)?.toDouble() ?? 210,
       maxPrice: (json['maxPrice'] as num?)?.toDouble() ?? 240,
       currentPrice: (json['currentPrice'] as num?)?.toDouble() ?? 220,
+      status: json['status'] as String? ?? 'active',
     );
 
 Map<String, dynamic> _$RecommendedBotToJson(RecommendedBot instance) =>
@@ -162,4 +163,5 @@ Map<String, dynamic> _$RecommendedBotToJson(RecommendedBot instance) =>
       'maxPrice': instance.maxPrice,
       'currentPrice': instance.currentPrice,
       'chartData': instance.chartData,
+      'status': instance.status,
     };

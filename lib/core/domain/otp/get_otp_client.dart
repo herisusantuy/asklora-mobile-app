@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 
 import '../endpoints.dart';
 import 'get_otp_request.dart';
+import 'get_sms_otp_request.dart';
 
 class GetOtpClient {
   Future<Response> getOtp(GetOtpRequest getOtpRequest) async {
@@ -18,6 +19,13 @@ class GetOtpClient {
     var response = await AskloraApiClient().post(
         endpoint: endpointVerifyEmail,
         payload: json.encode(verifyOtpRequest.toJson()));
+    return response;
+  }
+
+  Future<Response> getSmsOtp(GetSmsOtpRequest getSmsOtpRequest) async {
+    var response = await AskloraApiClient().post(
+        endpoint: endpointGetSmsOtp,
+        payload: json.encode(getSmsOtpRequest.toJson()));
     return response;
   }
 }
