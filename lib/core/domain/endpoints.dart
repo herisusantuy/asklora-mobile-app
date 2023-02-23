@@ -1,6 +1,7 @@
 const v1 = '/api/v1/';
 const v2 = '/api/v2/';
 const accounts = 'accounts/';
+const bots = 'bots/';
 const transactions = 'transactions/';
 const orders = 'orders/';
 const activities = 'activities/';
@@ -33,3 +34,4 @@ const String endpointOrders = '$v1$orders';
 const String endpointUserJourney = '$v2${activities}user-journey/';
 
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
+const String endpointBotDetail = '$v1${bots}bot_detail/';

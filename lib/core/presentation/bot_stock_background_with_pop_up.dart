@@ -51,11 +51,11 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
                   child: Wrap(
                     spacing: _spacing,
                     runSpacing: _spacing,
-                    children: defaultRecommendedBots
+                    children: defaultBotRecommendation
                         .map((e) => BotRecommendationCard(
                               onTap: () {},
                               height: botCardHeight,
-                              recommendedBot: e,
+                              botRecommendationModel: e,
                               spacing: _spacing,
                             ))
                         .toList(),

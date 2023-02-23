@@ -14,6 +14,7 @@ import '../../feature/balance/withdrawal/presentation/withdrawal_amount/withdraw
 import '../../feature/balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
+import '../../feature/bot_stock/domain/bot_recommendation_model.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
 import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
@@ -27,7 +28,6 @@ import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
-import '../../feature/onboarding/ppi/domain/ppi_user_response.dart';
 import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../feature/onboarding/ppi/presentation/ppi_screen.dart';
 import '../../feature/onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
@@ -122,17 +122,17 @@ class RouterGenerator {
       case BotRecommendationDetailScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotRecommendationDetailScreen(
-                  recommendedBot: settings.arguments as RecommendedBot,
+                  botRecommendation: settings.arguments as BotRecommendationModel,
                 ));
       case BotPortfolioDetailScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotPortfolioDetailScreen(
-                  recommendedBot: settings.arguments as RecommendedBot,
+                  botRecommendationModel: settings.arguments as BotRecommendationModel,
                 ));
       case BotTradeSummaryScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotTradeSummaryScreen(
-                  arguments: settings.arguments as Pair<RecommendedBot, double>,
+                  arguments: settings.arguments as Pair<BotRecommendationModel, double>,
                 ));
       case PortfolioScreen.route:
         return MaterialPageRoute(builder: (_) => const PortfolioScreen());

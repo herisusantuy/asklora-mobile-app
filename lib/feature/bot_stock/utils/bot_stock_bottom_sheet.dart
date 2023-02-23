@@ -9,8 +9,8 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/extensions.dart';
 import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
-import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../bloc/bot_stock_bloc.dart';
+import '../domain/bot_recommendation_model.dart';
 import '../presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../presentation/widgets/bot_bottom_sheet_widget.dart';
 import '../repository/bot_stock_repository.dart';
@@ -34,28 +34,28 @@ class BotStockBottomSheet {
   }
 
   static endBotStockConfirmation(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, BotRecommendationModel botRecommendationModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (_) => BotBottomSheetWidget(
               title:
-                  'You can quit now and all the trading activities of ${BotType.findByString(recommendedBot.botType).name} ${recommendedBot.ticker} will end ',
+                  'You can quit now and all the trading activities of ${BotType.findByString(botRecommendationModel.botType).name} ${botRecommendationModel.ticker} will end ',
               subTitle:
-                  'The total Botstock value (US\$ ${recommendedBot.value}) will be returned to your account after the next community order',
+                  'The total Botstock value (US\$ 200) will be returned to your account after the next community order',
               primaryButtonLabel: 'END BOT STOCK',
               secondaryButtonLabel: 'CANCEL',
               onPrimaryButtonTap: () {
                 Navigator.pop(context);
-                context.read<BotStockBloc>().add(EndBotStock(recommendedBot));
+                context.read<BotStockBloc>().add(EndBotStock(botRecommendationModel));
               },
               onSecondaryButtonTap: () => Navigator.pop(context),
             ));
   }
 
   static rolloverBotStockConfirmation(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, BotRecommendationModel botRecommendationModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -69,14 +69,14 @@ class BotStockBottomSheet {
               onPrimaryButtonTap: () {
                 Navigator.pop(context);
                 BotStockBottomSheet.rolloverBotStockDisclosure(
-                    context, recommendedBot);
+                    context, botRecommendationModel);
               },
               onSecondaryButtonTap: () => Navigator.pop(context),
             ));
   }
 
   static rolloverBotStockDisclosure(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, BotRecommendationModel botRecommendationModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -92,14 +92,14 @@ class BotStockBottomSheet {
                 Navigator.pop(context);
                 context
                     .read<BotStockBloc>()
-                    .add(RolloverBotStock(recommendedBot));
+                    .add(RolloverBotStock(botRecommendationModel));
               },
               onSecondaryButtonTap: () => Navigator.pop(context),
             ));
   }
 
   static amountBotStockForm(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, BotRecommendationModel botrecommendationModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -122,7 +122,7 @@ class BotStockBottomSheet {
                         BotTradeSummaryScreen.open(
                             context: context,
                             arguments: Pair(
-                                recommendedBot, state.botStockTradeAmount));
+                                botrecommendationModel, state.botStockTradeAmount));
                       },
                       onSecondaryButtonTap: () => Navigator.pop(context),
                       child: IntrinsicWidth(

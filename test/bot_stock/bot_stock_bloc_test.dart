@@ -1,9 +1,9 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart';
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -17,18 +17,18 @@ void main() async {
     late MockBotStockRepository botStockRepository;
     late BotStockBloc botStockBloc;
 
-    final BaseResponse<List<RecommendedBot>> botStockResponse =
-        BaseResponse.complete(defaultRecommendedBots);
+    final BaseResponse<List<BotRecommendationModel>> botStockResponse =
+        BaseResponse.complete(defaultBotRecommendation);
 
-    final BaseResponse<List<RecommendedBot>> freeBotStockResponse =
-        BaseResponse.complete(defaultRecommendedBots);
+    final BaseResponse<List<BotRecommendationModel>> freeBotStockResponse =
+        BaseResponse.complete(defaultBotRecommendation);
 
     final BaseResponse<List<ChartDataSet>> chartResponse =
         BaseResponse.complete([]);
 
     final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
 
-    final BaseResponse<List<RecommendedBot>> errorResponse =
+    final BaseResponse<List<BotRecommendationModel>> errorResponse =
         BaseResponse.error('Something went wrong');
 
     final BaseResponse<List<ChartDataSet>> chartErrorResponse =
@@ -37,18 +37,7 @@ void main() async {
     final BaseResponse<bool> boolErrorResponse =
         BaseResponse.error('Something went wrong');
 
-    final RecommendedBot recommendedBot = RecommendedBot(
-        '1',
-        'TSLA',
-        'Tesla TSLA',
-        '4',
-        'pull_up',
-        'For stocks that holds a stable position. ',
-        'Tesla Inc',
-        '303.75',
-        '9',
-        '10',
-        DateTime.now().add(const Duration(days: 5)));
+    const BotRecommendationModel botRecommendationModel = BotRecommendationModel(1, '', '', '', '', '', 'Pullup', '', '', '', '');
 
     setUpAll(() async {
       botStockRepository = MockBotStockRepository();
@@ -123,12 +112,12 @@ void main() async {
         'getting free bot stock',
         build: () {
           when(botStockRepository.getFreeBotStock(
-                  recommendedBot: recommendedBot, tradeBotStockAmount: 0))
+                  botRecommendationModel: botRecommendationModel, tradeBotStockAmount: 0))
               .thenAnswer((_) => Future.value(boolResponse));
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(TradeBotStock(
-            recommendedBot: recommendedBot, tradeBotStockAmount: 0)),
+        act: (bloc) => bloc.add(const TradeBotStock(
+            botRecommendationModel: botRecommendationModel, tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(tradeBotStockResponse: BaseResponse.loading()),
               BotStockState(tradeBotStockResponse: boolResponse)
@@ -139,12 +128,12 @@ void main() async {
         'failed getting free bot stock',
         build: () {
           when(botStockRepository.getFreeBotStock(
-                  recommendedBot: recommendedBot, tradeBotStockAmount: 0))
+                  botRecommendationModel: botRecommendationModel, tradeBotStockAmount: 0))
               .thenThrow(boolErrorResponse);
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(TradeBotStock(
-            recommendedBot: recommendedBot, tradeBotStockAmount: 0)),
+        act: (bloc) => bloc.add(const TradeBotStock(
+            botRecommendationModel: botRecommendationModel, tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(tradeBotStockResponse: BaseResponse.loading()),
               BotStockState(tradeBotStockResponse: boolErrorResponse)
@@ -154,11 +143,11 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'ending bot stock',
         build: () {
-          when(botStockRepository.endBotStock(recommendedBot))
+          when(botStockRepository.endBotStock(botRecommendationModel))
               .thenAnswer((_) => Future.value(boolResponse));
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(EndBotStock(recommendedBot)),
+        act: (bloc) => bloc.add(const EndBotStock(botRecommendationModel)),
         expect: () => {
               BotStockState(endBotStockResponse: BaseResponse.loading()),
               BotStockState(endBotStockResponse: boolResponse)
@@ -168,11 +157,11 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed ending bot stock',
         build: () {
-          when(botStockRepository.endBotStock(recommendedBot))
+          when(botStockRepository.endBotStock(botRecommendationModel))
               .thenThrow(boolErrorResponse);
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(EndBotStock(recommendedBot)),
+        act: (bloc) => bloc.add(const EndBotStock(botRecommendationModel)),
         expect: () => {
               BotStockState(endBotStockResponse: BaseResponse.loading()),
               BotStockState(endBotStockResponse: boolErrorResponse)
@@ -182,11 +171,11 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'rollover bot stock',
         build: () {
-          when(botStockRepository.rolloverBotStock(recommendedBot))
+          when(botStockRepository.rolloverBotStock(botRecommendationModel))
               .thenAnswer((_) => Future.value(boolResponse));
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(RolloverBotStock(recommendedBot)),
+        act: (bloc) => bloc.add(const RolloverBotStock(botRecommendationModel)),
         expect: () => {
               BotStockState(rolloverBotStockResponse: BaseResponse.loading()),
               BotStockState(rolloverBotStockResponse: boolResponse)
@@ -196,11 +185,11 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed rollover bot stock',
         build: () {
-          when(botStockRepository.rolloverBotStock(recommendedBot))
+          when(botStockRepository.rolloverBotStock(botRecommendationModel))
               .thenThrow(boolErrorResponse);
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(RolloverBotStock(recommendedBot)),
+        act: (bloc) => bloc.add(const RolloverBotStock(botRecommendationModel)),
         expect: () => {
               BotStockState(rolloverBotStockResponse: BaseResponse.loading()),
               BotStockState(rolloverBotStockResponse: boolErrorResponse)
@@ -219,22 +208,22 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'fetching chart data',
         build: () {
-          when(botStockRepository.fetchChartDataJson())
+          when(botStockRepository.fetchBotDetail())
               .thenAnswer((_) => Future.value(chartResponse));
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(FetchChartData()),
+        act: (bloc) => bloc.add(FetchBotDetail()),
         expect: () => {BotStockState(chartDataResponse: chartResponse)});
 
     blocTest<BotStockBloc, BotStockState>(
         'emits `BaseResponse.error` WHEN '
         'failed fetching chart data',
         build: () {
-          when(botStockRepository.fetchChartDataJson())
+          when(botStockRepository.fetchBotDetail())
               .thenThrow(chartErrorResponse);
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(FetchChartData()),
+        act: (bloc) => bloc.add(FetchBotDetail()),
         expect: () => {BotStockState(chartDataResponse: chartErrorResponse)});
 
     blocTest<BotStockBloc, BotStockState>(

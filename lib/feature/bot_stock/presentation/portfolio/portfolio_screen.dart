@@ -19,7 +19,7 @@ import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
-import '../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../domain/bot_recommendation_model.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/currency_dropdown.dart';
 import '../widgets/pair_column_text.dart';

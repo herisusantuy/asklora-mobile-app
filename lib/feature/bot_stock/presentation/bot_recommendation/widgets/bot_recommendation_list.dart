@@ -27,10 +27,10 @@ class BotRecommendationList extends StatelessWidget {
                 children: state.botRecommendationResponse.data!
                     .map((e) => BotRecommendationCard(
                           onTap: () => BotRecommendationDetailScreen.open(
-                              context: context, recommendedBot: e),
+                              context: context, botRecommendationModel: e),
                           height: botCardHeight,
                           spacing: _spacing,
-                          recommendedBot: e,
+                          botRecommendationModel: e,
                         ))
                     .toList(),
               ),
@@ -64,11 +64,11 @@ class BotRecommendationList extends StatelessWidget {
                     child: Wrap(
                       spacing: _spacing,
                       runSpacing: _spacing,
-                      children: defaultRecommendedBots
+                      children: defaultBotRecommendation
                           .map((e) => BotRecommendationCard(
                                 onTap: () {},
                                 height: botCardHeight,
-                                recommendedBot: e,
+                                botRecommendationModel: e,
                                 spacing: _spacing,
                               ))
                           .toList(),

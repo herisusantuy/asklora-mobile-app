@@ -18,14 +18,14 @@ class FaqActiveIndexChanged extends BotStockEvent {
 }
 
 class TradeBotStock extends BotStockEvent {
-  final RecommendedBot recommendedBot;
+  final BotRecommendationModel botRecommendationModel;
   final double tradeBotStockAmount;
 
   const TradeBotStock(
-      {required this.recommendedBot, required this.tradeBotStockAmount});
+      {required this.botRecommendationModel, required this.tradeBotStockAmount});
 
   @override
-  List<Object> get props => [recommendedBot];
+  List<Object> get props => [botRecommendationModel];
 }
 
 class TradeBotStockAmountChanged extends BotStockEvent {
@@ -38,21 +38,28 @@ class TradeBotStockAmountChanged extends BotStockEvent {
 }
 
 class EndBotStock extends BotStockEvent {
-  final RecommendedBot recommendedBot;
+  final BotRecommendationModel botRecommendationModel;
 
-  const EndBotStock(this.recommendedBot);
+  const EndBotStock(this.botRecommendationModel);
 
   @override
-  List<Object> get props => [recommendedBot];
+  List<Object> get props => [botRecommendationModel];
 }
 
 class RolloverBotStock extends BotStockEvent {
-  final RecommendedBot recommendedBot;
+  final BotRecommendationModel botRecommendationModel;
 
-  const RolloverBotStock(this.recommendedBot);
+  const RolloverBotStock(this.botRecommendationModel);
 
   @override
-  List<Object> get props => [recommendedBot];
+  List<Object> get props => [botRecommendationModel];
 }
 
-class FetchChartData extends BotStockEvent {}
+class FetchBotDetail extends BotStockEvent {
+  final BotRecommendationModel botRecommendationModel;
+
+  const FetchBotDetail(this.botRecommendationModel);
+
+  @override
+  List<Object> get props => [botRecommendationModel];
+}

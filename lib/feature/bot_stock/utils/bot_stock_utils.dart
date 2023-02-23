@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/domain/pair.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../domain/bot_recommendation_model.dart';
 
 List<Pair<String, String>> botRecommendationFaqs = [
   Pair('How can I get a specific stock?',
@@ -13,13 +14,24 @@ List<Pair<String, String>> botRecommendationFaqs = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet eget egestas egestas sed nisl, at gravida. Amet gravida massa eu fusce arcu urna.'),
 ];
 
+List<BotRecommendationModel> defaultBotRecommendation = [
+  const BotRecommendationModel(1, '', '', '', '', '', 'Pullup', '', 'TESLA', '', '440'),
+  const BotRecommendationModel(2, '', '', '', '', '', 'Plank', '', 'TESLA', '', '390'),
+  const BotRecommendationModel(3, '', '', '', '', '', 'Squat', '', 'TESLA', '', '100'),
+  const BotRecommendationModel(4, '', '', '', '', '', 'Plank', '', 'TESLA', '', '150'),
+  const BotRecommendationModel(5, '', '', '', '', '', 'Squat', '', 'TESLA', '', '160'),
+  const BotRecommendationModel(6, '', '', '', '', '', 'Pullup', '', 'TESLA', '', '90'),
+  const BotRecommendationModel(7, '', '', '', '', '', 'Pullup', '', 'TESLA', '', '20'),
+  const BotRecommendationModel(8, '', '', '', '', '', 'Plank', '', 'TESLA', '', '600'),
+];
+
 List<RecommendedBot> defaultRecommendedBots = [
   RecommendedBot(
       '1',
       'TSLA',
       'Tesla TSLA',
       '4',
-      'pull_up',
+      'Pullup',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -31,7 +43,7 @@ List<RecommendedBot> defaultRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -43,7 +55,7 @@ List<RecommendedBot> defaultRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -55,7 +67,7 @@ List<RecommendedBot> defaultRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'squat',
+      'Squat',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -67,7 +79,7 @@ List<RecommendedBot> defaultRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -79,7 +91,7 @@ List<RecommendedBot> defaultRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'pull_up',
+      'Pullup',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -91,7 +103,7 @@ List<RecommendedBot> defaultRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'squat',
+      'Squat',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -103,7 +115,7 @@ List<RecommendedBot> defaultRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -118,7 +130,7 @@ List<RecommendedBot> defaultFreeRecommendedBots = [
     'TSLA',
     'Tesla TSLA',
     '4',
-    'pull_up',
+    'Pullup',
     'For stocks that holds a stable position. ',
     'Tesla Inc',
     '303.75',
@@ -132,7 +144,7 @@ List<RecommendedBot> defaultFreeRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -145,7 +157,7 @@ List<RecommendedBot> defaultFreeRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -158,7 +170,7 @@ List<RecommendedBot> defaultFreeRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'squat',
+      'Squat',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -171,7 +183,7 @@ List<RecommendedBot> defaultFreeRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -184,7 +196,7 @@ List<RecommendedBot> defaultFreeRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'pull_up',
+      'Pullup',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -197,7 +209,7 @@ List<RecommendedBot> defaultFreeRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'squat',
+      'Squat',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -210,7 +222,7 @@ List<RecommendedBot> defaultFreeRecommendedBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -226,7 +238,7 @@ List<RecommendedBot> demonstrationBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'pull_up',
+      'Pullup',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -239,7 +251,7 @@ List<RecommendedBot> demonstrationBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -251,7 +263,7 @@ List<RecommendedBot> demonstrationBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -265,7 +277,7 @@ List<RecommendedBot> demonstrationBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'squat',
+      'Squat',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -278,7 +290,7 @@ List<RecommendedBot> demonstrationBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -290,7 +302,7 @@ List<RecommendedBot> demonstrationBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'pull_up',
+      'Pullup',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -302,7 +314,7 @@ List<RecommendedBot> demonstrationBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'squat',
+      'Squat',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -314,7 +326,7 @@ List<RecommendedBot> demonstrationBots = [
       'TSLA',
       'Tesla TSLA',
       '4',
-      'plank',
+      'Plank',
       'For stocks that holds a stable position. ',
       'Tesla Inc',
       '303.75',
@@ -324,12 +336,12 @@ List<RecommendedBot> demonstrationBots = [
 ];
 
 enum BotType {
-  pullUp('pull_up', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_pull_up',
+  pullUp('Pullup', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_Pullup',
       AskLoraColors.lime, AskLoraColors.darkerLime),
-  squat('squat', 'SQUAT', 'Squat', 'icon_bot_badge_pop_up_message_squat',
+  squat('Squat', 'SQUAT', 'Squat', 'icon_bot_badge_pop_up_message_squat',
       AskLoraColors.purple, AskLoraColors.darkerPurple,
       expiredTextColor: AskLoraColors.white),
-  plank('plank', 'PLANK', 'Plank', 'icon_bot_badge_pop_up_message_plank',
+  plank('Plank', 'PLANK', 'Plank', 'icon_bot_badge_pop_up_message_plank',
       AskLoraColors.primaryGreen, AskLoraColors.darkerGreen);
 
   final String value;
@@ -344,8 +356,8 @@ enum BotType {
       this.primaryBgColor, this.secondaryBgColor,
       {this.expiredTextColor = AskLoraColors.charcoal});
 
-  static BotType findByString(String botType) =>
-      BotType.values.firstWhere((element) => element.value == botType);
+  static BotType findByString(String botAppType) =>
+      BotType.values.firstWhere((element) => element.value == botAppType);
 }
 
 enum BotStockFilter {

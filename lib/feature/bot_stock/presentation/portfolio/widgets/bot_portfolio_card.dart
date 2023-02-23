@@ -1,25 +1,26 @@
 part of '../portfolio_screen.dart';
 
 class BotPortfolioCard extends StatelessWidget {
-  final RecommendedBot recommendedBot;
+  final BotRecommendationModel botRecommendationModel;
   final double spacing;
   final double height;
 
   const BotPortfolioCard(
       {required this.height,
       required this.spacing,
-      required this.recommendedBot,
+      required this.botRecommendationModel,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final BotType botType = BotType.findByString(recommendedBot.botType);
-    final Pair<bool, String> expiredDayLeft =
-        expiredDaysLeft(DateTime.now(), recommendedBot.expiredDate);
+    final BotType botType =
+        BotType.findByString(botRecommendationModel.botAppType);
+    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(
+        DateTime.now(), DateTime.now().add(const Duration(days: 5)));
     return GestureDetector(
       onTap: () => BotPortfolioDetailScreen.open(
-          context: context, recommendedBot: recommendedBot),
+          context: context, botRecommendationModel: botRecommendationModel),
       child: Stack(
         children: [
           Container(
@@ -42,7 +43,7 @@ class BotPortfolioCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botType.upperCaseName} ${recommendedBot.ticker}',
+                      '${botType.upperCaseName} ${botRecommendationModel.ticker}',
                       style: AskLoraTextStyles.h5Italic,
                       maxLines: 1,
                       ellipsis: true,
@@ -51,7 +52,7 @@ class BotPortfolioCard extends StatelessWidget {
                       height: 4,
                     ),
                     CustomTextNew(
-                      recommendedBot.description,
+                      botRecommendationModel.tickerName,
                       style: AskLoraTextStyles.body2,
                     ),
                   ],
@@ -62,7 +63,7 @@ class BotPortfolioCard extends StatelessWidget {
                 PairColumnText(
                   title1: 'Current Price',
                   title2: 'Total P/L',
-                  subTitle1: recommendedBot.benefit,
+                  subTitle1: botRecommendationModel.latestPrice,
                   subTitle2: '+1%',
                 ),
                 const SizedBox(
@@ -100,7 +101,7 @@ class BotPortfolioCard extends StatelessWidget {
               ],
             ),
           ),
-          if (recommendedBot.freeBot)
+          if (botRecommendationModel.freeBot)
             Container(
               decoration: BoxDecoration(
                   color: AskLoraColors.primaryMagenta,

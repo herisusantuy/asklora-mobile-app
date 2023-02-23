@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../chart/domain/chart_models.dart';
-import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../../domain/bot_recommendation_model.dart';
 import '../../../utils/bot_stock_utils.dart';
 import '../domain/portfolio_detail_response.dart';
 
@@ -23,11 +23,11 @@ class PortfolioRepository {
     }
   }
 
-  Future<BaseResponse<List<RecommendedBot>>> fetchBotPortfolio(
+  Future<BaseResponse<List<BotRecommendationModel>>> fetchBotPortfolio(
       BotStockFilter botStockFilter) async {
     await Future.delayed(const Duration(seconds: 1));
     return BaseResponse.complete(
-        botStockFilter == BotStockFilter.all ? defaultRecommendedBots : []);
+        botStockFilter == BotStockFilter.all ? defaultBotRecommendation : []);
   }
 
   Future<BaseResponse<PortfolioDetailResponse>> fetchPortfolioDetail() async {

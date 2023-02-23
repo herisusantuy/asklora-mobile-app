@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/currency_enum.dart';
 import '../../../../chart/domain/chart_models.dart';
-import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../../domain/bot_recommendation_model.dart';
 import '../../../utils/bot_stock_utils.dart';
 import '../domain/portfolio_detail_response.dart';
 import '../repository/portfolio_repository.dart';

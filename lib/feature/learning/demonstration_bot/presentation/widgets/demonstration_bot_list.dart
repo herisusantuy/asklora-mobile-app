@@ -53,7 +53,7 @@ class DemonstrationBotList extends StatelessWidget {
       Wrap(
         spacing: _spacing,
         runSpacing: _spacing,
-        children: recommendedBots
+        children: defaultBotRecommendation
             .map((e) => e.selectable && e.botType == botType.value
                 ? DemonstrationTooltipGuide(
                     verticalOffset: 10,
@@ -68,7 +68,7 @@ class DemonstrationBotList extends StatelessWidget {
                               LearningBotStockPageStep.botDetail)),
                       height: botCardHeight,
                       spacing: _spacing,
-                      recommendedBot: e,
+                      botRecommendationModel: e,
                       isDisabled: false,
                     ),
                   )
@@ -76,7 +76,7 @@ class DemonstrationBotList extends StatelessWidget {
                     onTap: () {},
                     height: botCardHeight,
                     spacing: _spacing,
-                    recommendedBot: e,
+                    botRecommendationModel: e,
                     isDisabled: true,
                   ))
             .toList(),

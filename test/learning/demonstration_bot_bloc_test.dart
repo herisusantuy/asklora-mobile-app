@@ -87,7 +87,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'fetching chart data',
         build: () {
-          when(botStockRepository.fetchChartDataJson())
+          when(botStockRepository.fetchBotDetail())
               .thenAnswer((_) => Future.value(chartResponse));
           return demonstrationBotBloc;
         },
@@ -101,7 +101,7 @@ void main() async {
         'failed fetching chart data',
         build: () {
           when(
-            botStockRepository.fetchChartDataJson(),
+            botStockRepository.fetchBotDetail(),
           ).thenThrow(chartErrorResponse);
           return demonstrationBotBloc;
         },

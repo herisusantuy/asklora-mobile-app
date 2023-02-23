@@ -40,7 +40,7 @@ class BotPortfolioList extends StatelessWidget {
                             .map((e) => BotPortfolioCard(
                                   height: botCardHeight,
                                   spacing: _spacing,
-                                  recommendedBot: e,
+                                  botRecommendationModel: e,
                                 ))
                             .toList(),
                       ),

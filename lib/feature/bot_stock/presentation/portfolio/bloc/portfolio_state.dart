@@ -10,7 +10,7 @@ class PortfolioState extends Equatable {
   });
 
   final BaseResponse<PortfolioDetailResponse> portfolioDetailResponse;
-  final BaseResponse<List<RecommendedBot>> botPortfolioResponse;
+  final BaseResponse<List<BotRecommendationModel>> botPortfolioResponse;
   final BaseResponse<List<ChartDataSet>> chartDataResponse;
   final BotStockFilter botStockFilter;
   final CurrencyType currency;
@@ -28,7 +28,7 @@ class PortfolioState extends Equatable {
 
   PortfolioState copyWith({
     BaseResponse<PortfolioDetailResponse>? portfolioDetailResponse,
-    BaseResponse<List<RecommendedBot>>? botPortfolioResponse,
+    BaseResponse<List<BotRecommendationModel>>? botPortfolioResponse,
     BaseResponse<List<ChartDataSet>>? chartDataResponse,
     BotStockFilter? botStockFilter,
     CurrencyType? currency,
