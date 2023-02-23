@@ -6,6 +6,8 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
+import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart'
+    as _i6;
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_detail_response.dart'
     as _i8;
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/repository/portfolio_repository.dart'
@@ -14,8 +16,6 @@ import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart'
     as _i7;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
     as _i5;
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
-    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -66,23 +66,23 @@ class MockPortfolioRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.BaseResponse<List<_i5.ChartDataSet>>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>> fetchBotPortfolio(
-          _i7.BotStockFilter? botStockFilter) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchBotPortfolio,
-          [botStockFilter],
-        ),
-        returnValue:
-            _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>.value(
-                _FakeBaseResponse_0<List<_i6.RecommendedBot>>(
-          this,
-          Invocation.method(
-            #fetchBotPortfolio,
-            [botStockFilter],
-          ),
-        )),
-      ) as _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>);
+  _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>
+      fetchBotPortfolio(_i7.BotStockFilter? botStockFilter) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #fetchBotPortfolio,
+              [botStockFilter],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i6.BotRecommendationModel>>>.value(
+                _FakeBaseResponse_0<List<_i6.BotRecommendationModel>>(
+              this,
+              Invocation.method(
+                #fetchBotPortfolio,
+                [botStockFilter],
+              ),
+            )),
+          ) as _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>);
   @override
   _i4.Future<_i2.BaseResponse<_i8.PortfolioDetailResponse>>
       fetchPortfolioDetail() => (super.noSuchMethod(

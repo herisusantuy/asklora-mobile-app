@@ -106,7 +106,7 @@ class MockData {
         portfolioDetailResponse.buyingPower >= tradeBotStockAmount) {
       PortfolioResponse data = await fetchPortfolioResponse();
       List<RecommendedBot> portfolioBots = List.from(data.portfolioBots);
-      portfolioBots.add(recommendedBot.copyWith(amount: tradeBotStockAmount));
+      //portfolioBots.add(recommendedBot.copyWith(amount: tradeBotStockAmount));
 
       await _savePortfolioResponse(
           PortfolioResponse(portfolioBots: portfolioBots));
