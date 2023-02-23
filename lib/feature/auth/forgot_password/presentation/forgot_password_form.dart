@@ -8,6 +8,7 @@ import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
+import '../../../../core/utils/extensions.dart';
 import '../bloc/forgot_password_bloc.dart';
 import 'forgot_password_success_screen.dart';
 
@@ -56,7 +57,6 @@ class ForgotPasswordForm extends StatelessWidget {
                   Column(
                     children: [
                       _padding(),
-                      _padding(),
                       const CustomTextNew(
                         'Please enter your email. Instructions will be sent to reset your password.',
                         textAlign: TextAlign.left,
@@ -73,7 +73,7 @@ class ForgotPasswordForm extends StatelessWidget {
                       ),
                       _padding(),
                       _forgotPasswordButton(),
-                      _padding(),
+                      context.padding(topPadding: 20),
                     ],
                   )
                 ],

@@ -8,6 +8,7 @@ import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../sign_in/presentation/sign_in_screen.dart';
 import '../bloc/reset_password_bloc.dart';
@@ -59,8 +60,8 @@ class ForgotPasswordForm extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _padding(),
                       _padding(),
                       const CustomTextNew(
                         'Enter a new password',
@@ -76,7 +77,7 @@ class ForgotPasswordForm extends StatelessWidget {
                   Column(
                     children: [
                       _resetPasswordButton(),
-                      _padding(),
+                      context.padding(topPadding: 20),
                     ],
                   )
                 ],
@@ -125,7 +126,7 @@ class ForgotPasswordForm extends StatelessWidget {
         builder: (context, state) {
           return PrimaryButton(
               key: const Key('reset_password_submit_button'),
-              label: 'SUBMIT',
+              label: 'RESET PASSWORD',
               disabled: state.enableSubmitButton(),
               onTap: () => context
                   .read<ResetPasswordBloc>()
