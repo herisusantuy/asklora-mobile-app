@@ -26,13 +26,6 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
 
   final ResetPasswordRepository _resetPasswordRepository;
   final TokenRepository _tokenRepository;
-  StreamSubscription? _streamSubscription;
-
-  @override
-  Future<void> close() {
-    _streamSubscription?.cancel();
-    return super.close();
-  }
 
   void _onPasswordChanged(
     ResetPasswordPasswordChanged event,
@@ -95,6 +88,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           token: resetPasswordToken!,
           password: state.password,
           confirmPassword: state.confirmPassword);
+
       data.copyWith(message: 'Password changed successfully.');
 
       emit(state.copyWith(response: data));
