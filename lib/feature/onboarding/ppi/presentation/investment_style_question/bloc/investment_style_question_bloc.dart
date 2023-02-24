@@ -21,7 +21,8 @@ class InvestmentStyleQuestionBloc
   }
 
   int _investmentStyleQuestionIndex;
-  List<Question> investmentStyleQuestions = Fixture.instance.getInvestmentStyleQuestion;
+  List<Question> investmentStyleQuestions =
+      Fixture.instance.getInvestmentStyleQuestion;
 
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<InvestmentStyleQuestionState> emit) {
