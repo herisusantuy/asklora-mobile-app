@@ -46,7 +46,7 @@ class ResetPasswordState extends Equatable {
     ];
   }
 
-  bool enableSubmitButton() {
+  bool disableSubmitButton() {
     if (passwordErrorText.isEmpty &&
         confirmPasswordErrorText.isEmpty &&
         password.isValidPassword() &&

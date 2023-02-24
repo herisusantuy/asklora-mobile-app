@@ -98,7 +98,7 @@ class ForgotPasswordBloc
     await Future.delayed(const Duration(milliseconds: 1500));
     emit(
       state.copyWith(
-          response: const BaseResponse(),
+          response: BaseResponse.complete('Successfully get token'),
           deeplinkStatus: DeeplinkStatus.success,
           resetPasswordToken: event.uri.queryParameters['token']!),
     );
