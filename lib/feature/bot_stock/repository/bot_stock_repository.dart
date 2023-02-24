@@ -10,6 +10,7 @@ import '../../chart/domain/chart_studio_animation_model.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_detail_request.dart';
 import '../domain/bot_recommendation_model.dart';
+import '../domain/bot_recommendation_response.dart';
 import '../domain/bot_stock_api_client.dart';
 import '../utils/bot_stock_utils.dart';
 
@@ -22,10 +23,8 @@ class BotStockRepository {
       var response = await _botStockApiClient.fetchBotDetail(BotDetailRequest(
           botRecommendationModel.ticker, botRecommendationModel.botId));
 
-      return BaseResponse.complete(
-          BotDetailModel.fromJson(response.data /*data*/));
+      return BaseResponse.complete(BotDetailModel.fromJson(response.data));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error('Something went wrong');
     }
   }
@@ -77,13 +76,22 @@ class BotStockRepository {
   Future<BaseResponse<List<BotRecommendationModel>>>
       fetchBotRecommendation() async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      final String response =
-          await rootBundle.loadString('assets/json/bot_recommendation.json');
-      Iterable iterable = json.decode(response);
+      if (isDemoEnable) {
+        ///MOCK
+        await Future.delayed(const Duration(seconds: 1));
+        final String response =
+            await rootBundle.loadString('assets/json/bot_recommendation.json');
+        Iterable iterable = json.decode(response);
 
-      return BaseResponse.complete(List<BotRecommendationModel>.from(
-          iterable.map((model) => BotRecommendationModel.fromJson(model))));
+        return BaseResponse.complete(List<BotRecommendationModel>.from(
+            iterable.map((model) => BotRecommendationModel.fromJson(model))));
+      } else {
+        ///REAL
+        ///TODO get account id from local later
+        var response = await _botStockApiClient.fetchBotRecommendation('1');
+        return BaseResponse.complete(
+            BotRecommendationResponse.fromJson(response.data).data);
+      }
     } catch (e) {
       return BaseResponse.error('Something went wrong');
     }
@@ -92,14 +100,24 @@ class BotStockRepository {
   Future<BaseResponse<List<BotRecommendationModel>>> fetchFreeBotRecommendation(
       {bool isFreeBot = false}) async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      final String response =
-          await rootBundle.loadString('assets/json/bot_recommendation.json');
-      Iterable iterable = json.decode(response);
-      List<BotRecommendationModel> data = List<BotRecommendationModel>.from(
-          iterable.map((model) =>
-              BotRecommendationModel.fromJson(model).copyWith(freeBot: true)));
-      return BaseResponse.complete(data);
+      if (isDemoEnable) {
+        await Future.delayed(const Duration(seconds: 1));
+        final String response =
+            await rootBundle.loadString('assets/json/bot_recommendation.json');
+        Iterable iterable = json.decode(response);
+        List<BotRecommendationModel> data = List<BotRecommendationModel>.from(
+            iterable.map((model) => BotRecommendationModel.fromJson(model)
+                .copyWith(freeBot: true)));
+        return BaseResponse.complete(data);
+      } else {
+        ///REAL
+        ///TODO get account id from local later
+        var response = await _botStockApiClient.fetchBotRecommendation('1');
+        return BaseResponse.complete(List<BotRecommendationModel>.from(
+            BotRecommendationResponse.fromJson(response.data)
+                .data
+                .map((model) => model.copyWith(freeBot: true))));
+      }
     } catch (e) {
       return BaseResponse.error('Something went wrong');
     }

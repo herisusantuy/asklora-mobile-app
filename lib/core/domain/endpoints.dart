@@ -5,6 +5,7 @@ const bots = 'bots/';
 const transactions = 'transactions/';
 const orders = 'orders/';
 const activities = 'activities/';
+const user = 'user/';
 
 //TODO later it will be changed
 const question = 'question/';
@@ -34,4 +35,6 @@ const String endpointOrders = '$v1$orders';
 const String endpointUserJourney = '$v2${activities}user-journey/';
 
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
+
+const String endpointBotRecommendation = '${user}recomendation_bots/';
 const String endpointBotDetail = '$v1${bots}bot_detail/';
