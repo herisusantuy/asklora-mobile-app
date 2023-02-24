@@ -11,35 +11,40 @@
         "name": "5 years or above",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 2,
         "name": "3 to 4 years",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 3,
         "name": "1 to 2 years",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 4,
         "name": "Less than 1 year",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 5,
         "name": "Never",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -55,35 +60,40 @@
         "name": "more than HK$150,000",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 7,
         "name": "HK$100,000-HK$149,999",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 8,
         "name": "HK$50,000-HK$99,999",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 9,
         "name": "HK$20,000-HK$49,999",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 10,
         "name": "less than HK$ 12,999",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -99,35 +109,40 @@
         "name": "Very accurate",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 12,
         "name": "Somewhat accurate",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 13,
         "name": "Neutral",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 14,
         "name": "Somewhat inaccurate",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 15,
         "name": "Very inaccurate",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -143,35 +158,40 @@
         "name": "I can toleratre very high risk of capital loss which can exceed initial invested value to achieve very high and substantial returns",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 17,
         "name": "I can toleratre higher risk of capital loss to achieve substantial returns above interest rates",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 18,
         "name": "I can toleratre moderate risk of capital loss to achieve some capital growth and returns above interest rates",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 19,
         "name": "I can toleratre low risk of capital loss, such as fixed returns similar to interest rates",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 20,
         "name": "I cannot accept any risk of capital loss",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -195,35 +215,40 @@
         "name": "Never",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 24,
         "name": "Not really...",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 25,
         "name": "Sometimes",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 26,
         "name": "Quite often",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 27,
         "name": "Of Course",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -239,35 +264,40 @@
         "name": "All the time",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 28,
         "name": "That's not me",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 29,
         "name": "Not really...",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 30,
         "name": "Sometimes",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 31,
         "name": "Usually",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -283,35 +313,40 @@
         "name": "No",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 34,
         "name": "Not really...",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 35,
         "name": "Sort of",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 36,
         "name": "Accurate",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 37,
         "name": "Of course",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -327,35 +362,40 @@
         "name": "All the time",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 39,
         "name": "Quite often",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 40,
         "name": "Sometimes",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 41,
         "name": "Not really...",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 42,
         "name": "Never",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -371,35 +411,40 @@
         "name": "All the time",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 44,
         "name": "Quite often",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 45,
         "name": "Sometimes",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 46,
         "name": "Not really...",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 47,
         "name": "Never",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -415,35 +460,40 @@
         "name": "All the time",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 49,
         "name": "Quite often",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 50,
         "name": "Sometimes",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 51,
         "name": "Not really...",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 52,
         "name": "That's not me",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -459,35 +509,40 @@
         "name": "All the time",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 68,
         "name": "Quite often",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 69,
         "name": "Sometimes",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 70,
         "name": "Not really...",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 71,
         "name": "That's not me",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -503,35 +558,40 @@
         "name": "All the time",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 73,
         "name": "Quite often",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 74,
         "name": "Sometimes",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 75,
         "name": "Not really...",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 76,
         "name": "That's not me",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   },
@@ -547,168 +607,40 @@
         "name": "All the time",
         "score": "5",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 78,
         "name": "Quite often",
         "score": "4",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 79,
         "name": "Sometimes",
         "score": "3",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 80,
         "name": "Not really...",
         "score": "2",
         "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       },
       {
         "id": 81,
         "name": "That's not me",
         "score": "1",
         "answer_type": "choices",
-        "answer": null
-      }
-    ]
-  },
-  {
-    "question_id": "quid15",
-    "question_type": "descriptive",
-    "question": "What gets your investing mojo on?",
-    "section": "omnisearch",
-    "hints": "rch for stocks with keywords or phrases, Lora will get you the relevant stocks!Go sea",
-    "answers": []
-  },
-  {
-    "question_id": "quid16",
-    "question_type": "choices",
-    "question": "How long do you consider to hold this investment?",
-    "section": "investment_style",
-    "hints": null,
-    "answers": [
-      {
-        "id": 54,
-        "name": "12 Months",
-        "score": "5",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 55,
-        "name": "6 Months",
-        "score": "4",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 56,
-        "name": "3 Months",
-        "score": "3",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 57,
-        "name": "1 Month",
-        "score": "2",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 58,
-        "name": "2 Weeks",
-        "score": "1",
-        "answer_type": "choices",
-        "answer": null
-      }
-    ]
-  },
-  {
-    "question_id": "quid17",
-    "question_type": "choices",
-    "question": "Will this investment be a large amount for you?",
-    "section": "investment_style",
-    "hints": null,
-    "answers": [
-      {
-        "id": 59,
-        "name": "Strongly agree",
-        "score": "5",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 60,
-        "name": "Agree",
-        "score": "4",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 61,
-        "name": "Neutral",
-        "score": "3",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 62,
-        "name": "Disagree",
-        "score": "2",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 63,
-        "name": "Strongly Disagree",
-        "score": "1",
-        "answer_type": "choices",
-        "answer": null
-      }
-    ]
-  },
-  {
-    "question_id": "quid18",
-    "question_type": "choices",
-    "question": "Which investment scenario do you prefer?",
-    "section": "investment_style",
-    "hints": null,
-    "answers": [
-      {
-        "id": 64,
-        "name": "Limited loss but slight probabiliy of substantial gain.",
-        "score": "3",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 65,
-        "name": "Passive income with a slight probability of substantial loss.",
-        "score": "2",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 66,
-        "name": "Lora please choose for me…",
-        "score": "1",
-        "answer_type": "choices",
-        "answer": null
-      },
-      {
-        "id": 82,
-        "name": "Just buy my stock!",
-        "score": "4",
-        "answer_type": "choices",
-        "answer": null
+        "answer": null,
+        "identifier": null
       }
     ]
   }

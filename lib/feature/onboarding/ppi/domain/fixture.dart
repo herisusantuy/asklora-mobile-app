@@ -29,15 +29,17 @@ enum QuestionType {
 }
 
 class Fixture {
-  static Fixture? _instance;
+  static final Fixture _singleton = Fixture._internal();
 
-  factory Fixture() => _instance ??= Fixture._();
+  factory Fixture() => _singleton;
 
-  Fixture._();
+  Fixture._internal();
 
-  List<Question> privacyQuestions = [];
-  List<Question> personalisedQuestion = [];
-  List<Question> investmentStyleQuestion = [];
+  static Fixture get instance => _singleton;
+
+  static List<Question> privacyQuestions = [];
+  static List<Question> personalisedQuestion = [];
+  static List<Question> investmentStyleQuestion = [];
 
   List<Question> get getPrivacyQuestions {
     return privacyQuestions;
@@ -69,8 +71,34 @@ class Fixture {
     privacyQuestions.clear();
   }
 
-  Fixture fix(List<Question> questionCollection) {
-    clearQuestion();
+  Fixture fixPersonalisedQuestion(List<Question> questionCollection) {
+    personalisedQuestion.clear();
+    privacyQuestions.clear();
+    for (var element in questionCollection) {
+      if (element.section == QuestionSection.privacy.value) {
+        setPrivacyQuestions = element;
+      }
+      if (element.section == QuestionSection.openness.value ||
+          element.section == QuestionSection.conscientiousness.value ||
+          element.section == QuestionSection.neuroticism.value ||
+          element.section == QuestionSection.extrovert.value) {
+        setPersonalisedQuestion = element;
+      }
+      if (element.section == QuestionSection.investmentStyle.value) {
+        setInvestmentStyleQuestion = element;
+      }
+      if (element.section == QuestionSection.omniSearch.value) {
+        element
+          ..questionType = QuestionType.omniSearch.value
+          ..section = QuestionSection.investmentStyle.value;
+        setInvestmentStyleQuestion = element;
+      }
+    }
+    return this;
+  }
+
+  Fixture fixInvestmentStyleQuestion(List<Question> questionCollection) {
+    investmentStyleQuestion.clear();
     for (var element in questionCollection) {
       if (element.section == QuestionSection.privacy.value) {
         setPrivacyQuestions = element;

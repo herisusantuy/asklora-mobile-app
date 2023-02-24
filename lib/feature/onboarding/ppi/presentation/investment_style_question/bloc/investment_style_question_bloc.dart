@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/fixture.dart';
@@ -15,13 +16,17 @@ class InvestmentStyleQuestionBloc
         super(const InvestmentStyleQuestionState()) {
     on<NextQuestion>(_onNavigationStepChanged);
     on<PreviousQuestion>(_onNavigationPop);
+
+    debugPrint('Krishna constructor ');
   }
 
   int _investmentStyleQuestionIndex;
-  List<Question> investmentStyleQuestions = Fixture().investmentStyleQuestion;
+  List<Question> investmentStyleQuestions = Fixture.instance.getInvestmentStyleQuestion;
 
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<InvestmentStyleQuestionState> emit) {
+    debugPrint(
+        'Krishna _onNavigationStepChanged ${investmentStyleQuestions.length}');
     ++_investmentStyleQuestionIndex;
     if (_investmentStyleQuestionIndex < investmentStyleQuestions.length) {
       Question question =

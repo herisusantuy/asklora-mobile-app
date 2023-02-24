@@ -74,7 +74,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       final data = await _signUpRepository.signUp(
           email: state.username, password: state.password, username: tempName!);
 
-      await _ppiResponseRepository.linkUserId(tempId);
+      await _ppiResponseRepository.linkUser(tempId);
 
       emit(state.copyWith(response: data));
     } on ConflictException {

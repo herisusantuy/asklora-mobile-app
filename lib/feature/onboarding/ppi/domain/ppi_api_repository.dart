@@ -8,8 +8,11 @@ import 'bot_submission_request.dart';
 import 'ppi_user_response_request.dart';
 
 class PpiApiRepository {
-  Future<Response> getQuestions() async =>
+  Future<Response> fetchPersonalAndPrivacyQuestions() async =>
       await PpiApiClient().get(endpoint: endpointQuestion);
+
+  Future<Response> fetchInvestmentStyleQuestions(String accountId) async =>
+      await PpiApiClient().get(endpoint: '$endpointQuestion/$accountId');
 
   Future<Response> postQuestionAnswer(PpiSelectionRequest request) async =>
       await PpiApiClient().post(
@@ -27,7 +30,7 @@ class PpiApiRepository {
           endpoint: endpointAddBotChoice,
           payload: json.encode(request.toJson()));
 
-  Future<Response> linkUserId(int userId) async => await PpiApiClient().post(
-      endpoint: '$endpointUser/$userId/$endpointLinkedUser',
+  Future<Response> linkUser(int userId) async => await PpiApiClient().post(
+      endpoint: '$endpointUser/$endpointLinkedUser/$userId',
       payload: json.encode(''));
 }

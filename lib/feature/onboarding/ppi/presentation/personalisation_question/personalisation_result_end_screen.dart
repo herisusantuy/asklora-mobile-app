@@ -36,7 +36,6 @@ class PersonalisationResultEndScreen extends StatelessWidget {
         }
         switch (state.responseState) {
           case ResponseState.success:
-            //InvestmentStyleWelcomeScreen.open(context);
             break;
           case ResponseState.error:
             context
@@ -59,17 +58,15 @@ class PersonalisationResultEndScreen extends StatelessWidget {
             state.ppiResponseState == PpiResponseState.dispatchResponse) {
           final scores = state.snapShot?.scores;
 
-          debugPrint('Krishna personalisation ${scores.toString()}');
           return PpiResultScreen(
             memojiText: 'Do you know?',
             additionalMessage: _getMessage(scores),
             bottomButton: Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: PrimaryButton(
-                key: const Key('next_button'),
-                label: 'GOT IT',
-                onTap: () => SignUpScreen.open(context),
-              ),
+                  key: const Key('next_button'),
+                  label: 'GOT IT',
+                  onTap: () => SignUpScreen.open(context)),
             ),
           );
         }

@@ -18,7 +18,7 @@ class PrivacyQuestionBloc
   }
 
   int _privacyQuestionIndex;
-  List<Question> privacyQuestions = Fixture().privacyQuestions;
+  List<Question> privacyQuestions = Fixture.instance.getPrivacyQuestions;
 
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<PrivacyQuestionState> emit) async {

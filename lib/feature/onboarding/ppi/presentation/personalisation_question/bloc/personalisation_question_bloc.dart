@@ -18,7 +18,7 @@ class PersonalisationQuestionBloc
   }
 
   int _personalizationIndex;
-  List<Question> personalizationQuestions = Fixture().personalisedQuestion;
+  List<Question> personalizationQuestions = Fixture.instance.getPersonalisedQuestion;
 
   void _onNavigationStepChanged(NextPersonalisationQuestion event,
       Emitter<PersonalisationQuestionState> emit) {

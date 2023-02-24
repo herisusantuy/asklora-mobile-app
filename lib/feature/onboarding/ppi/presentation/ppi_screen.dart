@@ -45,7 +45,7 @@ class PpiScreen extends StatelessWidget {
             create: (_) => QuestionBloc(
                 ppiQuestionRepository: PpiQuestionRepository(),
                 questionPageType: questionPageType)
-              ..add(const LoadQuestions())),
+              ..add(const LoadPrivacyAndPersonalisationQuestions())),
         BlocProvider(
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
@@ -71,13 +71,18 @@ class PpiScreen extends StatelessWidget {
   }
 
   Widget _pages(NavigationState navigationState) {
-    return BlocBuilder<QuestionBloc, QuestionState>(builder: (context, state) {
+    return BlocConsumer<QuestionBloc, QuestionState>(
+        listener: (context, state) {
+      if (state.response.state == ResponseState.loading) {
+        CustomLoadingOverlay.show(context);
+      } else {
+        CustomLoadingOverlay.dismiss();
+      }
+    }, builder: (context, state) {
+      debugPrint(
+          'Krishna kumar ${navigationState} ${state.investmentStyleQuestionIndex}');
       switch (state.response.state) {
-        case ResponseState.loading:
-          CustomLoadingOverlay.show(context);
-          return const SizedBox.shrink();
         case ResponseState.success:
-          CustomLoadingOverlay.dismiss();
           switch (navigationState.page) {
             case QuestionPageStep.privacy:
               return PrivacyQuestionScreen(
@@ -103,7 +108,6 @@ class PpiScreen extends StatelessWidget {
               return const SizedBox.shrink();
           }
         default:
-          CustomLoadingOverlay.dismiss();
           return const SizedBox.shrink();
       }
     });

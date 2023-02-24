@@ -11,7 +11,7 @@ environment:
 dependencies:
   built_value: ^8.3.2
   cupertino_icons: ^1.0.2
-  dio: ^4.0.6
+  dio: ^5.0.0
   equatable: ^2.0.3
   flutter:
     sdk: flutter
@@ -19,7 +19,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_native_splash: ^2.2.16
-  flutter_secure_storage: ^6.0.0
+  flutter_secure_storage: ^8.0.0
   json_annotation: ^4.5.0
   logger: any
   shared_preferences: ^2.0.17
@@ -35,9 +35,9 @@ dependencies:
   firebase_core: ^2.1.1
   firebase_crashlytics: ^3.0.3
   flutter_dotenv: ^5.0.2
-  flutter_svg: ^1.1.4
+  flutter_svg: ^2.0.2
   photo_view: ^0.14.0
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.3
   back_button_interceptor: ^6.0.2
   onfido_sdk: ^2.0.0
   just_the_tooltip: ^0.0.12
@@ -54,7 +54,7 @@ dev_dependencies:
   built_value_generator: ^8.3.2
   mockito: ^5.2.0
   bloc_test: ^9.0.3
-  http_mock_adapter: ^0.3.3
+  http_mock_adapter: ^0.4.2
   flutter_driver:
     sdk: flutter
   flutter_lints: ^2.0.0
@@ -65,7 +65,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  generate: true
+#  generate: true
   assets:
     - assets/images/
     - assets/icons/

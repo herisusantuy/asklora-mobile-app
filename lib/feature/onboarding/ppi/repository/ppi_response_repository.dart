@@ -41,8 +41,8 @@ class PpiResponseRepository {
     return SnapShot.fromJson(response.data);
   }
 
-  Future<Response> linkUserId(int userId) async {
-    var response = await _ppiApiRepository.linkUserId(userId);
+  Future<Response> linkUser(int userId) async {
+    var response = await _ppiApiRepository.linkUser(userId);
     return response;
   }
 }

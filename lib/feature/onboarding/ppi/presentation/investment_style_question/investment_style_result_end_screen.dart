@@ -36,7 +36,6 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
         }
         switch (state.responseState) {
           case ResponseState.success:
-            //InvestmentStyleWelcomeScreen.open(context);
             break;
           case ResponseState.error:
             context
