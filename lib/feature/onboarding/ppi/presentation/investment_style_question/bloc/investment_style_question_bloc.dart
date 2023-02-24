@@ -16,8 +16,6 @@ class InvestmentStyleQuestionBloc
         super(const InvestmentStyleQuestionState()) {
     on<NextQuestion>(_onNavigationStepChanged);
     on<PreviousQuestion>(_onNavigationPop);
-
-    debugPrint('Krishna constructor ');
   }
 
   int _investmentStyleQuestionIndex;
@@ -26,8 +24,6 @@ class InvestmentStyleQuestionBloc
 
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<InvestmentStyleQuestionState> emit) {
-    debugPrint(
-        'Krishna _onNavigationStepChanged ${investmentStyleQuestions.length}');
     ++_investmentStyleQuestionIndex;
     if (_investmentStyleQuestionIndex < investmentStyleQuestions.length) {
       Question question =

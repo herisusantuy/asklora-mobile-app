@@ -42,10 +42,6 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                   context.read<NavigationBloc<QuestionPageStep>>().add(
                       const PageChanged(
                           QuestionPageStep.investmentStyleResultEnd));
-
-                  debugPrint(
-                      'Krishna investment_question_screen OnNextResultEndScreen');
-                  // context.read<UserResponseBloc>().add(SendBulkResponse());
                 } else if (state is OnPreviousPage) {
                   context
                       .read<NavigationBloc<QuestionPageStep>>()

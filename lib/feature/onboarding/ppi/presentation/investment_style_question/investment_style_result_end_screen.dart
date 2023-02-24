@@ -53,8 +53,7 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
         if (state.ppiResponseState == PpiResponseState.finishAddResponse) {
           context.read<UserResponseBloc>().add(SendBulkResponse());
         }
-        debugPrint(
-            'Krishna personalisation ${state.responseState} ${state.ppiResponseState}');
+
         if (state.responseState == ResponseState.success &&
             state.ppiResponseState == PpiResponseState.dispatchResponse) {
           return PpiResultScreen(

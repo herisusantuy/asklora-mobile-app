@@ -80,8 +80,6 @@ class PpiScreen extends StatelessWidget {
         CustomLoadingOverlay.dismiss();
       }
     }, builder: (context, state) {
-      debugPrint(
-          'Krishna kumar ${navigationState} ${state.investmentStyleQuestionIndex}');
       switch (state.response.state) {
         case ResponseState.success:
           switch (navigationState.page) {

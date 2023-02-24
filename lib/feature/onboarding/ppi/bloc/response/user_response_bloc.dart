@@ -100,22 +100,15 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       var requests = state.getAllSelectionsInRequest(tempId);
 
-      debugPrint('Krishna user_response_bloc ${requests}');
-
       await _ppiResponseRepository.addBulkAnswer(requests);
       var userSnapShot = await _ppiResponseRepository.getUserSnapShot(tempId);
 
-      debugPrint(
-          'Krishna user_response_bloc sending data${userSnapShot.toString()}');
-
-      debugPrint('Krishna user_response_bloc done');
       emit(state.copyWith(
         responseState: ResponseState.success,
         ppiResponseState: PpiResponseState.dispatchResponse,
         snapShot: userSnapShot,
       ));
     } catch (e) {
-      debugPrint('Krishna user_response_bloc catch ${e}');
       emit(state.copyWith(
         responseState: ResponseState.error,
         ppiResponseState: PpiResponseState.dispatchResponse,
