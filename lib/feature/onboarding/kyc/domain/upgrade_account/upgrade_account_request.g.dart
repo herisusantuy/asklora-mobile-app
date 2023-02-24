@@ -9,19 +9,24 @@ part of 'upgrade_account_request.dart';
 UpgradeAccountRequest _$UpgradeAccountRequestFromJson(
         Map<String, dynamic> json) =>
     UpgradeAccountRequest(
-      contact: json['contact'] == null
+      personalInfo: json['personal_info'] == null
           ? null
-          : Contact.fromJson(json['contact'] as Map<String, dynamic>),
-      identity: json['identity'] == null
+          : PersonalInfo.fromJson(
+              json['personal_info'] as Map<String, dynamic>),
+      proofsOfAddress: (json['proofs_of_address'] as List<dynamic>?)
+          ?.map((e) => ProofsOfAddress.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      employmentInfo: json['employment_info'] == null
           ? null
-          : Identity.fromJson(json['identity'] as Map<String, dynamic>),
-      trustedContact: json['trusted_contact'] == null
+          : ProofsOfAddress.fromJson(
+              json['employment_info'] as Map<String, dynamic>),
+      wealthSources: (json['wealth_sources'] as List<dynamic>?)
+          ?.map((e) => TrustedContact.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      affiliatedPerson: json['affiliated_person'] == null
           ? null
           : TrustedContact.fromJson(
-              json['trusted_contact'] as Map<String, dynamic>),
-      disclosures: json['disclosures'] == null
-          ? null
-          : Disclosures.fromJson(json['disclosures'] as Map<String, dynamic>),
+              json['affiliated_person'] as Map<String, dynamic>),
       agreements: (json['agreements'] as List<dynamic>?)
           ?.map((e) => Agreement.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -30,9 +35,11 @@ UpgradeAccountRequest _$UpgradeAccountRequestFromJson(
 Map<String, dynamic> _$UpgradeAccountRequestToJson(
         UpgradeAccountRequest instance) =>
     <String, dynamic>{
-      'contact': instance.contact?.toJson(),
-      'identity': instance.identity?.toJson(),
-      'trusted_contact': instance.trustedContact?.toJson(),
-      'disclosures': instance.disclosures?.toJson(),
+      'personal_info': instance.personalInfo?.toJson(),
+      'proofs_of_address':
+          instance.proofsOfAddress?.map((e) => e.toJson()).toList(),
+      'employment_info': instance.employmentInfo?.toJson(),
+      'wealth_sources': instance.wealthSources?.map((e) => e.toJson()).toList(),
+      'affiliated_person': instance.affiliatedPerson?.toJson(),
       'agreements': instance.agreements?.map((e) => e.toJson()).toList(),
     };
