@@ -48,7 +48,6 @@ void main() {
               const ForgotPasswordState(
                 response: BaseResponse(),
                 email: '',
-                isEmailValid: false,
                 emailErrorText: '',
               ));
         },
@@ -59,10 +58,9 @@ void main() {
         build: () => forgotPasswordBloc,
         act: (bloc) => bloc.add(const ForgotPasswordEmailChanged('sadfasdf')),
         expect: () => {
-          ForgotPasswordState(
-            response: BaseResponse.unknown(),
+          const ForgotPasswordState(
+            response: BaseResponse(),
             email: 'sadfasdf',
-            isEmailValid: false,
             emailErrorText: 'Enter valid email',
           ),
         },
@@ -75,10 +73,9 @@ void main() {
           const ForgotPasswordEmailChanged('abc@abc.com'),
         ),
         expect: () => {
-          ForgotPasswordState(
-            response: BaseResponse.unknown(),
+          const ForgotPasswordState(
+            response: BaseResponse(),
             email: 'abc@abc.com',
-            isEmailValid: true,
             emailErrorText: '',
           )
         },
@@ -88,11 +85,10 @@ void main() {
           'emits "ForgotPasswordStatus.success" WHEN entered valid email AND pressed "Submit" button.',
           build: () {
             when(forgotPasswordRepository.forgotPassword(email: 'abc@abc.com'))
-                .thenAnswer((_) => Future.value(
-                    const BaseResponse<ForgotPasswordResponse>(
-                        data: ForgotPasswordResponse(
-                            'Successfully sent new password!'),
-                        state: ResponseState.success)));
+                .thenAnswer((_) => Future.value(BaseResponse.complete(
+                    const ForgotPasswordResponse(
+                        'Link for Password reset is sent to email.'),
+                    message: 'Link for Password reset is sent to email.')));
 
             return forgotPasswordBloc;
           },
@@ -101,26 +97,23 @@ void main() {
                 bloc.add(const ForgotPasswordSubmitted())
               },
           expect: () => {
-                ForgotPasswordState(
-                    response: BaseResponse.unknown(),
+                const ForgotPasswordState(
+                    response: BaseResponse(),
                     email: 'abc@abc.com',
-                    isEmailValid: true,
                     emailErrorText: ''),
                 ForgotPasswordState(
                   response: BaseResponse.loading(),
                   email: 'abc@abc.com',
-                  isEmailValid: true,
                   emailErrorText: '',
                 ),
-                const ForgotPasswordState(
-                  response: BaseResponse<ForgotPasswordResponse>(
-                      data: ForgotPasswordResponse(
-                          'Successfully sent new password!'),
-                      state: ResponseState.success),
-                  email: 'abc@abc.com',
-                  isEmailValid: true,
-                  emailErrorText: '',
-                )
+                ForgotPasswordState(
+                    response: BaseResponse.complete(
+                        const ForgotPasswordResponse(
+                            'Link for Password reset is sent to email.'),
+                        message: 'Link for Password reset is sent to email.'),
+                    email: 'abc@abc.com',
+                    emailErrorText: '',
+                    deeplinkStatus: DeeplinkStatus.inProgress)
               });
 
       tearDown(() => forgotPasswordBloc.close());

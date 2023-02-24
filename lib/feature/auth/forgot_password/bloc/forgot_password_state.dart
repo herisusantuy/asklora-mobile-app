@@ -3,29 +3,32 @@ part of 'forgot_password_bloc.dart';
 enum DeeplinkStatus { inProgress, success, failed }
 
 class ForgotPasswordState extends Equatable {
-  const ForgotPasswordState({
-    this.response = const BaseResponse(),
-    this.deeplinkStatus = DeeplinkStatus.inProgress,
-    this.email = '',
-    this.emailErrorText = '',
-  }) : super();
+  const ForgotPasswordState(
+      {this.response = const BaseResponse(),
+      this.deeplinkStatus = DeeplinkStatus.inProgress,
+      this.email = '',
+      this.emailErrorText = '',
+      this.resetPasswordToken = ''})
+      : super();
 
   final BaseResponse response;
   final DeeplinkStatus deeplinkStatus;
   final String email;
   final String emailErrorText;
+  final String resetPasswordToken;
 
-  ForgotPasswordState copyWith({
-    BaseResponse? response,
-    DeeplinkStatus? deeplinkStatus,
-    String? email,
-    String? emailErrorText,
-  }) {
+  ForgotPasswordState copyWith(
+      {BaseResponse? response,
+      DeeplinkStatus? deeplinkStatus,
+      String? email,
+      String? emailErrorText,
+      String? resetPasswordToken}) {
     return ForgotPasswordState(
       response: response ?? this.response,
       deeplinkStatus: deeplinkStatus ?? this.deeplinkStatus,
       email: email ?? this.email,
       emailErrorText: emailErrorText ?? this.emailErrorText,
+      resetPasswordToken: resetPasswordToken ?? this.resetPasswordToken,
     );
   }
 
@@ -36,6 +39,7 @@ class ForgotPasswordState extends Equatable {
       deeplinkStatus,
       email,
       emailErrorText,
+      resetPasswordToken
     ];
   }
 }

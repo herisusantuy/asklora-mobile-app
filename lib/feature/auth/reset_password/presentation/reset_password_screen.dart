@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
@@ -11,14 +10,17 @@ import '../repository/reset_password_repository.dart';
 import 'reset_password_form.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
-  const ResetPasswordScreen({Key? key}) : super(key: key);
+  static const String route = '/reset_password_screen';
+  const ResetPasswordScreen({required this.resetPasswordToken, Key? key})
+      : super(key: key);
+
+  final String resetPasswordToken;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ResetPasswordBloc(
-          resetPasswordRepository: ResetPasswordRepository(),
-          tokenRepository: TokenRepository()),
+      create: (context) =>
+          ResetPasswordBloc(resetPasswordRepository: ResetPasswordRepository()),
       child: CustomScaffold(
         body: CustomStretchedLayout(
           header: const CustomHeader(
@@ -44,13 +46,10 @@ class ResetPasswordScreen extends StatelessWidget {
               disabled: state.enableSubmitButton(),
               onTap: () => context
                   .read<ResetPasswordBloc>()
-                  .add(const ResetPasswordSubmitted()));
+                  .add(ResetPasswordSubmitted(resetPasswordToken)));
         },
       );
-
-  static void open(BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const ResetPasswordScreen(),
-        ),
-      );
+  static void open(BuildContext context,
+          {required String resetPasswordToken}) =>
+      Navigator.pushNamed(context, route, arguments: resetPasswordToken);
 }

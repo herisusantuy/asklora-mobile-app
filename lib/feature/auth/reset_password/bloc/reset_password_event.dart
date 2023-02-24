@@ -26,8 +26,9 @@ class ResetPasswordConfirmPasswordChanged extends ResetPasswordEvent {
 }
 
 class ResetPasswordSubmitted extends ResetPasswordEvent {
-  const ResetPasswordSubmitted();
+  final String resetPasswordToken;
+  const ResetPasswordSubmitted(this.resetPasswordToken) : super();
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [resetPasswordToken];
 }

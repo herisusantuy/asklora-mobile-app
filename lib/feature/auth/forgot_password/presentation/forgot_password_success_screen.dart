@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
@@ -19,8 +18,7 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) => BlocProvider(
         create: (context) {
           return ForgotPasswordBloc(
-              forgotPasswordRepository: ForgotPasswordRepository(),
-              tokenRepository: TokenRepository())
+              forgotPasswordRepository: ForgotPasswordRepository())
             ..add(const StartListenOnDeeplink());
         },
         child: BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
@@ -32,7 +30,8 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
             }
 
             if (state.deeplinkStatus == DeeplinkStatus.success) {
-              ResetPasswordScreen.open(context);
+              ResetPasswordScreen.open(context,
+                  resetPasswordToken: state.resetPasswordToken);
             }
           },
           child: CustomScaffold(

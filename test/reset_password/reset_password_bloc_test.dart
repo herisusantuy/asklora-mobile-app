@@ -48,8 +48,6 @@ void main() {
                   response: BaseResponse(),
                   password: '',
                   confirmPassword: '',
-                  isPasswordValid: false,
-                  isConfirmPasswordValid: false,
                   passwordErrorText: '',
                   confirmPasswordErrorText: ''));
         },
@@ -63,20 +61,16 @@ void main() {
           bloc.add(const ResetPasswordConfirmPasswordChanged('12345'));
         },
         expect: () => {
-          ResetPasswordState(
-              response: BaseResponse.unknown(),
+          const ResetPasswordState(
+              response: BaseResponse(),
               password: 'aaaBBB',
               confirmPassword: '',
-              isPasswordValid: false,
-              isConfirmPasswordValid: false,
               passwordErrorText: 'Enter valid password',
               confirmPasswordErrorText: ''),
-          ResetPasswordState(
-              response: BaseResponse.unknown(),
+          const ResetPasswordState(
+              response: BaseResponse(),
               password: 'aaaBBB',
               confirmPassword: '12345',
-              isPasswordValid: false,
-              isConfirmPasswordValid: false,
               passwordErrorText: 'Enter valid password',
               confirmPasswordErrorText: 'Enter valid password'),
         },
@@ -90,20 +84,16 @@ void main() {
           bloc.add(const ResetPasswordConfirmPasswordChanged('aA1234567'));
         },
         expect: () => {
-          ResetPasswordState(
-              response: BaseResponse.unknown(),
+          const ResetPasswordState(
+              response: BaseResponse(),
               password: 'Aa1234567',
               confirmPassword: '',
-              isPasswordValid: false,
-              isConfirmPasswordValid: false,
               passwordErrorText: 'Your password does not match.',
               confirmPasswordErrorText: ''),
-          ResetPasswordState(
-              response: BaseResponse.unknown(),
+          const ResetPasswordState(
+              response: BaseResponse(),
               password: 'Aa1234567',
               confirmPassword: 'aA1234567',
-              isPasswordValid: false,
-              isConfirmPasswordValid: false,
               passwordErrorText: 'Your password does not match.',
               confirmPasswordErrorText: 'Your password does not match.'),
         },
@@ -119,20 +109,16 @@ void main() {
           bloc.add(const ResetPasswordConfirmPasswordChanged('Aa1234567'));
         },
         expect: () => {
-          ResetPasswordState(
-              response: BaseResponse.unknown(),
+          const ResetPasswordState(
+              response: BaseResponse(),
               password: 'Aa1234567',
               confirmPassword: '',
-              isPasswordValid: false,
-              isConfirmPasswordValid: false,
               passwordErrorText: 'Your password does not match.',
               confirmPasswordErrorText: ''),
-          ResetPasswordState(
-              response: BaseResponse.unknown(),
+          const ResetPasswordState(
+              response: BaseResponse(),
               password: 'Aa1234567',
               confirmPassword: 'Aa1234567',
-              isPasswordValid: true,
-              isConfirmPasswordValid: true,
               passwordErrorText: '',
               confirmPasswordErrorText: ''),
         },

@@ -31,15 +31,6 @@ class TokenRepository implements Repository {
   }
 
   @override
-  void saveResetPasswordToken(String token) async {
-    await _secureStorage.writeData(Repository.keyAuthResetPassword, token);
-  }
-
-  @override
-  Future<String?> getResetPasswordToken() async =>
-      await _secureStorage.readData(Repository.keyAuthResetPassword);
-
-  @override
   Future<String?> getAccessToken() async =>
       await _secureStorage.readData(Repository.keyAuthTokenAccess);
 

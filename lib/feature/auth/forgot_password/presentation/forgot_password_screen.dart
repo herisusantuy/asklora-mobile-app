@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
@@ -19,8 +18,8 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ForgotPasswordBloc(
-          forgotPasswordRepository: ForgotPasswordRepository(),
-          tokenRepository: TokenRepository()),
+        forgotPasswordRepository: ForgotPasswordRepository(),
+      ),
       child: CustomScaffold(
         body: CustomStretchedLayout(
           header: const CustomHeader(
