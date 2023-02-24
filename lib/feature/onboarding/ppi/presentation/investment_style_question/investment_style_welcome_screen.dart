@@ -32,9 +32,9 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
             create: (_) {
               return QuestionBloc(
                   ppiQuestionRepository: PpiQuestionRepository(),
-                  questionPageType: QuestionPageType.investmentStyle)
-                ..add(const LoadInvestmentStyleQuestions(
-                    accountId: 'FFFF|b4561f7ec2d96903|1677138881'));
+                  questionPageType: QuestionPageType.investmentStyle,
+                  sharedPreference: SharedPreference())
+                ..add(const LoadInvestmentStyleQuestions());
             },
             child: BlocListener<QuestionBloc, QuestionState>(
               listenWhen: (previous, current) =>

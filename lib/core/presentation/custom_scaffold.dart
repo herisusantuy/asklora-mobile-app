@@ -47,25 +47,3 @@ class CustomScaffold extends Scaffold {
               ],
             ));
 }
-
-class CustomClassTest extends WillPopScope {
-  CustomClassTest(
-      {super.key,
-      required Widget body,
-      VoidCallback? onTapBack,
-      bool enableBackNavigation = true,
-      bool useSafeArea = true,
-      Color backgroundColor = Colors.white,
-      Widget? bottomNavigationBar})
-      : super(
-            onWillPop: () {
-              return Future.value(true);
-            },
-            child: CustomScaffold(
-              body: body,
-              onTapBack: onTapBack,
-              enableBackNavigation: enableBackNavigation,
-              useSafeArea: useSafeArea,
-              backgroundColor: backgroundColor,
-            ));
-}

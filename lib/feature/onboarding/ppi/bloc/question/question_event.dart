@@ -15,9 +15,7 @@ class LoadPrivacyAndPersonalisationQuestions extends QuestionEvent {
 }
 
 class LoadInvestmentStyleQuestions extends QuestionEvent {
-  const LoadInvestmentStyleQuestions({required this.accountId}) : super();
-
-  final String accountId;
+  const LoadInvestmentStyleQuestions() : super();
 
   @override
   List<Object?> get props => [];

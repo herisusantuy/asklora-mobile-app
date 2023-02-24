@@ -22,7 +22,7 @@ class AskNameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomClassTest(
+    return CustomScaffold(
       enableBackNavigation: true,
       body: BlocProvider(
         create: (_) => LoraAskNameBloc(

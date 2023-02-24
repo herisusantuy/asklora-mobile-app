@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/utils/storage/shared_preference.dart';
+import '../../../../../core/utils/storage/storage_keys.dart';
 import '../../domain/fixture.dart';
 import '../../repository/ppi_question_repository.dart';
 
@@ -23,11 +25,13 @@ enum QuestionPageStep {
 enum QuestionPageType { privacy, personalisation, investmentStyle }
 
 class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
-  QuestionBloc(
-      {required PpiQuestionRepository ppiQuestionRepository,
-      required QuestionPageType questionPageType})
-      : _questionCollectionRepository = ppiQuestionRepository,
+  QuestionBloc({
+    required PpiQuestionRepository ppiQuestionRepository,
+    required QuestionPageType questionPageType,
+    required SharedPreference sharedPreference,
+  })  : _questionCollectionRepository = ppiQuestionRepository,
         _questionPageType = questionPageType,
+        _sharedPreference = sharedPreference,
         super(const QuestionState()) {
     on<LoadPrivacyAndPersonalisationQuestions>(_onLoadQuestions);
     on<LoadInvestmentStyleQuestions>(_onLoadInvestmentStyleQuestions);
@@ -49,6 +53,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
 
   final PpiQuestionRepository _questionCollectionRepository;
   final QuestionPageType _questionPageType;
+  final SharedPreference _sharedPreference;
 
   void _onPrivacyQuestionIndexChanged(
       PrivacyQuestionIndexChanged event, Emitter<QuestionState> emit) {
@@ -63,8 +68,6 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
 
   void _onInvestmentStyleQuestionIndexChanged(
       InvestmentStyleQuestionIndexChanged event, Emitter<QuestionState> emit) {
-    debugPrint(
-        'Krishna Question bloc _onInvestmentStyleQuestionIndexChanged ${event.investmentStyleQuestionIndex}');
     emit(state.copyWith(
         investmentStyleQuestionIndex: event.investmentStyleQuestionIndex));
   }
@@ -73,18 +76,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       Emitter<QuestionState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     try {
-      Fixture fixture;
-      /*if (event.accountId == null) {
-        debugPrint('Krishna Question bloc getInvestmentStyleQuestion if');
-        fixture = await _questionCollectionRepository
-            .fetchPersonalAndPrivacyQuestions();
-      } else {
-        debugPrint('Krishna Question bloc getInvestmentStyleQuestion else');
-        fixture = await _questionCollectionRepository
-            .fetchInvestmentStyleQuestions(event.accountId!);
-      }*/
-
-      fixture = await _questionCollectionRepository
+      final fixture = await _questionCollectionRepository
           .fetchPersonalAndPrivacyQuestions();
       emit(state.copyWith(response: BaseResponse.complete(fixture)));
       //+1 for privacy result
@@ -104,13 +96,6 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
           //+1 for investmentStyle result
           totalInvestmentStylePages:
               fixture.getInvestmentStyleQuestion.length + 1));
-
-      debugPrint(
-          'Krishna Question bloc getInvestmentStyleQuestion ${fixture.getInvestmentStyleQuestion.length}');
-      debugPrint(
-          'Krishna Question bloc getPersonalisedQuestion ${fixture.getPersonalisedQuestion.length}');
-      debugPrint(
-          'Krishna Question bloc getPrivacyQuestions ${fixture.getPrivacyQuestions.length}');
     } catch (e) {
       emit(state.copyWith(
           response:
@@ -122,19 +107,10 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       LoadInvestmentStyleQuestions event, Emitter<QuestionState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     try {
-      Fixture fixture;
-      /*if (event.accountId == null) {
-        debugPrint('Krishna Question bloc getInvestmentStyleQuestion if');
-        fixture = await _questionCollectionRepository
-            .fetchPersonalAndPrivacyQuestions();
-      } else {
-        debugPrint('Krishna Question bloc getInvestmentStyleQuestion else');
-        fixture = await _questionCollectionRepository
-            .fetchInvestmentStyleQuestions(event.accountId!);
-      }*/
+      final accountId = await _sharedPreference.readData(sfKeyTempName);
 
-      fixture = await _questionCollectionRepository
-          .fetchInvestmentStyleQuestions(event.accountId);
+      final fixture = await _questionCollectionRepository
+          .fetchInvestmentStyleQuestions(accountId ?? '');
       emit(state.copyWith(response: BaseResponse.complete(fixture)));
       //+1 for privacy result
       int totalPrivacyPages = fixture.getPrivacyQuestions.length + 1;
@@ -153,13 +129,6 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
           //+1 for investmentStyle result
           totalInvestmentStylePages:
               fixture.getInvestmentStyleQuestion.length + 1));
-
-      debugPrint(
-          'Krishna Question bloc getInvestmentStyleQuestion ${fixture.getInvestmentStyleQuestion.length}');
-      debugPrint(
-          'Krishna Question bloc getPersonalisedQuestion ${fixture.getPersonalisedQuestion.length}');
-      debugPrint(
-          'Krishna Question bloc getPrivacyQuestions ${fixture.getPrivacyQuestions.length}');
     } catch (e) {
       emit(state.copyWith(
           response:
@@ -182,8 +151,6 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   void _onCurrentInvestmentStylePageIncremented(
       CurrentInvestmentStylePageIncremented event,
       Emitter<QuestionState> emit) async {
-    debugPrint(
-        'Krishna Question bloc _onCurrentInvestmentStylePageIncremented ${state.currentInvestmentStylePages}');
     emit(state.copyWith(
         currentInvestmentStylePages: state.currentInvestmentStylePages + 1));
   }

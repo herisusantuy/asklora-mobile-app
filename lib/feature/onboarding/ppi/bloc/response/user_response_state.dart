@@ -55,7 +55,6 @@ class UserResponseState extends Equatable {
   @override
   List<Object> get props => [
         responseState,
-        DateTime.now().millisecondsSinceEpoch,
         cachedSelectedChoices,
         cachedDefaultChoices,
         ppiResponseState
