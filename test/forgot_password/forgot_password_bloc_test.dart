@@ -1,5 +1,4 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/bloc/forgot_password_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_response.dart';
@@ -36,8 +35,7 @@ void main() {
       setUp(
         () async {
           forgotPasswordBloc = ForgotPasswordBloc(
-              forgotPasswordRepository: forgotPasswordRepository,
-              tokenRepository: TokenRepository());
+              forgotPasswordRepository: forgotPasswordRepository);
         },
       );
       test(
@@ -85,10 +83,11 @@ void main() {
           'emits "ForgotPasswordStatus.success" WHEN entered valid email AND pressed "Submit" button.',
           build: () {
             when(forgotPasswordRepository.forgotPassword(email: 'abc@abc.com'))
-                .thenAnswer((_) => Future.value(BaseResponse.complete(
-                    const ForgotPasswordResponse(
-                        'Link for Password reset is sent to email.'),
-                    message: 'Link for Password reset is sent to email.')));
+                .thenAnswer((_) => Future.value(
+                    const BaseResponse<ForgotPasswordResponse>(
+                        data: ForgotPasswordResponse(
+                            'Successfully sent new password!'),
+                        state: ResponseState.success)));
 
             return forgotPasswordBloc;
           },
@@ -106,14 +105,14 @@ void main() {
                   email: 'abc@abc.com',
                   emailErrorText: '',
                 ),
-                ForgotPasswordState(
-                    response: BaseResponse.complete(
-                        const ForgotPasswordResponse(
-                            'Link for Password reset is sent to email.'),
-                        message: 'Link for Password reset is sent to email.'),
-                    email: 'abc@abc.com',
-                    emailErrorText: '',
-                    deeplinkStatus: DeeplinkStatus.inProgress)
+                const ForgotPasswordState(
+                  response: BaseResponse<ForgotPasswordResponse>(
+                      data: ForgotPasswordResponse(
+                          'Successfully sent new password!'),
+                      state: ResponseState.success),
+                  email: 'abc@abc.com',
+                  emailErrorText: '',
+                )
               });
 
       tearDown(() => forgotPasswordBloc.close());

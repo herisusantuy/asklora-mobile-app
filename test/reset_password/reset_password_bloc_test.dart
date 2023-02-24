@@ -1,5 +1,4 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart';
 import 'package:asklora_mobile_app/feature/auth/reset_password/bloc/reset_password_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/reset_password/domain/reset_password_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/reset_password/repository/reset_password_repository.dart';
@@ -35,8 +34,7 @@ void main() {
       setUp(
         () async {
           resetPasswordBloc = ResetPasswordBloc(
-              resetPasswordRepository: resetPasswordRepository,
-              tokenRepository: TokenRepository());
+              resetPasswordRepository: resetPasswordRepository);
         },
       );
       test(

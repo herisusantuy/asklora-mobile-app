@@ -54,9 +54,9 @@ class ForgotPasswordBloc
       var data =
           await _forgotPasswordRepository.forgotPassword(email: state.email);
 
-      emit(state.copyWith(
-          response: BaseResponse.complete(data,
-              message: 'Link for Password reset is sent to email.')));
+      data.copyWith(message: 'Link for Password reset is sent to email.');
+
+      emit(state.copyWith(response: data));
     } on BadRequestException {
       emit(state.copyWith(
           response: BaseResponse.error('Your account is not active yet.')));

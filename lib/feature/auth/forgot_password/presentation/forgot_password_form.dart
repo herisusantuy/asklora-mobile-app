@@ -23,7 +23,11 @@ class ForgotPasswordForm extends StatelessWidget {
           CustomLoadingOverlay.show(context);
         } else {
           CustomLoadingOverlay.dismiss();
-          CustomInAppNotification.show(context, state.response.message);
+          CustomInAppNotification.show(
+              context,
+              responseState == ResponseState.success
+                  ? state.response.data.detail
+                  : state.response.message);
           if (responseState == ResponseState.success) {
             ForgotPasswordSuccessScreen.open(context);
           } else if (responseState == ResponseState.error) {
