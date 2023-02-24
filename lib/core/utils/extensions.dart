@@ -94,3 +94,26 @@ extension ExtraPadding on BuildContext {
         bottom: bottomPadding,
       ));
 }
+
+extension RestTimeOnDuration on Duration {
+  String get inDaysRest => inDays < 10 ? '0$inDays' : '$inDays';
+
+  String get inHoursRest {
+    int time = inHours - (inDays * 24);
+    return time < 10 ? '0$time' : '$time';
+  }
+
+  String get inMinutesRest {
+    int time = inMinutes - (inHours * 60);
+    return time < 10 ? '0$time' : '$time';
+  }
+
+  String get inSecondsRest {
+    int time = inSeconds - (inMinutes * 60);
+    return time < 10 ? '0$time' : '$time';
+  }
+
+  int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
+
+  int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
+}
