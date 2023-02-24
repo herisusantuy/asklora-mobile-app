@@ -227,7 +227,7 @@ void main() async {
                       data: SignUpResponse('Sign Up Successful'),
                       state: ResponseState.success)));
 
-          when(ppiResponseRepository.linkUserId(101)).thenAnswer(
+          when(ppiResponseRepository.linkUser(101)).thenAnswer(
               (realInvocation) => Future.value(Response(
                   data: '', requestOptions: RequestOptions(path: '/'))));
 

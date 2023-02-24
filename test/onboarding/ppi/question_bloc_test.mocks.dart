@@ -42,24 +42,32 @@ class MockPpiQuestionRepository extends _i1.Mock
   }
 
   @override
-  _i2.Fixture get fixture => (super.noSuchMethod(
-        Invocation.getter(#fixture),
-        returnValue: _FakeFixture_0(
-          this,
-          Invocation.getter(#fixture),
-        ),
-      ) as _i2.Fixture);
-  @override
-  _i4.Future<_i2.Fixture> fetchQuestions() => (super.noSuchMethod(
+  _i4.Future<_i2.Fixture> fetchPersonalAndPrivacyQuestions() =>
+      (super.noSuchMethod(
         Invocation.method(
-          #fetchQuestions,
+          #fetchPersonalAndPrivacyQuestions,
           [],
         ),
         returnValue: _i4.Future<_i2.Fixture>.value(_FakeFixture_0(
           this,
           Invocation.method(
-            #fetchQuestions,
+            #fetchPersonalAndPrivacyQuestions,
             [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Fixture>);
+  @override
+  _i4.Future<_i2.Fixture> fetchInvestmentStyleQuestions(String? accountId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchInvestmentStyleQuestions,
+          [accountId],
+        ),
+        returnValue: _i4.Future<_i2.Fixture>.value(_FakeFixture_0(
+          this,
+          Invocation.method(
+            #fetchInvestmentStyleQuestions,
+            [accountId],
           ),
         )),
       ) as _i4.Future<_i2.Fixture>);

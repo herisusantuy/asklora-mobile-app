@@ -20,7 +20,8 @@ void main() {
         find.byKey(const Key('question_navigation_button_widget'));
     var questionNextButton = find.byKey(const Key('question_next_button'));
 
-    List<Question> personalisedQuestions = Fixture().personalisedQuestion;
+    List<Question> personalisedQuestions =
+        Fixture.instance.getPersonalisedQuestion;
     Future<void> builderPersonalisationQuestionScreen(
         WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();

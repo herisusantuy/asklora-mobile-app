@@ -138,17 +138,17 @@ class MockPpiResponseRepository extends _i1.Mock
         )),
       ) as _i6.Future<_i3.SnapShot>);
   @override
-  _i6.Future<_i4.Response<dynamic>> linkUserId(int? userId) =>
+  _i6.Future<_i4.Response<dynamic>> linkUser(int? userId) =>
       (super.noSuchMethod(
         Invocation.method(
-          #linkUserId,
+          #linkUser,
           [userId],
         ),
         returnValue:
             _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_3<dynamic>(
           this,
           Invocation.method(
-            #linkUserId,
+            #linkUser,
             [userId],
           ),
         )),
