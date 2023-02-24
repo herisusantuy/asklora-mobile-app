@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,12 +32,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ) {
     emit(
       state.copyWith(
-          response: BaseResponse.unknown(),
           password: event.password,
-          isPasswordValid: event.password.isValidPassword() &&
-              event.password == state.confirmPassword,
-          isConfirmPasswordValid: event.password.isValidPassword() &&
-              event.password == state.confirmPassword,
           passwordErrorText: ((event.password.isValidPassword() &&
                       event.password == state.confirmPassword) ||
                   event.password.isEmpty)
@@ -59,12 +53,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ) {
     emit(
       state.copyWith(
-          response: BaseResponse.unknown(),
           confirmPassword: event.confirmPassword,
-          isPasswordValid: event.confirmPassword.isValidPassword() &&
-              state.password == event.confirmPassword,
-          isConfirmPasswordValid: event.confirmPassword.isValidPassword() &&
-              state.password == event.confirmPassword,
           confirmPasswordErrorText: ((event.confirmPassword.isValidPassword() &&
                       state.password == event.confirmPassword) ||
                   event.confirmPassword.isEmpty)
@@ -89,9 +78,9 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           password: state.password,
           confirmPassword: state.confirmPassword);
 
-      data.copyWith(message: 'Password changed successfully.');
-
-      emit(state.copyWith(response: data));
+      emit(state.copyWith(
+          response: BaseResponse.complete(data,
+              message: 'Password changed successfully.')));
     } on BadRequestException {
       emit(state.copyWith(
           response: BaseResponse.error('Token is invalid or expired.')));

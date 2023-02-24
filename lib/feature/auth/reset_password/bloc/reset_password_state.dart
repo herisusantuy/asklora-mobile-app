@@ -5,8 +5,6 @@ class ResetPasswordState extends Equatable {
       {this.response = const BaseResponse(),
       this.password = '',
       this.confirmPassword = '',
-      this.isPasswordValid = false,
-      this.isConfirmPasswordValid = false,
       this.passwordErrorText = '',
       this.confirmPasswordErrorText = ''})
       : super();
@@ -14,8 +12,6 @@ class ResetPasswordState extends Equatable {
   final BaseResponse response;
   final String password;
   final String confirmPassword;
-  final bool isPasswordValid;
-  final bool isConfirmPasswordValid;
   final String passwordErrorText;
   final String confirmPasswordErrorText;
 
@@ -33,9 +29,6 @@ class ResetPasswordState extends Equatable {
       response: response ?? this.response,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
-      isPasswordValid: isPasswordValid ?? this.isPasswordValid,
-      isConfirmPasswordValid:
-          isConfirmPasswordValid ?? this.isConfirmPasswordValid,
       passwordErrorText: passwordErrorText ?? this.passwordErrorText,
       confirmPasswordErrorText:
           confirmPasswordErrorText ?? this.confirmPasswordErrorText,
@@ -48,15 +41,16 @@ class ResetPasswordState extends Equatable {
       response,
       password,
       confirmPassword,
-      isPasswordValid,
-      isConfirmPasswordValid,
       passwordErrorText,
       confirmPasswordErrorText,
     ];
   }
 
   bool enableSubmitButton() {
-    if (isPasswordValid && isConfirmPasswordValid) {
+    if (passwordErrorText.isEmpty &&
+        confirmPasswordErrorText.isEmpty &&
+        password.isValidPassword() &&
+        confirmPassword.isValidPassword()) {
       return false;
     } else {
       return true;

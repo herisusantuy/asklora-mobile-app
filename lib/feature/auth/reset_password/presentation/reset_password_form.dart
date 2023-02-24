@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
-import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
-import '../../../../core/utils/extensions.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../sign_in/presentation/sign_in_screen.dart';
 import '../bloc/reset_password_bloc.dart';
 
-class ForgotPasswordForm extends StatelessWidget {
-  const ForgotPasswordForm({Key? key}) : super(key: key);
+class ResetPasswordForm extends StatelessWidget {
+  const ResetPasswordForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,66 +19,39 @@ class ForgotPasswordForm extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.response.state != current.response.state,
       listener: (context, state) {
-        switch (state.response.state) {
-          case ResponseState.loading:
-            CustomLoadingOverlay.show(context);
-            break;
-          case ResponseState.success:
-            CustomLoadingOverlay.dismiss();
-            CustomInAppNotification.show(context, state.response.data.detail);
+        if (state.response.state == ResponseState.loading) {
+          CustomLoadingOverlay.show(context);
+        } else {
+          CustomLoadingOverlay.dismiss();
+          CustomInAppNotification.show(context, state.response.message);
+          if (state.response.state == ResponseState.success) {
             SignInScreen.open(context);
-            break;
-          case ResponseState.error:
+          } else if (state.response.state == ResponseState.error) {
             context
                 .read<ResetPasswordBloc>()
                 .add(ResetPasswordPasswordChanged(state.password));
             context.read<ResetPasswordBloc>().add(
                 ResetPasswordConfirmPasswordChanged(state.confirmPassword));
-            CustomLoadingOverlay.dismiss();
-            CustomSnackBar(context)
-                .setMessage(state.response.message)
-                .showError();
             ForgotPasswordScreen.open(context);
-            break;
-          default:
-            break;
+          }
         }
       },
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _padding(),
-                      const CustomTextNew(
-                        'Enter a new password',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      _padding(),
-                      _passwordInput(),
-                      _padding(),
-                      _confirmPasswordInput(),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      _resetPasswordButton(),
-                      context.padding(topPadding: 20),
-                    ],
-                  )
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomTextNew(
+                  'Enter a new password',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 16),
+                ),
+                _padding(),
+                _passwordInput(),
+                _padding(),
+                _confirmPasswordInput(),
+              ],
             ),
           );
         },
@@ -117,22 +87,6 @@ class ForgotPasswordForm extends StatelessWidget {
               onChanged: (confirmPassword) => context
                   .read<ResetPasswordBloc>()
                   .add(ResetPasswordConfirmPasswordChanged(confirmPassword))));
-
-  Widget _resetPasswordButton() =>
-      BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-        buildWhen: (previous, current) =>
-            previous.isPasswordValid != current.isPasswordValid ||
-            previous.isConfirmPasswordValid != current.isConfirmPasswordValid,
-        builder: (context, state) {
-          return PrimaryButton(
-              key: const Key('reset_password_submit_button'),
-              label: 'RESET PASSWORD',
-              disabled: state.enableSubmitButton(),
-              onTap: () => context
-                  .read<ResetPasswordBloc>()
-                  .add(const ResetPasswordSubmitted()));
-        },
-      );
 
   Padding _padding() => const Padding(
         padding: EdgeInsets.symmetric(vertical: 15),
