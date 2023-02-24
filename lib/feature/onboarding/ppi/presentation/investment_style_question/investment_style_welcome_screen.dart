@@ -27,28 +27,32 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
       enableBackNavigation: false,
       body: Padding(
         padding: AppValues.screenHorizontalPadding,
-        child: LayoutBuilder(builder: (context, constraint) {
+        child: LayoutBuilder(builder: (_, constraint) {
           return BlocProvider(
             create: (_) {
               return QuestionBloc(
                   ppiQuestionRepository: PpiQuestionRepository(),
                   questionPageType: QuestionPageType.investmentStyle,
-                  sharedPreference: SharedPreference())
-                ..add(const LoadInvestmentStyleQuestions());
+                  sharedPreference: SharedPreference());
             },
-            child: BlocListener<QuestionBloc, QuestionState>(
+            child: BlocConsumer<QuestionBloc, QuestionState>(
               listenWhen: (previous, current) =>
                   previous.response.state != current.response.state,
               listener: (context, state) {
                 if (state.response.state == ResponseState.loading) {
                   CustomLoadingOverlay.show(context);
-                } else if (state.response.state == ResponseState.error) {
-                  CustomInAppNotification.show(context, state.response.message);
                 } else {
                   CustomLoadingOverlay.dismiss();
                 }
+                if (state.response.state == ResponseState.success) {
+                  PpiScreen.open(context,
+                      arguments: Pair(QuestionPageType.investmentStyle,
+                          QuestionPageStep.investmentStyle));
+                } else if (state.response.state == ResponseState.error) {
+                  CustomInAppNotification.show(context, state.response.message);
+                }
               },
-              child: SingleChildScrollView(
+              builder: (context, state) => SingleChildScrollView(
                   child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: constraint.maxHeight),
                 child: Column(
@@ -59,9 +63,11 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
                         text:
                             'Let\'s dive into the core of the personalisation experience - defining your investment style.'),
                     ButtonPair(
-                        primaryButtonOnClick: () => PpiScreen.open(context,
-                            arguments: Pair(QuestionPageType.investmentStyle,
-                                QuestionPageStep.investmentStyle)),
+                        primaryButtonOnClick: () {
+                          context
+                              .read<QuestionBloc>()
+                              .add(const LoadInvestmentStyleQuestions());
+                        },
                         secondaryButtonOnClick: () =>
                             TabsScreen.openAndRemoveAllRoute(context),
                         primaryButtonLabel: 'DEFINE INVESTMENT STYLE',

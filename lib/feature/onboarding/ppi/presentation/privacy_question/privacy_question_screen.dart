@@ -64,14 +64,16 @@ class PrivacyQuestionScreen extends StatelessWidget {
                             onCancel: () => onCancel(context),
                             onSubmitSuccess: () => onSubmitSuccess(context),
                           );
-                        case (QuestionType.unique):
-                          return BlocProvider(
-                              create: (_) => FinancialProfileBloc(),
-                              child: FinancialSituationQuestion(
-                                question: question,
-                                onTapNext: () => onSubmitSuccess(context),
-                                onCancel: () => onCancel(context),
-                              ));
+
+                        /// In case we want to add any extra screens in the PPI section.
+                        // case (QuestionType.unique):
+                        //   return BlocProvider(
+                        //       create: (_) => FinancialProfileBloc(),
+                        //       child: FinancialSituationQuestion(
+                        //         question: question,
+                        //         onTapNext: () => onSubmitSuccess(context),
+                        //         onCancel: () => onCancel(context),
+                        //       ));
                         default:
                           return const SizedBox.shrink();
                       }

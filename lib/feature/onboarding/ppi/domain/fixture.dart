@@ -20,8 +20,10 @@ enum QuestionType {
   choices('choices'),
   slider('slider'),
   descriptive('descriptive'),
-  omniSearch('omnisearch'),
-  unique('unique');
+  omniSearch('omnisearch');
+
+  /// In case we want to add any extra screens in the PPI section.
+  // unique('unique');
 
   final String value;
 

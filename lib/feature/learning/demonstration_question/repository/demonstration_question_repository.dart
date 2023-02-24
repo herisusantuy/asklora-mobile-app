@@ -7,13 +7,8 @@ class DemonstrationQuestionRepository {
   Future<List<Question>> fetchQuestions() async {
     final String response = await rootBundle
         .loadString('assets/json/demonstration_question_list.json');
-
-    List<Question> questions = List.empty(growable: true);
-
-    questions = (jsonDecode(response) as List)
+    return (jsonDecode(response) as List)
         .map((i) => Question.fromJson(i))
         .toList();
-
-    return questions;
   }
 }

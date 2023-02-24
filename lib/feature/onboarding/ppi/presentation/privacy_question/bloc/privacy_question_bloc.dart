@@ -42,10 +42,13 @@ class PrivacyQuestionBloc
       } else if (question.questionType == QuestionType.slider.value) {
         emit(OnNextQuestion<Question>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questionType == QuestionType.unique.value) {
-        emit(OnNextQuestion<Question>(QuestionType.unique, question,
-            privacyQuestionIndex: _privacyQuestionIndex));
       }
+
+      /// In case we want to add any extra screens in the PPI section.
+      // else if (question.questionType == QuestionType.unique.value) {
+      //   emit(OnNextQuestion<Question>(QuestionType.unique, question,
+      //       privacyQuestionIndex: _privacyQuestionIndex));
+      // }
     } else {
       emit(OnNextResultSuccessScreen());
     }
@@ -65,10 +68,13 @@ class PrivacyQuestionBloc
       } else if (question.questionType == QuestionType.slider.value) {
         emit(OnNextQuestion<Question>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questionType == QuestionType.unique.value) {
-        emit(OnNextQuestion<Question>(QuestionType.unique, question,
-            privacyQuestionIndex: _privacyQuestionIndex));
       }
+
+      /// In case we want to add any extra screens in the PPI section.
+      // else if (question.questionType == QuestionType.unique.value) {
+      //   emit(OnNextQuestion<Question>(QuestionType.unique, question,
+      //       privacyQuestionIndex: _privacyQuestionIndex));
+      // }
     } else if (_privacyQuestionIndex < 0) {
       emit(OnPreviousSignInSuccessScreen());
     }

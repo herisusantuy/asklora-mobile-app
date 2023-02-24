@@ -20,7 +20,7 @@ class SaveUserResponse extends UserResponseEvent {
   const SaveUserResponse(this.question, this.selectedAnswer);
 
   @override
-  List<Object?> get props => [question.toString()];
+  List<Object?> get props => [question, selectedAnswer];
 }
 
 class SaveOmniSearchResponse extends UserResponseEvent {

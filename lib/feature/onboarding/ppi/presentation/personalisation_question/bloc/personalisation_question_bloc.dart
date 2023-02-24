@@ -42,11 +42,14 @@ class PersonalisationQuestionBloc
         emit(OnNextPersonalizationQuestion<Question>(
             QuestionType.slider, question,
             personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questionType == QuestionType.unique.value) {
-        emit(OnNextPersonalizationQuestion<Question>(
-            QuestionType.unique, question,
-            personalizationQuestionIndex: _personalizationIndex));
       }
+
+      /// In case we want to add any extra screens in the PPI section.
+      // else if (question.questionType == QuestionType.unique.value) {
+      //   emit(OnNextPersonalizationQuestion<Question>(
+      //       QuestionType.unique, question,
+      //       personalizationQuestionIndex: _personalizationIndex));
+      // }
     } else {
       emit(OnNextResultEndScreen());
     }
