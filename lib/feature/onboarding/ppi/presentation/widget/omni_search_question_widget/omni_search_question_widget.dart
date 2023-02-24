@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,8 +131,6 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                                   child: ButtonPair(
                                       primaryButtonOnClick: () {
                                         onSubmitSuccess();
-
-                                        /// Here would be the changes.
                                         final omniSearchState = context
                                             .read<
                                                 OmniSearchQuestionWidgetBloc>()
