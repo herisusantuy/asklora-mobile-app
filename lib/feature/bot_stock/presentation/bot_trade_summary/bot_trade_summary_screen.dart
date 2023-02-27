@@ -12,9 +12,9 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/utils/extensions.dart';
-import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
+import '../../domain/bot_recommendation_model.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
 import '../bot_stock_result_screen.dart';
@@ -23,7 +23,7 @@ import '../widgets/pair_column_text.dart';
 
 class BotTradeSummaryScreen extends StatelessWidget {
   static const String route = '/bot_trade_summary_screen';
-  final Pair<RecommendedBot, double> arguments;
+  final Pair<BotRecommendationModel, double> arguments;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
@@ -139,7 +139,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         label: 'CONFIRM',
                         onTap: () => context.read<BotStockBloc>().add(
                             TradeBotStock(
-                                recommendedBot: arguments.left,
+                                botRecommendationModel: arguments.left,
                                 tradeBotStockAmount: arguments.right)),
                       ),
                     ))),
@@ -149,6 +149,6 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
   static void open(
           {required BuildContext context,
-          required Pair<RecommendedBot, double> arguments}) =>
+          required Pair<BotRecommendationModel, double> arguments}) =>
       Navigator.pushNamed(context, route, arguments: arguments);
 }

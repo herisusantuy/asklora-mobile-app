@@ -8,12 +8,12 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
+import '../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../../bot_stock/presentation/widgets/bot_bottom_sheet_widget.dart';
 import '../../../bot_stock/repository/bot_stock_repository.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
-import '../../../onboarding/ppi/domain/ppi_user_response.dart';
-import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../../demonstration_question/widgets/demonstration_tooltip_guide.dart';
 import '../../learning_bot_stock_screen.dart';
 import '../bloc/demonstration_bot_bloc.dart';
@@ -152,7 +152,8 @@ class DemonstrationBotScreen extends StatelessWidget {
                   tooltipController.showTooltip();
                   Navigator.pop(context);
                 },
-                onSecondaryButtonTap: () => CarouselScreen.open(context),
+                onSecondaryButtonTap: () =>
+                    TabsScreen.openAndRemoveAllRoute(context),
               ),
             ));
   }

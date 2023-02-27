@@ -1,9 +1,11 @@
 const v1 = '/api/v1/';
 const v2 = '/api/v2/';
 const accounts = 'accounts/';
+const bots = 'bots/';
 const transactions = 'transactions/';
 const orders = 'orders/';
 const activities = 'activities/';
+const user = 'user/';
 
 const String endpointSignIn = '${v2}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
@@ -40,3 +42,6 @@ const String endpointLinkedUser = '$endpointUser/linked';
 /// URLS
 ///
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
+
+const String endpointBotRecommendation = '${user}recomendation_bots/';
+const String endpointBotDetail = '$v1${bots}bot_detail/';
