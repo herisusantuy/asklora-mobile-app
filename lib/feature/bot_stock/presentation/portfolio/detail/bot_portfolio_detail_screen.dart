@@ -60,7 +60,9 @@ class BotPortfolioDetailScreen extends StatelessWidget {
           BlocProvider(
             create: (_) =>
                 PortfolioBloc(portfolioRepository: PortfolioRepository())
-                  ..add(FetchBotPortfolioDetail(portfolioBotModel)),
+                  ..add(FetchBotPortfolioDetail(
+                      ticker: portfolioBotModel.ticker,
+                      botId: portfolioBotModel.botId)),
           ),
           BlocProvider(
               create: (_) =>

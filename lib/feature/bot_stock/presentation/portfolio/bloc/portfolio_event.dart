@@ -22,13 +22,15 @@ class FetchBotPortfolio extends PortfolioEvent {
 }
 
 class FetchBotPortfolioDetail extends PortfolioEvent {
-  final PortfolioBotModel portfolioBotModel;
+  final String ticker;
+  final String botId;
 
-  const FetchBotPortfolioDetail(this.portfolioBotModel);
+  const FetchBotPortfolioDetail({required this.ticker, required this.botId});
 }
 
 class CurrencyChanged extends PortfolioEvent {
   final CurrencyType currencyType;
+
   const CurrencyChanged(this.currencyType) : super();
 
   @override

@@ -46,7 +46,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
     final BotType botType = BotType.findByString(botRecommendation.botAppType);
     return BlocProvider(
       create: (_) => BotStockBloc(botStockRepository: BotStockRepository())
-        ..add(FetchBotDetail(botRecommendation)),
+        ..add(FetchBotDetail(
+            ticker: botRecommendation.ticker, botId: botRecommendation.botId)),
       child: BotStockForm(
           useHeader: true,
           title: '${botType.upperCaseName} ${botRecommendation.ticker}',

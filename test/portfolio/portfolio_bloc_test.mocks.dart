@@ -85,11 +85,17 @@ class MockPortfolioRepository extends _i1.Mock
       ) as _i4.Future<_i2.BaseResponse<_i7.PortfolioResponse>>);
   @override
   _i4.Future<_i2.BaseResponse<_i8.PortfolioBotDetailModel>>
-      fetchBotPortfolioDetail(_i5.PortfolioBotModel? portfolioBotModel) =>
+      fetchBotPortfolioDetail(
+    String? ticker,
+    String? botId,
+  ) =>
           (super.noSuchMethod(
             Invocation.method(
               #fetchBotPortfolioDetail,
-              [portfolioBotModel],
+              [
+                ticker,
+                botId,
+              ],
             ),
             returnValue:
                 _i4.Future<_i2.BaseResponse<_i8.PortfolioBotDetailModel>>.value(
@@ -97,7 +103,10 @@ class MockPortfolioRepository extends _i1.Mock
               this,
               Invocation.method(
                 #fetchBotPortfolioDetail,
-                [portfolioBotModel],
+                [
+                  ticker,
+                  botId,
+                ],
               ),
             )),
           ) as _i4.Future<_i2.BaseResponse<_i8.PortfolioBotDetailModel>>);

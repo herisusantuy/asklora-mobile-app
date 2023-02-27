@@ -21,10 +21,10 @@ class BotStockRepository {
   final BotStockApiClient _botStockApiClient = BotStockApiClient();
 
   Future<BaseResponse<BotDetailModel>> fetchBotDetail(
-      BotRecommendationModel botRecommendationModel) async {
+      String ticker, String botId) async {
     try {
-      var response = await _botStockApiClient.fetchBotDetail(BotDetailRequest(
-          botRecommendationModel.ticker, botRecommendationModel.botId));
+      var response = await _botStockApiClient
+          .fetchBotDetail(BotDetailRequest(ticker, botId));
 
       return BaseResponse.complete(BotDetailModel.fromJson(response.data));
     } catch (e) {

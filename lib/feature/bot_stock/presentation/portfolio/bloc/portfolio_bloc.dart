@@ -57,7 +57,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       emit(state.copyWith(botPortfolioDetailResponse: BaseResponse.loading()));
       emit(state.copyWith(
           botPortfolioDetailResponse: await _portfolioRepository
-              .fetchBotPortfolioDetail(event.portfolioBotModel)));
+              .fetchBotPortfolioDetail(event.ticker, event.botId)));
     } catch (e) {
       emit(state.copyWith(
           botPortfolioDetailResponse:

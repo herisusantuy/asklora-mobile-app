@@ -43,10 +43,10 @@ class PortfolioRepository {
   }
 
   Future<BaseResponse<PortfolioBotDetailModel>> fetchBotPortfolioDetail(
-      PortfolioBotModel portfolioBotModel) async {
+      String ticker, String botId) async {
     try {
-      var response = await _portfolioApiClient.fetchPortfolioBotDetail(
-          BotDetailRequest(portfolioBotModel.ticker, portfolioBotModel.botId));
+      var response = await _portfolioApiClient
+          .fetchPortfolioBotDetail(BotDetailRequest(ticker, botId));
 
       return BaseResponse.complete(
           PortfolioBotDetailModel.fromJson(response.data));

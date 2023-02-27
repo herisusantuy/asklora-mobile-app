@@ -9,13 +9,13 @@ import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_detail_model.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart'
-    as _i6;
+    as _i8;
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart'
     as _i3;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
-    as _i7;
+    as _i6;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart'
-    as _i8;
+    as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -51,73 +51,81 @@ class MockBotStockRepository extends _i1.Mock
 
   @override
   _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>> fetchBotDetail(
-          _i6.BotRecommendationModel? botRecommendationModel) =>
+    String? ticker,
+    String? botId,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchBotDetail,
-          [botRecommendationModel],
+          [
+            ticker,
+            botId,
+          ],
         ),
         returnValue: _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>>.value(
             _FakeBaseResponse_0<_i5.BotDetailModel>(
           this,
           Invocation.method(
             #fetchBotDetail,
-            [botRecommendationModel],
+            [
+              ticker,
+              botId,
+            ],
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i7.ChartDataSet>>> fetchChartDataJson() =>
+  _i4.Future<_i2.BaseResponse<List<_i6.ChartDataSet>>> fetchChartDataJson() =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchChartDataJson,
           [],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<List<_i7.ChartDataSet>>>.value(
-            _FakeBaseResponse_0<List<_i7.ChartDataSet>>(
+        returnValue: _i4.Future<_i2.BaseResponse<List<_i6.ChartDataSet>>>.value(
+            _FakeBaseResponse_0<List<_i6.ChartDataSet>>(
           this,
           Invocation.method(
             #fetchChartDataJson,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<List<_i7.ChartDataSet>>>);
+      ) as _i4.Future<_i2.BaseResponse<List<_i6.ChartDataSet>>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i8.ChartStudioAnimationModel>>
+  _i4.Future<_i2.BaseResponse<_i7.ChartStudioAnimationModel>>
       fetchTradeChartDataJson() => (super.noSuchMethod(
             Invocation.method(
               #fetchTradeChartDataJson,
               [],
             ),
             returnValue: _i4.Future<
-                    _i2.BaseResponse<_i8.ChartStudioAnimationModel>>.value(
-                _FakeBaseResponse_0<_i8.ChartStudioAnimationModel>(
+                    _i2.BaseResponse<_i7.ChartStudioAnimationModel>>.value(
+                _FakeBaseResponse_0<_i7.ChartStudioAnimationModel>(
               this,
               Invocation.method(
                 #fetchTradeChartDataJson,
                 [],
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<_i8.ChartStudioAnimationModel>>);
+          ) as _i4.Future<_i2.BaseResponse<_i7.ChartStudioAnimationModel>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>
+  _i4.Future<_i2.BaseResponse<List<_i8.BotRecommendationModel>>>
       fetchBotRecommendation() => (super.noSuchMethod(
             Invocation.method(
               #fetchBotRecommendation,
               [],
             ),
             returnValue: _i4.Future<
-                    _i2.BaseResponse<List<_i6.BotRecommendationModel>>>.value(
-                _FakeBaseResponse_0<List<_i6.BotRecommendationModel>>(
+                    _i2.BaseResponse<List<_i8.BotRecommendationModel>>>.value(
+                _FakeBaseResponse_0<List<_i8.BotRecommendationModel>>(
               this,
               Invocation.method(
                 #fetchBotRecommendation,
                 [],
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>);
+          ) as _i4.Future<_i2.BaseResponse<List<_i8.BotRecommendationModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>
+  _i4.Future<_i2.BaseResponse<List<_i8.BotRecommendationModel>>>
       fetchFreeBotRecommendation({bool? isFreeBot = false}) =>
           (super.noSuchMethod(
             Invocation.method(
@@ -126,8 +134,8 @@ class MockBotStockRepository extends _i1.Mock
               {#isFreeBot: isFreeBot},
             ),
             returnValue: _i4.Future<
-                    _i2.BaseResponse<List<_i6.BotRecommendationModel>>>.value(
-                _FakeBaseResponse_0<List<_i6.BotRecommendationModel>>(
+                    _i2.BaseResponse<List<_i8.BotRecommendationModel>>>.value(
+                _FakeBaseResponse_0<List<_i8.BotRecommendationModel>>(
               this,
               Invocation.method(
                 #fetchFreeBotRecommendation,
@@ -135,27 +143,27 @@ class MockBotStockRepository extends _i1.Mock
                 {#isFreeBot: isFreeBot},
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>);
+          ) as _i4.Future<_i2.BaseResponse<List<_i8.BotRecommendationModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>
+  _i4.Future<_i2.BaseResponse<List<_i8.BotRecommendationModel>>>
       fetchBotDemonstration() => (super.noSuchMethod(
             Invocation.method(
               #fetchBotDemonstration,
               [],
             ),
             returnValue: _i4.Future<
-                    _i2.BaseResponse<List<_i6.BotRecommendationModel>>>.value(
-                _FakeBaseResponse_0<List<_i6.BotRecommendationModel>>(
+                    _i2.BaseResponse<List<_i8.BotRecommendationModel>>>.value(
+                _FakeBaseResponse_0<List<_i8.BotRecommendationModel>>(
               this,
               Invocation.method(
                 #fetchBotDemonstration,
                 [],
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<List<_i6.BotRecommendationModel>>>);
+          ) as _i4.Future<_i2.BaseResponse<List<_i8.BotRecommendationModel>>>);
   @override
   _i4.Future<_i2.BaseResponse<bool>> tradeBotStock({
-    required _i6.BotRecommendationModel? botRecommendationModel,
+    required _i8.BotRecommendationModel? botRecommendationModel,
     required double? tradeBotStockAmount,
   }) =>
       (super.noSuchMethod(
