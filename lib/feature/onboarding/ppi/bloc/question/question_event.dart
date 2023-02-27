@@ -7,15 +7,8 @@ abstract class QuestionEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoadPrivacyAndPersonalisationQuestions extends QuestionEvent {
-  const LoadPrivacyAndPersonalisationQuestions() : super();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class LoadInvestmentStyleQuestions extends QuestionEvent {
-  const LoadInvestmentStyleQuestions() : super();
+class LoadQuestions extends QuestionEvent {
+  const LoadQuestions() : super();
 
   @override
   List<Object?> get props => [];
