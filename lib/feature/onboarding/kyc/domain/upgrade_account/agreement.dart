@@ -7,9 +7,9 @@ part 'agreement.g.dart';
 class Agreement extends Equatable {
   final String? agreement;
 
-  const Agreement(
-    this.agreement,
-  );
+  const Agreement({
+    required this.agreement,
+  });
 
   factory Agreement.fromJson(Map<String, dynamic> json) =>
       _$AgreementFromJson(json);
@@ -17,7 +17,5 @@ class Agreement extends Equatable {
   Map<String, dynamic> toJson() => _$AgreementToJson(this);
 
   @override
-  List<Object> get props => [
-        agreement ?? '',
-      ];
+  List<Object> get props => [agreement ?? ''];
 }

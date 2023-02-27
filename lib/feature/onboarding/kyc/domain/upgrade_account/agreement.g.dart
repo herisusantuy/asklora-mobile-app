@@ -7,7 +7,7 @@ part of 'agreement.dart';
 // **************************************************************************
 
 Agreement _$AgreementFromJson(Map<String, dynamic> json) => Agreement(
-      json['agreement'] as String?,
+      agreement: json['agreement'] as String?,
     );
 
 Map<String, dynamic> _$AgreementToJson(Agreement instance) => <String, dynamic>{
