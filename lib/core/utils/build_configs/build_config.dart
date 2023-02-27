@@ -33,7 +33,7 @@ class DevConfig implements BaseConfig {
   String get ppiBaseUrl => 'https://ppi-dev.intra.asklora.ai/';
 
   @override
-  String get askLoraApiBaseUrl => 'https://dev-apca.api.asklora.ai/';
+  String get askLoraApiBaseUrl => 'https://dev-apca.intra.asklora.ai/';
 
   @override
   String get streamServiceBaseUrl => 'wss://apca.services.asklora.ai/';
