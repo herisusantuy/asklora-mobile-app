@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 
 import '../../core/domain/base_response.dart';
 import '../../core/utils/storage/shared_preference.dart';
+import '../../core/utils/storage/storage_keys.dart';
 import '../bloc/app_bloc.dart';
 import '../domain/user_journey_api_client.dart';
 import '../domain/user_journey_request.dart';
@@ -14,7 +15,7 @@ class UserJourneyRepository {
 
   Future<BaseResponse<UserJourneyResponse>> saveUserJourney(
       {required UserJourney userJourney, String? data}) async {
-    await _sharedPreference.writeData('user_journey', userJourney.value);
+    await _sharedPreference.writeData(sfKeyUserJourney, userJourney.value);
     try {
       var response = await _userJourneyApiClient
           .save(UserJourneyRequest(userJourney: userJourney.value, data: data));
@@ -27,22 +28,22 @@ class UserJourneyRepository {
   }
 
   Future<UserJourney> getUserJourney() async {
+    String? localUserJourneyString =
+        await _sharedPreference.readData('user_journey');
+    UserJourney? localUserJourney = UserJourney.values
+        .firstWhereOrNull((element) => element.value == localUserJourneyString);
     try {
-      String? localUserJourneyString =
-          await _sharedPreference.readData('user_journey');
-      UserJourney localUserJourney = UserJourney.values
-          .firstWhere((element) => element.value == localUserJourneyString);
-
       var response = await _userJourneyApiClient.get();
+
       var userJourneyResponse = UserJourneyResponse.fromJson(response.data);
 
       var indexUserJourneyResponse = UserJourney.values.indexWhere(
           (element) => element.value == userJourneyResponse.userJourney);
       var indexUserJourneyLocal = UserJourney.values
-          .indexWhere((element) => element.value == localUserJourney.value);
+          .indexWhere((element) => element.value == localUserJourney?.value);
 
       if (indexUserJourneyResponse < indexUserJourneyLocal) {
-        saveUserJourney(userJourney: localUserJourney);
+        saveUserJourney(userJourney: localUserJourney!);
         return localUserJourney;
       } else {
         return UserJourney.values.firstWhereOrNull((element) =>
@@ -50,7 +51,7 @@ class UserJourneyRepository {
             UserJourney.privacy;
       }
     } catch (e) {
-      return UserJourney.privacy;
+      return localUserJourney ?? UserJourney.privacy;
     }
   }
 }

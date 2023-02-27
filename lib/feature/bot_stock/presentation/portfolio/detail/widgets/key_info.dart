@@ -1,11 +1,12 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class KeyInfo extends StatelessWidget {
+  final PortfolioBotModel portfolioBotModel;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
-  const KeyInfo({Key? key}) : super(key: key);
+  const KeyInfo({required this.portfolioBotModel, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Column(
@@ -36,7 +37,9 @@ class KeyInfo extends StatelessWidget {
               title2: 'Take Profit Level (USD)',
               subTitle2: 'N/A'),
           _spaceBetweenInfo,
-          const ColumnText(title: 'Botstock Status', subTitle: 'Active'),
+          ColumnText(
+              title: 'Botstock Status',
+              subTitle: BotPortfolioStatus.findByString('active').name),
           const SizedBox(
             height: 40,
           ),

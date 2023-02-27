@@ -1,7 +1,7 @@
 abstract class BaseConfig {
   String get askLoraApiBaseUrl;
 
-  String get alpacaApiBaseUrl;
+  String get ppiBaseUrl;
 
   String get streamServiceBaseUrl;
 }

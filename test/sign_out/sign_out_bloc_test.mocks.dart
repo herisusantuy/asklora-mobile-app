@@ -106,22 +106,6 @@ class MockRepository extends _i1.Mock implements _i7.Repository {
         returnValueForMissingStub: null,
       );
   @override
-  void saveSignUpToken(String? token) => super.noSuchMethod(
-        Invocation.method(
-          #saveSignUpToken,
-          [token],
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  _i4.Future<String?> getSignUpToken() => (super.noSuchMethod(
-        Invocation.method(
-          #getSignUpToken,
-          [],
-        ),
-        returnValue: _i4.Future<String?>.value(),
-      ) as _i4.Future<String?>);
-  @override
   _i4.Future<String?> getAccessToken() => (super.noSuchMethod(
         Invocation.method(
           #getAccessToken,

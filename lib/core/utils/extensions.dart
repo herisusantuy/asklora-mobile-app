@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
+import 'currency_enum.dart';
+
 /// General Email Regex (RFC 5322 Official Standard)
 /// https://www.emailregex.com/
 const emailPatternSource =
@@ -68,6 +70,14 @@ extension CurrencyFormat on double {
     );
     return currencyFormatter.format(this);
   }
+
+  String toUsd() {
+    return '${CurrencyType.usd.value} ${(this * 0.13).convertToCurrencyDecimal()}';
+  }
+
+  String toHkd() {
+    return '${CurrencyType.hkd.value} ${(this * 7.85).convertToCurrencyDecimal()}';
+  }
 }
 
 extension ExtraPadding on BuildContext {
@@ -83,4 +93,27 @@ extension ExtraPadding on BuildContext {
         right: rightPadding,
         bottom: bottomPadding,
       ));
+}
+
+extension RestTimeOnDuration on Duration {
+  String get inDaysRest => inDays < 10 ? '0$inDays' : '$inDays';
+
+  String get inHoursRest {
+    int time = inHours - (inDays * 24);
+    return time < 10 ? '0$time' : '$time';
+  }
+
+  String get inMinutesRest {
+    int time = inMinutes - (inHours * 60);
+    return time < 10 ? '0$time' : '$time';
+  }
+
+  String get inSecondsRest {
+    int time = inSeconds - (inMinutes * 60);
+    return time < 10 ? '0$time' : '$time';
+  }
+
+  int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
+
+  int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
 }

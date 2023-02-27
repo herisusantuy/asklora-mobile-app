@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
+import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
@@ -21,10 +22,12 @@ class MockSignInBloc extends MockBloc<SignInEvent, SignInState>
 class MockRepository extends Mock implements Repository {}
 
 @GenerateMocks([SignInRepository])
+@GenerateMocks([UserJourneyRepository])
 @GenerateMocks([SignInApiClient])
 void main() async {
   group('Sign In Screen Bloc Test', () {
     late MockSignInRepository signInRepository;
+    late MockUserJourneyRepository userJourneyRepository;
     late SignInBloc signInBloc;
     late MockRepository mockRepository;
 
@@ -32,6 +35,7 @@ void main() async {
       () async {
         signInRepository = MockSignInRepository();
         mockRepository = MockRepository();
+        userJourneyRepository = MockUserJourneyRepository();
 
         when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
           null;
@@ -44,7 +48,9 @@ void main() async {
     setUp(
       () async {
         TestWidgetsFlutterBinding.ensureInitialized();
-        signInBloc = SignInBloc(signInRepository: signInRepository);
+        signInBloc = SignInBloc(
+            signInRepository: signInRepository,
+            userJourneyRepository: userJourneyRepository);
       },
     );
 
@@ -111,10 +117,10 @@ void main() async {
         build: () {
           when(signInRepository.signIn(
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
-              .thenAnswer((_) => Future.value(BaseResponse<SignInResponse>(
-                  data: SignInResponse('access', 'refresh',
-                      userJourney: UserJourney.investmentStyle.value),
-                  state: ResponseState.success)));
+              .thenAnswer((_) => Future.value(SignInResponse(
+                  userJourney: UserJourney.investmentStyle.value)));
+          when(userJourneyRepository.getUserJourney())
+              .thenAnswer((_) => Future.value(UserJourney.investmentStyle));
 
           return signInBloc;
         },
@@ -153,7 +159,7 @@ void main() async {
               ),
               SignInState(
                 response: BaseResponse<SignInResponse>(
-                    data: SignInResponse('access', 'refresh',
+                    data: SignInResponse(
                         userJourney: UserJourney.investmentStyle.value),
                     state: ResponseState.success),
                 emailAddress: 'nyoba@yopmail.com',

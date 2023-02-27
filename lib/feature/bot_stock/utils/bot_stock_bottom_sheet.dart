@@ -9,9 +9,11 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/extensions.dart';
 import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
-import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../bloc/bot_stock_bloc.dart';
+import '../domain/bot_recommendation_model.dart';
 import '../presentation/bot_trade_summary/bot_trade_summary_screen.dart';
+import '../presentation/portfolio/bloc/portfolio_bloc.dart';
+import '../presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../presentation/widgets/bot_bottom_sheet_widget.dart';
 import '../repository/bot_stock_repository.dart';
 import 'bot_stock_utils.dart';
@@ -34,28 +36,74 @@ class BotStockBottomSheet {
   }
 
   static endBotStockConfirmation(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, PortfolioBotModel portfolioBotModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (_) => BotBottomSheetWidget(
               title:
-                  'You can quit now and all the trading activities of ${BotType.findByString(recommendedBot.botType).name} ${recommendedBot.ticker} will end ',
+                  'You can quit now and all the trading activities of ${BotType.findByString(portfolioBotModel.botType).name} ${portfolioBotModel.ticker} will end ',
               subTitle:
-                  'The total Botstock value (US\$ ${recommendedBot.value}) will be returned to your account after the next community order',
+                  'The total Botstock value (US\$ 200) will be returned to your account after the next community order',
               primaryButtonLabel: 'END BOT STOCK',
               secondaryButtonLabel: 'CANCEL',
               onPrimaryButtonTap: () {
                 Navigator.pop(context);
-                context.read<BotStockBloc>().add(EndBotStock(recommendedBot));
+                context
+                    .read<PortfolioBloc>()
+                    .add(EndBotStock(portfolioBotModel));
+              },
+              onSecondaryButtonTap: () => Navigator.pop(context),
+            ));
+  }
+
+  static rolloverBotStockConfirmation(
+      BuildContext context, PortfolioBotModel portfolioBotModel) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: (context),
+        builder: (_) => BotBottomSheetWidget(
+              title:
+                  'Do you want to continue the Botstock and extend the investment period?\n\n 2 Weeks\n',
+              subTitle: 'The new expiry date is 15:30, 2023/04/12',
+              primaryButtonLabel: 'EXTEND',
+              secondaryButtonLabel: 'CANCEL',
+              onPrimaryButtonTap: () {
+                Navigator.pop(context);
+                BotStockBottomSheet.rolloverBotStockDisclosure(
+                    context, portfolioBotModel);
+              },
+              onSecondaryButtonTap: () => Navigator.pop(context),
+            ));
+  }
+
+  static rolloverBotStockDisclosure(
+      BuildContext context, PortfolioBotModel portfolioBotModel) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: (context),
+        builder: (_) => BotBottomSheetWidget(
+              title:
+                  'If you extend the Botstock period, you will incur additional fees ',
+              subTitle:
+                  'You will be charged HKD40 if you want to extend this Botstock. If you do not have enough funds, then your fees will be deducted when you have sufficient buying power',
+              primaryButtonLabel: 'CONFIRM',
+              secondaryButtonLabel: 'BACK',
+              onPrimaryButtonTap: () {
+                Navigator.pop(context);
+                context
+                    .read<PortfolioBloc>()
+                    .add(RolloverBotStock(portfolioBotModel));
               },
               onSecondaryButtonTap: () => Navigator.pop(context),
             ));
   }
 
   static amountBotStockForm(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, BotRecommendationModel botrecommendationModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -77,8 +125,8 @@ class BotStockBottomSheet {
                         Navigator.pop(context);
                         BotTradeSummaryScreen.open(
                             context: context,
-                            arguments: Pair(
-                                recommendedBot, state.botStockTradeAmount));
+                            arguments: Pair(botrecommendationModel,
+                                state.botStockTradeAmount));
                       },
                       onSecondaryButtonTap: () => Navigator.pop(context),
                       child: IntrinsicWidth(
@@ -102,7 +150,7 @@ class BotStockBottomSheet {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: CustomTextNew(
-                              'USD',
+                              'HKD',
                               style: AskLoraTextStyles.h5
                                   .copyWith(color: AskLoraColors.charcoal),
                             ),
@@ -120,8 +168,8 @@ class BotStockBottomSheet {
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (context) => BotBottomSheetWidget(
-              title: 'You are running out of money! Fund your accout now.',
-              subTitle: 'The minimum investment amount is USD200 per trade.',
+              title: 'You are running out of money! Fund your account now.',
+              subTitle: 'The minimum investment amount is HKD1,500 per trade.',
               primaryButtonLabel: 'DEPOSIT',
               secondaryButtonLabel: 'NOT NOW',
               onPrimaryButtonTap: () =>

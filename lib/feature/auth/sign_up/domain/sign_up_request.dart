@@ -6,8 +6,9 @@ part 'sign_up_request.g.dart';
 class SignUpRequest {
   final String email;
   final String password;
+  final String username;
 
-  SignUpRequest(this.email, this.password);
+  SignUpRequest(this.email, this.password, this.username);
 
   factory SignUpRequest.fromJson(Map<String, dynamic> json) =>
       _$SignUpRequestFromJson(json);

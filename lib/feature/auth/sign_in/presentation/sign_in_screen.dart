@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../bloc/sign_in_bloc.dart';
@@ -19,10 +20,10 @@ class SignInScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocProvider(
           create: (context) => SignInBloc(
-            signInRepository: SignInRepository(
-              TokenRepository(),
-            ),
-          ),
+              signInRepository: SignInRepository(
+                TokenRepository(),
+              ),
+              userJourneyRepository: UserJourneyRepository()),
           child: const SignInForm(),
         ),
       ),

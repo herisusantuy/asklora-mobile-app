@@ -31,3 +31,12 @@ class OtpSubmitted extends OtpEvent {
   @override
   List<Object> get props => [];
 }
+
+class SmsOtpRequested extends OtpEvent {
+  final String email;
+
+  const SmsOtpRequested(this.email) : super();
+
+  @override
+  List<Object> get props => [email];
+}

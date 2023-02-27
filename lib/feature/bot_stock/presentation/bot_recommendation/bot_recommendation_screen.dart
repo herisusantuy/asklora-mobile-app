@@ -18,10 +18,10 @@ import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
-import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
 import '../../bloc/bot_stock_bloc.dart';
+import '../../domain/bot_recommendation_model.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/custom_expansion_panel.dart';

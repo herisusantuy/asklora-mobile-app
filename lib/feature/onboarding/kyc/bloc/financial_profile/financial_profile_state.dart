@@ -3,17 +3,17 @@ part of 'financial_profile_bloc.dart';
 class FinancialProfileState extends Equatable {
   final EmploymentStatus employmentStatus;
   final NatureOfBusiness? natureOfBusiness;
-  final String? natureOfBusinessDescription;
+  final String natureOfBusinessDescription;
   final Occupations? occupation;
-  final String? otherOccupation;
-  final String? employer;
-  final String? employerAddress;
-  final String? employerAddressTwo;
+  final String otherOccupation;
+  final String employer;
+  final String employerAddress;
+  final String employerAddressTwo;
   final District? district;
   final Region? region;
-  final String? country;
-  final String? countryName;
-  final String? detailInformationOfCountry;
+  final String country;
+  final String countryName;
+  final String detailInformationOfCountry;
 
   const FinancialProfileState(
       {this.employmentStatus = EmploymentStatus.unknown,
@@ -71,17 +71,17 @@ class FinancialProfileState extends Equatable {
     return [
       employmentStatus,
       natureOfBusiness ?? '',
-      natureOfBusinessDescription ?? '',
+      natureOfBusinessDescription,
       occupation ?? '',
-      otherOccupation ?? '',
-      employer ?? '',
-      employerAddress ?? '',
-      employerAddressTwo ?? '',
+      otherOccupation,
+      employer,
+      employerAddress,
+      employerAddressTwo,
       district ?? '',
       region ?? '',
-      country ?? '',
-      countryName ?? '',
-      detailInformationOfCountry ?? ''
+      country,
+      countryName,
+      detailInformationOfCountry
     ];
   }
 
@@ -95,21 +95,21 @@ class FinancialProfileState extends Equatable {
           natureOfBusiness != NatureOfBusiness.other &&
           occupation != null &&
           occupation != Occupations.other &&
-          employer!.isNotEmpty &&
-          employerAddress!.isNotEmpty &&
+          employer.isNotEmpty &&
+          employerAddress.isNotEmpty &&
           district != null &&
           region != null &&
-          country!.isNotEmpty &&
+          country.isNotEmpty &&
           country == 'HKG') {
         return true;
       } else {
         if ((natureOfBusiness == NatureOfBusiness.other &&
-                natureOfBusinessDescription!.isEmpty) ||
-            (occupation == Occupations.other && otherOccupation!.isEmpty) ||
-            (country != 'HKG' && detailInformationOfCountry!.isEmpty)) {
+                natureOfBusinessDescription.isEmpty) ||
+            (occupation == Occupations.other && otherOccupation.isEmpty) ||
+            (country != 'HKG' && detailInformationOfCountry.isEmpty)) {
           return false;
         } else {
-          if (employer!.isEmpty || employerAddress!.isEmpty) {
+          if (employer.isEmpty || employerAddress.isEmpty) {
             return false;
           }
           return true;

@@ -16,8 +16,7 @@ void main() async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const OtpScreen(
-          email: 'test123@example.com',
-        ),
+            email: 'test123@example.com', password: 'Aa1234567'),
         navigatorObservers: [mockObserver],
       ));
     }

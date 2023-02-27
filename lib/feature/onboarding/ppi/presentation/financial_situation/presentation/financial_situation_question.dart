@@ -11,12 +11,12 @@ import '../bloc/financial_profile_bloc.dart';
 class FinancialSituationQuestion extends StatelessWidget {
   final Function() onTapNext;
   final Function() onCancel;
-  final QuestionCollection questionCollection;
+  final Question question;
 
   const FinancialSituationQuestion(
       {required this.onTapNext,
       required this.onCancel,
-      required this.questionCollection,
+      required this.question,
       Key? key})
       : super(key: key);
   static const double _spaceHeightDouble = 36;
@@ -45,7 +45,7 @@ class FinancialSituationQuestion extends StatelessWidget {
                   Column(
                     children: [
                       QuestionTitle(
-                        question: questionCollection.questions!.question!,
+                        question: question.question!,
                       ),
                       _investibleLiquidAssetsDropdown,
                       _spaceHeight,

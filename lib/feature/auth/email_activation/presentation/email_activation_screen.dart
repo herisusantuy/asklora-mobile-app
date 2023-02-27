@@ -25,9 +25,9 @@ class EmailActivationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) {
-          return EmailActivationBloc(SignUpRepository(), TokenRepository());
-        },
+        create: (_) =>
+            EmailActivationBloc(SignUpRepository(), TokenRepository())
+              ..add(const StartListenOnDeeplink()),
         child: BlocConsumer<EmailActivationBloc, EmailActivationState>(
             listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
@@ -35,6 +35,7 @@ class EmailActivationScreen extends StatelessWidget {
           } else {
             CustomLoadingOverlay.dismiss();
           }
+
           if (state.deeplinkStatus == DeeplinkStatus.success) {
             context
                 .read<AppBloc>()

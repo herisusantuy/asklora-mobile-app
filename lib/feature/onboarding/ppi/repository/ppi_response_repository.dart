@@ -1,4 +1,6 @@
-import '../domain/ppi_api_client.dart';
+import 'package:dio/dio.dart';
+
+import '../domain/ppi_api_repository.dart';
 import '../domain/ppi_user_response.dart';
 import '../domain/ppi_user_response_request.dart';
 import 'bot_recommendation_repository.dart';
@@ -13,30 +15,33 @@ class PpiResponseRepository {
   final BotRecommendationRepository botRecommendationRepository =
       BotRecommendationRepository();
 
-  final PpiApiClient _ppiApiClient = PpiApiClient();
+  final PpiApiRepository _ppiApiRepository = PpiApiRepository();
 
   Future<PpiUserResponse> addAnswer(
-      PpiUserResponseRequest ppiUserResponseRequest) async {
+      PpiSelectionRequest ppiUserResponseRequest) async {
     var response =
-        await _ppiApiClient.postQuestionAnswer(ppiUserResponseRequest);
+        await _ppiApiRepository.postQuestionAnswer(ppiUserResponseRequest);
 
     var ppiUserResponse = PpiUserResponse.fromJson(response.data);
-
-    botRecommendationRepository.recommendedBots =
-        ppiUserResponse.snapshot?.botRecommended ?? [];
 
     return ppiUserResponse;
   }
 
   Future<PpiUserResponse> addBulkAnswer(
-      List<PpiUserResponseRequest> ppiUserResponseRequest) async {
-    var response = await _ppiApiClient.postBulkAnswer(ppiUserResponseRequest);
+      List<PpiSelectionRequest> ppiUserResponseRequest) async {
+    var response =
+        await _ppiApiRepository.postBulkAnswer(ppiUserResponseRequest);
 
-    var ppiUserResponse = PpiUserResponse.fromJson(response.data);
+    return PpiUserResponse.fromJson(response.data);
+  }
 
-    botRecommendationRepository.recommendedBots =
-        ppiUserResponse.snapshot?.botRecommended ?? [];
+  Future<SnapShot> getUserSnapShot(int userId) async {
+    var response = await _ppiApiRepository.getUserSnapshot(userId);
+    return SnapShot.fromJson(response.data);
+  }
 
-    return ppiUserResponse;
+  Future<Response> linkUser(int userId) async {
+    var response = await _ppiApiRepository.linkUser(userId);
+    return response;
   }
 }

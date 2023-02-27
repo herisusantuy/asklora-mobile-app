@@ -2,7 +2,7 @@ part of '../bot_recommendation_screen.dart';
 
 class BotRecommendationCard extends StatelessWidget {
   final double height;
-  final RecommendedBot recommendedBot;
+  final BotRecommendationModel botRecommendationModel;
   final double spacing;
   final VoidCallback onTap;
   final bool isDisabled;
@@ -11,14 +11,15 @@ class BotRecommendationCard extends StatelessWidget {
       {required this.onTap,
       required this.height,
       required this.spacing,
-      required this.recommendedBot,
+      required this.botRecommendationModel,
       this.isDisabled = false,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final BotType botType = BotType.findByString(recommendedBot.botType);
+    final BotType botType =
+        BotType.findByString(botRecommendationModel.botAppType);
     return GestureDetector(
       onTap: () => isDisabled ? () {} : onTap(),
       child: Container(
@@ -40,7 +41,7 @@ class BotRecommendationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextNew(
-                  '${botType.upperCaseName} ${recommendedBot.ticker}',
+                  '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
                   style: AskLoraTextStyles.h5Italic,
                   maxLines: 1,
                   ellipsis: true,
@@ -49,8 +50,9 @@ class BotRecommendationCard extends StatelessWidget {
                   height: 4,
                 ),
                 CustomTextNew(
-                  recommendedBot.description,
+                  botRecommendationModel.tickerName,
                   style: AskLoraTextStyles.body2,
+                  maxLines: 1,
                 ),
                 const SizedBox(
                   height: 13,
@@ -63,7 +65,7 @@ class BotRecommendationCard extends StatelessWidget {
                   height: 1,
                 ),
                 CustomTextNew(
-                  recommendedBot.benefit,
+                  botRecommendationModel.latestPrice,
                   style: AskLoraTextStyles.subtitle2,
                 ),
                 const SizedBox(
@@ -78,7 +80,8 @@ class BotRecommendationCard extends StatelessWidget {
                 child: PrimaryButton(
                     disabled: isDisabled,
                     buttonPrimarySize: ButtonPrimarySize.small,
-                    label: recommendedBot.freeBot ? 'FREE TRADE' : 'TRADE',
+                    label:
+                        botRecommendationModel.freeBot ? 'FREE TRADE' : 'TRADE',
                     onTap: onTap),
               ),
             )

@@ -1,21 +1,20 @@
-class PpiUserResponseRequest {
+class PpiSelectionRequest {
   final String questionId;
-  final String section;
-  final String types;
-  final String points;
+  final String answer;
+  final int userId;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['question_id'] = questionId;
-    data['section'] = section;
-    data['types'] = types;
-    data['points'] = points;
+    data['answer'] = answer;
+    data['user_id'] = userId;
     return data;
   }
 
-  PpiUserResponseRequest(
-      {required this.questionId,
-      required this.section,
-      required this.types,
-      required this.points});
+  PpiSelectionRequest(
+      {required this.userId, required this.questionId, required this.answer});
+
+  @override
+  String toString() =>
+      '{questionId: $questionId, answer: $answer, userId: $userId}';
 }

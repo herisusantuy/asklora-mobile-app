@@ -7,15 +7,17 @@ import '../../../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_title.dart';
 import 'bloc/omni_search_question_widget_bloc.dart';
+import 'domain/omni_search_model.dart';
 import 'widgets/custom_choice_chips.dart';
 
 class OmniSearchQuestionWidget extends StatelessWidget {
-  final String defaultAnswer;
-  final QuestionCollection questionCollection;
+  final OmniSearchModel defaultOmniSearch;
+  final Question question;
   final Function() onSubmitSuccess;
   final Function() onCancel;
   final TextInputType textInputType;
@@ -24,8 +26,8 @@ class OmniSearchQuestionWidget extends StatelessWidget {
   final bool enableBackNavigation;
 
   OmniSearchQuestionWidget(
-      {this.defaultAnswer = '',
-      required this.questionCollection,
+      {required this.defaultOmniSearch,
+      required this.question,
       required this.onSubmitSuccess,
       required this.onCancel,
       this.textInputType = TextInputType.text,
@@ -37,7 +39,9 @@ class OmniSearchQuestionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => OmniSearchQuestionWidgetBloc(defaultAnswer: const []),
+      create: (_) => OmniSearchQuestionWidgetBloc(
+          initialKeywordAnswers: defaultOmniSearch.keywordAnswers,
+          initialKeywords: defaultOmniSearch.keywords),
       child: BlocListener<OmniSearchQuestionWidgetBloc,
           OmniSearchQuestionWidgetState>(
         listenWhen: (previous, current) =>
@@ -74,7 +78,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                         Column(
                           children: [
                             QuestionTitle(
-                              question: questionCollection.questions!.question!,
+                              question: question.question!,
                               paddingBottom: 24,
                             ),
                             const LoraRoundedCornerBanner(
@@ -131,7 +135,23 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                             builder: (context, state) => Padding(
                                   padding: const EdgeInsets.only(top: 24.0),
                                   child: ButtonPair(
-                                      primaryButtonOnClick: onSubmitSuccess,
+                                      primaryButtonOnClick: () {
+                                        onSubmitSuccess();
+                                        final omniSearchState = context
+                                            .read<
+                                                OmniSearchQuestionWidgetBloc>()
+                                            .state;
+                                        context.read<UserResponseBloc>().add(
+                                            SaveOmniSearchResponse(
+                                                omniSearchState.keywordAnswers,
+                                                omniSearchState.keywords));
+
+                                        context.read<UserResponseBloc>().add(
+                                            SaveUserResponse(
+                                                question,
+                                                omniSearchState.keywordAnswers
+                                                    .join(',')));
+                                      },
                                       secondaryButtonOnClick: () => context
                                           .read<OmniSearchQuestionWidgetBloc>()
                                           .add(KeywordReset()),
