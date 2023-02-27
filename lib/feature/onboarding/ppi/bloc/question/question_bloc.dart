@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
@@ -33,8 +32,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
         _questionPageType = questionPageType,
         _sharedPreference = sharedPreference,
         super(const QuestionState()) {
-    on<LoadPrivacyAndPersonalisationQuestions>(_onLoadQuestions);
-    on<LoadInvestmentStyleQuestions>(_onLoadInvestmentStyleQuestions);
+    on<LoadQuestions>(_onLoadQuestions);
     on<PrivacyQuestionIndexChanged>(_onPrivacyQuestionIndexChanged);
     on<PersonalisationQuestionIndexChanged>(_onPersonalisationIndexChanged);
     on<InvestmentStyleQuestionIndexChanged>(
@@ -72,45 +70,21 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
         investmentStyleQuestionIndex: event.investmentStyleQuestionIndex));
   }
 
-  void _onLoadQuestions(LoadPrivacyAndPersonalisationQuestions event,
-      Emitter<QuestionState> emit) async {
+  void _onLoadQuestions(
+      LoadQuestions event, Emitter<QuestionState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     try {
-      final fixture = await _questionCollectionRepository
-          .fetchPersonalAndPrivacyQuestions();
-      emit(state.copyWith(response: BaseResponse.complete(fixture)));
-      //+1 for privacy result
-      int totalPrivacyPages = fixture.getPrivacyQuestions.length + 1;
-      emit(state.copyWith(
-          response: BaseResponse.complete(fixture),
-          currentPrivacyPages: _questionPageType == QuestionPageType.privacy
-              ? 1
-              : totalPrivacyPages,
-          currentInvestmentStylePages:
-              _questionPageType == QuestionPageType.investmentStyle ? 1 : 0,
-          currentPersonalisationPages:
-              _questionPageType == QuestionPageType.personalisation ? 1 : 0,
-          totalPrivacyPages: totalPrivacyPages,
-          //+1 for personalisation result
-          totalPersonalisationPages: fixture.getPersonalisedQuestion.length + 1,
-          //+1 for investmentStyle result
-          totalInvestmentStylePages:
-              fixture.getInvestmentStyleQuestion.length + 1));
-    } catch (e) {
-      emit(state.copyWith(
-          response:
-              BaseResponse.error('Please try again! Something went wrong.')));
-    }
-  }
+      late final Fixture fixture;
+      if (_questionPageType == QuestionPageType.privacy) {
+        fixture = await _questionCollectionRepository
+            .fetchPersonalAndPrivacyQuestions();
+      } else {
+        final accountId = await _sharedPreference.readData(sfKeyTempName);
 
-  void _onLoadInvestmentStyleQuestions(
-      LoadInvestmentStyleQuestions event, Emitter<QuestionState> emit) async {
-    emit(state.copyWith(response: BaseResponse.loading()));
-    try {
-      final accountId = await _sharedPreference.readData(sfKeyTempName);
+        fixture = await _questionCollectionRepository
+            .fetchInvestmentStyleQuestions(accountId ?? '');
+      }
 
-      final fixture = await _questionCollectionRepository
-          .fetchInvestmentStyleQuestions(accountId ?? '');
       emit(state.copyWith(response: BaseResponse.complete(fixture)));
       //+1 for privacy result
       int totalPrivacyPages = fixture.getPrivacyQuestions.length + 1;

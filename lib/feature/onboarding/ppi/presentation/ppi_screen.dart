@@ -46,7 +46,7 @@ class PpiScreen extends StatelessWidget {
                 ppiQuestionRepository: PpiQuestionRepository(),
                 questionPageType: questionPageType,
                 sharedPreference: SharedPreference())
-              ..add(const LoadPrivacyAndPersonalisationQuestions())),
+              ..add(const LoadQuestions())),
         BlocProvider(
             create: (_) =>
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
