@@ -83,18 +83,21 @@ class BotRecommendationList extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Center(
+                  Center(
                     child: Padding(
                       padding: AppValues.screenHorizontalPadding,
                       child: LoraPopUpMessage(
                         backgroundColor: AskLoraColors.charcoal,
-                        title: 'No Botstock recommendation.',
+                        title: 'No Botstock recommendations',
                         titleColor: AskLoraColors.white,
                         subTitle:
-                            'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
+                            'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
                         subTitleColor: AskLoraColors.white,
-                        buttonLabel: 'CREATE AN ACCOUNT',
+                        buttonLabel: 'RETAKE INVESTMENT STYLE',
                         buttonPrimaryType: ButtonPrimaryType.solidGreen,
+                        onPrimaryButtonTap: () => PpiScreen.open(context,
+                            arguments: Pair(QuestionPageType.investmentStyle,
+                                QuestionPageStep.investmentStyle)),
                       ),
                     ),
                   )
