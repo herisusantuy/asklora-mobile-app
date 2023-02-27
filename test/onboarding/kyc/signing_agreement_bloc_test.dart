@@ -2,31 +2,17 @@ import 'package:asklora_mobile_app/feature/onboarding/kyc/bloc/signing_agreement
 import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/signing_broker_agreement_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:intl/intl.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:signature/signature.dart';
-import 'signing_agreement_bloc_test.mocks.dart';
 
 @GenerateMocks([SigningBrokerAgreementRepository])
 void main() async {
   group('*Signing Agreement Tax Bloc Test*', () {
-    late MockSigningBrokerAgreementRepository signingBrokerAgreementRepository;
     late SigningAgreementBloc signingAgreementBloc;
 
-    final SignatureController signatureController = SignatureController();
-    final SigningAgreementState signingAgreementState =
-        SigningAgreementState(signatureController: signatureController);
-
-    setUpAll(() => {
-          signingBrokerAgreementRepository =
-              MockSigningBrokerAgreementRepository()
-        });
+    SigningAgreementState signingAgreementState = const SigningAgreementState();
 
     setUp(() async {
-      signingAgreementBloc = SigningAgreementBloc(
-          signingBrokerAgreementRepository: signingBrokerAgreementRepository,
-          signatureController: signatureController);
+      signingAgreementBloc = SigningAgreementBloc();
     });
 
     test('init state data should be "false"', () {
@@ -75,23 +61,6 @@ void main() async {
         expect: () => {
               signingAgreementState.copyWith(
                   isRiskDisclosureAgreementChecked: true)
-            });
-
-    blocTest<SigningAgreementBloc, SigningAgreementState>(
-        'emits "customerSignature filled with base64" WHEN draw the signature',
-        build: () => signingAgreementBloc,
-        act: (bloc) {
-          when(signingBrokerAgreementRepository
-                  .getCustomerSignature(signatureController.points))
-              .thenAnswer((_) => Future.value('this is base64'));
-          bloc.add(const CustomerSignatureDrew());
-        },
-        expect: () => {
-              signingAgreementState.copyWith(
-                  customerSignature: 'this is base64',
-                  isSignatureDrew: true,
-                  signedTime:
-                      DateFormat('yyyy-MM-ddThh:mm').format(DateTime.now()))
             });
 
     tearDown(() => signingAgreementBloc.close());

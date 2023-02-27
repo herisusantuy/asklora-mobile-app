@@ -5,28 +5,28 @@ class SigningAgreementState extends Equatable {
   final bool isBoundByAskloraAgreementChecked;
   final bool isUnderstandOnTheAgreementChecked;
   final bool isRiskDisclosureAgreementChecked;
-  final String customerSignature;
+  final bool isSignatureChecked;
+  final String legalName;
   final String? signedTime;
-  final SignatureController signatureController;
 
   const SigningAgreementState({
-    required this.signatureController,
     this.isAskLoraClientAgreementOpened = false,
     this.isBoundByAskloraAgreementChecked = false,
     this.isUnderstandOnTheAgreementChecked = false,
     this.isRiskDisclosureAgreementChecked = false,
-    this.customerSignature = '',
+    this.isSignatureChecked = false,
+    this.legalName = '',
     this.signedTime,
   });
 
   @override
   List<Object?> get props => [
-        signatureController,
         isAskLoraClientAgreementOpened,
         isRiskDisclosureAgreementChecked,
         isBoundByAskloraAgreementChecked,
         isUnderstandOnTheAgreementChecked,
-        customerSignature,
+        isSignatureChecked,
+        legalName,
         signedTime ?? ''
       ];
 
@@ -35,15 +35,13 @@ class SigningAgreementState extends Equatable {
     bool? isAskLoraClientAgreementOpened,
     bool? isBoundByAskloraAgreementChecked,
     bool? isUnderstandOnTheAgreementChecked,
-    bool? isTaxAgreementChecked,
     bool? isRiskDisclosureAgreementChecked,
     bool? isCertifyNotUSCitizenAgreementChecked,
-    bool? isSignatureDrew,
-    String? customerSignature,
+    bool? isSignatureChecked,
+    String? legalName,
     String? signedTime,
   }) {
     return SigningAgreementState(
-      signatureController: signatureController,
       isAskLoraClientAgreementOpened:
           isAskLoraClientAgreementOpened ?? this.isAskLoraClientAgreementOpened,
       isRiskDisclosureAgreementChecked: isRiskDisclosureAgreementChecked ??
@@ -52,15 +50,14 @@ class SigningAgreementState extends Equatable {
           this.isBoundByAskloraAgreementChecked,
       isUnderstandOnTheAgreementChecked: isUnderstandOnTheAgreementChecked ??
           this.isUnderstandOnTheAgreementChecked,
-      customerSignature: customerSignature ?? this.customerSignature,
+      isSignatureChecked: isSignatureChecked ?? this.isSignatureChecked,
+      legalName: legalName ?? this.legalName,
       signedTime: signedTime ?? this.signedTime,
     );
   }
 
   bool disabledBrokerButton() {
-    if (isBoundByAskloraAgreementChecked &&
-        isUnderstandOnTheAgreementChecked &&
-        customerSignature.isNotEmpty) {
+    if (isBoundByAskloraAgreementChecked && isUnderstandOnTheAgreementChecked) {
       return false;
     }
     return true;

@@ -41,16 +41,19 @@ class RiskDisclosureAgreementChecked extends SigningBrokerAgreementEvent {
   List<Object> get props => [isChecked];
 }
 
-class CustomerSignatureDrew extends SigningBrokerAgreementEvent {
-  const CustomerSignatureDrew() : super();
+class LegalNameSignatureChanged extends SigningBrokerAgreementEvent {
+  final String legalName;
+  const LegalNameSignatureChanged(this.legalName) : super();
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [legalName];
 }
 
-class CustomerSignatureReset extends SigningBrokerAgreementEvent {
-  const CustomerSignatureReset() : super();
+class SignatureChecked extends SigningBrokerAgreementEvent {
+  final bool isChecked;
+
+  const SignatureChecked(this.isChecked) : super();
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [isChecked];
 }

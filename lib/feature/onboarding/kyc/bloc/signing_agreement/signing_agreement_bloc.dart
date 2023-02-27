@@ -1,9 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:signature/signature.dart';
-
-import '../../repository/signing_broker_agreement_repository.dart';
 
 part 'signing_agreement_event.dart';
 
@@ -11,23 +7,14 @@ part 'signing_agreement_state.dart';
 
 class SigningAgreementBloc
     extends Bloc<SigningBrokerAgreementEvent, SigningAgreementState> {
-  SigningAgreementBloc(
-      {required SigningBrokerAgreementRepository
-          signingBrokerAgreementRepository,
-      required SignatureController signatureController})
-      : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
-        _signatureController = signatureController,
-        super(SigningAgreementState(signatureController: signatureController)) {
+  SigningAgreementBloc() : super(const SigningAgreementState()) {
     on<AskLoraClientAgreementOpened>(_onAskLoraClientAgreementOpened);
     on<BoundByAskloraAgreementChecked>(_onBoundByAskloraAgreementChecked);
     on<UnderstandOnTheAgreementChecked>(_onUnderstandOnTheAgreementChecked);
     on<RiskDisclosureAgreementChecked>(_onRiskDisclosureAgreementChecked);
-    on<CustomerSignatureDrew>(_onCustomerSignatureDrew);
-    on<CustomerSignatureReset>(_onCustomerSignatureReset);
+    on<SignatureChecked>(_onSignatureChecked);
+    on<LegalNameSignatureChanged>(_onLegalNameSignatureChanged);
   }
-
-  final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
-  final SignatureController _signatureController;
 
   _onAskLoraClientAgreementOpened(AskLoraClientAgreementOpened event,
       Emitter<SigningAgreementState> emit) async {
@@ -49,19 +36,13 @@ class SigningAgreementBloc
     emit(state.copyWith(isRiskDisclosureAgreementChecked: event.isChecked));
   }
 
-  _onCustomerSignatureDrew(
-      CustomerSignatureDrew event, Emitter<SigningAgreementState> emit) async {
-    emit(state.copyWith(
-        customerSignature: await _signingBrokerAgreementRepository
-            .getCustomerSignature(state.signatureController.points),
-        isSignatureDrew: true,
-        signedTime: DateFormat('yyyy-MM-ddThh:mm').format(DateTime.now())));
+  _onSignatureChecked(
+      SignatureChecked event, Emitter<SigningAgreementState> emit) {
+    emit(state.copyWith(isSignatureChecked: event.isChecked));
   }
 
-  _onCustomerSignatureReset(
-      CustomerSignatureReset event, Emitter<SigningAgreementState> emit) {
-    _signatureController.clear();
-    emit(state.copyWith(
-        customerSignature: '', isSignatureDrew: false, signedTime: ''));
+  _onLegalNameSignatureChanged(
+      LegalNameSignatureChanged event, Emitter<SigningAgreementState> emit) {
+    emit(state.copyWith(legalName: event.legalName));
   }
 }
