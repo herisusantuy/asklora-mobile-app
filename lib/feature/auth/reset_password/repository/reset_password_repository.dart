@@ -10,9 +10,11 @@ class ResetPasswordRepository {
       ResetPasswordApiClient();
 
   Future<BaseResponse<ResetPasswordResponse>> resetPassword(
-      {required String email}) async {
+      {required String token,
+      required String password,
+      required String confirmPassword}) async {
     var response = await _resetPasswordApiClient.resetPassword(
-      ResetPasswordRequest(email),
+      ResetPasswordRequest(token, password, confirmPassword),
     );
     return BaseResponse.complete(ResetPasswordResponse.fromJson(response.data));
   }

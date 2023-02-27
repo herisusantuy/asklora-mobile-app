@@ -1,117 +1,151 @@
 [
   {
-    "collection": "question",
-    "questions": {
-      "choices": [
-        {
-          "name": "words",
-          "point": "TBD"
-        }
-      ],
-      "hints": "Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!",
-      "question": "What gets your investing mojo on?",
-      "question_index": 1,
-      "section": "investment_style",
-      "types": "omnisearch"
-    },
-    "uid": "quid10"
+    "question_id": "quid15",
+    "question_type": "descriptive",
+    "question": "What gets your investing mojo on?",
+    "section": "omnisearch",
+    "hints": "rch for stocks with keywords or phrases, Lora will get you the relevant stocks!Go sea",
+    "answers": []
   },
   {
-    "collection": "question",
-    "questions": {
-      "choices": [
-        {
-          "name": "2 Weeks",
-          "point": "1",
-          "selectable": true
-        },
-        {
-          "name": "1 Month",
-          "point": "2"
-        },
-        {
-          "name": "2 Months",
-          "point": "3"
-        },
-        {
-          "name": "3 Months",
-          "point": "4"
-        },
-        {
-          "name": "6 Months",
-          "point": "5"
-        },
-        {
-          "name": "1 Year",
-          "point": "6"
-        }
-      ],
-      "hints": null,
-      "question": "How long do you consider to hold this investment?",
-      "question_index": 2,
-      "section": "investment_style",
-      "types": "choices"
-    },
-    "uid": "quid11"
+    "question_id": "quid16",
+    "question_type": "choices",
+    "question": "How long do you consider to hold this investment?",
+    "section": "investment_style",
+    "hints": null,
+    "answers": [
+      {
+        "id": 54,
+        "name": "12 Months",
+        "score": "5",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      },
+      {
+        "id": 55,
+        "name": "6 Months",
+        "score": "4",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      },
+      {
+        "id": 56,
+        "name": "3 Months",
+        "score": "3",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null,
+        "selectable": true
+      },
+      {
+        "id": 57,
+        "name": "1 Month",
+        "score": "2",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      },
+      {
+        "id": 58,
+        "name": "2 Weeks",
+        "score": "1",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      }
+    ]
   },
   {
-    "collection": "question",
-    "questions": {
-      "choices": [
-        {
-          "name": "Definitely",
-          "point": "1"
-        },
-        {
-          "name": "I think so",
-          "point": "2"
-        },
-        {
-          "name": "Depends",
-          "point": "3",
-          "selectable": true
-        },
-        {
-          "name": "Not sure",
-          "point": "4"
-        },
-        {
-          "name": "Nope",
-          "point": "5"
-        }
-      ],
-      "hints": null,
-      "question": "Do you consider this next investment to be a large amount ?",
-      "question_index": 3,
-      "section": "investment_style",
-      "types": "choices"
-    },
-    "uid": "quid12"
+    "question_id": "quid17",
+    "question_type": "choices",
+    "question": "Will this investment be a large amount for you?",
+    "section": "investment_style",
+    "hints": null,
+    "answers": [
+      {
+        "id": 59,
+        "name": "Strongly agree",
+        "score": "5",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      },
+      {
+        "id": 60,
+        "name": "Agree",
+        "score": "4",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      },
+      {
+        "id": 61,
+        "name": "Neutral",
+        "score": "3",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      },
+      {
+        "id": 62,
+        "name": "Disagree",
+        "score": "2",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      },
+      {
+        "id": 63,
+        "name": "Strongly Disagree",
+        "score": "1",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": null
+      }
+    ]
   },
   {
-    "collection": "question",
-    "questions": {
-      "choices": [
-        {
-          "name": "75% of having x% gain;\u202825% of having y% loss",
-          "point": "1"
-        },
-        {
-          "name": "25% of having y% gain;\u202875% of having x% loss",
-          "point": "2"
-        },
-        {
-          "name": "50% of either making or losing z%",
-          "point": "3",
-          "selectable": true
-        }
-      ],
-      "hints": null,
-      "question": "Which investment scenario do you prefer?",
-      "question_index": 4,
-      "section": "investment_style",
-      "types": "choices"
-    },
-    "uid": "quid13"
+    "question_id": "quid18",
+    "question_type": "choices",
+    "question": "Which investment scenario do you prefer?",
+    "section": "investment_style",
+    "hints": null,
+    "answers": [
+      {
+        "id": 91,
+        "name": "Lora please choose for me…",
+        "score": "1",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": "Extrovert AND Neuroticism Score > 9"
+      },
+      {
+        "id": 92,
+        "name": "Passive income with a slight probability of substantial loss fits your personality",
+        "score": "2",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": "Extrovert AND Neuroticism Score > 9"
+      },
+      {
+        "id": 93,
+        "name": "Limited loss but slight probability of substantial gain fits your personality",
+        "score": "3",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": "Extrovert AND Neuroticism Score > 9"
+      },
+      {
+        "id": 94,
+        "name": "Just buy my stock!",
+        "score": "4",
+        "answer_type": "choices",
+        "answer": null,
+        "identifier": "Extrovert AND Neuroticism Score > 9",
+        "selectable": true
+      }
+    ]
   }
 ]

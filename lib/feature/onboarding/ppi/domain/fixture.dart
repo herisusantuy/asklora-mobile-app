@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'question.dart';
 
 enum QuestionSection {
@@ -6,7 +8,8 @@ enum QuestionSection {
   conscientiousness('conscientiousness'),
   neuroticism('neuroticism'),
   investmentStyle('investment_style'),
-  feedBack('feedback');
+  omniSearch('omnisearch'),
+  extrovert('extrovert');
 
   final String value;
 
@@ -17,9 +20,10 @@ enum QuestionType {
   choices('choices'),
   slider('slider'),
   descriptive('descriptive'),
-  omniSearch('omnisearch'),
-  unique('unique'),
-  feedBack('feedback');
+  omniSearch('omnisearch');
+
+  /// In case we want to add any extra screens in the PPI section.
+  // unique('unique');
 
   final String value;
 
@@ -27,84 +31,105 @@ enum QuestionType {
 }
 
 class Fixture {
-  static Fixture? _instance;
+  static final Fixture _singleton = Fixture._internal();
 
-  factory Fixture() => _instance ??= Fixture._();
+  factory Fixture() => _singleton;
 
-  Fixture._();
+  Fixture._internal();
 
-  List<QuestionCollection> privacyQuestions = [];
-  List<QuestionCollection> personalisedQuestion = [];
-  List<QuestionCollection> investmentStyleQuestion = [];
-  List<QuestionCollection> feedBackQuestion = [];
+  static Fixture get instance => _singleton;
 
-  List<QuestionCollection> get getFeedBackQuestions {
-    return feedBackQuestion;
-  }
+  static List<Question> privacyQuestions = [];
+  static List<Question> personalisedQuestion = [];
+  static List<Question> investmentStyleQuestion = [];
 
-  set setFeedBackQuestions(QuestionCollection questionCollection) {
-    feedBackQuestion.add(questionCollection);
-  }
-
-  List<QuestionCollection> get getPrivacyQuestions {
+  List<Question> get getPrivacyQuestions {
     return privacyQuestions;
   }
 
-  set setPrivacyQuestions(QuestionCollection questionCollection) {
-    privacyQuestions.add(questionCollection);
+  set setPrivacyQuestions(Question question) {
+    privacyQuestions.add(question);
   }
 
-  List<QuestionCollection> get getPersonalisedQuestion {
+  List<Question> get getPersonalisedQuestion {
     return personalisedQuestion;
   }
 
-  set setPersonalisedQuestion(QuestionCollection questionCollection) {
-    personalisedQuestion.add(questionCollection);
+  set setPersonalisedQuestion(Question question) {
+    personalisedQuestion.add(question);
   }
 
-  List<QuestionCollection> get getInvestmentStyleQuestion {
+  List<Question> get getInvestmentStyleQuestion {
     return investmentStyleQuestion;
   }
 
-  set setInvestmentStyleQuestion(QuestionCollection questionCollection) {
-    investmentStyleQuestion.add(questionCollection);
+  set setInvestmentStyleQuestion(Question question) {
+    investmentStyleQuestion.add(question);
   }
 
   void clearQuestion() {
     investmentStyleQuestion.clear();
     personalisedQuestion.clear();
     privacyQuestions.clear();
-    feedBackQuestion.clear();
   }
 
-  Fixture fixture(List<QuestionCollection> questionCollection) {
-    clearQuestion();
+  Fixture fixPersonalisedQuestion(List<Question> questionCollection) {
+    personalisedQuestion.clear();
+    privacyQuestions.clear();
     for (var element in questionCollection) {
-      if (element.questions!.section == QuestionSection.privacy.value) {
+      if (element.section == QuestionSection.privacy.value) {
         setPrivacyQuestions = element;
       }
-      if (element.questions!.section == QuestionSection.openness.value ||
-          element.questions!.section ==
-              QuestionSection.conscientiousness.value ||
-          element.questions!.section == QuestionSection.neuroticism.value) {
+      if (element.section == QuestionSection.openness.value ||
+          element.section == QuestionSection.conscientiousness.value ||
+          element.section == QuestionSection.neuroticism.value ||
+          element.section == QuestionSection.extrovert.value) {
         setPersonalisedQuestion = element;
       }
-      if (element.questions!.section == QuestionSection.investmentStyle.value) {
+      if (element.section == QuestionSection.investmentStyle.value) {
         setInvestmentStyleQuestion = element;
       }
-      if (element.questions!.section == QuestionSection.feedBack.value) {
-        setFeedBackQuestions = element;
+      if (element.section == QuestionSection.omniSearch.value) {
+        element
+          ..questionType = QuestionType.omniSearch.value
+          ..section = QuestionSection.investmentStyle.value;
+        setInvestmentStyleQuestion = element;
+      }
+    }
+    return this;
+  }
+
+  Fixture fixInvestmentStyleQuestion(List<Question> questionCollection) {
+    investmentStyleQuestion.clear();
+    for (var element in questionCollection) {
+      if (element.section == QuestionSection.privacy.value) {
+        setPrivacyQuestions = element;
+      }
+      if (element.section == QuestionSection.openness.value ||
+          element.section == QuestionSection.conscientiousness.value ||
+          element.section == QuestionSection.neuroticism.value ||
+          element.section == QuestionSection.extrovert.value) {
+        setPersonalisedQuestion = element;
+      }
+      if (element.section == QuestionSection.investmentStyle.value) {
+        setInvestmentStyleQuestion = element;
+      }
+      if (element.section == QuestionSection.omniSearch.value) {
+        element
+          ..questionType = QuestionType.omniSearch.value
+          ..section = QuestionSection.investmentStyle.value;
+        setInvestmentStyleQuestion = element;
       }
     }
     return this;
   }
 
   int indexOfPrivacyQuestionsByUid(String uid) =>
-      privacyQuestions.indexWhere((question) => question.uid == uid);
+      privacyQuestions.indexWhere((question) => question.questionId == uid);
 
   int indexOfPersonalisedQuestionsByUid(String uid) =>
-      personalisedQuestion.indexWhere((question) => question.uid == uid);
+      personalisedQuestion.indexWhere((question) => question.questionId == uid);
 
-  int indexOfInvestmentStyleQuestionByUid(String uid) =>
-      investmentStyleQuestion.indexWhere((question) => question.uid == uid);
+  int indexOfInvestmentStyleQuestionByUid(String uid) => investmentStyleQuestion
+      .indexWhere((question) => question.questionId == uid);
 }

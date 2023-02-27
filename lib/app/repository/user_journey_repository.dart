@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 
 import '../../core/domain/base_response.dart';
 import '../../core/utils/storage/shared_preference.dart';
+import '../../core/utils/storage/storage_keys.dart';
 import '../bloc/app_bloc.dart';
 import '../domain/user_journey_api_client.dart';
 import '../domain/user_journey_request.dart';
@@ -14,7 +15,7 @@ class UserJourneyRepository {
 
   Future<BaseResponse<UserJourneyResponse>> saveUserJourney(
       {required UserJourney userJourney, String? data}) async {
-    await _sharedPreference.writeData('user_journey', userJourney.value);
+    await _sharedPreference.writeData(sfKeyUserJourney, userJourney.value);
     try {
       var response = await _userJourneyApiClient
           .save(UserJourneyRequest(userJourney: userJourney.value, data: data));

@@ -10,14 +10,14 @@ import '../demonstration_tooltip_guide.dart';
 part 'widgets/multiple_choice_button.dart';
 
 class MultipleChoiceQuestionWidget extends StatelessWidget {
-  final QuestionCollection questionCollection;
+  final Question question;
   final bool alreadyAnswered;
   final VoidCallback? onAnswered;
   final JustTheController tooltipController;
 
   const MultipleChoiceQuestionWidget(
       {required this.tooltipController,
-      required this.questionCollection,
+      required this.question,
       required this.alreadyAnswered,
       this.onAnswered,
       Key? key})
@@ -40,10 +40,10 @@ class MultipleChoiceQuestionWidget extends StatelessWidget {
           return Column(
             children: [
               QuestionTitle(
-                question: questionCollection.questions!.question!,
+                question: question.question!,
               ),
-              ...questionCollection.questions!.choices!.map((e) {
-                int index = questionCollection.questions!.choices!.indexOf(e);
+              ...question.choices!.map((e) {
+                int index = question.choices!.indexOf(e);
                 if (e.selectable != null && e.selectable!) {
                   return DemonstrationTooltipGuide(
                     tooltipController: tooltipController,

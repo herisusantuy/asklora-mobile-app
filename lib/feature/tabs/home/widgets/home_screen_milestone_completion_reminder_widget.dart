@@ -9,7 +9,7 @@ class HomeScreenMilestoneCompletionReminderWidget extends StatelessWidget {
     return HomeScreenHorizontalPaddingWidget(
       child: CustomTextNew(
         'Complete the 3 milestones in 3 months to redeem more than HKD500 from the free Botstock!',
-        style: AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
+        style: AskLoraTextStyles.body2.copyWith(color: AskLoraColors.charcoal),
       ),
     );
   }

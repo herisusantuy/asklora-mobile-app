@@ -15,3 +15,10 @@ class NameChanged extends LoraAskNameEvent {
   @override
   List<Object> get props => [name];
 }
+
+class SubmitUserName extends LoraAskNameEvent {
+  const SubmitUserName() : super();
+
+  @override
+  List<Object> get props => [];
+}

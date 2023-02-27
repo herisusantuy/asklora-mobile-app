@@ -7,6 +7,7 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/ppi_question_repository.dart';
@@ -38,11 +39,13 @@ class PpiScreen extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (_) => UserResponseBloc(
+                sharedPreference: SharedPreference(),
                 ppiResponseRepository: PpiResponseRepository())),
         BlocProvider(
             create: (_) => QuestionBloc(
                 ppiQuestionRepository: PpiQuestionRepository(),
-                questionPageType: questionPageType)
+                questionPageType: questionPageType,
+                sharedPreference: SharedPreference())
               ..add(const LoadQuestions())),
         BlocProvider(
             create: (_) =>
@@ -69,13 +72,16 @@ class PpiScreen extends StatelessWidget {
   }
 
   Widget _pages(NavigationState navigationState) {
-    return BlocBuilder<QuestionBloc, QuestionState>(builder: (context, state) {
+    return BlocConsumer<QuestionBloc, QuestionState>(
+        listener: (context, state) {
+      if (state.response.state == ResponseState.loading) {
+        CustomLoadingOverlay.show(context);
+      } else {
+        CustomLoadingOverlay.dismiss();
+      }
+    }, builder: (context, state) {
       switch (state.response.state) {
-        case ResponseState.loading:
-          CustomLoadingOverlay.show(context);
-          return const SizedBox.shrink();
         case ResponseState.success:
-          CustomLoadingOverlay.dismiss();
           switch (navigationState.page) {
             case QuestionPageStep.privacy:
               return PrivacyQuestionScreen(
@@ -101,7 +107,6 @@ class PpiScreen extends StatelessWidget {
               return const SizedBox.shrink();
           }
         default:
-          CustomLoadingOverlay.dismiss();
           return const SizedBox.shrink();
       }
     });

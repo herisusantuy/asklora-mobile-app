@@ -18,55 +18,63 @@ class PrivacyQuestionBloc
   }
 
   int _privacyQuestionIndex;
-  List<QuestionCollection> privacyQuestions = Fixture().privacyQuestions;
+  List<Question> privacyQuestions = Fixture.instance.getPrivacyQuestions;
 
   void _onNavigationStepChanged(
-      NextQuestion event, Emitter<PrivacyQuestionState> emit) {
+      NextQuestion event, Emitter<PrivacyQuestionState> emit) async {
     ++_privacyQuestionIndex;
+
     if (_privacyQuestionIndex < privacyQuestions.length) {
-      QuestionCollection question = privacyQuestions[_privacyQuestionIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.choices, question,
+      Question question = privacyQuestions[_privacyQuestionIndex];
+
+      if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(
+          QuestionType.choices,
+          question,
+          privacyQuestionIndex: _privacyQuestionIndex,
+        ));
+      } else if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
+      } else if (question.questionType == QuestionType.descriptive.value) {
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
-            privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
-            privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.unique.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.unique, question,
+      } else if (question.questionType == QuestionType.slider.value) {
+        emit(OnNextQuestion<Question>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       }
+
+      /// In case we want to add any extra screens in the PPI section.
+      // else if (question.questionType == QuestionType.unique.value) {
+      //   emit(OnNextQuestion<Question>(QuestionType.unique, question,
+      //       privacyQuestionIndex: _privacyQuestionIndex));
+      // }
     } else {
       emit(OnNextResultSuccessScreen());
     }
   }
 
   void _onNavigationPop(
-      PreviousQuestion event, Emitter<PrivacyQuestionState> emit) {
+      PreviousQuestion event, Emitter<PrivacyQuestionState> emit) async {
     --_privacyQuestionIndex;
     if (_privacyQuestionIndex >= 0) {
-      QuestionCollection question = privacyQuestions[_privacyQuestionIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.choices, question,
+      Question question = privacyQuestions[_privacyQuestionIndex];
+      if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(QuestionType.choices, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
+      } else if (question.questionType == QuestionType.descriptive.value) {
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
-            privacyQuestionIndex: _privacyQuestionIndex));
-      } else if (question.questions!.types == QuestionType.unique.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.unique, question,
+      } else if (question.questionType == QuestionType.slider.value) {
+        emit(OnNextQuestion<Question>(QuestionType.slider, question,
             privacyQuestionIndex: _privacyQuestionIndex));
       }
+
+      /// In case we want to add any extra screens in the PPI section.
+      // else if (question.questionType == QuestionType.unique.value) {
+      //   emit(OnNextQuestion<Question>(QuestionType.unique, question,
+      //       privacyQuestionIndex: _privacyQuestionIndex));
+      // }
     } else if (_privacyQuestionIndex < 0) {
       emit(OnPreviousSignInSuccessScreen());
     }

@@ -18,7 +18,7 @@ import '../../../onboarding/ppi/presentation/investment_style_question/investmen
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
-import '../../reset_password/presentation/reset_password_screen.dart';
+import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../bloc/sign_in_bloc.dart';
 
 class SignInForm extends StatelessWidget {
@@ -118,7 +118,7 @@ class SignInForm extends StatelessWidget {
   Widget _forgotPasswordButton(context) => CustomTextButton(
       key: const Key('forgot_password_button'),
       label: 'FORGET PASSWORD?',
-      onTap: () => ResetPasswordScreen.open(context));
+      onTap: () => ForgotPasswordScreen.open(context));
 
   Widget _loginButton() => BlocBuilder<SignInBloc, SignInState>(
         builder: (context, state) {
