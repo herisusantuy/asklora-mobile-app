@@ -43,7 +43,7 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
                 .add(const PagePop()),
             useHeader: true,
             title: '${botType.upperCaseName} ${recommendedBot.ticker}',
-            contentPadding: EdgeInsets.zero,
+            padding: EdgeInsets.zero,
             content: BotRecommendationDetailContent(
               recommendedBot: recommendedBot,
               botType: botType,

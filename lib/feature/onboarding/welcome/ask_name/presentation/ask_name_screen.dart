@@ -5,6 +5,7 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
+import '../../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/presentation/we_create/custom_centered_text_input.dart';
@@ -46,35 +47,24 @@ class AskNameScreen extends StatelessWidget {
                 break;
             }
           },
-          child: Padding(
-            padding: AppValues.screenHorizontalPadding,
-            child: LayoutBuilder(
-              builder: (context, constraint) => SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          LoraMemojiHeader(
-                              text: S.of(context).askNameScreenPlaceholder),
-                          CustomCenteredTextInput(
-                              key: const Key('name_input'),
-                              onChanged: (value) => context
-                                  .read<LoraAskNameBloc>()
-                                  .add(NameChanged(value)),
-                              hintText:
-                                  S.of(context).askNameScreenTextFieldHint,
-                              textInputType: TextInputType.name),
-                        ],
-                      ),
-                      _nextButton,
-                    ],
-                  ),
-                ),
+          child: Builder(
+            builder: (context) => CustomStretchedLayout(
+              padding: AppValues.screenHorizontalPadding,
+              contentPadding: EdgeInsets.zero,
+              content: Column(
+                children: [
+                  LoraMemojiHeader(
+                      text: S.of(context).askNameScreenPlaceholder),
+                  CustomCenteredTextInput(
+                      key: const Key('name_input'),
+                      onChanged: (value) => context
+                          .read<LoraAskNameBloc>()
+                          .add(NameChanged(value)),
+                      hintText: S.of(context).askNameScreenTextFieldHint,
+                      textInputType: TextInputType.name),
+                ],
               ),
+              bottomButton: _nextButton,
             ),
           ),
         ),
