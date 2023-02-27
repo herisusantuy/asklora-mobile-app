@@ -16,86 +16,67 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   PersonalInfoBloc({required AccountRepository accountRepository})
       : _accountRepository = accountRepository,
         super(const PersonalInfoState()) {
-    on<BasicInformationFirstNameChanged>(_onBasicInformationFirstNameChange);
-    on<BasicInformationLastNameChanged>(_onBasicInformationLastNameChange);
-    on<BasicInformationMiddleNameChanged>(_onBasicInformationMiddleNameChange);
-    on<BasicInformationChineseNameChanged>(
-        _onBasicInformationChineseNameChange);
-    on<BasicInformationGenderChanged>(_onBasicInformationGenderChange);
-    on<BasicInformationDateOfBirthChanged>(
-        _onBasicInformationDateOfBirthChange);
-    on<BasicInformationCountryCodeChanged>(
-        _onBasicInformationCountryCodeChange);
-    on<BasicInformationPhoneNumberChanged>(
-        _onBasicInformationPhoneNumberChange);
-    on<BasicInformationCountryOfCitizenshipChanged>(
-        _onBasicInformationCountryOfCitizenshipChange);
-    on<BasicInformationCountryOfBirthChanged>(
-        _onBasicInformationCountryOfBirthChange);
-    on<BasicInformationIsHongKongPermanentResidentChanged>(
+    on<PersonalInfoFirstNameChanged>(_onPersonalInfoFirstNameChange);
+    on<PersonalInfoLastNameChanged>(_onPersonalInfoLastNameChange);
+    on<PersonalInfoGenderChanged>(_onPersonalInfoGenderChange);
+    on<PersonalInfoDateOfBirthChanged>(_onPersonalInfoDateOfBirthChange);
+    on<PersonalInfoPhoneCountryCodeChanged>(
+        _onPersonalInfoPhoneCountryCodeChange);
+    on<PersonalInfoPhoneNumberChanged>(_onPersonalInfoPhoneNumberChange);
+    on<PersonalInfoNationalityChanged>(_onPersonalInfoNationalityChange);
+    on<PersonalInfoCountryOfBirthChanged>(_onPersonalInfoCountryOfBirthChange);
+    on<PersonalInfoIsHongKongPermanentResidentChanged>(
         _onIsHongKongPermanentResidentChange);
-    on<BasicInformationIdNumberChanged>(_onIdNumberChange);
-    on<BasicInformationIsUnitedStateResidentChanged>(
+    on<PersonalInfoHkIdNumberChanged>(_onHkIdNumberChange);
+    on<PersonalInfoIsUnitedStateResidentChanged>(
         _onIsUnitedStateResidentChange);
-    on<BasicInformationNext>(_onBasicInformationNext);
-    on<BasicInformationReset>(_onBasicInformationReset);
-    on<BasicInformationSubmitted>(_onBasicInformationSubmitted);
+    on<PersonalInfoNext>(_onPersonalInfoNext);
+    on<PersonalInfoReset>(_onPersonalInfoReset);
   }
 
   final AccountRepository _accountRepository;
 
-  _onBasicInformationFirstNameChange(
-      BasicInformationFirstNameChanged event, Emitter<PersonalInfoState> emit) {
+  _onPersonalInfoFirstNameChange(
+      PersonalInfoFirstNameChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(firstName: event.firstName));
   }
 
-  _onBasicInformationLastNameChange(
-      BasicInformationLastNameChanged event, Emitter<PersonalInfoState> emit) {
+  _onPersonalInfoLastNameChange(
+      PersonalInfoLastNameChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(lastName: event.lastName));
   }
 
-  _onBasicInformationMiddleNameChange(BasicInformationMiddleNameChanged event,
-      Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(middleName: event.middleName));
-  }
-
-  _onBasicInformationChineseNameChange(BasicInformationChineseNameChanged event,
-      Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(chineseName: event.chineseName));
-  }
-
-  _onBasicInformationGenderChange(
-      BasicInformationGenderChanged event, Emitter<PersonalInfoState> emit) {
+  _onPersonalInfoGenderChange(
+      PersonalInfoGenderChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(gender: event.gender));
   }
 
-  _onBasicInformationDateOfBirthChange(BasicInformationDateOfBirthChanged event,
-      Emitter<PersonalInfoState> emit) {
+  _onPersonalInfoDateOfBirthChange(
+      PersonalInfoDateOfBirthChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(dateOfBirth: event.dateOfBirth));
   }
 
-  _onBasicInformationCountryCodeChange(BasicInformationCountryCodeChanged event,
+  _onPersonalInfoPhoneCountryCodeChange(
+      PersonalInfoPhoneCountryCodeChanged event,
       Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
-      countryCode: event.countryCode,
+      phoneCountryCode: event.phoneCountryCode,
     ));
   }
 
-  _onBasicInformationPhoneNumberChange(BasicInformationPhoneNumberChanged event,
-      Emitter<PersonalInfoState> emit) {
+  _onPersonalInfoPhoneNumberChange(
+      PersonalInfoPhoneNumberChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(phoneNumber: event.phoneNumber));
   }
 
-  _onBasicInformationCountryOfCitizenshipChange(
-      BasicInformationCountryOfCitizenshipChanged event,
-      Emitter<PersonalInfoState> emit) {
+  _onPersonalInfoNationalityChange(
+      PersonalInfoNationalityChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
-        countryOfCitizenship: event.countryOfCitizenship,
-        countryNameOfCitizenship: event.countryNameOfCitizenship));
+        nationalityCode: event.nationalityCode,
+        nationalityName: event.nationalityName));
   }
 
-  _onBasicInformationCountryOfBirthChange(
-      BasicInformationCountryOfBirthChanged event,
+  _onPersonalInfoCountryOfBirthChange(PersonalInfoCountryOfBirthChanged event,
       Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
         countryCodeOfBirth: event.countryCodeOfBirth,
@@ -103,26 +84,25 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   }
 
   _onIsHongKongPermanentResidentChange(
-      BasicInformationIsHongKongPermanentResidentChanged event,
+      PersonalInfoIsHongKongPermanentResidentChanged event,
       Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
         isHongKongPermanentResident: event.isHongKongPermanentResident));
   }
 
-  _onIdNumberChange(
-      BasicInformationIdNumberChanged event, Emitter<PersonalInfoState> emit) {
+  _onHkIdNumberChange(
+      PersonalInfoHkIdNumberChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
-        idNumber: event.idNumber, isHkIdValid: isHkIdValid(event.idNumber)));
+        hkIdNumber: event.hkIdNumber,
+        isHkIdValid: isHkIdValid(event.hkIdNumber)));
   }
 
-  _onIsUnitedStateResidentChange(
-      BasicInformationIsUnitedStateResidentChanged event,
+  _onIsUnitedStateResidentChange(PersonalInfoIsUnitedStateResidentChanged event,
       Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(isUnitedStateResident: event.isUnitedStateResident));
   }
 
-  _onBasicInformationNext(
-      BasicInformationNext event, Emitter<PersonalInfoState> emit) {
+  _onPersonalInfoNext(PersonalInfoNext event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(status: ResponseState.unknown));
     if (state.isHongKongPermanentResident != null &&
             !state.isHongKongPermanentResident! ||
@@ -138,17 +118,8 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     }
   }
 
-  _onBasicInformationReset(
-      BasicInformationReset event, Emitter<PersonalInfoState> emit) {
+  _onPersonalInfoReset(
+      PersonalInfoReset event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(status: ResponseState.unknown));
-  }
-
-  _onBasicInformationSubmitted(
-      BasicInformationSubmitted event, Emitter<PersonalInfoState> emit) async {
-    try {
-      emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _accountRepository
-          .submitPersonalInfo(const PersonalInfoRequest());
-    } catch (_) {}
   }
 }

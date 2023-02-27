@@ -58,7 +58,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 label: 'Legal English First Name',
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
-                    .add(BasicInformationFirstNameChanged(value))),
+                    .add(PersonalInfoFirstNameChanged(value))),
             _spaceHeight,
             _textInput(
                 initialValue: context.read<PersonalInfoBloc>().state.lastName,
@@ -66,7 +66,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 label: 'Legal English Last Name',
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
-                    .add(BasicInformationLastNameChanged(value))),
+                    .add(PersonalInfoLastNameChanged(value))),
             _spaceHeight,
             _selectGender,
             _spaceHeight,
@@ -98,7 +98,7 @@ class PersonalInfoScreen extends StatelessWidget {
             initialDateTime: dateOfBirth,
             maximumDate: DateTime.now(),
             onDateTimeChanged: (date) => context.read<PersonalInfoBloc>().add(
-                  BasicInformationDateOfBirthChanged(date.toString()),
+                  PersonalInfoDateOfBirthChanged(date.toString()),
                 ),
           );
         },
@@ -106,14 +106,14 @@ class PersonalInfoScreen extends StatelessWidget {
 
   Widget get _nationality => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
-            previous.countryOfCitizenship != current.countryOfCitizenship,
+            previous.nationalityCode != current.nationalityCode,
         builder: (context, state) => CustomCountryPicker(
           key: const Key('nationality'),
           label: 'Nationality',
           hintText: 'Select Nationality',
-          initialValue: state.countryNameOfCitizenship,
+          initialValue: state.nationalityName,
           onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
-              BasicInformationCountryOfCitizenshipChanged(
+              PersonalInfoNationalityChanged(
                   country.countryCodeIso3, country.name)),
         ),
       );
@@ -127,7 +127,7 @@ class PersonalInfoScreen extends StatelessWidget {
           label: 'Country Of Birth',
           initialValue: state.countryNameOfBirth,
           onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
-              BasicInformationCountryOfBirthChanged(
+              PersonalInfoCountryOfBirthChanged(
                   country.countryCodeIso3, country.name)),
         ),
       );
@@ -135,18 +135,19 @@ class PersonalInfoScreen extends StatelessWidget {
   Widget get _countryCodeAndPhoneNumber =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
           buildWhen: (previous, current) =>
-              previous.countryCode != current.countryCode ||
+              previous.phoneCountryCode != current.phoneCountryCode ||
               previous.phoneNumber != current.phoneNumber,
           builder: (context, state) => CustomPhoneNumberInput(
                 key: const Key('phone_number'),
-                initialValueOfCodeArea: state.countryCode,
+                initialValueOfCodeArea: state.phoneCountryCode,
                 initialValueOfPhoneNumber: state.phoneNumber,
                 onChangedCodeArea: (country) => context
                     .read<PersonalInfoBloc>()
-                    .add(BasicInformationCountryCodeChanged(country.phoneCode)),
+                    .add(
+                        PersonalInfoPhoneCountryCodeChanged(country.phoneCode)),
                 onChangePhoneNumber: (phoneNumber) => context
                     .read<PersonalInfoBloc>()
-                    .add(BasicInformationPhoneNumberChanged(phoneNumber)),
+                    .add(PersonalInfoPhoneNumberChanged(phoneNumber)),
               ));
 
   Widget get _selectGender => Column(
@@ -160,7 +161,7 @@ class PersonalInfoScreen extends StatelessWidget {
               builder: (context, state) => CustomToggleButton(
                     onSelected: (value) => context
                         .read<PersonalInfoBloc>()
-                        .add(BasicInformationGenderChanged(value)),
+                        .add(PersonalInfoGenderChanged(value)),
                     initialValue: state.gender,
                     choices: Pair('Male', 'Female'),
                   ))
@@ -170,15 +171,14 @@ class PersonalInfoScreen extends StatelessWidget {
   Widget get _hkIdNumberInput =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
-            previous.idNumber != current.idNumber ||
-            previous.countryNameOfCitizenship !=
-                current.countryNameOfCitizenship,
+            previous.hkIdNumber != current.hkIdNumber ||
+            previous.nationalityName != current.nationalityName,
         builder: (context, state) {
           return MasterTextField(
             key: const Key('hk_id_number'),
             labelText: 'HKID NUmber',
             hintText: 'A1234567',
-            initialValue: state.idNumber,
+            initialValue: state.hkIdNumber,
             textCapitalization: TextCapitalization.words,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             textInputFormatterList: [
@@ -186,13 +186,13 @@ class PersonalInfoScreen extends StatelessWidget {
               UpperCaseTextFormatter(),
               LengthLimitingTextInputFormatter(9)
             ],
-            errorText: state.isHkIdValid || state.idNumber.isEmpty
+            errorText: state.isHkIdValid || state.hkIdNumber.isEmpty
                 ? ''
                 : 'Please enter a valid HKID Number',
             textInputType: TextInputType.text,
             onChanged: (value) => context
                 .read<PersonalInfoBloc>()
-                .add(BasicInformationIdNumberChanged(value)),
+                .add(PersonalInfoHkIdNumberChanged(value)),
           );
         },
       );
@@ -230,11 +230,11 @@ class PersonalInfoScreen extends StatelessWidget {
                     firstName: state.firstName,
                     lastName: state.lastName,
                     gender: state.gender,
-                    hkIdNumber: state.idNumber,
-                    nationality: state.countryNameOfCitizenship,
+                    hkIdNumber: state.hkIdNumber,
+                    nationality: state.nationalityName,
                     dateOfBirth: state.dateOfBirth,
                     countryOfBirth: state.countryNameOfBirth,
-                    phoneCountryCode: state.countryCode,
+                    phoneCountryCode: state.phoneCountryCode,
                     phoneNumber: state.phoneNumber,
                   )));
               // context
@@ -250,9 +250,9 @@ class PersonalInfoScreen extends StatelessWidget {
     if (state.firstName.isEmpty ||
         state.lastName.isEmpty ||
         state.gender.isEmpty ||
-        state.countryNameOfCitizenship.isEmpty ||
+        state.nationalityName.isEmpty ||
         state.dateOfBirth.isEmpty ||
-        state.countryCode.isEmpty ||
+        state.phoneCountryCode.isEmpty ||
         state.phoneNumber.isEmpty ||
         state.countryNameOfBirth.isEmpty ||
         !state.isHkIdValid) {

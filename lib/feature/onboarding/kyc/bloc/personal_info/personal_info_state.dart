@@ -3,19 +3,17 @@ part of 'personal_info_bloc.dart';
 class PersonalInfoState extends Equatable {
   const PersonalInfoState({
     this.firstName = '',
-    this.middleName,
     this.lastName = '',
-    this.chineseName,
     this.gender = '',
     this.dateOfBirth = '1990-01-01',
     this.countryCodeOfBirth = '',
     this.countryNameOfBirth = '',
-    this.countryCode = '',
+    this.phoneCountryCode = '',
     this.phoneNumber = '',
-    this.countryOfCitizenship = '',
-    this.countryNameOfCitizenship = '',
+    this.nationalityCode = '',
+    this.nationalityName = '',
     this.isHongKongPermanentResident,
-    this.idNumber = '',
+    this.hkIdNumber = '',
     this.isUnitedStateResident,
     this.isHkIdValid = false,
     this.message = '',
@@ -24,19 +22,17 @@ class PersonalInfoState extends Equatable {
   });
 
   final String firstName;
-  final String? middleName;
   final String lastName;
-  final String? chineseName;
   final String gender;
   final String dateOfBirth;
   final String countryCodeOfBirth;
   final String countryNameOfBirth;
-  final String countryCode;
+  final String phoneCountryCode;
   final String phoneNumber;
-  final String countryOfCitizenship;
-  final String countryNameOfCitizenship;
+  final String nationalityCode;
+  final String nationalityName;
   final bool? isHongKongPermanentResident;
-  final String idNumber;
+  final String hkIdNumber;
   final bool? isUnitedStateResident;
   final bool isHkIdValid;
   final ResponseState status;
@@ -47,19 +43,17 @@ class PersonalInfoState extends Equatable {
   List<Object?> get props {
     return [
       firstName,
-      middleName,
       lastName,
-      chineseName,
       gender,
       dateOfBirth,
       countryCodeOfBirth,
       countryNameOfBirth,
-      countryCode,
+      phoneCountryCode,
       phoneNumber,
-      countryOfCitizenship,
-      countryNameOfCitizenship,
+      nationalityCode,
+      nationalityName,
       isHongKongPermanentResident,
-      idNumber,
+      hkIdNumber,
       isUnitedStateResident,
       isHkIdValid,
       status,
@@ -70,19 +64,17 @@ class PersonalInfoState extends Equatable {
 
   PersonalInfoState copyWith({
     String? firstName,
-    String? middleName,
     String? lastName,
-    String? chineseName,
     String? gender,
     String? dateOfBirth,
     String? countryCodeOfBirth,
     String? countryNameOfBirth,
-    String? countryCode,
+    String? phoneCountryCode,
     String? phoneNumber,
-    String? countryOfCitizenship,
-    String? countryNameOfCitizenship,
+    String? nationalityCode,
+    String? nationalityName,
     bool? isHongKongPermanentResident,
-    String? idNumber,
+    String? hkIdNumber,
     bool? isUnitedStateResident,
     bool? isHkIdValid,
     ResponseState? status,
@@ -91,21 +83,18 @@ class PersonalInfoState extends Equatable {
   }) {
     return PersonalInfoState(
       firstName: firstName ?? this.firstName,
-      middleName: middleName ?? this.middleName,
       lastName: lastName ?? this.lastName,
-      chineseName: chineseName ?? this.chineseName,
       gender: gender ?? this.gender,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       countryCodeOfBirth: countryCodeOfBirth ?? this.countryCodeOfBirth,
       countryNameOfBirth: countryNameOfBirth ?? this.countryNameOfBirth,
-      countryCode: countryCode ?? this.countryCode,
+      phoneCountryCode: phoneCountryCode ?? this.phoneCountryCode,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      countryOfCitizenship: countryOfCitizenship ?? this.countryOfCitizenship,
-      countryNameOfCitizenship:
-          countryNameOfCitizenship ?? this.countryNameOfCitizenship,
+      nationalityCode: nationalityCode ?? this.nationalityCode,
+      nationalityName: nationalityName ?? this.nationalityName,
       isHongKongPermanentResident:
           isHongKongPermanentResident ?? this.isHongKongPermanentResident,
-      idNumber: idNumber ?? this.idNumber,
+      hkIdNumber: hkIdNumber ?? this.hkIdNumber,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
       isHkIdValid: isHkIdValid ?? this.isHkIdValid,
@@ -121,13 +110,13 @@ class PersonalInfoState extends Equatable {
         gender.isNotEmpty &&
         dateOfBirth.isNotEmpty &&
         countryCodeOfBirth.isNotEmpty &&
-        countryCode.isNotEmpty &&
+        phoneCountryCode.isNotEmpty &&
         phoneNumber.isNotEmpty &&
-        countryOfCitizenship.isNotEmpty &&
+        nationalityCode.isNotEmpty &&
         isHongKongPermanentResident != null &&
         isUnitedStateResident != null) {
       if (isHongKongPermanentResident == true) {
-        if (idNumber.isNotEmpty && isHkIdValid) {
+        if (hkIdNumber.isNotEmpty && isHkIdValid) {
           return true;
         } else {
           return false;

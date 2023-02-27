@@ -7,95 +7,77 @@ abstract class PersonalInfoEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class BasicInformationFirstNameChanged extends PersonalInfoEvent {
+class PersonalInfoFirstNameChanged extends PersonalInfoEvent {
   final String firstName;
 
-  const BasicInformationFirstNameChanged(this.firstName) : super();
+  const PersonalInfoFirstNameChanged(this.firstName) : super();
 
   @override
   List<Object> get props => [firstName];
 }
 
-class BasicInformationMiddleNameChanged extends PersonalInfoEvent {
-  final String middleName;
-
-  const BasicInformationMiddleNameChanged(this.middleName) : super();
-
-  @override
-  List<Object> get props => [middleName];
-}
-
-class BasicInformationLastNameChanged extends PersonalInfoEvent {
+class PersonalInfoLastNameChanged extends PersonalInfoEvent {
   final String lastName;
 
-  const BasicInformationLastNameChanged(this.lastName) : super();
+  const PersonalInfoLastNameChanged(this.lastName) : super();
 
   @override
   List<Object> get props => [lastName];
 }
 
-class BasicInformationChineseNameChanged extends PersonalInfoEvent {
-  final String chineseName;
-
-  const BasicInformationChineseNameChanged(this.chineseName) : super();
-
-  @override
-  List<Object> get props => [chineseName];
-}
-
-class BasicInformationGenderChanged extends PersonalInfoEvent {
+class PersonalInfoGenderChanged extends PersonalInfoEvent {
   final String gender;
 
-  const BasicInformationGenderChanged(this.gender) : super();
+  const PersonalInfoGenderChanged(this.gender) : super();
 
   @override
   List<Object> get props => [gender];
 }
 
-class BasicInformationDateOfBirthChanged extends PersonalInfoEvent {
+class PersonalInfoDateOfBirthChanged extends PersonalInfoEvent {
   final String dateOfBirth;
 
-  const BasicInformationDateOfBirthChanged(this.dateOfBirth) : super();
+  const PersonalInfoDateOfBirthChanged(this.dateOfBirth) : super();
 
   @override
   List<Object> get props => [dateOfBirth];
 }
 
-class BasicInformationCountryCodeChanged extends PersonalInfoEvent {
-  final String countryCode;
+class PersonalInfoPhoneCountryCodeChanged extends PersonalInfoEvent {
+  final String phoneCountryCode;
 
-  const BasicInformationCountryCodeChanged(this.countryCode) : super();
+  const PersonalInfoPhoneCountryCodeChanged(this.phoneCountryCode) : super();
 
   @override
-  List<Object> get props => [countryCode];
+  List<Object> get props => [phoneCountryCode];
 }
 
-class BasicInformationPhoneNumberChanged extends PersonalInfoEvent {
+class PersonalInfoPhoneNumberChanged extends PersonalInfoEvent {
   final String phoneNumber;
 
-  const BasicInformationPhoneNumberChanged(this.phoneNumber) : super();
+  const PersonalInfoPhoneNumberChanged(this.phoneNumber) : super();
 
   @override
   List<Object> get props => [phoneNumber];
 }
 
-class BasicInformationCountryOfCitizenshipChanged extends PersonalInfoEvent {
-  final String countryOfCitizenship;
-  final String countryNameOfCitizenship;
+class PersonalInfoNationalityChanged extends PersonalInfoEvent {
+  final String nationalityCode;
+  final String nationalityName;
 
-  const BasicInformationCountryOfCitizenshipChanged(
-      this.countryOfCitizenship, this.countryNameOfCitizenship)
+  const PersonalInfoNationalityChanged(
+      this.nationalityCode, this.nationalityName)
       : super();
 
   @override
-  List<Object> get props => [countryOfCitizenship];
+  List<Object> get props => [nationalityCode];
 }
 
-class BasicInformationCountryOfBirthChanged extends PersonalInfoEvent {
+class PersonalInfoCountryOfBirthChanged extends PersonalInfoEvent {
   final String countryCodeOfBirth;
   final String countryNameOfBirth;
 
-  const BasicInformationCountryOfBirthChanged(
+  const PersonalInfoCountryOfBirthChanged(
       this.countryCodeOfBirth, this.countryNameOfBirth)
       : super();
 
@@ -103,11 +85,10 @@ class BasicInformationCountryOfBirthChanged extends PersonalInfoEvent {
   List<Object> get props => [countryCodeOfBirth];
 }
 
-class BasicInformationIsHongKongPermanentResidentChanged
-    extends PersonalInfoEvent {
+class PersonalInfoIsHongKongPermanentResidentChanged extends PersonalInfoEvent {
   final bool isHongKongPermanentResident;
 
-  const BasicInformationIsHongKongPermanentResidentChanged(
+  const PersonalInfoIsHongKongPermanentResidentChanged(
       this.isHongKongPermanentResident)
       : super();
 
@@ -115,41 +96,41 @@ class BasicInformationIsHongKongPermanentResidentChanged
   List<Object> get props => [isHongKongPermanentResident];
 }
 
-class BasicInformationIdNumberChanged extends PersonalInfoEvent {
-  final String idNumber;
+class PersonalInfoHkIdNumberChanged extends PersonalInfoEvent {
+  final String hkIdNumber;
 
-  const BasicInformationIdNumberChanged(this.idNumber);
+  const PersonalInfoHkIdNumberChanged(this.hkIdNumber);
 
   @override
-  List<Object> get props => [idNumber];
+  List<Object> get props => [hkIdNumber];
 }
 
-class BasicInformationIsUnitedStateResidentChanged extends PersonalInfoEvent {
+class PersonalInfoIsUnitedStateResidentChanged extends PersonalInfoEvent {
   final bool isUnitedStateResident;
 
-  const BasicInformationIsUnitedStateResidentChanged(this.isUnitedStateResident)
+  const PersonalInfoIsUnitedStateResidentChanged(this.isUnitedStateResident)
       : super();
 
   @override
   List<Object> get props => [isUnitedStateResident];
 }
 
-class BasicInformationNext extends PersonalInfoEvent {
-  const BasicInformationNext() : super();
+class PersonalInfoNext extends PersonalInfoEvent {
+  const PersonalInfoNext() : super();
 
   @override
   List<Object> get props => [];
 }
 
-class BasicInformationReset extends PersonalInfoEvent {
-  const BasicInformationReset() : super();
+class PersonalInfoReset extends PersonalInfoEvent {
+  const PersonalInfoReset() : super();
 
   @override
   List<Object> get props => [];
 }
 
-class BasicInformationSubmitted extends PersonalInfoEvent {
-  const BasicInformationSubmitted() : super();
+class PersonalInfoSubmitted extends PersonalInfoEvent {
+  const PersonalInfoSubmitted() : super();
   @override
   List<Object> get props => [];
 }

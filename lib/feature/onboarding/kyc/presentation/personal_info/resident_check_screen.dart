@@ -54,42 +54,41 @@ class ResidentCheckScreen extends StatelessWidget {
     );
   }
 
-  Widget get _isUnitedStatesResident => BlocBuilder<PersonalInfoBloc,
-          PersonalInfoState>(
-      key: const Key('is_united_states_resident'),
-      buildWhen: (previous, current) =>
-          previous.isUnitedStateResident != current.isUnitedStateResident,
-      builder: (context, state) => CustomToggleButton(
-            title:
-                'Are you a United States tax resident, green card holder or citizens ?',
-            onSelected: (value) => context.read<PersonalInfoBloc>().add(
-                BasicInformationIsUnitedStateResidentChanged(value == 'Yes')),
-            initialValue: state.isUnitedStateResident != null
-                ? state.isUnitedStateResident!
-                    ? 'Yes'
-                    : 'No'
-                : null,
-            choices: Pair('Yes', 'No'),
-          ));
-
-  Widget get _isHongKongResident =>
+  Widget get _isUnitedStatesResident =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
-          key: const Key('is_hong_kong_resident'),
+          key: const Key('is_united_states_resident'),
           buildWhen: (previous, current) =>
-              previous.isHongKongPermanentResident !=
-              current.isHongKongPermanentResident,
+              previous.isUnitedStateResident != current.isUnitedStateResident,
           builder: (context, state) => CustomToggleButton(
-                title: 'Are you a Hong Kong citizen or resident ?',
+                title:
+                    'Are you a United States tax resident, green card holder or citizens ?',
                 onSelected: (value) => context.read<PersonalInfoBloc>().add(
-                    BasicInformationIsHongKongPermanentResidentChanged(
-                        value == 'Yes')),
-                initialValue: state.isHongKongPermanentResident != null
-                    ? state.isHongKongPermanentResident!
+                    PersonalInfoIsUnitedStateResidentChanged(value == 'Yes')),
+                initialValue: state.isUnitedStateResident != null
+                    ? state.isUnitedStateResident!
                         ? 'Yes'
                         : 'No'
                     : null,
                 choices: Pair('Yes', 'No'),
               ));
+
+  Widget get _isHongKongResident => BlocBuilder<PersonalInfoBloc,
+          PersonalInfoState>(
+      key: const Key('is_hong_kong_resident'),
+      buildWhen: (previous, current) =>
+          previous.isHongKongPermanentResident !=
+          current.isHongKongPermanentResident,
+      builder: (context, state) => CustomToggleButton(
+            title: 'Are you a Hong Kong citizen or resident ?',
+            onSelected: (value) => context.read<PersonalInfoBloc>().add(
+                PersonalInfoIsHongKongPermanentResidentChanged(value == 'Yes')),
+            initialValue: state.isHongKongPermanentResident != null
+                ? state.isHongKongPermanentResident!
+                    ? 'Yes'
+                    : 'No'
+                : null,
+            choices: Pair('Yes', 'No'),
+          ));
 
   Widget get _bottomButton => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
       buildWhen: (previous, current) =>
@@ -99,9 +98,8 @@ class ResidentCheckScreen extends StatelessWidget {
       builder: (context, state) => ButtonPair(
             disablePrimaryButton: state.isUnitedStateResident == null ||
                 state.isHongKongPermanentResident == null,
-            primaryButtonOnClick: () => context
-                .read<PersonalInfoBloc>()
-                .add(const BasicInformationNext()),
+            primaryButtonOnClick: () =>
+                context.read<PersonalInfoBloc>().add(const PersonalInfoNext()),
             secondaryButtonOnClick: () => CarouselScreen.open(context),
             primaryButtonLabel: 'NEXT',
             secondaryButtonLabel: 'SAVE FOR LATER',
