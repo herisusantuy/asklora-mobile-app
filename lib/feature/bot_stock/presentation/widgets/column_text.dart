@@ -28,10 +28,12 @@ class ColumnText extends StatelessWidget {
         ),
         Row(
           children: [
-            CustomTextNew(
-              subTitle,
-              style: AskLoraTextStyles.subtitle2
-                  .copyWith(color: AskLoraColors.charcoal),
+            Flexible(
+              child: CustomTextNew(
+                subTitle,
+                style: AskLoraTextStyles.subtitle2
+                    .copyWith(color: AskLoraColors.charcoal),
+              ),
             ),
             if (tooltipText != null)
               Padding(

@@ -55,22 +55,24 @@ class BotPriceLineBar extends StatelessWidget {
                 Positioned(
                     top: labelTopPadding,
                     left: translationMinPrice -
-                        _textSize(maxPrice.toString(), AskLoraTextStyles.body4)
+                        _textSize(maxPrice.toStringAsFixed(1),
+                                    AskLoraTextStyles.body4)
                                 .width /
                             2,
                     child: CustomTextNew(
-                      minPrice.toString(),
+                      minPrice.toStringAsFixed(2),
                       style: AskLoraTextStyles.body4,
                     )),
                 Positioned(
                     top: labelTopPadding,
                     left: translationMinPrice +
                         translationMaxPrice -
-                        _textSize(maxPrice.toString(), AskLoraTextStyles.body4)
+                        _textSize(maxPrice.toStringAsFixed(1),
+                                    AskLoraTextStyles.body4)
                                 .width /
                             2,
                     child: CustomTextNew(
-                      maxPrice.toString(),
+                      maxPrice.toStringAsFixed(2),
                       style: AskLoraTextStyles.body4,
                     )),
                 Positioned(
@@ -85,13 +87,13 @@ class BotPriceLineBar extends StatelessWidget {
                 Positioned(
                     top: labelTopPadding,
                     left: translationCurrentPrice -
-                        _textSize(currentPrice.toString(),
+                        _textSize(currentPrice.toStringAsFixed(1),
                                     AskLoraTextStyles.body4)
                                 .width /
                             2 +
                         dotSize.width / 2,
                     child: CustomTextNew(
-                      currentPrice.toString(),
+                      currentPrice.toStringAsFixed(2),
                       style: AskLoraTextStyles.body4,
                     ))
               ],

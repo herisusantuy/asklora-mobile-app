@@ -3,14 +3,14 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
-import '../../../../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/pair_column_text.dart';
 import 'bot_price_line_bar.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
-  final RecommendedBot recommendedBot;
+  final BotRecommendationModel botRecommendationModel;
   final BotType botType;
   final Widget chart;
   final SizedBox _spaceBetweenInfo = const SizedBox(
@@ -21,7 +21,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
       'Lorem ipsum dolor sit amet consectetur. Integer neque ultrices amet fermentum condimentum consequat. ';
 
   const BotRecommendationDetailContent(
-      {required this.recommendedBot,
+      {required this.botRecommendationModel,
       required this.botType,
       required this.chart,
       Key? key})
@@ -41,7 +41,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                recommendedBot.botWord,
+                botRecommendationModel.botWord,
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )

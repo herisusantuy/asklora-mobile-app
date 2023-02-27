@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/token/repository/repository.dart';
 import '../domain/sign_in_api_client.dart';
 import '../domain/sign_in_request.dart';

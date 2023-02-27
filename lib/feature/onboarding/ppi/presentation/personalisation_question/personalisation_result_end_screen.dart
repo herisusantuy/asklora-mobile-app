@@ -11,7 +11,6 @@ import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/ppi_user_response.dart';
-import '../investment_style_question/investment_style_welcome_screen.dart';
 import '../ppi_result_screen.dart';
 
 class PersonalisationResultEndScreen extends StatelessWidget {

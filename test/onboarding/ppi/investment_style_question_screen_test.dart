@@ -1,41 +1,41 @@
-import 'dart:math';
-
-import 'package:asklora_mobile_app/feature/onboarding/ppi/bloc/question/question_bloc.dart';
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/fixture.dart';
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/question.dart';
-import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/ppi_screen.dart';
-import 'package:flutter/material.dart';
+// import 'dart:math';
+//
+// import 'package:asklora_mobile_app/feature/onboarding/ppi/bloc/question/question_bloc.dart';
+// import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/fixture.dart';
+// import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/question.dart';
+// import 'package:asklora_mobile_app/feature/onboarding/ppi/presentation/ppi_screen.dart';
+// import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../mocks/mocks.dart';
+// import '../../mocks/mocks.dart';
 
 void main() async {
   group('Investment Style Questions Screen Tests', () {
-    var multipleChoiceQuestionBuilder =
-        find.byKey(const Key('multiple_choice_question_builder'));
-    var omniSearchQuestionBuilder =
-        find.byKey(const Key('omni_search_question_builder'));
-    var descriptiveQuestionInput =
-        find.byKey(const Key('descriptive_question_input'));
-    var questionHeader = find.byKey(const Key('question_header'));
-    var questionNavigationButtonWidget =
-        find.byKey(const Key('question_navigation_button_widget'));
-
-    var questionNextButton = find.byKey(const Key('question_next_button'));
-
-    List<Question> investmentStyle =
-        Fixture.instance.getInvestmentStyleQuestion;
-
-    Future<void> buildPrivacyQuestionScreen(WidgetTester tester) async {
-      final mockObserver = MockNavigatorObserver();
-      await tester.pumpWidget(MaterialApp(
-        home: const PpiScreen(
-          initialQuestionPage: QuestionPageStep.investmentStyle,
-          questionPageType: QuestionPageType.investmentStyle,
-        ),
-        navigatorObservers: [mockObserver],
-      ));
-    }
+    // var multipleChoiceQuestionBuilder =
+    //     find.byKey(const Key('multiple_choice_question_builder'));
+    // var omniSearchQuestionBuilder =
+    //     find.byKey(const Key('omni_search_question_builder'));
+    // var descriptiveQuestionInput =
+    //     find.byKey(const Key('descriptive_question_input'));
+    // var questionHeader = find.byKey(const Key('question_header'));
+    // var questionNavigationButtonWidget =
+    //     find.byKey(const Key('question_navigation_button_widget'));
+    //
+    // var questionNextButton = find.byKey(const Key('question_next_button'));
+    //
+    // List<Question> investmentStyle =
+    //     Fixture.instance.getInvestmentStyleQuestion;
+    //
+    // Future<void> buildPrivacyQuestionScreen(WidgetTester tester) async {
+    //   final mockObserver = MockNavigatorObserver();
+    //   await tester.pumpWidget(MaterialApp(
+    //     home: const PpiScreen(
+    //       initialQuestionPage: QuestionPageStep.investmentStyle,
+    //       questionPageType: QuestionPageType.investmentStyle,
+    //     ),
+    //     navigatorObservers: [mockObserver],
+    //   ));
+    // }
 
     ///TODO: Fix this test cases
 
@@ -92,4 +92,4 @@ void main() async {
   });
 }
 
-int _randomSelectedIndex(int max) => Random().nextInt(max);
+// int _randomSelectedIndex(int max) => Random().nextInt(max);

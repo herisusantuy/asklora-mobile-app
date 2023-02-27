@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/we_create/custom_centered_text_input.dart';
 import '../../../bloc/response/user_response_bloc.dart';
-import '../../../domain/ppi_user_response_request.dart';
 import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';

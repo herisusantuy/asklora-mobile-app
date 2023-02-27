@@ -7,8 +7,6 @@ import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
 import '../../utils/ppi_utils.dart';
-import '../financial_situation/bloc/financial_profile_bloc.dart';
-import '../financial_situation/presentation/financial_situation_question.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
 import 'bloc/privacy_question_bloc.dart';

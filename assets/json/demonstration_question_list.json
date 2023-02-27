@@ -1,7 +1,7 @@
 [
   {
     "question_id": "quid15",
-    "question_type": "descriptive",
+    "question_type": "omnisearch",
     "question": "What gets your investing mojo on?",
     "section": "omnisearch",
     "hints": "rch for stocks with keywords or phrases, Lora will get you the relevant stocks!Go sea",
@@ -78,7 +78,8 @@
         "score": "4",
         "answer_type": "choices",
         "answer": null,
-        "identifier": null
+        "identifier": null,
+        "selectable": true
       },
       {
         "id": 61,

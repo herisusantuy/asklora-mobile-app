@@ -1,8 +1,4 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'question.dart';
 
 part 'ppi_user_response.g.dart';
 

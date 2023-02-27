@@ -18,6 +18,9 @@ class AddUserRequest extends Equatable {
 
   Map<String, dynamic> toJson() => _$AddUserRequestToJson(this);
 
+  factory AddUserRequest.fromJson(Map<String, dynamic> json) =>
+      _$AddUserRequestFromJson(json);
+
   @override
   List<Object> get props => [name, accountId ?? 'accountId', deviceId];
 }
