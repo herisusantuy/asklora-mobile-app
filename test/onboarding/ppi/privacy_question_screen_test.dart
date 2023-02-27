@@ -20,7 +20,7 @@ void main() async {
         find.byKey(const Key('question_navigation_button_widget'));
 
     var questionNextButton = find.byKey(const Key('question_next_button'));
-    List<QuestionCollection> privacyQuestions = Fixture().privacyQuestions;
+    List<Question> privacyQuestions = Fixture.instance.getPrivacyQuestions;
 
     Future<void> buildPrivacyQuestionScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();

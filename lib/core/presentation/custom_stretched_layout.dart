@@ -6,6 +6,7 @@ class CustomStretchedLayout extends StatelessWidget {
   final Widget? header;
   final Widget content;
   final Widget? bottomButton;
+  final EdgeInsets padding;
   final EdgeInsets contentPadding;
 
   const CustomStretchedLayout(
@@ -13,7 +14,8 @@ class CustomStretchedLayout extends StatelessWidget {
       this.header,
       required this.content,
       this.bottomButton,
-      this.contentPadding = AppValues.screenHorizontalPadding})
+      this.padding = AppValues.screenHorizontalPadding,
+      this.contentPadding = const EdgeInsets.only(top: 24.0, bottom: 43)})
       : super(key: key);
 
   @override
@@ -31,13 +33,13 @@ class CustomStretchedLayout extends StatelessWidget {
                     minHeight: viewportConstraints.maxHeight,
                   ),
                   child: Padding(
-                    padding: contentPadding,
+                    padding: padding,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(top: 24.0, bottom: 43),
+                          padding: contentPadding,
                           child: content,
                         ),
                         if (bottomButton != null) bottomButton!

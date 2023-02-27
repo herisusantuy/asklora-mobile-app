@@ -33,4 +33,14 @@ class SecureStorage implements Storage {
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
         encryptedSharedPreferences: true,
       );
+
+  @override
+  Future<int?> readIntData(String key) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> writeIntData(String key, int value) {
+    throw UnimplementedError();
+  }
 }
