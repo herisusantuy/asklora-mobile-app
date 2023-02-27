@@ -1,95 +1,90 @@
-class QuestionCollection {
-  String? collection;
-  Question? questions;
-  String? uid;
+import 'package:json_annotation/json_annotation.dart';
 
-  QuestionCollection({this.collection, this.questions, this.uid});
+part 'question.g.dart';
 
-  QuestionCollection.fromJson(Map<String, dynamic> json) {
-    collection = json['collection'];
-    questions =
-        json['questions'] != null ? Question.fromJson(json['questions']) : null;
-    uid = json['uid'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['collection'] = collection;
-    if (questions != null) {
-      data['questions'] = questions!.toJson();
-    }
-    data['uid'] = uid;
-    return data;
-  }
-}
-
+@JsonSerializable()
 class Question {
+  @JsonKey(name: 'answers')
   List<Choices>? choices;
   String? hints;
   String? question;
   String? section;
-  String? types;
+  @JsonKey(name: 'question_type')
+  String? questionType;
   String? questionIndex;
+  @JsonKey(name: 'question_id')
+  String? questionId;
 
-  Question(
-      {this.choices,
-      this.hints,
-      this.question,
-      this.section,
-      this.types,
-      this.questionIndex});
+  Question({
+    this.choices,
+    this.hints,
+    this.question,
+    this.section,
+    this.questionType,
+    this.questionIndex,
+    this.questionId,
+  });
 
-  Question.fromJson(Map<String, dynamic> json) {
-    if (json['choices'] != null) {
-      choices = <Choices>[];
-      json['choices'].forEach((v) {
-        choices!.add(Choices.fromJson(v));
-      });
-    }
-    hints = json['hints'];
-    question = json['question'];
-    section = json['section'];
-    types = json['types'];
-    questionIndex = json['question_index'].toString();
+  factory Question.fromJson(Map<String, dynamic> json) =>
+      _$QuestionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QuestionToJson(this);
+
+  Question copyWith({
+    List<Choices>? choices,
+    String? hints,
+    String? question,
+    String? section,
+    String? questionType,
+    String? questionIndex,
+    String? questionId,
+  }) {
+    return Question(
+      choices: choices ?? this.choices,
+      hints: hints ?? this.hints,
+      question: question ?? this.question,
+      section: section ?? this.section,
+      questionType: questionType ?? this.questionType,
+      questionIndex: questionIndex ?? this.questionIndex,
+      questionId: questionId ?? this.questionId,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (choices != null) {
-      data['choices'] = choices!.map((v) => v.toJson()).toList();
-    }
-    data['hints'] = hints;
-    data['question'] = question;
-    data['section'] = section;
-    data['types'] = types;
-    data['question_index'] = questionIndex;
-    return data;
+  @override
+  String toString() {
+    return 'Choices { hints: $hints, question: $question, section: $section, questionType: $questionType }';
   }
 }
 
 class Choices {
+  int? id;
   String? name;
-  String? point;
+  String? score;
+  String? answerType;
   bool? selectable;
 
-  Choices({this.name, this.point, this.selectable});
+  Choices({this.name, this.score, this.selectable});
 
   Choices.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
-    point = json['point'];
+    score = json['score'].toString();
+    answerType = json['answer_type'];
     selectable = json['selectable'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['name'] = name;
-    data['point'] = point;
+    data['score'] = score;
     data['selectable'] = selectable;
+    data['answer_type'] = answerType;
     return data;
   }
 
   @override
   String toString() {
-    return 'Choices{name: $name, point: $point}';
+    return 'Choices { id:$id, name: $name, score: $score, answer_type: $answerType }';
   }
 }

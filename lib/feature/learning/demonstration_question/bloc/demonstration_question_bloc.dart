@@ -25,7 +25,7 @@ class DemonstrationQuestionBloc
 
   void _onFetchQuestion(
       FetchQuestion event, Emitter<DemonstrationQuestionState> emit) async {
-    List<QuestionCollection> questionCollection =
+    List<Question> questionCollection =
         await _demonstrationQuestionRepository.fetchQuestions();
     emit(state.copyWith(
         questionCollection: questionCollection,
@@ -34,11 +34,10 @@ class DemonstrationQuestionBloc
   }
 
   List<bool> _getDefaultQuestionAnsweredList(
-      List<QuestionCollection> questionCollection) {
+      List<Question> questionCollection) {
     List<bool> defaultQuestionAnsweredList = [];
     for (int i = 0; i < questionCollection.length; i++) {
-      if (questionCollection[i].questions?.types ==
-          QuestionType.omniSearch.value) {
+      if (questionCollection[i].questionType == QuestionType.omniSearch.value) {
         defaultQuestionAnsweredList.add(true);
       } else {
         defaultQuestionAnsweredList.add(false);

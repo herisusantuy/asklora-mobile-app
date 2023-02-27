@@ -12,9 +12,10 @@ class SignUpRepository {
   Future<BaseResponse<SignUpResponse>> signUp({
     required String email,
     required String password,
+    required String username,
   }) async {
     var response =
-        await _signUpApiClient.signUp(SignUpRequest(email, password));
+        await _signUpApiClient.signUp(SignUpRequest(email, password, username));
     return BaseResponse.complete(SignUpResponse.fromJson(response.data));
   }
 

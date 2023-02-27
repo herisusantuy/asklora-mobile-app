@@ -98,7 +98,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              contentPadding: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
               content: Column(
                 children: [
                   Padding(

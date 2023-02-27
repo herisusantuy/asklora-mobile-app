@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
@@ -20,29 +19,30 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
       enableBackNavigation: false,
       body: Padding(
         padding: AppValues.screenHorizontalPadding,
-        child: LayoutBuilder(builder: (context, constraint) {
+        child: LayoutBuilder(builder: (_, constraint) {
           return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraint.maxHeight),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const LoraMemojiHeader(
-                      text:
-                          'Let\'s dive into the core of the personalisation experience - defining your investment style.'),
-                  ButtonPair(
-                      primaryButtonOnClick: () => PpiScreen.open(context,
+              child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraint.maxHeight),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const LoraMemojiHeader(
+                    text:
+                        'Let\'s dive into the core of the personalisation experience - defining your investment style.'),
+                ButtonPair(
+                    primaryButtonOnClick: () {
+                      PpiScreen.open(context,
                           arguments: Pair(QuestionPageType.investmentStyle,
-                              QuestionPageStep.investmentStyle)),
-                      secondaryButtonOnClick: () =>
-                          TabsScreen.openAndRemoveAllRoute(context),
-                      primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
-                      secondaryButtonLabel: 'MAYBE LATER')
-                ],
-              ),
+                              QuestionPageStep.investmentStyle));
+                    },
+                    secondaryButtonOnClick: () =>
+                        TabsScreen.openAndRemoveAllRoute(context),
+                    primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
+                    secondaryButtonLabel: 'MAYBE LATER')
+              ],
             ),
-          );
+          ));
         }),
       ),
     );

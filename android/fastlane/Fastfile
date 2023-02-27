@@ -39,7 +39,14 @@ platform :android do
     clean()
     set_up_env_vars(env:"dev")
     gradle(task: "assembleDevRelease")
+    gradle(task: "bundleDevRelease")
+    validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
     upload_to_firebase(apk_name:"app-dev-release.apk")
+    upload_to_play_store(
+        json_key: '../firebase_credentials_dev.json',
+        aab: '../build/app/outputs/bundle/devRelease/app-dev-release.aab',
+        track_promote_to: 'internal',
+        package_name: 'ai.asklora.app.dev')
   end
 
   desc "Create a staging build"

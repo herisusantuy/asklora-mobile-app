@@ -65,6 +65,7 @@ class App extends StatelessWidget {
                     onGenerateRoute: RouterGenerator.generateRoute,
                     title: 'Asklora',
                     theme: ThemeData(
+                        useMaterial3: true,
                         fontFamily: state.locale.fontType,
                         primarySwatch: MaterialColor(
                             AskLoraColors.charcoal.value, _colorCodes)),

@@ -18,36 +18,38 @@ class PersonalisationQuestionBloc
   }
 
   int _personalizationIndex;
-  List<QuestionCollection> personalizationQuestions =
-      Fixture().personalisedQuestion;
+  List<Question> personalizationQuestions =
+      Fixture.instance.getPersonalisedQuestion;
 
   void _onNavigationStepChanged(NextPersonalisationQuestion event,
       Emitter<PersonalisationQuestionState> emit) {
     ++_personalizationIndex;
     if (_personalizationIndex < personalizationQuestions.length) {
-      QuestionCollection question =
-          personalizationQuestions[_personalizationIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
+      Question question = personalizationQuestions[_personalizationIndex];
+      if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextPersonalizationQuestion<Question>(
             QuestionType.choices, question,
             personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
+      } else if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextPersonalizationQuestion<Question>(
             QuestionType.descriptive, question,
             personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
+      } else if (question.questionType == QuestionType.descriptive.value) {
+        emit(OnNextPersonalizationQuestion<Question>(
             QuestionType.descriptive, question,
             personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
+      } else if (question.questionType == QuestionType.slider.value) {
+        emit(OnNextPersonalizationQuestion<Question>(
             QuestionType.slider, question,
             personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.unique.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
-            QuestionType.unique, question,
-            personalizationQuestionIndex: _personalizationIndex));
       }
+
+      /// In case we want to add any extra screens in the PPI section.
+      // else if (question.questionType == QuestionType.unique.value) {
+      //   emit(OnNextPersonalizationQuestion<Question>(
+      //       QuestionType.unique, question,
+      //       personalizationQuestionIndex: _personalizationIndex));
+      // }
     } else {
       emit(OnNextResultEndScreen());
     }
@@ -57,18 +59,17 @@ class PersonalisationQuestionBloc
       Emitter<PersonalisationQuestionState> emit) {
     --_personalizationIndex;
     if (_personalizationIndex >= 0) {
-      QuestionCollection question =
-          personalizationQuestions[_personalizationIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
+      Question question = personalizationQuestions[_personalizationIndex];
+      if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextPersonalizationQuestion<Question>(
             QuestionType.choices, question,
             personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
+      } else if (question.questionType == QuestionType.descriptive.value) {
+        emit(OnNextPersonalizationQuestion<Question>(
             QuestionType.descriptive, question,
             personalizationQuestionIndex: _personalizationIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextPersonalizationQuestion<QuestionCollection>(
+      } else if (question.questionType == QuestionType.slider.value) {
+        emit(OnNextPersonalizationQuestion<Question>(
             QuestionType.slider, question,
             personalizationQuestionIndex: _personalizationIndex));
       }

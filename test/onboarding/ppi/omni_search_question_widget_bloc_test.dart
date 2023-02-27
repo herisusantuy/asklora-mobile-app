@@ -16,13 +16,14 @@ void main() async {
     late OmniSearchQuestionWidgetBloc omniSearchQuestionWidgetBloc;
 
     setUp(() async {
-      omniSearchQuestionWidgetBloc = OmniSearchQuestionWidgetBloc();
+      omniSearchQuestionWidgetBloc =
+          OmniSearchQuestionWidgetBloc(initialKeywords: keywords);
     });
 
     test('Omni Search Question Widget Bloc init keywordAnswer should be empty',
         () {
       expect(omniSearchQuestionWidgetBloc.state,
-          const OmniSearchQuestionWidgetState(keywordAnswers: []));
+          const OmniSearchQuestionWidgetState(keywords: keywords));
     });
 
     blocTest<OmniSearchQuestionWidgetBloc, OmniSearchQuestionWidgetState>(
@@ -33,7 +34,8 @@ void main() async {
           bloc.add(KeywordAdded('Something'));
         },
         expect: () => {
-              const OmniSearchQuestionWidgetState(addKeywordError: false),
+              const OmniSearchQuestionWidgetState(
+                  addKeywordError: false, keywords: keywords),
               const OmniSearchQuestionWidgetState(
                   keywords: [...keywords, 'Something']),
             });
@@ -47,9 +49,10 @@ void main() async {
           bloc.add(KeywordSelected('AAPL'));
         },
         expect: () => {
-              const OmniSearchQuestionWidgetState(keywordAnswers: ['Covid']),
               const OmniSearchQuestionWidgetState(
-                  keywordAnswers: ['Covid', 'AAPL'])
+                  keywordAnswers: ['Covid'], keywords: keywords),
+              const OmniSearchQuestionWidgetState(
+                  keywordAnswers: ['Covid', 'AAPL'], keywords: keywords)
             });
 
     blocTest<OmniSearchQuestionWidgetBloc, OmniSearchQuestionWidgetState>(
@@ -61,8 +64,10 @@ void main() async {
           bloc.add(KeywordSelected('Covid'));
         },
         expect: () => {
-              const OmniSearchQuestionWidgetState(keywordAnswers: ['Covid']),
-              const OmniSearchQuestionWidgetState(keywordAnswers: [])
+              const OmniSearchQuestionWidgetState(
+                  keywordAnswers: ['Covid'], keywords: keywords),
+              const OmniSearchQuestionWidgetState(
+                  keywordAnswers: [], keywords: keywords)
             });
 
     tearDown(() => {omniSearchQuestionWidgetBloc.close()});
