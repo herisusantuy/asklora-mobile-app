@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';
+import '../../feature/auth/reset_password/presentation/reset_password_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
@@ -107,6 +108,10 @@ class RouterGenerator {
         return MaterialPageRoute(
             builder: (_) =>
                 EmailActivationScreen(userName: settings.arguments as String));
+      case ResetPasswordScreen.route:
+        return MaterialPageRoute(
+            builder: (_) => ResetPasswordScreen(
+                resetPasswordToken: settings.arguments as String));
       case InvestmentStyleWelcomeScreen.route:
         return MaterialPageRoute(
             builder: (_) => const InvestmentStyleWelcomeScreen());
