@@ -4,11 +4,11 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
-import '../bloc/basic_information/basic_information_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/kyc_bloc.dart';
+import '../bloc/personal_info/personal_info_bloc.dart';
 import '../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import 'financial_profile/widgets/financial_profile_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
@@ -17,7 +17,7 @@ import 'widgets/kyc_base_form.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 
 class KycSummaryScreen extends StatelessWidget {
-  final BasicInformationState basicInformationState;
+  final PersonalInfoState personalInfoState;
   final AddressProofState addressProofState;
   final CountryOfTaxResidenceState countryOfTaxResidenceState;
   final DisclosureAffiliationState disclosureAffiliationState;
@@ -26,7 +26,7 @@ class KycSummaryScreen extends StatelessWidget {
   final double progress;
 
   const KycSummaryScreen(
-      {required this.basicInformationState,
+      {required this.personalInfoState,
       required this.progress,
       required this.addressProofState,
       required this.countryOfTaxResidenceState,
@@ -47,7 +47,7 @@ class KycSummaryScreen extends StatelessWidget {
         children: [
           PersonalInfoSummaryContent(
             key: const Key('personal_info_summary_content'),
-            basicInformationState: basicInformationState,
+            personalInfoState: personalInfoState,
             addressProofState: addressProofState,
             countryOfTaxResidenceState: countryOfTaxResidenceState,
             title: 'Personal Info',

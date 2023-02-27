@@ -14,16 +14,17 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
-import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../bloc/personal_indo/personal_info_bloc.dart';
+import '../../domain/upgrade_account/personal_info_request.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 
-class BasicInformationScreen extends StatelessWidget {
+class PersonalInfoScreen extends StatelessWidget {
   final double progress;
 
-  const BasicInformationScreen({required this.progress, Key? key})
+  const PersonalInfoScreen({required this.progress, Key? key})
       : super(key: key);
 
   static const double _spaceHeightDouble = 36;
@@ -52,21 +53,19 @@ class BasicInformationScreen extends StatelessWidget {
             ),
             _spaceHeight,
             _textInput(
-                initialValue:
-                    context.read<BasicInformationBloc>().state.firstName,
+                initialValue: context.read<PersonalInfoBloc>().state.firstName,
                 key: const Key('first_name'),
                 label: 'Legal English First Name',
                 onChanged: (value) => context
-                    .read<BasicInformationBloc>()
+                    .read<PersonalInfoBloc>()
                     .add(BasicInformationFirstNameChanged(value))),
             _spaceHeight,
             _textInput(
-                initialValue:
-                    context.read<BasicInformationBloc>().state.lastName,
+                initialValue: context.read<PersonalInfoBloc>().state.lastName,
                 key: const Key('last_name'),
                 label: 'Legal English Last Name',
                 onChanged: (value) => context
-                    .read<BasicInformationBloc>()
+                    .read<PersonalInfoBloc>()
                     .add(BasicInformationLastNameChanged(value))),
             _spaceHeight,
             _selectGender,
@@ -87,8 +86,7 @@ class BasicInformationScreen extends StatelessWidget {
     );
   }
 
-  Widget get _dateOfBirth =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+  Widget get _dateOfBirth => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: ((previous, current) =>
             previous.dateOfBirth != current.dateOfBirth),
         builder: (context, state) {
@@ -99,16 +97,14 @@ class BasicInformationScreen extends StatelessWidget {
             selectedDate: dateOfBirth,
             initialDateTime: dateOfBirth,
             maximumDate: DateTime.now(),
-            onDateTimeChanged: (date) =>
-                context.read<BasicInformationBloc>().add(
-                      BasicInformationDateOfBirthChanged(date.toString()),
-                    ),
+            onDateTimeChanged: (date) => context.read<PersonalInfoBloc>().add(
+                  BasicInformationDateOfBirthChanged(date.toString()),
+                ),
           );
         },
       );
 
-  Widget get _nationality =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+  Widget get _nationality => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
             previous.countryOfCitizenship != current.countryOfCitizenship,
         builder: (context, state) => CustomCountryPicker(
@@ -116,30 +112,28 @@ class BasicInformationScreen extends StatelessWidget {
           label: 'Nationality',
           hintText: 'Select Nationality',
           initialValue: state.countryNameOfCitizenship,
-          onSelect: (Country country) => context
-              .read<BasicInformationBloc>()
-              .add(BasicInformationCountryOfCitizenshipChanged(
+          onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
+              BasicInformationCountryOfCitizenshipChanged(
                   country.countryCodeIso3, country.name)),
         ),
       );
 
   Widget get _countryOfBirth =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+      BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
             previous.countryCodeOfBirth != current.countryCodeOfBirth,
         builder: (context, state) => CustomCountryPicker(
           key: const Key('country_of_birth'),
           label: 'Country Of Birth',
           initialValue: state.countryNameOfBirth,
-          onSelect: (Country country) => context
-              .read<BasicInformationBloc>()
-              .add(BasicInformationCountryOfBirthChanged(
+          onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
+              BasicInformationCountryOfBirthChanged(
                   country.countryCodeIso3, country.name)),
         ),
       );
 
   Widget get _countryCodeAndPhoneNumber =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+      BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
           buildWhen: (previous, current) =>
               previous.countryCode != current.countryCode ||
               previous.phoneNumber != current.phoneNumber,
@@ -148,10 +142,10 @@ class BasicInformationScreen extends StatelessWidget {
                 initialValueOfCodeArea: state.countryCode,
                 initialValueOfPhoneNumber: state.phoneNumber,
                 onChangedCodeArea: (country) => context
-                    .read<BasicInformationBloc>()
+                    .read<PersonalInfoBloc>()
                     .add(BasicInformationCountryCodeChanged(country.phoneCode)),
                 onChangePhoneNumber: (phoneNumber) => context
-                    .read<BasicInformationBloc>()
+                    .read<PersonalInfoBloc>()
                     .add(BasicInformationPhoneNumberChanged(phoneNumber)),
               ));
 
@@ -160,12 +154,12 @@ class BasicInformationScreen extends StatelessWidget {
         children: [
           const CustomTextNew('Gender'),
           const SizedBox(height: 5),
-          BlocBuilder<BasicInformationBloc, BasicInformationState>(
+          BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
               buildWhen: (previous, current) =>
                   previous.gender != current.gender,
               builder: (context, state) => CustomToggleButton(
                     onSelected: (value) => context
-                        .read<BasicInformationBloc>()
+                        .read<PersonalInfoBloc>()
                         .add(BasicInformationGenderChanged(value)),
                     initialValue: state.gender,
                     choices: Pair('Male', 'Female'),
@@ -174,7 +168,7 @@ class BasicInformationScreen extends StatelessWidget {
       );
 
   Widget get _hkIdNumberInput =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+      BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
             previous.idNumber != current.idNumber ||
             previous.countryNameOfCitizenship !=
@@ -197,7 +191,7 @@ class BasicInformationScreen extends StatelessWidget {
                 : 'Please enter a valid HKID Number',
             textInputType: TextInputType.text,
             onChanged: (value) => context
-                .read<BasicInformationBloc>()
+                .read<PersonalInfoBloc>()
                 .add(BasicInformationIdNumberChanged(value)),
           );
         },
@@ -224,21 +218,35 @@ class BasicInformationScreen extends StatelessWidget {
         hintText: hintText ?? '',
       );
 
-  Widget get _bottomButton =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
-          buildWhen: (previous, current) =>
-              _disablePrimaryButton(previous) != _disablePrimaryButton(current),
-          builder: (context, state) => ButtonPair(
-                disablePrimaryButton: _disablePrimaryButton(state),
-                primaryButtonOnClick: () => context
-                    .read<NavigationBloc<KycPageStep>>()
-                    .add(const PageChanged(KycPageStep.otp)),
-                secondaryButtonOnClick: () => CarouselScreen.open(context),
-                primaryButtonLabel: 'NEXT',
-                secondaryButtonLabel: 'SAVE FOR LATER',
-              ));
+  Widget get _bottomButton => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
+      buildWhen: (previous, current) =>
+          _disablePrimaryButton(previous) != _disablePrimaryButton(current),
+      builder: (context, state) => ButtonPair(
+            disablePrimaryButton: _disablePrimaryButton(state),
+            primaryButtonOnClick: () {
+              context
+                  .read<KycBloc>()
+                  .add(SubmitPersonalInfo(PersonalInfoRequest(
+                    firstName: state.firstName,
+                    lastName: state.lastName,
+                    gender: state.gender,
+                    hkIdNumber: state.idNumber,
+                    nationality: state.countryNameOfCitizenship,
+                    dateOfBirth: state.dateOfBirth,
+                    countryOfBirth: state.countryNameOfBirth,
+                    phoneCountryCode: state.countryCode,
+                    phoneNumber: state.phoneNumber,
+                  )));
+              // context
+              //     .read<NavigationBloc<KycPageStep>>()
+              //     .add(const PageChanged(KycPageStep.otp));
+            },
+            secondaryButtonOnClick: () => CarouselScreen.open(context),
+            primaryButtonLabel: 'NEXT',
+            secondaryButtonLabel: 'SAVE FOR LATER',
+          ));
 
-  bool _disablePrimaryButton(BasicInformationState state) {
+  bool _disablePrimaryButton(PersonalInfoState state) {
     if (state.firstName.isEmpty ||
         state.lastName.isEmpty ||
         state.gender.isEmpty ||

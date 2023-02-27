@@ -1,13 +1,13 @@
-part of 'basic_information_bloc.dart';
+part of 'personal_info_bloc.dart';
 
-abstract class BasicInformationEvent extends Equatable {
-  const BasicInformationEvent();
+abstract class PersonalInfoEvent extends Equatable {
+  const PersonalInfoEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class BasicInformationFirstNameChanged extends BasicInformationEvent {
+class BasicInformationFirstNameChanged extends PersonalInfoEvent {
   final String firstName;
 
   const BasicInformationFirstNameChanged(this.firstName) : super();
@@ -16,7 +16,7 @@ class BasicInformationFirstNameChanged extends BasicInformationEvent {
   List<Object> get props => [firstName];
 }
 
-class BasicInformationMiddleNameChanged extends BasicInformationEvent {
+class BasicInformationMiddleNameChanged extends PersonalInfoEvent {
   final String middleName;
 
   const BasicInformationMiddleNameChanged(this.middleName) : super();
@@ -25,7 +25,7 @@ class BasicInformationMiddleNameChanged extends BasicInformationEvent {
   List<Object> get props => [middleName];
 }
 
-class BasicInformationLastNameChanged extends BasicInformationEvent {
+class BasicInformationLastNameChanged extends PersonalInfoEvent {
   final String lastName;
 
   const BasicInformationLastNameChanged(this.lastName) : super();
@@ -34,7 +34,7 @@ class BasicInformationLastNameChanged extends BasicInformationEvent {
   List<Object> get props => [lastName];
 }
 
-class BasicInformationChineseNameChanged extends BasicInformationEvent {
+class BasicInformationChineseNameChanged extends PersonalInfoEvent {
   final String chineseName;
 
   const BasicInformationChineseNameChanged(this.chineseName) : super();
@@ -43,7 +43,7 @@ class BasicInformationChineseNameChanged extends BasicInformationEvent {
   List<Object> get props => [chineseName];
 }
 
-class BasicInformationGenderChanged extends BasicInformationEvent {
+class BasicInformationGenderChanged extends PersonalInfoEvent {
   final String gender;
 
   const BasicInformationGenderChanged(this.gender) : super();
@@ -52,7 +52,7 @@ class BasicInformationGenderChanged extends BasicInformationEvent {
   List<Object> get props => [gender];
 }
 
-class BasicInformationDateOfBirthChanged extends BasicInformationEvent {
+class BasicInformationDateOfBirthChanged extends PersonalInfoEvent {
   final String dateOfBirth;
 
   const BasicInformationDateOfBirthChanged(this.dateOfBirth) : super();
@@ -61,7 +61,7 @@ class BasicInformationDateOfBirthChanged extends BasicInformationEvent {
   List<Object> get props => [dateOfBirth];
 }
 
-class BasicInformationCountryCodeChanged extends BasicInformationEvent {
+class BasicInformationCountryCodeChanged extends PersonalInfoEvent {
   final String countryCode;
 
   const BasicInformationCountryCodeChanged(this.countryCode) : super();
@@ -70,7 +70,7 @@ class BasicInformationCountryCodeChanged extends BasicInformationEvent {
   List<Object> get props => [countryCode];
 }
 
-class BasicInformationPhoneNumberChanged extends BasicInformationEvent {
+class BasicInformationPhoneNumberChanged extends PersonalInfoEvent {
   final String phoneNumber;
 
   const BasicInformationPhoneNumberChanged(this.phoneNumber) : super();
@@ -79,8 +79,7 @@ class BasicInformationPhoneNumberChanged extends BasicInformationEvent {
   List<Object> get props => [phoneNumber];
 }
 
-class BasicInformationCountryOfCitizenshipChanged
-    extends BasicInformationEvent {
+class BasicInformationCountryOfCitizenshipChanged extends PersonalInfoEvent {
   final String countryOfCitizenship;
   final String countryNameOfCitizenship;
 
@@ -92,7 +91,7 @@ class BasicInformationCountryOfCitizenshipChanged
   List<Object> get props => [countryOfCitizenship];
 }
 
-class BasicInformationCountryOfBirthChanged extends BasicInformationEvent {
+class BasicInformationCountryOfBirthChanged extends PersonalInfoEvent {
   final String countryCodeOfBirth;
   final String countryNameOfBirth;
 
@@ -105,7 +104,7 @@ class BasicInformationCountryOfBirthChanged extends BasicInformationEvent {
 }
 
 class BasicInformationIsHongKongPermanentResidentChanged
-    extends BasicInformationEvent {
+    extends PersonalInfoEvent {
   final bool isHongKongPermanentResident;
 
   const BasicInformationIsHongKongPermanentResidentChanged(
@@ -116,7 +115,7 @@ class BasicInformationIsHongKongPermanentResidentChanged
   List<Object> get props => [isHongKongPermanentResident];
 }
 
-class BasicInformationIdNumberChanged extends BasicInformationEvent {
+class BasicInformationIdNumberChanged extends PersonalInfoEvent {
   final String idNumber;
 
   const BasicInformationIdNumberChanged(this.idNumber);
@@ -125,8 +124,7 @@ class BasicInformationIdNumberChanged extends BasicInformationEvent {
   List<Object> get props => [idNumber];
 }
 
-class BasicInformationIsUnitedStateResidentChanged
-    extends BasicInformationEvent {
+class BasicInformationIsUnitedStateResidentChanged extends PersonalInfoEvent {
   final bool isUnitedStateResident;
 
   const BasicInformationIsUnitedStateResidentChanged(this.isUnitedStateResident)
@@ -136,16 +134,22 @@ class BasicInformationIsUnitedStateResidentChanged
   List<Object> get props => [isUnitedStateResident];
 }
 
-class BasicInformationNext extends BasicInformationEvent {
+class BasicInformationNext extends PersonalInfoEvent {
   const BasicInformationNext() : super();
 
   @override
   List<Object> get props => [];
 }
 
-class BasicInformationReset extends BasicInformationEvent {
+class BasicInformationReset extends PersonalInfoEvent {
   const BasicInformationReset() : super();
 
+  @override
+  List<Object> get props => [];
+}
+
+class BasicInformationSubmitted extends PersonalInfoEvent {
+  const BasicInformationSubmitted() : super();
   @override
   List<Object> get props => [];
 }

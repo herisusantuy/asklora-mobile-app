@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/presentation/custom_image_picker.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../bloc/address_proof/address_proof_bloc.dart';
-import '../../../bloc/basic_information/basic_information_bloc.dart';
 import '../../../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
+import '../../../bloc/personal_info/personal_info_bloc.dart';
 import '../../widgets/kyc_sub_title.dart';
 import '../../widgets/summary_text_info.dart';
 
 class PersonalInfoSummaryContent extends StatelessWidget {
   final String title;
-  final BasicInformationState basicInformationState;
+  final PersonalInfoState personalInfoState;
   final AddressProofState addressProofState;
   final CountryOfTaxResidenceState countryOfTaxResidenceState;
 
   const PersonalInfoSummaryContent(
       {Key? key,
-      required this.basicInformationState,
+      required this.personalInfoState,
       required this.addressProofState,
       required this.countryOfTaxResidenceState,
       required this.title})
@@ -36,8 +36,8 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           SummaryTextInfo(
               title:
                   'Are you a United States tax resident, green card holder or citizens ?',
-              subTitle: basicInformationState.isUnitedStateResident != null
-                  ? basicInformationState.isUnitedStateResident!
+              subTitle: personalInfoState.isUnitedStateResident != null
+                  ? personalInfoState.isUnitedStateResident!
                       ? 'Yes'
                       : 'No'
                   : 'Unknown'),
@@ -45,35 +45,32 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           SummaryTextInfo(
               title:
                   'Are you a Hong Kong citizen or resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident',
-              subTitle:
-                  basicInformationState.isHongKongPermanentResident != null
-                      ? basicInformationState.isHongKongPermanentResident!
-                          ? 'Yes'
-                          : 'No'
-                      : 'Unknown'),
+              subTitle: personalInfoState.isHongKongPermanentResident != null
+                  ? personalInfoState.isHongKongPermanentResident!
+                      ? 'Yes'
+                      : 'No'
+                  : 'Unknown'),
           _spaceHeight,
           SummaryTextInfo(
               title: 'English First Name',
-              subTitle: basicInformationState.firstName),
+              subTitle: personalInfoState.firstName),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'English Last Name',
-              subTitle: basicInformationState.lastName),
-          SummaryTextInfo(title: 'Sex', subTitle: basicInformationState.gender),
+              title: 'English Last Name', subTitle: personalInfoState.lastName),
+          SummaryTextInfo(title: 'Sex', subTitle: personalInfoState.gender),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Day of Birth',
-              subTitle: basicInformationState.dateOfBirth),
+              title: 'Day of Birth', subTitle: personalInfoState.dateOfBirth),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Country of Birth',
-              subTitle: basicInformationState.countryNameOfBirth),
+              subTitle: personalInfoState.countryNameOfBirth),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Phone', subTitle: basicInformationState.phoneNumber),
+              title: 'Phone', subTitle: personalInfoState.phoneNumber),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'HKID Number', subTitle: basicInformationState.idNumber),
+              title: 'HKID Number', subTitle: personalInfoState.idNumber),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Address', subTitle: addressProofState.addressLine1),

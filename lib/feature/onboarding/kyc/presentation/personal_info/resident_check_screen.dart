@@ -4,8 +4,8 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
-import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -18,7 +18,7 @@ class ResidentCheckScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<BasicInformationBloc, BasicInformationState>(
+    return BlocListener<PersonalInfoBloc, PersonalInfoState>(
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.status == ResponseState.error) {
@@ -28,7 +28,7 @@ class ResidentCheckScreen extends StatelessWidget {
         } else if (state.status == ResponseState.success) {
           context
               .read<NavigationBloc<KycPageStep>>()
-              .add(const PageChanged(KycPageStep.basicInformation));
+              .add(const PageChanged(KycPageStep.personalInfo));
         }
       },
       child: KycBaseForm(
@@ -54,15 +54,15 @@ class ResidentCheckScreen extends StatelessWidget {
     );
   }
 
-  Widget get _isUnitedStatesResident => BlocBuilder<BasicInformationBloc,
-          BasicInformationState>(
+  Widget get _isUnitedStatesResident => BlocBuilder<PersonalInfoBloc,
+          PersonalInfoState>(
       key: const Key('is_united_states_resident'),
       buildWhen: (previous, current) =>
           previous.isUnitedStateResident != current.isUnitedStateResident,
       builder: (context, state) => CustomToggleButton(
             title:
                 'Are you a United States tax resident, green card holder or citizens ?',
-            onSelected: (value) => context.read<BasicInformationBloc>().add(
+            onSelected: (value) => context.read<PersonalInfoBloc>().add(
                 BasicInformationIsUnitedStateResidentChanged(value == 'Yes')),
             initialValue: state.isUnitedStateResident != null
                 ? state.isUnitedStateResident!
@@ -73,14 +73,14 @@ class ResidentCheckScreen extends StatelessWidget {
           ));
 
   Widget get _isHongKongResident =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
+      BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
           key: const Key('is_hong_kong_resident'),
           buildWhen: (previous, current) =>
               previous.isHongKongPermanentResident !=
               current.isHongKongPermanentResident,
           builder: (context, state) => CustomToggleButton(
                 title: 'Are you a Hong Kong citizen or resident ?',
-                onSelected: (value) => context.read<BasicInformationBloc>().add(
+                onSelected: (value) => context.read<PersonalInfoBloc>().add(
                     BasicInformationIsHongKongPermanentResidentChanged(
                         value == 'Yes')),
                 initialValue: state.isHongKongPermanentResident != null
@@ -91,20 +91,19 @@ class ResidentCheckScreen extends StatelessWidget {
                 choices: Pair('Yes', 'No'),
               ));
 
-  Widget get _bottomButton =>
-      BlocBuilder<BasicInformationBloc, BasicInformationState>(
-          buildWhen: (previous, current) =>
-              previous.isHongKongPermanentResident !=
-                  current.isHongKongPermanentResident ||
-              previous.isUnitedStateResident != current.isUnitedStateResident,
-          builder: (context, state) => ButtonPair(
-                disablePrimaryButton: state.isUnitedStateResident == null ||
-                    state.isHongKongPermanentResident == null,
-                primaryButtonOnClick: () => context
-                    .read<BasicInformationBloc>()
-                    .add(const BasicInformationNext()),
-                secondaryButtonOnClick: () => CarouselScreen.open(context),
-                primaryButtonLabel: 'NEXT',
-                secondaryButtonLabel: 'SAVE FOR LATER',
-              ));
+  Widget get _bottomButton => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
+      buildWhen: (previous, current) =>
+          previous.isHongKongPermanentResident !=
+              current.isHongKongPermanentResident ||
+          previous.isUnitedStateResident != current.isUnitedStateResident,
+      builder: (context, state) => ButtonPair(
+            disablePrimaryButton: state.isUnitedStateResident == null ||
+                state.isHongKongPermanentResident == null,
+            primaryButtonOnClick: () => context
+                .read<PersonalInfoBloc>()
+                .add(const BasicInformationNext()),
+            secondaryButtonOnClick: () => CarouselScreen.open(context),
+            primaryButtonLabel: 'NEXT',
+            secondaryButtonLabel: 'SAVE FOR LATER',
+          ));
 }

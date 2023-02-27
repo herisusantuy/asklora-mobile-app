@@ -3,21 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
-import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import 'widgets/personal_info_summary_content.dart';
 
 class PersonalInfoSummaryScreen extends StatelessWidget {
-  final BasicInformationState basicInformationState;
+  final PersonalInfoState personalInfoState;
   final AddressProofState addressProofState;
   final CountryOfTaxResidenceState countryOfTaxResidenceState;
   final double progress;
 
   const PersonalInfoSummaryScreen(
-      {required this.basicInformationState,
+      {required this.personalInfoState,
       required this.progress,
       required this.addressProofState,
       required this.countryOfTaxResidenceState,
@@ -32,7 +32,7 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
       title: 'Set Up Personal Info',
       content: PersonalInfoSummaryContent(
         key: const Key('personal_info_summary_content'),
-        basicInformationState: basicInformationState,
+        personalInfoState: personalInfoState,
         addressProofState: addressProofState,
         countryOfTaxResidenceState: countryOfTaxResidenceState,
         title: 'Summary',

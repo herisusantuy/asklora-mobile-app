@@ -1,25 +1,27 @@
-part of 'basic_information_bloc.dart';
+part of 'personal_info_bloc.dart';
 
-class BasicInformationState extends Equatable {
-  const BasicInformationState(
-      {this.firstName = '',
-      this.middleName,
-      this.lastName = '',
-      this.chineseName,
-      this.gender = '',
-      this.dateOfBirth = '1990-01-01',
-      this.countryCodeOfBirth = '',
-      this.countryNameOfBirth = '',
-      this.countryCode = '',
-      this.phoneNumber = '',
-      this.countryOfCitizenship = '',
-      this.countryNameOfCitizenship = '',
-      this.isHongKongPermanentResident,
-      this.idNumber = '',
-      this.isUnitedStateResident,
-      this.isHkIdValid = false,
-      this.message = '',
-      this.status = ResponseState.unknown});
+class PersonalInfoState extends Equatable {
+  const PersonalInfoState({
+    this.firstName = '',
+    this.middleName,
+    this.lastName = '',
+    this.chineseName,
+    this.gender = '',
+    this.dateOfBirth = '1990-01-01',
+    this.countryCodeOfBirth = '',
+    this.countryNameOfBirth = '',
+    this.countryCode = '',
+    this.phoneNumber = '',
+    this.countryOfCitizenship = '',
+    this.countryNameOfCitizenship = '',
+    this.isHongKongPermanentResident,
+    this.idNumber = '',
+    this.isUnitedStateResident,
+    this.isHkIdValid = false,
+    this.message = '',
+    this.status = ResponseState.unknown,
+    this.response = const BaseResponse(),
+  });
 
   final String firstName;
   final String? middleName;
@@ -39,6 +41,7 @@ class BasicInformationState extends Equatable {
   final bool isHkIdValid;
   final ResponseState status;
   final String? message;
+  final BaseResponse response;
 
   @override
   List<Object?> get props {
@@ -61,10 +64,11 @@ class BasicInformationState extends Equatable {
       isHkIdValid,
       status,
       message,
+      response,
     ];
   }
 
-  BasicInformationState copyWith({
+  PersonalInfoState copyWith({
     String? firstName,
     String? middleName,
     String? lastName,
@@ -83,8 +87,9 @@ class BasicInformationState extends Equatable {
     bool? isHkIdValid,
     ResponseState? status,
     String? message,
+    BaseResponse? response,
   }) {
-    return BasicInformationState(
+    return PersonalInfoState(
       firstName: firstName ?? this.firstName,
       middleName: middleName ?? this.middleName,
       lastName: lastName ?? this.lastName,
@@ -106,6 +111,7 @@ class BasicInformationState extends Equatable {
       isHkIdValid: isHkIdValid ?? this.isHkIdValid,
       status: status ?? this.status,
       message: message ?? this.message,
+      response: response ?? this.response,
     );
   }
 

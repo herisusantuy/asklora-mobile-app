@@ -4,14 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/hkid_validation.dart';
 import '../../../../../core/utils/age_validation.dart';
+import '../../domain/upgrade_account/personal_info_request.dart';
+import '../../domain/upgrade_account/personal_info_response.dart';
+import '../../repository/account_repository.dart';
 
-part 'basic_information_event.dart';
+part 'personal_info_event.dart';
 
-part 'basic_information_state.dart';
+part 'personal_info_state.dart';
 
-class BasicInformationBloc
-    extends Bloc<BasicInformationEvent, BasicInformationState> {
-  BasicInformationBloc() : super(const BasicInformationState()) {
+class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
+  PersonalInfoBloc({required AccountRepository accountRepository})
+      : _accountRepository = accountRepository,
+        super(const PersonalInfoState()) {
     on<BasicInformationFirstNameChanged>(_onBasicInformationFirstNameChange);
     on<BasicInformationLastNameChanged>(_onBasicInformationLastNameChange);
     on<BasicInformationMiddleNameChanged>(_onBasicInformationMiddleNameChange);
@@ -35,53 +39,56 @@ class BasicInformationBloc
         _onIsUnitedStateResidentChange);
     on<BasicInformationNext>(_onBasicInformationNext);
     on<BasicInformationReset>(_onBasicInformationReset);
+    on<BasicInformationSubmitted>(_onBasicInformationSubmitted);
   }
 
-  _onBasicInformationFirstNameChange(BasicInformationFirstNameChanged event,
-      Emitter<BasicInformationState> emit) {
+  final AccountRepository _accountRepository;
+
+  _onBasicInformationFirstNameChange(
+      BasicInformationFirstNameChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(firstName: event.firstName));
   }
 
-  _onBasicInformationLastNameChange(BasicInformationLastNameChanged event,
-      Emitter<BasicInformationState> emit) {
+  _onBasicInformationLastNameChange(
+      BasicInformationLastNameChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(lastName: event.lastName));
   }
 
   _onBasicInformationMiddleNameChange(BasicInformationMiddleNameChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(middleName: event.middleName));
   }
 
   _onBasicInformationChineseNameChange(BasicInformationChineseNameChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(chineseName: event.chineseName));
   }
 
-  _onBasicInformationGenderChange(BasicInformationGenderChanged event,
-      Emitter<BasicInformationState> emit) {
+  _onBasicInformationGenderChange(
+      BasicInformationGenderChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(gender: event.gender));
   }
 
   _onBasicInformationDateOfBirthChange(BasicInformationDateOfBirthChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(dateOfBirth: event.dateOfBirth));
   }
 
   _onBasicInformationCountryCodeChange(BasicInformationCountryCodeChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
       countryCode: event.countryCode,
     ));
   }
 
   _onBasicInformationPhoneNumberChange(BasicInformationPhoneNumberChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(phoneNumber: event.phoneNumber));
   }
 
   _onBasicInformationCountryOfCitizenshipChange(
       BasicInformationCountryOfCitizenshipChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
         countryOfCitizenship: event.countryOfCitizenship,
         countryNameOfCitizenship: event.countryNameOfCitizenship));
@@ -89,7 +96,7 @@ class BasicInformationBloc
 
   _onBasicInformationCountryOfBirthChange(
       BasicInformationCountryOfBirthChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
         countryCodeOfBirth: event.countryCodeOfBirth,
         countryNameOfBirth: event.countryNameOfBirth));
@@ -97,25 +104,25 @@ class BasicInformationBloc
 
   _onIsHongKongPermanentResidentChange(
       BasicInformationIsHongKongPermanentResidentChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
         isHongKongPermanentResident: event.isHongKongPermanentResident));
   }
 
-  _onIdNumberChange(BasicInformationIdNumberChanged event,
-      Emitter<BasicInformationState> emit) {
+  _onIdNumberChange(
+      BasicInformationIdNumberChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
         idNumber: event.idNumber, isHkIdValid: isHkIdValid(event.idNumber)));
   }
 
   _onIsUnitedStateResidentChange(
       BasicInformationIsUnitedStateResidentChanged event,
-      Emitter<BasicInformationState> emit) {
+      Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(isUnitedStateResident: event.isUnitedStateResident));
   }
 
   _onBasicInformationNext(
-      BasicInformationNext event, Emitter<BasicInformationState> emit) {
+      BasicInformationNext event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(status: ResponseState.unknown));
     if (state.isHongKongPermanentResident != null &&
             !state.isHongKongPermanentResident! ||
@@ -132,7 +139,16 @@ class BasicInformationBloc
   }
 
   _onBasicInformationReset(
-      BasicInformationReset event, Emitter<BasicInformationState> emit) {
+      BasicInformationReset event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(status: ResponseState.unknown));
+  }
+
+  _onBasicInformationSubmitted(
+      BasicInformationSubmitted event, Emitter<PersonalInfoState> emit) async {
+    try {
+      emit(state.copyWith(response: BaseResponse.loading()));
+      var data = await _accountRepository
+          .submitPersonalInfo(const PersonalInfoRequest());
+    } catch (_) {}
   }
 }

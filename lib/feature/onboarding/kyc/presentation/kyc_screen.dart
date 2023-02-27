@@ -6,10 +6,10 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
-import '../bloc/basic_information/basic_information_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/kyc_bloc.dart';
+import '../bloc/personal_info/personal_info_bloc.dart';
 import '../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/source_of_wealth/source_of_wealth_bloc.dart';
@@ -28,7 +28,7 @@ import 'kyc_progress/kyc_progress_screen.dart';
 import 'kyc_rejected_screen.dart';
 import 'kyc_summary_screen.dart';
 import 'personal_info/address_proof_screen.dart';
-import 'personal_info/basic_information_screen.dart';
+import 'personal_info/pesonal_info_screen.dart';
 import 'personal_info/otp/bloc/otp_bloc.dart';
 import 'personal_info/otp/presentation/otp_screen.dart';
 import 'personal_info/otp/repository/otp_repository.dart';
@@ -56,7 +56,9 @@ class KycScreen extends StatelessWidget {
               BlocProvider(
                   create: (_) =>
                       NavigationBloc<KycPageStep>(initialKycPageStep)),
-              BlocProvider(create: (_) => BasicInformationBloc()),
+              BlocProvider(
+                  create: (context) =>
+                      PersonalInfoBloc(accountRepository: AccountRepository())),
               BlocProvider(
                 create: (context) => OtpBloc(otpRepository: OtpRepository()),
               ),
@@ -122,8 +124,8 @@ class KycScreen extends StatelessWidget {
                 rejectedReason:
                     'Currently only eligible for Hong Kong Resident and Non-US Citizens.',
               );
-            case KycPageStep.basicInformation:
-              return const BasicInformationScreen(
+            case KycPageStep.personalInfo:
+              return const PersonalInfoScreen(
                 progress: 0.1,
               );
             case KycPageStep.otp:
@@ -141,8 +143,7 @@ class KycScreen extends StatelessWidget {
               );
             case KycPageStep.personalInfoSummary:
               return PersonalInfoSummaryScreen(
-                basicInformationState:
-                    context.read<BasicInformationBloc>().state,
+                personalInfoState: context.read<PersonalInfoBloc>().state,
                 progress: 0.3,
                 addressProofState: context.read<AddressProofBloc>().state,
                 countryOfTaxResidenceState:
@@ -212,8 +213,7 @@ class KycScreen extends StatelessWidget {
               );
             case KycPageStep.kycSummary:
               return KycSummaryScreen(
-                basicInformationState:
-                    context.read<BasicInformationBloc>().state,
+                personalInfoState: context.read<PersonalInfoBloc>().state,
                 progress: 0.9,
                 addressProofState: context.read<AddressProofBloc>().state,
                 countryOfTaxResidenceState:
