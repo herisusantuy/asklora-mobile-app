@@ -15,7 +15,7 @@ import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
-import '../../bloc/personal_indo/personal_info_bloc.dart';
+import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
