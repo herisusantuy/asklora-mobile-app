@@ -39,7 +39,7 @@ dependencies:
   photo_view: ^0.14.0
   google_fonts: ^4.0.3
   back_button_interceptor: ^6.0.2
-  onfido_sdk: ^2.0.0
+  onfido_sdk: ^2.2.0
   just_the_tooltip: ^0.0.12
 
   country_picker:
