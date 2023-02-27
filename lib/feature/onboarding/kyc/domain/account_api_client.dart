@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/endpoints.dart';
 import 'onfido/onfido_result_request.dart';
+import 'upgrade_account/personal_info_request.dart';
 import 'upgrade_account/upgrade_account_request.dart';
 import 'upgrade_account/tax_info_request.dart';
 
@@ -21,6 +22,11 @@ class AccountApiClient {
   Future<Response> upgradeAccount(UpgradeAccountRequest request) async =>
       await AskloraApiClient().post(
           endpoint: endpointUpgradeAccount,
+          payload: jsonEncode(request.toJson()));
+
+  Future<Response> submitPersonalInfo(PersonalInfoRequest request) async =>
+      await AskloraApiClient().post(
+          endpoint: endpointPersonalInfo,
           payload: jsonEncode(request.toJson()));
 
   Future<Response> getOnfidoToken() async =>
