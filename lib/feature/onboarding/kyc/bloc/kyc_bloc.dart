@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../domain/onfido/onfido_result_request.dart';
 import '../domain/onfido/onfido_result_response.dart';
+import '../domain/upgrade_account/personal_info_request.dart';
+import '../domain/upgrade_account/personal_info_response.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
+import 'personal_info/personal_info_bloc.dart';
 
 part 'kyc_event.dart';
 
@@ -17,6 +20,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     on<GetSdkToken>(_onGetOnfidoSdkToken);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
     on<SubmitKyc>(_onSubmitKyc);
+    on<SubmitPersonalInfo>(_onSubmitPersonalInfo);
   }
 
   final AccountRepository _accountRepository;
@@ -24,8 +28,16 @@ class KycBloc extends Bloc<KycEvent, KycState> {
   _onSubmitKyc(SubmitKyc event, Emitter<KycState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     var data =
-        await _accountRepository.upgradeAccount(const UpgradeAccountRequest());
+        await _accountRepository.upgradeAccount(event.upgradeAccountRequest);
     emit(state.copyWith(response: data));
+  }
+
+  _onSubmitPersonalInfo(
+      SubmitPersonalInfo event, Emitter<KycState> emit) async {
+    emit(state.copyWith(personalInfoResponse: BaseResponse.loading()));
+    var data =
+        await _accountRepository.submitPersonalInfo(event.personalInfoRequest);
+    emit(state.copyWith(personalInfoResponse: data));
   }
 
   _onGetOnfidoSdkToken(GetSdkToken event, Emitter<KycState> emit) async {
