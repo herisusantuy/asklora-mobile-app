@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
+import '../../../core/utils/storage/shared_preference.dart';
+import '../../../core/utils/storage/storage_keys.dart';
 import '../../../main.dart';
 import '../../../mock/mock_data.dart';
 import '../../chart/domain/chart_models.dart';
@@ -15,6 +17,7 @@ import '../domain/bot_stock_api_client.dart';
 import '../utils/bot_stock_utils.dart';
 
 class BotStockRepository {
+  final SharedPreference _sharedPreference = SharedPreference();
   final BotStockApiClient _botStockApiClient = BotStockApiClient();
 
   Future<BaseResponse<BotDetailModel>> fetchBotDetail(
@@ -87,8 +90,8 @@ class BotStockRepository {
             iterable.map((model) => BotRecommendationModel.fromJson(model))));
       } else {
         ///REAL
-        ///TODO get account id from local later
-        var response = await _botStockApiClient.fetchBotRecommendation('1');
+        var response = await _botStockApiClient.fetchBotRecommendation(
+            await _sharedPreference.readData(sfKeyTempName) ?? '');
         return BaseResponse.complete(
             BotRecommendationResponse.fromJson(response.data).data);
       }
@@ -112,7 +115,8 @@ class BotStockRepository {
       } else {
         ///REAL
         ///TODO get account id from local later
-        var response = await _botStockApiClient.fetchBotRecommendation('1');
+        var response = await _botStockApiClient.fetchBotRecommendation(
+            await _sharedPreference.readData(sfKeyTempName) ?? '');
         return BaseResponse.complete(List<BotRecommendationModel>.from(
             BotRecommendationResponse.fromJson(response.data)
                 .data

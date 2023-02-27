@@ -2,7 +2,7 @@ part of '../bot_recommendation_screen.dart';
 
 class BotRecommendationList extends StatelessWidget {
   final double _spacing = 16;
-  final double botCardHeight = 165;
+  final double botCardHeight = 166;
   final double blurPadding;
   final double verticalMargin;
 
@@ -17,7 +17,8 @@ class BotRecommendationList extends StatelessWidget {
             previous.botRecommendationResponse.state !=
             current.botRecommendationResponse.state,
         builder: (context, state) {
-          if (state.botRecommendationResponse.state == ResponseState.success) {
+          if (state.botRecommendationResponse.state == ResponseState.success &&
+              state.botRecommendationResponse.data!.isNotEmpty) {
             return Container(
               margin: EdgeInsets.symmetric(vertical: verticalMargin),
               padding: AppValues.screenHorizontalPadding,

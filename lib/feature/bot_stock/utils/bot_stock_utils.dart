@@ -75,7 +75,7 @@ List<BotRecommendationModel> demonstrationBots = [
 ];
 
 enum BotType {
-  pullUp('Pullup', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_Pullup',
+  pullUp('Pullup', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_pull_up',
       AskLoraColors.lime, AskLoraColors.darkerLime),
   squat('Squat', 'SQUAT', 'Squat', 'icon_bot_badge_pop_up_message_squat',
       AskLoraColors.purple, AskLoraColors.darkerPurple,

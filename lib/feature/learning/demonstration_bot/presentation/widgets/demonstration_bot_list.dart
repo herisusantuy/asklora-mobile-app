@@ -3,7 +3,7 @@ part of '../demonstration_bot_screen.dart';
 class DemonstrationBotList extends StatelessWidget {
   final BotType botType;
   final double _spacing = 16;
-  final double botCardHeight = 165;
+  final double botCardHeight = 166;
   final double blurPadding;
   final double verticalMargin;
   final JustTheController tooltipController;

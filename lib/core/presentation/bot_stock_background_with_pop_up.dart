@@ -21,7 +21,7 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
   });
 
   final double _spacing = 16;
-  final double botCardHeight = 165;
+  final double botCardHeight = 166;
   final double blurPadding = 8;
 
   final Widget? header;
