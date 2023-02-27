@@ -17,11 +17,6 @@ PersonalInfoRequest _$PersonalInfoRequestFromJson(Map<String, dynamic> json) =>
       countryOfBirth: json['country_of_birth'] as String?,
       phoneCountryCode: json['phone_country_code'] as String?,
       phoneNumber: json['phone_number'] as String?,
-      phoneNumberVerified: json['phone_number_verified'] as bool?,
-      addressLine1: json['address_line_1'] as String?,
-      addressLine2: json['address_line_2'] as String?,
-      district: json['district'] as String?,
-      region: json['region'] as String?,
     );
 
 Map<String, dynamic> _$PersonalInfoRequestToJson(
@@ -36,9 +31,4 @@ Map<String, dynamic> _$PersonalInfoRequestToJson(
       'country_of_birth': instance.countryOfBirth,
       'phone_country_code': instance.phoneCountryCode,
       'phone_number': instance.phoneNumber,
-      'phone_number_verified': instance.phoneNumberVerified,
-      'address_line_1': instance.addressLine1,
-      'address_line_2': instance.addressLine2,
-      'district': instance.district,
-      'region': instance.region,
     };

@@ -27,18 +27,6 @@ class PersonalInfoRequest extends Equatable {
   @JsonKey(name: 'phone_number')
   final String? phoneNumber;
 
-  @JsonKey(name: 'phone_number_verified')
-  final bool? phoneNumberVerified;
-
-  @JsonKey(name: 'address_line_1')
-  final String? addressLine1;
-
-  @JsonKey(name: 'address_line_2')
-  final String? addressLine2;
-
-  final String? district;
-  final String? region;
-
   const PersonalInfoRequest({
     this.firstName,
     this.lastName,
@@ -49,11 +37,6 @@ class PersonalInfoRequest extends Equatable {
     this.countryOfBirth,
     this.phoneCountryCode,
     this.phoneNumber,
-    this.phoneNumberVerified,
-    this.addressLine1,
-    this.addressLine2,
-    this.district,
-    this.region,
   });
 
   factory PersonalInfoRequest.fromJson(Map<String, dynamic> json) =>
@@ -72,10 +55,5 @@ class PersonalInfoRequest extends Equatable {
         countryOfBirth ?? '',
         phoneCountryCode ?? '',
         phoneNumber ?? '',
-        phoneNumberVerified ?? false,
-        addressLine1 ?? '',
-        addressLine2 ?? '',
-        district ?? '',
-        region ?? '',
       ];
 }
