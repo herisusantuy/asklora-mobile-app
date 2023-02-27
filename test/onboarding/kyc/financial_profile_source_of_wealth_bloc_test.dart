@@ -41,7 +41,7 @@ void main() async {
                   isActive: true,
                   additionalSourceOfWealth: null,
                 ),
-              ], totalAmount: 0, errorMessage: ''),
+              ], totalAmount: 0),
               const SourceOfWealthState(sourceOfWealthAnswers: [
                 SourceOfWealthModel(
                   sourceOfWealthType: SourceOfWealthType.incomeFromEmployment,
@@ -55,7 +55,7 @@ void main() async {
                   isActive: true,
                   additionalSourceOfWealth: null,
                 ),
-              ], totalAmount: 0, errorMessage: ''),
+              ], totalAmount: 0),
               const SourceOfWealthState(sourceOfWealthAnswers: [
                 SourceOfWealthModel(
                   sourceOfWealthType: SourceOfWealthType.incomeFromEmployment,
@@ -69,7 +69,7 @@ void main() async {
                   isActive: true,
                   additionalSourceOfWealth: null,
                 ),
-              ], totalAmount: 200, errorMessage: ''),
+              ], totalAmount: 200),
             });
     tearDown(() => sourceOfWealthBloc.close());
   });

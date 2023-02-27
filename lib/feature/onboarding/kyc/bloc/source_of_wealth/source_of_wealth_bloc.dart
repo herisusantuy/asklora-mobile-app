@@ -27,19 +27,19 @@ class SourceOfWealthBloc
         List.from(state.sourceOfWealthAnswers);
     SourceOfWealthModel? answer = sourceOfWealthAnswers.firstWhereOrNull(
         (element) => element.sourceOfWealthType == event.sourceOfWealthType);
-    int divideAmount = sourceOfWealthAnswers.isNotEmpty
-        ? 100 ~/ (sourceOfWealthAnswers.length + 1)
-        : 100;
+    // int divideAmount = sourceOfWealthAnswers.isNotEmpty
+    //     ? 100 ~/ (sourceOfWealthAnswers.length + 1)
+    //     : 100;
     if (answer == null) {
-      print('selected');
+      // print('selected');
       sourceOfWealthAnswers.add(SourceOfWealthModel(
         sourceOfWealthType: event.sourceOfWealthType,
-        amount: divideAmount,
+        amount: state.totalAmount == 0 ? 100 : 0,
         isActive: true,
       ));
     } else {
-      print('unselected');
-      sourceOfWealthAnswers.remove(answer);
+      // print('unselected');
+      // sourceOfWealthAnswers.remove(answer);
       answer = answer.copyWith(isActive: !answer.isActive);
       if (sourceOfWealthAnswers.isNotEmpty) {
         totalAmount =
@@ -48,13 +48,13 @@ class SourceOfWealthBloc
         totalAmount = 0;
       }
     }
-    print('length >> ${sourceOfWealthAnswers.length}');
-    List<int> arrayOfTotal =
-        sourceOfWealthAnswers.map((e) => e.amount).toList();
-    print('array of total>> $arrayOfTotal');
-    print('totalAmount >> $totalAmount');
-
-    print('divide amount>> $divideAmount');
+    // print('length >> ${sourceOfWealthAnswers.length}');
+    // List<int> arrayOfTotal =
+    //     sourceOfWealthAnswers.map((e) => e.amount).toList();
+    // print('array of total>> $arrayOfTotal');
+    // print('totalAmount >> $totalAmount');
+    //
+    // print('divide amount>> $divideAmount');
     emit(
       state.copyWith(
         sourceOfWealthAnswers: sourceOfWealthAnswers,
