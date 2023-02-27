@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
-
 import '../domain/fixture.dart';
+import '../domain/ppi_api_repository.dart';
 import '../domain/question.dart';
 
 class PpiQuestionRepository {
@@ -12,20 +11,34 @@ class PpiQuestionRepository {
 
   PpiQuestionRepository._();
 
-  final Fixture fixture = Fixture();
+  final PpiApiRepository _ppiApiRepository = PpiApiRepository();
 
-  Future<Fixture> fetchQuestions() async {
-    final String response =
-        await rootBundle.loadString('assets/json/question_list.json');
+  Future<Fixture> fetchPersonalAndPrivacyQuestions() async {
+    // Let's keep it for a while as sometimes it good to test the PPI from local file.
+    // final String response =
+    //     await rootBundle.loadString('assets/json/question_list.json');
 
-    Iterable iterable = json.decode(response);
-    var data = List<QuestionCollection>.from(
-        iterable.map((model) => QuestionCollection.fromJson(model)));
+    final response = await _ppiApiRepository.fetchPersonalAndPrivacyQuestions();
+    List<Question> questions = List.empty(growable: true);
 
-    return fixture.fixture(data);
+    questions = (jsonDecode(jsonEncode(response.data)) as List)
+        .map((i) => Question.fromJson(i))
+        .toList();
+    return Fixture.instance.fixPersonalisedQuestion(questions);
+  }
+
+  Future<Fixture> fetchInvestmentStyleQuestions(String accountId) async {
+    final response =
+        await _ppiApiRepository.fetchInvestmentStyleQuestions(accountId);
+    List<Question> questions = List.empty(growable: true);
+
+    questions = (jsonDecode(jsonEncode(response.data)) as List)
+        .map((i) => Question.fromJson(i))
+        .toList();
+    return Fixture.instance.fixInvestmentStyleQuestion(questions);
   }
 
   Future<Fixture> getQuestions() async {
-    return fixture;
+    return Fixture.instance;
   }
 }

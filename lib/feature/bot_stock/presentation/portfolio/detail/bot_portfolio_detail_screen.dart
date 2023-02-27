@@ -100,7 +100,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              contentPadding: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
               content: BlocConsumer<PortfolioBloc, PortfolioState>(
                   listenWhen: (previous, current) =>
                       previous.botPortfolioDetailResponse.state !=

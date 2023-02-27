@@ -50,7 +50,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
       child: BotStockForm(
           useHeader: true,
           title: '${botType.upperCaseName} ${botRecommendation.ticker}',
-          contentPadding: EdgeInsets.zero,
+          padding: EdgeInsets.zero,
           content: BlocConsumer<BotStockBloc, BotStockState>(
               listenWhen: (previous, current) =>
                   previous.botDetailResponse.state !=

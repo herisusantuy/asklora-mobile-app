@@ -17,6 +17,8 @@ import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_request.d
     as _i11;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart'
     as _i2;
+import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_with_otp_request.dart'
+    as _i12;
 import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart'
     as _i5;
 import 'package:dio/dio.dart' as _i4;
@@ -99,6 +101,35 @@ class MockSignInRepository extends _i1.Mock implements _i5.SignInRepository {
           ),
         )),
       ) as _i6.Future<_i2.SignInResponse>);
+  @override
+  _i6.Future<_i2.SignInResponse> signInWithOtp({
+    required String? otp,
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signInWithOtp,
+          [],
+          {
+            #otp: otp,
+            #email: email,
+            #password: password,
+          },
+        ),
+        returnValue: _i6.Future<_i2.SignInResponse>.value(_FakeSignInResponse_0(
+          this,
+          Invocation.method(
+            #signInWithOtp,
+            [],
+            {
+              #otp: otp,
+              #email: email,
+              #password: password,
+            },
+          ),
+        )),
+      ) as _i6.Future<_i2.SignInResponse>);
 }
 
 /// A class which mocks [UserJourneyRepository].
@@ -168,6 +199,23 @@ class MockSignInApiClient extends _i1.Mock implements _i10.SignInApiClient {
           this,
           Invocation.method(
             #signIn,
+            [request],
+          ),
+        )),
+      ) as _i6.Future<_i4.Response<dynamic>>);
+  @override
+  _i6.Future<_i4.Response<dynamic>> signInWithOtp(
+          _i12.SignInWithOtpRequest? request) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signInWithOtp,
+          [request],
+        ),
+        returnValue:
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
+          this,
+          Invocation.method(
+            #signInWithOtp,
             [request],
           ),
         )),

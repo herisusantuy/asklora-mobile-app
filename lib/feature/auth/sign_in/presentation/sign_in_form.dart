@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -12,12 +13,12 @@ import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/utils/extensions.dart';
-import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
-import '../../reset_password/presentation/reset_password_screen.dart';
+import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../bloc/sign_in_bloc.dart';
 
 class SignInForm extends StatelessWidget {
@@ -32,36 +33,30 @@ class SignInForm extends StatelessWidget {
       } else {
         CustomLoadingOverlay.dismiss();
       }
-      switch (state.response.state) {
-        case ResponseState.error:
-          context
-              .read<SignInBloc>()
-              .add(SignInEmailChanged(state.emailAddress));
 
-          CustomInAppNotification.show(context, state.response.message);
-          break;
-        case ResponseState.success:
+      var responseState = state.response.state;
+      if (responseState == ResponseState.error) {
+        context.read<SignInBloc>().add(SignInEmailChanged(state.emailAddress));
+        CustomInAppNotification.show(context, state.response.message);
+      } else if (responseState == ResponseState.success) {
+        var arguments = Pair(state.emailAddress, state.password);
+        if (state.isOtpRequired) {
+          OtpScreen.openReplace(context, arguments);
+        } else {
           UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
               (section) => section.value == state.response.data?.userJourney);
-          await SecureStorage()
-              .writeData('email', state.emailAddress)
-              .then((_) {
-            switch (userJourney) {
-              case UserJourney.kyc:
-                KycScreen.open(context);
-                break;
-              case UserJourney.investmentStyle:
-                InvestmentStyleWelcomeScreen.open(context);
-                break;
-              default:
-                OtpScreen.openReplace(context, state.emailAddress);
-                break;
-            }
-          });
-
-          break;
-        default:
-          break;
+          switch (userJourney) {
+            case UserJourney.kyc:
+              KycScreen.open(context);
+              break;
+            case UserJourney.investmentStyle:
+              InvestmentStyleWelcomeScreen.open(context);
+              break;
+            default:
+              TabsScreen.openAndRemoveAllRoute(context);
+              break;
+          }
+        }
       }
     }, child: LayoutBuilder(builder: (context, constraint) {
       return SingleChildScrollView(
@@ -123,7 +118,7 @@ class SignInForm extends StatelessWidget {
   Widget _forgotPasswordButton(context) => CustomTextButton(
       key: const Key('forgot_password_button'),
       label: 'FORGET PASSWORD?',
-      onTap: () => ResetPasswordScreen.open(context));
+      onTap: () => ForgotPasswordScreen.open(context));
 
   Widget _loginButton() => BlocBuilder<SignInBloc, SignInState>(
         builder: (context, state) {
