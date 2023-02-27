@@ -1,36 +1,34 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'affiliated_person.dart';
 import 'agreement.dart';
-import 'contact.dart';
-import 'disclosures.dart';
-import 'personal_info.dart';
+import 'employment_info.dart';
 import 'proofs_of_address.dart';
-import 'trusted_contact.dart';
+import 'residence.dart';
+import 'wealth_sources.dart';
 
 part 'upgrade_account_request.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UpgradeAccountRequest extends Equatable {
-  @JsonKey(name: 'personal_info')
-  final PersonalInfo? personalInfo;
-
+  final Residence? residence;
   @JsonKey(name: 'proofs_of_address')
   final List<ProofsOfAddress>? proofsOfAddress;
 
   @JsonKey(name: 'employment_info')
-  final ProofsOfAddress? employmentInfo;
+  final EmploymentInfo? employmentInfo;
 
   @JsonKey(name: 'wealth_sources')
-  final List<TrustedContact>? wealthSources;
+  final List<WealthSources>? wealthSources;
 
   @JsonKey(name: 'affiliated_person')
-  final TrustedContact? affiliatedPerson;
+  final AffiliatedPerson? affiliatedPerson;
 
   final List<Agreement>? agreements;
 
   const UpgradeAccountRequest({
-    this.personalInfo,
+    this.residence,
     this.proofsOfAddress,
     this.employmentInfo,
     this.wealthSources,
@@ -45,7 +43,7 @@ class UpgradeAccountRequest extends Equatable {
 
   @override
   List<Object> get props => [
-        personalInfo!,
+        residence!,
         proofsOfAddress!,
         employmentInfo!,
         wealthSources!,

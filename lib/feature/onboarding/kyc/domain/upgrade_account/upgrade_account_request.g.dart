@@ -9,23 +9,22 @@ part of 'upgrade_account_request.dart';
 UpgradeAccountRequest _$UpgradeAccountRequestFromJson(
         Map<String, dynamic> json) =>
     UpgradeAccountRequest(
-      personalInfo: json['personal_info'] == null
+      residence: json['residence'] == null
           ? null
-          : PersonalInfo.fromJson(
-              json['personal_info'] as Map<String, dynamic>),
+          : Residence.fromJson(json['residence'] as Map<String, dynamic>),
       proofsOfAddress: (json['proofs_of_address'] as List<dynamic>?)
           ?.map((e) => ProofsOfAddress.fromJson(e as Map<String, dynamic>))
           .toList(),
       employmentInfo: json['employment_info'] == null
           ? null
-          : ProofsOfAddress.fromJson(
+          : EmploymentInfo.fromJson(
               json['employment_info'] as Map<String, dynamic>),
       wealthSources: (json['wealth_sources'] as List<dynamic>?)
-          ?.map((e) => TrustedContact.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => WealthSources.fromJson(e as Map<String, dynamic>))
           .toList(),
       affiliatedPerson: json['affiliated_person'] == null
           ? null
-          : TrustedContact.fromJson(
+          : AffiliatedPerson.fromJson(
               json['affiliated_person'] as Map<String, dynamic>),
       agreements: (json['agreements'] as List<dynamic>?)
           ?.map((e) => Agreement.fromJson(e as Map<String, dynamic>))
@@ -35,7 +34,7 @@ UpgradeAccountRequest _$UpgradeAccountRequestFromJson(
 Map<String, dynamic> _$UpgradeAccountRequestToJson(
         UpgradeAccountRequest instance) =>
     <String, dynamic>{
-      'personal_info': instance.personalInfo?.toJson(),
+      'residence': instance.residence?.toJson(),
       'proofs_of_address':
           instance.proofsOfAddress?.map((e) => e.toJson()).toList(),
       'employment_info': instance.employmentInfo?.toJson(),
