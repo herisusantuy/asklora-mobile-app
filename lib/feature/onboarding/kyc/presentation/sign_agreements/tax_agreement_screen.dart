@@ -9,6 +9,7 @@ import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
+import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../financial_profile/widgets/dot_text.dart';
@@ -18,10 +19,10 @@ import '../widgets/kyc_sub_title.dart';
 
 class TaxAgreementScreen extends StatelessWidget {
   final double progress;
-  final String inputtedLegalName;
+  final BasicInformationState basicInformationState;
 
   const TaxAgreementScreen(
-      {required this.progress, required this.inputtedLegalName, Key? key})
+      {required this.progress, required this.basicInformationState, Key? key})
       : super(key: key);
 
   final Widget _spaceHeight = const SizedBox(
@@ -212,7 +213,8 @@ class TaxAgreementScreen extends StatelessWidget {
                 onChanged: (value) => context
                     .read<SigningAgreementBloc>()
                     .add(LegalNameSignatureChanged(value)),
-                hintText: inputtedLegalName,
+                hintText:
+                    '${basicInformationState.firstName} ${basicInformationState.lastName}',
               ),
             );
           });
@@ -234,8 +236,8 @@ class TaxAgreementScreen extends StatelessWidget {
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.kycSummary)),
-            disablePrimaryButton:
-                state.disableSignatureButton(inputtedLegalName),
+            disablePrimaryButton: state.disableSignatureButton(
+                '${basicInformationState.firstName} ${basicInformationState.lastName}'),
             secondaryButtonOnClick: () => CarouselScreen.open(context),
             primaryButtonLabel: 'AGREE',
             secondaryButtonLabel: 'CONTINUE LATER',

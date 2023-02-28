@@ -206,12 +206,10 @@ class KycScreen extends StatelessWidget {
                 progress: 0.8,
               );
             case KycPageStep.signTaxAgreements:
-              String inputtedLegalName =
-                  '${context.read<BasicInformationBloc>().state.firstName} ${context.read<BasicInformationBloc>().state.lastName}';
               return TaxAgreementScreen(
-                progress: 0.85,
-                inputtedLegalName: inputtedLegalName,
-              );
+                  progress: 0.85,
+                  basicInformationState:
+                      context.read<BasicInformationBloc>().state);
             case KycPageStep.kycSummary:
               return KycSummaryScreen(
                 basicInformationState:

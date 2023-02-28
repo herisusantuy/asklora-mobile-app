@@ -59,7 +59,7 @@ void main() async {
         'Checked first check box',
         build: () => signingBrokerAgreementBloc,
         act: (bloc) {
-          when(signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
+          when(signingBrokerAgreementRepository.openW8BenForm(
                   'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf'))
               .thenAnswer((_) => Future.value(true));
           bloc.add(const AlpacaCustomerAgreementOpened(true));
@@ -114,7 +114,7 @@ void main() async {
         'Draw Signature',
         build: () => signingBrokerAgreementBloc,
         act: (bloc) {
-          when(signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
+          when(signingBrokerAgreementRepository.openW8BenForm(
                   'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf'))
               .thenAnswer((_) => Future.value(true));
           bloc.add(const AlpacaCustomerAgreementOpened(true));
@@ -153,7 +153,7 @@ void main() async {
         'Reset Customer Signature',
         build: () => signingBrokerAgreementBloc,
         act: (bloc) {
-          when(signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
+          when(signingBrokerAgreementRepository.openW8BenForm(
                   'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf'))
               .thenAnswer((_) => Future.value(true));
           bloc.add(const AlpacaCustomerAgreementOpened(true));
