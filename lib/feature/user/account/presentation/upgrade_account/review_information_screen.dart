@@ -238,12 +238,6 @@ class ReviewInformationScreen extends StatelessWidget {
                         isChecked: state.isSigningAgreementChecked,
                         onChanged: (_) {}),
                     _spaceHeight(),
-                    if (state.customerSignature.isEmpty)
-                      ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.memory(
-                              base64Decode(state.customerSignature),
-                              height: 200)),
                   ],
                 )),
       );

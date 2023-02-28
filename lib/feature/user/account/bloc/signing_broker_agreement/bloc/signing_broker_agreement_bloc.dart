@@ -18,8 +18,6 @@ class SigningBrokerAgreementBloc
     on<UnderstoodAlpacaCustomAgreementChecked>(
         _onUnderstoodAlpacaCustomAgreementChecked);
     on<SigningAgreementChecked>(_onSigningAgreementChecked);
-    on<CustomerSignatureDrew>(_onCustomerSignatureDrew);
-    on<CustomerSignatureReset>(_onCustomerSignatureReset);
   }
 
   final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
@@ -51,21 +49,5 @@ class SigningBrokerAgreementBloc
       Emitter<SigningBrokerAgreementState> emit) {
     emit(state.copyWith(
         isSigningAgreementChecked: event.isSigningAgreementChecked));
-  }
-
-  _onCustomerSignatureDrew(CustomerSignatureDrew event,
-      Emitter<SigningBrokerAgreementState> emit) async {
-    if (event.customerSignature != null) {
-      emit(state.copyWith(
-          customerSignature: event.customerSignature,
-          isSignatureDrew: true,
-          signedTime: event.signedTime));
-    }
-  }
-
-  _onCustomerSignatureReset(
-      CustomerSignatureReset event, Emitter<SigningBrokerAgreementState> emit) {
-    emit(state.copyWith(
-        customerSignature: '', isSignatureDrew: false, signedTime: ''));
   }
 }

@@ -33,8 +33,6 @@ void main() async {
                     isAlpacaCustomerAgreementOpened: false,
                     isUnderstoodAlpacaCustomAgreementChecked: false,
                     isSigningAgreementChecked: false,
-                    isSignatureDrew: false,
-                    customerSignature: '',
                   )),
             });
 
@@ -49,11 +47,10 @@ void main() async {
         },
         expect: () => {
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: false,
-                  isSigningAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isUnderstoodAlpacaCustomAgreementChecked: false,
+                isSigningAgreementChecked: false,
+              ),
             });
     blocTest<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         'Checked first check box',
@@ -67,17 +64,15 @@ void main() async {
         },
         expect: () => {
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: false,
-                  isSigningAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isUnderstoodAlpacaCustomAgreementChecked: false,
+                isSigningAgreementChecked: false,
+              ),
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isSigningAgreementChecked: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isSigningAgreementChecked: true,
+                isUnderstoodAlpacaCustomAgreementChecked: false,
+              ),
             });
     blocTest<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         'Checked second check box',
@@ -92,23 +87,20 @@ void main() async {
         },
         expect: () => {
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isSigningAgreementChecked: false,
-                  isUnderstoodAlpacaCustomAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isSigningAgreementChecked: false,
+                isUnderstoodAlpacaCustomAgreementChecked: false,
+              ),
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isSigningAgreementChecked: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isSigningAgreementChecked: true,
+                isUnderstoodAlpacaCustomAgreementChecked: false,
+              ),
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isSigningAgreementChecked: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: true,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isSigningAgreementChecked: true,
+                isUnderstoodAlpacaCustomAgreementChecked: true,
+              ),
             });
     blocTest<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         'Draw Signature',
@@ -120,34 +112,23 @@ void main() async {
           bloc.add(const AlpacaCustomerAgreementOpened(true));
           bloc.add(const UnderstoodAlpacaCustomAgreementChecked(true));
           bloc.add(const SigningAgreementChecked(true));
-          bloc.add(const CustomerSignatureDrew('aaaaa', '2022-07-22T12:02'));
         },
         expect: () => {
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: false,
-                  isSigningAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isUnderstoodAlpacaCustomAgreementChecked: false,
+                isSigningAgreementChecked: false,
+              ),
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: true,
-                  isSigningAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isUnderstoodAlpacaCustomAgreementChecked: true,
+                isSigningAgreementChecked: false,
+              ),
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: true,
-                  isSigningAgreementChecked: true,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
-              const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: true,
-                  isSigningAgreementChecked: true,
-                  isSignatureDrew: true,
-                  customerSignature: 'aaaaa',
-                  signedTime: '2022-07-22T12:02'),
+                isAlpacaCustomerAgreementOpened: true,
+                isUnderstoodAlpacaCustomAgreementChecked: true,
+                isSigningAgreementChecked: true,
+              ),
             });
     blocTest<SigningBrokerAgreementBloc, SigningBrokerAgreementState>(
         'Reset Customer Signature',
@@ -159,42 +140,23 @@ void main() async {
           bloc.add(const AlpacaCustomerAgreementOpened(true));
           bloc.add(const UnderstoodAlpacaCustomAgreementChecked(true));
           bloc.add(const SigningAgreementChecked(true));
-          bloc.add(const CustomerSignatureDrew('aaaaa', '2022-07-22T12:02'));
-          bloc.add(const CustomerSignatureReset());
         },
         expect: () => {
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: false,
-                  isSigningAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isUnderstoodAlpacaCustomAgreementChecked: false,
+                isSigningAgreementChecked: false,
+              ),
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: true,
-                  isSigningAgreementChecked: false,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isUnderstoodAlpacaCustomAgreementChecked: true,
+                isSigningAgreementChecked: false,
+              ),
               const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: true,
-                  isSigningAgreementChecked: true,
-                  isSignatureDrew: false,
-                  customerSignature: ''),
-              const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: true,
-                  isSigningAgreementChecked: true,
-                  isSignatureDrew: true,
-                  customerSignature: 'aaaaa',
-                  signedTime: '2022-07-22T12:02'),
-              const SigningBrokerAgreementState(
-                  isAlpacaCustomerAgreementOpened: true,
-                  isUnderstoodAlpacaCustomAgreementChecked: true,
-                  isSigningAgreementChecked: true,
-                  isSignatureDrew: false,
-                  customerSignature: '',
-                  signedTime: ''),
+                isAlpacaCustomerAgreementOpened: true,
+                isUnderstoodAlpacaCustomAgreementChecked: true,
+                isSigningAgreementChecked: true,
+              ),
             });
 
     tearDown(() => signingBrokerAgreementBloc.close());

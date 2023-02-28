@@ -76,23 +76,17 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   List<Agreement> _generateAgreementList(String ipAddress) => [
         Agreement(
-            agreement: 'MA',
-            signedAt: signingBrokerAgreementBloc.state.signedTime,
-            ipAddress: ipAddress,
-            signature:
-                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+          agreement: 'MA',
+          ipAddress: ipAddress,
+        ),
         Agreement(
-            agreement: 'AA',
-            signedAt: signingBrokerAgreementBloc.state.signedTime,
-            ipAddress: ipAddress,
-            signature:
-                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+          agreement: 'AA',
+          ipAddress: ipAddress,
+        ),
         Agreement(
-            agreement: 'CA',
-            signedAt: signingBrokerAgreementBloc.state.signedTime,
-            ipAddress: ipAddress,
-            signature:
-                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}')
+          agreement: 'CA',
+          ipAddress: ipAddress,
+        )
       ];
 
   List<Context> _generateContextList() {
@@ -223,8 +217,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
         dateOfBirth:
             parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
-        signature:
-            'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
         date: parseDateFormatYYmmdd(DateTime.now().toString()),
         signerFullName:
             '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
