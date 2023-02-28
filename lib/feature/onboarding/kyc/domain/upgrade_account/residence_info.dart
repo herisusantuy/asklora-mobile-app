@@ -11,6 +11,7 @@ class ResidenceInfo extends Equatable {
   final String? addressLine2;
   final String? district;
   final String? region;
+  @JsonKey(includeIfNull: false)
   final String? country;
 
   const ResidenceInfo({

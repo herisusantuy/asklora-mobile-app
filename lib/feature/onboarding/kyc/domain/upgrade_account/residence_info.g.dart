@@ -15,11 +15,20 @@ ResidenceInfo _$ResidenceInfoFromJson(Map<String, dynamic> json) =>
       country: json['country'] as String?,
     );
 
-Map<String, dynamic> _$ResidenceInfoToJson(ResidenceInfo instance) =>
-    <String, dynamic>{
-      'address_line_1': instance.addressLine1,
-      'address_line_2': instance.addressLine2,
-      'district': instance.district,
-      'region': instance.region,
-      'country': instance.country,
-    };
+Map<String, dynamic> _$ResidenceInfoToJson(ResidenceInfo instance) {
+  final val = <String, dynamic>{
+    'address_line_1': instance.addressLine1,
+    'address_line_2': instance.addressLine2,
+    'district': instance.district,
+    'region': instance.region,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('country', instance.country);
+  return val;
+}
