@@ -58,6 +58,7 @@ class PersonalisationResultEndScreen extends StatelessWidget {
           final scores = state.snapShot?.scores;
 
           return PpiResultScreen(
+            ppiResult: PpiResult.success,
             memojiText: 'Do you know?',
             additionalMessage: _getMessage(scores),
             bottomButton: Padding(

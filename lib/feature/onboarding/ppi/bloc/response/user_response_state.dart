@@ -1,6 +1,11 @@
 part of 'user_response_bloc.dart';
 
-enum PpiResponseState { initAddResponse, finishAddResponse, dispatchResponse }
+enum PpiResponseState {
+  initAddResponse,
+  calculate,
+  finishAddResponse,
+  dispatchResponse
+}
 
 class UserResponseState extends Equatable {
   final ResponseState responseState;
@@ -44,13 +49,6 @@ class UserResponseState extends Equatable {
       snapShot: snapShot ?? this.snapShot,
     );
   }
-
-  List<PpiSelectionRequest> getAllSelectionsInRequest(int id) =>
-      userResponse
-          ?.map((e) => PpiSelectionRequest(
-              questionId: e.left, userId: id, answer: e.right))
-          .toList() ??
-      [];
 
   @override
   List<Object> get props => [
