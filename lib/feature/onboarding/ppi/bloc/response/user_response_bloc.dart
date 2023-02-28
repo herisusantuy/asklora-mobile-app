@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:collection/collection.dart';
 
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/domain/pair.dart';
 import '../../../../../core/domain/triplet.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/utils/storage/storage_keys.dart';
@@ -28,6 +33,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     on<SendBulkResponse>(_onSendBulkResponse);
     on<SaveUserResponse>(_onUserResponseSave);
     on<SaveOmniSearchResponse>(_onSaveOmniSearchResponse);
+    on<CalculateScore>(_onCalculateScore);
   }
 
   final PpiResponseRepository _ppiResponseRepository;
@@ -87,6 +93,19 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     emit(state);
   }
 
+  void _onCalculateScore(
+      CalculateScore event, Emitter<UserResponseState> emit) async {
+    emit(state.copyWith(
+      responseState: ResponseState.loading,
+      ppiResponseState: PpiResponseState.calculate,
+    ));
+    final result = await _isNotEligible();
+    emit(state.copyWith(
+      responseState: result ? ResponseState.error : ResponseState.success,
+      ppiResponseState: PpiResponseState.calculate,
+    ));
+  }
+
   void _onSendBulkResponse(
       SendBulkResponse event, Emitter<UserResponseState> emit) async {
     try {
@@ -97,7 +116,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       final tempId = await _sharedPreference.readIntData(sfKeyTempId) ?? 0;
 
-      var requests = state.getAllSelectionsInRequest(tempId);
+      var requests = _getAllSelectionsInRequest(tempId);
 
       await _ppiResponseRepository.addBulkAnswer(requests);
       var userSnapShot = await _ppiResponseRepository.getUserSnapShot(tempId);
@@ -114,4 +133,65 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       ));
     }
   }
+
+  Future<bool> _isNotEligible() async {
+    final scores = await _calculate();
+    return scores.left < 3 || scores.right < 3;
+  }
+
+  /// Assuming the last index (4) is for age. In case anything changes happen
+  /// in the PPI questioner we need to update this logic.
+  /// References:
+  ///   A5 -> Age,
+  ///   3rd index of list is "Risk Level" question.
+  ///   4th index of list is age question.
+  ///   Calculation Reference: https://loratechai.atlassian.net/wiki/spaces/SPD/pages/1144619026/PPI+Calculation
+  /// Returns a Pair<Suitability Score, Objective Score> of Suitability Score and Objective Score
+  Future<Pair<num, num>> _calculate() {
+    if (state.userResponse != null && state.userResponse!.isNotEmpty) {
+      final int age = int.parse(state.userResponse![4].right);
+      final List<num> scores = List.empty(growable: true);
+
+      for (var e in state.userResponse!) {
+        String? score = e.middle.choices
+                ?.firstWhereOrNull(
+                    (element) => element.id.toString() == e.right)
+                ?.score ??
+            '0';
+        scores.add(num.parse(score));
+      }
+
+      var ageScore = (6 - pow(age / 35, 2));
+
+      ageScore = ageScore <= 1
+          ? 1
+          : ageScore >= 5.5
+              ? 5.5
+              : ageScore;
+
+      scores.removeWhere((element) => element == 0);
+      scores.add(ageScore);
+
+      final mean = scores.reduce((a, b) => a + b) / scores.length;
+
+      final maxOfScores = scores.reduce(max);
+
+      var suitabilityScore = mean + maxOfScores / 2;
+
+      final objectiveScore = scores[3];
+
+      suitabilityScore = min(suitabilityScore, (objectiveScore + 0.5));
+
+      return Future.value(Pair(suitabilityScore, objectiveScore));
+    } else {
+      return Future.value(Pair(0, 0));
+    }
+  }
+
+  List<PpiSelectionRequest> _getAllSelectionsInRequest(int id) =>
+      state.userResponse
+          ?.map((e) => PpiSelectionRequest(
+              questionId: e.left, userId: id, answer: e.right))
+          .toList() ??
+      [];
 }
