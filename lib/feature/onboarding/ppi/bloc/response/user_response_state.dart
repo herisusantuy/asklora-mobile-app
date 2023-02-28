@@ -97,9 +97,9 @@ class UserResponseState extends Equatable {
 
       var suitabilityScore = mean + maxOfScores / 2;
 
-      final objectiveScore = scores[3] + 0.5;
+      final objectiveScore = scores[3];
 
-      suitabilityScore = min(suitabilityScore, objectiveScore);
+      suitabilityScore = min(suitabilityScore, (objectiveScore + 0.5));
 
       return Future.value(Pair(suitabilityScore, objectiveScore));
     } else {
