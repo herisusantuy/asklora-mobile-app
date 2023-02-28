@@ -20,10 +20,10 @@ class UpgradeAccountRequest extends Equatable {
   @JsonKey(name: 'employment_info')
   final EmploymentInfo? employmentInfo;
 
-  @JsonKey(name: 'wealth_sources')
+  @JsonKey(name: 'wealth_sources', includeIfNull: false)
   final List<WealthSources>? wealthSources;
 
-  @JsonKey(name: 'affiliated_person')
+  @JsonKey(name: 'affiliated_person', includeIfNull: false)
   final AffiliatedPerson? affiliatedPerson;
 
   final List<Agreement>? agreements;
@@ -34,7 +34,14 @@ class UpgradeAccountRequest extends Equatable {
     this.employmentInfo,
     this.wealthSources,
     this.affiliatedPerson,
-    this.agreements,
+    this.agreements = const [
+      Agreement(agreement: "MA"),
+      Agreement(agreement: "AA"),
+      Agreement(agreement: "CA"),
+      Agreement(agreement: "ACA"),
+      Agreement(agreement: "RDS"),
+      Agreement(agreement: "W8BEN"),
+    ],
   });
 
   factory UpgradeAccountRequest.fromJson(Map<String, dynamic> json) =>
