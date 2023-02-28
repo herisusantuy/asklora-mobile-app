@@ -55,18 +55,19 @@ enum FundingSource {
 }
 
 enum EmploymentStatus {
-  unemployed('Unemployed'),
-  employed('Employed'),
-  selfEmployed('Self Employed'),
-  retired('Retired'),
-  student('Student'),
-  atHomeTrader('At-Home Trader'),
-  homemaker('Homemaker'),
-  unknown('Unknown');
+  unemployed('Unemployed', 'UNEMPLOYED'),
+  employed('Employed', 'EMPLOYED'),
+  selfEmployed('Self Employed', 'SELFEMPLOYED'),
+  retired('Retired', 'RETIRED'),
+  student('Student', 'STUDENT'),
+  atHomeTrader('At-Home Trader', 'ATHOMETRADER'),
+  homemaker('Homemaker', 'HOMEMAKER'),
+  unknown('Unknown', 'UNKNOWN');
 
   final String value;
+  final String EnumString;
 
-  const EmploymentStatus(this.value);
+  const EmploymentStatus(this.value, this.EnumString);
 }
 
 enum NatureOfBusiness {
