@@ -7,7 +7,7 @@ class DemonstrationBotState extends Equatable {
     this.tradeChartDataResponse = const BaseResponse(),
   });
 
-  final BaseResponse<List<RecommendedBot>> botDemonstrationResponse;
+  final BaseResponse<List<BotRecommendationModel>> botDemonstrationResponse;
   final BaseResponse<List<ChartDataSet>> chartDataResponse;
   final BaseResponse<ChartStudioAnimationModel> tradeChartDataResponse;
 
@@ -17,7 +17,7 @@ class DemonstrationBotState extends Equatable {
   }
 
   DemonstrationBotState copyWith({
-    BaseResponse<List<RecommendedBot>>? botDemonstrationResponse,
+    BaseResponse<List<BotRecommendationModel>>? botDemonstrationResponse,
     BaseResponse<List<ChartDataSet>>? chartDataResponse,
     BaseResponse<ChartStudioAnimationModel>? tradeChartDataResponse,
   }) {

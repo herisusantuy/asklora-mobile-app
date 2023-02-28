@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/feature/onboarding/ppi/bloc/question/question_bloc.dart';
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_question_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -7,20 +8,23 @@ import 'package:mockito/annotations.dart';
 
 import 'question_bloc_test.mocks.dart';
 
-@GenerateMocks([PpiQuestionRepository])
+@GenerateMocks([PpiQuestionRepository, SharedPreference])
 void main() async {
   group('Question Bloc Tests', () {
     late PpiQuestionRepository ppiQuestionRepository;
     late QuestionBloc questionBloc;
+    late SharedPreference sharedPreference;
 
     setUpAll(() async {
       ppiQuestionRepository = MockPpiQuestionRepository();
+      sharedPreference = MockSharedPreference();
     });
 
     setUp(() async {
       questionBloc = QuestionBloc(
           ppiQuestionRepository: ppiQuestionRepository,
-          questionPageType: QuestionPageType.privacy);
+          questionPageType: QuestionPageType.privacy,
+          sharedPreference: sharedPreference);
     });
 
     test('Question Bloc init response should be BaseResponse', () {

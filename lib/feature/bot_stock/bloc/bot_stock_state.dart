@@ -5,17 +5,13 @@ class BotStockState extends Equatable {
       {this.botRecommendationResponse =
           const BaseResponse(state: ResponseState.loading),
       this.tradeBotStockResponse = const BaseResponse(),
-      this.endBotStockResponse = const BaseResponse(),
-      this.rolloverBotStockResponse = const BaseResponse(),
-      this.chartDataResponse = const BaseResponse(),
+      this.botDetailResponse = const BaseResponse(),
       this.faqActiveIndex,
       this.botStockTradeAmount = 0});
 
-  final BaseResponse<List<RecommendedBot>> botRecommendationResponse;
+  final BaseResponse<List<BotRecommendationModel>> botRecommendationResponse;
   final BaseResponse<bool> tradeBotStockResponse;
-  final BaseResponse<bool> endBotStockResponse;
-  final BaseResponse<bool> rolloverBotStockResponse;
-  final BaseResponse<List<ChartDataSet>> chartDataResponse;
+  final BaseResponse<BotDetailModel> botDetailResponse;
   final int? faqActiveIndex;
   final double botStockTradeAmount;
 
@@ -25,20 +21,18 @@ class BotStockState extends Equatable {
       botRecommendationResponse,
       faqActiveIndex,
       tradeBotStockResponse,
-      endBotStockResponse,
-      rolloverBotStockResponse,
-      chartDataResponse,
+      botDetailResponse,
       botStockTradeAmount,
     ];
   }
 
   BotStockState copyWith({
-    BaseResponse<List<RecommendedBot>>? botRecommendationResponse,
+    BaseResponse<List<BotRecommendationModel>>? botRecommendationResponse,
     BaseResponse<List<RecommendedBot>>? botPortfolioResponse,
     BaseResponse<bool>? tradeBotStockResponse,
     BaseResponse<bool>? endBotStockResponse,
     BaseResponse<bool>? rolloverBotStockResponse,
-    BaseResponse<List<ChartDataSet>>? chartDataResponse,
+    BaseResponse<BotDetailModel>? botDetailResponse,
     int? faqActiveIndex,
     double? botStockTradeAmount,
   }) {
@@ -47,10 +41,7 @@ class BotStockState extends Equatable {
           botRecommendationResponse ?? this.botRecommendationResponse,
       tradeBotStockResponse:
           tradeBotStockResponse ?? this.tradeBotStockResponse,
-      endBotStockResponse: endBotStockResponse ?? this.endBotStockResponse,
-      rolloverBotStockResponse:
-          rolloverBotStockResponse ?? this.rolloverBotStockResponse,
-      chartDataResponse: chartDataResponse ?? this.chartDataResponse,
+      botDetailResponse: botDetailResponse ?? this.botDetailResponse,
       faqActiveIndex: faqActiveIndex,
       botStockTradeAmount: botStockTradeAmount ?? this.botStockTradeAmount,
     );

@@ -10,7 +10,7 @@ class BotStockForm extends StatelessWidget {
   final bool enableBackNavigation;
   final Widget content;
   final Widget bottomButton;
-  final EdgeInsets contentPadding;
+  final EdgeInsets padding;
   final String title;
   final Color backgroundColor;
   final bool useHeader;
@@ -25,7 +25,7 @@ class BotStockForm extends StatelessWidget {
       required this.bottomButton,
       this.useHeader = false,
       this.backgroundColor = AskLoraColors.white,
-      this.contentPadding = AppValues.screenHorizontalPadding,
+      this.padding = AppValues.screenHorizontalPadding,
       this.customHeader,
       this.onTapBack})
       : super(key: key);
@@ -45,7 +45,7 @@ class BotStockForm extends StatelessWidget {
             : null,
         content: content,
         bottomButton: bottomButton,
-        contentPadding: contentPadding,
+        padding: padding,
       ),
     );
   }

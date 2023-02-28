@@ -1,7 +1,11 @@
 abstract class Storage {
   Future<void> writeData(String key, String value);
 
+  Future<void> writeIntData(String key, int value);
+
   Future<String?> readData(String key);
+
+  Future<int?> readIntData(String key);
 
   Future<void> deleteData(String key);
 

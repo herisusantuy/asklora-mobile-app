@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/we_create/custom_centered_text_input.dart';
 import '../../../bloc/response/user_response_bloc.dart';
-import '../../../domain/ppi_user_response_request.dart';
 import '../../../domain/question.dart';
 import '../header.dart';
 import '../question_navigation_button_widget.dart';
@@ -13,7 +12,7 @@ import 'bloc/descriptive_question_widget_bloc.dart';
 
 class DescriptiveQuestionWidget extends StatelessWidget {
   final String defaultAnswer;
-  final QuestionCollection questionCollection;
+  final Question question;
   final Function onSubmitSuccess;
   final Function() onCancel;
   final TextInputType textInputType;
@@ -21,7 +20,7 @@ class DescriptiveQuestionWidget extends StatelessWidget {
 
   const DescriptiveQuestionWidget(
       {this.defaultAnswer = '',
-      required this.questionCollection,
+      required this.question,
       required this.onSubmitSuccess,
       required this.onCancel,
       this.textInputType = TextInputType.text,
@@ -54,22 +53,26 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                     Column(
                       children: [
                         QuestionTitle(
-                          question: questionCollection.questions!.question!,
+                          question: question.question!,
                         ),
                         const SizedBox(
                           height: 16,
                         ),
-                        CustomCenteredTextInput(
-                            key: const Key('name_input'),
-                            maxLength: 2,
-                            onChanged: (value) => context
-                                .read<DescriptiveQuestionWidgetBloc>()
-                                .add(AnswerChanged(value)),
-                            hintText: 'Age',
-                            textInputFormatterList: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            textInputType: TextInputType.number),
+                        BlocBuilder<DescriptiveQuestionWidgetBloc,
+                            DescriptiveQuestionWidgetState>(
+                          builder: (context, state) => CustomCenteredTextInput(
+                              key: const Key('name_input'),
+                              maxLength: 2,
+                              onChanged: (value) => context
+                                  .read<DescriptiveQuestionWidgetBloc>()
+                                  .add(AnswerChanged(value)),
+                              hintText: 'Age',
+                              initialValue: state.answer,
+                              textInputFormatterList: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              textInputType: TextInputType.number),
+                        ),
                       ],
                     ),
                     BlocBuilder<DescriptiveQuestionWidgetBloc,
@@ -82,16 +85,12 @@ class DescriptiveQuestionWidget extends StatelessWidget {
                               onSubmitSuccess: onSubmitSuccess,
                               onNext: () => context
                                   .read<UserResponseBloc>()
-                                  .add(SendResponse(PpiUserResponseRequest(
-                                    questionId: questionCollection.uid!,
-                                    section:
-                                        questionCollection.questions!.section!,
-                                    types: questionCollection.questions!.types!,
-                                    points: context
-                                        .read<DescriptiveQuestionWidgetBloc>()
-                                        .state
-                                        .answer,
-                                  ))),
+                                  .add(SaveUserResponse(
+                                      question,
+                                      context
+                                          .read<DescriptiveQuestionWidgetBloc>()
+                                          .state
+                                          .answer)),
                               onCancel: onCancel,
                             ))
                   ],

@@ -3,7 +3,7 @@ part of '../demonstration_bot_screen.dart';
 class DemonstrationBotList extends StatelessWidget {
   final BotType botType;
   final double _spacing = 16;
-  final double botCardHeight = 165;
+  final double botCardHeight = 166;
   final double blurPadding;
   final double verticalMargin;
   final JustTheController tooltipController;
@@ -28,7 +28,7 @@ class DemonstrationBotList extends StatelessWidget {
             if (state.botDemonstrationResponse.state == ResponseState.success) {
               return _listData(
                   context: context,
-                  recommendedBots: state.botDemonstrationResponse.data!);
+                  botRecommendationModel: state.botDemonstrationResponse.data!);
             } else {
               return _listShimmer();
             }
@@ -39,7 +39,7 @@ class DemonstrationBotList extends StatelessWidget {
   Widget _listShimmer() => Wrap(
         spacing: _spacing,
         runSpacing: _spacing,
-        children: defaultRecommendedBots
+        children: defaultBotRecommendation
             .map((e) => BotRecommendationCardShimmer(
                   height: botCardHeight,
                   spacing: _spacing,
@@ -48,37 +48,38 @@ class DemonstrationBotList extends StatelessWidget {
       );
 
   Widget _listData(
-          {required BuildContext context,
-          required List<RecommendedBot> recommendedBots}) =>
-      Wrap(
-        spacing: _spacing,
-        runSpacing: _spacing,
-        children: recommendedBots
-            .map((e) => e.selectable && e.botType == botType.value
-                ? DemonstrationTooltipGuide(
-                    verticalOffset: 10,
-                    horizontalOffset: 110,
-                    text: 'Trade this!',
-                    tooltipController: tooltipController,
-                    showImmediately: false,
-                    child: BotRecommendationCard(
-                      onTap: () => context
-                          .read<NavigationBloc<LearningBotStockPageStep>>()
-                          .add(const PageChanged(
-                              LearningBotStockPageStep.botDetail)),
-                      height: botCardHeight,
-                      spacing: _spacing,
-                      recommendedBot: e,
-                      isDisabled: false,
-                    ),
-                  )
-                : BotRecommendationCard(
-                    onTap: () {},
+      {required BuildContext context,
+      required List<BotRecommendationModel> botRecommendationModel}) {
+    return Wrap(
+      spacing: _spacing,
+      runSpacing: _spacing,
+      children: botRecommendationModel
+          .map((e) => e.selectable && e.botAppType == botType.value
+              ? DemonstrationTooltipGuide(
+                  verticalOffset: 10,
+                  horizontalOffset: 110,
+                  text: 'Trade this!',
+                  tooltipController: tooltipController,
+                  showImmediately: false,
+                  child: BotRecommendationCard(
+                    onTap: () => context
+                        .read<NavigationBloc<LearningBotStockPageStep>>()
+                        .add(const PageChanged(
+                            LearningBotStockPageStep.botDetail)),
                     height: botCardHeight,
                     spacing: _spacing,
-                    recommendedBot: e,
-                    isDisabled: true,
-                  ))
-            .toList(),
-      );
+                    botRecommendationModel: e,
+                    isDisabled: false,
+                  ),
+                )
+              : BotRecommendationCard(
+                  onTap: () {},
+                  height: botCardHeight,
+                  spacing: _spacing,
+                  botRecommendationModel: e,
+                  isDisabled: true,
+                ))
+          .toList(),
+    );
+  }
 }

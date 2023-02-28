@@ -19,13 +19,13 @@ import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
-import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/currency_dropdown.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
-import 'domain/portfolio_detail_response.dart';
+import 'domain/portfolio_bot_model.dart';
+import 'domain/portfolio_response.dart';
 import 'repository/portfolio_repository.dart';
 import 'utils/portfolio_enum.dart';
 import 'widgets/bot_portfolio_pop_up.dart';
@@ -55,7 +55,7 @@ class PortfolioScreen extends StatelessWidget {
             source: context.read<AppBloc>().state.userJourney,
             target: UserJourney.freeBotStock)) {
           portfolioBloc.add(const FetchBotPortfolio());
-          portfolioBloc.add(FetchPortfolioDetail());
+          portfolioBloc.add(FetchPortfolio());
         }
         return portfolioBloc;
       },
@@ -95,12 +95,10 @@ class PortfolioScreen extends StatelessWidget {
   Widget get _botStockDetail {
     return BlocBuilder<PortfolioBloc, PortfolioState>(
         buildWhen: (previous, current) =>
-            previous.portfolioDetailResponse !=
-                current.portfolioDetailResponse ||
+            previous.portfolioResponse != current.portfolioResponse ||
             previous.currency != current.currency,
         builder: (context, state) {
-          final PortfolioDetailResponse? data =
-              state.portfolioDetailResponse.data;
+          final PortfolioResponse? data = state.portfolioResponse.data;
 
           return Column(
             children: [

@@ -6,15 +6,15 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_detail_response.dart'
+import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_bot_detail_model.dart'
     as _i8;
+import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart'
+    as _i5;
+import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_response.dart'
+    as _i7;
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/repository/portfolio_repository.dart'
     as _i3;
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart'
-    as _i7;
-import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
-    as _i5;
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -50,54 +50,98 @@ class MockPortfolioRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.BaseResponse<List<_i5.ChartDataSet>>> fetchChartDataJson() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #fetchChartDataJson,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.BaseResponse<List<_i5.ChartDataSet>>>.value(
-            _FakeBaseResponse_0<List<_i5.ChartDataSet>>(
-          this,
-          Invocation.method(
-            #fetchChartDataJson,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.BaseResponse<List<_i5.ChartDataSet>>>);
-  @override
-  _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>> fetchBotPortfolio(
-          _i7.BotStockFilter? botStockFilter) =>
+  _i4.Future<_i2.BaseResponse<List<_i5.PortfolioBotModel>>> fetchBotPortfolio(
+          _i6.BotStockFilter? botStockFilter) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchBotPortfolio,
           [botStockFilter],
         ),
         returnValue:
-            _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>.value(
-                _FakeBaseResponse_0<List<_i6.RecommendedBot>>(
+            _i4.Future<_i2.BaseResponse<List<_i5.PortfolioBotModel>>>.value(
+                _FakeBaseResponse_0<List<_i5.PortfolioBotModel>>(
           this,
           Invocation.method(
             #fetchBotPortfolio,
             [botStockFilter],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<List<_i6.RecommendedBot>>>);
+      ) as _i4.Future<_i2.BaseResponse<List<_i5.PortfolioBotModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i8.PortfolioDetailResponse>>
-      fetchPortfolioDetail() => (super.noSuchMethod(
+  _i4.Future<_i2.BaseResponse<_i7.PortfolioResponse>> fetchPortfolio() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchPortfolio,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i7.PortfolioResponse>>.value(
+            _FakeBaseResponse_0<_i7.PortfolioResponse>(
+          this,
+          Invocation.method(
+            #fetchPortfolio,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i7.PortfolioResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i8.PortfolioBotDetailModel>>
+      fetchBotPortfolioDetail(
+    String? ticker,
+    String? botId,
+  ) =>
+          (super.noSuchMethod(
             Invocation.method(
-              #fetchPortfolioDetail,
-              [],
+              #fetchBotPortfolioDetail,
+              [
+                ticker,
+                botId,
+              ],
             ),
             returnValue:
-                _i4.Future<_i2.BaseResponse<_i8.PortfolioDetailResponse>>.value(
-                    _FakeBaseResponse_0<_i8.PortfolioDetailResponse>(
+                _i4.Future<_i2.BaseResponse<_i8.PortfolioBotDetailModel>>.value(
+                    _FakeBaseResponse_0<_i8.PortfolioBotDetailModel>(
               this,
               Invocation.method(
-                #fetchPortfolioDetail,
-                [],
+                #fetchBotPortfolioDetail,
+                [
+                  ticker,
+                  botId,
+                ],
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<_i8.PortfolioDetailResponse>>);
+          ) as _i4.Future<_i2.BaseResponse<_i8.PortfolioBotDetailModel>>);
+  @override
+  _i4.Future<_i2.BaseResponse<bool>> rolloverBotStock(
+          _i5.PortfolioBotModel? portfolioBotModel) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #rolloverBotStock,
+          [portfolioBotModel],
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
+          this,
+          Invocation.method(
+            #rolloverBotStock,
+            [portfolioBotModel],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<bool>>);
+  @override
+  _i4.Future<_i2.BaseResponse<bool>> endBotStock(
+          _i5.PortfolioBotModel? portfolioBotModel) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #endBotStock,
+          [portfolioBotModel],
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
+          this,
+          Invocation.method(
+            #endBotStock,
+            [portfolioBotModel],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<bool>>);
 }

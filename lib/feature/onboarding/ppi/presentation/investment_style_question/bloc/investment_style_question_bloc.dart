@@ -18,28 +18,26 @@ class InvestmentStyleQuestionBloc
   }
 
   int _investmentStyleQuestionIndex;
-  List<QuestionCollection> investmentStyleQuestions =
-      Fixture().investmentStyleQuestion;
+  List<Question> investmentStyleQuestions =
+      Fixture.instance.getInvestmentStyleQuestion;
 
   void _onNavigationStepChanged(
       NextQuestion event, Emitter<InvestmentStyleQuestionState> emit) {
     ++_investmentStyleQuestionIndex;
     if (_investmentStyleQuestionIndex < investmentStyleQuestions.length) {
-      QuestionCollection question =
+      Question question =
           investmentStyleQuestions[_investmentStyleQuestionIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.choices, question,
+      if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(QuestionType.choices, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
-      } else if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
+      } else if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
-      } else if (question.questions!.types == QuestionType.omniSearch.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.omniSearch, question,
+      } else if (question.questionType == QuestionType.omniSearch.value) {
+        emit(OnNextQuestion<Question>(QuestionType.omniSearch, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
-      } else if (question.questions!.types == QuestionType.slider.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
+      } else if (question.questionType == QuestionType.slider.value) {
+        emit(OnNextQuestion<Question>(QuestionType.slider, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       }
     } else {
@@ -51,21 +49,19 @@ class InvestmentStyleQuestionBloc
       PreviousQuestion event, Emitter<InvestmentStyleQuestionState> emit) {
     --_investmentStyleQuestionIndex;
     if (_investmentStyleQuestionIndex >= 0) {
-      QuestionCollection question =
+      Question question =
           investmentStyleQuestions[_investmentStyleQuestionIndex];
-      if (question.questions!.types == QuestionType.choices.value) {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.choices, question,
+      if (question.questionType == QuestionType.choices.value) {
+        emit(OnNextQuestion<Question>(QuestionType.choices, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
-      } else if (question.questions!.types == QuestionType.descriptive.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.descriptive, question,
+      } else if (question.questionType == QuestionType.descriptive.value) {
+        emit(OnNextQuestion<Question>(QuestionType.descriptive, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
-      } else if (question.questions!.types == QuestionType.omniSearch.value) {
-        emit(OnNextQuestion<QuestionCollection>(
-            QuestionType.omniSearch, question,
+      } else if (question.questionType == QuestionType.omniSearch.value) {
+        emit(OnNextQuestion<Question>(QuestionType.omniSearch, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       } else {
-        emit(OnNextQuestion<QuestionCollection>(QuestionType.slider, question,
+        emit(OnNextQuestion<Question>(QuestionType.slider, question,
             investmentStyleQuestionIndex: _investmentStyleQuestionIndex));
       }
     } else if (_investmentStyleQuestionIndex < 0) {

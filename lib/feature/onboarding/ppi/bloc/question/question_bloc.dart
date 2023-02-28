@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/utils/storage/shared_preference.dart';
+import '../../../../../core/utils/storage/storage_keys.dart';
+import '../../domain/fixture.dart';
 import '../../repository/ppi_question_repository.dart';
 
 part 'question_event.dart';
@@ -21,11 +24,13 @@ enum QuestionPageStep {
 enum QuestionPageType { privacy, personalisation, investmentStyle }
 
 class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
-  QuestionBloc(
-      {required PpiQuestionRepository ppiQuestionRepository,
-      required QuestionPageType questionPageType})
-      : _questionCollectionRepository = ppiQuestionRepository,
+  QuestionBloc({
+    required PpiQuestionRepository ppiQuestionRepository,
+    required QuestionPageType questionPageType,
+    required SharedPreference sharedPreference,
+  })  : _questionCollectionRepository = ppiQuestionRepository,
         _questionPageType = questionPageType,
+        _sharedPreference = sharedPreference,
         super(const QuestionState()) {
     on<LoadQuestions>(_onLoadQuestions);
     on<PrivacyQuestionIndexChanged>(_onPrivacyQuestionIndexChanged);
@@ -46,6 +51,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
 
   final PpiQuestionRepository _questionCollectionRepository;
   final QuestionPageType _questionPageType;
+  final SharedPreference _sharedPreference;
 
   void _onPrivacyQuestionIndexChanged(
       PrivacyQuestionIndexChanged event, Emitter<QuestionState> emit) {
@@ -67,23 +73,41 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   void _onLoadQuestions(
       LoadQuestions event, Emitter<QuestionState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
-    var data = await _questionCollectionRepository.fetchQuestions();
-    //+1 for privacy result
-    int totalPrivacyPages = data.privacyQuestions.length + 1;
-    emit(state.copyWith(
-        response: BaseResponse.complete(data),
-        currentPrivacyPages: _questionPageType == QuestionPageType.privacy
-            ? 1
-            : totalPrivacyPages,
-        currentInvestmentStylePages:
-            _questionPageType == QuestionPageType.investmentStyle ? 1 : 0,
-        currentPersonalisationPages:
-            _questionPageType == QuestionPageType.personalisation ? 1 : 0,
-        totalPrivacyPages: totalPrivacyPages,
-        //+1 for personalisation result
-        totalPersonalisationPages: data.personalisedQuestion.length + 1,
-        //+1 for investmentStyle result
-        totalInvestmentStylePages: data.investmentStyleQuestion.length + 1));
+    try {
+      late final Fixture fixture;
+      if (_questionPageType == QuestionPageType.privacy) {
+        fixture = await _questionCollectionRepository
+            .fetchPersonalAndPrivacyQuestions();
+      } else {
+        final accountId = await _sharedPreference.readData(sfKeyTempName);
+
+        fixture = await _questionCollectionRepository
+            .fetchInvestmentStyleQuestions(accountId ?? '');
+      }
+
+      emit(state.copyWith(response: BaseResponse.complete(fixture)));
+      //+1 for privacy result
+      int totalPrivacyPages = fixture.getPrivacyQuestions.length + 1;
+      emit(state.copyWith(
+          response: BaseResponse.complete(fixture),
+          currentPrivacyPages: _questionPageType == QuestionPageType.privacy
+              ? 1
+              : totalPrivacyPages,
+          currentInvestmentStylePages:
+              _questionPageType == QuestionPageType.investmentStyle ? 1 : 0,
+          currentPersonalisationPages:
+              _questionPageType == QuestionPageType.personalisation ? 1 : 0,
+          totalPrivacyPages: totalPrivacyPages,
+          //+1 for personalisation result
+          totalPersonalisationPages: fixture.getPersonalisedQuestion.length + 1,
+          //+1 for investmentStyle result
+          totalInvestmentStylePages:
+              fixture.getInvestmentStyleQuestion.length + 1));
+    } catch (e) {
+      emit(state.copyWith(
+          response:
+              BaseResponse.error('Please try again! Something went wrong.')));
+    }
   }
 
   void _onCurrentPrivacyPageIncremented(

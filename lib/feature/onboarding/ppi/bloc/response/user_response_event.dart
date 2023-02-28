@@ -5,7 +5,7 @@ abstract class UserResponseEvent extends Equatable {
 }
 
 class SendResponse extends UserResponseEvent {
-  final PpiUserResponseRequest ppiUserResponseRequest;
+  final PpiSelectionRequest ppiUserResponseRequest;
 
   @override
   List<Object?> get props => [ppiUserResponseRequest];
@@ -13,13 +13,30 @@ class SendResponse extends UserResponseEvent {
   const SendResponse(this.ppiUserResponseRequest);
 }
 
-class SendBulkResponse extends UserResponseEvent {
-  final List<PpiUserResponseRequest> ppiUserResponseRequest;
+class SaveUserResponse extends UserResponseEvent {
+  final Question question;
+  final String selectedAnswer;
+
+  const SaveUserResponse(this.question, this.selectedAnswer);
 
   @override
-  List<Object?> get props => [ppiUserResponseRequest];
+  List<Object?> get props => [question, selectedAnswer];
+}
 
-  const SendBulkResponse(this.ppiUserResponseRequest);
+class SaveOmniSearchResponse extends UserResponseEvent {
+  final List<String> cachedSelectedChoices;
+  final List<String> cachedDefaultChoices;
+
+  const SaveOmniSearchResponse(
+      this.cachedSelectedChoices, this.cachedDefaultChoices);
+
+  @override
+  List<Object?> get props => [cachedSelectedChoices, cachedDefaultChoices];
+}
+
+class SendBulkResponse extends UserResponseEvent {
+  @override
+  List<Object?> get props => [DateTime.now().millisecondsSinceEpoch];
 }
 
 class SkipResponse extends UserResponseEvent {
@@ -29,11 +46,11 @@ class SkipResponse extends UserResponseEvent {
   const SkipResponse();
 }
 
-class UpdateppiUserResponse extends UserResponseEvent {
+class UpdatePpiUserResponse extends UserResponseEvent {
   final PpiUserResponse ppiUserResponse;
 
   @override
   List<Object?> get props => [ppiUserResponse];
 
-  const UpdateppiUserResponse(this.ppiUserResponse);
+  const UpdatePpiUserResponse(this.ppiUserResponse);
 }

@@ -3,7 +3,7 @@ part of 'demonstration_question_bloc.dart';
 class DemonstrationQuestionState extends Equatable {
   final int questionIndex;
   final List<bool> questionAnsweredList;
-  final List<QuestionCollection> questionCollection;
+  final List<Question> questionCollection;
 
   const DemonstrationQuestionState(
       {this.questionIndex = 0,
@@ -14,7 +14,7 @@ class DemonstrationQuestionState extends Equatable {
   DemonstrationQuestionState copyWith({
     int? questionIndex,
     List<bool>? questionAnsweredList,
-    List<QuestionCollection>? questionCollection,
+    List<Question>? questionCollection,
   }) {
     return DemonstrationQuestionState(
         questionIndex: questionIndex ?? this.questionIndex,

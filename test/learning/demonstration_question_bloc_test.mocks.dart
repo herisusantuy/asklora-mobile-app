@@ -32,13 +32,11 @@ class MockDemonstrationQuestionRepository extends _i1.Mock
   }
 
   @override
-  _i3.Future<List<_i4.QuestionCollection>> fetchQuestions() =>
-      (super.noSuchMethod(
+  _i3.Future<List<_i4.Question>> fetchQuestions() => (super.noSuchMethod(
         Invocation.method(
           #fetchQuestions,
           [],
         ),
-        returnValue: _i3.Future<List<_i4.QuestionCollection>>.value(
-            <_i4.QuestionCollection>[]),
-      ) as _i3.Future<List<_i4.QuestionCollection>>);
+        returnValue: _i3.Future<List<_i4.Question>>.value(<_i4.Question>[]),
+      ) as _i3.Future<List<_i4.Question>>);
 }

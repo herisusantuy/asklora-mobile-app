@@ -2,7 +2,7 @@ part of '../bot_recommendation_screen.dart';
 
 class BotRecommendationList extends StatelessWidget {
   final double _spacing = 16;
-  final double botCardHeight = 165;
+  final double botCardHeight = 166;
   final double blurPadding;
   final double verticalMargin;
 
@@ -17,22 +17,23 @@ class BotRecommendationList extends StatelessWidget {
             previous.botRecommendationResponse.state !=
             current.botRecommendationResponse.state,
         builder: (context, state) {
-          if (state.botRecommendationResponse.state == ResponseState.success) {
+          if (state.botRecommendationResponse.state == ResponseState.success &&
+              state.botRecommendationResponse.data!.isNotEmpty) {
             return Container(
               margin: EdgeInsets.symmetric(vertical: verticalMargin),
               padding: AppValues.screenHorizontalPadding,
               child: Wrap(
                 spacing: _spacing,
                 runSpacing: _spacing,
-                children: state.botRecommendationResponse.data!
-                    .map((e) => BotRecommendationCard(
-                          onTap: () => BotRecommendationDetailScreen.open(
-                              context: context, recommendedBot: e),
-                          height: botCardHeight,
-                          spacing: _spacing,
-                          recommendedBot: e,
-                        ))
-                    .toList(),
+                children: state.botRecommendationResponse.data!.map((e) {
+                  return BotRecommendationCard(
+                    onTap: () => BotRecommendationDetailScreen.open(
+                        context: context, botRecommendationModel: e),
+                    height: botCardHeight,
+                    spacing: _spacing,
+                    botRecommendationModel: e,
+                  );
+                }).toList(),
               ),
             );
           } else if (state.botRecommendationResponse.state ==
@@ -43,7 +44,7 @@ class BotRecommendationList extends StatelessWidget {
               child: Wrap(
                 spacing: _spacing,
                 runSpacing: _spacing,
-                children: defaultRecommendedBots
+                children: defaultBotRecommendation
                     .map((e) => BotRecommendationCardShimmer(
                           height: botCardHeight,
                           spacing: _spacing,
@@ -64,11 +65,11 @@ class BotRecommendationList extends StatelessWidget {
                     child: Wrap(
                       spacing: _spacing,
                       runSpacing: _spacing,
-                      children: defaultRecommendedBots
+                      children: defaultBotRecommendation
                           .map((e) => BotRecommendationCard(
                                 onTap: () {},
                                 height: botCardHeight,
-                                recommendedBot: e,
+                                botRecommendationModel: e,
                                 spacing: _spacing,
                               ))
                           .toList(),
@@ -82,18 +83,21 @@ class BotRecommendationList extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Center(
+                  Center(
                     child: Padding(
                       padding: AppValues.screenHorizontalPadding,
                       child: LoraPopUpMessage(
                         backgroundColor: AskLoraColors.charcoal,
-                        title: 'No Botstock recommendation.',
+                        title: 'No Botstock recommendations',
                         titleColor: AskLoraColors.white,
                         subTitle:
-                            'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
+                            'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
                         subTitleColor: AskLoraColors.white,
-                        buttonLabel: 'CREATE AN ACCOUNT',
+                        buttonLabel: 'RETAKE INVESTMENT STYLE',
                         buttonPrimaryType: ButtonPrimaryType.solidGreen,
+                        onPrimaryButtonTap: () => PpiScreen.open(context,
+                            arguments: Pair(QuestionPageType.investmentStyle,
+                                QuestionPageStep.investmentStyle)),
                       ),
                     ),
                   )
@@ -105,7 +109,7 @@ class BotRecommendationList extends StatelessWidget {
   }
 
   double get _getListHeight =>
-      botCardHeight * defaultRecommendedBots.length / 2 +
-      _spacing * ((defaultRecommendedBots.length / 2).ceil() - 1) +
+      botCardHeight * defaultBotRecommendation.length / 2 +
+      _spacing * ((defaultBotRecommendation.length / 2).ceil() - 1) +
       2 * blurPadding;
 }

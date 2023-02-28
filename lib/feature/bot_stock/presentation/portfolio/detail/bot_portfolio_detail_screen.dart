@@ -12,11 +12,11 @@ import '../../../../../core/presentation/lora_popup_message/lora_popup_message.d
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../chart/presentation/chart_animation.dart';
-import '../../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
@@ -27,6 +27,8 @@ import '../../widgets/bot_stock_form.dart';
 import '../../widgets/pair_column_text.dart';
 import '../../widgets/custom_detail_expansion_tile.dart';
 import '../bloc/portfolio_bloc.dart';
+import '../domain/portfolio_bot_detail_model.dart';
+import '../domain/portfolio_bot_model.dart';
 import '../repository/portfolio_repository.dart';
 import '../utils/portfolio_enum.dart';
 
@@ -36,7 +38,7 @@ part 'widgets/performance.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
   static const String route = '/bot_portfolio_detail_screen';
-  final RecommendedBot recommendedBot;
+  final PortfolioBotModel portfolioBotModel;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
@@ -44,33 +46,35 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   late final BotType botType;
 
-  BotPortfolioDetailScreen({required this.recommendedBot, Key? key})
+  BotPortfolioDetailScreen({required this.portfolioBotModel, Key? key})
       : super(key: key) {
-    botType = BotType.findByString(recommendedBot.botType);
+    botType = BotType.findByString(portfolioBotModel.botAppType);
   }
 
   @override
   Widget build(BuildContext context) {
     final Pair<Widget, Widget> portfolioDetailProps =
         _getPortfolioDetailProps(context);
-
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) =>
-                  PortfolioBloc(portfolioRepository: PortfolioRepository())
-                    ..add(FetchBotPortfolioChartData())),
+            create: (_) =>
+                PortfolioBloc(portfolioRepository: PortfolioRepository())
+                  ..add(FetchBotPortfolioDetail(
+                      ticker: portfolioBotModel.ticker,
+                      botId: portfolioBotModel.botId)),
+          ),
           BlocProvider(
               create: (_) =>
                   BotStockBloc(botStockRepository: BotStockRepository())),
         ],
-        child: BlocListener<BotStockBloc, BotStockState>(
+        child: BlocListener<PortfolioBloc, PortfolioState>(
           listenWhen: (previous, current) =>
               previous.endBotStockResponse.state !=
                   current.endBotStockResponse.state ||
               previous.rolloverBotStockResponse.state !=
                   current.rolloverBotStockResponse.state,
-          listener: _botStockListener,
+          listener: _portfolioListener,
           child: BotStockForm(
               useHeader: true,
               customHeader: Padding(
@@ -91,185 +95,230 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                       width: 12,
                     ),
                     CustomTextNew(
-                      '${botType.upperCaseName} ${recommendedBot.ticker}',
+                      '${botType.upperCaseName} ${portfolioBotModel.ticker}',
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
                   ],
                 ),
               ),
-              contentPadding: EdgeInsets.zero,
-              content: Column(
-                children: [
-                  Padding(
-                    padding: AppValues.screenHorizontalPadding,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Performance(),
-                        const SizedBox(
-                          height: 33,
-                        ),
-                        KeyInfo(
-                          recommendedBot: recommendedBot,
-                        ),
-                        const SizedBox(
-                          height: 35,
-                        ),
-                        CustomDetailExpansionTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomTextNew(
-                                '${botType.upperCaseName} Bots',
-                                style: AskLoraTextStyles.h5
-                                    .copyWith(color: AskLoraColors.charcoal),
-                              ),
-                              CustomTextNew(
-                                recommendedBot.botWord,
-                                style: AskLoraTextStyles.body3
-                                    .copyWith(color: AskLoraColors.charcoal),
-                              )
-                            ],
-                          ),
+              padding: EdgeInsets.zero,
+              content: BlocConsumer<PortfolioBloc, PortfolioState>(
+                  listenWhen: (previous, current) =>
+                      previous.botPortfolioDetailResponse.state !=
+                      current.botPortfolioDetailResponse.state,
+                  listener: (context, state) {
+                    if (state.botPortfolioDetailResponse.state ==
+                        ResponseState.loading) {
+                      CustomLoadingOverlay.show(context);
+                    } else {
+                      CustomLoadingOverlay.dismiss();
+                      if (state.botPortfolioDetailResponse.state ==
+                          ResponseState.error) {
+                        CustomInAppNotification.show(
+                            context, state.botPortfolioDetailResponse.message);
+                      }
+                    }
+                  },
+                  buildWhen: (previous, current) =>
+                      previous.botPortfolioDetailResponse.state !=
+                      current.botPortfolioDetailResponse.state,
+                  builder: (context, state) {
+                    if (state.botPortfolioDetailResponse.state ==
+                        ResponseState.success) {
+                      PortfolioBotDetailModel portfolioBotDetailModel =
+                          state.botPortfolioDetailResponse.data!;
+                      return Padding(
+                        padding: AppValues.screenHorizontalPadding,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomTextNew(
-                              'Best Suit For',
-                              style: AskLoraTextStyles.body4
-                                  .copyWith(color: AskLoraColors.charcoal),
+                            Performance(
+                              portfolioBotDetailModel: portfolioBotDetailModel,
+                              portfolioBotModel: portfolioBotModel,
                             ),
                             const SizedBox(
-                              height: 6,
+                              height: 33,
                             ),
-                            CustomTextNew(
-                              'Investors who want to take advantage of frequent price movements in the market.',
-                              style: AskLoraTextStyles.body1
-                                  .copyWith(color: AskLoraColors.charcoal),
+                            KeyInfo(
+                              portfolioBotModel: portfolioBotModel,
                             ),
                             const SizedBox(
-                              height: 18,
+                              height: 35,
                             ),
-                            CustomTextNew(
-                              'How It Works',
-                              style: AskLoraTextStyles.body4
-                                  .copyWith(color: AskLoraColors.charcoal),
+                            CustomDetailExpansionTile(
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomTextNew(
+                                    '${botType.upperCaseName} Bots',
+                                    style: AskLoraTextStyles.h5.copyWith(
+                                        color: AskLoraColors.charcoal),
+                                  ),
+                                  CustomTextNew(
+                                    portfolioBotDetailModel
+                                        .bot.botDescription.detail,
+                                    style: AskLoraTextStyles.body3.copyWith(
+                                        color: AskLoraColors.charcoal),
+                                  )
+                                ],
+                              ),
+                              children: [
+                                CustomTextNew(
+                                  'Best Suit For',
+                                  style: AskLoraTextStyles.body4
+                                      .copyWith(color: AskLoraColors.charcoal),
+                                ),
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                CustomTextNew(
+                                  portfolioBotDetailModel
+                                      .bot.botDescription.suited,
+                                  style: AskLoraTextStyles.body1
+                                      .copyWith(color: AskLoraColors.charcoal),
+                                ),
+                                const SizedBox(
+                                  height: 18,
+                                ),
+                                CustomTextNew(
+                                  'How It Works',
+                                  style: AskLoraTextStyles.body4
+                                      .copyWith(color: AskLoraColors.charcoal),
+                                ),
+                                const SizedBox(
+                                  height: 6,
+                                ),
+                                CustomTextNew(
+                                  portfolioBotDetailModel
+                                      .bot.botDescription.works,
+                                  style: AskLoraTextStyles.body1
+                                      .copyWith(color: AskLoraColors.charcoal),
+                                ),
+                              ],
                             ),
                             const SizedBox(
-                              height: 6,
+                              height: 10,
                             ),
-                            CustomTextNew(
-                              'It sells all to stop loss or when it reaches the target profit. ',
-                              style: AskLoraTextStyles.body1
-                                  .copyWith(color: AskLoraColors.charcoal),
+                            CustomDetailExpansionTile(
+                              title: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomTextNew(
+                                          '${portfolioBotDetailModel.tickerName} ${portfolioBotDetailModel.ticker}',
+                                          style: AskLoraTextStyles.h5.copyWith(
+                                              color: AskLoraColors.charcoal),
+                                          maxLines: 2,
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        CustomTextNew(
+                                          'Not available yet',
+                                          style: AskLoraTextStyles.body2
+                                              .copyWith(
+                                                  color:
+                                                      AskLoraColors.charcoal),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        CustomTextNew(
+                                          portfolioBotDetailModel.price
+                                              .convertToCurrencyDecimal(),
+                                          style: AskLoraTextStyles.h5.copyWith(
+                                              color: AskLoraColors.charcoal),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        CustomTextNew(
+                                          '${portfolioBotDetailModel.estimatedStopLossPrice.convertToCurrencyDecimal()} ${portfolioBotDetailModel.estimatedTakeProfitPct.toStringAsFixed(4)}%',
+                                          style: AskLoraTextStyles.body2
+                                              .copyWith(
+                                                  color:
+                                                      AskLoraColors.charcoal),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              children: [
+                                PairColumnText(
+                                  title1: 'Prev Close',
+                                  subTitle1: 'Not available yet',
+                                  title2: 'Market Cap',
+                                  subTitle2:
+                                      portfolioBotDetailModel.marketCap != null
+                                          ? portfolioBotDetailModel.marketCap!
+                                              .toStringAsFixed(1)
+                                          : '-',
+                                ),
+                                const SizedBox(
+                                  height: 2,
+                                ),
+                                const Divider(
+                                  color: AskLoraColors.gray,
+                                ),
+                                CustomTextNew(
+                                  'About ${portfolioBotDetailModel.tickerName}',
+                                  style: AskLoraTextStyles.h6
+                                      .copyWith(color: AskLoraColors.charcoal),
+                                ),
+                                const SizedBox(
+                                  height: 21,
+                                ),
+                                PairColumnText(
+                                  title1: 'Sector(s)',
+                                  subTitle1: portfolioBotDetailModel.sector,
+                                  title2: 'Industry',
+                                  subTitle2: portfolioBotDetailModel.industry,
+                                ),
+                                _spaceBetweenInfo,
+                                PairColumnText(
+                                  title1: 'CEO',
+                                  subTitle1: portfolioBotDetailModel.ceo,
+                                  title2: 'Employees',
+                                  subTitle2: portfolioBotDetailModel.employees
+                                      .toString(),
+                                ),
+                                _spaceBetweenInfo,
+                                PairColumnText(
+                                  title1: 'Headquarters',
+                                  subTitle1:
+                                      portfolioBotDetailModel.headquarters,
+                                  title2: 'Founded',
+                                  subTitle2: portfolioBotDetailModel.founded,
+                                ),
+                                const SizedBox(
+                                  height: 23,
+                                ),
+                                CustomTextNew(
+                                  portfolioBotDetailModel.description,
+                                  style: AskLoraTextStyles.body1
+                                      .copyWith(color: AskLoraColors.charcoal),
+                                )
+                              ],
                             ),
+                            portfolioDetailProps.left,
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CustomDetailExpansionTile(
-                          title: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomTextNew(
-                                      'Tesla TSLA',
-                                      style: AskLoraTextStyles.h5.copyWith(
-                                          color: AskLoraColors.charcoal),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    CustomTextNew(
-                                      'Prev Close 10/07 16:00:04 ET',
-                                      style: AskLoraTextStyles.body2.copyWith(
-                                          color: AskLoraColors.charcoal),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    CustomTextNew(
-                                      '223.07',
-                                      style: AskLoraTextStyles.h5.copyWith(
-                                          color: AskLoraColors.charcoal),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    CustomTextNew(
-                                      '-15.060 -6.32%',
-                                      style: AskLoraTextStyles.body2.copyWith(
-                                          color: AskLoraColors.charcoal),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                          children: [
-                            const PairColumnText(
-                              title1: 'Prev Close',
-                              subTitle1: '238.13',
-                              title2: 'Market Cap',
-                              subTitle2: '698.98B',
-                            ),
-                            const SizedBox(
-                              height: 2,
-                            ),
-                            const Divider(
-                              color: AskLoraColors.gray,
-                            ),
-                            CustomTextNew(
-                              'About Tesla',
-                              style: AskLoraTextStyles.h6
-                                  .copyWith(color: AskLoraColors.charcoal),
-                            ),
-                            const SizedBox(
-                              height: 21,
-                            ),
-                            const PairColumnText(
-                              title1: 'Sector(s)',
-                              subTitle1: 'Consumer Cyclical',
-                              title2: 'Take Profit Level',
-                              subTitle2: 'Auto Manufacturers',
-                            ),
-                            _spaceBetweenInfo,
-                            const PairColumnText(
-                              title1: 'CEO',
-                              subTitle1: 'Mr. Elon R. Musk',
-                              title2: 'Employees',
-                              subTitle2: '99,290',
-                            ),
-                            _spaceBetweenInfo,
-                            const PairColumnText(
-                              title1: 'Headquarters',
-                              subTitle1: 'Austin, TX',
-                              title2: 'Founded',
-                              subTitle2: '2003',
-                            ),
-                            const SizedBox(
-                              height: 23,
-                            ),
-                            CustomTextNew(
-                              'Tesla, Inc. designs, develops, manufactures, leases, and sells electric vehicles, and energy generation and storage systems in the United States, China, and internationally. The company operates in two segments, Automotive, and Energy Generation and Storage. ',
-                              style: AskLoraTextStyles.body1
-                                  .copyWith(color: AskLoraColors.charcoal),
-                            ),
-                          ],
-                        ),
-                        portfolioDetailProps.left,
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
+                  }),
               bottomButton: portfolioDetailProps.right),
         ));
   }
@@ -286,8 +335,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             child: Builder(
               builder: (context) {
                 BotPortfolioStatus botPortfolioStatus =
-                    BotPortfolioStatus.findByString(
-                        recommendedBot.status ?? '');
+                    BotPortfolioStatus.findByString('active');
                 return Column(
                   children: [
                     if (botPortfolioStatus != BotPortfolioStatus.pending)
@@ -297,7 +345,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                           label: 'ROLLOVER BOTSTOCK',
                           onTap: () =>
                               BotStockBottomSheet.rolloverBotStockConfirmation(
-                                  context, recommendedBot),
+                                  context, portfolioBotModel),
                         ),
                       ),
                     PrimaryButton(
@@ -306,7 +354,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                           ? 'END BOTSTOCK'
                           : 'CANCEL BOTSTOCK',
                       onTap: () => BotStockBottomSheet.endBotStockConfirmation(
-                          context, recommendedBot),
+                          context, portfolioBotModel),
                     ),
                   ],
                 );
@@ -334,7 +382,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     }
   }
 
-  void _botStockListener(BuildContext context, BotStockState state) {
+  void _portfolioListener(BuildContext context, PortfolioState state) {
     if (state.endBotStockResponse.state == ResponseState.loading ||
         state.rolloverBotStockResponse.state == ResponseState.loading) {
       CustomLoadingOverlay.show(context);
@@ -344,7 +392,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         BotStockResultScreen.open(
             context: context,
             arguments: Pair('Trade Request Received',
-                '${botType.name} ${recommendedBot.ticker} will end at 17/3/2023 10.22}'));
+                '${botType.name} ${portfolioBotModel.ticker} will end at 17/3/2023 10.22}'));
       } else if (state.endBotStockResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.endBotStockResponse.message);
@@ -353,7 +401,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         BotStockResultScreen.open(
             context: context,
             arguments: Pair('Trade Request Received',
-                '${botType.name} ${recommendedBot.ticker} will rollover at 17/3/2023 10.22}'));
+                '${botType.name} ${portfolioBotModel.ticker} will rollover at 17/3/2023 10.22}'));
       } else if (state.rolloverBotStockResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.endBotStockResponse.message);
@@ -363,6 +411,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   static void open(
           {required BuildContext context,
-          required RecommendedBot recommendedBot}) =>
-      Navigator.pushNamed(context, route, arguments: recommendedBot);
+          required PortfolioBotModel portfolioBotModel}) =>
+      Navigator.pushNamed(context, route, arguments: portfolioBotModel);
 }
