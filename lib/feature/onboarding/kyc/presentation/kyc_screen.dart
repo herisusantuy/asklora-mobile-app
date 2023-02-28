@@ -80,7 +80,9 @@ class KycScreen extends StatelessWidget {
                     KycBloc(getAccountRepository: AccountRepository()),
               ),
               BlocProvider(
-                create: (context) => SigningAgreementBloc(),
+                create: (context) => SigningAgreementBloc(
+                    signingBrokerAgreementRepository:
+                        SigningBrokerAgreementRepository()),
               ),
             ],
             child: Builder(builder: (context) {

@@ -14,6 +14,13 @@ class AskLoraClientAgreementOpened extends SigningBrokerAgreementEvent {
   List<Object> get props => [];
 }
 
+class W8BenFormOpened extends SigningBrokerAgreementEvent {
+  const W8BenFormOpened() : super();
+
+  @override
+  List<Object> get props => [];
+}
+
 class BoundByAskloraAgreementChecked extends SigningBrokerAgreementEvent {
   final bool isChecked;
 

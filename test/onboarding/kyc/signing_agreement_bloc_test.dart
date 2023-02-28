@@ -12,7 +12,8 @@ void main() async {
     SigningAgreementState signingAgreementState = const SigningAgreementState();
 
     setUp(() async {
-      signingAgreementBloc = SigningAgreementBloc();
+      signingAgreementBloc = SigningAgreementBloc(
+          signingBrokerAgreementRepository: SigningBrokerAgreementRepository());
     });
 
     test('init state data should be "false"', () {
