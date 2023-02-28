@@ -104,12 +104,11 @@ class DemonstrationQuestionScreen extends StatelessWidget {
       builder: (context, state) {
         if (state.questionCollection.isNotEmpty) {
           String? questionType =
-              state.questionCollection[state.questionIndex].questions?.types;
+              state.questionCollection[state.questionIndex].questionType;
           if (questionType == QuestionType.omniSearch.value) {
             return OmniSearchQuestionWidget(
                 tooltipController: tooltipController,
-                questionCollection:
-                    state.questionCollection[state.questionIndex]);
+                question: state.questionCollection[state.questionIndex]);
           } else if (questionType == QuestionType.choices.value) {
             return MultipleChoiceQuestionWidget(
               tooltipController: tooltipController,
@@ -119,7 +118,7 @@ class DemonstrationQuestionScreen extends StatelessWidget {
                   .read<DemonstrationQuestionBloc>()
                   .add(AnswerQuestion(state.questionIndex)),
               alreadyAnswered: state.questionAnsweredList[state.questionIndex],
-              questionCollection: state.questionCollection[state.questionIndex],
+              question: state.questionCollection[state.questionIndex],
             );
           } else {
             return const SizedBox.shrink();

@@ -7,6 +7,7 @@ import '../../../../../core/presentation/navigation/custom_navigation_widget.dar
 import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
+import '../../utils/ppi_utils.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
 import '../widget/omni_search_question_widget/omni_search_question_widget.dart';
@@ -47,33 +48,34 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                 }
               }, builder: (context, state) {
                 if (state is OnNextQuestion) {
-                  QuestionCollection questionCollection = state.question;
+                  Question question = state.question;
                   switch (state.questionType) {
                     case (QuestionType.choices):
-                      //TODO defaultChoiceIndex should be from answered question when endpoint is ready
                       return MultipleChoiceQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        questionCollection: questionCollection,
-                        defaultChoiceIndex: -1,
+                        key: Key(question.questionId!),
+                        question: question,
+                        defaultChoiceIndex: PpiDefaultAnswer.getIndex(
+                            context, question.questionId!),
                         onSubmitSuccess: () => onSubmitSuccess(context),
                         onCancel: () => onCancel(context),
                       );
                     case (QuestionType.descriptive):
-                      //TODO defaultAnswer should be from answered question when endpoint is ready
                       return DescriptiveQuestionWidget(
-                          key: Key(questionCollection.uid!),
-                          defaultAnswer: '',
-                          questionCollection: questionCollection,
+                          key: Key(question.question!),
+                          defaultAnswer: PpiDefaultAnswer.getString(
+                              context, question.questionId!),
+                          question: question,
                           onCancel: () => onCancel(context),
                           onSubmitSuccess: () => onSubmitSuccess(context));
                     case (QuestionType.omniSearch):
                       return OmniSearchQuestionWidget(
-                        key: Key(questionCollection.uid!),
-                        questionCollection: questionCollection,
+                        key: Key(question.questionId!),
+                        defaultOmniSearch: PpiDefaultAnswer.getOmniSearch(
+                            context, question.questionId!),
+                        question: question,
                         onSubmitSuccess: () => onSubmitSuccess(context),
                         onCancel: () => onCancel(context),
                       );
-
                     default:
                       return const SizedBox.shrink();
                   }

@@ -3,16 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
+    as _i8;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
     as _i3;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response_request.dart'
-    as _i6;
+    as _i7;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/bot_recommendation_repository.dart'
     as _i2;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_response_repository.dart'
-    as _i4;
+    as _i5;
+import 'package:dio/dio.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -48,11 +51,31 @@ class _FakePpiUserResponse_1 extends _i1.SmartFake
         );
 }
 
+class _FakeSnapShot_2 extends _i1.SmartFake implements _i3.SnapShot {
+  _FakeSnapShot_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeResponse_3<T> extends _i1.SmartFake implements _i4.Response<T> {
+  _FakeResponse_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [PpiResponseRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPpiResponseRepository extends _i1.Mock
-    implements _i4.PpiResponseRepository {
+    implements _i5.PpiResponseRepository {
   MockPpiResponseRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -67,37 +90,141 @@ class MockPpiResponseRepository extends _i1.Mock
         ),
       ) as _i2.BotRecommendationRepository);
   @override
-  _i5.Future<_i3.PpiUserResponse> addAnswer(
-          _i6.PpiUserResponseRequest? ppiUserResponseRequest) =>
+  _i6.Future<_i3.PpiUserResponse> addAnswer(
+          _i7.PpiSelectionRequest? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAnswer,
           [ppiUserResponseRequest],
         ),
         returnValue:
-            _i5.Future<_i3.PpiUserResponse>.value(_FakePpiUserResponse_1(
+            _i6.Future<_i3.PpiUserResponse>.value(_FakePpiUserResponse_1(
           this,
           Invocation.method(
             #addAnswer,
             [ppiUserResponseRequest],
           ),
         )),
-      ) as _i5.Future<_i3.PpiUserResponse>);
+      ) as _i6.Future<_i3.PpiUserResponse>);
   @override
-  _i5.Future<_i3.PpiUserResponse> addBulkAnswer(
-          List<_i6.PpiUserResponseRequest>? ppiUserResponseRequest) =>
+  _i6.Future<_i3.PpiUserResponse> addBulkAnswer(
+          List<_i7.PpiSelectionRequest>? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addBulkAnswer,
           [ppiUserResponseRequest],
         ),
         returnValue:
-            _i5.Future<_i3.PpiUserResponse>.value(_FakePpiUserResponse_1(
+            _i6.Future<_i3.PpiUserResponse>.value(_FakePpiUserResponse_1(
           this,
           Invocation.method(
             #addBulkAnswer,
             [ppiUserResponseRequest],
           ),
         )),
-      ) as _i5.Future<_i3.PpiUserResponse>);
+      ) as _i6.Future<_i3.PpiUserResponse>);
+  @override
+  _i6.Future<_i3.SnapShot> getUserSnapShot(int? userId) => (super.noSuchMethod(
+        Invocation.method(
+          #getUserSnapShot,
+          [userId],
+        ),
+        returnValue: _i6.Future<_i3.SnapShot>.value(_FakeSnapShot_2(
+          this,
+          Invocation.method(
+            #getUserSnapShot,
+            [userId],
+          ),
+        )),
+      ) as _i6.Future<_i3.SnapShot>);
+  @override
+  _i6.Future<_i4.Response<dynamic>> linkUser(int? userId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #linkUser,
+          [userId],
+        ),
+        returnValue:
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_3<dynamic>(
+          this,
+          Invocation.method(
+            #linkUser,
+            [userId],
+          ),
+        )),
+      ) as _i6.Future<_i4.Response<dynamic>>);
+}
+
+/// A class which mocks [SharedPreference].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPreference extends _i1.Mock implements _i8.SharedPreference {
+  MockSharedPreference() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<void> deleteAllData() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAllData,
+          [],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<void> deleteData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteData,
+          [key],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+  @override
+  _i6.Future<String?> readData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readData,
+          [key],
+        ),
+        returnValue: _i6.Future<String?>.value(),
+      ) as _i6.Future<String?>);
+  @override
+  _i6.Future<bool> writeData(
+    String? key,
+    String? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> writeIntData(
+    String? key,
+    int? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeIntData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
+  @override
+  _i6.Future<int?> readIntData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readIntData,
+          [key],
+        ),
+        returnValue: _i6.Future<int?>.value(),
+      ) as _i6.Future<int?>);
 }

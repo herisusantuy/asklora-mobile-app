@@ -1,5 +1,5 @@
 import '../domain/bot_submission_request.dart';
-import '../domain/ppi_api_client.dart';
+import '../domain/ppi_api_repository.dart';
 import '../domain/ppi_user_response.dart';
 
 class BotChoiceRepository {
@@ -9,7 +9,7 @@ class BotChoiceRepository {
 
   BotChoiceRepository._();
 
-  final PpiApiClient _ppiApiClient = PpiApiClient();
+  final PpiApiRepository _ppiApiClient = PpiApiRepository();
 
   Future<PpiUserResponse> addAnswer(
       BotSubmissionRequest botSubmissionRequest) async {

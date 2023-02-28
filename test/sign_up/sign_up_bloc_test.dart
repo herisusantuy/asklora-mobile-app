@@ -1,9 +1,12 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart';
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
+import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/bloc/sign_up_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/repository/sign_up_repository.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_response_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,17 +22,26 @@ class MockCounterBloc extends MockBloc<SignUpEvent, SignUpState>
 
 @GenerateMocks([SignUpRepository])
 @GenerateMocks([SignUpApiClient])
+@GenerateMocks([PpiResponseRepository])
+@GenerateMocks([SharedPreference])
 void main() async {
   group('Sign Up Screen Bloc Tests', () {
     late MockSignUpRepository signUpRepository;
+    late PpiResponseRepository ppiResponseRepository;
+    late SharedPreference sharedPreference;
     late SignUpBloc signUpBloc;
 
     setUpAll(() async {
       signUpRepository = MockSignUpRepository();
+      ppiResponseRepository = MockPpiResponseRepository();
+      sharedPreference = MockSharedPreference();
     });
 
     setUp(() async {
-      signUpBloc = SignUpBloc(signUpRepository: signUpRepository);
+      signUpBloc = SignUpBloc(
+          signUpRepository: signUpRepository,
+          ppiResponseRepository: ppiResponseRepository,
+          sharedPreference: sharedPreference);
     });
 
     test('Sign Up Bloc init state is should be `unknown`', () {
@@ -200,12 +212,25 @@ void main() async {
         'entered correct password and correct email WHEN '
         'pressed `Submit` button',
         build: () {
+          when(sharedPreference.readData(sfKeyTempName))
+              .thenAnswer((_) => Future.value('AAAA|BBBB|CCCC'));
+
+          when(sharedPreference.readIntData(sfKeyTempId))
+              .thenAnswer((_) => Future.value(101));
+
           when(signUpRepository.signUp(
-                  email: 'kk@test.com', password: 'Password1'))
+                  email: 'kk@test.com',
+                  password: 'Password1',
+                  username: 'AAAA|BBBB|CCCC'))
               .thenAnswer((_) => Future.value(
                   const BaseResponse<SignUpResponse>(
                       data: SignUpResponse('Sign Up Successful'),
                       state: ResponseState.success)));
+
+          when(ppiResponseRepository.linkUser(101)).thenAnswer(
+              (realInvocation) => Future.value(Response(
+                  data: '', requestOptions: RequestOptions(path: '/'))));
+
           when(signUpRepository.getVerificationEmail(
                   getVerificationEmailRequest:
                       GetOtpRequest('kk@test.com', OtpType.register.value)))

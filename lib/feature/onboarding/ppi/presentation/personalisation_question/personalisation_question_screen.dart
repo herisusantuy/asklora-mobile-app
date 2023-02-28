@@ -6,9 +6,9 @@ import '../../../../../core/presentation/navigation/custom_navigation_widget.dar
 import '../../bloc/question/question_bloc.dart';
 import '../../domain/fixture.dart';
 import '../../domain/question.dart';
+import '../../utils/ppi_utils.dart';
 import '../widget/descriptive_question_widget/descriptive_question_widget.dart';
 import '../widget/multiple_question_widget/multiple_question_widget.dart';
-import '../widget/slider_question_widget/slider_question_widget.dart';
 import 'bloc/personalisation_question_bloc.dart';
 
 class PersonalisationQuestionScreen extends StatelessWidget {
@@ -24,64 +24,58 @@ class PersonalisationQuestionScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => PersonalisationQuestionBloc(initialIndex: initialIndex)
         ..add(NextPersonalisationQuestion()),
-      child: Builder(
-          builder: (context) => CustomNavigationWidget<QuestionPageStep>(
-                onBackPressed: () => onCancel(context),
-                header: const SizedBox.shrink(),
-                child: BlocConsumer<PersonalisationQuestionBloc,
-                    PersonalisationQuestionState>(
-                  listener: (context, state) {
-                    if (state is OnNextPersonalizationQuestion) {
-                      context.read<QuestionBloc>().add(
-                          PersonalisationQuestionIndexChanged(
-                              state.personalizationQuestionIndex));
-                    } else if (state is OnPreviousToPrivacyQuestionScreen) {
-                      context
-                          .read<NavigationBloc<QuestionPageStep>>()
-                          .add(const PagePop());
-                    } else if (state is OnNextResultEndScreen) {
-                      context.read<NavigationBloc<QuestionPageStep>>().add(
-                          const PageChanged(
-                              QuestionPageStep.personalisationResultEnd));
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is OnNextPersonalizationQuestion) {
-                      QuestionCollection questionCollection = state.question;
-                      switch (state.questionType) {
-                        case (QuestionType.choices):
-                          //TODO defaultChoiceIndex should be from answered question when endpoint is ready
-                          return MultipleChoiceQuestionWidget(
-                            key: Key(questionCollection.uid!),
-                            questionCollection: questionCollection,
-                            defaultChoiceIndex: -1,
-                            onSubmitSuccess: () => onSubmitSuccess(context),
-                            onCancel: () => onCancel(context),
-                          );
-                        case (QuestionType.descriptive):
-                          //TODO defaultAnswer should be from answered question when endpoint is ready
-                          return DescriptiveQuestionWidget(
-                              defaultAnswer: '',
-                              questionCollection: questionCollection,
-                              onSubmitSuccess: () => onSubmitSuccess(context),
-                              onCancel: () => onCancel(context));
-                        case (QuestionType.slider):
-                          return SliderQuestionWidget(
-                            key: Key(questionCollection.uid!),
-                            questionCollection: questionCollection,
-                            defaultChoiceIndex: -1,
-                            onSubmitSuccess: () => onSubmitSuccess(context),
-                            onCancel: () => onCancel(context),
-                          );
-                        default:
-                          return const SizedBox.shrink();
-                      }
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                ),
-              )),
+      child: CustomNavigationWidget<QuestionPageStep>(
+        onBackPressed: () => onCancel(context),
+        header: const SizedBox.shrink(),
+        child: BlocConsumer<PersonalisationQuestionBloc,
+            PersonalisationQuestionState>(
+          buildWhen: (previous, current) =>
+              current is OnNextPersonalizationQuestion,
+          listener: (context, state) async {
+            if (state is OnNextPersonalizationQuestion) {
+              context.read<QuestionBloc>().add(
+                  PersonalisationQuestionIndexChanged(
+                      state.personalizationQuestionIndex));
+            } else if (state is OnPreviousToPrivacyQuestionScreen) {
+              context
+                  .read<NavigationBloc<QuestionPageStep>>()
+                  .add(const PagePop());
+            } else if (state is OnNextResultEndScreen) {
+              context.read<NavigationBloc<QuestionPageStep>>().add(
+                  const PageChanged(QuestionPageStep.personalisationResultEnd));
+            }
+          },
+          builder: (context, state) {
+            if (state is OnNextPersonalizationQuestion) {
+              Question question = state.question;
+              switch (state.questionType) {
+                case (QuestionType.choices):
+                  return MultipleChoiceQuestionWidget(
+                    key: Key(question.questionId!),
+                    question: question,
+                    defaultChoiceIndex: PpiDefaultAnswer.getIndex(
+                        context, question.questionId!),
+                    onSubmitSuccess: () {
+                      onSubmitSuccess(context);
+                    },
+                    onCancel: () => onCancel(context),
+                  );
+                case (QuestionType.descriptive):
+                  return DescriptiveQuestionWidget(
+                      defaultAnswer: PpiDefaultAnswer.getString(
+                          context, question.questionId!),
+                      question: question,
+                      onSubmitSuccess: () => onSubmitSuccess(context),
+                      onCancel: () => onCancel(context));
+                default:
+                  return const SizedBox.shrink();
+              }
+            } else {
+              return const SizedBox();
+            }
+          },
+        ),
+      ),
     );
   }
 

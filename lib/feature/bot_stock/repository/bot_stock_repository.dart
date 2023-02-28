@@ -3,12 +3,35 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
+import '../../../core/utils/storage/shared_preference.dart';
+import '../../../core/utils/storage/storage_keys.dart';
+import '../../../main.dart';
+import '../../../mock/mock_data.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
-import '../../onboarding/ppi/domain/ppi_user_response.dart';
+import '../domain/bot_detail_model.dart';
+import '../domain/bot_detail_request.dart';
+import '../domain/bot_recommendation_model.dart';
+import '../domain/bot_recommendation_response.dart';
+import '../domain/bot_stock_api_client.dart';
 import '../utils/bot_stock_utils.dart';
 
 class BotStockRepository {
+  final SharedPreference _sharedPreference = SharedPreference();
+  final BotStockApiClient _botStockApiClient = BotStockApiClient();
+
+  Future<BaseResponse<BotDetailModel>> fetchBotDetail(
+      String ticker, String botId) async {
+    try {
+      var response = await _botStockApiClient
+          .fetchBotDetail(BotDetailRequest(ticker, botId));
+
+      return BaseResponse.complete(BotDetailModel.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error('Something went wrong');
+    }
+  }
+
   Future<BaseResponse<List<ChartDataSet>>> fetchChartDataJson() async {
     try {
       final String response =
@@ -53,37 +76,77 @@ class BotStockRepository {
     return finalChartData;
   }
 
-  Future<BaseResponse<List<RecommendedBot>>> fetchBotRecommendation() async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(defaultRecommendedBots);
+  Future<BaseResponse<List<BotRecommendationModel>>>
+      fetchBotRecommendation() async {
+    try {
+      if (isDemoEnable) {
+        ///MOCK
+        await Future.delayed(const Duration(seconds: 1));
+        final String response =
+            await rootBundle.loadString('assets/json/bot_recommendation.json');
+        Iterable iterable = json.decode(response);
+
+        return BaseResponse.complete(List<BotRecommendationModel>.from(
+            iterable.map((model) => BotRecommendationModel.fromJson(model))));
+      } else {
+        ///REAL
+        var response = await _botStockApiClient.fetchBotRecommendation(
+            await _sharedPreference.readData(sfKeyTempName) ?? '');
+        return BaseResponse.complete(
+            BotRecommendationResponse.fromJson(response.data).data);
+      }
+    } catch (e) {
+      return BaseResponse.error('Something went wrong');
+    }
   }
 
-  Future<BaseResponse<List<RecommendedBot>>> fetchFreeBotRecommendation(
+  Future<BaseResponse<List<BotRecommendationModel>>> fetchFreeBotRecommendation(
       {bool isFreeBot = false}) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(defaultFreeRecommendedBots);
+    try {
+      if (isDemoEnable) {
+        await Future.delayed(const Duration(seconds: 1));
+        final String response =
+            await rootBundle.loadString('assets/json/bot_recommendation.json');
+        Iterable iterable = json.decode(response);
+        List<BotRecommendationModel> data = List<BotRecommendationModel>.from(
+            iterable.map((model) => BotRecommendationModel.fromJson(model)
+                .copyWith(freeBot: true)));
+        return BaseResponse.complete(data);
+      } else {
+        ///REAL
+        ///TODO get account id from local later
+        var response = await _botStockApiClient.fetchBotRecommendation(
+            await _sharedPreference.readData(sfKeyTempName) ?? '');
+        return BaseResponse.complete(List<BotRecommendationModel>.from(
+            BotRecommendationResponse.fromJson(response.data)
+                .data
+                .map((model) => model.copyWith(freeBot: true))));
+      }
+    } catch (e) {
+      return BaseResponse.error('Something went wrong');
+    }
   }
 
-  Future<BaseResponse<List<RecommendedBot>>> fetchBotDemonstration() async {
+  Future<BaseResponse<List<BotRecommendationModel>>>
+      fetchBotDemonstration() async {
     await Future.delayed(const Duration(seconds: 1));
     return BaseResponse.complete(demonstrationBots);
   }
 
-  Future<BaseResponse<bool>> getFreeBotStock(
-      {required RecommendedBot recommendedBot,
+  Future<BaseResponse<bool>> tradeBotStock(
+      {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount}) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(true);
-  }
-
-  Future<BaseResponse<bool>> rolloverBotStock(
-      RecommendedBot recommendedBot) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(true);
-  }
-
-  Future<BaseResponse<bool>> endBotStock(RecommendedBot recommendedBot) async {
-    await Future.delayed(const Duration(seconds: 1));
-    return BaseResponse.complete(true);
+    if (isDemoEnable) {
+      ///MOCK
+      await Future.delayed(const Duration(milliseconds: 500));
+      var data = await MockData().saveBotStock(
+          botRecommendationModel: botRecommendationModel,
+          tradeBotStockAmount: tradeBotStockAmount);
+      return data;
+    } else {
+      ///REAL
+      await Future.delayed(const Duration(milliseconds: 500));
+      return BaseResponse.complete(true);
+    }
   }
 }

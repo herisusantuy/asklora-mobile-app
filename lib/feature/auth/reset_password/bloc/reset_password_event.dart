@@ -7,18 +7,28 @@ abstract class ResetPasswordEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ResetPasswordEmailChanged extends ResetPasswordEvent {
-  const ResetPasswordEmailChanged(this.email) : super();
+class ResetPasswordPasswordChanged extends ResetPasswordEvent {
+  const ResetPasswordPasswordChanged(this.password) : super();
 
-  final String email;
+  final String password;
 
   @override
-  List<Object> get props => [email];
+  List<Object> get props => [password];
+}
+
+class ResetPasswordConfirmPasswordChanged extends ResetPasswordEvent {
+  const ResetPasswordConfirmPasswordChanged(this.confirmPassword) : super();
+
+  final String confirmPassword;
+
+  @override
+  List<Object> get props => [confirmPassword];
 }
 
 class ResetPasswordSubmitted extends ResetPasswordEvent {
-  const ResetPasswordSubmitted();
+  final String resetPasswordToken;
+  const ResetPasswordSubmitted(this.resetPasswordToken) : super();
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [resetPasswordToken];
 }

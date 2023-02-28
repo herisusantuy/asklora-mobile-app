@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../feature/auth/email_activation/presentation/email_activation_screen.dart';
 import '../../feature/auth/otp/presentation/otp_screen.dart';
+import '../../feature/auth/reset_password/presentation/reset_password_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
@@ -14,6 +15,7 @@ import '../../feature/balance/withdrawal/presentation/withdrawal_amount/withdraw
 import '../../feature/balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
+import '../../feature/bot_stock/domain/bot_recommendation_model.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
 import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
@@ -22,12 +24,12 @@ import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
+import '../../feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
-import '../../feature/onboarding/ppi/domain/ppi_user_response.dart';
 import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../feature/onboarding/ppi/presentation/ppi_screen.dart';
 import '../../feature/onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
@@ -107,6 +109,10 @@ class RouterGenerator {
         return MaterialPageRoute(
             builder: (_) =>
                 EmailActivationScreen(userName: settings.arguments as String));
+      case ResetPasswordScreen.route:
+        return MaterialPageRoute(
+            builder: (_) => ResetPasswordScreen(
+                resetPasswordToken: settings.arguments as String));
       case InvestmentStyleWelcomeScreen.route:
         return MaterialPageRoute(
             builder: (_) => const InvestmentStyleWelcomeScreen());
@@ -124,17 +130,19 @@ class RouterGenerator {
       case BotRecommendationDetailScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotRecommendationDetailScreen(
-                  recommendedBot: settings.arguments as RecommendedBot,
+                  botRecommendation:
+                      settings.arguments as BotRecommendationModel,
                 ));
       case BotPortfolioDetailScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotPortfolioDetailScreen(
-                  recommendedBot: settings.arguments as RecommendedBot,
+                  portfolioBotModel: settings.arguments as PortfolioBotModel,
                 ));
       case BotTradeSummaryScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotTradeSummaryScreen(
-                  arguments: settings.arguments as Pair<RecommendedBot, double>,
+                  arguments: settings.arguments
+                      as Pair<BotRecommendationModel, double>,
                 ));
       case PortfolioScreen.route:
         return MaterialPageRoute(builder: (_) => const PortfolioScreen());
