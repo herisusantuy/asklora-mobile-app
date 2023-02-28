@@ -170,10 +170,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
       if (state.botPortfolioDetailResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.botPortfolioDetailResponse.message);
-      } else if (state.botPortfolioDetailResponse.state ==
-          ResponseState.error) {
-        CustomInAppNotification.show(
-            context, state.botPortfolioDetailResponse.message);
       }
       if (state.endBotStockResponse.state == ResponseState.success) {
         BotStockResultScreen.open(
