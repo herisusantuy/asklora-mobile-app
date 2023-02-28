@@ -9,6 +9,10 @@ part of 'upgrade_account_response.dart';
 UpgradeAccountResponse _$UpgradeAccountResponseFromJson(
         Map<String, dynamic> json) =>
     UpgradeAccountResponse(
+      residenceInfo: json['residence_info'] == null
+          ? null
+          : ResidenceInfo.fromJson(
+              json['residence_info'] as Map<String, dynamic>),
       proofsOfAddress: (json['proofs_of_address'] as List<dynamic>?)
           ?.map((e) => ProofsOfAddress.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -31,6 +35,7 @@ UpgradeAccountResponse _$UpgradeAccountResponseFromJson(
 Map<String, dynamic> _$UpgradeAccountResponseToJson(
         UpgradeAccountResponse instance) =>
     <String, dynamic>{
+      'residence_info': instance.residenceInfo?.toJson(),
       'proofs_of_address':
           instance.proofsOfAddress?.map((e) => e.toJson()).toList(),
       'employment_info': instance.employmentInfo?.toJson(),

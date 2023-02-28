@@ -9,9 +9,10 @@ part of 'upgrade_account_request.dart';
 UpgradeAccountRequest _$UpgradeAccountRequestFromJson(
         Map<String, dynamic> json) =>
     UpgradeAccountRequest(
-      residence: json['residence'] == null
+      residenceInfo: json['residence_info'] == null
           ? null
-          : Residence.fromJson(json['residence'] as Map<String, dynamic>),
+          : ResidenceInfo.fromJson(
+              json['residence_info'] as Map<String, dynamic>),
       proofsOfAddress: (json['proofs_of_address'] as List<dynamic>?)
           ?.map((e) => ProofsOfAddress.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -34,7 +35,7 @@ UpgradeAccountRequest _$UpgradeAccountRequestFromJson(
 Map<String, dynamic> _$UpgradeAccountRequestToJson(
         UpgradeAccountRequest instance) =>
     <String, dynamic>{
-      'residence': instance.residence?.toJson(),
+      'residence_info': instance.residenceInfo?.toJson(),
       'proofs_of_address':
           instance.proofsOfAddress?.map((e) => e.toJson()).toList(),
       'employment_info': instance.employmentInfo?.toJson(),
