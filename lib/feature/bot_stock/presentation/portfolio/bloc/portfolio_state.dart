@@ -25,6 +25,8 @@ class PortfolioState extends Equatable {
       portfolioResponse,
       botPortfolioResponse,
       botPortfolioDetailResponse,
+      rolloverBotStockResponse,
+      endBotStockResponse,
       botStockFilter,
       currency,
     ];

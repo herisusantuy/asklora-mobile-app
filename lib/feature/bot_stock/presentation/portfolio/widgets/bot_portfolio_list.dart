@@ -5,8 +5,10 @@ class BotPortfolioList extends StatelessWidget {
   final double _runSpacing = 8;
   final double botCardHeight = 192;
   final UserJourney userJourney;
+  final PortfolioState portfolioState;
 
-  const BotPortfolioList({required this.userJourney, Key? key})
+  const BotPortfolioList(
+      {required this.userJourney, required this.portfolioState, Key? key})
       : super(key: key);
 
   @override
@@ -21,72 +23,65 @@ class BotPortfolioList extends StatelessWidget {
       return const BotPortfolioPopUp(
           botPortfolioPopUpType: BotPortfolioPopUpType.redeemBotStock);
     } else {
-      return BlocBuilder<PortfolioBloc, PortfolioState>(
-          buildWhen: (previous, current) =>
-              previous.botPortfolioResponse.state !=
-              current.botPortfolioResponse.state,
-          builder: (context, state) {
-            if (state.botPortfolioResponse.state == ResponseState.success) {
-              if (state.botPortfolioResponse.data!.isNotEmpty) {
-                return Column(
-                  children: [
-                    const BotPortfolioFilter(),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Wrap(
-                        spacing: _spacing,
-                        runSpacing: _runSpacing,
-                        children: state.botPortfolioResponse.data!
-                            .map((e) => BotPortfolioCard(
-                                  height: botCardHeight,
-                                  spacing: _spacing,
-                                  portfolioBotModel: e,
-                                ))
-                            .toList(),
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                if (state.botStockFilter == BotStockFilter.all) {
-                  return const BotPortfolioPopUp(
-                      botPortfolioPopUpType: BotPortfolioPopUpType.noBotStock);
-                } else {
-                  return Column(
-                    children: [
-                      const BotPortfolioFilter(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top:
-                                (MediaQuery.of(context).size.height - 600) / 2),
-                        child: CustomTextNew(
-                          'No ${state.botStockFilter.name} Botstocks',
-                          style: AskLoraTextStyles.body1
-                              .copyWith(color: AskLoraColors.darkGray),
-                        ),
-                      ),
-                    ],
-                  );
-                }
-              }
-            } else if (state.botPortfolioResponse.state ==
-                ResponseState.loading) {
-              return Wrap(
-                spacing: _spacing,
-                runSpacing: _runSpacing,
-                children: defaultBotRecommendation
-                    .map(
-                      (e) => BotPortfolioCardShimmer(
-                        height: botCardHeight,
-                        spacing: _spacing,
-                      ),
-                    )
-                    .toList(),
-              );
-            } else {
-              return const SizedBox();
-            }
-          });
+      if (portfolioState.botPortfolioResponse.state == ResponseState.success) {
+        if (portfolioState.botPortfolioResponse.data!.isNotEmpty) {
+          return Column(
+            children: [
+              const BotPortfolioFilter(),
+              SizedBox(
+                width: double.infinity,
+                child: Wrap(
+                  spacing: _spacing,
+                  runSpacing: _runSpacing,
+                  children: portfolioState.botPortfolioResponse.data!
+                      .map((e) => BotPortfolioCard(
+                            height: botCardHeight,
+                            spacing: _spacing,
+                            portfolioBotModel: e,
+                          ))
+                      .toList(),
+                ),
+              ),
+            ],
+          );
+        } else {
+          if (portfolioState.botStockFilter == BotStockFilter.all) {
+            return const BotPortfolioPopUp(
+                botPortfolioPopUpType: BotPortfolioPopUpType.noBotStock);
+          } else {
+            return Column(
+              children: [
+                const BotPortfolioFilter(),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: (MediaQuery.of(context).size.height - 600) / 2),
+                  child: CustomTextNew(
+                    'No ${portfolioState.botStockFilter.name} Botstocks',
+                    style: AskLoraTextStyles.body1
+                        .copyWith(color: AskLoraColors.darkGray),
+                  ),
+                ),
+              ],
+            );
+          }
+        }
+      } else if (portfolioState.botPortfolioResponse.state ==
+          ResponseState.loading) {
+        return Wrap(
+          spacing: _spacing,
+          runSpacing: _runSpacing,
+          children: defaultBotRecommendation
+              .map(
+                (e) => BotPortfolioCardShimmer(
+                  height: botCardHeight,
+                  spacing: _spacing,
+                ),
+              )
+              .toList(),
+        );
+      } else {
+        return const SizedBox();
+      }
     }
   }
 }

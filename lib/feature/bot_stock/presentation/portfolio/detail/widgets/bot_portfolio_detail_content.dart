@@ -1,39 +1,59 @@
 import 'package:flutter/material.dart';
+import '../../../../../../core/domain/pair.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
-import '../../../../../chart/presentation/chart_animation.dart';
-import '../../../../domain/bot_detail_model.dart';
-import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/pair_column_text.dart';
-import 'bot_price_line_bar.dart';
+import '../../domain/portfolio_bot_detail_model.dart';
+import '../../domain/portfolio_bot_model.dart';
+import '../bot_portfolio_detail_screen.dart';
 
-class BotRecommendationDetailContent extends StatelessWidget {
-  final BotRecommendationModel botRecommendationModel;
-  final BotDetailModel? botDetailModel;
+class BotPortfolioDetailContent extends StatelessWidget {
+  final PortfolioBotModel portfolioBotModel;
+  final PortfolioBotDetailModel? portfolioBotDetailModel;
   final BotType botType;
+  final Pair<Widget, Widget> portfolioDetailProps;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
-  final String _tempTooltipText =
-      'Lorem ipsum dolor sit amet consectetur. Integer neque ultrices amet fermentum condimentum consequat. ';
-
-  const BotRecommendationDetailContent(
-      {required this.botRecommendationModel,
+  const BotPortfolioDetailContent(
+      {required this.portfolioBotModel,
       required this.botType,
-      this.botDetailModel,
+      this.portfolioBotDetailModel,
+      required this.portfolioDetailProps,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Padding(
+          padding: AppValues.screenHorizontalPadding,
+          child: Column(
+            children: [
+              Performance(
+                portfolioBotDetailModel: portfolioBotDetailModel,
+                portfolioBotModel: portfolioBotModel,
+              ),
+              const SizedBox(
+                height: 33,
+              ),
+              KeyInfo(
+                portfolioBotModel: portfolioBotModel,
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+            ],
+          ),
+        ),
         CustomDetailExpansionTile(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +64,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                botDetailModel?.bot.botDescription.detail ?? '',
+                portfolioBotDetailModel?.bot.botDescription.detail ?? '',
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
@@ -60,7 +80,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.suited ?? '',
+              portfolioBotDetailModel?.bot.botDescription.suited ?? '',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -76,7 +96,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.works ?? '',
+              portfolioBotDetailModel?.bot.botDescription.works ?? '',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -94,7 +114,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botDetailModel?.tickerName} ${botDetailModel?.ticker}',
+                      '${portfolioBotDetailModel?.tickerName} ${portfolioBotDetailModel?.ticker}',
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                       maxLines: 2,
@@ -115,7 +135,8 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CustomTextNew(
-                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                      (portfolioBotDetailModel?.price ?? 0)
+                          .convertToCurrencyDecimal(),
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
@@ -123,7 +144,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      '${(botDetailModel?.estimatedStopLossPrice ?? 0).convertToCurrencyDecimal()} ${(botDetailModel?.estimatedTakeProfitPct ?? 0).toStringAsFixed(4)}%',
+                      '${(portfolioBotDetailModel?.estimatedStopLossPrice ?? 0).convertToCurrencyDecimal()} ${(portfolioBotDetailModel?.estimatedTakeProfitPct ?? 0).toStringAsFixed(4)}%',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -137,8 +158,8 @@ class BotRecommendationDetailContent extends StatelessWidget {
               title1: 'Prev Close',
               subTitle1: 'Not available yet',
               title2: 'Market Cap',
-              subTitle2: botDetailModel?.marketCap != null
-                  ? (botDetailModel?.marketCap ?? 0).toStringAsFixed(1)
+              subTitle2: portfolioBotDetailModel?.marketCap != null
+                  ? (portfolioBotDetailModel?.marketCap ?? 0).toStringAsFixed(1)
                   : '-',
             ),
             const SizedBox(
@@ -148,7 +169,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               color: AskLoraColors.gray,
             ),
             CustomTextNew(
-              'About ${botDetailModel?.tickerName}',
+              'About ${portfolioBotDetailModel?.tickerName}',
               style:
                   AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
             ),
@@ -157,91 +178,39 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ),
             PairColumnText(
               title1: 'Sector(s)',
-              subTitle1: botDetailModel?.sector ?? '',
+              subTitle1: portfolioBotDetailModel?.sector ?? '',
               title2: 'Industry',
-              subTitle2: botDetailModel?.industry ?? '',
+              subTitle2: portfolioBotDetailModel?.industry ?? '',
             ),
             _spaceBetweenInfo,
             PairColumnText(
               title1: 'CEO',
-              subTitle1: botDetailModel?.ceo ?? '',
+              subTitle1: portfolioBotDetailModel?.ceo ?? '',
               title2: 'Employees',
-              subTitle2: '${botDetailModel?.employees}',
+              subTitle2: '${portfolioBotDetailModel?.employees}',
             ),
             _spaceBetweenInfo,
             PairColumnText(
               title1: 'Headquarters',
-              subTitle1: botDetailModel?.headquarters ?? '',
+              subTitle1: portfolioBotDetailModel?.headquarters ?? '',
               title2: 'Founded',
-              subTitle2: botDetailModel?.founded ?? '',
+              subTitle2: portfolioBotDetailModel?.founded ?? '',
             ),
             const SizedBox(
               height: 23,
             ),
             CustomTextNew(
-              botDetailModel?.description ?? '',
+              portfolioBotDetailModel?.description ?? '',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             )
           ],
         ),
-        const SizedBox(
-          height: 33,
-        ),
         Padding(
           padding: AppValues.screenHorizontalPadding,
-          child: Column(
-            children: [
-              if (botType != BotType.squat && botDetailModel != null)
-                _detailedInformation(botDetailModel!),
-              PairColumnText(
-                  title1: 'Earliest Start Time',
-                  subTitle1: 'Not available yet',
-                  title2: 'Optimized Start Time',
-                  subTitle2: 'Not available yet',
-                  tooltipText1: _tempTooltipText,
-                  tooltipText2: _tempTooltipText),
-              _spaceBetweenInfo,
-              PairColumnText(
-                  title1: 'Investment Period',
-                  subTitle1: '${botDetailModel?.bot.duration}',
-                  title2: 'Estimated End Date',
-                  subTitle2: '${botDetailModel?.estimatedExpiredDate}',
-                  tooltipText1: _tempTooltipText,
-                  tooltipText2: _tempTooltipText),
-              if (botDetailModel?.performance.data != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: ChartAnimation(
-                      chartDataSets: botDetailModel!.performance.data!),
-                )
-            ],
-          ),
+          child: portfolioDetailProps.left,
         ),
       ],
     );
   }
-
-  Widget _detailedInformation(BotDetailModel botDetailModel) => Column(
-        children: [
-          BotPriceLineBar(
-            minPrice: botDetailModel.estimatedStopLossPrice,
-            maxPrice: botDetailModel.estimatedTakeProfitPrice,
-            currentPrice: botDetailModel.price,
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          PairColumnText(
-              title1: 'Stop Loss Level (USD)',
-              subTitle1: botDetailModel.estimatedStopLossPrice
-                  .convertToCurrencyDecimal(),
-              title2: 'Take Profit Level (USD)',
-              subTitle2: botDetailModel.estimatedTakeProfitPrice
-                  .convertToCurrencyDecimal(),
-              tooltipText1: _tempTooltipText,
-              tooltipText2: _tempTooltipText),
-          _spaceBetweenInfo,
-        ],
-      );
 }

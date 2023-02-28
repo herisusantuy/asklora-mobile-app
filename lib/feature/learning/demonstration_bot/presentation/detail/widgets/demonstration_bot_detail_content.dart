@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
-import '../../../../../chart/presentation/chart_animation.dart';
-import '../../../../domain/bot_detail_model.dart';
-import '../../../../domain/bot_recommendation_model.dart';
-import '../../../../utils/bot_stock_utils.dart';
-import '../../../widgets/custom_detail_expansion_tile.dart';
-import '../../../widgets/pair_column_text.dart';
-import 'bot_price_line_bar.dart';
+import '../../../../../bot_stock/domain/bot_recommendation_model.dart';
+import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_price_line_bar.dart';
+import '../../../../../bot_stock/presentation/widgets/custom_detail_expansion_tile.dart';
+import '../../../../../bot_stock/presentation/widgets/pair_column_text.dart';
+import '../../../../../bot_stock/utils/bot_stock_utils.dart';
 
-class BotRecommendationDetailContent extends StatelessWidget {
+class DemonstrationBotDetailContent extends StatelessWidget {
   final BotRecommendationModel botRecommendationModel;
-  final BotDetailModel? botDetailModel;
   final BotType botType;
+  final Widget chart;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
@@ -23,10 +20,10 @@ class BotRecommendationDetailContent extends StatelessWidget {
   final String _tempTooltipText =
       'Lorem ipsum dolor sit amet consectetur. Integer neque ultrices amet fermentum condimentum consequat. ';
 
-  const BotRecommendationDetailContent(
+  const DemonstrationBotDetailContent(
       {required this.botRecommendationModel,
       required this.botType,
-      this.botDetailModel,
+      required this.chart,
       Key? key})
       : super(key: key);
 
@@ -44,7 +41,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                botDetailModel?.bot.botDescription.detail ?? '',
+                botRecommendationModel.botWord,
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
@@ -60,7 +57,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.suited ?? '',
+              'Investors who want to take advantage of frequent price movements in the market.',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -76,7 +73,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.works ?? '',
+              'It sells all to stop loss or when it reaches the target profit. ',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -94,16 +91,15 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botDetailModel?.tickerName} ${botDetailModel?.ticker}',
+                      'Tesla TSLA',
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
-                      maxLines: 2,
                     ),
                     const SizedBox(
                       height: 5,
                     ),
                     CustomTextNew(
-                      'Not available yet',
+                      'Prev Close 10/07 16:00:04 ET',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -115,7 +111,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CustomTextNew(
-                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                      '223.07',
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
@@ -123,7 +119,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      '${(botDetailModel?.estimatedStopLossPrice ?? 0).convertToCurrencyDecimal()} ${(botDetailModel?.estimatedTakeProfitPct ?? 0).toStringAsFixed(4)}%',
+                      '-15.060 -6.32%',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -133,13 +129,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ],
           ),
           children: [
-            PairColumnText(
+            const PairColumnText(
               title1: 'Prev Close',
-              subTitle1: 'Not available yet',
+              subTitle1: '238.13',
               title2: 'Market Cap',
-              subTitle2: botDetailModel?.marketCap != null
-                  ? (botDetailModel?.marketCap ?? 0).toStringAsFixed(1)
-                  : '-',
+              subTitle2: '698.98B',
             ),
             const SizedBox(
               height: 2,
@@ -148,38 +142,38 @@ class BotRecommendationDetailContent extends StatelessWidget {
               color: AskLoraColors.gray,
             ),
             CustomTextNew(
-              'About ${botDetailModel?.tickerName}',
+              'About Tesla',
               style:
                   AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
             ),
             const SizedBox(
               height: 21,
             ),
-            PairColumnText(
+            const PairColumnText(
               title1: 'Sector(s)',
-              subTitle1: botDetailModel?.sector ?? '',
-              title2: 'Industry',
-              subTitle2: botDetailModel?.industry ?? '',
+              subTitle1: 'Consumer Cyclical',
+              title2: 'Take Profit Level',
+              subTitle2: 'Auto Manufacturers',
             ),
             _spaceBetweenInfo,
-            PairColumnText(
+            const PairColumnText(
               title1: 'CEO',
-              subTitle1: botDetailModel?.ceo ?? '',
+              subTitle1: 'Mr. Elon R. Musk',
               title2: 'Employees',
-              subTitle2: '${botDetailModel?.employees}',
+              subTitle2: '99,290',
             ),
             _spaceBetweenInfo,
-            PairColumnText(
+            const PairColumnText(
               title1: 'Headquarters',
-              subTitle1: botDetailModel?.headquarters ?? '',
+              subTitle1: 'Austin, TX',
               title2: 'Founded',
-              subTitle2: botDetailModel?.founded ?? '',
+              subTitle2: '2003',
             ),
             const SizedBox(
               height: 23,
             ),
             CustomTextNew(
-              botDetailModel?.description ?? '',
+              'Tesla, Inc. designs, develops, manufactures, leases, and sells electric vehicles, and energy generation and storage systems in the United States, China, and internationally. The company operates in two segments, Automotive, and Energy Generation and Storage. ',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             )
@@ -192,29 +186,26 @@ class BotRecommendationDetailContent extends StatelessWidget {
           padding: AppValues.screenHorizontalPadding,
           child: Column(
             children: [
-              if (botType != BotType.squat && botDetailModel != null)
-                _detailedInformation(botDetailModel!),
+              if (botType != BotType.squat) _detailedInformation,
               PairColumnText(
                   title1: 'Earliest Start Time',
-                  subTitle1: 'Not available yet',
+                  subTitle1: '03/12 15:30 ET',
                   title2: 'Optimized Start Time',
-                  subTitle2: 'Not available yet',
+                  subTitle2: '03/12 15:30 ET',
                   tooltipText1: _tempTooltipText,
                   tooltipText2: _tempTooltipText),
               _spaceBetweenInfo,
               PairColumnText(
                   title1: 'Investment Period',
-                  subTitle1: '${botDetailModel?.bot.duration}',
+                  subTitle1: '2 weeks',
                   title2: 'Estimated End Date',
-                  subTitle2: '${botDetailModel?.estimatedExpiredDate}',
+                  subTitle2: '03/26',
                   tooltipText1: _tempTooltipText,
                   tooltipText2: _tempTooltipText),
-              if (botDetailModel?.performance.data != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: ChartAnimation(
-                      chartDataSets: botDetailModel!.performance.data!),
-                )
+              const SizedBox(
+                height: 32,
+              ),
+              chart,
             ],
           ),
         ),
@@ -222,23 +213,21 @@ class BotRecommendationDetailContent extends StatelessWidget {
     );
   }
 
-  Widget _detailedInformation(BotDetailModel botDetailModel) => Column(
+  Widget get _detailedInformation => Column(
         children: [
-          BotPriceLineBar(
-            minPrice: botDetailModel.estimatedStopLossPrice,
-            maxPrice: botDetailModel.estimatedTakeProfitPrice,
-            currentPrice: botDetailModel.price,
+          const BotPriceLineBar(
+            minPrice: 210,
+            maxPrice: 240,
+            currentPrice: 220,
           ),
           const SizedBox(
             height: 24,
           ),
           PairColumnText(
               title1: 'Stop Loss Level (USD)',
-              subTitle1: botDetailModel.estimatedStopLossPrice
-                  .convertToCurrencyDecimal(),
+              subTitle1: '210.00',
               title2: 'Take Profit Level (USD)',
-              subTitle2: botDetailModel.estimatedTakeProfitPrice
-                  .convertToCurrencyDecimal(),
+              subTitle2: '210.00',
               tooltipText1: _tempTooltipText,
               tooltipText2: _tempTooltipText),
           _spaceBetweenInfo,
