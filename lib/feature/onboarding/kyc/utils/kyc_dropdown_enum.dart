@@ -65,9 +65,9 @@ enum EmploymentStatus {
   unknown('Unknown', 'UNKNOWN');
 
   final String value;
-  final String EnumString;
+  final String enumString;
 
-  const EmploymentStatus(this.value, this.EnumString);
+  const EmploymentStatus(this.value, this.enumString);
 }
 
 enum NatureOfBusiness {
