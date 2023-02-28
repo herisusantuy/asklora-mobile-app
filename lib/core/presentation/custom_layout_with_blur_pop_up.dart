@@ -11,6 +11,7 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
   final Widget content;
   final VoidCallback onTapReload;
   final bool showReloadPopUp;
+
   const CustomLayoutWithBlurPopUp(
       {required this.content,
       required this.onTapReload,
@@ -23,7 +24,7 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
     return Stack(
       children: [
         content,
-        if (showReloadPopUp)
+        if (showReloadPopUp) ...[
           ClipRect(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
@@ -33,7 +34,6 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
               ),
             ),
           ),
-        if (showReloadPopUp)
           Center(
             child: Padding(
               padding: AppValues.screenHorizontalPadding,
@@ -50,6 +50,7 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
               ),
             ),
           ),
+        ],
       ],
     );
   }
