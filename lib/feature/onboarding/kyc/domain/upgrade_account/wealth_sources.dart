@@ -5,8 +5,9 @@ part 'wealth_sources.g.dart';
 
 @JsonSerializable()
 class WealthSources extends Equatable {
-  @JsonKey(name: 'wealth_source')
+  @JsonKey(name: 'wealth_source', includeIfNull: false)
   final String? wealthSource;
+  @JsonKey(includeIfNull: false)
   final int? percentage;
 
   const WealthSources({

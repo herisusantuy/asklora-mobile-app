@@ -12,8 +12,16 @@ WealthSources _$WealthSourcesFromJson(Map<String, dynamic> json) =>
       percentage: json['percentage'] as int?,
     );
 
-Map<String, dynamic> _$WealthSourcesToJson(WealthSources instance) =>
-    <String, dynamic>{
-      'wealth_source': instance.wealthSource,
-      'percentage': instance.percentage,
-    };
+Map<String, dynamic> _$WealthSourcesToJson(WealthSources instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('wealth_source', instance.wealthSource);
+  writeNotNull('percentage', instance.percentage);
+  return val;
+}
