@@ -54,7 +54,6 @@ class BrokerAgreementScreen extends StatelessWidget {
           const SizedBox(
             height: 45,
           ),
-          // _customerSignature
         ],
       ),
       bottomButton: _bottomButton(context),

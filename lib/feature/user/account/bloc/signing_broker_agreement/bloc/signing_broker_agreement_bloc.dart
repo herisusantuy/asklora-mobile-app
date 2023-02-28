@@ -26,7 +26,7 @@ class SigningBrokerAgreementBloc
 
   _onAlpacaCustomerAgreementOpened(AlpacaCustomerAgreementOpened event,
       Emitter<SigningBrokerAgreementState> emit) async {
-    await _signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
+    await _signingBrokerAgreementRepository.openW8BenForm(
         'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf');
 
     emit(state.copyWith(

@@ -230,16 +230,12 @@ class TaxAgreementScreen extends StatelessWidget {
             previous.legalName != current.legalName ||
             previous.isSignatureChecked != current.isSignatureChecked,
         builder: (context, state) {
-          bool isButtonDisabled = true;
-          if (state.isSignatureChecked &&
-              inputtedLegalName == state.legalName) {
-            isButtonDisabled = false;
-          }
           return ButtonPair(
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.kycSummary)),
-            disablePrimaryButton: isButtonDisabled,
+            disablePrimaryButton:
+                state.disableSignatureButton(inputtedLegalName),
             secondaryButtonOnClick: () => CarouselScreen.open(context),
             primaryButtonLabel: 'AGREE',
             secondaryButtonLabel: 'CONTINUE LATER',

@@ -42,7 +42,7 @@ void main() async {
         'Tap "Alpaca Customer Agreement" button',
         build: () => signingBrokerAgreementBloc,
         act: (bloc) {
-          when(signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
+          when(signingBrokerAgreementRepository.openW8BenForm(
                   'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf'))
               .thenAnswer((_) => Future.value(true));
           bloc.add(const AlpacaCustomerAgreementOpened(true));
@@ -83,8 +83,8 @@ void main() async {
         'Checked second check box',
         build: () => signingBrokerAgreementBloc,
         act: (bloc) {
-          when(signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
-                  'https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf'))
+          when(signingBrokerAgreementRepository
+                  .openW8BenForm('https://www.irs.gov/pub/irs-pdf/fw8ben.pdf'))
               .thenAnswer((_) => Future.value(true));
           bloc.add(const AlpacaCustomerAgreementOpened(true));
           bloc.add(const SigningAgreementChecked(true));

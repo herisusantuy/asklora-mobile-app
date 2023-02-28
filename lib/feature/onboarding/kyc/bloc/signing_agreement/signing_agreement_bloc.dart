@@ -31,8 +31,8 @@ class SigningAgreementBloc
 
   _onW8BenFormOpened(
       W8BenFormOpened event, Emitter<SigningAgreementState> emit) async {
-    await _signingBrokerAgreementRepository.openAlpacaCustomerAgreement(
-        'https://www.irs.gov/pub/irs-pdf/fw8ben.pdf');
+    await _signingBrokerAgreementRepository
+        .openW8BenForm('https://www.irs.gov/pub/irs-pdf/fw8ben.pdf');
   }
 
   _onBoundByAskloraAgreementChecked(BoundByAskloraAgreementChecked event,

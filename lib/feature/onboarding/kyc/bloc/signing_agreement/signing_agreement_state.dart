@@ -62,4 +62,12 @@ class SigningAgreementState extends Equatable {
     }
     return true;
   }
+
+  bool disableSignatureButton(String inputtedLegalName) {
+    if (isSignatureChecked && inputtedLegalName == legalName) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
