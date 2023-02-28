@@ -1,19 +1,20 @@
 import 'package:equatable/equatable.dart';
 
 enum SourceOfWealthType {
-  incomeFromEmployment('Income from Employment'),
-  inheritance('Inheritance/Gift'),
-  interestOrDividendIncome('Interest / Dividend Income'),
-  marketTradingProfits('Market Trading Profits'),
-  disability('Disability / Severance / Unemployment'),
-  pension('Pension / Government Retirement benefit'),
-  property('Property'),
-  allowanceOrSpousalIncome('Allowance / Spousal Income'),
-  other('Other');
+  incomeFromEmployment('Income from Employment', 'INCOME'),
+  inheritance('Inheritance/Gift', 'INHERITANCE'),
+  interestOrDividendIncome('Interest / Dividend Income', 'INTEREST'),
+  marketTradingProfits('Market Trading Profits', 'MARKETPROFIT'),
+  disability('Disability / Severance / Unemployment', 'DISABILITY'),
+  pension('Pension / Government Retirement benefit', 'PENSION'),
+  property('Property', 'PROPERTY'),
+  allowanceOrSpousalIncome('Allowance / Spousal Income', 'ALLOWANCE'),
+  other('Other', 'OTHER');
 
   final String value;
+  final String enumString;
 
-  const SourceOfWealthType(this.value);
+  const SourceOfWealthType(this.value, this.enumString);
 }
 
 class SourceOfWealthModel {
