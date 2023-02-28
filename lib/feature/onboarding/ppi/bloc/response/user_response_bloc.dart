@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:collection/collection.dart';
 
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/domain/pair.dart';
 import '../../../../../core/domain/triplet.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/utils/storage/storage_keys.dart';
@@ -28,6 +33,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     on<SendBulkResponse>(_onSendBulkResponse);
     on<SaveUserResponse>(_onUserResponseSave);
     on<SaveOmniSearchResponse>(_onSaveOmniSearchResponse);
+    on<CalculateScore>(_onCalculateScore);
   }
 
   final PpiResponseRepository _ppiResponseRepository;
@@ -85,6 +91,12 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
   void _onUpdatePpiUserResponse(
       UpdatePpiUserResponse event, Emitter<UserResponseState> emit) async {
     emit(state);
+  }
+
+  void _onCalculateScore(
+      CalculateScore event, Emitter<UserResponseState> emit) async {
+    final result = await state.isNotEligible();
+    emit(ScoreCalculation(isUserIsNotEligible: result));
   }
 
   void _onSendBulkResponse(

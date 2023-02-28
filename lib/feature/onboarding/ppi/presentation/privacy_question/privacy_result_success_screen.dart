@@ -19,8 +19,9 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
       },
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
+        ppiResult: PpiResult.success,
         memojiText:
-            "One year older, one year wiser, you know. \n \n Ok! Let's get to know more about you!",
+            'Age is just a number.\n\nYou picked us, so you are already ahead of the game!\n\nOk! Let’s get to know more about you!',
         bottomButton: PrimaryButton(
           key: const Key('next_button'),
           label: 'SURE!',

@@ -57,6 +57,7 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
         if (state.responseState == ResponseState.success &&
             state.ppiResponseState == PpiResponseState.dispatchResponse) {
           return PpiResultScreen(
+            ppiResult: PpiResult.success,
             memojiText: 'Your investment style is all set!',
             additionalMessage:
                 'Time to reveal your personalised recommendations. The best part?  You’re eligible for a FREE AI trade (HKD500).\n\nBut first things first, let’s get that investment account set up!',
