@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
@@ -44,16 +45,15 @@ class PrivacyQuestionScreen extends StatelessWidget {
               }),
               BlocListener<UserResponseBloc, UserResponseState>(
                   listener: (context, state) {
-                if (state is ScoreCalculation) {
-                  if (state.isUserIsNotEligible) {
-                    context.read<NavigationBloc<QuestionPageStep>>().add(
-                        const PageChanged(
-                            QuestionPageStep.privacyResultFailed));
-                  } else {
-                    context.read<NavigationBloc<QuestionPageStep>>().add(
-                        const PageChanged(
-                            QuestionPageStep.privacyResultSuccess));
-                  }
+                if (state.ppiResponseState == PpiResponseState.calculate &&
+                    state.responseState == ResponseState.error) {
+                  context.read<NavigationBloc<QuestionPageStep>>().add(
+                      const PageChanged(QuestionPageStep.privacyResultFailed));
+                } else if (state.ppiResponseState ==
+                        PpiResponseState.calculate &&
+                    state.responseState == ResponseState.success) {
+                  context.read<NavigationBloc<QuestionPageStep>>().add(
+                      const PageChanged(QuestionPageStep.privacyResultSuccess));
                 }
               }),
             ],

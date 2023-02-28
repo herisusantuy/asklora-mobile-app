@@ -95,8 +95,15 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   void _onCalculateScore(
       CalculateScore event, Emitter<UserResponseState> emit) async {
+    emit(state.copyWith(
+      responseState: ResponseState.loading,
+      ppiResponseState: PpiResponseState.calculate,
+    ));
     final result = await _isNotEligible();
-    emit(ScoreCalculation(isUserIsNotEligible: result));
+    emit(state.copyWith(
+      responseState: result ? ResponseState.error : ResponseState.success,
+      ppiResponseState: PpiResponseState.calculate,
+    ));
   }
 
   void _onSendBulkResponse(

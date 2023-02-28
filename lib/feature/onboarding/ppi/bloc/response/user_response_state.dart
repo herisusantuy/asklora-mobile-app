@@ -1,6 +1,11 @@
 part of 'user_response_bloc.dart';
 
-enum PpiResponseState { initAddResponse, finishAddResponse, dispatchResponse }
+enum PpiResponseState {
+  initAddResponse,
+  calculate,
+  finishAddResponse,
+  dispatchResponse
+}
 
 class UserResponseState extends Equatable {
   final ResponseState responseState;
@@ -52,10 +57,4 @@ class UserResponseState extends Equatable {
         cachedDefaultChoices,
         ppiResponseState
       ];
-}
-
-class ScoreCalculation extends UserResponseState {
-  final bool isUserIsNotEligible;
-
-  ScoreCalculation({required this.isUserIsNotEligible});
 }
