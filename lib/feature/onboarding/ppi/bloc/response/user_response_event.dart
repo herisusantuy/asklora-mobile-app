@@ -39,6 +39,11 @@ class SendBulkResponse extends UserResponseEvent {
   List<Object?> get props => [DateTime.now().millisecondsSinceEpoch];
 }
 
+class CalculateScore extends UserResponseEvent {
+  @override
+  List<Object?> get props => [DateTime.now().millisecondsSinceEpoch];
+}
+
 class SkipResponse extends UserResponseEvent {
   @override
   List<Object?> get props => [];
