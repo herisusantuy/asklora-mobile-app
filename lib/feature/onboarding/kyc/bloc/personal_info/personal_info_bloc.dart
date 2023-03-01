@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/hkid_validation.dart';
@@ -54,7 +56,15 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   _onPersonalInfoDateOfBirthChange(
       PersonalInfoDateOfBirthChanged event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(dateOfBirth: event.dateOfBirth));
+    emit(state.copyWith(dateOfBirth: _formatDate(event.dateOfBirth)));
+  }
+
+  String _formatDate(String date) {
+    DateTime parseDate = DateFormat('yyyy-MM-dd HH:mm:ss.SSS').parse(date);
+    final inputDate = DateTime.parse(parseDate.toString());
+    final outputFormat = DateFormat('yyyy-MM-dd');
+    final outputDate = outputFormat.format(inputDate);
+    return outputDate;
   }
 
   _onPersonalInfoPhoneCountryCodeChange(

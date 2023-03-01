@@ -114,7 +114,8 @@ void main() {
           'Expected bloc error should be error as age is below 18',
           build: () => personalInfoBloc,
           act: (bloc) {
-            bloc.add(const PersonalInfoDateOfBirthChanged('2010-08-08'));
+            bloc.add(const PersonalInfoDateOfBirthChanged(
+                '2010-08-08 00:00:00.000'));
             bloc.add(const PersonalInfoNext());
           },
           expect: () => {
@@ -217,7 +218,8 @@ void main() {
             bloc.add(const PersonalInfoFirstNameChanged('John'));
             bloc.add(const PersonalInfoLastNameChanged('Doe'));
             bloc.add(const PersonalInfoGenderChanged('Male'));
-            bloc.add(const PersonalInfoDateOfBirthChanged('1990-09-10'));
+            bloc.add(const PersonalInfoDateOfBirthChanged(
+                '1990-09-10 00:00:00.000'));
             bloc.add(
                 const PersonalInfoCountryOfBirthChanged('HKG', 'Hong Kong'));
             bloc.add(const PersonalInfoPhoneCountryCodeChanged('+62'));
