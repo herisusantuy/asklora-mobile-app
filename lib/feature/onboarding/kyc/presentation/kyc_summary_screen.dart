@@ -1,7 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
@@ -9,12 +16,19 @@ import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/kyc_bloc.dart';
 import '../bloc/personal_info/personal_info_bloc.dart';
+import '../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../bloc/source_of_wealth/source_of_wealth_bloc.dart';
+import '../domain/upgrade_account/affiliated_person.dart';
+import '../domain/upgrade_account/agreement.dart';
+import '../domain/upgrade_account/employment_info.dart';
+import '../domain/upgrade_account/proofs_of_address.dart';
+import '../domain/upgrade_account/residence_info.dart';
+import '../domain/upgrade_account/upgrade_account_request.dart';
+import '../domain/upgrade_account/wealth_sources.dart';
 import 'financial_profile/widgets/financial_profile_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
 import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
 import 'widgets/kyc_base_form.dart';
-import '../../../../core/presentation/buttons/button_pair.dart';
 
 class KycSummaryScreen extends StatelessWidget {
   final PersonalInfoState personalInfoState;
@@ -74,17 +88,78 @@ class KycSummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => ButtonPair(
-        primaryButtonOnClick: () {
-          context
-              .read<AppBloc>()
-              .add(const SaveUserJourney(UserJourney.freeBotStock));
-          context
-              .read<NavigationBloc<KycPageStep>>()
-              .add(const PageChanged(KycPageStep.kycResultScreen));
+  Widget _bottomButton(BuildContext context) => BlocListener<KycBloc, KycState>(
+        listenWhen: (previous, current) =>
+            previous.response.state != current.response.state,
+        listener: (context, state) {
+          switch (state.response.state) {
+            case ResponseState.error:
+              CustomInAppNotification.show(context, state.response.message);
+              break;
+            case ResponseState.success:
+              context
+                  .read<NavigationBloc<KycPageStep>>()
+                  .add(const PageChanged(KycPageStep.kycResultScreen));
+              break;
+            default:
+              break;
+          }
         },
-        secondaryButtonOnClick: () => CarouselScreen.open(context),
-        primaryButtonLabel: 'COMPLETE',
-        secondaryButtonLabel: 'SAVE FOR LATER',
+        child: ButtonPair(
+          primaryButtonOnClick: () {
+            context.read<KycBloc>().add(SubmitKyc(UpgradeAccountRequest(
+                residenceInfo: ResidenceInfo(
+                  addressLine1: addressProofState.addressLine1,
+                  addressLine2: addressProofState.addressLine2,
+                  district: addressProofState.district?.value,
+                  region: addressProofState.region?.value,
+                ),
+                proofsOfAddress: addressProofState.addressProofImages
+                    .map((e) => ProofsOfAddress(
+                        proofFile:
+                            'data:image/png;base64,${base64.encode(utf8.encode(e.name))}'))
+                    .toList(),
+                employmentInfo: EmploymentInfo(
+                    employmentStatus:
+                        financialProfileState.employmentStatus.enumString,
+                    employer: financialProfileState.employer,
+                    employerBusiness:
+                        financialProfileState.natureOfBusiness?.value,
+                    employerBusinessDescription:
+                        financialProfileState.natureOfBusinessDescription,
+                    occupation: financialProfileState.occupation?.value,
+                    employerAddressLine1: financialProfileState.employerAddress,
+                    employerAddressLine2:
+                        financialProfileState.employerAddressTwo,
+                    district: financialProfileState.district?.value,
+                    region: financialProfileState.region?.value,
+                    country: financialProfileState.country,
+                    differentCountryReason:
+                        financialProfileState.detailInformationOfCountry),
+                wealthSources: sourceOfWealthState.sourceOfWealthAnswers
+                    .map((e) => WealthSources(
+                          wealthSource: e.sourceOfWealthType.enumString,
+                          percentage: e.amount,
+                        ))
+                    .toList(),
+                affiliatedPerson: disclosureAffiliationState
+                            .affiliatedPersonFirstName.isEmpty &&
+                        disclosureAffiliationState
+                            .affiliatedPersonLastName.isEmpty
+                    ? null
+                    : AffiliatedPerson(
+                        firstName: disclosureAffiliationState
+                            .affiliatedPersonFirstName,
+                        lastName:
+                            disclosureAffiliationState.affiliatedPersonLastName,
+                      ))));
+            context
+                .read<AppBloc>()
+                .add(const SaveUserJourney(UserJourney.freeBotStock));
+          },
+          secondaryButtonOnClick: () => CarouselScreen.open(context),
+          primaryButtonLabel: 'COMPLETE',
+          secondaryButtonLabel: 'SAVE FOR LATER',
+        ),
       );
 }
