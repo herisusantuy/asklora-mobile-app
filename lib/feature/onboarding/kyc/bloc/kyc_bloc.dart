@@ -1,16 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/domain/base_response.dart';
 import '../domain/onfido/onfido_result_request.dart';
 import '../domain/onfido/onfido_result_response.dart';
-import '../domain/upgrade_account/personal_info_request.dart';
-import '../domain/upgrade_account/personal_info_response.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
-import 'personal_info/personal_info_bloc.dart';
 
 part 'kyc_event.dart';
-
 part 'kyc_state.dart';
 
 class KycBloc extends Bloc<KycEvent, KycState> {
