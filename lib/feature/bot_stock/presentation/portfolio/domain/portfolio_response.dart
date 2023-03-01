@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../core/utils/extensions.dart';
+
 part 'portfolio_response.g.dart';
 
 @JsonSerializable()

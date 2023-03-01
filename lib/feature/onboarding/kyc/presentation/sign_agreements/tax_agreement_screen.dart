@@ -184,21 +184,30 @@ class TaxAgreementScreen extends StatelessWidget {
                 color: AskLoraColors.charcoal,
               ),
             ),
-            RichText(
+            _acceptedSignatureNameHint,
+          ],
+        ),
+      );
+
+  Widget get _acceptedSignatureNameHint =>
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
+          buildWhen: (previous, current) =>
+              previous.legalName != current.legalName,
+          builder: (context, state) {
+            return RichText(
                 text: TextSpan(children: [
               TextSpan(
                   text: 'Accepted signature(s): ',
                   style: AskLoraTextStyles.body2
                       .copyWith(color: AskLoraColors.charcoal)),
               TextSpan(
-                  text: 'Stephen Joon Choi',
+                  text:
+                      '${personalInfoState.firstName} ${personalInfoState.lastName}',
                   style: AskLoraTextStyles.body2.copyWith(
                       color: AskLoraColors.charcoal,
                       fontWeight: FontWeight.bold)),
-            ])),
-          ],
-        ),
-      );
+            ]));
+          });
 
   Widget get _legalNameInput =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
@@ -213,8 +222,6 @@ class TaxAgreementScreen extends StatelessWidget {
                 onChanged: (value) => context
                     .read<SigningAgreementBloc>()
                     .add(LegalNameSignatureChanged(value)),
-                hintText:
-                    '${personalInfoState.firstName} ${personalInfoState.lastName}',
               ),
             );
           });

@@ -124,6 +124,14 @@ class MockSharedPreference extends _i1.Mock implements _i5.SharedPreference {
         returnValue: _i4.Future<String?>.value(),
       ) as _i4.Future<String?>);
   @override
+  _i4.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readBoolData,
+          [key],
+        ),
+        returnValue: _i4.Future<bool?>.value(),
+      ) as _i4.Future<bool?>);
+  @override
   _i4.Future<bool> writeData(
     String? key,
     String? value,
@@ -131,6 +139,21 @@ class MockSharedPreference extends _i1.Mock implements _i5.SharedPreference {
       (super.noSuchMethod(
         Invocation.method(
           #writeData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<bool> writeBoolData(
+    String? key,
+    bool? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeBoolData,
           [
             key,
             value,
