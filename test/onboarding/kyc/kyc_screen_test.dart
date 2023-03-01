@@ -199,8 +199,6 @@ void main() {
             findsOneWidget);
         expect(find.byKey(const Key('understand_agreement_checkbox')),
             findsOneWidget);
-        expect(
-            find.byKey(const Key('customer_signature_drawer')), findsOneWidget);
         expect(kycButtonPair, findsOneWidget);
       });
 

@@ -84,8 +84,7 @@ class KycScreen extends StatelessWidget {
               BlocProvider(
                 create: (context) => SigningAgreementBloc(
                     signingBrokerAgreementRepository:
-                        SigningBrokerAgreementRepository(),
-                    signatureController: SignatureController()),
+                        SigningBrokerAgreementRepository()),
               ),
             ],
             child: Builder(builder: (context) {
@@ -208,9 +207,10 @@ class KycScreen extends StatelessWidget {
                 progress: 0.8,
               );
             case KycPageStep.signTaxAgreements:
-              return const TaxAgreementScreen(
-                progress: 0.85,
-              );
+              return TaxAgreementScreen(
+                  progress: 0.85,
+                  basicInformationState:
+                      context.read<BasicInformationBloc>().state);
             case KycPageStep.kycSummary:
               return KycSummaryScreen(
                 personalInfoState: context.read<PersonalInfoBloc>().state,

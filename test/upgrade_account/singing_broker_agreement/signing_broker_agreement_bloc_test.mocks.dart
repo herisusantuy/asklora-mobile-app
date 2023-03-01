@@ -31,10 +31,9 @@ class MockSigningBrokerAgreementRepository extends _i1.Mock
   }
 
   @override
-  _i3.Future<bool> openAlpacaCustomerAgreement(String? filePath) =>
-      (super.noSuchMethod(
+  _i3.Future<bool> openW8BenForm(String? filePath) => (super.noSuchMethod(
         Invocation.method(
-          #openAlpacaCustomerAgreement,
+          #openW8BenForm,
           [filePath],
         ),
         returnValue: _i3.Future<bool>.value(false),
