@@ -19,22 +19,20 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
       },
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
+        ppiResult: PpiResult.success,
         memojiText:
-            "One year older, one year wiser, you know. \n \n Ok! Let's get to know more about you!",
-        bottomButton: Padding(
-          padding: const EdgeInsets.only(top: 20.0, bottom: 35),
-          child: PrimaryButton(
-            key: const Key('next_button'),
-            label: 'SURE!',
-            onTap: () {
-              context
-                  .read<QuestionBloc>()
-                  .add(const CurrentPersonalisationPageIncremented());
-              context
-                  .read<NavigationBloc<QuestionPageStep>>()
-                  .add(const PageChanged(QuestionPageStep.personalisation));
-            },
-          ),
+            'Age is just a number.\n\nYou picked us, so you are already ahead of the game!\n\nOk! Let’s get to know more about you!',
+        bottomButton: PrimaryButton(
+          key: const Key('next_button'),
+          label: 'SURE!',
+          onTap: () {
+            context
+                .read<QuestionBloc>()
+                .add(const CurrentPersonalisationPageIncremented());
+            context
+                .read<NavigationBloc<QuestionPageStep>>()
+                .add(const PageChanged(QuestionPageStep.personalisation));
+          },
         ),
       ),
     );

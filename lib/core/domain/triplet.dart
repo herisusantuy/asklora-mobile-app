@@ -4,4 +4,9 @@ class Triplet<T, S, U> {
   final T left;
   final S middle;
   final U right;
+
+  @override
+  String toString() {
+    return '{left: $left, middle: $middle, right: $right}';
+  }
 }
