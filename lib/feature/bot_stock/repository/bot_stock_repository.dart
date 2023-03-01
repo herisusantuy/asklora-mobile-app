@@ -79,22 +79,10 @@ class BotStockRepository {
   Future<BaseResponse<List<BotRecommendationModel>>>
       fetchBotRecommendation() async {
     try {
-      if (isDemoEnable) {
-        ///MOCK
-        await Future.delayed(const Duration(seconds: 1));
-        final String response =
-            await rootBundle.loadString('assets/json/bot_recommendation.json');
-        Iterable iterable = json.decode(response);
-
-        return BaseResponse.complete(List<BotRecommendationModel>.from(
-            iterable.map((model) => BotRecommendationModel.fromJson(model))));
-      } else {
-        ///REAL
-        var response = await _botStockApiClient.fetchBotRecommendation(
-            await _sharedPreference.readData(sfKeyTempName) ?? '');
-        return BaseResponse.complete(
-            BotRecommendationResponse.fromJson(response.data).data);
-      }
+      var response = await _botStockApiClient.fetchBotRecommendation(
+          await _sharedPreference.readData(sfKeyTempName) ?? '');
+      return BaseResponse.complete(
+          BotRecommendationResponse.fromJson(response.data).data);
     } catch (e) {
       return BaseResponse.error('Something went wrong');
     }
@@ -103,25 +91,12 @@ class BotStockRepository {
   Future<BaseResponse<List<BotRecommendationModel>>> fetchFreeBotRecommendation(
       {bool isFreeBot = false}) async {
     try {
-      if (isDemoEnable) {
-        await Future.delayed(const Duration(seconds: 1));
-        final String response =
-            await rootBundle.loadString('assets/json/bot_recommendation.json');
-        Iterable iterable = json.decode(response);
-        List<BotRecommendationModel> data = List<BotRecommendationModel>.from(
-            iterable.map((model) => BotRecommendationModel.fromJson(model)
-                .copyWith(freeBot: true)));
-        return BaseResponse.complete(data);
-      } else {
-        ///REAL
-        ///TODO get account id from local later
-        var response = await _botStockApiClient.fetchBotRecommendation(
-            await _sharedPreference.readData(sfKeyTempName) ?? '');
-        return BaseResponse.complete(List<BotRecommendationModel>.from(
-            BotRecommendationResponse.fromJson(response.data)
-                .data
-                .map((model) => model.copyWith(freeBot: true))));
-      }
+      var response = await _botStockApiClient.fetchBotRecommendation(
+          await _sharedPreference.readData(sfKeyTempName) ?? '');
+      return BaseResponse.complete(List<BotRecommendationModel>.from(
+          BotRecommendationResponse.fromJson(response.data)
+              .data
+              .map((model) => model.copyWith(freeBot: true))));
     } catch (e) {
       return BaseResponse.error('Something went wrong');
     }
@@ -136,6 +111,7 @@ class BotStockRepository {
   Future<BaseResponse<bool>> tradeBotStock(
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount}) async {
+    await removeInvestmentStyleState();
     if (isDemoEnable) {
       ///MOCK
       await Future.delayed(const Duration(milliseconds: 500));
@@ -148,5 +124,10 @@ class BotStockRepository {
       await Future.delayed(const Duration(milliseconds: 500));
       return BaseResponse.complete(true);
     }
+  }
+
+  Future<bool> removeInvestmentStyleState() async {
+    _sharedPreference.deleteData('investment_style_state');
+    return true;
   }
 }

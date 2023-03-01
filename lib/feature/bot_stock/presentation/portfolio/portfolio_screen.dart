@@ -53,8 +53,7 @@ class PortfolioScreen extends StatelessWidget {
 
         ///fetch portfolio when current UserJourney already passed freeBotStock
         if (UserJourney.compareUserJourney(
-            source: context.read<AppBloc>().state.userJourney,
-            target: UserJourney.freeBotStock)) {
+            context: context, target: UserJourney.freeBotStock)) {
           portfolioBloc.add(const FetchBotPortfolio());
           portfolioBloc.add(FetchPortfolio());
         }

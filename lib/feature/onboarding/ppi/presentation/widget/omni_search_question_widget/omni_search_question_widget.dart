@@ -23,6 +23,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
   final TextInputType textInputType;
   final List<TextInputFormatter>? textInputFormatterList;
   final TextEditingController keywordController = TextEditingController();
+  final bool enableBackNavigation;
 
   OmniSearchQuestionWidget(
       {required this.defaultOmniSearch,
@@ -31,6 +32,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
       required this.onCancel,
       this.textInputType = TextInputType.text,
       this.textInputFormatterList,
+      this.enableBackNavigation = true,
       Key? key})
       : super(key: key);
 
@@ -55,10 +57,14 @@ class OmniSearchQuestionWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            QuestionHeader(
-              key: const Key('question_header'),
-              onTapBack: onCancel,
-            ),
+            enableBackNavigation
+                ? QuestionHeader(
+                    key: const Key('question_header'),
+                    onTapBack: onCancel,
+                  )
+                : const SizedBox(
+                    height: 20,
+                  ),
             Expanded(
               child: LayoutBuilder(builder: (context, viewportConstraints) {
                 return SingleChildScrollView(
