@@ -13,6 +13,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../core/presentation/shimmer.dart';
@@ -57,29 +58,39 @@ class BotRecommendationScreen extends StatelessWidget {
           backgroundColor: AskLoraColors.white,
           body: Padding(
             padding: const EdgeInsets.only(top: 70),
-            child: BlocBuilder<AppBloc, AppState>(
-                buildWhen: (previous, current) =>
-                    previous.userJourney != current.userJourney,
-                builder: (context, state) {
-                  return ListView(
-                    padding: const EdgeInsets.only(bottom: 35),
-                    children: [
-                      _header(context: context, userJourney: state.userJourney),
-                      const BotRecommendationList(
-                        verticalMargin: 14,
-                      ),
-                      _loraMemojiWidget(context),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      const BotRecommendationFaq(),
-                      const SizedBox(
-                        height: 28,
-                      ),
-                      _needHelpButton
-                    ],
-                  );
-                }),
+            child: BlocBuilder<BotStockBloc, BotStockState>(
+              buildWhen: (previous, current) =>
+                  previous.botRecommendationResponse !=
+                  current.botRecommendationResponse,
+              builder: (context, state) => CustomLayoutWithBlurPopUp(
+                showReloadPopUp: state.botRecommendationResponse.state ==
+                    ResponseState.error,
+                content: ListView(
+                  padding: const EdgeInsets.only(bottom: 35),
+                  children: [
+                    _header(
+                        context: context,
+                        userJourney: context.read<AppBloc>().state.userJourney),
+                    BotRecommendationList(
+                      verticalMargin: 14,
+                      botStockState: state,
+                    ),
+                    _loraMemojiWidget(context),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    const BotRecommendationFaq(),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    _needHelpButton
+                  ],
+                ),
+                onTapReload: () => context.read<BotStockBloc>().add(
+                      FetchFreeBotRecommendation(),
+                    ),
+              ),
+            ),
           )),
     );
   }

@@ -13,7 +13,8 @@ class BotRecommendationChart extends StatelessWidget {
             return const SizedBox.shrink();
           } else {
             return ChartAnimation(
-                chartDataSets: state.botDetailResponse.data!.performance.data);
+                chartDataSets:
+                    state.botDetailResponse.data!.performance.data ?? []);
           }
         });
   }

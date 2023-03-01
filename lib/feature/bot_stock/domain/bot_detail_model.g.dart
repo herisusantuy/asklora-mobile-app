@@ -94,8 +94,8 @@ Map<String, dynamic> _$BotDescriptionModelToJson(
 
 PerformanceModel _$PerformanceModelFromJson(Map<String, dynamic> json) =>
     PerformanceModel(
-      (json['data'] as List<dynamic>)
-          .map((e) => ChartDataSet.fromJson(e as Map<String, dynamic>))
+      (json['data'] as List<dynamic>?)
+          ?.map((e) => ChartDataSet.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

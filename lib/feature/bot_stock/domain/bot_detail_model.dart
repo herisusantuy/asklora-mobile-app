@@ -144,7 +144,7 @@ class BotDescriptionModel extends Equatable {
 
 @JsonSerializable()
 class PerformanceModel extends Equatable {
-  final List<ChartDataSet> data;
+  final List<ChartDataSet>? data;
 
   const PerformanceModel(this.data);
 
