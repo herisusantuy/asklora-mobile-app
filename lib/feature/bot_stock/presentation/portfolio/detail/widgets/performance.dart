@@ -1,7 +1,7 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class Performance extends StatelessWidget {
-  final PortfolioBotDetailModel portfolioBotDetailModel;
+  final PortfolioBotDetailModel? portfolioBotDetailModel;
   final PortfolioBotModel portfolioBotModel;
   final String _tempTooltipText =
       'Lorem ipsum dolor sit amet consectetur. Integer neque ultrices amet fermentum condimentum consequat. ';
@@ -11,9 +11,7 @@ class Performance extends StatelessWidget {
   );
 
   const Performance(
-      {required this.portfolioBotDetailModel,
-      required this.portfolioBotModel,
-      Key? key})
+      {this.portfolioBotDetailModel, required this.portfolioBotModel, Key? key})
       : super(key: key);
 
   @override
@@ -68,6 +66,11 @@ class Performance extends StatelessWidget {
         const SizedBox(
           height: 32,
         ),
-        ChartAnimation(chartDataSets: portfolioBotDetailModel.performance.data),
+        if (portfolioBotDetailModel?.performance.data != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 32.0),
+            child: ChartAnimation(
+                chartDataSets: portfolioBotDetailModel!.performance.data),
+          ),
       ]);
 }

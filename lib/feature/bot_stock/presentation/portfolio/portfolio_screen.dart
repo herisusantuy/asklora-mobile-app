@@ -13,6 +13,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/currency_enum.dart';
@@ -63,155 +64,159 @@ class PortfolioScreen extends StatelessWidget {
         useSafeArea: false,
         backgroundColor: AskLoraColors.white,
         enableBackNavigation: false,
-        body: ListView(
-          padding:
-              AppValues.screenHorizontalPadding.copyWith(top: 15, bottom: 15),
-          children: [
-            _botStockDetail,
-            const SizedBox(
-              height: 40,
-            ),
-            CustomTextNew(
-              'Your Botstocks',
-              style:
-                  AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            BlocBuilder<AppBloc, AppState>(
-              buildWhen: (previous, current) =>
-                  previous.userJourney != current.userJourney,
-              builder: (context, state) => BotPortfolioList(
-                userJourney: state.userJourney,
-              ),
-            ),
-          ],
-        ),
+        body: BlocBuilder<PortfolioBloc, PortfolioState>(
+            buildWhen: (previous, current) =>
+                previous.portfolioResponse != current.portfolioResponse ||
+                previous.botPortfolioResponse != current.botPortfolioResponse ||
+                previous.currency != current.currency,
+            builder: (context, state) {
+              return CustomLayoutWithBlurPopUp(
+                showReloadPopUp:
+                    state.botPortfolioResponse.state == ResponseState.error ||
+                        state.portfolioResponse.state == ResponseState.error,
+                content: ListView(
+                  padding: AppValues.screenHorizontalPadding
+                      .copyWith(top: 15, bottom: 15),
+                  children: [
+                    _botStockDetail(context, state),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    CustomTextNew(
+                      'Your Botstocks',
+                      style: AskLoraTextStyles.h2
+                          .copyWith(color: AskLoraColors.charcoal),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    BotPortfolioList(
+                      userJourney: context.read<AppBloc>().state.userJourney,
+                      portfolioState: state,
+                    ),
+                  ],
+                ),
+                onTapReload: () {
+                  context.read<PortfolioBloc>().add(const FetchBotPortfolio());
+                  context.read<PortfolioBloc>().add(FetchPortfolio());
+                },
+              );
+            }),
       ),
     );
   }
 
-  Widget get _botStockDetail {
-    return BlocBuilder<PortfolioBloc, PortfolioState>(
-        buildWhen: (previous, current) =>
-            previous.portfolioResponse != current.portfolioResponse ||
-            previous.currency != current.currency,
-        builder: (context, state) {
-          final PortfolioResponse? data = state.portfolioResponse.data;
+  Widget _botStockDetail(BuildContext context, PortfolioState state) {
+    final PortfolioResponse? data = state.portfolioResponse.data;
 
-          return Column(
-            children: [
-              SafeArea(
-                bottom: false,
-                child: RoundColoredBox(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 16),
-                    content: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  CustomTextNew(
-                                    'Total Portfolio Value   -   ',
-                                    style: AskLoraTextStyles.body4,
-                                  ),
-                                  CurrencyDropdown(
-                                    initialValue: CurrencyType.hkd,
-                                    onChanged: (newValue) {
-                                      context
-                                          .read<PortfolioBloc>()
-                                          .add(CurrencyChanged(newValue!));
-                                    },
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              CustomTextNew(
-                                (data?.totalPortfolio ?? 0)
-                                    .convertToCurrencyDecimal(),
-                                style: AskLoraTextStyles.h2,
-                              ),
-                              if (state.currency == CurrencyType.usd)
-                                CustomTextNew(
-                                  'Indicative Quote - HKD1 ≈ USD${0.13}',
-                                  style: AskLoraTextStyles.body4,
-                                )
-                            ],
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
+    return Column(
+      children: [
+        SafeArea(
+          bottom: false,
+          child: RoundColoredBox(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              content: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                      child: RoundColoredBox(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          content: Column(
-                            children: [
-                              PairColumnText(
-                                  title1:
-                                      'Withdrawable\nAmount (${state.currency.value})',
-                                  title2:
-                                      'Buying Power\n(${state.currency.value})',
-                                  subTitle1: data?.withdrawableAmount != null
-                                      ? (data!.withdrawableAmount)
-                                          .convertToCurrencyDecimal()
-                                      : '/',
-                                  subTitle2: (data?.buyingPower ?? 0)
-                                      .convertToCurrencyDecimal()),
-                              const SizedBox(
-                                height: 14,
-                              ),
-                              PairColumnText(
-                                title1:
-                                    'Total Botstock\nValues (${state.currency.value})',
-                                title2: 'Total P/L\n',
-                                subTitle1: (data?.totalBotStockValues ?? 0)
-                                    .convertToCurrencyDecimal(),
-                                subTitle2: data?.withdrawableAmount != null
-                                    ? '${(data!.profit).convertToCurrencyDecimal()}%'
-                                    : '/',
-                              ),
-                            ],
-                          ))),
-                  const SizedBox(
-                    width: 10,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            CustomTextNew(
+                              'Total Portfolio Value   -   ',
+                              style: AskLoraTextStyles.body4,
+                            ),
+                            CurrencyDropdown(
+                              initialValue: CurrencyType.hkd,
+                              onChanged: (newValue) {
+                                context
+                                    .read<PortfolioBloc>()
+                                    .add(CurrencyChanged(newValue!));
+                              },
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        CustomTextNew(
+                          (data?.totalPortfolio ?? 0)
+                              .convertToCurrencyDecimal(),
+                          style: AskLoraTextStyles.h2,
+                        ),
+                        if (state.currency == CurrencyType.usd)
+                          CustomTextNew(
+                            'Indicative Quote - HKD1 ≈ USD${0.13}',
+                            style: AskLoraTextStyles.body4,
+                          )
+                      ],
+                    ),
                   ),
-                  Column(
-                    children: [
-                      FundingButton(
-                        disabled: data == null,
-                        fundingType: FundingType.fund,
-                        onTap: () =>
-                            DepositWelcomeScreen.open(context: context),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      FundingButton(
-                        disabled: data == null,
-                        fundingType: FundingType.withdraw,
-                        onTap: () => WithdrawalBankDetailScreen.open(context),
-                      ),
-                    ],
-                  )
                 ],
-              ),
-            ],
-          );
-        });
+              )),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            Expanded(
+                child: RoundColoredBox(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
+                    content: Column(
+                      children: [
+                        PairColumnText(
+                            title1:
+                                'Withdrawable\nAmount (${state.currency.value})',
+                            title2: 'Buying Power\n(${state.currency.value})',
+                            subTitle1: data?.withdrawableAmount != null
+                                ? (data!.withdrawableAmount)
+                                    .convertToCurrencyDecimal()
+                                : '/',
+                            subTitle2: (data?.buyingPower ?? 0)
+                                .convertToCurrencyDecimal()),
+                        const SizedBox(
+                          height: 14,
+                        ),
+                        PairColumnText(
+                          title1:
+                              'Total Botstock\nValues (${state.currency.value})',
+                          title2: 'Total P/L\n',
+                          subTitle1: (data?.totalBotStockValues ?? 0)
+                              .convertToCurrencyDecimal(),
+                          subTitle2: data?.withdrawableAmount != null
+                              ? '${(data!.profit).convertToCurrencyDecimal()}%'
+                              : '/',
+                        ),
+                      ],
+                    ))),
+            const SizedBox(
+              width: 10,
+            ),
+            Column(
+              children: [
+                FundingButton(
+                  disabled: data == null,
+                  fundingType: FundingType.fund,
+                  onTap: () => DepositWelcomeScreen.open(context: context),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FundingButton(
+                  disabled: data == null,
+                  fundingType: FundingType.withdraw,
+                  onTap: () => WithdrawalBankDetailScreen.open(context),
+                ),
+              ],
+            )
+          ],
+        ),
+      ],
+    );
   }
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
