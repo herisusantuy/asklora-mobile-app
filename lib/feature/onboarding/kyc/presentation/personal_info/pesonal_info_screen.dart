@@ -46,63 +46,42 @@ class PersonalInfoScreen extends StatelessWidget {
             focus.focusedChild?.unfocus();
           }
         },
-        child: BlocListener<KycBloc, KycState>(
-          listenWhen: (previous, current) =>
-              previous.personalInfoResponse.state !=
-              current.personalInfoResponse.state,
-          listener: (context, state) {
-            switch (state.personalInfoResponse.state) {
-              case ResponseState.error:
-                CustomInAppNotification.show(
-                    context, state.personalInfoResponse.message);
-                break;
-              case ResponseState.success:
-                context
-                    .read<NavigationBloc<KycPageStep>>()
-                    .add(const PageChanged(KycPageStep.otp));
-                break;
-              default:
-                break;
-            }
-          },
-          child: Column(
-            children: [
-              CustomTextNew(
-                'Please make sure your name is exactly the same as the information on identification document.',
-                style: AskLoraTextStyles.body1
-                    .copyWith(color: AskLoraColors.charcoal),
-              ),
-              _spaceHeight,
-              _textInput(
-                  initialValue:
-                      context.read<PersonalInfoBloc>().state.firstName,
-                  key: const Key('first_name'),
-                  label: 'Legal English First Name',
-                  onChanged: (value) => context
-                      .read<PersonalInfoBloc>()
-                      .add(PersonalInfoFirstNameChanged(value))),
-              _spaceHeight,
-              _textInput(
-                  initialValue: context.read<PersonalInfoBloc>().state.lastName,
-                  key: const Key('last_name'),
-                  label: 'Legal English Last Name',
-                  onChanged: (value) => context
-                      .read<PersonalInfoBloc>()
-                      .add(PersonalInfoLastNameChanged(value))),
-              _spaceHeight,
-              _selectGender,
-              _spaceHeight,
-              _hkIdNumberInput,
-              _spaceHeight,
-              _nationality,
-              _spaceHeight,
-              _dateOfBirth,
-              _spaceHeight,
-              _countryOfBirth,
-              _spaceHeight,
-              _countryCodeAndPhoneNumber
-            ],
-          ),
+        child: Column(
+          children: [
+            CustomTextNew(
+              'Please make sure your name is exactly the same as the information on identification document.',
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            _spaceHeight,
+            _textInput(
+                initialValue: context.read<PersonalInfoBloc>().state.firstName,
+                key: const Key('first_name'),
+                label: 'Legal English First Name',
+                onChanged: (value) => context
+                    .read<PersonalInfoBloc>()
+                    .add(PersonalInfoFirstNameChanged(value))),
+            _spaceHeight,
+            _textInput(
+                initialValue: context.read<PersonalInfoBloc>().state.lastName,
+                key: const Key('last_name'),
+                label: 'Legal English Last Name',
+                onChanged: (value) => context
+                    .read<PersonalInfoBloc>()
+                    .add(PersonalInfoLastNameChanged(value))),
+            _spaceHeight,
+            _selectGender,
+            _spaceHeight,
+            _hkIdNumberInput,
+            _spaceHeight,
+            _nationality,
+            _spaceHeight,
+            _dateOfBirth,
+            _spaceHeight,
+            _countryOfBirth,
+            _spaceHeight,
+            _countryCodeAndPhoneNumber
+          ],
         ),
       ),
       bottomButton: _bottomButton,
@@ -244,26 +223,45 @@ class PersonalInfoScreen extends StatelessWidget {
   Widget get _bottomButton => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
       buildWhen: (previous, current) =>
           _disablePrimaryButton(previous) != _disablePrimaryButton(current),
-      builder: (context, state) => ButtonPair(
-            disablePrimaryButton: _disablePrimaryButton(state),
-            primaryButtonOnClick: () {
-              context
-                  .read<KycBloc>()
-                  .add(SubmitPersonalInfo(PersonalInfoRequest(
-                    firstName: state.firstName,
-                    lastName: state.lastName,
-                    gender: state.gender,
-                    hkIdNumber: state.hkIdNumber,
-                    nationality: state.nationalityCode,
-                    dateOfBirth: state.dateOfBirth,
-                    countryOfBirth: state.countryCodeOfBirth,
-                    phoneCountryCode: state.phoneCountryCode,
-                    phoneNumber: state.phoneNumber,
-                  )));
+      builder: (context, state) =>
+          BlocListener<PersonalInfoBloc, PersonalInfoState>(
+            listenWhen: (previous, current) =>
+                previous.response.state != current.response.state,
+            listener: (context, state) {
+              switch (state.response.state) {
+                case ResponseState.error:
+                  CustomInAppNotification.show(context, state.response.message);
+                  break;
+                case ResponseState.success:
+                  context
+                      .read<NavigationBloc<KycPageStep>>()
+                      .add(const PageChanged(KycPageStep.otp));
+                  break;
+                default:
+                  break;
+              }
             },
-            secondaryButtonOnClick: () => CarouselScreen.open(context),
-            primaryButtonLabel: 'NEXT',
-            secondaryButtonLabel: 'SAVE FOR LATER',
+            child: ButtonPair(
+              disablePrimaryButton: _disablePrimaryButton(state),
+              primaryButtonOnClick: () {
+                context
+                    .read<PersonalInfoBloc>()
+                    .add(PersonalInfoSubmitted(PersonalInfoRequest(
+                      firstName: state.firstName,
+                      lastName: state.lastName,
+                      gender: state.gender,
+                      hkIdNumber: state.hkIdNumber,
+                      nationality: state.nationalityCode,
+                      dateOfBirth: state.dateOfBirth,
+                      countryOfBirth: state.countryCodeOfBirth,
+                      phoneCountryCode: state.phoneCountryCode,
+                      phoneNumber: state.phoneNumber,
+                    )));
+              },
+              secondaryButtonOnClick: () => CarouselScreen.open(context),
+              primaryButtonLabel: 'NEXT',
+              secondaryButtonLabel: 'SAVE FOR LATER',
+            ),
           ));
 
   bool _disablePrimaryButton(PersonalInfoState state) {

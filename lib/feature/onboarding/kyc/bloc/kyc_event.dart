@@ -25,13 +25,3 @@ class UpdateOnfidoResult extends KycEvent {
 
   const UpdateOnfidoResult(this.outcome, this.reason, this.token);
 }
-
-class SubmitPersonalInfo extends KycEvent {
-  final PersonalInfoRequest personalInfoRequest;
-  const SubmitPersonalInfo(
-    this.personalInfoRequest,
-  );
-
-  @override
-  List<Object> get props => [personalInfoRequest];
-}

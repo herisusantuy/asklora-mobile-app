@@ -130,7 +130,9 @@ class PersonalInfoReset extends PersonalInfoEvent {
 }
 
 class PersonalInfoSubmitted extends PersonalInfoEvent {
-  const PersonalInfoSubmitted() : super();
+  final PersonalInfoRequest personalInfoRequest;
+  const PersonalInfoSubmitted(this.personalInfoRequest);
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [personalInfoRequest];
 }

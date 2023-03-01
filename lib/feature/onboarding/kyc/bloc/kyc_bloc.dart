@@ -20,7 +20,6 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     on<GetSdkToken>(_onGetOnfidoSdkToken);
     on<UpdateOnfidoResult>(_onUpdateOnfidoResult);
     on<SubmitKyc>(_onSubmitKyc);
-    on<SubmitPersonalInfo>(_onSubmitPersonalInfo);
   }
 
   final AccountRepository _accountRepository;
@@ -30,14 +29,6 @@ class KycBloc extends Bloc<KycEvent, KycState> {
     var data =
         await _accountRepository.upgradeAccount(event.upgradeAccountRequest);
     emit(state.copyWith(response: data));
-  }
-
-  _onSubmitPersonalInfo(
-      SubmitPersonalInfo event, Emitter<KycState> emit) async {
-    emit(state.copyWith(personalInfoResponse: BaseResponse.loading()));
-    var data =
-        await _accountRepository.submitPersonalInfo(event.personalInfoRequest);
-    emit(state.copyWith(personalInfoResponse: data));
   }
 
   _onGetOnfidoSdkToken(GetSdkToken event, Emitter<KycState> emit) async {

@@ -40,27 +40,22 @@ enum KycPageStep {
 class KycState extends Equatable {
   const KycState({
     this.response = const BaseResponse(),
-    this.personalInfoResponse = const BaseResponse(),
   });
 
   final BaseResponse response;
-  final BaseResponse personalInfoResponse;
 
   @override
   List<Object?> get props {
     return [
       response,
-      personalInfoResponse,
     ];
   }
 
   KycState copyWith({
     BaseResponse? response,
-    BaseResponse? personalInfoResponse,
   }) {
     return KycState(
       response: response ?? this.response,
-      personalInfoResponse: personalInfoResponse ?? this.personalInfoResponse,
     );
   }
 }

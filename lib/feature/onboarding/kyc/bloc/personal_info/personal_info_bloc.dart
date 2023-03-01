@@ -32,6 +32,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
         _onIsUnitedStateResidentChange);
     on<PersonalInfoNext>(_onPersonalInfoNext);
     on<PersonalInfoReset>(_onPersonalInfoReset);
+    on<PersonalInfoSubmitted>(_onPersonalInfoSubmitted);
   }
 
   final AccountRepository _accountRepository;
@@ -121,5 +122,13 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   _onPersonalInfoReset(
       PersonalInfoReset event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(status: ResponseState.unknown));
+  }
+
+  _onPersonalInfoSubmitted(
+      PersonalInfoSubmitted event, Emitter<PersonalInfoState> emit) async {
+    emit(state.copyWith(response: BaseResponse.loading()));
+    var data =
+        await _accountRepository.submitPersonalInfo(event.personalInfoRequest);
+    emit(state.copyWith(response: data));
   }
 }
