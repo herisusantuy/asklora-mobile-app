@@ -209,8 +209,7 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.signTaxAgreements:
               return TaxAgreementScreen(
                   progress: 0.85,
-                  basicInformationState:
-                      context.read<BasicInformationBloc>().state);
+                  personalInfoState: context.read<PersonalInfoBloc>().state);
             case KycPageStep.kycSummary:
               return KycSummaryScreen(
                 personalInfoState: context.read<PersonalInfoBloc>().state,
