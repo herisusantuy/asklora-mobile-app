@@ -244,6 +244,7 @@ class PersonalInfoScreen extends StatelessWidget {
             child: ButtonPair(
               disablePrimaryButton: _disablePrimaryButton(state),
               primaryButtonOnClick: () {
+                final state = context.read<PersonalInfoBloc>().state;
                 context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoSubmitted(PersonalInfoRequest(
@@ -251,10 +252,19 @@ class PersonalInfoScreen extends StatelessWidget {
                       lastName: state.lastName,
                       gender: state.gender,
                       hkIdNumber: state.hkIdNumber,
-                      nationality: state.nationalityCode,
+                      nationality: context
+                          .read<PersonalInfoBloc>()
+                          .state
+                          .nationalityCode,
                       dateOfBirth: state.dateOfBirth,
-                      countryOfBirth: state.countryCodeOfBirth,
-                      phoneCountryCode: state.phoneCountryCode,
+                      countryOfBirth: context
+                          .read<PersonalInfoBloc>()
+                          .state
+                          .countryCodeOfBirth,
+                      phoneCountryCode: context
+                          .read<PersonalInfoBloc>()
+                          .state
+                          .phoneCountryCode,
                       phoneNumber: state.phoneNumber,
                     )));
               },
