@@ -108,23 +108,17 @@ void main() async {
                   financialProfileBloc.state.employmentStatus.name),
           agreements: [
             Agreement(
-                agreement: 'MA',
-                ipAddress: ipAddress,
-                signedAt: signedAt,
-                signature:
-                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+              agreement: 'MA',
+              ipAddress: ipAddress,
+            ),
             Agreement(
-                agreement: 'AA',
-                ipAddress: ipAddress,
-                signedAt: signedAt,
-                signature:
-                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+              agreement: 'AA',
+              ipAddress: ipAddress,
+            ),
             Agreement(
-                agreement: 'CA',
-                ipAddress: ipAddress,
-                signedAt: signedAt,
-                signature:
-                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+              agreement: 'CA',
+              ipAddress: ipAddress,
+            ),
           ]);
       taxInfoReq = TaxInfoRequest(
           fullName:
@@ -139,8 +133,6 @@ void main() async {
           foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
           dateOfBirth:
               parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
-          signature:
-              'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
           date: parseDateFormatYYmmdd(DateTime.now().toString()),
           signerFullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
@@ -184,14 +176,8 @@ void main() async {
           when(secureStorage.readData('email'))
               .thenAnswer((_) => Future.value(''));
 
-          /* when(accountRepository.upgradeAccount(upgradeAccountRequest))
-              .thenAnswer((_) => Future.value(const UpgradeAccountRequest()));*/
-
           when(accountRepository.upgradeAccount(upgradeAccountRequest))
               .thenAnswer((_) => Future.value(true));
-
-          /*when(accountRepository.submitTaxInfo(taxInfoReq))
-              .thenAnswer((_) => Future.value( TaxInfoRequest()));*/
 
           when(accountRepository.submitTaxInfo(taxInfoReq))
               .thenAnswer((_) => Future.value(true));

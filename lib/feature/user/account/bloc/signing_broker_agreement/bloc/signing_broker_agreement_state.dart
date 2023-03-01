@@ -5,18 +5,12 @@ class SigningBrokerAgreementState extends Equatable {
   final bool isAskLoraClientAgreementOpened;
   final bool isUnderstoodAlpacaCustomAgreementChecked;
   final bool isSigningAgreementChecked;
-  final bool isSignatureDrew;
-  final String customerSignature;
-  final String? signedTime;
 
   const SigningBrokerAgreementState({
     this.isAlpacaCustomerAgreementOpened = false,
     this.isAskLoraClientAgreementOpened = false,
     this.isUnderstoodAlpacaCustomAgreementChecked = false,
     this.isSigningAgreementChecked = false,
-    this.isSignatureDrew = false,
-    this.customerSignature = '',
-    this.signedTime,
   });
 
   @override
@@ -25,9 +19,6 @@ class SigningBrokerAgreementState extends Equatable {
         isAskLoraClientAgreementOpened,
         isUnderstoodAlpacaCustomAgreementChecked,
         isSigningAgreementChecked,
-        isSignatureDrew,
-        customerSignature,
-        signedTime ?? ''
       ];
 
   SigningBrokerAgreementState copyWith({
@@ -35,9 +26,6 @@ class SigningBrokerAgreementState extends Equatable {
     bool? isAskLoraClientAgreementOpened,
     bool? isUnderstoodAlpacaCustomAgreementChecked,
     bool? isSigningAgreementChecked,
-    bool? isSignatureDrew,
-    String? customerSignature,
-    String? signedTime,
   }) {
     return SigningBrokerAgreementState(
       isAlpacaCustomerAgreementOpened: isAlpacaCustomerAgreementOpened ??
@@ -49,17 +37,13 @@ class SigningBrokerAgreementState extends Equatable {
               this.isUnderstoodAlpacaCustomAgreementChecked,
       isSigningAgreementChecked:
           isSigningAgreementChecked ?? this.isSigningAgreementChecked,
-      isSignatureDrew: isSignatureDrew ?? this.isSignatureDrew,
-      customerSignature: customerSignature ?? this.customerSignature,
-      signedTime: signedTime ?? this.signedTime,
     );
   }
 
   bool disabledNextButton() {
     if (isAlpacaCustomerAgreementOpened &&
         isUnderstoodAlpacaCustomAgreementChecked &&
-        isSigningAgreementChecked &&
-        customerSignature.isNotEmpty) {
+        isSigningAgreementChecked) {
       return false;
     }
     return true;

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/presentation/buttons/secondary/view_file_button.dart';
+import '../../../../../core/presentation/custom_checkbox.dart';
+import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
+import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../financial_profile/widgets/dot_text.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -13,8 +19,10 @@ import '../widgets/kyc_sub_title.dart';
 
 class TaxAgreementScreen extends StatelessWidget {
   final double progress;
+  final BasicInformationState basicInformationState;
 
-  const TaxAgreementScreen({required this.progress, Key? key})
+  const TaxAgreementScreen(
+      {required this.progress, required this.basicInformationState, Key? key})
       : super(key: key);
 
   final Widget _spaceHeight = const SizedBox(
@@ -34,6 +42,15 @@ class TaxAgreementScreen extends StatelessWidget {
             key: Key('sub_title'),
             subTitle: 'W-8BEN Form',
           ),
+          const SizedBox(
+            height: 24,
+          ),
+          ViewFileButton(
+              key: const Key('w8_ben_form'),
+              label: 'W-8BEN Form',
+              onTap: () => context
+                  .read<SigningAgreementBloc>()
+                  .add(const W8BenFormOpened())),
           const SizedBox(
             height: 24,
           ),
@@ -75,12 +92,132 @@ class TaxAgreementScreen extends StatelessWidget {
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
+          const SizedBox(
+            height: 46,
+          ),
+          CustomTextNew(
+            'The US Internal Revenue Service does not require your consent to any provisions of this document other than the certifications required to establish your status as a non-U.S. person, and if applicable, obtain a reduced rate of witholding.',
+            style:
+                AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _signatureCheck,
+          const SizedBox(
+            height: 46,
+          ),
+          _signatureSection,
+          _legalNameInput
         ],
       ),
       bottomButton: _bottomButton(context),
       progress: progress,
     );
   }
+
+  Widget get _signatureCheck =>
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
+          buildWhen: (previous, current) =>
+              previous.isSignatureChecked != current.isSignatureChecked,
+          builder: (context, state) => CustomCheckbox(
+                checkboxKey: const Key('signature_check_value'),
+                key: const Key('signature_check'),
+                text:
+                    'By checking this box, you consent to the collection and distribution of tax forms in an electronic format in lieu of paper',
+                fontHeight: 1.4,
+                isChecked: state.isSignatureChecked,
+                fontType: FontType.smallText,
+                onChanged: (value) => context
+                    .read<SigningAgreementBloc>()
+                    .add(SignatureChecked(value!)),
+              ));
+
+  Widget get _signatureSection => Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 28,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomTextNew('Signature',
+                style: AskLoraTextStyles.h5
+                    .copyWith(color: AskLoraColors.charcoal)),
+            const SizedBox(
+              height: 8,
+            ),
+            CustomTextNew(
+              'By typing my signature and clicking ‘Next’ below, I confirm that:',
+              style: AskLoraTextStyles.body2
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            _spaceHeight,
+            CustomTextNew(
+              '(1) All information and/or documentation provided by me during the account application process is accurate, complete and up-to-date; ',
+              style: AskLoraTextStyles.body2
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            _spaceHeight,
+            CustomTextNew(
+              '(2) I have read and understood all of the information provided to me by LORA Advisors; ',
+              style: AskLoraTextStyles.body2
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            _spaceHeight,
+            CustomTextNew(
+              '(3) I consent and agree to the terms of all the above agreements and disclosures provided to me during the account application process: and ',
+              style: AskLoraTextStyles.body2
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            _spaceHeight,
+            CustomTextNew(
+              '(4) I understand and agree that my electronic signature is the legal equivalent of a manual written signature.',
+              style: AskLoraTextStyles.body2
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 46,
+            ),
+            CustomTextNew(
+              'Sign this electronically by typing your name exactly as shown below.',
+              style: AskLoraTextStyles.body2.copyWith(
+                color: AskLoraColors.charcoal,
+              ),
+            ),
+            RichText(
+                text: TextSpan(children: [
+              TextSpan(
+                  text: 'Accepted signature(s): ',
+                  style: AskLoraTextStyles.body2
+                      .copyWith(color: AskLoraColors.charcoal)),
+              TextSpan(
+                  text: 'Stephen Joon Choi',
+                  style: AskLoraTextStyles.body2.copyWith(
+                      color: AskLoraColors.charcoal,
+                      fontWeight: FontWeight.bold)),
+            ])),
+          ],
+        ),
+      );
+
+  Widget get _legalNameInput =>
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
+          buildWhen: (previous, current) =>
+              previous.legalName != current.legalName,
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 46),
+              child: MasterTextField(
+                initialValue: state.legalName,
+                key: const Key('legal_name_input'),
+                onChanged: (value) => context
+                    .read<SigningAgreementBloc>()
+                    .add(LegalNameSignatureChanged(value)),
+                hintText:
+                    '${basicInformationState.firstName} ${basicInformationState.lastName}',
+              ),
+            );
+          });
 
   Widget _dotTextSlightRight(String text) => Padding(
         padding: const EdgeInsets.only(left: 28.0),
@@ -89,12 +226,22 @@ class TaxAgreementScreen extends StatelessWidget {
         ),
       );
 
-  Widget _bottomButton(BuildContext context) => ButtonPair(
-        primaryButtonOnClick: () => context
-            .read<NavigationBloc<KycPageStep>>()
-            .add(const PageChanged(KycPageStep.kycSummary)),
-        secondaryButtonOnClick: () => CarouselScreen.open(context),
-        primaryButtonLabel: 'AGREE',
-        secondaryButtonLabel: 'CONTINUE LATER',
+  Widget _bottomButton(BuildContext context) =>
+      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
+        buildWhen: (previous, current) =>
+            previous.legalName != current.legalName ||
+            previous.isSignatureChecked != current.isSignatureChecked,
+        builder: (context, state) {
+          return ButtonPair(
+            primaryButtonOnClick: () => context
+                .read<NavigationBloc<KycPageStep>>()
+                .add(const PageChanged(KycPageStep.kycSummary)),
+            disablePrimaryButton: state.disableSignatureButton(
+                '${basicInformationState.firstName} ${basicInformationState.lastName}'),
+            secondaryButtonOnClick: () => CarouselScreen.open(context),
+            primaryButtonLabel: 'AGREE',
+            secondaryButtonLabel: 'CONTINUE LATER',
+          );
+        },
       );
 }

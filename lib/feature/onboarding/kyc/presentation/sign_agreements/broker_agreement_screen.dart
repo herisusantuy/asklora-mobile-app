@@ -12,7 +12,6 @@ import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
-import 'widgets/signature_drawer.dart';
 
 class BrokerAgreementScreen extends StatelessWidget {
   final double progress;
@@ -55,7 +54,6 @@ class BrokerAgreementScreen extends StatelessWidget {
           const SizedBox(
             height: 45,
           ),
-          _customerSignature
         ],
       ),
       bottomButton: _bottomButton(context),
@@ -105,23 +103,6 @@ class BrokerAgreementScreen extends StatelessWidget {
                     .read<SigningAgreementBloc>()
                     .add(UnderstandOnTheAgreementChecked(value!)),
               ));
-
-  Widget get _customerSignature =>
-      BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
-        buildWhen: (previous, current) =>
-            previous.customerSignature != current.customerSignature,
-        builder: (context, state) => SignatureDrawer(
-          key: const Key('customer_signature_drawer'),
-          initialValue: state.customerSignature,
-          onSubmit: () => context
-              .read<SigningAgreementBloc>()
-              .add(const CustomerSignatureDrew()),
-          onReset: () => context
-              .read<SigningAgreementBloc>()
-              .add(const CustomerSignatureReset()),
-          signatureController: state.signatureController,
-        ),
-      );
 
   Widget _bottomButton(BuildContext context) =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(

@@ -10,16 +10,10 @@ class Agreement extends Equatable {
   @JsonKey(name: 'ip_address')
   final String? ipAddress;
 
-  final String? signature;
-
-  @JsonKey(name: 'signed_at')
-  final String? signedAt;
-
-  const Agreement(
-      {required this.agreement,
-      required this.signedAt,
-      required this.ipAddress,
-      required this.signature});
+  const Agreement({
+    required this.agreement,
+    required this.ipAddress,
+  });
 
   factory Agreement.fromJson(Map<String, dynamic> json) =>
       _$AgreementFromJson(json);
@@ -27,5 +21,5 @@ class Agreement extends Equatable {
   Map<String, dynamic> toJson() => _$AgreementToJson(this);
 
   @override
-  List<Object> get props => [agreement ?? '', ipAddress ?? '', signature ?? ''];
+  List<Object> get props => [agreement ?? '', ipAddress ?? ''];
 }
