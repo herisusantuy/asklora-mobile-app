@@ -43,7 +43,7 @@ class BotStockBottomSheet {
         context: (context),
         builder: (_) => BotBottomSheetWidget(
               title:
-                  'You can quit now and all the trading activities of ${BotType.findByString(portfolioBotModel.botType).name} ${portfolioBotModel.ticker} will end ',
+                  'You can quit now and all the trading activities of ${BotType.findByString(portfolioBotModel.botAppType).name} ${portfolioBotModel.ticker} will end ',
               subTitle:
                   'The total Botstock value (US\$ 200) will be returned to your account after the next community order',
               primaryButtonLabel: 'END BOT STOCK',

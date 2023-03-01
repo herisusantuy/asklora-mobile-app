@@ -16,7 +16,7 @@ List<Pair<String, String>> botRecommendationFaqs = [
 
 List<BotRecommendationModel> defaultBotRecommendation = [
   const BotRecommendationModel(1, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pullup', 'MSFT.O', 'TESLA', '', '440'),
+      'Pull Up', 'MSFT.O', 'TESLA', '', '440'),
   const BotRecommendationModel(2, '', '', 'CLASSIC_classic_003846', '', '',
       'Plank', 'MSFT.O', 'TESLA', '', '390'),
   const BotRecommendationModel(3, '', '', 'CLASSIC_classic_003846', '', '',
@@ -26,16 +26,16 @@ List<BotRecommendationModel> defaultBotRecommendation = [
   const BotRecommendationModel(5, '', '', 'CLASSIC_classic_003846', '', '',
       'Squat', 'MSFT.O', 'TESLA', '', '160'),
   const BotRecommendationModel(6, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pullup', 'MSFT.O', 'TESLA', '', '90'),
+      'Pull Up', 'MSFT.O', 'TESLA', '', '90'),
   const BotRecommendationModel(7, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pullup', 'MSFT.O', 'TESLA', '', '20'),
+      'Pull Up', 'MSFT.O', 'TESLA', '', '20'),
   const BotRecommendationModel(8, '', '', 'CLASSIC_classic_003846', '', '',
       'Plank', 'MSFT.O', 'TESLA', '', '600'),
 ];
 
 List<PortfolioBotModel> defaultPortfolioBot = [
-  const PortfolioBotModel(1, '', '', 'CLASSIC_classic_003846', '', '', 'Pullup',
-      'MSFT.O', 'TESLA', '', '440', 2000),
+  const PortfolioBotModel(1, '', '', 'CLASSIC_classic_003846', '', '',
+      'Pull Up', 'MSFT.O', 'TESLA', '', '440', 2000),
   const PortfolioBotModel(2, '', '', 'CLASSIC_classic_003846', '', '', 'Plank',
       'MSFT.O', 'TESLA', '', '390', 2000),
   const PortfolioBotModel(3, '', '', 'CLASSIC_classic_003846', '', '', 'Squat',
@@ -44,17 +44,17 @@ List<PortfolioBotModel> defaultPortfolioBot = [
       'MSFT.O', 'TESLA', '', '150', 2000),
   const PortfolioBotModel(5, '', '', 'CLASSIC_classic_003846', '', '', 'Squat',
       'MSFT.O', 'TESLA', '', '160', 2000),
-  const PortfolioBotModel(6, '', '', 'CLASSIC_classic_003846', '', '', 'Pullup',
-      'MSFT.O', 'TESLA', '', '90', 2000),
-  const PortfolioBotModel(7, '', '', 'CLASSIC_classic_003846', '', '', 'Pullup',
-      'MSFT.O', 'TESLA', '', '20', 2000),
+  const PortfolioBotModel(6, '', '', 'CLASSIC_classic_003846', '', '',
+      'Pull Up', 'MSFT.O', 'TESLA', '', '90', 2000),
+  const PortfolioBotModel(7, '', '', 'CLASSIC_classic_003846', '', '',
+      'Pull Up', 'MSFT.O', 'TESLA', '', '20', 2000),
   const PortfolioBotModel(8, '', '', 'CLASSIC_classic_003846', '', '', 'Plank',
       'MSFT.O', 'TESLA', '', '600', 2000),
 ];
 
 List<BotRecommendationModel> demonstrationBots = [
   const BotRecommendationModel(1, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pullup', 'MSFT.O', 'TESLA', '', '440',
+      'Pull Up', 'MSFT.O', 'TESLA', '', '440',
       selectable: true),
   const BotRecommendationModel(2, '', '', 'CLASSIC_classic_003846', '', '',
       'Plank', 'MSFT.O', 'TESLA', '', '390',
@@ -67,15 +67,15 @@ List<BotRecommendationModel> demonstrationBots = [
   const BotRecommendationModel(5, '', '', 'CLASSIC_classic_003846', '', '',
       'Squat', 'MSFT.O', 'TESLA', '', '160'),
   const BotRecommendationModel(6, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pullup', 'MSFT.O', 'TESLA', '', '90'),
+      'Pull Up', 'MSFT.O', 'TESLA', '', '90'),
   const BotRecommendationModel(7, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pullup', 'MSFT.O', 'TESLA', '', '20'),
+      'Pull Up', 'MSFT.O', 'TESLA', '', '20'),
   const BotRecommendationModel(8, '', '', 'CLASSIC_classic_003846', '', '',
       'Plank', 'MSFT.O', 'TESLA', '', '600'),
 ];
 
 enum BotType {
-  pullUp('Pullup', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_pull_up',
+  pullUp('Pull Up', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_pull_up',
       AskLoraColors.lime, AskLoraColors.darkerLime),
   squat('Squat', 'SQUAT', 'Squat', 'icon_bot_badge_pop_up_message_squat',
       AskLoraColors.purple, AskLoraColors.darkerPurple,

@@ -130,7 +130,7 @@ class RouterGenerator {
       case BotRecommendationDetailScreen.route:
         return MaterialPageRoute(
             builder: (_) => BotRecommendationDetailScreen(
-                  botRecommendation:
+                  botRecommendationModel:
                       settings.arguments as BotRecommendationModel,
                 ));
       case BotPortfolioDetailScreen.route:
