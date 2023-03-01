@@ -36,6 +36,12 @@ firebase_credentials_dev.json
 *.iws
 .idea/
 
+#Avoid .env
+.env
+
+#Avoid android keystore file
+**/android/**/androidKeyStore
+
 # Visual Studio Code related
 .classpath
 .project
