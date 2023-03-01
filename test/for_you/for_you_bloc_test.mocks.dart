@@ -41,35 +41,35 @@ class MockForYouRepository extends _i1.Mock implements _i3.ForYouRepository {
   }
 
   @override
-  _i4.Future<_i2.BaseResponse<String>> saveInvestmentStyleAnswer() =>
+  _i4.Future<_i2.BaseResponse<bool>> saveInvestmentStyleState() =>
       (super.noSuchMethod(
         Invocation.method(
-          #saveInvestmentStyleAnswer,
+          #saveInvestmentStyleState,
           [],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<String>>.value(
-            _FakeBaseResponse_0<String>(
+        returnValue:
+            _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
           this,
           Invocation.method(
-            #saveInvestmentStyleAnswer,
+            #saveInvestmentStyleState,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<String>>);
+      ) as _i4.Future<_i2.BaseResponse<bool>>);
   @override
-  _i4.Future<_i2.BaseResponse<String>> getInvestmentStyleAnswer() =>
+  _i4.Future<_i2.BaseResponse<bool>> getInvestmentStyleState() =>
       (super.noSuchMethod(
         Invocation.method(
-          #getInvestmentStyleAnswer,
+          #getInvestmentStyleState,
           [],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<String>>.value(
-            _FakeBaseResponse_0<String>(
+        returnValue:
+            _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
           this,
           Invocation.method(
-            #getInvestmentStyleAnswer,
+            #getInvestmentStyleState,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<String>>);
+      ) as _i4.Future<_i2.BaseResponse<bool>>);
 }

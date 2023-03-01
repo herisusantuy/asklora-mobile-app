@@ -69,7 +69,7 @@ class ForYouScreenForm extends StatelessWidget {
               return const BotRecommendationScreen(
                 enableBackNavigation: false,
               );
-            } else {
+            } else if (state.response.state == ResponseState.error) {
               return BlocBuilder<NavigationBloc<ForYouPage>,
                       NavigationState<ForYouPage>>(
                   buildWhen: (previous, current) =>
@@ -87,6 +87,8 @@ class ForYouScreenForm extends StatelessWidget {
                         );
                     }
                   });
+            } else {
+              return const SizedBox.shrink();
             }
           },
           listener: (context, state) {
@@ -102,7 +104,7 @@ class ForYouScreenForm extends StatelessWidget {
   LoraPopUpMessageModel _getLoraPopUpMessageModel(
       BuildContext context, UserJourney userJourney) {
     if (UserJourney.compareUserJourney(
-        source: userJourney, target: UserJourney.freeBotStock)) {
+        context: context, target: UserJourney.freeBotStock)) {
       return LoraPopUpMessageModel(
           title: 'No Botstock recommendation.',
           subTitle:

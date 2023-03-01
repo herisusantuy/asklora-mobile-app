@@ -14,7 +14,7 @@ void main() async {
     late MockForYouRepository forYouRepository;
     late ForYouBloc forYouBloc;
 
-    final BaseResponse<String> response = BaseResponse.complete('');
+    final BaseResponse<bool> response = BaseResponse.complete(true);
 
     setUpAll(() async {
       forYouRepository = MockForYouRepository();
@@ -32,7 +32,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'get investment style answer',
         build: () {
-          when(forYouRepository.getInvestmentStyleAnswer())
+          when(forYouRepository.getInvestmentStyleState())
               .thenAnswer((_) => Future.value(response));
           return forYouBloc;
         },
@@ -46,7 +46,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'get investment style answer',
         build: () {
-          when(forYouRepository.getInvestmentStyleAnswer())
+          when(forYouRepository.getInvestmentStyleState())
               .thenAnswer((_) => Future.value(response));
           return forYouBloc;
         },

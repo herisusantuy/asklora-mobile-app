@@ -103,8 +103,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   Pair<Widget, Widget> _getPortfolioDetailProps(BuildContext context) {
     if (UserJourney.compareUserJourney(
-        source: context.read<AppBloc>().state.userJourney,
-        target: UserJourney.deposit)) {
+        context: context, target: UserJourney.deposit)) {
       return Pair(
           const SizedBox.shrink(),
           Padding(

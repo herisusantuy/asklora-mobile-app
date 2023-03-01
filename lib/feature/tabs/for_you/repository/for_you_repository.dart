@@ -10,19 +10,18 @@ class ForYouRepository {
 
   ForYouRepository._();
 
-  ///TODO save object type answer later
-  Future<BaseResponse<String>> saveInvestmentStyleAnswer() async {
-    String answer = 'some answer';
-    _sharedPreference.writeData('investment_style_answer', answer);
-    return BaseResponse.complete(answer);
+  Future<BaseResponse<bool>> saveInvestmentStyleState() async {
+    bool investmentStyleState = true;
+    _sharedPreference.writeBoolData(
+        'investment_style_state', investmentStyleState);
+    return BaseResponse.complete(investmentStyleState);
   }
 
-  ///TODO get object type answer later
-  Future<BaseResponse<String>> getInvestmentStyleAnswer() async {
-    String? investmentStyleAnswer =
-        await _sharedPreference.readData('investment_style_answer');
-    if (investmentStyleAnswer != null) {
-      return BaseResponse.complete(investmentStyleAnswer);
+  Future<BaseResponse<bool>> getInvestmentStyleState() async {
+    bool? investmentStyleState =
+        await _sharedPreference.readBoolData('investment_style_state');
+    if (investmentStyleState != null) {
+      return BaseResponse.complete(investmentStyleState);
     } else {
       return BaseResponse.error('Answer not found');
     }

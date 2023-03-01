@@ -5,7 +5,7 @@ class ForYouState extends Equatable {
     this.response = const BaseResponse(),
   });
 
-  final BaseResponse<String> response;
+  final BaseResponse<bool> response;
 
   @override
   List<Object?> get props {
@@ -15,7 +15,7 @@ class ForYouState extends Equatable {
   }
 
   ForYouState copyWith({
-    BaseResponse<String>? response,
+    BaseResponse<bool>? response,
   }) {
     return ForYouState(
       response: response ?? this.response,
