@@ -229,7 +229,7 @@ class FinancialSituationQuestion extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.enableNextButton() != current.enableNextButton(),
         builder: (context, state) => Padding(
-              padding: const EdgeInsets.only(bottom: 24.0, top: 52),
+              padding: const EdgeInsets.only(bottom: 35.0, top: 52),
               child: PrimaryButton(
                 label: 'NEXT',
                 buttonPrimaryType: ButtonPrimaryType.solidCharcoal,

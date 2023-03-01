@@ -188,4 +188,12 @@ class MockBotStockRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<bool>>);
+  @override
+  _i4.Future<bool> removeInvestmentStyleState() => (super.noSuchMethod(
+        Invocation.method(
+          #removeInvestmentStyleState,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }
