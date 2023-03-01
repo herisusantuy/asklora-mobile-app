@@ -75,6 +75,9 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                 padding: AppValues.screenHorizontalPadding
                     .copyWith(top: 24, bottom: 30),
                 child: PrimaryButton(
+                    disabled: state.botDetailResponse.state ==
+                            ResponseState.loading ||
+                        state.botDetailResponse.state == ResponseState.error,
                     label: 'TRADE',
                     onTap: () {
                       if (botRecommendationModel.freeBot) {

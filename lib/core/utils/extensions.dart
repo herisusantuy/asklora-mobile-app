@@ -72,10 +72,18 @@ extension CurrencyFormat on double {
   }
 
   String toUsd() {
-    return '${CurrencyType.usd.value} ${(this * 0.13).convertToCurrencyDecimal()}';
+    return (this * 0.13).convertToCurrencyDecimal();
   }
 
   String toHkd() {
+    return (this * 7.85).convertToCurrencyDecimal();
+  }
+
+  String toUsdWithCurrencyPrefix() {
+    return '${CurrencyType.usd.value} ${(this * 0.13).convertToCurrencyDecimal()}';
+  }
+
+  String toHkdWithCurrencyPrefix() {
     return '${CurrencyType.hkd.value} ${(this * 7.85).convertToCurrencyDecimal()}';
   }
 }
