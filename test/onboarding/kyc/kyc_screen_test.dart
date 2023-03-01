@@ -57,7 +57,7 @@ void main() {
 
       testWidgets('Show basic information screen with all the input',
           (WidgetTester tester) async {
-        await buildKycScreen(tester, KycPageStep.basicInformation);
+        await buildKycScreen(tester, KycPageStep.personalInfo);
         expect(find.byKey(const Key('first_name')), findsOneWidget);
         expect(find.byKey(const Key('last_name')), findsOneWidget);
         expect(find.text('Male'), findsOneWidget);
