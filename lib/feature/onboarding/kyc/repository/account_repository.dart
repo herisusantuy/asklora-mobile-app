@@ -6,8 +6,11 @@ import '../domain/get_account/get_account_response.dart';
 import '../domain/onfido/onfido_result_request.dart';
 import '../domain/onfido/onfido_result_response.dart';
 import '../domain/onfido/onfido_token_response.dart';
+import '../domain/upgrade_account/personal_info_request.dart';
+import '../domain/upgrade_account/personal_info_response.dart';
 import '../domain/upgrade_account/tax_info_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
+import '../domain/upgrade_account/upgrade_account_response.dart';
 
 class AccountRepository {
   final AccountApiClient _accountApiClient = AccountApiClient();
@@ -17,13 +20,26 @@ class AccountRepository {
     return GetAccountResponse.fromJson(response.data);
   }
 
-  Future<BaseResponse<bool>> upgradeAccount(
+  Future<BaseResponse<UpgradeAccountResponse>> upgradeAccount(
       UpgradeAccountRequest upgradeAccountRequest) async {
-    // TODO: Change this API flow according to the new flow.
     try {
-      _accountApiClient.upgradeAccount(upgradeAccountRequest);
-      return BaseResponse.complete(true);
-    } catch (e) {
+      var response =
+          await _accountApiClient.upgradeAccount(upgradeAccountRequest);
+      return BaseResponse.complete(
+          UpgradeAccountResponse.fromJson(response.data));
+    } catch (_) {
+      return BaseResponse.error('Invalid Request');
+    }
+  }
+
+  Future<BaseResponse<PersonalInfoResponse>> submitPersonalInfo(
+      PersonalInfoRequest personalInfoRequest) async {
+    try {
+      var response =
+          await _accountApiClient.submitPersonalInfo(personalInfoRequest);
+      return BaseResponse.complete(
+          PersonalInfoResponse.fromJson(response.data));
+    } catch (_) {
       return BaseResponse.error('Invalid Request');
     }
   }
