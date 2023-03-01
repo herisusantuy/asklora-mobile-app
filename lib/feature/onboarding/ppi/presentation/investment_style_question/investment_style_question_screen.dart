@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
+import '../../../../bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../../../tabs/for_you/bloc/for_you_bloc.dart';
 import '../../../../tabs/for_you/for_you_screen_form.dart';
 import '../../bloc/question/question_bloc.dart';
@@ -84,20 +86,27 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
       context.read<QuestionBloc>().add(InvestmentStyleQuestionIndexChanged(
           state.investmentStyleQuestionIndex));
     } else if (state is OnNextResultScreen) {
-      UserJourney.onAlreadyPassed(
-          context: context,
-          target: UserJourney.investmentStyle,
-          onTrueCallback: () {
-            context.read<ForYouBloc>().add(SaveInvestmentStyleAnswer());
-            context
-                .read<NavigationBloc<ForYouPage>>()
-                .add(const PageChanged(ForYouPage.botRecommendation));
-          },
-          onFalseCallback: () {
-            context.read<AppBloc>().add(const SaveUserJourney(UserJourney.kyc));
-            context.read<NavigationBloc<QuestionPageStep>>().add(
-                const PageChanged(QuestionPageStep.investmentStyleResultEnd));
-          });
+      if (context.read<AppBloc>().state.userJourney ==
+          UserJourney.investmentStyle) {
+        ///user comes from doing milestone 1.3 after sign up
+        context.read<AppBloc>().add(const SaveUserJourney(UserJourney.kyc));
+        context
+            .read<NavigationBloc<QuestionPageStep>>()
+            .add(const PageChanged(QuestionPageStep.investmentStyleResultEnd));
+      } else if (context.read<AppBloc>().state.userJourney ==
+          UserJourney.freeBotStock) {
+        ///user comes from retaking investment style question
+        ///after getting zero gift bot recommendation
+        BotRecommendationScreen.openAndRemoveUntil(
+            context, BotStockDoScreen.route);
+      } else if (UserJourney.compareUserJourney(
+          context: context, target: UserJourney.freeBotStock)) {
+        ///user comes from for you screen
+        context.read<ForYouBloc>().add(SaveInvestmentStyleAnswer());
+        context
+            .read<NavigationBloc<ForYouPage>>()
+            .add(const PageChanged(ForYouPage.botRecommendation));
+      }
     } else if (state is OnPreviousPage) {
       context.read<NavigationBloc<QuestionPageStep>>().add(const PagePop());
     }

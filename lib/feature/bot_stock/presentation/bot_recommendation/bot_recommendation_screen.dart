@@ -191,4 +191,8 @@ class BotRecommendationScreen extends StatelessWidget {
         context,
         route,
       );
+
+  static void openAndRemoveUntil(BuildContext context, String removeUntil) =>
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(route, ModalRoute.withName(removeUntil));
 }
