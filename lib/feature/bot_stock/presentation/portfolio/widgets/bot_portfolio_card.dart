@@ -60,10 +60,10 @@ class BotPortfolioCard extends StatelessWidget {
                   height: 13,
                 ),
                 PairColumnText(
-                  title1: 'Current Price',
-                  title2: 'Total P/L',
-                  subTitle1: portfolioBotModel.latestPrice,
-                  subTitle2: '+1%',
+                  leftTitle: 'Current Price',
+                  rightTitle: 'Total P/L',
+                  leftSubTitle: portfolioBotModel.latestPrice,
+                  rightSubTitle: '+1%',
                 ),
                 const SizedBox(
                   height: 15,

@@ -124,7 +124,7 @@ class PortfolioScreen extends StatelessWidget {
                         Row(
                           children: [
                             CustomTextNew(
-                              'Total Portfolio Value   -   ',
+                              'Total Portfolio Value  -  ',
                               style: AskLoraTextStyles.body4,
                             ),
                             CurrencyDropdown(
@@ -141,9 +141,8 @@ class PortfolioScreen extends StatelessWidget {
                           height: 2,
                         ),
                         CustomTextNew(
-                          (data?.totalPortfolio ?? 0)
-                              .convertToCurrencyDecimal(),
                           style: AskLoraTextStyles.h2,
+                          formatCurrency(state.currency, data?.totalPortfolio),
                         ),
                         if (state.currency == CurrencyType.usd)
                           CustomTextNew(
@@ -168,25 +167,28 @@ class PortfolioScreen extends StatelessWidget {
                     content: Column(
                       children: [
                         PairColumnText(
-                            title1:
+                            leftTitle:
                                 'Withdrawable\nAmount (${state.currency.value})',
-                            title2: 'Buying Power\n(${state.currency.value})',
-                            subTitle1: data?.withdrawableAmount != null
+                            rightTitle:
+                                'Buying Power\n(${state.currency.value})',
+                            rightTooltipText:
+                                'Your Buying Power represents the amount of cash that you can use to buy stocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
+                            leftSubTitle: data?.withdrawableAmount != null
                                 ? (data!.withdrawableAmount)
                                     .convertToCurrencyDecimal()
                                 : '/',
-                            subTitle2: (data?.buyingPower ?? 0)
+                            rightSubTitle: (data?.buyingPower ?? 0)
                                 .convertToCurrencyDecimal()),
                         const SizedBox(
                           height: 14,
                         ),
                         PairColumnText(
-                          title1:
+                          leftTitle:
                               'Total Botstock\nValues (${state.currency.value})',
-                          title2: 'Total P/L\n',
-                          subTitle1: (data?.totalBotStockValues ?? 0)
+                          rightTitle: 'Total P/L\n',
+                          leftSubTitle: (data?.totalBotStockValues ?? 0)
                               .convertToCurrencyDecimal(),
-                          subTitle2: data?.withdrawableAmount != null
+                          rightSubTitle: data?.withdrawableAmount != null
                               ? '${(data!.profit).convertToCurrencyDecimal()}%'
                               : '/',
                         ),
@@ -216,6 +218,13 @@ class PortfolioScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String formatCurrency(CurrencyType currencyType, double? currency) {
+    final value = currency ?? 0;
+    return currencyType == CurrencyType.hkd
+        ? value.convertToCurrencyDecimal()
+        : value.toUsd();
   }
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);

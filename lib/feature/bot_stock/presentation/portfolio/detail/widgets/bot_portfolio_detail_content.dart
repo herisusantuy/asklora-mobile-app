@@ -155,10 +155,10 @@ class BotPortfolioDetailContent extends StatelessWidget {
           ),
           children: [
             PairColumnText(
-              title1: 'Prev Close',
-              subTitle1: 'Not available yet',
-              title2: 'Market Cap',
-              subTitle2: portfolioBotDetailModel?.marketCap != null
+              leftTitle: 'Prev Close',
+              leftSubTitle: 'Not available yet',
+              rightTitle: 'Market Cap',
+              rightSubTitle: portfolioBotDetailModel?.marketCap != null
                   ? (portfolioBotDetailModel?.marketCap ?? 0).toStringAsFixed(1)
                   : '-',
             ),
@@ -177,24 +177,24 @@ class BotPortfolioDetailContent extends StatelessWidget {
               height: 21,
             ),
             PairColumnText(
-              title1: 'Sector(s)',
-              subTitle1: portfolioBotDetailModel?.sector ?? '',
-              title2: 'Industry',
-              subTitle2: portfolioBotDetailModel?.industry ?? '',
+              leftTitle: 'Sector(s)',
+              leftSubTitle: portfolioBotDetailModel?.sector ?? '',
+              rightTitle: 'Industry',
+              rightSubTitle: portfolioBotDetailModel?.industry ?? '',
             ),
             _spaceBetweenInfo,
             PairColumnText(
-              title1: 'CEO',
-              subTitle1: portfolioBotDetailModel?.ceo ?? '',
-              title2: 'Employees',
-              subTitle2: '${portfolioBotDetailModel?.employees}',
+              leftTitle: 'CEO',
+              leftSubTitle: portfolioBotDetailModel?.ceo ?? '',
+              rightTitle: 'Employees',
+              rightSubTitle: '${portfolioBotDetailModel?.employees}',
             ),
             _spaceBetweenInfo,
             PairColumnText(
-              title1: 'Headquarters',
-              subTitle1: portfolioBotDetailModel?.headquarters ?? '',
-              title2: 'Founded',
-              subTitle2: portfolioBotDetailModel?.founded ?? '',
+              leftTitle: 'Headquarters',
+              leftSubTitle: portfolioBotDetailModel?.headquarters ?? '',
+              rightTitle: 'Founded',
+              rightSubTitle: portfolioBotDetailModel?.founded ?? '',
             ),
             const SizedBox(
               height: 23,

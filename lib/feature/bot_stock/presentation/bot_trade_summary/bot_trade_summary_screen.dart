@@ -74,28 +74,29 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   content: Column(
                     children: [
                       PairColumnText(
-                          title1: 'Investment Amount (HKD)',
-                          title2: 'Bot Management Fee (HKD)',
-                          subTitle1: arguments.right.convertToCurrencyDecimal(),
-                          subTitle2: 'Free'),
+                          leftTitle: 'Investment Amount (HKD)',
+                          rightTitle: 'Bot Management Fee (HKD)',
+                          leftSubTitle:
+                              arguments.right.convertToCurrencyDecimal(),
+                          rightSubTitle: 'Free'),
                       _spaceBetweenInfo,
                       const PairColumnText(
-                          title1: 'Stop Loss Level',
-                          title2: 'Take Profit Level',
-                          subTitle1: 'N/A',
-                          subTitle2: '240.00'),
+                          leftTitle: 'Stop Loss Level',
+                          rightTitle: 'Take Profit Level',
+                          leftSubTitle: 'N/A',
+                          rightSubTitle: '240.00'),
                       _spaceBetweenInfo,
                       const PairColumnText(
-                          title1: 'Market Price',
-                          title2: 'Investment Period',
-                          subTitle1: '223.07',
-                          subTitle2: '3 months'),
+                          leftTitle: 'Market Price',
+                          rightTitle: 'Investment Period',
+                          leftSubTitle: '223.07',
+                          rightSubTitle: '3 months'),
                       _spaceBetweenInfo,
                       const PairColumnText(
-                          title1: 'Start Time',
-                          title2: 'End Time',
-                          subTitle1: '03/12 15:30 ET',
-                          subTitle2: '03/26 15:30 ET'),
+                          leftTitle: 'Start Time',
+                          rightTitle: 'End Time',
+                          leftSubTitle: '03/12 15:30 ET',
+                          rightSubTitle: '03/26 15:30 ET'),
                     ],
                   ),
                   title: arguments.left.freeBot

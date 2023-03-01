@@ -134,10 +134,10 @@ class BotRecommendationDetailContent extends StatelessWidget {
           ),
           children: [
             PairColumnText(
-              title1: 'Prev Close',
-              subTitle1: 'Not available yet',
-              title2: 'Market Cap',
-              subTitle2: botDetailModel?.marketCap != null
+              leftTitle: 'Prev Close',
+              leftSubTitle: 'Not available yet',
+              rightTitle: 'Market Cap',
+              rightSubTitle: botDetailModel?.marketCap != null
                   ? (botDetailModel?.marketCap ?? 0).toStringAsFixed(1)
                   : '-',
             ),
@@ -156,24 +156,24 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 21,
             ),
             PairColumnText(
-              title1: 'Sector(s)',
-              subTitle1: botDetailModel?.sector ?? '',
-              title2: 'Industry',
-              subTitle2: botDetailModel?.industry ?? '',
+              leftTitle: 'Sector(s)',
+              leftSubTitle: botDetailModel?.sector ?? '',
+              rightTitle: 'Industry',
+              rightSubTitle: botDetailModel?.industry ?? '',
             ),
             _spaceBetweenInfo,
             PairColumnText(
-              title1: 'CEO',
-              subTitle1: botDetailModel?.ceo ?? '',
-              title2: 'Employees',
-              subTitle2: '${botDetailModel?.employees}',
+              leftTitle: 'CEO',
+              leftSubTitle: botDetailModel?.ceo ?? '',
+              rightTitle: 'Employees',
+              rightSubTitle: '${botDetailModel?.employees}',
             ),
             _spaceBetweenInfo,
             PairColumnText(
-              title1: 'Headquarters',
-              subTitle1: botDetailModel?.headquarters ?? '',
-              title2: 'Founded',
-              subTitle2: botDetailModel?.founded ?? '',
+              leftTitle: 'Headquarters',
+              leftSubTitle: botDetailModel?.headquarters ?? '',
+              rightTitle: 'Founded',
+              rightSubTitle: botDetailModel?.founded ?? '',
             ),
             const SizedBox(
               height: 23,
@@ -195,20 +195,20 @@ class BotRecommendationDetailContent extends StatelessWidget {
               if (botType != BotType.squat && botDetailModel != null)
                 _detailedInformation(botDetailModel!),
               PairColumnText(
-                  title1: 'Earliest Start Time',
-                  subTitle1: 'Not available yet',
-                  title2: 'Optimized Start Time',
-                  subTitle2: 'Not available yet',
-                  tooltipText1: _tempTooltipText,
-                  tooltipText2: _tempTooltipText),
+                  leftTitle: 'Earliest Start Time',
+                  leftSubTitle: 'Not available yet',
+                  rightTitle: 'Optimized Start Time',
+                  rightSubTitle: 'Not available yet',
+                  leftTooltipText: _tempTooltipText,
+                  rightTooltipText: _tempTooltipText),
               _spaceBetweenInfo,
               PairColumnText(
-                  title1: 'Investment Period',
-                  subTitle1: '${botDetailModel?.bot.duration}',
-                  title2: 'Estimated End Date',
-                  subTitle2: '${botDetailModel?.estimatedExpiredDate}',
-                  tooltipText1: _tempTooltipText,
-                  tooltipText2: _tempTooltipText),
+                  leftTitle: 'Investment Period',
+                  leftSubTitle: '${botDetailModel?.bot.duration}',
+                  rightTitle: 'Estimated End Date',
+                  rightSubTitle: '${botDetailModel?.estimatedExpiredDate}',
+                  leftTooltipText: _tempTooltipText,
+                  rightTooltipText: _tempTooltipText),
               if (botDetailModel?.performance.data != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0),
@@ -233,14 +233,14 @@ class BotRecommendationDetailContent extends StatelessWidget {
             height: 24,
           ),
           PairColumnText(
-              title1: 'Stop Loss Level (USD)',
-              subTitle1: botDetailModel.estimatedStopLossPrice
+              leftTitle: 'Stop Loss Level (USD)',
+              leftSubTitle: botDetailModel.estimatedStopLossPrice
                   .convertToCurrencyDecimal(),
-              title2: 'Take Profit Level (USD)',
-              subTitle2: botDetailModel.estimatedTakeProfitPrice
+              rightTitle: 'Take Profit Level (USD)',
+              rightSubTitle: botDetailModel.estimatedTakeProfitPrice
                   .convertToCurrencyDecimal(),
-              tooltipText1: _tempTooltipText,
-              tooltipText2: _tempTooltipText),
+              leftTooltipText: _tempTooltipText,
+              rightTooltipText: _tempTooltipText),
           _spaceBetweenInfo,
         ],
       );
