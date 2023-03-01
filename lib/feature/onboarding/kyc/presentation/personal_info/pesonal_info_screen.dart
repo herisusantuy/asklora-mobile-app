@@ -2,9 +2,11 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
+import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_phone_number_input.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -44,42 +46,63 @@ class PersonalInfoScreen extends StatelessWidget {
             focus.focusedChild?.unfocus();
           }
         },
-        child: Column(
-          children: [
-            CustomTextNew(
-              'Please make sure your name is exactly the same as the information on identification document.',
-              style: AskLoraTextStyles.body1
-                  .copyWith(color: AskLoraColors.charcoal),
-            ),
-            _spaceHeight,
-            _textInput(
-                initialValue: context.read<PersonalInfoBloc>().state.firstName,
-                key: const Key('first_name'),
-                label: 'Legal English First Name',
-                onChanged: (value) => context
-                    .read<PersonalInfoBloc>()
-                    .add(PersonalInfoFirstNameChanged(value))),
-            _spaceHeight,
-            _textInput(
-                initialValue: context.read<PersonalInfoBloc>().state.lastName,
-                key: const Key('last_name'),
-                label: 'Legal English Last Name',
-                onChanged: (value) => context
-                    .read<PersonalInfoBloc>()
-                    .add(PersonalInfoLastNameChanged(value))),
-            _spaceHeight,
-            _selectGender,
-            _spaceHeight,
-            _hkIdNumberInput,
-            _spaceHeight,
-            _nationality,
-            _spaceHeight,
-            _dateOfBirth,
-            _spaceHeight,
-            _countryOfBirth,
-            _spaceHeight,
-            _countryCodeAndPhoneNumber
-          ],
+        child: BlocListener<KycBloc, KycState>(
+          listenWhen: (previous, current) =>
+              previous.personalInfoResponse.state !=
+              current.personalInfoResponse.state,
+          listener: (context, state) {
+            switch (state.personalInfoResponse.state) {
+              case ResponseState.error:
+                CustomInAppNotification.show(
+                    context, state.personalInfoResponse.message);
+                break;
+              case ResponseState.success:
+                context
+                    .read<NavigationBloc<KycPageStep>>()
+                    .add(const PageChanged(KycPageStep.otp));
+                break;
+              default:
+                break;
+            }
+          },
+          child: Column(
+            children: [
+              CustomTextNew(
+                'Please make sure your name is exactly the same as the information on identification document.',
+                style: AskLoraTextStyles.body1
+                    .copyWith(color: AskLoraColors.charcoal),
+              ),
+              _spaceHeight,
+              _textInput(
+                  initialValue:
+                      context.read<PersonalInfoBloc>().state.firstName,
+                  key: const Key('first_name'),
+                  label: 'Legal English First Name',
+                  onChanged: (value) => context
+                      .read<PersonalInfoBloc>()
+                      .add(PersonalInfoFirstNameChanged(value))),
+              _spaceHeight,
+              _textInput(
+                  initialValue: context.read<PersonalInfoBloc>().state.lastName,
+                  key: const Key('last_name'),
+                  label: 'Legal English Last Name',
+                  onChanged: (value) => context
+                      .read<PersonalInfoBloc>()
+                      .add(PersonalInfoLastNameChanged(value))),
+              _spaceHeight,
+              _selectGender,
+              _spaceHeight,
+              _hkIdNumberInput,
+              _spaceHeight,
+              _nationality,
+              _spaceHeight,
+              _dateOfBirth,
+              _spaceHeight,
+              _countryOfBirth,
+              _spaceHeight,
+              _countryCodeAndPhoneNumber
+            ],
+          ),
         ),
       ),
       bottomButton: _bottomButton,
@@ -231,15 +254,12 @@ class PersonalInfoScreen extends StatelessWidget {
                     lastName: state.lastName,
                     gender: state.gender,
                     hkIdNumber: state.hkIdNumber,
-                    nationality: state.nationalityName,
+                    nationality: state.nationalityCode,
                     dateOfBirth: state.dateOfBirth,
-                    countryOfBirth: state.countryNameOfBirth,
+                    countryOfBirth: state.countryCodeOfBirth,
                     phoneCountryCode: state.phoneCountryCode,
                     phoneNumber: state.phoneNumber,
                   )));
-              // context
-              //     .read<NavigationBloc<KycPageStep>>()
-              //     .add(const PageChanged(KycPageStep.otp));
             },
             secondaryButtonOnClick: () => CarouselScreen.open(context),
             primaryButtonLabel: 'NEXT',
