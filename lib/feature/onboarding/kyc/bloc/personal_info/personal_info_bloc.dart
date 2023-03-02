@@ -136,9 +136,17 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   _onPersonalInfoSubmitted(
       PersonalInfoSubmitted event, Emitter<PersonalInfoState> emit) async {
-    emit(state.copyWith(response: BaseResponse.loading()));
-    var data =
-        await _accountRepository.submitPersonalInfo(event.personalInfoRequest);
-    emit(state.copyWith(response: data));
+    try {
+      emit(state.copyWith(
+          response: BaseResponse.loading(), status: ResponseState.loading));
+      var data = await _accountRepository
+          .submitPersonalInfo(event.personalInfoRequest);
+      emit(state.copyWith(response: data, status: data.state));
+    } catch (e) {
+      emit(state.copyWith(
+          response:
+              BaseResponse.error('Something went wrong! Please try again.'),
+          status: ResponseState.error));
+    }
   }
 }

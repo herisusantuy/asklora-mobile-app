@@ -39,8 +39,8 @@ class AccountRepository {
           await _accountApiClient.submitPersonalInfo(personalInfoRequest);
       return BaseResponse.complete(
           PersonalInfoResponse.fromJson(response.data));
-    } catch (_) {
-      return BaseResponse.error('Invalid Request');
+    } catch (e) {
+      return BaseResponse.error(e.toString());
     }
   }
 

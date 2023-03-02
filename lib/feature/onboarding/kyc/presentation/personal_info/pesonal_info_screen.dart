@@ -9,6 +9,7 @@ import '../../../../../core/presentation/custom_date_picker.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_phone_number_input.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
@@ -22,6 +23,7 @@ import '../../domain/upgrade_account/personal_info_request.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
+import 'otp/bloc/otp_bloc.dart';
 
 class PersonalInfoScreen extends StatelessWidget {
   final double progress;
@@ -228,17 +230,18 @@ class PersonalInfoScreen extends StatelessWidget {
             listenWhen: (previous, current) =>
                 previous.response.state != current.response.state,
             listener: (context, state) {
-              switch (state.response.state) {
-                case ResponseState.error:
+              if (state.status == ResponseState.loading) {
+                CustomLoadingOverlay.show(context);
+              } else {
+                CustomLoadingOverlay.dismiss();
+                if (state.response.state == ResponseState.error) {
                   CustomInAppNotification.show(context, state.response.message);
-                  break;
-                case ResponseState.success:
+                } else {
+                  context.read<OtpBloc>().add(const OtpRequested());
                   context
                       .read<NavigationBloc<KycPageStep>>()
                       .add(const PageChanged(KycPageStep.otp));
-                  break;
-                default:
-                  break;
+                }
               }
             },
             child: ButtonPair(

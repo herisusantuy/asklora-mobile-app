@@ -98,6 +98,25 @@ class MockOtpRepository extends _i1.Mock implements _i4.OtpRepository {
         )),
       ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
   @override
+  _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> validatePhone(
+          {required _i8.VerifyOtpRequest? verifyOtpRequest}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #validatePhone,
+          [],
+          {#verifyOtpRequest: verifyOtpRequest},
+        ),
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>.value(
+            _FakeBaseResponse_0<_i6.GetOtpResponse>(
+          this,
+          Invocation.method(
+            #validatePhone,
+            [],
+            {#verifyOtpRequest: verifyOtpRequest},
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
+  @override
   _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> getSmsOtp(
           {required _i9.GetSmsOtpRequest? getSmsOtpRequest}) =>
       (super.noSuchMethod(
@@ -155,6 +174,23 @@ class MockGetOtpClient extends _i1.Mock implements _i10.GetOtpClient {
           this,
           Invocation.method(
             #verifyOtp,
+            [verifyOtpRequest],
+          ),
+        )),
+      ) as _i5.Future<_i3.Response<dynamic>>);
+  @override
+  _i5.Future<_i3.Response<dynamic>> validatePhone(
+          _i8.VerifyOtpRequest? verifyOtpRequest) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #validatePhone,
+          [verifyOtpRequest],
+        ),
+        returnValue:
+            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
+          this,
+          Invocation.method(
+            #validatePhone,
             [verifyOtpRequest],
           ),
         )),
