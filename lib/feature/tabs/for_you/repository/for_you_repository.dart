@@ -20,10 +20,6 @@ class ForYouRepository {
   Future<BaseResponse<bool>> getInvestmentStyleState() async {
     bool? investmentStyleState =
         await _sharedPreference.readBoolData('investment_style_state');
-    if (investmentStyleState != null) {
-      return BaseResponse.complete(investmentStyleState);
-    } else {
-      return BaseResponse.error('Answer not found');
-    }
+    return BaseResponse.complete(investmentStyleState ?? false);
   }
 }

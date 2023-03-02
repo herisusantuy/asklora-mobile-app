@@ -55,10 +55,6 @@ class ForYouScreenForm extends StatelessWidget {
   Widget get _getForYouPage => MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) =>
-                NavigationBloc<ForYouPage>(ForYouPage.investmentStyle),
-          ),
-          BlocProvider(
             create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
               ..add(GetInvestmentStyleAnswer()),
           ),
@@ -66,27 +62,29 @@ class ForYouScreenForm extends StatelessWidget {
         child: BlocConsumer<ForYouBloc, ForYouState>(
           builder: (BuildContext context, state) {
             if (state.response.state == ResponseState.success) {
-              return const BotRecommendationScreen(
-                enableBackNavigation: false,
+              return BlocProvider(
+                create: (_) => NavigationBloc<ForYouPage>(state.response.data!
+                    ? ForYouPage.botRecommendation
+                    : ForYouPage.investmentStyle),
+                child: BlocBuilder<NavigationBloc<ForYouPage>,
+                        NavigationState<ForYouPage>>(
+                    buildWhen: (previous, current) =>
+                        previous.page != current.page,
+                    builder: (context, state) {
+                      switch (state.page) {
+                        case ForYouPage.investmentStyle:
+                          return const PpiScreen(
+                              questionPageType:
+                                  QuestionPageType.investmentStyle,
+                              initialQuestionPage:
+                                  QuestionPageStep.investmentStyle);
+                        case ForYouPage.botRecommendation:
+                          return const BotRecommendationScreen(
+                            enableBackNavigation: false,
+                          );
+                      }
+                    }),
               );
-            } else if (state.response.state == ResponseState.error) {
-              return BlocBuilder<NavigationBloc<ForYouPage>,
-                      NavigationState<ForYouPage>>(
-                  buildWhen: (previous, current) =>
-                      previous.page != current.page,
-                  builder: (context, state) {
-                    switch (state.page) {
-                      case ForYouPage.investmentStyle:
-                        return const PpiScreen(
-                            questionPageType: QuestionPageType.investmentStyle,
-                            initialQuestionPage:
-                                QuestionPageStep.investmentStyle);
-                      case ForYouPage.botRecommendation:
-                        return const BotRecommendationScreen(
-                          enableBackNavigation: false,
-                        );
-                    }
-                  });
             } else {
               return const SizedBox.shrink();
             }
