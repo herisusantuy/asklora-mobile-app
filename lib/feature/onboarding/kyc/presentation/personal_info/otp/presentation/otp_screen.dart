@@ -7,6 +7,7 @@ import '../../../../../../../core/domain/otp/verify_otp_request.dart';
 import '../../../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../../../core/styles/asklora_colors.dart';
@@ -26,6 +27,11 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
+        if (state.response.state == ResponseState.loading) {
+          CustomLoadingOverlay.show(context);
+        } else {
+          CustomLoadingOverlay.dismiss();
+        }
         if (state is OtpValidationSuccess) {
           context
               .read<NavigationBloc<KycPageStep>>()

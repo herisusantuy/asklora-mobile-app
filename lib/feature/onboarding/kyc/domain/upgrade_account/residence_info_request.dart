@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'residence_info.g.dart';
+part 'residence_info_request.g.dart';
 
 @JsonSerializable()
-class ResidenceInfo extends Equatable {
+class ResidenceInfoRequest extends Equatable {
   @JsonKey(name: 'address_line_1')
   final String? addressLine1;
   @JsonKey(name: 'address_line_2')
@@ -14,7 +14,7 @@ class ResidenceInfo extends Equatable {
   @JsonKey(includeIfNull: false)
   final String? country;
 
-  const ResidenceInfo({
+  const ResidenceInfoRequest({
     this.addressLine1,
     this.addressLine2,
     this.district,
@@ -22,10 +22,10 @@ class ResidenceInfo extends Equatable {
     this.country,
   });
 
-  factory ResidenceInfo.fromJson(Map<String, dynamic> json) =>
-      _$ResidenceInfoFromJson(json);
+  factory ResidenceInfoRequest.fromJson(Map<String, dynamic> json) =>
+      _$ResidenceInfoRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResidenceInfoToJson(this);
+  Map<String, dynamic> toJson() => _$ResidenceInfoRequestToJson(this);
 
   @override
   List<Object> get props => [

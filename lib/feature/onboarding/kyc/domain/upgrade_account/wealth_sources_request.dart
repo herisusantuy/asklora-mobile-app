@@ -1,24 +1,24 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'wealth_sources.g.dart';
+part 'wealth_sources_request.g.dart';
 
 @JsonSerializable()
-class WealthSources extends Equatable {
+class WealthSourcesRequest extends Equatable {
   @JsonKey(name: 'wealth_source', includeIfNull: false)
   final String? wealthSource;
   @JsonKey(includeIfNull: false)
   final int? percentage;
 
-  const WealthSources({
+  const WealthSourcesRequest({
     this.wealthSource,
     this.percentage,
   });
 
-  factory WealthSources.fromJson(Map<String, dynamic> json) =>
-      _$WealthSourcesFromJson(json);
+  factory WealthSourcesRequest.fromJson(Map<String, dynamic> json) =>
+      _$WealthSourcesRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WealthSourcesToJson(this);
+  Map<String, dynamic> toJson() => _$WealthSourcesRequestToJson(this);
 
   @override
   List<Object> get props => [

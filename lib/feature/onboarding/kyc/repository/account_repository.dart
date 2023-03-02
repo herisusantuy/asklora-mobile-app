@@ -40,7 +40,7 @@ class AccountRepository {
       return BaseResponse.complete(
           PersonalInfoResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error(e.toString());
+      return BaseResponse.error('Something went wrong! Please try again.');
     }
   }
 

@@ -110,43 +110,47 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   _onIsUnitedStateResidentChange(PersonalInfoIsUnitedStateResidentChanged event,
       Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(isUnitedStateResident: event.isUnitedStateResident));
+    emit(state.copyWith(
+      isUnitedStateResident: event.isUnitedStateResident,
+    ));
   }
 
   _onPersonalInfoNext(PersonalInfoNext event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(status: ResponseState.unknown));
+    emit(state.copyWith(response: BaseResponse.unknown()));
     if (state.isHongKongPermanentResident != null &&
             !state.isHongKongPermanentResident! ||
         state.isUnitedStateResident != null && state.isUnitedStateResident!) {
       emit(state.copyWith(
-          status: ResponseState.error, message: r'You are not eligible!'));
+          response: BaseResponse.error(r'You are not eligible!'),
+          message: r'You are not eligible!'));
     } else if (!isAdult(state.dateOfBirth)) {
       emit(state.copyWith(
-          status: ResponseState.error,
+          response: BaseResponse.error(
+              r'You must be over 18 to sign up for AskLORA!'),
           message: r'You must be over 18 to sign up for AskLORA!'));
     } else {
-      emit(state.copyWith(status: ResponseState.success));
+      emit(state.copyWith(response: BaseResponse.complete('')));
     }
   }
 
   _onPersonalInfoReset(
       PersonalInfoReset event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(status: ResponseState.unknown));
+    emit(state.copyWith(response: BaseResponse.unknown()));
   }
 
   _onPersonalInfoSubmitted(
       PersonalInfoSubmitted event, Emitter<PersonalInfoState> emit) async {
     try {
       emit(state.copyWith(
-          response: BaseResponse.loading(), status: ResponseState.loading));
+        response: BaseResponse.loading(),
+      ));
       var data = await _accountRepository
           .submitPersonalInfo(event.personalInfoRequest);
-      emit(state.copyWith(response: data, status: data.state));
+      emit(state.copyWith(response: BaseResponse.complete(data)));
     } catch (e) {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('Something went wrong! Please try again.'),
-          status: ResponseState.error));
+        response: BaseResponse.error('Something went wrong! Please try again.'),
+      ));
     }
   }
 }

@@ -11,10 +11,10 @@ enum SourceOfWealthType {
   allowanceOrSpousalIncome('Allowance / Spousal Income', 'ALLOWANCE'),
   other('Other', 'OTHER');
 
+  final String name;
   final String value;
-  final String enumString;
 
-  const SourceOfWealthType(this.value, this.enumString);
+  const SourceOfWealthType(this.name, this.value);
 }
 
 class SourceOfWealthModel {

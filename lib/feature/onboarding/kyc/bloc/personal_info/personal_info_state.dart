@@ -17,7 +17,6 @@ class PersonalInfoState extends Equatable {
     this.isUnitedStateResident,
     this.isHkIdValid = false,
     this.message = '',
-    this.status = ResponseState.unknown,
     this.response = const BaseResponse(),
   });
 
@@ -35,7 +34,6 @@ class PersonalInfoState extends Equatable {
   final String hkIdNumber;
   final bool? isUnitedStateResident;
   final bool isHkIdValid;
-  final ResponseState status;
   final String? message;
   final BaseResponse response;
 
@@ -56,7 +54,6 @@ class PersonalInfoState extends Equatable {
       hkIdNumber,
       isUnitedStateResident,
       isHkIdValid,
-      status,
       message,
       response,
     ];
@@ -77,7 +74,6 @@ class PersonalInfoState extends Equatable {
     String? hkIdNumber,
     bool? isUnitedStateResident,
     bool? isHkIdValid,
-    ResponseState? status,
     String? message,
     BaseResponse? response,
   }) {
@@ -98,7 +94,6 @@ class PersonalInfoState extends Equatable {
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
       isHkIdValid: isHkIdValid ?? this.isHkIdValid,
-      status: status ?? this.status,
       message: message ?? this.message,
       response: response ?? this.response,
     );

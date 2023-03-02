@@ -230,7 +230,7 @@ class PersonalInfoScreen extends StatelessWidget {
             listenWhen: (previous, current) =>
                 previous.response.state != current.response.state,
             listener: (context, state) {
-              if (state.status == ResponseState.loading) {
+              if (state.response.state == ResponseState.loading) {
                 CustomLoadingOverlay.show(context);
               } else {
                 CustomLoadingOverlay.dismiss();

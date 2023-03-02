@@ -103,7 +103,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextNew(
-                  widget.sourceOfWealthType.value,
+                  widget.sourceOfWealthType.name,
                   style: AskLoraTextStyles.subtitle2,
                 ),
                 widget.active

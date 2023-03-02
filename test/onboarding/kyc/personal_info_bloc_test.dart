@@ -59,7 +59,6 @@ void main() {
               isUnitedStateResident: null,
               isHkIdValid: false,
               message: '',
-              status: ResponseState.unknown,
               response: BaseResponse(),
             ));
       });
@@ -87,10 +86,9 @@ void main() {
                   isUnitedStateResident: true,
                   isHkIdValid: false,
                   message: '',
-                  status: ResponseState.unknown,
                   response: BaseResponse(),
                 ),
-                const PersonalInfoState(
+                PersonalInfoState(
                   firstName: '',
                   lastName: '',
                   gender: '',
@@ -105,8 +103,7 @@ void main() {
                   isUnitedStateResident: true,
                   isHkIdValid: false,
                   message: r'You are not eligible!',
-                  status: ResponseState.error,
-                  response: BaseResponse(),
+                  response: BaseResponse.error(''),
                 ),
               });
 
@@ -135,10 +132,9 @@ void main() {
                   isUnitedStateResident: null,
                   isHkIdValid: false,
                   message: '',
-                  status: ResponseState.unknown,
                   response: BaseResponse(),
                 ),
-                const PersonalInfoState(
+                PersonalInfoState(
                   firstName: '',
                   lastName: '',
                   gender: '',
@@ -154,8 +150,7 @@ void main() {
                   isUnitedStateResident: null,
                   isHkIdValid: false,
                   message: r'You must be over 18 to sign up for AskLORA!',
-                  status: ResponseState.error,
-                  response: BaseResponse(),
+                  response: BaseResponse.error(''),
                 ),
               });
 
@@ -180,7 +175,6 @@ void main() {
                   isUnitedStateResident: null,
                   isHkIdValid: false,
                   message: '',
-                  status: ResponseState.unknown,
                   response: BaseResponse(),
                 ),
               });
@@ -206,7 +200,6 @@ void main() {
                   isUnitedStateResident: null,
                   isHkIdValid: true,
                   message: '',
-                  status: ResponseState.unknown,
                   response: BaseResponse(),
                 ),
               });
