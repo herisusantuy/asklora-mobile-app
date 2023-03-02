@@ -9,6 +9,7 @@ import '../../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/presentation/we_create/custom_centered_text_input.dart';
+import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
@@ -61,7 +62,9 @@ class AskNameScreen extends StatelessWidget {
                           .read<LoraAskNameBloc>()
                           .add(NameChanged(value)),
                       hintText: S.of(context).askNameScreenTextFieldHint,
-                      textInputType: TextInputType.name),
+                      textInputFormatterList: [fullEnglishNameFormatter()],
+                      textCapitalization: TextCapitalization.words,
+                      textInputType: TextInputType.text),
                 ],
               ),
               bottomButton: _nextButton,
