@@ -57,12 +57,12 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
                         case 2:
                           return RadarChartTitle(
                               text:
-                                  'Risk aversion ${value.extrovert.toDouble().toString()}',
+                                  'Risk aversion ${value.neuroticism.toDouble().toString()}',
                               angle: 0);
                         case 1:
                           return RadarChartTitle(
                               text:
-                                  'Openness ${value.extrovert.toDouble().toString()}',
+                                  'Openness ${value.openness.toDouble().toString()}',
                               angle: 0);
                         default:
                           return const RadarChartTitle(text: '');
