@@ -54,15 +54,15 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
                               text:
                                   'Extroversion ${value.extrovert.toDouble().toString()}',
                               angle: 0);
-                        case 2:
-                          return RadarChartTitle(
-                              text:
-                                  'Risk aversion ${value.neuroticism.toDouble().toString()}',
-                              angle: 0);
                         case 1:
                           return RadarChartTitle(
                               text:
                                   'Openness ${value.openness.toDouble().toString()}',
+                              angle: 0);
+                        case 2:
+                          return RadarChartTitle(
+                              text:
+                                  'Risk aversion ${value.neuroticism.toDouble().toString()}',
                               angle: 0);
                         default:
                           return const RadarChartTitle(text: '');
@@ -86,8 +86,8 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
                           borderColor: AskLoraColors.primaryGreen,
                           dataEntries: [
                             RadarEntry(value: value.extrovert.toDouble()),
-                            RadarEntry(value: value.neuroticism.toDouble()),
                             RadarEntry(value: value.openness.toDouble()),
+                            RadarEntry(value: value.neuroticism.toDouble()),
                           ])
                     ]));
               },
