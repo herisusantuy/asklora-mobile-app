@@ -14,6 +14,7 @@ class CustomCenteredTextInput extends StatelessWidget {
   final EdgeInsets padding;
   final FontWeight fontWeight;
   final int? maxLength;
+  final TextCapitalization textCapitalization;
 
   const CustomCenteredTextInput(
       {required this.onChanged,
@@ -25,6 +26,7 @@ class CustomCenteredTextInput extends StatelessWidget {
       this.textInputFormatterList,
       this.fontWeight = FontWeight.w900,
       this.maxLength,
+      this.textCapitalization = TextCapitalization.none,
       Key? key})
       : super(key: key);
 
@@ -33,6 +35,7 @@ class CustomCenteredTextInput extends StatelessWidget {
     return Padding(
       padding: padding,
       child: CustomTextInput(
+        textCapitalization: textCapitalization,
         textInputType: textInputType,
         initialValue: initialValue,
         labelText: labelText,

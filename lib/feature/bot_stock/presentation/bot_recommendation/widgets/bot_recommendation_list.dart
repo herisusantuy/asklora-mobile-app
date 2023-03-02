@@ -93,9 +93,16 @@ class BotRecommendationList extends StatelessWidget {
                   subTitleColor: AskLoraColors.white,
                   buttonLabel: 'RETAKE INVESTMENT STYLE',
                   buttonPrimaryType: ButtonPrimaryType.solidGreen,
-                  onPrimaryButtonTap: () => PpiScreen.open(context,
-                      arguments: Pair(QuestionPageType.investmentStyle,
-                          QuestionPageStep.investmentStyle)),
+                  onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
+                    context: context,
+                    target: UserJourney.freeBotStock,
+                    onTrueCallback: () => context
+                        .read<NavigationBloc<ForYouPage>>()
+                        .add(const PageChanged(ForYouPage.investmentStyle)),
+                    onFalseCallback: () => PpiScreen.open(context,
+                        arguments: Pair(QuestionPageType.investmentStyle,
+                            QuestionPageStep.investmentStyle)),
+                  ),
                 ),
               ),
             )

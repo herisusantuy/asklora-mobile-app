@@ -53,39 +53,51 @@ class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case HomeScreen.route:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const HomeScreen());
       case SignInScreen.route:
-        return MaterialPageRoute(builder: (_) => const SignInScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const SignInScreen());
       case SignInSuccessScreen.route:
-        return MaterialPageRoute(builder: (_) => const SignInSuccessScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const SignInSuccessScreen());
       case SignUpScreen.route:
-        return MaterialPageRoute(builder: (_) => const SignUpScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const SignUpScreen());
       case SignUpSuccessScreen.route:
-        return MaterialPageRoute(builder: (_) => const SignUpSuccessScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const SignUpSuccessScreen());
       case UpgradeAccountScreen.route:
-        return MaterialPageRoute(builder: (_) => UpgradeAccountScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => UpgradeAccountScreen());
       case OtpScreen.route:
         var arguments = settings.arguments as Pair<String, String>;
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) =>
                 OtpScreen(email: arguments.left, password: arguments.right));
       case KycScreen.route:
-        return MaterialPageRoute(builder: (_) => const KycScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const KycScreen());
       case NotEligibleScreen.route:
-        return MaterialPageRoute(builder: (_) => const NotEligibleScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const NotEligibleScreen());
       case WithdrawalScreen.route:
-        return MaterialPageRoute(builder: (_) => const WithdrawalScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const WithdrawalScreen());
       case DepositScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => DepositScreen(
                   depositType: settings.arguments as DepositType,
                 ));
       case PhotoViewScreen.route:
         ImageProvider imageProvider = settings.arguments as ImageProvider;
         return MaterialPageRoute(
-            builder: (_) => PhotoViewScreen(imageProvider));
+            settings: settings, builder: (_) => PhotoViewScreen(imageProvider));
       case RegularOrderHomeScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => RegularOrderHomeScreen(
                 availableBuyingPower: 1000,
                 symbolDetail: SymbolDetail(
@@ -94,109 +106,136 @@ class RouterGenerator {
         var args =
             settings.arguments as Pair<QuestionPageType, QuestionPageStep>;
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => PpiScreen(
                   questionPageType: args.left,
                   initialQuestionPage: args.right,
                 ));
       case CarouselScreen.route:
-        return MaterialPageRoute(builder: (_) => const CarouselScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const CarouselScreen());
       case AskNameScreen.route:
-        return MaterialPageRoute(builder: (_) => const AskNameScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const AskNameScreen());
       case GreetingScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => GreetingScreen(name: settings.arguments as String));
       case EmailActivationScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) =>
                 EmailActivationScreen(userName: settings.arguments as String));
       case ResetPasswordScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => ResetPasswordScreen(
                 resetPasswordToken: settings.arguments as String));
       case InvestmentStyleWelcomeScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => const InvestmentStyleWelcomeScreen());
       case GiftBotStockWelcomeScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => const GiftBotStockWelcomeScreen());
       case BotStockExplanationScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => const BotStockExplanationScreen());
       case BotStockDoScreen.route:
-        return MaterialPageRoute(builder: (_) => const BotStockDoScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const BotStockDoScreen());
       case BotRecommendationScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => const BotRecommendationScreen());
       case BotRecommendationDetailScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BotRecommendationDetailScreen(
                   botRecommendationModel:
                       settings.arguments as BotRecommendationModel,
                 ));
       case BotPortfolioDetailScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BotPortfolioDetailScreen(
                   portfolioBotModel: settings.arguments as PortfolioBotModel,
                 ));
       case BotTradeSummaryScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => BotTradeSummaryScreen(
                   arguments: settings.arguments
                       as Pair<BotRecommendationModel, double>,
                 ));
       case PortfolioScreen.route:
-        return MaterialPageRoute(builder: (_) => const PortfolioScreen());
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const PortfolioScreen());
       case DepositWelcomeScreen.route:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => DepositWelcomeScreen(
                   initialDepositType: settings.arguments as DepositType?,
                 ));
       case DepositResultScreen.route:
-        return MaterialPageRoute(builder: (_) {
-          var arguments = settings.arguments as Pair<DepositType, StatusType>;
-          return DepositResultScreen(
-            statusType: arguments.right,
-            depositType: arguments.left,
-          );
-        });
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) {
+              var arguments =
+                  settings.arguments as Pair<DepositType, StatusType>;
+              return DepositResultScreen(
+                statusType: arguments.right,
+                depositType: arguments.left,
+              );
+            });
       case TabsScreen.route:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => TabsScreen(
             initialTabScreenPage: settings.arguments as TabScreenPage?,
           ),
         );
       case WithdrawalBankDetailScreen.route:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => const WithdrawalBankDetailScreen(),
         );
       case WithdrawalAmountScreen.route:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => const WithdrawalAmountScreen(),
         );
       case WithdrawalSummaryScreen.route:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => WithdrawalSummaryScreen(
             withdrawalAmount: settings.arguments as double,
           ),
         );
       case WithdrawalResultScreen.route:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => const WithdrawalResultScreen(),
         );
       case LearningBotStockScreen.route:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => LearningBotStockScreen(
             botType: settings.arguments as BotType,
           ),
         );
       case BotStockResultScreen.route:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => BotStockResultScreen(
             arguments: settings.arguments as Pair<String, String>,
           ),
         );
       default:
         return MaterialPageRoute(
+            settings: settings,
             builder: (_) => Scaffold(
                   body: Center(
                       child: Text(
