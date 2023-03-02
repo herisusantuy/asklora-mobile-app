@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import '../../../../core/data/remote/ppi_api_client.dart';
 import '../../../../core/domain/endpoints.dart';
 import 'bot_submission_request.dart';
-import 'ppi_user_response.dart';
 import 'ppi_user_response_request.dart';
 
 class PpiApiRepository {
