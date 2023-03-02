@@ -16,6 +16,7 @@ const String endpointConfirmPassword = '$v2${accounts}confirm-password';
 const String endpointGetOtp = '$v1${accounts}otp/';
 const String endpointGetSmsOtp = '$v2${accounts}request-sms-otp/';
 const String endpointValidateEmail = '$v2${accounts}validate-email/';
+const String endpointValidatePhone = '$v2${accounts}validate-phone/';
 const String endpointVerifyEmail = '$v1${accounts}verify-email/';
 const String endpointPersonalInfo = '$v2${accounts}upgrade/personal-info/';
 const String endpointUpgradeAccount = '$v2${accounts}upgrade/ibkr/';

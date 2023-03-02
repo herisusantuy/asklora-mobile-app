@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:signature/signature.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../auth/otp/repository/otp_repository.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
@@ -30,7 +31,6 @@ import 'personal_info/address_proof_screen.dart';
 import 'personal_info/pesonal_info_screen.dart';
 import 'personal_info/otp/bloc/otp_bloc.dart';
 import 'personal_info/otp/presentation/otp_screen.dart';
-import 'personal_info/otp/repository/otp_repository.dart';
 import 'personal_info/personal_info_summary_screen.dart';
 import 'personal_info/resident_check_screen.dart';
 import 'personal_info/tin_screen.dart';
@@ -59,7 +59,9 @@ class KycScreen extends StatelessWidget {
                   create: (context) =>
                       PersonalInfoBloc(accountRepository: AccountRepository())),
               BlocProvider(
-                create: (context) => OtpBloc(otpRepository: OtpRepository()),
+                create: (context) => OtpBloc(
+                    otpRepository: OtpRepository(),
+                    sharedPreference: SharedPreference()),
               ),
               BlocProvider(
                 create: (context) => CountryOfTaxResidenceBloc(),
@@ -128,7 +130,6 @@ class KycScreen extends StatelessWidget {
               );
             case KycPageStep.otp:
               return const OtpScreen(
-                email: 'raviranjan@asifboot.com',
                 progress: 0.15,
               );
             case KycPageStep.tin:

@@ -212,6 +212,9 @@ void main() async {
         'entered correct password and correct email WHEN '
         'pressed `Submit` button',
         build: () {
+          when(sharedPreference.writeData(sfKeyEmail, 'kk@test.com'))
+              .thenAnswer((_) => Future.value(true));
+
           when(sharedPreference.readData(sfKeyTempName))
               .thenAnswer((_) => Future.value('AAAA|BBBB|CCCC'));
 

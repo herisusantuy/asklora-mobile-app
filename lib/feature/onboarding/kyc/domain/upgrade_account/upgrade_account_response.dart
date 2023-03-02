@@ -3,8 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'affiliated_person.dart';
 import 'agreement.dart';
-import 'proofs_of_address.dart';
-import 'residence_info.dart';
+import 'proofs_of_address_request.dart';
+import 'residence_info_request.dart';
 import 'trusted_contact.dart';
 
 part 'upgrade_account_response.g.dart';
@@ -12,12 +12,13 @@ part 'upgrade_account_response.g.dart';
 @JsonSerializable(explicitToJson: true)
 class UpgradeAccountResponse extends Equatable {
   @JsonKey(name: 'residence_info')
-  final ResidenceInfo? residenceInfo;
+  final ResidenceInfoRequest? residenceInfo;
+
   @JsonKey(name: 'proofs_of_address')
-  final List<ProofsOfAddress>? proofsOfAddress;
+  final List<ProofsOfAddressRequest>? proofsOfAddress;
 
   @JsonKey(name: 'employment_info')
-  final ProofsOfAddress? employmentInfo;
+  final ProofsOfAddressRequest? employmentInfo;
 
   @JsonKey(name: 'wealth_sources')
   final List<TrustedContact>? wealthSources;
@@ -52,9 +53,9 @@ class UpgradeAccountResponse extends Equatable {
       ];
 
   UpgradeAccountResponse copyWith({
-    ResidenceInfo? residenceInfo,
-    List<ProofsOfAddress>? proofsOfAddress,
-    ProofsOfAddress? employmentInfo,
+    ResidenceInfoRequest? residenceInfo,
+    List<ProofsOfAddressRequest>? proofsOfAddress,
+    ProofsOfAddressRequest? employmentInfo,
     List<TrustedContact>? wealthSources,
     AffiliatedPerson? affiliatedPerson,
     List<Agreement>? agreements,

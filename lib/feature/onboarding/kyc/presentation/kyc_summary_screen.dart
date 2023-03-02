@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,15 +15,13 @@ import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/kyc_bloc.dart';
 import '../bloc/personal_info/personal_info_bloc.dart';
-import '../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../domain/upgrade_account/affiliated_person.dart';
-import '../domain/upgrade_account/agreement.dart';
 import '../domain/upgrade_account/employment_info.dart';
-import '../domain/upgrade_account/proofs_of_address.dart';
-import '../domain/upgrade_account/residence_info.dart';
+import '../domain/upgrade_account/proofs_of_address_request.dart';
+import '../domain/upgrade_account/residence_info_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
-import '../domain/upgrade_account/wealth_sources.dart';
+import '../domain/upgrade_account/wealth_sources_request.dart';
 import 'financial_profile/widgets/financial_profile_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
 import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
@@ -107,52 +104,7 @@ class KycSummaryScreen extends StatelessWidget {
         },
         child: ButtonPair(
           primaryButtonOnClick: () {
-            context.read<KycBloc>().add(SubmitKyc(UpgradeAccountRequest(
-                residenceInfo: ResidenceInfo(
-                  addressLine1: addressProofState.addressLine1,
-                  addressLine2: addressProofState.addressLine2,
-                  district: addressProofState.district?.value,
-                  region: addressProofState.region?.value,
-                ),
-                proofsOfAddress: addressProofState.addressProofImages
-                    .map((e) => ProofsOfAddress(
-                        proofFile:
-                            'data:image/png;base64,${base64.encode(utf8.encode(e.name))}'))
-                    .toList(),
-                employmentInfo: EmploymentInfo(
-                    employmentStatus:
-                        financialProfileState.employmentStatus.enumString,
-                    employer: financialProfileState.employer,
-                    employerBusiness:
-                        financialProfileState.natureOfBusiness?.value,
-                    employerBusinessDescription:
-                        financialProfileState.natureOfBusinessDescription,
-                    occupation: financialProfileState.occupation?.value,
-                    employerAddressLine1: financialProfileState.employerAddress,
-                    employerAddressLine2:
-                        financialProfileState.employerAddressTwo,
-                    district: financialProfileState.district?.value,
-                    region: financialProfileState.region?.value,
-                    country: financialProfileState.country,
-                    differentCountryReason:
-                        financialProfileState.detailInformationOfCountry),
-                wealthSources: sourceOfWealthState.sourceOfWealthAnswers
-                    .map((e) => WealthSources(
-                          wealthSource: e.sourceOfWealthType.enumString,
-                          percentage: e.amount,
-                        ))
-                    .toList(),
-                affiliatedPerson: disclosureAffiliationState
-                            .affiliatedPersonFirstName.isEmpty &&
-                        disclosureAffiliationState
-                            .affiliatedPersonLastName.isEmpty
-                    ? null
-                    : AffiliatedPerson(
-                        firstName: disclosureAffiliationState
-                            .affiliatedPersonFirstName,
-                        lastName:
-                            disclosureAffiliationState.affiliatedPersonLastName,
-                      ))));
+            context.read<KycBloc>().add(_submitKyc(addressProofState));
             context
                 .read<AppBloc>()
                 .add(const SaveUserJourney(UserJourney.freeBotStock));
@@ -162,4 +114,47 @@ class KycSummaryScreen extends StatelessWidget {
           secondaryButtonLabel: 'SAVE FOR LATER',
         ),
       );
+
+  SubmitKyc _submitKyc(AddressProofState addressProofState) {
+    return SubmitKyc(UpgradeAccountRequest(
+        residenceInfo: ResidenceInfoRequest(
+          addressLine1: addressProofState.addressLine1,
+          addressLine2: addressProofState.addressLine2,
+          district: addressProofState.district?.value,
+          region: addressProofState.region?.value,
+        ),
+        proofsOfAddress: addressProofState.addressProofImages
+            .map((e) => ProofsOfAddressRequest(
+                proofFile:
+                    'data:image/png;base64,${base64.encode(utf8.encode(e.name))}'))
+            .toList(),
+        employmentInfo: EmploymentInfo(
+            employmentStatus: financialProfileState.employmentStatus.enumString,
+            employer: financialProfileState.employer,
+            employerBusiness: financialProfileState.natureOfBusiness?.value,
+            employerBusinessDescription:
+                financialProfileState.natureOfBusinessDescription,
+            occupation: financialProfileState.occupation?.value,
+            employerAddressLine1: financialProfileState.employerAddress,
+            employerAddressLine2: financialProfileState.employerAddressTwo,
+            district: financialProfileState.district?.value,
+            region: financialProfileState.region?.value,
+            country: financialProfileState.country,
+            differentCountryReason:
+                financialProfileState.detailInformationOfCountry),
+        wealthSources: sourceOfWealthState.sourceOfWealthAnswers
+            .map((e) => WealthSourcesRequest(
+                  wealthSource: e.sourceOfWealthType.value,
+                  percentage: e.amount,
+                ))
+            .toList(),
+        affiliatedPerson: disclosureAffiliationState
+                    .affiliatedPersonFirstName.isEmpty &&
+                disclosureAffiliationState.affiliatedPersonLastName.isEmpty
+            ? null
+            : AffiliatedPerson(
+                firstName: disclosureAffiliationState.affiliatedPersonFirstName,
+                lastName: disclosureAffiliationState.affiliatedPersonLastName,
+              )));
+  }
 }
