@@ -70,6 +70,7 @@ class PortfolioScreen extends StatelessWidget {
                 previous.currency != current.currency,
             builder: (context, state) {
               return CustomLayoutWithBlurPopUp(
+                subTitleAdditionalText: 'portfolio',
                 showReloadPopUp:
                     state.botPortfolioResponse.state == ResponseState.error ||
                         state.portfolioResponse.state == ResponseState.error,
