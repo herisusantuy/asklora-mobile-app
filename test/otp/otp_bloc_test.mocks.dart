@@ -6,9 +6,11 @@
 import 'dart:async' as _i5;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/core/domain/otp/get_otp_client.dart' as _i10;
+import 'package:asklora_mobile_app/core/domain/otp/get_otp_client.dart' as _i11;
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart' as _i7;
 import 'package:asklora_mobile_app/core/domain/otp/get_sms_otp_request.dart'
+    as _i10;
+import 'package:asklora_mobile_app/core/domain/otp/validate_phone_request.dart'
     as _i9;
 import 'package:asklora_mobile_app/core/domain/otp/verify_otp_request.dart'
     as _i8;
@@ -99,12 +101,12 @@ class MockOtpRepository extends _i1.Mock implements _i4.OtpRepository {
       ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
   @override
   _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> validatePhone(
-          {required _i8.VerifyOtpRequest? verifyOtpRequest}) =>
+          {required _i9.ValidatePhoneRequest? validatePhoneRequest}) =>
       (super.noSuchMethod(
         Invocation.method(
           #validatePhone,
           [],
-          {#verifyOtpRequest: verifyOtpRequest},
+          {#validatePhoneRequest: validatePhoneRequest},
         ),
         returnValue: _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>.value(
             _FakeBaseResponse_0<_i6.GetOtpResponse>(
@@ -112,13 +114,13 @@ class MockOtpRepository extends _i1.Mock implements _i4.OtpRepository {
           Invocation.method(
             #validatePhone,
             [],
-            {#verifyOtpRequest: verifyOtpRequest},
+            {#validatePhoneRequest: validatePhoneRequest},
           ),
         )),
       ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
   @override
   _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> getSmsOtp(
-          {required _i9.GetSmsOtpRequest? getSmsOtpRequest}) =>
+          {required _i10.GetSmsOtpRequest? getSmsOtpRequest}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSmsOtp,
@@ -140,7 +142,7 @@ class MockOtpRepository extends _i1.Mock implements _i4.OtpRepository {
 /// A class which mocks [GetOtpClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetOtpClient extends _i1.Mock implements _i10.GetOtpClient {
+class MockGetOtpClient extends _i1.Mock implements _i11.GetOtpClient {
   MockGetOtpClient() {
     _i1.throwOnMissingStub(this);
   }
@@ -180,24 +182,24 @@ class MockGetOtpClient extends _i1.Mock implements _i10.GetOtpClient {
       ) as _i5.Future<_i3.Response<dynamic>>);
   @override
   _i5.Future<_i3.Response<dynamic>> validatePhone(
-          _i8.VerifyOtpRequest? verifyOtpRequest) =>
+          _i9.ValidatePhoneRequest? validatePhoneRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #validatePhone,
-          [verifyOtpRequest],
+          [validatePhoneRequest],
         ),
         returnValue:
             _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
           this,
           Invocation.method(
             #validatePhone,
-            [verifyOtpRequest],
+            [validatePhoneRequest],
           ),
         )),
       ) as _i5.Future<_i3.Response<dynamic>>);
   @override
   _i5.Future<_i3.Response<dynamic>> getSmsOtp(
-          _i9.GetSmsOtpRequest? getSmsOtpRequest) =>
+          _i10.GetSmsOtpRequest? getSmsOtpRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #getSmsOtp,
