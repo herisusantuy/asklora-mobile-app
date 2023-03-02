@@ -6,7 +6,7 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
-import '../../../auth/sign_in/presentation/sign_in_success_screen.dart';
+import '../../../settings/presentation/settings_screen.dart';
 import 'custom_shape.dart';
 
 class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
@@ -37,7 +37,7 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                         getSvgIcon('icon_notification'),
                         const SizedBox(width: 15),
                         InkWell(
-                            onTap: () => SignInSuccessScreen.open(context),
+                            onTap: () => SettingsScreen.open(context),
                             child: getSvgIcon('icon_settings')),
                       ],
                     ),
