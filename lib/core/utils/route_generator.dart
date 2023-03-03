@@ -39,6 +39,7 @@ import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
+import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
@@ -232,6 +233,11 @@ class RouterGenerator {
           builder: (_) => BotStockResultScreen(
             arguments: settings.arguments as Pair<String, String>,
           ),
+        );
+      case SettingsScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const SettingsScreen(),
         );
       default:
         return MaterialPageRoute(
