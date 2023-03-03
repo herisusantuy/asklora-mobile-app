@@ -18,7 +18,7 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: CustomTextNew(
-              'Your Investment Style',
+              'Your Investment Persona',
               style:
                   AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
             ),
@@ -31,6 +31,10 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
             width: 244,
             child: BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
+                Scores value = Scores([], 0, 0, 0, 0, 0, 0, 0, 0, 0, '');
+                if (state.response.state == ResponseState.success) {
+                  value = state.response.data!.scores;
+                }
                 return RadarChart(RadarChartData(
                     tickCount: 0,
                     radarBackgroundColor: AskLoraColors.whiteSmoke,
@@ -48,17 +52,17 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
                         case 0:
                           return RadarChartTitle(
                               text:
-                                  'Extroversion ${state.response.data != null ? state.response.data!.scores.extrovert.toDouble().toString() : 0}',
-                              angle: 0);
-                        case 2:
-                          return RadarChartTitle(
-                              text:
-                                  'Risk aversion ${state.response.data != null ? state.response.data!.scores.extrovert.toDouble().toString() : 0}',
+                                  'Extroversion ${value.extrovert.toDouble().toString()}',
                               angle: 0);
                         case 1:
                           return RadarChartTitle(
                               text:
-                                  'Openness ${state.response.data != null ? state.response.data!.scores.extrovert.toDouble().toString() : 0}',
+                                  'Openness ${value.openness.toDouble().toString()}',
+                              angle: 0);
+                        case 2:
+                          return RadarChartTitle(
+                              text:
+                                  'Risk aversion ${value.neuroticism.toDouble().toString()}',
                               angle: 0);
                         default:
                           return const RadarChartTitle(text: '');
@@ -81,21 +85,9 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
                           fillColor: Colors.transparent,
                           borderColor: AskLoraColors.primaryGreen,
                           dataEntries: [
-                            RadarEntry(
-                                value: state.response.data != null
-                                    ? state.response.data!.scores.extrovert
-                                        .toDouble()
-                                    : 0),
-                            RadarEntry(
-                                value: state.response.data != null
-                                    ? state.response.data!.scores.neuroticism
-                                        .toDouble()
-                                    : 0),
-                            RadarEntry(
-                                value: state.response.data != null
-                                    ? state.response.data!.scores.openness
-                                        .toDouble()
-                                    : 0),
+                            RadarEntry(value: value.extrovert.toDouble()),
+                            RadarEntry(value: value.openness.toDouble()),
+                            RadarEntry(value: value.neuroticism.toDouble()),
                           ])
                     ]));
               },
