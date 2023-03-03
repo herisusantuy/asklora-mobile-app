@@ -4,6 +4,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/otp/get_otp_client.dart';
 import '../../../../core/domain/otp/get_otp_request.dart';
 import '../../../../core/domain/otp/get_sms_otp_request.dart';
+import '../../../../core/domain/otp/validate_phone_request.dart';
 import '../../../../core/domain/otp/verify_otp_request.dart';
 import '../../sign_up/domain/response.dart';
 
@@ -21,6 +22,13 @@ class OtpRepository {
     required VerifyOtpRequest verifyOtpRequest,
   }) async {
     var response = await _getOtpApiClient.verifyOtp(verifyOtpRequest);
+    return BaseResponse.complete(GetOtpResponse.fromJson(response.data));
+  }
+
+  Future<BaseResponse<GetOtpResponse>> validatePhone({
+    required ValidatePhoneRequest validatePhoneRequest,
+  }) async {
+    var response = await _getOtpApiClient.validatePhone(validatePhoneRequest);
     return BaseResponse.complete(GetOtpResponse.fromJson(response.data));
   }
 

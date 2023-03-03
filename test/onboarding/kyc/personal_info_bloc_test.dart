@@ -59,7 +59,6 @@ void main() {
               isUnitedStateResident: null,
               isHkIdValid: false,
               message: '',
-              status: ResponseState.unknown,
               response: BaseResponse(),
             ));
       });
@@ -87,10 +86,26 @@ void main() {
                   isUnitedStateResident: true,
                   isHkIdValid: false,
                   message: '',
-                  status: ResponseState.unknown,
                   response: BaseResponse(),
                 ),
-                const PersonalInfoState(
+                PersonalInfoState(
+                  firstName: '',
+                  lastName: '',
+                  gender: '',
+                  countryCodeOfBirth: '',
+                  countryNameOfBirth: '',
+                  phoneCountryCode: '',
+                  phoneNumber: '',
+                  nationalityCode: '',
+                  nationalityName: '',
+                  isHongKongPermanentResident: null,
+                  hkIdNumber: '',
+                  isUnitedStateResident: true,
+                  isHkIdValid: false,
+                  message: '',
+                  response: BaseResponse.unknown(),
+                ),
+                PersonalInfoState(
                   firstName: '',
                   lastName: '',
                   gender: '',
@@ -105,8 +120,7 @@ void main() {
                   isUnitedStateResident: true,
                   isHkIdValid: false,
                   message: r'You are not eligible!',
-                  status: ResponseState.error,
-                  response: BaseResponse(),
+                  response: BaseResponse.error(r'You are not eligible!'),
                 ),
               });
 
@@ -135,10 +149,27 @@ void main() {
                   isUnitedStateResident: null,
                   isHkIdValid: false,
                   message: '',
-                  status: ResponseState.unknown,
                   response: BaseResponse(),
                 ),
-                const PersonalInfoState(
+                PersonalInfoState(
+                  firstName: '',
+                  lastName: '',
+                  gender: '',
+                  dateOfBirth: '2010-08-08',
+                  countryCodeOfBirth: '',
+                  countryNameOfBirth: '',
+                  phoneCountryCode: '',
+                  phoneNumber: '',
+                  nationalityCode: '',
+                  nationalityName: '',
+                  isHongKongPermanentResident: null,
+                  hkIdNumber: '',
+                  isUnitedStateResident: null,
+                  isHkIdValid: false,
+                  message: '',
+                  response: BaseResponse.unknown(),
+                ),
+                PersonalInfoState(
                   firstName: '',
                   lastName: '',
                   gender: '',
@@ -154,8 +185,8 @@ void main() {
                   isUnitedStateResident: null,
                   isHkIdValid: false,
                   message: r'You must be over 18 to sign up for AskLORA!',
-                  status: ResponseState.error,
-                  response: BaseResponse(),
+                  response: BaseResponse.error(
+                      r'You must be over 18 to sign up for AskLORA!'),
                 ),
               });
 
@@ -180,7 +211,6 @@ void main() {
                   isUnitedStateResident: null,
                   isHkIdValid: false,
                   message: '',
-                  status: ResponseState.unknown,
                   response: BaseResponse(),
                 ),
               });
@@ -206,7 +236,6 @@ void main() {
                   isUnitedStateResident: null,
                   isHkIdValid: true,
                   message: '',
-                  status: ResponseState.unknown,
                   response: BaseResponse(),
                 ),
               });

@@ -11,14 +11,15 @@ UpgradeAccountResponse _$UpgradeAccountResponseFromJson(
     UpgradeAccountResponse(
       residenceInfo: json['residence_info'] == null
           ? null
-          : ResidenceInfo.fromJson(
+          : ResidenceInfoRequest.fromJson(
               json['residence_info'] as Map<String, dynamic>),
       proofsOfAddress: (json['proofs_of_address'] as List<dynamic>?)
-          ?.map((e) => ProofsOfAddress.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => ProofsOfAddressRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       employmentInfo: json['employment_info'] == null
           ? null
-          : ProofsOfAddress.fromJson(
+          : ProofsOfAddressRequest.fromJson(
               json['employment_info'] as Map<String, dynamic>),
       wealthSources: (json['wealth_sources'] as List<dynamic>?)
           ?.map((e) => TrustedContact.fromJson(e as Map<String, dynamic>))

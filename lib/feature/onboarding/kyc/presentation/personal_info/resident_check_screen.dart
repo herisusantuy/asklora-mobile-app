@@ -19,13 +19,14 @@ class ResidentCheckScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<PersonalInfoBloc, PersonalInfoState>(
-      listenWhen: (previous, current) => previous.status != current.status,
+      listenWhen: (previous, current) =>
+          previous.response.state != current.response.state,
       listener: (context, state) {
-        if (state.status == ResponseState.error) {
+        if (state.response.state == ResponseState.error) {
           context
               .read<NavigationBloc<KycPageStep>>()
               .add(const PageChanged(KycPageStep.personalInfoRejected));
-        } else if (state.status == ResponseState.success) {
+        } else if (state.response.state == ResponseState.success) {
           context
               .read<NavigationBloc<KycPageStep>>()
               .add(const PageChanged(KycPageStep.personalInfo));
