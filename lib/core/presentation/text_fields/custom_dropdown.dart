@@ -58,11 +58,25 @@ class _CustomDropdownState extends State<CustomDropdown> {
               child: CustomTextNew(
                 element,
                 style: TextFieldStyle.valueTextStyle.copyWith(height: 1),
-                ellipsis: true,
               ),
             ),
           )
           .toList(),
+      selectedItemBuilder: (context) {
+        return widget.itemsList
+            .map(
+              (element) => DropdownMenuItem<String>(
+                key: Key(element),
+                value: element,
+                child: CustomTextNew(
+                  element,
+                  style: TextFieldStyle.valueTextStyle.copyWith(height: 1),
+                  ellipsis: true,
+                ),
+              ),
+            )
+            .toList();
+      },
     );
   }
 }

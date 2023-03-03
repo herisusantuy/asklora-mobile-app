@@ -57,12 +57,11 @@ class ForYouScreenForm extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
-              ..add(GetInvestmentStyleAnswer()),
+              ..add(GetInvestmentStyleState()),
           ),
         ],
         child: BlocConsumer<ForYouBloc, ForYouState>(
           builder: (BuildContext context, state) {
-            print('for you rebuild');
             if (state.response.state == ResponseState.success) {
               return BlocProvider(
                 create: (_) => NavigationBloc<ForYouPage>(state.response.data!
@@ -73,7 +72,6 @@ class ForYouScreenForm extends StatelessWidget {
                     buildWhen: (previous, current) =>
                         previous.page != current.page,
                     builder: (context, state) {
-                      print('change page ${state.page}');
                       switch (state.page) {
                         case ForYouPage.investmentStyle:
                           return const ForYouInvestmentStyleScreen();
