@@ -84,8 +84,8 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
         fixture = await _questionCollectionRepository
             .fetchInvestmentStyleQuestions(accountId ?? '');
       }
-
-      emit(state.copyWith(response: BaseResponse.complete(fixture)));
+///TODO SURYA DISABLE THIS FOR NOW
+      //emit(state.copyWith(response: BaseResponse.complete(fixture)));
       //+1 for privacy result
       int totalPrivacyPages = fixture.getPrivacyQuestions.length + 1;
       emit(state.copyWith(
