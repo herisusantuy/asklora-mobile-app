@@ -17,7 +17,7 @@ enum SourceOfWealthType {
   const SourceOfWealthType(this.name, this.value);
 }
 
-class SourceOfWealthModel {
+class SourceOfWealthModel extends Equatable {
   final SourceOfWealthType sourceOfWealthType;
   final int amount;
   final String? additionalSourceOfWealth;
@@ -46,13 +46,6 @@ class SourceOfWealthModel {
   }
 
   @override
-  String toString() {
-    return [
-      sourceOfWealthType.name,
-      amount,
-      additionalSourceOfWealth,
-      isActive,
-      DateTime.now().millisecondsSinceEpoch
-    ].toString();
-  }
+  List<Object?> get props =>
+      [sourceOfWealthType, amount, additionalSourceOfWealth, isActive];
 }
