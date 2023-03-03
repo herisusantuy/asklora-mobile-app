@@ -80,7 +80,7 @@ class BotStockRepository {
       fetchBotRecommendation() async {
     try {
       var response = await _botStockApiClient.fetchBotRecommendation(
-          await _sharedPreference.readData(sfKeyTempName) ?? '');
+          await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
       return BaseResponse.complete(
           BotRecommendationResponse.fromJson(response.data).data);
     } catch (e) {
@@ -92,7 +92,7 @@ class BotStockRepository {
       {bool isFreeBot = false}) async {
     try {
       var response = await _botStockApiClient.fetchBotRecommendation(
-          await _sharedPreference.readData(sfKeyTempName) ?? '');
+          await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
       return BaseResponse.complete(List<BotRecommendationModel>.from(
           BotRecommendationResponse.fromJson(response.data)
               .data

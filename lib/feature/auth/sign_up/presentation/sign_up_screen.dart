@@ -23,7 +23,6 @@ class SignUpScreen extends StatelessWidget {
           create: (context) {
             return SignUpBloc(
                 signUpRepository: SignUpRepository(),
-                ppiResponseRepository: PpiResponseRepository(),
                 sharedPreference: SharedPreference());
           },
           child: const SignUpForm(),

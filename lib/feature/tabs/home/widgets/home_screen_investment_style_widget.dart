@@ -18,7 +18,7 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: CustomTextNew(
-              'Your Investment Style',
+              'Your Investment Persona',
               style:
                   AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
             ),

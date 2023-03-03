@@ -7,6 +7,9 @@ import 'package:uni_links/uni_links.dart';
 import '../../../core/domain/base_response.dart';
 import '../../../core/domain/otp/get_otp_request.dart';
 import '../../../core/domain/token/repository/token_repository.dart';
+import '../../../core/utils/storage/shared_preference.dart';
+import '../../../core/utils/storage/storage_keys.dart';
+import '../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../sign_up/repository/sign_up_repository.dart';
 
 part 'email_activation_event.dart';
@@ -15,7 +18,8 @@ part 'email_activation_state.dart';
 
 class EmailActivationBloc
     extends Bloc<EmailActivationEvent, EmailActivationState> {
-  EmailActivationBloc(this._signUpRepository, this._tokenRepository)
+  EmailActivationBloc(this._signUpRepository, this._tokenRepository,
+      this._sharedPreference, this._ppiResponseRepository)
       : super(const EmailActivationState()) {
     on<ResendEmailActivationLink>(_onResendEmailActivationLink);
     on<StartListenOnDeeplink>(_onStartListenOnDeeplink);
@@ -24,6 +28,8 @@ class EmailActivationBloc
 
   final SignUpRepository _signUpRepository;
   final TokenRepository _tokenRepository;
+  final PpiResponseRepository _ppiResponseRepository;
+  final SharedPreference _sharedPreference;
   StreamSubscription? _streamSubscription;
 
   void _onResendEmailActivationLink(
@@ -78,9 +84,16 @@ class EmailActivationBloc
     Emitter<EmailActivationState> emit,
   ) async {
     emit(state.copyWith(response: BaseResponse.loading()));
+
+    final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId);
+
+    await _ppiResponseRepository.linkUser(tempId ?? 0);
+
     await Future.delayed(const Duration(milliseconds: 1500));
+
     _tokenRepository.saveAccessToken(event.uri.queryParameters['access']!);
     _tokenRepository.saveRefreshToken(event.uri.queryParameters['refresh']!);
+
     emit(state.copyWith(
         response: const BaseResponse(),
         deeplinkStatus: DeeplinkStatus.success));
