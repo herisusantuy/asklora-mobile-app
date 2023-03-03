@@ -1,18 +1,18 @@
-part of 'home_bloc.dart';
+part of 'home_screen_bloc.dart';
 
-class HomeState extends Equatable {
+class HomeScreenState extends Equatable {
   final BaseResponse<SnapShot> response;
-  const HomeState({
+  const HomeScreenState({
     this.response = const BaseResponse(),
   });
 
   @override
   List<Object> get props => [response];
 
-  HomeState copyWith({
+  HomeScreenState copyWith({
     BaseResponse<SnapShot>? response,
   }) {
-    return HomeState(
+    return HomeScreenState(
       response: response ?? this.response,
     );
   }

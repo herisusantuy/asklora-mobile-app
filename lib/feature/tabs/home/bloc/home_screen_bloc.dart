@@ -1,31 +1,30 @@
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../onboarding/ppi/domain/ppi_api_repository.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 
-part 'home_state.dart';
-part 'home_event.dart';
+part 'home_screen_event.dart';
+part 'home_screen_state.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
+class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   final PpiApiRepository _ppiApiRepository;
   final SharedPreference _sharedPreference;
 
-  HomeBloc(
+  HomeScreenBloc(
       {required PpiApiRepository ppiApiRepository,
       required SharedPreference sharedPreference})
       : _ppiApiRepository = ppiApiRepository,
         _sharedPreference = sharedPreference,
-        super(const HomeState()) {
+        super(const HomeScreenState()) {
     on<GetUserSnapShots>(_onGetUserSnapshots);
   }
 
-  _onGetUserSnapshots(GetUserSnapShots event, Emitter<HomeState> emit) async {
+  _onGetUserSnapshots(
+      GetUserSnapShots event, Emitter<HomeScreenState> emit) async {
     try {
       var accountId = await _sharedPreference.readIntData(sfKeyTempId) ?? 0;
       var response = await _ppiApiRepository.getUserSnapshot(accountId);

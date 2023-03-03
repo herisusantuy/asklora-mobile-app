@@ -22,7 +22,7 @@ import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/domain/ppi_api_repository.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
-import 'bloc/home_bloc.dart';
+import 'bloc/home_screen_bloc.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
 import 'widgets/on_boarding_status/on_boarding_status.dart';
 
@@ -52,7 +52,7 @@ class HomeScreenForm extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => HomeBloc(
+            create: (_) => HomeScreenBloc(
                 ppiApiRepository: PpiApiRepository(),
                 sharedPreference: SharedPreference())
               ..add(GetUserSnapShots()),
