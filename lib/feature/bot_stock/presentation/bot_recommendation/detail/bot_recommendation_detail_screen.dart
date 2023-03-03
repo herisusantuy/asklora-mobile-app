@@ -59,7 +59,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               previous.botDetailResponse.state !=
               current.botDetailResponse.state,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
-            subTitleAdditionalText: 'investment details',
+            subTitleAdditionalText: 'Investment Details',
             onTapCancel: () => Navigator.pop(context),
             showReloadPopUp:
                 state.botDetailResponse.state == ResponseState.error,

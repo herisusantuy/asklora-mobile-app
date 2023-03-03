@@ -68,7 +68,7 @@ class BotRecommendationScreen extends StatelessWidget {
                   previous.botRecommendationResponse !=
                   current.botRecommendationResponse,
               builder: (context, state) => CustomLayoutWithBlurPopUp(
-                subTitleAdditionalText: 'investment details',
+                subTitleAdditionalText: 'Investment Details',
                 showReloadPopUp: state.botRecommendationResponse.state ==
                     ResponseState.error,
                 content: ListView(

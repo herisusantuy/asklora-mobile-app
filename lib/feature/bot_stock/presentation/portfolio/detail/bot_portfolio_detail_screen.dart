@@ -73,7 +73,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               previous.botPortfolioDetailResponse.state !=
               current.botPortfolioDetailResponse.state,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
-            subTitleAdditionalText: 'portfolio',
+            subTitleAdditionalText: 'Portfolio',
             onTapCancel: () => Navigator.pop(context),
             showReloadPopUp:
                 state.botPortfolioDetailResponse.state == ResponseState.error,
