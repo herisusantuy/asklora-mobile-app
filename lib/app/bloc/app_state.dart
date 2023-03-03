@@ -13,10 +13,27 @@ enum UserJourney {
   const UserJourney(this.value);
 
   static bool compareUserJourney(
-      {required UserJourney source, required UserJourney target}) {
-    ///This function is used to check whether the source is already passed the target of UserJourney
-    return UserJourney.values.indexWhere((element) => element == source) >
+      {required BuildContext context, required UserJourney target}) {
+    ///This function is used to check whether the current journey is already passed the target of UserJourney
+    return UserJourney.values.indexWhere(
+            (element) => element == context.read<AppBloc>().state.userJourney) >
         UserJourney.values.indexWhere((element) => element == target);
+  }
+
+  static void onAlreadyPassed(
+      {required BuildContext context,
+      required UserJourney target,
+      required VoidCallback onTrueCallback,
+      VoidCallback? onFalseCallback}) {
+    if (UserJourney.values.indexWhere(
+            (element) => element == context.read<AppBloc>().state.userJourney) >
+        UserJourney.values.indexWhere((element) => element == target)) {
+      onTrueCallback();
+    } else {
+      if (onFalseCallback != null) {
+        onFalseCallback();
+      }
+    }
   }
 }
 

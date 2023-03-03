@@ -8,12 +8,10 @@ abstract class OtpEvent extends Equatable {
 }
 
 class OtpRequested extends OtpEvent {
-  final String email;
-
-  const OtpRequested(this.email) : super();
+  const OtpRequested() : super();
 
   @override
-  List<Object> get props => [email];
+  List<Object> get props => [];
 }
 
 class OtpTimeResetUpdate extends OtpEvent {
@@ -24,9 +22,9 @@ class OtpTimeResetUpdate extends OtpEvent {
 }
 
 class OtpSubmitted extends OtpEvent {
-  final VerifyOtpRequest verifyOtpRequest;
+  final String otp;
 
-  const OtpSubmitted(this.verifyOtpRequest) : super();
+  const OtpSubmitted(this.otp) : super();
 
   @override
   List<Object> get props => [];

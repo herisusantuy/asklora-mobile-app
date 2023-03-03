@@ -2,110 +2,118 @@ part of '../bot_recommendation_screen.dart';
 
 class BotRecommendationList extends StatelessWidget {
   final double _spacing = 16;
-  final double botCardHeight = 165;
+  final double botCardHeight = 166;
   final double blurPadding;
   final double verticalMargin;
+  final BotStockState botStockState;
 
-  const BotRecommendationList({required this.verticalMargin, Key? key})
+  const BotRecommendationList(
+      {required this.verticalMargin, required this.botStockState, Key? key})
       : blurPadding = verticalMargin - 8,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BotStockBloc, BotStockState>(
-        buildWhen: (previous, current) =>
-            previous.botRecommendationResponse.state !=
-            current.botRecommendationResponse.state,
-        builder: (context, state) {
-          if (state.botRecommendationResponse.state == ResponseState.success) {
-            return Container(
-              margin: EdgeInsets.symmetric(vertical: verticalMargin),
-              padding: AppValues.screenHorizontalPadding,
+    if (botStockState.botRecommendationResponse.state ==
+            ResponseState.success &&
+        botStockState.botRecommendationResponse.data!.isNotEmpty) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: verticalMargin),
+        padding: AppValues.screenHorizontalPadding,
+        child: Wrap(
+          spacing: _spacing,
+          runSpacing: _spacing,
+          children: botStockState.botRecommendationResponse.data!.map((e) {
+            return BotRecommendationCard(
+              onTap: () => BotRecommendationDetailScreen.open(
+                  context: context, botRecommendationModel: e),
+              height: botCardHeight,
+              spacing: _spacing,
+              botRecommendationModel: e,
+            );
+          }).toList(),
+        ),
+      );
+    } else if (botStockState.botRecommendationResponse.state ==
+        ResponseState.loading) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: verticalMargin),
+        padding: AppValues.screenHorizontalPadding,
+        child: Wrap(
+          spacing: _spacing,
+          runSpacing: _spacing,
+          children: defaultBotRecommendation
+              .map((e) => BotRecommendationCardShimmer(
+                    height: botCardHeight,
+                    spacing: _spacing,
+                  ))
+              .toList(),
+        ),
+      );
+    } else {
+      return SizedBox(
+        height: _getListHeight,
+        width: double.infinity,
+        child: Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(vertical: blurPadding),
+              padding: AppValues.screenHorizontalPadding
+                  .copyWith(top: blurPadding, bottom: blurPadding),
               child: Wrap(
                 spacing: _spacing,
                 runSpacing: _spacing,
-                children: state.botRecommendationResponse.data!
+                children: defaultBotRecommendation
                     .map((e) => BotRecommendationCard(
-                          onTap: () => BotRecommendationDetailScreen.open(
-                              context: context, recommendedBot: e),
+                          onTap: () {},
                           height: botCardHeight,
-                          spacing: _spacing,
-                          recommendedBot: e,
-                        ))
-                    .toList(),
-              ),
-            );
-          } else if (state.botRecommendationResponse.state ==
-              ResponseState.loading) {
-            return Container(
-              margin: EdgeInsets.symmetric(vertical: verticalMargin),
-              padding: AppValues.screenHorizontalPadding,
-              child: Wrap(
-                spacing: _spacing,
-                runSpacing: _spacing,
-                children: defaultRecommendedBots
-                    .map((e) => BotRecommendationCardShimmer(
-                          height: botCardHeight,
+                          botRecommendationModel: e,
                           spacing: _spacing,
                         ))
                     .toList(),
               ),
-            );
-          } else {
-            return SizedBox(
-              height: _getListHeight,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: blurPadding),
-                    padding: AppValues.screenHorizontalPadding
-                        .copyWith(top: blurPadding, bottom: blurPadding),
-                    child: Wrap(
-                      spacing: _spacing,
-                      runSpacing: _spacing,
-                      children: defaultRecommendedBots
-                          .map((e) => BotRecommendationCard(
-                                onTap: () {},
-                                height: botCardHeight,
-                                recommendedBot: e,
-                                spacing: _spacing,
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                  ClipRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
-                      child: Container(
-                        color: Colors.white.withOpacity(0.6),
-                      ),
-                    ),
-                  ),
-                  const Center(
-                    child: Padding(
-                      padding: AppValues.screenHorizontalPadding,
-                      child: LoraPopUpMessage(
-                        backgroundColor: AskLoraColors.charcoal,
-                        title: 'No Botstock recommendation.',
-                        titleColor: AskLoraColors.white,
-                        subTitle:
-                            'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-                        subTitleColor: AskLoraColors.white,
-                        buttonLabel: 'CREATE AN ACCOUNT',
-                        buttonPrimaryType: ButtonPrimaryType.solidGreen,
-                      ),
-                    ),
-                  )
-                ],
+            ),
+            ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                child: Container(
+                  color: Colors.white.withOpacity(0.6),
+                ),
               ),
-            );
-          }
-        });
+            ),
+            Center(
+              child: Padding(
+                padding: AppValues.screenHorizontalPadding,
+                child: LoraPopUpMessage(
+                  backgroundColor: AskLoraColors.charcoal,
+                  title: 'No Botstock recommendations',
+                  titleColor: AskLoraColors.white,
+                  subTitle:
+                      'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
+                  subTitleColor: AskLoraColors.white,
+                  buttonLabel: 'RETAKE INVESTMENT STYLE',
+                  buttonPrimaryType: ButtonPrimaryType.solidGreen,
+                  onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
+                    context: context,
+                    target: UserJourney.freeBotStock,
+                    onTrueCallback: () => context
+                        .read<NavigationBloc<ForYouPage>>()
+                        .add(const PageChanged(ForYouPage.investmentStyle)),
+                    onFalseCallback: () => PpiScreen.open(context,
+                        arguments: Pair(QuestionPageType.investmentStyle,
+                            QuestionPageStep.investmentStyle)),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    }
   }
 
   double get _getListHeight =>
-      botCardHeight * defaultRecommendedBots.length / 2 +
-      _spacing * ((defaultRecommendedBots.length / 2).ceil() - 1) +
+      botCardHeight * defaultBotRecommendation.length / 2 +
+      _spacing * ((defaultBotRecommendation.length / 2).ceil() - 1) +
       2 * blurPadding;
 }

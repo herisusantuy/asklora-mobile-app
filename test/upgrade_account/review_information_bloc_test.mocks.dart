@@ -217,4 +217,28 @@ class MockSecureStorage extends _i1.Mock implements _i10.SecureStorage {
         returnValue: _i6.Future<void>.value(),
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
+  @override
+  _i6.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readBoolData,
+          [key],
+        ),
+        returnValue: _i6.Future<bool?>.value(),
+      ) as _i6.Future<bool?>);
+  @override
+  _i6.Future<void> writeBoolData(
+    String? key,
+    bool? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeBoolData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 }

@@ -9,30 +9,56 @@ part of 'upgrade_account_request.dart';
 UpgradeAccountRequest _$UpgradeAccountRequestFromJson(
         Map<String, dynamic> json) =>
     UpgradeAccountRequest(
-      contact: json['contact'] == null
+      residenceInfo: json['residence_info'] == null
           ? null
-          : Contact.fromJson(json['contact'] as Map<String, dynamic>),
-      identity: json['identity'] == null
-          ? null
-          : Identity.fromJson(json['identity'] as Map<String, dynamic>),
-      trustedContact: json['trusted_contact'] == null
-          ? null
-          : TrustedContact.fromJson(
-              json['trusted_contact'] as Map<String, dynamic>),
-      disclosures: json['disclosures'] == null
-          ? null
-          : Disclosures.fromJson(json['disclosures'] as Map<String, dynamic>),
-      agreements: (json['agreements'] as List<dynamic>?)
-          ?.map((e) => Agreement.fromJson(e as Map<String, dynamic>))
+          : ResidenceInfoRequest.fromJson(
+              json['residence_info'] as Map<String, dynamic>),
+      proofsOfAddress: (json['proofs_of_address'] as List<dynamic>?)
+          ?.map(
+              (e) => ProofsOfAddressRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
+      employmentInfo: json['employment_info'] == null
+          ? null
+          : EmploymentInfo.fromJson(
+              json['employment_info'] as Map<String, dynamic>),
+      wealthSources: (json['wealth_sources'] as List<dynamic>?)
+          ?.map((e) => WealthSourcesRequest.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      affiliatedPerson: json['affiliated_person'] == null
+          ? null
+          : AffiliatedPerson.fromJson(
+              json['affiliated_person'] as Map<String, dynamic>),
+      agreements: (json['agreements'] as List<dynamic>?)
+              ?.map((e) => Agreement.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [
+            Agreement(agreement: 'MA'),
+            Agreement(agreement: 'AA'),
+            Agreement(agreement: 'CA'),
+            Agreement(agreement: 'ACA'),
+            Agreement(agreement: 'RDS'),
+            Agreement(agreement: 'W8BEN')
+          ],
     );
 
 Map<String, dynamic> _$UpgradeAccountRequestToJson(
-        UpgradeAccountRequest instance) =>
-    <String, dynamic>{
-      'contact': instance.contact?.toJson(),
-      'identity': instance.identity?.toJson(),
-      'trusted_contact': instance.trustedContact?.toJson(),
-      'disclosures': instance.disclosures?.toJson(),
-      'agreements': instance.agreements?.map((e) => e.toJson()).toList(),
-    };
+    UpgradeAccountRequest instance) {
+  final val = <String, dynamic>{
+    'residence_info': instance.residenceInfo?.toJson(),
+    'proofs_of_address':
+        instance.proofsOfAddress?.map((e) => e.toJson()).toList(),
+    'employment_info': instance.employmentInfo?.toJson(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('wealth_sources',
+      instance.wealthSources?.map((e) => e.toJson()).toList());
+  writeNotNull('affiliated_person', instance.affiliatedPerson?.toJson());
+  val['agreements'] = instance.agreements?.map((e) => e.toJson()).toList();
+  return val;
+}

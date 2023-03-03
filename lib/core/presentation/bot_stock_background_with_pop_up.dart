@@ -21,7 +21,7 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
   });
 
   final double _spacing = 16;
-  final double botCardHeight = 165;
+  final double botCardHeight = 166;
   final double blurPadding = 8;
 
   final Widget? header;
@@ -51,11 +51,11 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
                   child: Wrap(
                     spacing: _spacing,
                     runSpacing: _spacing,
-                    children: defaultRecommendedBots
+                    children: defaultBotRecommendation
                         .map((e) => BotRecommendationCard(
                               onTap: () {},
                               height: botCardHeight,
-                              recommendedBot: e,
+                              botRecommendationModel: e,
                               spacing: _spacing,
                             ))
                         .toList(),
@@ -94,7 +94,7 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
   }
 
   double get _getListHeight =>
-      botCardHeight * defaultRecommendedBots.length / 2 +
-      _spacing * ((defaultRecommendedBots.length / 2).ceil() - 1) +
+      botCardHeight * defaultBotRecommendation.length / 2 +
+      _spacing * ((defaultBotRecommendation.length / 2).ceil() - 1) +
       2 * blurPadding;
 }

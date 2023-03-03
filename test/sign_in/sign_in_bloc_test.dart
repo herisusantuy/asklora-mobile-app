@@ -117,8 +117,8 @@ void main() async {
         build: () {
           when(signInRepository.signIn(
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
-              .thenAnswer((_) => Future.value(SignInResponse(
-                  userJourney: UserJourney.investmentStyle.value)));
+              .thenAnswer((_) => Future.value(const SignInResponse(
+                  userJourney: UserJourney.investmentStyle)));
           when(userJourneyRepository.getUserJourney())
               .thenAnswer((_) => Future.value(UserJourney.investmentStyle));
 
@@ -157,10 +157,10 @@ void main() async {
                 isPasswordValid: true,
                 passwordErrorText: '',
               ),
-              SignInState(
+              const SignInState(
                 response: BaseResponse<SignInResponse>(
                     data: SignInResponse(
-                        userJourney: UserJourney.investmentStyle.value),
+                        userJourney: UserJourney.investmentStyle),
                     state: ResponseState.success),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,

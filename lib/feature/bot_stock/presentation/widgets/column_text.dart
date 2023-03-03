@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/utils/app_icons.dart';
 
 class ColumnText extends StatelessWidget {
   final String title;
@@ -28,10 +29,12 @@ class ColumnText extends StatelessWidget {
         ),
         Row(
           children: [
-            CustomTextNew(
-              subTitle,
-              style: AskLoraTextStyles.subtitle2
-                  .copyWith(color: AskLoraColors.charcoal),
+            Flexible(
+              child: CustomTextNew(
+                subTitle,
+                style: AskLoraTextStyles.subtitle2
+                    .copyWith(color: AskLoraColors.charcoal),
+              ),
             ),
             if (tooltipText != null)
               Padding(
@@ -67,11 +70,7 @@ class ColumnText extends StatelessWidget {
                           ),
                         )),
                     padding: const EdgeInsets.all(10),
-                    child: const Icon(
-                      Icons.info,
-                      color: AskLoraColors.gray,
-                      size: 16,
-                    )),
+                    child: getSvgIcon('icon_info')),
               )
           ],
         )

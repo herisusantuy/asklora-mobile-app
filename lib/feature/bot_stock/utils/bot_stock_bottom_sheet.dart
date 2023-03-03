@@ -9,9 +9,11 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/extensions.dart';
 import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
-import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../bloc/bot_stock_bloc.dart';
+import '../domain/bot_recommendation_model.dart';
 import '../presentation/bot_trade_summary/bot_trade_summary_screen.dart';
+import '../presentation/portfolio/bloc/portfolio_bloc.dart';
+import '../presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../presentation/widgets/bot_bottom_sheet_widget.dart';
 import '../repository/bot_stock_repository.dart';
 import 'bot_stock_utils.dart';
@@ -34,28 +36,30 @@ class BotStockBottomSheet {
   }
 
   static endBotStockConfirmation(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, PortfolioBotModel portfolioBotModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (_) => BotBottomSheetWidget(
               title:
-                  'You can quit now and all the trading activities of ${BotType.findByString(recommendedBot.botType).name} ${recommendedBot.ticker} will end ',
+                  'You can quit now and all the trading activities of ${BotType.findByString(portfolioBotModel.botAppType).name} ${portfolioBotModel.ticker} will end ',
               subTitle:
-                  'The total Botstock value (US\$ ${recommendedBot.value}) will be returned to your account after the next community order',
+                  'The total Botstock value (US\$ 200) will be returned to your account after the next community order',
               primaryButtonLabel: 'END BOT STOCK',
               secondaryButtonLabel: 'CANCEL',
               onPrimaryButtonTap: () {
                 Navigator.pop(context);
-                context.read<BotStockBloc>().add(EndBotStock(recommendedBot));
+                context
+                    .read<PortfolioBloc>()
+                    .add(EndBotStock(portfolioBotModel));
               },
               onSecondaryButtonTap: () => Navigator.pop(context),
             ));
   }
 
   static rolloverBotStockConfirmation(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, PortfolioBotModel portfolioBotModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -69,14 +73,14 @@ class BotStockBottomSheet {
               onPrimaryButtonTap: () {
                 Navigator.pop(context);
                 BotStockBottomSheet.rolloverBotStockDisclosure(
-                    context, recommendedBot);
+                    context, portfolioBotModel);
               },
               onSecondaryButtonTap: () => Navigator.pop(context),
             ));
   }
 
   static rolloverBotStockDisclosure(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, PortfolioBotModel portfolioBotModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -91,15 +95,15 @@ class BotStockBottomSheet {
               onPrimaryButtonTap: () {
                 Navigator.pop(context);
                 context
-                    .read<BotStockBloc>()
-                    .add(RolloverBotStock(recommendedBot));
+                    .read<PortfolioBloc>()
+                    .add(RolloverBotStock(portfolioBotModel));
               },
               onSecondaryButtonTap: () => Navigator.pop(context),
             ));
   }
 
   static amountBotStockForm(
-      BuildContext context, RecommendedBot recommendedBot) {
+      BuildContext context, BotRecommendationModel botrecommendationModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -121,8 +125,8 @@ class BotStockBottomSheet {
                         Navigator.pop(context);
                         BotTradeSummaryScreen.open(
                             context: context,
-                            arguments: Pair(
-                                recommendedBot, state.botStockTradeAmount));
+                            arguments: Pair(botrecommendationModel,
+                                state.botStockTradeAmount));
                       },
                       onSecondaryButtonTap: () => Navigator.pop(context),
                       child: IntrinsicWidth(

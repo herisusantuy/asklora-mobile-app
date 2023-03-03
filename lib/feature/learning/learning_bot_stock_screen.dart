@@ -4,8 +4,8 @@ import 'package:just_the_tooltip/just_the_tooltip.dart';
 
 import '../../core/presentation/custom_scaffold.dart';
 import '../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../bot_stock/domain/bot_recommendation_model.dart';
 import '../bot_stock/utils/bot_stock_utils.dart';
-import '../onboarding/ppi/domain/ppi_user_response.dart';
 import 'demonstration_bot/presentation/detail/demonstration_bot_detail_screen.dart';
 import 'demonstration_bot/presentation/demonstration_bot_screen.dart';
 import 'demonstration_bot/presentation/trade/demonstration_bot_trade.dart';
@@ -55,9 +55,9 @@ class LearningBotStockScreen extends StatelessWidget {
   }
 
   Widget get _getPages {
-    final RecommendedBot recommendedBot = demonstrationBots.firstWhere(
-        (element) =>
-            element.selectable == true && element.botType == botType.value);
+    final BotRecommendationModel botRecommendationModel =
+        demonstrationBots.firstWhere((element) =>
+            element.selectable == true && element.botAppType == botType.value);
     return BlocBuilder<NavigationBloc<LearningBotStockPageStep>,
             NavigationState<LearningBotStockPageStep>>(
         buildWhen: (previous, current) => previous.page != current.page,
@@ -78,7 +78,7 @@ class LearningBotStockScreen extends StatelessWidget {
               );
             case LearningBotStockPageStep.botDetail:
               return DemonstrationBotDetailScreen(
-                recommendedBot: recommendedBot,
+                botRecommendationModel: botRecommendationModel,
                 botType: botType,
               );
             case LearningBotStockPageStep.trade:

@@ -76,6 +76,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
       await _ppiResponseRepository.linkUser(tempId);
 
+      await _sharedPreference.writeData(sfKeyEmail, state.username);
+
       emit(state.copyWith(response: data));
     } on ConflictException {
       emit(state.copyWith(

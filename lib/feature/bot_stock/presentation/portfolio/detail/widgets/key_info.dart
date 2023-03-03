@@ -1,12 +1,12 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class KeyInfo extends StatelessWidget {
-  final RecommendedBot recommendedBot;
+  final PortfolioBotModel portfolioBotModel;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
-  const KeyInfo({required this.recommendedBot, Key? key}) : super(key: key);
+  const KeyInfo({required this.portfolioBotModel, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Column(
@@ -20,28 +20,26 @@ class KeyInfo extends StatelessWidget {
             height: 20,
           ),
           const PairColumnText(
-              title1: 'Investment Period',
-              subTitle1: '2 weeks',
-              title2: 'Time of Rollover',
-              subTitle2: '0'),
+              leftTitle: 'Investment Period',
+              leftSubTitle: '2 weeks',
+              rightTitle: 'Time of Rollover',
+              rightSubTitle: '0'),
           _spaceBetweenInfo,
           const PairColumnText(
-              title1: 'Start Time',
-              subTitle1: '03/12 15:30:00 ET',
-              title2: 'End Time',
-              subTitle2: '03/16 15:30:00 ET '),
+              leftTitle: 'Start Time',
+              leftSubTitle: '03/12 15:30:00 ET',
+              rightTitle: 'End Time',
+              rightSubTitle: '03/16 15:30:00 ET '),
           _spaceBetweenInfo,
           const PairColumnText(
-              title1: 'Stop Loss Level (USD)',
-              subTitle1: '240.00',
-              title2: 'Take Profit Level (USD)',
-              subTitle2: 'N/A'),
+              leftTitle: 'Stop Loss Level (USD)',
+              leftSubTitle: '240.00',
+              rightTitle: 'Take Profit Level (USD)',
+              rightSubTitle: 'N/A'),
           _spaceBetweenInfo,
           ColumnText(
               title: 'Botstock Status',
-              subTitle:
-                  BotPortfolioStatus.findByString(recommendedBot.status ?? '')
-                      .name),
+              subTitle: BotPortfolioStatus.findByString('active').name),
           const SizedBox(
             height: 40,
           ),

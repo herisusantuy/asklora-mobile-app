@@ -43,4 +43,14 @@ class SecureStorage implements Storage {
   Future<void> writeIntData(String key, int value) {
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool?> readBoolData(String key) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> writeBoolData(String key, bool value) {
+    throw UnimplementedError();
+  }
 }

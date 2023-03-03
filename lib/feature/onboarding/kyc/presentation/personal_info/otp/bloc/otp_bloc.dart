@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/data/remote/base_api_client.dart';
 import '../../../../../../../core/domain/base_response.dart';
-import '../../../../../../../core/domain/otp/get_otp_request.dart';
-import '../../../../../../../core/domain/otp/verify_otp_request.dart';
-import '../repository/otp_repository.dart';
+import '../../../../../../../core/domain/otp/get_sms_otp_request.dart';
+import '../../../../../../../core/domain/otp/validate_phone_request.dart';
+import '../../../../../../../core/utils/storage/shared_preference.dart';
+import '../../../../../../../core/utils/storage/storage_keys.dart';
+import '../../../../../../auth/otp/repository/otp_repository.dart';
 
 part 'otp_event.dart';
 
@@ -15,12 +17,15 @@ part 'otp_state.dart';
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final OtpRepository _otpRepository;
-  final int _resetTime = 180;
+  final SharedPreference _sharedPreference;
+  final int _resetTime = 60;
   StreamSubscription? resetTimeStreamSubscription;
 
-  OtpBloc({
-    required OtpRepository otpRepository,
-  })  : _otpRepository = otpRepository,
+  OtpBloc(
+      {required OtpRepository otpRepository,
+      required SharedPreference sharedPreference})
+      : _otpRepository = otpRepository,
+        _sharedPreference = sharedPreference,
         super(const OtpState()) {
     on<OtpSubmitted>(_onOtpSubmitted);
     on<OtpRequested>(_onOtpRequested);
@@ -30,8 +35,9 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   void _onOtpRequested(OtpRequested event, Emitter<OtpState> emit) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _otpRepository.getOtp(
-          getOtpRequest: GetOtpRequest(event.email, OtpType.register.value));
+      final email = await _sharedPreference.readData(sfKeyEmail);
+      var data = await _otpRepository.getSmsOtp(
+          getSmsOtpRequest: GetSmsOtpRequest(email ?? ''));
       data.copyWith(message: 'OTP code sent to your email');
       emit(state.copyWith(
           response: data, disableRequest: true, resetTime: _resetTime));
@@ -61,11 +67,11 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
   ) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _otpRepository.verifyOtp(
-          verifyOtpRequest: event.verifyOtpRequest);
+      var data = await _otpRepository.validatePhone(
+          validatePhoneRequest: ValidatePhoneRequest(event.otp));
       cancelStreamSubscription();
       data.copyWith(message: 'Verify OTP Success');
-      emit(state.copyWith(response: data));
+      emit(OtpValidationSuccess());
     } on UnauthorizedException {
       emit(state.copyWith(response: BaseResponse.error('Invalid OTP')));
     } catch (e) {

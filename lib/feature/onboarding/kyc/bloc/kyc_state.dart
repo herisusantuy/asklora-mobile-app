@@ -15,7 +15,7 @@ enum KycPageStep {
   progress,
   residentCheck,
   personalInfoRejected,
-  basicInformation,
+  personalInfo,
   otp,
   tin,
   addressProof,
@@ -46,7 +46,9 @@ class KycState extends Equatable {
 
   @override
   List<Object?> get props {
-    return [response];
+    return [
+      response,
+    ];
   }
 
   KycState copyWith({

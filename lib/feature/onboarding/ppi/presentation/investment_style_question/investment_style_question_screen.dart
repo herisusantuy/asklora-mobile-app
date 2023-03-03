@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../app/bloc/app_bloc.dart';
+import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
+import '../../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
+import '../../../../bot_stock/presentation/gift/bot_stock_do_screen.dart';
+import '../../../../tabs/for_you/bloc/for_you_bloc.dart';
+import '../../../../tabs/for_you/for_you_screen_form.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/fixture.dart';
@@ -26,28 +32,22 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
       create: (_) => InvestmentStyleQuestionBloc(initialIndex: initialIndex)
         ..add(NextQuestion()),
       child: Builder(
-          builder: (context) => CustomNavigationWidget<QuestionPageStep>(
-              onBackPressed: () => onCancel(context),
-              header: const SizedBox.shrink(),
-              child: BlocConsumer<InvestmentStyleQuestionBloc,
-                  InvestmentStyleQuestionState>(listener: (context, state) {
-                if (state is OnNextQuestion) {
-                  context.read<QuestionBloc>().add(
-                      InvestmentStyleQuestionIndexChanged(
-                          state.investmentStyleQuestionIndex));
-                } else if (state is OnNextResultScreen) {
-                  context
-                      .read<AppBloc>()
-                      .add(const SaveUserJourney(UserJourney.kyc));
-                  context.read<NavigationBloc<QuestionPageStep>>().add(
-                      const PageChanged(
-                          QuestionPageStep.investmentStyleResultEnd));
-                } else if (state is OnPreviousPage) {
-                  context
-                      .read<NavigationBloc<QuestionPageStep>>()
-                      .add(const PagePop());
-                }
-              }, builder: (context, state) {
+        builder: (context) => CustomNavigationWidget<QuestionPageStep>(
+          onBackPressed: () => onCancel(context),
+          header: const SizedBox.shrink(),
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<UserResponseBloc, UserResponseState>(
+                listener: _userResponseListener,
+              ),
+              BlocListener<InvestmentStyleQuestionBloc,
+                  InvestmentStyleQuestionState>(
+                listener: _investmentStyleQuestionListener,
+              ),
+            ],
+            child: BlocBuilder<InvestmentStyleQuestionBloc,
+                InvestmentStyleQuestionState>(
+              builder: (context, state) {
                 if (state is OnNextQuestion) {
                   Question question = state.question;
                   switch (state.questionType) {
@@ -71,6 +71,8 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                     case (QuestionType.omniSearch):
                       return OmniSearchQuestionWidget(
                         key: Key(question.questionId!),
+                        enableBackNavigation: !UserJourney.compareUserJourney(
+                            context: context, target: UserJourney.freeBotStock),
                         defaultOmniSearch: PpiDefaultAnswer.getOmniSearch(
                             context, question.questionId!),
                         question: question,
@@ -83,8 +85,57 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
                 } else {
                   return const SizedBox.shrink();
                 }
-              }))),
+              },
+            ),
+          ),
+        ),
+      ),
     );
+  }
+
+  void _userResponseListener(BuildContext context, UserResponseState state) {
+    if (state.responseState == ResponseState.loading) {
+      CustomLoadingOverlay.show(context);
+    } else {
+      CustomLoadingOverlay.dismiss();
+      if (state.ppiResponseState == PpiResponseState.dispatchResponse &&
+          state.responseState == ResponseState.success) {
+        if (context.read<AppBloc>().state.userJourney ==
+            UserJourney.investmentStyle) {
+          ///user comes from doing milestone 1.3 after sign up
+          context.read<AppBloc>().add(const SaveUserJourney(UserJourney.kyc));
+          context.read<NavigationBloc<QuestionPageStep>>().add(
+              const PageChanged(QuestionPageStep.investmentStyleResultEnd));
+        } else if (context.read<AppBloc>().state.userJourney ==
+            UserJourney.freeBotStock) {
+          ///user comes from retaking investment style question
+          ///after getting zero gift bot recommendation
+          BotRecommendationScreen.openAndRemoveUntil(
+              context, BotStockDoScreen.route);
+        } else if (UserJourney.compareUserJourney(
+            context: context, target: UserJourney.freeBotStock)) {
+          ///user comes from for you screen
+          context.read<ForYouBloc>().add(SaveInvestmentStyleAnswer());
+          context
+              .read<NavigationBloc<ForYouPage>>()
+              .add(const PageChanged(ForYouPage.botRecommendation));
+        }
+      }
+    }
+  }
+
+  void _investmentStyleQuestionListener(
+      BuildContext context, InvestmentStyleQuestionState state) {
+    if (state is OnNextQuestion) {
+      context.read<QuestionBloc>().add(
+            InvestmentStyleQuestionIndexChanged(
+                state.investmentStyleQuestionIndex),
+          );
+    } else if (state is OnNextResultScreen) {
+      context.read<UserResponseBloc>().add(SendBulkResponse());
+    } else if (state is OnPreviousPage) {
+      context.read<NavigationBloc<QuestionPageStep>>().add(const PagePop());
+    }
   }
 
   void onSubmitSuccess(BuildContext context) {

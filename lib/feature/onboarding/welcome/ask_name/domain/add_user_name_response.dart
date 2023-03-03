@@ -21,4 +21,6 @@ class AddUserNameResponse extends Equatable {
 
   factory AddUserNameResponse.fromJson(Map<String, dynamic> json) =>
       _$AddUserNameResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AddUserNameResponseToJson(this);
 }

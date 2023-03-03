@@ -1,9 +1,11 @@
 const v1 = '/api/v1/';
 const v2 = '/api/v2/';
 const accounts = 'accounts/';
+const bots = 'bots/';
 const transactions = 'transactions/';
 const orders = 'orders/';
 const activities = 'activities/';
+const user = 'user/';
 
 const String endpointSignIn = '${v2}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
@@ -14,8 +16,10 @@ const String endpointConfirmPassword = '$v2${accounts}confirm-password';
 const String endpointGetOtp = '$v1${accounts}otp/';
 const String endpointGetSmsOtp = '$v2${accounts}request-sms-otp/';
 const String endpointValidateEmail = '$v2${accounts}validate-email/';
+const String endpointValidatePhone = '$v2${accounts}validate-phone/';
 const String endpointVerifyEmail = '$v1${accounts}verify-email/';
-const String endpointUpgradeAccount = '$v1${accounts}upgrade/';
+const String endpointPersonalInfo = '$v2${accounts}upgrade/personal-info/';
+const String endpointUpgradeAccount = '$v2${accounts}upgrade/ibkr/';
 const String endpointGetAccount = '$v1$accounts';
 const String endpointGetOnfidoToken = '$v1${accounts}onfido/sdk/token/';
 const String endpointOnfidoOutcome = '$v1${accounts}onfido/sdk/outcome/';
@@ -40,3 +44,6 @@ const String endpointLinkedUser = '$endpointUser/linked';
 /// URLS
 ///
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
+
+const String endpointBotRecommendation = '${user}recomendation_bots/';
+const String endpointBotDetail = '$v1${bots}bot_detail/';

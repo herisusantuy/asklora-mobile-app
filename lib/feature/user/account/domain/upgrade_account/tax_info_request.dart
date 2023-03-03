@@ -25,7 +25,6 @@ class TaxInfoRequest extends Equatable {
   final String foreignTaxId;
   @JsonKey(name: 'date_of_birth')
   final String dateOfBirth;
-  final String signature;
   final String date;
   @JsonKey(name: 'signer_full_name')
   final String signerFullName;
@@ -43,7 +42,6 @@ class TaxInfoRequest extends Equatable {
     this.mailingAddressCountry = '',
     this.foreignTaxId = '',
     this.dateOfBirth = '',
-    this.signature = '',
     this.date = '',
     this.signerFullName = '',
     this.ipAddress = '',
@@ -66,7 +64,6 @@ class TaxInfoRequest extends Equatable {
         mailingAddressCountry ?? '',
         foreignTaxId,
         dateOfBirth,
-        signature,
         date,
         signerFullName,
         ipAddress
