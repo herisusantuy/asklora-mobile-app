@@ -6,6 +6,8 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../settings/presentation/settings_screen.dart';
 import 'custom_shape.dart';
 
@@ -46,11 +48,21 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                         padding: const EdgeInsets.symmetric(
                           vertical: 20,
                         ),
-                        child: CustomTextNew(
-                          'You are making great\nprogress, Sassy Chris!',
-                          style: AskLoraTextStyles.h3.copyWith(
-                            color: AskLoraColors.white,
-                          ),
+                        child: FutureBuilder<String>(
+                          future: _getName(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<String> snapshot) {
+                            if (snapshot.hasData) {
+                              return CustomTextNew(
+                                'You are making great\nprogress, Sassy ${snapshot.data}!',
+                                style: AskLoraTextStyles.h3.copyWith(
+                                  color: AskLoraColors.white,
+                                ),
+                              );
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
                         ),
                       ),
                     ),
@@ -63,6 +75,9 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
       );
     });
   }
+
+  Future<String> _getName() async =>
+      await SharedPreference().readData(sfKeyPpiName) ?? '';
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
