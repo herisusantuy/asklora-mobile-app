@@ -10,7 +10,7 @@ enum PpiResponseState {
 class UserResponseState extends Equatable {
   final ResponseState responseState;
   final PpiResponseState ppiResponseState;
-  final SnapShot? snapShot;
+  final BaseResponse<SnapShot>? snapShot;
 
   /// Left => question id
   /// middle => Whole question object
@@ -37,7 +37,7 @@ class UserResponseState extends Equatable {
     List<Triplet<String, Question, String>>? userResponse,
     List<String>? cachedSelectedChoices,
     List<String>? cachedDefaultChoices,
-    SnapShot? snapShot,
+    BaseResponse<SnapShot>? snapShot,
   }) {
     return UserResponseState(
       responseState: responseState ?? this.responseState,

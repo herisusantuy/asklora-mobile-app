@@ -25,14 +25,10 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
   _onGetUserSnapshots(
       GetUserSnapShots event, Emitter<HomeScreenState> emit) async {
-    try {
-      var accountId = await _sharedPreference.readIntData(sfKeyTempId) ?? 0;
-      var response = await _ppiApiRepository.getUserSnapshot(accountId);
-      emit(state.copyWith(response: BaseResponse.loading()));
-      emit(state.copyWith(
-          response: BaseResponse.complete(SnapShot.fromJson(response.data))));
-    } catch (_) {
-      emit(state.copyWith(response: BaseResponse.error('Failed to get data')));
-    }
+    emit(state.copyWith(response: BaseResponse.loading()));
+    var accountId = await _sharedPreference.readIntData(sfKeyTempId) ?? 0;
+    var response = await _ppiApiRepository.getUserSnapshot(accountId);
+    if (response.statusCode == 200)
+      emit(state.copyWith(response: response.data));
   }
 }

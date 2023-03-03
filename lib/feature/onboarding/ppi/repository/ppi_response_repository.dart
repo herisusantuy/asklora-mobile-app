@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 
+import '../../../../core/domain/base_response.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../domain/ppi_api_repository.dart';
 import '../domain/ppi_user_response.dart';
 import '../domain/ppi_user_response_request.dart';
@@ -16,6 +19,7 @@ class PpiResponseRepository {
       BotRecommendationRepository();
 
   final PpiApiRepository _ppiApiRepository = PpiApiRepository();
+  final SharedPreference _sharedPreference = SharedPreference();
 
   Future<PpiUserResponse> addAnswer(
       PpiSelectionRequest ppiUserResponseRequest) async {
@@ -35,9 +39,13 @@ class PpiResponseRepository {
     return PpiUserResponse.fromJson(response.data);
   }
 
-  Future<SnapShot> getUserSnapShot(int userId) async {
-    var response = await _ppiApiRepository.getUserSnapshot(userId);
-    return SnapShot.fromJson(response.data);
+  Future<BaseResponse<SnapShot>> getUserSnapShot(int userId) async {
+    try {
+      var response = await _ppiApiRepository.getUserSnapshot(userId);
+      return BaseResponse.complete(SnapShot.fromJson(response.data));
+    } catch (_) {
+      return BaseResponse.error('Failed to get data');
+    }
   }
 
   Future<Response> linkUser(int userId) async {
