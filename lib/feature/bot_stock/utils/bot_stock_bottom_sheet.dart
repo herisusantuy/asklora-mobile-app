@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/domain/pair.dart';
 import '../../../core/presentation/custom_text_new.dart';
+import '../../../core/presentation/lora_memoji_widget.dart';
 import '../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
@@ -27,6 +28,7 @@ class BotStockBottomSheet {
         builder: (context) => BotBottomSheetWidget(
               title:
                   'Your free Botstock has been added to your portfolio successfully!',
+              loraMemojiType: LoraMemojiType.lora4,
               primaryButtonLabel: 'DEPOSIT TO START REAL TRADE',
               secondaryButtonLabel: 'NOT NOW',
               onPrimaryButtonTap: () =>
