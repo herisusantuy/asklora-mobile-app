@@ -32,8 +32,8 @@ class CustomTextButton extends StatelessWidget {
         onTap: onTap,
         child: CustomTextNew(
           label,
-          style:
-              AskLoraTextStyles.button1.copyWith(color: AskLoraColors.charcoal),
+          style: AskLoraTextStyles.button1
+              .copyWith(color: color ?? AskLoraColors.charcoal),
         ),
       ),
     );
