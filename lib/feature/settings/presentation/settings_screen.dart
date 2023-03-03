@@ -9,6 +9,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
@@ -101,8 +102,17 @@ class SettingsScreen extends StatelessWidget {
             }
           },
           child: GestureDetector(
-            onTap: () =>
-                context.read<SignOutBloc>().add(const SignOutSubmitted()),
+            onTap: () => LoraBottomSheet.show(
+              context: context,
+              title: 'Are you sure you want to sign out ?',
+              primaryButtonLabel: 'SIGN OUT',
+              secondaryButtonLabel: 'CANCEL',
+              onPrimaryButtonTap: () {
+                Navigator.pop(context);
+                context.read<SignOutBloc>().add(const SignOutSubmitted());
+              },
+              onSecondaryButtonTap: () => Navigator.pop(context),
+            ),
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.only(top: 39),

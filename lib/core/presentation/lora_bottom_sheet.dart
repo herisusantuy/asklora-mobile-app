@@ -6,7 +6,43 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 
-class BotBottomSheetWidget extends StatelessWidget {
+class LoraBottomSheet {
+  final BuildContext context;
+  final bool disablePrimaryButton;
+  final String title;
+  final String? subTitle;
+  final String primaryButtonLabel;
+  final String secondaryButtonLabel;
+  final VoidCallback onPrimaryButtonTap;
+  final VoidCallback onSecondaryButtonTap;
+
+  LoraBottomSheet.show({
+    required this.context,
+    required this.title,
+    this.disablePrimaryButton = false,
+    this.subTitle,
+    required this.primaryButtonLabel,
+    required this.secondaryButtonLabel,
+    required this.onPrimaryButtonTap,
+    required this.onSecondaryButtonTap,
+  }) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: (context),
+        builder: (_) => LoraBottomSheetContent(
+              title: title,
+              primaryButtonLabel: primaryButtonLabel,
+              secondaryButtonLabel: secondaryButtonLabel,
+              onPrimaryButtonTap: onPrimaryButtonTap,
+              onSecondaryButtonTap: onSecondaryButtonTap,
+              subTitle: subTitle,
+              disablePrimaryButton: disablePrimaryButton,
+            ));
+  }
+}
+
+class LoraBottomSheetContent extends StatelessWidget {
   final bool disablePrimaryButton;
   final String title;
   final String? subTitle;
@@ -16,7 +52,7 @@ class BotBottomSheetWidget extends StatelessWidget {
   final VoidCallback onPrimaryButtonTap;
   final VoidCallback onSecondaryButtonTap;
 
-  const BotBottomSheetWidget(
+  const LoraBottomSheetContent(
       {required this.title,
       this.disablePrimaryButton = false,
       this.subTitle,
