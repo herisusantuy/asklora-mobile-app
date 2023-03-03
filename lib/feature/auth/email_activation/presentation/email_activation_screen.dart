@@ -10,8 +10,10 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
+import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../sign_up/repository/sign_up_repository.dart';
 import '../email_activation_bloc.dart';
 
@@ -25,9 +27,9 @@ class EmailActivationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) =>
-            EmailActivationBloc(SignUpRepository(), TokenRepository())
-              ..add(const StartListenOnDeeplink()),
+        create: (_) => EmailActivationBloc(SignUpRepository(),
+            TokenRepository(), SharedPreference(), PpiResponseRepository())
+          ..add(const StartListenOnDeeplink()),
         child: BlocConsumer<EmailActivationBloc, EmailActivationState>(
             listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
