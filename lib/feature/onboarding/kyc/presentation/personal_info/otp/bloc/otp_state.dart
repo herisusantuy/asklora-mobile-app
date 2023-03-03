@@ -35,3 +35,8 @@ class OtpState extends Equatable {
     );
   }
 }
+
+class OtpValidationSuccess extends OtpState {
+  @override
+  List<Object> get props => [];
+}

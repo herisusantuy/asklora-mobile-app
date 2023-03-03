@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../../core/domain/base_response.dart';
 import '../../../../../../../core/domain/otp/verify_otp_request.dart';
 import '../../../../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../../../core/styles/asklora_colors.dart';
@@ -18,28 +20,27 @@ import '../bloc/otp_bloc.dart';
 
 class OtpScreen extends StatelessWidget {
   final double progress;
-  final String email;
 
-  const OtpScreen({required this.email, required this.progress, Key? key})
-      : super(key: key);
+  const OtpScreen({required this.progress, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
-        switch (state.response.state) {
-          case ResponseState.error:
-
-            ///TODO should only show error later
-            context
-                .read<NavigationBloc<KycPageStep>>()
-                .add(const PageChanged(KycPageStep.addressProof));
-            break;
-          case ResponseState.success:
-            SignUpSuccessScreen.openReplace(context);
-            break;
-          default:
-            break;
+        if (state.response.state == ResponseState.loading) {
+          CustomLoadingOverlay.show(context);
+        } else {
+          CustomLoadingOverlay.dismiss();
+        }
+        if (state is OtpValidationSuccess) {
+          context
+              .read<NavigationBloc<KycPageStep>>()
+              .add(const PageChanged(KycPageStep.addressProof));
+        } else {
+          if (state.response.state == ResponseState.error ||
+              state.response.state == ResponseState.success) {
+            CustomInAppNotification.show(context, state.response.message);
+          }
         }
       },
       child: KycBaseForm(
@@ -49,7 +50,7 @@ class OtpScreen extends StatelessWidget {
         content: Column(
           children: [
             CustomTextNew(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit OTP is sent to your SMS.',
+              'We’ve sent you a code via SMS to verify your phone number. Please enter the OTP code below..',
               key: const Key('sub_title'),
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
@@ -74,11 +75,11 @@ class OtpScreen extends StatelessWidget {
           return ButtonPair(
             disablePrimaryButton: state.disableRequest,
             primaryButtonOnClick: () =>
-                context.read<OtpBloc>().add(OtpRequested(email)),
+                context.read<OtpBloc>().add(const OtpRequested()),
             secondaryButtonOnClick: () =>
                 TabsScreen.openAndRemoveAllRoute(context),
             primaryButtonLabel: state.disableRequest
-                ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
+                ? 'REQUEST ANOTHER OTP IN ${_formatTimeMMSS(state.resetTime)}'
                 : 'RESEND OTP CODE',
             secondaryButtonLabel: 'SAVE FOR LATER',
           );
@@ -91,23 +92,27 @@ class OtpScreen extends StatelessWidget {
             previous.response.state != current.response.state,
         builder: (context, state) {
           return MasterTextField(
-            key: const Key('otp_input'),
-            initialValue: state.otp,
-            labelText: 'OTP',
-            textInputType: TextInputType.number,
-            hintText: '0000 (4 digit)',
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            errorText: state.response.state == ResponseState.error
-                ? 'The OTP is incorrect'
-                : '',
-            textInputFormatterList: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(4)
-            ],
-            onFieldSubmitted: (otp) => context.read<OtpBloc>().add(
-                  OtpSubmitted(VerifyOtpRequest(email, otp)),
-                ),
-          );
+              key: const Key('otp_input'),
+              initialValue: state.otp,
+              labelText: 'OTP',
+              textInputType: TextInputType.number,
+              hintText: '000000 (6 digit)',
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              errorText: state.response.state == ResponseState.error
+                  ? 'The OTP is incorrect'
+                  : '',
+              textInputFormatterList: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(6)
+              ],
+              onChanged: (otp) {
+                if (otp.length == 6) {
+                  context.read<OtpBloc>().add(OtpSubmitted(otp));
+                }
+              },
+              onFieldSubmitted: (otp) {
+                context.read<OtpBloc>().add(OtpSubmitted(otp));
+              });
         });
   }
 

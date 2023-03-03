@@ -9,8 +9,8 @@ import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
-import '../../bloc/basic_information/basic_information_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../financial_profile/widgets/dot_text.dart';
 import '../widgets/kyc_base_form.dart';
@@ -19,10 +19,10 @@ import '../widgets/kyc_sub_title.dart';
 
 class TaxAgreementScreen extends StatelessWidget {
   final double progress;
-  final BasicInformationState basicInformationState;
+  final PersonalInfoState personalInfoState;
 
   const TaxAgreementScreen(
-      {required this.progress, required this.basicInformationState, Key? key})
+      {required this.progress, required this.personalInfoState, Key? key})
       : super(key: key);
 
   final Widget _spaceHeight = const SizedBox(
@@ -202,7 +202,7 @@ class TaxAgreementScreen extends StatelessWidget {
                       .copyWith(color: AskLoraColors.charcoal)),
               TextSpan(
                   text:
-                      '${basicInformationState.firstName} ${basicInformationState.lastName}',
+                      '${personalInfoState.firstName} ${personalInfoState.lastName}',
                   style: AskLoraTextStyles.body2.copyWith(
                       color: AskLoraColors.charcoal,
                       fontWeight: FontWeight.bold)),
@@ -244,7 +244,7 @@ class TaxAgreementScreen extends StatelessWidget {
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.kycSummary)),
             disablePrimaryButton: state.disableSignatureButton(
-                '${basicInformationState.firstName} ${basicInformationState.lastName}'),
+                '${personalInfoState.firstName} ${personalInfoState.lastName}'),
             secondaryButtonOnClick: () => CarouselScreen.open(context),
             primaryButtonLabel: 'AGREE',
             secondaryButtonLabel: 'CONTINUE LATER',
