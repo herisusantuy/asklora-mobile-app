@@ -10,7 +10,8 @@ SignInResponse _$SignInResponseFromJson(Map<String, dynamic> json) =>
     SignInResponse(
       access: json['access'] as String?,
       refresh: json['refresh'] as String?,
-      userJourney: json['userJourney'] as String? ?? 'investment_style',
+      userJourney:
+          $enumDecodeNullable(_$UserJourneyEnumMap, json['userJourney']),
       detail: json['detail'] as String?,
       statusCode: json['statusCode'] as int?,
     );
@@ -19,7 +20,16 @@ Map<String, dynamic> _$SignInResponseToJson(SignInResponse instance) =>
     <String, dynamic>{
       'access': instance.access,
       'refresh': instance.refresh,
-      'userJourney': instance.userJourney,
+      'userJourney': _$UserJourneyEnumMap[instance.userJourney],
       'detail': instance.detail,
       'statusCode': instance.statusCode,
     };
+
+const _$UserJourneyEnumMap = {
+  UserJourney.privacy: 'privacy',
+  UserJourney.investmentStyle: 'investmentStyle',
+  UserJourney.kyc: 'kyc',
+  UserJourney.freeBotStock: 'freeBotStock',
+  UserJourney.deposit: 'deposit',
+  UserJourney.learnBotPlank: 'learnBotPlank',
+};

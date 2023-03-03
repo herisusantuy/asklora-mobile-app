@@ -13,6 +13,7 @@ class LoraPopUpMessage extends StatelessWidget {
   final String? subTitle;
   final String? buttonLabel;
   final String? secondaryButtonLabel;
+  final Color? secondaryButtonColor;
   final Color titleColor;
   final Color subTitleColor;
   final ButtonPrimaryType buttonPrimaryType;
@@ -35,6 +36,7 @@ class LoraPopUpMessage extends StatelessWidget {
       this.buttonPrimaryType = ButtonPrimaryType.solidCharcoal,
       this.buttonLabel,
       this.secondaryButtonLabel,
+      this.secondaryButtonColor,
       this.backgroundColor = AskLoraColors.white,
       this.onPrimaryButtonTap,
       this.onSecondaryButtonTap,
@@ -103,6 +105,7 @@ class LoraPopUpMessage extends StatelessWidget {
                         key: const Key('kyc_secondary_button'),
                         margin: const EdgeInsets.only(top: 24),
                         label: secondaryButtonLabel!,
+                        color: secondaryButtonColor,
                         onTap: onSecondaryButtonTap ?? () {},
                       ),
                     if (bottomText != null)

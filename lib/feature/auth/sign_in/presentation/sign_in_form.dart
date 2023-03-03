@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,12 +39,13 @@ class SignInForm extends StatelessWidget {
         CustomInAppNotification.show(context, state.response.message);
       } else if (responseState == ResponseState.success) {
         var arguments = Pair(state.emailAddress, state.password);
+        context
+            .read<AppBloc>()
+            .add(SaveUserJourney(state.response.data!.userJourney!));
         if (state.isOtpRequired) {
           OtpScreen.openReplace(context, arguments);
         } else {
-          UserJourney? userJourney = UserJourney.values.firstWhereOrNull(
-              (section) => section.value == state.response.data?.userJourney);
-          switch (userJourney) {
+          switch (state.response.data!.userJourney) {
             case UserJourney.kyc:
               KycScreen.open(context);
               break;
