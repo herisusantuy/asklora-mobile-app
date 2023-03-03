@@ -68,7 +68,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(
           isOtpRequired: data.statusCode == 202,
           response: BaseResponse.complete(
-              data.copyWith(userJourney: userJourney.value))));
+              data.copyWith(userJourney: userJourney))));
     } on UnauthorizedException {
       emit(state.copyWith(response: BaseResponse.error('Invalid Password')));
     } on NotFoundException {
@@ -95,7 +95,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
       emit(state.copyWith(
           response: BaseResponse.complete(
-              data.copyWith(userJourney: userJourney.value))));
+              data.copyWith(userJourney: userJourney))));
     } on UnauthorizedException {
       emit(state.copyWith(response: BaseResponse.error('Invalid Password')));
     } on NotFoundException {
