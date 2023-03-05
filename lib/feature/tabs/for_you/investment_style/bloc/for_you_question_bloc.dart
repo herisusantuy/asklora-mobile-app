@@ -35,7 +35,7 @@ class ForYouQuestionBloc
           await _ppiQuestionRepository.fetchInvestmentStyleQuestions(
               await _sharedPreference.readData(sfKeyTempName) ?? '');
       List<Question> data = fixture.getInvestmentStyleQuestion;
-      late Question? omniSearchQuestion;
+      Question? omniSearchQuestion;
       List<Question> otherQuestions = [];
       for (var element in data) {
         if (element.questionType == QuestionType.omniSearch.value) {
@@ -49,6 +49,7 @@ class ForYouQuestionBloc
           response:
               BaseResponse.complete(Pair(omniSearchQuestion, otherQuestions))));
     } catch (e) {
+      print('error $e');
       emit(state.copyWith(
           response:
               BaseResponse.error('Please try again! Something went wrong.')));
