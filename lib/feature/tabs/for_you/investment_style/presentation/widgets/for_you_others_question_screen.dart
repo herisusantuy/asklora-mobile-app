@@ -33,24 +33,32 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
         ),
         bottomButton: Padding(
           padding: const EdgeInsets.only(top: 24.0),
-          child: isFirstQuestion
-              ? Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
-                  child: PrimaryButton(
-                      label: 'VIEW BOTSTOCK RECOMMENDATION',
-                      onTap: () => context
+          child: BlocBuilder<UserResponseBloc, UserResponseState>(
+            buildWhen: (previous, current) =>
+                previous.ppiResponseState != current.ppiResponseState,
+            builder: (context, state) {
+              return isFirstQuestion
+                  ? Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: PrimaryButton(
+                          disabled: _disableButton(context),
+                          label: 'VIEW BOTSTOCK RECOMMENDATION',
+                          onTap: () => context
+                              .read<UserResponseBloc>()
+                              .add(SendBulkResponse())),
+                    )
+                  : ButtonPair(
+                      primaryButtonOnClick: () => context
                           .read<UserResponseBloc>()
-                          .add(SendBulkResponse())),
-                )
-              : ButtonPair(
-                  primaryButtonOnClick: () =>
-                      context.read<UserResponseBloc>().add(SendBulkResponse()),
-                  secondaryButtonOnClick: () => context
-                      .read<NavigationBloc<InvestmentStyleQuestionType>>()
-                      .add(const PagePop()),
-                  disablePrimaryButton: false,
-                  primaryButtonLabel: 'VIEW BOTSTOCK RECOMMENDATION',
-                  secondaryButtonLabel: 'BACK'),
+                          .add(SendBulkResponse()),
+                      secondaryButtonOnClick: () => context
+                          .read<NavigationBloc<InvestmentStyleQuestionType>>()
+                          .add(const PagePop()),
+                      disablePrimaryButton: _disableButton(context),
+                      primaryButtonLabel: 'VIEW BOTSTOCK RECOMMENDATION',
+                      secondaryButtonLabel: 'BACK');
+            },
+          ),
         ),
       ),
     );
@@ -90,5 +98,16 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
     Choices? choices = question.choices!.firstWhereOrNull((element) =>
         element.id == PpiDefaultAnswer.getIndex(context, question.questionId!));
     return choices?.name ?? '';
+  }
+
+  bool _disableButton(BuildContext context) {
+    bool disableButton = false;
+    for (var element in questions) {
+      if (_getInitialValue(context, element).isEmpty) {
+        disableButton = true;
+        break;
+      }
+    }
+    return disableButton;
   }
 }
