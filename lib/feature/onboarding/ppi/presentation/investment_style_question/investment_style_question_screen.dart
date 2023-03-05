@@ -47,7 +47,13 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
             ],
             child: BlocBuilder<InvestmentStyleQuestionBloc,
                 InvestmentStyleQuestionState>(
+              buildWhen: (previous, current) {
+                debugPrint(
+                    'Krishna buildWhen previous ${previous} current ${current}');
+                return current is OnNextQuestion;
+              },
               builder: (context, state) {
+                debugPrint('Krishna main build ${state}');
                 if (state is OnNextQuestion) {
                   Question question = state.question;
                   switch (state.questionType) {
@@ -120,6 +126,15 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
               .read<NavigationBloc<ForYouPage>>()
               .add(const PageChanged(ForYouPage.botRecommendation));
         }
+      } else if (state.ppiResponseState == PpiResponseState.dispatchResponse &&
+          state.responseState == ResponseState.error) {
+        onSubmitSuccess(context);
+        debugPrint(
+            'Krishna loading failed ${state.ppiResponseState} ${state.responseState}');
+        // context.read<QuestionBloc>().add(
+        //   InvestmentStyleQuestionIndexChanged(
+        //       state.investmentStyleQuestionIndex),
+        // );
       }
     }
   }

@@ -11,6 +11,7 @@ import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../bloc/response/user_response_bloc.dart';
 import '../../domain/ppi_user_response.dart';
+import '../investment_style_question/investment_style_welcome_screen.dart';
 import '../ppi_result_screen.dart';
 
 class PersonalisationResultEndScreen extends StatelessWidget {
@@ -66,7 +67,8 @@ class PersonalisationResultEndScreen extends StatelessWidget {
               child: PrimaryButton(
                   key: const Key('next_button'),
                   label: 'GOT IT',
-                  onTap: () => SignUpScreen.open(context)),
+                  onTap: () => InvestmentStyleWelcomeScreen.open(
+                      context) /*SignUpScreen.open(context)*/),
             ),
           );
         }
@@ -77,18 +79,23 @@ class PersonalisationResultEndScreen extends StatelessWidget {
 
   String _getMessage(Scores? scores) {
     const high = 9;
+    String message = '';
     if (scores == null) {
-      return '';
+      return message;
     }
     if (scores.openness >= high && scores.neuroticism >= high) {
-      return 'You are pretty open-minded to new things!\nLet’s be a little bit aggressive!';
+      message =
+          'You are pretty open-minded to new things!\nLet’s be a little bit aggressive!';
     } else if (scores.openness >= high && scores.neuroticism < high) {
-      return 'You are one of those people who’s down for trying anything new!\nLet’s be more aggressive!';
+      message =
+          'You are one of those people who’s down for trying anything new!\nLet’s be more aggressive!';
     } else if (scores.openness < high && scores.neuroticism >= high) {
-      return 'You prefer a stable and safe journey!\nLet’s aim to make small wins in a steady manner!';
+      message =
+          'You prefer a stable and safe journey!\nLet’s aim to make small wins in a steady manner!';
     } else if (scores.openness < high && scores.neuroticism < high) {
-      return 'You prefer a stable and safe journey!\nLet’s try a more balanced strategy!';
+      message =
+          'You prefer a stable and safe journey!\nLet’s try a more balanced strategy!';
     }
-    return '';
+    return message;
   }
 }
