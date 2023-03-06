@@ -173,28 +173,26 @@ class SettingsScreen extends StatelessWidget {
         ),
       );
 
-  Widget _getAppVersion() {
-    return FutureBuilder<PackageInfo>(
-      future: PackageInfo.fromPlatform(),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.done:
-            return Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 23.5),
-                child: CustomTextNew(
-                  'Version: ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
-                  style: AskLoraTextStyles.body1,
+  Widget _getAppVersion() => FutureBuilder<PackageInfo>(
+        future: PackageInfo.fromPlatform(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.done:
+              return Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 23.5),
+                  child: CustomTextNew(
+                    'Version: ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
+                    style: AskLoraTextStyles.body1,
+                  ),
                 ),
-              ),
-            );
-          default:
-            return const SizedBox();
-        }
-      },
-    );
-  }
+              );
+            default:
+              return const SizedBox();
+          }
+        },
+      );
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }
