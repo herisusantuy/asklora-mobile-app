@@ -8,4 +8,9 @@ class Pair<T, S> extends Equatable {
 
   @override
   List<Object> get props => [];
+
+  @override
+  String toString() {
+    return 'left ${this.left.toString()}, right ${this.right.toString()}';
+  }
 }
