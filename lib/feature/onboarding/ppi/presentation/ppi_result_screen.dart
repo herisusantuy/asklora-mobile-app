@@ -14,6 +14,7 @@ class PpiResultScreen extends StatelessWidget {
   final PpiResult? ppiResult;
   final TextStyle? additionalMessageTextStyle;
   final double bottomPadding;
+  final LoraMemojiType loraMemojiType;
 
   const PpiResultScreen(
       {required this.memojiText,
@@ -22,6 +23,7 @@ class PpiResultScreen extends StatelessWidget {
       required this.bottomButton,
       this.additionalMessageTextStyle,
       this.bottomPadding = 35,
+      this.loraMemojiType = LoraMemojiType.lora2,
       Key? key})
       : super(key: key);
 
@@ -40,7 +42,7 @@ class PpiResultScreen extends StatelessWidget {
                   LoraMemojiHeader(
                       text: memojiText,
                       loraMemojiType: ppiResult == PpiResult.success
-                          ? LoraMemojiType.lora2
+                          ? loraMemojiType
                           : LoraMemojiType.lora6),
                   if (additionalMessage.isNotEmpty)
                     Padding(

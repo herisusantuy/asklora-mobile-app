@@ -113,7 +113,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
         ppiResponseState: PpiResponseState.dispatchResponse,
       ));
 
-      final tempId = await _sharedPreference.readIntData(sfKeyTempId) ?? 0;
+      final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
 
       var requests = _getAllSelectionsInRequest(tempId);
 

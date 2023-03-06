@@ -39,7 +39,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'get investment style answer',
         build: () {
-          when(sharedPreference.readData(sfKeyTempName))
+          when(sharedPreference.readData(sfKeyPpiAccountId))
               .thenAnswer((realInvocation) => Future.value('abc'));
           when(ppiQuestionRepository.fetchInvestmentStyleQuestions('abc'))
               .thenAnswer((_) => Future.value(

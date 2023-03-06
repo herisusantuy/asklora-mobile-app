@@ -35,7 +35,38 @@ class FinancialProfileSummaryContent extends StatelessWidget {
           subTitle: title,
         ),
         _spaceHeight,
-        ..._sourceOfWealthSummary,
+        SummaryTextInfo(
+            titleWidget: _affiliatedQuestionWidget,
+            subTitle: disclosureAffiliationState.isAffiliatedPerson != null
+                ? disclosureAffiliationState.isAffiliatedPerson!
+                    ? 'Yes'
+                    : 'No'
+                : 'Unknown'),
+        if (disclosureAffiliationState.affiliatedPersonFirstName.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: _spaceHeightDouble),
+            child: SummaryTextInfo(
+                title: 'Name of Affiliated Person',
+                subTitle:
+                    '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
+          ),
+        _spaceHeight,
+        SummaryTextInfo(
+            title:
+                'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
+            subTitle: disclosureAffiliationState.isAffiliatedAssociates != null
+                ? disclosureAffiliationState.isAffiliatedAssociates!
+                    ? 'Yes'
+                    : 'No'
+                : 'Unknown'),
+        if (disclosureAffiliationState.affiliatedAssociatesFirstName.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: _spaceHeightDouble),
+            child: SummaryTextInfo(
+                title: 'Name of Affiliated Person',
+                subTitle:
+                    '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
+          ),
         _spaceHeight,
         SummaryTextInfo(
             title: 'Employment Status',
@@ -74,38 +105,7 @@ class FinancialProfileSummaryContent extends StatelessWidget {
                   'Why is your country of employment different from your country of residence?',
               subTitle: financialProfileState.detailInformationOfCountry),
         _spaceHeight,
-        SummaryTextInfo(
-            titleWidget: _affiliatedQuestionWidget,
-            subTitle: disclosureAffiliationState.isAffiliatedPerson != null
-                ? disclosureAffiliationState.isAffiliatedPerson!
-                    ? 'Yes'
-                    : 'No'
-                : 'Unknown'),
-        if (disclosureAffiliationState.affiliatedPersonFirstName.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: _spaceHeightDouble),
-            child: SummaryTextInfo(
-                title: 'Name of Affiliated Person',
-                subTitle:
-                    '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
-          ),
-        _spaceHeight,
-        SummaryTextInfo(
-            title:
-                'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
-            subTitle: disclosureAffiliationState.isAffiliatedAssociates != null
-                ? disclosureAffiliationState.isAffiliatedAssociates!
-                    ? 'Yes'
-                    : 'No'
-                : 'Unknown'),
-        if (disclosureAffiliationState.affiliatedAssociatesFirstName.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: _spaceHeightDouble),
-            child: SummaryTextInfo(
-                title: 'Name of Affiliated Person',
-                subTitle:
-                    '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
-          ),
+        ..._sourceOfWealthSummary,
         _spaceHeight,
         SummaryTextInfo(
             title:
