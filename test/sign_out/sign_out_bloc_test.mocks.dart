@@ -7,6 +7,10 @@ import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart'
     as _i7;
+import 'package:asklora_mobile_app/core/utils/storage/secure_storage.dart'
+    as _i9;
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
+    as _i8;
 import 'package:asklora_mobile_app/feature/auth/sign_out/domain/sign_out_api_client.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/auth/sign_out/domain/sign_out_request.dart'
@@ -142,6 +146,203 @@ class MockRepository extends _i1.Mock implements _i7.Repository {
         Invocation.method(
           #deleteAll,
           [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+}
+
+/// A class which mocks [SharedPreference].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPreference extends _i1.Mock implements _i8.SharedPreference {
+  MockSharedPreference() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<void> deleteAllData() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAllData,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> deleteData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteData,
+          [key],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<String?> readData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readData,
+          [key],
+        ),
+        returnValue: _i4.Future<String?>.value(),
+      ) as _i4.Future<String?>);
+  @override
+  _i4.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readBoolData,
+          [key],
+        ),
+        returnValue: _i4.Future<bool?>.value(),
+      ) as _i4.Future<bool?>);
+  @override
+  _i4.Future<bool> writeData(
+    String? key,
+    String? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<bool> writeBoolData(
+    String? key,
+    bool? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeBoolData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<bool> writeIntData(
+    String? key,
+    int? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeIntData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<int?> readIntData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readIntData,
+          [key],
+        ),
+        returnValue: _i4.Future<int?>.value(),
+      ) as _i4.Future<int?>);
+}
+
+/// A class which mocks [SecureStorage].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSecureStorage extends _i1.Mock implements _i9.SecureStorage {
+  MockSecureStorage() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<void> writeData(
+    String? key,
+    String? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<String?> readData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readData,
+          [key],
+        ),
+        returnValue: _i4.Future<String?>.value(),
+      ) as _i4.Future<String?>);
+  @override
+  _i4.Future<void> deleteData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteData,
+          [key],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> deleteAllData() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAllData,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<int?> readIntData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readIntData,
+          [key],
+        ),
+        returnValue: _i4.Future<int?>.value(),
+      ) as _i4.Future<int?>);
+  @override
+  _i4.Future<void> writeIntData(
+    String? key,
+    int? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeIntData,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #readBoolData,
+          [key],
+        ),
+        returnValue: _i4.Future<bool?>.value(),
+      ) as _i4.Future<bool?>);
+  @override
+  _i4.Future<void> writeBoolData(
+    String? key,
+    bool? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #writeBoolData,
+          [
+            key,
+            value,
+          ],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),

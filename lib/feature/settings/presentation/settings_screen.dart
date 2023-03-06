@@ -12,6 +12,8 @@ import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../core/utils/storage/secure_storage.dart';
+import '../../../core/utils/storage/shared_preference.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
@@ -28,7 +30,9 @@ class SettingsScreen extends StatelessWidget {
       body: BlocProvider(
         create: (_) => SignOutBloc(
             tokenRepository: TokenRepository(),
-            signOutRepository: SignOutRepository()),
+            signOutRepository: SignOutRepository(),
+            secureStorage: SecureStorage(),
+            sharedPreference: SharedPreference()),
         child: CustomStretchedLayout(
           header: const CustomHeader(
             title: 'All Settings',
