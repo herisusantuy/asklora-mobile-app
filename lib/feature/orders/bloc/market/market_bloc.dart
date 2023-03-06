@@ -101,8 +101,7 @@ class MarketBloc extends Bloc<MarketEvent, MarketState> {
           await _ordersRepository.submitOrder(orderRequest: event.orderRequest);
       emit(state.copyWith(response: data));
     } catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(BaseResponse.errorMessage)));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }

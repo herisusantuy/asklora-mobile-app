@@ -104,8 +104,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
           totalInvestmentStylePages:
               fixture.getInvestmentStyleQuestion.length + 1));
     } catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(BaseResponse.errorMessage)));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 

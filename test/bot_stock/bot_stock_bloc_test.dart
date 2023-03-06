@@ -25,10 +25,9 @@ void main() async {
     final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
 
     final BaseResponse<List<BotRecommendationModel>> errorResponse =
-        BaseResponse.error(BaseResponse.errorMessage);
+        BaseResponse.error();
 
-    final BaseResponse<bool> boolErrorResponse =
-        BaseResponse.error(BaseResponse.errorMessage);
+    final BaseResponse<bool> boolErrorResponse = BaseResponse.error();
 
     const BotRecommendationModel botRecommendationModel =
         BotRecommendationModel(1, '', '', '', '', '', 'Pullup', '', '', '', '');

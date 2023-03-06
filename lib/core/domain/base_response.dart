@@ -26,7 +26,8 @@ class BaseResponse<T> extends Equatable {
         state: ResponseState.success, data: data, message: message);
   }
 
-  static BaseResponse<T> error<T>(String message) {
+  static BaseResponse<T> error<T>(
+      {String message = BaseResponse.errorMessage}) {
     return BaseResponse(state: ResponseState.error, message: message);
   }
 

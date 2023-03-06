@@ -31,9 +31,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       var data = await _botStockRepository.fetchBotRecommendation();
       emit(state.copyWith(botRecommendationResponse: data));
     } catch (e) {
-      emit(state.copyWith(
-          botRecommendationResponse:
-              BaseResponse.error(BaseResponse.errorMessage)));
+      emit(state.copyWith(botRecommendationResponse: BaseResponse.error()));
     }
   }
 
@@ -45,9 +43,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
           botRecommendationResponse:
               await _botStockRepository.fetchFreeBotRecommendation()));
     } catch (e) {
-      emit(state.copyWith(
-          botRecommendationResponse:
-              BaseResponse.error(BaseResponse.errorMessage)));
+      emit(state.copyWith(botRecommendationResponse: BaseResponse.error()));
     }
   }
 
@@ -59,9 +55,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
               botRecommendationModel: event.botRecommendationModel,
               tradeBotStockAmount: event.tradeBotStockAmount)));
     } catch (e) {
-      emit(state.copyWith(
-          tradeBotStockResponse:
-              BaseResponse.error(BaseResponse.errorMessage)));
+      emit(state.copyWith(tradeBotStockResponse: BaseResponse.error()));
     }
   }
 
@@ -80,8 +74,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
           botDetailResponse: await _botStockRepository.fetchBotDetail(
               event.ticker, event.botId)));
     } catch (e) {
-      emit(state.copyWith(
-          botDetailResponse: BaseResponse.error(BaseResponse.errorMessage)));
+      emit(state.copyWith(botDetailResponse: BaseResponse.error()));
     }
   }
 

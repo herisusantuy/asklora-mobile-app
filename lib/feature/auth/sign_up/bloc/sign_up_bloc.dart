@@ -74,13 +74,14 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emit(state.copyWith(response: data));
     } on ConflictException {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('Account with this email already exists')));
+          response: BaseResponse.error(
+              message: 'Account with this email already exists')));
     } on BadRequestException {
       emit(state.copyWith(
-          response: BaseResponse.error('This password is too common.')));
+          response:
+              BaseResponse.error(message: 'This password is too common.')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }
   }
 }

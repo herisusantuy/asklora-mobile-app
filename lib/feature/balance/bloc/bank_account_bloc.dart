@@ -37,7 +37,7 @@ class BankAccountBloc extends Bloc<BankAccountEvent, BankAccountState> {
       ));
     } catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error(e.toString()),
+          response: BaseResponse.error(message: e.toString()),
           depositType: depositType));
     }
   }

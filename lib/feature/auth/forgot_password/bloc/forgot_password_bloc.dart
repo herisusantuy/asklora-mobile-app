@@ -59,13 +59,14 @@ class ForgotPasswordBloc
       emit(state.copyWith(response: data));
     } on BadRequestException {
       emit(state.copyWith(
-          response: BaseResponse.error('Your account is not active yet.')));
+          response:
+              BaseResponse.error(message: 'Your account is not active yet.')));
     } on NotFoundException {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('User does not exist with the given email.')));
+          response: BaseResponse.error(
+              message: 'User does not exist with the given email.')));
     } catch (e) {
-      state.copyWith(response: BaseResponse.error(e.toString()));
+      state.copyWith(response: BaseResponse.error(message: e.toString()));
     }
   }
 

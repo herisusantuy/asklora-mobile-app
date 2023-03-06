@@ -28,7 +28,7 @@ class AccountRepository {
       return BaseResponse.complete(
           UpgradeAccountResponse.fromJson(response.data));
     } catch (_) {
-      return BaseResponse.error('Invalid Request');
+      return BaseResponse.error();
     }
   }
 
@@ -40,7 +40,7 @@ class AccountRepository {
       return BaseResponse.complete(
           PersonalInfoResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error(BaseResponse.errorMessage);
+      return BaseResponse.error();
     }
   }
 
@@ -49,7 +49,7 @@ class AccountRepository {
       var response = await _accountApiClient.getOnfidoToken();
       return BaseResponse.complete(OnfidoTokenResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error('Could not fetch the token!');
+      return BaseResponse.error(message: 'Could not fetch the token!');
     }
   }
 
@@ -60,7 +60,7 @@ class AccountRepository {
       return BaseResponse.complete(
           OnfidoResultResponse.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error('Could not update the Onfido result!');
+      return BaseResponse.error(message: 'Could not update the Onfido result!');
     }
   }
 

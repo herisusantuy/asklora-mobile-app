@@ -152,7 +152,7 @@ void main() async {
     );
     BaseResponse<OrderResponse> successResponse =
         BaseResponse.complete(OrderResponse());
-    BaseResponse errorResponse = BaseResponse.error(BaseResponse.errorMessage);
+    BaseResponse errorResponse = BaseResponse.error();
 
     blocTest<TrailingOrderBloc, TrailingOrderState>(
       'emits response = BaseResponse.complete WHEN failed submit buy trail stop order by trail amount',

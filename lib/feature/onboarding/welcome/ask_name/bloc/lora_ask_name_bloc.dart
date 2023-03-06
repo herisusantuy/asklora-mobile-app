@@ -51,8 +51,7 @@ class LoraAskNameBloc extends Bloc<LoraAskNameEvent, LoraAskNameState> {
       await _sharedPreference.writeIntData(sfKeyPpiUserId, response.data!.id);
       emit(state.copyWith(response: BaseResponse.complete(response.data)));
     } catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(BaseResponse.errorMessage)));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }

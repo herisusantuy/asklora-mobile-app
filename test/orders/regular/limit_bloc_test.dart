@@ -104,7 +104,7 @@ void main() async {
         quantity: '10');
     BaseResponse<OrderResponse> successResponse =
         BaseResponse.complete(OrderResponse());
-    BaseResponse errorResponse = BaseResponse.error(BaseResponse.errorMessage);
+    BaseResponse errorResponse = BaseResponse.error();
 
     blocTest<LimitOrderBloc, LimitOrderState>(
         'emits `response` = BaseResponse.complete WHEN '
