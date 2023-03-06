@@ -48,9 +48,7 @@ void main() async {
         act: (bloc) => bloc.add(LoadQuestion()),
         expect: () => {
               ForYouQuestionState(response: BaseResponse.loading()),
-              ForYouQuestionState(
-                  response: BaseResponse.error(
-                      'Please try again! Something went wrong.'))
+              ForYouQuestionState(response: BaseResponse.error())
             });
 
     tearDown(() => {forYouQuestionBloc.close()});
