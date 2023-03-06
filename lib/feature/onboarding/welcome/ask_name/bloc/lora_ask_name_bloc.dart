@@ -52,7 +52,7 @@ class LoraAskNameBloc extends Bloc<LoraAskNameEvent, LoraAskNameState> {
       emit(state.copyWith(response: BaseResponse.complete(response.data)));
     } catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error('Something went wrong!')));
+          response: BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 }

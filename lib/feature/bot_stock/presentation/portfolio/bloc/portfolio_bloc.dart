@@ -36,7 +36,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       emit(state.copyWith(botPortfolioResponse: data));
     } catch (e) {
       emit(state.copyWith(
-          botPortfolioResponse: BaseResponse.error('Something went wrong')));
+          botPortfolioResponse: BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -47,7 +47,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       emit(state.copyWith(portfolioResponse: data));
     } catch (e) {
       emit(state.copyWith(
-          portfolioResponse: BaseResponse.error('Something went wrong')));
+          portfolioResponse: BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -61,7 +61,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     } catch (e) {
       emit(state.copyWith(
           botPortfolioDetailResponse:
-              BaseResponse.error('Something went wrong')));
+              BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -83,7 +83,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
               await _portfolioRepository.endBotStock(event.portfolioBotModel)));
     } catch (e) {
       emit(state.copyWith(
-          endBotStockResponse: BaseResponse.error('Something went wrong')));
+          endBotStockResponse: BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -97,7 +97,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     } catch (e) {
       emit(state.copyWith(
           rolloverBotStockResponse:
-              BaseResponse.error('Something went wrong')));
+              BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 }

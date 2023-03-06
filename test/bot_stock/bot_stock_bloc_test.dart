@@ -25,10 +25,10 @@ void main() async {
     final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
 
     final BaseResponse<List<BotRecommendationModel>> errorResponse =
-        BaseResponse.error('Something went wrong');
+        BaseResponse.error(BaseResponse.errorMessage);
 
     final BaseResponse<bool> boolErrorResponse =
-        BaseResponse.error('Something went wrong');
+        BaseResponse.error(BaseResponse.errorMessage);
 
     const BotRecommendationModel botRecommendationModel =
         BotRecommendationModel(1, '', '', '', '', '', 'Pullup', '', '', '', '');

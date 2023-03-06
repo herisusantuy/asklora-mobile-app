@@ -33,7 +33,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     } catch (e) {
       emit(state.copyWith(
           botRecommendationResponse:
-              BaseResponse.error('Something went wrong')));
+              BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -47,7 +47,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     } catch (e) {
       emit(state.copyWith(
           botRecommendationResponse:
-              BaseResponse.error('Something went wrong')));
+              BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -60,7 +60,8 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
               tradeBotStockAmount: event.tradeBotStockAmount)));
     } catch (e) {
       emit(state.copyWith(
-          tradeBotStockResponse: BaseResponse.error('Something went wrong')));
+          tradeBotStockResponse:
+              BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -80,7 +81,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
               event.ticker, event.botId)));
     } catch (e) {
       emit(state.copyWith(
-          botDetailResponse: BaseResponse.error('Something went wrong')));
+          botDetailResponse: BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 

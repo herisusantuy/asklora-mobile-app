@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -7,7 +6,6 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/hkid_validation.dart';
 import '../../../../../core/utils/age_validation.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
-import '../../domain/upgrade_account/personal_info_response.dart';
 import '../../repository/account_repository.dart';
 
 part 'personal_info_event.dart';
@@ -149,7 +147,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       emit(state.copyWith(response: BaseResponse.complete(data)));
     } catch (e) {
       emit(state.copyWith(
-        response: BaseResponse.error('Something went wrong! Please try again.'),
+        response: BaseResponse.error(BaseResponse.errorMessage),
       ));
     }
   }

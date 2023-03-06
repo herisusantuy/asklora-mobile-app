@@ -63,8 +63,7 @@ class StopLimitOrderBloc
       emit(state.copyWith(response: data));
     } catch (e) {
       emit(state.copyWith(
-          response: BaseResponse.error(
-              'Something went wrong, please try again later')));
+          response: BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 }

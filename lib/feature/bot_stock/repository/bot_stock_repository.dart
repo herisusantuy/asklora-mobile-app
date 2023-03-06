@@ -28,7 +28,7 @@ class BotStockRepository {
 
       return BaseResponse.complete(BotDetailModel.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error('Something went wrong');
+      return BaseResponse.error(BaseResponse.errorMessage);
     }
   }
 
@@ -42,7 +42,7 @@ class BotStockRepository {
       return BaseResponse.complete(List<ChartDataSet>.from(
           iterable.map((model) => ChartDataSet.fromJson(model))));
     } catch (e) {
-      return BaseResponse.error('Something went wrong');
+      return BaseResponse.error(BaseResponse.errorMessage);
     }
   }
 
@@ -84,7 +84,7 @@ class BotStockRepository {
       return BaseResponse.complete(
           BotRecommendationResponse.fromJson(response.data).data);
     } catch (e) {
-      return BaseResponse.error('Something went wrong');
+      return BaseResponse.error(BaseResponse.errorMessage);
     }
   }
 
@@ -98,7 +98,7 @@ class BotStockRepository {
               .data
               .map((model) => model.copyWith(freeBot: true))));
     } catch (e) {
-      return BaseResponse.error('Something went wrong');
+      return BaseResponse.error(BaseResponse.errorMessage);
     }
   }
 

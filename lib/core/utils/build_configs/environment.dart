@@ -1,1 +1,1 @@
-const String defaultEnvironment = 'dev';
+const String defaultEnvironment = 'staging';

@@ -8,7 +8,6 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
-import '../../../../core/presentation/custom_overlay_widget.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';

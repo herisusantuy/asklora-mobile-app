@@ -105,8 +105,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
               fixture.getInvestmentStyleQuestion.length + 1));
     } catch (e) {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('Please try again! Something went wrong.')));
+          response: BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 

@@ -51,7 +51,7 @@ class PortfolioRepository {
       return BaseResponse.complete(
           PortfolioBotDetailModel.fromJson(response.data));
     } catch (e) {
-      return BaseResponse.error('Something went wrong');
+      return BaseResponse.error(BaseResponse.errorMessage);
     }
   }
 

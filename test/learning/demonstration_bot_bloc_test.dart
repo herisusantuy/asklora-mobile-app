@@ -29,13 +29,13 @@ void main() async {
             ChartStudioAnimationModel(chartData: [], botData: [], uiData: []));
 
     final BaseResponse<List<BotRecommendationModel>> errorResponse =
-        BaseResponse.error('Something went wrong');
+        BaseResponse.error(BaseResponse.errorMessage);
 
     final BaseResponse<List<ChartDataSet>> chartErrorResponse =
-        BaseResponse.error('Something went wrong');
+        BaseResponse.error(BaseResponse.errorMessage);
 
     final BaseResponse<ChartStudioAnimationModel> tradeChartErrorResponse =
-        BaseResponse.error('Something went wrong');
+        BaseResponse.error(BaseResponse.errorMessage);
 
     setUpAll(() async {
       botStockRepository = MockBotStockRepository();

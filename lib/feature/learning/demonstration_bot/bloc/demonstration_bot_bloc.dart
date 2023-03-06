@@ -32,7 +32,7 @@ class DemonstrationBotBloc
     } catch (e) {
       emit(state.copyWith(
           botDemonstrationResponse:
-              BaseResponse.error('Something went wrong')));
+              BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -43,7 +43,7 @@ class DemonstrationBotBloc
           chartDataResponse: await _botStockRepository.fetchChartDataJson()));
     } catch (e) {
       emit(state.copyWith(
-          chartDataResponse: BaseResponse.error('Something went wrong')));
+          chartDataResponse: BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 
@@ -55,7 +55,8 @@ class DemonstrationBotBloc
               await _botStockRepository.fetchTradeChartDataJson()));
     } catch (e) {
       emit(state.copyWith(
-          tradeChartDataResponse: BaseResponse.error('Something went wrong')));
+          tradeChartDataResponse:
+              BaseResponse.error(BaseResponse.errorMessage)));
     }
   }
 }

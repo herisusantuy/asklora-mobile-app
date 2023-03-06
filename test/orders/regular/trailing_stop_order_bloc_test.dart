@@ -152,15 +152,14 @@ void main() async {
     );
     BaseResponse<OrderResponse> successResponse =
         BaseResponse.complete(OrderResponse());
-    BaseResponse errorResponse =
-        BaseResponse.error('Something went wrong, please try again later');
+    BaseResponse errorResponse = BaseResponse.error(BaseResponse.errorMessage);
 
     blocTest<TrailingOrderBloc, TrailingOrderState>(
       'emits response = BaseResponse.complete WHEN failed submit buy trail stop order by trail amount',
       build: () {
         when(mockOrdersRepository.submitOrder(
                 orderRequest: requestBuyTrailStopOrderByAmount))
-            .thenThrow('Something went wrong, please try again later');
+            .thenThrow(BaseResponse.errorMessage);
         return trailingOrderBloc;
       },
       act: (bloc) async {
@@ -184,7 +183,7 @@ void main() async {
       build: () {
         when(mockOrdersRepository.submitOrder(
                 orderRequest: requestBuyTrailStopOrderByPercentage))
-            .thenThrow('Something went wrong, please try again later');
+            .thenThrow(BaseResponse.errorMessage);
         return trailingOrderBloc;
       },
       act: (bloc) async {
