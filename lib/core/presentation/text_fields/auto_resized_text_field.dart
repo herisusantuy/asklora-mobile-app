@@ -6,6 +6,7 @@ import '../../styles/asklora_text_styles.dart';
 
 class AutoResizedTextField extends StatelessWidget {
   final Function(String)? onChanged;
+  final Function(String)? onFieldSubmitted;
   final String labelText;
   final TextInputType textInputType;
   final List<TextInputFormatter>? textInputFormatterList;
@@ -19,6 +20,7 @@ class AutoResizedTextField extends StatelessWidget {
 
   const AutoResizedTextField(
       {this.onChanged,
+      this.onFieldSubmitted,
       this.labelText = '',
       this.hintText = '',
       this.initialValue,
@@ -37,6 +39,7 @@ class AutoResizedTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
       keyboardType: textInputType,
       inputFormatters: textInputFormatterList,
       decoration: InputDecoration(
