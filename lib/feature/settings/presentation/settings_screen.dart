@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/domain/base_response.dart';
-import '../../../core/domain/pair.dart';
 import '../../../core/domain/token/repository/token_repository.dart';
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_in_app_notification.dart';
@@ -13,8 +12,7 @@ import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
-import '../../../core/utils/storage/shared_preference.dart';
-import '../../../core/utils/storage/storage_keys.dart';
+import '../../../core/utils/storage/profile_data.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
@@ -39,10 +37,10 @@ class SettingsScreen extends StatelessWidget {
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FutureBuilder<Pair<String, String>>(
-                future: _getProfileData(),
+              FutureBuilder<ProfileDataModel>(
+                future: ProfileData().getProfileData(),
                 builder: (BuildContext context,
-                    AsyncSnapshot<Pair<String, String>> snapshot) {
+                    AsyncSnapshot<ProfileDataModel> snapshot) {
                   if (snapshot.hasData) {
                     return Row(
                       children: [
@@ -52,7 +50,7 @@ class SettingsScreen extends StatelessWidget {
                               shape: BoxShape.circle),
                           padding: const EdgeInsets.fromLTRB(20, 18, 18, 20),
                           child: CustomTextNew(
-                            snapshot.data?.left[0].toUpperCase() ?? '',
+                            snapshot.data?.name[0].toUpperCase() ?? '',
                             style: AskLoraTextStyles.h2,
                           ),
                         ),
@@ -63,12 +61,12 @@ class SettingsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomTextNew(
-                              snapshot.data?.left ?? '',
+                              snapshot.data?.name ?? '',
                               style: AskLoraTextStyles.h5
                                   .copyWith(color: AskLoraColors.charcoal),
                             ),
                             CustomTextNew(
-                              snapshot.data?.right ?? '',
+                              snapshot.data?.email ?? '',
                               style: AskLoraTextStyles.body1
                                   .copyWith(color: AskLoraColors.charcoal),
                             ),
@@ -194,10 +192,6 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
       );
-
-  Future<Pair<String, String>> _getProfileData() async => Pair(
-      await SharedPreference().readData(sfKeyPpiName) ?? '',
-      await SharedPreference().readData(sfKeyEmail) ?? '');
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }
