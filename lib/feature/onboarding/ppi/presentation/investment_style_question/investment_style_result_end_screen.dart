@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
@@ -24,6 +25,7 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
       header: const SizedBox.shrink(),
       child: PpiResultScreen(
         ppiResult: PpiResult.success,
+        loraMemojiType: LoraMemojiType.lora4,
         memojiText: 'Your investment style is all set!',
         additionalMessage:
             'Time to reveal your personalised recommendations. The best part?  You’re eligible for a FREE AI trade (HKD500).\n\nBut first things first, let’s get that investment account set up!',

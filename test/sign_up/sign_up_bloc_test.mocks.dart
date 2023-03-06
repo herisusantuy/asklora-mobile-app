@@ -3,28 +3,20 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
+import 'dart:async' as _i5;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart' as _i9;
+import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart' as _i7;
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
-    as _i14;
-import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart'
-    as _i8;
-import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart'
     as _i10;
-import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_request.dart'
-    as _i11;
-import 'package:asklora_mobile_app/feature/auth/sign_up/repository/sign_up_repository.dart'
+import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart'
     as _i6;
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
-    as _i5;
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response_request.dart'
-    as _i13;
-import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/bot_recommendation_repository.dart'
+import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart'
+    as _i8;
+import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_request.dart'
+    as _i9;
+import 'package:asklora_mobile_app/feature/auth/sign_up/repository/sign_up_repository.dart'
     as _i4;
-import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_response_repository.dart'
-    as _i12;
 import 'package:dio/dio.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -60,48 +52,16 @@ class _FakeResponse_1<T> extends _i1.SmartFake implements _i3.Response<T> {
         );
 }
 
-class _FakeBotRecommendationRepository_2 extends _i1.SmartFake
-    implements _i4.BotRecommendationRepository {
-  _FakeBotRecommendationRepository_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakePpiUserResponse_3 extends _i1.SmartFake
-    implements _i5.PpiUserResponse {
-  _FakePpiUserResponse_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeSnapShot_4 extends _i1.SmartFake implements _i5.SnapShot {
-  _FakeSnapShot_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
 /// A class which mocks [SignUpRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignUpRepository extends _i1.Mock implements _i6.SignUpRepository {
+class MockSignUpRepository extends _i1.Mock implements _i4.SignUpRepository {
   MockSignUpRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i7.Future<_i2.BaseResponse<_i8.SignUpResponse>> signUp({
+  _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>> signUp({
     required String? email,
     required String? password,
     required String? username,
@@ -116,8 +76,8 @@ class MockSignUpRepository extends _i1.Mock implements _i6.SignUpRepository {
             #username: username,
           },
         ),
-        returnValue: _i7.Future<_i2.BaseResponse<_i8.SignUpResponse>>.value(
-            _FakeBaseResponse_0<_i8.SignUpResponse>(
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>>.value(
+            _FakeBaseResponse_0<_i6.SignUpResponse>(
           this,
           Invocation.method(
             #signUp,
@@ -129,18 +89,18 @@ class MockSignUpRepository extends _i1.Mock implements _i6.SignUpRepository {
             },
           ),
         )),
-      ) as _i7.Future<_i2.BaseResponse<_i8.SignUpResponse>>);
+      ) as _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>>);
   @override
-  _i7.Future<_i2.BaseResponse<_i8.GetOtpResponse>> getVerificationEmail(
-          {required _i9.GetOtpRequest? getVerificationEmailRequest}) =>
+  _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> getVerificationEmail(
+          {required _i7.GetOtpRequest? getVerificationEmailRequest}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getVerificationEmail,
           [],
           {#getVerificationEmailRequest: getVerificationEmailRequest},
         ),
-        returnValue: _i7.Future<_i2.BaseResponse<_i8.GetOtpResponse>>.value(
-            _FakeBaseResponse_0<_i8.GetOtpResponse>(
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>.value(
+            _FakeBaseResponse_0<_i6.GetOtpResponse>(
           this,
           Invocation.method(
             #getVerificationEmail,
@@ -148,180 +108,96 @@ class MockSignUpRepository extends _i1.Mock implements _i6.SignUpRepository {
             {#getVerificationEmailRequest: getVerificationEmailRequest},
           ),
         )),
-      ) as _i7.Future<_i2.BaseResponse<_i8.GetOtpResponse>>);
+      ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
 }
 
 /// A class which mocks [SignUpApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignUpApiClient extends _i1.Mock implements _i10.SignUpApiClient {
+class MockSignUpApiClient extends _i1.Mock implements _i8.SignUpApiClient {
   MockSignUpApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i7.Future<_i3.Response<dynamic>> signUp(_i11.SignUpRequest? request) =>
+  _i5.Future<_i3.Response<dynamic>> signUp(_i9.SignUpRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #signUp,
           [request],
         ),
         returnValue:
-            _i7.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
+            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
           this,
           Invocation.method(
             #signUp,
             [request],
           ),
         )),
-      ) as _i7.Future<_i3.Response<dynamic>>);
+      ) as _i5.Future<_i3.Response<dynamic>>);
   @override
-  _i7.Future<_i3.Response<dynamic>> getActivationEmail(
-          _i9.GetOtpRequest? getOtpRequest) =>
+  _i5.Future<_i3.Response<dynamic>> getActivationEmail(
+          _i7.GetOtpRequest? getOtpRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #getActivationEmail,
           [getOtpRequest],
         ),
         returnValue:
-            _i7.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
+            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
           this,
           Invocation.method(
             #getActivationEmail,
             [getOtpRequest],
           ),
         )),
-      ) as _i7.Future<_i3.Response<dynamic>>);
-}
-
-/// A class which mocks [PpiResponseRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockPpiResponseRepository extends _i1.Mock
-    implements _i12.PpiResponseRepository {
-  MockPpiResponseRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.BotRecommendationRepository get botRecommendationRepository =>
-      (super.noSuchMethod(
-        Invocation.getter(#botRecommendationRepository),
-        returnValue: _FakeBotRecommendationRepository_2(
-          this,
-          Invocation.getter(#botRecommendationRepository),
-        ),
-      ) as _i4.BotRecommendationRepository);
-  @override
-  _i7.Future<_i5.PpiUserResponse> addAnswer(
-          _i13.PpiSelectionRequest? ppiUserResponseRequest) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addAnswer,
-          [ppiUserResponseRequest],
-        ),
-        returnValue:
-            _i7.Future<_i5.PpiUserResponse>.value(_FakePpiUserResponse_3(
-          this,
-          Invocation.method(
-            #addAnswer,
-            [ppiUserResponseRequest],
-          ),
-        )),
-      ) as _i7.Future<_i5.PpiUserResponse>);
-  @override
-  _i7.Future<_i5.PpiUserResponse> addBulkAnswer(
-          List<_i13.PpiSelectionRequest>? ppiUserResponseRequest) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addBulkAnswer,
-          [ppiUserResponseRequest],
-        ),
-        returnValue:
-            _i7.Future<_i5.PpiUserResponse>.value(_FakePpiUserResponse_3(
-          this,
-          Invocation.method(
-            #addBulkAnswer,
-            [ppiUserResponseRequest],
-          ),
-        )),
-      ) as _i7.Future<_i5.PpiUserResponse>);
-  @override
-  _i7.Future<_i5.SnapShot> getUserSnapShot(int? userId) => (super.noSuchMethod(
-        Invocation.method(
-          #getUserSnapShot,
-          [userId],
-        ),
-        returnValue: _i7.Future<_i5.SnapShot>.value(_FakeSnapShot_4(
-          this,
-          Invocation.method(
-            #getUserSnapShot,
-            [userId],
-          ),
-        )),
-      ) as _i7.Future<_i5.SnapShot>);
-  @override
-  _i7.Future<_i3.Response<dynamic>> linkUser(int? userId) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #linkUser,
-          [userId],
-        ),
-        returnValue:
-            _i7.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
-          this,
-          Invocation.method(
-            #linkUser,
-            [userId],
-          ),
-        )),
-      ) as _i7.Future<_i3.Response<dynamic>>);
+      ) as _i5.Future<_i3.Response<dynamic>>);
 }
 
 /// A class which mocks [SharedPreference].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreference extends _i1.Mock implements _i14.SharedPreference {
+class MockSharedPreference extends _i1.Mock implements _i10.SharedPreference {
   MockSharedPreference() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i7.Future<void> deleteAllData() => (super.noSuchMethod(
+  _i5.Future<void> deleteAllData() => (super.noSuchMethod(
         Invocation.method(
           #deleteAllData,
           [],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
-  _i7.Future<void> deleteData(String? key) => (super.noSuchMethod(
+  _i5.Future<void> deleteData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #deleteData,
           [key],
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
-  _i7.Future<String?> readData(String? key) => (super.noSuchMethod(
+  _i5.Future<String?> readData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readData,
           [key],
         ),
-        returnValue: _i7.Future<String?>.value(),
-      ) as _i7.Future<String?>);
+        returnValue: _i5.Future<String?>.value(),
+      ) as _i5.Future<String?>);
   @override
-  _i7.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
+  _i5.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readBoolData,
           [key],
         ),
-        returnValue: _i7.Future<bool?>.value(),
-      ) as _i7.Future<bool?>);
+        returnValue: _i5.Future<bool?>.value(),
+      ) as _i5.Future<bool?>);
   @override
-  _i7.Future<bool> writeData(
+  _i5.Future<bool> writeData(
     String? key,
     String? value,
   ) =>
@@ -333,10 +209,10 @@ class MockSharedPreference extends _i1.Mock implements _i14.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i7.Future<bool>.value(false),
-      ) as _i7.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i7.Future<bool> writeBoolData(
+  _i5.Future<bool> writeBoolData(
     String? key,
     bool? value,
   ) =>
@@ -348,10 +224,10 @@ class MockSharedPreference extends _i1.Mock implements _i14.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i7.Future<bool>.value(false),
-      ) as _i7.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i7.Future<bool> writeIntData(
+  _i5.Future<bool> writeIntData(
     String? key,
     int? value,
   ) =>
@@ -363,14 +239,14 @@ class MockSharedPreference extends _i1.Mock implements _i14.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i7.Future<bool>.value(false),
-      ) as _i7.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i7.Future<int?> readIntData(String? key) => (super.noSuchMethod(
+  _i5.Future<int?> readIntData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readIntData,
           [key],
         ),
-        returnValue: _i7.Future<int?>.value(),
-      ) as _i7.Future<int?>);
+        returnValue: _i5.Future<int?>.value(),
+      ) as _i5.Future<int?>);
 }

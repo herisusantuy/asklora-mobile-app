@@ -57,7 +57,7 @@ void main() {
 
       testWidgets('Show basic information screen with all the input',
           (WidgetTester tester) async {
-        await buildKycScreen(tester, KycPageStep.basicInformation);
+        await buildKycScreen(tester, KycPageStep.personalInfo);
         expect(find.byKey(const Key('first_name')), findsOneWidget);
         expect(find.byKey(const Key('last_name')), findsOneWidget);
         expect(find.text('Male'), findsOneWidget);
@@ -66,7 +66,7 @@ void main() {
       });
 
       testWidgets(
-          'Show otp screen with the input then try to input not number and more than 4 characters and finally input the right one 4 character numbers',
+          'Show otp screen with the input then try to input not number and more than 6 characters and finally input the right one 4 character numbers',
           (WidgetTester tester) async {
         var otpInput = find.byKey(const Key('otp_input'));
         await buildKycScreen(tester, KycPageStep.otp);
@@ -77,9 +77,11 @@ void main() {
         await tester.enterText(otpInput, 'abc');
         expect(find.text('abc'), findsNothing);
         await tester.enterText(otpInput, '12345');
-        expect(find.text('12345'), findsNothing);
-        await tester.enterText(otpInput, '1234');
-        expect(find.text('1234'), findsOneWidget);
+        expect(find.text('12345'), findsOneWidget);
+        await tester.enterText(otpInput, '123456');
+        expect(find.text('123456'), findsOneWidget);
+        await tester.enterText(otpInput, '1234567');
+        expect(find.text('1234567'), findsNothing);
       });
 
       testWidgets(

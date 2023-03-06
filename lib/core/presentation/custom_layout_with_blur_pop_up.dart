@@ -10,12 +10,16 @@ import 'lora_popup_message/lora_popup_message.dart';
 class CustomLayoutWithBlurPopUp extends StatelessWidget {
   final Widget content;
   final VoidCallback onTapReload;
+  final VoidCallback? onTapCancel;
   final bool showReloadPopUp;
+  final String subTitleAdditionalText;
 
   const CustomLayoutWithBlurPopUp(
       {required this.content,
       required this.onTapReload,
+      this.onTapCancel,
       this.showReloadPopUp = false,
+      required this.subTitleAdditionalText,
       Key? key})
       : super(key: key);
 
@@ -38,15 +42,19 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
             child: Padding(
               padding: AppValues.screenHorizontalPadding,
               child: LoraPopUpMessage(
+                pngImage: 'lora_memoji_10',
                 backgroundColor: AskLoraColors.charcoal,
                 title: 'Unable to get information',
                 titleColor: AskLoraColors.white,
                 subTitle:
-                    'There was an error when trying to get your investment details. Please try reloading the page',
+                    'There was an error when trying to get your $subTitleAdditionalText. Please try reloading the page',
                 subTitleColor: AskLoraColors.white,
                 buttonLabel: 'RELOAD PAGE',
                 buttonPrimaryType: ButtonPrimaryType.solidGreen,
                 onPrimaryButtonTap: onTapReload,
+                secondaryButtonLabel: onTapCancel != null ? 'CANCEL' : null,
+                secondaryButtonColor: AskLoraColors.white,
+                onSecondaryButtonTap: onTapCancel,
               ),
             ),
           ),

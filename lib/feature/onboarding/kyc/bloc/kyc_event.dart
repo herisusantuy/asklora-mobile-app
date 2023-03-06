@@ -7,7 +7,14 @@ abstract class KycEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SubmitKyc extends KycEvent {}
+class SubmitKyc extends KycEvent {
+  final UpgradeAccountRequest upgradeAccountRequest;
+  const SubmitKyc(
+    this.upgradeAccountRequest,
+  );
+  @override
+  List<Object> get props => [upgradeAccountRequest];
+}
 
 class GetSdkToken extends KycEvent {}
 

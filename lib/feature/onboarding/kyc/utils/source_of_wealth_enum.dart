@@ -1,22 +1,23 @@
 import 'package:equatable/equatable.dart';
 
 enum SourceOfWealthType {
-  incomeFromEmployment('Income from Employment'),
-  inheritance('Inheritance/Gift'),
-  interestOrDividendIncome('Interest / Dividend Income'),
-  marketTradingProfits('Market Trading Profits'),
-  disability('Disability / Severance / Unemployment'),
-  pension('Pension / Government Retirement benefit'),
-  property('Property'),
-  allowanceOrSpousalIncome('Allowance / Spousal Income'),
-  other('Other');
+  incomeFromEmployment('Income from Employment', 'INCOME'),
+  inheritance('Inheritance/Gift', 'INHERITANCE'),
+  interestOrDividendIncome('Interest / Dividend Income', 'INTEREST'),
+  marketTradingProfits('Market Trading Profits', 'MARKETPROFIT'),
+  disability('Disability / Severance / Unemployment', 'DISABILITY'),
+  pension('Pension / Government Retirement benefit', 'PENSION'),
+  property('Property', 'PROPERTY'),
+  allowanceOrSpousalIncome('Allowance / Spousal Income', 'ALLOWANCE'),
+  other('Other', 'OTHER');
 
+  final String name;
   final String value;
 
-  const SourceOfWealthType(this.value);
+  const SourceOfWealthType(this.name, this.value);
 }
 
-class SourceOfWealthModel {
+class SourceOfWealthModel extends Equatable {
   final SourceOfWealthType sourceOfWealthType;
   final int amount;
   final String? additionalSourceOfWealth;
@@ -45,13 +46,6 @@ class SourceOfWealthModel {
   }
 
   @override
-  String toString() {
-    return [
-      sourceOfWealthType.name,
-      amount,
-      additionalSourceOfWealth,
-      isActive,
-      DateTime.now().millisecondsSinceEpoch
-    ].toString();
-  }
+  List<Object?> get props =>
+      [sourceOfWealthType, amount, additionalSourceOfWealth, isActive];
 }

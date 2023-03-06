@@ -51,6 +51,7 @@ class LoraBottomSheetContent extends StatelessWidget {
   final String secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
   final VoidCallback onSecondaryButtonTap;
+  final LoraMemojiType loraMemojiType;
 
   const LoraBottomSheetContent(
       {required this.title,
@@ -61,6 +62,7 @@ class LoraBottomSheetContent extends StatelessWidget {
       required this.secondaryButtonLabel,
       required this.onPrimaryButtonTap,
       required this.onSecondaryButtonTap,
+      this.loraMemojiType = LoraMemojiType.lora1,
       Key? key})
       : super(key: key);
 
@@ -120,9 +122,9 @@ class LoraBottomSheetContent extends StatelessWidget {
                 ),
               ),
             ),
-            const Align(
+            Align(
               alignment: Alignment.topCenter,
-              child: LoraMemojiWidget(loraMemojiType: LoraMemojiType.lora1),
+              child: LoraMemojiWidget(loraMemojiType: loraMemojiType),
             ),
           ],
         ),

@@ -1,20 +1,22 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../app/bloc/app_bloc.dart';
+
 part 'sign_in_response.g.dart';
 
 @JsonSerializable()
 class SignInResponse extends Equatable {
   final String? access;
   final String? refresh;
-  final String? userJourney;
+  final UserJourney? userJourney;
   final String? detail;
   final int? statusCode;
 
   const SignInResponse(
       {this.access,
       this.refresh,
-      this.userJourney = 'investment_style',
+      this.userJourney,
       this.detail,
       this.statusCode});
 
@@ -29,7 +31,7 @@ class SignInResponse extends Equatable {
   SignInResponse copyWith({
     String? access,
     String? refresh,
-    String? userJourney,
+    UserJourney? userJourney,
     String? detail,
     int? statusCode,
   }) {
