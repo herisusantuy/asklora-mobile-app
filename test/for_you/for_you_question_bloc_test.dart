@@ -1,5 +1,4 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/core/domain/pair.dart';
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/fixture.dart';
@@ -36,8 +35,8 @@ void main() async {
     });
 
     blocTest<ForYouQuestionBloc, ForYouQuestionState>(
-        'emits `BaseResponse.complete` WHEN '
-        'get investment style answer',
+        'emits `BaseResponse.error` WHEN '
+        'get investment style answer but with empty data',
         build: () {
           when(sharedPreference.readData(sfKeyPpiAccountId))
               .thenAnswer((realInvocation) => Future.value('abc'));
@@ -50,7 +49,8 @@ void main() async {
         expect: () => {
               ForYouQuestionState(response: BaseResponse.loading()),
               ForYouQuestionState(
-                  response: BaseResponse.complete(const Pair(null, [])))
+                  response: BaseResponse.error(
+                      'Please try again! Something went wrong.'))
             });
 
     tearDown(() => {forYouQuestionBloc.close()});

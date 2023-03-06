@@ -6,6 +6,7 @@ import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -50,61 +51,71 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
                 ppiResponseRepository: PpiResponseRepository())),
       ],
       child: MultiBlocListener(
-          listeners: [
-            BlocListener<ForYouQuestionBloc, ForYouQuestionState>(
-              listenWhen: (previous, current) =>
-                  previous.response.state != current.response.state,
-              listener: _investmentStyleQuestionListener,
-            ),
-            BlocListener<UserResponseBloc, UserResponseState>(
-              listenWhen: (previous, current) =>
-                  previous.responseState != current.responseState,
-              listener: _userResponseListener,
-            ),
-          ],
-          child: BlocBuilder<ForYouQuestionBloc, ForYouQuestionState>(
-              buildWhen: (previous, current) =>
-                  previous.response != current.response,
-              builder: (context, investmentStyleQuestionState) {
-                if (investmentStyleQuestionState.response.state ==
-                    ResponseState.success) {
-                  return Padding(
-                    padding: AppValues.screenHorizontalPadding,
-                    child: BlocProvider(
-                      create: (_) =>
-                          NavigationBloc<InvestmentStyleQuestionType>(
-                              investmentStyleQuestionState
-                                          .response.data!.left !=
-                                      null
-                                  ? InvestmentStyleQuestionType.omnisearch
-                                  : InvestmentStyleQuestionType.others),
-                      child: BlocBuilder<
-                          NavigationBloc<InvestmentStyleQuestionType>,
-                          NavigationState<InvestmentStyleQuestionType>>(
-                        builder: (context, navigationState) {
-                          return Column(
-                            children: [
-                              CustomLinearProgressIndicator(
-                                padding: const EdgeInsets.only(
-                                    left: 10, top: 10, bottom: 10, right: 2),
-                                progress: navigationState.page ==
-                                        InvestmentStyleQuestionType.omnisearch
-                                    ? 0.5
-                                    : 1,
+        listeners: [
+          BlocListener<ForYouQuestionBloc, ForYouQuestionState>(
+            listenWhen: (previous, current) =>
+                previous.response.state != current.response.state,
+            listener: _investmentStyleQuestionListener,
+          ),
+          BlocListener<UserResponseBloc, UserResponseState>(
+            listenWhen: (previous, current) =>
+                previous.responseState != current.responseState,
+            listener: _userResponseListener,
+          ),
+        ],
+        child: BlocBuilder<ForYouQuestionBloc, ForYouQuestionState>(
+            buildWhen: (previous, current) =>
+                previous.response != current.response,
+            builder: (context, investmentStyleQuestionState) =>
+                CustomLayoutWithBlurPopUp(
+                    showReloadPopUp:
+                        investmentStyleQuestionState.response.state ==
+                            ResponseState.error,
+                    content: investmentStyleQuestionState.response.state ==
+                            ResponseState.success
+                        ? Padding(
+                            padding: AppValues.screenHorizontalPadding,
+                            child: BlocProvider(
+                              create: (_) =>
+                                  NavigationBloc<InvestmentStyleQuestionType>(
+                                      investmentStyleQuestionState
+                                                  .response.data!.left !=
+                                              null
+                                          ? InvestmentStyleQuestionType
+                                              .omnisearch
+                                          : InvestmentStyleQuestionType.others),
+                              child: BlocBuilder<
+                                  NavigationBloc<InvestmentStyleQuestionType>,
+                                  NavigationState<InvestmentStyleQuestionType>>(
+                                builder: (context, navigationState) {
+                                  return Column(
+                                    children: [
+                                      CustomLinearProgressIndicator(
+                                        padding: const EdgeInsets.only(
+                                            left: 10,
+                                            top: 10,
+                                            bottom: 10,
+                                            right: 2),
+                                        progress: navigationState.page ==
+                                                InvestmentStyleQuestionType
+                                                    .omnisearch
+                                            ? 0.5
+                                            : 1,
+                                      ),
+                                      Expanded(
+                                          child: _pages(navigationState.page,
+                                              investmentStyleQuestionState))
+                                    ],
+                                  );
+                                },
                               ),
-                              Expanded(
-                                  child: _pages(navigationState.page,
-                                      investmentStyleQuestionState))
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              })),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
+                    onTapReload: () =>
+                        context.read<ForYouQuestionBloc>().add(LoadQuestion()),
+                    subTitleAdditionalText: 'Investment Style Question')),
+      ),
     );
   }
 

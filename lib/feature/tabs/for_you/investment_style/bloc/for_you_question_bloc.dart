@@ -35,19 +35,24 @@ class ForYouQuestionBloc
           await _ppiQuestionRepository.fetchInvestmentStyleQuestions(
               await _sharedPreference.readData(sfKeyPpiAccountId) ?? '');
       List<Question> data = fixture.getInvestmentStyleQuestion;
-      Question? omniSearchQuestion;
-      List<Question> otherQuestions = [];
-      for (var element in data) {
-        if (element.questionType == QuestionType.omniSearch.value) {
-          omniSearchQuestion = element;
-        } else {
-          otherQuestions.add(element);
+      if (data.isNotEmpty) {
+        Question? omniSearchQuestion;
+        List<Question> otherQuestions = [];
+        for (var element in data) {
+          if (element.questionType == QuestionType.omniSearch.value) {
+            omniSearchQuestion = element;
+          } else {
+            otherQuestions.add(element);
+          }
         }
+        emit(state.copyWith(
+            response: BaseResponse.complete(
+                Pair(omniSearchQuestion, otherQuestions))));
+      } else {
+        emit(state.copyWith(
+            response:
+                BaseResponse.error('Please try again! Something went wrong.')));
       }
-
-      emit(state.copyWith(
-          response:
-              BaseResponse.complete(Pair(omniSearchQuestion, otherQuestions))));
     } catch (e) {
       emit(state.copyWith(
           response:
