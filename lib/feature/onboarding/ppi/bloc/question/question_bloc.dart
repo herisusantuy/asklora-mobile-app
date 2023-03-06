@@ -79,7 +79,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
         fixture = await _questionCollectionRepository
             .fetchPersonalAndPrivacyQuestions();
       } else {
-        final accountId = await _sharedPreference.readData(sfKeyTempName);
+        final accountId = await _sharedPreference.readData(sfKeyPpiAccountId);
 
         fixture = await _questionCollectionRepository
             .fetchInvestmentStyleQuestions(accountId ?? '');

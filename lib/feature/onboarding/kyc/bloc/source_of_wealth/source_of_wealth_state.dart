@@ -25,14 +25,11 @@ class SourceOfWealthState extends Equatable {
   }
 
   @override
-  List<Object?> get props {
-    return [
-      sourceOfWealthAnswers,
-      totalAmount,
-      errorMessage,
-      DateTime.now().millisecondsSinceEpoch
-    ];
-  }
+  List<Object?> get props => [
+        sourceOfWealthAnswers,
+        totalAmount,
+        errorMessage,
+      ];
 
   bool enableNextButton() {
     return totalAmount > 0;
