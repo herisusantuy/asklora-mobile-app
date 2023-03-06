@@ -9,6 +9,8 @@ import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
+import '../../../../bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../../../tabs/tabs_screen.dart';
 import '../../../kyc/presentation/kyc_screen.dart';
 import '../../bloc/question/question_bloc.dart';
@@ -37,7 +39,18 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
         }
         switch (state.responseState) {
           case ResponseState.success:
-            context.read<AppBloc>().add(const SaveUserJourney(UserJourney.kyc));
+            UserJourney.onAlreadyPassed(
+                context: context,
+                target: UserJourney.investmentStyle,
+                onTrueCallback: () {
+                  BotRecommendationScreen.openAndRemoveUntil(
+                      context, BotStockDoScreen.route);
+                },
+                onFalseCallback: () {
+                  context
+                      .read<AppBloc>()
+                      .add(const SaveUserJourney(UserJourney.kyc));
+                });
             break;
           case ResponseState.error:
             context
