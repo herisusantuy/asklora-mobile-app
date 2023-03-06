@@ -7,6 +7,6 @@ abstract class ForYouEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetInvestmentStyleAnswer extends ForYouEvent {}
+class GetInvestmentStyleState extends ForYouEvent {}
 
-class SaveInvestmentStyleAnswer extends ForYouEvent {}
+class SaveInvestmentStyleState extends ForYouEvent {}
