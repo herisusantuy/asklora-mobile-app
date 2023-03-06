@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../bot_stock/presentation/widgets/bot_bottom_sheet_widget.dart';
+import '../../../../core/presentation/lora_bottom_sheet.dart';
 
 class DemonstrationBottomSheet {
   static show(BuildContext context,
@@ -26,7 +26,7 @@ class DemonstrationBottomSheet {
                 }
                 return false;
               },
-              child: BotBottomSheetWidget(
+              child: LoraBottomSheetContent(
                 title: title,
                 subTitle: subTitle,
                 primaryButtonLabel: primaryButtonLabel,

@@ -11,7 +11,7 @@ import '../../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../learning_bot_stock_screen.dart';
 import '../../bloc/demonstration_bot_bloc.dart';
-import '../../utils/demonstration_bot_utils.dart';
+import '../../utils/demonstration_bottom_sheet.dart';
 import 'widgets/demonstration_bot_detail_content.dart';
 
 part 'widgets/demonstration_bot_chart.dart';
