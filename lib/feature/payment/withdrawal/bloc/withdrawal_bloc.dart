@@ -27,7 +27,7 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
           withdrawalRequest: WithdrawalRequest(amount: event.amount));
       emit(state.copyWith(response: response));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }

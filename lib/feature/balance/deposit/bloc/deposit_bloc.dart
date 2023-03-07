@@ -66,7 +66,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
         emit(state.copyWith(response: data));
       }
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 

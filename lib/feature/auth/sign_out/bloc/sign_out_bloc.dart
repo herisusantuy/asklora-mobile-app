@@ -49,7 +49,7 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
             response: BaseResponse.error(message: 'Not able to sign-out!')));
       }
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }

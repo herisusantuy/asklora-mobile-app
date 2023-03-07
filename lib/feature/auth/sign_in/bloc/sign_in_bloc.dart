@@ -80,7 +80,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(
           response: BaseResponse.error(message: 'User email is not verified')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 
@@ -111,7 +111,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(
           state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }

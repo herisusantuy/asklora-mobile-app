@@ -61,7 +61,7 @@ class BotStockRepository {
           uiData: List<UiData>.from(
               decodedJson['ui_data'].map((model) => UiData.fromJson(model)))));
     } catch (e) {
-      return BaseResponse.error(message: e.toString());
+      return BaseResponse.error();
     }
   }
 

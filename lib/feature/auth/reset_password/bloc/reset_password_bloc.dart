@@ -80,7 +80,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           response:
               BaseResponse.error(message: 'Token is invalid or expired.')));
     } catch (e) {
-      state.copyWith(response: BaseResponse.error(message: e.toString()));
+      state.copyWith(response: BaseResponse.error());
     }
   }
 }

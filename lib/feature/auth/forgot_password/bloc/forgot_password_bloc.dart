@@ -66,7 +66,7 @@ class ForgotPasswordBloc
           response: BaseResponse.error(
               message: 'User does not exist with the given email.')));
     } catch (e) {
-      state.copyWith(response: BaseResponse.error(message: e.toString()));
+      state.copyWith(response: BaseResponse.error());
     }
   }
 

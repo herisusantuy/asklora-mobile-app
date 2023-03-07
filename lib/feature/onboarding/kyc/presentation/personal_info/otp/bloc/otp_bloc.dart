@@ -50,7 +50,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
           response: BaseResponse.error(
               message: 'User does not exist with the given email')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 
@@ -76,7 +76,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       emit(
           state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 

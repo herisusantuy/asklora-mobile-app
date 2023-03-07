@@ -81,7 +81,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           response:
               BaseResponse.error(message: 'This password is too common.')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }
