@@ -43,7 +43,7 @@ class KycRejectedScreen extends StatelessWidget {
                       CustomTextNew(
                         rejectedReason,
                         key: const Key('rejected_reason'),
-                        style: AskLoraTextStyles.body1
+                        style: AskLoraTextStyles.subtitle1
                             .copyWith(color: AskLoraColors.charcoal),
                         textAlign: TextAlign.center,
                       ),
