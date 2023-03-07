@@ -6,7 +6,6 @@ import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
@@ -157,9 +156,6 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
         context
             .read<NavigationBloc<ForYouPage>>()
             .add(const PageChanged(ForYouPage.botRecommendation));
-      } else if (state.ppiResponseState == PpiResponseState.dispatchResponse &&
-          state.responseState == ResponseState.error) {
-        CustomInAppNotification.show(context, state.message);
       }
     }
   }

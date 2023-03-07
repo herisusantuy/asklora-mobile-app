@@ -59,3 +59,10 @@ class UpdatePpiUserResponse extends UserResponseEvent {
 
   const UpdatePpiUserResponse(this.ppiUserResponse);
 }
+
+class ResetState extends UserResponseEvent {
+  @override
+  List<Object?> get props => [];
+
+  const ResetState();
+}

@@ -33,10 +33,15 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     on<SaveUserResponse>(_onUserResponseSave);
     on<SaveOmniSearchResponse>(_onSaveOmniSearchResponse);
     on<CalculateScore>(_onCalculateScore);
+    on<ResetState>(_onResetState);
   }
 
   final PpiResponseRepository _ppiResponseRepository;
   final SharedPreference _sharedPreference;
+
+  void _onResetState(ResetState event, Emitter<UserResponseState> emit) async {
+    emit(UserResponseState(userResponse: List.empty(growable: true)));
+  }
 
   void _onSendAnswer(
       SendResponse event, Emitter<UserResponseState> emit) async {

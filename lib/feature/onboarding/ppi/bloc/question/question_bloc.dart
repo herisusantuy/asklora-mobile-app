@@ -47,6 +47,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
         _onCurrentPersonalisationPageDecremented);
     on<CurrentInvestmentStylePageDecremented>(
         _onCurrentInvestmentStylePageDecremented);
+    on<ResetInvestmentStylePage>(_onResetInvestmentStylePage);
   }
 
   final PpiQuestionRepository _questionCollectionRepository;
@@ -145,5 +146,11 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
       Emitter<QuestionState> emit) async {
     emit(state.copyWith(
         currentInvestmentStylePages: state.currentInvestmentStylePages - 1));
+  }
+
+  void _onResetInvestmentStylePage(
+      ResetInvestmentStylePage event, Emitter<QuestionState> emit) async {
+    emit(state.copyWith(
+        currentInvestmentStylePages: 0, investmentStyleQuestionIndex: 0));
   }
 }

@@ -12,14 +12,20 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
   final VoidCallback onTapReload;
   final VoidCallback? onTapCancel;
   final bool showReloadPopUp;
-  final String subTitleAdditionalText;
+  final String? subTitleAdditionalText;
+  final String? title;
+  final String? subTitle;
+  final String? buttonLabel;
 
   const CustomLayoutWithBlurPopUp(
       {required this.content,
       required this.onTapReload,
       this.onTapCancel,
       this.showReloadPopUp = false,
-      required this.subTitleAdditionalText,
+      this.subTitleAdditionalText,
+      this.title,
+      this.subTitle,
+      this.buttonLabel,
       Key? key})
       : super(key: key);
 
@@ -44,12 +50,12 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
               child: LoraPopUpMessage(
                 pngImage: 'lora_memoji_10',
                 backgroundColor: AskLoraColors.charcoal,
-                title: 'Unable to get information',
+                title: title ?? 'Unable to get information',
                 titleColor: AskLoraColors.white,
-                subTitle:
+                subTitle: subTitle ??
                     'There was an error when trying to get your $subTitleAdditionalText. Please try reloading the page',
                 subTitleColor: AskLoraColors.white,
-                buttonLabel: 'RELOAD PAGE',
+                buttonLabel: buttonLabel ?? 'RELOAD PAGE',
                 buttonPrimaryType: ButtonPrimaryType.solidGreen,
                 onPrimaryButtonTap: onTapReload,
                 secondaryButtonLabel: onTapCancel != null ? 'CANCEL' : null,

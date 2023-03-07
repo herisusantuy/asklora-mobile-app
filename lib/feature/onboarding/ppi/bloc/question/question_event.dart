@@ -84,3 +84,10 @@ class CurrentInvestmentStylePageDecremented extends QuestionEvent {
   @override
   List<Object> get props => [];
 }
+
+class ResetInvestmentStylePage extends QuestionEvent {
+  const ResetInvestmentStylePage() : super();
+
+  @override
+  List<Object> get props => [];
+}
