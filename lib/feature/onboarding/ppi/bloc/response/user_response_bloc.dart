@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collection/collection.dart';
 
@@ -74,10 +73,9 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     emit(state.copyWith(
         ppiResponseState: PpiResponseState.initAddResponse,
         responseState: ResponseState.loading));
-
-    state.cachedDefaultChoices = List.from(event.cachedDefaultChoices);
-    state.cachedSelectedChoices = List.from(event.cachedSelectedChoices);
     emit(state.copyWith(
+        cachedDefaultChoices: List.from(event.cachedDefaultChoices),
+        cachedSelectedChoices: List.from(event.cachedSelectedChoices),
         ppiResponseState: PpiResponseState.finishAddResponse,
         responseState: ResponseState.success));
   }
@@ -120,7 +118,6 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       await _ppiResponseRepository.addBulkAnswer(requests);
       var userSnapShot = await _ppiResponseRepository.getUserSnapShot(tempId);
-
       emit(state.copyWith(
         responseState: ResponseState.success,
         ppiResponseState: PpiResponseState.dispatchResponse,
@@ -128,9 +125,9 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       ));
     } catch (e) {
       emit(state.copyWith(
-        responseState: ResponseState.error,
-        ppiResponseState: PpiResponseState.dispatchResponse,
-      ));
+          responseState: ResponseState.error,
+          ppiResponseState: PpiResponseState.dispatchResponse,
+          message: 'Something went wrong! Please try again.'));
     }
   }
 

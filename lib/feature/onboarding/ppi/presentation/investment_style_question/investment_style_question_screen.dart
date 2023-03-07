@@ -115,7 +115,7 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
         } else if (UserJourney.compareUserJourney(
             context: context, target: UserJourney.freeBotStock)) {
           ///user comes from for you screen
-          context.read<ForYouBloc>().add(SaveInvestmentStyleAnswer());
+          context.read<ForYouBloc>().add(SaveInvestmentStyleState());
           context
               .read<NavigationBloc<ForYouPage>>()
               .add(const PageChanged(ForYouPage.botRecommendation));

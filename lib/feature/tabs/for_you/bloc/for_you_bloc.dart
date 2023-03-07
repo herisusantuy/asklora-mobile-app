@@ -11,21 +11,21 @@ class ForYouBloc extends Bloc<ForYouEvent, ForYouState> {
   ForYouBloc({required ForYouRepository forYouRepository})
       : _forYouRepository = forYouRepository,
         super(const ForYouState()) {
-    on<GetInvestmentStyleAnswer>(_onGetInvestmentStyleAnswer);
-    on<SaveInvestmentStyleAnswer>(_onSaveInvestmentStyleAnswer);
+    on<GetInvestmentStyleState>(_onGetInvestmentStyleAnswer);
+    on<SaveInvestmentStyleState>(_onSaveInvestmentStyleState);
   }
 
   final ForYouRepository _forYouRepository;
 
   _onGetInvestmentStyleAnswer(
-      GetInvestmentStyleAnswer event, Emitter<ForYouState> emit) async {
+      GetInvestmentStyleState event, Emitter<ForYouState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     var data = await _forYouRepository.getInvestmentStyleState();
     emit(state.copyWith(response: data));
   }
 
-  _onSaveInvestmentStyleAnswer(
-      SaveInvestmentStyleAnswer event, Emitter<ForYouState> emit) async {
+  _onSaveInvestmentStyleState(
+      SaveInvestmentStyleState event, Emitter<ForYouState> emit) async {
     await _forYouRepository.saveInvestmentStyleState();
   }
 }
