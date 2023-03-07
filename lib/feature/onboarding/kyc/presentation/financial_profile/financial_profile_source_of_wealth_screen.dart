@@ -120,7 +120,8 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
               primaryButtonOnClick: () {
                 if (state.totalAmount == 100) {
                   context.read<NavigationBloc<KycPageStep>>().add(
-                      const PageChanged(KycPageStep.financialProfileSummary));
+                      const PageChanged(
+                          KycPageStep.disclosureAffiliationAssociates));
                 } else {
                   CustomInAppNotification.show(
                       context, 'Your sources of wealth must add up to 100%');

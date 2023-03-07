@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
+import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -35,15 +36,15 @@ class KycRejectedScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      const LoraMemojiHeader(
-                          text: 'Sorry ! you’re not eligible for Asklora'),
-                      const SizedBox(
-                        height: 20,
+                      const CustomStatusWidget(
+                        title: 'Sorry ! you’re not eligible for Asklora',
+                        statusType: StatusType.failed,
                       ),
+                      const SizedBox(height: 30),
                       CustomTextNew(
                         rejectedReason,
                         key: const Key('rejected_reason'),
-                        style: AskLoraTextStyles.body1
+                        style: AskLoraTextStyles.subtitle1
                             .copyWith(color: AskLoraColors.charcoal),
                         textAlign: TextAlign.center,
                       ),
