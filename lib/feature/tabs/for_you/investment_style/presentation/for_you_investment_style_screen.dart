@@ -140,17 +140,17 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
   void _investmentStyleQuestionListener(
       BuildContext context, ForYouQuestionState state) {
     if (state.response.state == ResponseState.loading) {
-      CustomLoadingOverlay.show(context);
+      CustomLoadingOverlay.of(context).show();
     } else {
-      CustomLoadingOverlay.dismiss();
+      CustomLoadingOverlay.of(context).dismiss();
     }
   }
 
   void _userResponseListener(BuildContext context, UserResponseState state) {
     if (state.responseState == ResponseState.loading) {
-      CustomLoadingOverlay.show(context);
+      CustomLoadingOverlay.of(context).show();
     } else {
-      CustomLoadingOverlay.dismiss();
+      CustomLoadingOverlay.of(context).dismiss();
       if (state.ppiResponseState == PpiResponseState.dispatchResponse &&
           state.responseState == ResponseState.success) {
         context.read<ForYouBloc>().add(SaveInvestmentStyleState());
