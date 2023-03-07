@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../core/domain/base_response.dart';
 import '../../../core/domain/token/repository/token_repository.dart';
@@ -91,7 +92,8 @@ class SettingsScreen extends StatelessWidget {
               _settingsMenu(title: 'Transaction History', onTap: () {}),
               _settingsMenu(title: 'Get Help', onTap: () {}),
               _settingsMenu(title: 'About Asklora', onTap: () {}),
-              _signOutButton(context)
+              _signOutButton(context),
+              _getAppVersion()
             ],
           ),
         ),
@@ -191,6 +193,27 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
         ),
+      );
+
+  Widget _getAppVersion() => FutureBuilder<PackageInfo>(
+        future: PackageInfo.fromPlatform(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.done:
+              return Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 23.5),
+                  child: CustomTextNew(
+                    'Version: ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
+                    style: AskLoraTextStyles.body1,
+                  ),
+                ),
+              );
+            default:
+              return const SizedBox();
+          }
+        },
       );
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);

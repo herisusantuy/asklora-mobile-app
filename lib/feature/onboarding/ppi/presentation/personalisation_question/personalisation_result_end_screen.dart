@@ -77,18 +77,23 @@ class PersonalisationResultEndScreen extends StatelessWidget {
 
   String _getMessage(Scores? scores) {
     const high = 9;
+    String message = '';
     if (scores == null) {
-      return '';
+      return message;
     }
     if (scores.openness >= high && scores.neuroticism >= high) {
-      return 'You are pretty open-minded to new things!\nLet’s be a little bit aggressive!';
+      message =
+          'You are pretty open-minded to new things!\nLet’s be a little bit aggressive!';
     } else if (scores.openness >= high && scores.neuroticism < high) {
-      return 'You are one of those people who’s down for trying anything new!\nLet’s be more aggressive!';
+      message =
+          'You are one of those people who’s down for trying anything new!\nLet’s be more aggressive!';
     } else if (scores.openness < high && scores.neuroticism >= high) {
-      return 'You prefer a stable and safe journey!\nLet’s aim to make small wins in a steady manner!';
+      message =
+          'You prefer a stable and safe journey!\nLet’s aim to make small wins in a steady manner!';
     } else if (scores.openness < high && scores.neuroticism < high) {
-      return 'You prefer a stable and safe journey!\nLet’s try a more balanced strategy!';
+      message =
+          'You prefer a stable and safe journey!\nLet’s try a more balanced strategy!';
     }
-    return '';
+    return message;
   }
 }

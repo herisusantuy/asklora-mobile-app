@@ -8,6 +8,8 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../core/presentation/custom_overlay_widget.dart';
+import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
@@ -89,6 +91,11 @@ class KycSummaryScreen extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
         listener: (context, state) {
+          if (state.response.state == ResponseState.loading) {
+            CustomLoadingOverlay.show(context);
+          } else {
+            CustomLoadingOverlay.dismiss();
+          }
           switch (state.response.state) {
             case ResponseState.error:
               CustomInAppNotification.show(context, state.response.message);
