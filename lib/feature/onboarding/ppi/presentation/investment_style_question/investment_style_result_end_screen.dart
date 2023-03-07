@@ -59,8 +59,7 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
             context
                 .read<NavigationBloc<QuestionPageStep>>()
                 .add(const PagePop());
-            CustomInAppNotification.show(
-                context, 'Error while posting the user request.');
+            CustomInAppNotification.show(context, BaseResponse.errorMessage);
             break;
           default:
         }

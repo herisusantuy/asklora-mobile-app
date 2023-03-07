@@ -70,16 +70,17 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           response:
               BaseResponse.complete(data.copyWith(userJourney: userJourney))));
     } on UnauthorizedException {
-      emit(state.copyWith(response: BaseResponse.error('Invalid Password')));
+      emit(state.copyWith(
+          response: BaseResponse.error(message: 'Invalid Password')));
     } on NotFoundException {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('User does not exist with the given email')));
+          response: BaseResponse.error(
+              message: 'User does not exist with the given email')));
     } on NotAcceptableException {
       emit(state.copyWith(
-          response: BaseResponse.error('User email is not verified')));
+          response: BaseResponse.error(message: 'User email is not verified')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 
@@ -97,18 +98,20 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           response:
               BaseResponse.complete(data.copyWith(userJourney: userJourney))));
     } on UnauthorizedException {
-      emit(state.copyWith(response: BaseResponse.error('Invalid Password')));
+      emit(state.copyWith(
+          response: BaseResponse.error(message: 'Invalid Password')));
     } on NotFoundException {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('User does not exist with the given email')));
+          response: BaseResponse.error(
+              message: 'User does not exist with the given email')));
     } on NotAcceptableException {
       emit(state.copyWith(
-          response: BaseResponse.error('User email is not verified')));
+          response: BaseResponse.error(message: 'User email is not verified')));
     } on BadRequestException {
-      emit(state.copyWith(response: BaseResponse.error('Invalid OTP')));
+      emit(
+          state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }
