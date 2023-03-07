@@ -11,6 +11,7 @@ class UserResponseState extends Equatable {
   final ResponseState responseState;
   final PpiResponseState ppiResponseState;
   final SnapShot? snapShot;
+  final String message;
 
   /// Left => question id
   /// middle => Whole question object
@@ -19,16 +20,17 @@ class UserResponseState extends Equatable {
   /// for example (descriptive) "quid03, {}, my name"
   final List<Triplet<String, Question, String>>? userResponse;
 
-  List<String> cachedSelectedChoices;
-  List<String> cachedDefaultChoices;
+  final List<String> cachedSelectedChoices;
+  final List<String> cachedDefaultChoices;
 
-  UserResponseState({
+  const UserResponseState({
     this.responseState = ResponseState.unknown,
     this.ppiResponseState = PpiResponseState.finishAddResponse,
     this.userResponse,
     this.cachedSelectedChoices = const [],
     this.cachedDefaultChoices = const [],
     this.snapShot,
+    this.message = '',
   });
 
   UserResponseState copyWith({
@@ -38,6 +40,7 @@ class UserResponseState extends Equatable {
     List<String>? cachedSelectedChoices,
     List<String>? cachedDefaultChoices,
     SnapShot? snapShot,
+    String? message,
   }) {
     return UserResponseState(
       responseState: responseState ?? this.responseState,
@@ -47,6 +50,7 @@ class UserResponseState extends Equatable {
           cachedSelectedChoices ?? this.cachedSelectedChoices,
       cachedDefaultChoices: cachedDefaultChoices ?? this.cachedDefaultChoices,
       snapShot: snapShot ?? this.snapShot,
+      message: message ?? this.message,
     );
   }
 
@@ -55,6 +59,7 @@ class UserResponseState extends Equatable {
         responseState,
         cachedSelectedChoices,
         cachedDefaultChoices,
-        ppiResponseState
+        ppiResponseState,
+        message,
       ];
 }
