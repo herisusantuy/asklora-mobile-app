@@ -28,7 +28,7 @@ class SignAgreementSummaryContent extends StatelessWidget {
             subTitle: '(Agreed)',
           ),
           _spaceHeight,
-          const SummaryTextInfo(title: 'US Tax Form', subTitle: '(Agreed)'),
+          const SummaryTextInfo(title: 'W-8BEN Form', subTitle: '(Agreed)'),
         ],
       );
 }
