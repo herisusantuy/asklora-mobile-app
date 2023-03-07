@@ -122,13 +122,13 @@ class BadgeGeometry {
   Offset _calcPathOffset(Offset offset, double w, double h) {
     switch (alignment) {
       case BadgeAlignment.bottomLeft:
-        return Offset(offset.dx, offset.dy + h - this.height);
+        return Offset(offset.dx, offset.dy + h - height);
       case BadgeAlignment.bottomRight:
-        return Offset(offset.dx + w - this.width, offset.dy + h);
+        return Offset(offset.dx + w - width, offset.dy + h);
       case BadgeAlignment.topLeft:
         return Offset(offset.dx, offset.dy + height);
       default:
-        return Offset(offset.dx + w - this.width, offset.dy);
+        return Offset(offset.dx + w - width, offset.dy);
     }
   }
 

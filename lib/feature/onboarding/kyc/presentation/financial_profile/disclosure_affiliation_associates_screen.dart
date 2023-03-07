@@ -24,7 +24,7 @@ class DisclosureAffiliationAssociatesScreen extends StatelessWidget {
       content: Column(
         children: const [
           FinancialQuestion(
-            'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
+            'Are you and/or your immediate family affiliated with any director, shareholder,  or employee of LORA Advisors Limited or its associates?',
           ),
         ],
       ),
@@ -45,15 +45,14 @@ class DisclosureAffiliationAssociatesScreen extends StatelessWidget {
                       .add(const AffiliatedAssociatesChanged(true));
                   context.read<NavigationBloc<KycPageStep>>().add(
                       const PageChanged(
-                          KycPageStep.disclosureAffiliationAssociatesInput));
+                          KycPageStep.disclosureAffiliationPersonInput));
                 },
                 onAnswerNo: () {
                   context
                       .read<DisclosureAffiliationBloc>()
                       .add(const AffiliatedAssociatesChanged(false));
                   context.read<NavigationBloc<KycPageStep>>().add(
-                      const PageChanged(
-                          KycPageStep.disclosureAffiliationCommissions));
+                      const PageChanged(KycPageStep.financialProfileSummary));
                 },
                 onSaveForLater: () => CarouselScreen.open(context),
               )),

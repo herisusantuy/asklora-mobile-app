@@ -87,7 +87,7 @@ class MockData {
       ));
       return BaseResponse.complete(const WithdrawalResponse('Success'));
     } else {
-      return BaseResponse.error('Insufficient Balance');
+      return BaseResponse.error(message: 'Insufficient Balance');
     }
   }
 
@@ -128,7 +128,7 @@ class MockData {
               (botRecommendationModel.freeBot ? tradeBotStockAmount : 0)));
       return BaseResponse.complete(true);
     } else {
-      return BaseResponse.error('Insufficient balance');
+      return BaseResponse.error(message: 'Insufficient balance');
     }
   }
 

@@ -29,8 +29,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
           await _accountRepository.upgradeAccount(event.upgradeAccountRequest);
       emit(state.copyWith(response: data));
     } catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(BaseResponse.errorMessage)));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 

@@ -104,15 +104,14 @@ void main() async {
         quantity: '10');
     BaseResponse<OrderResponse> successResponse =
         BaseResponse.complete(OrderResponse());
-    BaseResponse errorResponse =
-        BaseResponse.error('Something went wrong, please try again later');
+    BaseResponse errorResponse = BaseResponse.error();
 
     blocTest<LimitOrderBloc, LimitOrderState>(
         'emits `response` = BaseResponse.complete WHEN '
         'failed submit buy limit order',
         build: () {
           when(mockOrdersRepository.submitOrder(orderRequest: buyLimitRequest))
-              .thenThrow('Something went wrong, please try again later');
+              .thenThrow(BaseResponse.errorMessage);
           return limitBloc;
         },
         act: (bloc) async {
@@ -136,7 +135,7 @@ void main() async {
         'failed submit sell limit order',
         build: () {
           when(mockOrdersRepository.submitOrder(orderRequest: sellLimitRequest))
-              .thenThrow('Something went wrong, please try again later');
+              .thenThrow(BaseResponse.errorMessage);
           return limitBloc;
         },
         act: (bloc) async {

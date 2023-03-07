@@ -44,10 +44,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       });
     } on NotFoundException {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('User does not exist with the given email')));
+          response: BaseResponse.error(
+              message: 'User does not exist with the given email')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }
   }
 
@@ -69,10 +69,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       });
     } on NotFoundException {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('User does not exist with the given email')));
+          response: BaseResponse.error(
+              message: 'User does not exist with the given email')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }
   }
 
@@ -95,9 +95,10 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       data.copyWith(message: 'Verify OTP Success');
       emit(state.copyWith(response: data));
     } on UnauthorizedException {
-      emit(state.copyWith(response: BaseResponse.error('Invalid OTP')));
+      emit(
+          state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error(message: e.toString())));
     }
   }
 

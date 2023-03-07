@@ -47,7 +47,7 @@ class EmailActivationBloc
               message: 'Email verification link has been sent successfully!',
               null)));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 

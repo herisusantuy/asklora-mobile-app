@@ -32,9 +32,9 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
       child: BlocConsumer<UserResponseBloc, UserResponseState>(
           listener: (context, state) {
         if (state.responseState == ResponseState.loading) {
-          CustomLoadingOverlay.show(context);
+          CustomLoadingOverlay.of(context).show();
         } else {
-          CustomLoadingOverlay.dismiss();
+          CustomLoadingOverlay.of(context).dismiss();
         }
         switch (state.responseState) {
           case ResponseState.success:

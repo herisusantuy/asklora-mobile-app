@@ -11,6 +11,7 @@ import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
@@ -42,7 +43,9 @@ class SignInSuccessScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => SignOutBloc(
               tokenRepository: TokenRepository(),
-              signOutRepository: SignOutRepository()),
+              signOutRepository: SignOutRepository(),
+              sharedPreference: SharedPreference(),
+              secureStorage: SecureStorage()),
         ),
       ],
       child: Scaffold(

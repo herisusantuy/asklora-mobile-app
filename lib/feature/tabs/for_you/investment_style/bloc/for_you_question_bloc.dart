@@ -49,14 +49,10 @@ class ForYouQuestionBloc
             response: BaseResponse.complete(
                 Pair(omniSearchQuestion, otherQuestions))));
       } else {
-        emit(state.copyWith(
-            response:
-                BaseResponse.error('Please try again! Something went wrong.')));
+        emit(state.copyWith(response: BaseResponse.error()));
       }
     } catch (e) {
-      emit(state.copyWith(
-          response:
-              BaseResponse.error('Please try again! Something went wrong.')));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }

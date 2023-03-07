@@ -35,8 +35,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
           await _portfolioRepository.fetchBotPortfolio(event.botStockFilter);
       emit(state.copyWith(botPortfolioResponse: data));
     } catch (e) {
-      emit(state.copyWith(
-          botPortfolioResponse: BaseResponse.error('Something went wrong')));
+      emit(state.copyWith(botPortfolioResponse: BaseResponse.error()));
     }
   }
 
@@ -46,8 +45,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       var data = await _portfolioRepository.fetchPortfolio();
       emit(state.copyWith(portfolioResponse: data));
     } catch (e) {
-      emit(state.copyWith(
-          portfolioResponse: BaseResponse.error('Something went wrong')));
+      emit(state.copyWith(portfolioResponse: BaseResponse.error()));
     }
   }
 
@@ -59,9 +57,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
           botPortfolioDetailResponse: await _portfolioRepository
               .fetchBotPortfolioDetail(event.ticker, event.botId)));
     } catch (e) {
-      emit(state.copyWith(
-          botPortfolioDetailResponse:
-              BaseResponse.error('Something went wrong')));
+      emit(state.copyWith(botPortfolioDetailResponse: BaseResponse.error()));
     }
   }
 
@@ -82,8 +78,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
           endBotStockResponse:
               await _portfolioRepository.endBotStock(event.portfolioBotModel)));
     } catch (e) {
-      emit(state.copyWith(
-          endBotStockResponse: BaseResponse.error('Something went wrong')));
+      emit(state.copyWith(endBotStockResponse: BaseResponse.error()));
     }
   }
 
@@ -95,9 +90,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
           rolloverBotStockResponse: await _portfolioRepository
               .rolloverBotStock(event.portfolioBotModel)));
     } catch (e) {
-      emit(state.copyWith(
-          rolloverBotStockResponse:
-              BaseResponse.error('Something went wrong')));
+      emit(state.copyWith(rolloverBotStockResponse: BaseResponse.error()));
     }
   }
 }

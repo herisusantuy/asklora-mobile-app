@@ -32,22 +32,20 @@ class DisclosureAffiliationPersonInputScreen extends StatelessWidget {
           .add(AffiliatePersonLastNameChanged(value)),
       bottomButton: _bottomButton);
 
-  Widget get _bottomButton =>
-      BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-          buildWhen: (previous, current) =>
-              previous.affiliatedPersonFirstName !=
-                  current.affiliatedPersonFirstName ||
-              previous.affiliatedPersonLastName !=
-                  current.affiliatedPersonLastName,
-          builder: (context, state) => ButtonPair(
-                disablePrimaryButton: state.affiliatedPersonFirstName.isEmpty ||
-                    state.affiliatedPersonLastName.isEmpty,
-                primaryButtonOnClick: () => context
-                    .read<NavigationBloc<KycPageStep>>()
-                    .add(const PageChanged(
-                        KycPageStep.disclosureAffiliationAssociates)),
-                secondaryButtonOnClick: () => CarouselScreen.open(context),
-                primaryButtonLabel: 'NEXT',
-                secondaryButtonLabel: 'SAVE FOR LATER',
-              ));
+  Widget get _bottomButton => BlocBuilder<DisclosureAffiliationBloc,
+          DisclosureAffiliationState>(
+      buildWhen: (previous, current) =>
+          previous.affiliatedPersonFirstName !=
+              current.affiliatedPersonFirstName ||
+          previous.affiliatedPersonLastName != current.affiliatedPersonLastName,
+      builder: (context, state) => ButtonPair(
+            disablePrimaryButton: state.affiliatedPersonFirstName.isEmpty ||
+                state.affiliatedPersonLastName.isEmpty,
+            primaryButtonOnClick: () => context
+                .read<NavigationBloc<KycPageStep>>()
+                .add(const PageChanged(KycPageStep.financialProfileSummary)),
+            secondaryButtonOnClick: () => CarouselScreen.open(context),
+            primaryButtonLabel: 'NEXT',
+            secondaryButtonLabel: 'SAVE FOR LATER',
+          ));
 }
