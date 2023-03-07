@@ -10,13 +10,13 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
-import '../../../bot_stock/presentation/widgets/bot_bottom_sheet_widget.dart';
 import '../../../bot_stock/repository/bot_stock_repository.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../demonstration_question/widgets/demonstration_tooltip_guide.dart';
 import '../../learning_bot_stock_screen.dart';
 import '../bloc/demonstration_bot_bloc.dart';
+import '../utils/demonstration_bottom_sheet.dart';
 
 part 'widgets/demonstration_bot_list.dart';
 
@@ -49,7 +49,19 @@ class DemonstrationBotScreen extends StatelessWidget {
               current.botDemonstrationResponse.state,
           listener: (context, state) {
             if (state.botDemonstrationResponse.state == ResponseState.success) {
-              _showBottomSheet(context);
+              DemonstrationBottomSheet.show(
+                context,
+                title:
+                    "Let's see the recommendations based on your Investment style.",
+                primaryButtonLabel: 'VIEW RECOMMENDATIONS',
+                secondaryButtonLabel: 'CONTINUE LATER',
+                onPrimaryButtonTap: () {
+                  tooltipController.showTooltip();
+                  Navigator.pop(context);
+                },
+                onSecondaryButtonTap: () =>
+                    TabsScreen.openAndRemoveAllRoute(context),
+              );
             }
           },
           child: Padding(
@@ -128,35 +140,6 @@ class DemonstrationBotScreen extends StatelessWidget {
         subTitle:
             'Investment preference included Investment Style, Privacy Questions and Personalisation Questions.',
       );
-
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-        isDismissible: false,
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        context: (context),
-        builder: (_) => WillPopScope(
-              onWillPop: () async {
-                Navigator.pop(context);
-                context
-                    .read<NavigationBloc<LearningBotStockPageStep>>()
-                    .add(const PagePop());
-                return false;
-              },
-              child: BotBottomSheetWidget(
-                title:
-                    "Let's see the recommendations based on your Investment style.",
-                primaryButtonLabel: 'VIEW RECOMMENDATIONS',
-                secondaryButtonLabel: 'CONTINUE LATER',
-                onPrimaryButtonTap: () {
-                  tooltipController.showTooltip();
-                  Navigator.pop(context);
-                },
-                onSecondaryButtonTap: () =>
-                    TabsScreen.openAndRemoveAllRoute(context),
-              ),
-            ));
-  }
 
   static void open(BuildContext context) => Navigator.pushNamed(
         context,

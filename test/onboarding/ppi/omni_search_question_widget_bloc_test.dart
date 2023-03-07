@@ -38,6 +38,9 @@ void main() async {
                   addKeywordError: false, keywords: keywords),
               const OmniSearchQuestionWidgetState(
                   keywords: [...keywords, 'Something']),
+              const OmniSearchQuestionWidgetState(
+                  keywords: [...keywords, 'Something'],
+                  keywordAnswers: ['Something']),
             });
 
     blocTest<OmniSearchQuestionWidgetBloc, OmniSearchQuestionWidgetState>(

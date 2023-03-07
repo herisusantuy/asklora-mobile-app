@@ -29,6 +29,7 @@ class OmniSearchQuestionWidgetBloc
     if (!keywords.contains(event.keywordInput)) {
       keywords.add(event.keywordInput);
       emit(state.copyWith(keywords: keywords, keyword: ''));
+      add(KeywordSelected(event.keywordInput));
     } else {
       emit(state.copyWith(addKeywordError: true, keyword: ''));
     }

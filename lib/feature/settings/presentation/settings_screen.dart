@@ -10,8 +10,10 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../core/utils/storage/profile_data.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
@@ -36,36 +38,47 @@ class SettingsScreen extends StatelessWidget {
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: AskLoraColors.gray, shape: BoxShape.circle),
-                    padding: const EdgeInsets.fromLTRB(20, 18, 18, 20),
-                    child: CustomTextNew(
-                      'L',
-                      style: AskLoraTextStyles.h2,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 18,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextNew(
-                        'Lillian Lambert',
-                        style: AskLoraTextStyles.h5
-                            .copyWith(color: AskLoraColors.charcoal),
-                      ),
-                      CustomTextNew(
-                        'lilianlambert1109@gmail.com',
-                        style: AskLoraTextStyles.body1
-                            .copyWith(color: AskLoraColors.charcoal),
-                      ),
-                    ],
-                  ),
-                ],
+              FutureBuilder<ProfileDataModel>(
+                future: ProfileData().getProfileData(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<ProfileDataModel> snapshot) {
+                  if (snapshot.hasData) {
+                    return Row(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                              color: AskLoraColors.gray,
+                              shape: BoxShape.circle),
+                          padding: const EdgeInsets.fromLTRB(20, 18, 18, 20),
+                          child: CustomTextNew(
+                            snapshot.data?.name[0].toUpperCase() ?? '',
+                            style: AskLoraTextStyles.h2,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomTextNew(
+                              snapshot.data?.name ?? '',
+                              style: AskLoraTextStyles.h5
+                                  .copyWith(color: AskLoraColors.charcoal),
+                            ),
+                            CustomTextNew(
+                              snapshot.data?.email ?? '',
+                              style: AskLoraTextStyles.body1
+                                  .copyWith(color: AskLoraColors.charcoal),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
               ),
               const SizedBox(
                 height: 40,
@@ -103,8 +116,17 @@ class SettingsScreen extends StatelessWidget {
             }
           },
           child: GestureDetector(
-            onTap: () =>
-                context.read<SignOutBloc>().add(const SignOutSubmitted()),
+            onTap: () => LoraBottomSheet.show(
+              context: context,
+              title: 'Are you sure you want to sign out ?',
+              primaryButtonLabel: 'SIGN OUT',
+              secondaryButtonLabel: 'CANCEL',
+              onPrimaryButtonTap: () {
+                Navigator.pop(context);
+                context.read<SignOutBloc>().add(const SignOutSubmitted());
+              },
+              onSecondaryButtonTap: () => Navigator.pop(context),
+            ),
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.only(top: 39),
