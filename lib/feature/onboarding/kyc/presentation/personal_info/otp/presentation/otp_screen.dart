@@ -26,9 +26,9 @@ class OtpScreen extends StatelessWidget {
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
         if (state.response.state == ResponseState.loading) {
-          CustomLoadingOverlay.of().show(context);
+          CustomLoadingOverlay.of(context).show();
         } else {
-          CustomLoadingOverlay.of().dismiss(context);
+          CustomLoadingOverlay.of(context).dismiss();
         }
         if (state is OtpValidationSuccess) {
           context

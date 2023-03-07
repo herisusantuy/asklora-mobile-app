@@ -20,9 +20,9 @@ class ResetPasswordForm extends StatelessWidget {
           previous.response.state != current.response.state,
       listener: (context, state) {
         if (state.response.state == ResponseState.loading) {
-          CustomLoadingOverlay.of().show(context);
+          CustomLoadingOverlay.of(context).show();
         } else {
-          CustomLoadingOverlay.of().dismiss(context);
+          CustomLoadingOverlay.of(context).dismiss();
           CustomInAppNotification.show(context, state.response.message);
           if (state.response.state == ResponseState.success) {
             SignInScreen.open(context);

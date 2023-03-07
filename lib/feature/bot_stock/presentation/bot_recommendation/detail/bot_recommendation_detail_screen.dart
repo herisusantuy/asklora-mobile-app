@@ -46,9 +46,9 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               current.botDetailResponse.state,
           listener: (context, state) {
             if (state.botDetailResponse.state == ResponseState.loading) {
-              CustomLoadingOverlay.of().show(context);
+              CustomLoadingOverlay.of(context).show();
             } else {
-              CustomLoadingOverlay.of().dismiss(context);
+              CustomLoadingOverlay.of(context).dismiss();
               if (state.botDetailResponse.state == ResponseState.error) {
                 CustomInAppNotification.show(
                     context, state.botDetailResponse.message);

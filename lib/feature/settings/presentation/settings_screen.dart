@@ -109,9 +109,9 @@ class SettingsScreen extends StatelessWidget {
         builder: (context) => BlocListener<SignOutBloc, SignOutState>(
           listener: (context, state) async {
             if (state.response.state == ResponseState.loading) {
-              CustomLoadingOverlay.of().show(context);
+              CustomLoadingOverlay.of(context).show();
             } else {
-              CustomLoadingOverlay.of().dismiss(context);
+              CustomLoadingOverlay.of(context).dismiss();
               if (state.response.state == ResponseState.error) {
                 CustomInAppNotification.show(context, state.response.message);
               } else if (state.response.state == ResponseState.success) {

@@ -6,15 +6,16 @@ import 'jumping_dots_widget.dart';
 
 class CustomLoadingOverlay {
   static bool _isShowing = false;
+  BuildContext context;
 
-  void dismiss(BuildContext context) {
+  void dismiss() {
     if (_isShowing) {
       _isShowing = !_isShowing;
       Navigator.of(context).pop();
     }
   }
 
-  void show(BuildContext context) {
+  void show() {
     _isShowing = !_isShowing;
     showDialog(
         context: context,
@@ -38,20 +39,18 @@ class CustomLoadingOverlay {
             ));
   }
 
-  Future<T> during<T>(Future<T> future, BuildContext context) {
-    show(context);
-    return future.whenComplete(() => dismiss(context));
+  Future<T> during<T>(Future<T> future) {
+    show();
+    return future.whenComplete(() => dismiss());
   }
 
-  static final CustomLoadingOverlay _singleton = CustomLoadingOverlay._create();
+  factory CustomLoadingOverlay(BuildContext context) {
+    return CustomLoadingOverlay._create(context);
+  }
 
-  factory CustomLoadingOverlay() => _singleton;
+  CustomLoadingOverlay._create(this.context);
 
-  CustomLoadingOverlay._create();
-
-  static CustomLoadingOverlay get instance => _singleton;
-
-  factory CustomLoadingOverlay.of() {
-    return CustomLoadingOverlay._create();
+  factory CustomLoadingOverlay.of(BuildContext context) {
+    return CustomLoadingOverlay._create(context);
   }
 }

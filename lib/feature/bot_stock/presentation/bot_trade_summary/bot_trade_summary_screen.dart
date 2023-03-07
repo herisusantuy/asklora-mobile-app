@@ -41,9 +41,9 @@ class BotTradeSummaryScreen extends StatelessWidget {
             previous.tradeBotStockResponse != current.tradeBotStockResponse,
         listener: (context, state) {
           if (state.tradeBotStockResponse.state == ResponseState.loading) {
-            CustomLoadingOverlay.of().show(context);
+            CustomLoadingOverlay.of(context).show();
           } else {
-            CustomLoadingOverlay.of().dismiss(context);
+            CustomLoadingOverlay.of(context).dismiss();
             if (state.tradeBotStockResponse.state == ResponseState.success) {
               context.read<AppBloc>().add(
                     const SaveUserJourney(UserJourney.deposit),

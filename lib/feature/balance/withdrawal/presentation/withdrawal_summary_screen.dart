@@ -30,9 +30,9 @@ class WithdrawalSummaryScreen extends StatelessWidget {
       child: BlocListener<WithdrawalBloc, WithdrawalState>(
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
-            CustomLoadingOverlay.of().show(context);
+            CustomLoadingOverlay.of(context).show();
           } else {
-            CustomLoadingOverlay.of().dismiss(context);
+            CustomLoadingOverlay.of(context).dismiss();
           }
 
           if (state.response.state == ResponseState.error) {
