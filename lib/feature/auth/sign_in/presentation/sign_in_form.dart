@@ -28,9 +28,9 @@ class SignInForm extends StatelessWidget {
     return BlocListener<SignInBloc, SignInState>(
         listener: (context, state) async {
       if (state.response.state == ResponseState.loading) {
-        CustomLoadingOverlay.show(context);
+        CustomLoadingOverlay.of().show(context);
       } else {
-        CustomLoadingOverlay.dismiss();
+        CustomLoadingOverlay.of().dismiss(context);
       }
 
       var responseState = state.response.state;

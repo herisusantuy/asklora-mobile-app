@@ -30,14 +30,16 @@ class WithdrawalSummaryScreen extends StatelessWidget {
       child: BlocListener<WithdrawalBloc, WithdrawalState>(
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
-            CustomLoadingOverlay.show(context);
-          } else if (state.response.state == ResponseState.error) {
+            CustomLoadingOverlay.of().show(context);
+          } else {
+            CustomLoadingOverlay.of().dismiss(context);
+          }
+
+          if (state.response.state == ResponseState.error) {
             ///LETS ASSUME ERROR AS SUCCEED FOR NOW TO SHOW THE RESULT SCREEN
-            CustomLoadingOverlay.dismiss();
             // CustomInAppNotification.show(context, state.response.message);
             WithdrawalResultScreen.open(context);
           } else if (state.response.state == ResponseState.success) {
-            CustomLoadingOverlay.dismiss();
             WithdrawalResultScreen.open(context);
           }
         },

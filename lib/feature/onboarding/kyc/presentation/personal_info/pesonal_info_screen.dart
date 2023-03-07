@@ -231,9 +231,9 @@ class PersonalInfoScreen extends StatelessWidget {
                 previous.response.state != current.response.state,
             listener: (context, state) {
               if (state.response.state == ResponseState.loading) {
-                CustomLoadingOverlay.show(context);
+                CustomLoadingOverlay.of().show(context);
               } else {
-                CustomLoadingOverlay.dismiss();
+                CustomLoadingOverlay.of().dismiss(context);
                 if (state.response.state == ResponseState.error) {
                   CustomInAppNotification.show(context, state.response.message);
                 } else {

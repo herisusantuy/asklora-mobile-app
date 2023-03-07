@@ -33,9 +33,9 @@ class AskNameScreen extends StatelessWidget {
         child: BlocListener<LoraAskNameBloc, LoraAskNameState>(
           listener: (context, state) {
             if (state.response.state == ResponseState.loading) {
-              CustomLoadingOverlay.show(context);
+              CustomLoadingOverlay.of().show(context);
             } else {
-              CustomLoadingOverlay.dismiss();
+              CustomLoadingOverlay.of().dismiss(context);
             }
             switch (state.response.state) {
               case ResponseState.error:

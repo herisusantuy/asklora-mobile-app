@@ -41,11 +41,10 @@ class BotTradeSummaryScreen extends StatelessWidget {
             previous.tradeBotStockResponse != current.tradeBotStockResponse,
         listener: (context, state) {
           if (state.tradeBotStockResponse.state == ResponseState.loading) {
-            CustomLoadingOverlay.show(context);
+            CustomLoadingOverlay.of().show(context);
           } else {
-            CustomLoadingOverlay.dismiss();
+            CustomLoadingOverlay.of().dismiss(context);
             if (state.tradeBotStockResponse.state == ResponseState.success) {
-              CustomLoadingOverlay.dismiss();
               context.read<AppBloc>().add(
                     const SaveUserJourney(UserJourney.deposit),
                   );
@@ -56,7 +55,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
               } else {
                 BotStockResultScreen.open(
                     context: context,
-                    arguments: Pair('Trade Request Received',
+                    arguments: const Pair('Trade Request Received',
                         'Pull-up TSLA will be started at 14:00, 2022/03/12.'));
               }
             } else if (state.tradeBotStockResponse.state ==

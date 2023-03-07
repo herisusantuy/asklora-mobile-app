@@ -20,9 +20,9 @@ class ForgotPasswordForm extends StatelessWidget {
       listener: (context, state) {
         ResponseState responseState = state.response.state;
         if (responseState == ResponseState.loading) {
-          CustomLoadingOverlay.show(context);
+          CustomLoadingOverlay.of().show(context);
         } else {
-          CustomLoadingOverlay.dismiss();
+          CustomLoadingOverlay.of().dismiss(context);
           CustomInAppNotification.show(
               context,
               responseState == ResponseState.success

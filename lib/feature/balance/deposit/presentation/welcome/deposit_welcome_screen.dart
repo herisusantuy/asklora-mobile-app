@@ -59,9 +59,9 @@ class DepositWelcomeScreen extends StatelessWidget {
       child: BlocConsumer<BankAccountBloc, BankAccountState>(
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
-            CustomLoadingOverlay.show(context);
+            CustomLoadingOverlay.of().show(context);
           } else {
-            CustomLoadingOverlay.dismiss();
+            CustomLoadingOverlay.of().dismiss(context);
           }
         },
         builder: (context, state) {

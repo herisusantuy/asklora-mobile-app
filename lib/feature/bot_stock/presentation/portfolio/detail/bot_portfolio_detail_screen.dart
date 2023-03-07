@@ -165,9 +165,9 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     if (state.botPortfolioDetailResponse.state == ResponseState.loading ||
         state.endBotStockResponse.state == ResponseState.loading ||
         state.rolloverBotStockResponse.state == ResponseState.loading) {
-      CustomLoadingOverlay.show(context);
+      CustomLoadingOverlay.of().show(context);
     } else {
-      CustomLoadingOverlay.dismiss();
+      CustomLoadingOverlay.of().dismiss(context);
       if (state.botPortfolioDetailResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.botPortfolioDetailResponse.message);
