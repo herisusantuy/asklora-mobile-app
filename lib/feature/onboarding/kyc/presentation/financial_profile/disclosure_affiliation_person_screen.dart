@@ -31,6 +31,9 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
           ),
           _spaceHeight,
           const DotText(
+              'I am affiliated or work with US registered broker-dealer or FINRA.'),
+          _spaceHeight,
+          const DotText(
               'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.'),
           _spaceHeight,
           const DotText('I am a senior political figure.'),
@@ -58,8 +61,7 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
                           .read<DisclosureAffiliationBloc>()
                           .add(const AffiliatedPersonChanged(true));
                       context.read<NavigationBloc<KycPageStep>>().add(
-                          const PageChanged(
-                              KycPageStep.disclosureAffiliationPersonInput));
+                          const PageChanged(KycPageStep.disclosureRejected));
                     },
                     onAnswerNo: () {
                       context
@@ -67,7 +69,7 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
                           .add(const AffiliatedPersonChanged(false));
                       context.read<NavigationBloc<KycPageStep>>().add(
                           const PageChanged(
-                              KycPageStep.disclosureAffiliationAssociates));
+                              KycPageStep.financialProfileEmployment));
                     },
                     onSaveForLater: () => CarouselScreen.open(context),
                   )),
