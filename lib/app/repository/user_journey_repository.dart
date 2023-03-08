@@ -23,7 +23,7 @@ class UserJourneyRepository {
       return BaseResponse.complete(userJourneyResponse);
     } catch (e) {
       ///TODO POST TO FIREBASE
-      return BaseResponse.error('Failed save user journey!');
+      return BaseResponse.error(message: 'Failed save user journey!');
     }
   }
 

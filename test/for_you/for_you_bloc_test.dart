@@ -36,7 +36,7 @@ void main() async {
               .thenAnswer((_) => Future.value(response));
           return forYouBloc;
         },
-        act: (bloc) => bloc.add(GetInvestmentStyleAnswer()),
+        act: (bloc) => bloc.add(GetInvestmentStyleState()),
         expect: () => {
               ForYouState(response: BaseResponse.loading()),
               ForYouState(response: response)
@@ -50,7 +50,7 @@ void main() async {
               .thenAnswer((_) => Future.value(response));
           return forYouBloc;
         },
-        act: (bloc) => bloc.add(GetInvestmentStyleAnswer()),
+        act: (bloc) => bloc.add(GetInvestmentStyleState()),
         expect: () => {
               ForYouState(response: BaseResponse.loading()),
               ForYouState(response: response)

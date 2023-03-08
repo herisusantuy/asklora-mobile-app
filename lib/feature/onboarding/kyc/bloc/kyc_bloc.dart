@@ -8,6 +8,7 @@ import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
 
 part 'kyc_event.dart';
+
 part 'kyc_state.dart';
 
 class KycBloc extends Bloc<KycEvent, KycState> {
@@ -23,9 +24,13 @@ class KycBloc extends Bloc<KycEvent, KycState> {
 
   _onSubmitKyc(SubmitKyc event, Emitter<KycState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
-    var data =
-        await _accountRepository.upgradeAccount(event.upgradeAccountRequest);
-    emit(state.copyWith(response: data));
+    try {
+      var data =
+          await _accountRepository.upgradeAccount(event.upgradeAccountRequest);
+      emit(state.copyWith(response: data));
+    } catch (e) {
+      emit(state.copyWith(response: BaseResponse.error()));
+    }
   }
 
   _onGetOnfidoSdkToken(GetSdkToken event, Emitter<KycState> emit) async {

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/buttons/button_pair.dart';
-import '../../../../../../core/presentation/custom_snack_bar.dart';
+import '../../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -48,9 +48,8 @@ class OmniSearchQuestionWidget extends StatelessWidget {
             previous.addKeywordError != current.addKeywordError,
         listener: (context, state) {
           if (state.addKeywordError) {
-            CustomSnackBar(context)
-                .setMessage('Keyword already added to the list')
-                .showError();
+            CustomInAppNotification.show(
+                context, 'Keyword already added to the list');
             keywordController.text = '';
           }
         },
@@ -173,13 +172,24 @@ class OmniSearchQuestionWidget extends StatelessWidget {
   }
 
   Widget get _addKeywordInput =>
-      BlocBuilder<OmniSearchQuestionWidgetBloc, OmniSearchQuestionWidgetState>(
+      BlocConsumer<OmniSearchQuestionWidgetBloc, OmniSearchQuestionWidgetState>(
+        listenWhen: (previous, current) =>
+            previous.keywords != current.keywords,
+        listener: (context, state) {
+          keywordController.text = '';
+        },
         buildWhen: (previous, current) => previous.keywords != current.keywords,
         builder: (context, state) {
-          keywordController.text = '';
           return AutoResizedTextField(
             key: const Key('name_input'),
             controller: keywordController,
+            onFieldSubmitted: (value) {
+              if (value.isNotEmpty) {
+                context
+                    .read<OmniSearchQuestionWidgetBloc>()
+                    .add(KeywordAdded(value));
+              }
+            },
             hintText: 'ENTER KEYWORDS',
             textInputType: TextInputType.text,
             onChanged: (value) => context

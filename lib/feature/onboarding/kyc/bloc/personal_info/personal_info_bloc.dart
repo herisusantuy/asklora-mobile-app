@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -7,7 +6,6 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/hkid_validation.dart';
 import '../../../../../core/utils/age_validation.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
-import '../../domain/upgrade_account/personal_info_response.dart';
 import '../../repository/account_repository.dart';
 
 part 'personal_info_event.dart';
@@ -121,12 +119,12 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
             !state.isHongKongPermanentResident! ||
         state.isUnitedStateResident != null && state.isUnitedStateResident!) {
       emit(state.copyWith(
-          response: BaseResponse.error(r'You are not eligible!'),
+          response: BaseResponse.error(message: 'You are not eligible!'),
           message: r'You are not eligible!'));
     } else if (!isAdult(state.dateOfBirth)) {
       emit(state.copyWith(
           response: BaseResponse.error(
-              r'You must be over 18 to sign up for AskLORA!'),
+              message: 'You must be over 18 to sign up for AskLORA!'),
           message: r'You must be over 18 to sign up for AskLORA!'));
     } else {
       emit(state.copyWith(response: BaseResponse.complete('')));
@@ -149,7 +147,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       emit(state.copyWith(response: BaseResponse.complete(data)));
     } catch (e) {
       emit(state.copyWith(
-        response: BaseResponse.error('Something went wrong! Please try again.'),
+        response: BaseResponse.error(),
       ));
     }
   }

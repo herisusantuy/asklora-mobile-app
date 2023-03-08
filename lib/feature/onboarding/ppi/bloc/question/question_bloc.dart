@@ -84,7 +84,6 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
         fixture = await _questionCollectionRepository
             .fetchInvestmentStyleQuestions(accountId ?? '');
       }
-
       emit(state.copyWith(response: BaseResponse.complete(fixture)));
       //+1 for privacy result
       int totalPrivacyPages = fixture.getPrivacyQuestions.length + 1;
@@ -104,9 +103,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
           totalInvestmentStylePages:
               fixture.getInvestmentStyleQuestion.length + 1));
     } catch (e) {
-      emit(state.copyWith(
-          response:
-              BaseResponse.error('Please try again! Something went wrong.')));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 

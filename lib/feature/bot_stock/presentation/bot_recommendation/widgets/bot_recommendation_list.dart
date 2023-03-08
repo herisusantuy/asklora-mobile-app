@@ -35,22 +35,8 @@ class BotRecommendationList extends StatelessWidget {
         ),
       );
     } else if (botStockState.botRecommendationResponse.state ==
-        ResponseState.loading) {
-      return Container(
-        margin: EdgeInsets.symmetric(vertical: verticalMargin),
-        padding: AppValues.screenHorizontalPadding,
-        child: Wrap(
-          spacing: _spacing,
-          runSpacing: _spacing,
-          children: defaultBotRecommendation
-              .map((e) => BotRecommendationCardShimmer(
-                    height: botCardHeight,
-                    spacing: _spacing,
-                  ))
-              .toList(),
-        ),
-      );
-    } else {
+            ResponseState.success &&
+        botStockState.botRecommendationResponse.data!.isEmpty) {
       return SizedBox(
         height: _getListHeight,
         width: double.infinity,
@@ -100,13 +86,47 @@ class BotRecommendationList extends StatelessWidget {
                         .read<NavigationBloc<ForYouPage>>()
                         .add(const PageChanged(ForYouPage.investmentStyle)),
                     onFalseCallback: () => PpiScreen.open(context,
-                        arguments: Pair(QuestionPageType.investmentStyle,
+                        arguments: const Pair(QuestionPageType.investmentStyle,
                             QuestionPageStep.investmentStyle)),
                   ),
                 ),
               ),
             )
           ],
+        ),
+      );
+    } else if (botStockState.botRecommendationResponse.state ==
+        ResponseState.loading) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: verticalMargin),
+        padding: AppValues.screenHorizontalPadding,
+        child: Wrap(
+          spacing: _spacing,
+          runSpacing: _spacing,
+          children: defaultBotRecommendation
+              .map((e) => BotRecommendationCardShimmer(
+                    height: botCardHeight,
+                    spacing: _spacing,
+                  ))
+              .toList(),
+        ),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: blurPadding),
+        padding: AppValues.screenHorizontalPadding
+            .copyWith(top: blurPadding, bottom: blurPadding),
+        child: Wrap(
+          spacing: _spacing,
+          runSpacing: _spacing,
+          children: defaultBotRecommendation
+              .map((e) => BotRecommendationCard(
+                    onTap: () {},
+                    height: botCardHeight,
+                    botRecommendationModel: e,
+                    spacing: _spacing,
+                  ))
+              .toList(),
         ),
       );
     }

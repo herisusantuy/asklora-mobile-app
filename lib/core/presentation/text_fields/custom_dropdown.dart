@@ -50,7 +50,14 @@ class _CustomDropdownState extends State<CustomDropdown> {
           floatingLabelBehavior: FloatingLabelBehavior.always,
           contentPadding: widget.contentPadding),
       borderRadius: BorderRadius.circular(5),
-      items: widget.itemsList
+      items: _getDropdownMenuItems(textEllipsis: true),
+      selectedItemBuilder: (_) => _getDropdownMenuItems(textEllipsis: true),
+    );
+  }
+
+  List<DropdownMenuItem<String>> _getDropdownMenuItems(
+          {bool textEllipsis = true}) =>
+      widget.itemsList
           .map(
             (element) => DropdownMenuItem<String>(
               key: Key(element),
@@ -58,11 +65,9 @@ class _CustomDropdownState extends State<CustomDropdown> {
               child: CustomTextNew(
                 element,
                 style: TextFieldStyle.valueTextStyle.copyWith(height: 1),
-                ellipsis: true,
+                ellipsis: textEllipsis,
               ),
             ),
           )
-          .toList(),
-    );
-  }
+          .toList();
 }

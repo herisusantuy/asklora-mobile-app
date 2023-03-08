@@ -120,7 +120,8 @@ void main() {
                   isUnitedStateResident: true,
                   isHkIdValid: false,
                   message: r'You are not eligible!',
-                  response: BaseResponse.error(r'You are not eligible!'),
+                  response:
+                      BaseResponse.error(message: r'You are not eligible!'),
                 ),
               });
 
@@ -186,7 +187,7 @@ void main() {
                   isHkIdValid: false,
                   message: r'You must be over 18 to sign up for AskLORA!',
                   response: BaseResponse.error(
-                      r'You must be over 18 to sign up for AskLORA!'),
+                      message: r'You must be over 18 to sign up for AskLORA!'),
                 ),
               });
 

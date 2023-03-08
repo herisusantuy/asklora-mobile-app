@@ -39,7 +39,6 @@ class LoraMemojiHeader extends StatelessWidget {
   Pair<String, LoraMemojiType> _getMemojiProps() {
     switch (loraMemojiType) {
       case LoraMemojiType.lora6:
-      case LoraMemojiType.lora7:
       case LoraMemojiType.lora8:
       case LoraMemojiType.lora9:
         return Pair('memoji_background_magenta', loraMemojiType);

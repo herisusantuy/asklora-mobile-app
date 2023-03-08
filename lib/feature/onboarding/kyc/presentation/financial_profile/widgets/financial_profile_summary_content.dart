@@ -42,31 +42,6 @@ class FinancialProfileSummaryContent extends StatelessWidget {
                     ? 'Yes'
                     : 'No'
                 : 'Unknown'),
-        if (disclosureAffiliationState.affiliatedPersonFirstName.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: _spaceHeightDouble),
-            child: SummaryTextInfo(
-                title: 'Name of Affiliated Person',
-                subTitle:
-                    '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
-          ),
-        _spaceHeight,
-        SummaryTextInfo(
-            title:
-                'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
-            subTitle: disclosureAffiliationState.isAffiliatedAssociates != null
-                ? disclosureAffiliationState.isAffiliatedAssociates!
-                    ? 'Yes'
-                    : 'No'
-                : 'Unknown'),
-        if (disclosureAffiliationState.affiliatedAssociatesFirstName.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: _spaceHeightDouble),
-            child: SummaryTextInfo(
-                title: 'Name of Affiliated Person',
-                subTitle:
-                    '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
-          ),
         _spaceHeight,
         SummaryTextInfo(
             title: 'Employment Status',
@@ -109,12 +84,28 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         _spaceHeight,
         SummaryTextInfo(
             title:
-                'Are your immediate family or/and you a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.',
-            subTitle: disclosureAffiliationState.isAffiliatedCommission != null
-                ? disclosureAffiliationState.isAffiliatedCommission!
+                'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
+            subTitle: disclosureAffiliationState.isAffiliatedAssociates != null
+                ? disclosureAffiliationState.isAffiliatedAssociates!
                     ? 'Yes'
                     : 'No'
                 : 'Unknown'),
+        if (disclosureAffiliationState.affiliatedAssociatesFirstName.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: _spaceHeightDouble),
+            child: SummaryTextInfo(
+                title: 'Name of Affiliated Person',
+                subTitle:
+                    '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
+          ),
+        if (disclosureAffiliationState.affiliatedPersonFirstName.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: _spaceHeightDouble),
+            child: SummaryTextInfo(
+                title: 'Name of Affiliated Person',
+                subTitle:
+                    '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
+          ),
       ],
     );
   }
@@ -167,9 +158,9 @@ class FinancialProfileSummaryContent extends StatelessWidget {
           return const SizedBox();
         } else {
           return CustomTextNew(
-            e.sourceOfWealthType.value == 'Other'
-                ? '${e.sourceOfWealthType.value} : ${e.additionalSourceOfWealth!}'
-                : e.sourceOfWealthType.value,
+            e.sourceOfWealthType.name == 'Other'
+                ? '${e.sourceOfWealthType.name} : ${e.additionalSourceOfWealth!}'
+                : e.sourceOfWealthType.name,
             style: AskLoraTextStyles.subtitle2
                 .copyWith(color: AskLoraColors.charcoal),
           );

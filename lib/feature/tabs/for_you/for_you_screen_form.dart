@@ -17,6 +17,7 @@ import '../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
 import 'bloc/for_you_bloc.dart';
+import 'investment_style/presentation/for_you_investment_style_screen.dart';
 import 'repository/for_you_repository.dart';
 
 enum ForYouPage { investmentStyle, botRecommendation }
@@ -56,7 +57,7 @@ class ForYouScreenForm extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
-              ..add(GetInvestmentStyleAnswer()),
+              ..add(GetInvestmentStyleState()),
           ),
         ],
         child: BlocConsumer<ForYouBloc, ForYouState>(
@@ -73,11 +74,7 @@ class ForYouScreenForm extends StatelessWidget {
                     builder: (context, state) {
                       switch (state.page) {
                         case ForYouPage.investmentStyle:
-                          return const PpiScreen(
-                              questionPageType:
-                                  QuestionPageType.investmentStyle,
-                              initialQuestionPage:
-                                  QuestionPageStep.investmentStyle);
+                          return const ForYouInvestmentStyleScreen();
                         case ForYouPage.botRecommendation:
                           return const BotRecommendationScreen(
                             enableBackNavigation: false,
@@ -91,9 +88,9 @@ class ForYouScreenForm extends StatelessWidget {
           },
           listener: (context, state) {
             if (state.response.state == ResponseState.loading) {
-              CustomLoadingOverlay.show(context);
+              CustomLoadingOverlay.of(context).show();
             } else {
-              CustomLoadingOverlay.dismiss();
+              CustomLoadingOverlay.of(context).dismiss();
             }
           },
         ),

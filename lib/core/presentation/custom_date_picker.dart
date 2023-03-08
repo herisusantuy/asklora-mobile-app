@@ -60,7 +60,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                           ),
                         ),
                         PrimaryButton(
-                            label: 'Select',
+                            label: 'SELECT',
                             onTap: () => Navigator.pop(context))
                       ],
                     ),

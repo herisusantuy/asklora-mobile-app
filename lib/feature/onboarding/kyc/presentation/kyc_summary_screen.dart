@@ -8,6 +8,8 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
@@ -77,7 +79,12 @@ class KycSummaryScreen extends StatelessWidget {
             height: 56,
           ),
           const SignAgreementSummaryContent(
-              key: Key('sign_agreement_summary_content'), title: 'Agreements')
+              key: Key('sign_agreement_summary_content'), title: 'Agreements'),
+          const SizedBox(height: 50),
+          const CustomTextNew(
+            'The agreements will become binding subject to the approval of the information submitted by you. ',
+            textAlign: TextAlign.center,
+          )
         ],
       ),
       bottomButton: _bottomButton(context),
@@ -89,6 +96,11 @@ class KycSummaryScreen extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
         listener: (context, state) {
+          if (state.response.state == ResponseState.loading) {
+            CustomLoadingOverlay.of(context).show();
+          } else {
+            CustomLoadingOverlay.of(context).dismiss();
+          }
           switch (state.response.state) {
             case ResponseState.error:
               CustomInAppNotification.show(context, state.response.message);

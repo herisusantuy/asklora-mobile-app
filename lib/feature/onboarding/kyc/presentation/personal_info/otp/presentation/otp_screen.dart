@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/domain/base_response.dart';
-import '../../../../../../../core/domain/otp/verify_otp_request.dart';
 import '../../../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../../../core/presentation/custom_text_new.dart';
@@ -12,7 +11,6 @@ import '../../../../../../../core/presentation/navigation/bloc/navigation_bloc.d
 import '../../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../../auth/sign_up/presentation/sign_up_success_screen.dart';
 import '../../../../../../tabs/tabs_screen.dart';
 import '../../../../bloc/kyc_bloc.dart';
 import '../../../widgets/kyc_base_form.dart';
@@ -28,9 +26,9 @@ class OtpScreen extends StatelessWidget {
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
         if (state.response.state == ResponseState.loading) {
-          CustomLoadingOverlay.show(context);
+          CustomLoadingOverlay.of(context).show();
         } else {
-          CustomLoadingOverlay.dismiss();
+          CustomLoadingOverlay.of(context).dismiss();
         }
         if (state is OtpValidationSuccess) {
           context

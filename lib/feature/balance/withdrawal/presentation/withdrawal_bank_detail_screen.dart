@@ -26,9 +26,9 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
       child: BlocConsumer<BankAccountBloc, BankAccountState>(
         listener: (context, state) {
           if (state.response.state == ResponseState.loading) {
-            CustomLoadingOverlay.show(context);
+            CustomLoadingOverlay.of(context).show();
           } else {
-            CustomLoadingOverlay.dismiss();
+            CustomLoadingOverlay.of(context).dismiss();
           }
         },
         builder: (context, state) {

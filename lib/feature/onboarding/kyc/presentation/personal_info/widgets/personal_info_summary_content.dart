@@ -52,12 +52,20 @@ class PersonalInfoSummaryContent extends StatelessWidget {
                   : 'Unknown'),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'English First Name',
+              title: 'Legal English First Name',
               subTitle: personalInfoState.firstName),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'English Last Name', subTitle: personalInfoState.lastName),
-          SummaryTextInfo(title: 'Sex', subTitle: personalInfoState.gender),
+              title: 'Legal English Last Name',
+              subTitle: personalInfoState.lastName),
+          SummaryTextInfo(title: 'Gender', subTitle: personalInfoState.gender),
+          _spaceHeight,
+          SummaryTextInfo(
+              title: 'HKID Number', subTitle: personalInfoState.hkIdNumber),
+          _spaceHeight,
+          SummaryTextInfo(
+              title: 'Nationality',
+              subTitle: personalInfoState.nationalityName),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Day of Birth', subTitle: personalInfoState.dateOfBirth),
@@ -67,10 +75,9 @@ class PersonalInfoSummaryContent extends StatelessWidget {
               subTitle: personalInfoState.countryNameOfBirth),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Phone', subTitle: personalInfoState.phoneNumber),
-          _spaceHeight,
-          SummaryTextInfo(
-              title: 'HKID Number', subTitle: personalInfoState.hkIdNumber),
+              title: 'Phone',
+              subTitle:
+                  '+${personalInfoState.phoneCountryCode} ${personalInfoState.phoneNumber}'),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Address', subTitle: addressProofState.addressLine1),
@@ -83,7 +90,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
             title: 'Address Proof',
             titleColor: AskLoraColors.gray,
             disabled: true,
-          )
+          ),
         ],
       );
 }
