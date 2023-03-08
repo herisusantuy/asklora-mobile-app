@@ -2,7 +2,7 @@ class ChartDataSet {
   int? index;
   DateTime? date;
   double? price;
-  int? hedgeShare;
+  double? hedgeShare;
   double? currentPnlRet;
 
   ChartDataSet(
