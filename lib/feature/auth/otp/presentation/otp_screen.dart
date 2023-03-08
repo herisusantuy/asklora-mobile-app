@@ -6,6 +6,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/styles/asklora_colors.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../sign_in/bloc/sign_in_bloc.dart';
 import '../../sign_in/repository/sign_in_repository.dart';
@@ -41,7 +42,8 @@ class OtpScreen extends StatelessWidget {
             BlocProvider(
               create: (context) => SignInBloc(
                   signInRepository: SignInRepository(TokenRepository()),
-                  userJourneyRepository: UserJourneyRepository()),
+                  userJourneyRepository: UserJourneyRepository(),
+                  sharedPreference: SharedPreference()),
             ),
           ],
           child:
