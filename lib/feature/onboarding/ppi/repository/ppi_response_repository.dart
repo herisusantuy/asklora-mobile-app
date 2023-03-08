@@ -44,7 +44,7 @@ class PpiResponseRepository {
       var response = await _ppiApiRepository.getUserSnapshot(userId);
       return BaseResponse.complete(SnapShot.fromJson(response.data));
     } catch (_) {
-      return BaseResponse.error('Failed to get data');
+      return BaseResponse.error(message: 'Failed to get data');
     }
   }
 
