@@ -25,15 +25,14 @@ void main() async {
         BaseResponse.complete(PortfolioResponse());
 
     final BaseResponse<PortfolioResponse> portfolioErrorResponse =
-        BaseResponse.error('Something went wrong');
+        BaseResponse.error();
 
     final BaseResponse<List<PortfolioBotModel>> errorResponse =
-        BaseResponse.error('Something went wrong');
+        BaseResponse.error();
 
     final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
 
-    final BaseResponse<bool> boolErrorResponse =
-        BaseResponse.error('Something went wrong');
+    final BaseResponse<bool> boolErrorResponse = BaseResponse.error();
 
     const PortfolioBotModel portfolioBotModel = PortfolioBotModel(
         1,

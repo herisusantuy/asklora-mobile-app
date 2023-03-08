@@ -192,7 +192,7 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.disclosureRejected:
               return const KycRejectedScreen(
                 rejectedReason:
-                    'Employees of the SFC consectetur adipiscing elit. Viverra in diam tortor.',
+                    'We do not acecpt any members who are affiliated with the organisations mentioned above',
               );
             case KycPageStep.verifyIdentity:
               return const VerifyIdentityScreen(

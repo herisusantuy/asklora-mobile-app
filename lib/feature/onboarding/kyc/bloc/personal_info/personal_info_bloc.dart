@@ -119,12 +119,12 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
             !state.isHongKongPermanentResident! ||
         state.isUnitedStateResident != null && state.isUnitedStateResident!) {
       emit(state.copyWith(
-          response: BaseResponse.error(r'You are not eligible!'),
+          response: BaseResponse.error(message: 'You are not eligible!'),
           message: r'You are not eligible!'));
     } else if (!isAdult(state.dateOfBirth)) {
       emit(state.copyWith(
           response: BaseResponse.error(
-              r'You must be over 18 to sign up for AskLORA!'),
+              message: 'You must be over 18 to sign up for AskLORA!'),
           message: r'You must be over 18 to sign up for AskLORA!'));
     } else {
       emit(state.copyWith(response: BaseResponse.complete('')));
@@ -147,7 +147,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       emit(state.copyWith(response: BaseResponse.complete(data)));
     } catch (e) {
       emit(state.copyWith(
-        response: BaseResponse.error('Something went wrong! Please try again.'),
+        response: BaseResponse.error(),
       ));
     }
   }

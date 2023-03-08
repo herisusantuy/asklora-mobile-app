@@ -52,7 +52,7 @@ void main() async {
               OtpState(response: BaseResponse.loading()),
               OtpState(
                   response: BaseResponse.error(
-                      'User does not exist with the given email'))
+                      message: 'User does not exist with the given email'))
             });
 
     blocTest<OtpBloc, OtpState>(
@@ -92,7 +92,7 @@ void main() async {
             VerifyOtpRequest('test123@example.com', '112233'))),
         expect: () => {
               OtpState(response: BaseResponse.loading()),
-              OtpState(response: BaseResponse.error('Invalid OTP'))
+              OtpState(response: BaseResponse.error(message: 'Invalid OTP'))
             });
 
     blocTest<OtpBloc, OtpState>(

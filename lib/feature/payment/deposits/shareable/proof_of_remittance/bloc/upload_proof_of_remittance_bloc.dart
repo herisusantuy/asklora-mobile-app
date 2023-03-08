@@ -41,7 +41,7 @@ class UploadProofOfRemittanceBloc
           platformFiles: state.documentFiles);
       emit(state.copyWith(response: data));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 
@@ -53,7 +53,7 @@ class UploadProofOfRemittanceBloc
           depositAmount: state.depositAmount, platformFiles: []);
       emit(state.copyWith(response: data));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 

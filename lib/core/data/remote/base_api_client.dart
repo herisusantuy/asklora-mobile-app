@@ -31,8 +31,13 @@ class BaseApiClient {
 
   String getBaseUrl() => Environment().config.askLoraApiBaseUrl;
 
+  final Duration timeOutDuration = const Duration(seconds: 60);
+
   Dio _createDio() {
     var dio = Dio(BaseOptions(
+        connectTimeout: timeOutDuration,
+        sendTimeout: timeOutDuration,
+        receiveTimeout: timeOutDuration,
         baseUrl: getBaseUrl(),
         followRedirects: false,
         validateStatus: (status) {
