@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -53,21 +54,34 @@ class PpiScreen extends StatelessWidget {
       ],
       child: CustomScaffold(
           enableBackNavigation: false,
-          body: BlocConsumer<NavigationBloc<QuestionPageStep>,
-              NavigationState<QuestionPageStep>>(
-            listenWhen: (_, current) => current.lastPage == true,
-            listener: (context, state) {
-              Navigator.pop(context);
-            },
-            builder: (context, state) => Column(
-              children: [
-                PpiProgressIndicatorWidget(
-                  questionPageType: questionPageType,
-                ),
-                Expanded(child: _pages(state)),
-              ],
-            ),
-          )),
+          body: BlocBuilder<QuestionBloc, QuestionState>(
+              buildWhen: (previous, current) =>
+                  previous.response.state != current.response.state,
+              builder: (context, state) {
+                return CustomLayoutWithBlurPopUp(
+                    subTitleAdditionalText: 'Investment Style Question',
+                    showReloadPopUp:
+                        state.response.state == ResponseState.error,
+                    content: BlocConsumer<NavigationBloc<QuestionPageStep>,
+                        NavigationState<QuestionPageStep>>(
+                      listenWhen: (_, current) => current.lastPage == true,
+                      listener: (context, state) {
+                        Navigator.pop(context);
+                      },
+                      builder: (context, state) => Column(
+                        children: [
+                          PpiProgressIndicatorWidget(
+                            questionPageType: questionPageType,
+                          ),
+                          Expanded(child: _pages(state)),
+                        ],
+                      ),
+                    ),
+                    onTapCancel: () => Navigator.pop(context),
+                    onTapReload: () => context
+                        .read<QuestionBloc>()
+                        .add(const LoadQuestions()));
+              })),
     );
   }
 

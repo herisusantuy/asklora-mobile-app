@@ -52,15 +52,10 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
                 });
             break;
           case ResponseState.error:
-            // PpiScreen.openReplace(context,
-            //     arguments: const Pair(QuestionPageType.investmentStyle,
-            //         QuestionPageStep.investmentStyle));
             context.read<QuestionBloc>().add(const ResetInvestmentStylePage());
             context
                 .read<NavigationBloc<QuestionPageStep>>()
                 .add(const PagePop());
-            // CustomInAppNotification.show(
-            //     context, 'Error while posting the user request.');
             break;
           default:
         }
