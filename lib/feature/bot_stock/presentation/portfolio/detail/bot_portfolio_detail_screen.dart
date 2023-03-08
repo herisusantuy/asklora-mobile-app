@@ -174,10 +174,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
       CustomLoadingOverlay.of(context).show();
     } else {
       CustomLoadingOverlay.of(context).dismiss();
-      if (state.botPortfolioDetailResponse.state == ResponseState.error) {
-        CustomInAppNotification.show(
-            context, state.botPortfolioDetailResponse.message);
-      }
       if (state.endBotStockResponse.state == ResponseState.success) {
         BotStockResultScreen.open(
             context: context,
