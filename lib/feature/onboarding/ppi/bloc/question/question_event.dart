@@ -91,3 +91,10 @@ class ResetInvestmentStylePage extends QuestionEvent {
   @override
   List<Object> get props => [];
 }
+
+class ResetPrivacyAndPersonalisationPage extends QuestionEvent {
+  const ResetPrivacyAndPersonalisationPage() : super();
+
+  @override
+  List<Object> get props => [];
+}

@@ -6,6 +6,7 @@ import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
@@ -53,35 +54,40 @@ class PpiScreen extends StatelessWidget {
                 NavigationBloc<QuestionPageStep>(initialQuestionPage)),
       ],
       child: CustomScaffold(
-          enableBackNavigation: false,
-          body: BlocBuilder<QuestionBloc, QuestionState>(
-              buildWhen: (previous, current) =>
-                  previous.response.state != current.response.state,
-              builder: (context, state) {
-                return CustomLayoutWithBlurPopUp(
-                    subTitleAdditionalText: 'Investment Style Question',
-                    showReloadPopUp:
-                        state.response.state == ResponseState.error,
-                    content: BlocConsumer<NavigationBloc<QuestionPageStep>,
-                        NavigationState<QuestionPageStep>>(
-                      listenWhen: (_, current) => current.lastPage == true,
-                      listener: (context, state) {
-                        Navigator.pop(context);
-                      },
-                      builder: (context, state) => Column(
-                        children: [
-                          PpiProgressIndicatorWidget(
-                            questionPageType: questionPageType,
-                          ),
-                          Expanded(child: _pages(state)),
-                        ],
-                      ),
-                    ),
-                    onTapCancel: () => Navigator.pop(context),
-                    onTapReload: () => context
-                        .read<QuestionBloc>()
-                        .add(const LoadQuestions()));
-              })),
+        enableBackNavigation: false,
+        body: BlocBuilder<QuestionBloc, QuestionState>(
+          buildWhen: (previous, current) =>
+              previous.response.state != current.response.state,
+          builder: (context, state) => CustomLayoutWithBlurPopUp(
+            loraPopUpMessageModel: LoraPopUpMessageModel(
+              title: 'Unable to get information',
+              subTitle:
+                  'There was an error when trying to get your Investment Style Question. Please try reloading the page',
+              primaryButtonLabel: 'RELOAD PAGE',
+              secondaryButtonLabel: 'CANCEL',
+              onSecondaryButtonTap: () => Navigator.pop(context),
+              onPrimaryButtonTap: () =>
+                  context.read<QuestionBloc>().add(const LoadQuestions()),
+            ),
+            showPopUp: state.response.state == ResponseState.error,
+            content: BlocConsumer<NavigationBloc<QuestionPageStep>,
+                NavigationState<QuestionPageStep>>(
+              listenWhen: (_, current) => current.lastPage == true,
+              listener: (context, state) {
+                Navigator.pop(context);
+              },
+              builder: (context, state) => Column(
+                children: [
+                  PpiProgressIndicatorWidget(
+                    questionPageType: questionPageType,
+                  ),
+                  Expanded(child: _pages(state)),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -113,6 +119,7 @@ class PpiScreen extends StatelessWidget {
               return const PersonalisationResultEndScreen();
             case QuestionPageStep.investmentStyle:
               return InvestmentStyleQuestionScreen(
+                key: UniqueKey(),
                 initialIndex: state.investmentStyleQuestionIndex,
               );
             case QuestionPageStep.investmentStyleResultEnd:

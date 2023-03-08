@@ -10,6 +10,7 @@ import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
@@ -65,57 +66,58 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
           ),
         ],
         child: BlocBuilder<ForYouQuestionBloc, ForYouQuestionState>(
-            buildWhen: (previous, current) =>
-                previous.response != current.response,
-            builder: (context, investmentStyleQuestionState) =>
-                CustomLayoutWithBlurPopUp(
-                    showReloadPopUp:
-                        investmentStyleQuestionState.response.state ==
-                            ResponseState.error,
-                    content: investmentStyleQuestionState.response.state ==
-                            ResponseState.success
-                        ? Padding(
-                            padding: AppValues.screenHorizontalPadding,
-                            child: BlocProvider(
-                              create: (_) =>
-                                  NavigationBloc<InvestmentStyleQuestionType>(
-                                      investmentStyleQuestionState
-                                                  .response.data!.left !=
-                                              null
-                                          ? InvestmentStyleQuestionType
-                                              .omnisearch
-                                          : InvestmentStyleQuestionType.others),
-                              child: BlocBuilder<
-                                  NavigationBloc<InvestmentStyleQuestionType>,
-                                  NavigationState<InvestmentStyleQuestionType>>(
-                                builder: (context, navigationState) {
-                                  return Column(
-                                    children: [
-                                      CustomLinearProgressIndicator(
-                                        padding: const EdgeInsets.only(
-                                            left: 10,
-                                            top: 10,
-                                            bottom: 10,
-                                            right: 2),
-                                        progress: navigationState.page ==
-                                                InvestmentStyleQuestionType
-                                                    .omnisearch
-                                            ? 0.5
-                                            : 1,
-                                      ),
-                                      Expanded(
-                                          child: _pages(navigationState.page,
-                                              investmentStyleQuestionState))
-                                    ],
-                                  );
-                                },
+          buildWhen: (previous, current) =>
+              previous.response != current.response,
+          builder: (context, investmentStyleQuestionState) =>
+              CustomLayoutWithBlurPopUp(
+            loraPopUpMessageModel: LoraPopUpMessageModel(
+              title: 'Unable to get information',
+              subTitle:
+                  'There was an error when trying to get your Investment Style Question. Please try reloading the page',
+              primaryButtonLabel: 'RELOAD PAGE',
+              onPrimaryButtonTap: () =>
+                  context.read<ForYouQuestionBloc>().add(LoadQuestion()),
+            ),
+            showPopUp: investmentStyleQuestionState.response.state ==
+                ResponseState.error,
+            content: investmentStyleQuestionState.response.state ==
+                    ResponseState.success
+                ? Padding(
+                    padding: AppValues.screenHorizontalPadding,
+                    child: BlocProvider(
+                      create: (_) =>
+                          NavigationBloc<InvestmentStyleQuestionType>(
+                              investmentStyleQuestionState
+                                          .response.data!.left !=
+                                      null
+                                  ? InvestmentStyleQuestionType.omnisearch
+                                  : InvestmentStyleQuestionType.others),
+                      child: BlocBuilder<
+                          NavigationBloc<InvestmentStyleQuestionType>,
+                          NavigationState<InvestmentStyleQuestionType>>(
+                        builder: (context, navigationState) {
+                          return Column(
+                            children: [
+                              CustomLinearProgressIndicator(
+                                padding: const EdgeInsets.only(
+                                    left: 10, top: 10, bottom: 10, right: 2),
+                                progress: navigationState.page ==
+                                        InvestmentStyleQuestionType.omnisearch
+                                    ? 0.5
+                                    : 1,
                               ),
-                            ),
-                          )
-                        : const SizedBox.shrink(),
-                    onTapReload: () =>
-                        context.read<ForYouQuestionBloc>().add(LoadQuestion()),
-                    subTitleAdditionalText: 'Investment Style Question')),
+                              Expanded(
+                                  child: _pages(navigationState.page,
+                                      investmentStyleQuestionState))
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
+        ),
       ),
     );
   }

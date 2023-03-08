@@ -12,6 +12,7 @@ class NavigationBloc<T> extends Bloc<NavigationEvent<T>, NavigationState<T>> {
     on<PageChanged<T>>(_onPageChanged);
     on<PageChangedReplacement<T>>(_onPageChangedReplacement);
     on<PageChangedRemoveUntil<T>>(_onPageChangedRemoveUntil);
+    on<PageChangedRemoveAllRoute<T>>(_onPageChangedRemoveAllRoute);
     on<PagePop<T>>(_onPagePop);
     _savedPages = [_initialPage];
   }
@@ -39,6 +40,13 @@ class NavigationBloc<T> extends Bloc<NavigationEvent<T>, NavigationState<T>> {
     } else {
       _savedPages.removeRange(0, _savedPages.length);
     }
+    _savedPages.add(event.page);
+    emit(state.copyWith(page: event.page));
+  }
+
+  void _onPageChangedRemoveAllRoute(
+      PageChangedRemoveAllRoute event, Emitter<NavigationState> emit) {
+    _savedPages.clear();
     _savedPages.add(event.page);
     emit(state.copyWith(page: event.page));
   }

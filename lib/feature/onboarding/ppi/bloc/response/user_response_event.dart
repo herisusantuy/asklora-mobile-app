@@ -61,8 +61,9 @@ class UpdatePpiUserResponse extends UserResponseEvent {
 }
 
 class ResetState extends UserResponseEvent {
+  final bool wholeState;
   @override
   List<Object?> get props => [];
 
-  const ResetState();
+  const ResetState({this.wholeState = true});
 }

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collection/collection.dart';
 
+import '../../../../../core/data/remote/base_api_client.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/domain/triplet.dart';
@@ -40,7 +41,13 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
   final SharedPreference _sharedPreference;
 
   void _onResetState(ResetState event, Emitter<UserResponseState> emit) async {
-    emit(UserResponseState(userResponse: List.empty(growable: true)));
+    if (event.wholeState) {
+      emit(UserResponseState(userResponse: List.empty(growable: true)));
+    } else {
+      emit(state.copyWith(
+          responseState: ResponseState.unknown,
+          ppiResponseState: PpiResponseState.finishAddResponse));
+    }
   }
 
   void _onSendAnswer(
@@ -128,11 +135,18 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
         ppiResponseState: PpiResponseState.dispatchResponse,
         snapShot: userSnapShot,
       ));
+    } on BadRequestException {
+      emit(state.copyWith(
+          responseState: ResponseState.error,
+          ppiResponseState: PpiResponseState.dispatchResponse,
+          message: 'Something went wrong! Please try again.',
+          errorType: ErrorType.error400));
     } catch (e) {
       emit(state.copyWith(
           responseState: ResponseState.error,
           ppiResponseState: PpiResponseState.dispatchResponse,
-          message: 'Something went wrong! Please try again.'));
+          message: 'Something went wrong! Please try again.',
+          errorType: ErrorType.error500));
     }
   }
 

@@ -52,7 +52,6 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
                 });
             break;
           case ResponseState.error:
-            context.read<QuestionBloc>().add(const ResetInvestmentStylePage());
             context
                 .read<NavigationBloc<QuestionPageStep>>()
                 .add(const PagePop());
