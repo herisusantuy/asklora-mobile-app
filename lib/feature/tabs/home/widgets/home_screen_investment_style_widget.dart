@@ -31,7 +31,7 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
             width: 244,
             child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
               builder: (context, state) {
-                Scores value = Scores([], 0, 0, 0, 0, 0, 0, 0, 0, 0, '');
+                Scores value = Scores();
                 if (state.response.state == ResponseState.success) {
                   value = state.response.data!.scores;
                 }
