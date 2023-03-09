@@ -47,9 +47,11 @@ class PpiResponseRepository {
     }
   }
 
-  Future<BaseResponse<SnapShot>> getUserSnapshotByAskloraId(int userId) async {
+  Future<BaseResponse<SnapShot>> getUserSnapshotByAskloraId(
+      int askloraId) async {
     try {
-      var response = await _ppiApiRepository.getUserSnapshotByAskloraId(userId);
+      var response =
+          await _ppiApiRepository.getUserSnapshotByAskloraId(askloraId);
       return BaseResponse.complete(SnapShot.fromJson(response.data));
     } catch (_) {
       return BaseResponse.error(message: 'Failed to get data');
