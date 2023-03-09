@@ -36,6 +36,8 @@ const String endpointUserJourney = '$v2${activities}user-journey/';
 
 const endpointQuestion = 'questions';
 const String endpointUser = 'user';
+const String endpointGetSnapshotByDeviceId = 'user/device-id';
+const String endpointGetSnapshotByAskloraId = 'user/asklora-id';
 const String endpointAddAnswer = 'user/add-answer';
 const String endpointAddBotChoice = 'user/add-choices';
 const String endpointLinkedUser = '$endpointUser/linked';

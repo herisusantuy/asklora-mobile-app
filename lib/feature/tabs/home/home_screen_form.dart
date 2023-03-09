@@ -22,6 +22,7 @@ import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/domain/ppi_api_repository.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
+import '../../onboarding/ppi/repository/ppi_response_repository.dart';
 import 'bloc/home_screen_bloc.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
 import 'widgets/on_boarding_status/on_boarding_status.dart';
@@ -53,7 +54,7 @@ class HomeScreenForm extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (_) => HomeScreenBloc(
-                ppiApiRepository: PpiApiRepository(),
+                ppiResponseRepository: PpiResponseRepository(),
                 sharedPreference: SharedPreference())
               ..add(GetUserSnapShots()),
           ),

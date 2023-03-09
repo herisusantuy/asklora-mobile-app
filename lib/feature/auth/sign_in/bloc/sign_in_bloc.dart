@@ -6,6 +6,7 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../domain/sign_in_response.dart';
 import '../repository/sign_in_repository.dart';
 
@@ -16,9 +17,11 @@ part 'sign_in_state.dart';
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc(
       {required SignInRepository signInRepository,
-      required UserJourneyRepository userJourneyRepository})
+      required UserJourneyRepository userJourneyRepository,
+      required SharedPreference sharedPreference})
       : _signInRepository = signInRepository,
         _userJourneyRepository = userJourneyRepository,
+        _sharedPreference = sharedPreference,
         super(const SignInState()) {
     on<SignInEmailChanged>(_onEmailChanged);
     on<SignInPasswordChanged>(_onPasswordChanged);
@@ -28,6 +31,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   final SignInRepository _signInRepository;
   final UserJourneyRepository _userJourneyRepository;
+  final SharedPreference _sharedPreference;
 
   void _onEmailChanged(SignInEmailChanged event, Emitter<SignInState> emit) {
     emit(state.copyWith(

@@ -19,7 +19,6 @@ class PpiResponseRepository {
       BotRecommendationRepository();
 
   final PpiApiRepository _ppiApiRepository = PpiApiRepository();
-  final SharedPreference _sharedPreference = SharedPreference();
 
   Future<PpiUserResponse> addAnswer(
       PpiSelectionRequest ppiUserResponseRequest) async {
@@ -44,7 +43,16 @@ class PpiResponseRepository {
       var response = await _ppiApiRepository.getUserSnapshot(userId);
       return BaseResponse.complete(SnapShot.fromJson(response.data));
     } catch (_) {
-      return BaseResponse.error('Failed to get data');
+      return BaseResponse.error(message: 'Failed to get data');
+    }
+  }
+
+  Future<BaseResponse<SnapShot>> getUserSnapshotByAskloraId(int userId) async {
+    try {
+      var response = await _ppiApiRepository.getUserSnapshotByAskloraId(userId);
+      return BaseResponse.complete(SnapShot.fromJson(response.data));
+    } catch (_) {
+      return BaseResponse.error(message: 'Failed to get data');
     }
   }
 

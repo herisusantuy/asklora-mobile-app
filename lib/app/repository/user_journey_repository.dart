@@ -36,6 +36,8 @@ class UserJourneyRepository {
       var response = await _userJourneyApiClient.get();
 
       var userJourneyResponse = UserJourneyResponse.fromJson(response.data);
+      await _sharedPreference.writeIntData(
+          sfKeyAskloraId, userJourneyResponse.user!);
 
       var indexUserJourneyResponse = UserJourney.values.indexWhere(
           (element) => element.value == userJourneyResponse.userJourney);
