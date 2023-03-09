@@ -50,15 +50,10 @@ class HomeScreenForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => HomeScreenBloc(
-                ppiResponseRepository: PpiResponseRepository(),
-                sharedPreference: SharedPreference())
-              ..add(GetUserSnapShots()),
-          ),
-        ],
+      child: BlocProvider(
+        create: (context) => HomeScreenBloc(
+            ppiResponseRepository: PpiResponseRepository(),
+            sharedPreference: SharedPreference()),
         child: CustomScrollView(
           slivers: <Widget>[
             SliverPersistentHeader(
