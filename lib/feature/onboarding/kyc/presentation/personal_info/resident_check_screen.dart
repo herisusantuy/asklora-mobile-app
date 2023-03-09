@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
+import '../../../../tabs/tabs_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../widgets/custom_toggle_button.dart';
@@ -70,7 +70,7 @@ class ResidentCheckScreen extends StatelessWidget {
                         ? 'Yes'
                         : 'No'
                     : null,
-                choices: Pair('Yes', 'No'),
+                choices: const Pair('Yes', 'No'),
               ));
 
   Widget get _isHongKongResident => BlocBuilder<PersonalInfoBloc,
@@ -88,7 +88,7 @@ class ResidentCheckScreen extends StatelessWidget {
                     ? 'Yes'
                     : 'No'
                 : null,
-            choices: Pair('Yes', 'No'),
+            choices: const Pair('Yes', 'No'),
           ));
 
   Widget get _bottomButton => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
@@ -101,7 +101,8 @@ class ResidentCheckScreen extends StatelessWidget {
                 state.isHongKongPermanentResident == null,
             primaryButtonOnClick: () =>
                 context.read<PersonalInfoBloc>().add(const PersonalInfoNext()),
-            secondaryButtonOnClick: () => CarouselScreen.open(context),
+            secondaryButtonOnClick: () =>
+                TabsScreen.openAndRemoveAllRoute(context),
             primaryButtonLabel: 'NEXT',
             secondaryButtonLabel: 'SAVE FOR LATER',
           ));

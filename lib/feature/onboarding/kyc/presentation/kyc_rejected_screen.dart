@@ -5,13 +5,12 @@ import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/values/app_values.dart';
-import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/kyc_bloc.dart';
+import 'kyc_screen.dart';
 
 class KycRejectedScreen extends StatelessWidget {
   final String rejectedReason;
@@ -61,7 +60,7 @@ class KycRejectedScreen extends StatelessWidget {
   }
 
   Widget _bottomButton(BuildContext context) => ButtonPair(
-        primaryButtonOnClick: () => CarouselScreen.open(context),
+        primaryButtonOnClick: () => KycScreen.open(context),
         secondaryButtonOnClick: () =>
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
         primaryButtonLabel: 'DONE',
