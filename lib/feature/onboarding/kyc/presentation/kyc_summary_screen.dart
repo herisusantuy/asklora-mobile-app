@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -128,6 +129,13 @@ class KycSummaryScreen extends StatelessWidget {
       );
 
   SubmitKyc _submitKyc(AddressProofState addressProofState) {
+    List<ProofsOfAddressRequest> proofsOfAddressRequests = [];
+    for (var element in addressProofState.addressProofImages) {
+      final bytes = File(element.path!).readAsBytesSync();
+      proofsOfAddressRequests.add(ProofsOfAddressRequest(
+          proofFile: 'data:image/png;base64,${base64Encode(bytes)}'));
+    }
+    ;
     return SubmitKyc(UpgradeAccountRequest(
         residenceInfo: ResidenceInfoRequest(
           addressLine1: addressProofState.addressLine1,
@@ -135,11 +143,7 @@ class KycSummaryScreen extends StatelessWidget {
           district: addressProofState.district?.value,
           region: addressProofState.region?.value,
         ),
-        proofsOfAddress: addressProofState.addressProofImages
-            .map((e) => ProofsOfAddressRequest(
-                proofFile:
-                    'data:image/png;base64,${base64.encode(utf8.encode(e.name))}'))
-            .toList(),
+        proofsOfAddress: proofsOfAddressRequests,
         employmentInfo: EmploymentInfo(
             employmentStatus: financialProfileState.employmentStatus.enumString,
             employer: financialProfileState.employer,
