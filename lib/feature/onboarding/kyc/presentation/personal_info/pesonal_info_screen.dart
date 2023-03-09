@@ -255,19 +255,10 @@ class PersonalInfoScreen extends StatelessWidget {
                       lastName: state.lastName,
                       gender: state.gender,
                       hkIdNumber: state.hkIdNumber,
-                      nationality: context
-                          .read<PersonalInfoBloc>()
-                          .state
-                          .nationalityCode,
+                      nationality: state.nationalityCode,
                       dateOfBirth: state.dateOfBirth,
-                      countryOfBirth: context
-                          .read<PersonalInfoBloc>()
-                          .state
-                          .countryCodeOfBirth,
-                      phoneCountryCode: context
-                          .read<PersonalInfoBloc>()
-                          .state
-                          .phoneCountryCode,
+                      countryOfBirth: state.countryCodeOfBirth,
+                      phoneCountryCode: state.phoneCountryCode,
                       phoneNumber: state.phoneNumber,
                     )));
               },
