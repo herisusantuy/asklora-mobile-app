@@ -16,6 +16,7 @@ import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
+import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
@@ -68,8 +69,23 @@ class BotRecommendationScreen extends StatelessWidget {
                   previous.botRecommendationResponse !=
                   current.botRecommendationResponse,
               builder: (context, state) => CustomLayoutWithBlurPopUp(
-                subTitleAdditionalText: 'Investment Details',
-                showReloadPopUp: state.botRecommendationResponse.state ==
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: 'Unable to get information',
+                  subTitle:
+                      'There was an error when trying to get your Investment Details. Please try reloading the page',
+                  primaryButtonLabel: 'RELOAD PAGE',
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
+                      context: context,
+                      target: UserJourney.freeBotStock,
+                      onTrueCallback: () => context
+                          .read<BotStockBloc>()
+                          .add(FetchBotRecommendation()),
+                      onFalseCallback: () => context
+                          .read<BotStockBloc>()
+                          .add(FetchFreeBotRecommendation())),
+                ),
+                showPopUp: state.botRecommendationResponse.state ==
                     ResponseState.error,
                 content: ListView(
                   padding: const EdgeInsets.only(bottom: 35),
@@ -94,9 +110,6 @@ class BotRecommendationScreen extends StatelessWidget {
                     _needHelpButton
                   ],
                 ),
-                onTapReload: () => context.read<BotStockBloc>().add(
-                      FetchFreeBotRecommendation(),
-                    ),
               ),
             ),
           )),

@@ -1,12 +1,15 @@
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collection/collection.dart';
 
+import '../../../../../core/data/remote/base_api_client.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/domain/triplet.dart';
+import '../../../../../core/utils/log.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/utils/storage/storage_keys.dart';
 import '../../domain/ppi_user_response.dart';
@@ -33,10 +36,21 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     on<SaveUserResponse>(_onUserResponseSave);
     on<SaveOmniSearchResponse>(_onSaveOmniSearchResponse);
     on<CalculateScore>(_onCalculateScore);
+    on<ResetState>(_onResetState);
   }
 
   final PpiResponseRepository _ppiResponseRepository;
   final SharedPreference _sharedPreference;
+
+  void _onResetState(ResetState event, Emitter<UserResponseState> emit) async {
+    if (event.wholeState) {
+      emit(UserResponseState(userResponse: List.empty(growable: true)));
+    } else {
+      emit(state.copyWith(
+          responseState: ResponseState.unknown,
+          ppiResponseState: PpiResponseState.finishAddResponse));
+    }
+  }
 
   void _onSendAnswer(
       SendResponse event, Emitter<UserResponseState> emit) async {
@@ -123,11 +137,18 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
         ppiResponseState: PpiResponseState.dispatchResponse,
         snapShot: userSnapShot,
       ));
+    } on BadRequestException {
+      emit(state.copyWith(
+          responseState: ResponseState.error,
+          ppiResponseState: PpiResponseState.dispatchResponse,
+          message: 'Something went wrong! Please try again.',
+          errorType: ErrorType.error400));
     } catch (e) {
       emit(state.copyWith(
           responseState: ResponseState.error,
           ppiResponseState: PpiResponseState.dispatchResponse,
-          message: 'Something went wrong! Please try again.'));
+          message: 'Something went wrong! Please try again.',
+          errorType: ErrorType.error500));
     }
   }
 
@@ -149,6 +170,8 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       final int age = int.parse(state.userResponse![4].right);
       final List<num> scores = List.empty(growable: true);
 
+      Logger.log('age $age');
+
       for (var e in state.userResponse!) {
         String? score = e.middle.choices
                 ?.firstWhereOrNull(
@@ -158,7 +181,11 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
         scores.add(num.parse(score));
       }
 
+      Logger.log('scores $scores');
+
       var ageScore = (6 - pow(age / 35, 2));
+
+      Logger.log('ageScore before $ageScore');
 
       ageScore = ageScore <= 1
           ? 1
@@ -166,22 +193,39 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
               ? 5.5
               : ageScore;
 
+      Logger.log('ageScore after $ageScore');
+
       scores.removeWhere((element) => element == 0);
       scores.add(ageScore);
 
+      Logger.log('scores after adding age $scores');
+
       final mean = scores.reduce((a, b) => a + b) / scores.length;
+
+      Logger.log('mean $mean');
 
       final maxOfScores = scores.reduce(max);
 
-      var suitabilityScore = mean + maxOfScores / 2;
+      Logger.log('maxOfScores $maxOfScores');
+
+      var suitabilityScore = (mean + maxOfScores) / 2;
+
+      Logger.log('suitabilityScore $suitabilityScore');
 
       final objectiveScore = scores[3];
 
+      Logger.log('objectiveScore $objectiveScore');
+
       suitabilityScore = min(suitabilityScore, (objectiveScore + 0.5));
+
+      Logger.log('min objectiveScore $objectiveScore');
+
+      Logger.log(
+          'suitabilityScore $suitabilityScore objectiveScore $objectiveScore');
 
       return Future.value(Pair(suitabilityScore, objectiveScore));
     } else {
-      return Future.value(Pair(0, 0));
+      return Future.value(const Pair(0, 0));
     }
   }
 

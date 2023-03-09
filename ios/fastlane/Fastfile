@@ -75,8 +75,9 @@ platform :ios do
   lane :staging do
     set_up_env_vars(env:"staging")
     cert_stag()
-    build_app(workspace: "Runner.xcworkspace", scheme: "staging",  export_method: "ad-hoc")
-    #upload_to_testflight
+    build_app(workspace: "Runner.xcworkspace", scheme: "staging",  export_method: "app-store")
+    upload_to_testflight(username: "asklora@loratechai.com", app_identifier: "ai.asklora.app.stag", ipa: "Runner.ipa", skip_waiting_for_build_processing: true)
+    upload_symbols()
   end
 
   desc "Creating a production build"

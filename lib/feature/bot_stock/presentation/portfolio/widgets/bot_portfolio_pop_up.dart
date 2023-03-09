@@ -31,8 +31,8 @@ class BotPortfolioPopUp extends StatelessWidget {
         titleColor: AskLoraColors.white,
         subTitle: loraPopUpMessageModel.subTitle,
         subTitleColor: AskLoraColors.white,
-        buttonLabel: loraPopUpMessageModel.buttonLabel,
-        onPrimaryButtonTap: loraPopUpMessageModel.onTap,
+        primaryButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
+        onPrimaryButtonTap: loraPopUpMessageModel.onPrimaryButtonTap,
         buttonPrimaryType: ButtonPrimaryType.solidGreen,
       ),
     );
@@ -46,38 +46,38 @@ class BotPortfolioPopUp extends StatelessWidget {
             title: 'Create an Account and Start Trading!',
             subTitle:
                 'You can manage all your investments here after you start trading. Create an account and start trading.',
-            buttonLabel: 'CREATE AN ACCOUNT',
-            onTap: () => SignUpScreen.open(context));
+            primaryButtonLabel: 'CREATE AN ACCOUNT',
+            onPrimaryButtonTap: () => SignUpScreen.open(context));
       case BotPortfolioPopUpType.investmentStyle:
         return LoraPopUpMessageModel(
             title: 'Define Your Investment Style',
             subTitle:
                 'Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!',
-            buttonLabel: 'DEFINE INVESTMENT STYLE',
-            onTap: () => PpiScreen.open(context,
-                arguments: Pair(QuestionPageType.investmentStyle,
+            primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
+            onPrimaryButtonTap: () => PpiScreen.open(context,
+                arguments: const Pair(QuestionPageType.investmentStyle,
                     QuestionPageStep.investmentStyle)));
       case BotPortfolioPopUpType.kyc:
         return LoraPopUpMessageModel(
             title: 'Continue Account Opening',
             subTitle:
                 'You still need to complete your account opening until you can start trading.',
-            buttonLabel: 'CONTINUE ACCOUNT OPENING',
-            onTap: () => KycScreen.open(context));
+            primaryButtonLabel: 'CONTINUE ACCOUNT OPENING',
+            onPrimaryButtonTap: () => KycScreen.open(context));
       case BotPortfolioPopUpType.redeemBotStock:
         return LoraPopUpMessageModel(
             title: 'Redeem Your Free Botstock',
             subTitle:
                 'Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!',
-            buttonLabel: 'REDEEM YOUR BOTSTOCK NOW',
-            onTap: () => GiftBotStockWelcomeScreen.open(context));
+            primaryButtonLabel: 'REDEEM YOUR BOTSTOCK NOW',
+            onPrimaryButtonTap: () => GiftBotStockWelcomeScreen.open(context));
       case BotPortfolioPopUpType.noBotStock:
         return LoraPopUpMessageModel(
             title: 'No trading has started!',
             subTitle:
                 'You can manage all your investments here after you start trading. ',
-            buttonLabel: 'START A BOTSTOCK',
-            onTap: () => SignUpScreen.open(context));
+            primaryButtonLabel: 'START A BOTSTOCK',
+            onPrimaryButtonTap: () => SignUpScreen.open(context));
     }
   }
 }

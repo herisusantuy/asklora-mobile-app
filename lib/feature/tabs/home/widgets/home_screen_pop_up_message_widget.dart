@@ -31,7 +31,7 @@ class HomeScreenPopUpMessageWidget extends StatelessWidget {
         backgroundColor: backgroundColor,
         title: title,
         subTitle: subTitle,
-        buttonLabel: buttonLabel,
+        primaryButtonLabel: buttonLabel,
         secondaryButtonLabel: secondaryButtonLabel,
         onPrimaryButtonTap: onPrimaryButtonTap,
         onSecondaryButtonTap: onSecondaryButtonTap,
