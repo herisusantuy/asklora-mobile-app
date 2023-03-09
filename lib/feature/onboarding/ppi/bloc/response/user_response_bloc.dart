@@ -130,7 +130,8 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       var requests = _getAllSelectionsInRequest(tempId);
 
       await _ppiResponseRepository.addBulkAnswer(requests);
-      var userSnapShot = await _ppiResponseRepository.getUserSnapShot(tempId);
+      var userSnapShot =
+          await _ppiResponseRepository.getUserSnapShotUserId(tempId);
       emit(state.copyWith(
         responseState: ResponseState.success,
         ppiResponseState: PpiResponseState.dispatchResponse,

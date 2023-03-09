@@ -38,9 +38,9 @@ class PpiResponseRepository {
     return PpiUserResponse.fromJson(response.data);
   }
 
-  Future<BaseResponse<SnapShot>> getUserSnapShot(int userId) async {
+  Future<BaseResponse<SnapShot>> getUserSnapShotUserId(int userId) async {
     try {
-      var response = await _ppiApiRepository.getUserSnapshot(userId);
+      var response = await _ppiApiRepository.getUserSnapshotByUserId(userId);
       return BaseResponse.complete(SnapShot.fromJson(response.data));
     } catch (_) {
       return BaseResponse.error(message: 'Failed to get data');
