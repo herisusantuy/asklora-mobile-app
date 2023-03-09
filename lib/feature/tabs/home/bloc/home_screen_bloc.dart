@@ -26,7 +26,6 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   _onGetUserSnapshots(
       GetUserSnapShots event, Emitter<HomeScreenState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
-    var userId = await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
     var askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
     var response =
         await _ppiResponseRepository.getUserSnapshotByAskloraId(askloraId ?? 0);
