@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -54,12 +53,8 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
             break;
           case ResponseState.error:
             context
-                .read<QuestionBloc>()
-                .add(const CurrentInvestmentStylePageDecremented());
-            context
                 .read<NavigationBloc<QuestionPageStep>>()
                 .add(const PagePop());
-            CustomInAppNotification.show(context, BaseResponse.errorMessage);
             break;
           default:
         }

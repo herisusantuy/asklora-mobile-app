@@ -163,7 +163,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
     drawLineTimer = Timer.periodic(
         Duration(milliseconds: ((factor / currentDistance)).round()), (timer) {
       if (mounted) {
-        int? hedgeShare = widget.chartDataSets[animateIndex].hedgeShare;
+        double? hedgeShare = widget.chartDataSets[animateIndex].hedgeShare;
         double? profit = widget.chartDataSets[animateIndex].currentPnlRet;
         if (profit != null) {
           lastProfit = widget.chartDataSets[animateIndex].currentPnlRet!;

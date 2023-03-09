@@ -45,8 +45,8 @@ class ForYouScreenForm extends StatelessWidget {
                 ),
                 popUpTitle: loraPopUpMessageModel.title,
                 popUpSubTitle: loraPopUpMessageModel.subTitle,
-                popUpButtonLabel: loraPopUpMessageModel.buttonLabel,
-                onPopUpButtonTap: loraPopUpMessageModel.onTap);
+                popUpButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
+                onPopUpButtonTap: loraPopUpMessageModel.onPrimaryButtonTap);
           } else {
             return _getForYouPage;
           }
@@ -104,8 +104,8 @@ class ForYouScreenForm extends StatelessWidget {
           title: 'No Botstock recommendation.',
           subTitle:
               'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-          buttonLabel: 'DEFINE INVESTMENT STYLE',
-          onTap: () => context
+          primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
+          onPrimaryButtonTap: () => context
               .read<NavigationBloc<ForYouPage>>()
               .add(const PageChanged(ForYouPage.investmentStyle)));
     } else {
@@ -115,8 +115,8 @@ class ForYouScreenForm extends StatelessWidget {
               title: 'No Botstock recommendation.',
               subTitle:
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-              buttonLabel: 'DEFINE INVESTMENT STYLE',
-              onTap: () => PpiScreen.open(context,
+              primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
+              onPrimaryButtonTap: () => PpiScreen.open(context,
                   arguments: Pair(QuestionPageType.investmentStyle,
                       QuestionPageStep.investmentStyle)));
         case UserJourney.kyc:
@@ -124,18 +124,22 @@ class ForYouScreenForm extends StatelessWidget {
               title: 'No Botstock recommendation.',
               subTitle:
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-              buttonLabel: 'OPEN INVESTMENT ACCOUNT',
-              onTap: () => KycScreen.open(context));
+              primaryButtonLabel: 'OPEN INVESTMENT ACCOUNT',
+              onPrimaryButtonTap: () => KycScreen.open(context));
         case UserJourney.freeBotStock:
           return LoraPopUpMessageModel(
               title: 'No Botstock recommendation.',
               subTitle:
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-              buttonLabel: 'REDEEM YOUR BOTSTOCK NOW',
-              onTap: () => GiftBotStockWelcomeScreen.open(context));
+              primaryButtonLabel: 'REDEEM YOUR BOTSTOCK NOW',
+              onPrimaryButtonTap: () =>
+                  GiftBotStockWelcomeScreen.open(context));
         default:
           return LoraPopUpMessageModel(
-              title: '', subTitle: '', buttonLabel: '', onTap: () {});
+              title: '',
+              subTitle: '',
+              primaryButtonLabel: '',
+              onPrimaryButtonTap: () {});
       }
     }
   }

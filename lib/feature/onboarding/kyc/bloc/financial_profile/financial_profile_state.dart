@@ -109,7 +109,7 @@ class FinancialProfileState extends Equatable {
             (country != 'HKG' && detailInformationOfCountry.isEmpty)) {
           return false;
         } else {
-          if (employer.isEmpty || employerAddress.isEmpty) {
+          if (employer.isEmpty || employerAddress.isEmpty || district == null) {
             return false;
           }
           return true;

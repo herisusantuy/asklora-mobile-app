@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
@@ -18,6 +17,7 @@ class PersonalisationResultEndScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('rebuild result end ');
     return CustomNavigationWidget<QuestionPageStep>(
       onBackPressed: () {
         context
@@ -43,8 +43,6 @@ class PersonalisationResultEndScreen extends StatelessWidget {
             context
                 .read<NavigationBloc<QuestionPageStep>>()
                 .add(const PagePop());
-            CustomInAppNotification.show(
-                context, 'Error while posting the user request.');
             break;
           default:
         }

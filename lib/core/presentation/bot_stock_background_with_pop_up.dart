@@ -79,7 +79,7 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
                       titleColor: AskLoraColors.white,
                       subTitle: popUpSubTitle,
                       subTitleColor: AskLoraColors.white,
-                      buttonLabel: popUpButtonLabel,
+                      primaryButtonLabel: popUpButtonLabel,
                       buttonPrimaryType: ButtonPrimaryType.solidGreen,
                       onPrimaryButtonTap: onPopUpButtonTap,
                     ),

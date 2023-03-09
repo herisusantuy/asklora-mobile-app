@@ -35,6 +35,15 @@ class PageChangedRemoveUntil<T> extends NavigationEvent<T> {
   List<Object?> get props => [page, removeUntil];
 }
 
+class PageChangedRemoveAllRoute<T> extends NavigationEvent<T> {
+  final T page;
+
+  const PageChangedRemoveAllRoute(this.page) : super();
+
+  @override
+  List<Object?> get props => [page];
+}
+
 class PagePop<T> extends NavigationEvent<T> {
   const PagePop() : super();
 

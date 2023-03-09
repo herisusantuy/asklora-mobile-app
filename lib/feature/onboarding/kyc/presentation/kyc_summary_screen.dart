@@ -108,6 +108,9 @@ class KycSummaryScreen extends StatelessWidget {
               break;
             case ResponseState.success:
               context
+                  .read<AppBloc>()
+                  .add(const SaveUserJourney(UserJourney.freeBotStock));
+              context
                   .read<NavigationBloc<KycPageStep>>()
                   .add(const PageChanged(KycPageStep.kycResultScreen));
               break;
@@ -118,9 +121,6 @@ class KycSummaryScreen extends StatelessWidget {
         child: ButtonPair(
           primaryButtonOnClick: () {
             context.read<KycBloc>().add(_submitKyc(addressProofState));
-            context
-                .read<AppBloc>()
-                .add(const SaveUserJourney(UserJourney.freeBotStock));
           },
           secondaryButtonOnClick: () => CarouselScreen.open(context),
           primaryButtonLabel: 'COMPLETE',

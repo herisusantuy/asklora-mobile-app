@@ -7,7 +7,7 @@ class Pair<T, S> extends Equatable {
   final S right;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [left ?? '', right ?? ''];
 
   @override
   String toString() {

@@ -50,10 +50,10 @@ class UserJourneyRepository {
       } else {
         return UserJourney.values.firstWhereOrNull((element) =>
                 element.value == userJourneyResponse.userJourney) ??
-            UserJourney.privacy;
+            UserJourney.investmentStyle;
       }
     } catch (e) {
-      return localUserJourney ?? UserJourney.privacy;
+      return localUserJourney ?? UserJourney.investmentStyle;
     }
   }
 }

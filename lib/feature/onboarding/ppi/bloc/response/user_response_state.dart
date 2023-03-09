@@ -7,11 +7,13 @@ enum PpiResponseState {
   dispatchResponse
 }
 
+enum ErrorType { unknown, error400, error500 }
+
 class UserResponseState extends Equatable {
   final ResponseState responseState;
   final PpiResponseState ppiResponseState;
   final BaseResponse<SnapShot>? snapShot;
-  final String message;
+  final ErrorType errorType;
 
   /// Left => question id
   /// middle => Whole question object
@@ -30,7 +32,7 @@ class UserResponseState extends Equatable {
     this.cachedSelectedChoices = const [],
     this.cachedDefaultChoices = const [],
     this.snapShot,
-    this.message = '',
+    this.errorType = ErrorType.unknown,
   });
 
   UserResponseState copyWith({
@@ -41,6 +43,7 @@ class UserResponseState extends Equatable {
     List<String>? cachedDefaultChoices,
     BaseResponse<SnapShot>? snapShot,
     String? message,
+    ErrorType? errorType,
   }) {
     return UserResponseState(
       responseState: responseState ?? this.responseState,
@@ -50,7 +53,7 @@ class UserResponseState extends Equatable {
           cachedSelectedChoices ?? this.cachedSelectedChoices,
       cachedDefaultChoices: cachedDefaultChoices ?? this.cachedDefaultChoices,
       snapShot: snapShot ?? this.snapShot,
-      message: message ?? this.message,
+      errorType: errorType ?? this.errorType,
     );
   }
 
@@ -60,6 +63,6 @@ class UserResponseState extends Equatable {
         cachedSelectedChoices,
         cachedDefaultChoices,
         ppiResponseState,
-        message,
+        errorType
       ];
 }

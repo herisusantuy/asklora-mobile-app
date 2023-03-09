@@ -6,20 +6,17 @@ import '../styles/asklora_colors.dart';
 import '../values/app_values.dart';
 import 'buttons/primary_button.dart';
 import 'lora_popup_message/lora_popup_message.dart';
+import 'lora_popup_message/model/lora_pop_up_message_model.dart';
 
 class CustomLayoutWithBlurPopUp extends StatelessWidget {
+  final LoraPopUpMessageModel loraPopUpMessageModel;
   final Widget content;
-  final VoidCallback onTapReload;
-  final VoidCallback? onTapCancel;
-  final bool showReloadPopUp;
-  final String subTitleAdditionalText;
+  final bool showPopUp;
 
   const CustomLayoutWithBlurPopUp(
-      {required this.content,
-      required this.onTapReload,
-      this.onTapCancel,
-      this.showReloadPopUp = false,
-      required this.subTitleAdditionalText,
+      {required this.loraPopUpMessageModel,
+      required this.content,
+      this.showPopUp = false,
       Key? key})
       : super(key: key);
 
@@ -28,7 +25,7 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
     return Stack(
       children: [
         content,
-        if (showReloadPopUp) ...[
+        if (showPopUp) ...[
           ClipRect(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
@@ -44,17 +41,18 @@ class CustomLayoutWithBlurPopUp extends StatelessWidget {
               child: LoraPopUpMessage(
                 pngImage: 'lora_memoji_10',
                 backgroundColor: AskLoraColors.charcoal,
-                title: 'Unable to get information',
+                title: loraPopUpMessageModel.title,
                 titleColor: AskLoraColors.white,
-                subTitle:
-                    'There was an error when trying to get your $subTitleAdditionalText. Please try reloading the page',
+                subTitle: loraPopUpMessageModel.subTitle,
                 subTitleColor: AskLoraColors.white,
-                buttonLabel: 'RELOAD PAGE',
+                primaryButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
                 buttonPrimaryType: ButtonPrimaryType.solidGreen,
-                onPrimaryButtonTap: onTapReload,
-                secondaryButtonLabel: onTapCancel != null ? 'CANCEL' : null,
+                onPrimaryButtonTap: loraPopUpMessageModel.onPrimaryButtonTap,
+                secondaryButtonLabel:
+                    loraPopUpMessageModel.secondaryButtonLabel,
                 secondaryButtonColor: AskLoraColors.white,
-                onSecondaryButtonTap: onTapCancel,
+                onSecondaryButtonTap:
+                    loraPopUpMessageModel.onSecondaryButtonTap,
               ),
             ),
           ),
