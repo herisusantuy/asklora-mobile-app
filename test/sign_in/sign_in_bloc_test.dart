@@ -13,7 +13,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../for_you/for_you_question_bloc_test.mocks.dart';
 import 'sign_in_bloc_test.mocks.dart';
 
 class DioAdapterMock extends Mock implements HttpClientAdapter {}
@@ -33,14 +32,14 @@ void main() async {
     late MockUserJourneyRepository userJourneyRepository;
     late SignInBloc signInBloc;
     late MockRepository mockRepository;
-    late MockSharedPreference mockSharedPreference;
+    late SharedPreference sharedPreference;
 
     setUpAll(
       () async {
         signInRepository = MockSignInRepository();
         mockRepository = MockRepository();
         userJourneyRepository = MockUserJourneyRepository();
-        mockSharedPreference = MockSharedPreference();
+        sharedPreference = MockSharedPreference();
 
         when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
           null;
@@ -56,7 +55,7 @@ void main() async {
         signInBloc = SignInBloc(
             signInRepository: signInRepository,
             userJourneyRepository: userJourneyRepository,
-            sharedPreference: mockSharedPreference);
+            sharedPreference: sharedPreference);
       },
     );
 
