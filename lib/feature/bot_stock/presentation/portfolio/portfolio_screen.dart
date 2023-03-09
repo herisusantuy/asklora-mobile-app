@@ -14,6 +14,7 @@ import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
+import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/currency_enum.dart';
@@ -64,44 +65,50 @@ class PortfolioScreen extends StatelessWidget {
         backgroundColor: AskLoraColors.white,
         enableBackNavigation: false,
         body: BlocBuilder<PortfolioBloc, PortfolioState>(
-            buildWhen: (previous, current) =>
-                previous.portfolioResponse != current.portfolioResponse ||
-                previous.botPortfolioResponse != current.botPortfolioResponse ||
-                previous.currency != current.currency,
-            builder: (context, state) {
-              return CustomLayoutWithBlurPopUp(
-                subTitleAdditionalText: 'Portfolio',
-                showReloadPopUp:
-                    state.botPortfolioResponse.state == ResponseState.error ||
-                        state.portfolioResponse.state == ResponseState.error,
-                content: ListView(
-                  padding: AppValues.screenHorizontalPadding
-                      .copyWith(top: 15, bottom: 15),
-                  children: [
-                    _botStockDetail(context, state),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    CustomTextNew(
-                      'Your Botstocks',
-                      style: AskLoraTextStyles.h2
-                          .copyWith(color: AskLoraColors.charcoal),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    BotPortfolioList(
-                      userJourney: context.read<AppBloc>().state.userJourney,
-                      portfolioState: state,
-                    ),
-                  ],
+          buildWhen: (previous, current) =>
+              previous.portfolioResponse != current.portfolioResponse ||
+              previous.botPortfolioResponse != current.botPortfolioResponse ||
+              previous.currency != current.currency,
+          builder: (context, state) => CustomLayoutWithBlurPopUp(
+            loraPopUpMessageModel: LoraPopUpMessageModel(
+              title: 'Unable to get information',
+              subTitle:
+                  'There was an error when trying to get your Portfolio. Please try reloading the page',
+              primaryButtonLabel: 'RELOAD PAGE',
+              secondaryButtonLabel: 'CANCEL',
+              onSecondaryButtonTap: () => Navigator.pop(context),
+              onPrimaryButtonTap: () {
+                context.read<PortfolioBloc>().add(const FetchBotPortfolio());
+                context.read<PortfolioBloc>().add(FetchPortfolio());
+              },
+            ),
+            showPopUp:
+                state.botPortfolioResponse.state == ResponseState.error ||
+                    state.portfolioResponse.state == ResponseState.error,
+            content: ListView(
+              padding: AppValues.screenHorizontalPadding
+                  .copyWith(top: 15, bottom: 15),
+              children: [
+                _botStockDetail(context, state),
+                const SizedBox(
+                  height: 40,
                 ),
-                onTapReload: () {
-                  context.read<PortfolioBloc>().add(const FetchBotPortfolio());
-                  context.read<PortfolioBloc>().add(FetchPortfolio());
-                },
-              );
-            }),
+                CustomTextNew(
+                  'Your Botstocks',
+                  style: AskLoraTextStyles.h2
+                      .copyWith(color: AskLoraColors.charcoal),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                BotPortfolioList(
+                  userJourney: context.read<AppBloc>().state.userJourney,
+                  portfolioState: state,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

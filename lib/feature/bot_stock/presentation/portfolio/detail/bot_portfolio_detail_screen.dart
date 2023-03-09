@@ -11,6 +11,7 @@ import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
+import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
@@ -73,15 +74,20 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               previous.botPortfolioDetailResponse.state !=
               current.botPortfolioDetailResponse.state,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
-            subTitleAdditionalText: 'Portfolio',
-            onTapCancel: () => Navigator.pop(context),
-            showReloadPopUp:
-                state.botPortfolioDetailResponse.state == ResponseState.error,
-            onTapReload: () => context.read<PortfolioBloc>().add(
+            loraPopUpMessageModel: LoraPopUpMessageModel(
+              title: 'Unable to get information',
+              subTitle:
+                  'There was an error when trying to get your Portfolio. Please try reloading the page',
+              primaryButtonLabel: 'RELOAD PAGE',
+              secondaryButtonLabel: 'CANCEL',
+              onSecondaryButtonTap: () => Navigator.pop(context),
+              onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
                   (FetchBotPortfolioDetail(
                       ticker: portfolioBotModel.ticker,
-                      botId: portfolioBotModel.botId)),
-                ),
+                      botId: portfolioBotModel.botId))),
+            ),
+            showPopUp:
+                state.botPortfolioDetailResponse.state == ResponseState.error,
             content: BotStockForm(
                 useHeader: true,
                 customHeader: BotPortfolioDetailHeader(
@@ -150,7 +156,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               titleColor: AskLoraColors.white,
               subTitle: 'The secret of getting ahead is getting started.',
               subTitleColor: AskLoraColors.white,
-              buttonLabel: 'COMPLETE MILESTONE',
+              primaryButtonLabel: 'COMPLETE MILESTONE',
               onPrimaryButtonTap: () => DepositWelcomeScreen.open(
                   context: context, depositType: DepositType.firstTime),
               buttonPrimaryType: ButtonPrimaryType.solidGreen,
@@ -168,10 +174,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
       CustomLoadingOverlay.of(context).show();
     } else {
       CustomLoadingOverlay.of(context).dismiss();
-      if (state.botPortfolioDetailResponse.state == ResponseState.error) {
-        CustomInAppNotification.show(
-            context, state.botPortfolioDetailResponse.message);
-      }
       if (state.endBotStockResponse.state == ResponseState.success) {
         BotStockResultScreen.open(
             context: context,

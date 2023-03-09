@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../bloc/bot_stock_bloc.dart';
@@ -49,20 +49,25 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               CustomLoadingOverlay.of(context).show();
             } else {
               CustomLoadingOverlay.of(context).dismiss();
-              if (state.botDetailResponse.state == ResponseState.error) {
-                CustomInAppNotification.show(
-                    context, state.botDetailResponse.message);
-              }
             }
           },
           buildWhen: (previous, current) =>
               previous.botDetailResponse.state !=
               current.botDetailResponse.state,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
-            subTitleAdditionalText: 'Investment Details',
-            onTapCancel: () => Navigator.pop(context),
-            showReloadPopUp:
-                state.botDetailResponse.state == ResponseState.error,
+            loraPopUpMessageModel: LoraPopUpMessageModel(
+              title: 'Unable to get information',
+              subTitle:
+                  'There was an error when trying to get your Investment Details. Please try reloading the page',
+              primaryButtonLabel: 'RELOAD PAGE',
+              secondaryButtonLabel: 'CANCEL',
+              onSecondaryButtonTap: () => Navigator.pop(context),
+              onPrimaryButtonTap: () => context.read<BotStockBloc>().add(
+                  (FetchBotDetail(
+                      ticker: botRecommendationModel.ticker,
+                      botId: botRecommendationModel.botId))),
+            ),
+            showPopUp: state.botDetailResponse.state == ResponseState.error,
             content: BotStockForm(
               useHeader: true,
               title:
@@ -93,11 +98,6 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                     }),
               ),
             ),
-            onTapReload: () => context.read<BotStockBloc>().add(
-                  (FetchBotDetail(
-                      ticker: botRecommendationModel.ticker,
-                      botId: botRecommendationModel.botId)),
-                ),
           ),
         ),
       ),

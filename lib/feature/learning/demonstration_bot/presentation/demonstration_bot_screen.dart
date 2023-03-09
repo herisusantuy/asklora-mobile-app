@@ -136,7 +136,7 @@ class DemonstrationBotScreen extends StatelessWidget {
         subTitleColor: AskLoraColors.white,
         backgroundColor: AskLoraColors.charcoal,
         title: 'The recommendation is based on your investment preference.',
-        buttonLabel: '',
+        primaryButtonLabel: '',
         subTitle:
             'Investment preference included Investment Style, Privacy Questions and Personalisation Questions.',
       );

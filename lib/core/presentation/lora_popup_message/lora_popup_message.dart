@@ -11,7 +11,7 @@ class LoraPopUpMessage extends StatelessWidget {
   final Color backgroundColor;
   final String title;
   final String? subTitle;
-  final String? buttonLabel;
+  final String? primaryButtonLabel;
   final String? secondaryButtonLabel;
   final Color? secondaryButtonColor;
   final Color titleColor;
@@ -34,7 +34,7 @@ class LoraPopUpMessage extends StatelessWidget {
       this.titleColor = AskLoraColors.charcoal,
       this.subTitleColor = AskLoraColors.charcoal,
       this.buttonPrimaryType = ButtonPrimaryType.solidCharcoal,
-      this.buttonLabel,
+      this.primaryButtonLabel,
       this.secondaryButtonLabel,
       this.secondaryButtonColor,
       this.backgroundColor = AskLoraColors.white,
@@ -91,10 +91,10 @@ class LoraPopUpMessage extends StatelessWidget {
                         ),
                       ),
                     if (content != null) content!,
-                    if (buttonLabel != null)
+                    if (primaryButtonLabel != null)
                       PrimaryButton(
                           buttonPrimaryType: buttonPrimaryType,
-                          label: buttonLabel!,
+                          label: primaryButtonLabel!,
                           onTap: () {
                             if (onPrimaryButtonTap != null) {
                               onPrimaryButtonTap!();

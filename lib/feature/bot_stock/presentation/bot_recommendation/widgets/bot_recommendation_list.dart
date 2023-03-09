@@ -77,7 +77,7 @@ class BotRecommendationList extends StatelessWidget {
                   subTitle:
                       'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
                   subTitleColor: AskLoraColors.white,
-                  buttonLabel: 'RETAKE INVESTMENT STYLE',
+                  primaryButtonLabel: 'RETAKE INVESTMENT STYLE',
                   buttonPrimaryType: ButtonPrimaryType.solidGreen,
                   onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
                     context: context,

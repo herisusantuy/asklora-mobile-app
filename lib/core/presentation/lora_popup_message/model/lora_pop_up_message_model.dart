@@ -3,12 +3,16 @@ import 'dart:ui';
 class LoraPopUpMessageModel {
   final String title;
   final String subTitle;
-  final String buttonLabel;
-  final VoidCallback onTap;
+  final String primaryButtonLabel;
+  final String? secondaryButtonLabel;
+  final VoidCallback onPrimaryButtonTap;
+  final VoidCallback? onSecondaryButtonTap;
 
   LoraPopUpMessageModel(
       {required this.title,
       required this.subTitle,
-      required this.buttonLabel,
-      required this.onTap});
+      required this.primaryButtonLabel,
+      this.secondaryButtonLabel,
+      required this.onPrimaryButtonTap,
+      this.onSecondaryButtonTap});
 }
