@@ -218,8 +218,7 @@ class PersonalInfoScreen extends StatelessWidget {
         onChanged: onChanged,
         labelText: label,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        textInputFormatterList:
-            textInputFormatterList ?? [fullEnglishNameFormatter()],
+        textInputFormatterList: textInputFormatterList,
         textInputType: TextInputType.text,
         hintText: hintText ?? '',
       );
