@@ -35,10 +35,12 @@ const String endpointUserJourney = '$v2${activities}user-journey/';
 /// PPI related
 
 const endpointQuestion = 'questions';
-const String endpointUser = 'user';
+const String endpointGetUser = 'user';
+const String endpointGetSnapshotByDeviceId = 'user/device-id';
+const String endpointGetSnapshotByAskloraId = 'user/asklora-id';
 const String endpointAddAnswer = 'user/add-answer';
 const String endpointAddBotChoice = 'user/add-choices';
-const String endpointLinkedUser = '$endpointUser/linked';
+const String endpointLinkedUser = '$endpointGetUser/linked';
 
 ///
 /// URLS

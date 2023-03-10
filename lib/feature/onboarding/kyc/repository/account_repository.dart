@@ -33,13 +33,13 @@ class AccountRepository {
   }
 
   Future<BaseResponse<PersonalInfoResponse>> submitPersonalInfo(
-      PersonalInfoRequest personalInfoRequest) async {
+      {required PersonalInfoRequest personalInfoRequest}) async {
     try {
       var response =
           await _accountApiClient.submitPersonalInfo(personalInfoRequest);
       return BaseResponse.complete(
           PersonalInfoResponse.fromJson(response.data));
-    } catch (e) {
+    } catch (_) {
       return BaseResponse.error();
     }
   }

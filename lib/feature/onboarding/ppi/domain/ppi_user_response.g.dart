@@ -57,19 +57,20 @@ Map<String, dynamic> _$AnswerToJson(Answer instance) => <String, dynamic>{
     };
 
 Scores _$ScoresFromJson(Map<String, dynamic> json) => Scores(
-      (json['answers'] as List<dynamic>)
-          .map((e) => Answer.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      json['conscientiousness'] as int,
-      (json['extrovert'] as num).toDouble(),
-      (json['objective'] as num).toDouble(),
-      json['investment_style'] as int,
-      (json['max_risk_score'] as num).toDouble(),
-      json['neuroticism'] as int,
-      json['openness'] as int,
-      json['privacy'] as int,
-      (json['suitability'] as num).toDouble(),
-      json['current_question_id'] as String,
+      answers: (json['answers'] as List<dynamic>?)
+              ?.map((e) => Answer.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      conscientiousness: json['conscientiousness'] as int? ?? 0,
+      extrovert: (json['extrovert'] as num?)?.toDouble() ?? 0,
+      objective: (json['objective'] as num?)?.toDouble() ?? 0,
+      investmentStyle: json['investment_style'] as int? ?? 0,
+      maxRiskScore: (json['max_risk_score'] as num?)?.toDouble() ?? 0,
+      neuroticism: json['neuroticism'] as int? ?? 0,
+      openness: json['openness'] as int? ?? 0,
+      privacy: json['privacy'] as int? ?? 0,
+      suitability: (json['suitability'] as num?)?.toDouble() ?? 0,
+      currentQuestionId: json['current_question_id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$ScoresToJson(Scores instance) => <String, dynamic>{

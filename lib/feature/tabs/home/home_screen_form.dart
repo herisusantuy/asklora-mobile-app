@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../app/bloc/app_bloc.dart';
+import '../../../core/domain/base_response.dart';
 import '../../../core/domain/pair.dart';
 import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.dart';
 import '../../../core/presentation/buttons/primary_button.dart';
@@ -13,11 +14,16 @@ import '../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/extensions.dart';
+import '../../../core/utils/storage/shared_preference.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../bot_stock/utils/bot_stock_utils.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../onboarding/ppi/bloc/question/question_bloc.dart';
+import '../../onboarding/ppi/domain/ppi_api_repository.dart';
+import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
+import '../../onboarding/ppi/repository/ppi_response_repository.dart';
+import 'bloc/home_screen_bloc.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
 import 'widgets/on_boarding_status/on_boarding_status.dart';
 
@@ -44,27 +50,32 @@ class HomeScreenForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: CustomScrollView(
-        slivers: <Widget>[
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: CustomSliverPersistentHeader(),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              const SizedBox(
-                height: 100,
-              ),
-              const HomeScreenHorizontalPaddingWidget(
-                child: OnBoardingStatus(),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const HomeScreenContentWidget(),
-            ]),
-          ),
-        ],
+      child: BlocProvider(
+        create: (context) => HomeScreenBloc(
+            ppiResponseRepository: PpiResponseRepository(),
+            sharedPreference: SharedPreference()),
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: CustomSliverPersistentHeader(),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                const SizedBox(
+                  height: 100,
+                ),
+                const HomeScreenHorizontalPaddingWidget(
+                  child: OnBoardingStatus(),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                const HomeScreenContentWidget(),
+              ]),
+            ),
+          ],
+        ),
       ),
     );
   }

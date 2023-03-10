@@ -2,6 +2,7 @@ import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
 import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart';
@@ -24,18 +25,21 @@ class MockRepository extends Mock implements Repository {}
 @GenerateMocks([SignInRepository])
 @GenerateMocks([UserJourneyRepository])
 @GenerateMocks([SignInApiClient])
+@GenerateMocks([SharedPreference])
 void main() async {
   group('Sign In Screen Bloc Test', () {
     late MockSignInRepository signInRepository;
     late MockUserJourneyRepository userJourneyRepository;
     late SignInBloc signInBloc;
     late MockRepository mockRepository;
+    late SharedPreference sharedPreference;
 
     setUpAll(
       () async {
         signInRepository = MockSignInRepository();
         mockRepository = MockRepository();
         userJourneyRepository = MockUserJourneyRepository();
+        sharedPreference = MockSharedPreference();
 
         when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
           null;
@@ -50,7 +54,8 @@ void main() async {
         TestWidgetsFlutterBinding.ensureInitialized();
         signInBloc = SignInBloc(
             signInRepository: signInRepository,
-            userJourneyRepository: userJourneyRepository);
+            userJourneyRepository: userJourneyRepository,
+            sharedPreference: sharedPreference);
       },
     );
 

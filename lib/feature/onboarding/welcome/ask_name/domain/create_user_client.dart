@@ -8,5 +8,5 @@ import 'add_user_request.dart';
 
 class CreateUserClient {
   Future<Response> addUser(AddUserRequest request) async => await PpiApiClient()
-      .post(endpoint: endpointUser, payload: json.encode(request.toJson()));
+      .post(endpoint: endpointGetUser, payload: json.encode(request.toJson()));
 }

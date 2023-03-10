@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../bloc/sign_in_bloc.dart';
 import '../repository/sign_in_repository.dart';
 import 'sign_in_form.dart';
@@ -23,7 +24,8 @@ class SignInScreen extends StatelessWidget {
               signInRepository: SignInRepository(
                 TokenRepository(),
               ),
-              userJourneyRepository: UserJourneyRepository()),
+              userJourneyRepository: UserJourneyRepository(),
+              sharedPreference: SharedPreference()),
           child: const SignInForm(),
         ),
       ),

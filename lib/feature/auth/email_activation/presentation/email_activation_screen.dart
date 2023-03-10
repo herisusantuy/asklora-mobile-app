@@ -60,9 +60,10 @@ class EmailActivationScreen extends StatelessWidget {
                   text:
                       'Sorry! Your request has been timed out. Let’s try and activate your account again.',
                   loraMemojiType: LoraMemojiType.lora6)
-              : const LoraMemojiHeader(
+              : LoraMemojiHeader(
                   loraMemojiType: LoraMemojiType.lora7,
-                  text: 'Check your email and activate your account.');
+                  text:
+                      "We've sent an email to $userName Please use your phone to click on the activation link!");
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return CustomScaffold(

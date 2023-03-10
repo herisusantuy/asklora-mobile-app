@@ -22,8 +22,12 @@ class PpiApiRepository {
       await PpiApiClient()
           .post(endpoint: endpointAddAnswer, payload: jsonEncode(request));
 
-  Future<Response> getUserSnapshot(int userId) async =>
-      await PpiApiClient().get(endpoint: '$endpointUser/$userId');
+  Future<Response> getUserSnapshotByUserId(int userId) async =>
+      await PpiApiClient().get(endpoint: '$endpointGetUser/$userId');
+
+  Future<Response> getUserSnapshotByAskloraId(int askloraId) async =>
+      await PpiApiClient()
+          .get(endpoint: '$endpointGetSnapshotByAskloraId/$askloraId');
 
   Future<Response> postBotChoice(BotSubmissionRequest request) async =>
       await PpiApiClient().post(
