@@ -13,6 +13,7 @@ import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../tabs/tabs_screen.dart';
 import '../../../../bloc/kyc_bloc.dart';
+import '../../../../bloc/personal_info/personal_info_bloc.dart';
 import '../../../widgets/kyc_base_form.dart';
 import '../bloc/otp_bloc.dart';
 
@@ -48,7 +49,7 @@ class OtpScreen extends StatelessWidget {
         content: Column(
           children: [
             CustomTextNew(
-              'We’ve sent you a code via SMS to verify your phone number. Please enter the OTP code below..',
+              'We’ve sent you a code via SMS to verify your phone number (${_getPhoneNumber(context)}). Please enter the OTP code below.',
               key: const Key('sub_title'),
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
@@ -112,6 +113,11 @@ class OtpScreen extends StatelessWidget {
                 context.read<OtpBloc>().add(OtpSubmitted(otp));
               });
         });
+  }
+
+  String _getPhoneNumber(BuildContext context) {
+    PersonalInfoState state = context.read<PersonalInfoBloc>().state;
+    return '+${state.phoneCountryCode} ${state.phoneNumber}';
   }
 
   String _formatTimeMMSS(int time) =>
