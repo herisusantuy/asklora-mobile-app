@@ -123,11 +123,12 @@ class MockAccountRepository extends _i1.Mock implements _i5.AccountRepository {
       ) as _i6.Future<_i3.BaseResponse<_i7.UpgradeAccountResponse>>);
   @override
   _i6.Future<_i3.BaseResponse<_i9.PersonalInfoResponse>> submitPersonalInfo(
-          _i10.PersonalInfoRequest? personalInfoRequest) =>
+          {required _i10.PersonalInfoRequest? personalInfoRequest}) =>
       (super.noSuchMethod(
         Invocation.method(
           #submitPersonalInfo,
-          [personalInfoRequest],
+          [],
+          {#personalInfoRequest: personalInfoRequest},
         ),
         returnValue:
             _i6.Future<_i3.BaseResponse<_i9.PersonalInfoResponse>>.value(
@@ -135,7 +136,8 @@ class MockAccountRepository extends _i1.Mock implements _i5.AccountRepository {
           this,
           Invocation.method(
             #submitPersonalInfo,
-            [personalInfoRequest],
+            [],
+            {#personalInfoRequest: personalInfoRequest},
           ),
         )),
       ) as _i6.Future<_i3.BaseResponse<_i9.PersonalInfoResponse>>);
