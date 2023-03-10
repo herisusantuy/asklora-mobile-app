@@ -7,6 +7,8 @@ import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
+import '../../../user/account/repository/account_repository.dart';
 import '../domain/sign_in_response.dart';
 import '../repository/sign_in_repository.dart';
 
@@ -18,10 +20,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc(
       {required SignInRepository signInRepository,
       required UserJourneyRepository userJourneyRepository,
-      required SharedPreference sharedPreference})
+      required SharedPreference sharedPreference,
+      required AccountRepository accountRepository})
       : _signInRepository = signInRepository,
         _userJourneyRepository = userJourneyRepository,
         _sharedPreference = sharedPreference,
+        _accountRepository = accountRepository,
         super(const SignInState()) {
     on<SignInEmailChanged>(_onEmailChanged);
     on<SignInPasswordChanged>(_onPasswordChanged);
@@ -30,6 +34,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   final SignInRepository _signInRepository;
+  final AccountRepository _accountRepository;
   final UserJourneyRepository _userJourneyRepository;
   final SharedPreference _sharedPreference;
 
@@ -69,8 +74,13 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           email: state.emailAddress, password: state.password);
       UserJourney userJourney = await _userJourneyRepository.getUserJourney();
 
+      final isOtpRequired = data.statusCode == 202;
+      if (!isOtpRequired) {
+        _fetchUserProfile();
+      }
+
       emit(state.copyWith(
-          isOtpRequired: data.statusCode == 202,
+          isOtpRequired: isOtpRequired,
           response:
               BaseResponse.complete(data.copyWith(userJourney: userJourney))));
     } on UnauthorizedException {
@@ -98,6 +108,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           otp: event.otp, email: event.email, password: event.password);
       UserJourney userJourney = await _userJourneyRepository.getUserJourney();
 
+      _fetchUserProfile();
+
       emit(state.copyWith(
           response:
               BaseResponse.complete(data.copyWith(userJourney: userJourney))));
@@ -117,5 +129,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
+  }
+
+  void _fetchUserProfile() async {
+    /// TODO: Cache the whole account info.
+    final accountInfo = await _accountRepository.getAccount();
+    _sharedPreference.writeData(sfKeyEmail, accountInfo.email);
   }
 }

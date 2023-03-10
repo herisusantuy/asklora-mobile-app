@@ -135,7 +135,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
           children: [
             PairColumnText(
               leftTitle: 'Prev Close',
-              leftSubTitle: 'Not available yet',
+              leftSubTitle: botDetailModel?.prevClosePrice != null
+                  ? (botDetailModel?.prevClosePrice ?? 0).toStringAsFixed(1)
+                  : '-',
               rightTitle: 'Market Cap',
               rightSubTitle: botDetailModel?.marketCap != null
                   ? (botDetailModel?.marketCap ?? 0).toStringAsFixed(1)

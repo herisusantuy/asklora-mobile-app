@@ -126,35 +126,36 @@ class MockPpiResponseRepository extends _i1.Mock
         )),
       ) as _i7.Future<_i3.PpiUserResponse>);
   @override
-  _i7.Future<_i4.BaseResponse<_i3.SnapShot>> getUserSnapShot(int? userId) =>
+  _i7.Future<_i4.BaseResponse<_i3.SnapShot>> getUserSnapShotUserId(
+          int? userId) =>
       (super.noSuchMethod(
         Invocation.method(
-          #getUserSnapShot,
+          #getUserSnapShotUserId,
           [userId],
         ),
         returnValue: _i7.Future<_i4.BaseResponse<_i3.SnapShot>>.value(
             _FakeBaseResponse_2<_i3.SnapShot>(
           this,
           Invocation.method(
-            #getUserSnapShot,
+            #getUserSnapShotUserId,
             [userId],
           ),
         )),
       ) as _i7.Future<_i4.BaseResponse<_i3.SnapShot>>);
   @override
   _i7.Future<_i4.BaseResponse<_i3.SnapShot>> getUserSnapshotByAskloraId(
-          int? userId) =>
+          int? askloraId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserSnapshotByAskloraId,
-          [userId],
+          [askloraId],
         ),
         returnValue: _i7.Future<_i4.BaseResponse<_i3.SnapShot>>.value(
             _FakeBaseResponse_2<_i3.SnapShot>(
           this,
           Invocation.method(
             #getUserSnapshotByAskloraId,
-            [userId],
+            [askloraId],
           ),
         )),
       ) as _i7.Future<_i4.BaseResponse<_i3.SnapShot>>);
