@@ -138,17 +138,17 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   _onPersonalInfoSubmitted(
       PersonalInfoSubmitted event, Emitter<PersonalInfoState> emit) async {
-    try {
+    emit(state.copyWith(
+      response: BaseResponse.loading(),
+    ));
+    if (!isAdult(state.dateOfBirth)) {
       emit(state.copyWith(
-        response: BaseResponse.loading(),
-      ));
-      var data = await _accountRepository
-          .submitPersonalInfo(event.personalInfoRequest);
-      emit(state.copyWith(response: BaseResponse.complete(data)));
-    } catch (e) {
-      emit(state.copyWith(
-        response: BaseResponse.error(),
-      ));
+          response: BaseResponse.error(
+              message: 'You must be over 18 to sign up for AskLORA!')));
+    } else {
+      var data = await _accountRepository.submitPersonalInfo(
+          personalInfoRequest: event.personalInfoRequest);
+      emit(state.copyWith(response: data));
     }
   }
 }
