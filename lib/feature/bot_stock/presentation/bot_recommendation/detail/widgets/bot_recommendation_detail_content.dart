@@ -197,7 +197,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               if (botType != BotType.squat && botDetailModel != null)
                 _detailedInformation(botDetailModel!),
               PairColumnText(
-                  leftTitle: 'Earliest Start Time',
+                  leftTitle: 'Start Time',
                   leftSubTitle: 'Not available yet',
                   rightTitle: 'Optimized Start Time',
                   rightSubTitle: 'Not available yet',
@@ -235,10 +235,10 @@ class BotRecommendationDetailContent extends StatelessWidget {
             height: 24,
           ),
           PairColumnText(
-              leftTitle: 'Stop Loss Level (USD)',
+              leftTitle: 'Estimated Stop Loss %',
               leftSubTitle: botDetailModel.estimatedStopLossPrice
                   .convertToCurrencyDecimal(),
-              rightTitle: 'Take Profit Level (USD)',
+              rightTitle: 'Estimated Take Profit %',
               rightSubTitle: botDetailModel.estimatedTakeProfitPrice
                   .convertToCurrencyDecimal(),
               leftTooltipText: _tempTooltipText,

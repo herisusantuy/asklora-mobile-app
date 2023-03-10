@@ -36,7 +36,7 @@ class KycRejectedScreen extends StatelessWidget {
                   Column(
                     children: [
                       const CustomStatusWidget(
-                        title: 'Sorry ! you’re not eligible for Asklora',
+                        title: 'Sorry! You are not eligible for Asklora',
                         statusType: StatusType.failed,
                       ),
                       const SizedBox(height: 30),

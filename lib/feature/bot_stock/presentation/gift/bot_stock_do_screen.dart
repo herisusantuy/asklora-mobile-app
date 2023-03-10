@@ -23,15 +23,15 @@ class BotStockDoScreen extends StatelessWidget {
         children: [
           const LoraMemojiHeader(
               text:
-                  'Bot does the work of buying and selling to execute your personalized strategy.'),
+                  'Bot is an AI strategy that buys and sells stock within your chosen investment period, to properly manage risk and reward.'),
           _botCard(
               botType: BotType.pullUp,
-              description: 'Try your luck for a bigger win'),
+              description: 'Go for occasional big wins'),
           _botCard(
-              botType: BotType.plank,
-              description: 'Stop loss and target gain automatically'),
+              botType: BotType.plank, description: 'Avoid excessive losses'),
           _botCard(
-              botType: BotType.squat, description: 'Keen for passive income '),
+              botType: BotType.squat,
+              description: 'Go for small but frequent wins'),
         ],
       ),
       bottomButton: Padding(

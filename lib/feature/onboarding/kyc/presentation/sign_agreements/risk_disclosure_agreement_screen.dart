@@ -73,12 +73,12 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   CustomText(
-                    'Licensee: Chau Kwong Lui',
+                    'Licensee: Joseph Chang',
                     type: FontType.smallTextBold,
                     padding: EdgeInsets.only(bottom: 8),
                   ),
                   CustomText(
-                    'CE No.: AU456',
+                    'CE No.: XXXXXX',
                     type: FontType.note,
                   ),
                 ],

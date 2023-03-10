@@ -19,7 +19,7 @@ class BotStockExplanationScreen extends StatelessWidget {
         children: const [
           LoraMemojiHeader(
               text:
-                  'A Botstock is a combination of a stock and a Bot. A Bot is where Lora manages your stock position.'),
+                  'A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that Lora will manage for you!'),
           SizedBox(
             height: 32,
           ),
@@ -32,7 +32,7 @@ class BotStockExplanationScreen extends StatelessWidget {
       bottomButton: Padding(
         padding: const EdgeInsets.only(bottom: 30.0),
         child: PrimaryButton(
-          label: 'SURE! WHAT DOES BOT DO?',
+          label: 'GOT IT! WHAT DOES A BOT DO?',
           onTap: () => BotStockDoScreen.open(context),
         ),
       ),
