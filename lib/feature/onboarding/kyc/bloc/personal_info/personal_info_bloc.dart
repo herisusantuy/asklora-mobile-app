@@ -33,9 +33,26 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     on<PersonalInfoNext>(_onPersonalInfoNext);
     on<PersonalInfoReset>(_onPersonalInfoReset);
     on<PersonalInfoSubmitted>(_onPersonalInfoSubmitted);
+    on<InitiatePersonalInfo>(_onInitiatePersonalInfo);
   }
 
   final AccountRepository _accountRepository;
+
+  _onInitiatePersonalInfo(
+      InitiatePersonalInfo event, Emitter<PersonalInfoState> emit) {
+    PersonalInfoRequest? personalInfoRequest = event.personalInfoRequest;
+    emit(state.copyWith(
+      firstName: personalInfoRequest?.firstName,
+      lastName: personalInfoRequest?.lastName,
+      gender: personalInfoRequest?.gender,
+      dateOfBirth: personalInfoRequest?.dateOfBirth,
+      hkIdNumber: personalInfoRequest?.hkIdNumber,
+      isHkIdValid: isHkIdValid(personalInfoRequest?.hkIdNumber ?? ''),
+      nationalityCode: personalInfoRequest?.nationality,
+      phoneCountryCode: personalInfoRequest?.phoneCountryCode,
+      phoneNumber: personalInfoRequest?.phoneNumber,
+    ));
+  }
 
   _onPersonalInfoFirstNameChange(
       PersonalInfoFirstNameChanged event, Emitter<PersonalInfoState> emit) {

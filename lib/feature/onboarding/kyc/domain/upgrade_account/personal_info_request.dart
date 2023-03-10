@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../bloc/personal_info/personal_info_bloc.dart';
 
 part 'personal_info_request.g.dart';
 
@@ -38,6 +42,23 @@ class PersonalInfoRequest extends Equatable {
     this.phoneCountryCode,
     this.phoneNumber,
   });
+
+  static PersonalInfoRequest getRequestFromPersonalInfoState(BuildContext context) {
+    final PersonalInfoState personalInfostate =
+        context.read<PersonalInfoBloc>().state;
+
+    return PersonalInfoRequest(
+      firstName: personalInfostate.firstName,
+      lastName: personalInfostate.lastName,
+      gender: personalInfostate.gender,
+      hkIdNumber: personalInfostate.hkIdNumber,
+      nationality: context.read<PersonalInfoBloc>().state.nationalityCode,
+      dateOfBirth: personalInfostate.dateOfBirth,
+      countryOfBirth: context.read<PersonalInfoBloc>().state.countryCodeOfBirth,
+      phoneCountryCode: context.read<PersonalInfoBloc>().state.phoneCountryCode,
+      phoneNumber: personalInfostate.phoneNumber,
+    );
+  }
 
   factory PersonalInfoRequest.fromJson(Map<String, dynamic> json) =>
       _$PersonalInfoRequestFromJson(json);

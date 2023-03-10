@@ -33,7 +33,7 @@ class VerifyIdentityScreen extends StatelessWidget {
           if (state is OnfidoSdkToken) {
             await _doVerificationOnfido(
                 context: context, onFidoSdkTokenState: state);
-          } else if (state.response.state == ResponseState.error) {
+          } else if (state.submitKycResponse.state == ResponseState.error) {
             ///CHANGE THIS TO HANDLE ERROR LATER
             context
                 .read<NavigationBloc<KycPageStep>>()

@@ -39,23 +39,33 @@ enum KycPageStep {
 
 class KycState extends Equatable {
   const KycState({
-    this.response = const BaseResponse(),
+    this.submitKycResponse = const BaseResponse(),
+    this.saveKycResponse = const BaseResponse(),
+    this.fetchKycResponse = const BaseResponse(),
   });
 
-  final BaseResponse response;
+  final BaseResponse submitKycResponse;
+  final BaseResponse saveKycResponse;
+  final BaseResponse<SaveKycRequest> fetchKycResponse;
 
   @override
   List<Object?> get props {
     return [
-      response,
+      submitKycResponse,
+      saveKycResponse,
+      fetchKycResponse
     ];
   }
 
   KycState copyWith({
-    BaseResponse? response,
+    BaseResponse? submitKycResponse,
+    BaseResponse? saveKycResponse,
+    BaseResponse<SaveKycRequest>? fetchKycResponse,
   }) {
     return KycState(
-      response: response ?? this.response,
+      submitKycResponse: submitKycResponse ?? this.submitKycResponse,
+      saveKycResponse: saveKycResponse ?? this.saveKycResponse,
+      fetchKycResponse: fetchKycResponse ?? this.fetchKycResponse,
     );
   }
 }

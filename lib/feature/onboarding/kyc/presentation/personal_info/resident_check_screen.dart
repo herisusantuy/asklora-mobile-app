@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../tabs/tabs_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -101,8 +101,11 @@ class ResidentCheckScreen extends StatelessWidget {
                 state.isHongKongPermanentResident == null,
             primaryButtonOnClick: () =>
                 context.read<PersonalInfoBloc>().add(const PersonalInfoNext()),
-            secondaryButtonOnClick: () =>
-                TabsScreen.openAndRemoveAllRoute(context),
+            secondaryButtonOnClick: () {
+              context
+                  .read<KycBloc>()
+                  .add(SaveKyc(SaveKycRequest.getSaveKycRequest(context)));
+            },
             primaryButtonLabel: 'NEXT',
             secondaryButtonLabel: 'SAVE FOR LATER',
           ));

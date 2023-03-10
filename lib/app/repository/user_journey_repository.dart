@@ -54,4 +54,13 @@ class UserJourneyRepository {
       return localUserJourney ?? UserJourney.investmentStyle;
     }
   }
+
+  Future<BaseResponse<UserJourneyResponse>> getUserJourneyWithData() async {
+    try {
+      var response = await _userJourneyApiClient.get();
+      return BaseResponse.complete(UserJourneyResponse.fromJson(response.data));
+    } catch (_) {
+      return BaseResponse.error();
+    }
+  }
 }

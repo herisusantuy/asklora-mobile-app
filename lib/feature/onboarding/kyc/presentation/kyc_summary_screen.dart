@@ -94,16 +94,16 @@ class KycSummaryScreen extends StatelessWidget {
 
   Widget _bottomButton(BuildContext context) => BlocListener<KycBloc, KycState>(
         listenWhen: (previous, current) =>
-            previous.response.state != current.response.state,
+            previous.submitKycResponse.state != current.submitKycResponse.state,
         listener: (context, state) {
-          if (state.response.state == ResponseState.loading) {
+          if (state.submitKycResponse.state == ResponseState.loading) {
             CustomLoadingOverlay.of(context).show();
           } else {
             CustomLoadingOverlay.of(context).dismiss();
           }
-          switch (state.response.state) {
+          switch (state.submitKycResponse.state) {
             case ResponseState.error:
-              CustomInAppNotification.show(context, state.response.message);
+              CustomInAppNotification.show(context, state.submitKycResponse.message);
               break;
             case ResponseState.success:
               context
@@ -119,7 +119,7 @@ class KycSummaryScreen extends StatelessWidget {
         },
         child: ButtonPair(
           primaryButtonOnClick: () {
-            context.read<KycBloc>().add(_submitKyc(addressProofState));
+            context.read<KycBloc>().add(_submitKyc());
           },
           secondaryButtonOnClick: () => CarouselScreen.open(context),
           primaryButtonLabel: 'COMPLETE',
@@ -127,7 +127,7 @@ class KycSummaryScreen extends StatelessWidget {
         ),
       );
 
-  SubmitKyc _submitKyc(AddressProofState addressProofState) {
+  SubmitKyc _submitKyc() {
     return SubmitKyc(UpgradeAccountRequest(
         residenceInfo: ResidenceInfoRequest(
           addressLine1: addressProofState.addressLine1,

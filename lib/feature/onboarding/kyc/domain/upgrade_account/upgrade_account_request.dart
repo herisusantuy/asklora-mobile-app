@@ -1,6 +1,14 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../bloc/address_proof/address_proof_bloc.dart';
+import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
+import '../../bloc/financial_profile/financial_profile_bloc.dart';
+import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import 'affiliated_person.dart';
 import 'agreement.dart';
 import 'employment_info.dart';
@@ -44,6 +52,57 @@ class UpgradeAccountRequest extends Equatable {
       Agreement(agreement: 'W8BEN'),
     ],
   });
+
+  static UpgradeAccountRequest getRequestFromKycStates(BuildContext context) {
+    final AddressProofState addressProofState =
+        context.read<AddressProofBloc>().state;
+    final FinancialProfileState financialProfileState =
+        context.read<FinancialProfileBloc>().state;
+    final DisclosureAffiliationState disclosureAffiliationState =
+        context.read<DisclosureAffiliationBloc>().state;
+    final SourceOfWealthState sourceOfWealthState =
+        context.read<SourceOfWealthBloc>().state;
+    return UpgradeAccountRequest(
+        residenceInfo: ResidenceInfoRequest(
+          addressLine1: addressProofState.addressLine1,
+          addressLine2: addressProofState.addressLine2,
+          district: addressProofState.district?.value,
+          region: addressProofState.region?.value,
+        ),
+        proofsOfAddress: addressProofState.addressProofImages
+            .map((e) => ProofsOfAddressRequest(
+                proofFile:
+                    'data:image/png;base64,${base64.encode(utf8.encode(e.name))}'))
+            .toList(),
+        employmentInfo: EmploymentInfo(
+            employmentStatus: financialProfileState.employmentStatus.enumString,
+            employer: financialProfileState.employer,
+            employerBusiness: financialProfileState.natureOfBusiness?.value,
+            employerBusinessDescription:
+                financialProfileState.natureOfBusinessDescription,
+            occupation: financialProfileState.occupation?.value,
+            employerAddressLine1: financialProfileState.employerAddress,
+            employerAddressLine2: financialProfileState.employerAddressTwo,
+            district: financialProfileState.district?.value,
+            region: financialProfileState.region?.value,
+            country: financialProfileState.country,
+            differentCountryReason:
+                financialProfileState.detailInformationOfCountry),
+        wealthSources: sourceOfWealthState.sourceOfWealthAnswers
+            .map((e) => WealthSourcesRequest(
+                  wealthSource: e.sourceOfWealthType.value,
+                  percentage: e.amount,
+                ))
+            .toList(),
+        affiliatedPerson: disclosureAffiliationState
+                    .affiliatedPersonFirstName.isEmpty &&
+                disclosureAffiliationState.affiliatedPersonLastName.isEmpty
+            ? null
+            : AffiliatedPerson(
+                firstName: disclosureAffiliationState.affiliatedPersonFirstName,
+                lastName: disclosureAffiliationState.affiliatedPersonLastName,
+              ));
+  }
 
   factory UpgradeAccountRequest.fromJson(Map<String, dynamic> json) =>
       _$UpgradeAccountRequestFromJson(json);

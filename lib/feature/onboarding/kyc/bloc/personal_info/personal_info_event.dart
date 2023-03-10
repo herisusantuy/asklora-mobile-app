@@ -136,3 +136,13 @@ class PersonalInfoSubmitted extends PersonalInfoEvent {
   @override
   List<Object> get props => [personalInfoRequest];
 }
+
+class InitiatePersonalInfo extends PersonalInfoEvent {
+  final PersonalInfoRequest? personalInfoRequest;
+  const InitiatePersonalInfo(this.personalInfoRequest);
+
+  @override
+  List<Object> get props => [personalInfoRequest??''];
+}
+
+
