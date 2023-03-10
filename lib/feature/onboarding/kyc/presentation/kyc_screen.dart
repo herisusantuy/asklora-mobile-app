@@ -122,7 +122,7 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.personalInfoRejected:
               return const KycRejectedScreen(
                 rejectedReason:
-                    'Currently only eligible for Hong Kong Resident and Non-US Citizens.',
+                    'Asklora is only available to Hong Kong Residents who are NOT US Citizens',
               );
             case KycPageStep.personalInfo:
               return const PersonalInfoScreen(
@@ -192,7 +192,7 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.disclosureRejected:
               return const KycRejectedScreen(
                 rejectedReason:
-                    'We do not acecpt any members who are affiliated with the organisations mentioned above',
+                    'We do not accept any members who are affiliated with the organisations mentioned above',
               );
             case KycPageStep.verifyIdentity:
               return const VerifyIdentityScreen(

@@ -69,3 +69,10 @@ class AffiliateAssociatesLastNameChanged extends DisclosuresAffiliationEvent {
   @override
   List<Object> get props => [lastName];
 }
+
+class AffiliateAssociatesReset extends DisclosuresAffiliationEvent {
+  const AffiliateAssociatesReset() : super();
+
+  @override
+  List<Object> get props => [];
+}
