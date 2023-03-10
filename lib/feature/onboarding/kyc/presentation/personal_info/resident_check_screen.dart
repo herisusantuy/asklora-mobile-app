@@ -62,7 +62,7 @@ class ResidentCheckScreen extends StatelessWidget {
               previous.isUnitedStateResident != current.isUnitedStateResident,
           builder: (context, state) => CustomToggleButton(
                 title:
-                    'Are you a United States tax resident, green card holder or citizens ?',
+                    'Are you a United States tax resident, green card holder, or citizen?',
                 onSelected: (value) => context.read<PersonalInfoBloc>().add(
                     PersonalInfoIsUnitedStateResidentChanged(value == 'Yes')),
                 initialValue: state.isUnitedStateResident != null
@@ -80,7 +80,8 @@ class ResidentCheckScreen extends StatelessWidget {
           previous.isHongKongPermanentResident !=
           current.isHongKongPermanentResident,
       builder: (context, state) => CustomToggleButton(
-            title: 'Are you a Hong Kong citizen or resident ?',
+            title:
+                'Are you a Hong Kong resident? By clicking yes, you acknowledge that you are also a Hong Kong tax resident',
             onSelected: (value) => context.read<PersonalInfoBloc>().add(
                 PersonalInfoIsHongKongPermanentResidentChanged(value == 'Yes')),
             initialValue: state.isHongKongPermanentResident != null

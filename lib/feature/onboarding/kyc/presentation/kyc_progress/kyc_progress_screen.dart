@@ -26,7 +26,7 @@ class KycProgressScreen extends StatelessWidget {
         children: [
           const LoraMemojiHeader(
               text:
-                  'Open investment account and deposit are the last step before investing. '),
+                  'Account opening and deposit are the last few steps before investing.'),
           _kycSteps,
           const SizedBox(
             height: 20,
@@ -36,7 +36,7 @@ class KycProgressScreen extends StatelessWidget {
             height: 57,
           ),
           CustomTextNew(
-            'Once you started, you can always take a break and resume to the process whenever you want.',
+            'Once you\'ve started, you can always take a break and resume the process whenever you want.',
             style: AskLoraTextStyles.subtitle3
                 .copyWith(color: AskLoraColors.charcoal),
             textAlign: TextAlign.center,
@@ -74,7 +74,7 @@ class KycProgressScreen extends StatelessWidget {
 
   Widget get _neededItems => RoundColoredBox(
       key: const Key('kyc_items_needed'),
-      title: 'The items you will needs..',
+      title: 'The items you will need..',
       content: Column(children: [
         _neededItem('HKID'),
         const SizedBox(

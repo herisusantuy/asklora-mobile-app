@@ -31,10 +31,9 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
           ),
           _spaceHeight,
           const DotText(
-              'I am affiliated or work with US registered broker-dealer or FINRA.'),
-          _spaceHeight,
-          const DotText(
               'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.'),
+          _spaceHeight,
+          const DotText('I am a senior political figure.'),
           _spaceHeight,
           const DotText('I am a senior political figure.'),
           _spaceHeight,
@@ -42,7 +41,7 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
               'I am a family member or relative of a senior political figure.'),
           _spaceHeight,
           const DotText(
-              'I am a director, employee, or licensed person registered with the Hong Kong Securities and Futures Commission.'),
+              'I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission.'),
         ],
       ),
       bottomButton:
