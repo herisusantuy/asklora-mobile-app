@@ -137,7 +137,6 @@ class KycSummaryScreen extends StatelessWidget {
           district: addressProofState.district?.value,
           region: addressProofState.region?.value,
         ),
-        // proofsOfAddress: proofsOfAddressRequests,
         proofsOfAddress: addressProofState.addressProofImages.map((e) {
           return ProofsOfAddressRequest(proofFile: base64Image(e));
         }).toList(),
