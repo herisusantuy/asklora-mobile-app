@@ -7,6 +7,7 @@ import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -131,6 +132,7 @@ class AddressProofScreen extends StatelessWidget {
         labelText: label,
         hintText: hintText,
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        textInputFormatterList: [denyEmoji()],
       );
 
   Widget get _bottomButton => BlocBuilder<AddressProofBloc, AddressProofState>(
