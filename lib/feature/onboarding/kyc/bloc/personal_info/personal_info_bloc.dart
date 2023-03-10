@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -41,17 +43,25 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   _onInitiatePersonalInfo(
       InitiatePersonalInfo event, Emitter<PersonalInfoState> emit) {
     PersonalInfoRequest? personalInfoRequest = event.personalInfoRequest;
-    emit(state.copyWith(
-      firstName: personalInfoRequest?.firstName,
-      lastName: personalInfoRequest?.lastName,
-      gender: personalInfoRequest?.gender,
-      dateOfBirth: personalInfoRequest?.dateOfBirth,
-      hkIdNumber: personalInfoRequest?.hkIdNumber,
-      isHkIdValid: isHkIdValid(personalInfoRequest?.hkIdNumber ?? ''),
-      nationalityCode: personalInfoRequest?.nationality,
-      phoneCountryCode: personalInfoRequest?.phoneCountryCode,
-      phoneNumber: personalInfoRequest?.phoneNumber,
-    ));
+
+    emit(
+      state.copyWith(
+        firstName: personalInfoRequest?.firstName,
+        lastName: personalInfoRequest?.lastName,
+        gender: personalInfoRequest?.gender,
+        dateOfBirth: personalInfoRequest?.dateOfBirth,
+        hkIdNumber: personalInfoRequest?.hkIdNumber,
+        isHkIdValid: isHkIdValid(personalInfoRequest?.hkIdNumber ?? ''),
+        nationalityCode: personalInfoRequest?.nationality,
+        nationalityName:
+            getCountryByIso3(personalInfoRequest?.nationality ?? '')?.name,
+        phoneCountryCode: personalInfoRequest?.phoneCountryCode,
+        phoneNumber: personalInfoRequest?.phoneNumber,
+        countryCodeOfBirth: personalInfoRequest?.countryOfBirth,
+        countryNameOfBirth:
+            getCountryByIso3(personalInfoRequest?.countryOfBirth ?? '')?.name,
+      ),
+    );
   }
 
   _onPersonalInfoFirstNameChange(
@@ -167,5 +177,11 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
         response: BaseResponse.error(),
       ));
     }
+  }
+
+  Country? getCountryByIso3(String iso3) {
+    List<Country> countries = CountryService().getAll();
+    return countries
+        .firstWhereOrNull((element) => element.countryCodeIso3 == iso3);
   }
 }
