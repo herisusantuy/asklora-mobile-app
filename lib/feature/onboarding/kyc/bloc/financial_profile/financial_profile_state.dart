@@ -16,7 +16,8 @@ class FinancialProfileState extends Equatable {
   final String detailInformationOfCountry;
 
   const FinancialProfileState(
-      {this.employmentStatus = EmploymentStatus.unknown,
+      {this.employmentStatus =
+          isDemoEnable ? EmploymentStatus.unemployed : EmploymentStatus.unknown,
       this.natureOfBusiness,
       this.natureOfBusinessDescription = '',
       this.occupation,

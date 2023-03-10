@@ -144,7 +144,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       ));
       var data = await _accountRepository
           .submitPersonalInfo(event.personalInfoRequest);
-      emit(state.copyWith(response: BaseResponse.complete(data)));
+      emit(state.copyWith(response: data));
     } catch (e) {
       emit(state.copyWith(
         response: BaseResponse.error(),

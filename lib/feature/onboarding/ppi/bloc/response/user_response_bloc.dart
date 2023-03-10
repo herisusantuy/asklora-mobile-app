@@ -182,7 +182,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       Logger.log('scores $scores');
 
-      var ageScore = (6 - pow(age / 35, 2));
+      var ageScore = (6 - pow(age / 33, 2));
 
       Logger.log('ageScore before $ageScore');
 

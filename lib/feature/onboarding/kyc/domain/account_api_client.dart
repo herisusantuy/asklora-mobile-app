@@ -25,7 +25,7 @@ class AccountApiClient {
           payload: jsonEncode(request.toJson()));
 
   Future<Response> submitPersonalInfo(PersonalInfoRequest request) async =>
-      await AskloraApiClient().post(
+      await AskloraApiClient().patch(
           endpoint: endpointPersonalInfo,
           payload: jsonEncode(request.toJson()));
 
@@ -33,7 +33,7 @@ class AccountApiClient {
       await AskloraApiClient().get(endpoint: endpointGetOnfidoToken);
 
   Future<Response> updateKycResult(OnfidoResultRequest request) async =>
-      await AskloraApiClient().patch(
+      await AskloraApiClient().post(
           endpoint: endpointOnfidoOutcome,
           payload: jsonEncode(request.toJson()));
 
