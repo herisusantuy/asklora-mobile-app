@@ -34,9 +34,14 @@ class AccountRepository {
 
   Future<BaseResponse<PersonalInfoResponse>> submitPersonalInfo(
       {required PersonalInfoRequest personalInfoRequest}) async {
-    var response =
-        await _accountApiClient.submitPersonalInfo(personalInfoRequest);
-    return BaseResponse.complete(PersonalInfoResponse.fromJson(response.data));
+    try {
+      var response =
+          await _accountApiClient.submitPersonalInfo(personalInfoRequest);
+      return BaseResponse.complete(
+          PersonalInfoResponse.fromJson(response.data));
+    } catch (_) {
+      return BaseResponse.error();
+    }
   }
 
   Future<BaseResponse<OnfidoTokenResponse>> getOnfidoToken() async {
