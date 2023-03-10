@@ -48,7 +48,7 @@ class OtpScreen extends StatelessWidget {
         content: Column(
           children: [
             CustomTextNew(
-              'We’ve sent you a code via SMS to verify your phone number. Please enter the OTP code below..',
+              'We’ve sent you a code via SMS to verify your phone number. Please enter the OTP code below.',
               key: const Key('sub_title'),
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),

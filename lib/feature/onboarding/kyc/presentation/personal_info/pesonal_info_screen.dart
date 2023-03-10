@@ -51,7 +51,7 @@ class PersonalInfoScreen extends StatelessWidget {
         child: Column(
           children: [
             CustomTextNew(
-              'Please make sure your name is exactly the same as the information on identification document.',
+              'Please make sure your name matches the information on your identification document.',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -59,7 +59,7 @@ class PersonalInfoScreen extends StatelessWidget {
             _textInput(
                 initialValue: context.read<PersonalInfoBloc>().state.firstName,
                 key: const Key('first_name'),
-                label: 'Legal English First Name',
+                label: 'Legal English First Name*',
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoFirstNameChanged(value))),
@@ -67,7 +67,7 @@ class PersonalInfoScreen extends StatelessWidget {
             _textInput(
                 initialValue: context.read<PersonalInfoBloc>().state.lastName,
                 key: const Key('last_name'),
-                label: 'Legal English Last Name',
+                label: 'Legal English Last Name*',
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoLastNameChanged(value))),
@@ -97,7 +97,7 @@ class PersonalInfoScreen extends StatelessWidget {
           DateTime dateOfBirth = DateTime.parse(state.dateOfBirth);
           return CustomDatePicker(
             key: const Key('date_of_birth'),
-            label: 'Date of Birth',
+            label: 'Date of Birth*',
             selectedDate: dateOfBirth,
             initialDateTime: dateOfBirth,
             maximumDate: DateTime.now(),
@@ -113,7 +113,7 @@ class PersonalInfoScreen extends StatelessWidget {
             previous.nationalityCode != current.nationalityCode,
         builder: (context, state) => CustomCountryPicker(
           key: const Key('nationality'),
-          label: 'Nationality',
+          label: 'Nationality*',
           hintText: 'Select Nationality',
           initialValue: state.nationalityName,
           onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
@@ -128,7 +128,7 @@ class PersonalInfoScreen extends StatelessWidget {
             previous.countryCodeOfBirth != current.countryCodeOfBirth,
         builder: (context, state) => CustomCountryPicker(
           key: const Key('country_of_birth'),
-          label: 'Country Of Birth',
+          label: 'Country Of Birth*',
           initialValue: state.countryNameOfBirth,
           onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
               PersonalInfoCountryOfBirthChanged(
@@ -180,7 +180,7 @@ class PersonalInfoScreen extends StatelessWidget {
         builder: (context, state) {
           return MasterTextField(
             key: const Key('hk_id_number'),
-            labelText: 'HKID NUmber',
+            labelText: 'HKID Number*',
             hintText: 'A1234567',
             initialValue: state.hkIdNumber,
             textCapitalization: TextCapitalization.words,

@@ -44,7 +44,7 @@ class VerifyIdentityScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextNew(
-              'We need to make sure lorem ipsum dolor sit amet, consectetur adipscing elit. Ornare velit ipsum risus at feugiat adipiscing erat mauris velit. Morbi non morbi eu tincidunt. Laoreet elit.',
+              'We\'ll need to verify your identity via your HKID',
               key: const Key('sub_title'),
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),

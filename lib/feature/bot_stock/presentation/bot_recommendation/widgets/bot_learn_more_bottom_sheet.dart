@@ -23,14 +23,14 @@ class BotLearnMoreBottomSheet extends StatelessWidget {
                   onTap: () => Navigator.pop(context),
                   child: const Icon(Icons.close))),
           CustomTextNew(
-            'Free AI Bot-stock for you to trade and learn',
+            'Free AI Botstock for you to trade and learn',
             style: AskLoraTextStyles.h4.copyWith(color: AskLoraColors.charcoal),
           ),
           const SizedBox(
             height: 24,
           ),
           CustomTextNew(
-            'Redeem the free Botstock by achieving the followings:',
+            'Redeem the free Botstock by achieving the following:',
             style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
           ),
           const SizedBox(
@@ -39,7 +39,7 @@ class BotLearnMoreBottomSheet extends StatelessWidget {
           _achievementCard(
               title: 'Complete 3 Milestones in 3 Months',
               subTitle:
-                  'You will master how Botstock investment works and trades with 2 Botstocks'),
+                  'You will master how Botstock investment works and trade with 2 real Botstocks'),
           const SizedBox(
             height: 12,
           ),
@@ -50,9 +50,9 @@ class BotLearnMoreBottomSheet extends StatelessWidget {
             height: 12,
           ),
           _achievementCard(
-              title: 'Stay on Core Plans after 3 Months',
+              title: 'Stay on the Core Plan after 3 months',
               subTitle:
-                  'It costs USD12.5 per month, but I promise you your free Botstock will generate more than USD68 for you'),
+                  'It costs HKD100 per month, but your free Botstock can generate up to HKD800 for you!'),
         ],
       ),
     );
