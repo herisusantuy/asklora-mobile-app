@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
@@ -124,4 +128,12 @@ extension RestTimeOnDuration on Duration {
   int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
 
   int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
+}
+
+extension ConvertToBase64 on PlatformFile {
+  String base64Image() {
+    final bytes = File(path!).readAsBytesSync();
+    String result = 'data:image/png;base64,${base64Encode(bytes)}';
+    return result;
+  }
 }

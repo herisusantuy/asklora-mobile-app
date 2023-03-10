@@ -1,9 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/extensions.dart';
 
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
@@ -138,7 +135,7 @@ class KycSummaryScreen extends StatelessWidget {
           region: addressProofState.region?.value,
         ),
         proofsOfAddress: addressProofState.addressProofImages.map((e) {
-          return ProofsOfAddressRequest(proofFile: base64Image(e));
+          return ProofsOfAddressRequest(proofFile: e.base64Image());
         }).toList(),
         employmentInfo: EmploymentInfo(
             employmentStatus: financialProfileState.employmentStatus.enumString,
@@ -168,11 +165,5 @@ class KycSummaryScreen extends StatelessWidget {
                 firstName: disclosureAffiliationState.affiliatedPersonFirstName,
                 lastName: disclosureAffiliationState.affiliatedPersonLastName,
               )));
-  }
-
-  String base64Image(PlatformFile e) {
-    final bytes = File(e.path!).readAsBytesSync();
-    String result = 'data:image/png;base64,${base64Encode(bytes)}';
-    return result;
   }
 }
