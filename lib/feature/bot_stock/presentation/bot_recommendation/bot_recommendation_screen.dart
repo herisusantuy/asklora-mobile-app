@@ -149,7 +149,7 @@ class BotRecommendationScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomTextNew(
-                    'Hi Sassy Chris! Check out my 20 recommended Botstocks just for you.',
+                    'Hi! Check out my 20 recommended Botstocks just for you.',
                     style: AskLoraTextStyles.body1
                         .copyWith(color: AskLoraColors.charcoal),
                   ),
@@ -172,7 +172,7 @@ class BotRecommendationScreen extends StatelessWidget {
                       builder: (context) => const BotLearnMoreBottomSheet(),
                     ),
                     child: CustomTextNew(
-                      'LEARN MORE!',
+                      'Redemption Instructions',
                       style: AskLoraTextStyles.subtitle1.copyWith(
                         color: AskLoraColors.charcoal,
                         decoration: TextDecoration.underline,
