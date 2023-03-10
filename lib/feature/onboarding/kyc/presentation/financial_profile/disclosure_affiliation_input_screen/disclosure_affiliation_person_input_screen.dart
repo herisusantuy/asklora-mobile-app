@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../tabs/tabs_screen.dart';
 import '../../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/kyc_bloc.dart';
@@ -44,7 +45,8 @@ class DisclosureAffiliationPersonInputScreen extends StatelessWidget {
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.financialProfileSummary)),
-            secondaryButtonOnClick: () => CarouselScreen.open(context),
+            secondaryButtonOnClick: () =>
+                TabsScreen.openAndRemoveAllRoute(context),
             primaryButtonLabel: 'NEXT',
             secondaryButtonLabel: 'SAVE FOR LATER',
           ));
