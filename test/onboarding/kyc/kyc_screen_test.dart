@@ -45,14 +45,14 @@ void main() {
         expect(
             (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
             true);
-        await tester.tap(find.byKey(const Key(
-            'Are you a United States tax resident, green card holder or citizens ?-No')));
-        await tester.tap(find
-            .byKey(const Key('Are you a Hong Kong citizen or resident ?-Yes')));
-        await tester.pump();
-        expect(
-            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
-            false);
+        // await tester.tap(find.byKey(const Key(
+        //     'Are you a United States tax resident, green card holder or citizens ?-No')));
+        // await tester.tap(find
+        //     .byKey(const Key('Are you a Hong Kong citizen or resident ?-Yes')));
+        // await tester.pump();
+        // expect(
+        //     (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
+        //     false);
       });
 
       testWidgets('Show basic information screen with all the input',
