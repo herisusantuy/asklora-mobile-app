@@ -31,8 +31,6 @@ class TaxAgreementScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        'legal name : ${personalInfoState.firstName} ${personalInfoState.lastName}');
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
@@ -214,20 +212,23 @@ class TaxAgreementScreen extends StatelessWidget {
   Widget get _legalNameInput =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
-              previous.legalName != current.legalName,
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 46),
-              child: MasterTextField(
-                initialValue: state.legalName,
-                key: const Key('legal_name_input'),
-                onChanged: (value) => context
-                    .read<SigningAgreementBloc>()
-                    .add(LegalNameSignatureChanged(value)),
-                errorText: state.legalNameErrorText,
-              ),
-            );
-          });
+              previous.legalName != current.legalName ||
+              previous.legalNameErrorText != current.legalNameErrorText,
+          builder: (context, state) => Padding(
+                padding: const EdgeInsets.only(top: 46),
+                child: MasterTextField(
+                  initialValue: state.legalName,
+                  key: const Key('legal_name_input'),
+                  onChanged: (value) => context
+                      .read<SigningAgreementBloc>()
+                      .add(LegalNameSignatureChanged(value)),
+                  errorText: (state.legalName.isNotEmpty &&
+                          state.legalName !=
+                              '${personalInfoState.firstName} ${personalInfoState.lastName}'
+                      ? 'You input does not match'
+                      : ''),
+                ),
+              ));
 
   Widget _dotTextSlightRight(String text) => Padding(
         padding: const EdgeInsets.only(left: 28.0),

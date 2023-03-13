@@ -12,10 +12,8 @@ class SigningAgreementBloc
     extends Bloc<SigningBrokerAgreementEvent, SigningAgreementState> {
   SigningAgreementBloc(
       {required SigningBrokerAgreementRepository
-          signingBrokerAgreementRepository,
-      required PersonalInfoState personalInfoState})
+          signingBrokerAgreementRepository})
       : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
-        _personalInfoState = personalInfoState,
         super(const SigningAgreementState()) {
     on<AskLoraClientAgreementOpened>(_onAskLoraClientAgreementOpened);
     on<BoundByAskloraAgreementChecked>(_onBoundByAskloraAgreementChecked);
@@ -27,7 +25,6 @@ class SigningAgreementBloc
   }
 
   final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
-  final PersonalInfoState _personalInfoState;
 
   _onAskLoraClientAgreementOpened(AskLoraClientAgreementOpened event,
       Emitter<SigningAgreementState> emit) async {
@@ -62,13 +59,6 @@ class SigningAgreementBloc
 
   _onLegalNameSignatureChanged(
       LegalNameSignatureChanged event, Emitter<SigningAgreementState> emit) {
-    if (event.legalName !=
-        '${_personalInfoState.firstName} ${_personalInfoState.lastName}') {
-      emit(state.copyWith(
-          legalName: event.legalName,
-          legalNameErrorText: 'You input does not match'));
-    } else {
-      emit(state.copyWith(legalName: event.legalName, legalNameErrorText: ''));
-    }
+    emit(state.copyWith(legalName: event.legalName));
   }
 }

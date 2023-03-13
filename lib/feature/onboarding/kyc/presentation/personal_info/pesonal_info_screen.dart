@@ -16,6 +16,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
+import '../../../../tabs/tabs_screen.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
@@ -263,7 +264,8 @@ class PersonalInfoScreen extends StatelessWidget {
                       phoneNumber: state.phoneNumber,
                     )));
               },
-              secondaryButtonOnClick: () => CarouselScreen.open(context),
+              secondaryButtonOnClick: () =>
+                  TabsScreen.openAndRemoveAllRoute(context),
               primaryButtonLabel: 'NEXT',
               secondaryButtonLabel: 'SAVE FOR LATER',
             ),
