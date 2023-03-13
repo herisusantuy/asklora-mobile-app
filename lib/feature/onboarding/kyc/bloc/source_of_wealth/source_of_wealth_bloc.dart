@@ -37,7 +37,7 @@ class SourceOfWealthBloc
         isActive: true,
       ));
     } else {
-      answer = answer.copyWith(isActive: !answer.isActive);
+      sourceOfWealthAnswers.remove(answer);
       if (sourceOfWealthAnswers.isNotEmpty) {
         totalAmount =
             sourceOfWealthAnswers.map((e) => e.amount).reduce((a, b) => a + b);

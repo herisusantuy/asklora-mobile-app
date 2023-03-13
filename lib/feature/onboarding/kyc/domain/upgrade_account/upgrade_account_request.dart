@@ -43,6 +43,7 @@ class UpgradeAccountRequest extends Equatable {
     this.wealthSources,
     this.affiliatedPerson,
     this.agreements = const [
+      ///this is not used as per ibkr docs
       //Agreement(agreement: 'MA'),
       //Agreement(agreement: 'AA'),//application aggreement
       //Agreement(agreement: 'CA'),
