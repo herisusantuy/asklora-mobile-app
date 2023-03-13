@@ -11,12 +11,11 @@ part 'signing_agreement_state.dart';
 
 class SigningAgreementBloc
     extends Bloc<SigningBrokerAgreementEvent, SigningAgreementState> {
-  SigningAgreementBloc(
-      {required SigningBrokerAgreementRepository
-          signingBrokerAgreementRepository,
-      required PersonalInfoState personalInfoState})
-      : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
-        _personalInfoState = personalInfoState,
+  SigningAgreementBloc({
+    required SigningBrokerAgreementRepository signingBrokerAgreementRepository,
+    required PersonalInfoBloc personalInfoBloc,
+  })  : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
+        _personalInfoBloc = personalInfoBloc,
         super(const SigningAgreementState()) {
     on<AskLoraClientAgreementOpened>(_onAskLoraClientAgreementOpened);
     on<BoundByAskloraAgreementChecked>(_onBoundByAskloraAgreementChecked);
@@ -25,10 +24,11 @@ class SigningAgreementBloc
     on<SignatureChecked>(_onSignatureChecked);
     on<LegalNameSignatureChanged>(_onLegalNameSignatureChanged);
     on<W8BenFormOpened>(_onW8BenFormOpened);
+    on<SignAgreementScreenRendered>(_onSignAgreementRendered);
   }
 
   final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
-  final PersonalInfoState _personalInfoState;
+  final PersonalInfoBloc _personalInfoBloc;
 
   _onAskLoraClientAgreementOpened(AskLoraClientAgreementOpened event,
       Emitter<SigningAgreementState> emit) async {
@@ -64,7 +64,27 @@ class SigningAgreementBloc
   _onLegalNameSignatureChanged(
       LegalNameSignatureChanged event, Emitter<SigningAgreementState> emit) {
     String fullName =
-        '${_personalInfoState.firstName} ${_personalInfoState.lastName}';
+        '${_personalInfoBloc.state.firstName} ${_personalInfoBloc.state.lastName}';
+    print('personalInfo state >> $fullName');
+    if (event.legalName != fullName) {
+      emit(state.copyWith(
+        legalName: event.legalName,
+        legalNameErrorText: 'Your input does not match',
+        isInputNameValid: false,
+      ));
+    } else {
+      emit(state.copyWith(
+        legalName: event.legalName,
+        legalNameErrorText: '',
+        isInputNameValid: true,
+      ));
+    }
+  }
+
+  _onSignAgreementRendered(
+      SignAgreementScreenRendered event, Emitter<SigningAgreementState> emit) {
+    String fullName =
+        '${_personalInfoBloc.state.firstName} ${_personalInfoBloc.state.lastName}';
     if (event.legalName != fullName) {
       emit(state.copyWith(
         legalName: event.legalName,

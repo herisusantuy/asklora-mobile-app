@@ -83,15 +83,10 @@ class KycScreen extends StatelessWidget {
                     KycBloc(getAccountRepository: AccountRepository()),
               ),
               BlocProvider(
-                create: (context) => SigningAgreementBloc(
-                    signingBrokerAgreementRepository:
-                        SigningBrokerAgreementRepository(),
-                    personalInfoState: PersonalInfoState(
-                      firstName:
-                          context.read<PersonalInfoBloc>().state.firstName,
-                      lastName: context.read<PersonalInfoBloc>().state.lastName,
-                    )),
-              ),
+                  create: (context) => SigningAgreementBloc(
+                      signingBrokerAgreementRepository:
+                          SigningBrokerAgreementRepository(),
+                      personalInfoBloc: context.read<PersonalInfoBloc>())),
             ],
             child: Builder(builder: (context) {
               return CustomNavigationWidget<KycPageStep>(
@@ -214,7 +209,7 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.signTaxAgreements:
               return TaxAgreementScreen(
                   progress: 0.85,
-                  personalInfoState: context.read<PersonalInfoBloc>().state);
+                  personalInfoBloc: context.read<PersonalInfoBloc>());
             case KycPageStep.kycSummary:
               return KycSummaryScreen(
                 personalInfoState: context.read<PersonalInfoBloc>().state,

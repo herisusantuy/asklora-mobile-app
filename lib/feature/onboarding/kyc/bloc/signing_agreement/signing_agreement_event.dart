@@ -64,3 +64,11 @@ class SignatureChecked extends SigningBrokerAgreementEvent {
   @override
   List<Object> get props => [isChecked];
 }
+
+class SignAgreementScreenRendered extends SigningBrokerAgreementEvent {
+  final String legalName;
+
+  const SignAgreementScreenRendered(this.legalName) : super();
+  @override
+  List<Object> get props => [legalName];
+}

@@ -21,10 +21,10 @@ import '../widgets/kyc_sub_title.dart';
 
 class TaxAgreementScreen extends StatelessWidget {
   final double progress;
-  final PersonalInfoState personalInfoState;
+  final PersonalInfoBloc personalInfoBloc;
 
   const TaxAgreementScreen(
-      {required this.progress, required this.personalInfoState, Key? key})
+      {required this.progress, required this.personalInfoBloc, Key? key})
       : super(key: key);
 
   final Widget _spaceHeight = const SizedBox(
@@ -204,7 +204,7 @@ class TaxAgreementScreen extends StatelessWidget {
                       .copyWith(color: AskLoraColors.charcoal)),
               TextSpan(
                   text:
-                      '${personalInfoState.firstName} ${personalInfoState.lastName}',
+                      '${personalInfoBloc.state.firstName} ${personalInfoBloc.state.lastName}',
                   style: AskLoraTextStyles.body2.copyWith(
                       color: AskLoraColors.charcoal,
                       fontWeight: FontWeight.bold)),
