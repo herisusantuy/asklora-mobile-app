@@ -53,7 +53,7 @@ class HomeScreenForm extends StatelessWidget {
       child: BlocProvider(
         create: (context) => HomeScreenBloc(
             ppiResponseRepository: PpiResponseRepository(),
-            sharedPreference: SharedPreference()),
+            sharedPreference: SharedPreference())..add(GetUserSnapShots()),
         child: CustomScrollView(
           slivers: <Widget>[
             SliverPersistentHeader(

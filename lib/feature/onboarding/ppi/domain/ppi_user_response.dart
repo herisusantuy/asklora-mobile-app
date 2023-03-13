@@ -40,6 +40,11 @@ class SnapShot {
       _$SnapShotFromJson(json);
 
   Map<String, dynamic> toJson() => _$SnapShotToJson(this);
+
+  @override
+  String toString() {
+    return 'SnapShot{id: $id, name: $name, accountId: $accountId, deviceId: $deviceId, created: $created, updated: $updated, scores: $scores}';
+  }
 }
 
 @JsonSerializable()
