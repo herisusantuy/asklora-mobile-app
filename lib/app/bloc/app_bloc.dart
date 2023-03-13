@@ -23,6 +23,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppLaunched>(_onAppLaunched);
     on<AppLanguageChangeEvent>(_onAppLanguageChangeEvent);
     on<SaveUserJourney>(_onSaveUserJourney);
+    on<GetUserJourneyFromLocal>(_onGetUserJourneyFromLocal);
   }
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
@@ -48,5 +49,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(state.copyWith(userJourney: event.userJourney));
     _userJourneyRepository.saveUserJourney(
         userJourney: event.userJourney, data: event.data);
+  }
+
+  void _onGetUserJourneyFromLocal(
+      GetUserJourneyFromLocal event, Emitter<AppState> emit) async {
+    var data = await _userJourneyRepository.getUserJourneyFromLocal();
+    emit(state.copyWith(userJourney: data));
   }
 }

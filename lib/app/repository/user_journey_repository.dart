@@ -28,6 +28,20 @@ class UserJourneyRepository {
     }
   }
 
+  void saveUserJourneyToLocal(
+      {required UserJourney userJourney, String? data}) async {
+    await _sharedPreference.writeData(sfKeyUserJourney, userJourney.value);
+    await _sharedPreference.writeData(sfKeyUserJourneyData, data ?? '');
+  }
+
+  Future<UserJourney?> getUserJourneyFromLocal() async {
+    String? localUserJourneyString =
+    await _sharedPreference.readData(sfKeyUserJourney);
+    UserJourney? localUserJourney = UserJourney.values
+        .firstWhereOrNull((element) => element.value == localUserJourneyString)??UserJourney.investmentStyle;
+    return localUserJourney;
+  }
+
   Future<UserJourney> getUserJourney() async {
     String? localUserJourneyString =
         await _sharedPreference.readData(sfKeyUserJourney);
@@ -52,9 +66,13 @@ class UserJourneyRepository {
             userJourney: localUserJourney!, data: localUserJourneyDataString);
         return localUserJourney;
       } else {
-        return UserJourney.values.firstWhereOrNull((element) =>
-                element.value == userJourneyResponse.userJourney) ??
+        UserJourney userJourney = UserJourney.values.firstWhereOrNull(
+                (element) =>
+                    element.value == userJourneyResponse.userJourney) ??
             UserJourney.investmentStyle;
+        saveUserJourneyToLocal(
+            userJourney: userJourney, data: userJourneyResponse.data);
+        return userJourney;
       }
     } catch (e) {
       return localUserJourney ?? UserJourney.investmentStyle;
