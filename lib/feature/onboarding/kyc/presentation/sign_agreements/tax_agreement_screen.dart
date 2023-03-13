@@ -225,7 +225,7 @@ class TaxAgreementScreen extends StatelessWidget {
                   errorText: (state.legalName.isNotEmpty &&
                           state.legalName !=
                               '${personalInfoState.firstName} ${personalInfoState.lastName}'
-                      ? 'You input does not match'
+                      ? 'Your input does not match'
                       : ''),
                 ),
               ));
