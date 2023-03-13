@@ -68,7 +68,7 @@ class FinancialProfileSummaryContent extends StatelessWidget {
                 subTitle:
                     '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
           ),
-        if (!isDemoEnable) ...test(),
+        ..._getEmploymentDetailsContent(),
       ],
     );
   }
@@ -132,7 +132,7 @@ class FinancialProfileSummaryContent extends StatelessWidget {
     ];
   }
 
-  List<Widget> test() {
+  List<Widget> _getEmploymentDetailsContent() {
     return [
       SummaryTextInfo(
           title: 'Employment Status',

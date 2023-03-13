@@ -211,11 +211,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   rightSubTitle: '${botDetailModel?.estimatedExpiredDate}',
                   leftTooltipText: _tempTooltipText,
                   rightTooltipText: _tempTooltipText),
-              if (botDetailModel?.performance.data != null)
+              if (botDetailModel?.performance != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0),
                   child: ChartAnimation(
-                      chartDataSets: botDetailModel!.performance.data!),
+                      chartDataSets: botDetailModel!.performance!),
                 )
             ],
           ),

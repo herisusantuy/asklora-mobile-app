@@ -108,7 +108,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           otp: event.otp, email: event.email, password: event.password);
       UserJourney userJourney = await _userJourneyRepository.getUserJourney();
 
-      _fetchUserProfile();
+      await _fetchUserProfile();
 
       emit(state.copyWith(
           response:
@@ -131,7 +131,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     }
   }
 
-  void _fetchUserProfile() async {
+  Future<void> _fetchUserProfile() async {
     /// TODO: Cache the whole account info.
     final accountInfo = await _accountRepository.getAccount();
     _sharedPreference.writeData(sfKeyEmail, accountInfo.email);

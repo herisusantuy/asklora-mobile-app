@@ -14,7 +14,7 @@ class BotRecommendationChart extends StatelessWidget {
           } else {
             return ChartAnimation(
                 chartDataSets:
-                    state.botDetailResponse.data!.performance.data ?? []);
+                    state.botDetailResponse.data!.performance ?? []);
           }
         });
   }

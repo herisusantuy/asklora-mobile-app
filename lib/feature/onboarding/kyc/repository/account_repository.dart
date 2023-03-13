@@ -53,10 +53,10 @@ class AccountRepository {
     }
   }
 
-  Future<BaseResponse<OnfidoResultResponse>> updateKycResult(
+  Future<BaseResponse<OnfidoResultResponse>> submitOnfidoOutcome(
       OnfidoResultRequest request) async {
     try {
-      var response = await _accountApiClient.updateKycResult(request);
+      var response = await _accountApiClient.submitOnfidoOutcome(request);
       return BaseResponse.complete(
           OnfidoResultResponse.fromJson(response.data));
     } catch (e) {
