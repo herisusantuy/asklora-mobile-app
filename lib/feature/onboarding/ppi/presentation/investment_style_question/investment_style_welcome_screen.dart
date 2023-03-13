@@ -29,7 +29,7 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
               children: [
                 const LoraMemojiHeader(
                     text:
-                        'Let\'s dive into the core of the personalisation experience - defining your investment style.'),
+                        'Let’s get to the heart of personalisation, its time to define your investment style.'),
                 ButtonPair(
                     primaryButtonOnClick: () {
                       PpiScreen.open(context,

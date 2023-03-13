@@ -72,7 +72,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
           ),
           children: [
             CustomTextNew(
-              'Best Suit For',
+              'Best Suited For',
               style: AskLoraTextStyles.body4
                   .copyWith(color: AskLoraColors.charcoal),
             ),
