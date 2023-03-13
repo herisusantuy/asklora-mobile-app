@@ -12,6 +12,8 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
+import '../../repository/account_repository.dart';
+import '../../repository/signing_broker_agreement_repository.dart';
 import '../financial_profile/widgets/dot_text.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -213,7 +215,8 @@ class TaxAgreementScreen extends StatelessWidget {
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
               previous.legalName != current.legalName ||
-              previous.legalNameErrorText != current.legalNameErrorText,
+              previous.legalNameErrorText != current.legalNameErrorText ||
+              previous.isInputNameValid != current.isInputNameValid,
           builder: (context, state) => Padding(
                 padding: const EdgeInsets.only(top: 46),
                 child: MasterTextField(
@@ -222,11 +225,7 @@ class TaxAgreementScreen extends StatelessWidget {
                   onChanged: (value) => context
                       .read<SigningAgreementBloc>()
                       .add(LegalNameSignatureChanged(value)),
-                  errorText: (state.legalName.isNotEmpty &&
-                          state.legalName !=
-                              '${personalInfoState.firstName} ${personalInfoState.lastName}'
-                      ? 'Your input does not match'
-                      : ''),
+                  errorText: state.legalNameErrorText,
                 ),
               ));
 
@@ -241,14 +240,14 @@ class TaxAgreementScreen extends StatelessWidget {
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
         buildWhen: (previous, current) =>
             previous.legalName != current.legalName ||
-            previous.isSignatureChecked != current.isSignatureChecked,
+            previous.isSignatureChecked != current.isSignatureChecked ||
+            previous.isInputNameValid != current.isInputNameValid,
         builder: (context, state) {
           return ButtonPair(
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.kycSummary)),
-            disablePrimaryButton: state.disableSignatureButton(
-                '${personalInfoState.firstName} ${personalInfoState.lastName}'),
+            disablePrimaryButton: state.disableAgreeButton(),
             secondaryButtonOnClick: () => CarouselScreen.open(context),
             primaryButtonLabel: 'AGREE',
             secondaryButtonLabel: 'CONTINUE LATER',

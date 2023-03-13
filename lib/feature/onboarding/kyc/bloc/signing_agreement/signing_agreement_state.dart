@@ -10,6 +10,7 @@ class SigningAgreementState extends Equatable {
   final String legalName;
   final String? signedTime;
   final String legalNameErrorText;
+  final bool isInputNameValid;
 
   const SigningAgreementState({
     this.isAskLoraClientAgreementOpened = false,
@@ -20,6 +21,7 @@ class SigningAgreementState extends Equatable {
     this.legalName = '',
     this.signedTime,
     this.legalNameErrorText = '',
+    this.isInputNameValid = false,
   });
 
   @override
@@ -32,6 +34,7 @@ class SigningAgreementState extends Equatable {
         legalName,
         signedTime ?? '',
         legalNameErrorText,
+        isInputNameValid,
       ];
 
   SigningAgreementState copyWith({
@@ -43,6 +46,7 @@ class SigningAgreementState extends Equatable {
     String? legalName,
     String? signedTime,
     String? legalNameErrorText,
+    bool? isInputNameValid,
   }) {
     return SigningAgreementState(
       isAskLoraClientAgreementOpened:
@@ -57,6 +61,7 @@ class SigningAgreementState extends Equatable {
       legalName: legalName ?? this.legalName,
       signedTime: signedTime ?? this.signedTime,
       legalNameErrorText: legalNameErrorText ?? this.legalNameErrorText,
+      isInputNameValid: isInputNameValid ?? this.isInputNameValid,
     );
   }
 
@@ -67,8 +72,8 @@ class SigningAgreementState extends Equatable {
     return true;
   }
 
-  bool disableSignatureButton(String inputtedLegalName) {
-    if (isSignatureChecked && inputtedLegalName == legalName) {
+  bool disableAgreeButton() {
+    if (isSignatureChecked && isInputNameValid) {
       return false;
     } else {
       return true;
