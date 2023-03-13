@@ -21,8 +21,8 @@ const String endpointVerifyEmail = '$v1${accounts}verify-email/';
 const String endpointPersonalInfo = '$v2${accounts}upgrade/personal-info/';
 const String endpointUpgradeAccount = '$v2${accounts}upgrade/ibkr/';
 const String endpointGetAccount = '$v1$accounts';
-const String endpointGetOnfidoToken = '$v1${accounts}onfido/sdk/token/';
-const String endpointOnfidoOutcome = '$v1${accounts}onfido/sdk/outcome/';
+const String endpointGetOnfidoToken = '$v2${accounts}onfido/token/';
+const String endpointOnfidoOutcome = '$v2${accounts}onfido/outcome/';
 const String endpointTokenVerify = '${v1}auth/verify/';
 const String endpointTokenRefresh = '${v1}auth/refresh/';
 const String endpointTaxInfo = '$v1${accounts}tax-info/';
@@ -35,10 +35,12 @@ const String endpointUserJourney = '$v2${activities}user-journey/';
 /// PPI related
 
 const endpointQuestion = 'questions';
-const String endpointUser = 'user';
+const String endpointGetUser = 'user';
+const String endpointGetSnapshotByDeviceId = 'user/device-id';
+const String endpointGetSnapshotByAskloraId = 'user/asklora-id';
 const String endpointAddAnswer = 'user/add-answer';
 const String endpointAddBotChoice = 'user/add-choices';
-const String endpointLinkedUser = '$endpointUser/linked';
+const String endpointLinkedUser = '$endpointGetUser/linked';
 
 ///
 /// URLS

@@ -46,7 +46,7 @@ class KycBloc extends Bloc<KycEvent, KycState> {
   _onUpdateOnfidoResult(
       UpdateOnfidoResult event, Emitter<KycState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
-    var response = await _accountRepository.updateKycResult(
+    var response = await _accountRepository.submitOnfidoOutcome(
         OnfidoResultRequest(event.token, event.reason, event.outcome));
     if (response.state == ResponseState.success) {
       emit(OnfidoResultUpdated(response.data!));

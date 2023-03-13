@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/extensions.dart';
 
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
@@ -10,6 +9,7 @@ import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../main.dart';
 import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
@@ -24,6 +24,7 @@ import '../domain/upgrade_account/proofs_of_address_request.dart';
 import '../domain/upgrade_account/residence_info_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../domain/upgrade_account/wealth_sources_request.dart';
+import '../utils/source_of_wealth_enum.dart';
 import 'financial_profile/widgets/financial_profile_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
 import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
@@ -135,11 +136,9 @@ class KycSummaryScreen extends StatelessWidget {
           district: addressProofState.district?.value,
           region: addressProofState.region?.value,
         ),
-        proofsOfAddress: addressProofState.addressProofImages
-            .map((e) => ProofsOfAddressRequest(
-                proofFile:
-                    'data:image/png;base64,${base64.encode(utf8.encode(e.name))}'))
-            .toList(),
+        proofsOfAddress: addressProofState.addressProofImages.map((e) {
+          return ProofsOfAddressRequest(proofFile: e.base64Image());
+        }).toList(),
         employmentInfo: EmploymentInfo(
             employmentStatus: financialProfileState.employmentStatus.enumString,
             employer: financialProfileState.employer,
@@ -154,12 +153,23 @@ class KycSummaryScreen extends StatelessWidget {
             country: financialProfileState.country,
             differentCountryReason:
                 financialProfileState.detailInformationOfCountry),
-        wealthSources: sourceOfWealthState.sourceOfWealthAnswers
-            .map((e) => WealthSourcesRequest(
-                  wealthSource: e.sourceOfWealthType.value,
-                  percentage: e.amount,
-                ))
-            .toList(),
+
+        ///
+        /// TODO: Confirm with James if we need this in real release. For now
+        /// disabling as Stephen does not want this in the SFC Demo.
+        ///
+        wealthSources: isDemoEnable
+            ? sourceOfWealthState.sourceOfWealthAnswers
+                .map((e) => WealthSourcesRequest(
+                      wealthSource: e.sourceOfWealthType.value,
+                      percentage: e.amount,
+                    ))
+                .toList()
+            : [
+                WealthSourcesRequest(
+                    wealthSource: SourceOfWealthType.incomeFromEmployment.value,
+                    percentage: 100)
+              ],
         affiliatedPerson: disclosureAffiliationState
                     .affiliatedPersonFirstName.isEmpty &&
                 disclosureAffiliationState.affiliatedPersonLastName.isEmpty

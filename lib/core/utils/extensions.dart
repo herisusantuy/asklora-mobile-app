@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
@@ -124,4 +128,26 @@ extension RestTimeOnDuration on Duration {
   int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
 
   int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
+}
+
+double checkDouble(dynamic value) {
+  if (value is double) return value;
+  if (value is int) return value.toDouble();
+  if (value is String) return double.tryParse(value) ?? 0.0;
+  return 0.0;
+}
+
+int checkInt(dynamic value) {
+  if (value is int) return value;
+  if (value is double) return value.toInt();
+  if (value is String) return int.tryParse(value) ?? 0;
+  return 0;
+}
+
+extension ConvertToBase64 on PlatformFile {
+  String base64Image() {
+    final bytes = File(path!).readAsBytesSync();
+    String result = 'data:image/png;base64,${base64Encode(bytes)}';
+    return result;
+  }
 }

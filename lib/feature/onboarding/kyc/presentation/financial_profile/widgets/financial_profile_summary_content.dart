@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../../main.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
@@ -44,45 +45,6 @@ class FinancialProfileSummaryContent extends StatelessWidget {
                 : 'Unknown'),
         _spaceHeight,
         SummaryTextInfo(
-            title: 'Employment Status',
-            subTitle: financialProfileState.employmentStatus.value),
-        if (financialProfileState.natureOfBusiness != null)
-          _summaryTextInfoWithPadding(
-              title: 'Nature of Business',
-              subTitle: financialProfileState.natureOfBusiness?.value ?? ''),
-        if (financialProfileState.occupation != null ||
-            financialProfileState.otherOccupation.isNotEmpty &&
-                financialProfileState.otherOccupation.isNotEmpty)
-          _summaryTextInfoWithPadding(
-              title: 'Occupation',
-              subTitle: financialProfileState.occupation != null &&
-                      financialProfileState.occupation != Occupations.other
-                  ? financialProfileState.occupation!.value
-                  : financialProfileState.occupation != null &&
-                          financialProfileState.occupation == Occupations.other
-                      ? financialProfileState.otherOccupation
-                      : ''),
-        if (financialProfileState.employer.isNotEmpty)
-          _summaryTextInfoWithPadding(
-              title: 'Employer', subTitle: financialProfileState.employer),
-        if (financialProfileState.employerAddress.isNotEmpty)
-          _summaryTextInfoWithPadding(
-              title: 'Employer/ Company Address',
-              subTitle: financialProfileState.employerAddress),
-        if (financialProfileState.countryName.isNotEmpty)
-          _summaryTextInfoWithPadding(
-              title: 'Country of Employment',
-              subTitle: financialProfileState.countryName),
-        if (financialProfileState.country != 'HKG' &&
-            financialProfileState.detailInformationOfCountry.isNotEmpty)
-          _summaryTextInfoWithPadding(
-              title:
-                  'Why is your country of employment different from your country of residence?',
-              subTitle: financialProfileState.detailInformationOfCountry),
-        _spaceHeight,
-        ..._sourceOfWealthSummary,
-        _spaceHeight,
-        SummaryTextInfo(
             title:
                 'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
             subTitle: disclosureAffiliationState.isAffiliatedAssociates != null
@@ -106,6 +68,7 @@ class FinancialProfileSummaryContent extends StatelessWidget {
                 subTitle:
                     '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
           ),
+        ..._getEmploymentDetailsContent(),
       ],
     );
   }
@@ -166,6 +129,50 @@ class FinancialProfileSummaryContent extends StatelessWidget {
           );
         }
       }).toList()
+    ];
+  }
+
+  List<Widget> _getEmploymentDetailsContent() {
+    return [
+      SummaryTextInfo(
+          title: 'Employment Status',
+          subTitle: financialProfileState.employmentStatus.value),
+      if (financialProfileState.natureOfBusiness != null)
+        _summaryTextInfoWithPadding(
+            title: 'Nature of Business',
+            subTitle: financialProfileState.natureOfBusiness?.value ?? ''),
+      if (financialProfileState.occupation != null ||
+          financialProfileState.otherOccupation.isNotEmpty &&
+              financialProfileState.otherOccupation.isNotEmpty)
+        _summaryTextInfoWithPadding(
+            title: 'Occupation',
+            subTitle: financialProfileState.occupation != null &&
+                    financialProfileState.occupation != Occupations.other
+                ? financialProfileState.occupation!.value
+                : financialProfileState.occupation != null &&
+                        financialProfileState.occupation == Occupations.other
+                    ? financialProfileState.otherOccupation
+                    : ''),
+      if (financialProfileState.employer.isNotEmpty)
+        _summaryTextInfoWithPadding(
+            title: 'Employer', subTitle: financialProfileState.employer),
+      if (financialProfileState.employerAddress.isNotEmpty)
+        _summaryTextInfoWithPadding(
+            title: 'Employer/ Company Address',
+            subTitle: financialProfileState.employerAddress),
+      if (financialProfileState.countryName.isNotEmpty)
+        _summaryTextInfoWithPadding(
+            title: 'Country of Employment',
+            subTitle: financialProfileState.countryName),
+      if (financialProfileState.country != 'HKG' &&
+          financialProfileState.detailInformationOfCountry.isNotEmpty)
+        _summaryTextInfoWithPadding(
+            title:
+                'Why is your country of employment different from your country of residence?',
+            subTitle: financialProfileState.detailInformationOfCountry),
+      _spaceHeight,
+      ..._sourceOfWealthSummary,
+      _spaceHeight
     ];
   }
 
