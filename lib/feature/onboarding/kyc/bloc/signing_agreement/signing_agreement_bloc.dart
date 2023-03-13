@@ -24,7 +24,6 @@ class SigningAgreementBloc
     on<SignatureChecked>(_onSignatureChecked);
     on<LegalNameSignatureChanged>(_onLegalNameSignatureChanged);
     on<W8BenFormOpened>(_onW8BenFormOpened);
-    on<SignAgreementScreenRendered>(_onSignAgreementRendered);
   }
 
   final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
@@ -63,26 +62,6 @@ class SigningAgreementBloc
 
   _onLegalNameSignatureChanged(
       LegalNameSignatureChanged event, Emitter<SigningAgreementState> emit) {
-    String fullName =
-        '${_personalInfoBloc.state.firstName} ${_personalInfoBloc.state.lastName}';
-    print('personalInfo state >> $fullName');
-    if (event.legalName != fullName) {
-      emit(state.copyWith(
-        legalName: event.legalName,
-        legalNameErrorText: 'Your input does not match',
-        isInputNameValid: false,
-      ));
-    } else {
-      emit(state.copyWith(
-        legalName: event.legalName,
-        legalNameErrorText: '',
-        isInputNameValid: true,
-      ));
-    }
-  }
-
-  _onSignAgreementRendered(
-      SignAgreementScreenRendered event, Emitter<SigningAgreementState> emit) {
     String fullName =
         '${_personalInfoBloc.state.firstName} ${_personalInfoBloc.state.lastName}';
     if (event.legalName != fullName) {
