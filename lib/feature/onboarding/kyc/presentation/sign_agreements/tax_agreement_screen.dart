@@ -31,6 +31,8 @@ class TaxAgreementScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        'legal name : ${personalInfoState.firstName} ${personalInfoState.lastName}');
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
@@ -222,6 +224,7 @@ class TaxAgreementScreen extends StatelessWidget {
                 onChanged: (value) => context
                     .read<SigningAgreementBloc>()
                     .add(LegalNameSignatureChanged(value)),
+                errorText: state.legalNameErrorText,
               ),
             );
           });

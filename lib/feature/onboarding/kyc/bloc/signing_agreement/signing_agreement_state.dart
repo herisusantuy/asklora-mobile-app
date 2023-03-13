@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'signing_agreement_bloc.dart';
 
 class SigningAgreementState extends Equatable {
@@ -8,6 +9,7 @@ class SigningAgreementState extends Equatable {
   final bool isSignatureChecked;
   final String legalName;
   final String? signedTime;
+  final String legalNameErrorText;
 
   const SigningAgreementState({
     this.isAskLoraClientAgreementOpened = false,
@@ -17,6 +19,7 @@ class SigningAgreementState extends Equatable {
     this.isSignatureChecked = false,
     this.legalName = '',
     this.signedTime,
+    this.legalNameErrorText = '',
   });
 
   @override
@@ -27,32 +30,33 @@ class SigningAgreementState extends Equatable {
         isUnderstandOnTheAgreementChecked,
         isSignatureChecked,
         legalName,
-        signedTime ?? ''
+        signedTime ?? '',
+        legalNameErrorText,
       ];
 
   SigningAgreementState copyWith({
-    bool? isAlpacaCustomerAgreementOpened,
     bool? isAskLoraClientAgreementOpened,
     bool? isBoundByAskloraAgreementChecked,
     bool? isUnderstandOnTheAgreementChecked,
     bool? isRiskDisclosureAgreementChecked,
-    bool? isCertifyNotUSCitizenAgreementChecked,
     bool? isSignatureChecked,
     String? legalName,
     String? signedTime,
+    String? legalNameErrorText,
   }) {
     return SigningAgreementState(
       isAskLoraClientAgreementOpened:
           isAskLoraClientAgreementOpened ?? this.isAskLoraClientAgreementOpened,
-      isRiskDisclosureAgreementChecked: isRiskDisclosureAgreementChecked ??
-          this.isRiskDisclosureAgreementChecked,
       isBoundByAskloraAgreementChecked: isBoundByAskloraAgreementChecked ??
           this.isBoundByAskloraAgreementChecked,
       isUnderstandOnTheAgreementChecked: isUnderstandOnTheAgreementChecked ??
           this.isUnderstandOnTheAgreementChecked,
+      isRiskDisclosureAgreementChecked: isRiskDisclosureAgreementChecked ??
+          this.isRiskDisclosureAgreementChecked,
       isSignatureChecked: isSignatureChecked ?? this.isSignatureChecked,
       legalName: legalName ?? this.legalName,
       signedTime: signedTime ?? this.signedTime,
+      legalNameErrorText: legalNameErrorText ?? this.legalNameErrorText,
     );
   }
 
