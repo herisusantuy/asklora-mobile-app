@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../main.dart';
+import '../../../../../core/utils/feature_flags.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -66,7 +66,7 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
                           .read<DisclosureAffiliationBloc>()
                           .add(const AffiliatedPersonChanged(false));
 
-                      if (isDemoEnable) {
+                      if (FeatureFlags.isDemoEnable) {
                         context.read<NavigationBloc<KycPageStep>>().add(
                             const PageChanged(
                                 KycPageStep.disclosureAffiliationAssociates));

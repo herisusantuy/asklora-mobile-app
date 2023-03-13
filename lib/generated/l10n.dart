@@ -169,6 +169,66 @@ class S {
       args: [name],
     );
   }
+
+  /// `Lora’s date to start the Botstocks`
+  String get tooltipBotDetailsStartDate {
+    return Intl.message(
+      'Lora’s date to start the Botstocks',
+      name: 'tooltipBotDetailsStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The duration you set for Botstock where the Bot will automatically buy and sell.`
+  String get tooltipBotDetailsInvestmentPeriod {
+    return Intl.message(
+      'The duration you set for Botstock where the Bot will automatically buy and sell.',
+      name: 'tooltipBotDetailsInvestmentPeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.`
+  String get tooltipBotDetailsEstMaxProfit {
+    return Intl.message(
+      'This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.',
+      name: 'tooltipBotDetailsEstMaxProfit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level.`
+  String get tooltipBotDetailsEstMaxLoss {
+    return Intl.message(
+      'This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level.',
+      name: 'tooltipBotDetailsEstMaxLoss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The return % where the Plank Bot will sell to try and capture profits. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level above your initial investment level.`
+  String get tooltipBotDetailsEstTakeProfit {
+    return Intl.message(
+      'The return % where the Plank Bot will sell to try and capture profits. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level above your initial investment level.',
+      name: 'tooltipBotDetailsEstTakeProfit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The return % where the Plank Bot will sell try and limit losses. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level below your initial investment level.`
+  String get tooltipBotDetailsEstStopLoss {
+    return Intl.message(
+      'The return % where the Plank Bot will sell try and limit losses. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level below your initial investment level.',
+      name: 'tooltipBotDetailsEstStopLoss',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

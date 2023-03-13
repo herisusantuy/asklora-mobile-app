@@ -25,5 +25,11 @@
                           "type": "String"
                 }
             }
-      }
+      },
+      "tooltip_bot_details_start_date": "Lora開始Botstocks交易",
+      "tooltip_bot_details_investment_period": "你定下的投資時間，Botstock將會於此期間內自動買賣股票。",
+      "tooltip_bot_details_est_max_profit": "Bot將出售以獲取最大利潤的股票價位。",
+      "tooltip_bot_details_est_max_loss": "Bot將出售以限制損失的最低股票價位。",
+      "tooltip_bot_details_est_take_profit": "Plank Bot將出售以獲取利潤的預設最高股票價位",
+      "tooltip_bot_details_est_stop_loss": "Plank Bot將出售以限制過分損失的預設最低股票價位"
 }

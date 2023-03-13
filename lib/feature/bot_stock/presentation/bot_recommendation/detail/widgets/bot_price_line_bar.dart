@@ -55,12 +55,11 @@ class BotPriceLineBar extends StatelessWidget {
                 Positioned(
                     top: labelTopPadding,
                     left: translationMinPrice -
-                        _textSize(maxPrice.toStringAsFixed(1),
-                                    AskLoraTextStyles.body4)
+                        _textSize(maxPrice.toString(), AskLoraTextStyles.body4)
                                 .width /
                             2,
                     child: CustomTextNew(
-                      minPrice.toStringAsFixed(2),
+                      minPrice.toString(),
                       style: AskLoraTextStyles.body4,
                     )),
                 Positioned(
@@ -93,7 +92,7 @@ class BotPriceLineBar extends StatelessWidget {
                             2 +
                         dotSize.width / 2,
                     child: CustomTextNew(
-                      currentPrice.toStringAsFixed(2),
+                      currentPrice.toString(),
                       style: AskLoraTextStyles.body4,
                     ))
               ],
