@@ -72,10 +72,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _signInRepository.signIn(
           email: state.emailAddress, password: state.password);
-      UserJourney userJourney = await _userJourneyRepository.getUserJourney();
 
+      UserJourney? userJourney;
       final isOtpRequired = data.statusCode == 202;
       if (!isOtpRequired) {
+        userJourney = await _userJourneyRepository.getUserJourney();
         _fetchUserProfile();
       }
 

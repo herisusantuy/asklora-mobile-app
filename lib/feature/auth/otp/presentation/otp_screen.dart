@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/bloc/app_bloc.dart';
 import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
@@ -71,6 +72,9 @@ class OtpScreen extends StatelessWidget {
                               context, state.response.message);
                           break;
                         case ResponseState.success:
+                          context
+                              .read<AppBloc>()
+                              .add(const GetUserJourneyFromLocal());
                           TabsScreen.openAndRemoveAllRoute(context);
                           break;
                         default:
