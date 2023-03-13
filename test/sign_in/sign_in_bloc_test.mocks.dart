@@ -177,6 +177,23 @@ class MockUserJourneyRepository extends _i1.Mock
         ),
         returnValue: _i6.Future<_i9.UserJourney>.value(_i9.UserJourney.privacy),
       ) as _i6.Future<_i9.UserJourney>);
+  @override
+  _i6.Future<_i3.BaseResponse<_i8.UserJourneyResponse>>
+      getUserJourneyWithData() => (super.noSuchMethod(
+            Invocation.method(
+              #getUserJourneyWithData,
+              [],
+            ),
+            returnValue:
+                _i6.Future<_i3.BaseResponse<_i8.UserJourneyResponse>>.value(
+                    _FakeBaseResponse_1<_i8.UserJourneyResponse>(
+              this,
+              Invocation.method(
+                #getUserJourneyWithData,
+                [],
+              ),
+            )),
+          ) as _i6.Future<_i3.BaseResponse<_i8.UserJourneyResponse>>);
 }
 
 /// A class which mocks [SignInApiClient].

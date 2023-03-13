@@ -104,7 +104,7 @@ class ResidentCheckScreen extends StatelessWidget {
             secondaryButtonOnClick: () {
               context
                   .read<KycBloc>()
-                  .add(SaveKyc(SaveKycRequest.getSaveKycRequest(context)));
+                  .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context)));
             },
             primaryButtonLabel: 'NEXT',
             secondaryButtonLabel: 'SAVE FOR LATER',

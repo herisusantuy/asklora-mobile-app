@@ -12,9 +12,9 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../../utils/source_of_wealth_enum.dart';
 import '../widgets/custom_donut_chart/custom_donut_chart.dart';
 import '../widgets/kyc_base_form.dart';
@@ -127,7 +127,9 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                       context, 'Your sources of wealth must add up to 100%');
                 }
               },
-              secondaryButtonOnClick: () => CarouselScreen.open(context),
+              secondaryButtonOnClick: () => context
+                  .read<KycBloc>()
+                  .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
               primaryButtonLabel: 'NEXT',
               secondaryButtonLabel: 'SAVE FOR LATER');
         },

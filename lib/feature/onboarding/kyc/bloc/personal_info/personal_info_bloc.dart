@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -9,6 +7,7 @@ import '../../../../../core/utils/hkid_validation.dart';
 import '../../../../../core/utils/age_validation.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
 import '../../repository/account_repository.dart';
+import '../../utils/kyc_util.dart';
 
 part 'personal_info_event.dart';
 
@@ -43,7 +42,6 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   _onInitiatePersonalInfo(
       InitiatePersonalInfo event, Emitter<PersonalInfoState> emit) {
     PersonalInfoRequest? personalInfoRequest = event.personalInfoRequest;
-
     emit(
       state.copyWith(
         firstName: personalInfoRequest?.firstName,
@@ -53,13 +51,20 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
         hkIdNumber: personalInfoRequest?.hkIdNumber,
         isHkIdValid: isHkIdValid(personalInfoRequest?.hkIdNumber ?? ''),
         nationalityCode: personalInfoRequest?.nationality,
-        nationalityName:
-            getCountryByIso3(personalInfoRequest?.nationality ?? '')?.name,
+        nationalityName: personalInfoRequest?.nationality != null &&
+                personalInfoRequest!.nationality!.isNotEmpty
+            ? getCountryByIso3(personalInfoRequest.nationality!)?.name
+            : null,
         phoneCountryCode: personalInfoRequest?.phoneCountryCode,
         phoneNumber: personalInfoRequest?.phoneNumber,
         countryCodeOfBirth: personalInfoRequest?.countryOfBirth,
-        countryNameOfBirth:
-            getCountryByIso3(personalInfoRequest?.countryOfBirth ?? '')?.name,
+        countryNameOfBirth: personalInfoRequest?.countryOfBirth != null &&
+                personalInfoRequest!.countryOfBirth!.isNotEmpty
+            ? getCountryByIso3(personalInfoRequest.countryOfBirth!)?.name
+            : null,
+        isUnitedStateResident: personalInfoRequest?.isUnitedStateResident,
+        isHongKongPermanentResident:
+            personalInfoRequest?.isHongKongPermanentResident,
       ),
     );
   }
@@ -177,11 +182,5 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
         response: BaseResponse.error(),
       ));
     }
-  }
-
-  Country? getCountryByIso3(String iso3) {
-    List<Country> countries = CountryService().getAll();
-    return countries
-        .firstWhereOrNull((element) => element.countryCodeIso3 == iso3);
   }
 }

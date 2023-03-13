@@ -60,3 +60,14 @@ class ImageDeleted extends AddressProofEvent {
   @override
   List<Object> get props => [image];
 }
+
+class InitiateAddressProof extends AddressProofEvent {
+  final ResidenceInfoRequest? residenceInfoRequest;
+  final List<ProofsOfAddressRequest>? proofOfAddressRequests;
+  const InitiateAddressProof(
+      this.residenceInfoRequest, this.proofOfAddressRequests);
+
+  @override
+  List<Object> get props =>
+      [residenceInfoRequest ?? '', proofOfAddressRequests ?? ''];
+}

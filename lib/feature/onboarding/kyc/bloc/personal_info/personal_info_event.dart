@@ -142,7 +142,5 @@ class InitiatePersonalInfo extends PersonalInfoEvent {
   const InitiatePersonalInfo(this.personalInfoRequest);
 
   @override
-  List<Object> get props => [personalInfoRequest??''];
+  List<Object> get props => [personalInfoRequest ?? ''];
 }
-
-

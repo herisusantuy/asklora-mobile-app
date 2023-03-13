@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/upgrade_account/employment_info.dart';
 import '../../utils/kyc_dropdown_enum.dart';
+import '../../utils/kyc_util.dart';
 
 part 'financial_profile_event.dart';
 
@@ -28,6 +30,39 @@ class FinancialProfileBloc
     on<FinancialProfileCountryChanged>(_onFinancialProfileCountryChanged);
     on<FinancialProfileDetailInformationOfCountryChanged>(
         _onFinancialProfileDetailInformationOfCountryChanged);
+    on<InitiateFinancialProfile>(_onInitiateFinancialProfile);
+  }
+
+  _onInitiateFinancialProfile(
+      InitiateFinancialProfile event, Emitter<FinancialProfileState> emit) {
+    Occupations? occupations =
+        Occupations.findByString(event.employmentInfo?.occupation ?? '');
+    NatureOfBusiness? natureOfBusiness = NatureOfBusiness.findByString(
+        event.employmentInfo?.employerBusiness ?? '');
+    emit(
+      state.copyWith(
+        employmentStatus: EmploymentStatus.findByStringValue(
+            event.employmentInfo?.employmentStatus ?? ''),
+        natureOfBusiness: natureOfBusiness,
+        natureOfBusinessDescription:
+            event.employmentInfo?.employerBusinessDescription,
+        occupation: occupations ?? Occupations.other,
+        otherOccupation:
+            occupations != null ? null : event.employmentInfo?.occupation,
+        employer: event.employmentInfo?.employer,
+        employerAddress: event.employmentInfo?.employerAddressLine1,
+        employerAddressTwo: event.employmentInfo?.employerAddressLine2,
+        district: District.findByString(event.employmentInfo?.district ?? ''),
+        region: Region.findByString(event.employmentInfo?.region ?? ''),
+        country: event.employmentInfo?.country,
+        countryName: event.employmentInfo?.country != null &&
+                event.employmentInfo!.country!.isNotEmpty
+            ? getCountryByIso3(event.employmentInfo!.country!)?.name
+            : null,
+        detailInformationOfCountry:
+            event.employmentInfo?.differentCountryReason,
+      ),
+    );
   }
 
   _onFinancialProfileEmploymentStatusChanged(

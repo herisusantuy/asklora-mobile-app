@@ -45,7 +45,7 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         _spaceHeight,
         SummaryTextInfo(
             title: 'Employment Status',
-            subTitle: financialProfileState.employmentStatus.value),
+            subTitle: financialProfileState.employmentStatus.name),
         if (financialProfileState.natureOfBusiness != null)
           _summaryTextInfoWithPadding(
               title: 'Nature of Business',

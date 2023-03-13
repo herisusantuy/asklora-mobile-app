@@ -7,9 +7,9 @@ import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../../utils/kyc_dropdown_enum.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -141,7 +141,9 @@ class AddressProofScreen extends StatelessWidget {
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.personalInfoSummary)),
-            secondaryButtonOnClick: () => CarouselScreen.open(context),
+            secondaryButtonOnClick: () => context
+                .read<KycBloc>()
+                .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
             primaryButtonLabel: 'NEXT',
             secondaryButtonLabel: 'SAVE FOR LATER',
           ));

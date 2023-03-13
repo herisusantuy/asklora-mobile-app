@@ -16,6 +16,7 @@ class UserJourneyRepository {
   Future<BaseResponse<UserJourneyResponse>> saveUserJourney(
       {required UserJourney userJourney, String? data}) async {
     await _sharedPreference.writeData(sfKeyUserJourney, userJourney.value);
+    await _sharedPreference.writeData(sfKeyUserJourneyData, data ?? '');
     try {
       var response = await _userJourneyApiClient
           .save(UserJourneyRequest(userJourney: userJourney.value, data: data));
@@ -29,7 +30,9 @@ class UserJourneyRepository {
 
   Future<UserJourney> getUserJourney() async {
     String? localUserJourneyString =
-        await _sharedPreference.readData('user_journey');
+        await _sharedPreference.readData(sfKeyUserJourney);
+    String? localUserJourneyDataString =
+        await _sharedPreference.readData(sfKeyUserJourneyData);
     UserJourney? localUserJourney = UserJourney.values
         .firstWhereOrNull((element) => element.value == localUserJourneyString);
     try {
@@ -43,7 +46,8 @@ class UserJourneyRepository {
           .indexWhere((element) => element.value == localUserJourney?.value);
 
       if (indexUserJourneyResponse < indexUserJourneyLocal) {
-        saveUserJourney(userJourney: localUserJourney!);
+        saveUserJourney(
+            userJourney: localUserJourney!, data: localUserJourneyDataString);
         return localUserJourney;
       } else {
         return UserJourney.values.firstWhereOrNull((element) =>

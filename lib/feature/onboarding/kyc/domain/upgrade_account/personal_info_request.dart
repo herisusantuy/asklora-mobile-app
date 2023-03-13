@@ -31,6 +31,12 @@ class PersonalInfoRequest extends Equatable {
   @JsonKey(name: 'phone_number')
   final String? phoneNumber;
 
+  ///below field are for saving state purposes and not be used on submitting real kyc
+  @JsonKey(includeIfNull: false)
+  final bool? isUnitedStateResident;
+  @JsonKey(includeIfNull: false)
+  final bool? isHongKongPermanentResident;
+
   const PersonalInfoRequest({
     this.firstName,
     this.lastName,
@@ -41,22 +47,27 @@ class PersonalInfoRequest extends Equatable {
     this.countryOfBirth,
     this.phoneCountryCode,
     this.phoneNumber,
+    this.isUnitedStateResident,
+    this.isHongKongPermanentResident,
   });
 
-  static PersonalInfoRequest getRequestFromPersonalInfoState(BuildContext context) {
-    final PersonalInfoState personalInfostate =
+  static PersonalInfoRequest getRequestForSavingKyc(BuildContext context) {
+    final PersonalInfoState personalInfoState =
         context.read<PersonalInfoBloc>().state;
 
     return PersonalInfoRequest(
-      firstName: personalInfostate.firstName,
-      lastName: personalInfostate.lastName,
-      gender: personalInfostate.gender,
-      hkIdNumber: personalInfostate.hkIdNumber,
+      firstName: personalInfoState.firstName,
+      lastName: personalInfoState.lastName,
+      gender: personalInfoState.gender,
+      hkIdNumber: personalInfoState.hkIdNumber,
       nationality: context.read<PersonalInfoBloc>().state.nationalityCode,
-      dateOfBirth: personalInfostate.dateOfBirth,
+      dateOfBirth: personalInfoState.dateOfBirth,
       countryOfBirth: context.read<PersonalInfoBloc>().state.countryCodeOfBirth,
       phoneCountryCode: context.read<PersonalInfoBloc>().state.phoneCountryCode,
-      phoneNumber: personalInfostate.phoneNumber,
+      phoneNumber: personalInfoState.phoneNumber,
+      isUnitedStateResident: personalInfoState.isUnitedStateResident,
+      isHongKongPermanentResident:
+          personalInfoState.isHongKongPermanentResident,
     );
   }
 

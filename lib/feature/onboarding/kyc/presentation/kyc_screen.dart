@@ -18,11 +18,11 @@ import '../bloc/personal_info/personal_info_bloc.dart';
 import '../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/source_of_wealth/source_of_wealth_bloc.dart';
+import '../domain/upgrade_account/save_kyc_request.dart';
 import '../repository/account_repository.dart';
 import '../repository/signing_broker_agreement_repository.dart';
 import 'financial_profile/disclosure_affiliation_associates_screen.dart';
 import 'financial_profile/disclosure_affiliation_commission_screen.dart';
-import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_associates_input_screen.dart';
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_person_input_screen.dart';
 import 'financial_profile/financial_profile_source_of_wealth_screen.dart';
 import 'financial_profile/disclosure_affiliation_person_screen.dart';
@@ -60,21 +60,30 @@ class KycScreen extends StatelessWidget {
             accountRepository: AccountRepository(),
             userJourneyRepository: UserJourneyRepository())
           ..add(const FetchKyc()),
-        child: BlocBuilder<KycBloc, KycState>(
+        child: BlocConsumer<KycBloc, KycState>(
+            listener: (context, state) {
+              if (state.fetchKycResponse.state == ResponseState.loading) {
+                CustomLoadingOverlay.of(context).show();
+              } else {
+                CustomLoadingOverlay.of(context).dismiss();
+              }
+            },
             buildWhen: (previous, current) =>
                 previous.fetchKycResponse.state !=
                 current.fetchKycResponse.state,
             builder: (context, state) {
+              SaveKycRequest? saveKycRequest = state.fetchKycResponse.data;
               return MultiBlocProvider(
                 providers: [
                   BlocProvider(
                       create: (_) =>
                           NavigationBloc<KycPageStep>(initialKycPageStep)),
                   BlocProvider(
+                      lazy: !(saveKycRequest?.personalInfoRequest != null),
                       create: (context) => PersonalInfoBloc(
                           accountRepository: AccountRepository())
                         ..add(InitiatePersonalInfo(
-                            state.fetchKycResponse.data?.personalInfoRequest))),
+                            saveKycRequest?.personalInfoRequest))),
                   BlocProvider(
                     create: (context) => OtpBloc(
                         otpRepository: OtpRepository(),
@@ -84,16 +93,46 @@ class KycScreen extends StatelessWidget {
                     create: (context) => CountryOfTaxResidenceBloc(),
                   ),
                   BlocProvider(
-                    create: (context) => AddressProofBloc(),
+                    lazy: !(saveKycRequest
+                                ?.upgradeAccountRequest.residenceInfo !=
+                            null ||
+                        saveKycRequest?.upgradeAccountRequest.proofsOfAddress !=
+                            null),
+                    create: (context) => AddressProofBloc()
+                      ..add(InitiateAddressProof(
+                          saveKycRequest?.upgradeAccountRequest.residenceInfo,
+                          saveKycRequest
+                              ?.upgradeAccountRequest.proofsOfAddress)),
                   ),
                   BlocProvider(
-                    create: (context) => DisclosureAffiliationBloc(),
+                    lazy:
+                        !(saveKycRequest?.immediateFamilyAffiliation != null ||
+                            saveKycRequest?.associatesAffiliation != null ||
+                            saveKycRequest
+                                    ?.upgradeAccountRequest.affiliatedPerson !=
+                                null),
+                    create: (context) => DisclosureAffiliationBloc()
+                      ..add(InitiateDisclosureAffiliation(
+                          saveKycRequest?.immediateFamilyAffiliation,
+                          saveKycRequest?.associatesAffiliation,
+                          saveKycRequest
+                              ?.upgradeAccountRequest.affiliatedPerson)),
                   ),
                   BlocProvider(
-                    create: (context) => FinancialProfileBloc(),
+                    lazy: !(saveKycRequest
+                            ?.upgradeAccountRequest.employmentInfo !=
+                        null),
+                    create: (context) => FinancialProfileBloc()
+                      ..add(InitiateFinancialProfile(saveKycRequest
+                          ?.upgradeAccountRequest.employmentInfo)),
                   ),
                   BlocProvider(
-                    create: (context) => SourceOfWealthBloc(),
+                    lazy:
+                        !(saveKycRequest?.upgradeAccountRequest.wealthSources !=
+                            null),
+                    create: (context) => SourceOfWealthBloc()
+                      ..add(InitiateSourceOfWealth(
+                          saveKycRequest?.upgradeAccountRequest.wealthSources)),
                   ),
                   BlocProvider(
                     create: (context) => SigningAgreementBloc(
@@ -138,6 +177,119 @@ class KycScreen extends StatelessWidget {
                   ),
                 ),
               );
+              /* if (state.fetchKycResponse.state == ResponseState.success) {
+                SaveKycRequest? saveKycRequest = state.fetchKycResponse.data;
+                return MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                        create: (_) =>
+                            NavigationBloc<KycPageStep>(initialKycPageStep)),
+                    BlocProvider(
+                        lazy: !(saveKycRequest?.personalInfoRequest != null),
+                        create: (context) => PersonalInfoBloc(
+                            accountRepository: AccountRepository())
+                          ..add(InitiatePersonalInfo(
+                              saveKycRequest?.personalInfoRequest))),
+                    BlocProvider(
+                      create: (context) => OtpBloc(
+                          otpRepository: OtpRepository(),
+                          sharedPreference: SharedPreference()),
+                    ),
+                    BlocProvider(
+                      create: (context) => CountryOfTaxResidenceBloc(),
+                    ),
+                    BlocProvider(
+                      lazy: !(saveKycRequest
+                                  ?.upgradeAccountRequest.residenceInfo !=
+                              null ||
+                          saveKycRequest
+                                  ?.upgradeAccountRequest.proofsOfAddress !=
+                              null),
+                      create: (context) => AddressProofBloc()
+                        ..add(InitiateAddressProof(
+                            saveKycRequest?.upgradeAccountRequest.residenceInfo,
+                            saveKycRequest
+                                ?.upgradeAccountRequest.proofsOfAddress)),
+                    ),
+                    BlocProvider(
+                      lazy: !(saveKycRequest?.immediateFamilyAffiliation !=
+                              null ||
+                          saveKycRequest?.associatesAffiliation != null ||
+                          saveKycRequest
+                                  ?.upgradeAccountRequest.affiliatedPerson !=
+                              null),
+                      create: (context) => DisclosureAffiliationBloc()
+                        ..add(InitiateDisclosureAffiliation(
+                            saveKycRequest?.immediateFamilyAffiliation,
+                            saveKycRequest?.associatesAffiliation,
+                            saveKycRequest
+                                ?.upgradeAccountRequest.affiliatedPerson)),
+                    ),
+                    BlocProvider(
+                      lazy: !(saveKycRequest
+                              ?.upgradeAccountRequest.employmentInfo !=
+                          null),
+                      create: (context) => FinancialProfileBloc()
+                        ..add(InitiateFinancialProfile(saveKycRequest
+                            ?.upgradeAccountRequest.employmentInfo)),
+                    ),
+                    BlocProvider(
+                      lazy: !(saveKycRequest
+                              ?.upgradeAccountRequest.wealthSources !=
+                          null),
+                      create: (context) => SourceOfWealthBloc()
+                        ..add(InitiateSourceOfWealth(saveKycRequest
+                            ?.upgradeAccountRequest.wealthSources)),
+                    ),
+                    BlocProvider(
+                      create: (context) => SigningAgreementBloc(
+                          signingBrokerAgreementRepository:
+                              SigningBrokerAgreementRepository()),
+                    ),
+                  ],
+                  child: BlocListener<KycBloc, KycState>(
+                    listenWhen: (previous, current) =>
+                        previous.saveKycResponse.state !=
+                        current.saveKycResponse.state,
+                    listener: (context, state) {
+                      if (state.saveKycResponse.state ==
+                          ResponseState.loading) {
+                        CustomLoadingOverlay.of(context).show();
+                      } else {
+                        CustomLoadingOverlay.of(context).dismiss();
+                        if (state.saveKycResponse.state ==
+                            ResponseState.success) {
+                          TabsScreen.openAndRemoveAllRoute(context);
+                        } else if (state.saveKycResponse.state ==
+                            ResponseState.error) {
+                          CustomInAppNotification.show(
+                              context, state.saveKycResponse.message);
+                        }
+                      }
+                    },
+                    child: Builder(
+                      builder: (context) => CustomNavigationWidget<KycPageStep>(
+                        padding: EdgeInsets.zero,
+                        header: const SizedBox.shrink(),
+                        onBackPressed: () {
+                          context
+                              .read<NavigationBloc<KycPageStep>>()
+                              .add(const PagePop());
+                        },
+                        child: BlocListener<NavigationBloc<KycPageStep>,
+                                NavigationState>(
+                            listenWhen: (_, current) =>
+                                current.lastPage == true,
+                            listener: (context, state) =>
+                                Navigator.pop(context),
+                            child: _getPages),
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }*/
             }),
       ),
     );
@@ -198,12 +350,6 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.disclosureAffiliationAssociates:
               return const DisclosureAffiliationAssociatesScreen(
                 progress: 0.45,
-              );
-            case KycPageStep.disclosureAffiliationAssociatesInput:
-              return DisclosureAffiliationAssociatesInputScreen(
-                progress: 0.5,
-                disclosureAffiliationState:
-                    context.read<DisclosureAffiliationBloc>().state,
               );
             case KycPageStep.disclosureAffiliationCommissions:
               return const DisclosureAffiliationCommissionScreen(

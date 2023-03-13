@@ -10,7 +10,6 @@ import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
@@ -22,6 +21,7 @@ import '../domain/upgrade_account/affiliated_person.dart';
 import '../domain/upgrade_account/employment_info.dart';
 import '../domain/upgrade_account/proofs_of_address_request.dart';
 import '../domain/upgrade_account/residence_info_request.dart';
+import '../domain/upgrade_account/save_kyc_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../domain/upgrade_account/wealth_sources_request.dart';
 import 'financial_profile/widgets/financial_profile_summary_content.dart';
@@ -103,7 +103,8 @@ class KycSummaryScreen extends StatelessWidget {
           }
           switch (state.submitKycResponse.state) {
             case ResponseState.error:
-              CustomInAppNotification.show(context, state.submitKycResponse.message);
+              CustomInAppNotification.show(
+                  context, state.submitKycResponse.message);
               break;
             case ResponseState.success:
               context
@@ -121,7 +122,9 @@ class KycSummaryScreen extends StatelessWidget {
           primaryButtonOnClick: () {
             context.read<KycBloc>().add(_submitKyc());
           },
-          secondaryButtonOnClick: () => CarouselScreen.open(context),
+          secondaryButtonOnClick: () => context
+              .read<KycBloc>()
+              .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
           primaryButtonLabel: 'COMPLETE',
           secondaryButtonLabel: 'SAVE FOR LATER',
         ),
@@ -141,7 +144,7 @@ class KycSummaryScreen extends StatelessWidget {
                     'data:image/png;base64,${base64.encode(utf8.encode(e.name))}'))
             .toList(),
         employmentInfo: EmploymentInfo(
-            employmentStatus: financialProfileState.employmentStatus.enumString,
+            employmentStatus: financialProfileState.employmentStatus.value,
             employer: financialProfileState.employer,
             employerBusiness: financialProfileState.natureOfBusiness?.value,
             employerBusinessDescription:

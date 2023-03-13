@@ -69,3 +69,15 @@ class AffiliateAssociatesLastNameChanged extends DisclosuresAffiliationEvent {
   @override
   List<Object> get props => [lastName];
 }
+
+class InitiateDisclosureAffiliation extends DisclosuresAffiliationEvent {
+  final bool? immediateFamilyAffiliation;
+  final bool? associatesAffiliation;
+  final AffiliatedPerson? affiliatedPerson;
+
+  const InitiateDisclosureAffiliation(this.immediateFamilyAffiliation,
+      this.associatesAffiliation, this.affiliatedPerson);
+
+  @override
+  List<Object> get props => [immediateFamilyAffiliation ?? ''];
+}

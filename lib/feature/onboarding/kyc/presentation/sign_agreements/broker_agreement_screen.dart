@@ -32,7 +32,7 @@ class BrokerAgreementScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
-            'Please read the the Asklora Customer Agreement. You must check all the boxes and provide your signature in order to proceed.',
+            'Please read the Asklora Customer Agreement. You must check all the boxes and provide your signature in order to proceed.',
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),

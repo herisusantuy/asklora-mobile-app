@@ -50,11 +50,7 @@ class KycState extends Equatable {
 
   @override
   List<Object?> get props {
-    return [
-      submitKycResponse,
-      saveKycResponse,
-      fetchKycResponse
-    ];
+    return [submitKycResponse, saveKycResponse, fetchKycResponse];
   }
 
   KycState copyWith({

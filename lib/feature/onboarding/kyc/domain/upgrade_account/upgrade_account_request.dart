@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +7,7 @@ import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
+import '../../utils/kyc_dropdown_enum.dart';
 import 'affiliated_person.dart';
 import 'agreement.dart';
 import 'employment_info.dart';
@@ -44,16 +43,16 @@ class UpgradeAccountRequest extends Equatable {
     this.wealthSources,
     this.affiliatedPerson,
     this.agreements = const [
-      Agreement(agreement: 'MA'),
-      Agreement(agreement: 'AA'),
-      Agreement(agreement: 'CA'),
-      Agreement(agreement: 'ACA'),
-      Agreement(agreement: 'RDS'),
-      Agreement(agreement: 'W8BEN'),
+      //Agreement(agreement: 'MA'),
+      //Agreement(agreement: 'AA'),//application aggreement
+      //Agreement(agreement: 'CA'),
+      Agreement(agreement: 'ACA'), //asklora customer agreement
+      Agreement(agreement: 'RDS'), //risk disclosure agreement
+      Agreement(agreement: 'W8BEN'), //w8ben
     ],
   });
 
-  static UpgradeAccountRequest getRequestFromKycStates(BuildContext context) {
+  static UpgradeAccountRequest getRequestForSavingKyc(BuildContext context) {
     final AddressProofState addressProofState =
         context.read<AddressProofBloc>().state;
     final FinancialProfileState financialProfileState =
@@ -70,17 +69,17 @@ class UpgradeAccountRequest extends Equatable {
           region: addressProofState.region?.value,
         ),
         proofsOfAddress: addressProofState.addressProofImages
-            .map((e) => ProofsOfAddressRequest(
-                proofFile:
-                    'data:image/png;base64,${base64.encode(utf8.encode(e.name))}'))
+            .map((e) => ProofsOfAddressRequest(proofFile: e.path))
             .toList(),
         employmentInfo: EmploymentInfo(
-            employmentStatus: financialProfileState.employmentStatus.enumString,
+            employmentStatus: financialProfileState.employmentStatus.value,
             employer: financialProfileState.employer,
             employerBusiness: financialProfileState.natureOfBusiness?.value,
             employerBusinessDescription:
                 financialProfileState.natureOfBusinessDescription,
-            occupation: financialProfileState.occupation?.value,
+            occupation: financialProfileState.occupation != Occupations.other
+                ? financialProfileState.occupation?.value
+                : financialProfileState.otherOccupation,
             employerAddressLine1: financialProfileState.employerAddress,
             employerAddressLine2: financialProfileState.employerAddressTwo,
             district: financialProfileState.district?.value,

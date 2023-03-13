@@ -271,10 +271,9 @@ class PersonalInfoScreen extends StatelessWidget {
                       phoneNumber: state.phoneNumber,
                     )));
               },
-              secondaryButtonOnClick: (){
-                context.read<KycBloc>().add(SaveKyc(
-                    SaveKycRequest.getSaveKycRequest(context)));
-              },
+              secondaryButtonOnClick: () => context
+                  .read<KycBloc>()
+                  .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
               primaryButtonLabel: 'NEXT',
               secondaryButtonLabel: 'SAVE FOR LATER',
             ),
