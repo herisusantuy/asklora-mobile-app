@@ -36,9 +36,10 @@ class UserJourneyRepository {
 
   Future<UserJourney?> getUserJourneyFromLocal() async {
     String? localUserJourneyString =
-    await _sharedPreference.readData(sfKeyUserJourney);
-    UserJourney? localUserJourney = UserJourney.values
-        .firstWhereOrNull((element) => element.value == localUserJourneyString)??UserJourney.investmentStyle;
+        await _sharedPreference.readData(sfKeyUserJourney);
+    UserJourney? localUserJourney = UserJourney.values.firstWhereOrNull(
+            (element) => element.value == localUserJourneyString) ??
+        UserJourney.investmentStyle;
     return localUserJourney;
   }
 

@@ -11,9 +11,9 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/onfido/onfido_result_request.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -31,6 +31,8 @@ class VerifyIdentityScreen extends StatelessWidget {
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Verify Identity',
       content: BlocListener<KycBloc, KycState>(
+        listenWhen: (previous, current) =>
+            previous.onfidoResponse.state != current.onfidoResponse.state,
         listener: (context, state) async {
           if (state.onfidoResponse.state == ResponseState.loading) {
             CustomLoadingOverlay.of(context).show();
@@ -110,7 +112,9 @@ class VerifyIdentityScreen extends StatelessWidget {
           ///TODO OPEN ONFIDO SCREEN LATER
           context.read<KycBloc>().add(GetSdkToken());
         },
-        secondaryButtonOnClick: () => CarouselScreen.open(context),
+        secondaryButtonOnClick: () => context
+            .read<KycBloc>()
+            .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
         primaryButtonLabel: 'VERIFY NOW',
         secondaryButtonLabel: 'SAVE FOR LATER',
       );
