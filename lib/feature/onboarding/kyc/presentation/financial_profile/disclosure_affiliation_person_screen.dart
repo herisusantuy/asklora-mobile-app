@@ -35,8 +35,6 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
           _spaceHeight,
           const DotText('I am a senior political figure.'),
           _spaceHeight,
-          const DotText('I am a senior political figure.'),
-          _spaceHeight,
           const DotText(
               'I am a family member or relative of a senior political figure.'),
           _spaceHeight,
