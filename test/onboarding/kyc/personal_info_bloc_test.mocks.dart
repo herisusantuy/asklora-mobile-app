@@ -159,11 +159,11 @@ class MockAccountRepository extends _i1.Mock implements _i5.AccountRepository {
         )),
       ) as _i6.Future<_i3.BaseResponse<_i11.OnfidoTokenResponse>>);
   @override
-  _i6.Future<_i3.BaseResponse<_i12.OnfidoResultResponse>> updateKycResult(
+  _i6.Future<_i3.BaseResponse<_i12.OnfidoResultResponse>> submitOnfidoOutcome(
           _i13.OnfidoResultRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
-          #updateKycResult,
+          #submitOnfidoOutcome,
           [request],
         ),
         returnValue:
@@ -171,7 +171,7 @@ class MockAccountRepository extends _i1.Mock implements _i5.AccountRepository {
                 _FakeBaseResponse_1<_i12.OnfidoResultResponse>(
           this,
           Invocation.method(
-            #updateKycResult,
+            #submitOnfidoOutcome,
             [request],
           ),
         )),

@@ -156,7 +156,10 @@ class BotPortfolioDetailContent extends StatelessWidget {
           children: [
             PairColumnText(
               leftTitle: 'Prev Close',
-              leftSubTitle: 'Not available yet',
+              leftSubTitle: portfolioBotDetailModel?.prevClosePrice != null
+                  ? (portfolioBotDetailModel?.prevClosePrice ?? 0)
+                      .toStringAsFixed(1)
+                  : '-',
               rightTitle: 'Market Cap',
               rightSubTitle: portfolioBotDetailModel?.marketCap != null
                   ? (portfolioBotDetailModel?.marketCap ?? 0).toStringAsFixed(1)

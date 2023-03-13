@@ -130,7 +130,8 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       var requests = _getAllSelectionsInRequest(tempId);
 
       await _ppiResponseRepository.addBulkAnswer(requests);
-      var userSnapShot = await _ppiResponseRepository.getUserSnapShot(tempId);
+      var userSnapShot =
+          await _ppiResponseRepository.getUserSnapShotUserId(tempId);
       emit(state.copyWith(
         responseState: ResponseState.success,
         ppiResponseState: PpiResponseState.dispatchResponse,
@@ -182,7 +183,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       Logger.log('scores $scores');
 
-      var ageScore = (6 - pow(age / 35, 2));
+      var ageScore = (6 - pow(age / 33, 2));
 
       Logger.log('ageScore before $ageScore');
 

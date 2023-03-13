@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 
+import '../../../../core/domain/base_response.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../domain/ppi_api_repository.dart';
 import '../domain/ppi_user_response.dart';
 import '../domain/ppi_user_response_request.dart';
@@ -35,9 +38,24 @@ class PpiResponseRepository {
     return PpiUserResponse.fromJson(response.data);
   }
 
-  Future<SnapShot> getUserSnapShot(int userId) async {
-    var response = await _ppiApiRepository.getUserSnapshot(userId);
-    return SnapShot.fromJson(response.data);
+  Future<BaseResponse<SnapShot>> getUserSnapShotUserId(int userId) async {
+    try {
+      var response = await _ppiApiRepository.getUserSnapshotByUserId(userId);
+      return BaseResponse.complete(SnapShot.fromJson(response.data));
+    } catch (_) {
+      return BaseResponse.error(message: 'Failed to get data');
+    }
+  }
+
+  Future<BaseResponse<SnapShot>> getUserSnapshotByAskloraId(
+      int askloraId) async {
+    try {
+      var response =
+          await _ppiApiRepository.getUserSnapshotByAskloraId(askloraId);
+      return BaseResponse.complete(SnapShot.fromJson(response.data));
+    } catch (_) {
+      return BaseResponse.error(message: 'Failed to get data');
+    }
   }
 
   Future<Response> linkUser(int userId) async {

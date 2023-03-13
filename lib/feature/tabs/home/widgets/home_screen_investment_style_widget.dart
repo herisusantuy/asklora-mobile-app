@@ -29,41 +29,69 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
           SizedBox(
             height: 244,
             width: 244,
-            child: RadarChart(RadarChartData(
-                tickCount: 0,
-                radarBackgroundColor: AskLoraColors.whiteSmoke,
-                titleTextStyle: AskLoraTextStyles.subtitle2,
-                extendedBorderStyle: ExtendedBorderStyle.dash,
-                tickBorderData: const BorderSide(color: Colors.blue, width: 2),
-                radarBorderData: const BorderSide(
-                    color: AskLoraColors.primaryGreen, width: 3),
-                gridBorderData:
-                    const BorderSide(color: AskLoraColors.gray, width: 1.5),
-                titlePositionPercentageOffset: .5,
-                getTitle: (index, angle) {
-                  switch (index) {
-                    case 0:
-                      return const RadarChartTitle(
-                          text: 'Risk Tolerance', angle: 0);
-                    case 2:
-                      return const RadarChartTitle(text: 'Patient', angle: 0);
-                    case 1:
-                      return const RadarChartTitle(text: 'Detailed', angle: 0);
-                    default:
-                      return const RadarChartTitle(text: '');
-                  }
-                },
-                dataSets: [
-                  RadarDataSet(
-                      entryRadius: 6,
-                      fillColor: Colors.transparent,
-                      borderColor: AskLoraColors.primaryGreen,
-                      dataEntries: [
-                        const RadarEntry(value: 0),
-                        const RadarEntry(value: 0),
-                        const RadarEntry(value: 0),
-                      ])
-                ])),
+            child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+              builder: (context, state) {
+                Scores value = Scores();
+                if (state.response.state == ResponseState.success) {
+                  value = state.response.data!.scores;
+                }
+                return RadarChart(RadarChartData(
+                    tickCount: 0,
+                    radarBackgroundColor: AskLoraColors.whiteSmoke,
+                    titleTextStyle: AskLoraTextStyles.subtitle2,
+                    extendedBorderStyle: ExtendedBorderStyle.dash,
+                    tickBorderData:
+                        const BorderSide(color: Colors.blue, width: 2),
+                    radarBorderData: const BorderSide(
+                        color: AskLoraColors.primaryGreen, width: 3),
+                    gridBorderData:
+                        const BorderSide(color: AskLoraColors.gray, width: 1.5),
+                    titlePositionPercentageOffset: .5,
+                    getTitle: (index, angle) {
+                      switch (index) {
+                        case 0:
+                          return RadarChartTitle(
+                              text:
+                                  'Extroversion ${value.extrovert.toDouble().toString()}',
+                              angle: 0);
+                        case 1:
+                          return RadarChartTitle(
+                              text:
+                                  'Openness ${value.openness.toDouble().toString()}',
+                              angle: 0);
+                        case 2:
+                          return RadarChartTitle(
+                              text:
+                                  'Risk aversion ${value.neuroticism.toDouble().toString()}',
+                              angle: 0);
+                        default:
+                          return const RadarChartTitle(text: '');
+                      }
+                    },
+                    dataSets: [
+                      // default highest score
+                      RadarDataSet(
+                          entryRadius: 0,
+                          fillColor: Colors.transparent,
+                          borderColor: Colors.transparent,
+                          dataEntries: [
+                            const RadarEntry(value: 15),
+                            const RadarEntry(value: 15),
+                            const RadarEntry(value: 15),
+                          ]),
+                      //this is for user score
+                      RadarDataSet(
+                          entryRadius: 6,
+                          fillColor: Colors.transparent,
+                          borderColor: AskLoraColors.primaryGreen,
+                          dataEntries: [
+                            RadarEntry(value: value.extrovert.toDouble()),
+                            RadarEntry(value: value.openness.toDouble()),
+                            RadarEntry(value: value.neuroticism.toDouble()),
+                          ])
+                    ]));
+              },
+            ),
           ),
           if (showAdditionalInfo)
             Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../main.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -66,9 +67,18 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
                       context
                           .read<DisclosureAffiliationBloc>()
                           .add(const AffiliatedPersonChanged(false));
-                      context.read<NavigationBloc<KycPageStep>>().add(
-                          const PageChanged(
-                              KycPageStep.financialProfileEmployment));
+
+                      if (isDemoEnable) {
+                        context.read<NavigationBloc<KycPageStep>>().add(
+                            const PageChanged(
+                                KycPageStep.disclosureAffiliationAssociates));
+                      } else {
+                        /// Disabling this as Stephen do not want to include this in
+                        /// the SFC Demo. TODO: Later on please confirm with James
+                        context.read<NavigationBloc<KycPageStep>>().add(
+                            const PageChanged(
+                                KycPageStep.financialProfileEmployment));
+                      }
                     },
                     onSaveForLater: () => CarouselScreen.open(context),
                   )),

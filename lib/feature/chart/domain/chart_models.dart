@@ -1,3 +1,5 @@
+import '../../../core/utils/extensions.dart';
+
 class ChartDataSet {
   int? index;
   DateTime? date;
@@ -10,10 +12,10 @@ class ChartDataSet {
 
   ChartDataSet.fromJson(Map<String, dynamic> json) {
     date = DateTime.parse(json['date']);
-    index = json['i'];
-    price = json['price'];
-    hedgeShare = json['hedge_share'];
-    currentPnlRet = json['current_pnl_ret'];
+    index = json['i'] ?? 0;
+    price = checkDouble(json['price']);
+    hedgeShare = checkDouble(json['hedge_share']);
+    currentPnlRet = checkDouble(json['current_pnl_ret']);
   }
 
   Map<String, dynamic> toJson() {
