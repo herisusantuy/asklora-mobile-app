@@ -19,6 +19,7 @@ class DisclosureAffiliationBloc
         _onAffiliateAssociatesFirstNameChanged);
     on<AffiliateAssociatesLastNameChanged>(
         _onAffiliateAssociatesLastNameChanged);
+    on<AffiliateAssociatesReset>(_onAffiliateAssociatesReset);
     on<InitiateDisclosureAffiliation>(_onInitiateDisclosureAffiliation);
   }
 
@@ -70,5 +71,13 @@ class DisclosureAffiliationBloc
       AffiliateAssociatesLastNameChanged event,
       Emitter<DisclosureAffiliationState> emit) {
     emit(state.copyWith(affiliatedAssociatesLastName: event.lastName));
+  }
+
+  _onAffiliateAssociatesReset(AffiliateAssociatesReset event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(
+      affiliatedPersonFirstName: '',
+      affiliatedPersonLastName: '',
+    ));
   }
 }

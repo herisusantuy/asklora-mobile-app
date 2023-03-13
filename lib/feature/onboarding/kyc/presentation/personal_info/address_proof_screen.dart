@@ -7,6 +7,7 @@ import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -41,7 +42,7 @@ class AddressProofScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextNew(
-              'Please provide your permanent residential address.',
+              'Please provide your residential address. This will also be your mailing address.',
               key: const Key('sub_title'),
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
@@ -50,7 +51,7 @@ class AddressProofScreen extends StatelessWidget {
             _textInput(
               initialValue: context.read<AddressProofBloc>().state.addressLine1,
               key: const Key('address_line_1'),
-              label: 'Address Line 1',
+              label: 'Address Line 1*',
               onChanged: (value) => context
                   .read<AddressProofBloc>()
                   .add(AddressLine1Changed(value)),
@@ -86,7 +87,7 @@ class AddressProofScreen extends StatelessWidget {
           builder: (context, state) => CustomImagePicker(
                 hintText: 'Upload Address Proof',
                 key: const Key('address_proof_image_picker'),
-                title: 'Upload Address Proof',
+                title: 'Upload Address Proof*',
                 initialValue: state.addressProofImages,
                 additionalText:
                     'Your address proof must contain your full name, full residential address and the issuing agency.\n\nWe accept utility bill, bank statement, or government correspondence within the last 3 months.',
@@ -99,7 +100,7 @@ class AddressProofScreen extends StatelessWidget {
   Widget get _district => BlocBuilder<AddressProofBloc, AddressProofState>(
       builder: (context, state) => CustomDropdown(
           key: const Key('district_picker'),
-          labelText: 'District',
+          labelText: 'District*',
           hintText: 'District',
           initialValue: state.district?.value ?? '',
           itemsList: District.values.map((e) => e.value).toList(),
@@ -110,7 +111,7 @@ class AddressProofScreen extends StatelessWidget {
   Widget get _region => BlocBuilder<AddressProofBloc, AddressProofState>(
       builder: (context, state) => CustomDropdown(
           key: const Key('region_picker'),
-          labelText: 'Region',
+          labelText: 'Region*',
           hintText: 'Region',
           initialValue: state.region?.value ?? '',
           itemsList: Region.values.map((e) => e.value).toList(),
@@ -131,6 +132,7 @@ class AddressProofScreen extends StatelessWidget {
         labelText: label,
         hintText: hintText,
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        textInputFormatterList: [denyEmoji()],
       );
 
   Widget get _bottomButton => BlocBuilder<AddressProofBloc, AddressProofState>(

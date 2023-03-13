@@ -51,6 +51,9 @@ class DisclosureAffiliationAssociatesScreen extends StatelessWidget {
                   context
                       .read<DisclosureAffiliationBloc>()
                       .add(const AffiliatedAssociatesChanged(false));
+                  context
+                      .read<DisclosureAffiliationBloc>()
+                      .add(const AffiliateAssociatesReset());
                   context.read<NavigationBloc<KycPageStep>>().add(
                       const PageChanged(KycPageStep.financialProfileSummary));
                 },

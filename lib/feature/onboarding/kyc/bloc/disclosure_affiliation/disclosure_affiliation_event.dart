@@ -70,6 +70,13 @@ class AffiliateAssociatesLastNameChanged extends DisclosuresAffiliationEvent {
   List<Object> get props => [lastName];
 }
 
+class AffiliateAssociatesReset extends DisclosuresAffiliationEvent {
+  const AffiliateAssociatesReset() : super();
+
+  @override
+  List<Object> get props => [];
+}
+
 class InitiateDisclosureAffiliation extends DisclosuresAffiliationEvent {
   final bool? immediateFamilyAffiliation;
   final bool? associatesAffiliation;

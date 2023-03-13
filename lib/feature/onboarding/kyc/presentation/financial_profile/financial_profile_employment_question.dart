@@ -174,7 +174,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                   onChanged: (value) => context
                       .read<FinancialProfileBloc>()
                       .add(FinancialProfileOtherOccupationChanged(value)),
-                  hintText: 'Other Occupation*',
+                  hintText: 'Occupation',
                 ),
               );
             } else {
@@ -199,17 +199,17 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                     onChanged: (value) => context
                         .read<FinancialProfileBloc>()
                         .add(FinancialProfileEmployerChanged(value)),
-                    hintText: 'Company name'),
+                    hintText: 'Company Name'),
                 _spaceHeight,
                 MasterTextField(
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   initialValue: state.employerAddress,
                   key: const Key('account_employer_address_input'),
-                  labelText: 'Employer/ Company Address*',
+                  labelText: 'Employer/Company Address*',
                   onChanged: (value) => context
                       .read<FinancialProfileBloc>()
                       .add(FinancialProfileEmployerAddressChanged(value)),
-                  hintText: 'Company Address 1',
+                  hintText: 'Address Line 1',
                 ),
                 const SizedBox(
                   height: _spaceHeightDouble,
@@ -220,7 +220,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                   onChanged: (value) => context
                       .read<FinancialProfileBloc>()
                       .add(FinancialProfileEmployerAddressTwoChanged(value)),
-                  hintText: 'Employer Address 2',
+                  hintText: 'Address Line 2',
                 ),
               ],
             );
@@ -318,10 +318,11 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                 initialValue: state.detailInformationOfCountry,
                 key: const Key('account_detail_information_of_country_input'),
                 labelText:
-                    'Why is your country of employment different from your country of residence?*',
+                    'Why is your country of employment different from your country of \n residence?*',
                 onChanged: (value) => context.read<FinancialProfileBloc>().add(
                     FinancialProfileDetailInformationOfCountryChanged(value)),
-                hintText: 'Use this space to provide more detailed information',
+                hintText:
+                    'Use this space to provide more detailed \n information',
               ),
             );
           } else {

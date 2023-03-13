@@ -178,6 +178,9 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
     AskLoraColors.lime,
     AskLoraColors.purple,
     AskLoraColors.primaryBlue,
+    AskLoraColors.darkerGreen,
+    AskLoraColors.darkerLime,
+    AskLoraColors.darkerPurple,
   ];
 
   void _generateGradients() {

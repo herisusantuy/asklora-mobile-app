@@ -7,9 +7,9 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 
@@ -32,7 +32,7 @@ class BrokerAgreementScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomTextNew(
-            'Please read the Asklora Customer Agreement. You must check all the boxes and provide your signature in order to proceed.',
+            'Please read the the Asklora Customer Agreement. You must click on the agreement and check all the boxes in order to proceed.',
             style:
                 AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
           ),
@@ -41,7 +41,7 @@ class BrokerAgreementScreen extends StatelessWidget {
           ),
           ViewFileButton(
               key: const Key('asklora_agreement'),
-              label: 'Asklora Client Agreement.pdf',
+              label: 'Asklora Customer Agreement.pdf',
               onTap: () => context
                   .read<SigningAgreementBloc>()
                   .add(const AskLoraClientAgreementOpened())),
@@ -94,7 +94,7 @@ class BrokerAgreementScreen extends StatelessWidget {
                 checkboxKey: const Key('understand_agreement_checkbox_value'),
                 key: const Key('understand_agreement_checkbox'),
                 text:
-                    'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Application Agreement.',
+                    'I understand I am signing this agreement electronically, and that my electronic signature will have the same effect as physically signing and returning the Customer Agreement.',
                 fontHeight: 1.4,
                 disabled: !state.isBoundByAskloraAgreementChecked,
                 isChecked: state.isUnderstandOnTheAgreementChecked,
@@ -113,7 +113,8 @@ class BrokerAgreementScreen extends StatelessWidget {
                     .read<NavigationBloc<KycPageStep>>()
                     .add(const PageChanged(
                         KycPageStep.signRiskDisclosureAgreements)),
-                secondaryButtonOnClick: () => CarouselScreen.open(context),
+                secondaryButtonOnClick: () => context.read<KycBloc>().add(
+                    SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
                 disablePrimaryButton: state.disabledBrokerButton(),
                 primaryButtonLabel: 'AGREE',
                 secondaryButtonLabel: 'CONTINUE LATER',
