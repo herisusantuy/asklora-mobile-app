@@ -52,7 +52,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
           ),
           children: [
             CustomTextNew(
-              'Best Suit For',
+              'Best Suited For',
               style: AskLoraTextStyles.body4
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -135,7 +135,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
           children: [
             PairColumnText(
               leftTitle: 'Prev Close',
-              leftSubTitle: 'Not available yet',
+              leftSubTitle: botDetailModel?.prevClosePrice != null
+                  ? (botDetailModel?.prevClosePrice ?? 0).toStringAsFixed(1)
+                  : '-',
               rightTitle: 'Market Cap',
               rightSubTitle: botDetailModel?.marketCap != null
                   ? (botDetailModel?.marketCap ?? 0).toStringAsFixed(1)
@@ -209,11 +211,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   rightSubTitle: '${botDetailModel?.estimatedExpiredDate}',
                   leftTooltipText: _tempTooltipText,
                   rightTooltipText: _tempTooltipText),
-              if (botDetailModel?.performance.data != null)
+              if (botDetailModel?.performance != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0),
                   child: ChartAnimation(
-                      chartDataSets: botDetailModel!.performance.data!),
+                      chartDataSets: botDetailModel!.performance!),
                 )
             ],
           ),

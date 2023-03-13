@@ -12,7 +12,7 @@ enum ErrorType { unknown, error400, error500 }
 class UserResponseState extends Equatable {
   final ResponseState responseState;
   final PpiResponseState ppiResponseState;
-  final SnapShot? snapShot;
+  final BaseResponse<SnapShot>? snapShot;
   final ErrorType errorType;
 
   /// Left => question id
@@ -41,7 +41,7 @@ class UserResponseState extends Equatable {
     List<Triplet<String, Question, String>>? userResponse,
     List<String>? cachedSelectedChoices,
     List<String>? cachedDefaultChoices,
-    SnapShot? snapShot,
+    BaseResponse<SnapShot>? snapShot,
     String? message,
     ErrorType? errorType,
   }) {

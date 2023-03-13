@@ -53,7 +53,7 @@ class PersonalisationResultEndScreen extends StatelessWidget {
 
         if (state.responseState == ResponseState.success &&
             state.ppiResponseState == PpiResponseState.dispatchResponse) {
-          final scores = state.snapShot?.scores;
+          final scores = state.snapShot?.data?.scores;
 
           return PpiResultScreen(
             ppiResult: PpiResult.success,

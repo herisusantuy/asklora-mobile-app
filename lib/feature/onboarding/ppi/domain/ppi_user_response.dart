@@ -40,6 +40,11 @@ class SnapShot {
       _$SnapShotFromJson(json);
 
   Map<String, dynamic> toJson() => _$SnapShotToJson(this);
+
+  @override
+  String toString() {
+    return 'SnapShot{id: $id, name: $name, accountId: $accountId, deviceId: $deviceId, created: $created, updated: $updated, scores: $scores}';
+  }
 }
 
 @JsonSerializable()
@@ -82,17 +87,17 @@ class Scores {
   final String currentQuestionId;
 
   Scores(
-      this.answers,
-      this.conscientiousness,
-      this.extrovert,
-      this.objective,
-      this.investmentStyle,
-      this.maxRiskScore,
-      this.neuroticism,
-      this.openness,
-      this.privacy,
-      this.suitability,
-      this.currentQuestionId);
+      {this.answers = const [],
+      this.conscientiousness = 0,
+      this.extrovert = 0,
+      this.objective = 0,
+      this.investmentStyle = 0,
+      this.maxRiskScore = 0,
+      this.neuroticism = 0,
+      this.openness = 0,
+      this.privacy = 0,
+      this.suitability = 0,
+      this.currentQuestionId = ''});
 
   factory Scores.fromJson(Map<String, dynamic> json) => _$ScoresFromJson(json);
 

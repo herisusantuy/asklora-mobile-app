@@ -74,24 +74,25 @@ class KycBloc extends Bloc<KycEvent, KycState> {
   }
 
   _onGetOnfidoSdkToken(GetSdkToken event, Emitter<KycState> emit) async {
-    emit(state.copyWith(submitKycResponse: BaseResponse.loading()));
+    emit(state.copyWith(onfidoResponse: BaseResponse.loading()));
     var response = await _accountRepository.getOnfidoToken();
     if (response.state == ResponseState.success) {
       emit(OnfidoSdkToken(response.data!.token));
     } else {
-      emit(state.copyWith(submitKycResponse: response));
+      emit(state.copyWith(onfidoResponse: response));
     }
   }
 
   _onUpdateOnfidoResult(
       UpdateOnfidoResult event, Emitter<KycState> emit) async {
-    emit(state.copyWith(submitKycResponse: BaseResponse.loading()));
-    var response = await _accountRepository.updateKycResult(
+    emit(state.copyWith(onfidoResponse: BaseResponse.loading()));
+    var response = await _accountRepository.submitOnfidoOutcome(
         OnfidoResultRequest(event.token, event.reason, event.outcome));
+
     if (response.state == ResponseState.success) {
       emit(OnfidoResultUpdated(response.data!));
     } else {
-      emit(state.copyWith(submitKycResponse: response));
+      emit(state.copyWith(onfidoResponse: response));
     }
   }
 }

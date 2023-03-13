@@ -10,27 +10,40 @@ class BotDetailModel extends Equatable {
   final BotModel bot;
   final String symbol;
   final String ticker;
+
   @JsonKey(name: 'ticker_name')
   final String tickerName;
+
   @JsonKey(name: 'chinese_name')
   final String chineseName;
+
   @JsonKey(name: 'traditional_name')
   final String traditionalName;
+
   final double price;
+
   @JsonKey(name: 'estimated_expired_date')
   final String estimatedExpiredDate;
+
   @JsonKey(name: 'estimated_take_profit_pct')
   final double estimatedTakeProfitPct;
+
   @JsonKey(name: 'estimated_take_profit_price')
   final double estimatedTakeProfitPrice;
+
   @JsonKey(name: 'estimated_stop_loss_pct')
   final double estimatedStopLossPct;
+
   @JsonKey(name: 'estimated_stop_loss_price')
   final double estimatedStopLossPrice;
+
   final String description;
+
   @JsonKey(name: 'market_cap')
   final double? marketCap;
-  final PerformanceModel performance;
+
+  final List<ChartDataSet>? performance;
+
   @JsonKey(name: 'prev_close_price')
   final double prevClosePrice;
   @JsonKey(name: 'prev_close_changes')

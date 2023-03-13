@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/onfido/start_onfido.dart';
+import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
@@ -30,21 +32,34 @@ class VerifyIdentityScreen extends StatelessWidget {
       title: 'Verify Identity',
       content: BlocListener<KycBloc, KycState>(
         listener: (context, state) async {
+          if (state.onfidoResponse.state == ResponseState.loading) {
+            CustomLoadingOverlay.of(context).show();
+          } else {
+            CustomLoadingOverlay.of(context).dismiss();
+            if (state.onfidoResponse.state == ResponseState.error) {
+              CustomInAppNotification.show(
+                  context, state.onfidoResponse.message);
+            }
+          }
+
           if (state is OnfidoSdkToken) {
             await _doVerificationOnfido(
                 context: context, onFidoSdkTokenState: state);
-          } else if (state.submitKycResponse.state == ResponseState.error) {
-            ///CHANGE THIS TO HANDLE ERROR LATER
-            context
-                .read<NavigationBloc<KycPageStep>>()
-                .add(const PageChanged(KycPageStep.signBrokerAgreements));
+          }
+
+          if (state is OnfidoResultUpdated) {
+            if (context.mounted) {
+              context
+                  .read<NavigationBloc<KycPageStep>>()
+                  .add(const PageChanged(KycPageStep.signBrokerAgreements));
+            }
           }
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextNew(
-              'We\'ll need to verify your identity via your HKID',
+              'We’ll need to verify your identity via your HKID.',
               key: const Key('sub_title'),
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),

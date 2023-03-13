@@ -60,7 +60,7 @@ class LearningBotStockWelcomeScreen extends StatelessWidget {
   String get _getSubTitle {
     switch (botType) {
       case BotType.pullUp:
-        return 'Pull-up AI bot is suited for investors who want to try their lucky for a bigger win. Mutiple buy and sell occur. It buys on the rise then sell at a target price.   ';
+        return 'Pull-up AI bot is suited for investors who want to try their lucky for a bigger win. Mutiple buy and sell occur. It buys on the rise then sell at a target price. ';
       case BotType.squat:
         return 'Squat AI bot is best suited for investors who want to have a frequent win with small profit. Multiple buy and sell occur. It buys low and sells high for modest. ';
       case BotType.plank:
