@@ -15,6 +15,7 @@ class LoraBottomSheet {
   final String secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
   final VoidCallback onSecondaryButtonTap;
+  final LoraMemojiType loraMemojiType;
 
   LoraBottomSheet.show({
     required this.context,
@@ -25,12 +26,14 @@ class LoraBottomSheet {
     required this.secondaryButtonLabel,
     required this.onPrimaryButtonTap,
     required this.onSecondaryButtonTap,
+    this.loraMemojiType = LoraMemojiType.lora1,
   }) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         context: (context),
         builder: (_) => LoraBottomSheetContent(
+              loraMemojiType: loraMemojiType,
               title: title,
               primaryButtonLabel: primaryButtonLabel,
               secondaryButtonLabel: secondaryButtonLabel,
