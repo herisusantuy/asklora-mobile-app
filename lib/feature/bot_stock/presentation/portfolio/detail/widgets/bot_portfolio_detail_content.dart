@@ -126,7 +126,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      'Not available yet',
+                      '${portfolioBotDetailModel?.prevCloseDate}',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )

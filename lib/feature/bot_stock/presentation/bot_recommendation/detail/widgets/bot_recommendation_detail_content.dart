@@ -98,11 +98,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
                           .copyWith(color: AskLoraColors.charcoal),
                       maxLines: 2,
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     CustomTextNew(
-                      'Not available yet',
+                      '${botDetailModel?.prevCloseDate}',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
