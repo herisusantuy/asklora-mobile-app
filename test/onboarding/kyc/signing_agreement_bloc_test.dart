@@ -4,6 +4,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 
+import 'personal_info_bloc_test.dart';
+
 @GenerateMocks([SigningBrokerAgreementRepository])
 void main() async {
   group('*Signing Agreement Tax Bloc Test*', () {
@@ -13,7 +15,8 @@ void main() async {
 
     setUp(() async {
       signingAgreementBloc = SigningAgreementBloc(
-          signingBrokerAgreementRepository: SigningBrokerAgreementRepository());
+          signingBrokerAgreementRepository: SigningBrokerAgreementRepository(),
+          personalInfoBloc: MockPersonalInfoBloc());
     });
 
     test('init state data should be "false"', () {

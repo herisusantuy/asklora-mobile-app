@@ -12,6 +12,8 @@ import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
+import '../../repository/account_repository.dart';
+import '../../repository/signing_broker_agreement_repository.dart';
 import '../financial_profile/widgets/dot_text.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -19,10 +21,10 @@ import '../widgets/kyc_sub_title.dart';
 
 class TaxAgreementScreen extends StatelessWidget {
   final double progress;
-  final PersonalInfoState personalInfoState;
+  final PersonalInfoBloc personalInfoBloc;
 
   const TaxAgreementScreen(
-      {required this.progress, required this.personalInfoState, Key? key})
+      {required this.progress, required this.personalInfoBloc, Key? key})
       : super(key: key);
 
   final Widget _spaceHeight = const SizedBox(
@@ -202,7 +204,7 @@ class TaxAgreementScreen extends StatelessWidget {
                       .copyWith(color: AskLoraColors.charcoal)),
               TextSpan(
                   text:
-                      '${personalInfoState.firstName} ${personalInfoState.lastName}',
+                      '${personalInfoBloc.state.firstName} ${personalInfoBloc.state.lastName}',
                   style: AskLoraTextStyles.body2.copyWith(
                       color: AskLoraColors.charcoal,
                       fontWeight: FontWeight.bold)),
@@ -213,18 +215,17 @@ class TaxAgreementScreen extends StatelessWidget {
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
               previous.legalName != current.legalName,
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 46),
-              child: MasterTextField(
-                initialValue: state.legalName,
-                key: const Key('legal_name_input'),
-                onChanged: (value) => context
-                    .read<SigningAgreementBloc>()
-                    .add(LegalNameSignatureChanged(value)),
-              ),
-            );
-          });
+          builder: (context, state) => Padding(
+                padding: const EdgeInsets.only(top: 46),
+                child: MasterTextField(
+                  initialValue: state.legalName,
+                  key: const Key('legal_name_input'),
+                  onChanged: (value) => context
+                      .read<SigningAgreementBloc>()
+                      .add(LegalNameSignatureChanged(value)),
+                  errorText: state.legalNameErrorText,
+                ),
+              ));
 
   Widget _dotTextSlightRight(String text) => Padding(
         padding: const EdgeInsets.only(left: 28.0),
@@ -236,15 +237,14 @@ class TaxAgreementScreen extends StatelessWidget {
   Widget _bottomButton(BuildContext context) =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
         buildWhen: (previous, current) =>
-            previous.legalName != current.legalName ||
-            previous.isSignatureChecked != current.isSignatureChecked,
+            previous.isSignatureChecked != current.isSignatureChecked ||
+            previous.isInputNameValid != current.isInputNameValid,
         builder: (context, state) {
           return ButtonPair(
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.kycSummary)),
-            disablePrimaryButton: state.disableSignatureButton(
-                '${personalInfoState.firstName} ${personalInfoState.lastName}'),
+            disablePrimaryButton: state.disableAgreeButton(),
             secondaryButtonOnClick: () => CarouselScreen.open(context),
             primaryButtonLabel: 'AGREE',
             secondaryButtonLabel: 'CONTINUE LATER',
