@@ -247,22 +247,25 @@ class PersonalInfoScreen extends StatelessWidget {
               }
             },
             child: ButtonPair(
-              disablePrimaryButton: _disablePrimaryButton(state),
+              // disablePrimaryButton: _disablePrimaryButton(state),
               primaryButtonOnClick: () {
-                final state = context.read<PersonalInfoBloc>().state;
+                // final state = context.read<PersonalInfoBloc>().state;
+                // context
+                //     .read<PersonalInfoBloc>()
+                //     .add(PersonalInfoSubmitted(PersonalInfoRequest(
+                //       firstName: state.firstName,
+                //       lastName: state.lastName,
+                //       gender: state.gender,
+                //       hkIdNumber: state.hkIdNumber,
+                //       nationality: state.nationalityCode,
+                //       dateOfBirth: state.dateOfBirth,
+                //       countryOfBirth: state.countryCodeOfBirth,
+                //       phoneCountryCode: state.phoneCountryCode,
+                //       phoneNumber: state.phoneNumber,
+                //     )));
                 context
-                    .read<PersonalInfoBloc>()
-                    .add(PersonalInfoSubmitted(PersonalInfoRequest(
-                      firstName: state.firstName,
-                      lastName: state.lastName,
-                      gender: state.gender,
-                      hkIdNumber: state.hkIdNumber,
-                      nationality: state.nationalityCode,
-                      dateOfBirth: state.dateOfBirth,
-                      countryOfBirth: state.countryCodeOfBirth,
-                      phoneCountryCode: state.phoneCountryCode,
-                      phoneNumber: state.phoneNumber,
-                    )));
+                    .read<NavigationBloc<KycPageStep>>()
+                    .add(const PageChanged(KycPageStep.signTaxAgreements));
               },
               secondaryButtonOnClick: () =>
                   TabsScreen.openAndRemoveAllRoute(context),

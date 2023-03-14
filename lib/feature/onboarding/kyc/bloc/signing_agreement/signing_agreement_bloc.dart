@@ -64,18 +64,11 @@ class SigningAgreementBloc
       LegalNameSignatureChanged event, Emitter<SigningAgreementState> emit) {
     String fullName =
         '${_personalInfoBloc.state.firstName} ${_personalInfoBloc.state.lastName}';
-    if (event.legalName != fullName) {
-      emit(state.copyWith(
-        legalName: event.legalName,
-        legalNameErrorText: 'Your input does not match',
-        isInputNameValid: false,
-      ));
-    } else {
-      emit(state.copyWith(
-        legalName: event.legalName,
-        legalNameErrorText: '',
-        isInputNameValid: true,
-      ));
-    }
+    bool isNameValid = event.legalName == fullName;
+    emit(state.copyWith(
+      legalName: event.legalName,
+      legalNameErrorText: !isNameValid ? 'Your input does not match' : '',
+      isInputNameValid: isNameValid ? true : false,
+    ));
   }
 }
