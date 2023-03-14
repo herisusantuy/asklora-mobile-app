@@ -76,3 +76,15 @@ class AffiliateAssociatesReset extends DisclosuresAffiliationEvent {
   @override
   List<Object> get props => [];
 }
+
+class InitiateDisclosureAffiliation extends DisclosuresAffiliationEvent {
+  final bool? immediateFamilyAffiliation;
+  final bool? associatesAffiliation;
+  final AffiliatedPerson? affiliatedPerson;
+
+  const InitiateDisclosureAffiliation(this.immediateFamilyAffiliation,
+      this.associatesAffiliation, this.affiliatedPerson);
+
+  @override
+  List<Object> get props => [immediateFamilyAffiliation ?? ''];
+}

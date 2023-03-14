@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/utils/feature_flags.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/kyc_base_form.dart';
 import 'widgets/choices_button.dart';
 import 'widgets/dot_text.dart';
@@ -43,34 +42,36 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
               'I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission.'),
         ],
       ),
-      bottomButton:
-          BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
-              buildWhen: (previous, current) =>
-                  previous.isAffiliatedPerson != current.isAffiliatedPerson,
-              builder: (context, state) => ChoicesButton(
-                    initialValue: state.isAffiliatedPerson != null
-                        ? state.isAffiliatedPerson!
-                            ? 'yes'
-                            : 'no'
-                        : 'unknown',
-                    key: const Key('choices_button'),
-                    onAnswerYes: () {
-                      context
-                          .read<DisclosureAffiliationBloc>()
-                          .add(const AffiliatedPersonChanged(true));
-                      context.read<NavigationBloc<KycPageStep>>().add(
-                          const PageChanged(KycPageStep.disclosureRejected));
-                    },
-                    onAnswerNo: () {
-                      context
-                          .read<DisclosureAffiliationBloc>()
-                          .add(const AffiliatedPersonChanged(false));
-                      context.read<NavigationBloc<KycPageStep>>().add(
-                          const PageChanged(
-                              KycPageStep.financialProfileEmployment));
-                    },
-                    onSaveForLater: () => CarouselScreen.open(context),
-                  )),
+      bottomButton: BlocBuilder<DisclosureAffiliationBloc,
+              DisclosureAffiliationState>(
+          buildWhen: (previous, current) =>
+              previous.isAffiliatedPerson != current.isAffiliatedPerson,
+          builder: (context, state) => ChoicesButton(
+                initialValue: state.isAffiliatedPerson != null
+                    ? state.isAffiliatedPerson!
+                        ? 'yes'
+                        : 'no'
+                    : 'unknown',
+                key: const Key('choices_button'),
+                onAnswerYes: () {
+                  context
+                      .read<DisclosureAffiliationBloc>()
+                      .add(const AffiliatedPersonChanged(true));
+                  context
+                      .read<NavigationBloc<KycPageStep>>()
+                      .add(const PageChanged(KycPageStep.disclosureRejected));
+                },
+                onAnswerNo: () {
+                  context
+                      .read<DisclosureAffiliationBloc>()
+                      .add(const AffiliatedPersonChanged(false));
+                  context.read<NavigationBloc<KycPageStep>>().add(
+                      const PageChanged(
+                          KycPageStep.financialProfileEmployment));
+                },
+                onSaveForLater: () => context.read<KycBloc>().add(
+                    SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
+              )),
       progress: progress,
     );
   }

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 
 enum SourceOfWealthType {
@@ -15,6 +16,11 @@ enum SourceOfWealthType {
   final String value;
 
   const SourceOfWealthType(this.name, this.value);
+
+  static SourceOfWealthType? findByStringValue(
+          String sourceOfWealthTypeValue) =>
+      SourceOfWealthType.values.firstWhereOrNull(
+          (element) => element.value == sourceOfWealthTypeValue);
 }
 
 class SourceOfWealthModel extends Equatable {

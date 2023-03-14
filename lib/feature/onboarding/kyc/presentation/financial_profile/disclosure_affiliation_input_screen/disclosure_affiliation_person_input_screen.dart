@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../tabs/tabs_screen.dart';
-import '../../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/kyc_bloc.dart';
 import '../../../../../../core/presentation/buttons/button_pair.dart';
+import '../../../domain/upgrade_account/save_kyc_request.dart';
 import 'disclosure_affiliation_base_input_screen.dart';
 
 class DisclosureAffiliationPersonInputScreen extends StatelessWidget {
@@ -45,8 +44,9 @@ class DisclosureAffiliationPersonInputScreen extends StatelessWidget {
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.financialProfileSummary)),
-            secondaryButtonOnClick: () =>
-                TabsScreen.openAndRemoveAllRoute(context),
+            secondaryButtonOnClick: () => context
+                .read<KycBloc>()
+                .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
             primaryButtonLabel: 'NEXT',
             secondaryButtonLabel: 'SAVE FOR LATER',
           ));

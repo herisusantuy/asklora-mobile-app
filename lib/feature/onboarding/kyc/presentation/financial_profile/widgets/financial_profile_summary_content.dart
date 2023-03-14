@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../../main.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';

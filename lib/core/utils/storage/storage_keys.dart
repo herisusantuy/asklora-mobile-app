@@ -1,4 +1,5 @@
 const String sfKeyUserJourney = 'user_journey';
+const String sfKeyUserJourneyData = 'user_journey_data';
 const String sfKeyEmail = 'email';
 const String sfKeyPpiAccountId = 'ppi_account_id';
 const String sfKeyPpiName = 'ppi_name';

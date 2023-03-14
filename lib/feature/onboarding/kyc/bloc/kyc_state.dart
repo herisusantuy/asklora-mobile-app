@@ -39,23 +39,38 @@ enum KycPageStep {
 
 class KycState extends Equatable {
   const KycState({
-    this.response = const BaseResponse(),
+    this.submitKycResponse = const BaseResponse(),
+    this.saveKycResponse = const BaseResponse(),
+    this.fetchKycResponse = const BaseResponse(),
+    this.onfidoResponse = const BaseResponse(),
   });
 
-  final BaseResponse response;
+  final BaseResponse submitKycResponse;
+  final BaseResponse saveKycResponse;
+  final BaseResponse onfidoResponse;
+  final BaseResponse<SaveKycRequest> fetchKycResponse;
 
   @override
   List<Object?> get props {
     return [
-      response,
+      submitKycResponse,
+      saveKycResponse,
+      fetchKycResponse,
+      onfidoResponse
     ];
   }
 
   KycState copyWith({
-    BaseResponse? response,
+    BaseResponse? submitKycResponse,
+    BaseResponse? saveKycResponse,
+    BaseResponse? onfidoResponse,
+    BaseResponse<SaveKycRequest>? fetchKycResponse,
   }) {
     return KycState(
-      response: response ?? this.response,
+      submitKycResponse: submitKycResponse ?? this.submitKycResponse,
+      saveKycResponse: saveKycResponse ?? this.saveKycResponse,
+      fetchKycResponse: fetchKycResponse ?? this.fetchKycResponse,
+      onfidoResponse: onfidoResponse ?? this.onfidoResponse,
     );
   }
 }
@@ -67,7 +82,7 @@ class OnfidoSdkToken extends KycState {
 }
 
 class OnfidoResultUpdated extends KycState {
-  final OnfidoResultResponse onfidoResponse;
+  final OnfidoResultResponse onfidoResultResponse;
 
-  const OnfidoResultUpdated(this.onfidoResponse);
+  const OnfidoResultUpdated(this.onfidoResultResponse);
 }

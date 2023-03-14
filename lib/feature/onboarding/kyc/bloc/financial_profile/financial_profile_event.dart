@@ -136,3 +136,12 @@ class FinancialProfileDetailInformationOfCountryChanged
   @override
   List<Object> get props => [detailInformationOfCountry];
 }
+
+class InitiateFinancialProfile extends FinancialProfileEvent {
+  final EmploymentInfo? employmentInfo;
+
+  const InitiateFinancialProfile(this.employmentInfo);
+
+  @override
+  List<Object> get props => [employmentInfo ?? ''];
+}

@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/upgrade_account/wealth_sources_request.dart';
 import '../../utils/source_of_wealth_enum.dart';
 
 part 'source_of_wealth_event.dart';
@@ -18,6 +19,7 @@ class SourceOfWealthBloc
     on<SourceOfWealthDecrementAmountChanged>(
         _onSourceOfWealthDecrementAmountChanged);
     on<SourceOfWealthOtherIncomeChanged>(_onSourceOfWealthOtherIncomeChanged);
+    on<InitiateSourceOfWealth>(_onInitiateSourceOfWealth);
   }
 
   _onSourceOfWealthSelected(
@@ -35,7 +37,7 @@ class SourceOfWealthBloc
         isActive: true,
       ));
     } else {
-      answer = answer.copyWith(isActive: !answer.isActive);
+      sourceOfWealthAnswers.remove(answer);
       if (sourceOfWealthAnswers.isNotEmpty) {
         totalAmount =
             sourceOfWealthAnswers.map((e) => e.amount).reduce((a, b) => a + b);
@@ -134,6 +136,21 @@ class SourceOfWealthBloc
             .copyWith(additionalSourceOfWealth: event.otherIncome);
     emit(state.copyWith(
       sourceOfWealthAnswers: sourceOfWealthAnswers,
+    ));
+  }
+
+  _onInitiateSourceOfWealth(
+      InitiateSourceOfWealth event, Emitter<SourceOfWealthState> emit) {
+    emit(state.copyWith(
+      sourceOfWealthAnswers: event.sourceOfWealthRequest
+          ?.map((e) => SourceOfWealthModel(
+                sourceOfWealthType: SourceOfWealthType.findByStringValue(
+                        e.wealthSource ?? '') ??
+                    SourceOfWealthType.other,
+                amount: e.percentage ?? 0,
+                isActive: true,
+              ))
+          .toList(),
     ));
   }
 }

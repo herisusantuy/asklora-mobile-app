@@ -16,10 +16,10 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
@@ -263,7 +263,9 @@ class PersonalInfoScreen extends StatelessWidget {
                       phoneNumber: state.phoneNumber,
                     )));
               },
-              secondaryButtonOnClick: () => CarouselScreen.open(context),
+              secondaryButtonOnClick: () => context
+                  .read<KycBloc>()
+                  .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
               primaryButtonLabel: 'NEXT',
               secondaryButtonLabel: 'SAVE FOR LATER',
             ),

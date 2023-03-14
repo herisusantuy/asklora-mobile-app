@@ -67,3 +67,12 @@ class SourceOfWealthOtherIncomeChanged extends SourceOfWealthEvent {
         otherIncome,
       ];
 }
+
+class InitiateSourceOfWealth extends SourceOfWealthEvent {
+  final List<WealthSourcesRequest>? sourceOfWealthRequest;
+
+  const InitiateSourceOfWealth(this.sourceOfWealthRequest);
+
+  @override
+  List<Object> get props => [sourceOfWealthRequest ?? ''];
+}

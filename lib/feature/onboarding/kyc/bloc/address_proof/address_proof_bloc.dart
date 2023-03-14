@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/upgrade_account/proofs_of_address_request.dart';
+import '../../domain/upgrade_account/residence_info_request.dart';
 import '../../utils/kyc_dropdown_enum.dart';
 
 part 'address_proof_event.dart';
@@ -15,6 +17,23 @@ class AddressProofBloc extends Bloc<AddressProofEvent, AddressProofState> {
     on<RegionChanged>(_onRegionChanged);
     on<ImagesChanged>(_onImagesChanged);
     on<ImageDeleted>(_onImageDeleted);
+    on<InitiateAddressProof>(_onInitiateAddressProof);
+  }
+
+  _onInitiateAddressProof(
+      InitiateAddressProof event, Emitter<AddressProofState> emit) {
+    emit(
+      state.copyWith(
+        addressLine1: event.residenceInfoRequest?.addressLine1,
+        addressLine2: event.residenceInfoRequest?.addressLine2,
+        district:
+            District.findByString(event.residenceInfoRequest?.district ?? ''),
+        region: Region.findByString(event.residenceInfoRequest?.region ?? ''),
+        addressProofImages: event.proofOfAddressRequests
+            ?.map((e) => PlatformFile(path: e.proofFile, name: 'temp', size: 0))
+            .toList(),
+      ),
+    );
   }
 
   _onAddressLine1Changed(

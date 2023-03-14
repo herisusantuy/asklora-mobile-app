@@ -9,8 +9,6 @@ import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../main.dart';
-import '../../welcome/carousel/presentation/carousel_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
@@ -22,9 +20,9 @@ import '../domain/upgrade_account/affiliated_person.dart';
 import '../domain/upgrade_account/employment_info.dart';
 import '../domain/upgrade_account/proofs_of_address_request.dart';
 import '../domain/upgrade_account/residence_info_request.dart';
+import '../domain/upgrade_account/save_kyc_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../domain/upgrade_account/wealth_sources_request.dart';
-import '../utils/source_of_wealth_enum.dart';
 import 'financial_profile/widgets/financial_profile_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
 import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
@@ -95,16 +93,17 @@ class KycSummaryScreen extends StatelessWidget {
 
   Widget _bottomButton(BuildContext context) => BlocListener<KycBloc, KycState>(
         listenWhen: (previous, current) =>
-            previous.response.state != current.response.state,
+            previous.submitKycResponse.state != current.submitKycResponse.state,
         listener: (context, state) {
-          if (state.response.state == ResponseState.loading) {
+          if (state.submitKycResponse.state == ResponseState.loading) {
             CustomLoadingOverlay.of(context).show();
           } else {
             CustomLoadingOverlay.of(context).dismiss();
           }
-          switch (state.response.state) {
+          switch (state.submitKycResponse.state) {
             case ResponseState.error:
-              CustomInAppNotification.show(context, state.response.message);
+              CustomInAppNotification.show(
+                  context, state.submitKycResponse.message);
               break;
             case ResponseState.success:
               context
@@ -120,15 +119,17 @@ class KycSummaryScreen extends StatelessWidget {
         },
         child: ButtonPair(
           primaryButtonOnClick: () {
-            context.read<KycBloc>().add(_submitKyc(addressProofState));
+            context.read<KycBloc>().add(_submitKyc());
           },
-          secondaryButtonOnClick: () => CarouselScreen.open(context),
+          secondaryButtonOnClick: () => context
+              .read<KycBloc>()
+              .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
           primaryButtonLabel: 'COMPLETE',
           secondaryButtonLabel: 'SAVE FOR LATER',
         ),
       );
 
-  SubmitKyc _submitKyc(AddressProofState addressProofState) {
+  SubmitKyc _submitKyc() {
     return SubmitKyc(UpgradeAccountRequest(
         residenceInfo: ResidenceInfoRequest(
           addressLine1: addressProofState.addressLine1,
@@ -140,7 +141,7 @@ class KycSummaryScreen extends StatelessWidget {
           return ProofsOfAddressRequest(proofFile: e.base64Image());
         }).toList(),
         employmentInfo: EmploymentInfo(
-            employmentStatus: financialProfileState.employmentStatus.enumString,
+            employmentStatus: financialProfileState.employmentStatus.value,
             employer: financialProfileState.employer,
             employerBusiness: financialProfileState.natureOfBusiness?.value,
             employerBusinessDescription:
