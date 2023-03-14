@@ -159,6 +159,30 @@ class MockUserJourneyRepository extends _i1.Mock
         )),
       ) as _i5.Future<_i2.BaseResponse<_i7.UserJourneyResponse>>);
   @override
+  void saveUserJourneyToLocal({
+    required _i8.UserJourney? userJourney,
+    String? data,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #saveUserJourneyToLocal,
+          [],
+          {
+            #userJourney: userJourney,
+            #data: data,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i5.Future<_i8.UserJourney?> getUserJourneyFromLocal() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserJourneyFromLocal,
+          [],
+        ),
+        returnValue: _i5.Future<_i8.UserJourney?>.value(),
+      ) as _i5.Future<_i8.UserJourney?>);
+  @override
   _i5.Future<_i8.UserJourney> getUserJourney() => (super.noSuchMethod(
         Invocation.method(
           #getUserJourney,

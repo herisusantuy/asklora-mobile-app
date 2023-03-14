@@ -29,7 +29,7 @@ class PortfolioBotDetailModel extends Equatable {
   final double estimatedStopLossPrice;
   final String description;
   @JsonKey(name: 'market_cap')
-  final double? marketCap;
+  final String? marketCap;
   final List<ChartDataSet> performance;
   @JsonKey(name: 'prev_close_price')
   final double prevClosePrice;
