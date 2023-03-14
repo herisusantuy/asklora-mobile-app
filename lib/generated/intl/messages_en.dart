@@ -21,15 +21,12 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   static String m0(name) =>
-      "You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy ${name}！";
-
-  static String m1(name) =>
       "Hi ${name}! How long have you been investing in stocks until now, aside from MPFs?";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
-            "Hi! I\'m Lora, your AI investment coach. What should I call you?"),
+            "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
         "buttonCreateAnAccount":
@@ -46,8 +43,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Personalised Experience"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage(
             "Trade with Ease and Strategy"),
-        "greetingScreenPlaceholder": m0,
-        "ppiQuestion1": m1,
+        "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
+            "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
+        "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Alright! Are you ready for the FinFit journey? "),
+        "ppiQuestion1": m0,
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(

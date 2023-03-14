@@ -3,6 +3,7 @@ enum BotPortfolioPopUpType {
   investmentStyle,
   kyc,
   redeemBotStock,
+  deposit,
   noBotStock
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
@@ -13,10 +14,10 @@ import '../../../tabs/tabs_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
+import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/kyc_bloc.dart';
 import '../bloc/personal_info/personal_info_bloc.dart';
 import '../bloc/signing_agreement/signing_agreement_bloc.dart';
-import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../domain/upgrade_account/save_kyc_request.dart';
 import '../repository/account_repository.dart';
@@ -24,19 +25,19 @@ import '../repository/signing_broker_agreement_repository.dart';
 import 'financial_profile/disclosure_affiliation_associates_screen.dart';
 import 'financial_profile/disclosure_affiliation_commission_screen.dart';
 import 'financial_profile/disclosure_affiliation_input_screen/disclosure_affiliation_person_input_screen.dart';
-import 'financial_profile/financial_profile_source_of_wealth_screen.dart';
 import 'financial_profile/disclosure_affiliation_person_screen.dart';
-import 'financial_profile/financial_profile_summary_screen.dart';
 import 'financial_profile/financial_profile_employment_question.dart';
-import 'kyc_result_screen.dart';
+import 'financial_profile/financial_profile_source_of_wealth_screen.dart';
+import 'financial_profile/financial_profile_summary_screen.dart';
 import 'kyc_progress/kyc_progress_screen.dart';
 import 'kyc_rejected_screen.dart';
+import 'kyc_result_screen.dart';
 import 'kyc_summary_screen.dart';
 import 'personal_info/address_proof_screen.dart';
-import 'personal_info/pesonal_info_screen.dart';
 import 'personal_info/otp/bloc/otp_bloc.dart';
 import 'personal_info/otp/presentation/otp_screen.dart';
 import 'personal_info/personal_info_summary_screen.dart';
+import 'personal_info/pesonal_info_screen.dart';
 import 'personal_info/resident_check_screen.dart';
 import 'personal_info/tin_screen.dart';
 import 'sign_agreements/broker_agreement_screen.dart';
@@ -131,7 +132,8 @@ class KycScreen extends StatelessWidget {
                 BlocProvider(
                   create: (context) => SigningAgreementBloc(
                       signingBrokerAgreementRepository:
-                          SigningBrokerAgreementRepository()),
+                          SigningBrokerAgreementRepository(),
+                      personalInfoBloc: context.read<PersonalInfoBloc>()),
                 ),
               ],
               child: BlocListener<KycBloc, KycState>(
@@ -273,7 +275,7 @@ class KycScreen extends StatelessWidget {
             case KycPageStep.signTaxAgreements:
               return TaxAgreementScreen(
                   progress: 0.85,
-                  personalInfoState: context.read<PersonalInfoBloc>().state);
+                  personalInfoBloc: context.read<PersonalInfoBloc>());
             case KycPageStep.kycSummary:
               return KycSummaryScreen(
                 personalInfoState: context.read<PersonalInfoBloc>().state,

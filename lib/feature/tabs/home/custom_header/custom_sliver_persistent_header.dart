@@ -54,7 +54,7 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                               AsyncSnapshot<String> snapshot) {
                             if (snapshot.hasData) {
                               return CustomTextNew(
-                                'You are making great\nprogress, Sassy ${snapshot.data}!',
+                                'You are making great\nprogress, ${snapshot.data}!',
                                 style: AskLoraTextStyles.h3.copyWith(
                                   color: AskLoraColors.white,
                                 ),

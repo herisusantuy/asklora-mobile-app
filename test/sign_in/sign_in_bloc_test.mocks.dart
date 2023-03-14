@@ -219,6 +219,31 @@ class MockUserJourneyRepository extends _i1.Mock
         )),
       ) as _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>);
   @override
+  void saveUserJourneyToLocal({
+    required _i12.UserJourney? userJourney,
+    String? data,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #saveUserJourneyToLocal,
+          [],
+          {
+            #userJourney: userJourney,
+            #data: data,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i9.Future<_i12.UserJourney?> getUserJourneyFromLocal() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserJourneyFromLocal,
+          [],
+        ),
+        returnValue: _i9.Future<_i12.UserJourney?>.value(),
+      ) as _i9.Future<_i12.UserJourney?>);
+  @override
   _i9.Future<_i12.UserJourney> getUserJourney() => (super.noSuchMethod(
         Invocation.method(
           #getUserJourney,
@@ -227,6 +252,23 @@ class MockUserJourneyRepository extends _i1.Mock
         returnValue:
             _i9.Future<_i12.UserJourney>.value(_i12.UserJourney.privacy),
       ) as _i9.Future<_i12.UserJourney>);
+  @override
+  _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>
+      getUserJourneyWithData() => (super.noSuchMethod(
+            Invocation.method(
+              #getUserJourneyWithData,
+              [],
+            ),
+            returnValue:
+                _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>.value(
+                    _FakeBaseResponse_1<_i11.UserJourneyResponse>(
+              this,
+              Invocation.method(
+                #getUserJourneyWithData,
+                [],
+              ),
+            )),
+          ) as _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>);
 }
 
 /// A class which mocks [SignInApiClient].
