@@ -106,7 +106,7 @@ class BotStockBottomSheet {
                   builder: (context, state) {
                     return LoraBottomSheetContent(
                       disablePrimaryButton: state.botStockTradeAmount == 0,
-                      title: 'How much do you want to invest?',
+                      title: 'How much are you investing?',
                       primaryButtonLabel: 'NEXT',
                       secondaryButtonLabel: 'CANCEL',
                       onPrimaryButtonTap: () {
@@ -128,7 +128,7 @@ class BotStockBottomSheet {
                               .copyWith(color: AskLoraColors.gray),
                           textStyle: AskLoraTextStyles.h2
                               .copyWith(color: AskLoraColors.charcoal),
-                          hintText: '0',
+                          hintText: '1,500',
                           onChanged: (value) => context
                               .read<BotStockBloc>()
                               .add(TradeBotStockAmountChanged(value.isNotEmpty

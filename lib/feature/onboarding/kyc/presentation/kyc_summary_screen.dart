@@ -153,23 +153,12 @@ class KycSummaryScreen extends StatelessWidget {
             country: financialProfileState.country,
             differentCountryReason:
                 financialProfileState.detailInformationOfCountry),
-
-        ///
-        /// TODO: Confirm with James if we need this in real release. For now
-        /// disabling as Stephen does not want this in the SFC Demo.
-        ///
-        wealthSources: isDemoEnable
-            ? sourceOfWealthState.sourceOfWealthAnswers
-                .map((e) => WealthSourcesRequest(
-                      wealthSource: e.sourceOfWealthType.value,
-                      percentage: e.amount,
-                    ))
-                .toList()
-            : [
-                WealthSourcesRequest(
-                    wealthSource: SourceOfWealthType.incomeFromEmployment.value,
-                    percentage: 100)
-              ],
+        wealthSources: sourceOfWealthState.sourceOfWealthAnswers
+            .map((e) => WealthSourcesRequest(
+                  wealthSource: e.sourceOfWealthType.value,
+                  percentage: e.amount,
+                ))
+            .toList(),
         affiliatedPerson: disclosureAffiliationState
                     .affiliatedPersonFirstName.isEmpty &&
                 disclosureAffiliationState.affiliatedPersonLastName.isEmpty

@@ -47,6 +47,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro4": MessageLookupByLibrary.simpleMessage(
             "Trade with Ease and Strategy"),
         "greetingScreenPlaceholder": m0,
-        "ppiQuestion1": m1
+        "ppiQuestion1": m1,
+        "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
+            "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
+        "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(
+            "This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level."),
+        "tooltipBotDetailsEstStopLoss": MessageLookupByLibrary.simpleMessage(
+            "The return % where the Plank Bot will sell try and limit losses. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level below your initial investment level."),
+        "tooltipBotDetailsEstTakeProfit": MessageLookupByLibrary.simpleMessage(
+            "The return % where the Plank Bot will sell to try and capture profits. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level above your initial investment level."),
+        "tooltipBotDetailsInvestmentPeriod": MessageLookupByLibrary.simpleMessage(
+            "The duration you set for Botstock where the Bot will automatically buy and sell."),
+        "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
+            "Lora’s date to start the Botstocks")
       };
 }

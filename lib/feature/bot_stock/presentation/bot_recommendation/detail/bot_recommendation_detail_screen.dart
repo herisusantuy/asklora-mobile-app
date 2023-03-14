@@ -90,7 +90,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                       if (botRecommendationModel.freeBot) {
                         BotTradeSummaryScreen.open(
                             context: context,
-                            arguments: Pair(botRecommendationModel, 0));
+                            arguments: Pair(botRecommendationModel, 500));
                       } else {
                         BotStockBottomSheet.amountBotStockForm(
                             context, botRecommendationModel);

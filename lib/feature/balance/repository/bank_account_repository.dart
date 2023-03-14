@@ -1,5 +1,5 @@
 import '../../../core/domain/base_response.dart';
-import '../../../main.dart';
+import '../../../core/utils/feature_flags.dart';
 import '../../../mock/mock_data.dart';
 import '../deposit/utils/deposit_utils.dart';
 import '../domain/bank_account_api_client.dart';
@@ -10,7 +10,7 @@ class BankAccountRepository {
   final BankAccountApiClient _bankDetailsApiClient = BankAccountApiClient();
 
   Future<BaseResponse<RegisteredBankAccounts>> getBankAccount() async {
-    if (isDemoEnable) {
+    if (FeatureFlags.isDemoEnable) {
       ///MOCK
       await Future.delayed(const Duration(milliseconds: 500));
       DepositType depositType = await MockData().getDepositType();
