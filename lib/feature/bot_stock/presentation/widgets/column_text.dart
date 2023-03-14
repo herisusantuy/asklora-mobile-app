@@ -19,20 +19,12 @@ class ColumnText extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextNew(
-          title,
-          style:
-              AskLoraTextStyles.body4.copyWith(color: AskLoraColors.charcoal),
-        ),
-        const SizedBox(
-          height: 1,
-        ),
         Row(
           children: [
             Flexible(
               child: CustomTextNew(
-                subTitle,
-                style: AskLoraTextStyles.subtitle2
+                title,
+                style: AskLoraTextStyles.body4
                     .copyWith(color: AskLoraColors.charcoal),
               ),
             ),
@@ -63,17 +55,21 @@ class ColumnText extends StatelessWidget {
                           constraints: BoxConstraints(
                               maxWidth:
                                   MediaQuery.of(context).size.width * 2 / 3),
-                          child: CustomTextNew(
-                            tooltipText!,
-                            style: AskLoraTextStyles.body3
-                                .copyWith(color: AskLoraColors.charcoal),
-                          ),
+                          child: CustomTextNew(tooltipText!,
+                              style: AskLoraTextStyles.body3
+                                  .copyWith(color: AskLoraColors.charcoal)),
                         )),
                     padding: const EdgeInsets.all(10),
                     child: getSvgIcon('icon_info')),
               )
           ],
-        )
+        ),
+        CustomTextNew(subTitle,
+            style: AskLoraTextStyles.subtitle2
+                .copyWith(color: AskLoraColors.charcoal)),
+        const SizedBox(
+          height: 1,
+        ),
       ],
     );
   }

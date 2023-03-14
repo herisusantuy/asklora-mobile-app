@@ -76,7 +76,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
       final isOtpRequired = data.statusCode == 202;
       if (!isOtpRequired) {
-        _fetchUserProfile();
+        await _fetchUserProfile();
       }
 
       emit(state.copyWith(
