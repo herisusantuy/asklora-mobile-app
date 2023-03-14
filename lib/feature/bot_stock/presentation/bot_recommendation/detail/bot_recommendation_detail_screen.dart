@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
@@ -90,10 +89,17 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                       if (botRecommendationModel.freeBot) {
                         BotTradeSummaryScreen.open(
                             context: context,
-                            arguments: Pair(botRecommendationModel, 500));
+                            botTradeSummaryModel: BotTradeSummaryModel(
+                                botType: botType,
+                                botRecommendationModel: botRecommendationModel,
+                                botDetailModel: state.botDetailResponse.data!,
+                                amount: 500));
                       } else {
                         BotStockBottomSheet.amountBotStockForm(
-                            context, botRecommendationModel);
+                            context,
+                            botType,
+                            botRecommendationModel,
+                            state.botDetailResponse.data!);
                       }
                     }),
               ),
