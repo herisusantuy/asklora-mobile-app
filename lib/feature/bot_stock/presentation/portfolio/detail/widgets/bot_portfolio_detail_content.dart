@@ -162,7 +162,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                   : '-',
               rightTitle: 'Market Cap',
               rightSubTitle: portfolioBotDetailModel?.marketCap != null
-                  ? (portfolioBotDetailModel?.marketCap ?? 0).toString()
+                  ? (portfolioBotDetailModel?.marketCap ?? '-')
                   : '-',
             ),
             const SizedBox(

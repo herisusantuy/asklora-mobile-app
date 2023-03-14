@@ -169,7 +169,7 @@ class PersonalInfoScreen extends StatelessWidget {
                         .read<PersonalInfoBloc>()
                         .add(PersonalInfoGenderChanged(value)),
                     initialValue: state.gender,
-                    choices: Pair('Male', 'Female'),
+                    choices: const Pair('Male', 'Female'),
                   ))
         ],
       );

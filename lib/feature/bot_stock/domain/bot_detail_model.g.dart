@@ -15,13 +15,14 @@ BotDetailModel _$BotDetailModelFromJson(Map<String, dynamic> json) =>
       json['chinese_name'] as String,
       json['traditional_name'] as String,
       (json['price'] as num).toDouble(),
+      json['prev_close_date'] as String,
       json['estimated_expired_date'] as String,
       (json['estimated_take_profit_pct'] as num).toDouble(),
       (json['estimated_take_profit_price'] as num).toDouble(),
       (json['estimated_stop_loss_pct'] as num).toDouble(),
       (json['estimated_stop_loss_price'] as num).toDouble(),
       json['description'] as String,
-      (json['market_cap'] as num?)?.toDouble(),
+      json['market_cap'] as String?,
       (json['performance'] as List<dynamic>?)
           ?.map((e) => ChartDataSet.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -33,6 +34,7 @@ BotDetailModel _$BotDetailModelFromJson(Map<String, dynamic> json) =>
       json['ceo'] as String,
       json['employees'] as int,
       json['founded'] as String,
+      json['estimated_start_date'] as String,
       json['headquarters'] as String,
     );
 
@@ -45,6 +47,8 @@ Map<String, dynamic> _$BotDetailModelToJson(BotDetailModel instance) =>
       'chinese_name': instance.chineseName,
       'traditional_name': instance.traditionalName,
       'price': instance.price,
+      'prev_close_date': instance.prevCloseDate,
+      'estimated_start_date': instance.estimatedStartDate,
       'estimated_expired_date': instance.estimatedExpiredDate,
       'estimated_take_profit_pct': instance.estimatedTakeProfitPct,
       'estimated_take_profit_price': instance.estimatedTakeProfitPrice,

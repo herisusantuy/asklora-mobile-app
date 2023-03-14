@@ -1,5 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import '../../chart/domain/chart_models.dart';
 
@@ -22,6 +22,12 @@ class BotDetailModel extends Equatable {
 
   final double price;
 
+  @JsonKey(name: 'prev_close_date')
+  final String prevCloseDate;
+
+  @JsonKey(name: 'estimated_start_date')
+  final String estimatedStartDate;
+
   @JsonKey(name: 'estimated_expired_date')
   final String estimatedExpiredDate;
 
@@ -40,7 +46,7 @@ class BotDetailModel extends Equatable {
   final String description;
 
   @JsonKey(name: 'market_cap')
-  final double? marketCap;
+  final String? marketCap;
 
   final List<ChartDataSet>? performance;
 
@@ -65,6 +71,7 @@ class BotDetailModel extends Equatable {
       this.chineseName,
       this.traditionalName,
       this.price,
+      this.prevCloseDate,
       this.estimatedExpiredDate,
       this.estimatedTakeProfitPct,
       this.estimatedTakeProfitPrice,
@@ -81,6 +88,7 @@ class BotDetailModel extends Equatable {
       this.ceo,
       this.employees,
       this.founded,
+      this.estimatedStartDate,
       this.headquarters);
 
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -98,6 +106,7 @@ class BotDetailModel extends Equatable {
         traditionalName,
         price,
         estimatedExpiredDate,
+        prevCloseDate,
         estimatedTakeProfitPct,
         estimatedTakeProfitPrice,
         estimatedStopLossPct,

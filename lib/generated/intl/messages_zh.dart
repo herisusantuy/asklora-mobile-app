@@ -20,14 +20,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
-  static String m0(name) => "全新嘅投資旅程即將展開，等Asklora送你一個與別不同嘅稱號 — Sassy ${name}！";
-
-  static String m1(name) => "Hi ${name}! 撇除 MPFs，你有幾耐投資經驗 ？";
+  static String m0(name) => "Hi ${name}! 撇除 MPFs，你有幾耐投資經驗 ？";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
-            "Hi! 我係Lora，你嘅AI投資教練， 我可以點稱呼你？"),
+            "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
         "buttonCreateAnAccount": MessageLookupByLibrary.simpleMessage("建立帳戶"),
@@ -38,7 +36,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro2": MessageLookupByLibrary.simpleMessage("AI 教練指導"),
         "carouselIntro3": MessageLookupByLibrary.simpleMessage("個人化體驗"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("AI 全自動交易"),
-        "greetingScreenPlaceholder": m0,
-        "ppiQuestion1": m1
+        "greetingScreenSubTitle":
+            MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
+        "greetingScreenTitle":
+            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "ppiQuestion1": m0
       };
 }

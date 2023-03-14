@@ -22,7 +22,7 @@ PortfolioBotDetailModel _$PortfolioBotDetailModelFromJson(
       (json['estimated_stop_loss_pct'] as num).toDouble(),
       (json['estimated_stop_loss_price'] as num).toDouble(),
       json['description'] as String,
-      (json['market_cap'] as num?)?.toDouble(),
+      json['market_cap'] as String?,
       (json['performance'] as List<dynamic>)
           .map((e) => ChartDataSet.fromJson(e as Map<String, dynamic>))
           .toList(),

@@ -122,7 +122,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: CustomTextNew(
-                            'You will have more flexbility in the next real trade. Come on, this is FREE!',
+                            'You will have more flexibility in the next real trade. Come on, this is FREE!',
                             style: AskLoraTextStyles.body1
                                 .copyWith(color: AskLoraColors.charcoal),
                           ),
