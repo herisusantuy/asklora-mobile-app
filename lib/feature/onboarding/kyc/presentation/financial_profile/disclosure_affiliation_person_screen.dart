@@ -65,18 +65,9 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
                       context
                           .read<DisclosureAffiliationBloc>()
                           .add(const AffiliatedPersonChanged(false));
-
-                      if (FeatureFlags.isDemoEnable) {
-                        context.read<NavigationBloc<KycPageStep>>().add(
-                            const PageChanged(
-                                KycPageStep.disclosureAffiliationAssociates));
-                      } else {
-                        /// Disabling this as Stephen do not want to include this in
-                        /// the SFC Demo. TODO: Later on please confirm with James
-                        context.read<NavigationBloc<KycPageStep>>().add(
-                            const PageChanged(
-                                KycPageStep.financialProfileEmployment));
-                      }
+                      context.read<NavigationBloc<KycPageStep>>().add(
+                          const PageChanged(
+                              KycPageStep.financialProfileEmployment));
                     },
                     onSaveForLater: () => CarouselScreen.open(context),
                   )),
