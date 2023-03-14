@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../styles/asklora_colors.dart';
 import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
@@ -34,7 +35,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
       value: widget.initialValue.isNotEmpty ? widget.initialValue : null,
       elevation: 2,
       isExpanded: true,
-      menuMaxHeight: 200,
+      menuMaxHeight: 260,
       onChanged: (String? newValue) {
         widget.onChanged(newValue);
       },
