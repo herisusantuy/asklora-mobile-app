@@ -24,7 +24,7 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
             'Age is just a number.\n\nYou picked us, so you are already ahead of the game!\n\nOk! Let’s get to know more about you!',
         bottomButton: PrimaryButton(
           key: const Key('next_button'),
-          label: 'SURE!',
+          label: 'SURE',
           onTap: () {
             context
                 .read<QuestionBloc>()
