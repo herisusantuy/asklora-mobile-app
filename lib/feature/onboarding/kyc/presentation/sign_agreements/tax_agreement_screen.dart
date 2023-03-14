@@ -214,9 +214,7 @@ class TaxAgreementScreen extends StatelessWidget {
   Widget get _legalNameInput =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
           buildWhen: (previous, current) =>
-              previous.legalName != current.legalName ||
-              previous.legalNameErrorText != current.legalNameErrorText ||
-              previous.isInputNameValid != current.isInputNameValid,
+              previous.legalName != current.legalName,
           builder: (context, state) => Padding(
                 padding: const EdgeInsets.only(top: 46),
                 child: MasterTextField(
@@ -239,7 +237,6 @@ class TaxAgreementScreen extends StatelessWidget {
   Widget _bottomButton(BuildContext context) =>
       BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
         buildWhen: (previous, current) =>
-            previous.legalName != current.legalName ||
             previous.isSignatureChecked != current.isSignatureChecked ||
             previous.isInputNameValid != current.isInputNameValid,
         builder: (context, state) {
