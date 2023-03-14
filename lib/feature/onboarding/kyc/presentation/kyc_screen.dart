@@ -61,236 +61,117 @@ class KycScreen extends StatelessWidget {
             userJourneyRepository: UserJourneyRepository())
           ..add(const FetchKyc()),
         child: BlocConsumer<KycBloc, KycState>(
-            listener: (context, state) {
-              if (state.fetchKycResponse.state == ResponseState.loading) {
-                CustomLoadingOverlay.of(context).show();
-              } else {
-                CustomLoadingOverlay.of(context).dismiss();
-              }
-            },
-            buildWhen: (previous, current) =>
-                previous.fetchKycResponse.state !=
-                current.fetchKycResponse.state,
-            builder: (context, state) {
-              SaveKycRequest? saveKycRequest = state.fetchKycResponse.data;
-              return MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                      create: (_) =>
-                          NavigationBloc<KycPageStep>(initialKycPageStep)),
-                  BlocProvider(
-                      lazy: !(saveKycRequest?.personalInfoRequest != null),
-                      create: (context) => PersonalInfoBloc(
-                          accountRepository: AccountRepository())
-                        ..add(InitiatePersonalInfo(
-                            saveKycRequest?.personalInfoRequest))),
-                  BlocProvider(
-                    create: (context) => OtpBloc(
-                        otpRepository: OtpRepository(),
-                        sharedPreference: SharedPreference()),
-                  ),
-                  BlocProvider(
-                    create: (context) => CountryOfTaxResidenceBloc(),
-                  ),
-                  BlocProvider(
-                    lazy: !(saveKycRequest
-                                ?.upgradeAccountRequest.residenceInfo !=
-                            null ||
-                        saveKycRequest?.upgradeAccountRequest.proofsOfAddress !=
-                            null),
-                    create: (context) => AddressProofBloc()
-                      ..add(InitiateAddressProof(
-                          saveKycRequest?.upgradeAccountRequest.residenceInfo,
-                          saveKycRequest
-                              ?.upgradeAccountRequest.proofsOfAddress)),
-                  ),
-                  BlocProvider(
-                    lazy:
-                        !(saveKycRequest?.immediateFamilyAffiliation != null ||
-                            saveKycRequest?.associatesAffiliation != null ||
-                            saveKycRequest
-                                    ?.upgradeAccountRequest.affiliatedPerson !=
-                                null),
-                    create: (context) => DisclosureAffiliationBloc()
-                      ..add(InitiateDisclosureAffiliation(
-                          saveKycRequest?.immediateFamilyAffiliation,
-                          saveKycRequest?.associatesAffiliation,
-                          saveKycRequest
-                              ?.upgradeAccountRequest.affiliatedPerson)),
-                  ),
-                  BlocProvider(
-                    lazy: !(saveKycRequest
-                            ?.upgradeAccountRequest.employmentInfo !=
-                        null),
-                    create: (context) => FinancialProfileBloc()
-                      ..add(InitiateFinancialProfile(saveKycRequest
-                          ?.upgradeAccountRequest.employmentInfo)),
-                  ),
-                  BlocProvider(
-                    lazy:
-                        !(saveKycRequest?.upgradeAccountRequest.wealthSources !=
-                            null),
-                    create: (context) => SourceOfWealthBloc()
-                      ..add(InitiateSourceOfWealth(
-                          saveKycRequest?.upgradeAccountRequest.wealthSources)),
-                  ),
-                  BlocProvider(
-                    create: (context) => SigningAgreementBloc(
-                        signingBrokerAgreementRepository:
-                            SigningBrokerAgreementRepository()),
-                  ),
-                ],
-                child: BlocListener<KycBloc, KycState>(
-                  listenWhen: (previous, current) =>
-                      previous.saveKycResponse.state !=
-                      current.saveKycResponse.state,
-                  listener: (context, state) {
-                    if (state.saveKycResponse.state == ResponseState.loading) {
-                      CustomLoadingOverlay.of(context).show();
-                    } else {
-                      CustomLoadingOverlay.of(context).dismiss();
-                      if (state.saveKycResponse.state ==
-                          ResponseState.success) {
-                        TabsScreen.openAndRemoveAllRoute(context);
-                      } else if (state.saveKycResponse.state ==
-                          ResponseState.error) {
-                        CustomInAppNotification.show(
-                            context, state.saveKycResponse.message);
-                      }
-                    }
-                  },
-                  child: Builder(
-                    builder: (context) => CustomNavigationWidget<KycPageStep>(
-                      padding: EdgeInsets.zero,
-                      header: const SizedBox.shrink(),
-                      onBackPressed: () {
-                        context
-                            .read<NavigationBloc<KycPageStep>>()
-                            .add(const PagePop());
-                      },
-                      child: BlocListener<NavigationBloc<KycPageStep>,
-                              NavigationState>(
-                          listenWhen: (_, current) => current.lastPage == true,
-                          listener: (context, state) => Navigator.pop(context),
-                          child: _getPages),
-                    ),
-                  ),
-                ),
-              );
-              /* if (state.fetchKycResponse.state == ResponseState.success) {
-                SaveKycRequest? saveKycRequest = state.fetchKycResponse.data;
-                return MultiBlocProvider(
-                  providers: [
-                    BlocProvider(
-                        create: (_) =>
-                            NavigationBloc<KycPageStep>(initialKycPageStep)),
-                    BlocProvider(
-                        lazy: !(saveKycRequest?.personalInfoRequest != null),
-                        create: (context) => PersonalInfoBloc(
-                            accountRepository: AccountRepository())
+          listener: (context, state) {
+            if (state.fetchKycResponse.state == ResponseState.loading) {
+              CustomLoadingOverlay.of(context).show();
+            } else {
+              CustomLoadingOverlay.of(context).dismiss();
+            }
+          },
+          buildWhen: (previous, current) =>
+              previous.fetchKycResponse.state != current.fetchKycResponse.state,
+          builder: (context, state) {
+            SaveKycRequest? saveKycRequest = state.fetchKycResponse.data;
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                    create: (_) =>
+                        NavigationBloc<KycPageStep>(initialKycPageStep)),
+                BlocProvider(
+                    lazy: !(saveKycRequest?.personalInfoRequest != null),
+                    create: (context) =>
+                        PersonalInfoBloc(accountRepository: AccountRepository())
                           ..add(InitiatePersonalInfo(
                               saveKycRequest?.personalInfoRequest))),
-                    BlocProvider(
-                      create: (context) => OtpBloc(
-                          otpRepository: OtpRepository(),
-                          sharedPreference: SharedPreference()),
-                    ),
-                    BlocProvider(
-                      create: (context) => CountryOfTaxResidenceBloc(),
-                    ),
-                    BlocProvider(
-                      lazy: !(saveKycRequest
-                                  ?.upgradeAccountRequest.residenceInfo !=
-                              null ||
-                          saveKycRequest
-                                  ?.upgradeAccountRequest.proofsOfAddress !=
-                              null),
-                      create: (context) => AddressProofBloc()
-                        ..add(InitiateAddressProof(
-                            saveKycRequest?.upgradeAccountRequest.residenceInfo,
-                            saveKycRequest
-                                ?.upgradeAccountRequest.proofsOfAddress)),
-                    ),
-                    BlocProvider(
-                      lazy: !(saveKycRequest?.immediateFamilyAffiliation !=
-                              null ||
-                          saveKycRequest?.associatesAffiliation != null ||
-                          saveKycRequest
-                                  ?.upgradeAccountRequest.affiliatedPerson !=
-                              null),
-                      create: (context) => DisclosureAffiliationBloc()
-                        ..add(InitiateDisclosureAffiliation(
-                            saveKycRequest?.immediateFamilyAffiliation,
-                            saveKycRequest?.associatesAffiliation,
-                            saveKycRequest
-                                ?.upgradeAccountRequest.affiliatedPerson)),
-                    ),
-                    BlocProvider(
-                      lazy: !(saveKycRequest
-                              ?.upgradeAccountRequest.employmentInfo !=
+                BlocProvider(
+                  create: (context) => OtpBloc(
+                      otpRepository: OtpRepository(),
+                      sharedPreference: SharedPreference()),
+                ),
+                BlocProvider(
+                  create: (context) => CountryOfTaxResidenceBloc(),
+                ),
+                BlocProvider(
+                  lazy: !(saveKycRequest?.upgradeAccountRequest.residenceInfo !=
+                          null ||
+                      saveKycRequest?.upgradeAccountRequest.proofsOfAddress !=
                           null),
-                      create: (context) => FinancialProfileBloc()
-                        ..add(InitiateFinancialProfile(saveKycRequest
-                            ?.upgradeAccountRequest.employmentInfo)),
-                    ),
-                    BlocProvider(
-                      lazy: !(saveKycRequest
-                              ?.upgradeAccountRequest.wealthSources !=
+                  create: (context) => AddressProofBloc()
+                    ..add(InitiateAddressProof(
+                        saveKycRequest?.upgradeAccountRequest.residenceInfo,
+                        saveKycRequest?.upgradeAccountRequest.proofsOfAddress)),
+                ),
+                BlocProvider(
+                  lazy: !(saveKycRequest?.immediateFamilyAffiliation != null ||
+                      saveKycRequest?.associatesAffiliation != null ||
+                      saveKycRequest?.upgradeAccountRequest.affiliatedPerson !=
                           null),
-                      create: (context) => SourceOfWealthBloc()
-                        ..add(InitiateSourceOfWealth(saveKycRequest
-                            ?.upgradeAccountRequest.wealthSources)),
-                    ),
-                    BlocProvider(
-                      create: (context) => SigningAgreementBloc(
-                          signingBrokerAgreementRepository:
-                              SigningBrokerAgreementRepository()),
-                    ),
-                  ],
-                  child: BlocListener<KycBloc, KycState>(
-                    listenWhen: (previous, current) =>
-                        previous.saveKycResponse.state !=
-                        current.saveKycResponse.state,
-                    listener: (context, state) {
-                      if (state.saveKycResponse.state ==
-                          ResponseState.loading) {
-                        CustomLoadingOverlay.of(context).show();
-                      } else {
-                        CustomLoadingOverlay.of(context).dismiss();
-                        if (state.saveKycResponse.state ==
-                            ResponseState.success) {
-                          TabsScreen.openAndRemoveAllRoute(context);
-                        } else if (state.saveKycResponse.state ==
-                            ResponseState.error) {
-                          CustomInAppNotification.show(
-                              context, state.saveKycResponse.message);
-                        }
-                      }
+                  create: (context) => DisclosureAffiliationBloc()
+                    ..add(InitiateDisclosureAffiliation(
+                        saveKycRequest?.immediateFamilyAffiliation,
+                        saveKycRequest?.associatesAffiliation,
+                        saveKycRequest
+                            ?.upgradeAccountRequest.affiliatedPerson)),
+                ),
+                BlocProvider(
+                  lazy:
+                      !(saveKycRequest?.upgradeAccountRequest.employmentInfo !=
+                          null),
+                  create: (context) => FinancialProfileBloc()
+                    ..add(InitiateFinancialProfile(
+                        saveKycRequest?.upgradeAccountRequest.employmentInfo)),
+                ),
+                BlocProvider(
+                  lazy: !(saveKycRequest?.upgradeAccountRequest.wealthSources !=
+                      null),
+                  create: (context) => SourceOfWealthBloc()
+                    ..add(InitiateSourceOfWealth(
+                        saveKycRequest?.upgradeAccountRequest.wealthSources)),
+                ),
+                BlocProvider(
+                  create: (context) => SigningAgreementBloc(
+                      signingBrokerAgreementRepository:
+                          SigningBrokerAgreementRepository()),
+                ),
+              ],
+              child: BlocListener<KycBloc, KycState>(
+                listenWhen: (previous, current) =>
+                    previous.saveKycResponse.state !=
+                    current.saveKycResponse.state,
+                listener: (context, state) {
+                  if (state.saveKycResponse.state == ResponseState.loading) {
+                    CustomLoadingOverlay.of(context).show();
+                  } else {
+                    CustomLoadingOverlay.of(context).dismiss();
+                    if (state.saveKycResponse.state == ResponseState.success) {
+                      TabsScreen.openAndRemoveAllRoute(context);
+                    } else if (state.saveKycResponse.state ==
+                        ResponseState.error) {
+                      CustomInAppNotification.show(
+                          context, state.saveKycResponse.message);
+                    }
+                  }
+                },
+                child: Builder(
+                  builder: (context) => CustomNavigationWidget<KycPageStep>(
+                    padding: EdgeInsets.zero,
+                    header: const SizedBox.shrink(),
+                    onBackPressed: () {
+                      context
+                          .read<NavigationBloc<KycPageStep>>()
+                          .add(const PagePop());
                     },
-                    child: Builder(
-                      builder: (context) => CustomNavigationWidget<KycPageStep>(
-                        padding: EdgeInsets.zero,
-                        header: const SizedBox.shrink(),
-                        onBackPressed: () {
-                          context
-                              .read<NavigationBloc<KycPageStep>>()
-                              .add(const PagePop());
-                        },
-                        child: BlocListener<NavigationBloc<KycPageStep>,
-                                NavigationState>(
-                            listenWhen: (_, current) =>
-                                current.lastPage == true,
-                            listener: (context, state) =>
-                                Navigator.pop(context),
-                            child: _getPages),
-                      ),
-                    ),
+                    child: BlocListener<NavigationBloc<KycPageStep>,
+                            NavigationState>(
+                        listenWhen: (_, current) => current.lastPage == true,
+                        listener: (context, state) => Navigator.pop(context),
+                        child: _getPages),
                   ),
-                );
-              } else {
-                return const SizedBox.shrink();
-              }*/
-            }),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
