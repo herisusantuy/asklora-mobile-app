@@ -8,16 +8,10 @@
       "carouselIntro2": "AI 教練指導",
       "carouselIntro3": "個人化體驗",
       "carouselIntro4": "AI 全自動交易",
-      "askNameScreenPlaceholder": "Hi! 我係Lora，你嘅AI投資教練， 我可以點稱呼你？",
+      "askNameScreenPlaceholder": "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？",
       "askNameScreenTextFieldHint": "你的名字",
-      "greetingScreenPlaceholder": "全新嘅投資旅程即將展開，等Asklora送你一個與別不同嘅稱號 — Sassy {name}！",
-      "@greetingScreenPlaceholder": {
-            "placeholders": {
-                    "name": {
-                        "type": "String"
-                    }
-            }
-      },
+      "greetingScreenTitle": "Alright! 你準備開始 FinFit 未先？",
+      "greetingScreenSubTitle": "訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ ",
       "ppiQuestion1": "Hi {name}! 撇除 MPFs，你有幾耐投資經驗 ？",
       "@ppiQuestion1": {
             "placeholders": {

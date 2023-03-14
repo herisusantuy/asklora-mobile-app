@@ -140,7 +140,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   : '-',
               rightTitle: 'Market Cap',
               rightSubTitle: botDetailModel?.marketCap != null
-                  ? (botDetailModel?.marketCap ?? 0).toString()
+                  ? (botDetailModel?.marketCap ?? '0')
                   : '-',
             ),
             const SizedBox(

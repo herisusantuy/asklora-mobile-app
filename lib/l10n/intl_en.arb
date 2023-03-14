@@ -8,16 +8,10 @@
       "carouselIntro2": "Guidance From Your AI Coach",
       "carouselIntro3": "Personalised Experience",
       "carouselIntro4": "Trade with Ease and Strategy",
-      "askNameScreenPlaceholder": "Hi! I'm Lora, your AI investment coach. What should I call you?",
+      "askNameScreenPlaceholder": "I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ",
       "askNameScreenTextFieldHint": "Your Name",
-      "greetingScreenPlaceholder": "You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy {name}！",
-      "@greetingScreenPlaceholder": {
-            "placeholders": {
-                   "name": {
-                           "type": "String"
-                   }
-            }
-      },
+      "greetingScreenTitle": "Alright! Are you ready for the FinFit journey? ",
+      "greetingScreenSubTitle": "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!",
       "ppiQuestion1": "Hi {name}! How long have you been investing in stocks until now, aside from MPFs?",
       "@ppiQuestion1": {
             "placeholders": {

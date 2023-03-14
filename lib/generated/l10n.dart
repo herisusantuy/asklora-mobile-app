@@ -130,10 +130,10 @@ class S {
     );
   }
 
-  /// `Hi! I'm Lora, your AI investment coach. What should I call you?`
+  /// `I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? `
   String get askNameScreenPlaceholder {
     return Intl.message(
-      'Hi! I\'m Lora, your AI investment coach. What should I call you?',
+      'I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ',
       name: 'askNameScreenPlaceholder',
       desc: '',
       args: [],
@@ -150,13 +150,23 @@ class S {
     );
   }
 
-  /// `You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy {name}！`
-  String greetingScreenPlaceholder(String name) {
+  /// `Alright! Are you ready for the FinFit journey? `
+  String get greetingScreenTitle {
     return Intl.message(
-      'You’re starting a NEW investment journey. Let’s give you a new and different name - Sassy $name！',
-      name: 'greetingScreenPlaceholder',
+      'Alright! Are you ready for the FinFit journey? ',
+      name: 'greetingScreenTitle',
       desc: '',
-      args: [name],
+      args: [],
+    );
+  }
+
+  /// `Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!`
+  String get greetingScreenSubTitle {
+    return Intl.message(
+      'Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!',
+      name: 'greetingScreenSubTitle',
+      desc: '',
+      args: [],
     );
   }
 
