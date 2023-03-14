@@ -2,10 +2,8 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
-import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
@@ -18,12 +16,13 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
-import '../../../../tabs/tabs_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import 'otp/bloc/otp_bloc.dart';
 
 class PersonalInfoScreen extends StatelessWidget {
@@ -170,7 +169,7 @@ class PersonalInfoScreen extends StatelessWidget {
                         .read<PersonalInfoBloc>()
                         .add(PersonalInfoGenderChanged(value)),
                     initialValue: state.gender,
-                    choices: Pair('Male', 'Female'),
+                    choices: const Pair('Male', 'Female'),
                   ))
         ],
       );
@@ -264,8 +263,9 @@ class PersonalInfoScreen extends StatelessWidget {
                       phoneNumber: state.phoneNumber,
                     )));
               },
-              secondaryButtonOnClick: () =>
-                  TabsScreen.openAndRemoveAllRoute(context),
+              secondaryButtonOnClick: () => context
+                  .read<KycBloc>()
+                  .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
               primaryButtonLabel: 'NEXT',
               secondaryButtonLabel: 'SAVE FOR LATER',
             ),

@@ -38,10 +38,8 @@ class SignInForm extends StatelessWidget {
         context.read<SignInBloc>().add(SignInEmailChanged(state.emailAddress));
         CustomInAppNotification.show(context, state.response.message);
       } else if (responseState == ResponseState.success) {
+        context.read<AppBloc>().add(const GetUserJourneyFromLocal());
         var arguments = Pair(state.emailAddress, state.password);
-        context
-            .read<AppBloc>()
-            .add(SaveUserJourney(state.response.data!.userJourney!));
         if (state.isOtpRequired) {
           OtpScreen.openReplace(context, arguments);
         } else {

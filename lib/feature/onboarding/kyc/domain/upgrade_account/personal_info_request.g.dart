@@ -17,18 +17,31 @@ PersonalInfoRequest _$PersonalInfoRequestFromJson(Map<String, dynamic> json) =>
       countryOfBirth: json['country_of_birth'] as String?,
       phoneCountryCode: json['phone_country_code'] as String?,
       phoneNumber: json['phone_number'] as String?,
+      isUnitedStateResident: json['isUnitedStateResident'] as bool?,
+      isHongKongPermanentResident: json['isHongKongPermanentResident'] as bool?,
     );
 
-Map<String, dynamic> _$PersonalInfoRequestToJson(
-        PersonalInfoRequest instance) =>
-    <String, dynamic>{
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
-      'gender': instance.gender,
-      'hkid_number': instance.hkIdNumber,
-      'nationality': instance.nationality,
-      'date_of_birth': instance.dateOfBirth,
-      'country_of_birth': instance.countryOfBirth,
-      'phone_country_code': instance.phoneCountryCode,
-      'phone_number': instance.phoneNumber,
-    };
+Map<String, dynamic> _$PersonalInfoRequestToJson(PersonalInfoRequest instance) {
+  final val = <String, dynamic>{
+    'first_name': instance.firstName,
+    'last_name': instance.lastName,
+    'gender': instance.gender,
+    'hkid_number': instance.hkIdNumber,
+    'nationality': instance.nationality,
+    'date_of_birth': instance.dateOfBirth,
+    'country_of_birth': instance.countryOfBirth,
+    'phone_country_code': instance.phoneCountryCode,
+    'phone_number': instance.phoneNumber,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('isUnitedStateResident', instance.isUnitedStateResident);
+  writeNotNull(
+      'isHongKongPermanentResident', instance.isHongKongPermanentResident);
+  return val;
+}

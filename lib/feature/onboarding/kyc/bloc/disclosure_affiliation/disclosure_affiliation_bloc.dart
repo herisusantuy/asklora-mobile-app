@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/upgrade_account/affiliated_person.dart';
+
 part 'disclosure_affiliation_event.dart';
 
 part 'disclosure_affiliation_state.dart';
@@ -18,6 +20,16 @@ class DisclosureAffiliationBloc
     on<AffiliateAssociatesLastNameChanged>(
         _onAffiliateAssociatesLastNameChanged);
     on<AffiliateAssociatesReset>(_onAffiliateAssociatesReset);
+    on<InitiateDisclosureAffiliation>(_onInitiateDisclosureAffiliation);
+  }
+
+  _onInitiateDisclosureAffiliation(InitiateDisclosureAffiliation event,
+      Emitter<DisclosureAffiliationState> emit) {
+    emit(state.copyWith(
+        isAffiliatedPerson: event.immediateFamilyAffiliation,
+        isAffiliatedAssociates: event.associatesAffiliation,
+        affiliatedPersonFirstName: event.affiliatedPerson?.firstName,
+        affiliatedPersonLastName: event.affiliatedPerson?.lastName));
   }
 
   _onAffiliatedPersonChanged(

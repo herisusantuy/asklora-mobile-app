@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import 'widgets/personal_info_summary_content.dart';
@@ -46,7 +46,9 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.disclosureAffiliationPerson)),
-        secondaryButtonOnClick: () => CarouselScreen.open(context),
+        secondaryButtonOnClick: () => context
+            .read<KycBloc>()
+            .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
         primaryButtonLabel: 'CONFIRM & CONTINUE',
         secondaryButtonLabel: 'SAVE FOR LATER',
       );

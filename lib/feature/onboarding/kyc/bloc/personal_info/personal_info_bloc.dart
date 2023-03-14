@@ -7,6 +7,7 @@ import '../../../../../core/utils/hkid_validation.dart';
 import '../../../../../core/utils/age_validation.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
 import '../../repository/account_repository.dart';
+import '../../utils/kyc_util.dart';
 
 part 'personal_info_event.dart';
 
@@ -33,9 +34,40 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     on<PersonalInfoNext>(_onPersonalInfoNext);
     on<PersonalInfoReset>(_onPersonalInfoReset);
     on<PersonalInfoSubmitted>(_onPersonalInfoSubmitted);
+    on<InitiatePersonalInfo>(_onInitiatePersonalInfo);
   }
 
   final AccountRepository _accountRepository;
+
+  _onInitiatePersonalInfo(
+      InitiatePersonalInfo event, Emitter<PersonalInfoState> emit) {
+    PersonalInfoRequest? personalInfoRequest = event.personalInfoRequest;
+    emit(
+      state.copyWith(
+        firstName: personalInfoRequest?.firstName,
+        lastName: personalInfoRequest?.lastName,
+        gender: personalInfoRequest?.gender,
+        dateOfBirth: personalInfoRequest?.dateOfBirth,
+        hkIdNumber: personalInfoRequest?.hkIdNumber,
+        isHkIdValid: isHkIdValid(personalInfoRequest?.hkIdNumber ?? ''),
+        nationalityCode: personalInfoRequest?.nationality,
+        nationalityName: personalInfoRequest?.nationality != null &&
+                personalInfoRequest!.nationality!.isNotEmpty
+            ? getCountryByIso3(personalInfoRequest.nationality!)?.name
+            : null,
+        phoneCountryCode: personalInfoRequest?.phoneCountryCode,
+        phoneNumber: personalInfoRequest?.phoneNumber,
+        countryCodeOfBirth: personalInfoRequest?.countryOfBirth,
+        countryNameOfBirth: personalInfoRequest?.countryOfBirth != null &&
+                personalInfoRequest!.countryOfBirth!.isNotEmpty
+            ? getCountryByIso3(personalInfoRequest.countryOfBirth!)?.name
+            : null,
+        isUnitedStateResident: personalInfoRequest?.isUnitedStateResident,
+        isHongKongPermanentResident:
+            personalInfoRequest?.isHongKongPermanentResident,
+      ),
+    );
+  }
 
   _onPersonalInfoFirstNameChange(
       PersonalInfoFirstNameChanged event, Emitter<PersonalInfoState> emit) {

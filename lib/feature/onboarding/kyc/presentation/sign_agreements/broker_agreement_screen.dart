@@ -7,9 +7,9 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 
@@ -113,7 +113,8 @@ class BrokerAgreementScreen extends StatelessWidget {
                     .read<NavigationBloc<KycPageStep>>()
                     .add(const PageChanged(
                         KycPageStep.signRiskDisclosureAgreements)),
-                secondaryButtonOnClick: () => CarouselScreen.open(context),
+                secondaryButtonOnClick: () => context.read<KycBloc>().add(
+                    SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
                 disablePrimaryButton: state.disabledBrokerButton(),
                 primaryButtonLabel: 'AGREE',
                 secondaryButtonLabel: 'CONTINUE LATER',

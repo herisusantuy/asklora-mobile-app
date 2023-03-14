@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 enum Occupations {
   accountant('Accountant'),
   analyst('Analyst'),
@@ -38,6 +40,9 @@ enum Occupations {
   final String value;
 
   const Occupations(this.value);
+
+  static Occupations? findByString(String occupation) => Occupations.values
+      .firstWhereOrNull((element) => element.value == occupation);
 }
 
 enum FundingSource {
@@ -64,10 +69,14 @@ enum EmploymentStatus {
   homemaker('Homemaker', 'HOMEMAKER'),
   unknown('Unknown', 'UNKNOWN');
 
+  final String name;
   final String value;
-  final String enumString;
 
-  const EmploymentStatus(this.value, this.enumString);
+  const EmploymentStatus(this.name, this.value);
+
+  static EmploymentStatus? findByStringValue(String employmentStatus) =>
+      EmploymentStatus.values
+          .firstWhereOrNull((element) => element.value == employmentStatus);
 }
 
 enum NatureOfBusiness {
@@ -96,6 +105,10 @@ enum NatureOfBusiness {
   final String value;
 
   const NatureOfBusiness(this.value);
+
+  static NatureOfBusiness? findByString(String natureOfBusiness) =>
+      NatureOfBusiness.values
+          .firstWhereOrNull((element) => element.value == natureOfBusiness);
 }
 
 enum Region {
@@ -106,6 +119,9 @@ enum Region {
   final String value;
 
   const Region(this.value);
+
+  static Region? findByString(String region) =>
+      Region.values.firstWhereOrNull((element) => element.value == region);
 }
 
 enum District {
@@ -131,4 +147,7 @@ enum District {
   final String value;
 
   const District(this.value);
+
+  static District? findByString(String district) =>
+      District.values.firstWhereOrNull((element) => element.value == district);
 }

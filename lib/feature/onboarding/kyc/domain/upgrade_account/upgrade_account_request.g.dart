@@ -32,9 +32,6 @@ UpgradeAccountRequest _$UpgradeAccountRequestFromJson(
               ?.map((e) => Agreement.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [
-            Agreement(agreement: 'MA'),
-            Agreement(agreement: 'AA'),
-            Agreement(agreement: 'CA'),
             Agreement(agreement: 'ACA'),
             Agreement(agreement: 'RDS'),
             Agreement(agreement: 'W8BEN')

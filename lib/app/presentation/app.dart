@@ -39,6 +39,7 @@ class App extends StatelessWidget {
           ..add(AppLaunched()),
         child: BlocConsumer<AppBloc, AppState>(
             listener: (_, __) => FlutterNativeSplash.remove(),
+            buildWhen: (previous, current) => previous.status != current.status,
             builder: (context, state) => GestureDetector(
                 onTap: () {
                   FocusScopeNode focus = FocusScope.of(context);

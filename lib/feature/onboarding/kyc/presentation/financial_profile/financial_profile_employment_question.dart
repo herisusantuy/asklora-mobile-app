@@ -9,6 +9,7 @@ import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../../utils/kyc_dropdown_enum.dart';
 import '../widgets/kyc_base_form.dart';
 
@@ -67,14 +68,14 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
             key: const Key('account_employment_status_select'),
             labelText: 'Employment Status*',
             hintText: 'Please select',
-            itemsList: EmploymentStatus.values.map((e) => e.value).toList()
-              ..remove(EmploymentStatus.unknown.value),
+            itemsList: EmploymentStatus.values.map((e) => e.name).toList()
+              ..remove(EmploymentStatus.unknown.name),
             initialValue: state.employmentStatus != EmploymentStatus.unknown
-                ? state.employmentStatus.value
+                ? state.employmentStatus.name
                 : '',
             onChanged: (value) => context.read<FinancialProfileBloc>().add(
                 FinancialProfileEmploymentStatusChanged(EmploymentStatus.values
-                    .firstWhere((element) => element.value == value)))));
+                    .firstWhere((element) => element.name == value)))));
   }
 
   Widget get _getNatureOfBusinessDropdown {
@@ -340,7 +341,8 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                     .read<NavigationBloc<KycPageStep>>()
                     .add(const PageChanged(
                         KycPageStep.financialProfileSourceOfWealth)),
-                secondaryButtonOnClick: () => {},
+                secondaryButtonOnClick: () => context.read<KycBloc>().add(
+                    SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
                 primaryButtonLabel: 'NEXT',
                 secondaryButtonLabel: 'SAVE FOR LATER',
               ));

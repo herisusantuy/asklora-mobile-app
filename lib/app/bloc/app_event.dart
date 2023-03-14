@@ -21,3 +21,7 @@ class SaveUserJourney extends AppEvent {
 
   const SaveUserJourney(this.userJourney, {this.data});
 }
+
+class GetUserJourneyFromLocal extends AppEvent {
+  const GetUserJourneyFromLocal();
+}
