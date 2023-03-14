@@ -6,9 +6,11 @@ import '../../../../../core/presentation/lora_popup_message/lora_popup_message.d
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
+import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
+import '../../../../tabs/tabs_screen.dart';
 import '../../gift/gift_bot_stock_welcome_screen.dart';
 import '../utils/portfolio_enum.dart';
 
@@ -77,7 +79,16 @@ class BotPortfolioPopUp extends StatelessWidget {
             subTitle:
                 'You can manage all your investments here after you start trading. ',
             primaryButtonLabel: 'START A BOTSTOCK',
-            onPrimaryButtonTap: () => SignUpScreen.open(context));
+            onPrimaryButtonTap: () => TabsScreen.openAndRemoveAllRoute(context,
+                initialTabScreenPage: TabScreenPage.forYou));
+      case BotPortfolioPopUpType.deposit:
+        return LoraPopUpMessageModel(
+            title: 'Fund your account',
+            subTitle:
+                'Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.',
+            primaryButtonLabel: 'OK!',
+            onPrimaryButtonTap: () =>
+                DepositWelcomeScreen.open(context: context));
     }
   }
 }
