@@ -95,6 +95,21 @@ class BotDetailModel extends Equatable {
   String get formattedStartDate =>
       DateFormat('yyyy-MM-dd').format(DateTime.parse(estimatedStartDate));
 
+  String format(DateTime sourceDateTime) {
+    try {
+      var outputFormat = DateFormat('dd/MM/yy');
+      var outputDate = outputFormat.format(sourceDateTime);
+      return outputDate;
+    } catch (e) {
+      return '';
+    }
+  }
+
+  String get botPerformanceStartDate => format(performance[0].date!);
+
+  String get botPerformanceEndDate =>
+      format(performance[performance.length - 1].date!);
+
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotDetailModelFromJson(json);
 

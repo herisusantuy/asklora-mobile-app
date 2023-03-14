@@ -127,7 +127,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     )
                   ],
                 ),
-              )
+              ),
             ],
           ),
           children: [
@@ -207,7 +207,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   rightTitle: '',
                   rightSubTitle: '',
                   leftTooltipText: null),
-              _chartWidget()
+              _chartWidget(),
+              _spaceBetweenInfo,
+              _getChartCaption(),
             ],
           ),
         ),
@@ -228,6 +230,17 @@ class BotRecommendationDetailContent extends StatelessWidget {
             alignment: Alignment.center,
             child: Text('Performance data is not available for now')),
       );
+    }
+  }
+
+  Widget _getChartCaption() {
+    if (botDetailModel?.performance != null &&
+        botDetailModel!.performance.isNotEmpty) {
+      return CustomTextNew(
+          'Past ${botDetailModel?.bot.duration} performance of ${botType.upperCaseName} ${botDetailModel?.ticker}  (${botDetailModel?.botPerformanceStartDate} - ${botDetailModel?.botPerformanceEndDate})',
+          style: AskLoraTextStyles.body4);
+    } else {
+      return SizedBox.shrink();
     }
   }
 
