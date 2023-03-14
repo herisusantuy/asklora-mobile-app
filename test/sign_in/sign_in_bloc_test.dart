@@ -68,6 +68,10 @@ void main() async {
             .thenAnswer((_) async => true);
         when(sharedPreference.writeData(sfKeyPpiUsername, 'someusername'))
             .thenAnswer((_) async => true);
+        when(sharedPreference.writeData(sfKeyPpiAccountId, 'some id'))
+            .thenAnswer((_) async => true);
+        when(sharedPreference.writeIntData(sfKeyPpiUserId, 0))
+            .thenAnswer((_) async => true);
       },
     );
 

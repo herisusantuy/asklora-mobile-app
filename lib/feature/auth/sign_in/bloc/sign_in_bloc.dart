@@ -10,6 +10,7 @@ import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../onboarding/kyc/domain/get_account/get_account_response.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
+import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../domain/sign_in_response.dart';
 import '../repository/sign_in_repository.dart';
@@ -82,28 +83,30 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       final isOtpRequired = data.statusCode == 202;
       if (!isOtpRequired) {
         userJourney = await _userJourneyRepository.getUserJourney();
+
         GetAccountResponse getAccountResponse = await _fetchUserProfile();
-        if (userJourney == null) {
-          ///user journey null means user activate from different devices
-          var snapshot = await _ppiResponseRepository
-              .getUserSnapShotUserId(getAccountResponse.username);
-          if (snapshot.state == ResponseState.success) {
+
+        var snapshot = await _getUserSnapshot(getAccountResponse.username);
+        if (snapshot.state == ResponseState.success) {
+          if (userJourney == null) {
+            ///user journey null means user activate from different devices
             await _ppiResponseRepository.linkUser(snapshot.data!.id);
             emit(state.copyWith(
                 response: BaseResponse.complete(
                     data.copyWith(userJourney: UserJourney.investmentStyle))));
           } else {
-            ///user snapshot not found
-            ///shall delete the token
-            _signInRepository.removeStorageOnSignInFailed();
-            emit(state.copyWith(response: BaseResponse.error()));
+            ///this is normal sign in flow
+            emit(state.copyWith(
+                response: BaseResponse.complete(
+                    data.copyWith(userJourney: userJourney))));
           }
         } else {
-          emit(state.copyWith(
-              response: BaseResponse.complete(
-                  data.copyWith(userJourney: userJourney))));
+          ///snapshot error should remove storage and emit error
+          _signInRepository.removeStorageOnSignInFailed();
+          emit(state.copyWith(response: BaseResponse.error()));
         }
       } else {
+        ///this is when user need to input otp
         emit(state.copyWith(
             isOtpRequired: isOtpRequired,
             response: BaseResponse.complete(
@@ -135,11 +138,17 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           otp: event.otp, email: event.email, password: event.password);
       UserJourney? userJourney = await _userJourneyRepository.getUserJourney();
 
-      await _fetchUserProfile();
-
-      emit(state.copyWith(
-          response: BaseResponse.complete(data.copyWith(
-              userJourney: userJourney ?? UserJourney.investmentStyle))));
+      GetAccountResponse getAccountResponse = await _fetchUserProfile();
+      var snapshot = await _getUserSnapshot(getAccountResponse.username);
+      if (snapshot.state == ResponseState.success) {
+        emit(state.copyWith(
+            response: BaseResponse.complete(data.copyWith(
+                userJourney: userJourney ?? UserJourney.investmentStyle))));
+      } else {
+        ///snapshot error should remove storage and emit error
+        _signInRepository.removeStorageOnSignInFailed();
+        emit(state.copyWith(response: BaseResponse.error()));
+      }
     } on UnauthorizedException {
       emit(state.copyWith(
           response: BaseResponse.error(message: 'Invalid Password')));
@@ -164,5 +173,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     _sharedPreference.writeData(sfKeyEmail, accountInfo.email);
     _sharedPreference.writeData(sfKeyPpiUsername, accountInfo.username);
     return accountInfo;
+  }
+
+  Future<BaseResponse<SnapShot>> _getUserSnapshot(String username) async {
+    var snapshot = await _ppiResponseRepository.getUserSnapShotUserId(username);
+    _sharedPreference.writeData(sfKeyPpiAccountId, snapshot.data!.accountId);
+    _sharedPreference.writeIntData(sfKeyPpiUserId, snapshot.data!.id);
+    return snapshot;
   }
 }
