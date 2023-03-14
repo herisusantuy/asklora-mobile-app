@@ -33,7 +33,7 @@ class PrivacyResultFailedScreen extends StatelessWidget {
                     Pair(QuestionPageType.privacy, QuestionPageStep.privacy)),
             secondaryButtonOnClick: () {},
             primaryButtonLabel: 'TRY AGAIN',
-            secondaryButtonLabel: 'MAYBE LATER'),
+            secondaryButtonLabel: 'NEED HELP?'),
       ),
     );
   }
