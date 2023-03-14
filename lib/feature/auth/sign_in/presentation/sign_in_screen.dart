@@ -5,7 +5,8 @@ import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
-import '../../../user/account/repository/account_repository.dart';
+import '../../../onboarding/kyc/repository/account_repository.dart';
+import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../bloc/sign_in_bloc.dart';
 import '../repository/sign_in_repository.dart';
 import 'sign_in_form.dart';
@@ -27,7 +28,8 @@ class SignInScreen extends StatelessWidget {
                 TokenRepository(),
               ),
               userJourneyRepository: UserJourneyRepository(),
-              sharedPreference: SharedPreference()),
+              sharedPreference: SharedPreference(),
+              ppiResponseRepository: PpiResponseRepository()),
           child: const SignInForm(),
         ),
       ),

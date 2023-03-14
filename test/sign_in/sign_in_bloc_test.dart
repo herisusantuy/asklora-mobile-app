@@ -8,11 +8,10 @@ import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart';
-import 'package:asklora_mobile_app/feature/user/account/domain/get_account/account_contact.dart';
-import 'package:asklora_mobile_app/feature/user/account/domain/get_account/account_identity.dart';
-import 'package:asklora_mobile_app/feature/user/account/domain/get_account/get_account_response.dart';
-import 'package:asklora_mobile_app/feature/user/account/domain/get_account/trade_requirements_status.dart';
-import 'package:asklora_mobile_app/feature/user/account/repository/account_repository.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/get_account/get_account_response.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/account_repository.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart';
+import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_response_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -33,6 +32,7 @@ class MockRepository extends Mock implements Repository {}
 @GenerateMocks([SignInApiClient])
 @GenerateMocks([SharedPreference])
 @GenerateMocks([AccountRepository])
+@GenerateMocks([PpiResponseRepository])
 void main() async {
   group('Sign In Screen Bloc Test', () {
     late MockSignInRepository signInRepository;
@@ -41,43 +41,12 @@ void main() async {
     late MockRepository mockRepository;
     late SharedPreference sharedPreference;
     late AccountRepository accountRepository;
+    late PpiResponseRepository ppiResponseRepository;
 
-    final AccountContact contact = AccountContact(
-        email: 'asd@mail.com',
-        countryCode: '+62',
-        phoneNumber: '811111111',
-        streetAddress: 'Qwerty asdfg',
-        city: 'qwe',
-        unit: 'no 01',
-        state: 'asd',
-        postalCode: '111111',
-        country: 'ASD');
-    final AccountIdentity identity = AccountIdentity(
-        givenName: 'asd',
-        middleName: 'asd',
-        familyName: 'asd',
-        chineseName: 'asd',
-        dateOfBirth: 'asd',
-        taxId: '123',
-        taxIdType: 'USA_SSN',
-        countryOfResidentship: 'asd',
-        countryOfCitizenship: 'asd',
-        countryOfBirth: 'asd',
-        countryOfTaxResidence: 'asd',
-        fundingSource: 'asd');
-    final tradeRequirementStatus = TradeRequirementsStatus(
-      false,
-      false,
-      false,
-      false,
-      false,
-    );
-    final GetAccountResponse account = GetAccountResponse(
+    const GetAccountResponse account = GetAccountResponse(
+      0,
+      'someusername',
       'kk@kk.com',
-      tradeRequirementStatus,
-      false,
-      contact,
-      identity,
     );
 
     setUpAll(
@@ -87,6 +56,7 @@ void main() async {
         userJourneyRepository = MockUserJourneyRepository();
         sharedPreference = MockSharedPreference();
         accountRepository = MockAccountRepository();
+        ppiResponseRepository = MockPpiResponseRepository();
 
         when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
           null;
@@ -95,6 +65,8 @@ void main() async {
             .thenAnswer((_) async => {null});
 
         when(sharedPreference.writeData(sfKeyEmail, 'kk@kk.com'))
+            .thenAnswer((_) async => true);
+        when(sharedPreference.writeData(sfKeyPpiUsername, 'someusername'))
             .thenAnswer((_) async => true);
       },
     );
@@ -106,7 +78,8 @@ void main() async {
             accountRepository: accountRepository,
             signInRepository: signInRepository,
             userJourneyRepository: userJourneyRepository,
-            sharedPreference: sharedPreference);
+            sharedPreference: sharedPreference,
+            ppiResponseRepository: ppiResponseRepository);
       },
     );
 
@@ -179,6 +152,15 @@ void main() async {
               .thenAnswer((_) => Future.value(UserJourney.investmentStyle));
 
           when(accountRepository.getAccount()).thenAnswer((_) async => account);
+          when(ppiResponseRepository.getUserSnapShotUserId('someusername'))
+              .thenAnswer((_) => Future.value(BaseResponse.complete(SnapShot(
+                  0,
+                  'some name',
+                  'some id',
+                  'device id',
+                  'created',
+                  'updated',
+                  Scores()))));
 
           return signInBloc;
         },
@@ -228,6 +210,5 @@ void main() async {
                 passwordErrorText: '',
               )
             });
-    tearDown(() => signInBloc.close());
   });
 }

@@ -159,13 +159,37 @@ class MockUserJourneyRepository extends _i1.Mock
         )),
       ) as _i5.Future<_i2.BaseResponse<_i7.UserJourneyResponse>>);
   @override
-  _i5.Future<_i8.UserJourney> getUserJourney() => (super.noSuchMethod(
+  void saveUserJourneyToLocal({
+    _i8.UserJourney? userJourney,
+    String? data,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #saveUserJourneyToLocal,
+          [],
+          {
+            #userJourney: userJourney,
+            #data: data,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i5.Future<_i8.UserJourney?> getUserJourneyFromLocal() => (super.noSuchMethod(
+        Invocation.method(
+          #getUserJourneyFromLocal,
+          [],
+        ),
+        returnValue: _i5.Future<_i8.UserJourney?>.value(),
+      ) as _i5.Future<_i8.UserJourney?>);
+  @override
+  _i5.Future<_i8.UserJourney?> getUserJourney() => (super.noSuchMethod(
         Invocation.method(
           #getUserJourney,
           [],
         ),
-        returnValue: _i5.Future<_i8.UserJourney>.value(_i8.UserJourney.privacy),
-      ) as _i5.Future<_i8.UserJourney>);
+        returnValue: _i5.Future<_i8.UserJourney?>.value(),
+      ) as _i5.Future<_i8.UserJourney?>);
   @override
   _i5.Future<_i2.BaseResponse<_i7.UserJourneyResponse>>
       getUserJourneyWithData() => (super.noSuchMethod(

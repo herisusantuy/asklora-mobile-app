@@ -36,7 +36,7 @@ class PpiResponseRepository {
     return PpiUserResponse.fromJson(response.data);
   }
 
-  Future<BaseResponse<SnapShot>> getUserSnapShotUserId(int userId) async {
+  Future<BaseResponse<SnapShot>> getUserSnapShotUserId(dynamic userId) async {
     try {
       var response = await _ppiApiRepository.getUserSnapshotByUserId(userId);
       return BaseResponse.complete(SnapShot.fromJson(response.data));
