@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
+import '../../../core/utils/feature_flags.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
-import '../../../main.dart';
 import '../../../mock/mock_data.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
@@ -112,7 +112,7 @@ class BotStockRepository {
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount}) async {
     await removeInvestmentStyleState();
-    if (isDemoEnable) {
+    if (FeatureFlags.isDemoEnable) {
       ///MOCK
       await Future.delayed(const Duration(milliseconds: 500));
       var data = await MockData().saveBotStock(

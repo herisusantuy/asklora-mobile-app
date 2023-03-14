@@ -8,8 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app/presentation/app.dart';
 import 'core/utils/build_configs/app_config_widget.dart';
 
-const bool isDemoEnable = false;
-
 main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');

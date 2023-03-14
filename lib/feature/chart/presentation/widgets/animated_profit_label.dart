@@ -73,7 +73,7 @@ class _AnimatedProfitLabelState extends State<AnimatedProfitLabel> {
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomTextNew(
-                '${widget.profit > 0 ? '+' : ''}${(widget.profit * 100).toStringAsFixed(2)}%',
+                '${widget.profit > 0 ? '+' : ''}${widget.profit}%',
                 style: AskLoraTextStyles.h2.copyWith(
                     color: widget.hedgeType == HedgeType.buy
                         ? AskLoraColors.primaryMagenta

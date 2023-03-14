@@ -66,11 +66,11 @@ class Performance extends StatelessWidget {
         const SizedBox(
           height: 32,
         ),
-        if (portfolioBotDetailModel?.performance.data != null)
+        if (portfolioBotDetailModel?.performance != null)
           Padding(
             padding: const EdgeInsets.only(top: 32.0),
             child: ChartAnimation(
-                chartDataSets: portfolioBotDetailModel!.performance.data),
+                chartDataSets: portfolioBotDetailModel!.performance),
           ),
       ]);
 }

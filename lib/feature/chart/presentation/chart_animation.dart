@@ -234,7 +234,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
       flSpots.add(FlSpot(data.index!.toDouble(), data.price!));
       showIndexes.add(data.index!);
       showCenterValue.add(Text(
-        'Profit : ${((data.currentPnlRet ?? 0) * 100).toStringAsFixed(2)}%',
+        'Profit : ${data.currentPnlRet ?? 0}',
         style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16),
       ));

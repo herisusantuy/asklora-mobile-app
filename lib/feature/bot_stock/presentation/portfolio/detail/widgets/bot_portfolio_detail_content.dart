@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../../core/domain/pair.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -136,7 +137,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                   children: [
                     CustomTextNew(
                       (portfolioBotDetailModel?.price ?? 0)
-                          .convertToCurrencyDecimal(),
+                          .convertToCurrencyDecimal(decimalDigits: 2),
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
@@ -144,7 +145,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      '${(portfolioBotDetailModel?.estimatedStopLossPrice ?? 0).convertToCurrencyDecimal()} ${(portfolioBotDetailModel?.estimatedTakeProfitPct ?? 0).toStringAsFixed(4)}%',
+                      '${(portfolioBotDetailModel?.estimatedStopLossPrice ?? 0).convertToCurrencyDecimal(decimalDigits: 2)} ${(portfolioBotDetailModel?.estimatedTakeProfitPct ?? 0)}%',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -157,12 +158,11 @@ class BotPortfolioDetailContent extends StatelessWidget {
             PairColumnText(
               leftTitle: 'Prev Close',
               leftSubTitle: portfolioBotDetailModel?.prevClosePrice != null
-                  ? (portfolioBotDetailModel?.prevClosePrice ?? 0)
-                      .toStringAsFixed(1)
+                  ? (portfolioBotDetailModel?.prevClosePrice ?? 0).toString()
                   : '-',
               rightTitle: 'Market Cap',
               rightSubTitle: portfolioBotDetailModel?.marketCap != null
-                  ? (portfolioBotDetailModel?.marketCap ?? 0).toStringAsFixed(1)
+                  ? (portfolioBotDetailModel?.marketCap ?? 0).toString()
                   : '-',
             ),
             const SizedBox(

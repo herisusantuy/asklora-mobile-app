@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../main.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -36,8 +35,6 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
           _spaceHeight,
           const DotText('I am a senior political figure.'),
           _spaceHeight,
-          const DotText('I am a senior political figure.'),
-          _spaceHeight,
           const DotText(
               'I am a family member or relative of a senior political figure.'),
           _spaceHeight,
@@ -68,18 +65,9 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
                   context
                       .read<DisclosureAffiliationBloc>()
                       .add(const AffiliatedPersonChanged(false));
-
-                  if (isDemoEnable) {
-                    context.read<NavigationBloc<KycPageStep>>().add(
-                        const PageChanged(
-                            KycPageStep.disclosureAffiliationAssociates));
-                  } else {
-                    /// Disabling this as Stephen do not want to include this in
-                    /// the SFC Demo. TODO: Later on please confirm with James
-                    context.read<NavigationBloc<KycPageStep>>().add(
-                        const PageChanged(
-                            KycPageStep.financialProfileEmployment));
-                  }
+                  context.read<NavigationBloc<KycPageStep>>().add(
+                      const PageChanged(
+                          KycPageStep.financialProfileEmployment));
                 },
                 onSaveForLater: () => context.read<KycBloc>().add(
                     SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
 import '../../../../domain/bot_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
@@ -19,9 +21,6 @@ class BotRecommendationDetailContent extends StatelessWidget {
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
-
-  final String _tempTooltipText =
-      'Lorem ipsum dolor sit amet consectetur. Integer neque ultrices amet fermentum condimentum consequat. ';
 
   const BotRecommendationDetailContent(
       {required this.botRecommendationModel,
@@ -115,7 +114,8 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CustomTextNew(
-                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                      (botDetailModel?.price ?? 0)
+                          .convertToCurrencyDecimal(decimalDigits: 2),
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
@@ -123,7 +123,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      '${(botDetailModel?.estimatedStopLossPrice ?? 0).convertToCurrencyDecimal()} ${(botDetailModel?.estimatedTakeProfitPct ?? 0).toStringAsFixed(4)}%',
+                      '${(botDetailModel?.prevClosePrice ?? 0).convertToCurrencyDecimal(decimalDigits: 2)} ${(botDetailModel?.prevClosePct ?? 0)}%',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -136,11 +136,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
             PairColumnText(
               leftTitle: 'Prev Close',
               leftSubTitle: botDetailModel?.prevClosePrice != null
-                  ? (botDetailModel?.prevClosePrice ?? 0).toStringAsFixed(1)
+                  ? (botDetailModel?.prevClosePrice ?? 0).toString()
                   : '-',
               rightTitle: 'Market Cap',
               rightSubTitle: botDetailModel?.marketCap != null
-                  ? (botDetailModel?.marketCap ?? 0).toStringAsFixed(1)
+                  ? (botDetailModel?.marketCap ?? 0).toString()
                   : '-',
             ),
             const SizedBox(
@@ -149,11 +149,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
             const Divider(
               color: AskLoraColors.gray,
             ),
-            CustomTextNew(
-              'About ${botDetailModel?.tickerName}',
-              style:
-                  AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
-            ),
+            CustomTextNew('About ${botDetailModel?.tickerName}',
+                style: AskLoraTextStyles.h6
+                    .copyWith(color: AskLoraColors.charcoal)),
             const SizedBox(
               height: 21,
             ),
@@ -194,23 +192,23 @@ class BotRecommendationDetailContent extends StatelessWidget {
           padding: AppValues.screenHorizontalPadding,
           child: Column(
             children: [
-              if (botType != BotType.squat && botDetailModel != null)
-                _detailedInformation(botDetailModel!),
+              if (botDetailModel != null)
+                _detailedInformation(context, botDetailModel!),
               PairColumnText(
-                  leftTitle: 'Start Time',
+                  leftTitle: 'Start Date',
                   leftSubTitle: 'Not available yet',
-                  rightTitle: 'Optimized Start Time',
-                  rightSubTitle: 'Not available yet',
-                  leftTooltipText: _tempTooltipText,
-                  rightTooltipText: _tempTooltipText),
+                  rightTitle: 'Investment Period',
+                  rightSubTitle: '${botDetailModel?.bot.duration}',
+                  leftTooltipText: S.of(context).tooltipBotDetailsStartDate,
+                  rightTooltipText:
+                      S.of(context).tooltipBotDetailsInvestmentPeriod),
               _spaceBetweenInfo,
               PairColumnText(
-                  leftTitle: 'Investment Period',
-                  leftSubTitle: '${botDetailModel?.bot.duration}',
-                  rightTitle: 'Estimated End Date',
-                  rightSubTitle: '${botDetailModel?.estimatedExpiredDate}',
-                  leftTooltipText: _tempTooltipText,
-                  rightTooltipText: _tempTooltipText),
+                  leftTitle: 'Estimated End Date',
+                  leftSubTitle: '${botDetailModel?.estimatedExpiredDate}',
+                  rightTitle: '',
+                  rightSubTitle: '',
+                  leftTooltipText: null),
               if (botDetailModel?.performance != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0),
@@ -224,7 +222,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
     );
   }
 
-  Widget _detailedInformation(BotDetailModel botDetailModel) => Column(
+  Widget _detailedInformation(
+          BuildContext context, BotDetailModel botDetailModel) =>
+      Column(
         children: [
           BotPriceLineBar(
             minPrice: botDetailModel.estimatedStopLossPrice,
@@ -235,14 +235,22 @@ class BotRecommendationDetailContent extends StatelessWidget {
             height: 24,
           ),
           PairColumnText(
-              leftTitle: 'Estimated Stop Loss %',
-              leftSubTitle: botDetailModel.estimatedStopLossPrice
-                  .convertToCurrencyDecimal(),
-              rightTitle: 'Estimated Take Profit %',
-              rightSubTitle: botDetailModel.estimatedTakeProfitPrice
-                  .convertToCurrencyDecimal(),
-              leftTooltipText: _tempTooltipText,
-              rightTooltipText: _tempTooltipText),
+              leftTitle: botType == BotType.plank
+                  ? 'Estimated Stop Loss %'
+                  : 'Estimated Max Loss %',
+              leftSubTitle: botDetailModel.estimatedTakeProfitPct
+                  .convertToCurrencyDecimal(decimalDigits: 2),
+              rightTitle: botType == BotType.plank
+                  ? 'Estimated Take Profit %'
+                  : 'Estimated Max Profit %',
+              rightSubTitle: botDetailModel.estimatedStopLossPct
+                  .convertToCurrencyDecimal(decimalDigits: 2),
+              leftTooltipText: botType == BotType.plank
+                  ? S.of(context).tooltipBotDetailsEstStopLoss
+                  : S.of(context).tooltipBotDetailsEstMaxLoss,
+              rightTooltipText: botType == BotType.plank
+                  ? S.of(context).tooltipBotDetailsEstTakeProfit
+                  : S.of(context).tooltipBotDetailsEstMaxProfit),
           _spaceBetweenInfo,
         ],
       );

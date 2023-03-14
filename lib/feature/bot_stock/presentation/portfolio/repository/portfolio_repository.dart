@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../main.dart';
+import '../../../../../core/utils/feature_flags.dart';
 import '../../../../../mock/mock_data.dart';
 import '../../../domain/bot_detail_request.dart';
 import '../../../utils/bot_stock_utils.dart';
@@ -15,7 +15,7 @@ class PortfolioRepository {
 
   Future<BaseResponse<List<PortfolioBotModel>>> fetchBotPortfolio(
       BotStockFilter botStockFilter) async {
-    if (isDemoEnable) {
+    if (FeatureFlags.isDemoEnable) {
       await Future.delayed(const Duration(milliseconds: 500));
 
       ///MOCK
@@ -30,7 +30,7 @@ class PortfolioRepository {
   }
 
   Future<BaseResponse<PortfolioResponse>> fetchPortfolio() async {
-    if (isDemoEnable) {
+    if (FeatureFlags.isDemoEnable) {
       ///MOCK
       await Future.delayed(const Duration(milliseconds: 500));
       return BaseResponse.complete(
@@ -63,7 +63,7 @@ class PortfolioRepository {
 
   Future<BaseResponse<bool>> endBotStock(
       PortfolioBotModel portfolioBotModel) async {
-    if (isDemoEnable) {
+    if (FeatureFlags.isDemoEnable) {
       ///Remove bot to mock data
       await Future.delayed(const Duration(milliseconds: 500));
       MockData().endBotStock(portfolioBotModel);
