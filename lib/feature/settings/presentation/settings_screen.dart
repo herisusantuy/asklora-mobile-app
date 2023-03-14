@@ -115,7 +115,7 @@ class SettingsScreen extends StatelessWidget {
               if (state.response.state == ResponseState.error) {
                 CustomInAppNotification.show(context, state.response.message);
               } else if (state.response.state == ResponseState.success) {
-                CarouselScreen.open(context);
+                CarouselScreen.openAndRemoveAllRoute(context);
               }
             }
           },
