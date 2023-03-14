@@ -7,6 +7,7 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/app_icons.dart';
 import '../../../welcome/carousel/presentation/carousel_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
@@ -61,12 +62,13 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
   }
 
   Widget get _licenseeProfile => RoundColoredBox(
+        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 18),
         key: const Key('licensee_profile'),
         content: Row(
           children: [
-            const CustomText(
-              '-Image-',
-              padding: EdgeInsets.only(left: 12, right: 24),
+            Padding(
+              padding: const EdgeInsets.only(left: 12, right: 24),
+              child: getPngImage('joseph_chang', height: 60, width: 60),
             ),
             Expanded(
               child: Column(

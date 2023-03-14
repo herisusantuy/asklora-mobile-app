@@ -1,17 +1,21 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../repository/signing_broker_agreement_repository.dart';
+import '../personal_info/personal_info_bloc.dart';
 
 part 'signing_agreement_event.dart';
-
 part 'signing_agreement_state.dart';
 
 class SigningAgreementBloc
     extends Bloc<SigningBrokerAgreementEvent, SigningAgreementState> {
   SigningAgreementBloc({
     required SigningBrokerAgreementRepository signingBrokerAgreementRepository,
+    required PersonalInfoBloc personalInfoBloc,
   })  : _signingBrokerAgreementRepository = signingBrokerAgreementRepository,
+        _personalInfoBloc = personalInfoBloc,
         super(const SigningAgreementState()) {
     on<AskLoraClientAgreementOpened>(_onAskLoraClientAgreementOpened);
     on<BoundByAskloraAgreementChecked>(_onBoundByAskloraAgreementChecked);
@@ -23,6 +27,7 @@ class SigningAgreementBloc
   }
 
   final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
+  final PersonalInfoBloc _personalInfoBloc;
 
   _onAskLoraClientAgreementOpened(AskLoraClientAgreementOpened event,
       Emitter<SigningAgreementState> emit) async {
@@ -57,6 +62,13 @@ class SigningAgreementBloc
 
   _onLegalNameSignatureChanged(
       LegalNameSignatureChanged event, Emitter<SigningAgreementState> emit) {
-    emit(state.copyWith(legalName: event.legalName));
+    String fullName =
+        '${_personalInfoBloc.state.firstName} ${_personalInfoBloc.state.lastName}';
+    bool isNameValid = event.legalName == fullName;
+    emit(state.copyWith(
+      legalName: event.legalName,
+      legalNameErrorText: !isNameValid ? 'Your input does not match' : '',
+      isInputNameValid: isNameValid ? true : false,
+    ));
   }
 }
