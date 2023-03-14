@@ -68,67 +68,70 @@ class LoraBottomSheetContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.only(bottom: 0),
-      children: [
-        Stack(
+    return Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(bottom: 0),
           children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                padding: AppValues.screenHorizontalPadding
-                    .copyWith(top: 64, bottom: 20),
-                margin: const EdgeInsets.only(top: 70),
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(43),
-                      topRight: Radius.circular(43)),
-                ),
-                child: Column(
-                  children: [
-                    CustomTextNew(
-                      title,
-                      style: AskLoraTextStyles.h4,
-                      textAlign: TextAlign.center,
+            Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    padding: AppValues.screenHorizontalPadding
+                        .copyWith(top: 64, bottom: 20),
+                    margin: const EdgeInsets.only(top: 70),
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(43),
+                          topRight: Radius.circular(43)),
                     ),
-                    if (subTitle != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 14),
-                        child: CustomTextNew(
-                          subTitle!,
-                          style: AskLoraTextStyles.body1,
+                    child: Column(
+                      children: [
+                        CustomTextNew(
+                          title,
+                          style: AskLoraTextStyles.h4,
                           textAlign: TextAlign.center,
                         ),
-                      ),
-                    if (child != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: child!,
-                      ),
-                    const SizedBox(
-                      height: 32,
+                        if (subTitle != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 14),
+                            child: CustomTextNew(
+                              subTitle!,
+                              style: AskLoraTextStyles.body1,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        if (child != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: child!,
+                          ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        ButtonPair(
+                            disablePrimaryButton: disablePrimaryButton,
+                            primaryButtonOnClick: onPrimaryButtonTap,
+                            secondaryButtonOnClick: onSecondaryButtonTap,
+                            primaryButtonLabel: primaryButtonLabel,
+                            secondaryButtonLabel: secondaryButtonLabel)
+                      ],
                     ),
-                    ButtonPair(
-                        disablePrimaryButton: disablePrimaryButton,
-                        primaryButtonOnClick: onPrimaryButtonTap,
-                        secondaryButtonOnClick: onSecondaryButtonTap,
-                        primaryButtonLabel: primaryButtonLabel,
-                        secondaryButtonLabel: secondaryButtonLabel)
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: LoraMemojiWidget(loraMemojiType: loraMemojiType),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: LoraMemojiWidget(loraMemojiType: loraMemojiType),
+                ),
+              ],
             ),
           ],
-        ),
-      ],
-    );
+        ));
   }
 }

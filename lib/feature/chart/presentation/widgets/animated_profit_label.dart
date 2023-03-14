@@ -62,40 +62,40 @@ class _AnimatedProfitLabelState extends State<AnimatedProfitLabel> {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-        left: widget.left,
-        top: widget.top,
-        child: AnimatedOpacity(
-          opacity: show ? 1 : 0,
-          duration: widget.animationDuration,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomTextNew(
-                '${widget.profit > 0 ? '+' : ''}${widget.profit}%',
-                style: AskLoraTextStyles.h2.copyWith(
-                    color: widget.hedgeType == HedgeType.buy
-                        ? AskLoraColors.primaryMagenta
-                        : AskLoraColors.primaryGreen),
-              ),
-              CustomTextNew(
-                widget.additionalText,
-                style: AskLoraTextStyles.subtitle3.copyWith(
-                    color: widget.hedgeType == HedgeType.buy
-                        ? AskLoraColors.primaryMagenta
-                        : AskLoraColors.primaryGreen),
-              ),
-            ],
-          ),
-        ));
-  }
-
-  List<Color> get getColor {
-    if (widget.hedgeType == HedgeType.buy) {
-      return [const Color(0xffec6cfe), const Color(0xfff4a2fd)];
+    if (widget.profit == 0) {
+      return const SizedBox.shrink();
     } else {
-      return [const Color(0xff50ecbe), const Color(0xffacf8e1)];
+      return Positioned(
+          left: widget.left,
+          top: widget.top,
+          child: AnimatedOpacity(
+            opacity: show ? 1 : 0,
+            duration: widget.animationDuration,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomTextNew(
+                  '${widget.profit > 0 ? '+' : ''}${widget.profit}%',
+                  style: AskLoraTextStyles.h2.copyWith(
+                      color: widget.hedgeType == HedgeType.buy
+                          ? AskLoraColors.primaryMagenta
+                          : AskLoraColors.primaryGreen),
+                ),
+                CustomTextNew(
+                  widget.additionalText,
+                  style: AskLoraTextStyles.subtitle3.copyWith(
+                      color: widget.hedgeType == HedgeType.buy
+                          ? AskLoraColors.primaryMagenta
+                          : AskLoraColors.primaryGreen),
+                ),
+              ],
+            ),
+          ));
     }
   }
+
+  List<Color> get getColor => widget.hedgeType == HedgeType.buy
+      ? [const Color(0xffec6cfe), const Color(0xfff4a2fd)]
+      : [const Color(0xff50ecbe), const Color(0xffacf8e1)];
 }

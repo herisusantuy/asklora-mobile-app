@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../chart/domain/chart_models.dart';
@@ -22,12 +23,6 @@ class BotDetailModel extends Equatable {
 
   final double price;
 
-  @JsonKey(name: 'prev_close_date')
-  final String prevCloseDate;
-
-  @JsonKey(name: 'estimated_start_date')
-  final String estimatedStartDate;
-
   @JsonKey(name: 'estimated_expired_date')
   final String estimatedExpiredDate;
 
@@ -48,10 +43,16 @@ class BotDetailModel extends Equatable {
   @JsonKey(name: 'market_cap')
   final String? marketCap;
 
-  final List<ChartDataSet>? performance;
-
+  final List<ChartDataSet> performance;
   @JsonKey(name: 'prev_close_price')
   final double prevClosePrice;
+
+  @JsonKey(name: 'prev_close_date')
+  final String prevCloseDate;
+
+  @JsonKey(name: 'estimated_start_date')
+  final String estimatedStartDate;
+
   @JsonKey(name: 'prev_close_changes')
   final double prevCloseChanges;
   @JsonKey(name: 'prev_close_pct')
@@ -71,7 +72,6 @@ class BotDetailModel extends Equatable {
       this.chineseName,
       this.traditionalName,
       this.price,
-      this.prevCloseDate,
       this.estimatedExpiredDate,
       this.estimatedTakeProfitPct,
       this.estimatedTakeProfitPrice,
@@ -83,13 +83,17 @@ class BotDetailModel extends Equatable {
       this.prevClosePrice,
       this.prevCloseChanges,
       this.prevClosePct,
+      this.estimatedStartDate,
       this.sector,
       this.industry,
+      this.prevCloseDate,
       this.ceo,
       this.employees,
       this.founded,
-      this.estimatedStartDate,
       this.headquarters);
+
+  String get formattedStartDate =>
+      DateFormat('yyyy-MM-dd').format(DateTime.parse(estimatedStartDate));
 
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotDetailModelFromJson(json);
@@ -106,7 +110,6 @@ class BotDetailModel extends Equatable {
         traditionalName,
         price,
         estimatedExpiredDate,
-        prevCloseDate,
         estimatedTakeProfitPct,
         estimatedTakeProfitPrice,
         estimatedStopLossPct,
@@ -117,8 +120,10 @@ class BotDetailModel extends Equatable {
         prevClosePrice,
         prevCloseChanges,
         prevClosePct,
+        estimatedStartDate,
         sector,
         industry,
+        prevCloseDate,
         ceo,
         employees,
         founded,

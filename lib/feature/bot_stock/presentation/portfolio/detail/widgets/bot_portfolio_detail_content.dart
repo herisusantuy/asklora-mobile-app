@@ -46,9 +46,11 @@ class BotPortfolioDetailContent extends StatelessWidget {
               const SizedBox(
                 height: 33,
               ),
-              KeyInfo(
-                portfolioBotModel: portfolioBotModel,
-              ),
+              if (portfolioBotDetailModel != null)
+                KeyInfo(
+                  botType: botType,
+                  portfolioBotDetailModel: portfolioBotDetailModel!,
+                ),
               const SizedBox(
                 height: 35,
               ),
