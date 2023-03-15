@@ -53,6 +53,8 @@ class BotPortfolioCard extends StatelessWidget {
                     CustomTextNew(
                       portfolioBotModel.tickerName,
                       style: AskLoraTextStyles.body2,
+                      maxLines: 2,
+                      ellipsis: true,
                     ),
                   ],
                 ),
