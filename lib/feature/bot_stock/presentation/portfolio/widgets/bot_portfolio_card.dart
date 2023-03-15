@@ -87,7 +87,7 @@ class BotPortfolioCard extends StatelessWidget {
                         ),
                       Expanded(
                         child: CustomTextNew(
-                          expiredDayLeft.right,
+                          'Expired at ${portfolioBotModel.expiredDate ?? '--/--/--'}',
                           style: AskLoraTextStyles.subtitle4
                               .copyWith(color: botType.expiredTextColor),
                           maxLines: 2,
