@@ -100,30 +100,30 @@ class S {
     );
   }
 
-  /// `Guidance From Your AI Coach`
+  /// `Guided by FinFit Coach, Lora`
   String get carouselIntro2 {
     return Intl.message(
-      'Guidance From Your AI Coach',
+      'Guided by FinFit Coach, Lora',
       name: 'carouselIntro2',
       desc: '',
       args: [],
     );
   }
 
-  /// `Personalised Experience`
+  /// `Invest with AI strategy, automated`
   String get carouselIntro3 {
     return Intl.message(
-      'Personalised Experience',
+      'Invest with AI strategy, automated',
       name: 'carouselIntro3',
       desc: '',
       args: [],
     );
   }
 
-  /// `Trade with Ease and Strategy`
+  /// `Personalised experience`
   String get carouselIntro4 {
     return Intl.message(
-      'Trade with Ease and Strategy',
+      'Personalised experience',
       name: 'carouselIntro4',
       desc: '',
       args: [],
