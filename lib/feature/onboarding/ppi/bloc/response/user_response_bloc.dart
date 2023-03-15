@@ -223,7 +223,13 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       Logger.log(
           'suitabilityScore $suitabilityScore objectiveScore $objectiveScore');
 
-      return Future.value(Pair(suitabilityScore, objectiveScore));
+      // this condition for identify user's age
+      // if user's age < 18 we return with 0 score;
+      if (age < 18) {
+        return Future.value(const Pair(0, 0));
+      } else {
+        return Future.value(Pair(suitabilityScore, objectiveScore));
+      }
     } else {
       return Future.value(const Pair(0, 0));
     }
