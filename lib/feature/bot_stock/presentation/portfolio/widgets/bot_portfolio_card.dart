@@ -89,7 +89,7 @@ class BotPortfolioCard extends StatelessWidget {
                         ),
                       Expanded(
                         child: CustomTextNew(
-                          'Expired at ${portfolioBotModel.expiredDate ?? '--/--/--'}',
+                          'Expires at ${portfolioBotModel.expiredDate ?? '--/--/--'}',
                           style: AskLoraTextStyles.subtitle4
                               .copyWith(color: botType.expiredTextColor),
                           maxLines: 2,
@@ -135,9 +135,9 @@ class BotPortfolioCard extends StatelessWidget {
   Pair<bool, String> expiredDaysLeft(DateTime from, DateTime to) {
     int dayLeft = (to.difference(from).inHours / 24).round();
     if (dayLeft > 3) {
-      return Pair(false, 'Expired at ${DateFormat('kk:mm, dd-MM').format(to)}');
+      return Pair(false, 'Expires at ${DateFormat('kk:mm, dd-MM').format(to)}');
     } else {
-      return Pair(true, 'Expired in $dayLeft ${dayLeft > 1 ? 'days' : 'day'}!');
+      return Pair(true, 'Expires in $dayLeft ${dayLeft > 1 ? 'days' : 'day'}!');
     }
   }
 }

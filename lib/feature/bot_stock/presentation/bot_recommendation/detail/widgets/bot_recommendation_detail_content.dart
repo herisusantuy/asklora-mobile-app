@@ -141,9 +141,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   ? (botDetailModel?.marketCap ?? '-')
                   : '-',
             ),
-            const SizedBox(
-              height: 2,
-            ),
+            const SizedBox(height: 2),
             const Divider(
               color: AskLoraColors.gray,
             ),
@@ -183,9 +181,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             )
           ],
         ),
-        const SizedBox(
-          height: 33,
-        ),
+        const SizedBox(height: 33),
         Padding(
           padding: AppValues.screenHorizontalPadding,
           child: Column(
@@ -253,9 +249,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             maxPrice: botDetailModel.estimatedTakeProfitPrice,
             currentPrice: botDetailModel.price,
           ),
-          const SizedBox(
-            height: 24,
-          ),
+          const SizedBox(height: 24),
           PairColumnText(
               leftTitle: botType == BotType.plank
                   ? 'Estimated Stop Loss %'

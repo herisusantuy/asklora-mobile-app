@@ -52,21 +52,27 @@ class _CustomDropdownState extends State<CustomDropdown> {
           contentPadding: widget.contentPadding),
       borderRadius: BorderRadius.circular(5),
       items: _getDropdownMenuItems(textEllipsis: true),
-      selectedItemBuilder: (_) => _getDropdownMenuItems(textEllipsis: true),
+      selectedItemBuilder: (_) =>
+          _getDropdownMenuItems(textEllipsis: true, maxLines: 1),
     );
   }
 
   List<DropdownMenuItem<String>> _getDropdownMenuItems(
-          {bool textEllipsis = true}) =>
+          {bool textEllipsis = true, int maxLines = 2}) =>
       widget.itemsList
           .map(
             (element) => DropdownMenuItem<String>(
               key: Key(element),
               value: element,
-              child: CustomTextNew(
-                element,
-                style: TextFieldStyle.valueTextStyle.copyWith(height: 1),
-                ellipsis: textEllipsis,
+              child: Column(
+                children: [
+                  CustomTextNew(
+                    element,
+                    style: TextFieldStyle.valueTextStyle.copyWith(height: 1.3),
+                    maxLines: maxLines,
+                    ellipsis: textEllipsis,
+                  ),
+                ],
               ),
             ),
           )
