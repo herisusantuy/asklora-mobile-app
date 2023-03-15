@@ -55,8 +55,19 @@ class BotDetailModel extends Equatable {
 
   @JsonKey(name: 'prev_close_changes')
   final double prevCloseChanges;
+
   @JsonKey(name: 'prev_close_pct')
   final double prevClosePct;
+
+  @JsonKey(name: 'avg_return')
+  final double avgReturn;
+
+  @JsonKey(name: 'avg_loss')
+  final double avgLoss;
+
+  @JsonKey(name: 'avg_period')
+  final double avgPeriod;
+
   final String sector;
   final String industry;
   final String ceo;
@@ -84,6 +95,9 @@ class BotDetailModel extends Equatable {
       this.prevCloseChanges,
       this.prevClosePct,
       this.estimatedStartDate,
+      this.avgLoss,
+      this.avgPeriod,
+      this.avgReturn,
       this.sector,
       this.industry,
       this.prevCloseDate,
@@ -115,6 +129,11 @@ class BotDetailModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$BotDetailModelToJson(this);
 
+  String get avgReturnString =>
+      (avgReturn > 0) ? '+$avgReturn%' : '$avgReturn%';
+
+  String get avgLossString => (avgLoss > 0) ? '+$avgLoss%' : '$avgLoss%';
+
   @override
   List<Object?> get props => [
         bot,
@@ -136,6 +155,9 @@ class BotDetailModel extends Equatable {
         prevCloseChanges,
         prevClosePct,
         estimatedStartDate,
+        avgPeriod,
+        avgLoss,
+        avgReturn,
         sector,
         industry,
         prevCloseDate,

@@ -63,7 +63,7 @@ class BotPortfolioCard extends StatelessWidget {
                   leftTitle: 'Current Price',
                   rightTitle: 'Total P/L',
                   leftSubTitle: portfolioBotModel.latestPrice,
-                  rightSubTitle: '+1%',
+                  rightSubTitle: '0%',
                 ),
                 const SizedBox(
                   height: 15,

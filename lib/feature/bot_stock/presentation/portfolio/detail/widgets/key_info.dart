@@ -49,10 +49,15 @@ class KeyInfo extends StatelessWidget {
             content: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _columnTextBigTitle(title: '+15%', subTitle: 'Avg. Return'),
-                _columnTextBigTitle(title: '-10%', subTitle: 'Avg. Loss'),
                 _columnTextBigTitle(
-                    title: '27', subTitle: 'Avg. Period (Days)'),
+                    title: portfolioBotDetailModel.avgReturnString,
+                    subTitle: 'Avg. Return'),
+                _columnTextBigTitle(
+                    title: portfolioBotDetailModel.avgLossString,
+                    subTitle: 'Avg. Loss'),
+                _columnTextBigTitle(
+                    title: portfolioBotDetailModel.avgPeriod.toStringAsFixed(0),
+                    subTitle: 'Avg. Period (Days)'),
               ],
             ),
           ),

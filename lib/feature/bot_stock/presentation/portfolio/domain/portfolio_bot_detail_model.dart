@@ -50,12 +50,25 @@ class PortfolioBotDetailModel extends Equatable {
   final String? marketCap;
 
   final List<ChartDataSet> performance;
+
   @JsonKey(name: 'prev_close_price')
   final double prevClosePrice;
+
   @JsonKey(name: 'prev_close_changes')
   final double prevCloseChanges;
+
   @JsonKey(name: 'prev_close_pct')
   final double prevClosePct;
+
+  @JsonKey(name: 'avg_return')
+  final double avgReturn;
+
+  @JsonKey(name: 'avg_loss')
+  final double avgLoss;
+
+  @JsonKey(name: 'avg_period')
+  final double avgPeriod;
+
   final String sector;
   final String industry;
   final String ceo;
@@ -84,6 +97,9 @@ class PortfolioBotDetailModel extends Equatable {
       this.prevClosePct,
       this.prevCloseDate,
       this.estimatedStartDate,
+      this.avgLoss,
+      this.avgPeriod,
+      this.avgReturn,
       this.sector,
       this.industry,
       this.ceo,
@@ -98,6 +114,11 @@ class PortfolioBotDetailModel extends Equatable {
       _$PortfolioBotDetailModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$PortfolioBotDetailModelToJson(this);
+
+  String get avgReturnString =>
+      (avgReturn > 0) ? '+$avgReturn%' : '$avgReturn%';
+
+  String get avgLossString => (avgLoss > 0) ? '+$avgLoss%' : '$avgLoss%';
 
   @override
   List<Object?> get props => [
@@ -121,6 +142,9 @@ class PortfolioBotDetailModel extends Equatable {
         prevCloseChanges,
         prevClosePct,
         estimatedStartDate,
+        avgPeriod,
+        avgLoss,
+        avgReturn,
         sector,
         industry,
         ceo,
