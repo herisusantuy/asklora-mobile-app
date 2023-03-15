@@ -122,10 +122,9 @@ class MockData {
               (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
           buyingPower: portfolioDetailResponse.buyingPower -
               (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
-          totalBotStockValues:
-              portfolioDetailResponse.totalBotStockValues + tradeBotStockAmount,
-          totalPortfolio: portfolioDetailResponse.totalPortfolio +
-              (botRecommendationModel.freeBot ? tradeBotStockAmount : 0)));
+          totalBotStockValues: portfolioDetailResponse.totalBotStockValues +
+              (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
+          totalPortfolio: portfolioDetailResponse.totalPortfolio));
       return BaseResponse.complete(true);
     } else {
       return BaseResponse.error(message: 'Insufficient balance');

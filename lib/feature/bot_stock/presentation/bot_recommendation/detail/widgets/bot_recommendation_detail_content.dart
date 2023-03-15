@@ -240,7 +240,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
           'Past ${botDetailModel?.bot.duration} performance of ${botType.upperCaseName} ${botDetailModel?.ticker}  (${botDetailModel?.botPerformanceStartDate} - ${botDetailModel?.botPerformanceEndDate})',
           style: AskLoraTextStyles.body4);
     } else {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
   }
 
