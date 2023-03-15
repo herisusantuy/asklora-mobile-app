@@ -147,7 +147,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      '${(portfolioBotDetailModel?.estimatedStopLossPrice ?? 0).convertToCurrencyDecimal(decimalDigits: 2)} ${(portfolioBotDetailModel?.estimatedTakeProfitPct ?? 0)}%',
+                      '${getPriceDifference().convertToCurrencyDecimal(decimalDigits: 2)} ${getPercentDifference().convertToCurrencyDecimal(decimalDigits: 2)}%',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -217,5 +217,23 @@ class BotPortfolioDetailContent extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  double getPriceDifference() {
+    if (portfolioBotDetailModel != null) {
+      final currentPrice = portfolioBotDetailModel?.price ?? 0;
+      final prevClosePrice = portfolioBotDetailModel?.prevClosePrice ?? 0;
+      return currentPrice - prevClosePrice;
+    }
+    return 0;
+  }
+
+  double getPercentDifference() {
+    if (portfolioBotDetailModel != null) {
+      final currentPrice = portfolioBotDetailModel?.price ?? 0;
+      final prevClosePrice = portfolioBotDetailModel?.prevClosePrice ?? 0;
+      return ((currentPrice / prevClosePrice) - 1) * 100;
+    }
+    return 0;
   }
 }
