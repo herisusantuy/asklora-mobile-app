@@ -93,7 +93,8 @@ class MockData {
 
   Future<BaseResponse<bool>> saveBotStock(
       {required BotRecommendationModel botRecommendationModel,
-      required double tradeBotStockAmount}) async {
+      required double tradeBotStockAmount,
+      required String estimatedEndDate}) async {
     PortfolioResponse portfolioDetailResponse =
         await fetchPortfolioDetailResponse();
     if (botRecommendationModel.freeBot ||
@@ -113,6 +114,7 @@ class MockData {
           botRecommendationModel.tickerSymbol,
           botRecommendationModel.latestPrice,
           tradeBotStockAmount,
+          expiredDate: estimatedEndDate,
           freeBot: botRecommendationModel.freeBot));
 
       await _savePortfolioBotResponse(

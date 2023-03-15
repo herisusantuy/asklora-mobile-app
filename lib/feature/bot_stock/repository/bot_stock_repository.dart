@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/services.dart';
 
 import '../../../core/domain/base_response.dart';
@@ -110,12 +111,14 @@ class BotStockRepository {
 
   Future<BaseResponse<bool>> tradeBotStock(
       {required BotRecommendationModel botRecommendationModel,
-      required double tradeBotStockAmount}) async {
+      required double tradeBotStockAmount,
+      required String estimatedEndDate}) async {
     await removeInvestmentStyleState();
     if (FeatureFlags.isDemoEnable) {
       ///MOCK
       await Future.delayed(const Duration(milliseconds: 500));
       var data = await MockData().saveBotStock(
+          estimatedEndDate: estimatedEndDate,
           botRecommendationModel: botRecommendationModel,
           tradeBotStockAmount: tradeBotStockAmount);
       return data;
