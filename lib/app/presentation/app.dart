@@ -6,6 +6,11 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
+import '../../feature/onboarding/kyc/bloc/kyc_bloc.dart';
+import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
+import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_question_screen.dart';
+import '../../feature/onboarding/ppi/presentation/privacy_question/privacy_question_screen.dart';
+import '../../feature/onboarding/ppi/presentation/privacy_question/privacy_result_failed_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';
@@ -48,6 +53,12 @@ class App extends StatelessWidget {
                   }
                 },
                 child: MaterialApp(
+                    builder: (context, child) {
+                      return MediaQuery(
+                          data: MediaQuery.of(context)
+                              .copyWith(textScaleFactor: 1.0),
+                          child: child!);
+                    },
                     debugShowCheckedModeBanner: false,
                     localizationsDelegates: const [
                       S.delegate,
