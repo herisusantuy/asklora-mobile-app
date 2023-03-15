@@ -28,7 +28,7 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
           ),
           SizedBox(
             height: 244,
-            width: 244,
+            width: double.infinity,
             child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
               builder: (context, state) {
                 Scores value = Scores();
@@ -38,7 +38,7 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
                 return RadarChart(RadarChartData(
                     tickCount: 0,
                     radarBackgroundColor: AskLoraColors.whiteSmoke,
-                    titleTextStyle: AskLoraTextStyles.subtitle2,
+                    titleTextStyle: AskLoraTextStyles.subtitle3,
                     extendedBorderStyle: ExtendedBorderStyle.dash,
                     tickBorderData:
                         const BorderSide(color: Colors.blue, width: 2),
@@ -46,7 +46,7 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
                         color: AskLoraColors.primaryGreen, width: 3),
                     gridBorderData:
                         const BorderSide(color: AskLoraColors.gray, width: 1.5),
-                    titlePositionPercentageOffset: .5,
+                    titlePositionPercentageOffset: .48,
                     getTitle: (index, angle) {
                       switch (index) {
                         case 0:
