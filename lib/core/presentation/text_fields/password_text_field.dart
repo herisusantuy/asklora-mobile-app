@@ -5,6 +5,7 @@ import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../../utils/app_icons.dart';
 import '../../utils/extensions.dart';
+import '../../utils/formatters/custom_formatters.dart';
 import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 
@@ -101,7 +102,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   controller: controller,
                   onChanged: widget.onChanged,
                   textCapitalization: widget.textCapitalization,
-                  inputFormatters: widget.textInputFormatterList,
+                  inputFormatters: widget.textInputFormatterList ??
+                      [lettersAndNumberFormatter()],
                   obscureText: obscureText,
                   obscuringCharacter: '●',
                   style: TextFieldStyle.valueTextStyle,
