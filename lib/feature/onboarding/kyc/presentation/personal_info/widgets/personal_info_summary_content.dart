@@ -71,7 +71,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           _spaceHeight,
           SummaryTextInfo(
               title: 'Day of Birth',
-              subTitle: _formateDate(personalInfoState.dateOfBirth)),
+              subTitle: personalInfoState.dateOfBirth.replaceAll('-', '/')),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Country of Birth',
@@ -102,12 +102,4 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           ),
         ],
       );
-
-  String _formateDate(String date) {
-    DateTime parseDate = DateFormat('yyyy-MM-dd').parse(date);
-    final inputDate = DateTime.parse(parseDate.toString());
-    final outputFormat = DateFormat('yyyy/MM/dd');
-    final outputDate = outputFormat.format(inputDate);
-    return outputDate;
-  }
 }
