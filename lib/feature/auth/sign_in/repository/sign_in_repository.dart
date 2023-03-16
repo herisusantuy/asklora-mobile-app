@@ -41,4 +41,8 @@ class SignInRepository {
     }
     return signInResponse.copyWith(statusCode: response.statusCode);
   }
+
+  void removeStorageOnSignInFailed() {
+    _storage.deleteAll();
+  }
 }

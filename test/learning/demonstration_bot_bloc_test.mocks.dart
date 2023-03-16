@@ -165,6 +165,7 @@ class MockBotStockRepository extends _i1.Mock
   _i4.Future<_i2.BaseResponse<bool>> tradeBotStock({
     required _i8.BotRecommendationModel? botRecommendationModel,
     required double? tradeBotStockAmount,
+    required String? estimatedEndDate,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -173,6 +174,7 @@ class MockBotStockRepository extends _i1.Mock
           {
             #botRecommendationModel: botRecommendationModel,
             #tradeBotStockAmount: tradeBotStockAmount,
+            #estimatedEndDate: estimatedEndDate,
           },
         ),
         returnValue:
@@ -184,6 +186,7 @@ class MockBotStockRepository extends _i1.Mock
             {
               #botRecommendationModel: botRecommendationModel,
               #tradeBotStockAmount: tradeBotStockAmount,
+              #estimatedEndDate: estimatedEndDate,
             },
           ),
         )),

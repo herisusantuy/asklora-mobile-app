@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../core/domain/pair.dart';
+
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../core/presentation/lora_memoji_widget.dart';
@@ -11,6 +11,7 @@ import '../../../core/utils/extensions.dart';
 import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../bloc/bot_stock_bloc.dart';
+import '../domain/bot_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../presentation/portfolio/bloc/portfolio_bloc.dart';
@@ -91,7 +92,10 @@ class BotStockBottomSheet {
   }
 
   static amountBotStockForm(
-      BuildContext context, BotRecommendationModel botrecommendationModel) {
+      BuildContext context,
+      BotType botType,
+      BotRecommendationModel botRecommendationModel,
+      BotDetailModel botDetailModel) {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
@@ -113,8 +117,11 @@ class BotStockBottomSheet {
                         Navigator.pop(context);
                         BotTradeSummaryScreen.open(
                             context: context,
-                            arguments: Pair(botrecommendationModel,
-                                state.botStockTradeAmount));
+                            botTradeSummaryModel: BotTradeSummaryModel(
+                                botType: botType,
+                                botRecommendationModel: botRecommendationModel,
+                                botDetailModel: botDetailModel,
+                                amount: state.botStockTradeAmount));
                       },
                       onSecondaryButtonTap: () => Navigator.pop(context),
                       child: IntrinsicWidth(

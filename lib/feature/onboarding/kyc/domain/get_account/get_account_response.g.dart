@@ -8,23 +8,14 @@ part of 'get_account_response.dart';
 
 GetAccountResponse _$GetAccountResponseFromJson(Map<String, dynamic> json) =>
     GetAccountResponse(
+      json['id'] as int,
+      json['username'] as String,
       json['email'] as String,
-      TradeRequirementsStatus.fromJson(
-          json['trade_requirements_status'] as Map<String, dynamic>),
-      json['trade_status'] as bool,
-      json['contact'] == null
-          ? null
-          : AccountContact.fromJson(json['contact'] as Map<String, dynamic>),
-      json['identity'] == null
-          ? null
-          : AccountIdentity.fromJson(json['identity'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetAccountResponseToJson(GetAccountResponse instance) =>
     <String, dynamic>{
+      'id': instance.id,
+      'username': instance.username,
       'email': instance.email,
-      'trade_requirements_status': instance.tradeRequirementsStatus.toJson(),
-      'trade_status': instance.tradeStatus,
-      'contact': instance.contact?.toJson(),
-      'identity': instance.identity?.toJson(),
     };
