@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../chart/domain/chart_models.dart';
@@ -22,12 +23,6 @@ class BotDetailModel extends Equatable {
 
   final double price;
 
-  @JsonKey(name: 'prev_close_date')
-  final String prevCloseDate;
-
-  @JsonKey(name: 'estimated_start_date')
-  final String estimatedStartDate;
-
   @JsonKey(name: 'estimated_expired_date')
   final String estimatedExpiredDate;
 
@@ -48,14 +43,31 @@ class BotDetailModel extends Equatable {
   @JsonKey(name: 'market_cap')
   final String? marketCap;
 
-  final List<ChartDataSet>? performance;
-
+  final List<ChartDataSet> performance;
   @JsonKey(name: 'prev_close_price')
   final double prevClosePrice;
+
+  @JsonKey(name: 'prev_close_date')
+  final String prevCloseDate;
+
+  @JsonKey(name: 'estimated_start_date')
+  final String estimatedStartDate;
+
   @JsonKey(name: 'prev_close_changes')
   final double prevCloseChanges;
+
   @JsonKey(name: 'prev_close_pct')
   final double prevClosePct;
+
+  @JsonKey(name: 'avg_return')
+  final double avgReturn;
+
+  @JsonKey(name: 'avg_loss')
+  final double avgLoss;
+
+  @JsonKey(name: 'avg_period')
+  final double avgPeriod;
+
   final String sector;
   final String industry;
   final String ceo;
@@ -71,7 +83,6 @@ class BotDetailModel extends Equatable {
       this.chineseName,
       this.traditionalName,
       this.price,
-      this.prevCloseDate,
       this.estimatedExpiredDate,
       this.estimatedTakeProfitPct,
       this.estimatedTakeProfitPrice,
@@ -83,18 +94,45 @@ class BotDetailModel extends Equatable {
       this.prevClosePrice,
       this.prevCloseChanges,
       this.prevClosePct,
+      this.estimatedStartDate,
+      this.avgLoss,
+      this.avgPeriod,
+      this.avgReturn,
       this.sector,
       this.industry,
+      this.prevCloseDate,
       this.ceo,
       this.employees,
       this.founded,
-      this.estimatedStartDate,
       this.headquarters);
+
+  String get formattedStartDate =>
+      DateFormat('yyyy-MM-dd').format(DateTime.parse(estimatedStartDate));
+
+  String format(DateTime sourceDateTime) {
+    try {
+      var outputFormat = DateFormat('dd/MM/yy');
+      var outputDate = outputFormat.format(sourceDateTime);
+      return outputDate;
+    } catch (e) {
+      return '';
+    }
+  }
+
+  String get botPerformanceStartDate => format(performance[0].date!);
+
+  String get botPerformanceEndDate =>
+      format(performance[performance.length - 1].date!);
 
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotDetailModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BotDetailModelToJson(this);
+
+  String get avgReturnString =>
+      (avgReturn > 0) ? '+$avgReturn%' : '$avgReturn%';
+
+  String get avgLossString => (avgLoss > 0) ? '+$avgLoss%' : '$avgLoss%';
 
   @override
   List<Object?> get props => [
@@ -106,7 +144,6 @@ class BotDetailModel extends Equatable {
         traditionalName,
         price,
         estimatedExpiredDate,
-        prevCloseDate,
         estimatedTakeProfitPct,
         estimatedTakeProfitPrice,
         estimatedStopLossPct,
@@ -117,8 +154,13 @@ class BotDetailModel extends Equatable {
         prevClosePrice,
         prevCloseChanges,
         prevClosePct,
+        estimatedStartDate,
+        avgPeriod,
+        avgLoss,
+        avgReturn,
         sector,
         industry,
+        prevCloseDate,
         ceo,
         employees,
         founded,

@@ -22,7 +22,7 @@
       },
       "tooltipBotDetailsStartDate": "Lora’s date to start the Botstocks",
       "tooltipBotDetailsInvestmentPeriod": "The duration you set for Botstock where the Bot will automatically buy and sell.",
-      "tooltipBotDetailsEstMaxProfit": "This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.",
+      "tooltipBotDetailsEstMaxProfit": "This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level",
       "tooltipBotDetailsEstMaxLoss": "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level.",
       "tooltipBotDetailsEstTakeProfit": "The return % where the Plank Bot will sell to try and capture profits. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level above your initial investment level.",
       "tooltipBotDetailsEstStopLoss": "The return % where the Plank Bot will sell try and limit losses. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level below your initial investment level."

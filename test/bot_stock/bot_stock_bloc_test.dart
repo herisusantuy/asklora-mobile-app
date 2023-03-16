@@ -106,12 +106,14 @@ void main() async {
         build: () {
           when(botStockRepository.tradeBotStock(
                   botRecommendationModel: botRecommendationModel,
+                  estimatedEndDate: '2023-03-28',
                   tradeBotStockAmount: 0))
               .thenAnswer((_) => Future.value(boolResponse));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(const TradeBotStock(
             botRecommendationModel: botRecommendationModel,
+            estimatedEndDate: '2023-03-28',
             tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(tradeBotStockResponse: BaseResponse.loading()),
@@ -124,12 +126,14 @@ void main() async {
         build: () {
           when(botStockRepository.tradeBotStock(
                   botRecommendationModel: botRecommendationModel,
+                  estimatedEndDate: '2023-03-28',
                   tradeBotStockAmount: 0))
               .thenThrow(boolErrorResponse);
           return botStockBloc;
         },
         act: (bloc) => bloc.add(const TradeBotStock(
             botRecommendationModel: botRecommendationModel,
+            estimatedEndDate: '2023-03-28',
             tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(tradeBotStockResponse: BaseResponse.loading()),

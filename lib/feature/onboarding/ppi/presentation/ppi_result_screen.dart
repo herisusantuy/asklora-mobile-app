@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
@@ -39,11 +40,14 @@ class PpiResultScreen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  LoraMemojiHeader(
-                      text: memojiText,
-                      loraMemojiType: ppiResult == PpiResult.success
-                          ? loraMemojiType
-                          : LoraMemojiType.lora6),
+                  if (ppiResult == PpiResult.success)
+                    LoraMemojiHeader(
+                        text: memojiText, loraMemojiType: loraMemojiType)
+                  else
+                    CustomStatusWidget(
+                      title: memojiText,
+                      statusType: StatusType.failed,
+                    ),
                   if (additionalMessage.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.symmetric(

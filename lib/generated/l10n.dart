@@ -200,10 +200,10 @@ class S {
     );
   }
 
-  /// `This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.`
+  /// `This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level`
   String get tooltipBotDetailsEstMaxProfit {
     return Intl.message(
-      'This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.',
+      'This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level',
       name: 'tooltipBotDetailsEstMaxProfit',
       desc: '',
       args: [],
