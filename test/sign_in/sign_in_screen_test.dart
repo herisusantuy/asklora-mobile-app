@@ -61,7 +61,7 @@ void main() {
         );
         await tester.enterText(
           find.byKey(const Key('sign_in_password_input')),
-          'Test123!',
+          'Test123',
         );
         var submitButton = find.byKey(
           const Key('sign_in_submit_button'),
@@ -69,7 +69,7 @@ void main() {
         await tester.pump();
 
         expect(find.text('wahyu@loratechai.com'), findsOneWidget);
-        expect(find.text('Test123!'), findsOneWidget);
+        expect(find.text('Test123'), findsOneWidget);
         expect(find.text('Enter valid email'), findsNothing);
         expect(tester.widget<PrimaryButton>(submitButton).disabled, isFalse);
       });
