@@ -3,7 +3,7 @@ part of 'omni_search_question_widget_bloc.dart';
 const List<String> defaultKeywords = [
   'Covid',
   'Inflation',
-  'AAPL',
+  'GM',
   'Oil',
   'Elon Musk',
   'Burger',
