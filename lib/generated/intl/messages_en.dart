@@ -37,12 +37,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNext": MessageLookupByLibrary.simpleMessage("NEXT"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
-        "carouselIntro2":
-            MessageLookupByLibrary.simpleMessage("Guidance From Your AI Coach"),
-        "carouselIntro3":
-            MessageLookupByLibrary.simpleMessage("Personalised Experience"),
-        "carouselIntro4": MessageLookupByLibrary.simpleMessage(
-            "Trade with Ease and Strategy"),
+        "carouselIntro2": MessageLookupByLibrary.simpleMessage(
+            "Guided by FinFit Coach, Lora"),
+        "carouselIntro3": MessageLookupByLibrary.simpleMessage(
+            "Invest with AI strategy, automated"),
+        "carouselIntro4":
+            MessageLookupByLibrary.simpleMessage("Personalised experience"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(

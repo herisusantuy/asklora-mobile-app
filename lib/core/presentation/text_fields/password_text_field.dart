@@ -18,6 +18,7 @@ class PasswordTextField extends StatefulWidget {
   final String errorText;
   final Function(bool) validPassword;
   final Function(String)? onChanged;
+  final bool isShowingPasswordValidation;
 
   const PasswordTextField({
     Key? key,
@@ -29,6 +30,7 @@ class PasswordTextField extends StatefulWidget {
     this.hintText = '',
     this.errorText = '',
     required this.validPassword,
+    this.isShowingPasswordValidation = true,
   }) : super(key: key);
 
   @override
@@ -133,7 +135,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 onFocusChange: (hasFocus) {
                   shouldShowErrorsTexts = hasFocus;
                 }),
-            if (shouldShowErrorsTexts || controller.text.isNotEmpty)
+            if ((shouldShowErrorsTexts || controller.text.isNotEmpty) &&
+                widget.isShowingPasswordValidation)
               ..._errorCheckWidgets,
           ],
         ),

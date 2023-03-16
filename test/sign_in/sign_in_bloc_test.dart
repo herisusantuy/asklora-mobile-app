@@ -97,8 +97,6 @@ void main() async {
               emailAddress: '',
               isEmailValid: false,
               password: '',
-              isPasswordValid: false,
-              passwordErrorText: '',
             ));
       },
     );
@@ -117,17 +115,14 @@ void main() async {
                 isEmailValid: false,
                 emailAddressErrorText: 'Enter valid email',
                 password: '',
-                isPasswordValid: false,
-                passwordErrorText: '',
               ),
               SignInState(
-                  response: BaseResponse.unknown(),
-                  emailAddress: 'qweasdzxc',
-                  isEmailValid: false,
-                  emailAddressErrorText: 'Enter valid email',
-                  password: 'TestQWE123',
-                  isPasswordValid: true,
-                  passwordErrorText: '')
+                response: BaseResponse.unknown(),
+                emailAddress: 'qweasdzxc',
+                isEmailValid: false,
+                emailAddressErrorText: 'Enter valid email',
+                password: 'TestQWE123',
+              )
             });
     blocTest<SignInBloc, SignInState>(
         'emits "SignInStatus.unknown" and "isEmailValid = true" when entered an valid email',
@@ -140,8 +135,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: '',
-                isPasswordValid: false,
-                passwordErrorText: '',
               )
             });
 
@@ -180,8 +173,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: '',
-                isPasswordValid: false,
-                passwordErrorText: '',
               ),
               SignInState(
                 response: BaseResponse.unknown(),
@@ -189,8 +180,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: 'TestQWE123',
-                isPasswordValid: true,
-                passwordErrorText: '',
               ),
               SignInState(
                 response: BaseResponse.loading(),
@@ -198,8 +187,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: 'TestQWE123',
-                isPasswordValid: true,
-                passwordErrorText: '',
               ),
               const SignInState(
                 response: BaseResponse<SignInResponse>(
@@ -210,8 +197,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: 'TestQWE123',
-                isPasswordValid: true,
-                passwordErrorText: '',
               )
             });
   });

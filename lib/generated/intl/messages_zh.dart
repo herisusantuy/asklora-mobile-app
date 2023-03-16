@@ -32,10 +32,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
         "buttonNext": MessageLookupByLibrary.simpleMessage("下一步"),
-        "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資，一樣要 Fit！"),
-        "carouselIntro2": MessageLookupByLibrary.simpleMessage("AI 教練指導"),
-        "carouselIntro3": MessageLookupByLibrary.simpleMessage("個人化體驗"),
-        "carouselIntro4": MessageLookupByLibrary.simpleMessage("AI 全自動交易"),
+        "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
+        "carouselIntro2":
+            MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
+        "carouselIntro3": MessageLookupByLibrary.simpleMessage("AI策略，\n自動交易"),
+        "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
