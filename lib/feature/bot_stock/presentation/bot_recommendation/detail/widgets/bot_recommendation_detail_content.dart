@@ -101,7 +101,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     CustomTextNew(
-                      '${botDetailModel?.prevCloseDate}',
+                      'Prev Close ${botDetailModel?.prevCloseDate ?? 'NA'}',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
