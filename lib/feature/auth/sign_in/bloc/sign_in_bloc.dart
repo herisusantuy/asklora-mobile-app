@@ -159,6 +159,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(
           state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
     } catch (e) {
+      _signInRepository.removeStorageOnSignInFailed();
       emit(state.copyWith(response: BaseResponse.error()));
     }
   }
