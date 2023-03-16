@@ -44,7 +44,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                botDetailModel?.bot.botDescription.detail ?? '',
+                botDetailModel?.bot.botDescription.detail ?? 'NA',
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
@@ -60,7 +60,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.suited ?? '',
+              botDetailModel?.bot.botDescription.suited ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
