@@ -6,6 +6,10 @@ FilteringTextInputFormatter englishNameFormatter() =>
 FilteringTextInputFormatter fullEnglishNameFormatter() =>
     FilteringTextInputFormatter.allow(RegExp('[a-zA-Z ]'));
 
+FilteringTextInputFormatter onlyAllowOneSpace() {
+  return FilteringTextInputFormatter.deny(RegExp(r'\s '));
+}
+
 FilteringTextInputFormatter chineseNameFormatter() =>
     FilteringTextInputFormatter.allow(RegExp('[\u4e00-\u9fa5]'));
 

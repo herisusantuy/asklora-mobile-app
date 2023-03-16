@@ -79,4 +79,4 @@ build_prod: clean run_test
 
 build_stag: clean run_test
 	@echo "╠  Building the staging apk"
-	@flutter build apk --flavor dev --dart-define=ENVIRONMENT=staging
+	@flutter build apk --flavor staging --dart-define=ENVIRONMENT=staging

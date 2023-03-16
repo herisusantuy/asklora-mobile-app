@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/domain/base_response.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../domain/bot_detail_model.dart';
@@ -52,6 +53,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       emit(state.copyWith(tradeBotStockResponse: BaseResponse.loading()));
       emit(state.copyWith(
           tradeBotStockResponse: await _botStockRepository.tradeBotStock(
+              estimatedEndDate: event.estimatedEndDate,
               botRecommendationModel: event.botRecommendationModel,
               tradeBotStockAmount: event.tradeBotStockAmount)));
     } catch (e) {

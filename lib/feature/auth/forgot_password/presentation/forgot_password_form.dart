@@ -68,7 +68,7 @@ class ForgotPasswordForm extends StatelessWidget {
                 textInputType: TextInputType.emailAddress,
                 maxLine: 1,
                 labelText: 'Email',
-                hintText: 'Email',
+                hintText: 'Email Address',
                 errorText: state.emailErrorText,
                 onChanged: (email) => context
                     .read<ForgotPasswordBloc>()

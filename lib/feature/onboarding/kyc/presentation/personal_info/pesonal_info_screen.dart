@@ -60,7 +60,10 @@ class PersonalInfoScreen extends StatelessWidget {
                 initialValue: context.read<PersonalInfoBloc>().state.firstName,
                 key: const Key('first_name'),
                 label: 'Legal English First Name*',
-                textInputFormatterList: [englishNameFormatter()],
+                textInputFormatterList: [
+                  fullEnglishNameFormatter(),
+                  onlyAllowOneSpace()
+                ],
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoFirstNameChanged(value))),
@@ -69,7 +72,10 @@ class PersonalInfoScreen extends StatelessWidget {
                 initialValue: context.read<PersonalInfoBloc>().state.lastName,
                 key: const Key('last_name'),
                 label: 'Legal English Last Name*',
-                textInputFormatterList: [englishNameFormatter()],
+                textInputFormatterList: [
+                  fullEnglishNameFormatter(),
+                  onlyAllowOneSpace()
+                ],
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoLastNameChanged(value))),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
@@ -60,9 +61,13 @@ class AskNameScreen extends StatelessWidget {
                       key: const Key('name_input'),
                       onChanged: (value) => context
                           .read<LoraAskNameBloc>()
-                          .add(NameChanged(value)),
+                          .add(NameChanged(value.trimRight())),
                       hintText: S.of(context).askNameScreenTextFieldHint,
-                      textInputFormatterList: [fullEnglishNameFormatter()],
+                      textInputFormatterList: [
+                        fullEnglishNameFormatter(),
+                        onlyAllowOneSpace()
+                        // NoSpaceFormatter()
+                      ],
                       textCapitalization: TextCapitalization.words,
                       textInputType: TextInputType.text),
                 ],

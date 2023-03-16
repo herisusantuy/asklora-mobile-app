@@ -53,6 +53,7 @@ class BotRecommendationCard extends StatelessWidget {
                   botRecommendationModel.tickerName,
                   style: AskLoraTextStyles.body2,
                   maxLines: 1,
+                  ellipsis: true,
                 ),
                 const SizedBox(
                   height: 13,
