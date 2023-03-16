@@ -57,11 +57,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     emit(state.copyWith(
         response: BaseResponse.unknown(),
         password: event.password,
-        isPasswordValid: event.password.isValidPassword(),
-        passwordErrorText:
-            (event.password.isValidPassword() || event.password.isEmpty)
-                ? ''
-                : 'Enter valid password'));
+        isPasswordValid: event.password.isValidPassword()));
   }
 
   void _onSignInSubmitted(
