@@ -65,7 +65,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                portfolioBotDetailModel?.bot.botDescription.detail ?? '',
+                portfolioBotDetailModel?.bot.botDescription.detail ?? 'NA',
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
@@ -81,7 +81,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              portfolioBotDetailModel?.bot.botDescription.suited ?? '',
+              portfolioBotDetailModel?.bot.botDescription.suited ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -97,7 +97,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              portfolioBotDetailModel?.bot.botDescription.works ?? '',
+              portfolioBotDetailModel?.bot.botDescription.works ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -181,29 +181,29 @@ class BotPortfolioDetailContent extends StatelessWidget {
             ),
             PairColumnText(
               leftTitle: 'Sector(s)',
-              leftSubTitle: portfolioBotDetailModel?.sector ?? '',
+              leftSubTitle: portfolioBotDetailModel?.sector ?? 'NA',
               rightTitle: 'Industry',
-              rightSubTitle: portfolioBotDetailModel?.industry ?? '',
+              rightSubTitle: portfolioBotDetailModel?.industry ?? 'NA',
             ),
             _spaceBetweenInfo,
             PairColumnText(
               leftTitle: 'CEO',
-              leftSubTitle: portfolioBotDetailModel?.ceo ?? '',
+              leftSubTitle: portfolioBotDetailModel?.ceo ?? 'NA',
               rightTitle: 'Employees',
               rightSubTitle: '${portfolioBotDetailModel?.employees}',
             ),
             _spaceBetweenInfo,
             PairColumnText(
               leftTitle: 'Headquarters',
-              leftSubTitle: portfolioBotDetailModel?.headquarters ?? '',
+              leftSubTitle: portfolioBotDetailModel?.headquarters ?? 'NA',
               rightTitle: 'Founded',
-              rightSubTitle: portfolioBotDetailModel?.founded ?? '',
+              rightSubTitle: portfolioBotDetailModel?.founded ?? 'NA',
             ),
             const SizedBox(
               height: 23,
             ),
             CustomTextNew(
-              portfolioBotDetailModel?.description ?? '',
+              portfolioBotDetailModel?.description ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             )

@@ -45,9 +45,13 @@ class BotTradeSummaryScreen extends StatelessWidget {
           } else {
             CustomLoadingOverlay.of(context).dismiss();
             if (state.tradeBotStockResponse.state == ResponseState.success) {
-              context.read<AppBloc>().add(
-                    const SaveUserJourney(UserJourney.deposit),
-                  );
+              if (!UserJourney.compareUserJourney(
+                  context: context, target: UserJourney.deposit)) {
+                context.read<AppBloc>().add(
+                      const SaveUserJourney(UserJourney.deposit),
+                    );
+              }
+
               if (arguments.left.freeBot) {
                 TabsScreen.openAndRemoveAllRoute(context,
                     initialTabScreenPage: TabScreenPage.portfolio);

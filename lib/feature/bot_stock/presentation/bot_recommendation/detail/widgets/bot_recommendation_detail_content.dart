@@ -10,6 +10,7 @@ import '../../../../../chart/presentation/chart_animation.dart';
 import '../../../../domain/bot_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
+import '../../../widgets/column_text.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/pair_column_text.dart';
 import 'bot_price_line_bar.dart';
@@ -43,7 +44,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                botDetailModel?.bot.botDescription.detail ?? '',
+                botDetailModel?.bot.botDescription.detail ?? 'NA',
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
@@ -59,7 +60,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.suited ?? '',
+              botDetailModel?.bot.botDescription.suited ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -75,7 +76,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.works ?? '',
+              botDetailModel?.bot.botDescription.works ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -102,7 +103,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      'Not available yet',
+                      'Prev Close NA',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -157,29 +158,29 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ),
             PairColumnText(
               leftTitle: 'Sector(s)',
-              leftSubTitle: botDetailModel?.sector ?? '',
+              leftSubTitle: botDetailModel?.sector ?? 'NA',
               rightTitle: 'Industry',
-              rightSubTitle: botDetailModel?.industry ?? '',
+              rightSubTitle: botDetailModel?.industry ?? 'NA',
             ),
             _spaceBetweenInfo,
             PairColumnText(
               leftTitle: 'CEO',
-              leftSubTitle: botDetailModel?.ceo ?? '',
+              leftSubTitle: botDetailModel?.ceo ?? 'NA',
               rightTitle: 'Employees',
               rightSubTitle: '${botDetailModel?.employees}',
             ),
             _spaceBetweenInfo,
             PairColumnText(
               leftTitle: 'Headquarters',
-              leftSubTitle: botDetailModel?.headquarters ?? '',
+              leftSubTitle: botDetailModel?.headquarters ?? 'NA',
               rightTitle: 'Founded',
-              rightSubTitle: botDetailModel?.founded ?? '',
+              rightSubTitle: botDetailModel?.founded ?? 'NA',
             ),
             const SizedBox(
               height: 23,
             ),
             CustomTextNew(
-              botDetailModel?.description ?? '',
+              botDetailModel?.description ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             )
@@ -196,19 +197,17 @@ class BotRecommendationDetailContent extends StatelessWidget {
                 _detailedInformation(context, botDetailModel!),
               PairColumnText(
                   leftTitle: 'Start Date',
-                  leftSubTitle: 'Not available yet',
+                  leftSubTitle: 'NA',
                   rightTitle: 'Investment Period',
                   rightSubTitle: '${botDetailModel?.bot.duration}',
                   leftTooltipText: S.of(context).tooltipBotDetailsStartDate,
                   rightTooltipText:
                       S.of(context).tooltipBotDetailsInvestmentPeriod),
               _spaceBetweenInfo,
-              PairColumnText(
-                  leftTitle: 'Estimated End Date',
-                  leftSubTitle: '${botDetailModel?.estimatedExpiredDate}',
-                  rightTitle: '',
-                  rightSubTitle: '',
-                  leftTooltipText: null),
+              ColumnText(
+                  title: 'Estimated End Date',
+                  subTitle: '${botDetailModel?.estimatedExpiredDate}',
+                  tooltipText: null),
               if (botDetailModel?.performance != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 32.0),
