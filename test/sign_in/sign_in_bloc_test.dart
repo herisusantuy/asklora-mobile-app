@@ -1,9 +1,18 @@
+import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
+import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
+import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart';
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/account_contact.dart';
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/account_identity.dart';
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/get_account_response.dart';
+import 'package:asklora_mobile_app/feature/user/account/domain/get_account/trade_requirements_status.dart';
+import 'package:asklora_mobile_app/feature/user/account/repository/account_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,30 +29,84 @@ class MockSignInBloc extends MockBloc<SignInEvent, SignInState>
 class MockRepository extends Mock implements Repository {}
 
 @GenerateMocks([SignInRepository])
+@GenerateMocks([UserJourneyRepository])
 @GenerateMocks([SignInApiClient])
+@GenerateMocks([SharedPreference])
+@GenerateMocks([AccountRepository])
 void main() async {
   group('Sign In Screen Bloc Test', () {
     late MockSignInRepository signInRepository;
+    late MockUserJourneyRepository userJourneyRepository;
     late SignInBloc signInBloc;
     late MockRepository mockRepository;
+    late SharedPreference sharedPreference;
+    late AccountRepository accountRepository;
+
+    final AccountContact contact = AccountContact(
+        email: 'asd@mail.com',
+        countryCode: '+62',
+        phoneNumber: '811111111',
+        streetAddress: 'Qwerty asdfg',
+        city: 'qwe',
+        unit: 'no 01',
+        state: 'asd',
+        postalCode: '111111',
+        country: 'ASD');
+    final AccountIdentity identity = AccountIdentity(
+        givenName: 'asd',
+        middleName: 'asd',
+        familyName: 'asd',
+        chineseName: 'asd',
+        dateOfBirth: 'asd',
+        taxId: '123',
+        taxIdType: 'USA_SSN',
+        countryOfResidentship: 'asd',
+        countryOfCitizenship: 'asd',
+        countryOfBirth: 'asd',
+        countryOfTaxResidence: 'asd',
+        fundingSource: 'asd');
+    final tradeRequirementStatus = TradeRequirementsStatus(
+      false,
+      false,
+      false,
+      false,
+      false,
+    );
+    final GetAccountResponse account = GetAccountResponse(
+      'kk@kk.com',
+      tradeRequirementStatus,
+      false,
+      contact,
+      identity,
+    );
 
     setUpAll(
       () async {
         signInRepository = MockSignInRepository();
         mockRepository = MockRepository();
+        userJourneyRepository = MockUserJourneyRepository();
+        sharedPreference = MockSharedPreference();
+        accountRepository = MockAccountRepository();
 
         when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
           null;
         });
         when(mockRepository.saveAccessToken('token'))
             .thenAnswer((_) async => {null});
+
+        when(sharedPreference.writeData(sfKeyEmail, 'kk@kk.com'))
+            .thenAnswer((_) async => true);
       },
     );
 
     setUp(
       () async {
         TestWidgetsFlutterBinding.ensureInitialized();
-        signInBloc = SignInBloc(signInRepository: signInRepository);
+        signInBloc = SignInBloc(
+            accountRepository: accountRepository,
+            signInRepository: signInRepository,
+            userJourneyRepository: userJourneyRepository,
+            sharedPreference: sharedPreference);
       },
     );
 
@@ -110,10 +173,12 @@ void main() async {
         build: () {
           when(signInRepository.signIn(
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
-              .thenAnswer((_) => Future.value(
-                  const BaseResponse<SignInResponse>(
-                      data: SignInResponse('access', 'refresh'),
-                      state: ResponseState.success)));
+              .thenAnswer((_) => Future.value(const SignInResponse(
+                  userJourney: UserJourney.investmentStyle)));
+          when(userJourneyRepository.getUserJourney())
+              .thenAnswer((_) => Future.value(UserJourney.investmentStyle));
+
+          when(accountRepository.getAccount()).thenAnswer((_) async => account);
 
           return signInBloc;
         },
@@ -152,7 +217,8 @@ void main() async {
               ),
               const SignInState(
                 response: BaseResponse<SignInResponse>(
-                    data: SignInResponse('access', 'refresh'),
+                    data: SignInResponse(
+                        userJourney: UserJourney.investmentStyle),
                     state: ResponseState.success),
                 emailAddress: 'nyoba@yopmail.com',
                 isEmailValid: true,

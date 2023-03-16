@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../user/account/repository/account_repository.dart';
 import '../bloc/sign_in_bloc.dart';
 import '../repository/sign_in_repository.dart';
 import 'sign_in_form.dart';
@@ -13,16 +17,17 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+    return CustomScaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocProvider(
           create: (context) => SignInBloc(
-            signInRepository: SignInRepository(
-              TokenRepository(),
-            ),
-          ),
+              accountRepository: AccountRepository(),
+              signInRepository: SignInRepository(
+                TokenRepository(),
+              ),
+              userJourneyRepository: UserJourneyRepository(),
+              sharedPreference: SharedPreference()),
           child: const SignInForm(),
         ),
       ),

@@ -1,0 +1,139 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
+import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
+import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../bloc/question/question_bloc.dart';
+import '../bloc/response/user_response_bloc.dart';
+import '../repository/ppi_question_repository.dart';
+import '../repository/ppi_response_repository.dart';
+import 'investment_style_question/investment_style_question_screen.dart';
+import 'investment_style_question/investment_style_result_end_screen.dart';
+import 'personalisation_question/personalisation_question_screen.dart';
+import 'personalisation_question/personalisation_result_end_screen.dart';
+import 'privacy_question/privacy_question_screen.dart';
+import 'privacy_question/privacy_result_failed_screen.dart';
+import 'privacy_question/privacy_result_success_screen.dart';
+
+part 'widget/ppi_progress_indicator_widget.dart';
+
+class PpiScreen extends StatelessWidget {
+  static const String route = '/ppi_screen';
+  final QuestionPageStep initialQuestionPage;
+  final QuestionPageType questionPageType;
+
+  const PpiScreen(
+      {Key? key,
+      required this.questionPageType,
+      required this.initialQuestionPage})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (_) => UserResponseBloc(
+                sharedPreference: SharedPreference(),
+                ppiResponseRepository: PpiResponseRepository())),
+        BlocProvider(
+            create: (_) => QuestionBloc(
+                ppiQuestionRepository: PpiQuestionRepository(),
+                questionPageType: questionPageType,
+                sharedPreference: SharedPreference())
+              ..add(const LoadQuestions())),
+        BlocProvider(
+            create: (_) =>
+                NavigationBloc<QuestionPageStep>(initialQuestionPage)),
+      ],
+      child: CustomScaffold(
+        enableBackNavigation: false,
+        body: BlocBuilder<QuestionBloc, QuestionState>(
+          buildWhen: (previous, current) =>
+              previous.response.state != current.response.state,
+          builder: (context, state) => CustomLayoutWithBlurPopUp(
+            loraPopUpMessageModel: LoraPopUpMessageModel(
+              title: 'Unable to get information',
+              subTitle:
+                  'There was an error when trying to get your Investment Style Question. Please try reloading the page',
+              primaryButtonLabel: 'RELOAD PAGE',
+              secondaryButtonLabel: 'CANCEL',
+              onSecondaryButtonTap: () => Navigator.pop(context),
+              onPrimaryButtonTap: () =>
+                  context.read<QuestionBloc>().add(const LoadQuestions()),
+            ),
+            showPopUp: state.response.state == ResponseState.error,
+            content: BlocConsumer<NavigationBloc<QuestionPageStep>,
+                NavigationState<QuestionPageStep>>(
+              listenWhen: (_, current) => current.lastPage == true,
+              listener: (context, state) {
+                Navigator.pop(context);
+              },
+              builder: (context, state) => Column(
+                children: [
+                  PpiProgressIndicatorWidget(
+                    questionPageType: questionPageType,
+                  ),
+                  Expanded(child: _pages(state)),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _pages(NavigationState navigationState) {
+    return BlocConsumer<QuestionBloc, QuestionState>(
+        listener: (context, state) {
+      if (state.response.state == ResponseState.loading) {
+        CustomLoadingOverlay.of(context).show();
+      } else {
+        CustomLoadingOverlay.of(context).dismiss();
+      }
+    }, builder: (context, state) {
+      switch (state.response.state) {
+        case ResponseState.success:
+          switch (navigationState.page) {
+            case QuestionPageStep.privacy:
+              return PrivacyQuestionScreen(
+                initialIndex: state.privacyQuestionIndex,
+              );
+            case QuestionPageStep.privacyResultSuccess:
+              return const PrivacyResultSuccessScreen();
+            case QuestionPageStep.privacyResultFailed:
+              return const PrivacyResultFailedScreen();
+            case QuestionPageStep.personalisation:
+              return PersonalisationQuestionScreen(
+                initialIndex: state.personalisationQuestionIndex,
+              );
+            case QuestionPageStep.personalisationResultEnd:
+              return const PersonalisationResultEndScreen();
+            case QuestionPageStep.investmentStyle:
+              return InvestmentStyleQuestionScreen(
+                key: UniqueKey(),
+                initialIndex: state.investmentStyleQuestionIndex,
+              );
+            case QuestionPageStep.investmentStyleResultEnd:
+              return const InvestmentStyleResultEndScreen();
+            default:
+              return const SizedBox.shrink();
+          }
+        default:
+          return const SizedBox.shrink();
+      }
+    });
+  }
+
+  static void open(BuildContext context,
+          {required Pair<QuestionPageType, QuestionPageStep> arguments}) =>
+      Navigator.pushNamed(context, route, arguments: arguments);
+}

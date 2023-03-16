@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/data/remote/asklora_api_client.dart';
+import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../repository/sign_up_repository.dart';
 
 part 'sign_up_event.dart';
@@ -11,9 +13,11 @@ part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  SignUpBloc({
-    required SignUpRepository signUpRepository,
-  })  : _signUpRepository = signUpRepository,
+  SignUpBloc(
+      {required SignUpRepository signUpRepository,
+      required SharedPreference sharedPreference})
+      : _signUpRepository = signUpRepository,
+        _sharedPreference = sharedPreference,
         super(const SignUpState()) {
     on<SignUpUsernameChanged>(_onUsernameChanged);
     on<SignUpPasswordChanged>(_onPasswordChanged);
@@ -21,6 +25,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   final SignUpRepository _signUpRepository;
+  final SharedPreference _sharedPreference;
 
   void _onUsernameChanged(
     SignUpUsernameChanged event,
@@ -58,18 +63,25 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   ) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _signUpRepository.signUp(
-          email: state.username, password: state.password);
+
+      final tempName = await _sharedPreference.readData(sfKeyPpiAccountId);
+
+      final data = await _signUpRepository.signUp(
+          email: state.username, password: state.password, username: tempName!);
+
+      await _sharedPreference.writeData(sfKeyEmail, state.username);
+
       emit(state.copyWith(response: data));
     } on ConflictException {
       emit(state.copyWith(
-          response:
-              BaseResponse.error('Account with this email already exists')));
+          response: BaseResponse.error(
+              message: 'Account with this email already exists')));
     } on BadRequestException {
       emit(state.copyWith(
-          response: BaseResponse.error('This password is too common.')));
+          response:
+              BaseResponse.error(message: 'This password is too common.')));
     } catch (e) {
-      emit(state.copyWith(response: BaseResponse.error(e.toString())));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }

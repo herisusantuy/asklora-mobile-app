@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../styles/color.dart';
+import '../styles/asklora_colors.dart';
 import 'custom_text.dart';
 
 class QuestionWidget extends StatelessWidget {
@@ -11,6 +11,7 @@ class QuestionWidget extends StatelessWidget {
   final String? selectedAnswer;
   final String errorText;
   final String keyOption;
+
   const QuestionWidget({
     Key? key,
     this.padding = EdgeInsets.zero,
@@ -47,7 +48,7 @@ class QuestionWidget extends StatelessWidget {
               errorText,
               padding: const EdgeInsets.only(top: 5),
               type: FontType.smallText,
-              color: COLORS.down,
+              color: AskLoraColors.down,
             ),
         ],
       ),
@@ -91,18 +92,20 @@ class QuestionWidget extends StatelessWidget {
 
   Color _borderColor(isSelected) {
     if (isSelected) {
-      return COLORS.primary;
+      return AskLoraColors.primaryGreen;
     } else {
       return Colors.black38;
     }
   }
 
   Color _backgroundColor(isSelected) {
-    return isSelected ? COLORS.primary.withAlpha(30) : Colors.transparent;
+    return isSelected
+        ? AskLoraColors.primaryGreen.withAlpha(30)
+        : Colors.transparent;
   }
 
   Color _textColor(isSelected) {
-    return isSelected ? COLORS.primary : COLORS.text;
+    return isSelected ? AskLoraColors.primaryGreen : AskLoraColors.text;
   }
 
   FontType _textTypeStyle(isSelected) {
@@ -114,7 +117,7 @@ class QuestionWidget extends StatelessWidget {
       return const Icon(
         Icons.check,
         size: 20,
-        color: COLORS.primary,
+        color: AskLoraColors.primaryGreen,
       );
     } else {
       return const SizedBox(

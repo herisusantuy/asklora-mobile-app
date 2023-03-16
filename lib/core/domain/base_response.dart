@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 enum ResponseState { success, error, unknown, loading }
 
 class BaseResponse<T> extends Equatable {
+  static const String errorMessage = 'Something went wrong! Please try again.';
+
   final ResponseState state;
   final T? data;
   final String message;
@@ -23,7 +25,8 @@ class BaseResponse<T> extends Equatable {
         state: ResponseState.success, data: data, message: message);
   }
 
-  static BaseResponse<T> error<T>(String message) {
+  static BaseResponse<T> error<T>(
+      {String message = BaseResponse.errorMessage}) {
     return BaseResponse(state: ResponseState.error, message: message);
   }
 

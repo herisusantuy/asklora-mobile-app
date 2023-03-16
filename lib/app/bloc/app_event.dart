@@ -8,3 +8,20 @@ abstract class AppEvent extends Equatable {
 }
 
 class AppLaunched extends AppEvent {}
+
+class AppLanguageChangeEvent extends AppEvent {
+  final LocaleType language;
+
+  const AppLanguageChangeEvent(this.language);
+}
+
+class SaveUserJourney extends AppEvent {
+  final UserJourney userJourney;
+  final String? data;
+
+  const SaveUserJourney(this.userJourney, {this.data});
+}
+
+class GetUserJourneyFromLocal extends AppEvent {
+  const GetUserJourneyFromLocal();
+}

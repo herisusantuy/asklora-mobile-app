@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_onfido/flutter_onfido.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/pair.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
+import '../../../../core/onfido/start_onfido.dart';
+import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
-import '../../../../home_screen.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
+import '../../../onboarding/ppi/presentation/ppi_screen.dart';
+import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../../orders/regular/presentation/regular_order_home_screen.dart';
 import '../../../payment/deposits/presentation/deposit_screen.dart';
 import '../../../payment/withdrawal/presentation/withdrawal_screen.dart';
-import '../../../ppi/presentation/question_screen.dart';
 import '../../../user/account/bloc/account_bloc.dart';
 import '../../../user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../../user/account/presentation/user_profile/user_profile_screen.dart';
@@ -39,7 +43,9 @@ class SignInSuccessScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => SignOutBloc(
               tokenRepository: TokenRepository(),
-              signOutRepository: SignOutRepository()),
+              signOutRepository: SignOutRepository(),
+              sharedPreference: SharedPreference(),
+              secureStorage: SecureStorage()),
         ),
       ],
       child: Scaffold(
@@ -74,25 +80,13 @@ class SignInSuccessScreen extends StatelessWidget {
                           break;
                       }
                       if (state is OnfidoSdkToken) {
-                        // TODO: Refactor this into Widget and Bloc
                         try {
-                          await FlutterOnfido.start(
-                            config: OnfidoConfig(
-                              sdkToken: state.token,
-                              flowSteps: OnfidoFlowSteps(
-                                welcome: false,
-                                captureDocument: OnfidoCaptureDocumentStep(
-                                    countryCode: OnfidoCountryCode.HKG,
-                                    docType: OnfidoDocumentType
-                                        .NATIONAL_IDENTITY_CARD),
-                                captureFace: OnfidoCaptureFaceStep(
-                                    OnfidoCaptureType.PHOTO),
-                              ),
-                            ),
-                            iosAppearance: const OnfidoIOSAppearance(),
-                          ).then((value) => context.read<AccountBloc>().add(
-                              UpdateOnfidoResult(Reason.userCompleted.value,
-                                  'Onfido SDK', state.token)));
+                          await startOnfido(state.token).then((value) => context
+                              .read<AccountBloc>()
+                              .add(UpdateOnfidoResult(
+                                  Reason.userCompleted.value,
+                                  'Onfido SDK',
+                                  state.token)));
                         } on PlatformException {
                           context.read<AccountBloc>().add(UpdateOnfidoResult(
                               Reason.userExited.value,
@@ -144,7 +138,9 @@ class SignInSuccessScreen extends StatelessWidget {
       onClick: () => RegularOrderHomeScreen.open(context));
 
   Widget _questionScreen(BuildContext context) => CustomTextButton(
-      buttonText: 'Question PPI', onClick: () => QuestionScreen.open(context));
+      buttonText: 'Question PPI',
+      onClick: () => PpiScreen.open(context,
+          arguments: Pair(QuestionPageType.privacy, QuestionPageStep.privacy)));
 
   Widget _userButton(BuildContext context) {
     return InkWell(
@@ -174,8 +170,8 @@ class SignInSuccessScreen extends StatelessWidget {
                   .showError();
               break;
             case ResponseState.success:
-              CustomSnackBar(context).setMessage(state.response.message).show();
-              HomeScreen.openReplace(context);
+              CustomInAppNotification.show(context, 'Logged out successfully!');
+              CarouselScreen.open(context);
               break;
             default:
               break;
@@ -217,4 +213,7 @@ class SignInSuccessScreen extends StatelessWidget {
     Navigator.of(context)
         .pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false);
   }
+
+  static void open(BuildContext context) =>
+      Navigator.of(context).pushNamed(route);
 }

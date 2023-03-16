@@ -59,13 +59,20 @@ class MockResetPasswordRepository extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i2.BaseResponse<_i6.ResetPasswordResponse>> resetPassword(
-          {required String? email}) =>
+  _i5.Future<_i2.BaseResponse<_i6.ResetPasswordResponse>> resetPassword({
+    required String? token,
+    required String? password,
+    required String? confirmPassword,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #resetPassword,
           [],
-          {#email: email},
+          {
+            #token: token,
+            #password: password,
+            #confirmPassword: confirmPassword,
+          },
         ),
         returnValue:
             _i5.Future<_i2.BaseResponse<_i6.ResetPasswordResponse>>.value(
@@ -74,7 +81,11 @@ class MockResetPasswordRepository extends _i1.Mock
           Invocation.method(
             #resetPassword,
             [],
-            {#email: email},
+            {
+              #token: token,
+              #password: password,
+              #confirmPassword: confirmPassword,
+            },
           ),
         )),
       ) as _i5.Future<_i2.BaseResponse<_i6.ResetPasswordResponse>>);

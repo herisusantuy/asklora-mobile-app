@@ -67,7 +67,6 @@ class MockBankAccountRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<_i5.AddBankAccountRequest>>);
-
   @override
   _i4.Future<_i2.BaseResponse<_i6.RegisteredBankAccounts>> getBankAccount() =>
       (super.noSuchMethod(
@@ -85,7 +84,6 @@ class MockBankAccountRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<_i6.RegisteredBankAccounts>>);
-
   @override
   _i4.Future<List<_i7.BankDetails>> getBankDetails() => (super.noSuchMethod(
         Invocation.method(

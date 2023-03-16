@@ -98,7 +98,7 @@ class ControlledPersonForm extends StatelessWidget {
             BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
           builder: (context, state) => CustomCountryPicker(
             key: const Key('controlled_person_company_country_input'),
-            title: 'Company Country',
+            label: 'Company Country',
             initialValue: state.controlledPersonCompanyCountry,
             onSelect: (Country country) => context
                 .read<DisclosureAffiliationBloc>()

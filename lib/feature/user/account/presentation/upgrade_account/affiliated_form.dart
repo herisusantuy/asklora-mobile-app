@@ -97,7 +97,7 @@ class AffiliateForm extends StatelessWidget {
             BlocBuilder<DisclosureAffiliationBloc, DisclosureAffiliationState>(
           builder: (context, state) => CustomCountryPicker(
             key: const Key('affiliate_company_country_input'),
-            title: 'Company Country',
+            label: 'Company Country',
             initialValue: state.affiliateCompanyCountry,
             onSelect: (Country country) => context
                 .read<DisclosureAffiliationBloc>()

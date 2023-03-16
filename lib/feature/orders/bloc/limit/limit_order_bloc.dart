@@ -50,9 +50,7 @@ class LimitOrderBloc extends Bloc<LimitOrderEvent, LimitOrderState> {
           await _ordersRepository.submitOrder(orderRequest: event.orderRequest);
       emit(state.copyWith(response: data));
     } catch (e) {
-      emit(state.copyWith(
-          response: BaseResponse.error(
-              'Something went wrong, please try again later')));
+      emit(state.copyWith(response: BaseResponse.error()));
     }
   }
 }

@@ -17,7 +17,7 @@ import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/t
 import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/trusted_contact.dart';
 import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/upgrade_account_request.dart';
 import 'package:asklora_mobile_app/feature/user/account/repository/account_repository.dart';
-import 'package:asklora_mobile_app/feature/user/account/repository/signing_broker_agreement_repository.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/signing_broker_agreement_repository.dart';
 import 'package:asklora_mobile_app/feature/user/kyc/domain/onfido_token_response.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -108,23 +108,17 @@ void main() async {
                   financialProfileBloc.state.employmentStatus.name),
           agreements: [
             Agreement(
-                agreement: 'MA',
-                ipAddress: ipAddress,
-                signedAt: signedAt,
-                signature:
-                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+              agreement: 'MA',
+              ipAddress: ipAddress,
+            ),
             Agreement(
-                agreement: 'AA',
-                ipAddress: ipAddress,
-                signedAt: signedAt,
-                signature:
-                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+              agreement: 'AA',
+              ipAddress: ipAddress,
+            ),
             Agreement(
-                agreement: 'CA',
-                ipAddress: ipAddress,
-                signedAt: signedAt,
-                signature:
-                    'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+              agreement: 'CA',
+              ipAddress: ipAddress,
+            ),
           ]);
       taxInfoReq = TaxInfoRequest(
           fullName:
@@ -139,8 +133,6 @@ void main() async {
           foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
           dateOfBirth:
               parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
-          signature:
-              'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
           date: parseDateFormatYYmmdd(DateTime.now().toString()),
           signerFullName:
               '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',
@@ -181,17 +173,11 @@ void main() async {
         'emits `status success` WHEN '
         'Tap submit button',
         build: () {
-          when(secureStorage.readSecureData('email'))
+          when(secureStorage.readData('email'))
               .thenAnswer((_) => Future.value(''));
-
-          /* when(accountRepository.upgradeAccount(upgradeAccountRequest))
-              .thenAnswer((_) => Future.value(const UpgradeAccountRequest()));*/
 
           when(accountRepository.upgradeAccount(upgradeAccountRequest))
               .thenAnswer((_) => Future.value(true));
-
-          /*when(accountRepository.submitTaxInfo(taxInfoReq))
-              .thenAnswer((_) => Future.value( TaxInfoRequest()));*/
 
           when(accountRepository.submitTaxInfo(taxInfoReq))
               .thenAnswer((_) => Future.value(true));

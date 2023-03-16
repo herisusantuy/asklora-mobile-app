@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import '../utils/formatters/phone_input_formatter/phone_input_formatter.dart';
 import 'clearable_text_field.dart';
 import 'custom_country_picker.dart';
-import 'custom_text.dart';
 
 class CustomPhoneNumberInput extends StatelessWidget {
   static const String defaultSelectedCountryCode = '852';
@@ -25,53 +24,44 @@ class CustomPhoneNumberInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
-        const CustomText(
-          'Country Code + Phone Number',
-          type: FontType.formTitle,
+        Expanded(
+            flex: 1,
+            child: CustomCountryPicker(
+              label: 'Country Code',
+              initialValue: initialValueOfCodeArea != null &&
+                      initialValueOfCodeArea!.isNotEmpty
+                  ? '+$initialValueOfCodeArea'
+                  : null,
+              hintText: '',
+              showPhoneCode: true,
+              onSelect: onChangedCodeArea,
+            )),
+        const SizedBox(
+          width: 8,
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 5.0),
-          child: Row(
-            children: [
-              Expanded(
-                  flex: 1,
-                  child: CustomCountryPicker(
-                      initialValue: initialValueOfCodeArea != null &&
-                              initialValueOfCodeArea!.isNotEmpty
-                          ? '+$initialValueOfCodeArea'
-                          : null,
-                      hintText: '',
-                      showPhoneCode: true,
-                      onSelect: onChangedCodeArea)),
-              const SizedBox(
-                width: 8,
-              ),
-              Expanded(
-                  flex: 2,
-                  child: ClearableTextFormField(
-                    initialValue: initialValueOfPhoneNumber ?? '',
-                    textInputType: TextInputType.number,
-                    textInputFormatterList: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      PhoneInputFormatter(
-                        onPhoneNumberChange: (s) => onChangePhoneNumber(s),
-                        countryCode: initialValueOfCodeArea == null ||
-                                initialValueOfCodeArea!.isEmpty
-                            ? '852'
-                            : initialValueOfCodeArea,
-                      )
-                    ],
-                    onClear: () => onChangePhoneNumber(''),
-                    hintText: 'Phone Number',
-                    labelText: 'Phone Number',
-                    onChanged: (s) => {},
-                  ))
-            ],
-          ),
-        ),
+        Expanded(
+            flex: 2,
+            child: ClearableTextFormField(
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              initialValue: initialValueOfPhoneNumber ?? '',
+              textInputType: TextInputType.number,
+              textInputFormatterList: [
+                FilteringTextInputFormatter.digitsOnly,
+                PhoneInputFormatter(
+                  onPhoneNumberChange: (s) => onChangePhoneNumber(s),
+                  countryCode: initialValueOfCodeArea == null ||
+                          initialValueOfCodeArea!.isEmpty
+                      ? '852'
+                      : initialValueOfCodeArea,
+                )
+              ],
+              onClear: () => onChangePhoneNumber(''),
+              hintText: 'Phone Number',
+              labelText: 'Phone Number',
+              onChanged: (s) => {},
+            ))
       ],
     );
   }

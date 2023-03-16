@@ -1,5 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
+import 'package:asklora_mobile_app/core/utils/storage/secure_storage.dart';
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/bloc/sign_out_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/domain/sign_out_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/repository/sign_out_repository.dart';
@@ -16,21 +18,29 @@ class DioAdapterMock extends Mock implements HttpClientAdapter {}
 @GenerateMocks([SignOutRepository])
 @GenerateMocks([SignOutApiClient])
 @GenerateMocks([Repository])
+@GenerateMocks([SharedPreference])
+@GenerateMocks([SecureStorage])
 void main() async {
   group('Sign Up Screen Bloc Tests', () {
     late MockRepository tokenRepository;
     late SignOutBloc signOutBloc;
     late MockSignOutRepository signOutRepository;
+    late SharedPreference sharedPreference;
+    late SecureStorage secureStorage;
 
     setUpAll(() async {
       signOutRepository = MockSignOutRepository();
       tokenRepository = MockRepository();
+      sharedPreference = MockSharedPreference();
+      secureStorage = MockSecureStorage();
     });
 
     setUp(() async {
       signOutBloc = SignOutBloc(
           tokenRepository: tokenRepository,
-          signOutRepository: signOutRepository);
+          signOutRepository: signOutRepository,
+          sharedPreference: sharedPreference,
+          secureStorage: secureStorage);
     });
 
     test('Sign Out Bloc init state is should be `unknown`', () {

@@ -1,0 +1,29 @@
+{
+  "@@locale": "zh",
+      "buttonNext": "下一步",
+      "buttonCreateAnAccount": "建立帳戶",
+      "buttonLetsBegin": "立即開始",
+      "buttonHaveAnAccount": "已有賬戶？",
+      "carouselIntro1": "投資，一樣要 Fit！",
+      "carouselIntro2": "AI 教練指導",
+      "carouselIntro3": "個人化體驗",
+      "carouselIntro4": "AI 全自動交易",
+      "askNameScreenPlaceholder": "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？",
+      "askNameScreenTextFieldHint": "你的名字",
+      "greetingScreenTitle": "Alright! 你準備開始 FinFit 未先？",
+      "greetingScreenSubTitle": "訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ ",
+      "ppiQuestion1": "Hi {name}! 撇除 MPFs，你有幾耐投資經驗 ？",
+      "@ppiQuestion1": {
+            "placeholders": {
+                "firstName": {
+                          "type": "String"
+                }
+            }
+      },
+      "tooltip_bot_details_start_date": "Lora開始Botstocks交易",
+      "tooltip_bot_details_investment_period": "你定下的投資時間，Botstock將會於此期間內自動買賣股票。",
+      "tooltip_bot_details_est_max_profit": "Bot將出售以獲取最大利潤的股票價位。",
+      "tooltip_bot_details_est_max_loss": "Bot將出售以限制損失的最低股票價位。",
+      "tooltip_bot_details_est_take_profit": "Plank Bot將出售以獲取利潤的預設最高股票價位",
+      "tooltip_bot_details_est_stop_loss": "Plank Bot將出售以限制過分損失的預設最低股票價位"
+}

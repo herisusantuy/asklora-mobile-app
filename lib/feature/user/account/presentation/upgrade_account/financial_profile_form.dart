@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/presentation/custom_dropdown.dart';
 import '../../../../../core/presentation/custom_text_input.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../bloc/account_bloc.dart';
 import '../../bloc/financial_profile/bloc/financial_profile_bloc.dart';
 import 'widgets/upgrade_account_button.dart';
@@ -47,12 +47,11 @@ class FinancialProfileForm extends StatelessWidget {
       builder: (context, state) {
         return CustomDropdown(
             key: const Key('account_annual_income_select'),
-            padding: const EdgeInsets.only(top: 20),
-            label: 'Annual Household Income',
-            hintName: state.annualHouseholdIncome.isNotEmpty
+            labelText: 'Annual Household Income',
+            hintText: state.annualHouseholdIncome.isNotEmpty
                 ? state.annualHouseholdIncome
                 : '-',
-            value: state.annualHouseholdIncome,
+            initialValue: state.annualHouseholdIncome,
             itemsList: incomeRange,
             onChanged: (value) => context
                 .read<FinancialProfileBloc>()
@@ -68,12 +67,11 @@ class FinancialProfileForm extends StatelessWidget {
       builder: (context, state) {
         return CustomDropdown(
             key: const Key('account_investible_liquid_assets_select'),
-            padding: const EdgeInsets.only(top: 10),
-            label: 'Investible Liquid Assets',
-            hintName: state.investibleLiquidAssets.isNotEmpty
+            labelText: 'Investible Liquid Assets',
+            hintText: state.investibleLiquidAssets.isNotEmpty
                 ? state.investibleLiquidAssets
                 : '-',
-            value: state.investibleLiquidAssets,
+            initialValue: state.investibleLiquidAssets,
             itemsList: incomeRange,
             onChanged: (value) => context
                 .read<FinancialProfileBloc>()
@@ -91,13 +89,12 @@ class FinancialProfileForm extends StatelessWidget {
       builder: (context, state) {
         return CustomDropdown(
             key: const Key('account_funding_source_select'),
-            padding: const EdgeInsets.only(top: 10),
-            label: 'Account Funding Source',
-            hintName: state.fundingSource != FundingSource.unknown
+            labelText: 'Account Funding Source',
+            hintText: state.fundingSource != FundingSource.unknown
                 ? state.fundingSource.name
                 : '-',
             itemsList: itemList,
-            value: state.fundingSource.name,
+            initialValue: state.fundingSource.name,
             onChanged: (value) {
               final fundingSource = FundingSource.values.byName(value!);
               context
@@ -119,13 +116,12 @@ class FinancialProfileForm extends StatelessWidget {
           children: [
             CustomDropdown(
                 key: const Key('account_employment_status_select'),
-                padding: const EdgeInsets.only(top: 10),
-                label: 'Employment Status',
-                hintName: state.employmentStatus != EmploymentStatus.unknown
+                labelText: 'Employment Status',
+                hintText: state.employmentStatus != EmploymentStatus.unknown
                     ? state.employmentStatus.name
                     : '-',
                 itemsList: itemList,
-                value: state.employmentStatus.name,
+                initialValue: state.employmentStatus.name,
                 onChanged: (value) {
                   final employmentStatus =
                       EmploymentStatus.values.byName(value!);
@@ -166,11 +162,10 @@ class FinancialProfileForm extends StatelessWidget {
           children: [
             CustomDropdown(
               key: const Key('account_occupation_select'),
-              padding: const EdgeInsets.only(top: 10),
-              label: 'Occupation',
-              hintName: state.occupation ?? '-',
+              labelText: 'Occupation',
+              hintText: state.occupation ?? '-',
               itemsList: items,
-              value: state.occupation ?? '',
+              initialValue: state.occupation ?? '',
               onChanged: (value) => context
                   .read<FinancialProfileBloc>()
                   .add(FinancialProfileOccupationChanged(value!)),

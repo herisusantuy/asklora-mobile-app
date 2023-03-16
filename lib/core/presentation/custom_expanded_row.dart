@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
+import '../styles/asklora_text_styles.dart';
 import 'custom_text.dart';
+import 'custom_text_new.dart';
 
 class CustomExpandedRow extends StatelessWidget {
   final String label;
   final String text;
-  final FontType fontType;
+  final TextStyle? textStyle;
   final Widget? child;
   final EdgeInsets padding;
   final int flex1;
   final int flex2;
   final TextAlign textValueAlign;
   final CrossAxisAlignment crossAxisAlignment;
+  final FontType? fontType;
 
   const CustomExpandedRow(this.label,
       {this.text = '',
-      this.fontType = FontType.bodyText,
+      this.fontType,
+      this.textStyle,
       this.child,
       this.flex1 = 2,
       this.flex2 = 1,
@@ -35,16 +39,16 @@ class CustomExpandedRow extends StatelessWidget {
         children: [
           Expanded(
               flex: flex1,
-              child: CustomText(
+              child: CustomTextNew(
                 label,
-                type: fontType,
+                style: textStyle ?? AskLoraTextStyles.body1,
               )),
           Expanded(
               flex: flex2,
               child: child ??
-                  CustomText(
+                  CustomTextNew(
                     text,
-                    type: fontType,
+                    style: textStyle ?? AskLoraTextStyles.body1,
                     textAlign: textValueAlign,
                   ))
         ],

@@ -5,9 +5,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:asklora_mobile_app/feature/user/account/repository/signing_broker_agreement_repository.dart'
+import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/signing_broker_agreement_repository.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:signature/signature.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -30,12 +31,20 @@ class MockSigningBrokerAgreementRepository extends _i1.Mock
   }
 
   @override
-  _i3.Future<bool> openAlpacaCustomerAgreement(String? filePath) =>
-      (super.noSuchMethod(
+  _i3.Future<bool> openW8BenForm(String? filePath) => (super.noSuchMethod(
         Invocation.method(
           #openAlpacaCustomerAgreement,
           [filePath],
         ),
         returnValue: _i3.Future<bool>.value(false),
       ) as _i3.Future<bool>);
+  @override
+  _i3.Future<String> getCustomerSignature(List<_i4.Point>? points) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getCustomerSignature,
+          [points],
+        ),
+        returnValue: _i3.Future<String>.value(''),
+      ) as _i3.Future<String>);
 }

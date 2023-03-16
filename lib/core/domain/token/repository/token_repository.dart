@@ -22,24 +22,24 @@ class TokenRepository implements Repository {
 
   @override
   void saveAccessToken(String token) async {
-    await _secureStorage.writeSecureData(Repository.keyAuthTokenAccess, token);
+    await _secureStorage.writeData(Repository.keyAuthTokenAccess, token);
   }
 
   @override
   void saveRefreshToken(String token) async {
-    await _secureStorage.writeSecureData(Repository.keyAuthTokenRefresh, token);
+    await _secureStorage.writeData(Repository.keyAuthTokenRefresh, token);
   }
 
   @override
   Future<String?> getAccessToken() async =>
-      await _secureStorage.readSecureData(Repository.keyAuthTokenAccess);
+      await _secureStorage.readData(Repository.keyAuthTokenAccess);
 
   @override
   Future<String?> getRefreshToken() async =>
-      await _secureStorage.readSecureData(Repository.keyAuthTokenRefresh);
+      await _secureStorage.readData(Repository.keyAuthTokenRefresh);
 
   @override
-  Future<void> deleteAll() async => await _secureStorage.deleteAllSecureData();
+  Future<void> deleteAll() async => await _secureStorage.deleteAllData();
 
   @override
   Future<bool> isTokenValid() async {

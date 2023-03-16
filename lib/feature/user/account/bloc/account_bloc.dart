@@ -15,7 +15,7 @@ import '../domain/upgrade_account/tax_info_request.dart';
 import '../domain/upgrade_account/trusted_contact.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../repository/account_repository.dart';
-import '../repository/signing_broker_agreement_repository.dart';
+import '../../../onboarding/kyc/repository/signing_broker_agreement_repository.dart';
 import 'address_proof/bloc/address_proof_bloc.dart';
 import 'basic_information/bloc/basic_information_bloc.dart';
 import 'country_of_tax_residence/bloc/country_of_tax_residence_bloc.dart';
@@ -76,23 +76,17 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   List<Agreement> _generateAgreementList(String ipAddress) => [
         Agreement(
-            agreement: 'MA',
-            signedAt: signingBrokerAgreementBloc.state.signedTime,
-            ipAddress: ipAddress,
-            signature:
-                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+          agreement: 'MA',
+          ipAddress: ipAddress,
+        ),
         Agreement(
-            agreement: 'AA',
-            signedAt: signingBrokerAgreementBloc.state.signedTime,
-            ipAddress: ipAddress,
-            signature:
-                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}'),
+          agreement: 'AA',
+          ipAddress: ipAddress,
+        ),
         Agreement(
-            agreement: 'CA',
-            signedAt: signingBrokerAgreementBloc.state.signedTime,
-            ipAddress: ipAddress,
-            signature:
-                'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}')
+          agreement: 'CA',
+          ipAddress: ipAddress,
+        )
       ];
 
   List<Context> _generateContextList() {
@@ -138,7 +132,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   _onUpgradeAccount(UpgradeAccount event, Emitter<AccountState> emit) async {
-    var email = await _secureStorage.readSecureData('email');
+    var email = await _secureStorage.readData('email');
 
     try {
       emit(state.copyWith(status: AccountStatus.upgradingAccount));
@@ -223,8 +217,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         foreignTaxId: countryOfTaxResidenceBloc.state.tinNumber,
         dateOfBirth:
             parseDateFormatYYmmdd(basicInformationBloc.state.dateOfBirth),
-        signature:
-            'data:image/png;base64,${signingBrokerAgreementBloc.state.customerSignature}',
         date: parseDateFormatYYmmdd(DateTime.now().toString()),
         signerFullName:
             '${basicInformationBloc.state.firstName} ${basicInformationBloc.state.middleName} ${basicInformationBloc.state.lastName}',

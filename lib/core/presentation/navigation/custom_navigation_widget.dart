@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../values/app_values.dart';
 import '../custom_text.dart';
 import 'bloc/navigation_bloc.dart';
 
@@ -12,6 +13,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
   final Function? onSubmit;
   final Function? onBackPressed;
   final CrossAxisAlignment crossAxisAlignment;
+  final EdgeInsets padding;
   final Widget? header;
 
   const CustomNavigationWidget(
@@ -23,13 +25,15 @@ class CustomNavigationWidget<T> extends StatelessWidget {
       this.onBackPressed,
       this.crossAxisAlignment = CrossAxisAlignment.start,
       this.header,
+      this.padding = AppValues.screenHorizontalPadding,
       Key? key})
       : super(key: key);
 
   void _onTapBack(BuildContext context) {
-    context.read<NavigationBloc<T>>().add(const PagePop());
     if (onBackPressed != null) {
       onBackPressed!();
+    } else {
+      context.read<NavigationBloc<T>>().add(const PagePop());
     }
   }
 
@@ -46,17 +50,17 @@ class CustomNavigationWidget<T> extends StatelessWidget {
           children: [
             header ??
                 Material(
-                  color: Colors.blue,
+                  color: Colors.transparent,
                   child: Row(
                     children: [
                       InkWell(
                           onTap: () => _onTapBack(context),
                           child: const Padding(
-                            padding: EdgeInsets.all(8),
+                            padding: EdgeInsets.all(12),
                             child: Icon(
-                              Icons.chevron_left,
-                              size: 40,
-                              color: Colors.white,
+                              Icons.arrow_back_rounded,
+                              size: 26,
+                              color: Colors.black,
                             ),
                           )),
                       if (title.isNotEmpty)
@@ -64,7 +68,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
                           child: CustomText(
                             title,
                             type: FontType.h3,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         )
                     ],
@@ -72,8 +76,7 @@ class CustomNavigationWidget<T> extends StatelessWidget {
                 ),
             Expanded(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                padding: padding,
                 child: Container(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   child: child,

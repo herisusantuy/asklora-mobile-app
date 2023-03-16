@@ -9,7 +9,7 @@ import 'reset_password_request.dart';
 class ResetPasswordApiClient {
   Future<Response> resetPassword(ResetPasswordRequest request) async {
     var response = await AskloraApiClient().post(
-      endpoint: endpointResetPassword,
+      endpoint: endpointConfirmPassword,
       payload: json.encode(
         request.toJson(),
       ),

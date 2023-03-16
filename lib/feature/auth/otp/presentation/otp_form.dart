@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_snack_bar.dart';
-import '../../../../core/presentation/custom_text.dart';
-import '../../../../core/presentation/custom_text_button.dart';
-import '../../../../core/styles/color.dart';
+import '../../../../core/presentation/lora_memoji_header.dart';
+import '../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../core/styles/asklora_colors.dart';
 import '../../sign_up/presentation/sign_up_success_screen.dart';
 import '../bloc/otp_bloc.dart';
 
@@ -16,7 +17,7 @@ part 'otp_box.dart';
 class OtpForm extends StatelessWidget {
   final Function onOtpSubmit;
 
-  final Function onOtpResend;
+  final Function() onOtpResend;
 
   const OtpForm(
       {required this.onOtpResend, required this.onOtpSubmit, Key? key})
@@ -41,39 +42,28 @@ class OtpForm extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _padding(),
-              _titleWithGuide(),
-              _otpBox(context),
-              _padding(),
-              _requestOtp(),
-            ],
-          ),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _padding(),
+                    const LoraMemojiHeader(
+                        text:
+                            'Please enter the OTP sent on your registered Phone Number.'),
+                    _otpBox(context),
+                  ],
+                ),
+              ),
+            ),
+            _padding(),
+            _requestOtp(),
+            _signUpAgainButton(context)
+          ],
         ),
       ),
-    );
-  }
-
-  Widget _titleWithGuide() {
-    return Column(
-      key: const Key('title_with_guide'),
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const CustomText(
-          'Verification Code',
-          type: FontType.h3,
-        ),
-        _padding(),
-        const CustomText(
-          'Please enter the OTP sent on your registered Email ID.',
-          type: FontType.h5,
-          textAlign: TextAlign.center,
-        ),
-      ],
     );
   }
 
@@ -93,21 +83,26 @@ class OtpForm extends StatelessWidget {
             previous.resetTime != current.resetTime ||
             previous.response.state != current.response.state,
         builder: (context, state) {
-          if (state.disableRequest) {
-            return CustomText(
-                key: const Key('request_otp_instruction'),
-                'Request another otp in ${_formatTimeMMSS(state.resetTime)}');
-          } else {
-            return CustomTextButton(
-              key: const Key('request_otp_button'),
-              isLoading: state.response.state == ResponseState.loading,
-              buttonText: 'Request OTP',
-              onClick: () => onOtpResend(),
-              primaryColor: COLORS.text,
-              borderRadius: 32,
-            );
-          }
+          return PrimaryButton(
+            buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
+            key: const Key('request_otp_button'),
+            fontStyle: FontStyle.normal,
+            disabled: state.disableRequest,
+            label: state.disableRequest
+                ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
+                : 'RESEND OTP CODE',
+            onTap: onOtpResend,
+          );
         });
+  }
+
+  Widget _signUpAgainButton(BuildContext context) {
+    return CustomTextButton(
+      key: const Key('sign_up_again_button'),
+      margin: const EdgeInsets.only(top: 28, bottom: 28),
+      label: 'SIGN UP AGAIN',
+      onTap: () => Navigator.pop(context),
+    );
   }
 
   Padding _padding() => const Padding(

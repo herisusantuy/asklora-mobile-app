@@ -70,7 +70,7 @@ class WireTransferScreen extends StatelessWidget {
     if (bankAccountState.response.data != null &&
         bankAccountState.response.data.wireBankAccounts.isNotEmpty &&
         depositState.useExistingBankAccount) {
-      return DepositPageStep.acknowledged;
+      return DepositPageStep.uploadProof;
     } else {
       return DepositPageStep.uploadProof;
     }

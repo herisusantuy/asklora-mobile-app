@@ -1,4 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart';
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
+import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/bloc/sign_up_bloc.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/domain/sign_up_api_client.dart';
@@ -18,17 +21,22 @@ class MockCounterBloc extends MockBloc<SignUpEvent, SignUpState>
 
 @GenerateMocks([SignUpRepository])
 @GenerateMocks([SignUpApiClient])
+@GenerateMocks([SharedPreference])
 void main() async {
   group('Sign Up Screen Bloc Tests', () {
     late MockSignUpRepository signUpRepository;
+    late SharedPreference sharedPreference;
     late SignUpBloc signUpBloc;
 
     setUpAll(() async {
       signUpRepository = MockSignUpRepository();
+      sharedPreference = MockSharedPreference();
     });
 
     setUp(() async {
-      signUpBloc = SignUpBloc(signUpRepository: signUpRepository);
+      signUpBloc = SignUpBloc(
+          signUpRepository: signUpRepository,
+          sharedPreference: sharedPreference);
     });
 
     test('Sign Up Bloc init state is should be `unknown`', () {
@@ -128,7 +136,7 @@ void main() async {
         'emits `SignUpStatus.unknown` and `isPasswordValid = true` WHEN '
         'entered correct password',
         build: () => signUpBloc,
-        act: (bloc) => bloc.add(const SignUpPasswordChanged('password1')),
+        act: (bloc) => bloc.add(const SignUpPasswordChanged('Password1')),
         expect: () => {
               SignUpState(
                   response: BaseResponse.unknown(),
@@ -136,7 +144,7 @@ void main() async {
                   isPasswordValid: true,
                   username: '',
                   usernameErrorText: '',
-                  password: 'password1',
+                  password: 'Password1',
                   passwordErrorText: '')
             });
 
@@ -173,7 +181,7 @@ void main() async {
         build: () => signUpBloc,
         act: (bloc) => {
               bloc.add(const SignUpUsernameChanged('kk@test.com')),
-              bloc.add(const SignUpPasswordChanged('password1')),
+              bloc.add(const SignUpPasswordChanged('Password1')),
             },
         expect: () => {
               SignUpState(
@@ -190,7 +198,7 @@ void main() async {
                   isPasswordValid: true,
                   username: 'kk@test.com',
                   usernameErrorText: '',
-                  password: 'password1',
+                  password: 'Password1',
                   passwordErrorText: '')
             });
 
@@ -199,17 +207,36 @@ void main() async {
         'entered correct password and correct email WHEN '
         'pressed `Submit` button',
         build: () {
+          when(sharedPreference.writeData(sfKeyEmail, 'kk@test.com'))
+              .thenAnswer((_) => Future.value(true));
+
+          when(sharedPreference.readData(sfKeyPpiAccountId))
+              .thenAnswer((_) => Future.value('AAAA|BBBB|CCCC'));
+
+          when(sharedPreference.readIntData(sfKeyPpiUserId))
+              .thenAnswer((_) => Future.value(101));
+
           when(signUpRepository.signUp(
-                  email: 'kk@test.com', password: 'password1'))
+                  email: 'kk@test.com',
+                  password: 'Password1',
+                  username: 'AAAA|BBBB|CCCC'))
               .thenAnswer((_) => Future.value(
                   const BaseResponse<SignUpResponse>(
                       data: SignUpResponse('Sign Up Successful'),
+                      state: ResponseState.success)));
+
+          when(signUpRepository.getVerificationEmail(
+                  getVerificationEmailRequest:
+                      GetOtpRequest('kk@test.com', OtpType.register.value)))
+              .thenAnswer((_) => Future.value(
+                  const BaseResponse<GetOtpResponse>(
+                      data: GetOtpResponse('Success'),
                       state: ResponseState.success)));
           return signUpBloc;
         },
         act: (bloc) => {
               bloc.add(const SignUpUsernameChanged('kk@test.com')),
-              bloc.add(const SignUpPasswordChanged('password1')),
+              bloc.add(const SignUpPasswordChanged('Password1')),
               bloc.add(const SignUpSubmitted()),
             },
         expect: () => {
@@ -223,7 +250,7 @@ void main() async {
                 isEmailValid: true,
                 isPasswordValid: true,
                 username: 'kk@test.com',
-                password: 'password1',
+                password: 'Password1',
               ),
               SignUpState(
                   response: BaseResponse.loading(),
@@ -231,7 +258,7 @@ void main() async {
                   isPasswordValid: true,
                   username: 'kk@test.com',
                   usernameErrorText: '',
-                  password: 'password1',
+                  password: 'Password1',
                   passwordErrorText: ''),
               const SignUpState(
                   response: BaseResponse<SignUpResponse>(
@@ -241,7 +268,7 @@ void main() async {
                   isPasswordValid: true,
                   username: 'kk@test.com',
                   usernameErrorText: '',
-                  password: 'password1',
+                  password: 'Password1',
                   passwordErrorText: '')
             });
 

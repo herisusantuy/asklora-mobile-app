@@ -22,7 +22,7 @@ class NotEligibleScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const CustomText(
-                'Sorry, you\'re not eligible for AskLORA.\nCurrently only eligible for HK Permanent Resident and Non-US Citizen',
+                'Sorry, you\'re not eligible for Asklora.\nCurrently only eligible for HK Permanent Resident and Non-US Citizen',
                 textAlign: TextAlign.center,
               ),
               _padding(),

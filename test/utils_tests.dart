@@ -1,6 +1,6 @@
+import 'package:asklora_mobile_app/core/utils/age_validation.dart';
 import 'package:asklora_mobile_app/core/utils/extensions.dart';
 import 'package:asklora_mobile_app/core/utils/hkid_validation.dart';
-import 'package:asklora_mobile_app/core/utils/storage/age_validation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
@@ -71,6 +71,13 @@ main() {
       expect(isAdult('2004-08-02'), true);
       expect(isAdult(nineteenYears.toString()), true);
       expect(isAdult(eighteenYears.toString()), true);
+    });
+
+    test('convert currency test', () {
+      expect(10000.00.toUsd() == 'USD 1300', true);
+      expect(1000.00.toUsd() == 'USD 1500', false);
+      expect(1300.00.toHkd() == 'HKD 10000', true);
+      expect(1300.00.toHkd() == 'HKD 15000', false);
     });
   });
 }
