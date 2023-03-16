@@ -56,7 +56,7 @@ class KeyInfo extends StatelessWidget {
                     title: portfolioBotDetailModel.avgLossString,
                     subTitle: 'Avg. Loss'),
                 _columnTextBigTitle(
-                    title: portfolioBotDetailModel.avgPeriod.toStringAsFixed(0),
+                    title: portfolioBotDetailModel.avgPeriodString,
                     subTitle: 'Avg. Period (Days)'),
               ],
             ),
