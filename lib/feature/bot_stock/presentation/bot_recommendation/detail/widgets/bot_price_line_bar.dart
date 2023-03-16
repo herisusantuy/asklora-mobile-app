@@ -19,85 +19,86 @@ class BotPriceLineBar extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      LayoutBuilder(builder: (context, constraints) {
-        double edgeMinPrice = currentPrice - 50;
-        double widthConstraint = constraints.maxWidth;
-        double translationMinPrice =
-            ((minPrice - edgeMinPrice) / 100) * widthConstraint;
-        double translationMaxPrice =
-            (((maxPrice - edgeMinPrice) / 100) * widthConstraint -
-                translationMinPrice);
-        double translationCurrentPrice =
-            ((currentPrice - edgeMinPrice) / 100) * widthConstraint;
-        return SizedBox(
-            height: 40,
-            child: Stack(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 4),
-                  height: 1,
-                  width: double.infinity,
-                  color: AskLoraColors.lightGray,
-                ),
-                Positioned(
-                    left: translationMinPrice,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 3),
-                      height: 3,
-                      width: translationMaxPrice,
-                      decoration: BoxDecoration(
-                          color: AskLoraColors.primaryMagenta,
-                          borderRadius: BorderRadius.circular(100),
-                          border:
-                              Border.all(color: AskLoraColors.primaryMagenta)),
-                    )),
-                Positioned(
-                    top: labelTopPadding,
-                    left: translationMinPrice -
-                        _textSize(maxPrice.toString(), AskLoraTextStyles.body4)
-                                .width /
-                            2,
-                    child: CustomTextNew(
-                      minPrice.toString(),
-                      style: AskLoraTextStyles.body4,
-                    )),
-                Positioned(
-                    top: labelTopPadding,
-                    left: translationMinPrice +
-                        translationMaxPrice -
-                        _textSize(maxPrice.toStringAsFixed(1),
-                                    AskLoraTextStyles.body4)
-                                .width /
-                            2,
-                    child: CustomTextNew(
-                      maxPrice.toStringAsFixed(2),
-                      style: AskLoraTextStyles.body4,
-                    )),
-                Positioned(
-                    left: translationCurrentPrice,
-                    child: Container(
-                      height: dotSize.height,
-                      width: dotSize.width,
-                      decoration: const BoxDecoration(
-                          color: AskLoraColors.primaryMagenta,
-                          shape: BoxShape.circle),
-                    )),
-                Positioned(
-                    top: labelTopPadding,
-                    left: translationCurrentPrice -
-                        _textSize(currentPrice.toStringAsFixed(1),
-                                    AskLoraTextStyles.body4)
-                                .width /
-                            2 +
-                        dotSize.width / 2,
-                    child: CustomTextNew(
-                      currentPrice.toString(),
-                      style: AskLoraTextStyles.body4,
-                    ))
-              ],
-            ));
-      });
+  Widget build(BuildContext context) {
+    final rightEdgePadding = (currentPrice - maxPrice) <= 10 ? 20 : 0;
+    final leftEdgePadding = (currentPrice - minPrice) <= 10 ? 10 : 0;
+
+    return LayoutBuilder(builder: (context, constraints) {
+      double edgeMinPrice = currentPrice - 50;
+      double widthConstraint = constraints.maxWidth;
+      double translationMinPrice =
+          ((minPrice - edgeMinPrice) / 100) * widthConstraint;
+      double translationMaxPrice =
+          (((maxPrice - edgeMinPrice) / 100) * widthConstraint -
+              translationMinPrice);
+      double translationCurrentPrice =
+          ((currentPrice - edgeMinPrice) / 100) * widthConstraint;
+      return SizedBox(
+          height: 40,
+          child: Stack(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 4),
+                height: 1,
+                width: double.infinity,
+                color: AskLoraColors.lightGray,
+              ),
+              Positioned(
+                  left: translationMinPrice,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 3),
+                    height: 3,
+                    width: translationMaxPrice,
+                    decoration: BoxDecoration(
+                        color: AskLoraColors.primaryMagenta,
+                        borderRadius: BorderRadius.circular(100),
+                        border:
+                            Border.all(color: AskLoraColors.primaryMagenta)),
+                  )),
+              Positioned(
+                  top: labelTopPadding,
+                  left: translationMinPrice -
+                      _textSize(maxPrice.toString(), AskLoraTextStyles.body4)
+                          .width -
+                      leftEdgePadding,
+                  child: CustomTextNew(
+                    minPrice.toString(),
+                    style: AskLoraTextStyles.body4,
+                  )),
+              Positioned(
+                  top: labelTopPadding,
+                  left: translationMinPrice +
+                      translationMaxPrice +
+                      rightEdgePadding,
+                  child: CustomTextNew(
+                    maxPrice.toStringAsFixed(2),
+                    style: AskLoraTextStyles.body4,
+                  )),
+              Positioned(
+                  left: translationCurrentPrice,
+                  child: Container(
+                    height: dotSize.height,
+                    width: dotSize.width,
+                    decoration: const BoxDecoration(
+                        color: AskLoraColors.primaryMagenta,
+                        shape: BoxShape.circle),
+                  )),
+              Positioned(
+                  top: labelTopPadding,
+                  left: translationCurrentPrice -
+                      _textSize(currentPrice.toStringAsFixed(1),
+                                  AskLoraTextStyles.body4)
+                              .width /
+                          2 +
+                      dotSize.width / 2,
+                  child: CustomTextNew(
+                    currentPrice.toString(),
+                    style: AskLoraTextStyles.body4,
+                  ))
+            ],
+          ));
+    });
+  }
 
   Size _textSize(String text, TextStyle style) {
     final TextPainter textPainter = TextPainter(

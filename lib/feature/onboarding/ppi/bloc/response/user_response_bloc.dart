@@ -128,6 +128,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
 
       var requests = _getAllSelectionsInRequest(tempId);
+      print('temp id $tempId');
 
       await _ppiResponseRepository.addBulkAnswer(requests);
       var userSnapShot =

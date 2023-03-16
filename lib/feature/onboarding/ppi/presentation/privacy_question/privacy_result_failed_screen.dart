@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
@@ -24,17 +25,27 @@ class PrivacyResultFailedScreen extends StatelessWidget {
         ppiResult: PpiResult.failed,
         memojiText: 'I’m afraid you’re not eligible for Asklora yet.',
         additionalMessage:
-            'It could be your risk score is too low. If you made a mistake and did not answer the question correctly, please try again.',
-        additionalMessageTextStyle: AskLoraTextStyles.body1,
+            '\n\nIt could be your risk score is too low. If you made a mistake and did not answer the question correctly, please try again.',
+        additionalMessageTextStyle: AskLoraTextStyles.subtitle1,
         bottomPadding: 0,
         bottomButton: ButtonPair(
             primaryButtonOnClick: () => PpiScreen.open(context,
-                arguments:
-                    Pair(QuestionPageType.privacy, QuestionPageStep.privacy)),
-            secondaryButtonOnClick: () {},
+                arguments: const Pair(
+                    QuestionPageType.privacy, QuestionPageStep.privacy)),
+            secondaryButtonOnClick: openAskloraFaq,
             primaryButtonLabel: 'TRY AGAIN',
-            secondaryButtonLabel: 'MAYBE LATER'),
+            secondaryButtonLabel: 'NEED HELP?'),
       ),
     );
+  }
+
+  void openAskloraFaq() async {
+    const url = 'https://www.asklora.ai/faq';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

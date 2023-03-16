@@ -22,7 +22,7 @@ class PpiApiRepository {
       await PpiApiClient()
           .post(endpoint: endpointAddAnswer, payload: jsonEncode(request));
 
-  Future<Response> getUserSnapshotByUserId(int userId) async =>
+  Future<Response> getUserSnapshotByUserId(dynamic userId) async =>
       await PpiApiClient().get(endpoint: '$endpointGetUser/$userId');
 
   Future<Response> getUserSnapshotByAskloraId(int askloraId) async =>

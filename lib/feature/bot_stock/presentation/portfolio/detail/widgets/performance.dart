@@ -3,8 +3,6 @@ part of '../bot_portfolio_detail_screen.dart';
 class Performance extends StatelessWidget {
   final PortfolioBotDetailModel? portfolioBotDetailModel;
   final PortfolioBotModel portfolioBotModel;
-  final String _tempTooltipText =
-      'Lorem ipsum dolor sit amet consectetur. Integer neque ultrices amet fermentum condimentum consequat. ';
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
@@ -31,12 +29,12 @@ class Performance extends StatelessWidget {
             children: [
               Expanded(
                   child: ColumnText(
-                      title: 'Botstock Values (USD)',
+                      title: 'Botstock values (HKD)',
                       subTitle:
                           portfolioBotModel.amount.convertToCurrencyDecimal())),
               Expanded(
                   child: ColumnText(
-                      title: 'Inv. Amount (USD)',
+                      title: 'Inv. Amount (HKD)',
                       subTitle:
                           portfolioBotModel.amount.convertToCurrencyDecimal())),
               const Expanded(
@@ -49,28 +47,47 @@ class Performance extends StatelessWidget {
         ),
         PairColumnText(
             leftTitle: 'Current Price',
-            leftSubTitle: '230.00',
+            leftSubTitle:
+                '${portfolioBotDetailModel == null ? '-' : portfolioBotDetailModel?.price ?? '-'}',
             rightTitle: 'No. of Shares',
-            rightSubTitle: '2',
-            rightTooltipText: _tempTooltipText),
+            rightSubTitle: '0',
+            rightTooltipText:
+                'Indicates how many shares of a company are currently owned by you.'),
         _spaceBetweenInfo,
         PairColumnText(
-            leftTitle: 'Stock Values (USD)',
-            leftSubTitle: '500.00',
-            rightTitle: 'Cash (USD)',
-            rightSubTitle: '600.00',
-            leftTooltipText: _tempTooltipText,
-            rightTooltipText: _tempTooltipText),
-        _spaceBetweenInfo,
-        const ColumnText(title: 'Ratio of Stock to Cash', subTitle: '5:6'),
-        const SizedBox(
-          height: 32,
+          leftTitle: 'Stock Values (HKD)',
+          leftSubTitle: '0',
+          rightTitle: 'Cash (HKD)',
+          rightSubTitle: '${portfolioBotModel.amount}',
         ),
-        if (portfolioBotDetailModel?.performance != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 32.0),
-            child: ChartAnimation(
-                chartDataSets: portfolioBotDetailModel!.performance),
-          ),
+        _spaceBetweenInfo,
+        const ColumnText(title: 'Ratio of Stock to Cash', subTitle: '0:1'),
+        _chartWidget()
       ]);
+
+  Widget _chartWidget() {
+    return const SizedBox(
+      height: 300,
+      child: Align(
+          alignment: Alignment.center,
+          child: Text(
+              'Performance data will be available once the Botstock starts')),
+    );
+
+    /// The chart data should be disabled in the SFC demo build.
+    /*if (portfolioBotDetailModel?.performance != null) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 32.0),
+        child:
+            ChartAnimation(chartDataSets: portfolioBotDetailModel?.performance),
+      );
+    } else {
+      return const SizedBox(
+        height: 300,
+        child: Align(
+            alignment: Alignment.center,
+            child: Text('Performance data is not available for now')),
+      );
+    }*/
+  }
 }

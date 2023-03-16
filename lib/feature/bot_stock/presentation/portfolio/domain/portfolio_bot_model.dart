@@ -1,5 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'portfolio_bot_model.g.dart';
 
@@ -26,6 +26,7 @@ class PortfolioBotModel extends Equatable {
   final bool freeBot;
   final bool selectable;
   final double amount;
+  final String? expiredDate;
 
   const PortfolioBotModel(
     this.id,
@@ -40,6 +41,7 @@ class PortfolioBotModel extends Equatable {
     this.tickerSymbol,
     this.latestPrice,
     this.amount, {
+    this.expiredDate,
     this.freeBot = false,
     this.selectable = false,
   });
@@ -61,6 +63,7 @@ class PortfolioBotModel extends Equatable {
         ticker,
         tickerName,
         tickerSymbol,
-        latestPrice
+        latestPrice,
+        expiredDate
       ];
 }
