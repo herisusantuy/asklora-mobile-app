@@ -159,6 +159,7 @@ class BotStockBottomSheet {
 
   static insufficientBalance(BuildContext context) {
     LoraBottomSheet.show(
+      loraMemojiType: LoraMemojiType.lora10,
       context: context,
       title: 'You are running out of money! Fund your account now.',
       subTitle: 'The minimum investment amount is HKD1,500 per trade.',
