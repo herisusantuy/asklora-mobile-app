@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../core/utils/extensions.dart';
 import '../../../../chart/domain/chart_models.dart';
 
 part 'portfolio_bot_detail_model.g.dart';
@@ -61,13 +62,13 @@ class PortfolioBotDetailModel extends Equatable {
   final double prevClosePct;
 
   @JsonKey(name: 'avg_return')
-  final double avgReturn;
+  final dynamic avgReturn;
 
   @JsonKey(name: 'avg_loss')
-  final double avgLoss;
+  final dynamic avgLoss;
 
   @JsonKey(name: 'avg_period')
-  final double avgPeriod;
+  final dynamic avgPeriod;
 
   final String sector;
   final String industry;
@@ -115,10 +116,20 @@ class PortfolioBotDetailModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$PortfolioBotDetailModelToJson(this);
 
-  String get avgReturnString =>
-      (avgReturn > 0) ? '+$avgReturn%' : '$avgReturn%';
+  String get avgReturnString {
+    double avgReturnDouble = checkDouble(avgReturn);
+    return (avgReturnDouble > 0) ? '+$avgReturnDouble%' : 'NA';
+  }
 
-  String get avgLossString => (avgLoss > 0) ? '+$avgLoss%' : '$avgLoss%';
+  String get avgLossString {
+    double avgLossDouble = checkDouble(avgLoss);
+    return (avgLossDouble > 0) ? '+$avgLossDouble%' : 'NA';
+  }
+
+  String get avgPeriodString {
+    double avgPeriodString = checkDouble(avgPeriod);
+    return (avgPeriodString > 0) ? '$avgPeriodString' : 'NA';
+  }
 
   @override
   List<Object?> get props => [
