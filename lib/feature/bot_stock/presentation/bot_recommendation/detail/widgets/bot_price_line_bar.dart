@@ -5,34 +5,58 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 
 class BotPriceLineBar extends StatelessWidget {
-  final double minPrice;
-  final double maxPrice;
+  final double stopLossPrice;
+  final double takeProfitPrice;
   final double currentPrice;
   final double labelTopPadding = 18;
   final Size dotSize = const Size(10, 10);
 
   const BotPriceLineBar(
-      {required this.minPrice,
-      required this.maxPrice,
+      {required this.stopLossPrice,
+      required this.takeProfitPrice,
       required this.currentPrice,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final rightEdgePadding = (currentPrice - maxPrice) <= 10 ? 20 : 0;
-    final leftEdgePadding = (currentPrice - minPrice) <= 10 ? 10 : 0;
-
     return LayoutBuilder(builder: (context, constraints) {
-      double edgeMinPrice = currentPrice - 50;
+      double tPSubtractAbs = (takeProfitPrice - currentPrice).abs();
+      double sLSubtractAbs = (stopLossPrice - currentPrice).abs();
+      double edgeMaxPrice = tPSubtractAbs > sLSubtractAbs
+          ? (currentPrice + tPSubtractAbs + 50)
+          : (currentPrice + sLSubtractAbs + 50);
+
+      double edgeMinPrice = tPSubtractAbs > sLSubtractAbs
+          ? (currentPrice - tPSubtractAbs - 50)
+          : (currentPrice - sLSubtractAbs - 50);
+      double totalLengthBeforeTranslation = edgeMaxPrice - edgeMinPrice;
       double widthConstraint = constraints.maxWidth;
-      double translationMinPrice =
-          ((minPrice - edgeMinPrice) / 100) * widthConstraint;
-      double translationMaxPrice =
-          (((maxPrice - edgeMinPrice) / 100) * widthConstraint -
-              translationMinPrice);
-      double translationCurrentPrice =
-          ((currentPrice - edgeMinPrice) / 100) * widthConstraint;
+      double stopLossLeftMargin = (stopLossPrice - edgeMinPrice) /
+          totalLengthBeforeTranslation *
+          widthConstraint;
+
+      double currentPriceLeftMargin =
+          ((currentPrice - edgeMinPrice) / totalLengthBeforeTranslation) *
+              widthConstraint;
+      double takeProfitPriceLeftMargin =
+          ((takeProfitPrice - edgeMinPrice) / totalLengthBeforeTranslation) *
+              widthConstraint;
+
+      double lineLength =
+          ((takeProfitPrice - stopLossPrice) / totalLengthBeforeTranslation) *
+              widthConstraint;
+
+      double stopLossLeftMarginMinusTextWidth = stopLossLeftMargin -
+          _textSize(stopLossPrice.toStringAsFixed(1), AskLoraTextStyles.body4)
+                  .width /
+              2;
+
+      double takeProfitLeftMarginMinusTextWidth = takeProfitPriceLeftMargin -
+          _textSize(takeProfitPrice.toStringAsFixed(1), AskLoraTextStyles.body4)
+                  .width /
+              2;
+
       return SizedBox(
           height: 40,
           child: Stack(
@@ -44,11 +68,11 @@ class BotPriceLineBar extends StatelessWidget {
                 color: AskLoraColors.lightGray,
               ),
               Positioned(
-                  left: translationMinPrice,
+                  left: stopLossLeftMargin,
                   child: Container(
                     margin: const EdgeInsets.only(top: 3),
                     height: 3,
-                    width: translationMaxPrice,
+                    width: lineLength,
                     decoration: BoxDecoration(
                         color: AskLoraColors.primaryMagenta,
                         borderRadius: BorderRadius.circular(100),
@@ -57,25 +81,26 @@ class BotPriceLineBar extends StatelessWidget {
                   )),
               Positioned(
                   top: labelTopPadding,
-                  left: translationMinPrice -
-                      _textSize(maxPrice.toString(), AskLoraTextStyles.body4)
-                          .width -
-                      leftEdgePadding,
+                  left: stopLossLeftMarginMinusTextWidth -
+                      (stopLossLeftMarginMinusTextWidth >
+                              currentPriceLeftMargin -
+                                  _textSize(currentPrice.toStringAsFixed(1),
+                                          AskLoraTextStyles.body4)
+                                      .width
+                          ? _textSize(currentPrice.toStringAsFixed(1),
+                                      AskLoraTextStyles.body4)
+                                  .width -
+                              dotSize.width / 2 +
+                              dotSize.width / 2 -
+                              (stopLossLeftMargin - currentPriceLeftMargin)
+                                  .abs()
+                          : 0),
                   child: CustomTextNew(
-                    minPrice.toString(),
+                    stopLossPrice.toStringAsFixed(1),
                     style: AskLoraTextStyles.body4,
                   )),
               Positioned(
-                  top: labelTopPadding,
-                  left: translationMinPrice +
-                      translationMaxPrice +
-                      rightEdgePadding,
-                  child: CustomTextNew(
-                    maxPrice.toStringAsFixed(2),
-                    style: AskLoraTextStyles.body4,
-                  )),
-              Positioned(
-                  left: translationCurrentPrice,
+                  left: currentPriceLeftMargin,
                   child: Container(
                     height: dotSize.height,
                     width: dotSize.width,
@@ -85,16 +110,37 @@ class BotPriceLineBar extends StatelessWidget {
                   )),
               Positioned(
                   top: labelTopPadding,
-                  left: translationCurrentPrice -
+                  left: currentPriceLeftMargin -
                       _textSize(currentPrice.toStringAsFixed(1),
                                   AskLoraTextStyles.body4)
                               .width /
                           2 +
                       dotSize.width / 2,
                   child: CustomTextNew(
-                    currentPrice.toString(),
+                    currentPrice.toStringAsFixed(1),
                     style: AskLoraTextStyles.body4,
-                  ))
+                  )),
+              Positioned(
+                  top: labelTopPadding,
+                  left: takeProfitLeftMarginMinusTextWidth +
+                      (takeProfitLeftMarginMinusTextWidth <
+                              currentPriceLeftMargin +
+                                  _textSize(currentPrice.toStringAsFixed(1),
+                                              AskLoraTextStyles.body4)
+                                          .width /
+                                      2
+                          ? (_textSize(currentPrice.toStringAsFixed(1),
+                                          AskLoraTextStyles.body4)
+                                      .width +
+                                  dotSize.width) -
+                              (takeProfitPriceLeftMargin -
+                                      currentPriceLeftMargin)
+                                  .abs()
+                          : 0),
+                  child: CustomTextNew(
+                    takeProfitPrice.toStringAsFixed(1),
+                    style: AskLoraTextStyles.body4,
+                  )),
             ],
           ));
     });

@@ -243,9 +243,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
       Column(
         children: [
           BotPriceLineBar(
-            minPrice: botDetailModel.estimatedStopLossPrice,
-            maxPrice: botDetailModel.estimatedTakeProfitPrice,
+            stopLossPrice: botDetailModel.estimatedStopLossPrice,
             currentPrice: botDetailModel.price,
+            takeProfitPrice: botDetailModel.estimatedTakeProfitPrice,
           ),
           const SizedBox(height: 24),
           PairColumnText(

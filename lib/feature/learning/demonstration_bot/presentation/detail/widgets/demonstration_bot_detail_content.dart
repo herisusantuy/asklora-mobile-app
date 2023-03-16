@@ -216,8 +216,8 @@ class DemonstrationBotDetailContent extends StatelessWidget {
   Widget get _detailedInformation => Column(
         children: [
           const BotPriceLineBar(
-            minPrice: 210,
-            maxPrice: 240,
+            stopLossPrice: 210,
+            takeProfitPrice: 240,
             currentPrice: 220,
           ),
           const SizedBox(
