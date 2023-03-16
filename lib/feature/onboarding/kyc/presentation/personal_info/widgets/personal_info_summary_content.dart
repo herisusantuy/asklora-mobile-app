@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../core/presentation/custom_image_picker.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -58,6 +59,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           SummaryTextInfo(
               title: 'Legal English Last Name',
               subTitle: personalInfoState.lastName),
+          _spaceHeight,
           SummaryTextInfo(title: 'Gender', subTitle: personalInfoState.gender),
           _spaceHeight,
           SummaryTextInfo(
@@ -68,7 +70,8 @@ class PersonalInfoSummaryContent extends StatelessWidget {
               subTitle: personalInfoState.nationalityName),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Day of Birth', subTitle: personalInfoState.dateOfBirth),
+              title: 'Day of Birth',
+              subTitle: _formateDate(personalInfoState.dateOfBirth)),
           _spaceHeight,
           SummaryTextInfo(
               title: 'Country of Birth',
@@ -81,9 +84,15 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           _spaceHeight,
           SummaryTextInfo(
               title: 'Address', subTitle: addressProofState.addressLine1),
-          _spaceHeight,
-          SummaryTextInfo(
-              title: 'Address 2', subTitle: addressProofState.addressLine2),
+          if (addressProofState.addressLine2.isNotEmpty)
+            SummaryTextInfo(
+                title: null, subTitle: addressProofState.addressLine2),
+          if (addressProofState.region != null)
+            SummaryTextInfo(
+                title: null, subTitle: addressProofState.region!.value),
+          if (addressProofState.district != null)
+            SummaryTextInfo(
+                title: null, subTitle: addressProofState.district!.value),
           _spaceHeight,
           CustomImagePicker(
             initialValue: addressProofState.addressProofImages,
@@ -93,4 +102,12 @@ class PersonalInfoSummaryContent extends StatelessWidget {
           ),
         ],
       );
+
+  String _formateDate(String date) {
+    DateTime parseDate = DateFormat('yyyy-MM-dd').parse(date);
+    final inputDate = DateTime.parse(parseDate.toString());
+    final outputFormat = DateFormat('yyyy/MM/dd');
+    final outputDate = outputFormat.format(inputDate);
+    return outputDate;
+  }
 }

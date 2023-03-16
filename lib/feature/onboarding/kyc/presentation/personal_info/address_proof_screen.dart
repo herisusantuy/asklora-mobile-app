@@ -65,7 +65,7 @@ class AddressProofScreen extends StatelessWidget {
               onChanged: (value) => context
                   .read<AddressProofBloc>()
                   .add(AddressLine2Changed(value)),
-              hintText: 'Address Line 2',
+              hintText: 'Address Line 2 (optional)',
             ),
             _spaceHeight,
             _district,
