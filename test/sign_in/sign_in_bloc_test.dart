@@ -120,7 +120,6 @@ void main() async {
               emailAddress: '',
               isEmailValid: false,
               password: '',
-              isPasswordValid: false,
             ));
       },
     );
@@ -139,7 +138,6 @@ void main() async {
                 isEmailValid: false,
                 emailAddressErrorText: 'Enter valid email',
                 password: '',
-                isPasswordValid: false,
               ),
               SignInState(
                 response: BaseResponse.unknown(),
@@ -147,7 +145,6 @@ void main() async {
                 isEmailValid: false,
                 emailAddressErrorText: 'Enter valid email',
                 password: 'TestQWE123',
-                isPasswordValid: true,
               )
             });
     blocTest<SignInBloc, SignInState>(
@@ -161,7 +158,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: '',
-                isPasswordValid: false,
               )
             });
 
@@ -191,7 +187,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: '',
-                isPasswordValid: false,
               ),
               SignInState(
                 response: BaseResponse.unknown(),
@@ -199,7 +194,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: 'TestQWE123',
-                isPasswordValid: true,
               ),
               SignInState(
                 response: BaseResponse.loading(),
@@ -207,7 +201,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: 'TestQWE123',
-                isPasswordValid: true,
               ),
               const SignInState(
                 response: BaseResponse<SignInResponse>(
@@ -218,7 +211,6 @@ void main() async {
                 isEmailValid: true,
                 emailAddressErrorText: '',
                 password: 'TestQWE123',
-                isPasswordValid: true,
               )
             });
     tearDown(() => signInBloc.close());
