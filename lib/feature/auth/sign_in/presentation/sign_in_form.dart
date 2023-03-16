@@ -105,11 +105,11 @@ class SignInForm extends StatelessWidget {
   Widget _passwordInput() => BlocBuilder<SignInBloc, SignInState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) => PasswordTextField(
+          isShowingPasswordValidation: false,
           key: const Key('sign_in_password_input'),
           validPassword: (isValidPassword) => {},
           hintText: 'Password',
           label: 'Password',
-          errorText: state.passwordErrorText,
           onChanged: (password) =>
               context.read<SignInBloc>().add(SignInPasswordChanged(password))));
 

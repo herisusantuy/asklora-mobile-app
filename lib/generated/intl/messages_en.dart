@@ -37,12 +37,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNext": MessageLookupByLibrary.simpleMessage("NEXT"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
-        "carouselIntro2":
-            MessageLookupByLibrary.simpleMessage("Guidance From Your AI Coach"),
-        "carouselIntro3":
-            MessageLookupByLibrary.simpleMessage("Personalised Experience"),
-        "carouselIntro4": MessageLookupByLibrary.simpleMessage(
-            "Trade with Ease and Strategy"),
+        "carouselIntro2": MessageLookupByLibrary.simpleMessage(
+            "Guided by FinFit Coach, Lora"),
+        "carouselIntro3": MessageLookupByLibrary.simpleMessage(
+            "Invest with AI strategy, automated"),
+        "carouselIntro4":
+            MessageLookupByLibrary.simpleMessage("Personalised experience"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -51,7 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(
-            "This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level."),
+            "This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level"),
         "tooltipBotDetailsEstStopLoss": MessageLookupByLibrary.simpleMessage(
             "The return % where the Plank Bot will sell try and limit losses. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level below your initial investment level."),
         "tooltipBotDetailsEstTakeProfit": MessageLookupByLibrary.simpleMessage(

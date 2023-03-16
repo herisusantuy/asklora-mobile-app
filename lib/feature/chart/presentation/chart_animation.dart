@@ -165,7 +165,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
       if (mounted) {
         double? hedgeShare = widget.chartDataSets[animateIndex].hedgeShare;
         double? profit = widget.chartDataSets[animateIndex].currentPnlRet;
-        if (profit != null) {
+        if (profit != null && profit != 0) {
           lastProfit = widget.chartDataSets[animateIndex].currentPnlRet!;
         }
 

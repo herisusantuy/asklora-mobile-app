@@ -5,6 +5,7 @@ import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../../utils/app_icons.dart';
 import '../../utils/extensions.dart';
+import '../../utils/formatters/custom_formatters.dart';
 import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 
@@ -17,6 +18,7 @@ class PasswordTextField extends StatefulWidget {
   final String errorText;
   final Function(bool) validPassword;
   final Function(String)? onChanged;
+  final bool isShowingPasswordValidation;
 
   const PasswordTextField({
     Key? key,
@@ -28,6 +30,7 @@ class PasswordTextField extends StatefulWidget {
     this.hintText = '',
     this.errorText = '',
     required this.validPassword,
+    this.isShowingPasswordValidation = true,
   }) : super(key: key);
 
   @override
@@ -101,7 +104,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   controller: controller,
                   onChanged: widget.onChanged,
                   textCapitalization: widget.textCapitalization,
-                  inputFormatters: widget.textInputFormatterList,
+                  inputFormatters: widget.textInputFormatterList ??
+                      [lettersAndNumberFormatter()],
                   obscureText: obscureText,
                   obscuringCharacter: '●',
                   style: TextFieldStyle.valueTextStyle,
@@ -131,7 +135,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 onFocusChange: (hasFocus) {
                   shouldShowErrorsTexts = hasFocus;
                 }),
-            if (shouldShowErrorsTexts || controller.text.isNotEmpty)
+            if ((shouldShowErrorsTexts || controller.text.isNotEmpty) &&
+                widget.isShowingPasswordValidation)
               ..._errorCheckWidgets,
           ],
         ),

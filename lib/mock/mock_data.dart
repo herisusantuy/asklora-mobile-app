@@ -93,7 +93,8 @@ class MockData {
 
   Future<BaseResponse<bool>> saveBotStock(
       {required BotRecommendationModel botRecommendationModel,
-      required double tradeBotStockAmount}) async {
+      required double tradeBotStockAmount,
+      required String estimatedEndDate}) async {
     PortfolioResponse portfolioDetailResponse =
         await fetchPortfolioDetailResponse();
     if (botRecommendationModel.freeBot ||
@@ -113,6 +114,7 @@ class MockData {
           botRecommendationModel.tickerSymbol,
           botRecommendationModel.latestPrice,
           tradeBotStockAmount,
+          expiredDate: estimatedEndDate,
           freeBot: botRecommendationModel.freeBot));
 
       await _savePortfolioBotResponse(
@@ -122,10 +124,9 @@ class MockData {
               (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
           buyingPower: portfolioDetailResponse.buyingPower -
               (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
-          totalBotStockValues:
-              portfolioDetailResponse.totalBotStockValues + tradeBotStockAmount,
-          totalPortfolio: portfolioDetailResponse.totalPortfolio +
-              (botRecommendationModel.freeBot ? tradeBotStockAmount : 0)));
+          totalBotStockValues: portfolioDetailResponse.totalBotStockValues +
+              (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
+          totalPortfolio: portfolioDetailResponse.totalPortfolio));
       return BaseResponse.complete(true);
     } else {
       return BaseResponse.error(message: 'Insufficient balance');

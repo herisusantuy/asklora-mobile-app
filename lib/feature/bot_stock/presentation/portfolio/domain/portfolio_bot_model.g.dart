@@ -20,6 +20,7 @@ PortfolioBotModel _$PortfolioBotModelFromJson(Map<String, dynamic> json) =>
       json['ticker_symbol'] as String,
       json['latest_price'] as String,
       (json['amount'] as num).toDouble(),
+      expiredDate: json['expiredDate'] as String?,
       freeBot: json['freeBot'] as bool? ?? false,
       selectable: json['selectable'] as bool? ?? false,
     );
@@ -40,4 +41,5 @@ Map<String, dynamic> _$PortfolioBotModelToJson(PortfolioBotModel instance) =>
       'freeBot': instance.freeBot,
       'selectable': instance.selectable,
       'amount': instance.amount,
+      'expiredDate': instance.expiredDate,
     };

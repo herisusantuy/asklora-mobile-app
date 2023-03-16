@@ -6,8 +6,6 @@ class SignInState extends Equatable {
   final bool isEmailValid;
   final String emailAddressErrorText;
   final String password;
-  final String passwordErrorText;
-  final bool isPasswordValid;
   final bool isOtpRequired;
 
   const SignInState(
@@ -16,8 +14,6 @@ class SignInState extends Equatable {
       this.isEmailValid = false,
       this.emailAddressErrorText = '',
       this.password = '',
-      this.isPasswordValid = false,
-      this.passwordErrorText = '',
       this.isOtpRequired = false})
       : super();
 
@@ -28,8 +24,6 @@ class SignInState extends Equatable {
         isEmailValid,
         emailAddressErrorText,
         password,
-        isPasswordValid,
-        passwordErrorText,
         isOtpRequired
       ];
 
@@ -39,8 +33,6 @@ class SignInState extends Equatable {
       bool? isEmailValid,
       String? emailAddressErrorText,
       String? password,
-      String? passwordErrorText,
-      bool? isPasswordValid,
       bool? isOtpRequired}) {
     return SignInState(
       response: response ?? this.response,
@@ -49,8 +41,6 @@ class SignInState extends Equatable {
       emailAddressErrorText:
           emailAddressErrorText ?? this.emailAddressErrorText,
       password: password ?? this.password,
-      passwordErrorText: passwordErrorText ?? this.passwordErrorText,
-      isPasswordValid: isPasswordValid ?? this.isPasswordValid,
       isOtpRequired: isOtpRequired ?? this.isOtpRequired,
     );
   }

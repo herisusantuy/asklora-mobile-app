@@ -127,7 +127,7 @@ class MockPpiResponseRepository extends _i1.Mock
       ) as _i7.Future<_i3.PpiUserResponse>);
   @override
   _i7.Future<_i4.BaseResponse<_i3.SnapShot>> getUserSnapShotUserId(
-          int? userId) =>
+          dynamic userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserSnapShotUserId,

@@ -100,30 +100,30 @@ class S {
     );
   }
 
-  /// `Guidance From Your AI Coach`
+  /// `Guided by FinFit Coach, Lora`
   String get carouselIntro2 {
     return Intl.message(
-      'Guidance From Your AI Coach',
+      'Guided by FinFit Coach, Lora',
       name: 'carouselIntro2',
       desc: '',
       args: [],
     );
   }
 
-  /// `Personalised Experience`
+  /// `Invest with AI strategy, automated`
   String get carouselIntro3 {
     return Intl.message(
-      'Personalised Experience',
+      'Invest with AI strategy, automated',
       name: 'carouselIntro3',
       desc: '',
       args: [],
     );
   }
 
-  /// `Trade with Ease and Strategy`
+  /// `Personalised experience`
   String get carouselIntro4 {
     return Intl.message(
-      'Trade with Ease and Strategy',
+      'Personalised experience',
       name: 'carouselIntro4',
       desc: '',
       args: [],
@@ -200,10 +200,10 @@ class S {
     );
   }
 
-  /// `This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.`
+  /// `This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level`
   String get tooltipBotDetailsEstMaxProfit {
     return Intl.message(
-      'This is the estimated maximum target profit % level for the Bot strategy. The Pull-up bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.',
+      'This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level',
       name: 'tooltipBotDetailsEstMaxProfit',
       desc: '',
       args: [],

@@ -43,7 +43,6 @@ import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
 import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
-
 import '../../home_screen.dart';
 import '../domain/pair.dart';
 import '../presentation/custom_status_widget.dart';
@@ -168,8 +167,8 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => BotTradeSummaryScreen(
-                  arguments: settings.arguments
-                      as Pair<BotRecommendationModel, double>,
+                  botTradeSummaryModel:
+                      settings.arguments as BotTradeSummaryModel,
                 ));
       case PortfolioScreen.route:
         return MaterialPageRoute(

@@ -31,7 +31,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     if (isTokenValid) {
       var userJourney = await _userJourneyRepository.getUserJourney();
-      emit(AppState.authenticated(userJourney: userJourney));
+      emit(AppState.authenticated(
+          userJourney: userJourney ?? UserJourney.investmentStyle));
     } else {
       emit(AppState.unauthenticated(
         localeType: LocaleType.defaultFont(),

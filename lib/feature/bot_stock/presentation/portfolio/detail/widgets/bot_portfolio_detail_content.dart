@@ -46,9 +46,11 @@ class BotPortfolioDetailContent extends StatelessWidget {
               const SizedBox(
                 height: 33,
               ),
-              KeyInfo(
-                portfolioBotModel: portfolioBotModel,
-              ),
+              if (portfolioBotDetailModel != null)
+                KeyInfo(
+                  botType: botType,
+                  portfolioBotDetailModel: portfolioBotDetailModel!,
+                ),
               const SizedBox(
                 height: 35,
               ),
@@ -65,7 +67,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                portfolioBotDetailModel?.bot.botDescription.detail ?? '',
+                portfolioBotDetailModel?.bot.botDescription.detail ?? 'NA',
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
@@ -81,7 +83,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              portfolioBotDetailModel?.bot.botDescription.suited ?? '',
+              portfolioBotDetailModel?.bot.botDescription.suited ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -97,7 +99,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              portfolioBotDetailModel?.bot.botDescription.works ?? '',
+              portfolioBotDetailModel?.bot.botDescription.works ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -124,7 +126,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      'Not available yet',
+                      '${portfolioBotDetailModel?.prevCloseDate}',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -145,7 +147,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      '${(portfolioBotDetailModel?.estimatedStopLossPrice ?? 0).convertToCurrencyDecimal(decimalDigits: 2)} ${(portfolioBotDetailModel?.estimatedTakeProfitPct ?? 0)}%',
+                      '${getPriceDifference().convertToCurrencyDecimal(decimalDigits: 2)} ${getPercentDifference().convertToCurrencyDecimal(decimalDigits: 2)}%',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -181,29 +183,29 @@ class BotPortfolioDetailContent extends StatelessWidget {
             ),
             PairColumnText(
               leftTitle: 'Sector(s)',
-              leftSubTitle: portfolioBotDetailModel?.sector ?? '',
+              leftSubTitle: portfolioBotDetailModel?.sector ?? 'NA',
               rightTitle: 'Industry',
-              rightSubTitle: portfolioBotDetailModel?.industry ?? '',
+              rightSubTitle: portfolioBotDetailModel?.industry ?? 'NA',
             ),
             _spaceBetweenInfo,
             PairColumnText(
               leftTitle: 'CEO',
-              leftSubTitle: portfolioBotDetailModel?.ceo ?? '',
+              leftSubTitle: portfolioBotDetailModel?.ceo ?? 'NA',
               rightTitle: 'Employees',
               rightSubTitle: '${portfolioBotDetailModel?.employees}',
             ),
             _spaceBetweenInfo,
             PairColumnText(
               leftTitle: 'Headquarters',
-              leftSubTitle: portfolioBotDetailModel?.headquarters ?? '',
+              leftSubTitle: portfolioBotDetailModel?.headquarters ?? 'NA',
               rightTitle: 'Founded',
-              rightSubTitle: portfolioBotDetailModel?.founded ?? '',
+              rightSubTitle: portfolioBotDetailModel?.founded ?? 'NA',
             ),
             const SizedBox(
               height: 23,
             ),
             CustomTextNew(
-              portfolioBotDetailModel?.description ?? '',
+              portfolioBotDetailModel?.description ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             )
@@ -215,5 +217,23 @@ class BotPortfolioDetailContent extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  double getPriceDifference() {
+    if (portfolioBotDetailModel != null) {
+      final currentPrice = portfolioBotDetailModel?.price ?? 0;
+      final prevClosePrice = portfolioBotDetailModel?.prevClosePrice ?? 0;
+      return currentPrice - prevClosePrice;
+    }
+    return 0;
+  }
+
+  double getPercentDifference() {
+    if (portfolioBotDetailModel != null) {
+      final currentPrice = portfolioBotDetailModel?.price ?? 0;
+      final prevClosePrice = portfolioBotDetailModel?.prevClosePrice ?? 0;
+      return ((currentPrice / prevClosePrice) - 1) * 100;
+    }
+    return 0;
   }
 }
