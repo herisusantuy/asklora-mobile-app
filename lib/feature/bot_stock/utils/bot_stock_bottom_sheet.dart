@@ -109,7 +109,7 @@ class BotStockBottomSheet {
                       current.botStockTradeAmount,
                   builder: (context, state) {
                     return LoraBottomSheetContent(
-                      disablePrimaryButton: state.botStockTradeAmount == 0,
+                      disablePrimaryButton: state.botStockTradeAmount < 1500,
                       title: 'How much are you investing?',
                       primaryButtonLabel: 'NEXT',
                       secondaryButtonLabel: 'CANCEL',
