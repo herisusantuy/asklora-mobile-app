@@ -121,11 +121,6 @@ class PortfolioBotDetailModel extends Equatable {
     return (avgReturnDouble > 0) ? '+$avgReturnDouble%' : 'NA';
   }
 
-  String get avgLossString {
-    double avgLossDouble = checkDouble(avgLoss);
-    return (avgLossDouble > 0) ? '+$avgLossDouble%' : 'NA';
-  }
-
   String get avgPeriodString {
     double avgPeriodString = checkDouble(avgPeriod);
     return (avgPeriodString > 0) ? '$avgPeriodString' : 'NA';
