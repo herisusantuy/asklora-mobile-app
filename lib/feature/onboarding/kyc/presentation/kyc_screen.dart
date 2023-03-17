@@ -37,7 +37,7 @@ import 'personal_info/address_proof_screen.dart';
 import 'personal_info/otp/bloc/otp_bloc.dart';
 import 'personal_info/otp/presentation/otp_screen.dart';
 import 'personal_info/personal_info_summary_screen.dart';
-import 'personal_info/pesonal_info_screen.dart';
+import 'personal_info/personal_info_screen.dart';
 import 'personal_info/resident_check_screen.dart';
 import 'personal_info/tin_screen.dart';
 import 'sign_agreements/broker_agreement_screen.dart';
