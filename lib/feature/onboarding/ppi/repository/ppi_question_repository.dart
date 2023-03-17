@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../domain/fixture.dart';
 import '../domain/ppi_api_repository.dart';
 import '../domain/question.dart';
@@ -12,18 +14,22 @@ class PpiQuestionRepository {
   PpiQuestionRepository._();
 
   final PpiApiRepository _ppiApiRepository = PpiApiRepository();
-
+  final SharedPreference _sharedPreference = SharedPreference();
   Future<Fixture> fetchPersonalAndPrivacyQuestions() async {
     // Let's keep it for a while as sometimes it good to test the PPI from local file.
     // final String response =
     //     await rootBundle.loadString('assets/json/question_list.json');
+    var userName = await _sharedPreference.readData(sfKeyPpiName);
 
     final response = await _ppiApiRepository.fetchPersonalAndPrivacyQuestions();
     List<Question> questions = List.empty(growable: true);
 
-    questions = (jsonDecode(jsonEncode(response.data)) as List)
-        .map((i) => Question.fromJson(i))
-        .toList();
+    questions = (jsonDecode(jsonEncode(response.data)) as List).map((i) {
+      if (i['question_id'] == 'quid1') {
+        i['question'] = '$userName! ${i['question']}';
+      }
+      return Question.fromJson(i);
+    }).toList();
     return Fixture.instance.fixPersonalisedQuestion(questions);
   }
 
