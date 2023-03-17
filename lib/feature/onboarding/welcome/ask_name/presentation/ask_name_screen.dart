@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
@@ -66,7 +65,6 @@ class AskNameScreen extends StatelessWidget {
                       textInputFormatterList: [
                         fullEnglishNameFormatter(),
                         onlyAllowOneSpace()
-                        // NoSpaceFormatter()
                       ],
                       textCapitalization: TextCapitalization.words,
                       textInputType: TextInputType.text),
