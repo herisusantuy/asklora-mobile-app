@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:ui' as ui;
 
 import 'currency_enum.dart';
@@ -149,5 +150,17 @@ extension ConvertToBase64 on PlatformFile {
     final bytes = File(path!).readAsBytesSync();
     String result = 'data:image/png;base64,${base64Encode(bytes)}';
     return result;
+  }
+}
+
+extension DecodeFromBase64 on String {
+  Future<PlatformFile> decodeBase64ToPlatformFile() async {
+    final decodedBytes =
+        base64Decode((this).replaceAll('data:image/png;base64,', ''));
+    final directory = await getTemporaryDirectory();
+    String fileName = 'temp_file_${DateTime.now().millisecondsSinceEpoch}.png';
+    var fileImg = File('${directory.path}/$fileName')
+      ..writeAsBytesSync(List.from(decodedBytes));
+    return PlatformFile(name: fileName, size: 0, path: fileImg.path);
   }
 }
