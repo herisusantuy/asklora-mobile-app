@@ -42,32 +42,8 @@ class FinancialProfileSummaryContent extends StatelessWidget {
                     ? 'Yes'
                     : 'No'
                 : 'Unknown'),
-        _spaceHeight,
-        SummaryTextInfo(
-            title:
-                'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
-            subTitle: disclosureAffiliationState.isAffiliatedAssociates != null
-                ? disclosureAffiliationState.isAffiliatedAssociates!
-                    ? 'Yes'
-                    : 'No'
-                : 'Unknown'),
-        if (disclosureAffiliationState.affiliatedAssociatesFirstName.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: _spaceHeightDouble),
-            child: SummaryTextInfo(
-                title: 'Name of Affiliated Person',
-                subTitle:
-                    '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
-          ),
-        if (disclosureAffiliationState.affiliatedPersonFirstName.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: _spaceHeightDouble),
-            child: SummaryTextInfo(
-                title: 'Name of Affiliated Person',
-                subTitle:
-                    '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
-          ),
         ..._getEmploymentDetailsContent(),
+        ..._getAffiliatedPerson,
       ],
     );
   }
@@ -106,6 +82,35 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         color: AskLoraColors.gray,
       );
 
+  List<Widget> get _getAffiliatedPerson {
+    return [
+      SummaryTextInfo(
+          title:
+              'Are your immediate family or/and you affiliated with any director, office or employee if LORA Technologies Limited ot its associates?',
+          subTitle: disclosureAffiliationState.isAffiliatedAssociates != null
+              ? disclosureAffiliationState.isAffiliatedAssociates!
+                  ? 'Yes'
+                  : 'No'
+              : 'Unknown'),
+      if (disclosureAffiliationState.affiliatedAssociatesFirstName.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(top: _spaceHeightDouble),
+          child: SummaryTextInfo(
+              title: 'Name of Affiliated Person',
+              subTitle:
+                  '${disclosureAffiliationState.affiliatedAssociatesFirstName} ${disclosureAffiliationState.affiliatedAssociatesLastName}'),
+        ),
+      if (disclosureAffiliationState.affiliatedPersonFirstName.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(top: _spaceHeightDouble),
+          child: SummaryTextInfo(
+              title: 'Name of Affiliated Person',
+              subTitle:
+                  '${disclosureAffiliationState.affiliatedPersonFirstName} ${disclosureAffiliationState.affiliatedPersonLastName}'),
+        ),
+    ];
+  }
+
   List<Widget> get _sourceOfWealthSummary {
     return [
       CustomTextNew(
@@ -133,38 +138,45 @@ class FinancialProfileSummaryContent extends StatelessWidget {
 
   List<Widget> _getEmploymentDetailsContent() {
     return [
+      _spaceHeight,
       SummaryTextInfo(
           title: 'Employment Status',
-          subTitle: financialProfileState.employmentStatus.value),
-      if (financialProfileState.natureOfBusiness != null)
+          subTitle: financialProfileState.employmentStatus.name),
+      if (financialProfileState.employmentStatus == EmploymentStatus.employed ||
+          financialProfileState.employmentStatus ==
+              EmploymentStatus.selfEmployed)
         _summaryTextInfoWithPadding(
             title: 'Nature of Business',
-            subTitle: financialProfileState.natureOfBusiness?.value ?? ''),
-      if (financialProfileState.occupation != null ||
-          financialProfileState.otherOccupation.isNotEmpty &&
-              financialProfileState.otherOccupation.isNotEmpty)
+            subTitle:
+                financialProfileState.natureOfBusiness != NatureOfBusiness.other
+                    ? financialProfileState.natureOfBusiness?.value ?? ''
+                    : financialProfileState.natureOfBusinessDescription),
+      if (financialProfileState.employmentStatus == EmploymentStatus.employed ||
+          financialProfileState.employmentStatus ==
+              EmploymentStatus.selfEmployed)
         _summaryTextInfoWithPadding(
             title: 'Occupation',
-            subTitle: financialProfileState.occupation != null &&
-                    financialProfileState.occupation != Occupations.other
-                ? financialProfileState.occupation!.value
-                : financialProfileState.occupation != null &&
-                        financialProfileState.occupation == Occupations.other
-                    ? financialProfileState.otherOccupation
-                    : ''),
-      if (financialProfileState.employer.isNotEmpty)
+            subTitle: financialProfileState.occupation != Occupations.other
+                ? financialProfileState.occupation?.value ?? ''
+                : financialProfileState.otherOccupation),
+      if (financialProfileState.employmentStatus == EmploymentStatus.employed ||
+          financialProfileState.employmentStatus ==
+              EmploymentStatus.selfEmployed)
         _summaryTextInfoWithPadding(
             title: 'Employer', subTitle: financialProfileState.employer),
-      if (financialProfileState.employerAddress.isNotEmpty)
+      if (financialProfileState.employmentStatus == EmploymentStatus.employed ||
+          financialProfileState.employmentStatus ==
+              EmploymentStatus.selfEmployed)
         _summaryTextInfoWithPadding(
             title: 'Employer/ Company Address',
             subTitle: financialProfileState.employerAddress),
-      if (financialProfileState.countryName.isNotEmpty)
+      if (financialProfileState.employmentStatus == EmploymentStatus.employed ||
+          financialProfileState.employmentStatus ==
+              EmploymentStatus.selfEmployed)
         _summaryTextInfoWithPadding(
             title: 'Country of Employment',
             subTitle: financialProfileState.countryName),
-      if (financialProfileState.country != 'HKG' &&
-          financialProfileState.detailInformationOfCountry.isNotEmpty)
+      if (financialProfileState.country != 'HKG')
         _summaryTextInfoWithPadding(
             title:
                 'Why is your country of employment different from your country of residence?',
