@@ -22,7 +22,7 @@ UpgradeAccountResponse _$UpgradeAccountResponseFromJson(
           : ProofsOfAddressRequest.fromJson(
               json['employment_info'] as Map<String, dynamic>),
       wealthSources: (json['wealth_sources'] as List<dynamic>?)
-          ?.map((e) => TrustedContact.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => WealthSourcesRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       affiliatedPerson: json['affiliated_person'] == null
           ? null
