@@ -70,7 +70,7 @@ class PersonalInfoSummaryContent extends StatelessWidget {
               subTitle: personalInfoState.nationalityName),
           _spaceHeight,
           SummaryTextInfo(
-              title: 'Day of Birth',
+              title: 'Date of Birth',
               subTitle: personalInfoState.dateOfBirth.replaceAll('-', '/')),
           _spaceHeight,
           SummaryTextInfo(
