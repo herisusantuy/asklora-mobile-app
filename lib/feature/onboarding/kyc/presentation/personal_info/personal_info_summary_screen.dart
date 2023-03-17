@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
-import '../../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -13,14 +12,12 @@ import 'widgets/personal_info_summary_content.dart';
 class PersonalInfoSummaryScreen extends StatelessWidget {
   final PersonalInfoState personalInfoState;
   final AddressProofState addressProofState;
-  final CountryOfTaxResidenceState countryOfTaxResidenceState;
   final double progress;
 
   const PersonalInfoSummaryScreen(
       {required this.personalInfoState,
       required this.progress,
       required this.addressProofState,
-      required this.countryOfTaxResidenceState,
       Key? key})
       : super(key: key);
 
@@ -34,7 +31,6 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
         key: const Key('personal_info_summary_content'),
         personalInfoState: personalInfoState,
         addressProofState: addressProofState,
-        countryOfTaxResidenceState: countryOfTaxResidenceState,
         title: 'Summary',
       ),
       bottomButton: _bottomButton(context),

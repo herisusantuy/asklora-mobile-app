@@ -35,8 +35,6 @@ import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account
     as _i21;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/personal_info_response.dart'
     as _i20;
-import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/tax_info_request.dart'
-    as _i25;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/upgrade_account_request.dart'
     as _i19;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/upgrade_account_response.dart'
@@ -46,11 +44,11 @@ import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/account_rep
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
     as _i7;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response_request.dart'
-    as _i27;
+    as _i26;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/bot_recommendation_repository.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_response_repository.dart'
-    as _i26;
+    as _i25;
 import 'package:dio/dio.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -456,11 +454,11 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
         )),
       ) as _i9.Future<_i5.GetAccountResponse>);
   @override
-  _i9.Future<_i3.BaseResponse<_i18.UpgradeAccountResponse>> upgradeAccount(
+  _i9.Future<_i3.BaseResponse<_i18.UpgradeAccountResponse>> submitIBKR(
           _i19.UpgradeAccountRequest? upgradeAccountRequest) =>
       (super.noSuchMethod(
         Invocation.method(
-          #upgradeAccount,
+          #submitIBKR,
           [upgradeAccountRequest],
         ),
         returnValue:
@@ -468,7 +466,7 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
                 _FakeBaseResponse_1<_i18.UpgradeAccountResponse>(
           this,
           Invocation.method(
-            #upgradeAccount,
+            #submitIBKR,
             [upgradeAccountRequest],
           ),
         )),
@@ -528,22 +526,13 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
           ),
         )),
       ) as _i9.Future<_i3.BaseResponse<_i23.OnfidoResultResponse>>);
-  @override
-  _i9.Future<bool> submitTaxInfo(_i25.TaxInfoRequest? request) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #submitTaxInfo,
-          [request],
-        ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
 }
 
 /// A class which mocks [PpiResponseRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPpiResponseRepository extends _i1.Mock
-    implements _i26.PpiResponseRepository {
+    implements _i25.PpiResponseRepository {
   MockPpiResponseRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -559,7 +548,7 @@ class MockPpiResponseRepository extends _i1.Mock
       ) as _i6.BotRecommendationRepository);
   @override
   _i9.Future<_i7.PpiUserResponse> addAnswer(
-          _i27.PpiSelectionRequest? ppiUserResponseRequest) =>
+          _i26.PpiSelectionRequest? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addAnswer,
@@ -576,7 +565,7 @@ class MockPpiResponseRepository extends _i1.Mock
       ) as _i9.Future<_i7.PpiUserResponse>);
   @override
   _i9.Future<_i7.PpiUserResponse> addBulkAnswer(
-          List<_i27.PpiSelectionRequest>? ppiUserResponseRequest) =>
+          List<_i26.PpiSelectionRequest>? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
           #addBulkAnswer,
