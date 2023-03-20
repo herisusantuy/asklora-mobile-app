@@ -63,7 +63,6 @@ class _TabsScreenState extends State<TabsScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    Logger.log('Tab_Screen_Build');
     return CustomScaffold(
         enableBackNavigation: false,
         bottomNavigationBar: BottomNavigationBar(
