@@ -5,7 +5,6 @@ import '../../feature/auth/otp/presentation/otp_screen.dart';
 import '../../feature/auth/reset_password/presentation/reset_password_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
-import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_result_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_screen.dart';
 import '../../feature/balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
@@ -54,9 +53,6 @@ class RouterGenerator {
       case SignUpScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SignUpScreen());
-      // case SignUpSuccessScreen.route:
-      //   return MaterialPageRoute(
-      //       settings: settings, builder: (_) => const SignUpSuccessScreen());
       case OtpScreen.route:
         var arguments = settings.arguments as Pair<String, String>;
         return MaterialPageRoute(
