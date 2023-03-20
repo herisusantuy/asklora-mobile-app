@@ -139,26 +139,17 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
   }
 
   void _investmentStyleQuestionListener(
-      BuildContext context, ForYouQuestionState state) {
-    if (state.response.state == ResponseState.loading) {
-      CustomLoadingOverlay.of(context).show();
-    } else {
-      CustomLoadingOverlay.of(context).dismiss();
-    }
-  }
+          BuildContext context, ForYouQuestionState state) =>
+      CustomLoadingOverlay.of(context).show(state.response.state);
 
   void _userResponseListener(BuildContext context, UserResponseState state) {
-    if (state.responseState == ResponseState.loading) {
-      CustomLoadingOverlay.of(context).show();
-    } else {
-      CustomLoadingOverlay.of(context).dismiss();
-      if (state.ppiResponseState == PpiResponseState.dispatchResponse &&
-          state.responseState == ResponseState.success) {
-        context.read<ForYouBloc>().add(SaveInvestmentStyleState());
-        context
-            .read<NavigationBloc<ForYouPage>>()
-            .add(const PageChanged(ForYouPage.botRecommendation));
-      }
+    CustomLoadingOverlay.of(context).show(state.responseState);
+    if (state.ppiResponseState == PpiResponseState.dispatchResponse &&
+        state.responseState == ResponseState.success) {
+      context.read<ForYouBloc>().add(SaveInvestmentStyleState());
+      context
+          .read<NavigationBloc<ForYouPage>>()
+          .add(const PageChanged(ForYouPage.botRecommendation));
     }
   }
 }

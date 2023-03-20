@@ -2,11 +2,17 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../domain/base_response.dart';
 import 'jumping_dots_widget.dart';
 
 class CustomLoadingOverlay {
   static bool _isShowing = false;
   BuildContext context;
+
+  bool show(ResponseState state) {
+    state == ResponseState.loading ? appear() : dismiss();
+    return _isShowing;
+  }
 
   void dismiss() {
     if (_isShowing) {
@@ -15,7 +21,7 @@ class CustomLoadingOverlay {
     }
   }
 
-  void show() {
+  void appear() {
     _isShowing = !_isShowing;
     showDialog(
         context: context,
@@ -40,7 +46,7 @@ class CustomLoadingOverlay {
   }
 
   Future<T> during<T>(Future<T> future) {
-    show();
+    appear();
     return future.whenComplete(() => dismiss());
   }
 

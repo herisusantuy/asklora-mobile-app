@@ -61,11 +61,7 @@ class KycScreen extends StatelessWidget {
           ..add(const FetchKyc()),
         child: BlocConsumer<KycBloc, KycState>(
           listener: (context, state) {
-            if (state.fetchKycResponse.state == ResponseState.loading) {
-              CustomLoadingOverlay.of(context).show();
-            } else {
-              CustomLoadingOverlay.of(context).dismiss();
-            }
+            CustomLoadingOverlay.of(context).show(state.fetchKycResponse.state);
           },
           buildWhen: (previous, current) =>
               previous.fetchKycResponse.state != current.fetchKycResponse.state,
@@ -136,17 +132,15 @@ class KycScreen extends StatelessWidget {
                     previous.saveKycResponse.state !=
                     current.saveKycResponse.state,
                 listener: (context, state) {
-                  if (state.saveKycResponse.state == ResponseState.loading) {
-                    CustomLoadingOverlay.of(context).show();
-                  } else {
-                    CustomLoadingOverlay.of(context).dismiss();
-                    if (state.saveKycResponse.state == ResponseState.success) {
-                      TabsScreen.openAndRemoveAllRoute(context);
-                    } else if (state.saveKycResponse.state ==
-                        ResponseState.error) {
-                      CustomInAppNotification.show(
-                          context, state.saveKycResponse.message);
-                    }
+                  CustomLoadingOverlay.of(context)
+                      .show(state.saveKycResponse.state);
+
+                  if (state.saveKycResponse.state == ResponseState.success) {
+                    TabsScreen.openAndRemoveAllRoute(context);
+                  } else if (state.saveKycResponse.state ==
+                      ResponseState.error) {
+                    CustomInAppNotification.show(
+                        context, state.saveKycResponse.message);
                   }
                 },
                 child: Builder(

@@ -16,8 +16,8 @@ import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
 import '../../../tabs/tabs_screen.dart';
-import '../../otp/presentation/otp_screen.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
+import '../../otp/presentation/otp_screen.dart';
 import '../bloc/sign_in_bloc.dart';
 
 class SignInForm extends StatelessWidget {
@@ -27,11 +27,7 @@ class SignInForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignInBloc, SignInState>(
         listener: (context, state) async {
-      if (state.response.state == ResponseState.loading) {
-        CustomLoadingOverlay.of(context).show();
-      } else {
-        CustomLoadingOverlay.of(context).dismiss();
-      }
+      CustomLoadingOverlay.of(context).show(state.response.state);
 
       var responseState = state.response.state;
       if (responseState == ResponseState.error) {

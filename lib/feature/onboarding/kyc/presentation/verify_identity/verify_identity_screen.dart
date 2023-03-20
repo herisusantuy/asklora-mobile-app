@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/onfido/start_onfido.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -16,7 +17,6 @@ import '../../domain/onfido/onfido_result_request.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
 import '../widgets/kyc_base_form.dart';
-import '../../../../../core/presentation/buttons/button_pair.dart';
 
 class VerifyIdentityScreen extends StatelessWidget {
   final double progress;
@@ -34,14 +34,10 @@ class VerifyIdentityScreen extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.onfidoResponse.state != current.onfidoResponse.state,
         listener: (context, state) async {
-          if (state.onfidoResponse.state == ResponseState.loading) {
-            CustomLoadingOverlay.of(context).show();
-          } else {
-            CustomLoadingOverlay.of(context).dismiss();
-            if (state.onfidoResponse.state == ResponseState.error) {
-              CustomInAppNotification.show(
-                  context, state.onfidoResponse.message);
-            }
+          CustomLoadingOverlay.of(context).show(state.onfidoResponse.state);
+
+          if (state.onfidoResponse.state == ResponseState.error) {
+            CustomInAppNotification.show(context, state.onfidoResponse.message);
           }
 
           if (state is OnfidoSdkToken) {

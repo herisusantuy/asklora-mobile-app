@@ -26,11 +26,7 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<OtpBloc, OtpState>(
       listener: (context, state) {
-        if (state.response.state == ResponseState.loading) {
-          CustomLoadingOverlay.of(context).show();
-        } else {
-          CustomLoadingOverlay.of(context).dismiss();
-        }
+        CustomLoadingOverlay.of(context).show(state.response.state);
         if (state is OtpValidationSuccess) {
           context
               .read<NavigationBloc<KycPageStep>>()

@@ -93,8 +93,6 @@ class _TabsScreenState extends State<TabsScreen>
         body: IndexedStack(index: _selectedIndex, children: _widgets));
   }
 
-  // Center(child: _widgetOptions.elementAt(_selectedIndex))
-
   @override
   bool get wantKeepAlive => true;
 }

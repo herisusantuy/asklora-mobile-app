@@ -32,11 +32,7 @@ class EmailActivationScreen extends StatelessWidget {
           ..add(const StartListenOnDeeplink()),
         child: BlocConsumer<EmailActivationBloc, EmailActivationState>(
             listener: (context, state) {
-          if (state.response.state == ResponseState.loading) {
-            CustomLoadingOverlay.of(context).show();
-          } else {
-            CustomLoadingOverlay.of(context).dismiss();
-          }
+          CustomLoadingOverlay.of(context).show(state.response.state);
 
           if (state.deeplinkStatus == DeeplinkStatus.success) {
             context

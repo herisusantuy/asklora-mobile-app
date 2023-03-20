@@ -16,6 +16,7 @@ import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/text_fields/amount_text_field.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import '../../widgets/balance_base_form.dart';
@@ -23,17 +24,16 @@ import '../bloc/deposit_bloc.dart';
 import '../repository/deposit_repository.dart';
 import '../utils/deposit_utils.dart';
 import 'deposit_result_screen.dart';
-import '../../../../core/utils/extensions.dart';
 
 part 'widgets/deposit_notes.dart';
 
 part 'widgets/deposit_step/deposit_base_step.dart';
 
-part 'widgets/deposit_step/upload_proof_of_remittance_step.dart';
-
 part 'widgets/deposit_step/transfer_amount_step.dart';
 
 part 'widgets/deposit_step/transfer_detail_step.dart';
+
+part 'widgets/deposit_step/upload_proof_of_remittance_step.dart';
 
 class DepositScreen extends StatelessWidget {
   static const String route = '/deposit_screen';
@@ -50,11 +50,9 @@ class DepositScreen extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
         listener: (context, state) {
-          if (state.response.state == ResponseState.loading) {
-            CustomLoadingOverlay.of(context).show();
-          } else if (state.response.state == ResponseState.error) {
+          CustomLoadingOverlay.of(context).show(state.response.state);
+          if (state.response.state == ResponseState.error) {
             ///LETS ASSUME ERROR AS SUCCEED FOR NOW TO SHOW THE RESULT SCREEN
-            CustomLoadingOverlay.of(context).dismiss();
             // CustomInAppNotification.show(context, state.response.message);
             context
                 .read<AppBloc>()

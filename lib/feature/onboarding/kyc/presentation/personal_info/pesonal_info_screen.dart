@@ -2,8 +2,10 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
+import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_country_picker.dart';
 import '../../../../../core/presentation/custom_date_picker.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
@@ -22,7 +24,6 @@ import '../../domain/upgrade_account/personal_info_request.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../widgets/kyc_base_form.dart';
-import '../../../../../core/presentation/buttons/button_pair.dart';
 import 'otp/bloc/otp_bloc.dart';
 
 class PersonalInfoScreen extends StatelessWidget {
@@ -237,18 +238,14 @@ class PersonalInfoScreen extends StatelessWidget {
             listenWhen: (previous, current) =>
                 previous.response.state != current.response.state,
             listener: (context, state) {
-              if (state.response.state == ResponseState.loading) {
-                CustomLoadingOverlay.of(context).show();
+              CustomLoadingOverlay.of(context).show(state.response.state);
+              if (state.response.state == ResponseState.error) {
+                CustomInAppNotification.show(context, state.response.message);
               } else {
-                CustomLoadingOverlay.of(context).dismiss();
-                if (state.response.state == ResponseState.error) {
-                  CustomInAppNotification.show(context, state.response.message);
-                } else {
-                  context.read<OtpBloc>().add(const OtpRequested());
-                  context
-                      .read<NavigationBloc<KycPageStep>>()
-                      .add(const PageChanged(KycPageStep.otp));
-                }
+                context.read<OtpBloc>().add(const OtpRequested());
+                context
+                    .read<NavigationBloc<KycPageStep>>()
+                    .add(const PageChanged(KycPageStep.otp));
               }
             },
             child: ButtonPair(

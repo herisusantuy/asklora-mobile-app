@@ -19,22 +19,18 @@ class ForgotPasswordForm extends StatelessWidget {
           previous.response.state != current.response.state,
       listener: (context, state) {
         ResponseState responseState = state.response.state;
-        if (responseState == ResponseState.loading) {
-          CustomLoadingOverlay.of(context).show();
-        } else {
-          CustomLoadingOverlay.of(context).dismiss();
-          CustomInAppNotification.show(
-              context,
-              responseState == ResponseState.success
-                  ? state.response.data.detail
-                  : state.response.message);
-          if (responseState == ResponseState.success) {
-            ForgotPasswordSuccessScreen.open(context);
-          } else if (responseState == ResponseState.error) {
-            context
-                .read<ForgotPasswordBloc>()
-                .add(ForgotPasswordEmailChanged(state.email));
-          }
+        CustomLoadingOverlay.of(context).show(responseState);
+        CustomInAppNotification.show(
+            context,
+            responseState == ResponseState.success
+                ? state.response.data.detail
+                : state.response.message);
+        if (responseState == ResponseState.success) {
+          ForgotPasswordSuccessScreen.open(context);
+        } else if (responseState == ResponseState.error) {
+          context
+              .read<ForgotPasswordBloc>()
+              .add(ForgotPasswordEmailChanged(state.email));
         }
       },
       child: LayoutBuilder(
