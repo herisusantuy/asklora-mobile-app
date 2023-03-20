@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/utils/utils.dart';
 import '../../domain/upgrade_account/proofs_of_address_request.dart';
 import '../../domain/upgrade_account/residence_info_request.dart';
 import '../../utils/kyc_dropdown_enum.dart';
@@ -21,7 +22,7 @@ class AddressProofBloc extends Bloc<AddressProofEvent, AddressProofState> {
   }
 
   _onInitiateAddressProof(
-      InitiateAddressProof event, Emitter<AddressProofState> emit) {
+      InitiateAddressProof event, Emitter<AddressProofState> emit) async {
     emit(
       state.copyWith(
         addressLine1: event.residenceInfoRequest?.addressLine1,
@@ -29,9 +30,10 @@ class AddressProofBloc extends Bloc<AddressProofEvent, AddressProofState> {
         district:
             District.findByString(event.residenceInfoRequest?.district ?? ''),
         region: Region.findByString(event.residenceInfoRequest?.region ?? ''),
-        addressProofImages: event.proofOfAddressRequests
-            ?.map((e) => PlatformFile(path: e.proofFile, name: 'temp', size: 0))
-            .toList(),
+        addressProofImages: event.proofOfAddressRequests != null
+            ? await Future.wait(event.proofOfAddressRequests!.map(
+                (e) async => await decodeBase64ToPlatformFile(e.proofFile!)))
+            : [],
       ),
     );
   }
