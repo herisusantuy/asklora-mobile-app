@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/utils/extensions.dart';
+import '../../../../../core/utils/utils.dart';
 import '../../domain/upgrade_account/proofs_of_address_request.dart';
 import '../../domain/upgrade_account/residence_info_request.dart';
 import '../../utils/kyc_dropdown_enum.dart';
@@ -32,7 +32,7 @@ class AddressProofBloc extends Bloc<AddressProofEvent, AddressProofState> {
         region: Region.findByString(event.residenceInfoRequest?.region ?? ''),
         addressProofImages: event.proofOfAddressRequests != null
             ? await Future.wait(event.proofOfAddressRequests!.map(
-                (e) async => await e.proofFile!.decodeBase64ToPlatformFile()))
+                (e) async => await decodeBase64ToPlatformFile(e.proofFile!)))
             : [],
       ),
     );
