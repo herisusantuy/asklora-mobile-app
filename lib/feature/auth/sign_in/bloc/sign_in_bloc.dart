@@ -87,6 +87,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           if (userJourney == null) {
             ///user journey null means user activate from different devices
             await _ppiResponseRepository.linkUser(snapshot.data!.id);
+            await _userJourneyRepository.saveUserJourney(
+                userJourney: UserJourney.investmentStyle);
             emit(state.copyWith(
                 response: BaseResponse.complete(
                     data.copyWith(userJourney: UserJourney.investmentStyle))));
