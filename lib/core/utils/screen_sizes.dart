@@ -8,5 +8,5 @@ double scalableHeight(double height) {
 }
 
 double scalableWidth(double width) {
-  return screenHeight * (width / 100);
+  return screenWidth * (width / 100);
 }
