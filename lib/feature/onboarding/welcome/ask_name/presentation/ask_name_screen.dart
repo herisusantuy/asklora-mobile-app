@@ -34,11 +34,7 @@ class AskNameScreen extends StatelessWidget {
           listenWhen: (previous, current) =>
               previous.response.state != current.response.state,
           listener: (context, state) {
-            if (state.response.state == ResponseState.loading) {
-              CustomLoadingOverlay.of(context).show();
-            } else {
-              CustomLoadingOverlay.of(context).dismiss();
-            }
+            CustomLoadingOverlay.of(context).show(state.response.state);
             switch (state.response.state) {
               case ResponseState.error:
                 CustomInAppNotification.show(context, state.response.message);

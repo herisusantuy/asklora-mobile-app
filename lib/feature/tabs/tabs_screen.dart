@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/presentation/custom_scaffold.dart';
 import '../../core/utils/app_icons.dart';
+import '../../core/utils/log.dart';
 import '../bot_stock/presentation/portfolio/portfolio_screen.dart';
 import 'for_you/for_you_screen_form.dart';
 import 'home/home_screen_form.dart';
@@ -24,10 +25,11 @@ class TabsScreen extends StatefulWidget {
           arguments: initialTabScreenPage);
 }
 
-class _TabsScreenState extends State<TabsScreen> {
+class _TabsScreenState extends State<TabsScreen>
+    with AutomaticKeepAliveClientMixin<TabsScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static const List<Widget> _widgets = <Widget>[
     HomeScreenForm(),
     ForYouScreenForm(),
     PortfolioScreen(),
@@ -60,6 +62,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return CustomScaffold(
         enableBackNavigation: false,
         bottomNavigationBar: BottomNavigationBar(
@@ -86,6 +89,9 @@ class _TabsScreenState extends State<TabsScreen> {
           selectedItemColor: Colors.amber[800],
           onTap: _onItemTapped,
         ),
-        body: Center(child: _widgetOptions.elementAt(_selectedIndex)));
+        body: IndexedStack(index: _selectedIndex, children: _widgets));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

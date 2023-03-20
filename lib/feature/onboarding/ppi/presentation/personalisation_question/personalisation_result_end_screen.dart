@@ -28,11 +28,7 @@ class PersonalisationResultEndScreen extends StatelessWidget {
       header: const SizedBox.shrink(),
       child: BlocConsumer<UserResponseBloc, UserResponseState>(
           listener: (context, state) {
-        if (state.responseState == ResponseState.loading) {
-          CustomLoadingOverlay.of(context).show();
-        } else {
-          CustomLoadingOverlay.of(context).dismiss();
-        }
+        CustomLoadingOverlay.of(context).show(state.responseState);
         switch (state.responseState) {
           case ResponseState.success:
             break;

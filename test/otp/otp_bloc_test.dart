@@ -73,7 +73,7 @@ void main() async {
                 response: BaseResponse<GetOtpResponse>(
                     data: GetOtpResponse('OTP code sent to your email'),
                     state: ResponseState.success),
-                resetTime: 180,
+                resetTime: 60,
                 disableRequest: true,
               ),
             });

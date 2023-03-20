@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/domain/base_response.dart';
+
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -25,11 +25,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
             ..add(const RegisteredBankAccountCheck()),
       child: BlocConsumer<BankAccountBloc, BankAccountState>(
         listener: (context, state) {
-          if (state.response.state == ResponseState.loading) {
-            CustomLoadingOverlay.of(context).show();
-          } else {
-            CustomLoadingOverlay.of(context).dismiss();
-          }
+          CustomLoadingOverlay.of(context).show(state.response.state);
         },
         builder: (context, state) {
           return BalanceBaseForm(

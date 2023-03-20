@@ -19,21 +19,18 @@ class ResetPasswordForm extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.response.state != current.response.state,
       listener: (context, state) {
-        if (state.response.state == ResponseState.loading) {
-          CustomLoadingOverlay.of(context).show();
-        } else {
-          CustomLoadingOverlay.of(context).dismiss();
-          CustomInAppNotification.show(context, state.response.message);
-          if (state.response.state == ResponseState.success) {
-            SignInScreen.open(context);
-          } else if (state.response.state == ResponseState.error) {
-            context
-                .read<ResetPasswordBloc>()
-                .add(ResetPasswordPasswordChanged(state.password));
-            context.read<ResetPasswordBloc>().add(
-                ResetPasswordConfirmPasswordChanged(state.confirmPassword));
-            ForgotPasswordScreen.open(context);
-          }
+        CustomLoadingOverlay.of(context).show(state.response.state);
+        CustomInAppNotification.show(context, state.response.message);
+        if (state.response.state == ResponseState.success) {
+          SignInScreen.open(context);
+        } else if (state.response.state == ResponseState.error) {
+          context
+              .read<ResetPasswordBloc>()
+              .add(ResetPasswordPasswordChanged(state.password));
+          context
+              .read<ResetPasswordBloc>()
+              .add(ResetPasswordConfirmPasswordChanged(state.confirmPassword));
+          ForgotPasswordScreen.open(context);
         }
       },
       child: LayoutBuilder(

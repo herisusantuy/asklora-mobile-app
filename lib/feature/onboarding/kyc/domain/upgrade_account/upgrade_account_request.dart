@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../core/utils/extensions.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/financial_profile_bloc.dart';
@@ -66,7 +67,7 @@ class UpgradeAccountRequest extends Equatable {
           region: addressProofState.region?.value,
         ),
         proofsOfAddress: addressProofState.addressProofImages
-            .map((e) => ProofsOfAddressRequest(proofFile: e.path))
+            .map((e) => ProofsOfAddressRequest(proofFile: e.base64Image()))
             .toList(),
         employmentInfo: EmploymentInfo(
             employmentStatus: financialProfileState.employmentStatus.value,

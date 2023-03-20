@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/extensions.dart';
 
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../app/bloc/app_bloc.dart';
@@ -9,6 +8,7 @@ import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../core/utils/extensions.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
@@ -91,11 +91,7 @@ class KycSummaryScreen extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.submitKycResponse.state != current.submitKycResponse.state,
         listener: (context, state) {
-          if (state.submitKycResponse.state == ResponseState.loading) {
-            CustomLoadingOverlay.of(context).show();
-          } else {
-            CustomLoadingOverlay.of(context).dismiss();
-          }
+          CustomLoadingOverlay.of(context).show(state.submitKycResponse.state);
           switch (state.submitKycResponse.state) {
             case ResponseState.error:
               CustomInAppNotification.show(

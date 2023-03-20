@@ -5,6 +5,7 @@ import '../../../../app/bloc/app_bloc.dart';
 import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
+import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/styles/asklora_colors.dart';
@@ -14,7 +15,6 @@ import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../sign_in/bloc/sign_in_bloc.dart';
 import '../../sign_in/repository/sign_in_repository.dart';
-import '../../../../core/domain/token/repository/token_repository.dart';
 import '../bloc/otp_bloc.dart';
 import '../repository/otp_repository.dart';
 import 'otp_form.dart';
@@ -59,34 +59,29 @@ class OtpScreen extends StatelessWidget {
                 BlocListener<OtpBloc, OtpState>(
                     listenWhen: (previous, current) =>
                         previous.response.state != current.response.state,
-                    listener: ((context, state) {
-                      if (state.response.state != ResponseState.loading) {
-                        CustomInAppNotification.show(
-                            context, state.response.message);
-                      }
-                    })),
+                    listener: ((context, state) =>
+                        CustomLoadingOverlay.of(context)
+                            .show(state.response.state))),
                 BlocListener<SignInBloc, SignInState>(
                     listenWhen: (previous, current) =>
                         previous.response.state != current.response.state,
                     listener: ((context, state) {
-                      if (state.response.state == ResponseState.loading) {
-                        CustomLoadingOverlay.of(context).show();
-                      } else {
-                        CustomLoadingOverlay.of(context).dismiss();
-                        switch (state.response.state) {
-                          case ResponseState.error:
-                            CustomInAppNotification.show(
-                                context, state.response.message);
-                            break;
-                          case ResponseState.success:
-                            context
-                                .read<AppBloc>()
-                                .add(const GetUserJourneyFromLocal());
-                            TabsScreen.openAndRemoveAllRoute(context);
-                            break;
-                          default:
-                            break;
-                        }
+                      CustomLoadingOverlay.of(context)
+                          .show(state.response.state);
+
+                      switch (state.response.state) {
+                        case ResponseState.error:
+                          CustomInAppNotification.show(
+                              context, state.response.message);
+                          break;
+                        case ResponseState.success:
+                          context
+                              .read<AppBloc>()
+                              .add(const GetUserJourneyFromLocal());
+                          TabsScreen.openAndRemoveAllRoute(context);
+                          break;
+                        default:
+                          break;
                       }
                     }))
               ],

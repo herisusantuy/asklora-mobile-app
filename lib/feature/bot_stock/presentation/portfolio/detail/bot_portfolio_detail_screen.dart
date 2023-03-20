@@ -19,12 +19,11 @@ import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
-import '../../../../chart/presentation/chart_animation.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
 import '../../bot_stock_result_screen.dart';
-import '../../widgets/column_text.dart';
 import '../../widgets/bot_stock_form.dart';
+import '../../widgets/column_text.dart';
 import '../../widgets/pair_column_text.dart';
 import '../bloc/portfolio_bloc.dart';
 import '../domain/portfolio_bot_detail_model.dart';
@@ -33,11 +32,11 @@ import '../repository/portfolio_repository.dart';
 import '../utils/portfolio_enum.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
+part 'widgets/bot_portfolio_detail_header.dart';
+
 part 'widgets/key_info.dart';
 
 part 'widgets/performance.dart';
-
-part 'widgets/bot_portfolio_detail_header.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
   static const String route = '/bot_portfolio_detail_screen';
@@ -171,7 +170,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     if (state.botPortfolioDetailResponse.state == ResponseState.loading ||
         state.endBotStockResponse.state == ResponseState.loading ||
         state.rolloverBotStockResponse.state == ResponseState.loading) {
-      CustomLoadingOverlay.of(context).show();
+      CustomLoadingOverlay.of(context).appear();
     } else {
       CustomLoadingOverlay.of(context).dismiss();
       if (state.endBotStockResponse.state == ResponseState.success) {

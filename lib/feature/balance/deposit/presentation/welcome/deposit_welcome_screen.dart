@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../../../core/domain/base_response.dart';
+
 import '../../../../../core/domain/endpoints.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
@@ -21,13 +21,13 @@ import '../../utils/deposit_utils.dart';
 import '../deposit_screen.dart';
 import 'widgets/deposit_step/domain/deposit_step_model.dart';
 
+part 'widgets/deposit_bank_account.dart';
+
 part 'widgets/deposit_step/deposit_step.dart';
 
 part 'widgets/deposit_step/utils/deposit_step_utils.dart';
 
 part 'widgets/deposit_welcome_notes.dart';
-
-part 'widgets/deposit_bank_account.dart';
 
 class DepositWelcomeScreen extends StatelessWidget {
   final DepositType? initialDepositType;
@@ -58,11 +58,7 @@ class DepositWelcomeScreen extends StatelessWidget {
       },
       child: BlocConsumer<BankAccountBloc, BankAccountState>(
         listener: (context, state) {
-          if (state.response.state == ResponseState.loading) {
-            CustomLoadingOverlay.of(context).show();
-          } else {
-            CustomLoadingOverlay.of(context).dismiss();
-          }
+          CustomLoadingOverlay.of(context).show(state.response.state);
         },
         builder: (context, state) {
           DepositType depositType = initialDepositType ?? state.depositType;

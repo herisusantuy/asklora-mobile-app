@@ -5,7 +5,6 @@ import '../../feature/auth/otp/presentation/otp_screen.dart';
 import '../../feature/auth/reset_password/presentation/reset_password_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
-import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_result_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_screen.dart';
 import '../../feature/balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
@@ -40,7 +39,6 @@ import '../../feature/orders/regular/presentation/regular_order_home_screen.dart
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
-import '../../home_screen.dart';
 import '../domain/pair.dart';
 import '../presentation/custom_status_widget.dart';
 import '../presentation/photo_view_screen.dart';
@@ -49,18 +47,12 @@ import 'app_icons.dart';
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case HomeScreen.route:
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const HomeScreen());
       case SignInScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SignInScreen());
       case SignUpScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SignUpScreen());
-      case SignUpSuccessScreen.route:
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const SignUpSuccessScreen());
       case OtpScreen.route:
         var arguments = settings.arguments as Pair<String, String>;
         return MaterialPageRoute(

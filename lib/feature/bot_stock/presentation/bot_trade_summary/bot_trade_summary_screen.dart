@@ -58,32 +58,29 @@ class BotTradeSummaryScreen extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.tradeBotStockResponse != current.tradeBotStockResponse,
         listener: (context, state) {
-          if (state.tradeBotStockResponse.state == ResponseState.loading) {
-            CustomLoadingOverlay.of(context).show();
-          } else {
-            CustomLoadingOverlay.of(context).dismiss();
-            if (state.tradeBotStockResponse.state == ResponseState.success) {
-              if (!UserJourney.compareUserJourney(
-                  context: context, target: UserJourney.deposit)) {
-                context.read<AppBloc>().add(
-                      const SaveUserJourney(UserJourney.deposit),
-                    );
-              }
+          CustomLoadingOverlay.of(context)
+              .show(state.tradeBotStockResponse.state);
 
-              if (isFreeBotTrade) {
-                TabsScreen.openAndRemoveAllRoute(context,
-                    initialTabScreenPage: TabScreenPage.portfolio);
-                BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
-              } else {
-                BotStockResultScreen.open(
-                    context: context,
-                    arguments: Pair('Trade Request Received',
-                        _tradeRequestSuccessMessage()));
-              }
-            } else if (state.tradeBotStockResponse.state ==
-                ResponseState.error) {
-              BotStockBottomSheet.insufficientBalance(context);
+          if (state.tradeBotStockResponse.state == ResponseState.success) {
+            if (!UserJourney.compareUserJourney(
+                context: context, target: UserJourney.deposit)) {
+              context.read<AppBloc>().add(
+                    const SaveUserJourney(UserJourney.deposit),
+                  );
             }
+
+            if (isFreeBotTrade) {
+              TabsScreen.openAndRemoveAllRoute(context,
+                  initialTabScreenPage: TabScreenPage.portfolio);
+              BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
+            } else {
+              BotStockResultScreen.open(
+                  context: context,
+                  arguments: Pair(
+                      'Trade Request Received', _tradeRequestSuccessMessage()));
+            }
+          } else if (state.tradeBotStockResponse.state == ResponseState.error) {
+            BotStockBottomSheet.insufficientBalance(context);
           }
         },
         child: BotStockForm(

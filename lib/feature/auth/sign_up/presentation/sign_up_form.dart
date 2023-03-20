@@ -22,11 +22,7 @@ class SignUpForm extends StatelessWidget {
     return BlocListener<SignUpBloc, SignUpState>(listenWhen: (old, current) {
       return old.response.state != current.response.state;
     }, listener: (context, state) {
-      if (state.response.state == ResponseState.loading) {
-        CustomLoadingOverlay.of(context).show();
-      } else {
-        CustomLoadingOverlay.of(context).dismiss();
-      }
+      CustomLoadingOverlay.of(context).show(state.response.state);
       switch (state.response.state) {
         case ResponseState.error:
           context.read<SignUpBloc>().add(SignUpUsernameChanged(state.username));

@@ -22,7 +22,8 @@ class UserJourneyRepository {
           .save(UserJourneyRequest(userJourney: userJourney.value, data: data));
       var userJourneyResponse = UserJourneyResponse.fromJson(response.data!);
       await _sharedPreference.writeIntData(
-          sfKeyAskloraId, userJourneyResponse.user!);
+          sfKeyAskloraId, userJourneyResponse.user ?? 0);
+
       return BaseResponse.complete(userJourneyResponse);
     } catch (e) {
       ///TODO POST TO FIREBASE
