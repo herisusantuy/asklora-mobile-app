@@ -34,7 +34,7 @@ class OtpForm extends StatelessWidget {
                 .showError();
             break;
           case ResponseState.success:
-            SignUpSuccessScreen.openReplace(context);
+            // SignUpSuccessScreen.openReplace(context);
             break;
           default:
             break;

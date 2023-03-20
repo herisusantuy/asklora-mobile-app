@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../repository/user_journey_repository.dart';
-import 'package:flutter/material.dart';
 
 part 'app_event.dart';
 
@@ -48,7 +48,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void _onSaveUserJourney(SaveUserJourney event, Emitter<AppState> emit) async {
     emit(state.copyWith(userJourney: event.userJourney));
-    _userJourneyRepository.saveUserJourney(
+    await _userJourneyRepository.saveUserJourney(
         userJourney: event.userJourney, data: event.data);
   }
 
