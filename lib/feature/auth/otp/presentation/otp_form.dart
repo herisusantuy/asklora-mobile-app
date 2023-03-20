@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
-import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../core/presentation/custom_snack_bar.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/styles/asklora_colors.dart';
-import '../../sign_up/presentation/sign_up_success_screen.dart';
 import '../bloc/otp_bloc.dart';
 
 part 'otp_box.dart';
@@ -25,44 +21,28 @@ class OtpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<OtpBloc, OtpState>(
-      listener: (context, state) {
-        switch (state.response.state) {
-          case ResponseState.error:
-            CustomSnackBar(context)
-                .setMessage(state.response.message)
-                .showError();
-            break;
-          case ResponseState.success:
-            SignUpSuccessScreen.openReplace(context);
-            break;
-          default:
-            break;
-        }
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _padding(),
-                    const LoraMemojiHeader(
-                        text:
-                            'Please enter the OTP sent on your registered Phone Number.'),
-                    _otpBox(context),
-                  ],
-                ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _padding(),
+                  const LoraMemojiHeader(
+                      text:
+                          'Please enter the OTP sent on your registered Phone Number.'),
+                  _otpBox(context),
+                ],
               ),
             ),
-            _padding(),
-            _requestOtp(),
-            _signUpAgainButton(context)
-          ],
-        ),
+          ),
+          _padding(),
+          _requestOtp(),
+          _signUpAgainButton(context)
+        ],
       ),
     );
   }
