@@ -33,7 +33,8 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
                 ButtonPair(
                     primaryButtonOnClick: () {
                       PpiScreen.open(context,
-                          arguments: const Pair(QuestionPageType.investmentStyle,
+                          arguments: const Pair(
+                              QuestionPageType.investmentStyle,
                               QuestionPageStep.investmentStyle));
                     },
                     secondaryButtonOnClick: () =>
