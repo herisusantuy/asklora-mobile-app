@@ -84,29 +84,6 @@ void main() {
         expect(find.text('1234567'), findsNothing);
       });
 
-      testWidgets(
-          'Show tin input screen with the input then input the wrong TIN the button should be disabled and then input the right TIN the button should be enabled',
-          (WidgetTester tester) async {
-        var tinInput = find.byKey(const Key('tin_input'));
-        await buildKycScreen(tester, KycPageStep.tin);
-        expect(find.byKey(const Key('sub_title')), findsOneWidget);
-        expect(tinInput, findsOneWidget);
-        expect(kycButtonPair, findsOneWidget);
-
-        await tester.enterText(tinInput, 'abcdefg');
-        expect(find.text('abcdefg'), findsNothing);
-        expect(find.text('ABCDEFG'), findsOneWidget);
-        await tester.pump();
-        expect(
-            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
-            true);
-        await tester.enterText(tinInput, 'O8586854');
-        await tester.pump();
-        expect(
-            (tester.widget(kycButtonPair) as ButtonPair).disablePrimaryButton,
-            false);
-      });
-
       testWidgets('Show Address Proof screen with all the input',
           (WidgetTester tester) async {
         var addressLine1 = find.byKey(const Key('address_line_1'));

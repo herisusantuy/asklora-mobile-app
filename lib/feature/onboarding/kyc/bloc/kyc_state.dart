@@ -17,7 +17,6 @@ enum KycPageStep {
   personalInfoRejected,
   personalInfo,
   otp,
-  tin,
   addressProof,
   personalInfoSummary,
   disclosureAffiliationPerson,

@@ -5,7 +5,7 @@ import 'affiliated_person.dart';
 import 'agreement.dart';
 import 'proofs_of_address_request.dart';
 import 'residence_info_request.dart';
-import 'trusted_contact.dart';
+import 'wealth_sources_request.dart';
 
 part 'upgrade_account_response.g.dart';
 
@@ -21,7 +21,7 @@ class UpgradeAccountResponse extends Equatable {
   final ProofsOfAddressRequest? employmentInfo;
 
   @JsonKey(name: 'wealth_sources')
-  final List<TrustedContact>? wealthSources;
+  final List<WealthSourcesRequest>? wealthSources;
 
   @JsonKey(name: 'affiliated_person')
   final AffiliatedPerson? affiliatedPerson;
@@ -56,7 +56,7 @@ class UpgradeAccountResponse extends Equatable {
     ResidenceInfoRequest? residenceInfo,
     List<ProofsOfAddressRequest>? proofsOfAddress,
     ProofsOfAddressRequest? employmentInfo,
-    List<TrustedContact>? wealthSources,
+    List<WealthSourcesRequest>? wealthSources,
     AffiliatedPerson? affiliatedPerson,
     List<Agreement>? agreements,
   }) {

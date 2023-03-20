@@ -4,7 +4,6 @@ import '../../feature/auth/email_activation/presentation/email_activation_screen
 import '../../feature/auth/otp/presentation/otp_screen.dart';
 import '../../feature/auth/reset_password/presentation/reset_password_screen.dart';
 import '../../feature/auth/sign_in/presentation/sign_in_screen.dart';
-import '../../feature/auth/sign_in/presentation/sign_in_success_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/auth/sign_up/presentation/sign_up_success_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_result_screen.dart';
@@ -41,8 +40,6 @@ import '../../feature/orders/regular/presentation/regular_order_home_screen.dart
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
-import '../../feature/user/account/presentation/upgrade_account/not_eligible_screen.dart';
-import '../../feature/user/account/presentation/upgrade_account/upgrade_account_screen.dart';
 import '../../home_screen.dart';
 import '../domain/pair.dart';
 import '../presentation/custom_status_widget.dart';
@@ -58,18 +55,12 @@ class RouterGenerator {
       case SignInScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SignInScreen());
-      case SignInSuccessScreen.route:
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const SignInSuccessScreen());
       case SignUpScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SignUpScreen());
       case SignUpSuccessScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SignUpSuccessScreen());
-      case UpgradeAccountScreen.route:
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => UpgradeAccountScreen());
       case OtpScreen.route:
         var arguments = settings.arguments as Pair<String, String>;
         return MaterialPageRoute(
@@ -79,9 +70,6 @@ class RouterGenerator {
       case KycScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const KycScreen());
-      case NotEligibleScreen.route:
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const NotEligibleScreen());
       case WithdrawalScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const WithdrawalScreen());

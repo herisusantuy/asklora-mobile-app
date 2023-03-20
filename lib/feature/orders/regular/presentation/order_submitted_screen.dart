@@ -6,7 +6,7 @@ import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/custom_text_button.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
-import '../../../auth/sign_in/presentation/sign_in_success_screen.dart';
+import '../../../tabs/tabs_screen.dart';
 import '../../bloc/order_bloc.dart';
 import '../../domain/symbol_detail.dart';
 
@@ -118,6 +118,6 @@ class OrderSubmittedScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 15),
         borderRadius: 5,
         buttonText: 'Back to Dashboard',
-        onClick: () => SignInSuccessScreen.openAndRemoveAllRoute(context));
+        onClick: () => TabsScreen.openAndRemoveAllRoute(context));
   }
 }
