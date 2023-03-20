@@ -1,7 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/bloc/personal_info/personal_info_bloc.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/account_api_client.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/account_repository.dart';
-import 'package:asklora_mobile_app/feature/user/account/domain/account_api_client.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';

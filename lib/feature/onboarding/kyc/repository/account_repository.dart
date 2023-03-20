@@ -8,7 +8,6 @@ import '../domain/onfido/onfido_result_response.dart';
 import '../domain/onfido/onfido_token_response.dart';
 import '../domain/upgrade_account/personal_info_request.dart';
 import '../domain/upgrade_account/personal_info_response.dart';
-import '../domain/upgrade_account/tax_info_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../domain/upgrade_account/upgrade_account_response.dart';
 
@@ -20,11 +19,10 @@ class AccountRepository {
     return GetAccountResponse.fromJson(response.data);
   }
 
-  Future<BaseResponse<UpgradeAccountResponse>> upgradeAccount(
+  Future<BaseResponse<UpgradeAccountResponse>> submitIBKR(
       UpgradeAccountRequest upgradeAccountRequest) async {
     try {
-      var response =
-          await _accountApiClient.upgradeAccount(upgradeAccountRequest);
+      var response = await _accountApiClient.submitIBKR(upgradeAccountRequest);
       return BaseResponse.complete(
           UpgradeAccountResponse.fromJson(response.data));
     } catch (_) {
@@ -61,16 +59,6 @@ class AccountRepository {
           OnfidoResultResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(message: 'Could not update the Onfido result!');
-    }
-  }
-
-  Future<bool> submitTaxInfo(TaxInfoRequest request) async {
-    // TODO: Change this API flow according to the new flow.
-    try {
-      await _accountApiClient.submitTaxInfo(request);
-      return true;
-    } catch (e) {
-      return (e.toString() == 'Invalid request');
     }
   }
 }

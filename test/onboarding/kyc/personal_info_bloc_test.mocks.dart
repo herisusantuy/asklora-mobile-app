@@ -6,6 +6,8 @@
 import 'dart:async' as _i6;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i3;
+import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/account_api_client.dart'
+    as _i14;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/get_account/get_account_response.dart'
     as _i2;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/onfido/onfido_result_request.dart'
@@ -18,22 +20,12 @@ import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account
     as _i10;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/personal_info_response.dart'
     as _i9;
-import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/tax_info_request.dart'
-    as _i14;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/upgrade_account_request.dart'
     as _i8;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/upgrade_account_response.dart'
     as _i7;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/account_repository.dart'
     as _i5;
-import 'package:asklora_mobile_app/feature/user/account/domain/account_api_client.dart'
-    as _i15;
-import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/tax_info_request.dart'
-    as _i18;
-import 'package:asklora_mobile_app/feature/user/account/domain/upgrade_account/upgrade_account_request.dart'
-    as _i16;
-import 'package:asklora_mobile_app/feature/user/kyc/domain/onfido_result_request.dart'
-    as _i17;
 import 'package:dio/dio.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -104,11 +96,11 @@ class MockAccountRepository extends _i1.Mock implements _i5.AccountRepository {
         )),
       ) as _i6.Future<_i2.GetAccountResponse>);
   @override
-  _i6.Future<_i3.BaseResponse<_i7.UpgradeAccountResponse>> upgradeAccount(
+  _i6.Future<_i3.BaseResponse<_i7.UpgradeAccountResponse>> submitIBKR(
           _i8.UpgradeAccountRequest? upgradeAccountRequest) =>
       (super.noSuchMethod(
         Invocation.method(
-          #upgradeAccount,
+          #submitIBKR,
           [upgradeAccountRequest],
         ),
         returnValue:
@@ -116,7 +108,7 @@ class MockAccountRepository extends _i1.Mock implements _i5.AccountRepository {
                 _FakeBaseResponse_1<_i7.UpgradeAccountResponse>(
           this,
           Invocation.method(
-            #upgradeAccount,
+            #submitIBKR,
             [upgradeAccountRequest],
           ),
         )),
@@ -176,21 +168,12 @@ class MockAccountRepository extends _i1.Mock implements _i5.AccountRepository {
           ),
         )),
       ) as _i6.Future<_i3.BaseResponse<_i12.OnfidoResultResponse>>);
-  @override
-  _i6.Future<bool> submitTaxInfo(_i14.TaxInfoRequest? request) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #submitTaxInfo,
-          [request],
-        ),
-        returnValue: _i6.Future<bool>.value(false),
-      ) as _i6.Future<bool>);
 }
 
 /// A class which mocks [AccountApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAccountApiClient extends _i1.Mock implements _i15.AccountApiClient {
+class MockAccountApiClient extends _i1.Mock implements _i14.AccountApiClient {
   MockAccountApiClient() {
     _i1.throwOnMissingStub(this);
   }
@@ -211,18 +194,35 @@ class MockAccountApiClient extends _i1.Mock implements _i15.AccountApiClient {
         )),
       ) as _i6.Future<_i4.Response<dynamic>>);
   @override
-  _i6.Future<_i4.Response<dynamic>> upgradeAccount(
-          _i16.UpgradeAccountRequest? request) =>
+  _i6.Future<_i4.Response<dynamic>> submitIBKR(
+          _i8.UpgradeAccountRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
-          #upgradeAccount,
+          #submitIBKR,
           [request],
         ),
         returnValue:
             _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
-            #upgradeAccount,
+            #submitIBKR,
+            [request],
+          ),
+        )),
+      ) as _i6.Future<_i4.Response<dynamic>>);
+  @override
+  _i6.Future<_i4.Response<dynamic>> submitPersonalInfo(
+          _i10.PersonalInfoRequest? request) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitPersonalInfo,
+          [request],
+        ),
+        returnValue:
+            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
+          this,
+          Invocation.method(
+            #submitPersonalInfo,
             [request],
           ),
         )),
@@ -243,35 +243,18 @@ class MockAccountApiClient extends _i1.Mock implements _i15.AccountApiClient {
         )),
       ) as _i6.Future<_i4.Response<dynamic>>);
   @override
-  _i6.Future<_i4.Response<dynamic>> updateKycResult(
-          _i17.OnfidoResultRequest? request) =>
+  _i6.Future<_i4.Response<dynamic>> submitOnfidoOutcome(
+          _i13.OnfidoResultRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
-          #updateKycResult,
+          #submitOnfidoOutcome,
           [request],
         ),
         returnValue:
             _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
-            #updateKycResult,
-            [request],
-          ),
-        )),
-      ) as _i6.Future<_i4.Response<dynamic>>);
-  @override
-  _i6.Future<_i4.Response<dynamic>> submitTaxInfo(
-          _i18.TaxInfoRequest? request) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #submitTaxInfo,
-          [request],
-        ),
-        returnValue:
-            _i6.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
-          this,
-          Invocation.method(
-            #submitTaxInfo,
+            #submitOnfidoOutcome,
             [request],
           ),
         )),

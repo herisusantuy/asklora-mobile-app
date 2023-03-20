@@ -10,7 +10,6 @@ import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
-import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/kyc_bloc.dart';
@@ -31,7 +30,6 @@ import 'widgets/kyc_base_form.dart';
 class KycSummaryScreen extends StatelessWidget {
   final PersonalInfoState personalInfoState;
   final AddressProofState addressProofState;
-  final CountryOfTaxResidenceState countryOfTaxResidenceState;
   final DisclosureAffiliationState disclosureAffiliationState;
   final FinancialProfileState financialProfileState;
   final SourceOfWealthState sourceOfWealthState;
@@ -41,7 +39,6 @@ class KycSummaryScreen extends StatelessWidget {
       {required this.personalInfoState,
       required this.progress,
       required this.addressProofState,
-      required this.countryOfTaxResidenceState,
       required this.disclosureAffiliationState,
       required this.financialProfileState,
       required this.sourceOfWealthState,
@@ -61,7 +58,6 @@ class KycSummaryScreen extends StatelessWidget {
             key: const Key('personal_info_summary_content'),
             personalInfoState: personalInfoState,
             addressProofState: addressProofState,
-            countryOfTaxResidenceState: countryOfTaxResidenceState,
             title: 'Personal Info',
           ),
           const SizedBox(

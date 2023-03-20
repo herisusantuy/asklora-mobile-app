@@ -12,7 +12,6 @@ import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../auth/otp/repository/otp_repository.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
-import '../bloc/country_of_tax_residence/country_of_tax_residence_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
 import '../bloc/kyc_bloc.dart';
@@ -39,7 +38,6 @@ import 'personal_info/otp/presentation/otp_screen.dart';
 import 'personal_info/personal_info_summary_screen.dart';
 import 'personal_info/personal_info_screen.dart';
 import 'personal_info/resident_check_screen.dart';
-import 'personal_info/tin_screen.dart';
 import 'sign_agreements/broker_agreement_screen.dart';
 import 'sign_agreements/risk_disclosure_agreement_screen.dart';
 import 'sign_agreements/tax_agreement_screen.dart';
@@ -88,9 +86,6 @@ class KycScreen extends StatelessWidget {
                   create: (context) => OtpBloc(
                       otpRepository: OtpRepository(),
                       sharedPreference: SharedPreference()),
-                ),
-                BlocProvider(
-                  create: (context) => CountryOfTaxResidenceBloc(),
                 ),
                 BlocProvider(
                   lazy: !(saveKycRequest?.upgradeAccountRequest.residenceInfo !=
@@ -204,10 +199,6 @@ class KycScreen extends StatelessWidget {
               return const OtpScreen(
                 progress: 0.15,
               );
-            case KycPageStep.tin:
-              return const TinScreen(
-                progress: 0.2,
-              );
             case KycPageStep.addressProof:
               return const AddressProofScreen(
                 progress: 0.25,
@@ -217,8 +208,6 @@ class KycScreen extends StatelessWidget {
                 personalInfoState: context.read<PersonalInfoBloc>().state,
                 progress: 0.3,
                 addressProofState: context.read<AddressProofBloc>().state,
-                countryOfTaxResidenceState:
-                    context.read<CountryOfTaxResidenceBloc>().state,
               );
             case KycPageStep.disclosureAffiliationPerson:
               return const DisclosureAffiliationPersonScreen(
@@ -281,8 +270,6 @@ class KycScreen extends StatelessWidget {
                 personalInfoState: context.read<PersonalInfoBloc>().state,
                 progress: 0.9,
                 addressProofState: context.read<AddressProofBloc>().state,
-                countryOfTaxResidenceState:
-                    context.read<CountryOfTaxResidenceBloc>().state,
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,
                 financialProfileState:
