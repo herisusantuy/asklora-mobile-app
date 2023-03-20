@@ -12,6 +12,7 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/screen_sizes.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -45,71 +46,18 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
             'Source Of Wealth',
             style: AskLoraTextStyles.h4,
           ),
-          const SizedBox(height: 23),
+          SizedBox(height: scalableHeight(4)),
           CustomTextNew(
             'Please select all sources of wealth and declare the percentages of each. Please put 0% in the sources of wealth that you won’t invest with Asklora',
             style: AskLoraTextStyles.body1,
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: scalableHeight(1),
           ),
           _donutChart,
         ],
       ),
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ...SourceOfWealthType.values
-              .map(
-                (source) =>
-                    BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
-                  buildWhen: (previous, current) => true,
-                  builder: (context, state) {
-                    SourceOfWealthModel? sourceOfWealthModel =
-                        state.sourceOfWealthAnswers.firstWhereOrNull(
-                            (type) => type.sourceOfWealthType == source);
-                    return Column(
-                      children: [
-                        NumberCounterInput(
-                          key: Key(source.name),
-                          sourceOfWealthType: source,
-                          initialValue: sourceOfWealthModel != null
-                              ? sourceOfWealthModel.amount.toString()
-                              : '0',
-                          active: sourceOfWealthModel?.isActive ?? false,
-                          onTap: () {
-                            context
-                                .read<SourceOfWealthBloc>()
-                                .add(SourceOfWealthSelected(source));
-                          },
-                          onAmountChanged: (value) => context
-                              .read<SourceOfWealthBloc>()
-                              .add(SourceOfWealthAmountChanged(
-                                  value!.isNotEmpty ? value : '0', source)),
-                        ),
-                        if (sourceOfWealthModel != null &&
-                            (source == SourceOfWealthType.other))
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 20),
-                            child: MasterTextField(
-                              maxLine: 2,
-                              hintText:
-                                  'Use this space to provide more detailed information',
-                              onChanged: (value) {
-                                context.read<SourceOfWealthBloc>().add(
-                                    SourceOfWealthOtherIncomeChanged(
-                                        source, value));
-                              },
-                            ),
-                          ),
-                      ],
-                    );
-                  },
-                ),
-              )
-              .toList(),
-        ],
-      ),
+      content: _sourceOfWealthList,
       bottomButton: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
         buildWhen: (previous, current) =>
             previous.enableNextButton() != current.enableNextButton() ||
@@ -153,7 +101,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                   gradient: _gradients[index >= _gradients.length
                       ? index - _gradients.length
                       : index],
-                  radius: 25,
+                  radius: scalableWidth(5),
                   showTitle: false,
                   borderSide: const BorderSide(
                     width: 1,
@@ -168,6 +116,62 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
           sections: data,
         );
       },
+    );
+  }
+
+  Widget get _sourceOfWealthList {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ...SourceOfWealthType.values
+            .map(
+              (source) => BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
+                buildWhen: (previous, current) => true,
+                builder: (context, state) {
+                  SourceOfWealthModel? sourceOfWealthModel =
+                      state.sourceOfWealthAnswers.firstWhereOrNull(
+                          (type) => type.sourceOfWealthType == source);
+                  return Column(
+                    children: [
+                      NumberCounterInput(
+                        key: Key(source.name),
+                        sourceOfWealthType: source,
+                        initialValue: sourceOfWealthModel != null
+                            ? sourceOfWealthModel.amount.toString()
+                            : '0',
+                        active: sourceOfWealthModel?.isActive ?? false,
+                        onTap: () {
+                          context
+                              .read<SourceOfWealthBloc>()
+                              .add(SourceOfWealthSelected(source));
+                        },
+                        onAmountChanged: (value) => context
+                            .read<SourceOfWealthBloc>()
+                            .add(SourceOfWealthAmountChanged(
+                                value!.isNotEmpty ? value : '0', source)),
+                      ),
+                      if (sourceOfWealthModel != null &&
+                          (source == SourceOfWealthType.other))
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: MasterTextField(
+                            maxLine: 2,
+                            hintText:
+                                'Use this space to provide more detailed information',
+                            onChanged: (value) {
+                              context.read<SourceOfWealthBloc>().add(
+                                  SourceOfWealthOtherIncomeChanged(
+                                      source, value));
+                            },
+                          ),
+                        ),
+                    ],
+                  );
+                },
+              ),
+            )
+            .toList(),
+      ],
     );
   }
 

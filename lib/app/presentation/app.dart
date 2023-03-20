@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -6,6 +7,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
+import '../../core/utils/screen_sizes.dart';
+import '../../feature/onboarding/kyc/bloc/kyc_bloc.dart';
+import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';
@@ -49,9 +53,11 @@ class App extends StatelessWidget {
                 },
                 child: MaterialApp(
                     builder: (context, child) {
+                      screenWidth = MediaQuery.of(context).size.width;
+                      screenHeight = MediaQuery.of(context).size.height;
                       return MediaQuery(
-                          data: MediaQuery.of(context)
-                              .copyWith(textScaleFactor: 1.0),
+                          data: MediaQuery.of(context).copyWith(
+                              textScaleFactor: screenWidth < 360 ? .8 : 1.0),
                           child: child!);
                     },
                     debugShowCheckedModeBanner: false,

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../app/presentation/app.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../../core/utils/screen_sizes.dart';
 import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../../utils/numerical_range_formatter.dart';
 import '../../../utils/source_of_wealth_enum.dart';
@@ -98,7 +100,9 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(
-                horizontal: 20, vertical: widget.active ? 10 : 20),
+                horizontal: scalableWidth(5),
+                vertical:
+                    widget.active ? scalableWidth(2.5) : scalableWidth(5)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -124,13 +128,13 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
 
   Widget _counterButton({required String label, required VoidCallback onTap}) {
     return Material(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(scalableWidth(5)),
       color: AskLoraColors.black,
       child: InkWell(
         onTap: onTap,
         child: SizedBox(
-          height: 30,
-          width: 30,
+          height: scalableWidth(8),
+          width: scalableWidth(8),
           child: CustomTextNew(
             label,
             textAlign: TextAlign.center,
@@ -146,8 +150,8 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6),
       child: SizedBox(
-        width: 82,
-        height: 40,
+        width: scalableWidth(20),
+        height: scalableWidth(12),
         child: TextField(
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
