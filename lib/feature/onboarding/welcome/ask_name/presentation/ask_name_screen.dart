@@ -32,6 +32,8 @@ class AskNameScreen extends StatelessWidget {
             addUserNameRepository: AddUserNameRepository(),
             sharedPreference: SharedPreference()),
         child: BlocListener<LoraAskNameBloc, LoraAskNameState>(
+          listenWhen: (previous, current) =>
+              previous.response.state != current.response.state,
           listener: (context, state) {
             if (state.response.state == ResponseState.loading) {
               CustomLoadingOverlay.of(context).show();

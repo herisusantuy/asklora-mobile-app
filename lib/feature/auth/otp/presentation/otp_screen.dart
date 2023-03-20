@@ -6,6 +6,7 @@ import '../../../../app/repository/user_journey_repository.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
@@ -68,19 +69,24 @@ class OtpScreen extends StatelessWidget {
                     listenWhen: (previous, current) =>
                         previous.response.state != current.response.state,
                     listener: ((context, state) {
-                      switch (state.response.state) {
-                        case ResponseState.error:
-                          CustomInAppNotification.show(
-                              context, state.response.message);
-                          break;
-                        case ResponseState.success:
-                          context
-                              .read<AppBloc>()
-                              .add(const GetUserJourneyFromLocal());
-                          TabsScreen.openAndRemoveAllRoute(context);
-                          break;
-                        default:
-                          break;
+                      if (state.response.state == ResponseState.loading) {
+                        CustomLoadingOverlay.of(context).show();
+                      } else {
+                        CustomLoadingOverlay.of(context).dismiss();
+                        switch (state.response.state) {
+                          case ResponseState.error:
+                            CustomInAppNotification.show(
+                                context, state.response.message);
+                            break;
+                          case ResponseState.success:
+                            context
+                                .read<AppBloc>()
+                                .add(const GetUserJourneyFromLocal());
+                            TabsScreen.openAndRemoveAllRoute(context);
+                            break;
+                          default:
+                            break;
+                        }
                       }
                     }))
               ],
