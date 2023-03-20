@@ -94,11 +94,7 @@ class PpiScreen extends StatelessWidget {
   Widget _pages(NavigationState navigationState) {
     return BlocConsumer<QuestionBloc, QuestionState>(
         listener: (context, state) {
-      if (state.response.state == ResponseState.loading) {
-        CustomLoadingOverlay.of(context).show();
-      } else {
-        CustomLoadingOverlay.of(context).dismiss();
-      }
+      CustomLoadingOverlay.of(context).show(state.response.state);
     }, builder: (context, state) {
       switch (state.response.state) {
         case ResponseState.success:

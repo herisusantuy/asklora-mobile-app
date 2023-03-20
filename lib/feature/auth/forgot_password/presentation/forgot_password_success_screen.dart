@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
@@ -23,11 +22,7 @@ class ForgotPasswordSuccessScreen extends StatelessWidget {
         },
         child: BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
           listener: (context, state) {
-            if (state.response.state == ResponseState.loading) {
-              CustomLoadingOverlay.of(context).show();
-            } else {
-              CustomLoadingOverlay.of(context).dismiss();
-            }
+            CustomLoadingOverlay.of(context).show(state.response.state);
 
             if (state.deeplinkStatus == DeeplinkStatus.success) {
               ResetPasswordScreen.open(context,

@@ -16,7 +16,7 @@ part 'otp_state.dart';
 
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   final OtpRepository _otpRepository;
-  final int _resetTime = 180;
+  final int _resetTime = 60;
   StreamSubscription? resetTimeStreamSubscription;
 
   OtpBloc({

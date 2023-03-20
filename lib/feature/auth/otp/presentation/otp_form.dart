@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
@@ -20,32 +21,30 @@ class OtpForm extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _padding(),
-                  const LoraMemojiHeader(
-                      text:
-                          'Please enter the OTP sent on your registered Phone Number.'),
-                  _otpBox(context),
-                ],
+  Widget build(BuildContext context) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _padding(),
+                    const LoraMemojiHeader(
+                        text:
+                            'Please enter the OTP sent on your registered Phone Number.'),
+                    _otpBox(context),
+                  ],
+                ),
               ),
             ),
-          ),
-          _padding(),
-          _requestOtp(),
-          _signUpAgainButton(context)
-        ],
-      ),
-    );
-  }
+            _padding(),
+            _requestOtp(),
+            _signUpAgainButton(context)
+          ],
+        ),
+      );
 
   Widget _otpBox(BuildContext context) {
     return Container(
@@ -69,7 +68,7 @@ class OtpForm extends StatelessWidget {
             fontStyle: FontStyle.normal,
             disabled: state.disableRequest,
             label: state.disableRequest
-                ? 'Request another otp in ${_formatTimeMMSS(state.resetTime)}'
+                ? 'REQUEST ANOTHER OTP IN ${_formatTimeMMSS(state.resetTime)}'
                 : 'RESEND OTP CODE',
             onTap: onOtpResend,
           );

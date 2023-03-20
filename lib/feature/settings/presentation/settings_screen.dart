@@ -13,9 +13,9 @@ import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../core/utils/storage/profile_data.dart';
 import '../../../core/utils/storage/secure_storage.dart';
 import '../../../core/utils/storage/shared_preference.dart';
-import '../../../core/utils/storage/profile_data.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
@@ -108,15 +108,11 @@ class SettingsScreen extends StatelessWidget {
   Widget _signOutButton(BuildContext context) => Builder(
         builder: (context) => BlocListener<SignOutBloc, SignOutState>(
           listener: (context, state) async {
-            if (state.response.state == ResponseState.loading) {
-              CustomLoadingOverlay.of(context).show();
-            } else {
-              CustomLoadingOverlay.of(context).dismiss();
-              if (state.response.state == ResponseState.error) {
-                CustomInAppNotification.show(context, state.response.message);
-              } else if (state.response.state == ResponseState.success) {
-                CarouselScreen.openAndRemoveAllRoute(context);
-              }
+            CustomLoadingOverlay.of(context).show(state.response.state);
+            if (state.response.state == ResponseState.error) {
+              CustomInAppNotification.show(context, state.response.message);
+            } else if (state.response.state == ResponseState.success) {
+              CarouselScreen.openAndRemoveAllRoute(context);
             }
           },
           child: GestureDetector(

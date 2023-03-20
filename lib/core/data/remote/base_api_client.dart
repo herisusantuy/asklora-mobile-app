@@ -141,7 +141,8 @@ class AppInterceptors extends Interceptor {
           case 400:
             throw BadRequestException(err.requestOptions);
           case 401:
-            if (err.response?.data['message'] == 'Token invalid') {
+            if (err.response?.data['message'] == 'Token invalid' ||
+                err.response?.data['message'] == 'Token invalid / expired') {
               _handleExpiredToken(err, handler);
               return;
             } else {

@@ -44,11 +44,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               previous.botDetailResponse.state !=
               current.botDetailResponse.state,
           listener: (context, state) {
-            if (state.botDetailResponse.state == ResponseState.loading) {
-              CustomLoadingOverlay.of(context).show();
-            } else {
-              CustomLoadingOverlay.of(context).dismiss();
-            }
+            CustomLoadingOverlay.of(context)
+                .show(state.botDetailResponse.state);
           },
           buildWhen: (previous, current) =>
               previous.botDetailResponse.state !=

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
@@ -31,11 +32,7 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
       header: const SizedBox.shrink(),
       child: BlocConsumer<UserResponseBloc, UserResponseState>(
           listener: (context, state) {
-        if (state.responseState == ResponseState.loading) {
-          CustomLoadingOverlay.of(context).show();
-        } else {
-          CustomLoadingOverlay.of(context).dismiss();
-        }
+        CustomLoadingOverlay.of(context).show(state.responseState);
         switch (state.responseState) {
           case ResponseState.success:
             UserJourney.onAlreadyPassed(
