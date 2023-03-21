@@ -48,6 +48,14 @@ extension StringExtension on String {
     final height = countLines * textPainter.size.height;
     return height;
   }
+
+  double textWidth(TextStyle style) {
+    TextPainter textPainter = TextPainter()
+      ..text = TextSpan(text: this, style: style)
+      ..textDirection = ui.TextDirection.ltr
+      ..layout(minWidth: 0, maxWidth: double.infinity);
+    return textPainter.size.width;
+  }
 }
 
 extension PasswordValidators on String {
