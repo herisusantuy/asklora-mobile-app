@@ -5,7 +5,6 @@ import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../../utils/app_icons.dart';
 import '../../utils/extensions.dart';
-import '../../utils/formatters/custom_formatters.dart';
 import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 
@@ -105,7 +104,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   onChanged: widget.onChanged,
                   textCapitalization: widget.textCapitalization,
                   inputFormatters: widget.textInputFormatterList ??
-                      [lettersAndNumberFormatter()],
+                      [LengthLimitingTextInputFormatter(16)],
                   obscureText: obscureText,
                   obscuringCharacter: '●',
                   style: TextFieldStyle.valueTextStyle,
@@ -147,7 +146,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           height: 5,
         ),
         _errorWidget(
-            label: 'min. 8 characters', checkPassed: minEightCharacters),
+            label: 'min. 8 - max. 16 characters',
+            checkPassed: minEightCharacters),
         _errorWidget(
             label: 'at least 1 lowercase letter',
             checkPassed: containsLowerCase),
