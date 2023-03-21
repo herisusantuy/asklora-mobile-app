@@ -5,6 +5,7 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/values/app_values.dart';
 
 enum PpiResult { success, failed }
 
@@ -34,38 +35,41 @@ class PpiResultScreen extends StatelessWidget {
       return SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: viewportConstraints.maxHeight),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  if (ppiResult == PpiResult.success)
-                    LoraMemojiHeader(
-                        text: memojiText, loraMemojiType: loraMemojiType)
-                  else
-                    CustomStatusWidget(
-                      title: memojiText,
-                      statusType: StatusType.failed,
-                    ),
-                  if (additionalMessage.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 36, vertical: 0),
-                      child: CustomTextNew(
-                        additionalMessage,
-                        style:
-                            additionalMessageTextStyle ?? AskLoraTextStyles.h4,
-                        textAlign: TextAlign.center,
+          child: Padding(
+            padding: AppValues.screenHorizontalPadding,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    if (ppiResult == PpiResult.success)
+                      LoraMemojiHeader(
+                          text: memojiText, loraMemojiType: loraMemojiType)
+                    else
+                      CustomStatusWidget(
+                        title: memojiText,
+                        statusType: StatusType.failed,
                       ),
-                    ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: bottomPadding),
-                child: bottomButton,
-              )
-            ],
+                    if (additionalMessage.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 36, vertical: 0),
+                        child: CustomTextNew(
+                          additionalMessage,
+                          style: additionalMessageTextStyle ??
+                              AskLoraTextStyles.h4,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: bottomPadding, top: 20),
+                  child: bottomButton,
+                )
+              ],
+            ),
           ),
         ),
       );
