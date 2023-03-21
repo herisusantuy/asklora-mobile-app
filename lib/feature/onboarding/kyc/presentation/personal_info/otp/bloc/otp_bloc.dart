@@ -72,7 +72,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       cancelStreamSubscription();
       data.copyWith(message: 'Verify OTP Success');
       emit(OtpValidationSuccess());
-    } on UnauthorizedException {
+    } on BadRequestException {
       emit(
           state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
     } catch (e) {

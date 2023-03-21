@@ -13,6 +13,7 @@ class PpiResultScreen extends StatelessWidget {
   final String memojiText;
   final String additionalMessage;
   final Widget bottomButton;
+  final Widget? richText;
   final PpiResult? ppiResult;
   final TextStyle? additionalMessageTextStyle;
   final double bottomPadding;
@@ -24,6 +25,7 @@ class PpiResultScreen extends StatelessWidget {
       this.additionalMessage = '',
       required this.bottomButton,
       this.additionalMessageTextStyle,
+      this.richText,
       this.bottomPadding = 35,
       this.loraMemojiType = LoraMemojiType.lora2,
       Key? key})
@@ -62,10 +64,11 @@ class PpiResultScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
+                    if (richText != null) richText!,
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: bottomPadding, top: 20),
+                  padding: EdgeInsets.only(bottom: bottomPadding),
                   child: bottomButton,
                 )
               ],
