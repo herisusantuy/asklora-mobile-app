@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../../core/utils/scalable_media_query.dart';
 import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../../utils/numerical_range_formatter.dart';
 import '../../../utils/source_of_wealth_enum.dart';
