@@ -61,7 +61,7 @@ class AskNameScreen extends StatelessWidget {
                           .add(NameChanged(value.trimRight())),
                       hintText: S.of(context).askNameScreenTextFieldHint,
                       textInputFormatterList: [
-                        lettersAndNumberFormatter(),
+                        lettersAndNumberWithSpaceFormatter(),
                       ],
                       textCapitalization: TextCapitalization.words,
                       textInputType: TextInputType.text),
