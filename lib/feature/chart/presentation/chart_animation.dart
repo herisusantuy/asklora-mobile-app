@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
 
+import '../../../core/presentation/custom_text_new.dart';
+import '../../../core/styles/asklora_colors.dart';
+import '../../../core/styles/asklora_text_styles.dart';
+import '../../../core/utils/extensions.dart';
 import '../domain/chart_models.dart';
 import '../utils/chart_util.dart';
 import 'widgets/animated_icon_label.dart';
@@ -21,11 +25,8 @@ class ChartAnimation extends StatefulWidget {
 }
 
 class _ChartAnimationState extends State<ChartAnimation> {
-  final TextStyle axisStyle = TextStyle(
-    color: Colors.grey[700]!,
-    fontWeight: FontWeight.bold,
-    fontSize: 11,
-  );
+  final TextStyle axisStyle =
+      AskLoraTextStyles.body4.copyWith(color: AskLoraColors.charcoal);
 
   final double chartHeight = 300;
   final int lineAnimationDuration = 250;
@@ -174,7 +175,9 @@ class _ChartAnimationState extends State<ChartAnimation> {
             setState(() {
               labels.add(AnimatedIconLabel(
                   key: UniqueKey(),
-                  left: flSpotsCoordinate[animateIndex].offset.dx - 56,
+                  left: flSpotsCoordinate[animateIndex].offset.dx -
+                      56 +
+                      reservedLeftSize,
                   top: flSpotsCoordinate[animateIndex].offset.dy + 10,
                   hedgeType: HedgeType.buy));
             });
@@ -182,7 +185,9 @@ class _ChartAnimationState extends State<ChartAnimation> {
             setState(() {
               labels.add(AnimatedIconLabel(
                   key: UniqueKey(),
-                  left: flSpotsCoordinate[animateIndex].offset.dx - 56,
+                  left: flSpotsCoordinate[animateIndex].offset.dx -
+                      56 +
+                      reservedLeftSize,
                   top: flSpotsCoordinate[animateIndex].offset.dy - 58,
                   hedgeType: HedgeType.sell));
             });
@@ -194,8 +199,12 @@ class _ChartAnimationState extends State<ChartAnimation> {
                     (MediaQuery.of(context).size.width -
                         (_leftChartPadding + _rightChartPadding) -
                         120)
-                ? (flSpotsCoordinate[animateIndex].offset.dx - 88)
-                : (flSpotsCoordinate[animateIndex].offset.dx - 80),
+                ? (flSpotsCoordinate[animateIndex].offset.dx -
+                    88 +
+                    reservedLeftSize)
+                : (flSpotsCoordinate[animateIndex].offset.dx -
+                    80 +
+                    reservedLeftSize),
             top: flSpotsCoordinate[animateIndex].offset.dy >
                     50 * (chartHeight - 24) / 100
                 ? 10
@@ -257,7 +266,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
   }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    return Text(value.round().toString(),
+    return CustomTextNew(value.round().toString(),
         style: axisStyle, textAlign: TextAlign.left);
   }
 
@@ -274,6 +283,10 @@ class _ChartAnimationState extends State<ChartAnimation> {
       maxValue += (10 - maxValue % 10);
     }
     return maxValue;
+  }
+
+  double get reservedLeftSize {
+    return getMaxYValue.toString().textWidth(axisStyle);
   }
 
   double get getMinYValue {
@@ -333,7 +346,24 @@ class _ChartAnimationState extends State<ChartAnimation> {
         },
       ),
       titlesData: FlTitlesData(
-        show: false,
+        show: true,
+        rightTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        topTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        leftTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            interval: 10,
+            getTitlesWidget: leftTitleWidgets,
+            reservedSize: reservedLeftSize,
+          ),
+        ),
       ),
       borderData: FlBorderData(
           show: true,
