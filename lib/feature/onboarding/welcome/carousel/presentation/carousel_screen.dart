@@ -49,10 +49,14 @@ class CarouselScreen extends StatelessWidget {
     return DefaultTextStyle(
         style: AskLoraTextStyles.h1.copyWith(color: AskLoraColors.charcoal),
         child: AnimatedTextKit(animatedTexts: [
-          RotateAnimatedText(S.of(context).carouselIntro1),
-          RotateAnimatedText(S.of(context).carouselIntro2),
-          RotateAnimatedText(S.of(context).carouselIntro3),
-          RotateAnimatedText(S.of(context).carouselIntro4),
+          RotateAnimatedText(S.of(context).carouselIntro1,
+              alignment: Alignment.centerLeft),
+          RotateAnimatedText(S.of(context).carouselIntro2,
+              alignment: Alignment.centerLeft),
+          RotateAnimatedText(S.of(context).carouselIntro3,
+              alignment: Alignment.centerLeft),
+          RotateAnimatedText(S.of(context).carouselIntro4,
+              alignment: Alignment.centerLeft),
         ]));
   }
 

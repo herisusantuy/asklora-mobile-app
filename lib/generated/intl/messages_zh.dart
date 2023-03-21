@@ -20,8 +20,6 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
-  static String m0(name) => "Hi ${name}! 撇除 MPFs，你有幾耐投資經驗 ？";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -40,7 +38,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
-            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
-        "ppiQuestion1": m0
+            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？")
       };
 }
