@@ -45,7 +45,7 @@ class KycBaseForm extends StatelessWidget {
           if (headerContent != null)
             Container(
               padding: const EdgeInsets.only(
-                  left: 15, right: 15, bottom: 10, top: 20),
+                  left: 15, right: 15, bottom: 10, top: 0),
               decoration: const BoxDecoration(
                   border: Border(
                       bottom: BorderSide(
