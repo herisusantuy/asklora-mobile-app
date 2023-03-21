@@ -12,6 +12,7 @@ class PpiQuestionRepository {
   PpiQuestionRepository._();
 
   final PpiApiRepository _ppiApiRepository = PpiApiRepository();
+
   Future<Fixture> fetchPersonalAndPrivacyQuestions() async {
     // Let's keep it for a while as sometimes it good to test the PPI from local file.
     // final String response =
