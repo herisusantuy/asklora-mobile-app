@@ -170,16 +170,6 @@ class S {
     );
   }
 
-  /// `Hi {name}! How long have you been investing in stocks until now, aside from MPFs?`
-  String ppiQuestion1(String name) {
-    return Intl.message(
-      'Hi $name! How long have you been investing in stocks until now, aside from MPFs?',
-      name: 'ppiQuestion1',
-      desc: '',
-      args: [name],
-    );
-  }
-
   /// `Lora’s date to start the Botstocks`
   String get tooltipBotDetailsStartDate {
     return Intl.message(

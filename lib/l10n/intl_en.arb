@@ -12,14 +12,6 @@
       "askNameScreenTextFieldHint": "Your Name",
       "greetingScreenTitle": "Alright! Are you ready for the FinFit journey? ",
       "greetingScreenSubTitle": "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!",
-      "ppiQuestion1": "Hi {name}! How long have you been investing in stocks until now, aside from MPFs?",
-      "@ppiQuestion1": {
-            "placeholders": {
-                "name": {
-                    "type": "String"
-                }
-            }
-      },
       "tooltipBotDetailsStartDate": "Lora’s date to start the Botstocks",
       "tooltipBotDetailsInvestmentPeriod": "The duration you set for Botstock where the Bot will automatically buy and sell.",
       "tooltipBotDetailsEstMaxProfit": "This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level",
