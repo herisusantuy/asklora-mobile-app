@@ -20,9 +20,9 @@ class PpiQuestionRepository {
     final response = await _ppiApiRepository.fetchPersonalAndPrivacyQuestions();
     List<Question> questions = List.empty(growable: true);
 
-    questions = (jsonDecode(jsonEncode(response.data)) as List).map((i) {
-      return Question.fromJson(i);
-    }).toList();
+    questions = (jsonDecode(jsonEncode(response.data)) as List)
+        .map((i) => Question.fromJson(i))
+        .toList();
     return Fixture.instance.fixPersonalisedQuestion(questions);
   }
 
