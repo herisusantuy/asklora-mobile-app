@@ -12,14 +12,6 @@
       "askNameScreenTextFieldHint": "你的名字",
       "greetingScreenTitle": "Alright! 你準備開始 FinFit 未先？",
       "greetingScreenSubTitle": "訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ ",
-      "ppiQuestion1": "Hi {name}! 撇除 MPFs，你有幾耐投資經驗 ？",
-      "@ppiQuestion1": {
-            "placeholders": {
-                "firstName": {
-                          "type": "String"
-                }
-            }
-      },
       "tooltip_bot_details_start_date": "Lora開始Botstocks交易",
       "tooltip_bot_details_investment_period": "你定下的投資時間，Botstock將會於此期間內自動買賣股票。",
       "tooltip_bot_details_est_max_profit": "Bot將出售以獲取最大利潤的股票價位。",
