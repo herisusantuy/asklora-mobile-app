@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../ppi_result_screen.dart';
 
@@ -13,12 +12,8 @@ class PrivacyResultSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget<QuestionPageStep>(
-      onBackPressed: () {
-        context.read<QuestionBloc>().add(const CurrentPrivacyPageDecremented());
-        context.read<NavigationBloc<QuestionPageStep>>().add(const PagePop());
-      },
-      header: const SizedBox.shrink(),
+    return WillPopScope(
+      onWillPop: () async => false,
       child: PpiResultScreen(
         ppiResult: PpiResult.success,
         loraMemojiType: LoraMemojiType.lora2,

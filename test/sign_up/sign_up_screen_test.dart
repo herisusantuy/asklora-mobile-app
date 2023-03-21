@@ -31,7 +31,7 @@ void main() async {
       await _buildHomeScreen(tester);
 
       //password instruction should be greyed and icon should be ❗
-      expect(find.text('min. 8 characters'), findsNothing);
+      expect(find.text('min. 8 - max. 16 characters'), findsNothing);
       expect(find.text('at least 1 lowercase letter'), findsNothing);
       expect(find.text('at least 1 uppercase letter'), findsNothing);
       expect(find.text('at least 1 number'), findsNothing);
@@ -65,7 +65,7 @@ void main() async {
 
       expect(find.text('kkkkk'), findsOneWidget);
 
-      expect(find.text('min. 8 characters'), findsOneWidget);
+      expect(find.text('min. 8 - max. 16 characters'), findsOneWidget);
       expect(find.text('at least 1 lowercase letter'), findsOneWidget);
       expect(find.text('at least 1 uppercase letter'), findsOneWidget);
       expect(find.text('at least 1 number'), findsOneWidget);
@@ -90,7 +90,7 @@ void main() async {
       expect(find.text('Enter valid email'), findsNothing);
 
       //password instruction should be greyed and icon should be ❗
-      expect(find.text('min. 8 characters'), findsOneWidget);
+      expect(find.text('min. 8 - max. 16 characters'), findsOneWidget);
       expect(find.text('at least 1 lowercase letter'), findsOneWidget);
       expect(find.text('at least 1 uppercase letter'), findsOneWidget);
       expect(find.text('at least 1 number'), findsOneWidget);
@@ -115,7 +115,7 @@ void main() async {
       expect(find.text('Enter valid email'), findsOneWidget);
 
       //password instruction should be bluegrey and icon should be ✅
-      expect(find.text('min. 8 characters'), findsOneWidget);
+      expect(find.text('min. 8 - max. 16 characters'), findsOneWidget);
       expect(find.text('at least 1 lowercase letter'), findsOneWidget);
       expect(find.text('at least 1 uppercase letter'), findsOneWidget);
       expect(find.text('at least 1 number'), findsOneWidget);
@@ -140,7 +140,7 @@ void main() async {
       expect(find.text('Enter valid email'), findsNothing);
 
       //password instruction should be bluegrey and icon should be ✅
-      expect(find.text('min. 8 characters'), findsOneWidget);
+      expect(find.text('min. 8 - max. 16 characters'), findsOneWidget);
       expect(find.text('at least 1 lowercase letter'), findsOneWidget);
       expect(find.text('at least 1 uppercase letter'), findsOneWidget);
       expect(find.text('at least 1 number'), findsOneWidget);

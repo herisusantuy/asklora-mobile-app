@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
-import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../ppi_result_screen.dart';
@@ -15,12 +12,8 @@ class PrivacyResultFailedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget<QuestionPageStep>(
-      onBackPressed: () {
-        context.read<QuestionBloc>().add(const CurrentPrivacyPageDecremented());
-        context.read<NavigationBloc<QuestionPageStep>>().add(const PagePop());
-      },
-      header: const SizedBox.shrink(),
+    return WillPopScope(
+      onWillPop: () async => false,
       child: PpiResultScreen(
         ppiResult: PpiResult.failed,
         memojiText: 'I’m afraid you’re not eligible for Asklora yet.',
@@ -29,7 +22,7 @@ class PrivacyResultFailedScreen extends StatelessWidget {
         additionalMessageTextStyle: AskLoraTextStyles.subtitle1,
         bottomPadding: 0,
         bottomButton: ButtonPair(
-            primaryButtonOnClick: () => PpiScreen.open(context,
+            primaryButtonOnClick: () => PpiScreen.openReplace(context,
                 arguments: const Pair(
                     QuestionPageType.privacy, QuestionPageStep.privacy)),
             secondaryButtonOnClick: openAskloraFaq,

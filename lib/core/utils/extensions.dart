@@ -16,8 +16,8 @@ const emailPatternSource =
 final RegExp emailRegex = RegExp(emailPatternSource);
 
 /// Password regex (minimum 8 chars and one character and one number).
-final RegExp passwordRegex =
-    RegExp(r'^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$');
+final RegExp passwordRegex = RegExp(
+    r'^(?=.*[A-Za-z])(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d\S ]{8,16}$');
 
 /// OTP regex (exactly 6 digits)
 final RegExp otpRegex = RegExp(r'^([0-9]{6})$');
