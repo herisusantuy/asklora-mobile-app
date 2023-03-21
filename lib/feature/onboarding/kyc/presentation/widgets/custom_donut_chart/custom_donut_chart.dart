@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../../core/utils/scalable_media_query.dart';
 
 class CustomDonutChart extends StatelessWidget {
   final int total;
