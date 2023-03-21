@@ -126,7 +126,7 @@ class FinancialProfileSummaryContent extends StatelessWidget {
         } else {
           return CustomTextNew(
             e.sourceOfWealthType.name == 'Other'
-                ? '${e.sourceOfWealthType.name} : ${e.additionalSourceOfWealth!}'
+                ? '${e.sourceOfWealthType.name} : ${e.additionalSourceOfWealth}'
                 : e.sourceOfWealthType.name,
             style: AskLoraTextStyles.subtitle2
                 .copyWith(color: AskLoraColors.charcoal),
