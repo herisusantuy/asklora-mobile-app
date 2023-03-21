@@ -99,10 +99,7 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(
-                horizontal: ScalableMediaQuery().scaledWidth(5),
-                vertical: widget.active
-                    ? ScalableMediaQuery().scaledWidth(2.5)
-                    : ScalableMediaQuery().scaledWidth(5)),
+                horizontal: 20, vertical: widget.active ? 10 : 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -128,13 +125,13 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
 
   Widget _counterButton({required String label, required VoidCallback onTap}) {
     return Material(
-      borderRadius: BorderRadius.circular(ScalableMediaQuery().scaledWidth(5)),
+      borderRadius: BorderRadius.circular(15),
       color: AskLoraColors.black,
       child: InkWell(
         onTap: onTap,
         child: SizedBox(
-          height: ScalableMediaQuery().scaledWidth(8),
-          width: ScalableMediaQuery().scaledWidth(8),
+          height: 30,
+          width: 30,
           child: CustomTextNew(
             label,
             textAlign: TextAlign.center,
@@ -150,8 +147,8 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6),
       child: SizedBox(
-        width: ScalableMediaQuery().scaledWidth(20),
-        height: ScalableMediaQuery().scaledWidth(12),
+        width: 82,
+        height: 40,
         child: TextField(
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,

@@ -7,6 +7,8 @@ import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
 import '../../core/utils/scalable_media_query.dart';
+import '../../feature/onboarding/kyc/bloc/kyc_bloc.dart';
+import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';
@@ -50,15 +52,9 @@ class App extends StatelessWidget {
                 },
                 child: MaterialApp(
                     builder: (context, child) {
-                      final size = MediaQuery.of(context).size;
-                      ScalableMediaQuery.screenHeight = size.height;
-                      ScalableMediaQuery.screenWidth = size.width;
                       return MediaQuery(
-                          data: MediaQuery.of(context).copyWith(
-                              textScaleFactor:
-                                  ScalableMediaQuery.screenWidth < 360
-                                      ? .8
-                                      : 1.0),
+                          data: MediaQuery.of(context)
+                              .copyWith(textScaleFactor: 1.0),
                           child: child!);
                     },
                     debugShowCheckedModeBanner: false,

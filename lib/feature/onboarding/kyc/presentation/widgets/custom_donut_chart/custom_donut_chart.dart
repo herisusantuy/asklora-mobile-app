@@ -19,7 +19,7 @@ class CustomDonutChart extends StatelessWidget {
     final List<PieChartSectionData> totalGreaterThan100 = [
       PieChartSectionData(
         color: Colors.red,
-        radius: ScalableMediaQuery().scaledWidth(5),
+        radius: 25,
         borderSide: const BorderSide(
           color: Colors.black54,
         ),
@@ -28,7 +28,7 @@ class CustomDonutChart extends StatelessWidget {
     final List<PieChartSectionData> totalIsZero = [
       PieChartSectionData(
         color: Colors.white,
-        radius: ScalableMediaQuery().scaledWidth(5),
+        radius: 25,
         borderSide: const BorderSide(
           color: Colors.black38,
         ),
@@ -48,7 +48,7 @@ class CustomDonutChart extends StatelessWidget {
             value: 100.0 - total,
             showTitle: false,
             color: Colors.white,
-            radius: ScalableMediaQuery().scaledWidth(5),
+            radius: 25,
             borderSide: const BorderSide(
               color: Colors.black12,
             ),
@@ -61,15 +61,15 @@ class CustomDonutChart extends StatelessWidget {
     }
 
     return SizedBox(
-      width: ScalableMediaQuery.screenWidth,
-      height: ScalableMediaQuery().scaledWidth(38),
+      width: double.infinity,
+      height: 150,
       child: Stack(
         alignment: Alignment.center,
         children: [
           PieChart(
             PieChartData(
               sectionsSpace: 0,
-              centerSpaceRadius: ScalableMediaQuery().scaledWidth(12),
+              centerSpaceRadius: 40,
               startDegreeOffset: -90,
               sections: renderSection(),
             ),

@@ -12,7 +12,6 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/scalable_media_query.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -46,13 +45,13 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
             'Source Of Wealth',
             style: AskLoraTextStyles.h4,
           ),
-          SizedBox(height: ScalableMediaQuery().scaledHeight(4)),
+          const SizedBox(height: 23),
           CustomTextNew(
             'Please select all sources of wealth and declare the percentages of each. Please put 0% in the sources of wealth that you won’t invest with Asklora',
             style: AskLoraTextStyles.body1,
           ),
-          SizedBox(
-            height: ScalableMediaQuery().scaledHeight(1),
+          const SizedBox(
+            height: 10,
           ),
           _donutChart,
         ],
@@ -101,7 +100,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                   gradient: _gradients[index >= _gradients.length
                       ? index - _gradients.length
                       : index],
-                  radius: ScalableMediaQuery().scaledWidth(5),
+                  radius: 25,
                   showTitle: false,
                   borderSide: const BorderSide(
                     width: 1,
