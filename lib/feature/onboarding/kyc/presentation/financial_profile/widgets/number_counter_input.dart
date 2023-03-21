@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../app/presentation/app.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -100,9 +99,10 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
           child: Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(
-                horizontal: scalableWidth(5),
-                vertical:
-                    widget.active ? scalableWidth(2.5) : scalableWidth(5)),
+                horizontal: ScalableMediaQuery().scaledWidth(5),
+                vertical: widget.active
+                    ? ScalableMediaQuery().scaledWidth(2.5)
+                    : ScalableMediaQuery().scaledWidth(5)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -128,13 +128,13 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
 
   Widget _counterButton({required String label, required VoidCallback onTap}) {
     return Material(
-      borderRadius: BorderRadius.circular(scalableWidth(5)),
+      borderRadius: BorderRadius.circular(ScalableMediaQuery().scaledWidth(5)),
       color: AskLoraColors.black,
       child: InkWell(
         onTap: onTap,
         child: SizedBox(
-          height: scalableWidth(8),
-          width: scalableWidth(8),
+          height: ScalableMediaQuery().scaledWidth(8),
+          width: ScalableMediaQuery().scaledWidth(8),
           child: CustomTextNew(
             label,
             textAlign: TextAlign.center,
@@ -150,8 +150,8 @@ class _NumberCounterInputState extends State<NumberCounterInput> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6),
       child: SizedBox(
-        width: scalableWidth(20),
-        height: scalableWidth(12),
+        width: ScalableMediaQuery().scaledWidth(20),
+        height: ScalableMediaQuery().scaledWidth(12),
         child: TextField(
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,

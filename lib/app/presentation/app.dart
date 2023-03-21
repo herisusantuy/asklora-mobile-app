@@ -51,11 +51,14 @@ class App extends StatelessWidget {
                 child: MaterialApp(
                     builder: (context, child) {
                       final size = MediaQuery.of(context).size;
-                      screenWidth = size.width;
-                      screenHeight = size.height;
+                      ScalableMediaQuery.screenHeight = size.height;
+                      ScalableMediaQuery.screenWidth = size.width;
                       return MediaQuery(
                           data: MediaQuery.of(context).copyWith(
-                              textScaleFactor: screenWidth < 360 ? .8 : 1.0),
+                              textScaleFactor:
+                                  ScalableMediaQuery.screenWidth < 360
+                                      ? .8
+                                      : 1.0),
                           child: child!);
                     },
                     debugShowCheckedModeBanner: false,

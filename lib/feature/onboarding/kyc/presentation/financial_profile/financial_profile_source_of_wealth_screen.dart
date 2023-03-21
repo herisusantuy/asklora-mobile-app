@@ -46,13 +46,13 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
             'Source Of Wealth',
             style: AskLoraTextStyles.h4,
           ),
-          SizedBox(height: scalableHeight(4)),
+          SizedBox(height: ScalableMediaQuery().scaledHeight(4)),
           CustomTextNew(
             'Please select all sources of wealth and declare the percentages of each. Please put 0% in the sources of wealth that you won’t invest with Asklora',
             style: AskLoraTextStyles.body1,
           ),
           SizedBox(
-            height: scalableHeight(1),
+            height: ScalableMediaQuery().scaledHeight(1),
           ),
           _donutChart,
         ],
@@ -101,7 +101,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                   gradient: _gradients[index >= _gradients.length
                       ? index - _gradients.length
                       : index],
-                  radius: scalableWidth(5),
+                  radius: ScalableMediaQuery().scaledWidth(5),
                   showTitle: false,
                   borderSide: const BorderSide(
                     width: 1,

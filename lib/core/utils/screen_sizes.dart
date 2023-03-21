@@ -1,12 +1,38 @@
-late double screenWidth;
-late double screenHeight;
+import 'package:flutter/material.dart';
 
-// *Function to divide screen height base on params input on percentage
-// * ex:
-double scalableHeight(double height) {
-  return screenHeight * (height / 100);
-}
+class ScalableMediaQuery {
+  ScalableMediaQuery._internal();
 
-double scalableWidth(double width) {
-  return screenWidth * (width / 100);
+  static final ScalableMediaQuery _singleton = ScalableMediaQuery._internal();
+
+  factory ScalableMediaQuery() => _singleton;
+
+  static ScalableMediaQuery get instance => _singleton;
+
+  static double screenHeight = 0;
+  static double screenWidth = 0;
+
+  double get getScreenHeight {
+    return screenHeight;
+  }
+
+  set setScreenHeight(BuildContext context) {
+    screenHeight = MediaQuery.of(context).size.height;
+  }
+
+  double get getScreenWidth {
+    return screenWidth;
+  }
+
+  set setScreenWidth(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+  }
+
+  double scaledHeight(double sizes) {
+    return screenHeight * (sizes / 100);
+  }
+
+  double scaledWidth(double sizes) {
+    return screenWidth * (sizes / 100);
+  }
 }

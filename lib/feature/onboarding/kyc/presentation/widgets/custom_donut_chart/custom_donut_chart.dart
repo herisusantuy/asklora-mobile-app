@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../app/presentation/app.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/utils/screen_sizes.dart';
@@ -20,7 +19,7 @@ class CustomDonutChart extends StatelessWidget {
     final List<PieChartSectionData> totalGreaterThan100 = [
       PieChartSectionData(
         color: Colors.red,
-        radius: scalableWidth(5),
+        radius: ScalableMediaQuery().scaledWidth(5),
         borderSide: const BorderSide(
           color: Colors.black54,
         ),
@@ -29,7 +28,7 @@ class CustomDonutChart extends StatelessWidget {
     final List<PieChartSectionData> totalIsZero = [
       PieChartSectionData(
         color: Colors.white,
-        radius: scalableWidth(5),
+        radius: ScalableMediaQuery().scaledWidth(5),
         borderSide: const BorderSide(
           color: Colors.black38,
         ),
@@ -49,7 +48,7 @@ class CustomDonutChart extends StatelessWidget {
             value: 100.0 - total,
             showTitle: false,
             color: Colors.white,
-            radius: scalableWidth(5),
+            radius: ScalableMediaQuery().scaledWidth(5),
             borderSide: const BorderSide(
               color: Colors.black12,
             ),
@@ -62,15 +61,15 @@ class CustomDonutChart extends StatelessWidget {
     }
 
     return SizedBox(
-      width: screenWidth,
-      height: scalableWidth(38),
+      width: ScalableMediaQuery.screenWidth,
+      height: ScalableMediaQuery().scaledWidth(38),
       child: Stack(
         alignment: Alignment.center,
         children: [
           PieChart(
             PieChartData(
               sectionsSpace: 0,
-              centerSpaceRadius: scalableWidth(12),
+              centerSpaceRadius: ScalableMediaQuery().scaledWidth(12),
               startDegreeOffset: -90,
               sections: renderSection(),
             ),
