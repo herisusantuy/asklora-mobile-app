@@ -161,6 +161,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 onChangePhoneNumber: (phoneNumber) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoPhoneNumberChanged(phoneNumber)),
+                errorText: state.message ?? '',
               ));
 
   Widget get _selectGender => Column(
@@ -280,8 +281,7 @@ class PersonalInfoScreen extends StatelessWidget {
         state.gender.isEmpty ||
         state.nationalityName.isEmpty ||
         state.dateOfBirth.isEmpty ||
-        state.phoneCountryCode.isEmpty ||
-        state.phoneNumber.isEmpty ||
+        (state.phoneNumber.isEmpty || state.phoneNumber.length < 8) ||
         state.countryNameOfBirth.isEmpty ||
         !state.isHkIdValid) {
       return true;
