@@ -31,12 +31,9 @@ class SignAgreementSummaryContent extends StatelessWidget {
           _spaceHeight,
           const SummaryTextInfo(title: 'W-8BEN Form', subTitle: '(Agreed)'),
           _spaceHeight,
-          BlocBuilder<SigningAgreementBloc, SigningAgreementState>(
-            builder: (context, state) {
-              return SummaryTextInfo(
-                  title: 'Electronic Signature', subTitle: state.legalName);
-            },
-          ),
+          SummaryTextInfo(
+              title: 'Electronic Signature',
+              subTitle: context.read<SigningAgreementBloc>().state.legalName),
         ],
       );
 }
