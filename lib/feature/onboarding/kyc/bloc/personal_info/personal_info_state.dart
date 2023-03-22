@@ -8,7 +8,7 @@ class PersonalInfoState extends Equatable {
     this.dateOfBirth = '1990-01-01',
     this.countryCodeOfBirth = '',
     this.countryNameOfBirth = '',
-    this.phoneCountryCode = '',
+    this.phoneCountryCode = '852',
     this.phoneNumber = '',
     this.nationalityCode = '',
     this.nationalityName = '',
