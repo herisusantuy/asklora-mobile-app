@@ -61,7 +61,7 @@ class CustomPhoneNumberInput extends StatelessWidget {
             )
           ],
           onClear: () => onChangePhoneNumber(''),
-          hintText: 'Phone Number',
+          hintText: 'Input Phone Number',
           labelText: '',
           onChanged: (s) => {},
           errorText: errorText,

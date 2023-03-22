@@ -91,7 +91,7 @@ class PersonalInfoScreen extends StatelessWidget {
             _spaceHeight,
             _countryOfBirth,
             _spaceHeight,
-            _countryCodeAndPhoneNumber
+            _phoneNumberInput
           ],
         ),
       ),
@@ -145,7 +145,7 @@ class PersonalInfoScreen extends StatelessWidget {
         ),
       );
 
-  Widget get _countryCodeAndPhoneNumber =>
+  Widget get _phoneNumberInput =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
           buildWhen: (previous, current) =>
               previous.phoneCountryCode != current.phoneCountryCode ||
