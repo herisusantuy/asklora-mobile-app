@@ -148,7 +148,6 @@ class PersonalInfoScreen extends StatelessWidget {
   Widget get _phoneNumberInput =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
           buildWhen: (previous, current) =>
-              previous.phoneCountryCode != current.phoneCountryCode ||
               previous.phoneNumber != current.phoneNumber,
           builder: (context, state) => CustomPhoneNumberInput(
                 key: const Key('phone_number'),
