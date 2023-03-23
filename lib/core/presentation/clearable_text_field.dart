@@ -22,7 +22,7 @@ class ClearableTextFormField extends FormField<String> {
   final InputBorder? focusedBorder;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final Icon resetIcon;
-  final Widget? prefixIcon;
+  final Widget? prefix;
 
   ClearableTextFormField(
       {required this.labelText,
@@ -46,7 +46,7 @@ class ClearableTextFormField extends FormField<String> {
         Icons.cancel,
         size: 20,
       ),
-      this.prefixIcon,
+      this.prefix,
       Key? key})
       : super(
           key: key,
@@ -72,7 +72,7 @@ class ClearableTextFormField extends FormField<String> {
                   counterText: '',
                   hintText: hintText,
                   errorText: errorText.isEmpty ? null : errorText,
-                  prefixIcon: prefixIcon,
+                  prefix: prefix,
                   suffixIcon:
                       ((field.value?.length ?? -1) > 0 && state.hasFocus)
                           ? IconButton(
