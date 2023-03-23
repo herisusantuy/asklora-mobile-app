@@ -8,6 +8,7 @@ import '../../../../../../core/values/app_values.dart';
 import '../../../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_price_line_bar.dart';
 import '../../../../../bot_stock/presentation/widgets/custom_detail_expansion_tile.dart';
+import '../../../../../bot_stock/presentation/widgets/link_open_iex_cloud.dart';
 import '../../../../../bot_stock/presentation/widgets/pair_column_text.dart';
 import '../../../../../bot_stock/utils/bot_stock_utils.dart';
 
@@ -140,18 +141,7 @@ class DemonstrationBotDetailContent extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            RichText(
-                text: TextSpan(children: [
-              TextSpan(
-                  text: 'Market data provided by IEX Cloud ',
-                  style: AskLoraTextStyles.body4
-                      .copyWith(color: AskLoraColors.charcoal)),
-              TextSpan(
-                  text: 'https://iexcloud.io',
-                  style: AskLoraTextStyles.body4.copyWith(color: Colors.blue),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => launchUrlString('https://iexcloud.io')),
-            ])),
+            const LinkOpenIexCloud(),
             const Divider(
               color: AskLoraColors.gray,
             ),

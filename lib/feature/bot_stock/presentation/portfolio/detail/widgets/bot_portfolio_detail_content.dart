@@ -10,6 +10,7 @@ import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
+import '../../../widgets/link_open_iex_cloud.dart';
 import '../../../widgets/pair_column_text.dart';
 import '../../domain/portfolio_bot_detail_model.dart';
 import '../../domain/portfolio_bot_model.dart';
@@ -172,18 +173,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            RichText(
-                text: TextSpan(children: [
-              TextSpan(
-                  text: 'Market data provided by IEX Cloud ',
-                  style: AskLoraTextStyles.body4
-                      .copyWith(color: AskLoraColors.charcoal)),
-              TextSpan(
-                  text: 'https://iexcloud.io',
-                  style: AskLoraTextStyles.body4.copyWith(color: Colors.blue),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => launchUrlString('https://iexcloud.io')),
-            ])),
+            const LinkOpenIexCloud(),
             const Divider(
               color: AskLoraColors.gray,
             ),

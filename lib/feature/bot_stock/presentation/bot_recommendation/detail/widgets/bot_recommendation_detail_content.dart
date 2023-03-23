@@ -15,6 +15,7 @@ import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/column_text.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
+import '../../../widgets/link_open_iex_cloud.dart';
 import '../../../widgets/pair_column_text.dart';
 import 'bot_price_line_bar.dart';
 
@@ -146,18 +147,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   : '-',
             ),
             const SizedBox(height: 10),
-            RichText(
-                text: TextSpan(children: [
-              TextSpan(
-                  text: 'Market data provided by IEX Cloud ',
-                  style: AskLoraTextStyles.body4
-                      .copyWith(color: AskLoraColors.charcoal)),
-              TextSpan(
-                  text: 'https://iexcloud.io',
-                  style: AskLoraTextStyles.body4.copyWith(color: Colors.blue),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => launchUrlString('https://iexcloud.io')),
-            ])),
+            const LinkOpenIexCloud(),
             const Divider(
               color: AskLoraColors.gray,
             ),
