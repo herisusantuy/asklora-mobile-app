@@ -35,17 +35,15 @@ class CustomPhoneNumberInput extends StatelessWidget {
         CustomTextNew('Phone Number', style: AskLoraTextStyles.body2),
         const SizedBox(height: 5),
         ClearableTextFormField(
-          prefixIcon: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Padding(
-                padding: EdgeInsets.only(left: 11, right: 15),
-                child: Text(
-                  '+852',
-                  style: TextStyle(color: AskLoraColors.charcoal),
-                ),
-              )
-            ],
+          prefixIcon: const UnconstrainedBox(
+            constrainedAxis: Axis.horizontal,
+            child: Padding(
+              padding: EdgeInsets.only(left: 11, right: 15),
+              child: Text(
+                '+852',
+                style: TextStyle(color: AskLoraColors.charcoal),
+              ),
+            ),
           ),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           initialValue: initialValueOfPhoneNumber ?? '',
