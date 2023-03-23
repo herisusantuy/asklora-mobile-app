@@ -177,15 +177,15 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
     ));
     if (!isHkIdValid(state.hkIdNumber)) {
       emit(state.copyWith(
-          response: BaseResponse.error(),
+          response:
+              BaseResponse.error(message: 'Please enter a valid HKID Number'),
           hkIdErrorText: 'Please enter a valid HKID Number'));
     }
     if (!isAdult(state.dateOfBirth)) {
       emit(state.copyWith(
           response: BaseResponse.error(
               message: 'You must be over 18 to sign up for AskLORA!')));
-    }
-    if (isHkIdValid(state.hkIdNumber) && isAdult(state.dateOfBirth)) {
+    } else {
       var data = await _accountRepository.submitPersonalInfo(
           personalInfoRequest: event.personalInfoRequest);
       emit(state.copyWith(response: data));

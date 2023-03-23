@@ -279,12 +279,12 @@ class PersonalInfoScreen extends StatelessWidget {
     if (state.firstName.isEmpty ||
         state.lastName.isEmpty ||
         state.gender.isEmpty ||
+        state.hkIdNumber.isEmpty ||
         state.nationalityName.isEmpty ||
         state.dateOfBirth.isEmpty ||
         state.phoneCountryCode.isEmpty ||
-        state.phoneNumber.isEmpty ||
         state.countryNameOfBirth.isEmpty ||
-        state.hkIdErrorText!.isNotEmpty) {
+        state.phoneNumber.isEmpty) {
       return true;
     } else {
       return false;
