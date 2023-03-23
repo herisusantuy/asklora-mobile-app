@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
@@ -6,6 +7,7 @@ import '../../../../../../core/values/app_values.dart';
 import '../../../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_price_line_bar.dart';
 import '../../../../../bot_stock/presentation/widgets/custom_detail_expansion_tile.dart';
+import '../../../../../bot_stock/presentation/widgets/iex_data_provider_link.dart';
 import '../../../../../bot_stock/presentation/widgets/pair_column_text.dart';
 import '../../../../../bot_stock/utils/bot_stock_utils.dart';
 
@@ -136,8 +138,9 @@ class DemonstrationBotDetailContent extends StatelessWidget {
               rightSubTitle: '698.98B',
             ),
             const SizedBox(
-              height: 2,
+              height: 10,
             ),
+            const IexDataProviderLink(),
             const Divider(
               color: AskLoraColors.gray,
             ),

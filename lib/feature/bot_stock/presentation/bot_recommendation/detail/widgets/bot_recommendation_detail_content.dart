@@ -12,6 +12,7 @@ import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/column_text.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
+import '../../../widgets/iex_data_provider_link.dart';
 import '../../../widgets/pair_column_text.dart';
 import 'bot_price_line_bar.dart';
 
@@ -104,7 +105,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                       'Prev Close ${botDetailModel?.prevCloseDate ?? 'NA'}',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -142,7 +143,8 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   ? (botDetailModel?.marketCap ?? '-')
                   : '-',
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 10),
+            const IexDataProviderLink(),
             const Divider(
               color: AskLoraColors.gray,
             ),
