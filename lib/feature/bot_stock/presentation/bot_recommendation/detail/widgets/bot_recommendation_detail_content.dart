@@ -1,4 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -104,7 +107,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                       'Prev Close ${botDetailModel?.prevCloseDate ?? 'NA'}',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -142,7 +145,19 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   ? (botDetailModel?.marketCap ?? '-')
                   : '-',
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 10),
+            RichText(
+                text: TextSpan(children: [
+              TextSpan(
+                  text: 'Market data provided by IEX Cloud ',
+                  style: AskLoraTextStyles.body4
+                      .copyWith(color: AskLoraColors.charcoal)),
+              TextSpan(
+                  text: 'https://iexcloud.io',
+                  style: AskLoraTextStyles.body4.copyWith(color: Colors.blue),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => launchUrlString('https://iexcloud.io')),
+            ])),
             const Divider(
               color: AskLoraColors.gray,
             ),
