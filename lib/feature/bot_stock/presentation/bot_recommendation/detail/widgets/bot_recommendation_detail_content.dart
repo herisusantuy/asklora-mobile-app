@@ -12,7 +12,7 @@ import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/column_text.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
-import '../../../widgets/link_open_iex_cloud.dart';
+import '../../../widgets/iex_data_provider_link.dart';
 import '../../../widgets/pair_column_text.dart';
 import 'bot_price_line_bar.dart';
 
@@ -144,7 +144,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   : '-',
             ),
             const SizedBox(height: 10),
-            const LinkOpenIexCloud(),
+            const IexDataProviderLink(),
             const Divider(
               color: AskLoraColors.gray,
             ),

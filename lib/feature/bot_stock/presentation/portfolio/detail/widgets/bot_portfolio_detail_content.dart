@@ -8,7 +8,7 @@ import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
-import '../../../widgets/link_open_iex_cloud.dart';
+import '../../../widgets/iex_data_provider_link.dart';
 import '../../../widgets/pair_column_text.dart';
 import '../../domain/portfolio_bot_detail_model.dart';
 import '../../domain/portfolio_bot_model.dart';
@@ -171,7 +171,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const LinkOpenIexCloud(),
+            const IexDataProviderLink(),
             const Divider(
               color: AskLoraColors.gray,
             ),
