@@ -49,3 +49,4 @@ const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
 
 const String endpointBotRecommendation = '${user}recomendation_bots/';
 const String endpointBotDetail = '$v1${bots}bot_detail/';
+const String endpointIexCloud = 'https://iexcloud.io';
