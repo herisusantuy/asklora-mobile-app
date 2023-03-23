@@ -172,20 +172,22 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   _onPersonalInfoSubmitted(
       PersonalInfoSubmitted event, Emitter<PersonalInfoState> emit) async {
     emit(state.copyWith(
-      response: BaseResponse.loading(),
-      hkIdErrorText: '',
+      response: BaseResponse.unknown(),
     ));
     if (!isHkIdValid(state.hkIdNumber)) {
       emit(state.copyWith(
           response:
               BaseResponse.error(message: 'Please enter a valid HKID Number'),
           hkIdErrorText: 'Please enter a valid HKID Number'));
-    }
-    if (!isAdult(state.dateOfBirth)) {
+    } else if (!isAdult(state.dateOfBirth)) {
       emit(state.copyWith(
           response: BaseResponse.error(
               message: 'You must be over 18 to sign up for AskLORA!')));
     } else {
+      emit(state.copyWith(
+        response: BaseResponse.loading(),
+        hkIdErrorText: '',
+      ));
       var data = await _accountRepository.submitPersonalInfo(
           personalInfoRequest: event.personalInfoRequest);
       emit(state.copyWith(response: data));
