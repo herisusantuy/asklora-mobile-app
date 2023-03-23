@@ -151,12 +151,7 @@ class PersonalInfoScreen extends StatelessWidget {
               previous.phoneNumber != current.phoneNumber,
           builder: (context, state) => CustomPhoneNumberInput(
                 key: const Key('phone_number'),
-                initialValueOfCodeArea: state.phoneCountryCode,
                 initialValueOfPhoneNumber: state.phoneNumber,
-                onChangedCodeArea: (country) => context
-                    .read<PersonalInfoBloc>()
-                    .add(
-                        PersonalInfoPhoneCountryCodeChanged(country.phoneCode)),
                 onChangePhoneNumber: (phoneNumber) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoPhoneNumberChanged(phoneNumber)),

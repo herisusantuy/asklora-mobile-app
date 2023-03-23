@@ -1,4 +1,3 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,23 +5,18 @@ import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 import '../utils/formatters/phone_input_formatter/phone_input_formatter.dart';
 import 'clearable_text_field.dart';
-import 'custom_country_picker.dart';
 import 'custom_text_new.dart';
 
 class CustomPhoneNumberInput extends StatelessWidget {
   static const String defaultSelectedCountryCode = '852';
 
-  final Function(Country) onChangedCodeArea;
   final Function(String) onChangePhoneNumber;
-  final String? initialValueOfCodeArea;
   final String? initialValueOfPhoneNumber;
   final String errorText;
 
   const CustomPhoneNumberInput({
     Key? key,
-    this.initialValueOfCodeArea,
     this.initialValueOfPhoneNumber,
-    required this.onChangedCodeArea,
     required this.onChangePhoneNumber,
     this.errorText = '',
   }) : super(key: key);
@@ -52,10 +46,7 @@ class CustomPhoneNumberInput extends StatelessWidget {
             FilteringTextInputFormatter.digitsOnly,
             PhoneInputFormatter(
               onPhoneNumberChange: (s) => onChangePhoneNumber(s),
-              countryCode: initialValueOfCodeArea == null ||
-                      initialValueOfCodeArea!.isEmpty
-                  ? '852'
-                  : initialValueOfCodeArea,
+              countryCode: '852',
             )
           ],
           onClear: () => onChangePhoneNumber(''),
