@@ -16,8 +16,10 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/age_validation.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
+import '../../../../../core/utils/hkid_validation.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
@@ -99,38 +101,6 @@ class PersonalInfoScreen extends StatelessWidget {
     );
   }
 
-  Widget get _dateOfBirth => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
-        buildWhen: ((previous, current) =>
-            previous.dateOfBirth != current.dateOfBirth),
-        builder: (context, state) {
-          DateTime dateOfBirth = DateTime.parse(state.dateOfBirth);
-          return CustomDatePicker(
-            key: const Key('date_of_birth'),
-            label: 'Date of Birth*',
-            selectedDate: dateOfBirth,
-            initialDateTime: dateOfBirth,
-            maximumDate: DateTime.now(),
-            onDateTimeChanged: (date) => context.read<PersonalInfoBloc>().add(
-                  PersonalInfoDateOfBirthChanged(date.toString()),
-                ),
-          );
-        },
-      );
-
-  Widget get _nationality => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
-        buildWhen: (previous, current) =>
-            previous.nationalityCode != current.nationalityCode,
-        builder: (context, state) => CustomCountryPicker(
-          key: const Key('nationality'),
-          label: 'Nationality*',
-          hintText: 'Select Nationality',
-          initialValue: state.nationalityName,
-          onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
-              PersonalInfoNationalityChanged(
-                  country.countryCodeIso3, country.name)),
-        ),
-      );
-
   Widget get _countryOfBirth =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
@@ -185,7 +155,7 @@ class PersonalInfoScreen extends StatelessWidget {
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
         buildWhen: (previous, current) =>
             previous.hkIdNumber != current.hkIdNumber ||
-            previous.nationalityName != current.nationalityName,
+            previous.hkIdErrorText != current.hkIdErrorText,
         builder: (context, state) {
           return MasterTextField(
             key: const Key('hk_id_number'),
@@ -199,13 +169,44 @@ class PersonalInfoScreen extends StatelessWidget {
               UpperCaseTextFormatter(),
               LengthLimitingTextInputFormatter(9)
             ],
-            errorText: state.isHkIdValid || state.hkIdNumber.isEmpty
-                ? ''
-                : 'Please enter a valid HKID Number',
             textInputType: TextInputType.text,
             onChanged: (value) => context
                 .read<PersonalInfoBloc>()
                 .add(PersonalInfoHkIdNumberChanged(value)),
+            errorText: state.hkIdErrorText ?? '',
+          );
+        },
+      );
+
+  Widget get _nationality => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
+        buildWhen: (previous, current) =>
+            previous.nationalityCode != current.nationalityCode,
+        builder: (context, state) => CustomCountryPicker(
+          key: const Key('nationality'),
+          label: 'Nationality*',
+          hintText: 'Select Nationality',
+          initialValue: state.nationalityName,
+          onSelect: (Country country) => context.read<PersonalInfoBloc>().add(
+              PersonalInfoNationalityChanged(
+                  country.countryCodeIso3, country.name)),
+        ),
+      );
+
+  Widget get _dateOfBirth => BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
+        buildWhen: (previous, current) =>
+            previous.dateOfBirth != current.dateOfBirth ||
+            previous.response.state != current.response.state,
+        builder: (context, state) {
+          DateTime dateOfBirth = DateTime.parse(state.dateOfBirth);
+          return CustomDatePicker(
+            key: const Key('date_of_birth'),
+            label: 'Date of Birth*',
+            selectedDate: dateOfBirth,
+            initialDateTime: dateOfBirth,
+            maximumDate: DateTime.now(),
+            onDateTimeChanged: (date) => context.read<PersonalInfoBloc>().add(
+                  PersonalInfoDateOfBirthChanged(date.toString()),
+                ),
           );
         },
       );
@@ -241,7 +242,7 @@ class PersonalInfoScreen extends StatelessWidget {
               CustomLoadingOverlay.of(context).show(state.response.state);
               if (state.response.state == ResponseState.error) {
                 CustomInAppNotification.show(context, state.response.message);
-              } else {
+              } else if ((state.response.state == ResponseState.success)) {
                 context.read<OtpBloc>().add(const OtpRequested());
                 context
                     .read<NavigationBloc<KycPageStep>>()
@@ -283,7 +284,7 @@ class PersonalInfoScreen extends StatelessWidget {
         state.phoneCountryCode.isEmpty ||
         state.phoneNumber.isEmpty ||
         state.countryNameOfBirth.isEmpty ||
-        !state.isHkIdValid) {
+        state.hkIdErrorText!.isNotEmpty) {
       return true;
     } else {
       return false;

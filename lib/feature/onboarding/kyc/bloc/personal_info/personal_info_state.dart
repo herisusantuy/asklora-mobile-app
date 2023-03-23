@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'personal_info_bloc.dart';
 
 class PersonalInfoState extends Equatable {
@@ -17,6 +18,7 @@ class PersonalInfoState extends Equatable {
     this.isUnitedStateResident,
     this.isHkIdValid = false,
     this.message = '',
+    this.hkIdErrorText = '',
     this.response = const BaseResponse(),
   });
 
@@ -36,6 +38,7 @@ class PersonalInfoState extends Equatable {
   final bool isHkIdValid;
   final String? message;
   final BaseResponse response;
+  final String? hkIdErrorText;
 
   @override
   List<Object?> get props {
@@ -55,6 +58,7 @@ class PersonalInfoState extends Equatable {
       isUnitedStateResident,
       isHkIdValid,
       message,
+      hkIdErrorText,
       response,
     ];
   }
@@ -76,6 +80,7 @@ class PersonalInfoState extends Equatable {
     bool? isHkIdValid,
     String? message,
     BaseResponse? response,
+    String? hkIdErrorText,
   }) {
     return PersonalInfoState(
       firstName: firstName ?? this.firstName,
@@ -96,6 +101,7 @@ class PersonalInfoState extends Equatable {
       isHkIdValid: isHkIdValid ?? this.isHkIdValid,
       message: message ?? this.message,
       response: response ?? this.response,
+      hkIdErrorText: hkIdErrorText ?? this.hkIdErrorText,
     );
   }
 

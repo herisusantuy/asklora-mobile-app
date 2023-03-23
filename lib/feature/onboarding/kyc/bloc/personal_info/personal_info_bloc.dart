@@ -135,7 +135,8 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       PersonalInfoHkIdNumberChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
         hkIdNumber: event.hkIdNumber,
-        isHkIdValid: isHkIdValid(event.hkIdNumber)));
+        isHkIdValid: isHkIdValid(event.hkIdNumber),
+        hkIdErrorText: ''));
   }
 
   _onIsUnitedStateResidentChange(PersonalInfoIsUnitedStateResidentChanged event,
@@ -172,12 +173,19 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       PersonalInfoSubmitted event, Emitter<PersonalInfoState> emit) async {
     emit(state.copyWith(
       response: BaseResponse.loading(),
+      hkIdErrorText: '',
     ));
+    if (!isHkIdValid(state.hkIdNumber)) {
+      emit(state.copyWith(
+          response: BaseResponse.error(),
+          hkIdErrorText: 'Please enter a valid HKID Number'));
+    }
     if (!isAdult(state.dateOfBirth)) {
       emit(state.copyWith(
           response: BaseResponse.error(
               message: 'You must be over 18 to sign up for AskLORA!')));
-    } else {
+    }
+    if (isHkIdValid(state.hkIdNumber) && isAdult(state.dateOfBirth)) {
       var data = await _accountRepository.submitPersonalInfo(
           personalInfoRequest: event.personalInfoRequest);
       emit(state.copyWith(response: data));
