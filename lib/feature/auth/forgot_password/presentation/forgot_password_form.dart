@@ -20,14 +20,11 @@ class ForgotPasswordForm extends StatelessWidget {
       listener: (context, state) {
         ResponseState responseState = state.response.state;
         CustomLoadingOverlay.of(context).show(responseState);
-        CustomInAppNotification.show(
-            context,
-            responseState == ResponseState.success
-                ? state.response.data.detail
-                : state.response.message);
         if (responseState == ResponseState.success) {
+          CustomInAppNotification.show(context, state.response.data.detail);
           ForgotPasswordSuccessScreen.open(context);
         } else if (responseState == ResponseState.error) {
+          CustomInAppNotification.show(context, state.response.message);
           context
               .read<ForgotPasswordBloc>()
               .add(ForgotPasswordEmailChanged(state.email));
