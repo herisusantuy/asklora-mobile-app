@@ -124,25 +124,10 @@ class BotStockBottomSheet {
                                 amount: state.botStockTradeAmount));
                       },
                       onSecondaryButtonTap: () => Navigator.pop(context),
-                      child: IntrinsicWidth(
-                        child: AutoResizedTextField(
-                          textInputFormatterList: [
-                            CurrencyTextInputFormatter(
-                                symbol: '', decimalDigits: 1)
-                          ],
-                          textInputType: TextInputType.number,
-                          hintTextStyle: AskLoraTextStyles.h2
-                              .copyWith(color: AskLoraColors.gray),
-                          textStyle: AskLoraTextStyles.h2
-                              .copyWith(color: AskLoraColors.charcoal),
-                          hintText: '1,500',
-                          onChanged: (value) => context
-                              .read<BotStockBloc>()
-                              .add(TradeBotStockAmountChanged(value.isNotEmpty
-                                  ? double.parse(
-                                      value.replaceAll(amountRegex, ''))
-                                  : 0)),
-                          prefixIcon: Padding(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
                             padding: const EdgeInsets.only(top: 16.0),
                             child: CustomTextNew(
                               'HKD',
@@ -150,7 +135,30 @@ class BotStockBottomSheet {
                                   .copyWith(color: AskLoraColors.charcoal),
                             ),
                           ),
-                        ),
+                          Flexible(
+                            child: AutoResizedTextField(
+                              fullWidth: false,
+                              minWidth: 100,
+                              textInputFormatterList: [
+                                CurrencyTextInputFormatter(
+                                    symbol: '', decimalDigits: 1)
+                              ],
+                              textInputType: TextInputType.number,
+                              hintTextStyle: AskLoraTextStyles.h2
+                                  .copyWith(color: AskLoraColors.gray),
+                              textStyle: AskLoraTextStyles.h2
+                                  .copyWith(color: AskLoraColors.charcoal),
+                              hintText: '1,500',
+                              onChanged: (value) => context
+                                  .read<BotStockBloc>()
+                                  .add(TradeBotStockAmountChanged(
+                                      value.isNotEmpty
+                                          ? double.parse(
+                                              value.replaceAll(amountRegex, ''))
+                                          : 0)),
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   }),
