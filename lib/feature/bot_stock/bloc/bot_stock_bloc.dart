@@ -52,7 +52,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     try {
       emit(state.copyWith(tradeBotStockResponse: BaseResponse.loading()));
       emit(state.copyWith(
-          tradeBotStockResponse: await _botStockRepository.tradeBotStock(
+          tradeBotStockResponse: await _botStockRepository.createOrder(
               estimatedEndDate: event.estimatedEndDate,
               botRecommendationModel: event.botRecommendationModel,
               tradeBotStockAmount: event.tradeBotStockAmount)));

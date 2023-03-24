@@ -162,14 +162,22 @@ class MockBotStockRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.BaseResponse<List<_i8.BotRecommendationModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<bool>> tradeBotStock({
+  _i4.Future<bool> removeInvestmentStyleState() => (super.noSuchMethod(
+        Invocation.method(
+          #removeInvestmentStyleState,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+  @override
+  _i4.Future<_i2.BaseResponse<bool>> createOrder({
     required _i8.BotRecommendationModel? botRecommendationModel,
     required double? tradeBotStockAmount,
     required String? estimatedEndDate,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #tradeBotStock,
+          #createOrder,
           [],
           {
             #botRecommendationModel: botRecommendationModel,
@@ -181,7 +189,7 @@ class MockBotStockRepository extends _i1.Mock
             _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
           this,
           Invocation.method(
-            #tradeBotStock,
+            #createOrder,
             [],
             {
               #botRecommendationModel: botRecommendationModel,
@@ -191,12 +199,4 @@ class MockBotStockRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<bool>>);
-  @override
-  _i4.Future<bool> removeInvestmentStyleState() => (super.noSuchMethod(
-        Invocation.method(
-          #removeInvestmentStyleState,
-          [],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
 }

@@ -49,3 +49,10 @@ const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
 
 const String endpointBotRecommendation = '${user}recomendation_bots/';
 const String endpointBotDetail = '$v1${bots}bot_detail/';
+
+///bot orders
+const String endpointBotActiveOrder = '$v1${bots}active-order/';
+const String endpointBotCreateOrder = '$v1${bots}create-order/';
+const String endpointBotCancelOrder = '$v1${bots}cancel-order/';
+const String endpointBotRolloverOrder = '$v1${bots}rollover-order/';
+const String endpointBotTerminateOrder = '$v1${bots}terminate-order/';

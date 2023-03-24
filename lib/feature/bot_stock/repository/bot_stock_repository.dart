@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/domain/base_response.dart';
+import '../../../core/utils/extensions.dart';
 import '../../../core/utils/feature_flags.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
@@ -15,6 +17,8 @@ import '../domain/bot_detail_request.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../domain/bot_recommendation_response.dart';
 import '../domain/bot_stock_api_client.dart';
+import '../domain/orders/bot_create_order_request.dart';
+import '../domain/orders/bot_order_request.dart';
 import '../utils/bot_stock_utils.dart';
 
 class BotStockRepository {
@@ -109,7 +113,12 @@ class BotStockRepository {
     return BaseResponse.complete(demonstrationBots);
   }
 
-  Future<BaseResponse<bool>> tradeBotStock(
+  Future<bool> removeInvestmentStyleState() async {
+    _sharedPreference.deleteData('investment_style_state');
+    return true;
+  }
+
+  Future<BaseResponse<bool>> createOrder(
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount,
       required String estimatedEndDate}) async {
@@ -124,13 +133,84 @@ class BotStockRepository {
       return data;
     } else {
       ///REAL
-      await Future.delayed(const Duration(milliseconds: 500));
-      return BaseResponse.complete(true);
+      try {
+        await _botStockApiClient.createOrder(BotCreateOrderRequest(
+            ticker: botRecommendationModel.ticker,
+            botId: botRecommendationModel.botId,
+            spotDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+            investmentAmount: tradeBotStockAmount,
+            price: checkDouble(botRecommendationModel.latestPrice)));
+        return BaseResponse.complete(true);
+      } catch (e) {
+        return BaseResponse.error();
+      }
     }
   }
 
-  Future<bool> removeInvestmentStyleState() async {
-    _sharedPreference.deleteData('investment_style_state');
-    return true;
+  Future<BaseResponse<bool>> cancelOrder(String orderId) async {
+    if (FeatureFlags.isDemoEnable) {
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      ///todo create mock using latest model
+      //MockData().endBotStock(portfolioBotModel);
+      return BaseResponse.complete(true);
+    } else {
+      try {
+        await _botStockApiClient.cancelOrder(BotOrderRequest(orderId: orderId));
+        return BaseResponse.complete(true);
+      } catch (e) {
+        return BaseResponse.error();
+      }
+    }
+  }
+
+  Future<BaseResponse<bool>> rolloverOrder(String orderId) async {
+    if (FeatureFlags.isDemoEnable) {
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      ///create mock rollover
+      return BaseResponse.complete(true);
+    } else {
+      try {
+        await _botStockApiClient
+            .rolloverOrder(BotOrderRequest(orderId: orderId));
+        return BaseResponse.complete(true);
+      } catch (e) {
+        return BaseResponse.error();
+      }
+    }
+  }
+
+  Future<BaseResponse<bool>> terminateOrder(String orderId) async {
+    if (FeatureFlags.isDemoEnable) {
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      ///create mock rollover
+      return BaseResponse.complete(true);
+    } else {
+      try {
+        await _botStockApiClient
+            .terminateOrder(BotOrderRequest(orderId: orderId));
+        return BaseResponse.complete(true);
+      } catch (e) {
+        return BaseResponse.error();
+      }
+    }
+  }
+
+  Future<BaseResponse<bool>> activeOrder() async {
+    if (FeatureFlags.isDemoEnable) {
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      ///create mock rollover
+      return BaseResponse.complete(true);
+    } else {
+      try {
+        await _botStockApiClient.activeOrder();
+        return BaseResponse.complete(true);
+      } catch (e) {
+        return BaseResponse.error();
+      }
+    }
   }
 }

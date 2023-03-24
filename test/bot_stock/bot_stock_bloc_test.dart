@@ -104,7 +104,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'trade bot stock',
         build: () {
-          when(botStockRepository.tradeBotStock(
+          when(botStockRepository.createOrder(
                   botRecommendationModel: botRecommendationModel,
                   estimatedEndDate: '2023-03-28',
                   tradeBotStockAmount: 0))
@@ -124,7 +124,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed trade bot stock',
         build: () {
-          when(botStockRepository.tradeBotStock(
+          when(botStockRepository.createOrder(
                   botRecommendationModel: botRecommendationModel,
                   estimatedEndDate: '2023-03-28',
                   tradeBotStockAmount: 0))
