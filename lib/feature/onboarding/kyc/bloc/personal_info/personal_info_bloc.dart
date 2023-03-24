@@ -107,7 +107,11 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   _onPersonalInfoPhoneNumberChange(
       PersonalInfoPhoneNumberChanged event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(phoneNumber: event.phoneNumber));
+    emit(state.copyWith(
+        phoneNumber: event.phoneNumber,
+        message: (event.phoneNumber.isEmpty || event.phoneNumber.length < 8)
+            ? 'Your HK phone number must be exactly 8 digits'
+            : ''));
   }
 
   _onPersonalInfoNationalityChange(
