@@ -52,6 +52,7 @@ class _AutoResizedTextFieldState extends State<AutoResizedTextField> {
       textAlign: TextAlign.left,
       fullwidth: true,
       onChanged: widget.onChanged,
+      textAlignVertical: TextAlignVertical.center,
       style: widget.textStyle ?? AskLoraTextStyles.h3,
       controller: widget.controller,
       onSubmitted: widget.onFieldSubmitted,
@@ -67,24 +68,6 @@ class _AutoResizedTextFieldState extends State<AutoResizedTextField> {
                   .copyWith(color: AskLoraColors.lightGray),
           suffixIcon: widget.suffixIcon,
           hintText: widget.hintText),
-    );
-
-    return TextFormField(
-      controller: widget.controller,
-      onChanged: widget.onChanged,
-      onFieldSubmitted: widget.onFieldSubmitted,
-      keyboardType: widget.textInputType,
-      inputFormatters: widget.textInputFormatterList,
-      decoration: InputDecoration(
-          prefixIcon: widget.prefixIcon,
-          contentPadding: EdgeInsets.zero,
-          border: InputBorder.none,
-          hintStyle: widget.hintTextStyle ??
-              AskLoraTextStyles.h3Italic
-                  .copyWith(color: AskLoraColors.lightGray),
-          suffixIcon: widget.suffixIcon,
-          hintText: widget.hintText),
-      style: widget.textStyle ?? AskLoraTextStyles.h3,
     );
   }
 }
