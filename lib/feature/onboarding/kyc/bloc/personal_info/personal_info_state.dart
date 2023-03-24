@@ -15,8 +15,9 @@ class PersonalInfoState extends Equatable {
     this.isHongKongPermanentResident,
     this.hkIdNumber = '',
     this.isUnitedStateResident,
-    this.isHkIdValid = false,
+    // this.isHkIdValid = false,
     this.message = '',
+    this.hkIdErrorText = '',
     this.response = const BaseResponse(),
   });
 
@@ -33,9 +34,10 @@ class PersonalInfoState extends Equatable {
   final bool? isHongKongPermanentResident;
   final String hkIdNumber;
   final bool? isUnitedStateResident;
-  final bool isHkIdValid;
+  // final bool isHkIdValid;
   final String? message;
   final BaseResponse response;
+  final String? hkIdErrorText;
 
   @override
   List<Object?> get props {
@@ -53,8 +55,9 @@ class PersonalInfoState extends Equatable {
       isHongKongPermanentResident,
       hkIdNumber,
       isUnitedStateResident,
-      isHkIdValid,
+      // isHkIdValid,
       message,
+      hkIdErrorText,
       response,
     ];
   }
@@ -73,9 +76,10 @@ class PersonalInfoState extends Equatable {
     bool? isHongKongPermanentResident,
     String? hkIdNumber,
     bool? isUnitedStateResident,
-    bool? isHkIdValid,
+    // bool? isHkIdValid,
     String? message,
     BaseResponse? response,
+    String? hkIdErrorText,
   }) {
     return PersonalInfoState(
       firstName: firstName ?? this.firstName,
@@ -93,9 +97,10 @@ class PersonalInfoState extends Equatable {
       hkIdNumber: hkIdNumber ?? this.hkIdNumber,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
-      isHkIdValid: isHkIdValid ?? this.isHkIdValid,
+      // isHkIdValid: isHkIdValid ?? this.isHkIdValid,
       message: message ?? this.message,
       response: response ?? this.response,
+      hkIdErrorText: hkIdErrorText ?? this.hkIdErrorText,
     );
   }
 
@@ -111,7 +116,7 @@ class PersonalInfoState extends Equatable {
         isHongKongPermanentResident != null &&
         isUnitedStateResident != null) {
       if (isHongKongPermanentResident == true) {
-        if (hkIdNumber.isNotEmpty && isHkIdValid) {
+        if (hkIdNumber.isNotEmpty) {
           return true;
         } else {
           return false;

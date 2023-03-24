@@ -49,7 +49,6 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
         gender: personalInfoRequest?.gender,
         dateOfBirth: personalInfoRequest?.dateOfBirth,
         hkIdNumber: personalInfoRequest?.hkIdNumber,
-        isHkIdValid: isHkIdValid(personalInfoRequest?.hkIdNumber ?? ''),
         nationalityCode: personalInfoRequest?.nationality,
         nationalityName: personalInfoRequest?.nationality != null &&
                 personalInfoRequest!.nationality!.isNotEmpty
@@ -137,9 +136,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   _onHkIdNumberChange(
       PersonalInfoHkIdNumberChanged event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(
-        hkIdNumber: event.hkIdNumber,
-        isHkIdValid: isHkIdValid(event.hkIdNumber)));
+    emit(state.copyWith(hkIdNumber: event.hkIdNumber, hkIdErrorText: ''));
   }
 
   _onIsUnitedStateResidentChange(PersonalInfoIsUnitedStateResidentChanged event,
@@ -175,13 +172,22 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
   _onPersonalInfoSubmitted(
       PersonalInfoSubmitted event, Emitter<PersonalInfoState> emit) async {
     emit(state.copyWith(
-      response: BaseResponse.loading(),
+      response: BaseResponse.unknown(),
     ));
-    if (!isAdult(state.dateOfBirth)) {
+    if (!isHkIdValid(state.hkIdNumber)) {
+      emit(state.copyWith(
+          response:
+              BaseResponse.error(message: 'Please enter a valid HKID Number'),
+          hkIdErrorText: 'Please enter a valid HKID Number'));
+    } else if (!isAdult(state.dateOfBirth)) {
       emit(state.copyWith(
           response: BaseResponse.error(
               message: 'You must be over 18 to sign up for AskLORA!')));
     } else {
+      emit(state.copyWith(
+        response: BaseResponse.loading(),
+        hkIdErrorText: '',
+      ));
       var data = await _accountRepository.submitPersonalInfo(
           personalInfoRequest: event.personalInfoRequest);
       emit(state.copyWith(response: data));

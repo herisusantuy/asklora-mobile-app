@@ -57,7 +57,6 @@ void main() {
               isHongKongPermanentResident: null,
               hkIdNumber: '',
               isUnitedStateResident: null,
-              isHkIdValid: false,
               message: '',
               response: BaseResponse(),
             ));
@@ -84,7 +83,6 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: true,
-                  isHkIdValid: false,
                   message: '',
                   response: BaseResponse(),
                 ),
@@ -101,7 +99,6 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: true,
-                  isHkIdValid: false,
                   message: '',
                   response: BaseResponse.unknown(),
                 ),
@@ -118,7 +115,6 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: true,
-                  isHkIdValid: false,
                   message: r'You are not eligible!',
                   response:
                       BaseResponse.error(message: r'You are not eligible!'),
@@ -148,7 +144,6 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: null,
-                  isHkIdValid: false,
                   message: '',
                   response: BaseResponse(),
                 ),
@@ -166,7 +161,6 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: null,
-                  isHkIdValid: false,
                   message: '',
                   response: BaseResponse.unknown(),
                 ),
@@ -184,7 +178,6 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: null,
-                  isHkIdValid: false,
                   message: r'You must be over 18 to sign up for AskLORA!',
                   response: BaseResponse.error(
                       message: r'You must be over 18 to sign up for AskLORA!'),
@@ -210,7 +203,6 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '666-55-4321',
                   isUnitedStateResident: null,
-                  isHkIdValid: false,
                   message: '',
                   response: BaseResponse(),
                 ),
@@ -235,7 +227,6 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: 'F1234567',
                   isUnitedStateResident: null,
-                  isHkIdValid: true,
                   message: '',
                   response: BaseResponse(),
                 ),
@@ -400,7 +391,6 @@ void main() {
                   isHongKongPermanentResident: true,
                   hkIdNumber: '666-55-4321',
                   isUnitedStateResident: false,
-                  isHkIdValid: false,
                 )
               });
 
