@@ -124,7 +124,7 @@ class BotStockBottomSheet {
                                 amount: state.botStockTradeAmount));
                       },
                       onSecondaryButtonTap: () => Navigator.pop(context),
-                      child: IntrinsicWidth(
+                      child: Center(
                         child: AutoResizedTextField(
                           textInputFormatterList: [
                             CurrencyTextInputFormatter(

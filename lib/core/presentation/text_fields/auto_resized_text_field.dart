@@ -17,6 +17,7 @@ class AutoResizedTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final TextStyle? textStyle;
+  final TextAlign textAlign;
   final TextStyle? hintTextStyle;
 
   const AutoResizedTextField(
@@ -32,6 +33,7 @@ class AutoResizedTextField extends StatefulWidget {
       this.prefixIcon,
       this.textStyle,
       this.hintTextStyle,
+      this.textAlign = TextAlign.left,
       Key? key})
       : super(key: key);
 
@@ -40,26 +42,32 @@ class AutoResizedTextField extends StatefulWidget {
 }
 
 class _AutoResizedTextFieldState extends State<AutoResizedTextField> {
+  late TextEditingController _textEditingControllerFour;
+
   @override
-  void initState() => super.initState();
+  void initState() {
+    super.initState();
+    _textEditingControllerFour = TextEditingController();
+  }
 
   @override
   void dispose() {
     if (widget.controller != null) {
       widget.controller!.dispose();
     }
+    _textEditingControllerFour.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeTextField(
-      textAlign: TextAlign.left,
+      textAlign: widget.textAlign,
       fullwidth: true,
       onChanged: widget.onChanged,
       textAlignVertical: TextAlignVertical.center,
       style: widget.textStyle ?? AskLoraTextStyles.h3,
-      controller: widget.controller,
+      controller: widget.controller ?? _textEditingControllerFour,
       onSubmitted: widget.onFieldSubmitted,
       keyboardType: widget.textInputType,
       inputFormatters: widget.textInputFormatterList,
