@@ -9,6 +9,7 @@ import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/feature_flags.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
@@ -22,6 +23,8 @@ import '../domain/upgrade_account/residence_info_request.dart';
 import '../domain/upgrade_account/save_kyc_request.dart';
 import '../domain/upgrade_account/upgrade_account_request.dart';
 import '../domain/upgrade_account/wealth_sources_request.dart';
+import '../utils/kyc_dropdown_enum.dart';
+import '../utils/source_of_wealth_enum.dart';
 import 'financial_profile/widgets/financial_profile_summary_content.dart';
 import 'personal_info/widgets/personal_info_summary_content.dart';
 import 'sign_agreements/widgets/sign_agreement_summary_content.dart';
@@ -133,7 +136,12 @@ class KycSummaryScreen extends StatelessWidget {
           return ProofsOfAddressRequest(proofFile: e.base64Image());
         }).toList(),
         employmentInfo: EmploymentInfo(
-            employmentStatus: financialProfileState.employmentStatus.value,
+
+            /// TODO: Confirm with James if we want to show the source of wealth and employment or not.
+            /// Disabling the source of wealth and employment as there are few demo with potential investors.
+            employmentStatus: FeatureFlags.isDemoEnable
+                ? EmploymentStatus.unemployed.value
+                : financialProfileState.employmentStatus.value,
             employer: financialProfileState.employer,
             employerBusiness: financialProfileState.natureOfBusiness?.value,
             employerBusinessDescription:
@@ -146,12 +154,21 @@ class KycSummaryScreen extends StatelessWidget {
             country: financialProfileState.country,
             differentCountryReason:
                 financialProfileState.detailInformationOfCountry),
-        wealthSources: sourceOfWealthState.sourceOfWealthAnswers
-            .map((e) => WealthSourcesRequest(
-                  wealthSource: e.sourceOfWealthType.value,
-                  percentage: e.amount,
-                ))
-            .toList(),
+
+        /// TODO: Confirm with James if we want to show the source of wealth and employment or not.
+        /// Disabling the source of wealth and employment as there are few demo with potential investors.
+        wealthSources: FeatureFlags.isDemoEnable
+            ? [
+                WealthSourcesRequest(
+                    wealthSource: SourceOfWealthType.incomeFromEmployment.value,
+                    percentage: 100)
+              ]
+            : sourceOfWealthState.sourceOfWealthAnswers
+                .map((e) => WealthSourcesRequest(
+                      wealthSource: e.sourceOfWealthType.value,
+                      percentage: e.amount,
+                    ))
+                .toList(),
         affiliatedPerson: disclosureAffiliationState
                     .affiliatedPersonFirstName.isEmpty &&
                 disclosureAffiliationState.affiliatedPersonLastName.isEmpty
