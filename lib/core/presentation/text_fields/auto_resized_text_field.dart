@@ -44,7 +44,12 @@ class _AutoResizedTextFieldState extends State<AutoResizedTextField> {
   void initState() => super.initState();
 
   @override
-  void dispose() => super.dispose();
+  void dispose() {
+    if (widget.controller != null) {
+      widget.controller!.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
