@@ -61,9 +61,7 @@ class AskNameScreen extends StatelessWidget {
                           .add(NameChanged(value.trimRight())),
                       hintText: S.of(context).askNameScreenTextFieldHint,
                       textInputFormatterList: [
-                        fullEnglishNameFormatter(),
-                        onlyAllowOneSpace()
-                        // NoSpaceFormatter()
+                        lettersAndNumberWithSpaceFormatter(),
                       ],
                       textCapitalization: TextCapitalization.words,
                       textInputType: TextInputType.text),
@@ -83,7 +81,7 @@ class AskNameScreen extends StatelessWidget {
           child: PrimaryButton(
             key: const Key('next_button'),
             label: S.of(context).buttonNext,
-            disabled: state.name.isEmpty || state.name.length < 3,
+            disabled: state.name.isEmpty,
             onTap: () =>
                 context.read<LoraAskNameBloc>().add(const SubmitUserName()),
           )));

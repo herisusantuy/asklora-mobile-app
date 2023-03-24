@@ -16,12 +16,11 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ForgotPasswordBloc(
-        forgotPasswordRepository: ForgotPasswordRepository(),
-      ),
-      child: CustomScaffold(
-        body: CustomStretchedLayout(
+    return CustomScaffold(
+      body: BlocProvider(
+        create: (context) => ForgotPasswordBloc(
+            forgotPasswordRepository: ForgotPasswordRepository()),
+        child: CustomStretchedLayout(
           header: const CustomHeader(
             title: 'Forgot Password',
           ),
@@ -42,8 +41,8 @@ class ForgotPasswordScreen extends StatelessWidget {
                 'Can’t remember your email address?\nEmail us at cs@asklora.ai',
                 textAlign: TextAlign.center,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
+              const SizedBox(
+                height: 30,
               ),
               PrimaryButton(
                   key: const Key('forgot_password_submit_button'),
@@ -52,6 +51,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   onTap: () => context
                       .read<ForgotPasswordBloc>()
                       .add(const ForgotPasswordSubmitted())),
+              const SizedBox(height: 15)
             ],
           );
         },
