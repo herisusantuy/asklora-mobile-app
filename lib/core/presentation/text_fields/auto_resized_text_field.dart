@@ -19,6 +19,8 @@ class AutoResizedTextField extends StatefulWidget {
   final TextStyle? textStyle;
   final TextAlign textAlign;
   final TextStyle? hintTextStyle;
+  final bool fullWidth;
+  final double? minWidth;
 
   const AutoResizedTextField(
       {this.onChanged,
@@ -34,6 +36,8 @@ class AutoResizedTextField extends StatefulWidget {
       this.textStyle,
       this.hintTextStyle,
       this.textAlign = TextAlign.left,
+      this.fullWidth = true,
+      this.minWidth,
       Key? key})
       : super(key: key);
 
@@ -63,7 +67,8 @@ class _AutoResizedTextFieldState extends State<AutoResizedTextField> {
   Widget build(BuildContext context) {
     return AutoSizeTextField(
       textAlign: widget.textAlign,
-      fullwidth: true,
+      fullwidth: widget.fullWidth,
+      minWidth: widget.minWidth,
       onChanged: widget.onChanged,
       textAlignVertical: TextAlignVertical.center,
       style: widget.textStyle ?? AskLoraTextStyles.h3,
