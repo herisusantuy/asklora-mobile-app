@@ -16,10 +16,8 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/age_validation.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
-import '../../../../../core/utils/hkid_validation.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
@@ -93,7 +91,7 @@ class PersonalInfoScreen extends StatelessWidget {
             _spaceHeight,
             _countryOfBirth,
             _spaceHeight,
-            _countryCodeAndPhoneNumber
+            _phoneNumberInput
           ],
         ),
       ),
@@ -115,22 +113,17 @@ class PersonalInfoScreen extends StatelessWidget {
         ),
       );
 
-  Widget get _countryCodeAndPhoneNumber =>
+  Widget get _phoneNumberInput =>
       BlocBuilder<PersonalInfoBloc, PersonalInfoState>(
           buildWhen: (previous, current) =>
-              previous.phoneCountryCode != current.phoneCountryCode ||
               previous.phoneNumber != current.phoneNumber,
           builder: (context, state) => CustomPhoneNumberInput(
                 key: const Key('phone_number'),
-                initialValueOfCodeArea: state.phoneCountryCode,
                 initialValueOfPhoneNumber: state.phoneNumber,
-                onChangedCodeArea: (country) => context
-                    .read<PersonalInfoBloc>()
-                    .add(
-                        PersonalInfoPhoneCountryCodeChanged(country.phoneCode)),
                 onChangePhoneNumber: (phoneNumber) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoPhoneNumberChanged(phoneNumber)),
+                errorText: state.message ?? '',
               ));
 
   Widget get _selectGender => Column(
@@ -283,7 +276,7 @@ class PersonalInfoScreen extends StatelessWidget {
         state.nationalityName.isEmpty ||
         state.dateOfBirth.isEmpty ||
         state.countryNameOfBirth.isEmpty ||
-        state.phoneNumber.isEmpty) {
+        (state.phoneNumber.isEmpty || state.phoneNumber.length < 8)) {
       return true;
     } else {
       return false;
