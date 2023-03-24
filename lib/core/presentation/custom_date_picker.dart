@@ -15,6 +15,7 @@ class CustomDatePicker extends StatefulWidget {
   final DateTime? initialDateTime;
   final DateTime? maximumDate;
   final void Function(DateTime) onDateTimeChanged;
+  final String? errorText;
 
   const CustomDatePicker(
       {Key? key,
@@ -23,6 +24,7 @@ class CustomDatePicker extends StatefulWidget {
       this.selectedDate,
       this.initialDateTime,
       this.maximumDate,
+      this.errorText,
       required this.onDateTimeChanged})
       : super(key: key);
 
@@ -82,8 +84,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         },
         child: InputDecorator(
           isFocused: _focus,
-          decoration:
-              TextFieldStyle.inputDecoration.copyWith(labelText: widget.label),
+          decoration: TextFieldStyle.inputDecoration
+              .copyWith(labelText: widget.label, errorText: widget.errorText),
           child: CustomTextNew(
             widget.selectedDate != null
                 ? '${widget.selectedDate!.year}-${widget.selectedDate!.month}-${widget.selectedDate!.day}'
