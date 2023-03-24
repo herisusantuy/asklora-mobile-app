@@ -49,7 +49,6 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
         gender: personalInfoRequest?.gender,
         dateOfBirth: personalInfoRequest?.dateOfBirth,
         hkIdNumber: personalInfoRequest?.hkIdNumber,
-        isHkIdValid: isHkIdValid(personalInfoRequest?.hkIdNumber ?? ''),
         nationalityCode: personalInfoRequest?.nationality,
         nationalityName: personalInfoRequest?.nationality != null &&
                 personalInfoRequest!.nationality!.isNotEmpty
@@ -133,10 +132,7 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   _onHkIdNumberChange(
       PersonalInfoHkIdNumberChanged event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(
-        hkIdNumber: event.hkIdNumber,
-        isHkIdValid: isHkIdValid(event.hkIdNumber),
-        hkIdErrorText: ''));
+    emit(state.copyWith(hkIdNumber: event.hkIdNumber, hkIdErrorText: ''));
   }
 
   _onIsUnitedStateResidentChange(PersonalInfoIsUnitedStateResidentChanged event,
