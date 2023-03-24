@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../core/utils/feature_flags.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -65,9 +67,18 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
                   context
                       .read<DisclosureAffiliationBloc>()
                       .add(const AffiliatedPersonChanged(false));
-                  context.read<NavigationBloc<KycPageStep>>().add(
-                      const PageChanged(
-                          KycPageStep.financialProfileEmployment));
+
+                  /// TODO: Confirm with James if we want to show the source of wealth and employment or not.
+                  /// Disabling the source of wealth and employment as there are few demo with potential investors.
+                  if (FeatureFlags.isDemoEnable) {
+                    context.read<NavigationBloc<KycPageStep>>().add(
+                        const PageChanged(
+                            KycPageStep.disclosureAffiliationAssociates));
+                  } else {
+                    context.read<NavigationBloc<KycPageStep>>().add(
+                        const PageChanged(
+                            KycPageStep.financialProfileEmployment));
+                  }
                 },
                 onSaveForLater: () => context.read<KycBloc>().add(
                     SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
