@@ -93,7 +93,6 @@ class PersonalInfoState extends Equatable {
       hkIdNumber: hkIdNumber ?? this.hkIdNumber,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
-      // isHkIdValid: isHkIdValid ?? this.isHkIdValid,
       message: message ?? this.message,
       response: response ?? this.response,
       hkIdErrorText: hkIdErrorText ?? this.hkIdErrorText,
