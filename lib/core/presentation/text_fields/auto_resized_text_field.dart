@@ -1,10 +1,11 @@
+import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
 
-class AutoResizedTextField extends StatelessWidget {
+class AutoResizedTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final Function(String)? onFieldSubmitted;
   final String labelText;
@@ -35,23 +36,55 @@ class AutoResizedTextField extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<AutoResizedTextField> createState() => _AutoResizedTextFieldState();
+}
+
+class _AutoResizedTextFieldState extends State<AutoResizedTextField> {
+  @override
+  void initState() => super.initState();
+
+  @override
+  void dispose() => super.dispose();
+
+  @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      onChanged: onChanged,
-      onFieldSubmitted: onFieldSubmitted,
-      keyboardType: textInputType,
-      inputFormatters: textInputFormatterList,
+    return AutoSizeTextField(
+      textAlign: TextAlign.left,
+      fullwidth: true,
+      onChanged: widget.onChanged,
+      style: widget.textStyle ?? AskLoraTextStyles.h3,
+      controller: widget.controller,
+      onSubmitted: widget.onFieldSubmitted,
+      keyboardType: widget.textInputType,
+      inputFormatters: widget.textInputFormatterList,
+      maxLines: 1,
       decoration: InputDecoration(
-          prefixIcon: prefixIcon,
+          prefixIcon: widget.prefixIcon,
           contentPadding: EdgeInsets.zero,
           border: InputBorder.none,
-          hintStyle: hintTextStyle ??
+          hintStyle: widget.hintTextStyle ??
               AskLoraTextStyles.h3Italic
                   .copyWith(color: AskLoraColors.lightGray),
-          suffixIcon: suffixIcon,
-          hintText: hintText),
-      style: textStyle ?? AskLoraTextStyles.h3,
+          suffixIcon: widget.suffixIcon,
+          hintText: widget.hintText),
+    );
+
+    return TextFormField(
+      controller: widget.controller,
+      onChanged: widget.onChanged,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      keyboardType: widget.textInputType,
+      inputFormatters: widget.textInputFormatterList,
+      decoration: InputDecoration(
+          prefixIcon: widget.prefixIcon,
+          contentPadding: EdgeInsets.zero,
+          border: InputBorder.none,
+          hintStyle: widget.hintTextStyle ??
+              AskLoraTextStyles.h3Italic
+                  .copyWith(color: AskLoraColors.lightGray),
+          suffixIcon: widget.suffixIcon,
+          hintText: widget.hintText),
+      style: widget.textStyle ?? AskLoraTextStyles.h3,
     );
   }
 }
