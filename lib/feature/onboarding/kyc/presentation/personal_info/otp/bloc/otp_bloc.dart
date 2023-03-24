@@ -49,6 +49,11 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       emit(state.copyWith(
           response: BaseResponse.error(
               message: 'User does not exist with the given email')));
+    } on BadRequestException {
+      emit(state.copyWith(
+          response: BaseResponse.error(
+              message:
+                  ' Your phone number is invalid, please update it first')));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
