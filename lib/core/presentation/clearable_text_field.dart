@@ -72,7 +72,7 @@ class ClearableTextFormField extends FormField<String> {
                   counterText: '',
                   hintText: hintText,
                   errorText: errorText.isEmpty ? null : errorText,
-                  prefix: prefix,
+                  prefixIcon: prefix,
                   suffixIcon:
                       ((field.value?.length ?? -1) > 0 && state.hasFocus)
                           ? IconButton(
