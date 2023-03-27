@@ -139,8 +139,12 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
   }
 
   void _investmentStyleQuestionListener(
-          BuildContext context, ForYouQuestionState state) =>
-      CustomLoadingOverlay.of(context).show(state.response.state);
+      BuildContext context, ForYouQuestionState state) {
+    CustomLoadingOverlay.of(context).show(state.response.state);
+    if (state.response.state == ResponseState.success) {
+      context.read<UserResponseBloc>().add(InitiateUserResponse());
+    }
+  }
 
   void _userResponseListener(BuildContext context, UserResponseState state) {
     CustomLoadingOverlay.of(context).show(state.responseState);

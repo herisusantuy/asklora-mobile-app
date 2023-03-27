@@ -4,6 +4,11 @@ abstract class UserResponseEvent extends Equatable {
   const UserResponseEvent();
 }
 
+class InitiateUserResponse extends UserResponseEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class SendResponse extends UserResponseEvent {
   final PpiSelectionRequest ppiUserResponseRequest;
 
@@ -62,6 +67,7 @@ class UpdatePpiUserResponse extends UserResponseEvent {
 
 class ResetState extends UserResponseEvent {
   final bool wholeState;
+
   @override
   List<Object?> get props => [];
 
