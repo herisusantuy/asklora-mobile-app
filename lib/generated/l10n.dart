@@ -311,24 +311,24 @@ class S {
     );
   }
 
-  /// `You can quit now and all the trading activities of {botInformation} will end `
+  /// `You can end the Botstock now, and all stocks will be sold. Trading of {botInformation} will stop.`
   String botTradeBottomSheetEndBotStockConfirmationTitle(
       String botInformation) {
     return Intl.message(
-      'You can quit now and all the trading activities of $botInformation will end ',
+      'You can end the Botstock now, and all stocks will be sold. Trading of $botInformation will stop.',
       name: 'botTradeBottomSheetEndBotStockConfirmationTitle',
       desc: '',
       args: [botInformation],
     );
   }
 
-  /// `The total Botstock value ({botValue}) will be returned to your account after the next community order`
-  String botTradeBottomSheetEndBotStockConfirmationSubTitle(String botValue) {
+  /// `The total Botstock value will be returned to your \naccount after the next community order.`
+  String get botTradeBottomSheetEndBotStockConfirmationSubTitle {
     return Intl.message(
-      'The total Botstock value ($botValue) will be returned to your account after the next community order',
+      'The total Botstock value will be returned to your \naccount after the next community order.',
       name: 'botTradeBottomSheetEndBotStockConfirmationSubTitle',
       desc: '',
-      args: [botValue],
+      args: [],
     );
   }
 

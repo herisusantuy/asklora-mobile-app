@@ -50,7 +50,7 @@
       }
     }
   },
-  "botTradeBottomSheetEndBotStockConfirmationTitle": "You can quit now and all the trading activities of {botInformation} will end ",
+  "botTradeBottomSheetEndBotStockConfirmationTitle": "You can end the Botstock now, and all stocks will be sold. Trading of {botInformation} will stop.",
   "@botTradeBottomSheetEndBotStockConfirmationTitle": {
     "placeholders": {
       "botInformation": {
@@ -58,14 +58,7 @@
       }
     }
   },
-  "botTradeBottomSheetEndBotStockConfirmationSubTitle": "The total Botstock value ({botValue}) will be returned to your account after the next community order",
-  "@botTradeBottomSheetEndBotStockConfirmationSubTitle": {
-    "placeholders": {
-      "botValue": {
-        "type": "String"
-      }
-    }
-  },
+  "botTradeBottomSheetEndBotStockConfirmationSubTitle": "The total Botstock value will be returned to your \naccount after the next community order.",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio successfully!",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "DEPOSIT TO START REAL TRADE"
 }

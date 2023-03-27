@@ -47,9 +47,8 @@ class BotStockBottomSheet {
       context: context,
       title: S.of(context).botTradeBottomSheetEndBotStockConfirmationTitle(
           '${BotType.findByString(portfolioBotModel.botAppType).name} ${portfolioBotModel.ticker}'),
-      subTitle: S
-          .of(context)
-          .botTradeBottomSheetEndBotStockConfirmationSubTitle('US\$ 200'),
+      subTitle:
+          S.of(context).botTradeBottomSheetEndBotStockConfirmationSubTitle,
       primaryButtonLabel: 'END BOT STOCK',
       secondaryButtonLabel: 'CANCEL',
       onPrimaryButtonTap: () {

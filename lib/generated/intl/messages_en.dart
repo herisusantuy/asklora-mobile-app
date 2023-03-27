@@ -23,16 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(availableAmount, minimumAmount) =>
       "You have ${availableAmount}, the minimum investment amount is ${minimumAmount}.";
 
-  static String m1(botValue) =>
-      "The total Botstock value (${botValue}) will be returned to your account after the next community order";
+  static String m1(botInformation) =>
+      "You can end the Botstock now, and all stocks will be sold. Trading of ${botInformation} will stop.";
 
-  static String m2(botInformation) =>
-      "You can quit now and all the trading activities of ${botInformation} will end ";
-
-  static String m3(minimumAmount) =>
+  static String m2(minimumAmount) =>
       "The minimum investment amount is ${minimumAmount} per trade.";
 
-  static String m4(expiryTime) => "The new expiry date is ${expiryTime}";
+  static String m3(expiryTime) => "The new expiry date is ${expiryTime}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -43,18 +40,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetAmountMinimum": m0,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("How much are you investing?"),
-        "botTradeBottomSheetEndBotStockConfirmationSubTitle": m1,
-        "botTradeBottomSheetEndBotStockConfirmationTitle": m2,
+        "botTradeBottomSheetEndBotStockConfirmationSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "The total Botstock value will be returned to your \naccount after the next community order."),
+        "botTradeBottomSheetEndBotStockConfirmationTitle": m1,
         "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle":
             MessageLookupByLibrary.simpleMessage("DEPOSIT TO START REAL TRADE"),
         "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle":
             MessageLookupByLibrary.simpleMessage(
                 "Your free Botstock has been added to your portfolio successfully!"),
-        "botTradeBottomSheetInsufficientBalanceSubTitle": m3,
+        "botTradeBottomSheetInsufficientBalanceSubTitle": m2,
         "botTradeBottomSheetInsufficientBalanceTitle":
             MessageLookupByLibrary.simpleMessage(
                 "You are running out of money! Fund your account now."),
-        "botTradeBottomSheetRolloverConfirmationSubTitle": m4,
+        "botTradeBottomSheetRolloverConfirmationSubTitle": m3,
         "botTradeBottomSheetRolloverConfirmationTitle":
             MessageLookupByLibrary.simpleMessage(
                 "Do you want to continue the Botstock and extend the investment period?\\n\\n 2 Weeks\\n"),
