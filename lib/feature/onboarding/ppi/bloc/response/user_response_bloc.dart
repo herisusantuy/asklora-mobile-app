@@ -109,11 +109,8 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     if (userSnapShot.state == ResponseState.success) {
       List<Question> questions = Fixture().getInvestmentStyleQuestion;
       for (var e in userSnapShot.data!.scores.answers) {
-        Question? question = questions.firstWhereOrNull((element) =>
-            element.choices!
-                .firstWhereOrNull((element) => element.id == e.id)
-                ?.id ==
-            e.id);
+        Question? question = questions.firstWhereOrNull(
+            (element) => element.questionId == e.question?.questionId);
         if (question != null) {
           state.userResponse
               ?.add(Triplet(question.questionId!, question, e.id.toString()));

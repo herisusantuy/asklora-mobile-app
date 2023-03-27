@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/question.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ppi_user_response.g.dart';
@@ -50,6 +51,8 @@ class SnapShot {
 @JsonSerializable()
 class Answer {
   final int id;
+  @JsonKey(name: 'question_id')
+  final Question? question;
   final String? name;
   final String? score;
   @JsonKey(name: 'answer_type')
@@ -57,7 +60,12 @@ class Answer {
   final String? answer;
 
   Answer(
-      {required this.id, this.name, this.score, this.answerType, this.answer});
+      {required this.id,
+      this.question,
+      this.name,
+      this.score,
+      this.answerType,
+      this.answer});
 
   factory Answer.fromJson(Map<String, dynamic> json) => _$AnswerFromJson(json);
 
@@ -65,7 +73,7 @@ class Answer {
 
   @override
   String toString() {
-    return 'Answer{id: $id, name: $name, score: $score, answerType: $answerType, answer: $answer}';
+    return 'Answer{id: $id, question_id: ${question?.questionId}, name: $name, score: $score, answerType: $answerType, answer: $answer}';
   }
 }
 
