@@ -1,21 +1,64 @@
 {
   "@@locale": "en",
-      "buttonNext": "NEXT",
-      "buttonCreateAnAccount": "CREATE AN ACCOUNT",
-      "buttonHaveAnAccount": "HAVE AN ACCOUNT?",
-      "buttonLetsBegin": "LET’S BEGIN",
-      "carouselIntro1": "Get your Investments in Shape",
-      "carouselIntro2": "Guided by FinFit Coach, Lora",
-      "carouselIntro3": "Invest with AI strategy, automated",
-      "carouselIntro4": "Personalised experience",
-      "askNameScreenPlaceholder": "I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ",
-      "askNameScreenTextFieldHint": "Your Name",
-      "greetingScreenTitle": "Alright! Are you ready for the FinFit journey? ",
-      "greetingScreenSubTitle": "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!",
-      "tooltipBotDetailsStartDate": "Lora’s date to start the Botstocks",
-      "tooltipBotDetailsInvestmentPeriod": "The duration you set for Botstock where the Bot will automatically buy and sell.",
-      "tooltipBotDetailsEstMaxProfit": "This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level",
-      "tooltipBotDetailsEstMaxLoss": "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level.",
-      "tooltipBotDetailsEstTakeProfit": "The return % where the Plank Bot will sell to try and capture profits. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level above your initial investment level.",
-      "tooltipBotDetailsEstStopLoss": "The return % where the Plank Bot will sell try and limit losses. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level below your initial investment level."
+  "buttonNext": "NEXT",
+  "buttonCreateAnAccount": "CREATE AN ACCOUNT",
+  "buttonHaveAnAccount": "HAVE AN ACCOUNT?",
+  "buttonLetsBegin": "LET’S BEGIN",
+  "carouselIntro1": "Get your Investments in Shape",
+  "carouselIntro2": "Guided by FinFit Coach, Lora",
+  "carouselIntro3": "Invest with AI strategy, automated",
+  "carouselIntro4": "Personalised experience",
+  "askNameScreenPlaceholder": "I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ",
+  "askNameScreenTextFieldHint": "Your Name",
+  "greetingScreenTitle": "Alright! Are you ready for the FinFit journey? ",
+  "greetingScreenSubTitle": "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!",
+  "tooltipBotDetailsStartDate": "Lora’s date to start the Botstocks",
+  "tooltipBotDetailsInvestmentPeriod": "The duration you set for Botstock where the Bot will automatically buy and sell.",
+  "tooltipBotDetailsEstMaxProfit": "This is the estimated maximum target profit % level for the Bot strategy. The Bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.",
+  "tooltipBotDetailsEstMaxLoss": "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level.",
+  "tooltipBotDetailsEstTakeProfit": "The return % where the Plank Bot will sell to try and capture profits. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level above your initial investment level.",
+  "tooltipBotDetailsEstStopLoss": "The return % where the Plank Bot will sell try and limit losses. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level below your initial investment level.",
+  "botTradeBottomSheetAmountMinimum": "You have {availableAmount}, the minimum investment amount is {minimumAmount}.",
+  "@botTradeBottomSheetAmountMinimum": {
+    "placeholders": {
+      "availableAmount": {
+        "type": "String"
+      },
+      "minimumAmount": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetAmountTitle": "How much are you investing?",
+  "botTradeBottomSheetInsufficientBalanceTitle": "You are running out of money! Fund your account now.",
+  "botTradeBottomSheetInsufficientBalanceSubTitle": "The minimum investment amount is {minimumAmount} per trade.",
+  "@botTradeBottomSheetInsufficientBalanceSubTitle": {
+    "placeholders": {
+      "minimumAmount": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetRolloverDisclosureTitle": "If you extend the Botstock period, you will incur additional fees",
+  "botTradeBottomSheetRolloverDisclosureSubTitle": "You will be charged HKD40 if you want to extend this Botstock. If you do not have enough funds, then your fees will be deducted when you have sufficient buying power",
+  "botTradeBottomSheetRolloverConfirmationTitle": "Do you want to continue the Botstock and extend the investment period?\\n\\n 2 Weeks\\n",
+  "botTradeBottomSheetRolloverConfirmationSubTitle": "The new expiry date is {expiryTime}",
+  "@botTradeBottomSheetRolloverConfirmationSubTitle": {
+    "placeholders": {
+      "expiryTime": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetEndBotStockConfirmationTitle": "You can end the Botstock now, and all stocks will be sold. Trading of {botInformation} will stop.",
+  "@botTradeBottomSheetEndBotStockConfirmationTitle": {
+    "placeholders": {
+      "botInformation": {
+        "type": "String"
+      }
+    }
+  },
+  "botTradeBottomSheetEndBotStockConfirmationSubTitle": "The total Botstock value will be returned to your \naccount after the next community order.",
+  "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio successfully!",
+  "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "DEPOSIT TO START REAL TRADE"
 }

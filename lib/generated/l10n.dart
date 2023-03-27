@@ -190,10 +190,10 @@ class S {
     );
   }
 
-  /// `This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level`
+  /// `This is the estimated maximum target profit % level for the Bot strategy. The Bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.`
   String get tooltipBotDetailsEstMaxProfit {
     return Intl.message(
-      'This is the estimated maximum target profit % level for the Bot strategy. This is an estimated level',
+      'This is the estimated maximum target profit % level for the Bot strategy. The Bot will try to close the trade (sell stocks) and capture profits when profits reach this % level. This is an estimated level.',
       name: 'tooltipBotDetailsEstMaxProfit',
       desc: '',
       args: [],
@@ -225,6 +225,128 @@ class S {
     return Intl.message(
       'The return % where the Plank Bot will sell try and limit losses. The Plank Bot will try to close the trade (sell stocks) when the stock reaches this level below your initial investment level.',
       name: 'tooltipBotDetailsEstStopLoss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have {availableAmount}, the minimum investment amount is {minimumAmount}.`
+  String botTradeBottomSheetAmountMinimum(
+      String availableAmount, String minimumAmount) {
+    return Intl.message(
+      'You have $availableAmount, the minimum investment amount is $minimumAmount.',
+      name: 'botTradeBottomSheetAmountMinimum',
+      desc: '',
+      args: [availableAmount, minimumAmount],
+    );
+  }
+
+  /// `How much are you investing?`
+  String get botTradeBottomSheetAmountTitle {
+    return Intl.message(
+      'How much are you investing?',
+      name: 'botTradeBottomSheetAmountTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are running out of money! Fund your account now.`
+  String get botTradeBottomSheetInsufficientBalanceTitle {
+    return Intl.message(
+      'You are running out of money! Fund your account now.',
+      name: 'botTradeBottomSheetInsufficientBalanceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The minimum investment amount is {minimumAmount} per trade.`
+  String botTradeBottomSheetInsufficientBalanceSubTitle(String minimumAmount) {
+    return Intl.message(
+      'The minimum investment amount is $minimumAmount per trade.',
+      name: 'botTradeBottomSheetInsufficientBalanceSubTitle',
+      desc: '',
+      args: [minimumAmount],
+    );
+  }
+
+  /// `If you extend the Botstock period, you will incur additional fees`
+  String get botTradeBottomSheetRolloverDisclosureTitle {
+    return Intl.message(
+      'If you extend the Botstock period, you will incur additional fees',
+      name: 'botTradeBottomSheetRolloverDisclosureTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will be charged HKD40 if you want to extend this Botstock. If you do not have enough funds, then your fees will be deducted when you have sufficient buying power`
+  String get botTradeBottomSheetRolloverDisclosureSubTitle {
+    return Intl.message(
+      'You will be charged HKD40 if you want to extend this Botstock. If you do not have enough funds, then your fees will be deducted when you have sufficient buying power',
+      name: 'botTradeBottomSheetRolloverDisclosureSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to continue the Botstock and extend the investment period?\n\n 2 Weeks\n`
+  String get botTradeBottomSheetRolloverConfirmationTitle {
+    return Intl.message(
+      'Do you want to continue the Botstock and extend the investment period?\\n\\n 2 Weeks\\n',
+      name: 'botTradeBottomSheetRolloverConfirmationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The new expiry date is {expiryTime}`
+  String botTradeBottomSheetRolloverConfirmationSubTitle(String expiryTime) {
+    return Intl.message(
+      'The new expiry date is $expiryTime',
+      name: 'botTradeBottomSheetRolloverConfirmationSubTitle',
+      desc: '',
+      args: [expiryTime],
+    );
+  }
+
+  /// `You can end the Botstock now, and all stocks will be sold. Trading of {botInformation} will stop.`
+  String botTradeBottomSheetEndBotStockConfirmationTitle(
+      String botInformation) {
+    return Intl.message(
+      'You can end the Botstock now, and all stocks will be sold. Trading of $botInformation will stop.',
+      name: 'botTradeBottomSheetEndBotStockConfirmationTitle',
+      desc: '',
+      args: [botInformation],
+    );
+  }
+
+  /// `The total Botstock value will be returned to your \naccount after the next community order.`
+  String get botTradeBottomSheetEndBotStockConfirmationSubTitle {
+    return Intl.message(
+      'The total Botstock value will be returned to your \naccount after the next community order.',
+      name: 'botTradeBottomSheetEndBotStockConfirmationSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your free Botstock has been added to your portfolio successfully!`
+  String get botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle {
+    return Intl.message(
+      'Your free Botstock has been added to your portfolio successfully!',
+      name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DEPOSIT TO START REAL TRADE`
+  String get botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle {
+    return Intl.message(
+      'DEPOSIT TO START REAL TRADE',
+      name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle',
       desc: '',
       args: [],
     );
