@@ -32,7 +32,7 @@ class CustomPhoneNumberInput extends StatelessWidget {
           prefix: const UnconstrainedBox(
             constrainedAxis: Axis.horizontal,
             child: Padding(
-              padding: EdgeInsets.only(left: 0, right: 15),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 '+852',
                 style: TextStyle(color: AskLoraColors.charcoal),
