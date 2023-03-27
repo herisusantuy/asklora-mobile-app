@@ -51,7 +51,7 @@ class SnapShot {
 @JsonSerializable()
 class Answer {
   final int id;
-  @JsonKey(name: 'question_id')
+  @JsonKey(name: 'question')
   final Question? question;
   final String? name;
   final String? score;

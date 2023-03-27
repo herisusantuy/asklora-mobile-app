@@ -42,9 +42,9 @@ Map<String, dynamic> _$SnapShotToJson(SnapShot instance) => <String, dynamic>{
 
 Answer _$AnswerFromJson(Map<String, dynamic> json) => Answer(
       id: json['id'] as int,
-      question: json['question_id'] == null
+      question: json['question'] == null
           ? null
-          : Question.fromJson(json['question_id'] as Map<String, dynamic>),
+          : Question.fromJson(json['question'] as Map<String, dynamic>),
       name: json['name'] as String?,
       score: json['score'] as String?,
       answerType: json['answer_type'] as String?,
@@ -53,7 +53,7 @@ Answer _$AnswerFromJson(Map<String, dynamic> json) => Answer(
 
 Map<String, dynamic> _$AnswerToJson(Answer instance) => <String, dynamic>{
       'id': instance.id,
-      'question_id': instance.question,
+      'question': instance.question,
       'name': instance.name,
       'score': instance.score,
       'answer_type': instance.answerType,
