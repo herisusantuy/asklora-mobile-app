@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/utils/utils.dart';
 import '../../domain/upgrade_account/proofs_of_address_request.dart';
 import '../../domain/upgrade_account/residence_info_request.dart';
@@ -58,13 +59,27 @@ class AddressProofBloc extends Bloc<AddressProofEvent, AddressProofState> {
 
   _onImagesChanged(ImagesChanged event, Emitter<AddressProofState> emit) {
     List<PlatformFile> images = List.from(state.addressProofImages);
-    images.addAll(event.images);
-    emit(state.copyWith(addressProofImages: images));
+    if (images.length > AddressProofState.maximumProofOfAddressImagesAllowed) {
+      emit(state.copyWith(
+          proofOfAddressImagesErrorText:
+              'Maximum number of images allowed is ${AddressProofState.maximumProofOfAddressImagesAllowed}'));
+    } else {
+      images.addAll(event.images);
+      emit(state.copyWith(
+          addressProofImages: images, proofOfAddressImagesErrorText: ''));
+    }
   }
 
   _onImageDeleted(ImageDeleted event, Emitter<AddressProofState> emit) {
     List<PlatformFile> images = List.from(state.addressProofImages);
-    images.remove(event.image);
-    emit(state.copyWith(addressProofImages: images));
+    if (images.length > AddressProofState.maximumProofOfAddressImagesAllowed) {
+      emit(state.copyWith(
+          proofOfAddressImagesErrorText:
+              'Maximum number of images allowed is ${AddressProofState.maximumProofOfAddressImagesAllowed}'));
+    } else {
+      images.remove(event.image);
+      emit(state.copyWith(
+          addressProofImages: images, proofOfAddressImagesErrorText: ''));
+    }
   }
 }

@@ -1,18 +1,23 @@
 part of 'address_proof_bloc.dart';
 
 class AddressProofState extends Equatable {
-  const AddressProofState(
-      {this.district,
-      this.region,
-      this.addressLine1 = '',
-      this.addressLine2 = '',
-      this.addressProofImages = const []});
+  static const maximumProofOfAddressImagesAllowed = 5;
+
+  const AddressProofState({
+    this.district,
+    this.region,
+    this.addressLine1 = '',
+    this.addressLine2 = '',
+    this.addressProofImages = const [],
+    this.proofOfAddressImagesErrorText = '',
+  });
 
   final District? district;
   final Region? region;
   final String addressLine1;
   final String addressLine2;
   final List<PlatformFile> addressProofImages;
+  final String proofOfAddressImagesErrorText;
 
   AddressProofState copyWith({
     District? district,
@@ -20,6 +25,7 @@ class AddressProofState extends Equatable {
     String? addressLine1,
     String? addressLine2,
     List<PlatformFile>? addressProofImages,
+    String? proofOfAddressImagesErrorText,
   }) {
     return AddressProofState(
       district: district ?? this.district,
@@ -27,12 +33,21 @@ class AddressProofState extends Equatable {
       addressLine1: addressLine1 ?? this.addressLine1,
       addressLine2: addressLine2 ?? this.addressLine2,
       addressProofImages: addressProofImages ?? this.addressProofImages,
+      proofOfAddressImagesErrorText:
+          proofOfAddressImagesErrorText ?? this.proofOfAddressImagesErrorText,
     );
   }
 
   @override
   List<Object?> get props {
-    return [district, region, addressLine1, addressLine2, addressProofImages];
+    return [
+      district,
+      region,
+      addressLine1,
+      addressLine2,
+      addressProofImages,
+      proofOfAddressImagesErrorText
+    ];
   }
 
   bool enableNextButton() {

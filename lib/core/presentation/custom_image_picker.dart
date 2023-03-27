@@ -20,6 +20,7 @@ class CustomImagePicker extends StatelessWidget {
   final String? additionalText;
   final Function(List<PlatformFile>)? onImagePicked;
   final Function(PlatformFile)? onImageDeleted;
+  final bool allowMultiple;
   final FilePickerRepository filePickerRepository = FilePickerRepository();
 
   CustomImagePicker(
@@ -31,6 +32,7 @@ class CustomImagePicker extends StatelessWidget {
       this.onImagePicked,
       this.onImageDeleted,
       this.disabled = false,
+      this.allowMultiple = true,
       this.disabledPick = false,
       Key? key})
       : super(key: key);
@@ -126,8 +128,16 @@ class CustomImagePicker extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     if (onImagePicked != null && !disabled && !disabledPick) {
-                      onImagePicked!(await filePickerRepository.pickFiles(
-                          fileType: FileType.image));
+                      if (allowMultiple) {
+                        onImagePicked!(await filePickerRepository.pickFiles(
+                            fileType: FileType.image));
+                      } else {
+                        final file = await filePickerRepository.pickFile(
+                            fileType: FileType.image);
+                        if (file != null) {
+                          onImagePicked!([file]);
+                        }
+                      }
                     }
                   },
                   child: getSvgIcon('icon_add_files',
