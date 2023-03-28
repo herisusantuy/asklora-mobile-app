@@ -81,6 +81,12 @@ class CustomImagePicker extends StatelessWidget {
                         width: size,
                         height: size,
                         decoration: BoxDecoration(
+                            boxShadow: const [
+                              BoxShadow(
+                                color: AskLoraColors.gray,
+                                blurRadius: 5.0,
+                              )
+                            ],
                             borderRadius: BorderRadius.circular(5),
                             color: const Color(0xffc2d1d9),
                             image: DecorationImage(
@@ -98,7 +104,14 @@ class CustomImagePicker extends StatelessWidget {
                                   },
                                   child: const Icon(
                                     Icons.close,
-                                    color: Colors.white,
+                                    color: AskLoraColors.darkGray,
+                                    shadows: [
+                                      Shadow(
+                                        color: AskLoraColors.gray,
+                                        blurRadius: 5.0,
+                                        offset: Offset(1, 4),
+                                      )
+                                    ],
                                   ),
                                 )),
                       ))

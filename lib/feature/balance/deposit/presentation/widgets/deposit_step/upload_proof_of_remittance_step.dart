@@ -48,6 +48,7 @@ class UploadProofOfRemittanceStep extends StatelessWidget {
               onImagePicked: (images) => context
                   .read<DepositBloc>()
                   .add(ProofOfRemittanceImagesChanged(images)),
+              allowMultiple: false,
             ),
           ),
         ],
