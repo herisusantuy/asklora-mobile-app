@@ -5,6 +5,7 @@ import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 import '../utils/formatters/phone_input_formatter/phone_input_formatter.dart';
 import 'clearable_text_field.dart';
+import 'custom_text.dart';
 import 'custom_text_new.dart';
 
 class CustomPhoneNumberInput extends StatelessWidget {
@@ -29,13 +30,14 @@ class CustomPhoneNumberInput extends StatelessWidget {
         CustomTextNew('Phone Number', style: AskLoraTextStyles.body2),
         const SizedBox(height: 5),
         ClearableTextFormField(
-          prefix: const UnconstrainedBox(
+          prefix: UnconstrainedBox(
             constrainedAxis: Axis.horizontal,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 2),
               child: Text(
                 '+852',
-                style: TextStyle(color: AskLoraColors.charcoal),
+                style: AskLoraTextStyles.body1
+                    .copyWith(color: AskLoraColors.charcoal),
               ),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../styles/asklora_text_styles.dart';
 import 'text_fields/style/text_field_style.dart';
 
 class ClearableTextFormField extends FormField<String> {
@@ -66,6 +67,7 @@ class ClearableTextFormField extends FormField<String> {
                 obscureText: obscureText,
                 inputFormatters: textInputFormatterList,
                 maxLength: maxLength,
+                style: AskLoraTextStyles.body1,
                 decoration: TextFieldStyle.inputDecoration.copyWith(
                   floatingLabelBehavior: floatingLabelBehavior,
                   labelText: labelText,
