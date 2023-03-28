@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../domain/ppi_api_repository.dart';
 import '../domain/ppi_user_response.dart';
 import '../domain/ppi_user_response_request.dart';
@@ -15,6 +19,8 @@ class PpiResponseRepository {
 
   final BotRecommendationRepository botRecommendationRepository =
       BotRecommendationRepository();
+
+  final SharedPreference _sharedPreference = SharedPreference();
 
   final PpiApiRepository _ppiApiRepository = PpiApiRepository();
 
@@ -39,9 +45,26 @@ class PpiResponseRepository {
   Future<BaseResponse<SnapShot>> getUserSnapShotUserId(dynamic userId) async {
     try {
       var response = await _ppiApiRepository.getUserSnapshotByUserId(userId);
-      return BaseResponse.complete(SnapShot.fromJson(response.data));
+      SnapShot snapshot = SnapShot.fromJson(response.data);
+      await saveUserSnapShotToLocal(snapshot);
+      return BaseResponse.complete(snapshot);
     } catch (_) {
       return BaseResponse.error(message: 'Failed to get data');
+    }
+  }
+
+  Future<void> saveUserSnapShotToLocal(SnapShot snapshot) async {
+    await _sharedPreference.writeData(sfKeyPpiAccountId, snapshot.accountId);
+    await _sharedPreference.writeIntData(sfKeyPpiUserId, snapshot.id);
+    await _sharedPreference.writeData(sfKeyPpiSnapshot, jsonEncode(snapshot));
+  }
+
+  Future<SnapShot?> getUserSnapShotFromLocal() async {
+    var data = await _sharedPreference.readData(sfKeyPpiSnapshot);
+    if (data != null) {
+      return SnapShot.fromJson(jsonDecode(data));
+    } else {
+      return null;
     }
   }
 
@@ -50,7 +73,9 @@ class PpiResponseRepository {
     try {
       var response =
           await _ppiApiRepository.getUserSnapshotByAskloraId(askloraId);
-      return BaseResponse.complete(SnapShot.fromJson(response.data));
+      SnapShot snapshot = SnapShot.fromJson(response.data);
+      await saveUserSnapShotToLocal(snapshot);
+      return BaseResponse.complete(snapshot);
     } catch (_) {
       return BaseResponse.error(message: 'Failed to get data');
     }

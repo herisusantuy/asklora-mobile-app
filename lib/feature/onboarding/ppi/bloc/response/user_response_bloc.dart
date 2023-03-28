@@ -11,6 +11,7 @@ import '../../../../../core/domain/triplet.dart';
 import '../../../../../core/utils/log.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/utils/storage/storage_keys.dart';
+import '../../domain/fixture.dart';
 import '../../domain/ppi_user_response.dart';
 import '../../domain/ppi_user_response_request.dart';
 import '../../domain/question.dart';
@@ -36,6 +37,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     on<SaveOmniSearchResponse>(_onSaveOmniSearchResponse);
     on<CalculateScore>(_onCalculateScore);
     on<ResetState>(_onResetState);
+    on<InitiateUserResponse>(_onInitiateUserResponse);
   }
 
   final PpiResponseRepository _ppiResponseRepository;
@@ -99,6 +101,22 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     emit(state.copyWith(responseState: ResponseState.success));
   }
 
+  void _onInitiateUserResponse(
+      InitiateUserResponse event, Emitter<UserResponseState> emit) async {
+    var snapshot = await _ppiResponseRepository.getUserSnapShotFromLocal();
+    if (snapshot != null) {
+      List<Question> questions = Fixture().getInvestmentStyleQuestion;
+      for (var e in questions) {
+        Answer? answer = snapshot.scores.answers.firstWhereOrNull(
+            (element) => element.question?.questionId == e.questionId);
+        if (answer != null) {
+          state.userResponse
+              ?.add(Triplet(e.questionId!, e, answer.id.toString()));
+        }
+      }
+    }
+  }
+
   void _onUpdatePpiUserResponse(
       UpdatePpiUserResponse event, Emitter<UserResponseState> emit) async {
     emit(state);
@@ -128,7 +146,6 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
 
       var requests = _getAllSelectionsInRequest(tempId);
-      print('temp id $tempId');
 
       await _ppiResponseRepository.addBulkAnswer(requests);
       var userSnapShot =
