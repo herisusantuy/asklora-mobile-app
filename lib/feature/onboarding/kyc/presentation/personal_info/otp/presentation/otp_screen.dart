@@ -32,7 +32,8 @@ class OtpScreen extends StatelessWidget {
               .read<NavigationBloc<KycPageStep>>()
               .add(const PageChanged(KycPageStep.addressProof));
         } else {
-          if (state.response.state == ResponseState.error ||
+          if ((state.response.state == ResponseState.error &&
+                  state.response.message != 'Invalid OTP') ||
               state.response.state == ResponseState.success) {
             CustomInAppNotification.show(context, state.response.message);
           }
