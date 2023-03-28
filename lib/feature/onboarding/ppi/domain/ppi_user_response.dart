@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/question.dart';
+import 'question.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ppi_user_response.g.dart';
