@@ -103,13 +103,11 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   void _onInitiateUserResponse(
       InitiateUserResponse event, Emitter<UserResponseState> emit) async {
-    var userSnapShot = await _ppiResponseRepository.getUserSnapShotUserId(
-        await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0);
-
-    if (userSnapShot.state == ResponseState.success) {
+    var snapshot = await _ppiResponseRepository.getUserSnapShotFromLocal();
+    if (snapshot != null) {
       List<Question> questions = Fixture().getInvestmentStyleQuestion;
       for (var e in questions) {
-        Answer? answer = userSnapShot.data!.scores.answers.firstWhereOrNull(
+        Answer? answer = snapshot.scores.answers.firstWhereOrNull(
             (element) => element.question?.questionId == e.questionId);
         if (answer != null) {
           state.userResponse

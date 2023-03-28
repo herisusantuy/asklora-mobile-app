@@ -176,8 +176,6 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   Future<BaseResponse<SnapShot>> _getUserSnapshot(String username) async {
     var snapshot = await _ppiResponseRepository.getUserSnapShotUserId(username);
-    _sharedPreference.writeData(sfKeyPpiAccountId, snapshot.data!.accountId);
-    _sharedPreference.writeIntData(sfKeyPpiUserId, snapshot.data!.id);
     return snapshot;
   }
 }
