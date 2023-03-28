@@ -122,14 +122,15 @@ class BotStockRepository {
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount,
       required String estimatedEndDate}) async {
-    await removeInvestmentStyleState();
+
     if (FeatureFlags.isDemoEnable) {
       ///MOCK
       await Future.delayed(const Duration(milliseconds: 500));
-      var data = await MockData().saveBotStock(
+      var data = await MockData().createOrder(
           estimatedEndDate: estimatedEndDate,
           botRecommendationModel: botRecommendationModel,
           tradeBotStockAmount: tradeBotStockAmount);
+      await removeInvestmentStyleState();
       return data;
     } else {
       ///REAL
@@ -140,6 +141,7 @@ class BotStockRepository {
             spotDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
             investmentAmount: tradeBotStockAmount,
             price: checkDouble(botRecommendationModel.latestPrice)));
+        await removeInvestmentStyleState();
         return BaseResponse.complete(true);
       } catch (e) {
         return BaseResponse.error();

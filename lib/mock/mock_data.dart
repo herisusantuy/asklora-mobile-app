@@ -91,7 +91,7 @@ class MockData {
     }
   }
 
-  Future<BaseResponse<bool>> saveBotStock(
+  Future<BaseResponse<bool>> createOrder(
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount,
       required String estimatedEndDate}) async {
