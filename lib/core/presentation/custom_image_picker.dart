@@ -81,9 +81,9 @@ class CustomImagePicker extends StatelessWidget {
                         width: size,
                         height: size,
                         decoration: BoxDecoration(
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
-                                color: Colors.grey.shade400,
+                                color: AskLoraColors.gray,
                                 blurRadius: 5.0,
                               )
                             ],
@@ -102,14 +102,14 @@ class CustomImagePicker extends StatelessWidget {
                                       onImageDeleted!(e);
                                     }
                                   },
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.close,
-                                    color: const Color(0XFF878787),
+                                    color: AskLoraColors.darkGray,
                                     shadows: [
                                       Shadow(
-                                        color: Colors.grey.shade400,
+                                        color: AskLoraColors.gray,
                                         blurRadius: 5.0,
-                                        offset: const Offset(1, 4),
+                                        offset: Offset(1, 4),
                                       )
                                     ],
                                   ),
