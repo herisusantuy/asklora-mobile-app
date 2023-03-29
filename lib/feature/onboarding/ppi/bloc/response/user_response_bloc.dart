@@ -177,7 +177,14 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       var requests = _getAllSelectionsInRequest(tempId);
 
-      await _jsonCacheSharedPreferences.refresh(sfKeyPpiAnswers, requests);
+      if (requests.isEmpty) {
+        final cachedResponse =
+            await _jsonCacheSharedPreferences.value(sfKeyPpiAnswers);
+        requests = List<PpiSelectionRequest>.from((cachedResponse)
+            .map((e) => PpiSelectionRequest.fromJson(e, tempId)));
+      } else {
+        await _jsonCacheSharedPreferences.refresh(sfKeyPpiAnswers, requests);
+      }
 
       await _ppiResponseRepository.addBulkAnswer(requests);
       var userSnapShot =
@@ -203,43 +210,8 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
   }
 
   void _onReSendBulkResponse(
-      ReSendResponse event, Emitter<UserResponseState> emit) async {
-    try {
-      emit(state.copyWith(
-        responseState: ResponseState.loading,
-        ppiResponseState: PpiResponseState.dispatchResponse,
-      ));
-
-      final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
-
-      final cachedResponse =
-          await _jsonCacheSharedPreferences.value(sfKeyPpiAnswers);
-
-      final request = List<PpiSelectionRequest>.from(
-          (cachedResponse).map((e) => PpiSelectionRequest.fromJson(e, tempId)));
-
-      await _ppiResponseRepository.addBulkAnswer(request);
-      var userSnapShot =
-          await _ppiResponseRepository.getUserSnapShotUserId(tempId);
-      emit(state.copyWith(
-        responseState: ResponseState.success,
-        ppiResponseState: PpiResponseState.dispatchResponse,
-        snapShot: userSnapShot,
-      ));
-    } on BadRequestException {
-      emit(state.copyWith(
-          responseState: ResponseState.error,
-          ppiResponseState: PpiResponseState.dispatchResponse,
-          message: 'Something went wrong! Please try again.',
-          errorType: ErrorType.error400));
-    } catch (e) {
-      emit(state.copyWith(
-          responseState: ResponseState.error,
-          ppiResponseState: PpiResponseState.dispatchResponse,
-          message: 'Something went wrong! Please try again.',
-          errorType: ErrorType.error500));
-    }
-  }
+          ReSendResponse event, Emitter<UserResponseState> emit) async =>
+      add(const SendBulkResponse());
 
   Future<bool> _isNotEligible() async {
     final scores = await _calculate();
