@@ -190,10 +190,10 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       final cachedResponse =
           await _jsonCacheSharedPreferences.value(sfKeyPpiAnswers);
 
-      final a = List<PpiSelectionRequest>.from(
+      final request = List<PpiSelectionRequest>.from(
           (cachedResponse).map((e) => PpiSelectionRequest.fromJson(e, tempId)));
 
-      await _ppiResponseRepository.addBulkAnswer(a);
+      await _ppiResponseRepository.addBulkAnswer(request);
       var userSnapShot =
           await _ppiResponseRepository.getUserSnapShotUserId(tempId);
       emit(state.copyWith(

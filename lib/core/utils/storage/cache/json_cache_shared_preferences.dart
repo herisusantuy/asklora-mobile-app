@@ -26,8 +26,8 @@ class JsonCacheSharedPreferences implements JsonCache {
     if (value is List) {
       final json = jsonEncode(value.map((e) => e.toJson()).toList());
       await _sharedPreferences.writeData(key, json);
-    } else if (value is MapEntry) {
-      await _sharedPreferences.writeData(key, json.encode(value));
+    } else {
+      await _sharedPreferences.writeData(key, value.toJson());
     }
   }
 
