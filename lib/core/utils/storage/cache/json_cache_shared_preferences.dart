@@ -18,7 +18,7 @@ class JsonCacheSharedPreferences implements JsonCache {
 
   ///
   /// **[Note]**
-  /// In order to store the model in JSON string please make sure the model has
+  /// In order to store the model in JSON string, please make sure the model has
   /// `toJson` method implementation.
   ///
   @override

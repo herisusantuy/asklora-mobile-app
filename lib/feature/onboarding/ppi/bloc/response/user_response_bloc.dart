@@ -23,11 +23,13 @@ part 'user_response_event.dart';
 part 'user_response_state.dart';
 
 class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
-  UserResponseBloc(
-      {required PpiResponseRepository ppiResponseRepository,
-      required SharedPreference sharedPreference})
-      : _ppiResponseRepository = ppiResponseRepository,
+  UserResponseBloc({
+    required PpiResponseRepository ppiResponseRepository,
+    required SharedPreference sharedPreference,
+    required JsonCacheSharedPreferences jsonCacheSharedPreferences,
+  })  : _ppiResponseRepository = ppiResponseRepository,
         _sharedPreference = sharedPreference,
+        _jsonCacheSharedPreferences = jsonCacheSharedPreferences,
         super(UserResponseState(userResponse: List.empty(growable: true))) {
     on<UserResponseEvent>((event, emit) {});
     on<SendResponse>(_onSendAnswer);
@@ -44,6 +46,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   final PpiResponseRepository _ppiResponseRepository;
   final SharedPreference _sharedPreference;
+  final JsonCacheSharedPreferences _jsonCacheSharedPreferences;
 
   void _onResetState(ResetState event, Emitter<UserResponseState> emit) async {
     if (event.wholeState) {
@@ -149,7 +152,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       var requests = _getAllSelectionsInRequest(tempId);
 
-      await JsonCacheSharedPreferences().refresh(sfKeyPpiAnswers, requests);
+      await _jsonCacheSharedPreferences.refresh(sfKeyPpiAnswers, requests);
 
       await _ppiResponseRepository.addBulkAnswer(requests);
       var userSnapShot =
@@ -185,7 +188,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
       final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
 
       final cachedResponse =
-          await JsonCacheSharedPreferences().value(sfKeyPpiAnswers);
+          await _jsonCacheSharedPreferences.value(sfKeyPpiAnswers);
 
       final a = List<PpiSelectionRequest>.from(
           (cachedResponse).map((e) => PpiSelectionRequest.fromJson(e, tempId)));

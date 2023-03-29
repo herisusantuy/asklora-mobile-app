@@ -10,6 +10,7 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
+import '../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../onboarding/ppi/bloc/response/user_response_bloc.dart';
@@ -34,7 +35,8 @@ class EmailActivationScreen extends StatelessWidget {
         BlocProvider(
             create: (_) => UserResponseBloc(
                 sharedPreference: SharedPreference(),
-                ppiResponseRepository: PpiResponseRepository())),
+                ppiResponseRepository: PpiResponseRepository(),
+                jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
         BlocProvider(
             create: (_) => LoraAskNameBloc(
                 addUserNameRepository: AddUserNameRepository(),
