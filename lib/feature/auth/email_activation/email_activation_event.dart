@@ -35,10 +35,3 @@ class DeepLinkValidateFailed extends EmailActivationEvent {
   @override
   List<Object> get props => [];
 }
-
-class OnBackPress extends EmailActivationEvent {
-  const OnBackPress();
-
-  @override
-  List<Object> get props => [];
-}

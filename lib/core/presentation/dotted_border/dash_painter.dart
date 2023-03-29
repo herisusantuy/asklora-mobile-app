@@ -16,7 +16,7 @@ class _DashPainter extends CustomPainter {
     this.strokeWidth = 2,
     this.dashPattern = const <double>[3, 1],
     this.color = Colors.black,
-    this.borderType = BorderType.Rect,
+    this.borderType = BorderType.rect,
     this.radius = const Radius.circular(0),
     this.strokeCap = StrokeCap.butt,
     this.customPath,
@@ -61,16 +61,16 @@ class _DashPainter extends CustomPainter {
   Path _getPath(Size size) {
     Path path;
     switch (borderType) {
-      case BorderType.Circle:
+      case BorderType.circle:
         path = _getCirclePath(size);
         break;
-      case BorderType.RRect:
+      case BorderType.rRect:
         path = _getRRectPath(size, radius);
         break;
-      case BorderType.Rect:
+      case BorderType.rect:
         path = _getRectPath(size);
         break;
-      case BorderType.Oval:
+      case BorderType.oval:
         path = _getOvalPath(size);
         break;
     }

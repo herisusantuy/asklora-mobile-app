@@ -27,7 +27,7 @@ class SignatureDrawer extends StatelessWidget {
     return DottedBorder(
       padding: EdgeInsets.zero,
       radius: const Radius.circular(20),
-      borderType: BorderType.RRect,
+      borderType: BorderType.rRect,
       color: AskLoraColors.gray,
       dashPattern: const [4, 4],
       child: Stack(

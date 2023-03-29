@@ -1,6 +1,7 @@
 library dotted_border;
 
 import 'package:flutter/material.dart';
+
 import 'path_drawing/path_drawing.dart';
 
 part 'dash_painter.dart';
@@ -24,10 +25,11 @@ class DottedBorder extends StatelessWidget {
   final PathBuilder? customPath;
 
   DottedBorder({
+    super.key,
     required this.child,
     this.color = Colors.black,
     this.strokeWidth = 1,
-    this.borderType = BorderType.Rect,
+    this.borderType = BorderType.rect,
     this.dashPattern = const <double>[3, 1],
     this.padding = const EdgeInsets.all(2),
     this.borderPadding = EdgeInsets.zero,
@@ -77,4 +79,4 @@ class DottedBorder extends StatelessWidget {
 }
 
 /// The different supported BorderTypes
-enum BorderType { Circle, RRect, Rect, Oval }
+enum BorderType { circle, rRect, rect, oval }

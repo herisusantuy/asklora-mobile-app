@@ -120,7 +120,7 @@ class OnBoardingStatus extends StatelessWidget {
           title: 'START INVESTING',
           subTitle: 'Define Investment Style',
           onTap: () => PpiScreen.open(context,
-              arguments: Pair(QuestionPageType.investmentStyle,
+              arguments: const Pair(QuestionPageType.investmentStyle,
                   QuestionPageStep.investmentStyle)),
           progress: 0.1,
         );

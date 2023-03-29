@@ -117,15 +117,9 @@ class EmailActivationScreen extends StatelessWidget {
                                   primaryButtonOnClick: () => context
                                       .read<EmailActivationBloc>()
                                       .add(ResendEmailActivationLink(userName)),
-                                  secondaryButtonOnClick: () {
-                                    // context
-                                    //     .read<EmailActivationBloc>()
-                                    //     .add(const OnBackPress());
-                                    context
-                                        .read<LoraAskNameBloc>()
-                                        .add(const ReSubmitUserName());
-                                    //Navigator.pop(context);
-                                  },
+                                  secondaryButtonOnClick: () => context
+                                      .read<LoraAskNameBloc>()
+                                      .add(const ReSubmitUserName()),
                                   primaryButtonLabel: 'RESEND ACTIVATION LINK',
                                   secondaryButtonLabel: 'SIGN UP AGAIN')
                             ],

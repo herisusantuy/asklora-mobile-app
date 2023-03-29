@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,6 +5,7 @@ import '../../repository/signing_broker_agreement_repository.dart';
 import '../personal_info/personal_info_bloc.dart';
 
 part 'signing_agreement_event.dart';
+
 part 'signing_agreement_state.dart';
 
 class SigningAgreementBloc
