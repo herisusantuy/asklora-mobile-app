@@ -151,7 +151,6 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
   }
 
   void _loraPopUpMessagePrimaryButtonTap(BuildContext context) {
-    context.read<UserResponseBloc>().add(const ResetState());
     if (context.read<ForYouQuestionBloc>().state.response.data!.left != null) {
       context
           .read<NavigationBloc<InvestmentStyleQuestionType>>()
