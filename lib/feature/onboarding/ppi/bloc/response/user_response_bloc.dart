@@ -1,14 +1,15 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:collection/collection.dart';
 
 import '../../../../../core/data/remote/base_api_client.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/domain/triplet.dart';
 import '../../../../../core/utils/log.dart';
+import '../../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/utils/storage/storage_keys.dart';
 import '../../domain/fixture.dart';
@@ -38,6 +39,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     on<CalculateScore>(_onCalculateScore);
     on<ResetState>(_onResetState);
     on<InitiateUserResponse>(_onInitiateUserResponse);
+    on<ReSendResponse>(_onReSendBulkResponse);
   }
 
   final PpiResponseRepository _ppiResponseRepository;
@@ -147,7 +149,48 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       var requests = _getAllSelectionsInRequest(tempId);
 
+      await JsonCacheSharedPreferences().refresh(sfKeyPpiAnswers, requests);
+
       await _ppiResponseRepository.addBulkAnswer(requests);
+      var userSnapShot =
+          await _ppiResponseRepository.getUserSnapShotUserId(tempId);
+      emit(state.copyWith(
+        responseState: ResponseState.success,
+        ppiResponseState: PpiResponseState.dispatchResponse,
+        snapShot: userSnapShot,
+      ));
+    } on BadRequestException {
+      emit(state.copyWith(
+          responseState: ResponseState.error,
+          ppiResponseState: PpiResponseState.dispatchResponse,
+          message: 'Something went wrong! Please try again.',
+          errorType: ErrorType.error400));
+    } catch (e) {
+      emit(state.copyWith(
+          responseState: ResponseState.error,
+          ppiResponseState: PpiResponseState.dispatchResponse,
+          message: 'Something went wrong! Please try again.',
+          errorType: ErrorType.error500));
+    }
+  }
+
+  void _onReSendBulkResponse(
+      ReSendResponse event, Emitter<UserResponseState> emit) async {
+    try {
+      emit(state.copyWith(
+        responseState: ResponseState.loading,
+        ppiResponseState: PpiResponseState.dispatchResponse,
+      ));
+
+      final tempId = await _sharedPreference.readIntData(sfKeyPpiUserId) ?? 0;
+
+      final cachedResponse =
+          await JsonCacheSharedPreferences().value(sfKeyPpiAnswers);
+
+      final a = List<PpiSelectionRequest>.from(
+          (cachedResponse).map((e) => PpiSelectionRequest.fromJson(e, tempId)));
+
+      await _ppiResponseRepository.addBulkAnswer(a);
       var userSnapShot =
           await _ppiResponseRepository.getUserSnapShotUserId(tempId);
       emit(state.copyWith(

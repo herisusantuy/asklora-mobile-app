@@ -46,4 +46,8 @@ class SharedPreference implements Storage {
   @override
   Future<int?> readIntData(String key) async =>
       await _getPreference().then((v) => v.getInt(key));
+
+  @override
+  Future<bool> containsKey(String key) async =>
+      await _getPreference().then((value) => value.containsKey(key));
 }

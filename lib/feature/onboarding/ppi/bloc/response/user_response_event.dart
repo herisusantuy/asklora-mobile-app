@@ -18,6 +18,13 @@ class SendResponse extends UserResponseEvent {
   const SendResponse(this.ppiUserResponseRequest);
 }
 
+class ReSendResponse extends UserResponseEvent {
+  const ReSendResponse();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class SaveUserResponse extends UserResponseEvent {
   final Question question;
   final String selectedAnswer;
