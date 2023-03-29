@@ -15,6 +15,7 @@ import '../../domain/fixture.dart';
 import '../../domain/ppi_user_response.dart';
 import '../../domain/ppi_user_response_request.dart';
 import '../../domain/question.dart';
+import '../../presentation/widget/omni_search_question_widget/bloc/omni_search_question_widget_bloc.dart';
 import '../../repository/ppi_response_repository.dart';
 
 part 'user_response_event.dart';
@@ -103,6 +104,9 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   void _onInitiateUserResponse(
       InitiateUserResponse event, Emitter<UserResponseState> emit) async {
+    emit(state.copyWith(
+        ppiResponseState: PpiResponseState.initAddResponse,
+        responseState: ResponseState.loading));
     var snapshot = await _ppiResponseRepository.getUserSnapShotFromLocal();
     if (snapshot != null) {
       List<Question> questions = Fixture().getInvestmentStyleQuestion;
@@ -110,11 +114,32 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
         Answer? answer = snapshot.scores.answers.firstWhereOrNull(
             (element) => element.question?.questionId == e.questionId);
         if (answer != null) {
-          state.userResponse
-              ?.add(Triplet(e.questionId!, e, answer.id.toString()));
+          if (answer.question?.section ==
+                  QuestionSection.investmentStyle.value &&
+              answer.question?.questionType == QuestionType.choices.value) {
+            state.userResponse
+                ?.add(Triplet(e.questionId!, e, answer.id.toString()));
+          } else if (answer.question?.section ==
+              QuestionSection.omniSearch.value) {
+            List<String> selectedChoices = answer.answer!.split(',');
+            List<String> defaultChoices = defaultKeywords;
+
+            for (var e in selectedChoices) {
+              if (!defaultKeywords.contains(e)) {
+                defaultChoices.add(e);
+              }
+            }
+
+            emit(state.copyWith(
+                cachedDefaultChoices: defaultChoices,
+                cachedSelectedChoices: selectedChoices));
+          }
         }
       }
     }
+    emit(state.copyWith(
+        ppiResponseState: PpiResponseState.finishAddResponse,
+        responseState: ResponseState.success));
   }
 
   void _onUpdatePpiUserResponse(
