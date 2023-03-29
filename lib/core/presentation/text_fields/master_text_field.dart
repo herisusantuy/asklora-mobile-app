@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../styles/asklora_colors.dart';
+import '../../styles/asklora_text_styles.dart';
+import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 
 class MasterTextField extends StatefulWidget {
@@ -74,20 +77,33 @@ class _MasterTextFieldState extends State<MasterTextField> {
   }
 
   @override
-  Widget build(BuildContext context) => TextFormField(
-      onFieldSubmitted: widget.onFieldSubmitted,
-      controller: controller,
-      onChanged: widget.onChanged,
-      keyboardType: widget.textInputType,
-      textCapitalization: widget.textCapitalization,
-      inputFormatters: widget.textInputFormatterList,
-      maxLines: widget.maxLine,
-      textInputAction: widget.textInputAction,
-      style: TextFieldStyle.valueTextStyle,
-      decoration: TextFieldStyle.inputDecoration.copyWith(
-        floatingLabelBehavior: floatingLabelBehavior,
-        labelText: label,
-        hintText: widget.hintText,
-        errorText: widget.errorText.isEmpty ? null : widget.errorText,
-      ));
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+              onFieldSubmitted: widget.onFieldSubmitted,
+              controller: controller,
+              onChanged: widget.onChanged,
+              keyboardType: widget.textInputType,
+              textCapitalization: widget.textCapitalization,
+              inputFormatters: widget.textInputFormatterList,
+              maxLines: widget.maxLine,
+              textInputAction: widget.textInputAction,
+              style: TextFieldStyle.valueTextStyle,
+              decoration: TextFieldStyle.inputDecoration.copyWith(
+                floatingLabelBehavior: floatingLabelBehavior,
+                labelText: label,
+                hintText: widget.hintText,
+              )),
+          if (widget.errorText.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 2, top: 5),
+              child: CustomTextNew(
+                widget.errorText,
+                style: AskLoraTextStyles.body3
+                    .copyWith(color: AskLoraColors.primaryMagenta),
+              ),
+            )
+        ],
+      );
 }

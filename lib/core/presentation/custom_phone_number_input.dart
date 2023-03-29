@@ -55,15 +55,8 @@ class CustomPhoneNumberInput extends StatelessWidget {
           hintText: 'Input Phone Number',
           labelText: '',
           onChanged: (s) => {},
+          errorText: errorText,
         ),
-        if (errorText.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: CustomTextNew(errorText,
-                style: AskLoraTextStyles.body3.copyWith(
-                  color: AskLoraColors.primaryMagenta,
-                )),
-          ),
       ],
     );
   }
