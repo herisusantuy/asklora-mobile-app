@@ -211,7 +211,7 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
   void _onReSendBulkResponse(
           ReSendResponse event, Emitter<UserResponseState> emit) async =>
-      add(const SendBulkResponse());
+      add(SendBulkResponse());
 
   Future<bool> _isNotEligible() async {
     final scores = await _calculate();
