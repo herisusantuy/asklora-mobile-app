@@ -29,3 +29,17 @@ class OtpSubmitted extends OtpEvent {
   @override
   List<Object> get props => [];
 }
+
+class Reset extends OtpEvent {
+  const Reset();
+
+  @override
+  List<Object> get props => [];
+}
+
+class InValidOtpEvent extends OtpEvent {
+  const InValidOtpEvent();
+
+  @override
+  List<Object> get props => [];
+}
