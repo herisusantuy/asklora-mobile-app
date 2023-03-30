@@ -30,6 +30,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
     on<OtpSubmitted>(_onOtpSubmitted);
     on<OtpRequested>(_onOtpRequested);
     on<OtpTimeResetUpdate>(_onOtpTimeResetUpdate);
+    on<Reset>(_onOtpReset);
+    on<InValidOtpEvent>(_onInvalidOtpEvent);
   }
 
   void _onOtpRequested(OtpRequested event, Emitter<OtpState> emit) async {
@@ -66,6 +68,13 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
         response: BaseResponse.unknown()));
   }
 
+  void _onOtpReset(Reset event, Emitter<OtpState> emit) =>
+      emit(state.copyWith(response: BaseResponse.unknown(), otpError: ''));
+
+  void _onInvalidOtpEvent(InValidOtpEvent event, Emitter<OtpState> emit) =>
+      emit(state.copyWith(
+          response: BaseResponse.unknown(), otpError: 'Invalid OTP'));
+
   void _onOtpSubmitted(
     OtpSubmitted event,
     Emitter<OtpState> emit,
@@ -78,8 +87,8 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
       data.copyWith(message: 'Verify OTP Success');
       emit(OtpValidationSuccess());
     } on BadRequestException {
-      emit(
-          state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
+      emit(state.copyWith(
+          response: BaseResponse.unknown(), otpError: 'Invalid OTP'));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
