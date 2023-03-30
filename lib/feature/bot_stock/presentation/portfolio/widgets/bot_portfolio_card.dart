@@ -1,25 +1,26 @@
 part of '../portfolio_screen.dart';
 
 class BotPortfolioCard extends StatelessWidget {
-  final PortfolioBotModel portfolioBotModel;
+  final BotActiveOrderModel botActiveOrderModel;
   final double spacing;
   final double height;
 
   const BotPortfolioCard(
       {required this.height,
       required this.spacing,
-      required this.portfolioBotModel,
+      required this.botActiveOrderModel,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final BotType botType = BotType.findByString(portfolioBotModel.botAppType);
+    ///STATIC BOT TYPE FOR NOW, WAITING FOR BE
+    final BotType botType = BotType.findByString(botActiveOrderModel.botAppsName);
     final Pair<bool, String> expiredDayLeft = expiredDaysLeft(
         DateTime.now(), DateTime.now().add(const Duration(days: 5)));
     return GestureDetector(
       onTap: () => BotPortfolioDetailScreen.open(
-          context: context, portfolioBotModel: portfolioBotModel),
+          context: context, botActiveOrderModel: botActiveOrderModel),
       child: Stack(
         children: [
           Container(
@@ -42,7 +43,7 @@ class BotPortfolioCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botType.upperCaseName} ${portfolioBotModel.ticker}',
+                      '${botType.upperCaseName} ${botActiveOrderModel.ticker}',
                       style: AskLoraTextStyles.h5Italic,
                       maxLines: 1,
                       ellipsis: true,
@@ -51,7 +52,7 @@ class BotPortfolioCard extends StatelessWidget {
                       height: 4,
                     ),
                     CustomTextNew(
-                      portfolioBotModel.tickerName,
+                      botActiveOrderModel.tickerName,
                       style: AskLoraTextStyles.body2,
                       maxLines: 2,
                       ellipsis: true,
@@ -64,7 +65,7 @@ class BotPortfolioCard extends StatelessWidget {
                 PairColumnText(
                   leftTitle: 'Current Price',
                   rightTitle: 'Total P/L',
-                  leftSubTitle: portfolioBotModel.latestPrice,
+                  leftSubTitle: botActiveOrderModel.currentPrice,
                   rightSubTitle: '0%',
                 ),
                 const SizedBox(
@@ -89,7 +90,7 @@ class BotPortfolioCard extends StatelessWidget {
                         ),
                       Expanded(
                         child: CustomTextNew(
-                          'Expires at ${portfolioBotModel.expiredDate ?? '--/--/--'}',
+                          'Expires at ${botActiveOrderModel.expireDate}',
                           style: AskLoraTextStyles.subtitle4
                               .copyWith(color: botType.expiredTextColor),
                           maxLines: 2,
@@ -102,31 +103,31 @@ class BotPortfolioCard extends StatelessWidget {
               ],
             ),
           ),
-          if (portfolioBotModel.freeBot)
-            Container(
-              decoration: BoxDecoration(
-                  color: AskLoraColors.primaryMagenta,
-                  borderRadius: BorderRadius.circular(11)),
-              margin: const EdgeInsets.only(left: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              height: 20,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.card_giftcard_rounded,
-                    size: 14,
-                    color: AskLoraColors.white,
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  CustomTextNew('FREE',
-                      style: AskLoraTextStyles.subtitleAllCap1
-                          .copyWith(color: AskLoraColors.white))
-                ],
-              ),
-            )
+          // if (botActiveOrderModel.freeBot)
+          //   Container(
+          //     decoration: BoxDecoration(
+          //         color: AskLoraColors.primaryMagenta,
+          //         borderRadius: BorderRadius.circular(11)),
+          //     margin: const EdgeInsets.only(left: 10),
+          //     padding: const EdgeInsets.symmetric(horizontal: 8),
+          //     height: 20,
+          //     child: Row(
+          //       mainAxisSize: MainAxisSize.min,
+          //       children: [
+          //         const Icon(
+          //           Icons.card_giftcard_rounded,
+          //           size: 14,
+          //           color: AskLoraColors.white,
+          //         ),
+          //         const SizedBox(
+          //           width: 5,
+          //         ),
+          //         CustomTextNew('FREE',
+          //             style: AskLoraTextStyles.subtitleAllCap1
+          //                 .copyWith(color: AskLoraColors.white))
+          //       ],
+          //     ),
+          //   )
         ],
       ),
     );

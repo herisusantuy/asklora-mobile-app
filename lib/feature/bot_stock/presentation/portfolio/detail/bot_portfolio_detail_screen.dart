@@ -19,6 +19,9 @@ import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
+import '../../../domain/orders/bot_active_order_detail_model.dart';
+import '../../../domain/orders/bot_active_order_model.dart';
+import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
 import '../../bot_stock_result_screen.dart';
@@ -26,8 +29,6 @@ import '../../widgets/bot_stock_form.dart';
 import '../../widgets/column_text.dart';
 import '../../widgets/pair_column_text.dart';
 import '../bloc/portfolio_bloc.dart';
-import '../domain/portfolio_bot_detail_model.dart';
-import '../domain/portfolio_bot_model.dart';
 import '../repository/portfolio_repository.dart';
 import '../utils/portfolio_enum.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
@@ -40,75 +41,83 @@ part 'widgets/performance.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
   static const String route = '/bot_portfolio_detail_screen';
-  final PortfolioBotModel portfolioBotModel;
+  final BotActiveOrderModel botActiveOrderModel;
 
   late final BotType botType;
 
-  BotPortfolioDetailScreen({required this.portfolioBotModel, Key? key})
+  BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
       : super(key: key) {
-    botType = BotType.findByString(portfolioBotModel.botAppType);
+    botType = BotType.findByString(botActiveOrderModel.botAppsName);
   }
 
   @override
   Widget build(BuildContext context) {
-    final Pair<Widget, Widget> portfolioDetailProps =
-        _getPortfolioDetailProps(context);
     return CustomScaffold(
       enableBackNavigation: false,
       body: BlocProvider(
-        create: (_) => PortfolioBloc(portfolioRepository: PortfolioRepository())
-          ..add(FetchBotPortfolioDetail(
-              ticker: portfolioBotModel.ticker,
-              botId: portfolioBotModel.botId)),
+        create: (_) => PortfolioBloc(
+            portfolioRepository: PortfolioRepository(),
+            botStockRepository: BotStockRepository())
+          ..add(FetchActiveOrderDetail(orderId: botActiveOrderModel.pk)),
         child: BlocConsumer<PortfolioBloc, PortfolioState>(
           listenWhen: (previous, current) =>
-              previous.botPortfolioDetailResponse.state !=
-                  current.botPortfolioDetailResponse.state ||
+              previous.botActiveOrderDetailResponse.state !=
+                  current.botActiveOrderDetailResponse.state ||
               previous.endBotStockResponse.state !=
                   current.endBotStockResponse.state ||
               previous.rolloverBotStockResponse.state !=
                   current.rolloverBotStockResponse.state,
           listener: _portfolioListener,
           buildWhen: (previous, current) =>
-              previous.botPortfolioDetailResponse.state !=
-              current.botPortfolioDetailResponse.state,
-          builder: (context, state) => CustomLayoutWithBlurPopUp(
-            loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: 'Unable to get information',
-              subTitle:
-                  'There was an error when trying to get your Portfolio. Please try reloading the page',
-              primaryButtonLabel: 'RELOAD PAGE',
-              secondaryButtonLabel: 'CANCEL',
-              onSecondaryButtonTap: () => Navigator.pop(context),
-              onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
-                  (FetchBotPortfolioDetail(
-                      ticker: portfolioBotModel.ticker,
-                      botId: portfolioBotModel.botId))),
-            ),
-            showPopUp:
-                state.botPortfolioDetailResponse.state == ResponseState.error,
-            content: BotStockForm(
-                useHeader: true,
-                customHeader: BotPortfolioDetailHeader(
-                  portfolioBotModel: portfolioBotModel,
-                  botType: botType,
+              previous.botActiveOrderDetailResponse.state !=
+              current.botActiveOrderDetailResponse.state,
+          builder: (context, state) {
+
+            if (state.botActiveOrderDetailResponse.state ==
+                ResponseState.success) {
+              final BotActiveOrderDetailModel botActiveOrderDetailModel = state.botActiveOrderDetailResponse.data!;
+              final Pair<Widget, Widget> portfolioDetailProps =
+                  _getPortfolioDetailProps(
+                      context, botActiveOrderDetailModel);
+              return CustomLayoutWithBlurPopUp(
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: 'Unable to get information',
+                  subTitle:
+                      'There was an error when trying to get your Portfolio. Please try reloading the page',
+                  primaryButtonLabel: 'RELOAD PAGE',
+                  secondaryButtonLabel: 'CANCEL',
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
+                      (FetchActiveOrderDetail(
+                          orderId: botActiveOrderModel.pk))),
                 ),
-                padding: EdgeInsets.zero,
-                content: BotPortfolioDetailContent(
-                  portfolioBotModel: portfolioBotModel,
-                  botType: botType,
-                  portfolioDetailProps: portfolioDetailProps,
-                  portfolioBotDetailModel:
-                      state.botPortfolioDetailResponse.data,
-                ),
-                bottomButton: portfolioDetailProps.right),
-          ),
+                showPopUp: state.botActiveOrderDetailResponse.state ==
+                    ResponseState.error,
+                content: BotStockForm(
+                    useHeader: true,
+                    customHeader: BotPortfolioDetailHeader(
+                      botActiveOrderModel: botActiveOrderModel,
+                      botType: botType,
+                    ),
+                    padding: EdgeInsets.zero,
+                    content: BotPortfolioDetailContent(
+                      botType: botType,
+                      portfolioDetailProps: portfolioDetailProps,
+                      portfolioBotDetailModel:botActiveOrderDetailModel,
+                    ),
+                    bottomButton: portfolioDetailProps.right),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
         ),
       ),
     );
   }
 
-  Pair<Widget, Widget> _getPortfolioDetailProps(BuildContext context) {
+  Pair<Widget, Widget> _getPortfolioDetailProps(BuildContext context,
+      BotActiveOrderDetailModel botActiveOrderDetailModel) {
     if (UserJourney.compareUserJourney(
         context: context, target: UserJourney.deposit)) {
       return Pair(
@@ -129,7 +138,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                           label: 'ROLLOVER BOTSTOCK',
                           onTap: () =>
                               BotStockBottomSheet.rolloverBotStockConfirmation(
-                                  context, portfolioBotModel),
+                                  context,
+                                  orderId: botActiveOrderDetailModel.pk,
+                                  expireDate:
+                                      botActiveOrderDetailModel.expireDate),
                         ),
                       ),
                     PrimaryButton(
@@ -138,7 +150,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                           ? 'END BOTSTOCK'
                           : 'CANCEL BOTSTOCK',
                       onTap: () => BotStockBottomSheet.endBotStockConfirmation(
-                          context, portfolioBotModel),
+                          context,
+                          botActiveOrderDetailModel.pk,
+                          botActiveOrderDetailModel.ticker,
+                          botActiveOrderDetailModel.ticker),
                     ),
                   ],
                 );
@@ -167,7 +182,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   }
 
   void _portfolioListener(BuildContext context, PortfolioState state) {
-    if (state.botPortfolioDetailResponse.state == ResponseState.loading ||
+    if (state.botActiveOrderDetailResponse.state == ResponseState.loading ||
         state.endBotStockResponse.state == ResponseState.loading ||
         state.rolloverBotStockResponse.state == ResponseState.loading) {
       CustomLoadingOverlay.of(context).appear();
@@ -177,7 +192,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         BotStockResultScreen.open(
             context: context,
             arguments: Pair('Trade Request Received',
-                '${botType.name} ${portfolioBotModel.ticker} will end at 17/3/2023 10.22}'));
+                '${botType.name} ${botActiveOrderModel.ticker} will end at 17/3/2023 10.22}'));
       } else if (state.endBotStockResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.endBotStockResponse.message);
@@ -186,7 +201,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         BotStockResultScreen.open(
             context: context,
             arguments: Pair('Trade Request Received',
-                '${botType.name} ${portfolioBotModel.ticker} will rollover at 17/3/2023 10.22}'));
+                '${botType.name} ${botActiveOrderModel.ticker} will rollover at 17/3/2023 10.22}'));
       } else if (state.rolloverBotStockResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.endBotStockResponse.message);
@@ -196,6 +211,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   static void open(
           {required BuildContext context,
-          required PortfolioBotModel portfolioBotModel}) =>
-      Navigator.pushNamed(context, route, arguments: portfolioBotModel);
+          required BotActiveOrderModel botActiveOrderModel}) =>
+      Navigator.pushNamed(context, route, arguments: botActiveOrderModel);
 }

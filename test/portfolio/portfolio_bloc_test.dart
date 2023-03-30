@@ -96,10 +96,10 @@ void main() async {
               .thenAnswer((_) => Future.value(response));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const FetchBotPortfolio()),
+        act: (bloc) => bloc.add(const FetchActiveOrders()),
         expect: () => {
-              PortfolioState(botPortfolioResponse: BaseResponse.loading()),
-              PortfolioState(botPortfolioResponse: response)
+              PortfolioState(botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(botActiveOrderResponse: response)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
@@ -110,10 +110,10 @@ void main() async {
               .thenThrow(errorResponse);
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const FetchBotPortfolio()),
+        act: (bloc) => bloc.add(const FetchActiveOrders()),
         expect: () => {
-              PortfolioState(botPortfolioResponse: BaseResponse.loading()),
-              PortfolioState(botPortfolioResponse: errorResponse)
+              PortfolioState(botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(botActiveOrderResponse: errorResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(

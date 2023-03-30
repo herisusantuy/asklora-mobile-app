@@ -17,7 +17,10 @@ import '../domain/bot_detail_request.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../domain/bot_recommendation_response.dart';
 import '../domain/bot_stock_api_client.dart';
+import '../domain/orders/bot_active_order_detail_model.dart';
+import '../domain/orders/bot_active_order_model.dart';
 import '../domain/orders/bot_create_order_request.dart';
+import '../domain/orders/bot_create_order_response.dart';
 import '../domain/orders/bot_order_request.dart';
 import '../utils/bot_stock_utils.dart';
 
@@ -118,11 +121,36 @@ class BotStockRepository {
     return true;
   }
 
-  Future<BaseResponse<bool>> createOrder(
+  Future<BaseResponse<List<BotActiveOrderModel>>> activeOrders() async {
+    if (FeatureFlags.isDemoEnable) {
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      ///MOCK
+      // var data = await MockData().fetchBotPortfolioResponse();
+      // return BaseResponse.complete(data.portfolioBots);
+      return BaseResponse.complete([]);
+    } else {
+      ///REAL
+      var response = await _botStockApiClient.activeOrder();
+      return BaseResponse.complete(List.from(response.data
+          .map((element) => BotActiveOrderModel.fromJson(element))));
+    }
+  }
+
+  Future<BaseResponse<BotActiveOrderDetailModel>> activeOrderDetail(String orderId) async {
+    try{
+      var response = await _botStockApiClient.activeOrderDetail(orderId);
+      return BaseResponse.complete(BotActiveOrderDetailModel.fromJson(response.data));
+    }
+    catch(_){
+      return BaseResponse.error();
+    }
+  }
+
+  Future<BaseResponse<BotCreateOrderResponse>> createOrder(
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount,
       required String estimatedEndDate}) async {
-
     if (FeatureFlags.isDemoEnable) {
       ///MOCK
       await Future.delayed(const Duration(milliseconds: 500));
@@ -135,14 +163,16 @@ class BotStockRepository {
     } else {
       ///REAL
       try {
-        await _botStockApiClient.createOrder(BotCreateOrderRequest(
-            ticker: botRecommendationModel.ticker,
-            botId: botRecommendationModel.botId,
-            spotDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-            investmentAmount: tradeBotStockAmount,
-            price: checkDouble(botRecommendationModel.latestPrice)));
+        var response = await _botStockApiClient.createOrder(
+            BotCreateOrderRequest(
+                ticker: botRecommendationModel.ticker,
+                botId: botRecommendationModel.botId,
+                spotDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+                investmentAmount: tradeBotStockAmount,
+                price: checkDouble(botRecommendationModel.latestPrice)));
         await removeInvestmentStyleState();
-        return BaseResponse.complete(true);
+        return BaseResponse.complete(
+            BotCreateOrderResponse.fromJson(response.data));
       } catch (e) {
         return BaseResponse.error();
       }
@@ -193,22 +223,6 @@ class BotStockRepository {
       try {
         await _botStockApiClient
             .terminateOrder(BotOrderRequest(orderId: orderId));
-        return BaseResponse.complete(true);
-      } catch (e) {
-        return BaseResponse.error();
-      }
-    }
-  }
-
-  Future<BaseResponse<bool>> activeOrder() async {
-    if (FeatureFlags.isDemoEnable) {
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      ///create mock rollover
-      return BaseResponse.complete(true);
-    } else {
-      try {
-        await _botStockApiClient.activeOrder();
         return BaseResponse.complete(true);
       } catch (e) {
         return BaseResponse.error();

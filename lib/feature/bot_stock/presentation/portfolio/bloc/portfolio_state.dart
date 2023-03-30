@@ -3,8 +3,8 @@ part of 'portfolio_bloc.dart';
 class PortfolioState extends Equatable {
   const PortfolioState({
     this.portfolioResponse = const BaseResponse(),
-    this.botPortfolioResponse = const BaseResponse(),
-    this.botPortfolioDetailResponse = const BaseResponse(),
+    this.botActiveOrderResponse = const BaseResponse(),
+    this.botActiveOrderDetailResponse = const BaseResponse(),
     this.rolloverBotStockResponse = const BaseResponse(),
     this.endBotStockResponse = const BaseResponse(),
     this.botStockFilter = BotStockFilter.all,
@@ -12,8 +12,8 @@ class PortfolioState extends Equatable {
   });
 
   final BaseResponse<PortfolioResponse> portfolioResponse;
-  final BaseResponse<List<PortfolioBotModel>> botPortfolioResponse;
-  final BaseResponse<PortfolioBotDetailModel> botPortfolioDetailResponse;
+  final BaseResponse<List<BotActiveOrderModel>> botActiveOrderResponse;
+  final BaseResponse<BotActiveOrderDetailModel> botActiveOrderDetailResponse;
   final BaseResponse<bool> rolloverBotStockResponse;
   final BaseResponse<bool> endBotStockResponse;
   final BotStockFilter botStockFilter;
@@ -23,8 +23,8 @@ class PortfolioState extends Equatable {
   List<Object?> get props {
     return [
       portfolioResponse,
-      botPortfolioResponse,
-      botPortfolioDetailResponse,
+      botActiveOrderResponse,
+      botActiveOrderDetailResponse,
       rolloverBotStockResponse,
       endBotStockResponse,
       botStockFilter,
@@ -34,8 +34,8 @@ class PortfolioState extends Equatable {
 
   PortfolioState copyWith({
     BaseResponse<PortfolioResponse>? portfolioResponse,
-    BaseResponse<List<PortfolioBotModel>>? botPortfolioResponse,
-    BaseResponse<PortfolioBotDetailModel>? botPortfolioDetailResponse,
+    BaseResponse<List<BotActiveOrderModel>>? botActiveOrderResponse,
+    BaseResponse<BotActiveOrderDetailModel>? botActiveOrderDetailResponse,
     BaseResponse<bool>? rolloverBotStockResponse,
     BaseResponse<bool>? endBotStockResponse,
     BotStockFilter? botStockFilter,
@@ -43,9 +43,9 @@ class PortfolioState extends Equatable {
   }) {
     return PortfolioState(
       portfolioResponse: portfolioResponse ?? this.portfolioResponse,
-      botPortfolioResponse: botPortfolioResponse ?? this.botPortfolioResponse,
-      botPortfolioDetailResponse:
-          botPortfolioDetailResponse ?? this.botPortfolioDetailResponse,
+      botActiveOrderResponse: botActiveOrderResponse ?? this.botActiveOrderResponse,
+      botActiveOrderDetailResponse:
+          botActiveOrderDetailResponse ?? this.botActiveOrderDetailResponse,
       rolloverBotStockResponse:
           rolloverBotStockResponse ?? this.rolloverBotStockResponse,
       endBotStockResponse: endBotStockResponse ?? this.endBotStockResponse,

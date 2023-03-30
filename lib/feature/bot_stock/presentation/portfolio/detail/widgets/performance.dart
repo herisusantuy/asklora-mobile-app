@@ -1,15 +1,13 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class Performance extends StatelessWidget {
-  final PortfolioBotDetailModel? portfolioBotDetailModel;
-  final PortfolioBotModel portfolioBotModel;
+  final BotActiveOrderDetailModel botActiveOrderDetailModel;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
-  const Performance(
-      {this.portfolioBotDetailModel, required this.portfolioBotModel, Key? key})
+  const Performance({required this.botActiveOrderDetailModel, Key? key})
       : super(key: key);
 
   @override
@@ -30,13 +28,13 @@ class Performance extends StatelessWidget {
               Expanded(
                   child: ColumnText(
                       title: 'Botstock values (HKD)',
-                      subTitle:
-                          portfolioBotModel.amount.convertToCurrencyDecimal())),
+                      subTitle: (botActiveOrderDetailModel.botStockValue ?? 0)
+                          .convertToCurrencyDecimal())),
               Expanded(
                   child: ColumnText(
                       title: 'Inv. Amount (HKD)',
                       subTitle:
-                          portfolioBotModel.amount.convertToCurrencyDecimal())),
+                          botActiveOrderDetailModel.investmentAmountString)),
               const Expanded(
                   child: ColumnText(title: 'Total P/L', subTitle: '0%')),
             ],
@@ -47,21 +45,22 @@ class Performance extends StatelessWidget {
         ),
         PairColumnText(
             leftTitle: 'Current Price',
-            leftSubTitle:
-                '${portfolioBotDetailModel == null ? '-' : portfolioBotDetailModel?.price ?? '-'}',
+            leftSubTitle: botActiveOrderDetailModel.currentPriceString,
             rightTitle: 'No. of Shares',
-            rightSubTitle: '0',
+            rightSubTitle: botActiveOrderDetailModel.botShare ?? 'NA',
             rightTooltipText:
                 'Indicates how many shares of a company are currently owned by you.'),
         _spaceBetweenInfo,
         PairColumnText(
           leftTitle: 'Stock Values (HKD)',
-          leftSubTitle: '0',
+          leftSubTitle: botActiveOrderDetailModel.stockValueString,
           rightTitle: 'Cash (HKD)',
-          rightSubTitle: '${portfolioBotModel.amount}',
+          rightSubTitle: '0',
         ),
         _spaceBetweenInfo,
-        const ColumnText(title: 'Ratio of Stock to Cash', subTitle: '0:1'),
+        ColumnText(
+            title: '% of Bot Assets in Stock',
+            subTitle: botActiveOrderDetailModel.botAssetInStockPct.toString()),
         _chartWidget()
       ]);
 

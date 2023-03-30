@@ -23,8 +23,8 @@ class BotPortfolioList extends StatelessWidget {
       return const BotPortfolioPopUp(
           botPortfolioPopUpType: BotPortfolioPopUpType.redeemBotStock);
     } else {
-      if (portfolioState.botPortfolioResponse.state == ResponseState.success) {
-        if (portfolioState.botPortfolioResponse.data!.isNotEmpty) {
+      if (portfolioState.botActiveOrderResponse.state == ResponseState.success) {
+        if (portfolioState.botActiveOrderResponse.data!.isNotEmpty) {
           return Column(
             children: [
               const BotPortfolioFilter(),
@@ -33,11 +33,11 @@ class BotPortfolioList extends StatelessWidget {
                 child: Wrap(
                   spacing: _spacing,
                   runSpacing: _runSpacing,
-                  children: portfolioState.botPortfolioResponse.data!
+                  children: portfolioState.botActiveOrderResponse.data!
                       .map((e) => BotPortfolioCard(
                             height: botCardHeight,
                             spacing: _spacing,
-                            portfolioBotModel: e,
+                            botActiveOrderModel: e,
                           ))
                       .toList(),
                 ),
@@ -65,7 +65,7 @@ class BotPortfolioList extends StatelessWidget {
             );
           }
         }
-      } else if (portfolioState.botPortfolioResponse.state ==
+      } else if (portfolioState.botActiveOrderResponse.state ==
           ResponseState.loading) {
         return Wrap(
           spacing: _spacing,

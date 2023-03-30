@@ -2,9 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/currency_enum.dart';
+import '../../../domain/orders/bot_active_order_detail_model.dart';
+import '../../../domain/orders/bot_active_order_model.dart';
+import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_utils.dart';
-import '../domain/portfolio_bot_detail_model.dart';
-import '../domain/portfolio_bot_model.dart';
 import '../domain/portfolio_response.dart';
 import '../repository/portfolio_repository.dart';
 
@@ -13,12 +14,15 @@ part 'portfolio_event.dart';
 part 'portfolio_state.dart';
 
 class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
-  PortfolioBloc({required PortfolioRepository portfolioRepository})
+  PortfolioBloc(
+      {required PortfolioRepository portfolioRepository,
+      required BotStockRepository botStockRepository})
       : _portfolioRepository = portfolioRepository,
+        _botStockRepository = botStockRepository,
         super(const PortfolioState()) {
-    on<FetchBotPortfolioDetail>(_onFetchBotPortfolioDetail);
+    on<FetchActiveOrderDetail>(_onFetchActiveOrderDetail);
     on<FetchPortfolio>(_onFetchPortfolio);
-    on<FetchBotPortfolio>(_onFetchBotPortfolio);
+    on<FetchActiveOrders>(onFetchBotActiveOrders);
     on<BotStockFilterChanged>(_onBotStockFilterChanged);
     on<CurrencyChanged>(_onCurrencyChanged);
     on<RolloverBotStock>(_onRolloverBotStock);
@@ -26,17 +30,13 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   }
 
   final PortfolioRepository _portfolioRepository;
+  final BotStockRepository _botStockRepository;
 
-  _onFetchBotPortfolio(
-      FetchBotPortfolio event, Emitter<PortfolioState> emit) async {
-    try {
-      emit(state.copyWith(botPortfolioResponse: BaseResponse.loading()));
-      var data =
-          await _portfolioRepository.fetchBotPortfolio(event.botStockFilter);
-      emit(state.copyWith(botPortfolioResponse: data));
-    } catch (e) {
-      emit(state.copyWith(botPortfolioResponse: BaseResponse.error()));
-    }
+  onFetchBotActiveOrders(
+      FetchActiveOrders event, Emitter<PortfolioState> emit) async {
+    emit(state.copyWith(botActiveOrderResponse: BaseResponse.loading()));
+    emit(state.copyWith(
+        botActiveOrderResponse: await _botStockRepository.activeOrders()));
   }
 
   _onFetchPortfolio(FetchPortfolio event, Emitter<PortfolioState> emit) async {
@@ -49,22 +49,22 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     }
   }
 
-  _onFetchBotPortfolioDetail(
-      FetchBotPortfolioDetail event, Emitter<PortfolioState> emit) async {
+  _onFetchActiveOrderDetail(
+      FetchActiveOrderDetail event, Emitter<PortfolioState> emit) async {
     try {
-      emit(state.copyWith(botPortfolioDetailResponse: BaseResponse.loading()));
+      emit(state.copyWith(botActiveOrderDetailResponse: BaseResponse.loading()));
       emit(state.copyWith(
-          botPortfolioDetailResponse: await _portfolioRepository
-              .fetchBotPortfolioDetail(event.ticker, event.botId)));
+          botActiveOrderDetailResponse: await _botStockRepository
+              .activeOrderDetail(event.orderId)));
     } catch (e) {
-      emit(state.copyWith(botPortfolioDetailResponse: BaseResponse.error()));
+      emit(state.copyWith(botActiveOrderDetailResponse: BaseResponse.error()));
     }
   }
 
   _onBotStockFilterChanged(
       BotStockFilterChanged event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(botStockFilter: event.botStockFilter));
-    add(FetchBotPortfolio(botStockFilter: event.botStockFilter));
+    add(FetchActiveOrders(botStockFilter: event.botStockFilter));
   }
 
   _onCurrencyChanged(CurrencyChanged event, Emitter<PortfolioState> emit) {
@@ -76,7 +76,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       emit(state.copyWith(endBotStockResponse: BaseResponse.loading()));
       emit(state.copyWith(
           endBotStockResponse:
-              await _portfolioRepository.endBotStock(event.portfolioBotModel)));
+              await _botStockRepository.cancelOrder(event.orderId)));
     } catch (e) {
       emit(state.copyWith(endBotStockResponse: BaseResponse.error()));
     }
@@ -87,8 +87,8 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     try {
       emit(state.copyWith(rolloverBotStockResponse: BaseResponse.loading()));
       emit(state.copyWith(
-          rolloverBotStockResponse: await _portfolioRepository
-              .rolloverBotStock(event.portfolioBotModel)));
+          rolloverBotStockResponse: await _botStockRepository
+              .rolloverOrder(event.botId)));
     } catch (e) {
       emit(state.copyWith(rolloverBotStockResponse: BaseResponse.error()));
     }

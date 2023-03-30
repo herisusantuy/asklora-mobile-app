@@ -14,10 +14,10 @@ BotCreateOrderRequest _$BotCreateOrderRequestFromJson(
       spotDate: json['spot_date'] as String,
       investmentAmount: (json['investment_amount'] as num).toDouble(),
       price: (json['price'] as num).toDouble(),
-      fraction: json['fraction'] as bool,
-      margin: json['margin'] as int,
-      orderType: json['order_type'] as String,
-      isAggregate: json['is_aggregate'] as bool,
+      fraction: json['fraction'] as bool? ?? false,
+      margin: json['margin'] as int? ?? 1,
+      orderType: json['order_type'] as String? ?? 'POOL',
+      isAggregate: json['is_aggregate'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$BotCreateOrderRequestToJson(

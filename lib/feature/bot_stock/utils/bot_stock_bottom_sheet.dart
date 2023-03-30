@@ -15,7 +15,6 @@ import '../domain/bot_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../presentation/portfolio/bloc/portfolio_bloc.dart';
-import '../presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../repository/bot_stock_repository.dart';
 import 'bot_stock_utils.dart';
 
@@ -38,43 +37,44 @@ class BotStockBottomSheet {
   }
 
   static endBotStockConfirmation(
-      BuildContext context, PortfolioBotModel portfolioBotModel) {
+      BuildContext context, String orderId, String botAppsName, String ticker) {
     LoraBottomSheet.show(
       context: context,
       title:
-          'You can quit now and all the trading activities of ${BotType.findByString(portfolioBotModel.botAppType).name} ${portfolioBotModel.ticker} will end ',
+          'You can quit now and all the trading activities of ${BotType.findByString(botAppsName).name} $ticker will end ',
       subTitle:
           'The total Botstock value (US\$ 200) will be returned to your account after the next community order',
       primaryButtonLabel: 'END BOT STOCK',
       secondaryButtonLabel: 'CANCEL',
       onPrimaryButtonTap: () {
         Navigator.pop(context);
-        context.read<PortfolioBloc>().add(EndBotStock(portfolioBotModel));
+        context.read<PortfolioBloc>().add(EndBotStock(orderId));
       },
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
   }
 
   static rolloverBotStockConfirmation(
-      BuildContext context, PortfolioBotModel portfolioBotModel) {
+      BuildContext context, {required String orderId, required String expireDate}) {
     LoraBottomSheet.show(
       context: context,
       title:
           'Do you want to continue the Botstock and extend the investment period?\n\n 2 Weeks\n',
+      ///IMPLEMENT EXPIRE DATE + SOME DAYS
       subTitle: 'The new expiry date is 15:30, 2023/04/12',
       primaryButtonLabel: 'EXTEND',
       secondaryButtonLabel: 'CANCEL',
       onPrimaryButtonTap: () {
         Navigator.pop(context);
         BotStockBottomSheet.rolloverBotStockDisclosure(
-            context, portfolioBotModel);
+            context, botId: orderId);
       },
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
   }
 
   static rolloverBotStockDisclosure(
-      BuildContext context, PortfolioBotModel portfolioBotModel) {
+      BuildContext context, {required String botId}) {
     LoraBottomSheet.show(
       context: context,
       title:
@@ -85,7 +85,7 @@ class BotStockBottomSheet {
       secondaryButtonLabel: 'BACK',
       onPrimaryButtonTap: () {
         Navigator.pop(context);
-        context.read<PortfolioBloc>().add(RolloverBotStock(portfolioBotModel));
+        context.read<PortfolioBloc>().add(RolloverBotStock(botId));
       },
       onSecondaryButtonTap: () => Navigator.pop(context),
     );

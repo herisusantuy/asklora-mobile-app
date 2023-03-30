@@ -21,12 +21,13 @@ import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
+import '../../domain/orders/bot_active_order_model.dart';
+import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/currency_dropdown.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
-import 'domain/portfolio_bot_model.dart';
 import 'domain/portfolio_response.dart';
 import 'repository/portfolio_repository.dart';
 import 'utils/portfolio_enum.dart';
@@ -50,12 +51,12 @@ class PortfolioScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) {
         PortfolioBloc portfolioBloc =
-            PortfolioBloc(portfolioRepository: PortfolioRepository());
+            PortfolioBloc(portfolioRepository: PortfolioRepository(), botStockRepository: BotStockRepository());
 
         ///fetch portfolio when current UserJourney already passed freeBotStock
         if (UserJourney.compareUserJourney(
             context: context, target: UserJourney.freeBotStock)) {
-          portfolioBloc.add(const FetchBotPortfolio());
+          portfolioBloc.add(const FetchActiveOrders());
           portfolioBloc.add(FetchPortfolio());
         }
         return portfolioBloc;
@@ -67,7 +68,7 @@ class PortfolioScreen extends StatelessWidget {
         body: BlocBuilder<PortfolioBloc, PortfolioState>(
           buildWhen: (previous, current) =>
               previous.portfolioResponse != current.portfolioResponse ||
-              previous.botPortfolioResponse != current.botPortfolioResponse ||
+              previous.botActiveOrderResponse != current.botActiveOrderResponse ||
               previous.currency != current.currency,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(
@@ -78,12 +79,12 @@ class PortfolioScreen extends StatelessWidget {
               secondaryButtonLabel: 'CANCEL',
               onSecondaryButtonTap: () => Navigator.pop(context),
               onPrimaryButtonTap: () {
-                context.read<PortfolioBloc>().add(const FetchBotPortfolio());
+                context.read<PortfolioBloc>().add(const FetchActiveOrders());
                 context.read<PortfolioBloc>().add(FetchPortfolio());
               },
             ),
             showPopUp:
-                state.botPortfolioResponse.state == ResponseState.error ||
+                state.botActiveOrderResponse.state == ResponseState.error ||
                     state.portfolioResponse.state == ResponseState.error,
             content: ListView(
               padding: AppValues.screenHorizontalPadding

@@ -9,7 +9,7 @@ class BotPortfolioFilter extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.botStockFilter != current.botStockFilter,
         builder: (context, state) {
-          if (state.botPortfolioResponse.state != ResponseState.error) {
+          if (state.botActiveOrderResponse.state != ResponseState.error) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 30.0),
               child: CustomDropdown(

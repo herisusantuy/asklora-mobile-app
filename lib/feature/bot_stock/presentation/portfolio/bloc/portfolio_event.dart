@@ -15,17 +15,16 @@ class BotStockFilterChanged extends PortfolioEvent {
 
 class FetchPortfolio extends PortfolioEvent {}
 
-class FetchBotPortfolio extends PortfolioEvent {
+class FetchActiveOrders extends PortfolioEvent {
   final BotStockFilter botStockFilter;
 
-  const FetchBotPortfolio({this.botStockFilter = BotStockFilter.all});
+  const FetchActiveOrders({this.botStockFilter = BotStockFilter.all});
 }
 
-class FetchBotPortfolioDetail extends PortfolioEvent {
-  final String ticker;
-  final String botId;
+class FetchActiveOrderDetail extends PortfolioEvent {
+  final String orderId;
 
-  const FetchBotPortfolioDetail({required this.ticker, required this.botId});
+  const FetchActiveOrderDetail({required this.orderId});
 }
 
 class CurrencyChanged extends PortfolioEvent {
@@ -38,19 +37,19 @@ class CurrencyChanged extends PortfolioEvent {
 }
 
 class RolloverBotStock extends PortfolioEvent {
-  final PortfolioBotModel portfolioBotModel;
+  final String botId;
 
-  const RolloverBotStock(this.portfolioBotModel);
+  const RolloverBotStock(this.botId);
 
   @override
-  List<Object> get props => [portfolioBotModel];
+  List<Object> get props => [botId];
 }
 
 class EndBotStock extends PortfolioEvent {
-  final PortfolioBotModel portfolioBotModel;
+  final String orderId;
 
-  const EndBotStock(this.portfolioBotModel);
+  const EndBotStock(this.orderId);
 
   @override
-  List<Object> get props => [portfolioBotModel];
+  List<Object> get props => [orderId];
 }

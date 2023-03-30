@@ -5,6 +5,7 @@ import '../core/utils/storage/shared_preference.dart';
 import '../feature/balance/deposit/utils/deposit_utils.dart';
 import '../feature/balance/withdrawal/domain/withdrawal_response.dart';
 import '../feature/bot_stock/domain/bot_recommendation_model.dart';
+import '../feature/bot_stock/domain/orders/bot_create_order_response.dart';
 import '../feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../feature/bot_stock/presentation/portfolio/domain/portfolio_bot_response.dart';
 import '../feature/bot_stock/presentation/portfolio/domain/portfolio_response.dart';
@@ -91,7 +92,7 @@ class MockData {
     }
   }
 
-  Future<BaseResponse<bool>> createOrder(
+  Future<BaseResponse<BotCreateOrderResponse>> createOrder(
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount,
       required String estimatedEndDate}) async {
@@ -127,7 +128,8 @@ class MockData {
           totalBotStockValues: portfolioDetailResponse.totalBotStockValues +
               (botRecommendationModel.freeBot ? 0 : tradeBotStockAmount),
           totalPortfolio: portfolioDetailResponse.totalPortfolio));
-      return BaseResponse.complete(true);
+      return BaseResponse.complete(
+          const BotCreateOrderResponse(botOrder: 'x', botAction: 'y'));
     } else {
       return BaseResponse.error(message: 'Insufficient balance');
     }

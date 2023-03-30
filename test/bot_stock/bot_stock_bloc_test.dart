@@ -111,13 +111,13 @@ void main() async {
               .thenAnswer((_) => Future.value(boolResponse));
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(const TradeBotStock(
+        act: (bloc) => bloc.add(const BotCreateOrder(
             botRecommendationModel: botRecommendationModel,
             estimatedEndDate: '2023-03-28',
             tradeBotStockAmount: 0)),
         expect: () => {
-              BotStockState(tradeBotStockResponse: BaseResponse.loading()),
-              BotStockState(tradeBotStockResponse: boolResponse)
+              BotStockState(botCreateOrderResponse: BaseResponse.loading()),
+              BotStockState(botCreateOrderResponse: boolResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -131,13 +131,13 @@ void main() async {
               .thenThrow(boolErrorResponse);
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(const TradeBotStock(
+        act: (bloc) => bloc.add(const BotCreateOrder(
             botRecommendationModel: botRecommendationModel,
             estimatedEndDate: '2023-03-28',
             tradeBotStockAmount: 0)),
         expect: () => {
-              BotStockState(tradeBotStockResponse: BaseResponse.loading()),
-              BotStockState(tradeBotStockResponse: boolErrorResponse)
+              BotStockState(botCreateOrderResponse: BaseResponse.loading()),
+              BotStockState(botCreateOrderResponse: boolErrorResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(

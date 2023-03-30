@@ -1,14 +1,16 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class KeyInfo extends StatelessWidget {
-  final PortfolioBotDetailModel portfolioBotDetailModel;
+  final BotActiveOrderDetailModel botActiveOrderDetailModel;
   final BotType botType;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
   const KeyInfo(
-      {required this.portfolioBotDetailModel, required this.botType, Key? key})
+      {required this.botActiveOrderDetailModel,
+      required this.botType,
+      Key? key})
       : super(key: key);
 
   @override
@@ -24,23 +26,24 @@ class KeyInfo extends StatelessWidget {
           ),
           PairColumnText(
               leftTitle: 'Investment Period',
-              leftSubTitle: portfolioBotDetailModel == null
-                  ? '-'
-                  : portfolioBotDetailModel.bot.duration,
-              rightTitle: 'Time of Rollover',
-              rightSubTitle: '0'),
+              leftSubTitle: botActiveOrderDetailModel.investmentPeriod,
+              rightTitle: 'Days Till Expiry',
+              rightSubTitle: botActiveOrderDetailModel.dayTillExpiry),
           _spaceBetweenInfo,
           PairColumnText(
               leftTitle: 'Start Time',
-              leftSubTitle: portfolioBotDetailModel.formattedStartDate,
+              leftSubTitle: botActiveOrderDetailModel.spotDate,
               rightTitle: 'End Time',
-              rightSubTitle: portfolioBotDetailModel.estimatedExpiredDate),
+              rightSubTitle: botActiveOrderDetailModel.expireDate),
           _spaceBetweenInfo,
           ..._stopLossMaxProfit(),
           _spaceBetweenInfo,
-          ColumnText(
-              title: 'Botstock Status',
-              subTitle: BotPortfolioStatus.pending.name),
+          PairColumnText(
+              leftTitle: 'Botstock Status',
+              leftSubTitle:botActiveOrderDetailModel.status,
+              rightTitle: 'Number of Rollovers',
+              rightSubTitle: botActiveOrderDetailModel.rolloverCount.toString()),
+
           const SizedBox(
             height: 40,
           ),
@@ -50,13 +53,13 @@ class KeyInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _columnTextBigTitle(
-                    title: portfolioBotDetailModel.avgReturnString,
+                    title: botActiveOrderDetailModel.avgReturnString,
                     subTitle: 'Avg. Return'),
                 _columnTextBigTitle(
-                    title: '${portfolioBotDetailModel.avgLoss}%',
+                    title: botActiveOrderDetailModel.avgLossString,
                     subTitle: 'Avg. Loss'),
                 _columnTextBigTitle(
-                    title: portfolioBotDetailModel.avgPeriodString,
+                    title: botActiveOrderDetailModel.avgPeriodString,
                     subTitle: 'Avg. Period (Days)'),
               ],
             ),
@@ -69,16 +72,13 @@ class KeyInfo extends StatelessWidget {
 
   List<Widget> _stopLossMaxProfit() => [
         PairColumnText(
-          leftTitle: botType == BotType.plank
-              ? 'Estimated Stop Loss %'
-              : 'Estimated Max Loss %',
-          leftSubTitle: portfolioBotDetailModel.estimatedStopLossPct
-              .convertToCurrencyDecimal(decimalDigits: 2),
+          leftTitle:
+              botType == BotType.plank ? 'Est. Stop Loss %' : 'Est. Max Loss %',
+          leftSubTitle: botActiveOrderDetailModel.maxLossPct.toString(),
           rightTitle: botType == BotType.plank
-              ? 'Estimated Take Profit %'
-              : 'Estimated Max Profit %',
-          rightSubTitle: portfolioBotDetailModel.estimatedTakeProfitPct
-              .convertToCurrencyDecimal(decimalDigits: 2),
+              ? 'Est. Take Profit %'
+              : 'Est. Max Profit %',
+          rightSubTitle: botActiveOrderDetailModel.targetProfitPct.toString(),
         ),
       ];
 
