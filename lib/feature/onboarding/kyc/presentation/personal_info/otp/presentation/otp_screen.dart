@@ -44,6 +44,7 @@ class OtpScreen extends StatelessWidget {
         content: Column(
           children: [
             Text.rich(
+              key: const Key('sub_title'),
               TextSpan(children: [
                 TextSpan(
                   text:
@@ -102,8 +103,7 @@ class OtpScreen extends StatelessWidget {
               textInputType: TextInputType.number,
               hintText: '000000 (6 digit)',
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              errorText:
-                  state.otpError.isNotEmpty ? 'The OTP is incorrect' : '',
+              errorText: state.otpError,
               textInputFormatterList: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(6)
