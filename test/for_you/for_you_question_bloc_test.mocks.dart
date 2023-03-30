@@ -184,4 +184,12 @@ class MockSharedPreference extends _i1.Mock implements _i5.SharedPreference {
         ),
         returnValue: _i4.Future<int?>.value(),
       ) as _i4.Future<int?>);
+  @override
+  _i4.Future<bool> containsKey(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #containsKey,
+          [key],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

@@ -5,7 +5,6 @@ import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 import '../utils/formatters/phone_input_formatter/phone_input_formatter.dart';
 import 'clearable_text_field.dart';
-import 'custom_text.dart';
 import 'custom_text_new.dart';
 
 class CustomPhoneNumberInput extends StatelessWidget {

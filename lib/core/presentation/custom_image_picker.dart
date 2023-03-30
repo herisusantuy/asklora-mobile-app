@@ -126,7 +126,7 @@ class CustomImagePicker extends StatelessWidget {
 
   Widget _emptyImage({double width = double.infinity, double? height}) =>
       DottedBorder(
-          borderType: BorderType.RRect,
+          borderType: BorderType.rRect,
           radius: const Radius.circular(5),
           color: Colors.grey,
           dashPattern: const [4, 4],

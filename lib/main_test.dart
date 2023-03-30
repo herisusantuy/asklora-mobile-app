@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.dart';
 import 'core/presentation/buttons/button_example.dart';
 import 'core/presentation/text_fields/text_field_example.dart';
@@ -6,7 +7,7 @@ import 'core/styles/asklora_colors.dart';
 import 'feature/bot_stock/utils/bot_stock_utils.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {

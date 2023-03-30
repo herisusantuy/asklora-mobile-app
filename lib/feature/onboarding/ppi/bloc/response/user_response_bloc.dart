@@ -1,14 +1,15 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:collection/collection.dart';
 
 import '../../../../../core/data/remote/base_api_client.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/domain/triplet.dart';
 import '../../../../../core/utils/log.dart';
+import '../../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/utils/storage/storage_keys.dart';
 import '../../domain/fixture.dart';
@@ -23,11 +24,13 @@ part 'user_response_event.dart';
 part 'user_response_state.dart';
 
 class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
-  UserResponseBloc(
-      {required PpiResponseRepository ppiResponseRepository,
-      required SharedPreference sharedPreference})
-      : _ppiResponseRepository = ppiResponseRepository,
+  UserResponseBloc({
+    required PpiResponseRepository ppiResponseRepository,
+    required SharedPreference sharedPreference,
+    required JsonCacheSharedPreferences jsonCacheSharedPreferences,
+  })  : _ppiResponseRepository = ppiResponseRepository,
         _sharedPreference = sharedPreference,
+        _jsonCacheSharedPreferences = jsonCacheSharedPreferences,
         super(UserResponseState(userResponse: List.empty(growable: true))) {
     on<UserResponseEvent>((event, emit) {});
     on<SendResponse>(_onSendAnswer);
@@ -39,10 +42,12 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
     on<CalculateScore>(_onCalculateScore);
     on<ResetState>(_onResetState);
     on<InitiateUserResponse>(_onInitiateUserResponse);
+    on<ReSendResponse>(_onReSendBulkResponse);
   }
 
   final PpiResponseRepository _ppiResponseRepository;
   final SharedPreference _sharedPreference;
+  final JsonCacheSharedPreferences _jsonCacheSharedPreferences;
 
   void _onResetState(ResetState event, Emitter<UserResponseState> emit) async {
     if (event.wholeState) {
@@ -172,6 +177,15 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
 
       var requests = _getAllSelectionsInRequest(tempId);
 
+      if (requests.isEmpty) {
+        final cachedResponse =
+            await _jsonCacheSharedPreferences.value(sfKeyPpiAnswers);
+        requests = List<PpiSelectionRequest>.from((cachedResponse)
+            .map((e) => PpiSelectionRequest.fromJson(e, tempId)));
+      } else {
+        await _jsonCacheSharedPreferences.refresh(sfKeyPpiAnswers, requests);
+      }
+
       await _ppiResponseRepository.addBulkAnswer(requests);
       var userSnapShot =
           await _ppiResponseRepository.getUserSnapShotUserId(tempId);
@@ -194,6 +208,10 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
           errorType: ErrorType.error500));
     }
   }
+
+  void _onReSendBulkResponse(
+          ReSendResponse event, Emitter<UserResponseState> emit) async =>
+      add(SendBulkResponse());
 
   Future<bool> _isNotEligible() async {
     final scores = await _calculate();

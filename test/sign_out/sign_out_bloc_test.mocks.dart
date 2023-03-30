@@ -247,6 +247,14 @@ class MockSharedPreference extends _i1.Mock implements _i8.SharedPreference {
         ),
         returnValue: _i4.Future<int?>.value(),
       ) as _i4.Future<int?>);
+  @override
+  _i4.Future<bool> containsKey(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #containsKey,
+          [key],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }
 
 /// A class which mocks [SecureStorage].
@@ -347,4 +355,12 @@ class MockSecureStorage extends _i1.Mock implements _i9.SecureStorage {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  _i4.Future<bool> containsKey(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #containsKey,
+          [key],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }

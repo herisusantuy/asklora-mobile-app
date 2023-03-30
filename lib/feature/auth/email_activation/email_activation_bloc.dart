@@ -18,9 +18,12 @@ part 'email_activation_state.dart';
 
 class EmailActivationBloc
     extends Bloc<EmailActivationEvent, EmailActivationState> {
-  EmailActivationBloc(this._signUpRepository, this._tokenRepository,
-      this._sharedPreference, this._ppiResponseRepository)
-      : super(const EmailActivationState()) {
+  EmailActivationBloc(
+    this._signUpRepository,
+    this._tokenRepository,
+    this._sharedPreference,
+    this._ppiResponseRepository,
+  ) : super(const EmailActivationState()) {
     on<ResendEmailActivationLink>(_onResendEmailActivationLink);
     on<StartListenOnDeeplink>(_onStartListenOnDeeplink);
     on<DeepLinkValidateSuccess>(_onDeepLinkValidateSuccess);

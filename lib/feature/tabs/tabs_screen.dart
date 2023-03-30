@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/presentation/custom_scaffold.dart';
 import '../../core/utils/app_icons.dart';
-import '../../core/utils/log.dart';
 import '../bot_stock/presentation/portfolio/portfolio_screen.dart';
 import 'for_you/for_you_screen_form.dart';
 import 'home/home_screen_form.dart';
