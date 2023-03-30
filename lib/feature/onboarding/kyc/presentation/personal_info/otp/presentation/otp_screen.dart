@@ -53,7 +53,7 @@ class OtpScreen extends StatelessWidget {
                       .copyWith(color: AskLoraColors.charcoal),
                 ),
                 TextSpan(
-                    text: '${_getPhoneNumber(context)}.',
+                    text: '(${_getPhoneNumber(context)}).',
                     style: AskLoraTextStyles.h6),
                 TextSpan(
                     text: ' Please enter the OTP code below.',
