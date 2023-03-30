@@ -44,7 +44,7 @@ class HomeScreenContentWidget extends StatelessWidget {
             onSecondaryButtonTap: () {},
             onPrimaryButtonTap: () => PpiScreen.open(
               context,
-              arguments: Pair(QuestionPageType.investmentStyle,
+              arguments: const Pair(QuestionPageType.investmentStyle,
                   QuestionPageStep.investmentStyle),
             ),
             backgroundColor: AskLoraColors.primaryGreen,

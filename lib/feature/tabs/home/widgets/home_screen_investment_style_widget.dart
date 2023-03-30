@@ -108,7 +108,7 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
                 label: 'DEFINE INVESTMENT STYLE',
                 onTap: () => PpiScreen.open(
                   context,
-                  arguments: Pair(
+                  arguments: const Pair(
                     QuestionPageType.investmentStyle,
                     QuestionPageStep.investmentStyle,
                   ),

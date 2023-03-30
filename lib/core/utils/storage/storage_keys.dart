@@ -9,3 +9,4 @@ const String sfKeyPpiUsername = 'ppi_username';
 const String sfKeyPpiSnapshot = 'ppi_snapshot';
 const String sfKeySelectedLang = 'selected_lang';
 const String sfKeyAskloraId = 'asklora_id';
+const String sfKeyPpiAnswers = 'ppi_answers';
