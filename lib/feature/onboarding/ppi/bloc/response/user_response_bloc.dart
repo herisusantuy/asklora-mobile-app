@@ -127,7 +127,8 @@ class UserResponseBloc extends Bloc<UserResponseEvent, UserResponseState> {
           } else if (answer.question?.section ==
               QuestionSection.omniSearch.value) {
             List<String> selectedChoices = answer.answer!.split(',');
-            List<String> defaultChoices = defaultKeywords;
+            List<String> defaultChoices =
+                List.of(defaultKeywords, growable: true);
 
             for (var e in selectedChoices) {
               if (!defaultKeywords.contains(e)) {
