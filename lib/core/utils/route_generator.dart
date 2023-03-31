@@ -141,7 +141,8 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => BotPortfolioDetailScreen(
-                  botActiveOrderModel: settings.arguments as BotActiveOrderModel,
+                  botActiveOrderModel:
+                      settings.arguments as BotActiveOrderModel,
                 ));
       case BotTradeSummaryScreen.route:
         return MaterialPageRoute(

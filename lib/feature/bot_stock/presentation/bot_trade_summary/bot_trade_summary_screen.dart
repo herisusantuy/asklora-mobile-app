@@ -79,7 +79,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   arguments: Pair(
                       'Trade Request Received', _tradeRequestSuccessMessage()));
             }
-          } else if (state.botCreateOrderResponse.state == ResponseState.error) {
+          } else if (state.botCreateOrderResponse.state ==
+              ResponseState.error) {
             BotStockBottomSheet.insufficientBalance(context);
           }
         },

@@ -15,7 +15,8 @@ class BotPortfolioCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ///STATIC BOT TYPE FOR NOW, WAITING FOR BE
-    final BotType botType = BotType.findByString(botActiveOrderModel.botAppsName);
+    final BotType botType =
+        BotType.findByString(botActiveOrderModel.botAppsName);
     final Pair<bool, String> expiredDayLeft = expiredDaysLeft(
         DateTime.now(), DateTime.now().add(const Duration(days: 5)));
     return GestureDetector(
@@ -65,7 +66,7 @@ class BotPortfolioCard extends StatelessWidget {
                 PairColumnText(
                   leftTitle: 'Current Price',
                   rightTitle: 'Total P/L',
-                  leftSubTitle: botActiveOrderModel.currentPrice,
+                  leftSubTitle: botActiveOrderModel.currentPrice.toString(),
                   rightSubTitle: '0%',
                 ),
                 const SizedBox(

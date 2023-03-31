@@ -25,10 +25,10 @@ class BotCreateOrderRequest {
       required this.spotDate,
       required this.investmentAmount,
       required this.price,
-       this.fraction = false,
-       this.margin = 1,
-       this.orderType='POOL',
-       this.isAggregate=false});
+      this.fraction = false,
+      this.margin = 1,
+      this.orderType = 'POOL',
+      this.isAggregate = false});
 
   factory BotCreateOrderRequest.fromJson(Map<String, dynamic> json) =>
       _$BotCreateOrderRequestFromJson(json);

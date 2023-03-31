@@ -50,8 +50,9 @@ class PortfolioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) {
-        PortfolioBloc portfolioBloc =
-            PortfolioBloc(portfolioRepository: PortfolioRepository(), botStockRepository: BotStockRepository());
+        PortfolioBloc portfolioBloc = PortfolioBloc(
+            portfolioRepository: PortfolioRepository(),
+            botStockRepository: BotStockRepository());
 
         ///fetch portfolio when current UserJourney already passed freeBotStock
         if (UserJourney.compareUserJourney(
@@ -68,7 +69,8 @@ class PortfolioScreen extends StatelessWidget {
         body: BlocBuilder<PortfolioBloc, PortfolioState>(
           buildWhen: (previous, current) =>
               previous.portfolioResponse != current.portfolioResponse ||
-              previous.botActiveOrderResponse != current.botActiveOrderResponse ||
+              previous.botActiveOrderResponse !=
+                  current.botActiveOrderResponse ||
               previous.currency != current.currency,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(

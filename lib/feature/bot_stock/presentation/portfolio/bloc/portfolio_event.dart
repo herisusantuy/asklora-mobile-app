@@ -53,3 +53,12 @@ class EndBotStock extends PortfolioEvent {
   @override
   List<Object> get props => [orderId];
 }
+
+class CancelBotStock extends PortfolioEvent {
+  final String orderId;
+
+  const CancelBotStock(this.orderId);
+
+  @override
+  List<Object> get props => [orderId];
+}

@@ -2,6 +2,7 @@ part of '../bot_portfolio_detail_screen.dart';
 
 class KeyInfo extends StatelessWidget {
   final BotActiveOrderDetailModel botActiveOrderDetailModel;
+  final BotStatus botStatus;
   final BotType botType;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
@@ -9,6 +10,7 @@ class KeyInfo extends StatelessWidget {
 
   const KeyInfo(
       {required this.botActiveOrderDetailModel,
+      required this.botStatus,
       required this.botType,
       Key? key})
       : super(key: key);
@@ -26,9 +28,9 @@ class KeyInfo extends StatelessWidget {
           ),
           PairColumnText(
               leftTitle: 'Investment Period',
-              leftSubTitle: botActiveOrderDetailModel.investmentPeriod,
+              leftSubTitle: botActiveOrderDetailModel.botDetail.duration,
               rightTitle: 'Days Till Expiry',
-              rightSubTitle: botActiveOrderDetailModel.dayTillExpiry),
+              rightSubTitle: botActiveOrderDetailModel.daysToExpire.toString()),
           _spaceBetweenInfo,
           PairColumnText(
               leftTitle: 'Start Time',
@@ -40,10 +42,10 @@ class KeyInfo extends StatelessWidget {
           _spaceBetweenInfo,
           PairColumnText(
               leftTitle: 'Botstock Status',
-              leftSubTitle:botActiveOrderDetailModel.status,
+              leftSubTitle: botStatus.name,
               rightTitle: 'Number of Rollovers',
-              rightSubTitle: botActiveOrderDetailModel.rolloverCount.toString()),
-
+              rightSubTitle:
+                  botActiveOrderDetailModel.rolloverCount.toString()),
           const SizedBox(
             height: 40,
           ),

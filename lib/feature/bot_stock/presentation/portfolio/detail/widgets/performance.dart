@@ -35,8 +35,10 @@ class Performance extends StatelessWidget {
                       title: 'Inv. Amount (HKD)',
                       subTitle:
                           botActiveOrderDetailModel.investmentAmountString)),
-              const Expanded(
-                  child: ColumnText(title: 'Total P/L', subTitle: '0%')),
+              Expanded(
+                  child: ColumnText(
+                      title: 'Total P/L',
+                      subTitle: botActiveOrderDetailModel.currentPnlRetString)),
             ],
           ),
         ),
@@ -47,7 +49,7 @@ class Performance extends StatelessWidget {
             leftTitle: 'Current Price',
             leftSubTitle: botActiveOrderDetailModel.currentPriceString,
             rightTitle: 'No. of Shares',
-            rightSubTitle: botActiveOrderDetailModel.botShare ?? 'NA',
+            rightSubTitle: botActiveOrderDetailModel.botShareString,
             rightTooltipText:
                 'Indicates how many shares of a company are currently owned by you.'),
         _spaceBetweenInfo,
@@ -55,12 +57,12 @@ class Performance extends StatelessWidget {
           leftTitle: 'Stock Values (HKD)',
           leftSubTitle: botActiveOrderDetailModel.stockValueString,
           rightTitle: 'Cash (HKD)',
-          rightSubTitle: '0',
+          rightSubTitle: botActiveOrderDetailModel.botCashBalanceString,
         ),
         _spaceBetweenInfo,
         ColumnText(
             title: '% of Bot Assets in Stock',
-            subTitle: botActiveOrderDetailModel.botAssetInStockPct.toString()),
+            subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
         _chartWidget()
       ]);
 

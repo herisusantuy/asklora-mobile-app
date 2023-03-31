@@ -36,14 +36,29 @@ class BotStockBottomSheet {
             ));
   }
 
+  static cancelBotStockConfirmation(BuildContext context, String orderId) {
+    LoraBottomSheet.show(
+      context: context,
+      title:
+          'The investment amount and Bot management fee (HKD1,500) will be returned to your account.',
+      primaryButtonLabel: 'CANCEL TRADE',
+      secondaryButtonLabel: 'CANCEL',
+      onPrimaryButtonTap: () {
+        Navigator.pop(context);
+        context.read<PortfolioBloc>().add(CancelBotStock(orderId));
+      },
+      onSecondaryButtonTap: () => Navigator.pop(context),
+    );
+  }
+
   static endBotStockConfirmation(
       BuildContext context, String orderId, String botAppsName, String ticker) {
     LoraBottomSheet.show(
       context: context,
       title:
-          'You can quit now and all the trading activities of ${BotType.findByString(botAppsName).name} $ticker will end ',
+          'You can end the Botstock now, and all stocks will be sold. Trading of ${BotType.findByString(botAppsName).name} $ticker will stop.',
       subTitle:
-          'The total Botstock value (US\$ 200) will be returned to your account after the next community order',
+          'The total Botstock value will be returned to your account after the next community order.',
       primaryButtonLabel: 'END BOT STOCK',
       secondaryButtonLabel: 'CANCEL',
       onPrimaryButtonTap: () {
@@ -54,27 +69,25 @@ class BotStockBottomSheet {
     );
   }
 
-  static rolloverBotStockConfirmation(
-      BuildContext context, {required String orderId, required String expireDate}) {
+  static rolloverBotStockConfirmation(BuildContext context,
+      {required String orderId, required String expireDate}) {
     LoraBottomSheet.show(
       context: context,
       title:
           'Do you want to continue the Botstock and extend the investment period?\n\n 2 Weeks\n',
-      ///IMPLEMENT EXPIRE DATE + SOME DAYS
-      subTitle: 'The new expiry date is 15:30, 2023/04/12',
+      subTitle: 'The new expiry date is ${newExpiryDateOnRollover(expireDate)}',
       primaryButtonLabel: 'EXTEND',
       secondaryButtonLabel: 'CANCEL',
       onPrimaryButtonTap: () {
         Navigator.pop(context);
-        BotStockBottomSheet.rolloverBotStockDisclosure(
-            context, botId: orderId);
+        BotStockBottomSheet.rolloverBotStockDisclosure(context, botId: orderId);
       },
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
   }
 
-  static rolloverBotStockDisclosure(
-      BuildContext context, {required String botId}) {
+  static rolloverBotStockDisclosure(BuildContext context,
+      {required String botId}) {
     LoraBottomSheet.show(
       context: context,
       title:

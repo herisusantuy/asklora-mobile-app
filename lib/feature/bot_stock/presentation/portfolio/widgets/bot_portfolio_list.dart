@@ -23,7 +23,8 @@ class BotPortfolioList extends StatelessWidget {
       return const BotPortfolioPopUp(
           botPortfolioPopUpType: BotPortfolioPopUpType.redeemBotStock);
     } else {
-      if (portfolioState.botActiveOrderResponse.state == ResponseState.success) {
+      if (portfolioState.botActiveOrderResponse.state ==
+          ResponseState.success) {
         if (portfolioState.botActiveOrderResponse.data!.isNotEmpty) {
           return Column(
             children: [

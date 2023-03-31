@@ -11,12 +11,12 @@ BotActiveOrderModel _$BotActiveOrderModelFromJson(Map<String, dynamic> json) =>
       json['pk'] as String,
       json['bot_id'] as String,
       json['expire_date'] as String,
-      json['is_active'] as String,
+      json['is_active'],
       json['ticker'] as String,
       json['ticker_name'] as String,
       json['status'] as String,
-      json['current_pnl_ret'],
-      json['current_price'],
+      (json['current_pnl_ret'] as num?)?.toDouble(),
+      (json['current_price'] as num).toDouble(),
       botAppsName: json['bot_apps_name'] as String? ?? 'Pull Up',
     );
 

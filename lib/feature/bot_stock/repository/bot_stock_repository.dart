@@ -137,12 +137,14 @@ class BotStockRepository {
     }
   }
 
-  Future<BaseResponse<BotActiveOrderDetailModel>> activeOrderDetail(String orderId) async {
-    try{
+  Future<BaseResponse<BotActiveOrderDetailModel>> activeOrderDetail(
+      String orderId) async {
+    try {
       var response = await _botStockApiClient.activeOrderDetail(orderId);
-      return BaseResponse.complete(BotActiveOrderDetailModel.fromJson(response.data));
-    }
-    catch(_){
+      return BaseResponse.complete(
+          BotActiveOrderDetailModel.fromJson(response.data));
+    } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }

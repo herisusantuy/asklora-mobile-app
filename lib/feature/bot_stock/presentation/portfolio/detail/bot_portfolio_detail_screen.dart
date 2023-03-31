@@ -30,7 +30,6 @@ import '../../widgets/column_text.dart';
 import '../../widgets/pair_column_text.dart';
 import '../bloc/portfolio_bloc.dart';
 import '../repository/portfolio_repository.dart';
-import '../utils/portfolio_enum.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
 part 'widgets/bot_portfolio_detail_header.dart';
@@ -44,10 +43,13 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   final BotActiveOrderModel botActiveOrderModel;
 
   late final BotType botType;
+  late final BotStatus botStatus;
 
   BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
       : super(key: key) {
     botType = BotType.findByString(botActiveOrderModel.botAppsName);
+    botStatus = BotStatus.findByString(
+        botActiveOrderModel.status, botActiveOrderModel.expireDate);
   }
 
   @override
@@ -66,19 +68,20 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               previous.endBotStockResponse.state !=
                   current.endBotStockResponse.state ||
               previous.rolloverBotStockResponse.state !=
-                  current.rolloverBotStockResponse.state,
+                  current.rolloverBotStockResponse.state ||
+              previous.cancelBotStockResponse.state !=
+                  current.cancelBotStockResponse.state,
           listener: _portfolioListener,
           buildWhen: (previous, current) =>
               previous.botActiveOrderDetailResponse.state !=
               current.botActiveOrderDetailResponse.state,
           builder: (context, state) {
-
             if (state.botActiveOrderDetailResponse.state ==
                 ResponseState.success) {
-              final BotActiveOrderDetailModel botActiveOrderDetailModel = state.botActiveOrderDetailResponse.data!;
+              final BotActiveOrderDetailModel botActiveOrderDetailModel =
+                  state.botActiveOrderDetailResponse.data!;
               final Pair<Widget, Widget> portfolioDetailProps =
-                  _getPortfolioDetailProps(
-                      context, botActiveOrderDetailModel);
+                  _getPortfolioDetailProps(context, botActiveOrderDetailModel);
               return CustomLayoutWithBlurPopUp(
                 loraPopUpMessageModel: LoraPopUpMessageModel(
                   title: 'Unable to get information',
@@ -98,12 +101,14 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                     customHeader: BotPortfolioDetailHeader(
                       botActiveOrderModel: botActiveOrderModel,
                       botType: botType,
+                      botStatus: botStatus,
                     ),
                     padding: EdgeInsets.zero,
                     content: BotPortfolioDetailContent(
+                      botStatus: botStatus,
                       botType: botType,
                       portfolioDetailProps: portfolioDetailProps,
-                      portfolioBotDetailModel:botActiveOrderDetailModel,
+                      portfolioBotDetailModel: botActiveOrderDetailModel,
                     ),
                     bottomButton: portfolioDetailProps.right),
               );
@@ -127,11 +132,9 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                 AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
             child: Builder(
               builder: (context) {
-                BotPortfolioStatus botPortfolioStatus =
-                    BotPortfolioStatus.findByString('active');
                 return Column(
                   children: [
-                    if (botPortfolioStatus != BotPortfolioStatus.pending)
+                    if (botStatus == BotStatus.activeExpiresSoon)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20.0),
                         child: PrimaryButton(
@@ -146,14 +149,19 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                       ),
                     PrimaryButton(
                       buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-                      label: botPortfolioStatus == BotPortfolioStatus.active
+                      label: botStatus == BotStatus.active ||
+                              botStatus == BotStatus.activeExpiresSoon
                           ? 'END BOTSTOCK'
                           : 'CANCEL BOTSTOCK',
-                      onTap: () => BotStockBottomSheet.endBotStockConfirmation(
-                          context,
-                          botActiveOrderDetailModel.pk,
-                          botActiveOrderDetailModel.ticker,
-                          botActiveOrderDetailModel.ticker),
+                      onTap: () => botStatus == BotStatus.active||
+                          botStatus == BotStatus.activeExpiresSoon
+                          ? BotStockBottomSheet.endBotStockConfirmation(
+                              context,
+                              botActiveOrderDetailModel.pk,
+                              botActiveOrderDetailModel.botDetail.botName,
+                              botActiveOrderDetailModel.tickerDetail.ticker)
+                          : BotStockBottomSheet.cancelBotStockConfirmation(
+                              context, botActiveOrderDetailModel.pk),
                     ),
                   ],
                 );
@@ -184,7 +192,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   void _portfolioListener(BuildContext context, PortfolioState state) {
     if (state.botActiveOrderDetailResponse.state == ResponseState.loading ||
         state.endBotStockResponse.state == ResponseState.loading ||
-        state.rolloverBotStockResponse.state == ResponseState.loading) {
+        state.rolloverBotStockResponse.state == ResponseState.loading ||
+        state.cancelBotStockResponse.state == ResponseState.loading) {
       CustomLoadingOverlay.of(context).appear();
     } else {
       CustomLoadingOverlay.of(context).dismiss();
@@ -192,19 +201,28 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         BotStockResultScreen.open(
             context: context,
             arguments: Pair('Trade Request Received',
-                '${botType.name} ${botActiveOrderModel.ticker} will end at 17/3/2023 10.22}'));
+                '${botType.name} ${botActiveOrderModel.ticker} will end at 17/3/2023 10.22'));
       } else if (state.endBotStockResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
             context, state.endBotStockResponse.message);
+      }
+      if (state.cancelBotStockResponse.state == ResponseState.success) {
+        BotStockResultScreen.open(
+            context: context,
+            arguments: const Pair('Trade Canceled',
+                'The trade has been cancelled and your investment amount has been returned to your account'));
+      } else if (state.cancelBotStockResponse.state == ResponseState.error) {
+        CustomInAppNotification.show(
+            context, state.cancelBotStockResponse.message);
       }
       if (state.rolloverBotStockResponse.state == ResponseState.success) {
         BotStockResultScreen.open(
             context: context,
             arguments: Pair('Trade Request Received',
-                '${botType.name} ${botActiveOrderModel.ticker} will rollover at 17/3/2023 10.22}'));
+                '${botType.name} ${botActiveOrderModel.ticker} will rollover at ${newExpiryDateOnRollover(botActiveOrderModel.expireDate)}'));
       } else if (state.rolloverBotStockResponse.state == ResponseState.error) {
         CustomInAppNotification.show(
-            context, state.endBotStockResponse.message);
+            context, state.rolloverBotStockResponse.message);
       }
     }
   }

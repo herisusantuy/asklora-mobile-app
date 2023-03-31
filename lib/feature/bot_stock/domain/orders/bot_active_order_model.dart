@@ -10,15 +10,17 @@ class BotActiveOrderModel {
   @JsonKey(name: 'expire_date')
   final String expireDate;
   @JsonKey(name: 'is_active')
-  final String isActive;
+  final dynamic isActive;
   final String ticker;
   @JsonKey(name: 'ticker_name')
   final String tickerName;
   final String status;
+
+  ///Change to double later
   @JsonKey(name: 'current_pnl_ret')
-  final dynamic? currentPnlRet;
+  final double? currentPnlRet;
   @JsonKey(name: 'current_price')
-  final dynamic currentPrice;
+  final double currentPrice;
   @JsonKey(name: 'bot_apps_name')
   final String botAppsName;
 
@@ -32,7 +34,7 @@ class BotActiveOrderModel {
       this.status,
       this.currentPnlRet,
       this.currentPrice,
-  {this.botAppsName = 'Pull Up'});
+      {this.botAppsName = 'Pull Up'});
 
   factory BotActiveOrderModel.fromJson(Map<String, dynamic> json) =>
       _$BotActiveOrderModelFromJson(json);

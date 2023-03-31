@@ -7,6 +7,7 @@ class PortfolioState extends Equatable {
     this.botActiveOrderDetailResponse = const BaseResponse(),
     this.rolloverBotStockResponse = const BaseResponse(),
     this.endBotStockResponse = const BaseResponse(),
+    this.cancelBotStockResponse = const BaseResponse(),
     this.botStockFilter = BotStockFilter.all,
     this.currency = CurrencyType.hkd,
   });
@@ -16,6 +17,7 @@ class PortfolioState extends Equatable {
   final BaseResponse<BotActiveOrderDetailModel> botActiveOrderDetailResponse;
   final BaseResponse<bool> rolloverBotStockResponse;
   final BaseResponse<bool> endBotStockResponse;
+  final BaseResponse<bool> cancelBotStockResponse;
   final BotStockFilter botStockFilter;
   final CurrencyType currency;
 
@@ -27,6 +29,7 @@ class PortfolioState extends Equatable {
       botActiveOrderDetailResponse,
       rolloverBotStockResponse,
       endBotStockResponse,
+      cancelBotStockResponse,
       botStockFilter,
       currency,
     ];
@@ -38,17 +41,21 @@ class PortfolioState extends Equatable {
     BaseResponse<BotActiveOrderDetailModel>? botActiveOrderDetailResponse,
     BaseResponse<bool>? rolloverBotStockResponse,
     BaseResponse<bool>? endBotStockResponse,
+    BaseResponse<bool>? cancelBotStockResponse,
     BotStockFilter? botStockFilter,
     CurrencyType? currency,
   }) {
     return PortfolioState(
       portfolioResponse: portfolioResponse ?? this.portfolioResponse,
-      botActiveOrderResponse: botActiveOrderResponse ?? this.botActiveOrderResponse,
+      botActiveOrderResponse:
+          botActiveOrderResponse ?? this.botActiveOrderResponse,
       botActiveOrderDetailResponse:
           botActiveOrderDetailResponse ?? this.botActiveOrderDetailResponse,
       rolloverBotStockResponse:
           rolloverBotStockResponse ?? this.rolloverBotStockResponse,
       endBotStockResponse: endBotStockResponse ?? this.endBotStockResponse,
+      cancelBotStockResponse:
+          cancelBotStockResponse ?? this.cancelBotStockResponse,
       botStockFilter: botStockFilter ?? this.botStockFilter,
       currency: currency ?? this.currency,
     );

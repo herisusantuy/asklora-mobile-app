@@ -1,10 +1,14 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class BotPortfolioDetailHeader extends StatelessWidget {
+  final BotStatus botStatus;
   final BotType botType;
   final BotActiveOrderModel botActiveOrderModel;
   const BotPortfolioDetailHeader(
-      {required this.botType, required this.botActiveOrderModel, Key? key})
+      {required this.botType,
+      required this.botActiveOrderModel,
+      required this.botStatus,
+      Key? key})
       : super(key: key);
 
   @override
@@ -14,11 +18,11 @@ class BotPortfolioDetailHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 1.2),
+          Padding(
+            padding: const EdgeInsets.only(top: 1.2),
             child: Icon(
               Icons.circle,
-              color: AskLoraColors.primaryGreen,
+              color: botStatus.color,
               size: 12,
             ),
           ),

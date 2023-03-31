@@ -32,8 +32,6 @@ class BotCreateOrder extends BotStockEvent {
       [botRecommendationModel, tradeBotStockAmount, estimatedEndDate];
 }
 
-
-
 class TradeBotStockAmountChanged extends BotStockEvent {
   final double amount;
 

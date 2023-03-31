@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/domain/pair.dart';
 import '../../../core/styles/asklora_colors.dart';
@@ -6,11 +7,11 @@ import '../domain/bot_recommendation_model.dart';
 import '../presentation/portfolio/domain/portfolio_bot_model.dart';
 
 List<Pair<String, String>> botRecommendationFaqs = [
-  Pair('How can I get a specific stock?',
+  const Pair('How can I get a specific stock?',
       'Lora recommends a short list of stocks along with matching bots to invest with every time you engage her. Lora does not provide stock picks by themselves, as they are not useful without a trading strategy.'),
-  Pair('How can I see more Botstocks?',
+  const Pair('How can I see more Botstocks?',
       'The more keywords you add to our search, the more results you can get! Lora will display up to 20 Botstock recommendations.'),
-  Pair('Why should I invest in Botstocks?',
+  const Pair('Why should I invest in Botstocks?',
       'If you have ever felt helpless or lost in the stock market, because you were not sure what to do, our Botstocks are the perfect solution. Lora\'s mission is to use the best in AI technology to help you in your stock investment journey, from picking suitable stocks to trading them automatically.'),
 ];
 
@@ -108,3 +109,29 @@ enum BotStockFilter {
 
   const BotStockFilter(this.name);
 }
+
+enum BotStatus {
+  pending('place', 'Pending', AskLoraColors.orange),
+  active('open', 'Active', AskLoraColors.primaryGreen),
+  activeExpiresSoon(
+      'open', 'Active (expires soon)', AskLoraColors.primaryGreen);
+
+  final String value;
+  final String name;
+  final Color color;
+
+  static BotStatus findByString(String botStatusString, String expireDate) {
+    BotStatus botStatus = BotStatus.values
+        .firstWhere((element) => element.value == botStatusString);
+    if (botStatus == active &&
+        DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
+      botStatus = BotStatus.activeExpiresSoon;
+    }
+    return botStatus;
+  }
+
+  const BotStatus(this.value, this.name, this.color);
+}
+
+String newExpiryDateOnRollover(String expireDate) => DateFormat('yyyy-MM-dd')
+    .format(DateTime.parse(expireDate).add(const Duration(days: 14)));
