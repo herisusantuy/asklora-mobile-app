@@ -50,3 +50,6 @@ const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
 const String endpointBotRecommendation = '${user}recomendation_bots/';
 const String endpointBotDetail = '$v1${bots}bot_detail/';
 const String endpointIexCloud = 'https://iexcloud.io';
+const String askloraFaq = 'https://www.asklora.ai/faq';
+const String mailToLora =
+    'https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=loracares@asklora.ai';

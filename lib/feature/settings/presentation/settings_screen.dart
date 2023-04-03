@@ -19,6 +19,7 @@ import '../../../core/utils/storage/shared_preference.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import 'get_help_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String route = '/settings_screen';
@@ -37,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
             sharedPreference: SharedPreference()),
         child: CustomStretchedLayout(
           header: const CustomHeader(
-            title: 'All Settings',
+            title: '',
           ),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +95,8 @@ class SettingsScreen extends StatelessWidget {
               _settingsMenu(title: 'Account Settings', onTap: () {}),
               _settingsMenu(title: 'Investment Preferences', onTap: () {}),
               _settingsMenu(title: 'Transaction History', onTap: () {}),
-              _settingsMenu(title: 'Get Help', onTap: () {}),
+              _settingsMenu(
+                  title: 'Get Help', onTap: () => GetHelpScreen.open(context)),
               _settingsMenu(title: 'About Asklora', onTap: () {}),
               _signOutButton(context),
               _getAppVersion()
