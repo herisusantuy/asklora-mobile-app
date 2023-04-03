@@ -23,8 +23,11 @@ void main() async {
     final BaseResponse<List<BotRecommendationModel>> freeBotStockResponse =
         BaseResponse.complete(defaultBotRecommendation);
 
-    final BaseResponse<BotCreateOrderResponse> botCreateOrderSuccessResponse = BaseResponse.complete(const BotCreateOrderResponse(botOrder: '', botAction: ''));
-    final BaseResponse<BotCreateOrderResponse> botCreateOrderFailedResponse = BaseResponse.error();
+    final BaseResponse<BotCreateOrderResponse> botCreateOrderSuccessResponse =
+        BaseResponse.complete(
+            const BotCreateOrderResponse(botOrder: '', botAction: ''));
+    final BaseResponse<BotCreateOrderResponse> botCreateOrderFailedResponse =
+        BaseResponse.error();
 
     final BaseResponse<List<BotRecommendationModel>> errorResponse =
         BaseResponse.error();
@@ -115,7 +118,8 @@ void main() async {
             tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(botCreateOrderResponse: BaseResponse.loading()),
-              BotStockState(botCreateOrderResponse: botCreateOrderSuccessResponse)
+              BotStockState(
+                  botCreateOrderResponse: botCreateOrderSuccessResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -133,7 +137,8 @@ void main() async {
             tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(botCreateOrderResponse: BaseResponse.loading()),
-              BotStockState(botCreateOrderResponse: botCreateOrderFailedResponse)
+              BotStockState(
+                  botCreateOrderResponse: botCreateOrderFailedResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(

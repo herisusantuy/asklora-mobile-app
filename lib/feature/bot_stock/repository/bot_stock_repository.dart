@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 
 import '../../../core/domain/base_response.dart';
 import '../../../core/utils/extensions.dart';
-import '../../../core/utils/feature_flags.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
 import '../../chart/domain/chart_models.dart';
@@ -164,53 +163,30 @@ class BotStockRepository {
   }
 
   Future<BaseResponse<bool>> cancelOrder(String orderId) async {
-    if (FeatureFlags.isDemoEnable) {
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      ///todo create mock using latest model
-      //MockData().endBotStock(portfolioBotModel);
+    try {
+      await _botStockApiClient.cancelOrder(BotOrderRequest(orderId: orderId));
       return BaseResponse.complete(true);
-    } else {
-      try {
-        await _botStockApiClient.cancelOrder(BotOrderRequest(orderId: orderId));
-        return BaseResponse.complete(true);
-      } catch (e) {
-        return BaseResponse.error();
-      }
+    } catch (e) {
+      return BaseResponse.error();
     }
   }
 
   Future<BaseResponse<bool>> rolloverOrder(String orderId) async {
-    if (FeatureFlags.isDemoEnable) {
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      ///create mock rollover
+    try {
+      await _botStockApiClient.rolloverOrder(BotOrderRequest(orderId: orderId));
       return BaseResponse.complete(true);
-    } else {
-      try {
-        await _botStockApiClient
-            .rolloverOrder(BotOrderRequest(orderId: orderId));
-        return BaseResponse.complete(true);
-      } catch (e) {
-        return BaseResponse.error();
-      }
+    } catch (e) {
+      return BaseResponse.error();
     }
   }
 
   Future<BaseResponse<bool>> terminateOrder(String orderId) async {
-    if (FeatureFlags.isDemoEnable) {
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      ///create mock rollover
+    try {
+      await _botStockApiClient
+          .terminateOrder(BotOrderRequest(orderId: orderId));
       return BaseResponse.complete(true);
-    } else {
-      try {
-        await _botStockApiClient
-            .terminateOrder(BotOrderRequest(orderId: orderId));
-        return BaseResponse.complete(true);
-      } catch (e) {
-        return BaseResponse.error();
-      }
+    } catch (e) {
+      return BaseResponse.error();
     }
   }
 }

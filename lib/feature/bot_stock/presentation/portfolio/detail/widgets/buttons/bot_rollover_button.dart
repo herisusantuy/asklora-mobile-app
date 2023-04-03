@@ -17,7 +17,8 @@ class BotRolloverButton extends StatelessWidget {
             previous.rolloverBotStockResponse.state !=
             current.rolloverBotStockResponse.state,
         listener: (context, state) {
-          CustomLoadingOverlay.of(context).show(state.rolloverBotStockResponse.state);
+          CustomLoadingOverlay.of(context)
+              .show(state.rolloverBotStockResponse.state);
           if (state.rolloverBotStockResponse.state == ResponseState.success) {
             BotStockResultScreen.open(
                 context: context,

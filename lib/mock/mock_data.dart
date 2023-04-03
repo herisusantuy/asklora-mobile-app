@@ -71,5 +71,4 @@ class MockData {
       return BaseResponse.error(message: 'Insufficient Balance');
     }
   }
-
 }

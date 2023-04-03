@@ -13,7 +13,8 @@ class BotCancelButton extends StatelessWidget {
             previous.cancelBotStockResponse.state !=
             current.cancelBotStockResponse.state,
         listener: (context, state) {
-          CustomLoadingOverlay.of(context).show(state.cancelBotStockResponse.state);
+          CustomLoadingOverlay.of(context)
+              .show(state.cancelBotStockResponse.state);
           if (state.cancelBotStockResponse.state == ResponseState.success) {
             BotStockResultScreen.open(
                 context: context,
