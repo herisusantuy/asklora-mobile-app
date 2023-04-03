@@ -5,7 +5,6 @@ import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
-import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/utils.dart';
 
@@ -23,7 +22,7 @@ class CustomerServiceScreen extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                      onTap: () => openUrl(mailToLora),
+                      onTap: () => openUrl('mailto:loracares@asklora.ai'),
                       child:
                           text(title: 'Email', value: 'loracares@asklora.ai')),
                   const SizedBox(height: 22),
