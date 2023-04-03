@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/domain/pair.dart';
+import '../../../../../../app/bloc/app_bloc.dart';
+import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
+import '../../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
@@ -15,7 +19,6 @@ class BotPortfolioDetailContent extends StatelessWidget {
   final BotActiveOrderDetailModel portfolioBotDetailModel;
   final BotStatus botStatus;
   final BotType botType;
-  final Pair<Widget, Widget> portfolioDetailProps;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
@@ -24,7 +27,6 @@ class BotPortfolioDetailContent extends StatelessWidget {
       {required this.botStatus,
       required this.botType,
       required this.portfolioBotDetailModel,
-      required this.portfolioDetailProps,
       Key? key})
       : super(key: key);
 
@@ -126,22 +128,6 @@ class BotPortfolioDetailContent extends StatelessWidget {
             ],
           ),
           children: [
-            // PairColumnText(
-            //   leftTitle: 'Prev Close',
-            //   leftSubTitle: portfolioBotDetailModel?.prevClosePrice != null
-            //       ? (portfolioBotDetailModel?.prevClosePrice ?? 0).toString()
-            //       : '-',
-            //   rightTitle: 'Market Cap',
-            //   rightSubTitle: portfolioBotDetailModel?.marketCap != null
-            //       ? (portfolioBotDetailModel?.marketCap ?? '-')
-            //       : '-',
-            // ),
-            // const SizedBox(
-            //   height: 2,
-            // ),
-            // const Divider(
-            //   color: AskLoraColors.gray,
-            // ),
             CustomTextNew(
               'About ${portfolioBotDetailModel.tickerDetail.tickerName}',
               style:
@@ -181,29 +167,24 @@ class BotPortfolioDetailContent extends StatelessWidget {
             )
           ],
         ),
-        Padding(
-          padding: AppValues.screenHorizontalPadding,
-          child: portfolioDetailProps.left,
-        ),
+        if (!UserJourney.compareUserJourney(
+            context: context, target: UserJourney.deposit))
+          Padding(
+            padding: AppValues.screenHorizontalPadding.copyWith(top: 40.0),
+            child: LoraPopUpMessage(
+              backgroundColor: AskLoraColors.charcoal,
+              title: 'Take the next step towards gift redemption!',
+              titleColor: AskLoraColors.white,
+              subTitle: 'The secret of getting ahead is getting started.',
+              subTitleColor: AskLoraColors.white,
+              primaryButtonLabel: 'COMPLETE MILESTONE',
+              onPrimaryButtonTap: () => DepositWelcomeScreen.open(
+                  context: context, depositType: DepositType.firstTime),
+              buttonPrimaryType: ButtonPrimaryType.solidGreen,
+              bottomText: 'Next Step: Pay deposit',
+            ),
+          )
       ],
     );
   }
-
-// double getPriceDifference() {
-//   if (portfolioBotDetailModel != null) {
-//     final currentPrice = portfolioBotDetailModel?.price ?? 0;
-//     final prevClosePrice = portfolioBotDetailModel?.prevClosePrice ?? 0;
-//     return currentPrice - prevClosePrice;
-//   }
-//   return 0;
-// }
-
-// double getPercentDifference() {
-//   if (portfolioBotDetailModel != null) {
-//     final currentPrice = portfolioBotDetailModel?.price ?? 0;
-//     final prevClosePrice = portfolioBotDetailModel?.prevClosePrice ?? 0;
-//     return ((currentPrice / prevClosePrice) - 1) * 100;
-//   }
-//   return 0;
-// }
 }

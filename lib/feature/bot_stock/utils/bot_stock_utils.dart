@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import '../../../core/domain/pair.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../domain/bot_recommendation_model.dart';
-import '../presentation/portfolio/domain/portfolio_bot_model.dart';
 
 List<Pair<String, String>> botRecommendationFaqs = [
   const Pair('How can I get a specific stock?',
@@ -32,25 +31,6 @@ List<BotRecommendationModel> defaultBotRecommendation = [
       'Pull Up', 'MSFT.O', 'TESLA', '', '20'),
   const BotRecommendationModel(8, '', '', 'CLASSIC_classic_003846', '', '',
       'Plank', 'MSFT.O', 'TESLA', '', '600'),
-];
-
-List<PortfolioBotModel> defaultPortfolioBot = [
-  const PortfolioBotModel(1, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '440', 2000),
-  const PortfolioBotModel(2, '', '', 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '390', 2000),
-  const PortfolioBotModel(3, '', '', 'CLASSIC_classic_003846', '', '', 'Squat',
-      'MSFT.O', 'TESLA', '', '100', 2000),
-  const PortfolioBotModel(4, '', '', 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '150', 2000),
-  const PortfolioBotModel(5, '', '', 'CLASSIC_classic_003846', '', '', 'Squat',
-      'MSFT.O', 'TESLA', '', '160', 2000),
-  const PortfolioBotModel(6, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '90', 2000),
-  const PortfolioBotModel(7, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '20', 2000),
-  const PortfolioBotModel(8, '', '', 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '600', 2000),
 ];
 
 List<BotRecommendationModel> demonstrationBots = [

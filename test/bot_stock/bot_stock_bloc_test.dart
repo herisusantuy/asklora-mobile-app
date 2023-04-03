@@ -1,6 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_create_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -22,12 +23,11 @@ void main() async {
     final BaseResponse<List<BotRecommendationModel>> freeBotStockResponse =
         BaseResponse.complete(defaultBotRecommendation);
 
-    final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
+    final BaseResponse<BotCreateOrderResponse> botCreateOrderSuccessResponse = BaseResponse.complete(const BotCreateOrderResponse(botOrder: '', botAction: ''));
+    final BaseResponse<BotCreateOrderResponse> botCreateOrderFailedResponse = BaseResponse.error();
 
     final BaseResponse<List<BotRecommendationModel>> errorResponse =
         BaseResponse.error();
-
-    final BaseResponse<bool> boolErrorResponse = BaseResponse.error();
 
     const BotRecommendationModel botRecommendationModel =
         BotRecommendationModel(1, '', '', '', '', '', 'Pullup', '', '', '', '');
@@ -63,7 +63,7 @@ void main() async {
         'failed fetching bot recommendation',
         build: () {
           when(botStockRepository.fetchBotRecommendation())
-              .thenThrow(errorResponse);
+              .thenAnswer((_) => Future.value(errorResponse));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchBotRecommendation()),
@@ -106,18 +106,16 @@ void main() async {
         build: () {
           when(botStockRepository.createOrder(
                   botRecommendationModel: botRecommendationModel,
-                  estimatedEndDate: '2023-03-28',
                   tradeBotStockAmount: 0))
-              .thenAnswer((_) => Future.value(boolResponse));
+              .thenAnswer((_) => Future.value(botCreateOrderSuccessResponse));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(const BotCreateOrder(
             botRecommendationModel: botRecommendationModel,
-            estimatedEndDate: '2023-03-28',
             tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(botCreateOrderResponse: BaseResponse.loading()),
-              BotStockState(botCreateOrderResponse: boolResponse)
+              BotStockState(botCreateOrderResponse: botCreateOrderSuccessResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -126,18 +124,16 @@ void main() async {
         build: () {
           when(botStockRepository.createOrder(
                   botRecommendationModel: botRecommendationModel,
-                  estimatedEndDate: '2023-03-28',
                   tradeBotStockAmount: 0))
-              .thenThrow(boolErrorResponse);
+              .thenAnswer((_) => Future.value(botCreateOrderFailedResponse));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(const BotCreateOrder(
             botRecommendationModel: botRecommendationModel,
-            estimatedEndDate: '2023-03-28',
             tradeBotStockAmount: 0)),
         expect: () => {
               BotStockState(botCreateOrderResponse: BaseResponse.loading()),
-              BotStockState(botCreateOrderResponse: boolErrorResponse)
+              BotStockState(botCreateOrderResponse: botCreateOrderFailedResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(

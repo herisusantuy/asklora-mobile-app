@@ -18,6 +18,8 @@ class BotCreateOrderRequest {
   final String orderType;
   @JsonKey(name: 'is_aggregate')
   final bool isAggregate;
+  @JsonKey(name: 'is_dummy')
+  final bool isDummy;
 
   const BotCreateOrderRequest(
       {required this.ticker,
@@ -28,7 +30,8 @@ class BotCreateOrderRequest {
       this.fraction = false,
       this.margin = 1,
       this.orderType = 'POOL',
-      this.isAggregate = false});
+      this.isAggregate = false,
+      this.isDummy = false});
 
   factory BotCreateOrderRequest.fromJson(Map<String, dynamic> json) =>
       _$BotCreateOrderRequestFromJson(json);

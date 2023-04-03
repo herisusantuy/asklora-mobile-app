@@ -10,15 +10,12 @@ import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
-import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
-import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -37,6 +34,12 @@ part 'widgets/bot_portfolio_detail_header.dart';
 part 'widgets/key_info.dart';
 
 part 'widgets/performance.dart';
+
+part 'widgets/buttons/bot_rollover_button.dart';
+
+part 'widgets/buttons/bot_cancel_button.dart';
+
+part 'widgets/buttons/bot_terminate_button.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
   static const String route = '/bot_portfolio_detail_screen';
@@ -64,14 +67,9 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         child: BlocConsumer<PortfolioBloc, PortfolioState>(
           listenWhen: (previous, current) =>
               previous.botActiveOrderDetailResponse.state !=
-                  current.botActiveOrderDetailResponse.state ||
-              previous.endBotStockResponse.state !=
-                  current.endBotStockResponse.state ||
-              previous.rolloverBotStockResponse.state !=
-                  current.rolloverBotStockResponse.state ||
-              previous.cancelBotStockResponse.state !=
-                  current.cancelBotStockResponse.state,
-          listener: _portfolioListener,
+              current.botActiveOrderDetailResponse.state,
+          listener: (context, state) => CustomLoadingOverlay.of(context)
+              .show(state.botActiveOrderDetailResponse.state),
           buildWhen: (previous, current) =>
               previous.botActiveOrderDetailResponse.state !=
               current.botActiveOrderDetailResponse.state,
@@ -80,8 +78,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                 ResponseState.success) {
               final BotActiveOrderDetailModel botActiveOrderDetailModel =
                   state.botActiveOrderDetailResponse.data!;
-              final Pair<Widget, Widget> portfolioDetailProps =
-                  _getPortfolioDetailProps(context, botActiveOrderDetailModel);
               return CustomLayoutWithBlurPopUp(
                 loraPopUpMessageModel: LoraPopUpMessageModel(
                   title: 'Unable to get information',
@@ -107,10 +103,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                     content: BotPortfolioDetailContent(
                       botStatus: botStatus,
                       botType: botType,
-                      portfolioDetailProps: portfolioDetailProps,
                       portfolioBotDetailModel: botActiveOrderDetailModel,
                     ),
-                    bottomButton: portfolioDetailProps.right),
+                    bottomButton:
+                        _getBottomButtons(context, botActiveOrderDetailModel)),
               );
             } else {
               return const SizedBox.shrink();
@@ -121,109 +117,38 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     );
   }
 
-  Pair<Widget, Widget> _getPortfolioDetailProps(BuildContext context,
+  Widget? _getBottomButtons(BuildContext context,
       BotActiveOrderDetailModel botActiveOrderDetailModel) {
     if (UserJourney.compareUserJourney(
         context: context, target: UserJourney.deposit)) {
-      return Pair(
-          const SizedBox.shrink(),
-          Padding(
-            padding:
-                AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
-            child: Builder(
-              builder: (context) {
-                return Column(
-                  children: [
-                    if (botStatus == BotStatus.activeExpiresSoon)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
-                        child: PrimaryButton(
-                          label: 'ROLLOVER BOTSTOCK',
-                          onTap: () =>
-                              BotStockBottomSheet.rolloverBotStockConfirmation(
-                                  context,
-                                  orderId: botActiveOrderDetailModel.pk,
-                                  expireDate:
-                                      botActiveOrderDetailModel.expireDate),
-                        ),
-                      ),
-                    PrimaryButton(
-                      buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-                      label: botStatus == BotStatus.active ||
-                              botStatus == BotStatus.activeExpiresSoon
-                          ? 'END BOTSTOCK'
-                          : 'CANCEL BOTSTOCK',
-                      onTap: () => botStatus == BotStatus.active||
-                          botStatus == BotStatus.activeExpiresSoon
-                          ? BotStockBottomSheet.endBotStockConfirmation(
-                              context,
-                              botActiveOrderDetailModel.pk,
-                              botActiveOrderDetailModel.botDetail.botName,
-                              botActiveOrderDetailModel.tickerDetail.ticker)
-                          : BotStockBottomSheet.cancelBotStockConfirmation(
-                              context, botActiveOrderDetailModel.pk),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ));
+      return Padding(
+        padding:
+            AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
+        child: Column(
+          children: [
+            if (botStatus == BotStatus.activeExpiresSoon)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: BotRolloverButton(
+                  botActiveOrderDetailModel: botActiveOrderDetailModel,
+                  botType: botType,
+                ),
+              ),
+            if (botStatus == BotStatus.active ||
+                botStatus == BotStatus.activeExpiresSoon)
+              BotTerminateButton(
+                botActiveOrderDetailModel: botActiveOrderDetailModel,
+                botType: botType,
+              ),
+            if (botStatus == BotStatus.pending)
+              BotCancelButton(
+                botActiveOrderDetailModel: botActiveOrderDetailModel,
+              ),
+          ],
+        ),
+      );
     } else {
-      return Pair(
-          Padding(
-            padding: const EdgeInsets.only(top: 40.0),
-            child: LoraPopUpMessage(
-              backgroundColor: AskLoraColors.charcoal,
-              title: 'Take the next step towards gift redemption!',
-              titleColor: AskLoraColors.white,
-              subTitle: 'The secret of getting ahead is getting started.',
-              subTitleColor: AskLoraColors.white,
-              primaryButtonLabel: 'COMPLETE MILESTONE',
-              onPrimaryButtonTap: () => DepositWelcomeScreen.open(
-                  context: context, depositType: DepositType.firstTime),
-              buttonPrimaryType: ButtonPrimaryType.solidGreen,
-              bottomText: 'Next Step: Pay deposit',
-            ),
-          ),
-          const SizedBox.shrink());
-    }
-  }
-
-  void _portfolioListener(BuildContext context, PortfolioState state) {
-    if (state.botActiveOrderDetailResponse.state == ResponseState.loading ||
-        state.endBotStockResponse.state == ResponseState.loading ||
-        state.rolloverBotStockResponse.state == ResponseState.loading ||
-        state.cancelBotStockResponse.state == ResponseState.loading) {
-      CustomLoadingOverlay.of(context).appear();
-    } else {
-      CustomLoadingOverlay.of(context).dismiss();
-      if (state.endBotStockResponse.state == ResponseState.success) {
-        BotStockResultScreen.open(
-            context: context,
-            arguments: Pair('Trade Request Received',
-                '${botType.name} ${botActiveOrderModel.ticker} will end at 17/3/2023 10.22'));
-      } else if (state.endBotStockResponse.state == ResponseState.error) {
-        CustomInAppNotification.show(
-            context, state.endBotStockResponse.message);
-      }
-      if (state.cancelBotStockResponse.state == ResponseState.success) {
-        BotStockResultScreen.open(
-            context: context,
-            arguments: const Pair('Trade Canceled',
-                'The trade has been cancelled and your investment amount has been returned to your account'));
-      } else if (state.cancelBotStockResponse.state == ResponseState.error) {
-        CustomInAppNotification.show(
-            context, state.cancelBotStockResponse.message);
-      }
-      if (state.rolloverBotStockResponse.state == ResponseState.success) {
-        BotStockResultScreen.open(
-            context: context,
-            arguments: Pair('Trade Request Received',
-                '${botType.name} ${botActiveOrderModel.ticker} will rollover at ${newExpiryDateOnRollover(botActiveOrderModel.expireDate)}'));
-      } else if (state.rolloverBotStockResponse.state == ResponseState.error) {
-        CustomInAppNotification.show(
-            context, state.rolloverBotStockResponse.message);
-      }
+      return null;
     }
   }
 

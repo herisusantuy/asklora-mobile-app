@@ -23,6 +23,8 @@ class BotActiveOrderModel {
   final double currentPrice;
   @JsonKey(name: 'bot_apps_name')
   final String botAppsName;
+  @JsonKey(name: 'is_dummy')
+  final bool isDummy;
 
   const BotActiveOrderModel(
       this.pk,
@@ -34,6 +36,7 @@ class BotActiveOrderModel {
       this.status,
       this.currentPnlRet,
       this.currentPrice,
+      this.isDummy,
       {this.botAppsName = 'Pull Up'});
 
   factory BotActiveOrderModel.fromJson(Map<String, dynamic> json) =>

@@ -162,8 +162,6 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         label: 'CONFIRM',
                         onTap: () => context.read<BotStockBloc>().add(
                             BotCreateOrder(
-                                estimatedEndDate:
-                                    botDetailModel.estimatedExpiredDate,
                                 botRecommendationModel:
                                     botTradeSummaryModel.botRecommendationModel,
                                 tradeBotStockAmount:

@@ -29,38 +29,24 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
 
   _onFetchBotRecommendation(
       FetchBotRecommendation event, Emitter<BotStockState> emit) async {
-    try {
-      emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
-      var data = await _botStockRepository.fetchBotRecommendation();
-      emit(state.copyWith(botRecommendationResponse: data));
-    } catch (e) {
-      emit(state.copyWith(botRecommendationResponse: BaseResponse.error()));
-    }
+    emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
+    var data = await _botStockRepository.fetchBotRecommendation();
+    emit(state.copyWith(botRecommendationResponse: data));
   }
 
   _onFetchFreeBotRecommendation(
       FetchFreeBotRecommendation event, Emitter<BotStockState> emit) async {
-    try {
-      emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
-      emit(state.copyWith(
-          botRecommendationResponse:
-              await _botStockRepository.fetchFreeBotRecommendation()));
-    } catch (e) {
-      emit(state.copyWith(botRecommendationResponse: BaseResponse.error()));
-    }
+    emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
+    var data = await _botStockRepository.fetchFreeBotRecommendation();
+    emit(state.copyWith(botRecommendationResponse: data));
   }
 
   _onBotCreateOrder(BotCreateOrder event, Emitter<BotStockState> emit) async {
-    try {
-      emit(state.copyWith(botCreateOrderResponse: BaseResponse.loading()));
-      emit(state.copyWith(
-          botCreateOrderResponse: await _botStockRepository.createOrder(
-              estimatedEndDate: event.estimatedEndDate,
-              botRecommendationModel: event.botRecommendationModel,
-              tradeBotStockAmount: event.tradeBotStockAmount)));
-    } catch (e) {
-      emit(state.copyWith(botCreateOrderResponse: BaseResponse.error()));
-    }
+    emit(state.copyWith(botCreateOrderResponse: BaseResponse.loading()));
+    var data = await _botStockRepository.createOrder(
+        botRecommendationModel: event.botRecommendationModel,
+        tradeBotStockAmount: event.tradeBotStockAmount);
+    emit(state.copyWith(botCreateOrderResponse: data));
   }
 
   _onFaqActiveIndexChanged(

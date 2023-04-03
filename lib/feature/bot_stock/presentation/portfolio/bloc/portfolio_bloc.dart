@@ -36,7 +36,8 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   onFetchBotActiveOrders(
       FetchActiveOrders event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(botActiveOrderResponse: BaseResponse.loading()));
-    var data = await _botStockRepository.activeOrders();
+    var data = await _botStockRepository.activeOrders(
+        botStockFilter: event.botStockFilter);
     emit(state.copyWith(botActiveOrderResponse: data));
   }
 
@@ -48,13 +49,9 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   }
 
   _onFetchPortfolio(FetchPortfolio event, Emitter<PortfolioState> emit) async {
-    try {
-      emit(state.copyWith(portfolioResponse: BaseResponse.loading()));
-      var data = await _portfolioRepository.fetchPortfolio();
-      emit(state.copyWith(portfolioResponse: data));
-    } catch (e) {
-      emit(state.copyWith(portfolioResponse: BaseResponse.error()));
-    }
+    emit(state.copyWith(portfolioResponse: BaseResponse.loading()));
+    var data = await _portfolioRepository.fetchPortfolio();
+    emit(state.copyWith(portfolioResponse: data));
   }
 
   _onBotStockFilterChanged(
@@ -69,16 +66,14 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
   _onEndBotStock(EndBotStock event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(endBotStockResponse: BaseResponse.loading()));
-    emit(state.copyWith(
-        endBotStockResponse:
-            await _botStockRepository.terminateOrder(event.orderId)));
+    var data = await _botStockRepository.terminateOrder(event.orderId);
+    emit(state.copyWith(endBotStockResponse: data));
   }
 
   _onCancelBotStock(CancelBotStock event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(cancelBotStockResponse: BaseResponse.loading()));
-    emit(state.copyWith(
-        cancelBotStockResponse:
-            await _botStockRepository.cancelOrder(event.orderId)));
+    var data = await _botStockRepository.cancelOrder(event.orderId);
+    emit(state.copyWith(cancelBotStockResponse: data));
   }
 
   _onRolloverBotStock(

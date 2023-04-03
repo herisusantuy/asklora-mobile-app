@@ -18,6 +18,7 @@ BotCreateOrderRequest _$BotCreateOrderRequestFromJson(
       margin: json['margin'] as int? ?? 1,
       orderType: json['order_type'] as String? ?? 'POOL',
       isAggregate: json['is_aggregate'] as bool? ?? false,
+      isDummy: json['is_dummy'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$BotCreateOrderRequestToJson(
@@ -32,4 +33,5 @@ Map<String, dynamic> _$BotCreateOrderRequestToJson(
       'margin': instance.margin,
       'order_type': instance.orderType,
       'is_aggregate': instance.isAggregate,
+      'is_dummy': instance.isDummy,
     };

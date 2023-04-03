@@ -18,7 +18,7 @@ class BotPortfolioCard extends StatelessWidget {
     final BotType botType =
         BotType.findByString(botActiveOrderModel.botAppsName);
     final Pair<bool, String> expiredDayLeft = expiredDaysLeft(
-        DateTime.now(), DateTime.now().add(const Duration(days: 5)));
+        DateTime.now(), DateTime.parse(botActiveOrderModel.expireDate));
     return GestureDetector(
       onTap: () => BotPortfolioDetailScreen.open(
           context: context, botActiveOrderModel: botActiveOrderModel),
@@ -104,31 +104,31 @@ class BotPortfolioCard extends StatelessWidget {
               ],
             ),
           ),
-          // if (botActiveOrderModel.freeBot)
-          //   Container(
-          //     decoration: BoxDecoration(
-          //         color: AskLoraColors.primaryMagenta,
-          //         borderRadius: BorderRadius.circular(11)),
-          //     margin: const EdgeInsets.only(left: 10),
-          //     padding: const EdgeInsets.symmetric(horizontal: 8),
-          //     height: 20,
-          //     child: Row(
-          //       mainAxisSize: MainAxisSize.min,
-          //       children: [
-          //         const Icon(
-          //           Icons.card_giftcard_rounded,
-          //           size: 14,
-          //           color: AskLoraColors.white,
-          //         ),
-          //         const SizedBox(
-          //           width: 5,
-          //         ),
-          //         CustomTextNew('FREE',
-          //             style: AskLoraTextStyles.subtitleAllCap1
-          //                 .copyWith(color: AskLoraColors.white))
-          //       ],
-          //     ),
-          //   )
+          if (botActiveOrderModel.isDummy)
+            Container(
+              decoration: BoxDecoration(
+                  color: AskLoraColors.primaryMagenta,
+                  borderRadius: BorderRadius.circular(11)),
+              margin: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              height: 20,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.card_giftcard_rounded,
+                    size: 14,
+                    color: AskLoraColors.white,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  CustomTextNew('FREE',
+                      style: AskLoraTextStyles.subtitleAllCap1
+                          .copyWith(color: AskLoraColors.white))
+                ],
+              ),
+            )
         ],
       ),
     );

@@ -9,7 +9,6 @@ import '../../../core/utils/extensions.dart';
 import '../../../core/utils/feature_flags.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
-import '../../../mock/mock_data.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
 import '../domain/bot_detail_model.dart';
@@ -117,23 +116,18 @@ class BotStockRepository {
   }
 
   Future<bool> removeInvestmentStyleState() async {
-    _sharedPreference.deleteData('investment_style_state');
+    await _sharedPreference.deleteData(sfKeyInvestmentStyleState);
     return true;
   }
 
-  Future<BaseResponse<List<BotActiveOrderModel>>> activeOrders() async {
-    if (FeatureFlags.isDemoEnable) {
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      ///MOCK
-      // var data = await MockData().fetchBotPortfolioResponse();
-      // return BaseResponse.complete(data.portfolioBots);
-      return BaseResponse.complete([]);
-    } else {
-      ///REAL
+  Future<BaseResponse<List<BotActiveOrderModel>>> activeOrders(
+      {BotStockFilter? botStockFilter}) async {
+    try {
       var response = await _botStockApiClient.activeOrder();
       return BaseResponse.complete(List.from(response.data
           .map((element) => BotActiveOrderModel.fromJson(element))));
+    } catch (e) {
+      return BaseResponse.error();
     }
   }
 
@@ -144,40 +138,28 @@ class BotStockRepository {
       return BaseResponse.complete(
           BotActiveOrderDetailModel.fromJson(response.data));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }
 
   Future<BaseResponse<BotCreateOrderResponse>> createOrder(
       {required BotRecommendationModel botRecommendationModel,
-      required double tradeBotStockAmount,
-      required String estimatedEndDate}) async {
-    if (FeatureFlags.isDemoEnable) {
-      ///MOCK
-      await Future.delayed(const Duration(milliseconds: 500));
-      var data = await MockData().createOrder(
-          estimatedEndDate: estimatedEndDate,
-          botRecommendationModel: botRecommendationModel,
-          tradeBotStockAmount: tradeBotStockAmount);
+      required double tradeBotStockAmount}) async {
+    try {
+      var response = await _botStockApiClient.createOrder(BotCreateOrderRequest(
+          ticker: botRecommendationModel.ticker,
+          botId: botRecommendationModel.botId,
+          spotDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+          investmentAmount: tradeBotStockAmount,
+          price: checkDouble(
+            botRecommendationModel.latestPrice,
+          ),
+          isDummy: botRecommendationModel.freeBot));
       await removeInvestmentStyleState();
-      return data;
-    } else {
-      ///REAL
-      try {
-        var response = await _botStockApiClient.createOrder(
-            BotCreateOrderRequest(
-                ticker: botRecommendationModel.ticker,
-                botId: botRecommendationModel.botId,
-                spotDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
-                investmentAmount: tradeBotStockAmount,
-                price: checkDouble(botRecommendationModel.latestPrice)));
-        await removeInvestmentStyleState();
-        return BaseResponse.complete(
-            BotCreateOrderResponse.fromJson(response.data));
-      } catch (e) {
-        return BaseResponse.error();
-      }
+      return BaseResponse.complete(
+          BotCreateOrderResponse.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error();
     }
   }
 
