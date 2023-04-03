@@ -7,6 +7,7 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/utils.dart';
+import '../../../generated/l10n.dart';
 
 class CustomerServiceScreen extends StatelessWidget {
   const CustomerServiceScreen({super.key});
@@ -16,7 +17,7 @@ class CustomerServiceScreen extends StatelessWidget {
     return CustomScaffold(
         onTapBack: () => Navigator.pop(context),
         body: CustomStretchedLayout(
-            header: const CustomHeader(title: 'Customer Service'),
+            header: CustomHeader(title: S.of(context).customerService),
             content: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
@@ -24,10 +25,13 @@ class CustomerServiceScreen extends StatelessWidget {
                   GestureDetector(
                       onTap: () => openUrl('mailto:loracares@asklora.ai',
                           mode: LaunchMode.externalApplication),
-                      child:
-                          text(title: 'Email', value: 'loracares@asklora.ai')),
+                      child: text(
+                          title: S.of(context).email,
+                          value: 'loracares@asklora.ai')),
                   const SizedBox(height: 22),
-                  text(title: 'Office Hours', value: '09:00-18:00 (HKT)'),
+                  text(
+                      title: S.of(context).officeHours,
+                      value: '09:00-18:00 (HKT)'),
                 ],
               ),
             )));

@@ -77,10 +77,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invest with AI strategy, automated"),
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
+        "customerService":
+            MessageLookupByLibrary.simpleMessage("Customer Service"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "officeHours": MessageLookupByLibrary.simpleMessage("Office Hours"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(

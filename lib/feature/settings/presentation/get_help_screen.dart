@@ -18,7 +18,7 @@ class GetHelpScreen extends StatelessWidget {
     return CustomScaffold(
         onTapBack: () => Navigator.pop(context),
         body: CustomStretchedLayout(
-            header: CustomHeader(title: S.of(context).buttonNext),
+            header: CustomHeader(title: S.of(context).getHelp),
             content: Column(
               children: [
                 MenuButtonWidget(
@@ -26,7 +26,7 @@ class GetHelpScreen extends StatelessWidget {
                     onTap: () => openUrl(askloraFaq,
                         mode: LaunchMode.externalApplication)),
                 MenuButtonWidget(
-                    title: 'Customer Service',
+                    title: S.of(context).customerService,
                     onTap: () => CustomerServiceScreen.open(context)),
               ],
             )));

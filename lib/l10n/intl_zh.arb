@@ -17,5 +17,9 @@
       "tooltip_bot_details_est_max_profit": "Bot將出售以獲取最大利潤的股票價位。",
       "tooltip_bot_details_est_max_loss": "Bot將出售以限制損失的最低股票價位。",
       "tooltip_bot_details_est_take_profit": "Plank Bot將出售以獲取利潤的預設最高股票價位",
-      "tooltip_bot_details_est_stop_loss": "Plank Bot將出售以限制過分損失的預設最低股票價位"
+      "tooltip_bot_details_est_stop_loss": "Plank Bot將出售以限制過分損失的預設最低股票價位",
+      "getHelp" : "獲得幫助",
+      "customerService": "客戶服務",
+      "email": "電郵",
+      "officeHours" : "辦公時間"
 }
