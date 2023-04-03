@@ -155,10 +155,13 @@ class MockPpiResponseRepository extends _i1.Mock
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
   @override
-  _i7.Future<_i3.SnapShot?> getUserSnapShotFromLocal() => (super.noSuchMethod(
+  _i7.Future<_i3.SnapShot?> getUserSnapShotFromLocal(
+          {bool? forceToFetch = false}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getUserSnapShotFromLocal,
           [],
+          {#forceToFetch: forceToFetch},
         ),
         returnValue: _i7.Future<_i3.SnapShot?>.value(),
       ) as _i7.Future<_i3.SnapShot?>);
