@@ -56,7 +56,7 @@ class PpiResponseRepository {
   Future<void> saveUserSnapShotToLocal(SnapShot snapshot) async {
     await _sharedPreference.writeData(sfKeyPpiAccountId, snapshot.accountId);
     await _sharedPreference.writeIntData(sfKeyPpiUserId, snapshot.id);
-    await _sharedPreference.writeData(sfKeyPpiUsername, snapshot.name);
+    await _sharedPreference.writeData(sfKeyPpiName, snapshot.name);
     await _sharedPreference.writeData(sfKeyPpiSnapshot, jsonEncode(snapshot));
   }
 
