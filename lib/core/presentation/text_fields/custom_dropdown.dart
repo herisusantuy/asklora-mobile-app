@@ -64,7 +64,9 @@ class _CustomDropdownState extends State<CustomDropdown> {
             (element) => DropdownMenuItem<String>(
               key: Key(element),
               value: element,
+              alignment: Alignment.centerLeft,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomTextNew(
                     element,

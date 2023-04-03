@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../styles/asklora_colors.dart';
+import '../styles/asklora_text_styles.dart';
+import 'custom_text_new.dart';
 import 'text_fields/style/text_field_style.dart';
 
 class ClearableTextFormField extends FormField<String> {
@@ -22,6 +25,7 @@ class ClearableTextFormField extends FormField<String> {
   final InputBorder? focusedBorder;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final Icon resetIcon;
+  final Widget? prefix;
 
   ClearableTextFormField(
       {required this.labelText,
@@ -41,7 +45,11 @@ class ClearableTextFormField extends FormField<String> {
       this.disabledBorder,
       this.focusedBorder,
       this.controller,
-      this.resetIcon = const Icon(Icons.cancel, size: 20),
+      this.resetIcon = const Icon(
+        Icons.cancel,
+        size: 20,
+      ),
+      this.prefix,
       Key? key})
       : super(
           key: key,
@@ -52,37 +60,52 @@ class ClearableTextFormField extends FormField<String> {
 
             return Focus(
               onFocusChange: (hasFocus) => state.setHasFocus(hasFocus),
-              child: TextField(
-                controller: state._effectiveController,
-                onChanged: (value) {
-                  field.didChange(value);
-                  onChanged(value);
-                },
-                obscureText: obscureText,
-                inputFormatters: textInputFormatterList,
-                maxLength: maxLength,
-                decoration: TextFieldStyle.inputDecoration.copyWith(
-                  floatingLabelBehavior: floatingLabelBehavior,
-                  labelText: labelText,
-                  counterText: '',
-                  hintText: hintText,
-                  errorText: errorText.isEmpty ? null : errorText,
-                  suffixIcon:
-                      ((field.value?.length ?? -1) > 0 && state.hasFocus)
-                          ? IconButton(
-                              icon: resetIcon,
-                              onPressed: () {
-                                state.clear();
-                                onChanged('');
-                                if (onClear != null) {
-                                  onClear();
-                                }
-                              },
-                              color: Theme.of(state.context).hintColor,
-                            )
-                          : null,
-                ),
-                keyboardType: textInputType,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextField(
+                    controller: state._effectiveController,
+                    onChanged: (value) {
+                      field.didChange(value);
+                      onChanged(value);
+                    },
+                    obscureText: obscureText,
+                    inputFormatters: textInputFormatterList,
+                    maxLength: maxLength,
+                    style: AskLoraTextStyles.body1,
+                    decoration: TextFieldStyle.inputDecoration.copyWith(
+                      floatingLabelBehavior: floatingLabelBehavior,
+                      labelText: labelText,
+                      counterText: '',
+                      hintText: hintText,
+                      prefixIcon: prefix,
+                      suffixIcon:
+                          ((field.value?.length ?? -1) > 0 && state.hasFocus)
+                              ? IconButton(
+                                  icon: resetIcon,
+                                  onPressed: () {
+                                    state.clear();
+                                    onChanged('');
+                                    if (onClear != null) {
+                                      onClear();
+                                    }
+                                  },
+                                  color: Theme.of(state.context).hintColor,
+                                )
+                              : null,
+                    ),
+                    keyboardType: textInputType,
+                  ),
+                  if (errorText.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 2, top: 5),
+                      child: CustomTextNew(
+                        errorText,
+                        style: AskLoraTextStyles.body3
+                            .copyWith(color: AskLoraColors.primaryMagenta),
+                      ),
+                    )
+                ],
               ),
             );
           },

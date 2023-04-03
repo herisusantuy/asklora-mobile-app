@@ -7,10 +7,10 @@ class DotWidget extends StatefulWidget {
   const DotWidget() : super(key: const Key('ad'));
 
   @override
-  _DotWidgetState createState() => _DotWidgetState();
+  DotWidgetState createState() => DotWidgetState();
 }
 
-class _DotWidgetState extends State<DotWidget>
+class DotWidgetState extends State<DotWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 

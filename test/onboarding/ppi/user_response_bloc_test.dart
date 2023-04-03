@@ -1,5 +1,6 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/triplet.dart';
+import 'package:asklora_mobile_app/core/utils/storage/cache/json_cache_shared_preferences.dart';
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/feature/onboarding/ppi/bloc/response/user_response_bloc.dart';
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart';
@@ -13,12 +14,14 @@ import 'package:mockito/mockito.dart';
 
 import 'user_response_bloc_test.mocks.dart';
 
-@GenerateMocks([PpiResponseRepository, SharedPreference])
+@GenerateMocks(
+    [PpiResponseRepository, SharedPreference, JsonCacheSharedPreferences])
 void main() async {
   group('User Response Bloc Tests', () {
     late PpiResponseRepository ppiResponseRepository;
     late UserResponseBloc userResponseBloc;
     late SharedPreference sharedPreference;
+    late JsonCacheSharedPreferences jsonCacheSharedPreferences;
 
     PpiSelectionRequest ppiUserResponseRequest =
         PpiSelectionRequest(questionId: 'quid0', answer: 'AAAA', userId: 101);
@@ -29,17 +32,19 @@ void main() async {
     setUpAll(() async {
       ppiResponseRepository = MockPpiResponseRepository();
       sharedPreference = MockSharedPreference();
+      jsonCacheSharedPreferences = MockJsonCacheSharedPreferences();
     });
 
     setUp(() async {
       userResponseBloc = UserResponseBloc(
           ppiResponseRepository: ppiResponseRepository,
-          sharedPreference: sharedPreference);
+          sharedPreference: sharedPreference,
+          jsonCacheSharedPreferences: jsonCacheSharedPreferences);
     });
 
     test('User Response Bloc init state is should be unknown', () {
       expect(userResponseBloc.state,
-          UserResponseState(responseState: ResponseState.unknown));
+          const UserResponseState(responseState: ResponseState.unknown));
     });
 
     blocTest<UserResponseBloc, UserResponseState>(
@@ -52,7 +57,7 @@ void main() async {
         },
         act: (bloc) => bloc.add(SendResponse(ppiUserResponseRequest)),
         expect: () => {
-              UserResponseState(
+              const UserResponseState(
                 responseState: ResponseState.loading,
               ),
               UserResponseState(

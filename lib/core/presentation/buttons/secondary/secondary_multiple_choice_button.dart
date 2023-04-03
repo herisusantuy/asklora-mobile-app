@@ -107,9 +107,9 @@ class SecondaryMultipleChoiceButton extends StatelessWidget {
   Pair<double, double> get _getSizedBoxSize {
     switch (buttonSecondarySize) {
       case ButtonSecondarySize.small:
-        return Pair(200, 40);
+        return const Pair(200, 40);
       case ButtonSecondarySize.big:
-        return Pair(double.infinity, 50);
+        return const Pair(double.infinity, 50);
     }
   }
 }

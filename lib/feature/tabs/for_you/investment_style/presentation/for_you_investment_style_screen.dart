@@ -16,6 +16,7 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../onboarding/ppi/bloc/response/user_response_bloc.dart';
@@ -49,7 +50,8 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
         BlocProvider(
             create: (_) => UserResponseBloc(
                 sharedPreference: SharedPreference(),
-                ppiResponseRepository: PpiResponseRepository())),
+                ppiResponseRepository: PpiResponseRepository(),
+                jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -139,8 +141,12 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
   }
 
   void _investmentStyleQuestionListener(
-          BuildContext context, ForYouQuestionState state) =>
-      CustomLoadingOverlay.of(context).show(state.response.state);
+      BuildContext context, ForYouQuestionState state) {
+    CustomLoadingOverlay.of(context).show(state.response.state);
+    if (state.response.state == ResponseState.success) {
+      context.read<UserResponseBloc>().add(InitiateUserResponse());
+    }
+  }
 
   void _userResponseListener(BuildContext context, UserResponseState state) {
     CustomLoadingOverlay.of(context).show(state.responseState);

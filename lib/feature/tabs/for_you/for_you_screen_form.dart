@@ -113,7 +113,7 @@ class ForYouScreenForm extends StatelessWidget {
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
               primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
               onPrimaryButtonTap: () => PpiScreen.open(context,
-                  arguments: Pair(QuestionPageType.investmentStyle,
+                  arguments: const Pair(QuestionPageType.investmentStyle,
                       QuestionPageStep.investmentStyle)));
         case UserJourney.kyc:
           return LoraPopUpMessageModel(

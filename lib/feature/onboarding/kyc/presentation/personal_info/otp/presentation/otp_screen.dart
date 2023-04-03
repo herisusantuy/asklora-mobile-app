@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../../core/domain/base_response.dart';
 import '../../../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../../../core/presentation/custom_in_app_notification.dart';
-import '../../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../../../core/presentation/text_fields/master_text_field.dart';
@@ -44,11 +43,23 @@ class OtpScreen extends StatelessWidget {
             context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
         content: Column(
           children: [
-            CustomTextNew(
-              'We’ve sent you a code via SMS to verify your phone number ${_getPhoneNumber(context)}. Please enter the OTP code below.',
+            Text.rich(
               key: const Key('sub_title'),
-              style: AskLoraTextStyles.body1
-                  .copyWith(color: AskLoraColors.charcoal),
+              TextSpan(children: [
+                TextSpan(
+                  text:
+                      'We\'ve sent you a code via SMS to verify your phone number ',
+                  style: AskLoraTextStyles.body1
+                      .copyWith(color: AskLoraColors.charcoal),
+                ),
+                TextSpan(
+                    text: '(${_getPhoneNumber(context)}).',
+                    style: AskLoraTextStyles.h6),
+                TextSpan(
+                    text: ' Please enter the OTP code below.',
+                    style: AskLoraTextStyles.body1
+                        .copyWith(color: AskLoraColors.charcoal)),
+              ]),
             ),
             const SizedBox(
               height: 36,
@@ -83,8 +94,7 @@ class OtpScreen extends StatelessWidget {
 
   Widget _otpInput(BuildContext context) {
     return BlocBuilder<OtpBloc, OtpState>(
-        buildWhen: (previous, current) =>
-            previous.response.state != current.response.state,
+        buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
           return MasterTextField(
               key: const Key('otp_input'),
@@ -93,20 +103,23 @@ class OtpScreen extends StatelessWidget {
               textInputType: TextInputType.number,
               hintText: '000000 (6 digit)',
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              errorText: state.response.state == ResponseState.error
-                  ? 'The OTP is incorrect'
-                  : '',
+              errorText: state.otpError,
               textInputFormatterList: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(6)
               ],
               onChanged: (otp) {
+                context.read<OtpBloc>().add(const Reset());
                 if (otp.length == 6) {
                   context.read<OtpBloc>().add(OtpSubmitted(otp));
                 }
               },
               onFieldSubmitted: (otp) {
-                context.read<OtpBloc>().add(OtpSubmitted(otp));
+                if (otp.length == 6) {
+                  context.read<OtpBloc>().add(OtpSubmitted(otp));
+                } else {
+                  context.read<OtpBloc>().add(const InValidOtpEvent());
+                }
               });
         });
   }

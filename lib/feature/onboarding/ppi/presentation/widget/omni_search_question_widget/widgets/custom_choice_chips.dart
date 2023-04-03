@@ -61,11 +61,17 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CustomTextNew(widget.label,
+            Flexible(
+              child: CustomTextNew(
+                widget.label,
                 style: AskLoraTextStyles.subtitle4.copyWith(
                     color: widget.active
                         ? AskLoraColors.charcoal
-                        : AskLoraColors.gray)),
+                        : AskLoraColors.gray),
+                maxLines: 3,
+                ellipsis: true,
+              ),
+            ),
             if (widget.enableClosedButton)
               Padding(
                 padding: const EdgeInsets.only(left: 8.4),
@@ -79,7 +85,7 @@ class _CustomChoiceChipsState extends State<CustomChoiceChips> {
                     size: 12,
                   ),
                 ),
-              )
+              ),
           ],
         ),
       ),

@@ -37,12 +37,12 @@ class CurrencyChanged extends PortfolioEvent {
 }
 
 class RolloverBotStock extends PortfolioEvent {
-  final String botId;
+  final String orderId;
 
-  const RolloverBotStock(this.botId);
+  const RolloverBotStock(this.orderId);
 
   @override
-  List<Object> get props => [botId];
+  List<Object> get props => [orderId];
 }
 
 class EndBotStock extends PortfolioEvent {

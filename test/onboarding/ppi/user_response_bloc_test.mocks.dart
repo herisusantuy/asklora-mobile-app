@@ -6,6 +6,8 @@
 import 'dart:async' as _i7;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i4;
+import 'package:asklora_mobile_app/core/utils/storage/cache/json_cache_shared_preferences.dart'
+    as _i10;
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
     as _i9;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
@@ -143,6 +145,27 @@ class MockPpiResponseRepository extends _i1.Mock
         )),
       ) as _i7.Future<_i4.BaseResponse<_i3.SnapShot>>);
   @override
+  _i7.Future<void> saveUserSnapShotToLocal(_i3.SnapShot? snapshot) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveUserSnapShotToLocal,
+          [snapshot],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<_i3.SnapShot?> getUserSnapShotFromLocal(
+          {bool? forceToFetch = false}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserSnapShotFromLocal,
+          [],
+          {#forceToFetch: forceToFetch},
+        ),
+        returnValue: _i7.Future<_i3.SnapShot?>.value(),
+      ) as _i7.Future<_i3.SnapShot?>);
+  @override
   _i7.Future<_i4.BaseResponse<_i3.SnapShot>> getUserSnapshotByAskloraId(
           int? askloraId) =>
       (super.noSuchMethod(
@@ -272,4 +295,70 @@ class MockSharedPreference extends _i1.Mock implements _i9.SharedPreference {
         ),
         returnValue: _i7.Future<int?>.value(),
       ) as _i7.Future<int?>);
+  @override
+  _i7.Future<bool> containsKey(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #containsKey,
+          [key],
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
+}
+
+/// A class which mocks [JsonCacheSharedPreferences].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockJsonCacheSharedPreferences extends _i1.Mock
+    implements _i10.JsonCacheSharedPreferences {
+  MockJsonCacheSharedPreferences() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i7.Future<void> clear() => (super.noSuchMethod(
+        Invocation.method(
+          #clear,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> remove(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #remove,
+          [key],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  _i7.Future<void> refresh(
+    String? key,
+    dynamic value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #refresh,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+  @override
+  dynamic value(String? key) => super.noSuchMethod(Invocation.method(
+        #value,
+        [key],
+      ));
+  @override
+  _i7.Future<bool> contains(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #contains,
+          [key],
+        ),
+        returnValue: _i7.Future<bool>.value(false),
+      ) as _i7.Future<bool>);
 }

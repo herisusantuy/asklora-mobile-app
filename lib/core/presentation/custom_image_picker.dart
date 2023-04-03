@@ -20,6 +20,7 @@ class CustomImagePicker extends StatelessWidget {
   final String? additionalText;
   final Function(List<PlatformFile>)? onImagePicked;
   final Function(PlatformFile)? onImageDeleted;
+  final bool allowMultiple;
   final FilePickerRepository filePickerRepository = FilePickerRepository();
 
   CustomImagePicker(
@@ -31,6 +32,7 @@ class CustomImagePicker extends StatelessWidget {
       this.onImagePicked,
       this.onImageDeleted,
       this.disabled = false,
+      this.allowMultiple = true,
       this.disabledPick = false,
       Key? key})
       : super(key: key);
@@ -79,6 +81,12 @@ class CustomImagePicker extends StatelessWidget {
                         width: size,
                         height: size,
                         decoration: BoxDecoration(
+                            boxShadow: const [
+                              BoxShadow(
+                                color: AskLoraColors.gray,
+                                blurRadius: 5.0,
+                              )
+                            ],
                             borderRadius: BorderRadius.circular(5),
                             color: const Color(0xffc2d1d9),
                             image: DecorationImage(
@@ -96,7 +104,14 @@ class CustomImagePicker extends StatelessWidget {
                                   },
                                   child: const Icon(
                                     Icons.close,
-                                    color: Colors.white,
+                                    color: AskLoraColors.darkGray,
+                                    shadows: [
+                                      Shadow(
+                                        color: AskLoraColors.gray,
+                                        blurRadius: 5.0,
+                                        offset: Offset(1, 4),
+                                      )
+                                    ],
                                   ),
                                 )),
                       ))
@@ -111,7 +126,7 @@ class CustomImagePicker extends StatelessWidget {
 
   Widget _emptyImage({double width = double.infinity, double? height}) =>
       DottedBorder(
-          borderType: BorderType.RRect,
+          borderType: BorderType.rRect,
           radius: const Radius.circular(5),
           color: Colors.grey,
           dashPattern: const [4, 4],
@@ -126,8 +141,16 @@ class CustomImagePicker extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     if (onImagePicked != null && !disabled && !disabledPick) {
-                      onImagePicked!(await filePickerRepository.pickFiles(
-                          fileType: FileType.image));
+                      if (allowMultiple) {
+                        onImagePicked!(await filePickerRepository.pickFiles(
+                            fileType: FileType.image));
+                      } else {
+                        final file = await filePickerRepository.pickFile(
+                            fileType: FileType.image);
+                        if (file != null) {
+                          onImagePicked!([file]);
+                        }
+                      }
                     }
                   },
                   child: getSvgIcon('icon_add_files',

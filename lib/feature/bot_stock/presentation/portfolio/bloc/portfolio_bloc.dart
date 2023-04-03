@@ -79,7 +79,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   _onRolloverBotStock(
       RolloverBotStock event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(rolloverBotStockResponse: BaseResponse.loading()));
-    var data = await _botStockRepository.rolloverOrder(event.botId);
+    var data = await _botStockRepository.rolloverOrder(event.orderId);
     emit(state.copyWith(rolloverBotStockResponse: data));
   }
 }

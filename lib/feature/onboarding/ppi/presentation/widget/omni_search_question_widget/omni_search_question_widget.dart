@@ -180,47 +180,61 @@ class OmniSearchQuestionWidget extends StatelessWidget {
         },
         buildWhen: (previous, current) => previous.keywords != current.keywords,
         builder: (context, state) {
-          return AutoResizedTextField(
-            key: const Key('name_input'),
-            controller: keywordController,
-            onFieldSubmitted: (value) {
-              if (value.isNotEmpty) {
-                context
-                    .read<OmniSearchQuestionWidgetBloc>()
-                    .add(KeywordAdded(value));
-              }
-            },
-            hintText: 'ENTER KEYWORDS',
-            textInputType: TextInputType.text,
-            onChanged: (value) => context
-                .read<OmniSearchQuestionWidgetBloc>()
-                .add(KeywordChanged(value)),
-            suffixIcon: BlocBuilder<OmniSearchQuestionWidgetBloc,
-                    OmniSearchQuestionWidgetState>(
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Expanded(
+                child: AutoResizedTextField(
+                  key: const Key('name_input'),
+                  controller: keywordController,
+                  onFieldSubmitted: (value) {
+                    if (value.isNotEmpty) {
+                      context
+                          .read<OmniSearchQuestionWidgetBloc>()
+                          .add(KeywordAdded(value));
+                    }
+                  },
+                  hintText: 'ENTER KEYWORDS',
+                  textInputType: TextInputType.text,
+                  onChanged: (value) => context
+                      .read<OmniSearchQuestionWidgetBloc>()
+                      .add(KeywordChanged(value)),
+                ),
+              ),
+              BlocBuilder<OmniSearchQuestionWidgetBloc,
+                  OmniSearchQuestionWidgetState>(
                 buildWhen: (previous, current) =>
                     previous.keyword != current.keyword,
-                builder: (context, state) => ElevatedButton(
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      if (state.keyword.isNotEmpty) {
-                        context
-                            .read<OmniSearchQuestionWidgetBloc>()
-                            .add(KeywordAdded(keywordController.text));
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: state.keyword.isEmpty
-                          ? AskLoraColors.gray
-                          : AskLoraColors.charcoal,
-                      foregroundColor: state.keyword.isEmpty
-                          ? AskLoraColors.darkGray
-                          : AskLoraColors.primaryGreen,
-                      shape: const CircleBorder(),
-                    ),
-                    child: const Icon(
-                      Icons.add,
-                      size: 32,
-                    ))),
+                builder: (context, state) => Align(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          if (state.keyword.isNotEmpty) {
+                            context
+                                .read<OmniSearchQuestionWidgetBloc>()
+                                .add(KeywordAdded(keywordController.text));
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: state.keyword.isEmpty
+                              ? AskLoraColors.gray
+                              : AskLoraColors.charcoal,
+                          foregroundColor: state.keyword.isEmpty
+                              ? AskLoraColors.darkGray
+                              : AskLoraColors.primaryGreen,
+                          shape: const CircleBorder(),
+                          fixedSize: const Size(44, 44),
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          size: 32,
+                        ))),
+              )
+            ],
           );
         },
       );

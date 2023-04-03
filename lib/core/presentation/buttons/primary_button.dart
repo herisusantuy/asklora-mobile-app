@@ -170,9 +170,9 @@ class PrimaryButton extends StatelessWidget {
                     : AskLoraTextStyles.button1,
                 60));
       case ButtonPrimarySize.mid:
-        return Pair(200, 40);
+        return const Pair(200, 40);
       case ButtonPrimarySize.big:
-        return Pair(double.infinity, 55);
+        return const Pair(double.infinity, 55);
     }
   }
 

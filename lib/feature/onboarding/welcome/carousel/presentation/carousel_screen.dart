@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/animated_text.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
-import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/rotate_animated_text.dart';
-import '../../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
@@ -15,8 +13,6 @@ import '../../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../ask_name/presentation/ask_name_screen.dart';
 
 part 'widgets/carousel_item.dart';
-
-part 'widgets/foreground_carousel_widget.dart';
 
 class CarouselScreen extends StatelessWidget {
   static const route = '/carousel_screen';

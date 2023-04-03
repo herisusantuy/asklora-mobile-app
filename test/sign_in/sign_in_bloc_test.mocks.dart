@@ -428,6 +428,14 @@ class MockSharedPreference extends _i1.Mock implements _i16.SharedPreference {
         ),
         returnValue: _i9.Future<int?>.value(),
       ) as _i9.Future<int?>);
+  @override
+  _i9.Future<bool> containsKey(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #containsKey,
+          [key],
+        ),
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 }
 
 /// A class which mocks [AccountRepository].
@@ -597,6 +605,27 @@ class MockPpiResponseRepository extends _i1.Mock
           ),
         )),
       ) as _i9.Future<_i3.BaseResponse<_i7.SnapShot>>);
+  @override
+  _i9.Future<void> saveUserSnapShotToLocal(_i7.SnapShot? snapshot) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveUserSnapShotToLocal,
+          [snapshot],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+  @override
+  _i9.Future<_i7.SnapShot?> getUserSnapShotFromLocal(
+          {bool? forceToFetch = false}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserSnapShotFromLocal,
+          [],
+          {#forceToFetch: forceToFetch},
+        ),
+        returnValue: _i9.Future<_i7.SnapShot?>.value(),
+      ) as _i9.Future<_i7.SnapShot?>);
   @override
   _i9.Future<_i3.BaseResponse<_i7.SnapShot>> getUserSnapshotByAskloraId(
           int? askloraId) =>

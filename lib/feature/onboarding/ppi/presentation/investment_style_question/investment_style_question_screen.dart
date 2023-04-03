@@ -131,7 +131,9 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
           onSecondaryButtonTap: () => Navigator.pop(context),
           onPrimaryButtonTap: () {
             context.read<QuestionBloc>().add(const ResetInvestmentStylePage());
-            context.read<UserResponseBloc>().add(const ResetState());
+            context
+                .read<UserResponseBloc>()
+                .add(const ResetState(wholeState: false));
             context.read<NavigationBloc<QuestionPageStep>>().add(
                 const PageChangedRemoveAllRoute(
                     QuestionPageStep.investmentStyle));
@@ -149,7 +151,9 @@ class InvestmentStyleQuestionScreen extends StatelessWidget {
               .add(const ResetState(wholeState: false)),
           onPrimaryButtonTap: () {
             context.read<QuestionBloc>().add(const ResetInvestmentStylePage());
-            context.read<UserResponseBloc>().add(const ResetState());
+            context
+                .read<UserResponseBloc>()
+                .add(const ResetState(wholeState: false));
           },
         );
     }

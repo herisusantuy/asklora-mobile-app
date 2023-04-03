@@ -11,6 +11,13 @@ class PpiSelectionRequest {
     return data;
   }
 
+  static PpiSelectionRequest fromJson(Map<String, dynamic> json, int userId) =>
+      PpiSelectionRequest(
+        questionId: json['question_id'] as String,
+        answer: json['answer'] as String,
+        userId: userId,
+      );
+
   PpiSelectionRequest(
       {required this.userId, required this.questionId, required this.answer});
 

@@ -22,6 +22,7 @@ class CustomLoadingOverlay {
   }
 
   void appear() {
+    dismiss();
     _isShowing = !_isShowing;
     showDialog(
         context: context,

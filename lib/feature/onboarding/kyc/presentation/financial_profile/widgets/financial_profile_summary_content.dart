@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../../core/utils/feature_flags.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
@@ -42,11 +44,22 @@ class FinancialProfileSummaryContent extends StatelessWidget {
                     ? 'Yes'
                     : 'No'
                 : 'Unknown'),
-        ..._getEmploymentDetailsContent(),
+
+        /// TODO: Confirm with James if we want to show the source of wealth and employment or not.
+        /// Disabling the source of wealth and employment as there are few demo with potential investors.
+        if (!FeatureFlags.isDemoEnable)
+          ..._getEmploymentDetailsAndSourceOfWealthSummary(),
         ..._getAffiliatedPerson,
       ],
     );
   }
+
+  List<Widget> _getEmploymentDetailsAndSourceOfWealthSummary() => [
+        ..._getEmploymentDetailsContent(),
+        _spaceHeight,
+        ..._sourceOfWealthSummary,
+        _spaceHeight,
+      ];
 
   Widget get _spaceHeightAffiliated => const SizedBox(
         height: 10,
@@ -181,9 +194,6 @@ class FinancialProfileSummaryContent extends StatelessWidget {
             title:
                 'Why is your country of employment different from your country of residence?',
             subTitle: financialProfileState.detailInformationOfCountry),
-      _spaceHeight,
-      ..._sourceOfWealthSummary,
-      _spaceHeight
     ];
   }
 

@@ -18,7 +18,7 @@ class PrivacyResultFailedScreen extends StatelessWidget {
         ppiResult: PpiResult.failed,
         memojiText: 'I’m afraid you’re not eligible for Asklora yet.',
         additionalMessage:
-            '\n\nIt could be your risk score is too low. If you made a mistake and did not answer the question correctly, please try again.',
+            '\nIt could be that your risk score or age is too low.\n\nIf you made a mistake and did not answer the questions correctly, please try again',
         additionalMessageTextStyle: AskLoraTextStyles.subtitle1,
         bottomPadding: 0,
         bottomButton: ButtonPair(
