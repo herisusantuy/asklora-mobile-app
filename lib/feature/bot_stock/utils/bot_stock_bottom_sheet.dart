@@ -23,8 +23,7 @@ class BotStockBottomSheet {
   static cancelBotStockConfirmation(BuildContext context, String orderId) {
     LoraBottomSheet.show(
       context: context,
-      title:
-      'The investment amount and Bot management fee (HKD1,500) will be returned to your account.',
+      title: S.of(context).botTradeBottomSheetCancelBotStockConfirmationTitle,
       primaryButtonLabel: 'CANCEL TRADE',
       secondaryButtonLabel: 'CANCEL',
       onPrimaryButtonTap: () {
@@ -73,27 +72,26 @@ class BotStockBottomSheet {
     );
   }
 
-  static rolloverBotStockConfirmation(
-      BuildContext context, {required String orderId, required String expireDate}) {
+  static rolloverBotStockConfirmation(BuildContext context,
+      {required String orderId, required String expireDate}) {
     LoraBottomSheet.show(
       context: context,
       title: S.of(context).botTradeBottomSheetRolloverConfirmationTitle,
-      subTitle: S
-          .of(context)
-          .botTradeBottomSheetRolloverConfirmationSubTitle(newExpiryDateOnRollover(expireDate)),
+      subTitle: S.of(context).botTradeBottomSheetRolloverConfirmationSubTitle(
+          newExpiryDateOnRollover(expireDate)),
       primaryButtonLabel: 'EXTEND',
       secondaryButtonLabel: 'CANCEL',
       onPrimaryButtonTap: () {
         Navigator.pop(context);
-        BotStockBottomSheet.rolloverBotStockDisclosure(
-            context, orderId:orderId);
+        BotStockBottomSheet.rolloverBotStockDisclosure(context,
+            orderId: orderId);
       },
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
   }
 
-  static rolloverBotStockDisclosure(
-      BuildContext context, {required String orderId}) {
+  static rolloverBotStockDisclosure(BuildContext context,
+      {required String orderId}) {
     LoraBottomSheet.show(
       context: context,
       title: S.of(context).botTradeBottomSheetRolloverDisclosureTitle,
