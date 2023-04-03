@@ -89,8 +89,6 @@ class PpiResponseRepository {
     }
   }
 
-  Future<Response> linkUser(int userId) async {
-    var response = await _ppiApiRepository.linkUser(userId);
-    return response;
-  }
+  Future<Response> linkUser(int userId) async =>
+      await _ppiApiRepository.linkUser(userId);
 }
