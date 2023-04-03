@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/domain/endpoints.dart';
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
