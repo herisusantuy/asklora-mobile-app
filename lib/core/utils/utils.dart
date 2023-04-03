@@ -16,10 +16,11 @@ Future<PlatformFile> decodeBase64ToPlatformFile(String base64String) async {
   return PlatformFile(name: fileName, size: 0, path: fileImg.path);
 }
 
-Future<void> openUrl(String url) async {
+Future<void> openUrl(String url,
+    {LaunchMode mode = LaunchMode.platformDefault}) async {
   final Uri uri = Uri.parse(url);
   if (await canLaunchUrl(uri)) {
-    await launchUrl(uri);
+    await launchUrl(uri, mode: mode);
   } else {
     throw Exception('Could not launch $url');
   }

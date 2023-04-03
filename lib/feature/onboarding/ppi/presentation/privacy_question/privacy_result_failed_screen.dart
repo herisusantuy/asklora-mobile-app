@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/domain/endpoints.dart';
 import '../../../../../core/domain/pair.dart';
@@ -27,7 +28,8 @@ class PrivacyResultFailedScreen extends StatelessWidget {
             primaryButtonOnClick: () => PpiScreen.openReplace(context,
                 arguments: const Pair(
                     QuestionPageType.privacy, QuestionPageStep.privacy)),
-            secondaryButtonOnClick: () => openUrl(askloraFaq),
+            secondaryButtonOnClick: () =>
+                openUrl(askloraFaq, mode: LaunchMode.externalApplication),
             primaryButtonLabel: 'TRY AGAIN',
             secondaryButtonLabel: 'NEED HELP?'),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_scaffold.dart';
@@ -21,7 +22,8 @@ class CustomerServiceScreen extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                      onTap: () => openUrl('mailto:loracares@asklora.ai'),
+                      onTap: () => openUrl('mailto:loracares@asklora.ai',
+                          mode: LaunchMode.externalApplication),
                       child:
                           text(title: 'Email', value: 'loracares@asklora.ai')),
                   const SizedBox(height: 22),
