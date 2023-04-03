@@ -1,4 +1,4 @@
-file="version.properties"
+file="../version.properties"
 
 while IFS='=' read -r key value
 do
@@ -19,7 +19,7 @@ plutil -replace CFBundleVersion -string $VERSION_CODE ios/Runner/Info.plist
 
 NEW_PATCH=$(( $patch + 1 ))
 
-sed -i "" "/patch=/ s/=.*/=$NEW_PATCH/" version.properties
+sed -i "" "/patch=/ s/=.*/=$NEW_PATCH/" "../version.properties"
 
 #TODO: Open this in CI/CD Pipeline
 #git add version.properties
