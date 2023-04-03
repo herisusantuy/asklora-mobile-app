@@ -56,15 +56,23 @@ class PpiResponseRepository {
   Future<void> saveUserSnapShotToLocal(SnapShot snapshot) async {
     await _sharedPreference.writeData(sfKeyPpiAccountId, snapshot.accountId);
     await _sharedPreference.writeIntData(sfKeyPpiUserId, snapshot.id);
+    await _sharedPreference.writeData(sfKeyPpiName, snapshot.name);
     await _sharedPreference.writeData(sfKeyPpiSnapshot, jsonEncode(snapshot));
   }
 
-  Future<SnapShot?> getUserSnapShotFromLocal() async {
+  Future<SnapShot?> getUserSnapShotFromLocal(
+      {bool forceToFetch = false}) async {
     var data = await _sharedPreference.readData(sfKeyPpiSnapshot);
-    if (data != null) {
-      return SnapShot.fromJson(jsonDecode(data));
+    if (data == null || forceToFetch) {
+      try {
+        var askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+        final response = await getUserSnapshotByAskloraId(askloraId ?? 0);
+        return response.data;
+      } catch (e) {
+        return null;
+      }
     } else {
-      return null;
+      return SnapShot.fromJson(jsonDecode(data));
     }
   }
 
@@ -81,8 +89,6 @@ class PpiResponseRepository {
     }
   }
 
-  Future<Response> linkUser(int userId) async {
-    var response = await _ppiApiRepository.linkUser(userId);
-    return response;
-  }
+  Future<Response> linkUser(int userId) async =>
+      await _ppiApiRepository.linkUser(userId);
 }
