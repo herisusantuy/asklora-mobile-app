@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,6 +10,7 @@ import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
+import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/utils.dart';
@@ -42,14 +44,14 @@ class AboutAskloraScreen extends StatelessWidget {
               _getAppVersion(),
               const SizedBox(height: 48),
               GestureDetector(
-                onTap: () =>
-                    openUrl(askloraSite, mode: LaunchMode.externalApplication),
-                child: CustomExpandedRow(
-                  S.of(context).website,
-                  flex2: 2,
-                  text: askloraSite,
-                ),
-              ),
+                  onTap: () => openUrl(askloraSite,
+                      mode: LaunchMode.externalApplication),
+                  child: CustomExpandedRow(S.of(context).website,
+                      flex2: 2,
+                      text: askloraSite,
+                      rightTextStyle: AskLoraTextStyles.body1.copyWith(
+                        color: AskLoraColors.primaryMagenta,
+                      ))),
               const SizedBox(height: 10),
               const Divider(thickness: 1),
               MenuButtonWidget(
@@ -90,7 +92,7 @@ class AboutAskloraScreen extends StatelessWidget {
 
   Widget get _contactUsButton => Builder(builder: (context) {
         return PrimaryButton(
-            label: S.of(context).contactUs,
+            label: S.of(context).contactUs.toUpperCase(),
             onTap: () =>
                 openUrl(mailToLoraCare, mode: LaunchMode.externalApplication));
       });
