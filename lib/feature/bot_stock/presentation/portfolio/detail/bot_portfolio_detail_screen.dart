@@ -14,7 +14,6 @@ import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_me
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
@@ -63,7 +62,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         create: (_) => PortfolioBloc(
             portfolioRepository: PortfolioRepository(),
             botStockRepository: BotStockRepository())
-          ..add(FetchActiveOrderDetail(orderId: botActiveOrderModel.pk)),
+          ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.pk)),
         child: BlocConsumer<PortfolioBloc, PortfolioState>(
           listenWhen: (previous, current) =>
               previous.botActiveOrderDetailResponse.state !=
@@ -88,7 +87,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                   onSecondaryButtonTap: () => Navigator.pop(context),
                   onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
                       (FetchActiveOrderDetail(
-                          orderId: botActiveOrderModel.pk))),
+                          botOrderId: botActiveOrderModel.pk))),
                 ),
                 showPopUp: state.botActiveOrderDetailResponse.state ==
                     ResponseState.error,
@@ -106,7 +105,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                       portfolioBotDetailModel: botActiveOrderDetailModel,
                     ),
                     bottomButton:
-                        _getBottomButtons(context, botActiveOrderDetailModel)),
+                        _getBottomButton(context, botActiveOrderDetailModel)),
               );
             } else {
               return const SizedBox.shrink();
@@ -117,7 +116,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget? _getBottomButtons(BuildContext context,
+  Widget? _getBottomButton(BuildContext context,
       BotActiveOrderDetailModel botActiveOrderDetailModel) {
     if (UserJourney.compareUserJourney(
         context: context, target: UserJourney.deposit)) {

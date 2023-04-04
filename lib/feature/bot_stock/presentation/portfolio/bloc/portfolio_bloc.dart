@@ -4,6 +4,7 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/currency_enum.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
+import '../../../domain/orders/bot_order_response.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_utils.dart';
 import '../domain/portfolio_response.dart';
@@ -44,7 +45,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   _onFetchActiveOrderDetail(
       FetchActiveOrderDetail event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(botActiveOrderDetailResponse: BaseResponse.loading()));
-    var data = await _botStockRepository.activeOrderDetail(event.orderId);
+    var data = await _botStockRepository.activeOrderDetail(event.botOrderId);
     emit(state.copyWith(botActiveOrderDetailResponse: data));
   }
 
@@ -66,20 +67,20 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
   _onEndBotStock(EndBotStock event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(endBotStockResponse: BaseResponse.loading()));
-    var data = await _botStockRepository.terminateOrder(event.orderId);
+    var data = await _botStockRepository.terminateOrder(event.botOrderId);
     emit(state.copyWith(endBotStockResponse: data));
   }
 
   _onCancelBotStock(CancelBotStock event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(cancelBotStockResponse: BaseResponse.loading()));
-    var data = await _botStockRepository.cancelOrder(event.orderId);
+    var data = await _botStockRepository.cancelOrder(event.botOrderId);
     emit(state.copyWith(cancelBotStockResponse: data));
   }
 
   _onRolloverBotStock(
       RolloverBotStock event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(rolloverBotStockResponse: BaseResponse.loading()));
-    var data = await _botStockRepository.rolloverOrder(event.orderId);
+    var data = await _botStockRepository.rolloverOrder(event.botOrderId);
     emit(state.copyWith(rolloverBotStockResponse: data));
   }
 }

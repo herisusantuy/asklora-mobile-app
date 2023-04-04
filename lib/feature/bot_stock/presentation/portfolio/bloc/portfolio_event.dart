@@ -22,9 +22,9 @@ class FetchActiveOrders extends PortfolioEvent {
 }
 
 class FetchActiveOrderDetail extends PortfolioEvent {
-  final String orderId;
+  final String botOrderId;
 
-  const FetchActiveOrderDetail({required this.orderId});
+  const FetchActiveOrderDetail({required this.botOrderId});
 }
 
 class CurrencyChanged extends PortfolioEvent {
@@ -37,28 +37,28 @@ class CurrencyChanged extends PortfolioEvent {
 }
 
 class RolloverBotStock extends PortfolioEvent {
-  final String orderId;
+  final String botOrderId;
 
-  const RolloverBotStock(this.orderId);
+  const RolloverBotStock(this.botOrderId);
 
   @override
-  List<Object> get props => [orderId];
+  List<Object> get props => [botOrderId];
 }
 
 class EndBotStock extends PortfolioEvent {
-  final String orderId;
+  final String botOrderId;
 
-  const EndBotStock(this.orderId);
+  const EndBotStock(this.botOrderId);
 
   @override
-  List<Object> get props => [orderId];
+  List<Object> get props => [botOrderId];
 }
 
 class CancelBotStock extends PortfolioEvent {
-  final String orderId;
+  final String botOrderId;
 
-  const CancelBotStock(this.orderId);
+  const CancelBotStock(this.botOrderId);
 
   @override
-  List<Object> get props => [orderId];
+  List<Object> get props => [botOrderId];
 }

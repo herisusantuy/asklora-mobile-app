@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../../core/domain/pair.dart';
 import '../../../core/styles/asklora_colors.dart';
+import '../../../core/utils/date_utils.dart';
 import '../domain/bot_recommendation_model.dart';
 
 List<Pair<String, String>> botRecommendationFaqs = [
@@ -91,7 +91,7 @@ enum BotStockFilter {
 }
 
 enum BotStatus {
-  pending('place', 'Pending', AskLoraColors.orange),
+  pending('place', 'Pending', AskLoraColors.amber),
   active('open', 'Active', AskLoraColors.primaryGreen),
   activeExpiresSoon(
       'open', 'Active (expires soon)', AskLoraColors.primaryGreen);
@@ -113,5 +113,5 @@ enum BotStatus {
   const BotStatus(this.value, this.name, this.color);
 }
 
-String newExpiryDateOnRollover(String expireDate) => DateFormat('yyyy-MM-dd')
-    .format(DateTime.parse(expireDate).add(const Duration(days: 14)));
+String newExpiryDateOnRollover(String expireDate) => formatDateAsString(
+    DateTime.parse(expireDate).add(const Duration(days: 14)));

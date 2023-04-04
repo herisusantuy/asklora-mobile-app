@@ -15,8 +15,6 @@ class BotActiveOrderModel {
   @JsonKey(name: 'ticker_name')
   final String tickerName;
   final String status;
-
-  ///Change to double later
   @JsonKey(name: 'current_pnl_ret')
   final double? currentPnlRet;
   @JsonKey(name: 'current_price')

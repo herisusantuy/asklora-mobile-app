@@ -1,6 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/utils/currency_enum.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/repository/portfolio_repository.dart';
@@ -33,9 +34,14 @@ void main() async {
     final BaseResponse<PortfolioResponse> portfolioErrorResponse =
         BaseResponse.error();
 
-    final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
+    final BaseResponse<BotOrderResponse> boolResponse =
+        BaseResponse.complete(const BotOrderResponse(
+      botOrder: '',
+      botAction: '',
+    ));
 
-    final BaseResponse<bool> boolErrorResponse = BaseResponse.error();
+    final BaseResponse<BotOrderResponse> boolErrorResponse =
+        BaseResponse.error();
 
     setUpAll(() async {
       portfolioRepository = MockPortfolioRepository();

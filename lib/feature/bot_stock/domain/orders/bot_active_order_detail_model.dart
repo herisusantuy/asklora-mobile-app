@@ -122,6 +122,13 @@ class BotActiveOrderDetailModel {
     return (botShareDouble > 0) ? botShareDouble.toString() : '/';
   }
 
+  String get botStockValueString {
+    double botStockValueDouble = checkDouble(botStockValue);
+    return (botStockValueDouble > 0)
+        ? botStockValueDouble.convertToCurrencyDecimal()
+        : '/';
+  }
+
   String get currentPnlRetString {
     double currentPnlRetDouble = checkDouble(currentPnlRet);
     return (currentPnlRetDouble > 0)

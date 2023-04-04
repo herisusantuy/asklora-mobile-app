@@ -15,9 +15,9 @@ class PortfolioState extends Equatable {
   final BaseResponse<PortfolioResponse> portfolioResponse;
   final BaseResponse<List<BotActiveOrderModel>> botActiveOrderResponse;
   final BaseResponse<BotActiveOrderDetailModel> botActiveOrderDetailResponse;
-  final BaseResponse<bool> rolloverBotStockResponse;
-  final BaseResponse<bool> endBotStockResponse;
-  final BaseResponse<bool> cancelBotStockResponse;
+  final BaseResponse<BotOrderResponse> rolloverBotStockResponse;
+  final BaseResponse<BotOrderResponse> endBotStockResponse;
+  final BaseResponse<BotOrderResponse> cancelBotStockResponse;
   final BotStockFilter botStockFilter;
   final CurrencyType currency;
 
@@ -39,9 +39,9 @@ class PortfolioState extends Equatable {
     BaseResponse<PortfolioResponse>? portfolioResponse,
     BaseResponse<List<BotActiveOrderModel>>? botActiveOrderResponse,
     BaseResponse<BotActiveOrderDetailModel>? botActiveOrderDetailResponse,
-    BaseResponse<bool>? rolloverBotStockResponse,
-    BaseResponse<bool>? endBotStockResponse,
-    BaseResponse<bool>? cancelBotStockResponse,
+    BaseResponse<BotOrderResponse>? rolloverBotStockResponse,
+    BaseResponse<BotOrderResponse>? endBotStockResponse,
+    BaseResponse<BotOrderResponse>? cancelBotStockResponse,
     BotStockFilter? botStockFilter,
     CurrencyType? currency,
   }) {

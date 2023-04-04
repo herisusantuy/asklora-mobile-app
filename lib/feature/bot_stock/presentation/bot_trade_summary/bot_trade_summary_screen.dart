@@ -56,12 +56,12 @@ class BotTradeSummaryScreen extends StatelessWidget {
       create: (_) => BotStockBloc(botStockRepository: BotStockRepository()),
       child: BlocListener<BotStockBloc, BotStockState>(
         listenWhen: (previous, current) =>
-            previous.botCreateOrderResponse != current.botCreateOrderResponse,
+            previous.createBotOrderResponse != current.createBotOrderResponse,
         listener: (context, state) {
           CustomLoadingOverlay.of(context)
-              .show(state.botCreateOrderResponse.state);
+              .show(state.createBotOrderResponse.state);
 
-          if (state.botCreateOrderResponse.state == ResponseState.success) {
+          if (state.createBotOrderResponse.state == ResponseState.success) {
             if (!UserJourney.compareUserJourney(
                 context: context, target: UserJourney.deposit)) {
               context.read<AppBloc>().add(
@@ -79,7 +79,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   arguments: Pair(
                       'Trade Request Received', _tradeRequestSuccessMessage()));
             }
-          } else if (state.botCreateOrderResponse.state ==
+          } else if (state.createBotOrderResponse.state ==
               ResponseState.error) {
             BotStockBottomSheet.insufficientBalance(context);
           }
@@ -161,7 +161,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       child: PrimaryButton(
                         label: 'CONFIRM',
                         onTap: () => context.read<BotStockBloc>().add(
-                            BotCreateOrder(
+                            CreateBotOrder(
                                 botRecommendationModel:
                                     botTradeSummaryModel.botRecommendationModel,
                                 tradeBotStockAmount:

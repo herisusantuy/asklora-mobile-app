@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 import '../../../core/domain/base_response.dart';
+import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/extensions.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
@@ -18,7 +18,7 @@ import '../domain/bot_stock_api_client.dart';
 import '../domain/orders/bot_active_order_detail_model.dart';
 import '../domain/orders/bot_active_order_model.dart';
 import '../domain/orders/bot_create_order_request.dart';
-import '../domain/orders/bot_create_order_response.dart';
+import '../domain/orders/bot_order_response.dart';
 import '../domain/orders/bot_order_request.dart';
 import '../utils/bot_stock_utils.dart';
 
@@ -114,10 +114,8 @@ class BotStockRepository {
     return BaseResponse.complete(demonstrationBots);
   }
 
-  Future<bool> removeInvestmentStyleState() async {
-    await _sharedPreference.deleteData(sfKeyInvestmentStyleState);
-    return true;
-  }
+  Future<void> removeInvestmentStyleState() async =>
+      await _sharedPreference.deleteData(sfKeyInvestmentStyleState);
 
   Future<BaseResponse<List<BotActiveOrderModel>>> activeOrders(
       {BotStockFilter? botStockFilter}) async {
@@ -131,9 +129,9 @@ class BotStockRepository {
   }
 
   Future<BaseResponse<BotActiveOrderDetailModel>> activeOrderDetail(
-      String orderId) async {
+      String botOrderId) async {
     try {
-      var response = await _botStockApiClient.activeOrderDetail(orderId);
+      var response = await _botStockApiClient.activeOrderDetail(botOrderId);
       return BaseResponse.complete(
           BotActiveOrderDetailModel.fromJson(response.data));
     } catch (e) {
@@ -141,50 +139,53 @@ class BotStockRepository {
     }
   }
 
-  Future<BaseResponse<BotCreateOrderResponse>> createOrder(
+  Future<BaseResponse<BotOrderResponse>> createOrder(
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount}) async {
     try {
       var response = await _botStockApiClient.createOrder(BotCreateOrderRequest(
           ticker: botRecommendationModel.ticker,
           botId: botRecommendationModel.botId,
-          spotDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+          spotDate: formatDateAsString(DateTime.now()),
           investmentAmount: tradeBotStockAmount,
           price: checkDouble(
             botRecommendationModel.latestPrice,
           ),
           isDummy: botRecommendationModel.freeBot));
       await removeInvestmentStyleState();
-      return BaseResponse.complete(
-          BotCreateOrderResponse.fromJson(response.data));
+      return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }
   }
 
-  Future<BaseResponse<bool>> cancelOrder(String orderId) async {
+  Future<BaseResponse<BotOrderResponse>> cancelOrder(String botOrderId) async {
     try {
-      await _botStockApiClient.cancelOrder(BotOrderRequest(orderId: orderId));
-      return BaseResponse.complete(true);
+      var response = await _botStockApiClient
+          .cancelOrder(BotOrderRequest(orderId: botOrderId));
+      return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }
   }
 
-  Future<BaseResponse<bool>> rolloverOrder(String orderId) async {
+  Future<BaseResponse<BotOrderResponse>> rolloverOrder(
+      String botOrderId) async {
     try {
-      await _botStockApiClient.rolloverOrder(BotOrderRequest(orderId: orderId));
-      return BaseResponse.complete(true);
+      var response = await _botStockApiClient
+          .rolloverOrder(BotOrderRequest(orderId: botOrderId));
+      return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }
   }
 
-  Future<BaseResponse<bool>> terminateOrder(String orderId) async {
+  Future<BaseResponse<BotOrderResponse>> terminateOrder(
+      String botOrderId) async {
     try {
-      await _botStockApiClient
-          .terminateOrder(BotOrderRequest(orderId: orderId));
-      return BaseResponse.complete(true);
+      var response = await _botStockApiClient
+          .terminateOrder(BotOrderRequest(orderId: botOrderId));
+      return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }

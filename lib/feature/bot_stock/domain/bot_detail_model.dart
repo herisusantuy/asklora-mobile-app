@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/extensions.dart';
 import '../../chart/domain/chart_models.dart';
 
@@ -108,7 +109,7 @@ class BotDetailModel extends Equatable {
       this.headquarters);
 
   String get formattedStartDate =>
-      DateFormat('yyyy-MM-dd').format(DateTime.parse(estimatedStartDate));
+      formatDateAsString(DateTime.parse(estimatedStartDate));
 
   String format(DateTime sourceDateTime) {
     try {

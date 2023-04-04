@@ -17,11 +17,11 @@ class FaqActiveIndexChanged extends BotStockEvent {
   const FaqActiveIndexChanged(this.faqActiveIndex);
 }
 
-class BotCreateOrder extends BotStockEvent {
+class CreateBotOrder extends BotStockEvent {
   final BotRecommendationModel botRecommendationModel;
   final double tradeBotStockAmount;
 
-  const BotCreateOrder(
+  const CreateBotOrder(
       {required this.botRecommendationModel,
       required this.tradeBotStockAmount});
 

@@ -28,8 +28,7 @@ class Performance extends StatelessWidget {
               Expanded(
                   child: ColumnText(
                       title: 'Botstock values (HKD)',
-                      subTitle: (botActiveOrderDetailModel.botStockValue ?? 0)
-                          .convertToCurrencyDecimal())),
+                      subTitle: botActiveOrderDetailModel.botStockValueString)),
               Expanded(
                   child: ColumnText(
                       title: 'Inv. Amount (HKD)',

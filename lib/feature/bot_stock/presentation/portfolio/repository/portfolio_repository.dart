@@ -14,7 +14,7 @@ class PortfolioRepository {
         return BaseResponse.complete(
             await MockData().fetchPortfolioDetailResponse());
       } else {
-        ///REAL
+        ///TODO IMPLEMENT PORTFOLIO INTEGRATION HERE LATER
         await Future.delayed(const Duration(seconds: 1));
         return BaseResponse.complete(PortfolioResponse());
       }
