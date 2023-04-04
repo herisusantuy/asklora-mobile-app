@@ -15,6 +15,7 @@ class CustomExpandedRow extends StatelessWidget {
   final TextAlign textValueAlign;
   final CrossAxisAlignment crossAxisAlignment;
   final FontType? fontType;
+  final TextStyle? rightTextStyle;
 
   const CustomExpandedRow(this.label,
       {this.text = '',
@@ -26,6 +27,7 @@ class CustomExpandedRow extends StatelessWidget {
       this.padding = const EdgeInsets.only(bottom: 8),
       this.textValueAlign = TextAlign.right,
       this.crossAxisAlignment = CrossAxisAlignment.start,
+      this.rightTextStyle,
       Key? key})
       : super(key: key);
 
@@ -48,7 +50,8 @@ class CustomExpandedRow extends StatelessWidget {
               child: child ??
                   CustomTextNew(
                     text,
-                    style: textStyle ?? AskLoraTextStyles.body1,
+                    style:
+                        rightTextStyle ?? textStyle ?? AskLoraTextStyles.body1,
                     textAlign: textValueAlign,
                   ))
         ],
