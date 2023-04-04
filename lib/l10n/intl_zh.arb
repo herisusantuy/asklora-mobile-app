@@ -21,5 +21,11 @@
       "getHelp" : "獲得幫助",
       "customerService": "客戶服務",
       "email": "電郵",
-      "officeHours" : "辦公時間"
+      "officeHours" : "辦公時間",
+      "officeHours" : "Office Hours",
+      "aboutAsklora" : "關於 Asklora",
+      "website": "網站",
+      "privacyPolicy": "私隱政策",
+      "termsAndConditions": "條款與約束",
+      "contactUs" : "聯絡我們"
 }

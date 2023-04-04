@@ -101,7 +101,7 @@ class SettingsScreen extends StatelessWidget {
                   title: S.of(context).getHelp,
                   onTap: () => GetHelpScreen.open(context)),
               _settingsMenu(
-                  title: 'About Asklora',
+                  title: S.of(context).aboutAsklora,
                   onTap: () => AboutAskloraScreen.open(context)),
               _signOutButton(context),
               _getAppVersion()

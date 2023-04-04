@@ -64,5 +64,10 @@
   "getHelp" : "Get Help",
   "customerService": "Customer Service",
   "email": "Email",
-  "officeHours" : "Office Hours" 
+  "officeHours" : "Office Hours",
+  "aboutAsklora" : "About Asklora",
+  "website": "Website",
+  "privacyPolicy": "Privacy Policy",
+  "termsAndConditions": "Terms and Conditions",
+  "contactUs" : "Contact Us"
 }

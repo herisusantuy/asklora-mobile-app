@@ -5,6 +5,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../generated/l10n.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   static const route = '/privacy_policy_screen';
@@ -15,7 +16,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
     return CustomScaffold(
       body: CustomStretchedLayout(
         contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
-        header: const CustomHeader(title: 'Privacy Policy'),
+        header: CustomHeader(title: S.of(context).privacyPolicy),
         content: SizedBox(
           width: double.infinity,
           child: Column(

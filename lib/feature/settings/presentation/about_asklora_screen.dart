@@ -11,6 +11,7 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/utils.dart';
+import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_condition_screen.dart';
@@ -24,7 +25,7 @@ class AboutAskloraScreen extends StatelessWidget {
     return CustomScaffold(
       body: CustomStretchedLayout(
         contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
-        header: const CustomHeader(title: 'About Asklora'),
+        header: CustomHeader(title: S.of(context).aboutAsklora),
         content: SizedBox(
           width: double.infinity,
           child: Column(
@@ -40,8 +41,8 @@ class AboutAskloraScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () =>
                     openUrl(askloraSite, mode: LaunchMode.externalApplication),
-                child: const CustomExpandedRow(
-                  'Website',
+                child: CustomExpandedRow(
+                  S.of(context).website,
                   flex2: 2,
                   text: askloraSite,
                 ),
@@ -49,10 +50,10 @@ class AboutAskloraScreen extends StatelessWidget {
               const SizedBox(height: 20),
               MenuButtonWidget(
                   onTap: () => PrivacyPolicyScreen.open(context),
-                  title: 'Privacy Policy'),
+                  title: S.of(context).privacyPolicy),
               MenuButtonWidget(
                   onTap: () => TermsAndConditionScreen.open(context),
-                  title: 'Terms and Conditions'),
+                  title: S.of(context).termsAndConditions),
             ],
           ),
         ),
@@ -82,10 +83,12 @@ class AboutAskloraScreen extends StatelessWidget {
         },
       );
 
-  Widget get _contactUsButton => PrimaryButton(
-      label: 'Contact Us',
-      onTap: () =>
-          openUrl(mailToLoraCare, mode: LaunchMode.externalApplication));
+  Widget get _contactUsButton => Builder(builder: (context) {
+        return PrimaryButton(
+            label: S.of(context).contactUs,
+            onTap: () =>
+                openUrl(mailToLoraCare, mode: LaunchMode.externalApplication));
+      });
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

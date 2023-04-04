@@ -5,6 +5,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../generated/l10n.dart';
 
 class TermsAndConditionScreen extends StatelessWidget {
   static const route = '/terms_and_condition_screen';
@@ -15,7 +16,7 @@ class TermsAndConditionScreen extends StatelessWidget {
     return CustomScaffold(
       body: CustomStretchedLayout(
         contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
-        header: const CustomHeader(title: 'Terms and Conditions'),
+        header: CustomHeader(title: S.of(context).termsAndConditions),
         content: SizedBox(
           width: double.infinity,
           child: Column(
