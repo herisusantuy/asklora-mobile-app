@@ -11,6 +11,7 @@ import '../widget/menu_button.dart';
 import 'customer_service_screen.dart';
 
 class GetHelpScreen extends StatelessWidget {
+  static const route = '/get_help_screen';
   const GetHelpScreen({super.key});
 
   @override
@@ -31,9 +32,5 @@ class GetHelpScreen extends StatelessWidget {
             )));
   }
 
-  static void open(BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const GetHelpScreen(),
-        ),
-      );
+  static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

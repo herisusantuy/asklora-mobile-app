@@ -10,6 +10,8 @@ import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 
 class CustomerServiceScreen extends StatelessWidget {
+  static const String route = '/customer_service_screen';
+
   const CustomerServiceScreen({super.key});
 
   @override
@@ -50,9 +52,5 @@ class CustomerServiceScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context) => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const CustomerServiceScreen(),
-        ),
-      );
+  static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }
