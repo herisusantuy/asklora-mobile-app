@@ -38,6 +38,8 @@ import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/settings/presentation/about_asklora_screen.dart';
+import '../../feature/settings/presentation/customer_service_screen.dart';
+import '../../feature/settings/presentation/get_help_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../domain/pair.dart';
@@ -223,6 +225,16 @@ class RouterGenerator {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const AboutAskloraScreen(),
+        );
+      case GetHelpScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const GetHelpScreen(),
+        );
+      case CustomerServiceScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const CustomerServiceScreen(),
         );
       default:
         return MaterialPageRoute(

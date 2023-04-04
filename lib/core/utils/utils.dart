@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<PlatformFile> decodeBase64ToPlatformFile(String base64String) async {
   final decodedBytes =
@@ -12,4 +14,14 @@ Future<PlatformFile> decodeBase64ToPlatformFile(String base64String) async {
   var fileImg = File('${directory.path}/$fileName')
     ..writeAsBytesSync(List.from(decodedBytes));
   return PlatformFile(name: fileName, size: 0, path: fileImg.path);
+}
+
+Future<void> openUrl(String url,
+    {LaunchMode mode = LaunchMode.platformDefault}) async {
+  final Uri uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri, mode: mode);
+  } else {
+    throw Exception('Could not launch $url');
+  }
 }

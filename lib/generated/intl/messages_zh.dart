@@ -35,9 +35,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
         "carouselIntro3": MessageLookupByLibrary.simpleMessage("AI策略，\n自動交易"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
+        "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
+        "email": MessageLookupByLibrary.simpleMessage("電郵"),
+        "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
-            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？")
+            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "officeHours": MessageLookupByLibrary.simpleMessage("辦公時間")
       };
 }

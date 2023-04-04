@@ -60,5 +60,9 @@
   },
   "botTradeBottomSheetEndBotStockConfirmationSubTitle": "The total Botstock value will be returned to your \naccount after the next community order.",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio successfully!",
-  "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "DEPOSIT TO START REAL TRADE"
+  "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "DEPOSIT TO START REAL TRADE",
+  "getHelp" : "Get Help",
+  "customerService": "Customer Service",
+  "email": "Email",
+  "officeHours" : "Office Hours" 
 }

@@ -16,9 +16,11 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/storage/profile_data.dart';
 import '../../../core/utils/storage/secure_storage.dart';
 import '../../../core/utils/storage/shared_preference.dart';
+import '../../../generated/l10n.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import 'get_help_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String route = '/settings_screen';
@@ -94,7 +96,9 @@ class SettingsScreen extends StatelessWidget {
               _settingsMenu(title: 'Account Settings', onTap: () {}),
               _settingsMenu(title: 'Investment Preferences', onTap: () {}),
               _settingsMenu(title: 'Transaction History', onTap: () {}),
-              _settingsMenu(title: 'Get Help', onTap: () {}),
+              _settingsMenu(
+                  title: S.of(context).getHelp,
+                  onTap: () => GetHelpScreen.open(context)),
               _settingsMenu(title: 'About Asklora', onTap: () {}),
               _signOutButton(context),
               _getAppVersion()
