@@ -10,6 +10,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
@@ -25,17 +26,19 @@ class AboutAskloraScreen extends StatelessWidget {
     return CustomScaffold(
       body: CustomStretchedLayout(
         contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
-        header: CustomHeader(title: S.of(context).aboutAsklora),
+        header: CustomHeader(
+            title: S.of(context).aboutAsklora, isShowBottomBorder: true),
         content: SizedBox(
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Divider(thickness: 1),
               const SizedBox(height: 20),
-              const Center(
-                  child:
-                      SizedBox(width: 210, height: 100, child: Placeholder())),
+              Center(
+                  child: SizedBox(
+                      width: 210,
+                      height: 100,
+                      child: getPngImage('splash_screen'))),
               _getAppVersion(),
               const SizedBox(height: 48),
               GestureDetector(
@@ -47,13 +50,15 @@ class AboutAskloraScreen extends StatelessWidget {
                   text: askloraSite,
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+              const Divider(thickness: 1),
               MenuButtonWidget(
                   onTap: () => PrivacyPolicyScreen.open(context),
                   title: S.of(context).privacyPolicy),
               MenuButtonWidget(
                   onTap: () => TermsAndConditionScreen.open(context),
-                  title: S.of(context).termsAndConditions),
+                  title: S.of(context).termsAndConditions,
+                  showBottomBorder: false),
             ],
           ),
         ),
@@ -70,7 +75,7 @@ class AboutAskloraScreen extends StatelessWidget {
               return Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 23.5),
+                  padding: const EdgeInsets.only(top: 16),
                   child: CustomTextNew(
                     'Asklora Version ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
                     style: AskLoraTextStyles.body1,
