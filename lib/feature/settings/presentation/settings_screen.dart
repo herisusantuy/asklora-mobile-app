@@ -39,7 +39,7 @@ class SettingsScreen extends StatelessWidget {
             sharedPreference: SharedPreference()),
         child: CustomStretchedLayout(
           header: const CustomHeader(
-            title: '',
+            title: 'All Settings',
           ),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
