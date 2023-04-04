@@ -1,19 +1,31 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 import 'custom_text_new.dart';
 
 class CustomHeader extends StatelessWidget {
   final VoidCallback? onTapBack;
   final String title;
+  final bool isShowBottomBorder;
 
-  const CustomHeader({required this.title, this.onTapBack, Key? key})
-      : super(key: key);
+  const CustomHeader({
+    Key? key,
+    this.onTapBack,
+    required this.title,
+    this.isShowBottomBorder = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      decoration: BoxDecoration(
+          border: Border(
+              bottom: isShowBottomBorder
+                  ? BorderSide(color: AskLoraColors.gray.withOpacity(.5))
+                  : BorderSide.none)),
       child: Stack(
         children: [
           if (onTapBack != null)

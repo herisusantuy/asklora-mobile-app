@@ -18,7 +18,11 @@ class GetHelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
         body: CustomStretchedLayout(
-            header: CustomHeader(title: S.of(context).getHelp),
+            contentPadding: const EdgeInsets.only(top: 0),
+            header: CustomHeader(
+              title: S.of(context).getHelp,
+              isShowBottomBorder: true,
+            ),
             content: Column(
               children: [
                 MenuButtonWidget(
@@ -26,8 +30,10 @@ class GetHelpScreen extends StatelessWidget {
                     onTap: () => openUrl(askloraFaq,
                         mode: LaunchMode.externalApplication)),
                 MenuButtonWidget(
-                    title: S.of(context).customerService,
-                    onTap: () => CustomerServiceScreen.open(context)),
+                  title: S.of(context).customerService,
+                  onTap: () => CustomerServiceScreen.open(context),
+                  showBottomBorder: false,
+                ),
               ],
             )));
   }

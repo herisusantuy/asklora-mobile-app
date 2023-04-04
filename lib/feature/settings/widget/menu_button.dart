@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../../../core/presentation/custom_text_new.dart';
@@ -8,11 +9,13 @@ class MenuButtonWidget extends StatelessWidget {
   final VoidCallback onTap;
   final String title;
   final String? subtitle;
+  final bool showBottomBorder;
   const MenuButtonWidget({
     Key? key,
     required this.onTap,
     required this.title,
     this.subtitle,
+    this.showBottomBorder = true,
   }) : super(key: key);
 
   @override
@@ -22,9 +25,11 @@ class MenuButtonWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 23.5),
         width: double.infinity,
-        decoration: const BoxDecoration(
-            border:
-                Border(top: BorderSide(color: AskLoraColors.gray, width: 0.5))),
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: showBottomBorder
+                    ? const BorderSide(color: AskLoraColors.gray, width: 0.5)
+                    : BorderSide.none)),
         child: Row(
           children: [
             Expanded(
