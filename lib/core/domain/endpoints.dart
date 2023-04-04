@@ -51,3 +51,5 @@ const String endpointBotRecommendation = '${user}recomendation_bots/';
 const String endpointBotDetail = '$v1${bots}bot_detail/';
 const String endpointIexCloud = 'https://iexcloud.io';
 const String askloraFaq = 'https://www.asklora.ai/faq';
+const String askloraSite = 'https://www.asklora.ai/';
+const String mailToLoraCare = 'mailto:loracares@asklora.ai';

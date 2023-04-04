@@ -20,6 +20,7 @@ import '../../../generated/l10n.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import 'about_asklora_screen.dart';
 import 'get_help_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -99,7 +100,9 @@ class SettingsScreen extends StatelessWidget {
               _settingsMenu(
                   title: S.of(context).getHelp,
                   onTap: () => GetHelpScreen.open(context)),
-              _settingsMenu(title: 'About Asklora', onTap: () {}),
+              _settingsMenu(
+                  title: 'About Asklora',
+                  onTap: () => AboutAskloraScreen.open(context)),
               _signOutButton(context),
               _getAppVersion()
             ],

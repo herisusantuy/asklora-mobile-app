@@ -40,7 +40,9 @@ import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/settings/presentation/about_asklora_screen.dart';
 import '../../feature/settings/presentation/customer_service_screen.dart';
 import '../../feature/settings/presentation/get_help_screen.dart';
+import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
+import '../../feature/settings/presentation/terms_condition_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../domain/pair.dart';
 import '../presentation/custom_status_widget.dart';
@@ -235,6 +237,16 @@ class RouterGenerator {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const CustomerServiceScreen(),
+        );
+      case PrivacyPolicyScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const PrivacyPolicyScreen(),
+        );
+      case TermsAndConditionScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const TermsAndConditionScreen(),
         );
       default:
         return MaterialPageRoute(
