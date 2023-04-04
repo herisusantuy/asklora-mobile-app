@@ -22,6 +22,7 @@ class CustomerServiceScreen extends StatelessWidget {
             content: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
                       onTap: () => openUrl('mailto:loracares@asklora.ai',
@@ -39,16 +40,15 @@ class CustomerServiceScreen extends StatelessWidget {
   }
 
   Widget _text({required String title, required String value}) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextNew(title, style: AskLoraTextStyles.body1),
-            CustomTextNew(value, style: AskLoraTextStyles.body1),
-          ],
-        ),
-      ],
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomTextNew(title, style: AskLoraTextStyles.body1),
+          CustomTextNew(value, style: AskLoraTextStyles.body1),
+        ],
+      ),
     );
   }
 
