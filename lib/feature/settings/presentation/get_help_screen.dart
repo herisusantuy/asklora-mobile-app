@@ -18,7 +18,11 @@ class GetHelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
         body: CustomStretchedLayout(
-            header: CustomHeader(title: S.of(context).getHelp),
+            contentPadding: EdgeInsets.only(top: 0),
+            header: CustomHeader(
+              title: S.of(context).getHelp,
+              isShowBottomBorder: true,
+            ),
             content: Column(
               children: [
                 MenuButtonWidget(
