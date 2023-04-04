@@ -8,7 +8,7 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
-import 'customer_screen.dart';
+import 'customer_service_screen.dart';
 
 class GetHelpScreen extends StatelessWidget {
   const GetHelpScreen({super.key});
@@ -16,7 +16,6 @@ class GetHelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        onTapBack: () => Navigator.pop(context),
         body: CustomStretchedLayout(
             header: CustomHeader(title: S.of(context).getHelp),
             content: Column(

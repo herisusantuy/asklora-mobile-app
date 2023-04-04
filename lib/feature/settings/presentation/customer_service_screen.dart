@@ -15,7 +15,6 @@ class CustomerServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        onTapBack: () => Navigator.pop(context),
         body: CustomStretchedLayout(
             header: CustomHeader(title: S.of(context).customerService),
             content: Padding(
@@ -25,11 +24,11 @@ class CustomerServiceScreen extends StatelessWidget {
                   GestureDetector(
                       onTap: () => openUrl('mailto:loracares@asklora.ai',
                           mode: LaunchMode.externalApplication),
-                      child: text(
+                      child: _text(
                           title: S.of(context).email,
                           value: 'loracares@asklora.ai')),
                   const SizedBox(height: 22),
-                  text(
+                  _text(
                       title: S.of(context).officeHours,
                       value: '09:00-18:00 (HKT)'),
                 ],
@@ -37,7 +36,7 @@ class CustomerServiceScreen extends StatelessWidget {
             )));
   }
 
-  Widget text({required String title, required String value}) {
+  Widget _text({required String title, required String value}) {
     return Row(
       children: [
         Column(
