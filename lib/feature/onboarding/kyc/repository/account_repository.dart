@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../settings/domain/get_account_details_response.dart';
 import '../domain/account_api_client.dart';
 import '../domain/get_account/get_account_response.dart';
 import '../domain/onfido/onfido_result_request.dart';
@@ -59,6 +60,16 @@ class AccountRepository {
           OnfidoResultResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(message: 'Could not update the Onfido result!');
+    }
+  }
+
+  Future<BaseResponse> getAccountDetails() async {
+    try {
+      var response = await _accountApiClient.getAccount();
+      return BaseResponse.complete(
+          GetAccountDetailsResponse.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error(message: 'Could not get user details!');
     }
   }
 }
