@@ -5,6 +5,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
+import 'account_information_screen.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   static const route = 'account/setting_screen';
@@ -20,17 +21,30 @@ class AccountSettingScreen extends StatelessWidget {
         content: Column(
           children: [
             MenuButtonWidget(
-                onTap: () {}, title: S.of(context).accountInformation),
-            MenuButtonWidget(onTap: () {}, title: S.of(context).changePassword),
-            MenuButtonWidget(onTap: () {}, title: S.of(context).paymentDetails),
+                onTap: () => AccountInformationScreen.open(context),
+                title: S.of(context).accountInformation,
+                showBottomBorder: false),
             MenuButtonWidget(
                 onTap: () {},
-                title: 'Language',
-                subtitle: S.of(context).language),
+                title: S.of(context).changePassword,
+                showBottomBorder: false),
             MenuButtonWidget(
-                onTap: () {}, title: S.of(context).notificationSettings),
+                onTap: () {},
+                title: S.of(context).paymentDetails,
+                showBottomBorder: false),
             MenuButtonWidget(
-                onTap: () {}, title: S.of(context).terminateACcount),
+                onTap: () {},
+                title: S.of(context).language,
+                subtitle: 'English',
+                showBottomBorder: false),
+            MenuButtonWidget(
+                onTap: () {},
+                title: S.of(context).notificationSettings,
+                showBottomBorder: false),
+            MenuButtonWidget(
+                onTap: () {},
+                title: S.of(context).terminateACcount,
+                showBottomBorder: false),
           ],
         ),
       ),
