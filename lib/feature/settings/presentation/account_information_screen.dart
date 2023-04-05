@@ -44,29 +44,22 @@ class AccountInformationScreen extends StatelessWidget {
             content:
                 BlocBuilder<AccountInformationBloc, AccountInformationState>(
               builder: (context, state) {
-                // GetAccountDetailsResponse account =
-                //     const GetAccountDetailsResponse();
-                // if (state.response.state == ResponseState.success) {
-                //   account = state.response.data!;
-                // }
                 GetAccountDetailsResponse account =
                     state.response.data ?? const GetAccountDetailsResponse();
                 return Column(
                   children: [
-                    // _accountDetails(S.of(context).userId,
-                    //     account.id == 0 ? '-' : account.id.toString()),
-                    // const SizedBox(height: 40),
-                    // _accountDetails(S.of(context).fullName,
-                    //     '${account.personalInfo.firstName} ${account.personalInfo.lastName}'),
-                    // const SizedBox(height: 40),
-                    // _accountDetails(S.of(context).phone,
-                    //     '(852) ${account.personalInfo.phoneNumber ?? '-'}'),
-                    // const SizedBox(height: 40),
-                    // _accountDetails(S.of(context).email, account.email),
-                    // const SizedBox(height: 40),
+                    _accountDetails(S.of(context).userId,
+                        account.id == 0 ? '-' : account.id.toString()),
+                    const SizedBox(height: 40),
+                    _accountDetails(S.of(context).fullName,
+                        '${account.personalInfo.firstName} ${account.personalInfo.lastName}'),
+                    const SizedBox(height: 40),
+                    _accountDetails(S.of(context).phone,
+                        '(852) ${account.personalInfo.phoneNumber ?? '-'}'),
+                    const SizedBox(height: 40),
+                    _accountDetails(S.of(context).email, account.email),
+                    const SizedBox(height: 40),
                     _accountDetails(S.of(context).dateJoined, '-'),
-                    _accountDetails(
-                        S.of(context).userId, account.id.toString()),
                   ],
                 );
               },
