@@ -57,10 +57,56 @@ class _ChartAnimationState extends State<ChartAnimation> {
   double addition = 0.08;
   double lastProfit = 0;
 
+  late double maxPriceValue;
+  late double minPriceValue;
+  late double maxYValue;
+  late double minYValue;
+  late double interval;
+
   @override
   void initState() {
     super.initState();
+    getInitialAxisValue();
     drawLineChart();
+  }
+
+  void getInitialAxisValue() {
+    maxPriceValue = 0;
+    minPriceValue = double.infinity;
+    for (var element in widget.chartDataSets) {
+      if (element.price! > maxPriceValue) {
+        maxPriceValue = element.price!;
+      } else if (element.price! < minPriceValue) {
+        minPriceValue = element.price!;
+      }
+    }
+
+    maxPriceValue = maxPriceValue.ceilToDouble();
+
+    minPriceValue = minPriceValue.floorToDouble();
+
+    interval = ((maxPriceValue - minPriceValue) / 5).ceilToDouble();
+
+    double median = (maxPriceValue - minPriceValue) / 2;
+
+    double dividedMedian = median / 3;
+
+    maxYValue = (maxPriceValue + dividedMedian).ceilToDouble();
+
+    minYValue = (minPriceValue - dividedMedian).floorToDouble();
+  }
+
+  Widget leftTitleWidgets(double value, TitleMeta meta) {
+    if (value >= minPriceValue &&
+            value <= maxPriceValue &&
+            (value - minPriceValue) % interval == 0 ||
+        value == minPriceValue ||
+        value == maxPriceValue) {
+      return CustomTextNew(value.floor().toString(),
+          style: axisStyle, textAlign: TextAlign.left);
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 
   @override
@@ -77,26 +123,22 @@ class _ChartAnimationState extends State<ChartAnimation> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: chartHeight,
-          width: MediaQuery.of(context).size.width,
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Colors.transparent,
-            ),
-            child: Stack(
-              children: [
-                LineChart(
-                  mainData(),
-                ),
-                ...labels
-              ],
-            ),
-          ),
+    return SizedBox(
+      height: chartHeight,
+      width: MediaQuery.of(context).size.width,
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          color: Colors.transparent,
         ),
-      ],
+        child: Stack(
+          children: [
+            LineChart(
+              mainData(),
+            ),
+            ...labels
+          ],
+        ),
+      ),
     );
   }
 
@@ -176,9 +218,9 @@ class _ChartAnimationState extends State<ChartAnimation> {
               labels.add(AnimatedIconLabel(
                   key: UniqueKey(),
                   left: flSpotsCoordinate[animateIndex].offset.dx -
-                      56 +
+                      50 +
                       reservedLeftSize,
-                  top: flSpotsCoordinate[animateIndex].offset.dy + 10,
+                  top: flSpotsCoordinate[animateIndex].offset.dy + 20,
                   hedgeType: HedgeType.buy));
             });
           } else {
@@ -186,9 +228,9 @@ class _ChartAnimationState extends State<ChartAnimation> {
               labels.add(AnimatedIconLabel(
                   key: UniqueKey(),
                   left: flSpotsCoordinate[animateIndex].offset.dx -
-                      56 +
+                      50 +
                       reservedLeftSize,
-                  top: flSpotsCoordinate[animateIndex].offset.dy - 58,
+                  top: flSpotsCoordinate[animateIndex].offset.dy - 43,
                   hedgeType: HedgeType.sell));
             });
           }
@@ -208,7 +250,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
             top: flSpotsCoordinate[animateIndex].offset.dy >
                     50 * (chartHeight - 24) / 100
                 ? 10
-                : (chartHeight - 120),
+                : (chartHeight - 80),
             profit: profit!,
             hedgeType: hedgeShare > 0 ? HedgeType.buy : HedgeType.sell,
           ));
@@ -265,42 +307,8 @@ class _ChartAnimationState extends State<ChartAnimation> {
     }
   }
 
-  Widget leftTitleWidgets(double value, TitleMeta meta) {
-    return CustomTextNew(value.round().toString(),
-        style: axisStyle, textAlign: TextAlign.left);
-  }
-
-  double get getMaxYValue {
-    double maxValue = 0;
-    for (var element in widget.chartDataSets) {
-      if (element.price! > maxValue) {
-        maxValue = element.price!;
-      }
-    }
-    maxValue *= 1.1;
-    maxValue = maxValue.round().toDouble();
-    if (maxValue % 10 != 0) {
-      maxValue += (10 - maxValue % 10);
-    }
-    return maxValue;
-  }
-
   double get reservedLeftSize {
-    return getMaxYValue.toString().textWidth(axisStyle);
-  }
-
-  double get getMinYValue {
-    double minValue = double.infinity;
-    for (var element in widget.chartDataSets) {
-      if (element.price! < minValue) {
-        minValue = element.price!;
-      }
-    }
-    double minFactor = minValue * 0.2;
-    if ((minValue - minFactor) >= 0) {
-      minValue -= minFactor;
-    }
-    return minValue;
+    return maxYValue.toString().textWidth(axisStyle);
   }
 
   LineChartData mainData() {
@@ -351,15 +359,15 @@ class _ChartAnimationState extends State<ChartAnimation> {
           sideTitles: SideTitles(showTitles: false),
         ),
         topTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
+          sideTitles: SideTitles(showTitles: true, reservedSize: 5),
         ),
         bottomTitles: AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
+          sideTitles: SideTitles(showTitles: true, reservedSize: 5),
         ),
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            interval: 10,
+            interval: 1 /*(getMaxYValue-getMinYValue)/5*/ /*(58-31)/5*/,
             getTitlesWidget: leftTitleWidgets,
             reservedSize: reservedLeftSize,
           ),
@@ -372,8 +380,8 @@ class _ChartAnimationState extends State<ChartAnimation> {
               bottom: BorderSide(width: 1, color: Color(0XFFD2D2D2)))),
       minX: flSpots.first.x,
       maxX: widget.chartDataSets.length - 1,
-      minY: getMinYValue,
-      maxY: getMaxYValue,
+      minY: minYValue,
+      maxY: maxYValue,
       lineBarsData: [
         LineChartBarData(
           lineLengthCallback: (value) async {
