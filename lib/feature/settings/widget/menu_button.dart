@@ -6,14 +6,14 @@ import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 
 class MenuButtonWidget extends StatelessWidget {
-  final VoidCallback onTap;
   final String title;
   final String? subtitle;
+  final VoidCallback onTap;
   final bool showBottomBorder;
   const MenuButtonWidget({
     Key? key,
-    required this.onTap,
     required this.title,
+    required this.onTap,
     this.subtitle,
     this.showBottomBorder = true,
   }) : super(key: key);
