@@ -71,5 +71,9 @@
   "paymentDetails": "paymentDetails",
   "language" : "Language",
   "notificationSettings" : "Notification Settings",
-  "terminateACcount" : "Terminate Account"
+  "terminateACcount" : "Terminate Account",
+  "userId" : "User ID",
+  "fullName" : "Full Name",
+  "phone" : "Phone",
+  "dateJoined" : "Date Joined"
 }

@@ -461,6 +461,46 @@ class S {
       args: [],
     );
   }
+
+  /// `User ID`
+  String get userId {
+    return Intl.message(
+      'User ID',
+      name: 'userId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message(
+      'Full Name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone`
+  String get phone {
+    return Intl.message(
+      'Phone',
+      name: 'phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date Joined`
+  String get dateJoined {
+    return Intl.message(
+      'Date Joined',
+      name: 'dateJoined',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

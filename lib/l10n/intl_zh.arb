@@ -28,5 +28,9 @@
       "paymentDetails": "銀行賬戶詳情",
       "language" : "語言",
       "notificationSettings" : "通知設定",
-      "terminateACcount" : "終止賬戶"
+      "terminateACcount" : "終止賬戶",
+      "userId" : "用戶 ID",
+      "fullName" : "姓名",
+      "phone" : "電話",
+      "dateJoined" : "加入日期"
 }

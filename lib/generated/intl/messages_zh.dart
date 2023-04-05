@@ -39,7 +39,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
+        "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
+        "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
@@ -49,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
         "officeHours": MessageLookupByLibrary.simpleMessage("辦公時間"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
-        "terminateACcount": MessageLookupByLibrary.simpleMessage("終止賬戶")
+        "phone": MessageLookupByLibrary.simpleMessage("電話"),
+        "terminateACcount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
+        "userId": MessageLookupByLibrary.simpleMessage("用戶 ID")
       };
 }

@@ -85,7 +85,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
+        "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
@@ -97,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "officeHours": MessageLookupByLibrary.simpleMessage("Office Hours"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("paymentDetails"),
+        "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "terminateACcount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
@@ -110,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tooltipBotDetailsInvestmentPeriod": MessageLookupByLibrary.simpleMessage(
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
-            "Lora’s date to start the Botstocks")
+            "Lora’s date to start the Botstocks"),
+        "userId": MessageLookupByLibrary.simpleMessage("User ID")
       };
 }
