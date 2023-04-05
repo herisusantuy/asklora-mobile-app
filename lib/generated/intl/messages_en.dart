@@ -33,6 +33,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accountInformation":
+            MessageLookupByLibrary.simpleMessage("Account Information"),
+        "accountSettings":
+            MessageLookupByLibrary.simpleMessage("Account Settings"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
@@ -77,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invest with AI strategy, automated"),
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -85,7 +91,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "notificationSettings":
+            MessageLookupByLibrary.simpleMessage("Notification Settings"),
         "officeHours": MessageLookupByLibrary.simpleMessage("Office Hours"),
+        "paymentDetails":
+            MessageLookupByLibrary.simpleMessage("paymentDetails"),
+        "terminateACcount":
+            MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(

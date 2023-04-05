@@ -21,5 +21,12 @@
       "getHelp" : "獲得幫助",
       "customerService": "客戶服務",
       "email": "電郵",
-      "officeHours" : "辦公時間"
+      "officeHours" : "辦公時間",
+      "accountSettings" : "帳戶設定",
+      "accountInformation": "帳戶資訊",
+      "changePassword" : "更改密碼",
+      "paymentDetails": "銀行賬戶詳情",
+      "language" : "語言",
+      "notificationSettings" : "通知設定",
+      "terminateACcount" : "終止賬戶"
 }

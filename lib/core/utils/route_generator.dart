@@ -37,6 +37,7 @@ import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
+import '../../feature/settings/presentation/account_setting_screen.dart';
 import '../../feature/settings/presentation/customer_service_screen.dart';
 import '../../feature/settings/presentation/get_help_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
@@ -229,6 +230,11 @@ class RouterGenerator {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const CustomerServiceScreen(),
+        );
+      case AccountSettingScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const AccountSettingScreen(),
         );
       default:
         return MaterialPageRoute(

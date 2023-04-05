@@ -64,5 +64,12 @@
   "getHelp" : "Get Help",
   "customerService": "Customer Service",
   "email": "Email",
-  "officeHours" : "Office Hours" 
+  "officeHours" : "Office Hours",
+  "accountSettings" : "Account Settings",
+  "accountInformation": "Account Information",
+  "changePassword" : "Change Password",
+  "paymentDetails": "paymentDetails",
+  "language" : "Language",
+  "notificationSettings" : "Notification Settings",
+  "terminateACcount" : "Terminate Account"
 }
