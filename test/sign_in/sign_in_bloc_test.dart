@@ -44,9 +44,9 @@ void main() async {
     late PpiResponseRepository ppiResponseRepository;
 
     const GetAccountResponse account = GetAccountResponse(
-      0,
-      'someusername',
-      'kk@kk.com',
+      id: 0,
+      username: 'someusername',
+      email: 'kk@kk.com',
     );
 
     setUpAll(

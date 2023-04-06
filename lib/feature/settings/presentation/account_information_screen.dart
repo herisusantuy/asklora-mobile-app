@@ -11,9 +11,9 @@ import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
+import '../../onboarding/kyc/domain/get_account/get_account_response.dart';
 import '../../onboarding/kyc/repository/account_repository.dart';
 import '../bloc/account_information/account_information_bloc.dart';
-import '../domain/get_account_details_response.dart';
 
 class AccountInformationScreen extends StatelessWidget {
   static const route = '/account_information_screen';
@@ -44,18 +44,24 @@ class AccountInformationScreen extends StatelessWidget {
             content:
                 BlocBuilder<AccountInformationBloc, AccountInformationState>(
               builder: (context, state) {
-                GetAccountDetailsResponse account =
-                    state.response.data ?? const GetAccountDetailsResponse();
+                GetAccountResponse account =
+                    state.response.data ?? const GetAccountResponse();
                 return Column(
                   children: [
                     _accountDetails(S.of(context).userId,
-                        account.id == 0 ? '-' : account.id.toString()),
+                        account.id != 0 ? account.id.toString() : '-'),
                     const SizedBox(height: 40),
-                    _accountDetails(S.of(context).fullName,
-                        '${account.personalInfo.firstName} ${account.personalInfo.lastName}'),
+                    _accountDetails(
+                        S.of(context).fullName,
+                        account.personalInfo != null
+                            ? '${account.personalInfo?.firstName} ${account.personalInfo?.lastName}'
+                            : '-'),
                     const SizedBox(height: 40),
-                    _accountDetails(S.of(context).phone,
-                        '(852) ${account.personalInfo.phoneNumber ?? '-'}'),
+                    _accountDetails(
+                        S.of(context).phone,
+                        account.personalInfo != null
+                            ? '(852) ${account.personalInfo?.phoneNumber}'
+                            : '-'),
                     const SizedBox(height: 40),
                     _accountDetails(S.of(context).email, account.email),
                     const SizedBox(height: 40),

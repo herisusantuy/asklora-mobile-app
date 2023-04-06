@@ -1,7 +1,7 @@
 part of 'account_information_bloc.dart';
 
 class AccountInformationState extends Equatable {
-  final BaseResponse<GetAccountDetailsResponse> response;
+  final BaseResponse<GetAccountResponse> response;
 
   const AccountInformationState({
     this.response = const BaseResponse(),
@@ -11,7 +11,7 @@ class AccountInformationState extends Equatable {
   List<Object> get props => [response];
 
   AccountInformationState copyWith({
-    BaseResponse<GetAccountDetailsResponse>? response,
+    BaseResponse<GetAccountResponse>? response,
   }) {
     return AccountInformationState(
       response: response ?? this.response,
