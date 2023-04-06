@@ -30,39 +30,33 @@ class AboutAskloraScreen extends StatelessWidget {
         contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
         header: CustomHeader(
             title: S.of(context).aboutAsklora, isShowBottomBorder: true),
-        content: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              Center(
-                  child: SizedBox(
-                      width: 210,
-                      height: 100,
-                      child: getPngImage('splash_screen'))),
-              _getAppVersion(),
-              const SizedBox(height: 48),
-              GestureDetector(
-                  onTap: () => openUrl(askloraSite,
-                      mode: LaunchMode.externalApplication),
-                  child: CustomExpandedRow(S.of(context).website,
-                      flex2: 2,
-                      text: askloraSite,
-                      rightTextStyle: AskLoraTextStyles.body1.copyWith(
-                        color: AskLoraColors.primaryMagenta,
-                      ))),
-              const SizedBox(height: 10),
-              const Divider(thickness: 1),
-              MenuButtonWidget(
-                  onTap: () => PrivacyPolicyScreen.open(context),
-                  title: S.of(context).privacyPolicy),
-              MenuButtonWidget(
-                  onTap: () => TermsAndConditionScreen.open(context),
-                  title: S.of(context).termsAndConditions,
-                  showBottomBorder: false),
-            ],
-          ),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            Center(
+                child: getPngImage('splash_screen', width: 210, height: 100)),
+            _getAppVersion(),
+            const SizedBox(height: 48),
+            GestureDetector(
+                onTap: () =>
+                    openUrl(askloraSite, mode: LaunchMode.externalApplication),
+                child: CustomExpandedRow(S.of(context).website,
+                    flex2: 2,
+                    text: askloraSite,
+                    rightTextStyle: AskLoraTextStyles.body1.copyWith(
+                      color: AskLoraColors.primaryMagenta,
+                    ))),
+            const SizedBox(height: 10),
+            const Divider(thickness: 1),
+            MenuButtonWidget(
+                onTap: () => PrivacyPolicyScreen.open(context),
+                title: S.of(context).privacyPolicy),
+            MenuButtonWidget(
+                onTap: () => TermsAndConditionScreen.open(context),
+                title: S.of(context).termsAndConditions,
+                showBottomBorder: false),
+          ],
         ),
         bottomButton: _contactUsButton,
       ),
@@ -72,8 +66,8 @@ class AboutAskloraScreen extends StatelessWidget {
   Widget _getAppVersion() => FutureBuilder<PackageInfo>(
         future: PackageInfo.fromPlatform(),
         builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
+          switch (snapshot.hasData) {
+            case true:
               return Align(
                 alignment: Alignment.center,
                 child: Padding(
@@ -85,7 +79,7 @@ class AboutAskloraScreen extends StatelessWidget {
                 ),
               );
             default:
-              return const SizedBox();
+              return const SizedBox.shrink();
           }
         },
       );
