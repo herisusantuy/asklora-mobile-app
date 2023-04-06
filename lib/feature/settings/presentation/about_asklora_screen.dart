@@ -66,20 +66,19 @@ class AboutAskloraScreen extends StatelessWidget {
   Widget _getAppVersion() => FutureBuilder<PackageInfo>(
         future: PackageInfo.fromPlatform(),
         builder: (context, snapshot) {
-          switch (snapshot.hasData) {
-            case true:
-              return Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: CustomTextNew(
-                    'Asklora Version ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
-                    style: AskLoraTextStyles.body1,
-                  ),
+          if (snapshot.hasData) {
+            return Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: CustomTextNew(
+                  'Asklora Version ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
+                  style: AskLoraTextStyles.body1,
                 ),
-              );
-            default:
-              return const SizedBox.shrink();
+              ),
+            );
+          } else {
+            return const SizedBox.shrink();
           }
         },
       );
