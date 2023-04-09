@@ -31,7 +31,7 @@ class BotRolloverButton extends StatelessWidget {
           }
         },
         child: PrimaryButton(
-          label: 'ROLLOVER BOTSTOCK',
+          label: S.of(context).portfolioDetailButtonRolloverBotStock,
           onTap: () => BotStockBottomSheet.rolloverBotStockConfirmation(context,
               orderId: botActiveOrderDetailModel.pk,
               expireDate: botActiveOrderDetailModel.expireDate),

@@ -361,6 +361,276 @@ class S {
       args: [],
     );
   }
+
+  /// `Performance`
+  String get portfolioDetailPerformanceTitle {
+    return Intl.message(
+      'Performance',
+      name: 'portfolioDetailPerformanceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Botstock Values (HKD)`
+  String get portfolioDetailPerformanceBotStockValues {
+    return Intl.message(
+      'Botstock Values (HKD)',
+      name: 'portfolioDetailPerformanceBotStockValues',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inv. Amount (HKD)`
+  String get portfolioDetailPerformanceInvestmentAmount {
+    return Intl.message(
+      'Inv. Amount (HKD)',
+      name: 'portfolioDetailPerformanceInvestmentAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total P&L`
+  String get portfolioDetailPerformanceTotalPL {
+    return Intl.message(
+      'Total P&L',
+      name: 'portfolioDetailPerformanceTotalPL',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Price (USD)`
+  String get portfolioDetailPerformanceCurrentPrice {
+    return Intl.message(
+      'Current Price (USD)',
+      name: 'portfolioDetailPerformanceCurrentPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No. of Shares`
+  String get portfolioDetailPerformanceNumberOfShares {
+    return Intl.message(
+      'No. of Shares',
+      name: 'portfolioDetailPerformanceNumberOfShares',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stock Values (HKD)`
+  String get portfolioDetailPerformanceStockValues {
+    return Intl.message(
+      'Stock Values (HKD)',
+      name: 'portfolioDetailPerformanceStockValues',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cash (HKD)`
+  String get portfolioDetailPerformanceCash {
+    return Intl.message(
+      'Cash (HKD)',
+      name: 'portfolioDetailPerformanceCash',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `% of Bot Assets in Stock`
+  String get portfolioDetailPerformanceBotAssetsInStock {
+    return Intl.message(
+      '% of Bot Assets in Stock',
+      name: 'portfolioDetailPerformanceBotAssetsInStock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Indicates how many shares of a company are currently owned by you.`
+  String get portfolioDetailPerformanceNumberOfSharesTooltip {
+    return Intl.message(
+      'Indicates how many shares of a company are currently owned by you.',
+      name: 'portfolioDetailPerformanceNumberOfSharesTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Key Info`
+  String get portfolioDetailKeyInfoTitle {
+    return Intl.message(
+      'Key Info',
+      name: 'portfolioDetailKeyInfoTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Period`
+  String get portfolioDetailKeyInfoInvestmentPeriod {
+    return Intl.message(
+      'Investment Period',
+      name: 'portfolioDetailKeyInfoInvestmentPeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Days Till Expiry`
+  String get portfolioDetailKeyInfoDaysTillExpiry {
+    return Intl.message(
+      'Days Till Expiry',
+      name: 'portfolioDetailKeyInfoDaysTillExpiry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Time`
+  String get portfolioDetailKeyInfoStartTime {
+    return Intl.message(
+      'Start Time',
+      name: 'portfolioDetailKeyInfoStartTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Time`
+  String get portfolioDetailKeyInfoEndTime {
+    return Intl.message(
+      'End Time',
+      name: 'portfolioDetailKeyInfoEndTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Stop Loss %`
+  String get portfolioDetailKeyInfoEstimatedStopLoss {
+    return Intl.message(
+      'Est. Stop Loss %',
+      name: 'portfolioDetailKeyInfoEstimatedStopLoss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Take Profit %`
+  String get portfolioDetailKeyInfoEstimatedTakeProfit {
+    return Intl.message(
+      'Est. Take Profit %',
+      name: 'portfolioDetailKeyInfoEstimatedTakeProfit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Loss %`
+  String get portfolioDetailKeyInfoEstimatedMaxLoss {
+    return Intl.message(
+      'Est. Max Loss %',
+      name: 'portfolioDetailKeyInfoEstimatedMaxLoss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est, Max Profit %`
+  String get portfolioDetailKeyInfoEstimatedMaxProfit {
+    return Intl.message(
+      'Est, Max Profit %',
+      name: 'portfolioDetailKeyInfoEstimatedMaxProfit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Botstock Status`
+  String get portfolioDetailKeyInfoBotStockStatus {
+    return Intl.message(
+      'Botstock Status',
+      name: 'portfolioDetailKeyInfoBotStockStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of Rollovers`
+  String get portfolioDetailKeyInfoBotStockNumberOfRollover {
+    return Intl.message(
+      'Number of Rollovers',
+      name: 'portfolioDetailKeyInfoBotStockNumberOfRollover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Avg. Return`
+  String get portfolioDetailKeyInfoAvgReturn {
+    return Intl.message(
+      'Avg. Return',
+      name: 'portfolioDetailKeyInfoAvgReturn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Avg. Loss`
+  String get portfolioDetailKeyInfoAvgLoss {
+    return Intl.message(
+      'Avg. Loss',
+      name: 'portfolioDetailKeyInfoAvgLoss',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Avg. Period (Days)`
+  String get portfolioDetailKeyInfoAvgPeriod {
+    return Intl.message(
+      'Avg. Period (Days)',
+      name: 'portfolioDetailKeyInfoAvgPeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CANCEL BOTSTOCK`
+  String get portfolioDetailButtonCancelBotStock {
+    return Intl.message(
+      'CANCEL BOTSTOCK',
+      name: 'portfolioDetailButtonCancelBotStock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `END BOTSTOCK`
+  String get portfolioDetailButtonEndBotStock {
+    return Intl.message(
+      'END BOTSTOCK',
+      name: 'portfolioDetailButtonEndBotStock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ROLLOVER BOTSTOCK`
+  String get portfolioDetailButtonRolloverBotStock {
+    return Intl.message(
+      'ROLLOVER BOTSTOCK',
+      name: 'portfolioDetailButtonRolloverBotStock',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

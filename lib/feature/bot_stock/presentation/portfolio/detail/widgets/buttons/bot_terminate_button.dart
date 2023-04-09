@@ -23,7 +23,7 @@ class BotTerminateButton extends StatelessWidget {
             BotStockResultScreen.open(
                 context: context,
                 arguments: Pair('Trade Request Received',
-                    '${botType.name} ${botActiveOrderDetailModel.tickerDetail.ticker} will end at 17/3/2023 10.22'));
+                    '${botType.name} ${botActiveOrderDetailModel.tickerDetail.ticker} will end at ${state.endBotStockResponse.data?.optimalTime}'));
           } else if (state.endBotStockResponse.state == ResponseState.error) {
             CustomInAppNotification.show(
                 context, state.endBotStockResponse.message);
@@ -31,7 +31,7 @@ class BotTerminateButton extends StatelessWidget {
         },
         child: PrimaryButton(
           buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
-          label: 'END BOTSTOCK',
+          label: S.of(context).portfolioDetailButtonEndBotStock,
           onTap: () => BotStockBottomSheet.endBotStockConfirmation(
               context,
               botActiveOrderDetailModel.pk,

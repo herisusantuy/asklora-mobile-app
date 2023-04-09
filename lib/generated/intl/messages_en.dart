@@ -84,6 +84,61 @@ class MessageLookup extends MessageLookupByLibrary {
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "portfolioDetailButtonCancelBotStock":
+            MessageLookupByLibrary.simpleMessage("CANCEL BOTSTOCK"),
+        "portfolioDetailButtonEndBotStock":
+            MessageLookupByLibrary.simpleMessage("END BOTSTOCK"),
+        "portfolioDetailButtonRolloverBotStock":
+            MessageLookupByLibrary.simpleMessage("ROLLOVER BOTSTOCK"),
+        "portfolioDetailKeyInfoAvgLoss":
+            MessageLookupByLibrary.simpleMessage("Avg. Loss"),
+        "portfolioDetailKeyInfoAvgPeriod":
+            MessageLookupByLibrary.simpleMessage("Avg. Period (Days)"),
+        "portfolioDetailKeyInfoAvgReturn":
+            MessageLookupByLibrary.simpleMessage("Avg. Return"),
+        "portfolioDetailKeyInfoBotStockNumberOfRollover":
+            MessageLookupByLibrary.simpleMessage("Number of Rollovers"),
+        "portfolioDetailKeyInfoBotStockStatus":
+            MessageLookupByLibrary.simpleMessage("Botstock Status"),
+        "portfolioDetailKeyInfoDaysTillExpiry":
+            MessageLookupByLibrary.simpleMessage("Days Till Expiry"),
+        "portfolioDetailKeyInfoEndTime":
+            MessageLookupByLibrary.simpleMessage("End Time"),
+        "portfolioDetailKeyInfoEstimatedMaxLoss":
+            MessageLookupByLibrary.simpleMessage("Est. Max Loss %"),
+        "portfolioDetailKeyInfoEstimatedMaxProfit":
+            MessageLookupByLibrary.simpleMessage("Est, Max Profit %"),
+        "portfolioDetailKeyInfoEstimatedStopLoss":
+            MessageLookupByLibrary.simpleMessage("Est. Stop Loss %"),
+        "portfolioDetailKeyInfoEstimatedTakeProfit":
+            MessageLookupByLibrary.simpleMessage("Est. Take Profit %"),
+        "portfolioDetailKeyInfoInvestmentPeriod":
+            MessageLookupByLibrary.simpleMessage("Investment Period"),
+        "portfolioDetailKeyInfoStartTime":
+            MessageLookupByLibrary.simpleMessage("Start Time"),
+        "portfolioDetailKeyInfoTitle":
+            MessageLookupByLibrary.simpleMessage("Key Info"),
+        "portfolioDetailPerformanceBotAssetsInStock":
+            MessageLookupByLibrary.simpleMessage("% of Bot Assets in Stock"),
+        "portfolioDetailPerformanceBotStockValues":
+            MessageLookupByLibrary.simpleMessage("Botstock Values (HKD)"),
+        "portfolioDetailPerformanceCash":
+            MessageLookupByLibrary.simpleMessage("Cash (HKD)"),
+        "portfolioDetailPerformanceCurrentPrice":
+            MessageLookupByLibrary.simpleMessage("Current Price (USD)"),
+        "portfolioDetailPerformanceInvestmentAmount":
+            MessageLookupByLibrary.simpleMessage("Inv. Amount (HKD)"),
+        "portfolioDetailPerformanceNumberOfShares":
+            MessageLookupByLibrary.simpleMessage("No. of Shares"),
+        "portfolioDetailPerformanceNumberOfSharesTooltip":
+            MessageLookupByLibrary.simpleMessage(
+                "Indicates how many shares of a company are currently owned by you."),
+        "portfolioDetailPerformanceStockValues":
+            MessageLookupByLibrary.simpleMessage("Stock Values (HKD)"),
+        "portfolioDetailPerformanceTitle":
+            MessageLookupByLibrary.simpleMessage("Performance"),
+        "portfolioDetailPerformanceTotalPL":
+            MessageLookupByLibrary.simpleMessage("Total P&L"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(

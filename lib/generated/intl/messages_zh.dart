@@ -38,6 +38,58 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
-            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？")
+            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "portfolioDetailButtonCancelBotStock":
+            MessageLookupByLibrary.simpleMessage("取消BOTSTOCK"),
+        "portfolioDetailButtonEndBotStock":
+            MessageLookupByLibrary.simpleMessage("取消Botstock"),
+        "portfolioDetailButtonRolloverBotStock":
+            MessageLookupByLibrary.simpleMessage("續期Botstock"),
+        "portfolioDetailKeyInfoAvgLoss":
+            MessageLookupByLibrary.simpleMessage("平均虧損"),
+        "portfolioDetailKeyInfoAvgPeriod":
+            MessageLookupByLibrary.simpleMessage("平均時期 (日數)"),
+        "portfolioDetailKeyInfoAvgReturn":
+            MessageLookupByLibrary.simpleMessage("平均回報"),
+        "portfolioDetailKeyInfoBotStockNumberOfRollover":
+            MessageLookupByLibrary.simpleMessage("Number of Rollovers"),
+        "portfolioDetailKeyInfoBotStockStatus":
+            MessageLookupByLibrary.simpleMessage("Botstock 狀態"),
+        "portfolioDetailKeyInfoDaysTillExpiry":
+            MessageLookupByLibrary.simpleMessage("續期時間"),
+        "portfolioDetailKeyInfoEndTime":
+            MessageLookupByLibrary.simpleMessage("結束時間"),
+        "portfolioDetailKeyInfoEstimatedMaxLoss":
+            MessageLookupByLibrary.simpleMessage("預計最大損失%"),
+        "portfolioDetailKeyInfoEstimatedMaxProfit":
+            MessageLookupByLibrary.simpleMessage("預計最大收益% "),
+        "portfolioDetailKeyInfoEstimatedStopLoss":
+            MessageLookupByLibrary.simpleMessage("預計止損 %"),
+        "portfolioDetailKeyInfoEstimatedTakeProfit":
+            MessageLookupByLibrary.simpleMessage("預計止賺%"),
+        "portfolioDetailKeyInfoInvestmentPeriod":
+            MessageLookupByLibrary.simpleMessage("投資期"),
+        "portfolioDetailKeyInfoStartTime":
+            MessageLookupByLibrary.simpleMessage("開始時間"),
+        "portfolioDetailKeyInfoTitle":
+            MessageLookupByLibrary.simpleMessage("主要資訊"),
+        "portfolioDetailPerformanceBotAssetsInStock":
+            MessageLookupByLibrary.simpleMessage("股票/現金比例"),
+        "portfolioDetailPerformanceBotStockValues":
+            MessageLookupByLibrary.simpleMessage("Botstock 價值 (HKD)"),
+        "portfolioDetailPerformanceCash":
+            MessageLookupByLibrary.simpleMessage("現金 (HKD)"),
+        "portfolioDetailPerformanceCurrentPrice":
+            MessageLookupByLibrary.simpleMessage("當前價格(USD)"),
+        "portfolioDetailPerformanceInvestmentAmount":
+            MessageLookupByLibrary.simpleMessage("投資金額 (HKD)"),
+        "portfolioDetailPerformanceNumberOfShares":
+            MessageLookupByLibrary.simpleMessage("持股數量"),
+        "portfolioDetailPerformanceStockValues":
+            MessageLookupByLibrary.simpleMessage("股票價值 (HKD)"),
+        "portfolioDetailPerformanceTitle":
+            MessageLookupByLibrary.simpleMessage("表現"),
+        "portfolioDetailPerformanceTotalPL":
+            MessageLookupByLibrary.simpleMessage("總盈虧")
       };
 }

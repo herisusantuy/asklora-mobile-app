@@ -14,7 +14,7 @@ class Performance extends StatelessWidget {
   Widget build(BuildContext context) =>
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         CustomTextNew(
-          'Performance',
+          S.of(context).portfolioDetailPerformanceTitle,
           style: AskLoraTextStyles.h5,
         ),
         const SizedBox(
@@ -27,16 +27,20 @@ class Performance extends StatelessWidget {
             children: [
               Expanded(
                   child: ColumnText(
-                      title: 'Botstock values (HKD)',
+                      title: S
+                          .of(context)
+                          .portfolioDetailPerformanceBotStockValues,
                       subTitle: botActiveOrderDetailModel.botStockValueString)),
               Expanded(
                   child: ColumnText(
-                      title: 'Inv. Amount (HKD)',
+                      title: S
+                          .of(context)
+                          .portfolioDetailPerformanceInvestmentAmount,
                       subTitle:
                           botActiveOrderDetailModel.investmentAmountString)),
               Expanded(
                   child: ColumnText(
-                      title: 'Total P/L',
+                      title: S.of(context).portfolioDetailPerformanceTotalPL,
                       subTitle: botActiveOrderDetailModel.currentPnlRetString)),
             ],
           ),
@@ -45,22 +49,22 @@ class Performance extends StatelessWidget {
           height: 20,
         ),
         PairColumnText(
-            leftTitle: 'Current Price',
+            leftTitle: S.of(context).portfolioDetailPerformanceCurrentPrice,
             leftSubTitle: botActiveOrderDetailModel.currentPriceString,
-            rightTitle: 'No. of Shares',
+            rightTitle: S.of(context).portfolioDetailPerformanceNumberOfShares,
             rightSubTitle: botActiveOrderDetailModel.botShareString,
             rightTooltipText:
-                'Indicates how many shares of a company are currently owned by you.'),
+                S.of(context).portfolioDetailPerformanceNumberOfSharesTooltip),
         _spaceBetweenInfo,
         PairColumnText(
-          leftTitle: 'Stock Values (HKD)',
+          leftTitle: S.of(context).portfolioDetailPerformanceStockValues,
           leftSubTitle: botActiveOrderDetailModel.stockValueString,
-          rightTitle: 'Cash (HKD)',
+          rightTitle: S.of(context).portfolioDetailPerformanceCash,
           rightSubTitle: botActiveOrderDetailModel.botCashBalanceString,
         ),
         _spaceBetweenInfo,
         ColumnText(
-            title: '% of Bot Assets in Stock',
+            title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
             subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
         _chartWidget()
       ]);
