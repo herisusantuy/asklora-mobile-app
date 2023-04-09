@@ -11,19 +11,17 @@ import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_detail_model.dar
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart'
     as _i10;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_detail_model.dart'
-    as _i13;
+    as _i12;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart'
     as _i11;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart'
-    as _i14;
+    as _i13;
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_response.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/repository/portfolio_repository.dart'
     as _i3;
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart'
     as _i6;
-import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart'
-    as _i12;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
     as _i8;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart'
@@ -211,12 +209,12 @@ class MockBotStockRepository extends _i1.Mock
       ) as _i4.Future<void>);
   @override
   _i4.Future<_i2.BaseResponse<List<_i11.BotActiveOrderModel>>> activeOrders(
-          {_i12.BotStockFilter? botStockFilter}) =>
+          {required List<String>? status}) =>
       (super.noSuchMethod(
         Invocation.method(
           #activeOrders,
           [],
-          {#botStockFilter: botStockFilter},
+          {#status: status},
         ),
         returnValue:
             _i4.Future<_i2.BaseResponse<List<_i11.BotActiveOrderModel>>>.value(
@@ -225,13 +223,13 @@ class MockBotStockRepository extends _i1.Mock
           Invocation.method(
             #activeOrders,
             [],
-            {#botStockFilter: botStockFilter},
+            {#status: status},
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<List<_i11.BotActiveOrderModel>>>);
   @override
   _i4.Future<
-      _i2.BaseResponse<_i13.BotActiveOrderDetailModel>> activeOrderDetail(
+      _i2.BaseResponse<_i12.BotActiveOrderDetailModel>> activeOrderDetail(
           String? botOrderId) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -239,17 +237,17 @@ class MockBotStockRepository extends _i1.Mock
           [botOrderId],
         ),
         returnValue:
-            _i4.Future<_i2.BaseResponse<_i13.BotActiveOrderDetailModel>>.value(
-                _FakeBaseResponse_0<_i13.BotActiveOrderDetailModel>(
+            _i4.Future<_i2.BaseResponse<_i12.BotActiveOrderDetailModel>>.value(
+                _FakeBaseResponse_0<_i12.BotActiveOrderDetailModel>(
           this,
           Invocation.method(
             #activeOrderDetail,
             [botOrderId],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i13.BotActiveOrderDetailModel>>);
+      ) as _i4.Future<_i2.BaseResponse<_i12.BotActiveOrderDetailModel>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>> createOrder({
+  _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>> createOrder({
     required _i10.BotRecommendationModel? botRecommendationModel,
     required double? tradeBotStockAmount,
   }) =>
@@ -262,8 +260,8 @@ class MockBotStockRepository extends _i1.Mock
             #tradeBotStockAmount: tradeBotStockAmount,
           },
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>>.value(
-            _FakeBaseResponse_0<_i14.BotOrderResponse>(
+        returnValue: _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i13.BotOrderResponse>(
           this,
           Invocation.method(
             #createOrder,
@@ -274,56 +272,56 @@ class MockBotStockRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>>);
+      ) as _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>> cancelOrder(
+  _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>> cancelOrder(
           String? botOrderId) =>
       (super.noSuchMethod(
         Invocation.method(
           #cancelOrder,
           [botOrderId],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>>.value(
-            _FakeBaseResponse_0<_i14.BotOrderResponse>(
+        returnValue: _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i13.BotOrderResponse>(
           this,
           Invocation.method(
             #cancelOrder,
             [botOrderId],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>>);
+      ) as _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>> rolloverOrder(
+  _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>> rolloverOrder(
           String? botOrderId) =>
       (super.noSuchMethod(
         Invocation.method(
           #rolloverOrder,
           [botOrderId],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>>.value(
-            _FakeBaseResponse_0<_i14.BotOrderResponse>(
+        returnValue: _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i13.BotOrderResponse>(
           this,
           Invocation.method(
             #rolloverOrder,
             [botOrderId],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>>);
+      ) as _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>> terminateOrder(
+  _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>> terminateOrder(
           String? botOrderId) =>
       (super.noSuchMethod(
         Invocation.method(
           #terminateOrder,
           [botOrderId],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>>.value(
-            _FakeBaseResponse_0<_i14.BotOrderResponse>(
+        returnValue: _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i13.BotOrderResponse>(
           this,
           Invocation.method(
             #terminateOrder,
             [botOrderId],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i14.BotOrderResponse>>);
+      ) as _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>);
 }

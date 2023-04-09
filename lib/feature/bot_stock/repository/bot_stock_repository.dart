@@ -17,6 +17,7 @@ import '../domain/bot_recommendation_response.dart';
 import '../domain/bot_stock_api_client.dart';
 import '../domain/orders/bot_active_order_detail_model.dart';
 import '../domain/orders/bot_active_order_model.dart';
+import '../domain/orders/bot_active_order_request.dart';
 import '../domain/orders/bot_create_order_request.dart';
 import '../domain/orders/bot_order_response.dart';
 import '../domain/orders/bot_order_request.dart';
@@ -118,9 +119,10 @@ class BotStockRepository {
       await _sharedPreference.deleteData(sfKeyInvestmentStyleState);
 
   Future<BaseResponse<List<BotActiveOrderModel>>> activeOrders(
-      {BotStockFilter? botStockFilter}) async {
+      {required List<String> status}) async {
     try {
-      var response = await _botStockApiClient.activeOrder();
+      var response = await _botStockApiClient
+          .activeOrder(BotActiveOrderRequest(status: status));
       return BaseResponse.complete(List.from(response.data
           .map((element) => BotActiveOrderModel.fromJson(element))));
     } catch (e) {

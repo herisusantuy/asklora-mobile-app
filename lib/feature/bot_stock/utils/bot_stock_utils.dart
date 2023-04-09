@@ -93,8 +93,7 @@ enum BotStockFilter {
 enum BotStatus {
   pending('place', 'Pending', AskLoraColors.amber),
   active('open', 'Active', AskLoraColors.primaryGreen),
-  activeExpiresSoon(
-      'open', 'Active (expires soon)', AskLoraColors.primaryGreen);
+  activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen);
 
   final String value;
   final String name;
@@ -105,7 +104,7 @@ enum BotStatus {
         .firstWhere((element) => element.value == botStatusString);
     if (botStatus == active &&
         DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
-      botStatus = BotStatus.activeExpiresSoon;
+      botStatus = BotStatus.activeExpireSoon;
     }
     return botStatus;
   }

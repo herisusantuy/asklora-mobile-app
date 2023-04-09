@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 
 import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/domain/pair.dart';
 import '../../../../../../core/presentation/buttons/others/funding_button.dart';
 import '../../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../../core/presentation/text_fields/custom_dropdown.dart';
-import '../../../../../../core/presentation/text_fields/style/text_field_style.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/custom_checkbox.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
+import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
@@ -96,10 +97,17 @@ class PortfolioScreen extends StatelessWidget {
                 const SizedBox(
                   height: 40,
                 ),
-                CustomTextNew(
-                  'Your Botstocks',
-                  style: AskLoraTextStyles.h2
-                      .copyWith(color: AskLoraColors.charcoal),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextNew(
+                        'Your Botstocks',
+                        style: AskLoraTextStyles.h2
+                            .copyWith(color: AskLoraColors.charcoal),
+                      ),
+                    ),
+                    BotPortfolioFilter()
+                  ],
                 ),
                 const SizedBox(
                   height: 10,

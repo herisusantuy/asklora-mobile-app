@@ -86,12 +86,84 @@ void main() async {
               const PortfolioState(currency: CurrencyType.hkd),
             });
 
+    blocTest<PortfolioBloc, PortfolioState>('check active filter',
+        build: () {
+          when(botStockRepository.activeOrders(status: ['open', 'place']))
+              .thenAnswer((_) => Future.value(response));
+          return portfolioBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const ActiveFilterChecked(true)),
+            },
+        expect: () => {
+              const PortfolioState(activeFilterChecked: true),
+              PortfolioState(
+                  activeFilterChecked: true,
+                  botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(
+                  activeFilterChecked: true, botActiveOrderResponse: response),
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>('uncheck active filter',
+        build: () {
+          when(botStockRepository.activeOrders(status: ['place']))
+              .thenAnswer((_) => Future.value(response));
+          return portfolioBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const ActiveFilterChecked(false)),
+            },
+        expect: () => {
+              const PortfolioState(activeFilterChecked: false),
+              PortfolioState(
+                  activeFilterChecked: false,
+                  botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(
+                  activeFilterChecked: false, botActiveOrderResponse: response),
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>('check pending filter',
+        build: () {
+          when(botStockRepository.activeOrders(status: ['open', 'place']))
+              .thenAnswer((_) => Future.value(response));
+          return portfolioBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const PendingFilterChecked(true)),
+            },
+        expect: () => {
+              const PortfolioState(pendingFilterChecked: true),
+              PortfolioState(
+                  pendingFilterChecked: true,
+                  botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(
+                  pendingFilterChecked: true, botActiveOrderResponse: response),
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>('uncheck pending filter',
+        build: () {
+          when(botStockRepository.activeOrders(status: ['open']))
+              .thenAnswer((_) => Future.value(response));
+          return portfolioBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const PendingFilterChecked(false)),
+            },
+        expect: () => {
+              const PortfolioState(pendingFilterChecked: false),
+              PortfolioState(
+                  pendingFilterChecked: false,
+                  botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(
+                  pendingFilterChecked: false,
+                  botActiveOrderResponse: response),
+            });
+
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.complete` WHEN '
         'fetching bot portfolio',
         build: () {
-          when(botStockRepository.activeOrders(
-                  botStockFilter: BotStockFilter.all))
+          when(botStockRepository.activeOrders(status: ['open', 'place']))
               .thenAnswer((_) => Future.value(response));
           return portfolioBloc;
         },
@@ -105,8 +177,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed fetching bot portfolio',
         build: () {
-          when(botStockRepository.activeOrders(
-                  botStockFilter: BotStockFilter.all))
+          when(botStockRepository.activeOrders(status: ['open', 'place']))
               .thenAnswer((_) => Future.value(errorResponse));
           return portfolioBloc;
         },

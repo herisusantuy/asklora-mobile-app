@@ -7,10 +7,16 @@ abstract class PortfolioEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class BotStockFilterChanged extends PortfolioEvent {
-  final BotStockFilter botStockFilter;
+class ActiveFilterChecked extends PortfolioEvent {
+  final bool isChecked;
 
-  const BotStockFilterChanged(this.botStockFilter);
+  const ActiveFilterChecked(this.isChecked);
+}
+
+class PendingFilterChecked extends PortfolioEvent {
+  final bool isChecked;
+
+  const PendingFilterChecked(this.isChecked);
 }
 
 class FetchPortfolio extends PortfolioEvent {}

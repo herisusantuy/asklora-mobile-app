@@ -125,7 +125,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
         child: Column(
           children: [
-            if (botStatus == BotStatus.activeExpiresSoon)
+            if (botStatus == BotStatus.activeExpireSoon)
               Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
                 child: BotRolloverButton(
@@ -134,7 +134,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                 ),
               ),
             if (botStatus == BotStatus.active ||
-                botStatus == BotStatus.activeExpiresSoon)
+                botStatus == BotStatus.activeExpireSoon)
               BotTerminateButton(
                 botActiveOrderDetailModel: botActiveOrderDetailModel,
                 botType: botType,

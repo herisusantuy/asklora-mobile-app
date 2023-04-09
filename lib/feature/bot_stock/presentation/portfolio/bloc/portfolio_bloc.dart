@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/utils/bloc_transformer/restartable.dart';
 import '../../../../../core/utils/currency_enum.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
@@ -21,10 +22,16 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       : _portfolioRepository = portfolioRepository,
         _botStockRepository = botStockRepository,
         super(const PortfolioState()) {
-    on<FetchActiveOrderDetail>(_onFetchActiveOrderDetail);
+    on<FetchActiveOrderDetail>(
+      _onFetchActiveOrderDetail,
+    );
     on<FetchPortfolio>(_onFetchPortfolio);
-    on<FetchActiveOrders>(onFetchBotActiveOrders);
-    on<BotStockFilterChanged>(_onBotStockFilterChanged);
+    on<FetchActiveOrders>(
+      onFetchBotActiveOrders,
+      transformer: restartable(),
+    );
+    on<ActiveFilterChecked>(_onActiveFilterChecked);
+    on<PendingFilterChecked>(_onPendingFilterChecked);
     on<CurrencyChanged>(_onCurrencyChanged);
     on<RolloverBotStock>(_onRolloverBotStock);
     on<EndBotStock>(_onEndBotStock);
@@ -37,9 +44,20 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   onFetchBotActiveOrders(
       FetchActiveOrders event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(botActiveOrderResponse: BaseResponse.loading()));
-    var data = await _botStockRepository.activeOrders(
-        botStockFilter: event.botStockFilter);
+    var data =
+        await _botStockRepository.activeOrders(status: getFilterStatus(state));
     emit(state.copyWith(botActiveOrderResponse: data));
+  }
+
+  List<String> getFilterStatus(PortfolioState state) {
+    List<String> status = [];
+    if (state.activeFilterChecked) {
+      status.add(BotStatus.active.value);
+    }
+    if (state.pendingFilterChecked) {
+      status.add(BotStatus.pending.value);
+    }
+    return status;
   }
 
   _onFetchActiveOrderDetail(
@@ -55,10 +73,16 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     emit(state.copyWith(portfolioResponse: data));
   }
 
-  _onBotStockFilterChanged(
-      BotStockFilterChanged event, Emitter<PortfolioState> emit) async {
-    emit(state.copyWith(botStockFilter: event.botStockFilter));
-    add(FetchActiveOrders(botStockFilter: event.botStockFilter));
+  _onActiveFilterChecked(
+      ActiveFilterChecked event, Emitter<PortfolioState> emit) async {
+    emit(state.copyWith(activeFilterChecked: event.isChecked));
+    add(const FetchActiveOrders());
+  }
+
+  _onPendingFilterChecked(
+      PendingFilterChecked event, Emitter<PortfolioState> emit) async {
+    emit(state.copyWith(pendingFilterChecked: event.isChecked));
+    add(const FetchActiveOrders());
   }
 
   _onCurrencyChanged(CurrencyChanged event, Emitter<PortfolioState> emit) {

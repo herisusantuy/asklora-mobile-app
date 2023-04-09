@@ -26,45 +26,23 @@ class BotPortfolioList extends StatelessWidget {
       if (portfolioState.botActiveOrderResponse.state ==
           ResponseState.success) {
         if (portfolioState.botActiveOrderResponse.data!.isNotEmpty) {
-          return Column(
-            children: [
-              const BotPortfolioFilter(),
-              SizedBox(
-                width: double.infinity,
-                child: Wrap(
-                  spacing: _spacing,
-                  runSpacing: _runSpacing,
-                  children: portfolioState.botActiveOrderResponse.data!
-                      .map((e) => BotPortfolioCard(
-                            height: botCardHeight,
-                            spacing: _spacing,
-                            botActiveOrderModel: e,
-                          ))
-                      .toList(),
-                ),
-              ),
-            ],
+          return SizedBox(
+            width: double.infinity,
+            child: Wrap(
+              spacing: _spacing,
+              runSpacing: _runSpacing,
+              children: portfolioState.botActiveOrderResponse.data!
+                  .map((e) => BotPortfolioCard(
+                        height: botCardHeight,
+                        spacing: _spacing,
+                        botActiveOrderModel: e,
+                      ))
+                  .toList(),
+            ),
           );
         } else {
-          if (portfolioState.botStockFilter == BotStockFilter.all) {
-            return const BotPortfolioPopUp(
-                botPortfolioPopUpType: BotPortfolioPopUpType.noBotStock);
-          } else {
-            return Column(
-              children: [
-                const BotPortfolioFilter(),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: (MediaQuery.of(context).size.height - 600) / 2),
-                  child: CustomTextNew(
-                    'No ${portfolioState.botStockFilter.name} Botstocks',
-                    style: AskLoraTextStyles.body1
-                        .copyWith(color: AskLoraColors.darkGray),
-                  ),
-                ),
-              ],
-            );
-          }
+          return const BotPortfolioPopUp(
+              botPortfolioPopUpType: BotPortfolioPopUpType.noBotStock);
         }
       } else if (portfolioState.botActiveOrderResponse.state ==
           ResponseState.loading) {
