@@ -148,7 +148,8 @@ void main() async {
           when(userJourneyRepository.getUserJourney())
               .thenAnswer((_) => Future.value(UserJourney.investmentStyle));
 
-          when(accountRepository.getAccount()).thenAnswer((_) async => account);
+          when(accountRepository.getAccount())
+              .thenAnswer((_) async => BaseResponse.complete(account));
           when(ppiResponseRepository.getUserSnapShotUserId('someusername'))
               .thenAnswer((_) => Future.value(BaseResponse.complete(SnapShot(
                   0,
