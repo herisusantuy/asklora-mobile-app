@@ -20,25 +20,81 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
+  static String m0(availableAmount, minimumAmount) =>
+      "你有  ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";
+
+  static String m1(botInformation) =>
+      "你可以選擇依家結束，所有 ${botInformation} 嘅交易活動會立即停止。";
+
+  static String m2(minimumAmount) => "每單交易最小金額為 ${minimumAmount} 。";
+
+  static String m3(expiryTime) => "更新到期時間為 ${expiryTime}";
+
+  static String m4(detail) => "載入你投資細節時出咗少少問題，Reload一次試下？";
+
+  static String m5(currency) => "購買力 (${currency})";
+
+  static String m6(currency) => "Botstock 總價值 (${currency})";
+
+  static String m7(currency) => "可提取金額 (${currency})";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
+        "botTradeBottomSheetAmountMinimum": m0,
+        "botTradeBottomSheetAmountTitle":
+            MessageLookupByLibrary.simpleMessage("你想投資嘅金額係？"),
+        "botTradeBottomSheetCancelBotStockConfirmationTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "投資額及交易費用 (HKD1,500) 會自動轉至你嘅賬戶。"),
+        "botTradeBottomSheetEndBotStockConfirmationSubTitle":
+            MessageLookupByLibrary.simpleMessage(" Botstock 的總價值會自動轉至你的賬戶。"),
+        "botTradeBottomSheetEndBotStockConfirmationTitle": m1,
+        "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle":
+            MessageLookupByLibrary.simpleMessage("存入資金正式交易"),
+        "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle":
+            MessageLookupByLibrary.simpleMessage("免費 Botstock 已成功加至\n你嘅投資組合！"),
+        "botTradeBottomSheetInsufficientBalanceSubTitle": m2,
+        "botTradeBottomSheetInsufficientBalanceTitle":
+            MessageLookupByLibrary.simpleMessage("唔夠資金，幫你唔到，係時候入錢入戶口！"),
+        "botTradeBottomSheetRolloverConfirmationButton":
+            MessageLookupByLibrary.simpleMessage("延長"),
+        "botTradeBottomSheetRolloverConfirmationSubTitle": m3,
+        "botTradeBottomSheetRolloverConfirmationTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "你想延長 Botstock 投資期\n以繼續交易？\n\n2 星期"),
+        "botTradeBottomSheetRolloverDisclosureSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "延長期費用為每個Botstock 每月 HKD40， \n如你賬戶裡金額不足，收費金額將會在你有\n足夠的購買力的時候扣除。"),
+        "botTradeBottomSheetRolloverDisclosureTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "你將延長 Botstock 投資期，\n 並需繳付額外延長費用。"),
+        "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
+        "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
+        "buttonConfirm": MessageLookupByLibrary.simpleMessage("確定"),
         "buttonCreateAnAccount": MessageLookupByLibrary.simpleMessage("建立帳戶"),
+        "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
         "buttonNext": MessageLookupByLibrary.simpleMessage("下一步"),
+        "buttonNotNow": MessageLookupByLibrary.simpleMessage("稍後再說"),
+        "buttonReloadPage": MessageLookupByLibrary.simpleMessage("重新加載"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
         "carouselIntro3": MessageLookupByLibrary.simpleMessage("AI策略，\n自動交易"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
+        "errorGettingInformationSubTitle": m4,
+        "errorGettingInformationTitle":
+            MessageLookupByLibrary.simpleMessage("咦，無法獲取資料"),
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "portfolioBuyingPower": m5,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("取消BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
@@ -90,6 +146,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioDetailPerformanceTitle":
             MessageLookupByLibrary.simpleMessage("表現"),
         "portfolioDetailPerformanceTotalPL":
-            MessageLookupByLibrary.simpleMessage("總盈虧")
+            MessageLookupByLibrary.simpleMessage("總盈虧"),
+        "portfolioTotalBotStock": m6,
+        "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
+        "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
+        "portfolioWithdrawableAmount": m7,
+        "portfolioYourBotStock":
+            MessageLookupByLibrary.simpleMessage("你的Botstocks")
       };
 }

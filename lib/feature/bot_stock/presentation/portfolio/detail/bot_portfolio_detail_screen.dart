@@ -80,11 +80,12 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                   state.botActiveOrderDetailResponse.data!;
               return CustomLayoutWithBlurPopUp(
                 loraPopUpMessageModel: LoraPopUpMessageModel(
-                  title: 'Unable to get information',
-                  subTitle:
-                      'There was an error when trying to get your Portfolio. Please try reloading the page',
-                  primaryButtonLabel: 'RELOAD PAGE',
-                  secondaryButtonLabel: 'CANCEL',
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle: S
+                      .of(context)
+                      .errorGettingInformationSubTitle('your Portfolio'),
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  secondaryButtonLabel: S.of(context).buttonCancel,
                   onSecondaryButtonTap: () => Navigator.pop(context),
                   onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
                       (FetchActiveOrderDetail(

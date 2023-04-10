@@ -20,6 +20,7 @@ import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../domain/orders/bot_active_order_model.dart';
@@ -75,11 +76,12 @@ class PortfolioScreen extends StatelessWidget {
               previous.currency != current.currency,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: 'Unable to get information',
-              subTitle:
-                  'There was an error when trying to get your Portfolio. Please try reloading the page',
-              primaryButtonLabel: 'RELOAD PAGE',
-              secondaryButtonLabel: 'CANCEL',
+              title: S.of(context).errorGettingInformationTitle,
+              subTitle: S
+                  .of(context)
+                  .errorGettingInformationSubTitle('your Portfolio'),
+              primaryButtonLabel: S.of(context).buttonReloadPage,
+              secondaryButtonLabel: S.of(context).buttonCancel,
               onSecondaryButtonTap: () => Navigator.pop(context),
               onPrimaryButtonTap: () {
                 context.read<PortfolioBloc>().add(const FetchActiveOrders());
@@ -101,12 +103,12 @@ class PortfolioScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CustomTextNew(
-                        'Your Botstocks',
+                        S.of(context).portfolioYourBotStock,
                         style: AskLoraTextStyles.h2
                             .copyWith(color: AskLoraColors.charcoal),
                       ),
                     ),
-                    BotPortfolioFilter()
+                    const BotPortfolioFilter()
                   ],
                 ),
                 const SizedBox(
@@ -143,7 +145,7 @@ class PortfolioScreen extends StatelessWidget {
                         Row(
                           children: [
                             CustomTextNew(
-                              'Total Portfolio Value  -  ',
+                              '${S.of(context).portfolioTotalValue}  -  ',
                               style: AskLoraTextStyles.body4,
                             ),
                             CurrencyDropdown(
@@ -186,10 +188,13 @@ class PortfolioScreen extends StatelessWidget {
                     content: Column(
                       children: [
                         PairColumnText(
-                            leftTitle:
-                                'Withdrawable\nAmount (${state.currency.value})',
-                            rightTitle:
-                                'Buying Power\n(${state.currency.value})',
+                            leftTitle: S
+                                .of(context)
+                                .portfolioWithdrawableAmount(
+                                    state.currency.value),
+                            rightTitle: S
+                                .of(context)
+                                .portfolioBuyingPower(state.currency.value),
                             rightTooltipText:
                                 'Your Buying Power represents the amount of cash that you can use to buy stocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
                             leftSubTitle: data?.withdrawableAmount != null
@@ -202,9 +207,10 @@ class PortfolioScreen extends StatelessWidget {
                           height: 14,
                         ),
                         PairColumnText(
-                          leftTitle:
-                              'Total Botstock\nValues (${state.currency.value})',
-                          rightTitle: 'Total P/L\n',
+                          leftTitle: S
+                              .of(context)
+                              .portfolioTotalBotStock(state.currency.value),
+                          rightTitle: S.of(context).portfolioTotalPL,
                           leftSubTitle: (data?.totalBotStockValues ?? 0)
                               .convertToCurrencyDecimal(),
                           rightSubTitle: data?.withdrawableAmount != null

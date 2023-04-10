@@ -1,9 +1,24 @@
 {
   "@@locale": "en",
+  "buttonCancel": "CANCEL",
+  "buttonConfirm": "CONFIRM",
   "buttonNext": "NEXT",
+  "buttonNotNow": "NOT NOW",
+  "buttonReloadPage": "RELOAD PAGE",
+  "buttonDeposit": "DEPOSIT",
+  "buttonCancelTrade": "CANCEL TRADE",
   "buttonCreateAnAccount": "CREATE AN ACCOUNT",
   "buttonHaveAnAccount": "HAVE AN ACCOUNT?",
   "buttonLetsBegin": "LET’S BEGIN",
+  "errorGettingInformationTitle": "Unable to get information",
+  "errorGettingInformationSubTitle": "There was an error when trying to get {detail}. Please try reloading the page",
+  "@errorGettingInformationSubTitle": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
   "carouselIntro1": "Get your Investments in Shape",
   "carouselIntro2": "Guided by FinFit Coach, Lora",
   "carouselIntro3": "Invest with AI strategy, automated",
@@ -41,7 +56,7 @@
   },
   "botTradeBottomSheetRolloverDisclosureTitle": "If you extend the Botstock period, you will incur additional fees",
   "botTradeBottomSheetRolloverDisclosureSubTitle": "You will be charged HKD40 if you want to extend this Botstock. If you do not have enough funds, then your fees will be deducted when you have sufficient buying power",
-  "botTradeBottomSheetRolloverConfirmationTitle": "Do you want to continue the Botstock and extend the investment period?\\n\\n 2 Weeks\\n",
+  "botTradeBottomSheetRolloverConfirmationTitle": "Your Botstock will be extended for \n\n2 Weeks",
   "botTradeBottomSheetRolloverConfirmationSubTitle": "The new expiry date is {expiryTime}",
   "@botTradeBottomSheetRolloverConfirmationSubTitle": {
     "placeholders": {
@@ -59,9 +74,10 @@
     }
   },
   "botTradeBottomSheetEndBotStockConfirmationSubTitle": "The total Botstock value will be returned to your \naccount after the next community order.",
-  "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio successfully!",
-  "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "DEPOSIT TO START REAL TRADE",
+  "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio!",
+  "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": " DEPOSIT TO START TRADING",
   "botTradeBottomSheetCancelBotStockConfirmationTitle": "The investment amount and Bot management fee (HKD1,500) will be returned to your account.",
+  "botTradeBottomSheetRolloverConfirmationButton": "CONFIRM ROLLOVER",
   "portfolioDetailPerformanceTitle": "Performance",
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
@@ -88,6 +104,32 @@
   "portfolioDetailKeyInfoAvgPeriod": "Avg. Period (Days)",
   "portfolioDetailButtonCancelBotStock": "CANCEL BOTSTOCK",
   "portfolioDetailButtonEndBotStock": "END BOTSTOCK",
-  "portfolioDetailButtonRolloverBotStock": "ROLLOVER BOTSTOCK"
-
+  "portfolioDetailButtonRolloverBotStock": "ROLLOVER BOTSTOCK",
+  "portfolioTotalValue": "Total Portfolio Value",
+  "portfolioWithdrawableAmount": "Total Portfolio Value ({currency})",
+  "@portfolioWithdrawableAmount": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioBuyingPower": "Buying Power ({currency})",
+  "@portfolioBuyingPower": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioTotalBotStock": "Total Botstock Values ({currency})",
+  "@portfolioTotalBotStock": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioTotalPL": "Total P/L",
+  "portfolioYourBotStock": "Your Botstocks"
 }

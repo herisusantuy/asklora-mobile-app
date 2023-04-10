@@ -11,6 +11,7 @@ import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/question/question_bloc.dart';
 import '../bloc/response/user_response_bloc.dart';
 import '../repository/ppi_question_repository.dart';
@@ -62,11 +63,11 @@ class PpiScreen extends StatelessWidget {
               previous.response.state != current.response.state,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: 'Unable to get information',
-              subTitle:
-                  'There was an error when trying to get your Investment Style Question. Please try reloading the page',
-              primaryButtonLabel: 'RELOAD PAGE',
-              secondaryButtonLabel: 'CANCEL',
+              title: S.of(context).errorGettingInformationTitle,
+              subTitle: S.of(context).errorGettingInformationSubTitle(
+                  'your Investment Style Question'),
+              primaryButtonLabel: S.of(context).buttonReloadPage,
+              secondaryButtonLabel: S.of(context).buttonCancel,
               onSecondaryButtonTap: () => Navigator.pop(context),
               onPrimaryButtonTap: () =>
                   context.read<QuestionBloc>().add(const LoadQuestions()),

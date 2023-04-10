@@ -50,11 +50,71 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `CANCEL`
+  String get buttonCancel {
+    return Intl.message(
+      'CANCEL',
+      name: 'buttonCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CONFIRM`
+  String get buttonConfirm {
+    return Intl.message(
+      'CONFIRM',
+      name: 'buttonConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NEXT`
   String get buttonNext {
     return Intl.message(
       'NEXT',
       name: 'buttonNext',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NOT NOW`
+  String get buttonNotNow {
+    return Intl.message(
+      'NOT NOW',
+      name: 'buttonNotNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RELOAD PAGE`
+  String get buttonReloadPage {
+    return Intl.message(
+      'RELOAD PAGE',
+      name: 'buttonReloadPage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DEPOSIT`
+  String get buttonDeposit {
+    return Intl.message(
+      'DEPOSIT',
+      name: 'buttonDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CANCEL TRADE`
+  String get buttonCancelTrade {
+    return Intl.message(
+      'CANCEL TRADE',
+      name: 'buttonCancelTrade',
       desc: '',
       args: [],
     );
@@ -87,6 +147,26 @@ class S {
       name: 'buttonLetsBegin',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Unable to get information`
+  String get errorGettingInformationTitle {
+    return Intl.message(
+      'Unable to get information',
+      name: 'errorGettingInformationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get {detail}. Please try reloading the page`
+  String errorGettingInformationSubTitle(String detail) {
+    return Intl.message(
+      'There was an error when trying to get $detail. Please try reloading the page',
+      name: 'errorGettingInformationSubTitle',
+      desc: '',
+      args: [detail],
     );
   }
 
@@ -291,10 +371,10 @@ class S {
     );
   }
 
-  /// `Do you want to continue the Botstock and extend the investment period?\n\n 2 Weeks\n`
+  /// `Your Botstock will be extended for \n\n2 Weeks`
   String get botTradeBottomSheetRolloverConfirmationTitle {
     return Intl.message(
-      'Do you want to continue the Botstock and extend the investment period?\\n\\n 2 Weeks\\n',
+      'Your Botstock will be extended for \n\n2 Weeks',
       name: 'botTradeBottomSheetRolloverConfirmationTitle',
       desc: '',
       args: [],
@@ -332,20 +412,20 @@ class S {
     );
   }
 
-  /// `Your free Botstock has been added to your portfolio successfully!`
+  /// `Your free Botstock has been added to your portfolio!`
   String get botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle {
     return Intl.message(
-      'Your free Botstock has been added to your portfolio successfully!',
+      'Your free Botstock has been added to your portfolio!',
       name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `DEPOSIT TO START REAL TRADE`
+  /// ` DEPOSIT TO START TRADING`
   String get botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle {
     return Intl.message(
-      'DEPOSIT TO START REAL TRADE',
+      ' DEPOSIT TO START TRADING',
       name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle',
       desc: '',
       args: [],
@@ -357,6 +437,16 @@ class S {
     return Intl.message(
       'The investment amount and Bot management fee (HKD1,500) will be returned to your account.',
       name: 'botTradeBottomSheetCancelBotStockConfirmationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CONFIRM ROLLOVER`
+  String get botTradeBottomSheetRolloverConfirmationButton {
+    return Intl.message(
+      'CONFIRM ROLLOVER',
+      name: 'botTradeBottomSheetRolloverConfirmationButton',
       desc: '',
       args: [],
     );
@@ -627,6 +717,66 @@ class S {
     return Intl.message(
       'ROLLOVER BOTSTOCK',
       name: 'portfolioDetailButtonRolloverBotStock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Portfolio Value`
+  String get portfolioTotalValue {
+    return Intl.message(
+      'Total Portfolio Value',
+      name: 'portfolioTotalValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Portfolio Value ({currency})`
+  String portfolioWithdrawableAmount(String currency) {
+    return Intl.message(
+      'Total Portfolio Value ($currency)',
+      name: 'portfolioWithdrawableAmount',
+      desc: '',
+      args: [currency],
+    );
+  }
+
+  /// `Buying Power ({currency})`
+  String portfolioBuyingPower(String currency) {
+    return Intl.message(
+      'Buying Power ($currency)',
+      name: 'portfolioBuyingPower',
+      desc: '',
+      args: [currency],
+    );
+  }
+
+  /// `Total Botstock Values ({currency})`
+  String portfolioTotalBotStock(String currency) {
+    return Intl.message(
+      'Total Botstock Values ($currency)',
+      name: 'portfolioTotalBotStock',
+      desc: '',
+      args: [currency],
+    );
+  }
+
+  /// `Total P/L`
+  String get portfolioTotalPL {
+    return Intl.message(
+      'Total P/L',
+      name: 'portfolioTotalPL',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Botstocks`
+  String get portfolioYourBotStock {
+    return Intl.message(
+      'Your Botstocks',
+      name: 'portfolioYourBotStock',
       desc: '',
       args: [],
     );
