@@ -41,6 +41,7 @@ import '../../feature/settings/presentation/account_information_screen.dart';
 import '../../feature/settings/presentation/account_setting_screen.dart';
 import '../../feature/settings/presentation/customer_service_screen.dart';
 import '../../feature/settings/presentation/get_help_screen.dart';
+import '../../feature/settings/presentation/language_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../domain/pair.dart';
@@ -241,6 +242,11 @@ class RouterGenerator {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const AccountInformationScreen(),
+        );
+      case LanguageScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const LanguageScreen(),
         );
       default:
         return MaterialPageRoute(
