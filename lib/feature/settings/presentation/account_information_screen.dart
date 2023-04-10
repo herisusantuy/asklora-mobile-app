@@ -21,6 +21,7 @@ class AccountInformationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetAccountResponse account = const GetAccountResponse();
     return BlocProvider(
       create: (context) =>
           AccountInformationBloc(accountRepository: AccountRepository())
@@ -34,6 +35,9 @@ class AccountInformationScreen extends StatelessWidget {
             case ResponseState.error:
               CustomInAppNotification.show(context, state.response.message);
               break;
+            case ResponseState.success:
+              account = state.response.data!;
+              break;
             default:
               break;
           }
@@ -44,8 +48,6 @@ class AccountInformationScreen extends StatelessWidget {
             content:
                 BlocBuilder<AccountInformationBloc, AccountInformationState>(
               builder: (context, state) {
-                GetAccountResponse account =
-                    state.response.data ?? const GetAccountResponse();
                 return Column(
                   children: [
                     _accountDetails(S.of(context).userId,

@@ -21,7 +21,6 @@ class AccountInformationBloc
       Emitter<AccountInformationState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     var response = await _accountRepository.getAccount();
-    emit(state.copyWith(
-        response: BaseResponse.complete<GetAccountResponse>(response)));
+    emit(state.copyWith(response: response));
   }
 }
