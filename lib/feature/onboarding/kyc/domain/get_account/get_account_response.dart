@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../utils/kyc_dropdown_enum.dart';
 import '../upgrade_account/agreement.dart';
 import '../upgrade_account/employment_info.dart';
 import '../upgrade_account/personal_info_request.dart';
