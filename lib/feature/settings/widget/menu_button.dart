@@ -10,12 +10,16 @@ class MenuButtonWidget extends StatelessWidget {
   final String? subtitle;
   final VoidCallback onTap;
   final bool showBottomBorder;
+  final bool isSelected;
+  final bool isShowSuffixIcon;
   const MenuButtonWidget({
     Key? key,
     required this.title,
     required this.onTap,
     this.subtitle,
     this.showBottomBorder = true,
+    this.isSelected = false,
+    this.isShowSuffixIcon = true,
   }) : super(key: key);
 
   @override
@@ -50,11 +54,19 @@ class MenuButtonWidget extends StatelessWidget {
             const SizedBox(
               width: 12,
             ),
-            const Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: AskLoraColors.gray,
-              size: 14,
-            )
+            isSelected
+                ? const Icon(
+                    Icons.check,
+                    color: AskLoraColors.charcoal,
+                    size: 24,
+                  )
+                : isShowSuffixIcon
+                    ? const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        color: AskLoraColors.gray,
+                        size: 14,
+                      )
+                    : const SizedBox.shrink()
           ],
         ),
       ),
