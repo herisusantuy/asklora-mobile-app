@@ -39,6 +39,7 @@ import '../../feature/orders/regular/presentation/regular_order_home_screen.dart
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/settings/presentation/account_information_screen.dart';
 import '../../feature/settings/presentation/account_setting_screen.dart';
+import '../../feature/settings/presentation/change_password_screen.dart';
 import '../../feature/settings/presentation/customer_service_screen.dart';
 import '../../feature/settings/presentation/get_help_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
@@ -241,6 +242,11 @@ class RouterGenerator {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const AccountInformationScreen(),
+        );
+      case ChangePasswordScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const ChangePasswordScreen(),
         );
       default:
         return MaterialPageRoute(

@@ -6,6 +6,7 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
 import 'account_information_screen.dart';
+import 'change_password_screen.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   static const route = 'account/setting_screen';
@@ -25,7 +26,7 @@ class AccountSettingScreen extends StatelessWidget {
                 title: S.of(context).accountInformation,
                 showBottomBorder: false),
             MenuButtonWidget(
-                onTap: () {},
+                onTap: () => ChangePasswordScreen.open(context),
                 title: S.of(context).changePassword,
                 showBottomBorder: false),
             MenuButtonWidget(
