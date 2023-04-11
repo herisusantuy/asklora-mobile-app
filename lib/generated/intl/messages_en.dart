@@ -36,9 +36,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m5(currency) => "Buying Power (${currency})";
 
-  static String m6(currency) => "Total Botstock Values (${currency})";
+  static String m6(currency) => "Current Price ${currency}";
 
-  static String m7(currency) => "Total Portfolio Value (${currency})";
+  static String m7(dateTime) => "Expired at ${dateTime}";
+
+  static String m8(dateTime) => "Expired in \$${dateTime} days";
+
+  static String m9(currency) => "Total Botstock Values (${currency})";
+
+  static String m10(currency) => "Total Portfolio Value (${currency})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -106,12 +112,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
         "portfolioBuyingPower": m5,
+        "portfolioCurrentPrice": m6,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("CANCEL BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("END BOTSTOCK"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("ROLLOVER BOTSTOCK"),
+        "portfolioDetailExpiredAt": m7,
+        "portfolioDetailExpiredIn": m8,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("Avg. Loss"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -146,8 +155,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Botstock Values (HKD)"),
         "portfolioDetailPerformanceCash":
             MessageLookupByLibrary.simpleMessage("Cash (HKD)"),
-        "portfolioDetailPerformanceCurrentPrice":
-            MessageLookupByLibrary.simpleMessage("Current Price (USD)"),
         "portfolioDetailPerformanceInvestmentAmount":
             MessageLookupByLibrary.simpleMessage("Inv. Amount (HKD)"),
         "portfolioDetailPerformanceNumberOfShares":
@@ -161,11 +168,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Performance"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("Total P&L"),
-        "portfolioTotalBotStock": m6,
+        "portfolioTotalBotStock": m9,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
             MessageLookupByLibrary.simpleMessage("Total Portfolio Value"),
-        "portfolioWithdrawableAmount": m7,
+        "portfolioWithdrawableAmount": m10,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(

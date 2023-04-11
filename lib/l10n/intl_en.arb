@@ -82,7 +82,30 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
   "portfolioDetailPerformanceTotalPL": "Total P&L",
-  "portfolioDetailPerformanceCurrentPrice": "Current Price (USD)",
+  "portfolioCurrentPrice": "Current Price {currency}",
+  "@portfolioCurrentPrice": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioDetailExpiredAt": "Expired at {dateTime}",
+  "@portfolioDetailExpiredAt": {
+    "placeholders": {
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioDetailExpiredIn": "Expired in ${dateTime} days",
+  "@portfolioDetailExpiredIn": {
+    "placeholders": {
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
   "portfolioDetailPerformanceNumberOfShares": "No. of Shares",
   "portfolioDetailPerformanceStockValues": "Stock Values (HKD)",
   "portfolioDetailPerformanceCash": "Cash (HKD)",

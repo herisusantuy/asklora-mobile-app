@@ -82,7 +82,30 @@
   "portfolioDetailPerformanceBotStockValues": "Botstock 價值 (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "投資金額 (HKD)",
   "portfolioDetailPerformanceTotalPL": "總盈虧",
-  "portfolioDetailPerformanceCurrentPrice": "當前價格(USD)",
+  "portfolioCurrentPrice": "當前價格 {currency}",
+  "@portfolioCurrentPrice": {
+    "placeholders": {
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioDetailExpiredAt": "到期日期 {dateTime}",
+  "@portfolioDetailExpiredAt": {
+    "placeholders": {
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioDetailExpiredIn": "{dateTime}日後到期",
+  "@portfolioDetailExpiredIn": {
+    "placeholders": {
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
   "portfolioDetailPerformanceNumberOfShares": "持股數量",
   "portfolioDetailPerformanceStockValues": "股票價值 (HKD)",
   "portfolioDetailPerformanceCash": "現金 (HKD)",

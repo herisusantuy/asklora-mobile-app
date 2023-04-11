@@ -492,13 +492,33 @@ class S {
     );
   }
 
-  /// `Current Price (USD)`
-  String get portfolioDetailPerformanceCurrentPrice {
+  /// `Current Price {currency}`
+  String portfolioCurrentPrice(String currency) {
     return Intl.message(
-      'Current Price (USD)',
-      name: 'portfolioDetailPerformanceCurrentPrice',
+      'Current Price $currency',
+      name: 'portfolioCurrentPrice',
       desc: '',
-      args: [],
+      args: [currency],
+    );
+  }
+
+  /// `Expired at {dateTime}`
+  String portfolioDetailExpiredAt(String dateTime) {
+    return Intl.message(
+      'Expired at $dateTime',
+      name: 'portfolioDetailExpiredAt',
+      desc: '',
+      args: [dateTime],
+    );
+  }
+
+  /// `Expired in ${dateTime} days`
+  String portfolioDetailExpiredIn(String dateTime) {
+    return Intl.message(
+      'Expired in \$$dateTime days',
+      name: 'portfolioDetailExpiredIn',
+      desc: '',
+      args: [dateTime],
     );
   }
 

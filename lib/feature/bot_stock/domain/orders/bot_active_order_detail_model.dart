@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../chart/domain/bot_portfolio_chart_models.dart';
 import '../bot_detail_model.dart';
 
 part 'bot_active_order_detail_model.g.dart';
@@ -33,8 +34,7 @@ class BotActiveOrderDetailModel {
   @JsonKey(name: 'action_status')
   final String? actionStatus;
 
-  ///this still need to wait for chart finalize
-  // final List<ChartDataSet> performance;
+  final List<BotPortfolioChartDataSet> performance;
   @JsonKey(name: 'rollover_count')
   final int rolloverCount;
   @JsonKey(name: 'avg_loss')
@@ -75,7 +75,7 @@ class BotActiveOrderDetailModel {
     this.botStockValue,
     this.botDetail,
     this.tickerDetail, {
-    // this.performance = const [],
+    this.performance = const [],
     this.botAssetInStockPct = 0,
     this.spotDate = '',
     this.daysToExpire = 0,
@@ -83,6 +83,36 @@ class BotActiveOrderDetailModel {
     this.targetProfitPct = 0,
     this.rolloverCount = 0,
   });
+
+  BotActiveOrderDetailModel copyWith(
+          {List<BotPortfolioChartDataSet>? performance}) =>
+      BotActiveOrderDetailModel(
+        pk,
+        botId,
+        expireDate,
+        isActive,
+        status,
+        currentPnlRet,
+        currentPrice,
+        investmentAmount,
+        botShare,
+        botCashBalance,
+        actionStatus,
+        avgLoss,
+        avgReturn,
+        avgPeriod,
+        stockValue,
+        botStockValue,
+        botDetail,
+        tickerDetail,
+        botAssetInStockPct: botAssetInStockPct,
+        spotDate: spotDate,
+        daysToExpire: daysToExpire,
+        maxLossPct: maxLossPct,
+        targetProfitPct: targetProfitPct,
+        rolloverCount: rolloverCount,
+        performance: performance ?? this.performance,
+      );
 
   String get investmentAmountString {
     double investmentAmountDouble = checkDouble(investmentAmount);
@@ -144,8 +174,8 @@ class BotActiveOrderDetailModel {
   }
 
   String get avgPeriodString {
-    double avgPeriodString = checkDouble(avgPeriod);
-    return (avgPeriodString > 0) ? '$avgPeriodString' : 'NA';
+    double avgPeriodDouble = checkDouble(avgPeriod);
+    return (avgPeriodDouble > 0) ? '$avgPeriodDouble' : 'NA';
   }
 
   String get avgLossString {
@@ -156,6 +186,8 @@ class BotActiveOrderDetailModel {
             ? '$avgLossDouble%'
             : 'NA';
   }
+
+  String get daysToExpireString => '${daysToExpire.abs()}';
 
   factory BotActiveOrderDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotActiveOrderDetailModelFromJson(json);

@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/extensions.dart';
-import '../../chart/domain/chart_models.dart';
+import '../../chart/domain/bot_recommendation_chart_model.dart';
 
 part 'bot_detail_model.g.dart';
 
@@ -45,7 +45,7 @@ class BotDetailModel extends Equatable {
   @JsonKey(name: 'market_cap')
   final String? marketCap;
 
-  final List<ChartDataSet> performance;
+  final List<BotRecommendationChartModel> performance;
   @JsonKey(name: 'prev_close_price')
   final double prevClosePrice;
 
@@ -220,7 +220,7 @@ class BotDescriptionModel extends Equatable {
 
 @JsonSerializable()
 class PerformanceModel extends Equatable {
-  final List<ChartDataSet>? data;
+  final List<BotRecommendationChartModel>? data;
 
   const PerformanceModel(this.data);
 

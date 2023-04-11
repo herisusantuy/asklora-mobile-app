@@ -49,7 +49,7 @@ class Performance extends StatelessWidget {
           height: 20,
         ),
         PairColumnText(
-            leftTitle: S.of(context).portfolioDetailPerformanceCurrentPrice,
+            leftTitle: S.of(context).portfolioCurrentPrice('USD'),
             leftSubTitle: botActiveOrderDetailModel.currentPriceString,
             rightTitle: S.of(context).portfolioDetailPerformanceNumberOfShares,
             rightSubTitle: botActiveOrderDetailModel.botShareString,
@@ -69,29 +69,14 @@ class Performance extends StatelessWidget {
         _chartWidget()
       ]);
 
-  Widget _chartWidget() {
-    return const SizedBox(
-      height: 300,
-      child: Align(
-          alignment: Alignment.center,
-          child: Text(
-              'Performance data will be available once the Botstock starts')),
-    );
-
-    /// The chart data should be disabled in the SFC demo build.
-    /*if (portfolioBotDetailModel?.performance != null) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 32.0),
-        child:
-            ChartAnimation(chartDataSets: portfolioBotDetailModel?.performance),
-      );
-    } else {
-      return const SizedBox(
-        height: 300,
-        child: Align(
-            alignment: Alignment.center,
-            child: Text('Performance data is not available for now')),
-      );
-    }*/
-  }
+  Widget _chartWidget() => Align(
+      alignment: Alignment.center,
+      child: botActiveOrderDetailModel.performance.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.only(top: 32.0),
+              child: ChartAnimation(
+                  chartDataSets: botActiveOrderDetailModel.performance),
+            )
+          : const Text(
+              'Performance data will be available once the Botstock starts'));
 }

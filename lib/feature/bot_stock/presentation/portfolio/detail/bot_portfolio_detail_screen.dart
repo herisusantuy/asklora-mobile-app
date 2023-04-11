@@ -16,6 +16,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../chart/presentation/chart_animation.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -74,44 +75,39 @@ class BotPortfolioDetailScreen extends StatelessWidget {
               previous.botActiveOrderDetailResponse.state !=
               current.botActiveOrderDetailResponse.state,
           builder: (context, state) {
-            if (state.botActiveOrderDetailResponse.state ==
-                ResponseState.success) {
-              final BotActiveOrderDetailModel botActiveOrderDetailModel =
-                  state.botActiveOrderDetailResponse.data!;
-              return CustomLayoutWithBlurPopUp(
-                loraPopUpMessageModel: LoraPopUpMessageModel(
-                  title: S.of(context).errorGettingInformationTitle,
-                  subTitle: S
-                      .of(context)
-                      .errorGettingInformationSubTitle('your Portfolio'),
-                  primaryButtonLabel: S.of(context).buttonReloadPage,
-                  secondaryButtonLabel: S.of(context).buttonCancel,
-                  onSecondaryButtonTap: () => Navigator.pop(context),
-                  onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
-                      (FetchActiveOrderDetail(
-                          botOrderId: botActiveOrderModel.pk))),
-                ),
-                showPopUp: state.botActiveOrderDetailResponse.state ==
-                    ResponseState.error,
-                content: BotStockForm(
-                    useHeader: true,
-                    customHeader: BotPortfolioDetailHeader(
-                      botActiveOrderModel: botActiveOrderModel,
-                      botType: botType,
-                      botStatus: botStatus,
-                    ),
-                    padding: EdgeInsets.zero,
-                    content: BotPortfolioDetailContent(
-                      botStatus: botStatus,
-                      botType: botType,
-                      portfolioBotDetailModel: botActiveOrderDetailModel,
-                    ),
-                    bottomButton:
-                        _getBottomButton(context, botActiveOrderDetailModel)),
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
+            final BotActiveOrderDetailModel? botActiveOrderDetailModel =
+                state.botActiveOrderDetailResponse.data;
+            return CustomLayoutWithBlurPopUp(
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                title: S.of(context).errorGettingInformationTitle,
+                subTitle: S
+                    .of(context)
+                    .errorGettingInformationSubTitle('your Portfolio'),
+                primaryButtonLabel: S.of(context).buttonReloadPage,
+                secondaryButtonLabel: S.of(context).buttonCancel,
+                onSecondaryButtonTap: () => Navigator.pop(context),
+                onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
+                    (FetchActiveOrderDetail(
+                        botOrderId: botActiveOrderModel.pk))),
+              ),
+              showPopUp: state.botActiveOrderDetailResponse.state ==
+                  ResponseState.error,
+              content: BotStockForm(
+                  useHeader: true,
+                  customHeader: BotPortfolioDetailHeader(
+                    botActiveOrderModel: botActiveOrderModel,
+                    botType: botType,
+                    botStatus: botStatus,
+                  ),
+                  padding: EdgeInsets.zero,
+                  content: BotPortfolioDetailContent(
+                    botStatus: botStatus,
+                    botType: botType,
+                    portfolioBotDetailModel: botActiveOrderDetailModel,
+                  ),
+                  bottomButton:
+                      _getBottomButton(context, botActiveOrderDetailModel)),
+            );
           },
         ),
       ),
@@ -119,9 +115,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   }
 
   Widget? _getBottomButton(BuildContext context,
-      BotActiveOrderDetailModel botActiveOrderDetailModel) {
-    if (UserJourney.compareUserJourney(
-        context: context, target: UserJourney.deposit)) {
+      BotActiveOrderDetailModel? botActiveOrderDetailModel) {
+    if (botActiveOrderDetailModel != null &&
+        UserJourney.compareUserJourney(
+            context: context, target: UserJourney.deposit)) {
       return Padding(
         padding:
             AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),

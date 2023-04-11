@@ -9,7 +9,7 @@ part of 'bot_order_response.dart';
 BotOrderResponse _$BotOrderResponseFromJson(Map<String, dynamic> json) =>
     BotOrderResponse(
       botOrder: json['bot_order'] as String,
-      botAction: json['bot_action'] as String,
+      botAction: json['bot_action'] as String?,
       optimalTime: json['optimal_time'] as String?,
     );
 

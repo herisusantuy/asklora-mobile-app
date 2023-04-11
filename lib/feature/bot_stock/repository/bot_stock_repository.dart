@@ -8,8 +8,10 @@ import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/extensions.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
+import '../../chart/domain/bot_recommendation_chart_model.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
+import '../../chart/domain/bot_portfolio_chart_models.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_detail_request.dart';
 import '../domain/bot_recommendation_model.dart';
@@ -46,8 +48,8 @@ class BotStockRepository {
 
       Iterable iterable = json.decode(response);
 
-      return BaseResponse.complete(List<ChartDataSet>.from(
-          iterable.map((model) => ChartDataSet.fromJson(model))));
+      return BaseResponse.complete(List<ChartDataSet>.from(iterable
+          .map((model) => BotRecommendationChartModel.fromJson(model))));
     } catch (e) {
       return BaseResponse.error();
     }
@@ -60,7 +62,7 @@ class BotStockRepository {
           await rootBundle.loadString('assets/json/tesla_3_month_uno.json');
       var decodedJson = json.decode(response);
       return BaseResponse.complete(ChartStudioAnimationModel(
-          chartData: _addIndexChartData(List<ChartDataStudioSet>.from(
+          chartData: _addIndexChartStudioData(List<ChartDataStudioSet>.from(
               decodedJson['chart_data']
                   .map((model) => ChartDataStudioSet.fromJson(model)))),
           botData: List<ChartDataStudioSet>.from(decodedJson['bot_data']
@@ -72,13 +74,28 @@ class BotStockRepository {
     }
   }
 
-  List<ChartDataStudioSet> _addIndexChartData(
+  List<ChartDataStudioSet> _addIndexChartStudioData(
       List<ChartDataStudioSet> chartData) {
     List<ChartDataStudioSet> finalChartData = [];
     int index = 0;
     for (var element in chartData) {
       finalChartData.add(ChartDataStudioSet(
           index: index++, date: element.date, price: element.price));
+    }
+    return finalChartData;
+  }
+
+  List<BotPortfolioChartDataSet> _addIndexChartData(
+      List<BotPortfolioChartDataSet> chartData) {
+    List<BotPortfolioChartDataSet> finalChartData = [];
+    int index = 0;
+    for (var element in chartData) {
+      finalChartData.add(BotPortfolioChartDataSet(
+          index: index++,
+          date: element.date,
+          price: element.price,
+          hedgeShare: element.hedgeShare,
+          currentPnlRet: element.currentPnlRet));
     }
     return finalChartData;
   }
@@ -134,8 +151,11 @@ class BotStockRepository {
       String botOrderId) async {
     try {
       var response = await _botStockApiClient.activeOrderDetail(botOrderId);
-      return BaseResponse.complete(
-          BotActiveOrderDetailModel.fromJson(response.data));
+      BotActiveOrderDetailModel botActiveOrderDetailModel =
+          BotActiveOrderDetailModel.fromJson(response.data);
+      return BaseResponse.complete(botActiveOrderDetailModel.copyWith(
+          performance:
+              _addIndexChartData(botActiveOrderDetailModel.performance)));
     } catch (e) {
       return BaseResponse.error();
     }
@@ -167,6 +187,7 @@ class BotStockRepository {
           .cancelOrder(BotOrderRequest(orderId: botOrderId));
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }

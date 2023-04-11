@@ -14,10 +14,9 @@ class BotPortfolioCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ///STATIC BOT TYPE FOR NOW, WAITING FOR BE
     final BotType botType =
         BotType.findByString(botActiveOrderModel.botAppsName);
-    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(
+    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(context,
         DateTime.now(), DateTime.parse(botActiveOrderModel.expireDate));
     return GestureDetector(
       onTap: () => BotPortfolioDetailScreen.open(
@@ -64,8 +63,8 @@ class BotPortfolioCard extends StatelessWidget {
                   height: 13,
                 ),
                 PairColumnText(
-                  leftTitle: 'Current Price',
-                  rightTitle: 'Total P/L',
+                  leftTitle: S.of(context).portfolioCurrentPrice(''),
+                  rightTitle: S.of(context).portfolioTotalPL,
                   leftSubTitle: botActiveOrderModel.currentPrice.toString(),
                   rightSubTitle: '0%',
                 ),
@@ -91,7 +90,7 @@ class BotPortfolioCard extends StatelessWidget {
                         ),
                       Expanded(
                         child: CustomTextNew(
-                          'Expires at ${botActiveOrderModel.expireDate}',
+                          expiredDayLeft.right,
                           style: AskLoraTextStyles.subtitle4
                               .copyWith(color: botType.expiredTextColor),
                           maxLines: 2,
@@ -134,12 +133,18 @@ class BotPortfolioCard extends StatelessWidget {
     );
   }
 
-  Pair<bool, String> expiredDaysLeft(DateTime from, DateTime to) {
-    int dayLeft = (to.difference(from).inHours / 24).round();
+  Pair<bool, String> expiredDaysLeft(
+      BuildContext context, DateTime from, DateTime to) {
+    int dayLeft = (to.difference(from).inHours / 24).round().abs();
     if (dayLeft > 3) {
-      return Pair(false, 'Expires at ${DateFormat('kk:mm, dd-MM').format(to)}');
+      return Pair(
+          false,
+          S
+              .of(context)
+              .portfolioDetailExpiredAt(DateFormat('kk:mm, dd-MM').format(to)));
     } else {
-      return Pair(true, 'Expires in $dayLeft ${dayLeft > 1 ? 'days' : 'day'}!');
+      return Pair(
+          true, S.of(context).portfolioDetailExpiredIn(dayLeft.toString()));
     }
   }
 }

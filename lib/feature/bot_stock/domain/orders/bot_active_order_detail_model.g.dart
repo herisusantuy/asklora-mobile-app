@@ -27,6 +27,11 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       (json['botstock_value'] as num?)?.toDouble(),
       BotModel.fromJson(json['bot_detail'] as Map<String, dynamic>),
       TickerDetailModel.fromJson(json['ticker_detail'] as Map<String, dynamic>),
+      performance: (json['performance'] as List<dynamic>?)
+              ?.map((e) =>
+                  BotPortfolioChartDataSet.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       botAssetInStockPct: (json['asset_pct'] as num?)?.toDouble() ?? 0,
       spotDate: json['spot_date'] as String? ?? '',
       daysToExpire: json['days_to_expire'] as int? ?? 0,
@@ -52,6 +57,7 @@ Map<String, dynamic> _$BotActiveOrderDetailModelToJson(
       'max_loss_pct': instance.maxLossPct,
       'target_profit_pct': instance.targetProfitPct,
       'action_status': instance.actionStatus,
+      'performance': instance.performance,
       'rollover_count': instance.rolloverCount,
       'avg_loss': instance.avgLoss,
       'avg_return': instance.avgReturn,
