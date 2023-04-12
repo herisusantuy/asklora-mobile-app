@@ -4,28 +4,64 @@ class BotPortfolioFilter extends StatelessWidget {
   const BotPortfolioFilter({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PortfolioBloc, PortfolioState>(
-        buildWhen: (previous, current) =>
-            previous.botStockFilter != current.botStockFilter,
-        builder: (context, state) {
-          if (state.botPortfolioResponse.state != ResponseState.error) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 30.0),
-              child: CustomDropdown(
-                initialValue: state.botStockFilter.name,
-                contentPadding:
-                    TextFieldStyle.contentPadding.copyWith(top: 12, bottom: 12),
-                hintText: 'All Botstocks',
-                itemsList: BotStockFilter.values.map((e) => e.name).toList(),
-                onChanged: (value) => context.read<PortfolioBloc>().add(
-                    BotStockFilterChanged(BotStockFilter.values
-                        .firstWhere((element) => element.name == value))),
-              ),
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
-        });
-  }
+  Widget build(BuildContext context) => JustTheTooltip(
+        fadeInDuration: const Duration(milliseconds: 500),
+        fadeOutDuration: Duration.zero,
+        elevation: 0,
+        isModal: true,
+        shadow: null,
+        backgroundColor: Colors.transparent,
+        barrierDismissible: true,
+        tailLength: 0,
+        tailBuilder: (Offset tip, Offset point2, Offset point3) {
+          return Path();
+        },
+        content: Container(
+          margin: const EdgeInsets.only(top: 12, right: 8),
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 0.6,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ],
+              color: AskLoraColors.white,
+              borderRadius: BorderRadius.circular(12)),
+          padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
+          child: BlocProvider.value(
+            value: BlocProvider.of<PortfolioBloc>(context),
+            child: BlocBuilder<PortfolioBloc, PortfolioState>(
+                buildWhen: (previous, current) =>
+                    previous.activeFilterChecked !=
+                        current.activeFilterChecked ||
+                    previous.pendingFilterChecked !=
+                        current.pendingFilterChecked,
+                builder: (context, state) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomCheckbox(
+                        text: 'Active',
+                        isChecked: state.activeFilterChecked,
+                        onChanged: (value) => context
+                            .read<PortfolioBloc>()
+                            .add(ActiveFilterChecked(value!)),
+                      ),
+                      CustomCheckbox(
+                        text: 'Pending',
+                        isChecked: state.pendingFilterChecked,
+                        onChanged: (value) => context
+                            .read<PortfolioBloc>()
+                            .add(PendingFilterChecked(value!)),
+                      ),
+                    ],
+                  );
+                }),
+          ),
+        ),
+        child: getSvgIcon('icon_bot_filter'),
+      );
 }

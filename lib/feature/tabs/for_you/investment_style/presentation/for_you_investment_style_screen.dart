@@ -19,6 +19,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
 import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../onboarding/ppi/bloc/response/user_response_bloc.dart';
 import '../../../../onboarding/ppi/domain/question.dart';
 import '../../../../onboarding/ppi/presentation/widget/omni_search_question_widget/omni_search_question_widget.dart';
@@ -73,10 +74,10 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
           builder: (context, investmentStyleQuestionState) =>
               CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: 'Unable to get information',
-              subTitle:
-                  'There was an error when trying to get your Investment Style Question. Please try reloading the page',
-              primaryButtonLabel: 'RELOAD PAGE',
+              title: S.of(context).errorGettingInformationTitle,
+              subTitle: S.of(context).errorGettingInformationSubTitle(
+                  'your Investment Style Question'),
+              primaryButtonLabel: S.of(context).buttonReloadPage,
               onPrimaryButtonTap: () =>
                   context.read<ForYouQuestionBloc>().add(LoadQuestion()),
             ),
