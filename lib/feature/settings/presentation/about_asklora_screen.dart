@@ -49,8 +49,8 @@ class AboutAskloraScreen extends StatelessWidget {
                     rightTextStyle: AskLoraTextStyles.body1.copyWith(
                       color: AskLoraColors.primaryMagenta,
                     ))),
-            const SizedBox(height: 10),
-            const Divider(thickness: 1),
+            const SizedBox(height: 12),
+            const Divider(thickness: 1, height: 0),
             MenuButtonWidget(
                 onTap: () => PrivacyPolicyScreen.open(context),
                 title: S.of(context).privacyPolicy),
