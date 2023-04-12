@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
@@ -104,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invest with AI strategy, automated"),
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
+        "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -183,6 +185,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m10,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
+        "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "termsAndConditions":
+            MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(
@@ -194,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tooltipBotDetailsInvestmentPeriod": MessageLookupByLibrary.simpleMessage(
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
-            "Lora’s date to start the Botstocks")
+            "Lora’s date to start the Botstocks"),
+        "website": MessageLookupByLibrary.simpleMessage("Website")
       };
 }

@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
@@ -93,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
         "carouselIntro3": MessageLookupByLibrary.simpleMessage("AI策略，\n自動交易"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
+        "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
         "errorGettingInformationSubTitle": m4,
@@ -165,6 +167,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
         "portfolioWithdrawableAmount": m10,
         "portfolioYourBotStock":
-            MessageLookupByLibrary.simpleMessage("你的Botstocks")
+            MessageLookupByLibrary.simpleMessage("你的Botstocks"),
+        "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
+        "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
+        "tooltipBotDetailsEstMaxLoss":
+            MessageLookupByLibrary.simpleMessage("Bot將出售以限制損失的最低股票價位。"),
+        "tooltipBotDetailsEstMaxProfit":
+            MessageLookupByLibrary.simpleMessage("Bot將出售以獲取最大利潤的股票價位。"),
+        "tooltipBotDetailsEstStopLoss": MessageLookupByLibrary.simpleMessage(
+            "Plank Bot將出售以限制過分損失的預設最低股票價位"),
+        "tooltipBotDetailsEstTakeProfit":
+            MessageLookupByLibrary.simpleMessage("Plank Bot將出售以獲取利潤的預設最高股票價位"),
+        "tooltipBotDetailsInvestmentPeriod":
+            MessageLookupByLibrary.simpleMessage(
+                "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
+        "tooltipBotDetailsStartDate":
+            MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "website": MessageLookupByLibrary.simpleMessage("網站")
       };
 }
