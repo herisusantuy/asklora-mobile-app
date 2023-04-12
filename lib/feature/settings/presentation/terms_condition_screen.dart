@@ -15,13 +15,11 @@ class TermsAndConditionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: CustomStretchedLayout(
-        contentPadding: const EdgeInsets.only(top: 0, bottom: 43),
-        header: CustomHeader(title: S.of(context).termsAndConditions),
+        header: CustomHeader(
+            title: S.of(context).termsAndConditions, isShowBottomBorder: true),
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Divider(thickness: 1),
-            const SizedBox(height: 10),
             CustomTextNew(
               'Sed ut perspiciatis unde omnis',
               style: AskLoraTextStyles.subtitle2,
