@@ -19,6 +19,7 @@ class ChangePasswordBloc
     on<PasswordChanged>(_onPasswordChanged);
     on<NewPasswordChanged>(_onNewPasswordChanged);
     on<ConfirmNewPasswordChanged>(_onConfirmNewPasswordChanged);
+    on<ChangePasswordSubmitted>(_onChangePasswordSubmitted);
   }
 
   _onPasswordChanged(PasswordChanged event, Emitter<ChangePasswordState> emit) {
@@ -45,5 +46,16 @@ class ChangePasswordBloc
               ? 'Your password does not match'
               : '',
     ));
+  }
+
+  _onChangePasswordSubmitted(
+      ChangePasswordSubmitted event, Emitter<ChangePasswordState> emit) async {
+    emit(state.copyWith(response: BaseResponse.loading()));
+    var response = await _changePasswordRepository.changePassword(
+        password: state.password,
+        newPassword: state.newPassword,
+        confirmNewPassword: state.confirmNewPassword);
+
+    emit(state.copyWith(response: response));
   }
 }

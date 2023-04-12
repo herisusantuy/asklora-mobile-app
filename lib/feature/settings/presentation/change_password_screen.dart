@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/domain/base_response.dart';
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_header.dart';
+import '../../../core/presentation/custom_in_app_notification.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
+import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../bloc/change_password/change_password_bloc.dart';
@@ -20,19 +23,38 @@ class ChangePasswordScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ChangePasswordBloc(
           changePasswordRepository: ChangePasswordRepository()),
-      child: CustomScaffold(
-        body: CustomStretchedLayout(
-          header: const CustomHeader(title: 'Change Password'),
-          content: Column(
-            children: [
-              _passwordInput,
-              const SizedBox(height: 20),
-              _newPasswordInput,
-              const SizedBox(height: 20),
-              _confirmNewPassword,
-            ],
+      child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
+        listenWhen: (previous, current) =>
+            previous.response.state != current.response.state,
+        listener: (context, state) {
+          CustomLoadingOverlay.of(context).show(state.response.state);
+          switch (state.response.state) {
+            case ResponseState.success:
+              CustomInAppNotification.show(
+                  context, 'This feature will available soon! please wait :)');
+              break;
+            case ResponseState.error:
+              CustomInAppNotification.show(
+                  context, 'This feature will available soon! please wait :)');
+              break;
+            default:
+              break;
+          }
+        },
+        child: CustomScaffold(
+          body: CustomStretchedLayout(
+            header: const CustomHeader(title: 'Change Password'),
+            content: Column(
+              children: [
+                _passwordInput,
+                const SizedBox(height: 20),
+                _newPasswordInput,
+                const SizedBox(height: 20),
+                _confirmNewPassword,
+              ],
+            ),
+            bottomButton: _saveButton,
           ),
-          bottomButton: _saveButton,
         ),
       ),
     );
@@ -121,7 +143,9 @@ class ChangePasswordScreen extends StatelessWidget {
           return PrimaryButton(
               label: 'Save',
               disabled: state.disabledSaveButton(),
-              onTap: () {});
+              onTap: () => context
+                  .read<ChangePasswordBloc>()
+                  .add(ChangePasswordSubmitted()));
         },
       );
   static void open(BuildContext context) => Navigator.pushNamed(context, route);

@@ -45,7 +45,7 @@ void main() {
     });
 
     blocTest<ChangePasswordBloc, ChangePasswordState>(
-      '',
+      'when user input invalid new password and invalid confirm new password will show error text "Enter valid password"',
       build: () => changePasswordBloc,
       act: (bloc) {
         bloc.add(const PasswordChanged('aaabbbccc'));
@@ -64,6 +64,7 @@ void main() {
           response: BaseResponse(),
           password: 'aaabbbccc',
           newPassword: '12345678',
+          newPasswordErrorText: 'Enter valid password',
           confirmNewPassword: '',
           confirmNewPasswordErrorText: '',
         ),
@@ -71,8 +72,43 @@ void main() {
           response: BaseResponse(),
           password: 'aaabbbccc',
           newPassword: '12345678',
+          newPasswordErrorText: 'Enter valid password',
           confirmNewPassword: '12345678',
+          confirmNewPasswordErrorText: 'Enter valid password',
+        ),
+      },
+    );
+    blocTest<ChangePasswordBloc, ChangePasswordState>(
+      'when user input valid new password and input not match  confirm new password will show error text "Your password does not match"',
+      build: () => changePasswordBloc,
+      act: (bloc) {
+        bloc.add(const PasswordChanged('aaabbbccc'));
+        bloc.add(const NewPasswordChanged('Aa12345678'));
+        bloc.add(const ConfirmNewPasswordChanged('Aa1234567'));
+      },
+      expect: () => {
+        const ChangePasswordState(
+          response: BaseResponse(),
+          password: 'aaabbbccc',
+          newPassword: '',
+          confirmNewPassword: '',
           confirmNewPasswordErrorText: '',
+        ),
+        const ChangePasswordState(
+          response: BaseResponse(),
+          password: 'aaabbbccc',
+          newPassword: 'Aa12345678',
+          newPasswordErrorText: '',
+          confirmNewPassword: '',
+          confirmNewPasswordErrorText: '',
+        ),
+        const ChangePasswordState(
+          response: BaseResponse(),
+          password: 'aaabbbccc',
+          newPassword: 'Aa12345678',
+          newPasswordErrorText: '',
+          confirmNewPassword: 'Aa1234567',
+          confirmNewPasswordErrorText: 'Your password does not match',
         ),
       },
     );

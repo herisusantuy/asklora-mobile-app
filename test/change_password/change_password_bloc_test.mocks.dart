@@ -8,12 +8,12 @@ import 'dart:async' as _i5;
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
 import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_api_client.dart'
     as _i7;
-import 'package:asklora_mobile_app/feature/settings/repository/change_password_repository.dart'
-    as _i4;
 import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_request.dart'
     as _i8;
 import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_response.dart'
     as _i6;
+import 'package:asklora_mobile_app/feature/settings/repository/change_password_repository.dart'
+    as _i4;
 import 'package:dio/dio.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
