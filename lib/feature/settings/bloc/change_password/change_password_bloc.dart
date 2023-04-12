@@ -28,18 +28,22 @@ class ChangePasswordBloc
   _onNewPasswordChanged(
       NewPasswordChanged event, Emitter<ChangePasswordState> emit) {
     emit(state.copyWith(
-      newPassword: event.newPassword,
-      // newPasswordErrorText: (event.newPassword.isValidPassword() && event.newPassword == state.confirmNewPassword) || event.newPassword.isEmpty ? '' :
-    ));
+        newPassword: event.newPassword,
+        newPasswordErrorText:
+            (event.newPassword.isValidPassword() || event.newPassword.isEmpty)
+                ? ''
+                : 'Enter valid password'));
   }
 
   _onConfirmNewPasswordChanged(
       ConfirmNewPasswordChanged event, Emitter<ChangePasswordState> emit) {
     emit(state.copyWith(
       confirmNewPassword: event.confirmNewPassword,
-      confirmNewPasswordErrorText: event.confirmNewPassword == state.newPassword
-          ? ''
-          : 'Your Password does not match.',
+      confirmNewPasswordErrorText: !event.confirmNewPassword.isValidPassword()
+          ? 'Enter valid password'
+          : event.confirmNewPassword != state.newPassword
+              ? 'Your password does not match'
+              : '',
     ));
   }
 }
