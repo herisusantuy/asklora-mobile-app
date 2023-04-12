@@ -383,9 +383,19 @@ class S {
   }
 
   /// `Office Hours`
-  String get officeHours {
+  String get officeHoursLabel {
     return Intl.message(
       'Office Hours',
+      name: 'officeHoursLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `09:00-18:00 (HKT)`
+  String get officeHours {
+    return Intl.message(
+      '09:00-18:00 (HKT)',
       name: 'officeHours',
       desc: '',
       args: [],

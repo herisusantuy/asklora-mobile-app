@@ -42,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
-        "officeHours": MessageLookupByLibrary.simpleMessage("辦公時間")
+        "officeHours":
+            MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
+        "officeHoursLabel": MessageLookupByLibrary.simpleMessage("辦公時間")
       };
 }

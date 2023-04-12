@@ -64,5 +64,6 @@
   "getHelp" : "Get Help",
   "customerService": "Customer Service",
   "email": "Email",
-  "officeHours" : "Office Hours" 
+  "officeHoursLabel" : "Office Hours",
+  "officeHours" : "09:00-18:00 (HKT)"
 }
