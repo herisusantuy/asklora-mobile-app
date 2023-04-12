@@ -7,7 +7,7 @@ import 'custom_text_new.dart';
 class CustomExpandedRow extends StatelessWidget {
   final String label;
   final String text;
-  final TextStyle? textStyle;
+  final TextStyle? leftTextStyle;
   final Widget? child;
   final EdgeInsets padding;
   final int flex1;
@@ -20,7 +20,7 @@ class CustomExpandedRow extends StatelessWidget {
   const CustomExpandedRow(this.label,
       {this.text = '',
       this.fontType,
-      this.textStyle,
+      this.leftTextStyle,
       this.child,
       this.flex1 = 2,
       this.flex2 = 1,
@@ -43,15 +43,14 @@ class CustomExpandedRow extends StatelessWidget {
               flex: flex1,
               child: CustomTextNew(
                 label,
-                style: textStyle ?? AskLoraTextStyles.body1,
+                style: leftTextStyle ?? AskLoraTextStyles.body1,
               )),
           Expanded(
               flex: flex2,
               child: child ??
                   CustomTextNew(
                     text,
-                    style:
-                        rightTextStyle ?? textStyle ?? AskLoraTextStyles.body1,
+                    style: rightTextStyle ?? AskLoraTextStyles.body1,
                     textAlign: textValueAlign,
                   ))
         ],

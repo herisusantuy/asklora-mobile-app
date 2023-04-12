@@ -43,7 +43,7 @@ class AboutAskloraScreen extends StatelessWidget {
                 onTap: () =>
                     openUrl(askloraSite, mode: LaunchMode.externalApplication),
                 child: CustomExpandedRow(S.of(context).website,
-                    textStyle: AskLoraTextStyles.subtitle2,
+                    leftTextStyle: AskLoraTextStyles.subtitle2,
                     flex2: 2,
                     text: askloraSite,
                     rightTextStyle: AskLoraTextStyles.body1.copyWith(
