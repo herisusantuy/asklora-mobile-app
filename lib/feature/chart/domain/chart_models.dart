@@ -1,6 +1,6 @@
 import '../../../core/utils/extensions.dart';
 
-class ChartDataSet {
+abstract class ChartDataSet {
   int? index;
   DateTime? date;
   double? price;

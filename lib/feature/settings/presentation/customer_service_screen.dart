@@ -32,8 +32,8 @@ class CustomerServiceScreen extends StatelessWidget {
                           value: 'loracares@asklora.ai')),
                   const SizedBox(height: 22),
                   _text(
-                      title: S.of(context).officeHours,
-                      value: '09:00-18:00 (HKT)'),
+                      title: S.of(context).officeHoursLabel,
+                      value: S.of(context).officeHours),
                 ],
               ),
             )));
