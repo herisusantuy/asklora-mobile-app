@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -16,11 +15,13 @@ import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
+import 'customer_service_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_condition_screen.dart';
 
 class AboutAskloraScreen extends StatelessWidget {
   static const route = '/about_asklora_screen';
+
   const AboutAskloraScreen({super.key});
 
   @override
@@ -42,6 +43,7 @@ class AboutAskloraScreen extends StatelessWidget {
                 onTap: () =>
                     openUrl(askloraSite, mode: LaunchMode.externalApplication),
                 child: CustomExpandedRow(S.of(context).website,
+                    textStyle: AskLoraTextStyles.subtitle2,
                     flex2: 2,
                     text: askloraSite,
                     rightTextStyle: AskLoraTextStyles.body1.copyWith(
@@ -72,7 +74,7 @@ class AboutAskloraScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: CustomTextNew(
-                  'Asklora Version ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
+                  'Asklora Version ${snapshot.data!.version} (${snapshot.data!.buildNumber})',
                   style: AskLoraTextStyles.body1,
                 ),
               ),
@@ -86,8 +88,7 @@ class AboutAskloraScreen extends StatelessWidget {
   Widget get _contactUsButton => Builder(builder: (context) {
         return PrimaryButton(
             label: S.of(context).contactUs.toUpperCase(),
-            onTap: () =>
-                openUrl(mailToLoraCare, mode: LaunchMode.externalApplication));
+            onTap: () => CustomerServiceScreen.open(context));
       });
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
