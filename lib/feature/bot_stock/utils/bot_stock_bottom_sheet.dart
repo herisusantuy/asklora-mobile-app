@@ -16,11 +16,24 @@ import '../domain/bot_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../presentation/portfolio/bloc/portfolio_bloc.dart';
-import '../presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../repository/bot_stock_repository.dart';
 import 'bot_stock_utils.dart';
 
 class BotStockBottomSheet {
+  static cancelBotStockConfirmation(BuildContext context, String orderId) {
+    LoraBottomSheet.show(
+      context: context,
+      title: S.of(context).botTradeBottomSheetCancelBotStockConfirmationTitle,
+      primaryButtonLabel: S.of(context).buttonCancelTrade,
+      secondaryButtonLabel: S.of(context).buttonCancel,
+      onPrimaryButtonTap: () {
+        Navigator.pop(context);
+        context.read<PortfolioBloc>().add(CancelBotStock(orderId));
+      },
+      onSecondaryButtonTap: () => Navigator.pop(context),
+    );
+  }
+
   static freeBotStockSuccessfullyAdded(BuildContext context) {
     showModalBottomSheet(
         isScrollControlled: true,
@@ -34,7 +47,7 @@ class BotStockBottomSheet {
                   .of(context)
                   .botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle,
               loraMemojiType: LoraMemojiType.lora4,
-              secondaryButtonLabel: 'NOT NOW',
+              secondaryButtonLabel: S.of(context).buttonNotNow,
               onPrimaryButtonTap: () =>
                   DepositWelcomeScreen.open(context: context),
               onSecondaryButtonTap: () => Navigator.pop(context),
@@ -42,53 +55,53 @@ class BotStockBottomSheet {
   }
 
   static endBotStockConfirmation(
-      BuildContext context, PortfolioBotModel portfolioBotModel) {
+      BuildContext context, String orderId, String botAppsName, String ticker) {
     LoraBottomSheet.show(
       context: context,
       title: S.of(context).botTradeBottomSheetEndBotStockConfirmationTitle(
-          '${BotType.findByString(portfolioBotModel.botAppType).name} ${portfolioBotModel.ticker}'),
+          '${BotType.findByString(botAppsName).name} $ticker'),
       subTitle:
           S.of(context).botTradeBottomSheetEndBotStockConfirmationSubTitle,
-      primaryButtonLabel: 'END BOT STOCK',
-      secondaryButtonLabel: 'CANCEL',
+      primaryButtonLabel: S.of(context).portfolioDetailButtonEndBotStock,
+      secondaryButtonLabel: S.of(context).buttonCancel,
       onPrimaryButtonTap: () {
         Navigator.pop(context);
-        context.read<PortfolioBloc>().add(EndBotStock(portfolioBotModel));
+        context.read<PortfolioBloc>().add(EndBotStock(orderId));
       },
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
   }
 
-  static rolloverBotStockConfirmation(
-      BuildContext context, PortfolioBotModel portfolioBotModel) {
+  static rolloverBotStockConfirmation(BuildContext context,
+      {required String orderId, required String expireDate}) {
     LoraBottomSheet.show(
       context: context,
       title: S.of(context).botTradeBottomSheetRolloverConfirmationTitle,
-      subTitle: S
-          .of(context)
-          .botTradeBottomSheetRolloverConfirmationSubTitle('15:30, 2023/04/12'),
-      primaryButtonLabel: 'EXTEND',
-      secondaryButtonLabel: 'CANCEL',
+      subTitle: S.of(context).botTradeBottomSheetRolloverConfirmationSubTitle(
+          newExpiryDateOnRollover(expireDate)),
+      primaryButtonLabel:
+          S.of(context).botTradeBottomSheetRolloverConfirmationButton,
+      secondaryButtonLabel: S.of(context).buttonCancel,
       onPrimaryButtonTap: () {
         Navigator.pop(context);
-        BotStockBottomSheet.rolloverBotStockDisclosure(
-            context, portfolioBotModel);
+        BotStockBottomSheet.rolloverBotStockDisclosure(context,
+            orderId: orderId);
       },
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
   }
 
-  static rolloverBotStockDisclosure(
-      BuildContext context, PortfolioBotModel portfolioBotModel) {
+  static rolloverBotStockDisclosure(BuildContext context,
+      {required String orderId}) {
     LoraBottomSheet.show(
       context: context,
       title: S.of(context).botTradeBottomSheetRolloverDisclosureTitle,
       subTitle: S.of(context).botTradeBottomSheetRolloverDisclosureSubTitle,
-      primaryButtonLabel: 'CONFIRM',
-      secondaryButtonLabel: 'BACK',
+      primaryButtonLabel: S.of(context).buttonConfirm,
+      secondaryButtonLabel: S.of(context).buttonCancel,
       onPrimaryButtonTap: () {
         Navigator.pop(context);
-        context.read<PortfolioBloc>().add(RolloverBotStock(portfolioBotModel));
+        context.read<PortfolioBloc>().add(RolloverBotStock(orderId));
       },
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
@@ -114,8 +127,8 @@ class BotStockBottomSheet {
                     return LoraBottomSheetContent(
                       disablePrimaryButton: state.botStockTradeAmount < 1500,
                       title: S.of(context).botTradeBottomSheetAmountTitle,
-                      primaryButtonLabel: 'NEXT',
-                      secondaryButtonLabel: 'CANCEL',
+                      primaryButtonLabel: S.of(context).buttonNext,
+                      secondaryButtonLabel: S.of(context).buttonCancel,
                       onPrimaryButtonTap: () {
                         Navigator.pop(context);
                         BotTradeSummaryScreen.open(
@@ -189,8 +202,8 @@ class BotStockBottomSheet {
       subTitle: S
           .of(context)
           .botTradeBottomSheetInsufficientBalanceSubTitle('HKD1,500'),
-      primaryButtonLabel: 'DEPOSIT',
-      secondaryButtonLabel: 'NOT NOW',
+      primaryButtonLabel: S.of(context).buttonDeposit,
+      secondaryButtonLabel: S.of(context).buttonNotNow,
       onPrimaryButtonTap: () => DepositWelcomeScreen.open(context: context),
       onSecondaryButtonTap: () => Navigator.pop(context),
     );

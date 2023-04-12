@@ -5,6 +5,8 @@ import '../../../../../core/domain/base_response.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
+import '../domain/orders/bot_active_order_model.dart';
+import '../domain/orders/bot_order_response.dart';
 import '../repository/bot_stock_repository.dart';
 
 part 'bot_stock_event.dart';
@@ -18,7 +20,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     on<FetchBotRecommendation>(_onFetchBotRecommendation);
     on<FetchFreeBotRecommendation>(_onFetchFreeBotRecommendation);
     on<FaqActiveIndexChanged>(_onFaqActiveIndexChanged);
-    on<TradeBotStock>(_onTradeBotStock);
+    on<CreateBotOrder>(_onCreateBotOrder);
     on<FetchBotDetail>(_onFetchBotDetail);
     on<TradeBotStockAmountChanged>(_onTradeBotStockAmountChanged);
   }
@@ -27,38 +29,24 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
 
   _onFetchBotRecommendation(
       FetchBotRecommendation event, Emitter<BotStockState> emit) async {
-    try {
-      emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
-      var data = await _botStockRepository.fetchBotRecommendation();
-      emit(state.copyWith(botRecommendationResponse: data));
-    } catch (e) {
-      emit(state.copyWith(botRecommendationResponse: BaseResponse.error()));
-    }
+    emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
+    var data = await _botStockRepository.fetchBotRecommendation();
+    emit(state.copyWith(botRecommendationResponse: data));
   }
 
   _onFetchFreeBotRecommendation(
       FetchFreeBotRecommendation event, Emitter<BotStockState> emit) async {
-    try {
-      emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
-      emit(state.copyWith(
-          botRecommendationResponse:
-              await _botStockRepository.fetchFreeBotRecommendation()));
-    } catch (e) {
-      emit(state.copyWith(botRecommendationResponse: BaseResponse.error()));
-    }
+    emit(state.copyWith(botRecommendationResponse: BaseResponse.loading()));
+    var data = await _botStockRepository.fetchFreeBotRecommendation();
+    emit(state.copyWith(botRecommendationResponse: data));
   }
 
-  _onTradeBotStock(TradeBotStock event, Emitter<BotStockState> emit) async {
-    try {
-      emit(state.copyWith(tradeBotStockResponse: BaseResponse.loading()));
-      emit(state.copyWith(
-          tradeBotStockResponse: await _botStockRepository.tradeBotStock(
-              estimatedEndDate: event.estimatedEndDate,
-              botRecommendationModel: event.botRecommendationModel,
-              tradeBotStockAmount: event.tradeBotStockAmount)));
-    } catch (e) {
-      emit(state.copyWith(tradeBotStockResponse: BaseResponse.error()));
-    }
+  _onCreateBotOrder(CreateBotOrder event, Emitter<BotStockState> emit) async {
+    emit(state.copyWith(createBotOrderResponse: BaseResponse.loading()));
+    var data = await _botStockRepository.createOrder(
+        botRecommendationModel: event.botRecommendationModel,
+        tradeBotStockAmount: event.tradeBotStockAmount);
+    emit(state.copyWith(createBotOrderResponse: data));
   }
 
   _onFaqActiveIndexChanged(
@@ -70,14 +58,10 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
   }
 
   _onFetchBotDetail(FetchBotDetail event, Emitter<BotStockState> emit) async {
-    try {
-      emit(state.copyWith(botDetailResponse: BaseResponse.loading()));
-      emit(state.copyWith(
-          botDetailResponse: await _botStockRepository.fetchBotDetail(
-              event.ticker, event.botId)));
-    } catch (e) {
-      emit(state.copyWith(botDetailResponse: BaseResponse.error()));
-    }
+    emit(state.copyWith(botDetailResponse: BaseResponse.loading()));
+    var data =
+        await _botStockRepository.fetchBotDetail(event.ticker, event.botId);
+    emit(state.copyWith(botDetailResponse: data));
   }
 
   _onTradeBotStockAmountChanged(

@@ -14,6 +14,7 @@ import '../../feature/balance/withdrawal/presentation/withdrawal_bank_detail_scr
 import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
 import '../../feature/bot_stock/domain/bot_recommendation_model.dart';
+import '../../feature/bot_stock/domain/orders/bot_active_order_model.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
 import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
@@ -22,7 +23,6 @@ import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
-import '../../feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
@@ -141,7 +141,8 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => BotPortfolioDetailScreen(
-                  portfolioBotModel: settings.arguments as PortfolioBotModel,
+                  botActiveOrderModel:
+                      settings.arguments as BotActiveOrderModel,
                 ));
       case BotTradeSummaryScreen.route:
         return MaterialPageRoute(

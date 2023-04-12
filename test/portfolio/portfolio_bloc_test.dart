@@ -1,9 +1,11 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/utils/currency_enum.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/repository/portfolio_repository.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,13 +15,18 @@ import 'package:mockito/mockito.dart';
 import 'portfolio_bloc_test.mocks.dart';
 
 @GenerateMocks([PortfolioRepository])
+@GenerateMocks([BotStockRepository])
 void main() async {
   group('Portfolio Bloc Tests', () {
     late MockPortfolioRepository portfolioRepository;
+    late MockBotStockRepository botStockRepository;
     late PortfolioBloc portfolioBloc;
 
-    final BaseResponse<List<PortfolioBotModel>> response =
-        BaseResponse.complete(defaultPortfolioBot);
+    final BaseResponse<List<BotActiveOrderModel>> response =
+        BaseResponse.complete([]);
+
+    final BaseResponse<List<BotActiveOrderModel>> errorResponse =
+        BaseResponse.error();
 
     final BaseResponse<PortfolioResponse> portfolioResponse =
         BaseResponse.complete(PortfolioResponse());
@@ -27,33 +34,24 @@ void main() async {
     final BaseResponse<PortfolioResponse> portfolioErrorResponse =
         BaseResponse.error();
 
-    final BaseResponse<List<PortfolioBotModel>> errorResponse =
+    final BaseResponse<BotOrderResponse> boolResponse =
+        BaseResponse.complete(const BotOrderResponse(
+      botOrder: '',
+      botAction: '',
+    ));
+
+    final BaseResponse<BotOrderResponse> boolErrorResponse =
         BaseResponse.error();
-
-    final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
-
-    final BaseResponse<bool> boolErrorResponse = BaseResponse.error();
-
-    const PortfolioBotModel portfolioBotModel = PortfolioBotModel(
-        1,
-        '',
-        '',
-        'CLASSIC_classic_003846',
-        '',
-        '',
-        'Pullup',
-        'MSFT.O',
-        'TESLA',
-        '',
-        '440',
-        2000);
 
     setUpAll(() async {
       portfolioRepository = MockPortfolioRepository();
+      botStockRepository = MockBotStockRepository();
     });
 
     setUp(() async {
-      portfolioBloc = PortfolioBloc(portfolioRepository: portfolioRepository);
+      portfolioBloc = PortfolioBloc(
+          portfolioRepository: portfolioRepository,
+          botStockRepository: botStockRepository);
     });
 
     test('Portfolio Bloc init state response should be default one', () {
@@ -88,32 +86,106 @@ void main() async {
               const PortfolioState(currency: CurrencyType.hkd),
             });
 
+    blocTest<PortfolioBloc, PortfolioState>('check active filter',
+        build: () {
+          when(botStockRepository.activeOrders(status: ['open', 'place']))
+              .thenAnswer((_) => Future.value(response));
+          return portfolioBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const ActiveFilterChecked(true)),
+            },
+        expect: () => {
+              const PortfolioState(activeFilterChecked: true),
+              PortfolioState(
+                  activeFilterChecked: true,
+                  botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(
+                  activeFilterChecked: true, botActiveOrderResponse: response),
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>('uncheck active filter',
+        build: () {
+          when(botStockRepository.activeOrders(status: ['place']))
+              .thenAnswer((_) => Future.value(response));
+          return portfolioBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const ActiveFilterChecked(false)),
+            },
+        expect: () => {
+              const PortfolioState(activeFilterChecked: false),
+              PortfolioState(
+                  activeFilterChecked: false,
+                  botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(
+                  activeFilterChecked: false, botActiveOrderResponse: response),
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>('check pending filter',
+        build: () {
+          when(botStockRepository.activeOrders(status: ['open', 'place']))
+              .thenAnswer((_) => Future.value(response));
+          return portfolioBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const PendingFilterChecked(true)),
+            },
+        expect: () => {
+              const PortfolioState(pendingFilterChecked: true),
+              PortfolioState(
+                  pendingFilterChecked: true,
+                  botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(
+                  pendingFilterChecked: true, botActiveOrderResponse: response),
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>('uncheck pending filter',
+        build: () {
+          when(botStockRepository.activeOrders(status: ['open']))
+              .thenAnswer((_) => Future.value(response));
+          return portfolioBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const PendingFilterChecked(false)),
+            },
+        expect: () => {
+              const PortfolioState(pendingFilterChecked: false),
+              PortfolioState(
+                  pendingFilterChecked: false,
+                  botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(
+                  pendingFilterChecked: false,
+                  botActiveOrderResponse: response),
+            });
+
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.complete` WHEN '
         'fetching bot portfolio',
         build: () {
-          when(portfolioRepository.fetchBotPortfolio(BotStockFilter.all))
+          when(botStockRepository.activeOrders(status: ['open', 'place']))
               .thenAnswer((_) => Future.value(response));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const FetchBotPortfolio()),
+        act: (bloc) => bloc.add(const FetchActiveOrders()),
         expect: () => {
-              PortfolioState(botPortfolioResponse: BaseResponse.loading()),
-              PortfolioState(botPortfolioResponse: response)
+              PortfolioState(botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(botActiveOrderResponse: response)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.error` WHEN '
         'failed fetching bot portfolio',
         build: () {
-          when(portfolioRepository.fetchBotPortfolio(BotStockFilter.all))
-              .thenThrow(errorResponse);
+          when(botStockRepository.activeOrders(status: ['open', 'place']))
+              .thenAnswer((_) => Future.value(errorResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const FetchBotPortfolio()),
+        act: (bloc) => bloc
+            .add(const FetchActiveOrders(botStockFilter: BotStockFilter.all)),
         expect: () => {
-              PortfolioState(botPortfolioResponse: BaseResponse.loading()),
-              PortfolioState(botPortfolioResponse: errorResponse)
+              PortfolioState(botActiveOrderResponse: BaseResponse.loading()),
+              PortfolioState(botActiveOrderResponse: errorResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
@@ -135,7 +207,7 @@ void main() async {
         'failed portfolio detail',
         build: () {
           when(portfolioRepository.fetchPortfolio())
-              .thenThrow(portfolioErrorResponse);
+              .thenAnswer((_) => Future.value(portfolioErrorResponse));
           return portfolioBloc;
         },
         act: (bloc) => bloc.add(FetchPortfolio()),
@@ -146,13 +218,13 @@ void main() async {
 
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.complete` WHEN '
-        'ending bot stock',
+        'terminate bot stock',
         build: () {
-          when(portfolioRepository.endBotStock(portfolioBotModel))
+          when(botStockRepository.terminateOrder('123'))
               .thenAnswer((_) => Future.value(boolResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const EndBotStock(portfolioBotModel)),
+        act: (bloc) => bloc.add(const EndBotStock('123')),
         expect: () => {
               PortfolioState(endBotStockResponse: BaseResponse.loading()),
               PortfolioState(endBotStockResponse: boolResponse)
@@ -160,13 +232,13 @@ void main() async {
 
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.error` WHEN '
-        'failed ending bot stock',
+        'failed terminate bot stock',
         build: () {
-          when(portfolioRepository.endBotStock(portfolioBotModel))
-              .thenThrow(boolErrorResponse);
+          when(botStockRepository.terminateOrder('123'))
+              .thenAnswer((_) => Future.value(boolErrorResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const EndBotStock(portfolioBotModel)),
+        act: (bloc) => bloc.add(const EndBotStock('123')),
         expect: () => {
               PortfolioState(endBotStockResponse: BaseResponse.loading()),
               PortfolioState(endBotStockResponse: boolErrorResponse)
@@ -176,11 +248,11 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'rollover bot stock',
         build: () {
-          when(portfolioRepository.rolloverBotStock(portfolioBotModel))
+          when(botStockRepository.rolloverOrder('123'))
               .thenAnswer((_) => Future.value(boolResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const RolloverBotStock(portfolioBotModel)),
+        act: (bloc) => bloc.add(const RolloverBotStock('123')),
         expect: () => {
               PortfolioState(rolloverBotStockResponse: BaseResponse.loading()),
               PortfolioState(rolloverBotStockResponse: boolResponse)
@@ -190,14 +262,42 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed rollover bot stock',
         build: () {
-          when(portfolioRepository.rolloverBotStock(portfolioBotModel))
-              .thenThrow(boolErrorResponse);
+          when(botStockRepository.rolloverOrder('123'))
+              .thenAnswer((_) => Future.value(boolErrorResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const RolloverBotStock(portfolioBotModel)),
+        act: (bloc) => bloc.add(const RolloverBotStock('123')),
         expect: () => {
               PortfolioState(rolloverBotStockResponse: BaseResponse.loading()),
               PortfolioState(rolloverBotStockResponse: boolErrorResponse)
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>(
+        'emits `BaseResponse.complete` WHEN '
+        'cancel bot stock',
+        build: () {
+          when(botStockRepository.cancelOrder('123'))
+              .thenAnswer((_) => Future.value(boolResponse));
+          return portfolioBloc;
+        },
+        act: (bloc) => bloc.add(const CancelBotStock('123')),
+        expect: () => {
+              PortfolioState(cancelBotStockResponse: BaseResponse.loading()),
+              PortfolioState(cancelBotStockResponse: boolResponse)
+            });
+
+    blocTest<PortfolioBloc, PortfolioState>(
+        'emits `BaseResponse.error` WHEN '
+        'cancel bot stock',
+        build: () {
+          when(botStockRepository.cancelOrder('123'))
+              .thenAnswer((_) => Future.value(boolErrorResponse));
+          return portfolioBloc;
+        },
+        act: (bloc) => bloc.add(const CancelBotStock('123')),
+        expect: () => {
+              PortfolioState(cancelBotStockResponse: BaseResponse.loading()),
+              PortfolioState(cancelBotStockResponse: boolErrorResponse)
             });
 
     tearDown(() => {portfolioBloc.close()});
