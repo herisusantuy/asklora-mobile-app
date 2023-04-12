@@ -367,7 +367,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            interval: 1 /*(getMaxYValue-getMinYValue)/5*/ /*(58-31)/5*/,
+            interval: 1,
             getTitlesWidget: leftTitleWidgets,
             reservedSize: reservedLeftSize,
           ),
