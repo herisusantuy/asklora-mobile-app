@@ -100,6 +100,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             }
           } else {
             ///snapshot error should remove storage and emit error
+            _signInRepository.removeStorageOnSignInFailed();
             emit(state.copyWith(response: BaseResponse.error()));
           }
         } else {
@@ -183,6 +184,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       _sharedPreference.writeData(sfKeyPpiUsername, accountInfo.data!.username);
       return accountInfo.data;
     }
+    return null;
   }
 
   Future<BaseResponse<SnapShot>> _getUserSnapshot(String username) async =>

@@ -19,31 +19,44 @@ class GetAccountResponse extends Equatable {
   final ResidenceInfoRequest? residenceInfo;
   @JsonKey(name: 'employment_info')
   final EmploymentInfo? employmentInfo;
-  final List<Agreement> agreements;
+  final List<Agreement>? agreements;
   @JsonKey(name: 'last_journey')
   final LastJourney? lastJourney;
   @JsonKey(name: 'is_staff')
   final bool isStaff;
 
-  const GetAccountResponse({
-    this.id = 0,
-    this.username = '',
-    this.email = '',
-    this.personalInfo,
-    this.residenceInfo,
-    this.employmentInfo,
-    this.agreements = const [],
-    this.lastJourney,
-    this.isStaff = false,
-  });
+  const GetAccountResponse(
+      {required this.id,
+      required this.username,
+      required this.email,
+      this.personalInfo,
+      this.residenceInfo,
+      this.employmentInfo,
+      this.agreements,
+      this.lastJourney,
+      required this.isStaff});
 
   factory GetAccountResponse.fromJson(Map<String, dynamic> json) =>
       _$GetAccountResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetAccountResponseToJson(this);
 
+  String get idStr {
+    return id == 0 ? '-' : id.toString();
+  }
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [
+        id,
+        username,
+        email,
+        personalInfo,
+        residenceInfo,
+        employmentInfo,
+        agreements,
+        lastJourney,
+        isStaff
+      ];
 }
 
 @JsonSerializable()
@@ -54,7 +67,7 @@ class LastJourney {
   final String? signature;
 
   LastJourney({
-    this.userJourney = '',
+    required this.userJourney,
     this.signature,
   });
 

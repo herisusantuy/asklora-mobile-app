@@ -17,7 +17,8 @@ class AccountRepository {
   Future<BaseResponse<GetAccountResponse>> getAccount() async {
     try {
       var response = await _accountApiClient.getAccount();
-      return BaseResponse.complete(GetAccountResponse.fromJson(response.data));
+      return BaseResponse.complete<GetAccountResponse>(
+          GetAccountResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(message: 'Could not get user details!');
     }

@@ -11,87 +11,97 @@ import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
-import '../../onboarding/kyc/domain/get_account/get_account_response.dart';
+import '../../onboarding/kyc/domain/upgrade_account/personal_info_request.dart';
 import '../../onboarding/kyc/repository/account_repository.dart';
 import '../bloc/account_information/account_information_bloc.dart';
 
 class AccountInformationScreen extends StatelessWidget {
   static const route = '/account_information_screen';
+
   const AccountInformationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    GetAccountResponse account = const GetAccountResponse();
     return BlocProvider(
       create: (context) =>
           AccountInformationBloc(accountRepository: AccountRepository())
             ..add(GetAccountInformation()),
-      child: BlocListener<AccountInformationBloc, AccountInformationState>(
-        listenWhen: (previous, current) =>
-            previous.response.state != current.response.state,
-        listener: (context, state) {
-          CustomLoadingOverlay.of(context).show(state.response.state);
-          switch (state.response.state) {
-            case ResponseState.error:
-              CustomInAppNotification.show(context, state.response.message);
-              break;
-            case ResponseState.success:
-              account = state.response.data!;
-              break;
-            default:
-              break;
-          }
-        },
-        child: CustomScaffold(
-          body: CustomStretchedLayout(
-            header: CustomHeader(title: S.of(context).accountInformation),
-            content:
-                BlocBuilder<AccountInformationBloc, AccountInformationState>(
-              builder: (context, state) {
-                return Column(
-                  children: [
-                    _accountDetails(S.of(context).userId,
-                        account.id != 0 ? account.id.toString() : '-'),
-                    const SizedBox(height: 40),
-                    _accountDetails(
-                        S.of(context).fullName,
-                        account.personalInfo != null
-                            ? '${account.personalInfo?.firstName} ${account.personalInfo?.lastName}'
-                            : '-'),
-                    const SizedBox(height: 40),
-                    _accountDetails(
-                        S.of(context).phone,
-                        account.personalInfo != null
-                            ? '(852) ${account.personalInfo?.phoneNumber}'
-                            : '-'),
-                    const SizedBox(height: 40),
-                    _accountDetails(S.of(context).email, account.email),
-                    const SizedBox(height: 40),
-                    _accountDetails(S.of(context).dateJoined, '-'),
-                  ],
-                );
-              },
-            ),
-          ),
-        ),
-      ),
+      child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
+          listenWhen: (previous, current) =>
+              previous.response.state != current.response.state,
+          listener: (context, state) {
+            CustomLoadingOverlay.of(context).show(state.response.state);
+            switch (state.response.state) {
+              case ResponseState.error:
+                CustomInAppNotification.show(context, state.response.message);
+                break;
+              case ResponseState.success:
+                break;
+              default:
+                break;
+            }
+          },
+          builder: (context, state) {
+            if (state.response.state == ResponseState.success) {
+              return CustomScaffold(
+                body: CustomStretchedLayout(
+                  header: CustomHeader(title: S.of(context).accountInformation),
+                  content: BlocBuilder<AccountInformationBloc,
+                      AccountInformationState>(
+                    builder: (context, state) {
+                      return Column(
+                        children: [
+                          _accountDetails(
+                              S.of(context).userId, state.response.data!.idStr),
+                          const SizedBox(height: 40),
+                          _accountDetails(
+                              S.of(context).fullName,
+                              state.response.data!.personalInfo != null
+                                  ? _getFullName(
+                                      state.response.data!.personalInfo!)
+                                  : '-'),
+                          const SizedBox(height: 40),
+                          _accountDetails(
+                              S.of(context).phone,
+                              state.response.data!.personalInfo != null
+                                  ? _getPhoneNumber(
+                                      state.response.data!.personalInfo!)
+                                  : '-'),
+                          const SizedBox(height: 40),
+                          _accountDetails(
+                              S.of(context).email, state.response.data!.email),
+                          const SizedBox(height: 40),
+                          _accountDetails(S.of(context).dateJoined, '-'),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          }),
     );
   }
 
-  Widget _accountDetails(String label, String value) => SizedBox(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextNew(
-              label,
-              style: AskLoraTextStyles.body2
-                  .copyWith(color: AskLoraColors.darkGray),
-            ),
-            const SizedBox(height: 12),
-            CustomTextNew(value, style: AskLoraTextStyles.body1),
-          ],
-        ),
+  String _getFullName(PersonalInfoRequest personalInfoRequest) =>
+      '${personalInfoRequest.firstName} ${personalInfoRequest.lastName}';
+
+  String _getPhoneNumber(PersonalInfoRequest personalInfoRequest) =>
+      '(852) ${personalInfoRequest.phoneNumber}';
+
+  Widget _accountDetails(String label, String value) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          CustomTextNew(
+            label,
+            style:
+                AskLoraTextStyles.body2.copyWith(color: AskLoraColors.darkGray),
+          ),
+          const SizedBox(height: 12),
+          CustomTextNew(value, style: AskLoraTextStyles.body1),
+        ],
       );
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);

@@ -12,6 +12,7 @@ import 'customer_service_screen.dart';
 
 class GetHelpScreen extends StatelessWidget {
   static const route = '/get_help_screen';
+
   const GetHelpScreen({super.key});
 
   @override
@@ -28,11 +29,11 @@ class GetHelpScreen extends StatelessWidget {
                 MenuButtonWidget(
                     title: 'FAQ',
                     onTap: () => openUrl(askloraFaq,
-                        mode: LaunchMode.externalApplication)),
+                        mode: LaunchMode.externalApplication),
+                    showBottomBorder: true),
                 MenuButtonWidget(
                   title: S.of(context).customerService,
                   onTap: () => CustomerServiceScreen.open(context),
-                  showBottomBorder: false,
                 ),
               ],
             )));

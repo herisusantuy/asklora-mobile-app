@@ -50,6 +50,106 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Get Help`
+  String get getHelp {
+    return Intl.message(
+      'Get Help',
+      name: 'getHelp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customer Service`
+  String get customerService {
+    return Intl.message(
+      'Customer Service',
+      name: 'customerService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About Asklora`
+  String get aboutAsklora {
+    return Intl.message(
+      'About Asklora',
+      name: 'aboutAsklora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Website`
+  String get website {
+    return Intl.message(
+      'Website',
+      name: 'website',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms and Conditions`
+  String get termsAndConditions {
+    return Intl.message(
+      'Terms and Conditions',
+      name: 'termsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Us`
+  String get contactUs {
+    return Intl.message(
+      'Contact Us',
+      name: 'contactUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Office Hours`
+  String get officeHoursLabel {
+    return Intl.message(
+      'Office Hours',
+      name: 'officeHoursLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `09:00-18:00 (HKT)`
+  String get officeHours {
+    return Intl.message(
+      '09:00-18:00 (HKT)',
+      name: 'officeHours',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `CANCEL`
   String get buttonCancel {
     return Intl.message(
@@ -145,6 +245,116 @@ class S {
     return Intl.message(
       'LET’S BEGIN',
       name: 'buttonLetsBegin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Settings`
+  String get accountSettings {
+    return Intl.message(
+      'Account Settings',
+      name: 'accountSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Information`
+  String get accountInformation {
+    return Intl.message(
+      'Account Information',
+      name: 'accountInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Details`
+  String get paymentDetails {
+    return Intl.message(
+      'Payment Details',
+      name: 'paymentDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Settings`
+  String get notificationSettings {
+    return Intl.message(
+      'Notification Settings',
+      name: 'notificationSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terminate Account`
+  String get terminateAccount {
+    return Intl.message(
+      'Terminate Account',
+      name: 'terminateAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User ID`
+  String get userId {
+    return Intl.message(
+      'User ID',
+      name: 'userId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message(
+      'Full Name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone`
+  String get phone {
+    return Intl.message(
+      'Phone',
+      name: 'phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date Joined`
+  String get dateJoined {
+    return Intl.message(
+      'Date Joined',
+      name: 'dateJoined',
       desc: '',
       args: [],
     );
@@ -427,166 +637,6 @@ class S {
     return Intl.message(
       ' DEPOSIT TO START TRADING',
       name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Get Help`
-  String get getHelp {
-    return Intl.message(
-      'Get Help',
-      name: 'getHelp',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Customer Service`
-  String get customerService {
-    return Intl.message(
-      'Customer Service',
-      name: 'customerService',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email`
-  String get email {
-    return Intl.message(
-      'Email',
-      name: 'email',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Office Hours`
-  String get officeHoursLabel {
-    return Intl.message(
-      'Office Hours',
-      name: 'officeHoursLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `09:00-18:00 (HKT)`
-  String get officeHours {
-    return Intl.message(
-      '09:00-18:00 (HKT)',
-      name: 'officeHours',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Account Settings`
-  String get accountSettings {
-    return Intl.message(
-      'Account Settings',
-      name: 'accountSettings',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Account Information`
-  String get accountInformation {
-    return Intl.message(
-      'Account Information',
-      name: 'accountInformation',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Change Password`
-  String get changePassword {
-    return Intl.message(
-      'Change Password',
-      name: 'changePassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Payment Details`
-  String get paymentDetails {
-    return Intl.message(
-      'Payment Details',
-      name: 'paymentDetails',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Language`
-  String get language {
-    return Intl.message(
-      'Language',
-      name: 'language',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Notification Settings`
-  String get notificationSettings {
-    return Intl.message(
-      'Notification Settings',
-      name: 'notificationSettings',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Terminate Account`
-  String get terminateAccount {
-    return Intl.message(
-      'Terminate Account',
-      name: 'terminateAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `User ID`
-  String get userId {
-    return Intl.message(
-      'User ID',
-      name: 'userId',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Full Name`
-  String get fullName {
-    return Intl.message(
-      'Full Name',
-      name: 'fullName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Phone`
-  String get phone {
-    return Intl.message(
-      'Phone',
-      name: 'phone',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Date Joined`
-  String get dateJoined {
-    return Intl.message(
-      'Date Joined',
-      name: 'dateJoined',
       desc: '',
       args: [],
     );

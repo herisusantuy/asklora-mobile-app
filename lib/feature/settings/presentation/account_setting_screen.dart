@@ -25,30 +25,31 @@ class AccountSettingScreen extends StatelessWidget {
         content: Column(
           children: [
             MenuButtonWidget(
-                onTap: () => AccountInformationScreen.open(context),
-                title: S.of(context).accountInformation,
-                showBottomBorder: false),
+              onTap: () => AccountInformationScreen.open(context),
+              title: S.of(context).accountInformation,
+            ),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).changePassword,
-                showBottomBorder: false),
+              onTap: () {},
+              title: S.of(context).changePassword,
+            ),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).paymentDetails,
-                showBottomBorder: false),
+              onTap: () {},
+              title: S.of(context).paymentDetails,
+            ),
             MenuButtonWidget(
                 onTap: () => LanguageSelectionScreen.open(context),
                 title: S.of(context).language,
                 subtitle: context.read<AppBloc>().state.locale.labelName,
                 showBottomBorder: false),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).notificationSettings,
-                showBottomBorder: false),
+              onTap: () {},
+              title: S.of(context).notificationSettings,
+            ),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).terminateAccount,
-                showBottomBorder: false),
+              title: S.of(context).terminateAccount,
+              showBottomBorder: false,
+              onTap: () {},
+            ),
           ],
         ),
       ),

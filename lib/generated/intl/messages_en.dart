@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
         "accountInformation":
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "accountSettings":
@@ -110,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
@@ -197,8 +199,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m10,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
+        "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
+        "termsAndConditions":
+            MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(
@@ -211,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
-        "userId": MessageLookupByLibrary.simpleMessage("User ID")
+        "userId": MessageLookupByLibrary.simpleMessage("User ID"),
+        "website": MessageLookupByLibrary.simpleMessage("Website")
       };
 }

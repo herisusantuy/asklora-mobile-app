@@ -15,7 +15,7 @@ class MenuButtonWidget extends StatelessWidget {
     required this.title,
     required this.onTap,
     this.subtitle,
-    this.showBottomBorder = true,
+    this.showBottomBorder = false,
   }) : super(key: key);
 
   @override
