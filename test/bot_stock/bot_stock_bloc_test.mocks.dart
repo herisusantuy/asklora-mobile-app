@@ -10,6 +10,12 @@ import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_detail_model.dar
     as _i5;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart'
     as _i8;
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_detail_model.dart'
+    as _i10;
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart'
+    as _i9;
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart'
+    as _i11;
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart'
     as _i3;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
@@ -162,41 +168,129 @@ class MockBotStockRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.BaseResponse<List<_i8.BotRecommendationModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<bool>> tradeBotStock({
-    required _i8.BotRecommendationModel? botRecommendationModel,
-    required double? tradeBotStockAmount,
-    required String? estimatedEndDate,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #tradeBotStock,
-          [],
-          {
-            #botRecommendationModel: botRecommendationModel,
-            #tradeBotStockAmount: tradeBotStockAmount,
-            #estimatedEndDate: estimatedEndDate,
-          },
-        ),
-        returnValue:
-            _i4.Future<_i2.BaseResponse<bool>>.value(_FakeBaseResponse_0<bool>(
-          this,
-          Invocation.method(
-            #tradeBotStock,
-            [],
-            {
-              #botRecommendationModel: botRecommendationModel,
-              #tradeBotStockAmount: tradeBotStockAmount,
-              #estimatedEndDate: estimatedEndDate,
-            },
-          ),
-        )),
-      ) as _i4.Future<_i2.BaseResponse<bool>>);
-  @override
-  _i4.Future<bool> removeInvestmentStyleState() => (super.noSuchMethod(
+  _i4.Future<void> removeInvestmentStyleState() => (super.noSuchMethod(
         Invocation.method(
           #removeInvestmentStyleState,
           [],
         ),
-        returnValue: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i9.BotActiveOrderModel>>> activeOrders(
+          {required List<String>? status}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #activeOrders,
+          [],
+          {#status: status},
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<List<_i9.BotActiveOrderModel>>>.value(
+                _FakeBaseResponse_0<List<_i9.BotActiveOrderModel>>(
+          this,
+          Invocation.method(
+            #activeOrders,
+            [],
+            {#status: status},
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<List<_i9.BotActiveOrderModel>>>);
+  @override
+  _i4.Future<
+      _i2.BaseResponse<_i10.BotActiveOrderDetailModel>> activeOrderDetail(
+          String? botOrderId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #activeOrderDetail,
+          [botOrderId],
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i10.BotActiveOrderDetailModel>>.value(
+                _FakeBaseResponse_0<_i10.BotActiveOrderDetailModel>(
+          this,
+          Invocation.method(
+            #activeOrderDetail,
+            [botOrderId],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i10.BotActiveOrderDetailModel>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>> createOrder({
+    required _i8.BotRecommendationModel? botRecommendationModel,
+    required double? tradeBotStockAmount,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createOrder,
+          [],
+          {
+            #botRecommendationModel: botRecommendationModel,
+            #tradeBotStockAmount: tradeBotStockAmount,
+          },
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i11.BotOrderResponse>(
+          this,
+          Invocation.method(
+            #createOrder,
+            [],
+            {
+              #botRecommendationModel: botRecommendationModel,
+              #tradeBotStockAmount: tradeBotStockAmount,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>> cancelOrder(
+          String? botOrderId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #cancelOrder,
+          [botOrderId],
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i11.BotOrderResponse>(
+          this,
+          Invocation.method(
+            #cancelOrder,
+            [botOrderId],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>> rolloverOrder(
+          String? botOrderId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #rolloverOrder,
+          [botOrderId],
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i11.BotOrderResponse>(
+          this,
+          Invocation.method(
+            #rolloverOrder,
+            [botOrderId],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>> terminateOrder(
+          String? botOrderId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #terminateOrder,
+          [botOrderId],
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i11.BotOrderResponse>(
+          this,
+          Invocation.method(
+            #terminateOrder,
+            [botOrderId],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>);
 }

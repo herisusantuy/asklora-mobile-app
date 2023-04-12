@@ -19,6 +19,7 @@ import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
+import '../../../../generated/l10n.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
@@ -70,10 +71,10 @@ class BotRecommendationScreen extends StatelessWidget {
                   current.botRecommendationResponse,
               builder: (context, state) => CustomLayoutWithBlurPopUp(
                 loraPopUpMessageModel: LoraPopUpMessageModel(
-                  title: 'Unable to get information',
-                  subTitle:
-                      'There was an error when trying to get your Investment Details. Please try reloading the page',
-                  primaryButtonLabel: 'RELOAD PAGE',
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle: S.of(context).errorGettingInformationSubTitle(
+                      'the Investment Details'),
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
                   onSecondaryButtonTap: () => Navigator.pop(context),
                   onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
                       context: context,
