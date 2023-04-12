@@ -53,11 +53,12 @@ class AboutAskloraScreen extends StatelessWidget {
             const Divider(thickness: 1, height: 0),
             MenuButtonWidget(
                 onTap: () => PrivacyPolicyScreen.open(context),
-                title: S.of(context).privacyPolicy),
+                title: S.of(context).privacyPolicy,
+                showBottomBorder: true),
             MenuButtonWidget(
                 onTap: () => TermsAndConditionScreen.open(context),
                 title: S.of(context).termsAndConditions,
-                showBottomBorder: false),
+                showBottomBorder: true),
           ],
         ),
         bottomButton: _contactUsButton,

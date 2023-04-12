@@ -49,6 +49,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
+        "accountInformation":
+            MessageLookupByLibrary.simpleMessage("Account Information"),
+        "accountSettings":
+            MessageLookupByLibrary.simpleMessage("Account Settings"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
@@ -105,22 +109,32 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invest with AI strategy, automated"),
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
+        "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
+        "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "notificationSettings":
+            MessageLookupByLibrary.simpleMessage("Notification Settings"),
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel":
             MessageLookupByLibrary.simpleMessage("Office Hours"),
+        "paymentDetails":
+            MessageLookupByLibrary.simpleMessage("paymentDetails"),
+        "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "portfolioBuyingPower": m5,
         "portfolioCurrentPrice": m6,
         "portfolioDetailButtonCancelBotStock":
@@ -186,6 +200,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "terminateAccount":
+            MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
@@ -200,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
+        "userId": MessageLookupByLibrary.simpleMessage("User ID"),
         "website": MessageLookupByLibrary.simpleMessage("Website")
       };
 }
