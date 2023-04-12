@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_header.dart';
@@ -7,6 +8,8 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../bloc/change_password/change_password_bloc.dart';
+import '../repository/change_password_repository.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   static const route = '/change_password_screen';
@@ -14,33 +17,46 @@ class ChangePasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: CustomStretchedLayout(
-        header: const CustomHeader(title: 'Change Password'),
-        content: Column(
-          children: [
-            _currentPasswordInput,
-            const SizedBox(height: 20),
-            _newPasswordInput,
-            const SizedBox(height: 20),
-            _confirmNewPassword,
-          ],
+    return BlocProvider(
+      create: (context) => ChangePasswordBloc(
+          changePasswordRepository: ChangePasswordRepository()),
+      child: CustomScaffold(
+        body: CustomStretchedLayout(
+          header: const CustomHeader(title: 'Change Password'),
+          content: Column(
+            children: [
+              _passwordInput,
+              const SizedBox(height: 20),
+              _newPasswordInput,
+              const SizedBox(height: 20),
+              _confirmNewPassword,
+            ],
+          ),
+          bottomButton: _saveButton,
         ),
-        bottomButton: _saveButton,
       ),
     );
   }
 
-  Widget get _currentPasswordInput {
+  Widget get _passwordInput {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomTextNew('Password', style: AskLoraTextStyles.body1),
         const SizedBox(height: 5),
-        PasswordTextField(
-          validPassword: (validPassword) => {},
-          hintText: 'Existing Password',
-          isShowingPasswordValidation: false,
+        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+          buildWhen: (previous, current) =>
+              previous.password != current.password,
+          builder: (context, state) {
+            return PasswordTextField(
+              validPassword: (validPassword) => {},
+              hintText: 'Existing Password',
+              isShowingPasswordValidation: false,
+              onChanged: (password) => context
+                  .read<ChangePasswordBloc>()
+                  .add(PasswordChanged(password)),
+            );
+          },
         ),
       ],
     );
@@ -52,10 +68,19 @@ class ChangePasswordScreen extends StatelessWidget {
       children: [
         CustomTextNew('New Password', style: AskLoraTextStyles.body1),
         const SizedBox(height: 5),
-        PasswordTextField(
-          validPassword: (validPassword) => {},
-          hintText: 'Existing Password',
-          isShowingPasswordValidation: false,
+        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+          buildWhen: (previous, current) =>
+              previous.newPassword != current.newPassword ||
+              previous.confirmNewPassword != current.newPasswordErrorText,
+          builder: (context, state) {
+            return PasswordTextField(
+              validPassword: (validPassword) => {},
+              hintText: 'Existing Password',
+              onChanged: (newPassword) => context
+                  .read<ChangePasswordBloc>()
+                  .add(NewPasswordChanged(newPassword)),
+            );
+          },
         ),
       ],
     );
@@ -67,14 +92,37 @@ class ChangePasswordScreen extends StatelessWidget {
       children: [
         CustomTextNew('Confirm New Password', style: AskLoraTextStyles.body1),
         const SizedBox(height: 5),
-        PasswordTextField(
-          validPassword: (validPassword) => {},
-          hintText: 'Confirm New Password',
+        BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+          buildWhen: (previous, current) =>
+              previous.newPassword != current.newPassword ||
+              previous.confirmNewPassword != current.newPasswordErrorText,
+          builder: (context, state) {
+            return PasswordTextField(
+              validPassword: (validPassword) => {},
+              hintText: 'Confirm New Password',
+              isShowingPasswordValidation: false,
+              errorText: state.confirmNewPasswordErrorText,
+              onChanged: (confirmNewPassword) => context
+                  .read<ChangePasswordBloc>()
+                  .add(ConfirmNewPasswordChanged(confirmNewPassword)),
+            );
+          },
         ),
       ],
     );
   }
 
-  Widget get _saveButton => PrimaryButton(label: 'Save', onTap: () {});
+  Widget get _saveButton =>
+      BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+        buildWhen: (previous, current) =>
+            previous.confirmNewPasswordErrorText !=
+            current.confirmNewPasswordErrorText,
+        builder: (context, state) {
+          return PrimaryButton(
+              label: 'Save',
+              disabled: state.disabledSaveButton(),
+              onTap: () {});
+        },
+      );
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }
