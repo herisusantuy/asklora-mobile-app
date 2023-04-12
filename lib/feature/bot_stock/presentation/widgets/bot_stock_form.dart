@@ -9,7 +9,7 @@ import '../../../../core/styles/asklora_colors.dart';
 class BotStockForm extends StatelessWidget {
   final bool enableBackNavigation;
   final Widget content;
-  final Widget bottomButton;
+  final Widget? bottomButton;
   final EdgeInsets padding;
   final String title;
   final Color backgroundColor;
@@ -22,7 +22,7 @@ class BotStockForm extends StatelessWidget {
       this.title = '',
       this.enableBackNavigation = true,
       required this.content,
-      required this.bottomButton,
+      this.bottomButton,
       this.useHeader = false,
       this.backgroundColor = AskLoraColors.white,
       this.padding = AppValues.screenHorizontalPadding,
