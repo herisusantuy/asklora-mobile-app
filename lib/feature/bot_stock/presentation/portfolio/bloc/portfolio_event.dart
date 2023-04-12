@@ -7,25 +7,30 @@ abstract class PortfolioEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class BotStockFilterChanged extends PortfolioEvent {
-  final BotStockFilter botStockFilter;
+class ActiveFilterChecked extends PortfolioEvent {
+  final bool isChecked;
 
-  const BotStockFilterChanged(this.botStockFilter);
+  const ActiveFilterChecked(this.isChecked);
+}
+
+class PendingFilterChecked extends PortfolioEvent {
+  final bool isChecked;
+
+  const PendingFilterChecked(this.isChecked);
 }
 
 class FetchPortfolio extends PortfolioEvent {}
 
-class FetchBotPortfolio extends PortfolioEvent {
+class FetchActiveOrders extends PortfolioEvent {
   final BotStockFilter botStockFilter;
 
-  const FetchBotPortfolio({this.botStockFilter = BotStockFilter.all});
+  const FetchActiveOrders({this.botStockFilter = BotStockFilter.all});
 }
 
-class FetchBotPortfolioDetail extends PortfolioEvent {
-  final String ticker;
-  final String botId;
+class FetchActiveOrderDetail extends PortfolioEvent {
+  final String botOrderId;
 
-  const FetchBotPortfolioDetail({required this.ticker, required this.botId});
+  const FetchActiveOrderDetail({required this.botOrderId});
 }
 
 class CurrencyChanged extends PortfolioEvent {
@@ -38,19 +43,28 @@ class CurrencyChanged extends PortfolioEvent {
 }
 
 class RolloverBotStock extends PortfolioEvent {
-  final PortfolioBotModel portfolioBotModel;
+  final String botOrderId;
 
-  const RolloverBotStock(this.portfolioBotModel);
+  const RolloverBotStock(this.botOrderId);
 
   @override
-  List<Object> get props => [portfolioBotModel];
+  List<Object> get props => [botOrderId];
 }
 
 class EndBotStock extends PortfolioEvent {
-  final PortfolioBotModel portfolioBotModel;
+  final String botOrderId;
 
-  const EndBotStock(this.portfolioBotModel);
+  const EndBotStock(this.botOrderId);
 
   @override
-  List<Object> get props => [portfolioBotModel];
+  List<Object> get props => [botOrderId];
+}
+
+class CancelBotStock extends PortfolioEvent {
+  final String botOrderId;
+
+  const CancelBotStock(this.botOrderId);
+
+  @override
+  List<Object> get props => [botOrderId];
 }

@@ -47,7 +47,7 @@ class AccountSettingScreen extends StatelessWidget {
                 showBottomBorder: false),
             MenuButtonWidget(
                 onTap: () {},
-                title: S.of(context).terminateACcount,
+                title: S.of(context).terminateAccount,
                 showBottomBorder: false),
           ],
         ),
