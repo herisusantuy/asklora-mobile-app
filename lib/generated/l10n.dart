@@ -280,10 +280,10 @@ class S {
     );
   }
 
-  /// `paymentDetails`
+  /// `Payment Details`
   String get paymentDetails {
     return Intl.message(
-      'paymentDetails',
+      'Payment Details',
       name: 'paymentDetails',
       desc: '',
       args: [],

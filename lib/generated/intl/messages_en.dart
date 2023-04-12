@@ -133,7 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "officeHoursLabel":
             MessageLookupByLibrary.simpleMessage("Office Hours"),
         "paymentDetails":
-            MessageLookupByLibrary.simpleMessage("paymentDetails"),
+            MessageLookupByLibrary.simpleMessage("Payment Details"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "portfolioBuyingPower": m5,
         "portfolioCurrentPrice": m6,
