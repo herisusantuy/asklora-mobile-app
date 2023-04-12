@@ -9,6 +9,7 @@ import 'account_information_screen.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   static const route = 'account/setting_screen';
+
   const AccountSettingScreen({super.key});
 
   @override
@@ -21,30 +22,30 @@ class AccountSettingScreen extends StatelessWidget {
         content: Column(
           children: [
             MenuButtonWidget(
-                onTap: () => AccountInformationScreen.open(context),
-                title: S.of(context).accountInformation,
-                showBottomBorder: false),
+              onTap: () => AccountInformationScreen.open(context),
+              title: S.of(context).accountInformation,
+            ),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).changePassword,
-                showBottomBorder: false),
+              onTap: () {},
+              title: S.of(context).changePassword,
+            ),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).paymentDetails,
-                showBottomBorder: false),
+              onTap: () {},
+              title: S.of(context).paymentDetails,
+            ),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).language,
-                subtitle: 'English',
-                showBottomBorder: false),
+              onTap: () {},
+              title: S.of(context).language,
+              subtitle: 'English',
+            ),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).notificationSettings,
-                showBottomBorder: false),
+              onTap: () {},
+              title: S.of(context).notificationSettings,
+            ),
             MenuButtonWidget(
-                onTap: () {},
-                title: S.of(context).terminateACcount,
-                showBottomBorder: false),
+              onTap: () {},
+              title: S.of(context).terminateAccount,
+            ),
           ],
         ),
       ),
