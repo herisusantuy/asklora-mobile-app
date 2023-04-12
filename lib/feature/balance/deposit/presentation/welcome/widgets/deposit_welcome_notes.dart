@@ -84,7 +84,7 @@ class DepositWelcomeNotes extends StatelessWidget {
         child: CustomExpandedRow(
           label,
           text: text,
-          textStyle: AskLoraTextStyles.body3,
+          leftTextStyle: AskLoraTextStyles.body3,
           flex1: 1,
           flex2: 20,
           textValueAlign: TextAlign.start,
