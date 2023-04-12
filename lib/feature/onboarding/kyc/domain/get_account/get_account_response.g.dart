@@ -46,7 +46,7 @@ Map<String, dynamic> _$GetAccountResponseToJson(GetAccountResponse instance) =>
     };
 
 LastJourney _$LastJourneyFromJson(Map<String, dynamic> json) => LastJourney(
-      userJourney: json['user_journey'] as String? ?? '',
+      userJourney: json['user_journey'] as String,
       signature: json['data'] as String?,
     );
 

@@ -67,7 +67,7 @@ class LastJourney {
   final String? signature;
 
   LastJourney({
-    this.userJourney = '',
+    required this.userJourney,
     this.signature,
   });
 
