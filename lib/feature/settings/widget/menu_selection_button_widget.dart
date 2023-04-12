@@ -4,16 +4,18 @@ import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 
-class MenuButtonWidget extends StatelessWidget {
+class MenuSelectionButtonWidget extends StatelessWidget {
   final String title;
   final String? subtitle;
   final VoidCallback onTap;
   final bool showBottomBorder;
+  final bool isSelected;
 
-  const MenuButtonWidget({
+  const MenuSelectionButtonWidget({
     Key? key,
     required this.title,
     required this.onTap,
+    required this.isSelected,
     this.subtitle,
     this.showBottomBorder = true,
   }) : super(key: key);
@@ -50,11 +52,17 @@ class MenuButtonWidget extends StatelessWidget {
             const SizedBox(
               width: 12,
             ),
-            const Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: AskLoraColors.gray,
-              size: 14,
-            )
+            isSelected
+                ? const Icon(
+                    Icons.check,
+                    color: AskLoraColors.charcoal,
+                    size: 24,
+                  )
+                : const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: AskLoraColors.gray,
+                    size: 14,
+                  )
           ],
         ),
       ),

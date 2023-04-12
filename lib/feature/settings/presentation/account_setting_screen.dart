@@ -8,10 +8,11 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
 import 'account_information_screen.dart';
-import 'language_screen.dart';
+import 'language_selection_screen.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   static const route = '/account_setting_screen';
+
   const AccountSettingScreen({super.key});
 
   @override
@@ -36,7 +37,7 @@ class AccountSettingScreen extends StatelessWidget {
                 title: S.of(context).paymentDetails,
                 showBottomBorder: false),
             MenuButtonWidget(
-                onTap: () => LanguageScreen.open(context),
+                onTap: () => LanguageSelectionScreen.open(context),
                 title: S.of(context).language,
                 subtitle: context.read<AppBloc>().state.locale.labelName,
                 showBottomBorder: false),
