@@ -250,6 +250,116 @@ class S {
     );
   }
 
+  /// `Account Settings`
+  String get accountSettings {
+    return Intl.message(
+      'Account Settings',
+      name: 'accountSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Information`
+  String get accountInformation {
+    return Intl.message(
+      'Account Information',
+      name: 'accountInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Details`
+  String get paymentDetails {
+    return Intl.message(
+      'Payment Details',
+      name: 'paymentDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Settings`
+  String get notificationSettings {
+    return Intl.message(
+      'Notification Settings',
+      name: 'notificationSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terminate Account`
+  String get terminateAccount {
+    return Intl.message(
+      'Terminate Account',
+      name: 'terminateAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User ID`
+  String get userId {
+    return Intl.message(
+      'User ID',
+      name: 'userId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message(
+      'Full Name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone`
+  String get phone {
+    return Intl.message(
+      'Phone',
+      name: 'phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date Joined`
+  String get dateJoined {
+    return Intl.message(
+      'Date Joined',
+      name: 'dateJoined',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Unable to get information`
   String get errorGettingInformationTitle {
     return Intl.message(
@@ -532,31 +642,11 @@ class S {
     );
   }
 
-  /// `Account Settings`
-  String get accountSettings {
-    return Intl.message(
-      'Account Settings',
-      name: 'accountSettings',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `The investment amount and Bot management fee (HKD1,500) will be returned to your account.`
   String get botTradeBottomSheetCancelBotStockConfirmationTitle {
     return Intl.message(
       'The investment amount and Bot management fee (HKD1,500) will be returned to your account.',
       name: 'botTradeBottomSheetCancelBotStockConfirmationTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Account Information`
-  String get accountInformation {
-    return Intl.message(
-      'Account Information',
-      name: 'accountInformation',
       desc: '',
       args: [],
     );
@@ -572,30 +662,11 @@ class S {
     );
   }
 
-  /// `Change Password`
-  String get changePassword {
-    return Intl.message(
-      'Change Password',
-      name: 'changePassword',
-      args: [],
-    );
-  }
-
   /// `Performance`
   String get portfolioDetailPerformanceTitle {
     return Intl.message(
       'Performance',
       name: 'portfolioDetailPerformanceTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `paymentDetails`
-  String get paymentDetails {
-    return Intl.message(
-      'paymentDetails',
-      name: 'paymentDetails',
       desc: '',
       args: [],
     );
@@ -611,16 +682,6 @@ class S {
     );
   }
 
-  /// `Language`
-  String get language {
-    return Intl.message(
-      'Language',
-      name: 'language',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Inv. Amount (HKD)`
   String get portfolioDetailPerformanceInvestmentAmount {
     return Intl.message(
@@ -631,31 +692,11 @@ class S {
     );
   }
 
-  /// `Notification Settings`
-  String get notificationSettings {
-    return Intl.message(
-      'Notification Settings',
-      name: 'notificationSettings',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Total P&L`
   String get portfolioDetailPerformanceTotalPL {
     return Intl.message(
       'Total P&L',
       name: 'portfolioDetailPerformanceTotalPL',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Terminate Account`
-  String get terminateACcount {
-    return Intl.message(
-      'Terminate Account',
-      name: 'terminateACcount',
       desc: '',
       args: [],
     );
@@ -701,31 +742,11 @@ class S {
     );
   }
 
-  /// `User ID`
-  String get userId {
-    return Intl.message(
-      'User ID',
-      name: 'userId',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Stock Values (HKD)`
   String get portfolioDetailPerformanceStockValues {
     return Intl.message(
       'Stock Values (HKD)',
       name: 'portfolioDetailPerformanceStockValues',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Full Name`
-  String get fullName {
-    return Intl.message(
-      'Full Name',
-      name: 'fullName',
       desc: '',
       args: [],
     );
@@ -741,31 +762,11 @@ class S {
     );
   }
 
-  /// `Phone`
-  String get phone {
-    return Intl.message(
-      'Phone',
-      name: 'phone',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `% of Bot Assets in Stock`
   String get portfolioDetailPerformanceBotAssetsInStock {
     return Intl.message(
       '% of Bot Assets in Stock',
       name: 'portfolioDetailPerformanceBotAssetsInStock',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Date Joined`
-  String get dateJoined {
-    return Intl.message(
-      'Date Joined',
-      name: 'dateJoined',
       desc: '',
       args: [],
     );

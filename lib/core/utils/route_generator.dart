@@ -37,12 +37,13 @@ import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
+import '../../feature/settings/presentation/about_asklora_screen.dart';
 import '../../feature/settings/presentation/account_information_screen.dart';
 import '../../feature/settings/presentation/account_setting_screen.dart';
 import '../../feature/settings/presentation/change_password_screen.dart';
-import '../../feature/settings/presentation/about_asklora_screen.dart';
 import '../../feature/settings/presentation/customer_service_screen.dart';
 import '../../feature/settings/presentation/get_help_screen.dart';
+import '../../feature/settings/presentation/language_selection_screen.dart';
 import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
@@ -254,8 +255,11 @@ class RouterGenerator {
         );
       case ChangePasswordScreen.route:
         return MaterialPageRoute(
+            settings: settings, builder: (_) => const ChangePasswordScreen());
+      case LanguageSelectionScreen.route:
+        return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const ChangePasswordScreen(),
+          builder: (_) => const LanguageSelectionScreen(),
         );
       case PrivacyPolicyScreen.route:
         return MaterialPageRoute(

@@ -46,7 +46,7 @@ class AppState extends Equatable {
 
   const AppState._(
       {this.status = AppStatus.unknown,
-      this.locale = const LocaleType('en', 'US', 'ENG', 'Mulish'),
+      this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
       this.userJourney = UserJourney.privacy});
 
   const AppState.unknown() : this._();
@@ -55,7 +55,7 @@ class AppState extends Equatable {
       : this._(status: AppStatus.authenticated, userJourney: userJourney);
 
   const AppState.unauthenticated(
-      {localeType = const LocaleType('en', 'US', 'ENG', 'Mulish'),
+      {localeType = const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
       UserJourney userJourney = UserJourney.privacy})
       : this._(
             status: AppStatus.unauthenticated,

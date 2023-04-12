@@ -8,9 +8,9 @@ part of 'get_account_response.dart';
 
 GetAccountResponse _$GetAccountResponseFromJson(Map<String, dynamic> json) =>
     GetAccountResponse(
-      id: json['id'] as int? ?? 0,
-      username: json['username'] as String? ?? '',
-      email: json['email'] as String? ?? '',
+      id: json['id'] as int,
+      username: json['username'] as String,
+      email: json['email'] as String,
       personalInfo: json['personal_info'] == null
           ? null
           : PersonalInfoRequest.fromJson(
@@ -24,13 +24,12 @@ GetAccountResponse _$GetAccountResponseFromJson(Map<String, dynamic> json) =>
           : EmploymentInfo.fromJson(
               json['employment_info'] as Map<String, dynamic>),
       agreements: (json['agreements'] as List<dynamic>?)
-              ?.map((e) => Agreement.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+          ?.map((e) => Agreement.fromJson(e as Map<String, dynamic>))
+          .toList(),
       lastJourney: json['last_journey'] == null
           ? null
           : LastJourney.fromJson(json['last_journey'] as Map<String, dynamic>),
-      isStaff: json['is_staff'] as bool? ?? false,
+      isStaff: json['is_staff'] as bool,
     );
 
 Map<String, dynamic> _$GetAccountResponseToJson(GetAccountResponse instance) =>
@@ -41,13 +40,13 @@ Map<String, dynamic> _$GetAccountResponseToJson(GetAccountResponse instance) =>
       'personal_info': instance.personalInfo?.toJson(),
       'residence_info': instance.residenceInfo?.toJson(),
       'employment_info': instance.employmentInfo?.toJson(),
-      'agreements': instance.agreements.map((e) => e.toJson()).toList(),
+      'agreements': instance.agreements?.map((e) => e.toJson()).toList(),
       'last_journey': instance.lastJourney?.toJson(),
       'is_staff': instance.isStaff,
     };
 
 LastJourney _$LastJourneyFromJson(Map<String, dynamic> json) => LastJourney(
-      userJourney: json['user_journey'] as String? ?? '',
+      userJourney: json['user_journey'] as String,
       signature: json['data'] as String?,
     );
 
