@@ -1,22 +1,20 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class Performance extends StatelessWidget {
-  final PortfolioBotDetailModel? portfolioBotDetailModel;
-  final PortfolioBotModel portfolioBotModel;
+  final BotActiveOrderDetailModel botActiveOrderDetailModel;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
-  const Performance(
-      {this.portfolioBotDetailModel, required this.portfolioBotModel, Key? key})
+  const Performance({required this.botActiveOrderDetailModel, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) =>
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         CustomTextNew(
-          'Performance',
+          S.of(context).portfolioDetailPerformanceTitle,
           style: AskLoraTextStyles.h5,
         ),
         const SizedBox(
@@ -29,16 +27,21 @@ class Performance extends StatelessWidget {
             children: [
               Expanded(
                   child: ColumnText(
-                      title: 'Botstock values (HKD)',
-                      subTitle:
-                          portfolioBotModel.amount.convertToCurrencyDecimal())),
+                      title: S
+                          .of(context)
+                          .portfolioDetailPerformanceBotStockValues,
+                      subTitle: botActiveOrderDetailModel.botStockValueString)),
               Expanded(
                   child: ColumnText(
-                      title: 'Inv. Amount (HKD)',
+                      title: S
+                          .of(context)
+                          .portfolioDetailPerformanceInvestmentAmount,
                       subTitle:
-                          portfolioBotModel.amount.convertToCurrencyDecimal())),
-              const Expanded(
-                  child: ColumnText(title: 'Total P/L', subTitle: '0%')),
+                          botActiveOrderDetailModel.investmentAmountString)),
+              Expanded(
+                  child: ColumnText(
+                      title: S.of(context).portfolioDetailPerformanceTotalPL,
+                      subTitle: botActiveOrderDetailModel.currentPnlRetString)),
             ],
           ),
         ),
@@ -46,48 +49,34 @@ class Performance extends StatelessWidget {
           height: 20,
         ),
         PairColumnText(
-            leftTitle: 'Current Price',
-            leftSubTitle:
-                '${portfolioBotDetailModel == null ? '-' : portfolioBotDetailModel?.price ?? '-'}',
-            rightTitle: 'No. of Shares',
-            rightSubTitle: '0',
+            leftTitle: S.of(context).portfolioCurrentPrice('USD'),
+            leftSubTitle: botActiveOrderDetailModel.currentPriceString,
+            rightTitle: S.of(context).portfolioDetailPerformanceNumberOfShares,
+            rightSubTitle: botActiveOrderDetailModel.botShareString,
             rightTooltipText:
-                'Indicates how many shares of a company are currently owned by you.'),
+                S.of(context).portfolioDetailPerformanceNumberOfSharesTooltip),
         _spaceBetweenInfo,
         PairColumnText(
-          leftTitle: 'Stock Values (HKD)',
-          leftSubTitle: '0',
-          rightTitle: 'Cash (HKD)',
-          rightSubTitle: '${portfolioBotModel.amount}',
+          leftTitle: S.of(context).portfolioDetailPerformanceStockValues,
+          leftSubTitle: botActiveOrderDetailModel.stockValueString,
+          rightTitle: S.of(context).portfolioDetailPerformanceCash,
+          rightSubTitle: botActiveOrderDetailModel.botCashBalanceString,
         ),
         _spaceBetweenInfo,
-        const ColumnText(title: 'Ratio of Stock to Cash', subTitle: '0:1'),
+        ColumnText(
+            title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
+            subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
         _chartWidget()
       ]);
 
-  Widget _chartWidget() {
-    return const SizedBox(
-      height: 300,
-      child: Align(
-          alignment: Alignment.center,
-          child: Text(
-              'Performance data will be available once the Botstock starts')),
-    );
-
-    /// The chart data should be disabled in the SFC demo build.
-    /*if (portfolioBotDetailModel?.performance != null) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 32.0),
-        child:
-            ChartAnimation(chartDataSets: portfolioBotDetailModel?.performance),
-      );
-    } else {
-      return const SizedBox(
-        height: 300,
-        child: Align(
-            alignment: Alignment.center,
-            child: Text('Performance data is not available for now')),
-      );
-    }*/
-  }
+  Widget _chartWidget() => Align(
+      alignment: Alignment.center,
+      child: botActiveOrderDetailModel.performance.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.only(top: 32.0),
+              child: ChartAnimation(
+                  chartDataSets: botActiveOrderDetailModel.performance),
+            )
+          : const Text(
+              'Performance data will be available once the Botstock starts'));
 }
