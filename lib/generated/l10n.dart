@@ -432,6 +432,56 @@ class S {
     );
   }
 
+  /// `Get Help`
+  String get getHelp {
+    return Intl.message(
+      'Get Help',
+      name: 'getHelp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customer Service`
+  String get customerService {
+    return Intl.message(
+      'Customer Service',
+      name: 'customerService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Office Hours`
+  String get officeHoursLabel {
+    return Intl.message(
+      'Office Hours',
+      name: 'officeHoursLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `09:00-18:00 (HKT)`
+  String get officeHours {
+    return Intl.message(
+      '09:00-18:00 (HKT)',
+      name: 'officeHours',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `The investment amount and Bot management fee (HKD1,500) will be returned to your account.`
   String get botTradeBottomSheetCancelBotStockConfirmationTitle {
     return Intl.message(

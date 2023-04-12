@@ -104,13 +104,21 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invest with AI strategy, automated"),
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
+        "customerService":
+            MessageLookupByLibrary.simpleMessage("Customer Service"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
+        "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "officeHours":
+            MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
+        "officeHoursLabel":
+            MessageLookupByLibrary.simpleMessage("Office Hours"),
         "portfolioBuyingPower": m5,
         "portfolioCurrentPrice": m6,
         "portfolioDetailButtonCancelBotStock":
