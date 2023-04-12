@@ -23,7 +23,8 @@ BotDetailModel _$BotDetailModelFromJson(Map<String, dynamic> json) =>
       json['description'] as String,
       json['market_cap'] as String?,
       (json['performance'] as List<dynamic>)
-          .map((e) => ChartDataSet.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              BotRecommendationChartModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['prev_close_price'] as num).toDouble(),
       (json['prev_close_changes'] as num).toDouble(),
@@ -107,7 +108,8 @@ Map<String, dynamic> _$BotDescriptionModelToJson(
 PerformanceModel _$PerformanceModelFromJson(Map<String, dynamic> json) =>
     PerformanceModel(
       (json['data'] as List<dynamic>?)
-          ?.map((e) => ChartDataSet.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              BotRecommendationChartModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

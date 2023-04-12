@@ -1,32 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 
 import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/domain/pair.dart';
 import '../../../../../../core/presentation/buttons/others/funding_button.dart';
 import '../../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../../core/presentation/text_fields/custom_dropdown.dart';
-import '../../../../../../core/presentation/text_fields/style/text_field_style.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/presentation/custom_checkbox.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
+import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
+import '../../domain/orders/bot_active_order_model.dart';
+import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/currency_dropdown.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
-import 'domain/portfolio_bot_model.dart';
 import 'domain/portfolio_response.dart';
 import 'repository/portfolio_repository.dart';
 import 'utils/portfolio_enum.dart';
@@ -49,13 +52,14 @@ class PortfolioScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) {
-        PortfolioBloc portfolioBloc =
-            PortfolioBloc(portfolioRepository: PortfolioRepository());
+        PortfolioBloc portfolioBloc = PortfolioBloc(
+            portfolioRepository: PortfolioRepository(),
+            botStockRepository: BotStockRepository());
 
         ///fetch portfolio when current UserJourney already passed freeBotStock
         if (UserJourney.compareUserJourney(
             context: context, target: UserJourney.freeBotStock)) {
-          portfolioBloc.add(const FetchBotPortfolio());
+          portfolioBloc.add(const FetchActiveOrders());
           portfolioBloc.add(FetchPortfolio());
         }
         return portfolioBloc;
@@ -67,23 +71,25 @@ class PortfolioScreen extends StatelessWidget {
         body: BlocBuilder<PortfolioBloc, PortfolioState>(
           buildWhen: (previous, current) =>
               previous.portfolioResponse != current.portfolioResponse ||
-              previous.botPortfolioResponse != current.botPortfolioResponse ||
+              previous.botActiveOrderResponse !=
+                  current.botActiveOrderResponse ||
               previous.currency != current.currency,
           builder: (context, state) => CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: 'Unable to get information',
-              subTitle:
-                  'There was an error when trying to get your Portfolio. Please try reloading the page',
-              primaryButtonLabel: 'RELOAD PAGE',
-              secondaryButtonLabel: 'CANCEL',
+              title: S.of(context).errorGettingInformationTitle,
+              subTitle: S
+                  .of(context)
+                  .errorGettingInformationSubTitle('your Portfolio'),
+              primaryButtonLabel: S.of(context).buttonReloadPage,
+              secondaryButtonLabel: S.of(context).buttonCancel,
               onSecondaryButtonTap: () => Navigator.pop(context),
               onPrimaryButtonTap: () {
-                context.read<PortfolioBloc>().add(const FetchBotPortfolio());
+                context.read<PortfolioBloc>().add(const FetchActiveOrders());
                 context.read<PortfolioBloc>().add(FetchPortfolio());
               },
             ),
             showPopUp:
-                state.botPortfolioResponse.state == ResponseState.error ||
+                state.botActiveOrderResponse.state == ResponseState.error ||
                     state.portfolioResponse.state == ResponseState.error,
             content: ListView(
               padding: AppValues.screenHorizontalPadding
@@ -93,10 +99,17 @@ class PortfolioScreen extends StatelessWidget {
                 const SizedBox(
                   height: 40,
                 ),
-                CustomTextNew(
-                  'Your Botstocks',
-                  style: AskLoraTextStyles.h2
-                      .copyWith(color: AskLoraColors.charcoal),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomTextNew(
+                        S.of(context).portfolioYourBotStock,
+                        style: AskLoraTextStyles.h2
+                            .copyWith(color: AskLoraColors.charcoal),
+                      ),
+                    ),
+                    const BotPortfolioFilter()
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
@@ -132,7 +145,7 @@ class PortfolioScreen extends StatelessWidget {
                         Row(
                           children: [
                             CustomTextNew(
-                              'Total Portfolio Value  -  ',
+                              '${S.of(context).portfolioTotalValue}  -  ',
                               style: AskLoraTextStyles.body4,
                             ),
                             CurrencyDropdown(
@@ -175,10 +188,13 @@ class PortfolioScreen extends StatelessWidget {
                     content: Column(
                       children: [
                         PairColumnText(
-                            leftTitle:
-                                'Withdrawable\nAmount (${state.currency.value})',
-                            rightTitle:
-                                'Buying Power\n(${state.currency.value})',
+                            leftTitle: S
+                                .of(context)
+                                .portfolioWithdrawableAmount(
+                                    state.currency.value),
+                            rightTitle: S
+                                .of(context)
+                                .portfolioBuyingPower(state.currency.value),
                             rightTooltipText:
                                 'Your Buying Power represents the amount of cash that you can use to buy stocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
                             leftSubTitle: data?.withdrawableAmount != null
@@ -191,9 +207,10 @@ class PortfolioScreen extends StatelessWidget {
                           height: 14,
                         ),
                         PairColumnText(
-                          leftTitle:
-                              'Total Botstock\nValues (${state.currency.value})',
-                          rightTitle: 'Total P/L\n',
+                          leftTitle: S
+                              .of(context)
+                              .portfolioTotalBotStock(state.currency.value),
+                          rightTitle: S.of(context).portfolioTotalPL,
                           leftSubTitle: (data?.totalBotStockValues ?? 0)
                               .convertToCurrencyDecimal(),
                           rightSubTitle: data?.withdrawableAmount != null

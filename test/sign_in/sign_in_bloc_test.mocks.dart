@@ -3,28 +3,28 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i9;
+import 'dart:async' as _i8;
 
-import 'package:asklora_mobile_app/app/bloc/app_bloc.dart' as _i12;
+import 'package:asklora_mobile_app/app/bloc/app_bloc.dart' as _i11;
 import 'package:asklora_mobile_app/app/domain/user_journey_response.dart'
-    as _i11;
-import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart'
     as _i10;
+import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart'
+    as _i9;
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i3;
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
-    as _i16;
+    as _i15;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart'
-    as _i13;
+    as _i12;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_request.dart'
-    as _i14;
+    as _i13;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart'
     as _i2;
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_with_otp_request.dart'
-    as _i15;
+    as _i14;
 import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart'
-    as _i8;
+    as _i7;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/get_account/get_account_response.dart'
-    as _i5;
+    as _i17;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/onfido/onfido_result_request.dart'
     as _i24;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/onfido/onfido_result_response.dart'
@@ -40,13 +40,13 @@ import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/upgrade_account_response.dart'
     as _i18;
 import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/account_repository.dart'
-    as _i17;
+    as _i16;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart'
-    as _i7;
+    as _i6;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response_request.dart'
     as _i26;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/bot_recommendation_repository.dart'
-    as _i6;
+    as _i5;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/repository/ppi_response_repository.dart'
     as _i25;
 import 'package:dio/dio.dart' as _i4;
@@ -95,9 +95,9 @@ class _FakeResponse_2<T> extends _i1.SmartFake implements _i4.Response<T> {
         );
 }
 
-class _FakeGetAccountResponse_3 extends _i1.SmartFake
-    implements _i5.GetAccountResponse {
-  _FakeGetAccountResponse_3(
+class _FakeBotRecommendationRepository_3 extends _i1.SmartFake
+    implements _i5.BotRecommendationRepository {
+  _FakeBotRecommendationRepository_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -106,20 +106,9 @@ class _FakeGetAccountResponse_3 extends _i1.SmartFake
         );
 }
 
-class _FakeBotRecommendationRepository_4 extends _i1.SmartFake
-    implements _i6.BotRecommendationRepository {
-  _FakeBotRecommendationRepository_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakePpiUserResponse_5 extends _i1.SmartFake
-    implements _i7.PpiUserResponse {
-  _FakePpiUserResponse_5(
+class _FakePpiUserResponse_4 extends _i1.SmartFake
+    implements _i6.PpiUserResponse {
+  _FakePpiUserResponse_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -131,13 +120,13 @@ class _FakePpiUserResponse_5 extends _i1.SmartFake
 /// A class which mocks [SignInRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInRepository extends _i1.Mock implements _i8.SignInRepository {
+class MockSignInRepository extends _i1.Mock implements _i7.SignInRepository {
   MockSignInRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i2.SignInResponse> signIn({
+  _i8.Future<_i2.SignInResponse> signIn({
     required String? email,
     required String? password,
   }) =>
@@ -150,7 +139,7 @@ class MockSignInRepository extends _i1.Mock implements _i8.SignInRepository {
             #password: password,
           },
         ),
-        returnValue: _i9.Future<_i2.SignInResponse>.value(_FakeSignInResponse_0(
+        returnValue: _i8.Future<_i2.SignInResponse>.value(_FakeSignInResponse_0(
           this,
           Invocation.method(
             #signIn,
@@ -161,9 +150,9 @@ class MockSignInRepository extends _i1.Mock implements _i8.SignInRepository {
             },
           ),
         )),
-      ) as _i9.Future<_i2.SignInResponse>);
+      ) as _i8.Future<_i2.SignInResponse>);
   @override
-  _i9.Future<_i2.SignInResponse> signInWithOtp({
+  _i8.Future<_i2.SignInResponse> signInWithOtp({
     required String? otp,
     required String? email,
     required String? password,
@@ -178,7 +167,7 @@ class MockSignInRepository extends _i1.Mock implements _i8.SignInRepository {
             #password: password,
           },
         ),
-        returnValue: _i9.Future<_i2.SignInResponse>.value(_FakeSignInResponse_0(
+        returnValue: _i8.Future<_i2.SignInResponse>.value(_FakeSignInResponse_0(
           this,
           Invocation.method(
             #signInWithOtp,
@@ -190,7 +179,7 @@ class MockSignInRepository extends _i1.Mock implements _i8.SignInRepository {
             },
           ),
         )),
-      ) as _i9.Future<_i2.SignInResponse>);
+      ) as _i8.Future<_i2.SignInResponse>);
   @override
   void removeStorageOnSignInFailed() => super.noSuchMethod(
         Invocation.method(
@@ -205,14 +194,14 @@ class MockSignInRepository extends _i1.Mock implements _i8.SignInRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserJourneyRepository extends _i1.Mock
-    implements _i10.UserJourneyRepository {
+    implements _i9.UserJourneyRepository {
   MockUserJourneyRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>> saveUserJourney({
-    required _i12.UserJourney? userJourney,
+  _i8.Future<_i3.BaseResponse<_i10.UserJourneyResponse>> saveUserJourney({
+    required _i11.UserJourney? userJourney,
     String? data,
   }) =>
       (super.noSuchMethod(
@@ -225,8 +214,8 @@ class MockUserJourneyRepository extends _i1.Mock
           },
         ),
         returnValue:
-            _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>.value(
-                _FakeBaseResponse_1<_i11.UserJourneyResponse>(
+            _i8.Future<_i3.BaseResponse<_i10.UserJourneyResponse>>.value(
+                _FakeBaseResponse_1<_i10.UserJourneyResponse>(
           this,
           Invocation.method(
             #saveUserJourney,
@@ -237,10 +226,10 @@ class MockUserJourneyRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>);
+      ) as _i8.Future<_i3.BaseResponse<_i10.UserJourneyResponse>>);
   @override
   void saveUserJourneyToLocal({
-    _i12.UserJourney? userJourney,
+    _i11.UserJourney? userJourney,
     String? data,
   }) =>
       super.noSuchMethod(
@@ -255,128 +244,128 @@ class MockUserJourneyRepository extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i9.Future<_i12.UserJourney?> getUserJourneyFromLocal() =>
+  _i8.Future<_i11.UserJourney?> getUserJourneyFromLocal() =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserJourneyFromLocal,
           [],
         ),
-        returnValue: _i9.Future<_i12.UserJourney?>.value(),
-      ) as _i9.Future<_i12.UserJourney?>);
+        returnValue: _i8.Future<_i11.UserJourney?>.value(),
+      ) as _i8.Future<_i11.UserJourney?>);
   @override
-  _i9.Future<_i12.UserJourney?> getUserJourney() => (super.noSuchMethod(
+  _i8.Future<_i11.UserJourney?> getUserJourney() => (super.noSuchMethod(
         Invocation.method(
           #getUserJourney,
           [],
         ),
-        returnValue: _i9.Future<_i12.UserJourney?>.value(),
-      ) as _i9.Future<_i12.UserJourney?>);
+        returnValue: _i8.Future<_i11.UserJourney?>.value(),
+      ) as _i8.Future<_i11.UserJourney?>);
   @override
-  _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>
+  _i8.Future<_i3.BaseResponse<_i10.UserJourneyResponse>>
       getUserJourneyWithData() => (super.noSuchMethod(
             Invocation.method(
               #getUserJourneyWithData,
               [],
             ),
             returnValue:
-                _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>.value(
-                    _FakeBaseResponse_1<_i11.UserJourneyResponse>(
+                _i8.Future<_i3.BaseResponse<_i10.UserJourneyResponse>>.value(
+                    _FakeBaseResponse_1<_i10.UserJourneyResponse>(
               this,
               Invocation.method(
                 #getUserJourneyWithData,
                 [],
               ),
             )),
-          ) as _i9.Future<_i3.BaseResponse<_i11.UserJourneyResponse>>);
+          ) as _i8.Future<_i3.BaseResponse<_i10.UserJourneyResponse>>);
 }
 
 /// A class which mocks [SignInApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignInApiClient extends _i1.Mock implements _i13.SignInApiClient {
+class MockSignInApiClient extends _i1.Mock implements _i12.SignInApiClient {
   MockSignInApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i4.Response<dynamic>> signIn(_i14.SignInRequest? request) =>
+  _i8.Future<_i4.Response<dynamic>> signIn(_i13.SignInRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #signIn,
           [request],
         ),
         returnValue:
-            _i9.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
+            _i8.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
             #signIn,
             [request],
           ),
         )),
-      ) as _i9.Future<_i4.Response<dynamic>>);
+      ) as _i8.Future<_i4.Response<dynamic>>);
   @override
-  _i9.Future<_i4.Response<dynamic>> signInWithOtp(
-          _i15.SignInWithOtpRequest? request) =>
+  _i8.Future<_i4.Response<dynamic>> signInWithOtp(
+          _i14.SignInWithOtpRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #signInWithOtp,
           [request],
         ),
         returnValue:
-            _i9.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
+            _i8.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
             #signInWithOtp,
             [request],
           ),
         )),
-      ) as _i9.Future<_i4.Response<dynamic>>);
+      ) as _i8.Future<_i4.Response<dynamic>>);
 }
 
 /// A class which mocks [SharedPreference].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSharedPreference extends _i1.Mock implements _i16.SharedPreference {
+class MockSharedPreference extends _i1.Mock implements _i15.SharedPreference {
   MockSharedPreference() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<void> deleteAllData() => (super.noSuchMethod(
+  _i8.Future<void> deleteAllData() => (super.noSuchMethod(
         Invocation.method(
           #deleteAllData,
           [],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
   @override
-  _i9.Future<void> deleteData(String? key) => (super.noSuchMethod(
+  _i8.Future<void> deleteData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #deleteData,
           [key],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
   @override
-  _i9.Future<String?> readData(String? key) => (super.noSuchMethod(
+  _i8.Future<String?> readData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readData,
           [key],
         ),
-        returnValue: _i9.Future<String?>.value(),
-      ) as _i9.Future<String?>);
+        returnValue: _i8.Future<String?>.value(),
+      ) as _i8.Future<String?>);
   @override
-  _i9.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
+  _i8.Future<bool?> readBoolData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readBoolData,
           [key],
         ),
-        returnValue: _i9.Future<bool?>.value(),
-      ) as _i9.Future<bool?>);
+        returnValue: _i8.Future<bool?>.value(),
+      ) as _i8.Future<bool?>);
   @override
-  _i9.Future<bool> writeData(
+  _i8.Future<bool> writeData(
     String? key,
     String? value,
   ) =>
@@ -388,10 +377,10 @@ class MockSharedPreference extends _i1.Mock implements _i16.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
   @override
-  _i9.Future<bool> writeBoolData(
+  _i8.Future<bool> writeBoolData(
     String? key,
     bool? value,
   ) =>
@@ -403,10 +392,10 @@ class MockSharedPreference extends _i1.Mock implements _i16.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
   @override
-  _i9.Future<bool> writeIntData(
+  _i8.Future<bool> writeIntData(
     String? key,
     int? value,
   ) =>
@@ -418,51 +407,53 @@ class MockSharedPreference extends _i1.Mock implements _i16.SharedPreference {
             value,
           ],
         ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
   @override
-  _i9.Future<int?> readIntData(String? key) => (super.noSuchMethod(
+  _i8.Future<int?> readIntData(String? key) => (super.noSuchMethod(
         Invocation.method(
           #readIntData,
           [key],
         ),
-        returnValue: _i9.Future<int?>.value(),
-      ) as _i9.Future<int?>);
+        returnValue: _i8.Future<int?>.value(),
+      ) as _i8.Future<int?>);
   @override
-  _i9.Future<bool> containsKey(String? key) => (super.noSuchMethod(
+  _i8.Future<bool> containsKey(String? key) => (super.noSuchMethod(
         Invocation.method(
           #containsKey,
           [key],
         ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 }
 
 /// A class which mocks [AccountRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
+class MockAccountRepository extends _i1.Mock implements _i16.AccountRepository {
   MockAccountRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i5.GetAccountResponse> getAccount() => (super.noSuchMethod(
+  _i8.Future<_i3.BaseResponse<_i17.GetAccountResponse>> getAccount() =>
+      (super.noSuchMethod(
         Invocation.method(
           #getAccount,
           [],
         ),
         returnValue:
-            _i9.Future<_i5.GetAccountResponse>.value(_FakeGetAccountResponse_3(
+            _i8.Future<_i3.BaseResponse<_i17.GetAccountResponse>>.value(
+                _FakeBaseResponse_1<_i17.GetAccountResponse>(
           this,
           Invocation.method(
             #getAccount,
             [],
           ),
         )),
-      ) as _i9.Future<_i5.GetAccountResponse>);
+      ) as _i8.Future<_i3.BaseResponse<_i17.GetAccountResponse>>);
   @override
-  _i9.Future<_i3.BaseResponse<_i18.UpgradeAccountResponse>> submitIBKR(
+  _i8.Future<_i3.BaseResponse<_i18.UpgradeAccountResponse>> submitIBKR(
           _i19.UpgradeAccountRequest? upgradeAccountRequest) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -470,7 +461,7 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
           [upgradeAccountRequest],
         ),
         returnValue:
-            _i9.Future<_i3.BaseResponse<_i18.UpgradeAccountResponse>>.value(
+            _i8.Future<_i3.BaseResponse<_i18.UpgradeAccountResponse>>.value(
                 _FakeBaseResponse_1<_i18.UpgradeAccountResponse>(
           this,
           Invocation.method(
@@ -478,9 +469,9 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
             [upgradeAccountRequest],
           ),
         )),
-      ) as _i9.Future<_i3.BaseResponse<_i18.UpgradeAccountResponse>>);
+      ) as _i8.Future<_i3.BaseResponse<_i18.UpgradeAccountResponse>>);
   @override
-  _i9.Future<_i3.BaseResponse<_i20.PersonalInfoResponse>> submitPersonalInfo(
+  _i8.Future<_i3.BaseResponse<_i20.PersonalInfoResponse>> submitPersonalInfo(
           {required _i21.PersonalInfoRequest? personalInfoRequest}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -489,7 +480,7 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
           {#personalInfoRequest: personalInfoRequest},
         ),
         returnValue:
-            _i9.Future<_i3.BaseResponse<_i20.PersonalInfoResponse>>.value(
+            _i8.Future<_i3.BaseResponse<_i20.PersonalInfoResponse>>.value(
                 _FakeBaseResponse_1<_i20.PersonalInfoResponse>(
           this,
           Invocation.method(
@@ -498,16 +489,16 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
             {#personalInfoRequest: personalInfoRequest},
           ),
         )),
-      ) as _i9.Future<_i3.BaseResponse<_i20.PersonalInfoResponse>>);
+      ) as _i8.Future<_i3.BaseResponse<_i20.PersonalInfoResponse>>);
   @override
-  _i9.Future<_i3.BaseResponse<_i22.OnfidoTokenResponse>> getOnfidoToken() =>
+  _i8.Future<_i3.BaseResponse<_i22.OnfidoTokenResponse>> getOnfidoToken() =>
       (super.noSuchMethod(
         Invocation.method(
           #getOnfidoToken,
           [],
         ),
         returnValue:
-            _i9.Future<_i3.BaseResponse<_i22.OnfidoTokenResponse>>.value(
+            _i8.Future<_i3.BaseResponse<_i22.OnfidoTokenResponse>>.value(
                 _FakeBaseResponse_1<_i22.OnfidoTokenResponse>(
           this,
           Invocation.method(
@@ -515,9 +506,9 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
             [],
           ),
         )),
-      ) as _i9.Future<_i3.BaseResponse<_i22.OnfidoTokenResponse>>);
+      ) as _i8.Future<_i3.BaseResponse<_i22.OnfidoTokenResponse>>);
   @override
-  _i9.Future<_i3.BaseResponse<_i23.OnfidoResultResponse>> submitOnfidoOutcome(
+  _i8.Future<_i3.BaseResponse<_i23.OnfidoResultResponse>> submitOnfidoOutcome(
           _i24.OnfidoResultRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -525,7 +516,7 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
           [request],
         ),
         returnValue:
-            _i9.Future<_i3.BaseResponse<_i23.OnfidoResultResponse>>.value(
+            _i8.Future<_i3.BaseResponse<_i23.OnfidoResultResponse>>.value(
                 _FakeBaseResponse_1<_i23.OnfidoResultResponse>(
           this,
           Invocation.method(
@@ -533,7 +524,7 @@ class MockAccountRepository extends _i1.Mock implements _i17.AccountRepository {
             [request],
           ),
         )),
-      ) as _i9.Future<_i3.BaseResponse<_i23.OnfidoResultResponse>>);
+      ) as _i8.Future<_i3.BaseResponse<_i23.OnfidoResultResponse>>);
 }
 
 /// A class which mocks [PpiResponseRepository].
@@ -546,16 +537,16 @@ class MockPpiResponseRepository extends _i1.Mock
   }
 
   @override
-  _i6.BotRecommendationRepository get botRecommendationRepository =>
+  _i5.BotRecommendationRepository get botRecommendationRepository =>
       (super.noSuchMethod(
         Invocation.getter(#botRecommendationRepository),
-        returnValue: _FakeBotRecommendationRepository_4(
+        returnValue: _FakeBotRecommendationRepository_3(
           this,
           Invocation.getter(#botRecommendationRepository),
         ),
-      ) as _i6.BotRecommendationRepository);
+      ) as _i5.BotRecommendationRepository);
   @override
-  _i9.Future<_i7.PpiUserResponse> addAnswer(
+  _i8.Future<_i6.PpiUserResponse> addAnswer(
           _i26.PpiSelectionRequest? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -563,16 +554,16 @@ class MockPpiResponseRepository extends _i1.Mock
           [ppiUserResponseRequest],
         ),
         returnValue:
-            _i9.Future<_i7.PpiUserResponse>.value(_FakePpiUserResponse_5(
+            _i8.Future<_i6.PpiUserResponse>.value(_FakePpiUserResponse_4(
           this,
           Invocation.method(
             #addAnswer,
             [ppiUserResponseRequest],
           ),
         )),
-      ) as _i9.Future<_i7.PpiUserResponse>);
+      ) as _i8.Future<_i6.PpiUserResponse>);
   @override
-  _i9.Future<_i7.PpiUserResponse> addBulkAnswer(
+  _i8.Future<_i6.PpiUserResponse> addBulkAnswer(
           List<_i26.PpiSelectionRequest>? ppiUserResponseRequest) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -580,43 +571,43 @@ class MockPpiResponseRepository extends _i1.Mock
           [ppiUserResponseRequest],
         ),
         returnValue:
-            _i9.Future<_i7.PpiUserResponse>.value(_FakePpiUserResponse_5(
+            _i8.Future<_i6.PpiUserResponse>.value(_FakePpiUserResponse_4(
           this,
           Invocation.method(
             #addBulkAnswer,
             [ppiUserResponseRequest],
           ),
         )),
-      ) as _i9.Future<_i7.PpiUserResponse>);
+      ) as _i8.Future<_i6.PpiUserResponse>);
   @override
-  _i9.Future<_i3.BaseResponse<_i7.SnapShot>> getUserSnapShotUserId(
+  _i8.Future<_i3.BaseResponse<_i6.SnapShot>> getUserSnapShotUserId(
           dynamic userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserSnapShotUserId,
           [userId],
         ),
-        returnValue: _i9.Future<_i3.BaseResponse<_i7.SnapShot>>.value(
-            _FakeBaseResponse_1<_i7.SnapShot>(
+        returnValue: _i8.Future<_i3.BaseResponse<_i6.SnapShot>>.value(
+            _FakeBaseResponse_1<_i6.SnapShot>(
           this,
           Invocation.method(
             #getUserSnapShotUserId,
             [userId],
           ),
         )),
-      ) as _i9.Future<_i3.BaseResponse<_i7.SnapShot>>);
+      ) as _i8.Future<_i3.BaseResponse<_i6.SnapShot>>);
   @override
-  _i9.Future<void> saveUserSnapShotToLocal(_i7.SnapShot? snapshot) =>
+  _i8.Future<void> saveUserSnapShotToLocal(_i6.SnapShot? snapshot) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveUserSnapShotToLocal,
           [snapshot],
         ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
   @override
-  _i9.Future<_i7.SnapShot?> getUserSnapShotFromLocal(
+  _i8.Future<_i6.SnapShot?> getUserSnapShotFromLocal(
           {bool? forceToFetch = false}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -624,39 +615,39 @@ class MockPpiResponseRepository extends _i1.Mock
           [],
           {#forceToFetch: forceToFetch},
         ),
-        returnValue: _i9.Future<_i7.SnapShot?>.value(),
-      ) as _i9.Future<_i7.SnapShot?>);
+        returnValue: _i8.Future<_i6.SnapShot?>.value(),
+      ) as _i8.Future<_i6.SnapShot?>);
   @override
-  _i9.Future<_i3.BaseResponse<_i7.SnapShot>> getUserSnapshotByAskloraId(
+  _i8.Future<_i3.BaseResponse<_i6.SnapShot>> getUserSnapshotByAskloraId(
           int? askloraId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserSnapshotByAskloraId,
           [askloraId],
         ),
-        returnValue: _i9.Future<_i3.BaseResponse<_i7.SnapShot>>.value(
-            _FakeBaseResponse_1<_i7.SnapShot>(
+        returnValue: _i8.Future<_i3.BaseResponse<_i6.SnapShot>>.value(
+            _FakeBaseResponse_1<_i6.SnapShot>(
           this,
           Invocation.method(
             #getUserSnapshotByAskloraId,
             [askloraId],
           ),
         )),
-      ) as _i9.Future<_i3.BaseResponse<_i7.SnapShot>>);
+      ) as _i8.Future<_i3.BaseResponse<_i6.SnapShot>>);
   @override
-  _i9.Future<_i4.Response<dynamic>> linkUser(int? userId) =>
+  _i8.Future<_i4.Response<dynamic>> linkUser(int? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #linkUser,
           [userId],
         ),
         returnValue:
-            _i9.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
+            _i8.Future<_i4.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
           this,
           Invocation.method(
             #linkUser,
             [userId],
           ),
         )),
-      ) as _i9.Future<_i4.Response<dynamic>>);
+      ) as _i8.Future<_i4.Response<dynamic>>);
 }

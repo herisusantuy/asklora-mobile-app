@@ -83,7 +83,7 @@ class DepositNotes extends StatelessWidget {
         child: CustomExpandedRow(
           label,
           text: text,
-          textStyle: AskLoraTextStyles.subtitleAllCap2
+          leftTextStyle: AskLoraTextStyles.subtitleAllCap2
               .copyWith(color: AskLoraColors.darkGray),
           flex1: 1,
           flex2: 20,

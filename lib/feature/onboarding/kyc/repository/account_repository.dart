@@ -14,9 +14,14 @@ import '../domain/upgrade_account/upgrade_account_response.dart';
 class AccountRepository {
   final AccountApiClient _accountApiClient = AccountApiClient();
 
-  Future<GetAccountResponse> getAccount() async {
-    var response = await _accountApiClient.getAccount();
-    return GetAccountResponse.fromJson(response.data);
+  Future<BaseResponse<GetAccountResponse>> getAccount() async {
+    try {
+      var response = await _accountApiClient.getAccount();
+      return BaseResponse.complete<GetAccountResponse>(
+          GetAccountResponse.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error(message: 'Could not get user details!');
+    }
   }
 
   Future<BaseResponse<UpgradeAccountResponse>> submitIBKR(

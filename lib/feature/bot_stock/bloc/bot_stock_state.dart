@@ -4,13 +4,13 @@ class BotStockState extends Equatable {
   const BotStockState(
       {this.botRecommendationResponse =
           const BaseResponse(state: ResponseState.loading),
-      this.tradeBotStockResponse = const BaseResponse(),
+      this.createBotOrderResponse = const BaseResponse(),
       this.botDetailResponse = const BaseResponse(),
       this.faqActiveIndex,
       this.botStockTradeAmount = 0});
 
   final BaseResponse<List<BotRecommendationModel>> botRecommendationResponse;
-  final BaseResponse<bool> tradeBotStockResponse;
+  final BaseResponse<BotOrderResponse> createBotOrderResponse;
   final BaseResponse<BotDetailModel> botDetailResponse;
   final int? faqActiveIndex;
   final double botStockTradeAmount;
@@ -20,7 +20,7 @@ class BotStockState extends Equatable {
     return [
       botRecommendationResponse,
       faqActiveIndex,
-      tradeBotStockResponse,
+      createBotOrderResponse,
       botDetailResponse,
       botStockTradeAmount,
     ];
@@ -29,7 +29,8 @@ class BotStockState extends Equatable {
   BotStockState copyWith({
     BaseResponse<List<BotRecommendationModel>>? botRecommendationResponse,
     BaseResponse<List<RecommendedBot>>? botPortfolioResponse,
-    BaseResponse<bool>? tradeBotStockResponse,
+    BaseResponse<BotOrderResponse>? createBotOrderResponse,
+    BaseResponse<List<BotActiveOrderModel>>? botActiveOrderResponse,
     BaseResponse<bool>? endBotStockResponse,
     BaseResponse<bool>? rolloverBotStockResponse,
     BaseResponse<BotDetailModel>? botDetailResponse,
@@ -39,8 +40,8 @@ class BotStockState extends Equatable {
     return BotStockState(
       botRecommendationResponse:
           botRecommendationResponse ?? this.botRecommendationResponse,
-      tradeBotStockResponse:
-          tradeBotStockResponse ?? this.tradeBotStockResponse,
+      createBotOrderResponse:
+          createBotOrderResponse ?? this.createBotOrderResponse,
       botDetailResponse: botDetailResponse ?? this.botDetailResponse,
       faqActiveIndex: faqActiveIndex,
       botStockTradeAmount: botStockTradeAmount ?? this.botStockTradeAmount,
