@@ -4,9 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'app/presentation/app.dart';
 import 'core/utils/build_configs/app_config_widget.dart';
+import 'core/utils/feature_flags.dart';
 
 main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -28,5 +30,12 @@ main() async {
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-  runApp(AppConfigWidget(child: const App()));
+  if (FeatureFlags.enableSentry) {
+    await SentryFlutter.init(
+        (options) => options.dsn =
+            'https://7d102597b0f949038c91ccd163d0506e@sentry.api.asklora.ai/3',
+        appRunner: () => runApp(AppConfigWidget(child: const App())));
+  } else {
+    runApp(AppConfigWidget(child: const App()));
+  }
 }

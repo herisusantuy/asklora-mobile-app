@@ -2,68 +2,101 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
+
+import 'feature_flags.dart';
+import 'log.dart';
 
 class LoggingInterceptor extends Interceptor {
-  LoggingInterceptor();
+  final StringBuffer _stringBuffer = StringBuffer();
+  final StringBuffer _sentryLogs = StringBuffer();
 
   @override
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    _logPrint(
+    write(
         '╔==================================== ☁️ API Request - Start ☁️ =====================================╗');
 
-    _printKeyValue('URI', options.uri);
-    _printKeyValue('METHOD', options.method);
-    _logPrint('HEADERS:');
-    options.headers.forEach((key, v) => _printKeyValue(' - $key', v));
-    _logPrint('BODY:');
-    _printAll(_prettifyResponse(options.data ?? ''));
-
-    _logPrint(
+    writeKeyValue('URI', options.uri);
+    writeKeyValue('METHOD', options.method);
+    write('HEADERS:');
+    options.headers.forEach((key, v) => writeKeyValue(' - $key', v));
+    write('BODY:');
+    write(_prettifyResponse(options.data ?? ''));
+    write(
         '╚==================================== ☁️ API Request - End ☁️ =======================================╝');
-
+    _logPrint(_stringBuffer.toString());
+    _sentryLogs.write(_stringBuffer.toString());
+    clearLog();
     return handler.next(options);
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    _logPrint(
+  void onError(DioError err, ErrorInterceptorHandler handler) async {
+    write(
         '╔==================================== ❌ Api Error - Start ❌ =======================================╗');
-
-    _logPrint('URI: ${err.requestOptions.uri}');
+    write('URI: ${err.requestOptions.uri}');
     if (err.response != null) {
-      _logPrint('STATUS CODE: ${err.response?.statusCode?.toString()}');
+      write('STATUS CODE: ${err.response?.statusCode?.toString()}');
     }
-    _logPrint('$err');
-    if (err.response != null) {
-      _printKeyValue('REDIRECT', err.response?.realUri ?? '');
-      _logPrint('HEADERS:');
-      err.response?.headers.forEach((key, v) => _printKeyValue(' - $key', v));
-      _logPrint('BODY:');
-      _printAll(err.response?.data.toString());
-    }
+    write('$err');
 
-    _logPrint(
+    if (err.response != null) {
+      writeKeyValue('REDIRECT', err.response?.realUri ?? '');
+      write('HEADERS:');
+      err.response?.headers.forEach((key, v) => writeKeyValue(' - $key', v));
+      write('BODY:');
+      writeAll(err.response?.data.toString());
+    }
+    write(
         '╚==================================== ❌ Api Error - End ❌ ==========================================╝');
+
+    _logPrint(_stringBuffer.toString());
+
+    if (FeatureFlags.enableSentry) {
+      _sentryLogs.write(_stringBuffer.toString());
+      Logger.sendErrorLogsToSentry(
+          err.response?.headers.value('x-request-id') ?? '',
+          _sentryLogs.toString());
+    }
+
+    clearLog();
+    clearSentryLog();
     return handler.next(err);
   }
 
   @override
   Future onResponse(
       Response response, ResponseInterceptorHandler handler) async {
-    _logPrint(
+    write(
         '╔==================================== ✅ Api Response - Start ✅ ====================================╗');
 
-    _printKeyValue('URI', response.requestOptions.uri);
-    _printKeyValue('STATUS CODE', response.statusCode ?? '');
-    _printKeyValue('REDIRECT', response.isRedirect);
-    _logPrint('HEADERS:');
-    response.headers.forEach((key, v) => _printKeyValue(' - $key', v));
-    _logPrint('BODY:');
-    _printAll(_prettifyResponse(response.data ?? ''));
+    writeKeyValue('URI', response.requestOptions.uri);
 
-    _logPrint(
+    writeKeyValue('STATUS CODE', response.statusCode ?? '');
+
+    writeKeyValue('REDIRECT', response.isRedirect);
+
+    write('HEADERS:');
+
+    response.headers.forEach((key, v) => writeKeyValue(' - $key', v));
+
+    write('BODY:');
+
+    write(_prettifyResponse(response.data ?? ''));
+
+    write(
         '╚==================================== ✅ Api Response - End ✅ ======================================╝');
+    _logPrint(_stringBuffer.toString());
+
+    if (FeatureFlags.enableSentry) {
+      _sentryLogs.write(_stringBuffer.toString());
+      Logger.sendEvent(response.headers.value('x-request-id') ?? '',
+          _sentryLogs.toString(), SentryLevel.info);
+    }
+
+    clearLog();
+    clearSentryLog();
 
     return handler.next(response);
   }
@@ -79,4 +112,22 @@ class LoggingInterceptor extends Interceptor {
     var encoder = JsonEncoder.withIndent(spaces);
     return encoder.convert(jsonObject);
   }
+
+  String newLine() => '\n';
+
+  void write(String log) {
+    _stringBuffer.write(log);
+    _stringBuffer.write(newLine());
+  }
+
+  void writeKeyValue(String key, Object v) {
+    _stringBuffer.write('$key: $v');
+    _stringBuffer.write(newLine());
+  }
+
+  void clearLog() => _stringBuffer.clear();
+
+  void clearSentryLog() => _stringBuffer.clear();
+
+  void writeAll(msg) => msg.toString().split('\n').forEach(write);
 }
