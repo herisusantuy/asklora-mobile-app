@@ -13,6 +13,7 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/values/app_values.dart';
 import '../../../generated/l10n.dart';
 import '../../bot_stock/presentation/portfolio/portfolio_screen.dart';
+import '../../bot_stock/utils/bot_stock_utils.dart';
 import '../bloc/transaction_history_bloc.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_model.dart';
@@ -33,6 +34,8 @@ part 'transfer/transfer_transaction_history_list.dart';
 part 'transfer/transfer_transaction_history_card.dart';
 
 class TransactionHistoryScreen extends StatelessWidget {
+  static const String route = '/transaction_history_screen';
+
   const TransactionHistoryScreen({Key? key}) : super(key: key);
 
   @override
@@ -71,4 +74,6 @@ class TransactionHistoryScreen extends StatelessWidget {
       ),
     );
   }
+
+  static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

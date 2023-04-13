@@ -20,6 +20,7 @@ import '../../../generated/l10n.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../transaction_history/presentation/transaction_history_screen.dart';
 import 'account_setting_screen.dart';
 import 'about_asklora_screen.dart';
 import 'get_help_screen.dart';
@@ -99,7 +100,9 @@ class SettingsScreen extends StatelessWidget {
                   title: 'Account Settings',
                   onTap: () => AccountSettingScreen.open(context)),
               _settingsMenu(title: 'Investment Preferences', onTap: () {}),
-              _settingsMenu(title: 'Transaction History', onTap: () {}),
+              _settingsMenu(
+                  title: 'Transaction History',
+                  onTap: () => TransactionHistoryScreen.open(context)),
               _settingsMenu(
                   title: S.of(context).getHelp,
                   onTap: () => GetHelpScreen.open(context)),

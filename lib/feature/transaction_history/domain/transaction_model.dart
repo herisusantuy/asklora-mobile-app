@@ -12,6 +12,15 @@ abstract class TransactionModel {
   String? status;
   double? amount;
 
+  String get statusString => status ?? 'NA';
+
+  String get titleString => title ?? 'NA';
+
+  String get amountString {
+    double amountDouble = checkDouble(amount);
+    return (amountDouble > 0) ? amountDouble.convertToCurrencyDecimal() : 'NA';
+  }
+
   TransactionModel(
       {this.id,
       this.date,
