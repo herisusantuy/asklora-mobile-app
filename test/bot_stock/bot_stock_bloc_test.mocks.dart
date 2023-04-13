@@ -16,6 +16,8 @@ import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart'
     as _i7;
+import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_model.dart'
+    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -191,6 +193,23 @@ class MockBotStockRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<bool>>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i9.TransactionModel>>>
+      fetchBotOrderHistory() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchBotOrderHistory,
+              [],
+            ),
+            returnValue:
+                _i4.Future<_i2.BaseResponse<List<_i9.TransactionModel>>>.value(
+                    _FakeBaseResponse_0<List<_i9.TransactionModel>>(
+              this,
+              Invocation.method(
+                #fetchBotOrderHistory,
+                [],
+              ),
+            )),
+          ) as _i4.Future<_i2.BaseResponse<List<_i9.TransactionModel>>>);
   @override
   _i4.Future<bool> removeInvestmentStyleState() => (super.noSuchMethod(
         Invocation.method(
