@@ -39,11 +39,11 @@ class TransferTransactionHistoryCard extends StatelessWidget {
           const SizedBox(
             height: 7,
           ),
-          // CustomTextNew(
-          //   transactionModel.status ?? '',
-          //   style:
-          //       AskLoraTextStyles.body2.copyWith(color: AskLoraColors.darkGray),
-          // )
+          CustomTextNew(
+            transactionModel.status ?? '',
+            style:
+                AskLoraTextStyles.body2.copyWith(color: AskLoraColors.darkGray),
+          )
         ],
       ),
     );
