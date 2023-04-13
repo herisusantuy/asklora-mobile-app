@@ -43,6 +43,7 @@ import '../../feature/settings/presentation/account_setting_screen.dart';
 import '../../feature/settings/presentation/customer_service_screen.dart';
 import '../../feature/settings/presentation/get_help_screen.dart';
 import '../../feature/settings/presentation/language_selection_screen.dart';
+import '../../feature/settings/presentation/payment_detail_screen.dart';
 import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
@@ -266,6 +267,9 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => const TermsAndConditionScreen());
+      case PaymentDetailScreen.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const PaymentDetailScreen());
       default:
         return MaterialPageRoute(
             settings: settings,

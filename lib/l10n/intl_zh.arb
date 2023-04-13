@@ -174,5 +174,16 @@
     }
   },
   "portfolioTotalPL": "總盈虧",
-  "portfolioYourBotStock": "你的Botstocks"
+  "portfolioYourBotStock": "你的Botstocks",
+  "yourBankAccount" : "銀行賬戶",
+  "yourBankAccountIsUnderReview" : "銀行賬戶正在審批當中，並會於{dateTime} 完成。",
+  "@yourBankAccountIsUnderReview" : {
+    "placeholders" : {
+      "dateTime" : {
+        "type" : "String"
+      }
+    }
+  },
+  "changeBankAccount" : "更改銀行戶口",
+  "noteOnPaymentDetails" : "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"
 }

@@ -1011,6 +1011,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Your Bank Account`
+  String get yourBankAccount {
+    return Intl.message(
+      'Your Bank Account',
+      name: 'yourBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Bank Account is under review and will be complete by {dateTime}`
+  String yourBankAccountIsUnderReview(String dateTime) {
+    return Intl.message(
+      'Your Bank Account is under review and will be complete by $dateTime',
+      name: 'yourBankAccountIsUnderReview',
+      desc: '',
+      args: [dateTime],
+    );
+  }
+
+  /// `Change Bank Account`
+  String get changeBankAccount {
+    return Intl.message(
+      'Change Bank Account',
+      name: 'changeBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.`
+  String get noteOnPaymentDetails {
+    return Intl.message(
+      'Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.',
+      name: 'noteOnPaymentDetails',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

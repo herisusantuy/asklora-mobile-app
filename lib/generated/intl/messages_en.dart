@@ -46,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(currency) => "Total Portfolio Value (${currency})";
 
+  static String m11(dateTime) =>
+      "Your Bank Account is under review and will be complete by ${dateTime}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
@@ -109,6 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invest with AI strategy, automated"),
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
+        "changeBankAccount":
+            MessageLookupByLibrary.simpleMessage("Change Bank Account"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
@@ -126,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
+            "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
         "notificationSettings":
             MessageLookupByLibrary.simpleMessage("Notification Settings"),
         "officeHours":
@@ -217,6 +224,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
-        "website": MessageLookupByLibrary.simpleMessage("Website")
+        "website": MessageLookupByLibrary.simpleMessage("Website"),
+        "yourBankAccount":
+            MessageLookupByLibrary.simpleMessage("Your Bank Account"),
+        "yourBankAccountIsUnderReview": m11
       };
 }

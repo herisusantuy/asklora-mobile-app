@@ -177,5 +177,16 @@
     }
   },
   "portfolioTotalPL": "Total P/L",
-  "portfolioYourBotStock": "Your Botstocks"
+  "portfolioYourBotStock": "Your Botstocks",
+  "yourBankAccount" : "Your Bank Account",
+  "yourBankAccountIsUnderReview" : "Your Bank Account is under review and will be complete by {dateTime}",
+  "@yourBankAccountIsUnderReview" : {
+    "placeholders" : {
+      "dateTime" : {
+        "type" : "String"
+      }
+    }
+  },
+  "changeBankAccount" : "Change Bank Account",
+  "noteOnPaymentDetails" : "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."
 }
