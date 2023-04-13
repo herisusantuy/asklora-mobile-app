@@ -10,7 +10,6 @@ import '../../../core/utils/storage/storage_keys.dart';
 import '../../../mock/mock_data.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
-import '../../transaction_history/domain/transaction_model.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_detail_request.dart';
 import '../domain/bot_recommendation_model.dart';
@@ -127,16 +126,6 @@ class BotStockRepository {
       ///REAL
       await Future.delayed(const Duration(milliseconds: 500));
       return BaseResponse.complete(true);
-    }
-  }
-
-  Future<BaseResponse<List<TransactionModel>>> fetchBotOrderHistory() async {
-    try {
-      var response = await _botStockApiClient.fetchBotOrderHistory();
-      return BaseResponse.complete(List.from(response.data
-          .map((element) => BotOrderTransactionModel.fromJson(element))));
-    } catch (e) {
-      return BaseResponse.error();
     }
   }
 

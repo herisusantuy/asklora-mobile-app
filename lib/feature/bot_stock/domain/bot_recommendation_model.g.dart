@@ -10,10 +10,8 @@ BotRecommendationModel _$BotRecommendationModelFromJson(
         Map<String, dynamic> json) =>
     BotRecommendationModel(
       json['id'] as int,
-      json['suitability'] as String,
-      json['benefit'] as String,
       json['bot_id'] as String,
-      json['bot_word'] as String,
+      json['bot_word'] as String?,
       json['bot_type'] as String,
       json['bot_app_type'] as String,
       json['ticker'] as String,
@@ -28,8 +26,6 @@ Map<String, dynamic> _$BotRecommendationModelToJson(
         BotRecommendationModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'suitability': instance.suitability,
-      'benefit': instance.benefit,
       'bot_id': instance.botId,
       'bot_word': instance.botWord,
       'bot_type': instance.botType,

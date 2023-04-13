@@ -351,6 +351,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Transaction History`
+  String get transactionHistoryTitle {
+    return Intl.message(
+      'Transaction History',
+      name: 'transactionHistoryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get transactionHistoryTabAll {
+    return Intl.message(
+      'All',
+      name: 'transactionHistoryTabAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders`
+  String get transactionHistoryTabOrders {
+    return Intl.message(
+      'Orders',
+      name: 'transactionHistoryTabOrders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer`
+  String get transactionHistoryTabTransfer {
+    return Intl.message(
+      'Transfer',
+      name: 'transactionHistoryTabTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get transactionHistoryToday {
+    return Intl.message(
+      'Today',
+      name: 'transactionHistoryToday',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

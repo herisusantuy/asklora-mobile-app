@@ -11,25 +11,36 @@ import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/values/app_values.dart';
+import '../../../generated/l10n.dart';
 import '../../bot_stock/presentation/portfolio/portfolio_screen.dart';
-import '../../bot_stock/repository/bot_stock_repository.dart';
 import '../bloc/transaction_history_bloc.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_model.dart';
+import '../repository/transaction_history_repository.dart';
 
-part 'widgets/transaction_history_list.dart';
 part 'widgets/transaction_history_content.dart';
+
+part 'widgets/transaction_history_group_widget.dart';
+
+part 'widgets/all_transaction_history_list.dart';
+
+part 'bot_order/bot_order_transaction_history_list.dart';
+
+part 'bot_order/bot_order_transaction_history_card.dart';
+
+part 'transfer/transfer_transaction_history_list.dart';
+
+part 'transfer/transfer_transaction_history_card.dart';
 
 class TransactionHistoryScreen extends StatelessWidget {
   const TransactionHistoryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
-      create: (_) =>
-          TransactionHistoryBloc(botStockRepository: BotStockRepository())
-            ..add(FetchTransaction()),
+      create: (_) => TransactionHistoryBloc(
+          transactionHistoryRepository: TransactionHistoryRepository())
+        ..add(FetchTransaction()),
       child: CustomScaffold(
         body: BlocConsumer<TransactionHistoryBloc, TransactionHistoryState>(
           listenWhen: (previous, current) =>

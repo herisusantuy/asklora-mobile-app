@@ -103,10 +103,8 @@ class MockData {
       List<PortfolioBotModel> portfolioBots = List.from(data.portfolioBots);
       portfolioBots.add(PortfolioBotModel(
           botRecommendationModel.id,
-          botRecommendationModel.suitability,
-          botRecommendationModel.benefit,
           botRecommendationModel.botId,
-          botRecommendationModel.botWord,
+          botRecommendationModel.botWord ?? '',
           botRecommendationModel.botType,
           botRecommendationModel.botAppType,
           botRecommendationModel.ticker,

@@ -1,16 +1,23 @@
 import 'transaction_model.dart';
 
+enum GroupType { today, others }
+
 class GroupedTransactionModel {
+  final GroupType groupType;
   final String groupTitle;
   final List<TransactionModel> data;
 
-  GroupedTransactionModel(this.groupTitle, {this.data = const []});
+  GroupedTransactionModel(
+      {required this.groupType,
+      required this.groupTitle,
+      this.data = const []});
 
   GroupedTransactionModel copyWith({
     List<TransactionModel>? data,
   }) {
     return GroupedTransactionModel(
-      groupTitle,
+      groupType: groupType,
+      groupTitle: groupTitle,
       data: data ?? this.data,
     );
   }

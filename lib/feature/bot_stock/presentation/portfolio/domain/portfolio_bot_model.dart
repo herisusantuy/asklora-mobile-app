@@ -6,12 +6,10 @@ part 'portfolio_bot_model.g.dart';
 @JsonSerializable()
 class PortfolioBotModel extends Equatable {
   final int id;
-  final String suitability;
-  final String benefit;
   @JsonKey(name: 'bot_id')
   final String botId;
   @JsonKey(name: 'bot_word')
-  final String botWord;
+  final String? botWord;
   @JsonKey(name: 'bot_type')
   final String botType;
   @JsonKey(name: 'bot_app_type')
@@ -30,8 +28,6 @@ class PortfolioBotModel extends Equatable {
 
   const PortfolioBotModel(
     this.id,
-    this.suitability,
-    this.benefit,
     this.botId,
     this.botWord,
     this.botType,
@@ -54,8 +50,6 @@ class PortfolioBotModel extends Equatable {
   @override
   List<Object?> get props => [
         id,
-        suitability,
-        benefit,
         botId,
         botWord,
         botType,

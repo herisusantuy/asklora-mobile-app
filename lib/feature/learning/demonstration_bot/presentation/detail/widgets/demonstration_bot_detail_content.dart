@@ -43,7 +43,7 @@ class DemonstrationBotDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                botRecommendationModel.botWord,
+                botRecommendationModel.botWord ?? '',
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )

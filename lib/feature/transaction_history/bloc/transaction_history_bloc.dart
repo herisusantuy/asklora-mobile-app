@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/domain/base_response.dart';
-import '../../bot_stock/repository/bot_stock_repository.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_model.dart';
+import '../repository/transaction_history_repository.dart';
 
 part 'transaction_history_event.dart';
 
@@ -12,51 +12,34 @@ part 'transaction_history_state.dart';
 
 class TransactionHistoryBloc
     extends Bloc<TransactionHistoryEvent, TransactionHistoryState> {
-  TransactionHistoryBloc({required BotStockRepository botStockRepository})
-      : _botStockRepository = botStockRepository,
+  TransactionHistoryBloc(
+      {required TransactionHistoryRepository transactionHistoryRepository})
+      : _transactionHistoryRepository = transactionHistoryRepository,
         super(const TransactionHistoryState()) {
     on<FetchTransaction>(_onFetchTransaction);
-    on<FilterTransaction>(_onFilterByBotOrderTransaction);
   }
 
-  final BotStockRepository _botStockRepository;
+  final TransactionHistoryRepository _transactionHistoryRepository;
 
   _onFetchTransaction(
       FetchTransaction event, Emitter<TransactionHistoryState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
-    var data = await _botStockRepository.fetchBotOrderHistory();
-    if (data.state == ResponseState.success) {
-      emit(state.copyWith(
-          response: data, transactions: groupedNotificationModels(data.data!)));
-    }
-  }
-
-  _onFilterByBotOrderTransaction(
-      FilterTransaction event, Emitter<TransactionHistoryState> emit) async {
-    late List<TransactionModel> transactions;
-    switch (event.tabIndex) {
-      case 1:
-        //FILTER TRANSACTION - BOT ORDER
-        transactions = state.response.data!
+    var transactionHistory =
+        await _transactionHistoryRepository.fetchTransactionsHistory();
+    List<TransactionModel> transactions = transactionHistory.data ?? [];
+    emit(state.copyWith(
+        response: transactionHistory,
+        allTransactions: groupedNotificationModels(transactions),
+        botOrderTransactions: groupedNotificationModels(transactions
             .where((element) =>
                 element.transactionHistoryType ==
                 TransactionHistoryType.botOrder)
-            .toList();
-        break;
-      case 2:
-        //FILTER TRANSACTION - TRANSFER
-        transactions = state.response.data!
+            .toList()),
+        transferTransactions: groupedNotificationModels(transactions
             .where((element) =>
                 element.transactionHistoryType ==
                 TransactionHistoryType.transfer)
-            .toList();
-        break;
-      default:
-        //FILTER TRANSACTION - ALL
-        transactions = state.response.data!;
-        break;
-    }
-    emit(state.copyWith(transactions: groupedNotificationModels(transactions)));
+            .toList())));
   }
 
   List<GroupedTransactionModel> groupedNotificationModels(
@@ -70,7 +53,7 @@ class TransactionHistoryBloc
           DateFormat('yyyy-MM-dd').format(DateTime.parse(element.date!)));
       if (createdAt.compareTo(dateNow) == 0) {
         int groupIndex = groupedTransactions
-            .indexWhere((element) => element.groupTitle == 'Today');
+            .indexWhere((element) => element.groupType == GroupType.today);
         if (groupIndex >= 0) {
           ///ADD EXISTING GROUP TODAY
           groupedTransactions[groupIndex] = groupedTransactions[groupIndex]
@@ -79,8 +62,8 @@ class TransactionHistoryBloc
                     ..add(element));
         } else {
           ///CREATE NEW GROUP TODAY
-          groupedTransactions
-              .add(GroupedTransactionModel('Today', data: [element]));
+          groupedTransactions.add(GroupedTransactionModel(
+              groupType: GroupType.today, groupTitle: '', data: [element]));
         }
       } else {
         ///CREATE OTHER GROUP EACH DATE
@@ -95,8 +78,10 @@ class TransactionHistoryBloc
                     ..add(element));
         } else {
           ///CREATE NEW GROUP
-          groupedTransactions.add(
-              GroupedTransactionModel(createdAtFormatted, data: [element]));
+          groupedTransactions.add(GroupedTransactionModel(
+              groupType: GroupType.others,
+              groupTitle: createdAtFormatted,
+              data: [element]));
         }
       }
     }

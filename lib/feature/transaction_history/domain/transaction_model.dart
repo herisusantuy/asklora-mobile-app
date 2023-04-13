@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../core/utils/extensions.dart';
-import '../../chart/domain/chart_models.dart';
 
 enum TransactionHistoryType { all, botOrder, transfer }
 
@@ -22,21 +21,26 @@ abstract class TransactionModel {
       this.transactionHistoryType});
 }
 
+@JsonSerializable()
 class BotOrderTransactionModel extends TransactionModel {
+  final bool isDummy;
+
   BotOrderTransactionModel(
       {super.id,
       super.date,
       super.title,
       super.status,
       super.amount,
-      super.transactionHistoryType});
+      super.transactionHistoryType = TransactionHistoryType.botOrder,
+      this.isDummy = false});
 
-  BotOrderTransactionModel.fromJson(Map<String, dynamic> json) {
-    id = json['pk'];
-    date = json['updated'];
-    title = json['ticker'];
-    status = json['status'];
-    amount = checkDouble(json['investment_amount']);
-    transactionHistoryType = TransactionHistoryType.botOrder;
-  }
+  static BotOrderTransactionModel fromJson(Map<String, dynamic> json) =>
+      BotOrderTransactionModel(
+          transactionHistoryType: TransactionHistoryType.botOrder,
+          id: json['pk'],
+          date: json['updated'],
+          title: json['ticker'],
+          status: json['status'],
+          amount: checkDouble(json['investment_amount']),
+          isDummy: json['is_dummy']);
 }

@@ -92,6 +92,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "tooltipBotDetailsInvestmentPeriod": MessageLookupByLibrary.simpleMessage(
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
-            "Lora’s date to start the Botstocks")
+            "Lora’s date to start the Botstocks"),
+        "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("All"),
+        "transactionHistoryTabOrders":
+            MessageLookupByLibrary.simpleMessage("Orders"),
+        "transactionHistoryTabTransfer":
+            MessageLookupByLibrary.simpleMessage("Transfer"),
+        "transactionHistoryTitle":
+            MessageLookupByLibrary.simpleMessage("Transaction History"),
+        "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("Today")
       };
 }

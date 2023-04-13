@@ -8,7 +8,7 @@ abstract class TransactionHistoryEvent extends Equatable {
 }
 
 class FetchTransaction extends TransactionHistoryEvent {}
-class FilterTransaction extends TransactionHistoryEvent {
-  final int tabIndex;
-  const FilterTransaction(this.tabIndex);
-}
+
+class FetchBotOrderTransaction extends TransactionHistoryEvent {}
+
+class FetchTransferTransaction extends TransactionHistoryEvent {}

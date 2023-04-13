@@ -38,6 +38,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
-            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？")
+            MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("全部"),
+        "transactionHistoryTabOrders":
+            MessageLookupByLibrary.simpleMessage("訂單"),
+        "transactionHistoryTabTransfer":
+            MessageLookupByLibrary.simpleMessage("提存 "),
+        "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
+        "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日")
       };
 }

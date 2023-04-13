@@ -36,8 +36,6 @@ void main() async {
 
     const PortfolioBotModel portfolioBotModel = PortfolioBotModel(
         1,
-        '',
-        '',
         'CLASSIC_classic_003846',
         '',
         '',
