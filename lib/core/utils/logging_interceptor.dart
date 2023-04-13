@@ -55,9 +55,11 @@ class LoggingInterceptor extends Interceptor {
 
     if (FeatureFlags.enableSentry) {
       _sentryLogs.write(_stringBuffer.toString());
-      Logger.sendErrorLogsToSentry(
+      Logger.sendEvent(
+          err.requestOptions.path,
           err.response?.headers.value('x-request-id') ?? '',
-          _sentryLogs.toString());
+          _sentryLogs.toString(),
+          level: SentryLevel.error);
     }
 
     clearLog();
@@ -91,8 +93,8 @@ class LoggingInterceptor extends Interceptor {
 
     if (FeatureFlags.enableSentry) {
       _sentryLogs.write(_stringBuffer.toString());
-      Logger.sendEvent(response.headers.value('x-request-id') ?? '',
-          _sentryLogs.toString(), SentryLevel.info);
+      Logger.sendEvent(response.requestOptions.path,
+          response.headers.value('x-request-id') ?? '', _sentryLogs.toString());
     }
 
     clearLog();
@@ -113,21 +115,13 @@ class LoggingInterceptor extends Interceptor {
     return encoder.convert(jsonObject);
   }
 
-  String newLine() => '\n';
+  void write(String log) => _stringBuffer.writeln(log);
 
-  void write(String log) {
-    _stringBuffer.write(log);
-    _stringBuffer.write(newLine());
-  }
-
-  void writeKeyValue(String key, Object v) {
-    _stringBuffer.write('$key: $v');
-    _stringBuffer.write(newLine());
-  }
+  void writeKeyValue(String key, Object v) => _stringBuffer.writeln('$key: $v');
 
   void clearLog() => _stringBuffer.clear();
 
-  void clearSentryLog() => _stringBuffer.clear();
+  void clearSentryLog() => _sentryLogs.clear();
 
   void writeAll(msg) => msg.toString().split('\n').forEach(write);
 }
