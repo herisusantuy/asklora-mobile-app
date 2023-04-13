@@ -37,6 +37,8 @@ class BotRecommendationModel extends Equatable {
       {this.freeBot = false,
       this.selectable = false});
 
+  String get botWordString => botWord ?? '';
+
   BotRecommendationModel copyWith({bool? freeBot}) => BotRecommendationModel(
       id,
       botId,

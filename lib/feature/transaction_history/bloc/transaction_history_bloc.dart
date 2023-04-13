@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../core/utils/date_utils.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_model.dart';
 import '../repository/transaction_history_repository.dart';
@@ -49,8 +49,7 @@ class TransactionHistoryBloc
     DateTime dateNow =
         DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day);
     for (var element in transactions) {
-      DateTime createdAt = DateTime.parse(
-          DateFormat('yyyy-MM-dd').format(DateTime.parse(element.date!)));
+      DateTime createdAt = formatDateOnly(element.date);
       if (createdAt.compareTo(dateNow) == 0) {
         int groupIndex = groupedTransactions
             .indexWhere((element) => element.groupType == GroupType.today);
@@ -67,7 +66,7 @@ class TransactionHistoryBloc
         }
       } else {
         ///CREATE OTHER GROUP EACH DATE
-        String createdAtFormatted = DateFormat('yyyy-MM-dd').format(createdAt);
+        String createdAtFormatted = formatDateAsString(createdAt);
         int groupIndex = groupedTransactions
             .indexWhere((element) => element.groupTitle == createdAtFormatted);
         if (groupIndex >= 0) {

@@ -43,7 +43,7 @@ part 'widgets/bot_portfolio_list.dart';
 
 part 'widgets/bot_portfolio_filter.dart';
 
-part 'widgets/bot_free_badge.dart';
+part 'widgets/free_bot_badge.dart';
 
 class PortfolioScreen extends StatelessWidget {
   static const String route = '/portfolio_screen';

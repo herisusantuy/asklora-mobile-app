@@ -30,7 +30,7 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
                     Flexible(
                         child: CustomTextNew(
                             botOrderTransactionModel.title ?? '')),
-                    if (botOrderTransactionModel.isDummy) const BotFreeBadge(),
+                    if (botOrderTransactionModel.isDummy) const FreeBotBadge(),
                   ],
                 ),
               ),

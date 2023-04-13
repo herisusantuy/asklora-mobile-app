@@ -1,7 +1,7 @@
 part of '../portfolio_screen.dart';
 
-class BotFreeBadge extends StatelessWidget {
-  const BotFreeBadge({Key? key}) : super(key: key);
+class FreeBotBadge extends StatelessWidget {
+  const FreeBotBadge({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
