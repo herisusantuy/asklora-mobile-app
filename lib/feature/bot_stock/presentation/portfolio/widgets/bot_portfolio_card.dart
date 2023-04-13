@@ -102,8 +102,7 @@ class BotPortfolioCard extends StatelessWidget {
               ],
             ),
           ),
-          if (portfolioBotModel.freeBot)
-            const BotFreeBadge()
+          if (portfolioBotModel.freeBot) const BotFreeBadge()
         ],
       ),
     );
