@@ -52,8 +52,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
       : super(key: key) {
     botType = BotType.findByString(botActiveOrderModel.botAppsName);
-    botStatus = BotStatus.findByString(
-        botActiveOrderModel.status, expireDate:botActiveOrderModel.expireDate);
+    botStatus = BotStatus.findByString(botActiveOrderModel.status,
+        expireDate: botActiveOrderModel.expireDate);
   }
 
   @override
