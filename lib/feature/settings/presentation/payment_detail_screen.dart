@@ -64,9 +64,7 @@ class PaymentDetailScreen extends StatelessWidget {
                   )),
             );
           } else {
-            return Container(
-              color: Colors.white,
-            );
+            return const SizedBox.shrink();
           }
         },
       ),
