@@ -42,6 +42,13 @@ const String endpointAddAnswer = 'user/add-answer';
 const String endpointAddBotChoice = 'user/add-choices';
 const String endpointLinkedUser = '$endpointGetUser/linked';
 
+///bot orders
+const String endpointBotActiveOrder = '$v1${bots}active-order/';
+const String endpointBotCreateOrder = '$v1${bots}create-order/';
+const String endpointBotCancelOrder = '$v1${bots}cancel-order/';
+const String endpointBotRolloverOrder = '$v1${bots}rollover-order/';
+const String endpointBotTerminateOrder = '$v1${bots}terminate-order/';
+
 ///
 /// URLS
 ///
@@ -51,3 +58,6 @@ const String endpointBotRecommendation = '${user}recomendation_bots/';
 const String endpointBotOrderHistory = '$v1/$bots/history-order';
 const String endpointBotDetail = '$v1${bots}bot_detail/';
 const String endpointIexCloud = 'https://iexcloud.io';
+const String askloraFaq = 'https://www.asklora.ai/faq';
+const String askloraSite = 'https://www.asklora.ai/';
+const String mailToLoraCare = 'mailto:loracares@asklora.ai';

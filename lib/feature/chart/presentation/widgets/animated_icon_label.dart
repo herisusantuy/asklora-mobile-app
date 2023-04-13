@@ -17,8 +17,8 @@ class AnimatedIconLabel extends StatefulWidget {
     required this.left,
     required this.top,
     required this.hedgeType,
-    this.height = 50,
-    this.width = 50,
+    this.height = 40,
+    this.width = 40,
     this.animationLength = 30,
     this.animationDuration = const Duration(milliseconds: 500),
   }) : super(key: key);

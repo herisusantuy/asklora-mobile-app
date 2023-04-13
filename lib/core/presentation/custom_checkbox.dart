@@ -15,6 +15,7 @@ class CustomCheckbox extends StatelessWidget {
   final FontType fontType;
   final double? fontHeight;
   final void Function(bool?) onChanged;
+  final EdgeInsets textPadding;
 
   const CustomCheckbox({
     Key? key,
@@ -27,6 +28,7 @@ class CustomCheckbox extends StatelessWidget {
     this.fontHeight,
     this.textAlign = TextAlign.start,
     this.disabled = false,
+    this.textPadding = const EdgeInsets.only(top: 4),
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class CustomCheckbox extends StatelessWidget {
     return Padding(
       padding: padding,
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Theme(
@@ -52,13 +55,16 @@ class CustomCheckbox extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          Expanded(
-            child: CustomTextNew(
-              text,
-              style: AskLoraTextStyles.body2
-                  .copyWith(color: AskLoraColors.charcoal),
-              textAlign: textAlign,
-              applyHeightToFirstAscent: true,
+          Flexible(
+            child: Padding(
+              padding: textPadding,
+              child: CustomTextNew(
+                text,
+                style: AskLoraTextStyles.body2
+                    .copyWith(color: AskLoraColors.charcoal),
+                textAlign: textAlign,
+                applyHeightToFirstAscent: true,
+              ),
             ),
           ),
         ],

@@ -1,25 +1,26 @@
 part of '../portfolio_screen.dart';
 
 class BotPortfolioCard extends StatelessWidget {
-  final PortfolioBotModel portfolioBotModel;
+  final BotActiveOrderModel botActiveOrderModel;
   final double spacing;
   final double height;
 
   const BotPortfolioCard(
       {required this.height,
       required this.spacing,
-      required this.portfolioBotModel,
+      required this.botActiveOrderModel,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final BotType botType = BotType.findByString(portfolioBotModel.botAppType);
-    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(
-        DateTime.now(), DateTime.now().add(const Duration(days: 5)));
+    final BotType botType =
+        BotType.findByString(botActiveOrderModel.botAppsName);
+    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(context,
+        DateTime.now(), DateTime.parse(botActiveOrderModel.expireDate));
     return GestureDetector(
       onTap: () => BotPortfolioDetailScreen.open(
-          context: context, portfolioBotModel: portfolioBotModel),
+          context: context, botActiveOrderModel: botActiveOrderModel),
       child: Stack(
         children: [
           Container(
@@ -42,7 +43,7 @@ class BotPortfolioCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botType.upperCaseName} ${portfolioBotModel.ticker}',
+                      '${botType.upperCaseName} ${botActiveOrderModel.ticker}',
                       style: AskLoraTextStyles.h5Italic,
                       maxLines: 1,
                       ellipsis: true,
@@ -51,7 +52,7 @@ class BotPortfolioCard extends StatelessWidget {
                       height: 4,
                     ),
                     CustomTextNew(
-                      portfolioBotModel.tickerName,
+                      botActiveOrderModel.tickerName,
                       style: AskLoraTextStyles.body2,
                       maxLines: 2,
                       ellipsis: true,
@@ -62,9 +63,9 @@ class BotPortfolioCard extends StatelessWidget {
                   height: 13,
                 ),
                 PairColumnText(
-                  leftTitle: 'Current Price',
-                  rightTitle: 'Total P/L',
-                  leftSubTitle: portfolioBotModel.latestPrice,
+                  leftTitle: S.of(context).portfolioCurrentPrice(''),
+                  rightTitle: S.of(context).portfolioTotalPL,
+                  leftSubTitle: botActiveOrderModel.currentPrice.toString(),
                   rightSubTitle: '0%',
                 ),
                 const SizedBox(
@@ -89,7 +90,7 @@ class BotPortfolioCard extends StatelessWidget {
                         ),
                       Expanded(
                         child: CustomTextNew(
-                          'Expires at ${portfolioBotModel.expiredDate ?? '--/--/--'}',
+                          expiredDayLeft.right,
                           style: AskLoraTextStyles.subtitle4
                               .copyWith(color: botType.expiredTextColor),
                           maxLines: 2,
@@ -102,18 +103,48 @@ class BotPortfolioCard extends StatelessWidget {
               ],
             ),
           ),
-          if (portfolioBotModel.freeBot) const BotFreeBadge()
+          if (botActiveOrderModel.isDummy)
+            Container(
+              decoration: BoxDecoration(
+                  color: AskLoraColors.primaryMagenta,
+                  borderRadius: BorderRadius.circular(11)),
+              margin: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              height: 20,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.card_giftcard_rounded,
+                    size: 14,
+                    color: AskLoraColors.white,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  CustomTextNew('FREE',
+                      style: AskLoraTextStyles.subtitleAllCap1
+                          .copyWith(color: AskLoraColors.white))
+                ],
+              ),
+            )
         ],
       ),
     );
   }
 
-  Pair<bool, String> expiredDaysLeft(DateTime from, DateTime to) {
-    int dayLeft = (to.difference(from).inHours / 24).round();
+  Pair<bool, String> expiredDaysLeft(
+      BuildContext context, DateTime from, DateTime to) {
+    int dayLeft = (to.difference(from).inHours / 24).round().abs();
     if (dayLeft > 3) {
-      return Pair(false, 'Expires at ${DateFormat('kk:mm, dd-MM').format(to)}');
+      return Pair(
+          false,
+          S
+              .of(context)
+              .portfolioDetailExpiredAt(DateFormat('kk:mm, dd-MM').format(to)));
     } else {
-      return Pair(true, 'Expires in $dayLeft ${dayLeft > 1 ? 'days' : 'day'}!');
+      return Pair(
+          true, S.of(context).portfolioDetailExpiredIn(dayLeft.toString()));
     }
   }
 }

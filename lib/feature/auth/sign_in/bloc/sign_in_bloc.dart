@@ -80,26 +80,31 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       if (!isOtpRequired) {
         userJourney = await _userJourneyRepository.getUserJourney();
 
-        GetAccountResponse getAccountResponse = await _fetchUserProfile();
-
-        var snapshot = await _getUserSnapshot(getAccountResponse.username);
-        if (snapshot.state == ResponseState.success) {
-          if (userJourney == null) {
-            ///user journey null means user activate from different devices
-            await _ppiResponseRepository.linkUser(snapshot.data!.id);
-            await _userJourneyRepository.saveUserJourney(
-                userJourney: UserJourney.investmentStyle);
-            emit(state.copyWith(
-                response: BaseResponse.complete(
-                    data.copyWith(userJourney: UserJourney.investmentStyle))));
+        GetAccountResponse? getAccountResponse = await _fetchUserProfile();
+        if (getAccountResponse != null) {
+          var snapshot = await _getUserSnapshot(getAccountResponse.username);
+          if (snapshot.state == ResponseState.success) {
+            if (userJourney == null) {
+              ///user journey null means user activate from different devices
+              await _ppiResponseRepository.linkUser(snapshot.data!.id);
+              await _userJourneyRepository.saveUserJourney(
+                  userJourney: UserJourney.investmentStyle);
+              emit(state.copyWith(
+                  response: BaseResponse.complete(data.copyWith(
+                      userJourney: UserJourney.investmentStyle))));
+            } else {
+              ///this is normal sign in flow
+              emit(state.copyWith(
+                  response: BaseResponse.complete(
+                      data.copyWith(userJourney: userJourney))));
+            }
           } else {
-            ///this is normal sign in flow
-            emit(state.copyWith(
-                response: BaseResponse.complete(
-                    data.copyWith(userJourney: userJourney))));
+            ///snapshot error should remove storage and emit error
+            _signInRepository.removeStorageOnSignInFailed();
+            emit(state.copyWith(response: BaseResponse.error()));
           }
         } else {
-          ///snapshot error should remove storage and emit error
+          ///user profile error should remove storage and emit error
           _signInRepository.removeStorageOnSignInFailed();
           emit(state.copyWith(response: BaseResponse.error()));
         }
@@ -136,14 +141,20 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
           otp: event.otp, email: event.email, password: event.password);
       UserJourney? userJourney = await _userJourneyRepository.getUserJourney();
 
-      GetAccountResponse getAccountResponse = await _fetchUserProfile();
-      var snapshot = await _getUserSnapshot(getAccountResponse.username);
-      if (snapshot.state == ResponseState.success) {
-        emit(state.copyWith(
-            response: BaseResponse.complete(data.copyWith(
-                userJourney: userJourney ?? UserJourney.investmentStyle))));
+      GetAccountResponse? getAccountResponse = await _fetchUserProfile();
+      if (getAccountResponse != null) {
+        var snapshot = await _getUserSnapshot(getAccountResponse.username);
+        if (snapshot.state == ResponseState.success) {
+          emit(state.copyWith(
+              response: BaseResponse.complete(data.copyWith(
+                  userJourney: userJourney ?? UserJourney.investmentStyle))));
+        } else {
+          ///snapshot error should remove storage and emit error
+          _signInRepository.removeStorageOnSignInFailed();
+          emit(state.copyWith(response: BaseResponse.error()));
+        }
       } else {
-        ///snapshot error should remove storage and emit error
+        ///user profile error should remove storage and emit error
         _signInRepository.removeStorageOnSignInFailed();
         emit(state.copyWith(response: BaseResponse.error()));
       }
@@ -166,12 +177,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     }
   }
 
-  Future<GetAccountResponse> _fetchUserProfile() async {
-    /// TODO: Cache the whole account info.
+  Future<GetAccountResponse?> _fetchUserProfile() async {
     final accountInfo = await _accountRepository.getAccount();
-    _sharedPreference.writeData(sfKeyEmail, accountInfo.email);
-    _sharedPreference.writeData(sfKeyPpiUsername, accountInfo.username);
-    return accountInfo;
+    if (accountInfo.state == ResponseState.success) {
+      _sharedPreference.writeData(sfKeyEmail, accountInfo.data!.email);
+      _sharedPreference.writeData(sfKeyPpiUsername, accountInfo.data!.username);
+      return accountInfo.data;
+    }
+    return null;
   }
 
   Future<BaseResponse<SnapShot>> _getUserSnapshot(String username) async =>

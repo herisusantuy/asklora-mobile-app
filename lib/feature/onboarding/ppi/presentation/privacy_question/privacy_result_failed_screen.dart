@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../../core/domain/endpoints.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/utils.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../ppi_result_screen.dart';
 import '../ppi_screen.dart';
@@ -25,20 +28,11 @@ class PrivacyResultFailedScreen extends StatelessWidget {
             primaryButtonOnClick: () => PpiScreen.openReplace(context,
                 arguments: const Pair(
                     QuestionPageType.privacy, QuestionPageStep.privacy)),
-            secondaryButtonOnClick: openAskloraFaq,
+            secondaryButtonOnClick: () =>
+                openUrl(askloraFaq, mode: LaunchMode.externalApplication),
             primaryButtonLabel: 'TRY AGAIN',
             secondaryButtonLabel: 'NEED HELP?'),
       ),
     );
-  }
-
-  void openAskloraFaq() async {
-    const url = 'https://www.asklora.ai/faq';
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

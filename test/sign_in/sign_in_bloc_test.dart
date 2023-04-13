@@ -44,10 +44,7 @@ void main() async {
     late PpiResponseRepository ppiResponseRepository;
 
     const GetAccountResponse account = GetAccountResponse(
-      0,
-      'someusername',
-      'kk@kk.com',
-    );
+        id: 0, username: 'someusername', email: 'kk@kk.com', isStaff: false);
 
     setUpAll(
       () async {
@@ -148,7 +145,8 @@ void main() async {
           when(userJourneyRepository.getUserJourney())
               .thenAnswer((_) => Future.value(UserJourney.investmentStyle));
 
-          when(accountRepository.getAccount()).thenAnswer((_) async => account);
+          when(accountRepository.getAccount())
+              .thenAnswer((_) async => BaseResponse.complete(account));
           when(ppiResponseRepository.getUserSnapShotUserId('someusername'))
               .thenAnswer((_) => Future.value(BaseResponse.complete(SnapShot(
                   0,

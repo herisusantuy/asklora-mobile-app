@@ -14,6 +14,7 @@ import '../../feature/balance/withdrawal/presentation/withdrawal_bank_detail_scr
 import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
 import '../../feature/bot_stock/domain/bot_recommendation_model.dart';
+import '../../feature/bot_stock/domain/orders/bot_active_order_model.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
 import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
@@ -22,7 +23,6 @@ import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.dart';
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
-import '../../feature/bot_stock/presentation/portfolio/domain/portfolio_bot_model.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
@@ -37,7 +37,15 @@ import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
 import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
+import '../../feature/settings/presentation/about_asklora_screen.dart';
+import '../../feature/settings/presentation/account_information_screen.dart';
+import '../../feature/settings/presentation/account_setting_screen.dart';
+import '../../feature/settings/presentation/customer_service_screen.dart';
+import '../../feature/settings/presentation/get_help_screen.dart';
+import '../../feature/settings/presentation/language_selection_screen.dart';
+import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
+import '../../feature/settings/presentation/terms_condition_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../domain/pair.dart';
 import '../presentation/custom_status_widget.dart';
@@ -141,7 +149,8 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => BotPortfolioDetailScreen(
-                  portfolioBotModel: settings.arguments as PortfolioBotModel,
+                  botActiveOrderModel:
+                      settings.arguments as BotActiveOrderModel,
                 ));
       case BotTradeSummaryScreen.route:
         return MaterialPageRoute(
@@ -218,6 +227,45 @@ class RouterGenerator {
           settings: settings,
           builder: (_) => const SettingsScreen(),
         );
+      case AboutAskloraScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const AboutAskloraScreen(),
+        );
+      case GetHelpScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const GetHelpScreen(),
+        );
+      case CustomerServiceScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const CustomerServiceScreen(),
+        );
+      case AccountSettingScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const AccountSettingScreen(),
+        );
+      case AccountInformationScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const AccountInformationScreen(),
+        );
+      case LanguageSelectionScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const LanguageSelectionScreen(),
+        );
+      case PrivacyPolicyScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const PrivacyPolicyScreen(),
+        );
+      case TermsAndConditionScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const TermsAndConditionScreen());
       default:
         return MaterialPageRoute(
             settings: settings,

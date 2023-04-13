@@ -1,6 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -22,12 +23,14 @@ void main() async {
     final BaseResponse<List<BotRecommendationModel>> freeBotStockResponse =
         BaseResponse.complete(defaultBotRecommendation);
 
-    final BaseResponse<bool> boolResponse = BaseResponse.complete(true);
+    final BaseResponse<BotOrderResponse> botCreateOrderSuccessResponse =
+        BaseResponse.complete(
+            const BotOrderResponse(botOrder: '', botAction: ''));
+    final BaseResponse<BotOrderResponse> botCreateOrderFailedResponse =
+        BaseResponse.error();
 
     final BaseResponse<List<BotRecommendationModel>> errorResponse =
         BaseResponse.error();
-
-    final BaseResponse<bool> boolErrorResponse = BaseResponse.error();
 
     const BotRecommendationModel botRecommendationModel =
         BotRecommendationModel(1, '', '', '', 'Pullup', '', '', '', '');
@@ -63,7 +66,7 @@ void main() async {
         'failed fetching bot recommendation',
         build: () {
           when(botStockRepository.fetchBotRecommendation())
-              .thenThrow(errorResponse);
+              .thenAnswer((_) => Future.value(errorResponse));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchBotRecommendation()),
@@ -104,40 +107,38 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'trade bot stock',
         build: () {
-          when(botStockRepository.tradeBotStock(
+          when(botStockRepository.createOrder(
                   botRecommendationModel: botRecommendationModel,
-                  estimatedEndDate: '2023-03-28',
                   tradeBotStockAmount: 0))
-              .thenAnswer((_) => Future.value(boolResponse));
+              .thenAnswer((_) => Future.value(botCreateOrderSuccessResponse));
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(const TradeBotStock(
+        act: (bloc) => bloc.add(const CreateBotOrder(
             botRecommendationModel: botRecommendationModel,
-            estimatedEndDate: '2023-03-28',
             tradeBotStockAmount: 0)),
         expect: () => {
-              BotStockState(tradeBotStockResponse: BaseResponse.loading()),
-              BotStockState(tradeBotStockResponse: boolResponse)
+              BotStockState(createBotOrderResponse: BaseResponse.loading()),
+              BotStockState(
+                  createBotOrderResponse: botCreateOrderSuccessResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(
         'emits `BaseResponse.error` WHEN '
         'failed trade bot stock',
         build: () {
-          when(botStockRepository.tradeBotStock(
+          when(botStockRepository.createOrder(
                   botRecommendationModel: botRecommendationModel,
-                  estimatedEndDate: '2023-03-28',
                   tradeBotStockAmount: 0))
-              .thenThrow(boolErrorResponse);
+              .thenAnswer((_) => Future.value(botCreateOrderFailedResponse));
           return botStockBloc;
         },
-        act: (bloc) => bloc.add(const TradeBotStock(
+        act: (bloc) => bloc.add(const CreateBotOrder(
             botRecommendationModel: botRecommendationModel,
-            estimatedEndDate: '2023-03-28',
             tradeBotStockAmount: 0)),
         expect: () => {
-              BotStockState(tradeBotStockResponse: BaseResponse.loading()),
-              BotStockState(tradeBotStockResponse: boolErrorResponse)
+              BotStockState(createBotOrderResponse: BaseResponse.loading()),
+              BotStockState(
+                  createBotOrderResponse: botCreateOrderFailedResponse)
             });
 
     blocTest<BotStockBloc, BotStockState>(

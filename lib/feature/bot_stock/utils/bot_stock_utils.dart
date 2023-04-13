@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../core/domain/pair.dart';
 import '../../../core/styles/asklora_colors.dart';
+import '../../../core/utils/date_utils.dart';
 import '../domain/bot_recommendation_model.dart';
-import '../presentation/portfolio/domain/portfolio_bot_model.dart';
 
 List<Pair<String, String>> botRecommendationFaqs = [
   const Pair('How can I get a specific stock?',
@@ -31,25 +31,6 @@ List<BotRecommendationModel> defaultBotRecommendation = [
       'MSFT.O', 'TESLA', '', '20'),
   const BotRecommendationModel(8, 'CLASSIC_classic_003846', '', '', 'Plank',
       'MSFT.O', 'TESLA', '', '600'),
-];
-
-List<PortfolioBotModel> defaultPortfolioBot = [
-  const PortfolioBotModel(1, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '440', 2000),
-  const PortfolioBotModel(2, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '390', 2000),
-  const PortfolioBotModel(3, 'CLASSIC_classic_003846', '', '', 'Squat',
-      'MSFT.O', 'TESLA', '', '100', 2000),
-  const PortfolioBotModel(4, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '150', 2000),
-  const PortfolioBotModel(5, 'CLASSIC_classic_003846', '', '', 'Squat',
-      'MSFT.O', 'TESLA', '', '160', 2000),
-  const PortfolioBotModel(6, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '90', 2000),
-  const PortfolioBotModel(7, 'CLASSIC_classic_003846', '', '', 'Pull Up',
-      'MSFT.O', 'TESLA', '', '20', 2000),
-  const PortfolioBotModel(8, 'CLASSIC_classic_003846', '', '', 'Plank',
-      'MSFT.O', 'TESLA', '', '600', 2000),
 ];
 
 List<BotRecommendationModel> demonstrationBots = [
@@ -108,3 +89,28 @@ enum BotStockFilter {
 
   const BotStockFilter(this.name);
 }
+
+enum BotStatus {
+  pending('place', 'Pending', AskLoraColors.amber),
+  active('open', 'Active', AskLoraColors.primaryGreen),
+  activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen);
+
+  final String value;
+  final String name;
+  final Color color;
+
+  static BotStatus findByString(String botStatusString, String expireDate) {
+    BotStatus botStatus = BotStatus.values
+        .firstWhere((element) => element.value == botStatusString);
+    if (botStatus == active &&
+        DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
+      botStatus = BotStatus.activeExpireSoon;
+    }
+    return botStatus;
+  }
+
+  const BotStatus(this.value, this.name, this.color);
+}
+
+String newExpiryDateOnRollover(String expireDate) => formatDateAsString(
+    DateTime.parse(expireDate).add(const Duration(days: 14)));

@@ -188,6 +188,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
         Padding(
           padding: AppValues.screenHorizontalPadding,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (botDetailModel != null)
                 _detailedInformation(context, botDetailModel!),
@@ -204,7 +205,9 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   title: 'Estimated End Date',
                   subTitle: '${botDetailModel?.estimatedExpiredDate}'),
               _chartWidget(),
-              _spaceBetweenInfo,
+              const SizedBox(
+                height: 6,
+              ),
               _getChartCaption(),
             ],
           ),
@@ -232,9 +235,12 @@ class BotRecommendationDetailContent extends StatelessWidget {
   Widget _getChartCaption() {
     if (botDetailModel?.performance != null &&
         botDetailModel!.performance.isNotEmpty) {
-      return CustomTextNew(
-          'Past ${botDetailModel?.bot.duration} performance of ${botType.upperCaseName} ${botDetailModel?.ticker}  (${botDetailModel?.botPerformanceStartDate} - ${botDetailModel?.botPerformanceEndDate})',
-          style: AskLoraTextStyles.body4);
+      return Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: CustomTextNew(
+            'Past ${botDetailModel?.bot.duration} performance of ${botType.upperCaseName} ${botDetailModel?.ticker}  (${botDetailModel?.botPerformanceStartDate} - ${botDetailModel?.botPerformanceEndDate})',
+            style: AskLoraTextStyles.body4),
+      );
     } else {
       return const SizedBox.shrink();
     }
