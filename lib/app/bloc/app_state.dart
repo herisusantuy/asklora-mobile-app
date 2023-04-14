@@ -43,11 +43,18 @@ class AppState extends Equatable {
   final LocaleType locale;
   final AppStatus status;
   final UserJourney userJourney;
+  final bool isAllowInAppNotification;
+  final bool isAllowPushNotification;
+  final bool isAllowEmailNotification;
 
-  const AppState._(
-      {this.status = AppStatus.unknown,
-      this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
-      this.userJourney = UserJourney.privacy});
+  const AppState._({
+    this.status = AppStatus.unknown,
+    this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
+    this.userJourney = UserJourney.privacy,
+    this.isAllowInAppNotification = true,
+    this.isAllowPushNotification = true,
+    this.isAllowEmailNotification = true,
+  });
 
   const AppState.unknown() : this._();
 
@@ -64,14 +71,30 @@ class AppState extends Equatable {
 
   AppState copyWith({
     UserJourney? userJourney,
+    bool? isAllowInAppNotification,
+    bool? isAllowPushNotification,
+    bool? isAllowEmailNotification,
   }) {
     return AppState._(
       status: status,
       locale: locale,
       userJourney: userJourney ?? this.userJourney,
+      isAllowInAppNotification:
+          isAllowInAppNotification ?? this.isAllowInAppNotification,
+      isAllowPushNotification:
+          isAllowPushNotification ?? this.isAllowPushNotification,
+      isAllowEmailNotification:
+          isAllowEmailNotification ?? this.isAllowEmailNotification,
     );
   }
 
   @override
-  List<Object> get props => [status, locale, userJourney];
+  List<Object> get props => [
+        status,
+        locale,
+        userJourney,
+        isAllowInAppNotification,
+        isAllowPushNotification,
+        isAllowEmailNotification,
+      ];
 }

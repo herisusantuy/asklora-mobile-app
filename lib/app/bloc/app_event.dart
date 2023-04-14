@@ -25,3 +25,27 @@ class SaveUserJourney extends AppEvent {
 class GetUserJourneyFromLocal extends AppEvent {
   const GetUserJourneyFromLocal();
 }
+
+class AllowInAppNotification extends AppEvent {
+  final bool isAllowInAppNotification;
+  const AllowInAppNotification(this.isAllowInAppNotification);
+
+  @override
+  List<Object> get props => [isAllowInAppNotification];
+}
+
+class AllowPushNotification extends AppEvent {
+  final bool isAllowPushNotification;
+  const AllowPushNotification(this.isAllowPushNotification);
+
+  @override
+  List<Object> get props => [isAllowPushNotification];
+}
+
+class AllowEmailNotification extends AppEvent {
+  final bool isAllowEmailNotification;
+  const AllowEmailNotification(this.isAllowEmailNotification);
+
+  @override
+  List<Object> get props => [isAllowEmailNotification];
+}
