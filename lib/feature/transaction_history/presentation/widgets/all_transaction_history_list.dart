@@ -11,7 +11,9 @@ class AllTransactionHistoryList extends StatelessWidget {
         builder: (context, state) => ListView(
           children: state.allTransactions
               .map((e) => TransactionHistoryGroupWidget(
-                  title: e.groupTitle,
+                  title: e.groupType == GroupType.today
+                      ? S.of(context).transactionHistoryToday
+                      : e.groupTitle,
                   transactions: e.data,
                   showBottomBorder: state.allTransactions.indexOf(e) ==
                       state.allTransactions.length - 1))
