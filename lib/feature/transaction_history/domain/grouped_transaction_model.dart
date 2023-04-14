@@ -1,13 +1,15 @@
+import 'package:equatable/equatable.dart';
+
 import 'transaction_model.dart';
 
 enum GroupType { today, others }
 
-class GroupedTransactionModel {
+class GroupedTransactionModel extends Equatable {
   final GroupType groupType;
   final String groupTitle;
   final List<TransactionModel> data;
 
-  GroupedTransactionModel(
+  const GroupedTransactionModel(
       {required this.groupType,
       required this.groupTitle,
       this.data = const []});
@@ -20,5 +22,10 @@ class GroupedTransactionModel {
       groupTitle: groupTitle,
       data: data ?? this.data,
     );
+  }
+
+  @override
+  List<Object?> get props {
+    return [groupType, groupTitle, data];
   }
 }

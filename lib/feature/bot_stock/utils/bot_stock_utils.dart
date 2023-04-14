@@ -94,7 +94,8 @@ enum BotStatus {
   pending('place', 'Pending', AskLoraColors.amber),
   active('open', 'Active', AskLoraColors.primaryGreen),
   activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen),
-  closed('closed', 'Closed', AskLoraColors.primaryGreen);
+  closed('closed', 'Closed', AskLoraColors.primaryGreen),
+  cancel('cancel', 'Cancel', AskLoraColors.primaryGreen);
 
   final String value;
   final String name;

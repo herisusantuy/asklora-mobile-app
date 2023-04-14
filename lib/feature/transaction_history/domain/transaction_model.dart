@@ -1,16 +1,16 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../../core/utils/extensions.dart';
 
 enum TransactionHistoryType { all, botOrder, transfer }
 
-abstract class TransactionModel {
-  TransactionHistoryType? transactionHistoryType;
-  String? id;
-  String? date;
-  String? title;
-  String? status;
-  double? amount;
+abstract class TransactionModel extends Equatable {
+  final TransactionHistoryType? transactionHistoryType;
+  final String? id;
+  final String? date;
+  final String? title;
+  final String? status;
+  final double? amount;
 
   String get statusString => status ?? 'NA';
 
@@ -21,20 +21,24 @@ abstract class TransactionModel {
     return (amountDouble > 0) ? amountDouble.convertToCurrencyDecimal() : 'NA';
   }
 
-  TransactionModel(
+  const TransactionModel(
       {this.id,
       this.date,
       this.title,
       this.status,
       this.amount,
       this.transactionHistoryType});
+
+  @override
+  List<Object?> get props {
+    return [id, date, title, status, amount, transactionHistoryType];
+  }
 }
 
-@JsonSerializable()
 class BotOrderTransactionModel extends TransactionModel {
   final bool isDummy;
 
-  BotOrderTransactionModel(
+  const BotOrderTransactionModel(
       {super.id,
       super.date,
       super.title,
@@ -52,4 +56,9 @@ class BotOrderTransactionModel extends TransactionModel {
           status: json['status'],
           amount: checkDouble(json['investment_amount']),
           isDummy: json['is_dummy']);
+
+  @override
+  List<Object?> get props {
+    return [isDummy];
+  }
 }
