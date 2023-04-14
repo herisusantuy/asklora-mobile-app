@@ -111,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "confirmNewPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
@@ -126,12 +128,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "notificationSettings":
             MessageLookupByLibrary.simpleMessage("Notification Settings"),
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel":
             MessageLookupByLibrary.simpleMessage("Office Hours"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),

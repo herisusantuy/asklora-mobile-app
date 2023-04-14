@@ -11,8 +11,10 @@ import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../generated/l10n.dart';
 import '../bloc/change_password/change_password_bloc.dart';
 import '../repository/change_password_repository.dart';
+import 'account_setting_screen.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   static const route = '/change_password_screen';
@@ -30,12 +32,10 @@ class ChangePasswordScreen extends StatelessWidget {
           CustomLoadingOverlay.of(context).show(state.response.state);
           switch (state.response.state) {
             case ResponseState.success:
-              CustomInAppNotification.show(
-                  context, 'This feature will available soon! please wait :)');
+              // will add action here if the endpoint is ready
               break;
             case ResponseState.error:
-              CustomInAppNotification.show(
-                  context, 'This feature will available soon! please wait :)');
+              CustomInAppNotification.show(context, state.response.message);
               break;
             default:
               break;
@@ -43,14 +43,14 @@ class ChangePasswordScreen extends StatelessWidget {
         },
         child: CustomScaffold(
           body: CustomStretchedLayout(
-            header: const CustomHeader(title: 'Change Password'),
+            header: CustomHeader(title: S.of(context).changePassword),
             content: Column(
               children: [
-                _passwordInput,
+                _passwordInput(context),
                 const SizedBox(height: 20),
-                _newPasswordInput,
+                _newPasswordInput(context),
                 const SizedBox(height: 20),
-                _confirmNewPassword,
+                _confirmNewPassword(context),
               ],
             ),
             bottomButton: _saveButton,
@@ -60,11 +60,11 @@ class ChangePasswordScreen extends StatelessWidget {
     );
   }
 
-  Widget get _passwordInput {
+  Widget _passwordInput(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextNew('Password', style: AskLoraTextStyles.body1),
+        CustomTextNew(S.of(context).password, style: AskLoraTextStyles.body1),
         const SizedBox(height: 5),
         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
           buildWhen: (previous, current) =>
@@ -84,11 +84,12 @@ class ChangePasswordScreen extends StatelessWidget {
     );
   }
 
-  Widget get _newPasswordInput {
+  Widget _newPasswordInput(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextNew('New Password', style: AskLoraTextStyles.body1),
+        CustomTextNew(S.of(context).newPassword,
+            style: AskLoraTextStyles.body1),
         const SizedBox(height: 5),
         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
           buildWhen: (previous, current) =>
@@ -109,11 +110,12 @@ class ChangePasswordScreen extends StatelessWidget {
     );
   }
 
-  Widget get _confirmNewPassword {
+  Widget _confirmNewPassword(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomTextNew('Confirm New Password', style: AskLoraTextStyles.body1),
+        CustomTextNew(S.of(context).confirmNewPassword,
+            style: AskLoraTextStyles.body1),
         const SizedBox(height: 5),
         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
           buildWhen: (previous, current) =>

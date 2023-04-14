@@ -97,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro3": MessageLookupByLibrary.simpleMessage("AI策略，\n自動交易"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
@@ -111,10 +112,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel": MessageLookupByLibrary.simpleMessage("辦公時間"),
+        "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "portfolioBuyingPower": m5,

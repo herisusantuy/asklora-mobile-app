@@ -177,5 +177,8 @@
     }
   },
   "portfolioTotalPL": "Total P/L",
-  "portfolioYourBotStock": "Your Botstocks"
+  "portfolioYourBotStock": "Your Botstocks",
+  "password" : "Password",
+  "newPassword" : "New Password",
+  "confirmNewPassword" : "Confirm New Password"
 }

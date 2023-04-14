@@ -174,5 +174,8 @@
     }
   },
   "portfolioTotalPL": "總盈虧",
-  "portfolioYourBotStock": "你的Botstocks"
+  "portfolioYourBotStock": "你的Botstocks",
+  "password" : "密碼",
+  "newPassword" : "新密碼",
+  "confirmNewPassword" : "確認新密碼"
 }
