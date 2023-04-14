@@ -41,6 +41,7 @@ dependencies:
   back_button_interceptor: ^6.0.2
   onfido_sdk: ^2.2.0
   just_the_tooltip: ^0.0.12
+  sentry_flutter: ^7.4.2
 
   country_picker:
     path: ../flutter_country_picker/
