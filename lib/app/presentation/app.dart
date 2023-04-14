@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
@@ -58,6 +59,7 @@ class App extends StatelessWidget {
                           child: child!);
                     },
                     debugShowCheckedModeBanner: false,
+                    navigatorObservers: [SentryNavigatorObserver()],
                     localizationsDelegates: const [
                       S.delegate,
                       GlobalMaterialLocalizations.delegate,
