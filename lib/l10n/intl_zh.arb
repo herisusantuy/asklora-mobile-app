@@ -174,5 +174,8 @@
     }
   },
   "portfolioTotalPL": "總盈虧",
-  "portfolioYourBotStock": "你的Botstocks"
+  "portfolioYourBotStock": "你的Botstocks",
+  "notificationSetting" : "通知設定",
+  "inApp" : "In-app通知",
+  "pushNotification" : "推送通知"
 }

@@ -177,5 +177,8 @@
     }
   },
   "portfolioTotalPL": "Total P/L",
-  "portfolioYourBotStock": "Your Botstocks"
+  "portfolioYourBotStock": "Your Botstocks",
+  "notificationSetting" : "Notification Setting",
+  "inApp" : "In-App",
+  "pushNotification" : "Push-Notification"
 }
