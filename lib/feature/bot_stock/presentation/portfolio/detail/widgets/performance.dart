@@ -1,13 +1,17 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class Performance extends StatelessWidget {
+  final BotType botType;
   final BotActiveOrderDetailModel botActiveOrderDetailModel;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
-  const Performance({required this.botActiveOrderDetailModel, Key? key})
+  const Performance(
+      {required this.botActiveOrderDetailModel,
+      required this.botType,
+      Key? key})
       : super(key: key);
 
   @override
@@ -66,7 +70,11 @@ class Performance extends StatelessWidget {
         ColumnText(
             title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
             subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
-        _chartWidget()
+        _chartWidget(),
+        const SizedBox(
+          height: 6,
+        ),
+        _getChartCaption(),
       ]);
 
   Widget _chartWidget() => Align(
@@ -79,4 +87,17 @@ class Performance extends StatelessWidget {
             )
           : const Text(
               'Performance data will be available once the Botstock starts'));
+
+  Widget _getChartCaption() {
+    if (botActiveOrderDetailModel.performance.isNotEmpty) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: CustomTextNew(
+            'Past ${botActiveOrderDetailModel.botDetail.duration} performance of ${botType.upperCaseName} ${botActiveOrderDetailModel.tickerDetail.ticker}  (${botActiveOrderDetailModel.spotDate} - ${botActiveOrderDetailModel.expireDate})',
+            style: AskLoraTextStyles.body4),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
 }
