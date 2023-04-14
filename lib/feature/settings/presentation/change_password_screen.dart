@@ -124,6 +124,7 @@ class ChangePasswordScreen extends StatelessWidget {
               validPassword: (validPassword) => {},
               hintText: 'Confirm New Password',
               errorText: state.confirmNewPasswordErrorText,
+              isShowingPasswordValidation: false,
               onChanged: (confirmNewPassword) => context
                   .read<ChangePasswordBloc>()
                   .add(ConfirmNewPasswordChanged(confirmNewPassword)),

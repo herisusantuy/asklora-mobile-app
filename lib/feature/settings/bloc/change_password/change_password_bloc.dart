@@ -40,11 +40,9 @@ class ChangePasswordBloc
       ConfirmNewPasswordChanged event, Emitter<ChangePasswordState> emit) {
     emit(state.copyWith(
       confirmNewPassword: event.confirmNewPassword,
-      confirmNewPasswordErrorText: !event.confirmNewPassword.isValidPassword()
-          ? 'Enter valid password'
-          : event.confirmNewPassword != state.newPassword
-              ? 'Your password does not match'
-              : '',
+      confirmNewPasswordErrorText: event.confirmNewPassword != state.newPassword
+          ? 'Your password does not match'
+          : '',
     ));
   }
 
