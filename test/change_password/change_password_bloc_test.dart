@@ -74,7 +74,7 @@ void main() {
           newPassword: '12345678',
           newPasswordErrorText: 'Enter valid password',
           confirmNewPassword: '12345678',
-          confirmNewPasswordErrorText: 'Enter valid password',
+          confirmNewPasswordErrorText: '',
         ),
       },
     );
