@@ -2,12 +2,12 @@ part of '../transaction_history_screen.dart';
 
 class TransactionHistoryGroupWidget extends StatelessWidget {
   final String title;
-  final List<TransactionModel> transactions;
+  final List<TransactionModel> data;
   final bool showBottomBorder;
 
   const TransactionHistoryGroupWidget(
       {required this.title,
-      required this.transactions,
+      required this.data,
       required this.showBottomBorder,
       Key? key})
       : super(key: key);
@@ -23,28 +23,19 @@ class TransactionHistoryGroupWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: double.infinity,
-            padding:
-                AppValues.screenHorizontalPadding.copyWith(top: 8, bottom: 8),
-            color: AskLoraColors.whiteSmoke,
-            child: CustomTextNew(
-              title,
-              style: AskLoraTextStyles.subtitle4,
-            ),
+          TransactionHistoryGroupTitle(
+            title: title,
           ),
-          ...transactions
+          ...data
               .map(
                 (e) => e is BotOrderTransactionModel
                     ? BotOrderTransactionHistoryCard(
                         botOrderTransactionModel: e,
-                        showBottomBorder:
-                            transactions.indexOf(e) != transactions.length - 1,
+                        showBottomBorder: data.indexOf(e) != data.length - 1,
                       )
                     : TransferTransactionHistoryCard(
                         transactionModel: e,
-                        showBottomBorder:
-                            transactions.indexOf(e) != transactions.length - 1,
+                        showBottomBorder: data.indexOf(e) != data.length - 1,
                       ),
               )
               .toList()

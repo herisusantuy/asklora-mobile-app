@@ -12,6 +12,18 @@ String formatDateAsString(dynamic dateTime) {
   }
 }
 
+String formatDateTimeAsString(dynamic dateTime) {
+  try {
+    if (dateTime is DateTime) {
+      return DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
+    } else {
+      return DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse(dateTime));
+    }
+  } catch (e) {
+    return 'Error formatting date';
+  }
+}
+
 DateTime formatDateOnly(dynamic dateTime) {
   DateTime date = DateTime.parse(formatDateAsString(dateTime));
   return DateTime(date.year, date.month, date.day);

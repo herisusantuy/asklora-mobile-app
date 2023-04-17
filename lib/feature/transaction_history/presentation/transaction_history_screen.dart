@@ -18,6 +18,8 @@ import '../bloc/transaction_history_bloc.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_model.dart';
 import '../repository/transaction_history_repository.dart';
+import 'bot_order/detail/bot_transaction_history_detail_screen.dart';
+import 'widgets/transaction_history_group_title.dart';
 
 part 'widgets/transaction_history_content.dart';
 

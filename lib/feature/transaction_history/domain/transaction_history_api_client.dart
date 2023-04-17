@@ -10,4 +10,8 @@ class TransactionHistoryApiClient {
       await AskloraApiClient().post(
           endpoint: endpointBotOrderHistory,
           payload: jsonEncode({'status': status}));
+
+  Future<Response> fetchBotTransactionDetail(String orderId) async =>
+      await AskloraApiClient()
+          .get(endpoint: '$endpointBotOrderHistory/$orderId');
 }

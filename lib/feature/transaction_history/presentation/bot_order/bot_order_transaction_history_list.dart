@@ -14,7 +14,7 @@ class BotOrderTransactionHistoryList extends StatelessWidget {
                   title: e.groupType == GroupType.today
                       ? S.of(context).transactionHistoryToday
                       : e.groupTitle,
-                  transactions: e.data,
+                  data: e.data,
                   showBottomBorder: state.botOrderTransactions.indexOf(e) ==
                       state.botOrderTransactions.length - 1))
               .toList(),

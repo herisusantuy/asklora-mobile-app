@@ -14,7 +14,7 @@ class AllTransactionHistoryList extends StatelessWidget {
                   title: e.groupType == GroupType.today
                       ? S.of(context).transactionHistoryToday
                       : e.groupTitle,
-                  transactions: e.data,
+                  data: e.data,
                   showBottomBorder: state.allTransactions.indexOf(e) ==
                       state.allTransactions.length - 1))
               .toList(),

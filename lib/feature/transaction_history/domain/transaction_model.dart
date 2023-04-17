@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../core/utils/extensions.dart';
 
-enum TransactionHistoryType { all, botOrder, transfer }
+enum TransactionHistoryType { all, botOrder, transfer, botOrderSummary }
 
 abstract class TransactionModel extends Equatable {
   final TransactionHistoryType? transactionHistoryType;

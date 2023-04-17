@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../core/utils/date_utils.dart';
+import '../presentation/bot_order/domain/bot_transaction_history_response.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_model.dart';
 import '../repository/transaction_history_repository.dart';
@@ -17,6 +18,7 @@ class TransactionHistoryBloc
       : _transactionHistoryRepository = transactionHistoryRepository,
         super(const TransactionHistoryState()) {
     on<FetchTransaction>(_onFetchTransaction);
+    on<FetchBotTransactionDetail>(_onFetchBotTransactionDetail);
   }
 
   final TransactionHistoryRepository _transactionHistoryRepository;
@@ -40,6 +42,14 @@ class TransactionHistoryBloc
                 element.transactionHistoryType ==
                 TransactionHistoryType.transfer)
             .toList())));
+  }
+
+  _onFetchBotTransactionDetail(FetchBotTransactionDetail event,
+      Emitter<TransactionHistoryState> emit) async {
+    emit(state.copyWith(botDetailResponse: BaseResponse.loading()));
+    var botTransactionDetail = await _transactionHistoryRepository
+        .fetchBotTransactionsDetail(event.orderId);
+    emit(state.copyWith(botDetailResponse: botTransactionDetail));
   }
 
   List<GroupedTransactionModel> groupedNotificationModels(
