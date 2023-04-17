@@ -7,8 +7,8 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
+import '../../repository/auth_repository.dart';
 import '../bloc/sign_in_bloc.dart';
-import '../repository/sign_in_repository.dart';
 import 'sign_in_form.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -24,7 +24,7 @@ class SignInScreen extends StatelessWidget {
         child: BlocProvider(
           create: (context) => SignInBloc(
               accountRepository: AccountRepository(),
-              signInRepository: SignInRepository(
+              authRepository: AuthRepository(
                 TokenRepository(),
               ),
               userJourneyRepository: UserJourneyRepository(),

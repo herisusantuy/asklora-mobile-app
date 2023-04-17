@@ -13,6 +13,7 @@ const String endpointSignUp = '$v1$accounts';
 const String endpointResetPassword = '$v1$accounts/reset-password/';
 const String endpointForgotPassword = '$v2${accounts}request-reset-password/';
 const String endpointConfirmPassword = '$v2${accounts}confirm-password';
+const String endpointChangePassword = '$v2${accounts}change-password';
 const String endpointGetOtp = '$v1${accounts}otp/';
 const String endpointGetSmsOtp = '$v2${accounts}request-sms-otp/';
 const String endpointValidateEmail = '$v2${accounts}validate-email/';

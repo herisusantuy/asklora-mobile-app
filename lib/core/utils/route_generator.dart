@@ -49,6 +49,8 @@ import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../domain/pair.dart';
+import '../presentation/acknowledgement/domain/acknowledgement_model.dart';
+import '../presentation/acknowledgement/presentation/acknowledgement_screen.dart';
 import '../presentation/custom_status_widget.dart';
 import '../presentation/photo_view_screen.dart';
 import 'app_icons.dart';
@@ -271,6 +273,13 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => const NotificationSettingScreen());
+      case AcknowledgementScreen.route:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => AcknowledgementScreen(
+            acknowledgementModel: settings.arguments as AcknowledgementModel,
+          ),
+        );
       default:
         return MaterialPageRoute(
             settings: settings,

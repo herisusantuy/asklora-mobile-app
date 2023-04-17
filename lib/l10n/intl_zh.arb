@@ -177,5 +177,8 @@
   "portfolioYourBotStock": "你的Botstocks",
   "notificationSetting" : "通知設定",
   "inApp" : "In-app通知",
-  "pushNotification" : "推送通知"
+  "pushNotification" : "推送通知",
+  "password" : "密碼",
+  "newPassword" : "新密碼",
+  "confirmNewPassword" : "確認新密碼"
 }

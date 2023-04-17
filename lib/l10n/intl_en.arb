@@ -97,8 +97,6 @@
   "botTradeBottomSheetEndBotStockConfirmationSubTitle": "The total Botstock value will be returned to your \naccount after the next community order.",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio successfully!",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "DEPOSIT TO START REAL TRADE",
-  "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio!",
-  "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": " DEPOSIT TO START TRADING",
   "botTradeBottomSheetCancelBotStockConfirmationTitle": "The investment amount and Bot management fee (HKD1,500) will be returned to your account.",
   "botTradeBottomSheetRolloverConfirmationButton": "CONFIRM ROLLOVER",
   "portfolioDetailPerformanceTitle": "Performance",
@@ -180,5 +178,8 @@
   "portfolioYourBotStock": "Your Botstocks",
   "notificationSetting" : "Notification Setting",
   "inApp" : "In-App",
-  "pushNotification" : "Push-Notification"
+  "pushNotification" : "Push-Notification",
+  "password" : "Password",
+  "newPassword" : "New Password",
+  "confirmNewPassword" : "Confirm New Password"
 }

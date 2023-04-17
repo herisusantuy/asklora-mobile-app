@@ -622,20 +622,20 @@ class S {
     );
   }
 
-  /// `Your free Botstock has been added to your portfolio!`
+  /// `Your free Botstock has been added to your portfolio successfully!`
   String get botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle {
     return Intl.message(
-      'Your free Botstock has been added to your portfolio!',
+      'Your free Botstock has been added to your portfolio successfully!',
       name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// ` DEPOSIT TO START TRADING`
+  /// `DEPOSIT TO START REAL TRADE`
   String get botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle {
     return Intl.message(
-      ' DEPOSIT TO START TRADING',
+      'DEPOSIT TO START REAL TRADE',
       name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle',
       desc: '',
       args: [],
@@ -1037,6 +1037,36 @@ class S {
     return Intl.message(
       'Push-Notification',
       name: 'pushNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm New Password`
+  String get confirmNewPassword {
+    return Intl.message(
+      'Confirm New Password',
+      name: 'confirmNewPassword',
       desc: '',
       args: [],
     );
