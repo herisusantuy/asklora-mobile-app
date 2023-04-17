@@ -58,4 +58,8 @@ class AccountSettingScreen extends StatelessWidget {
   }
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
+
+  static void openAndRemoveUntil(BuildContext context, String removeUntil) =>
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(route, ModalRoute.withName(removeUntil));
 }

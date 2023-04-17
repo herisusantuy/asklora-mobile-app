@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/domain/base_response.dart';
 import '../../../core/domain/token/repository/token_repository.dart';
+import '../../../core/presentation/acknowledgement/domain/acknowledgement_model.dart';
+import '../../../core/presentation/acknowledgement/presentation/acknowledgement_screen.dart';
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_in_app_notification.dart';
 import '../../../core/presentation/custom_scaffold.dart';
+import '../../../core/presentation/custom_status_widget.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -15,6 +18,8 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/repository/auth_repository.dart';
 import '../bloc/change_password/change_password_bloc.dart';
+import 'account_setting_screen.dart';
+import 'settings_screen.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   static const route = '/change_password_screen';
@@ -33,8 +38,16 @@ class ChangePasswordScreen extends StatelessWidget {
           CustomLoadingOverlay.of(context).show(state.response.state);
           switch (state.response.state) {
             case ResponseState.success:
-
-              ///todo will move to some acknowledgement screen once figma is ready
+              AcknowledgementScreen.open(
+                  context: context,
+                  arguments: AcknowledgementModel(
+                      title: 'Password Change Success',
+                      subTitle: 'Your password has been changed',
+                      buttonTitle: 'BACK TO ACCOUNT SETTINGS',
+                      onButtonTap: () =>
+                          AccountSettingScreen.openAndRemoveUntil(
+                              context, SettingsScreen.route),
+                      statusType: StatusType.success));
               break;
             case ResponseState.error:
               CustomInAppNotification.show(context, state.response.message);
