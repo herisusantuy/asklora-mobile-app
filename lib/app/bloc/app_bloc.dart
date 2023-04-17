@@ -24,9 +24,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppLanguageChangeEvent>(_onAppLanguageChangeEvent);
     on<SaveUserJourney>(_onSaveUserJourney);
     on<GetUserJourneyFromLocal>(_onGetUserJourneyFromLocal);
-    on<AllowInAppNotification>(_onAllowInAppNotification);
-    on<AllowPushNotification>(_onAllowPushNotification);
-    on<AllowEmailNotification>(_onAllowEmailNotification);
   }
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
@@ -59,23 +56,5 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       GetUserJourneyFromLocal event, Emitter<AppState> emit) async {
     var data = await _userJourneyRepository.getUserJourneyFromLocal();
     emit(state.copyWith(userJourney: data));
-  }
-
-  void _onAllowInAppNotification(
-      AllowInAppNotification event, Emitter<AppState> emit) async {
-    emit(state.copyWith(
-        isAllowInAppNotification: event.isAllowInAppNotification));
-  }
-
-  void _onAllowPushNotification(
-      AllowPushNotification event, Emitter<AppState> emit) async {
-    emit(
-        state.copyWith(isAllowPushNotification: event.isAllowPushNotification));
-  }
-
-  void _onAllowEmailNotification(
-      AllowEmailNotification event, Emitter<AppState> emit) async {
-    emit(state.copyWith(
-        isAllowEmailNotification: event.isAllowEmailNotification));
   }
 }
