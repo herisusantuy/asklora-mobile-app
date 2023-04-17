@@ -622,20 +622,20 @@ class S {
     );
   }
 
-  /// `Your free Botstock has been added to your portfolio!`
+  /// `Your free Botstock has been added to your portfolio successfully!`
   String get botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle {
     return Intl.message(
-      'Your free Botstock has been added to your portfolio!',
+      'Your free Botstock has been added to your portfolio successfully!',
       name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// ` DEPOSIT TO START TRADING`
+  /// `DEPOSIT TO START REAL TRADE`
   String get botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle {
     return Intl.message(
-      ' DEPOSIT TO START TRADING',
+      'DEPOSIT TO START REAL TRADE',
       name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle',
       desc: '',
       args: [],
@@ -1007,6 +1007,36 @@ class S {
     return Intl.message(
       'Your Botstocks',
       name: 'portfolioYourBotStock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Setting`
+  String get notificationSetting {
+    return Intl.message(
+      'Notification Setting',
+      name: 'notificationSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In-App`
+  String get inApp {
+    return Intl.message(
+      'In-App',
+      name: 'inApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Push-Notification`
+  String get pushNotification {
+    return Intl.message(
+      'Push-Notification',
+      name: 'pushNotification',
       desc: '',
       args: [],
     );

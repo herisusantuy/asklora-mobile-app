@@ -111,8 +111,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
+        "notificationSetting": MessageLookupByLibrary.simpleMessage("通知設定"),
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
@@ -181,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
+        "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "tooltipBotDetailsEstMaxLoss":

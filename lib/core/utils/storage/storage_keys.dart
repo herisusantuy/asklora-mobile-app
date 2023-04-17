@@ -11,3 +11,6 @@ const String sfKeySelectedLang = 'selected_lang';
 const String sfKeyAskloraId = 'asklora_id';
 const String sfKeyPpiAnswers = 'ppi_answers';
 const String sfKeyInvestmentStyleState = 'investment_style_state';
+const String sfKeyInAppNotification = 'in_app_notification';
+const String sfKeyPushNotification = 'push_notification';
+const String sfKeyEmailNotification = 'email_notification';

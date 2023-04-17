@@ -68,10 +68,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "The total Botstock value will be returned to your \naccount after the next community order."),
         "botTradeBottomSheetEndBotStockConfirmationTitle": m1,
         "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle":
-            MessageLookupByLibrary.simpleMessage(" DEPOSIT TO START TRADING"),
+            MessageLookupByLibrary.simpleMessage("DEPOSIT TO START REAL TRADE"),
         "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle":
             MessageLookupByLibrary.simpleMessage(
-                "Your free Botstock has been added to your portfolio!"),
+                "Your free Botstock has been added to your portfolio successfully!"),
         "botTradeBottomSheetInsufficientBalanceSubTitle": m2,
         "botTradeBottomSheetInsufficientBalanceTitle":
             MessageLookupByLibrary.simpleMessage(
@@ -127,8 +127,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+        "notificationSetting":
+            MessageLookupByLibrary.simpleMessage("Notification Setting"),
         "notificationSettings":
             MessageLookupByLibrary.simpleMessage("Notification Settings"),
         "officeHours":
@@ -204,6 +207,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "pushNotification":
+            MessageLookupByLibrary.simpleMessage("Push-Notification"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
