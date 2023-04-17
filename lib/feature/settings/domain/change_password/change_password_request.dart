@@ -6,7 +6,7 @@ class ChangePasswordRequest {
   final String password;
   @JsonKey(name: 'new_password')
   final String newPassword;
-  @JsonKey(name: 'confirm_new_password')
+  @JsonKey(name: 'confirm_password')
   final String confirmNewPassword;
 
   ChangePasswordRequest(

@@ -6,15 +6,19 @@
 import 'dart:async' as _i5;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_api_client.dart'
-    as _i7;
-import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_request.dart'
-    as _i8;
-import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_response.dart'
-    as _i6;
-import 'package:asklora_mobile_app/feature/settings/repository/change_password_repository.dart'
+import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart' as _i7;
+import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_response.dart'
+    as _i9;
+import 'package:asklora_mobile_app/feature/auth/repository/auth_repository.dart'
     as _i4;
-import 'package:dio/dio.dart' as _i3;
+import 'package:asklora_mobile_app/feature/auth/reset_password/domain/reset_password_response.dart'
+    as _i8;
+import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart'
+    as _i3;
+import 'package:asklora_mobile_app/feature/auth/sign_up/domain/response.dart'
+    as _i6;
+import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_response.dart'
+    as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -39,8 +43,9 @@ class _FakeBaseResponse_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeResponse_1<T> extends _i1.SmartFake implements _i3.Response<T> {
-  _FakeResponse_1(
+class _FakeSignInResponse_1 extends _i1.SmartFake
+    implements _i3.SignInResponse {
+  _FakeSignInResponse_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -49,17 +54,187 @@ class _FakeResponse_1<T> extends _i1.SmartFake implements _i3.Response<T> {
         );
 }
 
-/// A class which mocks [ChangePasswordRepository].
+/// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockChangePasswordRepository extends _i1.Mock
-    implements _i4.ChangePasswordRepository {
-  MockChangePasswordRepository() {
+class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
+  MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.BaseResponse<_i6.ChangePasswordResponse>> changePassword({
+  _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>> signUp({
+    required String? email,
+    required String? password,
+    required String? username,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signUp,
+          [],
+          {
+            #email: email,
+            #password: password,
+            #username: username,
+          },
+        ),
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>>.value(
+            _FakeBaseResponse_0<_i6.SignUpResponse>(
+          this,
+          Invocation.method(
+            #signUp,
+            [],
+            {
+              #email: email,
+              #password: password,
+              #username: username,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i6.SignUpResponse>>);
+  @override
+  _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>> getVerificationEmail(
+          {required _i7.GetOtpRequest? getVerificationEmailRequest}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getVerificationEmail,
+          [],
+          {#getVerificationEmailRequest: getVerificationEmailRequest},
+        ),
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>.value(
+            _FakeBaseResponse_0<_i6.GetOtpResponse>(
+          this,
+          Invocation.method(
+            #getVerificationEmail,
+            [],
+            {#getVerificationEmailRequest: getVerificationEmailRequest},
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i6.GetOtpResponse>>);
+  @override
+  _i5.Future<bool> signOut(String? token) => (super.noSuchMethod(
+        Invocation.method(
+          #signOut,
+          [token],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+  @override
+  _i5.Future<_i3.SignInResponse> signIn({
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signIn,
+          [],
+          {
+            #email: email,
+            #password: password,
+          },
+        ),
+        returnValue: _i5.Future<_i3.SignInResponse>.value(_FakeSignInResponse_1(
+          this,
+          Invocation.method(
+            #signIn,
+            [],
+            {
+              #email: email,
+              #password: password,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.SignInResponse>);
+  @override
+  _i5.Future<_i3.SignInResponse> signInWithOtp({
+    required String? otp,
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signInWithOtp,
+          [],
+          {
+            #otp: otp,
+            #email: email,
+            #password: password,
+          },
+        ),
+        returnValue: _i5.Future<_i3.SignInResponse>.value(_FakeSignInResponse_1(
+          this,
+          Invocation.method(
+            #signInWithOtp,
+            [],
+            {
+              #otp: otp,
+              #email: email,
+              #password: password,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i3.SignInResponse>);
+  @override
+  void removeStorageOnSignInFailed() => super.noSuchMethod(
+        Invocation.method(
+          #removeStorageOnSignInFailed,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  _i5.Future<_i2.BaseResponse<_i8.ResetPasswordResponse>> resetPassword({
+    required String? token,
+    required String? password,
+    required String? confirmPassword,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #resetPassword,
+          [],
+          {
+            #token: token,
+            #password: password,
+            #confirmPassword: confirmPassword,
+          },
+        ),
+        returnValue:
+            _i5.Future<_i2.BaseResponse<_i8.ResetPasswordResponse>>.value(
+                _FakeBaseResponse_0<_i8.ResetPasswordResponse>(
+          this,
+          Invocation.method(
+            #resetPassword,
+            [],
+            {
+              #token: token,
+              #password: password,
+              #confirmPassword: confirmPassword,
+            },
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i8.ResetPasswordResponse>>);
+  @override
+  _i5.Future<_i2.BaseResponse<_i9.ForgotPasswordResponse>> forgotPassword(
+          {required String? email}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #forgotPassword,
+          [],
+          {#email: email},
+        ),
+        returnValue:
+            _i5.Future<_i2.BaseResponse<_i9.ForgotPasswordResponse>>.value(
+                _FakeBaseResponse_0<_i9.ForgotPasswordResponse>(
+          this,
+          Invocation.method(
+            #forgotPassword,
+            [],
+            {#email: email},
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i9.ForgotPasswordResponse>>);
+  @override
+  _i5.Future<_i2.BaseResponse<_i10.ChangePasswordResponse>> changePassword({
     required String? password,
     required String? newPassword,
     required String? confirmNewPassword,
@@ -75,8 +250,8 @@ class MockChangePasswordRepository extends _i1.Mock
           },
         ),
         returnValue:
-            _i5.Future<_i2.BaseResponse<_i6.ChangePasswordResponse>>.value(
-                _FakeBaseResponse_0<_i6.ChangePasswordResponse>(
+            _i5.Future<_i2.BaseResponse<_i10.ChangePasswordResponse>>.value(
+                _FakeBaseResponse_0<_i10.ChangePasswordResponse>(
           this,
           Invocation.method(
             #changePassword,
@@ -88,33 +263,5 @@ class MockChangePasswordRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i5.Future<_i2.BaseResponse<_i6.ChangePasswordResponse>>);
-}
-
-/// A class which mocks [ChangePasswordApiClient].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockChangePasswordApiClient extends _i1.Mock
-    implements _i7.ChangePasswordApiClient {
-  MockChangePasswordApiClient() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i5.Future<_i3.Response<dynamic>> changePassword(
-          _i8.ChangePasswordRequest? request) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #changePassword,
-          [request],
-        ),
-        returnValue:
-            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_1<dynamic>(
-          this,
-          Invocation.method(
-            #changePassword,
-            [request],
-          ),
-        )),
-      ) as _i5.Future<_i3.Response<dynamic>>);
+      ) as _i5.Future<_i2.BaseResponse<_i10.ChangePasswordResponse>>);
 }

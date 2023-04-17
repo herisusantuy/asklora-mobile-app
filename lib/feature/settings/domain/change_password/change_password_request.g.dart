@@ -11,7 +11,7 @@ ChangePasswordRequest _$ChangePasswordRequestFromJson(
     ChangePasswordRequest(
       json['password'] as String,
       json['new_password'] as String,
-      json['confirm_new_password'] as String,
+      json['confirm_password'] as String,
     );
 
 Map<String, dynamic> _$ChangePasswordRequestToJson(
@@ -19,5 +19,5 @@ Map<String, dynamic> _$ChangePasswordRequestToJson(
     <String, dynamic>{
       'password': instance.password,
       'new_password': instance.newPassword,
-      'confirm_new_password': instance.confirmNewPassword,
+      'confirm_password': instance.confirmNewPassword,
     };

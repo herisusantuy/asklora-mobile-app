@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../repository/auth_repository.dart';
 import '../bloc/forgot_password_bloc.dart';
-import '../repository/forgot_password_repository.dart';
 import 'forgot_password_form.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
@@ -19,7 +20,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return CustomScaffold(
       body: BlocProvider(
         create: (context) => ForgotPasswordBloc(
-            forgotPasswordRepository: ForgotPasswordRepository()),
+            authRepository: AuthRepository(TokenRepository())),
         child: CustomStretchedLayout(
           header: const CustomHeader(
             title: 'Forgot Password',

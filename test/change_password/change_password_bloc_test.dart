@@ -1,7 +1,6 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/feature/auth/repository/auth_repository.dart';
 import 'package:asklora_mobile_app/feature/settings/bloc/change_password/change_password_bloc.dart';
-import 'package:asklora_mobile_app/feature/settings/domain/change_password/change_password_api_client.dart';
-import 'package:asklora_mobile_app/feature/settings/repository/change_password_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,20 +15,18 @@ class MockChangePassword
     extends MockBloc<ChangePasswordEvent, ChangePasswordState>
     implements ChangePasswordBloc {}
 
-@GenerateMocks([ChangePasswordRepository])
-@GenerateMocks([ChangePasswordApiClient])
+@GenerateMocks([AuthRepository])
 void main() {
   group('Change Password Bloc Test', () {
-    late MockChangePasswordRepository changePasswordRepository;
+    late MockAuthRepository authRepository;
     late ChangePasswordBloc changePasswordBloc;
 
     setUpAll(() async {
-      changePasswordRepository = MockChangePasswordRepository();
+      authRepository = MockAuthRepository();
     });
 
     setUp(() async {
-      changePasswordBloc = ChangePasswordBloc(
-          changePasswordRepository: ChangePasswordRepository());
+      changePasswordBloc = ChangePasswordBloc(authRepository: authRepository);
     });
 
     test('Change Password init state is should be unknown', () {
