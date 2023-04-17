@@ -125,7 +125,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "notificationSetting":
+            MessageLookupByLibrary.simpleMessage("Notification Setting"),
         "notificationSettings":
             MessageLookupByLibrary.simpleMessage("Notification Settings"),
         "officeHours":
@@ -200,6 +203,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "pushNotification":
+            MessageLookupByLibrary.simpleMessage("Push-Notification"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
