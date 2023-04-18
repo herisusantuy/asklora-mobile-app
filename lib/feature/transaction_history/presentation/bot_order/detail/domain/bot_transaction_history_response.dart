@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'bot_activities_transaction_model.dart';
 import 'bot_summary_transaction_model.dart';
 
 part 'bot_transaction_history_response.g.dart';
@@ -21,6 +22,7 @@ class BotTransactionHistoryResponse extends Equatable {
   @JsonKey(name: 'bot_apps_name')
   final String botAppsName;
   final List<BotSummaryTransactionModel> summary;
+  final List<BotActivitiesTransactionModel> activities;
 
   const BotTransactionHistoryResponse(
       this.pk,
@@ -32,7 +34,8 @@ class BotTransactionHistoryResponse extends Equatable {
       this.status,
       this.actionStatus,
       this.botAppsName,
-      this.summary);
+      this.summary,
+      this.activities);
 
   factory BotTransactionHistoryResponse.fromJson(Map<String, dynamic> json) =>
       _$BotTransactionHistoryResponseFromJson(json);
@@ -51,5 +54,6 @@ class BotTransactionHistoryResponse extends Equatable {
         actionStatus,
         botAppsName,
         summary,
+        activities
       ];
 }

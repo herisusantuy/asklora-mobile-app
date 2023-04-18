@@ -15,7 +15,7 @@ import '../../../generated/l10n.dart';
 import '../../bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../bot_stock/utils/bot_stock_utils.dart';
 import '../bloc/transaction_history_bloc.dart';
-import '../domain/grouped_transaction_model.dart';
+import '../domain/grouped_model.dart';
 import '../domain/transaction_model.dart';
 import '../repository/transaction_history_repository.dart';
 import 'bot_order/detail/bot_transaction_history_detail_screen.dart';

@@ -21,24 +21,19 @@ class BotOrderTransactionHistorySummaryCard extends StatelessWidget {
               bottom: showBottomBorder
                   ? const BorderSide(color: AskLoraColors.gray, width: 0.5)
                   : BorderSide.none)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: CustomTextNew(
-                  title,
-                  style: AskLoraTextStyles.subtitle2,
-                ),
-              ),
-              const SizedBox(
-                width: 14,
-              ),
-              CustomTextNew(
-                subTitle,
-              ),
-            ],
+          Expanded(
+            child: CustomTextNew(
+              title,
+              style: AskLoraTextStyles.subtitle2,
+            ),
+          ),
+          const SizedBox(
+            width: 14,
+          ),
+          CustomTextNew(
+            subTitle,
           ),
         ],
       ),

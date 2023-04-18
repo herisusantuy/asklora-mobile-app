@@ -8,7 +8,7 @@ import 'dart:async' as _i4;
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
 import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_model.dart'
     as _i5;
-import 'package:asklora_mobile_app/feature/transaction_history/presentation/bot_order/domain/bot_transaction_history_response.dart'
+import 'package:asklora_mobile_app/feature/transaction_history/presentation/bot_order/detail/domain/bot_transaction_history_response.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart'
     as _i3;

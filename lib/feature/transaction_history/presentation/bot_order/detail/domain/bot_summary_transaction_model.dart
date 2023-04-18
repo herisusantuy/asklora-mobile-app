@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../../core/utils/date_utils.dart';
-import '../../../../../core/utils/extensions.dart';
+import '../../../../../../core/utils/date_utils.dart';
+import '../../../../../../core/utils/extensions.dart';
 
 part 'bot_summary_transaction_model.g.dart';
 
@@ -22,7 +22,7 @@ class BotSummaryTransactionModel extends Equatable {
         : 'NA';
   }
 
-  String get createdFormattedString => formatDateTimeAsString(created);
+  String get createdFormattedString => formatDateTimeAsString(created, dateFormat: 'yyyy-MM-dd HH:mm:ss');
 
   const BotSummaryTransactionModel(
       this.pk, this.created, this.updated, this.status, this.investmentAmount);

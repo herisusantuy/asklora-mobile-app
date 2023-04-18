@@ -1,6 +1,6 @@
 import '../../../core/domain/base_response.dart';
 import '../../bot_stock/utils/bot_stock_utils.dart';
-import '../presentation/bot_order/domain/bot_transaction_history_response.dart';
+import '../presentation/bot_order/detail/domain/bot_transaction_history_response.dart';
 import '../domain/transaction_history_api_client.dart';
 import '../domain/transaction_model.dart';
 

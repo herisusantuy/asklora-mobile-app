@@ -22,6 +22,10 @@ BotTransactionHistoryResponse _$BotTransactionHistoryResponseFromJson(
           .map((e) =>
               BotSummaryTransactionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      (json['activities'] as List<dynamic>)
+          .map((e) =>
+              BotActivitiesTransactionModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$BotTransactionHistoryResponseToJson(
@@ -37,4 +41,5 @@ Map<String, dynamic> _$BotTransactionHistoryResponseToJson(
       'action_status': instance.actionStatus,
       'bot_apps_name': instance.botAppsName,
       'summary': instance.summary,
+      'activities': instance.activities,
     };
