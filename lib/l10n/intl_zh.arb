@@ -3,6 +3,7 @@
   "buttonNext": "下一步",
   "buttonCreateAnAccount": "建立帳戶",
   "buttonLetsBegin": "立即開始",
+  "buttonSignOut": "登出",
   "buttonHaveAnAccount": "已有賬戶？",
   "carouselIntro1": "投資一樣\n要夠Fit",
   "carouselIntro2": "FinFit教練，Lora 全程教路",
@@ -11,27 +12,34 @@
   "askNameScreenPlaceholder": "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？",
   "greetingScreenTitle": "Alright! 你準備開始 FinFit 未先？",
   "greetingScreenSubTitle": "訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ ",
-  "accountSettings" : "帳戶設定",
+  "accountSettings": "帳戶設定",
+  "subscription": "訂購計劃",
+  "corePlan": "核心計劃",
+  "freeTrial": "免費試用期",
+  "allSettings": "設定",
+  "investmentPreferences": "投資偏好",
+  "transactionHistory": "交易歷史",
   "accountInformation": "帳戶資訊",
-  "changePassword" : "更改密碼",
+  "changePassword": "更改密碼",
   "paymentDetails": "銀行賬戶詳情",
-  "language" : "語言",
-  "notificationSettings" : "通知設定",
-  "terminateAccount" : "終止賬戶",
-  "userId" : "用戶 ID",
-  "fullName" : "姓名",
-  "phone" : "電話",
-  "dateJoined" : "加入日期",
-  "aboutAsklora" : "關於 Asklora",
+  "language": "語言",
+  "notificationSettings": "通知設定",
+  "terminateAccount": "終止賬戶",
+  "userId": "用戶 ID",
+  "fullName": "姓名",
+  "phone": "電話",
+  "dateJoined": "加入日期",
+  "free": "免費",
+  "aboutAsklora": "關於 Asklora",
   "website": "網站",
   "privacyPolicy": "私隱政策",
   "termsAndConditions": "條款與約束",
-  "contactUs" : "聯絡我們",
-  "getHelp" : "獲得幫助",
+  "contactUs": "聯絡我們",
+  "getHelp": "獲得幫助",
   "customerService": "客戶服務",
   "email": "電郵",
-  "officeHoursLabel" : "辦公時間",
-  "officeHours" : "09:00-18:00 (HKT)",
+  "officeHoursLabel": "辦公時間",
+  "officeHours": "09:00-18:00 (HKT)",
   "buttonCancel": "CANCEL",
   "buttonConfirm": "確定",
   "buttonNotNow": "稍後再說",
@@ -148,6 +156,23 @@
   "portfolioDetailButtonCancelBotStock": "取消BOTSTOCK",
   "portfolioDetailButtonEndBotStock": "取消Botstock",
   "portfolioDetailButtonRolloverBotStock": "續期Botstock",
+  "portfolioDetailChartCaption": "{bot} 於過去 {duration} 星期之表現  ({startDate} - {endDate})",
+  "@portfolioDetailChartCaption": {
+    "placeholders": {
+      "bot": {
+        "type": "String"
+      },
+      "startDate": {
+        "type": "String"
+      },
+      "endDate": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
   "portfolioTotalValue": "總價值 ",
   "portfolioWithdrawableAmount": "可提取金額 ({currency})",
   "@portfolioWithdrawableAmount": {
@@ -175,10 +200,16 @@
   },
   "portfolioTotalPL": "總盈虧",
   "portfolioYourBotStock": "你的Botstocks",
-  "notificationSetting" : "通知設定",
-  "inApp" : "In-app通知",
-  "pushNotification" : "推送通知",
-  "password" : "密碼",
-  "newPassword" : "新密碼",
-  "confirmNewPassword" : "確認新密碼"
+  "transactionHistoryTitle": "交易歷史",
+  "transactionHistoryTabAll": "全部",
+  "transactionHistoryTabOrders": "訂單",
+  "transactionHistoryTabTransfer": "提存 ",
+  "transactionHistoryToday": "今日",
+  "notificationSetting": "通知設定",
+  "inApp": "In-app通知",
+  "pushNotification": "推送通知",
+  "password": "密碼",
+  "newPassword": "新密碼",
+  "confirmNewPassword": "確認新密碼",
+  "signOutConfirmation": " 真係要登出？"
 }

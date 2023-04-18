@@ -76,7 +76,8 @@ class _ChartAnimationState extends State<ChartAnimation> {
     for (var element in widget.chartDataSets) {
       if (element.price! > maxPriceValue) {
         maxPriceValue = element.price!;
-      } else if (element.price! < minPriceValue) {
+      }
+      if (element.price! < minPriceValue) {
         minPriceValue = element.price!;
       }
     }

@@ -20,6 +20,7 @@ import '../../../generated/l10n.dart';
 import '../../auth/repository/auth_repository.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../transaction_history/presentation/transaction_history_screen.dart';
 import 'account_setting_screen.dart';
 import 'about_asklora_screen.dart';
 import 'get_help_screen.dart';
@@ -40,8 +41,8 @@ class SettingsScreen extends StatelessWidget {
             secureStorage: SecureStorage(),
             sharedPreference: SharedPreference()),
         child: CustomStretchedLayout(
-          header: const CustomHeader(
-            title: 'All Settings',
+          header: CustomHeader(
+            title: S.of(context).allSettings,
           ),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,14 +93,18 @@ class SettingsScreen extends StatelessWidget {
                 height: 40,
               ),
               _settingsMenu(
-                  title: 'Subscription',
-                  subTitle: 'Core Plan - Free Trial',
+                  title: S.of(context).subscription,
+                  subTitle:
+                      '${S.of(context).corePlan} - ${S.of(context).freeTrial}',
                   onTap: () {}),
               _settingsMenu(
-                  title: 'Account Settings',
+                  title: S.of(context).accountSettings,
                   onTap: () => AccountSettingScreen.open(context)),
-              _settingsMenu(title: 'Investment Preferences', onTap: () {}),
-              _settingsMenu(title: 'Transaction History', onTap: () {}),
+              _settingsMenu(
+                  title: S.of(context).investmentPreferences, onTap: () {}),
+              _settingsMenu(
+                  title: S.of(context).transactionHistory,
+                  onTap: () => TransactionHistoryScreen.open(context)),
               _settingsMenu(
                   title: S.of(context).getHelp,
                   onTap: () => GetHelpScreen.open(context)),
@@ -128,9 +133,9 @@ class SettingsScreen extends StatelessWidget {
           child: GestureDetector(
             onTap: () => LoraBottomSheet.show(
               context: context,
-              title: 'Are you sure you want to sign out ?',
-              primaryButtonLabel: 'SIGN OUT',
-              secondaryButtonLabel: 'CANCEL',
+              title: S.of(context).signOutConfirmation,
+              primaryButtonLabel: S.of(context).buttonSignOut,
+              secondaryButtonLabel: S.of(context).buttonCancel,
               onPrimaryButtonTap: () {
                 Navigator.pop(context);
                 context.read<SignOutBloc>().add(const SignOutSubmitted());
@@ -152,7 +157,7 @@ class SettingsScreen extends StatelessWidget {
                           bottom: BorderSide(
                               color: AskLoraColors.charcoal, width: 0.5))),
                   child: CustomTextNew(
-                    'SIGN OUT',
+                    S.of(context).buttonSignOut,
                     style: AskLoraTextStyles.subtitle2
                         .copyWith(color: AskLoraColors.charcoal),
                   ),
@@ -215,7 +220,7 @@ class SettingsScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 23.5),
                   child: CustomTextNew(
-                    'Version: ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
+                    '${S.of(context).version}: ${snapshot.data!.version} ${snapshot.data!.buildNumber}',
                     style: AskLoraTextStyles.body1,
                   ),
                 ),

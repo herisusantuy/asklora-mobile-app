@@ -11,3 +11,8 @@ String formatDateAsString(dynamic dateTime) {
     return 'Error formatting date';
   }
 }
+
+DateTime formatDateOnly(dynamic dateTime) {
+  DateTime date = DateTime.parse(formatDateAsString(dateTime));
+  return DateTime(date.year, date.month, date.day);
+}

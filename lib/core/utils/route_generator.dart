@@ -48,6 +48,7 @@ import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
+import '../../feature/transaction_history/presentation/transaction_history_screen.dart';
 import '../domain/pair.dart';
 import '../presentation/acknowledgement/domain/acknowledgement_model.dart';
 import '../presentation/acknowledgement/presentation/acknowledgement_screen.dart';
@@ -280,6 +281,10 @@ class RouterGenerator {
             acknowledgementModel: settings.arguments as AcknowledgementModel,
           ),
         );
+      case TransactionHistoryScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const TransactionHistoryScreen());
       default:
         return MaterialPageRoute(
             settings: settings,
