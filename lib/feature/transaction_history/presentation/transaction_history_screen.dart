@@ -58,11 +58,11 @@ class TransactionHistoryScreen extends StatelessWidget {
           builder: (context, state) {
             return CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
-                title: 'Unable to get information',
-                subTitle:
-                    'There was an error when trying to get your Transaction History. Please try reloading the page',
-                primaryButtonLabel: 'RELOAD PAGE',
-                secondaryButtonLabel: 'CANCEL',
+                title: S.of(context).errorGettingInformationTitle,
+                subTitle: S.of(context).errorGettingInformationSubTitle(
+                    S.of(context).transactionHistory),
+                primaryButtonLabel: S.of(context).buttonReloadPage,
+                secondaryButtonLabel: S.of(context).buttonCancel,
                 onSecondaryButtonTap: () => Navigator.pop(context),
                 onPrimaryButtonTap: () => context
                     .read<TransactionHistoryBloc>()

@@ -70,14 +70,14 @@ class Performance extends StatelessWidget {
         ColumnText(
             title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
             subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
-        _chartWidget(),
+        _chartWidget(context),
         const SizedBox(
           height: 6,
         ),
-        _getChartCaption(),
+        _getChartCaption(context),
       ]);
 
-  Widget _chartWidget() => Align(
+  Widget _chartWidget(BuildContext context) => Align(
       alignment: Alignment.center,
       child: botActiveOrderDetailModel.performance.isNotEmpty
           ? Padding(
@@ -85,15 +85,18 @@ class Performance extends StatelessWidget {
               child: ChartAnimation(
                   chartDataSets: botActiveOrderDetailModel.performance),
             )
-          : const Text(
-              'Performance data will be available once the Botstock starts'));
+          : Text(S.of(context).portfolioDetailChartEmptyMessage));
 
-  Widget _getChartCaption() {
+  Widget _getChartCaption(BuildContext context) {
     if (botActiveOrderDetailModel.performance.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomTextNew(
-            'Past ${botActiveOrderDetailModel.botDetail.duration} performance of ${botType.upperCaseName} ${botActiveOrderDetailModel.tickerDetail.ticker}  (${botActiveOrderDetailModel.spotDate} - ${botActiveOrderDetailModel.expireDate})',
+            S.of(context).portfolioDetailChartCaption(
+                '${botType.upperCaseName} ${botActiveOrderDetailModel.tickerDetail.ticker}',
+                botActiveOrderDetailModel.spotDate,
+                botActiveOrderDetailModel.expireDate,
+                botActiveOrderDetailModel.botDetail.duration),
             style: AskLoraTextStyles.body4),
       );
     } else {

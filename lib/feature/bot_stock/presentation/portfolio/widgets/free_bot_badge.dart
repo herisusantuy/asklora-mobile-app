@@ -23,7 +23,7 @@ class FreeBotBadge extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
-          CustomTextNew('FREE',
+          CustomTextNew(S.of(context).free,
               style: AskLoraTextStyles.subtitleAllCap1
                   .copyWith(color: AskLoraColors.white))
         ],

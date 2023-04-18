@@ -12,8 +12,8 @@ import '../../../onboarding/kyc/domain/get_account/get_account_response.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
+import '../../repository/auth_repository.dart';
 import '../domain/sign_in_response.dart';
-import '../repository/sign_in_repository.dart';
 
 part 'sign_in_event.dart';
 
@@ -21,12 +21,12 @@ part 'sign_in_state.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc({
-    required SignInRepository signInRepository,
+    required AuthRepository authRepository,
     required UserJourneyRepository userJourneyRepository,
     required SharedPreference sharedPreference,
     required AccountRepository accountRepository,
     required PpiResponseRepository ppiResponseRepository,
-  })  : _signInRepository = signInRepository,
+  })  : _authRepository = authRepository,
         _userJourneyRepository = userJourneyRepository,
         _sharedPreference = sharedPreference,
         _accountRepository = accountRepository,
@@ -38,7 +38,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<SignInWithOtp>(_onSignInWithOtp);
   }
 
-  final SignInRepository _signInRepository;
+  final AuthRepository _authRepository;
   final AccountRepository _accountRepository;
   final UserJourneyRepository _userJourneyRepository;
   final PpiResponseRepository _ppiResponseRepository;
@@ -72,7 +72,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _signInRepository.signIn(
+      var data = await _authRepository.signIn(
           email: state.emailAddress, password: state.password);
 
       UserJourney? userJourney;
@@ -100,12 +100,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
             }
           } else {
             ///snapshot error should remove storage and emit error
-            _signInRepository.removeStorageOnSignInFailed();
+            _authRepository.removeStorageOnSignInFailed();
             emit(state.copyWith(response: BaseResponse.error()));
           }
         } else {
           ///user profile error should remove storage and emit error
-          _signInRepository.removeStorageOnSignInFailed();
+          _authRepository.removeStorageOnSignInFailed();
           emit(state.copyWith(response: BaseResponse.error()));
         }
       } else {
@@ -126,7 +126,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(
           response: BaseResponse.error(message: 'User email is not verified')));
     } catch (e) {
-      _signInRepository.removeStorageOnSignInFailed();
+      _authRepository.removeStorageOnSignInFailed();
       emit(state.copyWith(response: BaseResponse.error()));
     }
   }
@@ -137,7 +137,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   ) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _signInRepository.signInWithOtp(
+      var data = await _authRepository.signInWithOtp(
           otp: event.otp, email: event.email, password: event.password);
       UserJourney? userJourney = await _userJourneyRepository.getUserJourney();
 
@@ -150,12 +150,12 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
                   userJourney: userJourney ?? UserJourney.investmentStyle))));
         } else {
           ///snapshot error should remove storage and emit error
-          _signInRepository.removeStorageOnSignInFailed();
+          _authRepository.removeStorageOnSignInFailed();
           emit(state.copyWith(response: BaseResponse.error()));
         }
       } else {
         ///user profile error should remove storage and emit error
-        _signInRepository.removeStorageOnSignInFailed();
+        _authRepository.removeStorageOnSignInFailed();
         emit(state.copyWith(response: BaseResponse.error()));
       }
     } on UnauthorizedException {
@@ -172,7 +172,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(
           state.copyWith(response: BaseResponse.error(message: 'Invalid OTP')));
     } catch (e) {
-      _signInRepository.removeStorageOnSignInFailed();
+      _authRepository.removeStorageOnSignInFailed();
       emit(state.copyWith(response: BaseResponse.error()));
     }
   }
