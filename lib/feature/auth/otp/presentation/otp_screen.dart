@@ -13,8 +13,8 @@ import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../tabs/tabs_screen.dart';
+import '../../repository/auth_repository.dart';
 import '../../sign_in/bloc/sign_in_bloc.dart';
-import '../../sign_in/repository/sign_in_repository.dart';
 import '../bloc/otp_bloc.dart';
 import '../repository/otp_repository.dart';
 import 'otp_form.dart';
@@ -45,7 +45,7 @@ class OtpScreen extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => SignInBloc(
-                  signInRepository: SignInRepository(TokenRepository()),
+                  authRepository: AuthRepository(TokenRepository()),
                   userJourneyRepository: UserJourneyRepository(),
                   accountRepository: AccountRepository(),
                   sharedPreference: SharedPreference(),

@@ -36,19 +36,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(currency) => "當前價格 ${currency}";
 
-  static String m7(dateTime) => "到期日期 ${dateTime}";
+  static String m7(bot, startDate, endDate, duration) =>
+      "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
 
-  static String m8(dateTime) => "${dateTime}日後到期";
+  static String m8(dateTime) => "到期日期 ${dateTime}";
 
-  static String m9(currency) => "Botstock 總價值 (${currency})";
+  static String m9(dateTime) => "${dateTime}日後到期";
 
-  static String m10(currency) => "可提取金額 (${currency})";
+  static String m10(currency) => "Botstock 總價值 (${currency})";
+
+  static String m11(currency) => "可提取金額 (${currency})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
+        "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
@@ -91,30 +95,40 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNext": MessageLookupByLibrary.simpleMessage("下一步"),
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("稍後再說"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("重新加載"),
+        "buttonSignOut": MessageLookupByLibrary.simpleMessage("登出"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
         "carouselIntro3": MessageLookupByLibrary.simpleMessage("AI策略，\n自動交易"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
+        "corePlan": MessageLookupByLibrary.simpleMessage("核心計劃"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("咦，無法獲取資料"),
+        "free": MessageLookupByLibrary.simpleMessage("免費"),
+        "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
+        "investmentPreferences": MessageLookupByLibrary.simpleMessage("投資偏好"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
+        "notificationSetting": MessageLookupByLibrary.simpleMessage("通知設定"),
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel": MessageLookupByLibrary.simpleMessage("辦公時間"),
+        "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "portfolioBuyingPower": m5,
@@ -125,8 +139,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("取消Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("續期Botstock"),
-        "portfolioDetailExpiredAt": m7,
-        "portfolioDetailExpiredIn": m8,
+        "portfolioDetailChartCaption": m7,
+        "portfolioDetailExpiredAt": m8,
+        "portfolioDetailExpiredIn": m9,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("平均虧損"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -171,13 +186,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("表現"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("總盈虧"),
-        "portfolioTotalBotStock": m9,
+        "portfolioTotalBotStock": m10,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
-        "portfolioWithdrawableAmount": m10,
+        "portfolioWithdrawableAmount": m11,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
+        "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
+        "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
+        "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "tooltipBotDetailsEstMaxLoss":
@@ -193,6 +211,14 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "transactionHistory": MessageLookupByLibrary.simpleMessage("交易歷史"),
+        "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("全部"),
+        "transactionHistoryTabOrders":
+            MessageLookupByLibrary.simpleMessage("訂單"),
+        "transactionHistoryTabTransfer":
+            MessageLookupByLibrary.simpleMessage("提存 "),
+        "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
+        "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "website": MessageLookupByLibrary.simpleMessage("網站")
       };

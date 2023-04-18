@@ -8,7 +8,9 @@ import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
 import 'account_information_screen.dart';
+import 'change_password_screen.dart';
 import 'language_selection_screen.dart';
+import 'notification_setting_screen.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   static const route = '/account_setting_screen';
@@ -29,9 +31,9 @@ class AccountSettingScreen extends StatelessWidget {
               title: S.of(context).accountInformation,
             ),
             MenuButtonWidget(
-              onTap: () {},
-              title: S.of(context).changePassword,
-            ),
+                onTap: () => ChangePasswordScreen.open(context),
+                title: S.of(context).changePassword,
+                showBottomBorder: false),
             MenuButtonWidget(
               onTap: () {},
               title: S.of(context).paymentDetails,
@@ -42,7 +44,7 @@ class AccountSettingScreen extends StatelessWidget {
                 subtitle: context.read<AppBloc>().state.locale.labelName,
                 showBottomBorder: false),
             MenuButtonWidget(
-              onTap: () {},
+              onTap: () => NotificationSettingScreen.open(context),
               title: S.of(context).notificationSettings,
             ),
             MenuButtonWidget(
@@ -57,4 +59,8 @@ class AccountSettingScreen extends StatelessWidget {
   }
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
+
+  static void openAndRemoveUntil(BuildContext context, String removeUntil) =>
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(route, ModalRoute.withName(removeUntil));
 }

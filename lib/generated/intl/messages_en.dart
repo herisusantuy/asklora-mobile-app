@@ -38,13 +38,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(currency) => "Current Price ${currency}";
 
-  static String m7(dateTime) => "Expired at ${dateTime}";
+  static String m7(bot, startDate, endDate, duration) =>
+      "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
 
-  static String m8(dateTime) => "Expired in \$${dateTime} days";
+  static String m8(dateTime) => "Expired at ${dateTime}";
 
-  static String m9(currency) => "Total Botstock Values (${currency})";
+  static String m9(dateTime) => "Expired in \$${dateTime} days";
 
-  static String m10(currency) => "Total Portfolio Value (${currency})";
+  static String m10(currency) => "Total Botstock Values (${currency})";
+
+  static String m11(currency) => "Total Portfolio Value (${currency})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -53,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account Settings"),
+        "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
@@ -101,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNext": MessageLookupByLibrary.simpleMessage("NEXT"),
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("NOT NOW"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("RELOAD PAGE"),
+        "buttonSignOut": MessageLookupByLibrary.simpleMessage("SIGN OUT"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(
@@ -111,7 +116,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "confirmNewPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
+        "corePlan": MessageLookupByLibrary.simpleMessage("Core Plan"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
@@ -119,19 +127,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
+        "free": MessageLookupByLibrary.simpleMessage("FREE"),
+        "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
+        "investmentPreferences":
+            MessageLookupByLibrary.simpleMessage("Investment Preferences"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+        "notificationSetting":
+            MessageLookupByLibrary.simpleMessage("Notification Setting"),
         "notificationSettings":
             MessageLookupByLibrary.simpleMessage("Notification Settings"),
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel":
             MessageLookupByLibrary.simpleMessage("Office Hours"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
@@ -143,8 +160,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("END BOTSTOCK"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("ROLLOVER BOTSTOCK"),
-        "portfolioDetailExpiredAt": m7,
-        "portfolioDetailExpiredIn": m8,
+        "portfolioDetailChartCaption": m7,
+        "portfolioDetailChartEmptyMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Performance data will be available once the Botstock starts"),
+        "portfolioDetailExpiredAt": m8,
+        "portfolioDetailExpiredIn": m9,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("Avg. Loss"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -192,14 +213,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Performance"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("Total P&L"),
-        "portfolioTotalBotStock": m9,
+        "portfolioTotalBotStock": m10,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
             MessageLookupByLibrary.simpleMessage("Total Portfolio Value"),
-        "portfolioWithdrawableAmount": m10,
+        "portfolioWithdrawableAmount": m11,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "pushNotification":
+            MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to sign out ?"),
+        "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -216,7 +242,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
+        "transactionHistory":
+            MessageLookupByLibrary.simpleMessage("Transaction History"),
+        "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("All"),
+        "transactionHistoryTabOrders":
+            MessageLookupByLibrary.simpleMessage("Orders"),
+        "transactionHistoryTabTransfer":
+            MessageLookupByLibrary.simpleMessage("Transfer"),
+        "transactionHistoryTitle":
+            MessageLookupByLibrary.simpleMessage("Transaction History"),
+        "transactionHistoryToday":
+            MessageLookupByLibrary.simpleMessage("Today"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
+        "version": MessageLookupByLibrary.simpleMessage("Version"),
         "website": MessageLookupByLibrary.simpleMessage("Website")
       };
 }

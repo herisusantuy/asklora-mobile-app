@@ -6,12 +6,10 @@ part 'bot_recommendation_model.g.dart';
 @JsonSerializable()
 class BotRecommendationModel extends Equatable {
   final int id;
-  final String suitability;
-  final String benefit;
   @JsonKey(name: 'bot_id')
   final String botId;
   @JsonKey(name: 'bot_word')
-  final String botWord;
+  final String? botWord;
   @JsonKey(name: 'bot_type')
   final String botType;
   @JsonKey(name: 'bot_app_type')
@@ -28,8 +26,6 @@ class BotRecommendationModel extends Equatable {
 
   const BotRecommendationModel(
       this.id,
-      this.suitability,
-      this.benefit,
       this.botId,
       this.botWord,
       this.botType,
@@ -41,10 +37,10 @@ class BotRecommendationModel extends Equatable {
       {this.freeBot = false,
       this.selectable = false});
 
+  String get botWordString => botWord ?? '';
+
   BotRecommendationModel copyWith({bool? freeBot}) => BotRecommendationModel(
       id,
-      suitability,
-      benefit,
       botId,
       botWord,
       botType,
@@ -63,8 +59,6 @@ class BotRecommendationModel extends Equatable {
   @override
   List<Object?> get props => [
         id,
-        suitability,
-        benefit,
         botId,
         botWord,
         botType,

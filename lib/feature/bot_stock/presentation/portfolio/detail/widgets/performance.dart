@@ -1,13 +1,17 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class Performance extends StatelessWidget {
+  final BotType botType;
   final BotActiveOrderDetailModel botActiveOrderDetailModel;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
 
-  const Performance({required this.botActiveOrderDetailModel, Key? key})
+  const Performance(
+      {required this.botActiveOrderDetailModel,
+      required this.botType,
+      Key? key})
       : super(key: key);
 
   @override
@@ -66,10 +70,14 @@ class Performance extends StatelessWidget {
         ColumnText(
             title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
             subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
-        _chartWidget()
+        _chartWidget(context),
+        const SizedBox(
+          height: 6,
+        ),
+        _getChartCaption(context),
       ]);
 
-  Widget _chartWidget() => Align(
+  Widget _chartWidget(BuildContext context) => Align(
       alignment: Alignment.center,
       child: botActiveOrderDetailModel.performance.isNotEmpty
           ? Padding(
@@ -77,6 +85,22 @@ class Performance extends StatelessWidget {
               child: ChartAnimation(
                   chartDataSets: botActiveOrderDetailModel.performance),
             )
-          : const Text(
-              'Performance data will be available once the Botstock starts'));
+          : Text(S.of(context).portfolioDetailChartEmptyMessage));
+
+  Widget _getChartCaption(BuildContext context) {
+    if (botActiveOrderDetailModel.performance.isNotEmpty) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: CustomTextNew(
+            S.of(context).portfolioDetailChartCaption(
+                '${botType.upperCaseName} ${botActiveOrderDetailModel.tickerDetail.ticker}',
+                botActiveOrderDetailModel.spotDate,
+                botActiveOrderDetailModel.expireDate,
+                botActiveOrderDetailModel.botDetail.duration),
+            style: AskLoraTextStyles.body4),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
 }

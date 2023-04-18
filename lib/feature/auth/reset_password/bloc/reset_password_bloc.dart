@@ -4,22 +4,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
-import '../repository/reset_password_repository.dart';
+import '../../repository/auth_repository.dart';
 
 part 'reset_password_event.dart';
 
 part 'reset_password_state.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
-  ResetPasswordBloc({required ResetPasswordRepository resetPasswordRepository})
-      : _resetPasswordRepository = resetPasswordRepository,
+  ResetPasswordBloc({required AuthRepository authRepository})
+      : _authRepository = authRepository,
         super(const ResetPasswordState()) {
     on<ResetPasswordPasswordChanged>(_onPasswordChanged);
     on<ResetPasswordConfirmPasswordChanged>(_onConfirmPasswordChanged);
     on<ResetPasswordSubmitted>(_onResetPasswordSubmitted);
   }
 
-  final ResetPasswordRepository _resetPasswordRepository;
+  final AuthRepository _authRepository;
 
   void _onPasswordChanged(
     ResetPasswordPasswordChanged event,
@@ -67,7 +67,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       ResetPasswordSubmitted event, Emitter<ResetPasswordState> emit) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
-      var data = await _resetPasswordRepository.resetPassword(
+      var data = await _authRepository.resetPassword(
           token: event.resetPasswordToken,
           password: state.password,
           confirmPassword: state.confirmPassword);

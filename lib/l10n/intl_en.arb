@@ -1,15 +1,15 @@
 {
   "@@locale": "en",
-  "getHelp" : "Get Help",
+  "getHelp": "Get Help",
   "customerService": "Customer Service",
   "email": "Email",
-  "aboutAsklora" : "About Asklora",
+  "aboutAsklora": "About Asklora",
   "website": "Website",
   "privacyPolicy": "Privacy Policy",
   "termsAndConditions": "Terms and Conditions",
-  "contactUs" : "Contact Us",
-  "officeHoursLabel" : "Office Hours",
-  "officeHours" : "09:00-18:00 (HKT)",
+  "contactUs": "Contact Us",
+  "officeHoursLabel": "Office Hours",
+  "officeHours": "09:00-18:00 (HKT)",
   "buttonCancel": "CANCEL",
   "buttonConfirm": "CONFIRM",
   "buttonNext": "NEXT",
@@ -20,17 +20,25 @@
   "buttonCreateAnAccount": "CREATE AN ACCOUNT",
   "buttonHaveAnAccount": "HAVE AN ACCOUNT?",
   "buttonLetsBegin": "LET’S BEGIN",
-  "accountSettings" : "Account Settings",
+  "buttonSignOut": "SIGN OUT",
+  "accountSettings": "Account Settings",
+  "subscription": "Subscription",
+  "corePlan": "Core Plan",
+  "freeTrial": "Free Trial",
+  "allSettings": "All Settings",
+  "investmentPreferences": "Investment Preferences",
+  "transactionHistory": "Transaction History",
   "accountInformation": "Account Information",
-  "changePassword" : "Change Password",
+  "changePassword": "Change Password",
   "paymentDetails": "Payment Details",
-  "language" : "Language",
-  "notificationSettings" : "Notification Settings",
-  "terminateAccount" : "Terminate Account",
-  "userId" : "User ID",
-  "fullName" : "Full Name",
-  "phone" : "Phone",
-  "dateJoined" : "Date Joined",
+  "language": "Language",
+  "notificationSettings": "Notification Settings",
+  "terminateAccount": "Terminate Account",
+  "userId": "User ID",
+  "fullName": "Full Name",
+  "phone": "Phone",
+  "dateJoined": "Date Joined",
+  "free": "FREE",
   "errorGettingInformationTitle": "Unable to get information",
   "errorGettingInformationSubTitle": "There was an error when trying to get {detail}. Please try reloading the page",
   "@errorGettingInformationSubTitle": {
@@ -95,8 +103,6 @@
     }
   },
   "botTradeBottomSheetEndBotStockConfirmationSubTitle": "The total Botstock value will be returned to your \naccount after the next community order.",
-  "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio successfully!",
-  "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "DEPOSIT TO START REAL TRADE",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio!",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": " DEPOSIT TO START TRADING",
   "botTradeBottomSheetCancelBotStockConfirmationTitle": "The investment amount and Bot management fee (HKD1,500) will be returned to your account.",
@@ -151,6 +157,24 @@
   "portfolioDetailButtonCancelBotStock": "CANCEL BOTSTOCK",
   "portfolioDetailButtonEndBotStock": "END BOTSTOCK",
   "portfolioDetailButtonRolloverBotStock": "ROLLOVER BOTSTOCK",
+  "portfolioDetailChartEmptyMessage": "Performance data will be available once the Botstock starts",
+  "portfolioDetailChartCaption": "Past {duration} performance of {bot}  ({startDate} - {endDate})",
+  "@portfolioDetailChartCaption": {
+    "placeholders": {
+      "bot": {
+        "type": "String"
+      },
+      "startDate": {
+        "type": "String"
+      },
+      "endDate": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
   "portfolioTotalValue": "Total Portfolio Value",
   "portfolioWithdrawableAmount": "Total Portfolio Value ({currency})",
   "@portfolioWithdrawableAmount": {
@@ -177,5 +201,20 @@
     }
   },
   "portfolioTotalPL": "Total P/L",
-  "portfolioYourBotStock": "Your Botstocks"
+  "portfolioYourBotStock": "Your Botstocks",
+  "transactionHistoryTitle": "Transaction History",
+  "transactionHistoryTabAll": "All",
+  "transactionHistoryTabOrders": "Orders",
+  "transactionHistoryTabTransfer": "Transfer",
+  "transactionHistoryToday": "Today",
+  "notificationSetting": "Notification Setting",
+  "inApp": "In-App",
+  "pushNotification": "Push-Notification",
+  "password": "Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "signOutConfirmation": "Are you sure you want to sign out ?",
+  "version": "Version"
+
+
 }

@@ -5,7 +5,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/token/repository/repository.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
-import '../repository/sign_out_repository.dart';
+import '../../repository/auth_repository.dart';
 
 part 'sign_out_event.dart';
 
@@ -14,11 +14,11 @@ part 'sign_out_state.dart';
 class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
   SignOutBloc({
     required Repository tokenRepository,
-    required SignOutRepository signOutRepository,
+    required AuthRepository authRepository,
     required SharedPreference sharedPreference,
     required SecureStorage secureStorage,
   })  : _tokenRepository = tokenRepository,
-        _signOutRepository = signOutRepository,
+        _authRepository = authRepository,
         _sharedPreference = sharedPreference,
         _secureStorage = secureStorage,
         super(const SignOutState()) {
@@ -26,7 +26,7 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
   }
 
   final Repository _tokenRepository;
-  final SignOutRepository _signOutRepository;
+  final AuthRepository _authRepository;
   final SharedPreference _sharedPreference;
   final SecureStorage _secureStorage;
 
@@ -36,7 +36,7 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
   ) async {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
-      var isSignedOut = await _signOutRepository
+      var isSignedOut = await _authRepository
           .signOut(await _tokenRepository.getRefreshToken());
       if (isSignedOut) {
         await _tokenRepository.deleteAll();

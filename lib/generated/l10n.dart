@@ -250,11 +250,81 @@ class S {
     );
   }
 
+  /// `SIGN OUT`
+  String get buttonSignOut {
+    return Intl.message(
+      'SIGN OUT',
+      name: 'buttonSignOut',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account Settings`
   String get accountSettings {
     return Intl.message(
       'Account Settings',
       name: 'accountSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Core Plan`
+  String get corePlan {
+    return Intl.message(
+      'Core Plan',
+      name: 'corePlan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free Trial`
+  String get freeTrial {
+    return Intl.message(
+      'Free Trial',
+      name: 'freeTrial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Settings`
+  String get allSettings {
+    return Intl.message(
+      'All Settings',
+      name: 'allSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Preferences`
+  String get investmentPreferences {
+    return Intl.message(
+      'Investment Preferences',
+      name: 'investmentPreferences',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transaction History`
+  String get transactionHistory {
+    return Intl.message(
+      'Transaction History',
+      name: 'transactionHistory',
       desc: '',
       args: [],
     );
@@ -355,6 +425,16 @@ class S {
     return Intl.message(
       'Date Joined',
       name: 'dateJoined',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FREE`
+  String get free {
+    return Intl.message(
+      'FREE',
+      name: 'free',
       desc: '',
       args: [],
     );
@@ -952,6 +1032,27 @@ class S {
     );
   }
 
+  /// `Performance data will be available once the Botstock starts`
+  String get portfolioDetailChartEmptyMessage {
+    return Intl.message(
+      'Performance data will be available once the Botstock starts',
+      name: 'portfolioDetailChartEmptyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Past {duration} performance of {bot}  ({startDate} - {endDate})`
+  String portfolioDetailChartCaption(
+      String bot, String startDate, String endDate, String duration) {
+    return Intl.message(
+      'Past $duration performance of $bot  ($startDate - $endDate)',
+      name: 'portfolioDetailChartCaption',
+      desc: '',
+      args: [bot, startDate, endDate, duration],
+    );
+  }
+
   /// `Total Portfolio Value`
   String get portfolioTotalValue {
     return Intl.message(
@@ -1007,6 +1108,136 @@ class S {
     return Intl.message(
       'Your Botstocks',
       name: 'portfolioYourBotStock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transaction History`
+  String get transactionHistoryTitle {
+    return Intl.message(
+      'Transaction History',
+      name: 'transactionHistoryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get transactionHistoryTabAll {
+    return Intl.message(
+      'All',
+      name: 'transactionHistoryTabAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders`
+  String get transactionHistoryTabOrders {
+    return Intl.message(
+      'Orders',
+      name: 'transactionHistoryTabOrders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer`
+  String get transactionHistoryTabTransfer {
+    return Intl.message(
+      'Transfer',
+      name: 'transactionHistoryTabTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get transactionHistoryToday {
+    return Intl.message(
+      'Today',
+      name: 'transactionHistoryToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Setting`
+  String get notificationSetting {
+    return Intl.message(
+      'Notification Setting',
+      name: 'notificationSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In-App`
+  String get inApp {
+    return Intl.message(
+      'In-App',
+      name: 'inApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Push-Notification`
+  String get pushNotification {
+    return Intl.message(
+      'Push-Notification',
+      name: 'pushNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm New Password`
+  String get confirmNewPassword {
+    return Intl.message(
+      'Confirm New Password',
+      name: 'confirmNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to sign out ?`
+  String get signOutConfirmation {
+    return Intl.message(
+      'Are you sure you want to sign out ?',
+      name: 'signOutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version`
+  String get version {
+    return Intl.message(
+      'Version',
+      name: 'version',
       desc: '',
       args: [],
     );
