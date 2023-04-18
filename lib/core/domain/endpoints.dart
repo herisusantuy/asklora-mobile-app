@@ -60,3 +60,10 @@ const String endpointIexCloud = 'https://iexcloud.io';
 const String askloraFaq = 'https://www.asklora.ai/faq';
 const String askloraSite = 'https://www.asklora.ai/';
 const String mailToLoraCare = 'mailto:loracares@asklora.ai';
+
+///
+/// LoraGPT
+///
+const String loraGptBaseUrl = 'http://192.168.1.175/';
+// const String loraGptBaseUrl = 'https://stock-gpt.api.asklora.ai/';
+const String endpointChat = 'chat/full_general';
