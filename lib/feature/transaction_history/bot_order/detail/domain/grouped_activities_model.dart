@@ -1,4 +1,3 @@
-
 import '../../../domain/grouped_model.dart';
 import 'bot_activities_transaction_history_model.dart';
 

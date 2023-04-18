@@ -3,12 +3,14 @@ part of '../bot_order_transaction_history_detail_screen.dart';
 class BotOrderTransactionHistorySummaryCard extends StatelessWidget {
   final String title;
   final String subTitle;
+  final String? additionalText;
   final bool showBottomBorder;
 
   const BotOrderTransactionHistorySummaryCard(
       {required this.title,
       required this.subTitle,
       required this.showBottomBorder,
+      this.additionalText,
       Key? key})
       : super(key: key);
 
@@ -21,20 +23,31 @@ class BotOrderTransactionHistorySummaryCard extends StatelessWidget {
               bottom: showBottomBorder
                   ? const BorderSide(color: AskLoraColors.gray, width: 0.5)
                   : BorderSide.none)),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: CustomTextNew(
-              title,
-              style: AskLoraTextStyles.subtitle2,
+          Row(
+            children: [
+              Expanded(
+                child: CustomTextNew(
+                  title,
+                  style: AskLoraTextStyles.subtitle2,
+                ),
+              ),
+              const SizedBox(
+                width: 14,
+              ),
+              CustomTextNew(
+                subTitle,
+              ),
+            ],
+          ),
+          if (additionalText != null)
+            Align(
+              alignment: Alignment.centerRight,
+              child: CustomTextNew(
+                additionalText!,
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 14,
-          ),
-          CustomTextNew(
-            subTitle,
-          ),
         ],
       ),
     );

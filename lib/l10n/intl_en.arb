@@ -47,6 +47,9 @@
   "activities": "Activities",
   "filledPrice": "Filled Price",
   "shares": "Shares",
+  "orderStarted": "Order Started",
+  "orderRollover": "Order Rollover",
+  "orderExpired": "Order Expired",
   "errorGettingInformationTitle": "Unable to get information",
   "errorGettingInformationSubTitle": "There was an error when trying to get {detail}. Please try reloading the page",
   "@errorGettingInformationSubTitle": {

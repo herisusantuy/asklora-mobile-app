@@ -520,6 +520,36 @@ class S {
     );
   }
 
+  /// `Order Started`
+  String get orderStarted {
+    return Intl.message(
+      'Order Started',
+      name: 'orderStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Rollover`
+  String get orderRollover {
+    return Intl.message(
+      'Order Rollover',
+      name: 'orderRollover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Expired`
+  String get orderExpired {
+    return Intl.message(
+      'Order Expired',
+      name: 'orderExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Unable to get information`
   String get errorGettingInformationTitle {
     return Intl.message(

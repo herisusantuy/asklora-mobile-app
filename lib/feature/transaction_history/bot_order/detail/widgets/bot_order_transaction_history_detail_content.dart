@@ -4,13 +4,16 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
   final List<BotSummaryTransactionHistoryModel> summaries;
   final String botStatus;
   final String title;
+  late final BotStatus botStatusType;
 
-  const BotOrderTransactionHistoryDetailContent(
+  BotOrderTransactionHistoryDetailContent(
       {required this.title,
       required this.summaries,
       required this.botStatus,
       Key? key})
-      : super(key: key);
+      : super(key: key) {
+    botStatusType = BotStatus.findByString(botStatus);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +22,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
       S.of(context).activities
     ], tabViews: [
       BotOrderTransactionHistorySummaryScreen(
-        summaries: summaries,
-      ),
+          summaries: summaries, botStatusType: botStatusType),
       const BotOrderTransactionHistoryActivitiesScreen(),
     ]);
   }
@@ -58,7 +60,6 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
       );
 
   Widget _statusWidget() {
-    BotStatus botStatusType = BotStatus.findByString(botStatus);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
       decoration: BoxDecoration(

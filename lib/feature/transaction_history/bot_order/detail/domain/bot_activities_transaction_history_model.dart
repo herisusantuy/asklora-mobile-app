@@ -38,7 +38,8 @@ class BotActivitiesTransactionHistoryModel extends Equatable {
         : 'NA';
   }
 
-  String get createdFormattedString => formatDateTimeAsString(created, dateFormat: 'HH:mm:ss');
+  String get createdFormattedString =>
+      formatDateTimeAsString(created, dateFormat: 'HH:mm:ss');
 
   const BotActivitiesTransactionHistoryModel(
     this.pk,
@@ -49,10 +50,12 @@ class BotActivitiesTransactionHistoryModel extends Equatable {
     this.invested,
   );
 
-  factory BotActivitiesTransactionHistoryModel.fromJson(Map<String, dynamic> json) =>
+  factory BotActivitiesTransactionHistoryModel.fromJson(
+          Map<String, dynamic> json) =>
       _$BotActivitiesTransactionHistoryModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BotActivitiesTransactionHistoryModelToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$BotActivitiesTransactionHistoryModelToJson(this);
 
   @override
   List<Object?> get props {

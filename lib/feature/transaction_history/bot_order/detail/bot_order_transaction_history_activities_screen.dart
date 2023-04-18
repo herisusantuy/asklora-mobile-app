@@ -1,7 +1,8 @@
 part of 'bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistoryActivitiesScreen extends StatelessWidget {
-  const BotOrderTransactionHistoryActivitiesScreen({Key? key}) : super(key: key);
+  const BotOrderTransactionHistoryActivitiesScreen({Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) => BlocBuilder<
