@@ -1092,6 +1092,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Notification Setting`
+  String get notificationSetting {
+    return Intl.message(
+      'Notification Setting',
+      name: 'notificationSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In-App`
+  String get inApp {
+    return Intl.message(
+      'In-App',
+      name: 'inApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Push-Notification`
+  String get pushNotification {
+    return Intl.message(
+      'Push-Notification',
+      name: 'pushNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm New Password`
+  String get confirmNewPassword {
+    return Intl.message(
+      'Confirm New Password',
+      name: 'confirmNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

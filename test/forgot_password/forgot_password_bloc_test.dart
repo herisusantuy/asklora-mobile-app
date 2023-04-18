@@ -1,8 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/bloc/forgot_password_bloc.dart';
-import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_response.dart';
-import 'package:asklora_mobile_app/feature/auth/forgot_password/repository/forgot_password_repository.dart';
+import 'package:asklora_mobile_app/feature/auth/repository/auth_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,25 +16,24 @@ class MockForgotPasswordBloc
     extends MockBloc<ForgotPasswordEvent, ForgotPasswordState>
     implements ForgotPasswordBloc {}
 
-@GenerateMocks([ForgotPasswordRepository])
-@GenerateMocks([ForgotPasswordApiClient])
+@GenerateMocks([AuthRepository])
 void main() {
   group(
     'Forgot Password Screen Bloc Test',
     () {
-      late MockForgotPasswordRepository forgotPasswordRepository;
+      late MockAuthRepository authRepository;
       late ForgotPasswordBloc forgotPasswordBloc;
 
       setUpAll(
         () async {
-          forgotPasswordRepository = MockForgotPasswordRepository();
+          authRepository = MockAuthRepository();
         },
       );
 
       setUp(
         () async {
-          forgotPasswordBloc = ForgotPasswordBloc(
-              forgotPasswordRepository: forgotPasswordRepository);
+          forgotPasswordBloc =
+              ForgotPasswordBloc(authRepository: authRepository);
         },
       );
       test(
@@ -82,7 +80,7 @@ void main() {
       blocTest<ForgotPasswordBloc, ForgotPasswordState>(
           'emits "ForgotPasswordStatus.success" WHEN entered valid email AND pressed "Submit" button.',
           build: () {
-            when(forgotPasswordRepository.forgotPassword(email: 'abc@abc.com'))
+            when(authRepository.forgotPassword(email: 'abc@abc.com'))
                 .thenAnswer((_) => Future.value(
                     const BaseResponse<ForgotPasswordResponse>(
                         data: ForgotPasswordResponse(

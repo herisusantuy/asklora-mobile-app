@@ -17,8 +17,8 @@ import '../../../core/utils/storage/profile_data.dart';
 import '../../../core/utils/storage/secure_storage.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../generated/l10n.dart';
+import '../../auth/repository/auth_repository.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
-import '../../auth/sign_out/repository/sign_out_repository.dart';
 import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../transaction_history/presentation/transaction_history_screen.dart';
 import 'account_setting_screen.dart';
@@ -37,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
       body: BlocProvider(
         create: (_) => SignOutBloc(
             tokenRepository: TokenRepository(),
-            signOutRepository: SignOutRepository(),
+            authRepository: AuthRepository(TokenRepository()),
             secureStorage: SecureStorage(),
             sharedPreference: SharedPreference()),
         child: CustomStretchedLayout(

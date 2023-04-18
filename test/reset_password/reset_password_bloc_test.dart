@@ -1,7 +1,6 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/feature/auth/repository/auth_repository.dart';
 import 'package:asklora_mobile_app/feature/auth/reset_password/bloc/reset_password_bloc.dart';
-import 'package:asklora_mobile_app/feature/auth/reset_password/domain/reset_password_api_client.dart';
-import 'package:asklora_mobile_app/feature/auth/reset_password/repository/reset_password_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,25 +15,23 @@ class MockForgotPasswordBloc
     extends MockBloc<ResetPasswordEvent, ResetPasswordState>
     implements ResetPasswordBloc {}
 
-@GenerateMocks([ResetPasswordRepository])
-@GenerateMocks([ResetPasswordApiClient])
+@GenerateMocks([AuthRepository])
 void main() {
   group(
     'Reset Password Screen Bloc Test',
     () {
-      late MockResetPasswordRepository resetPasswordRepository;
+      late MockAuthRepository authRepository;
       late ResetPasswordBloc resetPasswordBloc;
 
       setUpAll(
         () async {
-          resetPasswordRepository = MockResetPasswordRepository();
+          authRepository = MockAuthRepository();
         },
       );
 
       setUp(
         () async {
-          resetPasswordBloc = ResetPasswordBloc(
-              resetPasswordRepository: resetPasswordRepository);
+          resetPasswordBloc = ResetPasswordBloc(authRepository: authRepository);
         },
       );
       test(

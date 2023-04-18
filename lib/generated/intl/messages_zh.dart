@@ -100,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro3": MessageLookupByLibrary.simpleMessage("AI策略，\n自動交易"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
@@ -114,11 +115,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
+        "notificationSetting": MessageLookupByLibrary.simpleMessage("通知設定"),
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel": MessageLookupByLibrary.simpleMessage("辦公時間"),
+        "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "portfolioBuyingPower": m5,
@@ -183,6 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
+        "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "tooltipBotDetailsEstMaxLoss":
