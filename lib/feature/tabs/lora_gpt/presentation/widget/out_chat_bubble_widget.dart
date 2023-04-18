@@ -65,7 +65,9 @@ class OutChatBubbleWidget extends StatelessWidget {
                     CustomTextNew(message, style: AskLoraTextStyles.subtitle2),
               ),
             ),
-            const SizedBox(width: 30,)
+            const SizedBox(
+              width: 30,
+            )
           ],
         )
       ],
