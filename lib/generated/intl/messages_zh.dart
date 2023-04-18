@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
+        "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
@@ -94,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNext": MessageLookupByLibrary.simpleMessage("下一步"),
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("稍後再說"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("重新加載"),
+        "buttonSignOut": MessageLookupByLibrary.simpleMessage("登出"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
@@ -102,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
+        "corePlan": MessageLookupByLibrary.simpleMessage("核心計劃"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
@@ -109,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("咦，無法獲取資料"),
         "free": MessageLookupByLibrary.simpleMessage("免費"),
+        "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
         "greetingScreenSubTitle":
@@ -116,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
+        "investmentPreferences": MessageLookupByLibrary.simpleMessage("投資偏好"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "notificationSetting": MessageLookupByLibrary.simpleMessage("通知設定"),
@@ -189,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
+        "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
+        "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "tooltipBotDetailsEstMaxLoss":
@@ -204,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "transactionHistory": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("全部"),
         "transactionHistoryTabOrders":
             MessageLookupByLibrary.simpleMessage("訂單"),

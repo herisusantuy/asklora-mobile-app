@@ -20,7 +20,14 @@
   "buttonCreateAnAccount": "CREATE AN ACCOUNT",
   "buttonHaveAnAccount": "HAVE AN ACCOUNT?",
   "buttonLetsBegin": "LET’S BEGIN",
+  "buttonSignOut": "SIGN OUT",
   "accountSettings": "Account Settings",
+  "subscription": "Subscription",
+  "corePlan": "Core Plan",
+  "freeTrial": "Free Trial",
+  "allSettings": "All Settings",
+  "investmentPreferences": "Investment Preferences",
+  "transactionHistory": "Transaction History",
   "accountInformation": "Account Information",
   "changePassword": "Change Password",
   "paymentDetails": "Payment Details",
@@ -205,5 +212,9 @@
   "pushNotification": "Push-Notification",
   "password": "Password",
   "newPassword": "New Password",
-  "confirmNewPassword": "Confirm New Password"
+  "confirmNewPassword": "Confirm New Password",
+  "signOutConfirmation": "Are you sure you want to sign out ?",
+  "version": "Version"
+
+
 }

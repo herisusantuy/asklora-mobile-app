@@ -250,11 +250,81 @@ class S {
     );
   }
 
+  /// `SIGN OUT`
+  String get buttonSignOut {
+    return Intl.message(
+      'SIGN OUT',
+      name: 'buttonSignOut',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account Settings`
   String get accountSettings {
     return Intl.message(
       'Account Settings',
       name: 'accountSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Core Plan`
+  String get corePlan {
+    return Intl.message(
+      'Core Plan',
+      name: 'corePlan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free Trial`
+  String get freeTrial {
+    return Intl.message(
+      'Free Trial',
+      name: 'freeTrial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Settings`
+  String get allSettings {
+    return Intl.message(
+      'All Settings',
+      name: 'allSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Preferences`
+  String get investmentPreferences {
+    return Intl.message(
+      'Investment Preferences',
+      name: 'investmentPreferences',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transaction History`
+  String get transactionHistory {
+    return Intl.message(
+      'Transaction History',
+      name: 'transactionHistory',
       desc: '',
       args: [],
     );
@@ -1148,6 +1218,26 @@ class S {
     return Intl.message(
       'Confirm New Password',
       name: 'confirmNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to sign out ?`
+  String get signOutConfirmation {
+    return Intl.message(
+      'Are you sure you want to sign out ?',
+      name: 'signOutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version`
+  String get version {
+    return Intl.message(
+      'Version',
+      name: 'version',
       desc: '',
       args: [],
     );

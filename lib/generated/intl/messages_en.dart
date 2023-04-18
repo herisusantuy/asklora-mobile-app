@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account Settings"),
+        "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
@@ -104,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNext": MessageLookupByLibrary.simpleMessage("NEXT"),
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("NOT NOW"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("RELOAD PAGE"),
+        "buttonSignOut": MessageLookupByLibrary.simpleMessage("SIGN OUT"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(
@@ -117,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
+        "corePlan": MessageLookupByLibrary.simpleMessage("Core Plan"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
@@ -125,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
         "free": MessageLookupByLibrary.simpleMessage("FREE"),
+        "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
@@ -132,6 +136,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
         "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
+        "investmentPreferences":
+            MessageLookupByLibrary.simpleMessage("Investment Preferences"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "notificationSetting":
@@ -217,6 +223,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to sign out ?"),
+        "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -233,6 +242,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
+        "transactionHistory":
+            MessageLookupByLibrary.simpleMessage("Transaction History"),
         "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("All"),
         "transactionHistoryTabOrders":
             MessageLookupByLibrary.simpleMessage("Orders"),
@@ -243,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionHistoryToday":
             MessageLookupByLibrary.simpleMessage("Today"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
+        "version": MessageLookupByLibrary.simpleMessage("Version"),
         "website": MessageLookupByLibrary.simpleMessage("Website")
       };
 }
