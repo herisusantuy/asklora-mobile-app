@@ -1,4 +1,4 @@
-part of '../transaction_history_screen.dart';
+part of '../presentation/transaction_history_screen.dart';
 
 class BotOrderTransactionHistoryList extends StatelessWidget {
   const BotOrderTransactionHistoryList({Key? key}) : super(key: key);

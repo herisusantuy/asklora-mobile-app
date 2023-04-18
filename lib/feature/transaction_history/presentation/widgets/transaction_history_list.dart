@@ -1,7 +1,7 @@
 part of '../transaction_history_screen.dart';
 
-class AllTransactionHistoryList extends StatelessWidget {
-  const AllTransactionHistoryList({Key? key}) : super(key: key);
+class TransactionHistoryList extends StatelessWidget {
+  const TransactionHistoryList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) =>

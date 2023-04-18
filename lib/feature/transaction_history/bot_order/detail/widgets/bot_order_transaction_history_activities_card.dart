@@ -1,10 +1,10 @@
-part of '../bot_transaction_history_detail_screen.dart';
+part of '../bot_order_transaction_history_detail_screen.dart';
 
-class TransactionHistoryBotActivitiesCard extends StatelessWidget {
-  final BotActivitiesTransactionModel botActivitiesTransactionModel;
+class BotOrderTransactionHistoryActivitiesCard extends StatelessWidget {
+  final BotActivitiesTransactionHistoryModel botActivitiesTransactionModel;
   final bool showBottomBorder;
 
-  const TransactionHistoryBotActivitiesCard(
+  const BotOrderTransactionHistoryActivitiesCard(
       {required this.botActivitiesTransactionModel,
       required this.showBottomBorder,
       Key? key})
@@ -63,7 +63,7 @@ class TransactionHistoryBotActivitiesCard extends StatelessWidget {
               ),
               Flexible(
                 child: CustomTextNew(
-                  'Filled Price : ${botActivitiesTransactionModel.filledAvgPriceString}  Shares : ${botActivitiesTransactionModel.filledQtyString}',
+                  '${S.of(context).filledPrice} : ${botActivitiesTransactionModel.filledAvgPriceString}  ${S.of(context).shares} : ${botActivitiesTransactionModel.filledQtyString}',
                   style: AskLoraTextStyles.body2
                       .copyWith(color: AskLoraColors.darkGray),
                 ),

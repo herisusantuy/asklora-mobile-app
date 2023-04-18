@@ -1,7 +1,7 @@
-part of '../bot_transaction_history_detail_screen.dart';
+part of 'bot_order_transaction_history_detail_screen.dart';
 
-class TransactionHistoryBotActivitiesScreen extends StatelessWidget {
-  const TransactionHistoryBotActivitiesScreen({Key? key}) : super(key: key);
+class BotOrderTransactionHistoryActivitiesScreen extends StatelessWidget {
+  const BotOrderTransactionHistoryActivitiesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => BlocBuilder<
@@ -10,7 +10,7 @@ class TransactionHistoryBotActivitiesScreen extends StatelessWidget {
             previous.activities != current.activities,
         builder: (context, state) => ListView(
           children: state.activities
-              .map((e) => TransactionHistoryBotActivitiesGroupWidget(
+              .map((e) => BotOrderTransactionHistoryActivitiesGroupWidget(
                   title: e.groupType == GroupType.today
                       ? S.of(context).transactionHistoryToday
                       : e.groupTitle,

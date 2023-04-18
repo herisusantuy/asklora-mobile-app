@@ -1,4 +1,4 @@
-part of '../transaction_history_screen.dart';
+part of '../presentation/transaction_history_screen.dart';
 
 class TransferTransactionHistoryList extends StatelessWidget {
   const TransferTransactionHistoryList({Key? key}) : super(key: key);

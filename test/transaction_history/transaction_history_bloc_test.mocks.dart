@@ -6,10 +6,10 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
+import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart'
+    as _i6;
 import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_model.dart'
     as _i5;
-import 'package:asklora_mobile_app/feature/transaction_history/presentation/bot_order/detail/domain/bot_transaction_history_response.dart'
-    as _i6;
 import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -63,20 +63,22 @@ class MockTransactionHistoryRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.BaseResponse<List<_i5.TransactionModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i6.BotTransactionHistoryResponse>>
+  _i4.Future<_i2.BaseResponse<_i6.BotDetailTransactionHistoryResponse>>
       fetchBotTransactionsDetail(String? orderId) => (super.noSuchMethod(
             Invocation.method(
               #fetchBotTransactionsDetail,
               [orderId],
             ),
             returnValue: _i4.Future<
-                    _i2.BaseResponse<_i6.BotTransactionHistoryResponse>>.value(
-                _FakeBaseResponse_0<_i6.BotTransactionHistoryResponse>(
+                    _i2.BaseResponse<
+                        _i6.BotDetailTransactionHistoryResponse>>.value(
+                _FakeBaseResponse_0<_i6.BotDetailTransactionHistoryResponse>(
               this,
               Invocation.method(
                 #fetchBotTransactionsDetail,
                 [orderId],
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<_i6.BotTransactionHistoryResponse>>);
+          ) as _i4.Future<
+              _i2.BaseResponse<_i6.BotDetailTransactionHistoryResponse>>);
 }

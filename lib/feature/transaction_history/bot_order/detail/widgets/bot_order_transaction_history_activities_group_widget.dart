@@ -1,11 +1,11 @@
-part of '../bot_transaction_history_detail_screen.dart';
+part of '../bot_order_transaction_history_detail_screen.dart';
 
-class TransactionHistoryBotActivitiesGroupWidget extends StatelessWidget {
+class BotOrderTransactionHistoryActivitiesGroupWidget extends StatelessWidget {
   final String title;
-  final List<BotActivitiesTransactionModel> data;
+  final List<BotActivitiesTransactionHistoryModel> data;
   final bool showBottomBorder;
 
-  const TransactionHistoryBotActivitiesGroupWidget(
+  const BotOrderTransactionHistoryActivitiesGroupWidget(
       {required this.title,
       required this.data,
       required this.showBottomBorder,
@@ -28,7 +28,7 @@ class TransactionHistoryBotActivitiesGroupWidget extends StatelessWidget {
           ),
           ...data
               .map(
-                (e) => TransactionHistoryBotActivitiesCard(
+                (e) => BotOrderTransactionHistoryActivitiesCard(
                   botActivitiesTransactionModel: e,
                   showBottomBorder: data.indexOf(e) != data.length - 1,
                 ),

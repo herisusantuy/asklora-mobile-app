@@ -4,10 +4,10 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../../../../core/utils/date_utils.dart';
 import '../../../../../../core/utils/extensions.dart';
 
-part 'bot_activities_transaction_model.g.dart';
+part 'bot_activities_transaction_history_model.g.dart';
 
 @JsonSerializable()
-class BotActivitiesTransactionModel extends Equatable {
+class BotActivitiesTransactionHistoryModel extends Equatable {
   @JsonKey(name: 'bot_order__pk')
   final String pk;
   final String created;
@@ -40,7 +40,7 @@ class BotActivitiesTransactionModel extends Equatable {
 
   String get createdFormattedString => formatDateTimeAsString(created, dateFormat: 'HH:mm:ss');
 
-  const BotActivitiesTransactionModel(
+  const BotActivitiesTransactionHistoryModel(
     this.pk,
     this.created,
     this.side,
@@ -49,10 +49,10 @@ class BotActivitiesTransactionModel extends Equatable {
     this.invested,
   );
 
-  factory BotActivitiesTransactionModel.fromJson(Map<String, dynamic> json) =>
-      _$BotActivitiesTransactionModelFromJson(json);
+  factory BotActivitiesTransactionHistoryModel.fromJson(Map<String, dynamic> json) =>
+      _$BotActivitiesTransactionHistoryModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BotActivitiesTransactionModelToJson(this);
+  Map<String, dynamic> toJson() => _$BotActivitiesTransactionHistoryModelToJson(this);
 
   @override
   List<Object?> get props {

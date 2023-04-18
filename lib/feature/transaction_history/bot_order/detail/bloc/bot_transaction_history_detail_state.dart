@@ -4,7 +4,7 @@ class BotTransactionHistoryDetailState extends Equatable {
   const BotTransactionHistoryDetailState(
       {this.response = const BaseResponse(), this.activities = const []});
 
-  final BaseResponse<BotTransactionHistoryResponse> response;
+  final BaseResponse<BotDetailTransactionHistoryResponse> response;
   final List<GroupedActivitiesModel> activities;
 
   @override
@@ -13,7 +13,7 @@ class BotTransactionHistoryDetailState extends Equatable {
   }
 
   BotTransactionHistoryDetailState copyWith({
-    BaseResponse<BotTransactionHistoryResponse>? response,
+    BaseResponse<BotDetailTransactionHistoryResponse>? response,
     List<GroupedActivitiesModel>? activities,
   }) {
     return BotTransactionHistoryDetailState(

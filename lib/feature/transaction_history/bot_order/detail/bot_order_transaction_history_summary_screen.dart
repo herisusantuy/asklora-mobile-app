@@ -1,9 +1,10 @@
-part of '../bot_transaction_history_detail_screen.dart';
+part of 'bot_order_transaction_history_detail_screen.dart';
 
-class TransactionHistoryBotSummaryScreen extends StatelessWidget {
-  final List<BotSummaryTransactionModel> summaries;
+class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
+  final List<BotSummaryTransactionHistoryModel> summaries;
 
-  const TransactionHistoryBotSummaryScreen({required this.summaries, Key? key})
+  const BotOrderTransactionHistorySummaryScreen(
+      {required this.summaries, Key? key})
       : super(key: key);
 
   @override
@@ -15,17 +16,17 @@ class TransactionHistoryBotSummaryScreen extends StatelessWidget {
                       title: e.createdFormattedString,
                     ),
                     BotOrderTransactionHistorySummaryCard(
-                      title: 'Botstock ID',
+                      title: S.of(context).botStockId,
                       subTitle: e.pk,
                       showBottomBorder: true,
                     ),
                     BotOrderTransactionHistorySummaryCard(
-                      title: 'Investment Amount',
+                      title: S.of(context).investmentAmount,
                       subTitle: e.investmentAmountString,
                       showBottomBorder: true,
                     ),
                     BotOrderTransactionHistorySummaryCard(
-                      title: 'Trade Fee',
+                      title: S.of(context).tradeFee,
                       subTitle: 'HKD40.0',
                       showBottomBorder:
                           summaries.indexOf(e) == summaries.length - 1,

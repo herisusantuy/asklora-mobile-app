@@ -43,7 +43,7 @@ class TransactionHistoryContent extends StatelessWidget {
           ),
           const Expanded(
             child: TabBarView(children: [
-              AllTransactionHistoryList(),
+              TransactionHistoryList(),
               BotOrderTransactionHistoryList(),
               TransferTransactionHistoryList(),
             ]),

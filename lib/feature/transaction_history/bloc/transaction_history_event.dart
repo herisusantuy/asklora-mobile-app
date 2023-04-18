@@ -9,12 +9,6 @@ abstract class TransactionHistoryEvent extends Equatable {
 
 class FetchTransaction extends TransactionHistoryEvent {}
 
-class FetchBotTransactionDetail extends TransactionHistoryEvent {
-  final String orderId;
-
-  const FetchBotTransactionDetail(this.orderId);
-}
-
 class FetchBotOrderTransaction extends TransactionHistoryEvent {}
 
 class FetchTransferTransaction extends TransactionHistoryEvent {}

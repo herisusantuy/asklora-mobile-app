@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/utils/date_utils.dart';
-import '../../../../domain/grouped_model.dart';
-import '../../../../repository/transaction_history_repository.dart';
-import '../domain/bot_activities_transaction_model.dart';
-import '../domain/bot_transaction_history_response.dart';
+import '../../../domain/grouped_model.dart';
+import '../../../repository/transaction_history_repository.dart';
+import '../domain/bot_activities_transaction_history_model.dart';
+import '../domain/bot_detail_transaction_history_response.dart';
 import '../domain/grouped_activities_model.dart';
 
 part 'bot_transaction_history_detail_event.dart';
@@ -35,7 +35,7 @@ class BotTransactionHistoryDetailBloc extends Bloc<
   }
 
   List<GroupedActivitiesModel> groupedActivitiesModels(
-      List<BotActivitiesTransactionModel> activities) {
+      List<BotActivitiesTransactionHistoryModel> activities) {
     List<GroupedActivitiesModel> groupedActivities = [];
     DateTime dateTimeNow = DateTime.now();
     DateTime dateNow =

@@ -1,4 +1,4 @@
-part of '../transaction_history_screen.dart';
+part of '../presentation/transaction_history_screen.dart';
 
 class BotOrderTransactionHistoryCard extends StatelessWidget {
   final BotOrderTransactionModel botOrderTransactionModel;
@@ -13,7 +13,7 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => BotTransactionHistoryDetailScreen.open(
+      onTap: () => BotOrderTransactionHistoryDetailScreen.open(
           context, botOrderTransactionModel),
       child: Container(
         padding: const EdgeInsets.fromLTRB(17, 21, 17, 26),

@@ -1,11 +1,11 @@
-part of '../bot_transaction_history_detail_screen.dart';
+part of '../bot_order_transaction_history_detail_screen.dart';
 
-class TransactionHistoryContent extends StatelessWidget {
-  final List<BotSummaryTransactionModel> summaries;
+class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
+  final List<BotSummaryTransactionHistoryModel> summaries;
   final String botStatus;
   final String title;
 
-  const TransactionHistoryContent(
+  const BotOrderTransactionHistoryDetailContent(
       {required this.title,
       required this.summaries,
       required this.botStatus,
@@ -14,14 +14,14 @@ class TransactionHistoryContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TransactionHistoryTabScreen(header: _header(context), tabs: const [
-      'Summary',
-      'Activities'
+    return TransactionHistoryTabScreen(header: _header(context), tabs: [
+      S.of(context).summary,
+      S.of(context).activities
     ], tabViews: [
-      TransactionHistoryBotSummaryScreen(
+      BotOrderTransactionHistorySummaryScreen(
         summaries: summaries,
       ),
-      const TransactionHistoryBotActivitiesScreen(),
+      const BotOrderTransactionHistoryActivitiesScreen(),
     ]);
   }
 

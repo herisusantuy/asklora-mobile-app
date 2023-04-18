@@ -1,4 +1,4 @@
-part of '../bot_transaction_history_detail_screen.dart';
+part of '../bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistorySummaryCard extends StatelessWidget {
   final String title;

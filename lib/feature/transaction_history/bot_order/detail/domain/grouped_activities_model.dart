@@ -1,8 +1,9 @@
-import '../../../../domain/grouped_model.dart';
-import 'bot_activities_transaction_model.dart';
+
+import '../../../domain/grouped_model.dart';
+import 'bot_activities_transaction_history_model.dart';
 
 class GroupedActivitiesModel extends GroupedModel {
-  final List<BotActivitiesTransactionModel> data;
+  final List<BotActivitiesTransactionHistoryModel> data;
 
   const GroupedActivitiesModel(
       {required GroupType groupType,
@@ -11,7 +12,7 @@ class GroupedActivitiesModel extends GroupedModel {
       : super(groupType: groupType, groupTitle: groupTitle);
 
   GroupedActivitiesModel copyWith({
-    List<BotActivitiesTransactionModel>? data,
+    List<BotActivitiesTransactionHistoryModel>? data,
   }) {
     return GroupedActivitiesModel(
       groupType: groupType,
