@@ -36,13 +36,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(currency) => "當前價格 ${currency}";
 
-  static String m7(dateTime) => "到期日期 ${dateTime}";
+  static String m7(bot, startDate, endDate, duration) =>
+      "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
 
-  static String m8(dateTime) => "${dateTime}日後到期";
+  static String m8(dateTime) => "到期日期 ${dateTime}";
 
-  static String m9(currency) => "Botstock 總價值 (${currency})";
+  static String m9(dateTime) => "${dateTime}日後到期";
 
-  static String m10(currency) => "可提取金額 (${currency})";
+  static String m10(currency) => "Botstock 總價值 (${currency})";
+
+  static String m11(currency) => "可提取金額 (${currency})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -104,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("咦，無法獲取資料"),
+        "free": MessageLookupByLibrary.simpleMessage("免費"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
         "greetingScreenSubTitle":
@@ -125,8 +129,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("取消Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("續期Botstock"),
-        "portfolioDetailExpiredAt": m7,
-        "portfolioDetailExpiredIn": m8,
+        "portfolioDetailChartCaption": m7,
+        "portfolioDetailExpiredAt": m8,
+        "portfolioDetailExpiredIn": m9,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("平均虧損"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -171,10 +176,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("表現"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("總盈虧"),
-        "portfolioTotalBotStock": m9,
+        "portfolioTotalBotStock": m10,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
-        "portfolioWithdrawableAmount": m10,
+        "portfolioWithdrawableAmount": m11,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),

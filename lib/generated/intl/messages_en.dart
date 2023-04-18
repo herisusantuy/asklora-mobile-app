@@ -38,13 +38,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(currency) => "Current Price ${currency}";
 
-  static String m7(dateTime) => "Expired at ${dateTime}";
+  static String m7(bot, startDate, endDate, duration) =>
+      "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
 
-  static String m8(dateTime) => "Expired in \$${dateTime} days";
+  static String m8(dateTime) => "Expired at ${dateTime}";
 
-  static String m9(currency) => "Total Botstock Values (${currency})";
+  static String m9(dateTime) => "Expired in \$${dateTime} days";
 
-  static String m10(currency) => "Total Portfolio Value (${currency})";
+  static String m10(currency) => "Total Botstock Values (${currency})";
+
+  static String m11(currency) => "Total Portfolio Value (${currency})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -119,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
+        "free": MessageLookupByLibrary.simpleMessage("FREE"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
@@ -143,8 +147,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("END BOTSTOCK"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("ROLLOVER BOTSTOCK"),
-        "portfolioDetailExpiredAt": m7,
-        "portfolioDetailExpiredIn": m8,
+        "portfolioDetailChartCaption": m7,
+        "portfolioDetailChartEmptyMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Performance data will be available once the Botstock starts"),
+        "portfolioDetailExpiredAt": m8,
+        "portfolioDetailExpiredIn": m9,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("Avg. Loss"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -192,11 +200,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Performance"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("Total P&L"),
-        "portfolioTotalBotStock": m9,
+        "portfolioTotalBotStock": m10,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
             MessageLookupByLibrary.simpleMessage("Total Portfolio Value"),
-        "portfolioWithdrawableAmount": m10,
+        "portfolioWithdrawableAmount": m11,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),

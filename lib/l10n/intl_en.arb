@@ -31,6 +31,7 @@
   "fullName" : "Full Name",
   "phone" : "Phone",
   "dateJoined" : "Date Joined",
+  "free": "FREE",
   "errorGettingInformationTitle": "Unable to get information",
   "errorGettingInformationSubTitle": "There was an error when trying to get {detail}. Please try reloading the page",
   "@errorGettingInformationSubTitle": {
@@ -149,6 +150,25 @@
   "portfolioDetailButtonCancelBotStock": "CANCEL BOTSTOCK",
   "portfolioDetailButtonEndBotStock": "END BOTSTOCK",
   "portfolioDetailButtonRolloverBotStock": "ROLLOVER BOTSTOCK",
+  "portfolioDetailChartEmptyMessage": "Performance data will be available once the Botstock starts",
+  "portfolioDetailChartCaption": "Past {duration} performance of {bot}  ({startDate} - {endDate})",
+  "@portfolioDetailChartCaption": {
+    "placeholders": {
+      "bot": {
+        "type": "String"
+      },
+      "startDate": {
+        "type": "String"
+      },
+      "endDate": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+
   "portfolioTotalValue": "Total Portfolio Value",
   "portfolioWithdrawableAmount": "Total Portfolio Value ({currency})",
   "@portfolioWithdrawableAmount": {

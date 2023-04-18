@@ -360,6 +360,16 @@ class S {
     );
   }
 
+  /// `FREE`
+  String get free {
+    return Intl.message(
+      'FREE',
+      name: 'free',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Unable to get information`
   String get errorGettingInformationTitle {
     return Intl.message(
@@ -949,6 +959,27 @@ class S {
       name: 'portfolioDetailButtonRolloverBotStock',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Performance data will be available once the Botstock starts`
+  String get portfolioDetailChartEmptyMessage {
+    return Intl.message(
+      'Performance data will be available once the Botstock starts',
+      name: 'portfolioDetailChartEmptyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Past {duration} performance of {bot}  ({startDate} - {endDate})`
+  String portfolioDetailChartCaption(
+      String bot, String startDate, String endDate, String duration) {
+    return Intl.message(
+      'Past $duration performance of $bot  ($startDate - $endDate)',
+      name: 'portfolioDetailChartCaption',
+      desc: '',
+      args: [bot, startDate, endDate, duration],
     );
   }
 
