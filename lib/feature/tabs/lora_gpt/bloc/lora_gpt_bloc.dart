@@ -28,7 +28,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   void _onSearchQuery(
       OnSearchQuery onSearchQuery, Emitter<LoraGptState> emit) async {
     final query = state.query;
-    final tempList = List<Conversation>.of(state.conversations, growable: true);
+    final tempList = List<Conversation>.of(state.conversations);
     tempList.add(Me(state.query));
     tempList.add(Loading());
 
