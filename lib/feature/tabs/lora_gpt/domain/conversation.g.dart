@@ -10,13 +10,10 @@ Lora _$LoraFromJson(Map<String, dynamic> json) => Lora(
       json['response'] as String,
       json['session_id'] as String,
       json['type'] as String,
-      json['usage'] == null
-          ? null
-          : Usage.fromJson(json['usage'] as Map<String, dynamic>),
-    )..timestamp = json['timestamp'] as int;
+      Usage.fromJson(json['usage'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$LoraToJson(Lora instance) => <String, dynamic>{
-      'timestamp': instance.timestamp,
       'response': instance.response,
       'session_id': instance.sessionId,
       'type': instance.respType,

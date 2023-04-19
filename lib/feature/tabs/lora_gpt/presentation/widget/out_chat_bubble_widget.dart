@@ -6,7 +6,7 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import 'utils/traingle_chat_bubble_painter.dart';
+import 'utils/triangle_chat_bubble_painter.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message, {super.key});

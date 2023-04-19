@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'conversation.g.dart';
@@ -6,18 +7,12 @@ part 'conversation.g.dart';
 enum ConversationType { me, lora, loading }
 
 abstract class Conversation extends Equatable {
-  late int timestamp;
-
-  Conversation() {
-    timestamp = DateTime.now().millisecondsSinceEpoch;
-  }
-
   ConversationType type();
 
   static empty() => const [];
 
   @override
-  List<Object?> get props => [timestamp];
+  List<Object?> get props => [type()];
 }
 
 @JsonSerializable()
@@ -30,9 +25,9 @@ class Lora extends Conversation {
   final String respType;
 
   @JsonKey(name: 'usage')
-  final Usage? usage;
+  final Usage usage;
 
-  Lora(this.response, this.sessionId, this.respType, this.usage) : super();
+  Lora(this.response, this.sessionId, this.respType, this.usage);
 
   @override
   ConversationType type() => ConversationType.lora;
@@ -42,7 +37,7 @@ class Lora extends Conversation {
   Map<String, dynamic> toJson() => _$LoraToJson(this);
 
   @override
-  List<Object?> get props => [response, sessionId, respType, usage, timestamp];
+  List<Object?> get props => [response, sessionId, respType, usage];
 }
 
 @JsonSerializable()
@@ -56,7 +51,10 @@ class Usage extends Equatable {
 
   const Usage(this.promptTokens, this.completionTokens, this.totalTokens);
 
-  factory Usage.fromJson(Map<String, dynamic> json) => _$UsageFromJson(json);
+  factory Usage.fromJson(Map<String, dynamic> json) {
+    debugPrint('Krishna fro,JSON ${json}');
+    return _$UsageFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$UsageToJson(this);
 
@@ -77,7 +75,7 @@ class Me extends Conversation {
   ConversationType type() => ConversationType.me;
 
   @override
-  List<Object?> get props => [query, timestamp];
+  List<Object?> get props => [query];
 }
 
 class Loading extends Conversation {
