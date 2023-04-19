@@ -1,7 +1,9 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/bloc/bot_transaction_history_detail_bloc.dart';
+import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_activities_transaction_history_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/grouped_activities_model.dart';
+import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +19,7 @@ void main() async {
     late BotTransactionHistoryDetailBloc botTransactionHistoryDetailBloc;
 
     final BaseResponse<BotDetailTransactionHistoryResponse> successResponse =
-        BaseResponse.complete(const BotDetailTransactionHistoryResponse(
+        BaseResponse.complete(BotDetailTransactionHistoryResponse(
             '1',
             'AAPL',
             'APPLE',
@@ -28,7 +30,41 @@ void main() async {
             'pending',
             'Pull Up',
             [],
-            [],
+            [
+              BotActivitiesTransactionHistoryModel(
+                DateTime(2023, 04, 14),
+                0,
+                0,
+                0,
+                'buy',
+                0,
+                '',
+                0,
+                index: 1,
+              ),
+              BotActivitiesTransactionHistoryModel(
+                DateTime(2023, 04, 14),
+                0,
+                0,
+                0,
+                'buy',
+                0,
+                '',
+                0,
+                index: 1,
+              ),
+              BotActivitiesTransactionHistoryModel(
+                DateTime(2023, 04, 15),
+                0,
+                0,
+                0,
+                'buy',
+                0,
+                '',
+                0,
+                index: 1,
+              ),
+            ],
             0,
             0,
             '',
@@ -39,7 +75,51 @@ void main() async {
             0,
             0));
 
-    final List<GroupedActivitiesModel> groupedActivities = [];
+    final List<GroupedActivitiesModel> groupedActivities = [
+      GroupedActivitiesModel(
+          groupType: GroupType.others,
+          groupTitle: '2023-04-14',
+          data: [
+            BotActivitiesTransactionHistoryModel(
+              DateTime(2023, 04, 14),
+              0,
+              0,
+              0,
+              'buy',
+              0,
+              '',
+              0,
+              index: 1,
+            ),
+            BotActivitiesTransactionHistoryModel(
+              DateTime(2023, 04, 14),
+              0,
+              0,
+              0,
+              'buy',
+              0,
+              '',
+              0,
+              index: 1,
+            ),
+          ]),
+      GroupedActivitiesModel(
+          groupType: GroupType.others,
+          groupTitle: '2023-04-15',
+          data: [
+            BotActivitiesTransactionHistoryModel(
+              DateTime(2023, 04, 15),
+              0,
+              0,
+              0,
+              'buy',
+              0,
+              '',
+              0,
+              index: 1,
+            ),
+          ]),
+    ];
     final BaseResponse<BotDetailTransactionHistoryResponse> errorResponse =
         BaseResponse.error();
 

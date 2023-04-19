@@ -2,11 +2,11 @@ import '../../../core/utils/extensions.dart';
 import 'chart_models.dart';
 
 class BotRecommendationChartModel extends ChartDataSet {
-  BotRecommendationChartModel.fromJson(Map<String, dynamic> json) {
-    date = DateTime.parse(json['date']);
-    index = json['i'] ?? 0;
-    price = checkDouble(json['price']);
-    hedgeShare = checkDouble(json['hedge_share']);
-    currentPnlRet = checkDouble(json['current_pnl_ret']);
-  }
+  BotRecommendationChartModel.fromJson(Map<String, dynamic> json)
+      : super(
+            DateTime.parse(json['date']),
+            checkDouble(json['price']),
+            checkDouble(json['hedge_share']),
+            checkDouble(json['current_pnl_ret']),
+            index: json['i'] ?? 0);
 }

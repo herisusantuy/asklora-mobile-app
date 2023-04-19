@@ -90,12 +90,7 @@ class BotStockRepository {
     List<BotPortfolioChartDataSet> finalChartData = [];
     int index = 0;
     for (var element in chartData) {
-      finalChartData.add(BotPortfolioChartDataSet(
-          index: index++,
-          date: element.date,
-          price: element.price,
-          hedgeShare: element.hedgeShare,
-          currentPnlRet: element.currentPnlRet));
+      finalChartData.add(element.copyWith(index: index++));
     }
     return finalChartData;
   }

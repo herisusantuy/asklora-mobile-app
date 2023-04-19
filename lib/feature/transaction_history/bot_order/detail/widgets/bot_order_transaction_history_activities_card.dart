@@ -26,7 +26,7 @@ class BotOrderTransactionHistoryActivitiesCard extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomTextNew(
-                  botActivitiesTransactionModel.sideString.capitalize(),
+                  botActivitiesTransactionModel.side.capitalize(),
                   style: AskLoraTextStyles.h6,
                 ),
               ),
