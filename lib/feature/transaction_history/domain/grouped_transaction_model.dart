@@ -1,18 +1,14 @@
-import 'package:equatable/equatable.dart';
-
+import 'grouped_model.dart';
 import 'transaction_model.dart';
 
-enum GroupType { today, others }
-
-class GroupedTransactionModel extends Equatable {
-  final GroupType groupType;
-  final String groupTitle;
+class GroupedTransactionModel extends GroupedModel {
   final List<TransactionModel> data;
 
   const GroupedTransactionModel(
-      {required this.groupType,
-      required this.groupTitle,
-      this.data = const []});
+      {required this.data,
+      required GroupType groupType,
+      required String groupTitle})
+      : super(groupType: groupType, groupTitle: groupTitle);
 
   GroupedTransactionModel copyWith({
     List<TransactionModel>? data,

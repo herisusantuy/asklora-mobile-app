@@ -56,11 +56,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account Settings"),
+        "activities": MessageLookupByLibrary.simpleMessage("Activities"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botTradeBottomSheetAmountMinimum": m0,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("How much are you investing?"),
@@ -124,9 +126,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
+        "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
         "free": MessageLookupByLibrary.simpleMessage("FREE"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
@@ -136,6 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
         "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
+        "investmentAmount":
+            MessageLookupByLibrary.simpleMessage("Investment Amount"),
         "investmentPreferences":
             MessageLookupByLibrary.simpleMessage("Investment Preferences"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -148,6 +154,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel":
             MessageLookupByLibrary.simpleMessage("Office Hours"),
+        "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
+        "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
+        "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
@@ -223,9 +232,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "shares": MessageLookupByLibrary.simpleMessage("Shares"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to sign out ?"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
+        "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -242,6 +253,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
+        "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
+        "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
         "transactionHistory":
             MessageLookupByLibrary.simpleMessage("Transaction History"),
         "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("All"),

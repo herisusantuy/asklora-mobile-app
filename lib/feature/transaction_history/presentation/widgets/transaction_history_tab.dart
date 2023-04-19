@@ -1,15 +1,28 @@
-part of '../transaction_history_screen.dart';
+import 'package:flutter/material.dart';
 
-class TransactionHistoryContent extends StatelessWidget {
-  const TransactionHistoryContent({Key? key}) : super(key: key);
+import '../../../../core/styles/asklora_colors.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/values/app_values.dart';
+
+class TransactionHistoryTabScreen extends StatelessWidget {
+  final Widget header;
+  final List<String> tabs;
+  final List<Widget> tabViews;
+
+  const TransactionHistoryTabScreen(
+      {required this.header,
+      required this.tabs,
+      required this.tabViews,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: tabs.length,
       child: Column(
         children: [
-          CustomHeader(title: S.of(context).transactionHistoryTitle),
+          header,
           Container(
             margin: AppValues.screenHorizontalPadding.copyWith(top: 14),
             decoration: BoxDecoration(
@@ -26,27 +39,13 @@ class TransactionHistoryContent extends StatelessWidget {
                 indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: AskLoraColors.primaryGreen),
-                tabs: [
-                  Tab(
-                    text: S.of(context).transactionHistoryTabAll,
-                  ),
-                  Tab(
-                    text: S.of(context).transactionHistoryTabOrders,
-                  ),
-                  Tab(
-                    text: S.of(context).transactionHistoryTabTransfer,
-                  ),
-                ]),
+                tabs: tabs.map((e) => Tab(text: e)).toList()),
           ),
           const SizedBox(
             height: 20,
           ),
-          const Expanded(
-            child: TabBarView(children: [
-              TransactionHistoryList(),
-              BotOrderTransactionHistoryList(),
-              TransferTransactionHistoryList(),
-            ]),
+          Expanded(
+            child: TabBarView(children: tabViews),
           ),
         ],
       ),

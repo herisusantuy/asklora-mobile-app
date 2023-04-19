@@ -1,4 +1,4 @@
-part of '../transaction_history_screen.dart';
+part of '../presentation/transaction_history_screen.dart';
 
 class TransferTransactionHistoryCard extends StatelessWidget {
   final TransactionModel transactionModel;

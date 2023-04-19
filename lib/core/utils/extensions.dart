@@ -56,6 +56,10 @@ extension StringExtension on String {
       ..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size.width;
   }
+
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+  }
 }
 
 extension PasswordValidators on String {

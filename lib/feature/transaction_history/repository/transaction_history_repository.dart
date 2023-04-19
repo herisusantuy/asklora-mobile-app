@@ -1,5 +1,6 @@
 import '../../../core/domain/base_response.dart';
 import '../../bot_stock/utils/bot_stock_utils.dart';
+import '../bot_order/detail/domain/bot_detail_transaction_history_response.dart';
 import '../domain/transaction_history_api_client.dart';
 import '../domain/transaction_model.dart';
 
@@ -24,6 +25,20 @@ class TransactionHistoryRepository {
           .map((element) => BotOrderTransactionModel.fromJson(element))));
       return BaseResponse.complete(transactions);
     } catch (e) {
+      return BaseResponse.error();
+    }
+  }
+
+  Future<BaseResponse<BotDetailTransactionHistoryResponse>>
+      fetchBotTransactionsDetail(String orderId) async {
+    try {
+      var botOrderTransactionHistoryResponse =
+          await _transactionHistoryApiClient.fetchBotTransactionDetail(orderId);
+
+      return BaseResponse.complete(BotDetailTransactionHistoryResponse.fromJson(
+          botOrderTransactionHistoryResponse.data));
+    } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }
