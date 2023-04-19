@@ -131,14 +131,14 @@ class BotDetailTransactionHistoryResponse extends Equatable {
         botAppsName,
         summary,
         activities,
-    botStockValue,
-    stockValue,
-    duration,
-    rolloverCount,
-    currentPnlAmount,
-    currentPnlRet,
-    maxLossPct,
-    targetProfitPct,
-    investmentAmount
+        botStockValue,
+        stockValue,
+        duration,
+        rolloverCount,
+        currentPnlAmount,
+        currentPnlRet,
+        maxLossPct,
+        targetProfitPct,
+        investmentAmount
       ];
 }
