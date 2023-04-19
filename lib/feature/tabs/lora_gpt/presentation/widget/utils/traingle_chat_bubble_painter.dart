@@ -7,7 +7,7 @@ class TriangleChatBubblePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint()..color = backgroundColor;
+    final paint = Paint()..color = backgroundColor;
 
     var path = Path();
     path.lineTo(-5, 0);

@@ -22,9 +22,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   void _onEditQuery(OnEditQuery onEditQuery, Emitter<LoraGptState> emit) {
     emit(state.copyWith(
-        query: onEditQuery.query,
-        resetSearchField: false,
-        status: ResponseState.unknown));
+        query: onEditQuery.query, status: ResponseState.unknown));
   }
 
   void _onSearchQuery(
@@ -35,10 +33,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     tempList.add(Loading());
 
     emit(state.copyWith(
-        status: ResponseState.loading,
-        conversations: tempList,
-        resetSearchField: true,
-        query: ''));
+        status: ResponseState.loading, conversations: tempList, query: ''));
 
     final response = await _loraGptRepository
         .searchQuery(QueryRequest(input: query, sessionId: state.sessionId));

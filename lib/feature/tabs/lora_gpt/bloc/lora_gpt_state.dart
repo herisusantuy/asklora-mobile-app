@@ -17,7 +17,6 @@ class LoraGptState extends Equatable {
       {String? query,
       String? sessionId,
       List<Conversation>? conversations,
-      bool? resetSearchField,
       ResponseState? status}) {
     return LoraGptState(
       query: query ?? this.query,
