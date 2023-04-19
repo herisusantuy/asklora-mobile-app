@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../core/utils/date_utils.dart';
+import '../domain/grouped_model.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_model.dart';
 import '../repository/transaction_history_repository.dart';
@@ -29,20 +30,20 @@ class TransactionHistoryBloc
     List<TransactionModel> transactions = transactionHistory.data ?? [];
     emit(state.copyWith(
         response: transactionHistory,
-        allTransactions: groupedNotificationModels(transactions),
-        botOrderTransactions: groupedNotificationModels(transactions
+        allTransactions: groupedTransactionModels(transactions),
+        botOrderTransactions: groupedTransactionModels(transactions
             .where((element) =>
                 element.transactionHistoryType ==
                 TransactionHistoryType.botOrder)
             .toList()),
-        transferTransactions: groupedNotificationModels(transactions
+        transferTransactions: groupedTransactionModels(transactions
             .where((element) =>
                 element.transactionHistoryType ==
                 TransactionHistoryType.transfer)
             .toList())));
   }
 
-  List<GroupedTransactionModel> groupedNotificationModels(
+  List<GroupedTransactionModel> groupedTransactionModels(
       List<TransactionModel> transactions) {
     List<GroupedTransactionModel> groupedTransactions = [];
     DateTime dateTimeNow = DateTime.now();
@@ -66,7 +67,7 @@ class TransactionHistoryBloc
         }
       } else {
         ///CREATE OTHER GROUP EACH DATE
-        String createdAtFormatted = formatDateAsString(createdAt);
+        String createdAtFormatted = formatDateTimeAsString(createdAt);
         int groupIndex = groupedTransactions
             .indexWhere((element) => element.groupTitle == createdAtFormatted);
         if (groupIndex >= 0) {

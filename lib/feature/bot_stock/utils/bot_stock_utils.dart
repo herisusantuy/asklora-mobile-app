@@ -95,7 +95,7 @@ enum BotStatus {
   active('open', 'Active', AskLoraColors.primaryGreen),
   activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen),
   closed('closed', 'Closed', AskLoraColors.primaryGreen),
-  cancel('cancel', 'Cancel', AskLoraColors.primaryGreen);
+  cancel('cancel', 'Cancel', AskLoraColors.primaryMagenta);
 
   final String value;
   final String name;
@@ -115,5 +115,5 @@ enum BotStatus {
   const BotStatus(this.value, this.name, this.color);
 }
 
-String newExpiryDateOnRollover(String expireDate) => formatDateAsString(
+String newExpiryDateOnRollover(String expireDate) => formatDateTimeAsString(
     DateTime.parse(expireDate).add(const Duration(days: 14)));

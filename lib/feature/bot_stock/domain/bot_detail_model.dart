@@ -109,7 +109,7 @@ class BotDetailModel extends Equatable {
       this.headquarters);
 
   String get formattedStartDate =>
-      formatDateAsString(DateTime.parse(estimatedStartDate));
+      formatDateTimeAsString(DateTime.parse(estimatedStartDate));
 
   String format(DateTime sourceDateTime) {
     try {

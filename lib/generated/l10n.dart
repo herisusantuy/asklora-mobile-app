@@ -440,6 +440,116 @@ class S {
     );
   }
 
+  /// `Botstock ID`
+  String get botStockId {
+    return Intl.message(
+      'Botstock ID',
+      name: 'botStockId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Amount`
+  String get investmentAmount {
+    return Intl.message(
+      'Investment Amount',
+      name: 'investmentAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade Fee`
+  String get tradeFee {
+    return Intl.message(
+      'Trade Fee',
+      name: 'tradeFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ended Amount`
+  String get endedAmount {
+    return Intl.message(
+      'Ended Amount',
+      name: 'endedAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Summary`
+  String get summary {
+    return Intl.message(
+      'Summary',
+      name: 'summary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activities`
+  String get activities {
+    return Intl.message(
+      'Activities',
+      name: 'activities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filled Price`
+  String get filledPrice {
+    return Intl.message(
+      'Filled Price',
+      name: 'filledPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shares`
+  String get shares {
+    return Intl.message(
+      'Shares',
+      name: 'shares',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Started`
+  String get orderStarted {
+    return Intl.message(
+      'Order Started',
+      name: 'orderStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Rollover`
+  String get orderRollover {
+    return Intl.message(
+      'Order Rollover',
+      name: 'orderRollover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Expired`
+  String get orderExpired {
+    return Intl.message(
+      'Order Expired',
+      name: 'orderExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Unable to get information`
   String get errorGettingInformationTitle {
     return Intl.message(
@@ -1158,6 +1268,16 @@ class S {
     return Intl.message(
       'Today',
       name: 'transactionHistoryToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total P/L is`
+  String get totalPnlIs {
+    return Intl.message(
+      'Total P/L is',
+      name: 'totalPnlIs',
       desc: '',
       args: [],
     );

@@ -1,4 +1,4 @@
-part of '../transaction_history_screen.dart';
+part of '../presentation/transaction_history_screen.dart';
 
 class TransferTransactionHistoryList extends StatelessWidget {
   const TransferTransactionHistoryList({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class TransferTransactionHistoryList extends StatelessWidget {
           children: state.transferTransactions
               .map((e) => TransactionHistoryGroupWidget(
                   title: e.groupTitle,
-                  transactions: e.data,
+                  data: e.data,
                   showBottomBorder: state.transferTransactions.indexOf(e) ==
                       state.transferTransactions.length - 1))
               .toList(),

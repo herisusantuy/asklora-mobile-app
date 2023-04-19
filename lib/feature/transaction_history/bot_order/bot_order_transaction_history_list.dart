@@ -1,4 +1,4 @@
-part of '../transaction_history_screen.dart';
+part of '../presentation/transaction_history_screen.dart';
 
 class BotOrderTransactionHistoryList extends StatelessWidget {
   const BotOrderTransactionHistoryList({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class BotOrderTransactionHistoryList extends StatelessWidget {
                   title: e.groupType == GroupType.today
                       ? S.of(context).transactionHistoryToday
                       : e.groupTitle,
-                  transactions: e.data,
+                  data: e.data,
                   showBottomBorder: state.botOrderTransactions.indexOf(e) ==
                       state.botOrderTransactions.length - 1))
               .toList(),

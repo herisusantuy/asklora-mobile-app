@@ -48,6 +48,8 @@ import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
+import '../../feature/transaction_history/bot_order/detail/bot_order_transaction_history_detail_screen.dart';
+import '../../feature/transaction_history/domain/transaction_model.dart';
 import '../../feature/transaction_history/presentation/transaction_history_screen.dart';
 import '../domain/pair.dart';
 import '../presentation/acknowledgement/domain/acknowledgement_model.dart';
@@ -285,6 +287,12 @@ class RouterGenerator {
         return MaterialPageRoute(
             settings: settings,
             builder: (_) => const TransactionHistoryScreen());
+      case BotOrderTransactionHistoryDetailScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => BotOrderTransactionHistoryDetailScreen(
+                  transactionModel: settings.arguments as TransactionModel,
+                ));
       default:
         return MaterialPageRoute(
             settings: settings,

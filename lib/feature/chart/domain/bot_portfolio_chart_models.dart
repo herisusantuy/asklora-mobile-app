@@ -11,7 +11,7 @@ class BotPortfolioChartDataSet extends ChartDataSet {
       super.currentPnlRet});
 
   BotPortfolioChartDataSet.fromJson(Map<String, dynamic> json) {
-    date = DateTime.parse(formatDateAsString(json['created']));
+    date = DateTime.parse(formatDateTimeAsString(json['created']));
     index = json['i'] ?? 0;
     price = checkDouble(json['prices']);
     hedgeShare = checkDouble(json['filled_qty']);
