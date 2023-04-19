@@ -68,7 +68,8 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
         BotOrderTransactionHistorySummaryCard(
           title: S.of(context).endedAmount,
           subTitle: botSummaryTransactionHistoryModel.investmentAmountString,
-          additionalText: 'Total P/L is +295.00',
+          additionalText:
+              '${S.of(context).totalPnlIs} ${botSummaryTransactionHistoryModel.finalPnlAmountString}',
           showBottomBorder: true,
         ),
       ],

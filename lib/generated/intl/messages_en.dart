@@ -253,6 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
+        "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
         "transactionHistory":
             MessageLookupByLibrary.simpleMessage("Transaction History"),

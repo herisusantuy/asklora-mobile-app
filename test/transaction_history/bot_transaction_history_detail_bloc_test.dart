@@ -30,11 +30,11 @@ void main() async {
             'pending',
             'Pull Up', [], [
       BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-14', 'Buy', 22, 10, 200),
+          'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
       BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-14', 'Buy', 22, 10, 200),
+          'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
       BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-15', 'Buy', 22, 10, 200),
+          'x', '2023-04-15', 'Buy', 22, 10, 200, 0, 0),
     ]));
 
     final List<GroupedActivitiesModel> groupedActivities = [
@@ -43,16 +43,16 @@ void main() async {
           groupTitle: '2023-04-14',
           data: [
             BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-14', 'Buy', 22, 10, 200),
+                'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
             BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-14', 'Buy', 22, 10, 200),
+                'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
           ]),
       const GroupedActivitiesModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-15',
           data: [
             BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-15', 'Buy', 22, 10, 200),
+                'x', '2023-04-15', 'Buy', 22, 10, 200, 0, 0),
           ]),
     ];
     final BaseResponse<BotDetailTransactionHistoryResponse> errorResponse =

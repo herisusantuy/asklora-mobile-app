@@ -8,7 +8,7 @@ part 'bot_activities_transaction_history_model.g.dart';
 
 @JsonSerializable()
 class BotActivitiesTransactionHistoryModel extends Equatable {
-  @JsonKey(name: 'bot_order__pk')
+  @JsonKey(name: 'pk')
   final String pk;
   final String created;
   final String side;
@@ -18,6 +18,10 @@ class BotActivitiesTransactionHistoryModel extends Equatable {
   final double filledAvgPrice;
   @JsonKey(name: 'invested')
   final double invested;
+  @JsonKey(name: 'pnl_ret')
+  final double pnlRet;
+  @JsonKey(name: 'pnl_amt')
+  final double pnlAmt;
 
   String get investedString {
     double investmentAmountDouble = checkDouble(invested);
@@ -42,13 +46,14 @@ class BotActivitiesTransactionHistoryModel extends Equatable {
       formatDateTimeAsString(created, dateFormat: 'HH:mm:ss');
 
   const BotActivitiesTransactionHistoryModel(
-    this.pk,
-    this.created,
-    this.side,
-    this.filledQty,
-    this.filledAvgPrice,
-    this.invested,
-  );
+      this.pk,
+      this.created,
+      this.side,
+      this.filledQty,
+      this.filledAvgPrice,
+      this.invested,
+      this.pnlRet,
+      this.pnlAmt);
 
   factory BotActivitiesTransactionHistoryModel.fromJson(
           Map<String, dynamic> json) =>

@@ -14,6 +14,21 @@ class BotSummaryTransactionHistoryModel extends Equatable {
   final String status;
   @JsonKey(name: 'investment_amount')
   final double investmentAmount;
+  @JsonKey(name: 'bot_cash_balance')
+  final double botCashBalance;
+  @JsonKey(name: 'final_return')
+  final double? finalReturn;
+  @JsonKey(name: 'final_pnl_amount')
+  final double? finalPnlAmount;
+
+  String get finalPnlAmountString {
+    double finalPnlAmountDouble = checkDouble(finalPnlAmount);
+    return (finalPnlAmountDouble > 0)
+        ? '+$finalPnlAmountDouble'
+        : (finalPnlAmountDouble < 0)
+            ? '$finalPnlAmountDouble'
+            : 'NA';
+  }
 
   String get investmentAmountString {
     double investmentAmountDouble = checkDouble(investmentAmount);
@@ -26,7 +41,14 @@ class BotSummaryTransactionHistoryModel extends Equatable {
       formatDateTimeAsString(created, dateFormat: 'yyyy-MM-dd HH:mm:ss');
 
   const BotSummaryTransactionHistoryModel(
-      this.pk, this.created, this.updated, this.status, this.investmentAmount);
+      this.pk,
+      this.created,
+      this.updated,
+      this.status,
+      this.investmentAmount,
+      this.botCashBalance,
+      this.finalReturn,
+      this.finalPnlAmount);
 
   factory BotSummaryTransactionHistoryModel.fromJson(
           Map<String, dynamic> json) =>

@@ -1273,6 +1273,16 @@ class S {
     );
   }
 
+  /// `Total P/L is`
+  String get totalPnlIs {
+    return Intl.message(
+      'Total P/L is',
+      name: 'totalPnlIs',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Notification Setting`
   String get notificationSetting {
     return Intl.message(

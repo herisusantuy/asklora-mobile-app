@@ -220,6 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("交易費用"),
         "transactionHistory": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("全部"),
