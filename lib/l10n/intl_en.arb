@@ -118,7 +118,7 @@
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": " DEPOSIT TO START TRADING",
   "botTradeBottomSheetCancelBotStockConfirmationTitle": "The investment amount and Bot management fee (HKD1,500) will be returned to your account.",
   "botTradeBottomSheetRolloverConfirmationButton": "CONFIRM ROLLOVER",
-  "portfolioDetailPerformanceTitle": "Performance",
+
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
   "portfolioDetailPerformanceTotalPL": "Total P&L",
@@ -211,7 +211,9 @@
       }
     }
   },
+  "performance": "Performance",
   "portfolioTotalPL": "Total P/L",
+
   "portfolioYourBotStock": "Your Botstocks",
   "transactionHistoryTitle": "Transaction History",
   "transactionHistoryTabAll": "All",

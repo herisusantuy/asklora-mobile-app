@@ -160,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
+        "performance": MessageLookupByLibrary.simpleMessage("Performance"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "portfolioBuyingPower": m5,
         "portfolioCurrentPrice": m6,
@@ -218,8 +219,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Indicates how many shares of a company are currently owned by you."),
         "portfolioDetailPerformanceStockValues":
             MessageLookupByLibrary.simpleMessage("Stock Values (HKD)"),
-        "portfolioDetailPerformanceTitle":
-            MessageLookupByLibrary.simpleMessage("Performance"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("Total P&L"),
         "portfolioTotalBotStock": m10,

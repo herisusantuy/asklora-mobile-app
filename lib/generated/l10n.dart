@@ -852,16 +852,6 @@ class S {
     );
   }
 
-  /// `Performance`
-  String get portfolioDetailPerformanceTitle {
-    return Intl.message(
-      'Performance',
-      name: 'portfolioDetailPerformanceTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Botstock Values (HKD)`
   String get portfolioDetailPerformanceBotStockValues {
     return Intl.message(
@@ -1200,6 +1190,16 @@ class S {
       name: 'portfolioTotalBotStock',
       desc: '',
       args: [currency],
+    );
+  }
+
+  /// `Performance`
+  String get performance {
+    return Intl.message(
+      'Performance',
+      name: 'performance',
+      desc: '',
+      args: [],
     );
   }
 

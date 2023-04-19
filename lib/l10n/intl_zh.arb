@@ -117,7 +117,6 @@
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "免費 Botstock 已成功加至\n你嘅投資組合！",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "存入資金正式交易",
   "botTradeBottomSheetCancelBotStockConfirmationTitle": "投資額及交易費用 (HKD1,500) 會自動轉至你嘅賬戶。",
-  "portfolioDetailPerformanceTitle": "表現",
   "portfolioDetailPerformanceBotStockValues": "Botstock 價值 (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "投資金額 (HKD)",
   "portfolioDetailPerformanceTotalPL": "總盈虧",
@@ -208,6 +207,7 @@
       }
     }
   },
+  "performance": "表現",
   "portfolioTotalPL": "總盈虧",
   "portfolioYourBotStock": "你的Botstocks",
   "transactionHistoryTitle": "交易歷史",

@@ -137,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderStarted": MessageLookupByLibrary.simpleMessage("訂單已開始"),
         "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
+        "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "portfolioBuyingPower": m5,
         "portfolioCurrentPrice": m6,
@@ -189,8 +190,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("持股數量"),
         "portfolioDetailPerformanceStockValues":
             MessageLookupByLibrary.simpleMessage("股票價值 (HKD)"),
-        "portfolioDetailPerformanceTitle":
-            MessageLookupByLibrary.simpleMessage("表現"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalBotStock": m10,

@@ -1,9 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/bloc/bot_transaction_history_detail_bloc.dart';
-import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_activities_transaction_history_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/grouped_activities_model.dart';
-import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -28,33 +26,20 @@ void main() async {
             true,
             'open',
             'pending',
-            'Pull Up', [], [
-      BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
-      BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
-      BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-15', 'Buy', 22, 10, 200, 0, 0),
-    ]));
+            'Pull Up',
+            [],
+            [],
+            0,
+            0,
+            '',
+            0,
+            0,
+            0,
+            0,
+            0,
+            0));
 
-    final List<GroupedActivitiesModel> groupedActivities = [
-      const GroupedActivitiesModel(
-          groupType: GroupType.others,
-          groupTitle: '2023-04-14',
-          data: [
-            BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
-            BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
-          ]),
-      const GroupedActivitiesModel(
-          groupType: GroupType.others,
-          groupTitle: '2023-04-15',
-          data: [
-            BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-15', 'Buy', 22, 10, 200, 0, 0),
-          ]),
-    ];
+    final List<GroupedActivitiesModel> groupedActivities = [];
     final BaseResponse<BotDetailTransactionHistoryResponse> errorResponse =
         BaseResponse.error();
 

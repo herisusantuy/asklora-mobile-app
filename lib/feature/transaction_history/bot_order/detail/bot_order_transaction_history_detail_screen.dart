@@ -11,13 +11,19 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/extensions.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../core/presentation/round_colored_box.dart';
+import '../../../../core/values/app_values.dart';
+import '../../../bot_stock/presentation/widgets/column_text.dart';
+import '../../../bot_stock/presentation/widgets/pair_column_text.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../chart/presentation/chart_animation.dart';
 import '../../domain/grouped_model.dart';
 import '../../domain/transaction_model.dart';
 import '../../presentation/widgets/transaction_history_group_title.dart';
 import '../../presentation/widgets/transaction_history_tab.dart';
 import '../../repository/transaction_history_repository.dart';
 import 'domain/bot_activities_transaction_history_model.dart';
+import 'domain/bot_detail_transaction_history_response.dart';
 import 'domain/bot_summary_transaction_history_model.dart';
 import 'bloc/bot_transaction_history_detail_bloc.dart';
 
@@ -26,6 +32,7 @@ part 'widgets/bot_order_transaction_history_detail_content.dart';
 part 'bot_order_transaction_history_summary_screen.dart';
 
 part 'bot_order_transaction_history_activities_screen.dart';
+part 'bot_order_transaction_history_performance_screen.dart';
 
 part 'widgets/bot_order_transaction_history_summary_card.dart';
 part 'widgets/bot_order_transaction_history_activities_group_widget.dart';
@@ -73,7 +80,6 @@ class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
               content: BotOrderTransactionHistoryDetailContent(
                 title: transactionModel.titleString,
                 botStatus: transactionModel.statusString,
-                summaries: state.response.data?.summary ?? [],
               ),
             );
           },

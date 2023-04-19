@@ -187,7 +187,6 @@ class BotStockRepository {
           .cancelOrder(BotOrderRequest(orderId: botOrderId));
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }

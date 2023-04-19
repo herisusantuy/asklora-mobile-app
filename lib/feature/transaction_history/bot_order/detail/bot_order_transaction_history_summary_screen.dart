@@ -2,35 +2,46 @@ part of 'bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
   final BotStatus botStatusType;
-  final List<BotSummaryTransactionHistoryModel> summaries;
 
   const BotOrderTransactionHistorySummaryScreen(
-      {required this.summaries, required this.botStatusType, Key? key})
+      {required this.botStatusType, Key? key})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ListView(
-        reverse: true,
-        children: summaries.map((e) => _getCard(context, e)).toList(),
-      );
+  Widget build(BuildContext context) => BlocBuilder<
+          BotTransactionHistoryDetailBloc, BotTransactionHistoryDetailState>(
+      buildWhen: (previous, current) =>
+          previous.response.state != current.response.state,
+      builder: (context, state) {
+        return ListView(
+          reverse: true,
+          children: (state.response.data?.summary ?? [])
+              .map((e) =>
+                  _getCard(context, e, state.response.data?.summary.indexOf(e)))
+              .toList(),
+        );
+      });
 
-  Widget _getCard(BuildContext context,
-      BotSummaryTransactionHistoryModel botSummaryTransactionHistoryModel) {
-    if (summaries.indexOf(botSummaryTransactionHistoryModel) == 0) {
+  Widget _getCard(
+      BuildContext context,
+      BotSummaryTransactionHistoryModel botSummaryTransactionHistoryModel,
+      int? index) {
+    if (index == 0) {
       return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,
-          S.of(context).orderStarted);
+          S.of(context).orderStarted, index);
     } else if (botStatusType == BotStatus.closed) {
       return _expiredCard(context, botSummaryTransactionHistoryModel);
     } else {
       return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,
-          S.of(context).orderRollover);
+          S.of(context).orderRollover, index);
     }
   }
 
   Widget _startedAndRolloverCard(
       BuildContext context,
       BotSummaryTransactionHistoryModel botSummaryTransactionHistoryModel,
-      String additionalTitleInfo) {
+      String additionalTitleInfo,
+      int? index) {
     return Column(
       children: [
         TransactionHistoryGroupTitle(
@@ -50,8 +61,7 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
         BotOrderTransactionHistorySummaryCard(
           title: S.of(context).tradeFee,
           subTitle: 'HKD40.0',
-          showBottomBorder:
-              summaries.indexOf(botSummaryTransactionHistoryModel) == 0,
+          showBottomBorder: index == 0,
         ),
       ],
     );
