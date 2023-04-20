@@ -27,7 +27,7 @@ class KeyInfo extends StatelessWidget {
             height: 20,
           ),
           PairColumnText(
-              leftTitle: S.of(context).portfolioDetailKeyInfoInvestmentPeriod,
+              leftTitle: S.of(context).investmentPeriod,
               leftSubTitle: botActiveOrderDetailModel.botDetail.duration,
               rightTitle: S.of(context).portfolioDetailKeyInfoDaysTillExpiry,
               rightSubTitle: botActiveOrderDetailModel.daysToExpireString),
