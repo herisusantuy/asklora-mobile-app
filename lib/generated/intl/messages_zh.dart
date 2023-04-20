@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
@@ -58,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
+        "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
         "botTradeBottomSheetAmountMinimum": m0,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("你想投資嘅金額係？"),
@@ -106,14 +108,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "corePlan": MessageLookupByLibrary.simpleMessage("核心計劃"),
+        "currentPrice": MessageLookupByLibrary.simpleMessage("Current Price"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
+        "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("咦，無法獲取資料"),
+        "estMaxLossPercent": MessageLookupByLibrary.simpleMessage("預計最大損失%"),
+        "estMaxProfitPercent": MessageLookupByLibrary.simpleMessage("預計最大收益%"),
+        "estStopLossPercent": MessageLookupByLibrary.simpleMessage("預計止損 %"),
+        "estTakeProfitPercent": MessageLookupByLibrary.simpleMessage("預計止賺%"),
+        "estimatedEndDate": MessageLookupByLibrary.simpleMessage("預計結束日期"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("成交價格"),
+        "founded": MessageLookupByLibrary.simpleMessage("成立年份"),
         "free": MessageLookupByLibrary.simpleMessage("免費"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
@@ -122,10 +132,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
+        "headquarters": MessageLookupByLibrary.simpleMessage("總部地點"),
+        "howItWorks": MessageLookupByLibrary.simpleMessage("如何運作"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
+        "industry": MessageLookupByLibrary.simpleMessage("行業"),
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
+        "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
         "investmentPreferences": MessageLookupByLibrary.simpleMessage("投資偏好"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
+        "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "notificationSetting": MessageLookupByLibrary.simpleMessage("通知設定"),
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
@@ -171,8 +186,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("預計止損 %"),
         "portfolioDetailKeyInfoEstimatedTakeProfit":
             MessageLookupByLibrary.simpleMessage("預計止賺%"),
-        "portfolioDetailKeyInfoInvestmentPeriod":
-            MessageLookupByLibrary.simpleMessage("投資期"),
         "portfolioDetailKeyInfoStartTime":
             MessageLookupByLibrary.simpleMessage("開始時間"),
         "portfolioDetailKeyInfoTitle":
@@ -199,10 +212,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m11,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
+        "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
+        "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
+        "startDate": MessageLookupByLibrary.simpleMessage("最佳開始日期"),
         "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),
         "summary": MessageLookupByLibrary.simpleMessage("摘要"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),

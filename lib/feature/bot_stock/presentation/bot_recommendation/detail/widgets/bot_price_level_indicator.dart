@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../utils/bot_stock_utils.dart';
 
 class BotPriceLevelIndicator extends StatelessWidget {
@@ -28,8 +29,8 @@ class BotPriceLevelIndicator extends StatelessWidget {
             titleBackgroundColor: AskLoraColors.lightMagenta,
             textColor: AskLoraColors.primaryMagenta,
             title: botType == BotType.plank
-                ? 'Est. Stop Loss Level'
-                : 'Est. Max Loss Level',
+                ? S.of(context).estStopLossLevel
+                : S.of(context).estMaxLossLevel,
             value: stopLossPrice.toString()),
         const SizedBox(
           width: 8,
@@ -37,7 +38,7 @@ class BotPriceLevelIndicator extends StatelessWidget {
         _priceCard(
             titleBackgroundColor: AskLoraColors.whiteSmoke,
             textColor: AskLoraColors.charcoal,
-            title: 'Current Price',
+            title: S.of(context).currentPrice,
             value: currentPrice.toString()),
         const SizedBox(
           width: 8,
@@ -46,8 +47,8 @@ class BotPriceLevelIndicator extends StatelessWidget {
             titleBackgroundColor: AskLoraColors.lightGreen,
             textColor: AskLoraColors.primaryGreen,
             title: botType == BotType.plank
-                ? 'Est. Take Profit Level'
-                : 'Est. Max Profit Level',
+                ? S.of(context).estTakeProfitLevel
+                : S.of(context).estMaxProfitLevel,
             value: takeProfitPrice.toString()),
       ],
     );

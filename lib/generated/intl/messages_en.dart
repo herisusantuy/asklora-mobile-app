@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
         "accountInformation":
             MessageLookupByLibrary.simpleMessage("Account Information"),
@@ -62,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "bestSuitedFor":
+            MessageLookupByLibrary.simpleMessage("Best Suited For"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botTradeBottomSheetAmountMinimum": m0,
         "botTradeBottomSheetAmountTitle":
@@ -116,21 +119,43 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invest with AI strategy, automated"),
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
+        "ceo": MessageLookupByLibrary.simpleMessage("CEO"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "corePlan": MessageLookupByLibrary.simpleMessage("Core Plan"),
+        "currentPrice": MessageLookupByLibrary.simpleMessage("Current Price"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
         "errorGettingInformationSubTitle": m4,
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
+        "estMaxLossLevel":
+            MessageLookupByLibrary.simpleMessage("Est. Max Loss Level"),
+        "estMaxLossPercent":
+            MessageLookupByLibrary.simpleMessage("Est. Max Loss %"),
+        "estMaxProfitLevel":
+            MessageLookupByLibrary.simpleMessage("Est. Max Profit Level"),
+        "estMaxProfitPercent":
+            MessageLookupByLibrary.simpleMessage("Est. Max Profit %"),
+        "estStopLossLevel":
+            MessageLookupByLibrary.simpleMessage("Est. Stop Loss Level"),
+        "estStopLossPercent":
+            MessageLookupByLibrary.simpleMessage("Est. Stop Loss %"),
+        "estTakeProfitLevel":
+            MessageLookupByLibrary.simpleMessage("Est. Take Profit Level"),
+        "estTakeProfitPercent":
+            MessageLookupByLibrary.simpleMessage("Est. Take Profit %"),
+        "estimatedEndDate":
+            MessageLookupByLibrary.simpleMessage("Estimated End Date"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
+        "founded": MessageLookupByLibrary.simpleMessage("Founded"),
         "free": MessageLookupByLibrary.simpleMessage("FREE"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
@@ -139,12 +164,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
+        "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
+        "industry": MessageLookupByLibrary.simpleMessage("Industry"),
         "investmentAmount":
             MessageLookupByLibrary.simpleMessage("Investment Amount"),
+        "investmentPeriod":
+            MessageLookupByLibrary.simpleMessage("Investment Period"),
         "investmentPreferences":
             MessageLookupByLibrary.simpleMessage("Investment Preferences"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "notificationSetting":
             MessageLookupByLibrary.simpleMessage("Notification Setting"),
@@ -197,8 +228,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Est. Stop Loss %"),
         "portfolioDetailKeyInfoEstimatedTakeProfit":
             MessageLookupByLibrary.simpleMessage("Est. Take Profit %"),
-        "portfolioDetailKeyInfoInvestmentPeriod":
-            MessageLookupByLibrary.simpleMessage("Investment Period"),
         "portfolioDetailKeyInfoStartTime":
             MessageLookupByLibrary.simpleMessage("Start Time"),
         "portfolioDetailKeyInfoTitle":
@@ -229,12 +258,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m11,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
+        "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "shares": MessageLookupByLibrary.simpleMessage("Shares"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to sign out ?"),
+        "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "terminateAccount":

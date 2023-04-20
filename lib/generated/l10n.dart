@@ -260,6 +260,146 @@ class S {
     );
   }
 
+  /// `Current Price`
+  String get currentPrice {
+    return Intl.message(
+      'Current Price',
+      name: 'currentPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Stop Loss Level`
+  String get estStopLossLevel {
+    return Intl.message(
+      'Est. Stop Loss Level',
+      name: 'estStopLossLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Loss Level`
+  String get estMaxLossLevel {
+    return Intl.message(
+      'Est. Max Loss Level',
+      name: 'estMaxLossLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Take Profit Level`
+  String get estTakeProfitLevel {
+    return Intl.message(
+      'Est. Take Profit Level',
+      name: 'estTakeProfitLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Profit Level`
+  String get estMaxProfitLevel {
+    return Intl.message(
+      'Est. Max Profit Level',
+      name: 'estMaxProfitLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Stop Loss %`
+  String get estStopLossPercent {
+    return Intl.message(
+      'Est. Stop Loss %',
+      name: 'estStopLossPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Loss %`
+  String get estMaxLossPercent {
+    return Intl.message(
+      'Est. Max Loss %',
+      name: 'estMaxLossPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Take Profit %`
+  String get estTakeProfitPercent {
+    return Intl.message(
+      'Est. Take Profit %',
+      name: 'estTakeProfitPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Profit %`
+  String get estMaxProfitPercent {
+    return Intl.message(
+      'Est. Max Profit %',
+      name: 'estMaxProfitPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Estimated End Date`
+  String get estimatedEndDate {
+    return Intl.message(
+      'Estimated End Date',
+      name: 'estimatedEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employees`
+  String get employees {
+    return Intl.message(
+      'Employees',
+      name: 'employees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CEO`
+  String get ceo {
+    return Intl.message(
+      'CEO',
+      name: 'ceo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Founded`
+  String get founded {
+    return Intl.message(
+      'Founded',
+      name: 'founded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Headquarters`
+  String get headquarters {
+    return Intl.message(
+      'Headquarters',
+      name: 'headquarters',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account Settings`
   String get accountSettings {
     return Intl.message(
@@ -610,6 +750,16 @@ class S {
     );
   }
 
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? `
   String get askNameScreenPlaceholder {
     return Intl.message(
@@ -625,6 +775,16 @@ class S {
     return Intl.message(
       'Your Name',
       name: 'askNameScreenTextFieldHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Best Suited For`
+  String get bestSuitedFor {
+    return Intl.message(
+      'Best Suited For',
+      name: 'bestSuitedFor',
       desc: '',
       args: [],
     );
@@ -852,6 +1012,36 @@ class S {
     );
   }
 
+  /// `How It Works`
+  String get howItWorks {
+    return Intl.message(
+      'How It Works',
+      name: 'howItWorks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Market Cap`
+  String get marketCap {
+    return Intl.message(
+      'Market Cap',
+      name: 'marketCap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prev Close`
+  String get prevClose {
+    return Intl.message(
+      'Prev Close',
+      name: 'prevClose',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Performance`
   String get portfolioDetailPerformanceTitle {
     return Intl.message(
@@ -977,16 +1167,6 @@ class S {
     return Intl.message(
       'Key Info',
       name: 'portfolioDetailKeyInfoTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Investment Period`
-  String get portfolioDetailKeyInfoInvestmentPeriod {
-    return Intl.message(
-      'Investment Period',
-      name: 'portfolioDetailKeyInfoInvestmentPeriod',
       desc: '',
       args: [],
     );
@@ -1303,6 +1483,26 @@ class S {
     );
   }
 
+  /// `Industry`
+  String get industry {
+    return Intl.message(
+      'Industry',
+      name: 'industry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Period`
+  String get investmentPeriod {
+    return Intl.message(
+      'Investment Period',
+      name: 'investmentPeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Push-Notification`
   String get pushNotification {
     return Intl.message(
@@ -1343,11 +1543,31 @@ class S {
     );
   }
 
+  /// `Sector(s)`
+  String get sectors {
+    return Intl.message(
+      'Sector(s)',
+      name: 'sectors',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to sign out ?`
   String get signOutConfirmation {
     return Intl.message(
       'Are you sure you want to sign out ?',
       name: 'signOutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date`
+  String get startDate {
+    return Intl.message(
+      'Start Date',
+      name: 'startDate',
       desc: '',
       args: [],
     );
