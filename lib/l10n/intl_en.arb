@@ -157,7 +157,7 @@
       }
     }
   },
-  "portfolioDetailExpiredIn": "Expired in ${dateTime} days",
+  "portfolioDetailExpiredIn": "Expired in {dateTime} days",
   "@portfolioDetailExpiredIn": {
     "placeholders": {
       "dateTime": {

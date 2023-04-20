@@ -1102,10 +1102,10 @@ class S {
     );
   }
 
-  /// `Expired in ${dateTime} days`
+  /// `Expired in {dateTime} days`
   String portfolioDetailExpiredIn(String dateTime) {
     return Intl.message(
-      'Expired in \$$dateTime days',
+      'Expired in $dateTime days',
       name: 'portfolioDetailExpiredIn',
       desc: '',
       args: [dateTime],

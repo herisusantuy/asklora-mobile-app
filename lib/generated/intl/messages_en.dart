@@ -43,7 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(dateTime) => "Expired at ${dateTime}";
 
-  static String m9(dateTime) => "Expired in \$${dateTime} days";
+  static String m9(dateTime) => "Expired in ${dateTime} days";
 
   static String m10(currency) => "Total Botstock Values (${currency})";
 
