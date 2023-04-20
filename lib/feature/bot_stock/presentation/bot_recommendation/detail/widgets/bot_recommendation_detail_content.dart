@@ -14,7 +14,7 @@ import '../../../widgets/column_text.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
 import '../../../widgets/pair_column_text.dart';
-import 'bot_price_line_bar.dart';
+import 'bot_price_level_indicator.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
   final BotRecommendationModel botRecommendationModel;
@@ -184,7 +184,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             )
           ],
         ),
-        const SizedBox(height: 33),
+        const SizedBox(height: 26),
         Padding(
           padding: AppValues.screenHorizontalPadding,
           child: Column(
@@ -250,12 +250,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
           BuildContext context, BotDetailModel botDetailModel) =>
       Column(
         children: [
-          BotPriceLineBar(
+          BotPriceLevelIndicator(
             stopLossPrice: botDetailModel.estimatedStopLossPrice,
             currentPrice: botDetailModel.price,
             takeProfitPrice: botDetailModel.estimatedTakeProfitPrice,
+            botType: botType,
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 28),
           PairColumnText(
               leftTitle: botType == BotType.plank
                   ? 'Estimated Stop Loss %'

@@ -239,6 +239,7 @@ class TaxAgreementScreen extends StatelessWidget {
             previous.isSignatureChecked != current.isSignatureChecked ||
             previous.isInputNameValid != current.isInputNameValid,
         builder: (context, state) {
+          print('rebuild');
           return ButtonPair(
             primaryButtonOnClick: () => context
                 .read<NavigationBloc<KycPageStep>>()
