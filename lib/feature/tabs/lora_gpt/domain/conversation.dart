@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'conversation.g.dart';
 
-enum ConversationType { me, lora, loading }
+enum ConversationType { me, lora, loading, reset }
 
 abstract class Conversation extends Equatable {
   ConversationType type();
@@ -38,6 +37,12 @@ class Lora extends Conversation {
 
   @override
   List<Object?> get props => [response, sessionId, respType, usage];
+
+  static Lora get defaultMessage => Lora(
+      '👋Hi! I’m Lora. Let me know if you have any questions or requests on stocks investments.',
+      '',
+      '',
+      const Usage(0, 0, 0));
 }
 
 @JsonSerializable()
@@ -51,10 +56,7 @@ class Usage extends Equatable {
 
   const Usage(this.promptTokens, this.completionTokens, this.totalTokens);
 
-  factory Usage.fromJson(Map<String, dynamic> json) {
-    debugPrint('Krishna fro,JSON ${json}');
-    return _$UsageFromJson(json);
-  }
+  factory Usage.fromJson(Map<String, dynamic> json) => _$UsageFromJson(json);
 
   Map<String, dynamic> toJson() => _$UsageToJson(this);
 
@@ -79,6 +81,11 @@ class Me extends Conversation {
 }
 
 class Loading extends Conversation {
+  @override
+  ConversationType type() => ConversationType.loading;
+}
+
+class Reset extends Conversation {
   @override
   ConversationType type() => ConversationType.loading;
 }
