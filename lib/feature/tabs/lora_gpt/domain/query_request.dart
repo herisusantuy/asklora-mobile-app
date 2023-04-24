@@ -8,7 +8,7 @@ class QueryRequest {
   QueryRequest(
       {required this.input,
       this.userId = 'user_id',
-      this.username = 'username',
+      this.username = 'testing user',
       this.platform = 'mobile_app',
       required this.sessionId});
 
