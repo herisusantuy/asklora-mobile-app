@@ -82,7 +82,7 @@ class Me extends Conversation {
 
 class Loading extends Conversation {
   @override
-  ConversationType type() => ConversationType.loading;
+  ConversationType type() => ConversationType.reset;
 }
 
 class Reset extends Conversation {
