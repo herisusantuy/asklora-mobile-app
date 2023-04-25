@@ -45,7 +45,7 @@ class FinancialProfileSummaryScreen extends StatelessWidget {
   Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
-            .add(const PageChanged(KycPageStep.signBrokerAgreements)),
+            .add(const PageChanged(KycPageStep.verifyIdentity)),
         secondaryButtonOnClick: () => context
             .read<KycBloc>()
             .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
