@@ -72,8 +72,9 @@ class BotRecommendationScreen extends StatelessWidget {
               builder: (context, state) => CustomLayoutWithBlurPopUp(
                 loraPopUpMessageModel: LoraPopUpMessageModel(
                   title: S.of(context).errorGettingInformationTitle,
-                  subTitle: S.of(context).errorGettingInformationSubTitle(
-                      'the Investment Details'),
+                  subTitle: S
+                      .of(context)
+                      .errorGettingInformationInvestmentDetailSubTitle,
                   primaryButtonLabel: S.of(context).buttonReloadPage,
                   onSecondaryButtonTap: () => Navigator.pop(context),
                   onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(

@@ -11,11 +11,11 @@ class PortfolioResponse {
   final double profit;
 
   PortfolioResponse({
-    this.totalPortfolio = 100000,
-    this.withdrawableAmount = 5000,
-    this.buyingPower = 3000,
-    this.totalBotStockValues = 7000,
-    this.profit = 200,
+    this.totalPortfolio = 0,
+    this.withdrawableAmount = 0,
+    this.buyingPower = 0,
+    this.totalBotStockValues = 0,
+    this.profit = 0,
   });
 
   factory PortfolioResponse.fromJson(Map<String, dynamic> json) =>

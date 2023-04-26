@@ -68,14 +68,8 @@
   "buttonDeposit": "入金",
   "buttonCancelTrade": "取消交易",
   "errorGettingInformationTitle": "咦，無法獲取資料",
-  "errorGettingInformationSubTitle": "載入你投資細節時出咗少少問題，Reload一次試下？",
-  "@errorGettingInformationSubTitle": {
-    "placeholders": {
-      "detail": {
-        "type": "String"
-      }
-    }
-  },
+  "errorGettingInformationPortfolioSubTitle": "載入你投資組合時出咗少少問題，Reload一次試下？",
+  "errorGettingInformationInvestmentDetailSubTitle": "載入你投資細節時出咗少少問題，Reload一次試下？",
   "askNameScreenTextFieldHint": "你的名字",
   "tooltipBotDetailsStartDate": "Lora開始Botstocks交易",
   "tooltipBotDetailsInvestmentPeriod": "你定下的投資時間，Botstock將會於此期間內自動買賣股票。",
@@ -131,6 +125,7 @@
   "howItWorks": "如何運作",
   "marketCap": "市值",
   "prevClose": "上日收市",
+  "portfolioBuyingPowerToolTip": "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 ",
   "portfolioDetailPerformanceTitle": "表現",
   "portfolioDetailPerformanceBotStockValues": "Botstock 價值 (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "投資金額 (HKD)",
