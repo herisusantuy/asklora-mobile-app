@@ -4,7 +4,7 @@ FilteringTextInputFormatter englishNameFormatter() =>
     FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'));
 
 FilteringTextInputFormatter fullEnglishNameFormatter() =>
-    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z ]'));
+    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z-_ ]'));
 
 FilteringTextInputFormatter onlyAllowOneSpace() =>
     FilteringTextInputFormatter.deny(RegExp(r'\s '));

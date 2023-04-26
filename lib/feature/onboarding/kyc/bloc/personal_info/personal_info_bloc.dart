@@ -70,12 +70,12 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
 
   _onPersonalInfoFirstNameChange(
       PersonalInfoFirstNameChanged event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(firstName: event.firstName));
+    emit(state.copyWith(firstName: event.firstName.trim()));
   }
 
   _onPersonalInfoLastNameChange(
       PersonalInfoLastNameChanged event, Emitter<PersonalInfoState> emit) {
-    emit(state.copyWith(lastName: event.lastName));
+    emit(state.copyWith(lastName: event.lastName.trim()));
   }
 
   _onPersonalInfoGenderChange(
