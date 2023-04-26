@@ -5,9 +5,11 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 
 class InChatBubbleWidget extends StatelessWidget {
-  const InChatBubbleWidget(this.message, {super.key});
+  const InChatBubbleWidget(
+      {required this.message, required this.name, super.key});
 
   final String message;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class InChatBubbleWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         CustomTextNew(
-          'Mel',
+          name,
           style: AskLoraTextStyles.subtitle2,
         ),
         const SizedBox(height: 12),

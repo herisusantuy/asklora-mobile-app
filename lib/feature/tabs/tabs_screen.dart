@@ -5,8 +5,9 @@ import '../../core/utils/app_icons.dart';
 import '../bot_stock/presentation/portfolio/portfolio_screen.dart';
 import 'for_you/for_you_screen_form.dart';
 import 'home/home_screen_form.dart';
+import 'lora_gpt/presentation/lora_gpt_screen.dart';
 
-enum TabScreenPage { home, forYou, portfolio }
+enum TabScreenPage { home, forYou, portfolio, loraGpt }
 
 class TabsScreen extends StatefulWidget {
   static const String route = '/tab_screen';
@@ -32,6 +33,7 @@ class _TabsScreenState extends State<TabsScreen>
     HomeScreenForm(),
     ForYouScreenForm(),
     PortfolioScreen(),
+    LoraGptScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -47,6 +49,9 @@ class _TabsScreenState extends State<TabsScreen>
         break;
       case TabScreenPage.portfolio:
         _onItemTapped(2);
+        break;
+      case TabScreenPage.loraGpt:
+        _onItemTapped(3);
         break;
       default:
         _onItemTapped(0);
@@ -66,6 +71,7 @@ class _TabsScreenState extends State<TabsScreen>
         enableBackNavigation: false,
         bottomNavigationBar: BottomNavigationBar(
           selectedFontSize: 0,
+          type: BottomNavigationBarType.fixed,
           elevation: 0,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -82,6 +88,11 @@ class _TabsScreenState extends State<TabsScreen>
               icon: getSvgIcon('bottom_nav_portfolio'),
               label: '',
               activeIcon: getSvgIcon('bottom_nav_portfolio_selected'),
+            ),
+            BottomNavigationBarItem(
+              icon: getSvgIcon('bottom_nav_stock_gpt'),
+              label: '',
+              activeIcon: getSvgIcon('bottom_nav_stock_gpt_selected'),
             )
           ],
           currentIndex: _selectedIndex,
