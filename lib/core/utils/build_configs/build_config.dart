@@ -11,7 +11,7 @@ class Environment {
 
   static final Environment _singleton = Environment._internal();
 
-  late BaseConfig config;
+  BaseConfig? config;
 
   initConfig(EnvironmentType environmentType) =>
       config = _getConfig(environmentType);

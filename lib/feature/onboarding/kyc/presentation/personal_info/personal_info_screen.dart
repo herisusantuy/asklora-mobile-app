@@ -16,6 +16,8 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/build_configs/base_config.dart';
+import '../../../../../core/utils/build_configs/build_config.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
 import '../../bloc/kyc_bloc.dart';
@@ -37,6 +39,8 @@ class PersonalInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //base config check to determine first name and last name formatter
+    BaseConfig? baseConfig = Environment().config;
     return KycBaseForm(
       progress: progress,
       onTapBack: () =>
@@ -62,7 +66,9 @@ class PersonalInfoScreen extends StatelessWidget {
                 key: const Key('first_name'),
                 label: 'Legal English First Name*',
                 textInputFormatterList: [
-                  fullEnglishNameFormatter(),
+                  baseConfig is DevConfig || baseConfig is StagingConfig
+                      ? fullEnglishNameWithHyphenAndUnderScoreFormatter()
+                      : fullEnglishNameFormatter(),
                   onlyAllowOneSpace()
                 ],
                 onChanged: (value) => context
@@ -74,7 +80,9 @@ class PersonalInfoScreen extends StatelessWidget {
                 key: const Key('last_name'),
                 label: 'Legal English Last Name*',
                 textInputFormatterList: [
-                  fullEnglishNameFormatter(),
+                  baseConfig is DevConfig || baseConfig is StagingConfig
+                      ? fullEnglishNameWithHyphenAndUnderScoreFormatter()
+                      : fullEnglishNameFormatter(),
                   onlyAllowOneSpace()
                 ],
                 onChanged: (value) => context

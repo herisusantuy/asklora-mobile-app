@@ -29,7 +29,7 @@ class BaseApiClient {
           {required String endpoint, required String payload}) async =>
       _dio.patch(endpoint, data: payload);
 
-  String getBaseUrl() => Environment().config.askLoraApiBaseUrl;
+  String getBaseUrl() => Environment().config!.askLoraApiBaseUrl;
 
   final Duration timeOutDuration = const Duration(seconds: 60);
 

@@ -10,6 +10,6 @@ class PpiApiClient extends BaseApiClient {
 
   @override
   String getBaseUrl() {
-    return Environment().config.ppiBaseUrl;
+    return Environment().config!.ppiBaseUrl;
   }
 }
