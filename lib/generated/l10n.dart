@@ -1573,6 +1573,16 @@ class S {
     );
   }
 
+  /// `Your Portfolio`
+  String get yourPortfolio {
+    return Intl.message(
+      'Your Portfolio',
+      name: 'yourPortfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Version`
   String get version {
     return Intl.message(

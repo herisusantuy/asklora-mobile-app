@@ -81,10 +81,8 @@ class PortfolioScreen extends StatelessWidget {
               title: S.of(context).errorGettingInformationTitle,
               subTitle: S
                   .of(context)
-                  .errorGettingInformationSubTitle('your Portfolio'),
+                  .errorGettingInformationSubTitle(S.of(context).yourPortfolio),
               primaryButtonLabel: S.of(context).buttonReloadPage,
-              secondaryButtonLabel: S.of(context).buttonCancel,
-              onSecondaryButtonTap: () => Navigator.pop(context),
               onPrimaryButtonTap: () {
                 context.read<PortfolioBloc>().add(const FetchActiveOrders());
                 context.read<PortfolioBloc>().add(FetchPortfolio());
