@@ -30,7 +30,6 @@ class LoraGptScreen extends StatefulWidget {
 class _LoraGptScreenState extends State<LoraGptScreen>
     with SingleTickerProviderStateMixin {
   final TextEditingController controller = TextEditingController();
-  final ScrollController scrollController = ScrollController();
 
   final GlobalKey globalKey = GlobalKey();
   double searchFieldSize = 100;
@@ -118,7 +117,6 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                 current.status != ResponseState.unknown ||
             previous.conversations.length != current.conversations.length,
         builder: (context, state) => ListView.separated(
-              controller: scrollController,
               reverse: true,
               itemCount: state.conversations.length,
               itemBuilder: (context, index) {
@@ -312,7 +310,8 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                         ]))),
                 ClipPath(
                   clipper: Droplet(),
-                  child: Container(width: 30, height: 20, color: Colors.white),
+                  child: Container(
+                      width: 30, height: 20, color: AskLoraColors.white),
                 ),
                 const SizedBox(height: 15),
                 RippleAnimation(
@@ -342,12 +341,9 @@ class Droplet extends CustomClipper<Path> {
   @override
   getClip(Size size) {
     Path path = Path();
-
     path.moveTo(0.0, -1.0);
     path.lineTo(size.width, -1.0);
-
     path.lineTo(size.width / 2.0, size.height);
-
     return path;
   }
 
