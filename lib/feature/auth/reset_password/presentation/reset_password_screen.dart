@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
+import '../../repository/auth_repository.dart';
 import '../bloc/reset_password_bloc.dart';
-import '../repository/reset_password_repository.dart';
 import 'reset_password_form.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class ResetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ResetPasswordBloc(resetPasswordRepository: ResetPasswordRepository()),
+          ResetPasswordBloc(authRepository: AuthRepository(TokenRepository())),
       child: CustomScaffold(
         body: CustomStretchedLayout(
           header: const CustomHeader(

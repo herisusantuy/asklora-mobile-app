@@ -52,8 +52,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
       : super(key: key) {
     botType = BotType.findByString(botActiveOrderModel.botAppsName);
-    botStatus = BotStatus.findByString(
-        botActiveOrderModel.status, botActiveOrderModel.expireDate);
+    botStatus = BotStatus.findByString(botActiveOrderModel.status,
+        expireDate: botActiveOrderModel.expireDate);
   }
 
   @override
@@ -80,9 +80,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             return CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
                 title: S.of(context).errorGettingInformationTitle,
-                subTitle: S
-                    .of(context)
-                    .errorGettingInformationSubTitle('your Portfolio'),
+                subTitle:
+                    S.of(context).errorGettingInformationPortfolioSubTitle,
                 primaryButtonLabel: S.of(context).buttonReloadPage,
                 secondaryButtonLabel: S.of(context).buttonCancel,
                 onSecondaryButtonTap: () => Navigator.pop(context),

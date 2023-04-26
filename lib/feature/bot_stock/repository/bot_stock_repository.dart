@@ -168,7 +168,7 @@ class BotStockRepository {
       var response = await _botStockApiClient.createOrder(BotCreateOrderRequest(
           ticker: botRecommendationModel.ticker,
           botId: botRecommendationModel.botId,
-          spotDate: formatDateAsString(DateTime.now()),
+          spotDate: formatDateTimeAsString(DateTime.now()),
           investmentAmount: tradeBotStockAmount,
           price: checkDouble(
             botRecommendationModel.latestPrice,

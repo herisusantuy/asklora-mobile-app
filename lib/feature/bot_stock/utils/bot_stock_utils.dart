@@ -15,44 +15,44 @@ List<Pair<String, String>> botRecommendationFaqs = [
 ];
 
 List<BotRecommendationModel> defaultBotRecommendation = [
-  const BotRecommendationModel(1, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '440'),
-  const BotRecommendationModel(2, '', '', 'CLASSIC_classic_003846', '', '',
-      'Plank', 'MSFT.O', 'TESLA', '', '390'),
-  const BotRecommendationModel(3, '', '', 'CLASSIC_classic_003846', '', '',
-      'Squat', 'MSFT.O', 'TESLA', '', '100'),
-  const BotRecommendationModel(4, '', '', 'CLASSIC_classic_003846', '', '',
-      'Plank', 'MSFT.O', 'TESLA', '', '150'),
-  const BotRecommendationModel(5, '', '', 'CLASSIC_classic_003846', '', '',
-      'Squat', 'MSFT.O', 'TESLA', '', '160'),
-  const BotRecommendationModel(6, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '90'),
-  const BotRecommendationModel(7, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '20'),
-  const BotRecommendationModel(8, '', '', 'CLASSIC_classic_003846', '', '',
-      'Plank', 'MSFT.O', 'TESLA', '', '600'),
+  const BotRecommendationModel(1, 'CLASSIC_classic_003846', '', '', 'Pull Up',
+      'MSFT.O', 'TESLA', '', '440'),
+  const BotRecommendationModel(2, 'CLASSIC_classic_003846', '', '', 'Plank',
+      'MSFT.O', 'TESLA', '', '390'),
+  const BotRecommendationModel(3, 'CLASSIC_classic_003846', '', '', 'Squat',
+      'MSFT.O', 'TESLA', '', '100'),
+  const BotRecommendationModel(4, 'CLASSIC_classic_003846', '', '', 'Plank',
+      'MSFT.O', 'TESLA', '', '150'),
+  const BotRecommendationModel(5, 'CLASSIC_classic_003846', '', '', 'Squat',
+      'MSFT.O', 'TESLA', '', '160'),
+  const BotRecommendationModel(6, 'CLASSIC_classic_003846', '', '', 'Pull Up',
+      'MSFT.O', 'TESLA', '', '90'),
+  const BotRecommendationModel(7, 'CLASSIC_classic_003846', '', '', 'Pull Up',
+      'MSFT.O', 'TESLA', '', '20'),
+  const BotRecommendationModel(8, 'CLASSIC_classic_003846', '', '', 'Plank',
+      'MSFT.O', 'TESLA', '', '600'),
 ];
 
 List<BotRecommendationModel> demonstrationBots = [
-  const BotRecommendationModel(1, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '440',
+  const BotRecommendationModel(1, 'CLASSIC_classic_003846', '', '', 'Pull Up',
+      'MSFT.O', 'TESLA', '', '440',
       selectable: true),
-  const BotRecommendationModel(2, '', '', 'CLASSIC_classic_003846', '', '',
-      'Plank', 'MSFT.O', 'TESLA', '', '390',
+  const BotRecommendationModel(2, 'CLASSIC_classic_003846', '', '', 'Plank',
+      'MSFT.O', 'TESLA', '', '390',
       selectable: true),
-  const BotRecommendationModel(3, '', '', 'CLASSIC_classic_003846', '', '',
-      'Squat', 'MSFT.O', 'TESLA', '', '100',
+  const BotRecommendationModel(3, 'CLASSIC_classic_003846', '', '', 'Squat',
+      'MSFT.O', 'TESLA', '', '100',
       selectable: true),
-  const BotRecommendationModel(4, '', '', 'CLASSIC_classic_003846', '', '',
-      'Plank', 'MSFT.O', 'TESLA', '', '150'),
-  const BotRecommendationModel(5, '', '', 'CLASSIC_classic_003846', '', '',
-      'Squat', 'MSFT.O', 'TESLA', '', '160'),
-  const BotRecommendationModel(6, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '90'),
-  const BotRecommendationModel(7, '', '', 'CLASSIC_classic_003846', '', '',
-      'Pull Up', 'MSFT.O', 'TESLA', '', '20'),
-  const BotRecommendationModel(8, '', '', 'CLASSIC_classic_003846', '', '',
-      'Plank', 'MSFT.O', 'TESLA', '', '600'),
+  const BotRecommendationModel(4, 'CLASSIC_classic_003846', '', '', 'Plank',
+      'MSFT.O', 'TESLA', '', '150'),
+  const BotRecommendationModel(5, 'CLASSIC_classic_003846', '', '', 'Squat',
+      'MSFT.O', 'TESLA', '', '160'),
+  const BotRecommendationModel(6, 'CLASSIC_classic_003846', '', '', 'Pull Up',
+      'MSFT.O', 'TESLA', '', '90'),
+  const BotRecommendationModel(7, 'CLASSIC_classic_003846', '', '', 'Pull Up',
+      'MSFT.O', 'TESLA', '', '20'),
+  const BotRecommendationModel(8, 'CLASSIC_classic_003846', '', '', 'Plank',
+      'MSFT.O', 'TESLA', '', '600'),
 ];
 
 enum BotType {
@@ -93,16 +93,19 @@ enum BotStockFilter {
 enum BotStatus {
   pending('place', 'Pending', AskLoraColors.amber),
   active('open', 'Active', AskLoraColors.primaryGreen),
-  activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen);
+  activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen),
+  closed('closed', 'Closed', AskLoraColors.primaryGreen),
+  cancel('cancel', 'Cancel', AskLoraColors.primaryMagenta);
 
   final String value;
   final String name;
   final Color color;
 
-  static BotStatus findByString(String botStatusString, String expireDate) {
+  static BotStatus findByString(String botStatusString, {String? expireDate}) {
     BotStatus botStatus = BotStatus.values
         .firstWhere((element) => element.value == botStatusString);
     if (botStatus == active &&
+        expireDate != null &&
         DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
       botStatus = BotStatus.activeExpireSoon;
     }
@@ -112,5 +115,5 @@ enum BotStatus {
   const BotStatus(this.value, this.name, this.color);
 }
 
-String newExpiryDateOnRollover(String expireDate) => formatDateAsString(
+String newExpiryDateOnRollover(String expireDate) => formatDateTimeAsString(
     DateTime.parse(expireDate).add(const Duration(days: 14)));

@@ -44,10 +44,11 @@ class AppState extends Equatable {
   final AppStatus status;
   final UserJourney userJourney;
 
-  const AppState._(
-      {this.status = AppStatus.unknown,
-      this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
-      this.userJourney = UserJourney.privacy});
+  const AppState._({
+    this.status = AppStatus.unknown,
+    this.locale = const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
+    this.userJourney = UserJourney.privacy,
+  });
 
   const AppState.unknown() : this._();
 
@@ -73,5 +74,9 @@ class AppState extends Equatable {
   }
 
   @override
-  List<Object> get props => [status, locale, userJourney];
+  List<Object> get props => [
+        status,
+        locale,
+        userJourney,
+      ];
 }

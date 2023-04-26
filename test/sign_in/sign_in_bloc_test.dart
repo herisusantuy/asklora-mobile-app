@@ -4,10 +4,9 @@ import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
 import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
+import 'package:asklora_mobile_app/feature/auth/repository/auth_repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/bloc/sign_in_bloc.dart';
-import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_api_client.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_in/domain/sign_in_response.dart';
-import 'package:asklora_mobile_app/feature/auth/sign_in/repository/sign_in_repository.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/get_account/get_account_response.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/account_repository.dart';
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/ppi_user_response.dart';
@@ -27,15 +26,14 @@ class MockSignInBloc extends MockBloc<SignInEvent, SignInState>
 
 class MockRepository extends Mock implements Repository {}
 
-@GenerateMocks([SignInRepository])
+@GenerateMocks([AuthRepository])
 @GenerateMocks([UserJourneyRepository])
-@GenerateMocks([SignInApiClient])
 @GenerateMocks([SharedPreference])
 @GenerateMocks([AccountRepository])
 @GenerateMocks([PpiResponseRepository])
 void main() async {
   group('Sign In Screen Bloc Test', () {
-    late MockSignInRepository signInRepository;
+    late MockAuthRepository authRepository;
     late MockUserJourneyRepository userJourneyRepository;
     late SignInBloc signInBloc;
     late MockRepository mockRepository;
@@ -48,7 +46,7 @@ void main() async {
 
     setUpAll(
       () async {
-        signInRepository = MockSignInRepository();
+        authRepository = MockAuthRepository();
         mockRepository = MockRepository();
         userJourneyRepository = MockUserJourneyRepository();
         sharedPreference = MockSharedPreference();
@@ -77,7 +75,7 @@ void main() async {
         TestWidgetsFlutterBinding.ensureInitialized();
         signInBloc = SignInBloc(
             accountRepository: accountRepository,
-            signInRepository: signInRepository,
+            authRepository: authRepository,
             userJourneyRepository: userJourneyRepository,
             sharedPreference: sharedPreference,
             ppiResponseRepository: ppiResponseRepository);
@@ -138,7 +136,7 @@ void main() async {
     blocTest<SignInBloc, SignInState>(
         'emits "SignInStatus.success" WHEN entered valid email and correct password, Then pressed "Submit" button.',
         build: () {
-          when(signInRepository.signIn(
+          when(authRepository.signIn(
                   email: 'nyoba@yopmail.com', password: 'TestQWE123'))
               .thenAnswer((_) => Future.value(const SignInResponse(
                   userJourney: UserJourney.investmentStyle)));

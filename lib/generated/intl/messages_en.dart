@@ -31,16 +31,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(expiryTime) => "The new expiry date is ${expiryTime}";
 
-  static String m4(detail) =>
-      "There was an error when trying to get ${detail}. Please try reloading the page";
+  static String m4(currency) => "Buying Power (${currency})";
 
-  static String m5(currency) => "Buying Power (${currency})";
+  static String m5(currency) => "Current Price ${currency}";
 
-  static String m6(currency) => "Current Price ${currency}";
+  static String m6(bot, startDate, endDate, duration) =>
+      "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
 
   static String m7(dateTime) => "Expired at ${dateTime}";
 
-  static String m8(dateTime) => "Expired in \$${dateTime} days";
+  static String m8(dateTime) => "Expired in ${dateTime} days";
 
   static String m9(currency) => "Total Botstock Values (${currency})";
 
@@ -51,15 +51,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
         "accountInformation":
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account Settings"),
+        "activities": MessageLookupByLibrary.simpleMessage("Activities"),
+        "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "bestSuitedFor":
+            MessageLookupByLibrary.simpleMessage("Best Suited For"),
+        "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botTradeBottomSheetAmountMinimum": m0,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("How much are you investing?"),
@@ -104,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNext": MessageLookupByLibrary.simpleMessage("NEXT"),
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("NOT NOW"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("RELOAD PAGE"),
+        "buttonSignOut": MessageLookupByLibrary.simpleMessage("SIGN OUT"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(
@@ -112,44 +119,108 @@ class MessageLookup extends MessageLookupByLibrary {
             "Invest with AI strategy, automated"),
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
+        "ceo": MessageLookupByLibrary.simpleMessage("CEO"),
         "changeBankAccount":
             MessageLookupByLibrary.simpleMessage("Change Bank Account"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "confirmNewPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
+        "corePlan": MessageLookupByLibrary.simpleMessage("Core Plan"),
+        "currentPrice": MessageLookupByLibrary.simpleMessage("Current Price"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "errorGettingInformationSubTitle": m4,
+        "employees": MessageLookupByLibrary.simpleMessage("Employees"),
+        "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
+        "errorGettingInformationInvestmentDetailSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "There was an error when trying to get the investment details. Please try reloading the page"),
+        "errorGettingInformationInvestmentStyleQuestionSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "There was an error when trying to get the investment style question. Please try reloading the page"),
+        "errorGettingInformationPortfolioSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "There was an error when trying to get your Portfolio. Please try reloading the page"),
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
+        "errorGettingInformationTransactionHistorySubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "There was an error when trying to get the transaction history. Please try reloading the page"),
+        "estMaxLossLevel":
+            MessageLookupByLibrary.simpleMessage("Est. Max Loss Level"),
+        "estMaxLossPercent":
+            MessageLookupByLibrary.simpleMessage("Est. Max Loss %"),
+        "estMaxProfitLevel":
+            MessageLookupByLibrary.simpleMessage("Est. Max Profit Level"),
+        "estMaxProfitPercent":
+            MessageLookupByLibrary.simpleMessage("Est. Max Profit %"),
+        "estStopLossLevel":
+            MessageLookupByLibrary.simpleMessage("Est. Stop Loss Level"),
+        "estStopLossPercent":
+            MessageLookupByLibrary.simpleMessage("Est. Stop Loss %"),
+        "estTakeProfitLevel":
+            MessageLookupByLibrary.simpleMessage("Est. Take Profit Level"),
+        "estTakeProfitPercent":
+            MessageLookupByLibrary.simpleMessage("Est. Take Profit %"),
+        "estimatedEndDate":
+            MessageLookupByLibrary.simpleMessage("Estimated End Date"),
+        "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
+        "founded": MessageLookupByLibrary.simpleMessage("Founded"),
+        "free": MessageLookupByLibrary.simpleMessage("FREE"),
+        "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
+        "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
+        "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
+        "industry": MessageLookupByLibrary.simpleMessage("Industry"),
+        "investmentAmount":
+            MessageLookupByLibrary.simpleMessage("Investment Amount"),
+        "investmentPeriod":
+            MessageLookupByLibrary.simpleMessage("Investment Period"),
+        "investmentPreferences":
+            MessageLookupByLibrary.simpleMessage("Investment Preferences"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
+        "notificationSetting":
+            MessageLookupByLibrary.simpleMessage("Notification Setting"),
         "notificationSettings":
             MessageLookupByLibrary.simpleMessage("Notification Settings"),
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel":
             MessageLookupByLibrary.simpleMessage("Office Hours"),
+        "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
+        "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
+        "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
-        "portfolioBuyingPower": m5,
-        "portfolioCurrentPrice": m6,
+        "portfolioBuyingPower": m4,
+        "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
+            "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’."),
+        "portfolioCurrentPrice": m5,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("CANCEL BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("END BOTSTOCK"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("ROLLOVER BOTSTOCK"),
+        "portfolioDetailChartCaption": m6,
+        "portfolioDetailChartEmptyMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Performance data will be available once the Botstock starts"),
         "portfolioDetailExpiredAt": m7,
         "portfolioDetailExpiredIn": m8,
         "portfolioDetailKeyInfoAvgLoss":
@@ -174,8 +245,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Est. Stop Loss %"),
         "portfolioDetailKeyInfoEstimatedTakeProfit":
             MessageLookupByLibrary.simpleMessage("Est. Take Profit %"),
-        "portfolioDetailKeyInfoInvestmentPeriod":
-            MessageLookupByLibrary.simpleMessage("Investment Period"),
         "portfolioDetailKeyInfoStartTime":
             MessageLookupByLibrary.simpleMessage("Start Time"),
         "portfolioDetailKeyInfoTitle":
@@ -206,7 +275,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m10,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
+        "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "pushNotification":
+            MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
+        "shares": MessageLookupByLibrary.simpleMessage("Shares"),
+        "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to sign out ?"),
+        "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
+        "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
@@ -223,7 +302,21 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
+        "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
+        "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
+        "transactionHistory":
+            MessageLookupByLibrary.simpleMessage("Transaction History"),
+        "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("All"),
+        "transactionHistoryTabOrders":
+            MessageLookupByLibrary.simpleMessage("Orders"),
+        "transactionHistoryTabTransfer":
+            MessageLookupByLibrary.simpleMessage("Transfer"),
+        "transactionHistoryTitle":
+            MessageLookupByLibrary.simpleMessage("Transaction History"),
+        "transactionHistoryToday":
+            MessageLookupByLibrary.simpleMessage("Today"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
+        "version": MessageLookupByLibrary.simpleMessage("Version"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),

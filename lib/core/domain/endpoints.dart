@@ -13,6 +13,7 @@ const String endpointSignUp = '$v1$accounts';
 const String endpointResetPassword = '$v1$accounts/reset-password/';
 const String endpointForgotPassword = '$v2${accounts}request-reset-password/';
 const String endpointConfirmPassword = '$v2${accounts}confirm-password';
+const String endpointChangePassword = '$v2${accounts}change-password';
 const String endpointGetOtp = '$v1${accounts}otp/';
 const String endpointGetSmsOtp = '$v2${accounts}request-sms-otp/';
 const String endpointValidateEmail = '$v2${accounts}validate-email/';
@@ -55,8 +56,16 @@ const String endpointBotTerminateOrder = '$v1${bots}terminate-order/';
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
 
 const String endpointBotRecommendation = '${user}recomendation_bots/';
+const String endpointBotOrderHistory = '$v1/$bots/history-order';
 const String endpointBotDetail = '$v1${bots}bot_detail/';
 const String endpointIexCloud = 'https://iexcloud.io';
 const String askloraFaq = 'https://www.asklora.ai/faq';
 const String askloraSite = 'https://www.asklora.ai/';
 const String mailToLoraCare = 'mailto:loracares@asklora.ai';
+
+///
+/// LoraGPT
+///
+// const String loraGptBaseUrl = 'http://192.168.1.175/';
+const String loraGptBaseUrl = 'https://stock-gpt.api.asklora.ai/';
+const String endpointChat = 'chat/full_general';

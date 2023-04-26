@@ -5,7 +5,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../bot_stock/domain/bot_recommendation_model.dart';
-import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_price_line_bar.dart';
+import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_price_level_indicator.dart';
 import '../../../../../bot_stock/presentation/widgets/custom_detail_expansion_tile.dart';
 import '../../../../../bot_stock/presentation/widgets/iex_data_provider_link.dart';
 import '../../../../../bot_stock/presentation/widgets/pair_column_text.dart';
@@ -43,7 +43,7 @@ class DemonstrationBotDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                botRecommendationModel.botWord,
+                botRecommendationModel.botWordString,
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
@@ -183,7 +183,7 @@ class DemonstrationBotDetailContent extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 33,
+          height: 26,
         ),
         Padding(
           padding: AppValues.screenHorizontalPadding,
@@ -218,10 +218,11 @@ class DemonstrationBotDetailContent extends StatelessWidget {
 
   Widget get _detailedInformation => Column(
         children: [
-          const BotPriceLineBar(
+          BotPriceLevelIndicator(
             stopLossPrice: 210,
-            takeProfitPrice: 240,
-            currentPrice: 220,
+            currentPrice: 240,
+            takeProfitPrice: 220,
+            botType: botType,
           ),
           const SizedBox(
             height: 24,

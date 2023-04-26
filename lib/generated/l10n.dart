@@ -250,11 +250,221 @@ class S {
     );
   }
 
+  /// `SIGN OUT`
+  String get buttonSignOut {
+    return Intl.message(
+      'SIGN OUT',
+      name: 'buttonSignOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Price`
+  String get currentPrice {
+    return Intl.message(
+      'Current Price',
+      name: 'currentPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Stop Loss Level`
+  String get estStopLossLevel {
+    return Intl.message(
+      'Est. Stop Loss Level',
+      name: 'estStopLossLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Loss Level`
+  String get estMaxLossLevel {
+    return Intl.message(
+      'Est. Max Loss Level',
+      name: 'estMaxLossLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Take Profit Level`
+  String get estTakeProfitLevel {
+    return Intl.message(
+      'Est. Take Profit Level',
+      name: 'estTakeProfitLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Profit Level`
+  String get estMaxProfitLevel {
+    return Intl.message(
+      'Est. Max Profit Level',
+      name: 'estMaxProfitLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Stop Loss %`
+  String get estStopLossPercent {
+    return Intl.message(
+      'Est. Stop Loss %',
+      name: 'estStopLossPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Loss %`
+  String get estMaxLossPercent {
+    return Intl.message(
+      'Est. Max Loss %',
+      name: 'estMaxLossPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Take Profit %`
+  String get estTakeProfitPercent {
+    return Intl.message(
+      'Est. Take Profit %',
+      name: 'estTakeProfitPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Profit %`
+  String get estMaxProfitPercent {
+    return Intl.message(
+      'Est. Max Profit %',
+      name: 'estMaxProfitPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Estimated End Date`
+  String get estimatedEndDate {
+    return Intl.message(
+      'Estimated End Date',
+      name: 'estimatedEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employees`
+  String get employees {
+    return Intl.message(
+      'Employees',
+      name: 'employees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CEO`
+  String get ceo {
+    return Intl.message(
+      'CEO',
+      name: 'ceo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Founded`
+  String get founded {
+    return Intl.message(
+      'Founded',
+      name: 'founded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Headquarters`
+  String get headquarters {
+    return Intl.message(
+      'Headquarters',
+      name: 'headquarters',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account Settings`
   String get accountSettings {
     return Intl.message(
       'Account Settings',
       name: 'accountSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Core Plan`
+  String get corePlan {
+    return Intl.message(
+      'Core Plan',
+      name: 'corePlan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free Trial`
+  String get freeTrial {
+    return Intl.message(
+      'Free Trial',
+      name: 'freeTrial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Settings`
+  String get allSettings {
+    return Intl.message(
+      'All Settings',
+      name: 'allSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Preferences`
+  String get investmentPreferences {
+    return Intl.message(
+      'Investment Preferences',
+      name: 'investmentPreferences',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transaction History`
+  String get transactionHistory {
+    return Intl.message(
+      'Transaction History',
+      name: 'transactionHistory',
       desc: '',
       args: [],
     );
@@ -360,6 +570,126 @@ class S {
     );
   }
 
+  /// `FREE`
+  String get free {
+    return Intl.message(
+      'FREE',
+      name: 'free',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Botstock ID`
+  String get botStockId {
+    return Intl.message(
+      'Botstock ID',
+      name: 'botStockId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Amount`
+  String get investmentAmount {
+    return Intl.message(
+      'Investment Amount',
+      name: 'investmentAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade Fee`
+  String get tradeFee {
+    return Intl.message(
+      'Trade Fee',
+      name: 'tradeFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ended Amount`
+  String get endedAmount {
+    return Intl.message(
+      'Ended Amount',
+      name: 'endedAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Summary`
+  String get summary {
+    return Intl.message(
+      'Summary',
+      name: 'summary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Activities`
+  String get activities {
+    return Intl.message(
+      'Activities',
+      name: 'activities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filled Price`
+  String get filledPrice {
+    return Intl.message(
+      'Filled Price',
+      name: 'filledPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shares`
+  String get shares {
+    return Intl.message(
+      'Shares',
+      name: 'shares',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Started`
+  String get orderStarted {
+    return Intl.message(
+      'Order Started',
+      name: 'orderStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Rollover`
+  String get orderRollover {
+    return Intl.message(
+      'Order Rollover',
+      name: 'orderRollover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Expired`
+  String get orderExpired {
+    return Intl.message(
+      'Order Expired',
+      name: 'orderExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Unable to get information`
   String get errorGettingInformationTitle {
     return Intl.message(
@@ -370,13 +700,43 @@ class S {
     );
   }
 
-  /// `There was an error when trying to get {detail}. Please try reloading the page`
-  String errorGettingInformationSubTitle(String detail) {
+  /// `There was an error when trying to get your Portfolio. Please try reloading the page`
+  String get errorGettingInformationPortfolioSubTitle {
     return Intl.message(
-      'There was an error when trying to get $detail. Please try reloading the page',
-      name: 'errorGettingInformationSubTitle',
+      'There was an error when trying to get your Portfolio. Please try reloading the page',
+      name: 'errorGettingInformationPortfolioSubTitle',
       desc: '',
-      args: [detail],
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the investment details. Please try reloading the page`
+  String get errorGettingInformationInvestmentDetailSubTitle {
+    return Intl.message(
+      'There was an error when trying to get the investment details. Please try reloading the page',
+      name: 'errorGettingInformationInvestmentDetailSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the investment style question. Please try reloading the page`
+  String get errorGettingInformationInvestmentStyleQuestionSubTitle {
+    return Intl.message(
+      'There was an error when trying to get the investment style question. Please try reloading the page',
+      name: 'errorGettingInformationInvestmentStyleQuestionSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the transaction history. Please try reloading the page`
+  String get errorGettingInformationTransactionHistorySubTitle {
+    return Intl.message(
+      'There was an error when trying to get the transaction history. Please try reloading the page',
+      name: 'errorGettingInformationTransactionHistorySubTitle',
+      desc: '',
+      args: [],
     );
   }
 
@@ -420,6 +780,16 @@ class S {
     );
   }
 
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? `
   String get askNameScreenPlaceholder {
     return Intl.message(
@@ -435,6 +805,16 @@ class S {
     return Intl.message(
       'Your Name',
       name: 'askNameScreenTextFieldHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Best Suited For`
+  String get bestSuitedFor {
+    return Intl.message(
+      'Best Suited For',
+      name: 'bestSuitedFor',
       desc: '',
       args: [],
     );
@@ -662,6 +1042,46 @@ class S {
     );
   }
 
+  /// `How It Works`
+  String get howItWorks {
+    return Intl.message(
+      'How It Works',
+      name: 'howItWorks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Market Cap`
+  String get marketCap {
+    return Intl.message(
+      'Market Cap',
+      name: 'marketCap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prev Close`
+  String get prevClose {
+    return Intl.message(
+      'Prev Close',
+      name: 'prevClose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.`
+  String get portfolioBuyingPowerToolTip {
+    return Intl.message(
+      'Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
+      name: 'portfolioBuyingPowerToolTip',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Performance`
   String get portfolioDetailPerformanceTitle {
     return Intl.message(
@@ -722,10 +1142,10 @@ class S {
     );
   }
 
-  /// `Expired in ${dateTime} days`
+  /// `Expired in {dateTime} days`
   String portfolioDetailExpiredIn(String dateTime) {
     return Intl.message(
-      'Expired in \$$dateTime days',
+      'Expired in $dateTime days',
       name: 'portfolioDetailExpiredIn',
       desc: '',
       args: [dateTime],
@@ -787,16 +1207,6 @@ class S {
     return Intl.message(
       'Key Info',
       name: 'portfolioDetailKeyInfoTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Investment Period`
-  String get portfolioDetailKeyInfoInvestmentPeriod {
-    return Intl.message(
-      'Investment Period',
-      name: 'portfolioDetailKeyInfoInvestmentPeriod',
       desc: '',
       args: [],
     );
@@ -952,6 +1362,27 @@ class S {
     );
   }
 
+  /// `Performance data will be available once the Botstock starts`
+  String get portfolioDetailChartEmptyMessage {
+    return Intl.message(
+      'Performance data will be available once the Botstock starts',
+      name: 'portfolioDetailChartEmptyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Past {duration} performance of {bot}  ({startDate} - {endDate})`
+  String portfolioDetailChartCaption(
+      String bot, String startDate, String endDate, String duration) {
+    return Intl.message(
+      'Past $duration performance of $bot  ($startDate - $endDate)',
+      name: 'portfolioDetailChartCaption',
+      desc: '',
+      args: [bot, startDate, endDate, duration],
+    );
+  }
+
   /// `Total Portfolio Value`
   String get portfolioTotalValue {
     return Intl.message(
@@ -1007,6 +1438,186 @@ class S {
     return Intl.message(
       'Your Botstocks',
       name: 'portfolioYourBotStock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transaction History`
+  String get transactionHistoryTitle {
+    return Intl.message(
+      'Transaction History',
+      name: 'transactionHistoryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get transactionHistoryTabAll {
+    return Intl.message(
+      'All',
+      name: 'transactionHistoryTabAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders`
+  String get transactionHistoryTabOrders {
+    return Intl.message(
+      'Orders',
+      name: 'transactionHistoryTabOrders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer`
+  String get transactionHistoryTabTransfer {
+    return Intl.message(
+      'Transfer',
+      name: 'transactionHistoryTabTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get transactionHistoryToday {
+    return Intl.message(
+      'Today',
+      name: 'transactionHistoryToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total P/L is`
+  String get totalPnlIs {
+    return Intl.message(
+      'Total P/L is',
+      name: 'totalPnlIs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Setting`
+  String get notificationSetting {
+    return Intl.message(
+      'Notification Setting',
+      name: 'notificationSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `In-App`
+  String get inApp {
+    return Intl.message(
+      'In-App',
+      name: 'inApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Industry`
+  String get industry {
+    return Intl.message(
+      'Industry',
+      name: 'industry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Period`
+  String get investmentPeriod {
+    return Intl.message(
+      'Investment Period',
+      name: 'investmentPeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Push-Notification`
+  String get pushNotification {
+    return Intl.message(
+      'Push-Notification',
+      name: 'pushNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm New Password`
+  String get confirmNewPassword {
+    return Intl.message(
+      'Confirm New Password',
+      name: 'confirmNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sector(s)`
+  String get sectors {
+    return Intl.message(
+      'Sector(s)',
+      name: 'sectors',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to sign out ?`
+  String get signOutConfirmation {
+    return Intl.message(
+      'Are you sure you want to sign out ?',
+      name: 'signOutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date`
+  String get startDate {
+    return Intl.message(
+      'Start Date',
+      name: 'startDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version`
+  String get version {
+    return Intl.message(
+      'Version',
+      name: 'version',
       desc: '',
       args: [],
     );

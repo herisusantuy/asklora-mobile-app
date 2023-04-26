@@ -1,0 +1,119 @@
+import 'dart:async';
+import 'dart:io';
+
+import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/otp/get_otp_request.dart';
+import '../../../core/data/remote/base_api_client.dart';
+import '../../../core/domain/token/repository/repository.dart';
+import '../../settings/domain/change_password/change_password_request.dart';
+import '../../settings/domain/change_password/change_password_response.dart';
+import '../domain/auth_api_client.dart';
+import '../forgot_password/domain/forgot_password_request.dart';
+import '../forgot_password/domain/forgot_password_response.dart';
+import '../reset_password/domain/reset_password_request.dart';
+import '../reset_password/domain/reset_password_response.dart';
+import '../sign_in/domain/sign_in_request.dart';
+import '../sign_in/domain/sign_in_response.dart';
+import '../sign_in/domain/sign_in_with_otp_request.dart';
+import '../sign_out/domain/sign_out_request.dart';
+import '../sign_up/domain/response.dart';
+import '../sign_up/domain/sign_up_request.dart';
+
+class AuthRepository {
+  final AuthApiClient _authApiClient = AuthApiClient();
+  final Repository _storage;
+
+  AuthRepository(this._storage);
+
+  Future<BaseResponse<SignUpResponse>> signUp({
+    required String email,
+    required String password,
+    required String username,
+  }) async {
+    var response =
+        await _authApiClient.signUp(SignUpRequest(email, password, username));
+    return BaseResponse.complete(SignUpResponse.fromJson(response.data));
+  }
+
+  Future<BaseResponse<GetOtpResponse>> getVerificationEmail({
+    required GetOtpRequest getVerificationEmailRequest,
+  }) async {
+    var response =
+        await _authApiClient.getActivationEmail(getVerificationEmailRequest);
+    return BaseResponse.complete(GetOtpResponse.fromJson(response.data));
+  }
+
+  Future<bool> signOut(String? token) async {
+    var response = await _authApiClient.signOut(SignOutRequest(token));
+    return response.statusCode == HttpStatus.resetContent;
+  }
+
+  Future<SignInResponse> signIn({
+    required String email,
+    required String password,
+  }) async {
+    var response = await _authApiClient.signIn(SignInRequest(email, password));
+    var signInResponse = SignInResponse.fromJson(response.data);
+    if (response.statusCode == 200) {
+      _storage.saveAccessToken(signInResponse.access!);
+      _storage.saveRefreshToken(signInResponse.refresh!);
+    }
+    return signInResponse.copyWith(statusCode: response.statusCode);
+  }
+
+  Future<SignInResponse> signInWithOtp({
+    required String otp,
+    required String email,
+    required String password,
+  }) async {
+    var response = await _authApiClient
+        .signInWithOtp(SignInWithOtpRequest(otp, email, password));
+    var signInResponse = SignInResponse.fromJson(response.data);
+
+    if (response.statusCode == 200) {
+      _storage.saveAccessToken(signInResponse.access!);
+      _storage.saveRefreshToken(signInResponse.refresh!);
+    }
+    return signInResponse.copyWith(statusCode: response.statusCode);
+  }
+
+  void removeStorageOnSignInFailed() {
+    _storage.deleteAll();
+  }
+
+  Future<BaseResponse<ResetPasswordResponse>> resetPassword(
+      {required String token,
+      required String password,
+      required String confirmPassword}) async {
+    var response = await _authApiClient.resetPassword(
+      ResetPasswordRequest(token, password, confirmPassword),
+    );
+    return BaseResponse.complete(ResetPasswordResponse.fromJson(response.data));
+  }
+
+  Future<BaseResponse<ForgotPasswordResponse>> forgotPassword(
+      {required String email}) async {
+    var response = await _authApiClient.forgotPassword(
+      ForgotPasswordRequest(email),
+    );
+    return BaseResponse.complete(
+        ForgotPasswordResponse.fromJson(response.data));
+  }
+
+  Future<BaseResponse<ChangePasswordResponse>> changePassword({
+    required String password,
+    required String newPassword,
+    required String confirmNewPassword,
+  }) async {
+    try {
+      var response = await _authApiClient.changePassword(
+          ChangePasswordRequest(password, newPassword, confirmNewPassword));
+      return BaseResponse.complete(
+          ChangePasswordResponse.fromJson(response.data));
+    } on UnauthorizedException {
+      return BaseResponse.error(message: 'Invalid Password');
+    } catch (_) {
+      return BaseResponse.error();
+    }
+  }
+}

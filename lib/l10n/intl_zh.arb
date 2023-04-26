@@ -3,35 +3,64 @@
   "buttonNext": "下一步",
   "buttonCreateAnAccount": "建立帳戶",
   "buttonLetsBegin": "立即開始",
+  "buttonSignOut": "登出",
   "buttonHaveAnAccount": "已有賬戶？",
   "carouselIntro1": "投資一樣\n要夠Fit",
   "carouselIntro2": "FinFit教練，Lora 全程教路",
   "carouselIntro3": "AI策略，\n自動交易",
   "carouselIntro4": "個人化體驗，\n前所未見",
+  "currentPrice": "Current Price",
+  "estStopLossPercent": "預計止損 %",
+  "estMaxLossPercent": "預計最大損失%",
+  "estTakeProfitPercent": "預計止賺%",
+  "estMaxProfitPercent": "預計最大收益%",
+  "estimatedEndDate": "預計結束日期",
+  "employees": "員工人數",
+  "founded": "成立年份",
+  "headquarters": "總部地點",
+  "about": "關於",
   "askNameScreenPlaceholder": "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？",
+  "bestSuitedFor": "最適合",
   "greetingScreenTitle": "Alright! 你準備開始 FinFit 未先？",
   "greetingScreenSubTitle": "訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ ",
-  "accountSettings" : "帳戶設定",
+  "accountSettings": "帳戶設定",
+  "subscription": "訂購計劃",
+  "corePlan": "核心計劃",
+  "freeTrial": "免費試用期",
+  "allSettings": "設定",
+  "investmentPreferences": "投資偏好",
+  "transactionHistory": "交易歷史",
   "accountInformation": "帳戶資訊",
-  "changePassword" : "更改密碼",
+  "changePassword": "更改密碼",
   "paymentDetails": "銀行賬戶詳情",
-  "language" : "語言",
-  "notificationSettings" : "通知設定",
-  "terminateAccount" : "終止賬戶",
-  "userId" : "用戶 ID",
-  "fullName" : "姓名",
-  "phone" : "電話",
-  "dateJoined" : "加入日期",
-  "aboutAsklora" : "關於 Asklora",
+  "language": "語言",
+  "notificationSettings": "通知設定",
+  "terminateAccount": "終止賬戶",
+  "userId": "用戶 ID",
+  "fullName": "姓名",
+  "phone": "電話",
+  "dateJoined": "加入日期",
+  "free": "免費",
+  "investmentAmount": "投資金額",
+  "tradeFee": "交易費用",
+  "endedAmount": "到期價值",
+  "summary": "摘要",
+  "activities": "交易記錄",
+  "filledPrice": "成交價格",
+  "shares": "數量",
+  "orderStarted": "訂單已開始",
+  "orderRollover": "訂單已續期",
+  "orderExpired": "訂單已過期",
+  "aboutAsklora": "關於 Asklora",
   "website": "網站",
   "privacyPolicy": "私隱政策",
   "termsAndConditions": "條款與約束",
-  "contactUs" : "聯絡我們",
-  "getHelp" : "獲得幫助",
+  "contactUs": "聯絡我們",
+  "getHelp": "獲得幫助",
   "customerService": "客戶服務",
   "email": "電郵",
-  "officeHoursLabel" : "辦公時間",
-  "officeHours" : "09:00-18:00 (HKT)",
+  "officeHoursLabel": "辦公時間",
+  "officeHours": "09:00-18:00 (HKT)",
   "buttonCancel": "CANCEL",
   "buttonConfirm": "確定",
   "buttonNotNow": "稍後再說",
@@ -39,14 +68,8 @@
   "buttonDeposit": "入金",
   "buttonCancelTrade": "取消交易",
   "errorGettingInformationTitle": "咦，無法獲取資料",
-  "errorGettingInformationSubTitle": "載入你投資細節時出咗少少問題，Reload一次試下？",
-  "@errorGettingInformationSubTitle": {
-    "placeholders": {
-      "detail": {
-        "type": "String"
-      }
-    }
-  },
+  "errorGettingInformationPortfolioSubTitle": "載入你投資組合時出咗少少問題，Reload一次試下？",
+  "errorGettingInformationInvestmentDetailSubTitle": "載入你投資細節時出咗少少問題，Reload一次試下？",
   "askNameScreenTextFieldHint": "你的名字",
   "tooltipBotDetailsStartDate": "Lora開始Botstocks交易",
   "tooltipBotDetailsInvestmentPeriod": "你定下的投資時間，Botstock將會於此期間內自動買賣股票。",
@@ -99,6 +122,10 @@
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "免費 Botstock 已成功加至\n你嘅投資組合！",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "存入資金正式交易",
   "botTradeBottomSheetCancelBotStockConfirmationTitle": "投資額及交易費用 (HKD1,500) 會自動轉至你嘅賬戶。",
+  "howItWorks": "如何運作",
+  "marketCap": "市值",
+  "prevClose": "上日收市",
+  "portfolioBuyingPowerToolTip": "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 ",
   "portfolioDetailPerformanceTitle": "表現",
   "portfolioDetailPerformanceBotStockValues": "Botstock 價值 (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "投資金額 (HKD)",
@@ -132,7 +159,7 @@
   "portfolioDetailPerformanceCash": "現金 (HKD)",
   "portfolioDetailPerformanceBotAssetsInStock": "股票/現金比例",
   "portfolioDetailKeyInfoTitle": "主要資訊",
-  "portfolioDetailKeyInfoInvestmentPeriod": "投資期",
+
   "portfolioDetailKeyInfoDaysTillExpiry": "續期時間",
   "portfolioDetailKeyInfoStartTime": "開始時間",
   "portfolioDetailKeyInfoEndTime": "結束時間",
@@ -148,6 +175,23 @@
   "portfolioDetailButtonCancelBotStock": "取消BOTSTOCK",
   "portfolioDetailButtonEndBotStock": "取消Botstock",
   "portfolioDetailButtonRolloverBotStock": "續期Botstock",
+  "portfolioDetailChartCaption": "{bot} 於過去 {duration} 星期之表現  ({startDate} - {endDate})",
+  "@portfolioDetailChartCaption": {
+    "placeholders": {
+      "bot": {
+        "type": "String"
+      },
+      "startDate": {
+        "type": "String"
+      },
+      "endDate": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
   "portfolioTotalValue": "總價值 ",
   "portfolioWithdrawableAmount": "可提取金額 ({currency})",
   "@portfolioWithdrawableAmount": {
@@ -175,15 +219,32 @@
   },
   "portfolioTotalPL": "總盈虧",
   "portfolioYourBotStock": "你的Botstocks",
+  "sectors": "領域",
+  "transactionHistoryTitle": "交易歷史",
+  "transactionHistoryTabAll": "全部",
+  "transactionHistoryTabOrders": "訂單",
+  "transactionHistoryTabTransfer": "提存 ",
+  "transactionHistoryToday": "今日",
+  "totalPnlIs": "總盈虧",
+  "notificationSetting": "通知設定",
+  "inApp": "In-app通知",
+  "industry": "行業",
+  "investmentPeriod": "投資期",
+  "pushNotification": "推送通知",
+  "password": "密碼",
+  "newPassword": "新密碼",
+  "confirmNewPassword": "確認新密碼",
+  "startDate": "最佳開始日期",
+  "signOutConfirmation": " 真係要登出？",
   "yourBankAccount" : "銀行賬戶",
-  "yourBankAccountIsUnderReview" : "銀行賬戶正在審批當中，並會於{dateTime} 完成。",
-  "@yourBankAccountIsUnderReview" : {
-    "placeholders" : {
-      "dateTime" : {
-        "type" : "String"
+    "yourBankAccountIsUnderReview" : "銀行賬戶正在審批當中，並會於{dateTime} 完成。",
+    "@yourBankAccountIsUnderReview" : {
+      "placeholders" : {
+        "dateTime" : {
+          "type" : "String"
+        }
       }
-    }
-  },
+    },
   "changeBankAccount" : "更改銀行戶口",
   "noteOnPaymentDetails" : "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"
 }

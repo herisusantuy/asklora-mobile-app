@@ -8,13 +8,15 @@ class CustomHeader extends StatelessWidget {
   final VoidCallback? onTapBack;
   final String title;
   final bool isShowBottomBorder;
+  final Widget? body;
 
-  const CustomHeader({
-    Key? key,
-    this.onTapBack,
-    required this.title,
-    this.isShowBottomBorder = false,
-  }) : super(key: key);
+  const CustomHeader(
+      {Key? key,
+      this.onTapBack,
+      required this.title,
+      this.isShowBottomBorder = false,
+      this.body})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +40,12 @@ class CustomHeader extends StatelessWidget {
                     ))),
           Align(
             alignment: Alignment.center,
-            child: CustomTextNew(
-              title,
-              style: AskLoraTextStyles.h5,
-            ),
+            child: (body != null)
+                ? body
+                : CustomTextNew(
+                    title,
+                    style: AskLoraTextStyles.h5,
+                  ),
           )
         ],
       ),
