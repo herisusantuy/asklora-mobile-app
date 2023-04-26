@@ -11,6 +11,7 @@ import '../../../core/utils/extensions.dart';
 import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../../generated/l10n.dart';
 import '../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../tabs/tabs_screen.dart';
 import '../bloc/bot_stock_bloc.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
@@ -205,6 +206,19 @@ class BotStockBottomSheet {
       primaryButtonLabel: S.of(context).buttonDeposit,
       secondaryButtonLabel: S.of(context).buttonNotNow,
       onPrimaryButtonTap: () => DepositWelcomeScreen.open(context: context),
+      onSecondaryButtonTap: () => Navigator.pop(context),
+    );
+  }
+
+  static notYetRegisteredToBroker(BuildContext context) {
+    LoraBottomSheet.show(
+      loraMemojiType: LoraMemojiType.lora10,
+      context: context,
+      title: 'Not yet registered to broker',
+      subTitle: 'Please wait approximately 24 Hours',
+      primaryButtonLabel: 'BACK TO HOME SCREEN',
+      secondaryButtonLabel: S.of(context).buttonNotNow,
+      onPrimaryButtonTap: () => TabsScreen.openAndRemoveAllRoute(context),
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
   }
