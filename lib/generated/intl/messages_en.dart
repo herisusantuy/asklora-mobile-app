@@ -31,23 +31,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(expiryTime) => "The new expiry date is ${expiryTime}";
 
-  static String m4(detail) =>
-      "There was an error when trying to get ${detail}. Please try reloading the page";
+  static String m4(currency) => "Buying Power (${currency})";
 
-  static String m5(currency) => "Buying Power (${currency})";
+  static String m5(currency) => "Current Price ${currency}";
 
-  static String m6(currency) => "Current Price ${currency}";
-
-  static String m7(bot, startDate, endDate, duration) =>
+  static String m6(bot, startDate, endDate, duration) =>
       "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
 
-  static String m8(dateTime) => "Expired at ${dateTime}";
+  static String m7(dateTime) => "Expired at ${dateTime}";
 
-  static String m9(dateTime) => "Expired in ${dateTime} days";
+  static String m8(dateTime) => "Expired in ${dateTime} days";
 
-  static String m10(currency) => "Total Botstock Values (${currency})";
+  static String m9(currency) => "Total Botstock Values (${currency})";
 
-  static String m11(currency) => "Total Portfolio Value (${currency})";
+  static String m10(currency) => "Total Portfolio Value (${currency})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -133,9 +130,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
-        "errorGettingInformationSubTitle": m4,
+        "errorGettingInformationInvestmentDetailSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "There was an error when trying to get the investment details. Please try reloading the page"),
+        "errorGettingInformationInvestmentStyleQuestionSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "There was an error when trying to get the investment style question. Please try reloading the page"),
+        "errorGettingInformationPortfolioSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "There was an error when trying to get your Portfolio. Please try reloading the page"),
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("Unable to get information"),
+        "errorGettingInformationTransactionHistorySubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "There was an error when trying to get the transaction history. Please try reloading the page"),
         "estMaxLossLevel":
             MessageLookupByLibrary.simpleMessage("Est. Max Loss Level"),
         "estMaxLossPercent":
@@ -192,20 +200,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
-        "portfolioBuyingPower": m5,
-        "portfolioCurrentPrice": m6,
+        "portfolioBuyingPower": m4,
+        "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
+            "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’."),
+        "portfolioCurrentPrice": m5,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("CANCEL BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("END BOTSTOCK"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("ROLLOVER BOTSTOCK"),
-        "portfolioDetailChartCaption": m7,
+        "portfolioDetailChartCaption": m6,
         "portfolioDetailChartEmptyMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Performance data will be available once the Botstock starts"),
-        "portfolioDetailExpiredAt": m8,
-        "portfolioDetailExpiredIn": m9,
+        "portfolioDetailExpiredAt": m7,
+        "portfolioDetailExpiredIn": m8,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("Avg. Loss"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -251,11 +261,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Performance"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("Total P&L"),
-        "portfolioTotalBotStock": m10,
+        "portfolioTotalBotStock": m9,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
             MessageLookupByLibrary.simpleMessage("Total Portfolio Value"),
-        "portfolioWithdrawableAmount": m11,
+        "portfolioWithdrawableAmount": m10,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
@@ -300,7 +310,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Today"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "website": MessageLookupByLibrary.simpleMessage("Website"),
-        "yourPortfolio": MessageLookupByLibrary.simpleMessage("Your Portfolio")
+        "website": MessageLookupByLibrary.simpleMessage("Website")
       };
 }

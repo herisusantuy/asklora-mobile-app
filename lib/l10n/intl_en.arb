@@ -65,14 +65,10 @@
   "orderRollover": "Order Rollover",
   "orderExpired": "Order Expired",
   "errorGettingInformationTitle": "Unable to get information",
-  "errorGettingInformationSubTitle": "There was an error when trying to get {detail}. Please try reloading the page",
-  "@errorGettingInformationSubTitle": {
-    "placeholders": {
-      "detail": {
-        "type": "String"
-      }
-    }
-  },
+  "errorGettingInformationPortfolioSubTitle": "There was an error when trying to get your Portfolio. Please try reloading the page",
+  "errorGettingInformationInvestmentDetailSubTitle": "There was an error when trying to get the investment details. Please try reloading the page",
+  "errorGettingInformationInvestmentStyleQuestionSubTitle": "There was an error when trying to get the investment style question. Please try reloading the page",
+  "errorGettingInformationTransactionHistorySubTitle": "There was an error when trying to get the transaction history. Please try reloading the page",
   "carouselIntro1": "Get your Investments in Shape",
   "carouselIntro2": "Guided by FinFit Coach, Lora",
   "carouselIntro3": "Invest with AI strategy, automated",
@@ -137,6 +133,7 @@
   "howItWorks": "How It Works",
   "marketCap": "Market Cap",
   "prevClose": "Prev Close",
+  "portfolioBuyingPowerToolTip": "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.",
   "portfolioDetailPerformanceTitle": "Performance",
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
@@ -249,7 +246,6 @@
   "sectors": "Sector(s)",
   "signOutConfirmation": "Are you sure you want to sign out ?",
   "startDate": "Start Date",
-  "yourPortfolio": "Your Portfolio",
   "version": "Version"
 
 

@@ -80,9 +80,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             return CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
                 title: S.of(context).errorGettingInformationTitle,
-                subTitle: S
-                    .of(context)
-                    .errorGettingInformationSubTitle('your Portfolio'),
+                subTitle:
+                    S.of(context).errorGettingInformationPortfolioSubTitle,
                 primaryButtonLabel: S.of(context).buttonReloadPage,
                 secondaryButtonLabel: S.of(context).buttonCancel,
                 onSecondaryButtonTap: () => Navigator.pop(context),

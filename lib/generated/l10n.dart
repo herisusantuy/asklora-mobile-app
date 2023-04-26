@@ -700,13 +700,43 @@ class S {
     );
   }
 
-  /// `There was an error when trying to get {detail}. Please try reloading the page`
-  String errorGettingInformationSubTitle(String detail) {
+  /// `There was an error when trying to get your Portfolio. Please try reloading the page`
+  String get errorGettingInformationPortfolioSubTitle {
     return Intl.message(
-      'There was an error when trying to get $detail. Please try reloading the page',
-      name: 'errorGettingInformationSubTitle',
+      'There was an error when trying to get your Portfolio. Please try reloading the page',
+      name: 'errorGettingInformationPortfolioSubTitle',
       desc: '',
-      args: [detail],
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the investment details. Please try reloading the page`
+  String get errorGettingInformationInvestmentDetailSubTitle {
+    return Intl.message(
+      'There was an error when trying to get the investment details. Please try reloading the page',
+      name: 'errorGettingInformationInvestmentDetailSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the investment style question. Please try reloading the page`
+  String get errorGettingInformationInvestmentStyleQuestionSubTitle {
+    return Intl.message(
+      'There was an error when trying to get the investment style question. Please try reloading the page',
+      name: 'errorGettingInformationInvestmentStyleQuestionSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the transaction history. Please try reloading the page`
+  String get errorGettingInformationTransactionHistorySubTitle {
+    return Intl.message(
+      'There was an error when trying to get the transaction history. Please try reloading the page',
+      name: 'errorGettingInformationTransactionHistorySubTitle',
+      desc: '',
+      args: [],
     );
   }
 
@@ -1037,6 +1067,16 @@ class S {
     return Intl.message(
       'Prev Close',
       name: 'prevClose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.`
+  String get portfolioBuyingPowerToolTip {
+    return Intl.message(
+      'Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
+      name: 'portfolioBuyingPowerToolTip',
       desc: '',
       args: [],
     );
@@ -1568,16 +1608,6 @@ class S {
     return Intl.message(
       'Start Date',
       name: 'startDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your Portfolio`
-  String get yourPortfolio {
-    return Intl.message(
-      'Your Portfolio',
-      name: 'yourPortfolio',
       desc: '',
       args: [],
     );

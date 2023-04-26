@@ -75,8 +75,9 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
               CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(
               title: S.of(context).errorGettingInformationTitle,
-              subTitle: S.of(context).errorGettingInformationSubTitle(
-                  'your Investment Style Question'),
+              subTitle: S
+                  .of(context)
+                  .errorGettingInformationInvestmentStyleQuestionSubTitle,
               primaryButtonLabel: S.of(context).buttonReloadPage,
               onPrimaryButtonTap: () =>
                   context.read<ForYouQuestionBloc>().add(LoadQuestion()),
