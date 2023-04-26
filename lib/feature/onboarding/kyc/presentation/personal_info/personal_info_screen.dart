@@ -16,7 +16,7 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/build_configs/base_config.dart';
+import '../../../../../core/utils/build_configs/app_config_widget.dart';
 import '../../../../../core/utils/build_configs/build_config.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
@@ -39,8 +39,7 @@ class PersonalInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //base config check to determine first name and last name formatter
-    BaseConfig? baseConfig = Environment().config;
+    final inputFormatter = _getTextInputFormatter(context);
     return KycBaseForm(
       progress: progress,
       onTapBack: () =>
@@ -65,12 +64,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 initialValue: context.read<PersonalInfoBloc>().state.firstName,
                 key: const Key('first_name'),
                 label: 'Legal English First Name*',
-                textInputFormatterList: [
-                  baseConfig is DevConfig || baseConfig is StagingConfig
-                      ? fullEnglishNameWithHyphenAndUnderScoreFormatter()
-                      : fullEnglishNameFormatter(),
-                  onlyAllowOneSpace()
-                ],
+                textInputFormatterList: [inputFormatter, onlyAllowOneSpace()],
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoFirstNameChanged(value))),
@@ -79,12 +73,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 initialValue: context.read<PersonalInfoBloc>().state.lastName,
                 key: const Key('last_name'),
                 label: 'Legal English Last Name*',
-                textInputFormatterList: [
-                  baseConfig is DevConfig || baseConfig is StagingConfig
-                      ? fullEnglishNameWithHyphenAndUnderScoreFormatter()
-                      : fullEnglishNameFormatter(),
-                  onlyAllowOneSpace()
-                ],
+                textInputFormatterList: [inputFormatter, onlyAllowOneSpace()],
                 onChanged: (value) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoLastNameChanged(value))),
@@ -289,5 +278,17 @@ class PersonalInfoScreen extends StatelessWidget {
     } else {
       return false;
     }
+  }
+
+  FilteringTextInputFormatter _getTextInputFormatter(BuildContext context) {
+    final config = AppConfigWidget.of(context);
+    if (config != null) {
+      if (config.baseConfig is DevConfig ||
+          config.baseConfig is StagingConfig) {
+        return fullEnglishNameWithHyphenAndUnderScoreFormatter();
+      }
+    }
+
+    return fullEnglishNameFormatter();
   }
 }

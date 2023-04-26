@@ -5,6 +5,7 @@ FilteringTextInputFormatter englishNameFormatter() =>
 
 FilteringTextInputFormatter fullEnglishNameFormatter() =>
     FilteringTextInputFormatter.allow(RegExp('[a-zA-Z ]'));
+
 FilteringTextInputFormatter fullEnglishNameWithHyphenAndUnderScoreFormatter() =>
     FilteringTextInputFormatter.allow(RegExp('[a-zA-Z-_ ]'));
 
