@@ -17,6 +17,7 @@ import '../../payment/repository/bank_account_repository.dart';
 
 class PaymentDetailScreen extends StatelessWidget {
   static const route = '/payment_details';
+
   const PaymentDetailScreen({super.key});
 
   @override
@@ -54,7 +55,7 @@ class PaymentDetailScreen extends StatelessWidget {
                             CustomTextNew(S.of(context).yourBankAccount,
                                 style: AskLoraTextStyles.body1),
                             const SizedBox(height: 32),
-                            _bankDetails,
+                            _getBankDetails(response[0]),
                             //* This widget will shown if account status == "Account Approved"
                             const SizedBox(height: 32),
                             _changeBankButton,
@@ -75,32 +76,22 @@ class PaymentDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget get _bankDetails {
-    return BlocBuilder<BankAccountBloc, BankAccountState>(
-      buildWhen: (previous, current) =>
-          previous.response.state != current.response.state,
-      builder: (context, state) {
-        List<GetBankAccountResponse> response =
-            state.response.data as List<GetBankAccountResponse>;
-        return RoundColoredBox(
-            content: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomTextNew(response[0].name!, style: AskLoraTextStyles.h6),
-              const SizedBox(height: 5),
-              CustomTextNew(response[0].accountNumber!,
-                  style: AskLoraTextStyles.body1),
-              const SizedBox(height: 20),
-              CustomTextNew(response[0].accountName!,
-                  style: AskLoraTextStyles.body1),
-            ],
-          ),
-        ));
-      },
-    );
-  }
+  Widget _getBankDetails(GetBankAccountResponse response) => RoundColoredBox(
+          content: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomTextNew(response.name!, style: AskLoraTextStyles.h6),
+            const SizedBox(height: 5),
+            CustomTextNew(response.accountNumber!,
+                style: AskLoraTextStyles.body1),
+            const SizedBox(height: 20),
+            CustomTextNew(response.accountName!,
+                style: AskLoraTextStyles.body1),
+          ],
+        ),
+      ));
 
   Widget get _changeBankButton {
     return Builder(builder: (context) {
