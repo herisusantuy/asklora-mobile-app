@@ -56,7 +56,6 @@ class PaymentDetailScreen extends StatelessWidget {
                                 style: AskLoraTextStyles.body1),
                             const SizedBox(height: 32),
                             _getBankDetails(response[0]),
-                            //* This widget will shown if account status == "Account Approved"
                             const SizedBox(height: 32),
                             _changeBankButton,
                             const SizedBox(height: 32),
