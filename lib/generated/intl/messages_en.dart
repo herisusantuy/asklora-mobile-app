@@ -127,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
+        "doAnyOfTheFollowingApply": MessageLookupByLibrary.simpleMessage(
+            "Do any of the following apply to you or a member of your immediate family ?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
@@ -174,6 +176,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Alright! Are you ready for the FinFit journey? "),
         "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
+        "iAmADirector": MessageLookupByLibrary.simpleMessage(
+            "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)"),
+        "iAmAFamily": MessageLookupByLibrary.simpleMessage(
+            "I am a family member or relative of a senior political figure."),
+        "iAmASeniorExecutive": MessageLookupByLibrary.simpleMessage(
+            "I am a senior executive at or a 10% or greater shareholder of a publicly traded company."),
+        "iAmASeniorPolitical": MessageLookupByLibrary.simpleMessage(
+            "I am a senior political figure."),
         "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
         "industry": MessageLookupByLibrary.simpleMessage("Industry"),
         "investmentAmount":
@@ -185,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+        "no": MessageLookupByLibrary.simpleMessage(" No"),
         "notificationSetting":
             MessageLookupByLibrary.simpleMessage("Notification Setting"),
         "notificationSettings":
@@ -272,7 +283,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "saveForLater": MessageLookupByLibrary.simpleMessage("SAVE FOR LATER"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
+        "setUpFinancialProfile":
+            MessageLookupByLibrary.simpleMessage("Set Up Financial Profile"),
         "shares": MessageLookupByLibrary.simpleMessage("Shares"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to sign out ?"),
@@ -310,6 +324,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Today"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
-        "website": MessageLookupByLibrary.simpleMessage("Website")
+        "website": MessageLookupByLibrary.simpleMessage("Website"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }
