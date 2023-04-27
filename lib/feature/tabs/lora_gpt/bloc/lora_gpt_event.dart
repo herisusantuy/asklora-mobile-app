@@ -19,3 +19,24 @@ class OnSearchQuery extends LoraGptEvent {
   @override
   List<Object?> get props => [];
 }
+
+class OnScreenLaunch extends LoraGptEvent {
+  const OnScreenLaunch();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class OnResetSession extends LoraGptEvent {
+  const OnResetSession();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class OnFinishTyping extends LoraGptEvent {
+  const OnFinishTyping();
+
+  @override
+  List<Object?> get props => [];
+}

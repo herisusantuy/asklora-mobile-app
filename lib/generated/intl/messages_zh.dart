@@ -30,22 +30,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(expiryTime) => "更新到期時間為 ${expiryTime}";
 
-  static String m4(detail) => "載入你投資細節時出咗少少問題，Reload一次試下？";
+  static String m4(currency) => "購買力 (${currency})";
 
-  static String m5(currency) => "購買力 (${currency})";
+  static String m5(currency) => "當前價格 ${currency}";
 
-  static String m6(currency) => "當前價格 ${currency}";
-
-  static String m7(bot, startDate, endDate, duration) =>
+  static String m6(bot, startDate, endDate, duration) =>
       "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
 
-  static String m8(dateTime) => "到期日期 ${dateTime}";
+  static String m7(dateTime) => "到期日期 ${dateTime}";
 
-  static String m9(dateTime) => "${dateTime}日後到期";
+  static String m8(dateTime) => "${dateTime}日後到期";
 
-  static String m10(currency) => "Botstock 總價值 (${currency})";
+  static String m9(currency) => "Botstock 總價值 (${currency})";
 
-  static String m11(currency) => "可提取金額 (${currency})";
+  static String m10(currency) => "可提取金額 (${currency})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -114,7 +112,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
-        "errorGettingInformationSubTitle": m4,
+        "errorGettingInformationInvestmentDetailSubTitle":
+            MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
+        "errorGettingInformationPortfolioSubTitle":
+            MessageLookupByLibrary.simpleMessage("載入你投資組合時出咗少少問題，Reload一次試下？"),
         "errorGettingInformationTitle":
             MessageLookupByLibrary.simpleMessage("咦，無法獲取資料"),
         "estMaxLossPercent": MessageLookupByLibrary.simpleMessage("預計最大損失%"),
@@ -153,17 +154,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("密碼"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
-        "portfolioBuyingPower": m5,
-        "portfolioCurrentPrice": m6,
+        "portfolioBuyingPower": m4,
+        "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
+            "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 "),
+        "portfolioCurrentPrice": m5,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("取消BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("取消Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("續期Botstock"),
-        "portfolioDetailChartCaption": m7,
-        "portfolioDetailExpiredAt": m8,
-        "portfolioDetailExpiredIn": m9,
+        "portfolioDetailChartCaption": m6,
+        "portfolioDetailExpiredAt": m7,
+        "portfolioDetailExpiredIn": m8,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("平均虧損"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -206,10 +209,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("表現"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("總盈虧"),
-        "portfolioTotalBotStock": m10,
+        "portfolioTotalBotStock": m9,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
-        "portfolioWithdrawableAmount": m11,
+        "portfolioWithdrawableAmount": m10,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
