@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/utils/feature_flags.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -25,23 +26,21 @@ class DisclosureAffiliationPersonScreen extends StatelessWidget {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Set Up Financial Profile',
+      title: S.of(context).setUpFinancialProfile,
       content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const FinancialQuestion(
-            'Do any of the following apply to you or a member of your immediate family ?',
+          FinancialQuestion(
+            S.of(context).doAnyOfTheFollowingApply,
           ),
           _spaceHeight,
-          const DotText(
-              'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.'),
+          DotText(S.of(context).iAmASeniorExecutive),
           _spaceHeight,
-          const DotText('I am a senior political figure.'),
+          DotText(S.of(context).iAmASeniorPolitical),
           _spaceHeight,
-          const DotText(
-              'I am a family member or relative of a senior political figure.'),
+          DotText(S.of(context).iAmAFamily),
           _spaceHeight,
-          const DotText(
-              'I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission.'),
+          DotText(S.of(context).iAmADirector),
         ],
       ),
       bottomButton: BlocBuilder<DisclosureAffiliationBloc,

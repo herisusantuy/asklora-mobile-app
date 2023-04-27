@@ -246,7 +246,14 @@
   "sectors": "Sector(s)",
   "signOutConfirmation": "Are you sure you want to sign out ?",
   "startDate": "Start Date",
-  "version": "Version"
-
-
+  "version": "Version",
+  "setUpFinancialProfile" : "Set Up Financial Profile",
+  "doAnyOfTheFollowingApply" : "Do any of the following apply to you or a member of your immediate family ?",
+  "iAmASeniorExecutive" : "I am a senior executive at or a 10% or greater shareholder of a publicly traded company.",
+  "iAmASeniorPolitical" : "I am a senior political figure.",
+  "iAmAFamily" : "I am a family member or relative of a senior political figure.",
+  "iAmADirector": "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)",
+  "yes": "Yes",
+  "no" : " No",
+  "saveForLater": "SAVE FOR LATER"
 }

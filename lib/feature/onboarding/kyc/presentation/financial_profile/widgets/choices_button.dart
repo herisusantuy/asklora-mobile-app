@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/presentation/buttons/secondary/secondary_multiple_choice_button.dart';
 import '../../../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../../../generated/l10n.dart';
 
 class ChoicesButton extends StatelessWidget {
   final String initialValue;
@@ -28,7 +29,7 @@ class ChoicesButton extends StatelessWidget {
             active: initialValue == 'yes',
             key: const Key('yes_button'),
             fontStyle: FontStyle.normal,
-            label: 'Yes',
+            label: S.of(context).yes,
             onTap: onAnswerYes,
             labelAlignment: Alignment.center,
           ),
@@ -39,14 +40,14 @@ class ChoicesButton extends StatelessWidget {
             active: initialValue == 'no',
             key: const Key('no_button'),
             fontStyle: FontStyle.normal,
-            label: 'No',
+            label: S.of(context).no,
             onTap: onAnswerNo,
             labelAlignment: Alignment.center,
           ),
           CustomTextButton(
             key: const Key('save_for_later_button'),
             margin: const EdgeInsets.only(top: 24),
-            label: 'SAVE FOR LATER',
+            label: S.of(context).saveForLater,
             onTap: onSaveForLater,
           )
         ],
