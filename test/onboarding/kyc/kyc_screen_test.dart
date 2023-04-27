@@ -1,7 +1,9 @@
+import 'package:asklora_mobile_app/core/presentation/buttons/button_pair.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/bloc/kyc_bloc.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/presentation/kyc_screen.dart';
-import 'package:asklora_mobile_app/core/presentation/buttons/button_pair.dart';
+import 'package:asklora_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../mocks/mocks.dart';
@@ -14,6 +16,13 @@ void main() {
           WidgetTester tester, KycPageStep kycPageStep) async {
         final mockObserver = MockNavigatorObserver();
         await tester.pumpWidget(MaterialApp(
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
           home: KycScreen(
             initialKycPageStep: kycPageStep,
           ),
