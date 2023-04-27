@@ -32,10 +32,13 @@ part 'widgets/bot_order_transaction_history_detail_content.dart';
 part 'bot_order_transaction_history_summary_screen.dart';
 
 part 'bot_order_transaction_history_activities_screen.dart';
+
 part 'bot_order_transaction_history_performance_screen.dart';
 
 part 'widgets/bot_order_transaction_history_summary_card.dart';
+
 part 'widgets/bot_order_transaction_history_activities_group_widget.dart';
+
 part 'widgets/bot_order_transaction_history_activities_card.dart';
 
 class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
@@ -58,9 +61,8 @@ class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
             BotTransactionHistoryDetailState>(
           listenWhen: (previous, current) =>
               previous.response.state != current.response.state,
-          listener: (context, state) {
-            CustomLoadingOverlay.of(context).show(state.response.state);
-          },
+          listener: (context, state) =>
+              CustomLoadingOverlay.of(context).show(state.response.state),
           buildWhen: (previous, current) =>
               previous.response.state != current.response.state,
           builder: (context, state) {

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../../../../../core/utils/date_utils.dart';
 import '../../../../../core/utils/extensions.dart';
 import 'bot_activities_transaction_history_model.dart';
 import 'bot_summary_transaction_history_model.dart';
@@ -23,16 +24,16 @@ class BotDetailTransactionHistoryResponse extends Equatable {
   @JsonKey(name: 'bot_apps_name')
   final String botAppsName;
   @JsonKey(name: 'botstock_value')
-  final double botStockValue;
+  final double? botStockValue;
   @JsonKey(name: 'stock_value')
-  final double stockValue;
+  final double? stockValue;
   final String duration;
   @JsonKey(name: 'rollover_count')
   final int rolloverCount;
   @JsonKey(name: 'current_pnl_amount')
-  final double currentPnlAmount;
+  final double? currentPnlAmount;
   @JsonKey(name: 'current_pnl_ret')
-  final double currentPnlRet;
+  final double? currentPnlRet;
   @JsonKey(name: 'max_loss_pct')
   final double maxLossPct;
   @JsonKey(name: 'target_profit_pct')
@@ -41,6 +42,12 @@ class BotDetailTransactionHistoryResponse extends Equatable {
   final double investmentAmount;
   final List<BotSummaryTransactionHistoryModel> summary;
   final List<BotActivitiesTransactionHistoryModel> activities;
+  @JsonKey(name: 'days_to_expire')
+  final double daysToExpire;
+  @JsonKey(name: 'start_date')
+  final String? startDate;
+  @JsonKey(name: 'expire_date')
+  final String? expireDate;
 
   const BotDetailTransactionHistoryResponse(
       this.pk,
@@ -62,7 +69,10 @@ class BotDetailTransactionHistoryResponse extends Equatable {
       this.currentPnlRet,
       this.maxLossPct,
       this.targetProfitPct,
-      this.investmentAmount);
+      this.investmentAmount,
+      this.daysToExpire,
+      this.startDate,
+      this.expireDate);
 
   BotDetailTransactionHistoryResponse copyWith(
           {List<BotActivitiesTransactionHistoryModel>? activities}) =>
@@ -86,7 +96,10 @@ class BotDetailTransactionHistoryResponse extends Equatable {
           currentPnlRet,
           maxLossPct,
           targetProfitPct,
-          investmentAmount);
+          investmentAmount,
+          daysToExpire,
+          startDate,
+          expireDate);
 
   String get botStockValueString {
     double botStockValueDouble = checkDouble(botStockValue);
@@ -110,6 +123,14 @@ class BotDetailTransactionHistoryResponse extends Equatable {
             ? '$currentPnlRetDouble%'
             : '/';
   }
+
+  String get daysToExpireString => daysToExpire.abs().toInt().toString();
+
+  String get startDateFormatted =>
+      startDate != null ? formatDateTimeAsString(startDate) : 'NA';
+
+  String get expireDateFormatted =>
+      expireDate != null ? formatDateTimeAsString(expireDate) : 'NA';
 
   factory BotDetailTransactionHistoryResponse.fromJson(
           Map<String, dynamic> json) =>
@@ -139,6 +160,9 @@ class BotDetailTransactionHistoryResponse extends Equatable {
         currentPnlRet,
         maxLossPct,
         targetProfitPct,
-        investmentAmount
+        investmentAmount,
+        daysToExpire,
+        startDate,
+        expireDate
       ];
 }

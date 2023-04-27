@@ -29,7 +29,7 @@ void main() async {
             'open',
             'pending',
             'Pull Up',
-            [],
+            const [],
             [
               BotActivitiesTransactionHistoryModel(
                 DateTime(2023, 04, 14),
@@ -73,7 +73,10 @@ void main() async {
             0,
             0,
             0,
-            0));
+            0,
+            0,
+            '',
+            ''));
 
     final List<GroupedActivitiesModel> groupedActivities = [
       GroupedActivitiesModel(

@@ -26,15 +26,18 @@ BotDetailTransactionHistoryResponse
               .map((e) => BotActivitiesTransactionHistoryModel.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-          (json['botstock_value'] as num).toDouble(),
-          (json['stock_value'] as num).toDouble(),
+          (json['botstock_value'] as num?)?.toDouble(),
+          (json['stock_value'] as num?)?.toDouble(),
           json['duration'] as String,
           json['rollover_count'] as int,
-          (json['current_pnl_amount'] as num).toDouble(),
-          (json['current_pnl_ret'] as num).toDouble(),
+          (json['current_pnl_amount'] as num?)?.toDouble(),
+          (json['current_pnl_ret'] as num?)?.toDouble(),
           (json['max_loss_pct'] as num).toDouble(),
           (json['target_profit_pct'] as num).toDouble(),
           (json['investment_amount'] as num).toDouble(),
+          (json['days_to_expire'] as num).toDouble(),
+          json['start_date'] as String?,
+          json['expire_date'] as String?,
         );
 
 Map<String, dynamic> _$BotDetailTransactionHistoryResponseToJson(
@@ -60,4 +63,7 @@ Map<String, dynamic> _$BotDetailTransactionHistoryResponseToJson(
       'investment_amount': instance.investmentAmount,
       'summary': instance.summary,
       'activities': instance.activities,
+      'days_to_expire': instance.daysToExpire,
+      'start_date': instance.startDate,
+      'expire_date': instance.expireDate,
     };

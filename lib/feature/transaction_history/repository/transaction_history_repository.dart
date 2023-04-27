@@ -43,6 +43,7 @@ class TransactionHistoryRepository {
           activities: _addIndexChartData(
               botDetailTransactionHistoryResponse.activities)));
     } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }

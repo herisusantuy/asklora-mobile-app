@@ -15,17 +15,31 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return TransactionHistoryTabScreen(
       header: _header(context),
-      tabs: [
-        S.of(context).summary,
-        S.of(context).activities,
-        S.of(context).performance,
-      ],
-      tabViews: [
-        BotOrderTransactionHistorySummaryScreen(botStatusType: botStatusType),
-        const BotOrderTransactionHistoryActivitiesScreen(),
-        const BotOrderTransactionHistoryPerformanceScreen(),
-      ],
+      tabs: getTabs(context),
+      tabViews: getTabViews(context),
     );
+  }
+
+  List<String> getTabs(BuildContext context) {
+    List<String> tabs = [
+      S.of(context).summary,
+      S.of(context).activities,
+    ];
+    if (botStatusType == BotStatus.closed) {
+      tabs.add(S.of(context).performance);
+    }
+    return tabs;
+  }
+
+  List<Widget> getTabViews(BuildContext context) {
+    List<Widget> tabViews = [
+      BotOrderTransactionHistorySummaryScreen(botStatusType: botStatusType),
+      const BotOrderTransactionHistoryActivitiesScreen(),
+    ];
+    if (botStatusType == BotStatus.closed) {
+      tabViews.add(const BotOrderTransactionHistoryPerformanceScreen());
+    }
+    return tabViews;
   }
 
   Widget _header(BuildContext context) => Container(
