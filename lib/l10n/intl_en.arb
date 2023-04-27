@@ -246,15 +246,24 @@
   "signOutConfirmation": "Are you sure you want to sign out ?",
   "startDate": "Start Date",
   "version": "Version",
+  "setUpFinancialProfile" : "Set Up Financial Profile",
+  "doAnyOfTheFollowingApply" : "Do any of the following apply to you or a member of your immediate family ?",
+  "iAmASeniorExecutive" : "I am a senior executive at or a 10% or greater shareholder of a publicly traded company.",
+  "iAmASeniorPolitical" : "I am a senior political figure.",
+  "iAmAFamily" : "I am a family member or relative of a senior political figure.",
+  "iAmADirector": "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)",
+  "yes": "Yes",
+  "no" : " No",
+  "saveForLater": "SAVE FOR LATER",
   "yourBankAccount" : "Your Bank Account",
-    "yourBankAccountIsUnderReview" : "Your Bank Account is under review and will be complete by {dateTime}",
-    "@yourBankAccountIsUnderReview" : {
-      "placeholders" : {
-        "dateTime" : {
-          "type" : "String"
+      "yourBankAccountIsUnderReview" : "Your Bank Account is under review and will be complete by {dateTime}",
+      "@yourBankAccountIsUnderReview" : {
+        "placeholders" : {
+          "dateTime" : {
+            "type" : "String"
+          }
         }
-      }
-    },
-   "changeBankAccount" : "Change Bank Account",
-   "noteOnPaymentDetails" : "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."
+      },
+  "changeBankAccount" : "Change Bank Account",
+  "noteOnPaymentDetails" : "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."
 }

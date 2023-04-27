@@ -1623,6 +1623,96 @@ class S {
     );
   }
 
+  /// `Set Up Financial Profile`
+  String get setUpFinancialProfile {
+    return Intl.message(
+      'Set Up Financial Profile',
+      name: 'setUpFinancialProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do any of the following apply to you or a member of your immediate family ?`
+  String get doAnyOfTheFollowingApply {
+    return Intl.message(
+      'Do any of the following apply to you or a member of your immediate family ?',
+      name: 'doAnyOfTheFollowingApply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a senior executive at or a 10% or greater shareholder of a publicly traded company.`
+  String get iAmASeniorExecutive {
+    return Intl.message(
+      'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.',
+      name: 'iAmASeniorExecutive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a senior political figure.`
+  String get iAmASeniorPolitical {
+    return Intl.message(
+      'I am a senior political figure.',
+      name: 'iAmASeniorPolitical',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a family member or relative of a senior political figure.`
+  String get iAmAFamily {
+    return Intl.message(
+      'I am a family member or relative of a senior political figure.',
+      name: 'iAmAFamily',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)`
+  String get iAmADirector {
+    return Intl.message(
+      'I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)',
+      name: 'iAmADirector',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` No`
+  String get no {
+    return Intl.message(
+      ' No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SAVE FOR LATER`
+  String get saveForLater {
+    return Intl.message(
+      'SAVE FOR LATER',
+      name: 'saveForLater',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Your Bank Account`
   String get yourBankAccount {
     return Intl.message(

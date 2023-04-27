@@ -236,8 +236,17 @@
   "confirmNewPassword": "確認新密碼",
   "startDate": "最佳開始日期",
   "signOutConfirmation": " 真係要登出？",
+  "setUpFinancialProfile" : "設定財務概況",
+  "doAnyOfTheFollowingApply" : "以下描述適用於你或你的直系親屬？",
+  "iAmASeniorExecutive" : "我是上市公司的高級行政人員或持有 10% 或以上的股份。",
+  "iAmASeniorPolitical" : "我是高級政治人物。",
+  "iAmAFamily" : "我是高級政治人物的家庭成員或親屬。",
+  "iAmADirector": "我是香港證券及期貨事務監察委員會註冊持牌機構的董事、員工、或註冊持牌人士。(除了Lora Advisors Limited）",
+  "yes": "是",
+  "no" : " 否",
+  "saveForLater": "儲存並離開",
   "yourBankAccount" : "銀行賬戶",
-    "yourBankAccountIsUnderReview" : "銀行賬戶正在審批當中，並會於{dateTime} 完成。",
+  "yourBankAccountIsUnderReview" : "銀行賬戶正在審批當中，並會於{dateTime} 完成。",
     "@yourBankAccountIsUnderReview" : {
       "placeholders" : {
         "dateTime" : {
