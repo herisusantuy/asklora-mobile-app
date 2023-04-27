@@ -40,6 +40,7 @@ import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/settings/presentation/about_asklora_screen.dart';
 import '../../feature/settings/presentation/account_information_screen.dart';
 import '../../feature/settings/presentation/account_setting_screen.dart';
+import '../../feature/settings/presentation/change_password_screen.dart';
 import '../../feature/settings/presentation/customer_service_screen.dart';
 import '../../feature/settings/presentation/get_help_screen.dart';
 import '../../feature/settings/presentation/language_selection_screen.dart';
@@ -297,6 +298,9 @@ class RouterGenerator {
             builder: (_) => BotOrderTransactionHistoryDetailScreen(
                   transactionModel: settings.arguments as TransactionModel,
                 ));
+      case ChangePasswordScreen.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const ChangePasswordScreen());
       default:
         return MaterialPageRoute(
             settings: settings,
