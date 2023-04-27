@@ -63,6 +63,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestSuitedFor":
             MessageLookupByLibrary.simpleMessage("Best Suited For"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
+        "botTradeBottomSheetAccountNotYetApprovedSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Est. to be approved by 2 working days."),
+        "botTradeBottomSheetAccountNotYetApprovedTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "You can trade after your account is approved."),
         "botTradeBottomSheetAmountMinimum": m0,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("How much are you investing?"),
@@ -122,11 +128,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
+        "continueAccountOpening":
+            MessageLookupByLibrary.simpleMessage("CONTINUE ACCOUNT OPENING"),
         "corePlan": MessageLookupByLibrary.simpleMessage("Core Plan"),
+        "createAnAccount":
+            MessageLookupByLibrary.simpleMessage("CREATE AN ACCOUNT"),
         "currentPrice": MessageLookupByLibrary.simpleMessage("Current Price"),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
+        "defineInvestmentStyle":
+            MessageLookupByLibrary.simpleMessage("DEFINE INVESTMENT STYLE"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
@@ -168,6 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
+        "gotIt": MessageLookupByLibrary.simpleMessage("GOT IT"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -193,6 +206,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel":
             MessageLookupByLibrary.simpleMessage("Office Hours"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK!"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
         "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
@@ -261,6 +275,42 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Performance"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("Total P&L"),
+        "portfolioPopUpContinueAccountOpeningSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "You still need to complete your account opening until you can start trading. "),
+        "portfolioPopUpContinueAccountOpeningTitle":
+            MessageLookupByLibrary.simpleMessage("Continue Account Opening"),
+        "portfolioPopUpCreateAnAccountSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "You can manage all your investments here after you start trading. Create an account and start trading."),
+        "portfolioPopUpCreateAnAccountTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Create an Account and Start Trading!"),
+        "portfolioPopUpDefineInvestmentSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!"),
+        "portfolioPopUpDefineInvestmentTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Define Your Investment Style"),
+        "portfolioPopUpFundAccountSubTitle": MessageLookupByLibrary.simpleMessage(
+            "Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account."),
+        "portfolioPopUpFundAccountTitle":
+            MessageLookupByLibrary.simpleMessage("Fund your account"),
+        "portfolioPopUpNoTradingHasStartedTitle":
+            MessageLookupByLibrary.simpleMessage("No trading has started!"),
+        "portfolioPopUpNoTradingHasStartedtSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "You can manage all your investments here after you start trading. "),
+        "portfolioPopUpPendingReviewSubTitle": MessageLookupByLibrary.simpleMessage(
+            "You can manage all your investments here after your account has been opened!"),
+        "portfolioPopUpPendingReviewTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Your Account is Pending Review"),
+        "portfolioPopUpRedeemYourBotstockSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!"),
+        "portfolioPopUpRedeemYourBotstockTitle":
+            MessageLookupByLibrary.simpleMessage("Redeem Your Free Botstock"),
         "portfolioTotalBotStock": m9,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
@@ -272,10 +322,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "redeemYourBotstockNow":
+            MessageLookupByLibrary.simpleMessage("REDEEM YOUR BOTSTOCK NOW"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "shares": MessageLookupByLibrary.simpleMessage("Shares"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to sign out ?"),
+        "startABotstock":
+            MessageLookupByLibrary.simpleMessage("START A BOTSTOCK"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),

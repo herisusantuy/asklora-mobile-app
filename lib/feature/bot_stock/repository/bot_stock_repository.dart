@@ -143,7 +143,10 @@ class BotStockRepository {
           .activeOrder(BotActiveOrderRequest(status: status));
       return BaseResponse.complete(List.from(response.data
           .map((element) => BotActiveOrderModel.fromJson(element))));
+    } on ForbiddenException {
+      return BaseResponse.error(errorCode: 403);
     } catch (e) {
+      ///todo handle error code later on insufficient balance
       return BaseResponse.error();
     }
   }

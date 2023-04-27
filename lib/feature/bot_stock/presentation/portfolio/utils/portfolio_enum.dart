@@ -4,7 +4,8 @@ enum BotPortfolioPopUpType {
   kyc,
   redeemBotStock,
   deposit,
-  noBotStock
+  noBotStock,
+  pendingReview
 }
 
 enum BotPortfolioStatus {

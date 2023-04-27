@@ -28,7 +28,7 @@ class BotStockBackgroundWithPopUp extends StatelessWidget {
   final bool shouldScrollable;
   final String popUpTitle;
   final String popUpSubTitle;
-  final String popUpButtonLabel;
+  final String? popUpButtonLabel;
   final VoidCallback? onPopUpButtonTap;
 
   @override

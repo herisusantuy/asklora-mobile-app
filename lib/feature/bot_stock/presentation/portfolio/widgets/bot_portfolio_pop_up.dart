@@ -5,6 +5,7 @@ import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/lora_popup_message/lora_popup_message.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/styles/asklora_colors.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
@@ -45,50 +46,50 @@ class BotPortfolioPopUp extends StatelessWidget {
     switch (botPortfolioPopUpType) {
       case BotPortfolioPopUpType.createAccount:
         return LoraPopUpMessageModel(
-            title: 'Create an Account and Start Trading!',
-            subTitle:
-                'You can manage all your investments here after you start trading. Create an account and start trading.',
-            primaryButtonLabel: 'CREATE AN ACCOUNT',
+            title: S.of(context).portfolioPopUpCreateAnAccountTitle,
+            subTitle: S.of(context).portfolioPopUpCreateAnAccountSubTitle,
+            primaryButtonLabel: S.of(context).createAnAccount,
             onPrimaryButtonTap: () => SignUpScreen.open(context));
       case BotPortfolioPopUpType.investmentStyle:
         return LoraPopUpMessageModel(
-            title: 'Define Your Investment Style',
-            subTitle:
-                'Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!',
-            primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
+            title: S.of(context).portfolioPopUpDefineInvestmentTitle,
+            subTitle: S.of(context).portfolioPopUpDefineInvestmentSubTitle,
+            primaryButtonLabel: S.of(context).defineInvestmentStyle,
             onPrimaryButtonTap: () => PpiScreen.open(context,
                 arguments: const Pair(QuestionPageType.investmentStyle,
                     QuestionPageStep.investmentStyle)));
       case BotPortfolioPopUpType.kyc:
         return LoraPopUpMessageModel(
-            title: 'Continue Account Opening',
+            title: S.of(context).portfolioPopUpContinueAccountOpeningTitle,
             subTitle:
-                'You still need to complete your account opening until you can start trading.',
-            primaryButtonLabel: 'CONTINUE ACCOUNT OPENING',
+                S.of(context).portfolioPopUpContinueAccountOpeningSubTitle,
+            primaryButtonLabel: S.of(context).continueAccountOpening,
             onPrimaryButtonTap: () => KycScreen.open(context));
       case BotPortfolioPopUpType.redeemBotStock:
         return LoraPopUpMessageModel(
-            title: 'Redeem Your Free Botstock',
-            subTitle:
-                'Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!',
-            primaryButtonLabel: 'REDEEM YOUR BOTSTOCK NOW',
+            title: S.of(context).portfolioPopUpRedeemYourBotstockTitle,
+            subTitle: S.of(context).portfolioPopUpRedeemYourBotstockSubTitle,
+            primaryButtonLabel: S.of(context).redeemYourBotstockNow,
             onPrimaryButtonTap: () => GiftBotStockWelcomeScreen.open(context));
       case BotPortfolioPopUpType.noBotStock:
         return LoraPopUpMessageModel(
-            title: 'No trading has started!',
-            subTitle:
-                'You can manage all your investments here after you start trading. ',
-            primaryButtonLabel: 'START A BOTSTOCK',
+            title: S.of(context).portfolioPopUpNoTradingHasStartedTitle,
+            subTitle: S.of(context).portfolioPopUpNoTradingHasStartedtSubTitle,
+            primaryButtonLabel: S.of(context).startABotstock,
             onPrimaryButtonTap: () => TabsScreen.openAndRemoveAllRoute(context,
                 initialTabScreenPage: TabScreenPage.forYou));
       case BotPortfolioPopUpType.deposit:
         return LoraPopUpMessageModel(
-            title: 'Fund your account',
-            subTitle:
-                'Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.',
-            primaryButtonLabel: 'OK!',
+            title: S.of(context).portfolioPopUpFundAccountTitle,
+            subTitle: S.of(context).portfolioPopUpFundAccountSubTitle,
+            primaryButtonLabel: S.of(context).ok,
             onPrimaryButtonTap: () =>
                 DepositWelcomeScreen.open(context: context));
+      case BotPortfolioPopUpType.pendingReview:
+        return LoraPopUpMessageModel(
+          title: S.of(context).portfolioPopUpPendingReviewTitle,
+          subTitle: S.of(context).portfolioPopUpPendingReviewSubTitle,
+        );
     }
   }
 }

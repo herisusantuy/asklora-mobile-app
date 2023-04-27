@@ -5,6 +5,7 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
+import 'buttons/primary_button.dart';
 
 class LoraBottomSheet {
   final BuildContext context;
@@ -12,9 +13,9 @@ class LoraBottomSheet {
   final String title;
   final String? subTitle;
   final String primaryButtonLabel;
-  final String secondaryButtonLabel;
+  final String? secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
-  final VoidCallback onSecondaryButtonTap;
+  final VoidCallback? onSecondaryButtonTap;
   final LoraMemojiType loraMemojiType;
 
   LoraBottomSheet.show({
@@ -23,9 +24,9 @@ class LoraBottomSheet {
     this.disablePrimaryButton = false,
     this.subTitle,
     required this.primaryButtonLabel,
-    required this.secondaryButtonLabel,
+    this.secondaryButtonLabel,
     required this.onPrimaryButtonTap,
-    required this.onSecondaryButtonTap,
+    this.onSecondaryButtonTap,
     this.loraMemojiType = LoraMemojiType.lora1,
   }) {
     showModalBottomSheet(
@@ -51,9 +52,9 @@ class LoraBottomSheetContent extends StatelessWidget {
   final String? subTitle;
   final Widget? child;
   final String primaryButtonLabel;
-  final String secondaryButtonLabel;
+  final String? secondaryButtonLabel;
   final VoidCallback onPrimaryButtonTap;
-  final VoidCallback onSecondaryButtonTap;
+  final VoidCallback? onSecondaryButtonTap;
   final LoraMemojiType loraMemojiType;
   final double buttonPaddingTop;
 
@@ -63,9 +64,9 @@ class LoraBottomSheetContent extends StatelessWidget {
       this.subTitle,
       this.child,
       required this.primaryButtonLabel,
-      required this.secondaryButtonLabel,
+      this.secondaryButtonLabel,
       required this.onPrimaryButtonTap,
-      required this.onSecondaryButtonTap,
+      this.onSecondaryButtonTap,
       this.loraMemojiType = LoraMemojiType.lora1,
       this.buttonPaddingTop = 32,
       Key? key})
@@ -98,14 +99,18 @@ class LoraBottomSheetContent extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        CustomTextNew(
-                          title,
-                          style: AskLoraTextStyles.h4,
-                          textAlign: TextAlign.center,
+                        Padding(
+                          padding: AppValues.screenHorizontalPadding,
+                          child: CustomTextNew(
+                            title,
+                            style: AskLoraTextStyles.h4,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                         if (subTitle != null)
                           Padding(
-                            padding: const EdgeInsets.only(top: 14),
+                            padding: AppValues.screenHorizontalPadding
+                                .copyWith(top: 14),
                             child: CustomTextNew(
                               subTitle!,
                               style: AskLoraTextStyles.body1,
@@ -117,15 +122,28 @@ class LoraBottomSheetContent extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 20),
                             child: child!,
                           ),
-                        Padding(
-                          padding: EdgeInsets.only(top: buttonPaddingTop),
-                          child: ButtonPair(
-                              disablePrimaryButton: disablePrimaryButton,
-                              primaryButtonOnClick: onPrimaryButtonTap,
-                              secondaryButtonOnClick: onSecondaryButtonTap,
-                              primaryButtonLabel: primaryButtonLabel,
-                              secondaryButtonLabel: secondaryButtonLabel),
-                        )
+                        secondaryButtonLabel != null &&
+                                onSecondaryButtonTap != null
+                            ? Padding(
+                                padding: EdgeInsets.only(top: buttonPaddingTop),
+                                child: ButtonPair(
+                                    disablePrimaryButton: disablePrimaryButton,
+                                    primaryButtonOnClick: onPrimaryButtonTap,
+                                    secondaryButtonOnClick:
+                                        onSecondaryButtonTap!,
+                                    primaryButtonLabel: primaryButtonLabel,
+                                    secondaryButtonLabel:
+                                        secondaryButtonLabel!),
+                              )
+                            : Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: 30, top: buttonPaddingTop),
+                                child: PrimaryButton(
+                                  disabled: disablePrimaryButton,
+                                  label: primaryButtonLabel,
+                                  onTap: onPrimaryButtonTap,
+                                ),
+                              )
                       ],
                     ),
                   ),
