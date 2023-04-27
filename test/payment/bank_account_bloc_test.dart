@@ -17,11 +17,12 @@ void main() async {
   group('Deposit Bloc Tests', () {
     late BankAccountBloc bankAccountBloc;
     late MockBankAccountRepository mockBankAccountRepository;
-    final BaseResponse<RegisteredBankAccounts> registeredBankAccountResponse =
-        BaseResponse.complete(RegisteredBankAccounts(const [
-      GetBankAccountResponse('', '', '', '123', 'Alex', '112233', 'FPS', '',
-          'Bank Central Asia', '', '', '')
-    ]));
+
+    final BaseResponse<List<GetBankAccountResponse>>
+        registeredBankAccountResponse = BaseResponse.complete([
+      const GetBankAccountResponse('', '', '', '123', 'Alex', '112233', 'FPS',
+          '', 'Bank Central Asia', '', '', '')
+    ]);
 
     AddBankAccountRequest addBankAccountRequest = const AddBankAccountRequest(
         bankCodeType: 'HKD',
