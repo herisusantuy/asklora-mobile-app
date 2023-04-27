@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../balance/deposit/utils/deposit_utils.dart';
 import '../domain/add_bank_account_request.dart';
+import '../domain/get_bank_account_response.dart';
+import '../domain/registered_bank_accounts.dart';
 import '../repository/bank_account_repository.dart';
 
 part 'bank_account_event.dart';
@@ -16,6 +18,7 @@ class BankAccountBloc extends Bloc<BankAccountEvent, BankAccountState> {
         super(const BankAccountState()) {
     on<RegisteredBankAccountCheck>(_onRegisteredBankAccountCheck);
     on<BankAccountSubmitted>(_onBankAccountSubmitted);
+    on<GetBankAccountDetails>(_onGetBankAccountDetails);
   }
 
   final BankAccountRepository _bankAccountRepository;
@@ -27,8 +30,7 @@ class BankAccountBloc extends Bloc<BankAccountEvent, BankAccountState> {
       emit(state.copyWith(response: BaseResponse.loading()));
       var response = await _bankAccountRepository.getBankAccount();
 
-      if (response.data!.fpsBankAccounts!.isNotEmpty ||
-          response.data!.wireBankAccounts!.isNotEmpty) {
+      if (response.data!.isNotEmpty) {
         depositType = DepositType.type2;
       } else {
         depositType = DepositType.firstTime;
@@ -55,5 +57,12 @@ class BankAccountBloc extends Bloc<BankAccountEvent, BankAccountState> {
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
+  }
+
+  void _onGetBankAccountDetails(
+      GetBankAccountDetails event, Emitter<BankAccountState> emit) async {
+    emit(state.copyWith(response: BaseResponse.loading()));
+    var response = await _bankAccountRepository.getBankAccount();
+    emit(state.copyWith(response: response));
   }
 }
