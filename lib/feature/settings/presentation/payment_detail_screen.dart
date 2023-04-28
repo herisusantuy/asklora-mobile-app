@@ -57,7 +57,7 @@ class PaymentDetailScreen extends StatelessWidget {
                             const SizedBox(height: 32),
                             _getBankDetails(response[0]),
                             const SizedBox(height: 32),
-                            _changeBankButton,
+                            _changeBankButton(context),
                             const SizedBox(height: 32),
                             CustomTextNew(S.of(context).noteOnPaymentDetails,
                                 style: AskLoraTextStyles.body3)
@@ -92,20 +92,18 @@ class PaymentDetailScreen extends StatelessWidget {
         ),
       ));
 
-  Widget get _changeBankButton => Builder(builder: (context) {
-        return GestureDetector(
-          onTap: () => CustomInAppNotification.show(
-              context, 'This feature will be available soon! Please wait 😁'),
-          child: UnconstrainedBox(
-            child: Container(
-              decoration: const BoxDecoration(
-                  border: Border(bottom: BorderSide(width: .5))),
-              child: CustomTextNew(S.of(context).changeBankAccount,
-                  style: AskLoraTextStyles.h6),
-            ),
+  Widget _changeBankButton(BuildContext context) => GestureDetector(
+        onTap: () => CustomInAppNotification.show(
+            context, 'This feature will be available soon! Please wait 😁'),
+        child: UnconstrainedBox(
+          child: Container(
+            decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(width: .5))),
+            child: CustomTextNew(S.of(context).changeBankAccount,
+                style: AskLoraTextStyles.h6),
           ),
-        );
-      });
+        ),
+      );
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }
