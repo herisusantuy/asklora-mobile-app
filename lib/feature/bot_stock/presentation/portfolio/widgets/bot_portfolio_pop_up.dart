@@ -37,6 +37,7 @@ class BotPortfolioPopUp extends StatelessWidget {
         primaryButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
         onPrimaryButtonTap: loraPopUpMessageModel.onPrimaryButtonTap,
         buttonPrimaryType: ButtonPrimaryType.solidGreen,
+        pngImage: loraPopUpMessageModel.loraMemojiType,
       ),
     );
   }
@@ -89,6 +90,7 @@ class BotPortfolioPopUp extends StatelessWidget {
         return LoraPopUpMessageModel(
           title: S.of(context).portfolioPopUpPendingReviewTitle,
           subTitle: S.of(context).portfolioPopUpPendingReviewSubTitle,
+          loraMemojiType: 'lora_memoji_6',
         );
     }
   }
