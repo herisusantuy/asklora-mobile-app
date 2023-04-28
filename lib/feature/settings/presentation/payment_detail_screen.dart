@@ -64,7 +64,7 @@ class PaymentDetailScreen extends StatelessWidget {
                           ],
                         )
                       : CustomTextNew(
-                          'Your payment information is under review. Your bank account details will be shown here once your account is approved.',
+                          S.of(context).yourPaymentInformationIsUnderReview,
                           style: AskLoraTextStyles.body1)),
             );
           } else {

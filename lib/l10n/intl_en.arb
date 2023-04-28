@@ -265,5 +265,6 @@
         }
       },
   "changeBankAccount" : "Change Bank Account",
-  "noteOnPaymentDetails" : "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."
+  "noteOnPaymentDetails" : "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.",
+  "yourPaymentInformationIsUnderReview" : "Your payment information is under review. Your bank account details will be shown here once your account is approved."
 }

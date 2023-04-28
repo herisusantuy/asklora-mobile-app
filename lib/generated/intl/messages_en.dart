@@ -335,6 +335,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
-        "yourBankAccountIsUnderReview": m11
+        "yourBankAccountIsUnderReview": m11,
+        "yourPaymentInformationIsUnderReview": MessageLookupByLibrary.simpleMessage(
+            "Your payment information is under review. Your bank account details will be shown here once your account is approved.")
       };
 }

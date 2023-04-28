@@ -1752,6 +1752,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Your payment information is under review. Your bank account details will be shown here once your account is approved.`
+  String get yourPaymentInformationIsUnderReview {
+    return Intl.message(
+      'Your payment information is under review. Your bank account details will be shown here once your account is approved.',
+      name: 'yourPaymentInformationIsUnderReview',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

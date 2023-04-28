@@ -270,6 +270,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m11
+        "yourBankAccountIsUnderReview": m11,
+        "yourPaymentInformationIsUnderReview": MessageLookupByLibrary.simpleMessage(
+            "Your payment information is under review. Your bank account details will be shown here once your account is approved.")
       };
 }

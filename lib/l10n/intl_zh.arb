@@ -255,5 +255,6 @@
       }
     },
   "changeBankAccount" : "更改銀行戶口",
-  "noteOnPaymentDetails" : "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"
+  "noteOnPaymentDetails" : "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。",
+  "yourPaymentInformationIsUnderReview" : "Your payment information is under review. Your bank account details will be shown here once your account is approved."
 }
