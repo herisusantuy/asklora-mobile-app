@@ -117,6 +117,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
+        "doAnyOfTheFollowingApply":
+            MessageLookupByLibrary.simpleMessage("以下描述適用於你或你的直系親屬？"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
@@ -144,6 +146,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
         "headquarters": MessageLookupByLibrary.simpleMessage("總部地點"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("如何運作"),
+        "iAmADirector": MessageLookupByLibrary.simpleMessage(
+            "我是香港證券及期貨事務監察委員會註冊持牌機構的董事、員工、或註冊持牌人士。(除了Lora Advisors Limited）"),
+        "iAmAFamily": MessageLookupByLibrary.simpleMessage("我是高級政治人物的家庭成員或親屬。"),
+        "iAmASeniorExecutive": MessageLookupByLibrary.simpleMessage(
+            "我是上市公司的高級行政人員或持有 10% 或以上的股份。"),
+        "iAmASeniorPolitical":
+            MessageLookupByLibrary.simpleMessage("我是高級政治人物。"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "industry": MessageLookupByLibrary.simpleMessage("行業"),
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
@@ -152,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
+        "no": MessageLookupByLibrary.simpleMessage(" 否"),
         "notificationSetting": MessageLookupByLibrary.simpleMessage("通知設定"),
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
         "officeHours":
@@ -250,7 +260,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
+        "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
+        "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
         "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
@@ -283,6 +295,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
-        "website": MessageLookupByLibrary.simpleMessage("網站")
+        "website": MessageLookupByLibrary.simpleMessage("網站"),
+        "yes": MessageLookupByLibrary.simpleMessage("是")
       };
 }
