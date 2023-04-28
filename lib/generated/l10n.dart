@@ -1753,10 +1753,10 @@ class S {
     );
   }
 
-  /// `Your payment information is under review. Your bank account details will be shown here once your account is approved.`
+  /// `Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.`
   String get yourPaymentInformationIsUnderReview {
     return Intl.message(
-      'Your payment information is under review. Your bank account details will be shown here once your account is approved.',
+      'Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.',
       name: 'yourPaymentInformationIsUnderReview',
       desc: '',
       args: [],

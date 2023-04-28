@@ -271,7 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
         "yourBankAccountIsUnderReview": m11,
-        "yourPaymentInformationIsUnderReview": MessageLookupByLibrary.simpleMessage(
-            "Your payment information is under review. Your bank account details will be shown here once your account is approved.")
+        "yourPaymentInformationIsUnderReview":
+            MessageLookupByLibrary.simpleMessage(
+                "您的銀行帳戶信息正在審核中。一旦您的開戶申請獲批，您的銀行帳戶詳細信息將顯示在此處。請注意，審核過程最多可能需要 2 個工作日。")
       };
 }
