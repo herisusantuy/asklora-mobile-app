@@ -390,6 +390,16 @@ class S {
     );
   }
 
+  /// `GOT IT`
+  String get gotIt {
+    return Intl.message(
+      'GOT IT',
+      name: 'gotIt',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Headquarters`
   String get headquarters {
     return Intl.message(
@@ -941,6 +951,26 @@ class S {
     );
   }
 
+  /// `You can trade after your account is approved.`
+  String get botTradeBottomSheetAccountNotYetApprovedTitle {
+    return Intl.message(
+      'You can trade after your account is approved.',
+      name: 'botTradeBottomSheetAccountNotYetApprovedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. to be approved by 2 working days.`
+  String get botTradeBottomSheetAccountNotYetApprovedSubTitle {
+    return Intl.message(
+      'Est. to be approved by 2 working days.',
+      name: 'botTradeBottomSheetAccountNotYetApprovedSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `If you extend the Botstock period, you will incur additional fees`
   String get botTradeBottomSheetRolloverDisclosureTitle {
     return Intl.message(
@@ -1420,6 +1450,206 @@ class S {
       name: 'portfolioTotalBotStock',
       desc: '',
       args: [currency],
+    );
+  }
+
+  /// `CREATE AN ACCOUNT`
+  String get createAnAccount {
+    return Intl.message(
+      'CREATE AN ACCOUNT',
+      name: 'createAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create an Account and Start Trading!`
+  String get portfolioPopUpCreateAnAccountTitle {
+    return Intl.message(
+      'Create an Account and Start Trading!',
+      name: 'portfolioPopUpCreateAnAccountTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can manage all your investments here after you start trading. Create an account and start trading.`
+  String get portfolioPopUpCreateAnAccountSubTitle {
+    return Intl.message(
+      'You can manage all your investments here after you start trading. Create an account and start trading.',
+      name: 'portfolioPopUpCreateAnAccountSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DEFINE INVESTMENT STYLE`
+  String get defineInvestmentStyle {
+    return Intl.message(
+      'DEFINE INVESTMENT STYLE',
+      name: 'defineInvestmentStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Define Your Investment Style`
+  String get portfolioPopUpDefineInvestmentTitle {
+    return Intl.message(
+      'Define Your Investment Style',
+      name: 'portfolioPopUpDefineInvestmentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!`
+  String get portfolioPopUpDefineInvestmentSubTitle {
+    return Intl.message(
+      'Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!',
+      name: 'portfolioPopUpDefineInvestmentSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CONTINUE ACCOUNT OPENING`
+  String get continueAccountOpening {
+    return Intl.message(
+      'CONTINUE ACCOUNT OPENING',
+      name: 'continueAccountOpening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Account Opening`
+  String get portfolioPopUpContinueAccountOpeningTitle {
+    return Intl.message(
+      'Continue Account Opening',
+      name: 'portfolioPopUpContinueAccountOpeningTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You still need to complete your account opening until you can start trading. `
+  String get portfolioPopUpContinueAccountOpeningSubTitle {
+    return Intl.message(
+      'You still need to complete your account opening until you can start trading. ',
+      name: 'portfolioPopUpContinueAccountOpeningSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK!`
+  String get ok {
+    return Intl.message(
+      'OK!',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fund your account`
+  String get portfolioPopUpFundAccountTitle {
+    return Intl.message(
+      'Fund your account',
+      name: 'portfolioPopUpFundAccountTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.`
+  String get portfolioPopUpFundAccountSubTitle {
+    return Intl.message(
+      'Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.',
+      name: 'portfolioPopUpFundAccountSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `START A BOTSTOCK`
+  String get startABotstock {
+    return Intl.message(
+      'START A BOTSTOCK',
+      name: 'startABotstock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No trading has started!`
+  String get portfolioPopUpNoTradingHasStartedTitle {
+    return Intl.message(
+      'No trading has started!',
+      name: 'portfolioPopUpNoTradingHasStartedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can manage all your investments here after you start trading. `
+  String get portfolioPopUpNoTradingHasStartedtSubTitle {
+    return Intl.message(
+      'You can manage all your investments here after you start trading. ',
+      name: 'portfolioPopUpNoTradingHasStartedtSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Account is Pending Review`
+  String get portfolioPopUpPendingReviewTitle {
+    return Intl.message(
+      'Your Account is Pending Review',
+      name: 'portfolioPopUpPendingReviewTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can manage all your investments here after your account has been opened!`
+  String get portfolioPopUpPendingReviewSubTitle {
+    return Intl.message(
+      'You can manage all your investments here after your account has been opened!',
+      name: 'portfolioPopUpPendingReviewSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `REDEEM YOUR BOTSTOCK NOW`
+  String get redeemYourBotstockNow {
+    return Intl.message(
+      'REDEEM YOUR BOTSTOCK NOW',
+      name: 'redeemYourBotstockNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Redeem Your Free Botstock`
+  String get portfolioPopUpRedeemYourBotstockTitle {
+    return Intl.message(
+      'Redeem Your Free Botstock',
+      name: 'portfolioPopUpRedeemYourBotstockTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!`
+  String get portfolioPopUpRedeemYourBotstockSubTitle {
+    return Intl.message(
+      'Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!',
+      name: 'portfolioPopUpRedeemYourBotstockSubTitle',
+      desc: '',
+      args: [],
     );
   }
 

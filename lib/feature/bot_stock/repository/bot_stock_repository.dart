@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
+import '../../../core/data/remote/base_api_client.dart';
 import '../../../core/domain/base_response.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/extensions.dart';
@@ -142,7 +143,10 @@ class BotStockRepository {
           .activeOrder(BotActiveOrderRequest(status: status));
       return BaseResponse.complete(List.from(response.data
           .map((element) => BotActiveOrderModel.fromJson(element))));
+    } on ForbiddenException {
+      return BaseResponse.error(errorCode: 403);
     } catch (e) {
+      ///todo handle error code later on insufficient balance
       return BaseResponse.error();
     }
   }
@@ -176,7 +180,10 @@ class BotStockRepository {
           isDummy: botRecommendationModel.freeBot));
       await removeInvestmentStyleState();
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
+    } on ForbiddenException {
+      return BaseResponse.error(errorCode: 403);
     } catch (e) {
+      ///todo handle error code later on insufficient balance
       return BaseResponse.error();
     }
   }
@@ -187,7 +194,6 @@ class BotStockRepository {
           .cancelOrder(BotOrderRequest(orderId: botOrderId));
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }
