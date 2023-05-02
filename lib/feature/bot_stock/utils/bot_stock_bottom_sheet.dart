@@ -208,4 +208,15 @@ class BotStockBottomSheet {
       onSecondaryButtonTap: () => Navigator.pop(context),
     );
   }
+
+  static notYetRegisteredToBroker(BuildContext context) {
+    LoraBottomSheet.show(
+      loraMemojiType: LoraMemojiType.lora10,
+      context: context,
+      title: S.of(context).botTradeBottomSheetAccountNotYetApprovedTitle,
+      subTitle: S.of(context).botTradeBottomSheetAccountNotYetApprovedSubTitle,
+      primaryButtonLabel: S.of(context).gotIt,
+      onPrimaryButtonTap: () => Navigator.pop(context),
+    );
+  }
 }

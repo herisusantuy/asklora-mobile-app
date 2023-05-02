@@ -87,7 +87,8 @@ class PortfolioScreen extends StatelessWidget {
               },
             ),
             showPopUp:
-                state.botActiveOrderResponse.state == ResponseState.error ||
+                (state.botActiveOrderResponse.state == ResponseState.error &&
+                        state.botActiveOrderResponse.errorCode != 403) ||
                     state.portfolioResponse.state == ResponseState.error,
             content: ListView(
               padding: AppValues.screenHorizontalPadding

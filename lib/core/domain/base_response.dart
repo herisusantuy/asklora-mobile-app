@@ -7,10 +7,14 @@ class BaseResponse<T> extends Equatable {
 
   final ResponseState state;
   final T? data;
+  final int? errorCode;
   final String message;
 
   const BaseResponse(
-      {this.state = ResponseState.unknown, this.data, this.message = ''});
+      {this.state = ResponseState.unknown,
+      this.data,
+      this.message = '',
+      this.errorCode});
 
   static BaseResponse<T> unknown<T>() {
     return const BaseResponse(state: ResponseState.unknown);
@@ -26,24 +30,22 @@ class BaseResponse<T> extends Equatable {
   }
 
   static BaseResponse<T> error<T>(
-      {String message = BaseResponse.errorMessage}) {
-    return BaseResponse(state: ResponseState.error, message: message);
+      {String message = BaseResponse.errorMessage, int? errorCode}) {
+    return BaseResponse(
+        state: ResponseState.error, message: message, errorCode: errorCode);
   }
 
-  BaseResponse<T> copyWith({
-    ResponseState? state,
-    T? data,
-    String? message,
-  }) {
+  BaseResponse<T> copyWith(
+      {ResponseState? state, T? data, String? message, int? errorCode}) {
     return BaseResponse<T>(
-      state: state ?? this.state,
-      data: data ?? this.data,
-      message: message ?? this.message,
-    );
+        state: state ?? this.state,
+        data: data ?? this.data,
+        message: message ?? this.message,
+        errorCode: errorCode ?? this.errorCode);
   }
 
   @override
   List<Object?> get props {
-    return [state, data, message];
+    return [state, data, message, errorCode];
   }
 }

@@ -60,6 +60,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
+        "botTradeBottomSheetAccountNotYetApprovedSubTitle":
+            MessageLookupByLibrary.simpleMessage("預計批核時間為 2 個工作天。"),
+        "botTradeBottomSheetAccountNotYetApprovedTitle":
+            MessageLookupByLibrary.simpleMessage("賬戶成功批核後就可以開始交易。"),
         "botTradeBottomSheetAmountMinimum": m0,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("你想投資嘅金額係？"),
@@ -108,10 +112,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
+        "continueAccountOpening":
+            MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
         "corePlan": MessageLookupByLibrary.simpleMessage("核心計劃"),
+        "createAnAccount": MessageLookupByLibrary.simpleMessage("開立賬戶"),
         "currentPrice": MessageLookupByLibrary.simpleMessage("Current Price"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
+        "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
         "doAnyOfTheFollowingApply":
             MessageLookupByLibrary.simpleMessage("以下描述適用於你或你的直系親屬？"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
@@ -134,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "freeTrial": MessageLookupByLibrary.simpleMessage("免費試用期"),
         "fullName": MessageLookupByLibrary.simpleMessage("姓名"),
         "getHelp": MessageLookupByLibrary.simpleMessage("獲得幫助"),
+        "gotIt": MessageLookupByLibrary.simpleMessage("知道了"),
         "greetingScreenSubTitle":
             MessageLookupByLibrary.simpleMessage("訓練開始，會問下基本問題先！記住，冇耐性，就輸梗！ "),
         "greetingScreenTitle":
@@ -224,6 +233,29 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("表現"),
         "portfolioDetailPerformanceTotalPL":
             MessageLookupByLibrary.simpleMessage("總盈虧"),
+        "portfolioPopUpContinueAccountOpeningSubTitle":
+            MessageLookupByLibrary.simpleMessage("喺可以開始正式交易之前，你需要完成開戶。"),
+        "portfolioPopUpContinueAccountOpeningTitle":
+            MessageLookupByLibrary.simpleMessage("尚未完成開戶"),
+        "portfolioPopUpCreateAnAccountSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "開始交易後，你可以喺度管理你所有投資。快啲建立賬戶進行交易啦！"),
+        "portfolioPopUpCreateAnAccountTitle":
+            MessageLookupByLibrary.simpleMessage("建立賬戶，開始交易"),
+        "portfolioPopUpDefineInvestmentSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "你仲未界定你嘅投資風格。快啲去睇下咩\nBotstocks 最適合你喇！"),
+        "portfolioPopUpDefineInvestmentTitle":
+            MessageLookupByLibrary.simpleMessage("界定投資風格，立即交易！"),
+        "portfolioPopUpFundAccountSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "你好似仲未入錢喎，入咗 HKD 10,000 就可以正式完成開戶手續！"),
+        "portfolioPopUpFundAccountTitle":
+            MessageLookupByLibrary.simpleMessage("尚未入金"),
+        "portfolioPopUpNoTradingHasStartedTitle":
+            MessageLookupByLibrary.simpleMessage("尚未開始任何交易!"),
+        "portfolioPopUpNoTradingHasStartedtSubTitle":
+            MessageLookupByLibrary.simpleMessage(" 開始交易後你就可以一次過管理所有投資。"),
         "portfolioTotalBotStock": m9,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
@@ -238,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
+        "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
         "startDate": MessageLookupByLibrary.simpleMessage("最佳開始日期"),
         "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),
         "summary": MessageLookupByLibrary.simpleMessage("摘要"),
