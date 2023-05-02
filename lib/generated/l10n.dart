@@ -1962,6 +1962,26 @@ class S {
       args: [],
     );
   }
+
+  /// `No Transactions`
+  String get noTransactions {
+    return Intl.message(
+      'No Transactions',
+      name: 'noTransactions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Looks like you haven’t made \nany transactions yet!`
+  String get noTransactionsYet {
+    return Intl.message(
+      'Looks like you haven’t made \nany transactions yet!',
+      name: 'noTransactionsYet',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

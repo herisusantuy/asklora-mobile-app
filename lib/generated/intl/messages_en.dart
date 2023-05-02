@@ -209,6 +209,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "no": MessageLookupByLibrary.simpleMessage(" No"),
+        "noTransactions":
+            MessageLookupByLibrary.simpleMessage("No Transactions"),
+        "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
+            "Looks like you haven’t made \nany transactions yet!"),
         "notificationSetting":
             MessageLookupByLibrary.simpleMessage("Notification Setting"),
         "notificationSettings":

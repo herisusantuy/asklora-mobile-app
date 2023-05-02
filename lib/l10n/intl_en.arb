@@ -280,5 +280,7 @@
   "iAmADirector": "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)",
   "yes": "Yes",
   "no" : " No",
-  "saveForLater": "SAVE FOR LATER"
+  "saveForLater": "SAVE FOR LATER",
+  "noTransactions": "No Transactions",
+  "noTransactionsYet": "Looks like you haven’t made \nany transactions yet!"
 }

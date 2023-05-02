@@ -8,16 +8,22 @@ class TransactionHistoryList extends StatelessWidget {
       BlocBuilder<TransactionHistoryBloc, TransactionHistoryState>(
         buildWhen: (previous, current) =>
             previous.allTransactions != current.allTransactions,
-        builder: (context, state) => ListView(
-          children: state.allTransactions
-              .map((e) => TransactionHistoryGroupWidget(
-                  title: e.groupType == GroupType.today
-                      ? S.of(context).transactionHistoryToday
-                      : e.groupTitle,
-                  data: e.data,
-                  showBottomBorder: state.allTransactions.indexOf(e) ==
-                      state.allTransactions.length - 1))
-              .toList(),
-        ),
+        builder: (context, state) {
+          if (state.allTransactions.isEmpty) {
+            return const TransactionEmptyWidget();
+          } else {
+            return ListView(
+              children: state.allTransactions
+                  .map((e) => TransactionHistoryGroupWidget(
+                      title: e.groupType == GroupType.today
+                          ? S.of(context).transactionHistoryToday
+                          : e.groupTitle,
+                      data: e.data,
+                      showBottomBorder: state.allTransactions.indexOf(e) ==
+                          state.allTransactions.length - 1))
+                  .toList(),
+            );
+          }
+        },
       );
 }

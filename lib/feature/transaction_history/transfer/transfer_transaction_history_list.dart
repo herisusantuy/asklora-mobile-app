@@ -8,14 +8,20 @@ class TransferTransactionHistoryList extends StatelessWidget {
       BlocBuilder<TransactionHistoryBloc, TransactionHistoryState>(
         buildWhen: (previous, current) =>
             previous.transferTransactions != current.transferTransactions,
-        builder: (context, state) => ListView(
-          children: state.transferTransactions
-              .map((e) => TransactionHistoryGroupWidget(
-                  title: e.groupTitle,
-                  data: e.data,
-                  showBottomBorder: state.transferTransactions.indexOf(e) ==
-                      state.transferTransactions.length - 1))
-              .toList(),
-        ),
+        builder: (context, state) {
+          if (state.transferTransactions.isEmpty) {
+            return const TransactionEmptyWidget();
+          } else {
+            return ListView(
+              children: state.transferTransactions
+                  .map((e) => TransactionHistoryGroupWidget(
+                      title: e.groupTitle,
+                      data: e.data,
+                      showBottomBorder: state.transferTransactions.indexOf(e) ==
+                          state.transferTransactions.length - 1))
+                  .toList(),
+            );
+          }
+        },
       );
 }
