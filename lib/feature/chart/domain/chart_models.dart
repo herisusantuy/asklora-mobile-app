@@ -1,22 +1,28 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../core/utils/extensions.dart';
 
-abstract class ChartDataSet {
-  int? index;
-  DateTime? date;
-  double? price;
-  double? hedgeShare;
-  double? currentPnlRet;
+abstract class ChartDataSet extends Equatable {
+  final int? index;
+  final DateTime date;
+  final double price;
+  final double hedgeShare;
+  final double currentPnlRet;
 
-  ChartDataSet(
-      {this.index, this.date, this.price, this.hedgeShare, this.currentPnlRet});
+  const ChartDataSet(
+    this.date,
+    this.price,
+    this.hedgeShare,
+    this.currentPnlRet, {
+    this.index,
+  });
 
-  ChartDataSet.fromJson(Map<String, dynamic> json) {
-    date = DateTime.parse(json['date']);
-    index = json['i'] ?? 0;
-    price = checkDouble(json['price']);
-    hedgeShare = checkDouble(json['hedge_share']);
-    currentPnlRet = checkDouble(json['current_pnl_ret']);
-  }
+  ChartDataSet.fromJson(Map<String, dynamic> json)
+      : date = DateTime.parse(json['date']),
+        index = json['i'] ?? 0,
+        price = checkDouble(json['price']),
+        hedgeShare = checkDouble(json['hedge_share']),
+        currentPnlRet = checkDouble(json['current_pnl_ret']);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -26,6 +32,11 @@ abstract class ChartDataSet {
     data['hedge_share'] = hedgeShare;
     data['current_pnl_ret'] = currentPnlRet;
     return data;
+  }
+
+  @override
+  List<Object?> get props {
+    return [index, date, price, hedgeShare, currentPnlRet];
   }
 }
 

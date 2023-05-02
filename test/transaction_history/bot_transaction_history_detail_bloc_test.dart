@@ -19,7 +19,7 @@ void main() async {
     late BotTransactionHistoryDetailBloc botTransactionHistoryDetailBloc;
 
     final BaseResponse<BotDetailTransactionHistoryResponse> successResponse =
-        BaseResponse.complete(const BotDetailTransactionHistoryResponse(
+        BaseResponse.complete(BotDetailTransactionHistoryResponse(
             '1',
             'AAPL',
             'APPLE',
@@ -28,31 +28,99 @@ void main() async {
             true,
             'open',
             'pending',
-            'Pull Up', [], [
-      BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
-      BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
-      BotActivitiesTransactionHistoryModel(
-          'x', '2023-04-15', 'Buy', 22, 10, 200, 0, 0),
-    ]));
+            'Pull Up',
+            const [],
+            [
+              BotActivitiesTransactionHistoryModel(
+                DateTime(2023, 04, 14),
+                0,
+                0,
+                0,
+                'buy',
+                0,
+                '',
+                0,
+                index: 1,
+              ),
+              BotActivitiesTransactionHistoryModel(
+                DateTime(2023, 04, 14),
+                0,
+                0,
+                0,
+                'buy',
+                0,
+                '',
+                0,
+                index: 1,
+              ),
+              BotActivitiesTransactionHistoryModel(
+                DateTime(2023, 04, 15),
+                0,
+                0,
+                0,
+                'buy',
+                0,
+                '',
+                0,
+                index: 1,
+              ),
+            ],
+            0,
+            0,
+            '',
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            '',
+            ''));
 
     final List<GroupedActivitiesModel> groupedActivities = [
-      const GroupedActivitiesModel(
+      GroupedActivitiesModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-14',
           data: [
             BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
+              DateTime(2023, 04, 14),
+              0,
+              0,
+              0,
+              'buy',
+              0,
+              '',
+              0,
+              index: 1,
+            ),
             BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-14', 'Buy', 22, 10, 200, 0, 0),
+              DateTime(2023, 04, 14),
+              0,
+              0,
+              0,
+              'buy',
+              0,
+              '',
+              0,
+              index: 1,
+            ),
           ]),
-      const GroupedActivitiesModel(
+      GroupedActivitiesModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-15',
           data: [
             BotActivitiesTransactionHistoryModel(
-                'x', '2023-04-15', 'Buy', 22, 10, 200, 0, 0),
+              DateTime(2023, 04, 15),
+              0,
+              0,
+              0,
+              'buy',
+              0,
+              '',
+              0,
+              index: 1,
+            ),
           ]),
     ];
     final BaseResponse<BotDetailTransactionHistoryResponse> errorResponse =

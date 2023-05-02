@@ -8,16 +8,22 @@ class BotOrderTransactionHistoryList extends StatelessWidget {
       BlocBuilder<TransactionHistoryBloc, TransactionHistoryState>(
         buildWhen: (previous, current) =>
             previous.botOrderTransactions != current.botOrderTransactions,
-        builder: (context, state) => ListView(
-          children: state.botOrderTransactions
-              .map((e) => TransactionHistoryGroupWidget(
-                  title: e.groupType == GroupType.today
-                      ? S.of(context).transactionHistoryToday
-                      : e.groupTitle,
-                  data: e.data,
-                  showBottomBorder: state.botOrderTransactions.indexOf(e) ==
-                      state.botOrderTransactions.length - 1))
-              .toList(),
-        ),
+        builder: (context, state) {
+          if (state.botOrderTransactions.isEmpty) {
+            return const EmptyTransactionPlaceholder();
+          } else {
+            return ListView(
+              children: state.botOrderTransactions
+                  .map((e) => TransactionHistoryGroupWidget(
+                      title: e.groupType == GroupType.today
+                          ? S.of(context).transactionHistoryToday
+                          : e.groupTitle,
+                      data: e.data,
+                      showBottomBorder: state.botOrderTransactions.indexOf(e) ==
+                          state.botOrderTransactions.length - 1))
+                  .toList(),
+            );
+          }
+        },
       );
 }

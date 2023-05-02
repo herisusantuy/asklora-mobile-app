@@ -3,18 +3,28 @@ import '../../../core/utils/extensions.dart';
 import 'chart_models.dart';
 
 class BotPortfolioChartDataSet extends ChartDataSet {
-  BotPortfolioChartDataSet(
-      {super.index,
-      super.date,
-      super.price,
-      super.hedgeShare,
-      super.currentPnlRet});
+  const BotPortfolioChartDataSet(
+    super.date,
+    super.price,
+    super.hedgeShare,
+    super.currentPnlRet, {
+    super.index,
+  });
 
-  BotPortfolioChartDataSet.fromJson(Map<String, dynamic> json) {
-    date = DateTime.parse(formatDateTimeAsString(json['created']));
-    index = json['i'] ?? 0;
-    price = checkDouble(json['prices']);
-    hedgeShare = checkDouble(json['filled_qty']);
-    currentPnlRet = checkDouble(json['pnl_ret']);
-  }
+  BotPortfolioChartDataSet.fromJson(Map<String, dynamic> json)
+      : super(
+          DateTime.parse(formatDateTimeAsString(json['created'])),
+          checkDouble(json['prices']),
+          checkDouble(json['filled_qty']),
+          checkDouble(json['pnl_ret']),
+          index: json['i'] ?? 0,
+        );
+
+  BotPortfolioChartDataSet copyWith({int? index}) => BotPortfolioChartDataSet(
+        date,
+        price,
+        hedgeShare,
+        currentPnlRet,
+        index: index ?? this.index,
+      );
 }

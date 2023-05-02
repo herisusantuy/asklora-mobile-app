@@ -18,7 +18,7 @@ class Performance extends StatelessWidget {
   Widget build(BuildContext context) =>
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         CustomTextNew(
-          S.of(context).portfolioDetailPerformanceTitle,
+          S.of(context).performance,
           style: AskLoraTextStyles.h5,
         ),
         const SizedBox(

@@ -57,7 +57,7 @@ class BotOrderTransactionHistoryActivitiesCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomTextNew(
-                botActivitiesTransactionModel.createdFormattedString,
+                botActivitiesTransactionModel.dateFormattedString,
                 style: AskLoraTextStyles.body2
                     .copyWith(color: AskLoraColors.darkGray),
               ),

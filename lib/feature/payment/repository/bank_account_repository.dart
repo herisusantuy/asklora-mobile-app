@@ -6,7 +6,6 @@ import '../../../core/domain/base_response.dart';
 import '../domain/add_bank_account_request.dart';
 import '../domain/bank_account_api_client.dart';
 import '../domain/get_bank_account_response.dart';
-import '../domain/registered_bank_accounts.dart';
 import '../deposits/shareable/bank_list/domain/bank_details.dart';
 
 class BankAccountRepository {

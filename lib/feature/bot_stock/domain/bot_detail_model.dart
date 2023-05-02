@@ -121,10 +121,10 @@ class BotDetailModel extends Equatable {
     }
   }
 
-  String get botPerformanceStartDate => format(performance[0].date!);
+  String get botPerformanceStartDate => format(performance[0].date);
 
   String get botPerformanceEndDate =>
-      format(performance[performance.length - 1].date!);
+      format(performance[performance.length - 1].date);
 
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotDetailModelFromJson(json);

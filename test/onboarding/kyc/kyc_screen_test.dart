@@ -28,6 +28,7 @@ void main() {
           ),
           navigatorObservers: [mockObserver],
         ));
+        await tester.pumpAndSettle();
       }
 
       var kycButtonPair = find.byKey(
