@@ -10,7 +10,7 @@ import 'package:asklora_mobile_app/feature/payment/deposits/shareable/bank_list/
     as _i7;
 import 'package:asklora_mobile_app/feature/payment/domain/add_bank_account_request.dart'
     as _i5;
-import 'package:asklora_mobile_app/feature/payment/domain/registered_bank_accounts.dart'
+import 'package:asklora_mobile_app/feature/payment/domain/get_bank_account_response.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/payment/repository/bank_account_repository.dart'
     as _i3;
@@ -68,22 +68,22 @@ class MockBankAccountRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.BaseResponse<_i5.AddBankAccountRequest>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i6.RegisteredBankAccounts>> getBankAccount() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getBankAccount,
-          [],
-        ),
-        returnValue:
-            _i4.Future<_i2.BaseResponse<_i6.RegisteredBankAccounts>>.value(
-                _FakeBaseResponse_0<_i6.RegisteredBankAccounts>(
-          this,
-          Invocation.method(
-            #getBankAccount,
-            [],
-          ),
-        )),
-      ) as _i4.Future<_i2.BaseResponse<_i6.RegisteredBankAccounts>>);
+  _i4.Future<_i2.BaseResponse<List<_i6.GetBankAccountResponse>>>
+      getBankAccount() => (super.noSuchMethod(
+            Invocation.method(
+              #getBankAccount,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i6.GetBankAccountResponse>>>.value(
+                _FakeBaseResponse_0<List<_i6.GetBankAccountResponse>>(
+              this,
+              Invocation.method(
+                #getBankAccount,
+                [],
+              ),
+            )),
+          ) as _i4.Future<_i2.BaseResponse<List<_i6.GetBankAccountResponse>>>);
   @override
   _i4.Future<List<_i7.BankDetails>> getBankDetails() => (super.noSuchMethod(
         Invocation.method(

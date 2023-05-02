@@ -46,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(currency) => "Total Portfolio Value (${currency})";
 
+  static String m11(dateTime) =>
+      "Your Bank Account is under review and will be complete by ${dateTime}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
@@ -123,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro4":
             MessageLookupByLibrary.simpleMessage("Personalised experience"),
         "ceo": MessageLookupByLibrary.simpleMessage("CEO"),
+        "changeBankAccount":
+            MessageLookupByLibrary.simpleMessage("Change Bank Account"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "confirmNewPassword":
@@ -213,6 +218,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No Transactions"),
         "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
             "Looks like you haven’t made \nany transactions yet!"),
+        "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
+            "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
         "notificationSetting":
             MessageLookupByLibrary.simpleMessage("Notification Setting"),
         "notificationSettings":
@@ -268,8 +275,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Est. Stop Loss %"),
         "portfolioDetailKeyInfoEstimatedTakeProfit":
             MessageLookupByLibrary.simpleMessage("Est. Take Profit %"),
-        "portfolioDetailKeyInfoInvestmentPeriod":
-            MessageLookupByLibrary.simpleMessage("Investment Period"),
         "portfolioDetailKeyInfoStartTime":
             MessageLookupByLibrary.simpleMessage("Start Time"),
         "portfolioDetailKeyInfoTitle":
@@ -386,6 +391,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
-        "yes": MessageLookupByLibrary.simpleMessage("Yes")
+        "yes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "yourBankAccount":
+            MessageLookupByLibrary.simpleMessage("Your Bank Account"),
+        "yourBankAccountIsUnderReview": m11,
+        "yourPaymentInformationIsUnderReview": MessageLookupByLibrary.simpleMessage(
+            "Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.")
       };
 }

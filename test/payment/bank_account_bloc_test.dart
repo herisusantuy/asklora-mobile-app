@@ -3,7 +3,6 @@ import 'package:asklora_mobile_app/feature/balance/deposit/utils/deposit_utils.d
 import 'package:asklora_mobile_app/feature/payment/bloc/bank_account_bloc.dart';
 import 'package:asklora_mobile_app/feature/payment/domain/add_bank_account_request.dart';
 import 'package:asklora_mobile_app/feature/payment/domain/get_bank_account_response.dart';
-import 'package:asklora_mobile_app/feature/payment/domain/registered_bank_accounts.dart';
 import 'package:asklora_mobile_app/feature/payment/repository/bank_account_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,11 +16,12 @@ void main() async {
   group('Deposit Bloc Tests', () {
     late BankAccountBloc bankAccountBloc;
     late MockBankAccountRepository mockBankAccountRepository;
-    final BaseResponse<RegisteredBankAccounts> registeredBankAccountResponse =
-        BaseResponse.complete(RegisteredBankAccounts(const [
-      GetBankAccountResponse('', '', '', '123', 'Alex', '112233', 'FPS', '',
-          'Bank Central Asia', '', '', '')
-    ]));
+
+    final BaseResponse<List<GetBankAccountResponse>>
+        registeredBankAccountResponse = BaseResponse.complete([
+      const GetBankAccountResponse('', '', '', '123', 'Alex', '112233', 'FPS',
+          '', 'Bank Central Asia', '', '', '')
+    ]);
 
     AddBankAccountRequest addBankAccountRequest = const AddBankAccountRequest(
         bankCodeType: 'HKD',

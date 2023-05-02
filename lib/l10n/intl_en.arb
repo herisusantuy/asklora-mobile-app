@@ -171,7 +171,6 @@
   "portfolioDetailPerformanceBotAssetsInStock": "% of Bot Assets in Stock",
   "portfolioDetailPerformanceNumberOfSharesTooltip": "Indicates how many shares of a company are currently owned by you.",
   "portfolioDetailKeyInfoTitle": "Key Info",
-  "portfolioDetailKeyInfoInvestmentPeriod": "Investment Period",
   "portfolioDetailKeyInfoDaysTillExpiry": "Days Till Expiry",
   "portfolioDetailKeyInfoStartTime": "Start Time",
   "portfolioDetailKeyInfoEndTime": "End Time",
@@ -230,7 +229,6 @@
       }
     }
   },
-  "performance": "Performance",
   "createAnAccount": "CREATE AN ACCOUNT",
   "portfolioPopUpCreateAnAccountTitle" : "Create an Account and Start Trading!",
   "portfolioPopUpCreateAnAccountSubTitle" : "You can manage all your investments here after you start trading. Create an account and start trading.",
@@ -281,6 +279,19 @@
   "yes": "Yes",
   "no" : " No",
   "saveForLater": "SAVE FOR LATER",
+  "yourBankAccount" : "Your Bank Account",
+      "yourBankAccountIsUnderReview" : "Your Bank Account is under review and will be complete by {dateTime}",
+      "@yourBankAccountIsUnderReview" : {
+        "placeholders" : {
+          "dateTime" : {
+            "type" : "String"
+          }
+        }
+      },
+  "changeBankAccount" : "Change Bank Account",
+  "noteOnPaymentDetails" : "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.",
+  "yourPaymentInformationIsUnderReview" : "Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.",
   "noTransactions": "No Transactions",
-  "noTransactionsYet": "Looks like you haven’t made \nany transactions yet!"
+  "noTransactionsYet": "Looks like you haven’t made \nany transactions yet!",
+  "performance": "Performance"
 }

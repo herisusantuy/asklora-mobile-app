@@ -162,7 +162,6 @@
   "portfolioDetailPerformanceCash": "現金 (HKD)",
   "portfolioDetailPerformanceBotAssetsInStock": "股票/現金比例",
   "portfolioDetailKeyInfoTitle": "主要資訊",
-  "portfolioDetailKeyInfoInvestmentPeriod": "投資期",
   "portfolioDetailKeyInfoDaysTillExpiry": "續期時間",
   "portfolioDetailKeyInfoStartTime": "開始時間",
   "portfolioDetailKeyInfoEndTime": "結束時間",
@@ -259,8 +258,20 @@
   "iAmASeniorExecutive" : "我是上市公司的高級行政人員或持有 10% 或以上的股份。",
   "iAmASeniorPolitical" : "我是高級政治人物。",
   "iAmAFamily" : "我是高級政治人物的家庭成員或親屬。",
-  "iAmADirector": "我是香港證券及期貨事務監察委員會註冊持牌機構的董事、員工、或註冊持牌人士。(除了Lora Advisors Limited）"  ,
+  "iAmADirector": "我是香港證券及期貨事務監察委員會註冊持牌機構的董事、員工、或註冊持牌人士。(除了Lora Advisors Limited）",
   "yes": "是",
   "no" : " 否",
-  "saveForLater": "儲存並離開"
+  "saveForLater": "儲存並離開",
+  "yourBankAccount" : "銀行賬戶",
+  "yourBankAccountIsUnderReview" : "銀行賬戶正在審批當中，並會於{dateTime} 完成。",
+    "@yourBankAccountIsUnderReview" : {
+      "placeholders" : {
+        "dateTime" : {
+          "type" : "String"
+        }
+      }
+    },
+  "changeBankAccount" : "更改銀行戶口",
+  "noteOnPaymentDetails" : "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。",
+  "yourPaymentInformationIsUnderReview" : "您的銀行帳戶信息正在審核中。一旦您的開戶申請獲批，您的銀行帳戶詳細信息將顯示在此處。請注意，審核過程最多可能需要 2 個工作日。"
 }

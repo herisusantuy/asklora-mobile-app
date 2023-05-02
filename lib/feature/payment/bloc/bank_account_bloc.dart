@@ -16,6 +16,7 @@ class BankAccountBloc extends Bloc<BankAccountEvent, BankAccountState> {
         super(const BankAccountState()) {
     on<RegisteredBankAccountCheck>(_onRegisteredBankAccountCheck);
     on<BankAccountSubmitted>(_onBankAccountSubmitted);
+    on<GetBankAccountDetails>(_onGetBankAccountDetails);
   }
 
   final BankAccountRepository _bankAccountRepository;
@@ -27,8 +28,7 @@ class BankAccountBloc extends Bloc<BankAccountEvent, BankAccountState> {
       emit(state.copyWith(response: BaseResponse.loading()));
       var response = await _bankAccountRepository.getBankAccount();
 
-      if (response.data!.fpsBankAccounts!.isNotEmpty ||
-          response.data!.wireBankAccounts!.isNotEmpty) {
+      if (response.data!.isNotEmpty) {
         depositType = DepositType.type2;
       } else {
         depositType = DepositType.firstTime;
@@ -55,5 +55,12 @@ class BankAccountBloc extends Bloc<BankAccountEvent, BankAccountState> {
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
+  }
+
+  void _onGetBankAccountDetails(
+      GetBankAccountDetails event, Emitter<BankAccountState> emit) async {
+    emit(state.copyWith(response: BaseResponse.loading()));
+    var response = await _bankAccountRepository.getBankAccount();
+    emit(state.copyWith(response: response));
   }
 }

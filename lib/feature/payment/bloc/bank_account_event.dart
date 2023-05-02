@@ -25,3 +25,5 @@ class BankAccountSubmitted extends BankAccountEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetBankAccountDetails extends BankAccountEvent {}

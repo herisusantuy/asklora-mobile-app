@@ -58,8 +58,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
                 height: 20,
               ),
               PairColumnText(
-                  leftTitle:
-                      S.of(context).portfolioDetailKeyInfoInvestmentPeriod,
+                  leftTitle: S.of(context).investmentPeriod,
                   leftSubTitle: data.duration,
                   rightTitle:
                       S.of(context).portfolioDetailKeyInfoDaysTillExpiry,

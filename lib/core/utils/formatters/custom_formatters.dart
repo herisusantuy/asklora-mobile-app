@@ -1,13 +1,13 @@
 import 'package:flutter/services.dart';
 
 FilteringTextInputFormatter englishNameFormatter() =>
-    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'));
+    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'));
 
 FilteringTextInputFormatter fullEnglishNameFormatter() =>
-    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z ]'));
+    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'));
 
 FilteringTextInputFormatter fullEnglishNameWithHyphenAndUnderScoreFormatter() =>
-    FilteringTextInputFormatter.allow(RegExp('[a-zA-Z-_ ]'));
+    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z-_\s]'));
 
 FilteringTextInputFormatter onlyAllowOneSpace() =>
     FilteringTextInputFormatter.deny(RegExp(r'\s '));
