@@ -29,7 +29,11 @@ class BaseApiClient {
           {required String endpoint, required String payload}) async =>
       _dio.patch(endpoint, data: payload);
 
-  String getBaseUrl() => Environment().config.askLoraApiBaseUrl;
+  String get baseUrl => Environment().config.askLoraApiBaseUrl;
+
+  Map<String, String> get headers => {};
+
+  String? get token => null;
 
   final Duration timeOutDuration = const Duration(seconds: 60);
 
@@ -38,7 +42,7 @@ class BaseApiClient {
         connectTimeout: timeOutDuration,
         sendTimeout: timeOutDuration,
         receiveTimeout: timeOutDuration,
-        baseUrl: getBaseUrl(),
+        baseUrl: baseUrl,
         followRedirects: false,
         validateStatus: (status) {
           if (status != null && status < 300) {
@@ -49,12 +53,13 @@ class BaseApiClient {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          ...headers
         }));
 
     if (kDebugMode) {
       dio.interceptors.add(LoggingInterceptor());
     }
-    dio.interceptors.add(AppInterceptors(TokenRepository(), dio));
+    dio.interceptors.add(AppInterceptors(TokenRepository(), dio, token));
     return dio;
   }
 }
@@ -64,6 +69,7 @@ class AppInterceptors extends Interceptor {
   final Dio _dio;
   String? _deviceId;
   String? _userAgent;
+  String? token;
 
   Future<String?> _loadDeviceId() async {
     _deviceId = await getDeviceId();
@@ -75,14 +81,18 @@ class AppInterceptors extends Interceptor {
     return _userAgent;
   }
 
-  AppInterceptors(this._storage, this._dio);
+  AppInterceptors(this._storage, this._dio, this.token);
 
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     var accessToken = await _storage.getAccessToken();
-    if (accessToken != null) {
-      options.headers['Authorization'] = 'Bearer $accessToken';
+    if (token == null) {
+      if (accessToken != null) {
+        options.headers['Authorization'] = 'Bearer $accessToken';
+      }
+    } else {
+      options.headers['Authorization'] = 'Bearer $token';
     }
     options.headers['X-Device-id'] = _deviceId ?? await _loadDeviceId();
     options.headers['X-Device-User-Agent'] =
@@ -141,8 +151,9 @@ class AppInterceptors extends Interceptor {
           case 400:
             throw BadRequestException(err.requestOptions);
           case 401:
-            if (err.response?.data['message'] == 'Token invalid' ||
-                err.response?.data['message'] == 'Token invalid / expired') {
+            final message = err.response?.data['message'];
+            if (message == 'Token invalid' ||
+                message == 'Token invalid / expired') {
               _handleExpiredToken(err, handler);
               return;
             } else {
