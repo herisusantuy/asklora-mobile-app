@@ -1992,6 +1992,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Need help?`
+  String get needHelp {
+    return Intl.message(
+      'Need help?',
+      name: 'needHelp',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

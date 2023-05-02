@@ -6,7 +6,7 @@ class HomeScreenNeedHelpButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExtraInfoButton(
-      label: 'Need help?',
+      label: S.of(context).needHelp,
       onTap: () => TabsScreen.openAndRemoveAllRoute(context,
           initialTabScreenPage: TabScreenPage.loraGpt),
       suffixIcon: const Icon(

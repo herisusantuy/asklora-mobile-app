@@ -212,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Investment Preferences"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
+        "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "no": MessageLookupByLibrary.simpleMessage(" No"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(

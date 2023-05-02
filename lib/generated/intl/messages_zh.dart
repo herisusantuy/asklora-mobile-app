@@ -163,6 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "investmentPreferences": MessageLookupByLibrary.simpleMessage("投資偏好"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
+        "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
