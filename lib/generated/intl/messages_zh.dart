@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(currency) => "可提取金額 (${currency})";
 
+  static String m11(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("關於"),
@@ -106,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
         "carouselIntro3": MessageLookupByLibrary.simpleMessage("AI策略，\n自動交易"),
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
+        "changeBankAccount": MessageLookupByLibrary.simpleMessage("更改銀行戶口"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
@@ -162,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
+        "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
+            "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
         "notificationSetting": MessageLookupByLibrary.simpleMessage("通知設定"),
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
         "officeHours":
@@ -296,6 +301,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "website": MessageLookupByLibrary.simpleMessage("網站"),
-        "yes": MessageLookupByLibrary.simpleMessage("是")
+        "yes": MessageLookupByLibrary.simpleMessage("是"),
+        "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
+        "yourBankAccountIsUnderReview": m11,
+        "yourPaymentInformationIsUnderReview":
+            MessageLookupByLibrary.simpleMessage(
+                "您的銀行帳戶信息正在審核中。一旦您的開戶申請獲批，您的銀行帳戶詳細信息將顯示在此處。請注意，審核過程最多可能需要 2 個工作日。")
       };
 }

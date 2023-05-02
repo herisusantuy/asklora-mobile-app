@@ -278,5 +278,17 @@
   "iAmADirector": "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)",
   "yes": "Yes",
   "no" : " No",
-  "saveForLater": "SAVE FOR LATER"
+  "saveForLater": "SAVE FOR LATER",
+  "yourBankAccount" : "Your Bank Account",
+      "yourBankAccountIsUnderReview" : "Your Bank Account is under review and will be complete by {dateTime}",
+      "@yourBankAccountIsUnderReview" : {
+        "placeholders" : {
+          "dateTime" : {
+            "type" : "String"
+          }
+        }
+      },
+  "changeBankAccount" : "Change Bank Account",
+  "noteOnPaymentDetails" : "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.",
+  "yourPaymentInformationIsUnderReview" : "Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process."
 }

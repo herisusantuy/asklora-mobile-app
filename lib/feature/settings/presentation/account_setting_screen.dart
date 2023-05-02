@@ -11,6 +11,7 @@ import 'account_information_screen.dart';
 import 'change_password_screen.dart';
 import 'language_selection_screen.dart';
 import 'notification_setting_screen.dart';
+import 'payment_detail_screen.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   static const route = '/account_setting_screen';
@@ -35,7 +36,7 @@ class AccountSettingScreen extends StatelessWidget {
                 title: S.of(context).changePassword,
                 showBottomBorder: false),
             MenuButtonWidget(
-              onTap: () {},
+              onTap: () => PaymentDetailScreen.open(context),
               title: S.of(context).paymentDetails,
             ),
             MenuButtonWidget(
