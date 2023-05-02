@@ -68,6 +68,7 @@ class PaymentDetailScreen extends StatelessWidget {
                           style: AskLoraTextStyles.body1)),
             );
           } else {
+            // TODO : will update UI when response get error
             return const SizedBox.shrink();
           }
         },
