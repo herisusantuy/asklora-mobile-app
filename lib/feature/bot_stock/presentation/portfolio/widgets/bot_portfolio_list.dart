@@ -58,6 +58,12 @@ class BotPortfolioList extends StatelessWidget {
               )
               .toList(),
         );
+      } else if (portfolioState.botActiveOrderResponse.state ==
+              ResponseState.error &&
+          portfolioState.botActiveOrderResponse.errorCode == 403) {
+        //403 is to show error on pending review (not registered yet to broker)
+        return const BotPortfolioPopUp(
+            botPortfolioPopUpType: BotPortfolioPopUpType.pendingReview);
       } else {
         return const SizedBox();
       }

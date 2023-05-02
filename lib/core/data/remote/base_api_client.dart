@@ -148,6 +148,8 @@ class AppInterceptors extends Interceptor {
             } else {
               throw UnauthorizedException(err.requestOptions);
             }
+          case 403:
+            throw ForbiddenException(err.requestOptions);
           case 404:
             throw NotFoundException(err.requestOptions);
           case 406:
@@ -216,6 +218,15 @@ class NotFoundException extends DioError {
   @override
   String toString() {
     return 'The requested information could not be found';
+  }
+}
+
+class ForbiddenException extends DioError {
+  ForbiddenException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return "You don't have permission to access this resource";
   }
 }
 

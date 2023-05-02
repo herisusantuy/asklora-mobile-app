@@ -260,6 +260,156 @@ class S {
     );
   }
 
+  /// `Current Price`
+  String get currentPrice {
+    return Intl.message(
+      'Current Price',
+      name: 'currentPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Stop Loss Level`
+  String get estStopLossLevel {
+    return Intl.message(
+      'Est. Stop Loss Level',
+      name: 'estStopLossLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Loss Level`
+  String get estMaxLossLevel {
+    return Intl.message(
+      'Est. Max Loss Level',
+      name: 'estMaxLossLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Take Profit Level`
+  String get estTakeProfitLevel {
+    return Intl.message(
+      'Est. Take Profit Level',
+      name: 'estTakeProfitLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Profit Level`
+  String get estMaxProfitLevel {
+    return Intl.message(
+      'Est. Max Profit Level',
+      name: 'estMaxProfitLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Stop Loss %`
+  String get estStopLossPercent {
+    return Intl.message(
+      'Est. Stop Loss %',
+      name: 'estStopLossPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Loss %`
+  String get estMaxLossPercent {
+    return Intl.message(
+      'Est. Max Loss %',
+      name: 'estMaxLossPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Take Profit %`
+  String get estTakeProfitPercent {
+    return Intl.message(
+      'Est. Take Profit %',
+      name: 'estTakeProfitPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. Max Profit %`
+  String get estMaxProfitPercent {
+    return Intl.message(
+      'Est. Max Profit %',
+      name: 'estMaxProfitPercent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Estimated End Date`
+  String get estimatedEndDate {
+    return Intl.message(
+      'Estimated End Date',
+      name: 'estimatedEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Employees`
+  String get employees {
+    return Intl.message(
+      'Employees',
+      name: 'employees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CEO`
+  String get ceo {
+    return Intl.message(
+      'CEO',
+      name: 'ceo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Founded`
+  String get founded {
+    return Intl.message(
+      'Founded',
+      name: 'founded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GOT IT`
+  String get gotIt {
+    return Intl.message(
+      'GOT IT',
+      name: 'gotIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Headquarters`
+  String get headquarters {
+    return Intl.message(
+      'Headquarters',
+      name: 'headquarters',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account Settings`
   String get accountSettings {
     return Intl.message(
@@ -560,13 +710,43 @@ class S {
     );
   }
 
-  /// `There was an error when trying to get {detail}. Please try reloading the page`
-  String errorGettingInformationSubTitle(String detail) {
+  /// `There was an error when trying to get your Portfolio. Please try reloading the page`
+  String get errorGettingInformationPortfolioSubTitle {
     return Intl.message(
-      'There was an error when trying to get $detail. Please try reloading the page',
-      name: 'errorGettingInformationSubTitle',
+      'There was an error when trying to get your Portfolio. Please try reloading the page',
+      name: 'errorGettingInformationPortfolioSubTitle',
       desc: '',
-      args: [detail],
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the investment details. Please try reloading the page`
+  String get errorGettingInformationInvestmentDetailSubTitle {
+    return Intl.message(
+      'There was an error when trying to get the investment details. Please try reloading the page',
+      name: 'errorGettingInformationInvestmentDetailSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the investment style question. Please try reloading the page`
+  String get errorGettingInformationInvestmentStyleQuestionSubTitle {
+    return Intl.message(
+      'There was an error when trying to get the investment style question. Please try reloading the page',
+      name: 'errorGettingInformationInvestmentStyleQuestionSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There was an error when trying to get the transaction history. Please try reloading the page`
+  String get errorGettingInformationTransactionHistorySubTitle {
+    return Intl.message(
+      'There was an error when trying to get the transaction history. Please try reloading the page',
+      name: 'errorGettingInformationTransactionHistorySubTitle',
+      desc: '',
+      args: [],
     );
   }
 
@@ -610,6 +790,16 @@ class S {
     );
   }
 
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? `
   String get askNameScreenPlaceholder {
     return Intl.message(
@@ -625,6 +815,16 @@ class S {
     return Intl.message(
       'Your Name',
       name: 'askNameScreenTextFieldHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Best Suited For`
+  String get bestSuitedFor {
+    return Intl.message(
+      'Best Suited For',
+      name: 'bestSuitedFor',
       desc: '',
       args: [],
     );
@@ -751,6 +951,26 @@ class S {
     );
   }
 
+  /// `You can trade after your account is approved.`
+  String get botTradeBottomSheetAccountNotYetApprovedTitle {
+    return Intl.message(
+      'You can trade after your account is approved.',
+      name: 'botTradeBottomSheetAccountNotYetApprovedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est. to be approved by 2 working days.`
+  String get botTradeBottomSheetAccountNotYetApprovedSubTitle {
+    return Intl.message(
+      'Est. to be approved by 2 working days.',
+      name: 'botTradeBottomSheetAccountNotYetApprovedSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `If you extend the Botstock period, you will incur additional fees`
   String get botTradeBottomSheetRolloverDisclosureTitle {
     return Intl.message(
@@ -852,6 +1072,56 @@ class S {
     );
   }
 
+  /// `How It Works`
+  String get howItWorks {
+    return Intl.message(
+      'How It Works',
+      name: 'howItWorks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Market Cap`
+  String get marketCap {
+    return Intl.message(
+      'Market Cap',
+      name: 'marketCap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prev Close`
+  String get prevClose {
+    return Intl.message(
+      'Prev Close',
+      name: 'prevClose',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.`
+  String get portfolioBuyingPowerToolTip {
+    return Intl.message(
+      'Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
+      name: 'portfolioBuyingPowerToolTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Performance`
+  String get portfolioDetailPerformanceTitle {
+    return Intl.message(
+      'Performance',
+      name: 'portfolioDetailPerformanceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Botstock Values (HKD)`
   String get portfolioDetailPerformanceBotStockValues {
     return Intl.message(
@@ -902,10 +1172,10 @@ class S {
     );
   }
 
-  /// `Expired in ${dateTime} days`
+  /// `Expired in {dateTime} days`
   String portfolioDetailExpiredIn(String dateTime) {
     return Intl.message(
-      'Expired in \$$dateTime days',
+      'Expired in $dateTime days',
       name: 'portfolioDetailExpiredIn',
       desc: '',
       args: [dateTime],
@@ -1203,6 +1473,206 @@ class S {
     );
   }
 
+  /// `CREATE AN ACCOUNT`
+  String get createAnAccount {
+    return Intl.message(
+      'CREATE AN ACCOUNT',
+      name: 'createAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create an Account and Start Trading!`
+  String get portfolioPopUpCreateAnAccountTitle {
+    return Intl.message(
+      'Create an Account and Start Trading!',
+      name: 'portfolioPopUpCreateAnAccountTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can manage all your investments here after you start trading. Create an account and start trading.`
+  String get portfolioPopUpCreateAnAccountSubTitle {
+    return Intl.message(
+      'You can manage all your investments here after you start trading. Create an account and start trading.',
+      name: 'portfolioPopUpCreateAnAccountSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DEFINE INVESTMENT STYLE`
+  String get defineInvestmentStyle {
+    return Intl.message(
+      'DEFINE INVESTMENT STYLE',
+      name: 'defineInvestmentStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Define Your Investment Style`
+  String get portfolioPopUpDefineInvestmentTitle {
+    return Intl.message(
+      'Define Your Investment Style',
+      name: 'portfolioPopUpDefineInvestmentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!`
+  String get portfolioPopUpDefineInvestmentSubTitle {
+    return Intl.message(
+      'Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!',
+      name: 'portfolioPopUpDefineInvestmentSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CONTINUE ACCOUNT OPENING`
+  String get continueAccountOpening {
+    return Intl.message(
+      'CONTINUE ACCOUNT OPENING',
+      name: 'continueAccountOpening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Account Opening`
+  String get portfolioPopUpContinueAccountOpeningTitle {
+    return Intl.message(
+      'Continue Account Opening',
+      name: 'portfolioPopUpContinueAccountOpeningTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You still need to complete your account opening until you can start trading. `
+  String get portfolioPopUpContinueAccountOpeningSubTitle {
+    return Intl.message(
+      'You still need to complete your account opening until you can start trading. ',
+      name: 'portfolioPopUpContinueAccountOpeningSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK!`
+  String get ok {
+    return Intl.message(
+      'OK!',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fund your account`
+  String get portfolioPopUpFundAccountTitle {
+    return Intl.message(
+      'Fund your account',
+      name: 'portfolioPopUpFundAccountTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.`
+  String get portfolioPopUpFundAccountSubTitle {
+    return Intl.message(
+      'Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.',
+      name: 'portfolioPopUpFundAccountSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `START A BOTSTOCK`
+  String get startABotstock {
+    return Intl.message(
+      'START A BOTSTOCK',
+      name: 'startABotstock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No trading has started!`
+  String get portfolioPopUpNoTradingHasStartedTitle {
+    return Intl.message(
+      'No trading has started!',
+      name: 'portfolioPopUpNoTradingHasStartedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can manage all your investments here after you start trading. `
+  String get portfolioPopUpNoTradingHasStartedtSubTitle {
+    return Intl.message(
+      'You can manage all your investments here after you start trading. ',
+      name: 'portfolioPopUpNoTradingHasStartedtSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Account is Pending Review`
+  String get portfolioPopUpPendingReviewTitle {
+    return Intl.message(
+      'Your Account is Pending Review',
+      name: 'portfolioPopUpPendingReviewTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can manage all your investments here after your account has been opened!`
+  String get portfolioPopUpPendingReviewSubTitle {
+    return Intl.message(
+      'You can manage all your investments here after your account has been opened!',
+      name: 'portfolioPopUpPendingReviewSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `REDEEM YOUR BOTSTOCK NOW`
+  String get redeemYourBotstockNow {
+    return Intl.message(
+      'REDEEM YOUR BOTSTOCK NOW',
+      name: 'redeemYourBotstockNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Redeem Your Free Botstock`
+  String get portfolioPopUpRedeemYourBotstockTitle {
+    return Intl.message(
+      'Redeem Your Free Botstock',
+      name: 'portfolioPopUpRedeemYourBotstockTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!`
+  String get portfolioPopUpRedeemYourBotstockSubTitle {
+    return Intl.message(
+      'Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!',
+      name: 'portfolioPopUpRedeemYourBotstockSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Total P/L`
   String get portfolioTotalPL {
     return Intl.message(
@@ -1303,6 +1773,26 @@ class S {
     );
   }
 
+  /// `Industry`
+  String get industry {
+    return Intl.message(
+      'Industry',
+      name: 'industry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Period`
+  String get investmentPeriod {
+    return Intl.message(
+      'Investment Period',
+      name: 'investmentPeriod',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Push-Notification`
   String get pushNotification {
     return Intl.message(
@@ -1343,6 +1833,16 @@ class S {
     );
   }
 
+  /// `Sector(s)`
+  String get sectors {
+    return Intl.message(
+      'Sector(s)',
+      name: 'sectors',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to sign out ?`
   String get signOutConfirmation {
     return Intl.message(
@@ -1353,11 +1853,111 @@ class S {
     );
   }
 
+  /// `Start Date`
+  String get startDate {
+    return Intl.message(
+      'Start Date',
+      name: 'startDate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Version`
   String get version {
     return Intl.message(
       'Version',
       name: 'version',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Up Financial Profile`
+  String get setUpFinancialProfile {
+    return Intl.message(
+      'Set Up Financial Profile',
+      name: 'setUpFinancialProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do any of the following apply to you or a member of your immediate family ?`
+  String get doAnyOfTheFollowingApply {
+    return Intl.message(
+      'Do any of the following apply to you or a member of your immediate family ?',
+      name: 'doAnyOfTheFollowingApply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a senior executive at or a 10% or greater shareholder of a publicly traded company.`
+  String get iAmASeniorExecutive {
+    return Intl.message(
+      'I am a senior executive at or a 10% or greater shareholder of a publicly traded company.',
+      name: 'iAmASeniorExecutive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a senior political figure.`
+  String get iAmASeniorPolitical {
+    return Intl.message(
+      'I am a senior political figure.',
+      name: 'iAmASeniorPolitical',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a family member or relative of a senior political figure.`
+  String get iAmAFamily {
+    return Intl.message(
+      'I am a family member or relative of a senior political figure.',
+      name: 'iAmAFamily',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)`
+  String get iAmADirector {
+    return Intl.message(
+      'I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)',
+      name: 'iAmADirector',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` No`
+  String get no {
+    return Intl.message(
+      ' No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SAVE FOR LATER`
+  String get saveForLater {
+    return Intl.message(
+      'SAVE FOR LATER',
+      name: 'saveForLater',
       desc: '',
       args: [],
     );

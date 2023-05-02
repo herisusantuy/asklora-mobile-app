@@ -21,6 +21,21 @@
   "buttonHaveAnAccount": "HAVE AN ACCOUNT?",
   "buttonLetsBegin": "LET’S BEGIN",
   "buttonSignOut": "SIGN OUT",
+  "currentPrice": "Current Price",
+  "estStopLossLevel": "Est. Stop Loss Level",
+  "estMaxLossLevel": "Est. Max Loss Level",
+  "estTakeProfitLevel": "Est. Take Profit Level",
+  "estMaxProfitLevel": "Est. Max Profit Level",
+  "estStopLossPercent": "Est. Stop Loss %",
+  "estMaxLossPercent": "Est. Max Loss %",
+  "estTakeProfitPercent": "Est. Take Profit %",
+  "estMaxProfitPercent": "Est. Max Profit %",
+  "estimatedEndDate": "Estimated End Date",
+  "employees": "Employees",
+  "ceo": "CEO",
+  "founded": "Founded",
+  "gotIt": "GOT IT",
+  "headquarters": "Headquarters",
   "accountSettings": "Account Settings",
   "subscription": "Subscription",
   "corePlan": "Core Plan",
@@ -51,20 +66,18 @@
   "orderRollover": "Order Rollover",
   "orderExpired": "Order Expired",
   "errorGettingInformationTitle": "Unable to get information",
-  "errorGettingInformationSubTitle": "There was an error when trying to get {detail}. Please try reloading the page",
-  "@errorGettingInformationSubTitle": {
-    "placeholders": {
-      "detail": {
-        "type": "String"
-      }
-    }
-  },
+  "errorGettingInformationPortfolioSubTitle": "There was an error when trying to get your Portfolio. Please try reloading the page",
+  "errorGettingInformationInvestmentDetailSubTitle": "There was an error when trying to get the investment details. Please try reloading the page",
+  "errorGettingInformationInvestmentStyleQuestionSubTitle": "There was an error when trying to get the investment style question. Please try reloading the page",
+  "errorGettingInformationTransactionHistorySubTitle": "There was an error when trying to get the transaction history. Please try reloading the page",
   "carouselIntro1": "Get your Investments in Shape",
   "carouselIntro2": "Guided by FinFit Coach, Lora",
   "carouselIntro3": "Invest with AI strategy, automated",
   "carouselIntro4": "Personalised experience",
+  "about": "About",
   "askNameScreenPlaceholder": "I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ",
   "askNameScreenTextFieldHint": "Your Name",
+  "bestSuitedFor": "Best Suited For",
   "greetingScreenTitle": "Alright! Are you ready for the FinFit journey? ",
   "greetingScreenSubTitle": "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!",
   "tooltipBotDetailsStartDate": "Lora’s date to start the Botstocks",
@@ -94,6 +107,8 @@
       }
     }
   },
+  "botTradeBottomSheetAccountNotYetApprovedTitle": "You can trade after your account is approved.",
+  "botTradeBottomSheetAccountNotYetApprovedSubTitle": "Est. to be approved by 2 working days.",
   "botTradeBottomSheetRolloverDisclosureTitle": "If you extend the Botstock period, you will incur additional fees",
   "botTradeBottomSheetRolloverDisclosureSubTitle": "You will be charged HKD40 if you want to extend this Botstock. If you do not have enough funds, then your fees will be deducted when you have sufficient buying power",
   "botTradeBottomSheetRolloverConfirmationTitle": "Your Botstock will be extended for \n\n2 Weeks",
@@ -118,7 +133,11 @@
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": " DEPOSIT TO START TRADING",
   "botTradeBottomSheetCancelBotStockConfirmationTitle": "The investment amount and Bot management fee (HKD1,500) will be returned to your account.",
   "botTradeBottomSheetRolloverConfirmationButton": "CONFIRM ROLLOVER",
-
+  "howItWorks": "How It Works",
+  "marketCap": "Market Cap",
+  "prevClose": "Prev Close",
+  "portfolioBuyingPowerToolTip": "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.",
+  "portfolioDetailPerformanceTitle": "Performance",
   "portfolioDetailPerformanceBotStockValues": "Botstock Values (HKD)",
   "portfolioDetailPerformanceInvestmentAmount": "Inv. Amount (HKD)",
   "portfolioDetailPerformanceTotalPL": "Total P&L",
@@ -138,7 +157,7 @@
       }
     }
   },
-  "portfolioDetailExpiredIn": "Expired in ${dateTime} days",
+  "portfolioDetailExpiredIn": "Expired in {dateTime} days",
   "@portfolioDetailExpiredIn": {
     "placeholders": {
       "dateTime": {
@@ -212,8 +231,28 @@
     }
   },
   "performance": "Performance",
-  "portfolioTotalPL": "Total P/L",
+  "createAnAccount": "CREATE AN ACCOUNT",
+  "portfolioPopUpCreateAnAccountTitle" : "Create an Account and Start Trading!",
+  "portfolioPopUpCreateAnAccountSubTitle" : "You can manage all your investments here after you start trading. Create an account and start trading.",
+  "defineInvestmentStyle": "DEFINE INVESTMENT STYLE",
+  "portfolioPopUpDefineInvestmentTitle" : "Define Your Investment Style",
+  "portfolioPopUpDefineInvestmentSubTitle" : "Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!",
+  "continueAccountOpening": "CONTINUE ACCOUNT OPENING",
+  "portfolioPopUpContinueAccountOpeningTitle" : "Continue Account Opening",
+  "portfolioPopUpContinueAccountOpeningSubTitle" : "You still need to complete your account opening until you can start trading. ",
+  "ok": "OK!",
+  "portfolioPopUpFundAccountTitle" : "Fund your account",
+  "portfolioPopUpFundAccountSubTitle" : "Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.",
+  "startABotstock": "START A BOTSTOCK",
+  "portfolioPopUpNoTradingHasStartedTitle" : "No trading has started!",
+  "portfolioPopUpNoTradingHasStartedtSubTitle" : "You can manage all your investments here after you start trading. ",
+  "portfolioPopUpPendingReviewTitle" : "Your Account is Pending Review",
+  "portfolioPopUpPendingReviewSubTitle" : "You can manage all your investments here after your account has been opened!",
+  "redeemYourBotstockNow": "REDEEM YOUR BOTSTOCK NOW",
+  "portfolioPopUpRedeemYourBotstockTitle" : "Redeem Your Free Botstock",
+  "portfolioPopUpRedeemYourBotstockSubTitle" : "Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!",
 
+  "portfolioTotalPL": "Total P/L",
   "portfolioYourBotStock": "Your Botstocks",
   "transactionHistoryTitle": "Transaction History",
   "transactionHistoryTabAll": "All",
@@ -223,12 +262,23 @@
   "totalPnlIs": "Total P/L is",
   "notificationSetting": "Notification Setting",
   "inApp": "In-App",
+  "industry": "Industry",
+  "investmentPeriod": "Investment Period",
   "pushNotification": "Push-Notification",
   "password": "Password",
   "newPassword": "New Password",
   "confirmNewPassword": "Confirm New Password",
+  "sectors": "Sector(s)",
   "signOutConfirmation": "Are you sure you want to sign out ?",
-  "version": "Version"
-
-
+  "startDate": "Start Date",
+  "version": "Version",
+  "setUpFinancialProfile" : "Set Up Financial Profile",
+  "doAnyOfTheFollowingApply" : "Do any of the following apply to you or a member of your immediate family ?",
+  "iAmASeniorExecutive" : "I am a senior executive at or a 10% or greater shareholder of a publicly traded company.",
+  "iAmASeniorPolitical" : "I am a senior political figure.",
+  "iAmAFamily" : "I am a family member or relative of a senior political figure.",
+  "iAmADirector": "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)",
+  "yes": "Yes",
+  "no" : " No",
+  "saveForLater": "SAVE FOR LATER"
 }

@@ -59,8 +59,9 @@ class TransactionHistoryScreen extends StatelessWidget {
             return CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
                 title: S.of(context).errorGettingInformationTitle,
-                subTitle: S.of(context).errorGettingInformationSubTitle(
-                    S.of(context).transactionHistory),
+                subTitle: S
+                    .of(context)
+                    .errorGettingInformationTransactionHistorySubTitle,
                 primaryButtonLabel: S.of(context).buttonReloadPage,
                 secondaryButtonLabel: S.of(context).buttonCancel,
                 onSecondaryButtonTap: () => Navigator.pop(context),

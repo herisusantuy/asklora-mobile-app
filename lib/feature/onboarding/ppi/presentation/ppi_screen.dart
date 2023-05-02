@@ -64,8 +64,9 @@ class PpiScreen extends StatelessWidget {
           builder: (context, state) => CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(
               title: S.of(context).errorGettingInformationTitle,
-              subTitle: S.of(context).errorGettingInformationSubTitle(
-                  'your Investment Style Question'),
+              subTitle: S
+                  .of(context)
+                  .errorGettingInformationInvestmentStyleQuestionSubTitle,
               primaryButtonLabel: S.of(context).buttonReloadPage,
               secondaryButtonLabel: S.of(context).buttonCancel,
               onSecondaryButtonTap: () => Navigator.pop(context),

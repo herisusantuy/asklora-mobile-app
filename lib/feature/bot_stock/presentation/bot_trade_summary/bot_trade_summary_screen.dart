@@ -81,7 +81,11 @@ class BotTradeSummaryScreen extends StatelessWidget {
             }
           } else if (state.createBotOrderResponse.state ==
               ResponseState.error) {
-            BotStockBottomSheet.insufficientBalance(context);
+            if (state.createBotOrderResponse.errorCode == 403) {
+              BotStockBottomSheet.notYetRegisteredToBroker(context);
+            } else {
+              BotStockBottomSheet.insufficientBalance(context);
+            }
           }
         },
         child: BotStockForm(

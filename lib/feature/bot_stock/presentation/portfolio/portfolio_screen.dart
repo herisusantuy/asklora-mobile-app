@@ -79,19 +79,16 @@ class PortfolioScreen extends StatelessWidget {
           builder: (context, state) => CustomLayoutWithBlurPopUp(
             loraPopUpMessageModel: LoraPopUpMessageModel(
               title: S.of(context).errorGettingInformationTitle,
-              subTitle: S
-                  .of(context)
-                  .errorGettingInformationSubTitle('your Portfolio'),
+              subTitle: S.of(context).errorGettingInformationPortfolioSubTitle,
               primaryButtonLabel: S.of(context).buttonReloadPage,
-              secondaryButtonLabel: S.of(context).buttonCancel,
-              onSecondaryButtonTap: () => Navigator.pop(context),
               onPrimaryButtonTap: () {
                 context.read<PortfolioBloc>().add(const FetchActiveOrders());
                 context.read<PortfolioBloc>().add(FetchPortfolio());
               },
             ),
             showPopUp:
-                state.botActiveOrderResponse.state == ResponseState.error ||
+                (state.botActiveOrderResponse.state == ResponseState.error &&
+                        state.botActiveOrderResponse.errorCode != 403) ||
                     state.portfolioResponse.state == ResponseState.error,
             content: ListView(
               padding: AppValues.screenHorizontalPadding
@@ -198,7 +195,7 @@ class PortfolioScreen extends StatelessWidget {
                                 .of(context)
                                 .portfolioBuyingPower(state.currency.value),
                             rightTooltipText:
-                                'Your Buying Power represents the amount of cash that you can use to buy stocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’.',
+                                S.of(context).portfolioBuyingPowerToolTip,
                             leftSubTitle: data?.withdrawableAmount != null
                                 ? (data!.withdrawableAmount)
                                     .convertToCurrencyDecimal()
