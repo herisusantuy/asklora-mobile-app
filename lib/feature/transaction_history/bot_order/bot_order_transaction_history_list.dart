@@ -10,7 +10,7 @@ class BotOrderTransactionHistoryList extends StatelessWidget {
             previous.botOrderTransactions != current.botOrderTransactions,
         builder: (context, state) {
           if (state.botOrderTransactions.isEmpty) {
-            return const TransactionEmptyWidget();
+            return const EmptyTransactionPlaceholder();
           } else {
             return ListView(
               children: state.botOrderTransactions

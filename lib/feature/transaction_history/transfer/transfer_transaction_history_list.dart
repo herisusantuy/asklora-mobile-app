@@ -10,7 +10,7 @@ class TransferTransactionHistoryList extends StatelessWidget {
             previous.transferTransactions != current.transferTransactions,
         builder: (context, state) {
           if (state.transferTransactions.isEmpty) {
-            return const TransactionEmptyWidget();
+            return const EmptyTransactionPlaceholder();
           } else {
             return ListView(
               children: state.transferTransactions
