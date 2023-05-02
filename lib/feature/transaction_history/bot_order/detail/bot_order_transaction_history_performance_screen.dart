@@ -74,6 +74,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
             ],
           );
         } else {
+          ///TODO add error UI later
           return const SizedBox.shrink();
         }
       });
