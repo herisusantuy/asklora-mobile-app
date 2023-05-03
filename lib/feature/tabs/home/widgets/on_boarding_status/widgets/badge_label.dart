@@ -28,6 +28,6 @@ class BadgeLabel extends StatelessWidget {
             color: backgroundColor ?? AskLoraColors.lightGray,
             borderRadius: BorderRadius.circular(5)),
         child: CustomTextNew(label,
-            style: textStyle ?? AskLoraTextStyles.subtitle4));
+            style: textStyle ?? AskLoraTextStyles.subtitle5));
   }
 }
