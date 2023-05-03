@@ -4,18 +4,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/secondary/extra_info_button.dart';
+import '../../../../../core/presentation/custom_modal_bottom_sheet.dart';
+import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/values/app_values.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../../learning/learning_bot_stock_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
+import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
+import '../../../../orders/regular/presentation/widgets/custom_bottom_sheet_card_widget.dart';
 import 'domain/on_boarding_status_model.dart';
+import 'widgets/milestones_step.dart';
 
 part 'widgets/on_boarding_status_button.dart';
 
@@ -61,7 +68,11 @@ class OnBoardingStatus extends StatelessWidget {
                         color: AskLoraColors.primaryMagenta,
                         size: 15,
                       ),
-                      onTap: () {},
+                      onTap: () => customModalBottomSheet(
+                            context,
+                            title: 'Milestones',
+                            content: const MilestonesStep(),
+                          ),
                       buttonExtraInfoSize: ButtonExtraInfoSize.small)
                 ],
               ),

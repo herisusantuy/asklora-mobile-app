@@ -26,7 +26,10 @@ class HomeScreenFreeBotStockTimerWidget extends StatelessWidget {
             ),
             ExtraInfoButton(
               label: 'View your free Botstock',
-              onTap: () {},
+              onTap: () => TabsScreen.openAndRemoveAllRoute(
+                context,
+                initialTabScreenPage: TabScreenPage.portfolio,
+              ),
               suffixIcon: const Icon(
                 Icons.arrow_forward_rounded,
                 color: AskLoraColors.primaryMagenta,

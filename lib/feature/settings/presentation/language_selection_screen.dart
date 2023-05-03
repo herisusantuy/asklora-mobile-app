@@ -7,6 +7,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../../../generated/l10n.dart';
+import '../../tabs/tabs_screen.dart';
 import '../widget/menu_selection_button_widget.dart';
 
 class LanguageSelectionScreen extends StatelessWidget {
@@ -27,16 +28,22 @@ class LanguageSelectionScreen extends StatelessWidget {
                   children: [
                     MenuSelectionButtonWidget(
                       title: 'English',
-                      onTap: () => context.read<AppBloc>().add(
-                          AppLanguageChangeEvent(
-                              LocaleType.supportedLocales()[0])),
+                      onTap: () {
+                        context.read<AppBloc>().add(AppLanguageChangeEvent(
+                            LocaleType.supportedLocales()[0]));
+                        TabsScreen.openAndRemoveAllRoute(context,
+                            initialTabScreenPage: TabScreenPage.home);
+                      },
                       isSelected: state.locale.languageCode == 'en',
                     ),
                     MenuSelectionButtonWidget(
                       title: '繁體中文',
-                      onTap: () => context.read<AppBloc>().add(
-                          AppLanguageChangeEvent(
-                              LocaleType.supportedLocales()[1])),
+                      onTap: () {
+                        context.read<AppBloc>().add(AppLanguageChangeEvent(
+                            LocaleType.supportedLocales()[1]));
+                        TabsScreen.openAndRemoveAllRoute(context,
+                            initialTabScreenPage: TabScreenPage.home);
+                      },
                       showBottomBorder: false,
                       isSelected: state.locale.languageCode == 'zh',
                     ),
