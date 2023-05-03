@@ -294,5 +294,31 @@
   "needHelp": "Need help?",
   "noTransactions": "No Transactions",
   "noTransactionsYet": "Looks like you haven’t made \nany transactions yet!",
-  "performance": "Performance"
+  "performance": "Performance",
+  "milestones" : "Milestones",
+  "startInvesting": "Start Investing",
+  "privacyEvaluation": "Privacy Evaluation",
+  "personalisation": "Personalisation",
+  "createAnAccount": "Create an Account",
+  "openInvestmentAccount": "Open Investment Account",
+  "getTheFirstBotstockForFree": "Get the First Botstock for Free",
+  "payDepositToStartRealTrade": "Pay Deposit to Start Real Trade",
+  "tradeWithBots": "Trade with Bots",
+  "introduceBotPlank": "Introduce Bot - Plank",
+  "introduceBotPullup": "Introduce Bot - Pullup",
+  "introduceBotSquat": "Introduce Bot - Squat",
+  "tradeWithYourFirstBotstock": "Trade with Your First Botstock",
+  "masterAiTrading": "Master AI Trading",
+  "learnBotstockManagement": "Learn Botstock Management",
+  "manageYourBotstock": "Manage Your Botstock",
+  "tradeWithANewBotstock": "Trade with a New Botstock",
+  "relearn" : "relearn",
+  "min" : "~{minute} min",
+  "@min" : {
+    "placeholders": {
+      "minute" : {
+        "type" : "String"
+      }
+    }
+  }
 }

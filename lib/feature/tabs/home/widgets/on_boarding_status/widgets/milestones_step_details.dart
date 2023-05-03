@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../../core/utils/extensions.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import 'badge_label.dart';
 
@@ -14,9 +16,9 @@ class MilestonesStepDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _startInvestingSteps(),
-        _tradeWithBotsSteps(),
-        _masterAiTradingSteps(),
+        _startInvestingSteps(context),
+        _tradeWithBotsSteps(context),
+        _masterAiTradingSteps(context),
       ],
     );
   }
@@ -55,22 +57,28 @@ class MilestonesStepDetails extends StatelessWidget {
         spaceHorizontal: 30,
       );
 
-  Widget _startInvestingSteps() => Column(
+  Widget _startInvestingSteps(BuildContext context) => Column(
         children: [
-          _stepLabel('1', 'Start Investing'),
+          _stepLabel('1', S.of(context).startInvesting),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
             child: Column(
               children: [
-                _startInvestingStep('Privacy Evaluation', '~ 1 MIN'),
-                _startInvestingStep('Personalisation', '~ 1 MIN'),
-                _startInvestingStep('Create an Account', '~ 1 MIN'),
-                _startInvestingStep('Define Investment Style', '~ 2 MIN'),
-                _startInvestingStep('Open Investment Account', '~ 20 MIN'),
+                _startInvestingStep(S.of(context).privacyEvaluation,
+                    S.of(context).min(1.toString())),
+                _startInvestingStep(S.of(context).personalisation,
+                    S.of(context).min(1.toString())),
+                _startInvestingStep(S.of(context).createAnAccount,
+                    S.of(context).min(1.toString())),
                 _startInvestingStep(
-                    'Get the First Botstock for Free', '~ 3 MIN'),
-                _startInvestingStep(
-                    'Pay Deposit to Start Real Trade', '~ 10 MIN',
+                    S.of(context).defineInvestmentStyle.toTitleCase(),
+                    S.of(context).min(2.toString())),
+                _startInvestingStep(S.of(context).openInvestmentAccount,
+                    S.of(context).min(20.toString())),
+                _startInvestingStep(S.of(context).getTheFirstBotstockForFree,
+                    S.of(context).min(2.toString())),
+                _startInvestingStep(S.of(context).payDepositToStartRealTrade,
+                    S.of(context).min(10.toString()),
                     drawLine: false, spaceVertical: 10),
               ],
             ),
@@ -78,7 +86,8 @@ class MilestonesStepDetails extends StatelessWidget {
         ],
       );
 
-  Widget _labelStepWithButton(String label, {required VoidCallback onTap}) =>
+  Widget _labelStepWithButton(BuildContext context,
+          {required String label, required VoidCallback onTap}) =>
       Row(
         children: [
           Expanded(
@@ -89,23 +98,24 @@ class MilestonesStepDetails extends StatelessWidget {
               child: SizedBox(
                 height: 25,
                 child: PrimaryButton(
-                  label: 'RELEARN',
+                  label: S.of(context).relearn,
                   onTap: onTap,
                   buttonPrimarySize: ButtonPrimarySize.small,
                 ),
               )),
         ],
       );
-  Widget _tradeWithBotsSteps() => Column(
+  Widget _tradeWithBotsSteps(BuildContext context) => Column(
         children: [
-          _stepLabel('2', 'Trade with Bots'),
+          _stepLabel('2', S.of(context).tradeWithBots),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
             child: Column(
               children: [
                 CustomStep(
                   widgetStep: _labelStepWithButton(
-                    'Introduce Bot - Plank',
+                    context,
+                    label: S.of(context).introduceBotPlank,
                     onTap: () {},
                   ),
                   drawLine: true,
@@ -114,7 +124,8 @@ class MilestonesStepDetails extends StatelessWidget {
                 ),
                 CustomStep(
                   widgetStep: _labelStepWithButton(
-                    'Introduce Bot - Pullup',
+                    context,
+                    label: S.of(context).introduceBotPullup,
                     onTap: () {},
                   ),
                   drawLine: true,
@@ -123,7 +134,8 @@ class MilestonesStepDetails extends StatelessWidget {
                 ),
                 CustomStep(
                   widgetStep: _labelStepWithButton(
-                    'Introduce Bot - Squat',
+                    context,
+                    label: S.of(context).introduceBotSquat,
                     onTap: () {},
                   ),
                   drawLine: true,
@@ -132,7 +144,8 @@ class MilestonesStepDetails extends StatelessWidget {
                 ),
                 CustomStep(
                   widgetStep: _labelStepWithButton(
-                    'Trade with Your First Botstock',
+                    context,
+                    label: S.of(context).tradeWithYourFirstBotstock,
                     onTap: () {},
                   ),
                   spaceHorizontal: 30,
@@ -143,16 +156,17 @@ class MilestonesStepDetails extends StatelessWidget {
         ],
       );
 
-  Widget _masterAiTradingSteps() => Column(
+  Widget _masterAiTradingSteps(BuildContext context) => Column(
         children: [
-          _stepLabel('3', 'Master AI Trading'),
+          _stepLabel('3', S.of(context).masterAiTrading),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
             child: Column(
               children: [
                 CustomStep(
                   widgetStep: _labelStepWithButton(
-                    'Learn Botstock Management',
+                    context,
+                    label: S.of(context).learnBotstockManagement,
                     onTap: () {},
                   ),
                   drawLine: true,
@@ -161,7 +175,8 @@ class MilestonesStepDetails extends StatelessWidget {
                 ),
                 CustomStep(
                   widgetStep: _labelStepWithButton(
-                    'Manage Your Botstock',
+                    context,
+                    label: S.of(context).manageYourBotstock,
                     onTap: () {},
                   ),
                   drawLine: true,
@@ -170,7 +185,8 @@ class MilestonesStepDetails extends StatelessWidget {
                 ),
                 CustomStep(
                   widgetStep: _labelStepWithButton(
-                    'Trade with a New Botstock',
+                    context,
+                    label: S.of(context).tradeWithANewBotstock,
                     onTap: () {},
                   ),
                   spaceHorizontal: 30,

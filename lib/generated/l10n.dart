@@ -1453,10 +1453,10 @@ class S {
     );
   }
 
-  /// `CREATE AN ACCOUNT`
+  /// `Create an Account`
   String get createAnAccount {
     return Intl.message(
-      'CREATE AN ACCOUNT',
+      'Create an Account',
       name: 'createAnAccount',
       desc: '',
       args: [],
@@ -2030,6 +2030,186 @@ class S {
       name: 'performance',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Milestones`
+  String get milestones {
+    return Intl.message(
+      'Milestones',
+      name: 'milestones',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Investing`
+  String get startInvesting {
+    return Intl.message(
+      'Start Investing',
+      name: 'startInvesting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Evaluation`
+  String get privacyEvaluation {
+    return Intl.message(
+      'Privacy Evaluation',
+      name: 'privacyEvaluation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personalisation`
+  String get personalisation {
+    return Intl.message(
+      'Personalisation',
+      name: 'personalisation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Investment Account`
+  String get openInvestmentAccount {
+    return Intl.message(
+      'Open Investment Account',
+      name: 'openInvestmentAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get the First Botstock for Free`
+  String get getTheFirstBotstockForFree {
+    return Intl.message(
+      'Get the First Botstock for Free',
+      name: 'getTheFirstBotstockForFree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay Deposit to Start Real Trade`
+  String get payDepositToStartRealTrade {
+    return Intl.message(
+      'Pay Deposit to Start Real Trade',
+      name: 'payDepositToStartRealTrade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade with Bots`
+  String get tradeWithBots {
+    return Intl.message(
+      'Trade with Bots',
+      name: 'tradeWithBots',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introduce Bot - Plank`
+  String get introduceBotPlank {
+    return Intl.message(
+      'Introduce Bot - Plank',
+      name: 'introduceBotPlank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introduce Bot - Pullup`
+  String get introduceBotPullup {
+    return Intl.message(
+      'Introduce Bot - Pullup',
+      name: 'introduceBotPullup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introduce Bot - Squat`
+  String get introduceBotSquat {
+    return Intl.message(
+      'Introduce Bot - Squat',
+      name: 'introduceBotSquat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade with Your First Botstock`
+  String get tradeWithYourFirstBotstock {
+    return Intl.message(
+      'Trade with Your First Botstock',
+      name: 'tradeWithYourFirstBotstock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Master AI Trading`
+  String get masterAiTrading {
+    return Intl.message(
+      'Master AI Trading',
+      name: 'masterAiTrading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Learn Botstock Management`
+  String get learnBotstockManagement {
+    return Intl.message(
+      'Learn Botstock Management',
+      name: 'learnBotstockManagement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage Your Botstock`
+  String get manageYourBotstock {
+    return Intl.message(
+      'Manage Your Botstock',
+      name: 'manageYourBotstock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade with a New Botstock`
+  String get tradeWithANewBotstock {
+    return Intl.message(
+      'Trade with a New Botstock',
+      name: 'tradeWithANewBotstock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `relearn`
+  String get relearn {
+    return Intl.message(
+      'relearn',
+      name: 'relearn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `~{minute} min`
+  String min(String minute) {
+    return Intl.message(
+      '~$minute min',
+      name: 'min',
+      desc: '',
+      args: [minute],
     );
   }
 }

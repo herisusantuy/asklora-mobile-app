@@ -274,5 +274,31 @@
   "changeBankAccount" : "更改銀行戶口",
   "noteOnPaymentDetails" : "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。",
   "yourPaymentInformationIsUnderReview" : "您的銀行帳戶信息正在審核中。一旦您的開戶申請獲批，您的銀行帳戶詳細信息將顯示在此處。請注意，審核過程最多可能需要 2 個工作日。",
-  "needHelp": "需要幫助？"
+  "needHelp": "需要幫助？",
+  "milestones" : "目標",
+  "startInvesting": "開始投資 ",
+  "privacyEvaluation": "私隱評估",
+  "personalisation": "個人化",
+  "createAnAccount": "開立賬戶",
+  "openInvestmentAccount": "開立投資賬戶",
+  "getTheFirstBotstockForFree": "獲取首個免費 Botstock ",
+  "payDepositToStartRealTrade": "入金以開始正式交易",
+  "tradeWithBots": "以 Bot 交易",
+  "introduceBotPlank": "簡介 Bot - Plank",
+  "introduceBotPullup": "簡介 Bot - Pullup",
+  "introduceBotSquat": "簡介 Bot - Squat",
+  "tradeWithYourFirstBotstock": "以首隻 Botstock 交易",
+  "masterAiTrading": "Master AI Trading",
+  "learnBotstockManagement": "學䲾 Botstock 管理",
+  "manageYourBotstock": "管理 Botstock",
+  "tradeWithANewBotstock": "以一隻新 Botstock 交易",
+  "relearn" : "再次學習",
+  "min" : " ~{minute} 分鐘",
+  "@min" : {
+    "placeholders": {
+      "minute" : {
+        "type" : "String"
+      }
+    }
+  }
 }
