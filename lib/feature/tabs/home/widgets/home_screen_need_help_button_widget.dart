@@ -7,8 +7,9 @@ class HomeScreenNeedHelpButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExtraInfoButton(
       label: S.of(context).needHelp,
-      onTap: () => TabsScreen.openAndRemoveAllRoute(context,
-          initialTabScreenPage: TabScreenPage.loraGpt),
+      onTap: () => context
+          .read<NavigationBloc<TabScreenPage>>()
+          .add(const PageChanged(TabScreenPage.loraGpt)),
       suffixIcon: const Icon(
         Icons.arrow_forward_rounded,
         color: AskLoraColors.primaryMagenta,
