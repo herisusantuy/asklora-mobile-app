@@ -9,7 +9,5 @@ class PpiApiClient extends BaseApiClient {
   factory PpiApiClient() => _singleton;
 
   @override
-  String getBaseUrl() {
-    return Environment().config.ppiBaseUrl;
-  }
+  String get baseUrl => Environment().config.ppiBaseUrl;
 }
