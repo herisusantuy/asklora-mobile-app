@@ -25,7 +25,7 @@ class MilestonesStepDetails extends StatelessWidget {
     );
   }
 
-  Widget _stepLabel(String number, String label) => Row(
+  Widget _headerWithBadge(String number, String label) => Row(
         children: [
           Container(
             margin: const EdgeInsets.only(right: 10),
@@ -61,7 +61,7 @@ class MilestonesStepDetails extends StatelessWidget {
 
   Widget _startInvestingSteps(BuildContext context) => Column(
         children: [
-          _stepLabel('1', S.of(context).startInvesting),
+          _headerWithBadge('1', S.of(context).startInvesting),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
             child: Column(
@@ -109,7 +109,7 @@ class MilestonesStepDetails extends StatelessWidget {
       );
   Widget _tradeWithBotsSteps(BuildContext context) => Column(
         children: [
-          _stepLabel('2', S.of(context).tradeWithBots),
+          _headerWithBadge('2', S.of(context).tradeWithBots),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
             child: Column(
@@ -169,7 +169,7 @@ class MilestonesStepDetails extends StatelessWidget {
 
   Widget _masterAiTradingSteps(BuildContext context) => Column(
         children: [
-          _stepLabel('3', S.of(context).masterAiTrading),
+          _headerWithBadge('3', S.of(context).masterAiTrading),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
             child: Column(
