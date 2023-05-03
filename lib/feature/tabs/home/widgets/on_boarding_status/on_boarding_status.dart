@@ -22,7 +22,7 @@ import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../../orders/regular/presentation/widgets/custom_bottom_sheet_card_widget.dart';
 import 'domain/on_boarding_status_model.dart';
-import 'widgets/milestones_step.dart';
+import 'widgets/milestones_step_details.dart';
 
 part 'widgets/on_boarding_status_button.dart';
 
@@ -71,7 +71,7 @@ class OnBoardingStatus extends StatelessWidget {
                       onTap: () => customModalBottomSheet(
                             context,
                             title: 'Milestones',
-                            content: const MilestonesStep(),
+                            content: const MilestonesStepDetails(),
                           ),
                       buttonExtraInfoSize: ButtonExtraInfoSize.small)
                 ],

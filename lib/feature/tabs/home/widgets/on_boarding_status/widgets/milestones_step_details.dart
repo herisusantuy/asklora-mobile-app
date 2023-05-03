@@ -6,8 +6,8 @@ import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import 'badge_label.dart';
 
-class MilestonesStep extends StatelessWidget {
-  const MilestonesStep({super.key});
+class MilestonesStepDetails extends StatelessWidget {
+  const MilestonesStepDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
