@@ -91,12 +91,7 @@ class BotStockRepository {
     List<BotPortfolioChartDataSet> finalChartData = [];
     int index = 0;
     for (var element in chartData) {
-      finalChartData.add(BotPortfolioChartDataSet(
-          index: index++,
-          date: element.date,
-          price: element.price,
-          hedgeShare: element.hedgeShare,
-          currentPnlRet: element.currentPnlRet));
+      finalChartData.add(element.copyWith(index: index++));
     }
     return finalChartData;
   }
@@ -146,7 +141,6 @@ class BotStockRepository {
     } on ForbiddenException {
       return BaseResponse.error(errorCode: 403);
     } catch (e) {
-      ///todo handle error code later on insufficient balance
       return BaseResponse.error();
     }
   }

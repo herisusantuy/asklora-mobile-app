@@ -1,30 +1,45 @@
 part of '../bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
-  final List<BotSummaryTransactionHistoryModel> summaries;
   final String botStatus;
   final String title;
   late final BotStatus botStatusType;
 
   BotOrderTransactionHistoryDetailContent(
-      {required this.title,
-      required this.summaries,
-      required this.botStatus,
-      Key? key})
+      {required this.title, required this.botStatus, Key? key})
       : super(key: key) {
     botStatusType = BotStatus.findByString(botStatus);
   }
 
   @override
   Widget build(BuildContext context) {
-    return TransactionHistoryTabScreen(header: _header(context), tabs: [
+    return TransactionHistoryTabScreen(
+      header: _header(context),
+      tabs: getTabs(context),
+      tabViews: getTabViews(context),
+    );
+  }
+
+  List<String> getTabs(BuildContext context) {
+    List<String> tabs = [
       S.of(context).summary,
-      S.of(context).activities
-    ], tabViews: [
-      BotOrderTransactionHistorySummaryScreen(
-          summaries: summaries, botStatusType: botStatusType),
+      S.of(context).activities,
+    ];
+    if (botStatusType == BotStatus.closed) {
+      tabs.add(S.of(context).performance);
+    }
+    return tabs;
+  }
+
+  List<Widget> getTabViews(BuildContext context) {
+    List<Widget> tabViews = [
+      BotOrderTransactionHistorySummaryScreen(botStatusType: botStatusType),
       const BotOrderTransactionHistoryActivitiesScreen(),
-    ]);
+    ];
+    if (botStatusType == BotStatus.closed) {
+      tabViews.add(const BotOrderTransactionHistoryPerformanceScreen());
+    }
+    return tabViews;
   }
 
   Widget _header(BuildContext context) => Container(

@@ -74,11 +74,11 @@ class _ChartAnimationState extends State<ChartAnimation> {
     maxPriceValue = 0;
     minPriceValue = double.infinity;
     for (var element in widget.chartDataSets) {
-      if (element.price! > maxPriceValue) {
-        maxPriceValue = element.price!;
+      if (element.price > maxPriceValue) {
+        maxPriceValue = element.price;
       }
-      if (element.price! < minPriceValue) {
-        minPriceValue = element.price!;
+      if (element.price < minPriceValue) {
+        minPriceValue = element.price;
       }
     }
 
@@ -209,11 +209,11 @@ class _ChartAnimationState extends State<ChartAnimation> {
       if (mounted) {
         double? hedgeShare = widget.chartDataSets[animateIndex].hedgeShare;
         double? profit = widget.chartDataSets[animateIndex].currentPnlRet;
-        if (profit != null && profit != 0) {
-          lastProfit = widget.chartDataSets[animateIndex].currentPnlRet!;
+        if (profit != 0) {
+          lastProfit = widget.chartDataSets[animateIndex].currentPnlRet;
         }
 
-        if (hedgeShare != null && hedgeShare != 0) {
+        if (hedgeShare != 0) {
           if (hedgeShare > 0) {
             setState(() {
               labels.add(AnimatedIconLabel(
@@ -252,7 +252,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
                     50 * (chartHeight - 24) / 100
                 ? 10
                 : (chartHeight - 80),
-            profit: profit!,
+            profit: profit,
             hedgeType: hedgeShare > 0 ? HedgeType.buy : HedgeType.sell,
           ));
 
@@ -283,10 +283,10 @@ class _ChartAnimationState extends State<ChartAnimation> {
 
   void drawLineChart() {
     for (var data in widget.chartDataSets) {
-      flSpots.add(FlSpot(data.index!.toDouble(), data.price!));
+      flSpots.add(FlSpot(data.index!.toDouble(), data.price));
       showIndexes.add(data.index!);
       showCenterValue.add(Text(
-        'Profit : ${data.currentPnlRet ?? 0}',
+        'Profit : ${data.currentPnlRet}',
         style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16),
       ));
@@ -300,7 +300,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
       return Transform.rotate(
           angle: math.pi / 8,
           child: Text(
-            DateFormat('MM-dd').format(chartDataSet.date!),
+            DateFormat('MM-dd').format(chartDataSet.date),
             style: axisStyle,
           ));
     } else {

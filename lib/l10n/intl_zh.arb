@@ -162,7 +162,6 @@
   "portfolioDetailPerformanceCash": "現金 (HKD)",
   "portfolioDetailPerformanceBotAssetsInStock": "股票/現金比例",
   "portfolioDetailKeyInfoTitle": "主要資訊",
-
   "portfolioDetailKeyInfoDaysTillExpiry": "續期時間",
   "portfolioDetailKeyInfoStartTime": "開始時間",
   "portfolioDetailKeyInfoEndTime": "結束時間",
@@ -236,6 +235,7 @@
   "portfolioPopUpNoTradingHasStartedtSubTitle" : " 開始交易後你就可以一次過管理所有投資。",
   "portfolioTotalPL": "總盈虧",
   "portfolioYourBotStock": "你的Botstocks",
+  "performance": "表現",
   "sectors": "領域",
   "transactionHistoryTitle": "交易歷史",
   "transactionHistoryTabAll": "全部",

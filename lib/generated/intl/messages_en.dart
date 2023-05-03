@@ -215,6 +215,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "no": MessageLookupByLibrary.simpleMessage(" No"),
+        "noTransactions":
+            MessageLookupByLibrary.simpleMessage("No Transactions"),
+        "noTransactionsYet": MessageLookupByLibrary.simpleMessage(
+            "Looks like you haven’t made \nany transactions yet!"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
         "notificationSetting":
@@ -232,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
+        "performance": MessageLookupByLibrary.simpleMessage("Performance"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "portfolioBuyingPower": m4,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(

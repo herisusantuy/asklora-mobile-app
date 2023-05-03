@@ -1,69 +1,71 @@
-import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
-
 import '../../../../../../core/utils/date_utils.dart';
 import '../../../../../../core/utils/extensions.dart';
+import '../../../../chart/domain/chart_models.dart';
 
-part 'bot_activities_transaction_history_model.g.dart';
-
-@JsonSerializable()
-class BotActivitiesTransactionHistoryModel extends Equatable {
-  @JsonKey(name: 'pk')
+class BotActivitiesTransactionHistoryModel extends ChartDataSet {
   final String pk;
-  final String created;
-  final String side;
-  @JsonKey(name: 'filled_qty')
-  final double filledQty;
-  @JsonKey(name: 'filled_avg_price')
-  final double filledAvgPrice;
-  @JsonKey(name: 'invested')
-  final double invested;
-  @JsonKey(name: 'pnl_ret')
-  final double pnlRet;
-  @JsonKey(name: 'pnl_amt')
   final double pnlAmt;
+  final String side;
+  final double invested;
+
+  const BotActivitiesTransactionHistoryModel(
+    super.date,
+    super.price,
+    super.hedgeShare,
+    super.currentPnlRet,
+    this.pk,
+    this.pnlAmt,
+    this.side,
+    this.invested, {
+    super.index,
+  });
+
+  BotActivitiesTransactionHistoryModel copyWith({int? index}) =>
+      BotActivitiesTransactionHistoryModel(
+        date,
+        price,
+        hedgeShare,
+        currentPnlRet,
+        pk,
+        pnlAmt,
+        side,
+        invested,
+        index: index ?? this.index,
+      );
+
+  BotActivitiesTransactionHistoryModel.fromJson(Map<String, dynamic> json)
+      : pk = json['pk'],
+        pnlAmt = json['pnl_amt'],
+        side = json['side'],
+        invested = json['invested'],
+        super(
+            DateTime.parse(formatDateTimeAsString(json['created'])),
+            checkDouble(json['filled_avg_price']),
+            json['side'] == 'buy'
+                ? checkDouble(json['filled_qty'])
+                : -checkDouble(json['filled_qty']),
+            checkDouble(json['pnl_ret']),
+            index: json['i'] ?? 0);
 
   String get investedString {
     double investmentAmountDouble = checkDouble(invested);
     return 'USD ${investmentAmountDouble.convertToCurrencyDecimal()}';
   }
 
+  String get dateFormattedString =>
+      formatDateTimeAsString(date, dateFormat: 'HH:mm:ss');
+
   String get filledAvgPriceString {
-    double filledAvgPriceDouble = checkDouble(filledAvgPrice);
+    double filledAvgPriceDouble = checkDouble(price);
     return (filledAvgPriceDouble > 0)
         ? 'USD ${filledAvgPriceDouble.toInt()}'
         : 'NA';
   }
 
   String get filledQtyString {
-    double filledAvgQtyDouble = checkDouble(filledQty);
+    double filledAvgQtyDouble = checkDouble(hedgeShare);
     return (filledAvgQtyDouble > 0)
         ? 'USD ${filledAvgQtyDouble.toInt()}'
         : 'NA';
-  }
-
-  String get createdFormattedString =>
-      formatDateTimeAsString(created, dateFormat: 'HH:mm:ss');
-
-  const BotActivitiesTransactionHistoryModel(
-      this.pk,
-      this.created,
-      this.side,
-      this.filledQty,
-      this.filledAvgPrice,
-      this.invested,
-      this.pnlRet,
-      this.pnlAmt);
-
-  factory BotActivitiesTransactionHistoryModel.fromJson(
-          Map<String, dynamic> json) =>
-      _$BotActivitiesTransactionHistoryModelFromJson(json);
-
-  Map<String, dynamic> toJson() =>
-      _$BotActivitiesTransactionHistoryModelToJson(this);
-
-  @override
-  List<Object?> get props {
-    return [pk, created, side, filledQty, filledAvgPrice, invested];
   }
 }
