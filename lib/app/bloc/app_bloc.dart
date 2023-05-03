@@ -35,7 +35,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           userJourney: userJourney ?? UserJourney.investmentStyle));
     } else {
       emit(AppState.unauthenticated(
-        localeType: LocaleType.defaultFont(),
+        localeType: LocaleType.defaultLocale(),
       ));
     }
   }
