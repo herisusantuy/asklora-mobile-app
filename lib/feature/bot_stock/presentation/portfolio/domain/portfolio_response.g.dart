@@ -8,13 +8,12 @@ part of 'portfolio_response.dart';
 
 PortfolioResponse _$PortfolioResponseFromJson(Map<String, dynamic> json) =>
     PortfolioResponse(
-      totalPortfolio: (json['totalPortfolio'] as num?)?.toDouble() ?? 100000,
-      withdrawableAmount:
-          (json['withdrawableAmount'] as num?)?.toDouble() ?? 5000,
-      buyingPower: (json['buyingPower'] as num?)?.toDouble() ?? 3000,
+      totalPortfolio: (json['totalPortfolio'] as num?)?.toDouble() ?? 0,
+      withdrawableAmount: (json['withdrawableAmount'] as num?)?.toDouble() ?? 0,
+      buyingPower: (json['buyingPower'] as num?)?.toDouble() ?? 0,
       totalBotStockValues:
-          (json['totalBotStockValues'] as num?)?.toDouble() ?? 7000,
-      profit: (json['profit'] as num?)?.toDouble() ?? 200,
+          (json['totalBotStockValues'] as num?)?.toDouble() ?? 0,
+      profit: (json['profit'] as num?)?.toDouble() ?? 0,
     );
 
 Map<String, dynamic> _$PortfolioResponseToJson(PortfolioResponse instance) =>

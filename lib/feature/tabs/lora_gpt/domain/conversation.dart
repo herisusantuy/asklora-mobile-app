@@ -23,10 +23,10 @@ class Lora extends Conversation {
   @JsonKey(name: 'type')
   final String respType;
 
-  @JsonKey(name: 'usage')
-  final Usage usage;
+  @JsonKey(name: 'new_session')
+  final bool newSession;
 
-  Lora(this.response, this.sessionId, this.respType, this.usage);
+  Lora(this.response, this.sessionId, this.respType, this.newSession);
 
   @override
   ConversationType type() => ConversationType.lora;
@@ -36,13 +36,13 @@ class Lora extends Conversation {
   Map<String, dynamic> toJson() => _$LoraToJson(this);
 
   @override
-  List<Object?> get props => [response, sessionId, respType, usage];
+  List<Object?> get props => [response, sessionId, respType, newSession];
 
   static Lora get defaultMessage => Lora(
       '👋Hi! I’m Lora. Let me know if you have any questions or requests on stocks investments.',
       '',
       '',
-      const Usage(0, 0, 0));
+      false);
 }
 
 @JsonSerializable()

@@ -17,6 +17,8 @@ class QueryRequest {
         'user_id': userId,
         'username': username,
         'platform': platform,
-        'session_id': sessionId
+
+        /// TODO: enable session if needed.
+        // 'session_id': sessionId
       };
 }
