@@ -11,6 +11,7 @@ import '../../../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
@@ -70,7 +71,7 @@ class OnBoardingStatus extends StatelessWidget {
                       ),
                       onTap: () => customModalBottomSheet(
                             context,
-                            title: 'Milestones',
+                            title: S.of(context).milestones,
                             content: const MilestonesStepDetails(),
                           ),
                       buttonExtraInfoSize: ButtonExtraInfoSize.small)
