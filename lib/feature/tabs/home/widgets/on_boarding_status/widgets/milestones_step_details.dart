@@ -5,6 +5,8 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../generated/l10n.dart';
+import '../../../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../../../learning/learning_bot_stock_screen.dart';
 import '../../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import 'badge_label.dart';
 
@@ -98,7 +100,7 @@ class MilestonesStepDetails extends StatelessWidget {
               child: SizedBox(
                 height: 25,
                 child: PrimaryButton(
-                  label: S.of(context).relearn,
+                  label: S.of(context).relearn.toUpperCase(),
                   onTap: onTap,
                   buttonPrimarySize: ButtonPrimarySize.small,
                 ),
@@ -116,7 +118,10 @@ class MilestonesStepDetails extends StatelessWidget {
                   widgetStep: _labelStepWithButton(
                     context,
                     label: S.of(context).introduceBotPlank,
-                    onTap: () {},
+                    onTap: () => LearningBotStockScreen.open(
+                      context: context,
+                      botType: BotType.plank,
+                    ),
                   ),
                   drawLine: true,
                   spaceVertical: 30,
@@ -126,7 +131,10 @@ class MilestonesStepDetails extends StatelessWidget {
                   widgetStep: _labelStepWithButton(
                     context,
                     label: S.of(context).introduceBotPullup,
-                    onTap: () {},
+                    onTap: () => LearningBotStockScreen.open(
+                      context: context,
+                      botType: BotType.pullUp,
+                    ),
                   ),
                   drawLine: true,
                   spaceVertical: 30,
@@ -136,7 +144,10 @@ class MilestonesStepDetails extends StatelessWidget {
                   widgetStep: _labelStepWithButton(
                     context,
                     label: S.of(context).introduceBotSquat,
-                    onTap: () {},
+                    onTap: () => LearningBotStockScreen.open(
+                      context: context,
+                      botType: BotType.squat,
+                    ),
                   ),
                   drawLine: true,
                   spaceVertical: 30,
