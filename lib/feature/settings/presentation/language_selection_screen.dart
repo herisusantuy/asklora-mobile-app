@@ -7,7 +7,6 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../../../generated/l10n.dart';
-import '../../tabs/tabs_screen.dart';
 import '../widget/menu_selection_button_widget.dart';
 
 class LanguageSelectionScreen extends StatelessWidget {
