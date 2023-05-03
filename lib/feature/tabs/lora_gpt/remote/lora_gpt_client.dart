@@ -9,5 +9,8 @@ class LoraGptApiClient extends BaseApiClient {
   factory LoraGptApiClient() => _singleton;
 
   @override
-  String getBaseUrl() => loraGptBaseUrl;
+  String get baseUrl => loraGptBaseUrl;
+
+  @override
+  String get token => 'Bearer 90u1-6+pn2=as91jk';
 }

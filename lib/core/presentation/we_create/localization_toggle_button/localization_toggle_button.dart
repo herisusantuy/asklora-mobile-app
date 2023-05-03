@@ -109,6 +109,6 @@ class LocaleType {
         const LocaleType('zh', 'HK', '中', '繁體中文', 'NotoSansTC')
       ];
 
-  static LocaleType defaultFont() =>
+  static LocaleType defaultLocale() =>
       const LocaleType('en', 'US', 'ENG', 'English', 'Mulish');
 }
