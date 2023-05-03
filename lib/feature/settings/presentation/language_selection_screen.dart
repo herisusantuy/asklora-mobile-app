@@ -28,9 +28,11 @@ class LanguageSelectionScreen extends StatelessWidget {
                   children: [
                     MenuSelectionButtonWidget(
                       title: 'English',
-                      onTap: () => context.read<AppBloc>().add(
-                          AppLanguageChangeEvent(
-                              LocaleType.supportedLocales()[0])),
+                      onTap: () {
+                        context.read<AppBloc>().add(AppLanguageChangeEvent(
+                            LocaleType.supportedLocales()[0]));
+                        TabsScreen.openAndRemoveAllRoute(context);
+                      },
                       isSelected: state.locale.languageCode == 'en',
                     ),
                     MenuSelectionButtonWidget(
@@ -38,6 +40,7 @@ class LanguageSelectionScreen extends StatelessWidget {
                       onTap: () {
                         context.read<AppBloc>().add(AppLanguageChangeEvent(
                             LocaleType.supportedLocales()[1]));
+                        TabsScreen.openAndRemoveAllRoute(context);
                       },
                       showBottomBorder: false,
                       isSelected: state.locale.languageCode == 'zh',
