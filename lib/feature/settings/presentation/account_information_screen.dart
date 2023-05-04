@@ -71,7 +71,8 @@ class AccountInformationScreen extends StatelessWidget {
                           _accountDetails(
                               S.of(context).email, state.response.data!.email),
                           const SizedBox(height: 40),
-                          _accountDetails(S.of(context).dateJoined, '-'),
+                          _accountDetails(S.of(context).dateJoined,
+                              state.response.data!.dateJoinedFormatted),
                         ],
                       );
                     },
