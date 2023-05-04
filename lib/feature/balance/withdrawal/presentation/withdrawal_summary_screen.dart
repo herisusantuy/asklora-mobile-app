@@ -32,6 +32,10 @@ class WithdrawalSummaryScreen extends StatelessWidget {
         withdrawalRepository: WithdrawalRepository(),
       ),
       child: BlocConsumer<WithdrawalBloc, WithdrawalState>(
+        buildWhen: (previous, current) =>
+            previous.response.state != current.response.state,
+        listenWhen: (previous, current) =>
+            previous.response.state != current.response.state,
         listener: (context, state) {
           CustomLoadingOverlay.of(context).show(state.response.state);
           if (state.response.state == ResponseState.success) {

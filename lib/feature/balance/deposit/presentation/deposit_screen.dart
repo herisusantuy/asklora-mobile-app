@@ -51,6 +51,8 @@ class DepositScreen extends StatelessWidget {
       create: (_) => DepositBloc(
           depositRepository: DepositRepository(), depositType: depositType),
       child: BlocConsumer<DepositBloc, DepositState>(
+        buildWhen: (previous, current) =>
+            previous.response.state != current.response.state,
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
         listener: (context, state) {
