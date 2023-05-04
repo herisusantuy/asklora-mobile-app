@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
-import '../../../../../core/presentation/buttons/secondary/extra_info_button.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
@@ -23,6 +22,7 @@ import '../../../../generated/l10n.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
+import '../../../tabs/home/home_screen_form.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_model.dart';
 import '../../repository/bot_stock_repository.dart';
@@ -31,13 +31,9 @@ import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
 part 'widgets/bot_learn_more_bottom_sheet.dart';
-
 part 'widgets/bot_recommendation_card.dart';
-
 part 'widgets/bot_recommendation_card_shimmer.dart';
-
 part 'widgets/bot_recommendation_faq.dart';
-
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
@@ -109,7 +105,8 @@ class BotRecommendationScreen extends StatelessWidget {
                     const SizedBox(
                       height: 28,
                     ),
-                    _needHelpButton
+                    const UnconstrainedBox(
+                        child: HomeScreenNeedHelpButtonWidget())
                   ],
                 ),
               ),
@@ -117,19 +114,6 @@ class BotRecommendationScreen extends StatelessWidget {
           )),
     );
   }
-
-  Widget get _needHelpButton => UnconstrainedBox(
-      child: ExtraInfoButton(
-          label: 'Need Help?',
-          suffixIcon: const Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Icon(
-              Icons.arrow_forward_rounded,
-              color: AskLoraColors.primaryMagenta,
-              size: 18,
-            ),
-          ),
-          onTap: () {}));
 
   Widget _header(
           {required BuildContext context, required UserJourney userJourney}) =>
