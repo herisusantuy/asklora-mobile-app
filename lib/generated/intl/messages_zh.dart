@@ -97,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("確定"),
+        "buttonContinue": MessageLookupByLibrary.simpleMessage("繼續"),
         "buttonCreateAnAccount": MessageLookupByLibrary.simpleMessage("建立帳戶"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
@@ -118,10 +119,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
         "corePlan": MessageLookupByLibrary.simpleMessage("核心計劃"),
         "createAnAccount": MessageLookupByLibrary.simpleMessage("開立賬戶"),
-        "currentPrice": MessageLookupByLibrary.simpleMessage("Current Price"),
+        "createAnAccountCapitalize":
+            MessageLookupByLibrary.simpleMessage("開立賬戶"),
+        "currentPrice": MessageLookupByLibrary.simpleMessage("當前價格"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
+        "deposit": MessageLookupByLibrary.simpleMessage("存入資金"),
         "doAnyOfTheFollowingApply":
             MessageLookupByLibrary.simpleMessage("以下描述適用於你或你的直系親屬？"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
@@ -303,6 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "summary": MessageLookupByLibrary.simpleMessage("摘要"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
+        "to": MessageLookupByLibrary.simpleMessage("至"),
         "tooltipBotDetailsEstMaxLoss":
             MessageLookupByLibrary.simpleMessage("Bot將出售以限制損失的最低股票價位。"),
         "tooltipBotDetailsEstMaxProfit":
@@ -316,6 +321,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("交易費用"),
         "tradeWithANewBotstock":
@@ -323,6 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tradeWithBots": MessageLookupByLibrary.simpleMessage("以 Bot 交易"),
         "tradeWithYourFirstBotstock":
             MessageLookupByLibrary.simpleMessage("以首隻 Botstock 交易"),
+        "transactionFee": MessageLookupByLibrary.simpleMessage("交易費用"),
         "transactionHistory": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("全部"),
         "transactionHistoryTabOrders":
@@ -333,6 +340,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "website": MessageLookupByLibrary.simpleMessage("網站"),
+        "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
+        "withdrawalWorkingDays":
+            MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
         "yourBankAccountIsUnderReview": m12,

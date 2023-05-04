@@ -5,11 +5,14 @@
   "buttonLetsBegin": "立即開始",
   "buttonSignOut": "登出",
   "buttonHaveAnAccount": "已有賬戶？",
+  "buttonContinue": "繼續",
   "carouselIntro1": "投資一樣\n要夠Fit",
   "carouselIntro2": "FinFit教練，Lora 全程教路",
   "carouselIntro3": "AI策略，\n自動交易",
   "carouselIntro4": "個人化體驗，\n前所未見",
-  "currentPrice": "Current Price",
+  "currentPrice": "當前價格",
+
+  "deposit": "存入資金",
   "estStopLossPercent": "預計止損 %",
   "estMaxLossPercent": "預計最大損失%",
   "estTakeProfitPercent": "預計止賺%",
@@ -219,7 +222,7 @@
       }
     }
   },
-  "createAnAccount": "開立賬戶",
+  "createAnAccountCapitalize": "開立賬戶",
   "portfolioPopUpCreateAnAccountTitle" : "建立賬戶，開始交易",
   "portfolioPopUpCreateAnAccountSubTitle" : "開始交易後，你可以喺度管理你所有投資。快啲建立賬戶進行交易啦！",
   "defineInvestmentStyle": "界定投資風格",
@@ -292,6 +295,11 @@
   "learnBotstockManagement": "學䲾 Botstock 管理",
   "manageYourBotstock": "管理 Botstock",
   "tradeWithANewBotstock": "以一隻新 Botstock 交易",
+  "to": "至",
+  "transactionFee": "交易費用",
+  "totalAmount": "總金額",
+  "withdrawalAmount": "提取金額",
+  "withdrawalWorkingDays": "提取款項最多需時2個工作天。",
   "relearn" : "再次學習",
   "min" : " ~{minute} 分鐘",
   "@min" : {
