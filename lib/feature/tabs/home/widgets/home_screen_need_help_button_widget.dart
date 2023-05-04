@@ -6,8 +6,8 @@ class HomeScreenNeedHelpButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExtraInfoButton(
-      label: 'Need help?',
-      onTap: () {},
+      label: S.of(context).needHelp,
+      onTap: () => context.read<TabScreenBloc>().add(const TabIndexChanged(3)),
       suffixIcon: const Icon(
         Icons.arrow_forward_rounded,
         color: AskLoraColors.primaryMagenta,
