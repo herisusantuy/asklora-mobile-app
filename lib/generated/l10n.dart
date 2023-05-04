@@ -260,11 +260,41 @@ class S {
     );
   }
 
+  /// `BACK`
+  String get buttonBack {
+    return Intl.message(
+      'BACK',
+      name: 'buttonBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CONTINUE`
+  String get buttonContinue {
+    return Intl.message(
+      'CONTINUE',
+      name: 'buttonContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Price`
   String get currentPrice {
     return Intl.message(
       'Current Price',
       name: 'currentPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get deposit {
+    return Intl.message(
+      'Deposit',
+      name: 'deposit',
       desc: '',
       args: [],
     );
@@ -1453,10 +1483,10 @@ class S {
     );
   }
 
-  /// `Create an Account`
+  /// `CREATE AN ACCOUNT`
   String get createAnAccount {
     return Intl.message(
-      'Create an Account',
+      'CREATE AN ACCOUNT',
       name: 'createAnAccount',
       desc: '',
       args: [],
@@ -2073,6 +2103,16 @@ class S {
     );
   }
 
+  /// `Create an Account`
+  String get createAnAccountCapitalize {
+    return Intl.message(
+      'Create an Account',
+      name: 'createAnAccountCapitalize',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Open Investment Account`
   String get openInvestmentAccount {
     return Intl.message(
@@ -2188,6 +2228,96 @@ class S {
     return Intl.message(
       'Trade with a New Botstock',
       name: 'tradeWithANewBotstock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to Process Deposit`
+  String get unableToProcessDepositTitle {
+    return Intl.message(
+      'Unable to Process Deposit',
+      name: 'unableToProcessDepositTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’re having some trouble processing your deposit request. Please try again`
+  String get unableToProcessDepositSubTitle {
+    return Intl.message(
+      'We’re having some trouble processing your deposit request. Please try again',
+      name: 'unableToProcessDepositSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to Process Withdrawal`
+  String get unableToProcessWithdrawalTitle {
+    return Intl.message(
+      'Unable to Process Withdrawal',
+      name: 'unableToProcessWithdrawalTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’re having some trouble processing your withdrawal request. Please try again`
+  String get unableToProcessWithdrawalSubTitle {
+    return Intl.message(
+      'We’re having some trouble processing your withdrawal request. Please try again',
+      name: 'unableToProcessWithdrawalSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get to {
+    return Intl.message(
+      'To',
+      name: 'to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transaction fee`
+  String get transactionFee {
+    return Intl.message(
+      'Transaction fee',
+      name: 'transactionFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total amount`
+  String get totalAmount {
+    return Intl.message(
+      'Total amount',
+      name: 'totalAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdrawal Amount`
+  String get withdrawalAmount {
+    return Intl.message(
+      'Withdrawal Amount',
+      name: 'withdrawalAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your withdrawal can take up to 2 working days.`
+  String get withdrawalWorkingDays {
+    return Intl.message(
+      'Your withdrawal can take up to 2 working days.',
+      name: 'withdrawalWorkingDays',
       desc: '',
       args: [],
     );

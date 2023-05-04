@@ -9,15 +9,19 @@ import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_expanded_row.dart';
 import '../../../../core/presentation/custom_image_picker.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/text_fields/amount_text_field.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/values/app_values.dart';
+import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import '../../widgets/balance_base_form.dart';
 import '../bloc/deposit_bloc.dart';
@@ -46,25 +50,12 @@ class DepositScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => DepositBloc(
           depositRepository: DepositRepository(), depositType: depositType),
-      child: BlocListener<DepositBloc, DepositState>(
+      child: BlocConsumer<DepositBloc, DepositState>(
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
         listener: (context, state) {
           CustomLoadingOverlay.of(context).show(state.response.state);
-          if (state.response.state == ResponseState.error) {
-            ///LETS ASSUME ERROR AS SUCCEED FOR NOW TO SHOW THE RESULT SCREEN
-            // CustomInAppNotification.show(context, state.response.message);
-            if (!UserJourney.compareUserJourney(
-                context: context, target: UserJourney.deposit)) {
-              context
-                  .read<AppBloc>()
-                  .add(const SaveUserJourney(UserJourney.learnBotPlank));
-            }
-
-            DepositResultScreen.open(
-                context: context,
-                arguments: Pair(depositType, StatusType.success));
-          } else if (state.response.state == ResponseState.success) {
+          if (state.response.state == ResponseState.success) {
             CustomLoadingOverlay.of(context).dismiss();
             if (!UserJourney.compareUserJourney(
                 context: context, target: UserJourney.deposit)) {
@@ -77,18 +68,29 @@ class DepositScreen extends StatelessWidget {
                 arguments: Pair(depositType, StatusType.success));
           }
         },
-        child: BalanceBaseForm(
-            title: 'Deposit',
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ..._getSteps,
-                DepositNotes(
-                  depositType: depositType,
-                )
-              ],
-            ),
-            bottomButton: _bottomButton(context)),
+        builder: (context, state) => CustomScaffold(
+          enableBackNavigation: false,
+          body: CustomLayoutWithBlurPopUp(
+            content: BalanceBaseForm(
+                title: S.of(context).deposit,
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ..._getSteps,
+                    DepositNotes(
+                      depositType: depositType,
+                    )
+                  ],
+                ),
+                bottomButton: _bottomButton(context)),
+            showPopUp: state.response.state == ResponseState.error,
+            loraPopUpMessageModel: LoraPopUpMessageModel(
+                title: S.of(context).unableToProcessDepositTitle,
+                subTitle: S.of(context).unableToProcessDepositSubTitle,
+                onPrimaryButtonTap: () => Navigator.pop(context),
+                primaryButtonLabel: S.of(context).buttonBack),
+          ),
+        ),
       ),
     );
   }
@@ -136,7 +138,7 @@ class DepositScreen extends StatelessWidget {
                 current.disableDeposit(depositType),
             builder: (context, state) => PrimaryButton(
                   disabled: state.disableDeposit(depositType),
-                  label: 'CONTINUE',
+                  label: S.of(context).buttonContinue,
                   onTap: () => context.read<DepositBloc>().add(
                         SubmitDeposit(),
                       ),

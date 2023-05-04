@@ -49,7 +49,7 @@ class BotPortfolioPopUp extends StatelessWidget {
         return LoraPopUpMessageModel(
             title: S.of(context).portfolioPopUpCreateAnAccountTitle,
             subTitle: S.of(context).portfolioPopUpCreateAnAccountSubTitle,
-            primaryButtonLabel: S.of(context).createAnAccount,
+            primaryButtonLabel: S.of(context).createAnAccountCapitalize,
             onPrimaryButtonTap: () => SignUpScreen.open(context));
       case BotPortfolioPopUpType.investmentStyle:
         return LoraPopUpMessageModel(
