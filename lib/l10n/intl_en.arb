@@ -21,7 +21,10 @@
   "buttonHaveAnAccount": "HAVE AN ACCOUNT?",
   "buttonLetsBegin": "LET’S BEGIN",
   "buttonSignOut": "SIGN OUT",
+  "buttonBack": "BACK",
+  "buttonContinue": "CONTINUE",
   "currentPrice": "Current Price",
+  "deposit": "Deposit",
   "estStopLossLevel": "Est. Stop Loss Level",
   "estMaxLossLevel": "Est. Max Loss Level",
   "estTakeProfitLevel": "Est. Take Profit Level",
@@ -230,26 +233,25 @@
     }
   },
   "createAnAccount": "CREATE AN ACCOUNT",
-  "portfolioPopUpCreateAnAccountTitle" : "Create an Account and Start Trading!",
-  "portfolioPopUpCreateAnAccountSubTitle" : "You can manage all your investments here after you start trading. Create an account and start trading.",
+  "portfolioPopUpCreateAnAccountTitle": "Create an Account and Start Trading!",
+  "portfolioPopUpCreateAnAccountSubTitle": "You can manage all your investments here after you start trading. Create an account and start trading.",
   "defineInvestmentStyle": "DEFINE INVESTMENT STYLE",
-  "portfolioPopUpDefineInvestmentTitle" : "Define Your Investment Style",
-  "portfolioPopUpDefineInvestmentSubTitle" : "Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!",
+  "portfolioPopUpDefineInvestmentTitle": "Define Your Investment Style",
+  "portfolioPopUpDefineInvestmentSubTitle": "Looks like you haven’t defined your Investment Style yet. Let’s go and see what kind of Botstocks suit you best!",
   "continueAccountOpening": "CONTINUE ACCOUNT OPENING",
-  "portfolioPopUpContinueAccountOpeningTitle" : "Continue Account Opening",
-  "portfolioPopUpContinueAccountOpeningSubTitle" : "You still need to complete your account opening until you can start trading. ",
+  "portfolioPopUpContinueAccountOpeningTitle": "Continue Account Opening",
+  "portfolioPopUpContinueAccountOpeningSubTitle": "You still need to complete your account opening until you can start trading. ",
   "ok": "OK!",
-  "portfolioPopUpFundAccountTitle" : "Fund your account",
-  "portfolioPopUpFundAccountSubTitle" : "Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.",
+  "portfolioPopUpFundAccountTitle": "Fund your account",
+  "portfolioPopUpFundAccountSubTitle": "Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.",
   "startABotstock": "START A BOTSTOCK",
-  "portfolioPopUpNoTradingHasStartedTitle" : "No trading has started!",
-  "portfolioPopUpNoTradingHasStartedtSubTitle" : "You can manage all your investments here after you start trading. ",
-  "portfolioPopUpPendingReviewTitle" : "Your Account is Pending Review",
-  "portfolioPopUpPendingReviewSubTitle" : "You can manage all your investments here after your account has been opened!",
+  "portfolioPopUpNoTradingHasStartedTitle": "No trading has started!",
+  "portfolioPopUpNoTradingHasStartedtSubTitle": "You can manage all your investments here after you start trading. ",
+  "portfolioPopUpPendingReviewTitle": "Your Account is Pending Review",
+  "portfolioPopUpPendingReviewSubTitle": "You can manage all your investments here after your account has been opened!",
   "redeemYourBotstockNow": "REDEEM YOUR BOTSTOCK NOW",
-  "portfolioPopUpRedeemYourBotstockTitle" : "Redeem Your Free Botstock",
-  "portfolioPopUpRedeemYourBotstockSubTitle" : "Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!",
-
+  "portfolioPopUpRedeemYourBotstockTitle": "Redeem Your Free Botstock",
+  "portfolioPopUpRedeemYourBotstockSubTitle": "Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!",
   "portfolioTotalPL": "Total P/L",
   "portfolioYourBotStock": "Your Botstocks",
   "transactionHistoryTitle": "Transaction History",
@@ -270,36 +272,36 @@
   "signOutConfirmation": "Are you sure you want to sign out ?",
   "startDate": "Start Date",
   "version": "Version",
-  "setUpFinancialProfile" : "Set Up Financial Profile",
-  "doAnyOfTheFollowingApply" : "Do any of the following apply to you or a member of your immediate family ?",
-  "iAmASeniorExecutive" : "I am a senior executive at or a 10% or greater shareholder of a publicly traded company.",
-  "iAmASeniorPolitical" : "I am a senior political figure.",
-  "iAmAFamily" : "I am a family member or relative of a senior political figure.",
+  "setUpFinancialProfile": "Set Up Financial Profile",
+  "doAnyOfTheFollowingApply": "Do any of the following apply to you or a member of your immediate family ?",
+  "iAmASeniorExecutive": "I am a senior executive at or a 10% or greater shareholder of a publicly traded company.",
+  "iAmASeniorPolitical": "I am a senior political figure.",
+  "iAmAFamily": "I am a family member or relative of a senior political figure.",
   "iAmADirector": "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)",
   "yes": "Yes",
-  "no" : " No",
+  "no": " No",
   "saveForLater": "SAVE FOR LATER",
-  "yourBankAccount" : "Your Bank Account",
-      "yourBankAccountIsUnderReview" : "Your Bank Account is under review and will be complete by {dateTime}",
-      "@yourBankAccountIsUnderReview" : {
-        "placeholders" : {
-          "dateTime" : {
-            "type" : "String"
-          }
-        }
-      },
-  "changeBankAccount" : "Change Bank Account",
-  "noteOnPaymentDetails" : "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.",
-  "yourPaymentInformationIsUnderReview" : "Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.",
+  "yourBankAccount": "Your Bank Account",
+  "yourBankAccountIsUnderReview": "Your Bank Account is under review and will be complete by {dateTime}",
+  "@yourBankAccountIsUnderReview": {
+    "placeholders": {
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
+  "changeBankAccount": "Change Bank Account",
+  "noteOnPaymentDetails": "Note:\nWe will work with your bank in order to idenfity your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.",
+  "yourPaymentInformationIsUnderReview": "Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.",
   "needHelp": "Need help?",
   "noTransactions": "No Transactions",
   "noTransactionsYet": "Looks like you haven’t made \nany transactions yet!",
   "performance": "Performance",
-  "milestones" : "Milestones",
+  "milestones": "Milestones",
   "startInvesting": "Start Investing",
   "privacyEvaluation": "Privacy Evaluation",
   "personalisation": "Personalisation",
-  "createAnAccount": "Create an Account",
+  "createAnAccountCapitalize": "Create an Account",
   "openInvestmentAccount": "Open Investment Account",
   "getTheFirstBotstockForFree": "Get the First Botstock for Free",
   "payDepositToStartRealTrade": "Pay Deposit to Start Real Trade",
@@ -312,12 +314,21 @@
   "learnBotstockManagement": "Learn Botstock Management",
   "manageYourBotstock": "Manage Your Botstock",
   "tradeWithANewBotstock": "Trade with a New Botstock",
-  "relearn" : "relearn",
-  "min" : "~{minute} min",
-  "@min" : {
+  "unableToProcessDepositTitle": "Unable to Process Deposit",
+  "unableToProcessDepositSubTitle": "We’re having some trouble processing your deposit request. Please try again",
+  "unableToProcessWithdrawalTitle": "Unable to Process Withdrawal",
+  "unableToProcessWithdrawalSubTitle": "We’re having some trouble processing your withdrawal request. Please try again",
+  "to": "To",
+  "transactionFee": "Transaction fee",
+  "totalAmount": "Total amount",
+  "withdrawalAmount": "Withdrawal Amount",
+  "withdrawalWorkingDays": "Your withdrawal can take up to 2 working days.",
+  "relearn": "relearn",
+  "min": "~{minute} min",
+  "@min": {
     "placeholders": {
-      "minute" : {
-        "type" : "String"
+      "minute": {
+        "type": "String"
       }
     }
   }

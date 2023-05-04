@@ -105,10 +105,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetRolloverDisclosureTitle":
             MessageLookupByLibrary.simpleMessage(
                 "If you extend the Botstock period, you will incur additional fees"),
+        "buttonBack": MessageLookupByLibrary.simpleMessage("BACK"),
         "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "buttonCancelTrade":
             MessageLookupByLibrary.simpleMessage("CANCEL TRADE"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("CONFIRM"),
+        "buttonContinue": MessageLookupByLibrary.simpleMessage("CONTINUE"),
         "buttonCreateAnAccount":
             MessageLookupByLibrary.simpleMessage("CREATE AN ACCOUNT"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("DEPOSIT"),
@@ -139,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("CONTINUE ACCOUNT OPENING"),
         "corePlan": MessageLookupByLibrary.simpleMessage("Core Plan"),
         "createAnAccount":
+            MessageLookupByLibrary.simpleMessage("CREATE AN ACCOUNT"),
+        "createAnAccountCapitalize":
             MessageLookupByLibrary.simpleMessage("Create an Account"),
         "currentPrice": MessageLookupByLibrary.simpleMessage("Current Price"),
         "customerService":
@@ -146,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateJoined": MessageLookupByLibrary.simpleMessage("Date Joined"),
         "defineInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("DEFINE INVESTMENT STYLE"),
+        "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "doAnyOfTheFollowingApply": MessageLookupByLibrary.simpleMessage(
             "Do any of the following apply to you or a member of your immediate family ?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -393,6 +398,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
+        "to": MessageLookupByLibrary.simpleMessage("To"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(
@@ -405,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The duration you set for Botstock where the Bot will automatically buy and sell."),
         "tooltipBotDetailsStartDate": MessageLookupByLibrary.simpleMessage(
             "Lora’s date to start the Botstocks"),
+        "totalAmount": MessageLookupByLibrary.simpleMessage("Total amount"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
         "tradeWithANewBotstock":
@@ -413,6 +420,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Trade with Bots"),
         "tradeWithYourFirstBotstock": MessageLookupByLibrary.simpleMessage(
             "Trade with Your First Botstock"),
+        "transactionFee":
+            MessageLookupByLibrary.simpleMessage("Transaction fee"),
         "transactionHistory":
             MessageLookupByLibrary.simpleMessage("Transaction History"),
         "transactionHistoryTabAll": MessageLookupByLibrary.simpleMessage("All"),
@@ -424,9 +433,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transaction History"),
         "transactionHistoryToday":
             MessageLookupByLibrary.simpleMessage("Today"),
+        "unableToProcessDepositSubTitle": MessageLookupByLibrary.simpleMessage(
+            "We’re having some trouble processing your deposit request. Please try again"),
+        "unableToProcessDepositTitle":
+            MessageLookupByLibrary.simpleMessage("Unable to Process Deposit"),
+        "unableToProcessWithdrawalSubTitle": MessageLookupByLibrary.simpleMessage(
+            "We’re having some trouble processing your withdrawal request. Please try again"),
+        "unableToProcessWithdrawalTitle": MessageLookupByLibrary.simpleMessage(
+            "Unable to Process Withdrawal"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
+        "withdrawalAmount":
+            MessageLookupByLibrary.simpleMessage("Withdrawal Amount"),
+        "withdrawalWorkingDays": MessageLookupByLibrary.simpleMessage(
+            "Your withdrawal can take up to 2 working days."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
