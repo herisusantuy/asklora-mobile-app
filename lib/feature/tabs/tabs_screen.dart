@@ -23,7 +23,9 @@ class TabsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TabScreenBloc()..add(const TabIndexChanged(0)),
+      create: (context) => TabScreenBloc()
+        ..add(TabIndexChanged(
+            initialTabScreenPage == null ? 0 : initialTabScreenPage!.index)),
       child: CustomScaffold(
           enableBackNavigation: false,
           bottomNavigationBar: BlocBuilder<TabScreenBloc, TabScreenState>(
