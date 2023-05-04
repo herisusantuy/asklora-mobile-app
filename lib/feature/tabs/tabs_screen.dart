@@ -58,30 +58,8 @@ class TabsScreen extends StatelessWidget {
                 ],
                 currentIndex: state.currentIndexScreen,
                 selectedItemColor: Colors.amber[800],
-                onTap: (int index) {
-                  switch (index) {
-                    case 1:
-                      context
-                          .read<TabScreenBloc>()
-                          .add(const TabIndexChanged(1));
-                      break;
-                    case 2:
-                      context
-                          .read<TabScreenBloc>()
-                          .add(const TabIndexChanged(2));
-                      break;
-                    case 3:
-                      context
-                          .read<TabScreenBloc>()
-                          .add(const TabIndexChanged(3));
-                      break;
-                    default:
-                      context
-                          .read<TabScreenBloc>()
-                          .add(const TabIndexChanged(0));
-                      break;
-                  }
-                },
+                onTap: (int index) =>
+                    context.read<TabScreenBloc>().add(TabIndexChanged(index)),
               );
             },
           ),
