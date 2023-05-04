@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../../core/utils/date_utils.dart';
 import '../upgrade_account/agreement.dart';
 import '../upgrade_account/employment_info.dart';
 import '../upgrade_account/personal_info_request.dart';
@@ -13,6 +14,8 @@ class GetAccountResponse extends Equatable {
   final int id;
   final String username;
   final String email;
+  @JsonKey(name: 'date_joined')
+  final String dateJoined;
   @JsonKey(name: 'personal_info')
   final PersonalInfoRequest? personalInfo;
   @JsonKey(name: 'residence_info')
@@ -29,6 +32,7 @@ class GetAccountResponse extends Equatable {
       {required this.id,
       required this.username,
       required this.email,
+      required this.dateJoined,
       this.personalInfo,
       this.residenceInfo,
       this.employmentInfo,
@@ -44,6 +48,8 @@ class GetAccountResponse extends Equatable {
   String get idStr {
     return id == 0 ? '-' : id.toString();
   }
+
+  String get dateJoinedFormatted => formatDateTimeAsString(dateJoined);
 
   @override
   List<Object?> get props => [
