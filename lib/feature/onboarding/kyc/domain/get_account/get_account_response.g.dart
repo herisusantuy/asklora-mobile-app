@@ -12,6 +12,9 @@ GetAccountResponse _$GetAccountResponseFromJson(Map<String, dynamic> json) =>
       username: json['username'] as String,
       email: json['email'] as String,
       dateJoined: json['date_joined'] as String,
+      bankAccount: json['bank_account'] == null
+          ? null
+          : BankAccount.fromJson(json['bank_account'] as Map<String, dynamic>),
       personalInfo: json['personal_info'] == null
           ? null
           : PersonalInfoRequest.fromJson(
@@ -39,6 +42,7 @@ Map<String, dynamic> _$GetAccountResponseToJson(GetAccountResponse instance) =>
       'username': instance.username,
       'email': instance.email,
       'date_joined': instance.dateJoined,
+      'bank_account': instance.bankAccount?.toJson(),
       'personal_info': instance.personalInfo?.toJson(),
       'residence_info': instance.residenceInfo?.toJson(),
       'employment_info': instance.employmentInfo?.toJson(),
