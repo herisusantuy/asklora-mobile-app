@@ -11,9 +11,9 @@ import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/round_colored_box.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
-import '../../payment/bloc/bank_account_bloc.dart';
-import '../../payment/domain/get_bank_account_response.dart';
-import '../../payment/repository/bank_account_repository.dart';
+import '../../onboarding/kyc/repository/account_repository.dart';
+import '../bloc/account_information/account_information_bloc.dart';
+import '../domain/bank_account.dart';
 
 class PaymentDetailScreen extends StatelessWidget {
   static const route = '/payment_details';
@@ -24,9 +24,9 @@ class PaymentDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          BankAccountBloc(bankAccountRepository: BankAccountRepository())
-            ..add(const RegisteredBankAccountCheck()),
-      child: BlocConsumer<BankAccountBloc, BankAccountState>(
+          AccountInformationBloc(accountRepository: AccountRepository())
+            ..add(GetAccountInformation()),
+      child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
         listenWhen: (previous, current) =>
             previous.response.state != current.response.state,
         listener: (context, state) {
@@ -43,19 +43,18 @@ class PaymentDetailScreen extends StatelessWidget {
         },
         builder: (context, state) {
           if (state.response.state == ResponseState.success) {
-            List<GetBankAccountResponse> response =
-                state.response.data as List<GetBankAccountResponse>;
+            BankAccount? response = state.response.data?.bankAccount;
             return CustomScaffold(
               body: CustomStretchedLayout(
                   header: CustomHeader(title: S.of(context).paymentDetails),
-                  content: response.isNotEmpty
+                  content: response != null
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomTextNew(S.of(context).yourBankAccount,
                                 style: AskLoraTextStyles.body1),
                             const SizedBox(height: 32),
-                            _getBankDetails(response[0]),
+                            _bankDetails(response),
                             const SizedBox(height: 32),
                             _changeBankButton(context),
                             const SizedBox(height: 32),
@@ -76,19 +75,18 @@ class PaymentDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _getBankDetails(GetBankAccountResponse response) => RoundColoredBox(
+  Widget _bankDetails(BankAccount response) => RoundColoredBox(
           content: SizedBox(
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomTextNew(response.name!, style: AskLoraTextStyles.h6),
+            CustomTextNew(response.name, style: AskLoraTextStyles.h6),
             const SizedBox(height: 5),
-            CustomTextNew(response.accountNumber!,
+            CustomTextNew(response.accountNumber,
                 style: AskLoraTextStyles.body1),
             const SizedBox(height: 20),
-            CustomTextNew(response.accountName!,
-                style: AskLoraTextStyles.body1),
+            CustomTextNew(response.accountName, style: AskLoraTextStyles.body1),
           ],
         ),
       ));

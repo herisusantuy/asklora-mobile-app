@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../core/utils/date_utils.dart';
+import '../../../../settings/domain/bank_account.dart';
 import '../upgrade_account/agreement.dart';
 import '../upgrade_account/employment_info.dart';
 import '../upgrade_account/personal_info_request.dart';
@@ -16,6 +17,8 @@ class GetAccountResponse extends Equatable {
   final String email;
   @JsonKey(name: 'date_joined')
   final String dateJoined;
+  @JsonKey(name: 'bank_account')
+  final BankAccount? bankAccount;
   @JsonKey(name: 'personal_info')
   final PersonalInfoRequest? personalInfo;
   @JsonKey(name: 'residence_info')
@@ -33,6 +36,7 @@ class GetAccountResponse extends Equatable {
       required this.username,
       required this.email,
       required this.dateJoined,
+      this.bankAccount,
       this.personalInfo,
       this.residenceInfo,
       this.employmentInfo,
@@ -56,6 +60,7 @@ class GetAccountResponse extends Equatable {
         id,
         username,
         email,
+        bankAccount,
         personalInfo,
         residenceInfo,
         employmentInfo,
