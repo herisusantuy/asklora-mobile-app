@@ -11,7 +11,7 @@ GetAccountResponse _$GetAccountResponseFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       username: json['username'] as String,
       email: json['email'] as String,
-      dateJoined: json['date_joined'] as String,
+      dateJoined: json['date_joined'] as String?,
       bankAccount: json['bank_account'] == null
           ? null
           : BankAccount.fromJson(json['bank_account'] as Map<String, dynamic>),

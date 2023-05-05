@@ -16,8 +16,8 @@ BankAccount _$BankAccountFromJson(Map<String, dynamic> json) => BankAccount(
       json['name'] as String,
       json['bank_id'] as String?,
       json['bank_code'] as String,
-      json['bank_code_type'] as String,
-      json['bank_transfer_type'] as String,
+      json['bank_code_type'] as String?,
+      json['bank_transfer_type'] as String?,
       json['account_number'] as String,
       json['account_name'] as String,
     );
