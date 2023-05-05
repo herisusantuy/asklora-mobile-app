@@ -16,7 +16,7 @@ class GetAccountResponse extends Equatable {
   final String username;
   final String email;
   @JsonKey(name: 'date_joined')
-  final String dateJoined;
+  final String? dateJoined;
   @JsonKey(name: 'bank_account')
   final BankAccount? bankAccount;
   @JsonKey(name: 'personal_info')

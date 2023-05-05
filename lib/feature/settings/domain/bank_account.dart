@@ -20,9 +20,9 @@ class BankAccount extends Equatable {
   @JsonKey(name: 'bank_code')
   final String bankCode;
   @JsonKey(name: 'bank_code_type')
-  final String bankCodeType;
+  final String? bankCodeType;
   @JsonKey(name: 'bank_transfer_type')
-  final String bankTransferType;
+  final String? bankTransferType;
   @JsonKey(name: 'account_number')
   final String accountNumber;
   @JsonKey(name: 'account_name')
