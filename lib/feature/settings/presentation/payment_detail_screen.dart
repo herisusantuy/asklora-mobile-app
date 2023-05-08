@@ -8,9 +8,9 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../core/presentation/round_colored_box.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
+import '../../balance/widgets/bank_account_card.dart';
 import '../../onboarding/kyc/repository/account_repository.dart';
 import '../bloc/account_information/account_information_bloc.dart';
 import '../domain/bank_account.dart';
@@ -54,7 +54,9 @@ class PaymentDetailScreen extends StatelessWidget {
                             CustomTextNew(S.of(context).yourBankAccount,
                                 style: AskLoraTextStyles.body1),
                             const SizedBox(height: 32),
-                            _bankDetails(response),
+                            BankAccountCard(
+                              bankAccount: response,
+                            ),
                             const SizedBox(height: 32),
                             _changeBankButton(context),
                             const SizedBox(height: 32),
@@ -74,22 +76,6 @@ class PaymentDetailScreen extends StatelessWidget {
       ),
     );
   }
-
-  Widget _bankDetails(BankAccount response) => RoundColoredBox(
-          content: SizedBox(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextNew(response.name, style: AskLoraTextStyles.h6),
-            const SizedBox(height: 5),
-            CustomTextNew(response.accountNumber,
-                style: AskLoraTextStyles.body1),
-            const SizedBox(height: 20),
-            CustomTextNew(response.accountName, style: AskLoraTextStyles.body1),
-          ],
-        ),
-      ));
 
   Widget _changeBankButton(BuildContext context) => GestureDetector(
         onTap: () => CustomInAppNotification.show(

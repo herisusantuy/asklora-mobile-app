@@ -12,9 +12,10 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
+import '../../../../onboarding/kyc/repository/account_repository.dart';
+import '../../../../settings/bloc/account_information/account_information_bloc.dart';
+import '../../../../settings/domain/bank_account.dart';
 import '../../../../tabs/tabs_screen.dart';
-import '../../../bloc/bank_account_bloc.dart';
-import '../../../repository/bank_account_repository.dart';
 import '../../../widgets/balance_base_form.dart';
 import '../../../widgets/bank_account_card.dart';
 import '../../utils/deposit_utils.dart';
@@ -49,19 +50,20 @@ class DepositWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) {
-        BankAccountBloc bankAccountBloc =
-            BankAccountBloc(bankAccountRepository: BankAccountRepository());
+        AccountInformationBloc accountInformationBloc =
+            AccountInformationBloc(accountRepository: AccountRepository());
         if (initialDepositType == null) {
-          bankAccountBloc.add(const RegisteredBankAccountCheck());
+          accountInformationBloc.add(GetAccountInformation());
         }
-        return bankAccountBloc;
+        return accountInformationBloc;
       },
-      child: BlocConsumer<BankAccountBloc, BankAccountState>(
+      child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
         listener: (context, state) {
           CustomLoadingOverlay.of(context).show(state.response.state);
         },
         builder: (context, state) {
-          DepositType depositType = initialDepositType ?? state.depositType;
+          DepositType depositType =
+              _getDepositType(state.response.data?.bankAccount);
           return BalanceBaseForm(
               title: 'Deposit',
               content: Column(
@@ -83,7 +85,7 @@ class DepositWelcomeScreen extends StatelessWidget {
                   ),
                   _spaceHeight,
                   DepositBankAccount(
-                    depositType: depositType,
+                    bankAccount: state.response.data?.bankAccount,
                     spaceHeightSmall: _spaceHeightSmall,
                     spaceHeight: _spaceHeight,
                   ),
@@ -132,4 +134,9 @@ class DepositWelcomeScreen extends StatelessWidget {
 
   static void open({required BuildContext context, DepositType? depositType}) =>
       Navigator.pushNamed(context, route, arguments: depositType);
+
+  DepositType _getDepositType(BankAccount? bankAccount) {
+    return initialDepositType ??
+        (bankAccount != null ? DepositType.type2 : DepositType.firstTime);
+  }
 }
