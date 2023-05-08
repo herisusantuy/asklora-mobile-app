@@ -58,7 +58,7 @@ class PortfolioScreen extends StatelessWidget {
             portfolioRepository: PortfolioRepository(),
             botStockRepository: BotStockRepository());
 
-        ///fetch portfolio when current UserJourney already passed freeBotStock
+        ///fetch portfolio when current UserJourney already passed deposit
         if (UserJourney.compareUserJourney(
             context: context, target: UserJourney.deposit)) {
           portfolioBloc.add(const FetchActiveOrders());
