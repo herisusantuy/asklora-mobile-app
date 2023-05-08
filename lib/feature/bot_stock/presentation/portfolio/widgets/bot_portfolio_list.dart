@@ -22,6 +22,9 @@ class BotPortfolioList extends StatelessWidget {
     } else if (userJourney == UserJourney.freeBotStock) {
       return const BotPortfolioPopUp(
           botPortfolioPopUpType: BotPortfolioPopUpType.redeemBotStock);
+    } else if (userJourney == UserJourney.deposit) {
+      return const BotPortfolioPopUp(
+          botPortfolioPopUpType: BotPortfolioPopUpType.deposit);
     } else {
       if (portfolioState.botActiveOrderResponse.state ==
           ResponseState.success) {
