@@ -76,7 +76,7 @@ class TabsScreen extends StatelessWidget {
     );
   }
 
-  static  final List<Widget> _widgets = <Widget>[
+  static final List<Widget> _widgets = <Widget>[
     const HomeScreenForm(),
     const ForYouScreenForm(),
     PortfolioScreen(),

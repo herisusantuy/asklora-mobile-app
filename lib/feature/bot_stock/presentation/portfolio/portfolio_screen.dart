@@ -60,7 +60,6 @@ class PortfolioScreen extends StatelessWidget {
       portfolioBloc.add(const FetchActiveOrders());
       portfolioBloc.add(FetchPortfolio());
     }
-
   }
 
   @override

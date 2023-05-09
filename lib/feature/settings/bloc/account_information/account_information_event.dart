@@ -8,4 +8,5 @@ abstract class AccountInformationEvent extends Equatable {
 }
 
 class GetAccountInformation extends AccountInformationEvent {}
+
 class GetLocalAccountInformation extends AccountInformationEvent {}

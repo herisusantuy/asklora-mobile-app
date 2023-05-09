@@ -22,7 +22,8 @@ class AccountRepository {
       var response = await _accountApiClient.getAccount();
       GetAccountResponse getAccountResponse =
           GetAccountResponse.fromJson(response.data);
-      await _sharedPreference.writeData('account_data', jsonEncode(response.data));
+      await _sharedPreference.writeData(
+          'account_data', jsonEncode(response.data));
       return BaseResponse.complete<GetAccountResponse>(getAccountResponse);
     } catch (e) {
       return BaseResponse.error(message: 'Could not get user details!');
