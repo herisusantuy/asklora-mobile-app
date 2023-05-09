@@ -23,7 +23,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) =>
           AccountInformationBloc(accountRepository: AccountRepository())
-            ..add(GetAccountInformation()),
+            ..add(GetLocalAccountInformation()),
       child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
         listener: (context, state) {
           CustomLoadingOverlay.of(context).show(state.response.state);
@@ -39,7 +39,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
               title: 'Withdraw',
             );
           } else {
-            ///TODO : change to error UI later
+            ///TODO : change to error UI later if any
             return const SizedBox.shrink();
           }
         },
