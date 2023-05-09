@@ -169,7 +169,7 @@ class RouterGenerator {
                 ));
       case PortfolioScreen.route:
         return MaterialPageRoute(
-            settings: settings, builder: (_) => const PortfolioScreen());
+            settings: settings, builder: (_) =>  PortfolioScreen());
       case DepositWelcomeScreen.route:
         return MaterialPageRoute(
             settings: settings,

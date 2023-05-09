@@ -76,11 +76,11 @@ class TabsScreen extends StatelessWidget {
     );
   }
 
-  static const List<Widget> _widgets = <Widget>[
-    HomeScreenForm(),
-    ForYouScreenForm(),
+  static  final List<Widget> _widgets = <Widget>[
+    const HomeScreenForm(),
+    const ForYouScreenForm(),
     PortfolioScreen(),
-    LoraGptScreen()
+    const LoraGptScreen()
   ];
 
   static void openAndRemoveAllRoute(BuildContext context,

@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../domain/account_api_client.dart';
 import '../domain/get_account/get_account_response.dart';
 import '../domain/onfido/onfido_result_request.dart';
@@ -13,14 +15,27 @@ import '../domain/upgrade_account/upgrade_account_response.dart';
 
 class AccountRepository {
   final AccountApiClient _accountApiClient = AccountApiClient();
+  final SharedPreference _sharedPreference = SharedPreference();
 
   Future<BaseResponse<GetAccountResponse>> getAccount() async {
     try {
       var response = await _accountApiClient.getAccount();
-      return BaseResponse.complete<GetAccountResponse>(
-          GetAccountResponse.fromJson(response.data));
+      GetAccountResponse getAccountResponse =
+          GetAccountResponse.fromJson(response.data);
+      await _sharedPreference.writeData('account_data', jsonEncode(response.data));
+      return BaseResponse.complete<GetAccountResponse>(getAccountResponse);
     } catch (e) {
       return BaseResponse.error(message: 'Could not get user details!');
+    }
+  }
+
+  Future<BaseResponse<GetAccountResponse>> getLocalAccount() async {
+    var response = await _sharedPreference.readData('account_data');
+    if (response != null && response.isNotEmpty) {
+      return BaseResponse.complete<GetAccountResponse>(
+          GetAccountResponse.fromJson(jsonDecode(response)));
+    } else {
+      return await getAccount();
     }
   }
 

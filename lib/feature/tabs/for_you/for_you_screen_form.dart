@@ -53,13 +53,9 @@ class ForYouScreenForm extends StatelessWidget {
         });
   }
 
-  Widget get _getForYouPage => MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
-              ..add(GetInvestmentStyleState()),
-          ),
-        ],
+  Widget get _getForYouPage => BlocProvider(
+        create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
+          ..add(GetInvestmentStyleState()),
         child: BlocConsumer<ForYouBloc, ForYouState>(
           builder: (BuildContext context, state) {
             if (state.response.state == ResponseState.success) {

@@ -47,23 +47,27 @@ part 'widgets/free_bot_badge.dart';
 
 class PortfolioScreen extends StatelessWidget {
   static const String route = '/portfolio_screen';
+  final PortfolioBloc portfolioBloc = PortfolioBloc(
+      portfolioRepository: PortfolioRepository(),
+      botStockRepository: BotStockRepository());
 
-  const PortfolioScreen({Key? key}) : super(key: key);
+  PortfolioScreen({Key? key}) : super(key: key);
+
+  _fetchPortfolioData(BuildContext context) {
+    ///fetch portfolio when current UserJourney already passed freeBotStock
+    if (UserJourney.compareUserJourney(
+        context: context, target: UserJourney.freeBotStock)) {
+      portfolioBloc.add(const FetchActiveOrders());
+      portfolioBloc.add(FetchPortfolio());
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) {
-        PortfolioBloc portfolioBloc = PortfolioBloc(
-            portfolioRepository: PortfolioRepository(),
-            botStockRepository: BotStockRepository());
-
-        ///fetch portfolio when current UserJourney already passed freeBotStock
-        if (UserJourney.compareUserJourney(
-            context: context, target: UserJourney.freeBotStock)) {
-          portfolioBloc.add(const FetchActiveOrders());
-          portfolioBloc.add(FetchPortfolio());
-        }
+        _fetchPortfolioData(context);
         return portfolioBloc;
       },
       child: CustomScaffold(
@@ -76,48 +80,52 @@ class PortfolioScreen extends StatelessWidget {
               previous.botActiveOrderResponse !=
                   current.botActiveOrderResponse ||
               previous.currency != current.currency,
-          builder: (context, state) => CustomLayoutWithBlurPopUp(
-            loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: S.of(context).errorGettingInformationTitle,
-              subTitle: S.of(context).errorGettingInformationPortfolioSubTitle,
-              primaryButtonLabel: S.of(context).buttonReloadPage,
-              onPrimaryButtonTap: () {
-                context.read<PortfolioBloc>().add(const FetchActiveOrders());
-                context.read<PortfolioBloc>().add(FetchPortfolio());
-              },
-            ),
-            showPopUp:
-                (state.botActiveOrderResponse.state == ResponseState.error &&
-                        state.botActiveOrderResponse.errorCode != 403) ||
-                    state.portfolioResponse.state == ResponseState.error,
-            content: ListView(
-              padding: AppValues.screenHorizontalPadding
-                  .copyWith(top: 15, bottom: 15),
-              children: [
-                _botStockDetail(context, state),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextNew(
-                        S.of(context).portfolioYourBotStock,
-                        style: AskLoraTextStyles.h2
-                            .copyWith(color: AskLoraColors.charcoal),
+          builder: (context, state) => RefreshIndicator(
+            onRefresh: () async => _fetchPortfolioData(context),
+            child: CustomLayoutWithBlurPopUp(
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                title: S.of(context).errorGettingInformationTitle,
+                subTitle:
+                    S.of(context).errorGettingInformationPortfolioSubTitle,
+                primaryButtonLabel: S.of(context).buttonReloadPage,
+                onPrimaryButtonTap: () {
+                  context.read<PortfolioBloc>().add(const FetchActiveOrders());
+                  context.read<PortfolioBloc>().add(FetchPortfolio());
+                },
+              ),
+              showPopUp:
+                  (state.botActiveOrderResponse.state == ResponseState.error &&
+                          state.botActiveOrderResponse.errorCode != 403) ||
+                      state.portfolioResponse.state == ResponseState.error,
+              content: ListView(
+                padding: AppValues.screenHorizontalPadding
+                    .copyWith(top: 15, bottom: 15),
+                children: [
+                  _botStockDetail(context, state),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextNew(
+                          S.of(context).portfolioYourBotStock,
+                          style: AskLoraTextStyles.h2
+                              .copyWith(color: AskLoraColors.charcoal),
+                        ),
                       ),
-                    ),
-                    const BotPortfolioFilter()
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                BotPortfolioList(
-                  userJourney: context.read<AppBloc>().state.userJourney,
-                  portfolioState: state,
-                ),
-              ],
+                      const BotPortfolioFilter()
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  BotPortfolioList(
+                    userJourney: context.read<AppBloc>().state.userJourney,
+                    portfolioState: state,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
