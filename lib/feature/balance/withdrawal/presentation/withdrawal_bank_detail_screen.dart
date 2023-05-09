@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../bloc/bank_account_bloc.dart';
-import '../../repository/bank_account_repository.dart';
+import '../../../onboarding/kyc/repository/account_repository.dart';
+import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../widgets/balance_base_form.dart';
 import '../../widgets/bank_account_card.dart';
 import 'withdrawal_amount/withdrawal_amount_screen.dart';
@@ -21,21 +22,26 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) =>
-          BankAccountBloc(bankAccountRepository: BankAccountRepository())
-            ..add(const RegisteredBankAccountCheck()),
-      child: BlocConsumer<BankAccountBloc, BankAccountState>(
+          AccountInformationBloc(accountRepository: AccountRepository())
+            ..add(GetAccountInformation()),
+      child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
         listener: (context, state) {
           CustomLoadingOverlay.of(context).show(state.response.state);
         },
         builder: (context, state) {
-          return BalanceBaseForm(
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [BankAccountCard()],
-            ),
-            bottomButton: _bottomButton(context),
-            title: 'Withdraw',
-          );
+          if (state.response.state == ResponseState.success &&
+              state.response.data?.bankAccount != null) {
+            return BalanceBaseForm(
+              content: BankAccountCard(
+                bankAccount: state.response.data!.bankAccount!,
+              ),
+              bottomButton: _bottomButton(context),
+              title: 'Withdraw',
+            );
+          } else {
+            ///TODO : change to error UI later
+            return const SizedBox.shrink();
+          }
         },
       ),
     );
