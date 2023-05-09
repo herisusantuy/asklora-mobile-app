@@ -53,7 +53,7 @@ class DepositWelcomeScreen extends StatelessWidget {
         AccountInformationBloc accountInformationBloc =
             AccountInformationBloc(accountRepository: AccountRepository());
         if (initialDepositType == null) {
-          accountInformationBloc.add(GetLocalAccountInformation());
+          accountInformationBloc.add(GetAccountInformation());
         }
         return accountInformationBloc;
       },

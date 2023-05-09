@@ -6,27 +6,31 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../settings/domain/bank_account.dart';
 
 class BankAccountCard extends StatelessWidget {
-  final BankAccount bankAccount;
+  final BankAccount? bankAccount;
 
   const BankAccountCard({required this.bankAccount, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: RoundColoredBox(
-        content:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          CustomTextNew(bankAccount.name, style: AskLoraTextStyles.h6),
-          const SizedBox(height: 5),
-          CustomTextNew(bankAccount.accountNumber,
-              style: AskLoraTextStyles.body1),
-          const SizedBox(height: 20),
-          CustomTextNew(bankAccount.accountName,
-              style: AskLoraTextStyles.body1),
-        ]),
-      ),
-    );
+    if (bankAccount != null) {
+      return SizedBox(
+        width: double.infinity,
+        child: RoundColoredBox(
+          content:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            CustomTextNew(bankAccount!.name, style: AskLoraTextStyles.h6),
+            const SizedBox(height: 5),
+            CustomTextNew(bankAccount!.accountNumber,
+                style: AskLoraTextStyles.body1),
+            const SizedBox(height: 20),
+            CustomTextNew(bankAccount!.accountName,
+                style: AskLoraTextStyles.body1),
+          ]),
+        ),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 }

@@ -79,7 +79,7 @@ class TabsScreen extends StatelessWidget {
   static final List<Widget> _widgets = <Widget>[
     const HomeScreenForm(),
     const ForYouScreenForm(),
-    PortfolioScreen(),
+    const PortfolioScreen(),
     const LoraGptScreen()
   ];
 

@@ -47,26 +47,23 @@ part 'widgets/free_bot_badge.dart';
 
 class PortfolioScreen extends StatelessWidget {
   static const String route = '/portfolio_screen';
-  final PortfolioBloc portfolioBloc = PortfolioBloc(
-      portfolioRepository: PortfolioRepository(),
-      botStockRepository: BotStockRepository());
 
-  PortfolioScreen({Key? key}) : super(key: key);
-
-  _fetchPortfolioData(BuildContext context) {
-    ///fetch portfolio when current UserJourney already passed freeBotStock
-    if (UserJourney.compareUserJourney(
-        context: context, target: UserJourney.freeBotStock)) {
-      portfolioBloc.add(const FetchActiveOrders());
-      portfolioBloc.add(FetchPortfolio());
-    }
-  }
+  const PortfolioScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) {
-        _fetchPortfolioData(context);
+        PortfolioBloc portfolioBloc = PortfolioBloc(
+            portfolioRepository: PortfolioRepository(),
+            botStockRepository: BotStockRepository());
+
+        ///fetch portfolio when current UserJourney already passed freeBotStock
+        if (UserJourney.compareUserJourney(
+            context: context, target: UserJourney.freeBotStock)) {
+          portfolioBloc.add(const FetchActiveOrders());
+          portfolioBloc.add(FetchPortfolio());
+        }
         return portfolioBloc;
       },
       child: CustomScaffold(
@@ -80,7 +77,14 @@ class PortfolioScreen extends StatelessWidget {
                   current.botActiveOrderResponse ||
               previous.currency != current.currency,
           builder: (context, state) => RefreshIndicator(
-            onRefresh: () async => _fetchPortfolioData(context),
+            onRefresh: () async {
+              ///fetch portfolio when current UserJourney already passed freeBotStock
+              if (UserJourney.compareUserJourney(
+                  context: context, target: UserJourney.freeBotStock)) {
+                context.read<PortfolioBloc>().add(const FetchActiveOrders());
+                context.read<PortfolioBloc>().add(FetchPortfolio());
+              }
+            },
             child: CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
                 title: S.of(context).errorGettingInformationTitle,

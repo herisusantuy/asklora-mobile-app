@@ -3,10 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../widgets/balance_base_form.dart';
@@ -23,25 +27,35 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) =>
           AccountInformationBloc(accountRepository: AccountRepository())
-            ..add(GetLocalAccountInformation()),
+            ..add(GetAccountInformation()),
       child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
         listener: (context, state) {
           CustomLoadingOverlay.of(context).show(state.response.state);
         },
         builder: (context, state) {
-          if (state.response.state == ResponseState.success &&
-              state.response.data?.bankAccount != null) {
-            return BalanceBaseForm(
-              content: BankAccountCard(
-                bankAccount: state.response.data!.bankAccount!,
+          ///TODO : ignore localisation for now as this is not final UI and copywriting
+          return CustomScaffold(
+            enableBackNavigation: false,
+            body: CustomLayoutWithBlurPopUp(
+              showPopUp: state.response.state == ResponseState.error ||
+                  state.response.data?.bankAccount == null,
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                  primaryButtonLabel: S.of(context).buttonBack,
+                  onPrimaryButtonTap: () => Navigator.pop(context),
+                  title: 'No Bank Account Found!',
+                  subTitle: 'Please try again later'),
+              content: BalanceBaseForm(
+                content: BankAccountCard(
+                  bankAccount: state.response.data?.bankAccount,
+                ),
+                bottomButton: state.response.state == ResponseState.success &&
+                        state.response.data?.bankAccount != null
+                    ? _bottomButton(context)
+                    : const SizedBox.shrink(),
+                title: 'Withdraw',
               ),
-              bottomButton: _bottomButton(context),
-              title: 'Withdraw',
-            );
-          } else {
-            ///TODO : change to error UI later if any
-            return const SizedBox.shrink();
-          }
+            ),
+          );
         },
       ),
     );
