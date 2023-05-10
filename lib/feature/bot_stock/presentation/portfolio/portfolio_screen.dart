@@ -22,6 +22,7 @@ import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../repository/bot_stock_repository.dart';
@@ -237,7 +238,17 @@ class PortfolioScreen extends StatelessWidget {
                 FundingButton(
                   disabled: data == null,
                   fundingType: FundingType.fund,
-                  onTap: () => DepositWelcomeScreen.open(context: context),
+                  onTap: () {
+                    UserJourney.onAlreadyPassed(
+                        context: context,
+                        target: UserJourney.deposit,
+                        onTrueCallback: () {
+                          DepositWelcomeScreen.open(context: context);
+                        },
+                        onFalseCallback: () => DepositWelcomeScreen.open(
+                            context: context,
+                            depositType: DepositType.firstTime));
+                  },
                 ),
                 const SizedBox(
                   height: 10,
