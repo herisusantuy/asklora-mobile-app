@@ -15,7 +15,7 @@ class PersonalInfoState extends Equatable {
     this.isHongKongPermanentResident,
     this.hkIdNumber = '',
     this.isUnitedStateResident,
-    this.message = '',
+    this.phoneNumberErrorText = '',
     this.hkIdErrorText = '',
     this.response = const BaseResponse(),
   });
@@ -33,7 +33,7 @@ class PersonalInfoState extends Equatable {
   final bool? isHongKongPermanentResident;
   final String hkIdNumber;
   final bool? isUnitedStateResident;
-  final String? message;
+  final String? phoneNumberErrorText;
   final BaseResponse response;
   final String? hkIdErrorText;
 
@@ -53,7 +53,7 @@ class PersonalInfoState extends Equatable {
       isHongKongPermanentResident,
       hkIdNumber,
       isUnitedStateResident,
-      message,
+      phoneNumberErrorText,
       hkIdErrorText,
       response,
     ];
@@ -73,7 +73,7 @@ class PersonalInfoState extends Equatable {
     bool? isHongKongPermanentResident,
     String? hkIdNumber,
     bool? isUnitedStateResident,
-    String? message,
+    String? phoneNumberErrorText,
     BaseResponse? response,
     String? hkIdErrorText,
   }) {
@@ -93,7 +93,7 @@ class PersonalInfoState extends Equatable {
       hkIdNumber: hkIdNumber ?? this.hkIdNumber,
       isUnitedStateResident:
           isUnitedStateResident ?? this.isUnitedStateResident,
-      message: message ?? this.message,
+      phoneNumberErrorText: phoneNumberErrorText ?? this.phoneNumberErrorText,
       response: response ?? this.response,
       hkIdErrorText: hkIdErrorText ?? this.hkIdErrorText,
     );

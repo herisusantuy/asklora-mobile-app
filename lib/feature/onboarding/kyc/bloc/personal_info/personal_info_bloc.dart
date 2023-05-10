@@ -108,9 +108,10 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       PersonalInfoPhoneNumberChanged event, Emitter<PersonalInfoState> emit) {
     emit(state.copyWith(
         phoneNumber: event.phoneNumber,
-        message: (event.phoneNumber.isEmpty || event.phoneNumber.length < 8)
-            ? 'Your HK phone number must be exactly 8 digits'
-            : ''));
+        phoneNumberErrorText:
+            (event.phoneNumber.isEmpty || event.phoneNumber.length < 8)
+                ? 'Your HK phone number must be exactly 8 digits'
+                : ''));
   }
 
   _onPersonalInfoNationalityChange(
@@ -152,13 +153,8 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
             !state.isHongKongPermanentResident! ||
         state.isUnitedStateResident != null && state.isUnitedStateResident!) {
       emit(state.copyWith(
-          response: BaseResponse.error(message: 'You are not eligible!'),
-          message: r'You are not eligible!'));
-    } else if (!isAdult(state.dateOfBirth)) {
-      emit(state.copyWith(
-          response: BaseResponse.error(
-              message: 'You must be over 18 to sign up for AskLORA!'),
-          message: r'You must be over 18 to sign up for AskLORA!'));
+        response: BaseResponse.error(message: 'You are not eligible!'),
+      ));
     } else {
       emit(state.copyWith(response: BaseResponse.complete('')));
     }

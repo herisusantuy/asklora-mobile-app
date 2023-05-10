@@ -120,7 +120,7 @@ class PersonalInfoScreen extends StatelessWidget {
                 onChangePhoneNumber: (phoneNumber) => context
                     .read<PersonalInfoBloc>()
                     .add(PersonalInfoPhoneNumberChanged(phoneNumber)),
-                errorText: state.message ?? '',
+                errorText: state.phoneNumberErrorText ?? '',
               ));
 
   Widget get _selectGender => Column(

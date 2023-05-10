@@ -1,6 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/bloc/personal_info/personal_info_bloc.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/account_api_client.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/domain/upgrade_account/personal_info_request.dart';
 import 'package:asklora_mobile_app/feature/onboarding/kyc/repository/account_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
@@ -57,7 +58,7 @@ void main() {
               isHongKongPermanentResident: null,
               hkIdNumber: '',
               isUnitedStateResident: null,
-              message: '',
+              phoneNumberErrorText: '',
               response: BaseResponse(),
             ));
       });
@@ -83,7 +84,7 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: true,
-                  message: '',
+                  phoneNumberErrorText: '',
                   response: BaseResponse(),
                 ),
                 PersonalInfoState(
@@ -99,7 +100,7 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: true,
-                  message: '',
+                  phoneNumberErrorText: '',
                   response: BaseResponse.unknown(),
                 ),
                 PersonalInfoState(
@@ -115,7 +116,7 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: true,
-                  message: r'You are not eligible!',
+                  phoneNumberErrorText: '',
                   response:
                       BaseResponse.error(message: r'You are not eligible!'),
                 ),
@@ -127,7 +128,8 @@ void main() {
           act: (bloc) {
             bloc.add(const PersonalInfoDateOfBirthChanged(
                 '2010-08-08 00:00:00.000'));
-            bloc.add(const PersonalInfoNext());
+            bloc.add(const PersonalInfoHkIdNumberChanged('f1234567'));
+            bloc.add(const PersonalInfoSubmitted(PersonalInfoRequest()));
           },
           expect: () => {
                 const PersonalInfoState(
@@ -144,7 +146,24 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '',
                   isUnitedStateResident: null,
-                  message: '',
+                  phoneNumberErrorText: '',
+                  response: BaseResponse(),
+                ),
+                const PersonalInfoState(
+                  firstName: '',
+                  lastName: '',
+                  gender: '',
+                  dateOfBirth: '2010-08-08',
+                  countryCodeOfBirth: '',
+                  countryNameOfBirth: '',
+                  phoneCountryCode: '852',
+                  phoneNumber: '',
+                  nationalityCode: '',
+                  nationalityName: '',
+                  isHongKongPermanentResident: null,
+                  hkIdNumber: 'f1234567',
+                  isUnitedStateResident: null,
+                  phoneNumberErrorText: '',
                   response: BaseResponse(),
                 ),
                 PersonalInfoState(
@@ -159,9 +178,9 @@ void main() {
                   nationalityCode: '',
                   nationalityName: '',
                   isHongKongPermanentResident: null,
-                  hkIdNumber: '',
+                  hkIdNumber: 'f1234567',
                   isUnitedStateResident: null,
-                  message: '',
+                  phoneNumberErrorText: '',
                   response: BaseResponse.unknown(),
                 ),
                 PersonalInfoState(
@@ -176,9 +195,9 @@ void main() {
                   nationalityCode: '',
                   nationalityName: '',
                   isHongKongPermanentResident: null,
-                  hkIdNumber: '',
+                  hkIdNumber: 'f1234567',
                   isUnitedStateResident: null,
-                  message: r'You must be over 18 to sign up for AskLORA!',
+                  phoneNumberErrorText: '',
                   response: BaseResponse.error(
                       message: r'You must be over 18 to sign up for AskLORA!'),
                 ),
@@ -203,7 +222,7 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: '666-55-4321',
                   isUnitedStateResident: null,
-                  message: '',
+                  phoneNumberErrorText: '',
                   response: BaseResponse(),
                 ),
               });
@@ -227,7 +246,7 @@ void main() {
                   isHongKongPermanentResident: null,
                   hkIdNumber: 'F1234567',
                   isUnitedStateResident: null,
-                  message: '',
+                  phoneNumberErrorText: '',
                   response: BaseResponse(),
                 ),
               });
