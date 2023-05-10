@@ -33,7 +33,6 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
           CustomLoadingOverlay.of(context).show(state.response.state);
         },
         builder: (context, state) {
-          ///TODO : ignore localisation for now as this is not final UI and copywriting
           return CustomScaffold(
             enableBackNavigation: false,
             body: CustomLayoutWithBlurPopUp(
@@ -41,8 +40,14 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
                   (state.response.state != ResponseState.loading &&
                       state.response.data?.bankAccount == null),
               loraPopUpMessageModel: LoraPopUpMessageModel(
-                  primaryButtonLabel: S.of(context).buttonBack,
-                  onPrimaryButtonTap: () => Navigator.pop(context),
+                  secondaryButtonLabel: S.of(context).buttonBack,
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  onPrimaryButtonTap: () => context
+                      .read<AccountInformationBloc>()
+                      .add(GetAccountInformation()),
+
+                  ///TODO : ignore localisation for now as this is not final UI and copywriting
                   title: 'No Bank Account Found!',
                   subTitle: 'Please try again later'),
               content: BalanceBaseForm(
@@ -53,7 +58,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
                         state.response.data?.bankAccount != null
                     ? _bottomButton(context)
                     : const SizedBox.shrink(),
-                title: 'Withdraw',
+                title: S.of(context).buttonWithdraw,
               ),
             ),
           );
@@ -67,7 +72,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             CustomTextNew(
-              'Your withdrawal can take up to 2 working days.',
+              S.of(context).withdrawalWorkingDays,
               style: AskLoraTextStyles.subtitle3
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -78,8 +83,8 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
                 primaryButtonOnClick: () =>
                     WithdrawalAmountScreen.open(context),
                 secondaryButtonOnClick: () {},
-                primaryButtonLabel: 'NEXT',
-                secondaryButtonLabel: 'CHANGE BANK ACCOUNT')
+                primaryButtonLabel: S.of(context).buttonNext,
+                secondaryButtonLabel: S.of(context).changeBankAccount)
           ],
         ),
       );

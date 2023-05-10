@@ -117,10 +117,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("HAVE AN ACCOUNT?"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("LET’S BEGIN"),
+        "buttonMaybeLater": MessageLookupByLibrary.simpleMessage("MAYBE LATER"),
         "buttonNext": MessageLookupByLibrary.simpleMessage("NEXT"),
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("NOT NOW"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("RELOAD PAGE"),
         "buttonSignOut": MessageLookupByLibrary.simpleMessage("SIGN OUT"),
+        "buttonWithdraw": MessageLookupByLibrary.simpleMessage("WITHDRAW"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
         "carouselIntro2": MessageLookupByLibrary.simpleMessage(
@@ -443,6 +445,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Unable to Process Withdrawal"),
         "userId": MessageLookupByLibrary.simpleMessage("User ID"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "viewDepositGuide":
+            MessageLookupByLibrary.simpleMessage("View Deposit Guide"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "withdrawalAmount":
             MessageLookupByLibrary.simpleMessage("Withdrawal Amount"),

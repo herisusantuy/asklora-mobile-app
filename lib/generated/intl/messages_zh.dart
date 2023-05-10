@@ -102,10 +102,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
+        "buttonMaybeLater": MessageLookupByLibrary.simpleMessage("稍後再說"),
         "buttonNext": MessageLookupByLibrary.simpleMessage("下一步"),
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("稍後再說"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("重新加載"),
         "buttonSignOut": MessageLookupByLibrary.simpleMessage("登出"),
+        "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
             MessageLookupByLibrary.simpleMessage("FinFit教練，Lora 全程教路"),
@@ -339,6 +341,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
+        "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
         "withdrawalWorkingDays":
