@@ -16,7 +16,7 @@ void main() async {
     late WithdrawalBloc withdrawalBloc;
     late WithdrawalRepository withdrawalRepository;
     final BaseResponse<WithdrawalResponse> submitResponse =
-        BaseResponse.complete(const WithdrawalResponse(''));
+        BaseResponse.complete(const WithdrawalResponse('', ''));
 
     setUpAll(() async {
       withdrawalRepository = MockWithdrawalRepository();

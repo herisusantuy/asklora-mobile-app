@@ -66,7 +66,7 @@ class MockData {
             portfolioDetailResponse.withdrawableAmount - withdrawalAmount,
         buyingPower: portfolioDetailResponse.buyingPower - withdrawalAmount,
       ));
-      return BaseResponse.complete(const WithdrawalResponse('Success'));
+      return BaseResponse.complete(const WithdrawalResponse('', ''));
     } else {
       return BaseResponse.error(message: 'Insufficient Balance');
     }
