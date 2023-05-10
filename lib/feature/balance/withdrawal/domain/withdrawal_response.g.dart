@@ -8,10 +8,12 @@ part of 'withdrawal_response.dart';
 
 WithdrawalResponse _$WithdrawalResponseFromJson(Map<String, dynamic> json) =>
     WithdrawalResponse(
-      json['detail'] as String,
+      json['amount'] as String,
+      json['uid'] as String,
     );
 
 Map<String, dynamic> _$WithdrawalResponseToJson(WithdrawalResponse instance) =>
     <String, dynamic>{
-      'detail': instance.detail,
+      'amount': instance.amount,
+      'uid': instance.uid,
     };

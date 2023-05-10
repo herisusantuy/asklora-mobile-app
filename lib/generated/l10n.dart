@@ -280,6 +280,26 @@ class S {
     );
   }
 
+  /// `MAYBE LATER`
+  String get buttonMaybeLater {
+    return Intl.message(
+      'MAYBE LATER',
+      name: 'buttonMaybeLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WITHDRAW`
+  String get buttonWithdraw {
+    return Intl.message(
+      'WITHDRAW',
+      name: 'buttonWithdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Price`
   String get currentPrice {
     return Intl.message(
@@ -2340,6 +2360,16 @@ class S {
       name: 'min',
       desc: '',
       args: [minute],
+    );
+  }
+
+  /// `View Deposit Guide`
+  String get viewDepositGuide {
+    return Intl.message(
+      'View Deposit Guide',
+      name: 'viewDepositGuide',
+      desc: '',
+      args: [],
     );
   }
 }

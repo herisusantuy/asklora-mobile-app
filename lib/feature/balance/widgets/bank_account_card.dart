@@ -2,39 +2,35 @@ import 'package:flutter/material.dart';
 
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/round_colored_box.dart';
-import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../settings/domain/bank_account.dart';
 
 class BankAccountCard extends StatelessWidget {
-  const BankAccountCard({Key? key}) : super(key: key);
+  final BankAccount? bankAccount;
+
+  const BankAccountCard({required this.bankAccount, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: RoundColoredBox(
-        title: 'Hang Seng Bank Limited',
-        content: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Column(children: [
-            CustomTextNew(
-              '123 - 1256789 - 07',
-              style: AskLoraTextStyles.body2
-                  .copyWith(color: AskLoraColors.charcoal),
-              maxLines: 2,
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            CustomTextNew(
-              'Lillian Lambert',
-              style: AskLoraTextStyles.body2
-                  .copyWith(color: AskLoraColors.charcoal),
-              maxLines: 2,
-            ),
+    if (bankAccount != null) {
+      return SizedBox(
+        width: double.infinity,
+        child: RoundColoredBox(
+          content:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            CustomTextNew(bankAccount!.name, style: AskLoraTextStyles.h6),
+            const SizedBox(height: 5),
+            CustomTextNew(bankAccount!.accountNumber,
+                style: AskLoraTextStyles.body1),
+            const SizedBox(height: 20),
+            CustomTextNew(bankAccount!.accountName,
+                style: AskLoraTextStyles.body1),
           ]),
         ),
-      ),
-    );
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 }

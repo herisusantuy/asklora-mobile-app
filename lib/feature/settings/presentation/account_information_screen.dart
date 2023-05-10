@@ -25,7 +25,7 @@ class AccountInformationScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           AccountInformationBloc(accountRepository: AccountRepository())
-            ..add(GetAccountInformation()),
+            ..add(GetLocalAccountInformation()),
       child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
           listenWhen: (previous, current) =>
               previous.response.state != current.response.state,

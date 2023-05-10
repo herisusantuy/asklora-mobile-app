@@ -20,22 +20,31 @@ import '../../../generated/l10n.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../bot_stock/utils/bot_stock_utils.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
+import '../../onboarding/kyc/repository/account_repository.dart';
 import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../onboarding/ppi/repository/ppi_response_repository.dart';
+import '../../settings/bloc/account_information/account_information_bloc.dart';
 import '../bloc/tabs_screen_bloc.dart';
 import 'bloc/home_screen_bloc.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
 import 'widgets/on_boarding_status/on_boarding_status.dart';
 
 part 'widgets/home_screen_content_widget.dart';
+
 part 'widgets/home_screen_free_bot_stock_timer_widget.dart';
+
 part 'widgets/home_screen_horizontal_padding_widget.dart';
+
 part 'widgets/home_screen_investment_style_widget.dart';
+
 part 'widgets/home_screen_milestone_completion_reminder_widget.dart';
+
 part 'widgets/home_screen_need_help_button_widget.dart';
+
 part 'widgets/home_screen_pop_up_message_widget.dart';
+
 part 'widgets/home_screen_pop_up_message_with_bot_badge_widget.dart';
 
 class HomeScreenForm extends StatelessWidget {
@@ -43,12 +52,22 @@ class HomeScreenForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: BlocProvider(
-        create: (context) =>
-            HomeScreenBloc(ppiResponseRepository: PpiResponseRepository())
-              ..add(GetUserSnapShots()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) =>
+              AccountInformationBloc(accountRepository: AccountRepository())
+                ..add(GetAccountInformation()),
+          lazy: false,
+        ),
+        BlocProvider(
+          create: (context) =>
+              HomeScreenBloc(ppiResponseRepository: PpiResponseRepository())
+                ..add(GetUserSnapShots()),
+        )
+      ],
+      child: Container(
+        color: Colors.white,
         child: CustomScrollView(
           slivers: <Widget>[
             SliverPersistentHeader(

@@ -6,12 +6,13 @@
   "buttonSignOut": "登出",
   "buttonHaveAnAccount": "已有賬戶？",
   "buttonContinue": "繼續",
+  "buttonMaybeLater": "稍後再說",
+  "buttonWithdraw": "提取",
   "carouselIntro1": "投資一樣\n要夠Fit",
   "carouselIntro2": "FinFit教練，Lora 全程教路",
   "carouselIntro3": "AI策略，\n自動交易",
   "carouselIntro4": "個人化體驗，\n前所未見",
   "currentPrice": "當前價格",
-
   "deposit": "存入資金",
   "estStopLossPercent": "預計止損 %",
   "estMaxLossPercent": "預計最大損失%",
@@ -223,19 +224,19 @@
     }
   },
   "createAnAccountCapitalize": "開立賬戶",
-  "portfolioPopUpCreateAnAccountTitle" : "建立賬戶，開始交易",
-  "portfolioPopUpCreateAnAccountSubTitle" : "開始交易後，你可以喺度管理你所有投資。快啲建立賬戶進行交易啦！",
+  "portfolioPopUpCreateAnAccountTitle": "建立賬戶，開始交易",
+  "portfolioPopUpCreateAnAccountSubTitle": "開始交易後，你可以喺度管理你所有投資。快啲建立賬戶進行交易啦！",
   "defineInvestmentStyle": "界定投資風格",
-  "portfolioPopUpDefineInvestmentTitle" : "界定投資風格，立即交易！",
-  "portfolioPopUpDefineInvestmentSubTitle" : "你仲未界定你嘅投資風格。快啲去睇下咩\nBotstocks 最適合你喇！",
+  "portfolioPopUpDefineInvestmentTitle": "界定投資風格，立即交易！",
+  "portfolioPopUpDefineInvestmentSubTitle": "你仲未界定你嘅投資風格。快啲去睇下咩\nBotstocks 最適合你喇！",
   "continueAccountOpening": "開立投資賬戶",
-  "portfolioPopUpContinueAccountOpeningTitle" : "尚未完成開戶",
-  "portfolioPopUpContinueAccountOpeningSubTitle" : "喺可以開始正式交易之前，你需要完成開戶。",
-  "portfolioPopUpFundAccountTitle" : "尚未入金",
-  "portfolioPopUpFundAccountSubTitle" : "你好似仲未入錢喎，入咗 HKD 10,000 就可以正式完成開戶手續！",
+  "portfolioPopUpContinueAccountOpeningTitle": "尚未完成開戶",
+  "portfolioPopUpContinueAccountOpeningSubTitle": "喺可以開始正式交易之前，你需要完成開戶。",
+  "portfolioPopUpFundAccountTitle": "尚未入金",
+  "portfolioPopUpFundAccountSubTitle": "你好似仲未入錢喎，入咗 HKD 10,000 就可以正式完成開戶手續！",
   "startABotstock": "開始交易",
-  "portfolioPopUpNoTradingHasStartedTitle" : "尚未開始任何交易!",
-  "portfolioPopUpNoTradingHasStartedtSubTitle" : " 開始交易後你就可以一次過管理所有投資。",
+  "portfolioPopUpNoTradingHasStartedTitle": "尚未開始任何交易!",
+  "portfolioPopUpNoTradingHasStartedtSubTitle": " 開始交易後你就可以一次過管理所有投資。",
   "portfolioTotalPL": "總盈虧",
   "portfolioYourBotStock": "你的Botstocks",
   "performance": "表現",
@@ -256,29 +257,29 @@
   "confirmNewPassword": "確認新密碼",
   "startDate": "最佳開始日期",
   "signOutConfirmation": " 真係要登出？",
-  "setUpFinancialProfile" : "設定財務概況",
-  "doAnyOfTheFollowingApply" : "以下描述適用於你或你的直系親屬？",
-  "iAmASeniorExecutive" : "我是上市公司的高級行政人員或持有 10% 或以上的股份。",
-  "iAmASeniorPolitical" : "我是高級政治人物。",
-  "iAmAFamily" : "我是高級政治人物的家庭成員或親屬。",
+  "setUpFinancialProfile": "設定財務概況",
+  "doAnyOfTheFollowingApply": "以下描述適用於你或你的直系親屬？",
+  "iAmASeniorExecutive": "我是上市公司的高級行政人員或持有 10% 或以上的股份。",
+  "iAmASeniorPolitical": "我是高級政治人物。",
+  "iAmAFamily": "我是高級政治人物的家庭成員或親屬。",
   "iAmADirector": "我是香港證券及期貨事務監察委員會註冊持牌機構的董事、員工、或註冊持牌人士。(除了Lora Advisors Limited）",
   "yes": "是",
-  "no" : " 否",
+  "no": " 否",
   "saveForLater": "儲存並離開",
-  "yourBankAccount" : "銀行賬戶",
-  "yourBankAccountIsUnderReview" : "銀行賬戶正在審批當中，並會於{dateTime} 完成。",
-    "@yourBankAccountIsUnderReview" : {
-      "placeholders" : {
-        "dateTime" : {
-          "type" : "String"
-        }
+  "yourBankAccount": "銀行賬戶",
+  "yourBankAccountIsUnderReview": "銀行賬戶正在審批當中，並會於{dateTime} 完成。",
+  "@yourBankAccountIsUnderReview": {
+    "placeholders": {
+      "dateTime": {
+        "type": "String"
       }
-    },
-  "changeBankAccount" : "更改銀行戶口",
-  "noteOnPaymentDetails" : "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。",
-  "yourPaymentInformationIsUnderReview" : "您的銀行帳戶信息正在審核中。一旦您的開戶申請獲批，您的銀行帳戶詳細信息將顯示在此處。請注意，審核過程最多可能需要 2 個工作日。",
+    }
+  },
+  "changeBankAccount": "更改銀行戶口",
+  "noteOnPaymentDetails": "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。",
+  "yourPaymentInformationIsUnderReview": "您的銀行帳戶信息正在審核中。一旦您的開戶申請獲批，您的銀行帳戶詳細信息將顯示在此處。請注意，審核過程最多可能需要 2 個工作日。",
   "needHelp": "需要幫助？",
-  "milestones" : "目標",
+  "milestones": "目標",
   "startInvesting": "開始投資 ",
   "privacyEvaluation": "私隱評估",
   "personalisation": "個人化",
@@ -300,13 +301,14 @@
   "totalAmount": "總金額",
   "withdrawalAmount": "提取金額",
   "withdrawalWorkingDays": "提取款項最多需時2個工作天。",
-  "relearn" : "再次學習",
-  "min" : " ~{minute} 分鐘",
-  "@min" : {
+  "relearn": "再次學習",
+  "min": " ~{minute} 分鐘",
+  "@min": {
     "placeholders": {
-      "minute" : {
-        "type" : "String"
+      "minute": {
+        "type": "String"
       }
     }
-  }
+  },
+  "viewDepositGuide": "查看入金提示"
 }

@@ -5,9 +5,10 @@ part 'withdrawal_response.g.dart';
 
 @JsonSerializable()
 class WithdrawalResponse extends Equatable {
-  final String detail;
+  final String amount;
+  final String uid;
 
-  const WithdrawalResponse(this.detail);
+  const WithdrawalResponse(this.amount, this.uid);
 
   factory WithdrawalResponse.fromJson(Map<String, dynamic> json) =>
       _$WithdrawalResponseFromJson(json);
@@ -15,5 +16,5 @@ class WithdrawalResponse extends Equatable {
   Map<String, dynamic> toJson() => _$WithdrawalResponseToJson(this);
 
   @override
-  List<Object?> get props => [detail];
+  List<Object?> get props => [amount, uid];
 }

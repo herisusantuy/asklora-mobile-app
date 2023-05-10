@@ -15,12 +15,20 @@ class AccountInformationBloc
       : _accountRepository = accountRepository,
         super(const AccountInformationState()) {
     on<GetAccountInformation>(_onGetAccountInformation);
+    on<GetLocalAccountInformation>(_onGetLocalAccountInformation);
   }
 
   _onGetAccountInformation(GetAccountInformation event,
       Emitter<AccountInformationState> emit) async {
     emit(state.copyWith(response: BaseResponse.loading()));
     var response = await _accountRepository.getAccount();
+    emit(state.copyWith(response: response));
+  }
+
+  _onGetLocalAccountInformation(GetLocalAccountInformation event,
+      Emitter<AccountInformationState> emit) async {
+    emit(state.copyWith(response: BaseResponse.loading()));
+    var response = await _accountRepository.getLocalAccount();
     emit(state.copyWith(response: response));
   }
 }

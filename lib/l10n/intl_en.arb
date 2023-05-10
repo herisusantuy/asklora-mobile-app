@@ -23,6 +23,8 @@
   "buttonSignOut": "SIGN OUT",
   "buttonBack": "BACK",
   "buttonContinue": "CONTINUE",
+  "buttonMaybeLater": "MAYBE LATER",
+  "buttonWithdraw": "WITHDRAW",
   "currentPrice": "Current Price",
   "deposit": "Deposit",
   "estStopLossLevel": "Est. Stop Loss Level",
@@ -331,5 +333,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "viewDepositGuide": "View Deposit Guide"
 }

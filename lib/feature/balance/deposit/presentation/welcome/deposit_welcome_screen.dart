@@ -2,19 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/endpoints.dart';
+import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_expanded_row.dart';
+import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
+import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
+import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
+import '../../../../onboarding/kyc/repository/account_repository.dart';
+import '../../../../settings/bloc/account_information/account_information_bloc.dart';
+import '../../../../settings/domain/bank_account.dart';
 import '../../../../tabs/tabs_screen.dart';
-import '../../../bloc/bank_account_bloc.dart';
-import '../../../repository/bank_account_repository.dart';
 import '../../../widgets/balance_base_form.dart';
 import '../../../widgets/bank_account_card.dart';
 import '../../utils/deposit_utils.dart';
@@ -45,57 +52,91 @@ class DepositWelcomeScreen extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  Pair<Widget, Widget> _depositScreenArgs(
+      BuildContext context, AccountInformationState accountInformationState) {
+    if (accountInformationState.response.state != ResponseState.loading) {
+      DepositType depositType =
+          _getDepositType(accountInformationState.response.data?.bankAccount);
+      return Pair(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DepositStep(
+                depositType: depositType,
+              ),
+              _spaceHeightSmall,
+              GestureDetector(
+                onTap: () async => await launchUrl(Uri.parse(depositGuideUrl)),
+                child: CustomTextNew(
+                  S.of(context).viewDepositGuide,
+                  style: AskLoraTextStyles.subtitle2.copyWith(
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              _spaceHeight,
+              DepositBankAccount(
+                bankAccount: accountInformationState.response.data?.bankAccount,
+                spaceHeightSmall: _spaceHeightSmall,
+                spaceHeight: _spaceHeight,
+              ),
+              DepositWelcomeNotes(
+                depositType: depositType,
+              ),
+            ],
+          ),
+          _bottomButton(
+            context,
+            depositType,
+          ));
+    } else {
+      return const Pair(
+        SizedBox.shrink(),
+        SizedBox.shrink(),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) {
-        BankAccountBloc bankAccountBloc =
-            BankAccountBloc(bankAccountRepository: BankAccountRepository());
+        AccountInformationBloc accountInformationBloc =
+            AccountInformationBloc(accountRepository: AccountRepository());
         if (initialDepositType == null) {
-          bankAccountBloc.add(const RegisteredBankAccountCheck());
+          accountInformationBloc.add(GetAccountInformation());
         }
-        return bankAccountBloc;
+        return accountInformationBloc;
       },
-      child: BlocConsumer<BankAccountBloc, BankAccountState>(
+      child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
         listener: (context, state) {
           CustomLoadingOverlay.of(context).show(state.response.state);
         },
         builder: (context, state) {
-          DepositType depositType = initialDepositType ?? state.depositType;
-          return BalanceBaseForm(
-              title: 'Deposit',
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DepositStep(
-                    depositType: depositType,
-                  ),
-                  _spaceHeightSmall,
-                  GestureDetector(
-                    onTap: () async =>
-                        await launchUrl(Uri.parse(depositGuideUrl)),
-                    child: CustomTextNew(
-                      'VIEW DEPOSIT GUIDE',
-                      style: AskLoraTextStyles.subtitle2.copyWith(
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-                  _spaceHeight,
-                  DepositBankAccount(
-                    depositType: depositType,
-                    spaceHeightSmall: _spaceHeightSmall,
-                    spaceHeight: _spaceHeight,
-                  ),
-                  DepositWelcomeNotes(
-                    depositType: depositType,
-                  ),
-                ],
-              ),
-              bottomButton: _bottomButton(
-                context,
-                depositType,
-              ));
+          Pair<Widget, Widget> depositScreenArgs =
+              _depositScreenArgs(context, state);
+          return CustomScaffold(
+            enableBackNavigation: false,
+            body: CustomLayoutWithBlurPopUp(
+              content: BalanceBaseForm(
+                  title: S.of(context).deposit,
+                  content: depositScreenArgs.left,
+                  bottomButton: depositScreenArgs.right),
+              showPopUp: state.response.state == ResponseState.error,
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                  onPrimaryButtonTap: () => context
+                      .read<AccountInformationBloc>()
+                      .add(GetAccountInformation()),
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  secondaryButtonLabel: S.of(context).buttonBack,
+                  title: S.of(context).errorGettingInformationTitle,
+
+                  ///TODO : do localisation later as copywriting still not fixed yet
+                  subTitle:
+                      'There was an error when trying to get your Deposit Information. Please try reloading the page'),
+            ),
+          );
         },
       ),
     );
@@ -113,14 +154,14 @@ class DepositWelcomeScreen extends StatelessWidget {
                   ),
               secondaryButtonOnClick: () =>
                   TabsScreen.openAndRemoveAllRoute(context),
-              primaryButtonLabel: 'CONTINUE',
-              secondaryButtonLabel: 'MAYBE LATER'),
+              primaryButtonLabel: S.of(context).buttonContinue,
+              secondaryButtonLabel: S.of(context).buttonMaybeLater),
         );
       default:
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 30),
           child: PrimaryButton(
-            label: 'CONTINUE',
+            label: S.of(context).buttonContinue,
             onTap: () => DepositScreen.open(
               context: context,
               depositType: depositType,
@@ -132,4 +173,9 @@ class DepositWelcomeScreen extends StatelessWidget {
 
   static void open({required BuildContext context, DepositType? depositType}) =>
       Navigator.pushNamed(context, route, arguments: depositType);
+
+  DepositType _getDepositType(BankAccount? bankAccount) {
+    return initialDepositType ??
+        (bankAccount != null ? DepositType.type2 : DepositType.firstTime);
+  }
 }

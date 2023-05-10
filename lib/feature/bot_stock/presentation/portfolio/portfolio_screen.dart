@@ -22,6 +22,7 @@ import '../../../../core/utils/currency_enum.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../repository/bot_stock_repository.dart';
@@ -76,48 +77,59 @@ class PortfolioScreen extends StatelessWidget {
               previous.botActiveOrderResponse !=
                   current.botActiveOrderResponse ||
               previous.currency != current.currency,
-          builder: (context, state) => CustomLayoutWithBlurPopUp(
-            loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: S.of(context).errorGettingInformationTitle,
-              subTitle: S.of(context).errorGettingInformationPortfolioSubTitle,
-              primaryButtonLabel: S.of(context).buttonReloadPage,
-              onPrimaryButtonTap: () {
+          builder: (context, state) => RefreshIndicator(
+            onRefresh: () async {
+              ///fetch portfolio when current UserJourney already passed freeBotStock
+              if (UserJourney.compareUserJourney(
+                  context: context, target: UserJourney.freeBotStock)) {
                 context.read<PortfolioBloc>().add(const FetchActiveOrders());
                 context.read<PortfolioBloc>().add(FetchPortfolio());
-              },
-            ),
-            showPopUp:
-                (state.botActiveOrderResponse.state == ResponseState.error &&
-                        state.botActiveOrderResponse.errorCode != 403) ||
-                    state.portfolioResponse.state == ResponseState.error,
-            content: ListView(
-              padding: AppValues.screenHorizontalPadding
-                  .copyWith(top: 15, bottom: 15),
-              children: [
-                _botStockDetail(context, state),
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextNew(
-                        S.of(context).portfolioYourBotStock,
-                        style: AskLoraTextStyles.h2
-                            .copyWith(color: AskLoraColors.charcoal),
+              }
+            },
+            child: CustomLayoutWithBlurPopUp(
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                title: S.of(context).errorGettingInformationTitle,
+                subTitle:
+                    S.of(context).errorGettingInformationPortfolioSubTitle,
+                primaryButtonLabel: S.of(context).buttonReloadPage,
+                onPrimaryButtonTap: () {
+                  context.read<PortfolioBloc>().add(const FetchActiveOrders());
+                  context.read<PortfolioBloc>().add(FetchPortfolio());
+                },
+              ),
+              showPopUp:
+                  (state.botActiveOrderResponse.state == ResponseState.error &&
+                          state.botActiveOrderResponse.errorCode != 403) ||
+                      state.portfolioResponse.state == ResponseState.error,
+              content: ListView(
+                padding: AppValues.screenHorizontalPadding
+                    .copyWith(top: 15, bottom: 15),
+                children: [
+                  _botStockDetail(context, state),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextNew(
+                          S.of(context).portfolioYourBotStock,
+                          style: AskLoraTextStyles.h2
+                              .copyWith(color: AskLoraColors.charcoal),
+                        ),
                       ),
-                    ),
-                    const BotPortfolioFilter()
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                BotPortfolioList(
-                  userJourney: context.read<AppBloc>().state.userJourney,
-                  portfolioState: state,
-                ),
-              ],
+                      const BotPortfolioFilter()
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  BotPortfolioList(
+                    userJourney: context.read<AppBloc>().state.userJourney,
+                    portfolioState: state,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -226,13 +238,25 @@ class PortfolioScreen extends StatelessWidget {
                 FundingButton(
                   disabled: data == null,
                   fundingType: FundingType.fund,
-                  onTap: () => DepositWelcomeScreen.open(context: context),
+                  onTap: () {
+                    UserJourney.onAlreadyPassed(
+                        context: context,
+                        target: UserJourney.deposit,
+                        onTrueCallback: () {
+                          DepositWelcomeScreen.open(context: context);
+                        },
+                        onFalseCallback: () => DepositWelcomeScreen.open(
+                            context: context,
+                            depositType: DepositType.firstTime));
+                  },
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 FundingButton(
-                  disabled: data == null,
+                  disabled: !UserJourney.compareUserJourney(
+                          context: context, target: UserJourney.deposit) ||
+                      data == null,
                   fundingType: FundingType.withdraw,
                   onTap: () => WithdrawalBankDetailScreen.open(context),
                 ),

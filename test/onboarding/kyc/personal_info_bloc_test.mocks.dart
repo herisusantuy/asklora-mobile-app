@@ -86,6 +86,22 @@ class MockAccountRepository extends _i1.Mock implements _i4.AccountRepository {
         )),
       ) as _i5.Future<_i2.BaseResponse<_i6.GetAccountResponse>>);
   @override
+  _i5.Future<_i2.BaseResponse<_i6.GetAccountResponse>> getLocalAccount() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getLocalAccount,
+          [],
+        ),
+        returnValue: _i5.Future<_i2.BaseResponse<_i6.GetAccountResponse>>.value(
+            _FakeBaseResponse_0<_i6.GetAccountResponse>(
+          this,
+          Invocation.method(
+            #getLocalAccount,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.BaseResponse<_i6.GetAccountResponse>>);
+  @override
   _i5.Future<_i2.BaseResponse<_i7.UpgradeAccountResponse>> submitIBKR(
           _i8.UpgradeAccountRequest? upgradeAccountRequest) =>
       (super.noSuchMethod(
