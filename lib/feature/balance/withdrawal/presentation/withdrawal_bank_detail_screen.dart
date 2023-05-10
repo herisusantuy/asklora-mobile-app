@@ -38,7 +38,8 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
             enableBackNavigation: false,
             body: CustomLayoutWithBlurPopUp(
               showPopUp: state.response.state == ResponseState.error ||
-                  state.response.data?.bankAccount == null,
+                  (state.response.state != ResponseState.loading &&
+                      state.response.data?.bankAccount == null),
               loraPopUpMessageModel: LoraPopUpMessageModel(
                   primaryButtonLabel: S.of(context).buttonBack,
                   onPrimaryButtonTap: () => Navigator.pop(context),

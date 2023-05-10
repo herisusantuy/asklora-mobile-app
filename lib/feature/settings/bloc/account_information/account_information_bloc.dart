@@ -20,7 +20,6 @@ class AccountInformationBloc
 
   _onGetAccountInformation(GetAccountInformation event,
       Emitter<AccountInformationState> emit) async {
-    print('well');
     emit(state.copyWith(response: BaseResponse.loading()));
     var response = await _accountRepository.getAccount();
     emit(state.copyWith(response: response));
