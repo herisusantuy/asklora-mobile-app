@@ -254,7 +254,9 @@ class PortfolioScreen extends StatelessWidget {
                   height: 10,
                 ),
                 FundingButton(
-                  disabled: data == null,
+                  disabled: !UserJourney.compareUserJourney(
+                          context: context, target: UserJourney.deposit) ||
+                      data == null,
                   fundingType: FundingType.withdraw,
                   onTap: () => WithdrawalBankDetailScreen.open(context),
                 ),

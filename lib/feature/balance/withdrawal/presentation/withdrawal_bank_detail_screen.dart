@@ -48,8 +48,8 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
                       .add(GetAccountInformation()),
 
                   ///TODO : ignore localisation for now as this is not final UI and copywriting
-                  title: 'No Bank Account Found!',
-                  subTitle: 'Please try again later'),
+                  title: 'You can withdraw after your deposit is approved.',
+                  subTitle: 'Est. to be approved by 24 hours'),
               content: BalanceBaseForm(
                 content: BankAccountCard(
                   bankAccount: state.response.data?.bankAccount,
