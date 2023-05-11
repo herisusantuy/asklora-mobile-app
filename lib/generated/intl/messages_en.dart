@@ -46,7 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m10(currency) => "Total Botstock Values (${currency})";
 
-  static String m11(currency) => "Total Portfolio Value (${currency})";
+  static String m11(currency) => "Withdrawable Amount (${currency})";
 
   static String m12(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";
