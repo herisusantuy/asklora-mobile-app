@@ -1473,10 +1473,10 @@ class S {
     );
   }
 
-  /// `Total Portfolio Value ({currency})`
+  /// `Withdrawable Amount ({currency})`
   String portfolioWithdrawableAmount(String currency) {
     return Intl.message(
-      'Total Portfolio Value ($currency)',
+      'Withdrawable Amount ($currency)',
       name: 'portfolioWithdrawableAmount',
       desc: '',
       args: [currency],

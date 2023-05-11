@@ -210,7 +210,7 @@
     }
   },
   "portfolioTotalValue": "Total Portfolio Value",
-  "portfolioWithdrawableAmount": "Total Portfolio Value ({currency})",
+  "portfolioWithdrawableAmount": "Withdrawable Amount ({currency})",
   "@portfolioWithdrawableAmount": {
     "placeholders": {
       "currency": {

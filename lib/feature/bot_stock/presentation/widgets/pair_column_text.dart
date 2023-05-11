@@ -9,6 +9,7 @@ class PairColumnText extends StatelessWidget {
   final String rightTitle;
   final String rightSubTitle;
   final String? rightTooltipText;
+  final double? spaceWidth;
 
   const PairColumnText(
       {required this.leftTitle,
@@ -17,13 +18,14 @@ class PairColumnText extends StatelessWidget {
       required this.rightSubTitle,
       this.leftTooltipText,
       this.rightTooltipText,
+      this.spaceWidth,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
           child: ColumnText(
@@ -31,6 +33,10 @@ class PairColumnText extends StatelessWidget {
               subTitle: leftSubTitle,
               tooltipText: leftTooltipText),
         ),
+        if (spaceWidth != null)
+          SizedBox(
+            width: spaceWidth,
+          ),
         Expanded(
           child: ColumnText(
               title: rightTitle,

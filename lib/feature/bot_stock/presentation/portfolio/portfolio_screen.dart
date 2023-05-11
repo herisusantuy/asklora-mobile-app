@@ -199,21 +199,21 @@ class PortfolioScreen extends StatelessWidget {
                     content: Column(
                       children: [
                         PairColumnText(
-                            leftTitle: S
-                                .of(context)
-                                .portfolioWithdrawableAmount(
-                                    state.currency.value),
-                            rightTitle: S
-                                .of(context)
-                                .portfolioBuyingPower(state.currency.value),
-                            rightTooltipText:
-                                S.of(context).portfolioBuyingPowerToolTip,
-                            leftSubTitle: data?.withdrawableAmount != null
-                                ? (data!.withdrawableAmount)
-                                    .convertToCurrencyDecimal()
-                                : '/',
-                            rightSubTitle: (data?.buyingPower ?? 0)
-                                .convertToCurrencyDecimal()),
+                          leftTitle: S.of(context).portfolioWithdrawableAmount(
+                              state.currency.value),
+                          leftSubTitle: data?.withdrawableAmount != null
+                              ? (data!.withdrawableAmount)
+                                  .convertToCurrencyDecimal()
+                              : '/',
+                          rightTitle: S
+                              .of(context)
+                              .portfolioBuyingPower(state.currency.value),
+                          rightTooltipText:
+                              S.of(context).portfolioBuyingPowerToolTip,
+                          rightSubTitle: (data?.buyingPower ?? 0)
+                              .convertToCurrencyDecimal(),
+                          spaceWidth: 6,
+                        ),
                         const SizedBox(
                           height: 14,
                         ),
@@ -227,6 +227,7 @@ class PortfolioScreen extends StatelessWidget {
                           rightSubTitle: data?.withdrawableAmount != null
                               ? '${(data!.profit).convertToCurrencyDecimal()}%'
                               : '/',
+                          spaceWidth: 6,
                         ),
                       ],
                     ))),
