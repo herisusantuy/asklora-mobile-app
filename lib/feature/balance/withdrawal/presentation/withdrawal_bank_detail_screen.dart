@@ -40,16 +40,10 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
                   (state.response.state != ResponseState.loading &&
                       state.response.data?.bankAccount == null),
               loraPopUpMessageModel: LoraPopUpMessageModel(
-                  secondaryButtonLabel: S.of(context).buttonBack,
-                  onSecondaryButtonTap: () => Navigator.pop(context),
-                  primaryButtonLabel: S.of(context).buttonReloadPage,
-                  onPrimaryButtonTap: () => context
-                      .read<AccountInformationBloc>()
-                      .add(GetAccountInformation()),
-
-                  ///TODO : ignore localisation for now as this is not final UI and copywriting
-                  title: 'You can withdraw after your deposit is approved.',
-                  subTitle: 'Est. to be approved by 24 hours'),
+                  primaryButtonLabel: S.of(context).buttonBackToPortfolio,
+                  onPrimaryButtonTap: () => Navigator.pop(context),
+                  title: S.of(context).errorWithdrawalUnavailableTitle,
+                  subTitle: S.of(context).errorWithdrawalUnavailableSubTitle),
               content: BalanceBaseForm(
                 content: BankAccountCard(
                   bankAccount: state.response.data?.bankAccount,
