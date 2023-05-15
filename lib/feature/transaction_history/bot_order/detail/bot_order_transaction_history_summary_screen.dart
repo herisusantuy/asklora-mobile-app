@@ -14,10 +14,12 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
           previous.response.state != current.response.state,
       builder: (context, state) {
         return ListView(
-          reverse: true,
           children: (state.response.data?.summary ?? [])
-              .map((e) =>
-                  _getCard(context, e, state.response.data?.summary.indexOf(e)))
+              .map((e) => _getCard(
+                  context,
+                  e,
+                  state.response.data?.summary.indexOf(e),
+                  state.response.data?.summary.length))
               .toList(),
         );
       });
@@ -25,8 +27,9 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
   Widget _getCard(
       BuildContext context,
       BotSummaryTransactionHistoryModel botSummaryTransactionHistoryModel,
-      int? index) {
-    if (index == 0) {
+      int? index,
+      int? dataLength) {
+    if (index == (dataLength ?? 0) - 1) {
       return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,
           S.of(context).orderStarted, index);
     } else if (botStatusType == BotStatus.closed) {

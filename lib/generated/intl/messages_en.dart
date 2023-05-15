@@ -106,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "If you extend the Botstock period, you will incur additional fees"),
         "buttonBack": MessageLookupByLibrary.simpleMessage("BACK"),
+        "buttonBackToPortfolio":
+            MessageLookupByLibrary.simpleMessage("BACK TO PORTFOLIO"),
         "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "buttonCancelTrade":
             MessageLookupByLibrary.simpleMessage("CANCEL TRADE"),
@@ -172,6 +174,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorGettingInformationTransactionHistorySubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "There was an error when trying to get the transaction history. Please try reloading the page"),
+        "errorWithdrawalUnavailableSubTitle": MessageLookupByLibrary.simpleMessage(
+            "You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing "),
+        "errorWithdrawalUnavailableTitle":
+            MessageLookupByLibrary.simpleMessage("Withdrawal Unavailable"),
         "estMaxLossLevel":
             MessageLookupByLibrary.simpleMessage("Est. Max Loss Level"),
         "estMaxLossPercent":

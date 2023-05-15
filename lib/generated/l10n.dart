@@ -300,6 +300,16 @@ class S {
     );
   }
 
+  /// `BACK TO PORTFOLIO`
+  String get buttonBackToPortfolio {
+    return Intl.message(
+      'BACK TO PORTFOLIO',
+      name: 'buttonBackToPortfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Price`
   String get currentPrice {
     return Intl.message(
@@ -795,6 +805,26 @@ class S {
     return Intl.message(
       'There was an error when trying to get the transaction history. Please try reloading the page',
       name: 'errorGettingInformationTransactionHistorySubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdrawal Unavailable`
+  String get errorWithdrawalUnavailableTitle {
+    return Intl.message(
+      'Withdrawal Unavailable',
+      name: 'errorWithdrawalUnavailableTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing `
+  String get errorWithdrawalUnavailableSubTitle {
+    return Intl.message(
+      'You don’t have any funds to withdraw. You haven’t deposited yet or your deposit might still be processing ',
+      name: 'errorWithdrawalUnavailableSubTitle',
       desc: '',
       args: [],
     );
