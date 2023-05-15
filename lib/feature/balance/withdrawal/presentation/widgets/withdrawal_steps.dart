@@ -60,7 +60,7 @@ class WithdrawalSteps extends StatelessWidget {
                 content: Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: CustomTextNew(
-                    'Your withdrawal can take up to 2 working days.',
+                    S.of(context).withdrawalWorkingDays,
                     style: AskLoraTextStyles.body2,
                   ),
                 ))
