@@ -441,6 +441,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transaction History"),
         "transactionHistoryToday":
             MessageLookupByLibrary.simpleMessage("Today"),
+        "transferTo": MessageLookupByLibrary.simpleMessage("Transfer to"),
         "unableToProcessDepositSubTitle": MessageLookupByLibrary.simpleMessage(
             "We’re having some trouble processing your deposit request. Please try again"),
         "unableToProcessDepositTitle":

@@ -49,7 +49,10 @@ class CustomStep extends StatelessWidget {
 
   Widget get _drawContent => Container(
         transform: Matrix4.translationValues(0, -4, 0),
-        margin: EdgeInsets.only(left: spaceHorizontal, bottom: spaceVertical),
+        margin: EdgeInsets.only(
+          left: spaceHorizontal,
+          bottom: drawLine ? spaceVertical : 0,
+        ),
         child: widgetStep ??
             CustomTextNew(
               label ?? '',

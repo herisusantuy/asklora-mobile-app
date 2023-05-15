@@ -22,18 +22,7 @@ class DepositBankAccount extends StatelessWidget {
             bankAccount: bankAccount!,
           ),
           spaceHeightSmall,
-          GestureDetector(
-            onTap: () => DepositWelcomeScreen.open(
-              context: context,
-              depositType: DepositType.firstTime,
-            ),
-            child: CustomTextNew(
-              'CHANGE BANK ACC',
-              style: AskLoraTextStyles.subtitle2.copyWith(
-                decoration: TextDecoration.underline,
-              ),
-            ),
-          ),
+          ChangeBankAccountButton(),
           spaceHeight,
         ],
       );

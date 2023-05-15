@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/presentation/buttons/button_pair.dart';
+import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
@@ -10,11 +10,14 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
+import '../../../../core/utils/app_icons.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../widgets/balance_base_form.dart';
-import '../../widgets/bank_account_card.dart';
+import '../../widgets/change_bank_account_button.dart';
+import 'widgets/withdrawal_steps.dart';
 import 'withdrawal_amount/withdrawal_amount_screen.dart';
 
 class WithdrawalBankDetailScreen extends StatelessWidget {
@@ -45,14 +48,27 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
                   title: S.of(context).errorWithdrawalUnavailableTitle,
                   subTitle: S.of(context).errorWithdrawalUnavailableSubTitle),
               content: BalanceBaseForm(
-                content: BankAccountCard(
-                  bankAccount: state.response.data?.bankAccount,
-                ),
+                content: state.response.data?.bankAccount != null
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _sourceTransfer,
+                          _transferToIcon(context),
+                          WithdrawalSteps(
+                            bankAccount: state.response.data?.bankAccount,
+                          ),
+                          const SizedBox(
+                            height: 48,
+                          ),
+                          const ChangeBankAccountButton()
+                        ],
+                      )
+                    : const SizedBox.shrink(),
                 bottomButton: state.response.state == ResponseState.success &&
                         state.response.data?.bankAccount != null
                     ? _bottomButton(context)
                     : const SizedBox.shrink(),
-                title: S.of(context).buttonWithdraw,
+                title: S.of(context).buttonWithdraw.toTitleCase,
               ),
             ),
           );
@@ -61,26 +77,54 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomButton(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 30),
+  Widget get _sourceTransfer => Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            border: Border.all(color: AskLoraColors.darkGray),
+            borderRadius: BorderRadius.circular(8)),
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        child: CustomTextNew(
+          'Asklora',
+          style: AskLoraTextStyles.subtitle2,
+        ),
+      );
+
+  Widget _transferToIcon(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(left: 12.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomTextNew(
-              S.of(context).withdrawalWorkingDays,
-              style: AskLoraTextStyles.subtitle3
-                  .copyWith(color: AskLoraColors.charcoal),
+            _greenVerticalLine,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                getSvgIcon('icon_arrow_down_withdrawal'),
+                const SizedBox(
+                  width: 13,
+                ),
+                CustomTextNew(
+                  S.of(context).transferTo,
+                  style: AskLoraTextStyles.subtitle3,
+                )
+              ],
             ),
-            const SizedBox(
-              height: 30,
-            ),
-            ButtonPair(
-                primaryButtonOnClick: () =>
-                    WithdrawalAmountScreen.open(context),
-                secondaryButtonOnClick: () {},
-                primaryButtonLabel: S.of(context).buttonNext,
-                secondaryButtonLabel: S.of(context).changeBankAccount)
+            _greenVerticalLine,
           ],
         ),
+      );
+
+  Widget get _greenVerticalLine => Container(
+        margin: const EdgeInsets.only(left: 16),
+        height: 15,
+        width: 2,
+        color: AskLoraColors.primaryGreen,
+      );
+
+  Widget _bottomButton(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 30, bottom: 30),
+        child: PrimaryButton(
+            label: S.of(context).buttonWithdraw,
+            onTap: () => WithdrawalAmountScreen.open(context)),
       );
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);

@@ -325,6 +325,7 @@
   "unableToProcessWithdrawalSubTitle": "We’re having some trouble processing your withdrawal request. Please try again",
   "to": "To",
   "transactionFee": "Transaction fee",
+  "transferTo": "Transfer to",
   "totalAmount": "Total amount",
   "withdrawalAmount": "Withdrawal Amount",
   "withdrawalWorkingDays": "Your withdrawal can take up to 2 working days.",

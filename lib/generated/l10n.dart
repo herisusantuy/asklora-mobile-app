@@ -2343,6 +2343,16 @@ class S {
     );
   }
 
+  /// `Transfer to`
+  String get transferTo {
+    return Intl.message(
+      'Transfer to',
+      name: 'transferTo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Total amount`
   String get totalAmount {
     return Intl.message(

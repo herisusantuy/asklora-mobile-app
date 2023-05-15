@@ -73,7 +73,7 @@ class MilestonesStepDetails extends StatelessWidget {
                 _startInvestingStep(S.of(context).createAnAccount,
                     S.of(context).min(1.toString())),
                 _startInvestingStep(
-                    S.of(context).defineInvestmentStyle.toTitleCase(),
+                    S.of(context).defineInvestmentStyle.toTitleCase,
                     S.of(context).min(2.toString())),
                 _startInvestingStep(S.of(context).openInvestmentAccount,
                     S.of(context).min(20.toString())),

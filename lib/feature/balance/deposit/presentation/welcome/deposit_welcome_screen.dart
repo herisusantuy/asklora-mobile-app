@@ -24,6 +24,7 @@ import '../../../../settings/domain/bank_account.dart';
 import '../../../../tabs/tabs_screen.dart';
 import '../../../widgets/balance_base_form.dart';
 import '../../../widgets/bank_account_card.dart';
+import '../../../widgets/change_bank_account_button.dart';
 import '../../utils/deposit_utils.dart';
 import '../deposit_screen.dart';
 import 'widgets/deposit_step/domain/deposit_step_model.dart';
