@@ -17,7 +17,7 @@ class ChangeBankAccountButton extends StatelessWidget {
         ),
         child: CustomTextNew(
           S.of(context).changeBankAccount,
-          style: AskLoraTextStyles.subtitle2.copyWith(
+          style: AskLoraTextStyles.h6.copyWith(
             decoration: TextDecoration.underline,
           ),
         ),
