@@ -2,38 +2,37 @@ part of 'transaction_history_bloc.dart';
 
 class TransactionHistoryState extends Equatable {
   const TransactionHistoryState({
-    this.response = const BaseResponse(),
-    this.allTransactions = const [],
-    this.botOrderTransactions = const [],
-    this.transferTransactions = const [],
+    this.allTransactionsResponse = const BaseResponse(),
+    this.botTransactionsResponse = const BaseResponse(),
+    this.transferTransactionsResponse = const BaseResponse(),
   });
 
-  final BaseResponse<List<TransactionModel>> response;
-  final List<GroupedTransactionModel> allTransactions;
-  final List<GroupedTransactionModel> botOrderTransactions;
-  final List<GroupedTransactionModel> transferTransactions;
+  final BaseResponse<List<GroupedTransactionModel>> allTransactionsResponse;
+  final BaseResponse<List<GroupedTransactionModel>> botTransactionsResponse;
+  final BaseResponse<List<GroupedTransactionModel>>
+      transferTransactionsResponse;
 
   @override
   List<Object?> get props {
     return [
-      response,
-      allTransactions,
-      botOrderTransactions,
-      transferTransactions
+      allTransactionsResponse,
+      botTransactionsResponse,
+      transferTransactionsResponse,
     ];
   }
 
   TransactionHistoryState copyWith({
-    BaseResponse<List<TransactionModel>>? response,
-    List<GroupedTransactionModel>? allTransactions,
-    List<GroupedTransactionModel>? botOrderTransactions,
-    List<GroupedTransactionModel>? transferTransactions,
+    BaseResponse<List<GroupedTransactionModel>>? allTransactionsResponse,
+    BaseResponse<List<GroupedTransactionModel>>? botTransactionsResponse,
+    BaseResponse<List<GroupedTransactionModel>>? transferTransactionsResponse,
   }) {
     return TransactionHistoryState(
-      response: response ?? this.response,
-      allTransactions: allTransactions ?? this.allTransactions,
-      botOrderTransactions: botOrderTransactions ?? this.botOrderTransactions,
-      transferTransactions: transferTransactions ?? this.transferTransactions,
+      allTransactionsResponse:
+          allTransactionsResponse ?? this.allTransactionsResponse,
+      botTransactionsResponse:
+          botTransactionsResponse ?? this.botTransactionsResponse,
+      transferTransactionsResponse:
+          transferTransactionsResponse ?? this.transferTransactionsResponse,
     );
   }
 }

@@ -7,9 +7,11 @@ import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart'
-    as _i6;
-import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_model.dart'
+    as _i7;
+import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart'
     as _i5;
+import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_history_model.dart'
+    as _i6;
 import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -46,24 +48,36 @@ class MockTransactionHistoryRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.BaseResponse<List<_i5.TransactionModel>>>
-      fetchTransactionsHistory() => (super.noSuchMethod(
+  _i4.Future<_i2.BaseResponse<List<_i5.GroupedTransactionModel>>>
+      fetchTransactionsHistory(
+              _i6.TransactionHistoryType? transactionHistoryType) =>
+          (super.noSuchMethod(
             Invocation.method(
               #fetchTransactionsHistory,
-              [],
+              [transactionHistoryType],
             ),
-            returnValue:
-                _i4.Future<_i2.BaseResponse<List<_i5.TransactionModel>>>.value(
-                    _FakeBaseResponse_0<List<_i5.TransactionModel>>(
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i5.GroupedTransactionModel>>>.value(
+                _FakeBaseResponse_0<List<_i5.GroupedTransactionModel>>(
               this,
               Invocation.method(
                 #fetchTransactionsHistory,
-                [],
+                [transactionHistoryType],
               ),
             )),
-          ) as _i4.Future<_i2.BaseResponse<List<_i5.TransactionModel>>>);
+          ) as _i4.Future<_i2.BaseResponse<List<_i5.GroupedTransactionModel>>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i6.BotDetailTransactionHistoryResponse>>
+  List<_i5.GroupedTransactionModel> groupedTransactionModels(
+          List<_i6.TransactionHistoryModel>? transactions) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #groupedTransactionModels,
+          [transactions],
+        ),
+        returnValue: <_i5.GroupedTransactionModel>[],
+      ) as List<_i5.GroupedTransactionModel>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i7.BotDetailTransactionHistoryResponse>>
       fetchBotTransactionsDetail(String? orderId) => (super.noSuchMethod(
             Invocation.method(
               #fetchBotTransactionsDetail,
@@ -71,8 +85,8 @@ class MockTransactionHistoryRepository extends _i1.Mock
             ),
             returnValue: _i4.Future<
                     _i2.BaseResponse<
-                        _i6.BotDetailTransactionHistoryResponse>>.value(
-                _FakeBaseResponse_0<_i6.BotDetailTransactionHistoryResponse>(
+                        _i7.BotDetailTransactionHistoryResponse>>.value(
+                _FakeBaseResponse_0<_i7.BotDetailTransactionHistoryResponse>(
               this,
               Invocation.method(
                 #fetchBotTransactionsDetail,
@@ -80,5 +94,5 @@ class MockTransactionHistoryRepository extends _i1.Mock
               ),
             )),
           ) as _i4.Future<
-              _i2.BaseResponse<_i6.BotDetailTransactionHistoryResponse>>);
+              _i2.BaseResponse<_i7.BotDetailTransactionHistoryResponse>>);
 }

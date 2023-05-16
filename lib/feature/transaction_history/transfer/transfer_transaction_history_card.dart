@@ -1,11 +1,11 @@
 part of '../presentation/transaction_history_screen.dart';
 
 class TransferTransactionHistoryCard extends StatelessWidget {
-  final TransactionModel transactionModel;
+  final TransactionHistoryModel transactionHistoryModel;
   final bool showBottomBorder;
 
   const TransferTransactionHistoryCard(
-      {required this.transactionModel,
+      {required this.transactionHistoryModel,
       required this.showBottomBorder,
       Key? key})
       : super(key: key);
@@ -25,13 +25,13 @@ class TransferTransactionHistoryCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: CustomTextNew(transactionModel.title ?? ''),
+                child: CustomTextNew(transactionHistoryModel.title),
               ),
               const SizedBox(
                 width: 14,
               ),
               CustomTextNew(
-                'HKD ${transactionModel.amount}',
+                'HKD ${transactionHistoryModel.amountString}',
                 style: AskLoraTextStyles.subtitle2,
               ),
             ],
@@ -40,7 +40,7 @@ class TransferTransactionHistoryCard extends StatelessWidget {
             height: 7,
           ),
           CustomTextNew(
-            transactionModel.status ?? '',
+            transactionHistoryModel.status,
             style:
                 AskLoraTextStyles.body2.copyWith(color: AskLoraColors.darkGray),
           )

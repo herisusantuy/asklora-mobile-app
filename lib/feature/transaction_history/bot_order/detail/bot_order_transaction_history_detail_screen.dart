@@ -18,7 +18,7 @@ import '../../../bot_stock/presentation/widgets/pair_column_text.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../chart/presentation/chart_animation.dart';
 import '../../domain/grouped_model.dart';
-import '../../domain/transaction_model.dart';
+import '../../domain/transaction_history_model.dart';
 import '../../presentation/widgets/transaction_history_group_title.dart';
 import '../../presentation/widgets/transaction_history_tab.dart';
 import '../../repository/transaction_history_repository.dart';
@@ -42,11 +42,11 @@ part 'widgets/bot_order_transaction_history_activities_group_widget.dart';
 part 'widgets/bot_order_transaction_history_activities_card.dart';
 
 class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
-  final TransactionModel transactionModel;
+  final TransactionHistoryModel transactionHistoryModel;
   static const String route = '/bot_transaction_history_detail_screen';
 
   const BotOrderTransactionHistoryDetailScreen(
-      {required this.transactionModel, Key? key})
+      {required this.transactionHistoryModel, Key? key})
       : super(key: key);
 
   @override
@@ -54,7 +54,7 @@ class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => BotTransactionHistoryDetailBloc(
           transactionHistoryRepository: TransactionHistoryRepository())
-        ..add(FetchBotTransactionDetail(transactionModel.id!)),
+        ..add(FetchBotTransactionDetail(transactionHistoryModel.idString)),
       child: CustomScaffold(
         enableBackNavigation: false,
         body: BlocConsumer<BotTransactionHistoryDetailBloc,
@@ -77,12 +77,13 @@ class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
                 onSecondaryButtonTap: () => Navigator.pop(context),
                 onPrimaryButtonTap: () => context
                     .read<BotTransactionHistoryDetailBloc>()
-                    .add(FetchBotTransactionDetail(transactionModel.id!)),
+                    .add(FetchBotTransactionDetail(
+                        transactionHistoryModel.idString)),
               ),
               showPopUp: state.response.state == ResponseState.error,
               content: BotOrderTransactionHistoryDetailContent(
-                title: transactionModel.titleString,
-                botStatus: transactionModel.statusString,
+                title: transactionHistoryModel.title,
+                botStatus: transactionHistoryModel.status,
               ),
             );
           },
@@ -91,6 +92,7 @@ class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context, TransactionModel transactionModel) =>
-      Navigator.pushNamed(context, route, arguments: transactionModel);
+  static void open(BuildContext context,
+          TransactionHistoryModel transactionHistoryModel) =>
+      Navigator.pushNamed(context, route, arguments: transactionHistoryModel);
 }

@@ -1,33 +1,74 @@
 import '../../../core/domain/base_response.dart';
-import '../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../core/utils/date_utils.dart';
 import '../bot_order/detail/domain/bot_activities_transaction_history_model.dart';
 import '../bot_order/detail/domain/bot_detail_transaction_history_response.dart';
+import '../domain/grouped_model.dart';
+import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_history_api_client.dart';
-import '../domain/transaction_model.dart';
+import '../domain/transaction_history_model.dart';
+import '../domain/transaction_history_request.dart';
 
 class TransactionHistoryRepository {
   final TransactionHistoryApiClient _transactionHistoryApiClient =
       TransactionHistoryApiClient();
 
-  Future<BaseResponse<List<TransactionModel>>>
-      fetchTransactionsHistory() async {
+  Future<BaseResponse<List<GroupedTransactionModel>>> fetchTransactionsHistory(
+      TransactionHistoryType transactionHistoryType) async {
     try {
-      List<TransactionModel> transactions = [];
-      var botOrderTransactionHistoryResponse =
-          await _transactionHistoryApiClient.fetchBotOrderTransactionHistory([
-        BotStatus.active.value,
-        BotStatus.pending.value,
-        BotStatus.closed.value,
-        BotStatus.cancel.value
-      ]);
+      var response = await _transactionHistoryApiClient.fetchTransactionHistory(
+          TransactionHistoryRequest(transactionHistoryType.name));
 
-      ///todo fetch transfer transaction history when BE ready
-      transactions.addAll(List.from(botOrderTransactionHistoryResponse.data
-          .map((element) => BotOrderTransactionModel.fromJson(element))));
-      return BaseResponse.complete(transactions);
+      return BaseResponse.complete(groupedTransactionModels(List.from(response
+          .data
+          .map((element) => TransactionHistoryModel.fromJson(element)))));
     } catch (e) {
       return BaseResponse.error();
     }
+  }
+
+  List<GroupedTransactionModel> groupedTransactionModels(
+      List<TransactionHistoryModel> transactions) {
+    List<GroupedTransactionModel> groupedTransactions = [];
+    DateTime dateTimeNow = DateTime.now();
+    DateTime dateNow =
+        DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day);
+    for (var element in transactions) {
+      DateTime createdAt = formatDateOnly(element.created);
+      if (createdAt.compareTo(dateNow) == 0) {
+        int groupIndex = groupedTransactions
+            .indexWhere((element) => element.groupType == GroupType.today);
+        if (groupIndex >= 0) {
+          ///ADD EXISTING GROUP TODAY
+          groupedTransactions[groupIndex] = groupedTransactions[groupIndex]
+              .copyWith(
+                  data: List.from(groupedTransactions[groupIndex].data)
+                    ..add(element));
+        } else {
+          ///CREATE NEW GROUP TODAY
+          groupedTransactions.add(GroupedTransactionModel(
+              groupType: GroupType.today, groupTitle: '', data: [element]));
+        }
+      } else {
+        ///CREATE OTHER GROUP EACH DATE
+        String createdAtFormatted = formatDateTimeAsString(createdAt);
+        int groupIndex = groupedTransactions
+            .indexWhere((element) => element.groupTitle == createdAtFormatted);
+        if (groupIndex >= 0) {
+          ///ADD EXISTING GROUP
+          groupedTransactions[groupIndex] = groupedTransactions[groupIndex]
+              .copyWith(
+                  data: List.from(groupedTransactions[groupIndex].data)
+                    ..add(element));
+        } else {
+          ///CREATE NEW GROUP
+          groupedTransactions.add(GroupedTransactionModel(
+              groupType: GroupType.others,
+              groupTitle: createdAtFormatted,
+              data: [element]));
+        }
+      }
+    }
+    return groupedTransactions;
   }
 
   Future<BaseResponse<BotDetailTransactionHistoryResponse>>
@@ -43,7 +84,6 @@ class TransactionHistoryRepository {
           activities: _addIndexChartData(
               botDetailTransactionHistoryResponse.activities)));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }
