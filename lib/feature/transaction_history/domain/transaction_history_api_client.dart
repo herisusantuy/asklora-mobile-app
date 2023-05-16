@@ -8,7 +8,7 @@ class TransactionHistoryApiClient {
   Future<Response> fetchTransactionHistory(
           TransactionHistoryRequest transactionHistoryRequest) async =>
       await AskloraApiClient().get(
-          endpoint: endpointBotOrderHistoryV2,
+          endpoint: endpointTransactionHistory,
           queryParameters: transactionHistoryRequest.toJson());
 
   Future<Response> fetchBotTransactionDetail(String orderId) async =>
