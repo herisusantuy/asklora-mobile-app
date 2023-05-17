@@ -34,7 +34,7 @@ format: ## Formats the code
 
 lint: ## Lints the code
 	@echo "╠ Verifying code..."
-	@dart analyze . --no-fatal-warnings || (echo "▓▓ Lint error ▓▓"; exit 1)
+	@dart analyze . || (echo "▓▓ Lint error ▓▓"; exit 1)
 
 upgrade: clean ## Upgrades dependencies
 	@echo "╠ Upgrading dependencies..."
