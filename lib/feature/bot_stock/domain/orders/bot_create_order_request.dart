@@ -27,7 +27,7 @@ class BotCreateOrderRequest {
       required this.spotDate,
       required this.investmentAmount,
       required this.price,
-      this.fraction = false,
+      this.fraction = true,
       this.margin = 1,
       this.orderType = 'POOL',
       this.isAggregate = false,

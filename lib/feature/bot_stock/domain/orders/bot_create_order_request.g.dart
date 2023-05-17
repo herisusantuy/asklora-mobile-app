@@ -14,7 +14,7 @@ BotCreateOrderRequest _$BotCreateOrderRequestFromJson(
       spotDate: json['spot_date'] as String,
       investmentAmount: (json['investment_amount'] as num).toDouble(),
       price: (json['price'] as num).toDouble(),
-      fraction: json['fraction'] as bool? ?? false,
+      fraction: json['fraction'] as bool? ?? true,
       margin: json['margin'] as int? ?? 1,
       orderType: json['order_type'] as String? ?? 'POOL',
       isAggregate: json['is_aggregate'] as bool? ?? false,
