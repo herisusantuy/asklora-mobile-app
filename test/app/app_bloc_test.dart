@@ -1,7 +1,5 @@
 import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
-import 'package:asklora_mobile_app/app/domain/user_journey_response.dart';
 import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
-import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart';
 import 'package:asklora_mobile_app/core/domain/token/token_api_client.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -24,9 +22,6 @@ void main() async {
     late AppBloc appBloc;
     late MockTokenRepository tokenRepository;
     late MockUserJourneyRepository userJourneyRepository;
-    BaseResponse<UserJourneyResponse> userJourneyResponse =
-        BaseResponse.complete(
-            const UserJourneyResponse('uid', 'updated', 'kyc', 'data', 0, ''));
 
     setUpAll(() async {
       tokenRepository = MockTokenRepository();

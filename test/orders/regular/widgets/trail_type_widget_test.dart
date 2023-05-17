@@ -11,7 +11,7 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('Trail Type Widget Test', () {
-    Future<void> _buildTrailTypeWidget(WidgetTester tester,
+    Future<void> buildTrailTypeWidget(WidgetTester tester,
         {bool showOnlyInformation = false}) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -51,13 +51,13 @@ void main() {
         find.byKey(const Key('trail_type_percentage_choice_button'));
 
     testWidgets('First render trail type widget', (WidgetTester tester) async {
-      await _buildTrailTypeWidget(tester);
+      await buildTrailTypeWidget(tester);
       expect(trailTypeButton, findsOneWidget);
     });
 
     testWidgets('Tap and show bottom sheet widget',
         (WidgetTester tester) async {
-      await _buildTrailTypeWidget(tester);
+      await buildTrailTypeWidget(tester);
       expect(trailTypeButton, findsOneWidget);
       await tester.tap(trailTypeButton);
       await tester.pump();
@@ -68,7 +68,7 @@ void main() {
 
     testWidgets('Tap choice amount and percentage',
         (WidgetTester tester) async {
-      await _buildTrailTypeWidget(tester);
+      await buildTrailTypeWidget(tester);
       expect(trailTypeButton, findsOneWidget);
       await tester.tap(trailTypeButton);
       await tester.pump();
@@ -106,7 +106,7 @@ void main() {
     testWidgets(
         'render only the information with default state trailType=percentage',
         (WidgetTester tester) async {
-      await _buildTrailTypeWidget(tester, showOnlyInformation: true);
+      await buildTrailTypeWidget(tester, showOnlyInformation: true);
       expect(trailTypeButton, findsNothing);
       expect(find.text('Trail Percentage'), findsOneWidget);
     });

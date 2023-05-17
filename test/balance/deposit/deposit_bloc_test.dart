@@ -82,10 +82,7 @@ void main() async {
                 proofOfRemittanceImages: [
                   PlatformFile(name: 'test_file', size: 2000),
                 ],
-              ),
-              const DepositState(
-                proofOfRemittanceImages: [],
-              ),
+              )
             });
 
     blocTest<DepositBloc, DepositState>(

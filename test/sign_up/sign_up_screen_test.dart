@@ -7,7 +7,7 @@ import '../mocks/mocks.dart';
 
 void main() async {
   group('Sign Up Screen Widget Tests', () {
-    Future<void> _buildHomeScreen(WidgetTester tester) async {
+    Future<void> buildHomeScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const SignUpScreen(),
@@ -18,7 +18,7 @@ void main() async {
     testWidgets(
         'Render Sign-Up screen with `Username`, `Password`, `Submit` button and password instructions',
         (tester) async {
-      await _buildHomeScreen(tester);
+      await buildHomeScreen(tester);
       var emailInput = find.byKey(const Key('sign_up_email_input'));
       expect(emailInput, findsOneWidget);
       var passwordInput = find.byKey(const Key('sign_up_password_input'));
@@ -28,7 +28,7 @@ void main() async {
     });
 
     testWidgets('Not entering anything', (tester) async {
-      await _buildHomeScreen(tester);
+      await buildHomeScreen(tester);
 
       //password instruction should be greyed and icon should be ❗
       expect(find.text('min. 8 - max. 16 characters'), findsNothing);
@@ -43,7 +43,7 @@ void main() async {
     });
 
     testWidgets('Entering wrong email format', (tester) async {
-      await _buildHomeScreen(tester);
+      await buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_email_input')), 'kkkkk');
       await tester.pump();
@@ -58,7 +58,7 @@ void main() async {
     });
 
     testWidgets('Entering wrong password format', (tester) async {
-      await _buildHomeScreen(tester);
+      await buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_password_input')), 'kkkkk');
       await tester.pump();
@@ -78,7 +78,7 @@ void main() async {
 
     testWidgets('Entering correct email but wrong password format',
         (tester) async {
-      await _buildHomeScreen(tester);
+      await buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_email_input')), 'testing@xyz.com');
       await tester.enterText(
@@ -103,7 +103,7 @@ void main() async {
 
     testWidgets('Entering wrong email but correct password format',
         (tester) async {
-      await _buildHomeScreen(tester);
+      await buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_email_input')), 'kkkkk');
       await tester.enterText(
@@ -128,7 +128,7 @@ void main() async {
 
     testWidgets('Entering correct email and correct password format',
         (tester) async {
-      await _buildHomeScreen(tester);
+      await buildHomeScreen(tester);
       await tester.enterText(
           find.byKey(const Key('sign_up_email_input')), 'testing@xyz.com');
       await tester.enterText(

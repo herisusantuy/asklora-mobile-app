@@ -14,7 +14,7 @@ void main() {
   group('Stop Limit Order Widget Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
-    Future<void> _buildStopLimitOrderWidget(
+    Future<void> buildStopLimitOrderWidget(
         WidgetTester tester, OrderState orderState) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -50,7 +50,7 @@ void main() {
 
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
-      await _buildStopLimitOrderWidget(
+      await buildStopLimitOrderWidget(
         tester,
         const OrderState(
             orderType: OrderType.stopLimit,
@@ -69,7 +69,7 @@ void main() {
 
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
-      await _buildStopLimitOrderWidget(
+      await buildStopLimitOrderWidget(
         tester,
         const OrderState(
             orderType: OrderType.stopLimit,

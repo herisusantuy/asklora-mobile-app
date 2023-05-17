@@ -7,7 +7,7 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('FPS Information Screen Test', () {
-    Future<void> _buildWhatIsFpsScreen(WidgetTester tester) async {
+    Future<void> buildWhatIsFpsScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const DepositScreen(
@@ -18,7 +18,7 @@ void main() {
     }
 
     testWidgets('First render screen', (WidgetTester tester) async {
-      await _buildWhatIsFpsScreen(tester);
+      await buildWhatIsFpsScreen(tester);
       expect(find.text('What is FPS?'), findsOneWidget);
       expect(
           find.text(

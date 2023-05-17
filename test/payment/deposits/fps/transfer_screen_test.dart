@@ -7,7 +7,7 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('FPS Transfer Screen Test', () {
-    Future<void> _buildFpsTransferScreen(WidgetTester tester) async {
+    Future<void> buildFpsTransferScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const DepositScreen(
@@ -21,7 +21,7 @@ void main() {
     var fpsIdCopyButton = find.byKey(const Key('fps_id_card_copy_button'));
 
     testWidgets('First render screen', (WidgetTester tester) async {
-      await _buildFpsTransferScreen(tester);
+      await buildFpsTransferScreen(tester);
       expect(find.text('FPS Transfer'), findsOneWidget);
       expect(
           find.text(

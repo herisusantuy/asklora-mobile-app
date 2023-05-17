@@ -15,8 +15,8 @@ class BotStockExplanationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BotStockForm(
-      content: Column(
-        children: const [
+      content: const Column(
+        children: [
           LoraMemojiHeader(
               text:
                   'A Botstock is a combination of a stock and a Bot. Each bot represents a unique AI trading strategy that Lora will manage for you!'),

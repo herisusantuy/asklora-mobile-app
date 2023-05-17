@@ -14,7 +14,7 @@ void main() {
   group('Market Order Widget Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
-    Future<void> _buildMarketOrderWidget(
+    Future<void> buildMarketOrderWidget(
         WidgetTester tester, OrderType orderType, OrderState orderState) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -44,7 +44,7 @@ void main() {
     var estimatedTotal = find.byKey(const Key('estimated_total_widget'));
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
-      await _buildMarketOrderWidget(tester, OrderType.market,
+      await buildMarketOrderWidget(tester, OrderType.market,
           const OrderState(transactionType: TransactionType.buy));
       expect(inputMarket, findsOneWidget);
       expect(find.text('Market price of ${symbolDetail.name}'), findsOneWidget);
@@ -56,7 +56,7 @@ void main() {
 
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
-      await _buildMarketOrderWidget(tester, OrderType.market,
+      await buildMarketOrderWidget(tester, OrderType.market,
           const OrderState(transactionType: TransactionType.sell));
       expect(inputMarket, findsOneWidget);
       expect(find.text('Market price of ${symbolDetail.name}'), findsOneWidget);

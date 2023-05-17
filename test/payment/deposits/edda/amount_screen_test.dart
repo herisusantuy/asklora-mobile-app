@@ -8,7 +8,7 @@ import '../../../mocks/mocks.dart';
 
 void main() async {
   group('Deposit eDDA Amount Screen widget test', () {
-    Future<void> _buildAmountScreen(WidgetTester tester) async {
+    Future<void> buildAmountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const DepositScreen(
@@ -26,7 +26,7 @@ void main() async {
     testWidgets(
         'Render Deposit Amount Screen,`submit button` = disabled, `exceed amount error text` = not visible',
         (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       expect(submitButton, findsOneWidget);
       expect(amountInput, findsOneWidget);
       expect((tester.firstWidget(submitButton) as CustomPaymentButton).disable,
@@ -36,7 +36,7 @@ void main() async {
     testWidgets(
         'Enter 1 (below min amount) into amount, `submit button` = disabled',
         (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       await tester.enterText(amountInput, '1');
       await tester.pump();
       expect(find.text('1'), findsOneWidget);
@@ -46,7 +46,7 @@ void main() async {
 
     testWidgets('Enter 10001 into amount, `submit button` = enabled',
         (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       await tester.enterText(amountInput, '10001');
       await tester.pump();
       expect(find.text('10001'), findsOneWidget);
@@ -57,7 +57,7 @@ void main() async {
     testWidgets(
         'tap request deposit on given right amount, `submit button` = enabled and open deposit dialog',
         (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       await tester.enterText(amountInput, '10001');
       await tester.pump();
       expect(find.text('10001'), findsOneWidget);

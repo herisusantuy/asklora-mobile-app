@@ -7,7 +7,7 @@ import '../../mocks/mocks.dart';
 
 void main() {
   group('*Order Type Screen Test*', () {
-    Future<void> _buildOrderTypeScreen(
+    Future<void> buildOrderTypeScreen(
         WidgetTester tester, TransactionType transactionType) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -40,7 +40,7 @@ void main() {
 
     testWidgets('When user on "Buy" Order Type Screen',
         (WidgetTester tester) async {
-      await _buildOrderTypeScreen(tester, TransactionType.buy);
+      await buildOrderTypeScreen(tester, TransactionType.buy);
       expect(find.text('Select Order type'), findsOneWidget);
       expect(find.text('AskLORA supports the following order type :'),
           findsOneWidget);
@@ -57,7 +57,7 @@ void main() {
 
     testWidgets('When user on "Sell" Order Type Screen',
         (WidgetTester tester) async {
-      await _buildOrderTypeScreen(tester, TransactionType.sell);
+      await buildOrderTypeScreen(tester, TransactionType.sell);
       expect(find.text('Select Order type'), findsOneWidget);
       expect(find.text('AskLORA supports the following order type :'),
           findsOneWidget);

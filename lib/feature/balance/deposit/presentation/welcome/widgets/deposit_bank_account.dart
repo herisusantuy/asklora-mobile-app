@@ -22,7 +22,7 @@ class DepositBankAccount extends StatelessWidget {
             bankAccount: bankAccount!,
           ),
           spaceHeightSmall,
-          ChangeBankAccountButton(),
+          const ChangeBankAccountButton(),
           spaceHeight,
         ],
       );

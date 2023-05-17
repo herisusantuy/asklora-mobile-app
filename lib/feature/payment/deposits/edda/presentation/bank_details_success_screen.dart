@@ -9,9 +9,9 @@ class BankDetailsSuccessScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           CustomText(
             'Nice',
             type: FontType.h2,

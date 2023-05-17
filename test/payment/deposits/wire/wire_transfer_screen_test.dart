@@ -8,7 +8,7 @@ import '../../../test_helpers.dart';
 
 void main() {
   group('*Wire Transfer Screen Test*', () {
-    Future<void> _buildWireTransferScreen(WidgetTester tester) async {
+    Future<void> buildWireTransferScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const DepositScreen(
@@ -30,7 +30,7 @@ void main() {
 
     testWidgets('First Screen Render', (WidgetTester tester) async {
       FlutterError.onError = ignoreOverflowErrors;
-      await _buildWireTransferScreen(tester);
+      await buildWireTransferScreen(tester);
       expect(find.text('Wire Transfer'), findsOneWidget);
       expect(
           find.text(

@@ -9,7 +9,7 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('Trading Hours Widget Test', () {
-    Future<void> _buildTradingHoursWidget(WidgetTester tester,
+    Future<void> buildTradingHoursWidget(WidgetTester tester,
         {bool showOnlyInformation = false}) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -39,13 +39,13 @@ void main() {
 
     testWidgets('First render trading hours widget',
         (WidgetTester tester) async {
-      await _buildTradingHoursWidget(tester);
+      await buildTradingHoursWidget(tester);
       expect(tradingHoursButton, findsOneWidget);
     });
 
     testWidgets('Tap and show bottom sheet widget',
         (WidgetTester tester) async {
-      await _buildTradingHoursWidget(tester);
+      await buildTradingHoursWidget(tester);
       expect(tradingHoursButton, findsOneWidget);
       await tester.tap(tradingHoursButton);
       await tester.pump();
@@ -55,7 +55,7 @@ void main() {
     });
 
     testWidgets('Tap choice day and extended', (WidgetTester tester) async {
-      await _buildTradingHoursWidget(tester);
+      await buildTradingHoursWidget(tester);
       expect(tradingHoursButton, findsOneWidget);
       await tester.tap(tradingHoursButton);
       await tester.pump();
@@ -95,7 +95,7 @@ void main() {
     testWidgets(
         'render only the information with default state tradingHours=extended',
         (WidgetTester tester) async {
-      await _buildTradingHoursWidget(tester, showOnlyInformation: true);
+      await buildTradingHoursWidget(tester, showOnlyInformation: true);
       expect(tradingHoursButton, findsNothing);
       expect(find.text('Extended'), findsOneWidget);
     });

@@ -7,7 +7,7 @@ import '../../../mocks/mocks.dart';
 
 void main() async {
   group('Deposit eDDA Acknowledgement Screen widget test', () {
-    Future<void> _buildAmountScreen(WidgetTester tester) async {
+    Future<void> buildAmountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const DepositScreen(
@@ -17,7 +17,7 @@ void main() async {
     }
 
     testWidgets('Render Returning User Screen', (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       expect(find.text('Select Bank Account'), findsOneWidget);
       expect(find.text('Deposit From'), findsOneWidget);
       expect(find.text('Or'), findsOneWidget);

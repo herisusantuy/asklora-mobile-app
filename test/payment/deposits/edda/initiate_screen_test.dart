@@ -6,7 +6,7 @@ import '../../../mocks/mocks.dart';
 
 void main() async {
   group('Deposit Edda Initiate Screen widget test', () {
-    Future<void> _buildInitialScreen(WidgetTester tester) async {
+    Future<void> buildInitialScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const DepositScreen(
@@ -18,7 +18,7 @@ void main() async {
     final addBankButton = find.byKey(const Key('deposit_add_bank_details'));
 
     testWidgets('Render Deposit Edda Initiate Screen', (tester) async {
-      await _buildInitialScreen(tester);
+      await buildInitialScreen(tester);
       expect(find.text('eDDA Transfer'), findsOneWidget);
       expect(
           find.text(

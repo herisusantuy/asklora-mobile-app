@@ -8,7 +8,7 @@ import '../../mocks/mocks.dart';
 
 void main() async {
   group('Withdrawal Amount Screen widget test', () {
-    Future<void> _buildAmountScreen(WidgetTester tester) async {
+    Future<void> buildAmountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const WithdrawalScreen(
@@ -29,7 +29,7 @@ void main() async {
     testWidgets(
         'Render Withdrawal Amount Screen,`submit button` = disabled, `exceed amount error text` = not visible',
         (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       expect(submitButton, findsOneWidget);
       expect(amountInput, findsOneWidget);
       expect(estimatedHKDAmountText, findsOneWidget);
@@ -41,7 +41,7 @@ void main() async {
     testWidgets(
         'Enter 1 into amount, `submit button` = enabled, `estimated hkd amount` = 7.8476, `exceed amount error text` = not visible',
         (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       await tester.enterText(amountInput, '1');
       await tester.pump();
       expect(find.text('1'), findsOneWidget);
@@ -54,7 +54,7 @@ void main() async {
     testWidgets(
         'Enter 2001 into amount, `submit button` = disabled, `estimated hkd amount` = 15703.0476, `exceed amount error text` = visible',
         (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       await tester.enterText(amountInput, '2001');
       await tester.pump();
       expect(find.text('2001'), findsOneWidget);
@@ -67,7 +67,7 @@ void main() async {
     testWidgets(
         'tap request withdrawal on given right amount, `submit button` = enabled, `estimated hkd amount` = 7.8476, `exceed amount error text` = not visible',
         (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       await tester.enterText(amountInput, '1');
       await tester.pump();
       expect(find.text('1'), findsOneWidget);

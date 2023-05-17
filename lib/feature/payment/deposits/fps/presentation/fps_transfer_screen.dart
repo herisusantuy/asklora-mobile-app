@@ -53,9 +53,9 @@ class FpsTransferScreen extends StatelessWidget {
   }
 
   Widget _notesText() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         CustomText('Notes:', padding: EdgeInsets.only(bottom: 5)),
         CustomRowText(
             padding: EdgeInsets.only(bottom: 5),
