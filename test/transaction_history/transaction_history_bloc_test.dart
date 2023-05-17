@@ -2,7 +2,7 @@ import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bloc/transaction_history_bloc.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart';
-import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_model.dart';
+import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_history_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,35 +17,73 @@ void main() async {
     late MockTransactionHistoryRepository transactionHistoryRepository;
     late TransactionHistoryBloc transactionHistoryBloc;
 
-    final BaseResponse<List<TransactionModel>> successResponse =
-        BaseResponse.complete([
-      const BotOrderTransactionModel(
-          id: '1', date: '2023-04-01', title: 'AAPL.O'),
-      const BotOrderTransactionModel(
-          id: '2', date: '2023-04-01', title: 'MSFT.O'),
-      const BotOrderTransactionModel(
-          id: '3', date: '2023-04-02', title: 'AAPL.O'),
-    ]);
-
-    final List<GroupedTransactionModel> groupedTransactions = [
+    final BaseResponse<List<GroupedTransactionModel>>
+        allTransactionSuccessResponse = BaseResponse.complete([
       const GroupedTransactionModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-01',
           data: [
-            BotOrderTransactionModel(
-                id: '1', date: '2023-04-01', title: 'AAPL.O'),
-            BotOrderTransactionModel(
-                id: '2', date: '2023-04-01', title: 'MSFT.O'),
+            TransactionHistoryModel('1', TransactionHistoryType.bot,
+                '2023-04-01', '2023-04-01', 'AAPL', 'place', '2000'),
+            TransactionHistoryModel('1', TransactionHistoryType.bot,
+                '2023-04-01', '2023-04-01', 'BMW', 'place', '2500'),
+            TransactionHistoryModel('1', TransactionHistoryType.bot,
+                '2023-04-01', '2023-04-01', 'WITHDRAW', 'success', '2000'),
+            TransactionHistoryModel('1', TransactionHistoryType.bot,
+                '2023-04-01', '2023-04-01', 'WITHDRAW', 'success', '2500'),
           ]),
       const GroupedTransactionModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-02',
           data: [
-            BotOrderTransactionModel(
-                id: '3', date: '2023-04-01', title: 'AAPL.O'),
+            TransactionHistoryModel('1', TransactionHistoryType.bot,
+                '2023-04-02', '2023-04-02', 'FORD', 'place', '1000'),
+            TransactionHistoryModel('1', TransactionHistoryType.transfer,
+                '2023-04-02', '2023-04-02', 'DEPOSIT', 'success', '1000'),
           ]),
-    ];
-    final BaseResponse<List<TransactionModel>> errorResponse =
+    ]);
+
+    final BaseResponse<List<GroupedTransactionModel>>
+        botTransactionSuccessResponse = BaseResponse.complete([
+      const GroupedTransactionModel(
+          groupType: GroupType.others,
+          groupTitle: '2023-04-01',
+          data: [
+            TransactionHistoryModel('1', TransactionHistoryType.bot,
+                '2023-04-01', '2023-04-01', 'AAPL', 'place', '2000'),
+            TransactionHistoryModel('1', TransactionHistoryType.bot,
+                '2023-04-01', '2023-04-01', 'BMW', 'place', '2500'),
+          ]),
+      const GroupedTransactionModel(
+          groupType: GroupType.others,
+          groupTitle: '2023-04-02',
+          data: [
+            TransactionHistoryModel('1', TransactionHistoryType.bot,
+                '2023-04-02', '2023-04-02', 'FORD', 'place', '1000'),
+          ]),
+    ]);
+
+    final BaseResponse<List<GroupedTransactionModel>>
+        transferTransactionSuccessResponse = BaseResponse.complete([
+      const GroupedTransactionModel(
+          groupType: GroupType.others,
+          groupTitle: '2023-04-01',
+          data: [
+            TransactionHistoryModel('1', TransactionHistoryType.transfer,
+                '2023-04-01', '2023-04-01', 'WITHDRAW', 'success', '2000'),
+            TransactionHistoryModel('1', TransactionHistoryType.transfer,
+                '2023-04-01', '2023-04-01', 'WITHDRAW', 'success', '2500'),
+          ]),
+      const GroupedTransactionModel(
+          groupType: GroupType.others,
+          groupTitle: '2023-04-02',
+          data: [
+            TransactionHistoryModel('1', TransactionHistoryType.transfer,
+                '2023-04-02', '2023-04-02', 'DEPOSIT', 'success', '1000'),
+          ]),
+    ]);
+
+    final BaseResponse<List<GroupedTransactionModel>> errorResponse =
         BaseResponse.error();
 
     setUpAll(() async {
@@ -64,33 +102,98 @@ void main() async {
 
     blocTest<TransactionHistoryBloc, TransactionHistoryState>(
         'emits `BaseResponse.complete` WHEN '
-        'fetching transaction history',
+        'fetching all transaction history',
         build: () {
-          when(transactionHistoryRepository.fetchTransactionsHistory())
-              .thenAnswer((_) => Future.value(successResponse));
+          when(transactionHistoryRepository.fetchAllTransactionsHistory())
+              .thenAnswer((_) => Future.value(allTransactionSuccessResponse));
           return transactionHistoryBloc;
         },
-        act: (bloc) => bloc.add(FetchTransaction()),
+        act: (bloc) => bloc.add(FetchAllTransaction()),
         expect: () => {
-              TransactionHistoryState(response: BaseResponse.loading()),
               TransactionHistoryState(
-                  response: successResponse,
-                  allTransactions: groupedTransactions,
-                  botOrderTransactions: groupedTransactions),
+                  allTransactionsResponse: BaseResponse.loading()),
+              TransactionHistoryState(
+                  allTransactionsResponse: allTransactionSuccessResponse),
             });
 
     blocTest<TransactionHistoryBloc, TransactionHistoryState>(
         'emits `BaseResponse.error` WHEN '
-        'failed fetching transaction history',
+        'failed fetching all transaction history',
         build: () {
-          when(transactionHistoryRepository.fetchTransactionsHistory())
+          when(transactionHistoryRepository.fetchAllTransactionsHistory())
               .thenAnswer((_) => Future.value(errorResponse));
           return transactionHistoryBloc;
         },
-        act: (bloc) => bloc.add(FetchTransaction()),
+        act: (bloc) => bloc.add(FetchAllTransaction()),
         expect: () => {
-              TransactionHistoryState(response: BaseResponse.loading()),
-              TransactionHistoryState(response: errorResponse),
+              TransactionHistoryState(
+                  allTransactionsResponse: BaseResponse.loading()),
+              TransactionHistoryState(allTransactionsResponse: errorResponse),
+            });
+
+    blocTest<TransactionHistoryBloc, TransactionHistoryState>(
+        'emits `BaseResponse.complete` WHEN '
+        'fetching bot transaction history',
+        build: () {
+          when(transactionHistoryRepository.fetchBotTransactionsHistory())
+              .thenAnswer((_) => Future.value(botTransactionSuccessResponse));
+          return transactionHistoryBloc;
+        },
+        act: (bloc) => bloc.add(FetchBotTransaction()),
+        expect: () => {
+              TransactionHistoryState(
+                  botTransactionsResponse: BaseResponse.loading()),
+              TransactionHistoryState(
+                  botTransactionsResponse: botTransactionSuccessResponse),
+            });
+
+    blocTest<TransactionHistoryBloc, TransactionHistoryState>(
+        'emits `BaseResponse.error` WHEN '
+        'failed fetching bot transaction history',
+        build: () {
+          when(transactionHistoryRepository.fetchBotTransactionsHistory())
+              .thenAnswer((_) => Future.value(errorResponse));
+          return transactionHistoryBloc;
+        },
+        act: (bloc) => bloc.add(FetchBotTransaction()),
+        expect: () => {
+              TransactionHistoryState(
+                  botTransactionsResponse: BaseResponse.loading()),
+              TransactionHistoryState(botTransactionsResponse: errorResponse),
+            });
+
+    blocTest<TransactionHistoryBloc, TransactionHistoryState>(
+        'emits `BaseResponse.complete` WHEN '
+        'fetching transfer transaction history',
+        build: () {
+          when(transactionHistoryRepository.fetchTransferTransactionsHistory())
+              .thenAnswer(
+                  (_) => Future.value(transferTransactionSuccessResponse));
+          return transactionHistoryBloc;
+        },
+        act: (bloc) => bloc.add(FetchTransferTransaction()),
+        expect: () => {
+              TransactionHistoryState(
+                  transferTransactionsResponse: BaseResponse.loading()),
+              TransactionHistoryState(
+                  transferTransactionsResponse:
+                      transferTransactionSuccessResponse),
+            });
+
+    blocTest<TransactionHistoryBloc, TransactionHistoryState>(
+        'emits `BaseResponse.error` WHEN '
+        'failed fetching transfer transaction history',
+        build: () {
+          when(transactionHistoryRepository.fetchTransferTransactionsHistory())
+              .thenAnswer((_) => Future.value(errorResponse));
+          return transactionHistoryBloc;
+        },
+        act: (bloc) => bloc.add(FetchTransferTransaction()),
+        expect: () => {
+              TransactionHistoryState(
+                  transferTransactionsResponse: BaseResponse.loading()),
+              TransactionHistoryState(
+                  transferTransactionsResponse: errorResponse),
             });
 
     tearDown(() => {transactionHistoryBloc.close()});

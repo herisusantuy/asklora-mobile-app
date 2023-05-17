@@ -1,8 +1,8 @@
 import 'grouped_model.dart';
-import 'transaction_model.dart';
+import 'transaction_history_model.dart';
 
 class GroupedTransactionModel extends GroupedModel {
-  final List<TransactionModel> data;
+  final List<TransactionHistoryModel> data;
 
   const GroupedTransactionModel(
       {required this.data,
@@ -11,7 +11,7 @@ class GroupedTransactionModel extends GroupedModel {
       : super(groupType: groupType, groupTitle: groupTitle);
 
   GroupedTransactionModel copyWith({
-    List<TransactionModel>? data,
+    List<TransactionHistoryModel>? data,
   }) {
     return GroupedTransactionModel(
       groupType: groupType,

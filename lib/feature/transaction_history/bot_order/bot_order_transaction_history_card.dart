@@ -1,11 +1,11 @@
 part of '../presentation/transaction_history_screen.dart';
 
 class BotOrderTransactionHistoryCard extends StatelessWidget {
-  final BotOrderTransactionModel botOrderTransactionModel;
+  final TransactionHistoryModel transactionHistoryModel;
   final bool showBottomBorder;
 
   const BotOrderTransactionHistoryCard(
-      {required this.botOrderTransactionModel,
+      {required this.transactionHistoryModel,
       required this.showBottomBorder,
       Key? key})
       : super(key: key);
@@ -14,7 +14,7 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => BotOrderTransactionHistoryDetailScreen.open(
-          context, botOrderTransactionModel),
+          context, transactionHistoryModel),
       child: Container(
         padding: const EdgeInsets.fromLTRB(17, 21, 17, 26),
         decoration: BoxDecoration(
@@ -31,10 +31,8 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Flexible(
-                          child: CustomTextNew(
-                              botOrderTransactionModel.titleString)),
-                      if (botOrderTransactionModel.isDummy)
-                        const FreeBotBadge(),
+                          child: CustomTextNew(transactionHistoryModel.title)),
+                      if (transactionHistoryModel.isDummy) const FreeBotBadge(),
                     ],
                   ),
                 ),
@@ -42,7 +40,7 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
                   width: 14,
                 ),
                 CustomTextNew(
-                  'HKD ${botOrderTransactionModel.amountString}',
+                  'HKD ${transactionHistoryModel.amountString}',
                   style: AskLoraTextStyles.subtitle2,
                 ),
               ],
@@ -51,8 +49,7 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
               height: 7,
             ),
             CustomTextNew(
-              BotStatus.findByString(botOrderTransactionModel.statusString)
-                  .name,
+              BotStatus.findByString(transactionHistoryModel.status).name,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.darkGray),
             )

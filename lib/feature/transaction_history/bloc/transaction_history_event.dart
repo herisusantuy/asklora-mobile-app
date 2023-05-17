@@ -7,8 +7,8 @@ abstract class TransactionHistoryEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchTransaction extends TransactionHistoryEvent {}
+class FetchAllTransaction extends TransactionHistoryEvent {}
 
-class FetchBotOrderTransaction extends TransactionHistoryEvent {}
+class FetchBotTransaction extends TransactionHistoryEvent {}
 
 class FetchTransferTransaction extends TransactionHistoryEvent {}

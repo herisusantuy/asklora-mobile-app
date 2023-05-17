@@ -85,6 +85,7 @@
   "about": "About",
   "askNameScreenPlaceholder": "I'm Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? ",
   "askNameScreenTextFieldHint": "Your Name",
+  "bankAccountNumber": "Bank Account Number",
   "bestSuitedFor": "Best Suited For",
   "greetingScreenTitle": "Alright! Are you ready for the FinFit journey? ",
   "greetingScreenSubTitle": "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!",
@@ -323,9 +324,14 @@
   "unableToProcessDepositSubTitle": "We’re having some trouble processing your deposit request. Please try again",
   "unableToProcessWithdrawalTitle": "Unable to Process Withdrawal",
   "unableToProcessWithdrawalSubTitle": "We’re having some trouble processing your withdrawal request. Please try again",
+  "status": "Status",
   "to": "To",
   "transactionFee": "Transaction fee",
   "transferTo": "Transfer to",
+  "timeRequested": "Time Requested",
+
+
+  "timeCompleted": "Time Completed",
   "totalAmount": "Total amount",
   "withdrawalAmount": "Withdrawal Amount",
   "withdrawalWorkingDays": "Your withdrawal can take up to 2 working days.",

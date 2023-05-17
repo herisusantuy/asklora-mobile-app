@@ -900,6 +900,16 @@ class S {
     );
   }
 
+  /// `Bank Account Number`
+  String get bankAccountNumber {
+    return Intl.message(
+      'Bank Account Number',
+      name: 'bankAccountNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Best Suited For`
   String get bestSuitedFor {
     return Intl.message(
@@ -2323,6 +2333,16 @@ class S {
     );
   }
 
+  /// `Status`
+  String get status {
+    return Intl.message(
+      'Status',
+      name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `To`
   String get to {
     return Intl.message(
@@ -2348,6 +2368,26 @@ class S {
     return Intl.message(
       'Transfer to',
       name: 'transferTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time Requested`
+  String get timeRequested {
+    return Intl.message(
+      'Time Requested',
+      name: 'timeRequested',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time Completed`
+  String get timeCompleted {
+    return Intl.message(
+      'Time Completed',
+      name: 'timeCompleted',
       desc: '',
       args: [],
     );
