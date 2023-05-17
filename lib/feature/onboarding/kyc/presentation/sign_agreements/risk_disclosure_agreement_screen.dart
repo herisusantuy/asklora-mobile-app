@@ -70,10 +70,10 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 12, right: 24),
               child: getPngImage('joseph_chang', height: 60, width: 60),
             ),
-            Expanded(
+            const Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   CustomText(
                     'Licensee: Joseph Chang',
                     type: FontType.smallTextBold,
