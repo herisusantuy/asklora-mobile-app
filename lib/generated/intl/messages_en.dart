@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "bankAccountNumber":
+            MessageLookupByLibrary.simpleMessage("Bank Account Number"),
         "bestSuitedFor":
             MessageLookupByLibrary.simpleMessage("Best Suited For"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
@@ -400,12 +402,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "startInvesting":
             MessageLookupByLibrary.simpleMessage("Start Investing"),
+        "status": MessageLookupByLibrary.simpleMessage("Status"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
+        "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
+        "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),

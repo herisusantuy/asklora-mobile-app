@@ -17,6 +17,9 @@ TransactionHistoryModel _$TransactionHistoryModelFromJson(
       json['title'] as String,
       json['status'] as String,
       json['amount'],
+      timeComplete: json['time_complete'] as String?,
+      bankCode: json['bank_code'] as String?,
+      bankAccountNumber: json['bank_account_number'] as String?,
       isDummy: json['is_dummy'] as bool? ?? false,
     );
 
@@ -31,6 +34,9 @@ Map<String, dynamic> _$TransactionHistoryModelToJson(
       'title': instance.title,
       'status': instance.status,
       'amount': instance.amount,
+      'bank_code': instance.bankCode,
+      'bank_account_number': instance.bankAccountNumber,
+      'time_complete': instance.timeComplete,
       'is_dummy': instance.isDummy,
     };
 

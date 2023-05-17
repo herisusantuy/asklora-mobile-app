@@ -6,17 +6,50 @@ import '../domain/grouped_model.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_history_api_client.dart';
 import '../domain/transaction_history_model.dart';
-import '../domain/transaction_history_request.dart';
 
 class TransactionHistoryRepository {
   final TransactionHistoryApiClient _transactionHistoryApiClient =
       TransactionHistoryApiClient();
 
-  Future<BaseResponse<List<GroupedTransactionModel>>> fetchTransactionsHistory(
-      TransactionHistoryType transactionHistoryType) async {
+  Future<BaseResponse<List<GroupedTransactionModel>>>
+      fetchAllTransactionsHistory() async {
     try {
-      var response = await _transactionHistoryApiClient.fetchTransactionHistory(
-          TransactionHistoryRequest(transactionHistoryType.name));
+      var botTransactionHistory =
+          await _transactionHistoryApiClient.fetchBotTransactionHistory();
+      var transferTransactionHistory =
+          await _transactionHistoryApiClient.fetchTransferTransactionHistory();
+
+      return BaseResponse.complete(groupedTransactionModels([
+        ...List.from(botTransactionHistory.data
+            .map((element) => TransactionHistoryModel.fromJson(element))),
+        ...List.from(transferTransactionHistory.data
+            .map((element) => TransactionHistoryModel.fromJson(element)))
+      ]..sort((a, b) => b.created.compareTo(a.created))));
+    } catch (e) {
+      print('error $e');
+      return BaseResponse.error();
+    }
+  }
+
+  Future<BaseResponse<List<GroupedTransactionModel>>>
+      fetchBotTransactionsHistory() async {
+    try {
+      var response =
+          await _transactionHistoryApiClient.fetchBotTransactionHistory();
+
+      return BaseResponse.complete(groupedTransactionModels(List.from(response
+          .data
+          .map((element) => TransactionHistoryModel.fromJson(element)))));
+    } catch (e) {
+      return BaseResponse.error();
+    }
+  }
+
+  Future<BaseResponse<List<GroupedTransactionModel>>>
+      fetchTransferTransactionsHistory() async {
+    try {
+      var response =
+          await _transactionHistoryApiClient.fetchTransferTransactionHistory();
 
       return BaseResponse.complete(groupedTransactionModels(List.from(response
           .data

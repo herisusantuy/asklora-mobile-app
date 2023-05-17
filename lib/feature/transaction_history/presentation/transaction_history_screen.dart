@@ -17,6 +17,7 @@ import '../bot_order/detail/bot_order_transaction_history_detail_screen.dart';
 import '../domain/grouped_model.dart';
 import '../domain/transaction_history_model.dart';
 import '../repository/transaction_history_repository.dart';
+import '../transfer/detail/transfer_transaction_history_detail_screen.dart';
 import 'widgets/empty_transaction_placeholder.dart';
 import 'widgets/transaction_history_group_title.dart';
 

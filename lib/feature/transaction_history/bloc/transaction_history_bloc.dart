@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../domain/grouped_transaction_model.dart';
-import '../domain/transaction_history_model.dart';
 import '../repository/transaction_history_repository.dart';
 
 part 'transaction_history_event.dart';
@@ -25,8 +24,8 @@ class TransactionHistoryBloc
   _onFetchAllTransaction(
       FetchAllTransaction event, Emitter<TransactionHistoryState> emit) async {
     emit(state.copyWith(allTransactionsResponse: BaseResponse.loading()));
-    var transactionHistory = await _transactionHistoryRepository
-        .fetchTransactionsHistory(TransactionHistoryType.all);
+    var transactionHistory =
+        await _transactionHistoryRepository.fetchAllTransactionsHistory();
     emit(state.copyWith(
       allTransactionsResponse: transactionHistory,
     ));
@@ -35,8 +34,8 @@ class TransactionHistoryBloc
   _onFetchBotTransaction(
       FetchBotTransaction event, Emitter<TransactionHistoryState> emit) async {
     emit(state.copyWith(botTransactionsResponse: BaseResponse.loading()));
-    var transactionHistory = await _transactionHistoryRepository
-        .fetchTransactionsHistory(TransactionHistoryType.bot);
+    var transactionHistory =
+        await _transactionHistoryRepository.fetchBotTransactionsHistory();
     emit(state.copyWith(
       botTransactionsResponse: transactionHistory,
     ));
@@ -45,8 +44,8 @@ class TransactionHistoryBloc
   _onFetchTransferTransaction(FetchTransferTransaction event,
       Emitter<TransactionHistoryState> emit) async {
     emit(state.copyWith(transferTransactionsResponse: BaseResponse.loading()));
-    var transactionHistory = await _transactionHistoryRepository
-        .fetchTransactionsHistory(TransactionHistoryType.transfer);
+    var transactionHistory =
+        await _transactionHistoryRepository.fetchTransferTransactionsHistory();
     emit(state.copyWith(
       transferTransactionsResponse: transactionHistory,
     ));
