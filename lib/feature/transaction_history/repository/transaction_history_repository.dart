@@ -26,7 +26,6 @@ class TransactionHistoryRepository {
             .map((element) => TransactionHistoryModel.fromJson(element)))
       ]..sort((a, b) => b.created.compareTo(a.created))));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }
