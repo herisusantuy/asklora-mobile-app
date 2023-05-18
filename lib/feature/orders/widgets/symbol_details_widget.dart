@@ -13,12 +13,12 @@ class SymbolDetailsWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
+            const Expanded(
                 flex: 5,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     CustomText('Apple Inc', type: FontType.highlight),
                     CustomText(r'AAPL.O', type: FontType.h4SemiBold),
                   ],
@@ -35,7 +35,7 @@ class SymbolDetailsWidget extends StatelessWidget {
       const SizedBox(
         height: 20,
       ),
-      Row(
+      const Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,7 +44,7 @@ class SymbolDetailsWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     CustomText(r'$144.87', type: FontType.h4Normal),
                     CustomText(r'1.06 (5.45%) Today',
                         type: FontType.bodyText, color: Colors.green),
@@ -55,7 +55,7 @@ class SymbolDetailsWidget extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: const [
+                  children: [
                     CustomText(r'Buying Power', type: FontType.h4Normal),
                     CustomText(r'$20', type: FontType.bodyText),
                   ],

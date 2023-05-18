@@ -9,7 +9,7 @@ void main() {
   group(
     'Sign In Screen Widget Test',
     () {
-      Future<void> _buildSignInScreen(WidgetTester tester) async {
+      Future<void> buildSignInScreen(WidgetTester tester) async {
         final mockObserver = MockNavigatorObserver();
         await tester.pumpWidget(MaterialApp(
           home: const SignInScreen(),
@@ -21,7 +21,7 @@ void main() {
           'Show Sign in screen with email input, password input, and login button ',
           (WidgetTester tester) async {
         // ARRANGE
-        await _buildSignInScreen(tester);
+        await buildSignInScreen(tester);
         // ACT & ASSERT
         var emailInput = find.byKey(
           const Key('sign_in_email_input'),
@@ -42,7 +42,7 @@ void main() {
       });
 
       testWidgets('Render errol label on email', (tester) async {
-        await _buildSignInScreen(tester);
+        await buildSignInScreen(tester);
         await tester.enterText(
             find.byKey(const Key('sign_in_email_input')), 'qweasdzxc');
         var loginButton = find.byKey(const Key('sign_in_submit_button'));
@@ -54,7 +54,7 @@ void main() {
       });
 
       testWidgets('Enable button when entered valid email.', (tester) async {
-        await _buildSignInScreen(tester);
+        await buildSignInScreen(tester);
         await tester.enterText(
           find.byKey(const Key('sign_in_email_input')),
           'wahyu@loratechai.com',

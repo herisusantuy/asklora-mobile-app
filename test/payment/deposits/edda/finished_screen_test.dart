@@ -7,7 +7,7 @@ import '../../../mocks/mocks.dart';
 
 void main() async {
   group('Deposit eDDA Acknowledgement Screen widget test', () {
-    Future<void> _buildAmountScreen(WidgetTester tester) async {
+    Future<void> buildAmountScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const DepositScreen(
@@ -17,7 +17,7 @@ void main() async {
     }
 
     testWidgets('Render Deposit eDDA Acknowledmenet', (tester) async {
-      await _buildAmountScreen(tester);
+      await buildAmountScreen(tester);
       expect(find.text(r'CA$H MON€Y'), findsOneWidget);
       expect(find.text('EZ MONEY. See how easy that was?'), findsOneWidget);
       expect(

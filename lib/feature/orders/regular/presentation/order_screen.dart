@@ -19,7 +19,7 @@ import '../../domain/symbol_detail.dart';
 import '../../repository/orders_repository.dart';
 import 'market_order_widget.dart';
 import 'widgets/custom_bottom_sheet_card_widget.dart';
-import 'widgets/initialTrailingPrice.dart';
+import 'widgets/initial_trailing_price.dart';
 import 'widgets/order_bottom_sheet_widget.dart';
 
 part 'limit_order_widget.dart';

@@ -9,7 +9,7 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('Order Bottom Sheet Widget Test', () {
-    Future<void> _buildOrderBottomSheetWidget(WidgetTester tester) async {
+    Future<void> buildOrderBottomSheetWidget(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
@@ -41,7 +41,7 @@ void main() {
     final child2 = find.byKey(const Key('some_child_2'));
 
     testWidgets('First render order bottom sheet', (WidgetTester tester) async {
-      await _buildOrderBottomSheetWidget(tester);
+      await buildOrderBottomSheetWidget(tester);
       expect(title, findsOneWidget);
       expect(closeButton, findsOneWidget);
       expect(child1, findsOneWidget);

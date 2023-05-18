@@ -14,7 +14,7 @@ void main() {
   group('Trailing Stop Order Widget Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
-    Future<void> _buildTrailingStopOrderWidget(
+    Future<void> buildTrailingStopOrderWidget(
         WidgetTester tester, OrderState orderState) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -55,7 +55,7 @@ void main() {
 
     testWidgets('First render widget transaction type buy',
         (WidgetTester tester) async {
-      await _buildTrailingStopOrderWidget(
+      await buildTrailingStopOrderWidget(
           tester,
           const OrderState(
               orderType: OrderType.trailingStop,
@@ -73,7 +73,7 @@ void main() {
 
     testWidgets('First render widget transaction type sell',
         (WidgetTester tester) async {
-      await _buildTrailingStopOrderWidget(
+      await buildTrailingStopOrderWidget(
           tester,
           const OrderState(
               orderType: OrderType.trailingStop,

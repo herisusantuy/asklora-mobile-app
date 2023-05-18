@@ -1,9 +1,9 @@
 part of 'tabs_screen_bloc.dart';
 
-class TabScreenState {
+class TabScreenState extends Equatable {
   final int currentIndexScreen;
 
-  TabScreenState({
+  const TabScreenState({
     required this.currentIndexScreen,
   });
 

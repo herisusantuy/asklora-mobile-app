@@ -60,8 +60,7 @@ void main() async {
         when(mockRepository.saveRefreshToken('token')).thenAnswer((_) async {
           null;
         });
-        when(mockRepository.saveAccessToken('token'))
-            .thenAnswer((_) async => {null});
+        when(mockRepository.saveAccessToken('token')).thenAnswer((_) async {});
 
         when(sharedPreference.writeData(sfKeyEmail, 'kk@kk.com'))
             .thenAnswer((_) async => true);

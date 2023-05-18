@@ -2,7 +2,7 @@ import 'dart:ui';
 
 /// Creates a new path that is drawn from the segments of `source`.
 ///
-/// Dash intervals are controled by the `dashArray` - see [CircularIntervalList]
+/// Dash intervals are controlled by the `dashArray` - see [CircularIntervalList]
 /// for examples.
 ///
 /// `dashOffset` specifies an initial starting point for the dashing.
@@ -34,7 +34,7 @@ Path dashPath(
   return dest;
 }
 
-enum _DashOffsetType { Absolute, Percentage }
+enum _DashOffsetType { absolute, percentage }
 
 /// Specifies the starting position of a dash array on a path, either as a
 /// percentage or absolute value.
@@ -47,19 +47,19 @@ class DashOffset {
   /// `percentage` will be clamped between 0.0 and 1.0.
   DashOffset.percentage(double percentage)
       : _rawVal = percentage.clamp(0.0, 1.0),
-        _dashOffsetType = _DashOffsetType.Percentage;
+        _dashOffsetType = _DashOffsetType.percentage;
 
   /// Create a DashOffset that will be measured in terms of absolute pixels
   /// along the length of a [Path] segment.
   const DashOffset.absolute(double start)
       : _rawVal = start,
-        _dashOffsetType = _DashOffsetType.Absolute;
+        _dashOffsetType = _DashOffsetType.absolute;
 
   final double _rawVal;
   final _DashOffsetType _dashOffsetType;
 
   double _calculate(double length) {
-    return _dashOffsetType == _DashOffsetType.Absolute
+    return _dashOffsetType == _DashOffsetType.absolute
         ? _rawVal
         : length * _rawVal;
   }
@@ -89,15 +89,15 @@ class DashOffset {
 /// Note that this does not quite conform to an [Iterable<T>], because it does
 /// not have a moveNext.
 class CircularIntervalList<T> {
-  CircularIntervalList(this._vals);
+  CircularIntervalList(this._res);
 
-  final List<T> _vals;
+  final List<T> _res;
   int _idx = 0;
 
   T get next {
-    if (_idx >= _vals.length) {
+    if (_idx >= _res.length) {
       _idx = 0;
     }
-    return _vals[_idx++];
+    return _res[_idx++];
   }
 }

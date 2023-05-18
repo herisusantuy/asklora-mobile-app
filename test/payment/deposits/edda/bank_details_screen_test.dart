@@ -8,7 +8,7 @@ import '../../../mocks/mocks.dart';
 
 void main() async {
   group('Deposit Edda Bank Details Screen widget test', () {
-    Future<void> _buildBankDetailsScreen(WidgetTester tester) async {
+    Future<void> buildBankDetailsScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const DepositScreen(
@@ -30,7 +30,7 @@ void main() async {
     testWidgets(
         'Render Deposit Edda Bank Details Screen, `continue button` = disabled',
         (tester) async {
-      await _buildBankDetailsScreen(tester);
+      await buildBankDetailsScreen(tester);
       expect(find.text('Your Bank Details'), findsOneWidget);
       expect(bankName, findsOneWidget);
       expect(bankAccountNumberInput, findsOneWidget);
@@ -42,7 +42,7 @@ void main() async {
 
     testWidgets('Enter account number = `abc`, `continue button` = disabled',
         (tester) async {
-      await _buildBankDetailsScreen(tester);
+      await buildBankDetailsScreen(tester);
       await tester.enterText(bankAccountNumberInput, 'abc');
       await tester.pump();
       expect(find.text('abc'), findsNothing);
@@ -53,7 +53,7 @@ void main() async {
     testWidgets(
         'Enter account number = `123` and confirm account number = `123456`, `continue button` = disable',
         (tester) async {
-      await _buildBankDetailsScreen(tester);
+      await buildBankDetailsScreen(tester);
       await tester.enterText(bankAccountNumberInput, '123');
       await tester.enterText(confirmBankAccountNumberInput, '123456');
       await tester.pump();
@@ -66,7 +66,7 @@ void main() async {
     testWidgets(
         'Enter account number = `123` in both account number input and confirm account number input, `continue button` = enabled',
         (tester) async {
-      await _buildBankDetailsScreen(tester);
+      await buildBankDetailsScreen(tester);
       await tester.enterText(bankAccountNumberInput, '123');
       await tester.enterText(confirmBankAccountNumberInput, '123');
       await tester.enterText(bankAccountName, 'kkkkkk');

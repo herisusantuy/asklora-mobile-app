@@ -103,8 +103,10 @@ class LoggingInterceptor extends Interceptor {
     return handler.next(response);
   }
 
+  // ignore: unused_element
   void _printKeyValue(String key, Object v) => _logPrint('$key: $v');
 
+  // ignore: unused_element
   void _printAll(msg) => msg.toString().split('\n').forEach(_logPrint);
 
   void _logPrint(String s) => debugPrint(s);

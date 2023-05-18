@@ -52,9 +52,9 @@ class AmountScreen extends StatelessWidget {
     );
   }
 
-  Widget _exchangeArrowIcon() => Row(
+  Widget _exchangeArrowIcon() => const Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Icon(
             Icons.arrow_upward,
             size: 42,
@@ -66,9 +66,9 @@ class AmountScreen extends StatelessWidget {
         ],
       );
 
-  Widget _noteOfExchangeRate() => Row(
+  Widget _noteOfExchangeRate() => const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Icon(
             Icons.info_outline,
             size: 18,

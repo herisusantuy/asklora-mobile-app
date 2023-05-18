@@ -5,7 +5,7 @@ part 'tabs_screen_state.dart';
 part 'tabs_screen_event.dart';
 
 class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
-  TabScreenBloc() : super(TabScreenState(currentIndexScreen: 0)) {
+  TabScreenBloc() : super(const TabScreenState(currentIndexScreen: 0)) {
     on<TabIndexChanged>(_onChangedIndexTab);
   }
 

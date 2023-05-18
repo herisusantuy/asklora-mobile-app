@@ -21,8 +21,8 @@ class DisclosureAffiliationAssociatesScreen extends StatelessWidget {
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
       title: 'Set Up Financial Profile',
-      content: Column(
-        children: const [
+      content: const Column(
+        children: [
           FinancialQuestion(
             'Are you and/or your immediate family affiliated with any director, shareholder,  or employee of LORA Advisors Limited or its associates?',
           ),

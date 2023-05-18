@@ -6,7 +6,7 @@ import '../../../mocks/mocks.dart';
 
 void main() async {
   group('Deposit Edda Bank Details Progress Screen widget test', () {
-    Future<void> _buildBankDetailsProgressScreen(WidgetTester tester) async {
+    Future<void> buildBankDetailsProgressScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
           home: const DepositScreen(
@@ -20,7 +20,7 @@ void main() async {
 
     testWidgets('Render Deposit Edda Bank Details Loading Screen',
         (tester) async {
-      await _buildBankDetailsProgressScreen(tester);
+      await buildBankDetailsProgressScreen(tester);
       expect(find.text('Great!'), findsOneWidget);
       expect(find.text('We\'re doing our magic now. Just shut up and wait'),
           findsOneWidget);

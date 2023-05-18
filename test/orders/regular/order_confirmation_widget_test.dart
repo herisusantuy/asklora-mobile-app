@@ -12,7 +12,7 @@ import '../../mocks/mocks.dart';
 void main() {
   final SymbolDetail symbolDetail =
       SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
-  Future<void> _buildOrderConfirmationWidget<T>(
+  Future<void> buildOrderConfirmationWidget<T>(
       WidgetTester tester, OrderState orderState,
       {T? dynamicState}) async {
     final mockObserver = MockNavigatorObserver();
@@ -44,7 +44,7 @@ void main() {
 
   group('Order Buy Confirmation Widget Test', () {
     testWidgets('Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget<LimitOrderState>(
+      await buildOrderConfirmationWidget<LimitOrderState>(
           tester,
           const OrderState(
               orderType: OrderType.limit, transactionType: TransactionType.buy),
@@ -65,7 +65,7 @@ void main() {
     });
 
     testWidgets('Stop Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await buildOrderConfirmationWidget(
           tester,
           const OrderState(
               orderType: OrderType.stop, transactionType: TransactionType.buy));
@@ -81,7 +81,7 @@ void main() {
     });
 
     testWidgets('Stop Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await buildOrderConfirmationWidget(
           tester,
           const OrderState(
               orderType: OrderType.stopLimit,
@@ -99,7 +99,7 @@ void main() {
     });
 
     testWidgets('Trailing Stop Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await buildOrderConfirmationWidget(
           tester,
           const OrderState(
               orderType: OrderType.trailingStop,
@@ -116,7 +116,7 @@ void main() {
     });
 
     testWidgets('Market Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await buildOrderConfirmationWidget(
           tester,
           const OrderState(
               orderType: OrderType.market,
@@ -134,7 +134,7 @@ void main() {
 
   group('Order Sell Confirmation Widget Test', () {
     testWidgets('Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget<LimitOrderState>(
+      await buildOrderConfirmationWidget<LimitOrderState>(
           tester,
           const OrderState(
               orderType: OrderType.limit,
@@ -155,7 +155,7 @@ void main() {
     });
 
     testWidgets('Stop Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await buildOrderConfirmationWidget(
           tester,
           const OrderState(
               orderType: OrderType.stop,
@@ -171,7 +171,7 @@ void main() {
     });
 
     testWidgets('Stop Limit Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await buildOrderConfirmationWidget(
           tester,
           const OrderState(
               orderType: OrderType.stopLimit,
@@ -188,7 +188,7 @@ void main() {
     });
 
     testWidgets('Trailing Stop Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await buildOrderConfirmationWidget(
           tester,
           const OrderState(
               orderType: OrderType.trailingStop,
@@ -204,7 +204,7 @@ void main() {
     });
 
     testWidgets('Market Order', (WidgetTester tester) async {
-      await _buildOrderConfirmationWidget(
+      await buildOrderConfirmationWidget(
           tester,
           const OrderState(
               orderType: OrderType.market,

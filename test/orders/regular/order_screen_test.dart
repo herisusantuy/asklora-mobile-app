@@ -11,7 +11,7 @@ void main() {
   group('Order Screen Test', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
-    Future<void> _buildDepositWelcomeScreen(WidgetTester tester) async {
+    Future<void> buildDepositWelcomeScreen(WidgetTester tester) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: RegularOrderHomeScreen(
@@ -24,7 +24,7 @@ void main() {
     }
 
     testWidgets('First render order screen', (WidgetTester tester) async {
-      await _buildDepositWelcomeScreen(tester);
+      await buildDepositWelcomeScreen(tester);
       expect(find.byKey(const Key('dropdown_order_type')), findsOneWidget);
       expect(find.byKey(const Key('order_contents')), findsOneWidget);
       expect(find.byKey(const Key('symbol_title_widget')), findsOneWidget);

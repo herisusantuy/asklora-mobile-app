@@ -46,9 +46,9 @@ class WithdrawalAmountScreen extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            Expanded(
+            const Expanded(
               child: Column(
-                children: const [
+                children: [
                   WithdrawalAmountValue(),
                   WithdrawalKeyPad(),
                 ],

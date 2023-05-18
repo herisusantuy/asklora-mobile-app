@@ -9,9 +9,9 @@ class FpsInformationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationWidget<DepositPageStep>(
+    return const CustomNavigationWidget<DepositPageStep>(
       child: Column(
-        children: const [
+        children: [
           CustomText(
             'What is FPS?',
             padding: EdgeInsets.only(bottom: 40),

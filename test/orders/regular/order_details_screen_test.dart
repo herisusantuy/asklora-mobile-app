@@ -7,7 +7,7 @@ import '../../mocks/mocks.dart';
 
 void main() {
   group('Order Details Screen Test', () {
-    Future<void> _buildOrderDetailsScreen(WidgetTester tester,
+    Future<void> buildOrderDetailsScreen(WidgetTester tester,
         {required TransactionType transactionType,
         required OrderType orderType}) async {
       final mockObserver = MockNavigatorObserver();
@@ -29,7 +29,7 @@ void main() {
 
     testWidgets('When user on "BUY" Market Order ',
         (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.buy, orderType: OrderType.market);
       expect(find.text('Trade Details'), findsWidgets);
       expect(directionValue, findsWidgets);
@@ -39,7 +39,7 @@ void main() {
       expect(estTotalValue, findsWidgets);
     });
     testWidgets('When user on "BUY" Limit Order ', (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.buy, orderType: OrderType.limit);
       expect(find.text('Trade Details'), findsWidgets);
       expect(directionValue, findsWidgets);
@@ -49,7 +49,7 @@ void main() {
       expect(estTotalValue, findsWidgets);
     });
     testWidgets('When user on "BUY" Stop Order ', (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.buy, orderType: OrderType.stop);
       expect(find.text('Trade Details'), findsWidgets);
       expect(directionValue, findsWidgets);
@@ -60,7 +60,7 @@ void main() {
     });
     testWidgets('When user on "BUY" Stop Limit Order ',
         (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.buy, orderType: OrderType.stopLimit);
       expect(find.text('Trade Details'), findsWidgets);
       expect(directionValue, findsWidgets);
@@ -71,7 +71,7 @@ void main() {
     });
     testWidgets('When user on "BUY" Trailing Stop Order ',
         (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.buy,
           orderType: OrderType.trailingStop);
       expect(find.text('Trade Details'), findsWidgets);
@@ -83,7 +83,7 @@ void main() {
     });
     testWidgets('When user on "SELL" Market Order ',
         (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.sell, orderType: OrderType.market);
       expect(find.text('Trade Details'), findsWidgets);
       expect(directionValue, findsWidgets);
@@ -94,7 +94,7 @@ void main() {
     });
     testWidgets('When user on "SELL" Limit Order ',
         (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.sell, orderType: OrderType.limit);
       expect(find.text('Trade Details'), findsWidgets);
       expect(directionValue, findsWidgets);
@@ -104,7 +104,7 @@ void main() {
       expect(estTotalValue, findsWidgets);
     });
     testWidgets('When user on "SELL" Stop Order ', (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.sell, orderType: OrderType.stop);
       expect(find.text('Trade Details'), findsWidgets);
       expect(directionValue, findsWidgets);
@@ -115,7 +115,7 @@ void main() {
     });
     testWidgets('When user on "SELL" Stop Limit Order ',
         (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.sell,
           orderType: OrderType.stopLimit);
       expect(find.text('Trade Details'), findsWidgets);
@@ -127,7 +127,7 @@ void main() {
     });
     testWidgets('When user on "SELL" Trailing Stop Order ',
         (WidgetTester tester) async {
-      await _buildOrderDetailsScreen(tester,
+      await buildOrderDetailsScreen(tester,
           transactionType: TransactionType.sell,
           orderType: OrderType.trailingStop);
       expect(find.text('Trade Details'), findsWidgets);

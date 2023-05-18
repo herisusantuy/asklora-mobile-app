@@ -11,7 +11,7 @@ void main() {
   group('*Order Submitted Screen Test*', () {
     final SymbolDetail symbolDetail =
         SymbolDetail('AAPL.O', 100, AppIcons.appleLogo, SymbolType.symbol);
-    Future<void> _buildOrderSubmittedScreen(WidgetTester tester,
+    Future<void> buildOrderSubmittedScreen(WidgetTester tester,
         {required TransactionType transactionType,
         required OrderType orderType,
         required SymbolDetail symbolDetail}) async {
@@ -39,7 +39,7 @@ void main() {
 
     testWidgets('When user on "BUY Market Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.buy,
           orderType: OrderType.market,
           symbolDetail: symbolDetail);
@@ -55,7 +55,7 @@ void main() {
     });
     testWidgets('When user on "BUY Limit Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.buy,
           orderType: OrderType.limit,
           symbolDetail: symbolDetail);
@@ -72,7 +72,7 @@ void main() {
     });
     testWidgets('When user on "BUY Stop Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.buy,
           orderType: OrderType.stop,
           symbolDetail: symbolDetail);
@@ -89,7 +89,7 @@ void main() {
     });
     testWidgets('When user on "BUY Stop Limit Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.buy,
           orderType: OrderType.stopLimit,
           symbolDetail: symbolDetail);
@@ -106,7 +106,7 @@ void main() {
     });
     testWidgets('When user on "BUY Trailing Stop Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.buy,
           orderType: OrderType.trailingStop,
           symbolDetail: symbolDetail);
@@ -124,7 +124,7 @@ void main() {
 
     testWidgets('When user on "SELL Market Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.sell,
           orderType: OrderType.market,
           symbolDetail: symbolDetail);
@@ -141,7 +141,7 @@ void main() {
     });
     testWidgets('When user on "SELL Limit Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.sell,
           orderType: OrderType.limit,
           symbolDetail: symbolDetail);
@@ -158,7 +158,7 @@ void main() {
     });
     testWidgets('When user on "SELL Stop Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.sell,
           orderType: OrderType.stop,
           symbolDetail: symbolDetail);
@@ -175,7 +175,7 @@ void main() {
     });
     testWidgets('When user on "SELL Stop Limit Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.sell,
           orderType: OrderType.stopLimit,
           symbolDetail: symbolDetail);
@@ -193,7 +193,7 @@ void main() {
     testWidgets(
         'When user on "SELL Trailing Stop Order" Order submitted screen',
         (WidgetTester tester) async {
-      await _buildOrderSubmittedScreen(tester,
+      await buildOrderSubmittedScreen(tester,
           transactionType: TransactionType.sell,
           orderType: OrderType.trailingStop,
           symbolDetail: symbolDetail);

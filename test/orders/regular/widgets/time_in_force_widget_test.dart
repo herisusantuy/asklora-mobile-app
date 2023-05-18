@@ -9,7 +9,7 @@ import '../../../mocks/mocks.dart';
 
 void main() {
   group('Time in Force Widget Test', () {
-    Future<void> _buildTimeInForceWidget(WidgetTester tester,
+    Future<void> buildTimeInForceWidget(WidgetTester tester,
         {bool showOnlyInformation = false}) async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
@@ -39,13 +39,13 @@ void main() {
 
     testWidgets('First render time in force widget',
         (WidgetTester tester) async {
-      await _buildTimeInForceWidget(tester);
+      await buildTimeInForceWidget(tester);
       expect(timeInForceButton, findsOneWidget);
     });
 
     testWidgets('Tap and show bottom sheet widget',
         (WidgetTester tester) async {
-      await _buildTimeInForceWidget(tester);
+      await buildTimeInForceWidget(tester);
       expect(timeInForceButton, findsOneWidget);
       await tester.tap(timeInForceButton);
       await tester.pump();
@@ -56,7 +56,7 @@ void main() {
 
     testWidgets('Tap choice day and good till cancelled',
         (WidgetTester tester) async {
-      await _buildTimeInForceWidget(tester);
+      await buildTimeInForceWidget(tester);
       expect(timeInForceButton, findsOneWidget);
       await tester.tap(timeInForceButton);
       await tester.pump();
@@ -94,7 +94,7 @@ void main() {
     testWidgets(
         'render only the information with default state timeInForce=Day',
         (WidgetTester tester) async {
-      await _buildTimeInForceWidget(tester, showOnlyInformation: true);
+      await buildTimeInForceWidget(tester, showOnlyInformation: true);
       expect(timeInForceButton, findsNothing);
       expect(find.text('Day'), findsOneWidget);
     });
