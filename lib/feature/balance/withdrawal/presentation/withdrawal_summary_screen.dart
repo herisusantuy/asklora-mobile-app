@@ -104,7 +104,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                   subTitle: S.of(context).unableToProcessWithdrawalSubTitle,
                   onPrimaryButtonTap: () => context
                       .read<WithdrawalBloc>()
-                      .add(ResetWithdrawalResponseState()),
+                      .add(ResetWithdrawalResponse()),
                   primaryButtonLabel: S.of(context).buttonBack),
             )),
       ),

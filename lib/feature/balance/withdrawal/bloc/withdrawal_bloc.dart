@@ -16,13 +16,13 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
         super(const WithdrawalState()) {
     on<WithdrawalAmountChanged>(_onWithdrawalAmountChanged);
     on<SubmitWithdrawal>(_onSubmitWithdrawal);
-    on<ResetWithdrawalResponseState>(_onResetWithdrawalResponseState);
+    on<ResetWithdrawalResponse>(_onResetWithdrawalResponse);
   }
 
   final WithdrawalRepository _withdrawalRepository;
 
-  void _onResetWithdrawalResponseState(
-      ResetWithdrawalResponseState event, Emitter<WithdrawalState> emit) {
+  void _onResetWithdrawalResponse(
+      ResetWithdrawalResponse event, Emitter<WithdrawalState> emit) {
     emit(state.copyWith(response: const BaseResponse()));
   }
 

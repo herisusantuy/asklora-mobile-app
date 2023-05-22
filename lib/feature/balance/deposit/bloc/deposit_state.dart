@@ -1,7 +1,7 @@
 part of 'deposit_bloc.dart';
 
 class DepositState extends Equatable {
-  final BaseResponse response;
+  final BaseResponse<DepositResponse> response;
   final double depositAmount;
   final String depositAmountErrorText;
   final List<PlatformFile> proofOfRemittanceImages;
@@ -27,7 +27,7 @@ class DepositState extends Equatable {
   DepositState copyWith({
     double? depositAmount,
     List<PlatformFile>? proofOfRemittanceImages,
-    BaseResponse? response,
+    BaseResponse<DepositResponse>? response,
     String? depositAmountErrorText,
     String? proofOfRemittanceImagesErrorText,
   }) {

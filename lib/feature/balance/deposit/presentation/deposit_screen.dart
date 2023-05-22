@@ -89,9 +89,8 @@ class DepositScreen extends StatelessWidget {
             loraPopUpMessageModel: LoraPopUpMessageModel(
                 title: S.of(context).unableToProcessDepositTitle,
                 subTitle: S.of(context).unableToProcessDepositSubTitle,
-                onPrimaryButtonTap: () => context
-                    .read<DepositBloc>()
-                    .add(ResetDepositResponseState()),
+                onPrimaryButtonTap: () =>
+                    context.read<DepositBloc>().add(ResetDepositResponse()),
                 primaryButtonLabel: S.of(context).buttonBack),
           ),
         ),
