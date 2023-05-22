@@ -9,7 +9,7 @@ class BotPortfolioFilter extends StatelessWidget {
         fadeOutDuration: Duration.zero,
         elevation: 0,
         isModal: true,
-        shadow: null,
+        shadow: const Shadow(color: Colors.transparent),
         backgroundColor: Colors.transparent,
         barrierDismissible: true,
         tailLength: 0,

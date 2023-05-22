@@ -13,8 +13,8 @@ import '../../../bot_stock/presentation/bot_recommendation/bot_recommendation_sc
 import '../../../bot_stock/repository/bot_stock_repository.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../tabs/tabs_screen.dart';
-import '../../demonstration_question/widgets/demonstration_tooltip_guide.dart';
 import '../../learning_bot_stock_screen.dart';
+import '../../widgets/demonstration_tooltip_guide.dart';
 import '../bloc/demonstration_bot_bloc.dart';
 import '../utils/demonstration_bottom_sheet.dart';
 
