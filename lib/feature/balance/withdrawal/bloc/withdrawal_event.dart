@@ -21,3 +21,5 @@ class SubmitWithdrawal extends WithdrawalEvent {
 
   const SubmitWithdrawal(this.withdrawalAmount);
 }
+
+class ResetWithdrawalResponse extends WithdrawalEvent {}

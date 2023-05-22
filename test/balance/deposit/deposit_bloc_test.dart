@@ -19,6 +19,8 @@ void main() async {
     final BaseResponse<DepositResponse> submitResponse =
         BaseResponse.complete(const DepositResponse(''));
 
+    final BaseResponse<DepositResponse> errorResponse = BaseResponse.error();
+
     setUpAll(() async {
       depositRepository = MockDepositRepository();
     });
@@ -117,6 +119,89 @@ void main() async {
                   ]),
               DepositState(
                   response: submitResponse,
+                  depositAmount: 20000,
+                  proofOfRemittanceImages: [
+                    PlatformFile(name: 'test_file', size: 2000)
+                  ]),
+            });
+
+    blocTest<DepositBloc, DepositState>(
+        'emits `BaseResponse.error` WHEN '
+        'failed submit deposit',
+        build: () {
+          when(depositRepository.submitDeposit(
+                  depositAmount: 20000,
+                  platformFiles: [PlatformFile(name: 'test_file', size: 2000)]))
+              .thenThrow(errorResponse);
+          return depositBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const DepositAmountChanged(20000)),
+              bloc.add(ProofOfRemittanceImagesChanged(
+                [
+                  PlatformFile(name: 'test_file', size: 2000),
+                ],
+              )),
+              bloc.add(SubmitDeposit())
+            },
+        expect: () => {
+              const DepositState(depositAmount: 20000),
+              DepositState(depositAmount: 20000, proofOfRemittanceImages: [
+                PlatformFile(name: 'test_file', size: 2000)
+              ]),
+              DepositState(
+                  response: BaseResponse.loading(),
+                  depositAmount: 20000,
+                  proofOfRemittanceImages: [
+                    PlatformFile(name: 'test_file', size: 2000)
+                  ]),
+              DepositState(
+                  response: errorResponse,
+                  depositAmount: 20000,
+                  proofOfRemittanceImages: [
+                    PlatformFile(name: 'test_file', size: 2000)
+                  ]),
+            });
+
+    blocTest<DepositBloc, DepositState>(
+        'emits `BaseResponse.unknown` WHEN '
+        'failed submit deposit and reset deposit response',
+        build: () {
+          when(depositRepository.submitDeposit(
+                  depositAmount: 20000,
+                  platformFiles: [PlatformFile(name: 'test_file', size: 2000)]))
+              .thenThrow(errorResponse);
+          return depositBloc;
+        },
+        act: (bloc) => {
+              bloc.add(const DepositAmountChanged(20000)),
+              bloc.add(ProofOfRemittanceImagesChanged(
+                [
+                  PlatformFile(name: 'test_file', size: 2000),
+                ],
+              )),
+              bloc.add(SubmitDeposit()),
+              bloc.add(ResetDepositResponse())
+            },
+        expect: () => {
+              const DepositState(depositAmount: 20000),
+              DepositState(depositAmount: 20000, proofOfRemittanceImages: [
+                PlatformFile(name: 'test_file', size: 2000)
+              ]),
+              DepositState(
+                  response: BaseResponse.loading(),
+                  depositAmount: 20000,
+                  proofOfRemittanceImages: [
+                    PlatformFile(name: 'test_file', size: 2000)
+                  ]),
+              DepositState(
+                  response: errorResponse,
+                  depositAmount: 20000,
+                  proofOfRemittanceImages: [
+                    PlatformFile(name: 'test_file', size: 2000)
+                  ]),
+              DepositState(
+                  response: const BaseResponse<DepositResponse>(),
                   depositAmount: 20000,
                   proofOfRemittanceImages: [
                     PlatformFile(name: 'test_file', size: 2000)

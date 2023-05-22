@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
+import '../../core/utils/storage/secure_storage.dart';
+import '../../core/utils/storage/shared_preference.dart';
 import '../repository/user_journey_repository.dart';
 
 part 'app_event.dart';
@@ -12,13 +14,19 @@ part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
   final TokenRepository _tokenRepository;
+  final SharedPreference _sharedPreference;
+  final SecureStorage _secureStorage;
   final UserJourneyRepository _userJourneyRepository;
 
-  AppBloc({
-    required TokenRepository tokenRepository,
-    required UserJourneyRepository userJourneyRepository,
-  })  : _tokenRepository = tokenRepository,
+  AppBloc(
+      {required TokenRepository tokenRepository,
+      required UserJourneyRepository userJourneyRepository,
+      required SharedPreference sharedPreference,
+      required SecureStorage secureStorage})
+      : _tokenRepository = tokenRepository,
         _userJourneyRepository = userJourneyRepository,
+        _sharedPreference = sharedPreference,
+        _secureStorage = secureStorage,
         super(const AppState.unknown()) {
     on<AppLaunched>(_onAppLaunched);
     on<AppLanguageChangeEvent>(_onAppLanguageChangeEvent);
@@ -34,6 +42,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       emit(AppState.authenticated(
           userJourney: userJourney ?? UserJourney.investmentStyle));
     } else {
+      await _tokenRepository.deleteAll();
+      await _sharedPreference.deleteAllData();
+      await _secureStorage.deleteAllData();
       emit(AppState.unauthenticated(
         localeType: LocaleType.defaultLocale(),
       ));

@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../sign_out/sign_out_bloc_test.mocks.dart';
 import 'app_bloc_test.mocks.dart';
 
 class DioAdapterMock extends Mock implements HttpClientAdapter {}
@@ -21,17 +22,23 @@ void main() async {
   group('App Bloc Tests', () {
     late AppBloc appBloc;
     late MockTokenRepository tokenRepository;
+    late MockSharedPreference sharedPreference;
+    late MockSecureStorage secureStorage;
     late MockUserJourneyRepository userJourneyRepository;
 
     setUpAll(() async {
       tokenRepository = MockTokenRepository();
+      sharedPreference = MockSharedPreference();
+      secureStorage = MockSecureStorage();
       userJourneyRepository = MockUserJourneyRepository();
     });
 
     setUp(() async {
       appBloc = AppBloc(
           tokenRepository: tokenRepository,
-          userJourneyRepository: userJourneyRepository);
+          userJourneyRepository: userJourneyRepository,
+          secureStorage: secureStorage,
+          sharedPreference: sharedPreference);
     });
 
     test('App Bloc init state is should be `unknown`', () {
