@@ -56,8 +56,8 @@ const String endpointBotTerminateOrder = '$v1${bots}terminate-order/';
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
 
 const String endpointBotRecommendation = '${user}recomendation_bots/';
-const String endpointBotOrderHistory = '$v1/$bots/history-order';
-const String endpointBotTransactionHistory = '$v2/$bots/history-order';
+const String endpointBotOrderHistory = '$v1/$bots/history-order/';
+const String endpointBotTransactionHistory = '$v1/$bots/history-order/';
 const String endpointTransferTransactionHistory = '$v1/$transactions/history/';
 const String endpointBotDetail = '$v1${bots}bot_detail/';
 const String endpointIexCloud = 'https://iexcloud.io';

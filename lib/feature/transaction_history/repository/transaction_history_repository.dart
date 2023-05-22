@@ -1,7 +1,9 @@
 import '../../../core/domain/base_response.dart';
 import '../../../core/utils/date_utils.dart';
+import '../../bot_stock/utils/bot_stock_utils.dart';
 import '../bot_order/detail/domain/bot_activities_transaction_history_model.dart';
 import '../bot_order/detail/domain/bot_detail_transaction_history_response.dart';
+import '../domain/bot_transaction_history_request.dart';
 import '../domain/grouped_model.dart';
 import '../domain/grouped_transaction_model.dart';
 import '../domain/transaction_history_api_client.dart';
@@ -14,8 +16,13 @@ class TransactionHistoryRepository {
   Future<BaseResponse<List<GroupedTransactionModel>>>
       fetchAllTransactionsHistory() async {
     try {
-      var botTransactionHistory =
-          await _transactionHistoryApiClient.fetchBotTransactionHistory();
+      var botTransactionHistory = await _transactionHistoryApiClient
+          .fetchBotTransactionHistory(BotTransactionHistoryRequest(status: [
+        BotStatus.active.value,
+        BotStatus.pending.value,
+        BotStatus.closed.value,
+        BotStatus.cancel.value
+      ]));
       var transferTransactionHistory =
           await _transactionHistoryApiClient.fetchTransferTransactionHistory();
 
@@ -33,8 +40,13 @@ class TransactionHistoryRepository {
   Future<BaseResponse<List<GroupedTransactionModel>>>
       fetchBotTransactionsHistory() async {
     try {
-      var response =
-          await _transactionHistoryApiClient.fetchBotTransactionHistory();
+      var response = await _transactionHistoryApiClient
+          .fetchBotTransactionHistory(BotTransactionHistoryRequest(status: [
+        BotStatus.active.value,
+        BotStatus.pending.value,
+        BotStatus.closed.value,
+        BotStatus.cancel.value
+      ]));
 
       return BaseResponse.complete(groupedTransactionModels(List.from(response
           .data
