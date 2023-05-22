@@ -55,7 +55,8 @@ class DepositResultScreen extends StatelessWidget {
                     TabsScreen.openAndRemoveAllRoute(context),
                 secondaryButtonLabel:
                     S.of(context).buttonViewTransactionHistory,
-                secondaryButtonOnClick: ()=>TransactionHistoryScreen.open(context),
+                secondaryButtonOnClick: () =>
+                    TransactionHistoryScreen.open(context),
               ),
             ));
     }
