@@ -11,7 +11,9 @@
   "officeHoursLabel": "Office Hours",
   "officeHours": "09:00-18:00 (HKT)",
   "buttonCancel": "CANCEL",
+
   "buttonConfirm": "CONFIRM",
+  "buttonDone": "DONE",
   "buttonNext": "NEXT",
   "buttonNotNow": "NOT NOW",
   "buttonReloadPage": "RELOAD PAGE",
@@ -26,8 +28,12 @@
   "buttonMaybeLater": "MAYBE LATER",
   "buttonWithdraw": "WITHDRAW",
   "buttonBackToPortfolio": "BACK TO PORTFOLIO",
+  "buttonViewTransactionHistory": "VIEW TRANSACTION HISTORY",
   "currentPrice": "Current Price",
   "deposit": "Deposit",
+  "depositRequestSubmittedTitle": "Deposit Request Submitted",
+  "depositRequestSubmittedSubTitleFirstTime": "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved.",
+  "depositRequestSubmittedSubTitleReturn": "Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.",
   "estStopLossLevel": "Est. Stop Loss Level",
   "estMaxLossLevel": "Est. Max Loss Level",
   "estTakeProfitLevel": "Est. Take Profit Level",
@@ -335,6 +341,9 @@
   "totalAmount": "Total amount",
   "withdrawalAmount": "Withdrawal Amount",
   "withdrawalWorkingDays": "Your withdrawal can take up to 2 working days.",
+  "withdrawalRequestSubmittedTitle": "Your Withdrawal request is submitted.",
+  "withdrawalRequestSubmittedSubTitle": "You will be informed via email and app notification as soon as the funds are paid to your account.",
+
   "relearn": "relearn",
   "min": "~{minute} min",
   "@min": {

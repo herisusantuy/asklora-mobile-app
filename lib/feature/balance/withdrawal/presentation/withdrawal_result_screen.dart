@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../tabs/tabs_screen.dart';
+import '../../../transaction_history/presentation/transaction_history_screen.dart';
 import '../../widgets/balance_base_form.dart';
 
 class WithdrawalResultScreen extends StatelessWidget {
@@ -13,20 +15,20 @@ class WithdrawalResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BalanceBaseForm(
         useHeader: false,
-        content: const CustomStatusWidget(
-          title: 'Your withdrawal request is submitted.',
+        content: CustomStatusWidget(
+          title: S.of(context).withdrawalRequestSubmittedTitle,
           statusType: StatusType.success,
-          subTitle:
-              'You will be informed via email and app notification as soon as the funds are paid to your account.',
+          subTitle: S.of(context).withdrawalRequestSubmittedSubTitle,
         ),
         bottomButton: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: ButtonPair(
-            primaryButtonLabel: 'DONE',
+            primaryButtonLabel: S.of(context).buttonDone,
             primaryButtonOnClick: () =>
                 TabsScreen.openAndRemoveAllRoute(context),
-            secondaryButtonLabel: 'VIEW TRANSACTION HISTORY',
-            secondaryButtonOnClick: () {},
+            secondaryButtonLabel: S.of(context).buttonViewTransactionHistory,
+            secondaryButtonOnClick: () =>
+                TransactionHistoryScreen.open(context),
           ),
         ));
   }
