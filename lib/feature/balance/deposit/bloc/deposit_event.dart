@@ -35,3 +35,5 @@ class ProofOfRemittanceImageDeleted extends DepositEvent {
 }
 
 class SubmitDeposit extends DepositEvent {}
+
+class ResetDepositResponseState extends DepositEvent {}

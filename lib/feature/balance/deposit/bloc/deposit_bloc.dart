@@ -20,10 +20,16 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     on<ProofOfRemittanceImagesChanged>(_onProofOfRemittanceImagesChanged);
     on<ProofOfRemittanceImageDeleted>(_onProofOfRemittanceImageDeleted);
     on<SubmitDeposit>(_onSubmitDeposit);
+    on<ResetDepositResponseState>(_onResetDepositResponseState);
   }
 
   final DepositRepository _depositRepository;
   final DepositType depositType;
+
+  void _onResetDepositResponseState(
+      ResetDepositResponseState event, Emitter<DepositState> emit) {
+    emit(state.copyWith(response: const BaseResponse()));
+  }
 
   void _onDepositAmountChanged(
       DepositAmountChanged event, Emitter<DepositState> emit) {

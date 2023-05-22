@@ -7,6 +7,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
 import '../../core/utils/route_generator.dart';
+import '../../core/utils/storage/secure_storage.dart';
+import '../../core/utils/storage/shared_preference.dart';
 import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';
@@ -36,7 +38,9 @@ class App extends StatelessWidget {
     return BlocProvider(
         create: (_) => AppBloc(
             tokenRepository: TokenRepository(),
-            userJourneyRepository: UserJourneyRepository())
+            userJourneyRepository: UserJourneyRepository(),
+            sharedPreference: SharedPreference(),
+            secureStorage: SecureStorage())
           ..add(AppLaunched()),
         child: BlocConsumer<AppBloc, AppState>(
             listener: (_, __) => FlutterNativeSplash.remove(),

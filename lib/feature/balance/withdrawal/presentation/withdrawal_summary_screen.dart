@@ -102,7 +102,9 @@ class WithdrawalSummaryScreen extends StatelessWidget {
               loraPopUpMessageModel: LoraPopUpMessageModel(
                   title: S.of(context).unableToProcessWithdrawalTitle,
                   subTitle: S.of(context).unableToProcessWithdrawalSubTitle,
-                  onPrimaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () => context
+                      .read<WithdrawalBloc>()
+                      .add(ResetWithdrawalResponseState()),
                   primaryButtonLabel: S.of(context).buttonBack),
             )),
       ),
