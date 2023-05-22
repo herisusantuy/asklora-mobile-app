@@ -170,6 +170,16 @@ class S {
     );
   }
 
+  /// `DONE`
+  String get buttonDone {
+    return Intl.message(
+      'DONE',
+      name: 'buttonDone',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `NEXT`
   String get buttonNext {
     return Intl.message(
@@ -310,6 +320,16 @@ class S {
     );
   }
 
+  /// `VIEW TRANSACTION HISTORY`
+  String get buttonViewTransactionHistory {
+    return Intl.message(
+      'VIEW TRANSACTION HISTORY',
+      name: 'buttonViewTransactionHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Price`
   String get currentPrice {
     return Intl.message(
@@ -325,6 +345,36 @@ class S {
     return Intl.message(
       'Deposit',
       name: 'deposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit Request Submitted`
+  String get depositRequestSubmittedTitle {
+    return Intl.message(
+      'Deposit Request Submitted',
+      name: 'depositRequestSubmittedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved.`
+  String get depositRequestSubmittedSubTitleFirstTime {
+    return Intl.message(
+      'Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved.',
+      name: 'depositRequestSubmittedSubTitleFirstTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.`
+  String get depositRequestSubmittedSubTitleReturn {
+    return Intl.message(
+      'Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.',
+      name: 'depositRequestSubmittedSubTitleReturn',
       desc: '',
       args: [],
     );
@@ -2418,6 +2468,26 @@ class S {
     return Intl.message(
       'Your withdrawal can take up to 2 working days.',
       name: 'withdrawalWorkingDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Withdrawal request is submitted.`
+  String get withdrawalRequestSubmittedTitle {
+    return Intl.message(
+      'Your Withdrawal request is submitted.',
+      name: 'withdrawalRequestSubmittedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You will be informed via email and app notification as soon as the funds are paid to your account.`
+  String get withdrawalRequestSubmittedSubTitle {
+    return Intl.message(
+      'You will be informed via email and app notification as soon as the funds are paid to your account.',
+      name: 'withdrawalRequestSubmittedSubTitle',
       desc: '',
       args: [],
     );

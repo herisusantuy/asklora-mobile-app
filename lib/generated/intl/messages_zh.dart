@@ -100,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonContinue": MessageLookupByLibrary.simpleMessage("繼續"),
         "buttonCreateAnAccount": MessageLookupByLibrary.simpleMessage("建立帳戶"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
+        "buttonDone": MessageLookupByLibrary.simpleMessage("完成"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
         "buttonMaybeLater": MessageLookupByLibrary.simpleMessage("稍後再說"),
@@ -107,6 +108,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("稍後再說"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("重新加載"),
         "buttonSignOut": MessageLookupByLibrary.simpleMessage("登出"),
+        "buttonViewTransactionHistory":
+            MessageLookupByLibrary.simpleMessage("查看交易歷史"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage("投資一樣\n要夠Fit"),
         "carouselIntro2":
@@ -128,6 +131,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
         "deposit": MessageLookupByLibrary.simpleMessage("存入資金"),
+        "depositRequestSubmittedSubTitleFirstTime":
+            MessageLookupByLibrary.simpleMessage(
+                "我們會於 1 至 2 個工作天內檢視你的開戶申請及首次入金。當賬戶批核後會以電郵或應用程式通知。"),
+        "depositRequestSubmittedSubTitleReturn":
+            MessageLookupByLibrary.simpleMessage(
+                "你已提交入金請求，當收到入金後，\n我們會盡快以電郵或應用程式通知。"),
+        "depositRequestSubmittedTitle":
+            MessageLookupByLibrary.simpleMessage("已收到入金申請"),
         "doAnyOfTheFollowingApply":
             MessageLookupByLibrary.simpleMessage("以下描述適用於你或你的直系親屬？"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
@@ -345,6 +356,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
+        "withdrawalRequestSubmittedSubTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "當資金已繳付至你戶口後，我們會盡快透過電郵或應用程式通知。"),
+        "withdrawalRequestSubmittedTitle":
+            MessageLookupByLibrary.simpleMessage("已收到提取申請"),
         "withdrawalWorkingDays":
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),

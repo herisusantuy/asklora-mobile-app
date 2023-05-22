@@ -118,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonCreateAnAccount":
             MessageLookupByLibrary.simpleMessage("CREATE AN ACCOUNT"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("DEPOSIT"),
+        "buttonDone": MessageLookupByLibrary.simpleMessage("DONE"),
         "buttonHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("HAVE AN ACCOUNT?"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("LET’S BEGIN"),
@@ -126,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("NOT NOW"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("RELOAD PAGE"),
         "buttonSignOut": MessageLookupByLibrary.simpleMessage("SIGN OUT"),
+        "buttonViewTransactionHistory":
+            MessageLookupByLibrary.simpleMessage("VIEW TRANSACTION HISTORY"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("WITHDRAW"),
         "carouselIntro1": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
@@ -157,6 +160,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "defineInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("DEFINE INVESTMENT STYLE"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
+        "depositRequestSubmittedSubTitleFirstTime":
+            MessageLookupByLibrary.simpleMessage(
+                "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved."),
+        "depositRequestSubmittedSubTitleReturn":
+            MessageLookupByLibrary.simpleMessage(
+                "Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives."),
+        "depositRequestSubmittedTitle":
+            MessageLookupByLibrary.simpleMessage("Deposit Request Submitted"),
         "doAnyOfTheFollowingApply": MessageLookupByLibrary.simpleMessage(
             "Do any of the following apply to you or a member of your immediate family ?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -462,6 +473,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "withdrawalAmount":
             MessageLookupByLibrary.simpleMessage("Withdrawal Amount"),
+        "withdrawalRequestSubmittedSubTitle": MessageLookupByLibrary.simpleMessage(
+            "You will be informed via email and app notification as soon as the funds are paid to your account."),
+        "withdrawalRequestSubmittedTitle": MessageLookupByLibrary.simpleMessage(
+            "Your Withdrawal request is submitted."),
         "withdrawalWorkingDays": MessageLookupByLibrary.simpleMessage(
             "Your withdrawal can take up to 2 working days."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
