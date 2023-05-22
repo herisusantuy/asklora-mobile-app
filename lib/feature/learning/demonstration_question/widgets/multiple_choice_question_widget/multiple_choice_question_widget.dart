@@ -5,7 +5,7 @@ import '../../../../../../../core/presentation/buttons/secondary/secondary_multi
 import '../../../../onboarding/ppi/domain/question.dart';
 import '../../../../onboarding/ppi/presentation/widget/multiple_question_widget/bloc/multiple_question_widget_bloc.dart';
 import '../../../../onboarding/ppi/presentation/widget/question_title.dart';
-import '../demonstration_tooltip_guide.dart';
+import '../../../widgets/demonstration_tooltip_guide.dart';
 
 part 'widgets/multiple_choice_button.dart';
 

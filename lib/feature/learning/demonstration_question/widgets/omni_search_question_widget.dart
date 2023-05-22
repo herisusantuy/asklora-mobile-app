@@ -7,7 +7,7 @@ import '../../../onboarding/ppi/domain/question.dart';
 import '../../../onboarding/ppi/presentation/widget/omni_search_question_widget/bloc/omni_search_question_widget_bloc.dart';
 import '../../../onboarding/ppi/presentation/widget/omni_search_question_widget/widgets/custom_choice_chips.dart';
 import '../../../onboarding/ppi/presentation/widget/question_title.dart';
-import 'demonstration_tooltip_guide.dart';
+import '../../widgets/demonstration_tooltip_guide.dart';
 import '../../../../../core/presentation/custom_snack_bar.dart';
 
 class OmniSearchQuestionWidget extends StatelessWidget {

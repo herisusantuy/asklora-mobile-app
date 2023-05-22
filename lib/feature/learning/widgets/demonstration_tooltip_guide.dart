@@ -47,7 +47,7 @@ class _DemonstrationTooltipGuideState extends State<DemonstrationTooltipGuide> {
       fadeOutDuration: Duration.zero,
       elevation: 0,
       isModal: true,
-      shadow: null,
+      shadow: const Shadow(color: Colors.transparent),
       backgroundColor: Colors.transparent,
       barrierDismissible: false,
       tailLength: 0,
