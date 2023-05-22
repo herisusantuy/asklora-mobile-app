@@ -9,14 +9,20 @@ part of 'bot_transaction_history_request.dart';
 BotTransactionHistoryRequest _$BotTransactionHistoryRequestFromJson(
         Map<String, dynamic> json) =>
     BotTransactionHistoryRequest(
-      status: (json['transaction_history_type'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
+      status:
+          (json['status'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$BotTransactionHistoryRequestToJson(
-        BotTransactionHistoryRequest instance) =>
-    <String, dynamic>{
-      'transaction_history_type': instance.status,
-    };
+    BotTransactionHistoryRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('status', instance.status);
+  return val;
+}

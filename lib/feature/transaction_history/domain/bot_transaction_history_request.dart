@@ -4,10 +4,10 @@ part 'bot_transaction_history_request.g.dart';
 
 @JsonSerializable()
 class BotTransactionHistoryRequest {
-  @JsonKey(name: 'transaction_history_type')
-  final List<String> status;
+  @JsonKey(name: 'status', includeIfNull: false)
+  final List<String>? status;
 
-  const BotTransactionHistoryRequest({this.status = const []});
+  const BotTransactionHistoryRequest({this.status});
 
   factory BotTransactionHistoryRequest.fromJson(Map<String, dynamic> json) =>
       _$BotTransactionHistoryRequestFromJson(json);
