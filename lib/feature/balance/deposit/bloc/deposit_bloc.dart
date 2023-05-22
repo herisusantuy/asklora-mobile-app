@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
+import '../domain/deposit_response.dart';
 import '../repository/deposit_repository.dart';
 import '../utils/deposit_utils.dart';
 
@@ -20,10 +21,16 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     on<ProofOfRemittanceImagesChanged>(_onProofOfRemittanceImagesChanged);
     on<ProofOfRemittanceImageDeleted>(_onProofOfRemittanceImageDeleted);
     on<SubmitDeposit>(_onSubmitDeposit);
+    on<ResetDepositResponse>(_onResetDepositResponse);
   }
 
   final DepositRepository _depositRepository;
   final DepositType depositType;
+
+  void _onResetDepositResponse(
+      ResetDepositResponse event, Emitter<DepositState> emit) {
+    emit(state.copyWith(response: const BaseResponse()));
+  }
 
   void _onDepositAmountChanged(
       DepositAmountChanged event, Emitter<DepositState> emit) {
