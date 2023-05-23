@@ -53,9 +53,10 @@ class TransactionHistoryModel extends Equatable {
   String get createdFormatted =>
       formatDateTimeAsString(created, dateFormat: 'dd/MM/yyyy hh:mm');
 
-  String get timeCompletedFormatted => timeComplete != null
-      ? formatDateTimeAsString(timeComplete, dateFormat: 'dd/MM/yyyy hh:mm')
-      : '';
+  String get timeCompletedFormatted =>
+      timeComplete != null && timeComplete!.isNotEmpty
+          ? formatDateTimeAsString(timeComplete, dateFormat: 'dd/MM/yyyy hh:mm')
+          : '';
 
   String get bankAccountNumberString => '$bankCode-$bankAccountNumber';
 
