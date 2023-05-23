@@ -3,11 +3,13 @@ import 'dart:ui';
 import '../../../core/styles/asklora_colors.dart';
 
 enum TransferType {
-  deposit('DEPOSIT', 'Deposit'),
-  withdraw('WITHDRAW', 'Withdrawal');
+  deposit('DEPOSIT', 'Deposit', AskLoraColors.primaryGreen, '+'),
+  withdraw('WITHDRAW', 'Withdrawal', AskLoraColors.primaryMagenta, '-');
 
   final String value;
   final String title;
+  final Color color;
+  final String punctuation;
 
   static TransferType findByString(String transferTypeString) {
     TransferType transferType = TransferType.values
@@ -15,7 +17,7 @@ enum TransferType {
     return transferType;
   }
 
-  const TransferType(this.value, this.title);
+  const TransferType(this.value, this.title, this.color, this.punctuation);
 }
 
 enum TransferStatus {
