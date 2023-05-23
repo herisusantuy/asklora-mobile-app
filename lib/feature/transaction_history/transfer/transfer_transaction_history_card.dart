@@ -35,8 +35,9 @@ class TransferTransactionHistoryCard extends StatelessWidget {
                   width: 14,
                 ),
                 CustomTextNew(
-                  'HKD ${transactionHistoryModel.amountString}',
-                  style: AskLoraTextStyles.subtitle2,
+                  '${transactionHistoryModel.transferType.punctuation}HKD ${transactionHistoryModel.amountString}',
+                  style: AskLoraTextStyles.subtitle2.copyWith(
+                      color: transactionHistoryModel.transferType.color),
                 ),
               ],
             ),
