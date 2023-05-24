@@ -59,7 +59,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
       if (controller.text.isEmpty) {
         hintText = widget.hintText;
         label = null;
-        prefixText = null;
+        prefixText = widget.prefixText;
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
         hintText = null;
@@ -85,7 +85,8 @@ class _AmountTextFieldState extends State<AmountTextField> {
               }
             },
             inputFormatters: [
-              CurrencyTextInputFormatter(symbol: '', decimalDigits: 1)
+              CurrencyTextInputFormatter(
+                  symbol: '', decimalDigits: 1, enableNegative: false),
             ],
             keyboardType: TextInputType.number,
             style: TextFieldStyle.valueTextStyle,
