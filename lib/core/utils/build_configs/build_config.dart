@@ -52,7 +52,7 @@ class StagingConfig implements BaseConfig {
 
 class ProdConfig implements BaseConfig {
   @override
-  String get ppiBaseUrl => 'https://ppi-dev.intra.asklora.ai/';
+  String get ppiBaseUrl => 'https://ppi.api.asklora.ai/';
 
   @override
   String get askLoraApiBaseUrl => 'https://apca.api.asklora.ai/';
