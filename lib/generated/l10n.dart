@@ -2453,6 +2453,56 @@ class S {
     );
   }
 
+  /// `Get your Investments in Shape`
+  String get welcomeScreenTitle {
+    return Intl.message(
+      'Get your Investments in Shape',
+      name: 'welcomeScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Say Goodbye to bad investing habits and embrace your new AI assistant, Asklora!`
+  String get welcomeScreenSubTitle {
+    return Intl.message(
+      'Say Goodbye to bad investing habits and embrace your new AI assistant, Asklora!',
+      name: 'welcomeScreenSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guidance from your own personal AI`
+  String get welcomeScreenFirstBenefit {
+    return Intl.message(
+      'Guidance from your own personal AI',
+      name: 'welcomeScreenFirstBenefit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personalised Experience`
+  String get welcomeScreenSecondBenefit {
+    return Intl.message(
+      'Personalised Experience',
+      name: 'welcomeScreenSecondBenefit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Automated trading strategies`
+  String get welcomeScreenThirdBenefit {
+    return Intl.message(
+      'Automated trading strategies',
+      name: 'welcomeScreenThirdBenefit',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Withdrawal Amount`
   String get withdrawalAmount {
     return Intl.message(

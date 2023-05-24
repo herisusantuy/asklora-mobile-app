@@ -471,6 +471,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "viewDepositGuide":
             MessageLookupByLibrary.simpleMessage("View Deposit Guide"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
+        "welcomeScreenFirstBenefit": MessageLookupByLibrary.simpleMessage(
+            "Guidance from your own personal AI"),
+        "welcomeScreenSecondBenefit":
+            MessageLookupByLibrary.simpleMessage("Personalised Experience"),
+        "welcomeScreenSubTitle": MessageLookupByLibrary.simpleMessage(
+            "Say Goodbye to bad investing habits and embrace your new AI assistant, Asklora!"),
+        "welcomeScreenThirdBenefit": MessageLookupByLibrary.simpleMessage(
+            "Automated trading strategies"),
+        "welcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
+            "Get your Investments in Shape"),
         "withdrawalAmount":
             MessageLookupByLibrary.simpleMessage("Withdrawal Amount"),
         "withdrawalRequestSubmittedSubTitle": MessageLookupByLibrary.simpleMessage(

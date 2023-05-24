@@ -355,6 +355,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
         "website": MessageLookupByLibrary.simpleMessage("網站"),
+        "welcomeScreenFirstBenefit":
+            MessageLookupByLibrary.simpleMessage("FinFit 教練指導"),
+        "welcomeScreenSecondBenefit":
+            MessageLookupByLibrary.simpleMessage("個人化體驗"),
+        "welcomeScreenSubTitle":
+            MessageLookupByLibrary.simpleMessage("踢走投資壞習慣！投資夠FinFit，夠自信！"),
+        "welcomeScreenThirdBenefit":
+            MessageLookupByLibrary.simpleMessage("AI 全自動交易"),
+        "welcomeScreenTitle":
+            MessageLookupByLibrary.simpleMessage("投資，你夠 Fit 未？"),
         "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
         "withdrawalRequestSubmittedSubTitle":
             MessageLookupByLibrary.simpleMessage(

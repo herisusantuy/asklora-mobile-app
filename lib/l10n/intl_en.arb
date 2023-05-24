@@ -339,6 +339,11 @@
 
   "timeCompleted": "Time Completed",
   "totalAmount": "Total amount",
+  "welcomeScreenTitle": "Get your Investments in Shape",
+  "welcomeScreenSubTitle": "Say Goodbye to bad investing habits and embrace your new AI assistant, Asklora!",
+  "welcomeScreenFirstBenefit": "Guidance from your own personal AI",
+  "welcomeScreenSecondBenefit": "Personalised Experience",
+  "welcomeScreenThirdBenefit": "Automated trading strategies",
   "withdrawalAmount": "Withdrawal Amount",
   "withdrawalWorkingDays": "Your withdrawal can take up to 2 working days.",
   "withdrawalRequestSubmittedTitle": "Your Withdrawal request is submitted.",

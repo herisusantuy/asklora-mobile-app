@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import 'package:asklora_mobile_app/feature/onboarding/welcome/welcome_screen.dart';
 import 'package:asklora_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,7 +20,7 @@ void main() {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          home: const CarouselScreen(),
+          home: const WelcomeScreen(),
           navigatorObservers: [mockObserver],
         ));
       }
@@ -31,7 +31,7 @@ void main() {
         await buildCarouselScreen(tester);
         await tester.pumpAndSettle();
         var onBoardingButtonPair = find.byKey(
-          const Key('carousel_button_pair'),
+          const Key('button_pair'),
         );
 
         var localizationToggleButton = find.byKey(
