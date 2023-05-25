@@ -9,6 +9,7 @@ import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../generated/l10n.dart';
 import '../../../auth/sign_in/presentation/sign_in_screen.dart';
 import '../../../onboarding/welcome/welcome_screen.dart';
 import '../../email_activation/presentation/email_activation_screen.dart';
@@ -47,9 +48,7 @@ class SignUpForm extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: [
-                    const LoraMemojiHeader(
-                        text:
-                            'Start your new investing journey\nwith Lora - your\nAI Investment Coach'),
+                    LoraMemojiHeader(text: S.of(context).signUpTitle),
                     _userNameInput(),
                     _padding(),
                     _passwordInput(),
@@ -115,7 +114,7 @@ class SignUpForm extends StatelessWidget {
       return PrimaryButton(
         key: const Key('sign_up_submit_button'),
         fontStyle: FontStyle.normal,
-        label: 'SIGN UP',
+        label: S.of(context).buttonSignUp,
         disabled: !(state.isEmailValid && state.isPasswordValid),
         onTap: () => context.read<SignUpBloc>().add(const SignUpSubmitted()),
       );
@@ -127,7 +126,7 @@ class SignUpForm extends StatelessWidget {
       buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
       key: const Key('sign_up_have_an_account_button'),
       fontStyle: FontStyle.normal,
-      label: 'ALREADY HAVE AN ACCOUNT?',
+      label: S.of(context).buttonAlreadyHaveAnAccount,
       onTap: () => SignInScreen.open(context),
     );
   }
@@ -136,7 +135,7 @@ class SignUpForm extends StatelessWidget {
     return CustomTextButton(
       key: const Key('sign_up_may_be_later_button'),
       margin: const EdgeInsets.only(top: 20),
-      label: 'MAYBE LATER',
+      label: S.of(context).buttonMaybeLater,
       onTap: () => WelcomeScreen.open(context),
     );
   }

@@ -29,11 +29,26 @@
   "buttonWithdraw": "WITHDRAW",
   "buttonBackToPortfolio": "BACK TO PORTFOLIO",
   "buttonViewTransactionHistory": "VIEW TRANSACTION HISTORY",
+  "buttonSignUp": "SIGN UP",
+  "buttonAlreadyHaveAnAccount": "ALREADY HAVE AN ACCOUNT?",
+  "buttonResendActivationLink": "RESEND ACTIVATION LINK",
+  "buttonSignUpAgain": "SIGN UP AGAIN",
+  "buttonDefineInvestmentStyle": "DEFINE INVESTMENT STYLE",
   "currentPrice": "Current Price",
   "deposit": "Deposit",
   "depositRequestSubmittedTitle": "Deposit Request Submitted",
   "depositRequestSubmittedSubTitleFirstTime": "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved.",
   "depositRequestSubmittedSubTitleReturn": "Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.",
+  "emailActivationSuccessTitle": "We’ve sent an email to\n {emailAddress}\n\nPlease use your phone to click on the activation link!",
+  "@emailActivationSuccessTitle": {
+    "placeholders": {
+      "emailAddress": {
+        "type": "String"
+      }
+    }
+  },
+  "emailActivationFailedTitle": "Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!",
+
   "estStopLossLevel": "Est. Stop Loss Level",
   "estMaxLossLevel": "Est. Max Loss Level",
   "estTakeProfitLevel": "Est. Take Profit Level",
@@ -68,6 +83,7 @@
   "free": "FREE",
   "botStockId": "Botstock ID",
   "investmentAmount": "Investment Amount",
+  "investmentStyleWelcomeTitle": "Let’s get to the heart of personalisation, it’s time to define your investment style.",
   "tradeFee": "Trade Fee",
   "endedAmount": "Ended Amount",
   "summary": "Summary",
@@ -331,6 +347,7 @@
   "unableToProcessWithdrawalTitle": "Unable to Process Withdrawal",
   "unableToProcessWithdrawalSubTitle": "We’re having some trouble processing your withdrawal request. Please try again",
   "status": "Status",
+  "signUpTitle": "Start your new investing journey with Lora - \nYour FinFit Coach",
   "to": "To",
   "transactionFee": "Transaction fee",
   "transferTo": "Transfer to",

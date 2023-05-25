@@ -330,6 +330,56 @@ class S {
     );
   }
 
+  /// `SIGN UP`
+  String get buttonSignUp {
+    return Intl.message(
+      'SIGN UP',
+      name: 'buttonSignUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ALREADY HAVE AN ACCOUNT?`
+  String get buttonAlreadyHaveAnAccount {
+    return Intl.message(
+      'ALREADY HAVE AN ACCOUNT?',
+      name: 'buttonAlreadyHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RESEND ACTIVATION LINK`
+  String get buttonResendActivationLink {
+    return Intl.message(
+      'RESEND ACTIVATION LINK',
+      name: 'buttonResendActivationLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SIGN UP AGAIN`
+  String get buttonSignUpAgain {
+    return Intl.message(
+      'SIGN UP AGAIN',
+      name: 'buttonSignUpAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DEFINE INVESTMENT STYLE`
+  String get buttonDefineInvestmentStyle {
+    return Intl.message(
+      'DEFINE INVESTMENT STYLE',
+      name: 'buttonDefineInvestmentStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Price`
   String get currentPrice {
     return Intl.message(
@@ -375,6 +425,26 @@ class S {
     return Intl.message(
       'Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.',
       name: 'depositRequestSubmittedSubTitleReturn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’ve sent an email to\n {emailAddress}\n\nPlease use your phone to click on the activation link!`
+  String emailActivationSuccessTitle(String emailAddress) {
+    return Intl.message(
+      'We’ve sent an email to\n $emailAddress\n\nPlease use your phone to click on the activation link!',
+      name: 'emailActivationSuccessTitle',
+      desc: '',
+      args: [emailAddress],
+    );
+  }
+
+  /// `Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!`
+  String get emailActivationFailedTitle {
+    return Intl.message(
+      'Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!',
+      name: 'emailActivationFailedTitle',
       desc: '',
       args: [],
     );
@@ -715,6 +785,16 @@ class S {
     return Intl.message(
       'Investment Amount',
       name: 'investmentAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let’s get to the heart of personalisation, it’s time to define your investment style.`
+  String get investmentStyleWelcomeTitle {
+    return Intl.message(
+      'Let’s get to the heart of personalisation, it’s time to define your investment style.',
+      name: 'investmentStyleWelcomeTitle',
       desc: '',
       args: [],
     );
@@ -2388,6 +2468,16 @@ class S {
     return Intl.message(
       'Status',
       name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start your new investing journey with Lora - \nYour FinFit Coach`
+  String get signUpTitle {
+    return Intl.message(
+      'Start your new investing journey with Lora - \nYour FinFit Coach',
+      name: 'signUpTitle',
       desc: '',
       args: [],
     );
