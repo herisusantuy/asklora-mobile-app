@@ -47,7 +47,7 @@ class BotRecommendationCardShimmer extends StatelessWidget {
                 child: PrimaryButton(
                     disabled: true,
                     buttonPrimarySize: ButtonPrimarySize.small,
-                    label: 'TRADE',
+                    label: S.of(context).trade,
                     onTap: () {}),
               ),
             )

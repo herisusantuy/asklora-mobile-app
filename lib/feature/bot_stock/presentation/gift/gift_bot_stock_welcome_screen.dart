@@ -35,7 +35,7 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 30.0),
         child: PrimaryButton(
           buttonPrimaryType: ButtonPrimaryType.solidGreen,
-          label: 'SURE! WHAT IS BOTSTOCK?',
+          label: 'Sure! What is Botstock?',
           onTap: () => BotStockExplanationScreen.open(context),
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:just_the_tooltip/just_the_tooltip.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../generated/l10n.dart';
 import '../../../onboarding/ppi/domain/fixture.dart';
 import '../../../onboarding/ppi/presentation/widget/header.dart';
 import '../../learning_bot_stock_screen.dart';
@@ -61,7 +62,7 @@ class DemonstrationQuestionScreen extends StatelessWidget {
                                     key: key,
                                     disabled: !state.questionAnsweredList[
                                         state.questionIndex],
-                                    label: 'NEXT',
+                                    label: S.of(context).buttonNext,
                                     onTap: () {
                                       if (state.questionIndex + 1 >=
                                           state.questionCollection.length) {

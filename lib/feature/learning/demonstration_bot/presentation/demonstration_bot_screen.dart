@@ -54,7 +54,7 @@ class DemonstrationBotScreen extends StatelessWidget {
                 title:
                     "Let's see the recommendations based on your Investment style.",
                 primaryButtonLabel: 'VIEW RECOMMENDATIONS',
-                secondaryButtonLabel: 'CONTINUE LATER',
+                secondaryButtonLabel: 'Continue Later',
                 onPrimaryButtonTap: () {
                   tooltipController.showTooltip();
                   Navigator.pop(context);

@@ -82,8 +82,7 @@ class _AutoResizedTextFieldState extends State<AutoResizedTextField> {
           contentPadding: EdgeInsets.zero,
           border: InputBorder.none,
           hintStyle: widget.hintTextStyle ??
-              AskLoraTextStyles.h3Italic
-                  .copyWith(color: AskLoraColors.lightGray),
+              AskLoraTextStyles.h3.copyWith(color: AskLoraColors.lightGray),
           suffixIcon: widget.suffixIcon,
           hintText: widget.hintText),
     );

@@ -105,10 +105,10 @@ class LocaleType {
       this.labelName, this.fontType);
 
   static List<LocaleType> supportedLocales() => [
-        const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
+        const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),
         const LocaleType('zh', 'HK', '中', '繁體中文', 'NotoSansTC')
       ];
 
   static LocaleType defaultLocale() =>
-      const LocaleType('en', 'US', 'ENG', 'English', 'Mulish');
+      const LocaleType('en', 'US', 'ENG', 'English', 'Manrope');
 }

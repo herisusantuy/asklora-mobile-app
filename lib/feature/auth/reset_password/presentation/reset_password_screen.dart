@@ -43,7 +43,7 @@ class ResetPasswordScreen extends StatelessWidget {
         builder: (context, state) {
           return PrimaryButton(
               key: const Key('reset_password_submit_button'),
-              label: 'RESET PASSWORD',
+              label: 'Reset Password',
               disabled: state.disableSubmitButton(),
               onTap: () => context
                   .read<ResetPasswordBloc>()

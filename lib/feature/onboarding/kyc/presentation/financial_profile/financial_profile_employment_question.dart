@@ -7,6 +7,7 @@ import '../../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -343,7 +344,7 @@ class FinancialProfileEmploymentQuestion extends StatelessWidget {
                         KycPageStep.financialProfileSourceOfWealth)),
                 secondaryButtonOnClick: () => context.read<KycBloc>().add(
                     SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-                primaryButtonLabel: 'NEXT',
-                secondaryButtonLabel: 'SAVE FOR LATER',
+                primaryButtonLabel: S.of(context).buttonNext,
+                secondaryButtonLabel: S.of(context).saveForLater,
               ));
 }

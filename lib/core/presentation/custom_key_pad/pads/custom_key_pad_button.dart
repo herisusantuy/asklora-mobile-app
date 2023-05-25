@@ -47,8 +47,7 @@ class _CustomKeyPadButtonState extends State<CustomKeyPadButton> {
         child: Center(
             child: CustomTextNew(
           widget.value,
-          style: AskLoraTextStyles.h3Italic
-              .copyWith(color: AskLoraColors.charcoal),
+          style: AskLoraTextStyles.h3.copyWith(color: AskLoraColors.charcoal),
         )),
       ),
     );

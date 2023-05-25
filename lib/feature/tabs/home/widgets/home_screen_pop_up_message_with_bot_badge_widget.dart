@@ -13,7 +13,7 @@ class HomeScreenPopUpWidgetWithBotBadgeWidget extends StatelessWidget {
       subTitle:
           'You can manage all your investments here after you start trading. Create an account and start trading.',
       botTypes: const [BotType.pullUp, BotType.squat],
-      buttonLabel: 'OPEN INVESTMENT ACCOUNT',
+      buttonLabel: S.of(context).openInvestmentAccount,
       onButtonTap: () {},
     );
   }

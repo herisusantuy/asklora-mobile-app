@@ -80,10 +80,10 @@ class S {
     );
   }
 
-  /// `EmailAddress`
+  /// `Email Address`
   String get emailAddress {
     return Intl.message(
-      'EmailAddress',
+      'Email Address',
       name: 'emailAddress',
       desc: '',
       args: [],
@@ -160,231 +160,231 @@ class S {
     );
   }
 
-  /// `CANCEL`
-  String get buttonCancel {
-    return Intl.message(
-      'CANCEL',
-      name: 'buttonCancel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `CONFIRM`
-  String get buttonConfirm {
-    return Intl.message(
-      'CONFIRM',
-      name: 'buttonConfirm',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `DONE`
-  String get buttonDone {
-    return Intl.message(
-      'DONE',
-      name: 'buttonDone',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `NEXT`
-  String get buttonNext {
-    return Intl.message(
-      'NEXT',
-      name: 'buttonNext',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `NOT NOW`
-  String get buttonNotNow {
-    return Intl.message(
-      'NOT NOW',
-      name: 'buttonNotNow',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `RELOAD PAGE`
-  String get buttonReloadPage {
-    return Intl.message(
-      'RELOAD PAGE',
-      name: 'buttonReloadPage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `DEPOSIT`
-  String get buttonDeposit {
-    return Intl.message(
-      'DEPOSIT',
-      name: 'buttonDeposit',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `CANCEL TRADE`
-  String get buttonCancelTrade {
-    return Intl.message(
-      'CANCEL TRADE',
-      name: 'buttonCancelTrade',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `CREATE AN ACCOUNT`
-  String get buttonCreateAnAccount {
-    return Intl.message(
-      'CREATE AN ACCOUNT',
-      name: 'buttonCreateAnAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `HAVE AN ACCOUNT?`
-  String get buttonHaveAnAccount {
-    return Intl.message(
-      'HAVE AN ACCOUNT?',
-      name: 'buttonHaveAnAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `LET’S BEGIN`
-  String get buttonLetsBegin {
-    return Intl.message(
-      'LET’S BEGIN',
-      name: 'buttonLetsBegin',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `SIGN OUT`
-  String get buttonSignOut {
-    return Intl.message(
-      'SIGN OUT',
-      name: 'buttonSignOut',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `BACK`
-  String get buttonBack {
-    return Intl.message(
-      'BACK',
-      name: 'buttonBack',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `CONTINUE`
-  String get buttonContinue {
-    return Intl.message(
-      'CONTINUE',
-      name: 'buttonContinue',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `MAYBE LATER`
-  String get buttonMaybeLater {
-    return Intl.message(
-      'MAYBE LATER',
-      name: 'buttonMaybeLater',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `WITHDRAW`
-  String get buttonWithdraw {
-    return Intl.message(
-      'WITHDRAW',
-      name: 'buttonWithdraw',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `BACK TO PORTFOLIO`
-  String get buttonBackToPortfolio {
-    return Intl.message(
-      'BACK TO PORTFOLIO',
-      name: 'buttonBackToPortfolio',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `VIEW TRANSACTION HISTORY`
-  String get buttonViewTransactionHistory {
-    return Intl.message(
-      'VIEW TRANSACTION HISTORY',
-      name: 'buttonViewTransactionHistory',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `SIGN UP`
+  /// `Sign Up`
   String get buttonSignUp {
     return Intl.message(
-      'SIGN UP',
+      'Sign Up',
       name: 'buttonSignUp',
       desc: '',
       args: [],
     );
   }
 
-  /// `ALREADY HAVE AN ACCOUNT?`
+  /// `Already Have An Account?`
   String get buttonAlreadyHaveAnAccount {
     return Intl.message(
-      'ALREADY HAVE AN ACCOUNT?',
+      'Already Have An Account?',
       name: 'buttonAlreadyHaveAnAccount',
       desc: '',
       args: [],
     );
   }
 
-  /// `RESEND ACTIVATION LINK`
+  /// `Resend Activation Link`
   String get buttonResendActivationLink {
     return Intl.message(
-      'RESEND ACTIVATION LINK',
+      'Resend Activation Link',
       name: 'buttonResendActivationLink',
       desc: '',
       args: [],
     );
   }
 
-  /// `SIGN UP AGAIN`
+  /// `Sign Up Again`
   String get buttonSignUpAgain {
     return Intl.message(
-      'SIGN UP AGAIN',
+      'Sign Up Again',
       name: 'buttonSignUpAgain',
       desc: '',
       args: [],
     );
   }
 
-  /// `DEFINE INVESTMENT STYLE`
-  String get buttonDefineInvestmentStyle {
+  /// `Cancel`
+  String get buttonCancel {
     return Intl.message(
-      'DEFINE INVESTMENT STYLE',
-      name: 'buttonDefineInvestmentStyle',
+      'Cancel',
+      name: 'buttonCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get buttonConfirm {
+    return Intl.message(
+      'Confirm',
+      name: 'buttonConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get buttonDone {
+    return Intl.message(
+      'Done',
+      name: 'buttonDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get buttonNext {
+    return Intl.message(
+      'Next',
+      name: 'buttonNext',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Now`
+  String get buttonNotNow {
+    return Intl.message(
+      'Not Now',
+      name: 'buttonNotNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reload Page`
+  String get buttonReloadPage {
+    return Intl.message(
+      'Reload Page',
+      name: 'buttonReloadPage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit`
+  String get buttonDeposit {
+    return Intl.message(
+      'Deposit',
+      name: 'buttonDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel Trade`
+  String get buttonCancelTrade {
+    return Intl.message(
+      'Cancel Trade',
+      name: 'buttonCancelTrade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Have An Account?`
+  String get buttonHaveAnAccount {
+    return Intl.message(
+      'Have An Account?',
+      name: 'buttonHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's Begin`
+  String get buttonLetsBegin {
+    return Intl.message(
+      'Let\'s Begin',
+      name: 'buttonLetsBegin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Out`
+  String get buttonSignOut {
+    return Intl.message(
+      'Sign Out',
+      name: 'buttonSignOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
+  String get buttonBack {
+    return Intl.message(
+      'Back',
+      name: 'buttonBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get buttonContinue {
+    return Intl.message(
+      'Continue',
+      name: 'buttonContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maybe Later`
+  String get buttonMaybeLater {
+    return Intl.message(
+      'Maybe Later',
+      name: 'buttonMaybeLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw`
+  String get buttonWithdraw {
+    return Intl.message(
+      'Withdraw',
+      name: 'buttonWithdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back To Portfolio`
+  String get buttonBackToPortfolio {
+    return Intl.message(
+      'Back To Portfolio',
+      name: 'buttonBackToPortfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Investment Style`
+  String get buttonChangeInvestmentStyle {
+    return Intl.message(
+      'Change Investment Style',
+      name: 'buttonChangeInvestmentStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget Password?`
+  String get buttonForgetPassword {
+    return Intl.message(
+      'Forget Password?',
+      name: 'buttonForgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Transaction History`
+  String get buttonViewTransactionHistory {
+    return Intl.message(
+      'View Transaction History',
+      name: 'buttonViewTransactionHistory',
       desc: '',
       args: [],
     );
@@ -580,10 +580,10 @@ class S {
     );
   }
 
-  /// `GOT IT`
+  /// `Got It`
   String get gotIt {
     return Intl.message(
-      'GOT IT',
+      'Got It',
       name: 'gotIt',
       desc: '',
       args: [],
@@ -770,10 +770,10 @@ class S {
     );
   }
 
-  /// `FREE`
+  /// `Free`
   String get free {
     return Intl.message(
-      'FREE',
+      'Free',
       name: 'free',
       desc: '',
       args: [],
@@ -900,6 +900,16 @@ class S {
     );
   }
 
+  /// `Retake Investment Style`
+  String get retakeInvestmentStyle {
+    return Intl.message(
+      'Retake Investment Style',
+      name: 'retakeInvestmentStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Unable to get information`
   String get errorGettingInformationTitle {
     return Intl.message(
@@ -1015,6 +1025,16 @@ class S {
     return Intl.message(
       'About',
       name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
       desc: '',
       args: [],
     );
@@ -1272,10 +1292,10 @@ class S {
     );
   }
 
-  /// ` DEPOSIT TO START TRADING`
+  /// `Deposit To Start Trading`
   String get botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle {
     return Intl.message(
-      ' DEPOSIT TO START TRADING',
+      'Deposit To Start Trading',
       name: 'botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle',
       desc: '',
       args: [],
@@ -1292,10 +1312,10 @@ class S {
     );
   }
 
-  /// `CONFIRM ROLLOVER`
+  /// `Confirm Rollover`
   String get botTradeBottomSheetRolloverConfirmationButton {
     return Intl.message(
-      'CONFIRM ROLLOVER',
+      'Confirm Rollover',
       name: 'botTradeBottomSheetRolloverConfirmationButton',
       desc: '',
       args: [],
@@ -1592,30 +1612,30 @@ class S {
     );
   }
 
-  /// `CANCEL BOTSTOCK`
+  /// `Cancel Botstock`
   String get portfolioDetailButtonCancelBotStock {
     return Intl.message(
-      'CANCEL BOTSTOCK',
+      'Cancel Botstock',
       name: 'portfolioDetailButtonCancelBotStock',
       desc: '',
       args: [],
     );
   }
 
-  /// `END BOTSTOCK`
+  /// `End Botstock`
   String get portfolioDetailButtonEndBotStock {
     return Intl.message(
-      'END BOTSTOCK',
+      'End Botstock',
       name: 'portfolioDetailButtonEndBotStock',
       desc: '',
       args: [],
     );
   }
 
-  /// `ROLLOVER BOTSTOCK`
+  /// `Rollover Botstock`
   String get portfolioDetailButtonRolloverBotStock {
     return Intl.message(
-      'ROLLOVER BOTSTOCK',
+      'Rollover Botstock',
       name: 'portfolioDetailButtonRolloverBotStock',
       desc: '',
       args: [],
@@ -1683,10 +1703,10 @@ class S {
     );
   }
 
-  /// `CREATE AN ACCOUNT`
+  /// `Create An Account`
   String get createAnAccount {
     return Intl.message(
-      'CREATE AN ACCOUNT',
+      'Create An Account',
       name: 'createAnAccount',
       desc: '',
       args: [],
@@ -1713,10 +1733,10 @@ class S {
     );
   }
 
-  /// `DEFINE INVESTMENT STYLE`
+  /// `Define Investment Style`
   String get defineInvestmentStyle {
     return Intl.message(
-      'DEFINE INVESTMENT STYLE',
+      'Define Investment Style',
       name: 'defineInvestmentStyle',
       desc: '',
       args: [],
@@ -1743,10 +1763,10 @@ class S {
     );
   }
 
-  /// `CONTINUE ACCOUNT OPENING`
+  /// `Continue Account Opening`
   String get continueAccountOpening {
     return Intl.message(
-      'CONTINUE ACCOUNT OPENING',
+      'Continue Account Opening',
       name: 'continueAccountOpening',
       desc: '',
       args: [],
@@ -1803,10 +1823,10 @@ class S {
     );
   }
 
-  /// `START A BOTSTOCK`
+  /// `Start A Botstock`
   String get startABotstock {
     return Intl.message(
-      'START A BOTSTOCK',
+      'Start A Botstock',
       name: 'startABotstock',
       desc: '',
       args: [],
@@ -1853,10 +1873,10 @@ class S {
     );
   }
 
-  /// `REDEEM YOUR BOTSTOCK NOW`
+  /// `Redeem Your Botstock Now`
   String get redeemYourBotstockNow {
     return Intl.message(
-      'REDEEM YOUR BOTSTOCK NOW',
+      'Redeem Your Botstock Now',
       name: 'redeemYourBotstockNow',
       desc: '',
       args: [],
@@ -2023,6 +2043,16 @@ class S {
     );
   }
 
+  /// `Sign In`
+  String get signIn {
+    return Intl.message(
+      'Sign In',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `New Password`
   String get newPassword {
     return Intl.message(
@@ -2078,6 +2108,16 @@ class S {
     return Intl.message(
       'Version',
       name: 'version',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade`
+  String get trade {
+    return Intl.message(
+      'Trade',
+      name: 'trade',
       desc: '',
       args: [],
     );
@@ -2163,11 +2203,21 @@ class S {
     );
   }
 
-  /// `SAVE FOR LATER`
+  /// `Save For Later`
   String get saveForLater {
     return Intl.message(
-      'SAVE FOR LATER',
+      'Save For Later',
       name: 'saveForLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm & Continue`
+  String get confirmAndContinue {
+    return Intl.message(
+      'Confirm & Continue',
+      name: 'confirmAndContinue',
       desc: '',
       args: [],
     );
@@ -2298,16 +2348,6 @@ class S {
     return Intl.message(
       'Personalisation',
       name: 'personalisation',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Create an Account`
-  String get createAnAccountCapitalize {
-    return Intl.message(
-      'Create an Account',
-      name: 'createAnAccountCapitalize',
       desc: '',
       args: [],
     );

@@ -102,9 +102,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("確定"),
         "buttonContinue": MessageLookupByLibrary.simpleMessage("繼續"),
-        "buttonCreateAnAccount": MessageLookupByLibrary.simpleMessage("建立帳戶"),
-        "buttonDefineInvestmentStyle":
-            MessageLookupByLibrary.simpleMessage("立即體驗"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
         "buttonDone": MessageLookupByLibrary.simpleMessage("完成"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
@@ -134,8 +131,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
         "corePlan": MessageLookupByLibrary.simpleMessage("核心計劃"),
         "createAnAccount": MessageLookupByLibrary.simpleMessage("開立賬戶"),
-        "createAnAccountCapitalize":
-            MessageLookupByLibrary.simpleMessage("開立賬戶"),
         "currentPrice": MessageLookupByLibrary.simpleMessage("當前價格"),
         "customerService": MessageLookupByLibrary.simpleMessage("客戶服務"),
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),

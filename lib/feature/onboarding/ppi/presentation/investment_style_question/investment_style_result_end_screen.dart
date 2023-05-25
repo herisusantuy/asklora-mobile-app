@@ -8,6 +8,7 @@ import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../../../bot_stock/presentation/gift/bot_stock_do_screen.dart';
 import '../../../../tabs/tabs_screen.dart';
@@ -80,8 +81,8 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
               primaryButtonOnClick: () => KycScreen.open(context),
               secondaryButtonOnClick: () =>
                   TabsScreen.openAndRemoveAllRoute(context),
-              primaryButtonLabel: 'OPEN INVESTMENT ACCOUNT',
-              secondaryButtonLabel: 'MAYBE LATER',
+              primaryButtonLabel: S.of(context).openInvestmentAccount,
+              secondaryButtonLabel: S.of(context).buttonMaybeLater,
             ),
           );
         }

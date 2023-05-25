@@ -12,6 +12,7 @@ import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
@@ -92,8 +93,8 @@ class SignInForm extends StatelessWidget {
           textInputAction: TextInputAction.next,
           textInputType: TextInputType.emailAddress,
           maxLine: 1,
-          labelText: 'Email Address',
-          hintText: 'Email Address',
+          labelText: S.of(context).emailAddress,
+          hintText: S.of(context).emailAddress,
           errorText: state.emailAddressErrorText,
           onChanged: (email) =>
               context.read<SignInBloc>().add(SignInEmailChanged(email))));
@@ -104,21 +105,21 @@ class SignInForm extends StatelessWidget {
           isShowingPasswordValidation: false,
           key: const Key('sign_in_password_input'),
           validPassword: (isValidPassword) => {},
-          hintText: 'Password',
-          label: 'Password',
+          hintText: S.of(context).password,
+          label: S.of(context).password,
           onChanged: (password) =>
               context.read<SignInBloc>().add(SignInPasswordChanged(password))));
 
   Widget _forgotPasswordButton(context) => CustomTextButton(
       key: const Key('forgot_password_button'),
-      label: 'FORGET PASSWORD?',
+      label: S.of(context).buttonForgetPassword,
       onTap: () => ForgotPasswordScreen.open(context));
 
   Widget _loginButton() => BlocBuilder<SignInBloc, SignInState>(
         builder: (context, state) {
           return PrimaryButton(
               key: const Key('sign_in_submit_button'),
-              label: 'SIGN IN',
+              label: S.of(context).signIn,
               disabled: (!state.emailAddress.isValidEmail() ||
                   state.password.isEmpty),
               onTap: () =>
@@ -129,7 +130,7 @@ class SignInForm extends StatelessWidget {
   Widget _createAnAccountButton(BuildContext context) {
     return CustomTextButton(
       margin: const EdgeInsets.only(top: 20),
-      label: 'CREATE AN ACCOUNT',
+      label: S.of(context).createAnAccount,
       onTap: () => AskNameScreen.open(context),
     );
   }

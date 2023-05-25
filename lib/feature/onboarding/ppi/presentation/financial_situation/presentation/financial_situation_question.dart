@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../../core/presentation/text_fields/master_text_field.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../domain/question.dart';
 import '../../widget/header.dart';
 import '../../widget/question_title.dart';
@@ -231,7 +232,7 @@ class FinancialSituationQuestion extends StatelessWidget {
         builder: (context, state) => Padding(
               padding: const EdgeInsets.only(bottom: 35.0, top: 52),
               child: PrimaryButton(
-                label: 'NEXT',
+                label: S.of(context).buttonNext,
                 buttonPrimaryType: ButtonPrimaryType.solidCharcoal,
                 key: const Key('question_next_button'),
                 disabled: !state.enableNextButton(),

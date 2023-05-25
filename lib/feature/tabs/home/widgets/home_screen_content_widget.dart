@@ -39,8 +39,8 @@ class HomeScreenContentWidget extends StatelessWidget {
             title: 'Let me Invest in you.',
             subTitle:
                 'What strategy and stocks fit you? Fill in the Investment style questions and I will figure it out right away! The more I know about you, the better recommendations I can offer!',
-            buttonLabel: 'DEFINE INVESTMENT STYLE',
-            secondaryButtonLabel: 'HOW IT WORKS',
+            buttonLabel: S.of(context).defineInvestmentStyle,
+            secondaryButtonLabel: S.of(context).howItWorks,
             onSecondaryButtonTap: () {},
             onPrimaryButtonTap: () => PpiScreen.open(
               context,
@@ -58,7 +58,7 @@ class HomeScreenContentWidget extends StatelessWidget {
             title: 'Get a FREE Botstock (HKD500)!',
             subTitle:
                 'Experience automated and personalised stock trading. Receive free bot stock and redeem it after completing the required milestones.',
-            buttonLabel: 'OPEN INVESTMENT ACCOUNT',
+            buttonLabel: S.of(context).openInvestmentAccount,
             secondaryButtonLabel: 'LEARN MORE',
             onSecondaryButtonTap: () {},
             onPrimaryButtonTap: () => KycScreen.open(context),
@@ -71,7 +71,7 @@ class HomeScreenContentWidget extends StatelessWidget {
             title: 'Start with your first milestone!',
             subTitle:
                 'Complete your account opening and experience your first trade with an AI strategy.  ',
-            buttonLabel: 'OPEN INVESTMENT ACCOUNT',
+            buttonLabel: S.of(context).openInvestmentAccount,
             onPrimaryButtonTap: () => KycScreen.open(context),
             backgroundColor: AskLoraColors.lime,
             pngImage: 'home_dumbell',
@@ -86,8 +86,8 @@ class HomeScreenContentWidget extends StatelessWidget {
             title: 'Get a FREE Botstock (HKD500)!',
             subTitle:
                 'Experience automated and personalised stock trading. Receive free bot stock and redeem it after completing the required milestones.',
-            buttonLabel: 'GET IT NOW',
-            secondaryButtonLabel: 'LEARN MORE',
+            buttonLabel: 'Get It Now',
+            secondaryButtonLabel: 'Learn More',
             onSecondaryButtonTap: () {},
             onPrimaryButtonTap: () => GiftBotStockWelcomeScreen.open(context),
             backgroundColor: AskLoraColors.whiteSmoke,

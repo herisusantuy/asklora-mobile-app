@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
@@ -45,7 +46,7 @@ class PersonalInfoSummaryScreen extends StatelessWidget {
         secondaryButtonOnClick: () => context
             .read<KycBloc>()
             .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-        primaryButtonLabel: 'CONFIRM & CONTINUE',
-        secondaryButtonLabel: 'SAVE FOR LATER',
+        primaryButtonLabel: S.of(context).confirmAndContinue,
+        secondaryButtonLabel: S.of(context).saveForLater,
       );
 }

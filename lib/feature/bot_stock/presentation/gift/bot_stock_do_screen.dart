@@ -37,7 +37,7 @@ class BotStockDoScreen extends StatelessWidget {
       bottomButton: Padding(
         padding: const EdgeInsets.only(top: 30, bottom: 30.0),
         child: PrimaryButton(
-          label: 'SEE MY RECOMMENDATIONS',
+          label: 'See My Recommendations',
           onTap: () => BotRecommendationScreen.open(context),
         ),
       ),
@@ -62,7 +62,7 @@ class BotStockDoScreen extends StatelessWidget {
                 children: [
                   CustomTextNew(
                     '${botType.upperCaseName} BOT',
-                    style: AskLoraTextStyles.h5Italic
+                    style: AskLoraTextStyles.h5
                         .copyWith(color: AskLoraColors.charcoal),
                   ),
                   const SizedBox(

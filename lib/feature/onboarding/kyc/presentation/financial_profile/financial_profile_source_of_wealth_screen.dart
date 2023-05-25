@@ -12,6 +12,7 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -77,8 +78,8 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
               secondaryButtonOnClick: () => context
                   .read<KycBloc>()
                   .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-              primaryButtonLabel: 'NEXT',
-              secondaryButtonLabel: 'SAVE FOR LATER');
+              primaryButtonLabel: S.of(context).buttonNext,
+              secondaryButtonLabel: S.of(context).saveForLater);
         },
       ),
     );

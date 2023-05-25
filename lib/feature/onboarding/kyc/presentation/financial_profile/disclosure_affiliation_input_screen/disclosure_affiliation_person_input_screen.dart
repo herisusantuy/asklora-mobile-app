@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../../bloc/kyc_bloc.dart';
 import '../../../../../../core/presentation/buttons/button_pair.dart';
@@ -47,7 +48,7 @@ class DisclosureAffiliationPersonInputScreen extends StatelessWidget {
             secondaryButtonOnClick: () => context
                 .read<KycBloc>()
                 .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-            primaryButtonLabel: 'NEXT',
-            secondaryButtonLabel: 'SAVE FOR LATER',
+            primaryButtonLabel: S.of(context).buttonNext,
+            secondaryButtonLabel: S.of(context).saveForLater,
           ));
 }

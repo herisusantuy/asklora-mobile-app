@@ -44,7 +44,7 @@ class BotPortfolioCard extends StatelessWidget {
                   children: [
                     CustomTextNew(
                       '${botType.upperCaseName} ${botActiveOrderModel.ticker}',
-                      style: AskLoraTextStyles.h5Italic,
+                      style: AskLoraTextStyles.h5,
                       maxLines: 1,
                       ellipsis: true,
                     ),

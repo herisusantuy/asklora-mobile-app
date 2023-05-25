@@ -1,54 +1,59 @@
 import 'package:flutter/material.dart';
 
 class AskLoraTextStyles {
-  static const TextStyle _textStyle = TextStyle(fontFamilyFallback: ['Mulish']);
+  static const TextStyle _textStyle =
+      TextStyle(fontFamilyFallback: ['Manrope']);
 
   static TextStyle h1 = _textStyle.copyWith(
-      fontSize: 50, height: 1.2, fontWeight: AskLoraFontWeight.black.value);
+      fontSize: 50, height: 1.2, fontWeight: AskLoraFontWeight.extraBold.value);
 
   static TextStyle h2 = _textStyle.copyWith(
-      fontSize: 33, height: 1.32, fontWeight: AskLoraFontWeight.black.value);
+      fontSize: 33,
+      height: 1.32,
+      fontWeight: AskLoraFontWeight.extraBold.value);
 
   static TextStyle h3 = _textStyle.copyWith(
-      fontSize: 28, height: 1.32, fontWeight: AskLoraFontWeight.black.value);
+      fontSize: 28,
+      height: 1.32,
+      fontWeight: AskLoraFontWeight.extraBold.value);
 
   static TextStyle h3Italic = _textStyle.copyWith(
     fontSize: 28,
     height: 1.5,
-    fontWeight: AskLoraFontWeight.black.value,
+    fontWeight: AskLoraFontWeight.extraBold.value,
     fontStyle: FontStyle.italic,
   );
 
   static TextStyle h4 = _textStyle.copyWith(
     fontSize: 23,
     height: 1.32,
-    fontWeight: AskLoraFontWeight.black.value,
+    fontWeight: AskLoraFontWeight.extraBold.value,
   );
 
   static TextStyle h4Italic = _textStyle.copyWith(
     fontSize: 23,
     height: 1.32,
-    fontWeight: AskLoraFontWeight.black.value,
+    fontWeight: AskLoraFontWeight.extraBold.value,
     fontStyle: FontStyle.italic,
   );
 
   static TextStyle h5 = _textStyle.copyWith(
     fontSize: 19,
     height: 1.32,
-    fontWeight: AskLoraFontWeight.black.value,
+    fontWeight: AskLoraFontWeight.extraBold.value,
   );
 
   static TextStyle h5Italic = _textStyle.copyWith(
     fontSize: 19,
     height: 1.32,
-    fontWeight: AskLoraFontWeight.black.value,
+    fontWeight: AskLoraFontWeight.extraBold.value,
     fontStyle: FontStyle.italic,
   );
 
   static TextStyle h6 = _textStyle.copyWith(
     fontSize: 16,
     height: 1.32,
-    fontWeight: AskLoraFontWeight.black.value,
+    fontWeight: AskLoraFontWeight.extraBold.value,
   );
 
   static TextStyle subtitle1 = _textStyle.copyWith(
@@ -100,17 +105,10 @@ class AskLoraTextStyles {
       fontSize: 9, height: 1.5, fontWeight: AskLoraFontWeight.regular.value);
 
   static TextStyle button1 = _textStyle.copyWith(
-      fontSize: 14,
-      height: 1.5,
-      fontWeight: AskLoraFontWeight.black.value,
-      fontStyle: FontStyle.italic);
+      fontSize: 14, height: 1.5, fontWeight: AskLoraFontWeight.extraBold.value);
 
   static TextStyle button2 = _textStyle.copyWith(
-    fontSize: 11,
-    height: 1.5,
-    fontWeight: AskLoraFontWeight.black.value,
-    fontStyle: FontStyle.italic,
-  );
+      fontSize: 11, height: 1.5, fontWeight: AskLoraFontWeight.extraBold.value);
 }
 
 enum AskLoraFontWeight {
@@ -121,8 +119,7 @@ enum AskLoraFontWeight {
   medium(FontWeight.w500),
   semiBold(FontWeight.w600),
   bold(FontWeight.w700),
-  extraBold(FontWeight.w800),
-  black(FontWeight.w900);
+  extraBold(FontWeight.w800);
 
   final FontWeight value;
 

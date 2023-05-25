@@ -78,7 +78,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                       const SizedBox(width: 10),
                       CustomTextNew(
                         'LORAGPT',
-                        style: AskLoraTextStyles.h5Italic,
+                        style: AskLoraTextStyles.h5,
                       )
                     ],
                   ),
@@ -301,7 +301,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                           PrimaryButton(
                               buttonPrimaryType:
                                   ButtonPrimaryType.solidCharcoal,
-                              label: 'ASK ME ANYTHING ',
+                              label: 'Ask Me Anything',
                               onTap: () {
                                 setState(() {
                                   showOverlay = false;

@@ -54,7 +54,7 @@ class OnBoardingStatus extends StatelessWidget {
                   Expanded(
                     child: CustomTextNew(
                       onBoardingStatusModel.title,
-                      style: AskLoraTextStyles.h4Italic,
+                      style: AskLoraTextStyles.h4,
                     ),
                   ),
                   ExtraInfoButton(
@@ -125,7 +125,7 @@ class OnBoardingStatus extends StatelessWidget {
       case UserJourney.investmentStyle:
         return OnBoardingStatusModel(
           title: 'START INVESTING',
-          subTitle: 'Define Investment Style',
+          subTitle: S.of(context).defineInvestmentStyle,
           onTap: () => PpiScreen.open(context,
               arguments: const Pair(QuestionPageType.investmentStyle,
                   QuestionPageStep.investmentStyle)),
