@@ -50,7 +50,7 @@ class KycResultScreen extends StatelessWidget {
   Widget _bottomButton(BuildContext context) => ButtonPair(
         primaryButtonOnClick: () => GiftBotStockWelcomeScreen.open(context),
         secondaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(context),
-        primaryButtonLabel: 'Get Free HKD5000 Gift Botstock',
+        primaryButtonLabel: 'Get Free HKD500 Gift Botstock',
         secondaryButtonLabel: 'Maybe Later',
       );
 }
