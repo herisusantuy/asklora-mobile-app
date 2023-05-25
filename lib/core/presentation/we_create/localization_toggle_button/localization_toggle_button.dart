@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,13 +11,19 @@ class LocalizationToggleButton extends StatelessWidget {
       : super(key: const Key('localization_toggle_button'));
 
   @override
-  Widget build(BuildContext context) => AnimatedToggle(onLanguageChange: (val) {
+  Widget build(BuildContext context) => AnimatedToggle(
+      initialPosition:
+          context.read<AppBloc>().state.locale.languageCode == 'en',
+      onLanguageChange: (val) {
         context.read<AppBloc>().add(AppLanguageChangeEvent(val));
       });
 }
 
 class AnimatedToggle extends StatefulWidget {
-  const AnimatedToggle({super.key, required this.onLanguageChange});
+  final bool initialPosition;
+
+  const AnimatedToggle(
+      {this.initialPosition = true, super.key, required this.onLanguageChange});
 
   final Function(LocaleType) onLanguageChange;
 
@@ -26,6 +33,12 @@ class AnimatedToggle extends StatefulWidget {
 
 class _AnimatedToggleState extends State<AnimatedToggle> {
   bool initialPosition = true;
+
+  @override
+  void initState() {
+    initialPosition = widget.initialPosition;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +116,11 @@ class LocaleType {
 
   const LocaleType(this.languageCode, this.countryCode, this.label,
       this.labelName, this.fontType);
+
+  static LocaleType findByLanguageCode(String? languageCode) =>
+      supportedLocales().firstWhereOrNull(
+          (element) => element.languageCode == languageCode) ??
+      supportedLocales()[0];
 
   static List<LocaleType> supportedLocales() => [
         const LocaleType('en', 'US', 'ENG', 'English', 'Manrope'),

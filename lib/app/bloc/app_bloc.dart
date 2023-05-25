@@ -6,6 +6,7 @@ import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../../core/utils/storage/secure_storage.dart';
 import '../../core/utils/storage/shared_preference.dart';
+import '../../core/utils/storage/storage_keys.dart';
 import '../repository/user_journey_repository.dart';
 
 part 'app_event.dart';
@@ -36,25 +37,28 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void _onAppLaunched(AppLaunched event, Emitter<AppState> emit) async {
     bool isTokenValid = await _tokenRepository.isTokenValid();
+    LocaleType localeType = LocaleType.findByLanguageCode(
+        await _sharedPreference.readData(sfKeyLocalisationData));
 
     if (isTokenValid) {
       var userJourney = await _userJourneyRepository.getUserJourney();
       emit(AppState.authenticated(
-          userJourney: userJourney ?? UserJourney.investmentStyle));
+          userJourney: userJourney ?? UserJourney.investmentStyle,
+          localeType: localeType));
     } else {
       await _tokenRepository.deleteAll();
-      await _sharedPreference.deleteAllData();
+      await _sharedPreference.deleteAllDataExcept([sfKeyLocalisationData]);
       await _secureStorage.deleteAllData();
-      emit(AppState.unauthenticated(
-        localeType: LocaleType.defaultLocale(),
-      ));
+      emit(AppState.unauthenticated(localeType: localeType));
     }
   }
 
   void _onAppLanguageChangeEvent(
-      AppLanguageChangeEvent event, Emitter<AppState> emit) {
-    emit(AppState.unauthenticated(
-        localeType: event.language, userJourney: state.userJourney));
+      AppLanguageChangeEvent event, Emitter<AppState> emit) async {
+    await _sharedPreference.writeData(
+        sfKeyLocalisationData, event.localeType.languageCode);
+    emit(state.copyWith(
+        locale: event.localeType, userJourney: state.userJourney));
   }
 
   void _onSaveUserJourney(SaveUserJourney event, Emitter<AppState> emit) async {

@@ -2,6 +2,8 @@ import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
 import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart';
 import 'package:asklora_mobile_app/core/domain/token/token_api_client.dart';
+import 'package:asklora_mobile_app/core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
+import 'package:asklora_mobile_app/core/utils/storage/storage_keys.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -53,11 +55,16 @@ void main() async {
             .thenAnswer((_) => Future.value(true));
         when(userJourneyRepository.getUserJourney())
             .thenAnswer((_) => Future.value(UserJourney.kyc));
+        when(sharedPreference.readData(sfKeyLocalisationData))
+            .thenAnswer((_) => Future.value('eng'));
         return appBloc;
       },
       act: (bloc) => bloc.add(AppLaunched()),
-      expect: () =>
-          {const AppState.authenticated(userJourney: UserJourney.kyc)},
+      expect: () => {
+        AppState.authenticated(
+            userJourney: UserJourney.kyc,
+            localeType: LocaleType.findByLanguageCode('eng'))
+      },
     );
 
     blocTest<AppBloc, AppState>(
@@ -68,11 +75,16 @@ void main() async {
             .thenAnswer((_) => Future.value(false));
         when(userJourneyRepository.getUserJourney())
             .thenAnswer((_) => Future.value(UserJourney.privacy));
+        when(sharedPreference.readData(sfKeyLocalisationData))
+            .thenAnswer((_) => Future.value('eng'));
         return appBloc;
       },
       act: (bloc) => bloc.add(AppLaunched()),
-      expect: () =>
-          {const AppState.unauthenticated(userJourney: UserJourney.privacy)},
+      expect: () => {
+        AppState.unauthenticated(
+            userJourney: UserJourney.privacy,
+            localeType: LocaleType.findByLanguageCode('eng'))
+      },
     );
 
     tearDown(() => {appBloc.close()});

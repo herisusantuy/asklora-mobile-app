@@ -525,6 +525,16 @@ class MockSharedPreference extends _i1.Mock implements _i17.SharedPreference {
         ),
         returnValue: _i8.Future<bool>.value(false),
       ) as _i8.Future<bool>);
+  @override
+  _i8.Future<void> deleteAllDataExcept(List<String>? keys) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAllDataExcept,
+          [keys],
+        ),
+        returnValue: _i8.Future<void>.value(),
+        returnValueForMissingStub: _i8.Future<void>.value(),
+      ) as _i8.Future<void>);
 }
 
 /// A class which mocks [AccountRepository].
