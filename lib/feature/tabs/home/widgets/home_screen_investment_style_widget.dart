@@ -105,7 +105,7 @@ class HomeScreenInvestmentStyleWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: PrimaryButton(
-                label: 'DEFINE INVESTMENT STYLE',
+                label: S.of(context).defineInvestmentStyle,
                 onTap: () => PpiScreen.open(
                   context,
                   arguments: const Pair(

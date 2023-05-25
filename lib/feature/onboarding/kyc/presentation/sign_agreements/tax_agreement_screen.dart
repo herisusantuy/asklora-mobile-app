@@ -246,8 +246,8 @@ class TaxAgreementScreen extends StatelessWidget {
             disablePrimaryButton: state.disableAgreeButton(),
             secondaryButtonOnClick: () =>
                 TabsScreen.openAndRemoveAllRoute(context),
-            primaryButtonLabel: 'AGREE',
-            secondaryButtonLabel: 'CONTINUE LATER',
+            primaryButtonLabel: 'Agree',
+            secondaryButtonLabel: 'Continue Later',
           );
         },
       );

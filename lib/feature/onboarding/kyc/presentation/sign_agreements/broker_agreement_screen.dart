@@ -116,7 +116,7 @@ class BrokerAgreementScreen extends StatelessWidget {
                 secondaryButtonOnClick: () => context.read<KycBloc>().add(
                     SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
                 disablePrimaryButton: state.disabledBrokerButton(),
-                primaryButtonLabel: 'AGREE',
-                secondaryButtonLabel: 'CONTINUE LATER',
+                primaryButtonLabel: 'Agree',
+                secondaryButtonLabel: 'Continue Later',
               ));
 }

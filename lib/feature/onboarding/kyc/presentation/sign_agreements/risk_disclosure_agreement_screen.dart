@@ -121,7 +121,7 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
                 secondaryButtonOnClick: () =>
                     TabsScreen.openAndRemoveAllRoute(context),
                 disablePrimaryButton: !state.isRiskDisclosureAgreementChecked,
-                primaryButtonLabel: 'AGREE',
-                secondaryButtonLabel: 'CONTINUE LATER',
+                primaryButtonLabel: 'Agree',
+                secondaryButtonLabel: 'Continue Later',
               ));
 }

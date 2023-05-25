@@ -10,6 +10,7 @@ import '../../../../../../../core/presentation/navigation/bloc/navigation_bloc.d
 import '../../../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../../../generated/l10n.dart';
 import '../../../../../../tabs/tabs_screen.dart';
 import '../../../../bloc/kyc_bloc.dart';
 import '../../../../bloc/personal_info/personal_info_bloc.dart';
@@ -87,7 +88,7 @@ class OtpScreen extends StatelessWidget {
             primaryButtonLabel: state.disableRequest
                 ? 'REQUEST ANOTHER OTP IN ${_formatTimeMMSS(state.resetTime)}'
                 : 'RESEND OTP CODE',
-            secondaryButtonLabel: 'SAVE FOR LATER',
+            secondaryButtonLabel: S.of(context).saveForLater,
           );
         },
       );

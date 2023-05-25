@@ -7,6 +7,7 @@ import '../../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../bloc/response/user_response_bloc.dart';
 import '../../../domain/question.dart';
 import '../header.dart';
@@ -156,8 +157,9 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                                           .add(KeywordReset()),
                                       disablePrimaryButton:
                                           state.keywordAnswers.isEmpty,
-                                      primaryButtonLabel: 'NEXT',
-                                      secondaryButtonLabel: 'RESET'),
+                                      primaryButtonLabel:
+                                          S.of(context).buttonNext,
+                                      secondaryButtonLabel: 'Reset'),
                                 ))
                       ],
                     ),
@@ -197,7 +199,7 @@ class OmniSearchQuestionWidget extends StatelessWidget {
                           .add(KeywordAdded(value));
                     }
                   },
-                  hintText: 'ENTER KEYWORDS',
+                  hintText: 'Enter Keywords',
                   textInputType: TextInputType.text,
                   onChanged: (value) => context
                       .read<OmniSearchQuestionWidgetBloc>()

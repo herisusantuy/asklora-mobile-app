@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -107,7 +108,7 @@ class ResidentCheckScreen extends StatelessWidget {
                   .read<KycBloc>()
                   .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context)));
             },
-            primaryButtonLabel: 'NEXT',
-            secondaryButtonLabel: 'SAVE FOR LATER',
+            primaryButtonLabel: S.of(context).buttonNext,
+            secondaryButtonLabel: S.of(context).saveForLater,
           ));
 }

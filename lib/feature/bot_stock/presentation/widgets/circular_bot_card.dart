@@ -41,8 +41,7 @@ class CircularBotCard extends StatelessWidget {
           ),
           CustomTextNew(
             title,
-            style: AskLoraTextStyles.h5Italic
-                .copyWith(color: AskLoraColors.charcoal),
+            style: AskLoraTextStyles.h5.copyWith(color: AskLoraColors.charcoal),
           )
         ],
       ),

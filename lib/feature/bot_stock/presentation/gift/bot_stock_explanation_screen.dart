@@ -32,7 +32,7 @@ class BotStockExplanationScreen extends StatelessWidget {
       bottomButton: Padding(
         padding: const EdgeInsets.only(bottom: 30.0),
         child: PrimaryButton(
-          label: 'GOT IT! WHAT DOES A BOT DO?',
+          label: 'Got It! What Does a Bot Do?',
           onTap: () => BotStockDoScreen.open(context),
         ),
       ),

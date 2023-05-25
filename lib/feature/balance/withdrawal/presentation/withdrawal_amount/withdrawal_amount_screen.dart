@@ -9,6 +9,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/withdrawal_bloc.dart';
 import '../../repository/withdrawal_repository.dart';
 import '../withdrawal_summary_screen.dart';
@@ -61,7 +62,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
                     previous.withdrawalAmount != current.withdrawalAmount,
                 builder: (context, state) => PrimaryButton(
                   disabled: state.withdrawalAmount == 0,
-                  label: 'NEXT',
+                  label: S.of(context).buttonNext,
                   onTap: () => WithdrawalSummaryScreen.open(context,
                       withdrawalAmount: context
                           .read<WithdrawalBloc>()

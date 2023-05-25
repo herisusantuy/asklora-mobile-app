@@ -11,6 +11,7 @@ import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_
 import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../generated/l10n.dart';
 import '../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
@@ -96,7 +97,7 @@ class ForYouScreenForm extends StatelessWidget {
           title: 'No Botstock recommendation.',
           subTitle:
               'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-          primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
+          primaryButtonLabel: S.of(context).defineInvestmentStyle,
           onPrimaryButtonTap: () => context
               .read<NavigationBloc<ForYouPage>>()
               .add(const PageChanged(ForYouPage.investmentStyle)));
@@ -107,7 +108,7 @@ class ForYouScreenForm extends StatelessWidget {
               title: 'No Botstock recommendation.',
               subTitle:
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-              primaryButtonLabel: 'DEFINE INVESTMENT STYLE',
+              primaryButtonLabel: S.of(context).defineInvestmentStyle,
               onPrimaryButtonTap: () => PpiScreen.open(context,
                   arguments: const Pair(QuestionPageType.investmentStyle,
                       QuestionPageStep.investmentStyle)));
@@ -116,14 +117,14 @@ class ForYouScreenForm extends StatelessWidget {
               title: 'No Botstock recommendation.',
               subTitle:
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-              primaryButtonLabel: 'OPEN INVESTMENT ACCOUNT',
+              primaryButtonLabel: S.of(context).openInvestmentAccount,
               onPrimaryButtonTap: () => KycScreen.open(context));
         case UserJourney.freeBotStock:
           return LoraPopUpMessageModel(
               title: 'No Botstock recommendation.',
               subTitle:
                   'I will recommend up to 20 Botstocks that created just for you after you define investment style and open the investment account.',
-              primaryButtonLabel: 'REDEEM YOUR BOTSTOCK NOW',
+              primaryButtonLabel: S.of(context).redeemYourBotstockNow,
               onPrimaryButtonTap: () =>
                   GiftBotStockWelcomeScreen.open(context));
         default:

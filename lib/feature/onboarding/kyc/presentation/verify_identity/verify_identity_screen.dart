@@ -12,6 +12,7 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/onfido/onfido_result_request.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -111,7 +112,7 @@ class VerifyIdentityScreen extends StatelessWidget {
         secondaryButtonOnClick: () => context
             .read<KycBloc>()
             .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-        primaryButtonLabel: 'VERIFY NOW',
-        secondaryButtonLabel: 'SAVE FOR LATER',
+        primaryButtonLabel: 'Verify Now',
+        secondaryButtonLabel: S.of(context).saveForLater,
       );
 }

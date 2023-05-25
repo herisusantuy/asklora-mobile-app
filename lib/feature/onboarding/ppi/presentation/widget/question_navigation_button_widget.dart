@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/response/user_response_bloc.dart';
 
 class QuestionNavigationButtonWidget extends StatelessWidget {
@@ -42,7 +43,7 @@ class QuestionNavigationButtonWidget extends StatelessWidget {
             child: PrimaryButton(
               key: const Key('question_next_button'),
               disabled: disable,
-              label: 'NEXT',
+              label: S.of(context).buttonNext,
               onTap: onNext,
             ),
           );

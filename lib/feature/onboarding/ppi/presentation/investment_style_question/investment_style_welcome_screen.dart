@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
@@ -39,8 +40,7 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
                     },
                     secondaryButtonOnClick: () =>
                         TabsScreen.openAndRemoveAllRoute(context),
-                    primaryButtonLabel:
-                        S.of(context).buttonDefineInvestmentStyle,
+                    primaryButtonLabel: S.of(context).defineInvestmentStyle,
                     secondaryButtonLabel: S.of(context).buttonMaybeLater)
               ],
             ),

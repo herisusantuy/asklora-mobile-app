@@ -12,6 +12,7 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../generated/l10n.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_detail_model.dart';
@@ -102,7 +103,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         rightTitle: 'Bot Management Fee (HKD)',
                         leftSubTitle: botTradeSummaryModel.amount
                             .convertToCurrencyDecimal(),
-                        rightSubTitle: 'Free',
+                        rightSubTitle: S.of(context).free,
                         rightTooltipText:
                             'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
                       ),
@@ -163,7 +164,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 builder: (context) => Padding(
                       padding: const EdgeInsets.only(top: 24, bottom: 30),
                       child: PrimaryButton(
-                        label: 'CONFIRM',
+                        label: S.of(context).confirm,
                         onTap: () => context.read<BotStockBloc>().add(
                             CreateBotOrder(
                                 botRecommendationModel:

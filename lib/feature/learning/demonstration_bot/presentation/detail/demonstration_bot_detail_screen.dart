@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../../bot_stock/presentation/widgets/bot_stock_form.dart';
 import '../../../../bot_stock/repository/bot_stock_repository.dart';
@@ -53,7 +55,7 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
               padding: AppValues.screenHorizontalPadding
                   .copyWith(top: 24, bottom: 30),
               child: PrimaryButton(
-                label: 'TRADE',
+                label: S.of(context).trade,
                 onTap: () => DemonstrationBottomSheet.show(
                   context,
                   onPrimaryButtonTap: () {
@@ -65,8 +67,8 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
                   onSecondaryButtonTap: () => Navigator.pop(context),
                   title: 'Trade any amount above HKD1,500',
                   subTitle: 'Bot will buy fractions of a share for you',
-                  primaryButtonLabel: 'SEE TRADE DEMONSTRATION',
-                  secondaryButtonLabel: 'CANCEL',
+                  primaryButtonLabel: 'See Trade Demonstration',
+                  secondaryButtonLabel: S.of(context).buttonCancel,
                 ),
               ),
             )),

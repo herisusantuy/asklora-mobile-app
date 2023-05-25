@@ -178,7 +178,7 @@ class BotRecommendationScreen extends StatelessWidget {
             const LoraMemojiHeader(
                 text: 'Not feeling it? Try something different.'),
             PrimaryButton(
-              label: 'CHANGE INVESTMENT STYLE',
+              label: S.of(context).buttonChangeInvestmentStyle,
               onTap: () => context
                   .read<NavigationBloc<ForYouPage>>()
                   .add(const PageChanged(ForYouPage.investmentStyle)),

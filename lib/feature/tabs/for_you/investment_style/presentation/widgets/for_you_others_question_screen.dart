@@ -52,7 +52,7 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 30),
                           child: PrimaryButton(
                               disabled: _disableButton(context),
-                              label: 'VIEW BOTSTOCK RECOMMENDATION',
+                              label: 'View Botstock Recommendation',
                               onTap: () => context
                                   .read<UserResponseBloc>()
                                   .add(SendBulkResponse())),
@@ -66,8 +66,8 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
                                   NavigationBloc<InvestmentStyleQuestionType>>()
                               .add(const PagePop()),
                           disablePrimaryButton: _disableButton(context),
-                          primaryButtonLabel: 'VIEW BOTSTOCK RECOMMENDATION',
-                          secondaryButtonLabel: 'BACK');
+                          primaryButtonLabel: 'View Botstock Recommendation',
+                          secondaryButtonLabel: 'Back');
                 },
               ),
             ),
@@ -132,7 +132,7 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
           title: 'No Botstock recommendations',
           subTitle:
               'Oops! Looks like there aren’t enough recommendations that meet your current investment profile - Let’s go through your Investment Style again to find suitable recommendations.',
-          primaryButtonLabel: 'RETAKE INVESTMENT STYLE',
+          primaryButtonLabel: S.of(context).retakeInvestmentStyle,
           onPrimaryButtonTap: () => _loraPopUpMessagePrimaryButtonTap(context),
         );
       default:
@@ -140,8 +140,8 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
           title: 'Error Storing Data',
           subTitle:
               'Oops! We’re having some technical difficulties trying to store your responses. Let’s try retaking the questions',
-          primaryButtonLabel: 'RETAKE INVESTMENT STYLE',
-          secondaryButtonLabel: 'CANCEL',
+          primaryButtonLabel: S.of(context).retakeInvestmentStyle,
+          secondaryButtonLabel: S.of(context).buttonCancel,
           onSecondaryButtonTap: () => context
               .read<UserResponseBloc>()
               .add(const ResetState(wholeState: false)),

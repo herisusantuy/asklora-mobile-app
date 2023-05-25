@@ -10,6 +10,7 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/feature_flags.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
@@ -119,8 +120,8 @@ class KycSummaryScreen extends StatelessWidget {
           secondaryButtonOnClick: () => context
               .read<KycBloc>()
               .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-          primaryButtonLabel: 'COMPLETE',
-          secondaryButtonLabel: 'SAVE FOR LATER',
+          primaryButtonLabel: 'Complete',
+          secondaryButtonLabel: S.of(context).saveForLater,
         ),
       );
 

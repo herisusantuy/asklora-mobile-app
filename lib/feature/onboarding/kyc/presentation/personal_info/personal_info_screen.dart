@@ -20,6 +20,7 @@ import '../../../../../core/utils/build_configs/app_config_widget.dart';
 import '../../../../../core/utils/build_configs/build_config.dart';
 import '../../../../../core/utils/formatters/custom_formatters.dart';
 import '../../../../../core/utils/formatters/upper_case_text_formatter.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
@@ -260,8 +261,8 @@ class PersonalInfoScreen extends StatelessWidget {
               secondaryButtonOnClick: () => context
                   .read<KycBloc>()
                   .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-              primaryButtonLabel: 'NEXT',
-              secondaryButtonLabel: 'SAVE FOR LATER',
+              primaryButtonLabel: S.of(context).buttonNext,
+              secondaryButtonLabel: S.of(context).saveForLater,
             ),
           ));
 

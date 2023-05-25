@@ -82,7 +82,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                     disabled: state.botDetailResponse.state ==
                             ResponseState.loading ||
                         state.botDetailResponse.state == ResponseState.error,
-                    label: 'TRADE',
+                    label: S.of(context).trade,
                     onTap: () {
                       if (botRecommendationModel.freeBot) {
                         BotTradeSummaryScreen.open(

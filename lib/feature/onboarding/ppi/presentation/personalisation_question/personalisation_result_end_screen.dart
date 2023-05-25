@@ -51,7 +51,7 @@ class PersonalisationResultEndScreen extends StatelessWidget {
             additionalMessage: _getMessage(scores),
             bottomButton: PrimaryButton(
                 key: const Key('next_button'),
-                label: 'GOT IT',
+                label: 'Got It',
                 onTap: () => SignUpScreen.open(context)),
           );
         }

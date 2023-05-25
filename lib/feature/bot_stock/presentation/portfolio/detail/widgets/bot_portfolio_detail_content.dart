@@ -180,7 +180,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                 titleColor: AskLoraColors.white,
                 subTitle: 'The secret of getting ahead is getting started.',
                 subTitleColor: AskLoraColors.white,
-                primaryButtonLabel: 'COMPLETE MILESTONE',
+                primaryButtonLabel: 'Complete Milestone',
                 onPrimaryButtonTap: () => DepositWelcomeScreen.open(
                     context: context, depositType: DepositType.firstTime),
                 buttonPrimaryType: ButtonPrimaryType.solidGreen,

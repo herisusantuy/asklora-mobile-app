@@ -42,7 +42,7 @@ class BotRecommendationCard extends StatelessWidget {
               children: [
                 CustomTextNew(
                   '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
-                  style: AskLoraTextStyles.h5Italic,
+                  style: AskLoraTextStyles.h5,
                   maxLines: 1,
                   ellipsis: true,
                 ),
@@ -82,7 +82,7 @@ class BotRecommendationCard extends StatelessWidget {
                     disabled: isDisabled,
                     buttonPrimarySize: ButtonPrimarySize.small,
                     label:
-                        botRecommendationModel.freeBot ? 'FREE TRADE' : 'TRADE',
+                        botRecommendationModel.freeBot ? 'FREE TRADE' : S.of(context).trade,
                     onTap: onTap),
               ),
             )
