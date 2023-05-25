@@ -84,8 +84,8 @@ class SignUpForm extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 textInputType: TextInputType.emailAddress,
                 maxLine: 1,
-                labelText: 'Email Address',
-                hintText: 'Email Address',
+                labelText: S.of(context).email,
+                hintText: S.of(context).emailAddress,
                 errorText: state.usernameErrorText,
                 onChanged: (email) => context
                     .read<SignUpBloc>()
@@ -101,8 +101,8 @@ class SignUpForm extends StatelessWidget {
           return PasswordTextField(
               key: const Key('sign_up_password_input'),
               validPassword: (isValidPassword) => {},
-              hintText: 'Password',
-              label: 'Password',
+              hintText: S.of(context).password,
+              label: S.of(context).password,
               onChanged: (password) => context
                   .read<SignUpBloc>()
                   .add(SignUpPasswordChanged(password)));

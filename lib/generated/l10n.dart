@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `EmailAddress`
+  String get emailAddress {
+    return Intl.message(
+      'EmailAddress',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `About Asklora`
   String get aboutAsklora {
     return Intl.message(

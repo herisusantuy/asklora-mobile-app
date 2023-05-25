@@ -83,6 +83,7 @@
   "getHelp": "獲得幫助",
   "customerService": "客戶服務",
   "email": "電郵",
+  "emailAddress": "電郵地址",
   "officeHoursLabel": "辦公時間",
   "officeHours": "09:00-18:00 (HKT)",
   "buttonCancel": "CANCEL",

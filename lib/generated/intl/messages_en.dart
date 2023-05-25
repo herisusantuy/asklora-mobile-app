@@ -186,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailActivationFailedTitle": MessageLookupByLibrary.simpleMessage(
             "Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!"),
         "emailActivationSuccessTitle": m4,
+        "emailAddress": MessageLookupByLibrary.simpleMessage("EmailAddress"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
         "errorGettingInformationInvestmentDetailSubTitle":

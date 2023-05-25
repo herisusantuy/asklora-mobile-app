@@ -155,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailActivationFailedTitle":
             MessageLookupByLibrary.simpleMessage("Sorry！你嘅請求已經逾時。\n請重新開通帳戶。"),
         "emailActivationSuccessTitle": m4,
+        "emailAddress": MessageLookupByLibrary.simpleMessage("電郵地址"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
         "errorGettingInformationInvestmentDetailSubTitle":
