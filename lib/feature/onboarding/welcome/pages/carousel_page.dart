@@ -9,12 +9,25 @@ class CarouselPage extends StatelessWidget {
           ..._backgroundImages,
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 14.0),
+            padding: AppValues.screenHorizontalPadding,
+            margin: const EdgeInsets.only(top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const LocalizationToggleButton(),
+                const SizedBox(
+                  height: 30,
+                ),
                 SizedBox(height: 250, child: _animatedTexts(context)),
                 const Expanded(child: SizedBox()),
+                ButtonPair(
+                    key: const Key('button_pair'),
+                    primaryButtonOnClick: () => context
+                        .read<NavigationBloc<WelcomePages>>()
+                        .add(const PageChanged(WelcomePages.welcome)),
+                    secondaryButtonOnClick: () => SignInScreen.open(context),
+                    primaryButtonLabel: S.of(context).buttonLetsBegin,
+                    secondaryButtonLabel: S.of(context).buttonHaveAnAccount),
               ],
             ),
           ),

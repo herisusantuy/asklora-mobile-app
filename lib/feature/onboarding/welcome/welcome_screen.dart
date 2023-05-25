@@ -13,6 +13,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/app_icons.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../auth/sign_in/presentation/sign_in_screen.dart';
 import 'ask_name/presentation/ask_name_screen.dart';
 
@@ -23,7 +24,7 @@ part 'pages/carousel_page.dart';
 enum WelcomePages { carousel, welcome }
 
 class WelcomeScreen extends StatelessWidget {
-  static const route = '/carousel_screen';
+  static const route = '/welcome_screen';
 
   const WelcomeScreen({Key? key}) : super(key: key);
 
@@ -34,49 +35,17 @@ class WelcomeScreen extends StatelessWidget {
       body: BlocProvider(
         create: (_) => NavigationBloc<WelcomePages>(WelcomePages.carousel),
         child: BlocBuilder<NavigationBloc<WelcomePages>,
-                NavigationState<WelcomePages>>(
-            builder: (context, state) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _localisationToggle,
-                    _content(state),
-                    _bottomButton(context, state),
-                  ],
-                )),
+            NavigationState<WelcomePages>>(builder: (context, state) {
+          switch (state.page) {
+            case WelcomePages.carousel:
+              return const CarouselPage();
+            case WelcomePages.welcome:
+              return const WelcomePage();
+          }
+        }),
       ),
     );
   }
-
-  Widget get _localisationToggle => Padding(
-        padding:
-            AppValues.screenHorizontalPadding.copyWith(top: 15, bottom: 30),
-        child: const LocalizationToggleButton(),
-      );
-
-  Widget _content(NavigationState<WelcomePages> state) => Expanded(
-      child: state.page == WelcomePages.carousel
-          ? const CarouselPage()
-          : const WelcomePage());
-
-  Widget _bottomButton(
-          BuildContext context, NavigationState<WelcomePages> state) =>
-      Padding(
-        padding: AppValues.screenHorizontalPadding,
-        child: ButtonPair(
-            key: const Key('button_pair'),
-            primaryButtonOnClick: () {
-              if (state.page == WelcomePages.carousel) {
-                context
-                    .read<NavigationBloc<WelcomePages>>()
-                    .add(const PageChanged(WelcomePages.welcome));
-              } else {
-                AskNameScreen.open(context);
-              }
-            },
-            secondaryButtonOnClick: () => SignInScreen.open(context),
-            primaryButtonLabel: S.of(context).buttonLetsBegin,
-            secondaryButtonLabel: S.of(context).buttonHaveAnAccount),
-      );
 
   static void open(BuildContext context) =>
       Navigator.of(context).pushNamed(route);
