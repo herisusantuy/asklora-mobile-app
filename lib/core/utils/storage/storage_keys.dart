@@ -15,3 +15,4 @@ const String sfKeyInAppNotification = 'in_app_notification';
 const String sfKeyPushNotification = 'push_notification';
 const String sfKeyEmailNotification = 'email_notification';
 const String sfKeyAccountData = 'account_data';
+const String sfKeyLocalisationData = 'localisation_data';

@@ -257,4 +257,14 @@ class MockSharedPreference extends _i1.Mock implements _i10.SharedPreference {
         ),
         returnValue: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
+  @override
+  _i5.Future<void> deleteAllDataExcept(List<String>? keys) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAllDataExcept,
+          [keys],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }

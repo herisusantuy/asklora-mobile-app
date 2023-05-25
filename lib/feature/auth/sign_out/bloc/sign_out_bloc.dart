@@ -5,6 +5,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/token/repository/repository.dart';
 import '../../../../core/utils/storage/secure_storage.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../core/utils/storage/storage_keys.dart';
 import '../../repository/auth_repository.dart';
 
 part 'sign_out_event.dart';
@@ -40,7 +41,7 @@ class SignOutBloc extends Bloc<SignOutEvent, SignOutState> {
           .signOut(await _tokenRepository.getRefreshToken());
       if (isSignedOut) {
         await _tokenRepository.deleteAll();
-        await _sharedPreference.deleteAllData();
+        await _sharedPreference.deleteAllDataExcept([sfKeyLocalisationData]);
         await _secureStorage.deleteAllData();
         emit(state.copyWith(
             response: BaseResponse.complete('Sign Out Success')));

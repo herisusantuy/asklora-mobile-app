@@ -303,6 +303,16 @@ class MockSharedPreference extends _i1.Mock implements _i9.SharedPreference {
         ),
         returnValue: _i7.Future<bool>.value(false),
       ) as _i7.Future<bool>);
+  @override
+  _i7.Future<void> deleteAllDataExcept(List<String>? keys) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAllDataExcept,
+          [keys],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [JsonCacheSharedPreferences].

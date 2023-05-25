@@ -52,8 +52,14 @@ class AppState extends Equatable {
 
   const AppState.unknown() : this._();
 
-  const AppState.authenticated({UserJourney userJourney = UserJourney.privacy})
-      : this._(status: AppStatus.authenticated, userJourney: userJourney);
+  const AppState.authenticated(
+      {UserJourney userJourney = UserJourney.privacy,
+      LocaleType localeType =
+          const LocaleType('en', 'US', 'ENG', 'English', 'Mulish')})
+      : this._(
+            status: AppStatus.authenticated,
+            userJourney: userJourney,
+            locale: localeType);
 
   const AppState.unauthenticated(
       {localeType = const LocaleType('en', 'US', 'ENG', 'English', 'Mulish'),
@@ -65,10 +71,11 @@ class AppState extends Equatable {
 
   AppState copyWith({
     UserJourney? userJourney,
+    LocaleType? locale,
   }) {
     return AppState._(
       status: status,
-      locale: locale,
+      locale: locale ?? this.locale,
       userJourney: userJourney ?? this.userJourney,
     );
   }

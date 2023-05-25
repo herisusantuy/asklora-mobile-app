@@ -50,4 +50,16 @@ class SharedPreference implements Storage {
   @override
   Future<bool> containsKey(String key) async =>
       await _getPreference().then((value) => value.containsKey(key));
+
+  Future<void> deleteAllDataExcept(List<String> keys) async {
+    await _getPreference().then(
+      (value) {
+        for (String key in value.getKeys()) {
+          if (!keys.contains(key)) {
+            value.remove(key);
+          }
+        }
+      },
+    );
+  }
 }
