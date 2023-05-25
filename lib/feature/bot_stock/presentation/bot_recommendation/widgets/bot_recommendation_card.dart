@@ -81,8 +81,9 @@ class BotRecommendationCard extends StatelessWidget {
                 child: PrimaryButton(
                     disabled: isDisabled,
                     buttonPrimarySize: ButtonPrimarySize.small,
-                    label:
-                        botRecommendationModel.freeBot ? 'FREE TRADE' : S.of(context).trade,
+                    label: botRecommendationModel.freeBot
+                        ? 'FREE TRADE'
+                        : S.of(context).trade,
                     onTap: onTap),
               ),
             )
