@@ -9,8 +9,9 @@ import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
+import '../../../../generated/l10n.dart';
 import '../../../auth/sign_in/presentation/sign_in_screen.dart';
-import '../../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../../onboarding/welcome/welcome_screen.dart';
 import '../../email_activation/presentation/email_activation_screen.dart';
 import '../bloc/sign_up_bloc.dart';
 
@@ -47,9 +48,7 @@ class SignUpForm extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: [
-                    const LoraMemojiHeader(
-                        text:
-                            'Start your new investing journey\nwith Lora - your\nAI Investment Coach'),
+                    LoraMemojiHeader(text: S.of(context).signUpTitle),
                     _userNameInput(),
                     _padding(),
                     _passwordInput(),
@@ -85,8 +84,8 @@ class SignUpForm extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 textInputType: TextInputType.emailAddress,
                 maxLine: 1,
-                labelText: 'Email Address',
-                hintText: 'Email Address',
+                labelText: S.of(context).email,
+                hintText: S.of(context).emailAddress,
                 errorText: state.usernameErrorText,
                 onChanged: (email) => context
                     .read<SignUpBloc>()
@@ -102,8 +101,8 @@ class SignUpForm extends StatelessWidget {
           return PasswordTextField(
               key: const Key('sign_up_password_input'),
               validPassword: (isValidPassword) => {},
-              hintText: 'Password',
-              label: 'Password',
+              hintText: S.of(context).password,
+              label: S.of(context).password,
               onChanged: (password) => context
                   .read<SignUpBloc>()
                   .add(SignUpPasswordChanged(password)));
@@ -115,7 +114,7 @@ class SignUpForm extends StatelessWidget {
       return PrimaryButton(
         key: const Key('sign_up_submit_button'),
         fontStyle: FontStyle.normal,
-        label: 'SIGN UP',
+        label: S.of(context).buttonSignUp,
         disabled: !(state.isEmailValid && state.isPasswordValid),
         onTap: () => context.read<SignUpBloc>().add(const SignUpSubmitted()),
       );
@@ -127,7 +126,7 @@ class SignUpForm extends StatelessWidget {
       buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
       key: const Key('sign_up_have_an_account_button'),
       fontStyle: FontStyle.normal,
-      label: 'ALREADY HAVE AN ACCOUNT?',
+      label: S.of(context).buttonAlreadyHaveAnAccount,
       onTap: () => SignInScreen.open(context),
     );
   }
@@ -136,8 +135,8 @@ class SignUpForm extends StatelessWidget {
     return CustomTextButton(
       key: const Key('sign_up_may_be_later_button'),
       margin: const EdgeInsets.only(top: 20),
-      label: 'MAYBE LATER',
-      onTap: () => CarouselScreen.open(context),
+      label: S.of(context).buttonMaybeLater,
+      onTap: () => WelcomeScreen.open(context),
     );
   }
 

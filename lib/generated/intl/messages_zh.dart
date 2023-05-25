@@ -30,24 +30,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(expiryTime) => "更新到期時間為 ${expiryTime}";
 
-  static String m4(minute) => " ~${minute} 分鐘";
+  static String m4(emailAddress) => "已發送電子郵件至\n ${emailAddress}\n\n請用手機點擊開通連結！";
 
-  static String m5(currency) => "購買力 (${currency})";
+  static String m5(minute) => " ~${minute} 分鐘";
 
-  static String m6(currency) => "當前價格 ${currency}";
+  static String m6(currency) => "購買力 (${currency})";
 
-  static String m7(bot, startDate, endDate, duration) =>
+  static String m7(currency) => "當前價格 ${currency}";
+
+  static String m8(bot, startDate, endDate, duration) =>
       "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
 
-  static String m8(dateTime) => "到期日期 ${dateTime}";
+  static String m9(dateTime) => "到期日期 ${dateTime}";
 
-  static String m9(dateTime) => "${dateTime}日後到期";
+  static String m10(dateTime) => "${dateTime}日後到期";
 
-  static String m10(currency) => "Botstock 總價值 (${currency})";
+  static String m11(currency) => "Botstock 總價值 (${currency})";
 
-  static String m11(currency) => "可提取金額 (${currency})";
+  static String m12(currency) => "可提取金額 (${currency})";
 
-  static String m12(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m13(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -94,11 +96,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetRolloverDisclosureTitle":
             MessageLookupByLibrary.simpleMessage(
                 "你將延長 Botstock 投資期，\n 並需繳付額外延長費用。"),
+        "buttonAlreadyHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("已有帳戶"),
         "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("確定"),
         "buttonContinue": MessageLookupByLibrary.simpleMessage("繼續"),
         "buttonCreateAnAccount": MessageLookupByLibrary.simpleMessage("建立帳戶"),
+        "buttonDefineInvestmentStyle":
+            MessageLookupByLibrary.simpleMessage("立即體驗"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
         "buttonDone": MessageLookupByLibrary.simpleMessage("完成"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
@@ -107,7 +113,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonNext": MessageLookupByLibrary.simpleMessage("下一步"),
         "buttonNotNow": MessageLookupByLibrary.simpleMessage("稍後再說"),
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("重新加載"),
+        "buttonResendActivationLink":
+            MessageLookupByLibrary.simpleMessage("再發送開通連結"),
         "buttonSignOut": MessageLookupByLibrary.simpleMessage("登出"),
+        "buttonSignUp": MessageLookupByLibrary.simpleMessage("註冊"),
+        "buttonSignUpAgain": MessageLookupByLibrary.simpleMessage("再次註冊"),
         "buttonViewTransactionHistory":
             MessageLookupByLibrary.simpleMessage("查看交易歷史"),
         "buttonWithdraw": MessageLookupByLibrary.simpleMessage("提取"),
@@ -142,6 +152,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "doAnyOfTheFollowingApply":
             MessageLookupByLibrary.simpleMessage("以下描述適用於你或你的直系親屬？"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
+        "emailActivationFailedTitle":
+            MessageLookupByLibrary.simpleMessage("Sorry！你嘅請求已經逾時。\n請重新開通帳戶。"),
+        "emailActivationSuccessTitle": m4,
+        "emailAddress": MessageLookupByLibrary.simpleMessage("電郵地址"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
         "errorGettingInformationInvestmentDetailSubTitle":
@@ -188,6 +202,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
         "investmentPreferences": MessageLookupByLibrary.simpleMessage("投資偏好"),
+        "investmentStyleWelcomeTitle": MessageLookupByLibrary.simpleMessage(
+            "想要 FinFit， 有咩投資秘技？\n界定投資風格先！\n"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("學䲾 Botstock 管理"),
@@ -197,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("目標"),
-        "min": m4,
+        "min": m5,
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
@@ -219,19 +235,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
-        "portfolioBuyingPower": m5,
+        "portfolioBuyingPower": m6,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 "),
-        "portfolioCurrentPrice": m6,
+        "portfolioCurrentPrice": m7,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("取消BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("取消Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("續期Botstock"),
-        "portfolioDetailChartCaption": m7,
-        "portfolioDetailExpiredAt": m8,
-        "portfolioDetailExpiredIn": m9,
+        "portfolioDetailChartCaption": m8,
+        "portfolioDetailExpiredAt": m9,
+        "portfolioDetailExpiredIn": m10,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("平均虧損"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -297,10 +313,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("尚未開始任何交易!"),
         "portfolioPopUpNoTradingHasStartedtSubTitle":
             MessageLookupByLibrary.simpleMessage(" 開始交易後你就可以一次過管理所有投資。"),
-        "portfolioTotalBotStock": m10,
+        "portfolioTotalBotStock": m11,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
-        "portfolioWithdrawableAmount": m11,
+        "portfolioWithdrawableAmount": m12,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
@@ -313,6 +329,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
+        "signUpTitle": MessageLookupByLibrary.simpleMessage(
+            "與 Lora --- 你嘅 FinFit 教練，\n展開全新投資之旅"),
         "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
         "startDate": MessageLookupByLibrary.simpleMessage("最佳開始日期"),
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
@@ -355,6 +373,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
         "website": MessageLookupByLibrary.simpleMessage("網站"),
+        "welcomeScreenFirstBenefit":
+            MessageLookupByLibrary.simpleMessage("FinFit 教練指導"),
+        "welcomeScreenSecondBenefit":
+            MessageLookupByLibrary.simpleMessage("個人化體驗"),
+        "welcomeScreenSubTitle":
+            MessageLookupByLibrary.simpleMessage("踢走投資壞習慣！投資夠FinFit，夠自信！"),
+        "welcomeScreenThirdBenefit":
+            MessageLookupByLibrary.simpleMessage("AI 全自動交易"),
+        "welcomeScreenTitle":
+            MessageLookupByLibrary.simpleMessage("投資，你夠 Fit 未？"),
         "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
         "withdrawalRequestSubmittedSubTitle":
             MessageLookupByLibrary.simpleMessage(
@@ -365,7 +393,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m12,
+        "yourBankAccountIsUnderReview": m13,
         "yourPaymentInformationIsUnderReview":
             MessageLookupByLibrary.simpleMessage(
                 "您的銀行帳戶信息正在審核中。一旦您的開戶申請獲批，您的銀行帳戶詳細信息將顯示在此處。請注意，審核過程最多可能需要 2 個工作日。")

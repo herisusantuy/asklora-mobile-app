@@ -31,8 +31,8 @@ import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../feature/onboarding/ppi/presentation/ppi_screen.dart';
 import '../../feature/onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
-import '../../feature/onboarding/welcome/carousel/presentation/carousel_screen.dart';
 import '../../feature/onboarding/welcome/greeting/greeting_screen.dart';
+import '../../feature/onboarding/welcome/welcome_screen.dart';
 import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
@@ -108,9 +108,9 @@ class RouterGenerator {
                   questionPageType: args.left,
                   initialQuestionPage: args.right,
                 ));
-      case CarouselScreen.route:
+      case WelcomeScreen.route:
         return MaterialPageRoute(
-            settings: settings, builder: (_) => const CarouselScreen());
+            settings: settings, builder: (_) => const WelcomeScreen());
       case AskNameScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const AskNameScreen());

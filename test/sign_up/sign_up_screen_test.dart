@@ -1,5 +1,6 @@
 import 'package:asklora_mobile_app/core/presentation/buttons/primary_button.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_up/presentation/sign_up_screen.dart';
+import 'package:asklora_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,8 +12,12 @@ void main() async {
       final mockObserver = MockNavigatorObserver();
       await tester.pumpWidget(MaterialApp(
         home: const SignUpScreen(),
+        localizationsDelegates: const [
+          S.delegate,
+        ],
         navigatorObservers: [mockObserver],
       ));
+      await tester.pumpAndSettle();
     }
 
     testWidgets(

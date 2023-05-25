@@ -19,7 +19,7 @@ import '../../../core/utils/storage/shared_preference.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/repository/auth_repository.dart';
 import '../../auth/sign_out/bloc/sign_out_bloc.dart';
-import '../../onboarding/welcome/carousel/presentation/carousel_screen.dart';
+import '../../onboarding/welcome/welcome_screen.dart';
 import '../../transaction_history/presentation/transaction_history_screen.dart';
 import 'account_setting_screen.dart';
 import 'about_asklora_screen.dart';
@@ -127,7 +127,7 @@ class SettingsScreen extends StatelessWidget {
             if (state.response.state == ResponseState.error) {
               CustomInAppNotification.show(context, state.response.message);
             } else if (state.response.state == ResponseState.success) {
-              CarouselScreen.openAndRemoveAllRoute(context);
+              WelcomeScreen.openAndRemoveAllRoute(context);
             }
           },
           child: GestureDetector(
