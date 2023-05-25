@@ -17,38 +17,38 @@ class AskLoraTextStyles {
       height: 1.32,
       fontWeight: AskLoraFontWeight.extraBold.value);
 
-  // static TextStyle h3Italic = _textStyle.copyWith(
-  //   fontSize: 28,
-  //   height: 1.5,
-  //   fontWeight: AskLoraFontWeight.black.value,
-  //   fontStyle: FontStyle.italic,
-  // );
-  //
+  static TextStyle h3Italic = _textStyle.copyWith(
+    fontSize: 28,
+    height: 1.5,
+    fontWeight: AskLoraFontWeight.extraBold.value,
+    fontStyle: FontStyle.italic,
+  );
+
   static TextStyle h4 = _textStyle.copyWith(
     fontSize: 23,
     height: 1.32,
     fontWeight: AskLoraFontWeight.extraBold.value,
   );
-  //
-  // static TextStyle h4Italic = _textStyle.copyWith(
-  //   fontSize: 23,
-  //   height: 1.32,
-  //   fontWeight: AskLoraFontWeight.black.value,
-  //   fontStyle: FontStyle.italic,
-  // );
-  //
+
+  static TextStyle h4Italic = _textStyle.copyWith(
+    fontSize: 23,
+    height: 1.32,
+    fontWeight: AskLoraFontWeight.extraBold.value,
+    fontStyle: FontStyle.italic,
+  );
+
   static TextStyle h5 = _textStyle.copyWith(
     fontSize: 19,
     height: 1.32,
     fontWeight: AskLoraFontWeight.extraBold.value,
   );
-  //
-  // static TextStyle h5Italic = _textStyle.copyWith(
-  //   fontSize: 19,
-  //   height: 1.32,
-  //   fontWeight: AskLoraFontWeight.black.value,
-  //   fontStyle: FontStyle.italic,
-  // );
+
+  static TextStyle h5Italic = _textStyle.copyWith(
+    fontSize: 19,
+    height: 1.32,
+    fontWeight: AskLoraFontWeight.extraBold.value,
+    fontStyle: FontStyle.italic,
+  );
 
   static TextStyle h6 = _textStyle.copyWith(
     fontSize: 16,
@@ -120,7 +120,6 @@ enum AskLoraFontWeight {
   semiBold(FontWeight.w600),
   bold(FontWeight.w700),
   extraBold(FontWeight.w800);
-  //black(FontWeight.w900);
 
   final FontWeight value;
 
