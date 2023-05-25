@@ -39,11 +39,11 @@ class CarouselPage extends StatelessWidget {
             right: 0,
             child: Container(
                 transform: Matrix4.translationValues(0, -35, 0),
-                child: getSvgIcon('carousel_bg_dollar_1'))),
+                child: getPngImage('carousel_bg_dollar_3'))),
         Positioned(
-            top: 170, left: 0, child: getSvgIcon('carousel_bg_dollar_2')),
+            top: 170, left: 0, child: getPngImage('carousel_bg_dollar_1')),
         Positioned(
-            top: 334, right: 1.61, child: getSvgIcon('carousel_bg_dollar_3')),
+            top: 334, right: 1.61, child: getPngImage('carousel_bg_dollar_2')),
       ];
 
   Widget _animatedTexts(BuildContext context) {
