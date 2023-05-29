@@ -49,9 +49,9 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   void precacheImages(BuildContext context) {
-    precacheImage(getPngImage('welcome_screen_whistle').image, context);
-    precacheImage(getPngImage('welcome_screen_chess').image, context);
-    precacheImage(getPngImage('welcome_screen_setting').image, context);
+    precachePngImage('welcome_screen_whistle', context);
+    precachePngImage('welcome_screen_chess', context);
+    precachePngImage('welcome_screen_setting', context);
   }
 
   static void open(BuildContext context) =>

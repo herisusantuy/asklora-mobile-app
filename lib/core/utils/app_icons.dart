@@ -31,3 +31,11 @@ Widget getSvgImage(String assetName,
         {Color? color, double? height, double? width}) =>
     SvgPicture.asset('assets/images/$assetName.svg',
         color: color, height: height, width: width);
+
+void precachePngIcon(String iconName, BuildContext context) {
+  precacheImage(getPngIcon(iconName).image, context);
+}
+
+void precachePngImage(String imageName, BuildContext context) {
+  precacheImage(getPngImage(imageName).image, context);
+}
