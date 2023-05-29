@@ -30,6 +30,7 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    precacheImages(context);
     return CustomScaffold(
       enableBackNavigation: false,
       body: BlocProvider(
@@ -45,6 +46,12 @@ class WelcomeScreen extends StatelessWidget {
         }),
       ),
     );
+  }
+
+  void precacheImages(BuildContext context) {
+    precachePngImage('welcome_screen_whistle', context);
+    precachePngImage('welcome_screen_chess', context);
+    precachePngImage('welcome_screen_setting', context);
   }
 
   static void open(BuildContext context) =>

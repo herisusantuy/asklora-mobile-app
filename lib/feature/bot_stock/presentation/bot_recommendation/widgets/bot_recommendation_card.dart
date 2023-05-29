@@ -29,7 +29,7 @@ class BotRecommendationCard extends StatelessWidget {
                 AppValues.screenHorizontalPadding.right -
                 spacing) /
             2,
-        padding: const EdgeInsets.fromLTRB(14, 20, 14, 11),
+        padding: const EdgeInsets.fromLTRB(14, 11, 14, 11),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: botType.primaryBgColor),
