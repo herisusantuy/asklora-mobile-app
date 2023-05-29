@@ -80,16 +80,6 @@ class S {
     );
   }
 
-  /// `Email Address`
-  String get emailAddress {
-    return Intl.message(
-      'Email Address',
-      name: 'emailAddress',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `About Asklora`
   String get aboutAsklora {
     return Intl.message(
@@ -355,6 +345,26 @@ class S {
     return Intl.message(
       'Back To Portfolio',
       name: 'buttonBackToPortfolio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back To Home`
+  String get buttonBackToHome {
+    return Intl.message(
+      'Back To Home',
+      name: 'buttonBackToHome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Customer Service`
+  String get buttonContactCustomerService {
+    return Intl.message(
+      'Contact Customer Service',
+      name: 'buttonContactCustomerService',
       desc: '',
       args: [],
     );
@@ -2043,6 +2053,16 @@ class S {
     );
   }
 
+  /// `Email Address`
+  String get emailAddress {
+    return Intl.message(
+      'Email Address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign In`
   String get signIn {
     return Intl.message(
@@ -2518,6 +2538,26 @@ class S {
     return Intl.message(
       'Status',
       name: 'status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Suspended`
+  String get suspendedScreenTitle {
+    return Intl.message(
+      'Account Suspended',
+      name: 'suspendedScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account has been suspended and is pending investigation from us. If you have any questions about your account, please contact our customer service team.`
+  String get suspendedScreenSubTitle {
+    return Intl.message(
+      'Your account has been suspended and is pending investigation from us. If you have any questions about your account, please contact our customer service team.',
+      name: 'suspendedScreenSubTitle',
       desc: '',
       args: [],
     );
