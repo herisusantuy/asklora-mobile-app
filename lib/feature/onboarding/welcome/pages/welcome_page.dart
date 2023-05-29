@@ -34,18 +34,18 @@ class WelcomePage extends StatelessWidget {
             const SizedBox(
               height: 43,
             ),
-            _welcomeCard(
-                'welcome_icon_cannon', S.of(context).welcomeScreenFirstBenefit),
+            _welcomeCard('welcome_screen_whistle',
+                S.of(context).welcomeScreenFirstBenefit),
             const SizedBox(
               height: 28,
             ),
-            _welcomeCard('welcome_icon_setting',
+            _welcomeCard('welcome_screen_setting',
                 S.of(context).welcomeScreenSecondBenefit),
             const SizedBox(
               height: 28,
             ),
-            _welcomeCard(
-                'welcome_icon_chess', S.of(context).welcomeScreenThirdBenefit),
+            _welcomeCard('welcome_screen_chess',
+                S.of(context).welcomeScreenThirdBenefit),
             const SizedBox(
               height: 45,
             ),
@@ -68,7 +68,7 @@ class WelcomePage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 19, vertical: 21),
         content: Row(
           children: [
-            getSvgIcon(iconAssetName),
+            getPngImage(iconAssetName),
             const SizedBox(
               width: 22,
             ),
