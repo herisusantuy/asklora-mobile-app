@@ -8,6 +8,7 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
+import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
@@ -40,12 +41,16 @@ class WithdrawalSummaryScreen extends StatelessWidget {
           CustomLoadingOverlay.of(context).show(state.response.state);
           if (state.response.state == ResponseState.success) {
             WithdrawalResultScreen.open(context);
+          } else if (state.response.state == ResponseState.error &&
+              state.response.errorCode == 451) {
+            SuspendedAccountScreen.open(context);
           }
         },
         builder: (context, state) => CustomScaffold(
             enableBackNavigation: false,
             body: CustomLayoutWithBlurPopUp(
-              showPopUp: state.response.state == ResponseState.error,
+              showPopUp: state.response.state == ResponseState.error &&
+                  state.response.errorCode != 451,
               content: BalanceBaseForm(
                 title: 'Withdrawal',
                 content: Column(

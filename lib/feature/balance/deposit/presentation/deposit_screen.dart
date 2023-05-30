@@ -16,6 +16,7 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/round_colored_box.dart';
+import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/presentation/text_fields/amount_text_field.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
@@ -68,6 +69,9 @@ class DepositScreen extends StatelessWidget {
             DepositResultScreen.open(
                 context: context,
                 arguments: Pair(depositType, StatusType.success));
+          } else if (state.response.state == ResponseState.error &&
+              state.response.errorCode == 451) {
+            SuspendedAccountScreen.open(context);
           }
         },
         builder: (context, state) => CustomScaffold(
@@ -85,7 +89,8 @@ class DepositScreen extends StatelessWidget {
                   ],
                 ),
                 bottomButton: _bottomButton(context)),
-            showPopUp: state.response.state == ResponseState.error,
+            showPopUp: state.response.state == ResponseState.error &&
+                state.response.errorCode != 451,
             loraPopUpMessageModel: LoraPopUpMessageModel(
                 title: S.of(context).unableToProcessDepositTitle,
                 subTitle: S.of(context).unableToProcessDepositSubTitle,

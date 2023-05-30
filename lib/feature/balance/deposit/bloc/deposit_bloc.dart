@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../domain/deposit_response.dart';
@@ -72,6 +73,8 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
             platformFiles: state.proofOfRemittanceImages);
         emit(state.copyWith(response: data));
       }
+    } on LegalReasonException {
+      emit(state.copyWith(response: BaseResponse.error(errorCode: 451)));
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }
