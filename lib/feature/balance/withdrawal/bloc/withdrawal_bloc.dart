@@ -44,7 +44,7 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
               WithdrawalRequest(amount: event.withdrawalAmount.toString()));
       emit(state.copyWith(response: data));
     } on LegalReasonException {
-      emit(state.copyWith(response: BaseResponse.error(errorCode: 451)));
+      emit(WithdrawalAccountSuspended());
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }

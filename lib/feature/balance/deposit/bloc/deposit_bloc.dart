@@ -74,7 +74,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
         emit(state.copyWith(response: data));
       }
     } on LegalReasonException {
-      emit(state.copyWith(response: BaseResponse.error(errorCode: 451)));
+      emit(DepositAccountSuspended());
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }

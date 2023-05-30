@@ -41,16 +41,14 @@ class WithdrawalSummaryScreen extends StatelessWidget {
           CustomLoadingOverlay.of(context).show(state.response.state);
           if (state.response.state == ResponseState.success) {
             WithdrawalResultScreen.open(context);
-          } else if (state.response.state == ResponseState.error &&
-              state.response.errorCode == 451) {
+          } else if (state is WithdrawalAccountSuspended) {
             SuspendedAccountScreen.open(context);
           }
         },
         builder: (context, state) => CustomScaffold(
             enableBackNavigation: false,
             body: CustomLayoutWithBlurPopUp(
-              showPopUp: state.response.state == ResponseState.error &&
-                  state.response.errorCode != 451,
+              showPopUp: state.response.state == ResponseState.error,
               content: BalanceBaseForm(
                 title: 'Withdrawal',
                 content: Column(

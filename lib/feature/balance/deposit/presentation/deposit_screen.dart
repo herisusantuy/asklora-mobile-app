@@ -69,8 +69,7 @@ class DepositScreen extends StatelessWidget {
             DepositResultScreen.open(
                 context: context,
                 arguments: Pair(depositType, StatusType.success));
-          } else if (state.response.state == ResponseState.error &&
-              state.response.errorCode == 451) {
+          } else if (state is DepositAccountSuspended) {
             SuspendedAccountScreen.open(context);
           }
         },
@@ -89,8 +88,7 @@ class DepositScreen extends StatelessWidget {
                   ],
                 ),
                 bottomButton: _bottomButton(context)),
-            showPopUp: state.response.state == ResponseState.error &&
-                state.response.errorCode != 451,
+            showPopUp: state.response.state == ResponseState.error,
             loraPopUpMessageModel: LoraPopUpMessageModel(
                 title: S.of(context).unableToProcessDepositTitle,
                 subTitle: S.of(context).unableToProcessDepositSubTitle,

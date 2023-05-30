@@ -53,3 +53,5 @@ class DepositState extends Equatable {
     }
   }
 }
+
+class DepositAccountSuspended extends DepositState {}
