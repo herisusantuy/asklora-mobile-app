@@ -28,5 +28,3 @@ class WithdrawalState extends Equatable {
     );
   }
 }
-
-class WithdrawalAccountSuspended extends WithdrawalState {}

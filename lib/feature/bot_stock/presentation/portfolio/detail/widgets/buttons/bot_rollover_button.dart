@@ -25,6 +25,9 @@ class BotRolloverButton extends StatelessWidget {
                 arguments: Pair('Trade Request Received',
                     '${botType.name} ${botActiveOrderDetailModel.tickerDetail.ticker} will rollover at ${newExpiryDateOnRollover(botActiveOrderDetailModel.expireDate)}'));
           } else if (state.rolloverBotStockResponse.state ==
+              ResponseState.suspended) {
+            SuspendedAccountScreen.open(context);
+          } else if (state.rolloverBotStockResponse.state ==
               ResponseState.error) {
             CustomInAppNotification.show(
                 context, state.rolloverBotStockResponse.message);

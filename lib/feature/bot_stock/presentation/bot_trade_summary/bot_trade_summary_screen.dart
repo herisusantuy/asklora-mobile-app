@@ -11,6 +11,7 @@ import '../../../../core/domain/pair.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
+import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../tabs/tabs_screen.dart';
@@ -80,6 +81,9 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   arguments: Pair(
                       'Trade Request Received', _tradeRequestSuccessMessage()));
             }
+          } else if (state.createBotOrderResponse.state ==
+              ResponseState.suspended) {
+            SuspendedAccountScreen.open(context);
           } else if (state.createBotOrderResponse.state ==
               ResponseState.error) {
             if (state.createBotOrderResponse.errorCode == 403) {

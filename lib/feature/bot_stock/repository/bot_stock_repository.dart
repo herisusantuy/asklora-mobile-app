@@ -176,6 +176,8 @@ class BotStockRepository {
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } on ForbiddenException {
       return BaseResponse.error(errorCode: 403);
+    } on LegalReasonException {
+      return BaseResponse.suspended();
     } catch (e) {
       ///todo handle error code later on insufficient balance
       return BaseResponse.error();
@@ -187,6 +189,8 @@ class BotStockRepository {
       var response = await _botStockApiClient
           .cancelOrder(BotOrderRequest(orderId: botOrderId));
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
+    } on LegalReasonException {
+      return BaseResponse.suspended();
     } catch (e) {
       return BaseResponse.error();
     }
@@ -198,6 +202,8 @@ class BotStockRepository {
       var response = await _botStockApiClient
           .rolloverOrder(BotOrderRequest(orderId: botOrderId));
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
+    } on LegalReasonException {
+      return BaseResponse.suspended();
     } catch (e) {
       return BaseResponse.error();
     }
@@ -209,6 +215,8 @@ class BotStockRepository {
       var response = await _botStockApiClient
           .terminateOrder(BotOrderRequest(orderId: botOrderId));
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
+    } on LegalReasonException {
+      return BaseResponse.suspended();
     } catch (e) {
       return BaseResponse.error();
     }

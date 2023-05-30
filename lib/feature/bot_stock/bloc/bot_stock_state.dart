@@ -48,3 +48,5 @@ class BotStockState extends Equatable {
     );
   }
 }
+
+class BotOrderAccountSuspended extends BotStockState {}
