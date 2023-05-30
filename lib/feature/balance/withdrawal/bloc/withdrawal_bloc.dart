@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
 import '../domain/withdrawal_request.dart';
 import '../domain/withdrawal_response.dart';
@@ -42,6 +43,8 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
           withdrawalRequest:
               WithdrawalRequest(amount: event.withdrawalAmount.toString()));
       emit(state.copyWith(response: data));
+    } on LegalReasonException {
+      emit(WithdrawalAccountSuspended());
     } catch (e) {
       emit(state.copyWith(response: BaseResponse.error()));
     }

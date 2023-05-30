@@ -167,6 +167,8 @@ class AppInterceptors extends Interceptor {
             throw NotAcceptableException(err.requestOptions);
           case 409:
             throw ConflictException(err.requestOptions);
+          case 451:
+            throw LegalReasonException(err.requestOptions);
           case 500:
             throw InternalServerErrorException(err.requestOptions);
         }
@@ -238,6 +240,15 @@ class ForbiddenException extends DioError {
   @override
   String toString() {
     return "You don't have permission to access this resource";
+  }
+}
+
+class LegalReasonException extends DioError {
+  LegalReasonException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'The account is suspended, cannot continue';
   }
 }
 

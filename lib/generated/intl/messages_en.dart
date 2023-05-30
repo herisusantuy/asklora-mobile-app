@@ -113,6 +113,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonAlreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Already Have An Account?"),
         "buttonBack": MessageLookupByLibrary.simpleMessage("Back"),
+        "buttonBackToHome":
+            MessageLookupByLibrary.simpleMessage("Back To Home"),
         "buttonBackToPortfolio":
             MessageLookupByLibrary.simpleMessage("Back To Portfolio"),
         "buttonCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -121,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonChangeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Change Investment Style"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "buttonContactCustomerService":
+            MessageLookupByLibrary.simpleMessage("Contact Customer Service"),
         "buttonContinue": MessageLookupByLibrary.simpleMessage("Continue"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "buttonDone": MessageLookupByLibrary.simpleMessage("Done"),
@@ -440,6 +444,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
+        "suspendedScreenSubTitle": MessageLookupByLibrary.simpleMessage(
+            "Your account has been suspended and is pending investigation from us. If you have any questions about your account, please contact our customer service team."),
+        "suspendedScreenTitle":
+            MessageLookupByLibrary.simpleMessage("Account Suspended"),
         "terminateAccount":
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":

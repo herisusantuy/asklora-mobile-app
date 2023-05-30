@@ -59,6 +59,7 @@ import '../presentation/acknowledgement/domain/acknowledgement_model.dart';
 import '../presentation/acknowledgement/presentation/acknowledgement_screen.dart';
 import '../presentation/custom_status_widget.dart';
 import '../presentation/photo_view_screen.dart';
+import '../presentation/suspended_account_screen.dart';
 import 'app_icons.dart';
 
 class RouterGenerator {
@@ -310,7 +311,9 @@ class RouterGenerator {
       case ChangePasswordScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const ChangePasswordScreen());
-
+      case SuspendedAccountScreen.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const SuspendedAccountScreen());
       default:
         return MaterialPageRoute(
             settings: settings,
