@@ -4,35 +4,35 @@ class ChangePasswordState extends Equatable {
   final BaseResponse response;
   final String password;
   final String newPassword;
-  final String newPasswordErrorText;
+  final PasswordErrorType newPasswordErrorType;
   final String confirmNewPassword;
-  final String confirmNewPasswordErrorText;
+  final PasswordErrorType confirmNewPasswordErrorType;
 
   const ChangePasswordState({
     this.response = const BaseResponse(),
     this.password = '',
     this.newPassword = '',
-    this.newPasswordErrorText = '',
+    this.newPasswordErrorType = PasswordErrorType.validPassword,
     this.confirmNewPassword = '',
-    this.confirmNewPasswordErrorText = '',
+    this.confirmNewPasswordErrorType = PasswordErrorType.validPassword,
   }) : super();
 
   ChangePasswordState copyWith({
     BaseResponse? response,
     String? password,
     String? newPassword,
-    String? newPasswordErrorText,
+    PasswordErrorType? newPasswordErrorType,
     String? confirmNewPassword,
-    String? confirmNewPasswordErrorText,
+    PasswordErrorType? confirmNewPasswordErrorType,
   }) {
     return ChangePasswordState(
       response: response ?? this.response,
       password: password ?? this.password,
       newPassword: newPassword ?? this.newPassword,
-      newPasswordErrorText: newPasswordErrorText ?? this.newPasswordErrorText,
+      newPasswordErrorType: newPasswordErrorType ?? this.newPasswordErrorType,
       confirmNewPassword: confirmNewPassword ?? this.confirmNewPassword,
-      confirmNewPasswordErrorText:
-          confirmNewPasswordErrorText ?? this.confirmNewPasswordErrorText,
+      confirmNewPasswordErrorType:
+          confirmNewPasswordErrorType ?? this.confirmNewPasswordErrorType,
     );
   }
 
@@ -41,16 +41,18 @@ class ChangePasswordState extends Equatable {
         response,
         password,
         newPassword,
-        newPasswordErrorText,
+        newPasswordErrorType,
         confirmNewPassword,
-        confirmNewPasswordErrorText,
+        confirmNewPasswordErrorType,
       ];
 
   bool disabledSaveButton() {
-    if (newPasswordErrorText.isEmpty &&
-        confirmNewPasswordErrorText.isEmpty &&
+    if (password.isNotEmpty &&
+        newPasswordErrorType == PasswordErrorType.validPassword &&
+        confirmNewPasswordErrorType == PasswordErrorType.validPassword &&
         newPassword.isValidPassword() &&
-        confirmNewPassword.isValidPassword()) {
+        confirmNewPassword.isValidPassword() &&
+        newPassword == confirmNewPassword) {
       return false;
     } else {
       return true;
