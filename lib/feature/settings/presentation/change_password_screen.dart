@@ -116,8 +116,7 @@ class ChangePasswordScreen extends StatelessWidget {
               isShowingPasswordValidation: false,
               validPassword: (validPassword) => {},
               hintText: S.of(context).newPassword,
-              errorText:
-                  state.newPasswordErrorType.getPasswordErrorTypeText(context),
+              errorText: state.newPasswordErrorType.text(context),
               onChanged: (newPassword) => context
                   .read<ChangePasswordBloc>()
                   .add(NewPasswordChanged(newPassword)),
@@ -143,8 +142,7 @@ class ChangePasswordScreen extends StatelessWidget {
             return PasswordTextField(
               validPassword: (validPassword) => {},
               hintText: S.of(context).confirmNewPassword,
-              errorText: state.confirmNewPasswordErrorType
-                  .getPasswordErrorTypeText(context),
+              errorText: state.confirmNewPasswordErrorType.text(context),
               onChanged: (confirmNewPassword) => context
                   .read<ChangePasswordBloc>()
                   .add(ConfirmNewPasswordChanged(confirmNewPassword)),

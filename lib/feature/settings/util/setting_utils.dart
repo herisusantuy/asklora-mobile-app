@@ -8,7 +8,7 @@ enum PasswordErrorType {
   validPassword,
   doesNotMatch;
 
-  String getPasswordErrorTypeText(BuildContext context) {
+  String text(BuildContext context) {
     switch (this) {
       case oldPasswordSameWithNewPassword:
         return S.of(context).oldPasswordSameWithNewPasswordError;
