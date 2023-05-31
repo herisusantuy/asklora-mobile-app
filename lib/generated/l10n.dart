@@ -400,6 +400,16 @@ class S {
     );
   }
 
+  /// `Save`
+  String get buttonSave {
+    return Intl.message(
+      'Save',
+      name: 'buttonSave',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Price`
   String get currentPrice {
     return Intl.message(
@@ -1718,6 +1728,66 @@ class S {
     return Intl.message(
       'Create An Account',
       name: 'createAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back to account settings`
+  String get backToAccountSettings {
+    return Intl.message(
+      'Back to account settings',
+      name: 'backToAccountSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Existing Password`
+  String get existingPassword {
+    return Intl.message(
+      'Existing Password',
+      name: 'existingPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password does not match.`
+  String get passwordDoesNotMatch {
+    return Intl.message(
+      'Your password does not match.',
+      name: 'passwordDoesNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password Change Success`
+  String get passwordChangeSuccess {
+    return Intl.message(
+      'Password Change Success',
+      name: 'passwordChangeSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password has been changed`
+  String get yourPasswordHasBeenChanged {
+    return Intl.message(
+      'Your password has been changed',
+      name: 'yourPasswordHasBeenChanged',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter valid password`
+  String get invalidPassword {
+    return Intl.message(
+      'Enter valid password',
+      name: 'invalidPassword',
       desc: '',
       args: [],
     );

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../auth/repository/auth_repository.dart';
+import '../../util/setting_utils.dart';
 
 part 'change_password_event.dart';
 
@@ -25,34 +26,36 @@ class ChangePasswordBloc
   _onPasswordChanged(PasswordChanged event, Emitter<ChangePasswordState> emit) {
     emit(state.copyWith(
         password: event.password,
-        newPasswordErrorText: event.password == state.newPassword&&state.newPassword.isNotEmpty
-            ? 'Can not be the same with old password'
-            : ''));
+        newPasswordErrorType:
+            event.password == state.newPassword && state.newPassword.isNotEmpty
+                ? PasswordErrorType.oldPasswordSameWithNewPassword
+                : PasswordErrorType.validPassword));
   }
 
   _onNewPasswordChanged(
       NewPasswordChanged event, Emitter<ChangePasswordState> emit) {
     emit(state.copyWith(
         newPassword: event.newPassword,
-        newPasswordErrorText:
+        newPasswordErrorType:
             (!event.newPassword.isValidPassword() || event.newPassword.isEmpty)
-                ? 'Enter valid password'
+                ? PasswordErrorType.invalidPassword
                 : event.newPassword == state.password
-                    ? 'Can not be the same with old password'
-                    : '',
-        confirmNewPasswordErrorText:
-            event.newPassword != state.confirmNewPassword&&state.confirmNewPassword.isNotEmpty
-                ? 'Your password does not match'
-                : ''));
+                    ? PasswordErrorType.oldPasswordSameWithNewPassword
+                    : PasswordErrorType.validPassword,
+        confirmNewPasswordErrorType:
+            event.newPassword != state.confirmNewPassword &&
+                    state.confirmNewPassword.isNotEmpty
+                ? PasswordErrorType.doesNotMatch
+                : PasswordErrorType.validPassword));
   }
 
   _onConfirmNewPasswordChanged(
       ConfirmNewPasswordChanged event, Emitter<ChangePasswordState> emit) {
     emit(state.copyWith(
       confirmNewPassword: event.confirmNewPassword,
-      confirmNewPasswordErrorText: event.confirmNewPassword != state.newPassword
-          ? 'Your password does not match'
-          : '',
+      confirmNewPasswordErrorType: event.confirmNewPassword != state.newPassword
+          ? PasswordErrorType.doesNotMatch
+          : PasswordErrorType.validPassword,
     ));
   }
 

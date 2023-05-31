@@ -18,6 +18,7 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/repository/auth_repository.dart';
 import '../bloc/change_password/change_password_bloc.dart';
+import '../util/setting_utils.dart';
 import 'account_setting_screen.dart';
 import 'settings_screen.dart';
 
@@ -41,9 +42,9 @@ class ChangePasswordScreen extends StatelessWidget {
               AcknowledgementScreen.open(
                   context: context,
                   arguments: AcknowledgementModel(
-                      title: 'Password Change Success',
-                      subTitle: 'Your password has been changed',
-                      buttonTitle: 'BACK TO ACCOUNT SETTINGS',
+                      title: S.of(context).passwordChangeSuccess,
+                      subTitle: S.of(context).yourPasswordHasBeenChanged,
+                      buttonTitle: S.of(context).backToAccountSettings,
                       onButtonTap: () =>
                           AccountSettingScreen.openAndRemoveUntil(
                               context, SettingsScreen.route),
@@ -87,7 +88,7 @@ class ChangePasswordScreen extends StatelessWidget {
           builder: (context, state) {
             return PasswordTextField(
               validPassword: (validPassword) => {},
-              hintText: 'Existing Password',
+              hintText: S.of(context).existingPassword,
               isShowingPasswordValidation: false,
               onChanged: (password) => context
                   .read<ChangePasswordBloc>()
@@ -107,15 +108,17 @@ class ChangePasswordScreen extends StatelessWidget {
             style: AskLoraTextStyles.body1),
         const SizedBox(height: 5),
         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-          buildWhen: (previous, current) =>previous.password!=current.password||
+          buildWhen: (previous, current) =>
+              previous.password != current.password ||
               previous.newPassword != current.newPassword ||
-              previous.confirmNewPassword != current.newPasswordErrorText,
+              previous.newPasswordErrorType != current.newPasswordErrorType,
           builder: (context, state) {
             return PasswordTextField(
               isShowingPasswordValidation: false,
               validPassword: (validPassword) => {},
-              hintText: 'New Password',
-              errorText: state.newPasswordErrorText,
+              hintText: S.of(context).newPassword,
+              errorText: PasswordErrorType.getPasswordErrorTypeText(
+                  context, state.newPasswordErrorType),
               onChanged: (newPassword) => context
                   .read<ChangePasswordBloc>()
                   .add(NewPasswordChanged(newPassword)),
@@ -136,12 +139,13 @@ class ChangePasswordScreen extends StatelessWidget {
         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
           buildWhen: (previous, current) =>
               previous.newPassword != current.newPassword ||
-              previous.confirmNewPassword != current.newPasswordErrorText,
+              previous.confirmNewPassword != current.confirmNewPassword,
           builder: (context, state) {
             return PasswordTextField(
               validPassword: (validPassword) => {},
-              hintText: 'Confirm New Password',
-              errorText: state.confirmNewPasswordErrorText,
+              hintText: S.of(context).confirmNewPassword,
+              errorText: PasswordErrorType.getPasswordErrorTypeText(
+                  context, state.confirmNewPasswordErrorType),
               onChanged: (confirmNewPassword) => context
                   .read<ChangePasswordBloc>()
                   .add(ConfirmNewPasswordChanged(confirmNewPassword)),
@@ -162,7 +166,7 @@ class ChangePasswordScreen extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 24, bottom: 30.0),
             child: PrimaryButton(
-                label: 'Save',
+                label: S.of(context).buttonSave,
                 disabled: state.disabledSaveButton(),
                 onTap: () => context
                     .read<ChangePasswordBloc>()

@@ -1,6 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/auth/repository/auth_repository.dart';
 import 'package:asklora_mobile_app/feature/settings/bloc/change_password/change_password_bloc.dart';
+import 'package:asklora_mobile_app/feature/settings/util/setting_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,7 +38,6 @@ void main() {
             password: '',
             newPassword: '',
             confirmNewPassword: '',
-            confirmNewPasswordErrorText: '',
           ));
     });
 
@@ -55,23 +55,23 @@ void main() {
           password: 'aaabbbccc',
           newPassword: '',
           confirmNewPassword: '',
-          confirmNewPasswordErrorText: '',
+          confirmNewPasswordErrorType: PasswordErrorType.validPassword,
         ),
         const ChangePasswordState(
           response: BaseResponse(),
           password: 'aaabbbccc',
           newPassword: '12345678',
-          newPasswordErrorText: 'Enter valid password',
+          newPasswordErrorType: PasswordErrorType.invalidPassword,
           confirmNewPassword: '',
-          confirmNewPasswordErrorText: '',
+          confirmNewPasswordErrorType: PasswordErrorType.validPassword,
         ),
         const ChangePasswordState(
           response: BaseResponse(),
           password: 'aaabbbccc',
           newPassword: '12345678',
-          newPasswordErrorText: 'Enter valid password',
+          newPasswordErrorType: PasswordErrorType.invalidPassword,
           confirmNewPassword: '12345678',
-          confirmNewPasswordErrorText: '',
+          confirmNewPasswordErrorType: PasswordErrorType.validPassword,
         ),
       },
     );
@@ -89,23 +89,23 @@ void main() {
           password: 'aaabbbccc',
           newPassword: '',
           confirmNewPassword: '',
-          confirmNewPasswordErrorText: '',
+          confirmNewPasswordErrorType: PasswordErrorType.validPassword,
         ),
         const ChangePasswordState(
           response: BaseResponse(),
           password: 'aaabbbccc',
           newPassword: 'Aa12345678',
-          newPasswordErrorText: '',
+          newPasswordErrorType: PasswordErrorType.validPassword,
           confirmNewPassword: '',
-          confirmNewPasswordErrorText: '',
+          confirmNewPasswordErrorType: PasswordErrorType.validPassword,
         ),
         const ChangePasswordState(
           response: BaseResponse(),
           password: 'aaabbbccc',
           newPassword: 'Aa12345678',
-          newPasswordErrorText: '',
+          newPasswordErrorType: PasswordErrorType.validPassword,
           confirmNewPassword: 'Aa1234567',
-          confirmNewPasswordErrorText: 'Your password does not match',
+          confirmNewPasswordErrorType: PasswordErrorType.doesNotMatch,
         ),
       },
     );

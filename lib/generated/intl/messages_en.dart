@@ -68,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "backToAccountSettings":
+            MessageLookupByLibrary.simpleMessage("Back to account settings"),
         "bankAccountNumber":
             MessageLookupByLibrary.simpleMessage("Bank Account Number"),
         "bestSuitedFor":
@@ -139,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("Reload Page"),
         "buttonResendActivationLink":
             MessageLookupByLibrary.simpleMessage("Resend Activation Link"),
+        "buttonSave": MessageLookupByLibrary.simpleMessage("Save"),
         "buttonSignOut": MessageLookupByLibrary.simpleMessage("Sign Out"),
         "buttonSignUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "buttonSignUpAgain":
@@ -230,6 +233,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Est. Take Profit %"),
         "estimatedEndDate":
             MessageLookupByLibrary.simpleMessage("Estimated End Date"),
+        "existingPassword":
+            MessageLookupByLibrary.simpleMessage("Existing Password"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
         "founded": MessageLookupByLibrary.simpleMessage("Founded"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
@@ -261,6 +266,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Squat"),
+        "invalidPassword":
+            MessageLookupByLibrary.simpleMessage("Enter valid password"),
         "investmentAmount":
             MessageLookupByLibrary.simpleMessage("Investment Amount"),
         "investmentPeriod":
@@ -306,6 +313,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordChangeSuccess":
+            MessageLookupByLibrary.simpleMessage("Password Change Success"),
+        "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage(
+            "Your password does not match."),
         "payDepositToStartRealTrade": MessageLookupByLibrary.simpleMessage(
             "Pay Deposit to Start Real Trade"),
         "paymentDetails":
@@ -529,6 +540,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
         "yourBankAccountIsUnderReview": m13,
+        "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
+            "Your password has been changed"),
         "yourPaymentInformationIsUnderReview": MessageLookupByLibrary.simpleMessage(
             "Your payment information is under review. Your bank account details will be shown here once your account is approved. please note it can take up to 2 working days for the approval process.")
       };

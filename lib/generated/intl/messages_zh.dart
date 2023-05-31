@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonReloadPage": MessageLookupByLibrary.simpleMessage("重新加載"),
         "buttonResendActivationLink":
             MessageLookupByLibrary.simpleMessage("再發送開通連結"),
+        "buttonSave": MessageLookupByLibrary.simpleMessage("儲存"),
         "buttonSignOut": MessageLookupByLibrary.simpleMessage("登出"),
         "buttonSignUp": MessageLookupByLibrary.simpleMessage("註冊"),
         "buttonSignUpAgain": MessageLookupByLibrary.simpleMessage("再次註冊"),
@@ -164,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "estStopLossPercent": MessageLookupByLibrary.simpleMessage("預計止損 %"),
         "estTakeProfitPercent": MessageLookupByLibrary.simpleMessage("預計止賺%"),
         "estimatedEndDate": MessageLookupByLibrary.simpleMessage("預計結束日期"),
+        "existingPassword": MessageLookupByLibrary.simpleMessage("現有密碼"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("成交價格"),
         "founded": MessageLookupByLibrary.simpleMessage("成立年份"),
         "free": MessageLookupByLibrary.simpleMessage("免費"),
@@ -226,6 +228,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderRollover": MessageLookupByLibrary.simpleMessage("訂單已續期"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("訂單已開始"),
         "password": MessageLookupByLibrary.simpleMessage("密碼"),
+        "passwordChangeSuccess":
+            MessageLookupByLibrary.simpleMessage("Password Change Success"),
+        "passwordDoesNotMatch": MessageLookupByLibrary.simpleMessage("兩組密碼不相符"),
         "payDepositToStartRealTrade":
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
@@ -391,6 +396,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
         "yourBankAccountIsUnderReview": m13,
+        "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
+            "Your password has been changed"),
         "yourPaymentInformationIsUnderReview":
             MessageLookupByLibrary.simpleMessage(
                 "您的銀行帳戶信息正在審核中。一旦您的開戶申請獲批，您的銀行帳戶詳細信息將顯示在此處。請注意，審核過程最多可能需要 2 個工作日。")
