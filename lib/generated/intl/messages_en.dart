@@ -297,6 +297,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "officeHoursLabel":
             MessageLookupByLibrary.simpleMessage("Office Hours"),
         "ok": MessageLookupByLibrary.simpleMessage("OK!"),
+        "oldPasswordSameWithNewPasswordError":
+            MessageLookupByLibrary.simpleMessage(
+                "Your new password cannot be the same as your old password"),
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("Open Investment Account"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),

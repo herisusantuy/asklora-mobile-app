@@ -1723,6 +1723,16 @@ class S {
     );
   }
 
+  /// `Your new password cannot be the same as your old password`
+  String get oldPasswordSameWithNewPasswordError {
+    return Intl.message(
+      'Your new password cannot be the same as your old password',
+      name: 'oldPasswordSameWithNewPasswordError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Create an Account and Start Trading!`
   String get portfolioPopUpCreateAnAccountTitle {
     return Intl.message(

@@ -219,6 +219,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "officeHours":
             MessageLookupByLibrary.simpleMessage("09:00-18:00 (HKT)"),
         "officeHoursLabel": MessageLookupByLibrary.simpleMessage("辦公時間"),
+        "oldPasswordSameWithNewPasswordError":
+            MessageLookupByLibrary.simpleMessage("設置的新密碼不能和舊密碼相同"),
         "openInvestmentAccount": MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("訂單已過期"),
         "orderRollover": MessageLookupByLibrary.simpleMessage("訂單已續期"),

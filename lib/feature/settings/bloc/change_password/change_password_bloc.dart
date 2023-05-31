@@ -23,7 +23,11 @@ class ChangePasswordBloc
   }
 
   _onPasswordChanged(PasswordChanged event, Emitter<ChangePasswordState> emit) {
-    emit(state.copyWith(password: event.password));
+    emit(state.copyWith(
+        password: event.password,
+        newPasswordErrorText: event.password == state.newPassword&&state.newPassword.isNotEmpty
+            ? 'Can not be the same with old password'
+            : ''));
   }
 
   _onNewPasswordChanged(
@@ -31,9 +35,15 @@ class ChangePasswordBloc
     emit(state.copyWith(
         newPassword: event.newPassword,
         newPasswordErrorText:
-            (event.newPassword.isValidPassword() || event.newPassword.isEmpty)
-                ? ''
-                : 'Enter valid password'));
+            (!event.newPassword.isValidPassword() || event.newPassword.isEmpty)
+                ? 'Enter valid password'
+                : event.newPassword == state.password
+                    ? 'Can not be the same with old password'
+                    : '',
+        confirmNewPasswordErrorText:
+            event.newPassword != state.confirmNewPassword&&state.confirmNewPassword.isNotEmpty
+                ? 'Your password does not match'
+                : ''));
   }
 
   _onConfirmNewPasswordChanged(

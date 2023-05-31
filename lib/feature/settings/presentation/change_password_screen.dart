@@ -107,7 +107,7 @@ class ChangePasswordScreen extends StatelessWidget {
             style: AskLoraTextStyles.body1),
         const SizedBox(height: 5),
         BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-          buildWhen: (previous, current) =>
+          buildWhen: (previous, current) =>previous.password!=current.password||
               previous.newPassword != current.newPassword ||
               previous.confirmNewPassword != current.newPasswordErrorText,
           builder: (context, state) {
@@ -155,8 +155,9 @@ class ChangePasswordScreen extends StatelessWidget {
   Widget get _saveButton =>
       BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
         buildWhen: (previous, current) =>
-            previous.confirmNewPasswordErrorText !=
-            current.confirmNewPasswordErrorText,
+            previous.newPassword != current.newPassword ||
+            previous.confirmNewPassword != current.confirmNewPassword ||
+            previous.password != current.password,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.only(top: 24, bottom: 30.0),

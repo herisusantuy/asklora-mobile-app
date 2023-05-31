@@ -47,10 +47,10 @@ class ChangePasswordState extends Equatable {
       ];
 
   bool disabledSaveButton() {
-    if (newPasswordErrorText.isEmpty &&
+    if (password.isNotEmpty&&newPasswordErrorText.isEmpty &&
         confirmNewPasswordErrorText.isEmpty &&
         newPassword.isValidPassword() &&
-        confirmNewPassword.isValidPassword()) {
+        confirmNewPassword.isValidPassword() && newPassword==confirmNewPassword) {
       return false;
     } else {
       return true;

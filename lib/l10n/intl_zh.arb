@@ -153,6 +153,7 @@
   "botTradeBottomSheetCancelBotStockConfirmationTitle": "投資額及交易費用 (HKD1,500) 會自動轉至你嘅賬戶。",
   "howItWorks": "如何運作",
   "marketCap": "市值",
+  "oldPasswordSameWithNewPasswordError": "設置的新密碼不能和舊密碼相同",
   "prevClose": "上日收市",
   "portfolioBuyingPowerToolTip": "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 ",
   "portfolioDetailPerformanceTitle": "表現",

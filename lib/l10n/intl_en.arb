@@ -263,6 +263,7 @@
     }
   },
   "createAnAccount": "Create An Account",
+  "oldPasswordSameWithNewPasswordError": "Your new password cannot be the same as your old password",
   "portfolioPopUpCreateAnAccountTitle": "Create an Account and Start Trading!",
   "portfolioPopUpCreateAnAccountSubTitle": "You can manage all your investments here after you start trading. Create an account and start trading.",
   "defineInvestmentStyle": "Define Investment Style",
@@ -275,6 +276,7 @@
   "portfolioPopUpFundAccountTitle": "Fund your account",
   "portfolioPopUpFundAccountSubTitle": "Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.",
   "startABotstock": "Start A Botstock",
+
   "portfolioPopUpNoTradingHasStartedTitle": "No trading has started!",
   "portfolioPopUpNoTradingHasStartedtSubTitle": "You can manage all your investments here after you start trading. ",
   "portfolioPopUpPendingReviewTitle": "Your Account is Pending Review",
