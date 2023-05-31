@@ -18,7 +18,6 @@ import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
 import '../../auth/repository/auth_repository.dart';
 import '../bloc/change_password/change_password_bloc.dart';
-import '../util/setting_utils.dart';
 import 'account_setting_screen.dart';
 import 'settings_screen.dart';
 
@@ -117,8 +116,8 @@ class ChangePasswordScreen extends StatelessWidget {
               isShowingPasswordValidation: false,
               validPassword: (validPassword) => {},
               hintText: S.of(context).newPassword,
-              errorText: PasswordErrorType.getPasswordErrorTypeText(
-                  context, state.newPasswordErrorType),
+              errorText:
+                  state.newPasswordErrorType.getPasswordErrorTypeText(context),
               onChanged: (newPassword) => context
                   .read<ChangePasswordBloc>()
                   .add(NewPasswordChanged(newPassword)),
@@ -144,8 +143,8 @@ class ChangePasswordScreen extends StatelessWidget {
             return PasswordTextField(
               validPassword: (validPassword) => {},
               hintText: S.of(context).confirmNewPassword,
-              errorText: PasswordErrorType.getPasswordErrorTypeText(
-                  context, state.confirmNewPasswordErrorType),
+              errorText: state.confirmNewPasswordErrorType
+                  .getPasswordErrorTypeText(context),
               onChanged: (confirmNewPassword) => context
                   .read<ChangePasswordBloc>()
                   .add(ConfirmNewPasswordChanged(confirmNewPassword)),
