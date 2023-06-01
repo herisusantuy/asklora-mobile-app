@@ -134,9 +134,12 @@ class SourceOfWealthBloc
     sourceOfWealthAnswers[indexOfOtherIncome] =
         sourceOfWealthAnswers[indexOfOtherIncome]
             .copyWith(additionalSourceOfWealth: event.otherIncome);
-    emit(state.copyWith(
-      sourceOfWealthAnswers: sourceOfWealthAnswers,
-    ));
+    if (event.otherIncome.isEmpty) {
+      emit(state.copyWith(errorMessage: 'Please enter more details'));
+    } else {
+      emit(state.copyWith(
+          sourceOfWealthAnswers: sourceOfWealthAnswers, errorMessage: ''));
+    }
   }
 
   _onInitiateSourceOfWealth(
