@@ -5,31 +5,23 @@ class SourceOfWealthState extends Equatable {
   final List<SourceOfWealthModel> sourceOfWealthAnswers;
   final int totalAmount;
   final String errorMessage;
-  final String errorPopupMessage;
-  final bool isShowPopupMessage;
 
   const SourceOfWealthState({
     this.sourceOfWealthAnswers = const [],
     this.totalAmount = 0,
     this.errorMessage = '',
-    this.errorPopupMessage = '',
-    this.isShowPopupMessage = false,
   });
 
   SourceOfWealthState copyWith({
     List<SourceOfWealthModel>? sourceOfWealthAnswers,
     int? totalAmount,
     String? errorMessage,
-    String? errorPopupMessage,
-    bool? isShowPopupMessage,
   }) {
     return SourceOfWealthState(
       sourceOfWealthAnswers:
           sourceOfWealthAnswers ?? this.sourceOfWealthAnswers,
       totalAmount: totalAmount ?? this.totalAmount,
       errorMessage: errorMessage ?? this.errorMessage,
-      errorPopupMessage: errorPopupMessage ?? this.errorPopupMessage,
-      isShowPopupMessage: isShowPopupMessage ?? this.isShowPopupMessage,
     );
   }
 
@@ -38,12 +30,29 @@ class SourceOfWealthState extends Equatable {
         sourceOfWealthAnswers,
         totalAmount,
         errorMessage,
-        errorPopupMessage,
-        isShowPopupMessage,
-        DateTime.now()
       ];
 
   bool enableNextButton() {
     return sourceOfWealthAnswers.isNotEmpty;
+  }
+
+  ({bool result, String errorMessage}) validate() {
+    if (sourceOfWealthAnswers.map((e) => e.amount).contains(0)) {
+      return (
+        result: false,
+        errorMessage: 'Please add percentage amount in list that you selected'
+      );
+    } else if (totalAmount != 100) {
+      return (
+        result: false,
+        errorMessage: 'Your sources of wealth must add up to 100%'
+      );
+    } else if (sourceOfWealthAnswers
+        .map((e) => e.sourceOfWealthType)
+        .contains(SourceOfWealthType.other)) {
+      return (result: false, errorMessage: 'Please enter more details');
+    } else {
+      return (result: true, errorMessage: '');
+    }
   }
 }

@@ -6,6 +6,7 @@ import '../../domain/upgrade_account/wealth_sources_request.dart';
 import '../../utils/source_of_wealth_enum.dart';
 
 part 'source_of_wealth_event.dart';
+
 part 'source_of_wealth_state.dart';
 
 class SourceOfWealthBloc
@@ -19,7 +20,6 @@ class SourceOfWealthBloc
         _onSourceOfWealthDecrementAmountChanged);
     on<SourceOfWealthOtherIncomeChanged>(_onSourceOfWealthOtherIncomeChanged);
     on<InitiateSourceOfWealth>(_onInitiateSourceOfWealth);
-    on<SubmitSourceOfWealth>(_onSubmitSourceOfWealth);
   }
 
   _onSourceOfWealthSelected(
@@ -134,14 +134,9 @@ class SourceOfWealthBloc
     sourceOfWealthAnswers[indexOfOtherIncome] =
         sourceOfWealthAnswers[indexOfOtherIncome]
             .copyWith(additionalSourceOfWealth: event.otherIncome);
-    if (event.otherIncome.isEmpty) {
-      emit(state.copyWith(
-          errorMessage: 'Please enter more details',
-          sourceOfWealthAnswers: sourceOfWealthAnswers));
-    } else {
-      emit(state.copyWith(
-          sourceOfWealthAnswers: sourceOfWealthAnswers, errorMessage: ''));
-    }
+    emit(state.copyWith(
+      sourceOfWealthAnswers: sourceOfWealthAnswers,
+    ));
   }
 
   _onInitiateSourceOfWealth(
@@ -157,32 +152,5 @@ class SourceOfWealthBloc
               ))
           .toList(),
     ));
-  }
-
-  _onSubmitSourceOfWealth(
-      SubmitSourceOfWealth event, Emitter<SourceOfWealthState> emit) {
-    if (state.sourceOfWealthAnswers.map((e) => e.amount).contains(0)) {
-      print('source of wealth list: ${state.sourceOfWealthAnswers}');
-      emit(state.copyWith(
-          isShowPopupMessage: true,
-          errorPopupMessage:
-              'Please add percentage amount in list that you selected'));
-    }
-    if (state.totalAmount != 100) {
-      emit(state.copyWith(
-          isShowPopupMessage: true,
-          errorPopupMessage: 'Your sources of wealth must add up to 100%'));
-    }
-    if (state.sourceOfWealthAnswers
-        .map((e) =>
-            e.sourceOfWealthType == SourceOfWealthType.other &&
-            (e.additionalSourceOfWealth == null ||
-                e.additionalSourceOfWealth == ''))
-        .contains(true)) {
-      emit(state.copyWith(errorMessage: 'Please enter more details'));
-    } else {
-      emit(state.copyWith(
-          isShowPopupMessage: false, errorMessage: '', errorPopupMessage: ''));
-    }
   }
 }
