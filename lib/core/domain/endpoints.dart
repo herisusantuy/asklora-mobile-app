@@ -32,9 +32,12 @@ const String endpointWithdrawal = '$v1${transactions}withdraw/';
 const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointOrders = '$v1$orders';
 const String endpointUserJourney = '$v2${activities}user-journey/';
+const String endpointTransferTransactionHistory = '$v1/$transactions/history/';
+const String endpointBalance = '$v1/$transactions/balance/';
 
+///
 /// PPI related
-
+///
 const endpointQuestion = 'questions';
 const String endpointGetUser = 'user';
 const String endpointGetSnapshotByDeviceId = 'user/device-id';
@@ -43,23 +46,23 @@ const String endpointAddAnswer = 'user/add-answer';
 const String endpointAddBotChoice = 'user/add-choices';
 const String endpointLinkedUser = '$endpointGetUser/linked';
 
+///
 ///bot orders
+///
 const String endpointBotActiveOrder = '$v1${bots}active-order/';
 const String endpointBotCreateOrder = '$v1${bots}create-order/';
 const String endpointBotCancelOrder = '$v1${bots}cancel-order/';
 const String endpointBotRolloverOrder = '$v1${bots}rollover-order/';
 const String endpointBotTerminateOrder = '$v1${bots}terminate-order/';
+const String endpointBotRecommendation = '${user}recomendation_bots/';
+const String endpointBotOrderHistory = '$v1/$bots/history-order/';
+const String endpointBotTransactionHistory = '$v1/$bots/history-order/';
+const String endpointBotDetail = '$v1${bots}bot_detail/';
 
 ///
 /// URLS
 ///
 const String depositGuideUrl = 'https://asklora.ai/faq/deposit-guide';
-
-const String endpointBotRecommendation = '${user}recomendation_bots/';
-const String endpointBotOrderHistory = '$v1/$bots/history-order/';
-const String endpointBotTransactionHistory = '$v1/$bots/history-order/';
-const String endpointTransferTransactionHistory = '$v1/$transactions/history/';
-const String endpointBotDetail = '$v1${bots}bot_detail/';
 const String endpointIexCloud = 'https://iexcloud.io';
 const String askloraFaq = 'https://www.asklora.ai/faq';
 const String askloraSite = 'https://www.asklora.ai/';

@@ -22,4 +22,7 @@ class TransactionHistoryApiClient {
   Future<Response> fetchBotTransactionDetail(String orderId) async =>
       await AskloraApiClient()
           .get(endpoint: '$endpointBotOrderHistory/$orderId');
+
+  Future<Response> fetchBalance() async =>
+      await AskloraApiClient().get(endpoint: endpointBalance);
 }

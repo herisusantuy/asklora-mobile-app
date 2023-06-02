@@ -5,12 +5,14 @@ class TransactionHistoryState extends Equatable {
     this.allTransactionsResponse = const BaseResponse(),
     this.botTransactionsResponse = const BaseResponse(),
     this.transferTransactionsResponse = const BaseResponse(),
+    this.transactionBalanceResponse = const BaseResponse(),
   });
 
   final BaseResponse<List<GroupedTransactionModel>> allTransactionsResponse;
   final BaseResponse<List<GroupedTransactionModel>> botTransactionsResponse;
   final BaseResponse<List<GroupedTransactionModel>>
       transferTransactionsResponse;
+  final BaseResponse<TransactionBalanceModel> transactionBalanceResponse;
 
   @override
   List<Object?> get props {
@@ -18,6 +20,7 @@ class TransactionHistoryState extends Equatable {
       allTransactionsResponse,
       botTransactionsResponse,
       transferTransactionsResponse,
+      transactionBalanceResponse,
     ];
   }
 
@@ -25,6 +28,7 @@ class TransactionHistoryState extends Equatable {
     BaseResponse<List<GroupedTransactionModel>>? allTransactionsResponse,
     BaseResponse<List<GroupedTransactionModel>>? botTransactionsResponse,
     BaseResponse<List<GroupedTransactionModel>>? transferTransactionsResponse,
+    BaseResponse<TransactionBalanceModel>? transactionBalanceResponse,
   }) {
     return TransactionHistoryState(
       allTransactionsResponse:
@@ -33,6 +37,8 @@ class TransactionHistoryState extends Equatable {
           botTransactionsResponse ?? this.botTransactionsResponse,
       transferTransactionsResponse:
           transferTransactionsResponse ?? this.transferTransactionsResponse,
+      transactionBalanceResponse:
+          transactionBalanceResponse ?? this.transactionBalanceResponse,
     );
   }
 }

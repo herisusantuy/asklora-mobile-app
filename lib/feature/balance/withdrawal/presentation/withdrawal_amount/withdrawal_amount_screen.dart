@@ -21,7 +21,10 @@ part 'widgets/withdrawal_key_pad.dart';
 class WithdrawalAmountScreen extends StatelessWidget {
   static const String route = '/withdrawal_amount_screen';
 
-  const WithdrawalAmountScreen({Key? key}) : super(key: key);
+  final String withdrawableBalance;
+
+  const WithdrawalAmountScreen(this.withdrawableBalance, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +50,11 @@ class WithdrawalAmountScreen extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            const Expanded(
+            Expanded(
               child: Column(
                 children: [
-                  WithdrawalAmountValue(),
-                  WithdrawalKeyPad(),
+                  WithdrawalAmountValue(withdrawalAmount: withdrawableBalance),
+                  const WithdrawalKeyPad(),
                 ],
               ),
             ),
@@ -77,5 +80,6 @@ class WithdrawalAmountScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context) => Navigator.pushNamed(context, route);
+  static void open(BuildContext context, String withdrawableBalance) =>
+      Navigator.pushNamed(context, route, arguments: withdrawableBalance);
 }

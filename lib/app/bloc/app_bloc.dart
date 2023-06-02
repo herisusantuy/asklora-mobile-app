@@ -69,7 +69,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void _onGetUserJourneyFromLocal(
       GetUserJourneyFromLocal event, Emitter<AppState> emit) async {
-    var data = await _userJourneyRepository.getUserJourneyFromLocal();
+    final data = await _userJourneyRepository.getUserJourneyFromLocal();
     emit(state.copyWith(userJourney: data));
   }
 }
