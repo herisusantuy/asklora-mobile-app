@@ -25,11 +25,7 @@ class SourceOfWealthState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        sourceOfWealthAnswers,
-        totalAmount,
-        errorMessage,
-      ];
+  List<Object?> get props => [sourceOfWealthAnswers, totalAmount, errorMessage];
 
   bool enableNextButton() {
     return sourceOfWealthAnswers.isNotEmpty;
@@ -46,11 +42,15 @@ class SourceOfWealthState extends Equatable {
         result: false,
         errorMessage: 'Your sources of wealth must add up to 100%'
       );
-    } else if (sourceOfWealthAnswers
-        .map((e) => e.sourceOfWealthType)
-        .contains(SourceOfWealthType.other)) {
-      return (result: false, errorMessage: 'Please enter more details');
     } else {
+      var a = sourceOfWealthAnswers.firstWhereOrNull(
+          (element) => element.sourceOfWealthType == SourceOfWealthType.other);
+
+      if (a != null &&
+          (a.additionalSourceOfWealth == null ||
+              a.additionalSourceOfWealth!.isEmpty)) {
+        return (result: false, errorMessage: 'Please enter more details');
+      }
       return (result: true, errorMessage: '');
     }
   }

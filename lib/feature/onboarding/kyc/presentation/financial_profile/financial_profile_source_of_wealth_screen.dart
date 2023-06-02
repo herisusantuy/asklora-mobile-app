@@ -59,9 +59,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
       ),
       content: _sourceOfWealthList,
       bottomButton: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
-        buildWhen: (previous, current) =>
-            previous.enableNextButton() != current.enableNextButton() ||
-            previous.totalAmount != current.totalAmount,
+        buildWhen: (previous, current) => true,
         builder: (context, state) {
           return ButtonPair(
               disablePrimaryButton: !state.enableNextButton(),
