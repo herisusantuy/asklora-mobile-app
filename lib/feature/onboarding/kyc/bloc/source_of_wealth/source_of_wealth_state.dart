@@ -43,7 +43,7 @@ class SourceOfWealthState extends Equatable {
         errorMessage: 'Your sources of wealth must add up to 100%'
       );
     } else {
-      var a = sourceOfWealthAnswers.firstWhereOrNull(
+      SourceOfWealthModel? a = sourceOfWealthAnswers.firstWhereOrNull(
           (element) => element.sourceOfWealthType == SourceOfWealthType.other);
 
       if (a != null &&
