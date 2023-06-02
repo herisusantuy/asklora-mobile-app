@@ -8,6 +8,7 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
+import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../settings/presentation/settings_screen.dart';
 import 'custom_shape.dart';
 
@@ -36,7 +37,9 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        getSvgIcon('icon_notification'),
+                        InkWell(
+                            onTap: () => KycScreen.open(context),
+                            child: getSvgIcon('icon_notification')),
                         const SizedBox(width: 15),
                         InkWell(
                             onTap: () => SettingsScreen.open(context),

@@ -76,3 +76,5 @@ class InitiateSourceOfWealth extends SourceOfWealthEvent {
   @override
   List<Object> get props => [sourceOfWealthRequest ?? ''];
 }
+
+class SubmitSourceOfWealth extends SourceOfWealthEvent {}

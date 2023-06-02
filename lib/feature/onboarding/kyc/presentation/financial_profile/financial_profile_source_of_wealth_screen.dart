@@ -58,30 +58,53 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
         ],
       ),
       content: _sourceOfWealthList,
-      bottomButton: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
-        buildWhen: (previous, current) =>
-            previous.enableNextButton() != current.enableNextButton() ||
-            previous.totalAmount != current.totalAmount,
-        builder: (context, state) {
-          return ButtonPair(
-              disablePrimaryButton: !state.enableNextButton(),
+      bottomButton: BlocListener<SourceOfWealthBloc, SourceOfWealthState>(
+          // buildWhen: (previous, current) => true,
+          listenWhen: (previous, current) {
+            return true;
+          },
+          listener: (context, state) {
+            if (!state.isShowPopupMessage) {
+              print('Move to the next step');
+              CustomInAppNotification.show(context, 'Clear');
+            } else {
+              CustomInAppNotification.show(context, state.errorPopupMessage);
+              // context.read<NavigationBloc<KycPageStep>>().add(
+              //     const PageChanged(
+              //         KycPageStep.disclosureAffiliationAssociates));
+            }
+          },
+          child: ButtonPair(
+              // disablePrimaryButton: !state.enableNextButton(),
               primaryButtonOnClick: () {
-                if (state.totalAmount == 100) {
-                  context.read<NavigationBloc<KycPageStep>>().add(
-                      const PageChanged(
-                          KycPageStep.disclosureAffiliationAssociates));
-                } else {
-                  CustomInAppNotification.show(
-                      context, 'Your sources of wealth must add up to 100%');
-                }
+                context.read<SourceOfWealthBloc>().add(SubmitSourceOfWealth());
+                // var listBool = state.sourceOfWealthAnswers
+                //     .map((e) =>
+                //         e.sourceOfWealthType == SourceOfWealthType.other &&
+                //         (e.additionalSourceOfWealth == null ||
+                //             e.additionalSourceOfWealth!.isEmpty))
+                //     .toList();
+                // print(
+                //     'list of SOW: ${state.sourceOfWealthAnswers.map((e) => e).toList()}');
+                // print('listBool: $listBool');
+                // print('listBool check: ${listBool.contains(true)}');
+                // print('error message: ${state.errorMessage}');
+                // print('error popup message: ${state.errorPopupMessage}');
+                // print('popup message: ${state.isShowPopupMessage}');
+                // if (state.totalAmount == 100) {
+                //   context.read<NavigationBloc<KycPageStep>>().add(
+                //       const PageChanged(
+                //           KycPageStep.disclosureAffiliationAssociates));
+                // } else {
+                //   CustomInAppNotification.show(
+                //       context, 'Your sources of wealth must add up to 100%');
+                // }
               },
               secondaryButtonOnClick: () => context
                   .read<KycBloc>()
                   .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
               primaryButtonLabel: S.of(context).buttonNext,
-              secondaryButtonLabel: S.of(context).saveForLater);
-        },
-      ),
+              secondaryButtonLabel: S.of(context).saveForLater)),
     );
   }
 
@@ -157,6 +180,7 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
                           maxLine: 2,
                           hintText:
                               'Use this space to provide more detailed information',
+                          errorText: state.errorMessage,
                           onChanged: (value) {
                             context.read<SourceOfWealthBloc>().add(
                                 SourceOfWealthOtherIncomeChanged(
