@@ -11,10 +11,11 @@ import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_messa
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
-import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
+import '../../../transaction_history/bloc/transaction_history_bloc.dart';
+import '../../../transaction_history/repository/transaction_history_repository.dart';
 import '../../widgets/balance_base_form.dart';
 import '../../widgets/change_bank_account_button.dart';
 import 'widgets/withdrawal_steps.dart';
@@ -27,52 +28,65 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) =>
-          AccountInformationBloc(accountRepository: AccountRepository())
-            ..add(GetAccountInformation()),
-      child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (_) => TransactionHistoryBloc(
+                transactionHistoryRepository: TransactionHistoryRepository())
+              ..add(FetchBalance())),
+        BlocProvider(
+            create: (_) =>
+                AccountInformationBloc(accountRepository: AccountRepository())
+                  ..add(GetAccountInformation())),
+      ],
+      child: BlocListener<TransactionHistoryBloc, TransactionHistoryState>(
         listener: (context, state) {
-          CustomLoadingOverlay.of(context).show(state.response.state);
+          CustomLoadingOverlay.of(context)
+              .show(state.transactionBalanceResponse.state);
         },
-        builder: (context, state) {
-          return CustomScaffold(
-            enableBackNavigation: false,
-            body: CustomLayoutWithBlurPopUp(
-              showPopUp: state.response.state == ResponseState.error ||
-                  (state.response.state != ResponseState.loading &&
-                      state.response.data?.bankAccount == null),
-              loraPopUpMessageModel: LoraPopUpMessageModel(
-                  primaryButtonLabel: S.of(context).buttonBackToPortfolio,
-                  onPrimaryButtonTap: () => Navigator.pop(context),
-                  title: S.of(context).errorWithdrawalUnavailableTitle,
-                  subTitle: S.of(context).errorWithdrawalUnavailableSubTitle),
-              content: BalanceBaseForm(
-                content: state.response.data?.bankAccount != null
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _sourceTransfer,
-                          _transferToIcon(context),
-                          WithdrawalSteps(
-                            bankAccount: state.response.data?.bankAccount,
-                          ),
-                          const SizedBox(
-                            height: 48,
-                          ),
-                          const ChangeBankAccountButton()
-                        ],
-                      )
-                    : const SizedBox.shrink(),
-                bottomButton: state.response.state == ResponseState.success &&
-                        state.response.data?.bankAccount != null
-                    ? _bottomButton(context)
-                    : const SizedBox.shrink(),
-                title: S.of(context).buttonWithdraw.toTitleCase,
+        child: BlocConsumer<AccountInformationBloc, AccountInformationState>(
+          listener: (context, state) {
+            CustomLoadingOverlay.of(context).show(state.response.state);
+          },
+          builder: (context, state) {
+            return CustomScaffold(
+              enableBackNavigation: false,
+              body: CustomLayoutWithBlurPopUp(
+                showPopUp: state.response.state == ResponseState.error ||
+                    (state.response.state != ResponseState.loading &&
+                        state.response.data?.bankAccount == null),
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                    primaryButtonLabel: S.of(context).buttonBackToPortfolio,
+                    onPrimaryButtonTap: () => Navigator.pop(context),
+                    title: S.of(context).errorWithdrawalUnavailableTitle,
+                    subTitle: S.of(context).errorWithdrawalUnavailableSubTitle),
+                content: BalanceBaseForm(
+                  content: state.response.data?.bankAccount != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _sourceTransfer,
+                            _transferToIcon(context),
+                            WithdrawalSteps(
+                              bankAccount: state.response.data?.bankAccount,
+                            ),
+                            const SizedBox(
+                              height: 48,
+                            ),
+                            const ChangeBankAccountButton()
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                  bottomButton: state.response.state == ResponseState.success &&
+                          state.response.data?.bankAccount != null
+                      ? _bottomButton(context)
+                      : const SizedBox.shrink(),
+                  title: S.of(context).buttonWithdraw,
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -120,12 +134,22 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
         color: AskLoraColors.primaryGreen,
       );
 
-  Widget _bottomButton(BuildContext context) => Padding(
+  Widget _bottomButton(BuildContext context) {
+    return Padding(
         padding: const EdgeInsets.only(top: 30, bottom: 30),
         child: PrimaryButton(
             label: S.of(context).buttonWithdraw,
-            onTap: () => WithdrawalAmountScreen.open(context)),
-      );
+            onTap: () {
+              final withdrawableBalance = context
+                      .read<TransactionHistoryBloc>()
+                      .state
+                      .transactionBalanceResponse
+                      .data
+                      ?.withdrawableBalance ??
+                  '';
+              WithdrawalAmountScreen.open(context, withdrawableBalance);
+            }));
+  }
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

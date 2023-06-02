@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/domain/base_response.dart';
 import '../domain/grouped_transaction_model.dart';
+import '../domain/transaction_balance_model.dart';
 import '../repository/transaction_history_repository.dart';
 
 part 'transaction_history_event.dart';
@@ -17,6 +19,7 @@ class TransactionHistoryBloc
     on<FetchAllTransaction>(_onFetchAllTransaction);
     on<FetchBotTransaction>(_onFetchBotTransaction);
     on<FetchTransferTransaction>(_onFetchTransferTransaction);
+    on<FetchBalance>(_onFetchBalance);
   }
 
   final TransactionHistoryRepository _transactionHistoryRepository;
@@ -49,5 +52,12 @@ class TransactionHistoryBloc
     emit(state.copyWith(
       transferTransactionsResponse: transactionHistory,
     ));
+  }
+
+  _onFetchBalance(
+      FetchBalance event, Emitter<TransactionHistoryState> emit) async {
+    emit(state.copyWith(transactionBalanceResponse: BaseResponse.loading()));
+    var balance = await _transactionHistoryRepository.fetchBalance();
+    emit(state.copyWith(transactionBalanceResponse: balance));
   }
 }

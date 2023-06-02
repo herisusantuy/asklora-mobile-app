@@ -204,7 +204,7 @@ class RouterGenerator {
       case WithdrawalAmountScreen.route:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const WithdrawalAmountScreen(),
+          builder: (_) => WithdrawalAmountScreen(settings.arguments as String),
         );
       case WithdrawalSummaryScreen.route:
         return MaterialPageRoute(

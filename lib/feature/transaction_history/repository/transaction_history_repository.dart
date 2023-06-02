@@ -5,6 +5,7 @@ import '../bot_order/detail/domain/bot_detail_transaction_history_response.dart'
 import '../domain/bot_transaction_history_request.dart';
 import '../domain/grouped_model.dart';
 import '../domain/grouped_transaction_model.dart';
+import '../domain/transaction_balance_model.dart';
 import '../domain/transaction_history_api_client.dart';
 import '../domain/transaction_history_model.dart';
 
@@ -129,5 +130,15 @@ class TransactionHistoryRepository {
       finalChartData.add(element.copyWith(index: index++));
     }
     return finalChartData;
+  }
+
+  Future<BaseResponse<TransactionBalanceModel>> fetchBalance() async {
+    try {
+      var response = await _transactionHistoryApiClient.fetchBalance();
+      return BaseResponse.complete(
+          TransactionBalanceModel.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error();
+    }
   }
 }
