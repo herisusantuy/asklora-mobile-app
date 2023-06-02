@@ -26,7 +26,6 @@ import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_deta
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
-import '../../feature/onboarding/kyc/bloc/kyc_bloc.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../feature/onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
@@ -80,11 +79,7 @@ class RouterGenerator {
                 OtpScreen(email: arguments.left, password: arguments.right));
       case KycScreen.route:
         return MaterialPageRoute(
-            settings: settings,
-            builder: (_) => const KycScreen(
-                  initialKycPageStep:
-                      KycPageStep.financialProfileSourceOfWealth,
-                ));
+            settings: settings, builder: (_) => const KycScreen());
       case WithdrawalScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const WithdrawalScreen());
