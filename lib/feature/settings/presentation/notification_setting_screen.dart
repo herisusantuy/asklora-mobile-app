@@ -97,7 +97,7 @@ class NotificationSettingScreen extends StatelessWidget {
         CupertinoSwitch(
           value: value,
           onChanged: onChanged,
-          activeColor: AskLoraColors.primaryGreen,
+          activeColor: AskLoraColors.charcoal,
         )
       ],
     );
