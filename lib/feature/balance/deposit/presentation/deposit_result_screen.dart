@@ -21,15 +21,19 @@ class DepositResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BalanceBaseForm(
-        title: S.of(context).deposit,
-        useHeader: false,
-        content: CustomStatusWidget(
-          title: S.of(context).depositRequestSubmittedTitle,
-          statusType: statusType,
-          subTitle: _getResultProps(context).left,
-        ),
-        bottomButton: _getResultProps(context).right);
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: BalanceBaseForm(
+          enableBackNavigation: false,
+          title: S.of(context).deposit,
+          useHeader: false,
+          content: CustomStatusWidget(
+            title: S.of(context).depositRequestSubmittedTitle,
+            statusType: statusType,
+            subTitle: _getResultProps(context).left,
+          ),
+          bottomButton: _getResultProps(context).right),
+    );
   }
 
   Pair<String, Widget> _getResultProps(BuildContext context) {
@@ -41,7 +45,10 @@ class DepositResultScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: PrimaryButton(
                 label: S.of(context).buttonDone,
-                onTap: () => TabsScreen.openAndRemoveAllRoute(context),
+                onTap: () => TabsScreen.openAndRemoveAllRoute(
+                  context,
+                  initialTabScreenPage: TabScreenPage.portfolio,
+                ),
               ),
             ));
       default:
@@ -51,8 +58,9 @@ class DepositResultScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30),
               child: ButtonPair(
                 primaryButtonLabel: S.of(context).buttonDone,
-                primaryButtonOnClick: () =>
-                    TabsScreen.openAndRemoveAllRoute(context),
+                primaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(
+                    context,
+                    initialTabScreenPage: TabScreenPage.portfolio),
                 secondaryButtonLabel:
                     S.of(context).buttonViewTransactionHistory,
                 secondaryButtonOnClick: () =>
@@ -65,5 +73,10 @@ class DepositResultScreen extends StatelessWidget {
   static void open(
           {required BuildContext context,
           required Pair<DepositType, StatusType> arguments}) =>
-      Navigator.pushNamed(context, route, arguments: arguments);
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        route,
+        arguments: arguments,
+        (route) => false,
+      );
 }

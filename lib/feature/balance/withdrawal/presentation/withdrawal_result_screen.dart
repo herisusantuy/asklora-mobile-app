@@ -13,25 +13,31 @@ class WithdrawalResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BalanceBaseForm(
-        useHeader: false,
-        content: CustomStatusWidget(
-          title: S.of(context).withdrawalRequestSubmittedTitle,
-          statusType: StatusType.success,
-          subTitle: S.of(context).withdrawalRequestSubmittedSubTitle,
-        ),
-        bottomButton: Padding(
-          padding: const EdgeInsets.only(top: 30),
-          child: ButtonPair(
-            primaryButtonLabel: S.of(context).buttonDone,
-            primaryButtonOnClick: () =>
-                TabsScreen.openAndRemoveAllRoute(context),
-            secondaryButtonLabel: S.of(context).buttonViewTransactionHistory,
-            secondaryButtonOnClick: () =>
-                TransactionHistoryScreen.open(context),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: BalanceBaseForm(
+          enableBackNavigation: false,
+          useHeader: false,
+          content: CustomStatusWidget(
+            title: S.of(context).withdrawalRequestSubmittedTitle,
+            statusType: StatusType.success,
+            subTitle: S.of(context).withdrawalRequestSubmittedSubTitle,
           ),
-        ));
+          bottomButton: Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: ButtonPair(
+              primaryButtonLabel: S.of(context).buttonDone,
+              primaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(
+                  context,
+                  initialTabScreenPage: TabScreenPage.portfolio),
+              secondaryButtonLabel: S.of(context).buttonViewTransactionHistory,
+              secondaryButtonOnClick: () =>
+                  TransactionHistoryScreen.open(context),
+            ),
+          )),
+    );
   }
 
-  static void open(BuildContext context) => Navigator.pushNamed(context, route);
+  static void open(BuildContext context) =>
+      Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
 }
