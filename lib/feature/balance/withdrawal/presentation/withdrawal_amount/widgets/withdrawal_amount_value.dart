@@ -1,9 +1,9 @@
 part of '../withdrawal_amount_screen.dart';
 
 class WithdrawalAmountValue extends StatelessWidget {
-  final String withdrawalAmount;
+  final String withdrawableBalance;
 
-  const WithdrawalAmountValue({Key? key, required this.withdrawalAmount})
+  const WithdrawalAmountValue({Key? key, required this.withdrawableBalance})
       : super(key: key);
 
   @override
@@ -45,7 +45,7 @@ class WithdrawalAmountValue extends StatelessWidget {
           height: 12,
         ),
         CustomTextNew(
-          'Withdrawable Amount HKD$withdrawalAmount',
+          'Withdrawable Amount HKD$withdrawableBalance',
           style:
               AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
         )

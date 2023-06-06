@@ -53,7 +53,8 @@ class WithdrawalAmountScreen extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  WithdrawalAmountValue(withdrawalAmount: withdrawableBalance),
+                  WithdrawalAmountValue(
+                      withdrawableBalance: withdrawableBalance),
                   const WithdrawalKeyPad(),
                 ],
               ),
