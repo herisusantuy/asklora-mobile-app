@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/domain/pair.dart';
@@ -110,14 +111,15 @@ enum BotStatus {
   final Color color;
 
   static BotStatus findByString(String botStatusString, {String? expireDate}) {
-    BotStatus botStatus = BotStatus.values
-        .firstWhere((element) => element.value == botStatusString);
+    BotStatus? botStatus = BotStatus.values
+        .firstWhereOrNull((element) => element.value == botStatusString);
     if (botStatus == active &&
         expireDate != null &&
         DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
       botStatus = BotStatus.activeExpireSoon;
     }
-    return botStatus;
+    ///TODO : THIS IS TEMPORARY FIX, LATER THE ENDPOINT SHOULD ONLY RETURN STATUS AS MENTIONED ABOVE ENUM
+    return botStatus??BotStatus.pending;
   }
 
   const BotStatus(this.value, this.name, this.color);
