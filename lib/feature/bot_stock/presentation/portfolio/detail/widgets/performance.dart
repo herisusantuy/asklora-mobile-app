@@ -1,6 +1,7 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class Performance extends StatelessWidget {
+  final BotType botType;
   final BotActiveOrderDetailModel botActiveOrderDetailModel;
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
@@ -9,6 +10,7 @@ class Performance extends StatelessWidget {
 
   const Performance(
       {required this.botActiveOrderDetailModel,
+      required this.botType,
       Key? key})
       : super(key: key);
 
@@ -90,7 +92,8 @@ class Performance extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomTextNew(
-            S.of(context).portfolioDetailChartCaption(botActiveOrderDetailModel.name,
+            S.of(context).portfolioDetailChartCaption(
+                '${botType.upperCaseName} ${botActiveOrderDetailModel.stockInfo.ticker}',
                 botActiveOrderDetailModel.spotDate,
                 botActiveOrderDetailModel.expireDateStr,
                 botActiveOrderDetailModel.botDuration),

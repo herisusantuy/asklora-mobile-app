@@ -25,8 +25,8 @@ class BotOrderResponse {
 
   ///todo : later menyesuaikan endpoint response
 
-  final String? optimalTime;
-  final String? newExpireDate;
+  final String optimalTime;
+  final String newExpireDate;
 
   const BotOrderResponse(
     this.uid,

@@ -44,10 +44,10 @@ class BotDetailModel extends Equatable {
   final String marketCap;
 
   double get estStopLossPriceFormatted =>
-      double.parse(checkDouble(estStopLossPrice).convertToCurrencyDecimal(decimalDigits: 2));
+      double.parse(checkDouble(estStopLossPrice).convertToCurrencyDecimal());
 
   double get estTakeProfitPriceFormatted =>
-      double.parse(checkDouble(estTakeProfitPrice).convertToCurrencyDecimal(decimalDigits: 2));
+      double.parse(checkDouble(estTakeProfitPrice).convertToCurrencyDecimal());
 
   const BotDetailModel(
     this.botId,

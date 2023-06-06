@@ -208,9 +208,9 @@ class _ChartAnimationState extends State<ChartAnimation> {
         Duration(milliseconds: ((factor / currentDistance)).round()), (timer) {
       if (mounted) {
         double? hedgeShare = widget.chartDataSets[animateIndex].hedgeShare;
-        double profit = widget.chartDataSets[animateIndex].currentPnlRetFormatted;
+        double profit = widget.chartDataSets[animateIndex].currentPnlRet ?? 0;
         if (profit != 0) {
-          lastProfit = widget.chartDataSets[animateIndex].currentPnlRetFormatted;
+          lastProfit = widget.chartDataSets[animateIndex].currentPnlRet ?? 0;
         }
 
         if (hedgeShare != 0) {
@@ -286,7 +286,7 @@ class _ChartAnimationState extends State<ChartAnimation> {
       flSpots.add(FlSpot(data.index!.toDouble(), data.price));
       showIndexes.add(data.index!);
       showCenterValue.add(Text(
-        'Profit : ${data.currentPnlRetFormatted}',
+        'Profit : ${data.currentPnlRet}',
         style: const TextStyle(
             color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16),
       ));
