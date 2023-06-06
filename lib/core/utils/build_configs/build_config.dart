@@ -30,18 +30,18 @@ class Environment {
 
 class DevConfig implements BaseConfig {
   ///HARIS PPI LOCAL
-  @override
-  String get ppiBaseUrl => 'http://192.168.100.201:8005/';
-  // ///REDES PPI LOCAL
   // @override
-  // String get ppiBaseUrl => 'http://192.168.100.194:8005/';
+  // String get ppiBaseUrl => 'http://192.168.100.201:8005/';
+   ///REDES PPI LOCAL
+  @override
+  String get ppiBaseUrl => 'http://192.168.100.198:8005/';
 
   ///REDES LOCAL
-  // @override
-  // String get askLoraApiBaseUrl => 'http://192.168.100.198:8002/';
-  ///HENDIKAS LOCAL
   @override
-  String get askLoraApiBaseUrl => 'http://192.168.100.194:8000/';
+  String get askLoraApiBaseUrl => 'http://192.168.100.198:8002/';
+  ///HENDIKAS LOCAL
+  // @override
+  // String get askLoraApiBaseUrl => 'http://192.168.100.194:8000/';
 
   @override
   String get streamServiceBaseUrl => 'wss://apca.services.asklora.ai/';

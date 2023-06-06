@@ -136,16 +136,20 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                   botType: botType,
                 ),
               ),
-            if (botStatus == BotStatus.active ||
-                botStatus == BotStatus.activeExpireSoon)
-              BotTerminateButton(
-                botActiveOrderDetailModel: botActiveOrderDetailModel,
-                botType: botType,
-              ),
-            if (botStatus == BotStatus.pending)
-              BotCancelButton(
-                botActiveOrderDetailModel: botActiveOrderDetailModel,
-              ),
+
+            ///TODO : TEMPORARY FIX TO ALWAYS SHOW TERMINATE BUTTON
+            // if (botStatus == BotStatus.active ||
+            //     botStatus == BotStatus.activeExpireSoon)
+            BotTerminateButton(
+              botActiveOrderDetailModel: botActiveOrderDetailModel,
+              botType: botType,
+            ),
+
+            ///TODO : TEMPORARY FIX TO ALWAYS SHOW CANCEL BUTTON
+            //if (botStatus == BotStatus.pending)
+            BotCancelButton(
+              botActiveOrderDetailModel: botActiveOrderDetailModel,
+            ),
           ],
         ),
       );
