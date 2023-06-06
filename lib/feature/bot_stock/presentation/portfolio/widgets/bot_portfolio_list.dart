@@ -13,6 +13,32 @@ class BotPortfolioList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _header(context),
+        const SizedBox(
+          height: 10,
+        ),
+        _botList
+      ],
+    );
+  }
+
+  Widget _header(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: CustomTextNew(
+            S.of(context).portfolioYourBotStock,
+            style: AskLoraTextStyles.h2.copyWith(color: AskLoraColors.charcoal),
+          ),
+        ),
+        const BotPortfolioFilter()
+      ],
+    );
+  }
+
+  Widget get _botList {
     if (userJourney == UserJourney.investmentStyle) {
       return const BotPortfolioPopUp(
           botPortfolioPopUpType: BotPortfolioPopUpType.investmentStyle);

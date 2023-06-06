@@ -1,3 +1,6 @@
+import '../../../../../core/utils/currency_enum.dart';
+import '../../../../../core/utils/extensions.dart';
+
 enum BotPortfolioPopUpType {
   createAccount,
   investmentStyle,
@@ -19,4 +22,11 @@ enum BotPortfolioStatus {
   static BotPortfolioStatus findByString(String botType) =>
       BotPortfolioStatus.values
           .firstWhere((element) => element.value == botType);
+}
+
+String formatCurrency(CurrencyType currencyType, double? currency) {
+  final value = currency ?? 0;
+  return currencyType == CurrencyType.hkd
+      ? value.convertToCurrencyDecimal()
+      : value.toUsd();
 }
