@@ -18,6 +18,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
+import '../../../../../core/repository/transaction_repository.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -28,7 +29,6 @@ import '../../widgets/bot_stock_form.dart';
 import '../../widgets/column_text.dart';
 import '../../widgets/pair_column_text.dart';
 import '../bloc/portfolio_bloc.dart';
-import '../repository/portfolio_repository.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
 part 'widgets/bot_portfolio_detail_header.dart';
@@ -63,8 +63,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
       enableBackNavigation: false,
       body: BlocProvider(
         create: (_) => PortfolioBloc(
-            portfolioRepository: PortfolioRepository(),
-            botStockRepository: BotStockRepository())
+            botStockRepository: BotStockRepository(),
+            transactionHistoryRepository: TransactionRepository())
           ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.pk)),
         child: BlocConsumer<PortfolioBloc, PortfolioState>(
           listenWhen: (previous, current) =>

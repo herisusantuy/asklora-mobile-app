@@ -12,5 +12,3 @@ class FetchAllTransaction extends TransactionHistoryEvent {}
 class FetchBotTransaction extends TransactionHistoryEvent {}
 
 class FetchTransferTransaction extends TransactionHistoryEvent {}
-
-class FetchBalance extends TransactionHistoryEvent {}

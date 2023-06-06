@@ -21,7 +21,7 @@ import '../../domain/grouped_model.dart';
 import '../../domain/transaction_history_model.dart';
 import '../../presentation/widgets/transaction_history_group_title.dart';
 import '../../presentation/widgets/transaction_history_tab.dart';
-import '../../repository/transaction_history_repository.dart';
+import '../../../../core/repository/transaction_repository.dart';
 import 'domain/bot_activities_transaction_history_model.dart';
 import 'domain/bot_detail_transaction_history_response.dart';
 import 'domain/bot_summary_transaction_history_model.dart';
@@ -53,7 +53,7 @@ class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => BotTransactionHistoryDetailBloc(
-          transactionHistoryRepository: TransactionHistoryRepository())
+          transactionHistoryRepository: TransactionRepository())
         ..add(FetchBotTransactionDetail(transactionHistoryModel.idString)),
       child: CustomScaffold(
         enableBackNavigation: false,

@@ -1,25 +1,24 @@
-import '../../../core/domain/base_response.dart';
-import '../../../core/utils/date_utils.dart';
-import '../bot_order/detail/domain/bot_activities_transaction_history_model.dart';
-import '../bot_order/detail/domain/bot_detail_transaction_history_response.dart';
-import '../domain/bot_transaction_history_request.dart';
-import '../domain/grouped_model.dart';
-import '../domain/grouped_transaction_model.dart';
-import '../domain/transaction_balance_model.dart';
-import '../domain/transaction_history_api_client.dart';
-import '../domain/transaction_history_model.dart';
+import '../domain/base_response.dart';
+import '../utils/date_utils.dart';
+import '../../feature/transaction_history/bot_order/detail/domain/bot_activities_transaction_history_model.dart';
+import '../../feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
+import '../../feature/transaction_history/domain/bot_transaction_history_request.dart';
+import '../../feature/transaction_history/domain/grouped_model.dart';
+import '../../feature/transaction_history/domain/grouped_transaction_model.dart';
+import '../domain/transaction/transaction_balance_model.dart';
+import '../domain/transaction/transaction_api_client.dart';
+import '../../feature/transaction_history/domain/transaction_history_model.dart';
 
-class TransactionHistoryRepository {
-  final TransactionHistoryApiClient _transactionHistoryApiClient =
-      TransactionHistoryApiClient();
+class TransactionRepository {
+  final TransactionApiClient _transactionApiClient = TransactionApiClient();
 
   Future<BaseResponse<List<GroupedTransactionModel>>>
       fetchAllTransactionsHistory() async {
     try {
-      var botTransactionHistory = await _transactionHistoryApiClient
+      var botTransactionHistory = await _transactionApiClient
           .fetchBotTransactionHistory(const BotTransactionHistoryRequest());
       var transferTransactionHistory =
-          await _transactionHistoryApiClient.fetchTransferTransactionHistory();
+          await _transactionApiClient.fetchTransferTransactionHistory();
 
       return BaseResponse.complete(groupedTransactionModels([
         ...List.from(botTransactionHistory.data
@@ -35,7 +34,7 @@ class TransactionHistoryRepository {
   Future<BaseResponse<List<GroupedTransactionModel>>>
       fetchBotTransactionsHistory() async {
     try {
-      var response = await _transactionHistoryApiClient
+      var response = await _transactionApiClient
           .fetchBotTransactionHistory(const BotTransactionHistoryRequest());
 
       return BaseResponse.complete(groupedTransactionModels(List.from(response
@@ -50,7 +49,7 @@ class TransactionHistoryRepository {
       fetchTransferTransactionsHistory() async {
     try {
       var response =
-          await _transactionHistoryApiClient.fetchTransferTransactionHistory();
+          await _transactionApiClient.fetchTransferTransactionHistory();
 
       return BaseResponse.complete(groupedTransactionModels(List.from(response
           .data
@@ -109,7 +108,7 @@ class TransactionHistoryRepository {
       fetchBotTransactionsDetail(String orderId) async {
     try {
       var botOrderTransactionHistoryResponse =
-          await _transactionHistoryApiClient.fetchBotTransactionDetail(orderId);
+          await _transactionApiClient.fetchBotTransactionDetail(orderId);
       BotDetailTransactionHistoryResponse botDetailTransactionHistoryResponse =
           BotDetailTransactionHistoryResponse.fromJson(
               botOrderTransactionHistoryResponse.data);
@@ -134,7 +133,7 @@ class TransactionHistoryRepository {
 
   Future<BaseResponse<TransactionBalanceModel>> fetchBalance() async {
     try {
-      var response = await _transactionHistoryApiClient.fetchBalance();
+      var response = await _transactionApiClient.fetchBalance();
       return BaseResponse.complete(
           TransactionBalanceModel.fromJson(response.data));
     } catch (e) {

@@ -1,12 +1,12 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_model.dart';
 import 'package:asklora_mobile_app/core/utils/currency_enum.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/domain/portfolio_response.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/repository/portfolio_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
+import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -14,12 +14,12 @@ import 'package:mockito/mockito.dart';
 
 import 'portfolio_bloc_test.mocks.dart';
 
-@GenerateMocks([PortfolioRepository])
 @GenerateMocks([BotStockRepository])
+@GenerateMocks([TransactionRepository])
 void main() async {
   group('Portfolio Bloc Tests', () {
-    late MockPortfolioRepository portfolioRepository;
     late MockBotStockRepository botStockRepository;
+    late MockTransactionRepository transactionRepository;
     late PortfolioBloc portfolioBloc;
 
     final BaseResponse<List<BotActiveOrderModel>> response =
@@ -28,11 +28,12 @@ void main() async {
     final BaseResponse<List<BotActiveOrderModel>> errorResponse =
         BaseResponse.error();
 
-    final BaseResponse<PortfolioResponse> portfolioResponse =
-        BaseResponse.complete(PortfolioResponse());
+    final BaseResponse<TransactionBalanceModel> transactionBalanceResponse =
+        BaseResponse.complete(
+            const TransactionBalanceModel('20', '20', '20', 20, 20, 20, 20));
 
-    final BaseResponse<PortfolioResponse> portfolioErrorResponse =
-        BaseResponse.error();
+    final BaseResponse<TransactionBalanceModel>
+        transactionBalanceErrorResponse = BaseResponse.error();
 
     final BaseResponse<BotOrderResponse> boolResponse =
         BaseResponse.complete(const BotOrderResponse(
@@ -44,14 +45,14 @@ void main() async {
         BaseResponse.error();
 
     setUpAll(() async {
-      portfolioRepository = MockPortfolioRepository();
       botStockRepository = MockBotStockRepository();
+      transactionRepository = MockTransactionRepository();
     });
 
     setUp(() async {
       portfolioBloc = PortfolioBloc(
-          portfolioRepository: portfolioRepository,
-          botStockRepository: botStockRepository);
+          botStockRepository: botStockRepository,
+          transactionHistoryRepository: transactionRepository);
     });
 
     test('Portfolio Bloc init state response should be default one', () {
@@ -190,30 +191,34 @@ void main() async {
 
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.complete` WHEN '
-        'fetching portfolio detail',
+        'fetching portfolio balance',
         build: () {
-          when(portfolioRepository.fetchPortfolio())
-              .thenAnswer((_) => Future.value(portfolioResponse));
+          when(transactionRepository.fetchBalance())
+              .thenAnswer((_) => Future.value(transactionBalanceResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(FetchPortfolio()),
+        act: (bloc) => bloc.add(FetchBalance()),
         expect: () => {
-              PortfolioState(portfolioResponse: BaseResponse.loading()),
-              PortfolioState(portfolioResponse: portfolioResponse)
+              PortfolioState(
+                  transactionBalanceResponse: BaseResponse.loading()),
+              PortfolioState(
+                  transactionBalanceResponse: transactionBalanceResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
         'emits `BaseResponse.error` WHEN '
-        'failed portfolio detail',
+        'failed portfolio balance',
         build: () {
-          when(portfolioRepository.fetchPortfolio())
-              .thenAnswer((_) => Future.value(portfolioErrorResponse));
+          when(transactionRepository.fetchBalance())
+              .thenAnswer((_) => Future.value(transactionBalanceErrorResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(FetchPortfolio()),
+        act: (bloc) => bloc.add(FetchBalance()),
         expect: () => {
-              PortfolioState(portfolioResponse: BaseResponse.loading()),
-              PortfolioState(portfolioResponse: portfolioErrorResponse)
+              PortfolioState(
+                  transactionBalanceResponse: BaseResponse.loading()),
+              PortfolioState(
+                  transactionBalanceResponse: transactionBalanceErrorResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(

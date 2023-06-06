@@ -199,7 +199,9 @@ class RouterGenerator {
       case WithdrawalBankDetailScreen.route:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const WithdrawalBankDetailScreen(),
+          builder: (_) => WithdrawalBankDetailScreen(
+            withdrawableBalance: settings.arguments as String,
+          ),
         );
       case WithdrawalAmountScreen.route:
         return MaterialPageRoute(
