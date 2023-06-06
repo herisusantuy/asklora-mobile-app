@@ -11,7 +11,7 @@ enum TransactionHistoryType { all, bot, transfer }
 
 @JsonSerializable()
 class TransactionHistoryModel extends Equatable {
-  @JsonKey(name: 'transaction_history_type')
+  @JsonKey(name: 'history_type')
   final TransactionHistoryType transactionHistoryType;
   final dynamic id;
   final String created;

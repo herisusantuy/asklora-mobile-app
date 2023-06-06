@@ -93,14 +93,14 @@ enum BotStockFilter {
 enum BotStatus {
   populated('initialized', 'Initialized', AskLoraColors.amber),
   indicative('indicative', 'Indicative', AskLoraColors.amber),
-  live('initialized', 'Live', AskLoraColors.primaryGreen),
+  live('live', 'Live', AskLoraColors.primaryGreen),
   earlyTerminated(
-      'initialized', 'Early Terminated', AskLoraColors.primaryMagenta),
+      'early_terminated', 'Early Terminated', AskLoraColors.primaryMagenta),
   expired('initialized', 'Expired', AskLoraColors.primaryMagenta),
   nearlyKnockOut('initialized', 'Nearly Knock Out', AskLoraColors.amber),
-  knockOut('initialized', 'Knock Out', AskLoraColors.primaryMagenta),
+  knockOut('knock_out', 'Knock Out', AskLoraColors.primaryMagenta),
   pending('place', 'Pending', AskLoraColors.amber),
-  active('live', 'Active', AskLoraColors.primaryGreen),
+  active('open', 'Active', AskLoraColors.primaryGreen),
   activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen),
   closed('closed', 'Closed', AskLoraColors.primaryMagenta),
   cancel('cancel', 'Cancel', AskLoraColors.primaryMagenta);

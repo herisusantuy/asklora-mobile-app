@@ -10,8 +10,7 @@ TransactionHistoryModel _$TransactionHistoryModelFromJson(
         Map<String, dynamic> json) =>
     TransactionHistoryModel(
       json['id'],
-      $enumDecode(
-          _$TransactionHistoryTypeEnumMap, json['transaction_history_type']),
+      $enumDecode(_$TransactionHistoryTypeEnumMap, json['history_type']),
       json['created'] as String,
       json['updated'] as String,
       json['title'] as String,
@@ -26,7 +25,7 @@ TransactionHistoryModel _$TransactionHistoryModelFromJson(
 Map<String, dynamic> _$TransactionHistoryModelToJson(
         TransactionHistoryModel instance) =>
     <String, dynamic>{
-      'transaction_history_type':
+      'history_type':
           _$TransactionHistoryTypeEnumMap[instance.transactionHistoryType]!,
       'id': instance.id,
       'created': instance.created,

@@ -2,7 +2,6 @@ import '../domain/base_response.dart';
 import '../utils/date_utils.dart';
 import '../../feature/transaction_history/bot_order/detail/domain/bot_activities_transaction_history_model.dart';
 import '../../feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
-import '../../feature/transaction_history/domain/bot_transaction_history_request.dart';
 import '../../feature/transaction_history/domain/grouped_model.dart';
 import '../../feature/transaction_history/domain/grouped_transaction_model.dart';
 import '../domain/transaction/transaction_balance_model.dart';
@@ -15,8 +14,8 @@ class TransactionRepository {
   Future<BaseResponse<List<GroupedTransactionModel>>>
       fetchAllTransactionsHistory() async {
     try {
-      var botTransactionHistory = await _transactionApiClient
-          .fetchBotTransactionHistory(const BotTransactionHistoryRequest());
+      var botTransactionHistory =
+          await _transactionApiClient.fetchBotTransactionHistory();
       var transferTransactionHistory =
           await _transactionApiClient.fetchTransferTransactionHistory();
 
@@ -34,8 +33,7 @@ class TransactionRepository {
   Future<BaseResponse<List<GroupedTransactionModel>>>
       fetchBotTransactionsHistory() async {
     try {
-      var response = await _transactionApiClient
-          .fetchBotTransactionHistory(const BotTransactionHistoryRequest());
+      var response = await _transactionApiClient.fetchBotTransactionHistory();
 
       return BaseResponse.complete(groupedTransactionModels(List.from(response
           .data
