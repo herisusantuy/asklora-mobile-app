@@ -32,8 +32,12 @@ class DevConfig implements BaseConfig {
   @override
   String get ppiBaseUrl => 'http://192.168.100.198:8005/';
 
+  ///redes endpoint
+  // @override
+  // String get askLoraApiBaseUrl => 'http://192.168.100.198:8002/';
+
   @override
-  String get askLoraApiBaseUrl => 'http://192.168.100.198:8002/';
+  String get askLoraApiBaseUrl => 'http://192.168.100.194:8000/';
 
   @override
   String get streamServiceBaseUrl => 'wss://apca.services.asklora.ai/';

@@ -4,38 +4,42 @@ part 'bot_active_order_model.g.dart';
 
 @JsonSerializable()
 class BotActiveOrderModel {
-  final String pk;
-  @JsonKey(name: 'bot_id')
-  final String botId;
-  @JsonKey(name: 'expire_date')
-  final String expireDate;
+  final String uid;
+  final String name;
+  final String status;
   @JsonKey(name: 'is_active')
-  final dynamic isActive;
-  final String ticker;
+  final bool isActive;
+  @JsonKey(name: 'total_pnl')
+  final double totalPnl;
+  @JsonKey(name: 'expire_date')
+  final String? expireDate;
   @JsonKey(name: 'ticker_name')
   final String tickerName;
-  final String status;
-  @JsonKey(name: 'current_pnl_ret')
-  final double? currentPnlRet;
   @JsonKey(name: 'current_price')
   final double currentPrice;
-  @JsonKey(name: 'bot_apps_name')
-  final String botAppsName;
   @JsonKey(name: 'is_dummy')
   final bool isDummy;
+  @JsonKey(name: 'spot_date')
+  final String spotDate;
+  final String ticker;
+  @JsonKey(name: 'bot_apps_name')
+  final String botAppsName;
+
+  String get expireDateStr=>expireDate??'';
 
   const BotActiveOrderModel(
-      this.pk,
-      this.botId,
-      this.expireDate,
-      this.isActive,
-      this.ticker,
-      this.tickerName,
+      this.uid,
+      this.name,
       this.status,
-      this.currentPnlRet,
+      this.isActive,
+      this.totalPnl,
+      this.expireDate,
+      this.tickerName,
       this.currentPrice,
       this.isDummy,
-      {this.botAppsName = 'Pull Up'});
+      this.spotDate,
+      this.ticker,
+      this.botAppsName);
 
   factory BotActiveOrderModel.fromJson(Map<String, dynamic> json) =>
       _$BotActiveOrderModelFromJson(json);

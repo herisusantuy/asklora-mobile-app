@@ -20,7 +20,6 @@ import '../domain/bot_recommendation_response.dart';
 import '../domain/bot_stock_api_client.dart';
 import '../domain/orders/bot_active_order_detail_model.dart';
 import '../domain/orders/bot_active_order_model.dart';
-import '../domain/orders/bot_active_order_request.dart';
 import '../domain/orders/bot_create_order_request.dart';
 import '../domain/orders/create_order_response.dart';
 import '../domain/orders/bot_order_request.dart';
@@ -136,12 +135,13 @@ class BotStockRepository {
       {required List<String> status}) async {
     try {
       var response = await _botStockApiClient
-          .activeOrder(BotActiveOrderRequest(status: status));
+          .activeOrder();
       return BaseResponse.complete(List.from(response.data
           .map((element) => BotActiveOrderModel.fromJson(element))));
     } on ForbiddenException {
       return BaseResponse.error(errorCode: 403);
     } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }
@@ -181,6 +181,7 @@ class BotStockRepository {
       return BaseResponse.suspended();
     } catch (e) {
       ///todo handle error code later on insufficient balance
+      print('error $e');
       return BaseResponse.error();
     }
   }

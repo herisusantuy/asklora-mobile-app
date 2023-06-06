@@ -115,5 +115,5 @@ enum BotStatus {
   const BotStatus(this.value, this.name, this.color);
 }
 
-String newExpiryDateOnRollover(String expireDate) => formatDateTimeAsString(
-    DateTime.parse(expireDate).add(const Duration(days: 14)));
+String newExpiryDateOnRollover(String? expireDate) => expireDate!=null?formatDateTimeAsString(
+    DateTime.parse(expireDate).add(const Duration(days: 14))):'';

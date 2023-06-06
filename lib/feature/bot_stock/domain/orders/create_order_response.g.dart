@@ -19,8 +19,8 @@ BotOrderResponse _$BotOrderResponseFromJson(Map<String, dynamic> json) =>
       json['is_dummy'] as bool,
       json['spot_date'] as String,
       json['ticker'] as String,
-      json['optimalTime'] as String,
-      json['newExpireDate'] as String,
+      json['optimalTime'] as String?,
+      json['newExpireDate'] as String?,
     );
 
 Map<String, dynamic> _$BotOrderResponseToJson(BotOrderResponse instance) =>

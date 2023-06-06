@@ -17,6 +17,9 @@ abstract class ChartDataSet extends Equatable {
     this.index,
   });
 
+  double get currentPnlRetFormatted =>
+      double.parse(checkDouble(currentPnlRet).convertToCurrencyDecimal(decimalDigits: 2));
+
   ChartDataSet.fromJson(Map<String, dynamic> json)
       : date = DateTime.parse(json['date']),
         index = json['i'] ?? 0,

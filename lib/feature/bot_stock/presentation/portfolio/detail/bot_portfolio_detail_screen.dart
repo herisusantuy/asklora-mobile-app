@@ -65,7 +65,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         create: (_) => PortfolioBloc(
             botStockRepository: BotStockRepository(),
             transactionHistoryRepository: TransactionRepository())
-          ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.pk)),
+          ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
         child: BlocConsumer<PortfolioBloc, PortfolioState>(
           listenWhen: (previous, current) =>
               previous.botActiveOrderDetailResponse.state !=
@@ -88,7 +88,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                 onSecondaryButtonTap: () => Navigator.pop(context),
                 onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
                     (FetchActiveOrderDetail(
-                        botOrderId: botActiveOrderModel.pk))),
+                        botOrderId: botActiveOrderModel.uid))),
               ),
               showPopUp: state.botActiveOrderDetailResponse.state ==
                   ResponseState.error,
