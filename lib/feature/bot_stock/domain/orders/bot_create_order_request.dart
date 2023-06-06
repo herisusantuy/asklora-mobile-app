@@ -29,6 +29,8 @@ class BotCreateOrderRequest {
       required this.price,
       this.fraction = true,
       this.margin = 1,
+
+      ///TODO : REVERT BACK THE ORDERTYPE TO `POOL` LATER AFTER TESTING
       this.orderType = 'POOL',
       this.isAggregate = false,
       this.isDummy = false});

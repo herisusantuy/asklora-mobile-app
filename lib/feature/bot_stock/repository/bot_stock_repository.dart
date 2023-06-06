@@ -12,7 +12,6 @@ import '../../../core/utils/storage/storage_keys.dart';
 import '../../chart/domain/bot_recommendation_chart_model.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
-import '../../chart/domain/bot_portfolio_chart_models.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_detail_request.dart';
 import '../domain/bot_recommendation_model.dart';
@@ -21,8 +20,9 @@ import '../domain/bot_stock_api_client.dart';
 import '../domain/orders/bot_active_order_detail_model.dart';
 import '../domain/orders/bot_active_order_model.dart';
 import '../domain/orders/bot_create_order_request.dart';
-import '../domain/orders/create_order_response.dart';
+import '../domain/orders/bot_create_order_response.dart';
 import '../domain/orders/bot_order_request.dart';
+import '../domain/orders/bot_order_response.dart';
 import '../utils/bot_stock_utils.dart';
 
 class BotStockRepository {
@@ -37,7 +37,6 @@ class BotStockRepository {
 
       return BaseResponse.complete(BotDetailModel.fromJson(response.data));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }
@@ -86,16 +85,6 @@ class BotStockRepository {
     return finalChartData;
   }
 
-  List<BotPortfolioChartDataSet> _addIndexChartData(
-      List<BotPortfolioChartDataSet> chartData) {
-    List<BotPortfolioChartDataSet> finalChartData = [];
-    int index = 0;
-    for (var element in chartData) {
-      finalChartData.add(element.copyWith(index: index++));
-    }
-    return finalChartData;
-  }
-
   Future<BaseResponse<List<BotRecommendationModel>>>
       fetchBotRecommendation() async {
     try {
@@ -134,14 +123,12 @@ class BotStockRepository {
   Future<BaseResponse<List<BotActiveOrderModel>>> activeOrders(
       {required List<String> status}) async {
     try {
-      var response = await _botStockApiClient
-          .activeOrder();
+      var response = await _botStockApiClient.activeOrder();
       return BaseResponse.complete(List.from(response.data
           .map((element) => BotActiveOrderModel.fromJson(element))));
     } on ForbiddenException {
       return BaseResponse.error(errorCode: 403);
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }
@@ -150,17 +137,14 @@ class BotStockRepository {
       String botOrderId) async {
     try {
       var response = await _botStockApiClient.activeOrderDetail(botOrderId);
-      BotActiveOrderDetailModel botActiveOrderDetailModel =
-          BotActiveOrderDetailModel.fromJson(response.data);
-      return BaseResponse.complete(botActiveOrderDetailModel.copyWith(
-          performance:
-              _addIndexChartData(botActiveOrderDetailModel.performance)));
+      return BaseResponse.complete(
+          BotActiveOrderDetailModel.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }
   }
 
-  Future<BaseResponse<BotOrderResponse>> createOrder(
+  Future<BaseResponse<BotCreateOrderResponse>> createOrder(
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount}) async {
     try {
@@ -174,14 +158,14 @@ class BotStockRepository {
           ),
           isDummy: botRecommendationModel.freeBot));
       await removeInvestmentStyleState();
-      return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
+      return BaseResponse.complete(
+          BotCreateOrderResponse.fromJson(response.data));
     } on ForbiddenException {
       return BaseResponse.error(errorCode: 403);
     } on LegalReasonException {
       return BaseResponse.suspended();
     } catch (e) {
       ///todo handle error code later on insufficient balance
-      print('error $e');
       return BaseResponse.error();
     }
   }
@@ -198,12 +182,13 @@ class BotStockRepository {
     }
   }
 
-  Future<BaseResponse<BotOrderResponse>> rolloverOrder(
+  Future<BaseResponse<RolloverOrderResponse>> rolloverOrder(
       String botOrderId) async {
     try {
       var response = await _botStockApiClient
           .rolloverOrder(BotOrderRequest(orderId: botOrderId));
-      return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
+      return BaseResponse.complete(
+          RolloverOrderResponse.fromJson(response.data));
     } on LegalReasonException {
       return BaseResponse.suspended();
     } catch (e) {
@@ -211,12 +196,13 @@ class BotStockRepository {
     }
   }
 
-  Future<BaseResponse<BotOrderResponse>> terminateOrder(
+  Future<BaseResponse<TerminateOrderResponse>> terminateOrder(
       String botOrderId) async {
     try {
       var response = await _botStockApiClient
           .terminateOrder(BotOrderRequest(orderId: botOrderId));
-      return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
+      return BaseResponse.complete(
+          TerminateOrderResponse.fromJson(response.data));
     } on LegalReasonException {
       return BaseResponse.suspended();
     } catch (e) {

@@ -55,11 +55,11 @@ class BotStockBottomSheet {
   }
 
   static endBotStockConfirmation(
-      BuildContext context, String orderId, String botAppsName, String ticker) {
+      BuildContext context, String orderId, String title, String ticker) {
     LoraBottomSheet.show(
       context: context,
-      title: S.of(context).botTradeBottomSheetEndBotStockConfirmationTitle(
-          '${BotType.findByString(botAppsName).name} $ticker'),
+      title:
+          S.of(context).botTradeBottomSheetEndBotStockConfirmationTitle(title),
       subTitle:
           S.of(context).botTradeBottomSheetEndBotStockConfirmationSubTitle,
       primaryButtonLabel: S.of(context).portfolioDetailButtonEndBotStock,

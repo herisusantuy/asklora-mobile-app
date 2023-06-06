@@ -2,11 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
-import '../domain/orders/bot_active_order_model.dart';
-import '../domain/orders/create_order_response.dart';
+import '../domain/orders/bot_create_order_response.dart';
 import '../repository/bot_stock_repository.dart';
 
 part 'bot_stock_event.dart';

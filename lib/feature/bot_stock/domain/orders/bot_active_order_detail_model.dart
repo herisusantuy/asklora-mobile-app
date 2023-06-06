@@ -43,13 +43,21 @@ class BotActiveOrderDetailModel {
   final StockInfo stockInfo;
 
   ///todo : later menyesuaikan endpoint response
+  @JsonKey(name: 'current_price')
   final double currentPrice;
+  @JsonKey(name: 'stock_value')
   final double stockValue;
+  @JsonKey(name: 'bot_asset_in_stock_pct')
   final double botAssetInStockPct;
+  @JsonKey(name: 'bot_cash_balance')
   final double botCashBalance;
+  @JsonKey(name: 'bot_share')
   final double botShare;
+  @JsonKey(name: 'current_pnl_ret')
   final double currentPnlRet;
+  @JsonKey(name: 'max_loss_pct')
   final double maxLossPct;
+  @JsonKey(name: 'target_profit_pct')
   final double targetProfitPct;
 
   const BotActiveOrderDetailModel(
@@ -166,6 +174,15 @@ class BotActiveOrderDetailModel {
             : '/';
   }
 
+  String get totalPnlRetString {
+    double totalPnlDouble = checkDouble(totalPnL);
+    return (totalPnlDouble > 0)
+        ? '+$totalPnlDouble%'
+        : (totalPnlDouble < 0)
+            ? '$totalPnlDouble%'
+            : '/';
+  }
+
   String get avgReturnString {
     double avgReturnPctDouble = checkDouble(avgReturnPct);
     return (avgReturnPctDouble > 0) ? '+$avgReturnPctDouble%' : 'NA';
@@ -184,6 +201,11 @@ class BotActiveOrderDetailModel {
             ? '$avgLossPctDouble%'
             : 'NA';
   }
+
+  String get maxLossPctString =>
+      maxLossPct.convertToCurrencyDecimal(decimalDigits: 2);
+  String get targetProfitPctString =>
+      targetProfitPct.convertToCurrencyDecimal(decimalDigits: 2);
 
   String get expireDateStr => expireDate ?? '';
 

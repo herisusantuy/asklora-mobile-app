@@ -7,7 +7,7 @@ import '../../../../../core/domain/transaction/transaction_balance_model.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
-import '../../../domain/orders/create_order_response.dart';
+import '../../../domain/orders/bot_order_response.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_utils.dart';
 

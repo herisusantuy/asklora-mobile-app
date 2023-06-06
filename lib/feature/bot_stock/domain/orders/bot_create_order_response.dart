@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'create_order_response.g.dart';
+part 'bot_create_order_response.g.dart';
 
 @JsonSerializable()
-class BotOrderResponse {
+class BotCreateOrderResponse {
   final String uid;
   final String name;
   final String status;
@@ -23,12 +23,7 @@ class BotOrderResponse {
   final String spotDate;
   final String ticker;
 
-  ///todo : later menyesuaikan endpoint response
-
-  final String optimalTime;
-  final String newExpireDate;
-
-  const BotOrderResponse(
+  const BotCreateOrderResponse(
     this.uid,
     this.name,
     this.status,
@@ -40,12 +35,10 @@ class BotOrderResponse {
     this.isDummy,
     this.spotDate,
     this.ticker,
-    this.optimalTime,
-    this.newExpireDate,
   );
 
-  factory BotOrderResponse.fromJson(Map<String, dynamic> json) =>
-      _$BotOrderResponseFromJson(json);
+  factory BotCreateOrderResponse.fromJson(Map<String, dynamic> json) =>
+      _$BotCreateOrderResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BotOrderResponseToJson(this);
+  Map<String, dynamic> toJson() => _$BotCreateOrderResponseToJson(this);
 }

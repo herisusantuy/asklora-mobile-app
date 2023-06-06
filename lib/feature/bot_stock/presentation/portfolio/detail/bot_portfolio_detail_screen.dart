@@ -78,35 +78,39 @@ class BotPortfolioDetailScreen extends StatelessWidget {
           builder: (context, state) {
             final BotActiveOrderDetailModel? botActiveOrderDetailModel =
                 state.botActiveOrderDetailResponse.data;
-            return CustomLayoutWithBlurPopUp(
-              loraPopUpMessageModel: LoraPopUpMessageModel(
-                title: S.of(context).errorGettingInformationTitle,
-                subTitle:
-                    S.of(context).errorGettingInformationPortfolioSubTitle,
-                primaryButtonLabel: S.of(context).buttonReloadPage,
-                secondaryButtonLabel: S.of(context).buttonCancel,
-                onSecondaryButtonTap: () => Navigator.pop(context),
-                onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
-                    (FetchActiveOrderDetail(
-                        botOrderId: botActiveOrderModel.uid))),
+            return RefreshIndicator(
+              onRefresh: () async => context.read<PortfolioBloc>().add(
+                  FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
+              child: CustomLayoutWithBlurPopUp(
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle:
+                      S.of(context).errorGettingInformationPortfolioSubTitle,
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  secondaryButtonLabel: S.of(context).buttonCancel,
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
+                      (FetchActiveOrderDetail(
+                          botOrderId: botActiveOrderModel.uid))),
+                ),
+                showPopUp: state.botActiveOrderDetailResponse.state ==
+                    ResponseState.error,
+                content: BotStockForm(
+                    useHeader: true,
+                    customHeader: BotPortfolioDetailHeader(
+                      botActiveOrderModel: botActiveOrderModel,
+                      botType: botType,
+                      botStatus: botStatus,
+                    ),
+                    padding: EdgeInsets.zero,
+                    content: BotPortfolioDetailContent(
+                      botStatus: botStatus,
+                      botType: botType,
+                      portfolioBotDetailModel: botActiveOrderDetailModel,
+                    ),
+                    bottomButton:
+                        _getBottomButton(context, botActiveOrderDetailModel)),
               ),
-              showPopUp: state.botActiveOrderDetailResponse.state ==
-                  ResponseState.error,
-              content: BotStockForm(
-                  useHeader: true,
-                  customHeader: BotPortfolioDetailHeader(
-                    botActiveOrderModel: botActiveOrderModel,
-                    botType: botType,
-                    botStatus: botStatus,
-                  ),
-                  padding: EdgeInsets.zero,
-                  content: BotPortfolioDetailContent(
-                    botStatus: botStatus,
-                    botType: botType,
-                    portfolioBotDetailModel: botActiveOrderDetailModel,
-                  ),
-                  bottomButton:
-                      _getBottomButton(context, botActiveOrderDetailModel)),
             );
           },
         ),

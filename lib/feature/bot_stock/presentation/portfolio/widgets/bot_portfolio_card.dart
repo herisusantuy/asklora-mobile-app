@@ -16,9 +16,14 @@ class BotPortfolioCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final BotType botType =
         BotType.findByString(botActiveOrderModel.botAppsName);
-    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(context,
+    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(
+        context,
+
         ///TODO : LATER MAKE SURE EXPIRED DATE IS NOT NULLABLE
-        DateTime.now(), botActiveOrderModel.expireDate!=null?DateTime.parse(botActiveOrderModel.expireDate!):null);
+        DateTime.now(),
+        botActiveOrderModel.expireDate != null
+            ? DateTime.parse(botActiveOrderModel.expireDate!)
+            : null);
     return GestureDetector(
       onTap: () => BotPortfolioDetailScreen.open(
           context: context, botActiveOrderModel: botActiveOrderModel),

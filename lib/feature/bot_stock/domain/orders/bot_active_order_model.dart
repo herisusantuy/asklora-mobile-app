@@ -25,7 +25,7 @@ class BotActiveOrderModel {
   @JsonKey(name: 'bot_apps_name')
   final String botAppsName;
 
-  String get expireDateStr=>expireDate??'';
+  String get expireDateStr => expireDate ?? '';
 
   const BotActiveOrderModel(
       this.uid,

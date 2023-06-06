@@ -41,6 +41,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
             child: Column(
               children: [
                 Performance(
+                  botType: botType,
                   botActiveOrderDetailModel: portfolioBotDetailModel!,
                 ),
                 const SizedBox(

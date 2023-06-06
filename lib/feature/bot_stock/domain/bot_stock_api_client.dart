@@ -27,12 +27,10 @@ class BotStockApiClient {
 
   ///TODO : LATER IMPLEMENT QUERY PARAMETER
   Future<Response> activeOrder() async =>
-      await AskloraApiClient().get(
-          endpoint: endpointBotActiveOrder);
+      await AskloraApiClient().get(endpoint: endpointBotActiveOrder);
 
   Future<Response> activeOrderDetail(String orderId) async =>
-      await AskloraApiClient()
-          .get(endpoint: '$endpointBotActiveOrder/$orderId');
+      await AskloraApiClient().get(endpoint: '$endpointBotActiveOrder$orderId');
 
   Future<Response> createOrder(BotCreateOrderRequest request) async =>
       await AskloraApiClient().post(

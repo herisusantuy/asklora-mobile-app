@@ -15,8 +15,8 @@ class PortfolioState extends Equatable {
 
   final BaseResponse<List<BotActiveOrderModel>> botActiveOrderResponse;
   final BaseResponse<BotActiveOrderDetailModel> botActiveOrderDetailResponse;
-  final BaseResponse<BotOrderResponse> rolloverBotStockResponse;
-  final BaseResponse<BotOrderResponse> endBotStockResponse;
+  final BaseResponse<RolloverOrderResponse> rolloverBotStockResponse;
+  final BaseResponse<TerminateOrderResponse> endBotStockResponse;
   final BaseResponse<BotOrderResponse> cancelBotStockResponse;
   final BaseResponse<TransactionBalanceModel> transactionBalanceResponse;
   final bool activeFilterChecked;
@@ -41,8 +41,8 @@ class PortfolioState extends Equatable {
   PortfolioState copyWith({
     BaseResponse<List<BotActiveOrderModel>>? botActiveOrderResponse,
     BaseResponse<BotActiveOrderDetailModel>? botActiveOrderDetailResponse,
-    BaseResponse<BotOrderResponse>? rolloverBotStockResponse,
-    BaseResponse<BotOrderResponse>? endBotStockResponse,
+    BaseResponse<RolloverOrderResponse>? rolloverBotStockResponse,
+    BaseResponse<TerminateOrderResponse>? endBotStockResponse,
     BaseResponse<BotOrderResponse>? cancelBotStockResponse,
     BaseResponse<TransactionBalanceModel>? transactionBalanceResponse,
     BotStockFilter? botStockFilter,

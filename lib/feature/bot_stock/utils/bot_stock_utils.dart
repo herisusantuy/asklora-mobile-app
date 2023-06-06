@@ -100,7 +100,7 @@ enum BotStatus {
   nearlyKnockOut('initialized', 'Nearly Knock Out', AskLoraColors.amber),
   knockOut('initialized', 'Knock Out', AskLoraColors.primaryMagenta),
   pending('place', 'Pending', AskLoraColors.amber),
-  active('open', 'Active', AskLoraColors.primaryGreen),
+  active('live', 'Active', AskLoraColors.primaryGreen),
   activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen),
   closed('closed', 'Closed', AskLoraColors.primaryMagenta),
   cancel('cancel', 'Cancel', AskLoraColors.primaryMagenta);
@@ -123,5 +123,7 @@ enum BotStatus {
   const BotStatus(this.value, this.name, this.color);
 }
 
-String newExpiryDateOnRollover(String? expireDate) => expireDate!=null?formatDateTimeAsString(
-    DateTime.parse(expireDate).add(const Duration(days: 14))):'';
+String newExpiryDateOnRollover(String? expireDate) => expireDate != null
+    ? formatDateTimeAsString(
+        DateTime.parse(expireDate).add(const Duration(days: 14)))
+    : '';

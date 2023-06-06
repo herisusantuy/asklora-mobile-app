@@ -78,11 +78,11 @@ class KeyInfo extends StatelessWidget {
           leftTitle: botType == BotType.plank
               ? S.of(context).portfolioDetailKeyInfoEstimatedStopLoss
               : S.of(context).portfolioDetailKeyInfoEstimatedMaxLoss,
-          leftSubTitle: botActiveOrderDetailModel.maxLossPct.toString(),
+          leftSubTitle: botActiveOrderDetailModel.maxLossPctString,
           rightTitle: botType == BotType.plank
               ? S.of(context).portfolioDetailKeyInfoEstimatedTakeProfit
               : S.of(context).portfolioDetailKeyInfoEstimatedMaxProfit,
-          rightSubTitle: botActiveOrderDetailModel.targetProfitPct.toString(),
+          rightSubTitle: botActiveOrderDetailModel.targetProfitPctString,
         ),
       ];
 
