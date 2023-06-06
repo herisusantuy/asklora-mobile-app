@@ -41,7 +41,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
           CustomLoadingOverlay.of(context).show(state.response.state);
           if (state.response.state == ResponseState.success) {
             WithdrawalResultScreen.open(context);
-          } else if (state is WithdrawalAccountSuspended) {
+          } else if (state.response.state == ResponseState.suspended) {
             SuspendedAccountScreen.open(context);
           }
         },

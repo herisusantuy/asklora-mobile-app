@@ -69,7 +69,7 @@ class DepositScreen extends StatelessWidget {
             DepositResultScreen.open(
                 context: context,
                 arguments: Pair(depositType, StatusType.success));
-          } else if (state is DepositAccountSuspended) {
+          } else if (state.response.state == ResponseState.suspended) {
             SuspendedAccountScreen.open(context);
           }
         },
