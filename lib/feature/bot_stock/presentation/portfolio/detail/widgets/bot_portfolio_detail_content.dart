@@ -68,7 +68,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                       .copyWith(color: AskLoraColors.charcoal),
                 ),
                 CustomTextNew(
-                  portfolioBotDetailModel!.botDetail.botDescription.detail,
+                  portfolioBotDetailModel!.botInfo.botDescription.detail,
                   style: AskLoraTextStyles.body3
                       .copyWith(color: AskLoraColors.charcoal),
                 )
@@ -84,7 +84,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                 height: 6,
               ),
               CustomTextNew(
-                portfolioBotDetailModel!.botDetail.botDescription.suited,
+                portfolioBotDetailModel!.botInfo.botDescription.suited,
                 style: AskLoraTextStyles.body1
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -100,7 +100,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                 height: 6,
               ),
               CustomTextNew(
-                portfolioBotDetailModel!.botDetail.botDescription.works,
+                portfolioBotDetailModel!.botInfo.botDescription.works,
                 style: AskLoraTextStyles.body1
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -114,7 +114,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextNew(
-                  'About ${portfolioBotDetailModel!.tickerDetail.tickerName} ${portfolioBotDetailModel!.tickerDetail.ticker}',
+                  'About ${portfolioBotDetailModel!.stockInfo.tickerName} ${portfolioBotDetailModel!.stockInfo.ticker}',
                   style: AskLoraTextStyles.h5
                       .copyWith(color: AskLoraColors.charcoal),
                   maxLines: 2,
@@ -123,7 +123,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                   height: 5,
                 ),
                 CustomTextNew(
-                  portfolioBotDetailModel!.tickerDetail.industry,
+                  portfolioBotDetailModel!.stockInfo.industry,
                   style: AskLoraTextStyles.body2
                       .copyWith(color: AskLoraColors.charcoal),
                 )
@@ -131,7 +131,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
             ),
             children: [
               CustomTextNew(
-                'About ${portfolioBotDetailModel!.tickerDetail.tickerName}',
+                'About ${portfolioBotDetailModel!.stockInfo.tickerName}',
                 style: AskLoraTextStyles.h6
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -140,31 +140,30 @@ class BotPortfolioDetailContent extends StatelessWidget {
               ),
               PairColumnText(
                 leftTitle: 'Sector(s)',
-                leftSubTitle: portfolioBotDetailModel!.tickerDetail.sector,
+                leftSubTitle: portfolioBotDetailModel!.stockInfo.sector,
                 rightTitle: 'Industry',
-                rightSubTitle: portfolioBotDetailModel!.tickerDetail.industry,
+                rightSubTitle: portfolioBotDetailModel!.stockInfo.industry,
               ),
               _spaceBetweenInfo,
               PairColumnText(
                 leftTitle: 'CEO',
-                leftSubTitle: portfolioBotDetailModel!.tickerDetail.ceo,
+                leftSubTitle: portfolioBotDetailModel!.stockInfo.ceo,
                 rightTitle: 'Employees',
                 rightSubTitle:
-                    '${portfolioBotDetailModel!.tickerDetail.employees}',
+                    '${portfolioBotDetailModel!.stockInfo.employees}',
               ),
               _spaceBetweenInfo,
               PairColumnText(
                 leftTitle: 'Headquarters',
-                leftSubTitle:
-                    portfolioBotDetailModel!.tickerDetail.headquarters,
+                leftSubTitle: portfolioBotDetailModel!.stockInfo.headquarter,
                 rightTitle: 'Founded',
-                rightSubTitle: portfolioBotDetailModel!.tickerDetail.founded,
+                rightSubTitle: portfolioBotDetailModel!.stockInfo.founded,
               ),
               const SizedBox(
                 height: 23,
               ),
               CustomTextNew(
-                portfolioBotDetailModel!.tickerDetail.description,
+                portfolioBotDetailModel!.stockInfo.description,
                 style: AskLoraTextStyles.body1
                     .copyWith(color: AskLoraColors.charcoal),
               )

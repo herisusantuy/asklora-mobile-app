@@ -23,7 +23,7 @@ class BotRolloverButton extends StatelessWidget {
             BotStockResultScreen.open(
                 context: context,
                 arguments: Pair('Trade Request Received',
-                    '${botType.name} ${botActiveOrderDetailModel.tickerDetail.ticker} will rollover at ${newExpiryDateOnRollover(botActiveOrderDetailModel.expireDate)}'));
+                    '${botType.name} ${botActiveOrderDetailModel.stockInfo.ticker} will rollover at ${newExpiryDateOnRollover(state.rolloverBotStockResponse.data!.newExpireDate)}'));
           } else if (state.rolloverBotStockResponse.state ==
               ResponseState.suspended) {
             SuspendedAccountScreen.open(context);
@@ -36,8 +36,8 @@ class BotRolloverButton extends StatelessWidget {
         child: PrimaryButton(
           label: S.of(context).portfolioDetailButtonRolloverBotStock,
           onTap: () => BotStockBottomSheet.rolloverBotStockConfirmation(context,
-              orderId: botActiveOrderDetailModel.pk,
-              expireDate: botActiveOrderDetailModel.expireDate),
+              orderId: botActiveOrderDetailModel.uid,
+              expireDate: botActiveOrderDetailModel.daysToExpireString),
         ),
       );
 }

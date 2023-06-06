@@ -10,106 +10,67 @@ part 'bot_detail_model.g.dart';
 
 @JsonSerializable()
 class BotDetailModel extends Equatable {
-  final BotModel bot;
-  final String symbol;
-  final String ticker;
-
-  @JsonKey(name: 'ticker_name')
-  final String tickerName;
-
-  @JsonKey(name: 'chinese_name')
-  final String chineseName;
-
-  @JsonKey(name: 'traditional_name')
-  final String traditionalName;
-
+  @JsonKey(name: 'bot_id')
+  final String botId;
+  @JsonKey(name: 'bot_info')
+  final BotInfo botInfo;
+  @JsonKey(name: 'stock_info')
+  final StockInfo stockInfo;
   final double price;
-
-  @JsonKey(name: 'estimated_expired_date')
-  final String estimatedExpiredDate;
-
-  @JsonKey(name: 'estimated_take_profit_pct')
-  final double estimatedTakeProfitPct;
-
-  @JsonKey(name: 'estimated_take_profit_price')
-  final double estimatedTakeProfitPrice;
-
-  @JsonKey(name: 'estimated_stop_loss_pct')
-  final double estimatedStopLossPct;
-
-  @JsonKey(name: 'estimated_stop_loss_price')
-  final double estimatedStopLossPrice;
-
-  final String description;
-
-  @JsonKey(name: 'market_cap')
-  final String? marketCap;
-
-  final List<BotRecommendationChartModel> performance;
+  @JsonKey(name: 'prev_close_amt')
+  final double prevCloseAmt;
   @JsonKey(name: 'prev_close_price')
   final double prevClosePrice;
-
-  @JsonKey(name: 'prev_close_date')
-  final String prevCloseDate;
-
-  @JsonKey(name: 'estimated_start_date')
-  final String estimatedStartDate;
-
-  @JsonKey(name: 'prev_close_changes')
-  final double prevCloseChanges;
-
+  @JsonKey(name: 'est_stop_loss_price')
+  final double estStopLossPrice;
+  @JsonKey(name: 'est_take_profit_price')
+  final double estTakeProfitPrice;
   @JsonKey(name: 'prev_close_pct')
   final double prevClosePct;
+  @JsonKey(name: 'est_stop_loss_pct')
+  final double estStopLossPct;
+  @JsonKey(name: 'est_take_profit_pct')
+  final double estTakeProfitPct;
+  @JsonKey(name: 'prev_close_date')
+  final String prevCloseDate;
+  @JsonKey(name: 'start_date')
+  final String startDate;
+  @JsonKey(name: 'est_end_date')
+  final String estEndDate;
+  final List<BotRecommendationChartModel> performance;
+  @JsonKey(name: 'bot_duration')
+  final String botDuration;
+  @JsonKey(name: 'market_cap')
+  final String marketCap;
 
-  @JsonKey(name: 'avg_return')
-  final dynamic avgReturn;
+  double get estStopLossPriceFormatted =>
+      double.parse(checkDouble(estStopLossPrice).convertToCurrencyDecimal());
 
-  @JsonKey(name: 'avg_loss')
-  final dynamic avgLoss;
-
-  @JsonKey(name: 'avg_period')
-  final dynamic avgPeriod;
-
-  final String sector;
-  final String industry;
-  final String ceo;
-  final int employees;
-  final String founded;
-  final String headquarters;
+  double get estTakeProfitPriceFormatted =>
+      double.parse(checkDouble(estTakeProfitPrice).convertToCurrencyDecimal());
 
   const BotDetailModel(
-      this.bot,
-      this.symbol,
-      this.ticker,
-      this.tickerName,
-      this.chineseName,
-      this.traditionalName,
-      this.price,
-      this.estimatedExpiredDate,
-      this.estimatedTakeProfitPct,
-      this.estimatedTakeProfitPrice,
-      this.estimatedStopLossPct,
-      this.estimatedStopLossPrice,
-      this.description,
-      this.marketCap,
-      this.performance,
-      this.prevClosePrice,
-      this.prevCloseChanges,
-      this.prevClosePct,
-      this.estimatedStartDate,
-      this.avgLoss,
-      this.avgPeriod,
-      this.avgReturn,
-      this.sector,
-      this.industry,
-      this.prevCloseDate,
-      this.ceo,
-      this.employees,
-      this.founded,
-      this.headquarters);
+    this.botId,
+    this.botInfo,
+    this.stockInfo,
+    this.price,
+    this.prevCloseAmt,
+    this.prevClosePrice,
+    this.estStopLossPrice,
+    this.estTakeProfitPrice,
+    this.prevClosePct,
+    this.estStopLossPct,
+    this.estTakeProfitPct,
+    this.prevCloseDate,
+    this.startDate,
+    this.estEndDate,
+    this.performance,
+    this.botDuration,
+    this.marketCap,
+  );
 
   String get formattedStartDate =>
-      formatDateTimeAsString(DateTime.parse(estimatedStartDate));
+      formatDateTimeAsString(DateTime.parse(startDate));
 
   String format(DateTime sourceDateTime) {
     try {
@@ -131,74 +92,100 @@ class BotDetailModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$BotDetailModelToJson(this);
 
-  String get avgReturnString {
-    double avgReturnDouble = checkDouble(avgReturn);
-    return (avgReturnDouble > 0) ? '+$avgReturnDouble%' : 'NA';
-  }
-
-  String get avgLossString {
-    double avgLossDouble = checkDouble(avgLoss);
-    return (avgLossDouble > 0) ? '+$avgLossDouble%' : 'NA';
-  }
-
-  String get avgPeriodString {
-    double avgPeriodString = checkDouble(avgPeriod);
-    return (avgPeriodString > 0) ? '$avgPeriodString' : 'NA';
-  }
-
   @override
   List<Object?> get props => [
-        bot,
-        symbol,
-        ticker,
-        tickerName,
-        chineseName,
-        traditionalName,
+        botId,
+        botInfo,
+        stockInfo,
         price,
-        estimatedExpiredDate,
-        estimatedTakeProfitPct,
-        estimatedTakeProfitPrice,
-        estimatedStopLossPct,
-        estimatedStopLossPrice,
-        description,
-        marketCap,
-        performance,
+        prevCloseAmt,
         prevClosePrice,
-        prevCloseChanges,
+        estStopLossPrice,
+        estTakeProfitPrice,
         prevClosePct,
-        estimatedStartDate,
-        avgPeriod,
-        avgLoss,
-        avgReturn,
-        sector,
-        industry,
+        estStopLossPct,
+        estTakeProfitPct,
         prevCloseDate,
-        ceo,
-        employees,
-        founded,
-        headquarters,
+        startDate,
+        estEndDate,
+        performance,
+        botDuration,
+        marketCap,
       ];
 }
 
 @JsonSerializable()
-class BotModel extends Equatable {
-  @JsonKey(name: 'bot_id')
-  final String botId;
-  final String duration;
+class BotInfo extends Equatable {
+  @JsonKey(name: 'bot_type')
+  final String botType;
   @JsonKey(name: 'bot_name')
   final String botName;
   @JsonKey(name: 'bot_description')
   final BotDescriptionModel botDescription;
 
-  const BotModel(this.botId, this.duration, this.botName, this.botDescription);
+  const BotInfo(this.botType, this.botName, this.botDescription);
 
-  factory BotModel.fromJson(Map<String, dynamic> json) =>
-      _$BotModelFromJson(json);
+  factory BotInfo.fromJson(Map<String, dynamic> json) =>
+      _$BotInfoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BotModelToJson(this);
+  Map<String, dynamic> toJson() => _$BotInfoToJson(this);
 
   @override
-  List<Object?> get props => [botId, duration, botName];
+  List<Object?> get props => [botDescription, botType, botName];
+}
+
+@JsonSerializable()
+class StockInfo extends Equatable {
+  final String symbol;
+  final String ticker;
+  @JsonKey(name: 'ticker_name')
+  final String tickerName;
+  @JsonKey(name: 'chinese_name')
+  final String chineseName;
+  @JsonKey(name: 'traditional_name')
+  final String traditionalName;
+  final String description;
+  final String sector;
+  final String industry;
+  final String ceo;
+  final int employees;
+  final String headquarter;
+  final String founded;
+
+  const StockInfo(
+      this.symbol,
+      this.ticker,
+      this.tickerName,
+      this.chineseName,
+      this.traditionalName,
+      this.description,
+      this.sector,
+      this.industry,
+      this.ceo,
+      this.employees,
+      this.headquarter,
+      this.founded);
+
+  factory StockInfo.fromJson(Map<String, dynamic> json) =>
+      _$StockInfoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$StockInfoToJson(this);
+
+  @override
+  List<Object?> get props => [
+        symbol,
+        ticker,
+        tickerName,
+        chineseName,
+        traditionalName,
+        description,
+        sector,
+        industry,
+        ceo,
+        employees,
+        headquarter,
+        founded
+      ];
 }
 
 @JsonSerializable()
@@ -216,19 +203,4 @@ class BotDescriptionModel extends Equatable {
 
   @override
   List<Object?> get props => [detail, suited, works];
-}
-
-@JsonSerializable()
-class PerformanceModel extends Equatable {
-  final List<BotRecommendationChartModel>? data;
-
-  const PerformanceModel(this.data);
-
-  factory PerformanceModel.fromJson(Map<String, dynamic> json) =>
-      _$PerformanceModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PerformanceModelToJson(this);
-
-  @override
-  List<Object?> get props => [data];
 }

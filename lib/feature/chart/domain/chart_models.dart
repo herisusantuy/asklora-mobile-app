@@ -7,7 +7,7 @@ abstract class ChartDataSet extends Equatable {
   final DateTime date;
   final double price;
   final double hedgeShare;
-  final double currentPnlRet;
+  final double? currentPnlRet;
 
   const ChartDataSet(
     this.date,

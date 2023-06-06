@@ -6,7 +6,7 @@ class BotRecommendationChartModel extends ChartDataSet {
       : super(
             DateTime.parse(json['date']),
             checkDouble(json['price']),
-            checkDouble(json['hedge_share']),
-            checkDouble(json['current_pnl_ret']),
+            checkDouble(json['hedge_share'] ?? 0),
+            checkDouble(json['pnl_amt'] ?? 0),
             index: json['i'] ?? 0);
 }

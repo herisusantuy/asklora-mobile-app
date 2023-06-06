@@ -6,7 +6,7 @@ import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../domain/bot_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../domain/orders/bot_active_order_model.dart';
-import '../domain/orders/bot_order_response.dart';
+import '../domain/orders/create_order_response.dart';
 import '../repository/bot_stock_repository.dart';
 
 part 'bot_stock_event.dart';

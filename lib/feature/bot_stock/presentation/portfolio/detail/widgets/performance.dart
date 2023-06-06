@@ -93,10 +93,10 @@ class Performance extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomTextNew(
             S.of(context).portfolioDetailChartCaption(
-                '${botType.upperCaseName} ${botActiveOrderDetailModel.tickerDetail.ticker}',
+                '${botType.upperCaseName} ${botActiveOrderDetailModel.stockInfo.ticker}',
                 botActiveOrderDetailModel.spotDate,
-                botActiveOrderDetailModel.expireDate,
-                botActiveOrderDetailModel.botDetail.duration),
+                botActiveOrderDetailModel.expireDateStr,
+                botActiveOrderDetailModel.botDuration),
             style: AskLoraTextStyles.body4),
       );
     } else {

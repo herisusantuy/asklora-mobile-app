@@ -8,86 +8,90 @@ part of 'bot_detail_model.dart';
 
 BotDetailModel _$BotDetailModelFromJson(Map<String, dynamic> json) =>
     BotDetailModel(
-      BotModel.fromJson(json['bot'] as Map<String, dynamic>),
-      json['symbol'] as String,
-      json['ticker'] as String,
-      json['ticker_name'] as String,
-      json['chinese_name'] as String,
-      json['traditional_name'] as String,
+      json['bot_id'] as String,
+      BotInfo.fromJson(json['bot_info'] as Map<String, dynamic>),
+      StockInfo.fromJson(json['stock_info'] as Map<String, dynamic>),
       (json['price'] as num).toDouble(),
-      json['estimated_expired_date'] as String,
-      (json['estimated_take_profit_pct'] as num).toDouble(),
-      (json['estimated_take_profit_price'] as num).toDouble(),
-      (json['estimated_stop_loss_pct'] as num).toDouble(),
-      (json['estimated_stop_loss_price'] as num).toDouble(),
-      json['description'] as String,
-      json['market_cap'] as String?,
+      (json['prev_close_amt'] as num).toDouble(),
+      (json['prev_close_price'] as num).toDouble(),
+      (json['est_stop_loss_price'] as num).toDouble(),
+      (json['est_take_profit_price'] as num).toDouble(),
+      (json['prev_close_pct'] as num).toDouble(),
+      (json['est_stop_loss_pct'] as num).toDouble(),
+      (json['est_take_profit_pct'] as num).toDouble(),
+      json['prev_close_date'] as String,
+      json['start_date'] as String,
+      json['est_end_date'] as String,
       (json['performance'] as List<dynamic>)
           .map((e) =>
               BotRecommendationChartModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['prev_close_price'] as num).toDouble(),
-      (json['prev_close_changes'] as num).toDouble(),
-      (json['prev_close_pct'] as num).toDouble(),
-      json['estimated_start_date'] as String,
-      json['avg_loss'],
-      json['avg_period'],
-      json['avg_return'],
-      json['sector'] as String,
-      json['industry'] as String,
-      json['prev_close_date'] as String,
-      json['ceo'] as String,
-      json['employees'] as int,
-      json['founded'] as String,
-      json['headquarters'] as String,
+      json['bot_duration'] as String,
+      json['market_cap'] as String,
     );
 
 Map<String, dynamic> _$BotDetailModelToJson(BotDetailModel instance) =>
     <String, dynamic>{
-      'bot': instance.bot,
-      'symbol': instance.symbol,
-      'ticker': instance.ticker,
-      'ticker_name': instance.tickerName,
-      'chinese_name': instance.chineseName,
-      'traditional_name': instance.traditionalName,
+      'bot_id': instance.botId,
+      'bot_info': instance.botInfo,
+      'stock_info': instance.stockInfo,
       'price': instance.price,
-      'estimated_expired_date': instance.estimatedExpiredDate,
-      'estimated_take_profit_pct': instance.estimatedTakeProfitPct,
-      'estimated_take_profit_price': instance.estimatedTakeProfitPrice,
-      'estimated_stop_loss_pct': instance.estimatedStopLossPct,
-      'estimated_stop_loss_price': instance.estimatedStopLossPrice,
-      'description': instance.description,
-      'market_cap': instance.marketCap,
-      'performance': instance.performance,
+      'prev_close_amt': instance.prevCloseAmt,
       'prev_close_price': instance.prevClosePrice,
-      'prev_close_date': instance.prevCloseDate,
-      'estimated_start_date': instance.estimatedStartDate,
-      'prev_close_changes': instance.prevCloseChanges,
+      'est_stop_loss_price': instance.estStopLossPrice,
+      'est_take_profit_price': instance.estTakeProfitPrice,
       'prev_close_pct': instance.prevClosePct,
-      'avg_return': instance.avgReturn,
-      'avg_loss': instance.avgLoss,
-      'avg_period': instance.avgPeriod,
-      'sector': instance.sector,
-      'industry': instance.industry,
-      'ceo': instance.ceo,
-      'employees': instance.employees,
-      'founded': instance.founded,
-      'headquarters': instance.headquarters,
+      'est_stop_loss_pct': instance.estStopLossPct,
+      'est_take_profit_pct': instance.estTakeProfitPct,
+      'prev_close_date': instance.prevCloseDate,
+      'start_date': instance.startDate,
+      'est_end_date': instance.estEndDate,
+      'performance': instance.performance,
+      'bot_duration': instance.botDuration,
+      'market_cap': instance.marketCap,
     };
 
-BotModel _$BotModelFromJson(Map<String, dynamic> json) => BotModel(
-      json['bot_id'] as String,
-      json['duration'] as String,
+BotInfo _$BotInfoFromJson(Map<String, dynamic> json) => BotInfo(
+      json['bot_type'] as String,
       json['bot_name'] as String,
       BotDescriptionModel.fromJson(
           json['bot_description'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$BotModelToJson(BotModel instance) => <String, dynamic>{
-      'bot_id': instance.botId,
-      'duration': instance.duration,
+Map<String, dynamic> _$BotInfoToJson(BotInfo instance) => <String, dynamic>{
+      'bot_type': instance.botType,
       'bot_name': instance.botName,
       'bot_description': instance.botDescription,
+    };
+
+StockInfo _$StockInfoFromJson(Map<String, dynamic> json) => StockInfo(
+      json['symbol'] as String,
+      json['ticker'] as String,
+      json['ticker_name'] as String,
+      json['chinese_name'] as String,
+      json['traditional_name'] as String,
+      json['description'] as String,
+      json['sector'] as String,
+      json['industry'] as String,
+      json['ceo'] as String,
+      json['employees'] as int,
+      json['headquarter'] as String,
+      json['founded'] as String,
+    );
+
+Map<String, dynamic> _$StockInfoToJson(StockInfo instance) => <String, dynamic>{
+      'symbol': instance.symbol,
+      'ticker': instance.ticker,
+      'ticker_name': instance.tickerName,
+      'chinese_name': instance.chineseName,
+      'traditional_name': instance.traditionalName,
+      'description': instance.description,
+      'sector': instance.sector,
+      'industry': instance.industry,
+      'ceo': instance.ceo,
+      'employees': instance.employees,
+      'headquarter': instance.headquarter,
+      'founded': instance.founded,
     };
 
 BotDescriptionModel _$BotDescriptionModelFromJson(Map<String, dynamic> json) =>
@@ -103,17 +107,4 @@ Map<String, dynamic> _$BotDescriptionModelToJson(
       'detail': instance.detail,
       'suited': instance.suited,
       'works': instance.works,
-    };
-
-PerformanceModel _$PerformanceModelFromJson(Map<String, dynamic> json) =>
-    PerformanceModel(
-      (json['data'] as List<dynamic>?)
-          ?.map((e) =>
-              BotRecommendationChartModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$PerformanceModelToJson(PerformanceModel instance) =>
-    <String, dynamic>{
-      'data': instance.data,
     };

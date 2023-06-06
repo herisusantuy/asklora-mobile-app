@@ -1,7 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/create_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -24,8 +24,7 @@ void main() async {
         BaseResponse.complete(defaultBotRecommendation);
 
     final BaseResponse<BotOrderResponse> botCreateOrderSuccessResponse =
-        BaseResponse.complete(
-            const BotOrderResponse(botOrder: '', botAction: ''));
+        BaseResponse.complete(BotOrderResponse(botOrder: '', botAction: ''));
     final BaseResponse<BotOrderResponse> botCreateOrderFailedResponse =
         BaseResponse.error();
 

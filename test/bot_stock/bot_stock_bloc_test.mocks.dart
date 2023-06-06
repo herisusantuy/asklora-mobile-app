@@ -16,7 +16,7 @@ import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_or
     as _i10;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart'
     as _i9;
-import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart'
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/create_order_response.dart'
     as _i11;
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart'
     as _i3;
