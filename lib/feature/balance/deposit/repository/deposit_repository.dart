@@ -5,8 +5,6 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 
 import '../../../../../../core/domain/base_response.dart';
-import '../../../../core/utils/feature_flags.dart';
-import '../../../../mock/mock_data.dart';
 import '../domain/deposit_api_client.dart';
 import '../domain/deposit_request.dart';
 import '../domain/deposit_response.dart';
@@ -18,23 +16,14 @@ class DepositRepository {
     required double depositAmount,
     required List<PlatformFile> platformFiles,
   }) async {
-    if (FeatureFlags.isDemoEnable) {
-      ///MOCK
-      await Future.delayed(const Duration(seconds: 1));
-      MockData().saveDeposit(depositAmount);
-      return BaseResponse.complete(const DepositResponse('Deposit success'));
-    } else {
-      ///REAL
-      List<ProofFile> proofFiles = [];
-      for (var element in platformFiles) {
-        final bytes = File(element.path!).readAsBytesSync();
-        proofFiles
-            .add(ProofFile('data:image/png;base64,${base64Encode(bytes)}'));
-      }
-      var response = await _depositApiClient
-          .submitDeposit(DepositRequest(depositAmount, proofFiles));
-
-      return BaseResponse.complete(DepositResponse.fromJson(response.data));
+    List<ProofFile> proofFiles = [];
+    for (var element in platformFiles) {
+      final bytes = File(element.path!).readAsBytesSync();
+      proofFiles.add(ProofFile('data:image/png;base64,${base64Encode(bytes)}'));
     }
+    var response = await _depositApiClient
+        .submitDeposit(DepositRequest(depositAmount, proofFiles));
+
+    return BaseResponse.complete(DepositResponse.fromJson(response.data));
   }
 }

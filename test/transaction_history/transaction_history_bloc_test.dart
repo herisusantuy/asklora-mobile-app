@@ -3,7 +3,7 @@ import 'package:asklora_mobile_app/feature/transaction_history/bloc/transaction_
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_history_model.dart';
-import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart';
+import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -11,10 +11,10 @@ import 'package:mockito/mockito.dart';
 
 import 'transaction_history_bloc_test.mocks.dart';
 
-@GenerateMocks([TransactionHistoryRepository])
+@GenerateMocks([TransactionRepository])
 void main() async {
   group('Transaction History Bloc Tests', () {
-    late MockTransactionHistoryRepository transactionHistoryRepository;
+    late MockTransactionRepository transactionRepository;
     late TransactionHistoryBloc transactionHistoryBloc;
 
     final BaseResponse<List<GroupedTransactionModel>>
@@ -87,12 +87,12 @@ void main() async {
         BaseResponse.error();
 
     setUpAll(() async {
-      transactionHistoryRepository = MockTransactionHistoryRepository();
+      transactionRepository = MockTransactionRepository();
     });
 
     setUp(() async {
       transactionHistoryBloc = TransactionHistoryBloc(
-          transactionHistoryRepository: transactionHistoryRepository);
+          transactionHistoryRepository: transactionRepository);
     });
 
     test('Transaction History Bloc init state response should be default one',
@@ -104,7 +104,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'fetching all transaction history',
         build: () {
-          when(transactionHistoryRepository.fetchAllTransactionsHistory())
+          when(transactionRepository.fetchAllTransactionsHistory())
               .thenAnswer((_) => Future.value(allTransactionSuccessResponse));
           return transactionHistoryBloc;
         },
@@ -120,7 +120,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed fetching all transaction history',
         build: () {
-          when(transactionHistoryRepository.fetchAllTransactionsHistory())
+          when(transactionRepository.fetchAllTransactionsHistory())
               .thenAnswer((_) => Future.value(errorResponse));
           return transactionHistoryBloc;
         },
@@ -135,7 +135,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'fetching bot transaction history',
         build: () {
-          when(transactionHistoryRepository.fetchBotTransactionsHistory())
+          when(transactionRepository.fetchBotTransactionsHistory())
               .thenAnswer((_) => Future.value(botTransactionSuccessResponse));
           return transactionHistoryBloc;
         },
@@ -151,7 +151,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed fetching bot transaction history',
         build: () {
-          when(transactionHistoryRepository.fetchBotTransactionsHistory())
+          when(transactionRepository.fetchBotTransactionsHistory())
               .thenAnswer((_) => Future.value(errorResponse));
           return transactionHistoryBloc;
         },
@@ -166,7 +166,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'fetching transfer transaction history',
         build: () {
-          when(transactionHistoryRepository.fetchTransferTransactionsHistory())
+          when(transactionRepository.fetchTransferTransactionsHistory())
               .thenAnswer(
                   (_) => Future.value(transferTransactionSuccessResponse));
           return transactionHistoryBloc;
@@ -184,7 +184,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed fetching transfer transaction history',
         build: () {
-          when(transactionHistoryRepository.fetchTransferTransactionsHistory())
+          when(transactionRepository.fetchTransferTransactionsHistory())
               .thenAnswer((_) => Future.value(errorResponse));
           return transactionHistoryBloc;
         },

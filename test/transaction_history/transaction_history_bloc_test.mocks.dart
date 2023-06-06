@@ -8,14 +8,16 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_model.dart'
+    as _i8;
+import 'package:asklora_mobile_app/core/repository/transaction_repository.dart'
+    as _i3;
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart'
     as _i7;
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_history_model.dart'
     as _i6;
-import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart'
-    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -40,12 +42,12 @@ class _FakeBaseResponse_0<T> extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [TransactionHistoryRepository].
+/// A class which mocks [TransactionRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTransactionHistoryRepository extends _i1.Mock
-    implements _i3.TransactionHistoryRepository {
-  MockTransactionHistoryRepository() {
+class MockTransactionRepository extends _i1.Mock
+    implements _i3.TransactionRepository {
+  MockTransactionRepository() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -129,4 +131,21 @@ class MockTransactionHistoryRepository extends _i1.Mock
             )),
           ) as _i4.Future<
               _i2.BaseResponse<_i7.BotDetailTransactionHistoryResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i8.TransactionBalanceModel>> fetchBalance() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchBalance,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i8.TransactionBalanceModel>>.value(
+                _FakeBaseResponse_0<_i8.TransactionBalanceModel>(
+          this,
+          Invocation.method(
+            #fetchBalance,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i8.TransactionBalanceModel>>);
 }

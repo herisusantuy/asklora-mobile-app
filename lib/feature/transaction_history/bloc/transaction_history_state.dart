@@ -21,18 +21,17 @@ class TransactionHistoryState extends Equatable {
     ];
   }
 
-  TransactionHistoryState copyWith({
-    BaseResponse<List<GroupedTransactionModel>>? allTransactionsResponse,
-    BaseResponse<List<GroupedTransactionModel>>? botTransactionsResponse,
-    BaseResponse<List<GroupedTransactionModel>>? transferTransactionsResponse,
-  }) {
+  TransactionHistoryState copyWith(
+      {BaseResponse<List<GroupedTransactionModel>>? allTransactionsResponse,
+      BaseResponse<List<GroupedTransactionModel>>? botTransactionsResponse,
+      BaseResponse<List<GroupedTransactionModel>>?
+          transferTransactionsResponse}) {
     return TransactionHistoryState(
-      allTransactionsResponse:
-          allTransactionsResponse ?? this.allTransactionsResponse,
-      botTransactionsResponse:
-          botTransactionsResponse ?? this.botTransactionsResponse,
-      transferTransactionsResponse:
-          transferTransactionsResponse ?? this.transferTransactionsResponse,
-    );
+        allTransactionsResponse:
+            allTransactionsResponse ?? this.allTransactionsResponse,
+        botTransactionsResponse:
+            botTransactionsResponse ?? this.botTransactionsResponse,
+        transferTransactionsResponse:
+            transferTransactionsResponse ?? this.transferTransactionsResponse);
   }
 }

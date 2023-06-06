@@ -4,7 +4,7 @@ import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/grouped_activities_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_model.dart';
-import 'package:asklora_mobile_app/feature/transaction_history/repository/transaction_history_repository.dart';
+import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -12,10 +12,10 @@ import 'package:mockito/mockito.dart';
 
 import 'transaction_history_bloc_test.mocks.dart';
 
-@GenerateMocks([TransactionHistoryRepository])
+@GenerateMocks([TransactionRepository])
 void main() async {
   group('Bot Transaction History Detail Bloc Tests', () {
-    late MockTransactionHistoryRepository transactionHistoryRepository;
+    late MockTransactionRepository transactionRepository;
     late BotTransactionHistoryDetailBloc botTransactionHistoryDetailBloc;
 
     final BaseResponse<BotDetailTransactionHistoryResponse> successResponse =
@@ -127,12 +127,12 @@ void main() async {
         BaseResponse.error();
 
     setUpAll(() async {
-      transactionHistoryRepository = MockTransactionHistoryRepository();
+      transactionRepository = MockTransactionRepository();
     });
 
     setUp(() async {
       botTransactionHistoryDetailBloc = BotTransactionHistoryDetailBloc(
-          transactionHistoryRepository: transactionHistoryRepository);
+          transactionHistoryRepository: transactionRepository);
     });
 
     test(
@@ -146,7 +146,7 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'fetching transaction history detail',
         build: () {
-          when(transactionHistoryRepository.fetchBotTransactionsDetail('123'))
+          when(transactionRepository.fetchBotTransactionsDetail('123'))
               .thenAnswer((_) => Future.value(successResponse));
           return botTransactionHistoryDetailBloc;
         },
@@ -162,7 +162,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed fetching transaction history detail',
         build: () {
-          when(transactionHistoryRepository.fetchBotTransactionsDetail('123'))
+          when(transactionRepository.fetchBotTransactionsDetail('123'))
               .thenAnswer((_) => Future.value(errorResponse));
           return botTransactionHistoryDetailBloc;
         },

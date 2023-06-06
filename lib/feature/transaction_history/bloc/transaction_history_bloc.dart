@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/domain/base_response.dart';
 import '../domain/grouped_transaction_model.dart';
-import '../repository/transaction_history_repository.dart';
+import '../../../core/repository/transaction_repository.dart';
 
 part 'transaction_history_event.dart';
 
@@ -11,7 +12,7 @@ part 'transaction_history_state.dart';
 class TransactionHistoryBloc
     extends Bloc<TransactionHistoryEvent, TransactionHistoryState> {
   TransactionHistoryBloc(
-      {required TransactionHistoryRepository transactionHistoryRepository})
+      {required TransactionRepository transactionHistoryRepository})
       : _transactionHistoryRepository = transactionHistoryRepository,
         super(const TransactionHistoryState()) {
     on<FetchAllTransaction>(_onFetchAllTransaction);
@@ -19,7 +20,7 @@ class TransactionHistoryBloc
     on<FetchTransferTransaction>(_onFetchTransferTransaction);
   }
 
-  final TransactionHistoryRepository _transactionHistoryRepository;
+  final TransactionRepository _transactionHistoryRepository;
 
   _onFetchAllTransaction(
       FetchAllTransaction event, Emitter<TransactionHistoryState> emit) async {

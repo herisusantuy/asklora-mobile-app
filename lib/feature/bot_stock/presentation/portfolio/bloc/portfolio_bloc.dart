@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/bloc_transformer/restartable.dart';
 import '../../../../../core/utils/currency_enum.dart';
+import '../../../../../core/domain/transaction/transaction_balance_model.dart';
+import '../../../../../core/repository/transaction_repository.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../domain/orders/bot_order_response.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_utils.dart';
-import '../domain/portfolio_response.dart';
-import '../repository/portfolio_repository.dart';
 
 part 'portfolio_event.dart';
 
@@ -17,15 +17,14 @@ part 'portfolio_state.dart';
 
 class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   PortfolioBloc(
-      {required PortfolioRepository portfolioRepository,
-      required BotStockRepository botStockRepository})
-      : _portfolioRepository = portfolioRepository,
-        _botStockRepository = botStockRepository,
+      {required BotStockRepository botStockRepository,
+      required TransactionRepository transactionHistoryRepository})
+      : _botStockRepository = botStockRepository,
+        _transactionHistoryRepository = transactionHistoryRepository,
         super(const PortfolioState()) {
     on<FetchActiveOrderDetail>(
       _onFetchActiveOrderDetail,
     );
-    on<FetchPortfolio>(_onFetchPortfolio);
     on<FetchActiveOrders>(
       onFetchBotActiveOrders,
       transformer: restartable(),
@@ -36,10 +35,17 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     on<RolloverBotStock>(_onRolloverBotStock);
     on<EndBotStock>(_onEndBotStock);
     on<CancelBotStock>(_onCancelBotStock);
+    on<FetchBalance>(_onFetchBalance);
   }
 
-  final PortfolioRepository _portfolioRepository;
   final BotStockRepository _botStockRepository;
+  final TransactionRepository _transactionHistoryRepository;
+
+  _onFetchBalance(FetchBalance event, Emitter<PortfolioState> emit) async {
+    emit(state.copyWith(transactionBalanceResponse: BaseResponse.loading()));
+    var balance = await _transactionHistoryRepository.fetchBalance();
+    emit(state.copyWith(transactionBalanceResponse: balance));
+  }
 
   onFetchBotActiveOrders(
       FetchActiveOrders event, Emitter<PortfolioState> emit) async {
@@ -65,12 +71,6 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     emit(state.copyWith(botActiveOrderDetailResponse: BaseResponse.loading()));
     var data = await _botStockRepository.activeOrderDetail(event.botOrderId);
     emit(state.copyWith(botActiveOrderDetailResponse: data));
-  }
-
-  _onFetchPortfolio(FetchPortfolio event, Emitter<PortfolioState> emit) async {
-    emit(state.copyWith(portfolioResponse: BaseResponse.loading()));
-    var data = await _portfolioRepository.fetchPortfolio();
-    emit(state.copyWith(portfolioResponse: data));
   }
 
   _onActiveFilterChecked(

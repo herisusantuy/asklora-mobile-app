@@ -1,7 +1,7 @@
 part of '../portfolio_screen.dart';
 
 class PortfolioBalance extends StatelessWidget {
-  final PortfolioResponse? data;
+  final TransactionBalanceModel? data;
   final CurrencyType currencyType;
 
   const PortfolioBalance(
@@ -30,7 +30,7 @@ class PortfolioBalance extends StatelessWidget {
   }
 
   Widget _totalPortfolioBalance(BuildContext context, CurrencyType currencyType,
-          PortfolioResponse? data) =>
+          TransactionBalanceModel? data) =>
       SafeArea(
         bottom: false,
         child: RoundColoredBox(
@@ -63,7 +63,7 @@ class PortfolioBalance extends StatelessWidget {
                       ),
                       CustomTextNew(
                         style: AskLoraTextStyles.h2,
-                        formatCurrency(currencyType, data?.totalPortfolio),
+                        formatCurrency(currencyType, data?.totalPortfolio ?? 0),
                       ),
                       if (currencyType == CurrencyType.usd)
                         CustomTextNew(
@@ -77,7 +77,7 @@ class PortfolioBalance extends StatelessWidget {
             )),
       );
 
-  Widget _fundingButtons(BuildContext context, PortfolioResponse? data) =>
+  Widget _fundingButtons(BuildContext context, TransactionBalanceModel? data) =>
       Column(
         children: [
           FundingButton(
@@ -102,14 +102,15 @@ class PortfolioBalance extends StatelessWidget {
               disabled:
                   data == null || !(state.response.data?.canTrade ?? false),
               fundingType: FundingType.withdraw,
-              onTap: () => WithdrawalBankDetailScreen.open(context),
+              onTap: () => WithdrawalBankDetailScreen.open(
+                  context, data!.withdrawableBalance),
             ),
           ),
         ],
       );
 
   Widget _portfolioBalanceDetail(BuildContext context,
-          CurrencyType currencyType, PortfolioResponse? data) =>
+          CurrencyType currencyType, TransactionBalanceModel? data) =>
       Expanded(
         child: RoundColoredBox(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -119,14 +120,11 @@ class PortfolioBalance extends StatelessWidget {
                 leftTitle: S
                     .of(context)
                     .portfolioWithdrawableAmount(currencyType.value),
-                leftSubTitle: data?.withdrawableAmount != null
-                    ? (data!.withdrawableAmount).convertToCurrencyDecimal()
-                    : '/',
+                leftSubTitle: data?.withdrawableBalanceStr ?? '/',
                 rightTitle:
                     S.of(context).portfolioBuyingPower(currencyType.value),
                 rightTooltipText: S.of(context).portfolioBuyingPowerToolTip,
-                rightSubTitle:
-                    (data?.buyingPower ?? 0).convertToCurrencyDecimal(),
+                rightSubTitle: data?.buyingPowerStr ?? '/',
                 spaceWidth: 6,
               ),
               const SizedBox(
@@ -136,11 +134,8 @@ class PortfolioBalance extends StatelessWidget {
                 leftTitle:
                     S.of(context).portfolioTotalBotStock(currencyType.value),
                 rightTitle: S.of(context).portfolioTotalPL,
-                leftSubTitle:
-                    (data?.totalBotStockValues ?? 0).convertToCurrencyDecimal(),
-                rightSubTitle: data?.withdrawableAmount != null
-                    ? '${(data!.profit).convertToCurrencyDecimal()}%'
-                    : '/',
+                leftSubTitle: data?.totalBotstockValueStr ?? '/',
+                rightSubTitle: data?.totalPnLStr ?? '/',
                 spaceWidth: 6,
               ),
             ],

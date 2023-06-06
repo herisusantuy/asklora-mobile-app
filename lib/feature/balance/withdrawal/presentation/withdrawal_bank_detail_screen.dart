@@ -11,7 +11,6 @@ import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_messa
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
-import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
@@ -22,8 +21,11 @@ import 'withdrawal_amount/withdrawal_amount_screen.dart';
 
 class WithdrawalBankDetailScreen extends StatelessWidget {
   static const String route = '/withdrawal_bank_detail_screen';
+  final String withdrawableBalance;
 
-  const WithdrawalBankDetailScreen({Key? key}) : super(key: key);
+  const WithdrawalBankDetailScreen(
+      {required this.withdrawableBalance, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
                         state.response.data?.bankAccount != null
                     ? _bottomButton(context)
                     : const SizedBox.shrink(),
-                title: S.of(context).buttonWithdraw.toTitleCase,
+                title: S.of(context).buttonWithdraw,
               ),
             ),
           );
@@ -120,12 +122,16 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
         color: AskLoraColors.primaryGreen,
       );
 
-  Widget _bottomButton(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 30, bottom: 30),
-        child: PrimaryButton(
-            label: S.of(context).buttonWithdraw,
-            onTap: () => WithdrawalAmountScreen.open(context)),
-      );
+  Widget _bottomButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 30, bottom: 30),
+      child: PrimaryButton(
+        label: S.of(context).buttonWithdraw,
+        onTap: () => WithdrawalAmountScreen.open(context, withdrawableBalance),
+      ),
+    );
+  }
 
-  static void open(BuildContext context) => Navigator.pushNamed(context, route);
+  static void open(BuildContext context, String withdrawableBalance) =>
+      Navigator.pushNamed(context, route, arguments: withdrawableBalance);
 }

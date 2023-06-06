@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/utils/date_utils.dart';
 import '../../../domain/grouped_model.dart';
-import '../../../repository/transaction_history_repository.dart';
+import '../../../../../core/repository/transaction_repository.dart';
 import '../domain/bot_activities_transaction_history_model.dart';
 import '../domain/bot_detail_transaction_history_response.dart';
 import '../domain/grouped_activities_model.dart';
@@ -15,13 +15,13 @@ part 'bot_transaction_history_detail_state.dart';
 class BotTransactionHistoryDetailBloc extends Bloc<
     BotTransactionHistoryDetailEvent, BotTransactionHistoryDetailState> {
   BotTransactionHistoryDetailBloc(
-      {required TransactionHistoryRepository transactionHistoryRepository})
+      {required TransactionRepository transactionHistoryRepository})
       : _transactionHistoryRepository = transactionHistoryRepository,
         super(const BotTransactionHistoryDetailState()) {
     on<FetchBotTransactionDetail>(_onFetchBotTransactionDetail);
   }
 
-  final TransactionHistoryRepository _transactionHistoryRepository;
+  final TransactionRepository _transactionHistoryRepository;
 
   _onFetchBotTransactionDetail(FetchBotTransactionDetail event,
       Emitter<BotTransactionHistoryDetailState> emit) async {

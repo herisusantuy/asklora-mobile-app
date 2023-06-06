@@ -19,12 +19,13 @@ import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/currency_enum.dart';
-import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
+import '../../../../core/domain/transaction/transaction_balance_model.dart';
+import '../../../../core/repository/transaction_repository.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -32,15 +33,17 @@ import '../widgets/currency_dropdown.dart';
 import '../widgets/pair_column_text.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
-import 'domain/portfolio_response.dart';
-import 'repository/portfolio_repository.dart';
 import 'utils/portfolio_utils.dart';
 import 'widgets/bot_portfolio_pop_up.dart';
 
 part 'widgets/bot_portfolio_card.dart';
+
 part 'widgets/bot_portfolio_card_shimmer.dart';
+
 part 'widgets/bot_portfolio_filter.dart';
+
 part 'widgets/bot_portfolio_list.dart';
+
 part 'widgets/free_bot_badge.dart';
 
 part 'widgets/portfolio_balance.dart';
@@ -55,14 +58,15 @@ class PortfolioScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) {
         PortfolioBloc portfolioBloc = PortfolioBloc(
-            portfolioRepository: PortfolioRepository(),
-            botStockRepository: BotStockRepository());
+          botStockRepository: BotStockRepository(),
+          transactionHistoryRepository: TransactionRepository(),
+        );
 
         ///fetch portfolio when current UserJourney already passed freeBotStock
         if (UserJourney.compareUserJourney(
             context: context, target: UserJourney.freeBotStock)) {
           portfolioBloc.add(const FetchActiveOrders());
-          portfolioBloc.add(FetchPortfolio());
+          portfolioBloc.add(FetchBalance());
         }
         return portfolioBloc;
       },
@@ -72,7 +76,8 @@ class PortfolioScreen extends StatelessWidget {
         enableBackNavigation: false,
         body: BlocBuilder<PortfolioBloc, PortfolioState>(
           buildWhen: (previous, current) =>
-              previous.portfolioResponse != current.portfolioResponse ||
+              previous.transactionBalanceResponse !=
+                  current.transactionBalanceResponse ||
               previous.botActiveOrderResponse !=
                   current.botActiveOrderResponse ||
               previous.currency != current.currency,
@@ -82,7 +87,7 @@ class PortfolioScreen extends StatelessWidget {
               if (UserJourney.compareUserJourney(
                   context: context, target: UserJourney.freeBotStock)) {
                 context.read<PortfolioBloc>().add(const FetchActiveOrders());
-                context.read<PortfolioBloc>().add(FetchPortfolio());
+                context.read<PortfolioBloc>().add(FetchBalance());
               }
               context
                   .read<AccountInformationBloc>()
@@ -96,19 +101,19 @@ class PortfolioScreen extends StatelessWidget {
                 primaryButtonLabel: S.of(context).buttonReloadPage,
                 onPrimaryButtonTap: () {
                   context.read<PortfolioBloc>().add(const FetchActiveOrders());
-                  context.read<PortfolioBloc>().add(FetchPortfolio());
+                  context.read<PortfolioBloc>().add(FetchBalance());
                 },
               ),
-              showPopUp:
-                  (state.botActiveOrderResponse.state == ResponseState.error &&
-                          state.botActiveOrderResponse.errorCode != 403) ||
-                      state.portfolioResponse.state == ResponseState.error,
+              showPopUp: (state.botActiveOrderResponse.state ==
+                          ResponseState.error &&
+                      state.botActiveOrderResponse.errorCode != 403) ||
+                  state.transactionBalanceResponse.state == ResponseState.error,
               content: ListView(
                 padding: AppValues.screenHorizontalPadding
                     .copyWith(top: 15, bottom: 15),
                 children: [
                   PortfolioBalance(
-                    data: state.portfolioResponse.data,
+                    data: state.transactionBalanceResponse.data,
                     currencyType: state.currency,
                   ),
                   const SizedBox(

@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/endpoints.dart';
-import 'bot_transaction_history_request.dart';
+import '../../../feature/transaction_history/domain/bot_transaction_history_request.dart';
 
-class TransactionHistoryApiClient {
+class TransactionApiClient {
   Future<Response> fetchBotTransactionHistory(
           BotTransactionHistoryRequest botTransactionHistoryRequest) async =>
       await AskloraApiClient().post(
@@ -22,4 +22,7 @@ class TransactionHistoryApiClient {
   Future<Response> fetchBotTransactionDetail(String orderId) async =>
       await AskloraApiClient()
           .get(endpoint: '$endpointBotOrderHistory/$orderId');
+
+  Future<Response> fetchBalance() async =>
+      await AskloraApiClient().get(endpoint: endpointBalance);
 }
