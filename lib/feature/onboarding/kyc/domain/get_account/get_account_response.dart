@@ -15,6 +15,8 @@ class GetAccountResponse extends Equatable {
   final int id;
   final String username;
   final String email;
+  @JsonKey(name: 'can_trade')
+  final bool canTrade;
   @JsonKey(name: 'date_joined')
   final String? dateJoined;
   @JsonKey(name: 'bank_account')
@@ -36,6 +38,7 @@ class GetAccountResponse extends Equatable {
       required this.username,
       required this.email,
       required this.dateJoined,
+      required this.canTrade,
       this.bankAccount,
       this.personalInfo,
       this.residenceInfo,

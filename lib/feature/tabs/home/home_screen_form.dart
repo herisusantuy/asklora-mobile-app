@@ -20,12 +20,10 @@ import '../../../generated/l10n.dart';
 import '../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../bot_stock/utils/bot_stock_utils.dart';
 import '../../onboarding/kyc/presentation/kyc_screen.dart';
-import '../../onboarding/kyc/repository/account_repository.dart';
 import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../onboarding/ppi/repository/ppi_response_repository.dart';
-import '../../settings/bloc/account_information/account_information_bloc.dart';
 import '../bloc/tabs_screen_bloc.dart';
 import 'bloc/home_screen_bloc.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
@@ -52,20 +50,10 @@ class HomeScreenForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) =>
-              AccountInformationBloc(accountRepository: AccountRepository())
-                ..add(GetAccountInformation()),
-          lazy: false,
-        ),
-        BlocProvider(
-          create: (context) =>
-              HomeScreenBloc(ppiResponseRepository: PpiResponseRepository())
-                ..add(GetUserSnapShots()),
-        )
-      ],
+    return BlocProvider(
+      create: (context) =>
+          HomeScreenBloc(ppiResponseRepository: PpiResponseRepository())
+            ..add(GetUserSnapShots()),
       child: Container(
         color: Colors.white,
         child: CustomScrollView(

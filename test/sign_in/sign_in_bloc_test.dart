@@ -46,7 +46,8 @@ void main() async {
         username: 'someusername',
         email: 'kk@kk.com',
         isStaff: false,
-        dateJoined: '1990-01-01');
+        dateJoined: '1990-01-01',
+        canTrade: true);
 
     setUpAll(
       () async {

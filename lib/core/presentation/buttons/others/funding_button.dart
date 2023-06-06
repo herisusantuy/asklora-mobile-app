@@ -34,33 +34,36 @@ class FundingButton extends StatelessWidget {
 
     return SizedBox(
       height: 55,
-      child: ElevatedButton(
-          style: _getDefaultButtonStyle,
-          onPressed: () {
-            if (!disabled) {
-              FocusManager.instance.primaryFocus?.unfocus();
-              onTap();
-            }
-          },
-          child: Row(
-            children: [
-              Icon(
-                Icons.monetization_on_outlined,
-                color: foregroundColor,
-                size: 30,
-              ),
-              const SizedBox(
-                width: 3,
-              ),
-              Icon(
-                fundingType == FundingType.fund
-                    ? Icons.arrow_downward_rounded
-                    : Icons.arrow_upward_rounded,
-                color: foregroundColor,
-                size: 30,
-              )
-            ],
-          )),
+      child: AbsorbPointer(
+        absorbing: disabled,
+        child: ElevatedButton(
+            style: _getDefaultButtonStyle,
+            onPressed: () {
+              if (!disabled) {
+                FocusManager.instance.primaryFocus?.unfocus();
+                onTap();
+              }
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.monetization_on_outlined,
+                  color: foregroundColor,
+                  size: 30,
+                ),
+                const SizedBox(
+                  width: 3,
+                ),
+                Icon(
+                  fundingType == FundingType.fund
+                      ? Icons.arrow_downward_rounded
+                      : Icons.arrow_upward_rounded,
+                  color: foregroundColor,
+                  size: 30,
+                )
+              ],
+            )),
+      ),
     );
   }
 

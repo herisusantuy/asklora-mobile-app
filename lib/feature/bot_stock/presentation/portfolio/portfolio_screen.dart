@@ -24,6 +24,7 @@ import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
+import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -33,7 +34,7 @@ import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
 import 'domain/portfolio_response.dart';
 import 'repository/portfolio_repository.dart';
-import 'utils/portfolio_enum.dart';
+import 'utils/portfolio_utils.dart';
 import 'widgets/bot_portfolio_pop_up.dart';
 
 part 'widgets/bot_portfolio_card.dart';
@@ -45,6 +46,8 @@ part 'widgets/bot_portfolio_list.dart';
 part 'widgets/bot_portfolio_filter.dart';
 
 part 'widgets/free_bot_badge.dart';
+
+part 'widgets/portfolio_balance.dart';
 
 class PortfolioScreen extends StatelessWidget {
   static const String route = '/portfolio_screen';
@@ -85,6 +88,9 @@ class PortfolioScreen extends StatelessWidget {
                 context.read<PortfolioBloc>().add(const FetchActiveOrders());
                 context.read<PortfolioBloc>().add(FetchPortfolio());
               }
+              context
+                  .read<AccountInformationBloc>()
+                  .add(GetAccountInformation());
             },
             child: CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
@@ -105,24 +111,12 @@ class PortfolioScreen extends StatelessWidget {
                 padding: AppValues.screenHorizontalPadding
                     .copyWith(top: 15, bottom: 15),
                 children: [
-                  _botStockDetail(context, state),
+                  PortfolioBalance(
+                    data: state.portfolioResponse.data,
+                    currencyType: state.currency,
+                  ),
                   const SizedBox(
                     height: 40,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomTextNew(
-                          S.of(context).portfolioYourBotStock,
-                          style: AskLoraTextStyles.h2
-                              .copyWith(color: AskLoraColors.charcoal),
-                        ),
-                      ),
-                      const BotPortfolioFilter()
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
                   ),
                   BotPortfolioList(
                     userJourney: context.read<AppBloc>().state.userJourney,
@@ -135,145 +129,6 @@ class PortfolioScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _botStockDetail(BuildContext context, PortfolioState state) {
-    final PortfolioResponse? data = state.portfolioResponse.data;
-
-    return Column(
-      children: [
-        SafeArea(
-          bottom: false,
-          child: RoundColoredBox(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              content: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            CustomTextNew(
-                              '${S.of(context).portfolioTotalValue}  -  ',
-                              style: AskLoraTextStyles.body4,
-                            ),
-                            CurrencyDropdown(
-                              initialValue: CurrencyType.hkd,
-                              onChanged: (newValue) {
-                                context
-                                    .read<PortfolioBloc>()
-                                    .add(CurrencyChanged(newValue!));
-                              },
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        CustomTextNew(
-                          style: AskLoraTextStyles.h2,
-                          formatCurrency(state.currency, data?.totalPortfolio),
-                        ),
-                        if (state.currency == CurrencyType.usd)
-                          CustomTextNew(
-                            'Indicative Quote - HKD1 ≈ USD${0.13}',
-                            style: AskLoraTextStyles.body4,
-                          )
-                      ],
-                    ),
-                  ),
-                ],
-              )),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Row(
-          children: [
-            Expanded(
-                child: RoundColoredBox(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    content: Column(
-                      children: [
-                        PairColumnText(
-                          leftTitle: S.of(context).portfolioWithdrawableAmount(
-                              state.currency.value),
-                          leftSubTitle: data?.withdrawableAmount != null
-                              ? (data!.withdrawableAmount)
-                                  .convertToCurrencyDecimal()
-                              : '/',
-                          rightTitle: S
-                              .of(context)
-                              .portfolioBuyingPower(state.currency.value),
-                          rightTooltipText:
-                              S.of(context).portfolioBuyingPowerToolTip,
-                          rightSubTitle: (data?.buyingPower ?? 0)
-                              .convertToCurrencyDecimal(),
-                          spaceWidth: 6,
-                        ),
-                        const SizedBox(
-                          height: 14,
-                        ),
-                        PairColumnText(
-                          leftTitle: S
-                              .of(context)
-                              .portfolioTotalBotStock(state.currency.value),
-                          rightTitle: S.of(context).portfolioTotalPL,
-                          leftSubTitle: (data?.totalBotStockValues ?? 0)
-                              .convertToCurrencyDecimal(),
-                          rightSubTitle: data?.withdrawableAmount != null
-                              ? '${(data!.profit).convertToCurrencyDecimal()}%'
-                              : '/',
-                          spaceWidth: 6,
-                        ),
-                      ],
-                    ))),
-            const SizedBox(
-              width: 10,
-            ),
-            Column(
-              children: [
-                FundingButton(
-                  disabled: data == null,
-                  fundingType: FundingType.fund,
-                  onTap: () {
-                    UserJourney.onAlreadyPassed(
-                        context: context,
-                        target: UserJourney.deposit,
-                        onTrueCallback: () {
-                          DepositWelcomeScreen.open(context: context);
-                        },
-                        onFalseCallback: () => DepositWelcomeScreen.open(
-                            context: context,
-                            depositType: DepositType.firstTime));
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                FundingButton(
-                  disabled: !UserJourney.compareUserJourney(
-                          context: context, target: UserJourney.deposit) ||
-                      data == null,
-                  fundingType: FundingType.withdraw,
-                  onTap: () => WithdrawalBankDetailScreen.open(context),
-                ),
-              ],
-            )
-          ],
-        ),
-      ],
-    );
-  }
-
-  String formatCurrency(CurrencyType currencyType, double? currency) {
-    final value = currency ?? 0;
-    return currencyType == CurrencyType.hkd
-        ? value.convertToCurrencyDecimal()
-        : value.toUsd();
   }
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
