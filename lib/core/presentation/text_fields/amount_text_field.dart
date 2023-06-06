@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../styles/asklora_colors.dart';
+import '../../styles/asklora_text_styles.dart';
 import '../../utils/extensions.dart';
 import '../../utils/formatters/currency_formatter.dart';
+import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 
 class AmountTextField extends StatefulWidget {
@@ -36,7 +38,6 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
   FloatingLabelBehavior floatingLabelBehavior = FloatingLabelBehavior.never;
   String? label;
-  String? prefixText;
   Widget? prefixWidget;
   String? hintText;
 
@@ -59,12 +60,10 @@ class _AmountTextFieldState extends State<AmountTextField> {
       if (controller.text.isEmpty) {
         hintText = widget.hintText;
         label = null;
-        prefixText = widget.prefixText;
         floatingLabelBehavior = FloatingLabelBehavior.never;
       } else {
         hintText = null;
         label = widget.label;
-        prefixText = widget.prefixText;
         floatingLabelBehavior = FloatingLabelBehavior.always;
       }
     });
@@ -97,7 +96,14 @@ class _AmountTextFieldState extends State<AmountTextField> {
                 labelText: label,
                 hintText: hintText,
                 errorText: widget.errorText.isEmpty ? null : widget.errorText,
-                prefixText: prefixText,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.only(left: 17, top: 12),
+                  child: CustomTextNew(
+                    widget.prefixText,
+                    style: AskLoraTextStyles.body1
+                        .copyWith(color: AskLoraColors.gray),
+                  ),
+                ),
                 contentPadding: widget.contentPadding)),
       );
 }
