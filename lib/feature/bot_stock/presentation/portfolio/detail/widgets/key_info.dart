@@ -28,7 +28,7 @@ class KeyInfo extends StatelessWidget {
           ),
           PairColumnText(
               leftTitle: S.of(context).investmentPeriod,
-              leftSubTitle: botActiveOrderDetailModel.botDetail.duration,
+              leftSubTitle: botActiveOrderDetailModel.botDuration,
               rightTitle: S.of(context).portfolioDetailKeyInfoDaysTillExpiry,
               rightSubTitle: botActiveOrderDetailModel.daysToExpireString),
           _spaceBetweenInfo,
@@ -36,7 +36,7 @@ class KeyInfo extends StatelessWidget {
               leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
               leftSubTitle: botActiveOrderDetailModel.spotDate,
               rightTitle: S.of(context).portfolioDetailKeyInfoEndTime,
-              rightSubTitle: botActiveOrderDetailModel.expireDate),
+              rightSubTitle: botActiveOrderDetailModel.expireDateStr),
           _spaceBetweenInfo,
           ..._stopLossMaxProfit(context),
           _spaceBetweenInfo,

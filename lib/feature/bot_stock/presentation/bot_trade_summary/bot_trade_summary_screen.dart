@@ -96,7 +96,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
         child: BotStockForm(
             useHeader: true,
             title:
-                '${botDetailModel.bot.botName} ${botTradeSummaryModel.botRecommendationModel.ticker}',
+                '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.ticker}',
             content: Column(
               children: [
                 RoundColoredBox(
@@ -119,15 +119,15 @@ class BotTradeSummaryScreen extends StatelessWidget {
                           leftSubTitle:
                               '${botTradeSummaryModel.botDetailModel.price}',
                           rightTitle: 'Investment Period',
-                          rightSubTitle: botDetailModel.bot.duration),
+                          rightSubTitle: botDetailModel.botDuration),
                       _spaceBetweenInfo,
                       PairColumnText(
                           leftTitle: 'Start Time',
                           rightTitle: 'End Time',
                           leftSubTitle: botTradeSummaryModel
                               .botDetailModel.formattedStartDate,
-                          rightSubTitle: botTradeSummaryModel
-                              .botDetailModel.estimatedExpiredDate),
+                          rightSubTitle:
+                              botTradeSummaryModel.botDetailModel.estEndDate),
                     ],
                   ),
                   title: isFreeBotTrade
@@ -186,19 +186,18 @@ class BotTradeSummaryScreen extends StatelessWidget {
           leftTitle: botTradeSummaryModel.botType == BotType.plank
               ? 'Estimated Stop Loss %'
               : 'Estimated Max Loss %',
-          leftSubTitle: botTradeSummaryModel.botDetailModel.estimatedStopLossPct
+          leftSubTitle: botTradeSummaryModel.botDetailModel.estStopLossPct
               .convertToCurrencyDecimal(decimalDigits: 2),
           rightTitle: botTradeSummaryModel.botType == BotType.plank
               ? 'Estimated Take Profit %'
               : 'Estimated Max Profit %',
-          rightSubTitle: botTradeSummaryModel
-              .botDetailModel.estimatedTakeProfitPct
+          rightSubTitle: botTradeSummaryModel.botDetailModel.estTakeProfitPct
               .convertToCurrencyDecimal(decimalDigits: 2),
         ),
       ];
 
   String _tradeRequestSuccessMessage() =>
-      '${botTradeSummaryModel.botDetailModel.bot.botName} ${botTradeSummaryModel.botDetailModel.ticker} will be started at ${botTradeSummaryModel.botDetailModel.estimatedStartDate}.';
+      '${botTradeSummaryModel.botDetailModel.botInfo.botName} ${botTradeSummaryModel.botDetailModel.stockInfo.ticker} will be started at ${botTradeSummaryModel.botDetailModel.startDate}.';
 
   static void open(
           {required BuildContext context,

@@ -208,9 +208,9 @@ class _ChartAnimationState extends State<ChartAnimation> {
         Duration(milliseconds: ((factor / currentDistance)).round()), (timer) {
       if (mounted) {
         double? hedgeShare = widget.chartDataSets[animateIndex].hedgeShare;
-        double? profit = widget.chartDataSets[animateIndex].currentPnlRet;
+        double profit = widget.chartDataSets[animateIndex].currentPnlRet ?? 0;
         if (profit != 0) {
-          lastProfit = widget.chartDataSets[animateIndex].currentPnlRet;
+          lastProfit = widget.chartDataSets[animateIndex].currentPnlRet ?? 0;
         }
 
         if (hedgeShare != 0) {

@@ -22,7 +22,7 @@ import '../domain/orders/bot_active_order_detail_model.dart';
 import '../domain/orders/bot_active_order_model.dart';
 import '../domain/orders/bot_active_order_request.dart';
 import '../domain/orders/bot_create_order_request.dart';
-import '../domain/orders/bot_order_response.dart';
+import '../domain/orders/create_order_response.dart';
 import '../domain/orders/bot_order_request.dart';
 import '../utils/bot_stock_utils.dart';
 
@@ -38,6 +38,7 @@ class BotStockRepository {
 
       return BaseResponse.complete(BotDetailModel.fromJson(response.data));
     } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }

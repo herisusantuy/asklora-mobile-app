@@ -33,7 +33,7 @@ class BotCancelButton extends StatelessWidget {
           buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
           label: S.of(context).portfolioDetailButtonCancelBotStock,
           onTap: () => BotStockBottomSheet.cancelBotStockConfirmation(
-              context, botActiveOrderDetailModel.pk),
+              context, botActiveOrderDetailModel.uid),
         ),
       );
 }
