@@ -59,20 +59,19 @@ class FinancialProfileSourceOfWealthScreen extends StatelessWidget {
       ),
       content: _sourceOfWealthList,
       bottomButton: BlocBuilder<SourceOfWealthBloc, SourceOfWealthState>(
-        buildWhen: (previous, current) =>
-            previous.enableNextButton() != current.enableNextButton() ||
-            previous.totalAmount != current.totalAmount,
+        buildWhen: (previous, current) => true,
         builder: (context, state) {
           return ButtonPair(
               disablePrimaryButton: !state.enableNextButton(),
               primaryButtonOnClick: () {
-                if (state.totalAmount == 100) {
+                final validation = state.validate();
+                if (validation.result) {
                   context.read<NavigationBloc<KycPageStep>>().add(
                       const PageChanged(
                           KycPageStep.disclosureAffiliationAssociates));
                 } else {
                   CustomInAppNotification.show(
-                      context, 'Your sources of wealth must add up to 100%');
+                      context, validation.errorMessage);
                 }
               },
               secondaryButtonOnClick: () => context
