@@ -218,7 +218,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
   }
 
   Widget _chartWidget(BuildContext context) {
-    if (botDetailModel?.performance != null) {
+    if (botDetailModel?.performance != null && botDetailModel!.performance.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.only(top: 32.0),
         child: ChartAnimation(chartDataSets: botDetailModel!.performance),
