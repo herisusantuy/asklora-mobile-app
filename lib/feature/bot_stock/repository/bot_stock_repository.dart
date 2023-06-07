@@ -151,10 +151,12 @@ class BotStockRepository {
       var response = await _botStockApiClient.createOrder(BotCreateOrderRequest(
           ticker: botRecommendationModel.ticker,
           botId: botRecommendationModel.botId,
-          spotDate: formatDateTimeAsString(DateTime.now()),
+          // spotDate: formatDateTimeAsString(DateTime.now()),
           investmentAmount: tradeBotStockAmount,
-          price: checkTwoDecimalDouble(botRecommendationModel.latestPrice),
-          isDummy: botRecommendationModel.freeBot));
+          // price: checkDouble(
+          //   botRecommendationModel.latestPrice,
+          // ),
+          /*isDummy: botRecommendationModel.freeBot)*/))  ;
       await removeInvestmentStyleState();
       return BaseResponse.complete(
           BotCreateOrderResponse.fromJson(response.data));
