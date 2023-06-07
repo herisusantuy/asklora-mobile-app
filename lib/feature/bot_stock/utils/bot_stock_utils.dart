@@ -118,8 +118,9 @@ enum BotStatus {
         DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
       botStatus = BotStatus.activeExpireSoon;
     }
+
     ///TODO : THIS IS TEMPORARY FIX, LATER THE ENDPOINT SHOULD ONLY RETURN STATUS AS MENTIONED ABOVE ENUM
-    return botStatus??BotStatus.pending;
+    return botStatus ?? BotStatus.pending;
   }
 
   const BotStatus(this.value, this.name, this.color);

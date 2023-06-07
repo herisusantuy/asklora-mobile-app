@@ -154,6 +154,9 @@ double checkDouble(dynamic value) {
   return 0.0;
 }
 
+double checkTwoDecimalDouble(dynamic value) =>
+    double.parse(checkDouble(value).toStringAsFixed(2));
+
 int checkInt(dynamic value) {
   if (value is int) return value;
   if (value is double) return value.toInt();

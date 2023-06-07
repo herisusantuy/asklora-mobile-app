@@ -153,9 +153,7 @@ class BotStockRepository {
           botId: botRecommendationModel.botId,
           spotDate: formatDateTimeAsString(DateTime.now()),
           investmentAmount: tradeBotStockAmount,
-          price: checkDouble(
-            botRecommendationModel.latestPrice,
-          ),
+          price: checkTwoDecimalDouble(botRecommendationModel.latestPrice),
           isDummy: botRecommendationModel.freeBot));
       await removeInvestmentStyleState();
       return BaseResponse.complete(
