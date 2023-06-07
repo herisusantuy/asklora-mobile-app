@@ -12,7 +12,7 @@ class BotActiveOrderDetailModel {
   @JsonKey(name: 'botstock_value')
   final double botStockValue;
   @JsonKey(name: 'investment_amount')
-  final String investmentAmount;
+  final double investmentAmount;
   @JsonKey(name: 'total_pnl')
   final double totalPnL;
   final List<BotPortfolioChartDataSet> performance;

@@ -2,7 +2,7 @@ import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_model.dart';
 import 'package:asklora_mobile_app/core/utils/currency_enum.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_create_order_response.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
@@ -35,13 +35,22 @@ void main() async {
     final BaseResponse<TransactionBalanceModel>
         transactionBalanceErrorResponse = BaseResponse.error();
 
-    final BaseResponse<BotCreateOrderResponse> boolResponse =
-        BaseResponse.complete(const BotCreateOrderResponse(
-      botOrder: '',
-      botAction: '',
-    ));
+    final BaseResponse<TerminateOrderResponse> terminateOrderResponse =
+        BaseResponse.complete(TerminateOrderResponse('a', botOrder: 'a'));
 
-    final BaseResponse<BotCreateOrderResponse> boolErrorResponse =
+    final BaseResponse<TerminateOrderResponse> terminateOrderErrorResponse =
+        BaseResponse.error();
+
+    final BaseResponse<RolloverOrderResponse> rolloverOrderResponse =
+        BaseResponse.complete(RolloverOrderResponse('a', botOrder: 'a'));
+
+    final BaseResponse<RolloverOrderResponse> rolloverOrderErrorResponse =
+        BaseResponse.error();
+
+    final BaseResponse<BotOrderResponse> botOrderResponse =
+        BaseResponse.complete(RolloverOrderResponse('a', botOrder: 'a'));
+
+    final BaseResponse<BotOrderResponse> botOrderErrorResponse =
         BaseResponse.error();
 
     setUpAll(() async {
@@ -226,13 +235,13 @@ void main() async {
         'terminate bot stock',
         build: () {
           when(botStockRepository.terminateOrder('123'))
-              .thenAnswer((_) => Future.value(boolResponse));
+              .thenAnswer((_) => Future.value(terminateOrderResponse));
           return portfolioBloc;
         },
         act: (bloc) => bloc.add(const EndBotStock('123')),
         expect: () => {
               PortfolioState(endBotStockResponse: BaseResponse.loading()),
-              PortfolioState(endBotStockResponse: boolResponse)
+              PortfolioState(endBotStockResponse: terminateOrderResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
@@ -240,13 +249,13 @@ void main() async {
         'failed terminate bot stock',
         build: () {
           when(botStockRepository.terminateOrder('123'))
-              .thenAnswer((_) => Future.value(boolErrorResponse));
+              .thenAnswer((_) => Future.value(terminateOrderErrorResponse));
           return portfolioBloc;
         },
         act: (bloc) => bloc.add(const EndBotStock('123')),
         expect: () => {
               PortfolioState(endBotStockResponse: BaseResponse.loading()),
-              PortfolioState(endBotStockResponse: boolErrorResponse)
+              PortfolioState(endBotStockResponse: terminateOrderErrorResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
@@ -254,13 +263,13 @@ void main() async {
         'rollover bot stock',
         build: () {
           when(botStockRepository.rolloverOrder('123'))
-              .thenAnswer((_) => Future.value(boolResponse));
+              .thenAnswer((_) => Future.value(rolloverOrderResponse));
           return portfolioBloc;
         },
         act: (bloc) => bloc.add(const RolloverBotStock('123')),
         expect: () => {
               PortfolioState(rolloverBotStockResponse: BaseResponse.loading()),
-              PortfolioState(rolloverBotStockResponse: boolResponse)
+              PortfolioState(rolloverBotStockResponse: rolloverOrderResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
@@ -268,13 +277,14 @@ void main() async {
         'failed rollover bot stock',
         build: () {
           when(botStockRepository.rolloverOrder('123'))
-              .thenAnswer((_) => Future.value(boolErrorResponse));
+              .thenAnswer((_) => Future.value(rolloverOrderErrorResponse));
           return portfolioBloc;
         },
         act: (bloc) => bloc.add(const RolloverBotStock('123')),
         expect: () => {
               PortfolioState(rolloverBotStockResponse: BaseResponse.loading()),
-              PortfolioState(rolloverBotStockResponse: boolErrorResponse)
+              PortfolioState(
+                  rolloverBotStockResponse: rolloverOrderErrorResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
@@ -282,13 +292,13 @@ void main() async {
         'cancel bot stock',
         build: () {
           when(botStockRepository.cancelOrder('123'))
-              .thenAnswer((_) => Future.value(boolResponse));
+              .thenAnswer((_) => Future.value(botOrderResponse));
           return portfolioBloc;
         },
         act: (bloc) => bloc.add(const CancelBotStock('123')),
         expect: () => {
               PortfolioState(cancelBotStockResponse: BaseResponse.loading()),
-              PortfolioState(cancelBotStockResponse: boolResponse)
+              PortfolioState(cancelBotStockResponse: botOrderResponse)
             });
 
     blocTest<PortfolioBloc, PortfolioState>(
@@ -296,13 +306,13 @@ void main() async {
         'cancel bot stock',
         build: () {
           when(botStockRepository.cancelOrder('123'))
-              .thenAnswer((_) => Future.value(boolErrorResponse));
+              .thenAnswer((_) => Future.value(botOrderErrorResponse));
           return portfolioBloc;
         },
         act: (bloc) => bloc.add(const CancelBotStock('123')),
         expect: () => {
               PortfolioState(cancelBotStockResponse: BaseResponse.loading()),
-              PortfolioState(cancelBotStockResponse: boolErrorResponse)
+              PortfolioState(cancelBotStockResponse: botOrderErrorResponse)
             });
 
     tearDown(() => {portfolioBloc.close()});

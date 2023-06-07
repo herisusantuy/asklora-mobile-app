@@ -24,8 +24,8 @@ void main() async {
         BaseResponse.complete(defaultBotRecommendation);
 
     final BaseResponse<BotCreateOrderResponse> botCreateOrderSuccessResponse =
-        BaseResponse.complete(
-            BotCreateOrderResponse(botOrder: '', botAction: ''));
+        BaseResponse.complete(const BotCreateOrderResponse('a', 'b', 'c', true,
+            0, '2023-06-06', 'APPLE', 0, true, '2023-06-06', 'AAOK'));
     final BaseResponse<BotCreateOrderResponse> botCreateOrderFailedResponse =
         BaseResponse.error();
 

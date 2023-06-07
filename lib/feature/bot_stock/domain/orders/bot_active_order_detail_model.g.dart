@@ -12,7 +12,7 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       json['uid'] as String,
       json['name'] as String,
       (json['botstock_value'] as num).toDouble(),
-      json['investment_amount'] as String,
+      (json['investment_amount'] as num).toDouble(),
       (json['total_pnl'] as num).toDouble(),
       (json['performance'] as List<dynamic>)
           .map((e) =>
