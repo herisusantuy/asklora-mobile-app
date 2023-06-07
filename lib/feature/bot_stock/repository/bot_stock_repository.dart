@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 
 import '../../../core/data/remote/base_api_client.dart';
 import '../../../core/domain/base_response.dart';
-import '../../../core/utils/date_utils.dart';
-import '../../../core/utils/extensions.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
 import '../../chart/domain/bot_recommendation_chart_model.dart';
@@ -149,14 +147,15 @@ class BotStockRepository {
       required double tradeBotStockAmount}) async {
     try {
       var response = await _botStockApiClient.createOrder(BotCreateOrderRequest(
-          ticker: botRecommendationModel.ticker,
-          botId: botRecommendationModel.botId,
-          // spotDate: formatDateTimeAsString(DateTime.now()),
-          investmentAmount: tradeBotStockAmount,
-          // price: checkDouble(
-          //   botRecommendationModel.latestPrice,
-          // ),
-          /*isDummy: botRecommendationModel.freeBot)*/))  ;
+        ticker: botRecommendationModel.ticker,
+        botId: botRecommendationModel.botId,
+        // spotDate: formatDateTimeAsString(DateTime.now()),
+        investmentAmount: tradeBotStockAmount,
+        // price: checkDouble(
+        //   botRecommendationModel.latestPrice,
+        // ),
+        /*isDummy: botRecommendationModel.freeBot)*/
+      ));
       await removeInvestmentStyleState();
       return BaseResponse.complete(
           BotCreateOrderResponse.fromJson(response.data));
