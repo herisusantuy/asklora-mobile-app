@@ -10,7 +10,7 @@ class BotActiveOrderDetailModel {
   final String uid;
   final String name;
   @JsonKey(name: 'botstock_value')
-  final double botStockValue;
+  final double? botStockValue;
   @JsonKey(name: 'investment_amount')
   final double investmentAmount;
   @JsonKey(name: 'total_pnl')
@@ -44,7 +44,7 @@ class BotActiveOrderDetailModel {
 
   ///todo : later menyesuaikan endpoint response
   @JsonKey(name: 'current_price')
-  final double currentPrice;
+  final double? currentPrice;
   @JsonKey(name: 'stock_value')
   final double stockValue;
   @JsonKey(name: 'bot_asset_in_stock_pct')
