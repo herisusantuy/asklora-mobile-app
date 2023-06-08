@@ -25,7 +25,7 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       (json['est_max_loss'] as num).toDouble(),
       (json['est_max_profit'] as num).toDouble(),
       json['status'] as String,
-      json['rollover_count'] as int,
+      json['rollover_count'] as int?,
       (json['avg_return_pct'] as num).toDouble(),
       (json['avg_loss_pct'] as num).toDouble(),
       (json['avg_period'] as num).toDouble(),

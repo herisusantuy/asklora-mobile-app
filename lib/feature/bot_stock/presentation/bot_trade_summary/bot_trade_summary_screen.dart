@@ -88,8 +88,11 @@ class BotTradeSummaryScreen extends StatelessWidget {
               ResponseState.error) {
             if (state.createBotOrderResponse.errorCode == 403) {
               BotStockBottomSheet.notYetRegisteredToBroker(context);
+
+              ///TODO : INSUFFICIENT BALANCE ERROR IS SAME 403 THEREFORE WILL BE IMPLEMENTED LATER WHEN GOT NEW ENUM STATUS_CODE
+              //BotStockBottomSheet.insufficientBalance(context);
             } else {
-              BotStockBottomSheet.insufficientBalance(context);
+              BotStockBottomSheet.generalError(context);
             }
           }
         },

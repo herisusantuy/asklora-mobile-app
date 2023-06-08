@@ -24,6 +24,9 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
     List<String> tabs = [
       S.of(context).summary,
       S.of(context).activities,
+
+      ///TODO : SHOULD ONLY SHOW PERFORMANCE WHEN STATUS CLOSED LATER WHEN BOT STATUS IS FIXED
+      S.of(context).performance
     ];
     if (botStatusType == BotStatus.closed) {
       tabs.add(S.of(context).performance);
@@ -35,6 +38,9 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
     List<Widget> tabViews = [
       BotOrderTransactionHistorySummaryScreen(botStatusType: botStatusType),
       const BotOrderTransactionHistoryActivitiesScreen(),
+
+      ///TODO : SHOULD ONLY SHOW PERFORMANCE WHEN STATUS CLOSED LATER WHEN BOT STATUS IS FIXED
+      const BotOrderTransactionHistoryPerformanceScreen()
     ];
     if (botStatusType == BotStatus.closed) {
       tabViews.add(const BotOrderTransactionHistoryPerformanceScreen());

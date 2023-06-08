@@ -39,7 +39,7 @@ class BotActivitiesTransactionHistoryModel extends ChartDataSet {
         side = json['side'],
         invested = json['invested'],
         super(
-            DateTime.parse(formatDateTimeAsString(json['created'])),
+            DateTime.parse(json['created']),
             checkDouble(json['filled_avg_price']),
             json['side'] == 'buy'
                 ? checkDouble(json['filled_qty'])

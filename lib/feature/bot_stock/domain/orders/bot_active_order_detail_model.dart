@@ -30,7 +30,7 @@ class BotActiveOrderDetailModel {
   final double estMaxProfit;
   final String status;
   @JsonKey(name: 'rollover_count')
-  final int rolloverCount;
+  final int? rolloverCount;
   @JsonKey(name: 'avg_return_pct')
   final double avgReturnPct;
   @JsonKey(name: 'avg_loss_pct')
@@ -120,6 +120,9 @@ class BotActiveOrderDetailModel {
           maxLossPct,
           targetProfitPct);
 
+  String get rolloverCountString =>
+      rolloverCount != null ? rolloverCount.toString() : 'NA';
+
   String get investmentAmountString {
     double investmentAmountDouble = checkDouble(investmentAmount);
     return (investmentAmountDouble > 0)
@@ -204,6 +207,7 @@ class BotActiveOrderDetailModel {
 
   String get maxLossPctString =>
       maxLossPct.convertToCurrencyDecimal(decimalDigits: 2);
+
   String get targetProfitPctString =>
       targetProfitPct.convertToCurrencyDecimal(decimalDigits: 2);
 

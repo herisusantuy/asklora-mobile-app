@@ -29,7 +29,7 @@ class BotDetailTransactionHistoryResponse extends Equatable {
   final double? stockValue;
   final String duration;
   @JsonKey(name: 'rollover_count')
-  final int rolloverCount;
+  final int? rolloverCount;
   @JsonKey(name: 'current_pnl_amount')
   final double? currentPnlAmount;
   @JsonKey(name: 'current_pnl_ret')
@@ -101,10 +101,27 @@ class BotDetailTransactionHistoryResponse extends Equatable {
           startDate,
           expireDate);
 
+  String get rolloverCountString =>
+      rolloverCount != null ? rolloverCount.toString() : 'NA';
+
   String get botStockValueString {
     double botStockValueDouble = checkDouble(botStockValue);
     return (botStockValueDouble > 0)
         ? botStockValueDouble.convertToCurrencyDecimal()
+        : '/';
+  }
+
+  String get targetProfitPctString {
+    double targetProfitPctDouble = checkDouble(targetProfitPct);
+    return (targetProfitPctDouble > 0)
+        ? targetProfitPctDouble.convertToCurrencyDecimal(decimalDigits: 2)
+        : '/';
+  }
+
+  String get maxLossPctString {
+    double maxLossPctDouble = checkDouble(maxLossPct).abs();
+    return (maxLossPctDouble > 0)
+        ? maxLossPctDouble.convertToCurrencyDecimal(decimalDigits: 2)
         : '/';
   }
 

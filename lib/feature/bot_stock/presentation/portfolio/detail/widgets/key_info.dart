@@ -45,8 +45,7 @@ class KeyInfo extends StatelessWidget {
               leftSubTitle: botStatus.name,
               rightTitle:
                   S.of(context).portfolioDetailKeyInfoBotStockNumberOfRollover,
-              rightSubTitle:
-                  botActiveOrderDetailModel.rolloverCount.toString()),
+              rightSubTitle: botActiveOrderDetailModel.rolloverCountString),
           const SizedBox(
             height: 40,
           ),

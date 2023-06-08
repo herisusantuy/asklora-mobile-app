@@ -46,6 +46,9 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 28,
+              ),
               _chartWidget(context, data.activities),
               const SizedBox(
                 height: 33,
@@ -60,9 +63,10 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
               PairColumnText(
                   leftTitle: S.of(context).investmentPeriod,
                   leftSubTitle: data.duration,
-                  rightTitle:
-                      S.of(context).portfolioDetailKeyInfoDaysTillExpiry,
-                  rightSubTitle: data.daysToExpireString),
+                  rightTitle: S
+                      .of(context)
+                      .portfolioDetailKeyInfoBotStockNumberOfRollover,
+                  rightSubTitle: data.rolloverCountString),
               _spaceBetweenInfo,
               PairColumnText(
                   leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
@@ -85,11 +89,11 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
         leftTitle: botType == BotType.plank
             ? S.of(context).portfolioDetailKeyInfoEstimatedStopLoss
             : S.of(context).portfolioDetailKeyInfoEstimatedMaxLoss,
-        leftSubTitle: data.maxLossPct.toString(),
+        leftSubTitle: data.maxLossPctString,
         rightTitle: botType == BotType.plank
             ? S.of(context).portfolioDetailKeyInfoEstimatedTakeProfit
             : S.of(context).portfolioDetailKeyInfoEstimatedMaxProfit,
-        rightSubTitle: data.targetProfitPct.toString(),
+        rightSubTitle: data.targetProfitPctString,
       );
 
   Widget _chartWidget(BuildContext context,

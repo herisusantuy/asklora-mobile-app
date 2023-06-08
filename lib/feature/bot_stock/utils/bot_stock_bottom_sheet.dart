@@ -219,4 +219,16 @@ class BotStockBottomSheet {
       onPrimaryButtonTap: () => Navigator.pop(context),
     );
   }
+
+  static generalError(BuildContext context) {
+    ///TODO : IMPLEMENT THE RIGHT COPYWRITING LATER
+    LoraBottomSheet.show(
+      loraMemojiType: LoraMemojiType.lora10,
+      context: context,
+      title: S.of(context).errorGettingInformationTitle,
+      subTitle: S.of(context).errorGettingInformationPortfolioSubTitle,
+      primaryButtonLabel: S.of(context).buttonBack,
+      onPrimaryButtonTap: () => Navigator.pop(context),
+    );
+  }
 }

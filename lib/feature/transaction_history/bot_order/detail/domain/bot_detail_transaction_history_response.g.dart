@@ -29,7 +29,7 @@ BotDetailTransactionHistoryResponse
           (json['botstock_value'] as num?)?.toDouble(),
           (json['stock_value'] as num?)?.toDouble(),
           json['duration'] as String,
-          json['rollover_count'] as int,
+          json['rollover_count'] as int?,
           (json['current_pnl_amount'] as num?)?.toDouble(),
           (json['current_pnl_ret'] as num?)?.toDouble(),
           (json['max_loss_pct'] as num).toDouble(),
