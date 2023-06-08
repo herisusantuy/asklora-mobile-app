@@ -1,7 +1,7 @@
 enum DepositType {
   firstTime(minDeposit: 10000),
-  type1(minDeposit: 3000),
-  type2(minDeposit: 3000);
+  type1(minDeposit: 0),
+  type2(minDeposit: 0);
 
   final double minDeposit;
 

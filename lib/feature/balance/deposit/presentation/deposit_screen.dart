@@ -82,6 +82,9 @@ class DepositScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ..._getSteps,
+                    const SizedBox(
+                      height: 20,
+                    ),
                     DepositNotes(
                       depositType: depositType,
                     )

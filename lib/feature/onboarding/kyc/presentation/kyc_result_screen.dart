@@ -4,8 +4,10 @@ import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
+import '../../../../core/utils/feature_flags.dart';
 import '../../../balance/deposit/presentation/deposit_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
+import '../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../../tabs/tabs_screen.dart';
 
 class KycResultScreen extends StatelessWidget {
@@ -29,10 +31,14 @@ class KycResultScreen extends StatelessWidget {
   }
 
   Widget _bottomButton(BuildContext context) => ButtonPair(
-        primaryButtonOnClick: () => DepositScreen.open(
-            context: context, depositType: DepositType.firstTime),
+        primaryButtonOnClick: () => FeatureFlags.byPassFreeBots
+            ? DepositScreen.open(
+                context: context, depositType: DepositType.firstTime)
+            : GiftBotStockWelcomeScreen.open(context),
         secondaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(context),
-        primaryButtonLabel: 'Deposit Funds',
+        primaryButtonLabel: FeatureFlags.byPassFreeBots
+            ? 'Deposit Funds'
+            : 'Get Free HKD500 Gift Botstock',
         secondaryButtonLabel: 'Maybe Later',
       );
 }
