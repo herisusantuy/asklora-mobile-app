@@ -147,9 +147,9 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
             ///TODO : TEMPORARY FIX TO ALWAYS SHOW CANCEL BUTTON
             //if (botStatus == BotStatus.pending)
-            BotCancelButton(
-              botActiveOrderDetailModel: botActiveOrderDetailModel,
-            ),
+            // BotCancelButton(
+            //   botActiveOrderDetailModel: botActiveOrderDetailModel,
+            // ),
           ],
         ),
       );

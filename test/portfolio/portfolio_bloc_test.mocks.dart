@@ -9,7 +9,7 @@ import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
 import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_model.dart'
-    as _i17;
+    as _i16;
 import 'package:asklora_mobile_app/core/repository/transaction_repository.dart'
     as _i13;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_detail_model.dart'
@@ -31,11 +31,9 @@ import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart'
     as _i7;
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart'
-    as _i16;
+    as _i15;
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart'
     as _i14;
-import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_history_model.dart'
-    as _i15;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -376,17 +374,7 @@ class MockTransactionRepository extends _i1.Mock
           ) as _i4
               .Future<_i2.BaseResponse<List<_i14.GroupedTransactionModel>>>);
   @override
-  List<_i14.GroupedTransactionModel> groupedTransactionModels(
-          List<_i15.TransactionHistoryModel>? transactions) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #groupedTransactionModels,
-          [transactions],
-        ),
-        returnValue: <_i14.GroupedTransactionModel>[],
-      ) as List<_i14.GroupedTransactionModel>);
-  @override
-  _i4.Future<_i2.BaseResponse<_i16.BotDetailTransactionHistoryResponse>>
+  _i4.Future<_i2.BaseResponse<_i15.BotDetailTransactionHistoryResponse>>
       fetchBotTransactionsDetail(String? orderId) => (super.noSuchMethod(
             Invocation.method(
               #fetchBotTransactionsDetail,
@@ -394,8 +382,8 @@ class MockTransactionRepository extends _i1.Mock
             ),
             returnValue: _i4.Future<
                     _i2.BaseResponse<
-                        _i16.BotDetailTransactionHistoryResponse>>.value(
-                _FakeBaseResponse_0<_i16.BotDetailTransactionHistoryResponse>(
+                        _i15.BotDetailTransactionHistoryResponse>>.value(
+                _FakeBaseResponse_0<_i15.BotDetailTransactionHistoryResponse>(
               this,
               Invocation.method(
                 #fetchBotTransactionsDetail,
@@ -403,22 +391,22 @@ class MockTransactionRepository extends _i1.Mock
               ),
             )),
           ) as _i4.Future<
-              _i2.BaseResponse<_i16.BotDetailTransactionHistoryResponse>>);
+              _i2.BaseResponse<_i15.BotDetailTransactionHistoryResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i17.TransactionBalanceModel>> fetchBalance() =>
+  _i4.Future<_i2.BaseResponse<_i16.TransactionBalanceModel>> fetchBalance() =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchBalance,
           [],
         ),
         returnValue:
-            _i4.Future<_i2.BaseResponse<_i17.TransactionBalanceModel>>.value(
-                _FakeBaseResponse_0<_i17.TransactionBalanceModel>(
+            _i4.Future<_i2.BaseResponse<_i16.TransactionBalanceModel>>.value(
+                _FakeBaseResponse_0<_i16.TransactionBalanceModel>(
           this,
           Invocation.method(
             #fetchBalance,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i17.TransactionBalanceModel>>);
+      ) as _i4.Future<_i2.BaseResponse<_i16.TransactionBalanceModel>>);
 }

@@ -14,7 +14,7 @@ class TransactionHistoryModel extends Equatable {
   @JsonKey(name: 'history_type')
   final TransactionHistoryType transactionHistoryType;
   final dynamic id;
-  final String created;
+  final DateTime created;
   final String updated;
   final String title;
   final String status;

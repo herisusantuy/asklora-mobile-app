@@ -19,7 +19,7 @@ class TransactionRepository {
       var transferTransactionHistory =
           await _transactionApiClient.fetchTransferTransactionHistory();
 
-      return BaseResponse.complete(groupedTransactionModels([
+      return BaseResponse.complete(_groupedTransactionModels([
         ...List.from(botTransactionHistory.data
             .map((element) => TransactionHistoryModel.fromJson(element))),
         ...List.from(transferTransactionHistory.data
@@ -35,7 +35,7 @@ class TransactionRepository {
     try {
       var response = await _transactionApiClient.fetchBotTransactionHistory();
 
-      return BaseResponse.complete(groupedTransactionModels(List.from(response
+      return BaseResponse.complete(_groupedTransactionModels(List.from(response
           .data
           .map((element) => TransactionHistoryModel.fromJson(element)))));
     } catch (e) {
@@ -49,7 +49,7 @@ class TransactionRepository {
       var response =
           await _transactionApiClient.fetchTransferTransactionHistory();
 
-      return BaseResponse.complete(groupedTransactionModels(List.from(response
+      return BaseResponse.complete(_groupedTransactionModels(List.from(response
           .data
           .map((element) => TransactionHistoryModel.fromJson(element)))));
     } catch (e) {
@@ -57,7 +57,7 @@ class TransactionRepository {
     }
   }
 
-  List<GroupedTransactionModel> groupedTransactionModels(
+  List<GroupedTransactionModel> _groupedTransactionModels(
       List<TransactionHistoryModel> transactions) {
     List<GroupedTransactionModel> groupedTransactions = [];
     DateTime dateTimeNow = DateTime.now();

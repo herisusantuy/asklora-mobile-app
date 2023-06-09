@@ -54,7 +54,7 @@ class BotActiveOrderDetailModel {
   @JsonKey(name: 'bot_share')
   final double botShare;
   @JsonKey(name: 'current_pnl_ret')
-  final double currentPnlRet;
+  final double? currentPnlRet;
   @JsonKey(name: 'max_loss_pct')
   final double maxLossPct;
   @JsonKey(name: 'target_profit_pct')

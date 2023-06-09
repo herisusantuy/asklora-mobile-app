@@ -19,67 +19,139 @@ void main() async {
 
     final BaseResponse<List<GroupedTransactionModel>>
         allTransactionSuccessResponse = BaseResponse.complete([
-      const GroupedTransactionModel(
+      GroupedTransactionModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-01',
           data: [
-            TransactionHistoryModel('1', TransactionHistoryType.bot,
-                '2023-04-01', '2023-04-01', 'AAPL', 'place', '2000'),
-            TransactionHistoryModel('1', TransactionHistoryType.bot,
-                '2023-04-01', '2023-04-01', 'BMW', 'place', '2500'),
-            TransactionHistoryModel('1', TransactionHistoryType.bot,
-                '2023-04-01', '2023-04-01', 'WITHDRAW', 'success', '2000'),
-            TransactionHistoryModel('1', TransactionHistoryType.bot,
-                '2023-04-01', '2023-04-01', 'WITHDRAW', 'success', '2500'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.bot,
+                DateTime.parse('2023-04-01'),
+                '2023-04-01',
+                'AAPL',
+                'place',
+                '2000'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.bot,
+                DateTime.parse('2023-04-01'),
+                '2023-04-01',
+                'BMW',
+                'place',
+                '2500'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.bot,
+                DateTime.parse('2023-04-01'),
+                '2023-04-01',
+                'WITHDRAW',
+                'success',
+                '2000'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.bot,
+                DateTime.parse('2023-04-01'),
+                '2023-04-01',
+                'WITHDRAW',
+                'success',
+                '2500'),
           ]),
-      const GroupedTransactionModel(
+      GroupedTransactionModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-02',
           data: [
-            TransactionHistoryModel('1', TransactionHistoryType.bot,
-                '2023-04-02', '2023-04-02', 'FORD', 'place', '1000'),
-            TransactionHistoryModel('1', TransactionHistoryType.transfer,
-                '2023-04-02', '2023-04-02', 'DEPOSIT', 'success', '1000'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.bot,
+                DateTime.parse('2023-04-02'),
+                '2023-04-02',
+                'FORD',
+                'place',
+                '1000'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.transfer,
+                DateTime.parse('2023-04-02'),
+                '2023-04-02',
+                'DEPOSIT',
+                'success',
+                '1000'),
           ]),
     ]);
 
     final BaseResponse<List<GroupedTransactionModel>>
         botTransactionSuccessResponse = BaseResponse.complete([
-      const GroupedTransactionModel(
+      GroupedTransactionModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-01',
           data: [
-            TransactionHistoryModel('1', TransactionHistoryType.bot,
-                '2023-04-01', '2023-04-01', 'AAPL', 'place', '2000'),
-            TransactionHistoryModel('1', TransactionHistoryType.bot,
-                '2023-04-01', '2023-04-01', 'BMW', 'place', '2500'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.bot,
+                DateTime.parse('2023-04-01'),
+                '2023-04-01',
+                'AAPL',
+                'place',
+                '2000'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.bot,
+                DateTime.parse('2023-04-01'),
+                '2023-04-01',
+                'BMW',
+                'place',
+                '2500'),
           ]),
-      const GroupedTransactionModel(
+      GroupedTransactionModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-02',
           data: [
-            TransactionHistoryModel('1', TransactionHistoryType.bot,
-                '2023-04-02', '2023-04-02', 'FORD', 'place', '1000'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.bot,
+                DateTime.parse('2023-04-02'),
+                '2023-04-02',
+                'FORD',
+                'place',
+                '1000'),
           ]),
     ]);
 
     final BaseResponse<List<GroupedTransactionModel>>
         transferTransactionSuccessResponse = BaseResponse.complete([
-      const GroupedTransactionModel(
+      GroupedTransactionModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-01',
           data: [
-            TransactionHistoryModel('1', TransactionHistoryType.transfer,
-                '2023-04-01', '2023-04-01', 'WITHDRAW', 'success', '2000'),
-            TransactionHistoryModel('1', TransactionHistoryType.transfer,
-                '2023-04-01', '2023-04-01', 'WITHDRAW', 'success', '2500'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.transfer,
+                DateTime.parse('2023-04-01'),
+                '2023-04-01',
+                'WITHDRAW',
+                'success',
+                '2000'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.transfer,
+                DateTime.parse('2023-04-01'),
+                '2023-04-01',
+                'WITHDRAW',
+                'success',
+                '2500'),
           ]),
-      const GroupedTransactionModel(
+      GroupedTransactionModel(
           groupType: GroupType.others,
           groupTitle: '2023-04-02',
           data: [
-            TransactionHistoryModel('1', TransactionHistoryType.transfer,
-                '2023-04-02', '2023-04-02', 'DEPOSIT', 'success', '1000'),
+            TransactionHistoryModel(
+                '1',
+                TransactionHistoryType.transfer,
+                DateTime.parse('2023-04-02'),
+                '2023-04-02',
+                'DEPOSIT',
+                'success',
+                '1000'),
           ]),
     ]);
 

@@ -36,7 +36,7 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       (json['bot_asset_in_stock_pct'] as num).toDouble(),
       (json['bot_cash_balance'] as num).toDouble(),
       (json['bot_share'] as num).toDouble(),
-      (json['current_pnl_ret'] as num).toDouble(),
+      (json['current_pnl_ret'] as num?)?.toDouble(),
       (json['max_loss_pct'] as num).toDouble(),
       (json['target_profit_pct'] as num).toDouble(),
     );
