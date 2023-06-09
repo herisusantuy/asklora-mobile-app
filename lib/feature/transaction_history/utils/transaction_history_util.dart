@@ -36,3 +36,11 @@ enum TransferStatus {
 
   const TransferStatus(this.value, this.name, this.color);
 }
+
+int compareDateTimeDesc(DateTime? a, DateTime? b) {
+  if (a != null && b != null) {
+    return b.compareTo(a);
+  } else {
+    return 1;
+  }
+}

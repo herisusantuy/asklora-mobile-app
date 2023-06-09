@@ -14,7 +14,7 @@ class TransactionHistoryModel extends Equatable {
   @JsonKey(name: 'history_type')
   final TransactionHistoryType transactionHistoryType;
   final dynamic id;
-  final DateTime created;
+  final String? created;
   final String updated;
   final String title;
   final String status;
@@ -27,6 +27,18 @@ class TransactionHistoryModel extends Equatable {
   final String? timeComplete;
   @JsonKey(name: 'is_dummy')
   final bool isDummy;
+
+  DateTime? get createdDateTimeFormat {
+    if (created != null) {
+      try {
+        return DateTime.parse(created!);
+      } catch (_) {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
 
   const TransactionHistoryModel(
     this.id,

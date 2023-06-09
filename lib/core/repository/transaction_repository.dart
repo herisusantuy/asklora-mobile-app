@@ -1,3 +1,4 @@
+import '../../feature/transaction_history/utils/transaction_history_util.dart';
 import '../domain/base_response.dart';
 import '../utils/date_utils.dart';
 import '../../feature/transaction_history/bot_order/detail/domain/bot_activities_transaction_history_model.dart';
@@ -24,7 +25,8 @@ class TransactionRepository {
             .map((element) => TransactionHistoryModel.fromJson(element))),
         ...List.from(transferTransactionHistory.data
             .map((element) => TransactionHistoryModel.fromJson(element)))
-      ]..sort((a, b) => b.created.compareTo(a.created))));
+      ]..sort((a, b) => compareDateTimeDesc(
+          a.createdDateTimeFormat, b.createdDateTimeFormat))));
     } catch (e) {
       return BaseResponse.error();
     }
