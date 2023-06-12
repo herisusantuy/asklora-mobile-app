@@ -30,12 +30,11 @@ BotDetailTransactionHistoryResponse
           json['bot_duration'] as String,
           json['spot_date'] as String,
           json['expire_date'] as String?,
-          json['days_to_expire'] as int,
           (json['est_max_loss'] as num).toDouble(),
           (json['est_max_profit'] as num).toDouble(),
           json['status'] as String,
           json['rollover_count'] as int,
-          (json['bot_stock_value'] as num).toDouble(),
+          json['bot_stock_value'] as String,
         );
 
 Map<String, dynamic> _$BotDetailTransactionHistoryResponseToJson(
@@ -53,7 +52,6 @@ Map<String, dynamic> _$BotDetailTransactionHistoryResponseToJson(
       'bot_duration': instance.botDuration,
       'spot_date': instance.spotDate,
       'expire_date': instance.expireDate,
-      'days_to_expire': instance.daysToExpire,
       'est_max_loss': instance.estMaxLoss,
       'est_max_profit': instance.estMaxProfit,
       'status': instance.status,

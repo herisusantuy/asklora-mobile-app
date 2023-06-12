@@ -10,11 +10,11 @@ part 'bot_summary_transaction_history_model.g.dart';
 class BotSummaryTransactionHistoryModel extends Equatable {
   final String uid;
   final String date;
-  final double amount;
-  final double fee;
+  final String amount;
+  final String fee;
   final String status;
+  @JsonKey(name: 'total_pnl')
   final double totalPnL;
-
 
   String get totalPnLString {
     double finalPnlAmountDouble = checkDouble(totalPnL);
@@ -36,10 +36,7 @@ class BotSummaryTransactionHistoryModel extends Equatable {
       formatDateTimeAsString(date, dateFormat: 'yyyy-MM-dd HH:mm:ss');
 
   const BotSummaryTransactionHistoryModel(
-      this.uid,
-      this.date,
-      this.status,
-      this.amount, this.fee, this.totalPnL);
+      this.uid, this.date, this.status, this.amount, this.fee, this.totalPnL);
 
   factory BotSummaryTransactionHistoryModel.fromJson(
           Map<String, dynamic> json) =>

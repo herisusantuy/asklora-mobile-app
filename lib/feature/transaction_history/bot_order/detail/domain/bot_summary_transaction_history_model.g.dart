@@ -12,9 +12,9 @@ BotSummaryTransactionHistoryModel _$BotSummaryTransactionHistoryModelFromJson(
       json['uid'] as String,
       json['date'] as String,
       json['status'] as String,
-      (json['amount'] as num).toDouble(),
-      (json['fee'] as num).toDouble(),
-      (json['totalPnL'] as num).toDouble(),
+      json['amount'] as String,
+      json['fee'] as String,
+      (json['total_pnl'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$BotSummaryTransactionHistoryModelToJson(
@@ -25,5 +25,5 @@ Map<String, dynamic> _$BotSummaryTransactionHistoryModelToJson(
       'amount': instance.amount,
       'fee': instance.fee,
       'status': instance.status,
-      'totalPnL': instance.totalPnL,
+      'total_pnl': instance.totalPnL,
     };

@@ -30,8 +30,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
   final String spotDate;
   @JsonKey(name: 'expire_date')
   final String? expireDate;
-  @JsonKey(name: 'days_to_expire')
-  final int daysToExpire;
   @JsonKey(name: 'est_max_loss')
   final double estMaxLoss;
   @JsonKey(name: 'est_max_profit')
@@ -40,7 +38,7 @@ class BotDetailTransactionHistoryResponse extends Equatable {
   @JsonKey(name: 'rollover_count')
   final int rolloverCount;
   @JsonKey(name: 'bot_stock_value')
-  final double botStockValue;
+  final String botStockValue;
 
   const BotDetailTransactionHistoryResponse(
       this.uid,
@@ -55,7 +53,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
       this.botDuration,
       this.spotDate,
       this.expireDate,
-      this.daysToExpire,
       this.estMaxLoss,
       this.estMaxProfit,
       this.status,
@@ -77,7 +74,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
           botDuration,
           spotDate,
           expireDate,
-          daysToExpire,
           estMaxLoss,
           estMaxProfit,
           status,
@@ -123,8 +119,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
             : '/';
   }
 
-  String get daysToExpireString => daysToExpire.abs().toInt().toString();
-
   String get spotDateFormatted => formatDateTimeAsString(spotDate);
 
   String get expireDateFormatted =>
@@ -151,7 +145,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
         botDuration,
         spotDate,
         expireDate,
-        daysToExpire,
         estMaxLoss,
         estMaxProfit,
         status,

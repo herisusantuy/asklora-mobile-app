@@ -11,8 +11,8 @@ class BotActiveOrderModel {
   final String status;
   @JsonKey(name: 'is_active')
   final bool isActive;
-  @JsonKey(name: 'total_pnl')
-  final double totalPnl;
+  @JsonKey(name: 'total_pnl_amt')
+  final String totalPnlAmt;
   @JsonKey(name: 'expire_date')
   final String? expireDate;
   @JsonKey(name: 'ticker_name')
@@ -34,7 +34,7 @@ class BotActiveOrderModel {
       this.name,
       this.status,
       this.isActive,
-      this.totalPnl,
+      this.totalPnlAmt,
       this.expireDate,
       this.tickerName,
       this.currentPrice,
@@ -44,12 +44,12 @@ class BotActiveOrderModel {
       this.botAppsName);
 
   String get totalPnlRetString {
-    double totalPnlDouble = checkDouble(totalPnl);
+    double totalPnlDouble = checkDouble(totalPnlAmt);
     return (totalPnlDouble > 0)
         ? '+$totalPnlDouble%'
         : (totalPnlDouble < 0)
-        ? '$totalPnlDouble%'
-        : '/';
+            ? '$totalPnlDouble%'
+            : '/';
   }
 
   factory BotActiveOrderModel.fromJson(Map<String, dynamic> json) =>

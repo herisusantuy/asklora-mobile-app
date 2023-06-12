@@ -64,7 +64,8 @@ class TransactionHistoryModel extends Equatable {
 
   String get idString => id.toString();
 
-  TransferStatus get transferStatus => TransferStatus.find(status, isRefunded:isRefunded, timeRejected: timeRejected);
+  TransferStatus get transferStatus => TransferStatus.find(status,
+      isRefunded: isRefunded, timeRejected: timeRejected);
 
   TransferType get transferType => TransferType.findByString(title);
 

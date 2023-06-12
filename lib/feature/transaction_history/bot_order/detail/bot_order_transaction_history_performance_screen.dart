@@ -16,7 +16,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
       builder: (context, state) {
         if (state.response.state == ResponseState.success) {
           BotDetailTransactionHistoryResponse data = state.response.data!;
-          BotType botType = BotType.findByString(data.botInfo.botType);
+          BotType botType = BotType.findByString(data.botInfo.botName);
           return ListView(
             padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
             children: [
@@ -49,7 +49,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
               const SizedBox(
                 height: 28,
               ),
-              _chartWidget(context, data.activities),
+              _chartWidget(context, data.performances),
               const SizedBox(
                 height: 33,
               ),
@@ -96,14 +96,14 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
         rightSubTitle: data.estMaxProfitPctString,
       );
 
-  Widget _chartWidget(BuildContext context,
-          List<BotActivitiesTransactionHistoryModel> activities) =>
+  Widget _chartWidget(
+          BuildContext context, List<BotPortfolioChartDataSet> performances) =>
       Align(
           alignment: Alignment.center,
-          child: activities.isNotEmpty
+          child: performances.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.only(top: 32.0),
-                  child: ChartAnimation(chartDataSets: activities),
+                  child: ChartAnimation(chartDataSets: performances),
                 )
               : Text(S.of(context).portfolioDetailChartEmptyMessage));
 }
