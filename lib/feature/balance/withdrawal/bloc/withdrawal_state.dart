@@ -27,4 +27,7 @@ class WithdrawalState extends Equatable {
           withdrawalAmountErrorText ?? this.withdrawalAmountErrorText,
     );
   }
+
+  bool disableWithdrawal(String withdrawableAmount) =>
+      withdrawalAmount > checkDouble(withdrawableAmount)||withdrawalAmount==0;
 }

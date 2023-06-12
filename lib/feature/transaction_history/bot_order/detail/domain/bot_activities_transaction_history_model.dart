@@ -34,7 +34,7 @@ class BotActivitiesTransactionHistoryModel extends ChartDataSet {
       );
 
   BotActivitiesTransactionHistoryModel.fromJson(Map<String, dynamic> json)
-      : pk = json['pk'],
+      : pk = json['uid'],
         pnlAmt = json['pnl_amt'],
         side = json['side'],
         invested = json['invested'],

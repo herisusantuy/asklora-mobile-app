@@ -16,7 +16,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
       builder: (context, state) {
         if (state.response.state == ResponseState.success) {
           BotDetailTransactionHistoryResponse data = state.response.data!;
-          BotType botType = BotType.findByString(data.botAppsName);
+          BotType botType = BotType.findByString(data.botInfo.botType);
           return ListView(
             padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
             children: [
@@ -42,7 +42,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
                         child: ColumnText(
                             title:
                                 S.of(context).portfolioDetailPerformanceTotalPL,
-                            subTitle: data.currentPnlRetString)),
+                            subTitle: data.totalPnLPctString)),
                   ],
                 ),
               ),
@@ -62,7 +62,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
               ),
               PairColumnText(
                   leftTitle: S.of(context).investmentPeriod,
-                  leftSubTitle: data.duration,
+                  leftSubTitle: data.botDuration,
                   rightTitle: S
                       .of(context)
                       .portfolioDetailKeyInfoBotStockNumberOfRollover,
@@ -70,7 +70,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
               _spaceBetweenInfo,
               PairColumnText(
                   leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
-                  leftSubTitle: data.startDateFormatted,
+                  leftSubTitle: data.spotDateFormatted,
                   rightTitle: S.of(context).portfolioDetailKeyInfoEndTime,
                   rightSubTitle: data.expireDateFormatted),
               _spaceBetweenInfo,
@@ -89,11 +89,11 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
         leftTitle: botType == BotType.plank
             ? S.of(context).portfolioDetailKeyInfoEstimatedStopLoss
             : S.of(context).portfolioDetailKeyInfoEstimatedMaxLoss,
-        leftSubTitle: data.maxLossPctString,
+        leftSubTitle: data.estMaxLossPctString,
         rightTitle: botType == BotType.plank
             ? S.of(context).portfolioDetailKeyInfoEstimatedTakeProfit
             : S.of(context).portfolioDetailKeyInfoEstimatedMaxProfit,
-        rightSubTitle: data.targetProfitPctString,
+        rightSubTitle: data.estMaxProfitPctString,
       );
 
   Widget _chartWidget(BuildContext context,

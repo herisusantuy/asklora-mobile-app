@@ -13,9 +13,9 @@ class BotActiveOrderDetailModel {
   final double? botStockValue;
   @JsonKey(name: 'investment_amount')
   final double investmentAmount;
-  @JsonKey(name: 'total_pnl')
-  final double totalPnL;
-  final List<BotPortfolioChartDataSet> performance;
+  @JsonKey(name: 'total_pnl_amt')
+  final double totalPnLAmt;
+  final List<BotPortfolioChartDataSet> performances;
   @JsonKey(name: 'bot_duration')
   final String botDuration;
   @JsonKey(name: 'spot_date')
@@ -65,8 +65,8 @@ class BotActiveOrderDetailModel {
       this.name,
       this.botStockValue,
       this.investmentAmount,
-      this.totalPnL,
-      this.performance,
+      this.totalPnLAmt,
+      this.performances,
       this.botDuration,
       this.spotDate,
       this.expireDate,
@@ -96,8 +96,8 @@ class BotActiveOrderDetailModel {
           name,
           botStockValue,
           investmentAmount,
-          totalPnL,
-          performance ?? this.performance,
+          totalPnLAmt,
+          performance ?? this.performances,
           botDuration,
           spotDate,
           expireDate,
@@ -178,7 +178,7 @@ class BotActiveOrderDetailModel {
   }
 
   String get totalPnlRetString {
-    double totalPnlDouble = checkDouble(totalPnL);
+    double totalPnlDouble = checkDouble(totalPnLAmt);
     return (totalPnlDouble > 0)
         ? '+$totalPnlDouble%'
         : (totalPnlDouble < 0)

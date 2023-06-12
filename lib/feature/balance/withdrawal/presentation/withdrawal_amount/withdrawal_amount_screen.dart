@@ -65,7 +65,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
                 buildWhen: (previous, current) =>
                     previous.withdrawalAmount != current.withdrawalAmount,
                 builder: (context, state) => PrimaryButton(
-                  disabled: state.withdrawalAmount == 0,
+                  disabled: state.disableWithdrawal(withdrawableBalance),
                   label: S.of(context).buttonNext,
                   onTap: () => WithdrawalSummaryScreen.open(context,
                       withdrawalAmount: context

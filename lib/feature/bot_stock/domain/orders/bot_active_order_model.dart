@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../core/utils/extensions.dart';
+
 part 'bot_active_order_model.g.dart';
 
 @JsonSerializable()
@@ -40,6 +42,15 @@ class BotActiveOrderModel {
       this.spotDate,
       this.ticker,
       this.botAppsName);
+
+  String get totalPnlRetString {
+    double totalPnlDouble = checkDouble(totalPnl);
+    return (totalPnlDouble > 0)
+        ? '+$totalPnlDouble%'
+        : (totalPnlDouble < 0)
+        ? '$totalPnlDouble%'
+        : '/';
+  }
 
   factory BotActiveOrderModel.fromJson(Map<String, dynamic> json) =>
       _$BotActiveOrderModelFromJson(json);

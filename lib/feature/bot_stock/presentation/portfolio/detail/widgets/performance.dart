@@ -79,16 +79,16 @@ class Performance extends StatelessWidget {
 
   Widget _chartWidget(BuildContext context) => Align(
       alignment: Alignment.center,
-      child: botActiveOrderDetailModel.performance.isNotEmpty
+      child: botActiveOrderDetailModel.performances.isNotEmpty
           ? Padding(
               padding: const EdgeInsets.only(top: 32.0),
               child: ChartAnimation(
-                  chartDataSets: botActiveOrderDetailModel.performance),
+                  chartDataSets: botActiveOrderDetailModel.performances),
             )
           : Text(S.of(context).portfolioDetailChartEmptyMessage));
 
   Widget _getChartCaption(BuildContext context) {
-    if (botActiveOrderDetailModel.performance.isNotEmpty) {
+    if (botActiveOrderDetailModel.performances.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomTextNew(

@@ -138,6 +138,7 @@ class BotStockRepository {
       return BaseResponse.complete(
           BotActiveOrderDetailModel.fromJson(response.data));
     } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }

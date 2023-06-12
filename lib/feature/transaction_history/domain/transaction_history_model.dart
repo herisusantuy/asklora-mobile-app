@@ -25,6 +25,10 @@ class TransactionHistoryModel extends Equatable {
   final String? bankAccountNumber;
   @JsonKey(name: 'time_complete')
   final String? timeComplete;
+  @JsonKey(name: 'time_rejected')
+  final String? timeRejected;
+  @JsonKey(name: 'is_refunded')
+  final bool? isRefunded;
   @JsonKey(name: 'is_dummy')
   final bool isDummy;
 
@@ -49,6 +53,8 @@ class TransactionHistoryModel extends Equatable {
     this.status,
     this.amount, {
     this.timeComplete,
+    this.timeRejected,
+    this.isRefunded,
     this.bankCode,
     this.bankAccountNumber,
     this.isDummy = false,
@@ -58,7 +64,7 @@ class TransactionHistoryModel extends Equatable {
 
   String get idString => id.toString();
 
-  TransferStatus get transferStatus => TransferStatus.findByString(status);
+  TransferStatus get transferStatus => TransferStatus.find(status, isRefunded:isRefunded, timeRejected: timeRejected);
 
   TransferType get transferType => TransferType.findByString(title);
 

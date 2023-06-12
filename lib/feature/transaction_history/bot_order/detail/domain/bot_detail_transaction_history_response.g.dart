@@ -9,15 +9,9 @@ part of 'bot_detail_transaction_history_response.dart';
 BotDetailTransactionHistoryResponse
     _$BotDetailTransactionHistoryResponseFromJson(Map<String, dynamic> json) =>
         BotDetailTransactionHistoryResponse(
-          json['pk'] as String,
-          json['ticker'] as String,
-          json['ticker_name'] as String,
-          json['bot_id'] as String,
-          json['updated'] as String,
-          json['is_active'] as bool,
-          json['status'] as String,
-          json['action_status'] as String?,
-          json['bot_apps_name'] as String,
+          json['uid'] as String,
+          json['name'] as String,
+          BotInfo.fromJson(json['bot_info'] as Map<String, dynamic>),
           (json['summary'] as List<dynamic>)
               .map((e) => BotSummaryTransactionHistoryModel.fromJson(
                   e as Map<String, dynamic>))
@@ -26,44 +20,43 @@ BotDetailTransactionHistoryResponse
               .map((e) => BotActivitiesTransactionHistoryModel.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-          (json['botstock_value'] as num?)?.toDouble(),
-          (json['stock_value'] as num?)?.toDouble(),
-          json['duration'] as String,
-          json['rollover_count'] as int?,
-          (json['current_pnl_amount'] as num?)?.toDouble(),
-          (json['current_pnl_ret'] as num?)?.toDouble(),
-          (json['max_loss_pct'] as num).toDouble(),
-          (json['target_profit_pct'] as num).toDouble(),
+          (json['performances'] as List<dynamic>)
+              .map((e) =>
+                  BotPortfolioChartDataSet.fromJson(e as Map<String, dynamic>))
+              .toList(),
           (json['investment_amount'] as num).toDouble(),
-          (json['days_to_expire'] as num).toDouble(),
-          json['start_date'] as String?,
+          (json['final_return'] as num?)?.toDouble(),
+          (json['total_pnl_pct'] as num).toDouble(),
+          json['bot_duration'] as String,
+          json['spot_date'] as String,
           json['expire_date'] as String?,
+          json['days_to_expire'] as int,
+          (json['est_max_loss'] as num).toDouble(),
+          (json['est_max_profit'] as num).toDouble(),
+          json['status'] as String,
+          json['rollover_count'] as int,
+          (json['bot_stock_value'] as num).toDouble(),
         );
 
 Map<String, dynamic> _$BotDetailTransactionHistoryResponseToJson(
         BotDetailTransactionHistoryResponse instance) =>
     <String, dynamic>{
-      'pk': instance.pk,
-      'ticker': instance.ticker,
-      'ticker_name': instance.tickerName,
-      'bot_id': instance.botId,
-      'updated': instance.updated,
-      'is_active': instance.isActive,
-      'status': instance.status,
-      'action_status': instance.actionStatus,
-      'bot_apps_name': instance.botAppsName,
-      'botstock_value': instance.botStockValue,
-      'stock_value': instance.stockValue,
-      'duration': instance.duration,
-      'rollover_count': instance.rolloverCount,
-      'current_pnl_amount': instance.currentPnlAmount,
-      'current_pnl_ret': instance.currentPnlRet,
-      'max_loss_pct': instance.maxLossPct,
-      'target_profit_pct': instance.targetProfitPct,
-      'investment_amount': instance.investmentAmount,
+      'uid': instance.uid,
+      'name': instance.name,
+      'bot_info': instance.botInfo,
       'summary': instance.summary,
       'activities': instance.activities,
-      'days_to_expire': instance.daysToExpire,
-      'start_date': instance.startDate,
+      'performances': instance.performances,
+      'investment_amount': instance.investmentAmount,
+      'final_return': instance.finalReturn,
+      'total_pnl_pct': instance.totalPnLPct,
+      'bot_duration': instance.botDuration,
+      'spot_date': instance.spotDate,
       'expire_date': instance.expireDate,
+      'days_to_expire': instance.daysToExpire,
+      'est_max_loss': instance.estMaxLoss,
+      'est_max_profit': instance.estMaxProfit,
+      'status': instance.status,
+      'rollover_count': instance.rolloverCount,
+      'bot_stock_value': instance.botStockValue,
     };

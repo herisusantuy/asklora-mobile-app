@@ -13,8 +13,8 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       json['name'] as String,
       (json['botstock_value'] as num?)?.toDouble(),
       (json['investment_amount'] as num).toDouble(),
-      (json['total_pnl'] as num).toDouble(),
-      (json['performance'] as List<dynamic>)
+      (json['total_pnl_amt'] as num).toDouble(),
+      (json['performances'] as List<dynamic>)
           .map((e) =>
               BotPortfolioChartDataSet.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -48,8 +48,8 @@ Map<String, dynamic> _$BotActiveOrderDetailModelToJson(
       'name': instance.name,
       'botstock_value': instance.botStockValue,
       'investment_amount': instance.investmentAmount,
-      'total_pnl': instance.totalPnL,
-      'performance': instance.performance,
+      'total_pnl_amt': instance.totalPnLAmt,
+      'performances': instance.performances,
       'bot_duration': instance.botDuration,
       'spot_date': instance.spotDate,
       'expire_date': instance.expireDate,

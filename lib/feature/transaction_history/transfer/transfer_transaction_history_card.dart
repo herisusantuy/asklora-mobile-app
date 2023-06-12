@@ -45,7 +45,7 @@ class TransferTransactionHistoryCard extends StatelessWidget {
               height: 7,
             ),
             CustomTextNew(
-              transactionHistoryModel.status.toTitleCase,
+              transactionHistoryModel.transferStatus.name,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.darkGray),
             )
