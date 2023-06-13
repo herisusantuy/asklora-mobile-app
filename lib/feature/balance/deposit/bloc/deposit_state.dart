@@ -49,7 +49,8 @@ class DepositState extends Equatable {
     } else {
       return (depositAmount == 0 ||
           proofOfRemittanceImages.isEmpty ||
-          depositAmountErrorText.isNotEmpty);
+          depositAmountErrorText.isNotEmpty ||
+          depositAmount < depositType.minDeposit);
     }
   }
 }
