@@ -7,6 +7,7 @@ import '../../../core/data/remote/base_api_client.dart';
 import '../../../core/domain/base_response.dart';
 import '../../../core/utils/storage/shared_preference.dart';
 import '../../../core/utils/storage/storage_keys.dart';
+import '../../chart/domain/bot_portfolio_chart_models.dart';
 import '../../chart/domain/bot_recommendation_chart_model.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
@@ -138,7 +139,18 @@ class BotStockRepository {
       return BaseResponse.complete(
           BotActiveOrderDetailModel.fromJson(response.data));
     } catch (e) {
-      print('error $e');
+      return BaseResponse.error();
+    }
+  }
+
+  Future<BaseResponse<List<BotPortfolioChartDataSet>>> fetchBotPerformance(
+      String botOrderId) async {
+    try {
+      var response = await _botStockApiClient.fetchBotPerformance(botOrderId);
+
+      return BaseResponse.complete(List.from(response.data
+          .map((element) => BotPortfolioChartDataSet.fromJson(element))));
+    } catch (e) {
       return BaseResponse.error();
     }
   }

@@ -4,6 +4,7 @@ class PortfolioState extends Equatable {
   const PortfolioState({
     this.botActiveOrderResponse = const BaseResponse(),
     this.botActiveOrderDetailResponse = const BaseResponse(),
+    this.botPerformanceResponse = const BaseResponse(),
     this.rolloverBotStockResponse = const BaseResponse(),
     this.endBotStockResponse = const BaseResponse(),
     this.cancelBotStockResponse = const BaseResponse(),
@@ -15,6 +16,7 @@ class PortfolioState extends Equatable {
 
   final BaseResponse<List<BotActiveOrderModel>> botActiveOrderResponse;
   final BaseResponse<BotActiveOrderDetailModel> botActiveOrderDetailResponse;
+  final BaseResponse<List<BotPortfolioChartDataSet>> botPerformanceResponse;
   final BaseResponse<RolloverOrderResponse> rolloverBotStockResponse;
   final BaseResponse<TerminateOrderResponse> endBotStockResponse;
   final BaseResponse<BotOrderResponse> cancelBotStockResponse;
@@ -28,6 +30,7 @@ class PortfolioState extends Equatable {
     return [
       botActiveOrderResponse,
       botActiveOrderDetailResponse,
+      botPerformanceResponse,
       rolloverBotStockResponse,
       endBotStockResponse,
       cancelBotStockResponse,
@@ -41,6 +44,7 @@ class PortfolioState extends Equatable {
   PortfolioState copyWith({
     BaseResponse<List<BotActiveOrderModel>>? botActiveOrderResponse,
     BaseResponse<BotActiveOrderDetailModel>? botActiveOrderDetailResponse,
+    BaseResponse<List<BotPortfolioChartDataSet>>? botPerformanceResponse,
     BaseResponse<RolloverOrderResponse>? rolloverBotStockResponse,
     BaseResponse<TerminateOrderResponse>? endBotStockResponse,
     BaseResponse<BotOrderResponse>? cancelBotStockResponse,
@@ -55,6 +59,8 @@ class PortfolioState extends Equatable {
           botActiveOrderResponse ?? this.botActiveOrderResponse,
       botActiveOrderDetailResponse:
           botActiveOrderDetailResponse ?? this.botActiveOrderDetailResponse,
+      botPerformanceResponse:
+          botPerformanceResponse ?? this.botPerformanceResponse,
       rolloverBotStockResponse:
           rolloverBotStockResponse ?? this.rolloverBotStockResponse,
       endBotStockResponse: endBotStockResponse ?? this.endBotStockResponse,

@@ -25,6 +25,10 @@ class BotStockApiClient {
   Future<Response> activeOrderDetail(String orderId) async =>
       await AskloraApiClient().get(endpoint: '$endpointBotActiveOrder$orderId');
 
+  Future<Response> fetchBotPerformance(String orderId) async =>
+      await AskloraApiClient()
+          .get(endpoint: endpointBotActiveOrderPerformance(orderId));
+
   Future<Response> createOrder(BotCreateOrderRequest request) async =>
       await AskloraApiClient().post(
           endpoint: endpointBotCreateOrder,

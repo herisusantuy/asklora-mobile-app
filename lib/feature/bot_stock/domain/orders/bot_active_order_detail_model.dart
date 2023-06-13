@@ -15,7 +15,6 @@ class BotActiveOrderDetailModel {
   final double investmentAmount;
   @JsonKey(name: 'total_pnl_amt')
   final double totalPnLAmt;
-  final List<BotPortfolioChartDataSet> performances;
   @JsonKey(name: 'bot_duration')
   final String botDuration;
   @JsonKey(name: 'spot_date')
@@ -64,7 +63,6 @@ class BotActiveOrderDetailModel {
       this.botStockValue,
       this.investmentAmount,
       this.totalPnLAmt,
-      this.performances,
       this.botDuration,
       this.spotDate,
       this.expireDate,
@@ -94,7 +92,6 @@ class BotActiveOrderDetailModel {
           botStockValue,
           investmentAmount,
           totalPnLAmt,
-          performances ?? this.performances,
           botDuration,
           spotDate,
           expireDate,

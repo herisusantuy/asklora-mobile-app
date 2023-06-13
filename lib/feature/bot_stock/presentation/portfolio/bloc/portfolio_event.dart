@@ -33,6 +33,12 @@ class FetchActiveOrderDetail extends PortfolioEvent {
   const FetchActiveOrderDetail({required this.botOrderId});
 }
 
+class FetchBotPerformance extends PortfolioEvent {
+  final String botOrderId;
+
+  const FetchBotPerformance({required this.botOrderId});
+}
+
 class CurrencyChanged extends PortfolioEvent {
   final CurrencyType currencyType;
 

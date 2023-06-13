@@ -50,6 +50,10 @@ const String endpointLinkedUser = '$endpointGetUser/linked';
 ///bot orders
 ///
 const String endpointBotActiveOrder = '$v1$bots/';
+
+String endpointBotActiveOrderPerformance(String botUid) =>
+    '$v1$bots$botUid/performance';
+
 const String endpointBotCreateOrder = '$v1${bots}create-order/';
 const String endpointBotCancelOrder = '$v1${bots}cancel-order/';
 const String endpointBotRolloverOrder = '$v1${bots}rollover-order/';
