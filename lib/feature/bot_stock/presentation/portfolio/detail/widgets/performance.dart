@@ -70,6 +70,9 @@ class Performance extends StatelessWidget {
         ColumnText(
             title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
             subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
+        const SizedBox(
+          height: 32,
+        ),
         _chartWidget(context),
       ]);
 
@@ -80,14 +83,12 @@ class Performance extends StatelessWidget {
             previous.botPerformanceResponse.state !=
             current.botPerformanceResponse.state,
         builder: (context, state) {
-          return state.botPerformanceResponse.data != null
+          return state.botPerformanceResponse.data != null &&
+                  state.botPerformanceResponse.data!.isNotEmpty
               ? Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 32.0),
-                      child: ChartAnimation(
-                          chartDataSets: state.botPerformanceResponse.data!),
-                    ),
+                    ChartAnimation(
+                        chartDataSets: state.botPerformanceResponse.data!),
                     const SizedBox(
                       height: 6,
                     ),
