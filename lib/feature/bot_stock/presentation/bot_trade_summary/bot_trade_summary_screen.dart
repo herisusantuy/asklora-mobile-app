@@ -12,6 +12,7 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
+import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../tabs/tabs_screen.dart';
@@ -55,7 +56,9 @@ class BotTradeSummaryScreen extends StatelessWidget {
     BotDetailModel botDetailModel = botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
     return BlocProvider(
-      create: (_) => BotStockBloc(botStockRepository: BotStockRepository()),
+      create: (_) => BotStockBloc(
+          botStockRepository: BotStockRepository(),
+          transactionRepository: TransactionRepository()),
       child: BlocListener<BotStockBloc, BotStockState>(
         listenWhen: (previous, current) =>
             previous.createBotOrderResponse != current.createBotOrderResponse,

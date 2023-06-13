@@ -53,8 +53,6 @@ class BotActiveOrderDetailModel {
   final double botCashBalance;
   @JsonKey(name: 'bot_share')
   final double botShare;
-  @JsonKey(name: 'current_pnl_ret')
-  final double? currentPnlRet;
   @JsonKey(name: 'max_loss_pct')
   final double maxLossPct;
   @JsonKey(name: 'target_profit_pct')
@@ -85,19 +83,18 @@ class BotActiveOrderDetailModel {
       this.botAssetInStockPct,
       this.botCashBalance,
       this.botShare,
-      this.currentPnlRet,
       this.maxLossPct,
       this.targetProfitPct);
 
   BotActiveOrderDetailModel copyWith(
-          {List<BotPortfolioChartDataSet>? performance}) =>
+          {List<BotPortfolioChartDataSet>? performances}) =>
       BotActiveOrderDetailModel(
           uid,
           name,
           botStockValue,
           investmentAmount,
           totalPnLAmt,
-          performance ?? this.performances,
+          performances ?? this.performances,
           botDuration,
           spotDate,
           expireDate,
@@ -116,7 +113,6 @@ class BotActiveOrderDetailModel {
           botAssetInStockPct,
           botCashBalance,
           botShare,
-          currentPnlRet,
           maxLossPct,
           targetProfitPct);
 
@@ -166,15 +162,6 @@ class BotActiveOrderDetailModel {
     return (botStockValueDouble > 0)
         ? botStockValueDouble.convertToCurrencyDecimal()
         : '/';
-  }
-
-  String get currentPnlRetString {
-    double currentPnlRetDouble = checkDouble(currentPnlRet);
-    return (currentPnlRetDouble > 0)
-        ? '+$currentPnlRetDouble%'
-        : (currentPnlRetDouble < 0)
-            ? '$currentPnlRetDouble%'
-            : '/';
   }
 
   String get totalPnlRetString {

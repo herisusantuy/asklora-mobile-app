@@ -36,7 +36,6 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       (json['bot_asset_in_stock_pct'] as num).toDouble(),
       (json['bot_cash_balance'] as num).toDouble(),
       (json['bot_share'] as num).toDouble(),
-      (json['current_pnl_ret'] as num?)?.toDouble(),
       (json['max_loss_pct'] as num).toDouble(),
       (json['target_profit_pct'] as num).toDouble(),
     );
@@ -68,7 +67,6 @@ Map<String, dynamic> _$BotActiveOrderDetailModelToJson(
       'bot_asset_in_stock_pct': instance.botAssetInStockPct,
       'bot_cash_balance': instance.botCashBalance,
       'bot_share': instance.botShare,
-      'current_pnl_ret': instance.currentPnlRet,
       'max_loss_pct': instance.maxLossPct,
       'target_profit_pct': instance.targetProfitPct,
     };

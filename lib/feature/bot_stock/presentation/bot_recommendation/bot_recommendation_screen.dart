@@ -18,6 +18,7 @@ import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
+import '../../../../core/repository/transaction_repository.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
@@ -31,9 +32,13 @@ import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
 
 part 'widgets/bot_learn_more_bottom_sheet.dart';
+
 part 'widgets/bot_recommendation_card.dart';
+
 part 'widgets/bot_recommendation_card_shimmer.dart';
+
 part 'widgets/bot_recommendation_faq.dart';
+
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
@@ -47,14 +52,16 @@ class BotRecommendationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) {
+        BotStockBloc botStockBloc = BotStockBloc(
+            botStockRepository: BotStockRepository(),
+            transactionRepository: TransactionRepository());
         if (context.read<AppBloc>().state.userJourney ==
             UserJourney.freeBotStock) {
-          return BotStockBloc(botStockRepository: BotStockRepository())
-            ..add(FetchFreeBotRecommendation());
+          botStockBloc.add(FetchFreeBotRecommendation());
         } else {
-          return BotStockBloc(botStockRepository: BotStockRepository())
-            ..add(FetchBotRecommendation());
+          botStockBloc.add(FetchBotRecommendation());
         }
+        return botStockBloc;
       },
       child: CustomScaffold(
           enableBackNavigation: enableBackNavigation,

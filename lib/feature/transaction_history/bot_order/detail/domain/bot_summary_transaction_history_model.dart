@@ -10,8 +10,8 @@ part 'bot_summary_transaction_history_model.g.dart';
 class BotSummaryTransactionHistoryModel extends Equatable {
   final String uid;
   final String date;
-  final String amount;
-  final String fee;
+  final double amount;
+  final double fee;
   final String status;
   @JsonKey(name: 'total_pnl')
   final double totalPnL;

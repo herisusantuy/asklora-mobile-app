@@ -8,6 +8,10 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_model.dart'
+    as _i16;
+import 'package:asklora_mobile_app/core/repository/transaction_repository.dart'
+    as _i13;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_detail_model.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart'
@@ -26,6 +30,10 @@ import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart'
     as _i7;
+import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart'
+    as _i15;
+import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart'
+    as _i14;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -300,4 +308,105 @@ class MockBotStockRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<_i12.TerminateOrderResponse>>);
+}
+
+/// A class which mocks [TransactionRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTransactionRepository extends _i1.Mock
+    implements _i13.TransactionRepository {
+  MockTransactionRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i14.GroupedTransactionModel>>>
+      fetchAllTransactionsHistory() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchAllTransactionsHistory,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i14.GroupedTransactionModel>>>.value(
+                _FakeBaseResponse_0<List<_i14.GroupedTransactionModel>>(
+              this,
+              Invocation.method(
+                #fetchAllTransactionsHistory,
+                [],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.BaseResponse<List<_i14.GroupedTransactionModel>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i14.GroupedTransactionModel>>>
+      fetchBotTransactionsHistory() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchBotTransactionsHistory,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i14.GroupedTransactionModel>>>.value(
+                _FakeBaseResponse_0<List<_i14.GroupedTransactionModel>>(
+              this,
+              Invocation.method(
+                #fetchBotTransactionsHistory,
+                [],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.BaseResponse<List<_i14.GroupedTransactionModel>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i14.GroupedTransactionModel>>>
+      fetchTransferTransactionsHistory() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchTransferTransactionsHistory,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i14.GroupedTransactionModel>>>.value(
+                _FakeBaseResponse_0<List<_i14.GroupedTransactionModel>>(
+              this,
+              Invocation.method(
+                #fetchTransferTransactionsHistory,
+                [],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.BaseResponse<List<_i14.GroupedTransactionModel>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i15.BotDetailTransactionHistoryResponse>>
+      fetchBotTransactionsDetail(String? orderId) => (super.noSuchMethod(
+            Invocation.method(
+              #fetchBotTransactionsDetail,
+              [orderId],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<
+                        _i15.BotDetailTransactionHistoryResponse>>.value(
+                _FakeBaseResponse_0<_i15.BotDetailTransactionHistoryResponse>(
+              this,
+              Invocation.method(
+                #fetchBotTransactionsDetail,
+                [orderId],
+              ),
+            )),
+          ) as _i4.Future<
+              _i2.BaseResponse<_i15.BotDetailTransactionHistoryResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i16.TransactionBalanceModel>> fetchBalance() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchBalance,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i16.TransactionBalanceModel>>.value(
+                _FakeBaseResponse_0<_i16.TransactionBalanceModel>(
+          this,
+          Invocation.method(
+            #fetchBalance,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i16.TransactionBalanceModel>>);
 }

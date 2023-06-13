@@ -12,7 +12,7 @@ class BotActiveOrderModel {
   @JsonKey(name: 'is_active')
   final bool isActive;
   @JsonKey(name: 'total_pnl_amt')
-  final String totalPnlAmt;
+  final double totalPnlAmt;
   @JsonKey(name: 'expire_date')
   final String? expireDate;
   @JsonKey(name: 'ticker_name')

@@ -7,13 +7,15 @@ class BotStockState extends Equatable {
       this.createBotOrderResponse = const BaseResponse(),
       this.botDetailResponse = const BaseResponse(),
       this.faqActiveIndex,
-      this.botStockTradeAmount = 0});
+      this.botStockTradeAmount = 0,
+      this.buyingPower = 0});
 
   final BaseResponse<List<BotRecommendationModel>> botRecommendationResponse;
   final BaseResponse<BotCreateOrderResponse> createBotOrderResponse;
   final BaseResponse<BotDetailModel> botDetailResponse;
   final int? faqActiveIndex;
   final double botStockTradeAmount;
+  final double buyingPower;
 
   @override
   List<Object?> get props {
@@ -23,6 +25,7 @@ class BotStockState extends Equatable {
       createBotOrderResponse,
       botDetailResponse,
       botStockTradeAmount,
+      buyingPower
     ];
   }
 
@@ -32,6 +35,7 @@ class BotStockState extends Equatable {
     BaseResponse<BotDetailModel>? botDetailResponse,
     int? faqActiveIndex,
     double? botStockTradeAmount,
+    double? buyingPower,
   }) {
     return BotStockState(
       botRecommendationResponse:
@@ -41,8 +45,13 @@ class BotStockState extends Equatable {
       botDetailResponse: botDetailResponse ?? this.botDetailResponse,
       faqActiveIndex: faqActiveIndex,
       botStockTradeAmount: botStockTradeAmount ?? this.botStockTradeAmount,
+      buyingPower: buyingPower ?? this.buyingPower,
     );
   }
-}
 
-class BotOrderAccountSuspended extends BotStockState {}
+  bool disableBuyingBotstock(double buyingPower) {
+    return checkDouble(botStockTradeAmount) > buyingPower ||
+        botStockTradeAmount == 0 ||
+        botStockTradeAmount < 1500;
+  }
+}

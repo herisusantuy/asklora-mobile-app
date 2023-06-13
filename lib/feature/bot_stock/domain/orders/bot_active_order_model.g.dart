@@ -12,7 +12,7 @@ BotActiveOrderModel _$BotActiveOrderModelFromJson(Map<String, dynamic> json) =>
       json['name'] as String,
       json['status'] as String,
       json['is_active'] as bool,
-      json['total_pnl_amt'] as String,
+      (json['total_pnl_amt'] as num).toDouble(),
       json['expire_date'] as String?,
       json['ticker_name'] as String,
       (json['current_price'] as num).toDouble(),

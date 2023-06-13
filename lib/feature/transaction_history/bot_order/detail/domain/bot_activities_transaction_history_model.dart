@@ -12,15 +12,15 @@ class BotActivitiesTransactionHistoryModel {
   final String side;
   final String action;
   final String status;
-  final String price;
-  final String qty;
-  final String invested;
+  final double price;
+  final double qty;
+  final double invested;
   @JsonKey(name: 'invested_currency')
   final String investedCurrency;
   @JsonKey(name: 'filled_qty')
-  final String filledQty;
+  final double filledQty;
   @JsonKey(name: 'filled_avg_price')
-  final String filledAvgPrice;
+  final double filledAvgPrice;
   @JsonKey(name: 'filled_at')
   final String? filledAt;
   @JsonKey(name: 'filled_at_hkt')

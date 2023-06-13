@@ -10,7 +10,7 @@ class BotCreateOrderResponse {
   @JsonKey(name: 'is_active')
   final bool isActive;
   @JsonKey(name: 'total_pnl_amt')
-  final String totalPnLAmt;
+  final double totalPnLAmt;
   @JsonKey(name: 'expire_date')
   final String? expireDate;
   @JsonKey(name: 'ticker_name')

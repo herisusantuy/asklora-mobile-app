@@ -5,6 +5,7 @@ import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../core/presentation/lora_memoji_widget.dart';
 import '../../../core/presentation/text_fields/auto_resized_text_field.dart';
+import '../../../core/repository/transaction_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/extensions.dart';
@@ -111,87 +112,89 @@ class BotStockBottomSheet {
       BuildContext context,
       BotType botType,
       BotRecommendationModel botRecommendationModel,
-      BotDetailModel botDetailModel) {
+      BotDetailModel botDetailModel,
+      double buyingPower) {
     showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        context: (context),
-        builder: (_) => BlocProvider(
-              create: (_) =>
-                  BotStockBloc(botStockRepository: BotStockRepository()),
-              child: BlocBuilder<BotStockBloc, BotStockState>(
-                  buildWhen: (previous, current) =>
-                      previous.botStockTradeAmount !=
-                      current.botStockTradeAmount,
-                  builder: (context, state) {
-                    return LoraBottomSheetContent(
-                      disablePrimaryButton: state.botStockTradeAmount < 1500,
-                      title: S.of(context).botTradeBottomSheetAmountTitle,
-                      primaryButtonLabel: S.of(context).buttonNext,
-                      secondaryButtonLabel: S.of(context).buttonCancel,
-                      onPrimaryButtonTap: () {
-                        Navigator.pop(context);
-                        BotTradeSummaryScreen.open(
-                            context: context,
-                            botTradeSummaryModel: BotTradeSummaryModel(
-                                botType: botType,
-                                botRecommendationModel: botRecommendationModel,
-                                botDetailModel: botDetailModel,
-                                amount: state.botStockTradeAmount));
-                      },
-                      onSecondaryButtonTap: () => Navigator.pop(context),
-                      buttonPaddingTop: 5,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 16.0),
-                                child: CustomTextNew(
-                                  'HKD',
-                                  style: AskLoraTextStyles.h5
-                                      .copyWith(color: AskLoraColors.charcoal),
-                                ),
-                              ),
-                              Flexible(
-                                child: AutoResizedTextField(
-                                  fullWidth: false,
-                                  minWidth: 100,
-                                  textInputFormatterList: [
-                                    CurrencyTextInputFormatter(
-                                        symbol: '', decimalDigits: 1)
-                                  ],
-                                  textInputType: TextInputType.number,
-                                  hintTextStyle: AskLoraTextStyles.h2
-                                      .copyWith(color: AskLoraColors.gray),
-                                  textStyle: AskLoraTextStyles.h2
-                                      .copyWith(color: AskLoraColors.charcoal),
-                                  hintText: '1,500',
-                                  onChanged: (value) => context
-                                      .read<BotStockBloc>()
-                                      .add(TradeBotStockAmountChanged(value
-                                              .isNotEmpty
-                                          ? double.parse(
-                                              value.replaceAll(amountRegex, ''))
-                                          : 0)),
-                                ),
-                              ),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: (context),
+      builder: (_) => BlocProvider(
+        create: (_) => BotStockBloc(
+            botStockRepository: BotStockRepository(),
+            transactionRepository: TransactionRepository()),
+        child: BlocBuilder<BotStockBloc, BotStockState>(
+            buildWhen: (previous, current) =>
+                previous.botStockTradeAmount != current.botStockTradeAmount,
+            builder: (context, state) {
+              return LoraBottomSheetContent(
+                disablePrimaryButton: state.disableBuyingBotstock(buyingPower),
+                title: S.of(context).botTradeBottomSheetAmountTitle,
+                primaryButtonLabel: S.of(context).buttonNext,
+                secondaryButtonLabel: S.of(context).buttonCancel,
+                onPrimaryButtonTap: () {
+                  Navigator.pop(context);
+                  BotTradeSummaryScreen.open(
+                      context: context,
+                      botTradeSummaryModel: BotTradeSummaryModel(
+                          botType: botType,
+                          botRecommendationModel: botRecommendationModel,
+                          botDetailModel: botDetailModel,
+                          amount: state.botStockTradeAmount));
+                },
+                onSecondaryButtonTap: () => Navigator.pop(context),
+                buttonPaddingTop: 5,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: CustomTextNew(
+                            'HKD',
+                            style: AskLoraTextStyles.h5
+                                .copyWith(color: AskLoraColors.charcoal),
+                          ),
+                        ),
+                        Flexible(
+                          child: AutoResizedTextField(
+                            fullWidth: false,
+                            minWidth: 100,
+                            textInputFormatterList: [
+                              CurrencyTextInputFormatter(
+                                  symbol: '', decimalDigits: 1)
                             ],
+                            textInputType: TextInputType.number,
+                            hintTextStyle: AskLoraTextStyles.h2
+                                .copyWith(color: AskLoraColors.gray),
+                            textStyle: AskLoraTextStyles.h2
+                                .copyWith(color: AskLoraColors.charcoal),
+                            hintText: '1,500',
+                            onChanged: (value) => context
+                                .read<BotStockBloc>()
+                                .add(TradeBotStockAmountChanged(value.isNotEmpty
+                                    ? double.parse(
+                                        value.replaceAll(amountRegex, ''))
+                                    : 0)),
                           ),
-                          const SizedBox(
-                            height: 11,
-                          ),
-                          CustomTextNew(
-                            S.of(context).botTradeBottomSheetAmountMinimum(
-                                'HKD10,000.00', 'HKD1,500'),
-                            style: AskLoraTextStyles.body4,
-                          )
-                        ],
-                      ),
-                    );
-                  }),
-            ));
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 11,
+                    ),
+                    CustomTextNew(
+                      S.of(context).botTradeBottomSheetAmountMinimum(
+                          'HKD${buyingPower.convertToCurrencyDecimal()}',
+                          'HKD1,500'),
+                      style: AskLoraTextStyles.body4,
+                    )
+                  ],
+                ),
+              );
+            }),
+      ),
+    );
   }
 
   static insufficientBalance(BuildContext context) {

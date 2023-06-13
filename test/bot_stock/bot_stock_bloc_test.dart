@@ -1,4 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_create_order_response.dart';
@@ -12,9 +13,11 @@ import 'package:mockito/mockito.dart';
 import 'bot_stock_bloc_test.mocks.dart';
 
 @GenerateMocks([BotStockRepository])
+@GenerateMocks([TransactionRepository])
 void main() async {
   group('Bot Stock Bloc Tests', () {
     late MockBotStockRepository botStockRepository;
+    late MockTransactionRepository transactionRepository;
     late BotStockBloc botStockBloc;
 
     final BaseResponse<List<BotRecommendationModel>> botStockResponse =
@@ -25,7 +28,7 @@ void main() async {
 
     final BaseResponse<BotCreateOrderResponse> botCreateOrderSuccessResponse =
         BaseResponse.complete(const BotCreateOrderResponse('a', 'b', 'c', true,
-            '0', '2023-06-06', 'APPLE', 0, true, '2023-06-06', 'AAOK'));
+            0, '2023-06-06', 'APPLE', 0, true, '2023-06-06', 'AAOK'));
     final BaseResponse<BotCreateOrderResponse> botCreateOrderFailedResponse =
         BaseResponse.error();
 
@@ -37,10 +40,13 @@ void main() async {
 
     setUpAll(() async {
       botStockRepository = MockBotStockRepository();
+      transactionRepository = MockTransactionRepository();
     });
 
     setUp(() async {
-      botStockBloc = BotStockBloc(botStockRepository: botStockRepository);
+      botStockBloc = BotStockBloc(
+          botStockRepository: botStockRepository,
+          transactionRepository: transactionRepository);
     });
 
     test('Bot Stock Bloc init state response should be default one', () {

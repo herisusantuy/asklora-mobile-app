@@ -12,8 +12,8 @@ BotSummaryTransactionHistoryModel _$BotSummaryTransactionHistoryModelFromJson(
       json['uid'] as String,
       json['date'] as String,
       json['status'] as String,
-      json['amount'] as String,
-      json['fee'] as String,
+      (json['amount'] as num).toDouble(),
+      (json['fee'] as num).toDouble(),
       (json['total_pnl'] as num).toDouble(),
     );
 
