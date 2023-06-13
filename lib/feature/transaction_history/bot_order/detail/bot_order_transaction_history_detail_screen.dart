@@ -13,11 +13,10 @@ import '../../../../../core/utils/extensions.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/values/app_values.dart';
+import '../../../bot_stock/presentation/bot_performance/bot_performance_chart.dart';
 import '../../../bot_stock/presentation/widgets/column_text.dart';
 import '../../../bot_stock/presentation/widgets/pair_column_text.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
-import '../../../chart/domain/bot_portfolio_chart_models.dart';
-import '../../../chart/presentation/chart_animation.dart';
 import '../../domain/grouped_model.dart';
 import '../../domain/transaction_history_model.dart';
 import '../../presentation/widgets/transaction_history_group_title.dart';
@@ -85,6 +84,7 @@ class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
               content: BotOrderTransactionHistoryDetailContent(
                 title: transactionHistoryModel.title,
                 botStatus: transactionHistoryModel.status,
+                botOrderId: transactionHistoryModel.idString,
               ),
             );
           },

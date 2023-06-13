@@ -20,10 +20,6 @@ BotDetailTransactionHistoryResponse
               .map((e) => BotActivitiesTransactionHistoryModel.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-          (json['performances'] as List<dynamic>)
-              .map((e) =>
-                  BotPortfolioChartDataSet.fromJson(e as Map<String, dynamic>))
-              .toList(),
           (json['investment_amount'] as num).toDouble(),
           (json['final_return'] as num?)?.toDouble(),
           (json['total_pnl_pct'] as num).toDouble(),
@@ -45,7 +41,6 @@ Map<String, dynamic> _$BotDetailTransactionHistoryResponseToJson(
       'bot_info': instance.botInfo,
       'summary': instance.summary,
       'activities': instance.activities,
-      'performances': instance.performances,
       'investment_amount': instance.investmentAmount,
       'final_return': instance.finalReturn,
       'total_pnl_pct': instance.totalPnLPct,

@@ -8,10 +8,10 @@ import 'bloc/bot_performance_bloc.dart';
 
 class BotPerformanceChart extends StatelessWidget {
   final String botOrderId;
-  final Widget chartCaption;
+  final Widget? chartCaption;
 
   const BotPerformanceChart(
-      {required this.botOrderId, required this.chartCaption, Key? key})
+      {required this.botOrderId, this.chartCaption, Key? key})
       : super(key: key);
 
   @override
@@ -31,10 +31,11 @@ class BotPerformanceChart extends StatelessWidget {
                   children: [
                     ChartAnimation(
                         chartDataSets: state.botPerformanceResponse.data!),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    chartCaption,
+                    if (chartCaption != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6.0),
+                        child: chartCaption,
+                      ),
                   ],
                 )
               : Text(S.of(context).portfolioDetailChartEmptyMessage);

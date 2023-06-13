@@ -1,12 +1,16 @@
 part of '../bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
+  final String botOrderId;
   final String botStatus;
   final String title;
   late final BotStatus botStatusType;
 
   BotOrderTransactionHistoryDetailContent(
-      {required this.title, required this.botStatus, Key? key})
+      {required this.title,
+      required this.botStatus,
+      required this.botOrderId,
+      Key? key})
       : super(key: key) {
     botStatusType = BotStatus.findByString(botStatus);
   }
@@ -40,10 +44,13 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
       const BotOrderTransactionHistoryActivitiesScreen(),
 
       ///TODO : SHOULD ONLY SHOW PERFORMANCE WHEN STATUS CLOSED LATER WHEN BOT STATUS IS FIXED
-      const BotOrderTransactionHistoryPerformanceScreen()
+      BotOrderTransactionHistoryPerformanceScreen(
+        botOrderId: botOrderId,
+      )
     ];
     if (botStatusType == BotStatus.closed) {
-      tabViews.add(const BotOrderTransactionHistoryPerformanceScreen());
+      tabViews.add(
+          BotOrderTransactionHistoryPerformanceScreen(botOrderId: botOrderId));
     }
     return tabViews;
   }

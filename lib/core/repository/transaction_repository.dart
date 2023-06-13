@@ -114,6 +114,7 @@ class TransactionRepository {
 
       return BaseResponse.complete(botDetailTransactionHistoryResponse);
     } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }

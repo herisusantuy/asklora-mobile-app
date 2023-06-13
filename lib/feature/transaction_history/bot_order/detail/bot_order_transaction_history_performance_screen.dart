@@ -1,7 +1,9 @@
 part of 'bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
-  const BotOrderTransactionHistoryPerformanceScreen({Key? key})
+  final String botOrderId;
+  const BotOrderTransactionHistoryPerformanceScreen(
+      {required this.botOrderId, Key? key})
       : super(key: key);
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
@@ -49,7 +51,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
               const SizedBox(
                 height: 28,
               ),
-              _chartWidget(context, data.performances),
+              _chartWidget(context, botOrderId),
               const SizedBox(
                 height: 33,
               ),
@@ -96,14 +98,10 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
         rightSubTitle: data.estMaxProfitPctString,
       );
 
-  Widget _chartWidget(
-          BuildContext context, List<BotPortfolioChartDataSet> performances) =>
-      Align(
-          alignment: Alignment.center,
-          child: performances.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: ChartAnimation(chartDataSets: performances),
-                )
-              : Text(S.of(context).portfolioDetailChartEmptyMessage));
+  Widget _chartWidget(BuildContext context, String botOrderId) => Align(
+      alignment: Alignment.center,
+      child: BotPerformanceChart(
+        botOrderId: botOrderId,
+        chartCaption: null,
+      ));
 }

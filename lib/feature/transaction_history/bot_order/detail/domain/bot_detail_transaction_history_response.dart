@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../../../core/utils/date_utils.dart';
 import '../../../../../core/utils/extensions.dart';
 import '../../../../bot_stock/domain/bot_detail_model.dart';
-import '../../../../chart/domain/bot_portfolio_chart_models.dart';
 import 'bot_activities_transaction_history_model.dart';
 import 'bot_summary_transaction_history_model.dart';
 
@@ -17,7 +16,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
   final BotInfo botInfo;
   final List<BotSummaryTransactionHistoryModel> summary;
   final List<BotActivitiesTransactionHistoryModel> activities;
-  final List<BotPortfolioChartDataSet> performances;
   @JsonKey(name: 'investment_amount')
   final double investmentAmount;
   @JsonKey(name: 'final_return')
@@ -46,7 +44,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
       this.botInfo,
       this.summary,
       this.activities,
-      this.performances,
       this.investmentAmount,
       this.finalReturn,
       this.totalPnLPct,
@@ -67,7 +64,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
           botInfo,
           summary,
           activities ?? this.activities,
-          performances,
           investmentAmount,
           finalReturn,
           totalPnLPct,
@@ -138,7 +134,6 @@ class BotDetailTransactionHistoryResponse extends Equatable {
         botInfo,
         summary,
         activities,
-        performances,
         investmentAmount,
         finalReturn,
         totalPnLPct,
