@@ -17,7 +17,7 @@ import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
-import '../../domain/bot_detail_model.dart';
+import '../../domain/bot_recommendation_detail_model.dart';
 import '../../domain/bot_recommendation_model.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
@@ -29,7 +29,7 @@ import '../widgets/pair_column_text.dart';
 class BotTradeSummaryModel {
   final double amount;
   final BotRecommendationModel botRecommendationModel;
-  final BotDetailModel botDetailModel;
+  final BotRecommendationDetailModel botDetailModel;
   final BotType botType;
 
   BotTradeSummaryModel(
@@ -53,7 +53,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BotDetailModel botDetailModel = botTradeSummaryModel.botDetailModel;
+    BotRecommendationDetailModel botDetailModel =
+        botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
     return BlocProvider(
       create: (_) => BotStockBloc(

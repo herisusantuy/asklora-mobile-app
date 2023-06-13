@@ -1,51 +1,29 @@
 import 'package:json_annotation/json_annotation.dart';
+import '../../../../core/domain/bot/bot_detail_model.dart';
+import '../../../../core/domain/bot/bot_info.dart';
+import '../../../../core/domain/bot/stock_info.dart';
 import '../../../../core/utils/extensions.dart';
-import '../../../chart/domain/bot_portfolio_chart_models.dart';
-import '../bot_detail_model.dart';
 
 part 'bot_active_order_detail_model.g.dart';
 
 @JsonSerializable()
-class BotActiveOrderDetailModel {
-  final String uid;
-  final String name;
-  @JsonKey(name: 'botstock_value')
-  final double? botStockValue;
-  @JsonKey(name: 'investment_amount')
-  final double investmentAmount;
+class BotActiveOrderDetailModel extends BotDetailModel {
   @JsonKey(name: 'total_pnl_amt')
   final double totalPnLAmt;
-  @JsonKey(name: 'bot_duration')
-  final String botDuration;
-  @JsonKey(name: 'spot_date')
-  final String spotDate;
-  @JsonKey(name: 'expire_date')
-  final String? expireDate;
   @JsonKey(name: 'days_to_expire')
   final int daysToExpire;
-  @JsonKey(name: 'est_max_loss')
-  final double estMaxLoss;
-  @JsonKey(name: 'est_max_profit')
-  final double estMaxProfit;
-  final String status;
-  @JsonKey(name: 'rollover_count')
-  final int? rolloverCount;
   @JsonKey(name: 'avg_return_pct')
   final double avgReturnPct;
   @JsonKey(name: 'avg_loss_pct')
   final double avgLossPct;
   @JsonKey(name: 'avg_period')
   final double avgPeriod;
-  @JsonKey(name: 'bot_info')
-  final BotInfo botInfo;
+
   @JsonKey(name: 'stock_info')
   final StockInfo stockInfo;
 
-  ///todo : later menyesuaikan endpoint response
   @JsonKey(name: 'current_price')
   final double? currentPrice;
-  @JsonKey(name: 'stock_value')
-  final double stockValue;
   @JsonKey(name: 'bot_asset_in_stock_pct')
   final double botAssetInStockPct;
   @JsonKey(name: 'bot_cash_balance')
@@ -58,83 +36,52 @@ class BotActiveOrderDetailModel {
   final double targetProfitPct;
 
   const BotActiveOrderDetailModel(
-      this.uid,
-      this.name,
-      this.botStockValue,
-      this.investmentAmount,
+      String uid,
+      String name,
+      BotInfo botInfo,
+      double investmentAmount,
+      double? finalReturn,
+      String botDuration,
+      String spotDate,
+      String? expireDate,
+      double estMaxLoss,
+      double estMaxProfit,
+      String status,
+      int rolloverCount,
+      double botStockValue,
       this.totalPnLAmt,
-      this.botDuration,
-      this.spotDate,
-      this.expireDate,
       this.daysToExpire,
-      this.estMaxLoss,
-      this.estMaxProfit,
-      this.status,
-      this.rolloverCount,
       this.avgReturnPct,
       this.avgLossPct,
       this.avgPeriod,
-      this.botInfo,
       this.stockInfo,
       this.currentPrice,
-      this.stockValue,
       this.botAssetInStockPct,
       this.botCashBalance,
       this.botShare,
       this.maxLossPct,
-      this.targetProfitPct);
-
-  BotActiveOrderDetailModel copyWith(
-          {List<BotPortfolioChartDataSet>? performances}) =>
-      BotActiveOrderDetailModel(
+      this.targetProfitPct)
+      : super(
           uid,
           name,
-          botStockValue,
+          botInfo,
           investmentAmount,
-          totalPnLAmt,
+          finalReturn,
           botDuration,
           spotDate,
           expireDate,
-          daysToExpire,
           estMaxLoss,
           estMaxProfit,
           status,
           rolloverCount,
-          avgReturnPct,
-          avgLossPct,
-          avgPeriod,
-          botInfo,
-          stockInfo,
-          currentPrice,
-          stockValue,
-          botAssetInStockPct,
-          botCashBalance,
-          botShare,
-          maxLossPct,
-          targetProfitPct);
-
-  String get rolloverCountString =>
-      rolloverCount != null ? rolloverCount.toString() : 'NA';
-
-  String get investmentAmountString {
-    double investmentAmountDouble = checkDouble(investmentAmount);
-    return (investmentAmountDouble > 0)
-        ? investmentAmountDouble.convertToCurrencyDecimal()
-        : 'NA';
-  }
+          botStockValue,
+        );
 
   String get currentPriceString {
     double currentPriceDouble = checkDouble(currentPrice);
     return (currentPriceDouble > 0)
         ? currentPriceDouble.convertToCurrencyDecimal()
         : 'NA';
-  }
-
-  String get stockValueString {
-    double stockValueDouble = checkDouble(stockValue);
-    return (stockValueDouble > 0)
-        ? stockValueDouble.convertToCurrencyDecimal()
-        : '/';
   }
 
   String get botAssetInStockPctString {
@@ -152,13 +99,6 @@ class BotActiveOrderDetailModel {
   String get botShareString {
     double botShareDouble = checkDouble(botShare);
     return (botShareDouble > 0) ? botShareDouble.toString() : '/';
-  }
-
-  String get botStockValueString {
-    double botStockValueDouble = checkDouble(botStockValue);
-    return (botStockValueDouble > 0)
-        ? botStockValueDouble.convertToCurrencyDecimal()
-        : '/';
   }
 
   String get totalPnlRetString {
@@ -195,12 +135,11 @@ class BotActiveOrderDetailModel {
   String get targetProfitPctString =>
       targetProfitPct.convertToCurrencyDecimal(decimalDigits: 2);
 
-  String get expireDateStr => expireDate ?? '';
-
   String get daysToExpireString => '${daysToExpire.abs()}';
 
   factory BotActiveOrderDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotActiveOrderDetailModelFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$BotActiveOrderDetailModelToJson(this);
 }

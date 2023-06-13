@@ -11,7 +11,7 @@ import '../../chart/domain/bot_portfolio_chart_models.dart';
 import '../../chart/domain/bot_recommendation_chart_model.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
-import '../domain/bot_detail_model.dart';
+import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_detail_request.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../domain/bot_recommendation_response.dart';
@@ -28,13 +28,14 @@ class BotStockRepository {
   final SharedPreference _sharedPreference = SharedPreference();
   final BotStockApiClient _botStockApiClient = BotStockApiClient();
 
-  Future<BaseResponse<BotDetailModel>> fetchBotDetail(
+  Future<BaseResponse<BotRecommendationDetailModel>> fetchBotDetail(
       String ticker, String botId) async {
     try {
       var response = await _botStockApiClient
           .fetchBotDetail(BotDetailRequest(ticker, botId));
 
-      return BaseResponse.complete(BotDetailModel.fromJson(response.data));
+      return BaseResponse.complete(
+          BotRecommendationDetailModel.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }
@@ -218,7 +219,6 @@ class BotStockRepository {
     } on LegalReasonException {
       return BaseResponse.suspended();
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }

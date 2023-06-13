@@ -8,7 +8,7 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_detail_model.dart'
+import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_detail_model.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart'
     as _i8;
@@ -62,7 +62,7 @@ class MockBotStockRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>> fetchBotDetail(
+  _i4.Future<_i2.BaseResponse<_i5.BotRecommendationDetailModel>> fetchBotDetail(
     String? ticker,
     String? botId,
   ) =>
@@ -74,8 +74,9 @@ class MockBotStockRepository extends _i1.Mock
             botId,
           ],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>>.value(
-            _FakeBaseResponse_0<_i5.BotDetailModel>(
+        returnValue: _i4.Future<
+                _i2.BaseResponse<_i5.BotRecommendationDetailModel>>.value(
+            _FakeBaseResponse_0<_i5.BotRecommendationDetailModel>(
           this,
           Invocation.method(
             #fetchBotDetail,
@@ -85,7 +86,7 @@ class MockBotStockRepository extends _i1.Mock
             ],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>>);
+      ) as _i4.Future<_i2.BaseResponse<_i5.BotRecommendationDetailModel>>);
   @override
   _i4.Future<_i2.BaseResponse<List<_i6.ChartDataSet>>> fetchChartDataJson() =>
       (super.noSuchMethod(

@@ -1,5 +1,6 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_detail_model.dart';
+import 'package:asklora_mobile_app/core/domain/bot/bot_description.dart';
+import 'package:asklora_mobile_app/core/domain/bot/bot_info.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/bloc/bot_transaction_history_detail_bloc.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_activities_transaction_history_model.dart';
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
@@ -24,6 +25,16 @@ void main() async {
             '1',
             '2',
             BotInfo('a', 'b', BotDescriptionModel('a', 'b', 'c')),
+            0,
+            0,
+            '2 weeks',
+            '2023-04-14',
+            '2023-04-14',
+            20,
+            20,
+            'pending',
+            0,
+            0,
             [],
             [
               BotActivitiesTransactionHistoryModel(
@@ -81,17 +92,7 @@ void main() async {
                 '2023-04-15',
               ),
             ],
-            0,
-            0,
-            0,
-            '1 weeks',
-            '2023-04-14',
-            '2023-04-14',
-            0,
-            0,
-            'pending',
-            0,
-            'a'));
+            0));
 
     final List<GroupedActivitiesModel> groupedActivities = [
       const GroupedActivitiesModel(

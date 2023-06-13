@@ -36,7 +36,7 @@ class KeyInfo extends StatelessWidget {
               leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
               leftSubTitle: botActiveOrderDetailModel.spotDate,
               rightTitle: S.of(context).portfolioDetailKeyInfoEndTime,
-              rightSubTitle: botActiveOrderDetailModel.expireDateStr),
+              rightSubTitle: botActiveOrderDetailModel.expireDateFormatted),
           _spaceBetweenInfo,
           ..._stopLossMaxProfit(context),
           _spaceBetweenInfo,

@@ -62,7 +62,7 @@ class Performance extends StatelessWidget {
         _spaceBetweenInfo,
         PairColumnText(
           leftTitle: S.of(context).portfolioDetailPerformanceStockValues,
-          leftSubTitle: botActiveOrderDetailModel.stockValueString,
+          leftSubTitle: botActiveOrderDetailModel.botStockValueString,
           rightTitle: S.of(context).portfolioDetailPerformanceCash,
           rightSubTitle: botActiveOrderDetailModel.botCashBalanceString,
         ),
@@ -89,7 +89,7 @@ class Performance extends StatelessWidget {
             S.of(context).portfolioDetailChartCaption(
                 '${botType.upperCaseName} ${botActiveOrderDetailModel.stockInfo.ticker}',
                 botActiveOrderDetailModel.spotDate,
-                botActiveOrderDetailModel.expireDateStr,
+                botActiveOrderDetailModel.expireDateFormatted,
                 botActiveOrderDetailModel.botDuration),
             style: AskLoraTextStyles.body4),
       );
