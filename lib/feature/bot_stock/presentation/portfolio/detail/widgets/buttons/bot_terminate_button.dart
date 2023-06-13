@@ -23,7 +23,7 @@ class BotTerminateButton extends StatelessWidget {
             BotStockResultScreen.open(
                 context: context,
                 arguments: Pair('Trade Request Received',
-                    '${botType.name} ${botActiveOrderDetailModel.stockInfo.ticker} will end at ${state.endBotStockResponse.data?.optimalTime}'));
+                    '${botType.name} ${botActiveOrderDetailModel.stockInfo.ticker} will end at ${state.endBotStockResponse.data?.optimalTimeFormatted}'));
           } else if (state.endBotStockResponse.state ==
               ResponseState.suspended) {
             SuspendedAccountScreen.open(context);

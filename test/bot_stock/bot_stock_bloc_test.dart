@@ -25,7 +25,7 @@ void main() async {
 
     final BaseResponse<BotCreateOrderResponse> botCreateOrderSuccessResponse =
         BaseResponse.complete(const BotCreateOrderResponse('a', 'b', 'c', true,
-            0, '2023-06-06', 'APPLE', 0, true, '2023-06-06', 'AAOK'));
+            '0', '2023-06-06', 'APPLE', 0, true, '2023-06-06', 'AAOK'));
     final BaseResponse<BotCreateOrderResponse> botCreateOrderFailedResponse =
         BaseResponse.error();
 

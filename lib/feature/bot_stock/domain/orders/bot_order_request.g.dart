@@ -8,12 +8,10 @@ part of 'bot_order_request.dart';
 
 BotOrderRequest _$BotOrderRequestFromJson(Map<String, dynamic> json) =>
     BotOrderRequest(
-      orderId: json['order_id'] as String,
-      orderType: json['order_type'] as String? ?? 'POOL',
+      json['bot_id'] as String,
     );
 
 Map<String, dynamic> _$BotOrderRequestToJson(BotOrderRequest instance) =>
     <String, dynamic>{
-      'order_id': instance.orderId,
-      'order_type': instance.orderType,
+      'bot_id': instance.botId,
     };

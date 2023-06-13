@@ -9,8 +9,8 @@ class BotCreateOrderResponse {
   final String status;
   @JsonKey(name: 'is_active')
   final bool isActive;
-  @JsonKey(name: 'total_pnl')
-  final double totalPnL;
+  @JsonKey(name: 'total_pnl_amt')
+  final String totalPnLAmt;
   @JsonKey(name: 'expire_date')
   final String? expireDate;
   @JsonKey(name: 'ticker_name')
@@ -28,7 +28,7 @@ class BotCreateOrderResponse {
     this.name,
     this.status,
     this.isActive,
-    this.totalPnL,
+    this.totalPnLAmt,
     this.expireDate,
     this.tickerName,
     this.currentPrice,

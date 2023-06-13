@@ -172,8 +172,8 @@ class BotStockRepository {
 
   Future<BaseResponse<BotOrderResponse>> cancelOrder(String botOrderId) async {
     try {
-      var response = await _botStockApiClient
-          .cancelOrder(BotOrderRequest(orderId: botOrderId));
+      var response =
+          await _botStockApiClient.cancelOrder(BotOrderRequest(botOrderId));
       return BaseResponse.complete(BotOrderResponse.fromJson(response.data));
     } on LegalReasonException {
       return BaseResponse.suspended();
@@ -185,8 +185,8 @@ class BotStockRepository {
   Future<BaseResponse<RolloverOrderResponse>> rolloverOrder(
       String botOrderId) async {
     try {
-      var response = await _botStockApiClient
-          .rolloverOrder(BotOrderRequest(orderId: botOrderId));
+      var response =
+          await _botStockApiClient.rolloverOrder(BotOrderRequest(botOrderId));
       return BaseResponse.complete(
           RolloverOrderResponse.fromJson(response.data));
     } on LegalReasonException {
@@ -199,13 +199,14 @@ class BotStockRepository {
   Future<BaseResponse<TerminateOrderResponse>> terminateOrder(
       String botOrderId) async {
     try {
-      var response = await _botStockApiClient
-          .terminateOrder(BotOrderRequest(orderId: botOrderId));
+      var response =
+          await _botStockApiClient.terminateOrder(BotOrderRequest(botOrderId));
       return BaseResponse.complete(
           TerminateOrderResponse.fromJson(response.data));
     } on LegalReasonException {
       return BaseResponse.suspended();
     } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }
