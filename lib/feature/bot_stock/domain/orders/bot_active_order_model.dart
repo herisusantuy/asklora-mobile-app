@@ -11,8 +11,8 @@ class BotActiveOrderModel {
   final String status;
   @JsonKey(name: 'is_active')
   final bool isActive;
-  @JsonKey(name: 'total_pnl_amt')
-  final double totalPnlAmt;
+  @JsonKey(name: 'total_pnl_pct')
+  final double totalPnLPct;
   @JsonKey(name: 'expire_date')
   final String? expireDate;
   @JsonKey(name: 'ticker_name')
@@ -34,7 +34,7 @@ class BotActiveOrderModel {
       this.name,
       this.status,
       this.isActive,
-      this.totalPnlAmt,
+      this.totalPnLPct,
       this.expireDate,
       this.tickerName,
       this.currentPrice,
@@ -43,12 +43,14 @@ class BotActiveOrderModel {
       this.ticker,
       this.botAppsName);
 
-  String get totalPnlRetString {
-    final double totalPnlDouble = checkDouble(totalPnlAmt);
-    return (totalPnlDouble > 0)
-        ? '+$totalPnlDouble%'
-        : (totalPnlDouble < 0)
-            ? '$totalPnlDouble%'
+  String get totalPnLPctString {
+    final double totalPnLPctDouble = checkDouble(totalPnLPct);
+    final String totalPnLPctString =
+        totalPnLPctDouble.convertToCurrencyDecimal();
+    return (totalPnLPctDouble > 0)
+        ? '+$totalPnLPctString%'
+        : (totalPnLPctDouble < 0)
+            ? '$totalPnLPctString%'
             : '/';
   }
 
