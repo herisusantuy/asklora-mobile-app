@@ -31,6 +31,8 @@ class BotDetailModel extends Equatable {
   final int rolloverCount;
   @JsonKey(name: 'bot_stock_value')
   final double botStockValue;
+  @JsonKey(name: 'total_pnl_pct')
+  final double totalPnLPct;
 
   const BotDetailModel(
       this.uid,
@@ -45,7 +47,8 @@ class BotDetailModel extends Equatable {
       this.estMaxProfit,
       this.status,
       this.rolloverCount,
-      this.botStockValue);
+      this.botStockValue,
+      this.totalPnLPct);
 
   String get rolloverCountString => rolloverCount.toString();
 
@@ -81,6 +84,17 @@ class BotDetailModel extends Equatable {
 
   String get expireDateFormatted =>
       expireDate != null ? formatDateTimeAsString(expireDate) : 'NA';
+
+  String get totalPnLPctString {
+    final double totalPnlPctDouble = checkDouble(totalPnLPct);
+    final String totalPnlPctFormatted =
+        totalPnlPctDouble.convertToCurrencyDecimal();
+    return (totalPnlPctDouble > 0)
+        ? '+$totalPnlPctFormatted%'
+        : (totalPnlPctDouble < 0)
+            ? '$totalPnlPctFormatted%'
+            : '/';
+  }
 
   factory BotDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotDetailModelFromJson(json);

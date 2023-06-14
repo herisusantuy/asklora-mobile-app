@@ -45,7 +45,7 @@ class Performance extends StatelessWidget {
               Expanded(
                   child: ColumnText(
                       title: S.of(context).portfolioDetailPerformanceTotalPL,
-                      subTitle: botActiveOrderDetailModel.totalPnlRetString)),
+                      subTitle: botActiveOrderDetailModel.totalPnLPctString)),
             ],
           ),
         ),

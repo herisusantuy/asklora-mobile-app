@@ -21,6 +21,7 @@ BotDetailModel _$BotDetailModelFromJson(Map<String, dynamic> json) =>
       json['status'] as String,
       json['rollover_count'] as int,
       (json['bot_stock_value'] as num).toDouble(),
+      (json['total_pnl_pct'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$BotDetailModelToJson(BotDetailModel instance) =>
@@ -38,4 +39,5 @@ Map<String, dynamic> _$BotDetailModelToJson(BotDetailModel instance) =>
       'status': instance.status,
       'rollover_count': instance.rolloverCount,
       'bot_stock_value': instance.botStockValue,
+      'total_pnl_pct': instance.totalPnLPct,
     };
