@@ -5,7 +5,6 @@ import '../../../../../core/utils/bloc_transformer/restartable.dart';
 import '../../../../../core/utils/currency_enum.dart';
 import '../../../../../core/domain/transaction/transaction_balance_model.dart';
 import '../../../../../core/repository/transaction_repository.dart';
-import '../../../../chart/domain/bot_portfolio_chart_models.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../domain/orders/bot_order_response.dart';
@@ -25,7 +24,6 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
         super(const PortfolioState()) {
     on<FetchActiveOrderDetail>(_onFetchActiveOrderDetail);
     on<FetchActiveOrders>(onFetchBotActiveOrders, transformer: restartable());
-    on<FetchBotPerformance>(_onFetchBotPerformance);
     on<ActiveFilterChecked>(_onActiveFilterChecked);
     on<PendingFilterChecked>(_onPendingFilterChecked);
     on<CurrencyChanged>(_onCurrencyChanged);
@@ -65,17 +63,9 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
   _onFetchActiveOrderDetail(
       FetchActiveOrderDetail event, Emitter<PortfolioState> emit) async {
-    add(FetchBotPerformance(botOrderId: event.botOrderId));
     emit(state.copyWith(botActiveOrderDetailResponse: BaseResponse.loading()));
     var data = await _botStockRepository.activeOrderDetail(event.botOrderId);
     emit(state.copyWith(botActiveOrderDetailResponse: data));
-  }
-
-  _onFetchBotPerformance(
-      FetchBotPerformance event, Emitter<PortfolioState> emit) async {
-    emit(state.copyWith(botPerformanceResponse: BaseResponse.loading()));
-    var data = await _botStockRepository.fetchBotPerformance(event.botOrderId);
-    emit(state.copyWith(botPerformanceResponse: data));
   }
 
   _onActiveFilterChecked(

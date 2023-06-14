@@ -13,7 +13,7 @@ import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../../generated/l10n.dart';
 import '../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../bloc/bot_stock_bloc.dart';
-import '../domain/bot_detail_model.dart';
+import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../presentation/portfolio/bloc/portfolio_bloc.dart';
@@ -112,7 +112,7 @@ class BotStockBottomSheet {
       BuildContext context,
       BotType botType,
       BotRecommendationModel botRecommendationModel,
-      BotDetailModel botDetailModel,
+      BotRecommendationDetailModel botDetailModel,
       double buyingPower) {
     showModalBottomSheet(
       isScrollControlled: true,

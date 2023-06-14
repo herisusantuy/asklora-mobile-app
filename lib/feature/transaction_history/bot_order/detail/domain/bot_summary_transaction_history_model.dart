@@ -17,7 +17,7 @@ class BotSummaryTransactionHistoryModel extends Equatable {
   final double totalPnL;
 
   String get totalPnLString {
-    double finalPnlAmountDouble = checkDouble(totalPnL);
+    final double finalPnlAmountDouble = checkDouble(totalPnL);
     return (finalPnlAmountDouble > 0)
         ? '+$finalPnlAmountDouble'
         : (finalPnlAmountDouble < 0)
@@ -26,7 +26,7 @@ class BotSummaryTransactionHistoryModel extends Equatable {
   }
 
   String get investmentAmountString {
-    double investmentAmountDouble = checkDouble(amount);
+    final double investmentAmountDouble = checkDouble(amount);
     return (investmentAmountDouble > 0)
         ? 'HKD${investmentAmountDouble.convertToCurrencyDecimal()}'
         : 'NA';

@@ -51,7 +51,7 @@ class BotActivitiesTransactionHistoryModel {
       this.failedAt);
 
   String get investedString {
-    double investmentAmountDouble = checkDouble(invested);
+    final double investmentAmountDouble = checkDouble(invested);
     return 'USD ${investmentAmountDouble.convertToCurrencyDecimal()}';
   }
 
@@ -59,14 +59,14 @@ class BotActivitiesTransactionHistoryModel {
       formatDateTimeAsString(created, dateFormat: 'HH:mm:ss');
 
   String get filledAvgPriceString {
-    double filledAvgPriceDouble = checkDouble(price);
+    final double filledAvgPriceDouble = checkDouble(price);
     return (filledAvgPriceDouble > 0)
         ? 'USD ${filledAvgPriceDouble.toInt()}'
         : 'NA';
   }
 
   String get filledQtyString {
-    double filledAvgQtyDouble = checkDouble(filledQty);
+    final double filledAvgQtyDouble = checkDouble(filledQty);
     return (filledAvgQtyDouble > 0) ? filledAvgQtyDouble.toString() : 'NA';
   }
 

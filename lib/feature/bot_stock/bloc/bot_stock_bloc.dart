@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/utils/extensions.dart';
-import '../domain/bot_detail_model.dart';
+import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
 import '../domain/orders/bot_create_order_response.dart';
 import '../repository/bot_stock_repository.dart';
