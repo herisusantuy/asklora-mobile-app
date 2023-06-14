@@ -200,13 +200,13 @@ class RouterGenerator {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => WithdrawalBankDetailScreen(
-            withdrawableBalance: settings.arguments as String,
+            withdrawableBalance: settings.arguments as double,
           ),
         );
       case WithdrawalAmountScreen.route:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => WithdrawalAmountScreen(settings.arguments as String),
+          builder: (_) => WithdrawalAmountScreen(settings.arguments as double),
         );
       case WithdrawalSummaryScreen.route:
         return MaterialPageRoute(

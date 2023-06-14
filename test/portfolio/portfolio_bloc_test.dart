@@ -30,7 +30,7 @@ void main() async {
 
     final BaseResponse<TransactionBalanceModel> transactionBalanceResponse =
         BaseResponse.complete(
-            const TransactionBalanceModel('20', '20', '20', 20, 20, 20, 20));
+            const TransactionBalanceModel(20, 20, 20, 20, 20));
 
     final BaseResponse<TransactionBalanceModel>
         transactionBalanceErrorResponse = BaseResponse.error();

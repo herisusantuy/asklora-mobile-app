@@ -21,7 +21,7 @@ part 'widgets/withdrawal_key_pad.dart';
 class WithdrawalAmountScreen extends StatelessWidget {
   static const String route = '/withdrawal_amount_screen';
 
-  final String withdrawableBalance;
+  final double withdrawableBalance;
 
   const WithdrawalAmountScreen(this.withdrawableBalance, {Key? key})
       : super(key: key);
@@ -81,6 +81,6 @@ class WithdrawalAmountScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context, String withdrawableBalance) =>
+  static void open(BuildContext context, double withdrawableBalance) =>
       Navigator.pushNamed(context, route, arguments: withdrawableBalance);
 }

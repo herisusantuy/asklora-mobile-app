@@ -7,49 +7,44 @@ part 'transaction_balance_model.g.dart';
 
 @JsonSerializable()
 class TransactionBalanceModel extends Equatable {
-  @JsonKey(name: 'fully_settled_balance_hkd')
-  final String fullySettledBalanceHkd;
-  @JsonKey(name: 'fully_settled_balance_usd')
-  final String fullySettledBalanceUsd;
   @JsonKey(name: 'withdrawable_balance')
-  final String withdrawableBalance;
+  final double withdrawableBalance;
+  @JsonKey(name: 'buying_power')
+  final double buyingPower;
+  @JsonKey(name: 'total_bot_stock')
+  final double totalBotStock;
+  @JsonKey(name: 'total_pnl_pct')
+  final double totalPnLPct;
+  @JsonKey(name: 'total_portfolio')
+  final double totalPortfolio;
 
-  ///below variable is not yet available from endpoint side
-  final double? totalPortfolio;
-  final double? buyingPower;
-  final double? totalBotstockValue;
-  final double? totalPnL;
-
-  const TransactionBalanceModel(
-      this.fullySettledBalanceHkd,
-      this.fullySettledBalanceUsd,
-      this.withdrawableBalance,
-      this.totalPortfolio,
-      this.buyingPower,
-      this.totalBotstockValue,
-      this.totalPnL);
+  const TransactionBalanceModel(this.withdrawableBalance, this.buyingPower,
+      this.totalBotStock, this.totalPnLPct, this.totalPortfolio);
 
   factory TransactionBalanceModel.fromJson(Map<String, dynamic> json) =>
       _$TransactionBalanceModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TransactionBalanceModelToJson(this);
 
-  String get withdrawableBalanceStr => withdrawableBalance.isNotEmpty
-      ? checkDouble(withdrawableBalance).convertToCurrencyDecimal()
+  String get withdrawableBalanceStr => withdrawableBalance != 0
+      ? withdrawableBalance.convertToCurrencyDecimal()
       : '/';
 
-  String get buyingPowerStr => buyingPower != null
-      ? checkDouble(buyingPower).convertToCurrencyDecimal()
-      : '/';
+  String get buyingPowerStr =>
+      buyingPower != 0 ? buyingPower.convertToCurrencyDecimal() : '/';
 
-  String get totalBotstockValueStr => totalBotstockValue != null
-      ? checkDouble(totalBotstockValue).convertToCurrencyDecimal()
-      : '/';
+  String get totalBotstockValueStr =>
+      totalBotStock != 0 ? totalBotStock.convertToCurrencyDecimal() : '/';
 
   String get totalPnLStr =>
-      totalPnL != null ? checkDouble(totalPnL).convertToCurrencyDecimal() : '/';
+      totalPnLPct != 0 ? totalPnLPct.convertToCurrencyDecimal() : '/';
 
   @override
-  List<Object> get props =>
-      [fullySettledBalanceHkd, fullySettledBalanceUsd, withdrawableBalance];
+  List<Object> get props => [
+        withdrawableBalance,
+        buyingPower,
+        totalBotStock,
+        totalPnLPct,
+        totalPortfolio
+      ];
 }

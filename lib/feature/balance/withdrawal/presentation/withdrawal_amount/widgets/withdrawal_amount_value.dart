@@ -1,7 +1,7 @@
 part of '../withdrawal_amount_screen.dart';
 
 class WithdrawalAmountValue extends StatelessWidget {
-  final String withdrawableBalance;
+  final double withdrawableBalance;
 
   const WithdrawalAmountValue({Key? key, required this.withdrawableBalance})
       : super(key: key);
