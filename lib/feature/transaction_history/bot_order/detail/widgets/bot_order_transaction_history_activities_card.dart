@@ -45,7 +45,7 @@ class BotOrderTransactionHistoryActivitiesCard extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: CustomTextNew(
-              'HKD: 3,180.92 @ 1USD = 7.847HKD',
+              'HKD: 3,180.92*',
               style: AskLoraTextStyles.body3
                   .copyWith(color: AskLoraColors.darkGray),
             ),
