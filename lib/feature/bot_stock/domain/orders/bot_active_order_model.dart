@@ -44,7 +44,7 @@ class BotActiveOrderModel {
       this.botAppsName);
 
   String get totalPnlRetString {
-    double totalPnlDouble = checkDouble(totalPnlAmt);
+    final double totalPnlDouble = checkDouble(totalPnlAmt);
     return (totalPnlDouble > 0)
         ? '+$totalPnlDouble%'
         : (totalPnlDouble < 0)

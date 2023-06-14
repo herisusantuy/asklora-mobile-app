@@ -38,6 +38,7 @@ class TransferAmountStep extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.depositAmountErrorText != current.depositAmountErrorText,
           builder: (context, state) => AmountTextField(
+            decimalDigits: 0,
             onChanged: (value) => context.read<DepositBloc>().add(
                 DepositAmountChanged(
                     value.isNotEmpty ? double.parse(value) : 0)),

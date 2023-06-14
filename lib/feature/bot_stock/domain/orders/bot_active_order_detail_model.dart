@@ -18,10 +18,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   final double avgLossPct;
   @JsonKey(name: 'avg_period')
   final double avgPeriod;
-
   @JsonKey(name: 'stock_info')
   final StockInfo stockInfo;
-
   @JsonKey(name: 'current_price')
   final double? currentPrice;
   @JsonKey(name: 'bot_asset_in_stock_pct')
@@ -78,31 +76,31 @@ class BotActiveOrderDetailModel extends BotDetailModel {
         );
 
   String get currentPriceString {
-    double currentPriceDouble = checkDouble(currentPrice);
+    final double currentPriceDouble = checkDouble(currentPrice);
     return (currentPriceDouble > 0)
         ? currentPriceDouble.convertToCurrencyDecimal()
         : 'NA';
   }
 
   String get botAssetInStockPctString {
-    double botAssetInStockPctDouble = checkDouble(botAssetInStockPct);
+    final double botAssetInStockPctDouble = checkDouble(botAssetInStockPct);
     return (botAssetInStockPctDouble > 0) ? '$botAssetInStockPctDouble%' : '/';
   }
 
   String get botCashBalanceString {
-    double botCashBalanceDouble = checkDouble(botCashBalance);
+    final double botCashBalanceDouble = checkDouble(botCashBalance);
     return (botCashBalanceDouble > 0)
         ? botCashBalanceDouble.convertToCurrencyDecimal()
         : 'NA';
   }
 
   String get botShareString {
-    double botShareDouble = checkDouble(botShare);
+    final double botShareDouble = checkDouble(botShare);
     return (botShareDouble > 0) ? botShareDouble.toString() : '/';
   }
 
   String get totalPnlRetString {
-    double totalPnlDouble = checkDouble(totalPnLAmt);
+    final double totalPnlDouble = checkDouble(totalPnLAmt);
     return (totalPnlDouble > 0)
         ? '+$totalPnlDouble%'
         : (totalPnlDouble < 0)
@@ -111,17 +109,17 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   }
 
   String get avgReturnString {
-    double avgReturnPctDouble = checkDouble(avgReturnPct);
+    final double avgReturnPctDouble = checkDouble(avgReturnPct);
     return (avgReturnPctDouble > 0) ? '+$avgReturnPctDouble%' : 'NA';
   }
 
   String get avgPeriodString {
-    double avgPeriodDouble = checkDouble(avgPeriod);
+    final double avgPeriodDouble = checkDouble(avgPeriod);
     return (avgPeriodDouble > 0) ? '$avgPeriodDouble' : 'NA';
   }
 
   String get avgLossString {
-    double avgLossPctDouble = checkDouble(avgLossPct);
+    final double avgLossPctDouble = checkDouble(avgLossPct);
     return (avgLossPctDouble > 0)
         ? '+$avgLossPctDouble%'
         : (avgLossPctDouble < 0)

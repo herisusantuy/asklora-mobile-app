@@ -56,8 +56,9 @@ class BotDetailTransactionHistoryResponse extends BotDetailModel {
       _$BotDetailTransactionHistoryResponseToJson(this);
 
   String get totalPnLPctString {
-    double totalPnlPctDouble = checkDouble(totalPnLPct);
-    String totalPnlPctFormatted = totalPnlPctDouble.convertToCurrencyDecimal();
+    final double totalPnlPctDouble = checkDouble(totalPnLPct);
+    final String totalPnlPctFormatted =
+        totalPnlPctDouble.convertToCurrencyDecimal();
     return (totalPnlPctDouble > 0)
         ? '+$totalPnlPctFormatted%'
         : (totalPnlPctDouble < 0)

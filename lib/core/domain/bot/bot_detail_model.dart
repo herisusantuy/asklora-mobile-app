@@ -50,28 +50,28 @@ class BotDetailModel extends Equatable {
   String get rolloverCountString => rolloverCount.toString();
 
   String get botStockValueString {
-    double botStockValueDouble = checkDouble(botStockValue);
+    final double botStockValueDouble = checkDouble(botStockValue);
     return (botStockValueDouble > 0)
         ? botStockValueDouble.convertToCurrencyDecimal()
         : '/';
   }
 
   String get estMaxProfitPctString {
-    double targetProfitPctDouble = checkDouble(estMaxProfit);
+    final double targetProfitPctDouble = checkDouble(estMaxProfit);
     return (targetProfitPctDouble > 0)
         ? targetProfitPctDouble.convertToCurrencyDecimal(decimalDigits: 2)
         : '/';
   }
 
   String get estMaxLossPctString {
-    double maxLossPctDouble = checkDouble(estMaxLoss).abs();
+    final double maxLossPctDouble = checkDouble(estMaxLoss).abs();
     return (maxLossPctDouble > 0)
         ? maxLossPctDouble.convertToCurrencyDecimal(decimalDigits: 2)
         : '/';
   }
 
   String get investmentAmountString {
-    double investmentAmountDouble = checkDouble(investmentAmount);
+    final double investmentAmountDouble = checkDouble(investmentAmount);
     return (investmentAmountDouble > 0)
         ? investmentAmountDouble.convertToCurrencyDecimal()
         : 'NA';
