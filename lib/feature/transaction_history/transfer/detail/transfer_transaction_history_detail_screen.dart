@@ -29,14 +29,14 @@ class TransferTransactionHistoryDetailScreen extends StatelessWidget {
           _withdrawalInformation('${S.of(context).withdrawalAmount} (HKD)',
               '\$${transactionHistoryModel.amountString}'),
           _withdrawalInformation(S.of(context).timeRequested,
-              transactionHistoryModel.createdFormatted),
+              '${transactionHistoryModel.createdFormatted}HKT'),
           _withdrawalInformation(S.of(context).bankAccountNumber,
               transactionHistoryModel.bankAccountNumberString),
           _withdrawalInformation(
               S.of(context).status, transactionHistoryModel.transferStatus.name,
               subTitleColor: transactionHistoryModel.transferStatus.color),
           _withdrawalInformation(S.of(context).timeCompleted,
-              transactionHistoryModel.timeCompletedFormatted)
+              '${transactionHistoryModel.timeCompletedFormatted}HKT')
         ],
       ),
     );

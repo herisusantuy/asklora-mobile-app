@@ -17,7 +17,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   @JsonKey(name: 'avg_period')
   final double avgPeriod;
   @JsonKey(name: 'stock_info')
-  final StockInfo stockInfo;
+  final StockInfo? stockInfo;
   @JsonKey(name: 'current_price')
   final double? currentPrice;
   @JsonKey(name: 'bot_asset_in_stock_pct')
@@ -72,6 +72,14 @@ class BotActiveOrderDetailModel extends BotDetailModel {
             rolloverCount,
             botStockValue,
             totalPnLPct);
+
+  ///This might be temporary fix as the endpoint break in some bot cannot found the universe data
+  ///which result in empty stock info object
+  StockInfo get stockInfoWithPlaceholder {
+    return stockInfo ??
+        const StockInfo('NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 0,
+            'NA', 'NA');
+  }
 
   String get currentPriceString {
     final double currentPriceDouble = checkDouble(currentPrice);

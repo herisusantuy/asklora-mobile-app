@@ -27,7 +27,9 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
       (json['avg_return_pct'] as num).toDouble(),
       (json['avg_loss_pct'] as num).toDouble(),
       (json['avg_period'] as num).toDouble(),
-      StockInfo.fromJson(json['stock_info'] as Map<String, dynamic>),
+      json['stock_info'] == null
+          ? null
+          : StockInfo.fromJson(json['stock_info'] as Map<String, dynamic>),
       (json['current_price'] as num?)?.toDouble(),
       (json['bot_asset_in_stock_pct'] as num).toDouble(),
       (json['bot_cash_balance'] as num).toDouble(),

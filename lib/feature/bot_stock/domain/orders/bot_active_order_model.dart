@@ -7,7 +7,6 @@ part 'bot_active_order_model.g.dart';
 @JsonSerializable()
 class BotActiveOrderModel {
   final String uid;
-  final String name;
   final String status;
   @JsonKey(name: 'is_active')
   final bool isActive;
@@ -31,7 +30,6 @@ class BotActiveOrderModel {
 
   const BotActiveOrderModel(
       this.uid,
-      this.name,
       this.status,
       this.isActive,
       this.totalPnLPct,

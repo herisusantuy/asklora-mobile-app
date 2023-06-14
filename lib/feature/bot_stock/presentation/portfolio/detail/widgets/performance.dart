@@ -87,7 +87,7 @@ class Performance extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomTextNew(
             S.of(context).portfolioDetailChartCaption(
-                '${botType.upperCaseName} ${botActiveOrderDetailModel.stockInfo.ticker}',
+                '${botType.upperCaseName} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.ticker}',
                 botActiveOrderDetailModel.spotDate,
                 botActiveOrderDetailModel.expireDateFormatted,
                 botActiveOrderDetailModel.botDuration),

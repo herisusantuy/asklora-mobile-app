@@ -9,7 +9,6 @@ part of 'bot_active_order_model.dart';
 BotActiveOrderModel _$BotActiveOrderModelFromJson(Map<String, dynamic> json) =>
     BotActiveOrderModel(
       json['uid'] as String,
-      json['name'] as String,
       json['status'] as String,
       json['is_active'] as bool,
       (json['total_pnl_pct'] as num).toDouble(),
@@ -26,7 +25,6 @@ Map<String, dynamic> _$BotActiveOrderModelToJson(
         BotActiveOrderModel instance) =>
     <String, dynamic>{
       'uid': instance.uid,
-      'name': instance.name,
       'status': instance.status,
       'is_active': instance.isActive,
       'total_pnl_pct': instance.totalPnLPct,
