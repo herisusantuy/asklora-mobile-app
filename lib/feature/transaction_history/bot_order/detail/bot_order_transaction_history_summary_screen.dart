@@ -53,7 +53,7 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
         ),
         BotOrderTransactionHistorySummaryCard(
           title: S.of(context).botStockId,
-          subTitle: botSummaryTransactionHistoryModel.pk,
+          subTitle: botSummaryTransactionHistoryModel.uid,
           showBottomBorder: true,
         ),
         BotOrderTransactionHistorySummaryCard(
@@ -82,7 +82,7 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
           title: S.of(context).endedAmount,
           subTitle: botSummaryTransactionHistoryModel.investmentAmountString,
           additionalText:
-              '${S.of(context).totalPnlIs} ${botSummaryTransactionHistoryModel.finalPnlAmountString}',
+              '${S.of(context).totalPnlIs} ${botSummaryTransactionHistoryModel.totalPnLString}',
           showBottomBorder: true,
         ),
       ],

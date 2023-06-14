@@ -8,21 +8,16 @@ part 'bot_summary_transaction_history_model.g.dart';
 
 @JsonSerializable()
 class BotSummaryTransactionHistoryModel extends Equatable {
-  final String pk;
-  final String created;
-  final String updated;
+  final String uid;
+  final String date;
+  final double amount;
+  final double fee;
   final String status;
-  @JsonKey(name: 'investment_amount')
-  final double investmentAmount;
-  @JsonKey(name: 'bot_cash_balance')
-  final double botCashBalance;
-  @JsonKey(name: 'final_return')
-  final double? finalReturn;
-  @JsonKey(name: 'final_pnl_amount')
-  final double? finalPnlAmount;
+  @JsonKey(name: 'total_pnl')
+  final double totalPnL;
 
-  String get finalPnlAmountString {
-    double finalPnlAmountDouble = checkDouble(finalPnlAmount);
+  String get totalPnLString {
+    final double finalPnlAmountDouble = checkDouble(totalPnL);
     return (finalPnlAmountDouble > 0)
         ? '+$finalPnlAmountDouble'
         : (finalPnlAmountDouble < 0)
@@ -31,24 +26,17 @@ class BotSummaryTransactionHistoryModel extends Equatable {
   }
 
   String get investmentAmountString {
-    double investmentAmountDouble = checkDouble(investmentAmount);
+    final double investmentAmountDouble = checkDouble(amount);
     return (investmentAmountDouble > 0)
         ? 'HKD${investmentAmountDouble.convertToCurrencyDecimal()}'
         : 'NA';
   }
 
   String get createdFormattedString =>
-      formatDateTimeAsString(created, dateFormat: 'yyyy-MM-dd HH:mm:ss');
+      formatDateTimeAsString(date, dateFormat: 'yyyy-MM-dd HH:mm:ss');
 
   const BotSummaryTransactionHistoryModel(
-      this.pk,
-      this.created,
-      this.updated,
-      this.status,
-      this.investmentAmount,
-      this.botCashBalance,
-      this.finalReturn,
-      this.finalPnlAmount);
+      this.uid, this.date, this.status, this.amount, this.fee, this.totalPnL);
 
   factory BotSummaryTransactionHistoryModel.fromJson(
           Map<String, dynamic> json) =>
@@ -59,6 +47,6 @@ class BotSummaryTransactionHistoryModel extends Equatable {
 
   @override
   List<Object?> get props {
-    return [pk, created, updated, status, investmentAmount];
+    return [uid, date, status, amount];
   }
 }

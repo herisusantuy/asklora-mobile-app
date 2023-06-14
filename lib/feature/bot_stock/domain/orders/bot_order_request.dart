@@ -4,13 +4,10 @@ part 'bot_order_request.g.dart';
 
 @JsonSerializable()
 class BotOrderRequest {
-  @JsonKey(name: 'order_id')
-  final String orderId;
+  @JsonKey(name: 'bot_id')
+  final String botId;
 
-  @JsonKey(name: 'order_type')
-  final String orderType;
-
-  const BotOrderRequest({required this.orderId, this.orderType = 'POOL'});
+  const BotOrderRequest(this.botId);
 
   factory BotOrderRequest.fromJson(Map<String, dynamic> json) =>
       _$BotOrderRequestFromJson(json);

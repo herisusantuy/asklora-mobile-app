@@ -7,7 +7,7 @@ import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
-import '../../../../domain/bot_detail_model.dart';
+import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/column_text.dart';
@@ -18,7 +18,7 @@ import 'bot_price_level_indicator.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
   final BotRecommendationModel botRecommendationModel;
-  final BotDetailModel? botDetailModel;
+  final BotRecommendationDetailModel? botDetailModel;
   final BotType botType;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
@@ -253,7 +253,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
   }
 
   Widget _detailedInformation(
-          BuildContext context, BotDetailModel botDetailModel) =>
+          BuildContext context, BotRecommendationDetailModel botDetailModel) =>
       Column(
         children: [
           BotPriceLevelIndicator(

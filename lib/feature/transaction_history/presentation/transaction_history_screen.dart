@@ -7,7 +7,6 @@ import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
-import '../../../core/utils/extensions.dart';
 import '../../../core/values/app_values.dart';
 import '../../../generated/l10n.dart';
 import '../../bot_stock/presentation/portfolio/portfolio_screen.dart';

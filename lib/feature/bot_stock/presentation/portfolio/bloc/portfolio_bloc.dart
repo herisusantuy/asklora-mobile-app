@@ -22,13 +22,8 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       : _botStockRepository = botStockRepository,
         _transactionHistoryRepository = transactionHistoryRepository,
         super(const PortfolioState()) {
-    on<FetchActiveOrderDetail>(
-      _onFetchActiveOrderDetail,
-    );
-    on<FetchActiveOrders>(
-      onFetchBotActiveOrders,
-      transformer: restartable(),
-    );
+    on<FetchActiveOrderDetail>(_onFetchActiveOrderDetail);
+    on<FetchActiveOrders>(onFetchBotActiveOrders, transformer: restartable());
     on<ActiveFilterChecked>(_onActiveFilterChecked);
     on<PendingFilterChecked>(_onPendingFilterChecked);
     on<CurrencyChanged>(_onCurrencyChanged);

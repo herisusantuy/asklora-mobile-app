@@ -7,6 +7,7 @@ import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
+import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
@@ -36,10 +37,13 @@ class BotRecommendationDetailScreen extends StatelessWidget {
     return CustomScaffold(
       enableBackNavigation: false,
       body: BlocProvider(
-        create: (_) => BotStockBloc(botStockRepository: BotStockRepository())
-          ..add(FetchBotDetail(
-              ticker: botRecommendationModel.ticker,
-              botId: botRecommendationModel.botId)),
+        create: (_) {
+          BotStockBloc botStockBloc = BotStockBloc(
+              botStockRepository: BotStockRepository(),
+              transactionRepository: TransactionRepository());
+          _fetchBotDetail(botStockBloc);
+          return botStockBloc;
+        },
         child: BlocConsumer<BotStockBloc, BotStockState>(
           listenWhen: (previous, current) =>
               previous.botDetailResponse.state !=
@@ -52,10 +56,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               previous.botDetailResponse.state !=
               current.botDetailResponse.state,
           builder: (context, state) => RefreshIndicator(
-            onRefresh: () async => context.read<BotStockBloc>().add(
-                FetchBotDetail(
-                    ticker: botRecommendationModel.ticker,
-                    botId: botRecommendationModel.botId)),
+            onRefresh: () async =>
+                _fetchBotDetail(context.read<BotStockBloc>()),
             child: CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
                 title: S.of(context).errorGettingInformationTitle,
@@ -65,10 +67,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                 primaryButtonLabel: S.of(context).buttonReloadPage,
                 secondaryButtonLabel: S.of(context).buttonCancel,
                 onSecondaryButtonTap: () => Navigator.pop(context),
-                onPrimaryButtonTap: () => context.read<BotStockBloc>().add(
-                    (FetchBotDetail(
-                        ticker: botRecommendationModel.ticker,
-                        botId: botRecommendationModel.botId))),
+                onPrimaryButtonTap: () =>
+                    _fetchBotDetail(context.read<BotStockBloc>()),
               ),
               showPopUp: state.botDetailResponse.state == ResponseState.error,
               content: BotStockForm(
@@ -104,7 +104,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                               context,
                               botType,
                               botRecommendationModel,
-                              state.botDetailResponse.data!);
+                              state.botDetailResponse.data!,
+                              state.buyingPower);
                         }
                       }),
                 ),
@@ -114,6 +115,13 @@ class BotRecommendationDetailScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _fetchBotDetail(BotStockBloc botStockBloc) {
+    botStockBloc.add(FetchBotDetail(
+        ticker: botRecommendationModel.ticker,
+        botId: botRecommendationModel.botId,
+        isFreeBot: botRecommendationModel.freeBot));
   }
 
   static void open(

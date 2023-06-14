@@ -22,16 +22,24 @@ enum TransferType {
 
 enum TransferStatus {
   pending('pending', 'Pending', AskLoraColors.primaryMagenta),
-  active('success', 'Completed', AskLoraColors.primaryGreen);
+  active('success', 'Completed', AskLoraColors.primaryGreen),
+  rejected('rejected', 'Rejected', AskLoraColors.primaryMagenta);
 
   final String value;
   final String name;
   final Color color;
 
-  static TransferStatus findByString(String transferStatusString) {
-    TransferStatus transferStatus = TransferStatus.values
-        .firstWhere((element) => element.value == transferStatusString);
-    return transferStatus;
+  static TransferStatus find(String transferStatusString,
+      {String? timeRejected, bool? isRefunded}) {
+    if (timeRejected != null &&
+        timeRejected.isNotEmpty &&
+        isRefunded != null &&
+        isRefunded == true) {
+      return TransferStatus.rejected;
+    } else {
+      return TransferStatus.values
+          .firstWhere((element) => element.value == transferStatusString);
+    }
   }
 
   const TransferStatus(this.value, this.name, this.color);

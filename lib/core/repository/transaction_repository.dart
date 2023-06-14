@@ -1,7 +1,6 @@
 import '../../feature/transaction_history/utils/transaction_history_util.dart';
 import '../domain/base_response.dart';
 import '../utils/date_utils.dart';
-import '../../feature/transaction_history/bot_order/detail/domain/bot_activities_transaction_history_model.dart';
 import '../../feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
 import '../../feature/transaction_history/domain/grouped_model.dart';
 import '../../feature/transaction_history/domain/grouped_transaction_model.dart';
@@ -113,22 +112,10 @@ class TransactionRepository {
           BotDetailTransactionHistoryResponse.fromJson(
               botOrderTransactionHistoryResponse.data);
 
-      return BaseResponse.complete(botDetailTransactionHistoryResponse.copyWith(
-          activities: _addIndexChartData(
-              botDetailTransactionHistoryResponse.activities)));
+      return BaseResponse.complete(botDetailTransactionHistoryResponse);
     } catch (e) {
       return BaseResponse.error();
     }
-  }
-
-  List<BotActivitiesTransactionHistoryModel> _addIndexChartData(
-      List<BotActivitiesTransactionHistoryModel> chartData) {
-    List<BotActivitiesTransactionHistoryModel> finalChartData = [];
-    int index = 0;
-    for (var element in chartData) {
-      finalChartData.add(element.copyWith(index: index++));
-    }
-    return finalChartData;
   }
 
   Future<BaseResponse<TransactionBalanceModel>> fetchBalance() async {

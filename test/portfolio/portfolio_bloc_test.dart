@@ -36,7 +36,7 @@ void main() async {
         transactionBalanceErrorResponse = BaseResponse.error();
 
     final BaseResponse<TerminateOrderResponse> terminateOrderResponse =
-        BaseResponse.complete(TerminateOrderResponse('a', botOrder: 'a'));
+        BaseResponse.complete(TerminateOrderResponse('a'));
 
     final BaseResponse<TerminateOrderResponse> terminateOrderErrorResponse =
         BaseResponse.error();

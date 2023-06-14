@@ -41,7 +41,7 @@ class BotTransactionHistoryDetailBloc extends Bloc<
     DateTime dateNow =
         DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day);
     for (var element in activities) {
-      DateTime createdAt = formatDateOnly(element.date);
+      DateTime createdAt = formatDateOnly(element.created);
       if (createdAt.compareTo(dateNow) == 0) {
         int groupIndex = groupedActivities
             .indexWhere((element) => element.groupType == GroupType.today);

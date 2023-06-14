@@ -16,6 +16,7 @@ class AmountTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final EdgeInsets? contentPadding;
   final Color? backgroundColor;
+  final int decimalDigits;
 
   const AmountTextField({
     Key? key,
@@ -27,6 +28,7 @@ class AmountTextField extends StatefulWidget {
     this.prefixText = 'HKD ',
     this.backgroundColor,
     this.contentPadding,
+    this.decimalDigits = 1,
   }) : super(key: key);
 
   @override
@@ -85,7 +87,9 @@ class _AmountTextFieldState extends State<AmountTextField> {
             },
             inputFormatters: [
               CurrencyTextInputFormatter(
-                  symbol: '', decimalDigits: 1, enableNegative: false),
+                  symbol: '',
+                  decimalDigits: widget.decimalDigits,
+                  enableNegative: false),
             ],
             keyboardType: TextInputType.number,
             style: TextFieldStyle.valueTextStyle,

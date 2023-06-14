@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 part 'bot_order_response.g.dart';
 
 @JsonSerializable()
@@ -21,17 +23,18 @@ class BotOrderResponse {
 }
 
 @JsonSerializable()
-class TerminateOrderResponse extends BotOrderResponse {
+class TerminateOrderResponse {
   @JsonKey(name: 'optimal_time')
   final String optimalTime;
 
-  TerminateOrderResponse(this.optimalTime,
-      {required super.botOrder, super.botAction});
+  TerminateOrderResponse(this.optimalTime);
 
   factory TerminateOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$TerminateOrderResponseFromJson(json);
 
-  @override
+  String get optimalTimeFormatted =>
+      formatDateTimeAsString(optimalTime, dateFormat: 'yyyy-MM-dd H:m:s');
+
   Map<String, dynamic> toJson() => _$TerminateOrderResponseToJson(this);
 }
 
