@@ -36,7 +36,7 @@ class DepositWelcomeNotes extends StatelessWidget {
         _depositNote(
           label: '1.',
           text:
-              'We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ 10,000 bank transfer is completed.',
+              'We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ ${DepositType.firstTime.minDepositString} bank transfer is completed.',
         ),
         _depositNote(
           label: '2.',
@@ -51,7 +51,7 @@ class DepositWelcomeNotes extends StatelessWidget {
         _depositNote(
           label: '4.',
           text:
-              'Any deposit less than HK\$10,000 will be rejected and fees will be charged.',
+              'Any deposit less than HK\$${DepositType.firstTime.minDepositString} will be rejected and fees will be charged.',
         ),
         _depositNote(
           label: '5.',
