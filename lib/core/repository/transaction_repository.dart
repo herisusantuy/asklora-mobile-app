@@ -65,7 +65,8 @@ class TransactionRepository {
     DateTime dateNow =
         DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day);
     for (var element in transactions) {
-      DateTime createdAt = formatDateOnly(element.created);
+      DateTime createdAt =
+          formatDateOnly(formatDateTimeToLocal(element.created));
       if (createdAt.compareTo(dateNow) == 0) {
         int groupIndex = groupedTransactions
             .indexWhere((element) => element.groupType == GroupType.today);
