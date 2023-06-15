@@ -9,7 +9,7 @@ void main() {
     setUp(() async {
       tabScreenBloc = TabScreenBloc();
     });
-    test('init screen index default should be 1', () {
+    test('init screen default index should be 0', () {
       expect(
         tabScreenBloc.state,
         const TabScreenState(
@@ -19,7 +19,7 @@ void main() {
       );
     });
     blocTest<TabScreenBloc, TabScreenState>(
-      'screen should be in "for you" screen when user clicked tab screen no 2',
+      'screen should be in "for you" screen when user clicked tab icon no 2',
       build: () => tabScreenBloc,
       act: (bloc) {
         bloc.add(const TabIndexChanged(1));
@@ -32,7 +32,7 @@ void main() {
       },
     );
     blocTest<TabScreenBloc, TabScreenState>(
-      'screen should be in "portfolio" screen when user clicked tab screen no 3',
+      'screen should be in "portfolio" screen when user clicked tab icon no 3',
       build: () => tabScreenBloc,
       act: (bloc) {
         bloc.add(const TabIndexChanged(2));
@@ -45,7 +45,7 @@ void main() {
       },
     );
     blocTest<TabScreenBloc, TabScreenState>(
-      'screen should be in "Chat Lora" screen when user clicked tab screen no 3',
+      'screen should be in "Chat Lora" screen when user clicked tab icon no 3',
       build: () => tabScreenBloc,
       act: (bloc) {
         bloc.add(const TabIndexChanged(3));
