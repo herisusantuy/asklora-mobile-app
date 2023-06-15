@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/utils/bloc_transformer/restartable.dart';
 import '../../../../../core/utils/currency_enum.dart';
-import '../../../../../core/domain/transaction/transaction_balance_model.dart';
+import '../../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
@@ -38,7 +38,8 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
   _onFetchBalance(FetchBalance event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(transactionBalanceResponse: BaseResponse.loading()));
-    var balance = await _transactionHistoryRepository.fetchBalance();
+    var balance = await _transactionHistoryRepository.fetchBalance(
+        currency: state.currency.value);
     emit(state.copyWith(transactionBalanceResponse: balance));
   }
 
@@ -82,6 +83,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
   _onCurrencyChanged(CurrencyChanged event, Emitter<PortfolioState> emit) {
     emit(state.copyWith(currency: event.currencyType));
+    add(FetchBalance());
   }
 
   _onEndBotStock(EndBotStock event, Emitter<PortfolioState> emit) async {

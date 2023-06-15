@@ -3,10 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../utils/extensions.dart';
 
-part 'transaction_balance_model.g.dart';
+part 'transaction_balance_response.g.dart';
 
 @JsonSerializable()
-class TransactionBalanceModel extends Equatable {
+class TransactionBalanceResponse extends Equatable {
   @JsonKey(name: 'withdrawable_balance')
   final double withdrawableBalance;
   @JsonKey(name: 'buying_power')
@@ -18,13 +18,13 @@ class TransactionBalanceModel extends Equatable {
   @JsonKey(name: 'total_portfolio')
   final double totalPortfolio;
 
-  const TransactionBalanceModel(this.withdrawableBalance, this.buyingPower,
+  const TransactionBalanceResponse(this.withdrawableBalance, this.buyingPower,
       this.totalBotStock, this.totalPnLPct, this.totalPortfolio);
 
-  factory TransactionBalanceModel.fromJson(Map<String, dynamic> json) =>
-      _$TransactionBalanceModelFromJson(json);
+  factory TransactionBalanceResponse.fromJson(Map<String, dynamic> json) =>
+      _$TransactionBalanceResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TransactionBalanceModelToJson(this);
+  Map<String, dynamic> toJson() => _$TransactionBalanceResponseToJson(this);
 
   String get withdrawableBalanceStr => withdrawableBalance != 0
       ? withdrawableBalance.convertToCurrencyDecimal()

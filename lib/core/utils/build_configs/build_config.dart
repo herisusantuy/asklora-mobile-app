@@ -55,7 +55,7 @@ class DevConfig implements BaseConfig {
 // String get askLoraApiBaseUrl => 'http://192.168.100.198:8002/';
   ///HENDIKAS LOCAL
   @override
-  String get askLoraApiBaseUrl => 'http://192.168.100.194:8000/';
+  String get askLoraApiBaseUrl => 'http://192.168.100.224:8002/';
 
   @override
   String get ppiBaseUrl => 'http://192.168.100.224:8005/';

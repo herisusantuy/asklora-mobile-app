@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_model.dart';
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_response.dart';
 import 'package:asklora_mobile_app/core/utils/currency_enum.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
@@ -28,11 +28,11 @@ void main() async {
     final BaseResponse<List<BotActiveOrderModel>> errorResponse =
         BaseResponse.error();
 
-    final BaseResponse<TransactionBalanceModel> transactionBalanceResponse =
+    final BaseResponse<TransactionBalanceResponse> transactionBalanceResponse =
         BaseResponse.complete(
-            const TransactionBalanceModel(20, 20, 20, 20, 20));
+            const TransactionBalanceResponse(20, 20, 20, 20, 20));
 
-    final BaseResponse<TransactionBalanceModel>
+    final BaseResponse<TransactionBalanceResponse>
         transactionBalanceErrorResponse = BaseResponse.error();
 
     final BaseResponse<TerminateOrderResponse> terminateOrderResponse =
@@ -68,32 +68,44 @@ void main() async {
       expect(portfolioBloc.state, const PortfolioState());
     });
 
-    blocTest<PortfolioBloc, PortfolioState>(
-        'init HKD to default of the  currency',
-        build: () => portfolioBloc,
-        act: (bloc) => {bloc.add(const CurrencyChanged(CurrencyType.hkd))},
-        expect: () => {const PortfolioState(currency: CurrencyType.hkd)});
-
-    blocTest<PortfolioBloc, PortfolioState>('change currency from HKD to USD',
-        build: () => portfolioBloc,
+    blocTest<PortfolioBloc, PortfolioState>('change currency to HKD',
+        build: () {
+          when(transactionRepository.fetchBalance(
+                  currency: CurrencyType.hkd.value))
+              .thenAnswer((_) => Future.value(transactionBalanceResponse));
+          return portfolioBloc;
+        },
         act: (bloc) => {
               bloc.add(const CurrencyChanged(CurrencyType.hkd)),
-              bloc.add(const CurrencyChanged(CurrencyType.usd)),
+              bloc.add(const FetchBalance())
             },
         expect: () => {
               const PortfolioState(currency: CurrencyType.hkd),
-              const PortfolioState(currency: CurrencyType.usd),
+              PortfolioState(
+                  transactionBalanceResponse: BaseResponse.loading()),
+              PortfolioState(
+                  transactionBalanceResponse: transactionBalanceResponse)
             });
 
-    blocTest<PortfolioBloc, PortfolioState>('change currency from USD to HKD',
-        build: () => portfolioBloc,
+    blocTest<PortfolioBloc, PortfolioState>('change currency to USD',
+        build: () {
+          when(transactionRepository.fetchBalance(
+                  currency: CurrencyType.usd.value))
+              .thenAnswer((_) => Future.value(transactionBalanceResponse));
+          return portfolioBloc;
+        },
         act: (bloc) => {
               bloc.add(const CurrencyChanged(CurrencyType.usd)),
-              bloc.add(const CurrencyChanged(CurrencyType.hkd)),
+              bloc.add(const FetchBalance()),
             },
         expect: () => {
               const PortfolioState(currency: CurrencyType.usd),
-              const PortfolioState(currency: CurrencyType.hkd),
+              PortfolioState(
+                  transactionBalanceResponse: BaseResponse.loading(),
+                  currency: CurrencyType.usd),
+              PortfolioState(
+                  transactionBalanceResponse: transactionBalanceResponse,
+                  currency: CurrencyType.usd),
             });
 
     blocTest<PortfolioBloc, PortfolioState>('check active filter',
@@ -206,7 +218,7 @@ void main() async {
               .thenAnswer((_) => Future.value(transactionBalanceResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(FetchBalance()),
+        act: (bloc) => bloc.add(const FetchBalance()),
         expect: () => {
               PortfolioState(
                   transactionBalanceResponse: BaseResponse.loading()),
@@ -222,7 +234,7 @@ void main() async {
               .thenAnswer((_) => Future.value(transactionBalanceErrorResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(FetchBalance()),
+        act: (bloc) => bloc.add(const FetchBalance()),
         expect: () => {
               PortfolioState(
                   transactionBalanceResponse: BaseResponse.loading()),

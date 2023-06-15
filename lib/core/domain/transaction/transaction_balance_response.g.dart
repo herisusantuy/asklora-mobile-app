@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transaction_balance_model.dart';
+part of 'transaction_balance_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TransactionBalanceModel _$TransactionBalanceModelFromJson(
+TransactionBalanceResponse _$TransactionBalanceResponseFromJson(
         Map<String, dynamic> json) =>
-    TransactionBalanceModel(
+    TransactionBalanceResponse(
       (json['withdrawable_balance'] as num).toDouble(),
       (json['buying_power'] as num).toDouble(),
       (json['total_bot_stock'] as num).toDouble(),
@@ -16,8 +16,8 @@ TransactionBalanceModel _$TransactionBalanceModelFromJson(
       (json['total_portfolio'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$TransactionBalanceModelToJson(
-        TransactionBalanceModel instance) =>
+Map<String, dynamic> _$TransactionBalanceResponseToJson(
+        TransactionBalanceResponse instance) =>
     <String, dynamic>{
       'withdrawable_balance': instance.withdrawableBalance,
       'buying_power': instance.buyingPower,

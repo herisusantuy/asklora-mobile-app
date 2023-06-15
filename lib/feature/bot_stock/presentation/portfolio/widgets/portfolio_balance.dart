@@ -1,7 +1,7 @@
 part of '../portfolio_screen.dart';
 
 class PortfolioBalance extends StatelessWidget {
-  final TransactionBalanceModel? data;
+  final TransactionBalanceResponse? data;
   final CurrencyType currencyType;
 
   const PortfolioBalance(
@@ -30,7 +30,7 @@ class PortfolioBalance extends StatelessWidget {
   }
 
   Widget _totalPortfolioBalance(BuildContext context, CurrencyType currencyType,
-          TransactionBalanceModel? data) =>
+          TransactionBalanceResponse? data) =>
       SafeArea(
         bottom: false,
         child: RoundColoredBox(
@@ -77,7 +77,8 @@ class PortfolioBalance extends StatelessWidget {
             )),
       );
 
-  Widget _fundingButtons(BuildContext context, TransactionBalanceModel? data) =>
+  Widget _fundingButtons(
+          BuildContext context, TransactionBalanceResponse? data) =>
       Column(
         children: [
           FundingButton(
@@ -110,7 +111,7 @@ class PortfolioBalance extends StatelessWidget {
       );
 
   Widget _portfolioBalanceDetail(BuildContext context,
-          CurrencyType currencyType, TransactionBalanceModel? data) =>
+          CurrencyType currencyType, TransactionBalanceResponse? data) =>
       Expanded(
         child: RoundColoredBox(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -119,10 +120,10 @@ class PortfolioBalance extends StatelessWidget {
               PairColumnText(
                 leftTitle: S
                     .of(context)
-                    .portfolioWithdrawableAmount(currencyType.value),
+                    .portfolioWithdrawableAmount(currencyType.name),
                 leftSubTitle: data?.withdrawableBalanceStr ?? '/',
                 rightTitle:
-                    S.of(context).portfolioBuyingPower(currencyType.value),
+                    S.of(context).portfolioBuyingPower(currencyType.name),
                 rightTooltipText: S.of(context).portfolioBuyingPowerToolTip,
                 rightSubTitle: data?.buyingPowerStr ?? '/',
                 spaceWidth: 6,
@@ -132,7 +133,7 @@ class PortfolioBalance extends StatelessWidget {
               ),
               PairColumnText(
                 leftTitle:
-                    S.of(context).portfolioTotalBotStock(currencyType.value),
+                    S.of(context).portfolioTotalBotStock(currencyType.name),
                 rightTitle: S.of(context).portfolioTotalPL,
                 leftSubTitle: data?.totalBotstockValueStr ?? '/',
                 rightSubTitle: data?.totalPnLStr ?? '/',

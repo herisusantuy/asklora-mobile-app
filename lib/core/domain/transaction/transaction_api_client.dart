@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_request.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../core/data/remote/asklora_api_client.dart';
@@ -18,6 +19,9 @@ class TransactionApiClient {
       await AskloraApiClient()
           .get(endpoint: '$endpointBotTransactionHistory/$orderId');
 
-  Future<Response> fetchBalance() async =>
-      await AskloraApiClient().get(endpoint: endpointBalance);
+  Future<Response> fetchBalance(
+          TransactionBalanceRequest transactionBalanceRequest) async =>
+      await AskloraApiClient().get(
+          endpoint: endpointBalance,
+          queryParameters: transactionBalanceRequest.toJson());
 }
