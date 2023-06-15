@@ -72,7 +72,7 @@ class BotPortfolioCard extends StatelessWidget {
                   leftTitle: S.of(context).portfolioCurrentPrice(''),
                   rightTitle: S.of(context).portfolioTotalPL,
                   leftSubTitle: botActiveOrderModel.currentPrice.toString(),
-                  rightSubTitle: botActiveOrderModel.totalPnlRetString,
+                  rightSubTitle: botActiveOrderModel.totalPnLPctString,
                 ),
                 const SizedBox(
                   height: 15,

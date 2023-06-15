@@ -24,7 +24,7 @@ import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dar
 import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
-import '../../../../core/domain/transaction/transaction_balance_model.dart';
+import '../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../../core/repository/transaction_repository.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../repository/bot_stock_repository.dart';

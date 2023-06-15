@@ -101,11 +101,11 @@ extension CurrencyFormat on double {
   }
 
   String toUsdWithCurrencyPrefix() {
-    return '${CurrencyType.usd.value} ${(this * 0.13).convertToCurrencyDecimal()}';
+    return '${CurrencyType.usd.name} ${(this * 0.13).convertToCurrencyDecimal()}';
   }
 
   String toHkdWithCurrencyPrefix() {
-    return '${CurrencyType.hkd.value} ${(this * 7.85).convertToCurrencyDecimal()}';
+    return '${CurrencyType.hkd.name} ${(this * 7.85).convertToCurrencyDecimal()}';
   }
 }
 

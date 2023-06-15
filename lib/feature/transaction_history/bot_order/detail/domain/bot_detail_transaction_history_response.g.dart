@@ -22,6 +22,7 @@ BotDetailTransactionHistoryResponse
           json['status'] as String,
           json['rollover_count'] as int,
           (json['bot_stock_value'] as num).toDouble(),
+          (json['total_pnl_pct'] as num).toDouble(),
           (json['summary'] as List<dynamic>)
               .map((e) => BotSummaryTransactionHistoryModel.fromJson(
                   e as Map<String, dynamic>))
@@ -30,7 +31,6 @@ BotDetailTransactionHistoryResponse
               .map((e) => BotActivitiesTransactionHistoryModel.fromJson(
                   e as Map<String, dynamic>))
               .toList(),
-          (json['total_pnl_pct'] as num).toDouble(),
         );
 
 Map<String, dynamic> _$BotDetailTransactionHistoryResponseToJson(
@@ -49,7 +49,7 @@ Map<String, dynamic> _$BotDetailTransactionHistoryResponseToJson(
       'status': instance.status,
       'rollover_count': instance.rolloverCount,
       'bot_stock_value': instance.botStockValue,
+      'total_pnl_pct': instance.totalPnLPct,
       'summary': instance.summary,
       'activities': instance.activities,
-      'total_pnl_pct': instance.totalPnLPct,
     };

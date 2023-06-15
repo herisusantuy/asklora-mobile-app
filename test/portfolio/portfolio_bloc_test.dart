@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
-import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_model.dart';
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_response.dart';
 import 'package:asklora_mobile_app/core/utils/currency_enum.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
@@ -28,11 +28,11 @@ void main() async {
     final BaseResponse<List<BotActiveOrderModel>> errorResponse =
         BaseResponse.error();
 
-    final BaseResponse<TransactionBalanceModel> transactionBalanceResponse =
-        BaseResponse.complete(
-            const TransactionBalanceModel('20', '20', '20', 20, 20, 20, 20));
+    final BaseResponse<TransactionBalanceResponse> transactionBalanceResponse =
+        BaseResponse.complete(const TransactionBalanceResponse(
+            20, 20, 20, 20, 20, 20, 20, 20, 20));
 
-    final BaseResponse<TransactionBalanceModel>
+    final BaseResponse<TransactionBalanceResponse>
         transactionBalanceErrorResponse = BaseResponse.error();
 
     final BaseResponse<TerminateOrderResponse> terminateOrderResponse =

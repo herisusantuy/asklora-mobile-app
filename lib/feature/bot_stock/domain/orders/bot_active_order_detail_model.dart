@@ -8,8 +8,6 @@ part 'bot_active_order_detail_model.g.dart';
 
 @JsonSerializable()
 class BotActiveOrderDetailModel extends BotDetailModel {
-  @JsonKey(name: 'total_pnl_amt')
-  final double totalPnLAmt;
   @JsonKey(name: 'days_to_expire')
   final int daysToExpire;
   @JsonKey(name: 'avg_return_pct')
@@ -19,7 +17,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   @JsonKey(name: 'avg_period')
   final double avgPeriod;
   @JsonKey(name: 'stock_info')
-  final StockInfo stockInfo;
+  final StockInfo? stockInfo;
   @JsonKey(name: 'current_price')
   final double? currentPrice;
   @JsonKey(name: 'bot_asset_in_stock_pct')
@@ -47,7 +45,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
       String status,
       int rolloverCount,
       double botStockValue,
-      this.totalPnLAmt,
+      double totalPnLPct,
       this.daysToExpire,
       this.avgReturnPct,
       this.avgLossPct,
@@ -60,20 +58,28 @@ class BotActiveOrderDetailModel extends BotDetailModel {
       this.maxLossPct,
       this.targetProfitPct)
       : super(
-          uid,
-          name,
-          botInfo,
-          investmentAmount,
-          finalReturn,
-          botDuration,
-          spotDate,
-          expireDate,
-          estMaxLoss,
-          estMaxProfit,
-          status,
-          rolloverCount,
-          botStockValue,
-        );
+            uid,
+            name,
+            botInfo,
+            investmentAmount,
+            finalReturn,
+            botDuration,
+            spotDate,
+            expireDate,
+            estMaxLoss,
+            estMaxProfit,
+            status,
+            rolloverCount,
+            botStockValue,
+            totalPnLPct);
+
+  ///This might be temporary fix as the endpoint break in some bot cannot found the universe data
+  ///which result in empty stock info object
+  StockInfo get stockInfoWithPlaceholder {
+    return stockInfo ??
+        const StockInfo('NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 0,
+            'NA', 'NA');
+  }
 
   String get currentPriceString {
     final double currentPriceDouble = checkDouble(currentPrice);
@@ -97,15 +103,6 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   String get botShareString {
     final double botShareDouble = checkDouble(botShare);
     return (botShareDouble > 0) ? botShareDouble.toString() : '/';
-  }
-
-  String get totalPnlRetString {
-    final double totalPnlDouble = checkDouble(totalPnLAmt);
-    return (totalPnlDouble > 0)
-        ? '+$totalPnlDouble%'
-        : (totalPnlDouble < 0)
-            ? '$totalPnlDouble%'
-            : '/';
   }
 
   String get avgReturnString {

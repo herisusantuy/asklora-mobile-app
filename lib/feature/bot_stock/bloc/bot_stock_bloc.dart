@@ -71,7 +71,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
         ///TODO : LATER SHOULD USE BUYING POWER WHEN BALANCE ENDPOINT UPDATED
         emit(state.copyWith(
             buyingPower:
-                checkDouble(balanceResponse.data!.withdrawableBalance)));
+                checkDouble(balanceResponse.data!.withdrawableBalanceHkd)));
         emit(state.copyWith(botDetailResponse: data));
       } else {
         emit(state.copyWith(
