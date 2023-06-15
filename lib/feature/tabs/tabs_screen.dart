@@ -41,21 +41,23 @@ class TabsScreen extends StatelessWidget {
         ],
         child: BlocConsumer<TabScreenBloc, TabScreenState>(
           listenWhen: (previous, current) =>
-              previous.isShowConfirmationBack != current.isShowConfirmationBack,
+              previous.shouldShowExitConfirmation !=
+              current.shouldShowExitConfirmation,
           listener: (context, state) {
-            if (state.isShowConfirmationBack) {
+            if (state.shouldShowExitConfirmation) {
               return CustomInAppNotification.show(
                   context, 'Please click BACK again to exit');
             }
           },
           buildWhen: (previous, current) =>
               previous.currentIndexScreen != current.currentIndexScreen ||
-              previous.isShowConfirmationBack != current.isShowConfirmationBack,
+              previous.shouldShowExitConfirmation !=
+                  current.shouldShowExitConfirmation,
           builder: (context, state) {
             return WillPopScope(
               onWillPop: () async {
-                context.read<TabScreenBloc>().add(BackButtonClickedOnce());
-                if (state.isShowConfirmationBack) {
+                context.read<TabScreenBloc>().add(BackButtonClicked());
+                if (state.shouldShowExitConfirmation) {
                   return true;
                 }
                 return false;

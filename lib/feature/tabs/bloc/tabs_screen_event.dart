@@ -14,4 +14,4 @@ class TabIndexChanged extends TabScreenEvent {
   List<Object> get props => [index];
 }
 
-class BackButtonClickedOnce extends TabScreenEvent {}
+class BackButtonClicked extends TabScreenEvent {}
