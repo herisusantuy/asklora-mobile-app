@@ -68,8 +68,12 @@ void main() {
       expect: () => {
         const TabScreenState(
           currentIndexScreen: 1,
+          shouldShowExitConfirmation: false,
+        ),
+        const TabScreenState(
+          currentIndexScreen: 1,
           shouldShowExitConfirmation: true,
-        )
+        ),
       },
     );
     tearDown(() => {tabScreenBloc.close()});
