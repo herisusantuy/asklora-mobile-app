@@ -87,9 +87,14 @@ public class AndroidTest {
          * and check "Allow CORS"
          * If you are using cli, type "appium --address=locahost --allow-cors" into cmd
          * or terminal
+         * - I have not tested running appium with cli, so I'm not sure if it will work
          * 
-         * run "getProps.sh" before running the automation, the setUp method requires
+         * run "getProps.sh" before running the UI automation, the setUp method requires
          * the device's name, udid, and version
+         * 
+         * You must put the apk file into the apps folder and rename the apk to
+         * "asklora_stag.apk". You can name the apk to something else but make sure to
+         * match the name of the apk in the setUp method
          * 
          * Make sure JAVA_HOME and ANDROID_HOME are set up to use this program to
          * automate creating an account
@@ -99,11 +104,22 @@ public class AndroidTest {
          * You should be able to input the otp and confirm you uploaded an image after
          * restarting IDE
          * 
-         * There is one part where automation would not work
+         * There is one part where automation would not work for the Xiaomi phone
          * - You must manually take a picture of the HKID and selfie in order for the
          * program to continue
          * - I have it set to wait for 2 minutes for you to complete the Onfido
          * authorization section
+         * 
+         * If you are using other phones, there are more parts where automation would
+         * not work
+         * 1) Entering the otp in the app
+         * - You must enter the otp you recieved into the terminal
+         * 2) Clicking images
+         * - You must click an image to upload and then type done into the terminal
+         * 
+         * The privacy questions are randomized to only click the first 3 options
+         * since clicking enough of the other 2 options would result in ineligibility to
+         * create an account
          */
 
         @BeforeTest
@@ -121,7 +137,7 @@ public class AndroidTest {
                 caps.setCapability("platformVersion", platformVersion);
                 caps.setCapability("udid", udid);
                 caps.setCapability("deviceName", deviceName);
-                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag_10182.apk");
+                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag.apk");
                 caps.setCapability("unicodeKeyboard", true);
                 caps.setCapability("resetKeyboard", true);
                 caps.setCapability("ignoreHiddenApiPolicyError", true);
