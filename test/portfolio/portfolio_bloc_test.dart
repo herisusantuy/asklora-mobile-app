@@ -77,7 +77,7 @@ void main() async {
         },
         act: (bloc) => {
               bloc.add(const CurrencyChanged(CurrencyType.hkd)),
-              bloc.add(const FetchBalance())
+              bloc.add(FetchBalance())
             },
         expect: () => {
               const PortfolioState(currency: CurrencyType.hkd),
@@ -96,7 +96,7 @@ void main() async {
         },
         act: (bloc) => {
               bloc.add(const CurrencyChanged(CurrencyType.usd)),
-              bloc.add(const FetchBalance()),
+              bloc.add(FetchBalance()),
             },
         expect: () => {
               const PortfolioState(currency: CurrencyType.usd),
@@ -218,7 +218,7 @@ void main() async {
               .thenAnswer((_) => Future.value(transactionBalanceResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const FetchBalance()),
+        act: (bloc) => bloc.add(FetchBalance()),
         expect: () => {
               PortfolioState(
                   transactionBalanceResponse: BaseResponse.loading()),
@@ -234,7 +234,7 @@ void main() async {
               .thenAnswer((_) => Future.value(transactionBalanceErrorResponse));
           return portfolioBloc;
         },
-        act: (bloc) => bloc.add(const FetchBalance()),
+        act: (bloc) => bloc.add(FetchBalance()),
         expect: () => {
               PortfolioState(
                   transactionBalanceResponse: BaseResponse.loading()),
