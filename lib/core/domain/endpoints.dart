@@ -6,8 +6,6 @@ const transactions = 'transactions/';
 const orders = 'orders/';
 const activities = 'activities/';
 const user = 'user/';
-
-///todo : revert to v1 later
 const String endpointSignIn = '${v2}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';
