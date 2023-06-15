@@ -5,13 +5,13 @@ import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/custom_key_pad/custom_key_pad.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
+import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../bloc/withdrawal_bloc.dart';
-import '../../repository/withdrawal_repository.dart';
 import '../withdrawal_summary_screen.dart';
 
 part 'widgets/withdrawal_amount_value.dart';
@@ -30,7 +30,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => WithdrawalBloc(
-        withdrawalRepository: WithdrawalRepository(),
+        transactionRepository: TransactionRepository(),
       ),
       child: CustomScaffold(
           body: Padding(

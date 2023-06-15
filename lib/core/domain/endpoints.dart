@@ -27,10 +27,14 @@ const String endpointTokenVerify = '${v1}auth/verify/';
 const String endpointTokenRefresh = '${v1}auth/refresh/';
 const String endpointTaxInfo = '$v1${accounts}tax-info/';
 const String endpointBankAccount = '$v1${accounts}bank-account-related/';
-const String endpointWithdrawal = '$v1${transactions}withdraw/';
-const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointOrders = '$v1$orders';
 const String endpointUserJourney = '$v2${activities}user-journey/';
+
+///
+/// Transaction
+///
+const String endpointWithdrawal = '$v1${transactions}withdraw/';
+const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointTransferTransactionHistory = '$v1/$transactions/history/';
 const String endpointBalance = '$v1/$transactions/balance/';
 

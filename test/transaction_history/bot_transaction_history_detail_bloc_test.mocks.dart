@@ -12,10 +12,17 @@ import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_r
     as _i7;
 import 'package:asklora_mobile_app/core/repository/transaction_repository.dart'
     as _i3;
+import 'package:asklora_mobile_app/feature/balance/deposit/domain/deposit_response.dart'
+    as _i8;
+import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_request.dart'
+    as _i11;
+import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_response.dart'
+    as _i10;
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart'
     as _i5;
+import 'package:file_picker/file_picker.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -136,4 +143,51 @@ class MockTransactionRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<_i7.TransactionBalanceResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i8.DepositResponse>> submitDeposit({
+    required double? depositAmount,
+    required List<_i9.PlatformFile>? platformFiles,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitDeposit,
+          [],
+          {
+            #depositAmount: depositAmount,
+            #platformFiles: platformFiles,
+          },
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i8.DepositResponse>>.value(
+            _FakeBaseResponse_0<_i8.DepositResponse>(
+          this,
+          Invocation.method(
+            #submitDeposit,
+            [],
+            {
+              #depositAmount: depositAmount,
+              #platformFiles: platformFiles,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i8.DepositResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i10.WithdrawalResponse>> submitWithdrawal(
+          {required _i11.WithdrawalRequest? withdrawalRequest}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitWithdrawal,
+          [],
+          {#withdrawalRequest: withdrawalRequest},
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i10.WithdrawalResponse>>.value(
+                _FakeBaseResponse_0<_i10.WithdrawalResponse>(
+          this,
+          Invocation.method(
+            #submitWithdrawal,
+            [],
+            {#withdrawalRequest: withdrawalRequest},
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i10.WithdrawalResponse>>);
 }

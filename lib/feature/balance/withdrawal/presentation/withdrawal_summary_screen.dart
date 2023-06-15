@@ -9,6 +9,7 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
+import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
@@ -16,7 +17,6 @@ import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../widgets/balance_base_form.dart';
 import '../bloc/withdrawal_bloc.dart';
-import '../repository/withdrawal_repository.dart';
 import 'withdrawal_result_screen.dart';
 
 class WithdrawalSummaryScreen extends StatelessWidget {
@@ -30,7 +30,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => WithdrawalBloc(
-        withdrawalRepository: WithdrawalRepository(),
+        transactionRepository: TransactionRepository(),
       ),
       child: BlocConsumer<WithdrawalBloc, WithdrawalState>(
         buildWhen: (previous, current) =>
