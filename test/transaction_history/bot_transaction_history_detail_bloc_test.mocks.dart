@@ -120,13 +120,11 @@ class MockTransactionRepository extends _i1.Mock
           ) as _i4.Future<
               _i2.BaseResponse<_i6.BotDetailTransactionHistoryResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i7.TransactionBalanceResponse>> fetchBalance(
-          {String? currency = r'hkd'}) =>
+  _i4.Future<_i2.BaseResponse<_i7.TransactionBalanceResponse>> fetchBalance() =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchBalance,
           [],
-          {#currency: currency},
         ),
         returnValue:
             _i4.Future<_i2.BaseResponse<_i7.TransactionBalanceResponse>>.value(
@@ -135,7 +133,6 @@ class MockTransactionRepository extends _i1.Mock
           Invocation.method(
             #fetchBalance,
             [],
-            {#currency: currency},
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<_i7.TransactionBalanceResponse>>);

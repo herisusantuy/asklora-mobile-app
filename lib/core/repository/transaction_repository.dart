@@ -1,6 +1,5 @@
 import '../../feature/transaction_history/utils/transaction_history_util.dart';
 import '../domain/base_response.dart';
-import '../domain/transaction/transaction_balance_request.dart';
 import '../utils/date_utils.dart';
 import '../../feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
 import '../../feature/transaction_history/domain/grouped_model.dart';
@@ -120,11 +119,9 @@ class TransactionRepository {
     }
   }
 
-  Future<BaseResponse<TransactionBalanceResponse>> fetchBalance(
-      {String currency = 'hkd'}) async {
+  Future<BaseResponse<TransactionBalanceResponse>> fetchBalance() async {
     try {
-      var response = await _transactionApiClient
-          .fetchBalance(TransactionBalanceRequest(currency));
+      var response = await _transactionApiClient.fetchBalance();
       return BaseResponse.complete(
           TransactionBalanceResponse.fromJson(response.data));
     } catch (e) {

@@ -38,8 +38,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
   _onFetchBalance(FetchBalance event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(transactionBalanceResponse: BaseResponse.loading()));
-    var balance = await _transactionHistoryRepository.fetchBalance(
-        currency: state.currency.value);
+    var balance = await _transactionHistoryRepository.fetchBalance();
     emit(state.copyWith(transactionBalanceResponse: balance));
   }
 
@@ -83,7 +82,6 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
 
   _onCurrencyChanged(CurrencyChanged event, Emitter<PortfolioState> emit) {
     emit(state.copyWith(currency: event.currencyType));
-    add(FetchBalance());
   }
 
   _onEndBotStock(EndBotStock event, Emitter<PortfolioState> emit) async {
