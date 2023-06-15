@@ -15,5 +15,3 @@ class TabIndexChanged extends TabScreenEvent {
 }
 
 class BackButtonClickedOnce extends TabScreenEvent {}
-
-class BackButtonClickedTwice extends TabScreenEvent {}
