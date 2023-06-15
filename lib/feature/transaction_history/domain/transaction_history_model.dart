@@ -74,7 +74,7 @@ class TransactionHistoryModel extends Equatable {
       DateTime localTime = formatDateTimeToLocal(created);
       return '${formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yyyy HH:mm')}${localTime.timeZoneName}';
     } else {
-      return '';
+      return '-';
     }
   }
 
@@ -83,7 +83,7 @@ class TransactionHistoryModel extends Equatable {
       DateTime localTime = formatDateTimeToLocal(timeComplete);
       return '${formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yyyy HH:mm')}${localTime.timeZoneName}';
     }
-    return '';
+    return '-';
   }
 
   String get bankAccountNumberString => '$bankCode-$bankAccountNumber';
