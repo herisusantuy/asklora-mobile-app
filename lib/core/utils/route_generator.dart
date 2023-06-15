@@ -36,7 +36,6 @@ import '../../feature/onboarding/welcome/welcome_screen.dart';
 import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
-import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
 import '../../feature/settings/presentation/about_asklora_screen.dart';
 import '../../feature/settings/presentation/account_information_screen.dart';
 import '../../feature/settings/presentation/account_setting_screen.dart';
@@ -80,9 +79,6 @@ class RouterGenerator {
       case KycScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const KycScreen());
-      case WithdrawalScreen.route:
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const WithdrawalScreen());
       case DepositScreen.route:
         return MaterialPageRoute(
             settings: settings,
