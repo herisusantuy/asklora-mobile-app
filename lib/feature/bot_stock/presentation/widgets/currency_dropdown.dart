@@ -29,7 +29,7 @@ class CurrencyDropdown extends StatelessWidget {
               .map((item) => DropdownMenuItem<CurrencyType>(
                     value: item,
                     child: CustomTextNew(
-                      item.value,
+                      item.name,
                       style: AskLoraTextStyles.body4,
                     ),
                   ))

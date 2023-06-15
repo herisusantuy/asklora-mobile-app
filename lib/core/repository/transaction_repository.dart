@@ -4,7 +4,7 @@ import '../utils/date_utils.dart';
 import '../../feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
 import '../../feature/transaction_history/domain/grouped_model.dart';
 import '../../feature/transaction_history/domain/grouped_transaction_model.dart';
-import '../domain/transaction/transaction_balance_model.dart';
+import '../domain/transaction/transaction_balance_response.dart';
 import '../domain/transaction/transaction_api_client.dart';
 import '../../feature/transaction_history/domain/transaction_history_model.dart';
 
@@ -65,7 +65,8 @@ class TransactionRepository {
     DateTime dateNow =
         DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day);
     for (var element in transactions) {
-      DateTime createdAt = formatDateOnly(element.created);
+      DateTime createdAt =
+          formatDateOnly(formatDateTimeToLocal(element.created));
       if (createdAt.compareTo(dateNow) == 0) {
         int groupIndex = groupedTransactions
             .indexWhere((element) => element.groupType == GroupType.today);
@@ -118,11 +119,11 @@ class TransactionRepository {
     }
   }
 
-  Future<BaseResponse<TransactionBalanceModel>> fetchBalance() async {
+  Future<BaseResponse<TransactionBalanceResponse>> fetchBalance() async {
     try {
       var response = await _transactionApiClient.fetchBalance();
       return BaseResponse.complete(
-          TransactionBalanceModel.fromJson(response.data));
+          TransactionBalanceResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }
