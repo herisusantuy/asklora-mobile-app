@@ -129,6 +129,7 @@ class BotStockRepository {
     } on ForbiddenException {
       return BaseResponse.error(errorCode: 403);
     } catch (e) {
+      print('error $e');
       return BaseResponse.error();
     }
   }
@@ -178,6 +179,8 @@ class BotStockRepository {
     } on LegalReasonException {
       return BaseResponse.suspended();
     } catch (e) {
+      print('create order error $e');
+
       ///todo handle error code later on insufficient balance
       return BaseResponse.error();
     }

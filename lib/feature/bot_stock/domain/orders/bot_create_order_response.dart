@@ -6,11 +6,13 @@ part 'bot_create_order_response.g.dart';
 class BotCreateOrderResponse {
   final String uid;
   final String name;
+  @JsonKey(name: 'bot_apps_name')
+  final String botAppsName;
   final String status;
   @JsonKey(name: 'is_active')
   final bool isActive;
-  @JsonKey(name: 'total_pnl_amt')
-  final double totalPnLAmt;
+  @JsonKey(name: 'total_pnl_pct')
+  final double totalPnLPct;
   @JsonKey(name: 'expire_date')
   final String? expireDate;
   @JsonKey(name: 'ticker_name')
@@ -26,9 +28,10 @@ class BotCreateOrderResponse {
   const BotCreateOrderResponse(
     this.uid,
     this.name,
+    this.botAppsName,
     this.status,
     this.isActive,
-    this.totalPnLAmt,
+    this.totalPnLPct,
     this.expireDate,
     this.tickerName,
     this.currentPrice,
