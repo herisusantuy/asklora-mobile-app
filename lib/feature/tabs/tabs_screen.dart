@@ -56,11 +56,12 @@ class TabsScreen extends StatelessWidget {
           builder: (context, state) {
             return WillPopScope(
               onWillPop: () async {
-                context.read<TabScreenBloc>().add(BackButtonClicked());
                 if (state.shouldShowExitConfirmation) {
                   return true;
+                } else {
+                  context.read<TabScreenBloc>().add(BackButtonClicked());
+                  return false;
                 }
-                return false;
               },
               child: CustomScaffold(
                   enableBackNavigation: false,
