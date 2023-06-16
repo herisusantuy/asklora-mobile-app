@@ -91,39 +91,86 @@ enum BotStockFilter {
   const BotStockFilter(this.name);
 }
 
-enum BotStatus {
-  populated('initialized', 'Initialized', AskLoraColors.amber),
-  indicative('indicative', 'Indicative', AskLoraColors.amber),
-  live('live', 'Live', AskLoraColors.primaryGreen),
-  earlyTerminated(
-      'early_terminated', 'Early Terminated', AskLoraColors.primaryMagenta),
-  expired('initialized', 'Expired', AskLoraColors.primaryMagenta),
-  nearlyKnockOut('initialized', 'Nearly Knock Out', AskLoraColors.amber),
-  knockOut('knock_out', 'Knock Out', AskLoraColors.primaryMagenta),
-  pending('place', 'Pending', AskLoraColors.amber),
-  active('open', 'Active', AskLoraColors.primaryGreen),
-  activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen),
-  closed('closed', 'Closed', AskLoraColors.primaryMagenta),
-  cancel('cancel', 'Cancel', AskLoraColors.primaryMagenta);
+enum OmsStatus {
+  initialized('initialized'),
+  indicative('indicative'),
+  rejectedOms('initialized'),
+  live('live'),
+  waitingTermination('waiting_termination'),
+  earlyTerminated('early_terminated'),
+  expired('expired'),
+  nearlyKnockOut('nearly_knock_out'),
+  knockOut('knockOut');
 
   final String value;
+
+  const OmsStatus(this.value);
+}
+
+enum BotStatus {
+  live(
+    'Live',
+    [
+      OmsStatus.live,
+      OmsStatus.nearlyKnockOut,
+      OmsStatus.waitingTermination,
+    ],
+    AskLoraColors.primaryGreen,
+  ),
+  liveExpireSoon(
+    'Live',
+    [
+      OmsStatus.live,
+      OmsStatus.nearlyKnockOut,
+      OmsStatus.waitingTermination,
+    ],
+    AskLoraColors.primaryGreen,
+  ),
+  canceled(
+    'Canceled',
+    [
+      OmsStatus.rejectedOms,
+    ],
+    AskLoraColors.primaryMagenta,
+  ),
+  pending(
+    'Pending',
+    [
+      OmsStatus.initialized,
+      OmsStatus.indicative,
+    ],
+    AskLoraColors.amber,
+  ),
+  expired(
+    'Expired',
+    [
+      OmsStatus.expired,
+      OmsStatus.knockOut,
+      OmsStatus.earlyTerminated,
+    ],
+    AskLoraColors.primaryMagenta,
+  );
+
   final String name;
+  final List<OmsStatus> omsStatusCollection;
+
   final Color color;
 
-  static BotStatus findByString(String botStatusString, {String? expireDate}) {
-    BotStatus? botStatus = BotStatus.values
-        .firstWhereOrNull((element) => element.value == botStatusString);
-    if (botStatus == active &&
+  const BotStatus(this.name, this.omsStatusCollection, this.color);
+
+  static BotStatus findByOmsStatus(String omsStatusString,
+      {String? expireDate}) {
+    OmsStatus? omsStatus = OmsStatus.values
+        .firstWhereOrNull((element) => element.value == omsStatusString);
+    BotStatus? botStatus = BotStatus.values.firstWhereOrNull(
+        (element) => element.omsStatusCollection.contains(omsStatus));
+    if (botStatus == BotStatus.live &&
         expireDate != null &&
         DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
-      botStatus = BotStatus.activeExpireSoon;
+      botStatus = BotStatus.liveExpireSoon;
     }
-
-    ///TODO : THIS IS TEMPORARY FIX, LATER THE ENDPOINT SHOULD ONLY RETURN STATUS AS MENTIONED ABOVE ENUM
     return botStatus ?? BotStatus.pending;
   }
-
-  const BotStatus(this.value, this.name, this.color);
 }
 
 String newExpiryDateOnRollover(String? expireDate) => expireDate != null
