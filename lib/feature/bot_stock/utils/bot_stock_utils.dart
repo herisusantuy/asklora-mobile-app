@@ -127,7 +127,7 @@ enum BotStatus {
     AskLoraColors.primaryGreen,
   ),
   canceled(
-    'Canceled',
+    'Cancelled',
     [
       OmsStatus.rejectedOms,
     ],
