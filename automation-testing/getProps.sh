@@ -1,10 +1,10 @@
-#!/bin/bash
+#!bin/bash
+FILE=config.properties
 
-# shellcheck disable=SC1072
 udid=$(adb devices | tail -n 2 | awk '{ print $1 }')
 deviceName=$(adb -s ${udid} shell getprop ro.product.model)
 platformVersion=$(adb shell getprop ro.build.version.release).0
-FILE=config.properties
+
 if [ -f "$FILE" ]; then
   echo "$FILE exists"
   sed -i "s/udid.*/udid=${udid}/" "$FILE"
