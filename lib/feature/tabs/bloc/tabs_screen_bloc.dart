@@ -7,9 +7,17 @@ part 'tabs_screen_event.dart';
 class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   TabScreenBloc() : super(const TabScreenState(currentIndexScreen: 0)) {
     on<TabIndexChanged>(_onChangedIndexTab);
+    on<BackButtonClicked>(_onBackButtonClicked);
   }
 
   _onChangedIndexTab(TabIndexChanged event, Emitter<TabScreenState> emit) {
     emit(state.copyWith(currentIndexScreen: event.index));
+  }
+
+  _onBackButtonClicked(
+      BackButtonClicked event, Emitter<TabScreenState> emit) async {
+    emit(state.copyWith(shouldShowExitConfirmation: true));
+    await Future.delayed(const Duration(seconds: 3));
+    emit(state.copyWith(shouldShowExitConfirmation: false));
   }
 }
