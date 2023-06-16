@@ -6,6 +6,7 @@ import '../../../../core/data/remote/asklora_api_client.dart';
 import '../../../../core/domain/endpoints.dart';
 import '../../../core/data/remote/ppi_api_client.dart';
 import 'bot_detail_request.dart';
+import 'orders/bot_active_order_request.dart';
 import 'orders/bot_create_order_request.dart';
 import 'orders/bot_order_request.dart';
 
@@ -18,9 +19,12 @@ class BotStockApiClient {
       await AskloraApiClient().post(
           endpoint: endpointBotDetail, payload: jsonEncode(request.toJson()));
 
-  ///TODO : LATER IMPLEMENT QUERY PARAMETER
-  Future<Response> activeOrder() async =>
-      await AskloraApiClient().get(endpoint: endpointBotActiveOrder);
+  Future<Response> activeOrder(
+      BotActiveOrderRequest botActiveOrderRequest) async {
+    return await AskloraApiClient().get(
+        endpoint: endpointBotActiveOrder,
+        queryParameters: botActiveOrderRequest.toJson());
+  }
 
   Future<Response> activeOrderDetail(String orderId) async =>
       await AskloraApiClient().get(endpoint: '$endpointBotActiveOrder$orderId');
