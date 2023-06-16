@@ -18,7 +18,6 @@ class TabScreenState extends Equatable {
   TabScreenState copyWith({
     int? currentIndexScreen,
     bool? shouldShowExitConfirmation,
-    bool? isConfirmedToBack,
   }) {
     return TabScreenState(
       currentIndexScreen: currentIndexScreen ?? this.currentIndexScreen,
