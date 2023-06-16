@@ -12,6 +12,12 @@ import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_r
     as _i17;
 import 'package:asklora_mobile_app/core/repository/transaction_repository.dart'
     as _i14;
+import 'package:asklora_mobile_app/feature/balance/deposit/domain/deposit_response.dart'
+    as _i18;
+import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_request.dart'
+    as _i21;
+import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_response.dart'
+    as _i20;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_detail_model.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart'
@@ -36,6 +42,7 @@ import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/
     as _i16;
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart'
     as _i15;
+import 'package:file_picker/file_picker.dart' as _i19;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -433,4 +440,51 @@ class MockTransactionRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.BaseResponse<_i17.TransactionBalanceResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i18.DepositResponse>> submitDeposit({
+    required double? depositAmount,
+    required List<_i19.PlatformFile>? platformFiles,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitDeposit,
+          [],
+          {
+            #depositAmount: depositAmount,
+            #platformFiles: platformFiles,
+          },
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i18.DepositResponse>>.value(
+            _FakeBaseResponse_0<_i18.DepositResponse>(
+          this,
+          Invocation.method(
+            #submitDeposit,
+            [],
+            {
+              #depositAmount: depositAmount,
+              #platformFiles: platformFiles,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i18.DepositResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i20.WithdrawalResponse>> submitWithdrawal(
+          {required _i21.WithdrawalRequest? withdrawalRequest}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitWithdrawal,
+          [],
+          {#withdrawalRequest: withdrawalRequest},
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i20.WithdrawalResponse>>.value(
+                _FakeBaseResponse_0<_i20.WithdrawalResponse>(
+          this,
+          Invocation.method(
+            #submitWithdrawal,
+            [],
+            {#withdrawalRequest: withdrawalRequest},
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i20.WithdrawalResponse>>);
 }

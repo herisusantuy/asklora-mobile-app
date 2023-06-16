@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/utils/extensions.dart';
 import '../domain/deposit_response.dart';
-import '../repository/deposit_repository.dart';
 import '../utils/deposit_utils.dart';
 
 part 'deposit_event.dart';
@@ -15,8 +15,9 @@ part 'deposit_state.dart';
 
 class DepositBloc extends Bloc<DepositEvent, DepositState> {
   DepositBloc(
-      {required DepositRepository depositRepository, required this.depositType})
-      : _depositRepository = depositRepository,
+      {required TransactionRepository transactionRepository,
+      required this.depositType})
+      : _transactionRepository = transactionRepository,
         super(const DepositState()) {
     on<DepositAmountChanged>(_onDepositAmountChanged);
     on<ProofOfRemittanceImagesChanged>(_onProofOfRemittanceImagesChanged);
@@ -25,7 +26,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
     on<ResetDepositResponse>(_onResetDepositResponse);
   }
 
-  final DepositRepository _depositRepository;
+  final TransactionRepository _transactionRepository;
   final DepositType depositType;
 
   void _onResetDepositResponse(
@@ -68,7 +69,7 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
         emit(state.copyWith(depositAmountErrorText: _getAmountErrorText));
       } else {
         emit(state.copyWith(response: BaseResponse.loading()));
-        var data = await _depositRepository.submitDeposit(
+        var data = await _transactionRepository.submitDeposit(
             depositAmount: state.depositAmount,
             platformFiles: state.proofOfRemittanceImages);
         emit(state.copyWith(response: data));

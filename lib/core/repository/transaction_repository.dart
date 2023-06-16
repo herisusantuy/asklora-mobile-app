@@ -1,3 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+
+import '../../feature/balance/deposit/domain/deposit_request.dart';
+import '../../feature/balance/deposit/domain/deposit_response.dart';
+import '../../feature/balance/withdrawal/domain/withdrawal_request.dart';
+import '../../feature/balance/withdrawal/domain/withdrawal_response.dart';
 import '../../feature/transaction_history/utils/transaction_history_util.dart';
 import '../domain/base_response.dart';
 import '../utils/date_utils.dart';
@@ -127,5 +136,28 @@ class TransactionRepository {
     } catch (e) {
       return BaseResponse.error();
     }
+  }
+
+  Future<BaseResponse<DepositResponse>> submitDeposit({
+    required double depositAmount,
+    required List<PlatformFile> platformFiles,
+  }) async {
+    List<ProofFile> proofFiles = [];
+    for (var element in platformFiles) {
+      final bytes = File(element.path!).readAsBytesSync();
+      proofFiles.add(ProofFile('data:image/png;base64,${base64Encode(bytes)}'));
+    }
+    var response = await _transactionApiClient
+        .submitDeposit(DepositRequest(depositAmount, proofFiles));
+
+    return BaseResponse.complete(DepositResponse.fromJson(response.data));
+  }
+
+  Future<BaseResponse<WithdrawalResponse>> submitWithdrawal({
+    required WithdrawalRequest withdrawalRequest,
+  }) async {
+    var response =
+        await _transactionApiClient.submitWithdrawal(withdrawalRequest);
+    return BaseResponse.complete(WithdrawalResponse.fromJson(response.data));
   }
 }
