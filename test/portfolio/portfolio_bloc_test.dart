@@ -98,8 +98,13 @@ void main() async {
 
     blocTest<PortfolioBloc, PortfolioState>('check active filter',
         build: () {
-          when(botStockRepository.activeOrders(status: ['open', 'place']))
-              .thenAnswer((_) => Future.value(response));
+          when(botStockRepository.activeOrders(status: [
+            OmsStatus.live.value,
+            OmsStatus.nearlyKnockOut.value,
+            OmsStatus.waitingTermination.value,
+            OmsStatus.initialized.value,
+            OmsStatus.indicative.value,
+          ])).thenAnswer((_) => Future.value(response));
           return portfolioBloc;
         },
         act: (bloc) => {
@@ -116,8 +121,10 @@ void main() async {
 
     blocTest<PortfolioBloc, PortfolioState>('uncheck active filter',
         build: () {
-          when(botStockRepository.activeOrders(status: ['place']))
-              .thenAnswer((_) => Future.value(response));
+          when(botStockRepository.activeOrders(status: [
+            OmsStatus.initialized.value,
+            OmsStatus.indicative.value,
+          ])).thenAnswer((_) => Future.value(response));
           return portfolioBloc;
         },
         act: (bloc) => {
@@ -134,8 +141,13 @@ void main() async {
 
     blocTest<PortfolioBloc, PortfolioState>('check pending filter',
         build: () {
-          when(botStockRepository.activeOrders(status: ['open', 'place']))
-              .thenAnswer((_) => Future.value(response));
+          when(botStockRepository.activeOrders(status: [
+            OmsStatus.live.value,
+            OmsStatus.nearlyKnockOut.value,
+            OmsStatus.waitingTermination.value,
+            OmsStatus.initialized.value,
+            OmsStatus.indicative.value,
+          ])).thenAnswer((_) => Future.value(response));
           return portfolioBloc;
         },
         act: (bloc) => {
@@ -152,8 +164,11 @@ void main() async {
 
     blocTest<PortfolioBloc, PortfolioState>('uncheck pending filter',
         build: () {
-          when(botStockRepository.activeOrders(status: ['open']))
-              .thenAnswer((_) => Future.value(response));
+          when(botStockRepository.activeOrders(status: [
+            OmsStatus.live.value,
+            OmsStatus.nearlyKnockOut.value,
+            OmsStatus.waitingTermination.value,
+          ])).thenAnswer((_) => Future.value(response));
           return portfolioBloc;
         },
         act: (bloc) => {
@@ -173,8 +188,13 @@ void main() async {
         'emits `BaseResponse.complete` WHEN '
         'fetching bot portfolio',
         build: () {
-          when(botStockRepository.activeOrders(status: ['open', 'place']))
-              .thenAnswer((_) => Future.value(response));
+          when(botStockRepository.activeOrders(status: [
+            OmsStatus.live.value,
+            OmsStatus.nearlyKnockOut.value,
+            OmsStatus.waitingTermination.value,
+            OmsStatus.initialized.value,
+            OmsStatus.indicative.value,
+          ])).thenAnswer((_) => Future.value(response));
           return portfolioBloc;
         },
         act: (bloc) => bloc.add(const FetchActiveOrders()),
@@ -187,8 +207,13 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed fetching bot portfolio',
         build: () {
-          when(botStockRepository.activeOrders(status: ['open', 'place']))
-              .thenAnswer((_) => Future.value(errorResponse));
+          when(botStockRepository.activeOrders(status: [
+            OmsStatus.live.value,
+            OmsStatus.nearlyKnockOut.value,
+            OmsStatus.waitingTermination.value,
+            OmsStatus.initialized.value,
+            OmsStatus.indicative.value,
+          ])).thenAnswer((_) => Future.value(errorResponse));
           return portfolioBloc;
         },
         act: (bloc) => bloc

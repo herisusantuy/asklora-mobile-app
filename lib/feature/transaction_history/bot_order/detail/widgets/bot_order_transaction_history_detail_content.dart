@@ -12,7 +12,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
       required this.botOrderId,
       Key? key})
       : super(key: key) {
-    botStatusType = BotStatus.findByString(botStatus);
+    botStatusType = BotStatus.findByOmsStatus(botStatus);
   }
 
   @override
@@ -28,11 +28,8 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
     List<String> tabs = [
       S.of(context).summary,
       S.of(context).activities,
-
-      ///TODO : SHOULD ONLY SHOW PERFORMANCE WHEN STATUS CLOSED LATER WHEN BOT STATUS IS FIXED
-      S.of(context).performance
     ];
-    if (botStatusType == BotStatus.closed) {
+    if (botStatusType == BotStatus.expired) {
       tabs.add(S.of(context).performance);
     }
     return tabs;
@@ -42,13 +39,8 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
     List<Widget> tabViews = [
       BotOrderTransactionHistorySummaryScreen(botStatusType: botStatusType),
       const BotOrderTransactionHistoryActivitiesScreen(),
-
-      ///TODO : SHOULD ONLY SHOW PERFORMANCE WHEN STATUS CLOSED LATER WHEN BOT STATUS IS FIXED
-      BotOrderTransactionHistoryPerformanceScreen(
-        botOrderId: botOrderId,
-      )
     ];
-    if (botStatusType == BotStatus.closed) {
+    if (botStatusType == BotStatus.expired) {
       tabViews.add(
           BotOrderTransactionHistoryPerformanceScreen(botOrderId: botOrderId));
     }

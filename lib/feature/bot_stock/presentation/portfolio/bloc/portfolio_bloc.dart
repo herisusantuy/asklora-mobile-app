@@ -53,10 +53,10 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   List<String> getFilterStatus(PortfolioState state) {
     List<String> status = [];
     if (state.activeFilterChecked) {
-      status.add(BotStatus.active.value);
+      status.addAll(BotStatus.live.omsStatusCollection.map((e) => e.value));
     }
     if (state.pendingFilterChecked) {
-      status.add(BotStatus.pending.value);
+      status.addAll(BotStatus.pending.omsStatusCollection.map((e) => e.value));
     }
     return status;
   }

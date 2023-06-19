@@ -32,7 +32,7 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
     if (index == (dataLength ?? 0) - 1) {
       return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,
           S.of(context).orderStarted, index);
-    } else if (botStatusType == BotStatus.closed) {
+    } else if (botStatusType == BotStatus.expired) {
       return _expiredCard(context, botSummaryTransactionHistoryModel);
     } else {
       return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,

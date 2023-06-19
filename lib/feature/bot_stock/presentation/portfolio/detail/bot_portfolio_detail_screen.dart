@@ -53,7 +53,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
       : super(key: key) {
     botType = BotType.findByString(botActiveOrderModel.botAppsName);
-    botStatus = BotStatus.findByString(botActiveOrderModel.status,
+    botStatus = BotStatus.findByOmsStatus(botActiveOrderModel.status,
         expireDate: botActiveOrderModel.expireDate);
   }
 
@@ -128,7 +128,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
         child: Column(
           children: [
-            if (botStatus == BotStatus.activeExpireSoon)
+            if (botStatus == BotStatus.liveExpireSoon)
               Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
                 child: BotRolloverButton(

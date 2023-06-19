@@ -20,7 +20,7 @@ class BotActivitiesTransactionHistoryModel {
   @JsonKey(name: 'filled_qty')
   final double filledQty;
   @JsonKey(name: 'filled_avg_price')
-  final double filledAvgPrice;
+  final double? filledAvgPrice;
   @JsonKey(name: 'filled_at')
   final String? filledAt;
   @JsonKey(name: 'filled_at_hkt')
