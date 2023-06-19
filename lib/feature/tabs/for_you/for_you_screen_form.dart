@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/feature/tabs/for_you/repository/for_you_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,34 +24,40 @@ import 'investment_style/presentation/for_you_investment_style_screen.dart';
 enum ForYouPage { investmentStyle, botRecommendation }
 
 class ForYouScreenForm extends StatelessWidget {
+  static const String route = '/for_you_screen';
+
   const ForYouScreenForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppBloc, AppState>(
-        buildWhen: (previous, current) =>
-            previous.userJourney != current.userJourney,
-        builder: (context, state) {
-          if (state.userJourney == UserJourney.investmentStyle ||
-              state.userJourney == UserJourney.kyc ||
-              state.userJourney == UserJourney.freeBotStock) {
-            final LoraPopUpMessageModel loraPopUpMessageModel =
-                _getLoraPopUpMessageModel(context, state.userJourney);
-            return BotStockBackgroundWithPopUp(
-                shouldScrollable: false,
-                header: CustomTextNew(
-                  'Investments for you, by you',
-                  style: AskLoraTextStyles.h2
-                      .copyWith(color: AskLoraColors.charcoal),
-                ),
-                popUpTitle: loraPopUpMessageModel.title,
-                popUpSubTitle: loraPopUpMessageModel.subTitle,
-                popUpButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
-                onPopUpButtonTap: loraPopUpMessageModel.onPrimaryButtonTap);
-          } else {
-            return _getForYouPage;
-          }
-        });
+    return BlocProvider(
+      create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
+        ..add(GetInvestmentStyleState()),
+      child: BlocBuilder<AppBloc, AppState>(
+          buildWhen: (previous, current) =>
+          previous.userJourney != current.userJourney,
+          builder: (context, state) {
+            if (state.userJourney == UserJourney.investmentStyle ||
+                state.userJourney == UserJourney.kyc ||
+                state.userJourney == UserJourney.freeBotStock) {
+              final LoraPopUpMessageModel loraPopUpMessageModel =
+              _getLoraPopUpMessageModel(context, state.userJourney);
+              return BotStockBackgroundWithPopUp(
+                  shouldScrollable: false,
+                  header: CustomTextNew(
+                    'Investments for you, by you',
+                    style: AskLoraTextStyles.h2
+                        .copyWith(color: AskLoraColors.charcoal),
+                  ),
+                  popUpTitle: loraPopUpMessageModel.title,
+                  popUpSubTitle: loraPopUpMessageModel.subTitle,
+                  popUpButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
+                  onPopUpButtonTap: loraPopUpMessageModel.onPrimaryButtonTap);
+            } else {
+              return _getForYouPage;
+            }
+          }),
+    );
   }
 
   Widget get _getForYouPage => BlocConsumer<ForYouBloc, ForYouState>(
