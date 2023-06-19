@@ -204,7 +204,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
       ];
 
   String _tradeRequestSuccessMessage() =>
-      '${botTradeSummaryModel.botDetailModel.botInfo.botName} ${botTradeSummaryModel.botDetailModel.stockInfo.ticker} will be started at ${botTradeSummaryModel.botDetailModel.startDate}.';
+      '${botTradeSummaryModel.botDetailModel.botInfo.botName} ${botTradeSummaryModel.botDetailModel.stockInfo.symbol} will be started at ${botTradeSummaryModel.botDetailModel.startDate}.';
 
   static void open(
           {required BuildContext context,

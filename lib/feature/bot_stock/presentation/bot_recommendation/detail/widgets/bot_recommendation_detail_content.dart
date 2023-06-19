@@ -95,7 +95,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botDetailModel?.stockInfo.tickerName} ${botDetailModel?.stockInfo.ticker}',
+                      '${botDetailModel?.stockInfo.tickerName} ${botDetailModel?.stockInfo.symbol}',
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                       maxLines: 2,
@@ -241,7 +241,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomTextNew(
             S.of(context).portfolioDetailChartCaption(
-                '${botType.upperCaseName} ${botDetailModel!.stockInfo.ticker}',
+                '${botType.upperCaseName} ${botDetailModel!.stockInfo.symbol}',
                 botDetailModel!.botPerformanceStartDate,
                 botDetailModel!.botPerformanceEndDate,
                 botDetailModel!.botDuration),

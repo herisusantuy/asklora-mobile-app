@@ -77,8 +77,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   ///which result in empty stock info object
   StockInfo get stockInfoWithPlaceholder {
     return stockInfo ??
-        const StockInfo('NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 0,
-            'NA', 'NA');
+        const StockInfo(
+            'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 0, 'NA', 'NA');
   }
 
   String get currentPriceString {

@@ -8,7 +8,6 @@ part of 'stock_info.dart';
 
 StockInfo _$StockInfoFromJson(Map<String, dynamic> json) => StockInfo(
       json['symbol'] as String,
-      json['ticker'] as String,
       json['ticker_name'] as String,
       json['chinese_name'] as String,
       json['traditional_name'] as String,
@@ -23,7 +22,6 @@ StockInfo _$StockInfoFromJson(Map<String, dynamic> json) => StockInfo(
 
 Map<String, dynamic> _$StockInfoToJson(StockInfo instance) => <String, dynamic>{
       'symbol': instance.symbol,
-      'ticker': instance.ticker,
       'ticker_name': instance.tickerName,
       'chinese_name': instance.chineseName,
       'traditional_name': instance.traditionalName,

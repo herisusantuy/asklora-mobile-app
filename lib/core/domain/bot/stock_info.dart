@@ -5,7 +5,6 @@ part 'stock_info.g.dart';
 @JsonSerializable()
 class StockInfo extends Equatable {
   final String symbol;
-  final String ticker;
   @JsonKey(name: 'ticker_name')
   final String tickerName;
   @JsonKey(name: 'chinese_name')
@@ -22,7 +21,6 @@ class StockInfo extends Equatable {
 
   const StockInfo(
       this.symbol,
-      this.ticker,
       this.tickerName,
       this.chineseName,
       this.traditionalName,
@@ -42,7 +40,6 @@ class StockInfo extends Equatable {
   @override
   List<Object?> get props => [
         symbol,
-        ticker,
         tickerName,
         chineseName,
         traditionalName,
