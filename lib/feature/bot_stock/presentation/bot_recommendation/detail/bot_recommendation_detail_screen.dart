@@ -85,29 +85,29 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                   padding: AppValues.screenHorizontalPadding
                       .copyWith(top: 24, bottom: 30),
                   child: PrimaryButton(
-                      disabled: state.botDetailResponse.state ==
-                              ResponseState.loading ||
-                          state.botDetailResponse.state == ResponseState.error,
-                      label: S.of(context).trade,
-                      onTap: () {
-                        if (botRecommendationModel.freeBot) {
-                          BotTradeSummaryScreen.open(
-                              context: context,
-                              botTradeSummaryModel: BotTradeSummaryModel(
-                                  botType: botType,
-                                  botRecommendationModel:
-                                      botRecommendationModel,
-                                  botDetailModel: state.botDetailResponse.data!,
-                                  amount: 500));
-                        } else {
-                          BotStockBottomSheet.amountBotStockForm(
-                              context,
-                              botType,
-                              botRecommendationModel,
-                              state.botDetailResponse.data!,
-                              state.buyingPower);
-                        }
-                      }),
+                    disabled: state.botDetailResponse.state ==
+                            ResponseState.loading ||
+                        state.botDetailResponse.state == ResponseState.error,
+                    label: S.of(context).trade,
+                    onTap: () {
+                      if (botRecommendationModel.freeBot) {
+                        BotTradeSummaryScreen.open(
+                            context: context,
+                            botTradeSummaryModel: BotTradeSummaryModel(
+                                botType: botType,
+                                botRecommendationModel: botRecommendationModel,
+                                botDetailModel: state.botDetailResponse.data!,
+                                amount: 500));
+                      } else {
+                        BotStockBottomSheet.amountBotStockForm(
+                            context,
+                            botType,
+                            botRecommendationModel,
+                            state.botDetailResponse.data!,
+                            state.buyingPower);
+                      }
+                    },
+                  ),
                 ),
               ),
             ),
@@ -125,8 +125,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
   }
 
   static void open(
-      {required BuildContext context,
-      required BotRecommendationModel botRecommendationModel}) {
-    Navigator.pushNamed(context, route, arguments: botRecommendationModel);
-  }
+          {required BuildContext context,
+          required BotRecommendationModel botRecommendationModel}) =>
+      Navigator.pushNamed(context, route, arguments: botRecommendationModel);
 }

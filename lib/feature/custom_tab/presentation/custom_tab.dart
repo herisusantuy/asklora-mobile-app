@@ -16,7 +16,6 @@ class CustomTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('custom tab rebuild');
     return MultiBlocProvider(
       providers: [
         BlocProvider(
