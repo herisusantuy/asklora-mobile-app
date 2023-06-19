@@ -114,7 +114,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextNew(
-                  'About ${portfolioBotDetailModel!.stockInfoWithPlaceholder.tickerName} ${portfolioBotDetailModel!.stockInfoWithPlaceholder.ticker}',
+                  'About ${portfolioBotDetailModel!.stockInfoWithPlaceholder.tickerName} ${portfolioBotDetailModel!.stockInfoWithPlaceholder.symbol}',
                   style: AskLoraTextStyles.h5
                       .copyWith(color: AskLoraColors.charcoal),
                   maxLines: 2,
