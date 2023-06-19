@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/presentation/custom_in_app_notification.dart';
 import '../../core/presentation/custom_scaffold.dart';
 import '../../core/utils/app_icons.dart';
-import '../bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../onboarding/kyc/repository/account_repository.dart';
 import '../settings/bloc/account_information/account_information_bloc.dart';
 import 'bloc/tabs_screen_bloc.dart';
@@ -114,13 +113,7 @@ class TabsScreen extends StatelessWidget {
   static final List<Widget> _widgets = <Widget>[
     const HomeScreenForm(),
     const ForYouScreenForm(),
-    const PortfolioScreen(),
+    // const PortfolioScreen(),
     const LoraGptScreen()
   ];
-
-  static void openAndRemoveAllRoute(BuildContext context,
-          {TabScreenPage? initialTabScreenPage}) =>
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          route, (Route<dynamic> route) => false,
-          arguments: initialTabScreenPage);
 }

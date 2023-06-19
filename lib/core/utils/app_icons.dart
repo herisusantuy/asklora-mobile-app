@@ -15,11 +15,13 @@ Widget getSvgIcon(String iconName,
     SvgPicture.asset('assets/icons/$iconName.svg',
         color: color, height: height, width: width);
 
-Image getPngIcon(String iconName, {double? height, double? width}) =>
+Image getPngIcon(String iconName,
+        {double? height, double? width, BoxFit? fit}) =>
     Image.asset(
       'assets/icons/$iconName.png',
       height: height,
       width: width,
+      fit: fit,
     );
 
 Image getPngImage(String imageName,

@@ -15,7 +15,8 @@ import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
-import '../../../tabs/tabs_screen.dart';
+import '../../../custom_tab/bloc/custom_tab_bloc.dart';
+import '../../../custom_tab/presentation/custom_tab.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_detail_model.dart';
 import '../../domain/bot_recommendation_model.dart';
@@ -76,8 +77,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
             }
 
             if (isFreeBotTrade) {
-              TabsScreen.openAndRemoveAllRoute(context,
-                  initialTabScreenPage: TabScreenPage.portfolio);
+              CustomTab.openAndRemoveAllRoute(context,
+                  initialTabPage: TabPage.portfolio);
               BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
             } else {
               BotStockResultScreen.open(

@@ -5,7 +5,8 @@ import '../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_status_widget.dart';
 import '../../../../generated/l10n.dart';
-import '../../../tabs/tabs_screen.dart';
+import '../../../custom_tab/bloc/custom_tab_bloc.dart';
+import '../../../custom_tab/presentation/custom_tab.dart';
 import '../../../transaction_history/presentation/transaction_history_screen.dart';
 import '../../widgets/balance_base_form.dart';
 import '../utils/deposit_utils.dart';
@@ -45,9 +46,9 @@ class DepositResultScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: PrimaryButton(
                 label: S.of(context).buttonDone,
-                onTap: () => TabsScreen.openAndRemoveAllRoute(
+                onTap: () => CustomTab.openAndRemoveAllRoute(
                   context,
-                  initialTabScreenPage: TabScreenPage.portfolio,
+                  initialTabPage: TabPage.portfolio,
                 ),
               ),
             ));
@@ -58,9 +59,9 @@ class DepositResultScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30),
               child: ButtonPair(
                 primaryButtonLabel: S.of(context).buttonDone,
-                primaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(
+                primaryButtonOnClick: () => CustomTab.openAndRemoveAllRoute(
                     context,
-                    initialTabScreenPage: TabScreenPage.portfolio),
+                    initialTabPage: TabPage.portfolio),
                 secondaryButtonLabel:
                     S.of(context).buttonViewTransactionHistory,
                 secondaryButtonOnClick: () =>

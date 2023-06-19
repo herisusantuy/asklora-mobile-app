@@ -1,6 +1,6 @@
 part of 'custom_tab_bloc.dart';
 
-enum TabPage { forYou, portfolio }
+enum TabPage { home, forYou, portfolio }
 
 class CustomTabState extends Equatable {
   final TabPage currentTabPage;
