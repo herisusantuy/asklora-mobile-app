@@ -48,6 +48,7 @@ import '../../feature/settings/presentation/payment_detail_screen.dart';
 import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
+import '../../feature/tabs/for_you/for_you_screen_form.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../feature/transaction_history/bot_order/detail/bot_order_transaction_history_detail_screen.dart';
 import '../../feature/transaction_history/domain/transaction_history_model.dart';
@@ -312,6 +313,9 @@ class RouterGenerator {
       case SuspendedAccountScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SuspendedAccountScreen());
+      case ForYouScreenForm.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const ForYouScreenForm());
       default:
         return MaterialPageRoute(
             settings: settings,

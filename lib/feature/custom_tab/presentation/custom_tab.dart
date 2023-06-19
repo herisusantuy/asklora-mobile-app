@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../app/bloc/app_bloc.dart';
 import '../../../core/presentation/custom_in_app_notification.dart';
 import '../../../core/presentation/custom_scaffold.dart';
-import '../../../core/repository/transaction_repository.dart';
 import '../../../core/utils/app_icons.dart';
-import '../../bot_stock/bloc/bot_stock_bloc.dart';
+import '../../../core/utils/route_generator.dart';
 import '../../bot_stock/presentation/portfolio/portfolio_screen.dart';
-import '../../bot_stock/repository/bot_stock_repository.dart';
 import '../../onboarding/kyc/repository/account_repository.dart';
 import '../../settings/bloc/account_information/account_information_bloc.dart';
+import '../../tabs/for_you/for_you_screen_form.dart';
 import '../bloc/custom_tab_bloc.dart';
-import 'tab/for_you_tab.dart';
+
 
 class CustomTab extends StatelessWidget {
   const CustomTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('custom tab rebuild');
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -27,20 +25,6 @@ class CustomTab extends StatelessWidget {
                 ..add(GetAccountInformation()),
         ),
         BlocProvider(create: (_) => CustomTabBloc()),
-        BlocProvider(
-          create: (_) {
-            BotStockBloc botStockBloc = BotStockBloc(
-                botStockRepository: BotStockRepository(),
-                transactionRepository: TransactionRepository());
-            if (context.read<AppBloc>().state.userJourney ==
-                UserJourney.freeBotStock) {
-              botStockBloc.add(FetchFreeBotRecommendation());
-            } else {
-              botStockBloc.add(FetchBotRecommendation());
-            }
-            return botStockBloc;
-          },
-        )
       ],
       child: CustomScaffold(
           enableBackNavigation: false,
@@ -94,12 +78,18 @@ class CustomTab extends StatelessWidget {
           builder: (context, state) {
             switch (state.currentTabPage) {
               case TabPage.forYou:
-                return const ForYouTab();
+                return _navigatorPage(ForYouScreenForm.route);
               case TabPage.portfolio:
-                return const PortfolioScreen();
+                return _navigatorPage(PortfolioScreen.route);
             }
           },
         ),
+      );
+
+  Widget _navigatorPage(String route) => Navigator(
+        key: Key(route),
+        onGenerateRoute: RouterGenerator.generateRoute,
+        initialRoute: route,
       );
 
   Widget _tab(
