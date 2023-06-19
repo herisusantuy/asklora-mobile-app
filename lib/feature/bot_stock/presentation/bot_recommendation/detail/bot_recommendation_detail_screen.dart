@@ -125,8 +125,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
   }
 
   static void open(
-      {required BuildContext context,
-      required BotRecommendationModel botRecommendationModel}) {
-    Navigator.pushNamed(context, route, arguments: botRecommendationModel);
-  }
+          {required BuildContext context,
+          required BotRecommendationModel botRecommendationModel}) =>
+      Navigator.pushNamed(context, route, arguments: botRecommendationModel);
 }
