@@ -41,11 +41,11 @@
           <version>5.9.1</version>
           <scope>test</scope>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/org.asynchttpclient/async-http-client -->
+      <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/htmlunit-driver -->
       <dependency>
-          <groupId>org.asynchttpclient</groupId>
-          <artifactId>async-http-client</artifactId>
-          <version>2.12.3</version>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>htmlunit-driver</artifactId>
+          <version>4.10.0</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
       <dependency>
