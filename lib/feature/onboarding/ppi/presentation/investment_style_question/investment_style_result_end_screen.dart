@@ -11,7 +11,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../../../bot_stock/presentation/gift/bot_stock_do_screen.dart';
-import '../../../../custom_tab/presentation/custom_tab.dart';
+import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../kyc/presentation/kyc_screen.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../../bloc/response/user_response_bloc.dart';
@@ -80,7 +80,7 @@ class InvestmentStyleResultEndScreen extends StatelessWidget {
             bottomButton: ButtonPair(
               primaryButtonOnClick: () => KycScreen.open(context),
               secondaryButtonOnClick: () =>
-                  CustomTab.openAndRemoveAllRoute(context),
+                  TabScreen.openAndRemoveAllRoute(context),
               primaryButtonLabel: S.of(context).openInvestmentAccount,
               secondaryButtonLabel: S.of(context).buttonMaybeLater,
             ),
