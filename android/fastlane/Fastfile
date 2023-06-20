@@ -16,9 +16,10 @@ platform :android do
   private_lane :upload_to_firebase do |options|
 
     output_path = "../build/app/outputs/flutter-apk/" +options[:apk_name]
+    firebase_app_id = options[:firebase_app_id]
 
     firebase_app_distribution(
-      app: ENV["FIREBASE_ANDROID_DEV_APP_ID"],
+      app: ENV[firebase_app_id],
       android_artifact_path: output_path,
       android_artifact_type: "APK",
       release_notes: "Test App",
@@ -39,9 +40,8 @@ platform :android do
     clean()
     set_up_env_vars(env:"dev")
     gradle(task: "assembleDevRelease")
-    gradle(task: "bundleDevRelease")
     validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
-    upload_to_firebase(apk_name:"app-dev-release.apk")
+    upload_to_firebase(firebase_app_id:"FIREBASE_ANDROID_DEV_APP_ID", apk_name:"app-dev-release.apk")
   end
 
   desc "Create a staging build"
@@ -51,7 +51,7 @@ platform :android do
     gradle(task: "assembleStagingRelease")
     gradle(task: "bundleStagingRelease")
     validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
-    upload_to_firebase(apk_name:"app-staging-release.apk")
+    upload_to_firebase(firebase_app_id:"FIREBASE_ANDROID_STAG_APP_ID", apk_name:"app-staging-release.apk")
     upload_to_play_store(
       json_key: '../firebase_credentials_dev.json',
       aab: '../build/app/outputs/bundle/stagingRelease/app-staging-release.aab',
@@ -65,7 +65,7 @@ platform :android do
       set_up_env_vars(env:"production")
       gradle(task: "assembleProductionRelease")
       validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
-      upload_to_firebase(apk_name:"app-production-release.apk")
+      upload_to_firebase(firebase_app_id:"FIREBASE_ANDROID_PROD_APP_ID", apk_name:"app-production-release.apk")
 #      upload_to_play_store
     end
 end
