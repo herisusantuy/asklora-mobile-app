@@ -6,8 +6,8 @@ part 'custom_tab_state.dart';
 part 'custom_tab_event.dart';
 
 class CustomTabBloc extends Bloc<CustomTabEvent, CustomTabState> {
-  CustomTabBloc()
-      : super(const CustomTabState(currentTabPage: TabPage.forYou)) {
+  CustomTabBloc({required TabPage initialTabPage})
+      : super(CustomTabState(currentTabPage: initialTabPage)) {
     on<TabChanged>(_onTabChanged);
     on<AiButtonSelected>(_onAiButtonSelected);
   }

@@ -46,6 +46,7 @@ part 'widgets/home_screen_pop_up_message_widget.dart';
 part 'widgets/home_screen_pop_up_message_with_bot_badge_widget.dart';
 
 class HomeScreenForm extends StatelessWidget {
+  static const String route = '/home_screen';
   const HomeScreenForm({super.key});
 
   @override

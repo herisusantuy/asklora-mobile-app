@@ -8,7 +8,7 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/app_icons.dart';
-import '../../../../tabs/tabs_screen.dart';
+import '../../../../custom_tab/presentation/custom_tab.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../widgets/kyc_base_form.dart';
@@ -119,7 +119,7 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
                     .read<NavigationBloc<KycPageStep>>()
                     .add(const PageChanged(KycPageStep.signTaxAgreements)),
                 secondaryButtonOnClick: () =>
-                    TabsScreen.openAndRemoveAllRoute(context),
+                    CustomTab.openAndRemoveAllRoute(context),
                 disablePrimaryButton: !state.isRiskDisclosureAgreementChecked,
                 primaryButtonLabel: 'Agree',
                 secondaryButtonLabel: 'Continue Later',

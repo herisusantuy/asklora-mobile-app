@@ -8,7 +8,7 @@ import '../../../../core/utils/feature_flags.dart';
 import '../../../balance/deposit/presentation/deposit_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
-import '../../../tabs/tabs_screen.dart';
+import '../../../custom_tab/presentation/custom_tab.dart';
 
 class KycResultScreen extends StatelessWidget {
   const KycResultScreen({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class KycResultScreen extends StatelessWidget {
             ? DepositScreen.open(
                 context: context, depositType: DepositType.firstTime)
             : GiftBotStockWelcomeScreen.open(context),
-        secondaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(context),
+        secondaryButtonOnClick: () => CustomTab.openAndRemoveAllRoute(context),
         primaryButtonLabel: FeatureFlags.byPassFreeBots
             ? 'Deposit Funds'
             : 'Get Free HKD500 Gift Botstock',
