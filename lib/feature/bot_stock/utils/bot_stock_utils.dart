@@ -100,7 +100,7 @@ enum OmsStatus {
   earlyTerminated('early_terminated'),
   expired('expired'),
   nearlyKnockOut('nearly_knock_out'),
-  knockOut('knockOut');
+  knockOut('knock_out');
 
   final String value;
 
