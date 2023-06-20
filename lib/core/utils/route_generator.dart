@@ -36,6 +36,7 @@ import '../../feature/onboarding/welcome/welcome_screen.dart';
 import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
+import '../../feature/settings/domain/bank_account.dart';
 import '../../feature/settings/presentation/about_asklora_screen.dart';
 import '../../feature/settings/presentation/account_information_screen.dart';
 import '../../feature/settings/presentation/account_setting_screen.dart';
@@ -201,14 +202,20 @@ class RouterGenerator {
         );
       case WithdrawalAmountScreen.route:
         return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => WithdrawalAmountScreen(settings.arguments as double),
-        );
+            settings: settings,
+            builder: (_) => WithdrawalAmountScreen(
+                    args: settings.arguments as ({
+                  double withdrawableBalance,
+                  BankAccount bankAccount
+                })));
       case WithdrawalSummaryScreen.route:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => WithdrawalSummaryScreen(
-            withdrawalAmount: settings.arguments as double,
+            args: settings.arguments as ({
+              double withdrawalAmount,
+              BankAccount bankAccount
+            }),
           ),
         );
       case WithdrawalResultScreen.route:
