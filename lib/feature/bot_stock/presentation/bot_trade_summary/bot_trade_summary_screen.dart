@@ -210,5 +210,6 @@ class BotTradeSummaryScreen extends StatelessWidget {
   static void open(
           {required BuildContext context,
           required BotTradeSummaryModel botTradeSummaryModel}) =>
-      Navigator.pushNamed(context, route, arguments: botTradeSummaryModel);
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: botTradeSummaryModel);
 }
