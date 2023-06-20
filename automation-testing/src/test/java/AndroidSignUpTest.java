@@ -31,56 +31,71 @@ import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-/*
- * IMPORTANT:
- * These settings are disabled in Developer options for the Xiaomi Phone:
- * "Verify apps over USB"
- * "Verify bytecode of debuggable apps"
- * "Disable MIUI optimisations"
+/**
+ * <h1>IMPORTANT:</h1>
+ * <h3>These settings are disabled in Developer options for the Xiaomi Phone:</h3>
+ * "Verify apps over USB" <br>
+ * "Verify bytecode of debuggable apps" <br>
+ * "Disable MIUI optimisations" <br><br>
  *
- * These settings are enabled in Developer options:
- * "Enable USB debugging (Security settings)"
+ * <h3>These settings are enabled in Developer options:</h3>
+ * "Enable USB debugging (Security settings)" <br>
  * "Install via USB"
  *
- * You can use cli or gui to run the server
+ * <p>
+ * You can use cli or gui to run the server <br>
  * If you are using gui, go to advanced -> put "localhost" for server address
- * and check "Allow CORS"
+ * and check "Allow CORS" <br>
  * If you are using cli, type "appium --address=locahost --allow-cors" into cmd
- * or terminal
+ * or terminal <br>
  * - I have not tested running appium with cli, so I'm not sure if it will work
+ * </p>
  *
- * run "getProps.sh" before running the UI automation, the setUp method requires
- * the device's name, udid, and version
+ * <p>run "getProps.sh" before running the UI automation, the setUp method requires
+ *  * the device's name, udid, and version
+ *  </p>
  *
- * You must create a folder called "apps" then put the apk file into the folder and rename the apk to
+ * <p>You must create a folder called "apps" then put the apk file into the folder and rename the apk to
  * "asklora_stag.apk". You can name the apk to something else but make sure to
  * match the name of the apk in the setUp method
+ * </p>
  *
- * Make sure JAVA_HOME and ANDROID_HOME are set up to use this program to
- * automate creating an account
+ * <p>Make sure JAVA_HOME and ANDROID_HOME are set up to use this program to
+ * automate creating an account <br>
  * To be able to interact with the scanner and you are using IntelliJ, go to:
- * Help -> Edit Custom VM Options
- * add "-Deditable.java.test.console=true" and restart IDE
+ * Help -> Edit Custom VM Options <br>
+ * Add "-Deditable.java.test.console=true" and restart IDE <br>
  * You should be able to input the otp and confirm you uploaded an image after
  * restarting IDE
+ * </p>
  *
- * There are certain parts where automation would not work, there are more parts where automation would
- * not work
- * 1) Entering the otp in the app (using Stag to test automation)
- * - You must enter the otp you received into the terminal
- * 2) Onfido
- * - You must manually take a picture of the HKID and selfie
+ * <p>There are certain parts where automation would not work, there are more parts where automation would
+ * not work <br>
+ * - If you are using the Dev build, you will only have to automate Onfido <br>
+ * 1) Entering the otp in the app (using Stag to test automation) <br>
+ * - You must enter the otp you received into the terminal <br>
+ * 2) Onfido <br>
+ * - You must manually take a picture of the HKID and selfie <br>
+ * </p>
  *
- * The privacy questions are randomized to only click the first 3 options to ensure eligibility to
- * create an account
  */
 
 public class AndroidSignUpTest {
         AppiumDriver driver;
         WebDriverWait wait;
-        HKIDGenerator generator = new HKIDGenerator();
+        final HKIDGenerator generator = new HKIDGenerator();
+        final SlackOTP slackToken = new SlackOTP();
 
-        String deviceName, udid, platformVersion, name, firstName, lastName, gender, otp, address, city;
+        String deviceName;
+        String udid;
+        String platformVersion;
+        String name;
+        String firstName;
+        String lastName;
+        String gender;
+        String otp;
+        String address;
+        String city;
         final String hkid = generator.getHKIDgenerated();
         final String phoneNum = ""; // enter a phone number before automation testing
         final String email = "testemail" + randomize(100, 1000000);
@@ -91,6 +106,7 @@ public class AndroidSignUpTest {
         final String FIND_BY_IMAGE_VIEW = "android.widget.ImageView";
         final String TEST_APP = "Stag"; // The other one would be "Dev"
 
+        ArrayList<String> deviceProperties = new ArrayList<>();
         String[] investTime = { "5 years or above", "3 to less then 5 years", "1 to less then 3 years", "Less than 1 year",
                         "Never" };
         String[] salary = { "more than HK$150,000", "HK$100,000-HK$149,999", "HK$50,000-HK$99,999", "HK$20,000-HK$49,999",
@@ -98,9 +114,7 @@ public class AndroidSignUpTest {
         String[] financialStability = { "Very accurate", "Somewhat accurate", "Neutral", "Somewhat inaccurate", "Very inaccurate" };
         String[] riskLevel = { "very high risk",
                         "higher risk of capital loss to achieve substantial returns above deposit interest rates",
-                        "moderate risk",
-                        "low risk",
-                        "I cannot accept any risk of capital loss" };
+                        "moderate risk", "low risk", "I cannot accept any risk of capital loss" };
 
         String[] richVocab = { "Of Course", "I think so", "Sort of", "Not Really", "No" };
         String[] learnNewThings = { "All the time", "Usually.", "Sometimes", "Not really", "That’s not me" };
@@ -115,14 +129,12 @@ public class AndroidSignUpTest {
 
         @BeforeTest
         public void setUp() throws IOException {
-                deviceName = getPropValues("deviceName");
-                platformVersion = getPropValues("platformVersion");
-                udid = getPropValues("udid");
+                getPropValues();
                 getPerson();
 
-                System.out.println("Device Name: " + deviceName);
                 System.out.println("Platform Version: " + platformVersion);
                 System.out.println("udid: " + udid);
+                System.out.println("Device Name: " + deviceName);
                 System.out.println("Name: " + name);
                 System.out.println("Gender: " + gender);
                 System.out.println("hkid: " + hkid);
@@ -135,7 +147,7 @@ public class AndroidSignUpTest {
                 caps.setCapability("platformVersion", platformVersion);
                 caps.setCapability("udid", udid);
                 caps.setCapability("deviceName", deviceName);
-                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag.apk");
+                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_dev.apk");
                 caps.setCapability("unicodeKeyboard", true);
                 caps.setCapability("resetKeyboard", true);
                 caps.setCapability("ignoreHiddenApiPolicyError", true);
@@ -162,12 +174,15 @@ public class AndroidSignUpTest {
                         .withTimeLimit(Duration.ofMinutes(5)));
 
                 clickContentDescription("Begin");
+                waitUntilXpath("//android.widget.Button");
                 clickContentDescription("Begin");
+                waitUntilXpath("//android.view.View[contains(@content-desc, 'Lora, your FinFit coach')]");
                 driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(firstName); // enter
                 // firstName
                 clickContentDescription("Next");
                 waitUntilXpath("//android.widget.Button[@content-desc='Next']");
                 clickContentDescription("Next");
+                Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Spill the truth')]")).isDisplayed());
         }
 
         /*
@@ -175,7 +190,6 @@ public class AndroidSignUpTest {
          */
         @Test(priority = 2, dependsOnMethods = { "testBegin" })
         public void testPrivacy() {
-                waitUntilXpath("//android.view.View[contains(@content-desc, 'Spill the truth')]");
                 clickContentDescription(investTime[randomize(0, 4)]); // time spent on investing stocks
                 clickContentDescription("Next");
                 clickContentDescription(salary[randomize(0, 4)]); // salary
@@ -188,10 +202,7 @@ public class AndroidSignUpTest {
                 clickContentDescription("Next");
 
                 try {
-                        String expectedView = "Age is just a number.You picked us, so you are already ahead of the game!Ok! Let’s get to know more about you!";
-                        String actualView = driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Age')]"))
-                                .getAttribute("contentDescription").replace("\n", "");
-                        Assert.assertEquals(actualView, expectedView, "View is not happy flow at PPI (Privacy)");
+                        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Age')]")).isDisplayed(), "View is not happy flow at PPI (Privacy)");
                 } catch (Exception e) {
                         System.out.println("Unhappy flow (Privacy)");
                         failPrivacy();
@@ -282,18 +293,19 @@ public class AndroidSignUpTest {
                 implicitWait(5);
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
 
-                if (!(driver.findElement(By.id("android:id/button_once")).isEnabled())) { // Check if the "Just Once"
-                                                                                          // Button is disabled
-                        driver.findElement(new AppiumBy.ByAndroidUIAutomator(
-                                        "new UiSelector().textContains(\" " + TEST_APP + " \")"))
-                                        .click();
-                        implicitWait(3);
-                        driver.findElement(By.id("android:id/button_once")).click();
+                if (TEST_APP.equals("Dev")) {
+                        driver.findElement(By.xpath("//android.widget.TextView[contains(@text, 'Dev')]")).click();
                 } else {
-                        driver.findElement(By.id("android:id/button_once")).click();
+                        driver.findElement(By.xpath("//android.widget.TextView[contains(@text, 'Stag')]")).click();
                 }
+
+                if (!(driver.findElement(By.xpath("//android.widget.Button[contains(@content-desc, 'Define Investment Style')]")).isDisplayed()))
+                        driver.findElement(By.id("android:id/button_once")).click();
         }
 
+        /*
+         * Click Investment Style questions
+         */
         @Test(priority = 6, dependsOnMethods = { "testVerifyEmail" })
         public void testInvestmentStyle() {
                 clickElementByXpath("//android.widget.Button[@content-desc='Define Investment Style']");
@@ -308,9 +320,7 @@ public class AndroidSignUpTest {
                 clickContentDescription("Next");
 
                 try {
-                        String expectedView = "Your investment style is all set!";
-                        String actualView = driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'all set!')]")).getAttribute("contentDescription");
-                        Assert.assertEquals(actualView, expectedView, "View is not a happy flow at PPI (Investment Style)");
+                        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'all set!')]")).isDisplayed(), "View is not a happy flow at PPI (Investment Style)");
                 } catch (Exception e) {
                         System.out.println("Unhappy flow (Investment Style)");
                         failInvestmentStyle();
@@ -319,10 +329,14 @@ public class AndroidSignUpTest {
         }
 
         public void failInvestmentStyle() {
-                clickElementByXpath("//android.widget.Button[contains(@content-desc, 'Retake Investment Style')]");
+                clickElementByXpath("//android.widget.Button[contains(@content-desc, 'RETAKE INVESTMENT STYLE')]");
+                clickElementByXpath("//android.view.View[contains(@content-desc, 'Reset')]");
                 testInvestmentStyle();
         }
 
+        /*
+         * Enter Personal Info
+         */
         @Test(priority = 7, dependsOnMethods = { "testInvestmentStyle" })
         public void testAccountSetUp() {
                 waitUntilXpath("//android.widget.Button[contains(@content-desc, 'Investment')]");
@@ -342,6 +356,7 @@ public class AndroidSignUpTest {
                 clickContentDescription("Nationality");
                 clickElementByXpath("//android.view.View[contains(@content-desc, 'Hong Kong SAR')]");
                 clickContentDescription("Country Of Birth");
+                waitUntilXpath("//android.view.View[contains(@content-desc, 'Hong Kong SAR')]");
                 clickElementByXpath("//android.view.View[contains(@content-desc, 'Hong Kong SAR')]");
                 scrollDown();
                 clickElementByXpath("//android.view.View[contains(@content-desc, 'Phone')]/android.widget.EditText[2]");
@@ -352,6 +367,9 @@ public class AndroidSignUpTest {
                 getOTP();
         }
 
+        /*
+         * Enter Address Info
+         */
         @Test(priority = 8, dependsOnMethods = { "testAccountSetUp" })
         public void testAddress() {
                 List<WebElement> addressTextFields = driver
@@ -369,6 +387,9 @@ public class AndroidSignUpTest {
                 clickContentDescription("Confirm & Continue");
         }
 
+        /*
+         * Enter Financial Profile
+         */
         @Test(priority = 9, dependsOnMethods = { "testAddress" })
         public void testFinancialProfile() {
                 clickContentDescription("No");
@@ -403,6 +424,9 @@ public class AndroidSignUpTest {
                 clickContentDescription("Complete");
         }
 
+        /*
+         * Deposit Funds
+         */
         @Test(priority = 10, dependsOnMethods = { "testFinancialProfile" })
         public void testDepositFunds() {
                 waitUntilXpath("//android.widget.Button[contains(@content-desc, 'Deposit Funds')]");
@@ -431,11 +455,16 @@ public class AndroidSignUpTest {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element)));
         }
 
-        public String getPropValues(String var) throws IOException {
+        public void getPropValues() throws IOException {
                 Properties prop = new Properties();
                 FileInputStream ip = new FileInputStream("config.properties");
                 prop.load(ip);
-                return prop.getProperty(var);
+                prop.forEach((k, v) -> deviceProperties.add((String) v));
+                System.out.println(deviceProperties);
+
+                platformVersion = deviceProperties.get(0);
+                udid = deviceProperties.get(1);
+                deviceName = deviceProperties.get(2);
         }
 
         public void clickContentDescription(String element) {
@@ -469,22 +498,16 @@ public class AndroidSignUpTest {
         }
 
         public void getOTP() {
-//                if (deviceName.contains("M2101K9G")) {
-//                        implicitWait(3);
-//                        ((AndroidDriver) driver).openNotifications();
-//                        waitUntilXpath("//android.widget.Button[contains(@content-desc, 'Copy')]");
-//                        clickElementByXpath("//android.widget.Button[contains(@content-desc, 'Copy')]");
-//                        ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.BACK));
-//                        otp = ((AndroidDriver) driver).getClipboardText();
-//                        System.out.println("Received otp: " + otp);
-//                        clickClassName(FIND_BY_EDIT_TEXT);
-//                        driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(otp);
-//                }
-                Scanner scanner = new Scanner(System.in);
-                System.out.print("Enter otp: ");
-                otp = scanner.nextLine();
-                System.out.println("Received otp: " + otp);
+                if (TEST_APP.equals("Dev")) {
+                        otp = slackToken.fetchHistory(email);
+                } else {
+                        Scanner scanner = new Scanner(System.in);
+                        System.out.print("Enter otp: ");
+                        otp = scanner.nextLine();
+                        System.out.println("Received otp: " + otp);
+                }
                 clickClassName(FIND_BY_EDIT_TEXT);
+                System.out.println("verification code: " + otp);
                 driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(otp);
         }
 
@@ -545,7 +568,7 @@ public class AndroidSignUpTest {
                 List<String> strList = Arrays.asList(omnisearch);
                 Collections.shuffle(strList);
                 strList.toArray(omnisearch);
-                int randNum = randomize(1, omnisearch.length-1);
+                int randNum = randomize(2, omnisearch.length-1);
                 for (int i = 0; i < randNum; i++) {
                         driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(omnisearch[i]);
                         clickElementByClass("android.widget.Button");

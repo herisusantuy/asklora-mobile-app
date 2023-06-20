@@ -3,10 +3,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-/*
-    Taken from: https://github.com/BinanGit/HKID/blob/master/src/test/java/org/test/methods/HKIDchecking_Methods.java
-
- */
+    /**
+     * Reference: <a href="https://github.com/BinanGit/HKID/blob/master/src/test/java/org/test/methods/HKIDchecking_Methods.java">HKID Generator</a>
+     */
 
 public class HKIDGenerator {
     public String HKIDgenerated;
@@ -63,7 +62,7 @@ public class HKIDGenerator {
         // Generate a random number between 1 - 10
         double hkidMode = getRandomInt(1, 10);
 
-        // Generate A - Z from ASCII code 65 - 90
+        // Generate A - Z from ASCII otpCode 65 - 90
         String randomAlphabet = Character.toString((char) getRandomInt(65, 90));
         if (hkidMode == 10) {
             randomAlphabet += Character.toString((char)getRandomInt(65, 90));
@@ -132,19 +131,19 @@ public class HKIDGenerator {
         System.out.println("The Modulus = " + mod);
 
         int checkCode = 11 - mod;
-        System.out.println("Checking code = " + checkCode);
+        System.out.println("Checking otpCode = " + checkCode);
 
         result = mod == 0 && lastCode == 0 || mod == 10 && lastCode == 1 || checkCode > 1 && checkCode < 10 && lastCode == checkCode;
         System.out.println("Modulus = " + mod + " & Checking digit = " + temp.charAt(len-1));
         System.out.println("The HKID of " + hkid + " is " + result);
         if (!result) {
             if (mod == 0) {
-                System.out.println("i.e. Verify code should be 0");
+                System.out.println("i.e. Verify otpCode should be 0");
             } else {
                 if (checkCode == 10) {
-                    System.out.println("i.e. Verify code should be A");
+                    System.out.println("i.e. Verify otpCode should be A");
                 } else {
-                    System.out.println("Verify code should be " + checkCode);
+                    System.out.println("Verify otpCode should be " + checkCode);
                 }
             }
         }
