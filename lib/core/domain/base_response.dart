@@ -20,8 +20,8 @@ class BaseResponse<T> extends Equatable {
     return const BaseResponse(state: ResponseState.unknown);
   }
 
-  static BaseResponse<T> loading<T>() {
-    return const BaseResponse(state: ResponseState.loading);
+  static BaseResponse<T> loading<T>({T? previousData}) {
+    return BaseResponse(state: ResponseState.loading, data: previousData);
   }
 
   static BaseResponse<T> complete<T>(T data, {String message = ''}) {
