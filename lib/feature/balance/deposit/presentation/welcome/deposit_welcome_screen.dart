@@ -17,11 +17,11 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../custom_tab/presentation/custom_tab.dart';
 import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import '../../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../../../settings/domain/bank_account.dart';
+import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../widgets/balance_base_form.dart';
 import '../../../widgets/bank_account_card.dart';
 import '../../../widgets/change_bank_account_button.dart';
@@ -154,7 +154,7 @@ class DepositWelcomeScreen extends StatelessWidget {
                     depositType: depositType,
                   ),
               secondaryButtonOnClick: () =>
-                  CustomTab.openAndRemoveAllRoute(context),
+                  TabScreen.openAndRemoveAllRoute(context),
               primaryButtonLabel: S.of(context).buttonContinue,
               secondaryButtonLabel: S.of(context).buttonMaybeLater),
         );

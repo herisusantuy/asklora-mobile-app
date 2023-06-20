@@ -5,7 +5,7 @@ import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_status_widget.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
-import '../../custom_tab/presentation/custom_tab.dart';
+import '../../tabs/presentation/tab_screen.dart';
 
 class BotStockResultScreen extends StatelessWidget {
   static const String route = '/bot_stock_result_screen';
@@ -28,7 +28,7 @@ class BotStockResultScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30.0),
             child: PrimaryButton(
               label: 'BACK TO HOME',
-              onTap: () => CustomTab.openAndRemoveAllRoute(context),
+              onTap: () => TabScreen.openAndRemoveAllRoute(context),
             ),
           ),
         ));

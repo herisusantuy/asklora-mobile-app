@@ -6,7 +6,7 @@ import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../custom_tab/presentation/custom_tab.dart';
+import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../ppi_screen.dart';
 
@@ -39,7 +39,7 @@ class InvestmentStyleWelcomeScreen extends StatelessWidget {
                               QuestionPageStep.investmentStyle));
                     },
                     secondaryButtonOnClick: () =>
-                        CustomTab.openAndRemoveAllRoute(context),
+                        TabScreen.openAndRemoveAllRoute(context),
                     primaryButtonLabel: S.of(context).defineInvestmentStyle,
                     secondaryButtonLabel: S.of(context).buttonMaybeLater)
               ],

@@ -1,12 +1,12 @@
-part of 'custom_tab_bloc.dart';
+part of 'tab_screen_bloc.dart';
 
 enum TabPage { home, forYou, portfolio }
 
-class CustomTabState extends Equatable {
+class TabScreenState extends Equatable {
   final TabPage currentTabPage;
   final bool aiPageSelected;
 
-  const CustomTabState({
+  const TabScreenState({
     required this.currentTabPage,
     this.aiPageSelected = false,
   });
@@ -17,11 +17,11 @@ class CustomTabState extends Equatable {
         aiPageSelected,
       ];
 
-  CustomTabState copyWith({
+  TabScreenState copyWith({
     TabPage? currentTabPage,
     bool? aiPageSelected,
   }) {
-    return CustomTabState(
+    return TabScreenState(
       currentTabPage: currentTabPage ?? this.currentTabPage,
       aiPageSelected: aiPageSelected ?? this.aiPageSelected,
     );
