@@ -17,13 +17,13 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
+import '../../bot_performance/bot_performance_chart.dart';
 import '../../bot_stock_result_screen.dart';
 import '../../widgets/bot_stock_form.dart';
 import '../../widgets/column_text.dart';
@@ -53,7 +53,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
       : super(key: key) {
     botType = BotType.findByString(botActiveOrderModel.botAppsName);
-    botStatus = BotStatus.findByString(botActiveOrderModel.status,
+    botStatus = BotStatus.findByOmsStatus(botActiveOrderModel.status,
         expireDate: botActiveOrderModel.expireDate);
   }
 
@@ -65,7 +65,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
         create: (_) => PortfolioBloc(
             botStockRepository: BotStockRepository(),
             transactionHistoryRepository: TransactionRepository())
-          ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.pk)),
+          ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
         child: BlocConsumer<PortfolioBloc, PortfolioState>(
           listenWhen: (previous, current) =>
               previous.botActiveOrderDetailResponse.state !=
@@ -78,35 +78,39 @@ class BotPortfolioDetailScreen extends StatelessWidget {
           builder: (context, state) {
             final BotActiveOrderDetailModel? botActiveOrderDetailModel =
                 state.botActiveOrderDetailResponse.data;
-            return CustomLayoutWithBlurPopUp(
-              loraPopUpMessageModel: LoraPopUpMessageModel(
-                title: S.of(context).errorGettingInformationTitle,
-                subTitle:
-                    S.of(context).errorGettingInformationPortfolioSubTitle,
-                primaryButtonLabel: S.of(context).buttonReloadPage,
-                secondaryButtonLabel: S.of(context).buttonCancel,
-                onSecondaryButtonTap: () => Navigator.pop(context),
-                onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
-                    (FetchActiveOrderDetail(
-                        botOrderId: botActiveOrderModel.pk))),
+            return RefreshIndicator(
+              onRefresh: () async => context.read<PortfolioBloc>().add(
+                  FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
+              child: CustomLayoutWithBlurPopUp(
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle:
+                      S.of(context).errorGettingInformationPortfolioSubTitle,
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  secondaryButtonLabel: S.of(context).buttonCancel,
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
+                      (FetchActiveOrderDetail(
+                          botOrderId: botActiveOrderModel.uid))),
+                ),
+                showPopUp: state.botActiveOrderDetailResponse.state ==
+                    ResponseState.error,
+                content: BotStockForm(
+                    useHeader: true,
+                    customHeader: BotPortfolioDetailHeader(
+                      botActiveOrderModel: botActiveOrderModel,
+                      botType: botType,
+                      botStatus: botStatus,
+                    ),
+                    padding: EdgeInsets.zero,
+                    content: BotPortfolioDetailContent(
+                      botStatus: botStatus,
+                      botType: botType,
+                      portfolioBotDetailModel: botActiveOrderDetailModel,
+                    ),
+                    bottomButton:
+                        _getBottomButton(context, botActiveOrderDetailModel)),
               ),
-              showPopUp: state.botActiveOrderDetailResponse.state ==
-                  ResponseState.error,
-              content: BotStockForm(
-                  useHeader: true,
-                  customHeader: BotPortfolioDetailHeader(
-                    botActiveOrderModel: botActiveOrderModel,
-                    botType: botType,
-                    botStatus: botStatus,
-                  ),
-                  padding: EdgeInsets.zero,
-                  content: BotPortfolioDetailContent(
-                    botStatus: botStatus,
-                    botType: botType,
-                    portfolioBotDetailModel: botActiveOrderDetailModel,
-                  ),
-                  bottomButton:
-                      _getBottomButton(context, botActiveOrderDetailModel)),
             );
           },
         ),
@@ -124,7 +128,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
         child: Column(
           children: [
-            if (botStatus == BotStatus.activeExpireSoon)
+            if (botStatus == BotStatus.liveExpireSoon)
               Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
                 child: BotRolloverButton(
@@ -132,16 +136,20 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                   botType: botType,
                 ),
               ),
-            if (botStatus == BotStatus.active ||
-                botStatus == BotStatus.activeExpireSoon)
-              BotTerminateButton(
-                botActiveOrderDetailModel: botActiveOrderDetailModel,
-                botType: botType,
-              ),
-            if (botStatus == BotStatus.pending)
-              BotCancelButton(
-                botActiveOrderDetailModel: botActiveOrderDetailModel,
-              ),
+
+            ///TODO : TEMPORARY FIX TO ALWAYS SHOW TERMINATE BUTTON
+            // if (botStatus == BotStatus.active ||
+            //     botStatus == BotStatus.activeExpireSoon)
+            BotTerminateButton(
+              botActiveOrderDetailModel: botActiveOrderDetailModel,
+              botType: botType,
+            ),
+
+            ///TODO : TEMPORARY FIX TO ALWAYS SHOW CANCEL BUTTON
+            //if (botStatus == BotStatus.pending)
+            // BotCancelButton(
+            //   botActiveOrderDetailModel: botActiveOrderDetailModel,
+            // ),
           ],
         ),
       );

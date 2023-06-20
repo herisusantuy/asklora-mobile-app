@@ -104,7 +104,7 @@ class KycSummaryScreen extends StatelessWidget {
             case ResponseState.success:
               context
                   .read<AppBloc>()
-                  .add(const SaveUserJourney(UserJourney.freeBotStock));
+                  .add(const SaveUserJourney(UserJourney.deposit));
               context
                   .read<NavigationBloc<KycPageStep>>()
                   .add(const PageChanged(KycPageStep.kycResultScreen));

@@ -1,8 +1,8 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
 import 'package:asklora_mobile_app/feature/balance/withdrawal/bloc/withdrawal_bloc.dart';
 import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_request.dart';
 import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_response.dart';
-import 'package:asklora_mobile_app/feature/balance/withdrawal/repository/withdrawal_repository.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,22 +10,22 @@ import 'package:mockito/mockito.dart';
 
 import 'withdrawal_bloc_test.mocks.dart';
 
-@GenerateMocks([WithdrawalRepository])
+@GenerateMocks([TransactionRepository])
 void main() async {
   group('Withdrawal Bloc Tests', () {
     late WithdrawalBloc withdrawalBloc;
-    late WithdrawalRepository withdrawalRepository;
+    late TransactionRepository transactionRepository;
     final BaseResponse<WithdrawalResponse> submitResponse =
         BaseResponse.complete(const WithdrawalResponse('', ''));
 
     final BaseResponse<WithdrawalResponse> errorResponse = BaseResponse.error();
 
     setUpAll(() async {
-      withdrawalRepository = MockWithdrawalRepository();
+      transactionRepository = MockTransactionRepository();
     });
     setUp(() async {
       withdrawalBloc = WithdrawalBloc(
-        withdrawalRepository: withdrawalRepository,
+        transactionRepository: transactionRepository,
       );
     });
 
@@ -46,7 +46,7 @@ void main() async {
         'emits `BaseResponse.success` WHEN '
         'submit withdrawal',
         build: () {
-          when(withdrawalRepository.submitWithdrawal(
+          when(transactionRepository.submitWithdrawal(
                   withdrawalRequest: const WithdrawalRequest(amount: '2000.0')))
               .thenAnswer((_) => Future.value(submitResponse));
           return withdrawalBloc;
@@ -71,7 +71,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed submit withdrawal',
         build: () {
-          when(withdrawalRepository.submitWithdrawal(
+          when(transactionRepository.submitWithdrawal(
                   withdrawalRequest: const WithdrawalRequest(amount: '2000.0')))
               .thenThrow(errorResponse);
           return withdrawalBloc;
@@ -96,7 +96,7 @@ void main() async {
         'emits `BaseResponse.error` WHEN '
         'failed submit withdrawal and reset withdrawal response',
         build: () {
-          when(withdrawalRepository.submitWithdrawal(
+          when(transactionRepository.submitWithdrawal(
                   withdrawalRequest: const WithdrawalRequest(amount: '2000.0')))
               .thenThrow(errorResponse);
           return withdrawalBloc;

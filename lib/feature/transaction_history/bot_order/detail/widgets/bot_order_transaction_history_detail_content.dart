@@ -1,14 +1,18 @@
 part of '../bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
+  final String botOrderId;
   final String botStatus;
   final String title;
   late final BotStatus botStatusType;
 
   BotOrderTransactionHistoryDetailContent(
-      {required this.title, required this.botStatus, Key? key})
+      {required this.title,
+      required this.botStatus,
+      required this.botOrderId,
+      Key? key})
       : super(key: key) {
-    botStatusType = BotStatus.findByString(botStatus);
+    botStatusType = BotStatus.findByOmsStatus(botStatus);
   }
 
   @override
@@ -25,7 +29,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
       S.of(context).summary,
       S.of(context).activities,
     ];
-    if (botStatusType == BotStatus.closed) {
+    if (botStatusType == BotStatus.expired) {
       tabs.add(S.of(context).performance);
     }
     return tabs;
@@ -36,8 +40,9 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
       BotOrderTransactionHistorySummaryScreen(botStatusType: botStatusType),
       const BotOrderTransactionHistoryActivitiesScreen(),
     ];
-    if (botStatusType == BotStatus.closed) {
-      tabViews.add(const BotOrderTransactionHistoryPerformanceScreen());
+    if (botStatusType == BotStatus.expired) {
+      tabViews.add(
+          BotOrderTransactionHistoryPerformanceScreen(botOrderId: botOrderId));
     }
     return tabViews;
   }
@@ -47,7 +52,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-                flex: 3,
+                flex: 2,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GestureDetector(
@@ -67,7 +72,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
               ),
             ),
             Flexible(
-                flex: 3,
+                flex: 2,
                 child: Align(
                     alignment: Alignment.centerRight, child: _statusWidget()))
           ],

@@ -1,7 +1,7 @@
 part of '../portfolio_screen.dart';
 
 class PortfolioBalance extends StatelessWidget {
-  final TransactionBalanceModel? data;
+  final TransactionBalanceResponse? data;
   final CurrencyType currencyType;
 
   const PortfolioBalance(
@@ -30,54 +30,58 @@ class PortfolioBalance extends StatelessWidget {
   }
 
   Widget _totalPortfolioBalance(BuildContext context, CurrencyType currencyType,
-          TransactionBalanceModel? data) =>
-      SafeArea(
-        bottom: false,
-        child: RoundColoredBox(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            content: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          CustomTextNew(
-                            '${S.of(context).portfolioTotalValue}  -  ',
-                            style: AskLoraTextStyles.body4,
-                          ),
-                          CurrencyDropdown(
-                            initialValue: CurrencyType.hkd,
-                            onChanged: (newValue) {
-                              context
-                                  .read<PortfolioBloc>()
-                                  .add(CurrencyChanged(newValue!));
-                            },
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      CustomTextNew(
-                        style: AskLoraTextStyles.h2,
-                        formatCurrency(currencyType, data?.totalPortfolio ?? 0),
-                      ),
-                      if (currencyType == CurrencyType.usd)
+      TransactionBalanceResponse? data) {
+    return SafeArea(
+      bottom: false,
+      child: RoundColoredBox(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          content: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
                         CustomTextNew(
-                          'Indicative Quote - HKD1 ≈ USD${0.13}',
+                          '${S.of(context).portfolioTotalValue}  -  ',
                           style: AskLoraTextStyles.body4,
+                        ),
+                        CurrencyDropdown(
+                          initialValue: CurrencyType.hkd,
+                          onChanged: (newValue) {
+                            context
+                                .read<PortfolioBloc>()
+                                .add(CurrencyChanged(newValue!));
+                          },
                         )
-                    ],
-                  ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    CustomTextNew(
+                      style: AskLoraTextStyles.h2,
+                      currencyType == CurrencyType.hkd
+                          ? data?.totalPortfolioHkdStr ?? '0.0'
+                          : data?.totalPortfolioUsdStr ?? '0.0',
+                    ),
+                    if (currencyType == CurrencyType.usd)
+                      CustomTextNew(
+                        'Indicative Quote - HKD1 ≈ USD${0.13}',
+                        style: AskLoraTextStyles.body4,
+                      )
+                  ],
                 ),
-              ],
-            )),
-      );
+              ),
+            ],
+          )),
+    );
+  }
 
-  Widget _fundingButtons(BuildContext context, TransactionBalanceModel? data) =>
+  Widget _fundingButtons(
+          BuildContext context, TransactionBalanceResponse? data) =>
       Column(
         children: [
           FundingButton(
@@ -103,14 +107,14 @@ class PortfolioBalance extends StatelessWidget {
                   data == null || !(state.response.data?.canTrade ?? false),
               fundingType: FundingType.withdraw,
               onTap: () => WithdrawalBankDetailScreen.open(
-                  context, data!.withdrawableBalance),
+                  context, data!.withdrawableBalanceHkd),
             ),
           ),
         ],
       );
 
   Widget _portfolioBalanceDetail(BuildContext context,
-          CurrencyType currencyType, TransactionBalanceModel? data) =>
+          CurrencyType currencyType, TransactionBalanceResponse? data) =>
       Expanded(
         child: RoundColoredBox(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -119,12 +123,16 @@ class PortfolioBalance extends StatelessWidget {
               PairColumnText(
                 leftTitle: S
                     .of(context)
-                    .portfolioWithdrawableAmount(currencyType.value),
-                leftSubTitle: data?.withdrawableBalanceStr ?? '/',
+                    .portfolioWithdrawableAmount(currencyType.name),
+                leftSubTitle: currencyType == CurrencyType.hkd
+                    ? data?.withdrawableBalanceHkdStr ?? '/'
+                    : data?.withdrawableBalanceUsdStr ?? '/',
                 rightTitle:
-                    S.of(context).portfolioBuyingPower(currencyType.value),
+                    S.of(context).portfolioBuyingPower(currencyType.name),
                 rightTooltipText: S.of(context).portfolioBuyingPowerToolTip,
-                rightSubTitle: data?.buyingPowerStr ?? '/',
+                rightSubTitle: currencyType == CurrencyType.hkd
+                    ? data?.buyingPowerHkdStr ?? '/'
+                    : data?.buyingPowerUsdStr ?? '/',
                 spaceWidth: 6,
               ),
               const SizedBox(
@@ -132,9 +140,11 @@ class PortfolioBalance extends StatelessWidget {
               ),
               PairColumnText(
                 leftTitle:
-                    S.of(context).portfolioTotalBotStock(currencyType.value),
+                    S.of(context).portfolioTotalBotStock(currencyType.name),
                 rightTitle: S.of(context).portfolioTotalPL,
-                leftSubTitle: data?.totalBotstockValueStr ?? '/',
+                leftSubTitle: currencyType == CurrencyType.hkd
+                    ? data?.totalBotstockHkdStr ?? '/'
+                    : data?.totalBotstockUsdStr ?? '/',
                 rightSubTitle: data?.totalPnLStr ?? '/',
                 spaceWidth: 6,
               ),

@@ -1,7 +1,9 @@
 part of 'bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
-  const BotOrderTransactionHistoryPerformanceScreen({Key? key})
+  final String botOrderId;
+  const BotOrderTransactionHistoryPerformanceScreen(
+      {required this.botOrderId, Key? key})
       : super(key: key);
 
   final SizedBox _spaceBetweenInfo = const SizedBox(
@@ -16,7 +18,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
       builder: (context, state) {
         if (state.response.state == ResponseState.success) {
           BotDetailTransactionHistoryResponse data = state.response.data!;
-          BotType botType = BotType.findByString(data.botAppsName);
+          BotType botType = BotType.findByString(data.botInfo.botName);
           return ListView(
             padding: AppValues.screenHorizontalPadding.copyWith(top: 20),
             children: [
@@ -42,11 +44,14 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
                         child: ColumnText(
                             title:
                                 S.of(context).portfolioDetailPerformanceTotalPL,
-                            subTitle: data.currentPnlRetString)),
+                            subTitle: data.totalPnLPctString)),
                   ],
                 ),
               ),
-              _chartWidget(context, data.activities),
+              const SizedBox(
+                height: 28,
+              ),
+              _chartWidget(context, botOrderId),
               const SizedBox(
                 height: 33,
               ),
@@ -59,14 +64,15 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
               ),
               PairColumnText(
                   leftTitle: S.of(context).investmentPeriod,
-                  leftSubTitle: data.duration,
-                  rightTitle:
-                      S.of(context).portfolioDetailKeyInfoDaysTillExpiry,
-                  rightSubTitle: data.daysToExpireString),
+                  leftSubTitle: data.botDuration,
+                  rightTitle: S
+                      .of(context)
+                      .portfolioDetailKeyInfoBotStockNumberOfRollover,
+                  rightSubTitle: data.rolloverCountString),
               _spaceBetweenInfo,
               PairColumnText(
                   leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
-                  leftSubTitle: data.startDateFormatted,
+                  leftSubTitle: data.spotDateFormatted,
                   rightTitle: S.of(context).portfolioDetailKeyInfoEndTime,
                   rightSubTitle: data.expireDateFormatted),
               _spaceBetweenInfo,
@@ -85,21 +91,17 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
         leftTitle: botType == BotType.plank
             ? S.of(context).portfolioDetailKeyInfoEstimatedStopLoss
             : S.of(context).portfolioDetailKeyInfoEstimatedMaxLoss,
-        leftSubTitle: data.maxLossPct.toString(),
+        leftSubTitle: data.estMaxLossPctString,
         rightTitle: botType == BotType.plank
             ? S.of(context).portfolioDetailKeyInfoEstimatedTakeProfit
             : S.of(context).portfolioDetailKeyInfoEstimatedMaxProfit,
-        rightSubTitle: data.targetProfitPct.toString(),
+        rightSubTitle: data.estMaxProfitPctString,
       );
 
-  Widget _chartWidget(BuildContext context,
-          List<BotActivitiesTransactionHistoryModel> activities) =>
-      Align(
-          alignment: Alignment.center,
-          child: activities.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 32.0),
-                  child: ChartAnimation(chartDataSets: activities),
-                )
-              : Text(S.of(context).portfolioDetailChartEmptyMessage));
+  Widget _chartWidget(BuildContext context, String botOrderId) => Align(
+      alignment: Alignment.center,
+      child: BotPerformanceChart(
+        botOrderId: botOrderId,
+        chartCaption: null,
+      ));
 }

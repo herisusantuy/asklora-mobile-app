@@ -41,8 +41,10 @@ class TradeBotStockAmountChanged extends BotStockEvent {
 class FetchBotDetail extends BotStockEvent {
   final String ticker;
   final String botId;
+  final bool isFreeBot;
 
-  const FetchBotDetail({required this.ticker, required this.botId});
+  const FetchBotDetail(
+      {required this.ticker, required this.botId, required this.isFreeBot});
 
   @override
   List<Object> get props => [ticker, botId];

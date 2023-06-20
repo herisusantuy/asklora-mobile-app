@@ -4,7 +4,7 @@ part 'bot_active_order_request.g.dart';
 
 @JsonSerializable()
 class BotActiveOrderRequest {
-  final List<String> status;
+  final String status;
 
   const BotActiveOrderRequest({required this.status});
 

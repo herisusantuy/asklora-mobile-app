@@ -16,8 +16,14 @@ class BotPortfolioCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final BotType botType =
         BotType.findByString(botActiveOrderModel.botAppsName);
-    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(context,
-        DateTime.now(), DateTime.parse(botActiveOrderModel.expireDate));
+    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(
+        context,
+
+        ///TODO : LATER MAKE SURE EXPIRED DATE IS NOT NULLABLE
+        DateTime.now(),
+        botActiveOrderModel.expireDate != null
+            ? DateTime.parse(botActiveOrderModel.expireDate!)
+            : null);
     return GestureDetector(
       onTap: () => BotPortfolioDetailScreen.open(
           context: context, botActiveOrderModel: botActiveOrderModel),
@@ -66,7 +72,7 @@ class BotPortfolioCard extends StatelessWidget {
                   leftTitle: S.of(context).portfolioCurrentPrice(''),
                   rightTitle: S.of(context).portfolioTotalPL,
                   leftSubTitle: botActiveOrderModel.currentPrice.toString(),
-                  rightSubTitle: '0%',
+                  rightSubTitle: botActiveOrderModel.totalPnLPctString,
                 ),
                 const SizedBox(
                   height: 15,
@@ -110,17 +116,26 @@ class BotPortfolioCard extends StatelessWidget {
   }
 
   Pair<bool, String> expiredDaysLeft(
-      BuildContext context, DateTime from, DateTime to) {
-    int dayLeft = (to.difference(from).inHours / 24).round().abs();
-    if (dayLeft > 3) {
-      return Pair(
+      BuildContext context, DateTime from, DateTime? to) {
+    ///TODO : LATER MAKE SURE EXPIRED DATE IS NOT NULLABLE
+    if (to != null) {
+      int dayLeft = (to.difference(from).inHours / 24).round().abs();
+      if (dayLeft > 3) {
+        return Pair(
           false,
-          S
-              .of(context)
-              .portfolioDetailExpiredAt(DateFormat('kk:mm, dd-MM').format(to)));
+          S.of(context).portfolioDetailExpiredAt(
+                DateFormat('kk:mm, dd-MM').format(to),
+              ),
+        );
+      } else {
+        return Pair(
+            true, S.of(context).portfolioDetailExpiredIn(dayLeft.toString()));
+      }
     } else {
       return Pair(
-          true, S.of(context).portfolioDetailExpiredIn(dayLeft.toString()));
+        false,
+        S.of(context).portfolioDetailExpiredAt('-'),
+      );
     }
   }
 }

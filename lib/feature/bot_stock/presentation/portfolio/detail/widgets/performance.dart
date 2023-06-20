@@ -45,7 +45,7 @@ class Performance extends StatelessWidget {
               Expanded(
                   child: ColumnText(
                       title: S.of(context).portfolioDetailPerformanceTotalPL,
-                      subTitle: botActiveOrderDetailModel.currentPnlRetString)),
+                      subTitle: botActiveOrderDetailModel.totalPnLPctString)),
             ],
           ),
         ),
@@ -62,7 +62,7 @@ class Performance extends StatelessWidget {
         _spaceBetweenInfo,
         PairColumnText(
           leftTitle: S.of(context).portfolioDetailPerformanceStockValues,
-          leftSubTitle: botActiveOrderDetailModel.stockValueString,
+          leftSubTitle: botActiveOrderDetailModel.botStockValueString,
           rightTitle: S.of(context).portfolioDetailPerformanceCash,
           rightSubTitle: botActiveOrderDetailModel.botCashBalanceString,
         ),
@@ -70,37 +70,27 @@ class Performance extends StatelessWidget {
         ColumnText(
             title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
             subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
-        _chartWidget(context),
         const SizedBox(
-          height: 6,
+          height: 32,
         ),
-        _getChartCaption(context),
+        _chartWidget(context),
       ]);
 
   Widget _chartWidget(BuildContext context) => Align(
       alignment: Alignment.center,
-      child: botActiveOrderDetailModel.performance.isNotEmpty
-          ? Padding(
-              padding: const EdgeInsets.only(top: 32.0),
-              child: ChartAnimation(
-                  chartDataSets: botActiveOrderDetailModel.performance),
-            )
-          : Text(S.of(context).portfolioDetailChartEmptyMessage));
+      child: BotPerformanceChart(
+        botOrderId: botActiveOrderDetailModel.uid,
+        chartCaption: _getChartCaption(context),
+      ));
 
-  Widget _getChartCaption(BuildContext context) {
-    if (botActiveOrderDetailModel.performance.isNotEmpty) {
-      return Padding(
+  Widget _getChartCaption(BuildContext context) => Padding(
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomTextNew(
             S.of(context).portfolioDetailChartCaption(
-                '${botType.upperCaseName} ${botActiveOrderDetailModel.tickerDetail.ticker}',
+                '${botType.upperCaseName} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol}',
                 botActiveOrderDetailModel.spotDate,
-                botActiveOrderDetailModel.expireDate,
-                botActiveOrderDetailModel.botDetail.duration),
+                botActiveOrderDetailModel.expireDateFormatted,
+                botActiveOrderDetailModel.botDuration),
             style: AskLoraTextStyles.body4),
       );
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
 }

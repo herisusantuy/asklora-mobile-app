@@ -13,6 +13,13 @@ String formatDateTimeAsString(dynamic dateTime,
   }
 }
 
+DateTime formatDateTimeToLocal(dynamic dateTime,
+    {String dateFormat = 'dd/MM/yyyy HH:mm', bool isUtc = true}) {
+  return DateFormat(dateFormat)
+      .parse(DateFormat(dateFormat).format(DateTime.parse(dateTime)), isUtc)
+      .toLocal();
+}
+
 DateTime formatDateOnly(dynamic dateTime) {
   DateTime date = DateTime.parse(formatDateTimeAsString(dateTime));
   return DateTime(date.year, date.month, date.day);

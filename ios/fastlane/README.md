@@ -21,15 +21,15 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios dev
 ```
 
-Creating a dev build
+Create a dev build
 
-### ios upload
+### ios upload_symbols
 
 ```sh
-[bundle exec] fastlane ios upload
+[bundle exec] fastlane ios upload_symbols
 ```
 
-Uploading dev build on TestFlight...
+Upload DSYM symbols file on Crashlytics
 
 ### ios staging
 

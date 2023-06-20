@@ -3,7 +3,8 @@ part of '../../../deposit_welcome_screen.dart';
 final List<DepositStepModel> _firstTimeStep = [
   DepositStepModel(
       title: 'Deposit via FPS or Wire Transfer',
-      subTitle: "Transfer at least HK\$10,000 to Asklora's bank account. ",
+      subTitle:
+          "Transfer at least HK\$${DepositType.firstTime.minDepositString} to Asklora's bank account. ",
       subTitleColor: AskLoraColors.primaryMagenta),
   DepositStepModel(
     title: 'Input deposit amount',
@@ -16,7 +17,8 @@ final List<DepositStepModel> _firstTimeStep = [
   ),
   DepositStepModel(
     title: 'Deposit via FPS or Wire Transfer',
-    subTitle: "Transfer at least HK\$10,000 to Asklora's bank account. ",
+    subTitle:
+        "Transfer at least HK\$${DepositType.firstTime.minDepositString} to Asklora's bank account. ",
   ),
 ];
 
@@ -24,7 +26,7 @@ final List<DepositStepModel> _type1Step = [
   DepositStepModel(
       title: 'Deposit via FPS or Wire Transfer',
       subTitle:
-          'Transfer at least HK\$3,000 to Asklora’s bank account from the same bank account you used. ',
+          'Transfer ${DepositType.type1.minDeposit != 0 ? 'at least HK\$${DepositType.type1.minDepositString}' : ''} to Asklora’s bank account from the same bank account you used. ',
       subTitleColor: AskLoraColors.primaryMagenta),
   DepositStepModel(
     title: 'Input deposit amount',
@@ -39,7 +41,7 @@ final List<DepositStepModel> _type2Step = [
   DepositStepModel(
       title: 'Deposit via FPS or Wire Transfer',
       subTitle:
-          'Transfer at least HK\$3,000 to Asklora’s bank account from the same bank account you used. ',
+          'Transfer ${DepositType.type1.minDeposit != 0 ? 'at least HK\$${DepositType.type1.minDepositString}' : ''} to Asklora’s bank account from the same bank account you used. ',
       subTitleColor: AskLoraColors.primaryMagenta),
   DepositStepModel(
     title: 'Upload proof of remittance',

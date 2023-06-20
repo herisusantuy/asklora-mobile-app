@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../onboarding/ppi/domain/ppi_user_response.dart';
-import '../domain/bot_detail_model.dart';
+import '../../../core/repository/transaction_repository.dart';
+import '../../../core/utils/extensions.dart';
+import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
-import '../domain/orders/bot_active_order_model.dart';
-import '../domain/orders/bot_order_response.dart';
+import '../domain/orders/bot_create_order_response.dart';
 import '../repository/bot_stock_repository.dart';
 
 part 'bot_stock_event.dart';
@@ -14,8 +14,11 @@ part 'bot_stock_event.dart';
 part 'bot_stock_state.dart';
 
 class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
-  BotStockBloc({required BotStockRepository botStockRepository})
+  BotStockBloc(
+      {required BotStockRepository botStockRepository,
+      required TransactionRepository transactionRepository})
       : _botStockRepository = botStockRepository,
+        _transactionRepository = transactionRepository,
         super(const BotStockState()) {
     on<FetchBotRecommendation>(_onFetchBotRecommendation);
     on<FetchFreeBotRecommendation>(_onFetchFreeBotRecommendation);
@@ -26,6 +29,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
   }
 
   final BotStockRepository _botStockRepository;
+  final TransactionRepository _transactionRepository;
 
   _onFetchBotRecommendation(
       FetchBotRecommendation event, Emitter<BotStockState> emit) async {
@@ -61,7 +65,22 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     emit(state.copyWith(botDetailResponse: BaseResponse.loading()));
     var data =
         await _botStockRepository.fetchBotDetail(event.ticker, event.botId);
-    emit(state.copyWith(botDetailResponse: data));
+    if (!event.isFreeBot) {
+      var balanceResponse = await _transactionRepository.fetchBalance();
+      if (balanceResponse.state == ResponseState.success) {
+        ///TODO : LATER SHOULD USE BUYING POWER WHEN BALANCE ENDPOINT UPDATED
+        emit(state.copyWith(
+            buyingPower:
+                checkDouble(balanceResponse.data!.withdrawableBalanceHkd)));
+        emit(state.copyWith(botDetailResponse: data));
+      } else {
+        emit(state.copyWith(
+            botDetailResponse:
+                BaseResponse.error(message: 'Error when fetching balance')));
+      }
+    } else {
+      emit(state.copyWith(botDetailResponse: data));
+    }
   }
 
   _onTradeBotStockAmountChanged(

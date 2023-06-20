@@ -42,7 +42,7 @@ class DepositWelcomeScreen extends StatelessWidget {
   static const String route = '/deposit_welcome_screen';
 
   final _spaceHeight = const SizedBox(
-    height: 54,
+    height: 38,
   );
   final _spaceHeightSmall = const SizedBox(
     height: 21,

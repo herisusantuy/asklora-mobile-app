@@ -49,7 +49,7 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
               height: 7,
             ),
             CustomTextNew(
-              BotStatus.findByString(transactionHistoryModel.status).name,
+              BotStatus.findByOmsStatus(transactionHistoryModel.status).name,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.darkGray),
             )

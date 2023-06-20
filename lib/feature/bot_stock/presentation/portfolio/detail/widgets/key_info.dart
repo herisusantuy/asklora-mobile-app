@@ -28,7 +28,7 @@ class KeyInfo extends StatelessWidget {
           ),
           PairColumnText(
               leftTitle: S.of(context).investmentPeriod,
-              leftSubTitle: botActiveOrderDetailModel.botDetail.duration,
+              leftSubTitle: botActiveOrderDetailModel.botDuration,
               rightTitle: S.of(context).portfolioDetailKeyInfoDaysTillExpiry,
               rightSubTitle: botActiveOrderDetailModel.daysToExpireString),
           _spaceBetweenInfo,
@@ -36,7 +36,7 @@ class KeyInfo extends StatelessWidget {
               leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
               leftSubTitle: botActiveOrderDetailModel.spotDate,
               rightTitle: S.of(context).portfolioDetailKeyInfoEndTime,
-              rightSubTitle: botActiveOrderDetailModel.expireDate),
+              rightSubTitle: botActiveOrderDetailModel.expireDateFormatted),
           _spaceBetweenInfo,
           ..._stopLossMaxProfit(context),
           _spaceBetweenInfo,
@@ -45,8 +45,7 @@ class KeyInfo extends StatelessWidget {
               leftSubTitle: botStatus.name,
               rightTitle:
                   S.of(context).portfolioDetailKeyInfoBotStockNumberOfRollover,
-              rightSubTitle:
-                  botActiveOrderDetailModel.rolloverCount.toString()),
+              rightSubTitle: botActiveOrderDetailModel.rolloverCountString),
           const SizedBox(
             height: 40,
           ),
@@ -78,11 +77,11 @@ class KeyInfo extends StatelessWidget {
           leftTitle: botType == BotType.plank
               ? S.of(context).portfolioDetailKeyInfoEstimatedStopLoss
               : S.of(context).portfolioDetailKeyInfoEstimatedMaxLoss,
-          leftSubTitle: botActiveOrderDetailModel.maxLossPct.toString(),
+          leftSubTitle: botActiveOrderDetailModel.maxLossPctString,
           rightTitle: botType == BotType.plank
               ? S.of(context).portfolioDetailKeyInfoEstimatedTakeProfit
               : S.of(context).portfolioDetailKeyInfoEstimatedMaxProfit,
-          rightSubTitle: botActiveOrderDetailModel.targetProfitPct.toString(),
+          rightSubTitle: botActiveOrderDetailModel.targetProfitPctString,
         ),
       ];
 

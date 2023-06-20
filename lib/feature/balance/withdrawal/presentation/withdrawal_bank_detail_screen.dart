@@ -21,7 +21,7 @@ import 'withdrawal_amount/withdrawal_amount_screen.dart';
 
 class WithdrawalBankDetailScreen extends StatelessWidget {
   static const String route = '/withdrawal_bank_detail_screen';
-  final String withdrawableBalance;
+  final double withdrawableBalance;
 
   const WithdrawalBankDetailScreen(
       {required this.withdrawableBalance, Key? key})
@@ -132,6 +132,6 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context, String withdrawableBalance) =>
+  static void open(BuildContext context, double withdrawableBalance) =>
       Navigator.pushNamed(context, route, arguments: withdrawableBalance);
 }

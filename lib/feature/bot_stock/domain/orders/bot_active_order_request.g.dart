@@ -9,8 +9,7 @@ part of 'bot_active_order_request.dart';
 BotActiveOrderRequest _$BotActiveOrderRequestFromJson(
         Map<String, dynamic> json) =>
     BotActiveOrderRequest(
-      status:
-          (json['status'] as List<dynamic>).map((e) => e as String).toList(),
+      status: json['status'] as String,
     );
 
 Map<String, dynamic> _$BotActiveOrderRequestToJson(

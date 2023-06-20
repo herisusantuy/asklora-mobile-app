@@ -14,7 +14,7 @@ class TransferAmountStep extends StatelessWidget {
       drawLine: drawLine,
       contents: [
         CustomTextNew(
-          'Transfer HK\$${depositType.minDeposit.convertToCurrencyDecimal()} to LORA',
+          'Transfer ${depositType.minDeposit != 0 ? 'HK\$${depositType.minDeposit.convertToCurrencyDecimal()} ' : ''}to LORA',
           style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
         ),
         const SizedBox(
@@ -38,6 +38,7 @@ class TransferAmountStep extends StatelessWidget {
           buildWhen: (previous, current) =>
               previous.depositAmountErrorText != current.depositAmountErrorText,
           builder: (context, state) => AmountTextField(
+            decimalDigits: 0,
             onChanged: (value) => context.read<DepositBloc>().add(
                 DepositAmountChanged(
                     value.isNotEmpty ? double.parse(value) : 0)),

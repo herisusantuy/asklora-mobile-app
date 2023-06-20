@@ -41,8 +41,8 @@ class BotPortfolioDetailContent extends StatelessWidget {
             child: Column(
               children: [
                 Performance(
-                  botActiveOrderDetailModel: portfolioBotDetailModel!,
                   botType: botType,
+                  botActiveOrderDetailModel: portfolioBotDetailModel!,
                 ),
                 const SizedBox(
                   height: 33,
@@ -68,7 +68,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                       .copyWith(color: AskLoraColors.charcoal),
                 ),
                 CustomTextNew(
-                  portfolioBotDetailModel!.botDetail.botDescription.detail,
+                  portfolioBotDetailModel!.botInfo.botDescription.detail,
                   style: AskLoraTextStyles.body3
                       .copyWith(color: AskLoraColors.charcoal),
                 )
@@ -84,7 +84,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                 height: 6,
               ),
               CustomTextNew(
-                portfolioBotDetailModel!.botDetail.botDescription.suited,
+                portfolioBotDetailModel!.botInfo.botDescription.suited,
                 style: AskLoraTextStyles.body1
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -100,7 +100,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                 height: 6,
               ),
               CustomTextNew(
-                portfolioBotDetailModel!.botDetail.botDescription.works,
+                portfolioBotDetailModel!.botInfo.botDescription.works,
                 style: AskLoraTextStyles.body1
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -114,7 +114,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextNew(
-                  'About ${portfolioBotDetailModel!.tickerDetail.tickerName} ${portfolioBotDetailModel!.tickerDetail.ticker}',
+                  'About ${portfolioBotDetailModel!.stockInfoWithPlaceholder.tickerName} ${portfolioBotDetailModel!.stockInfoWithPlaceholder.symbol}',
                   style: AskLoraTextStyles.h5
                       .copyWith(color: AskLoraColors.charcoal),
                   maxLines: 2,
@@ -123,7 +123,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                   height: 5,
                 ),
                 CustomTextNew(
-                  portfolioBotDetailModel!.tickerDetail.industry,
+                  portfolioBotDetailModel!.stockInfoWithPlaceholder.industry,
                   style: AskLoraTextStyles.body2
                       .copyWith(color: AskLoraColors.charcoal),
                 )
@@ -131,7 +131,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
             ),
             children: [
               CustomTextNew(
-                'About ${portfolioBotDetailModel!.tickerDetail.tickerName}',
+                'About ${portfolioBotDetailModel!.stockInfoWithPlaceholder.tickerName}',
                 style: AskLoraTextStyles.h6
                     .copyWith(color: AskLoraColors.charcoal),
               ),
@@ -140,31 +140,35 @@ class BotPortfolioDetailContent extends StatelessWidget {
               ),
               PairColumnText(
                 leftTitle: 'Sector(s)',
-                leftSubTitle: portfolioBotDetailModel!.tickerDetail.sector,
+                leftSubTitle:
+                    portfolioBotDetailModel!.stockInfoWithPlaceholder.sector,
                 rightTitle: 'Industry',
-                rightSubTitle: portfolioBotDetailModel!.tickerDetail.industry,
+                rightSubTitle:
+                    portfolioBotDetailModel!.stockInfoWithPlaceholder.industry,
               ),
               _spaceBetweenInfo,
               PairColumnText(
                 leftTitle: 'CEO',
-                leftSubTitle: portfolioBotDetailModel!.tickerDetail.ceo,
+                leftSubTitle:
+                    portfolioBotDetailModel!.stockInfoWithPlaceholder.ceo,
                 rightTitle: 'Employees',
                 rightSubTitle:
-                    '${portfolioBotDetailModel!.tickerDetail.employees}',
+                    '${portfolioBotDetailModel!.stockInfoWithPlaceholder.employees}',
               ),
               _spaceBetweenInfo,
               PairColumnText(
                 leftTitle: 'Headquarters',
-                leftSubTitle:
-                    portfolioBotDetailModel!.tickerDetail.headquarters,
+                leftSubTitle: portfolioBotDetailModel!
+                    .stockInfoWithPlaceholder.headquarter,
                 rightTitle: 'Founded',
-                rightSubTitle: portfolioBotDetailModel!.tickerDetail.founded,
+                rightSubTitle:
+                    portfolioBotDetailModel!.stockInfoWithPlaceholder.founded,
               ),
               const SizedBox(
                 height: 23,
               ),
               CustomTextNew(
-                portfolioBotDetailModel!.tickerDetail.description,
+                portfolioBotDetailModel!.stockInfoWithPlaceholder.description,
                 style: AskLoraTextStyles.body1
                     .copyWith(color: AskLoraColors.charcoal),
               )

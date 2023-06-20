@@ -8,7 +8,17 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_detail_model.dart'
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_response.dart'
+    as _i17;
+import 'package:asklora_mobile_app/core/repository/transaction_repository.dart'
+    as _i14;
+import 'package:asklora_mobile_app/feature/balance/deposit/domain/deposit_response.dart'
+    as _i18;
+import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_request.dart'
+    as _i21;
+import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_response.dart'
+    as _i20;
+import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_detail_model.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart'
     as _i8;
@@ -16,14 +26,23 @@ import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_or
     as _i10;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_active_order_model.dart'
     as _i9;
+import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_create_order_response.dart'
+    as _i12;
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart'
-    as _i11;
+    as _i13;
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart'
     as _i3;
+import 'package:asklora_mobile_app/feature/chart/domain/bot_portfolio_chart_models.dart'
+    as _i11;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart'
     as _i6;
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart'
     as _i7;
+import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart'
+    as _i16;
+import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart'
+    as _i15;
+import 'package:file_picker/file_picker.dart' as _i19;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -58,7 +77,7 @@ class MockBotStockRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>> fetchBotDetail(
+  _i4.Future<_i2.BaseResponse<_i5.BotRecommendationDetailModel>> fetchBotDetail(
     String? ticker,
     String? botId,
   ) =>
@@ -70,8 +89,9 @@ class MockBotStockRepository extends _i1.Mock
             botId,
           ],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>>.value(
-            _FakeBaseResponse_0<_i5.BotDetailModel>(
+        returnValue: _i4.Future<
+                _i2.BaseResponse<_i5.BotRecommendationDetailModel>>.value(
+            _FakeBaseResponse_0<_i5.BotRecommendationDetailModel>(
           this,
           Invocation.method(
             #fetchBotDetail,
@@ -81,7 +101,7 @@ class MockBotStockRepository extends _i1.Mock
             ],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i5.BotDetailModel>>);
+      ) as _i4.Future<_i2.BaseResponse<_i5.BotRecommendationDetailModel>>);
   @override
   _i4.Future<_i2.BaseResponse<List<_i6.ChartDataSet>>> fetchChartDataJson() =>
       (super.noSuchMethod(
@@ -218,7 +238,26 @@ class MockBotStockRepository extends _i1.Mock
         )),
       ) as _i4.Future<_i2.BaseResponse<_i10.BotActiveOrderDetailModel>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>> createOrder({
+  _i4.Future<_i2.BaseResponse<List<_i11.BotPortfolioChartDataSet>>>
+      fetchBotPerformance(String? botOrderId) => (super.noSuchMethod(
+            Invocation.method(
+              #fetchBotPerformance,
+              [botOrderId],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<
+                        List<_i11.BotPortfolioChartDataSet>>>.value(
+                _FakeBaseResponse_0<List<_i11.BotPortfolioChartDataSet>>(
+              this,
+              Invocation.method(
+                #fetchBotPerformance,
+                [botOrderId],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.BaseResponse<List<_i11.BotPortfolioChartDataSet>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i12.BotCreateOrderResponse>> createOrder({
     required _i8.BotRecommendationModel? botRecommendationModel,
     required double? tradeBotStockAmount,
   }) =>
@@ -231,8 +270,9 @@ class MockBotStockRepository extends _i1.Mock
             #tradeBotStockAmount: tradeBotStockAmount,
           },
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>.value(
-            _FakeBaseResponse_0<_i11.BotOrderResponse>(
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i12.BotCreateOrderResponse>>.value(
+                _FakeBaseResponse_0<_i12.BotCreateOrderResponse>(
           this,
           Invocation.method(
             #createOrder,
@@ -243,56 +283,208 @@ class MockBotStockRepository extends _i1.Mock
             },
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>);
+      ) as _i4.Future<_i2.BaseResponse<_i12.BotCreateOrderResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>> cancelOrder(
+  _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>> cancelOrder(
           String? botOrderId) =>
       (super.noSuchMethod(
         Invocation.method(
           #cancelOrder,
           [botOrderId],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>.value(
-            _FakeBaseResponse_0<_i11.BotOrderResponse>(
+        returnValue: _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>.value(
+            _FakeBaseResponse_0<_i13.BotOrderResponse>(
           this,
           Invocation.method(
             #cancelOrder,
             [botOrderId],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>);
+      ) as _i4.Future<_i2.BaseResponse<_i13.BotOrderResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>> rolloverOrder(
+  _i4.Future<_i2.BaseResponse<_i13.RolloverOrderResponse>> rolloverOrder(
           String? botOrderId) =>
       (super.noSuchMethod(
         Invocation.method(
           #rolloverOrder,
           [botOrderId],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>.value(
-            _FakeBaseResponse_0<_i11.BotOrderResponse>(
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i13.RolloverOrderResponse>>.value(
+                _FakeBaseResponse_0<_i13.RolloverOrderResponse>(
           this,
           Invocation.method(
             #rolloverOrder,
             [botOrderId],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>);
+      ) as _i4.Future<_i2.BaseResponse<_i13.RolloverOrderResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>> terminateOrder(
+  _i4.Future<_i2.BaseResponse<_i13.TerminateOrderResponse>> terminateOrder(
           String? botOrderId) =>
       (super.noSuchMethod(
         Invocation.method(
           #terminateOrder,
           [botOrderId],
         ),
-        returnValue: _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>.value(
-            _FakeBaseResponse_0<_i11.BotOrderResponse>(
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i13.TerminateOrderResponse>>.value(
+                _FakeBaseResponse_0<_i13.TerminateOrderResponse>(
           this,
           Invocation.method(
             #terminateOrder,
             [botOrderId],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i11.BotOrderResponse>>);
+      ) as _i4.Future<_i2.BaseResponse<_i13.TerminateOrderResponse>>);
+}
+
+/// A class which mocks [TransactionRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTransactionRepository extends _i1.Mock
+    implements _i14.TransactionRepository {
+  MockTransactionRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i15.GroupedTransactionModel>>>
+      fetchAllTransactionsHistory() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchAllTransactionsHistory,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i15.GroupedTransactionModel>>>.value(
+                _FakeBaseResponse_0<List<_i15.GroupedTransactionModel>>(
+              this,
+              Invocation.method(
+                #fetchAllTransactionsHistory,
+                [],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.BaseResponse<List<_i15.GroupedTransactionModel>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i15.GroupedTransactionModel>>>
+      fetchBotTransactionsHistory() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchBotTransactionsHistory,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i15.GroupedTransactionModel>>>.value(
+                _FakeBaseResponse_0<List<_i15.GroupedTransactionModel>>(
+              this,
+              Invocation.method(
+                #fetchBotTransactionsHistory,
+                [],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.BaseResponse<List<_i15.GroupedTransactionModel>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<List<_i15.GroupedTransactionModel>>>
+      fetchTransferTransactionsHistory() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchTransferTransactionsHistory,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<List<_i15.GroupedTransactionModel>>>.value(
+                _FakeBaseResponse_0<List<_i15.GroupedTransactionModel>>(
+              this,
+              Invocation.method(
+                #fetchTransferTransactionsHistory,
+                [],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.BaseResponse<List<_i15.GroupedTransactionModel>>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i16.BotDetailTransactionHistoryResponse>>
+      fetchBotTransactionsDetail(String? orderId) => (super.noSuchMethod(
+            Invocation.method(
+              #fetchBotTransactionsDetail,
+              [orderId],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<
+                        _i16.BotDetailTransactionHistoryResponse>>.value(
+                _FakeBaseResponse_0<_i16.BotDetailTransactionHistoryResponse>(
+              this,
+              Invocation.method(
+                #fetchBotTransactionsDetail,
+                [orderId],
+              ),
+            )),
+          ) as _i4.Future<
+              _i2.BaseResponse<_i16.BotDetailTransactionHistoryResponse>>);
+  @override
+  _i4.Future<
+      _i2
+          .BaseResponse<_i17.TransactionBalanceResponse>> fetchBalance() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchBalance,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i17.TransactionBalanceResponse>>.value(
+                _FakeBaseResponse_0<_i17.TransactionBalanceResponse>(
+          this,
+          Invocation.method(
+            #fetchBalance,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i17.TransactionBalanceResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i18.DepositResponse>> submitDeposit({
+    required double? depositAmount,
+    required List<_i19.PlatformFile>? platformFiles,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitDeposit,
+          [],
+          {
+            #depositAmount: depositAmount,
+            #platformFiles: platformFiles,
+          },
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i18.DepositResponse>>.value(
+            _FakeBaseResponse_0<_i18.DepositResponse>(
+          this,
+          Invocation.method(
+            #submitDeposit,
+            [],
+            {
+              #depositAmount: depositAmount,
+              #platformFiles: platformFiles,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i18.DepositResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i20.WithdrawalResponse>> submitWithdrawal(
+          {required _i21.WithdrawalRequest? withdrawalRequest}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitWithdrawal,
+          [],
+          {#withdrawalRequest: withdrawalRequest},
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i20.WithdrawalResponse>>.value(
+                _FakeBaseResponse_0<_i20.WithdrawalResponse>(
+          this,
+          Invocation.method(
+            #submitWithdrawal,
+            [],
+            {#withdrawalRequest: withdrawalRequest},
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i20.WithdrawalResponse>>);
 }
