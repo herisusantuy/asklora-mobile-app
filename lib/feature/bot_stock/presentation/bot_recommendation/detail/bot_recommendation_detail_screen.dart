@@ -7,12 +7,10 @@ import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
-import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
-import '../../../../custom_tab/presentation/tab/for_you_tab.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../domain/bot_recommendation_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -74,7 +72,6 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               ),
               showPopUp: state.botDetailResponse.state == ResponseState.error,
               content: BotStockForm(
-                onTapBack: ()=>context.read<NavigationBloc<ForYouTabPage>>().add(PagePop()),
                 useHeader: true,
                 title:
                     '${botType.upperCaseName} ${botRecommendationModel.ticker}',
@@ -128,9 +125,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
   }
 
   static void open(
-          {required BuildContext context,
-          required BotRecommendationModel botRecommendationModel}) =>
-      context.read<NavigationBloc<ForYouTabPage>>().add(PageChanged(
-          ForYouTabPage.botDetail,
-          arguments: botRecommendationModel));
+      {required BuildContext context,
+      required BotRecommendationModel botRecommendationModel}) {
+    Navigator.pushNamed(context, route, arguments: botRecommendationModel);
+  }
 }
