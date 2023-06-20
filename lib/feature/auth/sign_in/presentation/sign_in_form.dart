@@ -13,10 +13,10 @@ import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
+import '../../../custom_tab/presentation/custom_tab.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
-import '../../../tabs/tabs_screen.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
 import '../bloc/sign_in_bloc.dart';
@@ -48,7 +48,7 @@ class SignInForm extends StatelessWidget {
               InvestmentStyleWelcomeScreen.open(context);
               break;
             default:
-              TabsScreen.openAndRemoveAllRoute(context);
+              CustomTab.openAndRemoveAllRoute(context);
               break;
           }
         }

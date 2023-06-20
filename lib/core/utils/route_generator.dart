@@ -25,6 +25,8 @@ import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
+import '../../feature/custom_tab/bloc/custom_tab_bloc.dart';
+import '../../feature/custom_tab/presentation/custom_tab.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
@@ -50,6 +52,7 @@ import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
 import '../../feature/tabs/for_you/for_you_screen_form.dart';
+import '../../feature/tabs/home/home_screen_form.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../feature/transaction_history/bot_order/detail/bot_order_transaction_history_detail_screen.dart';
 import '../../feature/transaction_history/domain/transaction_history_model.dart';
@@ -323,6 +326,15 @@ class RouterGenerator {
       case ForYouScreenForm.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const ForYouScreenForm());
+      case HomeScreenForm.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const HomeScreenForm());
+      case CustomTab.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => CustomTab(
+                  initialTabPage: settings.arguments as TabPage?,
+                ));
       default:
         return MaterialPageRoute(
             settings: settings,

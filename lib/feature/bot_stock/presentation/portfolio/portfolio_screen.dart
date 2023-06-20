@@ -25,9 +25,7 @@ import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../../../core/domain/transaction/transaction_balance_response.dart';
-import '../../../../core/repository/transaction_repository.dart';
 import '../../domain/orders/bot_active_order_model.dart';
-import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/currency_dropdown.dart';
 import '../widgets/pair_column_text.dart';
@@ -55,76 +53,56 @@ class PortfolioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        PortfolioBloc portfolioBloc = PortfolioBloc(
-          botStockRepository: BotStockRepository(),
-          transactionHistoryRepository: TransactionRepository(),
-        );
-
-        ///fetch portfolio when current UserJourney already passed freeBotStock
-        if (UserJourney.compareUserJourney(
-            context: context, target: UserJourney.freeBotStock)) {
-          portfolioBloc.add(const FetchActiveOrders());
-          portfolioBloc.add(FetchBalance());
-        }
-        return portfolioBloc;
-      },
-      child: CustomScaffold(
-        useSafeArea: false,
-        backgroundColor: AskLoraColors.white,
-        enableBackNavigation: false,
-        body: BlocBuilder<PortfolioBloc, PortfolioState>(
-          buildWhen: (previous, current) =>
-              previous.transactionBalanceResponse !=
-                  current.transactionBalanceResponse ||
-              previous.botActiveOrderResponse !=
-                  current.botActiveOrderResponse ||
-              previous.currency != current.currency,
-          builder: (context, state) => RefreshIndicator(
-            onRefresh: () async {
-              ///fetch portfolio when current UserJourney already passed freeBotStock
-              if (UserJourney.compareUserJourney(
-                  context: context, target: UserJourney.freeBotStock)) {
+    return CustomScaffold(
+      useSafeArea: false,
+      backgroundColor: AskLoraColors.white,
+      enableBackNavigation: false,
+      body: BlocBuilder<PortfolioBloc, PortfolioState>(
+        buildWhen: (previous, current) =>
+            previous.transactionBalanceResponse !=
+                current.transactionBalanceResponse ||
+            previous.botActiveOrderResponse != current.botActiveOrderResponse ||
+            previous.currency != current.currency,
+        builder: (context, state) => RefreshIndicator(
+          onRefresh: () async {
+            ///fetch portfolio when current UserJourney already passed freeBotStock
+            if (UserJourney.compareUserJourney(
+                context: context, target: UserJourney.freeBotStock)) {
+              context.read<PortfolioBloc>().add(const FetchActiveOrders());
+              context.read<PortfolioBloc>().add(FetchBalance());
+            }
+            context.read<AccountInformationBloc>().add(GetAccountInformation());
+          },
+          child: CustomLayoutWithBlurPopUp(
+            loraPopUpMessageModel: LoraPopUpMessageModel(
+              title: S.of(context).errorGettingInformationTitle,
+              subTitle: S.of(context).errorGettingInformationPortfolioSubTitle,
+              primaryButtonLabel: S.of(context).buttonReloadPage,
+              onPrimaryButtonTap: () {
                 context.read<PortfolioBloc>().add(const FetchActiveOrders());
                 context.read<PortfolioBloc>().add(FetchBalance());
-              }
-              context
-                  .read<AccountInformationBloc>()
-                  .add(GetAccountInformation());
-            },
-            child: CustomLayoutWithBlurPopUp(
-              loraPopUpMessageModel: LoraPopUpMessageModel(
-                title: S.of(context).errorGettingInformationTitle,
-                subTitle:
-                    S.of(context).errorGettingInformationPortfolioSubTitle,
-                primaryButtonLabel: S.of(context).buttonReloadPage,
-                onPrimaryButtonTap: () {
-                  context.read<PortfolioBloc>().add(const FetchActiveOrders());
-                  context.read<PortfolioBloc>().add(FetchBalance());
-                },
-              ),
-              showPopUp: (state.botActiveOrderResponse.state ==
-                          ResponseState.error &&
-                      state.botActiveOrderResponse.errorCode != 403) ||
-                  state.transactionBalanceResponse.state == ResponseState.error,
-              content: ListView(
-                padding: AppValues.screenHorizontalPadding
-                    .copyWith(top: 15, bottom: 15),
-                children: [
-                  PortfolioBalance(
-                    data: state.transactionBalanceResponse.data,
-                    currencyType: state.currency,
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  BotPortfolioList(
-                    userJourney: context.read<AppBloc>().state.userJourney,
-                    portfolioState: state,
-                  ),
-                ],
-              ),
+              },
+            ),
+            showPopUp: (state.botActiveOrderResponse.state ==
+                        ResponseState.error &&
+                    state.botActiveOrderResponse.errorCode != 403) ||
+                state.transactionBalanceResponse.state == ResponseState.error,
+            content: ListView(
+              padding: AppValues.screenHorizontalPadding
+                  .copyWith(top: 15, bottom: 15),
+              children: [
+                PortfolioBalance(
+                  data: state.transactionBalanceResponse.data,
+                  currencyType: state.currency,
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                BotPortfolioList(
+                  userJourney: context.read<AppBloc>().state.userJourney,
+                  portfolioState: state,
+                ),
+              ],
             ),
           ),
         ),
