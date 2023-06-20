@@ -25,8 +25,7 @@ import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
-import '../../feature/custom_tab/bloc/custom_tab_bloc.dart';
-import '../../feature/custom_tab/presentation/custom_tab.dart';
+import '../../feature/tabs/bloc/tab_screen_bloc.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
@@ -53,7 +52,7 @@ import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
 import '../../feature/tabs/for_you/for_you_screen_form.dart';
 import '../../feature/tabs/home/home_screen_form.dart';
-import '../../feature/tabs/tabs_screen.dart';
+import '../../feature/tabs/presentation/tab_screen.dart';
 import '../../feature/transaction_history/bot_order/detail/bot_order_transaction_history_detail_screen.dart';
 import '../../feature/transaction_history/domain/transaction_history_model.dart';
 import '../../feature/transaction_history/presentation/transaction_history_screen.dart';
@@ -190,13 +189,6 @@ class RouterGenerator {
                 depositType: arguments.left,
               );
             });
-      case TabsScreen.route:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => TabsScreen(
-            initialTabScreenPage: settings.arguments as TabScreenPage?,
-          ),
-        );
       case WithdrawalBankDetailScreen.route:
         return MaterialPageRoute(
           settings: settings,
@@ -329,10 +321,10 @@ class RouterGenerator {
       case HomeScreenForm.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const HomeScreenForm());
-      case CustomTab.route:
+      case TabScreen.route:
         return MaterialPageRoute(
             settings: settings,
-            builder: (_) => CustomTab(
+            builder: (_) => TabScreen(
                   initialTabPage: settings.arguments as TabPage?,
                 ));
       default:

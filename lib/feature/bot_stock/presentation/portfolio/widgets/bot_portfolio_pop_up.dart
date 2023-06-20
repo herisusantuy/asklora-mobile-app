@@ -8,8 +8,8 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../auth/sign_up/presentation/sign_up_screen.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
-import '../../../../custom_tab/bloc/custom_tab_bloc.dart';
-import '../../../../custom_tab/presentation/custom_tab.dart';
+import '../../../../tabs/bloc/tab_screen_bloc.dart';
+import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
@@ -78,7 +78,7 @@ class BotPortfolioPopUp extends StatelessWidget {
             title: S.of(context).portfolioPopUpNoTradingHasStartedTitle,
             subTitle: S.of(context).portfolioPopUpNoTradingHasStartedtSubTitle,
             primaryButtonLabel: S.of(context).startABotstock,
-            onPrimaryButtonTap: () => CustomTab.openAndRemoveAllRoute(context,
+            onPrimaryButtonTap: () => TabScreen.openAndRemoveAllRoute(context,
                 initialTabPage: TabPage.forYou));
       case BotPortfolioPopUpType.deposit:
         return LoraPopUpMessageModel(
