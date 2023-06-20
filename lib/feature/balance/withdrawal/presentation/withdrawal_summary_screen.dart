@@ -15,15 +15,18 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
+import '../../../settings/domain/bank_account.dart';
 import '../../widgets/balance_base_form.dart';
 import '../bloc/withdrawal_bloc.dart';
 import 'withdrawal_result_screen.dart';
 
 class WithdrawalSummaryScreen extends StatelessWidget {
   static const String route = '/withdrawal_summary_screen';
-  final double withdrawalAmount;
+  static const int transactionFee = 10;
 
-  const WithdrawalSummaryScreen({required this.withdrawalAmount, Key? key})
+  final ({double withdrawalAmount, BankAccount bankAccount}) args;
+
+  const WithdrawalSummaryScreen({required this.args, Key? key})
       : super(key: key);
 
   @override
@@ -73,7 +76,8 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 18),
                       child: _textInfo(
                           title: S.of(context).to,
-                          subTitle: 'Hang Sang Bank (123-*******-189)'),
+                          subTitle:
+                              '${args.bankAccount.name} (${args.bankAccount.accountNumber})'),
                     ),
                     const SizedBox(
                       height: 21,
@@ -86,7 +90,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                     ),
                     _textInfo(
                         title: S.of(context).transactionFee,
-                        subTitle: 'HKD -80'),
+                        subTitle: 'HKD -$transactionFee'),
                     const Divider(
                       thickness: 2,
                       color: AskLoraColors.charcoal,
@@ -114,9 +118,11 @@ class WithdrawalSummaryScreen extends StatelessWidget {
     );
   }
 
-  String get _totalAmount => (withdrawalAmount - 80).convertToCurrencyDecimal();
+  String get _totalAmount =>
+      (args.withdrawalAmount - transactionFee).convertToCurrencyDecimal();
 
-  String get _withdrawalAmount => withdrawalAmount.convertToCurrencyDecimal();
+  String get _withdrawalAmount =>
+      args.withdrawalAmount.convertToCurrencyDecimal();
 
   Widget _bottomButton(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 30),
@@ -133,12 +139,11 @@ class WithdrawalSummaryScreen extends StatelessWidget {
             BlocBuilder<WithdrawalBloc, WithdrawalState>(
                 builder: (context, state) {
               return PrimaryButton(
-                disabled: state.response.state == ResponseState.loading,
-                label: S.of(context).buttonConfirm,
-                onTap: () => context.read<WithdrawalBloc>().add(
-                      SubmitWithdrawal(withdrawalAmount),
-                    ),
-              );
+                  disabled: state.response.state == ResponseState.loading,
+                  label: S.of(context).buttonConfirm,
+                  onTap: () => context
+                      .read<WithdrawalBloc>()
+                      .add(SubmitWithdrawal(args.withdrawalAmount)));
             })
           ],
         ),
@@ -162,6 +167,10 @@ class WithdrawalSummaryScreen extends StatelessWidget {
         ],
       );
 
-  static void open(BuildContext context, {required double withdrawalAmount}) =>
-      Navigator.pushNamed(context, route, arguments: withdrawalAmount);
+  static void open(BuildContext context,
+          {required ({
+            double withdrawalAmount,
+            BankAccount bankAccount
+          }) args}) =>
+      Navigator.pushNamed(context, route, arguments: args);
 }
