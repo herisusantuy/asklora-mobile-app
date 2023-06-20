@@ -25,6 +25,7 @@ import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../../../core/domain/transaction/transaction_balance_response.dart';
+import '../../../settings/presentation/settings_screen.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/currency_dropdown.dart';
@@ -91,6 +92,7 @@ class PortfolioScreen extends StatelessWidget {
               padding: AppValues.screenHorizontalPadding
                   .copyWith(top: 15, bottom: 15),
               children: [
+                _header(context),
                 PortfolioBalance(
                   data: state.transactionBalanceResponse.data,
                   currencyType: state.currency,
@@ -109,6 +111,17 @@ class PortfolioScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _header(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          getSvgIcon('icon_notification', color: AskLoraColors.black),
+          const SizedBox(width: 15),
+          InkWell(
+              onTap: () => SettingsScreen.open(context),
+              child: getSvgIcon('icon_settings', color: AskLoraColors.black)),
+        ],
+      );
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

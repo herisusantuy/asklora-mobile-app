@@ -14,7 +14,7 @@ class Tabs extends StatelessWidget {
         listener: (context, state) => CustomInAppNotification.show(
             context, 'this should open overlay AI'),
         builder: (context, state) => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             if (!canTrade)
               _tabSvg(

@@ -5,20 +5,26 @@ import 'column_text.dart';
 class PairColumnText extends StatelessWidget {
   final String leftTitle;
   final String leftSubTitle;
+  final Color? leftSubTitleColor;
   final String? leftTooltipText;
   final String rightTitle;
   final String rightSubTitle;
+  final Color? rightSubTitleColor;
   final String? rightTooltipText;
   final double? spaceWidth;
+  final CrossAxisAlignment? columnTextCrossAxisAlignment;
 
   const PairColumnText(
       {required this.leftTitle,
       required this.rightTitle,
       required this.leftSubTitle,
       required this.rightSubTitle,
+      this.leftSubTitleColor,
+      this.rightSubTitleColor,
       this.leftTooltipText,
       this.rightTooltipText,
       this.spaceWidth,
+      this.columnTextCrossAxisAlignment,
       Key? key})
       : super(key: key);
 
@@ -29,6 +35,8 @@ class PairColumnText extends StatelessWidget {
       children: [
         Expanded(
           child: ColumnText(
+              subTitleColor: leftSubTitleColor,
+              crossAxisAlignment: columnTextCrossAxisAlignment,
               title: leftTitle,
               subTitle: leftSubTitle,
               tooltipText: leftTooltipText),
@@ -39,6 +47,8 @@ class PairColumnText extends StatelessWidget {
           ),
         Expanded(
           child: ColumnText(
+              subTitleColor: rightSubTitleColor,
+              crossAxisAlignment: columnTextCrossAxisAlignment,
               title: rightTitle,
               subTitle: rightSubTitle,
               tooltipText: rightTooltipText),
