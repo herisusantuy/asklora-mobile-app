@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../generated/l10n.dart';
 import '../../../styles/asklora_colors.dart';
+import '../../../styles/asklora_text_styles.dart';
+import '../../../utils/app_icons.dart';
+import '../../custom_text_new.dart';
 
 enum FundingType { fund, withdraw }
 
@@ -45,22 +49,21 @@ class FundingButton extends StatelessWidget {
               }
             },
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.monetization_on_outlined,
-                  color: foregroundColor,
-                  size: 30,
+                CustomTextNew(
+                  fundingType == FundingType.fund
+                      ? S.of(context).deposit
+                      : S.of(context).withdraw,
+                  style: AskLoraTextStyles.subtitle1
+                      .copyWith(color: foregroundColor),
                 ),
                 const SizedBox(
-                  width: 3,
+                  width: 12,
                 ),
-                Icon(
-                  fundingType == FundingType.fund
-                      ? Icons.arrow_downward_rounded
-                      : Icons.arrow_upward_rounded,
-                  color: foregroundColor,
-                  size: 30,
-                )
+                getSvgIcon(fundingType == FundingType.fund
+                    ? 'icon_deposit'
+                    : 'icon_withdraw'),
               ],
             )),
       ),

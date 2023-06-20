@@ -1693,10 +1693,10 @@ class S {
     );
   }
 
-  /// `Withdrawable Amount ({currency})`
+  /// `Withdrawable Balance ({currency})`
   String portfolioWithdrawableAmount(String currency) {
     return Intl.message(
-      'Withdrawable Amount ($currency)',
+      'Withdrawable Balance ($currency)',
       name: 'portfolioWithdrawableAmount',
       desc: '',
       args: [currency],
@@ -2798,6 +2798,16 @@ class S {
     return Intl.message(
       'You will be informed via email and app notification as soon as the funds are paid to your account.',
       name: 'withdrawalRequestSubmittedSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw`
+  String get withdraw {
+    return Intl.message(
+      'Withdraw',
+      name: 'withdraw',
       desc: '',
       args: [],
     );
