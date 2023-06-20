@@ -95,14 +95,17 @@ class CustomTab extends StatelessWidget {
           body: BlocConsumer<AccountInformationBloc, AccountInformationState>(
               listener: (context, state) =>
                   CustomLoadingOverlay(context).show(state.response.state),
+              buildWhen: (previous, current) =>
+                  previous.response.data != current.response.data ||
+                  current.response.state == ResponseState.error,
               builder: (context, state) {
                 return CustomLayoutWithBlurPopUp(
                   showPopUp: state.response.state == ResponseState.error,
-                  content: state.response.state == ResponseState.success
+                  content: state.response.data != null
                       ? BlocProvider(
                           create: (_) => CustomTabBloc(
                               initialTabPage: state.response.data!.canTrade
-                                  ? TabPage.portfolio
+                                  ? TabPage.forYou
                                   : TabPage.home),
                           child: Column(
                             children: [
@@ -118,20 +121,24 @@ class CustomTab extends StatelessWidget {
                       title: S.of(context).errorGettingInformationTitle,
                       subTitle: S
                           .of(context)
-                          .errorGettingInformationPortfolioSubTitle),
+                          .errorGettingInformationPortfolioSubTitle,
+                      primaryButtonLabel: S.of(context).buttonReloadPage,
+                      onPrimaryButtonTap: () => context
+                          .read<AccountInformationBloc>()
+                          .add(GetAccountInformation())),
                 );
               })),
     );
   }
 
   Widget _tabs(bool canTrade) => Padding(
-        padding: const EdgeInsets.fromLTRB(60, 16, 60, 16),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         child: BlocConsumer<CustomTabBloc, CustomTabState>(
           listenWhen: (_, current) => current.aiPageSelected,
           listener: (context, state) => CustomInAppNotification.show(
               context, 'this should open overlay AI'),
           builder: (context, state) => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               if (!canTrade)
                 _tabSvg(
@@ -155,7 +162,7 @@ class CustomTab extends StatelessWidget {
                         .read<CustomTabBloc>()
                         .add(const AiButtonSelected()),
                     iconAsset: 'bottom_nav_ai',
-                    activeIconAsset: 'bottom_nav_ai',
+                    activeIconAsset: 'bottom_nav_ai_selected',
                     active: state.aiPageSelected),
               _tabSvg(
                   onTap: () => context

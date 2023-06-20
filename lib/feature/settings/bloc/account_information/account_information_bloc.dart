@@ -29,7 +29,10 @@ class AccountInformationBloc
 
   _onGetAccountInformation(GetAccountInformation event,
       Emitter<AccountInformationState> emit) async {
-    emit(state.copyWith(response: BaseResponse.loading()));
+    ///preserving previous data in the state
+    ///so the UI would not need to rebuild if the previous data == current data
+    emit(state.copyWith(
+        response: BaseResponse.loading(previousData: state.response.data)));
     var response = await _accountRepository.getAccount();
     emit(state.copyWith(response: response));
   }
