@@ -11,6 +11,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../settings/domain/bank_account.dart';
 import '../../bloc/withdrawal_bloc.dart';
 import '../withdrawal_summary_screen.dart';
 
@@ -20,10 +21,9 @@ part 'widgets/withdrawal_key_pad.dart';
 
 class WithdrawalAmountScreen extends StatelessWidget {
   static const String route = '/withdrawal_amount_screen';
+  final ({double withdrawableBalance, BankAccount bankAccount}) args;
 
-  final double withdrawableBalance;
-
-  const WithdrawalAmountScreen(this.withdrawableBalance, {Key? key})
+  const WithdrawalAmountScreen({Key? key, required this.args})
       : super(key: key);
 
   @override
@@ -54,7 +54,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
               child: Column(
                 children: [
                   WithdrawalAmountValue(
-                      withdrawableBalance: withdrawableBalance),
+                      withdrawableBalance: args.withdrawableBalance),
                   const WithdrawalKeyPad(),
                 ],
               ),
@@ -65,14 +65,15 @@ class WithdrawalAmountScreen extends StatelessWidget {
                 buildWhen: (previous, current) =>
                     previous.withdrawalAmount != current.withdrawalAmount,
                 builder: (context, state) => PrimaryButton(
-                  disabled: state.disableWithdrawal(withdrawableBalance),
-                  label: S.of(context).buttonNext,
-                  onTap: () => WithdrawalSummaryScreen.open(context,
-                      withdrawalAmount: context
-                          .read<WithdrawalBloc>()
-                          .state
-                          .withdrawalAmount),
-                ),
+                    disabled: state.disableWithdrawal(args.withdrawableBalance),
+                    label: S.of(context).buttonNext,
+                    onTap: () => WithdrawalSummaryScreen.open(context, args: (
+                          withdrawalAmount: context
+                              .read<WithdrawalBloc>()
+                              .state
+                              .withdrawalAmount,
+                          bankAccount: args.bankAccount
+                        ))),
               ),
             )
           ],
@@ -81,6 +82,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context, double withdrawableBalance) =>
-      Navigator.pushNamed(context, route, arguments: withdrawableBalance);
+  static void open(BuildContext context,
+          ({double withdrawableBalance, BankAccount bankAccount}) args) =>
+      Navigator.pushNamed(context, route, arguments: args);
 }
