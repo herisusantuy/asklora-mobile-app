@@ -8,18 +8,26 @@ import '../../../../core/utils/app_icons.dart';
 class ColumnText extends StatelessWidget {
   final String title;
   final String subTitle;
+  final Color? subTitleColor;
   final String? tooltipText;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   const ColumnText(
-      {required this.title, required this.subTitle, this.tooltipText, Key? key})
+      {required this.title,
+      required this.subTitle,
+      this.tooltipText,
+      this.crossAxisAlignment,
+      this.subTitleColor,
+      Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
       children: [
         Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Flexible(
               child: CustomTextNew(
@@ -66,7 +74,7 @@ class ColumnText extends StatelessWidget {
         ),
         CustomTextNew(subTitle,
             style: AskLoraTextStyles.subtitle2
-                .copyWith(color: AskLoraColors.charcoal)),
+                .copyWith(color: subTitleColor ?? AskLoraColors.charcoal)),
         const SizedBox(
           height: 1,
         ),
