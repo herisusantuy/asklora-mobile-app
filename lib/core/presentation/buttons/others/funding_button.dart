@@ -4,7 +4,7 @@ import '../../../../generated/l10n.dart';
 import '../../../styles/asklora_colors.dart';
 import '../../../styles/asklora_text_styles.dart';
 import '../../../utils/app_icons.dart';
-import '../../custom_text_new.dart';
+import '../../auto_sized_text_widget.dart';
 
 enum FundingType { fund, withdraw }
 
@@ -51,12 +51,15 @@ class FundingButton extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomTextNew(
-                  fundingType == FundingType.fund
-                      ? S.of(context).deposit
-                      : S.of(context).withdraw,
-                  style: AskLoraTextStyles.subtitle1
-                      .copyWith(color: foregroundColor),
+                Flexible(
+                  child: AutoSizedTextWidget(
+                    fundingType == FundingType.fund
+                        ? S.of(context).deposit
+                        : S.of(context).withdraw,
+                    style: AskLoraTextStyles.subtitle1
+                        .copyWith(color: foregroundColor),
+                    maxLines: 1,
+                  ),
                 ),
                 const SizedBox(
                   width: 12,
