@@ -106,7 +106,7 @@ public class AndroidSignUpTest {
         final String FIND_BY_IMAGE_VIEW = "android.widget.ImageView";
         final String TEST_APP = "Stag"; // The other one would be "Dev"
 
-        ArrayList<String> deviceProperties = new ArrayList<>();
+        Map <String, String> deviceProperties = new HashMap<>();
         String[] investTime = { "5 years or above", "3 to less then 5 years", "1 to less then 3 years", "Less than 1 year",
                         "Never" };
         String[] salary = { "more than HK$150,000", "HK$100,000-HK$149,999", "HK$50,000-HK$99,999", "HK$20,000-HK$49,999",
@@ -147,7 +147,7 @@ public class AndroidSignUpTest {
                 caps.setCapability("platformVersion", platformVersion);
                 caps.setCapability("udid", udid);
                 caps.setCapability("deviceName", deviceName);
-                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_dev.apk");
+                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag.apk");
                 caps.setCapability("unicodeKeyboard", true);
                 caps.setCapability("resetKeyboard", true);
                 caps.setCapability("ignoreHiddenApiPolicyError", true);
@@ -299,8 +299,11 @@ public class AndroidSignUpTest {
                         driver.findElement(By.xpath("//android.widget.TextView[contains(@text, 'Stag')]")).click();
                 }
 
-                if (!(driver.findElement(By.xpath("//android.widget.Button[contains(@content-desc, 'Define Investment Style')]")).isDisplayed()))
+                try {
+                        driver.findElement(By.xpath("//android.widget.Button[contains(@content-desc, 'Define Investment Style')]"));
+                } catch (Exception e) {
                         driver.findElement(By.id("android:id/button_once")).click();
+                }
         }
 
         /*
@@ -403,6 +406,8 @@ public class AndroidSignUpTest {
                 clickElementByXpath("//android.widget.Button[@content-desc=' No']");
                 clickContentDescription("Confirm & Continue");
                 clickElementByXpath("//android.widget.Button[@content-desc='Verify Now']");
+                clickElementByXpath("//android.widget.Button[contains(@text, 'Enable camera')]");
+                driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
                 WebDriverWait waitForVerification = new WebDriverWait(driver, Duration.ofSeconds(120));
                 waitForVerification.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.ImageView[@content-desc='Asklora Customer Agreement.pdf']")));
                 driver.findElement(
@@ -444,7 +449,7 @@ public class AndroidSignUpTest {
 
         @AfterTest
         public void tearDown() {
-                driver.quit();
+                System.out.println("Everything works :)");
         }
 
         public void implicitWait(int period) {
@@ -459,12 +464,12 @@ public class AndroidSignUpTest {
                 Properties prop = new Properties();
                 FileInputStream ip = new FileInputStream("config.properties");
                 prop.load(ip);
-                prop.forEach((k, v) -> deviceProperties.add((String) v));
+                prop.forEach((k, v) -> deviceProperties.put((String) k, (String) v));
                 System.out.println(deviceProperties);
 
-                platformVersion = deviceProperties.get(0);
-                udid = deviceProperties.get(1);
-                deviceName = deviceProperties.get(2);
+                platformVersion = deviceProperties.get("platformVersion");
+                udid = deviceProperties.get("udid");
+                deviceName = deviceProperties.get("deviceName");
         }
 
         public void clickContentDescription(String element) {
