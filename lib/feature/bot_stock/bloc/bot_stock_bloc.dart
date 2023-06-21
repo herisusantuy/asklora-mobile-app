@@ -63,11 +63,10 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
 
   _onFetchBotDetail(FetchBotDetail event, Emitter<BotStockState> emit) async {
     emit(state.copyWith(botDetailResponse: BaseResponse.loading()));
-    var data =
+    final data =
         await _botStockRepository.fetchBotDetail(event.ticker, event.botId);
     if (!event.isFreeBot) {
-      var balanceResponse = await _transactionRepository.fetchLedgerBalance();
-
+      final balanceResponse = await _transactionRepository.fetchLedgerBalance();
       if (balanceResponse.state == ResponseState.success) {
         emit(state.copyWith(
             buyingPower: balanceResponse.data!.buyingPower,
