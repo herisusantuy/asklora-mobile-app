@@ -8,7 +8,7 @@ class Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 14),
       child: BlocConsumer<TabScreenBloc, TabScreenState>(
         listenWhen: (_, current) => current.aiPageSelected,
         listener: (context, state) => CustomInAppNotification.show(
@@ -59,7 +59,7 @@ class Tabs extends StatelessWidget {
           required String iconAsset,
           required String activeIconAsset,
           bool active = false,
-          double size = 38}) =>
+          double size = 28}) =>
       GestureDetector(
         onTap: onTap,
         child: SizedBox(
@@ -76,7 +76,7 @@ class Tabs extends StatelessWidget {
           required String iconAsset,
           required String activeIconAsset,
           bool active = false,
-          double size = 38}) =>
+          double size = 28}) =>
       GestureDetector(
         onTap: onTap,
         child: SizedBox(
