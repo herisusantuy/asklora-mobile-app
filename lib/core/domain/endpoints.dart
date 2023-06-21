@@ -29,6 +29,7 @@ const String endpointTaxInfo = '$v1${accounts}tax-info/';
 const String endpointBankAccount = '$v1${accounts}bank-account-related/';
 const String endpointOrders = '$v1$orders';
 const String endpointUserJourney = '$v2${activities}user-journey/';
+const String endpointLedgerBalance = '$v2${accounts}ledger/balance/';
 
 ///
 /// Transaction
