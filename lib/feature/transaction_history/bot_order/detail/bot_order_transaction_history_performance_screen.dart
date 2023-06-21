@@ -29,19 +29,19 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                        child: ColumnText(
+                        child: ColumnTextWithTooltip(
                             title: S
                                 .of(context)
                                 .portfolioDetailPerformanceBotStockValues,
                             subTitle: data.botStockValueString)),
                     Expanded(
-                        child: ColumnText(
+                        child: ColumnTextWithTooltip(
                             title: S
                                 .of(context)
                                 .portfolioDetailPerformanceInvestmentAmount,
                             subTitle: data.investmentAmountString)),
                     Expanded(
-                        child: ColumnText(
+                        child: ColumnTextWithTooltip(
                             title:
                                 S.of(context).portfolioDetailPerformanceTotalPL,
                             subTitle: data.totalPnLPctString)),
@@ -62,7 +62,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              PairColumnText(
+              PairColumnTextWithTooltip(
                   leftTitle: S.of(context).investmentPeriod,
                   leftSubTitle: data.botDuration,
                   rightTitle: S
@@ -70,7 +70,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
                       .portfolioDetailKeyInfoBotStockNumberOfRollover,
                   rightSubTitle: data.rolloverCountString),
               _spaceBetweenInfo,
-              PairColumnText(
+              PairColumnTextWithTooltip(
                   leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
                   leftSubTitle: data.spotDateFormatted,
                   rightTitle: S.of(context).portfolioDetailKeyInfoEndTime,
@@ -87,7 +87,7 @@ class BotOrderTransactionHistoryPerformanceScreen extends StatelessWidget {
 
   Widget _stopLossMaxProfit(BuildContext context, BotType botType,
           BotDetailTransactionHistoryResponse data) =>
-      PairColumnText(
+      PairColumnTextWithTooltip(
         leftTitle: botType == BotType.plank
             ? S.of(context).portfolioDetailKeyInfoEstimatedStopLoss
             : S.of(context).portfolioDetailKeyInfoEstimatedMaxLoss,
