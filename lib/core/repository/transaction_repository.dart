@@ -146,7 +146,6 @@ class TransactionRepository {
       return BaseResponse.complete(
           TransactionLedgerBalanceResponse.fromJson(response.data));
     } catch (e) {
-      print('error $e');
       return BaseResponse.error();
     }
   }
