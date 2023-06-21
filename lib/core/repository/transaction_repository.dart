@@ -9,6 +9,7 @@ import '../../feature/balance/withdrawal/domain/withdrawal_request.dart';
 import '../../feature/balance/withdrawal/domain/withdrawal_response.dart';
 import '../../feature/transaction_history/utils/transaction_history_util.dart';
 import '../domain/base_response.dart';
+import '../domain/transaction/transaction_ledger_balance_response.dart';
 import '../utils/date_utils.dart';
 import '../../feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart';
 import '../../feature/transaction_history/domain/grouped_model.dart';
@@ -133,6 +134,17 @@ class TransactionRepository {
       var response = await _transactionApiClient.fetchBalance();
       return BaseResponse.complete(
           TransactionBalanceResponse.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error();
+    }
+  }
+
+  Future<BaseResponse<TransactionLedgerBalanceResponse>>
+      fetchLedgerBalance() async {
+    try {
+      var response = await _transactionApiClient.fetchLedgerBalance();
+      return BaseResponse.complete(
+          TransactionLedgerBalanceResponse.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error();
     }

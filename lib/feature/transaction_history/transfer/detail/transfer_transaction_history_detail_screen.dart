@@ -26,7 +26,8 @@ class TransferTransactionHistoryDetailScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          _withdrawalInformation('${S.of(context).withdrawalAmount} (HKD)',
+          _withdrawalInformation(
+              '${transactionHistoryModel.depositOrWithdrawalAmountTitle(context)} (HKD)',
               '\$${transactionHistoryModel.amountString}'),
           _withdrawalInformation(S.of(context).timeRequested,
               transactionHistoryModel.createdFormatted),

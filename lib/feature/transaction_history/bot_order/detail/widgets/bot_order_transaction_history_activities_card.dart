@@ -34,7 +34,7 @@ class BotOrderTransactionHistoryActivitiesCard extends StatelessWidget {
                 width: 14,
               ),
               CustomTextNew(
-                botActivitiesTransactionModel.investedString,
+                botActivitiesTransactionModel.investedUsdString,
                 style: AskLoraTextStyles.subtitle2,
               ),
             ],
@@ -46,7 +46,7 @@ class BotOrderTransactionHistoryActivitiesCard extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: CustomTextNew(
               ///TODO : should be HKD rate (example HKD : 3,180,92*) from endpoint later
-              'HKD: -',
+              'HKD: ${botActivitiesTransactionModel.investedHkdString}',
               style: AskLoraTextStyles.body3
                   .copyWith(color: AskLoraColors.darkGray),
             ),

@@ -14,9 +14,9 @@ class BotActivitiesTransactionHistoryModel {
   final String status;
   final double price;
   final double qty;
+  @JsonKey(name: 'invested_usd')
+  final double investedUsd;
   final double invested;
-  @JsonKey(name: 'invested_currency')
-  final String investedCurrency;
   @JsonKey(name: 'filled_qty')
   final double filledQty;
   @JsonKey(name: 'filled_avg_price')
@@ -41,7 +41,7 @@ class BotActivitiesTransactionHistoryModel {
       this.price,
       this.qty,
       this.invested,
-      this.investedCurrency,
+      this.investedUsd,
       this.filledQty,
       this.filledAvgPrice,
       this.filledAt,
@@ -50,9 +50,14 @@ class BotActivitiesTransactionHistoryModel {
       this.canceledAt,
       this.failedAt);
 
-  String get investedString {
-    final double investmentAmountDouble = checkDouble(invested);
+  String get investedUsdString {
+    final double investmentAmountDouble = checkDouble(investedUsd);
     return 'USD ${investmentAmountDouble.convertToCurrencyDecimal()}';
+  }
+
+  String get investedHkdString {
+    final double investmentAmountDouble = checkDouble(invested);
+    return '${investmentAmountDouble.convertToCurrencyDecimal()}*';
   }
 
   String get dateFormattedString =>

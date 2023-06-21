@@ -1,6 +1,11 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
+import 'package:asklora_mobile_app/core/domain/bot/bot_description.dart';
+import 'package:asklora_mobile_app/core/domain/bot/bot_info.dart';
+import 'package:asklora_mobile_app/core/domain/bot/stock_info.dart';
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_ledger_balance_response.dart';
 import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_detail_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_create_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
@@ -37,6 +42,46 @@ void main() async {
 
     const BotRecommendationModel botRecommendationModel =
         BotRecommendationModel(1, '', '', '', 'Pullup', '', '', '', '');
+
+    final BaseResponse<TransactionLedgerBalanceResponse> ledgerBalanceResponse =
+        BaseResponse.complete(
+            const TransactionLedgerBalanceResponse(0, 0, 0, 0, '', 0, []));
+
+    final BaseResponse<TransactionLedgerBalanceResponse>
+        ledgerBalanceErrorResponse = BaseResponse.error();
+
+    final BaseResponse<BotRecommendationDetailModel> botDetailResponse =
+        BaseResponse.complete(const BotRecommendationDetailModel(
+            BotInfo('', '', BotDescriptionModel('detail', 'suited', 'works')),
+            StockInfo(
+                'symbol',
+                'tickerName',
+                'chineseName',
+                'traditionalName',
+                'description',
+                'sector',
+                'industry',
+                'ceo',
+                10,
+                'headquarter',
+                'founded'),
+            20,
+            20,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0,
+            '',
+            '',
+            '',
+            [],
+            '',
+            ''));
+
+    final BaseResponse<BotRecommendationDetailModel> botDetailErrorResponse =
+        BaseResponse.error();
 
     setUpAll(() async {
       botStockRepository = MockBotStockRepository();
@@ -107,6 +152,60 @@ void main() async {
         expect: () => {
               BotStockState(botRecommendationResponse: BaseResponse.loading()),
               BotStockState(botRecommendationResponse: errorResponse)
+            });
+
+    blocTest<BotStockBloc, BotStockState>(
+        'emits `BaseResponse.complete` WHEN '
+        'fetch bot detail',
+        build: () {
+          when(botStockRepository.fetchBotDetail('AAPL', 'abc'))
+              .thenAnswer((_) => Future.value(botDetailResponse));
+          when(transactionRepository.fetchLedgerBalance())
+              .thenAnswer((_) => Future.value(ledgerBalanceResponse));
+          return botStockBloc;
+        },
+        act: (bloc) => bloc.add(const FetchBotDetail(
+            ticker: 'AAPL', botId: 'abc', isFreeBot: false)),
+        expect: () => {
+              BotStockState(botDetailResponse: BaseResponse.loading()),
+              BotStockState(
+                  botDetailResponse: botDetailResponse, buyingPower: 0)
+            });
+
+    blocTest<BotStockBloc, BotStockState>(
+        'emits `BaseResponse.error` WHEN '
+        'error on fetch bot detail and succeed on fetch ledger balance',
+        build: () {
+          when(botStockRepository.fetchBotDetail('AAPL', 'abc'))
+              .thenAnswer((_) => Future.value(botDetailErrorResponse));
+          when(transactionRepository.fetchLedgerBalance())
+              .thenAnswer((_) => Future.value(ledgerBalanceResponse));
+          return botStockBloc;
+        },
+        act: (bloc) => bloc.add(const FetchBotDetail(
+            ticker: 'AAPL', botId: 'abc', isFreeBot: false)),
+        expect: () => {
+              BotStockState(botDetailResponse: BaseResponse.loading()),
+              BotStockState(botDetailResponse: botDetailErrorResponse)
+            });
+
+    blocTest<BotStockBloc, BotStockState>(
+        'emits `BaseResponse.error` WHEN '
+        'succeed on fetch bot detail and error on fetch ledger balance',
+        build: () {
+          when(botStockRepository.fetchBotDetail('AAPL', 'abc'))
+              .thenAnswer((_) => Future.value(botDetailResponse));
+          when(transactionRepository.fetchLedgerBalance())
+              .thenAnswer((_) => Future.value(ledgerBalanceErrorResponse));
+          return botStockBloc;
+        },
+        act: (bloc) => bloc.add(const FetchBotDetail(
+            ticker: 'AAPL', botId: 'abc', isFreeBot: false)),
+        expect: () => {
+              BotStockState(botDetailResponse: BaseResponse.loading()),
+              BotStockState(
+                  botDetailResponse: BaseResponse.error(
+                      message: 'Error when fetching balance'))
             });
 
     blocTest<BotStockBloc, BotStockState>(

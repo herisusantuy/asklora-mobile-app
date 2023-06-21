@@ -25,6 +25,9 @@ class TransactionApiClient {
   Future<Response> fetchBalance() async =>
       await AskloraApiClient().get(endpoint: endpointBalance);
 
+  Future<Response> fetchLedgerBalance() async =>
+      await AskloraApiClient().get(endpoint: endpointLedgerBalance);
+
   Future<Response> submitDeposit(DepositRequest request) async =>
       await AskloraApiClient().post(
           endpoint: endpointProofOfRemittance,
