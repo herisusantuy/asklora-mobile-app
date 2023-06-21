@@ -75,7 +75,7 @@ class TransactionBalanceResponse extends Equatable {
       totalBotStockUsd != 0 ? totalBotStockUsd.convertToCurrencyDecimal() : '/';
 
   String get totalPnLStr =>
-      totalPnLPct != 0 ? totalPnLPct.convertToCurrencyDecimal() : '/';
+      totalPnLPct != 0 ? '${totalPnLPct.convertToCurrencyDecimal()}%' : '/';
 
   Color get totalPnLColor => totalPnLPct == 0
       ? AskLoraColors.charcoal

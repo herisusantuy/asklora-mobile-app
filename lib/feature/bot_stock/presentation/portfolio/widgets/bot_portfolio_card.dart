@@ -57,10 +57,11 @@ class BotPortfolioCard extends StatelessWidget {
                     const SizedBox(
                       height: 4,
                     ),
-                    CustomTextNew(
+                    AutoSizedTextWidget(
                       botActiveOrderModel.tickerName,
                       style: AskLoraTextStyles.body2,
-                      maxLines: 2,
+                      maxLines: 1,
+                      minFontSize: 9,
                       ellipsis: true,
                     ),
                   ],
@@ -68,11 +69,12 @@ class BotPortfolioCard extends StatelessWidget {
                 const SizedBox(
                   height: 13,
                 ),
-                PairColumnText(
+                PairColumnTextWithAutoSizedText(
                   leftTitle: S.of(context).portfolioCurrentPrice(''),
                   rightTitle: S.of(context).portfolioTotalPL,
                   leftSubTitle: botActiveOrderModel.currentPrice.toString(),
                   rightSubTitle: botActiveOrderModel.totalPnLPctString,
+                  maxLines: 1,
                 ),
                 const SizedBox(
                   height: 15,
@@ -95,13 +97,10 @@ class BotPortfolioCard extends StatelessWidget {
                           ),
                         ),
                       Expanded(
-                        child: CustomTextNew(
-                          expiredDayLeft.right,
-                          style: AskLoraTextStyles.subtitle4
-                              .copyWith(color: botType.expiredTextColor),
-                          maxLines: 2,
-                          ellipsis: true,
-                        ),
+                        child: AutoSizedTextWidget(expiredDayLeft.right,
+                            style: AskLoraTextStyles.subtitle4
+                                .copyWith(color: botType.expiredTextColor),
+                            maxLines: 1),
                       )
                     ],
                   ),

@@ -26,8 +26,8 @@ import '../../../utils/bot_stock_utils.dart';
 import '../../bot_performance/bot_performance_chart.dart';
 import '../../bot_stock_result_screen.dart';
 import '../../widgets/bot_stock_form.dart';
-import '../../widgets/column_text.dart';
-import '../../widgets/pair_column_text.dart';
+import '../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
+import '../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../bloc/portfolio_bloc.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 

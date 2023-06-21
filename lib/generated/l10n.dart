@@ -420,6 +420,16 @@ class S {
     );
   }
 
+  /// `Deposit Amount`
+  String get depositAmount {
+    return Intl.message(
+      'Deposit Amount',
+      name: 'depositAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Deposit`
   String get deposit {
     return Intl.message(

@@ -37,6 +37,7 @@
   "buttonViewTransactionHistory": "View Transaction History",
   "buttonSave": "Save",
   "currentPrice": "Current Price",
+  "depositAmount": "Deposit Amount",
   "deposit": "Deposit",
   "depositRequestSubmittedTitle": "Deposit Request Submitted",
   "depositRequestSubmittedSubTitleFirstTime": "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved.",
