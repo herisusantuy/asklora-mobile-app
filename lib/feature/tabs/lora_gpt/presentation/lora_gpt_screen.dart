@@ -55,46 +55,57 @@ class _LoraGptScreenState extends State<LoraGptScreen>
       children: [
         CustomScaffold(
           enableBackNavigation: false,
+          backgroundColor: Colors.transparent,
           body: BlocProvider(
             create: (_) => LoraGptBloc(
                 loraGptRepository: LoraGptRepository(),
                 sharedPreference: SharedPreference())
               ..add(const OnScreenLaunch()),
-            child: Column(
-              children: [
-                CustomHeader(
-                  isShowBottomBorder: true,
-                  title: '',
-                  body: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 11,
-                        height: 11,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AskLoraColors.primaryGreen),
-                      ),
-                      const SizedBox(width: 10),
-                      CustomTextNew(
-                        'LORAGPT',
-                        style: AskLoraTextStyles.h5,
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 15),
-                      child: _chatList()),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-                  child: _bottomContent(),
-                )
-              ],
-            ),
+            child: Container(
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/lora_gpt_background.png'),
+                        fit: BoxFit.cover)),
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        CustomHeader(
+                          isShowBottomBorder: true,
+                          title: '',
+                          body: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 11,
+                                height: 11,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AskLoraColors.primaryGreen),
+                              ),
+                              const SizedBox(width: 10),
+                              CustomTextNew(
+                                'LORAGPT',
+                                style: AskLoraTextStyles.h5,
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 15),
+                              child: _chatList()),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                          child: _bottomContent(),
+                        )
+                      ],
+                    ),
+                  ],
+                )),
           ),
         ),
         _overlayWidget()

@@ -41,3 +41,8 @@ void precachePngIcon(String iconName, BuildContext context) {
 void precachePngImage(String imageName, BuildContext context) {
   precacheImage(getPngImage(imageName).image, context);
 }
+
+Widget getSvgImageTest(String assetName,
+    {Color? color, double? height, double? width}) =>
+    SvgPicture.asset('assets/polygons/$assetName.svg',
+        color: color, height: height, width: width);
