@@ -321,6 +321,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m12,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
+        "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),

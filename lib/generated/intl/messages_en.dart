@@ -429,6 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m12,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
+        "pressBackAgain": MessageLookupByLibrary.simpleMessage(
+            "Press back again to exit Asklora"),
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
