@@ -66,14 +66,15 @@ public class AndroidWithdrawTest {
     @Test(priority = 1)
     public void testView() {
         clickElementByXpath("//android.widget.ImageView[contains(@content-desc, 'Tab 3 of 4')]");
-        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed(), "Portfolio view is not displayed");
     }
 
     @Test(priority = 2)
     public void testWithdrawView() {
         clickElementByXpath("//android.widget.ImageView[contains(@content-desc, 'Total Portfolio Value')]/android.widget.Button[2]");
         clickElementByXpath("//android.widget.Button[@content-desc='Withdraw']");
-        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Withdrawable Amount')]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Withdrawable Amount')]"))
+                .isDisplayed(), "Withdraw money view is displayed");
     }
 
     @Test(priority = 3)
@@ -87,15 +88,17 @@ public class AndroidWithdrawTest {
         for (int i = 0; i < withdrawVal.length(); i++) {
             driver.findElement(By.xpath("//android.view.View[@content-desc='" + withdrawInts[i] + "']")).click();
         }
+        double expectedTotal = Double.parseDouble(withdrawVal) / 10 - 10;
         clickContentDescription("Next");
-        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Your withdrawal can take')]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, '" + expectedTotal + "')]"))
+                        .isDisplayed(), "Actual total amount does not match expected total amount.");
     }
 
     @Test(priority = 4)
     public void testConfirmWithdraw() {
         clickContentDescription("Confirm");
         clickContentDescription("Done");
-        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed(), "Portfolio view is not displayed");
     }
 
 

@@ -16,10 +16,6 @@ import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static java.time.Duration.ofMillis;
-import static org.openqa.selenium.interactions.PointerInput.MouseButton.LEFT;
-import static org.openqa.selenium.interactions.PointerInput.Origin.viewport;
-
 public class AndroidBotstockTest {
     AppiumDriver driver;
     WebDriverWait wait;
@@ -72,14 +68,15 @@ public class AndroidBotstockTest {
     @Test(priority = 1)
     public void testView() {
         clickElementByXpath("//android.widget.ImageView[contains(@content-desc, 'Tab 3 of 4')]");
-        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed(), "Portfolio view is not displayed");
     }
 
     @Test(priority = 2)
     public void testStartBotstock() {
         clickElementByXpath("//android.widget.Button[@content-desc='Start A Botstock']");
         try {
-            Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'What gets your investing mojo on')]")).isDisplayed());
+            Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'What gets your investing mojo on')]"))
+                    .isDisplayed(), "Omnisearch view is not displayed");
         } catch (Exception e) {
             goToRightView();
         }
@@ -109,7 +106,8 @@ public class AndroidBotstockTest {
             clickContentDescription(investmentScenario[randomize(0, 4)]);
             clickContentDescription("View Botstock Recommendation");
         }
-        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Investments for you')]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Investments for you')]"))
+                .isDisplayed(), "Recommended Botstock view is not displayed");
     }
 
     @Test(priority = 4)
@@ -121,7 +119,8 @@ public class AndroidBotstockTest {
         clickContentDescription("Next");
         clickContentDescription("Confirm");
         clickContentDescription("BACK TO HOME");
-        Assert.assertTrue(driver.findElement(By.xpath("//android.widget.ImageView[@content-desc='Tab 1 of 4']")).isSelected());
+        Assert.assertTrue(driver.findElement(By.xpath("//android.widget.ImageView[@content-desc='Tab 1 of 4']"))
+                .isSelected(), "Home view is not displayed");
     }
 
     public void clickElementByXpath(String element) {

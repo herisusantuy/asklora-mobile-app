@@ -72,7 +72,8 @@ public class AndroidDepositTest {
     public void testDepositView() {
         clickElementByXpath("//android.widget.ImageView[contains(@content-desc, 'Total Portfolio Value')]/android.widget.Button[1]");
         clickContentDescription("Continue");
-        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Transfer')]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Transfer')]"))
+                .isDisplayed(), "Portfolio view is not displayed");
     }
 
     @Test(priority = 3)
@@ -80,13 +81,15 @@ public class AndroidDepositTest {
         clickElementByClass(FIND_BY_EDIT_TEXT);
         driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(String.valueOf(randomize(100, 1000)));
         clickContentDescription("Continue");
-        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Deposit Request Submitted')]")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Deposit Request Submitted')]"))
+                .isDisplayed(), "Unexpected view is displayed");
     }
 
     @Test(priority = 4)
     public void testFinish() {
         clickElementByXpath("//android.widget.Button[@content-desc='Done']");
-        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW))
+                .isDisplayed(), "Unexpected view is displayed");
     }
 
     public void getPropValues() throws IOException {

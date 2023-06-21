@@ -182,7 +182,8 @@ public class AndroidSignUpTest {
                 clickContentDescription("Next");
                 waitUntilXpath("//android.widget.Button[@content-desc='Next']");
                 clickContentDescription("Next");
-                Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Spill the truth')]")).isDisplayed());
+                Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Spill the truth')]"))
+                        .isDisplayed(), "The first privacy question is not displayed");
         }
 
         /*
@@ -204,7 +205,7 @@ public class AndroidSignUpTest {
                 try {
                         Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Age')]")).isDisplayed(), "View is not happy flow at PPI (Privacy)");
                 } catch (Exception e) {
-                        System.out.println("Unhappy flow (Privacy)");
+                        System.out.println("Risk score is too low, redoing privacy questions...");
                         failPrivacy();
                 }
         }
@@ -325,7 +326,7 @@ public class AndroidSignUpTest {
                 try {
                         Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'all set!')]")).isDisplayed(), "View is not a happy flow at PPI (Investment Style)");
                 } catch (Exception e) {
-                        System.out.println("Unhappy flow (Investment Style)");
+                        System.out.println("Not enough botstock recommendations, redoing investment style questions...");
                         failInvestmentStyle();
                 }
 
