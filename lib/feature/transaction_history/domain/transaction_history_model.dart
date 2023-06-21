@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../core/utils/date_utils.dart';
 import '../../../core/utils/extensions.dart';
+import '../../../generated/l10n.dart';
 import '../utils/transaction_history_util.dart';
 
 part 'transaction_history_model.g.dart';
@@ -68,6 +70,11 @@ class TransactionHistoryModel extends Equatable {
       isRefunded: isRefunded, timeRejected: timeRejected);
 
   TransferType get transferType => TransferType.findByString(title);
+
+  String depositOrWithdrawalAmountTitle(BuildContext context) =>
+      transferType == TransferType.withdraw
+          ? S.of(context).withdrawalAmount
+          : S.of(context).depositAmount;
 
   String get createdFormatted {
     if (created != null && created!.isNotEmpty) {

@@ -180,6 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defineInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Define Investment Style"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
+        "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit Amount"),
         "depositRequestSubmittedSubTitleFirstTime":
             MessageLookupByLibrary.simpleMessage(
                 "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved."),

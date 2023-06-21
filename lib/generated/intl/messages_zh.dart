@@ -137,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateJoined": MessageLookupByLibrary.simpleMessage("加入日期"),
         "defineInvestmentStyle": MessageLookupByLibrary.simpleMessage("界定投資風格"),
         "deposit": MessageLookupByLibrary.simpleMessage("存入資金"),
+        "depositAmount": MessageLookupByLibrary.simpleMessage("存入金額"),
         "depositRequestSubmittedSubTitleFirstTime":
             MessageLookupByLibrary.simpleMessage(
                 "我們會於 1 至 2 個工作天內檢視你的開戶申請及首次入金。當賬戶批核後會以電郵或應用程式通知。"),
