@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../core/styles/asklora_colors.dart';
-import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/utils/app_icons.dart';
+import '../../../../core/presentation/custom_text_new.dart';
+import '../../../../core/styles/asklora_colors.dart';
+import '../../../../core/styles/asklora_text_styles.dart';
+import '../../utils/app_icons.dart';
 
-class ColumnText extends StatelessWidget {
+class ColumnTextWithTooltip extends StatelessWidget {
   final String title;
   final String subTitle;
   final String? tooltipText;
 
-  const ColumnText(
+  const ColumnTextWithTooltip(
       {required this.title, required this.subTitle, this.tooltipText, Key? key})
       : super(key: key);
 

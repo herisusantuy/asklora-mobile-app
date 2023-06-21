@@ -30,20 +30,20 @@ class Performance extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                  child: ColumnText(
+                  child: ColumnTextWithTooltip(
                       title: S
                           .of(context)
                           .portfolioDetailPerformanceBotStockValues,
                       subTitle: botActiveOrderDetailModel.botStockValueString)),
               Expanded(
-                  child: ColumnText(
+                  child: ColumnTextWithTooltip(
                       title: S
                           .of(context)
                           .portfolioDetailPerformanceInvestmentAmount,
                       subTitle:
                           botActiveOrderDetailModel.investmentAmountString)),
               Expanded(
-                  child: ColumnText(
+                  child: ColumnTextWithTooltip(
                       title: S.of(context).portfolioDetailPerformanceTotalPL,
                       subTitle: botActiveOrderDetailModel.totalPnLPctString)),
             ],
@@ -52,7 +52,7 @@ class Performance extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        PairColumnText(
+        PairColumnTextWithTooltip(
             leftTitle: S.of(context).portfolioCurrentPrice('USD'),
             leftSubTitle: botActiveOrderDetailModel.currentPriceString,
             rightTitle: S.of(context).portfolioDetailPerformanceNumberOfShares,
@@ -60,14 +60,14 @@ class Performance extends StatelessWidget {
             rightTooltipText:
                 S.of(context).portfolioDetailPerformanceNumberOfSharesTooltip),
         _spaceBetweenInfo,
-        PairColumnText(
+        PairColumnTextWithTooltip(
           leftTitle: S.of(context).portfolioDetailPerformanceStockValues,
           leftSubTitle: botActiveOrderDetailModel.botStockValueString,
           rightTitle: S.of(context).portfolioDetailPerformanceCash,
           rightSubTitle: botActiveOrderDetailModel.botCashBalanceString,
         ),
         _spaceBetweenInfo,
-        ColumnText(
+        ColumnTextWithTooltip(
             title: S.of(context).portfolioDetailPerformanceBotAssetsInStock,
             subTitle: botActiveOrderDetailModel.botAssetInStockPctString),
         const SizedBox(

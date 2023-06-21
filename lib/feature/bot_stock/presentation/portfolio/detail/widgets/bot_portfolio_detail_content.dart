@@ -12,7 +12,7 @@ import '../../../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
-import '../../../widgets/pair_column_text.dart';
+import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../bot_portfolio_detail_screen.dart';
 
 class BotPortfolioDetailContent extends StatelessWidget {
@@ -138,7 +138,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
               const SizedBox(
                 height: 21,
               ),
-              PairColumnText(
+              PairColumnTextWithTooltip(
                 leftTitle: 'Sector(s)',
                 leftSubTitle:
                     portfolioBotDetailModel!.stockInfoWithPlaceholder.sector,
@@ -147,7 +147,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                     portfolioBotDetailModel!.stockInfoWithPlaceholder.industry,
               ),
               _spaceBetweenInfo,
-              PairColumnText(
+              PairColumnTextWithTooltip(
                 leftTitle: 'CEO',
                 leftSubTitle:
                     portfolioBotDetailModel!.stockInfoWithPlaceholder.ceo,
@@ -156,7 +156,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                     '${portfolioBotDetailModel!.stockInfoWithPlaceholder.employees}',
               ),
               _spaceBetweenInfo,
-              PairColumnText(
+              PairColumnTextWithTooltip(
                 leftTitle: 'Headquarters',
                 leftSubTitle: portfolioBotDetailModel!
                     .stockInfoWithPlaceholder.headquarter,

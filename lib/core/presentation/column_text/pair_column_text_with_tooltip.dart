@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'column_text.dart';
+import 'column_text_with_tooltip.dart';
 
-class PairColumnText extends StatelessWidget {
+class PairColumnTextWithTooltip extends StatelessWidget {
   final String leftTitle;
   final String leftSubTitle;
   final String? leftTooltipText;
@@ -11,7 +11,7 @@ class PairColumnText extends StatelessWidget {
   final String? rightTooltipText;
   final double? spaceWidth;
 
-  const PairColumnText(
+  const PairColumnTextWithTooltip(
       {required this.leftTitle,
       required this.rightTitle,
       required this.leftSubTitle,
@@ -28,7 +28,7 @@ class PairColumnText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          child: ColumnText(
+          child: ColumnTextWithTooltip(
               title: leftTitle,
               subTitle: leftSubTitle,
               tooltipText: leftTooltipText),
@@ -38,7 +38,7 @@ class PairColumnText extends StatelessWidget {
             width: spaceWidth,
           ),
         Expanded(
-          child: ColumnText(
+          child: ColumnTextWithTooltip(
               title: rightTitle,
               subTitle: rightSubTitle,
               tooltipText: rightTooltipText),

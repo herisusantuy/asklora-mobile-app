@@ -24,7 +24,7 @@ import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_stock_result_screen.dart';
 import '../widgets/bot_stock_form.dart';
-import '../widgets/pair_column_text.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 
 class BotTradeSummaryModel {
   final double amount;
@@ -109,7 +109,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 RoundColoredBox(
                   content: Column(
                     children: [
-                      PairColumnText(
+                      PairColumnTextWithTooltip(
                         leftTitle: 'Investment Amount (HKD)',
                         rightTitle: 'Bot Management Fee (HKD)',
                         leftSubTitle: botTradeSummaryModel.amount
@@ -121,14 +121,14 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       _spaceBetweenInfo,
                       ..._detailedInformation(context),
                       _spaceBetweenInfo,
-                      PairColumnText(
+                      PairColumnTextWithTooltip(
                           leftTitle: 'Market Price (USD)',
                           leftSubTitle:
                               '${botTradeSummaryModel.botDetailModel.price}',
                           rightTitle: 'Investment Period',
                           rightSubTitle: botDetailModel.botDuration),
                       _spaceBetweenInfo,
-                      PairColumnText(
+                      PairColumnTextWithTooltip(
                           leftTitle: 'Start Time',
                           rightTitle: 'End Time',
                           leftSubTitle: botTradeSummaryModel
@@ -189,7 +189,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
   }
 
   List<Widget> _detailedInformation(BuildContext context) => [
-        PairColumnText(
+        PairColumnTextWithTooltip(
           leftTitle: botTradeSummaryModel.botType == BotType.plank
               ? 'Estimated Stop Loss %'
               : 'Estimated Max Loss %',

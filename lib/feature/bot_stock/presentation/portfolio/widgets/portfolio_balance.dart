@@ -120,7 +120,7 @@ class PortfolioBalance extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           content: Column(
             children: [
-              PairColumnText(
+              PairColumnTextWithTooltip(
                 leftTitle: S
                     .of(context)
                     .portfolioWithdrawableAmount(currencyType.name),
@@ -138,7 +138,7 @@ class PortfolioBalance extends StatelessWidget {
               const SizedBox(
                 height: 14,
               ),
-              PairColumnText(
+              PairColumnTextWithTooltip(
                 leftTitle:
                     S.of(context).portfolioTotalBotStock(currencyType.name),
                 rightTitle: S.of(context).portfolioTotalPL,
