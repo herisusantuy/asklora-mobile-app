@@ -10,6 +10,7 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
       : super(TabScreenState(currentTabPage: initialTabPage)) {
     on<TabChanged>(_onTabChanged);
     on<AiButtonSelected>(_onAiButtonSelected);
+    on<BackButtonClicked>(_onBackButtonClicked);
   }
 
   _onTabChanged(TabChanged event, Emitter<TabScreenState> emit) {
@@ -18,5 +19,18 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
 
   _onAiButtonSelected(AiButtonSelected event, Emitter<TabScreenState> emit) {
     emit(state.copyWith(aiPageSelected: true));
+  }
+
+  _onBackButtonClicked(
+      BackButtonClicked event, Emitter<TabScreenState> emit) async {
+    if (state.tabScreenBackState == TabScreenBackState.none) {
+      emit(state.copyWith(
+          tabScreenBackState: TabScreenBackState.openConfirmation));
+      await Future.delayed(const Duration(seconds: 3));
+      emit(state.copyWith(tabScreenBackState: TabScreenBackState.none));
+    } else if (state.tabScreenBackState ==
+        TabScreenBackState.openConfirmation) {
+      emit(state.copyWith(tabScreenBackState: TabScreenBackState.closeApp));
+    }
   }
 }

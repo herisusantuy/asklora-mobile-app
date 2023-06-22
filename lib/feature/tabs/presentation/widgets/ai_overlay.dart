@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/tab_screen_bloc.dart';
-import '../../lora_gpt/presentation/lora_gpt_screen.dart';
+import '../../lora_gpt/presentation/lora_ai_screen.dart';
 
 class AiOverlay extends StatefulWidget {
   final double maxHeight;
@@ -49,7 +49,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
           child: GestureDetector(
             onPanEnd: _onPanEnd,
             onPanUpdate: _onPanUpdate,
-            child: const LoraGptScreen(),
+            child: const LoraAiScreen(),
           ),
         ),
       );

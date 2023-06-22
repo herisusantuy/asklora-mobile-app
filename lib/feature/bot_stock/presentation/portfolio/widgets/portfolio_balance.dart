@@ -12,7 +12,7 @@ class PortfolioBalance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _currencyDropdownButton(),
+        _currencyToggleButton(context),
         const SizedBox(
           height: 7,
         ),
@@ -29,19 +29,10 @@ class PortfolioBalance extends StatelessWidget {
     );
   }
 
-  Widget _currencyDropdownButton() {
-    return Container(
-      transform: Matrix4.translationValues(0, -8, 0),
-      child: BlocBuilder<PortfolioBloc, PortfolioState>(
-        buildWhen: (previous, current) => previous.currency != current.currency,
-        builder: (context, state) => CurrencyDropdown(
-          onChanged: (newValue) =>
-              context.read<PortfolioBloc>().add(CurrencyChanged(newValue!)),
-          initialValue: state.currency,
-        ),
-      ),
-    );
-  }
+  Widget _currencyToggleButton(BuildContext context) => CurrencyToggleButton(
+        onChanged: (currencyType) =>
+            context.read<PortfolioBloc>().add(CurrencyChanged(currencyType)),
+      );
 
   Widget _totalPortfolioBalance(BuildContext context, CurrencyType currencyType,
       TransactionBalanceResponse? data) {
