@@ -389,5 +389,7 @@
       }
     }
   },
-  "viewDepositGuide": "View Deposit Guide"
+  "viewDepositGuide": "View Deposit Guide",
+  "pressBackAgain": "Press back again to exit Asklora"
+
 }

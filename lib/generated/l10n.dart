@@ -2842,6 +2842,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Press back again to exit Asklora`
+  String get pressBackAgain {
+    return Intl.message(
+      'Press back again to exit Asklora',
+      name: 'pressBackAgain',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
