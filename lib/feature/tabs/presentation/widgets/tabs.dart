@@ -5,8 +5,6 @@ class Tabs extends StatelessWidget {
 
   const Tabs({required this.canTrade, super.key});
 
-  // late final TabPage currentPage;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
