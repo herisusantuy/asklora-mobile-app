@@ -7,6 +7,7 @@ class LoraGptState extends Equatable {
   final String sessionId;
   final List<Conversation> conversations;
   final bool isTyping;
+  final bool shouldShowOverlay;
 
   const LoraGptState({
     this.query = '',
@@ -15,15 +16,18 @@ class LoraGptState extends Equatable {
     this.userName = '',
     this.conversations = const [],
     this.isTyping = false,
+    this.shouldShowOverlay = true,
   });
 
-  LoraGptState copyWith(
-      {String? query,
-      String? sessionId,
-      String? userName,
-      List<Conversation>? conversations,
-      ResponseState? status,
-      bool? isTyping}) {
+  LoraGptState copyWith({
+    String? query,
+    String? sessionId,
+    String? userName,
+    List<Conversation>? conversations,
+    ResponseState? status,
+    bool? isTyping,
+    bool? shouldShowOverlay,
+  }) {
     return LoraGptState(
       query: query ?? this.query,
       sessionId: sessionId ?? this.sessionId,
@@ -31,10 +35,18 @@ class LoraGptState extends Equatable {
       status: status ?? this.status,
       isTyping: isTyping ?? this.isTyping,
       userName: userName ?? this.userName,
+      shouldShowOverlay: shouldShowOverlay ?? this.shouldShowOverlay,
     );
   }
 
   @override
-  List<Object> get props =>
-      [query, sessionId, conversations, status, isTyping, userName];
+  List<Object> get props => [
+        query,
+        sessionId,
+        conversations,
+        status,
+        isTyping,
+        userName,
+        shouldShowOverlay
+      ];
 }

@@ -1,23 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../core/domain/base_response.dart';
-import '../../../../core/presentation/custom_header.dart';
-import '../../../../core/presentation/custom_in_app_notification.dart';
-import '../../../../core/presentation/custom_scaffold.dart';
-import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/presentation/text_fields/style/text_field_style.dart';
-import '../../../../core/styles/asklora_colors.dart';
-import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/utils/app_icons.dart';
-import '../../../../core/utils/storage/shared_preference.dart';
-import '../bloc/lora_gpt_bloc.dart';
-import '../domain/conversation.dart';
-import '../repository/lora_gpt_repository.dart';
-import 'widget/in_chat_bubble_widget.dart';
-import 'widget/lora_thinking_widget.dart';
-import 'widget/out_chat_bubble_widget.dart';
-import 'widget/utils/breathing_glowing_button.dart';
+part of 'lora_ai_screen.dart';
 
 class LoraGptScreen extends StatefulWidget {
   const LoraGptScreen({super.key});
@@ -50,16 +31,6 @@ class _LoraGptScreenState extends State<LoraGptScreen>
   @override
   Widget build(BuildContext context) {
     searchFieldSize = MediaQuery.of(context).size.width;
-
-    return BlocProvider(
-        create: (_) => LoraGptBloc(
-            loraGptRepository: LoraGptRepository(),
-            sharedPreference: SharedPreference())
-          ..add(const OnScreenLaunch()),
-        child: showOverlay ? _overlayWidget() : _loraGpt());
-  }
-
-  Widget _loraGpt() {
     return CustomScaffold(
         enableBackNavigation: false,
         backgroundColor: Colors.transparent,
@@ -271,88 +242,5 @@ class _LoraGptScreenState extends State<LoraGptScreen>
         );
       },
     );
-  }
-
-  Widget _overlayWidget() {
-    return BlocBuilder<LoraGptBloc, LoraGptState>(
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          return Container(
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/lora_gpt_background.png'),
-                    fit: BoxFit.cover)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 60,
-                ),
-                Image.asset('assets/apng/lora_animation_green.png',
-                    height: 200, width: 200, filterQuality: FilterQuality.high),
-                const SizedBox(
-                  height: 30,
-                ),
-                CustomTextNew(
-                  'Asklora.\nYour ultimate\nfinancial advisor',
-                  style:
-                      AskLoraTextStyles.h3.copyWith(color: AskLoraColors.white),
-                  textAlign: TextAlign.center,
-                ),
-                TextFormField(
-                  textAlign: TextAlign.center,
-                  cursorColor: Colors.white,
-                  style: AskLoraTextStyles.body1
-                      .copyWith(color: AskLoraColors.white.withAlpha(100)),
-                  keyboardType: TextInputType.text,
-                  onFieldSubmitted: (str) =>
-                      context.read<LoraGptBloc>().add(OnEditQuery(str)),
-                  controller: controller,
-                  onChanged: (str) =>
-                      context.read<LoraGptBloc>().add(OnEditQuery(str)),
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: const EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                      hintText: 'Type your question here...',
-                      hintStyle: AskLoraTextStyles.body1
-                          .copyWith(color: AskLoraColors.white.withAlpha(100))),
-                ),
-                Expanded(
-                  child: BreathingGlowingButton(
-                    height: 75.0,
-                    width: 75.0,
-                    onTap: () {
-                      if (state.query.isNotEmpty) {
-                        setState(() {
-                          showOverlay = false;
-                          context
-                              .read<LoraGptBloc>()
-                              .add(const OnSearchQuery());
-                        });
-                      }
-                    },
-                    buttonBackgroundColor: const Color(0xFF373A49),
-                    glowColor: Colors.white.withAlpha(100),
-                    child: Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border:
-                                Border.all(color: Colors.white, width: 1.5)),
-                        child: getSvgIcon('icon_sent_text',
-                            color: AskLoraColors.white)),
-                  ),
-                )
-              ],
-            ),
-          );
-        });
   }
 }

@@ -52,23 +52,6 @@ class Tabs extends StatelessWidget {
     );
   }
 
-  void openAiBottomSheet(BuildContext context) {
-    Future<void> model = showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        useRootNavigator: true,
-        isScrollControlled: true,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-        builder: (context) => const LoraGptScreen());
-
-    model.then((value) => onAiBottomSheetClosed(context));
-  }
-
-  void onAiBottomSheetClosed(BuildContext context) {
-    final lastPage = context.read<TabScreenBloc>().state.currentTabPage;
-    context.read<TabScreenBloc>().add(TabChanged(lastPage));
-  }
-
   Widget _tabSvg(
           {required VoidCallback onTap,
           required String iconAsset,

@@ -40,3 +40,12 @@ class OnFinishTyping extends LoraGptEvent {
   @override
   List<Object?> get props => [];
 }
+
+class ShowOverLayScreen extends LoraGptEvent {
+  final bool shouldShowOverlayScreen;
+
+  const ShowOverLayScreen({this.shouldShowOverlayScreen = true});
+
+  @override
+  List<Object?> get props => [];
+}
