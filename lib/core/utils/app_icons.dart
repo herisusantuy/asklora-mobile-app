@@ -11,9 +11,17 @@ class AppIcons {
 }
 
 Widget getSvgIcon(String iconName,
-        {Color? color, double? height, double? width}) =>
-    SvgPicture.asset('assets/icons/$iconName.svg',
-        color: color, height: height, width: width);
+        {Color? color,
+        double? height,
+        double? width,
+        BoxFit fit = BoxFit.none}) =>
+    SvgPicture.asset(
+      'assets/icons/$iconName.svg',
+      color: color,
+      height: height,
+      width: width,
+      fit: fit,
+    );
 
 Image getPngIcon(String iconName,
         {double? height, double? width, BoxFit? fit}) =>
@@ -41,8 +49,3 @@ void precachePngIcon(String iconName, BuildContext context) {
 void precachePngImage(String imageName, BuildContext context) {
   precacheImage(getPngImage(imageName).image, context);
 }
-
-Widget getSvgImageTest(String assetName,
-    {Color? color, double? height, double? width}) =>
-    SvgPicture.asset('assets/polygons/$assetName.svg',
-        color: color, height: height, width: width);
