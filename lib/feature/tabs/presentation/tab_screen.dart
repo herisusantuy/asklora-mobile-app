@@ -104,6 +104,7 @@ class TabScreen extends StatelessWidget {
                 previous.response.data != current.response.data ||
                 current.response.state == ResponseState.error,
             builder: (context, state) => CustomLayoutWithBlurPopUp(
+              showPopUp: state.response.state == ResponseState.error,
               content: state.response.data != null
                   ? BlocProvider(
                       create: (_) => TabScreenBloc(
