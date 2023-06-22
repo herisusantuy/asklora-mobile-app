@@ -62,15 +62,28 @@ class Tabs extends StatelessWidget {
   }
 
   void test(BuildContext context) {
-    Future<void> model = showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        useRootNavigator: true,
-        isScrollControlled: true,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-        builder: (context) => const LoraGptScreen());
+    // Future<void> model = showModalBottomSheet(
+    //     context: context,
+    //     backgroundColor: Colors.transparent,
+    //     useRootNavigator: true,
+    //     isScrollControlled: true,
+    //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+    //     builder: (context) => const LoraGptScreen());
+    //
+    // model.then((value) => onAiClose(context));
 
-    model.then((value) => onAiClose(context));
+    // showDialog(
+    //     context: context,
+    //     barrierColor: Colors.transparent,
+    //     useSafeArea: false,
+    //     barrierDismissible: false,
+    //     builder: (ctx) => WillPopScope(
+    //       onWillPop: () async => false,
+    //       child: Material(
+    //         color: Colors.white70,
+    //         child: LoraGptScreen(),
+    //       ),
+    //     ));
   }
 
   void onAiClose(BuildContext context) {

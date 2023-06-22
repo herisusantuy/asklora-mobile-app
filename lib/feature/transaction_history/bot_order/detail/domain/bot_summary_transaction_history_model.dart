@@ -32,8 +32,10 @@ class BotSummaryTransactionHistoryModel extends Equatable {
         : 'NA';
   }
 
-  String get createdFormattedString =>
-      formatDateTimeAsString(date, dateFormat: 'yyyy-MM-dd HH:mm:ss');
+  String get createdFormattedString {
+    DateTime localTime = formatDateTimeToLocal(date);
+    return formatDateTimeAsString(localTime, dateFormat: 'yyyy-MM-dd HH:mm:ss');
+  }
 
   const BotSummaryTransactionHistoryModel(
       this.uid, this.date, this.status, this.amount, this.fee, this.totalPnL);
