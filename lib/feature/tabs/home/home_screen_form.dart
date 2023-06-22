@@ -50,33 +50,36 @@ class HomeScreenForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          HomeScreenBloc(ppiResponseRepository: PpiResponseRepository())
-            ..add(GetUserSnapShots()),
-      child: Container(
-        color: Colors.white,
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: CustomSliverPersistentHeader(),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate([
-                const SizedBox(
-                  height: 100,
-                ),
-                const HomeScreenHorizontalPaddingWidget(
-                  child: OnBoardingStatus(),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                const HomeScreenContentWidget(),
-              ]),
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: BlocProvider(
+        create: (context) =>
+            HomeScreenBloc(ppiResponseRepository: PpiResponseRepository())
+              ..add(GetUserSnapShots()),
+        child: Container(
+          color: Colors.white,
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: CustomSliverPersistentHeader(),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  const HomeScreenHorizontalPaddingWidget(
+                    child: OnBoardingStatus(),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const HomeScreenContentWidget(),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );
