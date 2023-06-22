@@ -112,7 +112,6 @@ class _LoraGptScreenState extends State<LoraGptScreen>
 
   Widget _chatList() {
     return BlocConsumer<LoraGptBloc, LoraGptState>(
-        listenWhen: (previous, current) => true,
         listener: (context, state) => {
               if (state.status == ResponseState.error)
                 {
