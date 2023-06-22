@@ -24,7 +24,6 @@ import '../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../onboarding/ppi/domain/ppi_user_response.dart';
 import '../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../onboarding/ppi/repository/ppi_response_repository.dart';
-import '../bloc/tabs_screen_bloc.dart';
 import 'bloc/home_screen_bloc.dart';
 import 'custom_header/custom_sliver_persistent_header.dart';
 import 'widgets/on_boarding_status/on_boarding_status.dart';
@@ -46,37 +45,41 @@ part 'widgets/home_screen_pop_up_message_widget.dart';
 part 'widgets/home_screen_pop_up_message_with_bot_badge_widget.dart';
 
 class HomeScreenForm extends StatelessWidget {
+  static const String route = '/home_screen';
   const HomeScreenForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          HomeScreenBloc(ppiResponseRepository: PpiResponseRepository())
-            ..add(GetUserSnapShots()),
-      child: Container(
-        color: Colors.white,
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: CustomSliverPersistentHeader(),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate([
-                const SizedBox(
-                  height: 100,
-                ),
-                const HomeScreenHorizontalPaddingWidget(
-                  child: OnBoardingStatus(),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                const HomeScreenContentWidget(),
-              ]),
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: BlocProvider(
+        create: (context) =>
+            HomeScreenBloc(ppiResponseRepository: PpiResponseRepository())
+              ..add(GetUserSnapShots()),
+        child: Container(
+          color: Colors.white,
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: CustomSliverPersistentHeader(),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  const HomeScreenHorizontalPaddingWidget(
+                    child: OnBoardingStatus(),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const HomeScreenContentWidget(),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );

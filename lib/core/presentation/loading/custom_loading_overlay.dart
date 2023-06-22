@@ -17,7 +17,7 @@ class CustomLoadingOverlay {
   void dismiss() {
     if (_isShowing) {
       _isShowing = !_isShowing;
-      Navigator.of(context).pop();
+      Navigator.of(context, rootNavigator: true).pop();
     }
   }
 

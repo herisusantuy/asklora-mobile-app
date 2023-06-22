@@ -12,7 +12,7 @@ import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
-import '../../../tabs/tabs_screen.dart';
+import '../../../tabs/presentation/tab_screen.dart';
 import '../../repository/auth_repository.dart';
 import '../../sign_in/bloc/sign_in_bloc.dart';
 import '../bloc/otp_bloc.dart';
@@ -78,7 +78,7 @@ class OtpScreen extends StatelessWidget {
                           context
                               .read<AppBloc>()
                               .add(const GetUserJourneyFromLocal());
-                          TabsScreen.openAndRemoveAllRoute(context);
+                          TabScreen.openAndRemoveAllRoute(context);
                           break;
                         default:
                           break;

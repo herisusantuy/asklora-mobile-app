@@ -10,3 +10,8 @@ abstract class AccountInformationEvent extends Equatable {
 class GetAccountInformation extends AccountInformationEvent {}
 
 class GetLocalAccountInformation extends AccountInformationEvent {}
+
+class InitiateAccountInformationData extends AccountInformationEvent {
+  final BaseResponse<GetAccountResponse> data;
+  const InitiateAccountInformationData(this.data);
+}

@@ -138,5 +138,6 @@ class WithdrawalBankDetailScreen extends StatelessWidget {
   }
 
   static void open(BuildContext context, double withdrawableBalance) =>
-      Navigator.pushNamed(context, route, arguments: withdrawableBalance);
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: withdrawableBalance);
 }

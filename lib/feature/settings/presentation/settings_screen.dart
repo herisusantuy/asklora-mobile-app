@@ -231,5 +231,6 @@ class SettingsScreen extends StatelessWidget {
         },
       );
 
-  static void open(BuildContext context) => Navigator.pushNamed(context, route);
+  static void open(BuildContext context) =>
+      Navigator.of(context, rootNavigator: true).pushNamed(route);
 }

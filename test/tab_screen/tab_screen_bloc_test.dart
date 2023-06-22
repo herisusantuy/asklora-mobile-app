@@ -1,4 +1,4 @@
-import 'package:asklora_mobile_app/feature/tabs/bloc/tabs_screen_bloc.dart';
+import 'package:asklora_mobile_app/feature/tabs/bloc/tab_screen_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -7,75 +7,42 @@ void main() {
     late TabScreenBloc tabScreenBloc;
 
     setUp(() async {
-      tabScreenBloc = TabScreenBloc();
+      tabScreenBloc = TabScreenBloc(initialTabPage: TabPage.forYou);
     });
-    test('init screen default index should be 0', () {
+    test('init screen default page should be for you', () {
       expect(
         tabScreenBloc.state,
-        const TabScreenState(
-          currentIndexScreen: 0,
-          shouldShowExitConfirmation: false,
-        ),
+        const TabScreenState(currentTabPage: TabPage.forYou),
       );
     });
     blocTest<TabScreenBloc, TabScreenState>(
-      'screen should be in "for you" screen when user clicked tab icon no 2',
+      'screen should be in "for you" screen when user clicked first tab',
       build: () => tabScreenBloc,
       act: (bloc) {
-        bloc.add(const TabIndexChanged(1));
+        bloc.add(const TabChanged(TabPage.forYou));
+      },
+      expect: () => {const TabScreenState(currentTabPage: TabPage.forYou)},
+    );
+    blocTest<TabScreenBloc, TabScreenState>(
+      'aiPageSelected = true when user clicked middle tab (AI)',
+      build: () => tabScreenBloc,
+      act: (bloc) {
+        bloc.add(const AiButtonSelected());
       },
       expect: () => {
         const TabScreenState(
-          currentIndexScreen: 1,
-          shouldShowExitConfirmation: false,
-        )
+            currentTabPage: TabPage.forYou, aiPageSelected: true)
       },
     );
     blocTest<TabScreenBloc, TabScreenState>(
-      'screen should be in "portfolio" screen when user clicked tab icon no 3',
+      'screen should be in "portfolio" screen when user clicked third tab',
       build: () => tabScreenBloc,
       act: (bloc) {
-        bloc.add(const TabIndexChanged(2));
+        bloc.add(const TabChanged(TabPage.portfolio));
       },
-      expect: () => {
-        const TabScreenState(
-          currentIndexScreen: 2,
-          shouldShowExitConfirmation: false,
-        )
-      },
-    );
-    blocTest<TabScreenBloc, TabScreenState>(
-      'screen should be in "Chat Lora" screen when user clicked tab icon no 3',
-      build: () => tabScreenBloc,
-      act: (bloc) {
-        bloc.add(const TabIndexChanged(3));
-      },
-      expect: () => {
-        const TabScreenState(
-          currentIndexScreen: 3,
-          shouldShowExitConfirmation: false,
-        )
-      },
+      expect: () => {const TabScreenState(currentTabPage: TabPage.portfolio)},
     );
 
-    blocTest<TabScreenBloc, TabScreenState>(
-      'warning user with showing popup message when user click back button once',
-      build: () => tabScreenBloc,
-      act: (bloc) {
-        bloc.add(const TabIndexChanged(1));
-        bloc.add(BackButtonClicked());
-      },
-      expect: () => {
-        const TabScreenState(
-          currentIndexScreen: 1,
-          shouldShowExitConfirmation: false,
-        ),
-        const TabScreenState(
-          currentIndexScreen: 1,
-          shouldShowExitConfirmation: true,
-        ),
-      },
-    );
     tearDown(() => {tabScreenBloc.close()});
   });
 }

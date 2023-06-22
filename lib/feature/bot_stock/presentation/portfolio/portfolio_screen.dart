@@ -27,16 +27,15 @@ import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../../../core/domain/transaction/transaction_balance_response.dart';
-import '../../../../core/repository/transaction_repository.dart';
+import '../../../settings/presentation/settings_screen.dart';
 import '../../domain/orders/bot_active_order_model.dart';
-import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
-import '../widgets/currency_dropdown.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
 import 'utils/portfolio_utils.dart';
 import 'widgets/bot_portfolio_pop_up.dart';
+import 'widgets/currency_toggle_button.dart';
 
 part 'widgets/bot_portfolio_card.dart';
 
@@ -57,21 +56,8 @@ class PortfolioScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        PortfolioBloc portfolioBloc = PortfolioBloc(
-          botStockRepository: BotStockRepository(),
-          transactionHistoryRepository: TransactionRepository(),
-        );
-
-        ///fetch portfolio when current UserJourney already passed freeBotStock
-        if (UserJourney.compareUserJourney(
-            context: context, target: UserJourney.freeBotStock)) {
-          portfolioBloc.add(const FetchActiveOrders());
-          portfolioBloc.add(FetchBalance());
-        }
-        return portfolioBloc;
-      },
+    return WillPopScope(
+      onWillPop: () async => false,
       child: CustomScaffold(
         useSafeArea: false,
         backgroundColor: AskLoraColors.white,
@@ -114,6 +100,7 @@ class PortfolioScreen extends StatelessWidget {
                 padding: AppValues.screenHorizontalPadding
                     .copyWith(top: 15, bottom: 15),
                 children: [
+                  _header(context),
                   PortfolioBalance(
                     data: state.transactionBalanceResponse.data,
                     currencyType: state.currency,
@@ -133,6 +120,17 @@ class PortfolioScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _header(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          getSvgIcon('icon_notification', color: AskLoraColors.black),
+          const SizedBox(width: 15),
+          InkWell(
+              onTap: () => SettingsScreen.open(context),
+              child: getSvgIcon('icon_settings', color: AskLoraColors.black)),
+        ],
+      );
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

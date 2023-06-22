@@ -9,8 +9,9 @@ abstract class NavigationEvent<T> extends Equatable {
 
 class PageChanged<T> extends NavigationEvent<T> {
   final T page;
+  final dynamic arguments;
 
-  const PageChanged(this.page) : super();
+  const PageChanged(this.page, {this.arguments}) : super();
 
   @override
   List<Object?> get props => [page];
