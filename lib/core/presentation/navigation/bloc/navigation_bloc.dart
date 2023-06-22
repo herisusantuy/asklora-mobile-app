@@ -22,7 +22,7 @@ class NavigationBloc<T> extends Bloc<NavigationEvent<T>, NavigationState<T>> {
 
   void _onPageChanged(PageChanged event, Emitter<NavigationState> emit) {
     _savedPages.add(event.page);
-    emit(state.copyWith(page: event.page));
+    emit(state.copyWith(page: event.page, arguments: event.arguments));
   }
 
   void _onPageChangedReplacement(

@@ -1703,10 +1703,10 @@ class S {
     );
   }
 
-  /// `Withdrawable Amount ({currency})`
+  /// `Withdrawable Balance ({currency})`
   String portfolioWithdrawableAmount(String currency) {
     return Intl.message(
-      'Withdrawable Amount ($currency)',
+      'Withdrawable Balance ($currency)',
       name: 'portfolioWithdrawableAmount',
       desc: '',
       args: [currency],
@@ -2813,6 +2813,16 @@ class S {
     );
   }
 
+  /// `Withdraw`
+  String get withdraw {
+    return Intl.message(
+      'Withdraw',
+      name: 'withdraw',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `relearn`
   String get relearn {
     return Intl.message(
@@ -2838,6 +2848,16 @@ class S {
     return Intl.message(
       'View Deposit Guide',
       name: 'viewDepositGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press back again to exit Asklora`
+  String get pressBackAgain {
+    return Intl.message(
+      'Press back again to exit Asklora',
+      name: 'pressBackAgain',
       desc: '',
       args: [],
     );

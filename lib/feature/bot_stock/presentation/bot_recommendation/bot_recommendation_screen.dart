@@ -18,7 +18,6 @@ import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/shimmer.dart';
-import '../../../../core/repository/transaction_repository.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../onboarding/ppi/presentation/ppi_screen.dart';
@@ -26,7 +25,6 @@ import '../../../tabs/for_you/for_you_screen_form.dart';
 import '../../../tabs/home/home_screen_form.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_model.dart';
-import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../widgets/custom_expansion_panel.dart';
 import 'detail/bot_recommendation_detail_screen.dart';
@@ -50,76 +48,62 @@ class BotRecommendationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        BotStockBloc botStockBloc = BotStockBloc(
-            botStockRepository: BotStockRepository(),
-            transactionRepository: TransactionRepository());
-        if (context.read<AppBloc>().state.userJourney ==
-            UserJourney.freeBotStock) {
-          botStockBloc.add(FetchFreeBotRecommendation());
-        } else {
-          botStockBloc.add(FetchBotRecommendation());
-        }
-        return botStockBloc;
-      },
-      child: CustomScaffold(
-          enableBackNavigation: enableBackNavigation,
-          backgroundColor: AskLoraColors.white,
-          body: Padding(
-            padding: EdgeInsets.only(top: enableBackNavigation ? 70 : 20),
-            child: BlocBuilder<BotStockBloc, BotStockState>(
-              buildWhen: (previous, current) =>
-                  previous.botRecommendationResponse !=
-                  current.botRecommendationResponse,
-              builder: (context, state) => CustomLayoutWithBlurPopUp(
-                loraPopUpMessageModel: LoraPopUpMessageModel(
-                  title: S.of(context).errorGettingInformationTitle,
-                  subTitle: S
-                      .of(context)
-                      .errorGettingInformationInvestmentDetailSubTitle,
-                  primaryButtonLabel: S.of(context).buttonReloadPage,
-                  onSecondaryButtonTap: () => Navigator.pop(context),
-                  onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
+    return CustomScaffold(
+        enableBackNavigation: enableBackNavigation,
+        backgroundColor: AskLoraColors.white,
+        body: Padding(
+          padding: EdgeInsets.only(top: enableBackNavigation ? 70 : 20),
+          child: BlocBuilder<BotStockBloc, BotStockState>(
+            buildWhen: (previous, current) =>
+                previous.botRecommendationResponse !=
+                current.botRecommendationResponse,
+            builder: (context, state) => CustomLayoutWithBlurPopUp(
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                title: S.of(context).errorGettingInformationTitle,
+                subTitle: S
+                    .of(context)
+                    .errorGettingInformationInvestmentDetailSubTitle,
+                primaryButtonLabel: S.of(context).buttonReloadPage,
+                onSecondaryButtonTap: () => Navigator.pop(context),
+                onPrimaryButtonTap: () => UserJourney.onAlreadyPassed(
+                    context: context,
+                    target: UserJourney.freeBotStock,
+                    onTrueCallback: () => context
+                        .read<BotStockBloc>()
+                        .add(FetchBotRecommendation()),
+                    onFalseCallback: () => context
+                        .read<BotStockBloc>()
+                        .add(FetchFreeBotRecommendation())),
+              ),
+              showPopUp:
+                  state.botRecommendationResponse.state == ResponseState.error,
+              content: ListView(
+                padding: const EdgeInsets.only(bottom: 35),
+                children: [
+                  _header(
                       context: context,
-                      target: UserJourney.freeBotStock,
-                      onTrueCallback: () => context
-                          .read<BotStockBloc>()
-                          .add(FetchBotRecommendation()),
-                      onFalseCallback: () => context
-                          .read<BotStockBloc>()
-                          .add(FetchFreeBotRecommendation())),
-                ),
-                showPopUp: state.botRecommendationResponse.state ==
-                    ResponseState.error,
-                content: ListView(
-                  padding: const EdgeInsets.only(bottom: 35),
-                  children: [
-                    _header(
-                        context: context,
-                        userJourney: context.read<AppBloc>().state.userJourney),
-                    BotRecommendationList(
-                      verticalMargin: 14,
-                      botStockState: state,
-                    ),
-                    if (UserJourney.compareUserJourney(
-                        context: context, target: UserJourney.freeBotStock))
-                      _loraMemojiWidget(context),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    const BotRecommendationFaq(),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    const UnconstrainedBox(
-                        child: HomeScreenNeedHelpButtonWidget())
-                  ],
-                ),
+                      userJourney: context.read<AppBloc>().state.userJourney),
+                  BotRecommendationList(
+                    verticalMargin: 14,
+                    botStockState: state,
+                  ),
+                  if (UserJourney.compareUserJourney(
+                      context: context, target: UserJourney.freeBotStock))
+                    _loraMemojiWidget(context),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const BotRecommendationFaq(),
+                  const SizedBox(
+                    height: 28,
+                  ),
+                  const UnconstrainedBox(
+                      child: HomeScreenNeedHelpButtonWidget())
+                ],
               ),
             ),
-          )),
-    );
+          ),
+        ));
   }
 
   Widget _header(

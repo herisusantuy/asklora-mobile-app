@@ -11,7 +11,7 @@ import '../../../../../../../core/presentation/text_fields/master_text_field.dar
 import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../../generated/l10n.dart';
-import '../../../../../../tabs/tabs_screen.dart';
+import '../../../../../../tabs/presentation/tab_screen.dart';
 import '../../../../bloc/kyc_bloc.dart';
 import '../../../../bloc/personal_info/personal_info_bloc.dart';
 import '../../../widgets/kyc_base_form.dart';
@@ -84,7 +84,7 @@ class OtpScreen extends StatelessWidget {
             primaryButtonOnClick: () =>
                 context.read<OtpBloc>().add(const OtpRequested()),
             secondaryButtonOnClick: () =>
-                TabsScreen.openAndRemoveAllRoute(context),
+                TabScreen.openAndRemoveAllRoute(context),
             primaryButtonLabel: state.disableRequest
                 ? 'REQUEST ANOTHER OTP IN ${_formatTimeMMSS(state.resetTime)}'
                 : 'RESEND OTP CODE',

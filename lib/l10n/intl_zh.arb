@@ -339,6 +339,7 @@
   "withdrawalWorkingDays": "提取款項最多需時2個工作天。",
   "withdrawalRequestSubmittedTitle": "已收到提取申請",
   "withdrawalRequestSubmittedSubTitle": "當資金已繳付至你戶口後，我們會盡快透過電郵或應用程式通知。",
+  "withdraw": "提取資金",
   "relearn": "再次學習",
   "min": " ~{minute} 分鐘",
   "@min": {
@@ -348,5 +349,6 @@
       }
     }
   },
-  "viewDepositGuide": "查看入金提示"
+  "viewDepositGuide": "查看入金提示",
+  "pressBackAgain": "再按一次登出Asklora"
 }

@@ -322,6 +322,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m12,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
+        "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
         "prevClose": MessageLookupByLibrary.simpleMessage("上日收市"),
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
@@ -386,6 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("AI 全自動交易"),
         "welcomeScreenTitle":
             MessageLookupByLibrary.simpleMessage("投資，你夠 Fit 未？"),
+        "withdraw": MessageLookupByLibrary.simpleMessage("提取資金"),
         "withdrawalAmount": MessageLookupByLibrary.simpleMessage("提取金額"),
         "withdrawalRequestSubmittedSubTitle":
             MessageLookupByLibrary.simpleMessage(

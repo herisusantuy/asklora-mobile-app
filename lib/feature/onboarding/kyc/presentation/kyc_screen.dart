@@ -10,7 +10,7 @@ import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../auth/otp/repository/otp_repository.dart';
-import '../../../tabs/tabs_screen.dart';
+import '../../../tabs/presentation/tab_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';
 import '../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../bloc/financial_profile/financial_profile_bloc.dart';
@@ -136,7 +136,7 @@ class KycScreen extends StatelessWidget {
                       .show(state.saveKycResponse.state);
 
                   if (state.saveKycResponse.state == ResponseState.success) {
-                    TabsScreen.openAndRemoveAllRoute(context);
+                    TabScreen.openAndRemoveAllRoute(context);
                   } else if (state.saveKycResponse.state ==
                       ResponseState.error) {
                     CustomInAppNotification.show(
@@ -278,8 +278,6 @@ class KycScreen extends StatelessWidget {
         });
   }
 
-  static void open(BuildContext context) => Navigator.pushNamed(
-        context,
-        route,
-      );
+  static void open(BuildContext context) =>
+      Navigator.of(context, rootNavigator: true).pushNamed(route);
 }

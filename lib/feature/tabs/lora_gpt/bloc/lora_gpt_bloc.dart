@@ -24,6 +24,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     on<OnScreenLaunch>(_onScreenLaunch);
     on<OnResetSession>(_onResetSession);
     on<OnFinishTyping>(_onFinishTyping);
+    on<ShowOverLayScreen>(_onShowOverlayWidget);
   }
 
   final LoraGptRepository _loraGptRepository;
@@ -92,4 +93,9 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
   void _onFinishTyping(
           OnFinishTyping onFinishTyping, Emitter<LoraGptState> emit) =>
       emit(state.copyWith(status: ResponseState.unknown, isTyping: false));
+
+  void _onShowOverlayWidget(
+          ShowOverLayScreen onShowOverLayScreen, Emitter<LoraGptState> emit) =>
+      emit(state.copyWith(
+          shouldShowOverlay: onShowOverLayScreen.shouldShowOverlayScreen));
 }

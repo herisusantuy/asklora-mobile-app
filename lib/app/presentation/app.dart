@@ -10,7 +10,7 @@ import '../../core/utils/route_generator.dart';
 import '../../core/utils/storage/secure_storage.dart';
 import '../../core/utils/storage/shared_preference.dart';
 import '../../feature/onboarding/welcome/welcome_screen.dart';
-import '../../feature/tabs/tabs_screen.dart';
+import '../../feature/tabs/presentation/tab_screen.dart';
 import '../../generated/l10n.dart';
 import '../bloc/app_bloc.dart';
 import '../repository/user_journey_repository.dart';
@@ -91,7 +91,7 @@ class App extends StatelessWidget {
   Widget _getBody(AppState state) {
     switch (state.status) {
       case AppStatus.authenticated:
-        return const TabsScreen();
+        return const TabScreen();
       case AppStatus.unauthenticated:
         return const WelcomeScreen();
       case AppStatus.unknown:

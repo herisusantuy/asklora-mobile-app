@@ -10,7 +10,7 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../tabs/tabs_screen.dart';
+import '../../../../tabs/presentation/tab_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
@@ -245,7 +245,7 @@ class TaxAgreementScreen extends StatelessWidget {
                 .add(const PageChanged(KycPageStep.kycSummary)),
             disablePrimaryButton: state.disableAgreeButton(),
             secondaryButtonOnClick: () =>
-                TabsScreen.openAndRemoveAllRoute(context),
+                TabScreen.openAndRemoveAllRoute(context),
             primaryButtonLabel: 'Agree',
             secondaryButtonLabel: 'Continue Later',
           );

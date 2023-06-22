@@ -49,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m11(currency) => "Total Botstock Values (${currency})";
 
-  static String m12(currency) => "Withdrawable Amount (${currency})";
+  static String m12(currency) => "Withdrawable Balance (${currency})";
 
   static String m13(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";
@@ -430,6 +430,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "portfolioWithdrawableAmount": m12,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
+        "pressBackAgain": MessageLookupByLibrary.simpleMessage(
+            "Press back again to exit Asklora"),
         "prevClose": MessageLookupByLibrary.simpleMessage("Prev Close"),
         "privacyEvaluation":
             MessageLookupByLibrary.simpleMessage("Privacy Evaluation"),
@@ -529,6 +531,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Automated trading strategies"),
         "welcomeScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Get your Investments in Shape"),
+        "withdraw": MessageLookupByLibrary.simpleMessage("Withdraw"),
         "withdrawalAmount":
             MessageLookupByLibrary.simpleMessage("Withdrawal Amount"),
         "withdrawalRequestSubmittedSubTitle": MessageLookupByLibrary.simpleMessage(

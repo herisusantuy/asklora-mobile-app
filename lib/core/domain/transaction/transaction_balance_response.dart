@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../styles/asklora_colors.dart';
 import '../../utils/extensions.dart';
 
 part 'transaction_balance_response.g.dart';
@@ -73,6 +76,12 @@ class TransactionBalanceResponse extends Equatable {
 
   String get totalPnLStr =>
       totalPnLPct != 0 ? '${totalPnLPct.convertToCurrencyDecimal()}%' : '/';
+
+  Color get totalPnLColor => totalPnLPct == 0
+      ? AskLoraColors.charcoal
+      : totalPnLPct > 0
+          ? AskLoraColors.primaryGreen
+          : AskLoraColors.primaryMagenta;
 
   @override
   List<Object> get props => [

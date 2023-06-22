@@ -16,16 +16,12 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
-import '../../../../../core/utils/storage/shared_preference.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../onboarding/ppi/bloc/response/user_response_bloc.dart';
 import '../../../../onboarding/ppi/domain/question.dart';
 import '../../../../onboarding/ppi/presentation/widget/omni_search_question_widget/omni_search_question_widget.dart';
 import '../../../../onboarding/ppi/presentation/widget/question_title.dart';
-import '../../../../onboarding/ppi/repository/ppi_question_repository.dart';
-import '../../../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../../../onboarding/ppi/utils/ppi_utils.dart';
 import '../../bloc/for_you_bloc.dart';
 import '../../for_you_screen_form.dart';
@@ -40,87 +36,68 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => ForYouQuestionBloc(
-              ppiQuestionRepository: PpiQuestionRepository(),
-              sharedPreference: SharedPreference())
-            ..add(LoadQuestion()),
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<ForYouQuestionBloc, ForYouQuestionState>(
+          listenWhen: (previous, current) =>
+              previous.response.state != current.response.state,
+          listener: _investmentStyleQuestionListener,
         ),
-        BlocProvider(
-            create: (_) => UserResponseBloc(
-                sharedPreference: SharedPreference(),
-                ppiResponseRepository: PpiResponseRepository(),
-                jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
+        BlocListener<UserResponseBloc, UserResponseState>(
+          listenWhen: (previous, current) =>
+              previous.responseState != current.responseState ||
+              previous.ppiResponseState != current.ppiResponseState,
+          listener: _userResponseListener,
+        ),
       ],
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<ForYouQuestionBloc, ForYouQuestionState>(
-            listenWhen: (previous, current) =>
-                previous.response.state != current.response.state,
-            listener: _investmentStyleQuestionListener,
+      child: BlocBuilder<ForYouQuestionBloc, ForYouQuestionState>(
+        buildWhen: (previous, current) => previous.response != current.response,
+        builder: (context, investmentStyleQuestionState) =>
+            CustomLayoutWithBlurPopUp(
+          loraPopUpMessageModel: LoraPopUpMessageModel(
+            title: S.of(context).errorGettingInformationTitle,
+            subTitle: S
+                .of(context)
+                .errorGettingInformationInvestmentStyleQuestionSubTitle,
+            primaryButtonLabel: S.of(context).buttonReloadPage,
+            onPrimaryButtonTap: () =>
+                context.read<ForYouQuestionBloc>().add(LoadQuestion()),
           ),
-          BlocListener<UserResponseBloc, UserResponseState>(
-            listenWhen: (previous, current) =>
-                previous.responseState != current.responseState ||
-                previous.ppiResponseState != current.ppiResponseState,
-            listener: _userResponseListener,
-          ),
-        ],
-        child: BlocBuilder<ForYouQuestionBloc, ForYouQuestionState>(
-          buildWhen: (previous, current) =>
-              previous.response != current.response,
-          builder: (context, investmentStyleQuestionState) =>
-              CustomLayoutWithBlurPopUp(
-            loraPopUpMessageModel: LoraPopUpMessageModel(
-              title: S.of(context).errorGettingInformationTitle,
-              subTitle: S
-                  .of(context)
-                  .errorGettingInformationInvestmentStyleQuestionSubTitle,
-              primaryButtonLabel: S.of(context).buttonReloadPage,
-              onPrimaryButtonTap: () =>
-                  context.read<ForYouQuestionBloc>().add(LoadQuestion()),
-            ),
-            showPopUp: investmentStyleQuestionState.response.state ==
-                ResponseState.error,
-            content: investmentStyleQuestionState.response.state ==
-                    ResponseState.success
-                ? Padding(
-                    padding: AppValues.screenHorizontalPadding,
-                    child: BlocProvider(
-                      create: (_) =>
-                          NavigationBloc<InvestmentStyleQuestionType>(
-                              investmentStyleQuestionState
-                                          .response.data!.left !=
-                                      null
-                                  ? InvestmentStyleQuestionType.omnisearch
-                                  : InvestmentStyleQuestionType.others),
-                      child: BlocBuilder<
-                          NavigationBloc<InvestmentStyleQuestionType>,
-                          NavigationState<InvestmentStyleQuestionType>>(
-                        builder: (context, navigationState) {
-                          return Column(
-                            children: [
-                              CustomLinearProgressIndicator(
-                                padding: const EdgeInsets.only(
-                                    left: 10, top: 10, bottom: 10, right: 2),
-                                progress: navigationState.page ==
-                                        InvestmentStyleQuestionType.omnisearch
-                                    ? 0.5
-                                    : 1,
-                              ),
-                              Expanded(
-                                  child: _pages(navigationState.page,
-                                      investmentStyleQuestionState))
-                            ],
-                          );
-                        },
-                      ),
+          showPopUp: investmentStyleQuestionState.response.state ==
+              ResponseState.error,
+          content: investmentStyleQuestionState.response.state ==
+                  ResponseState.success
+              ? Padding(
+                  padding: AppValues.screenHorizontalPadding,
+                  child: BlocProvider(
+                    create: (_) => NavigationBloc<InvestmentStyleQuestionType>(
+                        investmentStyleQuestionState.response.data!.left != null
+                            ? InvestmentStyleQuestionType.omnisearch
+                            : InvestmentStyleQuestionType.others),
+                    child: BlocBuilder<
+                        NavigationBloc<InvestmentStyleQuestionType>,
+                        NavigationState<InvestmentStyleQuestionType>>(
+                      builder: (context, navigationState) {
+                        return Column(
+                          children: [
+                            CustomLinearProgressIndicator(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 10, bottom: 10, right: 2),
+                              progress: navigationState.page ==
+                                      InvestmentStyleQuestionType.omnisearch
+                                  ? 0.5
+                                  : 1,
+                            ),
+                            Expanded(
+                                child: _pages(navigationState.page,
+                                    investmentStyleQuestionState))
+                          ],
+                        );
+                      },
                     ),
-                  )
-                : const SizedBox.shrink(),
-          ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ),
       ),
     );
