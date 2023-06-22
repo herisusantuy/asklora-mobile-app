@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../app/bloc/app_bloc.dart';
 import '../../../core/domain/base_response.dart';
-import '../../../core/presentation/custom_in_app_notification.dart';
 import '../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -22,12 +22,13 @@ import '../../onboarding/ppi/bloc/response/user_response_bloc.dart';
 import '../../onboarding/ppi/repository/ppi_question_repository.dart';
 import '../../onboarding/ppi/repository/ppi_response_repository.dart';
 import '../../settings/bloc/account_information/account_information_bloc.dart';
+import '../../tabs/bloc/tab_screen_bloc.dart';
 import '../../tabs/for_you/bloc/for_you_bloc.dart';
 import '../../tabs/for_you/for_you_screen_form.dart';
 import '../../tabs/for_you/investment_style/bloc/for_you_question_bloc.dart';
 import '../../tabs/for_you/repository/for_you_repository.dart';
 import '../../tabs/home/home_screen_form.dart';
-import '../../tabs/bloc/tab_screen_bloc.dart';
+import '../lora_gpt/presentation/lora_gpt_screen.dart';
 
 part 'widgets/tab_pages.dart';
 
