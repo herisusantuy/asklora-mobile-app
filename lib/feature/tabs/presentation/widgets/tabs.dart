@@ -57,11 +57,14 @@ class Tabs extends StatelessWidget {
           required String iconAsset,
           required String activeIconAsset,
           bool active = false,
-          double size = 28}) =>
+          double size = 28,
+          double clickAreaSize = 40}) =>
       GestureDetector(
         onTap: onTap,
-        child: SizedBox(
-          width: size,
+        child: Container(
+          color: AskLoraColors.white,
+          width: clickAreaSize,
+          height: clickAreaSize,
           child: getSvgIcon(
             active ? activeIconAsset : iconAsset,
             height: size,
@@ -74,14 +77,16 @@ class Tabs extends StatelessWidget {
           required String iconAsset,
           required String activeIconAsset,
           bool active = false,
-          double size = 28}) =>
+          double size = 28,
+          double clickAreaSize = 40}) =>
       GestureDetector(
         onTap: onTap,
-        child: SizedBox(
-          width: size,
-          height: size,
+        child: Container(
+          color: AskLoraColors.white,
+          width: clickAreaSize,
+          height: clickAreaSize,
           child: getPngIcon(active ? activeIconAsset : iconAsset,
-              height: size, width: size, fit: BoxFit.contain),
+              height: size, width: size),
         ),
       );
 }
