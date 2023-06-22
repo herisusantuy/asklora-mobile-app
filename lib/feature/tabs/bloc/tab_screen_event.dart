@@ -13,3 +13,5 @@ class TabChanged extends TabScreenEvent {
 class AiButtonSelected extends TabScreenEvent {
   const AiButtonSelected();
 }
+
+class BackButtonClicked extends TabScreenEvent {}

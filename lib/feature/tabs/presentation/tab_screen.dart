@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/bloc/app_bloc.dart';
 import '../../../core/domain/base_response.dart';
+import '../../../core/presentation/custom_in_app_notification.dart';
 import '../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
@@ -110,11 +111,37 @@ class TabScreen extends StatelessWidget {
                           initialTabPage: state.response.data!.canTrade
                               ? TabPage.forYou
                               : TabPage.home),
-                      child: Column(
-                        children: [
-                          TabPages(canTrade: state.response.data!.canTrade),
-                          const Tabs(canTrade: true)
-                        ],
+                      child: BlocListener<TabScreenBloc, TabScreenState>(
+                        listenWhen: (previous, current) =>
+                            previous.tabScreenBackState !=
+                            current.tabScreenBackState,
+                        listener: (context, state) {
+                          if (state.tabScreenBackState ==
+                              TabScreenBackState.openConfirmation) {
+                            CustomInAppNotification.show(
+                                context, 'Please click BACK again to exit');
+                          } else if (state.tabScreenBackState ==
+                              TabScreenBackState.closeApp) {
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Builder(
+                          builder: (context) => WillPopScope(
+                            onWillPop: () async {
+                              context
+                                  .read<TabScreenBloc>()
+                                  .add(BackButtonClicked());
+                              return false;
+                            },
+                            child: Column(
+                              children: [
+                                TabPages(
+                                    canTrade: state.response.data!.canTrade),
+                                const Tabs(canTrade: true)
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     )
                   : const SizedBox.shrink(),
