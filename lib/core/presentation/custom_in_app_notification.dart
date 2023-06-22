@@ -7,6 +7,7 @@ import '../styles/asklora_text_styles.dart';
 import '../utils/app_icons.dart';
 import 'custom_text_new.dart';
 
+///TODO : LATER DIVERSIFY TYPE BY SOMETHING MORE RELEVANT
 enum PopupType {
   pink,
   grey,
