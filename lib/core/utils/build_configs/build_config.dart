@@ -30,10 +30,10 @@ class Environment {
 
 class DevConfig implements BaseConfig {
   @override
-  String get ppiBaseUrl => 'http://192.168.100.224:8005/';
+  String get ppiBaseUrl => 'https://ppi-dev.intra.asklora.ai/';
 
   @override
-  String get askLoraApiBaseUrl => 'http://192.168.100.224:8002/';
+  String get askLoraApiBaseUrl => 'https://dev-apca.intra.asklora.ai/';
 
   @override
   String get streamServiceBaseUrl => 'wss://apca.services.asklora.ai/';
