@@ -120,7 +120,8 @@ class TabScreen extends StatelessWidget {
                           if (state.tabScreenBackState ==
                               TabScreenBackState.openConfirmation) {
                             CustomInAppNotification.show(
-                                context, 'Please click BACK again to exit');
+                                context, S.of(context).pressBackAgain,
+                                type: PopupType.grey);
                           } else if (state.tabScreenBackState ==
                               TabScreenBackState.closeApp) {
                             SystemNavigator.pop();

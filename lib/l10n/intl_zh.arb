@@ -349,5 +349,6 @@
       }
     }
   },
-  "viewDepositGuide": "查看入金提示"
+  "viewDepositGuide": "查看入金提示",
+  "pressBackAgain": "再按一次登出Asklora"
 }
