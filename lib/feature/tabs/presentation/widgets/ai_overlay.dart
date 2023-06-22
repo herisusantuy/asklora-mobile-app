@@ -16,16 +16,20 @@ class AiOverlay extends StatefulWidget {
 
 class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
   double _drawerBottom = double.infinity;
-  late Animation<double> animation;
-  late AnimationController controller;
+  Animation<double>? _animation;
+  AnimationController? _controller;
   final Duration openAndCloseAnimationDuration =
       const Duration(milliseconds: 250);
   final Duration dragAnimationDuration = const Duration(milliseconds: 100);
 
   @override
   void dispose() {
-    animation.removeListener(() {});
-    controller.dispose();
+    if (_animation != null) {
+      _animation!.removeListener(() {});
+    }
+    if (_controller != null) {
+      _controller!.dispose();
+    }
     super.dispose();
   }
 
@@ -55,68 +59,69 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
       );
 
   void _openAiOverlay() {
-    controller = AnimationController(
+    _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);
-    animation = animation = Tween<double>(begin: 0, end: 1).animate(controller)
+    _animation = Tween<double>(begin: 0, end: 1).animate(_controller!)
       ..addListener(() {
         setState(() {
-          _drawerBottom = widget.maxHeight - animation.value * widget.maxHeight;
+          _drawerBottom =
+              widget.maxHeight - _animation!.value * widget.maxHeight;
         });
       });
-    controller.forward();
+    _controller!.forward();
   }
 
   void _closeAiOverlay() {
     final double startingPoint = _drawerBottom;
-    controller = AnimationController(
+    _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);
-    animation = Tween<double>(begin: 1, end: 0).animate(controller)
+    _animation = Tween<double>(begin: 1, end: 0).animate(_controller!)
       ..addListener(() {
         setState(() {
           _drawerBottom = widget.maxHeight -
-              animation.value * (widget.maxHeight - startingPoint);
+              _animation!.value * (widget.maxHeight - startingPoint);
         });
 
         ///do something on close animation ends
-        if (animation.value == 0) {
+        if (_animation!.value == 0) {
           _onClosed();
         }
       });
-    controller.forward();
+    _controller!.forward();
   }
 
   void _onDragExceedHalfOfScreen() {
     ///animation will pull down to bottom (close)
     final double startingPoint = _drawerBottom;
-    controller =
+    _controller =
         AnimationController(duration: dragAnimationDuration, vsync: this);
-    animation = Tween<double>(begin: 1, end: 0).animate(controller)
+    _animation = Tween<double>(begin: 1, end: 0).animate(_controller!)
       ..addListener(() {
         setState(() {
           _drawerBottom = widget.maxHeight -
-              animation.value * (widget.maxHeight - startingPoint);
+              _animation!.value * (widget.maxHeight - startingPoint);
         });
 
         ///do something on close animation ends
-        if (animation.value == 0) {
+        if (_animation!.value == 0) {
           _onClosed();
         }
       });
-    controller.forward();
+    _controller!.forward();
   }
 
   void _onDragBelowHalfOfScreen() {
     ///animation will pull up to top
     final double startingPoint = _drawerBottom;
-    controller =
+    _controller =
         AnimationController(duration: dragAnimationDuration, vsync: this);
-    animation = Tween<double>(begin: 0, end: 1).animate(controller)
+    _animation = Tween<double>(begin: 0, end: 1).animate(_controller!)
       ..addListener(() {
         setState(() {
-          _drawerBottom = startingPoint - startingPoint * animation.value;
+          _drawerBottom = startingPoint - startingPoint * _animation!.value;
         });
       });
-    controller.forward();
+    _controller!.forward();
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
