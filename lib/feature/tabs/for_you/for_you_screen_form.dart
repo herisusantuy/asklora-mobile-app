@@ -29,30 +29,33 @@ class ForYouScreenForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppBloc, AppState>(
-        buildWhen: (previous, current) =>
-            previous.userJourney != current.userJourney,
-        builder: (context, state) {
-          if (state.userJourney == UserJourney.investmentStyle ||
-              state.userJourney == UserJourney.kyc ||
-              state.userJourney == UserJourney.freeBotStock) {
-            final LoraPopUpMessageModel loraPopUpMessageModel =
-                _getLoraPopUpMessageModel(context, state.userJourney);
-            return BotStockBackgroundWithPopUp(
-                shouldScrollable: false,
-                header: CustomTextNew(
-                  'Investments for you, by you',
-                  style: AskLoraTextStyles.h2
-                      .copyWith(color: AskLoraColors.charcoal),
-                ),
-                popUpTitle: loraPopUpMessageModel.title,
-                popUpSubTitle: loraPopUpMessageModel.subTitle,
-                popUpButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
-                onPopUpButtonTap: loraPopUpMessageModel.onPrimaryButtonTap);
-          } else {
-            return _getForYouPage;
-          }
-        });
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: BlocBuilder<AppBloc, AppState>(
+          buildWhen: (previous, current) =>
+              previous.userJourney != current.userJourney,
+          builder: (context, state) {
+            if (state.userJourney == UserJourney.investmentStyle ||
+                state.userJourney == UserJourney.kyc ||
+                state.userJourney == UserJourney.freeBotStock) {
+              final LoraPopUpMessageModel loraPopUpMessageModel =
+                  _getLoraPopUpMessageModel(context, state.userJourney);
+              return BotStockBackgroundWithPopUp(
+                  shouldScrollable: false,
+                  header: CustomTextNew(
+                    'Investments for you, by you',
+                    style: AskLoraTextStyles.h2
+                        .copyWith(color: AskLoraColors.charcoal),
+                  ),
+                  popUpTitle: loraPopUpMessageModel.title,
+                  popUpSubTitle: loraPopUpMessageModel.subTitle,
+                  popUpButtonLabel: loraPopUpMessageModel.primaryButtonLabel,
+                  onPopUpButtonTap: loraPopUpMessageModel.onPrimaryButtonTap);
+            } else {
+              return _getForYouPage;
+            }
+          }),
+    );
   }
 
   Widget get _getForYouPage => BlocConsumer<ForYouBloc, ForYouState>(

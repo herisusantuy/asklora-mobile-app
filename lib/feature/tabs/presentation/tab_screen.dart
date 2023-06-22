@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/bloc/app_bloc.dart';
@@ -104,6 +105,7 @@ class TabScreen extends StatelessWidget {
                 previous.response.data != current.response.data ||
                 current.response.state == ResponseState.error,
             builder: (context, state) => CustomLayoutWithBlurPopUp(
+              showPopUp: state.response.state == ResponseState.error,
               content: state.response.data != null
                   ? BlocProvider(
                       create: (_) => TabScreenBloc(
@@ -121,7 +123,7 @@ class TabScreen extends StatelessWidget {
                                 context, 'Please click BACK again to exit');
                           } else if (state.tabScreenBackState ==
                               TabScreenBackState.closeApp) {
-                            Navigator.pop(context);
+                            SystemNavigator.pop();
                           }
                         },
                         child: Builder(
