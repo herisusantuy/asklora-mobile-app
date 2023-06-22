@@ -29,6 +29,7 @@ import '../../tabs/for_you/investment_style/bloc/for_you_question_bloc.dart';
 import '../../tabs/for_you/repository/for_you_repository.dart';
 import '../../tabs/home/home_screen_form.dart';
 import '../lora_gpt/presentation/lora_gpt_screen.dart';
+import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';
 
@@ -41,99 +42,96 @@ class TabScreen extends StatelessWidget {
   const TabScreen({this.initialTabPage, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) =>
-              AccountInformationBloc(accountRepository: AccountRepository())
-                ..add(GetAccountInformation()),
-        ),
-        BlocProvider(
-          create: (_) {
-            PortfolioBloc portfolioBloc = PortfolioBloc(
-              botStockRepository: BotStockRepository(),
-              transactionHistoryRepository: TransactionRepository(),
-            );
-
-            ///fetch portfolio when current UserJourney already passed freeBotStock
-            if (UserJourney.compareUserJourney(
-                context: context, target: UserJourney.freeBotStock)) {
-              portfolioBloc.add(const FetchActiveOrders());
-              portfolioBloc.add(FetchBalance());
-            }
-            return portfolioBloc;
-          },
-        ),
-        BlocProvider(
-          create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
-            ..add(GetInvestmentStyleState()),
-        ),
-        BlocProvider(
-          create: (_) {
-            BotStockBloc botStockBloc = BotStockBloc(
+  Widget build(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) =>
+                AccountInformationBloc(accountRepository: AccountRepository())
+                  ..add(GetAccountInformation()),
+          ),
+          BlocProvider(
+            create: (_) {
+              PortfolioBloc portfolioBloc = PortfolioBloc(
                 botStockRepository: BotStockRepository(),
-                transactionRepository: TransactionRepository());
-            if (context.read<AppBloc>().state.userJourney ==
-                UserJourney.freeBotStock) {
-              botStockBloc.add(FetchFreeBotRecommendation());
-            } else {
-              botStockBloc.add(FetchBotRecommendation());
-            }
-            return botStockBloc;
-          },
-        ),
-        BlocProvider(
-          create: (_) => ForYouQuestionBloc(
-              ppiQuestionRepository: PpiQuestionRepository(),
-              sharedPreference: SharedPreference())
-            ..add(LoadQuestion()),
-        ),
-        BlocProvider(
-            create: (_) => UserResponseBloc(
-                sharedPreference: SharedPreference(),
-                ppiResponseRepository: PpiResponseRepository(),
-                jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
-      ],
-      child: CustomScaffold(
-        enableBackNavigation: false,
-        body: BlocConsumer<AccountInformationBloc, AccountInformationState>(
-          listener: (context, state) =>
-              CustomLoadingOverlay(context).show(state.response.state),
-          buildWhen: (previous, current) =>
-              previous.response.data != current.response.data ||
-              current.response.state == ResponseState.error,
-          builder: (context, state) => CustomLayoutWithBlurPopUp(
-            showPopUp: state.response.state == ResponseState.error,
-            content: state.response.data != null
-                ? BlocProvider(
-                    create: (_) => TabScreenBloc(
-                        initialTabPage: state.response.data!.canTrade
-                            ? TabPage.forYou
-                            : TabPage.home),
-                    child: Column(
-                      children: [
-                        const TabPages(),
-                        Tabs(canTrade: state.response.data!.canTrade)
-                      ],
-                    ),
-                  )
-                : const SizedBox.shrink(),
+                transactionHistoryRepository: TransactionRepository(),
+              );
 
-            ///TODO : IMPLEMENT THE RIGHT COPYWRITING LATER
-            loraPopUpMessageModel: LoraPopUpMessageModel(
-                title: S.of(context).errorGettingInformationTitle,
-                subTitle:
-                    S.of(context).errorGettingInformationPortfolioSubTitle,
-                primaryButtonLabel: S.of(context).buttonReloadPage,
-                onPrimaryButtonTap: () => context
-                    .read<AccountInformationBloc>()
-                    .add(GetAccountInformation())),
+              ///fetch portfolio when current UserJourney already passed freeBotStock
+              if (UserJourney.compareUserJourney(
+                  context: context, target: UserJourney.freeBotStock)) {
+                portfolioBloc.add(const FetchActiveOrders());
+                portfolioBloc.add(FetchBalance());
+              }
+              return portfolioBloc;
+            },
+          ),
+          BlocProvider(
+            create: (_) => ForYouBloc(forYouRepository: ForYouRepository())
+              ..add(GetInvestmentStyleState()),
+          ),
+          BlocProvider(
+            create: (_) {
+              BotStockBloc botStockBloc = BotStockBloc(
+                  botStockRepository: BotStockRepository(),
+                  transactionRepository: TransactionRepository());
+              if (context.read<AppBloc>().state.userJourney ==
+                  UserJourney.freeBotStock) {
+                botStockBloc.add(FetchFreeBotRecommendation());
+              } else {
+                botStockBloc.add(FetchBotRecommendation());
+              }
+              return botStockBloc;
+            },
+          ),
+          BlocProvider(
+            create: (_) => ForYouQuestionBloc(
+                ppiQuestionRepository: PpiQuestionRepository(),
+                sharedPreference: SharedPreference())
+              ..add(LoadQuestion()),
+          ),
+          BlocProvider(
+              create: (_) => UserResponseBloc(
+                  sharedPreference: SharedPreference(),
+                  ppiResponseRepository: PpiResponseRepository(),
+                  jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
+        ],
+        child: CustomScaffold(
+          enableBackNavigation: false,
+          body: BlocConsumer<AccountInformationBloc, AccountInformationState>(
+            listener: (context, state) =>
+                CustomLoadingOverlay(context).show(state.response.state),
+            buildWhen: (previous, current) =>
+                previous.response.data != current.response.data ||
+                current.response.state == ResponseState.error,
+            builder: (context, state) => CustomLayoutWithBlurPopUp(
+              content: state.response.data != null
+                  ? BlocProvider(
+                      create: (_) => TabScreenBloc(
+                          initialTabPage: state.response.data!.canTrade
+                              ? TabPage.forYou
+                              : TabPage.home),
+                      child: Column(
+                        children: [
+                          TabPages(canTrade: state.response.data!.canTrade),
+                          const Tabs(canTrade: true)
+                        ],
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+
+              ///TODO : IMPLEMENT THE RIGHT COPYWRITING LATER
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle:
+                      S.of(context).errorGettingInformationPortfolioSubTitle,
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  onPrimaryButtonTap: () => context
+                      .read<AccountInformationBloc>()
+                      .add(GetAccountInformation())),
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   static void openAndRemoveAllRoute(BuildContext context,
           {TabPage? initialTabPage}) =>

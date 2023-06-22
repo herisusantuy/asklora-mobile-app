@@ -1,25 +1,40 @@
 part of '../tab_screen.dart';
 
 class TabPages extends StatelessWidget {
-  const TabPages({super.key});
+  final bool canTrade;
+
+  const TabPages({required this.canTrade, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: BlocBuilder<TabScreenBloc, TabScreenState>(
-        buildWhen: (previous, current) =>
-            previous.currentTabPage != current.currentTabPage,
-        builder: (context, state) {
-          switch (state.currentTabPage) {
-            case TabPage.home:
-              return _navigatorPage(HomeScreenForm.route);
-            case TabPage.forYou:
-              return _navigatorPage(ForYouScreenForm.route);
-            case TabPage.portfolio:
-              return _navigatorPage(PortfolioScreen.route, arguments: context);
-          }
-        },
-      ),
+      child: LayoutBuilder(builder: (context, constraints) {
+        return Stack(
+          children: [
+            BlocBuilder<TabScreenBloc, TabScreenState>(
+              buildWhen: (previous, current) =>
+                  previous.currentTabPage != current.currentTabPage,
+              builder: (context, state) {
+                switch (state.currentTabPage) {
+                  case TabPage.home:
+                    return _navigatorPage(HomeScreenForm.route);
+                  case TabPage.forYou:
+                    return _navigatorPage(ForYouScreenForm.route);
+                  case TabPage.portfolio:
+                    return _navigatorPage(PortfolioScreen.route,
+                        arguments: context);
+                }
+              },
+            ),
+            canTrade
+                ? AiOverlay(
+                    maxHeight: constraints.maxHeight,
+                    maxWidth: constraints.maxWidth,
+                  )
+                : const SizedBox.shrink()
+          ],
+        );
+      }),
     );
   }
 

@@ -14,7 +14,7 @@ class PortfolioBalance extends StatelessWidget {
       children: [
         _currencyDropdownButton(),
         const SizedBox(
-          height: 15,
+          height: 7,
         ),
         _totalPortfolioBalance(context, currencyType, data),
         const SizedBox(
@@ -30,12 +30,15 @@ class PortfolioBalance extends StatelessWidget {
   }
 
   Widget _currencyDropdownButton() {
-    return BlocBuilder<PortfolioBloc, PortfolioState>(
-      buildWhen: (previous, current) => previous.currency != current.currency,
-      builder: (context, state) => CurrencyDropdown(
-        onChanged: (newValue) =>
-            context.read<PortfolioBloc>().add(CurrencyChanged(newValue!)),
-        initialValue: state.currency,
+    return Container(
+      transform: Matrix4.translationValues(0, -8, 0),
+      child: BlocBuilder<PortfolioBloc, PortfolioState>(
+        buildWhen: (previous, current) => previous.currency != current.currency,
+        builder: (context, state) => CurrencyDropdown(
+          onChanged: (newValue) =>
+              context.read<PortfolioBloc>().add(CurrencyChanged(newValue!)),
+          initialValue: state.currency,
+        ),
       ),
     );
   }
