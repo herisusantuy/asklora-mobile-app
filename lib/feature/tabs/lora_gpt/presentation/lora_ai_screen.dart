@@ -28,18 +28,14 @@ class LoraAiScreen extends StatelessWidget {
   const LoraAiScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => LoraGptBloc(
-            loraGptRepository: LoraGptRepository(),
-            sharedPreference: SharedPreference())
-          ..add(const ShowOverLayScreen())
-          ..add(const OnScreenLaunch()),
-        child:
-            BlocBuilder<LoraGptBloc, LoraGptState>(builder: (context, state) {
-          return state.shouldShowOverlay
+  Widget build(BuildContext context) => BlocProvider(
+      create: (_) => LoraGptBloc(
+          loraGptRepository: LoraGptRepository(),
+          sharedPreference: SharedPreference())
+        ..add(const ShowOverLayScreen())
+        ..add(const OnScreenLaunch()),
+      child: BlocBuilder<LoraGptBloc, LoraGptState>(
+          builder: (context, state) => state.shouldShowOverlay
               ? const LoraAiOverlayScreen()
-              : const LoraGptScreen();
-        }));
-  }
+              : const LoraGptScreen()));
 }
