@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/bloc/app_bloc.dart';
@@ -122,7 +123,7 @@ class TabScreen extends StatelessWidget {
                                 context, 'Please click BACK again to exit');
                           } else if (state.tabScreenBackState ==
                               TabScreenBackState.closeApp) {
-                            Navigator.pop(context);
+                            SystemNavigator.pop();
                           }
                         },
                         child: Builder(
