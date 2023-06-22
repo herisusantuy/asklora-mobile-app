@@ -26,6 +26,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     on<CreateBotOrder>(_onCreateBotOrder);
     on<FetchBotDetail>(_onFetchBotDetail);
     on<TradeBotStockAmountChanged>(_onTradeBotStockAmountChanged);
+    on<InitBotTutorial>(_onInitBotTutorial);
   }
 
   final BotStockRepository _botStockRepository;
@@ -84,5 +85,9 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
   _onTradeBotStockAmountChanged(
       TradeBotStockAmountChanged event, Emitter<BotStockState> emit) async {
     emit(state.copyWith(botStockTradeAmount: event.amount));
+  }
+
+  _onInitBotTutorial(InitBotTutorial event, Emitter<BotStockState> emit) {
+    emit(state.copyWith(isTutorial: !event.isTutorial));
   }
 }
