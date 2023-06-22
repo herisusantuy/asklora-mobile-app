@@ -30,12 +30,12 @@ import '../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../settings/presentation/settings_screen.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../utils/bot_stock_utils.dart';
-import '../widgets/currency_dropdown.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
 import 'utils/portfolio_utils.dart';
 import 'widgets/bot_portfolio_pop_up.dart';
+import 'widgets/currency_toggle_button.dart';
 
 part 'widgets/bot_portfolio_card.dart';
 
