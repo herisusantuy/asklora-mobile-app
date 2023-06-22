@@ -24,6 +24,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    animation.removeListener(() {});
     controller.dispose();
     super.dispose();
   }
