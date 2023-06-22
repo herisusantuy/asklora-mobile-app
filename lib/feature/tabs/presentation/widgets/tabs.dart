@@ -13,13 +13,8 @@ class Tabs extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 14),
       child: BlocConsumer<TabScreenBloc, TabScreenState>(
           listenWhen: (_, current) => current.aiPageSelected,
-          listener: (context, state) {
-            // openTest(context);
-            test(context);
-            // CustomInAppNotification.show(context, 'this should open overlay AI');
-          },
+          listener: (context, state) => openAiBottomSheet(context),
           builder: (context, state) {
-            // currentPage = state.currentTabPage;
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -61,7 +56,7 @@ class Tabs extends StatelessWidget {
     );
   }
 
-  void test(BuildContext context) {
+  void openAiBottomSheet(BuildContext context) {
     Future<void> model = showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -70,22 +65,12 @@ class Tabs extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         builder: (context) => const LoraGptScreen());
 
-    model.then((value) => onAiClose(context));
+    model.then((value) => onAiBottomSheetClosed(context));
   }
 
-  void onAiClose(BuildContext context) {
+  void onAiBottomSheetClosed(BuildContext context) {
     final lastPage = context.read<TabScreenBloc>().state.currentTabPage;
-    Logger.log('Krishna is closeing...$lastPage');
     context.read<TabScreenBloc>().add(TabChanged(lastPage));
-  }
-
-  // FractionallySizedBox(
-  void openTest(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return const LoraGptScreen();
-        },
-        fullscreenDialog: true));
   }
 
   Widget _tabSvg(
