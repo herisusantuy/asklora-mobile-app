@@ -18,6 +18,7 @@ import '../../../../../core/presentation/we_create/custom_linear_progress_indica
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../bot_stock/bloc/bot_stock_bloc.dart';
 import '../../../../onboarding/ppi/bloc/response/user_response_bloc.dart';
 import '../../../../onboarding/ppi/domain/question.dart';
 import '../../../../onboarding/ppi/presentation/widget/omni_search_question_widget/omni_search_question_widget.dart';
@@ -132,6 +133,13 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
     if (state.ppiResponseState == PpiResponseState.dispatchResponse &&
         state.responseState == ResponseState.success) {
       context.read<ForYouBloc>().add(SaveInvestmentStyleState());
+      UserJourney.onAlreadyPassed(
+          context: context,
+          target: UserJourney.freeBotStock,
+          onTrueCallback: () =>
+              context.read<BotStockBloc>().add(FetchBotRecommendation()),
+          onFalseCallback: () =>
+              context.read<BotStockBloc>().add(FetchFreeBotRecommendation()));
       context
           .read<NavigationBloc<ForYouPage>>()
           .add(const PageChanged(ForYouPage.botRecommendation));
