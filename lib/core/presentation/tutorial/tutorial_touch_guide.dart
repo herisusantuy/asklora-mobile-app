@@ -59,11 +59,5 @@ class _TutorialTouchGuideState extends State<TutorialTouchGuide> {
         ),
       ),
     );
-
-    //   return Container(
-    //     height: 70,
-    //     width: 70,
-    //     child: getSvgIcon('icon_hand_touch_guide'),
-    //   );
   }
 }

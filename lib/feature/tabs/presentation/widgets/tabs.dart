@@ -31,13 +31,41 @@ class Tabs extends StatelessWidget {
                 active: state.currentTabPage == TabPage.forYou &&
                     !state.aiPageSelected),
             if (canTrade)
-              _tabPng(
-                  onTap: () => context
-                      .read<TabScreenBloc>()
-                      .add(const AiButtonSelected()),
-                  iconAsset: 'bottom_nav_ai',
-                  activeIconAsset: 'bottom_nav_ai_selected',
-                  active: state.aiPageSelected),
+              CustomShowcaseView(
+                globalKey: TutorialJourney.chatLoraTab,
+                onToolTipClick: () {
+                  ShowCaseWidget.of(context).next();
+                  context.read<TabScreenBloc>().add(const AiButtonSelected());
+                },
+                tooltipPosition: TooltipPosition.top,
+                targetBorderRadius: BorderRadius.circular(35),
+                tooltipWidget: Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                          text: 'If you’ve got ',
+                          style: AskLoraTextStyles.body1),
+                      TextSpan(
+                          text: 'any questions ',
+                          style: AskLoraTextStyles.subtitle2),
+                      TextSpan(
+                          text:
+                              'about your investment, tap this icon to summon your ',
+                          style: AskLoraTextStyles.body1),
+                      TextSpan(
+                          text: 'personal AI assistant Asklora! ',
+                          style: AskLoraTextStyles.subtitle2),
+                    ],
+                  ),
+                ),
+                child: _tabPng(
+                    onTap: () => context
+                        .read<TabScreenBloc>()
+                        .add(const AiButtonSelected()),
+                    iconAsset: 'bottom_nav_ai',
+                    activeIconAsset: 'bottom_nav_ai_selected',
+                    active: state.aiPageSelected),
+              ),
             _tabSvg(
                 onTap: () => context
                     .read<TabScreenBloc>()

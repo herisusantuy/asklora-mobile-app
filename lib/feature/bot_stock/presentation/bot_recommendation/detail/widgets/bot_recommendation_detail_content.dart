@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
+import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../../core/presentation/tutorial/show_case_view.dart';
+import '../../../../../../core/presentation/tutorial/Utils/tutorial.dart';
+import '../../../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
-import '../../../../bloc/bot_stock_bloc.dart';
+import '../../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
-import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
-import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import 'bot_price_level_indicator.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
@@ -27,15 +28,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
-  final GlobalKey firstTutorialKey;
-  final GlobalKey secondTutorialKey;
 
   const BotRecommendationDetailContent(
       {required this.botRecommendationModel,
       required this.botType,
       this.botDetailModel,
-      required this.firstTutorialKey,
-      required this.secondTutorialKey,
       Key? key})
       : super(key: key);
 
@@ -44,7 +41,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (context.read<BotStockBloc>().state.isTutorial)
+        if (!context.read<TabScreenBloc>().state.isTutorial)
           ..._botDetailsExpansionTile(context),
         if (botDetailModel != null)
           _detailedInformation(context, botDetailModel!),
@@ -213,9 +210,8 @@ class BotRecommendationDetailContent extends StatelessWidget {
           BuildContext context, BotRecommendationDetailModel botDetailModel) =>
       Container(
         padding: AppValues.screenHorizontalPadding,
-        transform: Matrix4.translationValues(0, 0, 10),
         child: CustomShowcaseView(
-          globalKey: firstTutorialKey,
+          globalKey: TutorialJourney.botDetails,
           onToolTipClick: () => ShowCaseWidget.of(context).next(),
           tooltipWidget: Text.rich(
             TextSpan(
@@ -230,6 +226,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BotPriceLevelIndicator(
                 stopLossPrice: botDetailModel.estStopLossPriceFormatted,
@@ -279,7 +276,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.fromLTRB(15, 32, 15, 0),
         child: CustomShowcaseView(
-          globalKey: secondTutorialKey,
+          globalKey: TutorialJourney.botChart,
           tooltipPosition: TooltipPosition.top,
           onToolTipClick: () => ShowCaseWidget.of(context).next(),
           tooltipWidget: Text.rich(
@@ -320,8 +317,30 @@ class BotRecommendationDetailContent extends StatelessWidget {
       return SizedBox(
         height: 300,
         child: Align(
-            alignment: Alignment.center,
-            child: Text(S.of(context).portfolioDetailChartEmptyMessage)),
+          alignment: Alignment.center,
+          child: CustomShowcaseView(
+            globalKey: TutorialJourney.botChart,
+            tooltipPosition: TooltipPosition.top,
+            onToolTipClick: () => ShowCaseWidget.of(context).next(),
+            tooltipWidget: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                      text: 'This interactive graph shows the Botstock’s past ',
+                      style: AskLoraTextStyles.body1),
+                  TextSpan(
+                      text: '2 weeks performance ',
+                      style: AskLoraTextStyles.subtitle2),
+                  TextSpan(
+                      text:
+                          'to give you a better idea of its trading potential!',
+                      style: AskLoraTextStyles.body1),
+                ],
+              ),
+            ),
+            child: Text(S.of(context).portfolioDetailChartEmptyMessage),
+          ),
+        ),
       );
     }
   }

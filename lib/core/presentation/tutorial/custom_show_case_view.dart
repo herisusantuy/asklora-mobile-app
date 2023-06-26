@@ -10,27 +10,33 @@ class CustomShowcaseView extends StatelessWidget {
   final Widget tooltipWidget;
   final VoidCallback? onToolTipClick;
   final TooltipPosition tooltipPosition;
+  final BorderRadius targetBorderRadius;
+  final EdgeInsets targetPadding;
   const CustomShowcaseView({
     Key? key,
     required this.globalKey,
-    required this.tooltipWidget,
     required this.child,
+    required this.tooltipWidget,
     this.onToolTipClick,
     this.tooltipPosition = TooltipPosition.bottom,
+    this.targetPadding = const EdgeInsets.all(10),
+    this.targetBorderRadius = const BorderRadius.all(Radius.circular(20)),
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Showcase.withWidget(
-      disableDefaultTargetGestures: true,
+      onTargetClick: () {},
       disableMovingAnimation: true,
       tooltipPosition: tooltipPosition,
       key: globalKey,
       overlayColor: Colors.black,
       overlayOpacity: 0.5,
-      targetPadding: const EdgeInsets.all(10),
-      width: MediaQuery.of(context).size.width,
+      targetPadding: targetPadding,
+      width: MediaQuery.of(context)
+          .size
+          .width, //* container width for tooltip widget
       height: 0,
-      targetBorderRadius: BorderRadius.circular(20),
+      targetBorderRadius: targetBorderRadius,
       container: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -38,7 +44,8 @@ class CustomShowcaseView extends StatelessWidget {
               margin: tooltipPosition == TooltipPosition.top
                   ? EdgeInsets.zero
                   : const EdgeInsets.only(top: 10),
-              width: MediaQuery.of(context).size.width - 30,
+              width: MediaQuery.of(context).size.width -
+                  30, //* width of tooltip widget
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               decoration: BoxDecoration(
                 color: AskLoraColors.lightGreen,

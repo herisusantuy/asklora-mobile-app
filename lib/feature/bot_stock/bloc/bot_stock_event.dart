@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'bot_stock_bloc.dart';
 
 abstract class BotStockEvent extends Equatable {
@@ -49,12 +48,4 @@ class FetchBotDetail extends BotStockEvent {
 
   @override
   List<Object> get props => [ticker, botId];
-}
-
-class InitBotTutorial extends BotStockEvent {
-  final bool isTutorial;
-  const InitBotTutorial(this.isTutorial);
-
-  @override
-  List<Object> get props => [isTutorial];
 }

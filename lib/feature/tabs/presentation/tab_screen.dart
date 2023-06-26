@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../app/bloc/app_bloc.dart';
 import '../../../core/domain/base_response.dart';
@@ -9,8 +10,11 @@ import '../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
+import '../../../core/presentation/tutorial/Utils/tutorial.dart';
+import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
+import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/route_generator.dart';
 import '../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
@@ -110,9 +114,10 @@ class TabScreen extends StatelessWidget {
               content: state.response.data != null
                   ? BlocProvider(
                       create: (_) => TabScreenBloc(
-                          initialTabPage: state.response.data!.canTrade
-                              ? TabPage.forYou
-                              : TabPage.home),
+                        initialTabPage: state.response.data!.canTrade
+                            ? TabPage.forYou
+                            : TabPage.home,
+                      ),
                       child: BlocListener<TabScreenBloc, TabScreenState>(
                         listenWhen: (previous, current) =>
                             previous.tabScreenBackState !=
@@ -128,20 +133,23 @@ class TabScreen extends StatelessWidget {
                             SystemNavigator.pop();
                           }
                         },
-                        child: Builder(
-                          builder: (context) => WillPopScope(
-                            onWillPop: () async {
-                              context
-                                  .read<TabScreenBloc>()
-                                  .add(BackButtonClicked());
-                              return false;
-                            },
-                            child: Column(
-                              children: [
-                                TabPages(
-                                    canTrade: state.response.data!.canTrade),
-                                const Tabs(canTrade: true)
-                              ],
+                        child: ShowCaseWidget(
+                          disableBarrierInteraction: true,
+                          builder: Builder(
+                            builder: (context) => WillPopScope(
+                              onWillPop: () async {
+                                context
+                                    .read<TabScreenBloc>()
+                                    .add(BackButtonClicked());
+                                return false;
+                              },
+                              child: Column(
+                                children: [
+                                  TabPages(
+                                      canTrade: state.response.data!.canTrade),
+                                  const Tabs(canTrade: true)
+                                ],
+                              ),
                             ),
                           ),
                         ),
