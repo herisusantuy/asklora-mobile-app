@@ -1,10 +1,15 @@
 import 'package:equatable/equatable.dart';
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/utils/bloc_transformer/restartable.dart';
-import '../../../../../core/utils/currency_enum.dart';
 import '../../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../../../core/repository/transaction_repository.dart';
+import '../../../../../core/utils/bloc_transformer/restartable.dart';
+import '../../../../../core/utils/currency_enum.dart';
+import '../../../../../core/utils/events/asklora_event_bus.dart';
+import '../../../../../core/utils/events/event_bot_detail.dart';
+import '../../../../../core/utils/log.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../domain/orders/bot_order_response.dart';
@@ -36,6 +41,8 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   final BotStockRepository _botStockRepository;
   final TransactionRepository _transactionHistoryRepository;
 
+  final AskLoraEventBus _event = AskLoraEventBus();
+
   _onFetchBalance(FetchBalance event, Emitter<PortfolioState> emit) async {
     emit(state.copyWith(transactionBalanceResponse: BaseResponse.loading()));
     var balance = await _transactionHistoryRepository.fetchBalance();
@@ -47,6 +54,7 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
     emit(state.copyWith(botActiveOrderResponse: BaseResponse.loading()));
     var data =
         await _botStockRepository.activeOrders(status: getFilterStatus(state));
+    _event.event.fire(data.data);
     emit(state.copyWith(botActiveOrderResponse: data));
   }
 
@@ -59,6 +67,12 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       status.addAll(BotStatus.pending.omsStatusCollection.map((e) => e.value));
     }
     return status;
+  }
+
+  @override
+  Future<void> close() {
+    _event.event.destroy();
+    return super.close();
   }
 
   _onFetchActiveOrderDetail(

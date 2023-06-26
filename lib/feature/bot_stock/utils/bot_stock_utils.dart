@@ -58,23 +58,24 @@ List<BotRecommendationModel> demonstrationBots = [
 
 enum BotType {
   pullUp('Pull Up', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_pull_up',
-      AskLoraColors.lime, AskLoraColors.darkerLime),
+      'UNO', AskLoraColors.lime, AskLoraColors.darkerLime),
   squat('Squat', 'SQUAT', 'Squat', 'icon_bot_badge_pop_up_message_squat',
-      AskLoraColors.purple, AskLoraColors.darkerPurple,
+      'UCDC', AskLoraColors.purple, AskLoraColors.darkerPurple,
       expiredTextColor: AskLoraColors.white),
   plank('Plank', 'PLANK', 'Plank', 'icon_bot_badge_pop_up_message_plank',
-      AskLoraColors.primaryGreen, AskLoraColors.darkerGreen);
+      'CLASSIC', AskLoraColors.primaryGreen, AskLoraColors.darkerGreen);
 
   final String value;
   final String upperCaseName;
   final String name;
   final String botAssetName;
+  final String internalName;
   final Color primaryBgColor;
   final Color secondaryBgColor;
   final Color expiredTextColor;
 
   const BotType(this.value, this.upperCaseName, this.name, this.botAssetName,
-      this.primaryBgColor, this.secondaryBgColor,
+      this.internalName, this.primaryBgColor, this.secondaryBgColor,
       {this.expiredTextColor = AskLoraColors.charcoal});
 
   static BotType findByString(String botAppType) =>

@@ -1,3 +1,7 @@
+import 'package:equatable/equatable.dart';
+
+abstract class BaseQueryRequest extends Equatable {}
+
 class QueryRequest {
   final String input;
   final String userId;

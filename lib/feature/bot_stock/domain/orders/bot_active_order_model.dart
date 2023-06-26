@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../core/utils/extensions.dart';
@@ -5,7 +6,7 @@ import '../../../../core/utils/extensions.dart';
 part 'bot_active_order_model.g.dart';
 
 @JsonSerializable()
-class BotActiveOrderModel {
+class BotActiveOrderModel extends Equatable {
   final String uid;
   final String status;
   @JsonKey(name: 'is_active')
@@ -56,4 +57,18 @@ class BotActiveOrderModel {
       _$BotActiveOrderModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BotActiveOrderModelToJson(this);
+
+  @override
+  List<Object> get props => [
+        uid,
+        status,
+        isActive,
+        totalPnLPct,
+        tickerName,
+        currentPrice,
+        isDummy,
+        spotDate,
+        ticker,
+        botAppsName
+      ];
 }
