@@ -74,7 +74,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               content: BotStockForm(
                 useHeader: true,
                 title:
-                    '${botType.upperCaseName} ${botRecommendationModel.ticker}',
+                    '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
                 padding: EdgeInsets.zero,
                 content: BotRecommendationDetailContent(
                   botRecommendationModel: botRecommendationModel,

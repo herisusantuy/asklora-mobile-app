@@ -21,7 +21,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   @JsonKey(name: 'current_price')
   final double? currentPrice;
   @JsonKey(name: 'bot_asset_in_stock_pct')
-  final double botAssetInStockPct;
+  final int botAssetInStockPct;
   @JsonKey(name: 'bot_cash_balance')
   final double botCashBalance;
   @JsonKey(name: 'bot_share')
@@ -30,6 +30,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   final double maxLossPct;
   @JsonKey(name: 'target_profit_pct')
   final double targetProfitPct;
+  @JsonKey(name: 'stock_values')
+  final double stockValues;
 
   const BotActiveOrderDetailModel(
       String uid,
@@ -56,7 +58,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
       this.botCashBalance,
       this.botShare,
       this.maxLossPct,
-      this.targetProfitPct)
+      this.targetProfitPct,
+      this.stockValues)
       : super(
             uid,
             name,
@@ -89,7 +92,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   }
 
   String get botAssetInStockPctString {
-    final double botAssetInStockPctDouble = checkDouble(botAssetInStockPct);
+    final int botAssetInStockPctDouble = botAssetInStockPct;
     return (botAssetInStockPctDouble > 0) ? '$botAssetInStockPctDouble%' : '/';
   }
 
@@ -131,6 +134,13 @@ class BotActiveOrderDetailModel extends BotDetailModel {
       targetProfitPct.convertToCurrencyDecimal(decimalDigits: 2);
 
   String get daysToExpireString => '${daysToExpire.abs()}';
+
+  String get stockValuesString {
+    final double stockValuesDouble = checkDouble(stockValues);
+    return (stockValuesDouble > 0)
+        ? stockValuesDouble.convertToCurrencyDecimal()
+        : '/';
+  }
 
   factory BotActiveOrderDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotActiveOrderDetailModelFromJson(json);

@@ -22,7 +22,7 @@ class BotActiveOrderModel {
   final bool isDummy;
   @JsonKey(name: 'spot_date')
   final String spotDate;
-  final String ticker;
+  final String symbol;
   @JsonKey(name: 'bot_apps_name')
   final String botAppsName;
 
@@ -38,7 +38,7 @@ class BotActiveOrderModel {
       this.currentPrice,
       this.isDummy,
       this.spotDate,
-      this.ticker,
+      this.symbol,
       this.botAppsName);
 
   String get totalPnLPctString {
