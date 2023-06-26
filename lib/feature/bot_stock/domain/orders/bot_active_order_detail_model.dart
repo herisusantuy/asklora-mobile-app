@@ -91,10 +91,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
         : 'NA';
   }
 
-  String get botAssetInStockPctString {
-    final int botAssetInStockPctDouble = botAssetInStockPct;
-    return (botAssetInStockPctDouble > 0) ? '$botAssetInStockPctDouble%' : '/';
-  }
+  String get botAssetInStockPctString =>
+      (botAssetInStockPct > 0) ? '$botAssetInStockPct%' : '/';
 
   String get botCashBalanceString {
     final double botCashBalanceDouble = checkDouble(botCashBalance);

@@ -19,6 +19,7 @@ BotActiveOrderModel _$BotActiveOrderModelFromJson(Map<String, dynamic> json) =>
       json['spot_date'] as String,
       json['symbol'] as String,
       json['bot_apps_name'] as String,
+      json['bot_duration'] as String,
     );
 
 Map<String, dynamic> _$BotActiveOrderModelToJson(
@@ -35,4 +36,5 @@ Map<String, dynamic> _$BotActiveOrderModelToJson(
       'spot_date': instance.spotDate,
       'symbol': instance.symbol,
       'bot_apps_name': instance.botAppsName,
+      'bot_duration': instance.botDuration,
     };

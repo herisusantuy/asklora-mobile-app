@@ -25,6 +25,8 @@ class BotActiveOrderModel {
   final String symbol;
   @JsonKey(name: 'bot_apps_name')
   final String botAppsName;
+  @JsonKey(name: 'bot_duration')
+  final String botDuration;
 
   String get expireDateStr => expireDate ?? '';
 
@@ -39,7 +41,8 @@ class BotActiveOrderModel {
       this.isDummy,
       this.spotDate,
       this.symbol,
-      this.botAppsName);
+      this.botAppsName,
+      this.botDuration);
 
   String get totalPnLPctString {
     final double totalPnLPctDouble = checkDouble(totalPnLPct);
