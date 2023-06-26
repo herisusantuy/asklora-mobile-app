@@ -42,8 +42,8 @@ class GiftBotStockWelcomeScreen extends StatelessWidget {
     );
   }
 
-  static void open(BuildContext context) => Navigator.pushNamed(
-        context,
+  static void open(BuildContext context) =>
+      Navigator.of(context, rootNavigator: true).pushNamed(
         route,
       );
 }

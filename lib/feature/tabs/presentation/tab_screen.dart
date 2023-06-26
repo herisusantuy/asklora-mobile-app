@@ -77,12 +77,7 @@ class TabScreen extends StatelessWidget {
               BotStockBloc botStockBloc = BotStockBloc(
                   botStockRepository: BotStockRepository(),
                   transactionRepository: TransactionRepository());
-              if (context.read<AppBloc>().state.userJourney ==
-                  UserJourney.freeBotStock) {
-                botStockBloc.add(FetchFreeBotRecommendation());
-              } else {
-                botStockBloc.add(FetchBotRecommendation());
-              }
+              botStockBloc.add(FetchBotRecommendation());
               return botStockBloc;
             },
           ),
@@ -141,7 +136,7 @@ class TabScreen extends StatelessWidget {
                               children: [
                                 TabPages(
                                     canTrade: state.response.data!.canTrade),
-                                const Tabs(canTrade: true)
+                                Tabs(canTrade: state.response.data!.canTrade)
                               ],
                             ),
                           ),

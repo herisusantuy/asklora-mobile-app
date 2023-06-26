@@ -20,7 +20,7 @@ BotCreateOrderResponse _$BotCreateOrderResponseFromJson(
       (json['current_price'] as num).toDouble(),
       json['is_dummy'] as bool,
       json['spot_date'] as String,
-      json['ticker'] as String,
+      json['symbol'] as String,
     );
 
 Map<String, dynamic> _$BotCreateOrderResponseToJson(
@@ -37,5 +37,5 @@ Map<String, dynamic> _$BotCreateOrderResponseToJson(
       'current_price': instance.currentPrice,
       'is_dummy': instance.isDummy,
       'spot_date': instance.spotDate,
-      'ticker': instance.ticker,
+      'symbol': instance.symbol,
     };
