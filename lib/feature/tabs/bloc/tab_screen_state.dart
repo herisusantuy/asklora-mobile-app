@@ -15,7 +15,7 @@ class TabScreenState extends Equatable {
     required this.currentTabPage,
     this.aiPageSelected = false,
     this.tabScreenBackState = TabScreenBackState.none,
-    this.isTutorial = false,
+    this.isTutorial = true,
     required this.tutorialKeys,
   });
 
