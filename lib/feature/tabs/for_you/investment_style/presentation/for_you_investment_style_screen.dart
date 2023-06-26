@@ -133,13 +133,7 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
     if (state.ppiResponseState == PpiResponseState.dispatchResponse &&
         state.responseState == ResponseState.success) {
       context.read<ForYouBloc>().add(SaveInvestmentStyleState());
-      UserJourney.onAlreadyPassed(
-          context: context,
-          target: UserJourney.freeBotStock,
-          onTrueCallback: () =>
-              context.read<BotStockBloc>().add(FetchBotRecommendation()),
-          onFalseCallback: () =>
-              context.read<BotStockBloc>().add(FetchFreeBotRecommendation()));
+      context.read<BotStockBloc>().add(FetchBotRecommendation());
       context
           .read<NavigationBloc<ForYouPage>>()
           .add(const PageChanged(ForYouPage.botRecommendation));

@@ -162,6 +162,7 @@ class BotStockRepository {
       {required BotRecommendationModel botRecommendationModel,
       required double tradeBotStockAmount}) async {
     try {
+      ///SHOULD ENABLE ISDUMMY IF FREEBOTS FLOW IS ENABLED
       var response = await _botStockApiClient.createOrder(BotCreateOrderRequest(
         ticker: botRecommendationModel.ticker,
         botId: botRecommendationModel.botId,

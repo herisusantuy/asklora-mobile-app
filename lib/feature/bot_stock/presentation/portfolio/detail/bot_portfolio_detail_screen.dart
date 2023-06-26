@@ -128,14 +128,15 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
         child: Column(
           children: [
-            if (botStatus == BotStatus.liveExpireSoon)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: BotRolloverButton(
-                  botActiveOrderDetailModel: botActiveOrderDetailModel,
-                  botType: botType,
-                ),
-              ),
+            ///NEED TO TEMPORARY REMOVED AS AL1-2846
+            // if (botStatus == BotStatus.liveExpireSoon)
+            //   Padding(
+            //     padding: const EdgeInsets.only(bottom: 20.0),
+            //     child: BotRolloverButton(
+            //       botActiveOrderDetailModel: botActiveOrderDetailModel,
+            //       botType: botType,
+            //     ),
+            //   ),
 
             ///TODO : TEMPORARY FIX TO ALWAYS SHOW TERMINATE BUTTON
             // if (botStatus == BotStatus.active ||
