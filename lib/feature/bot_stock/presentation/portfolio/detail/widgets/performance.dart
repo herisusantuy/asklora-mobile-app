@@ -62,7 +62,7 @@ class Performance extends StatelessWidget {
         _spaceBetweenInfo,
         PairColumnTextWithTooltip(
           leftTitle: S.of(context).portfolioDetailPerformanceStockValues,
-          leftSubTitle: botActiveOrderDetailModel.botStockValueString,
+          leftSubTitle: botActiveOrderDetailModel.stockValuesString,
           rightTitle: S.of(context).portfolioDetailPerformanceCash,
           rightSubTitle: botActiveOrderDetailModel.botCashBalanceString,
         ),

@@ -31,11 +31,12 @@ BotActiveOrderDetailModel _$BotActiveOrderDetailModelFromJson(
           ? null
           : StockInfo.fromJson(json['stock_info'] as Map<String, dynamic>),
       (json['current_price'] as num?)?.toDouble(),
-      (json['bot_asset_in_stock_pct'] as num).toDouble(),
+      json['bot_asset_in_stock_pct'] as int,
       (json['bot_cash_balance'] as num).toDouble(),
       (json['bot_share'] as num).toDouble(),
       (json['max_loss_pct'] as num).toDouble(),
       (json['target_profit_pct'] as num).toDouble(),
+      (json['stock_values'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$BotActiveOrderDetailModelToJson(
@@ -66,4 +67,5 @@ Map<String, dynamic> _$BotActiveOrderDetailModelToJson(
       'bot_share': instance.botShare,
       'max_loss_pct': instance.maxLossPct,
       'target_profit_pct': instance.targetProfitPct,
+      'stock_values': instance.stockValues,
     };
