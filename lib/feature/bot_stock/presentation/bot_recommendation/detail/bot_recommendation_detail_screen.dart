@@ -39,92 +39,89 @@ class BotRecommendationDetailScreen extends StatelessWidget {
     return CustomScaffold(
       enableBackNavigation: false,
       body: BlocProvider(
-          create: (_) {
-            BotStockBloc botStockBloc = BotStockBloc(
-                botStockRepository: BotStockRepository(),
-                transactionRepository: TransactionRepository());
-            // ..add(const InitBotTutorial(true));
-            _fetchBotDetail(botStockBloc);
-            return botStockBloc;
-          },
-          child: BlocConsumer<BotStockBloc, BotStockState>(
-            listenWhen: (previous, current) =>
-                previous.botDetailResponse.state !=
-                current.botDetailResponse.state,
-            listener: (context, state) {
-              CustomLoadingOverlay.of(context)
-                  .show(state.botDetailResponse.state);
-              if (state.botDetailResponse.state == ResponseState.success) {
-                if (context.read<TabScreenBloc>().state.isTutorial) {
-                  ShowCaseWidget.of(context).startShowCase(
-                      context.read<TabScreenBloc>().state.tutorialKeys);
-                }
+        create: (_) {
+          BotStockBloc botStockBloc = BotStockBloc(
+              botStockRepository: BotStockRepository(),
+              transactionRepository: TransactionRepository());
+          _fetchBotDetail(botStockBloc);
+          return botStockBloc;
+        },
+        child: BlocConsumer<BotStockBloc, BotStockState>(
+          listenWhen: (previous, current) =>
+              previous.botDetailResponse.state !=
+              current.botDetailResponse.state,
+          listener: (context, state) {
+            CustomLoadingOverlay.of(context)
+                .show(state.botDetailResponse.state);
+            if (state.botDetailResponse.state == ResponseState.success) {
+              if (context.read<TabScreenBloc>().state.isTutorial) {
+                ShowCaseWidget.of(context).startShowCase(
+                    context.read<TabScreenBloc>().state.tutorialKeys);
               }
-            },
-            buildWhen: (previous, current) =>
-                previous.botDetailResponse.state !=
-                current.botDetailResponse.state,
-            builder: (context, state) => RefreshIndicator(
-              onRefresh: () async =>
-                  _fetchBotDetail(context.read<BotStockBloc>()),
-              child: CustomLayoutWithBlurPopUp(
-                  loraPopUpMessageModel: LoraPopUpMessageModel(
-                    title: S.of(context).errorGettingInformationTitle,
-                    subTitle: S
-                        .of(context)
-                        .errorGettingInformationInvestmentDetailSubTitle,
-                    primaryButtonLabel: S.of(context).buttonReloadPage,
-                    secondaryButtonLabel: S.of(context).buttonCancel,
-                    onSecondaryButtonTap: () => Navigator.pop(context),
-                    onPrimaryButtonTap: () =>
-                        _fetchBotDetail(context.read<BotStockBloc>()),
+            }
+          },
+          buildWhen: (previous, current) =>
+              previous.botDetailResponse.state !=
+              current.botDetailResponse.state,
+          builder: (context, state) => RefreshIndicator(
+            onRefresh: () async =>
+                _fetchBotDetail(context.read<BotStockBloc>()),
+            child: CustomLayoutWithBlurPopUp(
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                title: S.of(context).errorGettingInformationTitle,
+                subTitle: S
+                    .of(context)
+                    .errorGettingInformationInvestmentDetailSubTitle,
+                primaryButtonLabel: S.of(context).buttonReloadPage,
+                secondaryButtonLabel: S.of(context).buttonCancel,
+                onSecondaryButtonTap: () => Navigator.pop(context),
+                onPrimaryButtonTap: () =>
+                    _fetchBotDetail(context.read<BotStockBloc>()),
+              ),
+              showPopUp: state.botDetailResponse.state == ResponseState.error,
+              content: BotStockForm(
+                useHeader: true,
+                title:
+                    '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
+                padding: EdgeInsets.zero,
+                content: BotRecommendationDetailContent(
+                  botRecommendationModel: botRecommendationModel,
+                  botType: botType,
+                  botDetailModel: state.botDetailResponse.data,
+                ),
+                bottomButton: Padding(
+                  padding: AppValues.screenHorizontalPadding
+                      .copyWith(top: 24, bottom: 30),
+                  child: PrimaryButton(
+                    disabled: state.botDetailResponse.state ==
+                            ResponseState.loading ||
+                        state.botDetailResponse.state == ResponseState.error,
+                    label: S.of(context).trade,
+                    onTap: () {
+                      if (botRecommendationModel.freeBot) {
+                        BotTradeSummaryScreen.open(
+                            context: context,
+                            botTradeSummaryModel: BotTradeSummaryModel(
+                                botType: botType,
+                                botRecommendationModel: botRecommendationModel,
+                                botDetailModel: state.botDetailResponse.data!,
+                                amount: 500));
+                      } else {
+                        BotStockBottomSheet.amountBotStockForm(
+                            context,
+                            botType,
+                            botRecommendationModel,
+                            state.botDetailResponse.data!,
+                            state.buyingPower);
+                      }
+                    },
                   ),
-                  showPopUp:
-                      state.botDetailResponse.state == ResponseState.error,
-                  content: BotStockForm(
-                    useHeader: true,
-                    title:
-                        '${botType.upperCaseName} ${botRecommendationModel.ticker}',
-                    padding: EdgeInsets.zero,
-                    content: BotRecommendationDetailContent(
-                      botRecommendationModel: botRecommendationModel,
-                      botType: botType,
-                      botDetailModel: state.botDetailResponse.data,
-                    ),
-                    bottomButton: Padding(
-                      padding: AppValues.screenHorizontalPadding
-                          .copyWith(top: 24, bottom: 30),
-                      child: PrimaryButton(
-                        disabled: state.botDetailResponse.state ==
-                                ResponseState.loading ||
-                            state.botDetailResponse.state ==
-                                ResponseState.error,
-                        label: S.of(context).trade,
-                        onTap: () {
-                          if (botRecommendationModel.freeBot) {
-                            BotTradeSummaryScreen.open(
-                                context: context,
-                                botTradeSummaryModel: BotTradeSummaryModel(
-                                    botType: botType,
-                                    botRecommendationModel:
-                                        botRecommendationModel,
-                                    botDetailModel:
-                                        state.botDetailResponse.data!,
-                                    amount: 500));
-                          } else {
-                            BotStockBottomSheet.amountBotStockForm(
-                                context,
-                                botType,
-                                botRecommendationModel,
-                                state.botDetailResponse.data!,
-                                state.buyingPower);
-                          }
-                        },
-                      ),
-                    ),
-                  )),
+                ),
+              ),
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 

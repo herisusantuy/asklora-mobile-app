@@ -5,7 +5,7 @@ import '../../styles/asklora_colors.dart';
 import 'tutorial_touch_guide.dart';
 
 class CustomShowcaseView extends StatelessWidget {
-  final GlobalKey globalKey;
+  final GlobalKey tutorialKey;
   final Widget child;
   final Widget tooltipWidget;
   final VoidCallback? onToolTipClick;
@@ -14,7 +14,7 @@ class CustomShowcaseView extends StatelessWidget {
   final EdgeInsets targetPadding;
   const CustomShowcaseView({
     Key? key,
-    required this.globalKey,
+    required this.tutorialKey,
     required this.child,
     required this.tooltipWidget,
     this.onToolTipClick,
@@ -28,7 +28,7 @@ class CustomShowcaseView extends StatelessWidget {
       onTargetClick: () {},
       disableMovingAnimation: true,
       tooltipPosition: tooltipPosition,
-      key: globalKey,
+      key: tutorialKey,
       overlayColor: Colors.black,
       overlayOpacity: 0.5,
       targetPadding: targetPadding,

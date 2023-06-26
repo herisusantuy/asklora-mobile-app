@@ -32,7 +32,7 @@ class Tabs extends StatelessWidget {
                     !state.aiPageSelected),
             if (canTrade)
               CustomShowcaseView(
-                globalKey: TutorialJourney.chatLoraTab,
+                tutorialKey: TutorialJourney.chatLoraTab,
                 onToolTipClick: () {
                   ShowCaseWidget.of(context).next();
                   context.read<TabScreenBloc>().add(const AiButtonSelected());

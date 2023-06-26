@@ -211,7 +211,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
       Container(
         padding: AppValues.screenHorizontalPadding,
         child: CustomShowcaseView(
-          globalKey: TutorialJourney.botDetails,
+          tutorialKey: TutorialJourney.botDetails,
           onToolTipClick: () => ShowCaseWidget.of(context).next(),
           tooltipWidget: Text.rich(
             TextSpan(
@@ -276,7 +276,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.fromLTRB(15, 32, 15, 0),
         child: CustomShowcaseView(
-          globalKey: TutorialJourney.botChart,
+          tutorialKey: TutorialJourney.botChart,
           tooltipPosition: TooltipPosition.top,
           onToolTipClick: () => ShowCaseWidget.of(context).next(),
           tooltipWidget: Text.rich(
@@ -319,7 +319,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: CustomShowcaseView(
-            globalKey: TutorialJourney.botChart,
+            tutorialKey: TutorialJourney.botChart,
             tooltipPosition: TooltipPosition.top,
             onToolTipClick: () => ShowCaseWidget.of(context).next(),
             tooltipWidget: Text.rich(
