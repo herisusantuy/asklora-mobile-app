@@ -11,9 +11,6 @@ part 'tab_screen_event.dart';
 class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   TabScreenBloc({required TabPage initialTabPage})
       : super(TabScreenState(currentTabPage: initialTabPage, tutorialKeys: [
-          // GlobalKey(), //* Tutorial key for Bot Details
-          // GlobalKey(), //* Tutorial key for Bot Chart
-          // GlobalKey(), //* Tutorial key for Chat Lora Button Tab
           TutorialJourney.botDetails,
           TutorialJourney.botChart,
           TutorialJourney.chatLoraTab,

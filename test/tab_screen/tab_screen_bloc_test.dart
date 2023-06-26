@@ -1,3 +1,4 @@
+import 'package:asklora_mobile_app/core/presentation/tutorial/Utils/tutorial.dart';
 import 'package:asklora_mobile_app/feature/tabs/bloc/tab_screen_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +13,11 @@ void main() {
     test('init screen default page should be for you', () {
       expect(
         tabScreenBloc.state,
-        const TabScreenState(currentTabPage: TabPage.forYou),
+        TabScreenState(currentTabPage: TabPage.forYou, tutorialKeys: [
+          TutorialJourney.botDetails,
+          TutorialJourney.botChart,
+          TutorialJourney.chatLoraTab
+        ]),
       );
     });
     blocTest<TabScreenBloc, TabScreenState>(
@@ -21,7 +26,13 @@ void main() {
       act: (bloc) {
         bloc.add(const TabChanged(TabPage.forYou));
       },
-      expect: () => {const TabScreenState(currentTabPage: TabPage.forYou)},
+      expect: () => {
+        TabScreenState(currentTabPage: TabPage.forYou, tutorialKeys: [
+          TutorialJourney.botDetails,
+          TutorialJourney.botChart,
+          TutorialJourney.chatLoraTab
+        ])
+      },
     );
     blocTest<TabScreenBloc, TabScreenState>(
       'aiPageSelected = true when user clicked middle tab (AI)',
@@ -30,8 +41,14 @@ void main() {
         bloc.add(const AiButtonSelected());
       },
       expect: () => {
-        const TabScreenState(
-            currentTabPage: TabPage.forYou, aiPageSelected: true)
+        TabScreenState(
+            currentTabPage: TabPage.forYou,
+            aiPageSelected: true,
+            tutorialKeys: [
+              TutorialJourney.botDetails,
+              TutorialJourney.botChart,
+              TutorialJourney.chatLoraTab
+            ])
       },
     );
     blocTest<TabScreenBloc, TabScreenState>(
@@ -40,7 +57,13 @@ void main() {
       act: (bloc) {
         bloc.add(const TabChanged(TabPage.portfolio));
       },
-      expect: () => {const TabScreenState(currentTabPage: TabPage.portfolio)},
+      expect: () => {
+        TabScreenState(currentTabPage: TabPage.portfolio, tutorialKeys: [
+          TutorialJourney.botDetails,
+          TutorialJourney.botChart,
+          TutorialJourney.chatLoraTab
+        ])
+      },
     );
 
     tearDown(() => {tabScreenBloc.close()});
