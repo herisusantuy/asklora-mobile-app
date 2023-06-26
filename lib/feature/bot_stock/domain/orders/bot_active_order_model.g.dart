@@ -17,8 +17,9 @@ BotActiveOrderModel _$BotActiveOrderModelFromJson(Map<String, dynamic> json) =>
       (json['current_price'] as num).toDouble(),
       json['is_dummy'] as bool,
       json['spot_date'] as String,
-      json['ticker'] as String,
+      json['symbol'] as String,
       json['bot_apps_name'] as String,
+      json['bot_duration'] as String,
     );
 
 Map<String, dynamic> _$BotActiveOrderModelToJson(
@@ -33,6 +34,7 @@ Map<String, dynamic> _$BotActiveOrderModelToJson(
       'current_price': instance.currentPrice,
       'is_dummy': instance.isDummy,
       'spot_date': instance.spotDate,
-      'ticker': instance.ticker,
+      'symbol': instance.symbol,
       'bot_apps_name': instance.botAppsName,
+      'bot_duration': instance.botDuration,
     };

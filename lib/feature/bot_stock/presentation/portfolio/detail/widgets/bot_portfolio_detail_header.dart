@@ -30,7 +30,7 @@ class BotPortfolioDetailHeader extends StatelessWidget {
             width: 12,
           ),
           CustomTextNew(
-            '${botType.upperCaseName} ${botActiveOrderModel.ticker}',
+            '${botType.upperCaseName} ${botActiveOrderModel.symbol}',
             style: AskLoraTextStyles.h5.copyWith(color: AskLoraColors.charcoal),
           ),
         ],

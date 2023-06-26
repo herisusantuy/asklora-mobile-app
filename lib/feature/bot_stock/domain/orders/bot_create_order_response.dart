@@ -23,7 +23,7 @@ class BotCreateOrderResponse {
   final bool isDummy;
   @JsonKey(name: 'spot_date')
   final String spotDate;
-  final String ticker;
+  final String symbol;
 
   const BotCreateOrderResponse(
     this.uid,
@@ -37,7 +37,7 @@ class BotCreateOrderResponse {
     this.currentPrice,
     this.isDummy,
     this.spotDate,
-    this.ticker,
+    this.symbol,
   );
 
   factory BotCreateOrderResponse.fromJson(Map<String, dynamic> json) =>
