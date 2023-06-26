@@ -109,7 +109,7 @@ enum OmsStatus {
 
 enum BotStatus {
   live(
-    'Live',
+    'Active',
     [
       OmsStatus.live,
       OmsStatus.nearlyKnockOut,
@@ -118,7 +118,7 @@ enum BotStatus {
     AskLoraColors.primaryGreen,
   ),
   liveExpireSoon(
-    'Live',
+    'Active',
     [
       OmsStatus.live,
       OmsStatus.nearlyKnockOut,
