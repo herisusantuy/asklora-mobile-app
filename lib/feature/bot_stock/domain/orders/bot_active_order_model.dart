@@ -23,9 +23,11 @@ class BotActiveOrderModel extends Equatable {
   final bool isDummy;
   @JsonKey(name: 'spot_date')
   final String spotDate;
-  final String ticker;
+  final String symbol;
   @JsonKey(name: 'bot_apps_name')
   final String botAppsName;
+  @JsonKey(name: 'bot_duration')
+  final String botDuration;
 
   String get expireDateStr => expireDate ?? '';
 
@@ -39,8 +41,9 @@ class BotActiveOrderModel extends Equatable {
       this.currentPrice,
       this.isDummy,
       this.spotDate,
-      this.ticker,
-      this.botAppsName);
+      this.symbol,
+      this.botAppsName,
+      this.botDuration);
 
   String get totalPnLPctString {
     final double totalPnLPctDouble = checkDouble(totalPnLPct);
