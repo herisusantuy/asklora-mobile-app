@@ -71,7 +71,7 @@ class BotActiveOrderModel extends Equatable {
         currentPrice,
         isDummy,
         spotDate,
-        ticker,
+        symbol,
         botAppsName
       ];
 }

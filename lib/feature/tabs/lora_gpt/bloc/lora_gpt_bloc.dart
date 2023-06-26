@@ -38,7 +38,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       Logger.log('Krishna received  bus event .. ${toString()}');
       _botstocks.addAll(event
           .map((e) => Botstock(
-              ticker: e.ticker,
+              ticker: e.symbol,
               botType: BotType.findByString(e.botAppsName).internalName,
               duration: '1W',
               totalPnl: e.totalPnLPct.toString(),
