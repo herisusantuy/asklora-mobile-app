@@ -21,7 +21,6 @@ class EventBotDetail extends Equatable {
       required this.totalPnl,
       required this.expiryDate});
 
-
   factory EventBotDetail.fromJson(Map<String, dynamic> json) =>
       _$EventBotDetailFromJson(json);
 
