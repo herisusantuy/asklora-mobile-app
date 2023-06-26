@@ -9,11 +9,11 @@ part of 'portfolio_query_request.dart';
 PortfolioQueryRequest _$PortfolioQueryRequestFromJson(
         Map<String, dynamic> json) =>
     PortfolioQueryRequest(
-      json['input'] as String,
-      json['user_id'] as String,
-      json['username'] as String,
-      json['platform'] as String,
-      (json['total_pnl'] as num).toDouble(),
+      input: json['input'] as String,
+      userId: json['user_id'] as String,
+      username: json['username'] as String,
+      platform: json['platform'] as String,
+      totalPnl: (json['total_pnl'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$PortfolioQueryRequestToJson(

@@ -26,7 +26,12 @@ class PortfolioQueryRequest extends BaseQueryRequest {
         totalPnl = 0.0;
 
   PortfolioQueryRequest(
-      this.input, this.userId, this.username, this.platform, this.totalPnl);
+      {required this.input,
+      required this.userId,
+      required this.username,
+      required this.platform,
+      required this.totalPnl})
+      : super();
 
   factory PortfolioQueryRequest.fromJson(Map<String, dynamic> json) =>
       _$PortfolioQueryRequestFromJson(json);
@@ -45,18 +50,18 @@ class PortfolioQueryRequest extends BaseQueryRequest {
   List<Object> get props => [input, userId, username, platform, totalPnl];
 
   PortfolioQueryRequest copyWith({
-    final String? input,
-    final String? userId,
-    final String? username,
-    final String? platform,
-    final double? totalPnl,
+    String? input,
+    String? userId,
+    String? username,
+    String? platform,
+    double? totalPnl,
   }) {
     return PortfolioQueryRequest(
-      input ?? this.input,
-      userId ?? this.userId,
-      username ?? this.username,
-      platform ?? this.platform,
-      totalPnl ?? this.totalPnl,
+      input: input ?? this.input,
+      userId: userId ?? this.userId,
+      username: username ?? this.username,
+      platform: platform ?? this.platform,
+      totalPnl: totalPnl ?? this.totalPnl,
     );
   }
 }

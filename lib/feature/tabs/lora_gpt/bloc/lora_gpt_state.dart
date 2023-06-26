@@ -8,6 +8,8 @@ class LoraGptState extends Equatable {
   final List<Conversation> conversations;
   final bool isTyping;
   final bool shouldShowOverlay;
+  final List<Botstock> botstocks;
+  final double totalPnl;
 
   const LoraGptState({
     this.query = '',
@@ -17,6 +19,8 @@ class LoraGptState extends Equatable {
     this.conversations = const [],
     this.isTyping = false,
     this.shouldShowOverlay = true,
+    this.botstocks = const [],
+    this.totalPnl = 0,
   });
 
   LoraGptState copyWith({
@@ -27,6 +31,8 @@ class LoraGptState extends Equatable {
     ResponseState? status,
     bool? isTyping,
     bool? shouldShowOverlay,
+    List<Botstock>? botstocks,
+    double? totalPnl,
   }) {
     return LoraGptState(
       query: query ?? this.query,
@@ -36,8 +42,20 @@ class LoraGptState extends Equatable {
       isTyping: isTyping ?? this.isTyping,
       userName: userName ?? this.userName,
       shouldShowOverlay: shouldShowOverlay ?? this.shouldShowOverlay,
+      botstocks: botstocks ?? this.botstocks,
+      totalPnl: totalPnl ?? this.totalPnl,
     );
   }
+
+  PortfolioQueryRequest getRequest() => PortfolioQueryRequest(
+        totalPnl: totalPnl,
+        input: query,
+        userId: '101',
+        username: userName,
+        platform: 'app',
+      );
+
+  List<Botstock> getBotstocks() => botstocks;
 
   @override
   List<Object> get props => [
@@ -47,6 +65,9 @@ class LoraGptState extends Equatable {
         status,
         isTyping,
         userName,
-        shouldShowOverlay
+        botstocks,
+        totalPnl,
+        shouldShowOverlay,
+        DateTime.now().millisecondsSinceEpoch
       ];
 }
