@@ -2882,6 +2882,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Here, you can find the `
+  String get hereYouCanFind {
+    return Intl.message(
+      'Here, you can find the ',
+      name: 'hereYouCanFind',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Botstock’s details and estimated returns.`
+  String get botStocksDetails {
+    return Intl.message(
+      'Botstock’s details and estimated returns.',
+      name: 'botStocksDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This interactive graph shows the Botstock’s past `
+  String get thisInteractiveGraph {
+    return Intl.message(
+      'This interactive graph shows the Botstock’s past ',
+      name: 'thisInteractiveGraph',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2 weeks performance `
+  String get twoWeekPerformance {
+    return Intl.message(
+      '2 weeks performance ',
+      name: 'twoWeekPerformance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to give you a better idea of its trading potential!`
+  String get toGiveYou {
+    return Intl.message(
+      'to give you a better idea of its trading potential!',
+      name: 'toGiveYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you’ve got `
+  String get ifYouveGot {
+    return Intl.message(
+      'If you’ve got ',
+      name: 'ifYouveGot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `any questions `
+  String get anyQuestion {
+    return Intl.message(
+      'any questions ',
+      name: 'anyQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `about your investment, tap this icon to summon your `
+  String get aboutYourInvestment {
+    return Intl.message(
+      'about your investment, tap this icon to summon your ',
+      name: 'aboutYourInvestment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `personal AI assistant Asklora! `
+  String get personalAIAssistant {
+    return Intl.message(
+      'personal AI assistant Asklora! ',
+      name: 'personalAIAssistant',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

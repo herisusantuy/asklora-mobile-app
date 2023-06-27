@@ -58,12 +58,15 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("About Asklora"),
+        "aboutYourInvestment": MessageLookupByLibrary.simpleMessage(
+            "about your investment, tap this icon to summon your "),
         "accountInformation":
             MessageLookupByLibrary.simpleMessage("Account Information"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account Settings"),
         "activities": MessageLookupByLibrary.simpleMessage("Activities"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
+        "anyQuestion": MessageLookupByLibrary.simpleMessage("any questions "),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
@@ -78,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "botManagementFee":
             MessageLookupByLibrary.simpleMessage("Bot Management Fee"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
+        "botStocksDetails": MessageLookupByLibrary.simpleMessage(
+            "Botstock’s details and estimated returns."),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "Est. to be approved by 2 working days."),
@@ -253,6 +258,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
         "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
+        "hereYouCanFind":
+            MessageLookupByLibrary.simpleMessage("Here, you can find the "),
         "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
         "iAmADirector": MessageLookupByLibrary.simpleMessage(
             "I am a director/employee/licensed person of a licensed corporation registered with the HK Securities and Futures Commission. (Excluding Lora Advisors Limited)"),
@@ -262,6 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "I am a senior executive at or a 10% or greater shareholder of a publicly traded company."),
         "iAmASeniorPolitical": MessageLookupByLibrary.simpleMessage(
             "I am a senior political figure."),
+        "ifYouveGot": MessageLookupByLibrary.simpleMessage("If you’ve got "),
         "inApp": MessageLookupByLibrary.simpleMessage("In-App"),
         "industry": MessageLookupByLibrary.simpleMessage("Industry"),
         "introduceBotPlank":
@@ -326,6 +334,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "performance": MessageLookupByLibrary.simpleMessage("Performance"),
+        "personalAIAssistant": MessageLookupByLibrary.simpleMessage(
+            "personal AI assistant Asklora! "),
         "personalisation":
             MessageLookupByLibrary.simpleMessage("Personalisation"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
@@ -472,9 +482,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Terminate Account"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("Terms and Conditions"),
+        "thisInteractiveGraph": MessageLookupByLibrary.simpleMessage(
+            "This interactive graph shows the Botstock’s past "),
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
+        "toGiveYou": MessageLookupByLibrary.simpleMessage(
+            "to give you a better idea of its trading potential!"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(
             "This is the estimated maximum loss % level for the Bot strategy. The Bot will try to limit losses to this % level. This is an estimated level."),
         "tooltipBotDetailsEstMaxProfit": MessageLookupByLibrary.simpleMessage(
@@ -511,6 +525,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionHistoryToday":
             MessageLookupByLibrary.simpleMessage("Today"),
         "transferTo": MessageLookupByLibrary.simpleMessage("Transfer to"),
+        "twoWeekPerformance":
+            MessageLookupByLibrary.simpleMessage("2 weeks performance "),
         "unableToProcessDepositSubTitle": MessageLookupByLibrary.simpleMessage(
             "We’re having some trouble processing your deposit request. Please try again"),
         "unableToProcessDepositTitle":

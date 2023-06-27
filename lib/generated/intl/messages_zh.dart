@@ -55,10 +55,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("關於"),
         "aboutAsklora": MessageLookupByLibrary.simpleMessage("關於 Asklora"),
+        "aboutYourInvestment":
+            MessageLookupByLibrary.simpleMessage("關於投資嘅問題，可以點擊此處 "),
         "accountInformation": MessageLookupByLibrary.simpleMessage("帳戶資訊"),
         "accountSettings": MessageLookupByLibrary.simpleMessage("帳戶設定"),
         "activities": MessageLookupByLibrary.simpleMessage("交易記錄"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
+        "anyQuestion": MessageLookupByLibrary.simpleMessage("任何"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
@@ -66,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot 期限"),
         "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
+        "botStocksDetails":
+            MessageLookupByLibrary.simpleMessage("Botstock 嘅詳情同預計回報。 "),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage("預計批核時間為 2 個工作天。"),
         "botTradeBottomSheetAccountNotYetApprovedTitle":
@@ -183,6 +188,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "greetingScreenTitle":
             MessageLookupByLibrary.simpleMessage("Alright! 你準備開始 FinFit 未先？"),
         "headquarters": MessageLookupByLibrary.simpleMessage("總部地點"),
+        "hereYouCanFind": MessageLookupByLibrary.simpleMessage("你可以係度搵到 "),
         "howItWorks": MessageLookupByLibrary.simpleMessage("如何運作"),
         "iAmADirector": MessageLookupByLibrary.simpleMessage(
             "我是香港證券及期貨事務監察委員會註冊持牌機構的董事、員工、或註冊持牌人士。(除了Lora Advisors Limited）"),
@@ -191,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "我是上市公司的高級行政人員或持有 10% 或以上的股份。"),
         "iAmASeniorPolitical":
             MessageLookupByLibrary.simpleMessage("我是高級政治人物。"),
+        "ifYouveGot": MessageLookupByLibrary.simpleMessage("如果你有"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "industry": MessageLookupByLibrary.simpleMessage("行業"),
         "introduceBotPlank":
@@ -238,6 +245,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
+        "personalAIAssistant":
+            MessageLookupByLibrary.simpleMessage("問你嘅AI助手Asklora! "),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "portfolioBuyingPower": m6,
@@ -344,7 +353,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "summary": MessageLookupByLibrary.simpleMessage("摘要"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
+        "thisInteractiveGraph":
+            MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "toGiveYou":
+            MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
         "tooltipBotDetailsEstMaxLoss":
             MessageLookupByLibrary.simpleMessage("Bot將出售以限制損失的最低股票價位。"),
         "tooltipBotDetailsEstMaxProfit":
@@ -376,6 +389,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
         "transferTo": MessageLookupByLibrary.simpleMessage("轉賬至"),
+        "twoWeekPerformance": MessageLookupByLibrary.simpleMessage("兩個星期"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
         "website": MessageLookupByLibrary.simpleMessage("網站"),
