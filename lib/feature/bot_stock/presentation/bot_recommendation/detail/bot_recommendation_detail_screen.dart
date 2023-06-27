@@ -8,11 +8,11 @@ import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
+import '../../../../../core/presentation/tutorial/Utils/tutorial.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
-import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../domain/bot_recommendation_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -54,10 +54,11 @@ class BotRecommendationDetailScreen extends StatelessWidget {
             CustomLoadingOverlay.of(context)
                 .show(state.botDetailResponse.state);
             if (state.botDetailResponse.state == ResponseState.success) {
-              if (context.read<TabScreenBloc>().state.isTutorial) {
-                ShowCaseWidget.of(context).startShowCase(
-                    context.read<TabScreenBloc>().state.tutorialKeys);
-              }
+              ShowCaseWidget.of(context).startShowCase([
+                TutorialJourney.botDetails,
+                TutorialJourney.botChart,
+                TutorialJourney.chatLoraTab
+              ]);
             }
           },
           buildWhen: (previous, current) =>

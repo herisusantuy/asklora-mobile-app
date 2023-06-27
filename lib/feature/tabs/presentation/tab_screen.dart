@@ -113,25 +113,25 @@ class TabScreen extends StatelessWidget {
                             ? TabPage.forYou
                             : TabPage.home,
                       ),
-                      child: BlocListener<TabScreenBloc, TabScreenState>(
-                        listenWhen: (previous, current) =>
-                            previous.tabScreenBackState !=
-                            current.tabScreenBackState,
-                        listener: (context, state) {
-                          if (state.tabScreenBackState ==
-                              TabScreenBackState.openConfirmation) {
-                            CustomInAppNotification.show(
-                                context, S.of(context).pressBackAgain,
-                                type: PopupType.grey);
-                          } else if (state.tabScreenBackState ==
-                              TabScreenBackState.closeApp) {
-                            SystemNavigator.pop();
-                          }
-                        },
-                        child: ShowCaseWidget(
-                          disableBarrierInteraction: true,
-                          builder: Builder(
-                            builder: (context) => WillPopScope(
+                      child: ShowCaseWidget(
+                        disableBarrierInteraction: true,
+                        builder: Builder(builder: (context) {
+                          return BlocListener<TabScreenBloc, TabScreenState>(
+                            listenWhen: (previous, current) =>
+                                previous.tabScreenBackState !=
+                                current.tabScreenBackState,
+                            listener: (context, state) {
+                              if (state.tabScreenBackState ==
+                                  TabScreenBackState.openConfirmation) {
+                                CustomInAppNotification.show(
+                                    context, S.of(context).pressBackAgain,
+                                    type: PopupType.grey);
+                              } else if (state.tabScreenBackState ==
+                                  TabScreenBackState.closeApp) {
+                                SystemNavigator.pop();
+                              }
+                            },
+                            child: WillPopScope(
                               onWillPop: () async {
                                 context
                                     .read<TabScreenBloc>()
@@ -146,8 +146,8 @@ class TabScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
-                        ),
+                          );
+                        }),
                       ),
                     )
                   : const SizedBox.shrink(),
