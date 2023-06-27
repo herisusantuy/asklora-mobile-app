@@ -67,3 +67,12 @@ class StorePortfolioDetails extends LoraGptEvent {
   @override
   List<Object?> get props => [totalPortfolioPnl];
 }
+
+class StoreTabPageState extends LoraGptEvent {
+  final TabPage tabPage;
+
+  const StoreTabPageState({required this.tabPage});
+
+  @override
+  List<Object?> get props => [tabPage];
+}

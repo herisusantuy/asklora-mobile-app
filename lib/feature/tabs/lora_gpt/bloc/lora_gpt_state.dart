@@ -10,6 +10,7 @@ class LoraGptState extends Equatable {
   final bool shouldShowOverlay;
   final List<Botstock> botstocks;
   final double totalPnl;
+  final TabPage tabPage;
 
   const LoraGptState({
     this.query = '',
@@ -21,6 +22,7 @@ class LoraGptState extends Equatable {
     this.shouldShowOverlay = true,
     this.botstocks = const [],
     this.totalPnl = 0,
+    this.tabPage = TabPage.forYou,
   });
 
   LoraGptState copyWith({
@@ -33,6 +35,7 @@ class LoraGptState extends Equatable {
     bool? shouldShowOverlay,
     List<Botstock>? botstocks,
     double? totalPnl,
+    TabPage? tabPage,
   }) {
     return LoraGptState(
       query: query ?? this.query,
@@ -44,15 +47,24 @@ class LoraGptState extends Equatable {
       shouldShowOverlay: shouldShowOverlay ?? this.shouldShowOverlay,
       botstocks: botstocks ?? this.botstocks,
       totalPnl: totalPnl ?? this.totalPnl,
+      tabPage: tabPage ?? this.tabPage,
     );
   }
 
-  PortfolioQueryRequest getRequest() => PortfolioQueryRequest(
+  PortfolioQueryRequest getPortfolioRequest() => PortfolioQueryRequest(
         totalPnl: totalPnl,
         input: query,
         userId: '101',
         username: userName,
         platform: 'app',
+      );
+
+  GeneralQueryRequest getGeneralChatRequest() => GeneralQueryRequest(
+        input: query,
+        userId: '101',
+        username: userName,
+        platform: 'app',
+        sessionId: '',
       );
 
   List<Botstock> getBotstocks() => botstocks;
@@ -68,6 +80,7 @@ class LoraGptState extends Equatable {
         botstocks,
         totalPnl,
         shouldShowOverlay,
+        tabPage,
         DateTime.now().millisecondsSinceEpoch
       ];
 }

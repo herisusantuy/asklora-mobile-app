@@ -7,9 +7,10 @@ import '../domain/query_request.dart';
 class LoraGptRepository {
   final LoraGptClient _loraGptClient = LoraGptClient();
 
-  Future<BaseResponse<Lora>> general(QueryRequest request) async {
+  Future<BaseResponse<Lora>> general(
+      {required GeneralQueryRequest params}) async {
     try {
-      var response = await _loraGptClient.general(request.params);
+      var response = await _loraGptClient.general(params.params);
       return BaseResponse.complete<Lora>(Lora.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(

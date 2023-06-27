@@ -18,7 +18,7 @@ platform :android do
     output_path = "../build/app/outputs/flutter-apk/" +options[:apk_name]
     firebase_app_id = options[:firebase_app_id]
 
-    firebase_app_distribution(
+    release = firebase_app_distribution(
       app: ENV[firebase_app_id],
       android_artifact_path: output_path,
       android_artifact_type: "APK",
@@ -27,7 +27,6 @@ platform :android do
       service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
       debug: true
     )
-
   end
 
   desc "Runs all the tests"
@@ -41,7 +40,32 @@ platform :android do
     set_up_env_vars(env:"dev")
     gradle(task: "assembleDevRelease")
     validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
-    upload_to_firebase(firebase_app_id:"FIREBASE_ANDROID_DEV_APP_ID", apk_name:"app-dev-release.apk")
+#    upload_to_firebase(firebase_app_id:"FIREBASE_ANDROID_DEV_APP_ID", apk_name:"app-dev-release.apk")
+
+    output_path = "../build/app/outputs/flutter-apk/app-dev-release.apk"
+
+     release = firebase_app_distribution(
+          app: ENV["FIREBASE_ANDROID_DEV_APP_ID"],
+          android_artifact_path: output_path,
+          android_artifact_type: "APK",
+          release_notes: "Test App",
+          firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+          service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+          debug: true
+     )
+
+    slack(
+          slack_url: ENV["SLACK_HOOK_URL"],
+          message: "🐕 📱 Asklora Dev Android App successfully released!👯🏾‍👯🏾",
+          success: true,
+          payload: {
+            "Build Date" => release[:createTime],
+            "🌎 Environment" => "Development",
+            "📥 Download" => release[:firebaseConsoleUri],
+            "Build Version" => release[:displayVersion],
+          },
+          default_payloads: [:git_branch, :git_author],
+    )
   end
 
   desc "Create a staging build"
