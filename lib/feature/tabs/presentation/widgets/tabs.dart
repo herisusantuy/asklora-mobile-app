@@ -43,17 +43,16 @@ class Tabs extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                          text: 'If you’ve got ',
+                          text: S.of(context).ifYouveGot,
                           style: AskLoraTextStyles.body1),
                       TextSpan(
-                          text: 'any questions ',
+                          text: S.of(context).anyQuestion,
                           style: AskLoraTextStyles.subtitle2),
                       TextSpan(
-                          text:
-                              'about your investment, tap this icon to summon your ',
+                          text: S.of(context).aboutYourInvestment,
                           style: AskLoraTextStyles.body1),
                       TextSpan(
-                          text: 'personal AI assistant Asklora! ',
+                          text: S.of(context).personalAIAssistant,
                           style: AskLoraTextStyles.subtitle2),
                     ],
                   ),

@@ -217,10 +217,10 @@ class BotRecommendationDetailContent extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                    text: 'Here, you can find the ',
+                    text: S.of(context).hereYouCanFind,
                     style: AskLoraTextStyles.body1),
                 TextSpan(
-                    text: 'Botstock’s details and estimated returns.',
+                    text: S.of(context).botStocksDetails,
                     style: AskLoraTextStyles.subtitle2),
               ],
             ),
@@ -283,13 +283,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                    text: 'This interactive graph shows the Botstock’s past ',
+                    text: S.of(context).thisInteractiveGraph,
                     style: AskLoraTextStyles.body1),
                 TextSpan(
-                    text: '2 weeks performance ',
+                    text: S.of(context).twoWeekPerformance,
                     style: AskLoraTextStyles.subtitle2),
                 TextSpan(
-                    text: 'to give you a better idea of its trading potential!',
+                    text: S.of(context).toGiveYou,
                     style: AskLoraTextStyles.body1),
               ],
             ),
@@ -326,14 +326,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
               TextSpan(
                 children: [
                   TextSpan(
-                      text: 'This interactive graph shows the Botstock’s past ',
+                      text: S.of(context).thisInteractiveGraph,
                       style: AskLoraTextStyles.body1),
                   TextSpan(
-                      text: '2 weeks performance ',
+                      text: S.of(context).twoWeekPerformance,
                       style: AskLoraTextStyles.subtitle2),
                   TextSpan(
-                      text:
-                          'to give you a better idea of its trading potential!',
+                      text: S.of(context).toGiveYou,
                       style: AskLoraTextStyles.body1),
                 ],
               ),

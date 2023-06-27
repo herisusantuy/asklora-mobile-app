@@ -352,5 +352,14 @@
     }
   },
   "viewDepositGuide": "查看入金提示",
-  "pressBackAgain": "再按一次登出Asklora"
+  "pressBackAgain": "再按一次登出Asklora",
+  "hereYouCanFind" : "你可以係度搵到 ",
+  "botStocksDetails" : "Botstock 嘅詳情同預計回報。 ",
+  "thisInteractiveGraph" : "你可以係下面見到Botstock最近",
+  "twoWeekPerformance" : "兩個星期",
+  "toGiveYou" : "嘅表現，希望幫到你理解Botstock係點樣交易！",
+  "ifYouveGot" : "如果你有",
+  "anyQuestion" : "任何",
+  "aboutYourInvestment" : "關於投資嘅問題，可以點擊此處 ",
+  "personalAIAssistant" : "問你嘅AI助手Asklora! "
 }
