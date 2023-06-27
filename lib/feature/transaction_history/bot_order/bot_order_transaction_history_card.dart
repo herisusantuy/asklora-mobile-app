@@ -39,10 +39,17 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
                 const SizedBox(
                   width: 14,
                 ),
-                CustomTextNew(
-                  'HKD ${transactionHistoryModel.amountString}',
-                  style: AskLoraTextStyles.subtitle2,
-                ),
+                Row(children: [
+                  CustomTextNew(
+                    'HKD ${transactionHistoryModel.amountString}',
+                    style: AskLoraTextStyles.subtitle2,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Icon(Icons.arrow_forward_ios_rounded,
+                      color: AskLoraColors.black, size: 14)
+                ]),
               ],
             ),
             const SizedBox(
