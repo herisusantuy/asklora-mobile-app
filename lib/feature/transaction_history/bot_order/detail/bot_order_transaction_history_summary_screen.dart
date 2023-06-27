@@ -19,7 +19,8 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
                   context,
                   e,
                   state.response.data?.summary.indexOf(e),
-                  state.response.data?.summary.length))
+                  state.response.data?.summary.length,
+                  state.response.data?.botDuration ?? 'NA'))
               .toList(),
         );
       });
@@ -28,15 +29,16 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
       BuildContext context,
       BotSummaryTransactionHistoryModel botSummaryTransactionHistoryModel,
       int? index,
-      int? dataLength) {
+      int? dataLength,
+      String botDuration) {
     if (index == (dataLength ?? 0) - 1) {
       return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,
-          S.of(context).orderStarted, index);
+          S.of(context).orderStarted, index, botDuration);
     } else if (botStatusType == BotStatus.expired) {
       return _expiredCard(context, botSummaryTransactionHistoryModel);
     } else {
       return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,
-          S.of(context).orderRollover, index);
+          S.of(context).orderRollover, index, botDuration);
     }
   }
 
@@ -44,7 +46,8 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
       BuildContext context,
       BotSummaryTransactionHistoryModel botSummaryTransactionHistoryModel,
       String additionalTitleInfo,
-      int? index) {
+      int? index,
+      String botDuration) {
     return Column(
       children: [
         TransactionHistoryGroupTitle(
@@ -62,8 +65,13 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
           showBottomBorder: true,
         ),
         BotOrderTransactionHistorySummaryCard(
-          title: S.of(context).tradeFee,
-          subTitle: 'HKD40.0',
+          title: S.of(context).botDuration,
+          subTitle: botDuration,
+          showBottomBorder: true,
+        ),
+        BotOrderTransactionHistorySummaryCard(
+          title: S.of(context).botManagementFee,
+          subTitle: botSummaryTransactionHistoryModel.feeString,
           showBottomBorder: index == 0,
         ),
       ],
