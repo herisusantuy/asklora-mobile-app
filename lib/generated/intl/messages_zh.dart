@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
+        "botDuration": MessageLookupByLibrary.simpleMessage("Bot 期限"),
+        "botManagementFee": MessageLookupByLibrary.simpleMessage("Bot 管理費用"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage("預計批核時間為 2 個工作天。"),
         "botTradeBottomSheetAccountNotYetApprovedTitle":
