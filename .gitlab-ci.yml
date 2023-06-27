@@ -12,7 +12,7 @@ before_script:
   - pwd
   - git clone https://gitlab+deploy-token-4:C_UxoDSukHkRH4u8T2Ef@gitlab.intra.asklora.store/frontend/asklora-flutter-chart.git
   - pwd
-  - git clone https://gitlab+deploy-token-4:C_UxoDSukHkRH4u8T2Ef@git@gitlab.intra.asklora.store:frontend/flutter_showcaseview.git
+  - git clone https://gitlab+deploy-token-4:C_UxoDSukHkRH4u8T2Ef@gitlab.intra.asklora.store/frontend/flutter_showcaseview.git
   - pwd
   - cd asklora-mobile-app
   - flutter clean
