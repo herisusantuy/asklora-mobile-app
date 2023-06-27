@@ -40,7 +40,6 @@ part 'widgets/bot_recommendation_faq.dart';
 part 'widgets/bot_recommendation_list.dart';
 
 class BotRecommendationScreen extends StatelessWidget {
-  static const String route = '/gift_bot_stock_recommendation_screen';
   final bool enableBackNavigation;
 
   const BotRecommendationScreen({this.enableBackNavigation = true, Key? key})
@@ -177,13 +176,4 @@ class BotRecommendationScreen extends StatelessWidget {
           ],
         ),
       );
-
-  static void open(BuildContext context) => Navigator.pushNamed(
-        context,
-        route,
-      );
-
-  static void openAndRemoveUntil(BuildContext context, String removeUntil) =>
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(route, ModalRoute.withName(removeUntil));
 }

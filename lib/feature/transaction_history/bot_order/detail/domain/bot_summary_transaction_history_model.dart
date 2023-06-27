@@ -32,6 +32,8 @@ class BotSummaryTransactionHistoryModel extends Equatable {
         : 'NA';
   }
 
+  String get feeString => 'HKD${checkDouble(fee).convertToCurrencyDecimal()}';
+
   String get createdFormattedString {
     DateTime localTime = formatDateTimeToLocal(date);
     return formatDateTimeAsString(localTime, dateFormat: 'yyyy-MM-dd HH:mm:ss');

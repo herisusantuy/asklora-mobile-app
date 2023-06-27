@@ -5,6 +5,7 @@ import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
+import '../../../../../core/presentation/column_text/column_text.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
@@ -128,14 +129,15 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
         child: Column(
           children: [
-            if (botStatus == BotStatus.liveExpireSoon)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
-                child: BotRolloverButton(
-                  botActiveOrderDetailModel: botActiveOrderDetailModel,
-                  botType: botType,
-                ),
-              ),
+            ///TODO : NEED TO TEMPORARY REMOVED AS AL1-2846
+            // if (botStatus == BotStatus.liveExpireSoon)
+            //   Padding(
+            //     padding: const EdgeInsets.only(bottom: 20.0),
+            //     child: BotRolloverButton(
+            //       botActiveOrderDetailModel: botActiveOrderDetailModel,
+            //       botType: botType,
+            //     ),
+            //   ),
 
             ///TODO : TEMPORARY FIX TO ALWAYS SHOW TERMINATE BUTTON
             // if (botStatus == BotStatus.active ||

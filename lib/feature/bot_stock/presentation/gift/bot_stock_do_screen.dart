@@ -8,7 +8,7 @@ import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../utils/bot_stock_utils.dart';
-import '../bot_recommendation/bot_recommendation_screen.dart';
+import '../bot_recommendation/free_bot_recommendation_screen.dart';
 import '../widgets/bot_stock_form.dart';
 
 class BotStockDoScreen extends StatelessWidget {
@@ -38,7 +38,7 @@ class BotStockDoScreen extends StatelessWidget {
         padding: const EdgeInsets.only(top: 30, bottom: 30.0),
         child: PrimaryButton(
           label: 'See My Recommendations',
-          onTap: () => BotRecommendationScreen.open(context),
+          onTap: () => FreeBotRecommendationScreen.open(context),
         ),
       ),
     );

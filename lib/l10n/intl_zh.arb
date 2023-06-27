@@ -1,5 +1,7 @@
 {
   "@@locale": "zh",
+  "botDuration": "Bot 期限",
+  "botManagementFee": "Bot 管理費用",
   "buttonNext": "下一步",
   "buttonCreateAnAccount": "建立帳戶",
   "buttonLetsBegin": "立即開始",
