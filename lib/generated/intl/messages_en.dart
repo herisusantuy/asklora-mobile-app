@@ -175,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm & Continue"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
+        "confirmTrade":
+            MessageLookupByLibrary.simpleMessage("“Confirm Trade” "),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("Continue Account Opening"),
@@ -456,6 +458,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
+        "reviewYourTradeSummary": MessageLookupByLibrary.simpleMessage(
+            "Review your trade summary and hit "),
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "setUpFinancialProfile":
@@ -487,6 +491,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeCompleted": MessageLookupByLibrary.simpleMessage("Time Completed"),
         "timeRequested": MessageLookupByLibrary.simpleMessage("Time Requested"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
+        "toExecuteIt": MessageLookupByLibrary.simpleMessage("to execute it!"),
         "toGiveYou": MessageLookupByLibrary.simpleMessage(
             "to give you a better idea of its trading potential!"),
         "tooltipBotDetailsEstMaxLoss": MessageLookupByLibrary.simpleMessage(

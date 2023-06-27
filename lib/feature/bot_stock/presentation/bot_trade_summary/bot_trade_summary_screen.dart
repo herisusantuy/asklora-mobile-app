@@ -125,14 +125,13 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                                text: 'Review your trade summary and hit ',
+                                text: S.of(context).reviewYourTradeSummary,
                                 style: AskLoraTextStyles.body1),
                             TextSpan(
-                                text: '“Confirm Trade” ',
+                                text: S.of(context).confirmTrade,
                                 style: AskLoraTextStyles.subtitle2),
                             TextSpan(
-                                text:
-                                    'Review your trade summary and hit “Confirm Trade” to execute it!',
+                                text: S.of(context).toExecuteIt,
                                 style: AskLoraTextStyles.body1)
                           ],
                         ),

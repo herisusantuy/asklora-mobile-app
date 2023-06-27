@@ -134,6 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeBankAccount": MessageLookupByLibrary.simpleMessage("更改銀行戶口"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
+        "confirmTrade": MessageLookupByLibrary.simpleMessage("“確認買入” "),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
@@ -339,6 +340,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "reviewYourTradeSummary":
+            MessageLookupByLibrary.simpleMessage("查看你嘅交易摘要，點擊 "),
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
@@ -356,6 +359,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisInteractiveGraph":
             MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "toExecuteIt": MessageLookupByLibrary.simpleMessage("就可以立即執行指示！"),
         "toGiveYou":
             MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
         "tooltipBotDetailsEstMaxLoss":

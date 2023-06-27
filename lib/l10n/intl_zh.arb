@@ -361,5 +361,8 @@
   "ifYouveGot" : "如果你有",
   "anyQuestion" : "任何",
   "aboutYourInvestment" : "關於投資嘅問題，可以點擊此處 ",
-  "personalAIAssistant" : "問你嘅AI助手Asklora! "
+  "personalAIAssistant" : "問你嘅AI助手Asklora! ",
+  "reviewYourTradeSummary" : "查看你嘅交易摘要，點擊 ",
+  "confirmTrade" : "“確認買入” ",
+  "toExecuteIt" : "就可以立即執行指示！"
 }

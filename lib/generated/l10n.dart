@@ -2972,6 +2972,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Review your trade summary and hit `
+  String get reviewYourTradeSummary {
+    return Intl.message(
+      'Review your trade summary and hit ',
+      name: 'reviewYourTradeSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `“Confirm Trade” `
+  String get confirmTrade {
+    return Intl.message(
+      '“Confirm Trade” ',
+      name: 'confirmTrade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to execute it!`
+  String get toExecuteIt {
+    return Intl.message(
+      'to execute it!',
+      name: 'toExecuteIt',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
