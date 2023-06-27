@@ -60,7 +60,7 @@ class LoraAiScreen extends StatelessWidget {
               }, listener: (context, state) {
                 if (state.botActiveOrderResponse.state ==
                     ResponseState.success) {
-                  final test = state.botActiveOrderResponse.data
+                  final botstocks = state.botActiveOrderResponse.data
                       ?.map((e) => Botstock(
                           ticker: e.symbol,
                           botType:
@@ -72,7 +72,7 @@ class LoraAiScreen extends StatelessWidget {
 
                   context
                       .read<LoraGptBloc>()
-                      .add(StorePortfolioBotStocks(botstocks: test ?? []));
+                      .add(StorePortfolioBotStocks(botstocks: botstocks ?? []));
                 }
               })
             ],
