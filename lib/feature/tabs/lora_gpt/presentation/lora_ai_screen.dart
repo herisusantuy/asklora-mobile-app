@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +21,7 @@ import '../bloc/lora_gpt_bloc.dart';
 import '../domain/conversation.dart';
 import '../domain/portfolio_query_request.dart';
 import '../repository/lora_gpt_repository.dart';
+import 'widget/drag_indicator_widget.dart';
 import 'widget/in_chat_bubble_widget.dart';
 import 'widget/lora_thinking_widget.dart';
 import 'widget/out_chat_bubble_widget.dart';
