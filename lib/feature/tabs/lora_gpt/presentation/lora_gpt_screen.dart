@@ -32,89 +32,124 @@ class _LoraGptScreenState extends State<LoraGptScreen>
   Widget build(BuildContext context) {
     searchFieldSize = MediaQuery.of(context).size.width;
     return CustomScaffold(
-        enableBackNavigation: false,
-        backgroundColor: Colors.transparent,
-        body: Container(
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/lora_gpt_background.png'),
-                    fit: BoxFit.cover)),
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    CustomHeader(
-                      isShowBottomBorder: true,
-                      title: '',
-                      body: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 11,
-                            height: 11,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AskLoraColors.primaryGreen),
+      enableBackNavigation: false,
+      backgroundColor: Colors.white.withOpacity(0.2),
+      body: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: AskLoraColors.black.withOpacity(0.4),
+            image: const DecorationImage(
+                image: AssetImage('assets/lora_gpt_background.png'),
+                fit: BoxFit.cover)),
+        child: Column(
+          children: [
+            const DragIndicatorWidget(),
+            CustomHeader(
+              title: '',
+              body: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 11,
+                    height: 11,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AskLoraColors.primaryGreen,
+                            spreadRadius: 2,
+                            blurRadius: 7, // changes position of shadow
                           ),
-                          const SizedBox(width: 10),
-                          CustomTextNew(
-                            'LORAGPT',
-                            style: AskLoraTextStyles.h5,
-                          )
                         ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 15),
-                          child: _chatList()),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-                      child: _bottomContent(),
-                    )
-                  ],
-                ),
-              ],
-            )));
+                        color: AskLoraColors.primaryGreen),
+                  ),
+                  const SizedBox(width: 30),
+                  CustomTextNew(
+                    'Lora',
+                    style: AskLoraTextStyles.h5
+                        .copyWith(color: AskLoraColors.white),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: _chatList),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 22),
+              child: _bottomContent(),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
-  Widget _chatList() {
-    return BlocConsumer<LoraGptBloc, LoraGptState>(
+  Widget get _chatList => BlocConsumer<LoraGptBloc, LoraGptState>(
         listener: (context, state) => {
-              if (state.status == ResponseState.error)
-                {
-                  CustomInAppNotification.show(context,
-                      'I am sorry! Currently I am having issue to connect with my server.')
-                }
-            },
+          if (state.status == ResponseState.error)
+            {
+              CustomInAppNotification.show(context,
+                  'I am sorry! Currently I am having issue to connect with my server.')
+            }
+        },
         buildWhen: (previous, current) =>
             previous.status != current.status &&
                 current.status != ResponseState.unknown ||
             previous.conversations.length != current.conversations.length,
-        builder: (context, state) => ListView.separated(
-              reverse: true,
-              itemCount: state.conversations.length,
-              itemBuilder: (context, index) {
-                final message = state
-                    .conversations[(state.conversations.length - 1) - index];
-                if (message is Lora) {
-                  return OutChatBubbleWidget((message).response,
-                      animateText: index == 0 && state.isTyping);
-                } else if (message is Me) {
-                  return InChatBubbleWidget(
-                      message: (message).query, name: state.userName);
-                } else if (message is Reset) {
-                  return _sessionResetWidget();
-                } else {
-                  return const LoraThinkingWidget();
-                }
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 17),
-            ));
-  }
+        builder: (context, state) => Stack(children: [
+          ListView.separated(
+            padding: const EdgeInsets.only(bottom: 40),
+            reverse: true,
+            itemCount: state.conversations.length,
+            itemBuilder: (context, index) {
+              final message =
+                  state.conversations[(state.conversations.length - 1) - index];
+              if (message is Lora) {
+                return OutChatBubbleWidget((message).response,
+                    animateText: index == 0 && state.isTyping);
+              } else if (message is Me) {
+                return InChatBubbleWidget(
+                    message: (message).query, name: state.userName);
+              } else if (message is Reset) {
+                return _sessionResetWidget();
+              } else {
+                return const LoraThinkingWidget();
+              }
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 17),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: AnimatedOpacity(
+              opacity: state.conversations.isEmpty ? 0 : 1,
+              duration: const Duration(milliseconds: 350),
+              child: ElevatedButton(
+                  onPressed: () =>
+                      context.read<LoraGptBloc>().add(const OnResetSession()),
+                  style: ElevatedButton.styleFrom(
+                    shape: const StadiumBorder(),
+                    backgroundColor: AskLoraColors.gray.withOpacity(0.8),
+                    elevation: 0,
+                    fixedSize: const Size(124, 32),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.add),
+                      CustomTextNew(
+                        'New chat',
+                        style: AskLoraTextStyles.body1
+                            .copyWith(color: AskLoraColors.white),
+                      )
+                    ],
+                  )),
+            ),
+          ),
+        ]),
+      );
 
   Widget _sessionResetWidget() => Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -148,34 +183,6 @@ class _LoraGptScreenState extends State<LoraGptScreen>
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AnimatedContainer(
-                width: state.query.isEmpty ? 40 : 0,
-                duration: const Duration(milliseconds: 200),
-                child: GestureDetector(
-                    child: Container(
-                      height: 40,
-                      width: 40,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: state.isTyping
-                                  ? AskLoraColors.darkGray
-                                  : AskLoraColors.primaryGreen,
-                              width: 1)),
-                      child: Icon(
-                        Icons.add,
-                        color: state.isTyping
-                            ? AskLoraColors.darkGray
-                            : AskLoraColors.primaryGreen,
-                        size: state.query.isEmpty ? 30 : 0,
-                      ),
-                    ),
-                    onTap: () {
-                      if (state.isTyping) return;
-                      context.read<LoraGptBloc>().add(const OnResetSession());
-                    }),
-              ),
-              if (state.query.isEmpty) const SizedBox(width: 10),
               Expanded(
                 child: FocusScope(
                   onFocusChange: (focus) {
@@ -184,6 +191,7 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                     });
                   },
                   child: TextFormField(
+                      cursorColor: AskLoraColors.white,
                       key: globalKey,
                       onFieldSubmitted: (str) =>
                           context.read<LoraGptBloc>().add(OnEditQuery(str)),
@@ -192,8 +200,11 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                           context.read<LoraGptBloc>().add(OnEditQuery(str)),
                       maxLines: 5,
                       minLines: 1,
-                      style: TextFieldStyle.valueTextStyle,
+                      style: TextFieldStyle.valueTextStyle
+                          .copyWith(color: AskLoraColors.white),
                       decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 17, vertical: 18),
                           enabledBorder: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                             Radius.circular(15.0),
@@ -203,17 +214,18 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                           focusedBorder: TextFieldStyle.focusedBorder.copyWith(
                               borderRadius: const BorderRadius.all(
                                   Radius.circular(15.0))),
-                          hintText: 'Type here...',
-                          fillColor: AskLoraColors.whiteSmoke,
+                          hintText: 'Ask me anything...',
+                          hintStyle: TextFieldStyle.valueTextStyle
+                              .copyWith(color: AskLoraColors.white),
+                          fillColor: AskLoraColors.white.withOpacity(0.05),
                           filled: !focused && controller.text.isEmpty)),
                 ),
               ),
-              if (state.query.isNotEmpty) const SizedBox(width: 10),
-              AnimatedContainer(
-                width: state.query.isEmpty ? 0 : 55,
-                duration: const Duration(milliseconds: 200),
-                child: SizedBox.square(
-                  dimension: 55,
+              const SizedBox(width: 14),
+              SizedBox.square(
+                dimension: 55,
+                child: AbsorbPointer(
+                  absorbing: state.query.isEmpty || state.isTyping,
                   child: ElevatedButton(
                       onPressed: () {
                         FocusScope.of(context).unfocus();
@@ -224,17 +236,30 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                         }
                       },
                       style: ElevatedButton.styleFrom(
+                        side: const BorderSide(color: AskLoraColors.white),
                         backgroundColor: state.query.isEmpty || state.isTyping
-                            ? AskLoraColors.lightGray50Alpha
+                            ? AskLoraColors.gray.withOpacity(0.2)
                             : AskLoraColors.primaryGreen,
                         shape: const CircleBorder(),
                         elevation: 0,
                         fixedSize: const Size(55, 55),
                       ),
-                      child: getSvgIcon('icon_sent_text',
-                          color: state.query.isEmpty || state.isTyping
-                              ? AskLoraColors.darkGray
-                              : AskLoraColors.charcoal)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 7,
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: getSvgIcon('icon_sent_text',
+                            color: AskLoraColors.white),
+                      )),
                 ),
               ),
             ],
