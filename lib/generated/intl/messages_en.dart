@@ -74,6 +74,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bank Account Number"),
         "bestSuitedFor":
             MessageLookupByLibrary.simpleMessage("Best Suited For"),
+        "botDuration": MessageLookupByLibrary.simpleMessage("Bot Duration"),
+        "botManagementFee":
+            MessageLookupByLibrary.simpleMessage("Bot Management Fee"),
         "botStockId": MessageLookupByLibrary.simpleMessage("Botstock ID"),
         "botTradeBottomSheetAccountNotYetApprovedSubTitle":
             MessageLookupByLibrary.simpleMessage(
