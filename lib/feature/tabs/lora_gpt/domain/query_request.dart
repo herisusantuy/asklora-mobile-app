@@ -2,14 +2,14 @@ import 'package:equatable/equatable.dart';
 
 abstract class BaseQueryRequest extends Equatable {}
 
-class QueryRequest {
+class GeneralQueryRequest extends BaseQueryRequest {
   final String input;
   final String userId;
   final String username;
   final String platform;
   final String sessionId;
 
-  QueryRequest(
+  GeneralQueryRequest(
       {required this.input,
       this.userId = 'user_id',
       this.username = 'testing user',
@@ -25,4 +25,8 @@ class QueryRequest {
         /// TODO: enable session if needed.
         // 'session_id': sessionId
       };
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [input, userId, username, platform, sessionId];
 }

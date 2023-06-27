@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
+import '../../bloc/tab_screen_bloc.dart';
 import '../domain/conversation.dart';
 import '../domain/portfolio_query_request.dart';
+import '../domain/query_request.dart';
 import '../repository/lora_gpt_repository.dart';
 
 part 'lora_gpt_event.dart';
@@ -27,6 +29,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     on<ShowOverLayScreen>(_onShowOverlayWidget);
     on<StorePortfolioBotStocks>(_onActiveBotResponse);
     on<StorePortfolioDetails>(_onStoreTotalPnl);
+    on<StoreTabPageState>(_onStoreTabPage);
   }
 
   final LoraGptRepository _loraGptRepository;
@@ -60,8 +63,15 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         userName: userName,
         isTyping: true));
 
-    final response = await _loraGptRepository.portfolio(
-        params: state.getRequest(), data: state.getBotstocks());
+    var response = BaseResponse.error();
+
+    if (state.tabPage == TabPage.portfolio) {
+      response = await _loraGptRepository.portfolio(
+          params: state.getPortfolioRequest(), data: state.getBotstocks());
+    } else {
+      response = await _loraGptRepository.general(
+          params: state.getGeneralChatRequest());
+    }
 
     if (response.state == ResponseState.success) {
       tempList.removeLast();
@@ -110,4 +120,8 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
           StorePortfolioDetails event, Emitter<LoraGptState> emit) =>
       emit(state.copyWith(
           totalPnl: event.totalPortfolioPnl, status: ResponseState.unknown));
+
+  void _onStoreTabPage(StoreTabPageState event, Emitter<LoraGptState> emit) =>
+      emit(state.copyWith(
+          tabPage: event.tabPage, status: ResponseState.unknown));
 }

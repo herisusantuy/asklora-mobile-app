@@ -14,6 +14,7 @@ import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../bloc/tab_screen_bloc.dart';
 import '../bloc/lora_gpt_bloc.dart';
 import '../domain/conversation.dart';
 import '../domain/portfolio_query_request.dart';
@@ -74,7 +75,15 @@ class LoraAiScreen extends StatelessWidget {
                       .read<LoraGptBloc>()
                       .add(StorePortfolioBotStocks(botstocks: botstocks ?? []));
                 }
-              })
+              }),
+              BlocListener<TabScreenBloc, TabScreenState>(
+                  listenWhen: (previous, current) =>
+                      previous.currentTabPage != current.currentTabPage,
+                  listener: (context, state) {
+                    context
+                        .read<LoraGptBloc>()
+                        .add(StoreTabPageState(tabPage: state.currentTabPage));
+                  }),
             ],
             child: BlocBuilder<LoraGptBloc, LoraGptState>(
                 builder: (context, state) => state.shouldShowOverlay
