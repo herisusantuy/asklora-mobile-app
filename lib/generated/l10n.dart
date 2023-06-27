@@ -150,6 +150,26 @@ class S {
     );
   }
 
+  /// `Bot Duration`
+  String get botDuration {
+    return Intl.message(
+      'Bot Duration',
+      name: 'botDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bot Management Fee`
+  String get botManagementFee {
+    return Intl.message(
+      'Bot Management Fee',
+      name: 'botManagementFee',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign Up`
   String get buttonSignUp {
     return Intl.message(

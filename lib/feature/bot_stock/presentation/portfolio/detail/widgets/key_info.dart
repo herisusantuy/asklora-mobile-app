@@ -40,12 +40,9 @@ class KeyInfo extends StatelessWidget {
           _spaceBetweenInfo,
           ..._stopLossMaxProfit(context),
           _spaceBetweenInfo,
-          PairColumnTextWithTooltip(
-              leftTitle: S.of(context).portfolioDetailKeyInfoBotStockStatus,
-              leftSubTitle: botStatus.name,
-              rightTitle:
-                  S.of(context).portfolioDetailKeyInfoBotStockNumberOfRollover,
-              rightSubTitle: botActiveOrderDetailModel.rolloverCountString),
+          ColumnText(
+              title: S.of(context).portfolioDetailKeyInfoBotStockStatus,
+              subTitle: botStatus.name),
           const SizedBox(
             height: 40,
           ),
