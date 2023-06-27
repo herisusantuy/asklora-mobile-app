@@ -80,12 +80,7 @@ class TabScreen extends StatelessWidget {
               BotStockBloc botStockBloc = BotStockBloc(
                   botStockRepository: BotStockRepository(),
                   transactionRepository: TransactionRepository());
-              if (context.read<AppBloc>().state.userJourney ==
-                  UserJourney.freeBotStock) {
-                botStockBloc.add(FetchFreeBotRecommendation());
-              } else {
-                botStockBloc.add(FetchBotRecommendation());
-              }
+              botStockBloc.add(FetchBotRecommendation());
               return botStockBloc;
             },
           ),

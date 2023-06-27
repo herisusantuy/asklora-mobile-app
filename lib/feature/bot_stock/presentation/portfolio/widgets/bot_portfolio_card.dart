@@ -60,7 +60,7 @@ class BotPortfolioCard extends StatelessWidget {
                     AutoSizedTextWidget(
                       botActiveOrderModel.tickerName,
                       style: AskLoraTextStyles.body2,
-                      maxLines: 1,
+                      maxLines: 2,
                       minFontSize: 9,
                       ellipsis: true,
                     ),

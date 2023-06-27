@@ -15,8 +15,8 @@ import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.d
 import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
 import '../../feature/bot_stock/domain/bot_recommendation_model.dart';
 import '../../feature/bot_stock/domain/orders/bot_active_order_model.dart';
-import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
+import '../../feature/bot_stock/presentation/bot_recommendation/free_bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
 import '../../feature/bot_stock/presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
@@ -144,10 +144,10 @@ class RouterGenerator {
       case BotStockDoScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const BotStockDoScreen());
-      case BotRecommendationScreen.route:
+      case FreeBotRecommendationScreen.route:
         return MaterialPageRoute(
             settings: settings,
-            builder: (_) => const BotRecommendationScreen());
+            builder: (_) => const FreeBotRecommendationScreen());
       case BotRecommendationDetailScreen.route:
         return MaterialPageRoute(
             settings: settings,
