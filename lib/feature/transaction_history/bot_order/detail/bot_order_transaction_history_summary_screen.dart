@@ -71,7 +71,7 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
         ),
         BotOrderTransactionHistorySummaryCard(
           title: S.of(context).botManagementFee,
-          subTitle: 'HKD40.0',
+          subTitle: botSummaryTransactionHistoryModel.feeString,
           showBottomBorder: index == 0,
         ),
       ],
