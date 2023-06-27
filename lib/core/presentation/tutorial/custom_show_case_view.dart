@@ -12,6 +12,9 @@ class CustomShowcaseView extends StatelessWidget {
   final TooltipPosition tooltipPosition;
   final BorderRadius targetBorderRadius;
   final EdgeInsets targetPadding;
+  final VoidCallback? onBarrierClick;
+  final bool disableDefaultTargetGestures;
+  final VoidCallback? onTargetClick;
   const CustomShowcaseView({
     Key? key,
     required this.tutorialKey,
@@ -21,11 +24,16 @@ class CustomShowcaseView extends StatelessWidget {
     this.tooltipPosition = TooltipPosition.bottom,
     this.targetPadding = const EdgeInsets.all(10),
     this.targetBorderRadius = const BorderRadius.all(Radius.circular(20)),
+    this.onBarrierClick,
+    this.disableDefaultTargetGestures = false,
+    this.onTargetClick,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Showcase.withWidget(
-      onTargetClick: () {},
+      disableDefaultTargetGestures: disableDefaultTargetGestures,
+      onTargetClick: onTargetClick ?? () {},
+      onBarrierClick: onBarrierClick,
       disableMovingAnimation: true,
       tooltipPosition: tooltipPosition,
       key: tutorialKey,
