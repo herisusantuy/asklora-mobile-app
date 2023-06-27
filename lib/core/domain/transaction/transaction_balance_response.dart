@@ -47,35 +47,40 @@ class TransactionBalanceResponse extends Equatable {
   Map<String, dynamic> toJson() => _$TransactionBalanceResponseToJson(this);
 
   String get totalPortfolioHkdStr => totalPortfolioHkd != 0
-      ? totalPortfolioHkd.convertToCurrencyDecimal()
+      ? totalPortfolioHkd.convertToCurrencyDecimal(decimalDigits: 2)
       : '0.0';
 
   String get withdrawableBalanceHkdStr => withdrawableBalanceHkd != 0
-      ? withdrawableBalanceHkd.convertToCurrencyDecimal()
+      ? withdrawableBalanceHkd.convertToCurrencyDecimal(decimalDigits: 2)
       : '/';
 
-  String get buyingPowerHkdStr =>
-      buyingPowerHkd != 0 ? buyingPowerHkd.convertToCurrencyDecimal() : '/';
+  String get buyingPowerHkdStr => buyingPowerHkd != 0
+      ? buyingPowerHkd.convertToCurrencyDecimal(decimalDigits: 2)
+      : '/';
 
-  String get totalBotstockHkdStr =>
-      totalBotStockHkd != 0 ? totalBotStockHkd.convertToCurrencyDecimal() : '/';
+  String get totalBotstockHkdStr => totalBotStockHkd != 0
+      ? totalBotStockHkd.convertToCurrencyDecimal(decimalDigits: 2)
+      : '/';
 
   String get totalPortfolioUsdStr => totalPortfolioHkd != 0
-      ? totalPortfolioUsd.convertToCurrencyDecimal()
+      ? totalPortfolioUsd.convertToCurrencyDecimal(decimalDigits: 2)
       : '0.0';
 
   String get withdrawableBalanceUsdStr => withdrawableBalanceUsd != 0
-      ? withdrawableBalanceUsd.convertToCurrencyDecimal()
+      ? withdrawableBalanceUsd.convertToCurrencyDecimal(decimalDigits: 2)
       : '/';
 
-  String get buyingPowerUsdStr =>
-      buyingPowerUsd != 0 ? buyingPowerUsd.convertToCurrencyDecimal() : '/';
+  String get buyingPowerUsdStr => buyingPowerUsd != 0
+      ? buyingPowerUsd.convertToCurrencyDecimal(decimalDigits: 2)
+      : '/';
 
-  String get totalBotstockUsdStr =>
-      totalBotStockUsd != 0 ? totalBotStockUsd.convertToCurrencyDecimal() : '/';
+  String get totalBotstockUsdStr => totalBotStockUsd != 0
+      ? totalBotStockUsd.convertToCurrencyDecimal(decimalDigits: 2)
+      : '/';
 
-  String get totalPnLStr =>
-      totalPnLPct != 0 ? '${totalPnLPct.convertToCurrencyDecimal()}%' : '/';
+  String get totalPnLStr => totalPnLPct != 0
+      ? '${totalPnLPct.convertToCurrencyDecimal(decimalDigits: 2)}%'
+      : '/';
 
   Color get totalPnLColor => totalPnLPct == 0
       ? AskLoraColors.charcoal

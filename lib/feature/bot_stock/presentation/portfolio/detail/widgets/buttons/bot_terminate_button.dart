@@ -38,7 +38,7 @@ class BotTerminateButton extends StatelessWidget {
           onTap: () => BotStockBottomSheet.endBotStockConfirmation(
               context,
               botActiveOrderDetailModel.uid,
-              botActiveOrderDetailModel.name,
+              '${botActiveOrderDetailModel.botInfo.botName} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol}',
               botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol),
         ),
       );
