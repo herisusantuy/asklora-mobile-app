@@ -27,6 +27,5 @@ class GeneralQueryRequest extends BaseQueryRequest {
       };
 
   @override
-  // TODO: implement props
   List<Object?> get props => [input, userId, username, platform, sessionId];
 }
