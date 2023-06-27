@@ -62,12 +62,27 @@ platform :ios do
     set_up_env_vars(env:"dev")
     cert_dev()
     build_ios_app(workspace: "Runner.xcworkspace", scheme: "dev", export_method: "development")
-#    upload_to_testflight(username: "asklora@loratechai.com", app_identifier: "ai.asklora.app.dev", ipa: "Runner.ipa", skip_waiting_for_build_processing: true)
-    firebase_app_distribution(
+    upload_to_testflight(username: "asklora@loratechai.com", app_identifier: "ai.asklora.app.dev", ipa: "Runner.ipa", skip_waiting_for_build_processing: true)
+    dev_release = firebase_app_distribution(
         app: ENV["FIREBASE_IOS_DEV_APP_ID"],
-        ipa_path: "Runner.ipa"
+        ipa_path: "Runner.ipa", debug: true,
     )
+
     upload_symbols()
+
+    #TODO: Make this as Private Lane.
+    slack(
+      slack_url: ENV["SLACK_HOOK_URL"],
+      message: "🐕  Asklora Dev iOS App successfully released! 👯🏾‍👯🏾‍",
+      success: true,
+      payload: {
+        "Build Date" => dev_release[:createTime],
+        "🌎 Environment" => "Development",
+        "📥 Download" => dev_release[:firebaseConsoleUri],
+        "Build Version" => dev_release[:displayVersion],
+      },
+      default_payloads: [:git_branch, :git_author],
+    )
   end
 
   desc "Upload DSYM symbols file on Crashlytics"
@@ -82,6 +97,19 @@ platform :ios do
     build_app(workspace: "Runner.xcworkspace", scheme: "staging",  export_method: "app-store")
     upload_to_testflight(username: "asklora@loratechai.com", app_identifier: "ai.asklora.app.stag", ipa: "Runner.ipa", skip_waiting_for_build_processing: true)
     upload_symbols()
+
+#    slack(
+#          slack_url: ENV["SLACK_HOOK_URL"],
+#          message: "🐕 , Asklora Dev iOS App successfully released!",
+#          success: true,
+#          payload: {
+#            "Build Date" => dev_release[:createTime],
+#            "🌎 Environment" => "Staging",
+#            "📥 Download" => dev_release[:firebaseConsoleUri],
+#            "Build Version" => dev_release[:displayVersion],
+#          },
+#          default_payloads: [:git_branch, :git_author],
+#    )
   end
 
   desc "Creating a production build"
