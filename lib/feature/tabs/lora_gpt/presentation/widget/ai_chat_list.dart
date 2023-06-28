@@ -27,20 +27,22 @@ class _AiChatListState extends State<AiChatList> {
             previous.status != current.status &&
                 current.status != ResponseState.unknown ||
             previous.conversations.length != current.conversations.length,
-        builder: (context, state) => Stack(children: [
-          ShaderMask(
-            shaderCallback: (rect) {
-              return LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.center,
-                  colors: [Colors.black, Colors.black.withOpacity(0)],
-                  stops: const [0.15, 0.4]).createShader(rect);
-            },
-            blendMode: BlendMode.dstOut,
-            child: NotificationListener<UserScrollNotification>(
-              onNotification: (notification) {
-                final ScrollDirection direction = notification.direction;
-                setState(() {
+        builder: (context, state) {
+          final List<Conversation> reversedConversations =
+              List.from(state.conversations.reversed);
+          return Stack(children: [
+            ShaderMask(
+              shaderCallback: (rect) {
+                return LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.center,
+                    colors: [Colors.black, Colors.black.withOpacity(0)],
+                    stops: const [0.15, 0.25]).createShader(rect);
+              },
+              blendMode: BlendMode.dstOut,
+              child: NotificationListener<UserScrollNotification>(
+                onNotification: (notification) {
+                  final ScrollDirection direction = notification.direction;
                   setState(() {
                     if (direction == ScrollDirection.reverse) {
                       _showNewChatButton = false;
@@ -48,11 +50,37 @@ class _AiChatListState extends State<AiChatList> {
                       _showNewChatButton = true;
                     }
                   });
-                });
-                return true;
-              },
-              child: ListView.separated(
-                padding: const EdgeInsets.only(bottom: 126),
+                  return true;
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(vertical: 72),
+                  reverse: true,
+                  child: Column(
+                    children: reversedConversations.map((e) {
+                      final message = state.conversations[
+                          (state.conversations.length - 1) -
+                              state.conversations.indexOf(e)];
+                      if (message is Lora) {
+                        return OutChatBubbleWidget((message).response,
+                            animateText:
+                                reversedConversations.indexOf(message) == 0 &&
+                                    state.isTyping);
+                      } else if (message is Me) {
+                        return InChatBubbleWidget(
+                            message: (message).query, name: state.userName);
+                      } else if (message is Reset) {
+                        return _sessionResetWidget();
+                      } else {
+                        return const LoraThinkingWidget();
+                      }
+                    }).toList(),
+                  ),
+                )
+
+                ///todo: some backup code in case something fishy happening
+                /*ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: 72),
                 reverse: true,
                 itemCount: state.conversations.length,
                 itemBuilder: (context, index) {
@@ -72,50 +100,53 @@ class _AiChatListState extends State<AiChatList> {
                 },
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 17),
+              )*/
+                ,
               ),
             ),
-          ),
-          AnimatedPositioned(
-            bottom: state.status == ResponseState.loading ||
-                    state.conversations.isEmpty ||
-                    _showNewChatButton
-                ? 0
-                : 64,
-            left: 0,
-            right: 0,
-            duration: _newChatButtonDuration,
-            child: UnconstrainedBox(
-              constrainedAxis: Axis.vertical,
-              child: AnimatedOpacity(
-                opacity: state.status == ResponseState.loading ||
-                        state.conversations.isEmpty ||
-                        _showNewChatButton
-                    ? 0
-                    : 1,
-                duration: _newChatButtonDuration,
-                child: ElevatedButton(
-                    onPressed: () =>
-                        context.read<LoraGptBloc>().add(const OnResetSession()),
-                    style: ElevatedButton.styleFrom(
-                      shape: const StadiumBorder(),
-                      backgroundColor: AskLoraColors.gray.withOpacity(0.8),
-                      elevation: 0,
-                      fixedSize: const Size(124, 32),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.add),
-                        CustomTextNew(
-                          'New chat',
-                          style: AskLoraTextStyles.body1
-                              .copyWith(color: AskLoraColors.white),
-                        )
-                      ],
-                    )),
+            AnimatedPositioned(
+              bottom: state.status == ResponseState.loading ||
+                      state.conversations.isEmpty ||
+                      _showNewChatButton
+                  ? 0
+                  : 64,
+              left: 0,
+              right: 0,
+              duration: _newChatButtonDuration,
+              child: UnconstrainedBox(
+                constrainedAxis: Axis.vertical,
+                child: AnimatedOpacity(
+                  opacity: state.status == ResponseState.loading ||
+                          state.conversations.isEmpty ||
+                          _showNewChatButton
+                      ? 0
+                      : 1,
+                  duration: _newChatButtonDuration,
+                  child: ElevatedButton(
+                      onPressed: () => context
+                          .read<LoraGptBloc>()
+                          .add(const OnResetSession()),
+                      style: ElevatedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                        backgroundColor: AskLoraColors.gray.withOpacity(0.8),
+                        elevation: 0,
+                        fixedSize: const Size(124, 32),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.add),
+                          CustomTextNew(
+                            'New chat',
+                            style: AskLoraTextStyles.body1
+                                .copyWith(color: AskLoraColors.white),
+                          )
+                        ],
+                      )),
+                ),
               ),
             ),
-          ),
-        ]),
+          ]);
+        },
       ),
     );
   }

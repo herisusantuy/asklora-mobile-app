@@ -33,8 +33,8 @@ class InChatBubbleWidget extends StatelessWidget {
               child: ClipRect(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(
-                    sigmaX: 5,
-                    sigmaY: 5,
+                    sigmaX: 7,
+                    sigmaY: 7,
                   ),
                   child: Container(
                       padding: const EdgeInsets.all(15),

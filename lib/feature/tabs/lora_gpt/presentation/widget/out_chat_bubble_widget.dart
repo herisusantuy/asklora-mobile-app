@@ -47,8 +47,8 @@ class OutChatBubbleWidget extends StatelessWidget {
             child: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 5,
-                  sigmaY: 5,
+                  sigmaX: 7,
+                  sigmaY: 7,
                 ),
                 child: Container(
                     padding: const EdgeInsets.all(15),
@@ -73,9 +73,12 @@ class OutChatBubbleWidget extends StatelessWidget {
                                   textStyle: AskLoraTextStyles.subtitle2
                                       .copyWith(color: AskLoraColors.white))
                             ],
-                            onFinished: () => context
-                                .read<LoraGptBloc>()
-                                .add(const OnFinishTyping()))
+                            onFinished: () {
+                              print('on finish type');
+                              context
+                                  .read<LoraGptBloc>()
+                                  .add(const OnFinishTyping());
+                            })
                         : CustomTextNew(message,
                             style: AskLoraTextStyles.subtitle2
                                 .copyWith(color: AskLoraColors.white))),
