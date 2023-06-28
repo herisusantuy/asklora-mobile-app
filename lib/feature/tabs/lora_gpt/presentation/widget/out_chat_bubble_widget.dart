@@ -47,8 +47,8 @@ class OutChatBubbleWidget extends StatelessWidget {
             child: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 7,
-                  sigmaY: 7,
+                  sigmaX: 5,
+                  sigmaY: 5,
                 ),
                 child: Container(
                     padding: const EdgeInsets.all(15),
