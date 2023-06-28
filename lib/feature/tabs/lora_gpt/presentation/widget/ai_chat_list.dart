@@ -54,26 +54,14 @@ class _AiChatListState extends State<AiChatList> {
                 },
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(vertical: 72),
+                  padding: const EdgeInsets.only(top: 72, bottom: 55),
                   reverse: true,
                   child: Column(
                     children: reversedConversations.map((e) {
-                      final message = state.conversations[
-                          (state.conversations.length - 1) -
-                              state.conversations.indexOf(e)];
-                      if (message is Lora) {
-                        return OutChatBubbleWidget((message).response,
-                            animateText:
-                                reversedConversations.indexOf(message) == 0 &&
-                                    state.isTyping);
-                      } else if (message is Me) {
-                        return InChatBubbleWidget(
-                            message: (message).query, name: state.userName);
-                      } else if (message is Reset) {
-                        return _sessionResetWidget();
-                      } else {
-                        return const LoraThinkingWidget();
-                      }
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 17),
+                        child: _getBubbleChat(state, e),
+                      );
                     }).toList(),
                   ),
                 )
@@ -149,6 +137,24 @@ class _AiChatListState extends State<AiChatList> {
         },
       ),
     );
+  }
+
+  Widget _getBubbleChat(LoraGptState state, Conversation e) {
+    final List<Conversation> reversedConversations =
+        List.from(state.conversations.reversed);
+    final message = reversedConversations[
+        (reversedConversations.length - 1) - reversedConversations.indexOf(e)];
+    if (message is Lora) {
+      return OutChatBubbleWidget((message).response,
+          animateText:
+              reversedConversations.indexOf(message) == 0 && state.isTyping);
+    } else if (message is Me) {
+      return InChatBubbleWidget(message: (message).query, name: state.userName);
+    } else if (message is Reset) {
+      return _sessionResetWidget();
+    } else {
+      return const LoraThinkingWidget();
+    }
   }
 
   Widget _sessionResetWidget() => Row(
