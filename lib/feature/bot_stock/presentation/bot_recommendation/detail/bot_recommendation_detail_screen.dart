@@ -9,6 +9,7 @@ import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/presentation/tutorial/Utils/tutorial.dart';
+import '../../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
@@ -53,13 +54,6 @@ class BotRecommendationDetailScreen extends StatelessWidget {
           listener: (context, state) {
             CustomLoadingOverlay.of(context)
                 .show(state.botDetailResponse.state);
-            if (state.botDetailResponse.state == ResponseState.success) {
-              ShowCaseWidget.of(context).startShowCase([
-                TutorialJourney.botDetails,
-                TutorialJourney.botChart,
-                TutorialJourney.chatLoraTab
-              ]);
-            }
           },
           buildWhen: (previous, current) =>
               previous.botDetailResponse.state !=
@@ -67,58 +61,78 @@ class BotRecommendationDetailScreen extends StatelessWidget {
           builder: (context, state) => RefreshIndicator(
             onRefresh: () async =>
                 _fetchBotDetail(context.read<BotStockBloc>()),
-            child: CustomLayoutWithBlurPopUp(
-              loraPopUpMessageModel: LoraPopUpMessageModel(
-                title: S.of(context).errorGettingInformationTitle,
-                subTitle: S
-                    .of(context)
-                    .errorGettingInformationInvestmentDetailSubTitle,
-                primaryButtonLabel: S.of(context).buttonReloadPage,
-                secondaryButtonLabel: S.of(context).buttonCancel,
-                onSecondaryButtonTap: () => Navigator.pop(context),
-                onPrimaryButtonTap: () =>
-                    _fetchBotDetail(context.read<BotStockBloc>()),
-              ),
-              showPopUp: state.botDetailResponse.state == ResponseState.error,
-              content: BotStockForm(
-                useHeader: true,
-                title:
-                    '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
-                padding: EdgeInsets.zero,
-                content: BotRecommendationDetailContent(
-                  botRecommendationModel: botRecommendationModel,
-                  botType: botType,
-                  botDetailModel: state.botDetailResponse.data,
-                ),
-                bottomButton: Padding(
-                  padding: AppValues.screenHorizontalPadding
-                      .copyWith(top: 24, bottom: 30),
-                  child: PrimaryButton(
-                    disabled: state.botDetailResponse.state ==
-                            ResponseState.loading ||
-                        state.botDetailResponse.state == ResponseState.error,
-                    label: S.of(context).trade,
-                    onTap: () {
-                      if (botRecommendationModel.freeBot) {
-                        BotTradeSummaryScreen.open(
-                            context: context,
-                            botTradeSummaryModel: BotTradeSummaryModel(
-                                botType: botType,
-                                botRecommendationModel: botRecommendationModel,
-                                botDetailModel: state.botDetailResponse.data!,
-                                amount: 500));
-                      } else {
-                        BotStockBottomSheet.amountBotStockForm(
-                            context,
-                            botType,
-                            botRecommendationModel,
-                            state.botDetailResponse.data!,
-                            state.buyingPower);
-                      }
-                    },
+            child: BlocConsumer<TutorialBloc, TutorialState>(
+              listenWhen: (previous, current) =>
+                  previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
+              listener: (context, tutorialState) {
+                if (tutorialState.isBotDetailsTutorial) {
+                  ShowCaseWidget.of(context).startShowCase([
+                    TutorialJourney.botDetails,
+                    TutorialJourney.botChart,
+                    TutorialJourney.chatLoraTab
+                  ]);
+                }
+              },
+              builder: (context, tutorialState) {
+                return CustomLayoutWithBlurPopUp(
+                  loraPopUpMessageModel: LoraPopUpMessageModel(
+                    title: S.of(context).errorGettingInformationTitle,
+                    subTitle: S
+                        .of(context)
+                        .errorGettingInformationInvestmentDetailSubTitle,
+                    primaryButtonLabel: S.of(context).buttonReloadPage,
+                    secondaryButtonLabel: S.of(context).buttonCancel,
+                    onSecondaryButtonTap: () => Navigator.pop(context),
+                    onPrimaryButtonTap: () =>
+                        _fetchBotDetail(context.read<BotStockBloc>()),
                   ),
-                ),
-              ),
+                  showPopUp:
+                      state.botDetailResponse.state == ResponseState.error,
+                  content: BotStockForm(
+                    useHeader: true,
+                    title:
+                        '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
+                    padding: EdgeInsets.zero,
+                    content: BotRecommendationDetailContent(
+                      botRecommendationModel: botRecommendationModel,
+                      botType: botType,
+                      botDetailModel: state.botDetailResponse.data,
+                      isTutorial: tutorialState.isBotDetailsTutorial,
+                    ),
+                    bottomButton: Padding(
+                      padding: AppValues.screenHorizontalPadding
+                          .copyWith(top: 24, bottom: 30),
+                      child: PrimaryButton(
+                        disabled: state.botDetailResponse.state ==
+                                ResponseState.loading ||
+                            state.botDetailResponse.state ==
+                                ResponseState.error,
+                        label: S.of(context).trade,
+                        onTap: () {
+                          if (botRecommendationModel.freeBot) {
+                            BotTradeSummaryScreen.open(
+                                context: context,
+                                botTradeSummaryModel: BotTradeSummaryModel(
+                                    botType: botType,
+                                    botRecommendationModel:
+                                        botRecommendationModel,
+                                    botDetailModel:
+                                        state.botDetailResponse.data!,
+                                    amount: 500));
+                          } else {
+                            BotStockBottomSheet.amountBotStockForm(
+                                context,
+                                botType,
+                                botRecommendationModel,
+                                state.botDetailResponse.data!,
+                                state.buyingPower);
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ),

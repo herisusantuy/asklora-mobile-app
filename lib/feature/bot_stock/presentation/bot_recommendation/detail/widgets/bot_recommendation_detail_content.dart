@@ -26,11 +26,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
   );
+  final bool isTutorial;
 
   const BotRecommendationDetailContent(
       {required this.botRecommendationModel,
       required this.botType,
       this.botDetailModel,
+      this.isTutorial = false,
       Key? key})
       : super(key: key);
 
@@ -39,7 +41,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _botDetailsExpansionTile(context),
+        if (!isTutorial) _botDetailsExpansionTile(context),
         _detailedInformation(context),
         _chartWidget(context),
       ],

@@ -11,8 +11,10 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../core/presentation/tutorial/Utils/tutorial.dart';
+import '../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
+import '../../../core/repository/tutorial_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
@@ -95,6 +97,11 @@ class TabScreen extends StatelessWidget {
                   sharedPreference: SharedPreference(),
                   ppiResponseRepository: PpiResponseRepository(),
                   jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
+          BlocProvider(
+            create: (_) =>
+                TutorialBloc(tutorialRepository: TutorialRepository())
+                  ..add(InitTutorial()),
+          ),
         ],
         child: CustomScaffold(
           enableBackNavigation: false,
