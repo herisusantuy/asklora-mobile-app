@@ -10,9 +10,21 @@ class TutorialRepository {
     return response;
   }
 
+  Future<bool> setTradeSummaryTutorial() async {
+    bool response =
+        await _sharedPreference.writeBoolData(sfKeyTradeSummaryTutorial, false);
+    return response;
+  }
+
   Future<bool> isBotDetailsTutorial() async {
     bool? response =
         await _sharedPreference.readBoolData(sfKeyBotDetailsTutorial);
+    return response ?? true;
+  }
+
+  Future<bool> isTradeSummaryTutorial() async {
+    bool? response =
+        await _sharedPreference.readBoolData(sfKeyTradeSummaryTutorial);
     return response ?? true;
   }
 }

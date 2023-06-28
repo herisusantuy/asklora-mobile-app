@@ -10,3 +10,5 @@ abstract class TutorialEvent extends Equatable {
 class InitTutorial extends TutorialEvent {}
 
 class BotDetailsTutorialFinished extends TutorialEvent {}
+
+class TradeSummaryTutorialFinished extends TutorialEvent {}

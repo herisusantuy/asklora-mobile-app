@@ -17,3 +17,4 @@ const String sfKeyEmailNotification = 'email_notification';
 const String sfKeyAccountData = 'account_data';
 const String sfKeyLocalisationData = 'localisation_data';
 const String sfKeyBotDetailsTutorial = 'bot_details_tutorial';
+const String sfKeyTradeSummaryTutorial = 'trade"_summary_tutorial';
