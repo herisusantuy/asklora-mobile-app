@@ -11,8 +11,10 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../core/presentation/tutorial/Utils/tutorial.dart';
+import '../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
+import '../../../core/repository/tutorial_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
@@ -95,6 +97,11 @@ class TabScreen extends StatelessWidget {
                   sharedPreference: SharedPreference(),
                   ppiResponseRepository: PpiResponseRepository(),
                   jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
+          BlocProvider(
+            create: (_) =>
+                TutorialBloc(tutorialRepository: TutorialRepository())
+                  ..add(InitTutorial()),
+          ),
         ],
         child: CustomScaffold(
           enableBackNavigation: false,
@@ -113,25 +120,25 @@ class TabScreen extends StatelessWidget {
                             ? TabPage.forYou
                             : TabPage.home,
                       ),
-                      child: BlocListener<TabScreenBloc, TabScreenState>(
-                        listenWhen: (previous, current) =>
-                            previous.tabScreenBackState !=
-                            current.tabScreenBackState,
-                        listener: (context, state) {
-                          if (state.tabScreenBackState ==
-                              TabScreenBackState.openConfirmation) {
-                            CustomInAppNotification.show(
-                                context, S.of(context).pressBackAgain,
-                                type: PopupType.grey);
-                          } else if (state.tabScreenBackState ==
-                              TabScreenBackState.closeApp) {
-                            SystemNavigator.pop();
-                          }
-                        },
-                        child: ShowCaseWidget(
-                          disableBarrierInteraction: true,
-                          builder: Builder(
-                            builder: (context) => WillPopScope(
+                      child: ShowCaseWidget(
+                        disableBarrierInteraction: true,
+                        builder: Builder(builder: (context) {
+                          return BlocListener<TabScreenBloc, TabScreenState>(
+                            listenWhen: (previous, current) =>
+                                previous.tabScreenBackState !=
+                                current.tabScreenBackState,
+                            listener: (context, state) {
+                              if (state.tabScreenBackState ==
+                                  TabScreenBackState.openConfirmation) {
+                                CustomInAppNotification.show(
+                                    context, S.of(context).pressBackAgain,
+                                    type: PopupType.grey);
+                              } else if (state.tabScreenBackState ==
+                                  TabScreenBackState.closeApp) {
+                                SystemNavigator.pop();
+                              }
+                            },
+                            child: WillPopScope(
                               onWillPop: () async {
                                 context
                                     .read<TabScreenBloc>()
@@ -146,8 +153,8 @@ class TabScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
-                        ),
+                          );
+                        }),
                       ),
                     )
                   : const SizedBox.shrink(),

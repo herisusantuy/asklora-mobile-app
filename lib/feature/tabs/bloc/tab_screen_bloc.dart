@@ -2,19 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/presentation/tutorial/Utils/tutorial.dart';
-
-part 'tab_screen_state.dart';
-
 part 'tab_screen_event.dart';
+part 'tab_screen_state.dart';
 
 class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   TabScreenBloc({required TabPage initialTabPage})
-      : super(TabScreenState(currentTabPage: initialTabPage, tutorialKeys: [
-          TutorialJourney.botDetails,
-          TutorialJourney.botChart,
-          TutorialJourney.chatLoraTab,
-        ])) {
+      : super(TabScreenState(currentTabPage: initialTabPage)) {
     on<TabChanged>(_onTabChanged);
     on<AiButtonSelected>(_onAiButtonSelected);
     on<BackButtonClicked>(_onBackButtonClicked);
