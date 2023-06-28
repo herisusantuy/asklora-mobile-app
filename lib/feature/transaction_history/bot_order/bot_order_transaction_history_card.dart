@@ -31,7 +31,8 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Flexible(
-                          child: CustomTextNew(transactionHistoryModel.title)),
+                          child: CustomTextNew(transactionHistoryModel.title,
+                              style: AskLoraTextStyles.subtitle2)),
                       if (transactionHistoryModel.isDummy) const FreeBotBadge(),
                     ],
                   ),

@@ -29,7 +29,8 @@ class TransferTransactionHistoryCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: CustomTextNew(transactionHistoryModel.title),
+                  child: CustomTextNew(transactionHistoryModel.title,
+                      style: AskLoraTextStyles.subtitle1),
                 ),
                 const SizedBox(
                   width: 14,
