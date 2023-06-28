@@ -80,7 +80,7 @@ class _AiChatListState extends State<AiChatList> {
                     state.conversations.isEmpty ||
                     _showNewChatButton
                 ? 0
-                : 74,
+                : 64,
             left: 0,
             right: 0,
             duration: _newChatButtonDuration,
