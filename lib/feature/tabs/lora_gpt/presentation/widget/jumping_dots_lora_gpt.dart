@@ -94,7 +94,7 @@ class JumpingDotsLoraGptWidget extends StatefulWidget {
         super(key: key);
 
   @override
-  _JumpingDotsLoraGptWidgetState createState() =>
+  State<JumpingDotsLoraGptWidget> createState() =>
       _JumpingDotsLoraGptWidgetState();
 }
 
