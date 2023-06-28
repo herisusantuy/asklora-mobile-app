@@ -141,10 +141,10 @@ class MarketOrderWidget extends StatelessWidget {
                     context.read<MarketBloc>().add(const ResetMarketValue());
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: state.marketType == MarketType.amount
+                      backgroundColor: state.marketType == MarketType.amount
                           ? Colors.blue
                           : Colors.white,
-                      onPrimary: state.marketType == MarketType.amount
+                      foregroundColor: state.marketType == MarketType.amount
                           ? Colors.white
                           : Colors.blue,
                       shape: RoundedRectangleBorder(
