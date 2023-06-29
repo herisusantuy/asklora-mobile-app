@@ -66,6 +66,7 @@ platform :ios do
     dev_release = firebase_app_distribution(
         app: ENV["FIREBASE_IOS_DEV_APP_ID"],
         ipa_path: "Runner.ipa", debug: true,
+        groups: "AskLora, Internal",
     )
 
     upload_symbols()
