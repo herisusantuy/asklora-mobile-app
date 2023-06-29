@@ -8,7 +8,8 @@ enum DepositType {
 
   final double minDeposit;
 
-  String get minDepositString => minDeposit.convertToCurrencyDecimal(decimalDigits: 1);
+  String get minDepositString =>
+      minDeposit.convertToCurrencyDecimal(decimalDigits: 1);
 
   const DepositType({required this.minDeposit});
 }

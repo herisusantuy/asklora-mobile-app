@@ -114,8 +114,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CustomTextNew(
-                      (botDetailModel?.price ?? 0)
-                          .convertToCurrencyDecimal(),
+                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
@@ -267,13 +266,13 @@ class BotRecommendationDetailContent extends StatelessWidget {
               leftTitle: botType == BotType.plank
                   ? S.of(context).estStopLossPercent
                   : S.of(context).estMaxLossPercent,
-              leftSubTitle: botDetailModel.estStopLossPct
-                  .convertToCurrencyDecimal(),
+              leftSubTitle:
+                  botDetailModel.estStopLossPct.convertToCurrencyDecimal(),
               rightTitle: botType == BotType.plank
                   ? S.of(context).estTakeProfitPercent
                   : S.of(context).estMaxProfitPercent,
-              rightSubTitle: botDetailModel.estTakeProfitPct
-                  .convertToCurrencyDecimal(),
+              rightSubTitle:
+                  botDetailModel.estTakeProfitPct.convertToCurrencyDecimal(),
               leftTooltipText: botType == BotType.plank
                   ? S.of(context).tooltipBotDetailsEstStopLoss
                   : S.of(context).tooltipBotDetailsEstMaxLoss,

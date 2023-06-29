@@ -125,8 +125,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
             : 'NA';
   }
 
-  String get maxLossPctString =>
-      maxLossPct.convertToCurrencyDecimal();
+  String get maxLossPctString => maxLossPct.convertToCurrencyDecimal();
 
   String get targetProfitPctString =>
       targetProfitPct.convertToCurrencyDecimal();

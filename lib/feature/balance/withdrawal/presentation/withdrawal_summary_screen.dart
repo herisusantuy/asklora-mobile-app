@@ -118,8 +118,8 @@ class WithdrawalSummaryScreen extends StatelessWidget {
     );
   }
 
-  String get _totalAmount =>
-      (args.withdrawalAmount - transactionFee).convertToCurrencyDecimal(decimalDigits: 1);
+  String get _totalAmount => (args.withdrawalAmount - transactionFee)
+      .convertToCurrencyDecimal(decimalDigits: 1);
 
   String get _withdrawalAmount =>
       args.withdrawalAmount.convertToCurrencyDecimal(decimalDigits: 1);
