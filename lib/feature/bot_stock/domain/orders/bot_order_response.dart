@@ -6,7 +6,6 @@ part 'bot_order_response.g.dart';
 
 @JsonSerializable()
 class BotOrderResponse {
-  @JsonKey(name: 'detail')
   final String detail;
 
   const BotOrderResponse(this.detail);
@@ -19,7 +18,6 @@ class BotOrderResponse {
 
 @JsonSerializable()
 class TerminateOrderResponse {
-  @JsonKey(name: 'detail')
   final String detail;
   @JsonKey(name: 'optimal_time')
   final String optimalTime;

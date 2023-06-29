@@ -130,6 +130,8 @@ class BotActiveOrderDetailModel extends BotDetailModel {
 
   BotStatus get botStatus => BotStatus.findByOmsStatus(status);
 
+  BotType get botType => BotType.findByString(botInfo.botName);
+
   String get maxLossPctString =>
       maxLossPct.convertToCurrencyDecimal(decimalDigits: 2);
 

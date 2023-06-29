@@ -67,4 +67,13 @@ class PortfolioState extends Equatable {
       pendingFilterChecked: pendingFilterChecked ?? this.pendingFilterChecked,
     );
   }
+
+  bool get isShowTerminateButton =>
+      botActiveOrderDetailResponse.data?.botStatus == BotStatus.live ||
+      botActiveOrderDetailResponse.data?.botStatus ==
+          BotStatus.liveExpireSoon ||
+      botActiveOrderDetailResponse.data?.omsStatus == OmsStatus.indicative;
+
+  bool get isShowCancelButton =>
+      botActiveOrderDetailResponse.data?.omsStatus == OmsStatus.initialized;
 }

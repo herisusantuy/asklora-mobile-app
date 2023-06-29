@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../core/utils/extensions.dart';
+import '../../utils/bot_stock_utils.dart';
 
 part 'bot_active_order_model.g.dart';
 
@@ -29,6 +30,9 @@ class BotActiveOrderModel {
   final String botDuration;
 
   String get expireDateStr => expireDate ?? '';
+
+  String get botName =>
+      '${BotType.findByString(botAppsName).upperCaseName} $symbol';
 
   const BotActiveOrderModel(
       this.uid,
