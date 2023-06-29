@@ -73,9 +73,12 @@ class OutChatBubbleWidget extends StatelessWidget {
                                   textStyle: AskLoraTextStyles.subtitle2
                                       .copyWith(color: AskLoraColors.white))
                             ],
-                            onFinished: () => context
-                                .read<LoraGptBloc>()
-                                .add(const OnFinishTyping()))
+                            onFinished: () {
+                              print('on finish type');
+                              context
+                                  .read<LoraGptBloc>()
+                                  .add(const OnFinishTyping());
+                            })
                         : CustomTextNew(message,
                             style: AskLoraTextStyles.subtitle2
                                 .copyWith(color: AskLoraColors.white))),

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
@@ -30,6 +31,8 @@ import 'widget/utils/breathing_glowing_button.dart';
 part 'lora_ai_overlay_screen.dart';
 
 part 'lora_gpt_screen.dart';
+
+part 'widget/ai_chat_list.dart';
 
 class LoraAiScreen extends StatelessWidget {
   const LoraAiScreen({super.key});
