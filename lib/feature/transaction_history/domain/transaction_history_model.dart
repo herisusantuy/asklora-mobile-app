@@ -9,7 +9,7 @@ import '../utils/transaction_history_util.dart';
 
 part 'transaction_history_model.g.dart';
 
-enum TransactionHistoryType { all, bot, transfer }
+enum TransactionHistoryType { all, bot, transfer, subscription }
 
 @JsonSerializable()
 class TransactionHistoryModel extends Equatable {

@@ -17,9 +17,7 @@ class CustomShowcaseView extends StatelessWidget {
   final TooltipPosition tooltipPosition;
   final BorderRadius targetBorderRadius;
   final EdgeInsets targetPadding;
-  final VoidCallback? onBarrierClick;
-  final bool disableDefaultTargetGestures;
-  final VoidCallback? onTargetClick;
+
   final double overlayOpacity;
   final Color overlayColor;
   final PointerPosition pointerPosition;
@@ -32,9 +30,6 @@ class CustomShowcaseView extends StatelessWidget {
     this.tooltipPosition = TooltipPosition.bottom,
     this.targetPadding = const EdgeInsets.all(10),
     this.targetBorderRadius = const BorderRadius.all(Radius.circular(20)),
-    this.onBarrierClick,
-    this.disableDefaultTargetGestures = false,
-    this.onTargetClick,
     this.overlayColor = Colors.black,
     this.overlayOpacity = 0.5,
     this.pointerPosition = PointerPosition.bottom,
@@ -42,10 +37,8 @@ class CustomShowcaseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Showcase.withWidget(
-      disableDefaultTargetGestures: disableDefaultTargetGestures,
-      onTargetClick: onTargetClick ?? () {},
-      onBarrierClick: onBarrierClick,
-      disableMovingAnimation: true,
+      onBarrierClick: onToolTipClick,
+      onTargetClick: onToolTipClick,
       tooltipPosition: tooltipPosition,
       key: tutorialKey,
       overlayColor: overlayColor,
@@ -56,38 +49,50 @@ class CustomShowcaseView extends StatelessWidget {
           .width, //* container width for tooltip widget
       height: 0,
       targetBorderRadius: targetBorderRadius,
-      container: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          if (pointerPosition == PointerPosition.top)
-            Column(
-              children: [
-                GestureDetector(
-                    onTap: onToolTipClick, child: const TutorialTouchGuide()),
-                const SizedBox(height: 10),
-              ],
-            ),
-          Container(
-              margin: tooltipPosition == TooltipPosition.top
-                  ? EdgeInsets.zero
-                  : const EdgeInsets.only(top: 10),
-              width: MediaQuery.of(context).size.width -
-                  30, //* width of tooltip widget
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-              decoration: BoxDecoration(
-                color: AskLoraColors.lightGreen,
-                borderRadius: BorderRadius.circular(20),
+      container: GestureDetector(
+        onTap: onToolTipClick,
+        child: Container(
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              if (pointerPosition == PointerPosition.top)
+                Column(
+                  children: [
+                    GestureDetector(
+                        onTap: onToolTipClick,
+                        child: const TutorialTouchGuide()),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+              GestureDetector(
+                onTap: onToolTipClick,
+                child: Container(
+                    margin: tooltipPosition == TooltipPosition.top
+                        ? EdgeInsets.zero
+                        : const EdgeInsets.only(top: 10),
+                    width: MediaQuery.of(context).size.width -
+                        30, //* width of tooltip widget
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: AskLoraColors.lightGreen,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: tooltipWidget),
               ),
-              child: tooltipWidget),
-          if (pointerPosition == PointerPosition.bottom)
-            Column(
-              children: [
-                const SizedBox(height: 10),
-                GestureDetector(
-                    onTap: onToolTipClick, child: const TutorialTouchGuide()),
-              ],
-            )
-        ],
+              if (pointerPosition == PointerPosition.bottom)
+                Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    GestureDetector(
+                        onTap: onToolTipClick,
+                        child: const TutorialTouchGuide()),
+                  ],
+                )
+            ],
+          ),
+        ),
       ),
       child: child,
     );

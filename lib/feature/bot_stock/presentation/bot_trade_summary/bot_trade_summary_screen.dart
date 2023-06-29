@@ -155,8 +155,6 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         ),
                         onToolTipClick: () =>
                             _onTradeSummaryTutorialFinished(context),
-                        onBarrierClick: () =>
-                            _onTradeSummaryTutorialFinished(context),
                         child: RoundColoredBox(
                           content: Column(
                             children: [
