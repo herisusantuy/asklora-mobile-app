@@ -4,6 +4,11 @@ import 'package:showcaseview/showcaseview.dart';
 import '../../styles/asklora_colors.dart';
 import 'tutorial_touch_guide.dart';
 
+enum PointerPosition {
+  top,
+  bottom,
+}
+
 class CustomShowcaseView extends StatelessWidget {
   final GlobalKey tutorialKey;
   final Widget child;
@@ -14,6 +19,7 @@ class CustomShowcaseView extends StatelessWidget {
   final EdgeInsets targetPadding;
   final double overlayOpacity;
   final Color overlayColor;
+  final PointerPosition pointerPosition;
   const CustomShowcaseView({
     Key? key,
     required this.tutorialKey,
@@ -25,6 +31,7 @@ class CustomShowcaseView extends StatelessWidget {
     this.targetBorderRadius = const BorderRadius.all(Radius.circular(20)),
     this.overlayColor = Colors.black,
     this.overlayOpacity = 0.5,
+    this.pointerPosition = PointerPosition.bottom,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -44,6 +51,14 @@ class CustomShowcaseView extends StatelessWidget {
       container: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          if (pointerPosition == PointerPosition.top)
+            Column(
+              children: [
+                GestureDetector(
+                    onTap: onToolTipClick, child: const TutorialTouchGuide()),
+                const SizedBox(height: 10),
+              ],
+            ),
           Container(
               margin: tooltipPosition == TooltipPosition.top
                   ? EdgeInsets.zero
@@ -56,9 +71,14 @@ class CustomShowcaseView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: tooltipWidget),
-          const SizedBox(height: 10),
-          GestureDetector(
-              onTap: onToolTipClick, child: const TutorialTouchGuide()),
+          if (pointerPosition == PointerPosition.bottom)
+            Column(
+              children: [
+                const SizedBox(height: 10),
+                GestureDetector(
+                    onTap: onToolTipClick, child: const TutorialTouchGuide()),
+              ],
+            )
         ],
       ),
       child: child,
