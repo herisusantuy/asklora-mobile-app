@@ -402,6 +402,11 @@
   "ifYouveGot" : "If you’ve got ",
   "anyQuestion" : "any questions ",
   "aboutYourInvestment" : "about your investment, tap this icon to summon your ",
-  "personalAIAssistant" : "personal AI assistant Asklora! "
+  "personalAIAssistant" : "personal AI assistant Asklora! ",
+  "simplyTypeAQuestion" : "Simply type a question and tap the ",
+  "sendIcon" : "send icon ",
+  "toStartAConversation" : "to start a conversation. Swipe down ",
+  "topBar" : "top bar ",
+  "toDismissAsklora" : "to dismiss Asklora. "
 
 }

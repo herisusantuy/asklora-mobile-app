@@ -12,6 +12,8 @@ class CustomShowcaseView extends StatelessWidget {
   final TooltipPosition tooltipPosition;
   final BorderRadius targetBorderRadius;
   final EdgeInsets targetPadding;
+  final double overlayOpacity;
+  final Color overlayColor;
   const CustomShowcaseView({
     Key? key,
     required this.tutorialKey,
@@ -21,6 +23,8 @@ class CustomShowcaseView extends StatelessWidget {
     this.tooltipPosition = TooltipPosition.bottom,
     this.targetPadding = const EdgeInsets.all(10),
     this.targetBorderRadius = const BorderRadius.all(Radius.circular(20)),
+    this.overlayColor = Colors.black,
+    this.overlayOpacity = 0.5,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -29,8 +33,8 @@ class CustomShowcaseView extends StatelessWidget {
       disableMovingAnimation: true,
       tooltipPosition: tooltipPosition,
       key: tutorialKey,
-      overlayColor: Colors.black,
-      overlayOpacity: 0.5,
+      overlayColor: overlayColor,
+      overlayOpacity: overlayOpacity,
       targetPadding: targetPadding,
       width: MediaQuery.of(context)
           .size

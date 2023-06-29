@@ -4,7 +4,7 @@ import 'package:showcaseview/showcaseview.dart';
 import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
-import '../../../../../../core/presentation/tutorial/Utils/tutorial.dart';
+import '../../../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
 import '../../../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';

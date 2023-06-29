@@ -34,10 +34,8 @@ class Tabs extends StatelessWidget {
               CustomShowcaseView(
                 tutorialKey: TutorialJourney.chatLoraTab,
                 onToolTipClick: () {
-                  ShowCaseWidget.of(context).next();
-                  context
-                      .read<TutorialBloc>()
-                      .add(BotDetailsTutorialFinished());
+                  Future.delayed(const Duration(milliseconds: 300),
+                      () => ShowCaseWidget.of(context).next());
                   context.read<TabScreenBloc>().add(const AiButtonSelected());
                 },
                 tooltipPosition: TooltipPosition.top,

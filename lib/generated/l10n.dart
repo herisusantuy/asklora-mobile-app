@@ -2972,6 +2972,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Simply type a question and tap the `
+  String get simplyTypeAQuestion {
+    return Intl.message(
+      'Simply type a question and tap the ',
+      name: 'simplyTypeAQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `send icon `
+  String get sendIcon {
+    return Intl.message(
+      'send icon ',
+      name: 'sendIcon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to start a conversation. Swipe down `
+  String get toStartAConversation {
+    return Intl.message(
+      'to start a conversation. Swipe down ',
+      name: 'toStartAConversation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `top bar `
+  String get topBar {
+    return Intl.message(
+      'top bar ',
+      name: 'topBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to dismiss Asklora. `
+  String get toDismissAsklora {
+    return Intl.message(
+      'to dismiss Asklora. ',
+      name: 'toDismissAsklora',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

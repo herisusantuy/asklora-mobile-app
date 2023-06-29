@@ -361,5 +361,10 @@
   "ifYouveGot" : "如果你有",
   "anyQuestion" : "任何",
   "aboutYourInvestment" : "關於投資嘅問題，可以點擊此處 ",
-  "personalAIAssistant" : "問你嘅AI助手Asklora! "
+  "personalAIAssistant" : "問你嘅AI助手Asklora! ",
+  "simplyTypeAQuestion" : "Simply type a question and tap the ",
+  "sendIcon" : "send icon ",
+  "toStartAConversation" : "to start a conversation. Swipe down ",
+  "topBar" : "top bar ",
+  "toDismissAsklora" : "to dismiss Asklora. "
 }
