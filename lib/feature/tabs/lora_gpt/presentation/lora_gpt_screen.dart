@@ -98,7 +98,6 @@ class _LoraGptScreenState extends State<LoraGptScreen>
       listener: (context, state) => controller.clear(),
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        print('is typing ${state.isTyping}');
         return Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,

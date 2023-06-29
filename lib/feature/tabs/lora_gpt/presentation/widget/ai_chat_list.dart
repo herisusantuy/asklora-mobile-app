@@ -52,17 +52,20 @@ class _AiChatListState extends State<AiChatList> {
                   });
                   return true;
                 },
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.only(top: 72, bottom: 55),
-                  reverse: true,
-                  child: Column(
-                    children: reversedConversations.map((e) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 17),
-                        child: _getBubbleChat(state, e),
-                      );
-                    }).toList(),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.only(top: 72, bottom: 55),
+                    reverse: true,
+                    child: Column(
+                      children: reversedConversations.map((e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 17),
+                          child: _getBubbleChat(state, e),
+                        );
+                      }).toList(),
+                    ),
                   ),
                 )
 
