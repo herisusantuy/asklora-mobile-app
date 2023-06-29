@@ -18,7 +18,7 @@ class GeneralQueryRequest extends BaseQueryRequest {
       this.username = 'testing user',
       this.platform = 'mobile_app',
       required this.sessionId})
-      : super(input : input);
+      : super(input: input);
 
   Map<String, String> get params => {
         'input': input,
