@@ -42,7 +42,8 @@ class TransferTransactionHistoryCard extends StatelessWidget {
                       style: AskLoraTextStyles.subtitle2.copyWith(
                           color: transactionHistoryModel.transferType.color),
                     ),
-                    transactionHistoryModel.title != 'SUBSCRIPTION'
+                    transactionHistoryModel.transactionHistoryType !=
+                            TransactionHistoryType.subscription
                         ? const Row(
                             children: [
                               SizedBox(
