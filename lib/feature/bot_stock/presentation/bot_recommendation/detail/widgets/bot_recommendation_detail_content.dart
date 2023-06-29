@@ -115,7 +115,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   children: [
                     CustomTextNew(
                       (botDetailModel?.price ?? 0)
-                          .convertToCurrencyDecimal(decimalDigits: 2),
+                          .convertToCurrencyDecimal(),
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
@@ -123,7 +123,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      '${getPriceDifference().convertToCurrencyDecimal(decimalDigits: 2)} ${getPercentDifference().convertToCurrencyDecimal(decimalDigits: 2)}%',
+                      '${getPriceDifference().convertToCurrencyDecimal()} ${getPercentDifference().convertToCurrencyDecimal()}%',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -268,12 +268,12 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   ? S.of(context).estStopLossPercent
                   : S.of(context).estMaxLossPercent,
               leftSubTitle: botDetailModel.estStopLossPct
-                  .convertToCurrencyDecimal(decimalDigits: 2),
+                  .convertToCurrencyDecimal(),
               rightTitle: botType == BotType.plank
                   ? S.of(context).estTakeProfitPercent
                   : S.of(context).estMaxProfitPercent,
               rightSubTitle: botDetailModel.estTakeProfitPct
-                  .convertToCurrencyDecimal(decimalDigits: 2),
+                  .convertToCurrencyDecimal(),
               leftTooltipText: botType == BotType.plank
                   ? S.of(context).tooltipBotDetailsEstStopLoss
                   : S.of(context).tooltipBotDetailsEstMaxLoss,

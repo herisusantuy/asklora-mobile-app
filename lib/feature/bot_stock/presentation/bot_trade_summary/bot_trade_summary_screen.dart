@@ -114,7 +114,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         leftTitle: 'Investment Amount (HKD)',
                         rightTitle: 'Bot Management Fee (HKD)',
                         leftSubTitle: botTradeSummaryModel.amount
-                            .convertToCurrencyDecimal(),
+                            .convertToCurrencyDecimal(decimalDigits: 1),
                         rightSubTitle: S.of(context).free,
                         rightTooltipText:
                             'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
@@ -195,12 +195,12 @@ class BotTradeSummaryScreen extends StatelessWidget {
               ? 'Estimated Stop Loss %'
               : 'Estimated Max Loss %',
           leftSubTitle: botTradeSummaryModel.botDetailModel.estStopLossPct
-              .convertToCurrencyDecimal(decimalDigits: 2),
+              .convertToCurrencyDecimal(),
           rightTitle: botTradeSummaryModel.botType == BotType.plank
               ? 'Estimated Take Profit %'
               : 'Estimated Max Profit %',
           rightSubTitle: botTradeSummaryModel.botDetailModel.estTakeProfitPct
-              .convertToCurrencyDecimal(decimalDigits: 2),
+              .convertToCurrencyDecimal(),
         ),
       ];
 

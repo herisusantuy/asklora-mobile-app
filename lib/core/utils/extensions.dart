@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'dart:ui' as ui;
 
 import 'currency_enum.dart';
 
@@ -83,7 +83,7 @@ extension DoublePrecision on double {
 
 extension CurrencyFormat on double {
   String convertToCurrencyDecimal(
-      {String symbol = '', String? locale, int decimalDigits = 1}) {
+      {String symbol = '', String? locale, int decimalDigits = 2}) {
     NumberFormat currencyFormatter = NumberFormat.currency(
       symbol: symbol,
       locale: locale,
@@ -93,19 +93,19 @@ extension CurrencyFormat on double {
   }
 
   String toUsd() {
-    return (this * 0.13).convertToCurrencyDecimal();
+    return (this * 0.13).convertToCurrencyDecimal(decimalDigits: 2);
   }
 
   String toHkd() {
-    return (this * 7.85).convertToCurrencyDecimal();
+    return (this * 7.85).convertToCurrencyDecimal(decimalDigits: 1);
   }
 
   String toUsdWithCurrencyPrefix() {
-    return '${CurrencyType.usd.name} ${(this * 0.13).convertToCurrencyDecimal()}';
+    return '${CurrencyType.usd.name} ${(this * 0.13).convertToCurrencyDecimal(decimalDigits: 1)}';
   }
 
   String toHkdWithCurrencyPrefix() {
-    return '${CurrencyType.hkd.name} ${(this * 7.85).convertToCurrencyDecimal()}';
+    return '${CurrencyType.hkd.name} ${(this * 7.85).convertToCurrencyDecimal(decimalDigits: 1)}';
   }
 }
 

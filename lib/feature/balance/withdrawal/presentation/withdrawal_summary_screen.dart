@@ -119,10 +119,10 @@ class WithdrawalSummaryScreen extends StatelessWidget {
   }
 
   String get _totalAmount =>
-      (args.withdrawalAmount - transactionFee).convertToCurrencyDecimal();
+      (args.withdrawalAmount - transactionFee).convertToCurrencyDecimal(decimalDigits: 1);
 
   String get _withdrawalAmount =>
-      args.withdrawalAmount.convertToCurrencyDecimal();
+      args.withdrawalAmount.convertToCurrencyDecimal(decimalDigits: 1);
 
   Widget _bottomButton(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 30),

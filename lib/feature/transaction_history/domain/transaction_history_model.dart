@@ -63,7 +63,7 @@ class TransactionHistoryModel extends Equatable {
   });
 
   String get amountString =>
-      checkDouble(amount).convertToCurrencyDecimal(decimalDigits: 2);
+      checkDouble(amount).convertToCurrencyDecimal();
 
   String get idString => id.toString();
 

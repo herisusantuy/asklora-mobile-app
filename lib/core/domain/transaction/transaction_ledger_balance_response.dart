@@ -41,7 +41,7 @@ class TransactionLedgerBalanceResponse extends Equatable {
       _$TransactionLedgerBalanceResponseToJson(this);
 
   String get buyingPowerStr =>
-      buyingPower != 0 ? buyingPower.convertToCurrencyDecimal() : '/';
+      buyingPower != 0 ? buyingPower.convertToCurrencyDecimal(decimalDigits: 1) : '/';
 
   @override
   List<Object> get props => [

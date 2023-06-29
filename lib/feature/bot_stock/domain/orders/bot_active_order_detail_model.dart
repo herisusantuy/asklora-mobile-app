@@ -87,7 +87,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   String get currentPriceString {
     final double currentPriceDouble = checkDouble(currentPrice);
     return (currentPriceDouble > 0)
-        ? currentPriceDouble.convertToCurrencyDecimal()
+        ? currentPriceDouble.convertToCurrencyDecimal(decimalDigits: 1)
         : 'NA';
   }
 
@@ -97,7 +97,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   String get botCashBalanceString {
     final double botCashBalanceDouble = checkDouble(botCashBalance);
     return (botCashBalanceDouble > 0)
-        ? botCashBalanceDouble.convertToCurrencyDecimal()
+        ? botCashBalanceDouble.convertToCurrencyDecimal(decimalDigits: 1)
         : 'NA';
   }
 
@@ -126,17 +126,17 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   }
 
   String get maxLossPctString =>
-      maxLossPct.convertToCurrencyDecimal(decimalDigits: 2);
+      maxLossPct.convertToCurrencyDecimal();
 
   String get targetProfitPctString =>
-      targetProfitPct.convertToCurrencyDecimal(decimalDigits: 2);
+      targetProfitPct.convertToCurrencyDecimal();
 
   String get daysToExpireString => '${daysToExpire.abs()}';
 
   String get stockValuesString {
     final double stockValuesDouble = checkDouble(stockValues);
     return (stockValuesDouble > 0)
-        ? stockValuesDouble.convertToCurrencyDecimal()
+        ? stockValuesDouble.convertToCurrencyDecimal(decimalDigits: 1)
         : '/';
   }
 

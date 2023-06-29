@@ -55,28 +55,28 @@ class BotDetailModel extends Equatable {
   String get botStockValueString {
     final double botStockValueDouble = checkDouble(botStockValue);
     return (botStockValueDouble > 0)
-        ? botStockValueDouble.convertToCurrencyDecimal(decimalDigits: 2)
+        ? botStockValueDouble.convertToCurrencyDecimal()
         : '/';
   }
 
   String get estMaxProfitPctString {
     final double targetProfitPctDouble = checkDouble(estMaxProfit);
     return (targetProfitPctDouble > 0)
-        ? targetProfitPctDouble.convertToCurrencyDecimal(decimalDigits: 2)
+        ? targetProfitPctDouble.convertToCurrencyDecimal()
         : '/';
   }
 
   String get estMaxLossPctString {
     final double maxLossPctDouble = checkDouble(estMaxLoss).abs();
     return (maxLossPctDouble > 0)
-        ? maxLossPctDouble.convertToCurrencyDecimal(decimalDigits: 2)
+        ? maxLossPctDouble.convertToCurrencyDecimal()
         : '/';
   }
 
   String get investmentAmountString {
     final double investmentAmountDouble = checkDouble(investmentAmount);
     return (investmentAmountDouble > 0)
-        ? investmentAmountDouble.convertToCurrencyDecimal(decimalDigits: 2)
+        ? investmentAmountDouble.convertToCurrencyDecimal()
         : 'NA';
   }
 
@@ -88,7 +88,7 @@ class BotDetailModel extends Equatable {
   String get totalPnLPctString {
     final double totalPnlPctDouble = checkDouble(totalPnLPct);
     final String totalPnlPctFormatted =
-        totalPnlPctDouble.convertToCurrencyDecimal();
+        totalPnlPctDouble.convertToCurrencyDecimal(decimalDigits: 1);
     return (totalPnlPctDouble > 0)
         ? '+$totalPnlPctFormatted%'
         : (totalPnlPctDouble < 0)

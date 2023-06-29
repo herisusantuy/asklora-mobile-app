@@ -86,5 +86,5 @@ class DepositBloc extends Bloc<DepositEvent, DepositState> {
   }
 
   String get _getAmountErrorText =>
-      'The minimum deposit amount is HKD${depositType.minDeposit.convertToCurrencyDecimal()}';
+      'The minimum deposit amount is HKD${depositType.minDeposit.convertToCurrencyDecimal(decimalDigits: 1)}';
 }
