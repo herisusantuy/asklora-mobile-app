@@ -55,7 +55,7 @@ class BotDetailModel extends Equatable {
   String get botStockValueString {
     final double botStockValueDouble = checkDouble(botStockValue);
     return (botStockValueDouble > 0)
-        ? botStockValueDouble.convertToCurrencyDecimal()
+        ? botStockValueDouble.convertToCurrencyDecimal(decimalDigits: 2)
         : '/';
   }
 
@@ -76,7 +76,7 @@ class BotDetailModel extends Equatable {
   String get investmentAmountString {
     final double investmentAmountDouble = checkDouble(investmentAmount);
     return (investmentAmountDouble > 0)
-        ? investmentAmountDouble.convertToCurrencyDecimal()
+        ? investmentAmountDouble.convertToCurrencyDecimal(decimalDigits: 2)
         : 'NA';
   }
 

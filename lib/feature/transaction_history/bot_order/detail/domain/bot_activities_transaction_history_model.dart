@@ -52,12 +52,12 @@ class BotActivitiesTransactionHistoryModel {
 
   String get investedUsdString {
     final double investmentAmountDouble = checkDouble(investedUsd);
-    return 'USD ${investmentAmountDouble.convertToCurrencyDecimal()}';
+    return 'USD ${investmentAmountDouble.convertToCurrencyDecimal(decimalDigits: 2)}';
   }
 
   String get investedHkdString {
     final double investmentAmountDouble = checkDouble(invested);
-    return '${investmentAmountDouble.convertToCurrencyDecimal()}*';
+    return '${investmentAmountDouble.convertToCurrencyDecimal(decimalDigits: 2)}*';
   }
 
   String get createdFormattedString {
@@ -68,7 +68,7 @@ class BotActivitiesTransactionHistoryModel {
   String get filledAvgPriceString {
     final double filledAvgPriceDouble = checkDouble(filledAvgPrice);
     return (filledAvgPriceDouble > 0)
-        ? 'USD ${filledAvgPriceDouble.toInt()}'
+        ? 'USD ${filledAvgPriceDouble.convertToCurrencyDecimal(decimalDigits: 2)}'
         : 'NA';
   }
 
