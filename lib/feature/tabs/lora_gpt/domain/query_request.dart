@@ -1,20 +1,24 @@
 import 'package:equatable/equatable.dart';
 
-abstract class BaseQueryRequest extends Equatable {}
+abstract class BaseQueryRequest extends Equatable {
+  final String input;
+
+  const BaseQueryRequest({this.input = ''});
+}
 
 class GeneralQueryRequest extends BaseQueryRequest {
-  final String input;
   final String userId;
   final String username;
   final String platform;
   final String sessionId;
 
-  GeneralQueryRequest(
-      {required this.input,
+  const GeneralQueryRequest(
+      {required String input,
       this.userId = 'user_id',
       this.username = 'testing user',
       this.platform = 'mobile_app',
-      required this.sessionId});
+      required this.sessionId})
+      : super(input : input);
 
   Map<String, String> get params => {
         'input': input,

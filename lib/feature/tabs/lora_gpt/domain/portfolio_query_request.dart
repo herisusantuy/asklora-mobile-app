@@ -7,8 +7,6 @@ part 'portfolio_query_request.g.dart';
 
 @JsonSerializable()
 class PortfolioQueryRequest extends BaseQueryRequest {
-  final String input;
-
   @JsonKey(name: 'user_id')
   final String userId;
 
@@ -18,20 +16,19 @@ class PortfolioQueryRequest extends BaseQueryRequest {
   @JsonKey(name: 'total_pnl')
   final double totalPnl;
 
-  PortfolioQueryRequest.empty()
-      : input = '',
-        userId = '',
+  const PortfolioQueryRequest.empty()
+      : userId = '',
         username = '',
         platform = '',
         totalPnl = 0.0;
 
-  PortfolioQueryRequest(
-      {required this.input,
+  const PortfolioQueryRequest(
+      {required String input,
       required this.userId,
       required this.username,
       required this.platform,
       required this.totalPnl})
-      : super();
+      : super(input: input);
 
   factory PortfolioQueryRequest.fromJson(Map<String, dynamic> json) =>
       _$PortfolioQueryRequestFromJson(json);

@@ -61,12 +61,14 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
     final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+    final query = state.query;
 
     emit(state.copyWith(
         status: ResponseState.loading,
         conversations: tempList,
         userName: userName,
         userId: askloraId.toString(),
+        query: '',
         isTyping: true));
 
     var response = BaseResponse.error();
@@ -77,14 +79,16 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
         subPage.path == SubTabPage.portfolioBotStockDetails.value) {
       response = await _loraGptRepository.portfolioDetails(
           params: state.getPortfolioDetailsRequest(
+              query: query,
               botType: subPage.arguments['botType'],
               ticker: subPage.arguments['symbol']));
     } else if (state.tabPage == TabPage.portfolio) {
       response = await _loraGptRepository.portfolio(
-          params: state.getPortfolioRequest(), data: state.getBotstocks());
+          params: state.getPortfolioRequest(query: query),
+          data: state.getBotstocks());
     } else {
       response = await _loraGptRepository.general(
-          params: state.getGeneralChatRequest());
+          params: state.getGeneralChatRequest(query: query));
     }
 
     if (response.state == ResponseState.success) {

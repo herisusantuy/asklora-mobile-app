@@ -4,8 +4,6 @@ import 'query_request.dart';
 
 @JsonSerializable()
 class PortfolioDetailsRequest extends BaseQueryRequest {
-  final String input;
-
   final String ticker;
 
   @JsonKey(name: 'user_id')
@@ -17,22 +15,21 @@ class PortfolioDetailsRequest extends BaseQueryRequest {
   @JsonKey(name: 'bot_type')
   final String botType;
 
-  PortfolioDetailsRequest.empty()
-      : input = '',
-        userId = '',
+  const PortfolioDetailsRequest.empty()
+      : userId = '',
         ticker = '',
         username = '',
         platform = '',
         botType = '';
 
-  PortfolioDetailsRequest(
-      {required this.input,
+  const PortfolioDetailsRequest(
+      {required String input,
       required this.userId,
       required this.ticker,
       required this.username,
       required this.platform,
       required this.botType})
-      : super();
+      : super(input: input);
 
   Map<String, String> get params => {
         'input': input,

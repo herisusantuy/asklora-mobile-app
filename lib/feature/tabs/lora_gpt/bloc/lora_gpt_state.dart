@@ -57,7 +57,8 @@ class LoraGptState extends Equatable {
     );
   }
 
-  PortfolioQueryRequest getPortfolioRequest() => PortfolioQueryRequest(
+  PortfolioQueryRequest getPortfolioRequest({required String query}) =>
+      PortfolioQueryRequest(
         totalPnl: totalPnl,
         input: query,
         userId: userId,
@@ -66,7 +67,9 @@ class LoraGptState extends Equatable {
       );
 
   PortfolioDetailsRequest getPortfolioDetailsRequest(
-          {required String ticker, required String botType}) =>
+          {required String query,
+          required String ticker,
+          required String botType}) =>
       PortfolioDetailsRequest(
         ticker: ticker,
         input: query,
@@ -76,7 +79,8 @@ class LoraGptState extends Equatable {
         botType: botType,
       );
 
-  GeneralQueryRequest getGeneralChatRequest() => GeneralQueryRequest(
+  GeneralQueryRequest getGeneralChatRequest({required String query}) =>
+      GeneralQueryRequest(
         input: query,
         userId: userId,
         username: userName,
