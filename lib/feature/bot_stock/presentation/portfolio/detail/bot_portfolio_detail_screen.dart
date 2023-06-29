@@ -49,13 +49,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   final BotActiveOrderModel botActiveOrderModel;
 
   late final BotType botType;
-  late final BotStatus botStatus;
 
   BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
       : super(key: key) {
     botType = BotType.findByString(botActiveOrderModel.botAppsName);
-    botStatus = BotStatus.findByOmsStatus(botActiveOrderModel.status,
-        expireDate: botActiveOrderModel.expireDate);
   }
 
   @override
@@ -79,6 +76,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
           builder: (context, state) {
             final BotActiveOrderDetailModel? botActiveOrderDetailModel =
                 state.botActiveOrderDetailResponse.data;
+            final BotStatus? botStatus = botActiveOrderDetailModel?.botStatus;
+
             return RefreshIndicator(
               onRefresh: () async => context.read<PortfolioBloc>().add(
                   FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
@@ -109,8 +108,8 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                       botType: botType,
                       portfolioBotDetailModel: botActiveOrderDetailModel,
                     ),
-                    bottomButton:
-                        _getBottomButton(context, botActiveOrderDetailModel)),
+                    bottomButton: _getBottomButton(
+                        context, botActiveOrderDetailModel, botStatus)),
               ),
             );
           },
@@ -119,8 +118,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget? _getBottomButton(BuildContext context,
-      BotActiveOrderDetailModel? botActiveOrderDetailModel) {
+  Widget? _getBottomButton(
+      BuildContext context,
+      BotActiveOrderDetailModel? botActiveOrderDetailModel,
+      BotStatus? botStatus) {
     if (botActiveOrderDetailModel != null &&
         UserJourney.compareUserJourney(
             context: context, target: UserJourney.deposit)) {
@@ -139,16 +140,15 @@ class BotPortfolioDetailScreen extends StatelessWidget {
             //     ),
             //   ),
 
-            ///TODO : TEMPORARY FIX TO ALWAYS SHOW TERMINATE BUTTON
             if (botStatus == BotStatus.live ||
-                botStatus == BotStatus.liveExpireSoon)
+                botStatus == BotStatus.liveExpireSoon ||
+                botActiveOrderDetailModel.omsStatus == OmsStatus.indicative)
               BotTerminateButton(
                 botActiveOrderDetailModel: botActiveOrderDetailModel,
                 botType: botType,
               ),
 
-            ///TODO : TEMPORARY FIX TO ALWAYS SHOW CANCEL BUTTON
-            if (botStatus == BotStatus.pending)
+            if (botActiveOrderDetailModel.omsStatus == OmsStatus.initialized)
               BotCancelButton(
                 botActiveOrderDetailModel: botActiveOrderDetailModel,
               ),

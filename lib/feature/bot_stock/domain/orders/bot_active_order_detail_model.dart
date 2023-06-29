@@ -3,6 +3,7 @@ import '../../../../core/domain/bot/bot_detail_model.dart';
 import '../../../../core/domain/bot/bot_info.dart';
 import '../../../../core/domain/bot/stock_info.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../utils/bot_stock_utils.dart';
 
 part 'bot_active_order_detail_model.g.dart';
 
@@ -124,6 +125,10 @@ class BotActiveOrderDetailModel extends BotDetailModel {
             ? '$avgLossPctDouble%'
             : 'NA';
   }
+
+  OmsStatus get omsStatus => OmsStatus.findByString(status);
+
+  BotStatus get botStatus => BotStatus.findByOmsStatus(status);
 
   String get maxLossPctString =>
       maxLossPct.convertToCurrencyDecimal(decimalDigits: 2);

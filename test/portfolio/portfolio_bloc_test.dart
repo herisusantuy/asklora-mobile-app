@@ -42,13 +42,13 @@ void main() async {
         BaseResponse.error();
 
     final BaseResponse<RolloverOrderResponse> rolloverOrderResponse =
-        BaseResponse.complete(RolloverOrderResponse('a', '', ''));
+        BaseResponse.complete(RolloverOrderResponse('a', ''));
 
     final BaseResponse<RolloverOrderResponse> rolloverOrderErrorResponse =
         BaseResponse.error();
 
     final BaseResponse<BotOrderResponse> botOrderResponse =
-        BaseResponse.complete(RolloverOrderResponse('a', '', ''));
+        BaseResponse.complete(RolloverOrderResponse('a', ''));
 
     final BaseResponse<BotOrderResponse> botOrderErrorResponse =
         BaseResponse.error();

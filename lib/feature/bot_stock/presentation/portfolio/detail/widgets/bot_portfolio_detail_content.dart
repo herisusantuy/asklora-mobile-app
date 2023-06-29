@@ -17,7 +17,7 @@ import '../bot_portfolio_detail_screen.dart';
 
 class BotPortfolioDetailContent extends StatelessWidget {
   final BotActiveOrderDetailModel? portfolioBotDetailModel;
-  final BotStatus botStatus;
+  final BotStatus? botStatus;
   final BotType botType;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
@@ -48,7 +48,7 @@ class BotPortfolioDetailContent extends StatelessWidget {
                   height: 33,
                 ),
                 KeyInfo(
-                  botStatus: botStatus,
+                  botStatus: botStatus ?? BotStatus.pending,
                   botType: botType,
                   botActiveOrderDetailModel: portfolioBotDetailModel!,
                 ),

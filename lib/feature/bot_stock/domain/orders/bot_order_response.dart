@@ -8,10 +8,8 @@ part 'bot_order_response.g.dart';
 class BotOrderResponse {
   @JsonKey(name: 'detail')
   final String detail;
-  @JsonKey(name: 'optimal_time')
-  final String optimalTime;
 
-  const BotOrderResponse(this.detail, this.optimalTime);
+  const BotOrderResponse(this.detail);
 
   factory BotOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$BotOrderResponseFromJson(json);
@@ -44,7 +42,6 @@ class RolloverOrderResponse extends BotOrderResponse {
 
   RolloverOrderResponse(
     super.detail,
-    super.optimalTime,
     this.newExpireDate,
   );
 

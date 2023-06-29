@@ -9,13 +9,11 @@ part of 'bot_order_response.dart';
 BotOrderResponse _$BotOrderResponseFromJson(Map<String, dynamic> json) =>
     BotOrderResponse(
       json['detail'] as String,
-      json['optimal_time'] as String,
     );
 
 Map<String, dynamic> _$BotOrderResponseToJson(BotOrderResponse instance) =>
     <String, dynamic>{
       'detail': instance.detail,
-      'optimal_time': instance.optimalTime,
     };
 
 TerminateOrderResponse _$TerminateOrderResponseFromJson(
@@ -36,7 +34,6 @@ RolloverOrderResponse _$RolloverOrderResponseFromJson(
         Map<String, dynamic> json) =>
     RolloverOrderResponse(
       json['detail'] as String,
-      json['optimal_time'] as String,
       json['new_expire_date'] as String,
     );
 
@@ -44,6 +41,5 @@ Map<String, dynamic> _$RolloverOrderResponseToJson(
         RolloverOrderResponse instance) =>
     <String, dynamic>{
       'detail': instance.detail,
-      'optimal_time': instance.optimalTime,
       'new_expire_date': instance.newExpireDate,
     };

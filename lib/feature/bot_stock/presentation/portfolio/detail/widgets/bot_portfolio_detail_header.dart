@@ -1,13 +1,14 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class BotPortfolioDetailHeader extends StatelessWidget {
-  final BotStatus botStatus;
+  final BotStatus? botStatus;
   final BotType botType;
   final BotActiveOrderModel botActiveOrderModel;
+
   const BotPortfolioDetailHeader(
       {required this.botType,
       required this.botActiveOrderModel,
-      required this.botStatus,
+      this.botStatus,
       Key? key})
       : super(key: key);
 
@@ -22,7 +23,7 @@ class BotPortfolioDetailHeader extends StatelessWidget {
             padding: const EdgeInsets.only(top: 1.2),
             child: Icon(
               Icons.circle,
-              color: botStatus.color,
+              color: botStatus != null ? botStatus!.color : Colors.transparent,
               size: 12,
             ),
           ),
