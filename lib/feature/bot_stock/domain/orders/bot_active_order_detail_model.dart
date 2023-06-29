@@ -87,7 +87,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   String get currentPriceString {
     final double currentPriceDouble = checkDouble(currentPrice);
     return (currentPriceDouble > 0)
-        ? currentPriceDouble.convertToCurrencyDecimal(decimalDigits: 1)
+        ? currentPriceDouble.convertToCurrencyDecimal()
         : 'NA';
   }
 
@@ -97,7 +97,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   String get botCashBalanceString {
     final double botCashBalanceDouble = checkDouble(botCashBalance);
     return (botCashBalanceDouble > 0)
-        ? botCashBalanceDouble.convertToCurrencyDecimal(decimalDigits: 1)
+        ? botCashBalanceDouble.convertToCurrencyDecimal()
         : 'NA';
   }
 
@@ -135,7 +135,7 @@ class BotActiveOrderDetailModel extends BotDetailModel {
   String get stockValuesString {
     final double stockValuesDouble = checkDouble(stockValues);
     return (stockValuesDouble > 0)
-        ? stockValuesDouble.convertToCurrencyDecimal(decimalDigits: 1)
+        ? stockValuesDouble.convertToCurrencyDecimal()
         : '/';
   }
 

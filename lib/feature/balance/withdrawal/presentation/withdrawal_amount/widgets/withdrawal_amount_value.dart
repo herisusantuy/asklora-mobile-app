@@ -31,8 +31,7 @@ class WithdrawalAmountValue extends StatelessWidget {
                     CustomTextNew(
                       state.withdrawalAmount == 0
                           ? state.withdrawalAmount.toStringAsFixed(0)
-                          : state.withdrawalAmount
-                              .convertToCurrencyDecimal(decimalDigits: 1),
+                          : state.withdrawalAmount.convertToCurrencyDecimal(),
                       style: AskLoraTextStyles.h1.copyWith(
                           color: state.withdrawalAmount == 0
                               ? AskLoraColors.gray

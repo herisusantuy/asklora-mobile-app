@@ -114,7 +114,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                         leftTitle: 'Investment Amount (HKD)',
                         rightTitle: 'Bot Management Fee (HKD)',
                         leftSubTitle: botTradeSummaryModel.amount
-                            .convertToCurrencyDecimal(decimalDigits: 1),
+                            .convertToCurrencyDecimal(),
                         rightSubTitle: S.of(context).free,
                         rightTooltipText:
                             'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',

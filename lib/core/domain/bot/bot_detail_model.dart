@@ -88,7 +88,7 @@ class BotDetailModel extends Equatable {
   String get totalPnLPctString {
     final double totalPnlPctDouble = checkDouble(totalPnLPct);
     final String totalPnlPctFormatted =
-        totalPnlPctDouble.convertToCurrencyDecimal(decimalDigits: 1);
+        totalPnlPctDouble.convertToCurrencyDecimal();
     return (totalPnlPctDouble > 0)
         ? '+$totalPnlPctFormatted%'
         : (totalPnlPctDouble < 0)

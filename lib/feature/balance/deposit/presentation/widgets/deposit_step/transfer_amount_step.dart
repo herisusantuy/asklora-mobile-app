@@ -14,7 +14,7 @@ class TransferAmountStep extends StatelessWidget {
       drawLine: drawLine,
       contents: [
         CustomTextNew(
-          'Transfer ${depositType.minDeposit != 0 ? 'HK\$${depositType.minDeposit.convertToCurrencyDecimal(decimalDigits: 1)} ' : ''}to LORA',
+          'Transfer ${depositType.minDeposit != 0 ? 'HK\$${depositType.minDeposit.convertToCurrencyDecimal()} ' : ''}to LORA',
           style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
         ),
         const SizedBox(

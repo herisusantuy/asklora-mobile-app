@@ -27,6 +27,6 @@ enum BotPortfolioStatus {
 String formatCurrency(CurrencyType currencyType, double? currency) {
   final value = currency ?? 0;
   return currencyType == CurrencyType.hkd
-      ? value.convertToCurrencyDecimal(decimalDigits: 1)
+      ? value.convertToCurrencyDecimal()
       : value.toUsd();
 }

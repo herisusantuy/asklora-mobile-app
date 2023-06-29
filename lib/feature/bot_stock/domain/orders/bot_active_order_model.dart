@@ -47,7 +47,7 @@ class BotActiveOrderModel {
   String get totalPnLPctString {
     final double totalPnLPctDouble = checkDouble(totalPnLPct);
     final String totalPnLPctString =
-        totalPnLPctDouble.convertToCurrencyDecimal(decimalDigits: 1);
+        totalPnLPctDouble.convertToCurrencyDecimal();
     return (totalPnLPctDouble > 0)
         ? '+$totalPnLPctString%'
         : (totalPnLPctDouble < 0)

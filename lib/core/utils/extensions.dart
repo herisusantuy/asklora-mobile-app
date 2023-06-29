@@ -93,19 +93,19 @@ extension CurrencyFormat on double {
   }
 
   String toUsd() {
-    return (this * 0.13).convertToCurrencyDecimal(decimalDigits: 2);
+    return (this * 0.13).convertToCurrencyDecimal();
   }
 
   String toHkd() {
-    return (this * 7.85).convertToCurrencyDecimal(decimalDigits: 1);
+    return (this * 7.85).convertToCurrencyDecimal();
   }
 
   String toUsdWithCurrencyPrefix() {
-    return '${CurrencyType.usd.name} ${(this * 0.13).convertToCurrencyDecimal(decimalDigits: 1)}';
+    return '${CurrencyType.usd.name} ${(this * 0.13).convertToCurrencyDecimal()}';
   }
 
   String toHkdWithCurrencyPrefix() {
-    return '${CurrencyType.hkd.name} ${(this * 7.85).convertToCurrencyDecimal(decimalDigits: 1)}';
+    return '${CurrencyType.hkd.name} ${(this * 7.85).convertToCurrencyDecimal()}';
   }
 }
 

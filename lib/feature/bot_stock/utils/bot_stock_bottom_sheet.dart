@@ -185,7 +185,7 @@ class BotStockBottomSheet {
                     ),
                     CustomTextNew(
                       S.of(context).botTradeBottomSheetAmountMinimum(
-                          'HKD${buyingPower.convertToCurrencyDecimal(decimalDigits: 1)}',
+                          'HKD${buyingPower.convertToCurrencyDecimal()}',
                           'HKD1,500'),
                       style: AskLoraTextStyles.body4,
                     )
