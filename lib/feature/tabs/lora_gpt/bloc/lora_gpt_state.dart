@@ -4,6 +4,7 @@ class LoraGptState extends Equatable {
   final ResponseState status;
   final String query;
   final String userName;
+  final String userId;
   final String sessionId;
   final List<Conversation> conversations;
   final bool isTyping;
@@ -12,11 +13,14 @@ class LoraGptState extends Equatable {
   final double totalPnl;
   final TabPage tabPage;
 
+  static const String platform = 'asklora';
+
   const LoraGptState({
     this.query = '',
     this.sessionId = '',
     this.status = ResponseState.unknown,
     this.userName = '',
+    this.userId = '',
     this.conversations = const [],
     this.isTyping = false,
     this.shouldShowOverlay = true,
@@ -29,6 +33,7 @@ class LoraGptState extends Equatable {
     String? query,
     String? sessionId,
     String? userName,
+    String? userId,
     List<Conversation>? conversations,
     ResponseState? status,
     bool? isTyping,
@@ -44,6 +49,7 @@ class LoraGptState extends Equatable {
       status: status ?? this.status,
       isTyping: isTyping ?? this.isTyping,
       userName: userName ?? this.userName,
+      userId: userId ?? this.userId,
       shouldShowOverlay: shouldShowOverlay ?? this.shouldShowOverlay,
       botstocks: botstocks ?? this.botstocks,
       totalPnl: totalPnl ?? this.totalPnl,
@@ -54,9 +60,9 @@ class LoraGptState extends Equatable {
   PortfolioQueryRequest getPortfolioRequest() => PortfolioQueryRequest(
         totalPnl: totalPnl,
         input: query,
-        userId: '101',
+        userId: userId,
         username: userName,
-        platform: 'app',
+        platform: platform,
       );
 
   PortfolioDetailsRequest getPortfolioDetailsRequest(
@@ -64,17 +70,17 @@ class LoraGptState extends Equatable {
       PortfolioDetailsRequest(
         ticker: ticker,
         input: query,
-        userId: '101',
+        userId: userId,
         username: userName,
-        platform: 'app',
+        platform: platform,
         botType: botType,
       );
 
   GeneralQueryRequest getGeneralChatRequest() => GeneralQueryRequest(
         input: query,
-        userId: '101',
+        userId: userId,
         username: userName,
-        platform: 'app',
+        platform: platform,
         sessionId: '',
       );
 
@@ -88,6 +94,7 @@ class LoraGptState extends Equatable {
         status,
         isTyping,
         userName,
+        userId,
         botstocks,
         totalPnl,
         shouldShowOverlay,

@@ -84,4 +84,4 @@ const String loraGptBaseUrl = 'http://stock-gpt-dev.intra.asklora.ai/';
 const String endpointChat = 'chat/general';
 const String endpointPortfolio = 'chat/porfolio_page';
 const String endpointPortfolioDetailPage =
-    'chat/experimental/with_botstock_data_get';
+    'chat/experimental/with_botstock_data';

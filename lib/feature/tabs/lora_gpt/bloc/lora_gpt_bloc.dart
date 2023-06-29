@@ -35,17 +35,18 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   final LoraGptRepository _loraGptRepository;
   final SharedPreference _sharedPreference;
-  late final String userName;
 
   void _onScreenLaunch(
       OnScreenLaunch onEditQuery, Emitter<LoraGptState> emit) async {
-    userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
+    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
+    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+
     emit(state.copyWith(
-      status: ResponseState.success,
-      conversations: [Lora.defaultMessage],
-      sessionId: '',
-      userName: userName,
-    ));
+        status: ResponseState.success,
+        conversations: [Lora.defaultMessage],
+        sessionId: '',
+        userName: userName,
+        userId: askloraId.toString()));
   }
 
   void _onEditQuery(OnEditQuery onEditQuery, Emitter<LoraGptState> emit) =>
@@ -58,10 +59,14 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     tempList.add(Me(state.query));
     tempList.add(Loading());
 
+    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
+    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+
     emit(state.copyWith(
         status: ResponseState.loading,
         conversations: tempList,
         userName: userName,
+        userId: askloraId.toString(),
         isTyping: true));
 
     var response = BaseResponse.error();
