@@ -19,9 +19,9 @@ class Lora extends Conversation {
   final String response;
 
   @JsonKey(name: 'request_id')
-  final String requestId;
+  final String? requestId;
   @JsonKey(name: 'type')
-  final String respType;
+  final String? respType;
 
   @JsonKey(name: 'new_session')
   final bool newSession;

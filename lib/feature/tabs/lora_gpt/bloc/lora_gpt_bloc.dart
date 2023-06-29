@@ -6,6 +6,7 @@ import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../bloc/tab_screen_bloc.dart';
 import '../domain/conversation.dart';
+import '../domain/portfolio_details_request.dart';
 import '../domain/portfolio_query_request.dart';
 import '../domain/query_request.dart';
 import '../repository/lora_gpt_repository.dart';
@@ -65,7 +66,15 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     var response = BaseResponse.error();
 
-    if (state.tabPage == TabPage.portfolio) {
+    final subPage = state.tabPage.getArguments;
+
+    if (subPage.path.isNotEmpty &&
+        subPage.path == SubTabPage.portfolioBotStockDetails.value) {
+      response = await _loraGptRepository.portfolioDetails(
+          params: state.getPortfolioDetailsRequest(
+              botType: subPage.arguments['botType'],
+              ticker: subPage.arguments['symbol']));
+    } else if (state.tabPage == TabPage.portfolio) {
       response = await _loraGptRepository.portfolio(
           params: state.getPortfolioRequest(), data: state.getBotstocks());
     } else {

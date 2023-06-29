@@ -25,8 +25,19 @@ class BotPortfolioCard extends StatelessWidget {
             ? DateTime.parse(botActiveOrderModel.expireDate!)
             : null);
     return GestureDetector(
-      onTap: () => BotPortfolioDetailScreen.open(
-          context: context, botActiveOrderModel: botActiveOrderModel),
+      onTap: () {
+        context
+            .read<TabScreenBloc>()
+            .add(TabChanged(TabPage.portfolio.setData(arguments: (
+              path: SubTabPage.portfolioBotStockDetails.value,
+              arguments: {
+                'botType': botType.internalName,
+                'symbol': botActiveOrderModel.symbol
+              }
+            ))));
+        BotPortfolioDetailScreen.open(
+            context: context, botActiveOrderModel: botActiveOrderModel);
+      },
       child: Stack(
         children: [
           Container(

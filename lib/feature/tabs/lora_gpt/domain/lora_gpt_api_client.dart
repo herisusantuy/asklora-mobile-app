@@ -17,6 +17,10 @@ class LoraGptClient {
       await LoraGptApiClient()
           .get(endpoint: endpointChat, queryParameters: params);
 
+  Future<Response> portfolioDetails(Map<String, String> params) async =>
+      await LoraGptApiClient()
+          .get(endpoint: endpointPortfolioDetailPage, queryParameters: params);
+
   Future<Response> portfolio(
       {required Map<String, dynamic> params,
       required List<Botstock> payload}) async {

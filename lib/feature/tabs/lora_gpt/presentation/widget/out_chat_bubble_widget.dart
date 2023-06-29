@@ -1,6 +1,8 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/presentation/animated_text.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/lora_memoji_widget.dart';
@@ -74,7 +76,6 @@ class OutChatBubbleWidget extends StatelessWidget {
                                       .copyWith(color: AskLoraColors.white))
                             ],
                             onFinished: () {
-                              print('on finish type');
                               context
                                   .read<LoraGptBloc>()
                                   .add(const OnFinishTyping());

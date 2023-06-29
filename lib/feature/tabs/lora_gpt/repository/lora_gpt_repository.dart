@@ -1,6 +1,7 @@
 import '../../../../core/domain/base_response.dart';
 import '../domain/conversation.dart';
 import '../domain/lora_gpt_api_client.dart';
+import '../domain/portfolio_details_request.dart';
 import '../domain/portfolio_query_request.dart';
 import '../domain/query_request.dart';
 
@@ -11,6 +12,17 @@ class LoraGptRepository {
       {required GeneralQueryRequest params}) async {
     try {
       var response = await _loraGptClient.general(params.params);
+      return BaseResponse.complete<Lora>(Lora.fromJson(response.data));
+    } catch (e) {
+      return BaseResponse.error(
+          message: 'Something went wrong. Please try again!');
+    }
+  }
+
+  Future<BaseResponse<Lora>> portfolioDetails(
+      {required PortfolioDetailsRequest params}) async {
+    try {
+      var response = await _loraGptClient.portfolioDetails(params.params);
       return BaseResponse.complete<Lora>(Lora.fromJson(response.data));
     } catch (e) {
       return BaseResponse.error(
