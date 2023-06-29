@@ -5,4 +5,5 @@ class TutorialJourney {
   static GlobalKey botChart = GlobalKey();
   static GlobalKey chatLoraTab = GlobalKey();
   static GlobalKey summaryTrade = GlobalKey();
+  static GlobalKey sendQuestionButton = GlobalKey();
 }

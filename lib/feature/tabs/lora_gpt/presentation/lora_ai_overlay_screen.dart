@@ -55,26 +55,61 @@ class LoraAiOverlayScreen extends StatelessWidget {
             bottomButton: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                BreathingGlowingButton(
-                  height: 75.0,
-                  width: 75.0,
-                  onTap: () {
-                    if (state.query.isNotEmpty) {
-                      context.read<LoraGptBloc>().add(const ShowOverLayScreen(
-                          shouldShowOverlayScreen: false));
-                      context.read<LoraGptBloc>().add(const OnSearchQuery());
-                    }
+                CustomShowcaseView(
+                  targetPadding: EdgeInsets.zero,
+                  tutorialKey: TutorialJourney.sendQuestionButton,
+                  tooltipPosition: TooltipPosition.top,
+                  targetBorderRadius: BorderRadius.circular(50),
+                  onToolTipClick: () {
+                    ShowCaseWidget.of(context).dismiss();
+                    context
+                        .read<TutorialBloc>()
+                        .add(BotDetailsTutorialFinished());
                   },
-                  buttonBackgroundColor: const Color(0xFF373A49),
-                  glowColor: Colors.white.withAlpha(100),
-                  child: Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 1.5)),
-                      child: getSvgIcon('icon_sent_text',
-                          color: AskLoraColors.white)),
+                  overlayOpacity: 0,
+                  tooltipWidget: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: S.of(context).simplyTypeAQuestion,
+                            style: AskLoraTextStyles.body1),
+                        TextSpan(
+                            text: S.of(context).sendIcon,
+                            style: AskLoraTextStyles.subtitle2),
+                        TextSpan(
+                            text: S.of(context).toStartAConversation,
+                            style: AskLoraTextStyles.body1),
+                        TextSpan(
+                            text: S.of(context).topBar,
+                            style: AskLoraTextStyles.subtitle2),
+                        TextSpan(
+                            text: S.of(context).toDismissAsklora,
+                            style: AskLoraTextStyles.body1),
+                      ],
+                    ),
+                  ),
+                  child: BreathingGlowingButton(
+                    height: 75.0,
+                    width: 75.0,
+                    onTap: () {
+                      if (state.query.isNotEmpty) {
+                        context.read<LoraGptBloc>().add(const ShowOverLayScreen(
+                            shouldShowOverlayScreen: false));
+                        context.read<LoraGptBloc>().add(const OnSearchQuery());
+                      }
+                    },
+                    buttonBackgroundColor: const Color(0xFF373A49),
+                    glowColor: Colors.white.withAlpha(100),
+                    child: Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border:
+                                Border.all(color: Colors.white, width: 1.5)),
+                        child: getSvgIcon('icon_sent_text',
+                            color: AskLoraColors.white)),
+                  ),
                 ),
                 const SizedBox(height: 40),
               ],

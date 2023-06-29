@@ -344,11 +344,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("查看你嘅交易摘要，點擊 "),
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
+        "sendIcon": MessageLookupByLibrary.simpleMessage("send icon "),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
             "與 Lora --- 你嘅 FinFit 教練，\n展開全新投資之旅"),
+        "simplyTypeAQuestion": MessageLookupByLibrary.simpleMessage(
+            "Simply type a question and tap the "),
         "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
         "startDate": MessageLookupByLibrary.simpleMessage("最佳開始日期"),
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
@@ -359,9 +362,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisInteractiveGraph":
             MessageLookupByLibrary.simpleMessage("你可以係下面見到Botstock最近"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
+        "toDismissAsklora":
+            MessageLookupByLibrary.simpleMessage("to dismiss Asklora. "),
         "toExecuteIt": MessageLookupByLibrary.simpleMessage("就可以立即執行指示！"),
         "toGiveYou":
             MessageLookupByLibrary.simpleMessage("嘅表現，希望幫到你理解Botstock係點樣交易！"),
+        "toStartAConversation": MessageLookupByLibrary.simpleMessage(
+            "to start a conversation. Swipe down "),
         "tooltipBotDetailsEstMaxLoss":
             MessageLookupByLibrary.simpleMessage("Bot將出售以限制損失的最低股票價位。"),
         "tooltipBotDetailsEstMaxProfit":
@@ -375,6 +382,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你定下的投資時間，Botstock將會於此期間內自動買賣股票。"),
         "tooltipBotDetailsStartDate":
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
+        "topBar": MessageLookupByLibrary.simpleMessage("top bar "),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("交易費用"),

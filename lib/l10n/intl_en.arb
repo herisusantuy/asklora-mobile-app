@@ -405,6 +405,11 @@
   "personalAIAssistant" : "personal AI assistant Asklora! ",
   "reviewYourTradeSummary" : "Review your trade summary and hit ",
   "confirmTrade" : "“Confirm Trade” ",
-  "toExecuteIt" : "to execute it!"
+  "toExecuteIt" : "to execute it!",
+  "simplyTypeAQuestion" : "Simply type a question and tap the ",
+  "sendIcon" : "send icon ",
+  "toStartAConversation" : "to start a conversation. Swipe down ",
+  "topBar" : "top bar ",
+  "toDismissAsklora" : "to dismiss Asklora. "
 
 }

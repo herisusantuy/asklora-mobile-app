@@ -15,6 +15,8 @@ class CustomShowcaseView extends StatelessWidget {
   final VoidCallback? onBarrierClick;
   final bool disableDefaultTargetGestures;
   final VoidCallback? onTargetClick;
+  final double overlayOpacity;
+  final Color overlayColor;
   const CustomShowcaseView({
     Key? key,
     required this.tutorialKey,
@@ -27,6 +29,8 @@ class CustomShowcaseView extends StatelessWidget {
     this.onBarrierClick,
     this.disableDefaultTargetGestures = false,
     this.onTargetClick,
+    this.overlayColor = Colors.black,
+    this.overlayOpacity = 0.5,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -37,8 +41,8 @@ class CustomShowcaseView extends StatelessWidget {
       disableMovingAnimation: true,
       tooltipPosition: tooltipPosition,
       key: tutorialKey,
-      overlayColor: Colors.black,
-      overlayOpacity: 0.5,
+      overlayColor: overlayColor,
+      overlayOpacity: overlayOpacity,
       targetPadding: targetPadding,
       width: MediaQuery.of(context)
           .size

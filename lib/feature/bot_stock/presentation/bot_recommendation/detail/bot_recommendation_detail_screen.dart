@@ -8,7 +8,7 @@ import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
-import '../../../../../core/presentation/tutorial/Utils/tutorial.dart';
+import '../../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
 import '../../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/values/app_values.dart';
@@ -69,7 +69,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                   ShowCaseWidget.of(context).startShowCase([
                     TutorialJourney.botDetails,
                     TutorialJourney.botChart,
-                    TutorialJourney.chatLoraTab
+                    TutorialJourney.chatLoraTab,
+                    TutorialJourney.sendQuestionButton,
                   ]);
                 }
               },

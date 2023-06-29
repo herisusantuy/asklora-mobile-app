@@ -14,7 +14,7 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
-import '../../../../core/presentation/tutorial/Utils/tutorial.dart';
+import '../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
 import '../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../core/repository/transaction_repository.dart';
@@ -133,7 +133,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
               child: BotStockForm(
                   useHeader: true,
                   title:
-                      '//${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.ticker}',
+                      '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.ticker}',
                   content: Column(
                     children: [
                       CustomShowcaseView(
