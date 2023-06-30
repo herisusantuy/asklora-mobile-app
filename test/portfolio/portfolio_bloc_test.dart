@@ -36,19 +36,19 @@ void main() async {
         transactionBalanceErrorResponse = BaseResponse.error();
 
     final BaseResponse<TerminateOrderResponse> terminateOrderResponse =
-        BaseResponse.complete(TerminateOrderResponse('a'));
+        BaseResponse.complete(TerminateOrderResponse('a', ''));
 
     final BaseResponse<TerminateOrderResponse> terminateOrderErrorResponse =
         BaseResponse.error();
 
     final BaseResponse<RolloverOrderResponse> rolloverOrderResponse =
-        BaseResponse.complete(RolloverOrderResponse('a', botOrder: 'a'));
+        BaseResponse.complete(RolloverOrderResponse('a', ''));
 
     final BaseResponse<RolloverOrderResponse> rolloverOrderErrorResponse =
         BaseResponse.error();
 
     final BaseResponse<BotOrderResponse> botOrderResponse =
-        BaseResponse.complete(RolloverOrderResponse('a', botOrder: 'a'));
+        BaseResponse.complete(RolloverOrderResponse('a', ''));
 
     final BaseResponse<BotOrderResponse> botOrderErrorResponse =
         BaseResponse.error();

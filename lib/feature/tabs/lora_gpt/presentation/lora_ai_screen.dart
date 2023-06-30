@@ -72,7 +72,7 @@ class LoraAiScreen extends StatelessWidget {
                               BotType.findByString(e.botAppsName).internalName,
                           duration: e.botDuration,
                           totalPnl: e.totalPnLPct.toString(),
-                          expiryDate: e.expireDateStr))
+                          expiryDate: e.expireDate ?? e.optimalTime))
                       .toList();
 
                   context

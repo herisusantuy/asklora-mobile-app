@@ -239,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Estimated End Date"),
         "existingPassword":
             MessageLookupByLibrary.simpleMessage("Existing Password"),
+        "expiresAt": MessageLookupByLibrary.simpleMessage("Expires at"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
         "founded": MessageLookupByLibrary.simpleMessage("Founded"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
@@ -461,6 +462,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "startInvesting":
             MessageLookupByLibrary.simpleMessage("Start Investing"),
+        "startsAt": MessageLookupByLibrary.simpleMessage("Starts at"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),

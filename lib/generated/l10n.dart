@@ -610,6 +610,26 @@ class S {
     );
   }
 
+  /// `Expires at`
+  String get expiresAt {
+    return Intl.message(
+      'Expires at',
+      name: 'expiresAt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Starts at`
+  String get startsAt {
+    return Intl.message(
+      'Starts at',
+      name: 'startsAt',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `CEO`
   String get ceo {
     return Intl.message(

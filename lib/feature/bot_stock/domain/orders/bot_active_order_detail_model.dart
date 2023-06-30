@@ -3,6 +3,7 @@ import '../../../../core/domain/bot/bot_detail_model.dart';
 import '../../../../core/domain/bot/bot_info.dart';
 import '../../../../core/domain/bot/stock_info.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../utils/bot_stock_utils.dart';
 
 part 'bot_active_order_detail_model.g.dart';
 
@@ -138,6 +139,12 @@ class BotActiveOrderDetailModel extends BotDetailModel {
         ? stockValuesDouble.convertToCurrencyDecimal()
         : '/';
   }
+
+  OmsStatus get omsStatus => OmsStatus.findByString(status);
+
+  BotStatus get botStatus => BotStatus.findByOmsStatus(status);
+
+  BotType get botType => BotType.findByString(botInfo.botName);
 
   factory BotActiveOrderDetailModel.fromJson(Map<String, dynamic> json) =>
       _$BotActiveOrderDetailModelFromJson(json);

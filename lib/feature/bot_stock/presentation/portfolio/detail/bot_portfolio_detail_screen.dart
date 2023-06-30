@@ -37,6 +37,8 @@ part 'widgets/bot_portfolio_detail_header.dart';
 
 part 'widgets/buttons/bot_cancel_button.dart';
 
+part 'widgets/buttons/bot_portfolio_buttons.dart';
+
 part 'widgets/buttons/bot_rollover_button.dart';
 
 part 'widgets/buttons/bot_terminate_button.dart';
@@ -49,117 +51,67 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   static const String route = '/bot_portfolio_detail_screen';
   final BotActiveOrderModel botActiveOrderModel;
 
-  late final BotType botType;
-  late final BotStatus botStatus;
-
-  BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
-      : super(key: key) {
-    botType = BotType.findByString(botActiveOrderModel.botAppsName);
-    botStatus = BotStatus.findByOmsStatus(botActiveOrderModel.status,
-        expireDate: botActiveOrderModel.expireDate);
-  }
+  const BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return CustomScaffold(
-      enableBackNavigation: false,
-      body: BlocProvider(
-        create: (_) => PortfolioBloc(
-            botStockRepository: BotStockRepository(),
-            transactionHistoryRepository: TransactionRepository())
-          ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
-        child: BlocConsumer<PortfolioBloc, PortfolioState>(
-          listenWhen: (previous, current) =>
-              previous.botActiveOrderDetailResponse.state !=
-              current.botActiveOrderDetailResponse.state,
-          listener: (context, state) => CustomLoadingOverlay.of(context)
-              .show(state.botActiveOrderDetailResponse.state),
-          buildWhen: (previous, current) =>
-              previous.botActiveOrderDetailResponse.state !=
-              current.botActiveOrderDetailResponse.state,
-          builder: (context, state) {
-            final BotActiveOrderDetailModel? botActiveOrderDetailModel =
-                state.botActiveOrderDetailResponse.data;
-            return RefreshIndicator(
-              onRefresh: () async => context.read<PortfolioBloc>().add(
-                  FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
-              child: CustomLayoutWithBlurPopUp(
-                loraPopUpMessageModel: LoraPopUpMessageModel(
-                  title: S.of(context).errorGettingInformationTitle,
-                  subTitle:
-                      S.of(context).errorGettingInformationPortfolioSubTitle,
-                  primaryButtonLabel: S.of(context).buttonReloadPage,
-                  secondaryButtonLabel: S.of(context).buttonCancel,
-                  onSecondaryButtonTap: () => Navigator.pop(context),
-                  onPrimaryButtonTap: () => context.read<PortfolioBloc>().add(
-                      (FetchActiveOrderDetail(
-                          botOrderId: botActiveOrderModel.uid))),
-                ),
-                showPopUp: state.botActiveOrderDetailResponse.state ==
-                    ResponseState.error,
-                content: BotStockForm(
+  Widget build(BuildContext context) => CustomScaffold(
+        enableBackNavigation: false,
+        body: BlocProvider(
+          create: (_) => PortfolioBloc(
+              botStockRepository: BotStockRepository(),
+              transactionHistoryRepository: TransactionRepository())
+            ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
+          child: BlocConsumer<PortfolioBloc, PortfolioState>(
+            listenWhen: (previous, current) =>
+                previous.botActiveOrderDetailResponse.state !=
+                current.botActiveOrderDetailResponse.state,
+            listener: (context, state) => CustomLoadingOverlay.of(context)
+                .show(state.botActiveOrderDetailResponse.state),
+            buildWhen: (previous, current) =>
+                previous.botActiveOrderDetailResponse.state !=
+                current.botActiveOrderDetailResponse.state,
+            builder: (context, state) {
+              final BotActiveOrderDetailModel? botActiveOrderDetailModel =
+                  state.botActiveOrderDetailResponse.data;
+              return RefreshIndicator(
+                onRefresh: () async => _fetchActiveOrderDetail(context),
+                child: CustomLayoutWithBlurPopUp(
+                  loraPopUpMessageModel: LoraPopUpMessageModel(
+                    title: S.of(context).errorGettingInformationTitle,
+                    subTitle:
+                        S.of(context).errorGettingInformationPortfolioSubTitle,
+                    primaryButtonLabel: S.of(context).buttonReloadPage,
+                    secondaryButtonLabel: S.of(context).buttonCancel,
+                    onSecondaryButtonTap: () => Navigator.pop(context),
+                    onPrimaryButtonTap: () => _fetchActiveOrderDetail(context),
+                  ),
+                  showPopUp: state.botActiveOrderDetailResponse.state ==
+                      ResponseState.error,
+                  content: BotStockForm(
                     useHeader: true,
                     customHeader: BotPortfolioDetailHeader(
-                      botActiveOrderModel: botActiveOrderModel,
-                      botType: botType,
-                      botStatus: botStatus,
+                      title: botActiveOrderModel.botName,
+                      botStatus: botActiveOrderDetailModel?.botStatus,
                     ),
                     padding: EdgeInsets.zero,
                     content: BotPortfolioDetailContent(
-                      botStatus: botStatus,
-                      botType: botType,
-                      portfolioBotDetailModel: botActiveOrderDetailModel,
+                      botActiveOrderDetailModel: botActiveOrderDetailModel,
                     ),
-                    bottomButton:
-                        _getBottomButton(context, botActiveOrderDetailModel)),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget? _getBottomButton(BuildContext context,
-      BotActiveOrderDetailModel? botActiveOrderDetailModel) {
-    if (botActiveOrderDetailModel != null &&
-        UserJourney.compareUserJourney(
-            context: context, target: UserJourney.deposit)) {
-      return Padding(
-        padding:
-            AppValues.screenHorizontalPadding.copyWith(top: 36, bottom: 30),
-        child: Column(
-          children: [
-            ///TODO : NEED TO TEMPORARY REMOVED AS AL1-2846
-            // if (botStatus == BotStatus.liveExpireSoon)
-            //   Padding(
-            //     padding: const EdgeInsets.only(bottom: 20.0),
-            //     child: BotRolloverButton(
-            //       botActiveOrderDetailModel: botActiveOrderDetailModel,
-            //       botType: botType,
-            //     ),
-            //   ),
-
-            ///TODO : TEMPORARY FIX TO ALWAYS SHOW TERMINATE BUTTON
-            // if (botStatus == BotStatus.active ||
-            //     botStatus == BotStatus.activeExpireSoon)
-            BotTerminateButton(
-              botActiveOrderDetailModel: botActiveOrderDetailModel,
-              botType: botType,
-            ),
-
-            ///TODO : TEMPORARY FIX TO ALWAYS SHOW CANCEL BUTTON
-            //if (botStatus == BotStatus.pending)
-            // BotCancelButton(
-            //   botActiveOrderDetailModel: botActiveOrderDetailModel,
-            // ),
-          ],
+                    bottomButton: BotPortfolioButtons(
+                      portfolioState: state,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       );
-    } else {
-      return null;
-    }
-  }
+
+  void _fetchActiveOrderDetail(BuildContext context) => context
+      .read<PortfolioBloc>()
+      .add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid));
 
   static void open(
       {required BuildContext context,
