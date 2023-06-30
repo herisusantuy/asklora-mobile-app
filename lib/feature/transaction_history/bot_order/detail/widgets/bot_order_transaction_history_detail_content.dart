@@ -72,7 +72,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
               ),
             ),
             Flexible(
-                flex: 2,
+                flex: 3,
                 child: Align(
                     alignment: Alignment.centerRight, child: _statusWidget()))
           ],
