@@ -9,7 +9,7 @@ String formatDateTimeAsString(dynamic dateTime,
       return DateFormat(dateFormat).format(DateTime.parse(dateTime));
     }
   } catch (e) {
-    return 'Error formatting date';
+    return '-';
   }
 }
 
