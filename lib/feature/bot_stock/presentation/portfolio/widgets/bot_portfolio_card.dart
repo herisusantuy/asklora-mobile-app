@@ -72,6 +72,7 @@ class BotPortfolioCard extends StatelessWidget {
                   height: 15,
                 ),
                 Container(
+                  width: double.infinity,
                   padding:
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                   decoration: BoxDecoration(
