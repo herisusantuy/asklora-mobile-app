@@ -63,7 +63,7 @@ class LoraAiOverlayScreen extends StatelessWidget {
                   onToolTipClick: () {
                     ShowCaseWidget.of(context).dismiss();
                     context
-                        .read<TutorialBloc>()
+                        .read<BotStockBloc>()
                         .add(BotDetailsTutorialFinished());
                   },
                   overlayOpacity: 0,

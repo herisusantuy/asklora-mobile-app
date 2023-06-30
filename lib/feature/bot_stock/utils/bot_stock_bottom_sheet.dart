@@ -6,6 +6,7 @@ import '../../../core/presentation/lora_bottom_sheet.dart';
 import '../../../core/presentation/lora_memoji_widget.dart';
 import '../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../core/repository/transaction_repository.dart';
+import '../../../core/repository/tutorial_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/extensions.dart';
@@ -121,7 +122,8 @@ class BotStockBottomSheet {
       builder: (_) => BlocProvider(
         create: (_) => BotStockBloc(
             botStockRepository: BotStockRepository(),
-            transactionRepository: TransactionRepository()),
+            transactionRepository: TransactionRepository(),
+            tutorialRepository: TutorialRepository()),
         child: BlocBuilder<BotStockBloc, BotStockState>(
             buildWhen: (previous, current) =>
                 previous.botStockTradeAmount != current.botStockTradeAmount,

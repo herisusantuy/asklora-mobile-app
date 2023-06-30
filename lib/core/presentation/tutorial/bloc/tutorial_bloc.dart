@@ -21,7 +21,7 @@ class TutorialBloc extends Bloc<TutorialEvent, TutorialState> {
 
   _onBotDetailsTutorialFinished(
       BotDetailsTutorialFinished event, Emitter<TutorialState> emit) async {
-    final response = await _tutorialRepository.setBotDetailsTutorial(false);
+    final response = await _tutorialRepository.botDetailsTutorialFinished();
     emit(state.copyWith(isBotDetailsTutorial: response));
   }
 }
