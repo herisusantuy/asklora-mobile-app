@@ -49,234 +49,231 @@ class BotRecommendationDetailContent extends StatelessWidget {
   }
 
   Widget _botDetailsExpansionTile(BuildContext context) {
-    if (botDetailModel?.performance != null &&
-        botDetailModel!.performance.isNotEmpty) {
-      return Column(
-        children: [
-          CustomDetailExpansionTile(
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomTextNew(
-                  '${botType.upperCaseName} Bot',
-                  style: AskLoraTextStyles.h5
-                      .copyWith(color: AskLoraColors.charcoal),
-                ),
-                CustomTextNew(
-                  botDetailModel?.botInfo.botDescription.detail ?? 'NA',
-                  style: AskLoraTextStyles.body3
-                      .copyWith(color: AskLoraColors.charcoal),
-                )
-              ],
-            ),
+    return Column(
+      children: [
+        CustomDetailExpansionTile(
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextNew(
-                S.of(context).bestSuitedFor,
-                style: AskLoraTextStyles.body4
+                '${botType.upperCaseName} Bot',
+                style: AskLoraTextStyles.h5
                     .copyWith(color: AskLoraColors.charcoal),
               ),
-              const SizedBox(
-                height: 6,
-              ),
               CustomTextNew(
-                botDetailModel?.botInfo.botDescription.suited ?? 'NA',
-                style: AskLoraTextStyles.body1
-                    .copyWith(color: AskLoraColors.charcoal),
-              ),
-              const SizedBox(
-                height: 18,
-              ),
-              CustomTextNew(
-                S.of(context).howItWorks,
-                style: AskLoraTextStyles.body4
-                    .copyWith(color: AskLoraColors.charcoal),
-              ),
-              const SizedBox(
-                height: 6,
-              ),
-              CustomTextNew(
-                botDetailModel?.botInfo.botDescription.works ?? 'NA',
-                style: AskLoraTextStyles.body1
-                    .copyWith(color: AskLoraColors.charcoal),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          CustomDetailExpansionTile(
-            title: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomTextNew(
-                        '${botDetailModel?.stockInfo.tickerName} ${botDetailModel?.stockInfo.symbol}',
-                        style: AskLoraTextStyles.h5
-                            .copyWith(color: AskLoraColors.charcoal),
-                        maxLines: 2,
-                      ),
-                      const SizedBox(height: 5),
-                      CustomTextNew(
-                        '${S.of(context).prevClose} ${botDetailModel?.prevCloseDate ?? 'NA'}',
-                        style: AskLoraTextStyles.body2
-                            .copyWith(color: AskLoraColors.charcoal),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      CustomTextNew(
-                        (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
-                        style: AskLoraTextStyles.h5
-                            .copyWith(color: AskLoraColors.charcoal),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      CustomTextNew(
-                        '${getPriceDifference().convertToCurrencyDecimal()} ${getPercentDifference().convertToCurrencyDecimal()}%',
-                        style: AskLoraTextStyles.body2
-                            .copyWith(color: AskLoraColors.charcoal),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            children: [
-              PairColumnTextWithTooltip(
-                leftTitle: S.of(context).prevClose,
-                leftSubTitle: botDetailModel?.prevClosePrice != null
-                    ? (botDetailModel?.prevClosePrice ?? 0).toString()
-                    : '-',
-                rightTitle: S.of(context).marketCap,
-                rightSubTitle: botDetailModel?.marketCap != null
-                    ? (botDetailModel?.marketCap ?? '-')
-                    : '-',
-              ),
-              const SizedBox(height: 10),
-              const IexDataProviderLink(),
-              const Divider(
-                color: AskLoraColors.gray,
-              ),
-              CustomTextNew(
-                  '${S.of(context).about} ${botDetailModel?.stockInfo.tickerName}',
-                  style: AskLoraTextStyles.h6
-                      .copyWith(color: AskLoraColors.charcoal)),
-              const SizedBox(
-                height: 21,
-              ),
-              PairColumnTextWithTooltip(
-                leftTitle: S.of(context).sectors,
-                leftSubTitle: botDetailModel?.stockInfo.sector ?? 'NA',
-                rightTitle: S.of(context).industry,
-                rightSubTitle: botDetailModel?.stockInfo.industry ?? 'NA',
-              ),
-              _spaceBetweenInfo,
-              PairColumnTextWithTooltip(
-                leftTitle: S.of(context).ceo,
-                leftSubTitle: botDetailModel?.stockInfo.ceo ?? 'NA',
-                rightTitle: S.of(context).employees,
-                rightSubTitle: '${botDetailModel?.stockInfo.employees}',
-              ),
-              _spaceBetweenInfo,
-              PairColumnTextWithTooltip(
-                leftTitle: S.of(context).headquarters,
-                leftSubTitle: botDetailModel?.stockInfo.headquarter ?? 'NA',
-                rightTitle: S.of(context).founded,
-                rightSubTitle: botDetailModel?.stockInfo.founded ?? 'NA',
-              ),
-              const SizedBox(
-                height: 23,
-              ),
-              CustomTextNew(
-                botDetailModel?.stockInfo.description ?? 'NA',
-                style: AskLoraTextStyles.body1
+                botDetailModel?.botInfo.botDescription.detail ?? 'NA',
+                style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
             ],
           ),
-          const SizedBox(height: 26),
-        ],
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
+          children: [
+            CustomTextNew(
+              S.of(context).bestSuitedFor,
+              style: AskLoraTextStyles.body4
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 6,
+            ),
+            CustomTextNew(
+              botDetailModel?.botInfo.botDescription.suited ?? 'NA',
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            CustomTextNew(
+              S.of(context).howItWorks,
+              style: AskLoraTextStyles.body4
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+            const SizedBox(
+              height: 6,
+            ),
+            CustomTextNew(
+              botDetailModel?.botInfo.botDescription.works ?? 'NA',
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        CustomDetailExpansionTile(
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomTextNew(
+                      '${botDetailModel?.stockInfo.tickerName} ${botDetailModel?.stockInfo.symbol}',
+                      style: AskLoraTextStyles.h5
+                          .copyWith(color: AskLoraColors.charcoal),
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 5),
+                    CustomTextNew(
+                      '${S.of(context).prevClose} ${botDetailModel?.prevCloseDate ?? 'NA'}',
+                      style: AskLoraTextStyles.body2
+                          .copyWith(color: AskLoraColors.charcoal),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    CustomTextNew(
+                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
+                      style: AskLoraTextStyles.h5
+                          .copyWith(color: AskLoraColors.charcoal),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextNew(
+                      '${getPriceDifference().convertToCurrencyDecimal()} ${getPercentDifference().convertToCurrencyDecimal()}%',
+                      style: AskLoraTextStyles.body2
+                          .copyWith(color: AskLoraColors.charcoal),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+          children: [
+            PairColumnTextWithTooltip(
+              leftTitle: S.of(context).prevClose,
+              leftSubTitle: botDetailModel?.prevClosePrice != null
+                  ? (botDetailModel?.prevClosePrice ?? 0).toString()
+                  : '-',
+              rightTitle: S.of(context).marketCap,
+              rightSubTitle: botDetailModel?.marketCap != null
+                  ? (botDetailModel?.marketCap ?? '-')
+                  : '-',
+            ),
+            const SizedBox(height: 10),
+            const IexDataProviderLink(),
+            const Divider(
+              color: AskLoraColors.gray,
+            ),
+            CustomTextNew(
+                '${S.of(context).about} ${botDetailModel?.stockInfo.tickerName}',
+                style: AskLoraTextStyles.h6
+                    .copyWith(color: AskLoraColors.charcoal)),
+            const SizedBox(
+              height: 21,
+            ),
+            PairColumnTextWithTooltip(
+              leftTitle: S.of(context).sectors,
+              leftSubTitle: botDetailModel?.stockInfo.sector ?? 'NA',
+              rightTitle: S.of(context).industry,
+              rightSubTitle: botDetailModel?.stockInfo.industry ?? 'NA',
+            ),
+            _spaceBetweenInfo,
+            PairColumnTextWithTooltip(
+              leftTitle: S.of(context).ceo,
+              leftSubTitle: botDetailModel?.stockInfo.ceo ?? 'NA',
+              rightTitle: S.of(context).employees,
+              rightSubTitle: '${botDetailModel?.stockInfo.employees}',
+            ),
+            _spaceBetweenInfo,
+            PairColumnTextWithTooltip(
+              leftTitle: S.of(context).headquarters,
+              leftSubTitle: botDetailModel?.stockInfo.headquarter ?? 'NA',
+              rightTitle: S.of(context).founded,
+              rightSubTitle: botDetailModel?.stockInfo.founded ?? 'NA',
+            ),
+            const SizedBox(
+              height: 23,
+            ),
+            CustomTextNew(
+              botDetailModel?.stockInfo.description ?? 'NA',
+              style: AskLoraTextStyles.body1
+                  .copyWith(color: AskLoraColors.charcoal),
+            )
+          ],
+        ),
+        const SizedBox(height: 26),
+      ],
+    );
   }
 
   Widget _detailedInformation(BuildContext context) {
-    if (botDetailModel?.performance != null &&
-        botDetailModel!.performance.isNotEmpty) {
-      return Container(
-        padding: AppValues.screenHorizontalPadding,
-        child: CustomShowcaseView(
-          tutorialKey: TutorialJourney.botDetails,
-          onToolTipClick: () => ShowCaseWidget.of(context).next(),
-          tooltipWidget: Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                    text: S.of(context).hereYouCanFind,
-                    style: AskLoraTextStyles.body1),
-                TextSpan(
-                    text: S.of(context).botStocksDetails,
-                    style: AskLoraTextStyles.subtitle2),
-              ],
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      padding: AppValues.screenHorizontalPadding,
+      child: CustomShowcaseView(
+        tutorialKey: TutorialJourney.botDetails,
+        onToolTipClick: () => ShowCaseWidget.of(context).next(),
+        tooltipWidget: Text.rich(
+          TextSpan(
             children: [
-              BotPriceLevelIndicator(
-                stopLossPrice: botDetailModel!.estStopLossPriceFormatted,
-                currentPrice: botDetailModel!.price,
-                takeProfitPrice: botDetailModel!.estTakeProfitPriceFormatted,
-                botType: botType,
-              ),
-              const SizedBox(height: 28),
-              PairColumnTextWithTooltip(
-                  leftTitle: botType == BotType.plank
-                      ? S.of(context).estStopLossPercent
-                      : S.of(context).estMaxLossPercent,
-                  leftSubTitle:
-                      botDetailModel!.estStopLossPct.convertToCurrencyDecimal(),
-                  rightTitle: botType == BotType.plank
-                      ? S.of(context).estTakeProfitPercent
-                      : S.of(context).estMaxProfitPercent,
-                  rightSubTitle: botDetailModel!.estTakeProfitPct
-                      .convertToCurrencyDecimal(),
-                  leftTooltipText: botType == BotType.plank
-                      ? S.of(context).tooltipBotDetailsEstStopLoss
-                      : S.of(context).tooltipBotDetailsEstMaxLoss,
-                  rightTooltipText: botType == BotType.plank
-                      ? S.of(context).tooltipBotDetailsEstTakeProfit
-                      : S.of(context).tooltipBotDetailsEstMaxProfit),
-              _spaceBetweenInfo,
-              PairColumnTextWithTooltip(
-                  leftTitle: S.of(context).startDate,
-                  leftSubTitle: botDetailModel!.formattedStartDate,
-                  rightTitle: S.of(context).investmentPeriod,
-                  rightSubTitle: botDetailModel!.botDuration,
-                  leftTooltipText: S.of(context).tooltipBotDetailsStartDate,
-                  rightTooltipText:
-                      S.of(context).tooltipBotDetailsInvestmentPeriod),
-              _spaceBetweenInfo,
-              ColumnTextWithTooltip(
-                  title: S.of(context).estimatedEndDate,
-                  subTitle: botDetailModel!.estEndDate),
+              TextSpan(
+                  text: S.of(context).hereYouCanFind,
+                  style: AskLoraTextStyles.body1),
+              TextSpan(
+                  text: S.of(context).botStocksDetails,
+                  style: AskLoraTextStyles.subtitle2),
             ],
           ),
         ),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (botDetailModel != null)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BotPriceLevelIndicator(
+                    stopLossPrice: botDetailModel!.estStopLossPriceFormatted,
+                    currentPrice: botDetailModel!.price,
+                    takeProfitPrice:
+                        botDetailModel!.estTakeProfitPriceFormatted,
+                    botType: botType,
+                  ),
+                  const SizedBox(height: 28),
+                  PairColumnTextWithTooltip(
+                      leftTitle: botType == BotType.plank
+                          ? S.of(context).estStopLossPercent
+                          : S.of(context).estMaxLossPercent,
+                      leftSubTitle: botDetailModel!.estStopLossPct
+                          .convertToCurrencyDecimal(),
+                      rightTitle: botType == BotType.plank
+                          ? S.of(context).estTakeProfitPercent
+                          : S.of(context).estMaxProfitPercent,
+                      rightSubTitle: botDetailModel!.estTakeProfitPct
+                          .convertToCurrencyDecimal(),
+                      leftTooltipText: botType == BotType.plank
+                          ? S.of(context).tooltipBotDetailsEstStopLoss
+                          : S.of(context).tooltipBotDetailsEstMaxLoss,
+                      rightTooltipText: botType == BotType.plank
+                          ? S.of(context).tooltipBotDetailsEstTakeProfit
+                          : S.of(context).tooltipBotDetailsEstMaxProfit),
+                  _spaceBetweenInfo,
+                ],
+              ),
+            PairColumnTextWithTooltip(
+                leftTitle: S.of(context).startDate,
+                leftSubTitle: '${botDetailModel?.formattedStartDate}',
+                rightTitle: S.of(context).investmentPeriod,
+                rightSubTitle: '${botDetailModel?.botDuration}',
+                leftTooltipText: S.of(context).tooltipBotDetailsStartDate,
+                rightTooltipText:
+                    S.of(context).tooltipBotDetailsInvestmentPeriod),
+            _spaceBetweenInfo,
+            ColumnTextWithTooltip(
+                title: S.of(context).estimatedEndDate,
+                subTitle: '${botDetailModel?.estEndDate ?? 0}'),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _chartWidget(BuildContext context) {
