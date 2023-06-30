@@ -62,14 +62,14 @@ class BotDetailModel extends Equatable {
   String get estMaxProfitPctString {
     final double targetProfitPctDouble = checkDouble(estMaxProfit);
     return (targetProfitPctDouble > 0)
-        ? targetProfitPctDouble.convertToCurrencyDecimal(decimalDigits: 2)
+        ? targetProfitPctDouble.convertToCurrencyDecimal()
         : '/';
   }
 
   String get estMaxLossPctString {
     final double maxLossPctDouble = checkDouble(estMaxLoss).abs();
     return (maxLossPctDouble > 0)
-        ? maxLossPctDouble.convertToCurrencyDecimal(decimalDigits: 2)
+        ? maxLossPctDouble.convertToCurrencyDecimal()
         : '/';
   }
 

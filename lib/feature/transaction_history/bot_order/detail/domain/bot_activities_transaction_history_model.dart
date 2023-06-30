@@ -68,7 +68,7 @@ class BotActivitiesTransactionHistoryModel {
   String get filledAvgPriceString {
     final double filledAvgPriceDouble = checkDouble(filledAvgPrice);
     return (filledAvgPriceDouble > 0)
-        ? 'USD ${filledAvgPriceDouble.toInt()}'
+        ? 'USD ${filledAvgPriceDouble.convertToCurrencyDecimal()}'
         : 'NA';
   }
 
