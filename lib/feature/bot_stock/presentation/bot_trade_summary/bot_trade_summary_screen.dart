@@ -195,12 +195,12 @@ class BotTradeSummaryScreen extends StatelessWidget {
               ? 'Estimated Stop Loss %'
               : 'Estimated Max Loss %',
           leftSubTitle: botTradeSummaryModel.botDetailModel.estStopLossPct
-              .convertToCurrencyDecimal(decimalDigits: 2),
+              .convertToCurrencyDecimal(),
           rightTitle: botTradeSummaryModel.botType == BotType.plank
               ? 'Estimated Take Profit %'
               : 'Estimated Max Profit %',
           rightSubTitle: botTradeSummaryModel.botDetailModel.estTakeProfitPct
-              .convertToCurrencyDecimal(decimalDigits: 2),
+              .convertToCurrencyDecimal(),
         ),
       ];
 
