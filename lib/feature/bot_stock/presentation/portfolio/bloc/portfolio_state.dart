@@ -69,8 +69,11 @@ class PortfolioState extends Equatable {
   }
 
   bool get isShowTerminateButton =>
-      botActiveOrderDetailResponse.data?.botStatus == BotStatus.live ||
-      botActiveOrderDetailResponse.data?.botStatus == BotStatus.liveExpireSoon;
+      (botActiveOrderDetailResponse.data?.botStatus == BotStatus.live ||
+          botActiveOrderDetailResponse.data?.botStatus ==
+              BotStatus.liveExpireSoon) &&
+      botActiveOrderDetailResponse.data?.omsStatus !=
+          OmsStatus.waitingTermination;
 
   bool get isShowCancelButton =>
       botActiveOrderDetailResponse.data?.botStatus == BotStatus.pending;
