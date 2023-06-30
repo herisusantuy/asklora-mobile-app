@@ -36,8 +36,14 @@ class BotOrderTransactionHistorySummaryCard extends StatelessWidget {
               const SizedBox(
                 width: 14,
               ),
-              CustomTextNew(
-                subTitle,
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width / 1.6,
+                ),
+                child: AutoSizedTextWidget(
+                  subTitle,
+                  maxLines: 1,
+                ),
               ),
             ],
           ),
