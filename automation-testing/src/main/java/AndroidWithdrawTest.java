@@ -23,22 +23,22 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-public class AndroidDepositTest {
+public class AndroidWithdrawTest {
     String directory = String.valueOf(new File(System.getProperty("user.dir")).getParent());
     Dotenv dotenv = Dotenv.configure().directory(directory).ignoreIfMalformed().filename(".env").load();
     public final String userName = dotenv.get("LT_USERNAME");
     public final String accessKey = dotenv.get("LT_ACCESS_KEY");
+    public String gridURL = "@mobile-hub.lambdatest.com/wd/hub";
 
     AppiumDriver driver;
     WebDriverWait wait;
     String platformVersion;
-    String platformValue;
     String udid;
     String deviceName;
-    String otp;
+    String platformValue;
+    String withdrawVal;
     Map<String, String> deviceProperties = new HashMap<>();
 
-    final String FIND_BY_EDIT_TEXT = "android.widget.EditText";
     final String PORTFOLIO_VIEW = "//android.widget.ImageView[contains(@content-desc, 'Total Portfolio Value')]";
     final String email = "testemail213982@yopmail.com";
     final String password = "Password1234!";
@@ -57,7 +57,7 @@ public class AndroidDepositTest {
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("build", "Asklora_Stag_10218");
-        caps.setCapability("name","Deposit Test");
+        caps.setCapability("name","Withdraw Test");
         caps.setCapability("deviceName", device);
         caps.setCapability("platformVersion", version);
         caps.setCapability("platformName", platform);
@@ -90,6 +90,7 @@ public class AndroidDepositTest {
         wait = new WebDriverWait(driver, 60);
     }
 
+
     @Test(priority = 1)
     public void testLogin() {
         clickContentDescription("Have An Account");
@@ -108,34 +109,44 @@ public class AndroidDepositTest {
     }
 
     @Test(priority = 3)
-    public void testDepositView() {
+    public void testWithdrawView() {
         implicitWait(5);
-        clickElementByXpath("//android.widget.ImageView[@content-desc='Deposit']");
-        clickContentDescription("Continue");
-        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Transfer')]"))
-                .isDisplayed(), "Portfolio view is not displayed");
+        clickElementByXpath("//android.widget.ImageView[@content-desc='Withdraw']");
+        clickElementByXpath("//android.widget.Button[@content-desc='Withdraw']");
+        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Withdrawable Amount')]"))
+                .isDisplayed(), "Withdraw money view is displayed");
     }
 
     @Test(priority = 4)
-    public void testDepositValue() {
-        clickElementByClass(FIND_BY_EDIT_TEXT);
-        driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(String.valueOf(randomize(100, 1000)));
-        clickContentDescription("Continue");
-        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Deposit Request Submitted')]"))
-                .isDisplayed(), "Unexpected view is displayed");
+    public void testWithdrawValue() {
+        withdrawVal = String.valueOf(randomize(100, 10000));
+        int[] withdrawInts = new int[withdrawVal.length()];
+        for (int i = 0; i < withdrawVal.length(); i++) {
+            withdrawInts[i] = withdrawVal.charAt(i) - '0';
+        }
+        System.out.println(Arrays.toString(withdrawInts));
+        for (int i = 0; i < withdrawVal.length(); i++) {
+            driver.findElement(By.xpath("//android.view.View[@content-desc='" + withdrawInts[i] + "']")).click();
+        }
+        double expectedTotal = Double.parseDouble(withdrawVal) / 10 - 10;
+        clickContentDescription("Next");
+        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, '" + expectedTotal + "')]"))
+                        .isDisplayed(), "Actual total amount does not match expected total amount.");
     }
 
     @Test(priority = 5)
-    public void testFinish() {
-        clickElementByXpath("//android.widget.Button[@content-desc='Done']");
+    public void testConfirmWithdraw() {
+        clickContentDescription("Confirm");
+        clickContentDescription("Done");
         Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'investing mojo')]"))
-                .isDisplayed(), "Unexpected view is displayed");
+                .isDisplayed(), "Portfolio view is not displayed");
     }
 
     @AfterTest
     public void tearDown() {
         driver.quit();
     }
+
 
     public void getPropValues() throws IOException {
         Properties prop = new Properties();
@@ -149,26 +160,11 @@ public class AndroidDepositTest {
         deviceName = deviceProperties.get("deviceName");
     }
 
-    public void clickElementByXpath(String element) {
-        driver.findElement(By.xpath(element)).click();
-    }
-
-    public void clickElementByClass(String element) {
-        driver.findElement(By.className(element)).click();
-    }
-
-    public void clickContentDescription(String element) {
-        driver.findElement(new MobileBy.ByAndroidUIAutomator(
-                        "new UiScrollable(new UiSelector().scrollable(true))" +
-                                ".scrollIntoView(new UiSelector().descriptionContains(\"" + element + "\"))"))
-                .click();
-    }
-
     public void getOTP() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("----- Enter otp -----");
 
-        otp = scanner.nextLine();
+        String otp = scanner.nextLine();
         System.out.println("Received otp: " + otp);
 
         int[] otpInts = new int[otp.length()];
@@ -199,6 +195,17 @@ public class AndroidDepositTest {
         return null;
     }
 
+    public void clickElementByXpath(String element) {
+        driver.findElement(By.xpath(element)).click();
+    }
+
+    public void clickContentDescription(String element) {
+        driver.findElement(new MobileBy.ByAndroidUIAutomator(
+                        "new UiScrollable(new UiSelector().scrollable(true))" +
+                                ".scrollIntoView(new UiSelector().descriptionContains(\"" + element + "\"))"))
+                .click();
+    }
+
     public void implicitWait(int period) {
         driver.manage().timeouts().implicitlyWait(period < 1 ? 3 : period, TimeUnit.SECONDS);
     }
@@ -206,4 +213,6 @@ public class AndroidDepositTest {
     public int randomize(int min, int max) {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
+
+
 }
