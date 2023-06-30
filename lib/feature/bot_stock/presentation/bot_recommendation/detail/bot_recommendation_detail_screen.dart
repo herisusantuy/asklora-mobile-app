@@ -100,7 +100,6 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                       botRecommendationModel: botRecommendationModel,
                       botType: botType,
                       botDetailModel: state.botDetailResponse.data,
-                      isTutorial: state.isBotDetailsTutorial,
                     ),
                     bottomButton: Padding(
                       padding: AppValues.screenHorizontalPadding
