@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
-import '../../balance/deposit/utils/deposit_utils.dart';
+import '../../balance/deposit/UtilTest/deposit_utils.dart';
 import '../repository/bank_account_repository.dart';
 
 part 'bank_account_event.dart';

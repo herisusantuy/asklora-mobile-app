@@ -10,7 +10,7 @@ import '../../../../../core/presentation/typer_animated_text.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../bloc/lora_gpt_bloc.dart';
-import 'utils/triangle_chat_bubble_painter.dart';
+import 'UtilTest/triangle_chat_bubble_painter.dart';
 
 class OutChatBubbleWidget extends StatelessWidget {
   const OutChatBubbleWidget(this.message,

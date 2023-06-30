@@ -11,12 +11,12 @@ import '../../../../core/presentation/lora_popup_message/lora_popup_message.dart
 import '../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../../bot_stock/repository/bot_stock_repository.dart';
-import '../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../bot_stock/UtilTest/bot_stock_utils.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../learning_bot_stock_screen.dart';
 import '../../widgets/demonstration_tooltip_guide.dart';
 import '../bloc/demonstration_bot_bloc.dart';
-import '../utils/demonstration_bottom_sheet.dart';
+import '../UtilTest/demonstration_bottom_sheet.dart';
 
 part 'widgets/demonstration_bot_list.dart';
 

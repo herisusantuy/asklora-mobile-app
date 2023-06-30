@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../../core/utils/date_utils.dart';
+import '../../../../../core/UtilTest/date_utils.dart';
 import '../../../../settings/domain/bank_account.dart';
 import '../upgrade_account/agreement.dart';
 import '../upgrade_account/employment_info.dart';

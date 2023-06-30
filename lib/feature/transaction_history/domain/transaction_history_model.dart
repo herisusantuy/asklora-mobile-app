@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../core/utils/date_utils.dart';
-import '../../../core/utils/extensions.dart';
-import '../utils/transaction_history_util.dart';
+import '../../../core/UtilTest/date_utils.dart';
+import '../../../core/UtilTest/extensions.dart';
+import '../UtilTest/transaction_history_util.dart';
 
 part 'transaction_history_model.g.dart';
 

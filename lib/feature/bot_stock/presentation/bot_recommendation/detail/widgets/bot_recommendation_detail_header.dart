@@ -4,7 +4,7 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../onboarding/ppi/domain/ppi_user_response.dart';
-import '../../../../utils/bot_stock_utils.dart';
+import '../../../../UtilTest/bot_stock_utils.dart';
 
 class BotRecommendationDetailHeader extends StatelessWidget {
   final RecommendedBot recommendedBot;

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import '../../../../../core/utils/date_utils.dart';
-import '../../../../../core/utils/extensions.dart';
+import '../../../../../core/UtilTest/date_utils.dart';
+import '../../../../../core/UtilTest/extensions.dart';
 import 'bot_activities_transaction_history_model.dart';
 import 'bot_summary_transaction_history_model.dart';
 

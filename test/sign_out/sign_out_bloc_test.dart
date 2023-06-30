@@ -1,7 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/repository.dart';
-import 'package:asklora_mobile_app/core/utils/storage/secure_storage.dart';
-import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
+import 'package:asklora_mobile_app/core/UtilTest/storage/secure_storage.dart';
+import 'package:asklora_mobile_app/core/UtilTest/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/feature/auth/repository/auth_repository.dart';
 import 'package:asklora_mobile_app/feature/auth/sign_out/bloc/sign_out_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';

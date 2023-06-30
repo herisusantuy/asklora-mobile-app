@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/presentation/custom_text.dart';
-import '../../../core/utils/app_icons.dart';
+import '../../../core/UtilTest/app_icons.dart';
 
 class SymbolDetailsWidget extends StatelessWidget {
   const SymbolDetailsWidget({Key? key}) : super(key: key);

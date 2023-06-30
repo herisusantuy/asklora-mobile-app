@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../../core/utils/extensions.dart';
+import '../../../../../core/UtilTest/extensions.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
-import '../../utils/kyc_dropdown_enum.dart';
+import '../../UtilTest/kyc_dropdown_enum.dart';
 import 'affiliated_person.dart';
 import 'agreement.dart';
 import 'employment_info.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
+import '../../../feature/bot_stock/UtilTest/bot_stock_utils.dart';
 import '../../styles/asklora_text_styles.dart';
-import '../../utils/app_icons.dart';
+import '../../UtilTest/app_icons.dart';
 import '../custom_text_new.dart';
 
 class BotBadge extends StatefulWidget {

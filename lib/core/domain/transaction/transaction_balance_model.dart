@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../utils/extensions.dart';
+import '../../UtilTest/extensions.dart';
 
 part 'transaction_balance_model.g.dart';
 

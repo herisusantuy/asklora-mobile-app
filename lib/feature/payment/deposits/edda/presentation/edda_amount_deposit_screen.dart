@@ -7,7 +7,7 @@ import '../../../../../core/presentation/custom_text_information.dart';
 import '../../../presentation/custom_payment_button_button.dart';
 import '../../../presentation/custom_payment_text_input.dart';
 import '../../../presentation/payment_confirmation_dialog.dart';
-import '../../../utils/amount_error_type.dart';
+import '../../../UtilTest/amount_error_type.dart';
 import '../../bloc/deposit_bloc.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/navigation/custom_navigation_widget.dart';

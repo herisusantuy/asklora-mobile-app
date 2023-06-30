@@ -11,7 +11,7 @@ import '../../../../../generated/l10n.dart';
 import '../../bloc/financial_profile/financial_profile_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
-import '../../utils/kyc_dropdown_enum.dart';
+import '../../UtilTest/kyc_dropdown_enum.dart';
 import '../widgets/kyc_base_form.dart';
 
 class FinancialProfileEmploymentQuestion extends StatelessWidget {

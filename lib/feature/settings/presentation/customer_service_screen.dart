@@ -6,7 +6,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_text_styles.dart';
-import '../../../core/utils/utils.dart';
+import '../../../core/UtilTest/UtilTest.dart';
 import '../../../generated/l10n.dart';
 
 class CustomerServiceScreen extends StatelessWidget {

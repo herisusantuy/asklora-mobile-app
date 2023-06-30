@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/utils/currency_enum.dart';
+import '../../../../core/UtilTest/currency_enum.dart';
 
 class CurrencyDropdown extends StatelessWidget {
   final void Function(CurrencyType?) onChanged;

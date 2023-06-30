@@ -10,12 +10,12 @@ import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/formatters/custom_formatters.dart';
+import '../../../../../core/UtilTest/formatters/custom_formatters.dart';
 import '../../../../../generated/l10n.dart';
 import '../../bloc/address_proof/address_proof_bloc.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
-import '../../utils/kyc_dropdown_enum.dart';
+import '../../UtilTest/kyc_dropdown_enum.dart';
 import '../widgets/kyc_base_form.dart';
 
 class AddressProofScreen extends StatelessWidget {

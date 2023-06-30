@@ -8,7 +8,7 @@ import '../../../../generated/l10n.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../../../transaction_history/presentation/transaction_history_screen.dart';
 import '../../widgets/balance_base_form.dart';
-import '../utils/deposit_utils.dart';
+import '../UtilTest/deposit_utils.dart';
 
 class DepositResultScreen extends StatelessWidget {
   static const String route = '/deposit_result_screen';

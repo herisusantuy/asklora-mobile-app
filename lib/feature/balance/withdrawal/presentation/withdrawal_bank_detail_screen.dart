@@ -10,7 +10,7 @@ import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/utils/app_icons.dart';
+import '../../../../core/UtilTest/app_icons.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';

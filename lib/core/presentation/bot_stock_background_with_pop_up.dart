@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
-import '../../feature/bot_stock/utils/bot_stock_utils.dart';
+import '../../feature/bot_stock/UtilTest/bot_stock_utils.dart';
 import '../styles/asklora_colors.dart';
 import '../values/app_values.dart';
 import 'buttons/primary_button.dart';

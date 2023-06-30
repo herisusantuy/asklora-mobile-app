@@ -7,7 +7,7 @@ import '../../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import 'jumping_dots_lora_gpt.dart';
-import 'utils/triangle_chat_bubble_painter.dart';
+import 'UtilTest/triangle_chat_bubble_painter.dart';
 
 class LoraThinkingWidget extends StatelessWidget {
   const LoraThinkingWidget({super.key});

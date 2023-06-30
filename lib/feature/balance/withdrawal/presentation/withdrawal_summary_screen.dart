@@ -11,8 +11,8 @@ import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_messa
 import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/utils/app_icons.dart';
-import '../../../../core/utils/extensions.dart';
+import '../../../../core/UtilTest/app_icons.dart';
+import '../../../../core/UtilTest/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../widgets/balance_base_form.dart';
 import '../bloc/withdrawal_bloc.dart';

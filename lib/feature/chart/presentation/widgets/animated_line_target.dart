@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/dashed_line_horizontal_painter.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../utils/chart_util.dart';
+import '../../UtilTest/chart_util.dart';
 import 'custom_animated_opacity.dart';
 
 class AnimatedLineTarget extends StatelessWidget {

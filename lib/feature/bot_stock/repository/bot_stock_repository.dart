@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 
 import '../../../core/data/remote/base_api_client.dart';
 import '../../../core/domain/base_response.dart';
-import '../../../core/utils/date_utils.dart';
-import '../../../core/utils/extensions.dart';
-import '../../../core/utils/storage/shared_preference.dart';
-import '../../../core/utils/storage/storage_keys.dart';
+import '../../../core/UtilTest/date_utils.dart';
+import '../../../core/UtilTest/extensions.dart';
+import '../../../core/UtilTest/storage/shared_preference.dart';
+import '../../../core/UtilTest/storage/storage_keys.dart';
 import '../../chart/domain/bot_recommendation_chart_model.dart';
 import '../../chart/domain/chart_models.dart';
 import '../../chart/domain/chart_studio_animation_model.dart';
@@ -24,7 +24,7 @@ import '../domain/orders/bot_active_order_request.dart';
 import '../domain/orders/bot_create_order_request.dart';
 import '../domain/orders/bot_order_response.dart';
 import '../domain/orders/bot_order_request.dart';
-import '../utils/bot_stock_utils.dart';
+import '../UtilTest/bot_stock_utils.dart';
 
 class BotStockRepository {
   final SharedPreference _sharedPreference = SharedPreference();

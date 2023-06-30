@@ -16,7 +16,7 @@ import '../../../../../generated/l10n.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/source_of_wealth/source_of_wealth_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
-import '../../utils/source_of_wealth_enum.dart';
+import '../../UtilTest/source_of_wealth_enum.dart';
 import '../widgets/custom_donut_chart/custom_donut_chart.dart';
 import '../widgets/kyc_base_form.dart';
 import 'widgets/number_counter_input.dart';

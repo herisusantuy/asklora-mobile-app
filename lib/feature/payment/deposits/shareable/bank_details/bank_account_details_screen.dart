@@ -6,7 +6,7 @@ import '../../../../../core/domain/base_response.dart';
 import '../../../../../core/presentation/alert_dialog.dart';
 import '../../../../../core/presentation/custom_text.dart';
 import '../../../../../core/presentation/custom_text_information.dart';
-import '../../../../../core/utils/formatters/custom_formatters.dart';
+import '../../../../../core/UtilTest/formatters/custom_formatters.dart';
 import '../../../bloc/bank_account_bloc.dart';
 import '../../../domain/add_bank_account_request.dart';
 import '../../../presentation/custom_payment_button_button.dart';

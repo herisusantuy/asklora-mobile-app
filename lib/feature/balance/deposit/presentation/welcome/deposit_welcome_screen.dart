@@ -25,7 +25,7 @@ import '../../../../tabs/tabs_screen.dart';
 import '../../../widgets/balance_base_form.dart';
 import '../../../widgets/bank_account_card.dart';
 import '../../../widgets/change_bank_account_button.dart';
-import '../../utils/deposit_utils.dart';
+import '../../UtilTest/deposit_utils.dart';
 import '../deposit_screen.dart';
 import 'widgets/deposit_step/domain/deposit_step_model.dart';
 
@@ -33,7 +33,7 @@ part 'widgets/deposit_bank_account.dart';
 
 part 'widgets/deposit_step/deposit_step.dart';
 
-part 'widgets/deposit_step/utils/deposit_step_utils.dart';
+part 'widgets/deposit_step/UtilTest/deposit_step_utils.dart';
 
 part 'widgets/deposit_welcome_notes.dart';
 

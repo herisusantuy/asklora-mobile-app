@@ -9,9 +9,9 @@ import 'dart:math' as math;
 import '../../../core/presentation/custom_text_new.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
-import '../../../core/utils/extensions.dart';
+import '../../../core/UtilTest/extensions.dart';
 import '../domain/chart_models.dart';
-import '../utils/chart_util.dart';
+import '../UtilTest/chart_util.dart';
 import 'widgets/animated_icon_label.dart';
 import 'widgets/animated_profit_label.dart';
 

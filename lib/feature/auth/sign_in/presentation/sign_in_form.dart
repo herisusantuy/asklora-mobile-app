@@ -11,7 +11,7 @@ import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../core/presentation/text_fields/password_text_field.dart';
 import '../../../../core/presentation/we_create/custom_text_button.dart';
-import '../../../../core/utils/extensions.dart';
+import '../../../../core/UtilTest/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';

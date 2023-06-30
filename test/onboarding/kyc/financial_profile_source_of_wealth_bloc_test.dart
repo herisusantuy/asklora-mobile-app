@@ -1,5 +1,5 @@
 import 'package:asklora_mobile_app/feature/onboarding/kyc/bloc/source_of_wealth/source_of_wealth_bloc.dart';
-import 'package:asklora_mobile_app/feature/onboarding/kyc/utils/source_of_wealth_enum.dart';
+import 'package:asklora_mobile_app/feature/onboarding/kyc/UtilTest/source_of_wealth_enum.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 

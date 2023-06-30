@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../utils/chart_util.dart';
+import '../../UtilTest/chart_util.dart';
 
 class AnimatedProfitLabel extends StatefulWidget {
   final double left;

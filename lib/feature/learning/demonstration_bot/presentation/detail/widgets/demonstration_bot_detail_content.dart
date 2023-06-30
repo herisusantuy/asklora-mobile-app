@@ -9,7 +9,7 @@ import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/
 import '../../../../../bot_stock/presentation/widgets/custom_detail_expansion_tile.dart';
 import '../../../../../bot_stock/presentation/widgets/iex_data_provider_link.dart';
 import '../../../../../bot_stock/presentation/widgets/pair_column_text.dart';
-import '../../../../../bot_stock/utils/bot_stock_utils.dart';
+import '../../../../../bot_stock/UtilTest/bot_stock_utils.dart';
 
 class DemonstrationBotDetailContent extends StatelessWidget {
   final BotRecommendationModel botRecommendationModel;

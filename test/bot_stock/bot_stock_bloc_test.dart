@@ -3,7 +3,7 @@ import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/orders/bot_order_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/UtilTest/bot_stock_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
