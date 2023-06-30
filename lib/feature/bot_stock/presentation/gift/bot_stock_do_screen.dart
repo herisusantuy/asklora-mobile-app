@@ -6,8 +6,8 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/lora_memoji_header.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/UtilTest/app_icons.dart';
-import '../../UtilTest/bot_stock_utils.dart';
+import '../../../../core/utils/app_icons.dart';
+import '../../utils/bot_stock_utils.dart';
 import '../bot_recommendation/bot_recommendation_screen.dart';
 import '../widgets/bot_stock_form.dart';
 

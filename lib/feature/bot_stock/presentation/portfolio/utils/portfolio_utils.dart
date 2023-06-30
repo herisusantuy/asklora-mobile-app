@@ -1,5 +1,5 @@
-import '../../../../../core/UtilTest/currency_enum.dart';
-import '../../../../../core/UtilTest/extensions.dart';
+import '../../../../../core/utils/currency_enum.dart';
+import '../../../../../core/utils/extensions.dart';
 
 enum BotPortfolioPopUpType {
   createAccount,

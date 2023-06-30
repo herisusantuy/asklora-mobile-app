@@ -3,7 +3,7 @@ import 'package:asklora_mobile_app/feature/orders/bloc/market/market_bloc.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/order_request.dart';
 import 'package:asklora_mobile_app/feature/orders/domain/order_response.dart';
 import 'package:asklora_mobile_app/feature/orders/repository/orders_repository.dart';
-import 'package:asklora_mobile_app/feature/orders/UtilTest/orders_calculation.dart';
+import 'package:asklora_mobile_app/feature/orders/utils/orders_calculation.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

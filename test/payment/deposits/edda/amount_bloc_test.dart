@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/payment/deposits/edda/bloc/amount/amount_bloc.dart';
-import 'package:asklora_mobile_app/feature/payment/UtilTest/amount_error_type.dart';
+import 'package:asklora_mobile_app/feature/payment/utils/amount_error_type.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 

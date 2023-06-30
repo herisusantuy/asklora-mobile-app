@@ -13,7 +13,7 @@ import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../../tabs/tabs_screen.dart';
 import '../../gift/gift_bot_stock_welcome_screen.dart';
-import '../UtilTest/portfolio_utils.dart';
+import '../utils/portfolio_utils.dart';
 
 class BotPortfolioPopUp extends StatelessWidget {
   final BotPortfolioPopUpType botPortfolioPopUpType;

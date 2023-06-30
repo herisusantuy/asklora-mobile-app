@@ -1,4 +1,4 @@
-import '../../UtilTest/build_configs/build_config.dart';
+import '../../utils/build_configs/build_config.dart';
 import 'base_api_client.dart';
 
 class PpiApiClient extends BaseApiClient {

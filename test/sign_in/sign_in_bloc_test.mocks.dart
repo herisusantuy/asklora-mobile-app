@@ -15,7 +15,7 @@ import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart'
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
 import 'package:asklora_mobile_app/core/domain/otp/get_otp_request.dart'
     as _i10;
-import 'package:asklora_mobile_app/core/UtilTest/storage/shared_preference.dart'
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
     as _i17;
 import 'package:asklora_mobile_app/feature/auth/forgot_password/domain/forgot_password_response.dart'
     as _i12;

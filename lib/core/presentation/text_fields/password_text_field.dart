@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
-import '../../UtilTest/app_icons.dart';
-import '../../UtilTest/extensions.dart';
+import '../../utils/app_icons.dart';
+import '../../utils/extensions.dart';
 import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 

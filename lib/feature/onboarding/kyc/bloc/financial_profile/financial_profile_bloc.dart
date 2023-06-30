@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/upgrade_account/employment_info.dart';
-import '../../UtilTest/kyc_dropdown_enum.dart';
-import '../../UtilTest/kyc_util.dart';
+import '../../utils/kyc_dropdown_enum.dart';
+import '../../utils/kyc_util.dart';
 
 part 'financial_profile_event.dart';
 

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../core/UtilTest/extensions.dart';
+import '../../../core/utils/extensions.dart';
 
 abstract class ChartDataSet extends Equatable {
   final int? index;

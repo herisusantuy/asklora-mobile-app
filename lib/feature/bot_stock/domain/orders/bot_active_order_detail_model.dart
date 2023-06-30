@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../../../core/UtilTest/extensions.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../../chart/domain/bot_portfolio_chart_models.dart';
 import '../bot_detail_model.dart';
 

@@ -7,7 +7,7 @@ import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../core/presentation/custom_text_new.dart';
-import '../../../../core/UtilTest/extensions.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../repository/auth_repository.dart';
 import '../bloc/forgot_password_bloc.dart';
 import 'forgot_password_form.dart';

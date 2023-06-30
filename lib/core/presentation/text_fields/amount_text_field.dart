@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
-import '../../UtilTest/extensions.dart';
-import '../../UtilTest/formatters/currency_formatter.dart';
+import '../../utils/extensions.dart';
+import '../../utils/formatters/currency_formatter.dart';
 import '../custom_text_new.dart';
 import 'style/text_field_style.dart';
 

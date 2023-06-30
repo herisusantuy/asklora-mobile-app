@@ -6,7 +6,7 @@ import 'package:uni_links/uni_links.dart';
 
 import '../../../../core/data/remote/base_api_client.dart';
 import '../../../../core/domain/base_response.dart';
-import '../../../../core/UtilTest/extensions.dart';
+import '../../../../core/utils/extensions.dart';
 import '../../repository/auth_repository.dart';
 
 part 'forgot_password_event.dart';

@@ -7,7 +7,7 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/UtilTest/app_icons.dart';
+import '../../../../../core/utils/app_icons.dart';
 import '../../../../tabs/tabs_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';

@@ -8,7 +8,7 @@ import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
-import '../../../../core/UtilTest/storage/shared_preference.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../auth/otp/repository/otp_repository.dart';
 import '../../../tabs/tabs_screen.dart';
 import '../bloc/address_proof/address_proof_bloc.dart';

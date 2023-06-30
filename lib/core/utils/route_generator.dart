@@ -8,7 +8,7 @@ import '../../feature/auth/sign_up/presentation/sign_up_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_result_screen.dart';
 import '../../feature/balance/deposit/presentation/deposit_screen.dart';
 import '../../feature/balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
-import '../../feature/balance/deposit/UtilTest/deposit_utils.dart';
+import '../../feature/balance/deposit/utils/deposit_utils.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_amount/withdrawal_amount_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.dart';
@@ -24,7 +24,7 @@ import '../../feature/bot_stock/presentation/gift/bot_stock_explanation_screen.d
 import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
-import '../../feature/bot_stock/UtilTest/bot_stock_utils.dart';
+import '../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';

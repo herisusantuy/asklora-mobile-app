@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../UtilTest/app_icons.dart';
+import '../utils/app_icons.dart';
 
 enum LoraMemojiType {
   lora1('lora_memoji_1'),

@@ -5,7 +5,7 @@ import '../../../core/domain/endpoints.dart';
 import '../../../core/presentation/custom_header.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
-import '../../../core/UtilTest/UtilTest.dart';
+import '../../../core/utils/utils.dart';
 import '../../../generated/l10n.dart';
 import '../widget/menu_button.dart';
 import 'customer_service_screen.dart';

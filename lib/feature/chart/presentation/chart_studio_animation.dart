@@ -11,7 +11,7 @@ import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../domain/chart_models.dart';
 import '../domain/chart_studio_animation_model.dart';
-import '../UtilTest/chart_util.dart';
+import '../utils/chart_util.dart';
 import 'widgets/animated_icon_label.dart';
 import 'widgets/animated_line_pointer.dart';
 import 'widgets/animated_line_target.dart';

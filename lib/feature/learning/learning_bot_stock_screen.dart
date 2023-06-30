@@ -5,7 +5,7 @@ import 'package:just_the_tooltip/just_the_tooltip.dart';
 import '../../core/presentation/custom_scaffold.dart';
 import '../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../bot_stock/domain/bot_recommendation_model.dart';
-import '../bot_stock/UtilTest/bot_stock_utils.dart';
+import '../bot_stock/utils/bot_stock_utils.dart';
 import 'demonstration_bot/presentation/detail/demonstration_bot_detail_screen.dart';
 import 'demonstration_bot/presentation/demonstration_bot_screen.dart';
 import 'demonstration_bot/presentation/trade/demonstration_bot_trade.dart';

@@ -5,9 +5,9 @@ import '../../domain/endpoints.dart';
 import '../../domain/token/model/token_refresh_response.dart';
 import '../../domain/token/repository/repository.dart';
 import '../../domain/token/repository/token_repository.dart';
-import '../../UtilTest/build_configs/build_config.dart';
-import '../../UtilTest/header_util.dart';
-import '../../UtilTest/logging_interceptor.dart';
+import '../../utils/build_configs/build_config.dart';
+import '../../utils/header_util.dart';
+import '../../utils/logging_interceptor.dart';
 
 class BaseApiClient {
   late Dio _dio;

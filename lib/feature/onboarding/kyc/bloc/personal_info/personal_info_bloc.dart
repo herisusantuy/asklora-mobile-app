@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/UtilTest/hkid_validation.dart';
-import '../../../../../core/UtilTest/age_validation.dart';
+import '../../../../../core/utils/hkid_validation.dart';
+import '../../../../../core/utils/age_validation.dart';
 import '../../domain/upgrade_account/personal_info_request.dart';
 import '../../repository/account_repository.dart';
-import '../../UtilTest/kyc_util.dart';
+import '../../utils/kyc_util.dart';
 
 part 'personal_info_event.dart';
 

@@ -4,7 +4,7 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/UtilTest/app_icons.dart';
+import '../../../../../core/utils/app_icons.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import '../../../../settings/domain/bank_account.dart';

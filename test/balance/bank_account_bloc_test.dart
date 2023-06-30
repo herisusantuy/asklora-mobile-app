@@ -1,6 +1,6 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/balance/bloc/bank_account_bloc.dart';
-import 'package:asklora_mobile_app/feature/balance/deposit/UtilTest/deposit_utils.dart';
+import 'package:asklora_mobile_app/feature/balance/deposit/utils/deposit_utils.dart';
 import 'package:asklora_mobile_app/feature/balance/domain/get_bank_account_response.dart';
 import 'package:asklora_mobile_app/feature/balance/domain/registered_bank_accounts.dart';
 import 'package:asklora_mobile_app/feature/balance/repository/bank_account_repository.dart';

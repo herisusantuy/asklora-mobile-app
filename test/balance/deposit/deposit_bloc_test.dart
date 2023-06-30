@@ -2,7 +2,7 @@ import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/balance/deposit/bloc/deposit_bloc.dart';
 import 'package:asklora_mobile_app/feature/balance/deposit/domain/deposit_response.dart';
 import 'package:asklora_mobile_app/feature/balance/deposit/repository/deposit_repository.dart';
-import 'package:asklora_mobile_app/feature/balance/deposit/UtilTest/deposit_utils.dart';
+import 'package:asklora_mobile_app/feature/balance/deposit/utils/deposit_utils.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_test/flutter_test.dart';

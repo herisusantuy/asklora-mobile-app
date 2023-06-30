@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../core/UtilTest/date_utils.dart';
-import '../../../core/UtilTest/extensions.dart';
+import '../../../core/utils/date_utils.dart';
+import '../../../core/utils/extensions.dart';
 import '../../chart/domain/bot_recommendation_chart_model.dart';
 
 part 'bot_detail_model.g.dart';

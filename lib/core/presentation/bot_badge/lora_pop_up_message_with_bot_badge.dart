@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../feature/bot_stock/UtilTest/bot_stock_utils.dart';
+import '../../../feature/bot_stock/utils/bot_stock_utils.dart';
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../../values/app_values.dart';

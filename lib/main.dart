@@ -7,8 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'app/presentation/app.dart';
-import 'core/UtilTest/build_configs/app_config_widget.dart';
-import 'core/UtilTest/feature_flags.dart';
+import 'core/utils/build_configs/app_config_widget.dart';
+import 'core/utils/feature_flags.dart';
 
 main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

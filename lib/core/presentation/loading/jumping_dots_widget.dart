@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../styles/asklora_colors.dart';
-import '../../UtilTest/app_icons.dart';
+import '../../utils/app_icons.dart';
 
 class DotWidget extends StatefulWidget {
   const DotWidget() : super(key: const Key('ad'));

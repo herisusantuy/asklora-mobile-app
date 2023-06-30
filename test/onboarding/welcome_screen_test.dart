@@ -1,8 +1,8 @@
 import 'package:asklora_mobile_app/app/bloc/app_bloc.dart';
 import 'package:asklora_mobile_app/app/repository/user_journey_repository.dart';
 import 'package:asklora_mobile_app/core/domain/token/repository/token_repository.dart';
-import 'package:asklora_mobile_app/core/UtilTest/storage/secure_storage.dart';
-import 'package:asklora_mobile_app/core/UtilTest/storage/shared_preference.dart';
+import 'package:asklora_mobile_app/core/utils/storage/secure_storage.dart';
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart';
 import 'package:asklora_mobile_app/feature/onboarding/welcome/welcome_screen.dart';
 import 'package:asklora_mobile_app/generated/l10n.dart';
 import 'package:flutter/material.dart';

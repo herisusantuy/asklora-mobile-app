@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
-import '../UtilTest/formatters/phone_input_formatter/phone_input_formatter.dart';
+import '../utils/formatters/phone_input_formatter/phone_input_formatter.dart';
 import 'clearable_text_field.dart';
 import 'custom_text_new.dart';
 

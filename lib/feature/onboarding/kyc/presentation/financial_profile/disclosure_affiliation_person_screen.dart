@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
-import '../../../../../core/UtilTest/feature_flags.dart';
+import '../../../../../core/utils/feature_flags.dart';
 import '../../../../../generated/l10n.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
 import '../../bloc/kyc_bloc.dart';

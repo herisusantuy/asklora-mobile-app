@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/upgrade_account/wealth_sources_request.dart';
-import '../../UtilTest/source_of_wealth_enum.dart';
+import '../../utils/source_of_wealth_enum.dart';
 
 part 'source_of_wealth_event.dart';
 

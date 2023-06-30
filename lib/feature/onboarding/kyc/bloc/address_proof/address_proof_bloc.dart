@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/UtilTest/UtilTest.dart';
+import '../../../../../core/utils/utils.dart';
 import '../../domain/upgrade_account/proofs_of_address_request.dart';
 import '../../domain/upgrade_account/residence_info_request.dart';
-import '../../UtilTest/kyc_dropdown_enum.dart';
+import '../../utils/kyc_dropdown_enum.dart';
 
 part 'address_proof_event.dart';
 

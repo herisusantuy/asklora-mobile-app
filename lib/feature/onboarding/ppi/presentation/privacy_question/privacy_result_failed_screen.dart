@@ -5,7 +5,7 @@ import '../../../../../core/domain/endpoints.dart';
 import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/UtilTest/UtilTest.dart';
+import '../../../../../core/utils/utils.dart';
 import '../../bloc/question/question_bloc.dart';
 import '../ppi_result_screen.dart';
 import '../ppi_screen.dart';

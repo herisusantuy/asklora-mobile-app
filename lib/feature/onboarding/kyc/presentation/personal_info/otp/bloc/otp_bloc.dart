@@ -7,8 +7,8 @@ import '../../../../../../../core/data/remote/base_api_client.dart';
 import '../../../../../../../core/domain/base_response.dart';
 import '../../../../../../../core/domain/otp/get_sms_otp_request.dart';
 import '../../../../../../../core/domain/otp/validate_phone_request.dart';
-import '../../../../../../../core/UtilTest/storage/shared_preference.dart';
-import '../../../../../../../core/UtilTest/storage/storage_keys.dart';
+import '../../../../../../../core/utils/storage/shared_preference.dart';
+import '../../../../../../../core/utils/storage/storage_keys.dart';
 import '../../../../../../auth/otp/repository/otp_repository.dart';
 
 part 'otp_event.dart';

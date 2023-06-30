@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/presentation/custom_text.dart';
 import '../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../core/presentation/navigation/custom_navigation_widget.dart';
-import '../../../../core/UtilTest/app_icons.dart';
+import '../../../../core/utils/app_icons.dart';
 import '../../bloc/order_bloc.dart';
 
 class OrderTypeScreen extends StatelessWidget {

@@ -4,7 +4,7 @@ import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../../UtilTest/bot_stock_utils.dart';
+import '../../../../utils/bot_stock_utils.dart';
 
 class BotPriceLevelIndicator extends StatelessWidget {
   final double stopLossPrice;

@@ -6,9 +6,9 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../../core/domain/token/repository/token_repository.dart';
 import '../../core/styles/asklora_colors.dart';
-import '../../core/UtilTest/route_generator.dart';
-import '../../core/UtilTest/storage/secure_storage.dart';
-import '../../core/UtilTest/storage/shared_preference.dart';
+import '../../core/utils/route_generator.dart';
+import '../../core/utils/storage/secure_storage.dart';
+import '../../core/utils/storage/shared_preference.dart';
 import '../../feature/onboarding/welcome/welcome_screen.dart';
 import '../../feature/tabs/tabs_screen.dart';
 import '../../generated/l10n.dart';

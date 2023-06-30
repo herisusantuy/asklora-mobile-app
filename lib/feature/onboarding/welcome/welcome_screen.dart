@@ -10,7 +10,7 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/presentation/we_create/localization_toggle_button/localization_toggle_button.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/UtilTest/app_icons.dart';
+import '../../../../../core/utils/app_icons.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';

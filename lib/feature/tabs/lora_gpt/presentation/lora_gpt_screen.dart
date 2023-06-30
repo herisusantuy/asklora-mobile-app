@@ -10,15 +10,15 @@ import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/text_fields/style/text_field_style.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
-import '../../../../core/UtilTest/app_icons.dart';
-import '../../../../core/UtilTest/storage/shared_preference.dart';
+import '../../../../core/utils/app_icons.dart';
+import '../../../../core/utils/storage/shared_preference.dart';
 import '../bloc/lora_gpt_bloc.dart';
 import '../domain/conversation.dart';
 import '../repository/lora_gpt_repository.dart';
 import 'widget/in_chat_bubble_widget.dart';
 import 'widget/lora_thinking_widget.dart';
 import 'widget/out_chat_bubble_widget.dart';
-import 'widget/UtilTest/ripple_animation.dart';
+import 'widget/utils/ripple_animation.dart';
 
 class LoraGptScreen extends StatefulWidget {
   const LoraGptScreen({super.key});

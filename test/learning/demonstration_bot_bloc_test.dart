@@ -1,7 +1,7 @@
 import 'package:asklora_mobile_app/core/domain/base_response.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/repository/bot_stock_repository.dart';
-import 'package:asklora_mobile_app/feature/bot_stock/UtilTest/bot_stock_utils.dart';
+import 'package:asklora_mobile_app/feature/bot_stock/utils/bot_stock_utils.dart';
 import 'package:asklora_mobile_app/feature/chart/domain/chart_models.dart';
 import 'package:asklora_mobile_app/feature/chart/domain/chart_studio_animation_model.dart';
 import 'package:asklora_mobile_app/feature/learning/demonstration_bot/bloc/demonstration_bot_bloc.dart';

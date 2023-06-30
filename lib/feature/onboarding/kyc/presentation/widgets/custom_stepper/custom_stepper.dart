@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../../core/UtilTest/app_icons.dart';
+import '../../../../../../core/utils/app_icons.dart';
 
 part 'custom_step.dart';
 

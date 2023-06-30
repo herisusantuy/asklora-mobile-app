@@ -1,4 +1,4 @@
-import '../../../core/UtilTest/extensions.dart';
+import '../../../core/utils/extensions.dart';
 
 double calculateEstimateTotal(double price, double sharesAmount) {
   return (price * sharesAmount).toPrecision(1);

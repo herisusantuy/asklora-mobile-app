@@ -7,7 +7,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:asklora_mobile_app/core/UtilTest/storage/shared_preference.dart'
+import 'package:asklora_mobile_app/core/utils/storage/shared_preference.dart'
     as _i5;
 import 'package:asklora_mobile_app/feature/onboarding/ppi/domain/fixture.dart'
     as _i2;

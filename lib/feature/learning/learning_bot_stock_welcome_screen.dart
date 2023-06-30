@@ -5,7 +5,7 @@ import '../../../core/presentation/bot_badge/lora_pop_up_message_with_bot_badge.
 import '../../../core/presentation/lora_memoji_header.dart';
 import '../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../core/values/app_values.dart';
-import '../bot_stock/UtilTest/bot_stock_utils.dart';
+import '../bot_stock/utils/bot_stock_utils.dart';
 import 'learning_bot_stock_screen.dart';
 
 class LearningBotStockWelcomeScreen extends StatelessWidget {
