@@ -62,14 +62,21 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
                         size: 24,
                       )),
                 )),
+            const SizedBox(
+              width: 4,
+            ),
             Expanded(
               flex: 5,
               child: Center(
-                child: CustomTextNew(
+                child: AutoSizedTextWidget(
                   title,
                   style: AskLoraTextStyles.h5,
+                  maxLines: 1,
                 ),
               ),
+            ),
+            const SizedBox(
+              width: 4,
             ),
             Flexible(
                 flex: 2,
@@ -81,13 +88,14 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
 
   Widget _statusWidget() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+      padding: const EdgeInsets.fromLTRB(16, 5, 16, 7),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 1.4, color: botStatusType.color),
       ),
-      child: CustomTextNew(
+      child: AutoSizedTextWidget(
         botStatusType.name,
+        maxLines: 1,
         style: AskLoraTextStyles.subtitle3.copyWith(color: botStatusType.color),
         textAlign: TextAlign.center,
       ),
