@@ -129,7 +129,7 @@ public class AndroidDepositTest {
     public void testFinish() {
         clickElementByXpath("//android.widget.Button[@content-desc='Done']");
         Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'investing mojo')]"))
-                .isDisplayed(), "Unexpected view is displayed");
+                .isDisplayed(), "Omnisearch view is not displayed");
     }
 
     @AfterTest

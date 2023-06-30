@@ -28,7 +28,6 @@ public class AndroidWithdrawTest {
     Dotenv dotenv = Dotenv.configure().directory(directory).ignoreIfMalformed().filename(".env").load();
     public final String userName = dotenv.get("LT_USERNAME");
     public final String accessKey = dotenv.get("LT_ACCESS_KEY");
-    public String gridURL = "@mobile-hub.lambdatest.com/wd/hub";
 
     AppiumDriver driver;
     WebDriverWait wait;
@@ -105,7 +104,7 @@ public class AndroidWithdrawTest {
     @Test(priority = 2)
     public void testView() {
         clickElementByXpath("//android.widget.ImageView[3]");
-        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath(PORTFOLIO_VIEW)).isDisplayed(), "Portfolio View is not displayed");
     }
 
     @Test(priority = 3)
@@ -139,7 +138,7 @@ public class AndroidWithdrawTest {
         clickContentDescription("Confirm");
         clickContentDescription("Done");
         Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'investing mojo')]"))
-                .isDisplayed(), "Portfolio view is not displayed");
+                .isDisplayed(), "Omnisearch view is not displayed");
     }
 
     @AfterTest
