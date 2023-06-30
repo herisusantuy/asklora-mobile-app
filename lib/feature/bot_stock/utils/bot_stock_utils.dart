@@ -104,6 +104,9 @@ enum OmsStatus {
 
   final String value;
 
+  static OmsStatus findByString(String omsStatus) =>
+      OmsStatus.values.firstWhere((element) => element.value == omsStatus);
+
   const OmsStatus(this.value);
 }
 
@@ -164,6 +167,7 @@ enum BotStatus {
         .firstWhereOrNull((element) => element.value == omsStatusString);
     BotStatus? botStatus = BotStatus.values.firstWhereOrNull(
         (element) => element.omsStatusCollection.contains(omsStatus));
+
     if (botStatus == BotStatus.live &&
         expireDate != null &&
         DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {

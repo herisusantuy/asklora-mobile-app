@@ -42,6 +42,9 @@ class BotActiveOrderModel {
     }
   }
 
+  String get botName =>
+      '${BotType.findByString(botAppsName).upperCaseName} $symbol';
+
   BotStatus get botStatus => BotStatus.findByOmsStatus(status);
 
   const BotActiveOrderModel(

@@ -25,6 +25,9 @@ class BotCancelButton extends StatelessWidget {
             SuspendedAccountScreen.open(context);
           } else if (state.cancelBotStockResponse.state ==
               ResponseState.error) {
+            ///TODO : Later (after error code implemented) to handle error
+            ///when the status have changed to live before hitting cancel
+            ///currently is having status code 400
             CustomInAppNotification.show(
                 context, state.cancelBotStockResponse.message);
           }
