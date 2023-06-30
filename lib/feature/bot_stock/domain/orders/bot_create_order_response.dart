@@ -11,19 +11,13 @@ class BotCreateOrderResponse {
   final String status;
   @JsonKey(name: 'is_active')
   final bool isActive;
-  @JsonKey(name: 'total_pnl_pct')
-  final double totalPnLPct;
-  @JsonKey(name: 'expire_date')
-  final String? expireDate;
+  final String symbol;
   @JsonKey(name: 'ticker_name')
   final String tickerName;
-  @JsonKey(name: 'current_price')
-  final double currentPrice;
   @JsonKey(name: 'is_dummy')
   final bool isDummy;
   @JsonKey(name: 'spot_date')
   final String spotDate;
-  final String symbol;
 
   const BotCreateOrderResponse(
     this.uid,
@@ -31,10 +25,7 @@ class BotCreateOrderResponse {
     this.botAppsName,
     this.status,
     this.isActive,
-    this.totalPnLPct,
-    this.expireDate,
     this.tickerName,
-    this.currentPrice,
     this.isDummy,
     this.spotDate,
     this.symbol,
