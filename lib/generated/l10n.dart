@@ -2943,10 +2943,10 @@ class S {
     );
   }
 
-  /// `check botstock details`
+  /// `Check Botstock Details`
   String get checkBotStockDetails {
     return Intl.message(
-      'check botstock details',
+      'Check Botstock Details',
       name: 'checkBotStockDetails',
       desc: '',
       args: [],

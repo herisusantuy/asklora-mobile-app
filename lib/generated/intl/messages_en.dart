@@ -166,7 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "checkBotStockDetails":
-            MessageLookupByLibrary.simpleMessage("check botstock details"),
+            MessageLookupByLibrary.simpleMessage("Check Botstock Details"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmAndContinue":
             MessageLookupByLibrary.simpleMessage("Confirm & Continue"),
