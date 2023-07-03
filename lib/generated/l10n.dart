@@ -2902,6 +2902,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Trade Summary`
+  String get tradeSummary {
+    return Intl.message(
+      'Trade Summary',
+      name: 'tradeSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Market Price`
+  String get marketPrice {
+    return Intl.message(
+      'Market Price',
+      name: 'marketPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get endDate {
+    return Intl.message(
+      'End Date',
+      name: 'endDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Trade`
+  String get confirmTrade {
+    return Intl.message(
+      'Confirm Trade',
+      name: 'confirmTrade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `check botstock details`
+  String get checkBotStockDetails {
+    return Intl.message(
+      'check botstock details',
+      name: 'checkBotStockDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade Request Received`
+  String get tradeRequestReceived {
+    return Intl.message(
+      'Trade Request Received',
+      name: 'tradeRequestReceived',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

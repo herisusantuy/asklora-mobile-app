@@ -352,5 +352,11 @@
     }
   },
   "viewDepositGuide": "查看入金提示",
-  "pressBackAgain": "再按一次登出Asklora"
+  "pressBackAgain": "再按一次登出Asklora",
+  "tradeSummary" : "交易摘要",
+  "marketPrice" : "市場價格",
+  "endDate" : "結束日期",
+  "confirmTrade": "確認買入",
+  "checkBotStockDetails" : "查看 Botstock 資訊",
+  "tradeRequestReceived" : "已收到交易指令"
 }

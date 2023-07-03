@@ -128,7 +128,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "changeBankAccount": MessageLookupByLibrary.simpleMessage("更改銀行戶口"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "checkBotStockDetails":
+            MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
+        "confirmTrade": MessageLookupByLibrary.simpleMessage("確認買入"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
@@ -156,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailActivationSuccessTitle": m4,
         "emailAddress": MessageLookupByLibrary.simpleMessage("電郵地址"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
+        "endDate": MessageLookupByLibrary.simpleMessage("結束日期"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
@@ -210,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("管理 Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
+        "marketPrice": MessageLookupByLibrary.simpleMessage("市場價格"),
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("目標"),
@@ -361,6 +366,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("交易費用"),
+        "tradeRequestReceived": MessageLookupByLibrary.simpleMessage("已收到交易指令"),
+        "tradeSummary": MessageLookupByLibrary.simpleMessage("交易摘要"),
         "tradeWithANewBotstock":
             MessageLookupByLibrary.simpleMessage("以一隻新 Botstock 交易"),
         "tradeWithBots": MessageLookupByLibrary.simpleMessage("以 Bot 交易"),

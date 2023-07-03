@@ -395,6 +395,11 @@
     }
   },
   "viewDepositGuide": "View Deposit Guide",
-  "pressBackAgain": "Press back again to exit Asklora"
-
+  "pressBackAgain": "Press back again to exit Asklora",
+  "tradeSummary" : "Trade Summary",
+  "marketPrice" : "Market Price",
+  "endDate" : "End Date",
+  "confirmTrade": "Confirm Trade",
+  "checkBotStockDetails" : "check botstock details",
+  "tradeRequestReceived" : "Trade Request Received"
 }

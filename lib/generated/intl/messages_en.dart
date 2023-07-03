@@ -165,11 +165,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change Bank Account"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "checkBotStockDetails":
+            MessageLookupByLibrary.simpleMessage("check botstock details"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmAndContinue":
             MessageLookupByLibrary.simpleMessage("Confirm & Continue"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
+        "confirmTrade": MessageLookupByLibrary.simpleMessage("Confirm Trade"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("Continue Account Opening"),
@@ -200,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailActivationSuccessTitle": m4,
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
+        "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage(
@@ -287,6 +291,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("Manage Your Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
+        "marketPrice": MessageLookupByLibrary.simpleMessage("Market Price"),
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("Milestones"),
@@ -493,6 +498,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
         "trade": MessageLookupByLibrary.simpleMessage("Trade"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
+        "tradeRequestReceived":
+            MessageLookupByLibrary.simpleMessage("Trade Request Received"),
+        "tradeSummary": MessageLookupByLibrary.simpleMessage("Trade Summary"),
         "tradeWithANewBotstock":
             MessageLookupByLibrary.simpleMessage("Trade with a New Botstock"),
         "tradeWithBots":
