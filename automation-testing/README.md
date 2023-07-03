@@ -1,5 +1,10 @@
 # automation-testing
----
+
+##### Table of Contents
+[Local Automation Testing](#instructions-for-automation-testing-with-local-device)  
+[LambdaTest Automation Testing](#instructions-for-automation-testing-on-lambdatest)  
+[IMPORTANT](#important)
+
 ### Instructions for Automation Testing with Local Device
 1) Install [Node.js](https://nodejs.org/en)
 2) Follow this [link](https://www.browserstack.com/guide/download-and-install-appium) to install Appium and its dependencies  
