@@ -86,6 +86,8 @@ void main() async {
     final BaseResponse<BotRecommendationDetailModel> botDetailErrorResponse =
         BaseResponse.error();
 
+    final bool isBotTutorialStarted = false;
+
     setUpAll(() async {
       botStockRepository = MockBotStockRepository();
       transactionRepository = MockTransactionRepository();
@@ -101,7 +103,8 @@ void main() async {
     });
 
     test('Bot Stock Bloc init state response should be default one', () {
-      expect(botStockBloc.state, const BotStockState());
+      expect(
+          botStockBloc.state, const BotStockState(isBotDetailsTutorial: false));
     });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -110,6 +113,8 @@ void main() async {
         build: () {
           when(botStockRepository.fetchBotRecommendation())
               .thenAnswer((_) => Future.value(botStockResponse));
+          when(tutorialRepository.isBotDetailsTutorial())
+              .thenAnswer((_) => Future.value(isBotTutorialStarted));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchBotRecommendation()),
@@ -208,10 +213,13 @@ void main() async {
         act: (bloc) => bloc.add(const FetchBotDetail(
             ticker: 'AAPL', botId: 'abc', isFreeBot: false)),
         expect: () => {
-              BotStockState(botDetailResponse: BaseResponse.loading()),
+              BotStockState(
+                  botDetailResponse: BaseResponse.loading(),
+                  isBotDetailsTutorial: false),
               BotStockState(
                   botDetailResponse: BaseResponse.error(
-                      message: 'Error when fetching balance'))
+                      message: 'Error when fetching balance'),
+                  isBotDetailsTutorial: false)
             });
 
     blocTest<BotStockBloc, BotStockState>(
