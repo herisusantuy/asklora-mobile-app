@@ -401,5 +401,7 @@
   "endDate" : "End Date",
   "confirmTrade": "Confirm Trade",
   "checkBotStockDetails" : "check botstock details",
-  "tradeRequestReceived" : "Trade Request Received"
+  "tradeRequestReceived" : "Trade Request Received",
+  "tradeCancelledTitle" : "Trade Cancelled",
+  "tradeCancelledSubtitle" : "The trade has been cancelled and your investment amount has been returned to your account"
 }

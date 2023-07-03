@@ -48,6 +48,6 @@ class BotStockResultArgument {
   const BotStockResultArgument({
     required this.title,
     required this.desc,
-    this.labelBottomButton = 'BACK TO HOME',
+    required this.labelBottomButton,
   });
 }

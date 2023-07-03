@@ -358,5 +358,8 @@
   "endDate" : "結束日期",
   "confirmTrade": "確認買入",
   "checkBotStockDetails" : "查看 Botstock 資訊",
-  "tradeRequestReceived" : "已收到交易指令"
+  "tradeRequestReceived" : "已收到交易指令",
+  "tradeCancelledTitle" : "交易已取消",
+  "buttonBackToHome": "返回主頁",
+  "tradeCancelledSubtitle": "交易已取消，你的投資金額已轉至你嘅賬戶。"
 }

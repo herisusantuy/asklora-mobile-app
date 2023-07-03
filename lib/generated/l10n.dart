@@ -2962,6 +2962,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Trade Cancelled`
+  String get tradeCancelledTitle {
+    return Intl.message(
+      'Trade Cancelled',
+      name: 'tradeCancelledTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The trade has been cancelled and your investment amount has been returned to your account`
+  String get tradeCancelledSubtitle {
+    return Intl.message(
+      'The trade has been cancelled and your investment amount has been returned to your account',
+      name: 'tradeCancelledSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -100,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你將延長 Botstock 投資期，\n 並需繳付額外延長費用。"),
         "buttonAlreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("已有帳戶"),
+        "buttonBackToHome": MessageLookupByLibrary.simpleMessage("返回主頁"),
         "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("確定"),
@@ -365,6 +366,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
+        "tradeCancelledSubtitle":
+            MessageLookupByLibrary.simpleMessage("交易已取消，你的投資金額已轉至你嘅賬戶。"),
+        "tradeCancelledTitle": MessageLookupByLibrary.simpleMessage("交易已取消"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("交易費用"),
         "tradeRequestReceived": MessageLookupByLibrary.simpleMessage("已收到交易指令"),
         "tradeSummary": MessageLookupByLibrary.simpleMessage("交易摘要"),

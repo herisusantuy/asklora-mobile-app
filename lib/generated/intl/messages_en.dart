@@ -497,6 +497,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalAmount": MessageLookupByLibrary.simpleMessage("Total amount"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
         "trade": MessageLookupByLibrary.simpleMessage("Trade"),
+        "tradeCancelledSubtitle": MessageLookupByLibrary.simpleMessage(
+            "The trade has been cancelled and your investment amount has been returned to your account"),
+        "tradeCancelledTitle":
+            MessageLookupByLibrary.simpleMessage("Trade Cancelled"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
         "tradeRequestReceived":
             MessageLookupByLibrary.simpleMessage("Trade Request Received"),
