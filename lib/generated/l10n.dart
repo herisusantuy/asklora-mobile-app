@@ -2982,6 +2982,17 @@ class S {
       args: [],
     );
   }
+
+  /// `{botName} {botSymbol} will start at {dateTime}EST`
+  String rolloverBotStockAcknowledgement(
+      String botName, String botSymbol, String dateTime) {
+    return Intl.message(
+      '$botName $botSymbol will start at ${dateTime}EST',
+      name: 'rolloverBotStockAcknowledgement',
+      desc: '',
+      args: [botName, botSymbol, dateTime],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

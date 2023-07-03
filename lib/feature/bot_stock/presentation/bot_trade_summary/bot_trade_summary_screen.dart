@@ -85,7 +85,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   context: context,
                   arguments: BotStockResultArgument(
                     title: S.of(context).tradeRequestReceived,
-                    desc: _tradeRequestSuccessMessage(),
+                    desc: _tradeRequestSuccessMessage(context),
                     labelBottomButton: S.of(context).checkBotStockDetails,
                   ));
             }
@@ -207,8 +207,11 @@ class BotTradeSummaryScreen extends StatelessWidget {
         ),
       ];
 
-  String _tradeRequestSuccessMessage() =>
-      '${botTradeSummaryModel.botDetailModel.botInfo.botName} ${botTradeSummaryModel.botDetailModel.stockInfo.symbol} will start at ${_formatDateWithHour(botTradeSummaryModel.botDetailModel.startDate)} EST.';
+  String _tradeRequestSuccessMessage(BuildContext context) =>
+      S.of(context).rolloverBotStockAcknowledgement(
+          botTradeSummaryModel.botDetailModel.botInfo.botName,
+          botTradeSummaryModel.botDetailModel.stockInfo.symbol,
+          _formatDateWithHour(botTradeSummaryModel.botDetailModel.startDate));
 
   String _formatDate(String date) {
     DateTime localTime = formatDateTimeToLocal(date);

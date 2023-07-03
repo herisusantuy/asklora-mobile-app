@@ -49,7 +49,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m12(currency) => "可提取金額 (${currency})";
 
-  static String m13(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m13(botName, botSymbol, dateTime) =>
+      "${botName} ${botSymbol} 將於  ${dateTime}EST 開始";
+
+  static String m14(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -336,6 +339,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "rolloverBotStockAcknowledgement": m13,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
@@ -411,7 +415,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m13,
+        "yourBankAccountIsUnderReview": m14,
         "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed"),
         "yourPaymentInformationIsUnderReview":

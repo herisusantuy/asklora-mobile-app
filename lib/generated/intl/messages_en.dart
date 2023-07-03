@@ -51,7 +51,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m12(currency) => "Withdrawable Balance (${currency})";
 
-  static String m13(dateTime) =>
+  static String m13(botName, botSymbol, dateTime) =>
+      "${botName} ${botSymbol} will start at ${dateTime}EST";
+
+  static String m14(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -452,6 +455,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
+        "rolloverBotStockAcknowledgement": m13,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "setUpFinancialProfile":
@@ -560,7 +564,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
-        "yourBankAccountIsUnderReview": m13,
+        "yourBankAccountIsUnderReview": m14,
         "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed"),
         "yourPaymentInformationIsUnderReview": MessageLookupByLibrary.simpleMessage(
