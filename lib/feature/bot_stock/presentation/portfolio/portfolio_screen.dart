@@ -12,8 +12,10 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../app/bloc/app_bloc.dart';
+import '../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/column_text/pair_column_text_with_auto_sized_text.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../core/presentation/custom_checkbox.dart';
 import '../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
@@ -21,18 +23,14 @@ import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/currency_enum.dart';
-import '../../../../core/utils/storage/shared_preference.dart';
-import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
-import '../../../../core/domain/transaction/transaction_balance_response.dart';
 import '../../../settings/presentation/settings_screen.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../utils/bot_stock_utils.dart';
-import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import 'bloc/portfolio_bloc.dart';
 import 'detail/bot_portfolio_detail_screen.dart';
 import 'utils/portfolio_utils.dart';
@@ -40,15 +38,10 @@ import 'widgets/bot_portfolio_pop_up.dart';
 import 'widgets/currency_toggle_button.dart';
 
 part 'widgets/bot_portfolio_card.dart';
-
 part 'widgets/bot_portfolio_card_shimmer.dart';
-
 part 'widgets/bot_portfolio_filter.dart';
-
 part 'widgets/bot_portfolio_list.dart';
-
 part 'widgets/free_bot_badge.dart';
-
 part 'widgets/portfolio_balance.dart';
 
 class PortfolioScreen extends StatelessWidget {
@@ -82,7 +75,6 @@ class PortfolioScreen extends StatelessWidget {
               context
                   .read<AccountInformationBloc>()
                   .add(GetAccountInformation());
-              await SharedPreference().deleteData(sfKeyBotDetailsTutorial);
             },
             child: CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
