@@ -116,6 +116,9 @@ class TabScreen extends StatelessWidget {
                       ),
                       child: ShowCaseWidget(
                         disableBarrierInteraction: true,
+                        showCaseViewScrollPosition:
+                            ShowCaseViewScrollPosition.scrollToTop,
+                        blurValue: 2.5,
                         builder: Builder(builder: (context) {
                           return BlocListener<TabScreenBloc, TabScreenState>(
                             listenWhen: (previous, current) =>

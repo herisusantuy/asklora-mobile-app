@@ -207,6 +207,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
     return Container(
       padding: AppValues.screenHorizontalPadding,
       child: CustomShowcaseView(
+        tooltipPosition: TooltipPosition.bottom,
         tutorialKey: TutorialJourney.botDetails,
         onToolTipClick: () => ShowCaseWidget.of(context).next(),
         tooltipWidget: Text.rich(
@@ -281,7 +282,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(15, 32, 15, 0),
         child: CustomShowcaseView(
           tutorialKey: TutorialJourney.botChart,
-          tooltipPosition: TooltipPosition.top,
+          tooltipPosition: TooltipPosition.bottom,
           onToolTipClick: () => ShowCaseWidget.of(context).next(),
           tooltipWidget: Text.rich(
             TextSpan(
