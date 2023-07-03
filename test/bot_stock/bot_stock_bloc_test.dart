@@ -4,6 +4,7 @@ import 'package:asklora_mobile_app/core/domain/bot/bot_info.dart';
 import 'package:asklora_mobile_app/core/domain/bot/stock_info.dart';
 import 'package:asklora_mobile_app/core/domain/transaction/transaction_ledger_balance_response.dart';
 import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
+import 'package:asklora_mobile_app/core/repository/tutorial_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_detail_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
@@ -19,10 +20,12 @@ import 'bot_stock_bloc_test.mocks.dart';
 
 @GenerateMocks([BotStockRepository])
 @GenerateMocks([TransactionRepository])
+@GenerateMocks([TutorialRepository])
 void main() async {
   group('Bot Stock Bloc Tests', () {
     late MockBotStockRepository botStockRepository;
     late MockTransactionRepository transactionRepository;
+    late MockTutorialRepository tutorialRepository;
     late BotStockBloc botStockBloc;
 
     final BaseResponse<List<BotRecommendationModel>> botStockResponse =
@@ -86,12 +89,15 @@ void main() async {
     setUpAll(() async {
       botStockRepository = MockBotStockRepository();
       transactionRepository = MockTransactionRepository();
+      tutorialRepository = MockTutorialRepository();
     });
 
     setUp(() async {
       botStockBloc = BotStockBloc(
-          botStockRepository: botStockRepository,
-          transactionRepository: transactionRepository);
+        botStockRepository: botStockRepository,
+        transactionRepository: transactionRepository,
+        tutorialRepository: tutorialRepository,
+      );
     });
 
     test('Bot Stock Bloc init state response should be default one', () {
