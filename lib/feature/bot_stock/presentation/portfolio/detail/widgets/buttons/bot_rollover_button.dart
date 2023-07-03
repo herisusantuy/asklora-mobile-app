@@ -21,9 +21,13 @@ class BotRolloverButton extends StatelessWidget {
               .show(state.rolloverBotStockResponse.state);
           if (state.rolloverBotStockResponse.state == ResponseState.success) {
             BotStockResultScreen.open(
-                context: context,
-                arguments: Pair('Trade Request Received',
-                    '${botType.name} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol} will rollover at ${newExpiryDateOnRollover(state.rolloverBotStockResponse.data!.newExpireDate)}'));
+              context: context,
+              arguments: BotStockResultArgument(
+                title: 'Trade Request Received',
+                desc:
+                    '${botType.name} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol} will rollover at ${newExpiryDateOnRollover(state.rolloverBotStockResponse.data!.newExpireDate)}',
+              ),
+            );
           } else if (state.rolloverBotStockResponse.state ==
               ResponseState.suspended) {
             SuspendedAccountScreen.open(context);

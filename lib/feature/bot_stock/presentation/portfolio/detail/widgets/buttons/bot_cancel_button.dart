@@ -18,8 +18,11 @@ class BotCancelButton extends StatelessWidget {
           if (state.cancelBotStockResponse.state == ResponseState.success) {
             BotStockResultScreen.open(
                 context: context,
-                arguments: const Pair('Trade Canceled',
-                    'The trade has been cancelled and your investment amount has been returned to your account'));
+                arguments: const BotStockResultArgument(
+                  title: 'Trade Canceled',
+                  desc:
+                      'The trade has been cancelled and your investment amount has been returned to your account',
+                ));
           } else if (state.cancelBotStockResponse.state ==
               ResponseState.suspended) {
             SuspendedAccountScreen.open(context);
