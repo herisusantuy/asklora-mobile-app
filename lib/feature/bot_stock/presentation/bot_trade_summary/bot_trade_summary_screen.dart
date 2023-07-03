@@ -208,10 +208,16 @@ class BotTradeSummaryScreen extends StatelessWidget {
       ];
 
   String _tradeRequestSuccessMessage() =>
-      '${botTradeSummaryModel.botDetailModel.botInfo.botName} ${botTradeSummaryModel.botDetailModel.stockInfo.symbol} will start at ${_formatDate(botTradeSummaryModel.botDetailModel.startDate)}.';
+      '${botTradeSummaryModel.botDetailModel.botInfo.botName} ${botTradeSummaryModel.botDetailModel.stockInfo.symbol} will start at ${_formatDateWithHour(botTradeSummaryModel.botDetailModel.startDate)} EST.';
 
   String _formatDate(String date) {
-    return formatDateTimeAsString(date, dateFormat: 'dd/MM/yy');
+    DateTime localTime = formatDateTimeToLocal(date);
+    return formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yy');
+  }
+
+  String _formatDateWithHour(String date) {
+    DateTime localTime = formatDateTimeToLocal(date);
+    return formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yy HH:MM');
   }
 
   static void open(
