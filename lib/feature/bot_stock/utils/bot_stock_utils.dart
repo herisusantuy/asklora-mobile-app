@@ -95,7 +95,7 @@ enum BotStockFilter {
 enum OmsStatus {
   initialized('initialized'),
   indicative('indicative'),
-  rejectedOms('initialized'),
+  rejectedOms('rejected_oms'),
   live('live'),
   waitingTermination('waiting_termination'),
   earlyTerminated('early_terminated'),
@@ -131,7 +131,7 @@ enum BotStatus {
     AskLoraColors.primaryGreen,
   ),
   canceled(
-    'Cancelled',
+    'Canceled',
     [
       OmsStatus.rejectedOms,
     ],
