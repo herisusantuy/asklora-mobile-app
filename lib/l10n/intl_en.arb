@@ -63,6 +63,8 @@
   "estMaxProfitPercent": "Est. Max Profit %",
   "estimatedEndDate": "Estimated End Date",
   "employees": "Employees",
+  "expiresAt": "Expires at",
+  "startsAt": "Starts at",
   "ceo": "CEO",
   "founded": "Founded",
   "gotIt": "Got It",

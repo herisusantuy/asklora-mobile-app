@@ -94,7 +94,7 @@ enum BotStockFilter {
 enum OmsStatus {
   initialized('initialized'),
   indicative('indicative'),
-  rejectedOms('initialized'),
+  rejectedOms('rejected_oms'),
   live('live'),
   waitingTermination('waiting_termination'),
   earlyTerminated('early_terminated'),
@@ -103,6 +103,9 @@ enum OmsStatus {
   knockOut('knock_out');
 
   final String value;
+
+  static OmsStatus findByString(String omsStatus) =>
+      OmsStatus.values.firstWhere((element) => element.value == omsStatus);
 
   const OmsStatus(this.value);
 }
@@ -127,7 +130,7 @@ enum BotStatus {
     AskLoraColors.primaryGreen,
   ),
   canceled(
-    'Cancelled',
+    'Canceled',
     [
       OmsStatus.rejectedOms,
     ],
@@ -164,6 +167,7 @@ enum BotStatus {
         .firstWhereOrNull((element) => element.value == omsStatusString);
     BotStatus? botStatus = BotStatus.values.firstWhereOrNull(
         (element) => element.omsStatusCollection.contains(omsStatus));
+
     if (botStatus == BotStatus.live &&
         expireDate != null &&
         DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {

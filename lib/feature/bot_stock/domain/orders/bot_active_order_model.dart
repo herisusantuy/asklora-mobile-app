@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../../generated/l10n.dart';
+import '../../utils/bot_stock_utils.dart';
 
 part 'bot_active_order_model.g.dart';
 
@@ -27,8 +31,21 @@ class BotActiveOrderModel {
   final String botAppsName;
   @JsonKey(name: 'bot_duration')
   final String botDuration;
+  @JsonKey(name: 'optimal_time')
+  final String optimalTime;
 
-  String get expireDateStr => expireDate ?? '';
+  String startOrExpireDateStr(BuildContext context) {
+    if (botStatus == BotStatus.pending) {
+      return '${S.of(context).startsAt} ${formatDateTimeAsString(optimalTime, dateFormat: 'dd-MM-yyyy')}';
+    } else {
+      return '${S.of(context).expiresAt} ${formatDateTimeAsString(expireDate, dateFormat: 'dd-MM-yyyy')}';
+    }
+  }
+
+  String get botName =>
+      '${BotType.findByString(botAppsName).upperCaseName} $symbol';
+
+  BotStatus get botStatus => BotStatus.findByOmsStatus(status);
 
   const BotActiveOrderModel(
       this.uid,
@@ -42,7 +59,8 @@ class BotActiveOrderModel {
       this.spotDate,
       this.symbol,
       this.botAppsName,
-      this.botDuration);
+      this.botDuration,
+      this.optimalTime);
 
   String get totalPnLPctString {
     final double totalPnLPctDouble = checkDouble(totalPnLPct);

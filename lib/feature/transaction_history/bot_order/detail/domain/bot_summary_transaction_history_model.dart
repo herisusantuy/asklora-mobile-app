@@ -28,11 +28,11 @@ class BotSummaryTransactionHistoryModel extends Equatable {
   String get investmentAmountString {
     final double investmentAmountDouble = checkDouble(amount);
     return (investmentAmountDouble > 0)
-        ? 'HKD${investmentAmountDouble.convertToCurrencyDecimal()}'
+        ? 'HKD ${investmentAmountDouble.convertToCurrencyDecimal()}'
         : 'NA';
   }
 
-  String get feeString => 'HKD${checkDouble(fee).convertToCurrencyDecimal()}';
+  String get feeString => 'HKD ${checkDouble(fee).convertToCurrencyDecimal()}';
 
   String get createdFormattedString {
     DateTime localTime = formatDateTimeToLocal(date);
