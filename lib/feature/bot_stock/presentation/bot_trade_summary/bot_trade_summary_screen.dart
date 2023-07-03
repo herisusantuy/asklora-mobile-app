@@ -217,7 +217,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
   String _formatDateWithHour(String date) {
     DateTime localTime = formatDateTimeToLocal(date);
-    return formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yyyyy HH:MM');
+    return formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yyyy HH:MM');
   }
 
   static void open(
