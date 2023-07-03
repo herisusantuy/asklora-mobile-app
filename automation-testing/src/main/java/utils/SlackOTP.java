@@ -1,3 +1,5 @@
+package utils;
+
 import com.slack.api.Slack;
 import com.slack.api.methods.MethodsClient;
 import com.slack.api.methods.SlackApiException;

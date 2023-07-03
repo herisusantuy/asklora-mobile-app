@@ -1,3 +1,5 @@
+package local;
+
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -13,6 +15,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import utils.SlackOTP;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,57 +26,44 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-public class AndroidWithdrawTest {
+public class LocalWithdrawTest {
     String directory = String.valueOf(new File(System.getProperty("user.dir")).getParent());
     Dotenv dotenv = Dotenv.configure().directory(directory).ignoreIfMalformed().filename(".env").load();
-    public final String userName = dotenv.get("LT_USERNAME");
-    public final String accessKey = dotenv.get("LT_ACCESS_KEY");
 
     AppiumDriver driver;
     WebDriverWait wait;
+    final SlackOTP slackToken = new SlackOTP();
+
     String platformVersion;
     String udid;
     String deviceName;
     String platformValue;
     String withdrawVal;
+    String otp;
     Map<String, String> deviceProperties = new HashMap<>();
 
     final String PORTFOLIO_VIEW = "//android.widget.ImageView[contains(@content-desc, 'Total Portfolio Value')]";
     final String email = "testemail213982@yopmail.com";
     final String password = "Password1234!";
+    final String TEST_APP = "Stag";
 
     @BeforeTest
-    @Parameters(value = {"device", "version", "platform"})
     public void setUp(String device, String version, String platform) throws IOException {
-//        getPropValues();
-        deviceName = device;
-        platformVersion = version;
-        platformValue = platform;
+        getPropValues();
 
-//        System.out.println("Platform Version: " + platformVersion);
-//        System.out.println("udid: " + udid);
-//        System.out.println("Device Name: " + deviceName);
+        System.out.println("Platform Version: " + platformVersion);
+        System.out.println("udid: " + udid);
+        System.out.println("Device Name: " + deviceName);
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("build", "Asklora_Stag_10218");
-        caps.setCapability("name","Withdraw Test");
+        caps.setCapability("name","Android Withdraw Test");
         caps.setCapability("deviceName", device);
         caps.setCapability("platformVersion", version);
         caps.setCapability("platformName", platform);
-        caps.setCapability("isRealMobile", true);
-        caps.setCapability("app", "lt://APP10160631101688091461122107");
-        caps.setCapability("deviceOrientation", "PORTRAIT");
-        caps.setCapability("video", true);
-        caps.setCapability("console", true);
-        caps.setCapability("network", true);
-        caps.setCapability("visual", true);
-        caps.setCapability("devicelog", true);
-        caps.setCapability("tunnel", true);
-        caps.setCapability("tunnelName", "DESKTOP-72RJ0L4");
-        caps.setCapability("enableImageInjection", true);
-//                caps.setCapability("automationName", "UiAutomator2");
-//                caps.setCapability("udid", udid);
-//                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag_2.apk");
+        caps.setCapability("automationName", "UiAutomator2");
+        caps.setCapability("udid", udid);
+        caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag_2.apk");
         caps.setCapability("unicodeKeyboard", true);
         caps.setCapability("resetKeyboard", true);
 //                 caps.setCapability("ignoreHiddenApiPolicyError", true);
@@ -85,7 +75,7 @@ public class AndroidWithdrawTest {
         caps.setCapability("chromeOptions", ImmutableMap.of("w3c", false));
         caps.setCapability("newCommandTimeout", 0);
 
-        driver = new AndroidDriver(new URL("https://" + userName + ":" + accessKey + "@mobile-hub.lambdatest.com/wd/hub"), caps);
+        driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), caps);
         wait = new WebDriverWait(driver, 60);
     }
 
@@ -130,7 +120,7 @@ public class AndroidWithdrawTest {
         double expectedTotal = Double.parseDouble(withdrawVal) / 10 - 10;
         clickContentDescription("Next");
         Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, '" + expectedTotal + "')]"))
-                        .isDisplayed(), "Actual total amount does not match expected total amount.");
+                .isDisplayed(), "Actual total amount does not match expected total amount.");
     }
 
     @Test(priority = 5)
@@ -143,7 +133,8 @@ public class AndroidWithdrawTest {
 
     @AfterTest
     public void tearDown() {
-        driver.quit();
+        if (driver != null)
+            driver.quit();
     }
 
 
@@ -160,17 +151,22 @@ public class AndroidWithdrawTest {
     }
 
     public void getOTP() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("----- Enter otp -----");
+        if (TEST_APP.equals("Dev")) {
+            otp = slackToken.fetchHistory(email);
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("----- Enter otp -----");
 
-        String otp = scanner.nextLine();
-        System.out.println("Received otp: " + otp);
+            otp = scanner.nextLine();
+            System.out.println("Received otp: " + otp);
+        }
 
+        // Press buttons according to to the otp
         int[] otpInts = new int[otp.length()];
         for (int i = 0; i < otp.length(); i++) {
             otpInts[i] = Integer.parseInt(String.valueOf(otp.charAt(i)));
         }
-        System.out.println(Arrays.toString(otpInts));
+//        System.out.println(Arrays.toString(otpInts));
         for (int i = 0; i < otp.length(); i++) {
             ((AndroidDriver) driver).pressKey(new KeyEvent(typeNum(otpInts[i])));
         }

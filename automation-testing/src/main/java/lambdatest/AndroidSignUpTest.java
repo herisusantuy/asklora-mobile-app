@@ -1,16 +1,23 @@
+package lambdatest;
+
 import com.google.common.collect.ImmutableMap;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
-import io.appium.java_client.screenrecording.CanRecordScreen;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import static java.time.Duration.ofMillis;
@@ -22,73 +29,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import utils.HKIDGenerator;
+import utils.SlackOTP;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-
-/**
- * <h1>IMPORTANT:</h1>
- * <h3>These settings are disabled in Developer options for the Xiaomi Phone:</h3>
- * "Verify apps over USB" <br>
- * "Verify bytecode of debuggable apps" <br>
- * "Disable MIUI optimisations" <br><br>
- *
- * <h3>These settings are enabled in Developer options:</h3>
- * "Enable USB debugging (Security settings)" <br>
- * "Install via USB"
- *
- * <p>
- * You can use cli or gui to run the server <br>
- * If you are using gui, go to advanced -> put "localhost" for server address
- * and check "Allow CORS" <br>
- * If you are using cli, type "appium --address=locahost --allow-cors" into cmd
- * or terminal <br>
- * - I have not tested running appium with cli, so I'm not sure if it will work
- * </p>
- *
- * <p>run "getProps.sh" before running the UI automation, the setUp method requires
- *  * the device's name, udid, and version
- *  </p>
- *
- * <p>You must create a folder called "apps" then put the apk file into the folder and rename the apk to
- * "asklora_stag.apk". You can name the apk to something else but make sure to
- * match the name of the apk in the setUp method
- * </p>
- *
- * <p>Make sure JAVA_HOME and ANDROID_HOME are set up to use this program to
- * automate creating an account <br>
- * To be able to interact with the scanner and you are using IntelliJ, go to:
- * Help -> Edit Custom VM Options <br>
- * Add "-Deditable.java.test.console=true" and restart IDE <br>
- * You should be able to input the otp and confirm you uploaded an image after
- * restarting IDE
- * </p>
- *
- * <p>There are certain parts where automation would not work, there are more parts where automation would
- * not work <br>
- * - If you are using the Dev build, you will only have to automate Onfido <br>
- * 1) Entering the otp in the app (using Stag to test automation) <br>
- * - You must enter the otp you received into the terminal <br>
- * 2) Onfido <br>
- * - You must manually take a picture of the HKID and selfie <br>
- * </p>
- *
- */
+import java.util.concurrent.TimeUnit;
 
 public class AndroidSignUpTest {
+        String directory = String.valueOf(new File(System.getProperty("user.dir")).getParent());
+        Dotenv dotenv = Dotenv.configure().directory(directory).ignoreIfMalformed().filename(".env").load();
+        public final String userName = dotenv.get("LT_USERNAME");
+        public final String accessKey = dotenv.get("LT_ACCESS_KEY");
+
         AppiumDriver driver;
         WebDriverWait wait;
+        WebDriverWait shortWait;
         final HKIDGenerator generator = new HKIDGenerator();
         final SlackOTP slackToken = new SlackOTP();
 
         String deviceName;
         String udid;
         String platformVersion;
+        String platformValue;
         String name;
         String firstName;
         String lastName;
@@ -106,12 +76,15 @@ public class AndroidSignUpTest {
         final String FIND_BY_IMAGE_VIEW = "android.widget.ImageView";
         final String TEST_APP = "Stag"; // The other one would be "Dev"
 
-        Map <String, String> deviceProperties = new HashMap<>();
-        String[] investTime = { "5 years or above", "3 to less then 5 years", "1 to less then 3 years", "Less than 1 year",
+        // Map <String, String> deviceProperties = new HashMap<>();
+        String[] investTime = { "5 years or above", "3 to less then 5 years", "1 to less then 3 years",
+                        "Less than 1 year",
                         "Never" };
-        String[] salary = { "more than HK$150,000", "HK$100,000-HK$149,999", "HK$50,000-HK$99,999", "HK$20,000-HK$49,999",
+        String[] salary = { "more than HK$150,000", "HK$100,000-HK$149,999", "HK$50,000-HK$99,999",
+                        "HK$20,000-HK$49,999",
                         "less than HK$ 20,000" };
-        String[] financialStability = { "Very accurate", "Somewhat accurate", "Neutral", "Somewhat inaccurate", "Very inaccurate" };
+        String[] financialStability = { "Very accurate", "Somewhat accurate", "Neutral", "Somewhat inaccurate",
+                        "Very inaccurate" };
         String[] riskLevel = { "very high risk",
                         "higher risk of capital loss to achieve substantial returns above deposit interest rates",
                         "moderate risk", "low risk", "I cannot accept any risk of capital loss" };
@@ -124,17 +97,26 @@ public class AndroidSignUpTest {
         String[] energetic = { "Definitely yes", "Somewhat accurate", "Sometimes", "Not really", "No one thinks so" };
         String[] investDuration = { "1 year", "Half a year", "3 Months", "1 Month", "2 Weeks" };
         String[] largeAmount = { "Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly Agree" };
-        String[] investmentScenario = { "Lora please choose for me", "Passive income", "Limited loss", "Just buy my stock" };
-        String[] omnisearch = { "auto stocks", "bank stocks", "tesla", "car", "tech", "medical", "research", "oil", "burger", "robot" };
+        String[] investmentScenario = { "Lora please choose for me", "Passive income", "Limited loss",
+                        "Just buy my stock" };
+        String[] omnisearch = { "auto stocks", "bank stocks", "tesla", "car", "tech", "medical", "research", "oil",
+                        "burger", "robot" };
 
         @BeforeTest
-        public void setUp() throws IOException {
-                getPropValues();
+        @Parameters(value = { "device", "version", "platform" })
+        public void setup(String device, String version, String platform) throws IOException {
+                // getPropValues();
                 getPerson();
+                deviceName = device;
+                platformVersion = version;
+                platformValue = platform;
+                System.out.println("Device Name: " + device);
+                System.out.println("Platform Version: " + version);
+                System.out.println("Platform Name: " + platform);
 
-                System.out.println("Platform Version: " + platformVersion);
-                System.out.println("udid: " + udid);
-                System.out.println("Device Name: " + deviceName);
+                // System.out.println("Platform Version: " + platformVersion);
+                // System.out.println("udid: " + udid);
+                // System.out.println("Device Name: " + deviceName);
                 System.out.println("Name: " + name);
                 System.out.println("Gender: " + gender);
                 System.out.println("hkid: " + hkid);
@@ -142,27 +124,44 @@ public class AndroidSignUpTest {
                 System.out.println("city: " + city);
 
                 DesiredCapabilities caps = new DesiredCapabilities();
-                caps.setCapability("platformName", "Android");
-                caps.setCapability("automationName", "UiAutomator2");
-                caps.setCapability("platformVersion", platformVersion);
-                caps.setCapability("udid", udid);
-                caps.setCapability("deviceName", deviceName);
-                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag.apk");
+                caps.setCapability("build", "Asklora_Stag_10218");
+                caps.setCapability("name", "Android Sign Up Test");
+                caps.setCapability("deviceName", device);
+                caps.setCapability("platformVersion", version);
+                caps.setCapability("platformName", platform);
+                caps.setCapability("isRealMobile", true);
+                caps.setCapability("app", "lt://APP10160631101688091461122107");
+                caps.setCapability("deviceOrientation", "PORTRAIT");
+                caps.setCapability("video", true);
+                caps.setCapability("console", true);
+                caps.setCapability("network", true);
+                caps.setCapability("visual", true);
+                caps.setCapability("devicelog", true);
+                caps.setCapability("tunnel", true);
+                caps.setCapability("tunnelName", "DESKTOP-72RJ0L4");
+                caps.setCapability("enableImageInjection", true);
+                // caps.setCapability("automationName", "UiAutomator2");
+                // caps.setCapability("udid", udid);
+                // caps.setCapability("app", System.getProperty("user.dir") +
+                // "/apps/asklora_stag_2.apk");
                 caps.setCapability("unicodeKeyboard", true);
                 caps.setCapability("resetKeyboard", true);
-                caps.setCapability("ignoreHiddenApiPolicyError", true);
-//                 caps.setCapability("autoGrantPermission", true);
-//                 caps.setCapability("appPackage", "ai.asklora.app.stag");
-//                 caps.setCapability("appActivity", ".MainActivity");
-//                 caps.setCapability("noReset", true);
-//                 caps.setCapability("autoLaunch", false);
-//                 caps.setCapability("enforceAppInstall", true);
-//                 caps.setCapability("skipDeviceInitialization", true);
-//                 caps.setCapability("skipServerInstallation", true);
+                // caps.setCapability("ignoreHiddenApiPolicyError", true);
+                caps.setCapability("autoGrantPermissions", true);
+                // caps.setCapability("appPackage", "ai.asklora.app.stag");
+                // caps.setCapability("appActivity", ".MainActivity");
+                // caps.setCapability("noReset", true);
+                // caps.setCapability("autoLaunch", false);
                 caps.setCapability("chromeOptions", ImmutableMap.of("w3c", false));
                 caps.setCapability("newCommandTimeout", 0);
-                driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), caps);
-                wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+
+                // String hub = "https://" + userName + ":" + accessKey + gridURL;
+
+                driver = new AndroidDriver(
+                                new URL("https://" + userName + ":" + accessKey + "@mobile-hub.lambdatest.com/wd/hub"),
+                                caps);
+                wait = new WebDriverWait(driver, 60);
+                shortWait = new WebDriverWait(driver, 5);
         }
 
         /*
@@ -170,20 +169,19 @@ public class AndroidSignUpTest {
          */
         @Test(priority = 1)
         public void testBegin() {
-                ((CanRecordScreen) driver).startRecordingScreen(new AndroidStartScreenRecordingOptions()
-                        .withTimeLimit(Duration.ofMinutes(5)));
-
                 clickContentDescription("Begin");
-                waitUntilXpath("//android.widget.Button");
+                implicitWait(5);
                 clickContentDescription("Begin");
-                waitUntilXpath("//android.view.View[contains(@content-desc, 'Lora, your FinFit coach')]");
+                shortWaitUntilXpath("//android.view.View[contains(@content-desc, 'Lora, your FinFit coach')]");
                 driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(firstName); // enter
                 // firstName
                 clickContentDescription("Next");
                 waitUntilXpath("//android.widget.Button[@content-desc='Next']");
                 clickContentDescription("Next");
-                Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Spill the truth')]"))
-                        .isDisplayed(), "The first privacy question is not displayed");
+                Assert.assertTrue(driver
+                                .findElement(By.xpath(
+                                                "//android.view.View[contains(@content-desc, 'Spill the truth')]"))
+                                .isDisplayed(), "The first privacy question is not displayed");
         }
 
         /*
@@ -203,7 +201,10 @@ public class AndroidSignUpTest {
                 clickContentDescription("Next");
 
                 try {
-                        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'Age')]")).isDisplayed(), "View is not happy flow at PPI (Privacy)");
+                        shortWaitUntilXpath("//android.view.View[contains(@content-desc, 'Age')]");
+                        Assert.assertTrue(driver
+                                        .findElement(By.xpath("//android.view.View[contains(@content-desc, 'Age')]"))
+                                        .isDisplayed(), "View is not happy flow at PPI (Privacy)");
                 } catch (Exception e) {
                         System.out.println("Risk score is too low, redoing privacy questions...");
                         failPrivacy();
@@ -252,12 +253,15 @@ public class AndroidSignUpTest {
         public void testSignUp() {
                 waitUntilXpath("//android.view.View");
                 clickElementsByXpath("//android.widget.EditText", 0);
-                driver.findElements(By.xpath("//android.widget.EditText")).get(0)
-                                .sendKeys(email + "@yopmail.com");
+                MobileElement userElement = (MobileElement) driver.findElements(By.xpath("//android.widget.EditText"))
+                                .get(0);
+                userElement.sendKeys(email + "@yopmail.com");
                 System.out.println("email: " + email + "@yopmail.com");
                 waitUntilXpath("//android.widget.EditText");
                 clickElementsByXpath("//android.widget.EditText", 1);
-                driver.findElements(By.xpath("//android.widget.EditText")).get(1).sendKeys(password);
+                MobileElement passElement = (MobileElement) driver.findElements(By.xpath("//android.widget.EditText"))
+                                .get(1);
+                passElement.sendKeys(password);
                 clickContentDescription("Sign Up");
         }
 
@@ -268,8 +272,17 @@ public class AndroidSignUpTest {
         public void testVerifyEmail() {
                 waitUntilXpath("//android.view.View[contains(@content-desc, 'sent an email to')]");
                 ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.HOME));
-                driver.findElement(AppiumBy.accessibilityId("Chrome")).click();
+                // driver.closeApp();
+                try {
+                        clickElementByXpath("//android.widget.TextView[contains(@content-desc, 'Google')]");
+                        driver.findElement(new MobileBy.ByAccessibilityId("Chrome")).click();
+                } catch (Exception e) {
+                        ((AndroidDriver) driver).pressKey(new KeyEvent(AndroidKey.HOME));
+                        driver.findElement(new MobileBy.ByAccessibilityId("Chrome")).click();
+                }
                 implicitWait(10);
+                shortWait.until(ExpectedConditions
+                                .visibilityOfElementLocated(By.id("com.android.chrome:id/menu_button")));
                 driver.findElement(By.id("com.android.chrome:id/menu_button")).click();
                 implicitWait(10);
                 clickElementByXpath("//android.widget.TextView[@content-desc='New tab']");
@@ -282,8 +295,12 @@ public class AndroidSignUpTest {
                 implicitWait(5);
                 waitUntilXpath("//android.widget.EditText[contains(@resource-id, 'login')]");
                 driver.findElement(By.xpath("//android.widget.EditText[contains(@resource-id, 'login')]")).click();
-                driver.findElement(By.xpath("//android.widget.EditText[contains(@resource-id, 'login')]")).sendKeys(email);
-                wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("//android.widget.EditText[contains(@resource-id, 'login')]")), email));
+                driver.findElement(By.xpath("//android.widget.EditText[contains(@resource-id, 'login')]"))
+                                .sendKeys(email);
+                wait.until(ExpectedConditions.textToBePresentInElement(
+                                driver.findElement(
+                                                By.xpath("//android.widget.EditText[contains(@resource-id, 'login')]")),
+                                email));
                 clickElementByXpath("//android.view.View[contains(@resource-id, 'refreshbut')]");
                 implicitWait(5);
                 waitUntilXpath("//android.widget.Button[contains(@text, 'Asklora')]");
@@ -291,17 +308,21 @@ public class AndroidSignUpTest {
                 implicitWait(3);
                 waitUntilXpath("//android.view.View[@content-desc='Verify Email']");
                 clickElementByXpath("//android.view.View[@content-desc='Verify Email']");
-                implicitWait(5);
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
-
-                if (TEST_APP.equals("Dev")) {
-                        driver.findElement(By.xpath("//android.widget.TextView[contains(@text, 'Dev')]")).click();
-                } else {
-                        driver.findElement(By.xpath("//android.widget.TextView[contains(@text, 'Stag')]")).click();
-                }
+                // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
+                //
+                // if (TEST_APP.equals("Dev")) {
+                // driver.findElement(By.xpath("//android.widget.TextView[contains(@text,
+                // 'Dev')]")).click();
+                // } else {
+                // driver.findElement(By.xpath("//android.widget.TextView[contains(@text,
+                // 'Stag')]")).click();
+                // }
 
                 try {
-                        driver.findElement(By.xpath("//android.widget.Button[contains(@content-desc, 'Define Investment Style')]"));
+                        waitUntilXpath("//android.widget.Button[contains(@content-desc, 'Define Investment Style')]");
+                        driver.findElement(By.xpath(
+                                        "//android.widget.Button[contains(@content-desc, 'Define Investment Style')]"));
+                        clickElementByXpath("//android.widget.Button[@content-desc='Define Investment Style']");
                 } catch (Exception e) {
                         driver.findElement(By.id("android:id/button_once")).click();
                 }
@@ -312,7 +333,6 @@ public class AndroidSignUpTest {
          */
         @Test(priority = 6, dependsOnMethods = { "testVerifyEmail" })
         public void testInvestmentStyle() {
-                clickElementByXpath("//android.widget.Button[@content-desc='Define Investment Style']");
                 clickClassName(FIND_BY_EDIT_TEXT);
                 randomizeKeyword();
                 clickContentDescription("Next");
@@ -322,18 +342,24 @@ public class AndroidSignUpTest {
                 clickContentDescription("Next");
                 clickContentDescription(investmentScenario[randomize(0, 3)]);
                 clickContentDescription("Next");
+                waitUntilXpath("//android.widget.Button[contains(@content-desc, 'Investment')]");
+                clickElementByXpath("//android.widget.Button[contains(@content-desc, 'Investment Account')]");
 
                 try {
-                        Assert.assertTrue(driver.findElement(By.xpath("//android.view.View[contains(@content-desc, 'all set!')]")).isDisplayed(), "View is not a happy flow at PPI (Investment Style)");
+                        waitUntilXpath("//android.view.View[contains(@content-desc, 'Account opening and deposit')]");
+                        Assert.assertTrue(driver.findElement(By.xpath(
+                                        "//android.view.View[contains(@content-desc, 'Account opening and deposit')]"))
+                                        .isDisplayed(), "View is not a happy flow at PPI (Investment Style)");
                 } catch (Exception e) {
-                        System.out.println("Not enough botstock recommendations, redoing investment style questions...");
+                        System.out.println(
+                                        "Not enough botstock recommendations, redoing investment style questions...");
                         failInvestmentStyle();
                 }
-
         }
 
         public void failInvestmentStyle() {
-                clickElementByXpath("//android.widget.Button[contains(@content-desc, 'RETAKE INVESTMENT STYLE')]");
+                clickElementByXpath("//android.widget.Button[contains(@content-desc, 'RETAKE')]");
+                scrollDown();
                 clickElementByXpath("//android.view.View[contains(@content-desc, 'Reset')]");
                 testInvestmentStyle();
         }
@@ -343,20 +369,22 @@ public class AndroidSignUpTest {
          */
         @Test(priority = 7, dependsOnMethods = { "testInvestmentStyle" })
         public void testAccountSetUp() {
-                waitUntilXpath("//android.widget.Button[contains(@content-desc, 'Investment')]");
-                clickElementByXpath("//android.widget.Button[contains(@content-desc, 'Investment Account')]");
-                waitUntilXpath("//android.view.View[contains(@content-desc, 'Account opening and deposit')]");
                 clickContentDescription("Open Account Now");
                 clickElementByXpath("(//android.view.View[@content-desc='No'])[1]");
                 clickElementByXpath("(//android.view.View[@content-desc='Yes'])[2]");
                 clickContentDescription("Next");
                 clickElementsByClass(FIND_BY_EDIT_TEXT, 0);
-                driver.findElements(By.className(FIND_BY_EDIT_TEXT)).get(0).sendKeys(firstName);
+                MobileElement firstNameElement = (MobileElement) driver.findElements(By.className(FIND_BY_EDIT_TEXT))
+                                .get(0);
+                firstNameElement.sendKeys(firstName);
                 clickElementsByClass(FIND_BY_EDIT_TEXT, 1);
-                driver.findElements(By.className(FIND_BY_EDIT_TEXT)).get(1).sendKeys(lastName);
+                MobileElement lastNameElement = (MobileElement) driver.findElements(By.className(FIND_BY_EDIT_TEXT))
+                                .get(1);
+                lastNameElement.sendKeys(lastName);
                 clickElementByXpath(("//android.view.View[@content-desc='" + gender + "']"));
                 clickElementsByClass(FIND_BY_EDIT_TEXT, 2);
-                driver.findElements(By.className(FIND_BY_EDIT_TEXT)).get(2).sendKeys(hkid);
+                MobileElement hkidElement = (MobileElement) driver.findElements(By.className(FIND_BY_EDIT_TEXT)).get(2);
+                hkidElement.sendKeys(hkid);
                 clickContentDescription("Nationality");
                 clickElementByXpath("//android.view.View[contains(@content-desc, 'Hong Kong SAR')]");
                 clickContentDescription("Country Of Birth");
@@ -376,11 +404,15 @@ public class AndroidSignUpTest {
          */
         @Test(priority = 8, dependsOnMethods = { "testAccountSetUp" })
         public void testAddress() {
-                List<WebElement> addressTextFields = driver
-                                .findElements(By.className(FIND_BY_EDIT_TEXT));
-                System.out.println("Text Fields: " + addressTextFields);
-                clickElementsByClass(FIND_BY_EDIT_TEXT, 0);
-                driver.findElements(By.className(FIND_BY_EDIT_TEXT)).get(0).sendKeys(address);
+                waitUntilXpath("//android.view.View[contains(@content-desc, 'Set Up Personal Info')]");
+                // List<?> addressTextFields = driver
+                // .findElements(By.className(FIND_BY_EDIT_TEXT));
+                // System.out.println("Text Fields: " + addressTextFields);
+                // clickElementsByClass(FIND_BY_EDIT_TEXT, 0);
+                clickElementByXpath("//android.widget.EditText[1]");
+                MobileElement addressElement = (MobileElement) driver.findElements(By.className(FIND_BY_EDIT_TEXT))
+                                .get(0);
+                addressElement.sendKeys(address);
                 clickElementByXpath("//android.widget.Button[contains(@content-desc, 'District')]");
                 clickElementByXpath("//android.view.View[contains(@content-desc, 'Islands')]");
                 clickElementByXpath("//android.widget.Button[contains(@content-desc, 'Region')]");
@@ -388,7 +420,12 @@ public class AndroidSignUpTest {
                 clickClassName(FIND_BY_IMAGE_VIEW);
                 getImage();
                 clickContentDescription("Next");
-                clickContentDescription("Confirm & Continue");
+                clickContentDescription("Confirm");
+        }
+
+        public void failOnfido() {
+                clickElementByXpath("//android.view.View[contains(@content-desc, 'Open Investment')]");
+                testAccountSetUp();
         }
 
         /*
@@ -397,20 +434,37 @@ public class AndroidSignUpTest {
         @Test(priority = 9, dependsOnMethods = { "testAddress" })
         public void testFinancialProfile() {
                 clickContentDescription("No");
-                driver.findElement(By
-                                .xpath("//android.widget.Button[contains(@content-desc, 'Employment Status')]"))
-                                .click();
+                clickElementByXpath("//android.widget.Button[contains(@content-desc, 'Employment Status')]");
                 clickElementByXpath("//android.view.View[@content-desc='Student']");
                 clickContentDescription("Next");
                 clickElementByXpath("//android.view.View[@content-desc='Income from Employment']");
                 clickContentDescription("Next");
                 clickElementByXpath("//android.widget.Button[@content-desc=' No']");
                 clickContentDescription("Confirm & Continue");
+                driver.executeScript("lambda-image-injection=lt://MEDIA326bcd7d1fa14e529dd5d576d24b5a2a"); // front hkid
                 clickElementByXpath("//android.widget.Button[@content-desc='Verify Now']");
-                clickElementByXpath("//android.widget.Button[contains(@text, 'Enable camera')]");
-                driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
-                WebDriverWait waitForVerification = new WebDriverWait(driver, Duration.ofSeconds(120));
-                waitForVerification.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.ImageView[@content-desc='Asklora Customer Agreement.pdf']")));
+                // clickElementByXpath("//android.widget.Button[contains(@text, 'Enable
+                // camera')]");
+                // driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button")).click();
+                waitUntilXpath("//android.widget.ImageView[@content-desc='Take a picture']");
+                clickElementByXpath("//android.widget.ImageView[@content-desc='Take a picture']");
+                try {
+                        waitUntilXpath("//android.widget.Button[@tex='Submit photo']");
+                } catch (Exception e) {
+                        failOnfido();
+                }
+                driver.executeScript("lambda-image-injection=lt://MEDIA7ffbb56b1ca7455a82ad4ab6a496e8fa"); // back hkid
+                clickElementByXpath("//android.widget.Button[@text='Submit photo']");
+                clickElementByXpath("//android.widget.ImageView[@content-desc='Take a picture']");
+                waitUntilXpath("//android.widget.Button[@tex='Submit photo']");
+                clickElementByXpath("//android.widget.ImageView[@content-desc='Submit photo']");
+                driver.executeScript("lambda-image-injection=lt://MEDIAe86bbd53c0714e328042cf13f05bce7b"); // face
+                clickElementByXpath("//android.widget.ImageView[@content-desc='Take selfie']");
+                clickElementByXpath("//android.widget.ImageView[@content-desc='Take a picture']");
+                clickElementByXpath("//android.widget.Button[@text='Upload photo']");
+                // WebDriverWait waitForVerification = new WebDriverWait(driver, 120);
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By
+                                .xpath("//android.widget.ImageView[@content-desc='Asklora Customer Agreement.pdf']")));
                 driver.findElement(
                                 By.xpath("//android.widget.ImageView[contains(@content-desc, 'Asklora Customer Agreement')]"))
                                 .click();
@@ -450,41 +504,51 @@ public class AndroidSignUpTest {
 
         @AfterTest
         public void tearDown() {
-                System.out.println("Everything works :)");
+                if (driver != null)
+                        driver.quit();
+        }
+
+        public void clickErrorMessage() {
+                clickElementByXpath("//android.widget.Button[contains(@content-desc, 'Retake')]");
         }
 
         public void implicitWait(int period) {
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(period < 1 ? 3 : period));
+                driver.manage().timeouts().implicitlyWait(period < 1 ? 3 : period, TimeUnit.SECONDS);
         }
 
         public void waitUntilXpath(String element) {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element)));
         }
 
-        public void getPropValues() throws IOException {
-                Properties prop = new Properties();
-                FileInputStream ip = new FileInputStream("config.properties");
-                prop.load(ip);
-                prop.forEach((k, v) -> deviceProperties.put((String) k, (String) v));
-                System.out.println(deviceProperties);
-
-                platformVersion = deviceProperties.get("platformVersion");
-                udid = deviceProperties.get("udid");
-                deviceName = deviceProperties.get("deviceName");
+        public void shortWaitUntilXpath(String element) {
+                shortWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(element)));
         }
 
+        // public void getPropValues() throws IOException {
+        // Properties prop = new Properties();
+        // FileInputStream ip = new FileInputStream("config.properties");
+        // prop.load(ip);
+        // prop.forEach((k, v) -> deviceProperties.put((String) k, (String) v));
+        // System.out.println(deviceProperties);
+        //
+        // platformVersion = deviceProperties.get("platformVersion");
+        // udid = deviceProperties.get("udid");
+        // deviceName = deviceProperties.get("deviceName");
+        // }
+
         public void clickContentDescription(String element) {
-                driver.findElement(new AppiumBy.ByAndroidUIAutomator(
+                driver.findElement(new MobileBy.ByAndroidUIAutomator(
                                 "new UiScrollable(new UiSelector().scrollable(true))" +
-                                        ".scrollIntoView(new UiSelector().descriptionContains(\"" + element + "\"))"))
-                        .click();
+                                                ".scrollIntoView(new UiSelector().descriptionContains(\"" + element
+                                                + "\"))"))
+                                .click();
         }
 
         public void clickClassName(String element) {
-                driver.findElement(new AppiumBy.ByAndroidUIAutomator(
+                driver.findElement(new MobileBy.ByAndroidUIAutomator(
                                 "new UiScrollable(new UiSelector().scrollable(true))" +
-                                        ".scrollIntoView(new UiSelector().className(\"" + element + "\"))"))
-                        .click();
+                                                ".scrollIntoView(new UiSelector().className(\"" + element + "\"))"))
+                                .click();
         }
 
         public void clickElementByXpath(String element) {
@@ -492,7 +556,8 @@ public class AndroidSignUpTest {
         }
 
         public void clickElementsByXpath(String element, int num) {
-                driver.findElements(By.xpath(element)).get(num).click();
+                MobileElement xpathElement = (MobileElement) driver.findElements(By.xpath(element)).get(num);
+                xpathElement.click();
         }
 
         public void clickElementByClass(String element) {
@@ -500,7 +565,8 @@ public class AndroidSignUpTest {
         }
 
         public void clickElementsByClass(String element, int num) {
-                driver.findElements(By.className(element)).get(num).click();
+                MobileElement classElement = (MobileElement) driver.findElements(By.className(element)).get(num);
+                classElement.click();
         }
 
         public void getOTP() {
@@ -508,7 +574,8 @@ public class AndroidSignUpTest {
                         otp = slackToken.fetchHistory(email);
                 } else {
                         Scanner scanner = new Scanner(System.in);
-                        System.out.print("Enter otp: ");
+                        System.out.println("----- Enter otp -----");
+
                         otp = scanner.nextLine();
                         System.out.println("Received otp: " + otp);
                 }
@@ -517,30 +584,50 @@ public class AndroidSignUpTest {
                 driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(otp);
         }
 
+        // This method uses selenium 4
+        // public void scrollDown() {
+        // Dimension dimension = driver.manage().window().getSize();
+        // Point start = new Point((int) (dimension.width * 0.5), (int)
+        // (dimension.height * 0.9));
+        // Point end = new Point((int) (dimension.width * 0.2), (int) (dimension.height
+        // * 0.1));
+        //
+        // PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        // // Sequence scroll = new Sequence(finger, 0);
+        //
+        // Sequence swipe = new Sequence(finger, 1)
+        // .addAction(finger.createPointerMove(ofMillis(0), viewport(), start.getX(),
+        // start.getY()))
+        // .addAction(finger.createPointerDown(LEFT.asArg()))
+        // .addAction(finger.createPointerMove(ofMillis(1000), viewport(), end.getX(),
+        // end.getY()))
+        // .addAction(finger.createPointerUp(LEFT.asArg()));
+        // driver.perform(Collections.singletonList(swipe));
+        // }
+
         public void scrollDown() {
                 Dimension dimension = driver.manage().window().getSize();
-                Point start = new Point((int) (dimension.width * 0.5), (int) (dimension.height * 0.9));
-                Point end = new Point((int) (dimension.width * 0.2), (int) (dimension.height * 0.1));
+                int startX = dimension.width / 2;
+                int startY = (int) (dimension.height * 0.8);
+                int endY = (int) (dimension.height * 0.2);
 
-                PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-                // Sequence scroll = new Sequence(finger, 0);
-
-                Sequence swipe = new Sequence(finger, 1)
-                        .addAction(finger.createPointerMove(ofMillis(0), viewport(), start.getX(),
-                                start.getY()))
-                        .addAction(finger.createPointerDown(LEFT.asArg()))
-                        .addAction(finger.createPointerMove(ofMillis(1000), viewport(), end.getX(), end.getY()))
-                        .addAction(finger.createPointerUp(LEFT.asArg()));
-                driver.perform(Arrays.asList(swipe));
+                TouchAction action = new TouchAction(driver);
+                action.press(PointOption.point(startX, startY))
+                                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                                .moveTo(PointOption.point(startX, endY))
+                                .release()
+                                .perform();
         }
 
         public void getImage() {
                 wait.until(ExpectedConditions
-                        .visibilityOfElementLocated(By.className("android.widget.RelativeLayout")));
+                                .visibilityOfElementLocated(By.className("android.widget.RelativeLayout")));
                 clickElementByClass("android.widget.RelativeLayout");
-                wait.until(ExpectedConditions.visibilityOfElementLocated(
-                        By.id("com.google.android.apps.photos:id/action_mode_bar")));
-                clickElementByXpath("//android.view.ViewGroup[contains(@content-desc, 'Photo')]");
+                clickElementByXpath("//android.widget.FrameLayout[2]");
+                // wait.until(ExpectedConditions.visibilityOfElementLocated(
+                // By.id("com.google.android.apps.photos:id/action_mode_bar")));
+                // clickElementByXpath("//android.view.ViewGroup[contains(@content-desc,
+                // 'Photo')]");
         }
 
         public void getPerson() throws IOException {
@@ -574,7 +661,7 @@ public class AndroidSignUpTest {
                 List<String> strList = Arrays.asList(omnisearch);
                 Collections.shuffle(strList);
                 strList.toArray(omnisearch);
-                int randNum = randomize(2, omnisearch.length-1);
+                int randNum = randomize(2, omnisearch.length - 1);
                 for (int i = 0; i < randNum; i++) {
                         driver.findElement(By.className(FIND_BY_EDIT_TEXT)).sendKeys(omnisearch[i]);
                         clickElementByClass("android.widget.Button");

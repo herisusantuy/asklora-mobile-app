@@ -2,12 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite thread-count="100" name="Mobile" parallel="tests">
 
-    <test name="AppTest 1">
+    <test name="Asklora AppTest">
         <parameter name="version" value="12"/>
         <parameter name="platform" value="Android"/>
         <parameter name="device" value="Galaxy S22 5G"/>
         <classes>
-            <class name="AndroidDepositTest"/>
+            <class name="lambdatest.AndroidSignUpTest"/>
         </classes>
     </test>
 </suite>
