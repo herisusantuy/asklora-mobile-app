@@ -24,8 +24,11 @@ class BotTerminateButton extends StatelessWidget {
               context: context,
               arguments: BotStockResultArgument(
                 title: S.of(context).tradeRequestReceived,
-                desc:
-                    '${botType.name} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol} will end at ${state.endBotStockResponse.data?.optimalTimeFormatted}',
+                desc: S.of(context).endBotStockAcknowledgement(
+                    botType.name,
+                    botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol,
+                    state.endBotStockResponse.data?.optimalTimeFormatted ??
+                        '-'),
                 labelBottomButton: S.of(context).buttonBackToHome,
               ),
             );

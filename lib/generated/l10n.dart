@@ -2983,12 +2983,23 @@ class S {
     );
   }
 
-  /// `{botName} {botSymbol} will start at {dateTime}EST`
+  /// `{botName} {botSymbol} will start at {dateTime} EST`
   String rolloverBotStockAcknowledgement(
       String botName, String botSymbol, String dateTime) {
     return Intl.message(
-      '$botName $botSymbol will start at ${dateTime}EST',
+      '$botName $botSymbol will start at $dateTime EST',
       name: 'rolloverBotStockAcknowledgement',
+      desc: '',
+      args: [botName, botSymbol, dateTime],
+    );
+  }
+
+  /// `{botName} {botSymbol} will end at {dateTime} EST`
+  String endBotStockAcknowledgement(
+      String botName, String botSymbol, String dateTime) {
+    return Intl.message(
+      '$botName $botSymbol will end at $dateTime EST',
+      name: 'endBotStockAcknowledgement',
       desc: '',
       args: [botName, botSymbol, dateTime],
     );

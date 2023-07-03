@@ -27,8 +27,9 @@ class TerminateOrderResponse {
   factory TerminateOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$TerminateOrderResponseFromJson(json);
 
-  String get optimalTimeFormatted =>
-      formatDateTimeAsString(optimalTime, dateFormat: 'yyyy-MM-dd H:m:s');
+  String get optimalTimeFormatted {
+    return formatDateTimeAsString(optimalTime, dateFormat: 'dd/MM/yyy HH:mm');
+  }
 
   Map<String, dynamic> toJson() => _$TerminateOrderResponseToJson(this);
 }

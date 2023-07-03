@@ -375,5 +375,19 @@
         "type": "String"
       }
     }
+  },
+  "endBotStockAcknowledgement": "{botName} {botSymbol}  將會在 {dateTime} EST 開始",
+  "@endBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
+        "type": "String"
+      }
+    }
   }
 }
