@@ -54,37 +54,22 @@ public class LocalBotstockTest {
     String[] investmentScenario = { "Limited loss", "Passive income", "Lora please choose for me", "Just buy my stock" };
 
     @BeforeTest
-    @Parameters(value = {"device", "version", "platform"})
-    public void setUp(String device, String version, String platform) throws IOException {
-//        getPropValues();
-        deviceName = device;
-        platformVersion = version;
-        platformValue = platform;
+    public void setUp() throws IOException {
+        getPropValues();
 
-//        System.out.println("Platform Version: " + platformVersion);
-//        System.out.println("udid: " + udid);
-//        System.out.println("Device Name: " + deviceName);
+        System.out.println("Platform Version: " + platformVersion);
+        System.out.println("udid: " + udid);
+        System.out.println("Device Name: " + deviceName);
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("build", "Asklora_Stag_10218");
         caps.setCapability("name","Buy Botstock Test");
-        caps.setCapability("deviceName", device);
-        caps.setCapability("platformVersion", version);
-        caps.setCapability("platformName", platform);
-        caps.setCapability("isRealMobile", true);
-        caps.setCapability("app", "lt://APP10160631101688091461122107");
-        caps.setCapability("deviceOrientation", "PORTRAIT");
-        caps.setCapability("video", true);
-        caps.setCapability("console", true);
-        caps.setCapability("network", true);
-        caps.setCapability("visual", true);
-        caps.setCapability("devicelog", true);
-        caps.setCapability("tunnel", true);
-        caps.setCapability("tunnelName", "DESKTOP-72RJ0L4");
-        caps.setCapability("enableImageInjection", true);
-//                caps.setCapability("automationName", "UiAutomator2");
-//                caps.setCapability("udid", udid);
-//                caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag_2.apk");
+        caps.setCapability("deviceName", deviceName);
+        caps.setCapability("platformVersion", platformVersion);
+        caps.setCapability("udid", udid);
+
+        caps.setCapability("automationName", "UiAutomator2");
+        caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag.apk");
         caps.setCapability("unicodeKeyboard", true);
         caps.setCapability("resetKeyboard", true);
 //                 caps.setCapability("ignoreHiddenApiPolicyError", true);

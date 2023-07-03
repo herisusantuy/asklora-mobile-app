@@ -48,7 +48,7 @@ public class LocalDepositTest {
     final String TEST_APP = "Stag";
 
     @BeforeTest
-    public void setUp(String device, String version, String platform) throws IOException {
+    public void setUp() throws IOException {
         getPropValues();
 
         System.out.println("Platform Version: " + platformVersion);
@@ -58,12 +58,11 @@ public class LocalDepositTest {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("build", "Asklora_Stag_10218");
         caps.setCapability("name","Android Deposit Test");
-        caps.setCapability("deviceName", device);
-        caps.setCapability("platformVersion", version);
-        caps.setCapability("platformName", platform);
-        caps.setCapability("automationName", "UiAutomator2");
+        caps.setCapability("deviceName", deviceName);
+        caps.setCapability("platformVersion", platformVersion);
         caps.setCapability("udid", udid);
-        caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag_2.apk");
+        caps.setCapability("automationName", "UiAutomator2");
+        caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag.apk");
         caps.setCapability("unicodeKeyboard", true);
         caps.setCapability("resetKeyboard", true);
 //                 caps.setCapability("ignoreHiddenApiPolicyError", true);

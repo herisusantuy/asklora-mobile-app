@@ -17,7 +17,7 @@ or terminal
 
 4) run "getProps.sh" before running the UI automation, the setUp method requires the device's name, udid, and version to perform automation
 
-5) Create a folder called "apps" then put the apk file into the folder and rename the apk to **"asklora_stag.apk"**. You can name the apk to something else but make sure to match the name of the apk in the setUp method in the following line.  
+5) Create a folder called "apps" in the same directory as src then put the apk file into the folder and rename the apk to **"asklora_stag.apk"**. You can name the apk to something else but make sure to match the name of the apk in the setUp method in the following line.  
 ``` java
 caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag.apk");
 ```
