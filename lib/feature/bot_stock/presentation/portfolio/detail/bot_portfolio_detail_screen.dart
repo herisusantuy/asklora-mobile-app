@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/column_text/column_text.dart';
+import '../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
+import '../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../../../core/presentation/custom_scaffold.dart';
@@ -14,11 +15,11 @@ import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/presentation/suspended_account_screen.dart';
+import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../../core/repository/transaction_repository.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -27,24 +28,16 @@ import '../../../utils/bot_stock_utils.dart';
 import '../../bot_performance/bot_performance_chart.dart';
 import '../../bot_stock_result_screen.dart';
 import '../../widgets/bot_stock_form.dart';
-import '../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
-import '../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../bloc/portfolio_bloc.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
 part 'widgets/bot_portfolio_detail_header.dart';
-
-part 'widgets/key_info.dart';
-
-part 'widgets/performance.dart';
-
-part 'widgets/buttons/bot_rollover_button.dart';
-
 part 'widgets/buttons/bot_cancel_button.dart';
-
-part 'widgets/buttons/bot_terminate_button.dart';
-
 part 'widgets/buttons/bot_portfolio_buttons.dart';
+part 'widgets/buttons/bot_rollover_button.dart';
+part 'widgets/buttons/bot_terminate_button.dart';
+part 'widgets/key_info.dart';
+part 'widgets/performance.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
   static const String route = '/bot_portfolio_detail_screen';
