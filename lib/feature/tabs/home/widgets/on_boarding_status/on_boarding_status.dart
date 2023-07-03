@@ -3,22 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/pair.dart';
-import '../../../../../core/presentation/buttons/secondary/extra_info_button.dart';
-import '../../../../../core/presentation/custom_modal_bottom_sheet.dart';
 import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../../balance/deposit/utils/deposit_utils.dart';
-import '../../../../bot_stock/presentation/gift/gift_bot_stock_welcome_screen.dart';
 import '../../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../../../learning/learning_bot_stock_screen.dart';
 import '../../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../../onboarding/ppi/bloc/question/question_bloc.dart';
 import '../../../../onboarding/ppi/presentation/ppi_screen.dart';
 import 'domain/on_boarding_status_model.dart';
-import 'widgets/milestones_step_details.dart';
 
 part 'widgets/on_boarding_status_button.dart';
 
@@ -28,6 +24,7 @@ class OnBoardingStatus extends StatelessWidget {
   final double edgeRadius;
   final int intersectCount;
   final int arrowPointingOnSection;
+  final Color completeColor;
 
   const OnBoardingStatus(
       {this.valueColor = AskLoraColors.primaryMagenta,
@@ -35,6 +32,7 @@ class OnBoardingStatus extends StatelessWidget {
       this.arrowPointingOnSection = 1,
       this.edgeRadius = 10,
       this.intersectCount = 2,
+      this.completeColor = AskLoraColors.primaryGreen,
       Key? key})
       : super(key: key);
 
@@ -57,19 +55,6 @@ class OnBoardingStatus extends StatelessWidget {
                       style: AskLoraTextStyles.h4,
                     ),
                   ),
-                  ExtraInfoButton(
-                      label: 'Milestone 1 / 3',
-                      suffixIcon: const Icon(
-                        Icons.arrow_forward_ios_sharp,
-                        color: AskLoraColors.primaryMagenta,
-                        size: 15,
-                      ),
-                      onTap: () => customModalBottomSheet(
-                            context,
-                            title: S.of(context).milestones,
-                            content: const MilestonesStepDetails(),
-                          ),
-                      buttonExtraInfoSize: ButtonExtraInfoSize.small)
                 ],
               ),
               const SizedBox(
@@ -82,7 +67,10 @@ class OnBoardingStatus extends StatelessWidget {
                     child: LinearProgressIndicator(
                       minHeight: 10,
                       value: onBoardingStatusModel.progress,
-                      valueColor: AlwaysStoppedAnimation<Color>(valueColor),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          onBoardingStatusModel.progress != 1
+                              ? valueColor
+                              : completeColor),
                       backgroundColor: backgroundColor,
                     ),
                   ),
@@ -94,12 +82,18 @@ class OnBoardingStatus extends StatelessWidget {
               const SizedBox(
                 height: 14,
               ),
-              OnBoardingStatusButton(
-                arrowPointingOnSection: arrowPointingOnSection,
-                onTap: onBoardingStatusModel.onTap,
-                intersectCount: intersectCount,
-                subTitle: onBoardingStatusModel.subTitle,
-              ),
+              onBoardingStatusModel.progress != 1
+                  ? OnBoardingStatusButton(
+                      arrowPointingOnSection:
+                          state.userJourney == UserJourney.kyc ||
+                                  state.userJourney == UserJourney.deposit
+                              ? arrowPointingOnSection + 1
+                              : arrowPointingOnSection,
+                      onTap: onBoardingStatusModel.onTap,
+                      intersectCount: intersectCount,
+                      subTitle: onBoardingStatusModel.subTitle,
+                    )
+                  : const SizedBox.shrink(),
             ],
           );
         });
@@ -124,44 +118,37 @@ class OnBoardingStatus extends StatelessWidget {
     switch (userJourney) {
       case UserJourney.investmentStyle:
         return OnBoardingStatusModel(
-          title: 'START INVESTING',
+          title: 'Great start!',
           subTitle: S.of(context).defineInvestmentStyle,
           onTap: () => PpiScreen.open(context,
               arguments: const Pair(QuestionPageType.investmentStyle,
                   QuestionPageStep.investmentStyle)),
-          progress: 0.1,
+          progress: 0.17,
         );
       case UserJourney.kyc:
         return OnBoardingStatusModel(
-          title: 'START INVESTING',
+          title: 'Halfway there!',
           subTitle: 'Open Investment Account',
           onTap: () => KycScreen.open(context),
-          progress: 0.15,
-        );
-      case UserJourney.freeBotStock:
-        return OnBoardingStatusModel(
-          title: 'START INVESTING',
-          subTitle: 'Get the First Botstock for Free',
-          onTap: () => GiftBotStockWelcomeScreen.open(context),
-          progress: 0.2,
+          progress: 0.5,
         );
       case UserJourney.deposit:
         return OnBoardingStatusModel(
-          title: 'START INVESTING',
+          title: 'Almost finished!',
           subTitle: 'Deposit funds and start investing',
           onTap: () => DepositWelcomeScreen.open(
               context: context, depositType: DepositType.firstTime),
-          progress: 0.25,
+          progress: 0.67,
         );
       case UserJourney.learnBotPlank:
         return OnBoardingStatusModel(
-          title: 'START INVESTING',
+          title: 'Start investing',
           subTitle: 'Learn to Invest with Bot - Plank',
           onTap: () => LearningBotStockScreen.open(
             context: context,
             botType: BotType.plank,
           ),
-          progress: 0.3,
+          progress: 1,
         );
       default:
         return OnBoardingStatusModel(

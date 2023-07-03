@@ -109,13 +109,7 @@ class HomeScreenContentWidget extends StatelessWidget {
         ];
       case UserJourney.learnBotPlank:
         return [
-          const HomeScreenMilestoneCompletionReminderWidget(),
-          _spaceHeightSmall,
-          const HomeScreenFreeBotStockTimerWidget(),
-          _spaceHeightBig,
-          const HomeScreenInvestmentStyleWidget(),
-          _spaceHeightSmall,
-          const HomeScreenNeedHelpButtonWidget(),
+          const HomeScreenMilestoneCompletionWidget(),
         ];
       default:
         return [
