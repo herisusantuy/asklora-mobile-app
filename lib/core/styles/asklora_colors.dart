@@ -30,4 +30,5 @@ class AskLoraColors {
   static const darkerPurple50Alpha = Color(0X80A479E9);
   static const extraLightGray = Color(0XFFF8F8F8);
   static const amber = Color(0XFFFFA500);
+  static const cyan = Color(0xFFA3FFE4);
 }

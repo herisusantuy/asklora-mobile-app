@@ -8,14 +8,14 @@ part of 'conversation.dart';
 
 Lora _$LoraFromJson(Map<String, dynamic> json) => Lora(
       json['response'] as String,
-      json['session_id'] as String,
-      json['type'] as String,
+      json['request_id'] as String?,
+      json['type'] as String?,
       json['new_session'] as bool,
     );
 
 Map<String, dynamic> _$LoraToJson(Lora instance) => <String, dynamic>{
       'response': instance.response,
-      'session_id': instance.sessionId,
+      'request_id': instance.requestId,
       'type': instance.respType,
       'new_session': instance.newSession,
     };

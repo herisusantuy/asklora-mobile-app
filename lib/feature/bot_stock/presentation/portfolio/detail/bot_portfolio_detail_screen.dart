@@ -20,6 +20,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -106,7 +107,13 @@ class BotPortfolioDetailScreen extends StatelessWidget {
       .add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid));
 
   static void open(
-          {required BuildContext context,
-          required BotActiveOrderModel botActiveOrderModel}) =>
-      Navigator.pushNamed(context, route, arguments: botActiveOrderModel);
+      {required BuildContext context,
+      required BotActiveOrderModel botActiveOrderModel}) {
+    Navigator.pushNamed(context, route, arguments: botActiveOrderModel)
+        .then((value) {
+      context
+          .read<TabScreenBloc>()
+          .add(TabChanged(TabPage.portfolio.setData()));
+    });
+  }
 }

@@ -14,7 +14,7 @@ Widget getSvgIcon(String iconName,
         {Color? color,
         double? height,
         double? width,
-        BoxFit fit = BoxFit.none}) =>
+        BoxFit fit = BoxFit.contain}) =>
     SvgPicture.asset(
       'assets/icons/$iconName.svg',
       color: color,

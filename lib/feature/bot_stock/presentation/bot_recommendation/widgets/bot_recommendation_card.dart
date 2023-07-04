@@ -21,7 +21,18 @@ class BotRecommendationCard extends StatelessWidget {
     final BotType botType =
         BotType.findByString(botRecommendationModel.botAppType);
     return GestureDetector(
-      onTap: () => isDisabled ? () {} : onTap(),
+      onTap: () {
+        context
+            .read<TabScreenBloc>()
+            .add(TabChanged(TabPage.forYou.setData(arguments: (
+              path: SubTabPage.portfolioBotStockDetails.value,
+              arguments: {
+                'botType': botType.internalName,
+                'symbol': botRecommendationModel.tickerSymbol
+              }
+            ))));
+        isDisabled ? () {} : onTap();
+      },
       child: Container(
         height: height,
         width: (MediaQuery.of(context).size.width -

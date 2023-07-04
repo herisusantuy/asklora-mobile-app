@@ -8,7 +8,7 @@ class Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 14),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child:
           BlocBuilder<TabScreenBloc, TabScreenState>(builder: (context, state) {
         return Row(
@@ -65,10 +65,8 @@ class Tabs extends StatelessWidget {
           color: AskLoraColors.white,
           width: clickAreaSize,
           height: clickAreaSize,
-          child: getSvgIcon(
-            active ? activeIconAsset : iconAsset,
-            height: size,
-          ),
+          child: getSvgIcon(active ? activeIconAsset : iconAsset,
+              height: size, fit: BoxFit.none),
         ),
       );
 
