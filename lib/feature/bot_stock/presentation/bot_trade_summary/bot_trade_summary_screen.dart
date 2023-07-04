@@ -20,7 +20,6 @@ import '../../../tabs/presentation/tab_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_detail_model.dart';
 import '../../domain/bot_recommendation_model.dart';
-import '../../domain/orders/bot_active_order_model.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -65,9 +64,6 @@ class BotTradeSummaryScreen extends StatelessWidget {
               botStockRepository: BotStockRepository(),
               transactionRepository: TransactionRepository()),
         ),
-        BlocProvider(
-          create: (context) => TabScreenBloc(initialTabPage: TabPage.portfolio),
-        ),
       ],
       child: BlocListener<BotStockBloc, BotStockState>(
         listenWhen: (previous, current) =>
@@ -98,7 +94,6 @@ class BotTradeSummaryScreen extends StatelessWidget {
                     onNextButton: () {
                       String botName =
                           '${BotType.findByString(state.createBotOrderResponse.data!.botAppsName).upperCaseName} ${state.createBotOrderResponse.data!.symbol}';
-                      print('botName: ');
                       BotPortfolioDetailScreen.open(
                         context: context,
                         arguments: BotPortfolioDetailArguments(
