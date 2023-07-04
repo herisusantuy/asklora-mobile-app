@@ -7,6 +7,7 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
@@ -30,12 +31,7 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          foregroundColor: AskLoraColors.text,
-          elevation: 0,
-        ),
+    return CustomScaffold(
         body: SafeArea(
             child: MultiBlocProvider(
           providers: [
