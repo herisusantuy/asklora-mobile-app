@@ -2992,6 +2992,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Next step`
+  String get nextStep {
+    return Intl.message(
+      'Next step',
+      name: 'nextStep',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go`
+  String get go {
+    return Intl.message(
+      'Go',
+      name: 'go',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
