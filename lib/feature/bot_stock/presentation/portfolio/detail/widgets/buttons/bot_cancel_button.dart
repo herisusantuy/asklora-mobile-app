@@ -36,7 +36,11 @@ class BotCancelButton extends StatelessWidget {
           buttonPrimaryType: ButtonPrimaryType.ghostCharcoal,
           label: S.of(context).portfolioDetailButtonCancelBotStock,
           onTap: () => BotStockBottomSheet.cancelBotStockConfirmation(
-              context, botActiveOrderDetailModel.uid),
+              context: context,
+              orderId: botActiveOrderDetailModel.uid,
+
+              ///TODO : Later should add management fee when subscription done
+              amount: botActiveOrderDetailModel.investmentAmountString),
         ),
       );
 }

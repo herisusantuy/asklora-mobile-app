@@ -21,10 +21,15 @@ import '../repository/bot_stock_repository.dart';
 import 'bot_stock_utils.dart';
 
 class BotStockBottomSheet {
-  static cancelBotStockConfirmation(BuildContext context, String orderId) {
+  static cancelBotStockConfirmation(
+      {required BuildContext context,
+      required String orderId,
+      required String amount}) {
     LoraBottomSheet.show(
       context: context,
-      title: S.of(context).botTradeBottomSheetCancelBotStockConfirmationTitle,
+      title: S
+          .of(context)
+          .botTradeBottomSheetCancelBotStockConfirmationTitle(amount),
       primaryButtonLabel: S.of(context).buttonCancelTrade,
       secondaryButtonLabel: S.of(context).buttonCancel,
       onPrimaryButtonTap: () {
