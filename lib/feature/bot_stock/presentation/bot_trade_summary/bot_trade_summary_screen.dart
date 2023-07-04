@@ -13,7 +13,6 @@ import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/repository/transaction_repository.dart';
-import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
@@ -135,10 +134,10 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       PairColumnTextWithTooltip(
                           leftTitle: S.of(context).startDate,
                           rightTitle: S.of(context).endDate,
-                          leftSubTitle: _formatDate(botTradeSummaryModel
-                              .botDetailModel.formattedStartDate),
-                          rightSubTitle: _formatDate(
-                              botTradeSummaryModel.botDetailModel.estEndDate)),
+                          leftSubTitle: botTradeSummaryModel
+                              .botDetailModel.formattedStartDate,
+                          rightSubTitle: botTradeSummaryModel
+                              .botDetailModel.formattedEstEndDate),
                     ],
                   ),
                   title: isFreeBotTrade
@@ -211,17 +210,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
       S.of(context).rolloverBotStockAcknowledgement(
           botTradeSummaryModel.botDetailModel.botInfo.botName,
           botTradeSummaryModel.botDetailModel.stockInfo.symbol,
-          _formatDateWithHour(botTradeSummaryModel.botDetailModel.startDate));
-
-  String _formatDate(String date) {
-    DateTime localTime = formatDateTimeToLocal(date);
-    return formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yy');
-  }
-
-  String _formatDateWithHour(String date) {
-    DateTime localTime = formatDateTimeToLocal(date);
-    return formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yyyy HH:MM');
-  }
+          botTradeSummaryModel
+              .botDetailModel.formattedAcknowledgementEstEndDate);
 
   static void open(
           {required BuildContext context,

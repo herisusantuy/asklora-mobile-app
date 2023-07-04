@@ -69,7 +69,17 @@ class BotRecommendationDetailModel extends Equatable {
   );
 
   String get formattedStartDate =>
-      formatDateTimeAsString(DateTime.parse(startDate));
+      formatDateTimeAsString(DateTime.parse(startDate),
+          dateFormat: 'dd/MM/yyyy');
+
+  String get formattedEstEndDate =>
+      formatDateTimeAsString(DateTime.parse(estEndDate),
+          dateFormat: 'dd/MM/yyyy');
+
+  String get formattedAcknowledgementEstEndDate {
+    DateTime localTime = formatDateTimeToLocal(estEndDate);
+    return '${formatDateTimeAsString(localTime, dateFormat: 'dd/MM/yyyy HH:mm')} ${localTime.timeZoneName}';
+  }
 
   String format(DateTime sourceDateTime) {
     try {
