@@ -244,7 +244,6 @@ public class AndroidBotstockTest {
             ((AndroidDriver) driver).pressKey(new KeyEvent(typeNum(otpInts[i])));
         }
 
-        driver.findElement(By.xpath("//android.view.View[2]")).sendKeys(otp);
     }
 
     public AndroidKey typeNum(int digit) {

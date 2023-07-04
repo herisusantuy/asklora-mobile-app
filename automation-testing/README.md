@@ -9,11 +9,10 @@
 1) Install [Node.js](https://nodejs.org/en)
 2) Follow this [link](https://www.browserstack.com/guide/download-and-install-appium) to install Appium and its dependencies  
 ##### You can use cli or gui to run the server
-3) The gui is no longer maintained. If you are using gui, go [here](https://github.com/appium/appium-desktop/releases/tag/v1.22.3-4) and download the corresponding file
-Once Appium Desktop is installed, go to advanced → put "localhost" for server address and check "Allow CORS"   
-If you are using cli, type "appium --address=localhost --allow-cors" into cmd
-or terminal  
-> **Note** I have not tested running appium with cli, so I'm not sure if it will work    
+   3) The gui is no longer maintained. If you are using gui, go [here](https://github.com/appium/appium-desktop/releases/tag/v1.22.3-4) and download the corresponding file
+   Once Appium Desktop is installed, go to advanced → put "localhost" for server address and check "Allow CORS"   
+      - If you are using cli, first type `appium driver install uiautomator2` into cmd or terminal
+      - Then type `appium --address=localhost --allow-cors --base-path /wd/hub` into cmd or terminal to start a server  
 
 4) run "getProps.sh" before running the UI automation, the setUp method requires the device's name, udid, and version to perform automation
 

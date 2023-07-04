@@ -60,9 +60,9 @@ public class LocalSignUpTest {
     String otp;
     String address;
     String city;
+    String email;
     final String hkid = generator.getHKIDgenerated();
     final String phoneNum = ""; // enter a phone number before automation testing
-    final String email = "testemail" + randomize(100, 1000000);
     final String password = "Password1234!";
     final int age = randomize(20, 73);
     final String FIND_BY_EDIT_TEXT = "android.widget.EditText";
@@ -109,7 +109,6 @@ public class LocalSignUpTest {
         System.out.println("city: " + city);
 
         DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("platformName", "Android");
         caps.setCapability("automationName", "UiAutomator2");
         caps.setCapability("platformVersion", platformVersion);
         caps.setCapability("udid", udid);
@@ -117,7 +116,7 @@ public class LocalSignUpTest {
         caps.setCapability("app", System.getProperty("user.dir") + "/apps/asklora_stag.apk");
         caps.setCapability("unicodeKeyboard", true);
         caps.setCapability("resetKeyboard", true);
-        caps.setCapability("ignoreHiddenApiPolicyError", true);
+//        caps.setCapability("ignoreHiddenApiPolicyError", true);
         // caps.setCapability("autoGrantPermission", true);
         // caps.setCapability("appPackage", "ai.asklora.app.stag");
         // caps.setCapability("appActivity", ".MainActivity");
@@ -557,6 +556,7 @@ public class LocalSignUpTest {
         String[] splitStr = name.split("\\s+");
         firstName = splitStr[0];
         lastName = splitStr[1];
+        email = firstName.toLowerCase() + "." + lastName.toLowerCase();
     }
 
     public void randomizeKeyword() {

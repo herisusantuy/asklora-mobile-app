@@ -56,7 +56,6 @@ public class AndroidSignUpTest {
         final SlackOTP slackToken = new SlackOTP();
 
         String deviceName;
-        String udid;
         String platformVersion;
         String platformValue;
         String name;
@@ -66,9 +65,9 @@ public class AndroidSignUpTest {
         String otp;
         String address;
         String city;
+        String email;
         final String hkid = generator.getHKIDgenerated();
         final String phoneNum = ""; // enter a phone number before automation testing
-        final String email = "testemail" + randomize(100, 1000000);
         final String password = "Password1234!";
         final int age = randomize(20, 73);
         final String FIND_BY_EDIT_TEXT = "android.widget.EditText";
@@ -308,15 +307,6 @@ public class AndroidSignUpTest {
                 implicitWait(3);
                 waitUntilXpath("//android.view.View[@content-desc='Verify Email']");
                 clickElementByXpath("//android.view.View[@content-desc='Verify Email']");
-                // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/title")));
-                //
-                // if (TEST_APP.equals("Dev")) {
-                // driver.findElement(By.xpath("//android.widget.TextView[contains(@text,
-                // 'Dev')]")).click();
-                // } else {
-                // driver.findElement(By.xpath("//android.widget.TextView[contains(@text,
-                // 'Stag')]")).click();
-                // }
 
                 try {
                         waitUntilXpath("//android.widget.Button[contains(@content-desc, 'Define Investment Style')]");
@@ -655,6 +645,7 @@ public class AndroidSignUpTest {
                 String[] splitStr = name.split("\\s+");
                 firstName = splitStr[0];
                 lastName = splitStr[1];
+                email = firstName.toLowerCase() + "." + lastName.toLowerCase();
         }
 
         public void randomizeKeyword() {
