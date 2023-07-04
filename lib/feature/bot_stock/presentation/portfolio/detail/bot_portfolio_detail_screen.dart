@@ -22,7 +22,6 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
-import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
@@ -42,19 +41,20 @@ part 'widgets/performance.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
   static const String route = '/bot_portfolio_detail_screen';
-  final BotActiveOrderModel botActiveOrderModel;
+  final BotPortfolioDetailArguments arguments;
 
-  const BotPortfolioDetailScreen({required this.botActiveOrderModel, Key? key})
+  const BotPortfolioDetailScreen({required this.arguments, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomScaffold(
-        enableBackNavigation: false,
+        onTapBack: arguments.onTapBack,
+        enableBackNavigation: arguments.onTapBack == null ? false : true,
         body: BlocProvider(
           create: (_) => PortfolioBloc(
               botStockRepository: BotStockRepository(),
               transactionHistoryRepository: TransactionRepository())
-            ..add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid)),
+            ..add(FetchActiveOrderDetail(botOrderId: arguments.botUid)),
           child: BlocConsumer<PortfolioBloc, PortfolioState>(
             listenWhen: (previous, current) =>
                 previous.botActiveOrderDetailResponse.state !=
@@ -84,7 +84,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                   content: BotStockForm(
                     useHeader: true,
                     customHeader: BotPortfolioDetailHeader(
-                      title: botActiveOrderModel.botName,
+                      title: arguments.botName,
                       botStatus: botActiveOrderDetailModel?.botStatus,
                     ),
                     padding: EdgeInsets.zero,
@@ -104,16 +104,42 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   void _fetchActiveOrderDetail(BuildContext context) => context
       .read<PortfolioBloc>()
-      .add(FetchActiveOrderDetail(botOrderId: botActiveOrderModel.uid));
+      .add(FetchActiveOrderDetail(botOrderId: arguments.botUid));
 
   static void open(
       {required BuildContext context,
-      required BotActiveOrderModel botActiveOrderModel}) {
-    Navigator.pushNamed(context, route, arguments: botActiveOrderModel)
+      required BotPortfolioDetailArguments arguments}) {
+    Navigator.pushNamed(context, route, arguments: arguments).then((value) {
+      context
+          .read<TabScreenBloc>()
+          .add(TabChanged(TabPage.portfolio.setData()));
+    });
+  }
+
+  static void openAndRemoveAllRoute(
+      {required BuildContext context,
+      required BotPortfolioDetailArguments arguments}) {
+    Navigator.pushNamedAndRemoveUntil(
+            context, route, (Route<dynamic> route) => false,
+            arguments: arguments)
         .then((value) {
       context
           .read<TabScreenBloc>()
           .add(TabChanged(TabPage.portfolio.setData()));
     });
   }
+}
+
+class BotPortfolioDetailArguments {
+  final VoidCallback? onTapBack;
+  final String botUid;
+  final String botName;
+  final bool isFromResultScreen;
+
+  const BotPortfolioDetailArguments({
+    this.onTapBack,
+    required this.botUid,
+    required this.botName,
+    this.isFromResultScreen = false,
+  });
 }

@@ -20,10 +20,12 @@ import '../../../tabs/presentation/tab_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_detail_model.dart';
 import '../../domain/bot_recommendation_model.dart';
+import '../../domain/orders/bot_active_order_model.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_stock_result_screen.dart';
+import '../portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../widgets/bot_stock_form.dart';
 
 class BotTradeSummaryModel {
@@ -56,10 +58,17 @@ class BotTradeSummaryScreen extends StatelessWidget {
     BotRecommendationDetailModel botDetailModel =
         botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
-    return BlocProvider(
-      create: (_) => BotStockBloc(
-          botStockRepository: BotStockRepository(),
-          transactionRepository: TransactionRepository()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => BotStockBloc(
+              botStockRepository: BotStockRepository(),
+              transactionRepository: TransactionRepository()),
+        ),
+        BlocProvider(
+          create: (context) => TabScreenBloc(initialTabPage: TabPage.portfolio),
+        ),
+      ],
       child: BlocListener<BotStockBloc, BotStockState>(
         listenWhen: (previous, current) =>
             previous.createBotOrderResponse != current.createBotOrderResponse,
@@ -86,6 +95,27 @@ class BotTradeSummaryScreen extends StatelessWidget {
                     title: S.of(context).tradeRequestReceived,
                     desc: _tradeRequestSuccessMessage(context),
                     labelBottomButton: S.of(context).checkBotStockDetails,
+                    onNextButton: () {
+                      String botName =
+                          '${BotType.findByString(state.createBotOrderResponse.data!.botAppsName).upperCaseName} ${state.createBotOrderResponse.data!.symbol}';
+                      print('botName: ');
+                      BotPortfolioDetailScreen.open(
+                        context: context,
+                        arguments: BotPortfolioDetailArguments(
+                          botUid: state.createBotOrderResponse.data!.uid,
+                          botName: botName,
+                          onTapBack: () {
+                            /// TODO
+                            /// onTapBack should go to TabPage.portfolio
+
+                            // ? this function able go to TabScreen, but not direct into TabPage.portfolio
+                            TabScreen.openAndRemoveAllRoute(context,
+                                initialTabPage: TabPage.portfolio);
+                            print('back to tab screen');
+                          },
+                        ),
+                      );
+                    },
                   ));
             }
           } else if (state.createBotOrderResponse.state ==

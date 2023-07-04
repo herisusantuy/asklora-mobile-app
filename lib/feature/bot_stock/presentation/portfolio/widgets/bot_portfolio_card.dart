@@ -28,7 +28,10 @@ class BotPortfolioCard extends StatelessWidget {
               }
             ))));
         BotPortfolioDetailScreen.open(
-            context: context, botActiveOrderModel: botActiveOrderModel);
+            context: context,
+            arguments: BotPortfolioDetailArguments(
+                botUid: botActiveOrderModel.uid,
+                botName: botActiveOrderModel.botName));
       },
       child: Stack(
         children: [

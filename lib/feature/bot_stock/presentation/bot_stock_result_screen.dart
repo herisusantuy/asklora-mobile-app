@@ -27,7 +27,8 @@ class BotStockResultScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30.0),
             child: PrimaryButton(
               label: arguments.labelBottomButton,
-              onTap: () => TabScreen.openAndRemoveAllRoute(context),
+              onTap: arguments.onNextButton ??
+                  () => TabScreen.openAndRemoveAllRoute(context),
             ),
           ),
         ));
@@ -44,10 +45,12 @@ class BotStockResultArgument {
   final String title;
   final String desc;
   final String labelBottomButton;
+  final VoidCallback? onNextButton;
 
   const BotStockResultArgument({
     required this.title,
     required this.desc,
     required this.labelBottomButton,
+    this.onNextButton,
   });
 }
