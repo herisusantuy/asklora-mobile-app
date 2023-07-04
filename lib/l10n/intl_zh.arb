@@ -359,5 +359,42 @@
     }
   },
   "viewDepositGuide": "查看入金提示",
-  "pressBackAgain": "再按一次登出Asklora"
+  "pressBackAgain": "再按一次登出Asklora",
+  "tradeSummary": "交易摘要",
+  "marketPrice": "市場價格",
+  "endDate": "結束日期",
+  "confirmTrade": "確認買入",
+  "checkBotStockDetails": "查看 Botstock 資訊",
+  "tradeRequestReceived": "已收到交易指令",
+  "tradeCancelledTitle": "交易已取消",
+  "buttonBackToHome": "返回主頁",
+  "tradeCancelledSubtitle": "交易已取消，你的投資金額已轉至你嘅賬戶。",
+  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} 將於 {dateTime} 開始",
+  "@rolloverBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
+  "endBotStockAcknowledgement": "{botName} {botSymbol} 將會在 {dateTime} 開始",
+  "@endBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  }
 }
