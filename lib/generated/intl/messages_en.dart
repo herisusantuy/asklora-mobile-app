@@ -35,7 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "We’ve sent an email to\n ${emailAddress}\n\nPlease use your phone to click on the activation link!";
 
   static String m5(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} will end at ${dateTime} EST";
+      "${botName} ${botSymbol} will end at ${dateTime}";
 
   static String m6(minute) => "~${minute} min";
 
@@ -55,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m13(currency) => "Withdrawable Balance (${currency})";
 
   static String m14(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} will start at ${dateTime} EST";
+      "${botName} ${botSymbol} will start at ${dateTime}";
 
   static String m15(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";

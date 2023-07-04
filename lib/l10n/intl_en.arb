@@ -403,7 +403,7 @@
   "tradeRequestReceived": "Trade Request Received",
   "tradeCancelledTitle": "Trade Cancelled",
   "tradeCancelledSubtitle": "The trade has been cancelled and your investment amount has been returned to your account",
-  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} will start at {dateTime} EST",
+  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} will start at {dateTime}",
   "@rolloverBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
@@ -417,7 +417,7 @@
       }
     }
   },
-  "endBotStockAcknowledgement": "{botName} {botSymbol} will end at {dateTime} EST",
+  "endBotStockAcknowledgement": "{botName} {botSymbol} will end at {dateTime}",
   "@endBotStockAcknowledgement": {
     "placeholders": {
       "botName": {

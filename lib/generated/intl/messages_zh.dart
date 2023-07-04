@@ -33,7 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m4(emailAddress) => "已發送電子郵件至\n ${emailAddress}\n\n請用手機點擊開通連結！";
 
   static String m5(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol}  將會在 ${dateTime} EST 開始";
+      "${botName} ${botSymbol} 將會在 ${dateTime} 開始";
 
   static String m6(minute) => " ~${minute} 分鐘";
 
@@ -53,7 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m13(currency) => "可提取金額 (${currency})";
 
   static String m14(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} 將於  ${dateTime}EST 開始";
+      "${botName} ${botSymbol} 將於 ${dateTime} 開始";
 
   static String m15(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 

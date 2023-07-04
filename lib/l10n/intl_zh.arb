@@ -362,7 +362,7 @@
   "tradeCancelledTitle": "交易已取消",
   "buttonBackToHome": "返回主頁",
   "tradeCancelledSubtitle": "交易已取消，你的投資金額已轉至你嘅賬戶。",
-  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} 將於  {dateTime}EST 開始",
+  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} 將於 {dateTime} 開始",
   "@rolloverBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
@@ -376,7 +376,7 @@
       }
     }
   },
-  "endBotStockAcknowledgement": "{botName} {botSymbol}  將會在 {dateTime} EST 開始",
+  "endBotStockAcknowledgement": "{botName} {botSymbol} 將會在 {dateTime} 開始",
   "@endBotStockAcknowledgement": {
     "placeholders": {
       "botName": {
