@@ -35,7 +35,6 @@
     }
   },
   "emailActivationFailedTitle": "Sorry！你嘅請求已經逾時。\n請重新開通帳戶。",
-
   "estStopLossPercent": "預計止損 %",
   "estMaxLossPercent": "預計最大損失%",
   "estTakeProfitPercent": "預計止賺%",
@@ -352,5 +351,28 @@
     }
   },
   "viewDepositGuide": "查看入金提示",
-  "pressBackAgain": "再按一次登出Asklora"
+  "pressBackAgain": "再按一次登出Asklora",
+  "beforeKYCHeaderTitle": "進度好好吖\n{name}！",
+  "@beforeKYCHeaderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "beforeDepositHeaderTitle": "離AI投資之道\n又近左一步，{name}！",
+  "@beforeDepositHeaderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "afterPayDepositHeaderTitle": "投資賬戶\n即將 Ready！",
+  "greatStart": "開始投資",
+  "halfWayThere": "進展順利",
+  "almostFinished": "馬上就好",
+  "startInvestingOnMilestone": "即將進入投資狀態！",
+  "depositFundToStartInvesting": "存入資金開始投資",
+  "onBoardingCompletionMessage":"您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。"
 }

@@ -288,7 +288,6 @@
   "portfolioPopUpFundAccountTitle": "Fund your account",
   "portfolioPopUpFundAccountSubTitle": "Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.",
   "startABotstock": "Start A Botstock",
-
   "portfolioPopUpNoTradingHasStartedTitle": "No trading has started!",
   "portfolioPopUpNoTradingHasStartedtSubTitle": "You can manage all your investments here after you start trading. ",
   "portfolioPopUpPendingReviewTitle": "Your Account is Pending Review",
@@ -395,6 +394,28 @@
     }
   },
   "viewDepositGuide": "View Deposit Guide",
-  "pressBackAgain": "Press back again to exit Asklora"
-
+  "pressBackAgain": "Press back again to exit Asklora",
+  "beforeKYCHeaderTitle": "You are making great\nprogress, {name}!",
+  "@beforeKYCHeaderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "beforeDepositHeaderTitle": "Just one more step to AI\ngreatness, {name}!",
+  "@beforeDepositHeaderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "afterPayDepositHeaderTitle": "Your investment account will be ready soon!",
+  "greatStart": "Great start!",
+  "halfWayThere": "Halfway there!",
+  "almostFinished": "Almost finished!",
+  "startInvestingOnMilestone": "Start investing",
+  "depositFundToStartInvesting": "Deposit funds and start investing",
+  "onBoardingCompletionMessage": "You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days."
 }

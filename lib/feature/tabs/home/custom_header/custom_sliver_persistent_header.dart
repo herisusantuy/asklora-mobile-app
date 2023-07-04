@@ -10,6 +10,7 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
+import '../../../../generated/l10n.dart';
 import '../../../settings/presentation/settings_screen.dart';
 import 'custom_shape.dart';
 
@@ -18,23 +19,23 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return LayoutBuilder(builder: (context, constraints) {
-      return BlocBuilder<AppBloc, AppState>(
-        buildWhen: (previous, current) =>
-            previous.userJourney != current.userJourney,
-        builder: (context, state) {
-          return OverflowBox(
-            maxHeight: constraints.biggest.height + 100,
-            alignment: Alignment.topCenter,
-            child: SizedBox.fromSize(
-              size: constraints.biggest + Offset(0, max(0, 100 - shrinkOffset)),
-              child: Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(shape: CustomShape(shrinkOffset)),
-                child: Container(
-                  color: AskLoraColors.charcoal,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
+      return OverflowBox(
+        maxHeight: constraints.biggest.height + 100,
+        alignment: Alignment.topCenter,
+        child: SizedBox.fromSize(
+          size: constraints.biggest + Offset(0, max(0, 100 - shrinkOffset)),
+          child: Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: ShapeDecoration(shape: CustomShape(shrinkOffset)),
+            child: Container(
+              color: AskLoraColors.charcoal,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: BlocBuilder<AppBloc, AppState>(
+                  buildWhen: (previous, current) =>
+                      previous.userJourney != current.userJourney,
+                  builder: (context, state) {
+                    return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,
@@ -61,11 +62,17 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                                 if (snapshot.hasData) {
                                   return CustomTextNew(
                                     state.userJourney == UserJourney.deposit
-                                        ? 'Just one more step to AI\ngreatness, ${snapshot.data}!'
+                                        ? S.of(context).beforeKYCHeaderTitle(
+                                            snapshot.data!)
                                         : state.userJourney ==
                                                 UserJourney.learnBotPlank
-                                            ? 'Your investment account will be ready soon!'
-                                            : 'You are making great\nprogress, ${snapshot.data}!',
+                                            ? S
+                                                .of(context)
+                                                .afterPayDepositHeaderTitle
+                                            : S
+                                                .of(context)
+                                                .beforeDepositHeaderTitle(
+                                                    snapshot.data!),
                                     style: AskLoraTextStyles.h3.copyWith(
                                       color: AskLoraColors.white,
                                     ),
@@ -78,13 +85,13 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                           ),
                         ),
                       ],
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ),
             ),
-          );
-        },
+          ),
+        ),
       );
     });
   }

@@ -82,18 +82,8 @@ class OnBoardingStatus extends StatelessWidget {
               const SizedBox(
                 height: 14,
               ),
-              onBoardingStatusModel.progress != 1
-                  ? OnBoardingStatusButton(
-                      arrowPointingOnSection:
-                          state.userJourney == UserJourney.kyc ||
-                                  state.userJourney == UserJourney.deposit
-                              ? arrowPointingOnSection + 1
-                              : arrowPointingOnSection,
-                      onTap: onBoardingStatusModel.onTap,
-                      intersectCount: intersectCount,
-                      subTitle: onBoardingStatusModel.subTitle,
-                    )
-                  : const SizedBox.shrink(),
+              _isShowOnBoardingStatusButton(
+                  onBoardingStatusModel, state.userJourney)
             ],
           );
         });
@@ -118,7 +108,7 @@ class OnBoardingStatus extends StatelessWidget {
     switch (userJourney) {
       case UserJourney.investmentStyle:
         return OnBoardingStatusModel(
-          title: 'Great start!',
+          title: S.of(context).greatStart,
           subTitle: S.of(context).defineInvestmentStyle,
           onTap: () => PpiScreen.open(context,
               arguments: const Pair(QuestionPageType.investmentStyle,
@@ -127,23 +117,23 @@ class OnBoardingStatus extends StatelessWidget {
         );
       case UserJourney.kyc:
         return OnBoardingStatusModel(
-          title: 'Halfway there!',
-          subTitle: 'Open Investment Account',
+          title: S.of(context).halfWayThere,
+          subTitle: S.of(context).openInvestmentAccount,
           onTap: () => KycScreen.open(context),
           progress: 0.5,
         );
       case UserJourney.deposit:
         return OnBoardingStatusModel(
-          title: 'Almost finished!',
-          subTitle: 'Deposit funds and start investing',
+          title: S.of(context).almostFinished,
+          subTitle: S.of(context).depositFundToStartInvesting,
           onTap: () => DepositWelcomeScreen.open(
               context: context, depositType: DepositType.firstTime),
           progress: 0.67,
         );
       case UserJourney.learnBotPlank:
         return OnBoardingStatusModel(
-          title: 'Start investing',
-          subTitle: 'Learn to Invest with Bot - Plank',
+          title: S.of(context).startInvestingOnMilestone,
+          subTitle: '',
           onTap: () => LearningBotStockScreen.open(
             context: context,
             botType: BotType.plank,
@@ -158,5 +148,20 @@ class OnBoardingStatus extends StatelessWidget {
           progress: 0,
         );
     }
+  }
+
+  Widget _isShowOnBoardingStatusButton(
+      OnBoardingStatusModel onBoardingStatusModel, UserJourney userJourney) {
+    return onBoardingStatusModel.progress != 1
+        ? OnBoardingStatusButton(
+            arrowPointingOnSection: userJourney == UserJourney.kyc ||
+                    userJourney == UserJourney.deposit
+                ? arrowPointingOnSection + 1
+                : arrowPointingOnSection,
+            onTap: onBoardingStatusModel.onTap,
+            intersectCount: intersectCount,
+            subTitle: onBoardingStatusModel.subTitle,
+          )
+        : const SizedBox.shrink();
   }
 }
