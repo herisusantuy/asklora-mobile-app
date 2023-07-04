@@ -37,24 +37,30 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m5(emailAddress) =>
       "We’ve sent an email to\n ${emailAddress}\n\nPlease use your phone to click on the activation link!";
 
-  static String m6(minute) => "~${minute} min";
+  static String m6(botName, botSymbol, dateTime) =>
+      "${botName} ${botSymbol} will end at ${dateTime}";
 
-  static String m7(currency) => "Buying Power (${currency})";
+  static String m7(minute) => "~${minute} min";
 
-  static String m8(currency) => "Current Price ${currency}";
+  static String m8(currency) => "Buying Power (${currency})";
 
-  static String m9(bot, startDate, endDate, duration) =>
+  static String m9(currency) => "Current Price ${currency}";
+
+  static String m10(bot, startDate, endDate, duration) =>
       "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
 
-  static String m10(dateTime) => "Expired at ${dateTime}";
+  static String m11(dateTime) => "Expired at ${dateTime}";
 
-  static String m11(dateTime) => "Expired in ${dateTime} days";
+  static String m12(dateTime) => "Expired in ${dateTime} days";
 
-  static String m12(currency) => "Total Botstock Values (${currency})";
+  static String m13(currency) => "Total Botstock Values (${currency})";
 
-  static String m13(currency) => "Withdrawable Balance (${currency})";
+  static String m14(currency) => "Withdrawable Balance (${currency})";
 
-  static String m14(dateTime) =>
+  static String m15(botName, botSymbol, dateTime) =>
+      "${botName} ${botSymbol} will start at ${dateTime}";
+
+  static String m16(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -204,7 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailActivationSuccessTitle": m5,
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
-        "endBotStockAcknowledgement": m5,
+        "endBotStockAcknowledgement": m6,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
         "errorGettingInformationInvestmentDetailSubTitle":
@@ -297,7 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("Milestones"),
-        "min": m6,
+        "min": m7,
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "no": MessageLookupByLibrary.simpleMessage(" No"),
@@ -337,22 +343,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "personalisation":
             MessageLookupByLibrary.simpleMessage("Personalisation"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
-        "portfolioBuyingPower": m7,
+        "portfolioBuyingPower": m8,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’."),
-        "portfolioCurrentPrice": m8,
+        "portfolioCurrentPrice": m9,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("Cancel Botstock"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("End Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("Rollover Botstock"),
-        "portfolioDetailChartCaption": m9,
+        "portfolioDetailChartCaption": m10,
         "portfolioDetailChartEmptyMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Performance data will be available once the Botstock starts"),
-        "portfolioDetailExpiredAt": m10,
-        "portfolioDetailExpiredIn": m11,
+        "portfolioDetailExpiredAt": m11,
+        "portfolioDetailExpiredIn": m12,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("Avg. Loss"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -434,11 +440,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!"),
         "portfolioPopUpRedeemYourBotstockTitle":
             MessageLookupByLibrary.simpleMessage("Redeem Your Free Botstock"),
-        "portfolioTotalBotStock": m12,
+        "portfolioTotalBotStock": m13,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
             MessageLookupByLibrary.simpleMessage("Total Portfolio Value"),
-        "portfolioWithdrawableAmount": m13,
+        "portfolioWithdrawableAmount": m14,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
@@ -454,7 +460,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
-        "rolloverBotStockAcknowledgement": m14,
+        "rolloverBotStockAcknowledgement": m15,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "setUpFinancialProfile":
@@ -563,7 +569,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
-        "yourBankAccountIsUnderReview": m14,
+        "yourBankAccountIsUnderReview": m16,
         "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed"),
         "yourPaymentInformationIsUnderReview": MessageLookupByLibrary.simpleMessage(
