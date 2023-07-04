@@ -2,6 +2,30 @@ part of 'tab_screen_bloc.dart';
 
 enum TabPage { home, forYou, portfolio }
 
+enum SubTabPage {
+  portfolioBotStockDetails('portfolioBotStockDetails');
+
+  const SubTabPage(this.value);
+
+  final String value;
+}
+
+extension TabPageExtension on TabPage {
+  static ({String path, Map<String, dynamic> arguments}) data =
+      (path: '', arguments: {});
+
+  TabPage setData(
+      {({
+        String path,
+        Map<String, dynamic> arguments
+      }) arguments = (path: '', arguments: const {})}) {
+    data = arguments;
+    return this;
+  }
+
+  ({String path, Map<String, dynamic> arguments}) get getArguments => data;
+}
+
 enum TabScreenBackState { none, openConfirmation, closeApp }
 
 class TabScreenState extends Equatable {

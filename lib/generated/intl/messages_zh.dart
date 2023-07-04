@@ -82,9 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetAmountMinimum": m2,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("你想投資嘅金額係？"),
-        "botTradeBottomSheetCancelBotStockConfirmationTitle":
-            MessageLookupByLibrary.simpleMessage(
-                "投資額及交易費用 (HKD1,500) 會自動轉至你嘅賬戶。"),
+        "botTradeBottomSheetCancelBotStockConfirmationTitle": m1,
         "botTradeBottomSheetEndBotStockConfirmationSubTitle":
             MessageLookupByLibrary.simpleMessage(" Botstock 的總價值會自動轉至你的賬戶。"),
         "botTradeBottomSheetEndBotStockConfirmationTitle": m3,

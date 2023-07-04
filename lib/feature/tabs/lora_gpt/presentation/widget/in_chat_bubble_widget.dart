@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/custom_text_new.dart';
@@ -18,7 +20,8 @@ class InChatBubbleWidget extends StatelessWidget {
       children: [
         CustomTextNew(
           name,
-          style: AskLoraTextStyles.subtitle2,
+          style:
+              AskLoraTextStyles.subtitle2.copyWith(color: AskLoraColors.white),
         ),
         const SizedBox(height: 12),
         Row(
@@ -27,20 +30,31 @@ class InChatBubbleWidget extends StatelessWidget {
           children: [
             const SizedBox(width: 30),
             Flexible(
-              child: Container(
-                  padding: const EdgeInsets.all(15),
-                  margin: const EdgeInsets.only(bottom: 5),
-                  decoration: const BoxDecoration(
-                    color: AskLoraColors.charcoal,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
+              child: ClipRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 7,
+                    sigmaY: 7,
                   ),
-                  child: CustomTextNew(message,
-                      style: AskLoraTextStyles.subtitle2
-                          .copyWith(color: AskLoraColors.white))),
+                  child: Container(
+                      padding: const EdgeInsets.all(15),
+                      margin: const EdgeInsets.only(bottom: 5),
+                      decoration: BoxDecoration(
+                        color: AskLoraColors.white.withOpacity(0.2),
+                        border: Border.all(
+                            width: 1.5,
+                            color: AskLoraColors.white.withOpacity(0.8)),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                      ),
+                      child: CustomTextNew(message,
+                          style: AskLoraTextStyles.subtitle2
+                              .copyWith(color: AskLoraColors.white))),
+                ),
+              ),
             ),
           ],
         )

@@ -97,9 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetAmountMinimum": m2,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("How much are you investing?"),
-        "botTradeBottomSheetCancelBotStockConfirmationTitle":
-            MessageLookupByLibrary.simpleMessage(
-                "The investment amount and Bot management fee (HKD1,500) will be returned to your account."),
+        "botTradeBottomSheetCancelBotStockConfirmationTitle": m1,
         "botTradeBottomSheetEndBotStockConfirmationSubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "The total Botstock value will be returned to your \naccount after the next community order."),

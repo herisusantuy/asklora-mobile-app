@@ -153,7 +153,14 @@
   "botTradeBottomSheetEndBotStockConfirmationSubTitle": " Botstock 的總價值會自動轉至你的賬戶。",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "免費 Botstock 已成功加至\n你嘅投資組合！",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "存入資金正式交易",
-  "botTradeBottomSheetCancelBotStockConfirmationTitle": "投資額及交易費用 (HKD1,500) 會自動轉至你嘅賬戶。",
+  "botTradeBottomSheetCancelBotStockConfirmationTitle": "投資額及交易費用 (HKD{amount}) 會自動轉至你嘅賬戶。",
+  "@botTradeBottomSheetCancelBotStockConfirmationTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "howItWorks": "如何運作",
   "marketCap": "市值",
   "passwordChangeSuccess": "Password Change Success",
