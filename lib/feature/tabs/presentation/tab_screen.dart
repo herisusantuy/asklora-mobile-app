@@ -116,6 +116,7 @@ class TabScreen extends StatelessWidget {
                       ),
                       child: ShowCaseWidget(
                         disableBarrierInteraction: true,
+                        disableMovingAnimation: true,
                         showCaseViewScrollPosition:
                             ShowCaseViewScrollPosition.scrollToTop,
                         blurValue: 2.5,

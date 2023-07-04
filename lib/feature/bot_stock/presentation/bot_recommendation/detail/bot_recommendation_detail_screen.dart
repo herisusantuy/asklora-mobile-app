@@ -49,7 +49,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               BotStockBloc botStockBloc = BotStockBloc(
                   botStockRepository: BotStockRepository(),
                   transactionRepository: TransactionRepository(),
-                  tutorialRepository: TutorialRepository());
+                  tutorialRepository: TutorialRepository())
+                ..add(InitBotDetailsTutorial());
               _fetchBotDetail(botStockBloc);
               return botStockBloc;
             },
@@ -61,13 +62,15 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               listener: (context, state) {
                 CustomLoadingOverlay.of(context)
                     .show(state.botDetailResponse.state);
-                if (state.isBotDetailsTutorial) {
-                  ShowCaseWidget.of(context).startShowCase([
-                    TutorialJourney.botDetails,
-                    TutorialJourney.botChart,
-                    TutorialJourney.chatLoraTab,
-                    TutorialJourney.sendQuestionButton,
-                  ]);
+                if (state.botDetailResponse.state == ResponseState.success) {
+                  if (state.isBotDetailsTutorial) {
+                    ShowCaseWidget.of(context).startShowCase([
+                      TutorialJourney.botDetails,
+                      TutorialJourney.botChart,
+                      TutorialJourney.chatLoraTab,
+                      TutorialJourney.sendQuestionButton,
+                    ]);
+                  }
                 }
               },
               buildWhen: (previous, current) =>

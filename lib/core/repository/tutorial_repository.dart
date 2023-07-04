@@ -13,6 +13,12 @@ class TutorialRepository {
   Future<bool> isBotDetailsTutorial() async {
     bool? response =
         await _sharedPreference.readBoolData(sfKeyBotDetailsTutorial);
-    return response ?? true;
+    if (response != null) {
+      print('sfKeyBotDetails tutorial (not null): $response');
+      return response;
+    } else {
+      print('sfKeyBotDetails tutorial (null): $response');
+      return true;
+    }
   }
 }

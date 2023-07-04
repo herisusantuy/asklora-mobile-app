@@ -50,7 +50,7 @@ class FetchBotDetail extends BotStockEvent {
   List<Object> get props => [ticker, botId];
 }
 
-class InitBotTutorial extends BotStockEvent {}
+class InitBotDetailsTutorial extends BotStockEvent {}
 
 class BotDetailsTutorialFinished extends BotStockEvent {}
 
