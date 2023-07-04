@@ -13,6 +13,7 @@ import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/repository/transaction_repository.dart';
+import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
@@ -179,12 +180,18 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 24, bottom: 30),
                       child: PrimaryButton(
                         label: S.of(context).confirmTrade,
-                        onTap: () => context.read<BotStockBloc>().add(
-                            CreateBotOrder(
-                                botRecommendationModel:
-                                    botTradeSummaryModel.botRecommendationModel,
-                                tradeBotStockAmount:
-                                    botTradeSummaryModel.amount)),
+                        onTap: () {
+                          // context.read<BotStockBloc>().add(
+                          //   CreateBotOrder(
+                          //       botRecommendationModel:
+                          //           botTradeSummaryModel.botRecommendationModel,
+                          //       tradeBotStockAmount:
+                          //           botTradeSummaryModel.amount));
+                          print(
+                              'UTC date time: ${formatDateTimeAsString(botTradeSummaryModel.botDetailModel.estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')}');
+                          print(
+                              'EST date time: ${convertDateToUtc(botTradeSummaryModel.botDetailModel.estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')}');
+                        },
                       ),
                     ))),
       ),
