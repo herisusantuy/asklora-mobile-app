@@ -88,8 +88,6 @@ class LoraGptState extends Equatable {
         sessionId: '',
       );
 
-  List<Botstock> getBotstocks() => botstocks;
-
   @override
   List<Object> get props => [
         query,

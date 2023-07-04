@@ -85,7 +85,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     } else if (state.tabPage == TabPage.portfolio) {
       response = await _loraGptRepository.portfolio(
           params: state.getPortfolioRequest(query: query),
-          data: state.getBotstocks());
+          data: state.botstocks);
     } else {
       response = await _loraGptRepository.general(
           params: state.getGeneralChatRequest(query: query));
