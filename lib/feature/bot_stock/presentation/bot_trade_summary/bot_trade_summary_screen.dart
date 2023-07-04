@@ -181,16 +181,11 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       child: PrimaryButton(
                         label: S.of(context).confirmTrade,
                         onTap: () {
-                          // context.read<BotStockBloc>().add(
-                          //   CreateBotOrder(
-                          //       botRecommendationModel:
-                          //           botTradeSummaryModel.botRecommendationModel,
-                          //       tradeBotStockAmount:
-                          //           botTradeSummaryModel.amount));
-                          print(
-                              'UTC date time: ${formatDateTimeAsString(botTradeSummaryModel.botDetailModel.estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')}');
-                          print(
-                              'EST date time: ${convertDateToUtc(botTradeSummaryModel.botDetailModel.estEndDate, dateFormat: 'dd/MM/yyyy HH:mm')}');
+                          context.read<BotStockBloc>().add(CreateBotOrder(
+                              botRecommendationModel:
+                                  botTradeSummaryModel.botRecommendationModel,
+                              tradeBotStockAmount:
+                                  botTradeSummaryModel.amount));
                         },
                       ),
                     ))),
