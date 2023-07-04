@@ -62,8 +62,10 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                                 if (snapshot.hasData) {
                                   return CustomTextNew(
                                     state.userJourney == UserJourney.deposit
-                                        ? S.of(context).beforeKYCHeaderTitle(
-                                            snapshot.data!)
+                                        ? S
+                                            .of(context)
+                                            .beforeDepositHeaderTitle(
+                                                snapshot.data!)
                                         : state.userJourney ==
                                                 UserJourney.learnBotPlank
                                             ? S
@@ -71,7 +73,7 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                                                 .afterPayDepositHeaderTitle
                                             : S
                                                 .of(context)
-                                                .beforeDepositHeaderTitle(
+                                                .beforeKYCHeaderTitle(
                                                     snapshot.data!),
                                     style: AskLoraTextStyles.h3.copyWith(
                                       color: AskLoraColors.white,

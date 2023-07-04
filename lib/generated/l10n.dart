@@ -2973,10 +2973,10 @@ class S {
     );
   }
 
-  /// `Deposit funds and start investing`
+  /// `Deposit funds to start investing`
   String get depositFundToStartInvesting {
     return Intl.message(
-      'Deposit funds and start investing',
+      'Deposit funds to start investing',
       name: 'depositFundToStartInvesting',
       desc: '',
       args: [],

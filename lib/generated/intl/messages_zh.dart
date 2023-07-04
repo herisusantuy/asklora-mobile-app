@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(name) => "離AI投資之道\n又近左一步，${name}！";
 
-  static String m1(name) => "進度好好吖\n${name}！";
+  static String m1(name) => "進度好好吖,\n${name}！";
 
   static String m2(availableAmount, minimumAmount) =>
       "你有  ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";

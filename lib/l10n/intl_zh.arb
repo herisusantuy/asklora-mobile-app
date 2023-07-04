@@ -359,7 +359,7 @@
   },
   "viewDepositGuide": "查看入金提示",
   "pressBackAgain": "再按一次登出Asklora",
-  "beforeKYCHeaderTitle": "進度好好吖\n{name}！",
+  "beforeKYCHeaderTitle": "進度好好吖,\n{name}！",
   "@beforeKYCHeaderTitle": {
     "placeholders": {
       "name": {
@@ -381,7 +381,7 @@
   "almostFinished": "馬上就好",
   "startInvestingOnMilestone": "即將進入投資狀態！",
   "depositFundToStartInvesting": "存入資金開始投資",
-  "onBoardingCompletionMessage":"您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。",
+  "onBoardingCompletionMessage": "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。",
   "nextStep": "下一步",
   "go": "繼續"
 }
