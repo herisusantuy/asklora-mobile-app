@@ -19,6 +19,8 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return LayoutBuilder(builder: (context, constraints) {
       return BlocBuilder<AppBloc, AppState>(
+        buildWhen: (previous, current) =>
+            previous.userJourney != current.userJourney,
         builder: (context, state) {
           return OverflowBox(
             maxHeight: constraints.biggest.height + 100,
