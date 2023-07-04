@@ -44,7 +44,8 @@ class DemonstrationBotDetailScreen extends StatelessWidget {
                 .read<NavigationBloc<LearningBotStockPageStep>>()
                 .add(const PagePop()),
             useHeader: true,
-            title: '${botType.upperCaseName} ${botRecommendationModel.ticker}',
+            title:
+                '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
             padding: EdgeInsets.zero,
             content: DemonstrationBotDetailContent(
               botRecommendationModel: botRecommendationModel,

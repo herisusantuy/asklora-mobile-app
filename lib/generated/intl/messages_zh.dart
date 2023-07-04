@@ -23,17 +23,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(availableAmount, minimumAmount) =>
       "你有  ${availableAmount} 可供使用，每單交易最小金額為 ${minimumAmount} 。";
 
-  static String m1(botInformation) =>
+  static String m1(amount) => "投資額及交易費用 (HKD${amount}) 會自動轉至你嘅賬戶。";
+
+  static String m2(botInformation) =>
       "你可以選擇依家結束，所有 ${botInformation} 嘅交易活動會立即停止。";
 
-  static String m2(minimumAmount) => "每單交易最小金額為 ${minimumAmount} 。";
+  static String m3(minimumAmount) => "每單交易最小金額為 ${minimumAmount} 。";
 
-  static String m3(expiryTime) => "更新到期時間為 ${expiryTime}";
+  static String m4(expiryTime) => "更新到期時間為 ${expiryTime}";
 
-  static String m4(emailAddress) => "已發送電子郵件至\n ${emailAddress}\n\n請用手機點擊開通連結！";
-
-  static String m5(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} 將會在 ${dateTime} 開始";
+  static String m5(emailAddress) => "已發送電子郵件至\n ${emailAddress}\n\n請用手機點擊開通連結！";
 
   static String m6(minute) => " ~${minute} 分鐘";
 
@@ -52,10 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m13(currency) => "可提取金額 (${currency})";
 
-  static String m14(botName, botSymbol, dateTime) =>
-      "${botName} ${botSymbol} 將於 ${dateTime} 開始";
-
-  static String m15(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m14(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -79,22 +75,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetAmountMinimum": m0,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("你想投資嘅金額係？"),
-        "botTradeBottomSheetCancelBotStockConfirmationTitle":
-            MessageLookupByLibrary.simpleMessage(
-                "投資額及交易費用 (HKD1,500) 會自動轉至你嘅賬戶。"),
+        "botTradeBottomSheetCancelBotStockConfirmationTitle": m1,
         "botTradeBottomSheetEndBotStockConfirmationSubTitle":
             MessageLookupByLibrary.simpleMessage(" Botstock 的總價值會自動轉至你的賬戶。"),
-        "botTradeBottomSheetEndBotStockConfirmationTitle": m1,
+        "botTradeBottomSheetEndBotStockConfirmationTitle": m2,
         "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle":
             MessageLookupByLibrary.simpleMessage("存入資金正式交易"),
         "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle":
             MessageLookupByLibrary.simpleMessage("免費 Botstock 已成功加至\n你嘅投資組合！"),
-        "botTradeBottomSheetInsufficientBalanceSubTitle": m2,
+        "botTradeBottomSheetInsufficientBalanceSubTitle": m3,
         "botTradeBottomSheetInsufficientBalanceTitle":
             MessageLookupByLibrary.simpleMessage("唔夠資金，幫你唔到，係時候入錢入戶口！"),
         "botTradeBottomSheetRolloverConfirmationButton":
             MessageLookupByLibrary.simpleMessage("延長"),
-        "botTradeBottomSheetRolloverConfirmationSubTitle": m3,
+        "botTradeBottomSheetRolloverConfirmationSubTitle": m4,
         "botTradeBottomSheetRolloverConfirmationTitle":
             MessageLookupByLibrary.simpleMessage(
                 "你想延長 Botstock 投資期\n以繼續交易？\n\n2 星期"),
@@ -163,7 +157,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
         "emailActivationFailedTitle":
             MessageLookupByLibrary.simpleMessage("Sorry！你嘅請求已經逾時。\n請重新開通帳戶。"),
-        "emailActivationSuccessTitle": m4,
+        "emailActivationSuccessTitle": m5,
         "emailAddress": MessageLookupByLibrary.simpleMessage("電郵地址"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
         "endBotStockAcknowledgement": m5,
@@ -419,7 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m15,
+        "yourBankAccountIsUnderReview": m14,
         "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed"),
         "yourPaymentInformationIsUnderReview":

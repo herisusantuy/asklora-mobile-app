@@ -1372,13 +1372,13 @@ class S {
     );
   }
 
-  /// `The investment amount and Bot management fee (HKD1,500) will be returned to your account.`
-  String get botTradeBottomSheetCancelBotStockConfirmationTitle {
+  /// `The investment amount and Bot management fee (HKD{amount}) will be returned to your account.`
+  String botTradeBottomSheetCancelBotStockConfirmationTitle(String amount) {
     return Intl.message(
-      'The investment amount and Bot management fee (HKD1,500) will be returned to your account.',
+      'The investment amount and Bot management fee (HKD$amount) will be returned to your account.',
       name: 'botTradeBottomSheetCancelBotStockConfirmationTitle',
       desc: '',
-      args: [],
+      args: [amount],
     );
   }
 

@@ -106,7 +106,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
         child: BotStockForm(
             useHeader: true,
             title:
-                '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.ticker}',
+                '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.tickerSymbol}',
             content: Column(
               children: [
                 RoundColoredBox(
