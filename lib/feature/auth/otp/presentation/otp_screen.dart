@@ -31,8 +31,7 @@ class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        body: SafeArea(
-            child: MultiBlocProvider(
+        body: MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => OtpBloc(otpRepository: OtpRepository())
@@ -88,7 +87,7 @@ class OtpScreen extends StatelessWidget {
           ),
         );
       }),
-    )));
+    ));
   }
 
   static void openReplace(
