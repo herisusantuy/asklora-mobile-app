@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../app/bloc/app_bloc.dart';
@@ -10,12 +11,9 @@ import '../../../core/presentation/custom_layout_with_blur_pop_up.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
-import '../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
-import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/repository/tutorial_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
-import '../../../core/styles/asklora_text_styles.dart';
 import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/route_generator.dart';
 import '../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
@@ -65,8 +63,9 @@ class TabScreen extends StatelessWidget {
               ///fetch portfolio when current UserJourney already passed freeBotStock
               if (UserJourney.compareUserJourney(
                   context: context, target: UserJourney.freeBotStock)) {
-                portfolioBloc.add(const FetchActiveOrders());
-                portfolioBloc.add(FetchBalance());
+                portfolioBloc
+                  ..add(FetchBalance())
+                  ..add(const FetchActiveOrders());
               }
               return portfolioBloc;
             },

@@ -14,6 +14,7 @@ import '../../../../../core/repository/tutorial_repository.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
+import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../domain/bot_recommendation_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -153,7 +154,11 @@ class BotRecommendationDetailScreen extends StatelessWidget {
   }
 
   static void open(
-          {required BuildContext context,
-          required BotRecommendationModel botRecommendationModel}) =>
-      Navigator.pushNamed(context, route, arguments: botRecommendationModel);
+      {required BuildContext context,
+      required BotRecommendationModel botRecommendationModel}) {
+    Navigator.pushNamed(context, route, arguments: botRecommendationModel)
+        .then((value) {
+      context.read<TabScreenBloc>().add(TabChanged(TabPage.forYou.setData()));
+    });
+  }
 }

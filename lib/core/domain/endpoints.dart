@@ -79,6 +79,9 @@ const String mailToLoraCare = 'mailto:loracares@asklora.ai';
 ///
 /// LoraGPT
 ///
-// const String loraGptBaseUrl = 'http://192.168.1.175/';
-const String loraGptBaseUrl = 'https://stock-gpt-stag.api.asklora.ai/';
-const String endpointChat = 'chat/experimental/with_user_management';
+const String loraGptBaseUrl = 'http://stock-gpt-dev.intra.asklora.ai/';
+// const String loraGptBaseUrl = 'https://stock-gpt-stag.api.asklora.ai/';
+const String endpointChat = 'chat/general';
+const String endpointPortfolio = 'chat/porfolio_page';
+const String endpointPortfolioDetailPage =
+    'chat/experimental/with_botstock_data';

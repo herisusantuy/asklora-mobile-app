@@ -51,6 +51,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
           height: widget.maxHeight,
           top: _drawerBottom,
           child: GestureDetector(
+            onPanDown: _onPanDown,
             onPanEnd: _onPanEnd,
             onPanUpdate: _onPanUpdate,
             child: const LoraAiScreen(),
@@ -129,6 +130,11 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
     setState(() {
       _drawerBottom += details.delta.dy;
     });
+  }
+
+  void _onPanDown(DragDownDetails dragEndDetails) {
+    ///dismiss keyboard on user tap down background
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   void _onPanEnd(DragEndDetails dragEndDetails) {

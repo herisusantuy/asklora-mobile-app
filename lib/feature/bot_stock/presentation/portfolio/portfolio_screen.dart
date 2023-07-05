@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../../core/domain/base_response.dart';
 import '../../../../../../core/presentation/buttons/others/funding_button.dart';
@@ -22,15 +21,13 @@ import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/shimmer.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/currency_enum.dart';
-import '../../../../core/utils/storage/shared_preference.dart';
-import '../../../../core/utils/storage/storage_keys.dart';
 import '../../../../generated/l10n.dart';
 import '../../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
 import '../../../balance/deposit/utils/deposit_utils.dart';
 import '../../../balance/withdrawal/presentation/withdrawal_bank_detail_screen.dart';
 import '../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../../settings/presentation/settings_screen.dart';
-import '../../../tabs/for_you/bloc/for_you_bloc.dart';
+import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../domain/orders/bot_active_order_model.dart';
 import '../../utils/bot_stock_utils.dart';
 import 'bloc/portfolio_bloc.dart';
@@ -77,8 +74,6 @@ class PortfolioScreen extends StatelessWidget {
               context
                   .read<AccountInformationBloc>()
                   .add(GetAccountInformation());
-              context.read<ForYouBloc>().add(SaveInvestmentStyleState());
-              await SharedPreference().deleteData(sfKeyBotDetailsTutorial);
             },
             child: CustomLayoutWithBlurPopUp(
               loraPopUpMessageModel: LoraPopUpMessageModel(
@@ -101,7 +96,8 @@ class PortfolioScreen extends StatelessWidget {
                 children: [
                   _header(context),
                   PortfolioBalance(
-                    data: state.transactionBalanceResponse.data,
+                    data: state.transactionBalanceResponse.data ??
+                        TransactionBalanceResponse.placeholder,
                     currencyType: state.currency,
                   ),
                   const SizedBox(
