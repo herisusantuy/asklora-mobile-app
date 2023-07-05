@@ -51,7 +51,7 @@ class TransactionBalanceResponse extends Equatable {
 
   String get totalPortfolioHkdStr => totalPortfolioHkd != 0
       ? totalPortfolioHkd.convertToCurrencyDecimal()
-      : '0.0';
+      : '0.00';
 
   String get withdrawableBalanceHkdStr => withdrawableBalanceHkd != 0
       ? withdrawableBalanceHkd.convertToCurrencyDecimal()
@@ -66,7 +66,7 @@ class TransactionBalanceResponse extends Equatable {
 
   String get totalPortfolioUsdStr => totalPortfolioHkd != 0
       ? totalPortfolioUsd.convertToCurrencyDecimal()
-      : '0.0';
+      : '0.00';
 
   String get withdrawableBalanceUsdStr => withdrawableBalanceUsd != 0
       ? withdrawableBalanceUsd.convertToCurrencyDecimal()
