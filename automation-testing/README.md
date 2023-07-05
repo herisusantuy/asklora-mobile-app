@@ -42,30 +42,36 @@ You should be able to input the otp after restarting IDE
 3) Navigate to [LambdaTest's Website](https://www.lambdatest.com/) and click **Dashboard**
     - Go to Automation → App Automation 
     - This is where all the automation tests are displayed  
+4) Download [underpass](https://www.lambdatest.com/support/docs/underpass-tunnel-application/) and set up underpass for secure tunnel
   
-4) **LambdaTest iteself has separate set up capabilities compared to Appium.** When you want to test with a new apk file, follow this [link](https://www.lambdatest.com/support/docs/upload-your-mobile-app/) and replace the value of the following line
+5) **LambdaTest iteself has separate set up capabilities compared to Appium.** When you want to test with a new apk file, follow this [link](https://www.lambdatest.com/support/docs/upload-your-mobile-app/) and replace the value of the following line:
 ``` java
 caps.setCapability("app", "lt://APP10160631101688091461122107");
 ```
+- To set up the secure tunnel, change the contents of this line:
+``` java
+caps.setCapability("tunnelName", "DESKTOP-72RJ0L4");
+```
 
-5) Make sure JAVA_HOME and ANDROID_HOME are set up to use this program for automation
+
+6) Make sure JAVA_HOME and ANDROID_HOME are set up to use this program for automation
 To be able to interact with the scanner and using IntelliJ, go to:
 Help → Edit Custom VM Options  
 Add "-Deditable.java.test.console=true" and restart IDE  
 You should be able to input the otp after restarting IDE
 > **Note** I did not test automation using vs code, so I'm not sure if it will work with vs code  
 
-6) Add the API token for **LT_USERNAME**, **LT_ACCESS_KEY**, and **SLACK_BOT_TOKEN** in `.env` (Tokens are stored in 1Password)
+7) Add the API token for **LT_USERNAME**, **LT_ACCESS_KEY**, and **SLACK_BOT_TOKEN** in `.env` (Tokens are stored in 1Password)
 
-7) Open **android_single.xml** and change the class name to whichever file you would like to test
+8) Open **android_single.xml** and change the class name to whichever file you would like to test
 
-8) You are done! Run the files inside the package lambdatest using **android_single.xml** and the test builds will show up on LambdaTest's dashboard
+9) You are done! Run the files inside the package lambdatest using **android_single.xml** and the test builds will show up on LambdaTest's dashboard
 
 > **Note** When testing sign up, you must enter your phone number into the file
 
 > **Warning** The AndroidSignUpTest does not work. The KYC part keeps crashing when trying to take a picture
 ---
-## IMPORTANT
+### IMPORTANT
 ##### These settings are disabled in Developer options for the Xiaomi Phone
 "Verify apps over USB"  
 "Verify bytecode of debuggable apps"  
