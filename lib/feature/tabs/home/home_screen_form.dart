@@ -38,6 +38,8 @@ part 'widgets/home_screen_investment_style_widget.dart';
 
 part 'widgets/home_screen_milestone_completion_reminder_widget.dart';
 
+part 'widgets/home_screen_milestone_completion_widget.dart';
+
 part 'widgets/home_screen_need_help_button_widget.dart';
 
 part 'widgets/home_screen_pop_up_message_widget.dart';

@@ -52,6 +52,7 @@ platform :android do
           release_notes: "Test App",
           firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
           service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+          groups: "AskLora, Internal",
           debug: true
      )
 
