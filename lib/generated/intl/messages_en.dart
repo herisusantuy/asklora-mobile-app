@@ -20,41 +20,51 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(availableAmount, minimumAmount) =>
+  static String m0(name) => "Just one more step to AI\ngreatness, ${name}!";
+
+  static String m1(name) => "You are making great\nprogress, ${name}!";
+
+  static String m2(availableAmount, minimumAmount) =>
       "You have ${availableAmount}, the minimum investment amount is ${minimumAmount}.";
 
-  static String m1(amount) =>
+  static String m3(amount) =>
       "The investment amount and Bot management fee (HKD${amount}) will be returned to your account.";
 
-  static String m2(botInformation) =>
+  static String m4(botInformation) =>
       "You can end the Botstock now, and all stocks will be sold. Trading of ${botInformation} will stop.";
 
-  static String m3(minimumAmount) =>
+  static String m5(minimumAmount) =>
       "The minimum investment amount is ${minimumAmount} per trade.";
 
-  static String m4(expiryTime) => "The new expiry date is ${expiryTime}";
+  static String m6(expiryTime) => "The new expiry date is ${expiryTime}";
 
-  static String m5(emailAddress) =>
+  static String m7(emailAddress) =>
       "We’ve sent an email to\n ${emailAddress}\n\nPlease use your phone to click on the activation link!";
 
-  static String m6(minute) => "~${minute} min";
+  static String m8(botName, botSymbol, dateTime) =>
+      "${botName} ${botSymbol} will end at ${dateTime}";
 
-  static String m7(currency) => "Buying Power (${currency})";
+  static String m9(minute) => "~${minute} min";
 
-  static String m8(currency) => "Current Price ${currency}";
+  static String m10(currency) => "Buying Power (${currency})";
 
-  static String m9(bot, startDate, endDate, duration) =>
+  static String m11(currency) => "Current Price ${currency}";
+
+  static String m12(bot, startDate, endDate, duration) =>
       "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
 
-  static String m10(dateTime) => "Expired at ${dateTime}";
+  static String m13(dateTime) => "Expired at ${dateTime}";
 
-  static String m11(dateTime) => "Expired in ${dateTime} days";
+  static String m14(dateTime) => "Expired in ${dateTime} days";
 
-  static String m12(currency) => "Total Botstock Values (${currency})";
+  static String m15(currency) => "Total Botstock Values (${currency})";
 
-  static String m13(currency) => "Withdrawable Balance (${currency})";
+  static String m16(currency) => "Withdrawable Balance (${currency})";
 
-  static String m14(dateTime) =>
+  static String m17(botName, botSymbol, dateTime) =>
+      "${botName} ${botSymbol} will start at ${dateTime}";
+
+  static String m18(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -66,7 +76,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account Settings"),
         "activities": MessageLookupByLibrary.simpleMessage("Activities"),
+        "afterPayDepositHeaderTitle": MessageLookupByLibrary.simpleMessage(
+            "Your investment account will be ready soon!"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
+        "almostFinished":
+            MessageLookupByLibrary.simpleMessage("Almost finished!"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
@@ -75,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Back to account settings"),
         "bankAccountNumber":
             MessageLookupByLibrary.simpleMessage("Bank Account Number"),
+        "beforeDepositHeaderTitle": m0,
+        "beforeKYCHeaderTitle": m1,
         "bestSuitedFor":
             MessageLookupByLibrary.simpleMessage("Best Suited For"),
         "botDuration": MessageLookupByLibrary.simpleMessage("Bot Duration"),
@@ -87,26 +103,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "botTradeBottomSheetAccountNotYetApprovedTitle":
             MessageLookupByLibrary.simpleMessage(
                 "You can trade after your account is approved."),
-        "botTradeBottomSheetAmountMinimum": m0,
+        "botTradeBottomSheetAmountMinimum": m2,
         "botTradeBottomSheetAmountTitle":
             MessageLookupByLibrary.simpleMessage("How much are you investing?"),
-        "botTradeBottomSheetCancelBotStockConfirmationTitle": m1,
+        "botTradeBottomSheetCancelBotStockConfirmationTitle": m3,
         "botTradeBottomSheetEndBotStockConfirmationSubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "The total Botstock value will be returned to your \naccount after the next community order."),
-        "botTradeBottomSheetEndBotStockConfirmationTitle": m2,
+        "botTradeBottomSheetEndBotStockConfirmationTitle": m4,
         "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle":
             MessageLookupByLibrary.simpleMessage("Deposit To Start Trading"),
         "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle":
             MessageLookupByLibrary.simpleMessage(
                 "Your free Botstock has been added to your portfolio!"),
-        "botTradeBottomSheetInsufficientBalanceSubTitle": m3,
+        "botTradeBottomSheetInsufficientBalanceSubTitle": m5,
         "botTradeBottomSheetInsufficientBalanceTitle":
             MessageLookupByLibrary.simpleMessage(
                 "You are running out of money! Fund your account now."),
         "botTradeBottomSheetRolloverConfirmationButton":
             MessageLookupByLibrary.simpleMessage("Confirm Rollover"),
-        "botTradeBottomSheetRolloverConfirmationSubTitle": m4,
+        "botTradeBottomSheetRolloverConfirmationSubTitle": m6,
         "botTradeBottomSheetRolloverConfirmationTitle":
             MessageLookupByLibrary.simpleMessage(
                 "Your Botstock will be extended for \n\n2 Weeks"),
@@ -166,11 +182,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change Bank Account"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "checkBotStockDetails":
+            MessageLookupByLibrary.simpleMessage("Check Botstock Details"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmAndContinue":
             MessageLookupByLibrary.simpleMessage("Confirm & Continue"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
+        "confirmTrade": MessageLookupByLibrary.simpleMessage("Confirm Trade"),
         "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("Continue Account Opening"),
@@ -185,6 +204,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Define Investment Style"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit Amount"),
+        "depositFundToStartInvesting": MessageLookupByLibrary.simpleMessage(
+            "Deposit funds to start investing"),
         "depositRequestSubmittedSubTitleFirstTime":
             MessageLookupByLibrary.simpleMessage(
                 "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved."),
@@ -198,9 +219,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailActivationFailedTitle": MessageLookupByLibrary.simpleMessage(
             "Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!"),
-        "emailActivationSuccessTitle": m5,
+        "emailActivationSuccessTitle": m7,
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
+        "endBotStockAcknowledgement": m8,
+        "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage(
@@ -249,11 +272,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "getTheFirstBotstockForFree": MessageLookupByLibrary.simpleMessage(
             "Get the First Botstock for Free"),
+        "go": MessageLookupByLibrary.simpleMessage("Go AA"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got It"),
+        "greatStart": MessageLookupByLibrary.simpleMessage("Great start!"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Let’s start the training with\nsimple questions!\n\nRemember - to lose patience\nis to lose the battle!"),
         "greetingScreenTitle": MessageLookupByLibrary.simpleMessage(
             "Alright! Are you ready for the FinFit journey? "),
+        "halfWayThere": MessageLookupByLibrary.simpleMessage("Halfway there!"),
         "headquarters": MessageLookupByLibrary.simpleMessage("Headquarters"),
         "howItWorks": MessageLookupByLibrary.simpleMessage("How It Works"),
         "iAmADirector": MessageLookupByLibrary.simpleMessage(
@@ -288,12 +314,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("Manage Your Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
+        "marketPrice": MessageLookupByLibrary.simpleMessage("Market Price"),
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("Milestones"),
-        "min": m6,
+        "min": m9,
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+        "nextStep": MessageLookupByLibrary.simpleMessage("Next step"),
         "no": MessageLookupByLibrary.simpleMessage(" No"),
         "noTransactions":
             MessageLookupByLibrary.simpleMessage("No Transactions"),
@@ -313,6 +341,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "oldPasswordSameWithNewPasswordError":
             MessageLookupByLibrary.simpleMessage(
                 "Your new password cannot be the same as your old password"),
+        "onBoardingCompletionMessage": MessageLookupByLibrary.simpleMessage(
+            "You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days."),
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("Open Investment Account"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
@@ -331,22 +361,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "personalisation":
             MessageLookupByLibrary.simpleMessage("Personalisation"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
-        "portfolioBuyingPower": m7,
+        "portfolioBuyingPower": m10,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’."),
-        "portfolioCurrentPrice": m8,
+        "portfolioCurrentPrice": m11,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("Cancel Botstock"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("End Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("Rollover Botstock"),
-        "portfolioDetailChartCaption": m9,
+        "portfolioDetailChartCaption": m12,
         "portfolioDetailChartEmptyMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Performance data will be available once the Botstock starts"),
-        "portfolioDetailExpiredAt": m10,
-        "portfolioDetailExpiredIn": m11,
+        "portfolioDetailExpiredAt": m13,
+        "portfolioDetailExpiredIn": m14,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("Avg. Loss"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -428,11 +458,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!"),
         "portfolioPopUpRedeemYourBotstockTitle":
             MessageLookupByLibrary.simpleMessage("Redeem Your Free Botstock"),
-        "portfolioTotalBotStock": m12,
+        "portfolioTotalBotStock": m15,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
             MessageLookupByLibrary.simpleMessage("Total Portfolio Value"),
-        "portfolioWithdrawableAmount": m13,
+        "portfolioWithdrawableAmount": m16,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
@@ -448,6 +478,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
         "retakeInvestmentStyle":
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
+        "rolloverBotStockAcknowledgement": m17,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "setUpFinancialProfile":
@@ -463,6 +494,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "startInvesting":
             MessageLookupByLibrary.simpleMessage("Start Investing"),
+        "startInvestingOnMilestone":
+            MessageLookupByLibrary.simpleMessage("Start investing"),
         "startsAt": MessageLookupByLibrary.simpleMessage("Starts at"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
@@ -493,7 +526,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "totalAmount": MessageLookupByLibrary.simpleMessage("Total amount"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("Total P/L is"),
         "trade": MessageLookupByLibrary.simpleMessage("Trade"),
+        "tradeCancelledSubtitle": MessageLookupByLibrary.simpleMessage(
+            "The trade has been cancelled and your investment amount has been returned to your account"),
+        "tradeCancelledTitle":
+            MessageLookupByLibrary.simpleMessage("Trade Cancelled"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("Trade Fee"),
+        "tradeRequestReceived":
+            MessageLookupByLibrary.simpleMessage("Trade Request Received"),
+        "tradeSummary": MessageLookupByLibrary.simpleMessage("Trade Summary"),
         "tradeWithANewBotstock":
             MessageLookupByLibrary.simpleMessage("Trade with a New Botstock"),
         "tradeWithBots":
@@ -549,7 +589,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
-        "yourBankAccountIsUnderReview": m14,
+        "yourBankAccountIsUnderReview": m18,
         "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed"),
         "yourPaymentInformationIsUnderReview": MessageLookupByLibrary.simpleMessage(

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../app/bloc/app_bloc.dart';
 import '../../../../../core/domain/base_response.dart';
-import '../../../../../core/domain/pair.dart';
 import '../../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../../core/presentation/column_text/column_text.dart';
 import '../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
@@ -34,17 +33,11 @@ import '../bloc/portfolio_bloc.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
 part 'widgets/bot_portfolio_detail_header.dart';
-
 part 'widgets/buttons/bot_cancel_button.dart';
-
 part 'widgets/buttons/bot_portfolio_buttons.dart';
-
 part 'widgets/buttons/bot_rollover_button.dart';
-
 part 'widgets/buttons/bot_terminate_button.dart';
-
 part 'widgets/key_info.dart';
-
 part 'widgets/performance.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {

@@ -71,7 +71,7 @@ class _OnBoardingStatusButtonState extends State<OnBoardingStatusButton> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomTextNew(
-                          'NEXT STEP',
+                          S.of(context).nextStep,
                           style: AskLoraTextStyles.subtitleAllCap1.copyWith(
                               color: AskLoraColors.white, letterSpacing: 1),
                         ),
@@ -87,7 +87,7 @@ class _OnBoardingStatusButtonState extends State<OnBoardingStatusButton> {
                     ),
                   ),
                   CustomTextNew(
-                    'GO',
+                    S.of(context).go,
                     style: AskLoraTextStyles.button2
                         .copyWith(color: AskLoraColors.primaryGreen),
                   ),

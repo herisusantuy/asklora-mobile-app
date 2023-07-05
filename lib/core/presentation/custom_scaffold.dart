@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../styles/asklora_colors.dart';
 
 class CustomScaffold extends Scaffold {
