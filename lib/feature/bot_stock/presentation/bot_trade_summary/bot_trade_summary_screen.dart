@@ -58,7 +58,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
         botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
     return BlocProvider(
-      create: (context) => BotStockBloc(
+      create: (_) => BotStockBloc(
           botStockRepository: BotStockRepository(),
           transactionRepository: TransactionRepository()),
       child: BlocListener<BotStockBloc, BotStockState>(
@@ -96,13 +96,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                           botUid: state.createBotOrderResponse.data!.uid,
                           botName: botName,
                           onTapBack: () {
-                            /// TODO
-                            /// onTapBack should go to TabPage.portfolio
-
-                            // ? this function able go to TabScreen, but not direct into TabPage.portfolio
                             TabScreen.openAndRemoveAllRoute(context,
                                 initialTabPage: TabPage.portfolio);
-                            print('back to tab screen');
                           },
                         ),
                       );
