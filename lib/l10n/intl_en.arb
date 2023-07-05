@@ -295,7 +295,6 @@
   "portfolioPopUpFundAccountTitle": "Fund your account",
   "portfolioPopUpFundAccountSubTitle": "Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.",
   "startABotstock": "Start A Botstock",
-
   "portfolioPopUpNoTradingHasStartedTitle": "No trading has started!",
   "portfolioPopUpNoTradingHasStartedtSubTitle": "You can manage all your investments here after you start trading. ",
   "portfolioPopUpPendingReviewTitle": "Your Account is Pending Review",
@@ -389,7 +388,7 @@
   "welcomeScreenThirdBenefit": "Automated trading strategies",
   "withdrawalAmount": "Withdrawal Amount",
   "withdrawalWorkingDays": "Your withdrawal can take up to 2 working days.",
-  "withdrawalRequestSubmittedTitle": "Your Withdrawal request is submitted.",
+  "withdrawalRequestSubmittedTitle": "Your withdrawal request is submitted.",
   "withdrawalRequestSubmittedSubTitle": "You will be informed via email and app notification as soon as the funds are paid to your account.",
   "withdraw": "Withdraw",
   "relearn": "relearn",
@@ -403,5 +402,4 @@
   },
   "viewDepositGuide": "View Deposit Guide",
   "pressBackAgain": "Press back again to exit Asklora"
-
 }

@@ -77,7 +77,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                       child: _textInfo(
                           title: S.of(context).to,
                           subTitle:
-                              '${args.bankAccount.name} (${args.bankAccount.accountNumber})'),
+                              '${args.bankAccount.name} (${_maskAccountNumber(args.bankAccount.accountNumber)})'),
                     ),
                     const SizedBox(
                       height: 21,
@@ -123,6 +123,11 @@ class WithdrawalSummaryScreen extends StatelessWidget {
 
   String get _withdrawalAmount =>
       args.withdrawalAmount.convertToCurrencyDecimal();
+
+  String _maskAccountNumber(String accountNumber) {
+    int numSpace = accountNumber.length - 3;
+    return accountNumber.replaceRange(3, numSpace, '*' * numSpace);
+  }
 
   Widget _bottomButton(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 30),
