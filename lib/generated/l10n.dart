@@ -2994,6 +2994,16 @@ class S {
     );
   }
 
+  /// `You are making great\nprogress, {name}!`
+  String beforeKYCHeaderTitle(String name) {
+    return Intl.message(
+      'You are making great\nprogress, $name!',
+      name: 'beforeKYCHeaderTitle',
+      desc: '',
+      args: [name],
+    );
+  }
+
   /// `{botName} {botSymbol} will end at {dateTime}`
   String endBotStockAcknowledgement(
       String botName, String botSymbol, String dateTime) {
@@ -3002,6 +3012,106 @@ class S {
       name: 'endBotStockAcknowledgement',
       desc: '',
       args: [botName, botSymbol, dateTime],
+    );
+  }
+
+  /// `Just one more step to AI\ngreatness, {name}!`
+  String beforeDepositHeaderTitle(String name) {
+    return Intl.message(
+      'Just one more step to AI\ngreatness, $name!',
+      name: 'beforeDepositHeaderTitle',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Your investment account will be ready soon!`
+  String get afterPayDepositHeaderTitle {
+    return Intl.message(
+      'Your investment account will be ready soon!',
+      name: 'afterPayDepositHeaderTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Great start!`
+  String get greatStart {
+    return Intl.message(
+      'Great start!',
+      name: 'greatStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Halfway there!`
+  String get halfWayThere {
+    return Intl.message(
+      'Halfway there!',
+      name: 'halfWayThere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Almost finished!`
+  String get almostFinished {
+    return Intl.message(
+      'Almost finished!',
+      name: 'almostFinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start investing`
+  String get startInvestingOnMilestone {
+    return Intl.message(
+      'Start investing',
+      name: 'startInvestingOnMilestone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit funds to start investing`
+  String get depositFundToStartInvesting {
+    return Intl.message(
+      'Deposit funds to start investing',
+      name: 'depositFundToStartInvesting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.`
+  String get onBoardingCompletionMessage {
+    return Intl.message(
+      'You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.',
+      name: 'onBoardingCompletionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next step`
+  String get nextStep {
+    return Intl.message(
+      'Next step',
+      name: 'nextStep',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go AA`
+  String get go {
+    return Intl.message(
+      'Go AA',
+      name: 'go',
+      desc: '',
+      args: [],
     );
   }
 }
