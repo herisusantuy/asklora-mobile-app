@@ -41,6 +41,9 @@ class TransactionBalanceResponse extends Equatable {
     this.totalPnLPct,
   );
 
+  static TransactionBalanceResponse get placeholder =>
+      const TransactionBalanceResponse(0, 0, 0, 0, 0, 0, 0, 0, 0);
+
   factory TransactionBalanceResponse.fromJson(Map<String, dynamic> json) =>
       _$TransactionBalanceResponseFromJson(json);
 
