@@ -125,8 +125,9 @@ class WithdrawalSummaryScreen extends StatelessWidget {
       args.withdrawalAmount.convertToCurrencyDecimal();
 
   String _maskAccountNumber(String accountNumber) {
-    int numSpace = accountNumber.length - 3;
-    return accountNumber.replaceRange(3, numSpace, '*' * numSpace);
+    int start = 3;
+    int end = accountNumber.length - 3;
+    return accountNumber.replaceRange(start, end, '*' * (end - start));
   }
 
   Widget _bottomButton(BuildContext context) => Padding(
