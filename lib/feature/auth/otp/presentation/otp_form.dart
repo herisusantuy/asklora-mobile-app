@@ -30,7 +30,6 @@ class OtpForm extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _padding(),
                     const LoraMemojiHeader(
                         text:
                             'Please enter the OTP sent on your registered Phone Number.'),
