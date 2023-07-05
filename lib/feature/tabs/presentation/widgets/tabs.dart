@@ -2,12 +2,13 @@ part of '../tab_screen.dart';
 
 class Tabs extends StatelessWidget {
   final bool canTrade;
+
   const Tabs({required this.canTrade, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
-      return !isKeyboardVisible
+    return KeyboardVisibilityBuilder(
+      builder: (context, isKeyboardVisible) => !isKeyboardVisible
           ? Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: BlocBuilder<TabScreenBloc, TabScreenState>(
@@ -51,8 +52,8 @@ class Tabs extends StatelessWidget {
                 );
               }),
             )
-          : SizedBox();
-    });
+          : const SizedBox.shrink(),
+    );
   }
 
   Widget _tabSvg(
