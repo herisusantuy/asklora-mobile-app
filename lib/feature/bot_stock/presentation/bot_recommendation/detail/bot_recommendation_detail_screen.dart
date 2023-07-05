@@ -20,6 +20,7 @@ import '../../../domain/bot_recommendation_model.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
+
 import '../../bot_trade_summary/bot_trade_summary_screen.dart';
 import '../../widgets/bot_stock_form.dart';
 import 'widgets/bot_recommendation_detail_content.dart';
@@ -39,7 +40,6 @@ class BotRecommendationDetailScreen extends StatelessWidget {
     final BotType botType =
         BotType.findByString(botRecommendationModel.botAppType);
     return BlocProvider(
-      key: GlobalKey(),
       create: (_) {
         BotStockBloc botStockBloc = BotStockBloc(
             botStockRepository: BotStockRepository(),
