@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'tab_screen_event.dart';
 part 'tab_screen_state.dart';
 
-part 'tab_screen_state.dart';
-
 class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   TabScreenBloc({required TabPage initialTabPage})
       : super(TabScreenState(currentTabPage: initialTabPage)) {
