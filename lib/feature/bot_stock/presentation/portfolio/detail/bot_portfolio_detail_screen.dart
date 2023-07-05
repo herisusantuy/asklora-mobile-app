@@ -49,7 +49,7 @@ class BotPortfolioDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => CustomScaffold(
         onTapBack: arguments.onTapBack,
-        enableBackNavigation: arguments.onTapBack == null ? false : true,
+        enableBackNavigation: arguments.onTapBack != null ? true : false,
         body: BlocProvider(
           create: (_) => PortfolioBloc(
               botStockRepository: BotStockRepository(),
@@ -134,12 +134,10 @@ class BotPortfolioDetailArguments {
   final VoidCallback? onTapBack;
   final String botUid;
   final String botName;
-  final bool isFromResultScreen;
 
   const BotPortfolioDetailArguments({
     this.onTapBack,
     required this.botUid,
     required this.botName,
-    this.isFromResultScreen = false,
   });
 }

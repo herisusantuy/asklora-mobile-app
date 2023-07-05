@@ -106,9 +106,10 @@ class TabScreen extends StatelessWidget {
               content: state.response.data != null
                   ? BlocProvider(
                       create: (_) => TabScreenBloc(
-                          initialTabPage: state.response.data!.canTrade
-                              ? TabPage.forYou
-                              : TabPage.home),
+                          initialTabPage: initialTabPage ??
+                              (state.response.data!.canTrade
+                                  ? TabPage.forYou
+                                  : TabPage.home)),
                       child: BlocListener<TabScreenBloc, TabScreenState>(
                         listenWhen: (previous, current) =>
                             previous.tabScreenBackState !=
