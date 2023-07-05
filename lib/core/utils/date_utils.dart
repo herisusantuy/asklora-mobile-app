@@ -9,7 +9,7 @@ String formatDateTimeAsString(dynamic dateTime,
       return DateFormat(dateFormat).format(DateTime.parse(dateTime));
     }
   } catch (e) {
-    return 'Error formatting date';
+    return '-';
   }
 }
 
@@ -23,4 +23,10 @@ DateTime formatDateTimeToLocal(dynamic dateTime,
 DateTime formatDateOnly(dynamic dateTime) {
   DateTime date = DateTime.parse(formatDateTimeAsString(dateTime));
   return DateTime(date.year, date.month, date.day);
+}
+
+String convertDateToEst(String dateTime, {String dateFormat = 'dd/MM/yyyy'}) {
+  DateTime date = DateFormat(dateFormat).parse(DateFormat(dateFormat)
+      .format(DateTime.parse(dateTime).subtract(const Duration(hours: 4))));
+  return formatDateTimeAsString(date, dateFormat: dateFormat);
 }

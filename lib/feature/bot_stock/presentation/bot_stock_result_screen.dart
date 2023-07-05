@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/domain/pair.dart';
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_status_widget.dart';
@@ -9,7 +8,7 @@ import '../../tabs/presentation/tab_screen.dart';
 
 class BotStockResultScreen extends StatelessWidget {
   static const String route = '/bot_stock_result_screen';
-  final Pair<String, String> arguments;
+  final BotStockResultArgument arguments;
 
   const BotStockResultScreen({required this.arguments, Key? key})
       : super(key: key);
@@ -20,22 +19,35 @@ class BotStockResultScreen extends StatelessWidget {
         enableBackNavigation: false,
         body: CustomStretchedLayout(
           content: CustomStatusWidget(
-            title: arguments.left,
+            title: arguments.title,
             statusType: StatusType.success,
-            subTitle: arguments.right,
+            subTitle: arguments.desc,
           ),
           bottomButton: Padding(
             padding: const EdgeInsets.symmetric(vertical: 30.0),
             child: PrimaryButton(
-              label: 'BACK TO HOME',
+              label: arguments.labelBottomButton,
               onTap: () => TabScreen.openAndRemoveAllRoute(context),
             ),
           ),
         ));
   }
 
-  static void open(
-          {required BuildContext context,
-          required Pair<String, String> arguments}) =>
+  static void open({
+    required BuildContext context,
+    required BotStockResultArgument arguments,
+  }) =>
       Navigator.pushNamed(context, route, arguments: arguments);
+}
+
+class BotStockResultArgument {
+  final String title;
+  final String desc;
+  final String labelBottomButton;
+
+  const BotStockResultArgument({
+    required this.title,
+    required this.desc,
+    required this.labelBottomButton,
+  });
 }

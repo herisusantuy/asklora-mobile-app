@@ -45,6 +45,7 @@ class OtpBox extends StatelessWidget {
       animationDuration: const Duration(milliseconds: 200),
       onCompleted: onCompleted,
       onChanged: (value) => onChanged,
+      cursorColor: AskLoraColors.charcoal,
     );
   }
 }

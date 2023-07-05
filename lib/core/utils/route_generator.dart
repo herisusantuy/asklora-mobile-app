@@ -230,7 +230,7 @@ class RouterGenerator {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => BotStockResultScreen(
-            arguments: settings.arguments as Pair<String, String>,
+            arguments: settings.arguments as BotStockResultArgument,
           ),
         );
       case SettingsScreen.route:

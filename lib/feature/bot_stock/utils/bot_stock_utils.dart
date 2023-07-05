@@ -58,23 +58,24 @@ List<BotRecommendationModel> demonstrationBots = [
 
 enum BotType {
   pullUp('Pull Up', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_pull_up',
-      AskLoraColors.lime, AskLoraColors.darkerLime),
+      'UNO', AskLoraColors.lime, AskLoraColors.darkerLime),
   squat('Squat', 'SQUAT', 'Squat', 'icon_bot_badge_pop_up_message_squat',
-      AskLoraColors.purple, AskLoraColors.darkerPurple,
+      'UCDC', AskLoraColors.purple, AskLoraColors.darkerPurple,
       expiredTextColor: AskLoraColors.white),
   plank('Plank', 'PLANK', 'Plank', 'icon_bot_badge_pop_up_message_plank',
-      AskLoraColors.primaryGreen, AskLoraColors.darkerGreen);
+      'CLASSIC', AskLoraColors.primaryGreen, AskLoraColors.darkerGreen);
 
   final String value;
   final String upperCaseName;
   final String name;
   final String botAssetName;
+  final String internalName;
   final Color primaryBgColor;
   final Color secondaryBgColor;
   final Color expiredTextColor;
 
   const BotType(this.value, this.upperCaseName, this.name, this.botAssetName,
-      this.primaryBgColor, this.secondaryBgColor,
+      this.internalName, this.primaryBgColor, this.secondaryBgColor,
       {this.expiredTextColor = AskLoraColors.charcoal});
 
   static BotType findByString(String botAppType) =>
@@ -94,7 +95,7 @@ enum BotStockFilter {
 enum OmsStatus {
   initialized('initialized'),
   indicative('indicative'),
-  rejectedOms('initialized'),
+  rejectedOms('rejected_oms'),
   live('live'),
   waitingTermination('waiting_termination'),
   earlyTerminated('early_terminated'),
@@ -103,6 +104,9 @@ enum OmsStatus {
   knockOut('knock_out');
 
   final String value;
+
+  static OmsStatus findByString(String omsStatus) =>
+      OmsStatus.values.firstWhere((element) => element.value == omsStatus);
 
   const OmsStatus(this.value);
 }
@@ -127,7 +131,7 @@ enum BotStatus {
     AskLoraColors.primaryGreen,
   ),
   canceled(
-    'Cancelled',
+    'Canceled',
     [
       OmsStatus.rejectedOms,
     ],
@@ -164,6 +168,7 @@ enum BotStatus {
         .firstWhereOrNull((element) => element.value == omsStatusString);
     BotStatus? botStatus = BotStatus.values.firstWhereOrNull(
         (element) => element.omsStatusCollection.contains(omsStatus));
+
     if (botStatus == BotStatus.live &&
         expireDate != null &&
         DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {

@@ -35,7 +35,6 @@
     }
   },
   "emailActivationFailedTitle": "Sorry！你嘅請求已經逾時。\n請重新開通帳戶。",
-
   "estStopLossPercent": "預計止損 %",
   "estMaxLossPercent": "預計最大損失%",
   "estTakeProfitPercent": "預計止賺%",
@@ -154,7 +153,14 @@
   "botTradeBottomSheetEndBotStockConfirmationSubTitle": " Botstock 的總價值會自動轉至你的賬戶。",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "免費 Botstock 已成功加至\n你嘅投資組合！",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "存入資金正式交易",
-  "botTradeBottomSheetCancelBotStockConfirmationTitle": "投資額及交易費用 (HKD1,500) 會自動轉至你嘅賬戶。",
+  "botTradeBottomSheetCancelBotStockConfirmationTitle": "投資額及交易費用 (HKD{amount}) 會自動轉至你嘅賬戶。",
+  "@botTradeBottomSheetCancelBotStockConfirmationTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "howItWorks": "如何運作",
   "marketCap": "市值",
   "passwordChangeSuccess": "Password Change Success",
@@ -353,21 +359,82 @@
   },
   "viewDepositGuide": "查看入金提示",
   "pressBackAgain": "再按一次登出Asklora",
-  "hereYouCanFind" : "你可以係度搵到 ",
-  "botStocksDetails" : "Botstock 嘅詳情同預計回報。 ",
-  "thisInteractiveGraph" : "你可以係下面見到Botstock最近",
-  "twoWeekPerformance" : "兩個星期",
-  "toGiveYou" : "嘅表現，希望幫到你理解Botstock係點樣交易！",
-  "ifYouveGot" : "如果你有",
-  "anyQuestion" : "任何",
-  "aboutYourInvestment" : "關於投資嘅問題，可以點擊此處 ",
-  "personalAIAssistant" : "問你嘅AI助手Asklora! ",
-  "reviewYourTradeSummary" : "查看你嘅交易摘要，點擊 ",
-  "confirmTrade" : "“確認買入” ",
-  "toExecuteIt" : "就可以立即執行指示！",
-  "simplyTypeAQuestion" : "Simply type a question and tap the ",
-  "sendIcon" : "send icon ",
-  "toStartAConversation" : "to start a conversation. Swipe down ",
-  "topBar" : "top bar ",
-  "toDismissAsklora" : "to dismiss Asklora. "
+  "reviewYourTradeSummary": "查看你嘅交易摘要，點擊 ",
+  "toExecuteIt": "就可以立即執行指示！",
+  "hereYouCanFind": "你可以係度搵到 ",
+  "botStocksDetails": "Botstock 嘅詳情同預計回報。 ",
+  "thisInteractiveGraph": "你可以係下面見到Botstock最近",
+  "twoWeekPerformance": "兩個星期",
+  "toGiveYou": "嘅表現，希望幫到你理解Botstock係點樣交易！",
+  "ifYouveGot": "如果你有",
+  "anyQuestion": "任何",
+  "aboutYourInvestment": "關於投資嘅問題，可以點擊此處 ",
+  "personalAIAssistant": "問你嘅AI助手Asklora! ",
+  "simplyTypeAQuestion": "Simply type a question and tap the ",
+  "sendIcon": "send icon ",
+  "toStartAConversation": "to start a conversation. Swipe down ",
+  "topBar": "top bar ",
+  "toDismissAsklora": "to dismiss Asklora. ",
+  "tradeSummary": "交易摘要",
+  "marketPrice": "市場價格",
+  "endDate": "結束日期",
+  "confirmTrade": "確認買入",
+  "checkBotStockDetails": "查看 Botstock 資訊",
+  "tradeRequestReceived": "已收到交易指令",
+  "tradeCancelledTitle": "交易已取消",
+  "buttonBackToHome": "返回主頁",
+  "tradeCancelledSubtitle": "交易已取消，你的投資金額已轉至你嘅賬戶。",
+  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} 將於 {dateTime} 開始",
+  "@rolloverBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
+  "beforeKYCHeaderTitle": "進度好好吖,\n{name}！",
+  "@beforeKYCHeaderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "endBotStockAcknowledgement": "{botName} {botSymbol} 將會在 {dateTime} 開始",
+  "@endBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
+  "beforeDepositHeaderTitle": "離AI投資之道\n又近左一步，{name}！",
+  "@beforeDepositHeaderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "afterPayDepositHeaderTitle": "投資賬戶\n即將 Ready！",
+  "greatStart": "開始投資",
+  "halfWayThere": "進展順利",
+  "almostFinished": "馬上就好",
+  "startInvestingOnMilestone": "即將進入投資狀態！",
+  "depositFundToStartInvesting": "存入資金開始投資",
+  "onBoardingCompletionMessage": "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。",
+  "nextStep": "下一步",
+  "go": "繼續"
 }

@@ -18,15 +18,15 @@ abstract class Conversation extends Equatable {
 class Lora extends Conversation {
   final String response;
 
-  @JsonKey(name: 'session_id')
-  final String sessionId;
+  @JsonKey(name: 'request_id')
+  final String? requestId;
   @JsonKey(name: 'type')
-  final String respType;
+  final String? respType;
 
   @JsonKey(name: 'new_session')
   final bool newSession;
 
-  Lora(this.response, this.sessionId, this.respType, this.newSession);
+  Lora(this.response, this.requestId, this.respType, this.newSession);
 
   @override
   ConversationType type() => ConversationType.lora;
@@ -36,7 +36,7 @@ class Lora extends Conversation {
   Map<String, dynamic> toJson() => _$LoraToJson(this);
 
   @override
-  List<Object?> get props => [response, sessionId, respType, newSession];
+  List<Object?> get props => [response, requestId, respType, newSession];
 
   static Lora get defaultMessage => Lora(
       '👋Hi! I’m Lora. Let me know if you have any questions or requests on stocks investments.',

@@ -9,11 +9,12 @@ import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
-import '../../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../../core/repository/transaction_repository.dart';
+import '../../../../../core/repository/tutorial_repository.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
+import '../../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../domain/bot_recommendation_model.dart';
 import '../../../repository/bot_stock_repository.dart';
@@ -39,43 +40,48 @@ class BotRecommendationDetailScreen extends StatelessWidget {
         BotType.findByString(botRecommendationModel.botAppType);
     return CustomScaffold(
       enableBackNavigation: false,
-      body: BlocProvider(
-        create: (_) {
-          BotStockBloc botStockBloc = BotStockBloc(
-              botStockRepository: BotStockRepository(),
-              transactionRepository: TransactionRepository());
-          _fetchBotDetail(botStockBloc);
-          return botStockBloc;
-        },
-        child: BlocConsumer<BotStockBloc, BotStockState>(
-          listenWhen: (previous, current) =>
-              previous.botDetailResponse.state !=
-              current.botDetailResponse.state,
-          listener: (context, state) {
-            CustomLoadingOverlay.of(context)
-                .show(state.botDetailResponse.state);
-          },
-          buildWhen: (previous, current) =>
-              previous.botDetailResponse.state !=
-              current.botDetailResponse.state,
-          builder: (context, state) => RefreshIndicator(
-            onRefresh: () async =>
-                _fetchBotDetail(context.read<BotStockBloc>()),
-            child: BlocConsumer<TutorialBloc, TutorialState>(
+      body: BlocBuilder<BotStockBloc, BotStockState>(
+        buildWhen: (previous, current) =>
+            previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
+        builder: (context, state) {
+          return BlocProvider(
+            key: UniqueKey(),
+            create: (_) {
+              BotStockBloc botStockBloc = BotStockBloc(
+                  botStockRepository: BotStockRepository(),
+                  transactionRepository: TransactionRepository(),
+                  tutorialRepository: TutorialRepository())
+                ..add(InitBotDetailsTutorial());
+              _fetchBotDetail(botStockBloc);
+              return botStockBloc;
+            },
+            child: BlocConsumer<BotStockBloc, BotStockState>(
               listenWhen: (previous, current) =>
+                  previous.botDetailResponse.state !=
+                      current.botDetailResponse.state ||
                   previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
-              listener: (context, tutorialState) {
-                if (tutorialState.isBotDetailsTutorial) {
-                  ShowCaseWidget.of(context).startShowCase([
-                    TutorialJourney.botDetails,
-                    TutorialJourney.botChart,
-                    TutorialJourney.chatLoraTab,
-                    TutorialJourney.sendQuestionButton,
-                  ]);
+              listener: (context, state) {
+                CustomLoadingOverlay.of(context)
+                    .show(state.botDetailResponse.state);
+                if (state.botDetailResponse.state == ResponseState.success) {
+                  if (state.isBotDetailsTutorial) {
+                    ShowCaseWidget.of(context).startShowCase([
+                      TutorialJourney.botDetails,
+                      TutorialJourney.botChart,
+                      TutorialJourney.chatLoraTab,
+                      TutorialJourney.sendQuestionButton,
+                    ]);
+                  }
                 }
               },
-              builder: (context, tutorialState) {
-                return CustomLayoutWithBlurPopUp(
+              buildWhen: (previous, current) =>
+                  previous.botDetailResponse.state !=
+                      current.botDetailResponse.state ||
+                  previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
+              builder: (context, state) => RefreshIndicator(
+                onRefresh: () async =>
+                    _fetchBotDetail(context.read<BotStockBloc>()),
+                child: CustomLayoutWithBlurPopUp(
                   loraPopUpMessageModel: LoraPopUpMessageModel(
                     title: S.of(context).errorGettingInformationTitle,
                     subTitle: S
@@ -98,7 +104,6 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                       botRecommendationModel: botRecommendationModel,
                       botType: botType,
                       botDetailModel: state.botDetailResponse.data,
-                      isTutorial: tutorialState.isBotDetailsTutorial,
                     ),
                     bottomButton: Padding(
                       padding: AppValues.screenHorizontalPadding
@@ -132,11 +137,11 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -149,7 +154,11 @@ class BotRecommendationDetailScreen extends StatelessWidget {
   }
 
   static void open(
-          {required BuildContext context,
-          required BotRecommendationModel botRecommendationModel}) =>
-      Navigator.pushNamed(context, route, arguments: botRecommendationModel);
+      {required BuildContext context,
+      required BotRecommendationModel botRecommendationModel}) {
+    Navigator.pushNamed(context, route, arguments: botRecommendationModel)
+        .then((value) {
+      context.read<TabScreenBloc>().add(TabChanged(TabPage.forYou.setData()));
+    });
+  }
 }

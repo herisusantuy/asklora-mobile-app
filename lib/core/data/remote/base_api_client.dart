@@ -17,8 +17,10 @@ class BaseApiClient {
   }
 
   Future<Response> post(
-          {required String endpoint, required String payload}) async =>
-      _dio.post(endpoint, data: payload);
+          {required String endpoint,
+          required String payload,
+          Map<String, dynamic>? queryParameters}) async =>
+      _dio.post(endpoint, data: payload, queryParameters: queryParameters);
 
   Future<Response> get(
           {required String endpoint,

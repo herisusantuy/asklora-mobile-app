@@ -6,15 +6,9 @@ part 'bot_order_response.g.dart';
 
 @JsonSerializable()
 class BotOrderResponse {
-  @JsonKey(name: 'bot_order')
-  final String botOrder;
-  @JsonKey(name: 'bot_action')
-  final String? botAction;
+  final String detail;
 
-  const BotOrderResponse({
-    required this.botOrder,
-    this.botAction,
-  });
+  const BotOrderResponse(this.detail);
 
   factory BotOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$BotOrderResponseFromJson(json);
@@ -24,16 +18,18 @@ class BotOrderResponse {
 
 @JsonSerializable()
 class TerminateOrderResponse {
+  final String detail;
   @JsonKey(name: 'optimal_time')
   final String optimalTime;
 
-  TerminateOrderResponse(this.optimalTime);
+  TerminateOrderResponse(this.detail, this.optimalTime);
 
   factory TerminateOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$TerminateOrderResponseFromJson(json);
 
-  String get optimalTimeFormatted =>
-      formatDateTimeAsString(optimalTime, dateFormat: 'yyyy-MM-dd H:m:s');
+  String get optimalTimeFormatted {
+    return '${convertDateToEst(optimalTime, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
+  }
 
   Map<String, dynamic> toJson() => _$TerminateOrderResponseToJson(this);
 }
@@ -43,8 +39,10 @@ class RolloverOrderResponse extends BotOrderResponse {
   @JsonKey(name: 'new_expire_date')
   final String newExpireDate;
 
-  RolloverOrderResponse(this.newExpireDate,
-      {required super.botOrder, super.botAction});
+  RolloverOrderResponse(
+    super.detail,
+    this.newExpireDate,
+  );
 
   factory RolloverOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$RolloverOrderResponseFromJson(json);

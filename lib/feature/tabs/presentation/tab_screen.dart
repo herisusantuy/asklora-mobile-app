@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../../app/bloc/app_bloc.dart';
@@ -11,7 +12,6 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
-import '../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/repository/tutorial_repository.dart';
@@ -40,7 +40,6 @@ import '../../tabs/home/home_screen_form.dart';
 import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';
-
 part 'widgets/tabs.dart';
 
 class TabScreen extends StatelessWidget {
@@ -67,8 +66,9 @@ class TabScreen extends StatelessWidget {
               ///fetch portfolio when current UserJourney already passed freeBotStock
               if (UserJourney.compareUserJourney(
                   context: context, target: UserJourney.freeBotStock)) {
-                portfolioBloc.add(const FetchActiveOrders());
-                portfolioBloc.add(FetchBalance());
+                portfolioBloc
+                  ..add(FetchBalance())
+                  ..add(const FetchActiveOrders());
               }
               return portfolioBloc;
             },
@@ -81,7 +81,8 @@ class TabScreen extends StatelessWidget {
             create: (_) {
               BotStockBloc botStockBloc = BotStockBloc(
                   botStockRepository: BotStockRepository(),
-                  transactionRepository: TransactionRepository());
+                  transactionRepository: TransactionRepository(),
+                  tutorialRepository: TutorialRepository());
               botStockBloc.add(FetchBotRecommendation());
               return botStockBloc;
             },
@@ -97,11 +98,6 @@ class TabScreen extends StatelessWidget {
                   sharedPreference: SharedPreference(),
                   ppiResponseRepository: PpiResponseRepository(),
                   jsonCacheSharedPreferences: JsonCacheSharedPreferences())),
-          BlocProvider(
-            create: (_) =>
-                TutorialBloc(tutorialRepository: TutorialRepository())
-                  ..add(InitTutorial()),
-          ),
         ],
         child: CustomScaffold(
           enableBackNavigation: false,
@@ -122,6 +118,10 @@ class TabScreen extends StatelessWidget {
                       ),
                       child: ShowCaseWidget(
                         disableBarrierInteraction: true,
+                        disableMovingAnimation: true,
+                        showCaseViewScrollPosition:
+                            ShowCaseViewScrollPosition.scrollToTop,
+                        blurValue: 2.5,
                         builder: Builder(builder: (context) {
                           return BlocListener<TabScreenBloc, TabScreenState>(
                             listenWhen: (previous, current) =>

@@ -11,6 +11,7 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/extensions.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/values/app_values.dart';
 import '../../../bot_stock/presentation/bot_performance/bot_performance_chart.dart';

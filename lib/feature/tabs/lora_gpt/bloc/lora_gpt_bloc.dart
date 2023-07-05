@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/base_response.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
+import '../../bloc/tab_screen_bloc.dart';
 import '../domain/conversation.dart';
+import '../domain/portfolio_details_request.dart';
+import '../domain/portfolio_query_request.dart';
 import '../domain/query_request.dart';
 import '../repository/lora_gpt_repository.dart';
 
@@ -25,21 +28,25 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
     on<OnResetSession>(_onResetSession);
     on<OnFinishTyping>(_onFinishTyping);
     on<ShowOverLayScreen>(_onShowOverlayWidget);
+    on<StorePortfolioBotStocks>(_onActiveBotResponse);
+    on<StorePortfolioDetails>(_onStoreTotalPnl);
+    on<StoreTabPageState>(_onStoreTabPage);
   }
 
   final LoraGptRepository _loraGptRepository;
   final SharedPreference _sharedPreference;
-  late final String userName;
 
   void _onScreenLaunch(
       OnScreenLaunch onEditQuery, Emitter<LoraGptState> emit) async {
-    userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
+    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
+    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+
     emit(state.copyWith(
-      status: ResponseState.success,
-      conversations: [Lora.defaultMessage],
-      sessionId: '',
-      userName: userName,
-    ));
+        status: ResponseState.success,
+        conversations: [Lora.defaultMessage],
+        sessionId: '',
+        userName: userName,
+        userId: askloraId.toString()));
   }
 
   void _onEditQuery(OnEditQuery onEditQuery, Emitter<LoraGptState> emit) =>
@@ -48,20 +55,41 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
   void _onSearchQuery(
       OnSearchQuery onSearchQuery, Emitter<LoraGptState> emit) async {
-    final query = state.query;
     final tempList = List<Conversation>.of(state.conversations);
     tempList.add(Me(state.query));
     tempList.add(Loading());
 
+    final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
+    final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
+    final query = state.query;
+
     emit(state.copyWith(
         status: ResponseState.loading,
         conversations: tempList,
-        query: '',
         userName: userName,
+        userId: askloraId.toString(),
+        query: '',
         isTyping: true));
 
-    final response = await _loraGptRepository
-        .searchQuery(QueryRequest(input: query, sessionId: state.sessionId));
+    var response = BaseResponse.error();
+
+    final subPage = state.tabPage.getArguments;
+
+    if (subPage.path.isNotEmpty &&
+        subPage.path == SubTabPage.portfolioBotStockDetails.value) {
+      response = await _loraGptRepository.portfolioDetails(
+          params: state.getPortfolioDetailsRequest(
+              query: query,
+              botType: subPage.arguments['botType'],
+              ticker: subPage.arguments['symbol']));
+    } else if (state.tabPage == TabPage.portfolio) {
+      response = await _loraGptRepository.portfolio(
+          params: state.getPortfolioRequest(query: query),
+          data: state.botstocks);
+    } else {
+      response = await _loraGptRepository.general(
+          params: state.getGeneralChatRequest(query: query));
+    }
 
     if (response.state == ResponseState.success) {
       tempList.removeLast();
@@ -70,14 +98,16 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(state.copyWith(
           status: ResponseState.success,
           conversations: tempList,
-          sessionId: response.data?.sessionId,
+          query: '',
+          sessionId: response.data?.requestId,
           isTyping: true));
     } else {
       tempList.removeLast();
       emit(state.copyWith(
           status: ResponseState.error,
+          query: '',
           conversations: tempList,
-          sessionId: response.data?.sessionId,
+          sessionId: response.data?.requestId,
           isTyping: false));
     }
   }
@@ -98,4 +128,18 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
           ShowOverLayScreen onShowOverLayScreen, Emitter<LoraGptState> emit) =>
       emit(state.copyWith(
           shouldShowOverlay: onShowOverLayScreen.shouldShowOverlayScreen));
+
+  void _onActiveBotResponse(
+          StorePortfolioBotStocks event, Emitter<LoraGptState> emit) =>
+      emit(state.copyWith(
+          botstocks: event.botstocks, status: ResponseState.unknown));
+
+  void _onStoreTotalPnl(
+          StorePortfolioDetails event, Emitter<LoraGptState> emit) =>
+      emit(state.copyWith(
+          totalPnl: event.totalPortfolioPnl, status: ResponseState.unknown));
+
+  void _onStoreTabPage(StoreTabPageState event, Emitter<LoraGptState> emit) =>
+      emit(state.copyWith(
+          tabPage: event.tabPage, status: ResponseState.unknown));
 }

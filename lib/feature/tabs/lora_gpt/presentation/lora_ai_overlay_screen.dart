@@ -33,7 +33,7 @@ class LoraAiOverlayScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 cursorColor: Colors.white,
                 style: AskLoraTextStyles.body1
-                    .copyWith(color: AskLoraColors.white.withAlpha(100)),
+                    .copyWith(color: AskLoraColors.white),
                 keyboardType: TextInputType.text,
                 onFieldSubmitted: (str) =>
                     context.read<LoraGptBloc>().add(OnEditQuery(str)),
@@ -63,7 +63,7 @@ class LoraAiOverlayScreen extends StatelessWidget {
                   onToolTipClick: () {
                     ShowCaseWidget.of(context).dismiss();
                     context
-                        .read<TutorialBloc>()
+                        .read<BotStockBloc>()
                         .add(BotDetailsTutorialFinished());
                   },
                   overlayOpacity: 0,

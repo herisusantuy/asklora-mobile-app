@@ -14,6 +14,10 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   }
 
   _onTabChanged(TabChanged event, Emitter<TabScreenState> emit) {
+    if (state.currentTabPage != event.tabPage) {
+      //Remove the data when tab change.
+      state.currentTabPage.setData();
+    }
     emit(state.copyWith(currentTabPage: event.tabPage, aiPageSelected: false));
   }
 

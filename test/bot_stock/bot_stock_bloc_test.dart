@@ -4,6 +4,7 @@ import 'package:asklora_mobile_app/core/domain/bot/bot_info.dart';
 import 'package:asklora_mobile_app/core/domain/bot/stock_info.dart';
 import 'package:asklora_mobile_app/core/domain/transaction/transaction_ledger_balance_response.dart';
 import 'package:asklora_mobile_app/core/repository/transaction_repository.dart';
+import 'package:asklora_mobile_app/core/repository/tutorial_repository.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/bloc/bot_stock_bloc.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_detail_model.dart';
 import 'package:asklora_mobile_app/feature/bot_stock/domain/bot_recommendation_model.dart';
@@ -19,10 +20,12 @@ import 'bot_stock_bloc_test.mocks.dart';
 
 @GenerateMocks([BotStockRepository])
 @GenerateMocks([TransactionRepository])
+@GenerateMocks([TutorialRepository])
 void main() async {
   group('Bot Stock Bloc Tests', () {
     late MockBotStockRepository botStockRepository;
     late MockTransactionRepository transactionRepository;
+    late MockTutorialRepository tutorialRepository;
     late BotStockBloc botStockBloc;
 
     final BaseResponse<List<BotRecommendationModel>> botStockResponse =
@@ -83,19 +86,25 @@ void main() async {
     final BaseResponse<BotRecommendationDetailModel> botDetailErrorResponse =
         BaseResponse.error();
 
+    final bool isBotTutorialStarted = false;
+
     setUpAll(() async {
       botStockRepository = MockBotStockRepository();
       transactionRepository = MockTransactionRepository();
+      tutorialRepository = MockTutorialRepository();
     });
 
     setUp(() async {
       botStockBloc = BotStockBloc(
-          botStockRepository: botStockRepository,
-          transactionRepository: transactionRepository);
+        botStockRepository: botStockRepository,
+        transactionRepository: transactionRepository,
+        tutorialRepository: tutorialRepository,
+      );
     });
 
     test('Bot Stock Bloc init state response should be default one', () {
-      expect(botStockBloc.state, const BotStockState());
+      expect(
+          botStockBloc.state, const BotStockState(isBotDetailsTutorial: false));
     });
 
     blocTest<BotStockBloc, BotStockState>(
@@ -104,6 +113,8 @@ void main() async {
         build: () {
           when(botStockRepository.fetchBotRecommendation())
               .thenAnswer((_) => Future.value(botStockResponse));
+          when(tutorialRepository.isBotDetailsTutorial())
+              .thenAnswer((_) => Future.value(isBotTutorialStarted));
           return botStockBloc;
         },
         act: (bloc) => bloc.add(FetchBotRecommendation()),
@@ -202,10 +213,13 @@ void main() async {
         act: (bloc) => bloc.add(const FetchBotDetail(
             ticker: 'AAPL', botId: 'abc', isFreeBot: false)),
         expect: () => {
-              BotStockState(botDetailResponse: BaseResponse.loading()),
+              BotStockState(
+                  botDetailResponse: BaseResponse.loading(),
+                  isBotDetailsTutorial: false),
               BotStockState(
                   botDetailResponse: BaseResponse.error(
-                      message: 'Error when fetching balance'))
+                      message: 'Error when fetching balance'),
+                  isBotDetailsTutorial: false)
             });
 
     blocTest<BotStockBloc, BotStockState>(
