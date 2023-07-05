@@ -52,6 +52,8 @@ class FetchBotDetail extends BotStockEvent {
 
 class InitBotDetailsTutorial extends BotStockEvent {}
 
+class InitBotTradeSummaryTutorial extends BotStockEvent {}
+
 class BotDetailsTutorialFinished extends BotStockEvent {}
 
 class BotTradeSummaryTutorialFinished extends BotStockEvent {}

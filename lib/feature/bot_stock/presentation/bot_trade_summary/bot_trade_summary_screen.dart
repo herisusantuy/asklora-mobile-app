@@ -14,7 +14,6 @@ import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
-import '../../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/repository/tutorial_repository.dart';
@@ -61,204 +60,194 @@ class BotTradeSummaryScreen extends StatelessWidget {
     BotRecommendationDetailModel botDetailModel =
         botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => BotStockBloc(
-            botStockRepository: BotStockRepository(),
-            transactionRepository: TransactionRepository(),
-            tutorialRepository: TutorialRepository(),
-          ),
-        ),
-        BlocProvider(
-          create: (context) =>
-              TutorialBloc(tutorialRepository: TutorialRepository())
-                ..add(InitBotTradeSummaryTutorial()),
-        ),
-      ],
-      child: BlocListener<BotStockBloc, BotStockState>(
-        listenWhen: (previous, current) =>
-            previous.createBotOrderResponse != current.createBotOrderResponse,
-        listener: (context, state) {
-          CustomLoadingOverlay.of(context)
-              .show(state.createBotOrderResponse.state);
+    return BlocProvider(
+      create: (_) => BotStockBloc(
+        botStockRepository: BotStockRepository(),
+        transactionRepository: TransactionRepository(),
+        tutorialRepository: TutorialRepository(),
+      )..add(InitBotTradeSummaryTutorial()),
+      child: BlocBuilder<BotStockBloc, BotStockState>(
+        buildWhen: (previous, current) =>
+            previous.createBotOrderResponse != current.createBotOrderResponse ||
+            previous.isBotTradeSummaryTutorial !=
+                current.isBotTradeSummaryTutorial,
+        builder: (context, state) {
+          return ShowCaseWidget(
+            disableBarrierInteraction: true,
+            disableMovingAnimation: true,
+            showCaseViewScrollPosition: ShowCaseViewScrollPosition.scrollToTop,
+            blurValue: 2.5,
+            builder: Builder(builder: (context) {
+              return BlocListener<BotStockBloc, BotStockState>(
+                listenWhen: (previous, current) =>
+                    previous.isBotTradeSummaryTutorial !=
+                        current.isBotTradeSummaryTutorial ||
+                    previous.createBotOrderResponse !=
+                        current.createBotOrderResponse,
+                listener: (context, state) {
+                  if (state.isBotTradeSummaryTutorial) {
+                    Future.delayed(
+                        const Duration(milliseconds: 300),
+                        () => ShowCaseWidget.of(context)
+                            .startShowCase([TutorialJourney.summaryTrade]));
+                  }
+                  CustomLoadingOverlay.of(context)
+                      .show(state.createBotOrderResponse.state);
 
-          if (state.createBotOrderResponse.state == ResponseState.success) {
-            if (!UserJourney.compareUserJourney(
-                context: context, target: UserJourney.deposit)) {
-              context.read<AppBloc>().add(
-                    const SaveUserJourney(UserJourney.deposit),
-                  );
-            }
-
-            if (isFreeBotTrade) {
-              TabScreen.openAndRemoveAllRoute(context,
-                  initialTabPage: TabPage.portfolio);
-              BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
-            } else {
-              BotStockResultScreen.open(
-                  context: context,
-                  arguments: BotStockResultArgument(
-                    title: S.of(context).tradeRequestReceived,
-                    desc: _tradeRequestSuccessMessage(context),
-                    labelBottomButton: S.of(context).checkBotStockDetails,
-                  ));
-            }
-          } else if (state.createBotOrderResponse.state ==
-              ResponseState.suspended) {
-            SuspendedAccountScreen.open(context);
-          } else if (state.createBotOrderResponse.state ==
-              ResponseState.error) {
-            if (state.createBotOrderResponse.errorCode == 403) {
-              BotStockBottomSheet.notYetRegisteredToBroker(context);
-
-              ///TODO : INSUFFICIENT BALANCE ERROR IS SAME 403 THEREFORE WILL BE IMPLEMENTED LATER WHEN GOT NEW ENUM STATUS_CODE
-              //BotStockBottomSheet.insufficientBalance(context);
-            } else {
-              BotStockBottomSheet.generalError(context);
-            }
-          }
-        },
-        child: BlocBuilder<TutorialBloc, TutorialState>(
-          builder: (context, state) {
-            return ShowCaseWidget(
-              disableBarrierInteraction: true,
-              disableMovingAnimation: true,
-              showCaseViewScrollPosition:
-                  ShowCaseViewScrollPosition.scrollToTop,
-              blurValue: 2.5,
-              builder: Builder(builder: (context) {
-                return BlocListener<TutorialBloc, TutorialState>(
-                  listenWhen: (previous, current) =>
-                      previous.isTradeSummaryTutorial !=
-                      current.isTradeSummaryTutorial,
-                  listener: (context, tutorialState) {
-                    if (tutorialState.isTradeSummaryTutorial) {
-                      Future.delayed(
-                          const Duration(milliseconds: 300),
-                          () => ShowCaseWidget.of(context)
-                              .startShowCase([TutorialJourney.summaryTrade]));
+                  if (state.createBotOrderResponse.state ==
+                      ResponseState.success) {
+                    if (!UserJourney.compareUserJourney(
+                        context: context, target: UserJourney.deposit)) {
+                      context.read<AppBloc>().add(
+                            const SaveUserJourney(UserJourney.deposit),
+                          );
                     }
-                  },
-                  child: BotStockForm(
-                      useHeader: true,
-                      title:
-                          '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.tickerSymbol}',
-                      content: Column(
-                        children: [
-                          CustomShowcaseView(
-                            tutorialKey: TutorialJourney.summaryTrade,
-                            tooltipWidget: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text:
-                                          S.of(context).reviewYourTradeSummary,
-                                      style: AskLoraTextStyles.body1),
-                                  TextSpan(
-                                      text: S.of(context).confirmTrade,
-                                      style: AskLoraTextStyles.subtitle2),
-                                  TextSpan(
-                                      text: S.of(context).toExecuteIt,
-                                      style: AskLoraTextStyles.body1)
-                                ],
-                              ),
-                            ),
-                            onToolTipClick: () =>
-                                _onTradeSummaryTutorialFinished(context),
-                            child: RoundColoredBox(
-                              content: Column(
-                                children: [
-                                  PairColumnTextWithTooltip(
-                                    leftTitle:
-                                        '${S.of(context).investmentAmount} (HKD)',
-                                    rightTitle:
-                                        '${S.of(context).botManagementFee} (HKD)',
-                                    leftSubTitle: botTradeSummaryModel.amount
-                                        .convertToCurrencyDecimal(),
-                                    rightSubTitle: S.of(context).free,
-                                    rightTooltipText:
-                                        'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
-                                  ),
-                                  _spaceBetweenInfo,
-                                  ..._detailedInformation(context),
-                                  _spaceBetweenInfo,
-                                  PairColumnTextWithTooltip(
-                                      leftTitle:
-                                          '${S.of(context).marketPrice} (USD)',
-                                      leftSubTitle:
-                                          '${botTradeSummaryModel.botDetailModel.price}',
-                                      rightTitle:
-                                          S.of(context).investmentPeriod,
-                                      rightSubTitle:
-                                          botDetailModel.botDuration),
-                                  _spaceBetweenInfo,
-                                  PairColumnTextWithTooltip(
-                                      leftTitle: S.of(context).startDate,
-                                      rightTitle: S.of(context).endDate,
-                                      leftSubTitle: botTradeSummaryModel
-                                          .botDetailModel.formattedStartDate,
-                                      rightSubTitle: botTradeSummaryModel
-                                          .botDetailModel.formattedEstEndDate),
-                                ],
-                              ),
-                              title: isFreeBotTrade
-                                  ? 'Free Botstock Trade Summary'
-                                  : S.of(context).tradeSummary,
+
+                    if (isFreeBotTrade) {
+                      TabScreen.openAndRemoveAllRoute(context,
+                          initialTabPage: TabPage.portfolio);
+                      BotStockBottomSheet.freeBotStockSuccessfullyAdded(
+                          context);
+                    } else {
+                      BotStockResultScreen.open(
+                          context: context,
+                          arguments: BotStockResultArgument(
+                            title: S.of(context).tradeRequestReceived,
+                            desc: _tradeRequestSuccessMessage(context),
+                            labelBottomButton:
+                                S.of(context).checkBotStockDetails,
+                          ));
+                    }
+                  } else if (state.createBotOrderResponse.state ==
+                      ResponseState.suspended) {
+                    SuspendedAccountScreen.open(context);
+                  } else if (state.createBotOrderResponse.state ==
+                      ResponseState.error) {
+                    if (state.createBotOrderResponse.errorCode == 403) {
+                      BotStockBottomSheet.notYetRegisteredToBroker(context);
+
+                      ///TODO : INSUFFICIENT BALANCE ERROR IS SAME 403 THEREFORE WILL BE IMPLEMENTED LATER WHEN GOT NEW ENUM STATUS_CODE
+                      //BotStockBottomSheet.insufficientBalance(context);
+                    } else {
+                      BotStockBottomSheet.generalError(context);
+                    }
+                  }
+                },
+                child: BotStockForm(
+                    useHeader: true,
+                    title:
+                        '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.tickerSymbol}',
+                    content: Column(
+                      children: [
+                        CustomShowcaseView(
+                          tutorialKey: TutorialJourney.summaryTrade,
+                          tooltipWidget: Text.rich(
+                            TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: S.of(context).reviewYourTradeSummary,
+                                    style: AskLoraTextStyles.body1),
+                                TextSpan(
+                                    text: S.of(context).confirmTrade,
+                                    style: AskLoraTextStyles.subtitle2),
+                                TextSpan(
+                                    text: S.of(context).toExecuteIt,
+                                    style: AskLoraTextStyles.body1)
+                              ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 19,
-                          ),
-                          if (isFreeBotTrade)
-                            RoundColoredBox(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 13),
-                              backgroundColor: AskLoraColors.lightGreen,
-                              content: Row(
-                                children: [
-                                  const LoraMemojiWidget(
-                                    loraMemojiType: LoraMemojiType.lora1,
-                                    height: 70,
-                                    width: 70,
-                                  ),
-                                  const SizedBox(
-                                    width: 12,
-                                  ),
-                                  Expanded(
-                                    child: CustomTextNew(
-                                      'You will have more flexibility in the next real trade. Come on, this is FREE!',
-                                      style: AskLoraTextStyles.body1.copyWith(
-                                          color: AskLoraColors.charcoal),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
-                      bottomButton: Builder(
-                          builder: (context) => Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 24, bottom: 30),
-                                child: PrimaryButton(
-                                  label: S.of(context).confirmTrade,
-                                  onTap: () {
-                                    context.read<BotStockBloc>().add(
-                                        CreateBotOrder(
-                                            botRecommendationModel:
-                                                botTradeSummaryModel
-                                                    .botRecommendationModel,
-                                            tradeBotStockAmount:
-                                                botTradeSummaryModel.amount));
-                                  },
+                          onToolTipClick: () =>
+                              _onTradeSummaryTutorialFinished(context),
+                          child: RoundColoredBox(
+                            content: Column(
+                              children: [
+                                PairColumnTextWithTooltip(
+                                  leftTitle:
+                                      '${S.of(context).investmentAmount} (HKD)',
+                                  rightTitle:
+                                      '${S.of(context).botManagementFee} (HKD)',
+                                  leftSubTitle: botTradeSummaryModel.amount
+                                      .convertToCurrencyDecimal(),
+                                  rightSubTitle: S.of(context).free,
+                                  rightTooltipText:
+                                      'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
                                 ),
-                              ))),
-                );
-              }),
-            );
-          },
-        ),
+                                _spaceBetweenInfo,
+                                ..._detailedInformation(context),
+                                _spaceBetweenInfo,
+                                PairColumnTextWithTooltip(
+                                    leftTitle:
+                                        '${S.of(context).marketPrice} (USD)',
+                                    leftSubTitle:
+                                        '${botTradeSummaryModel.botDetailModel.price}',
+                                    rightTitle: S.of(context).investmentPeriod,
+                                    rightSubTitle: botDetailModel.botDuration),
+                                _spaceBetweenInfo,
+                                PairColumnTextWithTooltip(
+                                    leftTitle: S.of(context).startDate,
+                                    rightTitle: S.of(context).endDate,
+                                    leftSubTitle: botTradeSummaryModel
+                                        .botDetailModel.formattedStartDate,
+                                    rightSubTitle: botTradeSummaryModel
+                                        .botDetailModel.formattedEstEndDate),
+                              ],
+                            ),
+                            title: isFreeBotTrade
+                                ? 'Free Botstock Trade Summary'
+                                : S.of(context).tradeSummary,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 19,
+                        ),
+                        if (isFreeBotTrade)
+                          RoundColoredBox(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 13),
+                            backgroundColor: AskLoraColors.lightGreen,
+                            content: Row(
+                              children: [
+                                const LoraMemojiWidget(
+                                  loraMemojiType: LoraMemojiType.lora1,
+                                  height: 70,
+                                  width: 70,
+                                ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                Expanded(
+                                  child: CustomTextNew(
+                                    'You will have more flexibility in the next real trade. Come on, this is FREE!',
+                                    style: AskLoraTextStyles.body1.copyWith(
+                                        color: AskLoraColors.charcoal),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                    bottomButton: Builder(
+                        builder: (context) => Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 24, bottom: 30),
+                              child: PrimaryButton(
+                                label: S.of(context).confirmTrade,
+                                onTap: () {
+                                  context.read<BotStockBloc>().add(
+                                      CreateBotOrder(
+                                          botRecommendationModel:
+                                              botTradeSummaryModel
+                                                  .botRecommendationModel,
+                                          tradeBotStockAmount:
+                                              botTradeSummaryModel.amount));
+                                },
+                              ),
+                            ))),
+              );
+            }),
+          );
+        },
       ),
     );
   }
@@ -293,6 +282,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
   void _onTradeSummaryTutorialFinished(BuildContext context) {
     ShowCaseWidget.of(context).dismiss();
-    context.read<TutorialBloc>().add(TradeSummaryTutorialFinished());
+    // context.read<TutorialBloc>().add(TradeSummaryTutorialFinished());
+    context.read<BotStockBloc>().add(BotTradeSummaryTutorialFinished());
   }
 }
