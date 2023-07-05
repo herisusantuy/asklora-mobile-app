@@ -61,20 +61,7 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
                                   AsyncSnapshot<String> snapshot) {
                                 if (snapshot.hasData) {
                                   return CustomTextNew(
-                                    state.userJourney == UserJourney.deposit
-                                        ? S
-                                            .of(context)
-                                            .beforeDepositHeaderTitle(
-                                                snapshot.data!)
-                                        : state.userJourney ==
-                                                UserJourney.learnBotPlank
-                                            ? S
-                                                .of(context)
-                                                .afterPayDepositHeaderTitle
-                                            : S
-                                                .of(context)
-                                                .beforeKYCHeaderTitle(
-                                                    snapshot.data!),
+                                    _getHeaderTitle(context, snapshot.data!),
                                     style: AskLoraTextStyles.h3.copyWith(
                                       color: AskLoraColors.white,
                                     ),
@@ -100,6 +87,18 @@ class CustomSliverPersistentHeader extends SliverPersistentHeaderDelegate {
 
   Future<String> _getName() async =>
       await SharedPreference().readData(sfKeyPpiName) ?? '';
+
+  String _getHeaderTitle(BuildContext context, String name) {
+    if (UserJourney.compareUserJourney(
+        context: context, target: UserJourney.learnBotPlank)) {
+      return S.of(context).afterPayDepositHeaderTitle;
+    } else if (UserJourney.compareUserJourney(
+        context: context, target: UserJourney.deposit)) {
+      return S.of(context).beforeDepositHeaderTitle(name);
+    } else {
+      return S.of(context).beforeKYCHeaderTitle(name);
+    }
+  }
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
