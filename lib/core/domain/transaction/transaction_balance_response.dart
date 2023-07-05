@@ -80,7 +80,7 @@ class TransactionBalanceResponse extends Equatable {
       : '0.00';
 
   String get totalPnLStr =>
-      totalPnLPct != 0 ? '${totalPnLPct.convertToCurrencyDecimal()}%' : '0.00';
+      '${totalPnLPct != 0 ? totalPnLPct.convertToCurrencyDecimal() : '0.00'}%';
 
   Color get totalPnLColor => totalPnLPct == 0
       ? AskLoraColors.charcoal
