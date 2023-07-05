@@ -1,7 +1,7 @@
 part of '../portfolio_screen.dart';
 
 class PortfolioBalance extends StatelessWidget {
-  final TransactionBalanceResponse? data;
+  final TransactionBalanceResponse data;
   final CurrencyType currencyType;
 
   const PortfolioBalance(
@@ -35,14 +35,14 @@ class PortfolioBalance extends StatelessWidget {
       );
 
   Widget _totalPortfolioBalance(BuildContext context, CurrencyType currencyType,
-      TransactionBalanceResponse? data) {
+      TransactionBalanceResponse data) {
     return Column(
       children: [
         CustomTextNew(
           style: AskLoraTextStyles.h2,
           currencyType == CurrencyType.hkd
-              ? data?.totalPortfolioHkdStr ?? '0.0'
-              : data?.totalPortfolioUsdStr ?? '0.0',
+              ? data.totalPortfolioHkdStr
+              : data.totalPortfolioUsdStr,
         ),
         CustomTextNew(
           S.of(context).portfolioTotalValue,
@@ -89,7 +89,7 @@ class PortfolioBalance extends StatelessWidget {
       );
 
   Widget _portfolioBalanceDetail(BuildContext context,
-          CurrencyType currencyType, TransactionBalanceResponse? data) =>
+          CurrencyType currencyType, TransactionBalanceResponse data) =>
       RoundColoredBox(
         radius: 30,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
@@ -99,12 +99,12 @@ class PortfolioBalance extends StatelessWidget {
               columnTextCrossAxisAlignment: CrossAxisAlignment.center,
               leftTitle: S.of(context).portfolioBuyingPower(currencyType.name),
               leftSubTitle: currencyType == CurrencyType.hkd
-                  ? data?.buyingPowerHkdStr ?? '/'
-                  : data?.buyingPowerUsdStr ?? '/',
+                  ? data.buyingPowerHkdStr
+                  : data.buyingPowerUsdStr,
               leftTooltipText: S.of(context).portfolioBuyingPowerToolTip,
               rightTitle: S.of(context).portfolioTotalPL,
-              rightSubTitle: data?.totalPnLStr ?? '/',
-              rightSubTitleColor: data?.totalPnLColor,
+              rightSubTitle: data.totalPnLStr,
+              rightSubTitleColor: data.totalPnLColor,
               spaceWidth: 6,
             ),
             const SizedBox(
@@ -115,13 +115,13 @@ class PortfolioBalance extends StatelessWidget {
               leftTitle:
                   S.of(context).portfolioWithdrawableAmount(currencyType.name),
               leftSubTitle: currencyType == CurrencyType.hkd
-                  ? data?.withdrawableBalanceHkdStr ?? '/'
-                  : data?.withdrawableBalanceUsdStr ?? '/',
+                  ? data.withdrawableBalanceHkdStr
+                  : data.withdrawableBalanceUsdStr,
               rightTitle:
                   S.of(context).portfolioTotalBotStock(currencyType.name),
               rightSubTitle: currencyType == CurrencyType.hkd
-                  ? data?.totalBotstockHkdStr ?? '/'
-                  : data?.totalBotstockUsdStr ?? '/',
+                  ? data.totalBotstockHkdStr
+                  : data.totalBotstockUsdStr,
               spaceWidth: 6,
             ),
           ],

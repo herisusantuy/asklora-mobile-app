@@ -101,7 +101,8 @@ class PortfolioScreen extends StatelessWidget {
                 children: [
                   _header(context),
                   PortfolioBalance(
-                    data: state.transactionBalanceResponse.data,
+                    data: state.transactionBalanceResponse.data ??
+                        TransactionBalanceResponse.placeholder,
                     currencyType: state.currency,
                   ),
                   const SizedBox(
