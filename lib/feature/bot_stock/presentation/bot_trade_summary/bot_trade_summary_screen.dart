@@ -57,14 +57,10 @@ class BotTradeSummaryScreen extends StatelessWidget {
     BotRecommendationDetailModel botDetailModel =
         botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => BotStockBloc(
-              botStockRepository: BotStockRepository(),
-              transactionRepository: TransactionRepository()),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => BotStockBloc(
+          botStockRepository: BotStockRepository(),
+          transactionRepository: TransactionRepository()),
       child: BlocListener<BotStockBloc, BotStockState>(
         listenWhen: (previous, current) =>
             previous.createBotOrderResponse != current.createBotOrderResponse,
