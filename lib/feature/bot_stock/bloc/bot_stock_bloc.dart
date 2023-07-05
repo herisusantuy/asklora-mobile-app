@@ -71,15 +71,12 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     emit(state.copyWith(botDetailResponse: BaseResponse.loading()));
     final data =
         await _botStockRepository.fetchBotDetail(event.ticker, event.botId);
-    // final bool isBotDetailsTutorial =
-    //     await _tutorialRepository.isBotDetailsTutorial();
     if (!event.isFreeBot) {
       final balanceResponse = await _transactionRepository.fetchLedgerBalance();
       if (balanceResponse.state == ResponseState.success) {
         emit(state.copyWith(
           buyingPower: balanceResponse.data!.buyingPower,
           botDetailResponse: data,
-          // isBotDetailsTutorial: isBotDetailsTutorial,
         ));
       } else {
         emit(state.copyWith(
@@ -89,7 +86,6 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     } else {
       emit(state.copyWith(
         botDetailResponse: data,
-        // isBotDetailsTutorial: isBotDetailsTutorial,
       ));
     }
   }
@@ -99,7 +95,8 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     final bool isBotDetailsTutorial =
         await _tutorialRepository.isBotDetailsTutorial();
     emit(state.copyWith(isBotDetailsTutorial: isBotDetailsTutorial));
-    print('started bot details tutorial: ${state.isBotDetailsTutorial}');
+    print(
+        'bot detail tutorial started : value of tutorial state ==> ${state.isBotDetailsTutorial}');
   }
 
   _onTradeBotStockAmountChanged(
@@ -113,6 +110,7 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     final bool isBotDetailsTutorialFinished =
         await _tutorialRepository.isBotDetailsTutorial();
     emit(state.copyWith(isBotDetailsTutorial: isBotDetailsTutorialFinished));
-    print('finished bot details tutorial: ${state.isBotDetailsTutorial}');
+    print(
+        'bot detail tutorial finished : value of tutorial state ==> ${state.isBotDetailsTutorial}');
   }
 }

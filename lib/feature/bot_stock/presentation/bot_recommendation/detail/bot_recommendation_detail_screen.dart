@@ -38,110 +38,99 @@ class BotRecommendationDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final BotType botType =
         BotType.findByString(botRecommendationModel.botAppType);
-    return CustomScaffold(
-      enableBackNavigation: false,
-      body: BlocBuilder<BotStockBloc, BotStockState>(
-        buildWhen: (previous, current) =>
+    return BlocProvider(
+      key: GlobalKey(),
+      create: (_) {
+        BotStockBloc botStockBloc = BotStockBloc(
+            botStockRepository: BotStockRepository(),
+            transactionRepository: TransactionRepository(),
+            tutorialRepository: TutorialRepository())
+          ..add(InitBotDetailsTutorial());
+        _fetchBotDetail(botStockBloc);
+        return botStockBloc;
+      },
+      child: BlocConsumer<BotStockBloc, BotStockState>(
+        listenWhen: (previous, current) =>
+            previous.botDetailResponse.state !=
+                current.botDetailResponse.state ||
             previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
-        builder: (context, state) {
-          return BlocProvider(
-            key: UniqueKey(),
-            create: (_) {
-              BotStockBloc botStockBloc = BotStockBloc(
-                  botStockRepository: BotStockRepository(),
-                  transactionRepository: TransactionRepository(),
-                  tutorialRepository: TutorialRepository())
-                ..add(InitBotDetailsTutorial());
-              _fetchBotDetail(botStockBloc);
-              return botStockBloc;
-            },
-            child: BlocConsumer<BotStockBloc, BotStockState>(
-              listenWhen: (previous, current) =>
-                  previous.botDetailResponse.state !=
-                      current.botDetailResponse.state ||
-                  previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
-              listener: (context, state) {
-                CustomLoadingOverlay.of(context)
-                    .show(state.botDetailResponse.state);
-                if (state.botDetailResponse.state == ResponseState.success) {
-                  if (state.isBotDetailsTutorial) {
-                    ShowCaseWidget.of(context).startShowCase([
-                      TutorialJourney.botDetails,
-                      TutorialJourney.botChart,
-                      TutorialJourney.chatLoraTab,
-                      TutorialJourney.sendQuestionButton,
-                    ]);
-                  }
-                }
-              },
-              buildWhen: (previous, current) =>
-                  previous.botDetailResponse.state !=
-                      current.botDetailResponse.state ||
-                  previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
-              builder: (context, state) => RefreshIndicator(
-                onRefresh: () async =>
+        listener: (context, state) {
+          CustomLoadingOverlay.of(context).show(state.botDetailResponse.state);
+          if (state.botDetailResponse.state == ResponseState.success) {
+            if (state.isBotDetailsTutorial) {
+              ShowCaseWidget.of(context).startShowCase([
+                TutorialJourney.botDetails,
+                TutorialJourney.botChart,
+                TutorialJourney.chatLoraTab,
+                TutorialJourney.sendQuestionButton,
+              ]);
+            }
+          }
+        },
+        buildWhen: (previous, current) =>
+            previous.botDetailResponse.state !=
+                current.botDetailResponse.state ||
+            previous.isBotDetailsTutorial != current.isBotDetailsTutorial,
+        builder: (context, state) => CustomScaffold(
+          enableBackNavigation: false,
+          body: RefreshIndicator(
+            onRefresh: () async =>
+                _fetchBotDetail(context.read<BotStockBloc>()),
+            child: CustomLayoutWithBlurPopUp(
+              loraPopUpMessageModel: LoraPopUpMessageModel(
+                title: S.of(context).errorGettingInformationTitle,
+                subTitle: S
+                    .of(context)
+                    .errorGettingInformationInvestmentDetailSubTitle,
+                primaryButtonLabel: S.of(context).buttonReloadPage,
+                secondaryButtonLabel: S.of(context).buttonCancel,
+                onSecondaryButtonTap: () => Navigator.pop(context),
+                onPrimaryButtonTap: () =>
                     _fetchBotDetail(context.read<BotStockBloc>()),
-                child: CustomLayoutWithBlurPopUp(
-                  loraPopUpMessageModel: LoraPopUpMessageModel(
-                    title: S.of(context).errorGettingInformationTitle,
-                    subTitle: S
-                        .of(context)
-                        .errorGettingInformationInvestmentDetailSubTitle,
-                    primaryButtonLabel: S.of(context).buttonReloadPage,
-                    secondaryButtonLabel: S.of(context).buttonCancel,
-                    onSecondaryButtonTap: () => Navigator.pop(context),
-                    onPrimaryButtonTap: () =>
-                        _fetchBotDetail(context.read<BotStockBloc>()),
-                  ),
-                  showPopUp:
-                      state.botDetailResponse.state == ResponseState.error,
-                  content: BotStockForm(
-                    useHeader: true,
-                    title:
-                        '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
-                    padding: EdgeInsets.zero,
-                    content: BotRecommendationDetailContent(
-                      botRecommendationModel: botRecommendationModel,
-                      botType: botType,
-                      botDetailModel: state.botDetailResponse.data,
-                    ),
-                    bottomButton: Padding(
-                      padding: AppValues.screenHorizontalPadding
-                          .copyWith(top: 24, bottom: 30),
-                      child: PrimaryButton(
-                        disabled: state.botDetailResponse.state ==
-                                ResponseState.loading ||
-                            state.botDetailResponse.state ==
-                                ResponseState.error,
-                        label: S.of(context).trade,
-                        onTap: () {
-                          if (botRecommendationModel.freeBot) {
-                            BotTradeSummaryScreen.open(
-                                context: context,
-                                botTradeSummaryModel: BotTradeSummaryModel(
-                                    botType: botType,
-                                    botRecommendationModel:
-                                        botRecommendationModel,
-                                    botDetailModel:
-                                        state.botDetailResponse.data!,
-                                    amount: 500));
-                          } else {
-                            BotStockBottomSheet.amountBotStockForm(
-                                context,
-                                botType,
-                                botRecommendationModel,
-                                state.botDetailResponse.data!,
-                                state.buyingPower);
-                          }
-                        },
-                      ),
-                    ),
+              ),
+              showPopUp: state.botDetailResponse.state == ResponseState.error,
+              content: BotStockForm(
+                useHeader: true,
+                title:
+                    '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
+                padding: EdgeInsets.zero,
+                content: BotRecommendationDetailContent(
+                  botRecommendationModel: botRecommendationModel,
+                  botType: botType,
+                  botDetailModel: state.botDetailResponse.data,
+                ),
+                bottomButton: Padding(
+                  padding: AppValues.screenHorizontalPadding
+                      .copyWith(top: 24, bottom: 30),
+                  child: PrimaryButton(
+                    disabled: state.botDetailResponse.state ==
+                            ResponseState.loading ||
+                        state.botDetailResponse.state == ResponseState.error,
+                    label: S.of(context).trade,
+                    onTap: () {
+                      if (botRecommendationModel.freeBot) {
+                        BotTradeSummaryScreen.open(
+                            context: context,
+                            botTradeSummaryModel: BotTradeSummaryModel(
+                                botType: botType,
+                                botRecommendationModel: botRecommendationModel,
+                                botDetailModel: state.botDetailResponse.data!,
+                                amount: 500));
+                      } else {
+                        BotStockBottomSheet.amountBotStockForm(
+                            context,
+                            botType,
+                            botRecommendationModel,
+                            state.botDetailResponse.data!,
+                            state.buyingPower);
+                      }
+                    },
                   ),
                 ),
               ),
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
