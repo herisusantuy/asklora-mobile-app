@@ -402,10 +402,46 @@
   },
   "viewDepositGuide": "View Deposit Guide",
   "pressBackAgain": "Press back again to exit Asklora",
+  "tradeSummary": "Trade Summary",
+  "marketPrice": "Market Price",
+  "endDate": "End Date",
+  "confirmTrade": "Confirm Trade",
+  "checkBotStockDetails": "Check Botstock Details",
+  "tradeRequestReceived": "Trade Request Received",
+  "tradeCancelledTitle": "Trade Cancelled",
+  "tradeCancelledSubtitle": "The trade has been cancelled and your investment amount has been returned to your account",
+  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} will start at {dateTime}",
+  "@rolloverBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
   "beforeKYCHeaderTitle": "You are making great\nprogress, {name}!",
   "@beforeKYCHeaderTitle": {
     "placeholders": {
       "name": {
+        "type": "String"
+      }
+    }
+  },
+  "endBotStockAcknowledgement": "{botName} {botSymbol} will end at {dateTime}",
+  "@endBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
         "type": "String"
       }
     }
@@ -426,5 +462,5 @@
   "depositFundToStartInvesting": "Deposit funds to start investing",
   "onBoardingCompletionMessage": "You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.",
   "nextStep": "Next step",
-  "go": "Go"
+  "go": "Go AA"
 }

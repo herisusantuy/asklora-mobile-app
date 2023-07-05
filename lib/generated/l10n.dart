@@ -2903,6 +2903,97 @@ class S {
     );
   }
 
+  /// `Trade Summary`
+  String get tradeSummary {
+    return Intl.message(
+      'Trade Summary',
+      name: 'tradeSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Market Price`
+  String get marketPrice {
+    return Intl.message(
+      'Market Price',
+      name: 'marketPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get endDate {
+    return Intl.message(
+      'End Date',
+      name: 'endDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Trade`
+  String get confirmTrade {
+    return Intl.message(
+      'Confirm Trade',
+      name: 'confirmTrade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Botstock Details`
+  String get checkBotStockDetails {
+    return Intl.message(
+      'Check Botstock Details',
+      name: 'checkBotStockDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade Request Received`
+  String get tradeRequestReceived {
+    return Intl.message(
+      'Trade Request Received',
+      name: 'tradeRequestReceived',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade Cancelled`
+  String get tradeCancelledTitle {
+    return Intl.message(
+      'Trade Cancelled',
+      name: 'tradeCancelledTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The trade has been cancelled and your investment amount has been returned to your account`
+  String get tradeCancelledSubtitle {
+    return Intl.message(
+      'The trade has been cancelled and your investment amount has been returned to your account',
+      name: 'tradeCancelledSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{botName} {botSymbol} will start at {dateTime}`
+  String rolloverBotStockAcknowledgement(
+      String botName, String botSymbol, String dateTime) {
+    return Intl.message(
+      '$botName $botSymbol will start at $dateTime',
+      name: 'rolloverBotStockAcknowledgement',
+      desc: '',
+      args: [botName, botSymbol, dateTime],
+    );
+  }
+
   /// `You are making great\nprogress, {name}!`
   String beforeKYCHeaderTitle(String name) {
     return Intl.message(
@@ -2910,6 +3001,17 @@ class S {
       name: 'beforeKYCHeaderTitle',
       desc: '',
       args: [name],
+    );
+  }
+
+  /// `{botName} {botSymbol} will end at {dateTime}`
+  String endBotStockAcknowledgement(
+      String botName, String botSymbol, String dateTime) {
+    return Intl.message(
+      '$botName $botSymbol will end at $dateTime',
+      name: 'endBotStockAcknowledgement',
+      desc: '',
+      args: [botName, botSymbol, dateTime],
     );
   }
 
@@ -3003,10 +3105,10 @@ class S {
     );
   }
 
-  /// `Go`
+  /// `Go AA`
   String get go {
     return Intl.message(
-      'Go',
+      'Go AA',
       name: 'go',
       desc: '',
       args: [],

@@ -7,7 +7,7 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../app/bloc/app_bloc.dart';
-import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
@@ -25,7 +25,6 @@ import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_stock_result_screen.dart';
 import '../widgets/bot_stock_form.dart';
-import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 
 class BotTradeSummaryModel {
   final double amount;
@@ -83,8 +82,11 @@ class BotTradeSummaryScreen extends StatelessWidget {
             } else {
               BotStockResultScreen.open(
                   context: context,
-                  arguments: Pair(
-                      'Trade Request Received', _tradeRequestSuccessMessage()));
+                  arguments: BotStockResultArgument(
+                    title: S.of(context).tradeRequestReceived,
+                    desc: _tradeRequestSuccessMessage(context),
+                    labelBottomButton: S.of(context).checkBotStockDetails,
+                  ));
             }
           } else if (state.createBotOrderResponse.state ==
               ResponseState.suspended) {
@@ -111,8 +113,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   content: Column(
                     children: [
                       PairColumnTextWithTooltip(
-                        leftTitle: 'Investment Amount (HKD)',
-                        rightTitle: 'Bot Management Fee (HKD)',
+                        leftTitle: '${S.of(context).investmentAmount} (HKD)',
+                        rightTitle: '${S.of(context).botManagementFee} (HKD)',
                         leftSubTitle: botTradeSummaryModel.amount
                             .convertToCurrencyDecimal(),
                         rightSubTitle: S.of(context).free,
@@ -123,24 +125,24 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       ..._detailedInformation(context),
                       _spaceBetweenInfo,
                       PairColumnTextWithTooltip(
-                          leftTitle: 'Market Price (USD)',
+                          leftTitle: '${S.of(context).marketPrice} (USD)',
                           leftSubTitle:
                               '${botTradeSummaryModel.botDetailModel.price}',
-                          rightTitle: 'Investment Period',
+                          rightTitle: S.of(context).investmentPeriod,
                           rightSubTitle: botDetailModel.botDuration),
                       _spaceBetweenInfo,
                       PairColumnTextWithTooltip(
-                          leftTitle: 'Start Time',
-                          rightTitle: 'End Time',
+                          leftTitle: S.of(context).startDate,
+                          rightTitle: S.of(context).endDate,
                           leftSubTitle: botTradeSummaryModel
                               .botDetailModel.formattedStartDate,
-                          rightSubTitle:
-                              botTradeSummaryModel.botDetailModel.estEndDate),
+                          rightSubTitle: botTradeSummaryModel
+                              .botDetailModel.formattedEstEndDate),
                     ],
                   ),
                   title: isFreeBotTrade
                       ? 'Free Botstock Trade Summary'
-                      : 'Trade Summary',
+                      : S.of(context).tradeSummary,
                 ),
                 const SizedBox(
                   height: 19,
@@ -176,13 +178,14 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 builder: (context) => Padding(
                       padding: const EdgeInsets.only(top: 24, bottom: 30),
                       child: PrimaryButton(
-                        label: S.of(context).confirm,
-                        onTap: () => context.read<BotStockBloc>().add(
-                            CreateBotOrder(
-                                botRecommendationModel:
-                                    botTradeSummaryModel.botRecommendationModel,
-                                tradeBotStockAmount:
-                                    botTradeSummaryModel.amount)),
+                        label: S.of(context).confirmTrade,
+                        onTap: () {
+                          context.read<BotStockBloc>().add(CreateBotOrder(
+                              botRecommendationModel:
+                                  botTradeSummaryModel.botRecommendationModel,
+                              tradeBotStockAmount:
+                                  botTradeSummaryModel.amount));
+                        },
                       ),
                     ))),
       ),
@@ -192,20 +195,24 @@ class BotTradeSummaryScreen extends StatelessWidget {
   List<Widget> _detailedInformation(BuildContext context) => [
         PairColumnTextWithTooltip(
           leftTitle: botTradeSummaryModel.botType == BotType.plank
-              ? 'Estimated Stop Loss %'
-              : 'Estimated Max Loss %',
+              ? S.of(context).estStopLossPercent
+              : S.of(context).estMaxLossPercent,
           leftSubTitle: botTradeSummaryModel.botDetailModel.estStopLossPct
               .convertToCurrencyDecimal(),
           rightTitle: botTradeSummaryModel.botType == BotType.plank
-              ? 'Estimated Take Profit %'
-              : 'Estimated Max Profit %',
+              ? S.of(context).estTakeProfitPercent
+              : S.of(context).estMaxProfitPercent,
           rightSubTitle: botTradeSummaryModel.botDetailModel.estTakeProfitPct
               .convertToCurrencyDecimal(),
         ),
       ];
 
-  String _tradeRequestSuccessMessage() =>
-      '${botTradeSummaryModel.botDetailModel.botInfo.botName} ${botTradeSummaryModel.botDetailModel.stockInfo.symbol} will be started at ${botTradeSummaryModel.botDetailModel.startDate}.';
+  String _tradeRequestSuccessMessage(BuildContext context) =>
+      S.of(context).rolloverBotStockAcknowledgement(
+          botTradeSummaryModel.botDetailModel.botInfo.botName,
+          botTradeSummaryModel.botDetailModel.stockInfo.symbol,
+          botTradeSummaryModel
+              .botDetailModel.formattedAcknowledgementEstEndDate);
 
   static void open(
           {required BuildContext context,

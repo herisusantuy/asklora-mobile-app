@@ -18,14 +18,17 @@ class BotCancelButton extends StatelessWidget {
           if (state.cancelBotStockResponse.state == ResponseState.success) {
             BotStockResultScreen.open(
                 context: context,
-                arguments: const Pair('Trade Canceled',
-                    'The trade has been cancelled and your investment amount has been returned to your account'));
+                arguments: BotStockResultArgument(
+                  title: S.of(context).tradeCancelledTitle,
+                  desc: S.of(context).tradeCancelledSubtitle,
+                  labelBottomButton: S.of(context).buttonBackToHome,
+                ));
           } else if (state.cancelBotStockResponse.state ==
               ResponseState.suspended) {
             SuspendedAccountScreen.open(context);
           } else if (state.cancelBotStockResponse.state ==
               ResponseState.error) {
-            ///TODO : Later (after error code implemented) to handle error
+            ///TODO : Later (after error code implemented) to handle erro
             ///when the status have changed to live before hitting cancel
             ///currently is having status code 400
             CustomInAppNotification.show(

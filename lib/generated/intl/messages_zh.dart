@@ -38,24 +38,30 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(emailAddress) => "已發送電子郵件至\n ${emailAddress}\n\n請用手機點擊開通連結！";
 
-  static String m8(minute) => " ~${minute} 分鐘";
+  static String m8(botName, botSymbol, dateTime) =>
+      "${botName} ${botSymbol} 將會在 ${dateTime} 開始";
 
-  static String m9(currency) => "購買力 (${currency})";
+  static String m9(minute) => " ~${minute} 分鐘";
 
-  static String m10(currency) => "當前價格 ${currency}";
+  static String m10(currency) => "購買力 (${currency})";
 
-  static String m11(bot, startDate, endDate, duration) =>
+  static String m11(currency) => "當前價格 ${currency}";
+
+  static String m12(bot, startDate, endDate, duration) =>
       "${bot} 於過去 ${duration} 星期之表現  (${startDate} - ${endDate})";
 
-  static String m12(dateTime) => "到期日期 ${dateTime}";
+  static String m13(dateTime) => "到期日期 ${dateTime}";
 
-  static String m13(dateTime) => "${dateTime}日後到期";
+  static String m14(dateTime) => "${dateTime}日後到期";
 
-  static String m14(currency) => "Botstock 總價值 (${currency})";
+  static String m15(currency) => "Botstock 總價值 (${currency})";
 
-  static String m15(currency) => "可提取金額 (${currency})";
+  static String m16(currency) => "可提取金額 (${currency})";
 
-  static String m16(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m17(botName, botSymbol, dateTime) =>
+      "${botName} ${botSymbol} 將於 ${dateTime} 開始";
+
+  static String m18(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -109,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你將延長 Botstock 投資期，\n 並需繳付額外延長費用。"),
         "buttonAlreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("已有帳戶"),
+        "buttonBackToHome": MessageLookupByLibrary.simpleMessage("返回主頁"),
         "buttonCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
         "buttonCancelTrade": MessageLookupByLibrary.simpleMessage("取消交易"),
         "buttonConfirm": MessageLookupByLibrary.simpleMessage("確定"),
@@ -137,7 +144,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "carouselIntro4": MessageLookupByLibrary.simpleMessage("個人化體驗，\n前所未見"),
         "changeBankAccount": MessageLookupByLibrary.simpleMessage("更改銀行戶口"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "checkBotStockDetails":
+            MessageLookupByLibrary.simpleMessage("查看 Botstock 資訊"),
         "confirmNewPassword": MessageLookupByLibrary.simpleMessage("確認新密碼"),
+        "confirmTrade": MessageLookupByLibrary.simpleMessage("確認買入"),
         "contactUs": MessageLookupByLibrary.simpleMessage("聯絡我們"),
         "continueAccountOpening":
             MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
@@ -167,6 +177,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailActivationSuccessTitle": m7,
         "emailAddress": MessageLookupByLibrary.simpleMessage("電郵地址"),
         "employees": MessageLookupByLibrary.simpleMessage("員工人數"),
+        "endBotStockAcknowledgement": m8,
+        "endDate": MessageLookupByLibrary.simpleMessage("結束日期"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("到期價值"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage("載入你投資細節時出咗少少問題，Reload一次試下？"),
@@ -224,10 +236,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("管理 Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("市值"),
+        "marketPrice": MessageLookupByLibrary.simpleMessage("市場價格"),
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("目標"),
-        "min": m8,
+        "min": m9,
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "nextStep": MessageLookupByLibrary.simpleMessage("下一步"),
@@ -257,19 +270,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
-        "portfolioBuyingPower": m9,
+        "portfolioBuyingPower": m10,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 "),
-        "portfolioCurrentPrice": m10,
+        "portfolioCurrentPrice": m11,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("取消BOTSTOCK"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("取消Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("續期Botstock"),
-        "portfolioDetailChartCaption": m11,
-        "portfolioDetailExpiredAt": m12,
-        "portfolioDetailExpiredIn": m13,
+        "portfolioDetailChartCaption": m12,
+        "portfolioDetailExpiredAt": m13,
+        "portfolioDetailExpiredIn": m14,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("平均虧損"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -335,10 +348,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("尚未開始任何交易!"),
         "portfolioPopUpNoTradingHasStartedtSubTitle":
             MessageLookupByLibrary.simpleMessage(" 開始交易後你就可以一次過管理所有投資。"),
-        "portfolioTotalBotStock": m14,
+        "portfolioTotalBotStock": m15,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("總盈虧"),
         "portfolioTotalValue": MessageLookupByLibrary.simpleMessage("總價值 "),
-        "portfolioWithdrawableAmount": m15,
+        "portfolioWithdrawableAmount": m16,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("你的Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage("再按一次登出Asklora"),
@@ -347,6 +360,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "rolloverBotStockAcknowledgement": m17,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
@@ -379,7 +393,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lora開始Botstocks交易"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("總金額"),
         "totalPnlIs": MessageLookupByLibrary.simpleMessage("總盈虧"),
+        "tradeCancelledSubtitle":
+            MessageLookupByLibrary.simpleMessage("交易已取消，你的投資金額已轉至你嘅賬戶。"),
+        "tradeCancelledTitle": MessageLookupByLibrary.simpleMessage("交易已取消"),
         "tradeFee": MessageLookupByLibrary.simpleMessage("交易費用"),
+        "tradeRequestReceived": MessageLookupByLibrary.simpleMessage("已收到交易指令"),
+        "tradeSummary": MessageLookupByLibrary.simpleMessage("交易摘要"),
         "tradeWithANewBotstock":
             MessageLookupByLibrary.simpleMessage("以一隻新 Botstock 交易"),
         "tradeWithBots": MessageLookupByLibrary.simpleMessage("以 Bot 交易"),
@@ -419,7 +438,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m16,
+        "yourBankAccountIsUnderReview": m18,
         "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed"),
         "yourPaymentInformationIsUnderReview":
