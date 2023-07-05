@@ -51,7 +51,6 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
         botRecommendationModel: event.botRecommendationModel,
         tradeBotStockAmount: event.tradeBotStockAmount);
     emit(state.copyWith(createBotOrderResponse: data));
-    print('created order: ${data.data?.uid}');
   }
 
   _onFaqActiveIndexChanged(
