@@ -11,30 +11,20 @@ class TutorialBloc extends Bloc<TutorialEvent, TutorialState> {
   TutorialBloc({required TutorialRepository tutorialRepository})
       : _tutorialRepository = tutorialRepository,
         super(const TutorialState()) {
-    on<InitTutorial>(_onInitTutorial);
-    on<BotDetailsTutorialFinished>(_onBotDetailsTutorialFinished);
+    on<InitBotTradeSummaryTutorial>(_onInitBotTradeSummaryTutorial);
     on<TradeSummaryTutorialFinished>(_onTradeSummaryTutorialFinished);
   }
-  _onInitTutorial(InitTutorial event, Emitter<TutorialState> emit) async {
-    final isBotDetailsTutorial =
-        await _tutorialRepository.isBotDetailsTutorial();
+  _onInitBotTradeSummaryTutorial(
+      InitBotTradeSummaryTutorial event, Emitter<TutorialState> emit) async {
     final bool isTradeSummaryTutorial =
         await _tutorialRepository.isTradeSummaryTutorial();
-    emit(state.copyWith(
-        isBotDetailsTutorial: isBotDetailsTutorial,
-        isTradeSummaryTutorial: isTradeSummaryTutorial));
-  }
-
-  _onBotDetailsTutorialFinished(
-      BotDetailsTutorialFinished event, Emitter<TutorialState> emit) async {
-    final response = await _tutorialRepository.setBotDetailsTutorial(false);
-    emit(state.copyWith(isBotDetailsTutorial: response));
+    emit(state.copyWith(isTradeSummaryTutorial: isTradeSummaryTutorial));
   }
 
   _onTradeSummaryTutorialFinished(
       TradeSummaryTutorialFinished event, Emitter<TutorialState> emit) async {
     final bool tradeSummaryTutorialFinished =
         await _tutorialRepository.setTradeSummaryTutorial();
-    emit(state.copyWith(isBotDetailsTutorial: tradeSummaryTutorialFinished));
+    emit(state.copyWith(isTradeSummaryTutorial: tradeSummaryTutorialFinished));
   }
 }

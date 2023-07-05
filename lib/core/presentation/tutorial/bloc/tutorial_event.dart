@@ -7,8 +7,6 @@ abstract class TutorialEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class InitTutorial extends TutorialEvent {}
-
-class BotDetailsTutorialFinished extends TutorialEvent {}
+class InitBotTradeSummaryTutorial extends TutorialEvent {}
 
 class TradeSummaryTutorialFinished extends TutorialEvent {}
