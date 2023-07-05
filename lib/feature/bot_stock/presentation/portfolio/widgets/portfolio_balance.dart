@@ -41,8 +41,8 @@ class PortfolioBalance extends StatelessWidget {
         CustomTextNew(
           style: AskLoraTextStyles.h2,
           currencyType == CurrencyType.hkd
-              ? data?.totalPortfolioHkdStr ?? '0.0'
-              : data?.totalPortfolioUsdStr ?? '0.0',
+              ? data?.totalPortfolioHkdStr ?? '0.00'
+              : data?.totalPortfolioUsdStr ?? '0.00',
         ),
         CustomTextNew(
           S.of(context).portfolioTotalValue,
@@ -99,11 +99,11 @@ class PortfolioBalance extends StatelessWidget {
               columnTextCrossAxisAlignment: CrossAxisAlignment.center,
               leftTitle: S.of(context).portfolioBuyingPower(currencyType.name),
               leftSubTitle: currencyType == CurrencyType.hkd
-                  ? data?.buyingPowerHkdStr ?? '/'
-                  : data?.buyingPowerUsdStr ?? '/',
+                  ? data?.buyingPowerHkdStr ?? '0.00'
+                  : data?.buyingPowerUsdStr ?? '0.00',
               leftTooltipText: S.of(context).portfolioBuyingPowerToolTip,
               rightTitle: S.of(context).portfolioTotalPL,
-              rightSubTitle: data?.totalPnLStr ?? '/',
+              rightSubTitle: data?.totalPnLStr ?? '0.00',
               rightSubTitleColor: data?.totalPnLColor,
               spaceWidth: 6,
             ),
@@ -115,13 +115,13 @@ class PortfolioBalance extends StatelessWidget {
               leftTitle:
                   S.of(context).portfolioWithdrawableAmount(currencyType.name),
               leftSubTitle: currencyType == CurrencyType.hkd
-                  ? data?.withdrawableBalanceHkdStr ?? '/'
-                  : data?.withdrawableBalanceUsdStr ?? '/',
+                  ? data?.withdrawableBalanceHkdStr ?? '0.00'
+                  : data?.withdrawableBalanceUsdStr ?? '0.00',
               rightTitle:
                   S.of(context).portfolioTotalBotStock(currencyType.name),
               rightSubTitle: currencyType == CurrencyType.hkd
-                  ? data?.totalBotstockHkdStr ?? '/'
-                  : data?.totalBotstockUsdStr ?? '/',
+                  ? data?.totalBotstockHkdStr ?? '0.00'
+                  : data?.totalBotstockUsdStr ?? '0.00',
               spaceWidth: 6,
             ),
           ],

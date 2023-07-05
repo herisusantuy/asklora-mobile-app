@@ -52,13 +52,14 @@ class TransactionBalanceResponse extends Equatable {
 
   String get withdrawableBalanceHkdStr => withdrawableBalanceHkd != 0
       ? withdrawableBalanceHkd.convertToCurrencyDecimal()
-      : '/';
+      : '0.00';
 
   String get buyingPowerHkdStr =>
-      buyingPowerHkd != 0 ? buyingPowerHkd.convertToCurrencyDecimal() : '/';
+      buyingPowerHkd != 0 ? buyingPowerHkd.convertToCurrencyDecimal() : '0.00';
 
-  String get totalBotstockHkdStr =>
-      totalBotStockHkd != 0 ? totalBotStockHkd.convertToCurrencyDecimal() : '/';
+  String get totalBotstockHkdStr => totalBotStockHkd != 0
+      ? totalBotStockHkd.convertToCurrencyDecimal()
+      : '0.00';
 
   String get totalPortfolioUsdStr => totalPortfolioHkd != 0
       ? totalPortfolioUsd.convertToCurrencyDecimal()
@@ -66,16 +67,17 @@ class TransactionBalanceResponse extends Equatable {
 
   String get withdrawableBalanceUsdStr => withdrawableBalanceUsd != 0
       ? withdrawableBalanceUsd.convertToCurrencyDecimal()
-      : '/';
+      : '0.00';
 
   String get buyingPowerUsdStr =>
-      buyingPowerUsd != 0 ? buyingPowerUsd.convertToCurrencyDecimal() : '/';
+      buyingPowerUsd != 0 ? buyingPowerUsd.convertToCurrencyDecimal() : '0.00';
 
-  String get totalBotstockUsdStr =>
-      totalBotStockUsd != 0 ? totalBotStockUsd.convertToCurrencyDecimal() : '/';
+  String get totalBotstockUsdStr => totalBotStockUsd != 0
+      ? totalBotStockUsd.convertToCurrencyDecimal()
+      : '0.00';
 
   String get totalPnLStr =>
-      totalPnLPct != 0 ? '${totalPnLPct.convertToCurrencyDecimal()}%' : '/';
+      totalPnLPct != 0 ? '${totalPnLPct.convertToCurrencyDecimal()}%' : '0.00';
 
   Color get totalPnLColor => totalPnLPct == 0
       ? AskLoraColors.charcoal
