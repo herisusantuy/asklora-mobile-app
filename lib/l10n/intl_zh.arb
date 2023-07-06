@@ -448,5 +448,23 @@
   },
   "pleaseAddAHkBankAccount": "請確保加入的香港銀行戶口是在你名下。其他人的銀行戶口及聯名戶口將不會接受。",
   "weWillOnlyAcceptDepositViaBankTransfer": "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。",
-  "weWillOnlyAcceptHKD": "我們只接受港幣"
+  "weWillOnlyAcceptHKD": "我們只接受港幣",
+  "transferInitialFundToAsklora": "轉賬首筆資金予Asklora",
+  "transferFundToAsklora": "轉賬資金予Asklora",
+  "firstTimeCopyAskloraBankDetails": "複製 Asklora 銀行資料，並從你銀行戶口透過 FPS 或 電匯 轉賬不少於 HK${minDeposit}。",
+  "@firstTimeCopyAskloraBankDetails": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "copyAskloraBankDetails": "複製 Asklora 銀行資料，並從你銀行戶口透過 FPS或電匯轉。",
+  "theAmountMustMatchWithPor": "金額須與匯款證明一致。",
+  "thePorShouldShowYourBank": "匯款證明需要顯示你的銀行戶口號碼，全名 及金額。",
+  "pleaseMakeSureYouHaveFinished": "匯款證明需要顯示你的銀行戶口號碼，全名 及金額。",
+  "pleaseMakeSureYouPressSubmit": "請確保於你的銀行轉賬資金後才按「提交」鍵。",
+  "yourDepositMayBeRejected": "若所通知的金額與實際轉賬金額不符，你的入金會被延誤。",
+  "weAcceptHKDOnly": "我們只接受港幣。",
+  "buttonSubmit": "提交"
 }

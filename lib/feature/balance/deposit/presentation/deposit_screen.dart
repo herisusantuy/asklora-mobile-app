@@ -148,7 +148,7 @@ class DepositScreen extends StatelessWidget {
                 current.disableDeposit(depositType),
             builder: (context, state) => PrimaryButton(
                   disabled: state.disableDeposit(depositType),
-                  label: S.of(context).buttonContinue,
+                  label: S.of(context).buttonSubmit,
                   onTap: () => context.read<DepositBloc>().add(
                         SubmitDeposit(),
                       ),

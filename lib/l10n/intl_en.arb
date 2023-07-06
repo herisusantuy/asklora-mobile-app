@@ -490,5 +490,23 @@
   },
   "pleaseAddAHkBankAccount": "Please add a HK bank account that is under your name; other people's bank accounts or joint accounts will not be accepted.",
   "weWillOnlyAcceptDepositViaBankTransfer": "We will only accept deposits via bank transfer (wire/FPS) from your own account.",
-  "weWillOnlyAcceptHKD": "We will only accept HKD."
+  "weWillOnlyAcceptHKD": "We will only accept HKD.",
+  "transferInitialFundToAsklora": "Transfer initial funds to Asklora",
+  "transferFundToAsklora": "Transfer funds to Asklora",
+  "firstTimeCopyAskloraBankDetails": "Copy Asklora's bank details and transfer no less than HK${minDeposit} from your bank account via FPS or Wire transfer.",
+  "@firstTimeCopyAskloraBankDetails": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "copyAskloraBankDetails": "Copy Asklora's bank details and transfer from your bank account via FPS or Wire transfer.",
+  "theAmountMustMatchWithPor": "The amount must match with the proof of remittance.",
+  "thePorShouldShowYourBank": "The proof of remittance should show your bank account number, full name, and amount.",
+  "pleaseMakeSureYouHaveFinished": "Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.",
+  "pleaseMakeSureYouPressSubmit": "Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.",
+  "yourDepositMayBeRejected": "Your deposit may be rejected if the informed amount is different from the actual transferred amount.",
+  "weAcceptHKDOnly": "We accept HKD only.",
+  "buttonSubmit": "Submit"
 }

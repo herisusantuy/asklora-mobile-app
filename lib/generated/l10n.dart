@@ -3254,6 +3254,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Transfer initial funds to Asklora`
+  String get transferInitialFundToAsklora {
+    return Intl.message(
+      'Transfer initial funds to Asklora',
+      name: 'transferInitialFundToAsklora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer funds to Asklora`
+  String get transferFundToAsklora {
+    return Intl.message(
+      'Transfer funds to Asklora',
+      name: 'transferFundToAsklora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy Asklora's bank details and transfer no less than HK${minDeposit} from your bank account via FPS or Wire transfer.`
+  String firstTimeCopyAskloraBankDetails(String minDeposit) {
+    return Intl.message(
+      'Copy Asklora\'s bank details and transfer no less than HK\$$minDeposit from your bank account via FPS or Wire transfer.',
+      name: 'firstTimeCopyAskloraBankDetails',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Copy Asklora's bank details and transfer from your bank account via FPS or Wire transfer.`
+  String get copyAskloraBankDetails {
+    return Intl.message(
+      'Copy Asklora\'s bank details and transfer from your bank account via FPS or Wire transfer.',
+      name: 'copyAskloraBankDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The amount must match with the proof of remittance.`
+  String get theAmountMustMatchWithPor {
+    return Intl.message(
+      'The amount must match with the proof of remittance.',
+      name: 'theAmountMustMatchWithPor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The proof of remittance should show your bank account number, full name, and amount.`
+  String get thePorShouldShowYourBank {
+    return Intl.message(
+      'The proof of remittance should show your bank account number, full name, and amount.',
+      name: 'thePorShouldShowYourBank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.`
+  String get pleaseMakeSureYouHaveFinished {
+    return Intl.message(
+      'Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.',
+      name: 'pleaseMakeSureYouHaveFinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.`
+  String get pleaseMakeSureYouPressSubmit {
+    return Intl.message(
+      'Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.',
+      name: 'pleaseMakeSureYouPressSubmit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your deposit may be rejected if the informed amount is different from the actual transferred amount.`
+  String get yourDepositMayBeRejected {
+    return Intl.message(
+      'Your deposit may be rejected if the informed amount is different from the actual transferred amount.',
+      name: 'yourDepositMayBeRejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We accept HKD only.`
+  String get weAcceptHKDOnly {
+    return Intl.message(
+      'We accept HKD only.',
+      name: 'weAcceptHKDOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get buttonSubmit {
+    return Intl.message(
+      'Submit',
+      name: 'buttonSubmit',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

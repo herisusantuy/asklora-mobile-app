@@ -19,14 +19,14 @@ class UploadProofOfRemittanceStep extends StatelessWidget {
         drawLine: false,
         contents: [
           CustomTextNew(
-            'Upload proof of remittance',
+            S.of(context).uploadProofOfRemittance,
             style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
           ),
           const SizedBox(
             height: 10,
           ),
           CustomTextNew(
-            'The remittance advice should show your bank account number, full name, and amount.',
+            S.of(context).thePorShouldShowYourBank,
             style:
                 AskLoraTextStyles.body2.copyWith(color: AskLoraColors.charcoal),
           ),
