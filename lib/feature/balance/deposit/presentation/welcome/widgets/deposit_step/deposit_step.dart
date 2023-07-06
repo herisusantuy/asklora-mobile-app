@@ -14,12 +14,10 @@ class DepositStep extends StatelessWidget {
   Widget build(BuildContext context) => _getDepositStep(context);
 
   Widget _getDepositStep(BuildContext context) {
-    final firstTimeDeposit = firstTimeDepositStep(context);
-    final type1Deposit = type1DepositStep(context);
-    final type2Deposit = type2DepositStep(context);
     const EdgeInsets padding = EdgeInsets.fromLTRB(20, 30, 20, 12);
     switch (depositType) {
       case DepositType.firstTime:
+        final firstTimeDeposit = firstTimeDepositStep(context);
         return RoundColoredBox(
           content: Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -37,6 +35,7 @@ class DepositStep extends StatelessWidget {
           padding: padding,
         );
       case DepositType.type1:
+        final type1Deposit = type1DepositStep(context);
         return RoundColoredBox(
           content: Column(
               children: type1Deposit.map((e) {
@@ -51,6 +50,7 @@ class DepositStep extends StatelessWidget {
           padding: padding,
         );
       case DepositType.type2:
+        final type2Deposit = type2DepositStep(context);
         return RoundColoredBox(
           content: Column(
               children: type2Deposit.map((e) {
