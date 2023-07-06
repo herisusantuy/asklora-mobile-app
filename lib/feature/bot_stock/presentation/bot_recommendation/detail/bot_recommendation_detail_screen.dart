@@ -95,6 +95,7 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                         BotTradeSummaryScreen.open(
                             context: context,
                             botTradeSummaryModel: BotTradeSummaryModel(
+                                oldContext: context,
                                 botType: botType,
                                 botRecommendationModel: botRecommendationModel,
                                 botDetailModel: state.botDetailResponse.data!,

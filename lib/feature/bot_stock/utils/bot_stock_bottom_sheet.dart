@@ -130,23 +130,24 @@ class BotStockBottomSheet {
         child: BlocBuilder<BotStockBloc, BotStockState>(
             buildWhen: (previous, current) =>
                 previous.botStockTradeAmount != current.botStockTradeAmount,
-            builder: (context, state) {
+            builder: (bottomSheetContext, state) {
               return LoraBottomSheetContent(
                 disablePrimaryButton: state.disableBuyingBotstock(buyingPower),
-                title: S.of(context).botTradeBottomSheetAmountTitle,
-                primaryButtonLabel: S.of(context).buttonNext,
-                secondaryButtonLabel: S.of(context).buttonCancel,
+                title: S.of(bottomSheetContext).botTradeBottomSheetAmountTitle,
+                primaryButtonLabel: S.of(bottomSheetContext).buttonNext,
+                secondaryButtonLabel: S.of(bottomSheetContext).buttonCancel,
                 onPrimaryButtonTap: () {
                   Navigator.pop(context);
                   BotTradeSummaryScreen.open(
                       context: context,
                       botTradeSummaryModel: BotTradeSummaryModel(
+                          oldContext: context,
                           botType: botType,
                           botRecommendationModel: botRecommendationModel,
                           botDetailModel: botDetailModel,
                           amount: state.botStockTradeAmount));
                 },
-                onSecondaryButtonTap: () => Navigator.pop(context),
+                onSecondaryButtonTap: () => Navigator.pop(bottomSheetContext),
                 buttonPaddingTop: 5,
                 child: Column(
                   children: [
@@ -175,7 +176,7 @@ class BotStockBottomSheet {
                             textStyle: AskLoraTextStyles.h2
                                 .copyWith(color: AskLoraColors.charcoal),
                             hintText: '1,500',
-                            onChanged: (value) => context
+                            onChanged: (value) => bottomSheetContext
                                 .read<BotStockBloc>()
                                 .add(TradeBotStockAmountChanged(value.isNotEmpty
                                     ? double.parse(
@@ -189,7 +190,7 @@ class BotStockBottomSheet {
                       height: 11,
                     ),
                     CustomTextNew(
-                      S.of(context).botTradeBottomSheetAmountMinimum(
+                      S.of(bottomSheetContext).botTradeBottomSheetAmountMinimum(
                           'HKD${buyingPower.convertToCurrencyDecimal()}',
                           'HKD1,500'),
                       style: AskLoraTextStyles.body4,

@@ -116,12 +116,10 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     });
   }
 
-  static void openAndRemoveAllRoute(
+  static void openAndReplace(
       {required BuildContext context,
       required BotPortfolioDetailArguments arguments}) {
-    Navigator.pushNamedAndRemoveUntil(
-            context, route, (Route<dynamic> route) => false,
-            arguments: arguments)
+    Navigator.pushReplacementNamed(context, route, arguments: arguments)
         .then((value) {
       context
           .read<TabScreenBloc>()

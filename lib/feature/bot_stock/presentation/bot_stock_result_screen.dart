@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_status_widget.dart';
 import '../../../core/presentation/custom_stretched_layout.dart';
-import '../../tabs/presentation/tab_screen.dart';
+import 'portfolio/detail/bot_portfolio_detail_screen.dart';
 
 class BotStockResultScreen extends StatelessWidget {
   static const String route = '/bot_stock_result_screen';
@@ -27,8 +26,19 @@ class BotStockResultScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30.0),
             child: PrimaryButton(
               label: arguments.labelBottomButton,
-              onTap: arguments.onNextButton ??
-                  () => TabScreen.openAndRemoveAllRoute(context),
+              onTap: () {
+                BotPortfolioDetailScreen.openAndReplace(
+                  context: context,
+                  arguments: BotPortfolioDetailArguments(
+                    botUid: '118a8062f2b7442085a77c2aac204296',
+                    botName: 'udin',
+                    // onTapBack: () {
+                    //   TabScreen.openAndRemoveAllRoute(context,
+                    //       initialTabPage: TabPage.portfolio);
+                    // },
+                  ),
+                );
+              },
             ),
           ),
         ));
@@ -37,8 +47,22 @@ class BotStockResultScreen extends StatelessWidget {
   static void open({
     required BuildContext context,
     required BotStockResultArgument arguments,
-  }) =>
-      Navigator.pushNamed(context, route, arguments: arguments);
+  }) {
+    Navigator.pushNamed(context, route, arguments: arguments);
+  }
+
+  static void openAndRemoveUntilWithImmediateCallback(
+      {required BuildContext context,
+      required BotStockResultArgument arguments,
+      required String removeUntil,
+      VoidCallback? immediateCallback}) {
+    if (immediateCallback != null) {
+      immediateCallback();
+    }
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        route, ModalRoute.withName(removeUntil),
+        arguments: arguments);
+  }
 }
 
 class BotStockResultArgument {
