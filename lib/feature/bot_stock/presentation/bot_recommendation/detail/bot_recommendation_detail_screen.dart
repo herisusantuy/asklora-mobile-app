@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +9,7 @@ import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/repository/transaction_repository.dart';
+import '../../../../../core/utils/log.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
@@ -23,7 +25,7 @@ import 'widgets/bot_recommendation_detail_content.dart';
 
 part 'widgets/bot_recommendation_chart.dart';
 
-class BotRecommendationDetailScreen extends StatelessWidget {
+class BotRecommendationDetailScreen extends StatefulWidget {
   static const String route = '/bot_recommendation_detail_screen';
   final BotRecommendationModel botRecommendationModel;
 
@@ -32,9 +34,42 @@ class BotRecommendationDetailScreen extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<BotRecommendationDetailScreen> createState() =>
+      _BotRecommendationDetailScreenState();
+
+  static void open(
+      {required BuildContext context,
+      required BotRecommendationModel botRecommendationModel}) {
+    Navigator.pushNamed(context, route, arguments: botRecommendationModel)
+        .then((value) {
+      context.read<TabScreenBloc>().add(TabChanged(TabPage.forYou.setData()));
+    });
+  }
+}
+
+class _BotRecommendationDetailScreenState
+    extends State<BotRecommendationDetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(backButtonInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(backButtonInterceptor);
+    super.dispose();
+  }
+
+  bool backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    Navigator.pop(context);
+    return true;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final BotType botType =
-        BotType.findByString(botRecommendationModel.botAppType);
+        BotType.findByString(widget.botRecommendationModel.botAppType);
     return CustomScaffold(
       enableBackNavigation: false,
       body: BlocProvider(
@@ -75,10 +110,10 @@ class BotRecommendationDetailScreen extends StatelessWidget {
               content: BotStockForm(
                 useHeader: true,
                 title:
-                    '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
+                    '${botType.upperCaseName} ${widget.botRecommendationModel.tickerSymbol}',
                 padding: EdgeInsets.zero,
                 content: BotRecommendationDetailContent(
-                  botRecommendationModel: botRecommendationModel,
+                  botRecommendationModel: widget.botRecommendationModel,
                   botType: botType,
                   botDetailModel: state.botDetailResponse.data,
                 ),
@@ -91,19 +126,20 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                         state.botDetailResponse.state == ResponseState.error,
                     label: S.of(context).trade,
                     onTap: () {
-                      if (botRecommendationModel.freeBot) {
+                      if (widget.botRecommendationModel.freeBot) {
                         BotTradeSummaryScreen.open(
                             context: context,
                             botTradeSummaryModel: BotTradeSummaryModel(
                                 botType: botType,
-                                botRecommendationModel: botRecommendationModel,
+                                botRecommendationModel:
+                                    widget.botRecommendationModel,
                                 botDetailModel: state.botDetailResponse.data!,
                                 amount: 500));
                       } else {
                         BotStockBottomSheet.amountBotStockForm(
                             context,
                             botType,
-                            botRecommendationModel,
+                            widget.botRecommendationModel,
                             state.botDetailResponse.data!,
                             state.buyingPower);
                       }
@@ -120,17 +156,8 @@ class BotRecommendationDetailScreen extends StatelessWidget {
 
   void _fetchBotDetail(BotStockBloc botStockBloc) {
     botStockBloc.add(FetchBotDetail(
-        ticker: botRecommendationModel.ticker,
-        botId: botRecommendationModel.botId,
-        isFreeBot: botRecommendationModel.freeBot));
-  }
-
-  static void open(
-      {required BuildContext context,
-      required BotRecommendationModel botRecommendationModel}) {
-    Navigator.pushNamed(context, route, arguments: botRecommendationModel)
-        .then((value) {
-      context.read<TabScreenBloc>().add(TabChanged(TabPage.forYou.setData()));
-    });
+        ticker: widget.botRecommendationModel.ticker,
+        botId: widget.botRecommendationModel.botId,
+        isFreeBot: widget.botRecommendationModel.freeBot));
   }
 }
