@@ -3105,10 +3105,10 @@ class S {
     );
   }
 
-  /// `Go AA`
+  /// `Go`
   String get go {
     return Intl.message(
-      'Go AA',
+      'Go',
       name: 'go',
       desc: '',
       args: [],

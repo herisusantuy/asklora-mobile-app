@@ -15,6 +15,7 @@ import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
+import '../utils/withdrawal_utils.dart';
 import '../../../settings/domain/bank_account.dart';
 import '../../widgets/balance_base_form.dart';
 import '../bloc/withdrawal_bloc.dart';
@@ -77,7 +78,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                       child: _textInfo(
                           title: S.of(context).to,
                           subTitle:
-                              '${args.bankAccount.name} (${_maskAccountNumber(args.bankAccount.accountNumber)})'),
+                              '${args.bankAccount.name} (${maskAccountNumber(args.bankAccount.accountNumber, end: args.bankAccount.accountNumber.length - 3)})'),
                     ),
                     const SizedBox(
                       height: 21,
@@ -123,12 +124,6 @@ class WithdrawalSummaryScreen extends StatelessWidget {
 
   String get _withdrawalAmount =>
       args.withdrawalAmount.convertToCurrencyDecimal();
-
-  String _maskAccountNumber(String accountNumber) {
-    int start = 3;
-    int end = accountNumber.length - 3;
-    return accountNumber.replaceRange(start, end, '*' * (end - start));
-  }
 
   Widget _bottomButton(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 30),

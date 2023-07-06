@@ -272,7 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "getHelp": MessageLookupByLibrary.simpleMessage("Get Help"),
         "getTheFirstBotstockForFree": MessageLookupByLibrary.simpleMessage(
             "Get the First Botstock for Free"),
-        "go": MessageLookupByLibrary.simpleMessage("Go AA"),
+        "go": MessageLookupByLibrary.simpleMessage("Go"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got It"),
         "greatStart": MessageLookupByLibrary.simpleMessage("Great start!"),
         "greetingScreenSubTitle": MessageLookupByLibrary.simpleMessage(
