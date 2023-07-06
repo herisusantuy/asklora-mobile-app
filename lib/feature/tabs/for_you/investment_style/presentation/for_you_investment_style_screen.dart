@@ -16,7 +16,6 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
 import '../../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../bot_stock/bloc/bot_stock_bloc.dart';
 import '../../../../onboarding/ppi/bloc/response/user_response_bloc.dart';
@@ -68,34 +67,31 @@ class ForYouInvestmentStyleScreen extends StatelessWidget {
               ResponseState.error,
           content: investmentStyleQuestionState.response.state ==
                   ResponseState.success
-              ? Padding(
-                  padding: AppValues.screenHorizontalPadding,
-                  child: BlocProvider(
-                    create: (_) => NavigationBloc<InvestmentStyleQuestionType>(
-                        investmentStyleQuestionState.response.data!.left != null
-                            ? InvestmentStyleQuestionType.omnisearch
-                            : InvestmentStyleQuestionType.others),
-                    child: BlocBuilder<
-                        NavigationBloc<InvestmentStyleQuestionType>,
-                        NavigationState<InvestmentStyleQuestionType>>(
-                      builder: (context, navigationState) {
-                        return Column(
-                          children: [
-                            CustomLinearProgressIndicator(
-                              padding: const EdgeInsets.only(
-                                  left: 10, top: 10, bottom: 10, right: 2),
-                              progress: navigationState.page ==
-                                      InvestmentStyleQuestionType.omnisearch
-                                  ? 0.5
-                                  : 1,
-                            ),
-                            Expanded(
-                                child: _pages(navigationState.page,
-                                    investmentStyleQuestionState))
-                          ],
-                        );
-                      },
-                    ),
+              ? BlocProvider(
+                  create: (_) => NavigationBloc<InvestmentStyleQuestionType>(
+                      investmentStyleQuestionState.response.data!.left != null
+                          ? InvestmentStyleQuestionType.omnisearch
+                          : InvestmentStyleQuestionType.others),
+                  child: BlocBuilder<
+                      NavigationBloc<InvestmentStyleQuestionType>,
+                      NavigationState<InvestmentStyleQuestionType>>(
+                    builder: (context, navigationState) {
+                      return Column(
+                        children: [
+                          CustomLinearProgressIndicator(
+                            padding: const EdgeInsets.only(
+                                left: 10, top: 10, bottom: 10, right: 2),
+                            progress: navigationState.page ==
+                                    InvestmentStyleQuestionType.omnisearch
+                                ? 0.5
+                                : 1,
+                          ),
+                          Expanded(
+                              child: _pages(navigationState.page,
+                                  investmentStyleQuestionState))
+                        ],
+                      );
+                    },
                   ),
                 )
               : const SizedBox.shrink(),
