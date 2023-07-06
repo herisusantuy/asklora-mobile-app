@@ -61,7 +61,13 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m17(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} 將於 ${dateTime} 開始";
 
-  static String m18(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
+  static String m18(minDeposit) =>
+      "請轉賬最少 HK\$${minDeposit} 至 Asklora 銀行戶口。任何少於 HK\$${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。";
+
+  static String m19(minDeposit) =>
+      "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK\$${minDeposit} 以通過相同的認證。";
+
+  static String m20(dateTime) => "銀行賬戶正在審批當中，並會於${dateTime} 完成。";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -169,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "你已提交入金請求，當收到入金後，\n我們會盡快以電郵或應用程式通知。"),
         "depositRequestSubmittedTitle":
             MessageLookupByLibrary.simpleMessage("已收到入金申請"),
+        "depositViaFpsOrWireTransfer":
+            MessageLookupByLibrary.simpleMessage("以 FPS 或電匯入金"),
         "doAnyOfTheFollowingApply":
             MessageLookupByLibrary.simpleMessage("以下描述適用於你或你的直系親屬？"),
         "email": MessageLookupByLibrary.simpleMessage("電郵"),
@@ -219,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("我是高級政治人物。"),
         "inApp": MessageLookupByLibrary.simpleMessage("In-app通知"),
         "industry": MessageLookupByLibrary.simpleMessage("行業"),
+        "inputDepositAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
         "introduceBotPlank":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Plank"),
         "introduceBotPullup":
@@ -247,6 +256,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage(" 否"),
         "noteOnPaymentDetails": MessageLookupByLibrary.simpleMessage(
             "注意\n我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶 號碼）。我們亦可能會因核實交易，向你要求更多附加資料。"),
+        "notes": MessageLookupByLibrary.simpleMessage("說明"),
         "notificationSetting": MessageLookupByLibrary.simpleMessage("通知設定"),
         "notificationSettings": MessageLookupByLibrary.simpleMessage("通知設定"),
         "officeHours":
@@ -270,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
+        "pleaseAddAHkBankAccount": MessageLookupByLibrary.simpleMessage(
+            "請確保加入的香港銀行戶口是在你名下。其他人的銀行戶口及聯名戶口將不會接受。"),
         "portfolioBuyingPower": m10,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "購買力代表了你可以用來購買Botstock的現金額。你的可提取金額和購買力會出現不一樣的情況。例如，開始Botstock後，你的購買力會相對減少，而Botstock總價值會相對提高。或當你的Botstock已到期或被終止，其價值將會增加至購買力，而在「T+2」日，T為交易當日， 該價值也會同時顯示在可提取金額。 "),
@@ -360,6 +372,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
+        "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
+            "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
         "rolloverBotStockAcknowledgement": m17,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
@@ -377,6 +391,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "summary": MessageLookupByLibrary.simpleMessage("摘要"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
+        "theAmountMustMatch":
+            MessageLookupByLibrary.simpleMessage("金額須與匯款證明一致。"),
+        "theProofOfRemittanceShouldShowYourBankAccount":
+            MessageLookupByLibrary.simpleMessage("匯款證明需要顯示你的銀行戶口號碼，全名 及金額。"),
         "to": MessageLookupByLibrary.simpleMessage("至"),
         "tooltipBotDetailsEstMaxLoss":
             MessageLookupByLibrary.simpleMessage("Bot將出售以限制損失的最低股票價位。"),
@@ -413,9 +431,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提存 "),
         "transactionHistoryTitle": MessageLookupByLibrary.simpleMessage("交易歷史"),
         "transactionHistoryToday": MessageLookupByLibrary.simpleMessage("今日"),
+        "transferAtLeastWithMinimumDeposit": m18,
+        "transferAtLeastWithNoMinimumDeposit":
+            MessageLookupByLibrary.simpleMessage(
+                "請由你之前使用的銀行戶口轉賬至Asklora 銀行戶口。"),
         "transferTo": MessageLookupByLibrary.simpleMessage("轉賬至"),
+        "uploadProofOfRemittance":
+            MessageLookupByLibrary.simpleMessage("上載匯款證明"),
         "userId": MessageLookupByLibrary.simpleMessage("用戶 ID"),
         "viewDepositGuide": MessageLookupByLibrary.simpleMessage("查看入金提示"),
+        "weWillOnlyAcceptDepositViaBankTransfer":
+            MessageLookupByLibrary.simpleMessage(
+                "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。"),
+        "weWillOnlyAcceptHKD": MessageLookupByLibrary.simpleMessage("我們只接受港幣"),
+        "weWillTakeInformationCollectedFromYour": m19,
         "website": MessageLookupByLibrary.simpleMessage("網站"),
         "welcomeScreenFirstBenefit":
             MessageLookupByLibrary.simpleMessage("FinFit 教練指導"),
@@ -438,7 +467,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("提取款項最多需時2個工作天。"),
         "yes": MessageLookupByLibrary.simpleMessage("是"),
         "yourBankAccount": MessageLookupByLibrary.simpleMessage("銀行賬戶"),
-        "yourBankAccountIsUnderReview": m18,
+        "yourBankAccountIsUnderReview": m20,
+        "yourDepositCanTakeUp2WorkingDays":
+            MessageLookupByLibrary.simpleMessage("入金程序最多需時 2 個工作天"),
         "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed"),
         "yourPaymentInformationIsUnderReview":

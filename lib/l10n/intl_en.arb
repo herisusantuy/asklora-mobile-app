@@ -462,5 +462,33 @@
   "depositFundToStartInvesting": "Deposit funds to start investing",
   "onBoardingCompletionMessage": "You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.",
   "nextStep": "Next step",
-  "go": "Go AA"
+  "go": "Go",
+  "depositViaFpsOrWireTransfer": "Deposit via FPS or Wire Transfer",
+  "transferAtLeastWithNoMinimumDeposit": "Transfer to Asklora bank account from the same bank account you used.",
+  "transferAtLeastWithMinimumDeposit": "Transfer at least HK${minDeposit} to Asklora's bank account. Any initial deposit less than HK${minDeposit} will be rejected and fees will be charged.",
+  "@transferAtLeastWithMinimumDeposit": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "uploadProofOfRemittance": "Upload proof of remittance",
+  "theProofOfRemittanceShouldShowYourBankAccount": "The proof of remittance should show your bank account number, full name, and amount.",
+  "inputDepositAmount": "Input deposit amount",
+  "theAmountMustMatch": "The amount must match with the actual transferred amount.",
+  "yourDepositCanTakeUp2WorkingDays": "Your deposit can take up to 2 working days",
+  "notes": "Notes",
+  "returningUserDepositNotes": "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.",
+  "weWillTakeInformationCollectedFromYour": "We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK$ {minDeposit} bank transfer is completed.",
+  "@weWillTakeInformationCollectedFromYour": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseAddAHkBankAccount": "Please add a HK bank account that is under your name; other people's bank accounts or joint accounts will not be accepted.",
+  "weWillOnlyAcceptDepositViaBankTransfer": "We will only accept deposits via bank transfer (wire/FPS) from your own account.",
+  "weWillOnlyAcceptHKD": "We will only accept HKD."
 }

@@ -11,21 +11,23 @@ class DepositStep extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) => _getDepositStep;
+  Widget build(BuildContext context) => _getDepositStep(context);
 
-  Widget get _getDepositStep {
+  Widget _getDepositStep(BuildContext context) {
+    final firstTimeDeposit = firstTimeDepositStep(context);
+    final type1Deposit = type1DepositStep(context);
+    final type2Deposit = type2DepositStep(context);
     const EdgeInsets padding = EdgeInsets.fromLTRB(20, 30, 20, 12);
     switch (depositType) {
       case DepositType.firstTime:
         return RoundColoredBox(
-          title: 'Deposit funds to complete your investment account opening',
           content: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Column(
-                children: _firstTimeStep.map((e) {
-              final int index = _firstTimeStep.indexOf(e);
+                children: firstTimeDeposit.map((e) {
+              final int index = firstTimeDeposit.indexOf(e);
               return _step(
-                  drawLine: index != _firstTimeStep.length - 1,
+                  drawLine: index != firstTimeDeposit.length - 1,
                   index: index,
                   subTitleColor: e.subTitleColor,
                   title: e.title,
@@ -37,11 +39,11 @@ class DepositStep extends StatelessWidget {
       case DepositType.type1:
         return RoundColoredBox(
           content: Column(
-              children: _type1Step.map((e) {
-            final int index = _type1Step.indexOf(e);
+              children: type1Deposit.map((e) {
+            final int index = type1Deposit.indexOf(e);
             return _step(
-                drawLine: index != _type1Step.length - 1,
-                index: _type1Step.indexOf(e),
+                drawLine: index != type1Deposit.length - 1,
+                index: type1Deposit.indexOf(e),
                 subTitleColor: e.subTitleColor,
                 title: e.title,
                 subTitle: e.subTitle);
@@ -51,11 +53,11 @@ class DepositStep extends StatelessWidget {
       case DepositType.type2:
         return RoundColoredBox(
           content: Column(
-              children: _type2Step.map((e) {
-            final int index = _type2Step.indexOf(e);
+              children: type2Deposit.map((e) {
+            final int index = type2Deposit.indexOf(e);
             return _step(
-                drawLine: index != _type2Step.length - 1,
-                index: _type2Step.indexOf(e),
+                drawLine: index != type2Deposit.length - 1,
+                index: type2Deposit.indexOf(e),
                 subTitleColor: e.subTitleColor,
                 title: e.title,
                 subTitle: e.subTitle);
@@ -90,7 +92,7 @@ class DepositStep extends StatelessWidget {
             CustomTextNew(
               subTitle,
               style: AskLoraTextStyles.body2.copyWith(color: subTitleColor),
-              maxLines: 2,
+              maxLines: 3,
             ),
           ],
         ),

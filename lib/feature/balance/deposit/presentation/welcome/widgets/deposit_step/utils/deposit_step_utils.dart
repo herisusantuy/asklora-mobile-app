@@ -1,54 +1,60 @@
 part of '../../../deposit_welcome_screen.dart';
 
-final List<DepositStepModel> _firstTimeStep = [
-  DepositStepModel(
-      title: 'Deposit via FPS or Wire Transfer',
-      subTitle:
-          "Transfer at least HK\$${DepositType.firstTime.minDepositString} to Asklora's bank account. ",
-      subTitleColor: AskLoraColors.primaryMagenta),
-  DepositStepModel(
-    title: 'Input deposit amount',
-    subTitle: 'The amount must match with the proof of remittance.',
-  ),
-  DepositStepModel(
-    title: 'Upload proof of remittance',
-    subTitle:
-        'The proof of remittance should show your bank account number, full name, and amount.',
-  ),
-  DepositStepModel(
-    title: 'Deposit via FPS or Wire Transfer',
-    subTitle:
-        "Transfer at least HK\$${DepositType.firstTime.minDepositString} to Asklora's bank account. ",
-  ),
-];
+List<DepositStepModel> firstTimeDepositStep(BuildContext context) {
+  final List<DepositStepModel> firstTimeStep = [
+    DepositStepModel(
+      title: S.of(context).depositViaFpsOrWireTransfer,
+      subTitle: S.of(context).transferAtLeastWithMinimumDeposit(
+          DepositType.type1.minDepositString),
+    ),
+    DepositStepModel(
+      title: S.of(context).inputDepositAmount,
+      subTitle: S.of(context).theAmountMustMatch,
+    ),
+    DepositStepModel(
+      title: S.of(context).uploadProofOfRemittance,
+      subTitle: S.of(context).theProofOfRemittanceShouldShowYourBankAccount,
+    ),
+    DepositStepModel(
+      title: S.of(context).yourDepositCanTakeUp2WorkingDays,
+    ),
+  ];
+  return firstTimeStep;
+}
 
-final List<DepositStepModel> _type1Step = [
-  DepositStepModel(
-      title: 'Deposit via FPS or Wire Transfer',
-      subTitle:
-          'Transfer ${DepositType.type1.minDeposit != 0 ? 'at least HK\$${DepositType.type1.minDepositString}' : ''} to Asklora’s bank account from the same bank account you used. ',
-      subTitleColor: AskLoraColors.primaryMagenta),
-  DepositStepModel(
-    title: 'Input deposit amount',
-    subTitle: 'The amount must match with the proof of remittance.',
-  ),
-  DepositStepModel(
-    title: 'Your deposit can take up to 2 working days.',
-  ),
-];
+List<DepositStepModel> type1DepositStep(BuildContext context) {
+  final List<DepositStepModel> type1Step = [
+    DepositStepModel(
+      title: S.of(context).depositViaFpsOrWireTransfer,
+      subTitle: S.of(context).transferAtLeastWithMinimumDeposit(
+          DepositType.type1.minDepositString),
+    ),
+    DepositStepModel(
+      title: S.of(context).inputDepositAmount,
+      subTitle: S.of(context).theAmountMustMatch,
+    ),
+    DepositStepModel(
+      title: S.of(context).yourDepositCanTakeUp2WorkingDays,
+    ),
+  ];
+  return type1Step;
+}
 
-final List<DepositStepModel> _type2Step = [
-  DepositStepModel(
-      title: 'Deposit via FPS or Wire Transfer',
-      subTitle:
-          'Transfer ${DepositType.type1.minDeposit != 0 ? 'at least HK\$${DepositType.type1.minDepositString}' : ''} to Asklora’s bank account from the same bank account you used. ',
-      subTitleColor: AskLoraColors.primaryMagenta),
-  DepositStepModel(
-    title: 'Upload proof of remittance',
-    subTitle:
-        'The proof of remittance should show your bank account number, full name, and amount.',
-  ),
-  DepositStepModel(
-    title: 'Your deposit can take up to 2 working days.',
-  ),
-];
+List<DepositStepModel> type2DepositStep(BuildContext context) {
+  final List<DepositStepModel> type2Step = [
+    DepositStepModel(
+        title: S.of(context).depositViaFpsOrWireTransfer,
+        subTitle: DepositType.type1.minDeposit != 0
+            ? S.of(context).transferAtLeastWithMinimumDeposit(
+                DepositType.type1.minDepositString)
+            : S.of(context).transferAtLeastWithNoMinimumDeposit),
+    DepositStepModel(
+      title: S.of(context).inputDepositAmount,
+      subTitle: S.of(context).theAmountMustMatch,
+    ),
+    DepositStepModel(
+      title: S.of(context).yourDepositCanTakeUp2WorkingDays,
+    ),
+  ];
+  return type2Step;
+}

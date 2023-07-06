@@ -3105,11 +3105,151 @@ class S {
     );
   }
 
-  /// `Go AA`
+  /// `Go`
   String get go {
     return Intl.message(
-      'Go AA',
+      'Go',
       name: 'go',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit via FPS or Wire Transfer`
+  String get depositViaFpsOrWireTransfer {
+    return Intl.message(
+      'Deposit via FPS or Wire Transfer',
+      name: 'depositViaFpsOrWireTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer to Asklora bank account from the same bank account you used.`
+  String get transferAtLeastWithNoMinimumDeposit {
+    return Intl.message(
+      'Transfer to Asklora bank account from the same bank account you used.',
+      name: 'transferAtLeastWithNoMinimumDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer at least HK${minDeposit} to Asklora's bank account. Any initial deposit less than HK${minDeposit} will be rejected and fees will be charged.`
+  String transferAtLeastWithMinimumDeposit(String minDeposit) {
+    return Intl.message(
+      'Transfer at least HK\$$minDeposit to Asklora\'s bank account. Any initial deposit less than HK\$$minDeposit will be rejected and fees will be charged.',
+      name: 'transferAtLeastWithMinimumDeposit',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Upload proof of remittance`
+  String get uploadProofOfRemittance {
+    return Intl.message(
+      'Upload proof of remittance',
+      name: 'uploadProofOfRemittance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The proof of remittance should show your bank account number, full name, and amount.`
+  String get theProofOfRemittanceShouldShowYourBankAccount {
+    return Intl.message(
+      'The proof of remittance should show your bank account number, full name, and amount.',
+      name: 'theProofOfRemittanceShouldShowYourBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input deposit amount`
+  String get inputDepositAmount {
+    return Intl.message(
+      'Input deposit amount',
+      name: 'inputDepositAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The amount must match with the actual transferred amount.`
+  String get theAmountMustMatch {
+    return Intl.message(
+      'The amount must match with the actual transferred amount.',
+      name: 'theAmountMustMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your deposit can take up to 2 working days`
+  String get yourDepositCanTakeUp2WorkingDays {
+    return Intl.message(
+      'Your deposit can take up to 2 working days',
+      name: 'yourDepositCanTakeUp2WorkingDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notes`
+  String get notes {
+    return Intl.message(
+      'Notes',
+      name: 'notes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.`
+  String get returningUserDepositNotes {
+    return Intl.message(
+      'We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.',
+      name: 'returningUserDepositNotes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK$ {minDeposit} bank transfer is completed.`
+  String weWillTakeInformationCollectedFromYour(String minDeposit) {
+    return Intl.message(
+      'We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ $minDeposit bank transfer is completed.',
+      name: 'weWillTakeInformationCollectedFromYour',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Please add a HK bank account that is under your name; other people's bank accounts or joint accounts will not be accepted.`
+  String get pleaseAddAHkBankAccount {
+    return Intl.message(
+      'Please add a HK bank account that is under your name; other people\'s bank accounts or joint accounts will not be accepted.',
+      name: 'pleaseAddAHkBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will only accept deposits via bank transfer (wire/FPS) from your own account.`
+  String get weWillOnlyAcceptDepositViaBankTransfer {
+    return Intl.message(
+      'We will only accept deposits via bank transfer (wire/FPS) from your own account.',
+      name: 'weWillOnlyAcceptDepositViaBankTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will only accept HKD.`
+  String get weWillOnlyAcceptHKD {
+    return Intl.message(
+      'We will only accept HKD.',
+      name: 'weWillOnlyAcceptHKD',
       desc: '',
       args: [],
     );
