@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../feature/tabs/utils/tab_utils.dart';
 import '../values/app_values.dart';
 
 class CustomStretchedLayout extends StatelessWidget {
@@ -8,6 +9,7 @@ class CustomStretchedLayout extends StatelessWidget {
   final Widget? bottomButton;
   final EdgeInsets padding;
   final EdgeInsets contentPadding;
+  final bool isUsedWithBottomTab;
 
   const CustomStretchedLayout(
       {Key? key,
@@ -15,6 +17,7 @@ class CustomStretchedLayout extends StatelessWidget {
       required this.content,
       this.bottomButton,
       this.padding = AppValues.screenHorizontalPadding,
+      this.isUsedWithBottomTab = false,
       this.contentPadding = const EdgeInsets.only(top: 24.0, bottom: 43)})
       : super(key: key);
 
@@ -28,6 +31,8 @@ class CustomStretchedLayout extends StatelessWidget {
             builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
               return SingleChildScrollView(
+                padding: EdgeInsets.only(
+                    bottom: isUsedWithBottomTab ? tabHeight : 0),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight: viewportConstraints.maxHeight,
