@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/presentation/buttons/button_pair.dart';
 import '../../../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../../../core/presentation/custom_stretched_layout.dart';
 import '../../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../../../../core/styles/asklora_colors.dart';
@@ -44,132 +45,99 @@ class OmniSearchQuestionWidget extends StatelessWidget {
           initialKeywordAnswers: defaultOmniSearch.keywordAnswers,
           initialKeywords: defaultOmniSearch.keywords),
       child: BlocListener<OmniSearchQuestionWidgetBloc,
-          OmniSearchQuestionWidgetState>(
-        listenWhen: (previous, current) =>
-            previous.addKeywordError != current.addKeywordError,
-        listener: (context, state) {
-          if (state.addKeywordError) {
-            CustomInAppNotification.show(
-                context, 'Keyword already added to the list');
-            keywordController.text = '';
-          }
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            enableBackNavigation
+              OmniSearchQuestionWidgetState>(
+          listenWhen: (previous, current) =>
+              previous.addKeywordError != current.addKeywordError,
+          listener: (context, state) {
+            if (state.addKeywordError) {
+              CustomInAppNotification.show(
+                  context, 'Keyword already added to the list');
+              keywordController.text = '';
+            }
+          },
+          child: CustomStretchedLayout(
+            isUsedWithBottomTab: true,
+            header: enableBackNavigation
                 ? QuestionHeader(
                     key: const Key('question_header'),
                     onTapBack: onCancel,
                   )
-                : const SizedBox(
-                    height: 20,
-                  ),
-            Expanded(
-              child: LayoutBuilder(builder: (context, viewportConstraints) {
-                return SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                        minHeight: viewportConstraints.maxHeight),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            QuestionTitle(
-                              question: question.question!,
-                              paddingBottom: 24,
-                            ),
-                            const LoraRoundedCornerBanner(
-                              text:
-                                  'Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!',
-                            ),
-                            const SizedBox(
-                              height: 52,
-                            ),
-                            _addKeywordInput,
-                            const SizedBox(
-                              height: 52,
-                            ),
-                            BlocBuilder<OmniSearchQuestionWidgetBloc,
-                                    OmniSearchQuestionWidgetState>(
-                                buildWhen: (previous, current) =>
-                                    previous.keywords != current.keywords ||
-                                    previous.keywordAnswers !=
-                                        current.keywordAnswers,
-                                builder: (context, state) {
-                                  return SizedBox(
-                                    width: double.infinity,
-                                    child: Wrap(
-                                        key: const Key(
-                                            'omni_search_question_builder'),
-                                        spacing: 12,
-                                        runSpacing: 12,
-                                        children: state.keywords
-                                            .map((e) => CustomChoiceChips(
-                                                active: state.keywordAnswers
-                                                    .contains(e),
-                                                enableClosedButton:
-                                                    !defaultKeywords
-                                                        .contains(e),
-                                                label: e,
-                                                onClosed: () => context
-                                                    .read<
-                                                        OmniSearchQuestionWidgetBloc>()
-                                                    .add(KeywordRemoved(e)),
-                                                onTap: () => context
-                                                    .read<
-                                                        OmniSearchQuestionWidgetBloc>()
-                                                    .add(KeywordSelected(e))))
-                                            .toList()),
-                                  );
-                                }),
-                          ],
-                        ),
-                        BlocBuilder<OmniSearchQuestionWidgetBloc,
-                                OmniSearchQuestionWidgetState>(
-                            buildWhen: (previous, current) =>
-                                previous.keywordAnswers !=
-                                current.keywordAnswers,
-                            builder: (context, state) => Padding(
-                                  padding: const EdgeInsets.only(top: 24.0),
-                                  child: ButtonPair(
-                                      primaryButtonOnClick: () {
-                                        onSubmitSuccess();
-                                        final omniSearchState = context
-                                            .read<
-                                                OmniSearchQuestionWidgetBloc>()
-                                            .state;
-                                        context.read<UserResponseBloc>().add(
-                                            SaveOmniSearchResponse(
-                                                omniSearchState.keywordAnswers,
-                                                omniSearchState.keywords));
-
-                                        context.read<UserResponseBloc>().add(
-                                            SaveUserResponse(
-                                                question,
-                                                omniSearchState.keywordAnswers
-                                                    .join(',')));
-                                      },
-                                      secondaryButtonOnClick: () => context
-                                          .read<OmniSearchQuestionWidgetBloc>()
-                                          .add(KeywordReset()),
-                                      disablePrimaryButton:
-                                          state.keywordAnswers.isEmpty,
-                                      primaryButtonLabel:
-                                          S.of(context).buttonNext,
-                                      secondaryButtonLabel: 'Reset'),
-                                ))
-                      ],
-                    ),
-                  ),
-                );
-              }),
+                : const SizedBox.shrink(),
+            content: Column(
+              children: [
+                QuestionTitle(
+                  question: question.question!,
+                  paddingBottom: 24,
+                ),
+                const LoraRoundedCornerBanner(
+                  text:
+                      'Go search for stocks with keywords or phrases, Lora will get you the relevant stocks!',
+                ),
+                const SizedBox(
+                  height: 52,
+                ),
+                _addKeywordInput,
+                const SizedBox(
+                  height: 52,
+                ),
+                BlocBuilder<OmniSearchQuestionWidgetBloc,
+                        OmniSearchQuestionWidgetState>(
+                    buildWhen: (previous, current) =>
+                        previous.keywords != current.keywords ||
+                        previous.keywordAnswers != current.keywordAnswers,
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: Wrap(
+                            key: const Key('omni_search_question_builder'),
+                            spacing: 12,
+                            runSpacing: 12,
+                            children: state.keywords
+                                .map((e) => CustomChoiceChips(
+                                    active: state.keywordAnswers.contains(e),
+                                    enableClosedButton:
+                                        !defaultKeywords.contains(e),
+                                    label: e,
+                                    onClosed: () => context
+                                        .read<OmniSearchQuestionWidgetBloc>()
+                                        .add(KeywordRemoved(e)),
+                                    onTap: () => context
+                                        .read<OmniSearchQuestionWidgetBloc>()
+                                        .add(KeywordSelected(e))))
+                                .toList()),
+                      );
+                    }),
+              ],
             ),
-          ],
-        ),
-      ),
+            bottomButton: BlocBuilder<OmniSearchQuestionWidgetBloc,
+                    OmniSearchQuestionWidgetState>(
+                buildWhen: (previous, current) =>
+                    previous.keywordAnswers != current.keywordAnswers,
+                builder: (context, state) => Padding(
+                      padding: const EdgeInsets.only(top: 24.0),
+                      child: ButtonPair(
+                          primaryButtonOnClick: () {
+                            onSubmitSuccess();
+                            final omniSearchState = context
+                                .read<OmniSearchQuestionWidgetBloc>()
+                                .state;
+                            context.read<UserResponseBloc>().add(
+                                SaveOmniSearchResponse(
+                                    omniSearchState.keywordAnswers,
+                                    omniSearchState.keywords));
+
+                            context.read<UserResponseBloc>().add(
+                                SaveUserResponse(question,
+                                    omniSearchState.keywordAnswers.join(',')));
+                          },
+                          secondaryButtonOnClick: () => context
+                              .read<OmniSearchQuestionWidgetBloc>()
+                              .add(KeywordReset()),
+                          disablePrimaryButton: state.keywordAnswers.isEmpty,
+                          primaryButtonLabel: S.of(context).buttonNext,
+                          secondaryButtonLabel: 'Reset'),
+                    )),
+          )),
     );
   }
 

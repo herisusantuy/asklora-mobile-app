@@ -7,35 +7,33 @@ class TabPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: LayoutBuilder(builder: (context, constraints) {
-        return Stack(
-          children: [
-            BlocBuilder<TabScreenBloc, TabScreenState>(
-              buildWhen: (previous, current) =>
-                  previous.currentTabPage != current.currentTabPage,
-              builder: (context, state) {
-                switch (state.currentTabPage) {
-                  case TabPage.home:
-                    return _navigatorPage(HomeScreenForm.route);
-                  case TabPage.forYou:
-                    return _navigatorPage(ForYouScreenForm.route);
-                  case TabPage.portfolio:
-                    return _navigatorPage(PortfolioScreen.route,
-                        arguments: context);
-                }
-              },
-            ),
-            canTrade
-                ? AiOverlay(
-                    maxHeight: constraints.maxHeight,
-                    maxWidth: constraints.maxWidth,
-                  )
-                : const SizedBox.shrink()
-          ],
-        );
-      }),
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      return Stack(
+        children: [
+          BlocBuilder<TabScreenBloc, TabScreenState>(
+            buildWhen: (previous, current) =>
+                previous.currentTabPage != current.currentTabPage,
+            builder: (context, state) {
+              switch (state.currentTabPage) {
+                case TabPage.home:
+                  return _navigatorPage(HomeScreenForm.route);
+                case TabPage.forYou:
+                  return _navigatorPage(ForYouScreenForm.route);
+                case TabPage.portfolio:
+                  return _navigatorPage(PortfolioScreen.route,
+                      arguments: context);
+              }
+            },
+          ),
+          canTrade
+              ? AiOverlay(
+                  maxHeight: constraints.maxHeight,
+                  maxWidth: constraints.maxWidth,
+                )
+              : const SizedBox.shrink()
+        ],
+      );
+    });
   }
 
   Widget _navigatorPage(String route, {dynamic arguments}) => Navigator(
