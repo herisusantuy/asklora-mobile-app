@@ -8,6 +8,7 @@ import '../../../../../core/presentation/custom_scaffold.dart';
 import '../../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../../../core/repository/transaction_repository.dart';
+import '../../../../../core/utils/back_button_interceptor/back_button_interceptor_bloc.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
@@ -37,77 +38,89 @@ class BotRecommendationDetailScreen extends StatelessWidget {
         BotType.findByString(botRecommendationModel.botAppType);
     return CustomScaffold(
       enableBackNavigation: false,
-      body: BlocProvider(
-        create: (_) {
-          BotStockBloc botStockBloc = BotStockBloc(
-              botStockRepository: BotStockRepository(),
-              transactionRepository: TransactionRepository());
-          _fetchBotDetail(botStockBloc);
-          return botStockBloc;
-        },
-        child: BlocConsumer<BotStockBloc, BotStockState>(
-          listenWhen: (previous, current) =>
-              previous.botDetailResponse.state !=
-              current.botDetailResponse.state,
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) {
+            BotStockBloc botStockBloc = BotStockBloc(
+                botStockRepository: BotStockRepository(),
+                transactionRepository: TransactionRepository());
+            _fetchBotDetail(botStockBloc);
+            return botStockBloc;
+          }),
+          BlocProvider(create: (_) => BackButtonInterceptorBloc())
+        ],
+        child:
+            BlocListener<BackButtonInterceptorBloc, BackButtonInterceptorState>(
           listener: (context, state) {
-            CustomLoadingOverlay.of(context)
-                .show(state.botDetailResponse.state);
+            if (state is OnPressedBack) {
+              Navigator.pop(context);
+            }
           },
-          buildWhen: (previous, current) =>
-              previous.botDetailResponse.state !=
-              current.botDetailResponse.state,
-          builder: (context, state) => RefreshIndicator(
-            onRefresh: () async =>
-                _fetchBotDetail(context.read<BotStockBloc>()),
-            child: CustomLayoutWithBlurPopUp(
-              loraPopUpMessageModel: LoraPopUpMessageModel(
-                title: S.of(context).errorGettingInformationTitle,
-                subTitle: S
-                    .of(context)
-                    .errorGettingInformationInvestmentDetailSubTitle,
-                primaryButtonLabel: S.of(context).buttonReloadPage,
-                secondaryButtonLabel: S.of(context).buttonCancel,
-                onSecondaryButtonTap: () => Navigator.pop(context),
-                onPrimaryButtonTap: () =>
-                    _fetchBotDetail(context.read<BotStockBloc>()),
-              ),
-              showPopUp: state.botDetailResponse.state == ResponseState.error,
-              content: BotStockForm(
-                useHeader: true,
-                title:
-                    '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
-                padding: EdgeInsets.zero,
-                content: BotRecommendationDetailContent(
-                  botRecommendationModel: botRecommendationModel,
-                  botType: botType,
-                  botDetailModel: state.botDetailResponse.data,
+          child: BlocConsumer<BotStockBloc, BotStockState>(
+            listenWhen: (previous, current) =>
+                previous.botDetailResponse.state !=
+                current.botDetailResponse.state,
+            listener: (context, state) {
+              CustomLoadingOverlay.of(context)
+                  .show(state.botDetailResponse.state);
+            },
+            buildWhen: (previous, current) =>
+                previous.botDetailResponse.state !=
+                current.botDetailResponse.state,
+            builder: (context, state) => RefreshIndicator(
+              onRefresh: () async =>
+                  _fetchBotDetail(context.read<BotStockBloc>()),
+              child: CustomLayoutWithBlurPopUp(
+                loraPopUpMessageModel: LoraPopUpMessageModel(
+                  title: S.of(context).errorGettingInformationTitle,
+                  subTitle: S
+                      .of(context)
+                      .errorGettingInformationInvestmentDetailSubTitle,
+                  primaryButtonLabel: S.of(context).buttonReloadPage,
+                  secondaryButtonLabel: S.of(context).buttonCancel,
+                  onSecondaryButtonTap: () => Navigator.pop(context),
+                  onPrimaryButtonTap: () =>
+                      _fetchBotDetail(context.read<BotStockBloc>()),
                 ),
-                bottomButton: Padding(
-                  padding: AppValues.screenHorizontalPadding
-                      .copyWith(top: 24, bottom: 30),
-                  child: PrimaryButton(
-                    disabled: state.botDetailResponse.state ==
-                            ResponseState.loading ||
-                        state.botDetailResponse.state == ResponseState.error,
-                    label: S.of(context).trade,
-                    onTap: () {
-                      if (botRecommendationModel.freeBot) {
-                        BotTradeSummaryScreen.open(
-                            context: context,
-                            botTradeSummaryModel: BotTradeSummaryModel(
-                                botType: botType,
-                                botRecommendationModel: botRecommendationModel,
-                                botDetailModel: state.botDetailResponse.data!,
-                                amount: 500));
-                      } else {
-                        BotStockBottomSheet.amountBotStockForm(
-                            context,
-                            botType,
-                            botRecommendationModel,
-                            state.botDetailResponse.data!,
-                            state.buyingPower);
-                      }
-                    },
+                showPopUp: state.botDetailResponse.state == ResponseState.error,
+                content: BotStockForm(
+                  useHeader: true,
+                  title:
+                      '${botType.upperCaseName} ${botRecommendationModel.tickerSymbol}',
+                  padding: EdgeInsets.zero,
+                  content: BotRecommendationDetailContent(
+                    botRecommendationModel: botRecommendationModel,
+                    botType: botType,
+                    botDetailModel: state.botDetailResponse.data,
+                  ),
+                  bottomButton: Padding(
+                    padding: AppValues.screenHorizontalPadding
+                        .copyWith(top: 24, bottom: 30),
+                    child: PrimaryButton(
+                      disabled: state.botDetailResponse.state ==
+                              ResponseState.loading ||
+                          state.botDetailResponse.state == ResponseState.error,
+                      label: S.of(context).trade,
+                      onTap: () {
+                        if (botRecommendationModel.freeBot) {
+                          BotTradeSummaryScreen.open(
+                              context: context,
+                              botTradeSummaryModel: BotTradeSummaryModel(
+                                  botType: botType,
+                                  botRecommendationModel:
+                                      botRecommendationModel,
+                                  botDetailModel: state.botDetailResponse.data!,
+                                  amount: 500));
+                        } else {
+                          BotStockBottomSheet.amountBotStockForm(
+                              context,
+                              botType,
+                              botRecommendationModel,
+                              state.botDetailResponse.data!,
+                              state.buyingPower);
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),
