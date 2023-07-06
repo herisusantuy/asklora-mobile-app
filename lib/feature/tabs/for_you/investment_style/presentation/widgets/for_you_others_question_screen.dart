@@ -20,56 +20,51 @@ class ForYouOthersQuestionScreen extends StatelessWidget {
         showPopUp:
             state.ppiResponseState == PpiResponseState.dispatchResponse &&
                 state.responseState == ResponseState.error,
-        content: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: CustomStretchedLayout(
-            contentPadding: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            content: Column(
-              children: [
-                const QuestionTitle(
-                  question: 'Get in your investment zone',
-                  paddingBottom: 24,
-                ),
-                const LoraRoundedCornerBanner(
-                  text:
-                      'Find Botstocks that fit you the best by letting me know your Investment Style.',
-                ),
-                const SizedBox(
-                  height: 52,
-                ),
-                ...questions.map((e) => _questionDropdown(context, e)).toList()
-              ],
-            ),
-            bottomButton: Padding(
-              padding: const EdgeInsets.only(top: 24.0),
-              child: BlocBuilder<UserResponseBloc, UserResponseState>(
-                buildWhen: (previous, current) =>
-                    previous.ppiResponseState != current.ppiResponseState,
-                builder: (context, state) {
-                  return isFirstQuestion
-                      ? Padding(
-                          padding: const EdgeInsets.only(bottom: 30),
-                          child: PrimaryButton(
-                              disabled: _disableButton(context),
-                              label: 'View Botstock Recommendation',
-                              onTap: () => context
-                                  .read<UserResponseBloc>()
-                                  .add(SendBulkResponse())),
-                        )
-                      : ButtonPair(
-                          primaryButtonOnClick: () => context
-                              .read<UserResponseBloc>()
-                              .add(SendBulkResponse()),
-                          secondaryButtonOnClick: () => context
-                              .read<
-                                  NavigationBloc<InvestmentStyleQuestionType>>()
-                              .add(const PagePop()),
-                          disablePrimaryButton: _disableButton(context),
-                          primaryButtonLabel: 'View Botstock Recommendation',
-                          secondaryButtonLabel: 'Back');
-                },
+        content: CustomStretchedLayout(
+          isUsedWithBottomTab: true,
+          content: Column(
+            children: [
+              const QuestionTitle(
+                question: 'Get in your investment zone',
+                paddingBottom: 24,
               ),
+              const LoraRoundedCornerBanner(
+                text:
+                    'Find Botstocks that fit you the best by letting me know your Investment Style.',
+              ),
+              const SizedBox(
+                height: 52,
+              ),
+              ...questions.map((e) => _questionDropdown(context, e)).toList()
+            ],
+          ),
+          bottomButton: Padding(
+            padding: const EdgeInsets.only(top: 24.0),
+            child: BlocBuilder<UserResponseBloc, UserResponseState>(
+              buildWhen: (previous, current) =>
+                  previous.ppiResponseState != current.ppiResponseState,
+              builder: (context, state) {
+                return isFirstQuestion
+                    ? Padding(
+                        padding: const EdgeInsets.only(bottom: 30),
+                        child: PrimaryButton(
+                            disabled: _disableButton(context),
+                            label: 'View Botstock Recommendation',
+                            onTap: () => context
+                                .read<UserResponseBloc>()
+                                .add(SendBulkResponse())),
+                      )
+                    : ButtonPair(
+                        primaryButtonOnClick: () => context
+                            .read<UserResponseBloc>()
+                            .add(SendBulkResponse()),
+                        secondaryButtonOnClick: () => context
+                            .read<NavigationBloc<InvestmentStyleQuestionType>>()
+                            .add(const PagePop()),
+                        disablePrimaryButton: _disableButton(context),
+                        primaryButtonLabel: 'View Botstock Recommendation',
+                        secondaryButtonLabel: 'Back');
+              },
             ),
           ),
         ),

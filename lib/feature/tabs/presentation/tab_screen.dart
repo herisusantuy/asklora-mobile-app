@@ -33,6 +33,7 @@ import '../../tabs/for_you/for_you_screen_form.dart';
 import '../../tabs/for_you/investment_style/bloc/for_you_question_bloc.dart';
 import '../../tabs/for_you/repository/for_you_repository.dart';
 import '../../tabs/home/home_screen_form.dart';
+import '../utils/tab_utils.dart';
 import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';

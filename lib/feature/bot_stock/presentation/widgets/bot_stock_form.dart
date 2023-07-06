@@ -16,6 +16,7 @@ class BotStockForm extends StatelessWidget {
   final bool useHeader;
   final VoidCallback? onTapBack;
   final Widget? customHeader;
+  final bool isUsedWithBottomTab;
 
   const BotStockForm(
       {Key? key,
@@ -27,6 +28,7 @@ class BotStockForm extends StatelessWidget {
       this.backgroundColor = AskLoraColors.white,
       this.padding = AppValues.screenHorizontalPadding,
       this.customHeader,
+      this.isUsedWithBottomTab = false,
       this.onTapBack})
       : super(key: key);
 
@@ -37,6 +39,7 @@ class BotStockForm extends StatelessWidget {
       enableBackNavigation: enableBackNavigation,
       backgroundColor: backgroundColor,
       body: CustomStretchedLayout(
+        isUsedWithBottomTab: isUsedWithBottomTab,
         header: useHeader
             ? customHeader ??
                 CustomHeader(
