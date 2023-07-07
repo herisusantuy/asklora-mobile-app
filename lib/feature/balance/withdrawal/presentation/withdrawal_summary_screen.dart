@@ -143,7 +143,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                   label: S.of(context).buttonConfirm,
                   onTap: () => context
                       .read<WithdrawalBloc>()
-                      .add(SubmitWithdrawal(args.withdrawalAmount)));
+                      .add(SubmitWithdrawal(args.withdrawalAmount.toString())));
             })
           ],
         ),

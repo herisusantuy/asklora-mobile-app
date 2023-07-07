@@ -29,13 +29,9 @@ class WithdrawalAmountValue extends StatelessWidget {
                       ),
                     ),
                     CustomTextNew(
-                      state.withdrawalAmount == 0
-                          ? state.withdrawalAmount.toStringAsFixed(0)
-                          : state.withdrawalAmount.convertToCurrencyDecimal(),
-                      style: AskLoraTextStyles.h1.copyWith(
-                          color: state.withdrawalAmount == 0
-                              ? AskLoraColors.gray
-                              : AskLoraColors.charcoal),
+                      state.withdrawalAmount,
+                      style: AskLoraTextStyles.h1
+                          .copyWith(color: AskLoraColors.charcoal),
                     ),
                   ],
                 );
@@ -45,7 +41,7 @@ class WithdrawalAmountValue extends StatelessWidget {
           height: 12,
         ),
         CustomTextNew(
-          'Withdrawable Amount HKD$withdrawableBalance',
+          'Withdrawable Amount HKD $withdrawableBalance',
           style:
               AskLoraTextStyles.body1.copyWith(color: AskLoraColors.charcoal),
         )

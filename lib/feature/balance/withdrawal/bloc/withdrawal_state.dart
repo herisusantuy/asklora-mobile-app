@@ -2,12 +2,12 @@ part of 'withdrawal_bloc.dart';
 
 class WithdrawalState extends Equatable {
   final BaseResponse<WithdrawalResponse> response;
-  final double withdrawalAmount;
+  final String withdrawalAmount;
   final String withdrawalAmountErrorText;
 
   const WithdrawalState({
     this.response = const BaseResponse(),
-    this.withdrawalAmount = 0,
+    this.withdrawalAmount = '',
     this.withdrawalAmountErrorText = '',
   }) : super();
 
@@ -16,7 +16,7 @@ class WithdrawalState extends Equatable {
       [withdrawalAmount, withdrawalAmountErrorText, response];
 
   WithdrawalState copyWith({
-    double? withdrawalAmount,
+    String? withdrawalAmount,
     String? withdrawalAmountErrorText,
     BaseResponse<WithdrawalResponse>? response,
   }) {
@@ -29,5 +29,12 @@ class WithdrawalState extends Equatable {
   }
 
   bool disableWithdrawal(double withdrawableAmount) =>
-      withdrawalAmount > withdrawableAmount || withdrawalAmount == 0;
+      double.parse(withdrawalAmount == ''
+              ? '0'
+              : withdrawalAmount.replaceAll(',', '')) >
+          withdrawableAmount ||
+      double.parse(withdrawalAmount == ''
+              ? '0'
+              : withdrawalAmount.replaceAll(',', '')) ==
+          0;
 }

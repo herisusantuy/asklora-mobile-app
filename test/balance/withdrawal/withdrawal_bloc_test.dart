@@ -37,9 +37,9 @@ void main() async {
         'emits `withdrawalAmount = 2000` WHEN '
         'changed withdraw amount to 2000',
         build: () => withdrawalBloc,
-        act: (bloc) => bloc.add(const WithdrawalAmountChanged(2000)),
+        act: (bloc) => bloc.add(const WithdrawalAmountChanged('2000')),
         expect: () => {
-              const WithdrawalState(withdrawalAmount: 2000),
+              const WithdrawalState(withdrawalAmount: '2000'),
             });
 
     blocTest<WithdrawalBloc, WithdrawalState>(
@@ -47,23 +47,23 @@ void main() async {
         'submit withdrawal',
         build: () {
           when(transactionRepository.submitWithdrawal(
-                  withdrawalRequest: const WithdrawalRequest(amount: '2000.0')))
+                  withdrawalRequest: const WithdrawalRequest(amount: '2000')))
               .thenAnswer((_) => Future.value(submitResponse));
           return withdrawalBloc;
         },
         act: (bloc) => {
-              bloc.add(const WithdrawalAmountChanged(2000.0)),
-              bloc.add(const SubmitWithdrawal(2000.0))
+              bloc.add(const WithdrawalAmountChanged('2000')),
+              bloc.add(const SubmitWithdrawal('2000'))
             },
         expect: () => {
-              const WithdrawalState(withdrawalAmount: 2000.0),
+              const WithdrawalState(withdrawalAmount: '2000'),
               WithdrawalState(
                 response: BaseResponse.loading(),
-                withdrawalAmount: 2000.0,
+                withdrawalAmount: '2000',
               ),
               WithdrawalState(
                 response: submitResponse,
-                withdrawalAmount: 2000.0,
+                withdrawalAmount: '2000',
               ),
             });
 
@@ -72,23 +72,23 @@ void main() async {
         'failed submit withdrawal',
         build: () {
           when(transactionRepository.submitWithdrawal(
-                  withdrawalRequest: const WithdrawalRequest(amount: '2000.0')))
+                  withdrawalRequest: const WithdrawalRequest(amount: '2000')))
               .thenThrow(errorResponse);
           return withdrawalBloc;
         },
         act: (bloc) => {
-              bloc.add(const WithdrawalAmountChanged(2000.0)),
-              bloc.add(const SubmitWithdrawal(2000.0))
+              bloc.add(const WithdrawalAmountChanged('2000')),
+              bloc.add(const SubmitWithdrawal('2000'))
             },
         expect: () => {
-              const WithdrawalState(withdrawalAmount: 2000.0),
+              const WithdrawalState(withdrawalAmount: '2000'),
               WithdrawalState(
                 response: BaseResponse.loading(),
-                withdrawalAmount: 2000.0,
+                withdrawalAmount: '2000',
               ),
               WithdrawalState(
                 response: errorResponse,
-                withdrawalAmount: 2000.0,
+                withdrawalAmount: '2000',
               ),
             });
 
@@ -102,7 +102,7 @@ void main() async {
           return withdrawalBloc;
         },
         act: (bloc) => {
-              bloc.add(const SubmitWithdrawal(0)),
+              bloc.add(const SubmitWithdrawal('0')),
               bloc.add(ResetWithdrawalResponse()),
             },
         expect: () => {
