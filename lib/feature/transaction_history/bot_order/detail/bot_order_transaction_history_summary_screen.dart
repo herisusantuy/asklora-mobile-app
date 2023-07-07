@@ -37,9 +37,8 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
           botSummaryTransactionHistoryModel,
       required String botDuration,
       required bool showLastBottomBorder}) {
-    BotSummaryType botSummaryType =
-        BotSummaryType.findByString(botSummaryTransactionHistoryModel.type);
-
+    final BotSummaryType botSummaryType =
+        botSummaryTransactionHistoryModel.botSummaryType;
     if (botSummaryType == BotSummaryType.makeIndicative ||
         botSummaryType == BotSummaryType.makeLive ||
         botSummaryType == BotSummaryType.makeCancel) {

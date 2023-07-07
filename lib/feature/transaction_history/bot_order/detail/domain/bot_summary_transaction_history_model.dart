@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../../core/utils/date_utils.dart';
 import '../../../../../../core/utils/extensions.dart';
+import '../../../utils/transaction_history_util.dart';
 
 part 'bot_summary_transaction_history_model.g.dart';
 
@@ -38,6 +39,8 @@ class BotSummaryTransactionHistoryModel extends Equatable {
   String get createdFormattedString {
     return '${convertDateToEst(date, dateFormat: 'dd/MM/yyyy HH:mm:ss')} EST';
   }
+
+  BotSummaryType get botSummaryType => BotSummaryType.findByString(type);
 
   const BotSummaryTransactionHistoryModel(this.uid, this.type, this.date,
       this.status, this.amount, this.fee, this.totalPnL);
