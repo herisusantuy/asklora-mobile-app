@@ -274,7 +274,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingCompletionMessage": MessageLookupByLibrary.simpleMessage(
             "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。"),
         "openInvestmentAccount": MessageLookupByLibrary.simpleMessage("開立投資賬戶"),
+        "orderCancelled": MessageLookupByLibrary.simpleMessage("訂單己取消"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("訂單已過期"),
+        "orderPlaced": MessageLookupByLibrary.simpleMessage("已提交訂單"),
         "orderRollover": MessageLookupByLibrary.simpleMessage("訂單已續期"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("訂單已開始"),
         "password": MessageLookupByLibrary.simpleMessage("密碼"),

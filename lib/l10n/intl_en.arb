@@ -96,6 +96,8 @@
   "activities": "Activities",
   "filledPrice": "Filled Price",
   "shares": "Shares",
+  "orderCancelled": "Order Cancelled",
+  "orderPlaced": "Order Placed",
   "orderStarted": "Order Started",
   "orderRollover": "Order Rollover",
   "orderExpired": "Order Expired",

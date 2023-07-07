@@ -10,43 +10,55 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocBuilder<
           BotTransactionHistoryDetailBloc, BotTransactionHistoryDetailState>(
-      buildWhen: (previous, current) =>
-          previous.response.state != current.response.state,
-      builder: (context, state) {
-        return ListView(
-          children: (state.response.data?.summary ?? [])
-              .map((e) => _getCard(
-                  context,
-                  e,
-                  state.response.data?.summary.indexOf(e),
-                  state.response.data?.summary.length,
-                  state.response.data?.botDuration ?? 'NA'))
-              .toList(),
-        );
-      });
+        buildWhen: (previous, current) =>
+            previous.response.state != current.response.state,
+        builder: (context, state) {
+          List<BotSummaryTransactionHistoryModel> botSummaries =
+              state.response.data?.summary ?? [];
+          return ListView(
+            children: botSummaries
+                .map((botSummaryTransactionHistoryModel) => _getCard(
+                      context: context,
+                      botSummaryTransactionHistoryModel:
+                          botSummaryTransactionHistoryModel,
+                      botDuration: state.response.data?.botDuration ?? 'NA',
+                      showLastBottomBorder: botSummaries
+                              .indexOf(botSummaryTransactionHistoryModel) ==
+                          0,
+                    ))
+                .toList(),
+          );
+        },
+      );
 
   Widget _getCard(
-      BuildContext context,
-      BotSummaryTransactionHistoryModel botSummaryTransactionHistoryModel,
-      int? index,
-      int? dataLength,
-      String botDuration) {
-    if (index == (dataLength ?? 0) - 1) {
-      return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,
-          S.of(context).orderStarted, index, botDuration);
-    } else if (botStatusType == BotStatus.expired) {
-      return _expiredCard(context, botSummaryTransactionHistoryModel);
+      {required BuildContext context,
+      required BotSummaryTransactionHistoryModel
+          botSummaryTransactionHistoryModel,
+      required String botDuration,
+      required bool showLastBottomBorder}) {
+    BotSummaryType botSummaryType =
+        BotSummaryType.findByString(botSummaryTransactionHistoryModel.type);
+
+    if (botSummaryType == BotSummaryType.makeIndicative ||
+        botSummaryType == BotSummaryType.makeLive ||
+        botSummaryType == BotSummaryType.makeCancel) {
+      return _completeSummaryCard(
+          context,
+          botSummaryTransactionHistoryModel,
+          getNameByBotSummaryType(context, botSummaryType),
+          showLastBottomBorder,
+          botDuration);
     } else {
-      return _startedAndRolloverCard(context, botSummaryTransactionHistoryModel,
-          S.of(context).orderRollover, index, botDuration);
+      return _expiredCard(context, botSummaryTransactionHistoryModel);
     }
   }
 
-  Widget _startedAndRolloverCard(
+  Widget _completeSummaryCard(
       BuildContext context,
       BotSummaryTransactionHistoryModel botSummaryTransactionHistoryModel,
       String additionalTitleInfo,
-      int? index,
+      bool showLastBottomBorder,
       String botDuration) {
     return Column(
       children: [
@@ -72,7 +84,7 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
         BotOrderTransactionHistorySummaryCard(
           title: S.of(context).botManagementFee,
           subTitle: botSummaryTransactionHistoryModel.feeString,
-          showBottomBorder: index == 0,
+          showBottomBorder: showLastBottomBorder,
         ),
       ],
     );

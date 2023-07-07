@@ -75,6 +75,8 @@
   "activities": "交易記錄",
   "filledPrice": "成交價格",
   "shares": "數量",
+  "orderCancelled": "訂單己取消",
+  "orderPlaced": "已提交訂單",
   "orderStarted": "訂單已開始",
   "orderRollover": "訂單已續期",
   "orderExpired": "訂單已過期",
