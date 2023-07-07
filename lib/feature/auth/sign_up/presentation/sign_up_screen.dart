@@ -14,7 +14,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('test');
     return CustomScaffold(
       enableBackNavigation: false,
       body: Padding(
