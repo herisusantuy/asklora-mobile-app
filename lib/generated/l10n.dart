@@ -2693,10 +2693,10 @@ class S {
     );
   }
 
-  /// `Start your new investing journey with Lora - \nYour FinFit Coach`
+  /// `Start your AI revolution with\nAsklora. Go crush it.`
   String get signUpTitle {
     return Intl.message(
-      'Start your new investing journey with Lora - \nYour FinFit Coach',
+      'Start your AI revolution with\nAsklora. Go crush it.',
       name: 'signUpTitle',
       desc: '',
       args: [],
@@ -3360,6 +3360,46 @@ class S {
     return Intl.message(
       'Submit',
       name: 'buttonSubmit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `min. 8 characters`
+  String get min8Character {
+    return Intl.message(
+      'min. 8 characters',
+      name: 'min8Character',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 lowercase letter`
+  String get atLeast1Lowercase {
+    return Intl.message(
+      'at least 1 lowercase letter',
+      name: 'atLeast1Lowercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 upper case letter`
+  String get atLeast1Uppercase {
+    return Intl.message(
+      'at least 1 upper case letter',
+      name: 'atLeast1Uppercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 number`
+  String get atLeast1Number {
+    return Intl.message(
+      'at least 1 number',
+      name: 'atLeast1Number',
       desc: '',
       args: [],
     );
