@@ -28,7 +28,7 @@ class BotRecommendationCard extends StatelessWidget {
               path: SubTabPage.portfolioBotStockDetails.value,
               arguments: {
                 'botType': botType.internalName,
-                'symbol': botRecommendationModel.tickerSymbol
+                'symbol': botRecommendationModel.ticker
               }
             ))));
         isDisabled ? () {} : onTap();

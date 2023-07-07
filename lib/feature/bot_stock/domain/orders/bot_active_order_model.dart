@@ -34,6 +34,7 @@ class BotActiveOrderModel extends Equatable {
   final String botDuration;
   @JsonKey(name: 'optimal_time')
   final String optimalTime;
+  final String ticker;
 
   String startOrExpireDateStr(BuildContext context) {
     if (botStatus == BotStatus.pending) {
@@ -61,6 +62,7 @@ class BotActiveOrderModel extends Equatable {
       this.symbol,
       this.botAppsName,
       this.botDuration,
+      this.ticker,
       this.optimalTime);
 
   String get totalPnLPctString {
@@ -90,6 +92,7 @@ class BotActiveOrderModel extends Equatable {
         isDummy,
         spotDate,
         symbol,
-        botAppsName
+        botAppsName,
+        ticker,
       ];
 }
