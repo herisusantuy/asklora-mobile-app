@@ -373,7 +373,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days."),
         "openInvestmentAccount":
             MessageLookupByLibrary.simpleMessage("Open Investment Account"),
+        "orderCancelled":
+            MessageLookupByLibrary.simpleMessage("Order Cancelled"),
         "orderExpired": MessageLookupByLibrary.simpleMessage("Order Expired"),
+        "orderPlaced": MessageLookupByLibrary.simpleMessage("Order Placed"),
         "orderRollover": MessageLookupByLibrary.simpleMessage("Order Rollover"),
         "orderStarted": MessageLookupByLibrary.simpleMessage("Order Started"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),

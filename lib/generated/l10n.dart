@@ -940,6 +940,26 @@ class S {
     );
   }
 
+  /// `Order Cancelled`
+  String get orderCancelled {
+    return Intl.message(
+      'Order Cancelled',
+      name: 'orderCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Placed`
+  String get orderPlaced {
+    return Intl.message(
+      'Order Placed',
+      name: 'orderPlaced',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Order Started`
   String get orderStarted {
     return Intl.message(

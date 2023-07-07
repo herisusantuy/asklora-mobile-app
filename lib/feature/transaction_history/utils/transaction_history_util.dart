@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+
 import '../../../core/styles/asklora_colors.dart';
+import '../../../generated/l10n.dart';
 
 enum TransferType {
   deposit('DEPOSIT', 'Deposit', AskLoraColors.primaryGreen, '+'),
@@ -18,6 +21,40 @@ enum TransferType {
   }
 
   const TransferType(this.value, this.title, this.color, this.punctuation);
+}
+
+enum BotSummaryType {
+  makeIndicative('make_indicative'),
+  makeLive('make_live'),
+  makeCancel('make_cancel'),
+  loss('loss'),
+  expired('expired'),
+  profit('profit'),
+  terminated('terminated');
+
+  final String value;
+
+  static BotSummaryType findByString(String botSummaryTypeString) {
+    BotSummaryType botSummaryType = BotSummaryType.values
+        .firstWhere((element) => element.value == botSummaryTypeString);
+    return botSummaryType;
+  }
+
+  const BotSummaryType(this.value);
+}
+
+String getNameByBotSummaryType(
+    BuildContext context, BotSummaryType botSummaryType) {
+  switch (botSummaryType) {
+    case BotSummaryType.makeIndicative:
+      return S.of(context).orderPlaced;
+    case BotSummaryType.makeLive:
+      return S.of(context).orderStarted;
+    case BotSummaryType.makeCancel:
+      return S.of(context).orderCancelled;
+    default:
+      return S.of(context).orderExpired;
+  }
 }
 
 enum TransferStatus {
