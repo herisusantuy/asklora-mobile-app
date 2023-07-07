@@ -36,10 +36,10 @@ void main() async {
       await buildHomeScreen(tester);
 
       //password instruction should be greyed and icon should be ❗
-      expect(find.text('min. 8 - max. 16 characters'), findsNothing);
-      expect(find.text('at least 1 lowercase letter'), findsNothing);
-      expect(find.text('at least 1 uppercase letter'), findsNothing);
-      expect(find.text('at least 1 number'), findsNothing);
+      expect(find.text(S.current.min8Character), findsNothing);
+      expect(find.text(S.current.atLeast1Lowercase), findsNothing);
+      expect(find.text(S.current.atLeast1Uppercase), findsNothing);
+      expect(find.text(S.current.atLeast1Number), findsNothing);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
@@ -70,10 +70,10 @@ void main() async {
 
       expect(find.text('kkkkk'), findsOneWidget);
 
-      expect(find.text('min. 8 - max. 16 characters'), findsOneWidget);
-      expect(find.text('at least 1 lowercase letter'), findsOneWidget);
-      expect(find.text('at least 1 uppercase letter'), findsOneWidget);
-      expect(find.text('at least 1 number'), findsOneWidget);
+      expect(find.text(S.current.min8Character), findsOneWidget);
+      expect(find.text(S.current.atLeast1Lowercase), findsOneWidget);
+      expect(find.text(S.current.atLeast1Uppercase), findsOneWidget);
+      expect(find.text(S.current.atLeast1Number), findsOneWidget);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
@@ -95,10 +95,11 @@ void main() async {
       expect(find.text('Enter valid email'), findsNothing);
 
       //password instruction should be greyed and icon should be ❗
-      expect(find.text('min. 8 - max. 16 characters'), findsOneWidget);
-      expect(find.text('at least 1 lowercase letter'), findsOneWidget);
-      expect(find.text('at least 1 uppercase letter'), findsOneWidget);
-      expect(find.text('at least 1 number'), findsOneWidget);
+
+      expect(find.text(S.current.min8Character), findsOneWidget);
+      expect(find.text(S.current.atLeast1Lowercase), findsOneWidget);
+      expect(find.text(S.current.atLeast1Uppercase), findsOneWidget);
+      expect(find.text(S.current.atLeast1Number), findsOneWidget);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
@@ -120,10 +121,10 @@ void main() async {
       expect(find.text('Enter valid email'), findsOneWidget);
 
       //password instruction should be bluegrey and icon should be ✅
-      expect(find.text('min. 8 - max. 16 characters'), findsOneWidget);
-      expect(find.text('at least 1 lowercase letter'), findsOneWidget);
-      expect(find.text('at least 1 uppercase letter'), findsOneWidget);
-      expect(find.text('at least 1 number'), findsOneWidget);
+      expect(find.text(S.current.min8Character), findsOneWidget);
+      expect(find.text(S.current.atLeast1Lowercase), findsOneWidget);
+      expect(find.text(S.current.atLeast1Uppercase), findsOneWidget);
+      expect(find.text(S.current.atLeast1Number), findsOneWidget);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
@@ -145,10 +146,10 @@ void main() async {
       expect(find.text('Enter valid email'), findsNothing);
 
       //password instruction should be bluegrey and icon should be ✅
-      expect(find.text('min. 8 - max. 16 characters'), findsOneWidget);
-      expect(find.text('at least 1 lowercase letter'), findsOneWidget);
-      expect(find.text('at least 1 uppercase letter'), findsOneWidget);
-      expect(find.text('at least 1 number'), findsOneWidget);
+      expect(find.text(S.current.min8Character), findsOneWidget);
+      expect(find.text(S.current.atLeast1Lowercase), findsOneWidget);
+      expect(find.text(S.current.atLeast1Uppercase), findsOneWidget);
+      expect(find.text(S.current.atLeast1Number), findsOneWidget);
 
       //signUpButton should be disabled
       var signUpButton = find.byKey(const Key('sign_up_submit_button'));
