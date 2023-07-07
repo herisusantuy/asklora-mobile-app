@@ -239,6 +239,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "endBotStockAcknowledgement": m8,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
+        "enterValidPassword":
+            MessageLookupByLibrary.simpleMessage("Enter valid password"),
         "errorGettingInformationInvestmentDetailSubTitle":
             MessageLookupByLibrary.simpleMessage(
                 "There was an error when trying to get the investment details. Please try reloading the page"),
@@ -315,8 +317,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Squat"),
-        "invalidPassword":
-            MessageLookupByLibrary.simpleMessage("Enter valid password"),
+        "invalidPassword": MessageLookupByLibrary.simpleMessage("無效密碼"),
         "investmentAmount":
             MessageLookupByLibrary.simpleMessage("Investment Amount"),
         "investmentPeriod":
@@ -497,6 +498,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "pushNotification":
             MessageLookupByLibrary.simpleMessage("Push-Notification"),
+        "readyToGo": MessageLookupByLibrary.simpleMessage("Ready to go?"),
         "redeemYourBotstockNow":
             MessageLookupByLibrary.simpleMessage("Redeem Your Botstock Now"),
         "relearn": MessageLookupByLibrary.simpleMessage("relearn"),
