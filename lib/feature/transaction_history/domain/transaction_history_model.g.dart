@@ -47,4 +47,5 @@ const _$TransactionHistoryTypeEnumMap = {
   TransactionHistoryType.all: 'all',
   TransactionHistoryType.bot: 'bot',
   TransactionHistoryType.transfer: 'transfer',
+  TransactionHistoryType.subscription: 'subscription',
 };

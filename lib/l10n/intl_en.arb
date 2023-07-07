@@ -96,6 +96,8 @@
   "activities": "Activities",
   "filledPrice": "Filled Price",
   "shares": "Shares",
+  "orderCancelled": "Order Cancelled",
+  "orderPlaced": "Order Placed",
   "orderStarted": "Order Started",
   "orderRollover": "Order Rollover",
   "orderExpired": "Order Expired",
@@ -281,7 +283,7 @@
   "passwordDoesNotMatch": "Your password does not match.",
   "passwordChangeSuccess": "Password Change Success",
   "yourPasswordHasBeenChanged": "Your password has been changed",
-  "invalidPassword": "Enter valid password",
+  "enterValidPassword": "Enter valid password",
   "oldPasswordSameWithNewPasswordError": "Your new password cannot be the same as your old password",
   "portfolioPopUpCreateAnAccountTitle": "Create an Account and Start Trading!",
   "portfolioPopUpCreateAnAccountSubTitle": "You can manage all your investments here after you start trading. Create an account and start trading.",
@@ -374,7 +376,7 @@
   "status": "Status",
   "suspendedScreenTitle": "Account Suspended",
   "suspendedScreenSubTitle": "Your account has been suspended and is pending investigation from us. If you have any questions about your account, please contact our customer service team.",
-  "signUpTitle": "Start your new investing journey with Lora - \nYour FinFit Coach",
+  "signUpTitle": "Start your AI revolution with\nAsklora. Go crush it.",
   "to": "To",
   "transactionFee": "Transaction fee",
   "transferTo": "Transfer to",
@@ -462,5 +464,57 @@
   "depositFundToStartInvesting": "Deposit funds to start investing",
   "onBoardingCompletionMessage": "You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.",
   "nextStep": "Next step",
-  "go": "Go AA"
+  "go": "Go",
+  "depositViaFpsOrWireTransfer": "Deposit via FPS or Wire Transfer",
+  "transferAtLeastWithNoMinimumDeposit": "Transfer to Asklora bank account from the same bank account you used.",
+  "transferAtLeastWithMinimumDeposit": "Transfer at least HK${minDeposit} to Asklora's bank account. Any initial deposit less than HK${minDeposit} will be rejected and fees will be charged.",
+  "@transferAtLeastWithMinimumDeposit": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "uploadProofOfRemittance": "Upload proof of remittance",
+  "theProofOfRemittanceShouldShowYourBankAccount": "The proof of remittance should show your bank account number, full name, and amount.",
+  "inputDepositAmount": "Input deposit amount",
+  "theAmountMustMatch": "The amount must match with the actual transferred amount.",
+  "yourDepositCanTakeUp2WorkingDays": "Your deposit can take up to 2 working days",
+  "notes": "Notes",
+  "returningUserDepositNotes": "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.",
+  "weWillTakeInformationCollectedFromYour": "We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK$ {minDeposit} bank transfer is completed.",
+  "@weWillTakeInformationCollectedFromYour": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseAddAHkBankAccount": "Please add a HK bank account that is under your name; other people's bank accounts or joint accounts will not be accepted.",
+  "weWillOnlyAcceptDepositViaBankTransfer": "We will only accept deposits via bank transfer (wire/FPS) from your own account.",
+  "weWillOnlyAcceptHKD": "We will only accept HKD.",
+  "transferInitialFundToAsklora": "Transfer initial funds to Asklora",
+  "transferFundToAsklora": "Transfer funds to Asklora",
+  "firstTimeCopyAskloraBankDetails": "Copy Asklora's bank details and transfer no less than HK${minDeposit} from your bank account via FPS or Wire transfer.",
+  "@firstTimeCopyAskloraBankDetails": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "copyAskloraBankDetails": "Copy Asklora's bank details and transfer from your bank account via FPS or Wire transfer.",
+  "theAmountMustMatchWithPor": "The amount must match with the proof of remittance.",
+  "thePorShouldShowYourBank": "The proof of remittance should show your bank account number, full name, and amount.",
+  "pleaseMakeSureYouHaveFinished": "Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.",
+  "pleaseMakeSureYouPressSubmit": "Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.",
+  "yourDepositMayBeRejected": "Your deposit may be rejected if the informed amount is different from the actual transferred amount.",
+  "weAcceptHKDOnly": "We accept HKD only.",
+  "buttonSubmit": "Submit",
+  "min8Character": "min. 8 characters",
+  "atLeast1Lowercase": "at least 1 lowercase letter",
+  "atLeast1Uppercase": "at least 1 upper case letter",
+  "atLeast1Number": "at least 1 number",
+  "readyToGo": "Ready to go?",
+  "invalidPassword": "Invalid Password"
 }

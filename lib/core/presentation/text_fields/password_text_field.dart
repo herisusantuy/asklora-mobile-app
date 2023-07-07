@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../generated/l10n.dart';
 import '../../styles/asklora_colors.dart';
 import '../../styles/asklora_text_styles.dart';
 import '../../utils/app_icons.dart';
@@ -146,15 +147,16 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           height: 5,
         ),
         _errorWidget(
-            label: 'min. 8 - max. 16 characters',
+            label: S.of(context).min8Character,
             checkPassed: minEightCharacters),
         _errorWidget(
-            label: 'at least 1 lowercase letter',
+            label: S.of(context).atLeast1Lowercase,
             checkPassed: containsLowerCase),
         _errorWidget(
-            label: 'at least 1 uppercase letter',
+            label: S.of(context).atLeast1Uppercase,
             checkPassed: containsUpperCase),
-        _errorWidget(label: 'at least 1 number', checkPassed: containsNumber),
+        _errorWidget(
+            label: S.of(context).atLeast1Number, checkPassed: containsNumber),
       ];
 
   Widget _errorWidget({required String label, bool checkPassed = false}) =>
