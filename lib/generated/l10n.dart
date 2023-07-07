@@ -1834,10 +1834,10 @@ class S {
   }
 
   /// `Enter valid password`
-  String get invalidPassword {
+  String get enterValidPassword {
     return Intl.message(
       'Enter valid password',
-      name: 'invalidPassword',
+      name: 'enterValidPassword',
       desc: '',
       args: [],
     );
@@ -3360,6 +3360,26 @@ class S {
     return Intl.message(
       'Submit',
       name: 'buttonSubmit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready to go?`
+  String get readyToGo {
+    return Intl.message(
+      'Ready to go?',
+      name: 'readyToGo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid Password`
+  String get invalidPassword {
+    return Intl.message(
+      'Invalid Password',
+      name: 'invalidPassword',
       desc: '',
       args: [],
     );

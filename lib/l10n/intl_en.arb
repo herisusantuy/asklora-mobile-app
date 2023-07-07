@@ -281,7 +281,7 @@
   "passwordDoesNotMatch": "Your password does not match.",
   "passwordChangeSuccess": "Password Change Success",
   "yourPasswordHasBeenChanged": "Your password has been changed",
-  "invalidPassword": "Enter valid password",
+  "enterValidPassword": "Enter valid password",
   "oldPasswordSameWithNewPasswordError": "Your new password cannot be the same as your old password",
   "portfolioPopUpCreateAnAccountTitle": "Create an Account and Start Trading!",
   "portfolioPopUpCreateAnAccountSubTitle": "You can manage all your investments here after you start trading. Create an account and start trading.",
@@ -508,5 +508,7 @@
   "pleaseMakeSureYouPressSubmit": "Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.",
   "yourDepositMayBeRejected": "Your deposit may be rejected if the informed amount is different from the actual transferred amount.",
   "weAcceptHKDOnly": "We accept HKD only.",
-  "buttonSubmit": "Submit"
+  "buttonSubmit": "Submit",
+  "readyToGo": "Ready to go?",
+  "invalidPassword": "Invalid Password"
 }
