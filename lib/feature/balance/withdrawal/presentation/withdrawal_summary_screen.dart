@@ -53,7 +53,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
             body: CustomLayoutWithBlurPopUp(
               showPopUp: state.response.state == ResponseState.error,
               content: BalanceBaseForm(
-                title: 'Withdrawal',
+                title: S.of(context).buttonWithdraw,
                 content: Column(
                   children: [
                     getPngImage('money'),
