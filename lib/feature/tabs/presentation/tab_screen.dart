@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +11,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../core/repository/transaction_repository.dart';
+import '../../../core/styles/asklora_colors.dart';
 import '../../../core/utils/app_icons.dart';
 import '../../../core/utils/route_generator.dart';
 import '../../../core/utils/storage/cache/json_cache_shared_preferences.dart';
@@ -33,7 +32,6 @@ import '../../tabs/for_you/for_you_screen_form.dart';
 import '../../tabs/for_you/investment_style/bloc/for_you_question_bloc.dart';
 import '../../tabs/for_you/repository/for_you_repository.dart';
 import '../../tabs/home/home_screen_form.dart';
-import '../utils/tab_utils.dart';
 import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';
@@ -135,8 +133,7 @@ class TabScreen extends StatelessWidget {
                                   .add(BackButtonClicked());
                               return false;
                             },
-                            child: Stack(
-                              alignment: Alignment.bottomCenter,
+                            child: Column(
                               children: [
                                 TabPages(
                                     canTrade: state.response.data!.canTrade),

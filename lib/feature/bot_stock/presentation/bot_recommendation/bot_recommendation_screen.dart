@@ -24,7 +24,6 @@ import '../../../onboarding/ppi/presentation/ppi_screen.dart';
 import '../../../tabs/bloc/tab_screen_bloc.dart';
 import '../../../tabs/for_you/for_you_screen_form.dart';
 import '../../../tabs/home/home_screen_form.dart';
-import '../../../tabs/utils/tab_utils.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_model.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -79,7 +78,7 @@ class BotRecommendationScreen extends StatelessWidget {
               showPopUp:
                   state.botRecommendationResponse.state == ResponseState.error,
               content: ListView(
-                padding: const EdgeInsets.only(bottom: tabHeight + 35),
+                padding: const EdgeInsets.only(bottom: 35),
                 children: [
                   _header(
                       context: context,
