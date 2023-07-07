@@ -317,7 +317,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("Introduce Bot - Squat"),
-        "invalidPassword": MessageLookupByLibrary.simpleMessage("無效密碼"),
+        "invalidPassword":
+            MessageLookupByLibrary.simpleMessage("Invalid Password"),
         "investmentAmount":
             MessageLookupByLibrary.simpleMessage("Investment Amount"),
         "investmentPeriod":

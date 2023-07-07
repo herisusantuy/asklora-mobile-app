@@ -3375,10 +3375,10 @@ class S {
     );
   }
 
-  /// `無效密碼`
+  /// `Invalid Password`
   String get invalidPassword {
     return Intl.message(
-      '無效密碼',
+      'Invalid Password',
       name: 'invalidPassword',
       desc: '',
       args: [],
