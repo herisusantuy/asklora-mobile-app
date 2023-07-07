@@ -5,7 +5,6 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
-import '../../feature/tabs/utils/tab_utils.dart';
 import 'buttons/primary_button.dart';
 
 class LoraBottomSheet {
@@ -81,7 +80,7 @@ class LoraBottomSheetContent extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(bottom: tabHeight),
+          padding: const EdgeInsets.only(bottom: 0),
           children: [
             Stack(
               children: [
