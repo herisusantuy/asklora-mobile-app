@@ -94,6 +94,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "atLeast1Lowercase":
+            MessageLookupByLibrary.simpleMessage("at least 1 lowercase letter"),
+        "atLeast1Number":
+            MessageLookupByLibrary.simpleMessage("at least 1 number"),
+        "atLeast1Uppercase": MessageLookupByLibrary.simpleMessage(
+            "at least 1 upper case letter"),
         "backToAccountSettings":
             MessageLookupByLibrary.simpleMessage("Back to account settings"),
         "bankAccountNumber":
@@ -338,6 +344,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("Milestones"),
         "min": m10,
+        "min8Character":
+            MessageLookupByLibrary.simpleMessage("min. 8 characters"),
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "nextStep": MessageLookupByLibrary.simpleMessage("Next step"),
@@ -517,7 +525,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to sign out ?"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
-            "Start your new investing journey with Lora - \nYour FinFit Coach"),
+            "Start your AI revolution with\nAsklora. Go crush it."),
         "startABotstock":
             MessageLookupByLibrary.simpleMessage("Start A Botstock"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),

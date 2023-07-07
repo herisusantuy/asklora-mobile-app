@@ -374,7 +374,7 @@
   "status": "Status",
   "suspendedScreenTitle": "Account Suspended",
   "suspendedScreenSubTitle": "Your account has been suspended and is pending investigation from us. If you have any questions about your account, please contact our customer service team.",
-  "signUpTitle": "Start your new investing journey with Lora - \nYour FinFit Coach",
+  "signUpTitle": "Start your AI revolution with\nAsklora. Go crush it.",
   "to": "To",
   "transactionFee": "Transaction fee",
   "transferTo": "Transfer to",
@@ -509,6 +509,10 @@
   "yourDepositMayBeRejected": "Your deposit may be rejected if the informed amount is different from the actual transferred amount.",
   "weAcceptHKDOnly": "We accept HKD only.",
   "buttonSubmit": "Submit",
+  "min8Character": "min. 8 characters",
+  "atLeast1Lowercase": "at least 1 lowercase letter",
+  "atLeast1Uppercase": "at least 1 upper case letter",
+  "atLeast1Number": "at least 1 number",
   "readyToGo": "Ready to go?",
   "invalidPassword": "Invalid Password"
 }

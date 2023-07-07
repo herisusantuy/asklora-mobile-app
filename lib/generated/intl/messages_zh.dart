@@ -87,6 +87,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
+        "atLeast1Lowercase":
+            MessageLookupByLibrary.simpleMessage("最少 1 個小寫英文字母"),
+        "atLeast1Number": MessageLookupByLibrary.simpleMessage("最少 1 個數字"),
+        "atLeast1Uppercase":
+            MessageLookupByLibrary.simpleMessage("最少 1 個大寫英文字母"),
         "beforeDepositHeaderTitle": m0,
         "beforeKYCHeaderTitle": m1,
         "bestSuitedFor": MessageLookupByLibrary.simpleMessage("最適合"),
@@ -259,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("目標"),
         "min": m10,
+        "min8Character": MessageLookupByLibrary.simpleMessage("最少 8 個字母"),
         "needHelp": MessageLookupByLibrary.simpleMessage("需要幫助？"),
         "newPassword": MessageLookupByLibrary.simpleMessage("新密碼"),
         "nextStep": MessageLookupByLibrary.simpleMessage("下一步"),
@@ -395,8 +401,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
         "signIn": MessageLookupByLibrary.simpleMessage("登入"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
-        "signUpTitle": MessageLookupByLibrary.simpleMessage(
-            "與 Lora --- 你嘅 FinFit 教練，\n展開全新投資之旅"),
+        "signUpTitle":
+            MessageLookupByLibrary.simpleMessage(" 踏入AI新世代，\n展開AI投資之旅"),
         "startABotstock": MessageLookupByLibrary.simpleMessage("開始交易"),
         "startDate": MessageLookupByLibrary.simpleMessage("最佳開始日期"),
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
