@@ -131,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "buttonContinue": MessageLookupByLibrary.simpleMessage("繼續"),
         "buttonDeposit": MessageLookupByLibrary.simpleMessage("入金"),
         "buttonDone": MessageLookupByLibrary.simpleMessage("完成"),
+        "buttonForgetPassword": MessageLookupByLibrary.simpleMessage("忘記密碼？"),
         "buttonHaveAnAccount": MessageLookupByLibrary.simpleMessage("已有賬戶？"),
         "buttonLetsBegin": MessageLookupByLibrary.simpleMessage("立即開始"),
         "buttonMaybeLater": MessageLookupByLibrary.simpleMessage("稍後再說"),
@@ -241,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Pullup"),
         "introduceBotSquat":
             MessageLookupByLibrary.simpleMessage("簡介 Bot - Squat"),
+        "invalidPassword": MessageLookupByLibrary.simpleMessage("無效密碼"),
         "investmentAmount": MessageLookupByLibrary.simpleMessage("投資金額"),
         "investmentPeriod": MessageLookupByLibrary.simpleMessage("投資期"),
         "investmentPreferences": MessageLookupByLibrary.simpleMessage("投資偏好"),
@@ -382,6 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacyEvaluation": MessageLookupByLibrary.simpleMessage("私隱評估"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("私隱政策"),
         "pushNotification": MessageLookupByLibrary.simpleMessage("推送通知"),
+        "readyToGo": MessageLookupByLibrary.simpleMessage("準備好未？"),
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
@@ -390,6 +393,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
+        "signIn": MessageLookupByLibrary.simpleMessage("登入"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
             "與 Lora --- 你嘅 FinFit 教練，\n展開全新投資之旅"),
