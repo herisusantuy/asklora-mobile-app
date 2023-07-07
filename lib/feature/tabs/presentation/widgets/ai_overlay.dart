@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../bloc/tab_screen_bloc.dart';
 import '../../lora_gpt/presentation/lora_ai_screen.dart';
-import '../../utils/tab_utils.dart';
 
 class AiOverlay extends StatefulWidget {
   final double maxHeight;
@@ -42,31 +40,21 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => KeyboardVisibilityBuilder(
-        builder: (context, isKeyboardVisible) => Container(
-          margin: EdgeInsets.only(bottom: !isKeyboardVisible ? tabHeight : 0),
-          child: Stack(
-            children: [
-              BlocListener<TabScreenBloc, TabScreenState>(
-                listenWhen: (previous, current) =>
-                    previous.aiPageSelected != current.aiPageSelected,
-                listener: (context, state) =>
-                    state.aiPageSelected ? _openAiOverlay() : _closeAiOverlay(),
-                child: Positioned(
-                  width: widget.maxWidth,
-                  height: isKeyboardVisible
-                      ? widget.maxHeight
-                      : widget.maxHeight - tabHeight,
-                  top: _drawerBottom,
-                  child: GestureDetector(
-                    onPanDown: _onPanDown,
-                    onPanEnd: _onPanEnd,
-                    onPanUpdate: _onPanUpdate,
-                    child: const LoraAiScreen(),
-                  ),
-                ),
-              ),
-            ],
+  Widget build(BuildContext context) =>
+      BlocListener<TabScreenBloc, TabScreenState>(
+        listenWhen: (previous, current) =>
+            previous.aiPageSelected != current.aiPageSelected,
+        listener: (context, state) =>
+            state.aiPageSelected ? _openAiOverlay() : _closeAiOverlay(),
+        child: Positioned(
+          width: widget.maxWidth,
+          height: widget.maxHeight,
+          top: _drawerBottom,
+          child: GestureDetector(
+            onPanDown: _onPanDown,
+            onPanEnd: _onPanEnd,
+            onPanUpdate: _onPanUpdate,
+            child: const LoraAiScreen(),
           ),
         ),
       );

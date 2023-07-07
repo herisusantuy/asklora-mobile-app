@@ -103,7 +103,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                     showPopUp: state.botActiveOrderDetailResponse.state ==
                         ResponseState.error,
                     content: BotStockForm(
-                      isUsedWithBottomTab: true,
                       useHeader: true,
                       customHeader: BotPortfolioDetailHeader(
                         title: botActiveOrderModel.botName,
