@@ -63,8 +63,8 @@ class SignInForm extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: [
-                        const LoraMemojiHeader(
-                            text: 'Welcome back!\nReady to go?'),
+                        LoraMemojiHeader(
+                            text: 'Welcome back!\n${S.of(context).readyToGo}'),
                         context.padding(),
                         _emailInput(),
                         context.padding(topPadding: 10),

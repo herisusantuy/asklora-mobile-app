@@ -5,7 +5,9 @@
   "buttonNext": "下一步",
   "buttonCreateAnAccount": "建立帳戶",
   "buttonLetsBegin": "立即開始",
+  "buttonForgetPassword": "忘記密碼？",
   "buttonSignOut": "登出",
+  "signIn": "登入",
   "buttonHaveAnAccount": "已有賬戶？",
   "buttonContinue": "繼續",
   "buttonMaybeLater": "稍後再說",
@@ -470,5 +472,7 @@
   "min8Character": "最少 8 個字母",
   "atLeast1Lowercase": "最少 1 個小寫英文字母",
   "atLeast1Uppercase": "最少 1 個大寫英文字母",
-  "atLeast1Number": "最少 1 個數字"
+  "atLeast1Number": "最少 1 個數字",
+  "readyToGo": "準備好未？",
+  "invalidPassword": "無效密碼"
 }
