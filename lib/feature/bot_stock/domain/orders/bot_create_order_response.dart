@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../utils/bot_stock_utils.dart';
+
 part 'bot_create_order_response.g.dart';
 
 @JsonSerializable()
@@ -30,6 +32,9 @@ class BotCreateOrderResponse {
     this.spotDate,
     this.symbol,
   );
+
+  String get botName =>
+      '${BotType.findByString(botAppsName).upperCaseName} $symbol';
 
   factory BotCreateOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$BotCreateOrderResponseFromJson(json);
