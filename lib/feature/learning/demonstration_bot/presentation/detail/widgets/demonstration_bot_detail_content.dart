@@ -219,9 +219,9 @@ class DemonstrationBotDetailContent extends StatelessWidget {
   Widget get _detailedInformation => Column(
         children: [
           BotPriceLevelIndicator(
-            stopLossPrice: 210,
-            currentPrice: 240,
-            takeProfitPrice: 220,
+            stopLossPrice: '210',
+            currentPrice: '240',
+            takeProfitPrice: '220',
             botType: botType,
           ),
           const SizedBox(

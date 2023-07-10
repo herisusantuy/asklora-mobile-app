@@ -257,7 +257,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
         children: [
           BotPriceLevelIndicator(
             stopLossPrice: botDetailModel.estStopLossPriceFormatted,
-            currentPrice: botDetailModel.price,
+            currentPrice: botDetailModel.priceFormatted,
             takeProfitPrice: botDetailModel.estTakeProfitPriceFormatted,
             botType: botType,
           ),
@@ -266,13 +266,11 @@ class BotRecommendationDetailContent extends StatelessWidget {
               leftTitle: botType == BotType.plank
                   ? S.of(context).estStopLossPercent
                   : S.of(context).estMaxLossPercent,
-              leftSubTitle:
-                  botDetailModel.estStopLossPct.convertToCurrencyDecimal(),
+              leftSubTitle: botDetailModel.estStopLossPctFormatted,
               rightTitle: botType == BotType.plank
                   ? S.of(context).estTakeProfitPercent
                   : S.of(context).estMaxProfitPercent,
-              rightSubTitle:
-                  botDetailModel.estTakeProfitPct.convertToCurrencyDecimal(),
+              rightSubTitle: botDetailModel.estTakeProfitPctFormatted,
               leftTooltipText: botType == BotType.plank
                   ? S.of(context).tooltipBotDetailsEstStopLoss
                   : S.of(context).tooltipBotDetailsEstMaxLoss,
