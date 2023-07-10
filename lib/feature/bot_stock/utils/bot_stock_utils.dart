@@ -133,10 +133,16 @@ enum BotStatus {
   canceled(
     'Canceled',
     [
-      OmsStatus.rejectedOms,
+      OmsStatus.earlyTerminated,
     ],
     AskLoraColors.primaryMagenta,
   ),
+  rejected(
+      'Rejected',
+      [
+        OmsStatus.rejectedOms,
+      ],
+      AskLoraColors.primaryMagenta),
   pending(
     'Pending',
     [
@@ -150,7 +156,6 @@ enum BotStatus {
     [
       OmsStatus.expired,
       OmsStatus.knockOut,
-      OmsStatus.earlyTerminated,
     ],
     AskLoraColors.primaryMagenta,
   );

@@ -20,6 +20,7 @@ import '../../../tabs/presentation/tab_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
 import '../../domain/bot_recommendation_detail_model.dart';
 import '../../domain/bot_recommendation_model.dart';
+import '../../domain/orders/bot_create_order_response.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
@@ -84,7 +85,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   context: context,
                   arguments: BotStockResultArgument(
                     title: S.of(context).tradeRequestReceived,
-                    desc: _tradeRequestSuccessMessage(context),
+                    desc: _tradeRequestSuccessMessage(
+                        context, state.createBotOrderResponse.data!),
                     labelBottomButton: S.of(context).checkBotStockDetails,
                   ));
             }
@@ -197,22 +199,22 @@ class BotTradeSummaryScreen extends StatelessWidget {
           leftTitle: botTradeSummaryModel.botType == BotType.plank
               ? S.of(context).estStopLossPercent
               : S.of(context).estMaxLossPercent,
-          leftSubTitle: botTradeSummaryModel.botDetailModel.estStopLossPct
-              .convertToCurrencyDecimal(),
+          leftSubTitle:
+              botTradeSummaryModel.botDetailModel.estStopLossPctFormatted,
           rightTitle: botTradeSummaryModel.botType == BotType.plank
               ? S.of(context).estTakeProfitPercent
               : S.of(context).estMaxProfitPercent,
-          rightSubTitle: botTradeSummaryModel.botDetailModel.estTakeProfitPct
-              .convertToCurrencyDecimal(),
+          rightSubTitle:
+              botTradeSummaryModel.botDetailModel.estTakeProfitPctFormatted,
         ),
       ];
 
-  String _tradeRequestSuccessMessage(BuildContext context) =>
+  String _tradeRequestSuccessMessage(
+          BuildContext context, BotCreateOrderResponse createOrderResponse) =>
       S.of(context).rolloverBotStockAcknowledgement(
-          botTradeSummaryModel.botDetailModel.botInfo.botName,
-          botTradeSummaryModel.botDetailModel.stockInfo.symbol,
-          botTradeSummaryModel
-              .botDetailModel.formattedAcknowledgementEstEndDate);
+          createOrderResponse.botAppsName,
+          createOrderResponse.symbol,
+          createOrderResponse.optimalTimeFormatted);
 
   static void open(
           {required BuildContext context,
