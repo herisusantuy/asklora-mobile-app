@@ -68,7 +68,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
                     label: S.of(context).buttonNext,
                     onTap: () => WithdrawalSummaryScreen.open(context, args: (
                           withdrawalAmount: double.parse(
-                              state.withdrawalAmount == ''
+                              state.withdrawalAmount.isEmpty
                                   ? '0'
                                   : state.withdrawalAmount.replaceAll(',', '')),
                           bankAccount: args.bankAccount

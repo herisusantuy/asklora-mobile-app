@@ -29,7 +29,7 @@ class WithdrawalAmountValue extends StatelessWidget {
                       ),
                     ),
                     CustomTextNew(
-                      state.withdrawalAmount == ''
+                      state.withdrawalAmount.isEmpty
                           ? '0'
                           : state.withdrawalAmount,
                       style: AskLoraTextStyles.h1.copyWith(

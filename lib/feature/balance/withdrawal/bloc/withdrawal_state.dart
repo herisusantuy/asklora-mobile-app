@@ -28,13 +28,10 @@ class WithdrawalState extends Equatable {
     );
   }
 
-  bool disableWithdrawal(double withdrawableAmount) =>
-      double.parse(withdrawalAmount == ''
-              ? '0'
-              : withdrawalAmount.replaceAll(',', '')) >
-          withdrawableAmount ||
-      double.parse(withdrawalAmount == ''
-              ? '0'
-              : withdrawalAmount.replaceAll(',', '')) ==
-          0;
+  bool disableWithdrawal(double withdrawableAmount) {
+    final double doubleWithdrawalAmount = double.parse(
+        withdrawalAmount.isEmpty ? '0' : withdrawalAmount.replaceAll(',', ''));
+    return doubleWithdrawalAmount > withdrawableAmount ||
+        doubleWithdrawalAmount == 0;
+  }
 }
