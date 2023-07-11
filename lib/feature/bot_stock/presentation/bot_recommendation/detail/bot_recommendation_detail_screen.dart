@@ -105,7 +105,9 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                       label: S.of(context).trade,
                       onTap: () {
                         if (botRecommendationModel.freeBot) {
-                          context.read<BackButtonInterceptorBloc>().add(RemoveInterceptor());
+                          context
+                              .read<BackButtonInterceptorBloc>()
+                              .add(RemoveInterceptor());
                           BotTradeSummaryScreen.openWithBackCallBack(
                               context: context,
                               botTradeSummaryModel: BotTradeSummaryModel(
@@ -115,7 +117,9 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                                   botDetailModel: state.botDetailResponse.data!,
                                   amount: 500),
                               backCallBack: () {
-                                context.read<BackButtonInterceptorBloc>().add(InitiateInterceptor());
+                                context
+                                    .read<BackButtonInterceptorBloc>()
+                                    .add(InitiateInterceptor());
                               });
                         } else {
                           BotStockBottomSheet.amountBotStockForm(
