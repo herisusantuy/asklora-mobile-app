@@ -97,6 +97,7 @@
   "filledPrice": "Filled Price",
   "shares": "Shares",
   "orderCancelled": "Order Cancelled",
+  "orderRejected": "Order Rejected",
   "orderPlaced": "Order Placed",
   "orderStarted": "Order Started",
   "orderRollover": "Order Rollover",
@@ -517,4 +518,5 @@
   "atLeast1Number": "at least 1 number",
   "readyToGo": "Ready to go?",
   "invalidPassword": "Invalid Password"
+
 }

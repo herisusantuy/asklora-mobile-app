@@ -29,6 +29,7 @@ enum BotSummaryType {
   makeCancel('make_cancel'),
   loss('loss'),
   expired('expired'),
+  rejectedOms('rejected_oms'),
   profit('profit'),
   terminated('terminated');
 
@@ -52,6 +53,8 @@ String getNameByBotSummaryType(
       return S.of(context).orderStarted;
     case BotSummaryType.makeCancel:
       return S.of(context).orderCancelled;
+    case BotSummaryType.rejectedOms:
+      return S.of(context).orderRejected;
     default:
       return S.of(context).orderExpired;
   }

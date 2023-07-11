@@ -41,7 +41,8 @@ class BotOrderTransactionHistorySummaryScreen extends StatelessWidget {
         botSummaryTransactionHistoryModel.botSummaryType;
     if (botSummaryType == BotSummaryType.makeIndicative ||
         botSummaryType == BotSummaryType.makeLive ||
-        botSummaryType == BotSummaryType.makeCancel) {
+        botSummaryType == BotSummaryType.makeCancel ||
+        botSummaryType == BotSummaryType.rejectedOms) {
       return _completeSummaryCard(
           context,
           botSummaryTransactionHistoryModel,

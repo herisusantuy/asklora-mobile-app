@@ -950,6 +950,16 @@ class S {
     );
   }
 
+  /// `Order Rejected`
+  String get orderRejected {
+    return Intl.message(
+      'Order Rejected',
+      name: 'orderRejected',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Order Placed`
   String get orderPlaced {
     return Intl.message(
