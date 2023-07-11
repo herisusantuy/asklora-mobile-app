@@ -3,6 +3,7 @@ import '../../../../core/utils/feature_flags.dart';
 
 enum DepositType {
   firstTime(minDeposit: FeatureFlags.isProdTestEnabled ? 100 : 10000),
+  changeBankAccount(minDeposit: FeatureFlags.isProdTestEnabled ? 100 : 10000),
   type1(minDeposit: 0),
   type2(minDeposit: 0);
 

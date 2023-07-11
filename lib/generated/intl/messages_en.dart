@@ -38,42 +38,45 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(expiryTime) => "The new expiry date is ${expiryTime}";
 
-  static String m7(emailAddress) =>
+  static String m7(amount) =>
+      "Due to regulatory requirements, you need to deposit at least HK\$${amount} if you want to change bank account";
+
+  static String m8(emailAddress) =>
       "We’ve sent an email to\n ${emailAddress}\n\nPlease use your phone to click on the activation link!";
 
-  static String m8(botName, botSymbol, dateTime) =>
+  static String m9(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} will end at ${dateTime}";
 
-  static String m9(minDeposit) =>
+  static String m10(minDeposit) =>
       "Copy Asklora\'s bank details and transfer no less than HK\$${minDeposit} from your bank account via FPS or Wire transfer.";
 
-  static String m10(minute) => "~${minute} min";
+  static String m11(minute) => "~${minute} min";
 
-  static String m11(currency) => "Buying Power (${currency})";
+  static String m12(currency) => "Buying Power (${currency})";
 
-  static String m12(currency) => "Current Price ${currency}";
+  static String m13(currency) => "Current Price ${currency}";
 
-  static String m13(bot, startDate, endDate, duration) =>
+  static String m14(bot, startDate, endDate, duration) =>
       "Past ${duration} performance of ${bot}  (${startDate} - ${endDate})";
 
-  static String m14(dateTime) => "Expired at ${dateTime}";
+  static String m15(dateTime) => "Expired at ${dateTime}";
 
-  static String m15(dateTime) => "Expired in ${dateTime} days";
+  static String m16(dateTime) => "Expired in ${dateTime} days";
 
-  static String m16(currency) => "Total Botstock Values (${currency})";
+  static String m17(currency) => "Total Botstock Values (${currency})";
 
-  static String m17(currency) => "Withdrawable Balance (${currency})";
+  static String m18(currency) => "Withdrawable Balance (${currency})";
 
-  static String m18(botName, botSymbol, dateTime) =>
+  static String m19(botName, botSymbol, dateTime) =>
       "${botName} ${botSymbol} will start at ${dateTime}";
 
-  static String m19(minDeposit) =>
+  static String m20(minDeposit) =>
       "Transfer at least HK\$${minDeposit} to Asklora\'s bank account. Any initial deposit less than HK\$${minDeposit} will be rejected and fees will be charged.";
 
-  static String m20(minDeposit) =>
+  static String m21(minDeposit) =>
       "We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ ${minDeposit} bank transfer is completed.";
 
-  static String m21(dateTime) =>
+  static String m22(dateTime) =>
       "Your Bank Account is under review and will be complete by ${dateTime}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -87,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "activities": MessageLookupByLibrary.simpleMessage("Activities"),
         "afterPayDepositHeaderTitle": MessageLookupByLibrary.simpleMessage(
             "Your investment account will be ready soon!"),
+        "agree": MessageLookupByLibrary.simpleMessage("Agree"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
@@ -224,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "depositAmount": MessageLookupByLibrary.simpleMessage("Deposit Amount"),
         "depositFundToStartInvesting": MessageLookupByLibrary.simpleMessage(
             "Deposit funds to start investing"),
+        "depositRegulatoryRequirements": m7,
         "depositRequestSubmittedSubTitleFirstTime":
             MessageLookupByLibrary.simpleMessage(
                 "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved."),
@@ -239,10 +244,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailActivationFailedTitle": MessageLookupByLibrary.simpleMessage(
             "Sorry! You were a bit late, your request has timed out. \n\nLet’s try and activate your account again!"),
-        "emailActivationSuccessTitle": m7,
+        "emailActivationSuccessTitle": m8,
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email Address"),
         "employees": MessageLookupByLibrary.simpleMessage("Employees"),
-        "endBotStockAcknowledgement": m8,
+        "endBotStockAcknowledgement": m9,
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "endedAmount": MessageLookupByLibrary.simpleMessage("Ended Amount"),
         "enterValidPassword":
@@ -287,7 +292,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Existing Password"),
         "expiresAt": MessageLookupByLibrary.simpleMessage("Expires at"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
-        "firstTimeCopyAskloraBankDetails": m9,
+        "firstTimeCopyAskloraBankDetails": m10,
         "founded": MessageLookupByLibrary.simpleMessage("Founded"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
         "freeTrial": MessageLookupByLibrary.simpleMessage("Free Trial"),
@@ -343,7 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "masterAiTrading":
             MessageLookupByLibrary.simpleMessage("Master AI Trading"),
         "milestones": MessageLookupByLibrary.simpleMessage("Milestones"),
-        "min": m10,
+        "min": m11,
         "min8Character":
             MessageLookupByLibrary.simpleMessage("min. 8 characters"),
         "needHelp": MessageLookupByLibrary.simpleMessage("Need help?"),
@@ -399,22 +404,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed."),
         "pleaseMakeSureYouPressSubmit": MessageLookupByLibrary.simpleMessage(
             "Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank."),
-        "portfolioBuyingPower": m11,
+        "portfolioBuyingPower": m12,
         "portfolioBuyingPowerToolTip": MessageLookupByLibrary.simpleMessage(
             "Your Buying Power represents the amount of cash that you can use to buy Botstocks. Your Withdrawable Balance and your Buying Power may not always be the same. For example, starting a Botstock will reduce your Buying Power and the amount value will be added to Total Botstock Values. When the Botstock is expired or terminated, the amount will be added to Buying Power and after T + 2, the amount will be also added to Withdrawable Balance. This is called ‘settlement’."),
-        "portfolioCurrentPrice": m12,
+        "portfolioCurrentPrice": m13,
         "portfolioDetailButtonCancelBotStock":
             MessageLookupByLibrary.simpleMessage("Cancel Botstock"),
         "portfolioDetailButtonEndBotStock":
             MessageLookupByLibrary.simpleMessage("End Botstock"),
         "portfolioDetailButtonRolloverBotStock":
             MessageLookupByLibrary.simpleMessage("Rollover Botstock"),
-        "portfolioDetailChartCaption": m13,
+        "portfolioDetailChartCaption": m14,
         "portfolioDetailChartEmptyMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Performance data will be available once the Botstock starts"),
-        "portfolioDetailExpiredAt": m14,
-        "portfolioDetailExpiredIn": m15,
+        "portfolioDetailExpiredAt": m15,
+        "portfolioDetailExpiredIn": m16,
         "portfolioDetailKeyInfoAvgLoss":
             MessageLookupByLibrary.simpleMessage("Avg. Loss"),
         "portfolioDetailKeyInfoAvgPeriod":
@@ -496,11 +501,11 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Looks like you haven’t claimed your free Botstock yet. Let’s get trading right away!"),
         "portfolioPopUpRedeemYourBotstockTitle":
             MessageLookupByLibrary.simpleMessage("Redeem Your Free Botstock"),
-        "portfolioTotalBotStock": m16,
+        "portfolioTotalBotStock": m17,
         "portfolioTotalPL": MessageLookupByLibrary.simpleMessage("Total P/L"),
         "portfolioTotalValue":
             MessageLookupByLibrary.simpleMessage("Total Portfolio Value"),
-        "portfolioWithdrawableAmount": m17,
+        "portfolioWithdrawableAmount": m18,
         "portfolioYourBotStock":
             MessageLookupByLibrary.simpleMessage("Your Botstocks"),
         "pressBackAgain": MessageLookupByLibrary.simpleMessage(
@@ -519,7 +524,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
-        "rolloverBotStockAcknowledgement": m18,
+        "rolloverBotStockAcknowledgement": m19,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "setUpFinancialProfile":
@@ -603,7 +608,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Transaction History"),
         "transactionHistoryToday":
             MessageLookupByLibrary.simpleMessage("Today"),
-        "transferAtLeastWithMinimumDeposit": m19,
+        "transferAtLeastWithMinimumDeposit": m20,
         "transferAtLeastWithNoMinimumDeposit": MessageLookupByLibrary.simpleMessage(
             "Transfer to Asklora bank account from the same bank account you used."),
         "transferFundToAsklora":
@@ -632,7 +637,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "We will only accept deposits via bank transfer (wire/FPS) from your own account."),
         "weWillOnlyAcceptHKD":
             MessageLookupByLibrary.simpleMessage("We will only accept HKD."),
-        "weWillTakeInformationCollectedFromYour": m20,
+        "weWillTakeInformationCollectedFromYour": m21,
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "welcomeScreenFirstBenefit": MessageLookupByLibrary.simpleMessage(
             "Guidance from your own personal AI"),
@@ -656,7 +661,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourBankAccount":
             MessageLookupByLibrary.simpleMessage("Your Bank Account"),
-        "yourBankAccountIsUnderReview": m21,
+        "yourBankAccountIsUnderReview": m22,
         "yourDepositCanTakeUp2WorkingDays":
             MessageLookupByLibrary.simpleMessage(
                 "Your deposit can take up to 2 working days"),

@@ -13,12 +13,14 @@ class ChangeBankAccountButton extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => DepositWelcomeScreen.open(
           context: context,
-          depositType: DepositType.firstTime,
+          depositType: DepositType.changeBankAccount,
         ),
-        child: CustomTextNew(
-          S.of(context).changeBankAccount,
-          style: AskLoraTextStyles.h6.copyWith(
-            decoration: TextDecoration.underline,
+        child: UnconstrainedBox(
+          child: Container(
+            decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(width: .5))),
+            child: CustomTextNew(S.of(context).changeBankAccount,
+                style: AskLoraTextStyles.h6),
           ),
         ),
       );

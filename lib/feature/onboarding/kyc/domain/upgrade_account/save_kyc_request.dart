@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../../bloc/disclosure_affiliation/disclosure_affiliation_bloc.dart';
+import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import 'personal_info_request.dart';
 import 'upgrade_account_request.dart';
 
@@ -20,13 +21,27 @@ class SaveKycRequest extends Equatable {
   @JsonKey(name: 'proofs_of_address')
   final PersonalInfoRequest personalInfoRequest;
 
+  ///SIGN AGREEMENTS
+  final bool? isBoundByAskloraAgreementChecked;
+  final bool? isUnderstandOnTheAgreementChecked;
+  final bool? isRiskDisclosureAgreementChecked;
+  final bool? isSignatureChecked;
+  final String? legalNameSignature;
+
   const SaveKycRequest(
       {required this.upgradeAccountRequest,
       required this.personalInfoRequest,
       this.immediateFamilyAffiliation,
-      this.associatesAffiliation});
+      this.associatesAffiliation,
+      this.isBoundByAskloraAgreementChecked,
+      this.isUnderstandOnTheAgreementChecked,
+      this.isRiskDisclosureAgreementChecked,
+      this.isSignatureChecked,
+      this.legalNameSignature});
 
   static SaveKycRequest getRequestForSavingKyc(BuildContext context) {
+    final SigningAgreementState signingAgreementState =
+        context.read<SigningAgreementBloc>().state;
     return SaveKycRequest(
       upgradeAccountRequest:
           UpgradeAccountRequest.getRequestForSavingKyc(context),
@@ -37,6 +52,14 @@ class SaveKycRequest extends Equatable {
           .read<DisclosureAffiliationBloc>()
           .state
           .isAffiliatedAssociates,
+      isBoundByAskloraAgreementChecked:
+          signingAgreementState.isBoundByAskloraAgreementChecked,
+      isUnderstandOnTheAgreementChecked:
+          signingAgreementState.isUnderstandOnTheAgreementChecked,
+      isRiskDisclosureAgreementChecked:
+          signingAgreementState.isRiskDisclosureAgreementChecked,
+      isSignatureChecked: signingAgreementState.isSignatureChecked,
+      legalNameSignature: signingAgreementState.legalName,
     );
   }
 

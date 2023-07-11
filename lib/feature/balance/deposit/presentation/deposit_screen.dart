@@ -117,6 +117,16 @@ class DepositScreen extends StatelessWidget {
           ),
           const UploadProofOfRemittanceStep(),
         ];
+      case DepositType.changeBankAccount:
+        return [
+          TransferDetailStep(
+            depositType: depositType,
+          ),
+          TransferAmountStep(
+            depositType: depositType,
+          ),
+          const UploadProofOfRemittanceStep(),
+        ];
       case DepositType.type1:
         return [
           TransferDetailStep(

@@ -24,6 +24,14 @@
   "carouselIntro4": "個人化體驗，\n前所未見",
   "currentPrice": "當前價格",
   "deposit": "存入資金",
+  "depositRegulatoryRequirements": "基於監管要求，如要更改銀行戶口，你必須重新入金最少HKD${amount}",
+  "@depositRegulatoryRequirements": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "depositAmount": "存入金額",
   "depositRequestSubmittedTitle": "已收到入金申請",
   "depositRequestSubmittedSubTitleFirstTime": "我們會於 1 至 2 個工作天內檢視你的開戶申請及首次入金。當賬戶批核後會以電郵或應用程式通知。",

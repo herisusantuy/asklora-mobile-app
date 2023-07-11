@@ -101,7 +101,7 @@ class _AnimatedToggleState extends State<AnimatedToggle> {
                         : LocaleType.supportedLocales()[1].label,
                     fontWeight: FontWeight.w700,
                     type: FontType.smallNote,
-                    color: Colors.white,
+                    color: AskLoraColors.primaryGreen,
                   )))
         ]));
   }

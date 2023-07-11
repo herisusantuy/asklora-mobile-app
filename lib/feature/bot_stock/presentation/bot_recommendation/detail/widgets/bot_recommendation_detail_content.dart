@@ -203,7 +203,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               _spaceBetweenInfo,
               ColumnTextWithTooltip(
                   title: S.of(context).estimatedEndDate,
-                  subTitle: '${botDetailModel?.estEndDate}'),
+                  subTitle: '${botDetailModel?.estEndDateFormatted}'),
               _chartWidget(context),
               const SizedBox(
                 height: 6,
