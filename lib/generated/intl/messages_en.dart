@@ -649,7 +649,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "withdrawalRequestSubmittedSubTitle": MessageLookupByLibrary.simpleMessage(
             "You will be informed via email and app notification as soon as the funds are paid to your account."),
         "withdrawalRequestSubmittedTitle": MessageLookupByLibrary.simpleMessage(
-            "Your Withdrawal request is submitted."),
+            "Your withdrawal request is submitted."),
         "withdrawalWorkingDays": MessageLookupByLibrary.simpleMessage(
             "Your withdrawal can take up to 2 working days."),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
