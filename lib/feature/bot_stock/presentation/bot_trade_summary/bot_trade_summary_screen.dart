@@ -7,28 +7,30 @@ import '../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/domain/base_response.dart';
 import '../../../../app/bloc/app_bloc.dart';
-import '../../../../core/domain/pair.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/lora_memoji_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
+import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../generated/l10n.dart';
-import '../../../tabs/tabs_screen.dart';
+import '../../../tabs/bloc/tab_screen_bloc.dart';
+import '../../../tabs/presentation/tab_screen.dart';
 import '../../bloc/bot_stock_bloc.dart';
-import '../../domain/bot_detail_model.dart';
+import '../../domain/bot_recommendation_detail_model.dart';
 import '../../domain/bot_recommendation_model.dart';
+import '../../domain/orders/bot_create_order_response.dart';
 import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_stock_result_screen.dart';
 import '../widgets/bot_stock_form.dart';
-import '../widgets/pair_column_text.dart';
 
 class BotTradeSummaryModel {
   final double amount;
   final BotRecommendationModel botRecommendationModel;
-  final BotDetailModel botDetailModel;
+  final BotRecommendationDetailModel botDetailModel;
   final BotType botType;
 
   BotTradeSummaryModel(
@@ -52,10 +54,13 @@ class BotTradeSummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BotDetailModel botDetailModel = botTradeSummaryModel.botDetailModel;
+    BotRecommendationDetailModel botDetailModel =
+        botTradeSummaryModel.botDetailModel;
     final isFreeBotTrade = botTradeSummaryModel.botRecommendationModel.freeBot;
     return BlocProvider(
-      create: (_) => BotStockBloc(botStockRepository: BotStockRepository()),
+      create: (_) => BotStockBloc(
+          botStockRepository: BotStockRepository(),
+          transactionRepository: TransactionRepository()),
       child: BlocListener<BotStockBloc, BotStockState>(
         listenWhen: (previous, current) =>
             previous.createBotOrderResponse != current.createBotOrderResponse,
@@ -72,14 +77,18 @@ class BotTradeSummaryScreen extends StatelessWidget {
             }
 
             if (isFreeBotTrade) {
-              TabsScreen.openAndRemoveAllRoute(context,
-                  initialTabScreenPage: TabScreenPage.portfolio);
+              TabScreen.openAndRemoveAllRoute(context,
+                  initialTabPage: TabPage.portfolio);
               BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
             } else {
               BotStockResultScreen.open(
                   context: context,
-                  arguments: Pair(
-                      'Trade Request Received', _tradeRequestSuccessMessage()));
+                  arguments: BotStockResultArgument(
+                    title: S.of(context).tradeRequestReceived,
+                    desc: _tradeRequestSuccessMessage(
+                        context, state.createBotOrderResponse.data!),
+                    labelBottomButton: S.of(context).checkBotStockDetails,
+                  ));
             }
           } else if (state.createBotOrderResponse.state ==
               ResponseState.suspended) {
@@ -88,23 +97,26 @@ class BotTradeSummaryScreen extends StatelessWidget {
               ResponseState.error) {
             if (state.createBotOrderResponse.errorCode == 403) {
               BotStockBottomSheet.notYetRegisteredToBroker(context);
+
+              ///TODO : INSUFFICIENT BALANCE ERROR IS SAME 403 THEREFORE WILL BE IMPLEMENTED LATER WHEN GOT NEW ENUM STATUS_CODE
+              //BotStockBottomSheet.insufficientBalance(context);
             } else {
-              BotStockBottomSheet.insufficientBalance(context);
+              BotStockBottomSheet.generalError(context);
             }
           }
         },
         child: BotStockForm(
             useHeader: true,
             title:
-                '${botDetailModel.bot.botName} ${botTradeSummaryModel.botRecommendationModel.ticker}',
+                '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.tickerSymbol}',
             content: Column(
               children: [
                 RoundColoredBox(
                   content: Column(
                     children: [
-                      PairColumnText(
-                        leftTitle: 'Investment Amount (HKD)',
-                        rightTitle: 'Bot Management Fee (HKD)',
+                      PairColumnTextWithTooltip(
+                        leftTitle: '${S.of(context).investmentAmount} (HKD)',
+                        rightTitle: '${S.of(context).botManagementFee} (HKD)',
                         leftSubTitle: botTradeSummaryModel.amount
                             .convertToCurrencyDecimal(),
                         rightSubTitle: S.of(context).free,
@@ -114,25 +126,25 @@ class BotTradeSummaryScreen extends StatelessWidget {
                       _spaceBetweenInfo,
                       ..._detailedInformation(context),
                       _spaceBetweenInfo,
-                      PairColumnText(
-                          leftTitle: 'Market Price (USD)',
+                      PairColumnTextWithTooltip(
+                          leftTitle: '${S.of(context).marketPrice} (USD)',
                           leftSubTitle:
                               '${botTradeSummaryModel.botDetailModel.price}',
-                          rightTitle: 'Investment Period',
-                          rightSubTitle: botDetailModel.bot.duration),
+                          rightTitle: S.of(context).investmentPeriod,
+                          rightSubTitle: botDetailModel.botDuration),
                       _spaceBetweenInfo,
-                      PairColumnText(
-                          leftTitle: 'Start Time',
-                          rightTitle: 'End Time',
+                      PairColumnTextWithTooltip(
+                          leftTitle: S.of(context).startDate,
+                          rightTitle: S.of(context).endDate,
                           leftSubTitle: botTradeSummaryModel
                               .botDetailModel.formattedStartDate,
                           rightSubTitle: botTradeSummaryModel
-                              .botDetailModel.estimatedExpiredDate),
+                              .botDetailModel.formattedEstEndDate),
                     ],
                   ),
                   title: isFreeBotTrade
                       ? 'Free Botstock Trade Summary'
-                      : 'Trade Summary',
+                      : S.of(context).tradeSummary,
                 ),
                 const SizedBox(
                   height: 19,
@@ -168,13 +180,14 @@ class BotTradeSummaryScreen extends StatelessWidget {
                 builder: (context) => Padding(
                       padding: const EdgeInsets.only(top: 24, bottom: 30),
                       child: PrimaryButton(
-                        label: S.of(context).confirm,
-                        onTap: () => context.read<BotStockBloc>().add(
-                            CreateBotOrder(
-                                botRecommendationModel:
-                                    botTradeSummaryModel.botRecommendationModel,
-                                tradeBotStockAmount:
-                                    botTradeSummaryModel.amount)),
+                        label: S.of(context).confirmTrade,
+                        onTap: () {
+                          context.read<BotStockBloc>().add(CreateBotOrder(
+                              botRecommendationModel:
+                                  botTradeSummaryModel.botRecommendationModel,
+                              tradeBotStockAmount:
+                                  botTradeSummaryModel.amount));
+                        },
                       ),
                     ))),
       ),
@@ -182,26 +195,30 @@ class BotTradeSummaryScreen extends StatelessWidget {
   }
 
   List<Widget> _detailedInformation(BuildContext context) => [
-        PairColumnText(
+        PairColumnTextWithTooltip(
           leftTitle: botTradeSummaryModel.botType == BotType.plank
-              ? 'Estimated Stop Loss %'
-              : 'Estimated Max Loss %',
-          leftSubTitle: botTradeSummaryModel.botDetailModel.estimatedStopLossPct
-              .convertToCurrencyDecimal(decimalDigits: 2),
+              ? S.of(context).estStopLossPercent
+              : S.of(context).estMaxLossPercent,
+          leftSubTitle:
+              botTradeSummaryModel.botDetailModel.estStopLossPctFormatted,
           rightTitle: botTradeSummaryModel.botType == BotType.plank
-              ? 'Estimated Take Profit %'
-              : 'Estimated Max Profit %',
-          rightSubTitle: botTradeSummaryModel
-              .botDetailModel.estimatedTakeProfitPct
-              .convertToCurrencyDecimal(decimalDigits: 2),
+              ? S.of(context).estTakeProfitPercent
+              : S.of(context).estMaxProfitPercent,
+          rightSubTitle:
+              botTradeSummaryModel.botDetailModel.estTakeProfitPctFormatted,
         ),
       ];
 
-  String _tradeRequestSuccessMessage() =>
-      '${botTradeSummaryModel.botDetailModel.bot.botName} ${botTradeSummaryModel.botDetailModel.ticker} will be started at ${botTradeSummaryModel.botDetailModel.estimatedStartDate}.';
+  String _tradeRequestSuccessMessage(
+          BuildContext context, BotCreateOrderResponse createOrderResponse) =>
+      S.of(context).rolloverBotStockAcknowledgement(
+          createOrderResponse.botAppsName,
+          createOrderResponse.symbol,
+          createOrderResponse.optimalTimeFormatted);
 
   static void open(
           {required BuildContext context,
           required BotTradeSummaryModel botTradeSummaryModel}) =>
-      Navigator.pushNamed(context, route, arguments: botTradeSummaryModel);
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: botTradeSummaryModel);
 }

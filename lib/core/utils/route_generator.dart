@@ -15,8 +15,8 @@ import '../../feature/balance/withdrawal/presentation/withdrawal_result_screen.d
 import '../../feature/balance/withdrawal/presentation/withdrawal_summary_screen.dart';
 import '../../feature/bot_stock/domain/bot_recommendation_model.dart';
 import '../../feature/bot_stock/domain/orders/bot_active_order_model.dart';
-import '../../feature/bot_stock/presentation/bot_recommendation/bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_recommendation/detail/bot_recommendation_detail_screen.dart';
+import '../../feature/bot_stock/presentation/bot_recommendation/free_bot_recommendation_screen.dart';
 import '../../feature/bot_stock/presentation/bot_stock_result_screen.dart';
 import '../../feature/bot_stock/presentation/bot_trade_summary/bot_trade_summary_screen.dart';
 import '../../feature/bot_stock/presentation/gift/bot_stock_do_screen.dart';
@@ -25,6 +25,7 @@ import '../../feature/bot_stock/presentation/gift/gift_bot_stock_welcome_screen.
 import '../../feature/bot_stock/presentation/portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../../feature/bot_stock/presentation/portfolio/portfolio_screen.dart';
 import '../../feature/bot_stock/utils/bot_stock_utils.dart';
+import '../../feature/tabs/bloc/tab_screen_bloc.dart';
 import '../../feature/learning/learning_bot_stock_screen.dart';
 import '../../feature/onboarding/kyc/presentation/kyc_screen.dart';
 import '../../feature/onboarding/ppi/bloc/question/question_bloc.dart';
@@ -36,7 +37,7 @@ import '../../feature/onboarding/welcome/welcome_screen.dart';
 import '../../feature/orders/bloc/order_bloc.dart';
 import '../../feature/orders/domain/symbol_detail.dart';
 import '../../feature/orders/regular/presentation/regular_order_home_screen.dart';
-import '../../feature/payment/withdrawal/presentation/withdrawal_screen.dart';
+import '../../feature/settings/domain/bank_account.dart';
 import '../../feature/settings/presentation/about_asklora_screen.dart';
 import '../../feature/settings/presentation/account_information_screen.dart';
 import '../../feature/settings/presentation/account_setting_screen.dart';
@@ -49,7 +50,9 @@ import '../../feature/settings/presentation/payment_detail_screen.dart';
 import '../../feature/settings/presentation/privacy_policy_screen.dart';
 import '../../feature/settings/presentation/settings_screen.dart';
 import '../../feature/settings/presentation/terms_condition_screen.dart';
-import '../../feature/tabs/tabs_screen.dart';
+import '../../feature/tabs/for_you/for_you_screen_form.dart';
+import '../../feature/tabs/home/home_screen_form.dart';
+import '../../feature/tabs/presentation/tab_screen.dart';
 import '../../feature/transaction_history/bot_order/detail/bot_order_transaction_history_detail_screen.dart';
 import '../../feature/transaction_history/domain/transaction_history_model.dart';
 import '../../feature/transaction_history/presentation/transaction_history_screen.dart';
@@ -80,9 +83,6 @@ class RouterGenerator {
       case KycScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const KycScreen());
-      case WithdrawalScreen.route:
-        return MaterialPageRoute(
-            settings: settings, builder: (_) => const WithdrawalScreen());
       case DepositScreen.route:
         return MaterialPageRoute(
             settings: settings,
@@ -144,10 +144,10 @@ class RouterGenerator {
       case BotStockDoScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const BotStockDoScreen());
-      case BotRecommendationScreen.route:
+      case FreeBotRecommendationScreen.route:
         return MaterialPageRoute(
             settings: settings,
-            builder: (_) => const BotRecommendationScreen());
+            builder: (_) => const FreeBotRecommendationScreen());
       case BotRecommendationDetailScreen.route:
         return MaterialPageRoute(
             settings: settings,
@@ -189,30 +189,29 @@ class RouterGenerator {
                 depositType: arguments.left,
               );
             });
-      case TabsScreen.route:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => TabsScreen(
-            initialTabScreenPage: settings.arguments as TabScreenPage?,
-          ),
-        );
       case WithdrawalBankDetailScreen.route:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => WithdrawalBankDetailScreen(
-            withdrawableBalance: settings.arguments as String,
+            withdrawableBalance: settings.arguments as double,
           ),
         );
       case WithdrawalAmountScreen.route:
         return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => WithdrawalAmountScreen(settings.arguments as String),
-        );
+            settings: settings,
+            builder: (_) => WithdrawalAmountScreen(
+                    args: settings.arguments as ({
+                  double withdrawableBalance,
+                  BankAccount bankAccount
+                })));
       case WithdrawalSummaryScreen.route:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => WithdrawalSummaryScreen(
-            withdrawalAmount: settings.arguments as double,
+            args: settings.arguments as ({
+              double withdrawalAmount,
+              BankAccount bankAccount
+            }),
           ),
         );
       case WithdrawalResultScreen.route:
@@ -231,7 +230,7 @@ class RouterGenerator {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => BotStockResultScreen(
-            arguments: settings.arguments as Pair<String, String>,
+            arguments: settings.arguments as BotStockResultArgument,
           ),
         );
       case SettingsScreen.route:
@@ -316,6 +315,18 @@ class RouterGenerator {
       case SuspendedAccountScreen.route:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const SuspendedAccountScreen());
+      case ForYouScreenForm.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const ForYouScreenForm());
+      case HomeScreenForm.route:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const HomeScreenForm());
+      case TabScreen.route:
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => TabScreen(
+                  initialTabPage: settings.arguments as TabPage?,
+                ));
       default:
         return MaterialPageRoute(
             settings: settings,

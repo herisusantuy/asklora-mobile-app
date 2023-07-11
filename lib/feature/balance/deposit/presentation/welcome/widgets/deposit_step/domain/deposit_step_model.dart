@@ -10,5 +10,5 @@ class DepositStepModel {
   DepositStepModel(
       {required this.title,
       this.subTitle = '',
-      this.subTitleColor = AskLoraColors.charcoal});
+      this.subTitleColor = AskLoraColors.darkGray});
 }

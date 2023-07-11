@@ -31,7 +31,8 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
                   child: Row(
                     children: [
                       Flexible(
-                          child: CustomTextNew(transactionHistoryModel.title)),
+                          child: CustomTextNew(transactionHistoryModel.title,
+                              style: AskLoraTextStyles.subtitle2)),
                       if (transactionHistoryModel.isDummy) const FreeBotBadge(),
                     ],
                   ),
@@ -39,17 +40,24 @@ class BotOrderTransactionHistoryCard extends StatelessWidget {
                 const SizedBox(
                   width: 14,
                 ),
-                CustomTextNew(
-                  'HKD ${transactionHistoryModel.amountString}',
-                  style: AskLoraTextStyles.subtitle2,
-                ),
+                Row(children: [
+                  CustomTextNew(
+                    'HKD ${transactionHistoryModel.amountString}',
+                    style: AskLoraTextStyles.subtitle2,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Icon(Icons.arrow_forward_ios_rounded,
+                      color: AskLoraColors.black, size: 14)
+                ]),
               ],
             ),
             const SizedBox(
               height: 7,
             ),
             CustomTextNew(
-              BotStatus.findByString(transactionHistoryModel.status).name,
+              BotStatus.findByOmsStatus(transactionHistoryModel.status).name,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.darkGray),
             )

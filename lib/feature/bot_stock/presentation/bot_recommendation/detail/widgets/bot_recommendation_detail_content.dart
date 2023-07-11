@@ -7,18 +7,18 @@ import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
-import '../../../../domain/bot_detail_model.dart';
+import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
 import '../../../../utils/bot_stock_utils.dart';
-import '../../../widgets/column_text.dart';
+import '../../../../../../core/presentation/column_text/column_text_with_tooltip.dart';
 import '../../../widgets/custom_detail_expansion_tile.dart';
 import '../../../widgets/iex_data_provider_link.dart';
-import '../../../widgets/pair_column_text.dart';
+import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import 'bot_price_level_indicator.dart';
 
 class BotRecommendationDetailContent extends StatelessWidget {
   final BotRecommendationModel botRecommendationModel;
-  final BotDetailModel? botDetailModel;
+  final BotRecommendationDetailModel? botDetailModel;
   final BotType botType;
   final SizedBox _spaceBetweenInfo = const SizedBox(
     height: 16,
@@ -45,7 +45,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                     .copyWith(color: AskLoraColors.charcoal),
               ),
               CustomTextNew(
-                botDetailModel?.bot.botDescription.detail ?? 'NA',
+                botDetailModel?.botInfo.botDescription.detail ?? 'NA',
                 style: AskLoraTextStyles.body3
                     .copyWith(color: AskLoraColors.charcoal),
               )
@@ -61,7 +61,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.suited ?? 'NA',
+              botDetailModel?.botInfo.botDescription.suited ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -77,7 +77,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
               height: 6,
             ),
             CustomTextNew(
-              botDetailModel?.bot.botDescription.works ?? 'NA',
+              botDetailModel?.botInfo.botDescription.works ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             ),
@@ -95,7 +95,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botDetailModel?.tickerName} ${botDetailModel?.ticker}',
+                      '${botDetailModel?.stockInfo.tickerName} ${botDetailModel?.stockInfo.symbol}',
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                       maxLines: 2,
@@ -114,8 +114,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CustomTextNew(
-                      (botDetailModel?.price ?? 0)
-                          .convertToCurrencyDecimal(decimalDigits: 2),
+                      (botDetailModel?.price ?? 0).convertToCurrencyDecimal(),
                       style: AskLoraTextStyles.h5
                           .copyWith(color: AskLoraColors.charcoal),
                     ),
@@ -123,7 +122,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
                       height: 5,
                     ),
                     CustomTextNew(
-                      '${getPriceDifference().convertToCurrencyDecimal(decimalDigits: 2)} ${getPercentDifference().convertToCurrencyDecimal(decimalDigits: 2)}%',
+                      '${getPriceDifference().convertToCurrencyDecimal()} ${getPercentDifference().convertToCurrencyDecimal()}%',
                       style: AskLoraTextStyles.body2
                           .copyWith(color: AskLoraColors.charcoal),
                     )
@@ -133,7 +132,7 @@ class BotRecommendationDetailContent extends StatelessWidget {
             ],
           ),
           children: [
-            PairColumnText(
+            PairColumnTextWithTooltip(
               leftTitle: S.of(context).prevClose,
               leftSubTitle: botDetailModel?.prevClosePrice != null
                   ? (botDetailModel?.prevClosePrice ?? 0).toString()
@@ -149,37 +148,37 @@ class BotRecommendationDetailContent extends StatelessWidget {
               color: AskLoraColors.gray,
             ),
             CustomTextNew(
-                '${S.of(context).about} ${botDetailModel?.tickerName}',
+                '${S.of(context).about} ${botDetailModel?.stockInfo.tickerName}',
                 style: AskLoraTextStyles.h6
                     .copyWith(color: AskLoraColors.charcoal)),
             const SizedBox(
               height: 21,
             ),
-            PairColumnText(
+            PairColumnTextWithTooltip(
               leftTitle: S.of(context).sectors,
-              leftSubTitle: botDetailModel?.sector ?? 'NA',
+              leftSubTitle: botDetailModel?.stockInfo.sector ?? 'NA',
               rightTitle: S.of(context).industry,
-              rightSubTitle: botDetailModel?.industry ?? 'NA',
+              rightSubTitle: botDetailModel?.stockInfo.industry ?? 'NA',
             ),
             _spaceBetweenInfo,
-            PairColumnText(
+            PairColumnTextWithTooltip(
               leftTitle: S.of(context).ceo,
-              leftSubTitle: botDetailModel?.ceo ?? 'NA',
+              leftSubTitle: botDetailModel?.stockInfo.ceo ?? 'NA',
               rightTitle: S.of(context).employees,
-              rightSubTitle: '${botDetailModel?.employees}',
+              rightSubTitle: '${botDetailModel?.stockInfo.employees}',
             ),
             _spaceBetweenInfo,
-            PairColumnText(
+            PairColumnTextWithTooltip(
               leftTitle: S.of(context).headquarters,
-              leftSubTitle: botDetailModel?.headquarters ?? 'NA',
+              leftSubTitle: botDetailModel?.stockInfo.headquarter ?? 'NA',
               rightTitle: S.of(context).founded,
-              rightSubTitle: botDetailModel?.founded ?? 'NA',
+              rightSubTitle: botDetailModel?.stockInfo.founded ?? 'NA',
             ),
             const SizedBox(
               height: 23,
             ),
             CustomTextNew(
-              botDetailModel?.description ?? 'NA',
+              botDetailModel?.stockInfo.description ?? 'NA',
               style: AskLoraTextStyles.body1
                   .copyWith(color: AskLoraColors.charcoal),
             )
@@ -193,18 +192,18 @@ class BotRecommendationDetailContent extends StatelessWidget {
             children: [
               if (botDetailModel != null)
                 _detailedInformation(context, botDetailModel!),
-              PairColumnText(
+              PairColumnTextWithTooltip(
                   leftTitle: S.of(context).startDate,
                   leftSubTitle: '${botDetailModel?.formattedStartDate}',
                   rightTitle: S.of(context).investmentPeriod,
-                  rightSubTitle: '${botDetailModel?.bot.duration}',
+                  rightSubTitle: '${botDetailModel?.botDuration}',
                   leftTooltipText: S.of(context).tooltipBotDetailsStartDate,
                   rightTooltipText:
                       S.of(context).tooltipBotDetailsInvestmentPeriod),
               _spaceBetweenInfo,
-              ColumnText(
+              ColumnTextWithTooltip(
                   title: S.of(context).estimatedEndDate,
-                  subTitle: '${botDetailModel?.estimatedExpiredDate}'),
+                  subTitle: '${botDetailModel?.estEndDate}'),
               _chartWidget(context),
               const SizedBox(
                 height: 6,
@@ -218,7 +217,8 @@ class BotRecommendationDetailContent extends StatelessWidget {
   }
 
   Widget _chartWidget(BuildContext context) {
-    if (botDetailModel?.performance != null) {
+    if (botDetailModel?.performance != null &&
+        botDetailModel!.performance.isNotEmpty) {
       return Padding(
         padding: const EdgeInsets.only(top: 32.0),
         child: ChartAnimation(chartDataSets: botDetailModel!.performance),
@@ -240,10 +240,10 @@ class BotRecommendationDetailContent extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20.0),
         child: CustomTextNew(
             S.of(context).portfolioDetailChartCaption(
-                '${botType.upperCaseName} ${botDetailModel!.ticker}',
+                '${botType.upperCaseName} ${botDetailModel!.stockInfo.symbol}',
                 botDetailModel!.botPerformanceStartDate,
                 botDetailModel!.botPerformanceEndDate,
-                botDetailModel!.bot.duration),
+                botDetailModel!.botDuration),
             style: AskLoraTextStyles.body4),
       );
     } else {
@@ -252,27 +252,25 @@ class BotRecommendationDetailContent extends StatelessWidget {
   }
 
   Widget _detailedInformation(
-          BuildContext context, BotDetailModel botDetailModel) =>
+          BuildContext context, BotRecommendationDetailModel botDetailModel) =>
       Column(
         children: [
           BotPriceLevelIndicator(
-            stopLossPrice: botDetailModel.estimatedStopLossPrice,
-            currentPrice: botDetailModel.price,
-            takeProfitPrice: botDetailModel.estimatedTakeProfitPrice,
+            stopLossPrice: botDetailModel.estStopLossPriceFormatted,
+            currentPrice: botDetailModel.priceFormatted,
+            takeProfitPrice: botDetailModel.estTakeProfitPriceFormatted,
             botType: botType,
           ),
           const SizedBox(height: 28),
-          PairColumnText(
+          PairColumnTextWithTooltip(
               leftTitle: botType == BotType.plank
                   ? S.of(context).estStopLossPercent
                   : S.of(context).estMaxLossPercent,
-              leftSubTitle: botDetailModel.estimatedStopLossPct
-                  .convertToCurrencyDecimal(decimalDigits: 2),
+              leftSubTitle: botDetailModel.estStopLossPctFormatted,
               rightTitle: botType == BotType.plank
                   ? S.of(context).estTakeProfitPercent
                   : S.of(context).estMaxProfitPercent,
-              rightSubTitle: botDetailModel.estimatedTakeProfitPct
-                  .convertToCurrencyDecimal(decimalDigits: 2),
+              rightSubTitle: botDetailModel.estTakeProfitPctFormatted,
               leftTooltipText: botType == BotType.plank
                   ? S.of(context).tooltipBotDetailsEstStopLoss
                   : S.of(context).tooltipBotDetailsEstMaxLoss,

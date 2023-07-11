@@ -1,14 +1,11 @@
 part of '../bot_portfolio_detail_screen.dart';
 
 class BotPortfolioDetailHeader extends StatelessWidget {
-  final BotStatus botStatus;
-  final BotType botType;
-  final BotActiveOrderModel botActiveOrderModel;
+  final BotStatus? botStatus;
+  final String title;
+
   const BotPortfolioDetailHeader(
-      {required this.botType,
-      required this.botActiveOrderModel,
-      required this.botStatus,
-      Key? key})
+      {required this.title, this.botStatus, Key? key})
       : super(key: key);
 
   @override
@@ -22,7 +19,7 @@ class BotPortfolioDetailHeader extends StatelessWidget {
             padding: const EdgeInsets.only(top: 1.2),
             child: Icon(
               Icons.circle,
-              color: botStatus.color,
+              color: botStatus != null ? botStatus!.color : Colors.transparent,
               size: 12,
             ),
           ),
@@ -30,7 +27,7 @@ class BotPortfolioDetailHeader extends StatelessWidget {
             width: 12,
           ),
           CustomTextNew(
-            '${botType.upperCaseName} ${botActiveOrderModel.ticker}',
+            title,
             style: AskLoraTextStyles.h5.copyWith(color: AskLoraColors.charcoal),
           ),
         ],

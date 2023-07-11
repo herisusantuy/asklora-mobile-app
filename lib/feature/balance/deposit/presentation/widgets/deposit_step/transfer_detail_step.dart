@@ -12,14 +12,20 @@ class TransferDetailStep extends StatelessWidget {
     return DepositBaseStep(
       contents: [
         CustomTextNew(
-          'Transfer HK\$${depositType.minDeposit.convertToCurrencyDecimal()} to LORA',
+          depositType == DepositType.firstTime
+              ? S.of(context).transferInitialFundToAsklora
+              : S.of(context).transferFundToAsklora,
           style: AskLoraTextStyles.h6.copyWith(color: AskLoraColors.charcoal),
         ),
         const SizedBox(
           height: 10,
         ),
         CustomTextNew(
-          "Copy LORA's bank details and transfer at less HK\$${depositType.minDeposit.convertToCurrencyDecimal()} from your bank account via FPS or Wire transfer.",
+          depositType.minDeposit != 0
+              ? S
+                  .of(context)
+                  .firstTimeCopyAskloraBankDetails(depositType.minDepositString)
+              : S.of(context).copyAskloraBankDetails,
           style:
               AskLoraTextStyles.body2.copyWith(color: AskLoraColors.charcoal),
         ),

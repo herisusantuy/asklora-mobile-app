@@ -16,11 +16,20 @@ class BotPortfolioCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final BotType botType =
         BotType.findByString(botActiveOrderModel.botAppsName);
-    final Pair<bool, String> expiredDayLeft = expiredDaysLeft(context,
-        DateTime.now(), DateTime.parse(botActiveOrderModel.expireDate));
     return GestureDetector(
-      onTap: () => BotPortfolioDetailScreen.open(
-          context: context, botActiveOrderModel: botActiveOrderModel),
+      onTap: () {
+        context
+            .read<TabScreenBloc>()
+            .add(TabChanged(TabPage.portfolio.setData(arguments: (
+              path: SubTabPage.portfolioBotStockDetails.value,
+              arguments: {
+                'botType': botType.internalName,
+                'symbol': botActiveOrderModel.ticker
+              }
+            ))));
+        BotPortfolioDetailScreen.open(
+            context: context, botActiveOrderModel: botActiveOrderModel);
+      },
       child: Stack(
         children: [
           Container(
@@ -43,7 +52,7 @@ class BotPortfolioCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextNew(
-                      '${botType.upperCaseName} ${botActiveOrderModel.ticker}',
+                      '${botType.upperCaseName} ${botActiveOrderModel.symbol}',
                       style: AskLoraTextStyles.h5,
                       maxLines: 1,
                       ellipsis: true,
@@ -51,10 +60,11 @@ class BotPortfolioCard extends StatelessWidget {
                     const SizedBox(
                       height: 4,
                     ),
-                    CustomTextNew(
+                    AutoSizedTextWidget(
                       botActiveOrderModel.tickerName,
                       style: AskLoraTextStyles.body2,
                       maxLines: 2,
+                      minFontSize: 9,
                       ellipsis: true,
                     ),
                   ],
@@ -62,43 +72,28 @@ class BotPortfolioCard extends StatelessWidget {
                 const SizedBox(
                   height: 13,
                 ),
-                PairColumnText(
+                PairColumnTextWithAutoSizedText(
                   leftTitle: S.of(context).portfolioCurrentPrice(''),
                   rightTitle: S.of(context).portfolioTotalPL,
                   leftSubTitle: botActiveOrderModel.currentPrice.toString(),
-                  rightSubTitle: '0%',
+                  rightSubTitle: botActiveOrderModel.totalPnLPctString,
+                  maxLines: 1,
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 Container(
+                  width: double.infinity,
                   padding:
                       const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                   decoration: BoxDecoration(
                       color: botType.secondaryBgColor,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
-                    children: [
-                      if (expiredDayLeft.left)
-                        const Padding(
-                          padding: EdgeInsets.only(right: 10),
-                          child: Icon(
-                            Icons.warning,
-                            color: AskLoraColors.charcoal,
-                            size: 14,
-                          ),
-                        ),
-                      Expanded(
-                        child: CustomTextNew(
-                          expiredDayLeft.right,
-                          style: AskLoraTextStyles.subtitle4
-                              .copyWith(color: botType.expiredTextColor),
-                          maxLines: 2,
-                          ellipsis: true,
-                        ),
-                      )
-                    ],
-                  ),
+                  child: AutoSizedTextWidget(
+                      botActiveOrderModel.startOrExpireDateStr(context),
+                      style: AskLoraTextStyles.subtitle4
+                          .copyWith(color: botType.expiredTextColor),
+                      maxLines: 1),
                 )
               ],
             ),
@@ -107,20 +102,5 @@ class BotPortfolioCard extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Pair<bool, String> expiredDaysLeft(
-      BuildContext context, DateTime from, DateTime to) {
-    int dayLeft = (to.difference(from).inHours / 24).round().abs();
-    if (dayLeft > 3) {
-      return Pair(
-          false,
-          S
-              .of(context)
-              .portfolioDetailExpiredAt(DateFormat('kk:mm, dd-MM').format(to)));
-    } else {
-      return Pair(
-          true, S.of(context).portfolioDetailExpiredIn(dayLeft.toString()));
-    }
   }
 }

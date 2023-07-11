@@ -10,6 +10,8 @@
   "contactUs": "Contact Us",
   "officeHoursLabel": "Office Hours",
   "officeHours": "09:00-18:00 (HKT)",
+  "botDuration": "Bot Duration",
+  "botManagementFee": "Bot Management Fee",
   "buttonSignUp": "Sign Up",
   "buttonAlreadyHaveAnAccount": "Already Have An Account?",
   "buttonResendActivationLink": "Resend Activation Link",
@@ -37,6 +39,7 @@
   "buttonViewTransactionHistory": "View Transaction History",
   "buttonSave": "Save",
   "currentPrice": "Current Price",
+  "depositAmount": "Deposit Amount",
   "deposit": "Deposit",
   "depositRequestSubmittedTitle": "Deposit Request Submitted",
   "depositRequestSubmittedSubTitleFirstTime": "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved.",
@@ -60,6 +63,8 @@
   "estMaxProfitPercent": "Est. Max Profit %",
   "estimatedEndDate": "Estimated End Date",
   "employees": "Employees",
+  "expiresAt": "Expires at",
+  "startsAt": "Starts at",
   "ceo": "CEO",
   "founded": "Founded",
   "gotIt": "Got It",
@@ -91,6 +96,8 @@
   "activities": "Activities",
   "filledPrice": "Filled Price",
   "shares": "Shares",
+  "orderCancelled": "Order Cancelled",
+  "orderPlaced": "Order Placed",
   "orderStarted": "Order Started",
   "orderRollover": "Order Rollover",
   "orderExpired": "Order Expired",
@@ -165,7 +172,14 @@
   "botTradeBottomSheetEndBotStockConfirmationSubTitle": "The total Botstock value will be returned to your \naccount after the next community order.",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedTitle": "Your free Botstock has been added to your portfolio!",
   "botTradeBottomSheetFreeBotStockSuccessfullyAddedSubTitle": "Deposit To Start Trading",
-  "botTradeBottomSheetCancelBotStockConfirmationTitle": "The investment amount and Bot management fee (HKD1,500) will be returned to your account.",
+  "botTradeBottomSheetCancelBotStockConfirmationTitle": "The investment amount and Bot management fee (HKD{amount}) will be returned to your account.",
+  "@botTradeBottomSheetCancelBotStockConfirmationTitle": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "botTradeBottomSheetRolloverConfirmationButton": "Confirm Rollover",
   "howItWorks": "How It Works",
   "marketCap": "Market Cap",
@@ -239,7 +253,7 @@
     }
   },
   "portfolioTotalValue": "Total Portfolio Value",
-  "portfolioWithdrawableAmount": "Withdrawable Amount ({currency})",
+  "portfolioWithdrawableAmount": "Withdrawable Balance ({currency})",
   "@portfolioWithdrawableAmount": {
     "placeholders": {
       "currency": {
@@ -269,7 +283,7 @@
   "passwordDoesNotMatch": "Your password does not match.",
   "passwordChangeSuccess": "Password Change Success",
   "yourPasswordHasBeenChanged": "Your password has been changed",
-  "invalidPassword": "Enter valid password",
+  "enterValidPassword": "Enter valid password",
   "oldPasswordSameWithNewPasswordError": "Your new password cannot be the same as your old password",
   "portfolioPopUpCreateAnAccountTitle": "Create an Account and Start Trading!",
   "portfolioPopUpCreateAnAccountSubTitle": "You can manage all your investments here after you start trading. Create an account and start trading.",
@@ -283,7 +297,6 @@
   "portfolioPopUpFundAccountTitle": "Fund your account",
   "portfolioPopUpFundAccountSubTitle": "Looks like you haven’t funded your account yet. Deposit HKD 10,000 to activate your account.",
   "startABotstock": "Start A Botstock",
-
   "portfolioPopUpNoTradingHasStartedTitle": "No trading has started!",
   "portfolioPopUpNoTradingHasStartedtSubTitle": "You can manage all your investments here after you start trading. ",
   "portfolioPopUpPendingReviewTitle": "Your Account is Pending Review",
@@ -363,7 +376,7 @@
   "status": "Status",
   "suspendedScreenTitle": "Account Suspended",
   "suspendedScreenSubTitle": "Your account has been suspended and is pending investigation from us. If you have any questions about your account, please contact our customer service team.",
-  "signUpTitle": "Start your new investing journey with Lora - \nYour FinFit Coach",
+  "signUpTitle": "Start your AI revolution with\nAsklora. Go crush it.",
   "to": "To",
   "transactionFee": "Transaction fee",
   "transferTo": "Transfer to",
@@ -377,8 +390,9 @@
   "welcomeScreenThirdBenefit": "Automated trading strategies",
   "withdrawalAmount": "Withdrawal Amount",
   "withdrawalWorkingDays": "Your withdrawal can take up to 2 working days.",
-  "withdrawalRequestSubmittedTitle": "Your Withdrawal request is submitted.",
+  "withdrawalRequestSubmittedTitle": "Your withdrawal request is submitted.",
   "withdrawalRequestSubmittedSubTitle": "You will be informed via email and app notification as soon as the funds are paid to your account.",
+  "withdraw": "Withdraw",
   "relearn": "relearn",
   "min": "~{minute} min",
   "@min": {
@@ -388,5 +402,119 @@
       }
     }
   },
-  "viewDepositGuide": "View Deposit Guide"
+  "viewDepositGuide": "View Deposit Guide",
+  "pressBackAgain": "Press back again to exit Asklora",
+  "tradeSummary": "Trade Summary",
+  "marketPrice": "Market Price",
+  "endDate": "End Date",
+  "confirmTrade": "Confirm Trade",
+  "checkBotStockDetails": "Check Botstock Details",
+  "tradeRequestReceived": "Trade Request Received",
+  "tradeCancelledTitle": "Trade Cancelled",
+  "tradeCancelledSubtitle": "The trade has been cancelled and your investment amount has been returned to your account",
+  "rolloverBotStockAcknowledgement": "{botName} {botSymbol} will start at {dateTime}",
+  "@rolloverBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
+  "beforeKYCHeaderTitle": "You are making great\nprogress, {name}!",
+  "@beforeKYCHeaderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "endBotStockAcknowledgement": "{botName} {botSymbol} will end at {dateTime}",
+  "@endBotStockAcknowledgement": {
+    "placeholders": {
+      "botName": {
+        "type": "String"
+      },
+      "botSymbol": {
+        "type": "String"
+      },
+      "dateTime": {
+        "type": "String"
+      }
+    }
+  },
+  "beforeDepositHeaderTitle": "Just one more step to AI\ngreatness, {name}!",
+  "@beforeDepositHeaderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "afterPayDepositHeaderTitle": "Your investment account will be ready soon!",
+  "greatStart": "Great start!",
+  "halfWayThere": "Halfway there!",
+  "almostFinished": "Almost finished!",
+  "startInvestingOnMilestone": "Start investing",
+  "depositFundToStartInvesting": "Deposit funds to start investing",
+  "onBoardingCompletionMessage": "You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.",
+  "nextStep": "Next step",
+  "go": "Go",
+  "depositViaFpsOrWireTransfer": "Deposit via FPS or Wire Transfer",
+  "transferAtLeastWithNoMinimumDeposit": "Transfer to Asklora bank account from the same bank account you used.",
+  "transferAtLeastWithMinimumDeposit": "Transfer at least HK${minDeposit} to Asklora's bank account. Any initial deposit less than HK${minDeposit} will be rejected and fees will be charged.",
+  "@transferAtLeastWithMinimumDeposit": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "uploadProofOfRemittance": "Upload proof of remittance",
+  "theProofOfRemittanceShouldShowYourBankAccount": "The proof of remittance should show your bank account number, full name, and amount.",
+  "inputDepositAmount": "Input deposit amount",
+  "theAmountMustMatch": "The amount must match with the actual transferred amount.",
+  "yourDepositCanTakeUp2WorkingDays": "Your deposit can take up to 2 working days",
+  "notes": "Notes",
+  "returningUserDepositNotes": "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.",
+  "weWillTakeInformationCollectedFromYour": "We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK$ {minDeposit} bank transfer is completed.",
+  "@weWillTakeInformationCollectedFromYour": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseAddAHkBankAccount": "Please add a HK bank account that is under your name; other people's bank accounts or joint accounts will not be accepted.",
+  "weWillOnlyAcceptDepositViaBankTransfer": "We will only accept deposits via bank transfer (wire/FPS) from your own account.",
+  "weWillOnlyAcceptHKD": "We will only accept HKD.",
+  "transferInitialFundToAsklora": "Transfer initial funds to Asklora",
+  "transferFundToAsklora": "Transfer funds to Asklora",
+  "firstTimeCopyAskloraBankDetails": "Copy Asklora's bank details and transfer no less than HK${minDeposit} from your bank account via FPS or Wire transfer.",
+  "@firstTimeCopyAskloraBankDetails": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "copyAskloraBankDetails": "Copy Asklora's bank details and transfer from your bank account via FPS or Wire transfer.",
+  "theAmountMustMatchWithPor": "The amount must match with the proof of remittance.",
+  "thePorShouldShowYourBank": "The proof of remittance should show your bank account number, full name, and amount.",
+  "pleaseMakeSureYouHaveFinished": "Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.",
+  "pleaseMakeSureYouPressSubmit": "Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.",
+  "yourDepositMayBeRejected": "Your deposit may be rejected if the informed amount is different from the actual transferred amount.",
+  "weAcceptHKDOnly": "We accept HKD only.",
+  "buttonSubmit": "Submit",
+  "min8Character": "min. 8 characters",
+  "atLeast1Lowercase": "at least 1 lowercase letter",
+  "atLeast1Uppercase": "at least 1 upper case letter",
+  "atLeast1Number": "at least 1 number",
+  "readyToGo": "Ready to go?",
+  "invalidPassword": "Invalid Password"
 }

@@ -16,7 +16,7 @@ import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/presentation/kyc_screen.dart';
 import '../../../onboarding/ppi/presentation/investment_style_question/investment_style_welcome_screen.dart';
 import '../../../onboarding/welcome/ask_name/presentation/ask_name_screen.dart';
-import '../../../tabs/tabs_screen.dart';
+import '../../../tabs/presentation/tab_screen.dart';
 import '../../forgot_password/presentation/forgot_password_screen.dart';
 import '../../otp/presentation/otp_screen.dart';
 import '../bloc/sign_in_bloc.dart';
@@ -48,7 +48,7 @@ class SignInForm extends StatelessWidget {
               InvestmentStyleWelcomeScreen.open(context);
               break;
             default:
-              TabsScreen.openAndRemoveAllRoute(context);
+              TabScreen.openAndRemoveAllRoute(context);
               break;
           }
         }
@@ -63,8 +63,8 @@ class SignInForm extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: [
-                        const LoraMemojiHeader(
-                            text: 'Welcome back!\nReady to go?'),
+                        LoraMemojiHeader(
+                            text: 'Welcome back!\n${S.of(context).readyToGo}'),
                         context.padding(),
                         _emailInput(),
                         context.padding(topPadding: 10),

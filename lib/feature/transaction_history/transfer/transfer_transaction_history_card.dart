@@ -29,23 +29,40 @@ class TransferTransactionHistoryCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: CustomTextNew(transactionHistoryModel.title),
+                  child: CustomTextNew(transactionHistoryModel.title,
+                      style: AskLoraTextStyles.subtitle1),
                 ),
                 const SizedBox(
                   width: 14,
                 ),
-                CustomTextNew(
-                  '${transactionHistoryModel.transferType.punctuation}HKD ${transactionHistoryModel.amountString}',
-                  style: AskLoraTextStyles.subtitle2.copyWith(
-                      color: transactionHistoryModel.transferType.color),
-                ),
+                Row(
+                  children: [
+                    CustomTextNew(
+                      '${transactionHistoryModel.transferType.punctuation}HKD ${transactionHistoryModel.amountString}',
+                      style: AskLoraTextStyles.subtitle2.copyWith(
+                          color: transactionHistoryModel.transferType.color),
+                    ),
+                    transactionHistoryModel.transactionHistoryType !=
+                            TransactionHistoryType.subscription
+                        ? const Row(
+                            children: [
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Icon(Icons.arrow_forward_ios_rounded,
+                                  color: AskLoraColors.black, size: 14)
+                            ],
+                          )
+                        : const SizedBox.shrink()
+                  ],
+                )
               ],
             ),
             const SizedBox(
               height: 7,
             ),
             CustomTextNew(
-              transactionHistoryModel.status.toTitleCase,
+              transactionHistoryModel.transferStatus.name,
               style: AskLoraTextStyles.body2
                   .copyWith(color: AskLoraColors.darkGray),
             )

@@ -1,71 +1,86 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import '../../../../../../core/utils/date_utils.dart';
 import '../../../../../../core/utils/extensions.dart';
-import '../../../../chart/domain/chart_models.dart';
 
-class BotActivitiesTransactionHistoryModel extends ChartDataSet {
-  final String pk;
-  final double pnlAmt;
+part 'bot_activities_transaction_history_model.g.dart';
+
+@JsonSerializable()
+class BotActivitiesTransactionHistoryModel {
+  final String uid;
+  final String created;
   final String side;
+  final String action;
+  final String status;
+  final double price;
+  final double qty;
+  @JsonKey(name: 'invested_usd')
+  final double investedUsd;
   final double invested;
+  @JsonKey(name: 'filled_qty')
+  final double filledQty;
+  @JsonKey(name: 'filled_avg_price')
+  final double? filledAvgPrice;
+  @JsonKey(name: 'filled_at')
+  final String? filledAt;
+  @JsonKey(name: 'filled_at_hkt')
+  final String? filledAtHkt;
+  @JsonKey(name: 'expire_at')
+  final String? expiredAt;
+  @JsonKey(name: 'canceled_at')
+  final String? canceledAt;
+  @JsonKey(name: 'failed_at')
+  final String? failedAt;
 
   const BotActivitiesTransactionHistoryModel(
-    super.date,
-    super.price,
-    super.hedgeShare,
-    super.currentPnlRet,
-    this.pk,
-    this.pnlAmt,
-    this.side,
-    this.invested, {
-    super.index,
-  });
+      this.uid,
+      this.created,
+      this.side,
+      this.action,
+      this.status,
+      this.price,
+      this.qty,
+      this.invested,
+      this.investedUsd,
+      this.filledQty,
+      this.filledAvgPrice,
+      this.filledAt,
+      this.filledAtHkt,
+      this.expiredAt,
+      this.canceledAt,
+      this.failedAt);
 
-  BotActivitiesTransactionHistoryModel copyWith({int? index}) =>
-      BotActivitiesTransactionHistoryModel(
-        date,
-        price,
-        hedgeShare,
-        currentPnlRet,
-        pk,
-        pnlAmt,
-        side,
-        invested,
-        index: index ?? this.index,
-      );
-
-  BotActivitiesTransactionHistoryModel.fromJson(Map<String, dynamic> json)
-      : pk = json['pk'],
-        pnlAmt = json['pnl_amt'],
-        side = json['side'],
-        invested = json['invested'],
-        super(
-            DateTime.parse(formatDateTimeAsString(json['created'])),
-            checkDouble(json['filled_avg_price']),
-            json['side'] == 'buy'
-                ? checkDouble(json['filled_qty'])
-                : -checkDouble(json['filled_qty']),
-            checkDouble(json['pnl_ret']),
-            index: json['i'] ?? 0);
-
-  String get investedString {
-    double investmentAmountDouble = checkDouble(invested);
-    return 'USD ${investmentAmountDouble.convertToCurrencyDecimal()}';
+  String get investedUsdString {
+    final double investmentAmountDouble = checkDouble(investedUsd);
+    return 'USD ${investmentAmountDouble.abs().convertToCurrencyDecimal()}';
   }
 
-  String get dateFormattedString =>
-      formatDateTimeAsString(date, dateFormat: 'HH:mm:ss');
+  String get investedHkdString {
+    final double investmentAmountDouble = checkDouble(invested);
+    return '${investmentAmountDouble.abs().convertToCurrencyDecimal()}*';
+  }
+
+  String get createdFormattedString {
+    DateTime localTime = formatDateTimeToLocal(created);
+    return formatDateTimeAsString(localTime, dateFormat: 'HH:mm:ss');
+  }
 
   String get filledAvgPriceString {
-    double filledAvgPriceDouble = checkDouble(price);
+    final double filledAvgPriceDouble = checkDouble(filledAvgPrice);
     return (filledAvgPriceDouble > 0)
-        ? 'USD ${filledAvgPriceDouble.toInt()}'
+        ? 'USD ${filledAvgPriceDouble.convertToCurrencyDecimal()}'
         : 'NA';
   }
 
   String get filledQtyString {
-    double filledAvgQtyDouble = checkDouble(hedgeShare);
-    return (filledAvgQtyDouble > 0)
-        ? 'USD ${filledAvgQtyDouble.toInt()}'
-        : 'NA';
+    final double filledAvgQtyDouble = checkDouble(filledQty);
+    return (filledAvgQtyDouble > 0) ? filledAvgQtyDouble.toString() : 'NA';
   }
+
+  factory BotActivitiesTransactionHistoryModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$BotActivitiesTransactionHistoryModelFromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$BotActivitiesTransactionHistoryModelToJson(this);
 }

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/domain/pair.dart';
@@ -57,23 +58,24 @@ List<BotRecommendationModel> demonstrationBots = [
 
 enum BotType {
   pullUp('Pull Up', 'PULLUP', 'Pullup', 'icon_bot_badge_pop_up_message_pull_up',
-      AskLoraColors.lime, AskLoraColors.darkerLime),
+      'UNO', AskLoraColors.lime, AskLoraColors.darkerLime),
   squat('Squat', 'SQUAT', 'Squat', 'icon_bot_badge_pop_up_message_squat',
-      AskLoraColors.purple, AskLoraColors.darkerPurple,
+      'UCDC', AskLoraColors.purple, AskLoraColors.darkerPurple,
       expiredTextColor: AskLoraColors.white),
   plank('Plank', 'PLANK', 'Plank', 'icon_bot_badge_pop_up_message_plank',
-      AskLoraColors.primaryGreen, AskLoraColors.darkerGreen);
+      'CLASSIC', AskLoraColors.primaryGreen, AskLoraColors.darkerGreen);
 
   final String value;
   final String upperCaseName;
   final String name;
   final String botAssetName;
+  final String internalName;
   final Color primaryBgColor;
   final Color secondaryBgColor;
   final Color expiredTextColor;
 
   const BotType(this.value, this.upperCaseName, this.name, this.botAssetName,
-      this.primaryBgColor, this.secondaryBgColor,
+      this.internalName, this.primaryBgColor, this.secondaryBgColor,
       {this.expiredTextColor = AskLoraColors.charcoal});
 
   static BotType findByString(String botAppType) =>
@@ -90,30 +92,98 @@ enum BotStockFilter {
   const BotStockFilter(this.name);
 }
 
-enum BotStatus {
-  pending('place', 'Pending', AskLoraColors.amber),
-  active('open', 'Active', AskLoraColors.primaryGreen),
-  activeExpireSoon('open', 'Active (Expire Soon)', AskLoraColors.primaryGreen),
-  closed('closed', 'Closed', AskLoraColors.primaryGreen),
-  cancel('cancel', 'Cancel', AskLoraColors.primaryMagenta);
+enum OmsStatus {
+  initialized('initialized'),
+  indicative('indicative'),
+  rejectedOms('rejected_oms'),
+  live('live'),
+  waitingTermination('waiting_termination'),
+  earlyTerminated('early_terminated'),
+  expired('expired'),
+  nearlyKnockOut('nearly_knock_out'),
+  knockOut('knock_out');
 
   final String value;
-  final String name;
-  final Color color;
 
-  static BotStatus findByString(String botStatusString, {String? expireDate}) {
-    BotStatus botStatus = BotStatus.values
-        .firstWhere((element) => element.value == botStatusString);
-    if (botStatus == active &&
-        expireDate != null &&
-        DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
-      botStatus = BotStatus.activeExpireSoon;
-    }
-    return botStatus;
-  }
+  static OmsStatus findByString(String omsStatus) =>
+      OmsStatus.values.firstWhere((element) => element.value == omsStatus);
 
-  const BotStatus(this.value, this.name, this.color);
+  const OmsStatus(this.value);
 }
 
-String newExpiryDateOnRollover(String expireDate) => formatDateTimeAsString(
-    DateTime.parse(expireDate).add(const Duration(days: 14)));
+enum BotStatus {
+  live(
+    'Active',
+    [
+      OmsStatus.live,
+      OmsStatus.nearlyKnockOut,
+      OmsStatus.waitingTermination,
+    ],
+    AskLoraColors.primaryGreen,
+  ),
+  liveExpireSoon(
+    'Active',
+    [
+      OmsStatus.live,
+      OmsStatus.nearlyKnockOut,
+      OmsStatus.waitingTermination,
+    ],
+    AskLoraColors.primaryGreen,
+  ),
+  canceled(
+    'Canceled',
+    [
+      OmsStatus.earlyTerminated,
+    ],
+    AskLoraColors.primaryMagenta,
+  ),
+  rejected(
+      'Rejected',
+      [
+        OmsStatus.rejectedOms,
+      ],
+      AskLoraColors.primaryMagenta),
+  pending(
+    'Pending',
+    [
+      OmsStatus.initialized,
+      OmsStatus.indicative,
+    ],
+    AskLoraColors.amber,
+  ),
+  expired(
+    'Expired',
+    [
+      OmsStatus.expired,
+      OmsStatus.knockOut,
+    ],
+    AskLoraColors.primaryMagenta,
+  );
+
+  final String name;
+  final List<OmsStatus> omsStatusCollection;
+
+  final Color color;
+
+  const BotStatus(this.name, this.omsStatusCollection, this.color);
+
+  static BotStatus findByOmsStatus(String omsStatusString,
+      {String? expireDate}) {
+    OmsStatus? omsStatus = OmsStatus.values
+        .firstWhereOrNull((element) => element.value == omsStatusString);
+    BotStatus? botStatus = BotStatus.values.firstWhereOrNull(
+        (element) => element.omsStatusCollection.contains(omsStatus));
+
+    if (botStatus == BotStatus.live &&
+        expireDate != null &&
+        DateTime.parse(expireDate).difference(DateTime.now()).inDays < 3) {
+      botStatus = BotStatus.liveExpireSoon;
+    }
+    return botStatus ?? BotStatus.pending;
+  }
+}
+
+String newExpiryDateOnRollover(String? expireDate) => expireDate != null
+    ? formatDateTimeAsString(
+        DateTime.parse(expireDate).add(const Duration(days: 14)))
+    : '';

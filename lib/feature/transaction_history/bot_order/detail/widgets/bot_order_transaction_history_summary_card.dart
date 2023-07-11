@@ -36,16 +36,27 @@ class BotOrderTransactionHistorySummaryCard extends StatelessWidget {
               const SizedBox(
                 width: 14,
               ),
-              CustomTextNew(
-                subTitle,
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width / 1.6,
+                ),
+                child: AutoSizedTextWidget(
+                  subTitle,
+                  maxLines: 1,
+                ),
               ),
             ],
           ),
           if (additionalText != null)
             Align(
               alignment: Alignment.centerRight,
-              child: CustomTextNew(
-                additionalText!,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: CustomTextNew(
+                  additionalText!,
+                  style: AskLoraTextStyles.body3
+                      .copyWith(color: AskLoraColors.darkGray),
+                ),
               ),
             ),
         ],

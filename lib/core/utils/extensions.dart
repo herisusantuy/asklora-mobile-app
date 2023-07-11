@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'dart:ui' as ui;
 
 import 'currency_enum.dart';
 
@@ -83,7 +83,7 @@ extension DoublePrecision on double {
 
 extension CurrencyFormat on double {
   String convertToCurrencyDecimal(
-      {String symbol = '', String? locale, int decimalDigits = 1}) {
+      {String symbol = '', String? locale, int decimalDigits = 2}) {
     NumberFormat currencyFormatter = NumberFormat.currency(
       symbol: symbol,
       locale: locale,
@@ -101,11 +101,11 @@ extension CurrencyFormat on double {
   }
 
   String toUsdWithCurrencyPrefix() {
-    return '${CurrencyType.usd.value} ${(this * 0.13).convertToCurrencyDecimal()}';
+    return '${CurrencyType.usd.name} ${(this * 0.13).convertToCurrencyDecimal()}';
   }
 
   String toHkdWithCurrencyPrefix() {
-    return '${CurrencyType.hkd.value} ${(this * 7.85).convertToCurrencyDecimal()}';
+    return '${CurrencyType.hkd.name} ${(this * 7.85).convertToCurrencyDecimal()}';
   }
 }
 
@@ -153,6 +153,9 @@ double checkDouble(dynamic value) {
   if (value is String) return double.tryParse(value) ?? 0.0;
   return 0.0;
 }
+
+double checkTwoDecimalDouble(dynamic value) =>
+    double.parse(checkDouble(value).toStringAsFixed(2));
 
 int checkInt(dynamic value) {
   if (value is int) return value;

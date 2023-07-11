@@ -21,7 +21,7 @@ import '../../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_st
 import '../../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../../settings/bloc/account_information/account_information_bloc.dart';
 import '../../../../settings/domain/bank_account.dart';
-import '../../../../tabs/tabs_screen.dart';
+import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../widgets/balance_base_form.dart';
 import '../../../widgets/bank_account_card.dart';
 import '../../../widgets/change_bank_account_button.dart';
@@ -42,7 +42,7 @@ class DepositWelcomeScreen extends StatelessWidget {
   static const String route = '/deposit_welcome_screen';
 
   final _spaceHeight = const SizedBox(
-    height: 54,
+    height: 38,
   );
   final _spaceHeightSmall = const SizedBox(
     height: 21,
@@ -154,7 +154,7 @@ class DepositWelcomeScreen extends StatelessWidget {
                     depositType: depositType,
                   ),
               secondaryButtonOnClick: () =>
-                  TabsScreen.openAndRemoveAllRoute(context),
+                  TabScreen.openAndRemoveAllRoute(context),
               primaryButtonLabel: S.of(context).buttonContinue,
               secondaryButtonLabel: S.of(context).buttonMaybeLater),
         );
@@ -173,7 +173,8 @@ class DepositWelcomeScreen extends StatelessWidget {
   }
 
   static void open({required BuildContext context, DepositType? depositType}) =>
-      Navigator.pushNamed(context, route, arguments: depositType);
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: depositType);
 
   DepositType _getDepositType(BankAccount? bankAccount) {
     return initialDepositType ??

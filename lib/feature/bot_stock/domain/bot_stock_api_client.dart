@@ -15,25 +15,23 @@ class BotStockApiClient {
       await PpiApiClient()
           .get(endpoint: '$endpointBotRecommendation/$accountId');
 
-  Future<Response> fetchBotOrderHistory() async =>
-      await AskloraApiClient().post(
-          endpoint: endpointBotOrderHistory,
-          payload: jsonEncode({
-            'status': ['place', 'open', 'closed', 'cancel']
-          }));
-
   Future<Response> fetchBotDetail(BotDetailRequest request) async =>
       await AskloraApiClient().post(
           endpoint: endpointBotDetail, payload: jsonEncode(request.toJson()));
 
-  Future<Response> activeOrder(BotActiveOrderRequest request) async =>
-      await AskloraApiClient().post(
-          endpoint: endpointBotActiveOrder,
-          payload: jsonEncode(request.toJson()));
+  Future<Response> activeOrder(
+      BotActiveOrderRequest botActiveOrderRequest) async {
+    return await AskloraApiClient().get(
+        endpoint: endpointBotActiveOrder,
+        queryParameters: botActiveOrderRequest.toJson());
+  }
 
   Future<Response> activeOrderDetail(String orderId) async =>
+      await AskloraApiClient().get(endpoint: '$endpointBotActiveOrder$orderId');
+
+  Future<Response> fetchBotPerformance(String orderId) async =>
       await AskloraApiClient()
-          .get(endpoint: '$endpointBotActiveOrder/$orderId');
+          .get(endpoint: endpointBotActiveOrderPerformance(orderId));
 
   Future<Response> createOrder(BotCreateOrderRequest request) async =>
       await AskloraApiClient().post(

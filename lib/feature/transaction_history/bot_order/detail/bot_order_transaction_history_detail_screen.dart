@@ -11,17 +11,19 @@ import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/extensions.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../core/presentation/auto_sized_text_widget.dart';
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/values/app_values.dart';
-import '../../../bot_stock/presentation/widgets/column_text.dart';
-import '../../../bot_stock/presentation/widgets/pair_column_text.dart';
+import '../../../bot_stock/presentation/bot_performance/bot_performance_chart.dart';
+import '../../../../core/presentation/column_text/column_text_with_tooltip.dart';
+import '../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
-import '../../../chart/presentation/chart_animation.dart';
 import '../../domain/grouped_model.dart';
 import '../../domain/transaction_history_model.dart';
 import '../../presentation/widgets/transaction_history_group_title.dart';
 import '../../presentation/widgets/transaction_history_tab.dart';
 import '../../../../core/repository/transaction_repository.dart';
+import '../../utils/transaction_history_util.dart';
 import 'domain/bot_activities_transaction_history_model.dart';
 import 'domain/bot_detail_transaction_history_response.dart';
 import 'domain/bot_summary_transaction_history_model.dart';
@@ -84,6 +86,7 @@ class BotOrderTransactionHistoryDetailScreen extends StatelessWidget {
               content: BotOrderTransactionHistoryDetailContent(
                 title: transactionHistoryModel.title,
                 botStatus: transactionHistoryModel.status,
+                botOrderId: transactionHistoryModel.idString,
               ),
             );
           },

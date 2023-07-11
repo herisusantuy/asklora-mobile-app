@@ -16,17 +16,18 @@ platform :android do
   private_lane :upload_to_firebase do |options|
 
     output_path = "../build/app/outputs/flutter-apk/" +options[:apk_name]
+    firebase_app_id = options[:firebase_app_id]
 
-    firebase_app_distribution(
-      app: ENV["FIREBASE_ANDROID_DEV_APP_ID"],
+    release = firebase_app_distribution(
+      app: ENV[firebase_app_id],
       android_artifact_path: output_path,
       android_artifact_type: "APK",
       release_notes: "Test App",
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
       service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+      groups: "AskLora, Internal",
       debug: true
     )
-
   end
 
   desc "Runs all the tests"
@@ -39,14 +40,34 @@ platform :android do
     clean()
     set_up_env_vars(env:"dev")
     gradle(task: "assembleDevRelease")
-    gradle(task: "bundleDevRelease")
     validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
-    upload_to_firebase(apk_name:"app-dev-release.apk")
-    upload_to_play_store(
-        json_key: '../firebase_credentials_dev.json',
-        aab: '../build/app/outputs/bundle/devRelease/app-dev-release.aab',
-        track_promote_to: 'internal',
-        package_name: 'ai.asklora.app.dev')
+#    upload_to_firebase(firebase_app_id:"FIREBASE_ANDROID_DEV_APP_ID", apk_name:"app-dev-release.apk")
+
+    output_path = "../build/app/outputs/flutter-apk/app-dev-release.apk"
+
+     release = firebase_app_distribution(
+          app: ENV["FIREBASE_ANDROID_DEV_APP_ID"],
+          android_artifact_path: output_path,
+          android_artifact_type: "APK",
+          release_notes: "Test App",
+          firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+          service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+          groups: "AskLora, Internal",
+          debug: true
+     )
+
+    slack(
+          slack_url: ENV["SLACK_HOOK_URL"],
+          message: "🐕 📱 Asklora Dev Android App successfully released!👯🏾‍👯🏾",
+          success: true,
+          payload: {
+            "Build Date" => release[:createTime],
+            "🌎 Environment" => "Development",
+            "📥 Download" => release[:firebaseConsoleUri],
+            "Build Version" => release[:displayVersion],
+          },
+          default_payloads: [:git_branch, :git_author],
+    )
   end
 
   desc "Create a staging build"
@@ -56,7 +77,35 @@ platform :android do
     gradle(task: "assembleStagingRelease")
     gradle(task: "bundleStagingRelease")
     validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
-    upload_to_firebase(apk_name:"app-staging-release.apk")
+
+    output_path = "../build/app/outputs/flutter-apk/app-staging-release.apk"
+
+    release = firebase_app_distribution(
+       app: ENV["FIREBASE_ANDROID_STAG_APP_ID"],
+       android_artifact_path: output_path,
+       android_artifact_type: "APK",
+       release_notes: "Test App",
+       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+       service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"],
+       groups: "AskLora, Internal",
+       debug: true
+     )
+
+    #upload_to_firebase(firebase_app_id:"FIREBASE_ANDROID_STAG_APP_ID", apk_name:"app-staging-release.apk")
+
+    slack(
+          slack_url: ENV["SLACK_HOOK_URL"],
+          message: "🐕 📱 Asklora Staging Android App successfully released!👯🏾‍👯🏾",
+          success: true,
+          payload: {
+            "Build Date" => release[:createTime],
+            "🌎 Environment" => "Staging",
+            "📥 Download" => release[:firebaseConsoleUri],
+            "Build Version" => release[:displayVersion],
+          },
+          default_payloads: [:git_branch, :git_author],
+        )
+
     upload_to_play_store(
       json_key: '../firebase_credentials_dev.json',
       aab: '../build/app/outputs/bundle/stagingRelease/app-staging-release.aab',
@@ -69,6 +118,8 @@ platform :android do
       clean()
       set_up_env_vars(env:"production")
       gradle(task: "assembleProductionRelease")
+      validate_play_store_json_key(json_key: '../firebase_credentials_dev.json')
+      upload_to_firebase(firebase_app_id:"FIREBASE_ANDROID_PROD_APP_ID", apk_name:"app-production-release.apk")
 #      upload_to_play_store
     end
 end

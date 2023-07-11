@@ -6,7 +6,6 @@ const transactions = 'transactions/';
 const orders = 'orders/';
 const activities = 'activities/';
 const user = 'user/';
-
 const String endpointSignIn = '${v2}auth/';
 const String endpointSignOut = '${v1}auth/revoke/';
 const String endpointSignUp = '$v1$accounts';
@@ -28,10 +27,15 @@ const String endpointTokenVerify = '${v1}auth/verify/';
 const String endpointTokenRefresh = '${v1}auth/refresh/';
 const String endpointTaxInfo = '$v1${accounts}tax-info/';
 const String endpointBankAccount = '$v1${accounts}bank-account-related/';
-const String endpointWithdrawal = '$v1${transactions}withdraw/';
-const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointOrders = '$v1$orders';
 const String endpointUserJourney = '$v2${activities}user-journey/';
+const String endpointLedgerBalance = '$v2${accounts}ledger/balance/';
+
+///
+/// Transaction
+///
+const String endpointWithdrawal = '$v1${transactions}withdraw/';
+const String endpointProofOfRemittance = '$v1${transactions}remitance/';
 const String endpointTransferTransactionHistory = '$v1/$transactions/history/';
 const String endpointBalance = '$v1/$transactions/balance/';
 
@@ -49,7 +53,11 @@ const String endpointLinkedUser = '$endpointGetUser/linked';
 ///
 ///bot orders
 ///
-const String endpointBotActiveOrder = '$v1${bots}active-order/';
+const String endpointBotActiveOrder = '$v1$bots/';
+
+String endpointBotActiveOrderPerformance(String botUid) =>
+    '$v1$bots$botUid/performance';
+
 const String endpointBotCreateOrder = '$v1${bots}create-order/';
 const String endpointBotCancelOrder = '$v1${bots}cancel-order/';
 const String endpointBotRolloverOrder = '$v1${bots}rollover-order/';
@@ -71,6 +79,9 @@ const String mailToLoraCare = 'mailto:loracares@asklora.ai';
 ///
 /// LoraGPT
 ///
-// const String loraGptBaseUrl = 'http://192.168.1.175/';
-const String loraGptBaseUrl = 'https://stock-gpt-stag.api.asklora.ai/';
-const String endpointChat = 'chat/experimental/with_user_management';
+const String loraGptBaseUrl = 'http://stock-gpt-dev.intra.asklora.ai/';
+// const String loraGptBaseUrl = 'https://stock-gpt-stag.api.asklora.ai/';
+const String endpointChat = 'chat/general';
+const String endpointPortfolio = 'chat/porfolio_page';
+const String endpointPortfolioDetailPage =
+    'chat/experimental/with_botstock_data';

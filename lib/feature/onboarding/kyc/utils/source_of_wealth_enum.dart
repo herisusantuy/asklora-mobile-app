@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 enum SourceOfWealthType {
   incomeFromEmployment('Income from Employment', 'INCOME'),
-  inheritance('Inheritance/Gift', 'INHERITANCE'),
+  inheritance('Inheritance / Gift', 'INHERITANCE'),
   interestOrDividendIncome('Interest / Dividend Income', 'INTEREST'),
   marketTradingProfits('Market Trading Profits', 'MARKETPROFIT'),
   disability('Disability / Severance / Unemployment', 'DISABILITY'),

@@ -150,6 +150,26 @@ class S {
     );
   }
 
+  /// `Bot Duration`
+  String get botDuration {
+    return Intl.message(
+      'Bot Duration',
+      name: 'botDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bot Management Fee`
+  String get botManagementFee {
+    return Intl.message(
+      'Bot Management Fee',
+      name: 'botManagementFee',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign Up`
   String get buttonSignUp {
     return Intl.message(
@@ -420,6 +440,16 @@ class S {
     );
   }
 
+  /// `Deposit Amount`
+  String get depositAmount {
+    return Intl.message(
+      'Deposit Amount',
+      name: 'depositAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Deposit`
   String get deposit {
     return Intl.message(
@@ -575,6 +605,26 @@ class S {
     return Intl.message(
       'Employees',
       name: 'employees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expires at`
+  String get expiresAt {
+    return Intl.message(
+      'Expires at',
+      name: 'expiresAt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Starts at`
+  String get startsAt {
+    return Intl.message(
+      'Starts at',
+      name: 'startsAt',
       desc: '',
       args: [],
     );
@@ -885,6 +935,26 @@ class S {
     return Intl.message(
       'Shares',
       name: 'shares',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Cancelled`
+  String get orderCancelled {
+    return Intl.message(
+      'Order Cancelled',
+      name: 'orderCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Placed`
+  String get orderPlaced {
+    return Intl.message(
+      'Order Placed',
+      name: 'orderPlaced',
       desc: '',
       args: [],
     );
@@ -1322,13 +1392,13 @@ class S {
     );
   }
 
-  /// `The investment amount and Bot management fee (HKD1,500) will be returned to your account.`
-  String get botTradeBottomSheetCancelBotStockConfirmationTitle {
+  /// `The investment amount and Bot management fee (HKD{amount}) will be returned to your account.`
+  String botTradeBottomSheetCancelBotStockConfirmationTitle(String amount) {
     return Intl.message(
-      'The investment amount and Bot management fee (HKD1,500) will be returned to your account.',
+      'The investment amount and Bot management fee (HKD$amount) will be returned to your account.',
       name: 'botTradeBottomSheetCancelBotStockConfirmationTitle',
       desc: '',
-      args: [],
+      args: [amount],
     );
   }
 
@@ -1693,10 +1763,10 @@ class S {
     );
   }
 
-  /// `Withdrawable Amount ({currency})`
+  /// `Withdrawable Balance ({currency})`
   String portfolioWithdrawableAmount(String currency) {
     return Intl.message(
-      'Withdrawable Amount ($currency)',
+      'Withdrawable Balance ($currency)',
       name: 'portfolioWithdrawableAmount',
       desc: '',
       args: [currency],
@@ -1784,10 +1854,10 @@ class S {
   }
 
   /// `Enter valid password`
-  String get invalidPassword {
+  String get enterValidPassword {
     return Intl.message(
       'Enter valid password',
-      name: 'invalidPassword',
+      name: 'enterValidPassword',
       desc: '',
       args: [],
     );
@@ -2643,10 +2713,10 @@ class S {
     );
   }
 
-  /// `Start your new investing journey with Lora - \nYour FinFit Coach`
+  /// `Start your AI revolution with\nAsklora. Go crush it.`
   String get signUpTitle {
     return Intl.message(
-      'Start your new investing journey with Lora - \nYour FinFit Coach',
+      'Start your AI revolution with\nAsklora. Go crush it.',
       name: 'signUpTitle',
       desc: '',
       args: [],
@@ -2783,10 +2853,10 @@ class S {
     );
   }
 
-  /// `Your Withdrawal request is submitted.`
+  /// `Your withdrawal request is submitted.`
   String get withdrawalRequestSubmittedTitle {
     return Intl.message(
-      'Your Withdrawal request is submitted.',
+      'Your withdrawal request is submitted.',
       name: 'withdrawalRequestSubmittedTitle',
       desc: '',
       args: [],
@@ -2798,6 +2868,16 @@ class S {
     return Intl.message(
       'You will be informed via email and app notification as soon as the funds are paid to your account.',
       name: 'withdrawalRequestSubmittedSubTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Withdraw`
+  String get withdraw {
+    return Intl.message(
+      'Withdraw',
+      name: 'withdraw',
       desc: '',
       args: [],
     );
@@ -2828,6 +2908,538 @@ class S {
     return Intl.message(
       'View Deposit Guide',
       name: 'viewDepositGuide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press back again to exit Asklora`
+  String get pressBackAgain {
+    return Intl.message(
+      'Press back again to exit Asklora',
+      name: 'pressBackAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade Summary`
+  String get tradeSummary {
+    return Intl.message(
+      'Trade Summary',
+      name: 'tradeSummary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Market Price`
+  String get marketPrice {
+    return Intl.message(
+      'Market Price',
+      name: 'marketPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End Date`
+  String get endDate {
+    return Intl.message(
+      'End Date',
+      name: 'endDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Trade`
+  String get confirmTrade {
+    return Intl.message(
+      'Confirm Trade',
+      name: 'confirmTrade',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Botstock Details`
+  String get checkBotStockDetails {
+    return Intl.message(
+      'Check Botstock Details',
+      name: 'checkBotStockDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade Request Received`
+  String get tradeRequestReceived {
+    return Intl.message(
+      'Trade Request Received',
+      name: 'tradeRequestReceived',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trade Cancelled`
+  String get tradeCancelledTitle {
+    return Intl.message(
+      'Trade Cancelled',
+      name: 'tradeCancelledTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The trade has been cancelled and your investment amount has been returned to your account`
+  String get tradeCancelledSubtitle {
+    return Intl.message(
+      'The trade has been cancelled and your investment amount has been returned to your account',
+      name: 'tradeCancelledSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{botName} {botSymbol} will start at {dateTime}`
+  String rolloverBotStockAcknowledgement(
+      String botName, String botSymbol, String dateTime) {
+    return Intl.message(
+      '$botName $botSymbol will start at $dateTime',
+      name: 'rolloverBotStockAcknowledgement',
+      desc: '',
+      args: [botName, botSymbol, dateTime],
+    );
+  }
+
+  /// `You are making great\nprogress, {name}!`
+  String beforeKYCHeaderTitle(String name) {
+    return Intl.message(
+      'You are making great\nprogress, $name!',
+      name: 'beforeKYCHeaderTitle',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `{botName} {botSymbol} will end at {dateTime}`
+  String endBotStockAcknowledgement(
+      String botName, String botSymbol, String dateTime) {
+    return Intl.message(
+      '$botName $botSymbol will end at $dateTime',
+      name: 'endBotStockAcknowledgement',
+      desc: '',
+      args: [botName, botSymbol, dateTime],
+    );
+  }
+
+  /// `Just one more step to AI\ngreatness, {name}!`
+  String beforeDepositHeaderTitle(String name) {
+    return Intl.message(
+      'Just one more step to AI\ngreatness, $name!',
+      name: 'beforeDepositHeaderTitle',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Your investment account will be ready soon!`
+  String get afterPayDepositHeaderTitle {
+    return Intl.message(
+      'Your investment account will be ready soon!',
+      name: 'afterPayDepositHeaderTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Great start!`
+  String get greatStart {
+    return Intl.message(
+      'Great start!',
+      name: 'greatStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Halfway there!`
+  String get halfWayThere {
+    return Intl.message(
+      'Halfway there!',
+      name: 'halfWayThere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Almost finished!`
+  String get almostFinished {
+    return Intl.message(
+      'Almost finished!',
+      name: 'almostFinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start investing`
+  String get startInvestingOnMilestone {
+    return Intl.message(
+      'Start investing',
+      name: 'startInvestingOnMilestone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit funds to start investing`
+  String get depositFundToStartInvesting {
+    return Intl.message(
+      'Deposit funds to start investing',
+      name: 'depositFundToStartInvesting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.`
+  String get onBoardingCompletionMessage {
+    return Intl.message(
+      'You’ve completed all the steps to opening an account with Asklora! You’ll be able to start trading as soon as your account is approved. It usually takes up to 2 business days.',
+      name: 'onBoardingCompletionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next step`
+  String get nextStep {
+    return Intl.message(
+      'Next step',
+      name: 'nextStep',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go`
+  String get go {
+    return Intl.message(
+      'Go',
+      name: 'go',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deposit via FPS or Wire Transfer`
+  String get depositViaFpsOrWireTransfer {
+    return Intl.message(
+      'Deposit via FPS or Wire Transfer',
+      name: 'depositViaFpsOrWireTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer to Asklora bank account from the same bank account you used.`
+  String get transferAtLeastWithNoMinimumDeposit {
+    return Intl.message(
+      'Transfer to Asklora bank account from the same bank account you used.',
+      name: 'transferAtLeastWithNoMinimumDeposit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer at least HK${minDeposit} to Asklora's bank account. Any initial deposit less than HK${minDeposit} will be rejected and fees will be charged.`
+  String transferAtLeastWithMinimumDeposit(String minDeposit) {
+    return Intl.message(
+      'Transfer at least HK\$$minDeposit to Asklora\'s bank account. Any initial deposit less than HK\$$minDeposit will be rejected and fees will be charged.',
+      name: 'transferAtLeastWithMinimumDeposit',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Upload proof of remittance`
+  String get uploadProofOfRemittance {
+    return Intl.message(
+      'Upload proof of remittance',
+      name: 'uploadProofOfRemittance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The proof of remittance should show your bank account number, full name, and amount.`
+  String get theProofOfRemittanceShouldShowYourBankAccount {
+    return Intl.message(
+      'The proof of remittance should show your bank account number, full name, and amount.',
+      name: 'theProofOfRemittanceShouldShowYourBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input deposit amount`
+  String get inputDepositAmount {
+    return Intl.message(
+      'Input deposit amount',
+      name: 'inputDepositAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The amount must match with the actual transferred amount.`
+  String get theAmountMustMatch {
+    return Intl.message(
+      'The amount must match with the actual transferred amount.',
+      name: 'theAmountMustMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your deposit can take up to 2 working days`
+  String get yourDepositCanTakeUp2WorkingDays {
+    return Intl.message(
+      'Your deposit can take up to 2 working days',
+      name: 'yourDepositCanTakeUp2WorkingDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notes`
+  String get notes {
+    return Intl.message(
+      'Notes',
+      name: 'notes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.`
+  String get returningUserDepositNotes {
+    return Intl.message(
+      'We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes.',
+      name: 'returningUserDepositNotes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK$ {minDeposit} bank transfer is completed.`
+  String weWillTakeInformationCollectedFromYour(String minDeposit) {
+    return Intl.message(
+      'We will take information collected from your bank via API or submitted remittance advice to determine your designated bank account. All future deposits and withdrawals are accepted ONLY through this designated bank account. You may change the designated bank account but you will need to go through the same verification by way of a minimum HK\$ $minDeposit bank transfer is completed.',
+      name: 'weWillTakeInformationCollectedFromYour',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Please add a HK bank account that is under your name; other people's bank accounts or joint accounts will not be accepted.`
+  String get pleaseAddAHkBankAccount {
+    return Intl.message(
+      'Please add a HK bank account that is under your name; other people\'s bank accounts or joint accounts will not be accepted.',
+      name: 'pleaseAddAHkBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will only accept deposits via bank transfer (wire/FPS) from your own account.`
+  String get weWillOnlyAcceptDepositViaBankTransfer {
+    return Intl.message(
+      'We will only accept deposits via bank transfer (wire/FPS) from your own account.',
+      name: 'weWillOnlyAcceptDepositViaBankTransfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We will only accept HKD.`
+  String get weWillOnlyAcceptHKD {
+    return Intl.message(
+      'We will only accept HKD.',
+      name: 'weWillOnlyAcceptHKD',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer initial funds to Asklora`
+  String get transferInitialFundToAsklora {
+    return Intl.message(
+      'Transfer initial funds to Asklora',
+      name: 'transferInitialFundToAsklora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transfer funds to Asklora`
+  String get transferFundToAsklora {
+    return Intl.message(
+      'Transfer funds to Asklora',
+      name: 'transferFundToAsklora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy Asklora's bank details and transfer no less than HK${minDeposit} from your bank account via FPS or Wire transfer.`
+  String firstTimeCopyAskloraBankDetails(String minDeposit) {
+    return Intl.message(
+      'Copy Asklora\'s bank details and transfer no less than HK\$$minDeposit from your bank account via FPS or Wire transfer.',
+      name: 'firstTimeCopyAskloraBankDetails',
+      desc: '',
+      args: [minDeposit],
+    );
+  }
+
+  /// `Copy Asklora's bank details and transfer from your bank account via FPS or Wire transfer.`
+  String get copyAskloraBankDetails {
+    return Intl.message(
+      'Copy Asklora\'s bank details and transfer from your bank account via FPS or Wire transfer.',
+      name: 'copyAskloraBankDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The amount must match with the proof of remittance.`
+  String get theAmountMustMatchWithPor {
+    return Intl.message(
+      'The amount must match with the proof of remittance.',
+      name: 'theAmountMustMatchWithPor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The proof of remittance should show your bank account number, full name, and amount.`
+  String get thePorShouldShowYourBank {
+    return Intl.message(
+      'The proof of remittance should show your bank account number, full name, and amount.',
+      name: 'thePorShouldShowYourBank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.`
+  String get pleaseMakeSureYouHaveFinished {
+    return Intl.message(
+      'Please make sure you have finished the transfer and then inform us, if not, your deposit will be delayed.',
+      name: 'pleaseMakeSureYouHaveFinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.`
+  String get pleaseMakeSureYouPressSubmit {
+    return Intl.message(
+      'Please make sure you press ‘SUBMIT’ after you have transferred the funds from your bank.',
+      name: 'pleaseMakeSureYouPressSubmit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your deposit may be rejected if the informed amount is different from the actual transferred amount.`
+  String get yourDepositMayBeRejected {
+    return Intl.message(
+      'Your deposit may be rejected if the informed amount is different from the actual transferred amount.',
+      name: 'yourDepositMayBeRejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We accept HKD only.`
+  String get weAcceptHKDOnly {
+    return Intl.message(
+      'We accept HKD only.',
+      name: 'weAcceptHKDOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get buttonSubmit {
+    return Intl.message(
+      'Submit',
+      name: 'buttonSubmit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `min. 8 characters`
+  String get min8Character {
+    return Intl.message(
+      'min. 8 characters',
+      name: 'min8Character',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 lowercase letter`
+  String get atLeast1Lowercase {
+    return Intl.message(
+      'at least 1 lowercase letter',
+      name: 'atLeast1Lowercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 upper case letter`
+  String get atLeast1Uppercase {
+    return Intl.message(
+      'at least 1 upper case letter',
+      name: 'atLeast1Uppercase',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `at least 1 number`
+  String get atLeast1Number {
+    return Intl.message(
+      'at least 1 number',
+      name: 'atLeast1Number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready to go?`
+  String get readyToGo {
+    return Intl.message(
+      'Ready to go?',
+      name: 'readyToGo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid Password`
+  String get invalidPassword {
+    return Intl.message(
+      'Invalid Password',
+      name: 'invalidPassword',
       desc: '',
       args: [],
     );

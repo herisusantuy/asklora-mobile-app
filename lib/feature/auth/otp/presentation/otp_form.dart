@@ -30,7 +30,6 @@ class OtpForm extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    _padding(),
                     const LoraMemojiHeader(
                         text:
                             'Please enter the OTP sent on your registered Phone Number.'),
@@ -68,8 +67,8 @@ class OtpForm extends StatelessWidget {
             fontStyle: FontStyle.normal,
             disabled: state.disableRequest,
             label: state.disableRequest
-                ? 'REQUEST ANOTHER OTP IN ${_formatTimeMMSS(state.resetTime)}'
-                : 'RESEND OTP CODE',
+                ? 'Request Another OTP in ${_formatTimeMMSS(state.resetTime)}'
+                : 'Resend OTP Code',
             onTap: onOtpResend,
           );
         });
@@ -79,7 +78,7 @@ class OtpForm extends StatelessWidget {
     return CustomTextButton(
       key: const Key('sign_up_again_button'),
       margin: const EdgeInsets.only(top: 28, bottom: 28),
-      label: 'SIGN UP AGAIN',
+      label: 'Sign Up Again',
       onTap: () => Navigator.pop(context),
     );
   }

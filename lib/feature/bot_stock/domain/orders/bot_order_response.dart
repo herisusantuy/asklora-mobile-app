@@ -1,21 +1,52 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../core/utils/date_utils.dart';
+
 part 'bot_order_response.g.dart';
 
 @JsonSerializable()
 class BotOrderResponse {
-  @JsonKey(name: 'bot_order')
-  final String botOrder;
-  @JsonKey(name: 'bot_action')
-  final String? botAction;
-  @JsonKey(name: 'optimal_time')
-  final String? optimalTime;
+  final String detail;
 
-  const BotOrderResponse(
-      {required this.botOrder, this.botAction, this.optimalTime});
+  const BotOrderResponse(this.detail);
 
   factory BotOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$BotOrderResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$BotOrderResponseToJson(this);
+}
+
+@JsonSerializable()
+class TerminateOrderResponse {
+  final String detail;
+  @JsonKey(name: 'optimal_time')
+  final String optimalTime;
+
+  TerminateOrderResponse(this.detail, this.optimalTime);
+
+  factory TerminateOrderResponse.fromJson(Map<String, dynamic> json) =>
+      _$TerminateOrderResponseFromJson(json);
+
+  String get optimalTimeFormatted {
+    return '${convertDateToEst(optimalTime, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
+  }
+
+  Map<String, dynamic> toJson() => _$TerminateOrderResponseToJson(this);
+}
+
+@JsonSerializable()
+class RolloverOrderResponse extends BotOrderResponse {
+  @JsonKey(name: 'new_expire_date')
+  final String newExpireDate;
+
+  RolloverOrderResponse(
+    super.detail,
+    this.newExpireDate,
+  );
+
+  factory RolloverOrderResponse.fromJson(Map<String, dynamic> json) =>
+      _$RolloverOrderResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$RolloverOrderResponseToJson(this);
 }

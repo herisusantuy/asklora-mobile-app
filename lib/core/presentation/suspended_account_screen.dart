@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../feature/settings/presentation/customer_service_screen.dart';
-import '../../feature/tabs/tabs_screen.dart';
+import '../../feature/tabs/presentation/tab_screen.dart';
 import '../../generated/l10n.dart';
 import 'buttons/button_pair.dart';
 import 'custom_scaffold.dart';
@@ -27,7 +27,7 @@ class SuspendedAccountScreen extends StatelessWidget {
           ),
           bottomButton: ButtonPair(
               primaryButtonOnClick: () =>
-                  TabsScreen.openAndRemoveAllRoute(context),
+                  TabScreen.openAndRemoveAllRoute(context),
               secondaryButtonOnClick: () => CustomerServiceScreen.open(context),
               primaryButtonLabel: S.of(context).buttonBackToHome,
               secondaryButtonLabel: S.of(context).buttonContactCustomerService),

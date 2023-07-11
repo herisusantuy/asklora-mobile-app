@@ -9,25 +9,23 @@ part of 'bot_summary_transaction_history_model.dart';
 BotSummaryTransactionHistoryModel _$BotSummaryTransactionHistoryModelFromJson(
         Map<String, dynamic> json) =>
     BotSummaryTransactionHistoryModel(
-      json['pk'] as String,
-      json['created'] as String,
-      json['updated'] as String,
+      json['uid'] as String,
+      json['type'] as String,
+      json['date'] as String,
       json['status'] as String,
-      (json['investment_amount'] as num).toDouble(),
-      (json['bot_cash_balance'] as num).toDouble(),
-      (json['final_return'] as num?)?.toDouble(),
-      (json['final_pnl_amount'] as num?)?.toDouble(),
+      (json['amount'] as num).toDouble(),
+      (json['fee'] as num).toDouble(),
+      (json['total_pnl'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$BotSummaryTransactionHistoryModelToJson(
         BotSummaryTransactionHistoryModel instance) =>
     <String, dynamic>{
-      'pk': instance.pk,
-      'created': instance.created,
-      'updated': instance.updated,
+      'uid': instance.uid,
+      'type': instance.type,
+      'date': instance.date,
+      'amount': instance.amount,
+      'fee': instance.fee,
       'status': instance.status,
-      'investment_amount': instance.investmentAmount,
-      'bot_cash_balance': instance.botCashBalance,
-      'final_return': instance.finalReturn,
-      'final_pnl_amount': instance.finalPnlAmount,
+      'total_pnl': instance.totalPnL,
     };

@@ -21,9 +21,17 @@ class BotTerminateButton extends StatelessWidget {
               .show(state.endBotStockResponse.state);
           if (state.endBotStockResponse.state == ResponseState.success) {
             BotStockResultScreen.open(
-                context: context,
-                arguments: Pair('Trade Request Received',
-                    '${botType.name} ${botActiveOrderDetailModel.tickerDetail.ticker} will end at ${state.endBotStockResponse.data?.optimalTime}'));
+              context: context,
+              arguments: BotStockResultArgument(
+                title: S.of(context).tradeRequestReceived,
+                desc: S.of(context).endBotStockAcknowledgement(
+                    botType.name,
+                    botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol,
+                    state.endBotStockResponse.data?.optimalTimeFormatted ??
+                        '-'),
+                labelBottomButton: S.of(context).buttonBackToHome,
+              ),
+            );
           } else if (state.endBotStockResponse.state ==
               ResponseState.suspended) {
             SuspendedAccountScreen.open(context);
@@ -37,9 +45,9 @@ class BotTerminateButton extends StatelessWidget {
           label: S.of(context).portfolioDetailButtonEndBotStock,
           onTap: () => BotStockBottomSheet.endBotStockConfirmation(
               context,
-              botActiveOrderDetailModel.pk,
-              botActiveOrderDetailModel.botDetail.botName,
-              botActiveOrderDetailModel.tickerDetail.ticker),
+              botActiveOrderDetailModel.uid,
+              '${botActiveOrderDetailModel.botInfo.botName} ${botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol}',
+              botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol),
         ),
       );
 }

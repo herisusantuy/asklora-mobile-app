@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-import '../../feature/payment/deposits/repository/file_picker_repository.dart';
+import '../repository/file_picker_repository.dart';
 import '../styles/asklora_colors.dart';
 import '../styles/asklora_text_styles.dart';
 import '../utils/app_icons.dart';

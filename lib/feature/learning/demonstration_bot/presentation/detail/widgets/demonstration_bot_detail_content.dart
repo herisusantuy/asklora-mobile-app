@@ -8,7 +8,7 @@ import '../../../../../bot_stock/domain/bot_recommendation_model.dart';
 import '../../../../../bot_stock/presentation/bot_recommendation/detail/widgets/bot_price_level_indicator.dart';
 import '../../../../../bot_stock/presentation/widgets/custom_detail_expansion_tile.dart';
 import '../../../../../bot_stock/presentation/widgets/iex_data_provider_link.dart';
-import '../../../../../bot_stock/presentation/widgets/pair_column_text.dart';
+import '../../../../../../core/presentation/column_text/pair_column_text_with_tooltip.dart';
 import '../../../../../bot_stock/utils/bot_stock_utils.dart';
 
 class DemonstrationBotDetailContent extends StatelessWidget {
@@ -131,7 +131,7 @@ class DemonstrationBotDetailContent extends StatelessWidget {
             ],
           ),
           children: [
-            const PairColumnText(
+            const PairColumnTextWithTooltip(
               leftTitle: 'Prev Close',
               leftSubTitle: '238.13',
               rightTitle: 'Market Cap',
@@ -152,21 +152,21 @@ class DemonstrationBotDetailContent extends StatelessWidget {
             const SizedBox(
               height: 21,
             ),
-            const PairColumnText(
+            const PairColumnTextWithTooltip(
               leftTitle: 'Sector(s)',
               leftSubTitle: 'Consumer Cyclical',
               rightTitle: 'Take Profit Level',
               rightSubTitle: 'Auto Manufacturers',
             ),
             _spaceBetweenInfo,
-            const PairColumnText(
+            const PairColumnTextWithTooltip(
               leftTitle: 'CEO',
               leftSubTitle: 'Mr. Elon R. Musk',
               rightTitle: 'Employees',
               rightSubTitle: '99,290',
             ),
             _spaceBetweenInfo,
-            const PairColumnText(
+            const PairColumnTextWithTooltip(
               leftTitle: 'Headquarters',
               leftSubTitle: 'Austin, TX',
               rightTitle: 'Founded',
@@ -190,7 +190,7 @@ class DemonstrationBotDetailContent extends StatelessWidget {
           child: Column(
             children: [
               if (botType != BotType.squat) _detailedInformation,
-              PairColumnText(
+              PairColumnTextWithTooltip(
                   leftTitle: 'Earliest Start Time',
                   leftSubTitle: '03/12 15:30 ET',
                   rightTitle: 'Optimized Start Time',
@@ -198,7 +198,7 @@ class DemonstrationBotDetailContent extends StatelessWidget {
                   leftTooltipText: _tempTooltipText,
                   rightTooltipText: _tempTooltipText),
               _spaceBetweenInfo,
-              PairColumnText(
+              PairColumnTextWithTooltip(
                   leftTitle: 'Investment Period',
                   leftSubTitle: '2 weeks',
                   rightTitle: 'Estimated End Date',
@@ -219,15 +219,15 @@ class DemonstrationBotDetailContent extends StatelessWidget {
   Widget get _detailedInformation => Column(
         children: [
           BotPriceLevelIndicator(
-            stopLossPrice: 210,
-            currentPrice: 240,
-            takeProfitPrice: 220,
+            stopLossPrice: '210',
+            currentPrice: '240',
+            takeProfitPrice: '220',
             botType: botType,
           ),
           const SizedBox(
             height: 24,
           ),
-          PairColumnText(
+          PairColumnTextWithTooltip(
               leftTitle: 'Stop Loss Level (USD)',
               leftSubTitle: '210.00',
               rightTitle: 'Take Profit Level (USD)',

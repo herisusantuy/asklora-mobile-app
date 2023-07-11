@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/domain/base_response.dart';
+import '../../../../../core/domain/transaction/transaction_balance_response.dart';
+import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/utils/bloc_transformer/restartable.dart';
 import '../../../../../core/utils/currency_enum.dart';
-import '../../../../../core/domain/transaction/transaction_balance_model.dart';
-import '../../../../../core/repository/transaction_repository.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../domain/orders/bot_active_order_model.dart';
 import '../../../domain/orders/bot_order_response.dart';
@@ -22,13 +23,8 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
       : _botStockRepository = botStockRepository,
         _transactionHistoryRepository = transactionHistoryRepository,
         super(const PortfolioState()) {
-    on<FetchActiveOrderDetail>(
-      _onFetchActiveOrderDetail,
-    );
-    on<FetchActiveOrders>(
-      onFetchBotActiveOrders,
-      transformer: restartable(),
-    );
+    on<FetchActiveOrderDetail>(_onFetchActiveOrderDetail);
+    on<FetchActiveOrders>(onFetchBotActiveOrders, transformer: restartable());
     on<ActiveFilterChecked>(_onActiveFilterChecked);
     on<PendingFilterChecked>(_onPendingFilterChecked);
     on<CurrencyChanged>(_onCurrencyChanged);
@@ -58,10 +54,10 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   List<String> getFilterStatus(PortfolioState state) {
     List<String> status = [];
     if (state.activeFilterChecked) {
-      status.add(BotStatus.active.value);
+      status.addAll(BotStatus.live.omsStatusCollection.map((e) => e.value));
     }
     if (state.pendingFilterChecked) {
-      status.add(BotStatus.pending.value);
+      status.addAll(BotStatus.pending.omsStatusCollection.map((e) => e.value));
     }
     return status;
   }

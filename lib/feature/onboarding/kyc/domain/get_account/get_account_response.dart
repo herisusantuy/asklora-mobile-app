@@ -63,24 +63,26 @@ class GetAccountResponse extends Equatable {
         id,
         username,
         email,
+        canTrade,
+        dateJoined,
         bankAccount,
         personalInfo,
         residenceInfo,
         employmentInfo,
         agreements,
         lastJourney,
-        isStaff
+        isStaff,
       ];
 }
 
 @JsonSerializable()
-class LastJourney {
+class LastJourney extends Equatable {
   @JsonKey(name: 'user_journey')
   final String userJourney;
   @JsonKey(name: 'data')
   final String? signature;
 
-  LastJourney({
+  const LastJourney({
     required this.userJourney,
     this.signature,
   });
@@ -93,4 +95,7 @@ class LastJourney {
   @override
   String toString() =>
       'LastJourney(userJourney: $userJourney, signature: $signature)';
+
+  @override
+  List<Object?> get props => [userJourney, signature];
 }

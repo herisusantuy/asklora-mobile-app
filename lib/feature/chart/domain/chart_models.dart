@@ -7,7 +7,7 @@ abstract class ChartDataSet extends Equatable {
   final DateTime date;
   final double price;
   final double hedgeShare;
-  final double currentPnlRet;
+  final double? currentPnlRet;
 
   const ChartDataSet(
     this.date,
@@ -16,6 +16,10 @@ abstract class ChartDataSet extends Equatable {
     this.currentPnlRet, {
     this.index,
   });
+
+  double get currentPnlRetFormatted {
+    return double.parse(checkDouble(currentPnlRet).toStringAsFixed(3));
+  }
 
   ChartDataSet.fromJson(Map<String, dynamic> json)
       : date = DateTime.parse(json['date']),

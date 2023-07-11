@@ -18,6 +18,7 @@ import '../../../../core/presentation/lora_popup_message/model/lora_pop_up_messa
 import '../../../../core/presentation/round_colored_box.dart';
 import '../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../core/presentation/text_fields/amount_text_field.dart';
+import '../../../../core/repository/transaction_repository.dart';
 import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/extensions.dart';
@@ -26,7 +27,6 @@ import '../../../../generated/l10n.dart';
 import '../../../onboarding/kyc/presentation/widgets/custom_stepper/custom_stepper.dart';
 import '../../widgets/balance_base_form.dart';
 import '../bloc/deposit_bloc.dart';
-import '../repository/deposit_repository.dart';
 import '../utils/deposit_utils.dart';
 import 'deposit_result_screen.dart';
 
@@ -50,7 +50,8 @@ class DepositScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => DepositBloc(
-          depositRepository: DepositRepository(), depositType: depositType),
+          transactionRepository: TransactionRepository(),
+          depositType: depositType),
       child: BlocConsumer<DepositBloc, DepositState>(
         buildWhen: (previous, current) =>
             previous.response.state != current.response.state,
@@ -82,6 +83,9 @@ class DepositScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ..._getSteps,
+                    const SizedBox(
+                      height: 20,
+                    ),
                     DepositNotes(
                       depositType: depositType,
                     )
@@ -144,7 +148,7 @@ class DepositScreen extends StatelessWidget {
                 current.disableDeposit(depositType),
             builder: (context, state) => PrimaryButton(
                   disabled: state.disableDeposit(depositType),
-                  label: S.of(context).buttonContinue,
+                  label: S.of(context).buttonSubmit,
                   onTap: () => context.read<DepositBloc>().add(
                         SubmitDeposit(),
                       ),

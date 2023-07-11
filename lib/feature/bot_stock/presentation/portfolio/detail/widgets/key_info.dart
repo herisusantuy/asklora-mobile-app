@@ -26,27 +26,23 @@ class KeyInfo extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          PairColumnText(
+          PairColumnTextWithTooltip(
               leftTitle: S.of(context).investmentPeriod,
-              leftSubTitle: botActiveOrderDetailModel.botDetail.duration,
+              leftSubTitle: botActiveOrderDetailModel.botDuration,
               rightTitle: S.of(context).portfolioDetailKeyInfoDaysTillExpiry,
               rightSubTitle: botActiveOrderDetailModel.daysToExpireString),
           _spaceBetweenInfo,
-          PairColumnText(
+          PairColumnTextWithTooltip(
               leftTitle: S.of(context).portfolioDetailKeyInfoStartTime,
               leftSubTitle: botActiveOrderDetailModel.spotDate,
               rightTitle: S.of(context).portfolioDetailKeyInfoEndTime,
-              rightSubTitle: botActiveOrderDetailModel.expireDate),
+              rightSubTitle: botActiveOrderDetailModel.expireDateFormatted),
           _spaceBetweenInfo,
           ..._stopLossMaxProfit(context),
           _spaceBetweenInfo,
-          PairColumnText(
-              leftTitle: S.of(context).portfolioDetailKeyInfoBotStockStatus,
-              leftSubTitle: botStatus.name,
-              rightTitle:
-                  S.of(context).portfolioDetailKeyInfoBotStockNumberOfRollover,
-              rightSubTitle:
-                  botActiveOrderDetailModel.rolloverCount.toString()),
+          ColumnText(
+              title: S.of(context).portfolioDetailKeyInfoBotStockStatus,
+              subTitle: botStatus.name),
           const SizedBox(
             height: 40,
           ),
@@ -74,15 +70,15 @@ class KeyInfo extends StatelessWidget {
       );
 
   List<Widget> _stopLossMaxProfit(BuildContext context) => [
-        PairColumnText(
+        PairColumnTextWithTooltip(
           leftTitle: botType == BotType.plank
               ? S.of(context).portfolioDetailKeyInfoEstimatedStopLoss
               : S.of(context).portfolioDetailKeyInfoEstimatedMaxLoss,
-          leftSubTitle: botActiveOrderDetailModel.maxLossPct.toString(),
+          leftSubTitle: botActiveOrderDetailModel.maxLossPctString,
           rightTitle: botType == BotType.plank
               ? S.of(context).portfolioDetailKeyInfoEstimatedTakeProfit
               : S.of(context).portfolioDetailKeyInfoEstimatedMaxProfit,
-          rightSubTitle: botActiveOrderDetailModel.targetProfitPct.toString(),
+          rightSubTitle: botActiveOrderDetailModel.targetProfitPctString,
         ),
       ];
 

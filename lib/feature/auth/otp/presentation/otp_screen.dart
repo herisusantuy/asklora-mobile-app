@@ -7,12 +7,12 @@ import '../../../../core/domain/base_response.dart';
 import '../../../../core/domain/pair.dart';
 import '../../../../core/domain/token/repository/token_repository.dart';
 import '../../../../core/presentation/custom_in_app_notification.dart';
+import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
-import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../onboarding/kyc/repository/account_repository.dart';
 import '../../../onboarding/ppi/repository/ppi_response_repository.dart';
-import '../../../tabs/tabs_screen.dart';
+import '../../../tabs/presentation/tab_screen.dart';
 import '../../repository/auth_repository.dart';
 import '../../sign_in/bloc/sign_in_bloc.dart';
 import '../bloc/otp_bloc.dart';
@@ -30,73 +30,64 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          foregroundColor: AskLoraColors.text,
-          elevation: 0,
+    return CustomScaffold(
+        body: MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => OtpBloc(otpRepository: OtpRepository())
+            ..add(SmsOtpRequested(email)),
         ),
-        body: SafeArea(
-            child: MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => OtpBloc(otpRepository: OtpRepository())
-                ..add(SmsOtpRequested(email)),
-            ),
-            BlocProvider(
-              create: (context) => SignInBloc(
-                  authRepository: AuthRepository(TokenRepository()),
-                  userJourneyRepository: UserJourneyRepository(),
-                  accountRepository: AccountRepository(),
-                  sharedPreference: SharedPreference(),
-                  ppiResponseRepository: PpiResponseRepository()),
-            ),
-          ],
-          child:
-              BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
-            return MultiBlocListener(
-              listeners: [
-                BlocListener<OtpBloc, OtpState>(
-                    listenWhen: (previous, current) =>
-                        previous.response.state != current.response.state,
-                    listener: ((context, state) =>
-                        CustomLoadingOverlay.of(context)
-                            .show(state.response.state))),
-                BlocListener<SignInBloc, SignInState>(
-                    listenWhen: (previous, current) =>
-                        previous.response.state != current.response.state,
-                    listener: ((context, state) {
-                      CustomLoadingOverlay.of(context)
-                          .show(state.response.state);
+        BlocProvider(
+          create: (context) => SignInBloc(
+              authRepository: AuthRepository(TokenRepository()),
+              userJourneyRepository: UserJourneyRepository(),
+              accountRepository: AccountRepository(),
+              sharedPreference: SharedPreference(),
+              ppiResponseRepository: PpiResponseRepository()),
+        ),
+      ],
+      child: BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
+        return MultiBlocListener(
+          listeners: [
+            BlocListener<OtpBloc, OtpState>(
+                listenWhen: (previous, current) =>
+                    previous.response.state != current.response.state,
+                listener: ((context, state) => CustomLoadingOverlay.of(context)
+                    .show(state.response.state))),
+            BlocListener<SignInBloc, SignInState>(
+                listenWhen: (previous, current) =>
+                    previous.response.state != current.response.state,
+                listener: ((context, state) {
+                  CustomLoadingOverlay.of(context).show(state.response.state);
 
-                      switch (state.response.state) {
-                        case ResponseState.error:
-                          CustomInAppNotification.show(
-                              context, state.response.message);
-                          break;
-                        case ResponseState.success:
-                          context
-                              .read<AppBloc>()
-                              .add(const GetUserJourneyFromLocal());
-                          TabsScreen.openAndRemoveAllRoute(context);
-                          break;
-                        default:
-                          break;
-                      }
-                    }))
-              ],
-              child: OtpForm(
-                onOtpResend: () =>
-                    context.read<OtpBloc>().add(SmsOtpRequested(email)),
-                onOtpSubmit: (otp) => {
-                  context
-                      .read<SignInBloc>()
-                      .add(SignInWithOtp(otp, email, password))
-                },
-              ),
-            );
-          }),
-        )));
+                  switch (state.response.state) {
+                    case ResponseState.error:
+                      CustomInAppNotification.show(
+                          context, state.response.message);
+                      break;
+                    case ResponseState.success:
+                      context
+                          .read<AppBloc>()
+                          .add(const GetUserJourneyFromLocal());
+                      TabScreen.openAndRemoveAllRoute(context);
+                      break;
+                    default:
+                      break;
+                  }
+                }))
+          ],
+          child: OtpForm(
+            onOtpResend: () =>
+                context.read<OtpBloc>().add(SmsOtpRequested(email)),
+            onOtpSubmit: (otp) => {
+              context
+                  .read<SignInBloc>()
+                  .add(SignInWithOtp(otp, email, password))
+            },
+          ),
+        );
+      }),
+    ));
   }
 
   static void openReplace(

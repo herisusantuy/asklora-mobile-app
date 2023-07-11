@@ -1,14 +1,18 @@
 part of '../bot_order_transaction_history_detail_screen.dart';
 
 class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
+  final String botOrderId;
   final String botStatus;
   final String title;
   late final BotStatus botStatusType;
 
   BotOrderTransactionHistoryDetailContent(
-      {required this.title, required this.botStatus, Key? key})
+      {required this.title,
+      required this.botStatus,
+      required this.botOrderId,
+      Key? key})
       : super(key: key) {
-    botStatusType = BotStatus.findByString(botStatus);
+    botStatusType = BotStatus.findByOmsStatus(botStatus);
   }
 
   @override
@@ -25,7 +29,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
       S.of(context).summary,
       S.of(context).activities,
     ];
-    if (botStatusType == BotStatus.closed) {
+    if (botStatusType == BotStatus.expired) {
       tabs.add(S.of(context).performance);
     }
     return tabs;
@@ -36,8 +40,9 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
       BotOrderTransactionHistorySummaryScreen(botStatusType: botStatusType),
       const BotOrderTransactionHistoryActivitiesScreen(),
     ];
-    if (botStatusType == BotStatus.closed) {
-      tabViews.add(const BotOrderTransactionHistoryPerformanceScreen());
+    if (botStatusType == BotStatus.expired) {
+      tabViews.add(
+          BotOrderTransactionHistoryPerformanceScreen(botOrderId: botOrderId));
     }
     return tabViews;
   }
@@ -47,7 +52,7 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-                flex: 3,
+                flex: 2,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GestureDetector(
@@ -57,14 +62,21 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
                         size: 24,
                       )),
                 )),
+            const SizedBox(
+              width: 4,
+            ),
             Expanded(
               flex: 5,
               child: Center(
-                child: CustomTextNew(
+                child: AutoSizedTextWidget(
                   title,
                   style: AskLoraTextStyles.h5,
+                  maxLines: 1,
                 ),
               ),
+            ),
+            const SizedBox(
+              width: 4,
             ),
             Flexible(
                 flex: 3,
@@ -76,13 +88,14 @@ class BotOrderTransactionHistoryDetailContent extends StatelessWidget {
 
   Widget _statusWidget() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+      padding: const EdgeInsets.fromLTRB(16, 5, 16, 7),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: Border.all(width: 1.4, color: botStatusType.color),
       ),
-      child: CustomTextNew(
+      child: AutoSizedTextWidget(
         botStatusType.name,
+        maxLines: 1,
         style: AskLoraTextStyles.subtitle3.copyWith(color: botStatusType.color),
         textAlign: TextAlign.center,
       ),

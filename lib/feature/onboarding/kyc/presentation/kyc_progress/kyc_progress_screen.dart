@@ -9,7 +9,7 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
-import '../../../../tabs/tabs_screen.dart';
+import '../../../../tabs/presentation/tab_screen.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../widgets/custom_stepper/custom_stepper.dart';
 
@@ -54,7 +54,7 @@ class KycProgressScreen extends StatelessWidget {
         primaryButtonOnClick: () => context
             .read<NavigationBloc<KycPageStep>>()
             .add(const PageChanged(KycPageStep.residentCheck)),
-        secondaryButtonOnClick: () => TabsScreen.openAndRemoveAllRoute(context),
+        secondaryButtonOnClick: () => TabScreen.openAndRemoveAllRoute(context),
         primaryButtonLabel: 'Open Account Now',
         secondaryButtonLabel: 'Maybe Later',
       );

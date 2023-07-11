@@ -8,16 +8,23 @@
 import 'dart:async' as _i4;
 
 import 'package:asklora_mobile_app/core/domain/base_response.dart' as _i2;
-import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_model.dart'
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_balance_response.dart'
+    as _i7;
+import 'package:asklora_mobile_app/core/domain/transaction/transaction_ledger_balance_response.dart'
     as _i8;
 import 'package:asklora_mobile_app/core/repository/transaction_repository.dart'
     as _i3;
+import 'package:asklora_mobile_app/feature/balance/deposit/domain/deposit_response.dart'
+    as _i9;
+import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_request.dart'
+    as _i12;
+import 'package:asklora_mobile_app/feature/balance/withdrawal/domain/withdrawal_response.dart'
+    as _i11;
 import 'package:asklora_mobile_app/feature/transaction_history/bot_order/detail/domain/bot_detail_transaction_history_response.dart'
-    as _i7;
+    as _i6;
 import 'package:asklora_mobile_app/feature/transaction_history/domain/grouped_transaction_model.dart'
     as _i5;
-import 'package:asklora_mobile_app/feature/transaction_history/domain/transaction_history_model.dart'
-    as _i6;
+import 'package:file_picker/file_picker.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -103,17 +110,7 @@ class MockTransactionRepository extends _i1.Mock
             )),
           ) as _i4.Future<_i2.BaseResponse<List<_i5.GroupedTransactionModel>>>);
   @override
-  List<_i5.GroupedTransactionModel> groupedTransactionModels(
-          List<_i6.TransactionHistoryModel>? transactions) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #groupedTransactionModels,
-          [transactions],
-        ),
-        returnValue: <_i5.GroupedTransactionModel>[],
-      ) as List<_i5.GroupedTransactionModel>);
-  @override
-  _i4.Future<_i2.BaseResponse<_i7.BotDetailTransactionHistoryResponse>>
+  _i4.Future<_i2.BaseResponse<_i6.BotDetailTransactionHistoryResponse>>
       fetchBotTransactionsDetail(String? orderId) => (super.noSuchMethod(
             Invocation.method(
               #fetchBotTransactionsDetail,
@@ -121,8 +118,8 @@ class MockTransactionRepository extends _i1.Mock
             ),
             returnValue: _i4.Future<
                     _i2.BaseResponse<
-                        _i7.BotDetailTransactionHistoryResponse>>.value(
-                _FakeBaseResponse_0<_i7.BotDetailTransactionHistoryResponse>(
+                        _i6.BotDetailTransactionHistoryResponse>>.value(
+                _FakeBaseResponse_0<_i6.BotDetailTransactionHistoryResponse>(
               this,
               Invocation.method(
                 #fetchBotTransactionsDetail,
@@ -130,22 +127,88 @@ class MockTransactionRepository extends _i1.Mock
               ),
             )),
           ) as _i4.Future<
-              _i2.BaseResponse<_i7.BotDetailTransactionHistoryResponse>>);
+              _i2.BaseResponse<_i6.BotDetailTransactionHistoryResponse>>);
   @override
-  _i4.Future<_i2.BaseResponse<_i8.TransactionBalanceModel>> fetchBalance() =>
+  _i4.Future<_i2.BaseResponse<_i7.TransactionBalanceResponse>> fetchBalance() =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchBalance,
           [],
         ),
         returnValue:
-            _i4.Future<_i2.BaseResponse<_i8.TransactionBalanceModel>>.value(
-                _FakeBaseResponse_0<_i8.TransactionBalanceModel>(
+            _i4.Future<_i2.BaseResponse<_i7.TransactionBalanceResponse>>.value(
+                _FakeBaseResponse_0<_i7.TransactionBalanceResponse>(
           this,
           Invocation.method(
             #fetchBalance,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.BaseResponse<_i8.TransactionBalanceModel>>);
+      ) as _i4.Future<_i2.BaseResponse<_i7.TransactionBalanceResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i8.TransactionLedgerBalanceResponse>>
+      fetchLedgerBalance() => (super.noSuchMethod(
+            Invocation.method(
+              #fetchLedgerBalance,
+              [],
+            ),
+            returnValue: _i4.Future<
+                    _i2.BaseResponse<
+                        _i8.TransactionLedgerBalanceResponse>>.value(
+                _FakeBaseResponse_0<_i8.TransactionLedgerBalanceResponse>(
+              this,
+              Invocation.method(
+                #fetchLedgerBalance,
+                [],
+              ),
+            )),
+          ) as _i4
+              .Future<_i2.BaseResponse<_i8.TransactionLedgerBalanceResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i9.DepositResponse>> submitDeposit({
+    required double? depositAmount,
+    required List<_i10.PlatformFile>? platformFiles,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitDeposit,
+          [],
+          {
+            #depositAmount: depositAmount,
+            #platformFiles: platformFiles,
+          },
+        ),
+        returnValue: _i4.Future<_i2.BaseResponse<_i9.DepositResponse>>.value(
+            _FakeBaseResponse_0<_i9.DepositResponse>(
+          this,
+          Invocation.method(
+            #submitDeposit,
+            [],
+            {
+              #depositAmount: depositAmount,
+              #platformFiles: platformFiles,
+            },
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i9.DepositResponse>>);
+  @override
+  _i4.Future<_i2.BaseResponse<_i11.WithdrawalResponse>> submitWithdrawal(
+          {required _i12.WithdrawalRequest? withdrawalRequest}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #submitWithdrawal,
+          [],
+          {#withdrawalRequest: withdrawalRequest},
+        ),
+        returnValue:
+            _i4.Future<_i2.BaseResponse<_i11.WithdrawalResponse>>.value(
+                _FakeBaseResponse_0<_i11.WithdrawalResponse>(
+          this,
+          Invocation.method(
+            #submitWithdrawal,
+            [],
+            {#withdrawalRequest: withdrawalRequest},
+          ),
+        )),
+      ) as _i4.Future<_i2.BaseResponse<_i11.WithdrawalResponse>>);
 }
