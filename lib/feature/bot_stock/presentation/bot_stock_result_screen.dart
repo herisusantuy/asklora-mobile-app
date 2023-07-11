@@ -38,6 +38,15 @@ class BotStockResultScreen extends StatelessWidget {
     required BotStockResultArgument arguments,
   }) =>
       Navigator.pushNamed(context, route, arguments: arguments);
+
+  static void openWithBackCallBack({
+    required BuildContext context,
+    required BotStockResultArgument arguments,
+    required VoidCallback backCallBack,
+  }) =>
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: arguments)
+          .then((value) => backCallBack());
 }
 
 class BotStockResultArgument {
