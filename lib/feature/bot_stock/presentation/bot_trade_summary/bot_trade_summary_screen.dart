@@ -221,4 +221,12 @@ class BotTradeSummaryScreen extends StatelessWidget {
           required BotTradeSummaryModel botTradeSummaryModel}) =>
       Navigator.of(context, rootNavigator: true)
           .pushNamed(route, arguments: botTradeSummaryModel);
+
+  static void openWithBackCallBack(
+          {required BuildContext context,
+          required BotTradeSummaryModel botTradeSummaryModel,
+          required VoidCallback backCallBack}) =>
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: botTradeSummaryModel)
+          .then((value) => backCallBack());
 }

@@ -9,18 +9,29 @@ part 'back_button_interceptor_state.dart';
 class BackButtonInterceptorBloc
     extends Bloc<BackButtonInterceptorEvent, BackButtonInterceptorState> {
   BackButtonInterceptorBloc() : super(BackButtonInterceptorInitial()) {
-    on<BackButtonInterceptorEvent>(_onBackPressed);
+    on<InitiateInterceptor>(_onInitiateInterceptor);
+    on<RemoveInterceptor>(_onRemoveInterceptor);
+    on<OnPressedBackInterceptor>(_onPressedBackInterceptor);
+  }
 
+  void _onInitiateInterceptor(
+      InitiateInterceptor event, Emitter<BackButtonInterceptorState> emit) {
     BackButtonInterceptor.add(interceptor);
   }
 
-  void _onBackPressed(BackButtonInterceptorEvent event,
+  void _onPressedBackInterceptor(OnPressedBackInterceptor event,
       Emitter<BackButtonInterceptorState> emit) {
     emit(OnPressedBack());
+    emit(BackButtonInterceptorInitial());
+  }
+
+  void _onRemoveInterceptor(
+      RemoveInterceptor event, Emitter<BackButtonInterceptorState> emit) {
+    BackButtonInterceptor.removeAll();
   }
 
   bool interceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    add(const BackButtonInterceptorEvent());
+    add(OnPressedBackInterceptor());
     return true;
   }
 

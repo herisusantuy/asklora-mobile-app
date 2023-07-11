@@ -65,12 +65,15 @@ class BotPortfolioDetailScreen extends StatelessWidget {
                     transactionHistoryRepository: TransactionRepository())
                   ..add(FetchActiveOrderDetail(
                       botOrderId: botActiveOrderModel.uid))),
-            BlocProvider(create: (_) => BackButtonInterceptorBloc())
+            BlocProvider(
+                create: (_) =>
+                    BackButtonInterceptorBloc()..add(InitiateInterceptor()))
           ],
           child: BlocListener<BackButtonInterceptorBloc,
               BackButtonInterceptorState>(
             listener: (context, state) {
               if (state is OnPressedBack) {
+                print('hello');
                 Navigator.pop(context);
               }
             },

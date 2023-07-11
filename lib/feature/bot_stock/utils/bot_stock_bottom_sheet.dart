@@ -8,6 +8,7 @@ import '../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../core/utils/back_button_interceptor/back_button_interceptor_bloc.dart';
 import '../../../core/utils/extensions.dart';
 import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../../generated/l10n.dart';
@@ -130,21 +131,28 @@ class BotStockBottomSheet {
         child: BlocBuilder<BotStockBloc, BotStockState>(
             buildWhen: (previous, current) =>
                 previous.botStockTradeAmount != current.botStockTradeAmount,
-            builder: (context, state) {
+            builder: (bottomSheetContext, state) {
               return LoraBottomSheetContent(
                 disablePrimaryButton: state.disableBuyingBotstock(buyingPower),
                 title: S.of(context).botTradeBottomSheetAmountTitle,
                 primaryButtonLabel: S.of(context).buttonNext,
                 secondaryButtonLabel: S.of(context).buttonCancel,
                 onPrimaryButtonTap: () {
+                  context
+                      .read<BackButtonInterceptorBloc>()
+                      .add(RemoveInterceptor());
                   Navigator.pop(context);
-                  BotTradeSummaryScreen.open(
+
+                  BotTradeSummaryScreen.openWithBackCallBack(
                       context: context,
                       botTradeSummaryModel: BotTradeSummaryModel(
                           botType: botType,
                           botRecommendationModel: botRecommendationModel,
                           botDetailModel: botDetailModel,
-                          amount: state.botStockTradeAmount));
+                          amount: state.botStockTradeAmount),
+                      backCallBack: () => context
+                          .read<BackButtonInterceptorBloc>()
+                          .add(InitiateInterceptor()));
                 },
                 onSecondaryButtonTap: () => Navigator.pop(context),
                 buttonPaddingTop: 5,
@@ -175,7 +183,7 @@ class BotStockBottomSheet {
                             textStyle: AskLoraTextStyles.h2
                                 .copyWith(color: AskLoraColors.charcoal),
                             hintText: '1,500',
-                            onChanged: (value) => context
+                            onChanged: (value) => bottomSheetContext
                                 .read<BotStockBloc>()
                                 .add(TradeBotStockAmountChanged(value.isNotEmpty
                                     ? double.parse(
