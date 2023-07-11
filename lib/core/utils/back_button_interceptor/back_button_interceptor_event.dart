@@ -7,7 +7,8 @@ abstract class BackButtonInterceptorEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class InitiateInterceptor extends BackButtonInterceptorEvent{}
-class OnPressedBackInterceptor extends BackButtonInterceptorEvent{}
+class InitiateInterceptor extends BackButtonInterceptorEvent {}
 
-class RemoveInterceptor extends BackButtonInterceptorEvent{}
+class OnPressedBackInterceptor extends BackButtonInterceptorEvent {}
+
+class RemoveInterceptor extends BackButtonInterceptorEvent {}
