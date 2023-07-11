@@ -19,10 +19,11 @@ class BotCancelButton extends StatelessWidget {
             BotStockResultScreen.open(
                 context: context,
                 arguments: BotStockResultArgument(
-                  title: S.of(context).tradeCancelledTitle,
-                  desc: S.of(context).tradeCancelledSubtitle,
-                  labelBottomButton: S.of(context).buttonBackToHome,
-                ));
+                    title: S.of(context).tradeCancelledTitle,
+                    desc: S.of(context).tradeCancelledSubtitle,
+                    labelBottomButton: S.of(context).buttonBackToHome,
+                    onButtonTap: (_) =>
+                        TabScreen.openAndRemoveAllRoute(context)));
           } else if (state.cancelBotStockResponse.state ==
               ResponseState.suspended) {
             SuspendedAccountScreen.open(context);

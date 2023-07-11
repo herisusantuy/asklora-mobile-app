@@ -21,6 +21,7 @@ import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../tabs/bloc/tab_screen_bloc.dart';
+import '../../../../tabs/presentation/tab_screen.dart';
 import '../../../domain/orders/bot_active_order_detail_model.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
@@ -32,11 +33,17 @@ import '../bloc/portfolio_bloc.dart';
 import 'widgets/bot_portfolio_detail_content.dart';
 
 part 'widgets/bot_portfolio_detail_header.dart';
+
 part 'widgets/buttons/bot_cancel_button.dart';
+
 part 'widgets/buttons/bot_portfolio_buttons.dart';
+
 part 'widgets/buttons/bot_rollover_button.dart';
+
 part 'widgets/buttons/bot_terminate_button.dart';
+
 part 'widgets/key_info.dart';
+
 part 'widgets/performance.dart';
 
 class BotPortfolioDetailScreen extends StatelessWidget {
@@ -48,8 +55,6 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomScaffold(
-        onTapBack: arguments.onTapBack,
-        enableBackNavigation: arguments.onTapBack != null ? true : false,
         body: BlocProvider(
           create: (_) => PortfolioBloc(
               botStockRepository: BotStockRepository(),
@@ -116,27 +121,17 @@ class BotPortfolioDetailScreen extends StatelessWidget {
     });
   }
 
-  static void openAndRemoveAllRoute(
-      {required BuildContext context,
-      required BotPortfolioDetailArguments arguments}) {
-    Navigator.pushNamedAndRemoveUntil(
-            context, route, (Route<dynamic> route) => false,
-            arguments: arguments)
-        .then((value) {
-      context
-          .read<TabScreenBloc>()
-          .add(TabChanged(TabPage.portfolio.setData()));
-    });
-  }
+  static void openReplace(
+          {required BuildContext context,
+          required BotPortfolioDetailArguments arguments}) =>
+      Navigator.pushReplacementNamed(context, route, arguments: arguments);
 }
 
 class BotPortfolioDetailArguments {
-  final VoidCallback? onTapBack;
   final String botUid;
   final String botName;
 
   const BotPortfolioDetailArguments({
-    this.onTapBack,
     required this.botUid,
     required this.botName,
   });

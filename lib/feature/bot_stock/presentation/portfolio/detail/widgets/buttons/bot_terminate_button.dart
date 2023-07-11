@@ -23,14 +23,14 @@ class BotTerminateButton extends StatelessWidget {
             BotStockResultScreen.open(
               context: context,
               arguments: BotStockResultArgument(
-                title: S.of(context).tradeRequestReceived,
-                desc: S.of(context).endBotStockAcknowledgement(
-                    botType.name,
-                    botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol,
-                    state.endBotStockResponse.data?.optimalTimeFormatted ??
-                        '-'),
-                labelBottomButton: S.of(context).buttonBackToHome,
-              ),
+                  title: S.of(context).tradeRequestReceived,
+                  desc: S.of(context).endBotStockAcknowledgement(
+                      botType.name,
+                      botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol,
+                      state.endBotStockResponse.data?.optimalTimeFormatted ??
+                          '-'),
+                  labelBottomButton: S.of(context).buttonBackToHome,
+                  onButtonTap: (_) => TabScreen.openAndRemoveAllRoute(context)),
             );
           } else if (state.endBotStockResponse.state ==
               ResponseState.suspended) {

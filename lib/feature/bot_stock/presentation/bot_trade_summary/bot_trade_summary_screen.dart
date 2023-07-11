@@ -32,12 +32,14 @@ class BotTradeSummaryModel {
   final BotRecommendationModel botRecommendationModel;
   final BotRecommendationDetailModel botDetailModel;
   final BotType botType;
+  final VoidCallback onCreateOrderSuccessCallback;
 
   BotTradeSummaryModel(
       {required this.botType,
       required this.amount,
       required this.botRecommendationModel,
-      required this.botDetailModel});
+      required this.botDetailModel,
+      required this.onCreateOrderSuccessCallback});
 }
 
 class BotTradeSummaryScreen extends StatelessWidget {
@@ -69,6 +71,8 @@ class BotTradeSummaryScreen extends StatelessWidget {
               .show(state.createBotOrderResponse.state);
 
           if (state.createBotOrderResponse.state == ResponseState.success) {
+            botTradeSummaryModel.onCreateOrderSuccessCallback();
+
             if (!UserJourney.compareUserJourney(
                 context: context, target: UserJourney.deposit)) {
               context.read<AppBloc>().add(
@@ -81,28 +85,22 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   initialTabPage: TabPage.portfolio);
               BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
             } else {
-              BotStockResultScreen.open(
-                  context: context,
-                  arguments: BotStockResultArgument(
-                    title: S.of(context).tradeRequestReceived,
-                    desc: _tradeRequestSuccessMessage(context),
-                    labelBottomButton: S.of(context).checkBotStockDetails,
-                    onNextButton: () {
-                      String botName =
-                          '${BotType.findByString(state.createBotOrderResponse.data!.botAppsName).upperCaseName} ${state.createBotOrderResponse.data!.symbol}';
-                      BotPortfolioDetailScreen.open(
-                        context: context,
-                        arguments: BotPortfolioDetailArguments(
-                          botUid: state.createBotOrderResponse.data!.uid,
-                          botName: botName,
-                          onTapBack: () {
-                            TabScreen.openAndRemoveAllRoute(context,
-                                initialTabPage: TabPage.portfolio);
-                          },
-                        ),
-                      );
-                    },
-                  ));
+              BotStockResultScreen.openReplace(
+                context: context,
+                arguments: BotStockResultArgument(
+                  title: S.of(context).tradeRequestReceived,
+                  desc: _tradeRequestSuccessMessage(context),
+                  labelBottomButton: S.of(context).checkBotStockDetails,
+                  onButtonTap: (context) =>
+                      BotPortfolioDetailScreen.openReplace(
+                    context: context,
+                    arguments: BotPortfolioDetailArguments(
+                      botUid: state.createBotOrderResponse.data!.uid,
+                      botName: state.createBotOrderResponse.data!.botName,
+                    ),
+                  ),
+                ),
+              );
             }
           } else if (state.createBotOrderResponse.state ==
               ResponseState.suspended) {
@@ -120,90 +118,91 @@ class BotTradeSummaryScreen extends StatelessWidget {
           }
         },
         child: BotStockForm(
-            useHeader: true,
-            title:
-                '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.tickerSymbol}',
-            content: Column(
-              children: [
+          useHeader: true,
+          title:
+              '${botDetailModel.botInfo.botName} ${botTradeSummaryModel.botRecommendationModel.tickerSymbol}',
+          content: Column(
+            children: [
+              RoundColoredBox(
+                content: Column(
+                  children: [
+                    PairColumnTextWithTooltip(
+                      leftTitle: '${S.of(context).investmentAmount} (HKD)',
+                      rightTitle: '${S.of(context).botManagementFee} (HKD)',
+                      leftSubTitle: botTradeSummaryModel.amount
+                          .convertToCurrencyDecimal(),
+                      rightSubTitle: S.of(context).free,
+                      rightTooltipText:
+                          'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
+                    ),
+                    _spaceBetweenInfo,
+                    ..._detailedInformation(context),
+                    _spaceBetweenInfo,
+                    PairColumnTextWithTooltip(
+                        leftTitle: '${S.of(context).marketPrice} (USD)',
+                        leftSubTitle:
+                            '${botTradeSummaryModel.botDetailModel.price}',
+                        rightTitle: S.of(context).investmentPeriod,
+                        rightSubTitle: botDetailModel.botDuration),
+                    _spaceBetweenInfo,
+                    PairColumnTextWithTooltip(
+                        leftTitle: S.of(context).startDate,
+                        rightTitle: S.of(context).endDate,
+                        leftSubTitle: botTradeSummaryModel
+                            .botDetailModel.formattedStartDate,
+                        rightSubTitle: botTradeSummaryModel
+                            .botDetailModel.formattedEstEndDate),
+                  ],
+                ),
+                title: isFreeBotTrade
+                    ? 'Free Botstock Trade Summary'
+                    : S.of(context).tradeSummary,
+              ),
+              const SizedBox(
+                height: 19,
+              ),
+              if (isFreeBotTrade)
                 RoundColoredBox(
-                  content: Column(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 13),
+                  backgroundColor: AskLoraColors.lightGreen,
+                  content: Row(
                     children: [
-                      PairColumnTextWithTooltip(
-                        leftTitle: '${S.of(context).investmentAmount} (HKD)',
-                        rightTitle: '${S.of(context).botManagementFee} (HKD)',
-                        leftSubTitle: botTradeSummaryModel.amount
-                            .convertToCurrencyDecimal(),
-                        rightSubTitle: S.of(context).free,
-                        rightTooltipText:
-                            'The Bot management fee is the monthly fee that you pay for a Bot (HKD40). If you’re on the Core Plan, then there are no management fees, as it’s included in your subscription!',
+                      const LoraMemojiWidget(
+                        loraMemojiType: LoraMemojiType.lora1,
+                        height: 70,
+                        width: 70,
                       ),
-                      _spaceBetweenInfo,
-                      ..._detailedInformation(context),
-                      _spaceBetweenInfo,
-                      PairColumnTextWithTooltip(
-                          leftTitle: '${S.of(context).marketPrice} (USD)',
-                          leftSubTitle:
-                              '${botTradeSummaryModel.botDetailModel.price}',
-                          rightTitle: S.of(context).investmentPeriod,
-                          rightSubTitle: botDetailModel.botDuration),
-                      _spaceBetweenInfo,
-                      PairColumnTextWithTooltip(
-                          leftTitle: S.of(context).startDate,
-                          rightTitle: S.of(context).endDate,
-                          leftSubTitle: botTradeSummaryModel
-                              .botDetailModel.formattedStartDate,
-                          rightSubTitle: botTradeSummaryModel
-                              .botDetailModel.formattedEstEndDate),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: CustomTextNew(
+                          'You will have more flexibility in the next real trade. Come on, this is FREE!',
+                          style: AskLoraTextStyles.body1
+                              .copyWith(color: AskLoraColors.charcoal),
+                        ),
+                      )
                     ],
                   ),
-                  title: isFreeBotTrade
-                      ? 'Free Botstock Trade Summary'
-                      : S.of(context).tradeSummary,
                 ),
-                const SizedBox(
-                  height: 19,
-                ),
-                if (isFreeBotTrade)
-                  RoundColoredBox(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 13),
-                    backgroundColor: AskLoraColors.lightGreen,
-                    content: Row(
-                      children: [
-                        const LoraMemojiWidget(
-                          loraMemojiType: LoraMemojiType.lora1,
-                          height: 70,
-                          width: 70,
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Expanded(
-                          child: CustomTextNew(
-                            'You will have more flexibility in the next real trade. Come on, this is FREE!',
-                            style: AskLoraTextStyles.body1
-                                .copyWith(color: AskLoraColors.charcoal),
-                          ),
-                        )
-                      ],
+            ],
+          ),
+          bottomButton: Builder(
+            builder: (context) => Padding(
+              padding: const EdgeInsets.only(top: 24, bottom: 30),
+              child: PrimaryButton(
+                label: S.of(context).confirmTrade,
+                onTap: () => context.read<BotStockBloc>().add(
+                      CreateBotOrder(
+                          botRecommendationModel:
+                              botTradeSummaryModel.botRecommendationModel,
+                          tradeBotStockAmount: botTradeSummaryModel.amount),
                     ),
-                  ),
-              ],
+              ),
             ),
-            bottomButton: Builder(
-                builder: (context) => Padding(
-                      padding: const EdgeInsets.only(top: 24, bottom: 30),
-                      child: PrimaryButton(
-                        label: S.of(context).confirmTrade,
-                        onTap: () {
-                          context.read<BotStockBloc>().add(CreateBotOrder(
-                              botRecommendationModel:
-                                  botTradeSummaryModel.botRecommendationModel,
-                              tradeBotStockAmount:
-                                  botTradeSummaryModel.amount));
-                        },
-                      ),
-                    ))),
+          ),
+        ),
       ),
     );
   }
