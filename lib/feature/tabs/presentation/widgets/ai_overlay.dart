@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,6 +40,11 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
     super.initState();
   }
 
+  bool _backButtonInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    _closeAiOverlay();
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) =>
       BlocListener<TabScreenBloc, TabScreenState>(
@@ -60,6 +66,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
       );
 
   void _openAiOverlay() {
+    BackButtonInterceptor.add(_backButtonInterceptor);
     _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_controller!)
@@ -73,6 +80,7 @@ class _AiOverlayState extends State<AiOverlay> with TickerProviderStateMixin {
   }
 
   void _closeAiOverlay() {
+    BackButtonInterceptor.remove(_backButtonInterceptor);
     final double startingPoint = _drawerBottom;
     _controller = AnimationController(
         duration: openAndCloseAnimationDuration, vsync: this);
