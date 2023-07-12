@@ -3474,6 +3474,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign Agreements`
+  String get signAgreements {
+    return Intl.message(
+      'Sign Agreements',
+      name: 'signAgreements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Licensee: Chang Yung Ching`
+  String get licenseeName {
+    return Intl.message(
+      'Licensee: Chang Yung Ching',
+      name: 'licenseeName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CE No.: AFF918`
+  String get licenseeNumber {
+    return Intl.message(
+      'CE No.: AFF918',
+      name: 'licenseeNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Risk Disclosure Statement`
+  String get riskDisclosureStatementLabel {
+    return Intl.message(
+      'Risk Disclosure Statement',
+      name: 'riskDisclosureStatementLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement`
+  String get riskDisclosureStatementString {
+    return Intl.message(
+      '1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement',
+      name: 'riskDisclosureStatementString',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have read, understood, and agree with the Risk Disclosure Statement.`
+  String get riskDisclosureStatementAcknowledgement {
+    return Intl.message(
+      'I have read, understood, and agree with the Risk Disclosure Statement.',
+      name: 'riskDisclosureStatementAcknowledgement',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
