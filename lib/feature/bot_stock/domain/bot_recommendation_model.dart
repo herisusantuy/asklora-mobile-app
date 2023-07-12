@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../core/utils/extensions.dart';
+
 part 'bot_recommendation_model.g.dart';
 
 @JsonSerializable()
@@ -38,6 +40,8 @@ class BotRecommendationModel extends Equatable {
       this.selectable = false});
 
   String get botWordString => botWord ?? '';
+
+  String get latestPriceFormatted=>checkDouble(latestPrice).convertToCurrencyDecimal();
 
   BotRecommendationModel copyWith({bool? freeBot}) => BotRecommendationModel(
       id,

@@ -22,7 +22,9 @@ class BotCancelButton extends StatelessWidget {
                 arguments: BotStockResultArgument(
                   title: S.of(context).tradeCancelledTitle,
                   desc: S.of(context).tradeCancelledSubtitle,
-                  labelBottomButton: S.of(context).buttonBackToHome,
+                  labelBottomButton: S.of(context).buttonBackToPortfolio,
+                  onButtonTap: (_) => TabScreen.openAndRemoveAllRoute(context,
+                      initialTabPage: TabPage.portfolio),
                 ),
                 backCallBack: () => context
                     .read<BackButtonInterceptorBloc>()

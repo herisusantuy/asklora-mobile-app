@@ -344,6 +344,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "learnBotstockManagement":
             MessageLookupByLibrary.simpleMessage("Learn Botstock Management"),
+        "licenseeName":
+            MessageLookupByLibrary.simpleMessage("Licensee: Chang Yung Ching"),
+        "licenseeNumber":
+            MessageLookupByLibrary.simpleMessage("CE No.: AFF918"),
         "manageYourBotstock":
             MessageLookupByLibrary.simpleMessage("Manage Your Botstock"),
         "marketCap": MessageLookupByLibrary.simpleMessage("Market Cap"),
@@ -528,8 +532,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
+        "riskDisclosureStatementAcknowledgement":
+            MessageLookupByLibrary.simpleMessage(
+                "I have read, understood, and agree with the Risk Disclosure Statement."),
         "riskDisclosureStatementCheckBox": MessageLookupByLibrary.simpleMessage(
             "I have read, understood, and agree with the Risk Disclosure Statement."),
+        "riskDisclosureStatementLabel":
+            MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
+        "riskDisclosureStatementString": MessageLookupByLibrary.simpleMessage(
+            "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement"),
         "riskDisclosureStatementTitle":
             MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "rolloverBotStockAcknowledgement": m19,

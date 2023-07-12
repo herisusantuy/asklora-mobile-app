@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../core/utils/date_utils.dart';
+import '../../utils/bot_stock_utils.dart';
 
 part 'bot_create_order_response.g.dart';
 
@@ -35,6 +36,9 @@ class BotCreateOrderResponse {
     this.symbol,
     this.optimalTime,
   );
+
+  String get botName =>
+      '${BotType.findByString(botAppsName).upperCaseName} $symbol';
 
   String get optimalTimeFormatted =>
       '${convertDateToEst(optimalTime, dateFormat: 'dd/MM/yyyy HH:mm')} EST';

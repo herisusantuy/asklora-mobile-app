@@ -68,16 +68,16 @@ class PersonalisationResultEndScreen extends StatelessWidget {
     }
     if (scores.openness >= high && scores.neuroticism >= high) {
       message =
-          'You are pretty open-minded to new things!\nLet’s be a little bit aggressive!';
+          'You are pretty open-minded to new things!\nYou are a bit risk-averse, but I got your back!';
     } else if (scores.openness >= high && scores.neuroticism < high) {
       message =
-          'You are one of those people who’s down for trying anything new!\nLet’s be more aggressive!';
+          'You are down for trying something new!\nYou can afford to take on some risk!';
     } else if (scores.openness < high && scores.neuroticism >= high) {
       message =
-          'You prefer a stable and safe journey!\nLet’s aim to make small wins in a steady manner!';
+          'You prefer more conventional and well established!\nLet’s aim to make steady wins!';
     } else if (scores.openness < high && scores.neuroticism < high) {
       message =
-          'You prefer a stable and safe journey!\nLet’s try a more balanced strategy!';
+          'You prefer more conventional and well established!\nBut you can afford to take on some risk!';
     }
     return message;
   }

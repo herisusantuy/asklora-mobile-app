@@ -13,12 +13,14 @@ import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../chart/presentation/chart_animation.dart';
 import '../../../../tabs/bloc/tab_screen_bloc.dart';
+import '../../../../tabs/for_you/bloc/for_you_bloc.dart';
 import '../../../bloc/bot_stock_bloc.dart';
 import '../../../domain/bot_recommendation_model.dart';
 import '../../../repository/bot_stock_repository.dart';
 import '../../../utils/bot_stock_bottom_sheet.dart';
 import '../../../utils/bot_stock_utils.dart';
 import '../../bot_trade_summary/bot_trade_summary_screen.dart';
+import '../../portfolio/bloc/portfolio_bloc.dart';
 import '../../widgets/bot_stock_form.dart';
 import 'widgets/bot_recommendation_detail_content.dart';
 
@@ -115,7 +117,20 @@ class BotRecommendationDetailScreen extends StatelessWidget {
                                   botRecommendationModel:
                                       botRecommendationModel,
                                   botDetailModel: state.botDetailResponse.data!,
-                                  amount: 500),
+                                  amount: 500,
+                                  onCreateOrderSuccessCallback: () {
+                                    context
+                                        .read<PortfolioBloc>()
+                                        .add(FetchBalance());
+                                    context
+                                        .read<PortfolioBloc>()
+                                        .add(const FetchActiveOrders());
+                                    context.read<TabScreenBloc>().add(
+                                        const TabChanged(TabPage.portfolio));
+                                    context
+                                        .read<ForYouBloc>()
+                                        .add(GetInvestmentStyleState());
+                                  }),
                               backCallBack: () {
                                 context
                                     .read<BackButtonInterceptorBloc>()
