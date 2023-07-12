@@ -25,6 +25,7 @@ import '../../repository/bot_stock_repository.dart';
 import '../../utils/bot_stock_bottom_sheet.dart';
 import '../../utils/bot_stock_utils.dart';
 import '../bot_stock_result_screen.dart';
+import '../portfolio/detail/bot_portfolio_detail_screen.dart';
 import '../widgets/bot_stock_form.dart';
 
 class BotTradeSummaryModel {
@@ -32,12 +33,14 @@ class BotTradeSummaryModel {
   final BotRecommendationModel botRecommendationModel;
   final BotRecommendationDetailModel botDetailModel;
   final BotType botType;
+  final VoidCallback onCreateOrderSuccessCallback;
 
   BotTradeSummaryModel(
       {required this.botType,
       required this.amount,
       required this.botRecommendationModel,
-      required this.botDetailModel});
+      required this.botDetailModel,
+      required this.onCreateOrderSuccessCallback});
 }
 
 class BotTradeSummaryScreen extends StatelessWidget {
@@ -69,6 +72,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
               .show(state.createBotOrderResponse.state);
 
           if (state.createBotOrderResponse.state == ResponseState.success) {
+            botTradeSummaryModel.onCreateOrderSuccessCallback();
             if (!UserJourney.compareUserJourney(
                 context: context, target: UserJourney.deposit)) {
               context.read<AppBloc>().add(
@@ -81,13 +85,21 @@ class BotTradeSummaryScreen extends StatelessWidget {
                   initialTabPage: TabPage.portfolio);
               BotStockBottomSheet.freeBotStockSuccessfullyAdded(context);
             } else {
-              BotStockResultScreen.open(
+              BotStockResultScreen.openReplace(
                   context: context,
                   arguments: BotStockResultArgument(
                     title: S.of(context).tradeRequestReceived,
                     desc: _tradeRequestSuccessMessage(
                         context, state.createBotOrderResponse.data!),
                     labelBottomButton: S.of(context).checkBotStockDetails,
+                    onButtonTap: (context) =>
+                        BotPortfolioDetailScreen.openReplace(
+                      context: context,
+                      arguments: BotPortfolioDetailArguments(
+                        botUid: state.createBotOrderResponse.data!.uid,
+                        botName: state.createBotOrderResponse.data!.botName,
+                      ),
+                    ),
                   ));
             }
           } else if (state.createBotOrderResponse.state ==

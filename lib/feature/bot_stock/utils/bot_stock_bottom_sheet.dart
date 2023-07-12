@@ -13,6 +13,8 @@ import '../../../core/utils/extensions.dart';
 import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../../generated/l10n.dart';
 import '../../balance/deposit/presentation/welcome/deposit_welcome_screen.dart';
+import '../../tabs/bloc/tab_screen_bloc.dart';
+import '../../tabs/for_you/bloc/for_you_bloc.dart';
 import '../bloc/bot_stock_bloc.dart';
 import '../domain/bot_recommendation_detail_model.dart';
 import '../domain/bot_recommendation_model.dart';
@@ -146,10 +148,23 @@ class BotStockBottomSheet {
                   BotTradeSummaryScreen.openWithBackCallBack(
                       context: context,
                       botTradeSummaryModel: BotTradeSummaryModel(
-                          botType: botType,
-                          botRecommendationModel: botRecommendationModel,
-                          botDetailModel: botDetailModel,
-                          amount: state.botStockTradeAmount),
+                        botType: botType,
+                        botRecommendationModel: botRecommendationModel,
+                        botDetailModel: botDetailModel,
+                        amount: state.botStockTradeAmount,
+                        onCreateOrderSuccessCallback: () {
+                          context.read<PortfolioBloc>().add(FetchBalance());
+                          context
+                              .read<PortfolioBloc>()
+                              .add(const FetchActiveOrders());
+                          context
+                              .read<TabScreenBloc>()
+                              .add(const TabChanged(TabPage.portfolio));
+                          context
+                              .read<ForYouBloc>()
+                              .add(GetInvestmentStyleState());
+                        },
+                      ),
                       backCallBack: () => context
                           .read<BackButtonInterceptorBloc>()
                           .add(InitiateInterceptor()));
