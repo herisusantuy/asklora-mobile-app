@@ -54,7 +54,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
             body: CustomLayoutWithBlurPopUp(
               showPopUp: state.response.state == ResponseState.error,
               content: BalanceBaseForm(
-                title: 'Withdrawal',
+                title: S.of(context).buttonWithdraw,
                 content: Column(
                   children: [
                     getPngImage('money'),
@@ -144,7 +144,7 @@ class WithdrawalSummaryScreen extends StatelessWidget {
                   label: S.of(context).buttonConfirm,
                   onTap: () => context
                       .read<WithdrawalBloc>()
-                      .add(SubmitWithdrawal(args.withdrawalAmount)));
+                      .add(SubmitWithdrawal(args.withdrawalAmount.toString())));
             })
           ],
         ),

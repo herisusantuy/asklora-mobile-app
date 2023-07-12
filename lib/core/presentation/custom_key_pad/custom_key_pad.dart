@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../../../core/styles/asklora_colors.dart';
 import '../../../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../../../core/utils/extensions.dart';
-import '../../utils/currency_masked_text_controller.dart';
 
 part 'pads/custom_key_pad_button.dart';
 
 part 'pads/custom_delete_key_pad.dart';
 
 class CustomKeyPad extends StatefulWidget {
-  final Function(double) onChange;
+  final Function(String) onChange;
 
   const CustomKeyPad({required this.onChange, Key? key}) : super(key: key);
 
@@ -20,8 +19,7 @@ class CustomKeyPad extends StatefulWidget {
 }
 
 class _CustomKeyPadState extends State<CustomKeyPad> {
-  final CurrencyMaskedTextController controller = CurrencyMaskedTextController(
-      thousandSeparator: ',', decimalSeparator: '.', precision: 1);
+  final TextEditingController controller = TextEditingController();
   final double _spacing = 5;
   final double _runSpacing = 7;
 
@@ -29,8 +27,7 @@ class _CustomKeyPadState extends State<CustomKeyPad> {
   void initState() {
     super.initState();
     controller.addListener(() {
-      widget
-          .onChange(double.parse(controller.text.replaceAll(amountRegex, '')));
+      widget.onChange(controller.text);
     });
   }
 
@@ -94,7 +91,11 @@ class _CustomKeyPadState extends State<CustomKeyPad> {
               onTap: onNumKeyTap,
               value: '9',
               width: padWidth),
-          _emptyKeyPad(width: padWidth, height: padHeight),
+          CustomKeyPadButton(
+              height: padHeight,
+              onTap: onNumKeyTap,
+              value: '.',
+              width: padWidth),
           CustomKeyPadButton(
               height: padHeight,
               onTap: onNumKeyTap,
@@ -107,24 +108,63 @@ class _CustomKeyPadState extends State<CustomKeyPad> {
     });
   }
 
+  NumberFormat formatter = NumberFormat.decimalPatternDigits(
+    locale: 'en_us',
+    decimalDigits: 0,
+  );
+
   void onNumKeyTap(String value) {
-    controller.text = '${controller.text}$value';
+    String inputtedAmount = '${controller.text.replaceAll(',', '')}$value';
+    int firstDotIndex = inputtedAmount.indexOf('.');
+    int lastDotIndex = inputtedAmount.lastIndexOf('.');
+
+    if (firstDotIndex == -1) {
+      controller.text = formatter.format(double.parse(inputtedAmount));
+    } else {
+      String digitString =
+          inputtedAmount.substring(firstDotIndex, inputtedAmount.length).trim();
+      if (firstDotIndex == 0) {
+        controller.text = '';
+      } else {
+        if (digitString.length > 3 || firstDotIndex != lastDotIndex) {
+          controller.text = controller.text;
+        } else {
+          String digitString = inputtedAmount
+              .substring(firstDotIndex, inputtedAmount.length)
+              .trim();
+
+          String amountString = formatter.format(double.parse(
+              inputtedAmount.substring(0, firstDotIndex).replaceAll(',', '')));
+
+          controller.text = '$amountString$digitString';
+        }
+      }
+    }
   }
 
   void onDeleteKeyTap() {
+    int firstDotIndex = controller.text.indexOf('.');
     int textLength = controller.text.length;
-    String value = '';
-    for (int i = 0; i < textLength; i++) {
-      if (i < textLength - 1) {
-        value = '$value${controller.text[i]}';
-      }
-    }
-    controller.text = value;
-  }
 
-  Widget _emptyKeyPad({required double width, required double height}) =>
-      SizedBox(
-        height: height,
-        width: width,
-      );
+    if (firstDotIndex == -1) {
+      controller.text = textLength > 1
+          ? formatter.format(double.parse(
+              controller.text.substring(0, textLength - 1).replaceAll(',', '')))
+          : '';
+    } else {
+      String digitString = controller.text
+          .substring(firstDotIndex, controller.text.length)
+          .trim();
+
+      String amountString = formatter.format(double.parse(
+          controller.text.substring(0, firstDotIndex).replaceAll(',', '')));
+
+      String formattedInputtedAmount = '$amountString$digitString';
+
+      controller.text = formattedInputtedAmount.length > 1
+          ? formattedInputtedAmount.substring(
+              0, formattedInputtedAmount.length - 1)
+          : '';
+    }
+  }
 }

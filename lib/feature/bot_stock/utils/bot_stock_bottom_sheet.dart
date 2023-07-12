@@ -175,9 +175,11 @@ class BotStockBottomSheet {
                             minWidth: 100,
                             textInputFormatterList: [
                               CurrencyTextInputFormatter(
-                                  symbol: '', decimalDigits: 1)
+                                  symbol: '', decimalDigits: 0)
                             ],
-                            textInputType: TextInputType.number,
+                            textInputType:
+                                const TextInputType.numberWithOptions(
+                                    decimal: true),
                             hintTextStyle: AskLoraTextStyles.h2
                                 .copyWith(color: AskLoraColors.gray),
                             textStyle: AskLoraTextStyles.h2
