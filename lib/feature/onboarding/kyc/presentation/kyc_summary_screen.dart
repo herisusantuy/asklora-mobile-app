@@ -54,7 +54,7 @@ class KycSummaryScreen extends StatelessWidget {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Summary',
+      title: S.of(context).summary,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -62,7 +62,7 @@ class KycSummaryScreen extends StatelessWidget {
             key: const Key('personal_info_summary_content'),
             personalInfoState: personalInfoState,
             addressProofState: addressProofState,
-            title: 'Personal Info',
+            title: S.of(context).personalInfo,
           ),
           const SizedBox(
             height: 56,
@@ -72,16 +72,17 @@ class KycSummaryScreen extends StatelessWidget {
             disclosureAffiliationState: disclosureAffiliationState,
             financialProfileState: financialProfileState,
             sourceOfWealthState: sourceOfWealthState,
-            title: 'Financial Profile',
+            title: S.of(context).financialProfile,
           ),
           const SizedBox(
             height: 56,
           ),
-          const SignAgreementSummaryContent(
-              key: Key('sign_agreement_summary_content'), title: 'Agreements'),
+          SignAgreementSummaryContent(
+              key: const Key('sign_agreement_summary_content'),
+              title: S.of(context).agreements),
           const SizedBox(height: 50),
-          const CustomTextNew(
-            'The agreements will become binding subject to the approval of the information submitted by you. ',
+          CustomTextNew(
+            S.of(context).summaryAgreementInformation,
             textAlign: TextAlign.center,
           )
         ],
@@ -120,7 +121,7 @@ class KycSummaryScreen extends StatelessWidget {
           secondaryButtonOnClick: () => context
               .read<KycBloc>()
               .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
-          primaryButtonLabel: 'Complete',
+          primaryButtonLabel: S.of(context).submitApplication,
           secondaryButtonLabel: S.of(context).saveForLater,
         ),
       );

@@ -83,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "activities": MessageLookupByLibrary.simpleMessage("交易記錄"),
         "afterPayDepositHeaderTitle":
             MessageLookupByLibrary.simpleMessage("投資賬戶\n即將 Ready！"),
+        "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
@@ -216,6 +217,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "estimatedEndDate": MessageLookupByLibrary.simpleMessage("預計結束日期"),
         "existingPassword": MessageLookupByLibrary.simpleMessage("現有密碼"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("成交價格"),
+        "financialProfile":
+            MessageLookupByLibrary.simpleMessage("Financial Profile"),
         "firstTimeCopyAskloraBankDetails": m10,
         "founded": MessageLookupByLibrary.simpleMessage("成立年份"),
         "free": MessageLookupByLibrary.simpleMessage("免費"),
@@ -298,6 +301,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("入金以開始正式交易"),
         "paymentDetails": MessageLookupByLibrary.simpleMessage("銀行賬戶詳情"),
         "performance": MessageLookupByLibrary.simpleMessage("表現"),
+        "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation": MessageLookupByLibrary.simpleMessage("個人化"),
         "phone": MessageLookupByLibrary.simpleMessage("電話"),
         "pleaseAddAHkBankAccount": MessageLookupByLibrary.simpleMessage(
@@ -399,11 +403,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "relearn": MessageLookupByLibrary.simpleMessage("再次學習"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。"),
+        "riskDisclosureStatementCheckBox": MessageLookupByLibrary.simpleMessage(
+            "I have read, understood, and agree with the Risk Disclosure Statement."),
+        "riskDisclosureStatementTitle":
+            MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "rolloverBotStockAcknowledgement": m19,
         "saveForLater": MessageLookupByLibrary.simpleMessage("儲存並離開"),
         "sectors": MessageLookupByLibrary.simpleMessage("領域"),
         "setUpFinancialProfile": MessageLookupByLibrary.simpleMessage("設定財務概況"),
         "shares": MessageLookupByLibrary.simpleMessage("數量"),
+        "signAgreements":
+            MessageLookupByLibrary.simpleMessage("Sign Agreements"),
         "signIn": MessageLookupByLibrary.simpleMessage("登入"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(" 真係要登出？"),
         "signUpTitle":
@@ -413,8 +423,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "startInvesting": MessageLookupByLibrary.simpleMessage("開始投資 "),
         "startInvestingOnMilestone":
             MessageLookupByLibrary.simpleMessage("即將進入投資狀態！"),
+        "submitApplication":
+            MessageLookupByLibrary.simpleMessage("Submit Application"),
         "subscription": MessageLookupByLibrary.simpleMessage("訂購計劃"),
         "summary": MessageLookupByLibrary.simpleMessage("摘要"),
+        "summaryAgreementInformation": MessageLookupByLibrary.simpleMessage(
+            "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"),
         "terminateAccount": MessageLookupByLibrary.simpleMessage("終止賬戶"),
         "termsAndConditions": MessageLookupByLibrary.simpleMessage("條款與約束"),
         "theAmountMustMatch":

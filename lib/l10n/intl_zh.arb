@@ -484,5 +484,13 @@
   "atLeast1Uppercase": "最少 1 個大寫英文字母",
   "atLeast1Number": "最少 1 個數字",
   "readyToGo": "準備好未？",
-  "invalidPassword": "無效密碼"
+  "invalidPassword": "無效密碼",
+  "signAgreements": "Sign Agreements",
+  "riskDisclosureStatementTitle" : "Risk Disclosure Statement",
+  "riskDisclosureStatementCheckBox" : "I have read, understood, and agree with the Risk Disclosure Statement.",
+  "personalInfo": "Personal Info",
+  "financialProfile": "Financial Profile",
+  "agreements": "Agreements",
+  "submitApplication": "Submit Application",
+  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"
 }

@@ -91,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "afterPayDepositHeaderTitle": MessageLookupByLibrary.simpleMessage(
             "Your investment account will be ready soon!"),
         "agree": MessageLookupByLibrary.simpleMessage("Agree"),
+        "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
@@ -292,6 +293,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Existing Password"),
         "expiresAt": MessageLookupByLibrary.simpleMessage("Expires at"),
         "filledPrice": MessageLookupByLibrary.simpleMessage("Filled Price"),
+        "financialProfile":
+            MessageLookupByLibrary.simpleMessage("Financial Profile"),
         "firstTimeCopyAskloraBankDetails": m10,
         "founded": MessageLookupByLibrary.simpleMessage("Founded"),
         "free": MessageLookupByLibrary.simpleMessage("Free"),
@@ -395,6 +398,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "paymentDetails":
             MessageLookupByLibrary.simpleMessage("Payment Details"),
         "performance": MessageLookupByLibrary.simpleMessage("Performance"),
+        "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "personalisation":
             MessageLookupByLibrary.simpleMessage("Personalisation"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
@@ -524,12 +528,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Retake Investment Style"),
         "returningUserDepositNotes": MessageLookupByLibrary.simpleMessage(
             "We will work with your bank in order to identify your bank account details (account name, bank code, account number). However, we may require additional details from you for transaction verification purposes."),
+        "riskDisclosureStatementCheckBox": MessageLookupByLibrary.simpleMessage(
+            "I have read, understood, and agree with the Risk Disclosure Statement."),
+        "riskDisclosureStatementTitle":
+            MessageLookupByLibrary.simpleMessage("Risk Disclosure Statement"),
         "rolloverBotStockAcknowledgement": m19,
         "saveForLater": MessageLookupByLibrary.simpleMessage("Save For Later"),
         "sectors": MessageLookupByLibrary.simpleMessage("Sector(s)"),
         "setUpFinancialProfile":
             MessageLookupByLibrary.simpleMessage("Set Up Financial Profile"),
         "shares": MessageLookupByLibrary.simpleMessage("Shares"),
+        "signAgreements":
+            MessageLookupByLibrary.simpleMessage("Sign Agreements"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signOutConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to sign out ?"),
@@ -544,8 +554,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Start investing"),
         "startsAt": MessageLookupByLibrary.simpleMessage("Starts at"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "submitApplication":
+            MessageLookupByLibrary.simpleMessage("Submit Application"),
         "subscription": MessageLookupByLibrary.simpleMessage("Subscription"),
         "summary": MessageLookupByLibrary.simpleMessage("Summary"),
+        "summaryAgreementInformation": MessageLookupByLibrary.simpleMessage(
+            "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"),
         "suspendedScreenSubTitle": MessageLookupByLibrary.simpleMessage(
             "Your account has been suspended and is pending investigation from us. If you have any questions about your account, please contact our customer service team."),
         "suspendedScreenTitle":

@@ -3474,6 +3474,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign Agreements`
+  String get signAgreements {
+    return Intl.message(
+      'Sign Agreements',
+      name: 'signAgreements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Risk Disclosure Statement`
+  String get riskDisclosureStatementTitle {
+    return Intl.message(
+      'Risk Disclosure Statement',
+      name: 'riskDisclosureStatementTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have read, understood, and agree with the Risk Disclosure Statement.`
+  String get riskDisclosureStatementCheckBox {
+    return Intl.message(
+      'I have read, understood, and agree with the Risk Disclosure Statement.',
+      name: 'riskDisclosureStatementCheckBox',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal Info`
+  String get personalInfo {
+    return Intl.message(
+      'Personal Info',
+      name: 'personalInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Financial Profile`
+  String get financialProfile {
+    return Intl.message(
+      'Financial Profile',
+      name: 'financialProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agreements`
+  String get agreements {
+    return Intl.message(
+      'Agreements',
+      name: 'agreements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit Application`
+  String get submitApplication {
+    return Intl.message(
+      'Submit Application',
+      name: 'submitApplication',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible`
+  String get summaryAgreementInformation {
+    return Intl.message(
+      'The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible',
+      name: 'summaryAgreementInformation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

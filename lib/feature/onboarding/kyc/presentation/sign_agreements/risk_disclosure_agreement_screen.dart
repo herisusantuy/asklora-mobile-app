@@ -27,7 +27,7 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
     return KycBaseForm(
       onTapBack: () =>
           context.read<NavigationBloc<KycPageStep>>().add(const PagePop()),
-      title: 'Sign Agreements',
+      title: S.of(context).signAgreements,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,9 +35,9 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
           const SizedBox(
             height: 42,
           ),
-          const KycSubTitle(
-            key: Key('sub_title'),
-            subTitle: 'Risk Disclosure Statement',
+          KycSubTitle(
+            key: const Key('sub_title'),
+            subTitle: S.of(context).riskDisclosureStatementTitle,
           ),
           const SizedBox(
             height: 24,
@@ -100,8 +100,7 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
                 checkboxKey:
                     const Key('signing_risk_disclosure_agreement_value'),
                 key: const Key('signing_risk_disclosure_agreement'),
-                text:
-                    'I have read, understood, and agree with the Risk Disclosure Statement',
+                text: S.of(context).riskDisclosureStatementCheckBox,
                 fontHeight: 1.4,
                 isChecked: state.isRiskDisclosureAgreementChecked,
                 fontType: FontType.smallText,
