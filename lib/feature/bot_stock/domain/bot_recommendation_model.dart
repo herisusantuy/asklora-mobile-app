@@ -41,7 +41,8 @@ class BotRecommendationModel extends Equatable {
 
   String get botWordString => botWord ?? '';
 
-  String get latestPriceFormatted=>checkDouble(latestPrice).convertToCurrencyDecimal();
+  String get latestPriceFormatted =>
+      checkDouble(latestPrice).convertToCurrencyDecimal();
 
   BotRecommendationModel copyWith({bool? freeBot}) => BotRecommendationModel(
       id,
