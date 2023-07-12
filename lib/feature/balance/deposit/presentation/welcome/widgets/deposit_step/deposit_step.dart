@@ -34,6 +34,40 @@ class DepositStep extends StatelessWidget {
           ),
           padding: padding,
         );
+      case DepositType.changeBankAccount:
+        final firstTimeDeposit = firstTimeDepositStep(context);
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30),
+              child: RoundColoredBox(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  backgroundColor: AskLoraColors.lightGreen,
+                  content: CustomTextNew(
+                    S.of(context).depositRegulatoryRequirements(
+                        DepositType.type1.minDepositString),
+                    style: AskLoraTextStyles.body1,
+                  )),
+            ),
+            RoundColoredBox(
+              content: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Column(
+                    children: firstTimeDeposit.map((e) {
+                  final int index = firstTimeDeposit.indexOf(e);
+                  return _step(
+                      drawLine: index != firstTimeDeposit.length - 1,
+                      index: index,
+                      subTitleColor: e.subTitleColor,
+                      title: e.title,
+                      subTitle: e.subTitle);
+                }).toList()),
+              ),
+              padding: padding,
+            ),
+          ],
+        );
       case DepositType.type1:
         final type1Deposit = type1DepositStep(context);
         return RoundColoredBox(

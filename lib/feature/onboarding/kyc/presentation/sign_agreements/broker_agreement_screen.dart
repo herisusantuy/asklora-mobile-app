@@ -7,6 +7,7 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
 import '../../domain/upgrade_account/save_kyc_request.dart';
@@ -116,7 +117,7 @@ class BrokerAgreementScreen extends StatelessWidget {
                 secondaryButtonOnClick: () => context.read<KycBloc>().add(
                     SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
                 disablePrimaryButton: state.disabledBrokerButton(),
-                primaryButtonLabel: 'Agree',
-                secondaryButtonLabel: 'Continue Later',
+                primaryButtonLabel: S.of(context).buttonNext,
+                secondaryButtonLabel: S.of(context).saveForLater,
               ));
 }

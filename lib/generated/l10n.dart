@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Agree`
+  String get agree {
+    return Intl.message(
+      'Agree',
+      name: 'agree',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Get Help`
   String get getHelp {
     return Intl.message(
@@ -457,6 +467,16 @@ class S {
       name: 'deposit',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Due to regulatory requirements, you need to deposit at least HK${amount} if you want to change bank account`
+  String depositRegulatoryRequirements(String amount) {
+    return Intl.message(
+      'Due to regulatory requirements, you need to deposit at least HK\$$amount if you want to change bank account',
+      name: 'depositRegulatoryRequirements',
+      desc: '',
+      args: [amount],
     );
   }
 

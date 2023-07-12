@@ -1,5 +1,6 @@
 {
   "@@locale": "en",
+  "agree": "Agree",
   "getHelp": "Get Help",
   "customerService": "Customer Service",
   "email": "Email",
@@ -41,6 +42,14 @@
   "currentPrice": "Current Price",
   "depositAmount": "Deposit Amount",
   "deposit": "Deposit",
+  "depositRegulatoryRequirements": "Due to regulatory requirements, you need to deposit at least HK${amount} if you want to change bank account",
+  "@depositRegulatoryRequirements": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "depositRequestSubmittedTitle": "Deposit Request Submitted",
   "depositRequestSubmittedSubTitleFirstTime": "Your account opening application and initial deposit will be reviewed within 1-2 working days. You will be informed via email and app notification once your account is approved.",
   "depositRequestSubmittedSubTitleReturn": "Your deposit request is submitted. We’ll let you know via email and app notification as soon as your deposit arrives.",

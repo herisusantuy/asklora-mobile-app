@@ -8,9 +8,10 @@ import '../../../../../core/presentation/round_colored_box.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/utils/app_icons.dart';
-import '../../../../tabs/presentation/tab_screen.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../widgets/kyc_base_form.dart';
 import '../../../../../core/presentation/buttons/button_pair.dart';
 import '../widgets/kyc_sub_title.dart';
@@ -118,10 +119,10 @@ class RiskDisclosureAgreementScreen extends StatelessWidget {
                 primaryButtonOnClick: () => context
                     .read<NavigationBloc<KycPageStep>>()
                     .add(const PageChanged(KycPageStep.signTaxAgreements)),
-                secondaryButtonOnClick: () =>
-                    TabScreen.openAndRemoveAllRoute(context),
+                secondaryButtonOnClick: () => context.read<KycBloc>().add(
+                    SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
                 disablePrimaryButton: !state.isRiskDisclosureAgreementChecked,
-                primaryButtonLabel: 'Agree',
-                secondaryButtonLabel: 'Continue Later',
+                primaryButtonLabel: S.of(context).buttonNext,
+                secondaryButtonLabel: S.of(context).saveForLater,
               ));
 }

@@ -53,51 +53,6 @@ class DepositWelcomeScreen extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Pair<Widget, Widget> _depositScreenArgs(
-      BuildContext context, AccountInformationState accountInformationState) {
-    if (accountInformationState.response.state != ResponseState.loading) {
-      DepositType depositType =
-          _getDepositType(accountInformationState.response.data?.bankAccount);
-      return Pair(
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DepositStep(
-                depositType: depositType,
-              ),
-              _spaceHeightSmall,
-              GestureDetector(
-                onTap: () async => await launchUrl(Uri.parse(depositGuideUrl)),
-                child: CustomTextNew(
-                  S.of(context).viewDepositGuide,
-                  style: AskLoraTextStyles.subtitle2.copyWith(
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              ),
-              _spaceHeight,
-              DepositBankAccount(
-                bankAccount: accountInformationState.response.data?.bankAccount,
-                spaceHeightSmall: _spaceHeightSmall,
-                spaceHeight: _spaceHeight,
-              ),
-              DepositWelcomeNotes(
-                depositType: depositType,
-              ),
-            ],
-          ),
-          _bottomButton(
-            context,
-            depositType,
-          ));
-    } else {
-      return const Pair(
-        SizedBox.shrink(),
-        SizedBox.shrink(),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -141,6 +96,54 @@ class DepositWelcomeScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _depositGuideButton(BuildContext context) => GestureDetector(
+      onTap: () async => await launchUrl(Uri.parse(depositGuideUrl)),
+      child: UnconstrainedBox(
+        child: Container(
+          decoration: const BoxDecoration(
+              border: Border(bottom: BorderSide(width: .5))),
+          child: CustomTextNew(S.of(context).viewDepositGuide,
+              style: AskLoraTextStyles.h6),
+        ),
+      ));
+
+  Pair<Widget, Widget> _depositScreenArgs(
+      BuildContext context, AccountInformationState accountInformationState) {
+    if (accountInformationState.response.state != ResponseState.loading) {
+      DepositType depositType =
+          _getDepositType(accountInformationState.response.data?.bankAccount);
+      return Pair(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DepositStep(
+                depositType: depositType,
+              ),
+              _spaceHeightSmall,
+              _depositGuideButton(context),
+              _spaceHeight,
+              DepositBankAccount(
+                bankAccount: accountInformationState.response.data?.bankAccount,
+                spaceHeightSmall: _spaceHeightSmall,
+                spaceHeight: _spaceHeight,
+              ),
+              DepositWelcomeNotes(
+                depositType: depositType,
+              ),
+            ],
+          ),
+          _bottomButton(
+            context,
+            depositType,
+          ));
+    } else {
+      return const Pair(
+        SizedBox.shrink(),
+        SizedBox.shrink(),
+      );
+    }
   }
 
   Widget _bottomButton(BuildContext context, DepositType depositType) {

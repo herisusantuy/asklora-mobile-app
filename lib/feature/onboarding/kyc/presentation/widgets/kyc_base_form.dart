@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/presentation/custom_header.dart';
+import '../../../../../core/presentation/custom_linear_progress_indicator/custom_linear_progress_indicator_with_section.dart';
 import '../../../../../core/presentation/custom_stretched_layout.dart';
-import '../../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 
 class KycBaseForm extends StatelessWidget {
@@ -33,10 +33,13 @@ class KycBaseForm extends StatelessWidget {
 
   Widget get _header => Column(
         children: [
-          CustomLinearProgressIndicator(
-            progress: progress,
+          Padding(
             padding:
                 const EdgeInsets.only(left: 10, top: 10, bottom: 5, right: 2),
+            child: CustomLinearProgressIndicatorWithSection(
+              progress: progress,
+              sectionCount: 4,
+            ),
           ),
           CustomHeader(
             title: title,
