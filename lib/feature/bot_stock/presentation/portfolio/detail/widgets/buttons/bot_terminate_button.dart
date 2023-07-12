@@ -30,8 +30,9 @@ class BotTerminateButton extends StatelessWidget {
                       botActiveOrderDetailModel.stockInfoWithPlaceholder.symbol,
                       state.endBotStockResponse.data?.optimalTimeFormatted ??
                           '-'),
-                  labelBottomButton: S.of(context).buttonBackToHome,
-                  onButtonTap: (_) => TabScreen.openAndRemoveAllRoute(context)),
+                  labelBottomButton: S.of(context).buttonBackToPortfolio,
+                  onButtonTap: (_) => TabScreen.openAndRemoveAllRoute(context,
+                      initialTabPage: TabPage.portfolio)),
               backCallBack: () => context
                   .read<BackButtonInterceptorBloc>()
                   .add(InitiateInterceptor()),

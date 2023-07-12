@@ -72,6 +72,7 @@ class BotTradeSummaryScreen extends StatelessWidget {
               .show(state.createBotOrderResponse.state);
 
           if (state.createBotOrderResponse.state == ResponseState.success) {
+            botTradeSummaryModel.onCreateOrderSuccessCallback();
             if (!UserJourney.compareUserJourney(
                 context: context, target: UserJourney.deposit)) {
               context.read<AppBloc>().add(
