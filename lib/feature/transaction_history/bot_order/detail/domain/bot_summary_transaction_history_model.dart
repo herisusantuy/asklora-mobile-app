@@ -21,9 +21,9 @@ class BotSummaryTransactionHistoryModel extends Equatable {
   String get totalPnLString {
     final double finalPnlAmountDouble = checkDouble(totalPnL);
     return (finalPnlAmountDouble > 0)
-        ? '+$finalPnlAmountDouble'
+        ? '+\$$finalPnlAmountDouble'
         : (finalPnlAmountDouble < 0)
-            ? '$finalPnlAmountDouble'
+            ? '\$$finalPnlAmountDouble'
             : 'NA';
   }
 
