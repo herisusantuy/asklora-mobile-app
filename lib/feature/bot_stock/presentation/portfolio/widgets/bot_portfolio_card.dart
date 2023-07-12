@@ -24,7 +24,7 @@ class BotPortfolioCard extends StatelessWidget {
               path: SubTabPage.portfolioBotStockDetails.value,
               arguments: {
                 'botType': botType.internalName,
-                'symbol': botActiveOrderModel.symbol
+                'symbol': botActiveOrderModel.ticker
               }
             ))));
         BotPortfolioDetailScreen.open(

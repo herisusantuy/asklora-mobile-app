@@ -89,7 +89,8 @@ class _AmountTextFieldState extends State<AmountTextField> {
               CurrencyTextInputFormatter(
                   symbol: '',
                   decimalDigits: widget.decimalDigits,
-                  enableNegative: false),
+                  enableNegative: false,
+                  allowDecimal: false),
             ],
             keyboardType: TextInputType.number,
             style: TextFieldStyle.valueTextStyle,

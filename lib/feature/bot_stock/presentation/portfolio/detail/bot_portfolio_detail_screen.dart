@@ -18,6 +18,7 @@ import '../../../../../core/presentation/suspended_account_screen.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
+import '../../../../../core/utils/back_button_interceptor/back_button_interceptor_bloc.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../tabs/bloc/tab_screen_bloc.dart';
@@ -55,54 +56,71 @@ class BotPortfolioDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CustomScaffold(
-        body: BlocProvider(
-          create: (_) => PortfolioBloc(
-              botStockRepository: BotStockRepository(),
-              transactionHistoryRepository: TransactionRepository())
-            ..add(FetchActiveOrderDetail(botOrderId: arguments.botUid)),
-          child: BlocConsumer<PortfolioBloc, PortfolioState>(
-            listenWhen: (previous, current) =>
-                previous.botActiveOrderDetailResponse.state !=
-                current.botActiveOrderDetailResponse.state,
-            listener: (context, state) => CustomLoadingOverlay.of(context)
-                .show(state.botActiveOrderDetailResponse.state),
-            buildWhen: (previous, current) =>
-                previous.botActiveOrderDetailResponse.state !=
-                current.botActiveOrderDetailResponse.state,
-            builder: (context, state) {
-              final BotActiveOrderDetailModel? botActiveOrderDetailModel =
-                  state.botActiveOrderDetailResponse.data;
-              return RefreshIndicator(
-                onRefresh: () async => _fetchActiveOrderDetail(context),
-                child: CustomLayoutWithBlurPopUp(
-                  loraPopUpMessageModel: LoraPopUpMessageModel(
-                    title: S.of(context).errorGettingInformationTitle,
-                    subTitle:
-                        S.of(context).errorGettingInformationPortfolioSubTitle,
-                    primaryButtonLabel: S.of(context).buttonReloadPage,
-                    secondaryButtonLabel: S.of(context).buttonCancel,
-                    onSecondaryButtonTap: () => Navigator.pop(context),
-                    onPrimaryButtonTap: () => _fetchActiveOrderDetail(context),
-                  ),
-                  showPopUp: state.botActiveOrderDetailResponse.state ==
-                      ResponseState.error,
-                  content: BotStockForm(
-                    useHeader: true,
-                    customHeader: BotPortfolioDetailHeader(
-                      title: arguments.botName,
-                      botStatus: botActiveOrderDetailModel?.botStatus,
-                    ),
-                    padding: EdgeInsets.zero,
-                    content: BotPortfolioDetailContent(
-                      botActiveOrderDetailModel: botActiveOrderDetailModel,
-                    ),
-                    bottomButton: BotPortfolioButtons(
-                      portfolioState: state,
-                    ),
-                  ),
-                ),
-              );
+        enableBackNavigation: false,
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+                create: (_) => PortfolioBloc(
+                    botStockRepository: BotStockRepository(),
+                    transactionHistoryRepository: TransactionRepository())
+                  ..add(FetchActiveOrderDetail(botOrderId: arguments.botUid))),
+            BlocProvider(
+                create: (_) =>
+                    BackButtonInterceptorBloc()..add(InitiateInterceptor()))
+          ],
+          child: BlocListener<BackButtonInterceptorBloc,
+              BackButtonInterceptorState>(
+            listener: (context, state) {
+              if (state is OnPressedBack) {
+                Navigator.pop(context);
+              }
             },
+            child: BlocConsumer<PortfolioBloc, PortfolioState>(
+              listenWhen: (previous, current) =>
+                  previous.botActiveOrderDetailResponse.state !=
+                  current.botActiveOrderDetailResponse.state,
+              listener: (context, state) => CustomLoadingOverlay.of(context)
+                  .show(state.botActiveOrderDetailResponse.state),
+              buildWhen: (previous, current) =>
+                  previous.botActiveOrderDetailResponse.state !=
+                  current.botActiveOrderDetailResponse.state,
+              builder: (context, state) {
+                final BotActiveOrderDetailModel? botActiveOrderDetailModel =
+                    state.botActiveOrderDetailResponse.data;
+                return RefreshIndicator(
+                  onRefresh: () async => _fetchActiveOrderDetail(context),
+                  child: CustomLayoutWithBlurPopUp(
+                    loraPopUpMessageModel: LoraPopUpMessageModel(
+                      title: S.of(context).errorGettingInformationTitle,
+                      subTitle: S
+                          .of(context)
+                          .errorGettingInformationPortfolioSubTitle,
+                      primaryButtonLabel: S.of(context).buttonReloadPage,
+                      secondaryButtonLabel: S.of(context).buttonCancel,
+                      onSecondaryButtonTap: () => Navigator.pop(context),
+                      onPrimaryButtonTap: () =>
+                          _fetchActiveOrderDetail(context),
+                    ),
+                    showPopUp: state.botActiveOrderDetailResponse.state ==
+                        ResponseState.error,
+                    content: BotStockForm(
+                      useHeader: true,
+                      customHeader: BotPortfolioDetailHeader(
+                        title: arguments.botName,
+                        botStatus: botActiveOrderDetailModel?.botStatus,
+                      ),
+                      padding: EdgeInsets.zero,
+                      content: BotPortfolioDetailContent(
+                        botActiveOrderDetailModel: botActiveOrderDetailModel,
+                      ),
+                      bottomButton: BotPortfolioButtons(
+                        portfolioState: state,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       );

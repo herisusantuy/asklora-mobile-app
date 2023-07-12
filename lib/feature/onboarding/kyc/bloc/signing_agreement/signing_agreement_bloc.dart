@@ -23,10 +23,31 @@ class SigningAgreementBloc
     on<SignatureChecked>(_onSignatureChecked);
     on<LegalNameSignatureChanged>(_onLegalNameSignatureChanged);
     on<W8BenFormOpened>(_onW8BenFormOpened);
+    on<InitiateSignAgreement>(_onInitiateSignAgreement);
   }
 
   final SigningBrokerAgreementRepository _signingBrokerAgreementRepository;
   final PersonalInfoBloc _personalInfoBloc;
+
+  _onInitiateSignAgreement(
+      InitiateSignAgreement event, Emitter<SigningAgreementState> emit) {
+    String fullName =
+        '${_personalInfoBloc.state.firstName} ${_personalInfoBloc.state.lastName}';
+    bool isNameValid = event.legalNameSignature == fullName;
+
+    emit(state.copyWith(
+      isAskLoraClientAgreementOpened:
+          event.isBoundByAskloraAgreementChecked != null,
+      isBoundByAskloraAgreementChecked: event.isBoundByAskloraAgreementChecked,
+      isUnderstandOnTheAgreementChecked:
+          event.isUnderstandOnTheAgreementChecked,
+      isRiskDisclosureAgreementChecked: event.isRiskDisclosureAgreementChecked,
+      isSignatureChecked: event.isSignatureChecked,
+      legalName: event.legalNameSignature,
+      legalNameErrorText: !isNameValid ? 'Your input does not match' : '',
+      isInputNameValid: isNameValid ? true : false,
+    ));
+  }
 
   _onAskLoraClientAgreementOpened(AskLoraClientAgreementOpened event,
       Emitter<SigningAgreementState> emit) async {

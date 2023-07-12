@@ -117,6 +117,16 @@ class DepositScreen extends StatelessWidget {
           ),
           const UploadProofOfRemittanceStep(),
         ];
+      case DepositType.changeBankAccount:
+        return [
+          TransferDetailStep(
+            depositType: depositType,
+          ),
+          TransferAmountStep(
+            depositType: depositType,
+          ),
+          const UploadProofOfRemittanceStep(),
+        ];
       case DepositType.type1:
         return [
           TransferDetailStep(
@@ -148,7 +158,7 @@ class DepositScreen extends StatelessWidget {
                 current.disableDeposit(depositType),
             builder: (context, state) => PrimaryButton(
                   disabled: state.disableDeposit(depositType),
-                  label: S.of(context).buttonContinue,
+                  label: S.of(context).buttonSubmit,
                   onTap: () => context.read<DepositBloc>().add(
                         SubmitDeposit(),
                       ),

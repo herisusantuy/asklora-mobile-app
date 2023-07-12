@@ -8,6 +8,7 @@ import '../../../core/presentation/text_fields/auto_resized_text_field.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/styles/asklora_colors.dart';
 import '../../../core/styles/asklora_text_styles.dart';
+import '../../../core/utils/back_button_interceptor/back_button_interceptor_bloc.dart';
 import '../../../core/utils/extensions.dart';
 import '../../../core/utils/formatters/currency_formatter.dart';
 import '../../../generated/l10n.dart';
@@ -135,34 +136,40 @@ class BotStockBottomSheet {
             builder: (bottomSheetContext, state) {
               return LoraBottomSheetContent(
                 disablePrimaryButton: state.disableBuyingBotstock(buyingPower),
-                title: S.of(bottomSheetContext).botTradeBottomSheetAmountTitle,
-                primaryButtonLabel: S.of(bottomSheetContext).buttonNext,
-                secondaryButtonLabel: S.of(bottomSheetContext).buttonCancel,
+                title: S.of(context).botTradeBottomSheetAmountTitle,
+                primaryButtonLabel: S.of(context).buttonNext,
+                secondaryButtonLabel: S.of(context).buttonCancel,
                 onPrimaryButtonTap: () {
+                  context
+                      .read<BackButtonInterceptorBloc>()
+                      .add(RemoveInterceptor());
                   Navigator.pop(context);
-                  BotTradeSummaryScreen.open(
-                    context: context,
-                    botTradeSummaryModel: BotTradeSummaryModel(
-                      botType: botType,
-                      botRecommendationModel: botRecommendationModel,
-                      botDetailModel: botDetailModel,
-                      amount: state.botStockTradeAmount,
-                      onCreateOrderSuccessCallback: () {
-                        context.read<PortfolioBloc>().add(FetchBalance());
-                        context
-                            .read<PortfolioBloc>()
-                            .add(const FetchActiveOrders());
-                        context
-                            .read<TabScreenBloc>()
-                            .add(const TabChanged(TabPage.portfolio));
-                        context
-                            .read<ForYouBloc>()
-                            .add(GetInvestmentStyleState());
-                      },
-                    ),
-                  );
+
+                  BotTradeSummaryScreen.openWithBackCallBack(
+                      context: context,
+                      botTradeSummaryModel: BotTradeSummaryModel(
+                        botType: botType,
+                        botRecommendationModel: botRecommendationModel,
+                        botDetailModel: botDetailModel,
+                        amount: state.botStockTradeAmount,
+                        onCreateOrderSuccessCallback: () {
+                          context.read<PortfolioBloc>().add(FetchBalance());
+                          context
+                              .read<PortfolioBloc>()
+                              .add(const FetchActiveOrders());
+                          context
+                              .read<TabScreenBloc>()
+                              .add(const TabChanged(TabPage.portfolio));
+                          context
+                              .read<ForYouBloc>()
+                              .add(GetInvestmentStyleState());
+                        },
+                      ),
+                      backCallBack: () => context
+                          .read<BackButtonInterceptorBloc>()
+                          .add(InitiateInterceptor()));
                 },
-                onSecondaryButtonTap: () => Navigator.pop(bottomSheetContext),
+                onSecondaryButtonTap: () => Navigator.pop(context),
                 buttonPaddingTop: 5,
                 child: Column(
                   children: [
@@ -183,9 +190,11 @@ class BotStockBottomSheet {
                             minWidth: 100,
                             textInputFormatterList: [
                               CurrencyTextInputFormatter(
-                                  symbol: '', decimalDigits: 1)
+                                  symbol: '', decimalDigits: 0)
                             ],
-                            textInputType: TextInputType.number,
+                            textInputType:
+                                const TextInputType.numberWithOptions(
+                                    decimal: true),
                             hintTextStyle: AskLoraTextStyles.h2
                                 .copyWith(color: AskLoraColors.gray),
                             textStyle: AskLoraTextStyles.h2
@@ -205,7 +214,7 @@ class BotStockBottomSheet {
                       height: 11,
                     ),
                     CustomTextNew(
-                      S.of(bottomSheetContext).botTradeBottomSheetAmountMinimum(
+                      S.of(context).botTradeBottomSheetAmountMinimum(
                           'HKD${buyingPower.convertToCurrencyDecimal()}',
                           'HKD1,500'),
                       style: AskLoraTextStyles.body4,

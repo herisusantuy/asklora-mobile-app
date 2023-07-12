@@ -74,7 +74,7 @@ class LoraAiOverlayScreen extends StatelessWidget {
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white, width: 1.5)),
                       child: getSvgIcon('icon_sent_text',
-                          color: AskLoraColors.white)),
+                          color: AskLoraColors.white, fit: BoxFit.none)),
                 ),
                 const SizedBox(height: 40),
               ],

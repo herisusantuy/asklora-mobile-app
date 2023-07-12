@@ -43,11 +43,22 @@ class BotRecommendationDetailModel extends Equatable {
   @JsonKey(name: 'market_cap')
   final String marketCap;
 
-  double get estStopLossPriceFormatted =>
-      double.parse(checkDouble(estStopLossPrice).convertToCurrencyDecimal());
+  String get estEndDateFormatted =>
+      formatDateTimeAsString(estEndDate, dateFormat: 'dd/MM/yyyy');
 
-  double get estTakeProfitPriceFormatted =>
-      double.parse(checkDouble(estTakeProfitPrice).convertToCurrencyDecimal());
+  String get estStopLossPriceFormatted =>
+      checkDouble(estStopLossPrice).convertToCurrencyDecimal();
+
+  String get priceFormatted => checkDouble(price).convertToCurrencyDecimal();
+
+  String get estTakeProfitPriceFormatted =>
+      checkDouble(estTakeProfitPrice).convertToCurrencyDecimal();
+
+  String get estStopLossPctFormatted =>
+      '${estStopLossPct.convertToCurrencyDecimal()}%';
+
+  String get estTakeProfitPctFormatted =>
+      '${estTakeProfitPct.convertToCurrencyDecimal()}%';
 
   const BotRecommendationDetailModel(
     this.botInfo,

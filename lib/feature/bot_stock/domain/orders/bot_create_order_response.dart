@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../core/utils/date_utils.dart';
 import '../../utils/bot_stock_utils.dart';
 
 part 'bot_create_order_response.g.dart';
@@ -20,6 +21,8 @@ class BotCreateOrderResponse {
   final bool isDummy;
   @JsonKey(name: 'spot_date')
   final String spotDate;
+  @JsonKey(name: 'optimal_time')
+  final String optimalTime;
 
   const BotCreateOrderResponse(
     this.uid,
@@ -31,10 +34,14 @@ class BotCreateOrderResponse {
     this.isDummy,
     this.spotDate,
     this.symbol,
+    this.optimalTime,
   );
 
   String get botName =>
       '${BotType.findByString(botAppsName).upperCaseName} $symbol';
+
+  String get optimalTimeFormatted =>
+      '${convertDateToEst(optimalTime, dateFormat: 'dd/MM/yyyy HH:mm')} EST';
 
   factory BotCreateOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$BotCreateOrderResponseFromJson(json);

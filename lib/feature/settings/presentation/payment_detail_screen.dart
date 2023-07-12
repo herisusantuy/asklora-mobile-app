@@ -11,6 +11,7 @@ import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/styles/asklora_text_styles.dart';
 import '../../../generated/l10n.dart';
 import '../../balance/widgets/bank_account_card.dart';
+import '../../balance/widgets/change_bank_account_button.dart';
 import '../../onboarding/kyc/repository/account_repository.dart';
 import '../bloc/account_information/account_information_bloc.dart';
 import '../domain/bank_account.dart';
@@ -77,18 +78,8 @@ class PaymentDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _changeBankButton(BuildContext context) => GestureDetector(
-        onTap: () => CustomInAppNotification.show(
-            context, 'This feature will be available soon! Please wait 😁'),
-        child: UnconstrainedBox(
-          child: Container(
-            decoration: const BoxDecoration(
-                border: Border(bottom: BorderSide(width: .5))),
-            child: CustomTextNew(S.of(context).changeBankAccount,
-                style: AskLoraTextStyles.h6),
-          ),
-        ),
-      );
+  Widget _changeBankButton(BuildContext context) =>
+      const ChangeBankAccountButton();
 
   static void open(BuildContext context) => Navigator.pushNamed(context, route);
 }

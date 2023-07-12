@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../core/presentation/buttons/primary_button.dart';
 import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/custom_status_widget.dart';
@@ -43,15 +44,22 @@ class BotStockResultScreen extends StatelessWidget {
   static void open({
     required BuildContext context,
     required BotStockResultArgument arguments,
-  }) {
-    Navigator.of(context, rootNavigator: true)
-        .pushNamed(route, arguments: arguments);
-  }
+  }) =>
+      Navigator.pushNamed(context, route, arguments: arguments);
 
   static void openReplace(
           {required BuildContext context,
           required BotStockResultArgument arguments}) =>
       Navigator.pushReplacementNamed(context, route, arguments: arguments);
+
+  static void openWithBackCallBack({
+    required BuildContext context,
+    required BotStockResultArgument arguments,
+    required VoidCallback backCallBack,
+  }) =>
+      Navigator.of(context, rootNavigator: true)
+          .pushNamed(route, arguments: arguments)
+          .then((value) => backCallBack());
 }
 
 class BotStockResultArgument {

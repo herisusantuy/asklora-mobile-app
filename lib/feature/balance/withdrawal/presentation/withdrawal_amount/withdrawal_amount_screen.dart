@@ -8,7 +8,6 @@ import '../../../../../core/presentation/custom_text_new.dart';
 import '../../../../../core/repository/transaction_repository.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../../core/utils/extensions.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../settings/domain/bank_account.dart';
@@ -41,7 +40,7 @@ class WithdrawalAmountScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 22.0),
                 child: CustomTextNew(
-                  'Withdraw',
+                  S.of(context).buttonWithdraw,
                   style: AskLoraTextStyles.h5
                       .copyWith(color: AskLoraColors.charcoal),
                 ),
@@ -68,10 +67,10 @@ class WithdrawalAmountScreen extends StatelessWidget {
                     disabled: state.disableWithdrawal(args.withdrawableBalance),
                     label: S.of(context).buttonNext,
                     onTap: () => WithdrawalSummaryScreen.open(context, args: (
-                          withdrawalAmount: context
-                              .read<WithdrawalBloc>()
-                              .state
-                              .withdrawalAmount,
+                          withdrawalAmount: double.parse(
+                              state.withdrawalAmount.isEmpty
+                                  ? '0'
+                                  : state.withdrawalAmount.replaceAll(',', '')),
                           bankAccount: args.bankAccount
                         ))),
               ),

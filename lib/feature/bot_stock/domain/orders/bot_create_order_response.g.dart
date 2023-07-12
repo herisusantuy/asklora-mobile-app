@@ -18,6 +18,7 @@ BotCreateOrderResponse _$BotCreateOrderResponseFromJson(
       json['is_dummy'] as bool,
       json['spot_date'] as String,
       json['symbol'] as String,
+      json['optimal_time'] as String,
     );
 
 Map<String, dynamic> _$BotCreateOrderResponseToJson(
@@ -32,4 +33,5 @@ Map<String, dynamic> _$BotCreateOrderResponseToJson(
       'ticker_name': instance.tickerName,
       'is_dummy': instance.isDummy,
       'spot_date': instance.spotDate,
+      'optimal_time': instance.optimalTime,
     };

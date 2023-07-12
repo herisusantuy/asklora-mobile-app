@@ -23,6 +23,7 @@ import '../../domain/transaction_history_model.dart';
 import '../../presentation/widgets/transaction_history_group_title.dart';
 import '../../presentation/widgets/transaction_history_tab.dart';
 import '../../../../core/repository/transaction_repository.dart';
+import '../../utils/transaction_history_util.dart';
 import 'domain/bot_activities_transaction_history_model.dart';
 import 'domain/bot_detail_transaction_history_response.dart';
 import 'domain/bot_summary_transaction_history_model.dart';

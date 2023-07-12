@@ -20,7 +20,8 @@ class BotTerminateButton extends StatelessWidget {
           CustomLoadingOverlay.of(context)
               .show(state.endBotStockResponse.state);
           if (state.endBotStockResponse.state == ResponseState.success) {
-            BotStockResultScreen.open(
+            context.read<BackButtonInterceptorBloc>().add(RemoveInterceptor());
+            BotStockResultScreen.openWithBackCallBack(
               context: context,
               arguments: BotStockResultArgument(
                   title: S.of(context).tradeRequestReceived,
@@ -31,6 +32,9 @@ class BotTerminateButton extends StatelessWidget {
                           '-'),
                   labelBottomButton: S.of(context).buttonBackToHome,
                   onButtonTap: (_) => TabScreen.openAndRemoveAllRoute(context)),
+              backCallBack: () => context
+                  .read<BackButtonInterceptorBloc>()
+                  .add(InitiateInterceptor()),
             );
           } else if (state.endBotStockResponse.state ==
               ResponseState.suspended) {

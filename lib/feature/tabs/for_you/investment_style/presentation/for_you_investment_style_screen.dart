@@ -14,7 +14,7 @@ import '../../../../../core/presentation/lora_popup_message/model/lora_pop_up_me
 import '../../../../../core/presentation/lora_rounded_corner_banner.dart';
 import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/custom_dropdown.dart';
-import '../../../../../core/presentation/we_create/custom_linear_progress_indicator.dart';
+import '../../../../../core/presentation/custom_linear_progress_indicator/custom_linear_progress_indicator.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../core/values/app_values.dart';
 import '../../../../../generated/l10n.dart';
