@@ -33,7 +33,7 @@ class DepositNotes extends StatelessWidget {
 
   List<Widget> _firstTimeNotes(context) => [
         _depositNote(
-            label: '1.', text: S.of(context).pleaseMakeSureYouHaveFinished),
+            label: '1.', text: S.of(context).pleaseMakeSureYouPressSubmit),
         _depositNote(label: '2.', text: S.of(context).yourDepositMayBeRejected),
         _depositNote(label: '3.', text: S.of(context).weAcceptHKDOnly),
       ];
