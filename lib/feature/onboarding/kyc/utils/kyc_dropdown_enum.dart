@@ -60,13 +60,14 @@ enum FundingSource {
 }
 
 enum EmploymentStatus {
-  unemployed('Unemployed', 'UNEMPLOYED'),
   employed('Employed', 'EMPLOYED'),
   selfEmployed('Self Employed', 'SELFEMPLOYED'),
   retired('Retired', 'RETIRED'),
   student('Student', 'STUDENT'),
-  atHomeTrader('At-Home Trader', 'ATHOMETRADER'),
+  businessOwner('Business Owner', 'BUSINESSOWNER'),
   homemaker('Homemaker', 'HOMEMAKER'),
+  unemployed('Unemployed', 'UNEMPLOYED'),
+  other('Other', 'OTHER'),
   unknown('Unknown', 'UNKNOWN');
 
   final String name;
