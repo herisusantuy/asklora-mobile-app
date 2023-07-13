@@ -3535,26 +3535,6 @@ class S {
     );
   }
 
-  /// `Risk Disclosure Statement`
-  String get riskDisclosureStatementTitle {
-    return Intl.message(
-      'Risk Disclosure Statement',
-      name: 'riskDisclosureStatementTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `I have read, understood, and agree with the Risk Disclosure Statement.`
-  String get riskDisclosureStatementCheckBox {
-    return Intl.message(
-      'I have read, understood, and agree with the Risk Disclosure Statement.',
-      name: 'riskDisclosureStatementCheckBox',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Personal Info`
   String get personalInfo {
     return Intl.message(
