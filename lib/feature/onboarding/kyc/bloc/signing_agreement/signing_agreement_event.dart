@@ -50,6 +50,7 @@ class RiskDisclosureAgreementChecked extends SigningBrokerAgreementEvent {
 
 class LegalNameSignatureChanged extends SigningBrokerAgreementEvent {
   final String legalName;
+
   const LegalNameSignatureChanged(this.legalName) : super();
 
   @override
@@ -63,4 +64,28 @@ class SignatureChecked extends SigningBrokerAgreementEvent {
 
   @override
   List<Object> get props => [isChecked];
+}
+
+class InitiateSignAgreement extends SigningBrokerAgreementEvent {
+  final bool? isBoundByAskloraAgreementChecked;
+  final bool? isUnderstandOnTheAgreementChecked;
+  final bool? isRiskDisclosureAgreementChecked;
+  final bool? isSignatureChecked;
+  final String? legalNameSignature;
+
+  const InitiateSignAgreement(
+      this.isBoundByAskloraAgreementChecked,
+      this.isUnderstandOnTheAgreementChecked,
+      this.isRiskDisclosureAgreementChecked,
+      this.isSignatureChecked,
+      this.legalNameSignature);
+
+  @override
+  List<Object> get props => [
+        isBoundByAskloraAgreementChecked ?? '',
+        isUnderstandOnTheAgreementChecked ?? '',
+        isRiskDisclosureAgreementChecked ?? '',
+        isSignatureChecked ?? '',
+        legalNameSignature ?? ''
+      ];
 }

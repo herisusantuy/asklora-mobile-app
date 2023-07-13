@@ -16,13 +16,19 @@ class BotCancelButton extends StatelessWidget {
           CustomLoadingOverlay.of(context)
               .show(state.cancelBotStockResponse.state);
           if (state.cancelBotStockResponse.state == ResponseState.success) {
-            BotStockResultScreen.open(
+            context.read<BackButtonInterceptorBloc>().add(RemoveInterceptor());
+            BotStockResultScreen.openWithBackCallBack(
                 context: context,
                 arguments: BotStockResultArgument(
                   title: S.of(context).tradeCancelledTitle,
                   desc: S.of(context).tradeCancelledSubtitle,
-                  labelBottomButton: S.of(context).buttonBackToHome,
-                ));
+                  labelBottomButton: S.of(context).buttonBackToPortfolio,
+                  onButtonTap: (_) => TabScreen.openAndRemoveAllRoute(context,
+                      initialTabPage: TabPage.portfolio),
+                ),
+                backCallBack: () => context
+                    .read<BackButtonInterceptorBloc>()
+                    .add(InitiateInterceptor()));
           } else if (state.cancelBotStockResponse.state ==
               ResponseState.suspended) {
             SuspendedAccountScreen.open(context);

@@ -121,10 +121,17 @@ class KycScreen extends StatelessWidget {
                         saveKycRequest?.upgradeAccountRequest.wealthSources)),
                 ),
                 BlocProvider(
+                  lazy: saveKycRequest != null ? false : true,
                   create: (context) => SigningAgreementBloc(
                       signingBrokerAgreementRepository:
                           SigningBrokerAgreementRepository(),
-                      personalInfoBloc: context.read<PersonalInfoBloc>()),
+                      personalInfoBloc: context.read<PersonalInfoBloc>())
+                    ..add(InitiateSignAgreement(
+                        saveKycRequest?.isBoundByAskloraAgreementChecked,
+                        saveKycRequest?.isUnderstandOnTheAgreementChecked,
+                        saveKycRequest?.isRiskDisclosureAgreementChecked,
+                        saveKycRequest?.isSignatureChecked,
+                        saveKycRequest?.legalNameSignature)),
                 ),
               ],
               child: BlocListener<KycBloc, KycState>(
@@ -195,43 +202,44 @@ class KycScreen extends StatelessWidget {
               );
             case KycPageStep.addressProof:
               return const AddressProofScreen(
-                progress: 0.25,
+                progress: 0.20,
               );
             case KycPageStep.personalInfoSummary:
               return PersonalInfoSummaryScreen(
                 personalInfoState: context.read<PersonalInfoBloc>().state,
-                progress: 0.3,
+                progress: 0.25,
                 addressProofState: context.read<AddressProofBloc>().state,
               );
+
             case KycPageStep.disclosureAffiliationPerson:
               return const DisclosureAffiliationPersonScreen(
+                progress: 0.3,
+              );
+            case KycPageStep.disclosureAffiliationCommissions:
+              return const DisclosureAffiliationCommissionScreen(
+                progress: 0.45,
+              );
+            case KycPageStep.financialProfileEmployment:
+              return const FinancialProfileEmploymentQuestion(
                 progress: 0.35,
               );
-            case KycPageStep.disclosureAffiliationPersonInput:
-              return DisclosureAffiliationPersonInputScreen(
+            case KycPageStep.financialProfileSourceOfWealth:
+              return FinancialProfileSourceOfWealthScreen(
                 progress: 0.4,
-                disclosureAffiliationState:
-                    context.read<DisclosureAffiliationBloc>().state,
               );
             case KycPageStep.disclosureAffiliationAssociates:
               return const DisclosureAffiliationAssociatesScreen(
                 progress: 0.45,
               );
-            case KycPageStep.disclosureAffiliationCommissions:
-              return const DisclosureAffiliationCommissionScreen(
-                progress: 0.6,
-              );
-            case KycPageStep.financialProfileEmployment:
-              return const FinancialProfileEmploymentQuestion(
-                progress: 0.62,
-              );
-            case KycPageStep.financialProfileSourceOfWealth:
-              return FinancialProfileSourceOfWealthScreen(
-                progress: 0.65,
+            case KycPageStep.disclosureAffiliationPersonInput:
+              return DisclosureAffiliationPersonInputScreen(
+                progress: 0.45,
+                disclosureAffiliationState:
+                    context.read<DisclosureAffiliationBloc>().state,
               );
             case KycPageStep.financialProfileSummary:
               return FinancialProfileSummaryScreen(
-                progress: 0.68,
+                progress: 0.5,
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,
                 financialProfileState:
@@ -245,24 +253,24 @@ class KycScreen extends StatelessWidget {
               );
             case KycPageStep.verifyIdentity:
               return const VerifyIdentityScreen(
-                progress: 0.7,
+                progress: 0.75,
               );
             case KycPageStep.signBrokerAgreements:
               return const BrokerAgreementScreen(
-                progress: 0.75,
+                progress: 0.8,
               );
             case KycPageStep.signRiskDisclosureAgreements:
               return const RiskDisclosureAgreementScreen(
-                progress: 0.8,
+                progress: 0.88,
               );
             case KycPageStep.signTaxAgreements:
               return TaxAgreementScreen(
-                  progress: 0.85,
+                  progress: 0.96,
                   personalInfoBloc: context.read<PersonalInfoBloc>());
             case KycPageStep.kycSummary:
               return KycSummaryScreen(
                 personalInfoState: context.read<PersonalInfoBloc>().state,
-                progress: 0.9,
+                progress: 1,
                 addressProofState: context.read<AddressProofBloc>().state,
                 disclosureAffiliationState:
                     context.read<DisclosureAffiliationBloc>().state,

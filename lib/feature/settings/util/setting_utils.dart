@@ -13,7 +13,7 @@ enum PasswordErrorType {
       case oldPasswordSameWithNewPassword:
         return S.of(context).oldPasswordSameWithNewPasswordError;
       case invalidPassword:
-        return S.of(context).invalidPassword;
+        return S.of(context).enterValidPassword;
       case doesNotMatch:
         return S.of(context).passwordDoesNotMatch;
       case validPassword:

@@ -52,12 +52,12 @@ class BotActivitiesTransactionHistoryModel {
 
   String get investedUsdString {
     final double investmentAmountDouble = checkDouble(investedUsd);
-    return 'USD ${investmentAmountDouble.convertToCurrencyDecimal()}';
+    return 'USD ${investmentAmountDouble.abs().convertToCurrencyDecimal()}';
   }
 
   String get investedHkdString {
     final double investmentAmountDouble = checkDouble(invested);
-    return '${investmentAmountDouble.convertToCurrencyDecimal()}*';
+    return '${investmentAmountDouble.abs().convertToCurrencyDecimal()}*';
   }
 
   String get createdFormattedString {

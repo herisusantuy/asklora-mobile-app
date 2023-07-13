@@ -7,9 +7,9 @@ import '../../../../../../generated/l10n.dart';
 import '../../../../utils/bot_stock_utils.dart';
 
 class BotPriceLevelIndicator extends StatelessWidget {
-  final double stopLossPrice;
-  final double takeProfitPrice;
-  final double currentPrice;
+  final String stopLossPrice;
+  final String takeProfitPrice;
+  final String currentPrice;
   final BotType botType;
 
   const BotPriceLevelIndicator(
@@ -31,7 +31,7 @@ class BotPriceLevelIndicator extends StatelessWidget {
             title: botType == BotType.plank
                 ? S.of(context).estStopLossLevel
                 : S.of(context).estMaxLossLevel,
-            value: stopLossPrice.toString()),
+            value: stopLossPrice),
         const SizedBox(
           width: 8,
         ),
@@ -39,7 +39,7 @@ class BotPriceLevelIndicator extends StatelessWidget {
             titleBackgroundColor: AskLoraColors.whiteSmoke,
             textColor: AskLoraColors.charcoal,
             title: S.of(context).currentPrice,
-            value: currentPrice.toString()),
+            value: currentPrice),
         const SizedBox(
           width: 8,
         ),
@@ -49,7 +49,7 @@ class BotPriceLevelIndicator extends StatelessWidget {
             title: botType == BotType.plank
                 ? S.of(context).estTakeProfitLevel
                 : S.of(context).estMaxProfitLevel,
-            value: takeProfitPrice.toString()),
+            value: takeProfitPrice),
       ],
     );
   }

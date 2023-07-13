@@ -92,9 +92,10 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
 
   _onInitBotDetailsTutorial(
       InitBotDetailsTutorial event, Emitter<BotStockState> emit) async {
-    final bool isBotDetailsTutorial =
-        await _tutorialRepository.isBotDetailsTutorial();
-    emit(state.copyWith(isBotDetailsTutorial: isBotDetailsTutorial));
+    ///todo : enable later
+    // final bool isBotDetailsTutorial =
+    //     await _tutorialRepository.isBotDetailsTutorial();
+    emit(state.copyWith(isBotDetailsTutorial: true));
     print(
         'bot detail tutorial started : value of tutorial state ==> ${state.isBotDetailsTutorial}');
   }

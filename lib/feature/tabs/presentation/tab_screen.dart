@@ -40,6 +40,7 @@ import '../../tabs/home/home_screen_form.dart';
 import 'widgets/ai_overlay.dart';
 
 part 'widgets/tab_pages.dart';
+
 part 'widgets/tabs.dart';
 
 class TabScreen extends StatelessWidget {
@@ -112,50 +113,57 @@ class TabScreen extends StatelessWidget {
               content: state.response.data != null
                   ? BlocProvider(
                       create: (_) => TabScreenBloc(
-                        initialTabPage: state.response.data!.canTrade
-                            ? TabPage.forYou
-                            : TabPage.home,
-                      ),
+                          initialTabPage: initialTabPage ??
+                              (state.response.data!.canTrade
+                                  ? TabPage.forYou
+                                  : TabPage.home)),
                       child: ShowCaseWidget(
-                        disableBarrierInteraction: true,
-                        disableMovingAnimation: true,
-                        showCaseViewScrollPosition:
-                            ShowCaseViewScrollPosition.scrollToTop,
-                        blurValue: 2.5,
-                        builder: Builder(builder: (context) {
-                          return BlocListener<TabScreenBloc, TabScreenState>(
-                            listenWhen: (previous, current) =>
-                                previous.tabScreenBackState !=
-                                current.tabScreenBackState,
-                            listener: (context, state) {
-                              if (state.tabScreenBackState ==
-                                  TabScreenBackState.openConfirmation) {
-                                CustomInAppNotification.show(
-                                    context, S.of(context).pressBackAgain,
-                                    type: PopupType.grey);
-                              } else if (state.tabScreenBackState ==
-                                  TabScreenBackState.closeApp) {
-                                SystemNavigator.pop();
-                              }
+                          disableBarrierInteraction: true,
+                          disableMovingAnimation: true,
+                          showCaseViewScrollPosition:
+                              ShowCaseViewScrollPosition.scrollToTop,
+                          blurValue: 2.5,
+                          builder: Builder(
+                            builder: (context) {
+                              return BlocListener<TabScreenBloc,
+                                  TabScreenState>(
+                                listenWhen: (previous, current) =>
+                                    previous.tabScreenBackState !=
+                                    current.tabScreenBackState,
+                                listener: (context, state) {
+                                  if (state.tabScreenBackState ==
+                                      TabScreenBackState.openConfirmation) {
+                                    CustomInAppNotification.show(
+                                        context, S.of(context).pressBackAgain,
+                                        type: PopupType.grey);
+                                  } else if (state.tabScreenBackState ==
+                                      TabScreenBackState.closeApp) {
+                                    SystemNavigator.pop();
+                                  }
+                                },
+                                child: Builder(
+                                  builder: (context) => WillPopScope(
+                                    onWillPop: () async {
+                                      context
+                                          .read<TabScreenBloc>()
+                                          .add(BackButtonClicked());
+                                      return false;
+                                    },
+                                    child: Column(
+                                      children: [
+                                        TabPages(
+                                            canTrade:
+                                                state.response.data!.canTrade),
+                                        Tabs(
+                                            canTrade:
+                                                state.response.data!.canTrade)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
                             },
-                            child: WillPopScope(
-                              onWillPop: () async {
-                                context
-                                    .read<TabScreenBloc>()
-                                    .add(BackButtonClicked());
-                                return false;
-                              },
-                              child: Column(
-                                children: [
-                                  TabPages(
-                                      canTrade: state.response.data!.canTrade),
-                                  const Tabs(canTrade: true)
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
+                          )),
                     )
                   : const SizedBox.shrink(),
 

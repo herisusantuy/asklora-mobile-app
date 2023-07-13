@@ -5,7 +5,9 @@
   "buttonNext": "下一步",
   "buttonCreateAnAccount": "建立帳戶",
   "buttonLetsBegin": "立即開始",
+  "buttonForgetPassword": "忘記密碼？",
   "buttonSignOut": "登出",
+  "signIn": "登入",
   "buttonHaveAnAccount": "已有賬戶？",
   "buttonContinue": "繼續",
   "buttonMaybeLater": "稍後再說",
@@ -22,6 +24,14 @@
   "carouselIntro4": "個人化體驗，\n前所未見",
   "currentPrice": "當前價格",
   "deposit": "存入資金",
+  "depositRegulatoryRequirements": "基於監管要求，如要更改銀行戶口，你必須重新入金最少HKD${amount}",
+  "@depositRegulatoryRequirements": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "depositAmount": "存入金額",
   "depositRequestSubmittedTitle": "已收到入金申請",
   "depositRequestSubmittedSubTitleFirstTime": "我們會於 1 至 2 個工作天內檢視你的開戶申請及首次入金。當賬戶批核後會以電郵或應用程式通知。",
@@ -75,6 +85,8 @@
   "activities": "交易記錄",
   "filledPrice": "成交價格",
   "shares": "數量",
+  "orderCancelled": "訂單己取消",
+  "orderPlaced": "已提交訂單",
   "orderStarted": "訂單已開始",
   "orderRollover": "訂單已續期",
   "orderExpired": "訂單已過期",
@@ -332,7 +344,7 @@
   "masterAiTrading": "Master AI Trading",
   "learnBotstockManagement": "學䲾 Botstock 管理",
   "manageYourBotstock": "管理 Botstock",
-  "signUpTitle": "與 Lora --- 你嘅 FinFit 教練，\n展開全新投資之旅",
+  "signUpTitle": " 踏入AI新世代，\n展開AI投資之旅",
   "tradeWithANewBotstock": "以一隻新 Botstock 交易",
   "to": "至",
   "transactionFee": "交易費用",
@@ -434,5 +446,68 @@
   "depositFundToStartInvesting": "存入資金開始投資",
   "onBoardingCompletionMessage": "您已經完成了在Asklora開立賬戶的所有步驟！您的賬戶一\n經審核通過，即可開始交易。審核通常需要1至2個工作日。",
   "nextStep": "下一步",
-  "go": "繼續"
+  "go": "繼續",
+  "depositViaFpsOrWireTransfer": "以 FPS 或電匯入金",
+  "transferAtLeastWithNoMinimumDeposit": "請由你之前使用的銀行戶口轉賬至Asklora 銀行戶口。",
+  "transferAtLeastWithMinimumDeposit": "請轉賬最少 HK${minDeposit} 至 Asklora 銀行戶口。任何少於 HK${minDeposit} 的首次入金均會被拒收，並會被徵收手續費。",
+  "@transferAtLeastWithMinimumDeposit": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "uploadProofOfRemittance": "上載匯款證明",
+  "theProofOfRemittanceShouldShowYourBankAccount": "匯款證明需要顯示你的銀行戶口號碼，全名 及金額。",
+  "inputDepositAmount": "輸入金額",
+  "theAmountMustMatch": "金額須與匯款證明一致。",
+  "yourDepositCanTakeUp2WorkingDays": "入金程序最多需時 2 個工作天",
+  "notes": "說明",
+  "returningUserDepositNotes": "我們會與你所登記銀行協作藉以核實你的銀行資料（賬戶姓名、銀行編號、銀行賬戶號碼）。不過，我們亦可能會因核實交易，向你要求更多附加資料。",
+  "weWillTakeInformationCollectedFromYour": "我們會提取由你銀行透過 API 或匯款通知書收集的資訊， 確定你指定的銀行戶口。我們只會接受透過此指定戶口進行所有將來的入金與提取。你可轉換指定銀行戶口，但你需要完成最少匯款 HK${minDeposit} 以通過相同的認證。",
+  "@weWillTakeInformationCollectedFromYour": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseAddAHkBankAccount": "請確保加入的香港銀行戶口是在你名下。其他人的銀行戶口及聯名戶口將不會接受。",
+  "weWillOnlyAcceptDepositViaBankTransfer": "我們只接受由你戶口透過銀行轉賬 (電匯/FPS) 的入金。",
+  "weWillOnlyAcceptHKD": "我們只接受港幣",
+  "transferInitialFundToAsklora": "轉賬首筆資金予Asklora",
+  "transferFundToAsklora": "轉賬資金予Asklora",
+  "firstTimeCopyAskloraBankDetails": "複製 Asklora 銀行資料，並從你銀行戶口透過 FPS 或 電匯 轉賬不少於 HK${minDeposit}。",
+  "@firstTimeCopyAskloraBankDetails": {
+    "placeholders": {
+      "minDeposit": {
+        "type": "String"
+      }
+    }
+  },
+  "copyAskloraBankDetails": "複製 Asklora 銀行資料，並從你銀行戶口透過 FPS或電匯轉。",
+  "theAmountMustMatchWithPor": "金額須與匯款證明一致。",
+  "thePorShouldShowYourBank": "匯款證明需要顯示你的銀行戶口號碼，全名 及金額。",
+  "pleaseMakeSureYouHaveFinished": "匯款證明需要顯示你的銀行戶口號碼，全名 及金額。",
+  "pleaseMakeSureYouPressSubmit": "請確保於你的銀行轉賬資金後才按「提交」鍵。",
+  "yourDepositMayBeRejected": "若所通知的金額與實際轉賬金額不符，你的入金會被延誤。",
+  "weAcceptHKDOnly": "我們只接受港幣。",
+  "buttonSubmit": "提交",
+  "min8Character": "最少 8 個字母",
+  "atLeast1Lowercase": "最少 1 個小寫英文字母",
+  "atLeast1Uppercase": "最少 1 個大寫英文字母",
+  "atLeast1Number": "最少 1 個數字",
+  "readyToGo": "準備好未？",
+  "invalidPassword": "無效密碼",
+  "signAgreements": "簽署協議",
+  "licenseeName": "Licensee: Chang Yung Ching",
+  "licenseeNumber": "CE 編號: AFF918",
+  "riskDisclosureStatementLabel": "風險披露聲明",
+  "riskDisclosureStatementString": "1. The prices of securities fluctuate, sometimes dramatically. The price of a security may move up or down, and may become valueless. It is as likely that losses will be incurred rather than profit made as a result of buying and selling securities. Investors should not only base on this marketing material to make any investment decision, you should carefully consider whether the investment products or services are suitable for you according to your investment experience, purpose, risk tolerance, financial or related conditions. If you have any questions, please contact us or obtain independent advice.\n\n2. Investment in foreign securities carries additional risks not generally associated with securities in the domestic market. The value or income of foreign securities may be more volatile and could be adversely affected by changes in currency rates of exchange, foreign taxation practices, foreign laws, government practices, regulations, and political events. You may find it more difficult to liquidate investments in foreign securities where they have limited liquidity in the relevant market. Foreign laws, government practices, and regulations may also affect the transferability of foreign securities. Timely and reliable information about the value or the extent of the risks of foreign securities may not be readily available at all times.\n\n3. You acknowledge that you have fully understood the implications of the risks associated with the Electronic Trading Service as set out in the Client Agreement",
+  "riskDisclosureStatementAcknowledgement": "我已閱讀、理解，及同意風險披露聲明。",
+  "personalInfo": "Personal Info",
+  "financialProfile": "Financial Profile",
+  "agreements": "Agreements",
+  "submitApplication": "Submit Application",
+  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"
 }

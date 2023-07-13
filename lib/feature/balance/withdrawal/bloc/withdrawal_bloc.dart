@@ -40,8 +40,7 @@ class WithdrawalBloc extends Bloc<WithdrawalEvent, WithdrawalState> {
     try {
       emit(state.copyWith(response: BaseResponse.loading()));
       var data = await _transactionRepository.submitWithdrawal(
-          withdrawalRequest:
-              WithdrawalRequest(amount: event.withdrawalAmount.toString()));
+          withdrawalRequest: WithdrawalRequest(amount: event.withdrawalAmount));
       emit(state.copyWith(response: data));
     } on LegalReasonException {
       emit(state.copyWith(response: BaseResponse.suspended()));

@@ -28,7 +28,7 @@ class BotRecommendationCard extends StatelessWidget {
               path: SubTabPage.portfolioBotStockDetails.value,
               arguments: {
                 'botType': botType.internalName,
-                'symbol': botRecommendationModel.tickerSymbol
+                'symbol': botRecommendationModel.ticker
               }
             ))));
         isDisabled ? () {} : onTap();
@@ -77,7 +77,7 @@ class BotRecommendationCard extends StatelessWidget {
                   height: 1,
                 ),
                 CustomTextNew(
-                  botRecommendationModel.latestPrice,
+                  botRecommendationModel.latestPriceFormatted,
                   style: AskLoraTextStyles.subtitle2,
                 ),
                 const SizedBox(

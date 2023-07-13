@@ -10,10 +10,11 @@ import '../../../../../core/presentation/navigation/bloc/navigation_bloc.dart';
 import '../../../../../core/presentation/text_fields/master_text_field.dart';
 import '../../../../../core/styles/asklora_colors.dart';
 import '../../../../../core/styles/asklora_text_styles.dart';
-import '../../../../tabs/presentation/tab_screen.dart';
+import '../../../../../generated/l10n.dart';
 import '../../bloc/kyc_bloc.dart';
 import '../../bloc/personal_info/personal_info_bloc.dart';
 import '../../bloc/signing_agreement/signing_agreement_bloc.dart';
+import '../../domain/upgrade_account/save_kyc_request.dart';
 import '../financial_profile/widgets/dot_text.dart';
 import '../widgets/kyc_base_form.dart';
 import '../widgets/kyc_sub_title.dart';
@@ -244,10 +245,11 @@ class TaxAgreementScreen extends StatelessWidget {
                 .read<NavigationBloc<KycPageStep>>()
                 .add(const PageChanged(KycPageStep.kycSummary)),
             disablePrimaryButton: state.disableAgreeButton(),
-            secondaryButtonOnClick: () =>
-                TabScreen.openAndRemoveAllRoute(context),
-            primaryButtonLabel: 'Agree',
-            secondaryButtonLabel: 'Continue Later',
+            secondaryButtonOnClick: () => context
+                .read<KycBloc>()
+                .add(SaveKyc(SaveKycRequest.getRequestForSavingKyc(context))),
+            primaryButtonLabel: S.of(context).agree,
+            secondaryButtonLabel: S.of(context).saveForLater,
           );
         },
       );

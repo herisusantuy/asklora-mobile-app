@@ -9,4 +9,8 @@ class BotRecommendationChartModel extends ChartDataSet {
             checkDouble(json['hedge_share'] ?? 0),
             checkDouble(json['pnl_amt'] ?? 0),
             index: json['i'] ?? 0);
+
+  ///todo remove this later
+  const BotRecommendationChartModel(super.date, super.price, super.hedgeShare, super.currentPnlRet,
+      {super.index});
 }
