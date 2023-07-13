@@ -523,8 +523,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yourBankAccountIsUnderReview": m22,
         "yourDepositCanTakeUp2WorkingDays":
             MessageLookupByLibrary.simpleMessage("入金程序最多需時 2 個工作天"),
-        "yourDepositMayBeRejected":
-            MessageLookupByLibrary.simpleMessage("若所通知的金額與實際轉賬金額不符，你的入金會被延誤。"),
+        "yourDepositMayBeRejected": MessageLookupByLibrary.simpleMessage(
+            "若所通知的金額與實際轉賬金額不符，你的入金可能會被拒絕。"),
         "yourPasswordHasBeenChanged": MessageLookupByLibrary.simpleMessage(
             "Your password has been changed"),
         "yourPaymentInformationIsUnderReview":
