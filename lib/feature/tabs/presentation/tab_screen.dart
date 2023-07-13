@@ -12,6 +12,7 @@ import '../../../core/presentation/custom_scaffold.dart';
 import '../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../core/presentation/lora_popup_message/model/lora_pop_up_message_model.dart';
 import '../../../core/presentation/tutorial/Utils/tutorial_journey.dart';
+import '../../../core/presentation/tutorial/bloc/tutorial_bloc.dart';
 import '../../../core/presentation/tutorial/custom_show_case_view.dart';
 import '../../../core/repository/transaction_repository.dart';
 import '../../../core/repository/tutorial_repository.dart';
@@ -52,6 +53,10 @@ class TabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (_) =>
+                TutorialBloc(tutorialRepository: TutorialRepository()),
+          ),
           BlocProvider(
             create: (_) =>
                 AccountInformationBloc(accountRepository: AccountRepository())

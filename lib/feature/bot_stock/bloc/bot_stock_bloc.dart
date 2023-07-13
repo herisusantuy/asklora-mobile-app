@@ -21,7 +21,6 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
       required TutorialRepository tutorialRepository})
       : _botStockRepository = botStockRepository,
         _transactionRepository = transactionRepository,
-        _tutorialRepository = tutorialRepository,
         super(const BotStockState()) {
     on<FetchBotRecommendation>(_onFetchBotRecommendation);
     on<FetchFreeBotRecommendation>(_onFetchFreeBotRecommendation);
@@ -29,13 +28,10 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     on<CreateBotOrder>(_onCreateBotOrder);
     on<FetchBotDetail>(_onFetchBotDetail);
     on<TradeBotStockAmountChanged>(_onTradeBotStockAmountChanged);
-    on<InitBotDetailsTutorial>(_onInitBotDetailsTutorial);
-    on<BotDetailsTutorialFinished>(_onBotDetailsTutorialFinished);
   }
 
   final BotStockRepository _botStockRepository;
   final TransactionRepository _transactionRepository;
-  final TutorialRepository _tutorialRepository;
 
   _onFetchBotRecommendation(
       FetchBotRecommendation event, Emitter<BotStockState> emit) async {
@@ -90,28 +86,8 @@ class BotStockBloc extends Bloc<BotStockEvent, BotStockState> {
     }
   }
 
-  _onInitBotDetailsTutorial(
-      InitBotDetailsTutorial event, Emitter<BotStockState> emit) async {
-    ///todo : enable later
-    // final bool isBotDetailsTutorial =
-    //     await _tutorialRepository.isBotDetailsTutorial();
-    emit(state.copyWith(isBotDetailsTutorial: true));
-    print(
-        'bot detail tutorial started : value of tutorial state ==> ${state.isBotDetailsTutorial}');
-  }
-
   _onTradeBotStockAmountChanged(
       TradeBotStockAmountChanged event, Emitter<BotStockState> emit) async {
     emit(state.copyWith(botStockTradeAmount: event.amount));
-  }
-
-  _onBotDetailsTutorialFinished(
-      BotDetailsTutorialFinished event, Emitter<BotStockState> emit) async {
-    await _tutorialRepository.botDetailsTutorialFinished();
-    final bool isBotDetailsTutorialFinished =
-        await _tutorialRepository.isBotDetailsTutorial();
-    emit(state.copyWith(isBotDetailsTutorial: isBotDetailsTutorialFinished));
-    print(
-        'bot detail tutorial finished : value of tutorial state ==> ${state.isBotDetailsTutorial}');
   }
 }

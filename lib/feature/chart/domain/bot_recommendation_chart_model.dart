@@ -11,6 +11,7 @@ class BotRecommendationChartModel extends ChartDataSet {
             index: json['i'] ?? 0);
 
   ///todo remove this later
-  const BotRecommendationChartModel(super.date, super.price, super.hedgeShare, super.currentPnlRet,
+  const BotRecommendationChartModel(
+      super.date, super.price, super.hedgeShare, super.currentPnlRet,
       {super.index});
 }

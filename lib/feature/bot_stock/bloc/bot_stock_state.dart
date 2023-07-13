@@ -9,7 +9,6 @@ class BotStockState extends Equatable {
     this.faqActiveIndex,
     this.botStockTradeAmount = 0,
     this.buyingPower = 0,
-    this.isBotDetailsTutorial = false,
   });
 
   final BaseResponse<List<BotRecommendationModel>> botRecommendationResponse;
@@ -18,7 +17,6 @@ class BotStockState extends Equatable {
   final int? faqActiveIndex;
   final double botStockTradeAmount;
   final double buyingPower;
-  final bool isBotDetailsTutorial;
 
   @override
   List<Object?> get props {
@@ -29,7 +27,6 @@ class BotStockState extends Equatable {
       botDetailResponse,
       botStockTradeAmount,
       buyingPower,
-      isBotDetailsTutorial,
     ];
   }
 
@@ -40,7 +37,6 @@ class BotStockState extends Equatable {
     int? faqActiveIndex,
     double? botStockTradeAmount,
     double? buyingPower,
-    bool? isBotDetailsTutorial,
   }) {
     return BotStockState(
       botRecommendationResponse:
@@ -51,7 +47,6 @@ class BotStockState extends Equatable {
       faqActiveIndex: faqActiveIndex ?? this.faqActiveIndex,
       botStockTradeAmount: botStockTradeAmount ?? this.botStockTradeAmount,
       buyingPower: buyingPower ?? this.buyingPower,
-      isBotDetailsTutorial: isBotDetailsTutorial ?? this.isBotDetailsTutorial,
     );
   }
 

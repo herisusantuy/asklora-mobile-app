@@ -9,7 +9,6 @@ import '../../../../../../core/styles/asklora_text_styles.dart';
 import '../../../../../../core/utils/extensions.dart';
 import '../../../../../../core/values/app_values.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../../../chart/domain/bot_recommendation_chart_model.dart';
 import '../../../../../chart/presentation/chart_animation.dart';
 import '../../../../domain/bot_recommendation_detail_model.dart';
 import '../../../../domain/bot_recommendation_model.dart';
@@ -270,56 +269,54 @@ class BotRecommendationDetailContent extends StatelessWidget {
       );
 
   Widget _performanceWidget(BuildContext context) {
-    ///todo should check if performance empty later
-    // if (botDetailModel?.performance != null &&
-    //     botDetailModel!.performance.isNotEmpty) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(15, 32, 15, 0),
-        child: CustomShowcaseView(
-          tutorialKey: TutorialJourney.botChart,
-          tooltipPosition: TooltipPosition.bottom,
-          onToolTipClick: () => ShowCaseWidget.of(context).next(),
-          tooltipWidget: Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                    text: S.of(context).thisInteractiveGraph,
-                    style: AskLoraTextStyles.body1),
-                TextSpan(
-                    text: S.of(context).twoWeekPerformance,
-                    style: AskLoraTextStyles.subtitle2),
-                TextSpan(
-                    text: S.of(context).toGiveYou,
-                    style: AskLoraTextStyles.body1),
-              ],
-            ),
-          ),
-          child: Column(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15, 32, 15, 0),
+      child: CustomShowcaseView(
+        tutorialKey: TutorialJourney.botChart,
+        tooltipPosition: TooltipPosition.bottom,
+        tooltipWidget: Text.rich(
+          TextSpan(
             children: [
-              ChartAnimation(chartDataSets: [BotRecommendationChartModel(DateTime.now(),200,20,2, index: 0),BotRecommendationChartModel(DateTime.now().add(const Duration(days: 1)),400,40,4, index: 1),]),
-              // const SizedBox(height: 6),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20.0),
-              //   child: CustomTextNew(
-              //       S.of(context).portfolioDetailChartCaption(
-              //           '${botType.upperCaseName} ${botDetailModel!.stockInfo.symbol}',
-              //           botDetailModel!.botPerformanceStartDate,
-              //           botDetailModel!.botPerformanceEndDate,
-              //           botDetailModel!.botDuration),
-              //       style: AskLoraTextStyles.body4),
-              // ),
+              TextSpan(
+                  text: S.of(context).thisInteractiveGraph,
+                  style: AskLoraTextStyles.body1),
+              TextSpan(
+                  text: S.of(context).twoWeekPerformance,
+                  style: AskLoraTextStyles.subtitle2),
+              TextSpan(
+                  text: S.of(context).toGiveYou,
+                  style: AskLoraTextStyles.body1),
             ],
           ),
         ),
-      );
-    // } else {
-    //   return SizedBox(
-    //     height: 300,
-    //     child: Align(
-    //         alignment: Alignment.center,
-    //         child: Text(S.of(context).portfolioDetailChartEmptyMessage)),
-    //   );
-    // }
+        onToolTipClick: () => ShowCaseWidget.of(context).next(),
+        child: botDetailModel?.performance != null &&
+                botDetailModel!.performance.isNotEmpty
+            ? Column(
+                children: [
+                  ChartAnimation(chartDataSets: botDetailModel!.performance),
+                  const SizedBox(height: 6),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: CustomTextNew(
+                        S.of(context).portfolioDetailChartCaption(
+                            '${botType.upperCaseName} ${botDetailModel!.stockInfo.symbol}',
+                            botDetailModel!.botPerformanceStartDate,
+                            botDetailModel!.botPerformanceEndDate,
+                            botDetailModel!.botDuration),
+                        style: AskLoraTextStyles.body4),
+                  ),
+                ],
+              )
+            : SizedBox(
+                height: 300,
+                child: Align(
+                    alignment: Alignment.center,
+                    child:
+                        Text(S.of(context).portfolioDetailChartEmptyMessage)),
+              ),
+      ),
+    );
   }
 
   double getPriceDifference() {

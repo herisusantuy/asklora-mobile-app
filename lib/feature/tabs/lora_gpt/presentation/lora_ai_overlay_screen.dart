@@ -57,14 +57,12 @@ class LoraAiOverlayScreen extends StatelessWidget {
               children: [
                 CustomShowcaseView(
                   targetPadding: EdgeInsets.zero,
-                  tutorialKey: TutorialJourney.sendQuestionButton,
+                  tutorialKey: TutorialJourney.chatLoraButton,
                   tooltipPosition: TooltipPosition.top,
                   targetBorderRadius: BorderRadius.circular(50),
                   onToolTipClick: () {
                     ShowCaseWidget.of(context).dismiss();
-                    context
-                        .read<BotStockBloc>()
-                        .add(BotDetailsTutorialFinished());
+                    context.read<TutorialBloc>().add(TutorialFinished());
                   },
                   overlayOpacity: 0,
                   tooltipWidget: Text.rich(
@@ -105,7 +103,8 @@ class LoraAiOverlayScreen extends StatelessWidget {
                         height: 20,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 1.5)),
+                            border:
+                                Border.all(color: Colors.white, width: 1.5)),
                         child: getSvgIcon('icon_sent_text',
                             color: AskLoraColors.white, fit: BoxFit.none)),
                   ),
