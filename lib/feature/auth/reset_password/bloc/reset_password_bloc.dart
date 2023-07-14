@@ -28,17 +28,14 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     emit(
       state.copyWith(
           password: event.password,
-          passwordErrorText: ((event.password.isValidPassword() &&
-                      event.password == state.confirmPassword) ||
-                  event.password.isEmpty)
-              ? ''
-              : (event.password.isValidPassword() &&
-                      state.confirmPassword != event.password)
-                  ? 'Your password does not match.'
-                  : 'Enter valid password',
-          confirmPasswordErrorText: event.password == state.confirmPassword
-              ? ''
-              : state.confirmPasswordErrorText),
+          passwordValidationError:
+              (event.password.isValidPassword() || event.password.isEmpty)
+                  ? PasswordValidationError.none
+                  : PasswordValidationError.passwordValidationError,
+          confirmPasswordError: (state.confirmPassword.isValidPassword() &&
+                  state.confirmPassword != event.password)
+              ? PasswordValidationError.passwordDoesNotMatchError
+              : PasswordValidationError.none),
     );
   }
 
@@ -48,18 +45,16 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ) {
     emit(
       state.copyWith(
-          confirmPassword: event.confirmPassword,
-          confirmPasswordErrorText: ((event.confirmPassword.isValidPassword() &&
-                      state.password == event.confirmPassword) ||
-                  event.confirmPassword.isEmpty)
-              ? ''
-              : (event.confirmPassword.isValidPassword() &&
-                      event.confirmPassword != state.password)
-                  ? 'Your password does not match.'
-                  : 'Enter valid password',
-          passwordErrorText: state.password == event.confirmPassword
-              ? ''
-              : state.passwordErrorText),
+        confirmPassword: event.confirmPassword,
+        confirmPasswordError: ((event.confirmPassword.isValidPassword() &&
+                    state.password == event.confirmPassword) ||
+                event.confirmPassword.isEmpty)
+            ? PasswordValidationError.none
+            : (event.confirmPassword.isValidPassword() &&
+                    event.confirmPassword != state.password)
+                ? PasswordValidationError.passwordDoesNotMatchError
+                : PasswordValidationError.confirmPasswordValidationError,
+      ),
     );
   }
 
@@ -80,7 +75,8 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           response:
               BaseResponse.error(message: 'Token is invalid or expired.')));
     } catch (e) {
-      state.copyWith(response: BaseResponse.error());
+      emit(state.copyWith(
+          response: BaseResponse.error(message: 'Something went wrong!')));
     }
   }
 }

@@ -1,19 +1,26 @@
 part of 'reset_password_bloc.dart';
 
+enum PasswordValidationError {
+  passwordValidationError,
+  confirmPasswordValidationError,
+  passwordDoesNotMatchError,
+  none
+}
+
 class ResetPasswordState extends Equatable {
-  const ResetPasswordState(
-      {this.response = const BaseResponse(),
-      this.password = '',
-      this.confirmPassword = '',
-      this.passwordErrorText = '',
-      this.confirmPasswordErrorText = ''})
-      : super();
+  const ResetPasswordState({
+    this.response = const BaseResponse(),
+    this.password = '',
+    this.confirmPassword = '',
+    this.passwordValidationError = PasswordValidationError.none,
+    this.confirmPasswordError = PasswordValidationError.none,
+  }) : super();
 
   final BaseResponse response;
   final String password;
   final String confirmPassword;
-  final String passwordErrorText;
-  final String confirmPasswordErrorText;
+  final PasswordValidationError passwordValidationError;
+  final PasswordValidationError confirmPasswordError;
 
   ResetPasswordState copyWith({
     BaseResponse? response,
@@ -22,16 +29,16 @@ class ResetPasswordState extends Equatable {
     String? confirmPassword,
     bool? isPasswordValid,
     bool? isConfirmPasswordValid,
-    String? passwordErrorText,
-    String? confirmPasswordErrorText,
+    PasswordValidationError? passwordValidationError,
+    PasswordValidationError? confirmPasswordError,
   }) {
     return ResetPasswordState(
       response: response ?? this.response,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
-      passwordErrorText: passwordErrorText ?? this.passwordErrorText,
-      confirmPasswordErrorText:
-          confirmPasswordErrorText ?? this.confirmPasswordErrorText,
+      passwordValidationError:
+          passwordValidationError ?? this.passwordValidationError,
+      confirmPasswordError: confirmPasswordError ?? this.confirmPasswordError,
     );
   }
 
@@ -41,19 +48,14 @@ class ResetPasswordState extends Equatable {
       response,
       password,
       confirmPassword,
-      passwordErrorText,
-      confirmPasswordErrorText,
+      passwordValidationError,
+      confirmPasswordError
     ];
   }
 
-  bool disableSubmitButton() {
-    if (passwordErrorText.isEmpty &&
-        confirmPasswordErrorText.isEmpty &&
-        password.isValidPassword() &&
-        confirmPassword.isValidPassword()) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  bool disableSubmitButton() =>
+      !(confirmPasswordError == PasswordValidationError.none &&
+          passwordValidationError == PasswordValidationError.none &&
+          password.isValidPassword() &&
+          confirmPassword.isValidPassword());
 }

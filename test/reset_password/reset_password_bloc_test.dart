@@ -43,8 +43,8 @@ void main() {
                   response: BaseResponse(),
                   password: '',
                   confirmPassword: '',
-                  passwordErrorText: '',
-                  confirmPasswordErrorText: ''));
+                  confirmPasswordError: PasswordValidationError.none,
+                  passwordValidationError: PasswordValidationError.none));
         },
       );
 
@@ -57,17 +57,22 @@ void main() {
         },
         expect: () => {
           const ResetPasswordState(
-              response: BaseResponse(),
-              password: 'aaaBBB',
-              confirmPassword: '',
-              passwordErrorText: 'Enter valid password',
-              confirmPasswordErrorText: ''),
+            response: BaseResponse(),
+            password: 'aaaBBB',
+            confirmPassword: '',
+            passwordValidationError:
+                PasswordValidationError.passwordValidationError,
+            confirmPasswordError: PasswordValidationError.none,
+          ),
           const ResetPasswordState(
-              response: BaseResponse(),
-              password: 'aaaBBB',
-              confirmPassword: '12345',
-              passwordErrorText: 'Enter valid password',
-              confirmPasswordErrorText: 'Enter valid password'),
+            response: BaseResponse(),
+            password: 'aaaBBB',
+            confirmPassword: '12345',
+            passwordValidationError:
+                PasswordValidationError.passwordValidationError,
+            confirmPasswordError:
+                PasswordValidationError.passwordValidationError,
+          ),
         },
       );
 
@@ -80,17 +85,20 @@ void main() {
         },
         expect: () => {
           const ResetPasswordState(
-              response: BaseResponse(),
-              password: 'Aa1234567',
-              confirmPassword: '',
-              passwordErrorText: 'Your password does not match.',
-              confirmPasswordErrorText: ''),
+            response: BaseResponse(),
+            password: 'Aa1234567',
+            confirmPassword: '',
+            passwordValidationError: PasswordValidationError.none,
+            confirmPasswordError: PasswordValidationError.none,
+          ),
           const ResetPasswordState(
-              response: BaseResponse(),
-              password: 'Aa1234567',
-              confirmPassword: 'aA1234567',
-              passwordErrorText: 'Your password does not match.',
-              confirmPasswordErrorText: 'Your password does not match.'),
+            response: BaseResponse(),
+            password: 'Aa1234567',
+            confirmPassword: 'aA1234567',
+            passwordValidationError: PasswordValidationError.none,
+            confirmPasswordError:
+                PasswordValidationError.passwordDoesNotMatchError,
+          ),
         },
       );
 
@@ -108,14 +116,16 @@ void main() {
               response: BaseResponse(),
               password: 'Aa1234567',
               confirmPassword: '',
-              passwordErrorText: 'Your password does not match.',
-              confirmPasswordErrorText: ''),
+              passwordValidationError: PasswordValidationError.none,
+              confirmPasswordError: PasswordValidationError.none),
           const ResetPasswordState(
-              response: BaseResponse(),
-              password: 'Aa1234567',
-              confirmPassword: 'Aa1234567',
-              passwordErrorText: '',
-              confirmPasswordErrorText: ''),
+            response: BaseResponse(),
+            password: 'Aa1234567',
+            confirmPassword: 'Aa1234567',
+            passwordValidationError: PasswordValidationError.none,
+            confirmPasswordError:
+                PasswordValidationError.passwordDoesNotMatchError,
+          ),
         },
       );
 

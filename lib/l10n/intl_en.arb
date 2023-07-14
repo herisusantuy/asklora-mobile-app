@@ -537,5 +537,16 @@
   "financialProfile": "Financial Profile",
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
-  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"
+  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "enterANewPassword": "Enter a new password",
+  "resetPassword": "Reset Password",
+  "passwordLinkHasBeenSent": "A Password reset email has been sent. Please check your email",
+  "inputWrongEmailAddress": "Input wrong email address",
+  "cannotRememberEmailAddress": "Can’t remember your email address?\nEmail us at cs@asklora.ai",
+  "forgotPassword": "Forgot Password",
+  "forgotPasswordMessage": "Please enter your email. Instructions will be sent to reset your password.",
+  "resetPasswordSuccessful": "Password Reset Successful",
+  "resetPasswordSuccessfulMessage": "Your password has been reset. Please go back to the Login page and login again.",
+  "backToLogin": "Back to login"
+
 }

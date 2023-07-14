@@ -6,12 +6,14 @@ import '../../../../core/presentation/buttons/primary_button.dart';
 import '../../../../core/presentation/custom_header.dart';
 import '../../../../core/presentation/custom_scaffold.dart';
 import '../../../../core/presentation/custom_stretched_layout.dart';
+import '../../../../generated/l10n.dart';
 import '../../repository/auth_repository.dart';
 import '../bloc/reset_password_bloc.dart';
 import 'reset_password_form.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   static const String route = '/reset_password_screen';
+
   const ResetPasswordScreen({required this.resetPasswordToken, Key? key})
       : super(key: key);
 
@@ -24,11 +26,18 @@ class ResetPasswordScreen extends StatelessWidget {
           ResetPasswordBloc(authRepository: AuthRepository(TokenRepository())),
       child: CustomScaffold(
         body: CustomStretchedLayout(
-          header: const CustomHeader(
-            title: 'Reset Password',
+          header: CustomHeader(
+            title: S.of(context).resetPassword,
           ),
           content: const ResetPasswordForm(),
-          bottomButton: _resetPasswordButton(),
+          bottomButton: Column(
+            children: [
+              _resetPasswordButton(),
+              const SizedBox(
+                height: 30,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -37,19 +46,18 @@ class ResetPasswordScreen extends StatelessWidget {
   Widget _resetPasswordButton() =>
       BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
         buildWhen: (previous, current) =>
-            previous.passwordErrorText != current.passwordErrorText ||
-            previous.confirmPasswordErrorText !=
-                current.confirmPasswordErrorText,
+            previous.confirmPasswordError != current.confirmPasswordError,
         builder: (context, state) {
           return PrimaryButton(
               key: const Key('reset_password_submit_button'),
-              label: 'Reset Password',
+              label: S.of(context).resetPassword,
               disabled: state.disableSubmitButton(),
               onTap: () => context
                   .read<ResetPasswordBloc>()
                   .add(ResetPasswordSubmitted(resetPasswordToken)));
         },
       );
+
   static void open(BuildContext context,
           {required String resetPasswordToken}) =>
       Navigator.pushNamed(context, route, arguments: resetPasswordToken);

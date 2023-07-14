@@ -6,6 +6,7 @@ import '../../../../core/presentation/custom_in_app_notification.dart';
 import '../../../../core/presentation/custom_text_new.dart';
 import '../../../../core/presentation/loading/custom_loading_overlay.dart';
 import '../../../../core/presentation/text_fields/master_text_field.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/forgot_password_bloc.dart';
 import 'forgot_password_success_screen.dart';
 
@@ -35,10 +36,10 @@ class ForgotPasswordForm extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
-                const CustomTextNew(
-                  'Please enter your email. Instructions will be sent to reset your password.',
+                CustomTextNew(
+                  S.of(context).forgotPasswordMessage,
                   textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 _emailInput(),
               ],
@@ -60,8 +61,8 @@ class ForgotPasswordForm extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 textInputType: TextInputType.emailAddress,
                 maxLine: 1,
-                labelText: 'Email',
-                hintText: 'Email Address',
+                labelText: S.of(context).email,
+                hintText: S.of(context).emailAddress,
                 errorText: state.emailErrorText,
                 onChanged: (email) => context
                     .read<ForgotPasswordBloc>()
