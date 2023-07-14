@@ -22,7 +22,7 @@ class TabScreenBloc extends Bloc<TabScreenEvent, TabScreenState> {
   }
 
   _onAiButtonSelected(AiButtonSelected event, Emitter<TabScreenState> emit) {
-    emit(state.copyWith(aiPageSelected: true));
+    emit(state.copyWith(aiPageSelected: !state.aiPageSelected));
   }
 
   _onBackButtonClicked(

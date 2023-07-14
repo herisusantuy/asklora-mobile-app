@@ -38,14 +38,33 @@ class _LoraGptScreenState extends State<LoraGptScreen>
             const AiChatList(),
             _topDarkenTransparencyWidget(context),
             Positioned(
-              top: 28,
+              top: 5,
               left: 0,
               right: 0,
               child: _header,
             ),
-            const Align(
-              alignment: Alignment.topCenter,
-              child: DragIndicatorWidget(),
+            BlocBuilder<TabScreenBloc, TabScreenState>(
+              buildWhen: (previous, current) =>
+                  previous.aiPageSelected != current.aiPageSelected,
+              builder: (context, state) {
+                if (state.aiPageSelected) {
+                  return Positioned(
+                      top: 20,
+                      right: 20,
+                      child: InkWell(
+                        onTap: () => context
+                            .read<TabScreenBloc>()
+                            .add(const AiButtonSelected()),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: getPngIcon('close_x',
+                              width: 15, height: 15, fit: BoxFit.contain),
+                        ),
+                      ));
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
             ),
             Align(
               alignment: Alignment.bottomCenter,
