@@ -82,28 +82,18 @@ class _LoraGptScreenState extends State<LoraGptScreen>
                 ],
               ),
             ),
-            BlocBuilder<TabScreenBloc, TabScreenState>(
-              buildWhen: (previous, current) =>
-                  previous.aiPageSelected != current.aiPageSelected,
-              builder: (context, state) {
-                if (state.aiPageSelected) {
-                  return Align(
-                      alignment: Alignment.centerRight,
-                      child: InkWell(
-                        onTap: () => context
-                            .read<TabScreenBloc>()
-                            .add(const AiButtonSelected()),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: getPngIcon('close_x',
-                              width: 15, height: 15, fit: BoxFit.contain),
-                        ),
-                      ));
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: () =>
+                    context.read<TabScreenBloc>().add(const AiButtonSelected()),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: getPngIcon('close_x',
+                      width: 15, height: 15, fit: BoxFit.contain),
+                ),
+              ),
+            )
           ],
         ),
       );
