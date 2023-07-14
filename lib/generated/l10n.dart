@@ -3584,6 +3584,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Asklora.\n Your ultimate\nfinancial advisor`
+  String get askloraYouUltimateFinancialAdvisor {
+    return Intl.message(
+      'Asklora.\n Your ultimate\nfinancial advisor',
+      name: 'askloraYouUltimateFinancialAdvisor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ask me anything related to finance`
+  String get askMeAnythingRelatedToFinance {
+    return Intl.message(
+      'Ask me anything related to finance',
+      name: 'askMeAnythingRelatedToFinance',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

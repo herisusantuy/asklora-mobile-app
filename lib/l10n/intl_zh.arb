@@ -495,5 +495,7 @@
   "financialProfile": "Financial Profile",
   "agreements": "Agreements",
   "submitApplication": "Submit Application",
-  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible"
+  "summaryAgreementInformation": "The agreements will become binding subject to the approval of the information submitted by you. \n\nIf there is a material change to this information, please contact loracares@asklora.ai as soon as possible",
+  "askloraYouUltimateFinancialAdvisor": "Asklora.\n你嘅 AI 投資顧問",
+  "askMeAnythingRelatedToFinance": "有咩投資問題都可以問我！"
 }

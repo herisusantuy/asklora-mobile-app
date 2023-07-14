@@ -95,10 +95,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "allSettings": MessageLookupByLibrary.simpleMessage("All Settings"),
         "almostFinished":
             MessageLookupByLibrary.simpleMessage("Almost finished!"),
+        "askMeAnythingRelatedToFinance": MessageLookupByLibrary.simpleMessage(
+            "Ask me anything related to finance"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "I\'m Lora, your FinFit coach. Get ready to crush your goals with me!\n\nWhat’s your name? "),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("Your Name"),
+        "askloraYouUltimateFinancialAdvisor":
+            MessageLookupByLibrary.simpleMessage(
+                "Asklora.\n Your ultimate\nfinancial advisor"),
         "atLeast1Lowercase":
             MessageLookupByLibrary.simpleMessage("at least 1 lowercase letter"),
         "atLeast1Number":

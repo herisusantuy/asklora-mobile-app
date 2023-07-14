@@ -86,10 +86,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "allSettings": MessageLookupByLibrary.simpleMessage("設定"),
         "almostFinished": MessageLookupByLibrary.simpleMessage("馬上就好"),
+        "askMeAnythingRelatedToFinance":
+            MessageLookupByLibrary.simpleMessage("有咩投資問題都可以問我！"),
         "askNameScreenPlaceholder": MessageLookupByLibrary.simpleMessage(
             "Hi! 我係 Lora，你嘅 FinFit 投資教練，可以點叫你？"),
         "askNameScreenTextFieldHint":
             MessageLookupByLibrary.simpleMessage("你的名字"),
+        "askloraYouUltimateFinancialAdvisor":
+            MessageLookupByLibrary.simpleMessage("Asklora.\n你嘅 AI 投資顧問"),
         "atLeast1Lowercase":
             MessageLookupByLibrary.simpleMessage("最少 1 個小寫英文字母"),
         "atLeast1Number": MessageLookupByLibrary.simpleMessage("最少 1 個數字"),

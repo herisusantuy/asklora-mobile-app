@@ -24,33 +24,15 @@ class LoraAiOverlayScreen extends StatelessWidget {
             content:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               CustomTextNew(
-                'Asklora.\nYour ultimate\nfinancial advisor',
+                S.of(context).askloraYouUltimateFinancialAdvisor,
                 style:
                     AskLoraTextStyles.h3.copyWith(color: AskLoraColors.white),
                 textAlign: TextAlign.center,
               ),
-              TextFormField(
-                textAlign: TextAlign.center,
-                cursorColor: Colors.white,
-                style: AskLoraTextStyles.body1
-                    .copyWith(color: AskLoraColors.white),
-                keyboardType: TextInputType.text,
-                onFieldSubmitted: (str) =>
-                    context.read<LoraGptBloc>().add(OnEditQuery(str)),
-                onChanged: (str) =>
-                    context.read<LoraGptBloc>().add(OnEditQuery(str)),
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    contentPadding: const EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
-                    hintText: 'Type your question here...',
-                    hintStyle: AskLoraTextStyles.body1
-                        .copyWith(color: AskLoraColors.white.withAlpha(100))),
-              ),
+              const SizedBox(height: 30),
+              CustomTextNew(S.of(context).askMeAnythingRelatedToFinance,
+                  style: AskLoraTextStyles.body1
+                      .copyWith(color: AskLoraColors.white)),
             ]),
             bottomButton: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -59,11 +41,8 @@ class LoraAiOverlayScreen extends StatelessWidget {
                   height: 75.0,
                   width: 75.0,
                   onTap: () {
-                    if (state.query.isNotEmpty) {
-                      context.read<LoraGptBloc>().add(const ShowOverLayScreen(
-                          shouldShowOverlayScreen: false));
-                      context.read<LoraGptBloc>().add(const OnSearchQuery());
-                    }
+                    context.read<LoraGptBloc>().add(const ShowOverLayScreen(
+                        shouldShowOverlayScreen: false));
                   },
                   buttonBackgroundColor: const Color(0xFF373A49),
                   glowColor: Colors.white.withAlpha(100),

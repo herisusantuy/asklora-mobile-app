@@ -13,6 +13,7 @@ import '../../../../core/styles/asklora_colors.dart';
 import '../../../../core/styles/asklora_text_styles.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
+import '../../../../generated/l10n.dart';
 import '../../../bot_stock/presentation/portfolio/bloc/portfolio_bloc.dart';
 import '../../../bot_stock/utils/bot_stock_utils.dart';
 import '../../bloc/tab_screen_bloc.dart';
