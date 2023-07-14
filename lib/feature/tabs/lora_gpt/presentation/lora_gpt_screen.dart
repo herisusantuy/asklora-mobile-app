@@ -26,36 +26,44 @@ class _LoraGptScreenState extends State<LoraGptScreen>
     return CustomScaffold(
       enableBackNavigation: false,
       backgroundColor: Colors.white.withOpacity(0.2),
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            color: AskLoraColors.black.withOpacity(0.4),
-            image: const DecorationImage(
-                image: AssetImage('assets/lora_gpt_background.png'),
-                fit: BoxFit.cover)),
-        child: Stack(
-          children: [
-            const AiChatList(),
-            _topDarkenTransparencyWidget(context),
-            Positioned(
-              top: 28,
-              left: 0,
-              right: 0,
-              child: _header,
-            ),
-            const Align(
-              alignment: Alignment.topCenter,
-              child: DragIndicatorWidget(),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 12),
-                child: _bottomContent,
+      body: Column(
+        children: [
+          _debugWidget(context),
+          Expanded(
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: AskLoraColors.black.withOpacity(0.4),
+                  image: const DecorationImage(
+                      image: AssetImage('assets/lora_gpt_background.png'),
+                      fit: BoxFit.cover)),
+              child: Stack(
+                children: [
+                  const AiChatList(),
+                  _topDarkenTransparencyWidget(context),
+                  Positioned(
+                    top: 28,
+                    left: 0,
+                    right: 0,
+                    child: _header,
+                  ),
+                  const Align(
+                    alignment: Alignment.topCenter,
+                    child: DragIndicatorWidget(),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 15, bottom: 12),
+                      child: _bottomContent,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -91,6 +99,43 @@ class _LoraGptScreenState extends State<LoraGptScreen>
           ),
         ),
       );
+
+  Widget _debugWidget(BuildContext context) {
+    final config = AppConfigWidget.of(context);
+    if (kDebugMode &&
+        config != null &&
+        (config.baseConfig is DevConfig ||
+            config.baseConfig is StagingConfig)) {
+      return Container(
+        padding: AppValues.screenHorizontalPadding.copyWith(bottom: 4, top: 4),
+        width: MediaQuery.of(context).size.width,
+        color: Colors.white,
+        constraints: const BoxConstraints(maxHeight: 100),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextNew(
+                'DEBUG',
+                style: AskLoraTextStyles.body3,
+              ),
+              BlocBuilder<LoraGptBloc, LoraGptState>(
+                  buildWhen: (previous, current) =>
+                      previous.debugText != current.debugText,
+                  builder: (context, state) {
+                    return CustomTextNew(
+                      state.debugText,
+                      style: AskLoraTextStyles.body3,
+                    );
+                  }),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
 
   Widget get _bottomContent {
     return BlocConsumer<LoraGptBloc, LoraGptState>(

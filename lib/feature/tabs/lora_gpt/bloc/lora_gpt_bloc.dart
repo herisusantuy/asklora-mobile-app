@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/domain/base_response.dart';
+import '../../../../core/domain/endpoints.dart';
 import '../../../../core/utils/storage/shared_preference.dart';
 import '../../../../core/utils/storage/storage_keys.dart';
 import '../../bloc/tab_screen_bloc.dart';
@@ -61,7 +62,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     final userName = await _sharedPreference.readData(sfKeyPpiName) ?? 'Me';
     final askloraId = await _sharedPreference.readIntData(sfKeyAskloraId);
-    final query = state.query;
+    final query = state.query.trim();
 
     emit(state.copyWith(
         status: ResponseState.loading,
@@ -77,18 +78,35 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
 
     if (subPage.path.isNotEmpty &&
         subPage.path == SubTabPage.portfolioBotStockDetails.value) {
-      response = await _loraGptRepository.portfolioDetails(
-          params: state.getPortfolioDetailsRequest(
-              query: query,
-              botType: subPage.arguments['botType'],
-              ticker: subPage.arguments['symbol']));
+      PortfolioDetailsRequest request = state.getPortfolioDetailsRequest(
+          query: query,
+          botType: subPage.arguments['botType'],
+          ticker: subPage.arguments['symbol']);
+
+      emit(
+        state.copyWith(
+            debugText:
+                'hitting endpoint : $endpointPortfolioDetailPage\n param : ${request.params}'),
+      );
+      response = await _loraGptRepository.portfolioDetails(params: request);
     } else if (state.tabPage == TabPage.portfolio) {
+      PortfolioQueryRequest request = state.getPortfolioRequest(query: query);
+      emit(
+        state.copyWith(
+            debugText:
+                'hitting endpoint : $endpointPortfolio\n param : ${request.params}\n payload : ${state.botstocks}'),
+      );
       response = await _loraGptRepository.portfolio(
-          params: state.getPortfolioRequest(query: query),
-          data: state.botstocks);
+          params: request, data: state.botstocks);
     } else {
-      response = await _loraGptRepository.general(
-          params: state.getGeneralChatRequest(query: query));
+      GeneralQueryRequest request = state.getGeneralChatRequest(query: query);
+
+      emit(
+        state.copyWith(
+            debugText:
+                'hitting endpoint : $endpointChat\n param : ${request.params}'),
+      );
+      response = await _loraGptRepository.general(params: request);
     }
 
     tempList.removeLast();
