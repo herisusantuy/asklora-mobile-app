@@ -91,25 +91,22 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
           params: state.getGeneralChatRequest(query: query));
     }
 
+    tempList.removeLast();
     if (response.state == ResponseState.success) {
-      tempList.removeLast();
       tempList.add(response.data!);
-
-      emit(state.copyWith(
-          status: ResponseState.success,
-          conversations: tempList,
-          query: '',
-          sessionId: response.data?.requestId,
-          isTyping: true));
     } else {
-      tempList.removeLast();
-      emit(state.copyWith(
-          status: ResponseState.error,
-          query: '',
-          conversations: tempList,
-          sessionId: response.data?.requestId,
-          isTyping: false));
+      tempList.add(Lora(
+          'Sorry I cannot connect to the server right now, please try again',
+          '',
+          '',
+          false));
     }
+    emit(state.copyWith(
+        status: ResponseState.success,
+        conversations: tempList,
+        query: '',
+        sessionId: response.data?.requestId,
+        isTyping: true));
   }
 
   void _onResetSession(
@@ -117,6 +114,7 @@ class LoraGptBloc extends Bloc<LoraGptEvent, LoraGptState> {
       emit(state.copyWith(
           status: ResponseState.success,
           conversations: [],
+          isTyping: false,
           sessionId: '',
           query: ''));
 
